@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.invalidateImageResource;
 import flighthq.types.SurfaceRegion;
 
-@:expose("flighthq.surface.SurfaceFlip")
 class SurfaceFlip {
   public static function flipSurfaceHorizontal(dest:SurfaceRegion, source:SurfaceRegion):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;

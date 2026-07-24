@@ -8,7 +8,6 @@ import flighthq.types.BinPack.BinPackOptions;
 import flighthq.types.BinPack.PackResult;
 import flighthq.types.BinPack.PackableRectangle;
 
-@:expose("flighthq.binpack.Binpack")
 class Binpack {
   public static function packRectangles(rects:Array<PackableRectangle>, ?options:BinPackOptions):PackResult {
     return cast _Runtime.callValue(Facade_Binpack_flighthq_binpack_PackRectangles.packRectangles, cast ([rects, options] : Array<Dynamic>));

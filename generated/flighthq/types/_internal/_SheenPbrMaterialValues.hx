@@ -7,7 +7,6 @@ import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
 import flighthq.types.SurfaceMaterial;
 import flighthq.types.Texture;
 
-@:expose("flighthq.types._internal._SheenPbrMaterialValues")
 class _SheenPbrMaterialValues {
   public static final SheenPbrMaterialKind:Dynamic = 'SheenPbrMaterial';
 }

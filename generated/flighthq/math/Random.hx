@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.RandomSource;
 
-@:expose("flighthq.math.Random")
 class Random {
   public static function createRandomSource(seed:Float):RandomSource {
     var a:Dynamic = cast _Runtime.UNDEFINED;

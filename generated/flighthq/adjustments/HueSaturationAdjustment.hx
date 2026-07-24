@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.ColorTransformFunction;
 import flighthq.types.HueSaturationAdjustment;
 
-@:expose("flighthq.adjustments.HueSaturationAdjustment")
 class HueSaturationAdjustment {
   public static function createHueSaturationAdjustment(?options:Dynamic):flighthq.types.HueSaturationAdjustment {
     if (options == null) options = cast ({  } : Dynamic);

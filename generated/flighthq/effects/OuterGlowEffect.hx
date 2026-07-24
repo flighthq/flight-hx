@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.OuterGlowEffect;
 
-@:expose("flighthq.effects.OuterGlowEffect")
 class OuterGlowEffect {
   public static function createOuterGlowEffect(?options:Dynamic):flighthq.types.OuterGlowEffect {
     if (options == null) options = cast ({  } : Dynamic);

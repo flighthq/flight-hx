@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.InvertAdjustment;
 
-@:expose("flighthq.adjustments.InvertAdjustment")
 class InvertAdjustment {
   public static function createInvertAdjustment(?options:Dynamic):flighthq.types.InvertAdjustment {
     if (options == null) options = cast ({  } : Dynamic);

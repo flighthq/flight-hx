@@ -12,7 +12,6 @@ import flighthq.velocity.TransformVelocity as Facade_Velocity_flighthq_velocity_
 import flighthq.velocity.VelocityField as Facade_Velocity_flighthq_velocity_VelocityField;
 import flighthq.velocity.VelocitySample as Facade_Velocity_flighthq_velocity_VelocitySample;
 
-@:expose("flighthq.velocity.Velocity")
 class Velocity {
   public static function addVelocity(out:Velocity2D, a:Velocity2D, b:Velocity2D):Velocity2D {
     return cast _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocityField.addVelocity, cast ([out, a, b] : Array<Dynamic>));

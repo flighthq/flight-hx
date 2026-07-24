@@ -8,7 +8,6 @@ import flighthq.materials.PbrMaterials.createStandardPbrMaterial;
 import flighthq.types.StandardPbrMaterial;
 import flighthq.types.TransmissionVolumePbrMaterial;
 
-@:expose("flighthq.materials.MaterialPresets")
 class MaterialPresets {
   public static function createAluminumStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
     return cast _Runtime.callValue(createStandardPbrMaterial, cast ([_Runtime.mergeObjects([{ baseColor: 2964369663.0 }, { metallic: 1.0 }, { roughness: 0.35 }, opts])] : Array<Dynamic>));

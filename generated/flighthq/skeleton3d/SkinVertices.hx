@@ -4,7 +4,6 @@ package flighthq.skeleton3d;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.skeleton3d.SkinVertices")
 class SkinVertices {
   public static function skinVertices(outPositions:flighthq._internal._Float32Array, outNormals:flighthq._internal._Float32Array, positions:flighthq._internal._Float32Array, normals:flighthq._internal._Float32Array, joints:Dynamic, weights:flighthq._internal._Float32Array, jointMatrices:flighthq._internal._Float32Array):Void {
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;

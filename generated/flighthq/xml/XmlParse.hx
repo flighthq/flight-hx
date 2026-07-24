@@ -7,7 +7,6 @@ import flighthq.types.XmlElement;
 
 typedef ParseState__xmlParse = { var pos:Float; };
 
-@:expose("flighthq.xml.XmlParse")
 class XmlParse {
   public static function parseXmlAttributes(attrs:String):Dynamic {
     var result:Dynamic = cast _Runtime.UNDEFINED;

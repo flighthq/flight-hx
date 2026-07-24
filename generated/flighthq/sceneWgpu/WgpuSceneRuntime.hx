@@ -8,7 +8,6 @@ import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 import flighthq.types.WgpuSceneRuntime;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
-@:expose("flighthq.sceneWgpu.WgpuSceneRuntime")
 class WgpuSceneRuntime {
   public static function getWgpuSceneRuntime(state:WgpuRenderState):flighthq.types.WgpuSceneRuntime {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;

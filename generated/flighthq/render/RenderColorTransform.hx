@@ -10,7 +10,6 @@ import flighthq.types.RenderProxy;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 
-@:expose("flighthq.render.RenderColorTransform")
 class RenderColorTransform {
   public static function updateRenderProxyColorTransform(state:RenderState, data:RenderProxy, ?_parentData:RenderProxy):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

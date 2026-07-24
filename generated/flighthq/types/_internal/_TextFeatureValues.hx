@@ -4,7 +4,6 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.types._internal._TextFeatureValues")
 class _TextFeatureValues {
   public static final TextFeatureCapitals:Dynamic = 'c2sc';
 

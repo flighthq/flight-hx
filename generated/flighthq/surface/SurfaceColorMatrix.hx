@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.SurfaceRegion;
 
-@:expose("flighthq.surface.SurfaceColorMatrix")
 class SurfaceColorMatrix {
   public static function buildSurfaceBrightnessColorMatrix(out:Array<Float>, amount:Float):Void {
     _Runtime.callValue(SurfaceColorMatrix.setColorMatrix__surfaceColorMatrix, cast ([out, amount, 0.0, 0.0, 0.0, 0.0, 0.0, amount, 0.0, 0.0, 0.0, 0.0, 0.0, amount, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));

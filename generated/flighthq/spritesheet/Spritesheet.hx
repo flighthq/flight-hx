@@ -23,7 +23,6 @@ import flighthq.types.SpritesheetValidationDiagnostic;
 import flighthq.types.TextureAtlas;
 import flighthq.types.Tileset;
 
-@:expose("flighthq.spritesheet.Spritesheet")
 class Spritesheet {
   public static function acquireSpritesheetPlayer():SpritesheetPlayer {
     return cast _Runtime.callValue(Facade_Spritesheet_flighthq_spritesheet_SpritesheetPlayer.acquireSpritesheetPlayer, cast ([] : Array<Dynamic>));

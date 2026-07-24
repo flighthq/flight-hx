@@ -10,7 +10,6 @@ import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
-@:expose("flighthq.effectsGl.GlDirectionalBlurEffect")
 class GlDirectionalBlurEffect {
   public static function applyDirectionalBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:DirectionalBlurEffect):Void {
     var angle:Dynamic = cast _Runtime.UNDEFINED;

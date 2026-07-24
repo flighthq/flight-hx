@@ -8,7 +8,6 @@ import flighthq.types.Shape;
 import flighthq.types.Shape.ShapeData;
 import flighthq.types.Shape.ShapeRuntime;
 
-@:expose("flighthq.types._internal._Scale9ShapeValues")
 class _Scale9ShapeValues {
   public static final Scale9ShapeKind:Dynamic = 'Scale9Shape';
 }

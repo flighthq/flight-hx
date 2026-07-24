@@ -21,7 +21,6 @@ import flighthq.types.Camera3D;
 import flighthq.types.Matrix4;
 import flighthq.types.SceneNode;
 
-@:expose("flighthq.scene.BillboardCamera")
 class BillboardCamera {
   public static function orientBillboardToCamera(billboard:Billboard, camera:Camera3D):Void {
     _Runtime.callValue(BillboardCamera.setBillboardCameraBasis__billboardCamera, cast ([camera] : Array<Dynamic>));

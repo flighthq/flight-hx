@@ -9,7 +9,6 @@ import flighthq.textshaper._TextShaperHooks._setTextShaperBackendHook;
 import flighthq.types.TextShaper.TextShaperBackend;
 import flighthq.types.TextShaperSignals;
 
-@:expose("flighthq.textshaper.TextShaperSignals")
 class TextShaperSignals {
   public static function disposeTextShaperSignals():Void {
     if (_Runtime.truthy(_Runtime.strictEquals(TextShaperSignals._signals__textShaperSignals, null))) { return; }

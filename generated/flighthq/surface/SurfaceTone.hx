@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.invalidateImageResource;
 import flighthq.types.SurfaceRegion;
 
-@:expose("flighthq.surface.SurfaceTone")
 class SurfaceTone {
   public static function applySurfaceCurve(out:SurfaceRegion, source:SurfaceRegion, redLut:Null<Dynamic>, greenLut:Null<Dynamic>, blueLut:Null<Dynamic>, ?alphaLut:Null<Dynamic>):Void {
     if (alphaLut == null) alphaLut = cast (null : Dynamic);

@@ -7,7 +7,6 @@ import flighthq.types.MarkupClassResolver;
 import flighthq.types.MarkupTagRegistry;
 import flighthq.types.TextFormat;
 
-@:expose("flighthq.textMarkup.MarkupClassStyles")
 class MarkupClassStyles {
   public static function registerMarkupClassStyles(registry:MarkupTagRegistry, styles:Dynamic):Void {
     var resolver:MarkupClassResolver = cast _Runtime.UNDEFINED;

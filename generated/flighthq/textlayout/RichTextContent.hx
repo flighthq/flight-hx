@@ -10,7 +10,6 @@ import flighthq.types.RichTextContent;
 import flighthq.types.TextFormat;
 import flighthq.types.TextFormatRange;
 
-@:expose("flighthq.textlayout.RichTextContent")
 class RichTextContent {
   public static function clearRichTextContent(runtime:RichTextRuntime):Void {
     _Runtime.setField(runtime, 'richTextContent', null);

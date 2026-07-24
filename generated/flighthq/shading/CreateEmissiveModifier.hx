@@ -12,7 +12,6 @@ import flighthq.types._internal._EmissiveModifierValues.EmissiveModifierFacingVa
 import flighthq.types._internal._EmissiveModifierValues.EmissiveModifierKind;
 import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 
-@:expose("flighthq.shading.CreateEmissiveModifier")
 class CreateEmissiveModifier {
   public static function createEmissiveModifier(options:EmissiveModifierOptions):EmissiveModifier {
     var modifier:EmissiveModifier = cast _Runtime.UNDEFINED;

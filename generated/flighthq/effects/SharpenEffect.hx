@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.SharpenEffect;
 
-@:expose("flighthq.effects.SharpenEffect")
 class SharpenEffect {
   public static function createSharpenEffect(?options:Dynamic):flighthq.types.SharpenEffect {
     if (options == null) options = cast ({  } : Dynamic);

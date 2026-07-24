@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.invalidateImageResource;
 import flighthq.types.SurfaceRegion;
 
-@:expose("flighthq.surface.SurfacePaletteMap")
 class SurfacePaletteMap {
   public static function applySurfacePaletteMap(dest:SurfaceRegion, source:SurfaceRegion, redMap:Null<Array<Float>>, greenMap:Null<Array<Float>>, blueMap:Null<Array<Float>>, alphaMap:Null<Array<Float>>):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;

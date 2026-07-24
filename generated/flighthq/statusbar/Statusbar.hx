@@ -13,7 +13,6 @@ import flighthq.types.StatusBar.StatusBarStyle;
 import flighthq.types.StatusBar.StatusBarStyleEntry;
 import flighthq.types.StatusBar.StatusBarStyleEntryHandle;
 
-@:expose("flighthq.statusbar.Statusbar")
 class Statusbar {
   public static function _applyTopStyleEntry__statusbar():Void {
     var backend:Dynamic = cast _Runtime.UNDEFINED;

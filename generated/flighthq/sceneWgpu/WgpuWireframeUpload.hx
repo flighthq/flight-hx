@@ -8,7 +8,6 @@ import flighthq.types.MeshGeometry;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuWireframePipeline.WgpuWireframeUpload;
 
-@:expose("flighthq.sceneWgpu.WgpuWireframeUpload")
 class WgpuWireframeUpload {
   public static function ensureWgpuWireframeUpload(state:WgpuRenderState, geometry:MeshGeometry):Null<flighthq.types.WgpuWireframePipeline.WgpuWireframeUpload> {
     var meshUpload:Dynamic = cast _Runtime.UNDEFINED;

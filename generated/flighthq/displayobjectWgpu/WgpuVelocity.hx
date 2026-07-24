@@ -28,7 +28,6 @@ import flighthq.velocity.VelocityField.getVelocity;
 
 typedef WgpuVelocityPipeline__wgpuVelocity = { var pipeline:Dynamic; var uniformBuffer:Dynamic; var bindGroup:Dynamic; var cursor:Float; var scratch:flighthq._internal._Float32Array; };
 
-@:expose("flighthq.displayobjectWgpu.WgpuVelocity")
 class WgpuVelocity {
   public static function createWgpuVelocityTarget(state:WgpuRenderState, width:Float, height:Float):WgpuRenderTarget {
     return cast _Runtime.callValue(createWgpuRenderTarget, cast ([state, width, height, 'rgba16float'] : Array<Dynamic>));

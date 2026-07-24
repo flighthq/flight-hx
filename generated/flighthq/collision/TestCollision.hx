@@ -18,7 +18,6 @@ import flighthq.types.Collision.CollisionManifold;
 import flighthq.types.Collision.CollisionShape;
 import flighthq.types.Collision.CollisionShapeKind;
 
-@:expose("flighthq.collision.TestCollision")
 class TestCollision {
   public static function testCollision(a:CollisionShape, b:CollisionShape, out:CollisionManifold):Bool {
     var rankA:Dynamic = cast _Runtime.UNDEFINED;

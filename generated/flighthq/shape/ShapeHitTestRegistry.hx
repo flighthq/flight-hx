@@ -9,7 +9,6 @@ import flighthq.types.ShapeCommand.ShapeHitTestCommand;
 
 typedef AnyHitTestFn__shapeHitTestRegistry = Dynamic;
 
-@:expose("flighthq.shape.ShapeHitTestRegistry")
 class ShapeHitTestRegistry {
   public static final hitTests__shapeHitTestRegistry:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
 

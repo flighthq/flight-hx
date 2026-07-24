@@ -8,7 +8,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.SmaaEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasSmaaEffect")
 class CanvasSmaaEffect {
   public static function applySmaaEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:SmaaEffect):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));

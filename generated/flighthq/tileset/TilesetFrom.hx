@@ -14,7 +14,6 @@ import flighthq.types.ImageResource;
 import flighthq.types.TextureAtlas;
 import flighthq.types.Tileset;
 
-@:expose("flighthq.tileset.TilesetFrom")
 class TilesetFrom {
   public static function createTilesetFromAtlas(atlas:TextureAtlas, tileWidth:Float, tileHeight:Float, margin:Float = 0.0, spacing:Float = 0.0):Tileset {
     var image:Dynamic = cast _Runtime.UNDEFINED;

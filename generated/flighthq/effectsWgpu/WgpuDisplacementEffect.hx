@@ -10,7 +10,6 @@ import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
-@:expose("flighthq.effectsWgpu.WgpuDisplacementEffect")
 class WgpuDisplacementEffect {
   public static function applyDisplacementEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:DisplacementEffect):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;

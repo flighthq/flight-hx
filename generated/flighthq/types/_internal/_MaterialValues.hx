@@ -7,7 +7,6 @@ import flighthq.types.Entity;
 import flighthq.types.Entity.EntityWithoutRuntime;
 import flighthq.types.Entity.Kind;
 
-@:expose("flighthq.types._internal._MaterialValues")
 class _MaterialValues {
   public static final DefaultMaterialKind:Dynamic = 'DefaultMaterial';
 }

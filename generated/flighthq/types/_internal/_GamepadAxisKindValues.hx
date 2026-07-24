@@ -4,7 +4,6 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.types._internal._GamepadAxisKindValues")
 class _GamepadAxisKindValues {
   public static final GamepadAxisKindValue:Dynamic = { STICK_LEFT_X: 'StickLeftX', STICK_LEFT_Y: 'StickLeftY', STICK_RIGHT_X: 'StickRightX', STICK_RIGHT_Y: 'StickRightY' };
 }

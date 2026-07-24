@@ -44,7 +44,6 @@ import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.Vector2.Vector2Like;
 import flighthq.types.Vector3.Vector3Like;
 
-@:expose("flighthq.camera.Camera")
 class Camera {
   public static final __scratchInverse__camera:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
 

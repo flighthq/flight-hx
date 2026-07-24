@@ -51,7 +51,6 @@ import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
 import flighthq.types.VideoTexture;
 
-@:expose("flighthq.renderGl.RenderGl")
 class RenderGl {
   public static function acquireGlRenderTarget(state:GlRenderState, pool:GlRenderTargetPool, descriptor:RenderTargetDescriptor):GlRenderTarget {
     return cast _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlRenderTargetPool.acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));

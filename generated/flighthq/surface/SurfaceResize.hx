@@ -9,7 +9,6 @@ import flighthq.types.SurfaceRegion;
 import flighthq.types.SurfaceResizeMode;
 import flighthq.types.SurfaceResizeOptions;
 
-@:expose("flighthq.surface.SurfaceResize")
 class SurfaceResize {
   public static function resizeSurface(dest:SurfaceRegion, source:SurfaceRegion, options:Dynamic = 'bilinear'):Void {
     var opts:SurfaceResizeOptions = cast _Runtime.UNDEFINED;

@@ -8,7 +8,6 @@ import flighthq.types.CameraMotionBlurEffect;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderTarget;
 
-@:expose("flighthq.effectsCanvas.CanvasCameraMotionBlurEffect")
 class CanvasCameraMotionBlurEffect {
   public static function applyCameraMotionBlurEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:CameraMotionBlurEffect):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));

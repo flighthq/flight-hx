@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textshaperCanvas.CanvasTextShaper as Facade_TextshaperCanvas_flighthq_textshaperCanvas_CanvasTextShaper;
 
-@:expose("flighthq.textshaperCanvas.TextshaperCanvas")
 class TextshaperCanvas {
   public static function clearCanvasTextShaperBackendCache(backend:Dynamic):Void {
     _Runtime.callValue(Facade_TextshaperCanvas_flighthq_textshaperCanvas_CanvasTextShaper.clearCanvasTextShaperBackendCache, cast ([backend] : Array<Dynamic>));

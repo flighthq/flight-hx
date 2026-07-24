@@ -10,7 +10,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.PixelateEffect;
 
-@:expose("flighthq.effectsGl.GlPixelateEffect")
 class GlPixelateEffect {
   public static function applyPixelateEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:PixelateEffect):Void {
     var size:Dynamic = cast _Runtime.UNDEFINED;

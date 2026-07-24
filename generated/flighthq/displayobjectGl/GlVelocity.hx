@@ -29,7 +29,6 @@ import flighthq.velocity.VelocityField.getVelocity;
 
 typedef GlVelocityProgram__glVelocity = { var program:Dynamic; var quadBuffer:Dynamic; var locCorner:Float; var locClipRect:Dynamic; var locVelocity:Dynamic; };
 
-@:expose("flighthq.displayobjectGl.GlVelocity")
 class GlVelocity {
   public static function createGlVelocityTarget(state:GlRenderState, width:Float, height:Float):GlRenderTarget {
     return cast _Runtime.callValue(createGlRenderTarget, cast ([state, { width: width, height: height, format: 'rgba16f' }] : Array<Dynamic>));

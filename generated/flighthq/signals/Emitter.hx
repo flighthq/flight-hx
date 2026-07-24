@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Signal;
 
-@:expose("flighthq.signals.Emitter")
 class Emitter {
   public static function cancelSignal<T>(signal:Signal<Dynamic>):Void {
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(signal, 'data'), null))) { _Runtime.setField(_Runtime.field(signal, 'data'), 'cancelled', true); }

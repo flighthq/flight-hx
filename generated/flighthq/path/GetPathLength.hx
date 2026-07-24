@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.path.FlattenPath.flattenPath;
 import flighthq.types.Path;
 
-@:expose("flighthq.path.GetPathLength")
 class GetPathLength {
   public static function getPathLength(path:Path, tolerance:Dynamic = 0.25):Float {
     var contours:Dynamic = cast _Runtime.UNDEFINED;

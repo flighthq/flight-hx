@@ -19,7 +19,6 @@ import flighthq.types.Types.ParticleEmitter3DKind;
 import flighthq.types.Vector3.Vector3Like;
 import flighthq.types._internal._ParticleEmitter3DValues.ParticleEmitter3DKind;
 
-@:expose("flighthq.particleemitter.ParticleEmitter3D")
 class ParticleEmitter3D {
   public static final PARTICLE_TRANSFORM_STRIDE__particleEmitter3D:Dynamic = 4.0;
 

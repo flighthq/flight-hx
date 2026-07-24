@@ -14,7 +14,6 @@ import flighthq.types.DisplayObject;
 import flighthq.types.DisplayObjectRenderer;
 import flighthq.types.RenderProxy2D;
 
-@:expose("flighthq.displayobjectCanvas.CanvasDisplayObject")
 class CanvasDisplayObject {
   public static function drawCanvasDisplayObject(_state:Dynamic, _renderProxy:RenderProxy2D):Void {
   }

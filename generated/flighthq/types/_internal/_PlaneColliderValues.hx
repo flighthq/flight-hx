@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CollisionResponse;
 
-@:expose("flighthq.types._internal._PlaneColliderValues")
 class _PlaneColliderValues {
   public static final PlaneColliderKind:Dynamic = 'PlaneCollider';
 }

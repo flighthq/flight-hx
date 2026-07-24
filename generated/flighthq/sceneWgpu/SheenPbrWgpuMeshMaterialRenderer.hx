@@ -27,7 +27,6 @@ import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._SheenPbrMaterialValues.SheenPbrMaterialKind;
 
-@:expose("flighthq.sceneWgpu.SheenPbrWgpuMeshMaterialRenderer")
 class SheenPbrWgpuMeshMaterialRenderer {
   public static final sheenPbrWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;

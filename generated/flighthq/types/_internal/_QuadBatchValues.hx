@@ -11,7 +11,6 @@ import flighthq.types.QuadTransformType;
 import flighthq.types.Rectangle;
 import flighthq.types.TextureAtlas;
 
-@:expose("flighthq.types._internal._QuadBatchValues")
 class _QuadBatchValues {
   public static final QuadBatchKind:Dynamic = 'QuadBatch';
 }

@@ -8,7 +8,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.SsrEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasSsrEffect")
 class CanvasSsrEffect {
   public static function applySsrEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:SsrEffect):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));

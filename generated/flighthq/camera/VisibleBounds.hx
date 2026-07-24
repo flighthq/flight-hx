@@ -10,7 +10,6 @@ import flighthq.geometry.Matrix.matrixTransformBounds;
 import flighthq.types.Camera2D;
 import flighthq.types.Rectangle.RectangleLike;
 
-@:expose("flighthq.camera.VisibleBounds")
 class VisibleBounds {
   public static function getCamera2DVisibleBounds(camera:Camera2D, out:RectangleLike):Void {
     _Runtime.callValue(getCamera2DViewMatrix, cast ([camera, VisibleBounds.scratchMatrix__visibleBounds] : Array<Dynamic>));

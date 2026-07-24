@@ -7,7 +7,6 @@ import flighthq.image.ImageResource.invalidateImageResource;
 import flighthq.types.ImageChannel;
 import flighthq.types.SurfaceRegion;
 
-@:expose("flighthq.surface.SurfaceCopy")
 class SurfaceCopy {
   public static function copySurfaceChannel(dest:SurfaceRegion, destChannel:ImageChannel, source:SurfaceRegion, sourceChannel:ImageChannel):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;

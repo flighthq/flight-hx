@@ -13,7 +13,6 @@ import flighthq.types.HasTransform2D.Transform2DNode;
 import flighthq.types.Velocity.VelocityField;
 import flighthq.velocity.VelocityField.ensureVelocitySample;
 
-@:expose("flighthq.velocity.TransformVelocity")
 class TransformVelocity {
   public static function contributeTransformVelocity<Traits>(field:VelocityField, root:Transform2DNode<Traits>):Void {
     _Runtime.callValue(TransformVelocity.visitTransformVelocity__transformVelocity, cast ([field, root] : Array<Dynamic>));

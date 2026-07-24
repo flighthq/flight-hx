@@ -14,7 +14,6 @@ import flighthq.types.Spring.Spring2D;
 import flighthq.types.Spring.Spring3D;
 import flighthq.types.Spring.SpringConfig;
 
-@:expose("flighthq.spring.Spring")
 class Spring {
   public static function createSpring(value:Float = 0.0, velocity:Float = 0.0):flighthq.types.Spring {
     return cast { value: value, velocity: velocity };

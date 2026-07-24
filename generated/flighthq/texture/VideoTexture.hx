@@ -17,7 +17,6 @@ import flighthq.types.VideoResource;
 import flighthq.types.VideoTexture;
 import flighthq.types.VideoTexture.VideoTextureLike;
 
-@:expose("flighthq.texture.VideoTexture")
 class VideoTexture {
   public static function advanceVideoTexture(videoTexture:VideoTextureLike):Float {
     _Runtime.setField(videoTexture, 'frameId', (_Runtime.field(videoTexture, 'frameId') + 1.0));

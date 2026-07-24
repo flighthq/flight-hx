@@ -7,7 +7,6 @@ import flighthq.intl.Cache.getCacheKey;
 import flighthq.intl.Cache.getCached;
 import flighthq.types.LocaleInput;
 
-@:expose("flighthq.intl.RelativeTime")
 class RelativeTime {
   public static function formatRelativeTime(value:Float, unit:Dynamic, locale:LocaleInput, ?options:Dynamic):String {
     var key:Dynamic = cast _Runtime.UNDEFINED;

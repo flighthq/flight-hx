@@ -15,7 +15,6 @@ import flighthq.types.PathBooleanOperation;
 import flighthq.types.PathBooleanOptions;
 import flighthq.types.PathOffsetOptions;
 
-@:expose("flighthq.pathBoolean.PathBoolean")
 class PathBoolean {
   public static function booleanPaths(subject:Path, clip:Path, operation:PathBooleanOperation, ?out:Path, ?options:PathBooleanOptions):Path {
     return cast _Runtime.callValue(Facade_PathBoolean_flighthq_pathBoolean_BooleanPaths.booleanPaths, cast ([subject, clip, operation, out, options] : Array<Dynamic>));

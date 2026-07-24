@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.TextFormat;
 
-@:expose("flighthq.textlayout.TextFormat")
 class TextFormat {
   public static final DEFAULT_SIZE__textFormat:Dynamic = 12.0;
 

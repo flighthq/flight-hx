@@ -7,7 +7,6 @@ import flighthq.color.SrgbTransfer.linearChannelToSrgb;
 import flighthq.color.SrgbTransfer.srgbChannelToLinear;
 import flighthq.types.LinearColor;
 
-@:expose("flighthq.color.PackColor")
 class PackColor {
   public static function allocateLinearColor():LinearColor {
     return cast cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);

@@ -4,7 +4,6 @@ package flighthq.adjustments;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.adjustments.ColorMatrixMath")
 class ColorMatrixMath {
   public static final COLOR_MATRIX_LENGTH:Dynamic = 20.0;
 

@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.createWgpuRenderState;
 import flighthq.types.WgpuRenderState;
 
-@:expose("flighthq.renderWgpu._internal._WgpuTestHelper")
 class _WgpuTestHelper {
   public static function installWgpuConstants__wgpuTestHelper():Void {
     var g:Dynamic = cast _Runtime.UNDEFINED;

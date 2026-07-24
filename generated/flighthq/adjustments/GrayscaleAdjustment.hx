@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.GrayscaleAdjustment;
 
-@:expose("flighthq.adjustments.GrayscaleAdjustment")
 class GrayscaleAdjustment {
   public static function createGrayscaleAdjustment(?options:Dynamic):flighthq.types.GrayscaleAdjustment {
     if (options == null) options = cast ({  } : Dynamic);

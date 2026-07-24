@@ -9,7 +9,6 @@ import flighthq.types.ApplicationWindow.WindowBackend;
 import flighthq.types.TauriApi;
 import flighthq.types.TauriApi.TauriWindow;
 
-@:expose("flighthq.hostTauri.TauriWindow")
 class TauriWindow {
   public static function createTauriWindowBackend(tauri:TauriApi):WindowBackend {
     var windowModule:Dynamic = cast _Runtime.UNDEFINED;

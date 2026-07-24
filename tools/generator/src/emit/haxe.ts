@@ -64,12 +64,14 @@ export function emitHaxeModule(module: IrModule): string {
   for (const declaration of typeDeclarations) lines.push(...emitDeclaration(declaration), '');
   // Barrel free functions live as public static members of a constructorless class
   // that acts purely as their module namespace (Flight allocates via `create<Type>`,
-  // never `new`). The class-level `@:expose` both exposes and keeps every public
-  // static, so no per-field `@:keep` is needed, and `import flighthq.<Module>.*` keeps
-  // working. Async is applied per function through the `_Async.make` expression
+  // never `new`). Async is applied per function through the `_Async.make` expression
   // macro, so no class-level `@:build(jsasync.JSAsync.build())` is needed.
+  //
+  // Do not expose namespace classes to JavaScript here. Exposure is an output policy
+  // that prevents consumer DCE; the parity harness adds it only to its dedicated JS
+  // build.
   if (valueDeclarations.length === 0) return lines.join('\n');
-  lines.push(`@:expose("${currentHaxePackage}.${module.name}")`, `class ${module.name} {`);
+  lines.push(`class ${module.name} {`);
   for (const declaration of typeDeclarations) {
     if (declaration.kind !== 'enum') continue;
     lines.push(
@@ -89,9 +91,8 @@ export function emitHaxeModule(module: IrModule): string {
 
 /**
  * Emit a barrel value (free function or variable) as a public static member of the
- * module's namespace class. Exposure and keep come from the class-level `@:expose`,
- * so members carry no `@:keep`. Async functions are made asynchronous per function
- * via the `_Async.make` expression macro rather than a class-level
+ * module's namespace class. Async functions are made asynchronous per function via
+ * the `_Async.make` expression macro rather than a class-level
  * `@:build(jsasync.JSAsync.build())` macro, keeping the class free of the build.
  */
 function emitModuleValue(declaration: Extract<IrDeclaration, { kind: 'function' | 'variable' }>): string[] {
@@ -112,8 +113,7 @@ function emitModuleValue(declaration: Extract<IrDeclaration, { kind: 'function' 
   const generics = declaration.typeParameters.length > 0 ? `<${declaration.typeParameters.join(', ')}>` : '';
   const directOnly = currentDirectFunctions.has(declaration.name);
   const parameters = directOnly ? '__flightArguments:Array<Dynamic>' : emitParameters(declaration.parameters);
-  // High-arity `directOnly` shims stay private; everything else is public and kept
-  // and exposed by the class-level `@:expose`.
+  // High-arity `directOnly` shims stay private; everything else is public.
   const access = directOnly ? 'private' : 'public';
   const signature = `${access} static function ${safeName(declaration.name)}${generics}(${parameters}):${emitType(declaration.returns)}`;
 
@@ -231,10 +231,7 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
     const parent = declaration.extends ? ` extends ${emitType(declaration.extends)}` : '';
     const lines = declaration.packagePrivate
       ? [`private class ${safeName(declaration.name)}${generics}${parent} {`]
-      : [
-          `@:expose("${currentHaxePackage}.${safeName(declaration.name)}")`,
-          `class ${safeName(declaration.name)}${generics}${parent} {`,
-        ];
+      : [`class ${safeName(declaration.name)}${generics}${parent} {`];
     for (const field of declaration.fields) {
       const fieldAccess = field.public ? 'public ' : 'private ';
       const static_ = field.static ? 'static ' : '';

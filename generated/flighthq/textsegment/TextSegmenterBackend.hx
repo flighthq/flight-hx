@@ -7,7 +7,6 @@ import flighthq.types.TextSegment;
 import flighthq.types.TextSegment.TextSegmentGranularity;
 import flighthq.types.TextSegment.TextSegmenterBackend;
 
-@:expose("flighthq.textsegment.TextSegmenterBackend")
 class TextSegmenterBackend {
   public static function createWebTextSegmenterBackend():flighthq.types.TextSegment.TextSegmenterBackend {
     return cast { segment: TextSegmenterBackend.segmentWithIntlSegmenter__textSegmenterBackend };

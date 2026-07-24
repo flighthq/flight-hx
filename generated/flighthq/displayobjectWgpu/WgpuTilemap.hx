@@ -18,7 +18,6 @@ import flighthq.types.SpriteRenderer;
 import flighthq.types.Tilemap;
 import flighthq.types.WgpuRenderState;
 
-@:expose("flighthq.displayobjectWgpu.WgpuTilemap")
 class WgpuTilemap {
   public static final INSTANCE_STRIDE_FLOATS__wgpuTilemap:Dynamic = 13.0;
 

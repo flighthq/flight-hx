@@ -7,7 +7,6 @@ import flighthq.types.DisplayObject;
 import flighthq.types.DisplayObject.DisplayObjectData;
 import flighthq.types.DisplayObject.DisplayObjectRuntime;
 
-@:expose("flighthq.types._internal._HtmlViewValues")
 class _HtmlViewValues {
   public static final HtmlViewKind:Dynamic = 'HtmlView';
 }

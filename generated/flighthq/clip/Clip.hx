@@ -10,7 +10,6 @@ import flighthq.types.Path;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.ShapeCommand.PathWinding;
 
-@:expose("flighthq.clip.Clip")
 class Clip {
   public static function acquireClipRegion():ClipRegion {
     return cast _Runtime.callValue(Facade_Clip_flighthq_clip_ClipRegion.acquireClipRegion, cast ([] : Array<Dynamic>));

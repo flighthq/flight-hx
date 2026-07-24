@@ -14,7 +14,6 @@ import flighthq.textureatlas.TextureAtlas.createTextureAtlas;
 import flighthq.types.ImageResource;
 import flighthq.types.TextureAtlas;
 
-@:expose("flighthq.textureatlas.TextureAtlasFrom")
 class TextureAtlasFrom {
   public static function createTextureAtlasFromCanvas(canvas:Dynamic):TextureAtlas {
     return cast _Runtime.callValue(createTextureAtlas, cast ([{ image: _Runtime.callValue(createImageResourceFromCanvas, cast ([canvas] : Array<Dynamic>)) }] : Array<Dynamic>));

@@ -19,7 +19,6 @@ import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextLayout.TextMeasureFunction;
 import flighthq.types.TextVerticalAlign;
 
-@:expose("flighthq.textlayout.TextLayout")
 class TextLayout {
   public static final TEXT_LAYOUT_GUTTER:Dynamic = 2.0;
 

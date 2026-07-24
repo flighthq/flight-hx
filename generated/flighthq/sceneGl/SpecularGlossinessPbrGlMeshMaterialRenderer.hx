@@ -27,7 +27,6 @@ import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
 import flighthq.types.Types.SpecularGlossinessPbrMaterialKind;
 import flighthq.types._internal._SpecularGlossinessPbrMaterialValues.SpecularGlossinessPbrMaterialKind;
 
-@:expose("flighthq.sceneGl.SpecularGlossinessPbrGlMeshMaterialRenderer")
 class SpecularGlossinessPbrGlMeshMaterialRenderer {
   public static final specularGlossinessPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;

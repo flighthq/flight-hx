@@ -17,7 +17,6 @@ import flighthq.types.DisplayObjectRenderer;
 import flighthq.types.DomRenderState;
 import flighthq.types.RenderProxy2D;
 
-@:expose("flighthq.displayobjectDom.DomDisplayObject")
 class DomDisplayObject {
   public static function drawDomDisplayObject(_state:DomRenderState, _renderProxy:RenderProxy2D):Void {
   }

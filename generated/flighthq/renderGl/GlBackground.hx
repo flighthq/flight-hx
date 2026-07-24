@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.GlRenderState;
 
-@:expose("flighthq.renderGl.GlBackground")
 class GlBackground {
   public static function renderGlBackground(state:GlRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

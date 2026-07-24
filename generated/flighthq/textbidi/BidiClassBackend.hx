@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Bidi.BidiClass;
 import flighthq.types.Bidi.BidiClassBackend;
 
-@:expose("flighthq.textbidi.BidiClassBackend")
 class BidiClassBackend {
   public static function createCompactBidiClassBackend():flighthq.types.Bidi.BidiClassBackend {
     return cast { getBidiClass: BidiClassBackend.getCompactBidiClass__bidiClassBackend };

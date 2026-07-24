@@ -10,7 +10,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.TaaEffect;
 
-@:expose("flighthq.effectsGl.GlTaaEffect")
 class GlTaaEffect {
   public static function applyTaaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, _effect:TaaEffect):Void {
     var program:Dynamic = cast _Runtime.UNDEFINED;

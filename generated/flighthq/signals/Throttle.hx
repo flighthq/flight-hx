@@ -8,7 +8,6 @@ import flighthq.signals.Slot.disconnectSignal;
 import flighthq.types.Signal;
 import flighthq.types.SignalThrottleOptions;
 
-@:expose("flighthq.signals.Throttle")
 class Throttle {
   public static function connectSignalAtFrameRate(source:Signal<Dynamic>, fps:Float, slot:Dynamic):Dynamic {
     var period:Dynamic = cast _Runtime.UNDEFINED;

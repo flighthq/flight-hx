@@ -12,7 +12,6 @@ import flighthq.types.Updater.UpdaterConfig;
 import flighthq.types.Updater.UpdaterSignatureConfig;
 import flighthq.types.Updater.UpdaterState;
 
-@:expose("flighthq.updater.Updater")
 class Updater {
   public static var _backend__updater:Null<UpdaterBackend> = _Runtime.explicitNull();
 

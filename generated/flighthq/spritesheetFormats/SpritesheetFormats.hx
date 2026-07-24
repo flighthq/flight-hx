@@ -25,7 +25,6 @@ import flighthq.types.StarlingSchema.StarlingParsed;
 import flighthq.types.TexturePackerSchema.TexturePackerParsed;
 import flighthq.types.TexturePackerSchema.TexturePackerSerializeOptions;
 
-@:expose("flighthq.spritesheetFormats.SpritesheetFormats")
 class SpritesheetFormats {
   public static function detectSpritesheetFormat(text:String):Null<SpritesheetFormatKind> {
     return cast _Runtime.callValue(Facade_SpritesheetFormats_flighthq_spritesheetFormats_SpritesheetDetect.detectSpritesheetFormat, cast ([text] : Array<Dynamic>));

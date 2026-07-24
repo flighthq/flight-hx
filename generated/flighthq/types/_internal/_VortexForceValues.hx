@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ForceFalloff;
 
-@:expose("flighthq.types._internal._VortexForceValues")
 class _VortexForceValues {
   public static final VortexForceKind:Dynamic = 'VortexForce';
 }

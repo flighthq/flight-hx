@@ -12,7 +12,6 @@ import flighthq.types.WgpuPbrPipeline;
 import flighthq.types.WgpuPbrPipeline.WgpuPbrDefineKey;
 import flighthq.types.WgpuRenderState;
 
-@:expose("flighthq.sceneWgpu.WgpuPbrPipelineCache")
 class WgpuPbrPipelineCache {
   public static function compileWgpuPbrPipeline(state:WgpuRenderState, key:WgpuPbrDefineKey, format:Dynamic):WgpuPbrPipeline {
     var device:Dynamic = cast _Runtime.UNDEFINED;

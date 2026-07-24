@@ -8,7 +8,6 @@ import flighthq.types.Aabb.AabbLike;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
 import flighthq.types.MeshGeometry;
 
-@:expose("flighthq.mesh.MeshGeometryCompute")
 class MeshGeometryCompute {
   public static function computeMeshGeometryBoundingSphere(out:BoundingSphereLike, geometry:MeshGeometry):Void {
     var vertices:Dynamic = cast _Runtime.UNDEFINED;

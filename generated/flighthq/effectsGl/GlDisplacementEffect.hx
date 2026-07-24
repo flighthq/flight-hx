@@ -10,7 +10,6 @@ import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
-@:expose("flighthq.effectsGl.GlDisplacementEffect")
 class GlDisplacementEffect {
   public static function applyDisplacementEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:DisplacementEffect):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;

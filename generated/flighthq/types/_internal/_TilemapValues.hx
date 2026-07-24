@@ -9,7 +9,6 @@ import flighthq.types.DisplayObject.DisplayObjectRuntime;
 import flighthq.types.Material.MaterialData;
 import flighthq.types.Tileset;
 
-@:expose("flighthq.types._internal._TilemapValues")
 class _TilemapValues {
   public static final TilemapKind:Dynamic = 'Tilemap';
 }

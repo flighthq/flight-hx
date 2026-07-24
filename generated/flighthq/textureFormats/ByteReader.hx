@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ByteReader;
 
-@:expose("flighthq.textureFormats.ByteReader")
 class ByteReader {
   public static function createByteReader(bytes:Dynamic, offset:Dynamic = 0.0):flighthq.types.ByteReader {
     return cast { view: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['DataView'] : Array<Dynamic>)), [_Runtime.field(bytes, 'buffer'), _Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')]), offset: offset };

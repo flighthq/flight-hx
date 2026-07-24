@@ -47,7 +47,6 @@ import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 
-@:expose("flighthq.displayobjectDom.DisplayobjectDom")
 class DisplayobjectDom {
   public static function applyDomBlendMode(element:Dynamic, value:Null<BlendMode>):Void {
     _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomMaterials.applyDomBlendMode, cast ([element, value] : Array<Dynamic>));

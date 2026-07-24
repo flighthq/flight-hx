@@ -9,7 +9,6 @@ import flighthq.types.CanvasImageSourceKind;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.ImageResource;
 
-@:expose("flighthq.displayobjectCanvas.CanvasImageSource")
 class CanvasImageSource {
   public static function explainCanvasImageSource(image:ImageResource):Dynamic {
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(image, 'source'), null))) { return cast 'element'; }

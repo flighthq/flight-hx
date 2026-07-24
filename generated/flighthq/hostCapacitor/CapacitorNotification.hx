@@ -10,7 +10,6 @@ import flighthq.types.Notification.NotificationBackend;
 import flighthq.types.Notification.NotificationCapabilities;
 import flighthq.types.Notification.NotificationPermission;
 
-@:expose("flighthq.hostCapacitor.CapacitorNotification")
 class CapacitorNotification {
   public static function createCapacitorNotificationBackend(capacitor:CapacitorApi):NotificationBackend {
     var notifications:Dynamic = cast _Runtime.UNDEFINED;

@@ -16,7 +16,6 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuSpriteBatchBufferSlot;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
-@:expose("flighthq.displayobjectWgpu.WgpuSpriteBatch")
 class WgpuSpriteBatch {
   public static final SPRITE_INSTANCE_FLOATS:Dynamic = 13.0;
 

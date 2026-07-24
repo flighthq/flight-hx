@@ -8,7 +8,6 @@ import flighthq.types.Signal;
 import flighthq.types.Signal.SignalData;
 import flighthq.types.SignalConnectOptions;
 
-@:expose("flighthq.signals.Slot")
 class Slot {
   public static function clearSignal<T>(signal:Signal<Dynamic>):Void {
     _Runtime.setField(signal, 'emit', (cast (cast nullSignalEmit : Dynamic) : Dynamic));

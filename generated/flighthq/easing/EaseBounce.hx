@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
-@:expose("flighthq.easing.EaseBounce")
 class EaseBounce {
   public static final easeInBounce:EasingFunction = function(t:Dynamic) return (1.0 - _Runtime.callValue(EaseBounce.bounceOut__easeBounce, cast ([(1.0 - t)] : Array<Dynamic>)));
 

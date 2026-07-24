@@ -12,7 +12,6 @@ import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.OrthographicProjectionOptions;
 import flighthq.types.PerspectiveProjectionOptions;
 
-@:expose("flighthq.camera.Projection")
 class Projection {
   public static function createOrthographicProjection(opts:OrthographicProjectionOptions):OrthographicProjection {
     return cast { halfHeight: _Runtime.field(opts, 'halfHeight'), halfWidth: _Runtime.field(opts, 'halfWidth'), kind: 'orthographic' };

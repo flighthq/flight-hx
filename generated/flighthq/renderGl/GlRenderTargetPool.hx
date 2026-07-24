@@ -11,7 +11,6 @@ import flighthq.types.GlRenderTarget;
 import flighthq.types.GlRenderTarget.GlRenderTargetPool;
 import flighthq.types.RenderTarget.RenderTargetDescriptor;
 
-@:expose("flighthq.renderGl.GlRenderTargetPool")
 class GlRenderTargetPool {
   public static function acquireGlRenderTarget(state:GlRenderState, pool:flighthq.types.GlRenderTarget.GlRenderTargetPool, descriptor:RenderTargetDescriptor):GlRenderTarget {
     var w:Dynamic = cast _Runtime.UNDEFINED;

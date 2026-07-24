@@ -8,7 +8,6 @@ import flighthq.font.FontShorthand.getFontShorthand;
 import flighthq.types.Font.FontUrl;
 import flighthq.types.FontResource;
 
-@:expose("flighthq.font.FontResourceFrom")
 class FontResourceFrom {
   public static function loadFontResourceFromBytes(out:FontResource, bytes:Dynamic):flighthq._internal._Promise<FontResource> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<FontResource> {

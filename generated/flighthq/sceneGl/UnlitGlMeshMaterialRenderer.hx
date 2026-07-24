@@ -26,7 +26,6 @@ import flighthq.types.Types.UnlitMaterialKind;
 import flighthq.types.UnlitMaterial;
 import flighthq.types._internal._UnlitMaterialValues.UnlitMaterialKind;
 
-@:expose("flighthq.sceneGl.UnlitGlMeshMaterialRenderer")
 class UnlitGlMeshMaterialRenderer {
   public static final unlitGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;

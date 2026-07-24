@@ -21,7 +21,6 @@ import flighthq.types.InnerShadowEffect;
 
 typedef InnerClipLocations__glInnerShadowEffect = GlFullscreenProgram;
 
-@:expose("flighthq.effectsGl.GlInnerShadowEffect")
 class GlInnerShadowEffect {
   public static final INNER_CLIP_FRAGMENT_SRC__glInnerShadowEffect:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nout vec4 fragColor;\nvoid main() {\n  vec4 shadow = texture(u_texture0, v_texCoord);\n  float srcAlpha = texture(u_texture1, v_texCoord).a;\n  fragColor = shadow * srcAlpha;\n}';
 

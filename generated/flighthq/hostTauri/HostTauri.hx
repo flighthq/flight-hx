@@ -26,7 +26,6 @@ import flighthq.types.Shortcut.ShortcutBackend;
 import flighthq.types.TauriApi;
 import flighthq.types.Tray.TrayBackend;
 
-@:expose("flighthq.hostTauri.HostTauri")
 class HostTauri {
   public static function createTauriAppBackend(tauri:TauriApi):AppBackend {
     return cast _Runtime.callValue(Facade_HostTauri_flighthq_hostTauri_TauriApp.createTauriAppBackend, cast ([tauri] : Array<Dynamic>));

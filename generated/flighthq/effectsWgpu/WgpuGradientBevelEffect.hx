@@ -20,7 +20,6 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 
-@:expose("flighthq.effectsWgpu.WgpuGradientBevelEffect")
 class WgpuGradientBevelEffect {
   public static function applyGradientBevelEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:GradientBevelEffect):Void {
     var src:Dynamic = cast _Runtime.UNDEFINED;

@@ -23,7 +23,6 @@ typedef ScreenDetails__screen = { var currentScreen:ScreenDetailed__screen; var 
 
 typedef WebScreenOrientationObject__screen = { @:optional var angle:Float; @:optional var type:String; @:optional var addEventListener:Dynamic; @:optional var removeEventListener:Dynamic; };
 
-@:expose("flighthq.screen.Screen")
 class Screen {
   public static var _backend__screen:Null<ScreenBackend> = _Runtime.explicitNull();
 

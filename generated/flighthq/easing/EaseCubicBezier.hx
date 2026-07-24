@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
-@:expose("flighthq.easing.EaseCubicBezier")
 class EaseCubicBezier {
   public static function easeCubicBezier(x1:Float, y1:Float, x2:Float, y2:Float):EasingFunction {
     var cx:Dynamic = cast _Runtime.UNDEFINED;

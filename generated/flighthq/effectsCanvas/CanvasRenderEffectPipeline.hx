@@ -23,7 +23,6 @@ import flighthq.types.CanvasRenderTarget;
 import flighthq.types.GlRenderEffectPipeline.RenderEffectPipelineOptions;
 import flighthq.types.RenderEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasRenderEffectPipeline")
 class CanvasRenderEffectPipeline {
   public static function acquireCanvasRenderTarget(pool:Dynamic, width:Float, height:Float):Dynamic {
     var w:Dynamic = cast _Runtime.UNDEFINED;

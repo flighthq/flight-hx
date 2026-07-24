@@ -13,7 +13,6 @@ import flighthq.types.Camera3D;
 import flighthq.types.FlyCameraController;
 import flighthq.types.FlyCameraController.FlyCameraControllerOptions;
 
-@:expose("flighthq.cameraControls.FlyCameraController")
 class FlyCameraController {
   public static function cloneFlyCameraController(source:flighthq.types.FlyCameraController):flighthq.types.FlyCameraController {
     var clone:Dynamic = cast _Runtime.UNDEFINED;

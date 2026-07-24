@@ -29,7 +29,6 @@ import flighthq.types.SceneRenderProxy;
 import flighthq.types.Types.LambertMaterialKind;
 import flighthq.types._internal._LambertMaterialValues.LambertMaterialKind;
 
-@:expose("flighthq.sceneGl.LambertGlMeshMaterialRenderer")
 class LambertGlMeshMaterialRenderer {
   public static final lambertGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;

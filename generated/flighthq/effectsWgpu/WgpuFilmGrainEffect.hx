@@ -10,7 +10,6 @@ import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
-@:expose("flighthq.effectsWgpu.WgpuFilmGrainEffect")
 class WgpuFilmGrainEffect {
   public static function applyFilmGrainEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:FilmGrainEffect):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;

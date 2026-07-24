@@ -7,7 +7,6 @@ import flighthq.scene.UpdateMeshMorph.updateMeshMorph;
 import flighthq.skeleton3d.UpdateMeshSkin.updateMeshSkin;
 import flighthq.types.Mesh;
 
-@:expose("flighthq.skeleton3d.UpdateMeshDeformation")
 class UpdateMeshDeformation {
   public static function updateMeshDeformation(mesh:Mesh):Void {
     _Runtime.callValue(updateMeshMorph, cast ([mesh] : Array<Dynamic>));

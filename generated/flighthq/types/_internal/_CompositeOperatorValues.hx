@@ -4,7 +4,6 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.types._internal._CompositeOperatorValues")
 class _CompositeOperatorValues {
   public static final CompositeOperatorValue:Dynamic = { Clear: 'Clear', Copy: 'Copy', DestinationAtop: 'DestinationAtop', DestinationIn: 'DestinationIn', DestinationOut: 'DestinationOut', DestinationOver: 'DestinationOver', SourceAtop: 'SourceAtop', SourceIn: 'SourceIn', SourceOut: 'SourceOut', SourceOver: 'SourceOver', Xor: 'Xor' };
 }

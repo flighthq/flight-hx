@@ -10,7 +10,6 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuSceneRuntime.WgpuMeshUpload;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
-@:expose("flighthq.sceneWgpu.WgpuMeshUpload")
 class WgpuMeshUpload {
   public static function ensureWgpuMeshUpload(state:WgpuRenderState, geometry:MeshGeometry):Null<flighthq.types.WgpuSceneRuntime.WgpuMeshUpload> {
     var indices:Dynamic = cast _Runtime.UNDEFINED;

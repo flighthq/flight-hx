@@ -10,7 +10,6 @@ import flighthq.types.AnimationTrackValidationDiagnostic;
 import flighthq.types.Types.AnimationInterpolationLinear;
 import flighthq.types._internal._AnimationInterpolationValues.AnimationInterpolationLinear;
 
-@:expose("flighthq.animation.AnimationTrack")
 class AnimationTrack {
   public static function cloneAnimationTrack(track:flighthq.types.AnimationTrack):flighthq.types.AnimationTrack {
     return cast _Runtime.callValue(createEntity, cast ([{ components: _Runtime.field(track, 'components'), easing: _Runtime.field(track, 'easing'), interpolation: _Runtime.field(track, 'interpolation'), quaternion: _Runtime.field(track, 'quaternion'), times: _Runtime.callValue(AnimationTrack.cloneNumberBuffer__animationTrack, cast ([_Runtime.field(track, 'times')] : Array<Dynamic>)), values: _Runtime.callValue(AnimationTrack.cloneNumberBuffer__animationTrack, cast ([_Runtime.field(track, 'values')] : Array<Dynamic>)) }] : Array<Dynamic>));

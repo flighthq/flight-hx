@@ -25,7 +25,6 @@ typedef BufferedLogSinkState__log = { var buf:Array<LogEntry>; var flush:Dynamic
 
 typedef MemoryLogSinkState__log = { var buf:Array<LogEntry>; var head:Float; };
 
-@:expose("flighthq.log.Log")
 class Log {
   public static function _applyRedaction__log(data:Dynamic):Dynamic {
     var result:Dynamic = cast _Runtime.UNDEFINED;

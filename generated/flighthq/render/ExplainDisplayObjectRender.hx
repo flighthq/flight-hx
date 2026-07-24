@@ -11,7 +11,6 @@ import flighthq.types.HasAppearance;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 
-@:expose("flighthq.render.ExplainDisplayObjectRender")
 class ExplainDisplayObjectRender {
   public static function explainDisplayObjectRender(state:RenderState, source:Renderable):DisplayObjectRenderExplanation {
     var kind:Dynamic = cast _Runtime.UNDEFINED;

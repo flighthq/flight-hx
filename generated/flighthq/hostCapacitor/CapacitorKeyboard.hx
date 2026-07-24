@@ -16,7 +16,6 @@ import flighthq.types.Types.SoftKeyboardResizeBodyKind;
 import flighthq.types.Types.SoftKeyboardResizeNoneKind;
 import flighthq.types.Types.SoftKeyboardStyleDarkKind;
 
-@:expose("flighthq.hostCapacitor.CapacitorKeyboard")
 class CapacitorKeyboard {
   public static function createCapacitorKeyboardBackend(capacitor:CapacitorApi):SoftKeyboardBackend {
     var keyboard:Dynamic = cast _Runtime.UNDEFINED;

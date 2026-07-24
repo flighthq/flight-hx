@@ -4,7 +4,6 @@ package flighthq.math;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.math.InterpolationAdvanced")
 class InterpolationAdvanced {
   public static function damp(current:Float, target:Float, lambda:Float, deltaTime:Float):Float {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(deltaTime, 0.0, '<='), function():Dynamic return cast _Runtime.compare(lambda, 0.0, '<=')))) { return cast current; }

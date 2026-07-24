@@ -7,7 +7,6 @@ import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuScissorRect;
 
-@:expose("flighthq.renderWgpu.WgpuScissor")
 class WgpuScissor {
   public static function applyWgpuScissorRect(state:WgpuRenderState, pass:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

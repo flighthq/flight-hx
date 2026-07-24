@@ -28,7 +28,6 @@ import flighthq.types._internal._MeshDeformerValues.MeshDeformerNone;
 import flighthq.types._internal._MeshDeformerValues.MeshDeformerSkeletal;
 import flighthq.types._internal._MeshValues.MeshKind;
 
-@:expose("flighthq.scene.Mesh")
 class Mesh {
   public static function cloneMesh(source:flighthq.types.Mesh):flighthq.types.Mesh {
     var hasDeformation:Dynamic = cast _Runtime.UNDEFINED;

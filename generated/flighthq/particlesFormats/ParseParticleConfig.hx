@@ -33,7 +33,6 @@ import flighthq.types._internal._ParticleFormatKindValues.SpineParticleFormatKin
 import flighthq.types._internal._ParticleFormatKindValues.StarlingPexFormatKind;
 import flighthq.types._internal._ParticleFormatKindValues.UnityParticleFormatKind;
 
-@:expose("flighthq.particlesFormats.ParseParticleConfig")
 class ParseParticleConfig {
   public static function parseParticleConfig(text:String, ?options:ParseParticleConfigOptions):ParticleEmitterConfig {
     var format:Dynamic = cast _Runtime.UNDEFINED;

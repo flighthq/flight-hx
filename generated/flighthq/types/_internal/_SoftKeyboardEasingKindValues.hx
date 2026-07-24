@@ -4,7 +4,6 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.types._internal._SoftKeyboardEasingKindValues")
 class _SoftKeyboardEasingKindValues {
   public static final SoftKeyboardEasingDefaultKindValue:Dynamic = 'ease';
 

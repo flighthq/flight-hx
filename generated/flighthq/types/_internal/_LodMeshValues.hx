@@ -7,7 +7,6 @@ import flighthq.types.Mesh;
 import flighthq.types.SceneNode;
 import flighthq.types.SceneNode.SceneNodeRuntime;
 
-@:expose("flighthq.types._internal._LodMeshValues")
 class _LodMeshValues {
   public static final LodMeshKind:Dynamic = 'LodMesh';
 }

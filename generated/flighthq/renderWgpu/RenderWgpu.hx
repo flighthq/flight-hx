@@ -44,7 +44,6 @@ import flighthq.types.WgpuRenderState.WgpuTextureEntry;
 import flighthq.types.WgpuRenderTarget;
 import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 
-@:expose("flighthq.renderWgpu.RenderWgpu")
 class RenderWgpu {
   public static function acquireWgpuFrameCaptureTexture(state:WgpuRenderState):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_RenderWgpu_flighthq_renderWgpu_WgpuSurface.acquireWgpuFrameCaptureTexture, cast ([state] : Array<Dynamic>));

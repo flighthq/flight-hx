@@ -12,7 +12,6 @@ import flighthq.types.CanvasRenderState;
 import flighthq.types.DisplayObjectRenderer;
 import flighthq.types.RenderProxy2D;
 
-@:expose("flighthq.displayobjectCanvas.CanvasBitmap")
 class CanvasBitmap {
   public static function drawCanvasBitmap(state:Dynamic, bitmap:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;

@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
-@:expose("flighthq.easing.EaseCombinators")
 class EaseCombinators {
   public static function easeClamp(ease:EasingFunction):EasingFunction {
     return cast function(t:Dynamic) return _Runtime.callValue(ease, cast ([_Runtime.select(_Runtime.compare(t, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(t, 1.0, '>'), function():Dynamic return cast 1.0, function():Dynamic return cast t))] : Array<Dynamic>));

@@ -8,7 +8,6 @@ import flighthq.types.MeshGeometry;
 import flighthq.types.SceneNode;
 import flighthq.types.SceneNode.SceneNodeRuntime;
 
-@:expose("flighthq.types._internal._BillboardValues")
 class _BillboardValues {
   public static final BillboardKind:Dynamic = 'Billboard';
 }

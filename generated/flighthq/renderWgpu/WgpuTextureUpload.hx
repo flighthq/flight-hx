@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ImageResource;
 
-@:expose("flighthq.renderWgpu.WgpuTextureUpload")
 class WgpuTextureUpload {
   public static function uploadWgpuTextureData(device:Dynamic, texture:Dynamic, origin:Dynamic, width:Float, height:Float, data:Dynamic):Void {
     _Runtime.callProperty(_Runtime.field(device, 'queue'), 'writeTexture', cast ([{ texture: texture, origin: origin }, (cast data : Dynamic), { bytesPerRow: (width * 4.0), rowsPerImage: height }, cast ([width, height, 1.0] : Array<Dynamic>)] : Array<Dynamic>));

@@ -41,7 +41,6 @@ import flighthq.types.Types.SceneNodeKind;
 import flighthq.types._internal._MeshValues.MeshKind;
 import flighthq.types._internal._SceneNodeValues.SceneNodeKind;
 
-@:expose("flighthq.sceneFormats.Md5Parse")
 class Md5Parse {
   public static function createSceneFromMd5Mesh(source:String, ?warnings:Array<String>):Scene {
     return cast _Runtime.callValue(createSceneFromDocument, cast ([_Runtime.callValue(parseMd5Mesh, cast ([source, warnings] : Array<Dynamic>))] : Array<Dynamic>));

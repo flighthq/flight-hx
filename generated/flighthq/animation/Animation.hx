@@ -16,7 +16,6 @@ import flighthq.types.AnimationSampleAccumulator;
 import flighthq.types.AnimationTrack;
 import flighthq.types.AnimationTrackValidationDiagnostic;
 
-@:expose("flighthq.animation.Animation")
 class Animation {
   public static function accumulateAnimationSample(accumulator:AnimationSampleAccumulator, sample:Dynamic, weight:Float):Void {
     _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationBlend.accumulateAnimationSample, cast ([accumulator, sample, weight] : Array<Dynamic>));

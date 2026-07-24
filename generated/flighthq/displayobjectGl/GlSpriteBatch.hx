@@ -15,7 +15,6 @@ import flighthq.types.ImageResource;
 import flighthq.types.Material;
 import flighthq.types.Material.MaterialData;
 
-@:expose("flighthq.displayobjectGl.GlSpriteBatch")
 class GlSpriteBatch {
   public static final SPRITE_INSTANCE_FLOATS__glSpriteBatch:Dynamic = 13.0;
 

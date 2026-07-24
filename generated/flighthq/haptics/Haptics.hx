@@ -8,7 +8,6 @@ import flighthq.types.Haptics.HapticNotificationType;
 import flighthq.types.Haptics.HapticsBackend;
 import flighthq.types.Haptics.HapticsCapabilities;
 
-@:expose("flighthq.haptics.Haptics")
 class Haptics {
   public static var _backend__haptics:Null<HapticsBackend> = _Runtime.explicitNull();
 

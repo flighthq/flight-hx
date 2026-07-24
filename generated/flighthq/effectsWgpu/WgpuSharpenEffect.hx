@@ -10,7 +10,6 @@ import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
-@:expose("flighthq.effectsWgpu.WgpuSharpenEffect")
 class WgpuSharpenEffect {
   public static function applySharpenEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SharpenEffect):Void {
     var amount:Dynamic = cast _Runtime.UNDEFINED;

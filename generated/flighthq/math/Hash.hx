@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.math.Random.createRandomSource;
 import flighthq.types.RandomSource;
 
-@:expose("flighthq.math.Hash")
 class Hash {
   public static function createRandomSourceFromHash(x:Float, y:Float):RandomSource {
     return cast _Runtime.callValue(createRandomSource, cast ([_Runtime.callValue(hash2D, cast ([x, y] : Array<Dynamic>))] : Array<Dynamic>));

@@ -12,7 +12,6 @@ import flighthq.types.BitmapFontRecord.BitmapFontCharRecord;
 import flighthq.types.BitmapFontRecord.BitmapFontKerningRecord;
 import flighthq.types.BitmapFontRecord.BitmapFontPageRecord;
 
-@:expose("flighthq.bitmapfontFormats.BitmapFontJson")
 class BitmapFontJson {
   public static function parseBitmapFontJson(text:String, ?options:BitmapFontParseOptions):Null<BitmapFont> {
     var record:Dynamic = cast _Runtime.UNDEFINED;

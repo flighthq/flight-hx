@@ -8,7 +8,6 @@ import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.types.Log.LogLevel;
 import flighthq.types.RenderState;
 
-@:expose("flighthq.render.EnableColorAdjustmentGuards")
 class EnableColorAdjustmentGuards {
   public static function areColorAdjustmentGuardsEnabled(state:RenderState):Bool {
     return cast !_Runtime.looseEquals(_Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'colorAdjustmentChannelMixingGuard'), null);

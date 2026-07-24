@@ -9,7 +9,6 @@ import flighthq.font.FontShorthand.getFontShorthand;
 import flighthq.types.Font;
 import flighthq.types.Font.FontUrl;
 
-@:expose("flighthq.font.FontFrom")
 class FontFrom {
   public static function loadFontFromBytes(bytes:Dynamic, family:String):flighthq._internal._Promise<Font> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Font> {

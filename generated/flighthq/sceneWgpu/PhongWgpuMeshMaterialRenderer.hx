@@ -25,7 +25,6 @@ import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._PhongMaterialValues.PhongMaterialKind;
 
-@:expose("flighthq.sceneWgpu.PhongWgpuMeshMaterialRenderer")
 class PhongWgpuMeshMaterialRenderer {
   public static final phongWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;

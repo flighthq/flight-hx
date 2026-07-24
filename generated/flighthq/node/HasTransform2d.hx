@@ -7,7 +7,6 @@ import flighthq.types.HasTransform2D;
 import flighthq.types.HasTransform2D.HasTransform2DRuntime;
 import flighthq.types.MethodsOf;
 
-@:expose("flighthq.node.HasTransform2d")
 class HasTransform2d {
   public static function initTransform2DRuntimeTrait(target:HasTransform2DRuntime, ?_methods:Dynamic):Void {
     _Runtime.setField(target, 'localMatrix', null);

@@ -8,7 +8,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.CrtEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasCrtEffect")
 class CanvasCrtEffect {
   public static function applyCrtEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:CrtEffect):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));

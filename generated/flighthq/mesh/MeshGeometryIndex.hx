@@ -7,7 +7,6 @@ import flighthq.mesh.MeshGeometry.cloneMeshGeometry;
 import flighthq.mesh.MeshGeometry.getMeshGeometryVertexCount;
 import flighthq.types.MeshGeometry;
 
-@:expose("flighthq.mesh.MeshGeometryIndex")
 class MeshGeometryIndex {
   public static function compactMeshGeometryVertices(geometry:MeshGeometry):MeshGeometry {
     var sourceIndices:Dynamic = cast _Runtime.UNDEFINED;

@@ -9,7 +9,6 @@ import flighthq.types.ApplicationWindow.WindowBackend;
 import flighthq.types.ElectronApi;
 import flighthq.types.ElectronApi.ElectronBrowserWindow;
 
-@:expose("flighthq.hostElectron.ElectronWindow")
 class ElectronWindow {
   public static function createElectronWindowBackend(electron:ElectronApi):WindowBackend {
     return cast { open: function(win:Dynamic, options:Dynamic) {

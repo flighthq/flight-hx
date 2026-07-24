@@ -11,7 +11,6 @@ import flighthq.types.Types.ShadedMaterialKind;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 import flighthq.types._internal._ShadedMaterialValues.ShadedMaterialKind;
 
-@:expose("flighthq.shading.CreateShadedMaterial")
 class CreateShadedMaterial {
   public static function createShadedMaterial(?options:ShadedMaterialOptions):ShadedMaterial {
     var material:Dynamic = cast _Runtime.UNDEFINED;

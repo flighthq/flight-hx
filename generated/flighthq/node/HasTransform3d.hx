@@ -8,7 +8,6 @@ import flighthq.geometry.Vector3.createVector3;
 import flighthq.types.HasTransform3D;
 import flighthq.types.HasTransform3D.HasTransform3DRuntime;
 
-@:expose("flighthq.node.HasTransform3d")
 class HasTransform3d {
   public static function initTransform3DRuntimeTrait(target:HasTransform3DRuntime):Void {
     _Runtime.setField(target, 'localMatrix4', null);

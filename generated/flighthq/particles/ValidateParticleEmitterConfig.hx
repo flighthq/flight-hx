@@ -7,7 +7,6 @@ import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
 import flighthq.types.ParticleConfigIssue;
 import flighthq.types.ParticleEmitterConfig;
 
-@:expose("flighthq.particles.ValidateParticleEmitterConfig")
 class ValidateParticleEmitterConfig {
   public static final NUMERIC_FIELDS__validateParticleEmitterConfig:Dynamic = cast (['alphaEnd', 'alphaStart', 'burstCount', 'burstInterval', 'duration', 'colorEndB', 'colorEndG', 'colorEndR', 'colorEndVarianceB', 'colorEndVarianceG', 'colorEndVarianceR', 'colorStartB', 'colorStartG', 'colorStartR', 'colorStartVarianceB', 'colorStartVarianceG', 'colorStartVarianceR', 'directionX', 'directionY', 'directionZ', 'emitterConeAngle', 'emitterDepth', 'emitterHeight', 'emitterRadius', 'emitterWidth', 'frameCount', 'frameRate', 'gravityX', 'gravityY', 'gravityZ', 'lifetimeMax', 'lifetimeMin', 'maxParticles', 'regionIdMax', 'regionIdMin', 'rotationSpeedMax', 'rotationSpeedMin', 'scaleEnd', 'scaleMax', 'scaleMin', 'speedMax', 'speedMin', 'spawnRate', 'spread', 'velocityInheritance'] : Array<Dynamic>);
 

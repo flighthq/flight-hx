@@ -8,7 +8,6 @@ import flighthq.displayobjectDom.DomTransform.setDomTransform;
 import flighthq.types.DomRenderState;
 import flighthq.types.RenderProxy2D;
 
-@:expose("flighthq.displayobjectDom.DomStyle")
 class DomStyle {
   public static function applyDomStyle(state:DomRenderState, element:Dynamic, node:RenderProxy2D):Void {
     _Runtime.callValue(setDomTransform, cast ([element, _Runtime.field(node, 'transform2D'), _Runtime.field(state, 'roundPixels')] : Array<Dynamic>));

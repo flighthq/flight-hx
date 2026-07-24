@@ -7,7 +7,6 @@ import flighthq.entity.Entity.createEntity;
 import flighthq.types.Spritesheet;
 import flighthq.types.SpritesheetAnimation;
 
-@:expose("flighthq.spritesheet.SpritesheetAnimation")
 class SpritesheetAnimation {
   public static function createSpritesheetAnimation(?obj:Dynamic):flighthq.types.SpritesheetAnimation {
     return cast _Runtime.callValue(createEntity, cast ([{ direction: _Runtime.coalesce(_Runtime.optionalField(obj, 'direction'), function():Dynamic return cast 'forward'), frameDuration: _Runtime.coalesce(_Runtime.optionalField(obj, 'frameDuration'), function():Dynamic return cast 0.0), frameDurations: _Runtime.coalesce(_Runtime.optionalField(obj, 'frameDurations'), function():Dynamic return cast null), frames: _Runtime.coalesce(_Runtime.optionalField(obj, 'frames'), function():Dynamic return cast cast ([] : Array<Dynamic>)), loop: _Runtime.coalesce(_Runtime.optionalField(obj, 'loop'), function():Dynamic return cast false), originX: _Runtime.coalesce(_Runtime.optionalField(obj, 'originX'), function():Dynamic return cast 0.0), originY: _Runtime.coalesce(_Runtime.optionalField(obj, 'originY'), function():Dynamic return cast 0.0) }] : Array<Dynamic>));

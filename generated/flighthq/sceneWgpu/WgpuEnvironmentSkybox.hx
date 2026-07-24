@@ -15,7 +15,6 @@ import flighthq.types.WgpuRenderState;
 
 typedef WgpuSkybox__wgpuEnvironmentSkybox = { var cubeBindGroup:Null<Dynamic>; var cubeBindGroupLayout:Dynamic; var cubeView:Null<Dynamic>; var pipeline:Dynamic; var uniformBindGroup:Dynamic; var uniformBuffer:Dynamic; };
 
-@:expose("flighthq.sceneWgpu.WgpuEnvironmentSkybox")
 class WgpuEnvironmentSkybox {
   public static function drawWgpuEnvironmentSkybox(state:WgpuRenderState, environment:Environment, camera:Camera3D, aspect:Float):Void {
     var cubeView:Dynamic = cast _Runtime.UNDEFINED;

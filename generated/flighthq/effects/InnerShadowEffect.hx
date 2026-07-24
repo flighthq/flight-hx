@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.InnerShadowEffect;
 
-@:expose("flighthq.effects.InnerShadowEffect")
 class InnerShadowEffect {
   public static function createInnerShadowEffect(?options:Dynamic):flighthq.types.InnerShadowEffect {
     if (options == null) options = cast ({  } : Dynamic);

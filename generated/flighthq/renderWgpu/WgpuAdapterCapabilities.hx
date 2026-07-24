@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.WgpuAdapterCapabilities;
 
-@:expose("flighthq.renderWgpu.WgpuAdapterCapabilities")
 class WgpuAdapterCapabilities {
   public static function getWgpuAdapterCapabilities(adapter:Dynamic):flighthq.types.WgpuAdapterCapabilities {
     var features:Dynamic = cast _Runtime.UNDEFINED;

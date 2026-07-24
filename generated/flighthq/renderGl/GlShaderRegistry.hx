@@ -7,7 +7,6 @@ import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlShaderLocations.GlBitmapShader;
 
-@:expose("flighthq.renderGl.GlShaderRegistry")
 class GlShaderRegistry {
   public static function registerGlBitmapShader(state:GlRenderState, shader:GlBitmapShader):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

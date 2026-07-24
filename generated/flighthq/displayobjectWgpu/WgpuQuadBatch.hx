@@ -20,7 +20,6 @@ import flighthq.types.RenderProxy2D;
 import flighthq.types.SpriteRenderer;
 import flighthq.types.WgpuRenderState;
 
-@:expose("flighthq.displayobjectWgpu.WgpuQuadBatch")
 class WgpuQuadBatch {
   public static final INSTANCE_STRIDE_FLOATS__wgpuQuadBatch:Dynamic = 13.0;
 

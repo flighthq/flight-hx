@@ -11,7 +11,6 @@ import flighthq.types.ParticleDesignerSchema.ParticleDesignerRawDict;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
 
-@:expose("flighthq.particlesFormats.ParticleDesignerParse")
 class ParticleDesignerParse {
   public static final DEG2RAD__particleDesignerParse:Dynamic = (HxMath.PI / 180.0);
 

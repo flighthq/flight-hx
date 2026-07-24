@@ -21,7 +21,6 @@ import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 
 typedef BevelCompositeParams__wgpuBevelEffect = { var offsetX:Float; var offsetY:Float; var highlightColor:Float; var highlightAlpha:Float; var shadowColor:Float; var shadowAlpha:Float; var intensity:Float; var clipMode:Float; };
 
-@:expose("flighthq.effectsWgpu.WgpuBevelEffect")
 class WgpuBevelEffect {
   public static function applyBevelEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:BevelEffect):Void {
     var src:Dynamic = cast _Runtime.UNDEFINED;

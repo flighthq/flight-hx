@@ -9,7 +9,6 @@ import flighthq.types.Shell.ShellOpenPathOptions;
 import flighthq.types.Shell.ShellShortcutLink;
 import flighthq.types.Shell.ShellShortcutWriteOperation;
 
-@:expose("flighthq.shell.Shell")
 class Shell {
   public static var _backend__shell:Null<ShellBackend> = _Runtime.explicitNull();
 

@@ -9,7 +9,6 @@ import flighthq.types.VideoResource.VideoResourceUrl;
 import flighthq.video.VideoFormat.selectVideoResourceUrl;
 import flighthq.video.VideoResource.createVideoResource;
 
-@:expose("flighthq.video.VideoResourceFrom")
 class VideoResourceFrom {
   public static function createVideoResourceFromMediaStream(stream:Dynamic):VideoResource {
     var element:Dynamic = cast _Runtime.UNDEFINED;

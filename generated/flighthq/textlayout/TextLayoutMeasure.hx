@@ -7,7 +7,6 @@ import flighthq.textshaper.TextShaper.getTextShaperBackend;
 import flighthq.textshaper.TextShaper.measureText;
 import flighthq.types.TextLayout.TextMeasureFunction;
 
-@:expose("flighthq.textlayout.TextLayoutMeasure")
 class TextLayoutMeasure {
   public static function getTextLayoutMeasureProvider():Null<TextMeasureFunction> {
     if (_Runtime.truthy(!_Runtime.strictEquals(TextLayoutMeasure._measureProvider__textLayoutMeasure, null))) { return cast TextLayoutMeasure._measureProvider__textLayoutMeasure; }

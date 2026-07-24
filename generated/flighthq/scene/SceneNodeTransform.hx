@@ -8,7 +8,6 @@ import flighthq.node.NodeTransform3d.setNodeLocalMatrix4;
 import flighthq.types.SceneNode;
 import flighthq.types.Vector3.Vector3Like;
 
-@:expose("flighthq.scene.SceneNodeTransform")
 class SceneNodeTransform {
   public static function setSceneNodeLookAt(node:SceneNode, eye:Vector3Like, target:Vector3Like, up:Vector3Like):Void {
     var eyeX:Dynamic = cast _Runtime.UNDEFINED;

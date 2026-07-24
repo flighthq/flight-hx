@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.geometry.Vector3.createVector3;
 import flighthq.types.Vector3;
 
-@:expose("flighthq.geometry.Vector3Pool")
 class Vector3Pool {
   public static function acquireEmptyVector3():Vector3 {
     var v:Dynamic = cast _Runtime.UNDEFINED;

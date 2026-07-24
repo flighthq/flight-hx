@@ -4,7 +4,6 @@ package flighthq.imageCodec;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.imageCodec.DetectImageMimeType")
 class DetectImageMimeType {
   public static function detectImageMimeType(data:Dynamic):Null<String> {
     var b:Dynamic = cast _Runtime.UNDEFINED;

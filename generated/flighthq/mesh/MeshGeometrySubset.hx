@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.MeshSubset;
 
-@:expose("flighthq.mesh.MeshGeometrySubset")
 class MeshGeometrySubset {
   public static function addMeshGeometrySubset(geometry:MeshGeometry, subset:MeshSubset):Void {
     var next:Array<MeshSubset> = cast _Runtime.UNDEFINED;

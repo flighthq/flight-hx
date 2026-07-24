@@ -9,7 +9,6 @@ import flighthq.types.SurfaceGradientBevelOptions;
 import flighthq.types.SurfaceGradientGlowOptions;
 import flighthq.types.SurfaceRegion;
 
-@:expose("flighthq.surface.SurfaceGradient")
 class SurfaceGradient {
   public static function buildSurfaceGradientRamp(out:Dynamic, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Void {
     var n:Dynamic = cast _Runtime.UNDEFINED;

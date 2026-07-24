@@ -32,7 +32,6 @@ import flighthq.types.TextLineMetrics;
 import flighthq.types.TextMetrics;
 import flighthq.types.TextSelectionRectangle;
 
-@:expose("flighthq.textlayout.Textlayout")
 class Textlayout {
   public static function clearRichTextContent(runtime:RichTextRuntime):Void {
     _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextContent.clearRichTextContent, cast ([runtime] : Array<Dynamic>));

@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.ElectronApi;
 import flighthq.types.Ipc.IpcBackend;
 
-@:expose("flighthq.hostElectron.ElectronIpc")
 class ElectronIpc {
   public static function createElectronIpcBackend(electron:ElectronApi):IpcBackend {
     var ipcMain:Dynamic = cast _Runtime.UNDEFINED;

@@ -9,7 +9,6 @@ import flighthq.types.MeshGeometry;
 import flighthq.types.SceneNode;
 import flighthq.types.SceneNode.SceneNodeRuntime;
 
-@:expose("flighthq.types._internal._InstancedMeshValues")
 class _InstancedMeshValues {
   public static final InstancedMeshKind:Dynamic = 'InstancedMesh';
 }

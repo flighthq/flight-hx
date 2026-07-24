@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.SmaaEffect;
 
-@:expose("flighthq.effects.SmaaEffect")
 class SmaaEffect {
   public static function createSmaaEffect(?options:Dynamic):flighthq.types.SmaaEffect {
     if (options == null) options = cast ({  } : Dynamic);

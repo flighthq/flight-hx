@@ -8,7 +8,6 @@ import flighthq.types.FileSystem.FileEntry;
 import flighthq.types.FileSystem.FileStat;
 import flighthq.types.FileSystem.FileSystemBackend;
 
-@:expose("flighthq.hostCapacitor.CapacitorFileSystem")
 class CapacitorFileSystem {
   public static function createCapacitorFileSystemBackend(capacitor:CapacitorApi):Dynamic {
     var filesystem:Dynamic = cast _Runtime.UNDEFINED;

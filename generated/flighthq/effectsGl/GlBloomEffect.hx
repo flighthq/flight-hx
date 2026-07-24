@@ -17,7 +17,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.GlRenderTarget.GlRenderTargetPool;
 
-@:expose("flighthq.effectsGl.GlBloomEffect")
 class GlBloomEffect {
   public static function applyBloomEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:BloomEffect):Void {
     var threshold:Dynamic = cast _Runtime.UNDEFINED;

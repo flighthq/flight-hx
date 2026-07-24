@@ -10,7 +10,6 @@ import flighthq.types.GlColorLutTextureCache;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
-@:expose("flighthq.effectsGl.GlColorLutPass")
 class GlColorLutPass {
   public static function applyColorLutPassToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, lut:ColorLut, cache:GlColorLutTextureCache):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;

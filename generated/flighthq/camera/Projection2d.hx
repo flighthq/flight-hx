@@ -10,7 +10,6 @@ import flighthq.geometry.Matrix.matrixTransformPointXY;
 import flighthq.types.Camera2D;
 import flighthq.types.Vector2.Vector2Like;
 
-@:expose("flighthq.camera.Projection2d")
 class Projection2d {
   public static function projectCamera2DPoint(camera:Camera2D, worldX:Float, worldY:Float, out:Vector2Like):Void {
     _Runtime.callValue(getCamera2DViewMatrix, cast ([camera, Projection2d.scratchMatrix__projection2d] : Array<Dynamic>));

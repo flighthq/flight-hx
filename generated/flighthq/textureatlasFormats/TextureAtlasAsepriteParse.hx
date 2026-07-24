@@ -9,7 +9,6 @@ import flighthq.types.TextureAtlasAsepriteSchema.TextureAtlasAsepriteArrayFrame;
 import flighthq.types.TextureAtlasAsepriteSchema.TextureAtlasAsepriteBaseFrame;
 import flighthq.types.TextureAtlasAsepriteSchema.TextureAtlasAsepriteDocument;
 
-@:expose("flighthq.textureatlasFormats.TextureAtlasAsepriteParse")
 class TextureAtlasAsepriteParse {
   public static function parseTextureAtlasAsepriteDocument(doc:TextureAtlasAsepriteDocument, atlas:TextureAtlas):TextureAtlas {
     _Runtime.setLength(_Runtime.field(atlas, 'regions'), 0.0);

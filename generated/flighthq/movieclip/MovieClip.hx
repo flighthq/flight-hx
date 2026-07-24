@@ -32,7 +32,6 @@ import flighthq.types.Types.MovieClipKind;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 import flighthq.types._internal._MovieClipValues.MovieClipKind;
 
-@:expose("flighthq.movieclip.MovieClip")
 class MovieClip {
   public static function addMovieClipFrameScript(clip:flighthq.types.MovieClip, frame:Dynamic, script:FrameScript):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null))) { return; }

@@ -7,7 +7,6 @@ import flighthq.image.ImageResource.invalidateImageResource;
 import flighthq.types.GradientSpread;
 import flighthq.types.SurfaceRegion;
 
-@:expose("flighthq.surface.SurfaceGradientFill")
 class SurfaceGradientFill {
   public static function fillSurfaceLinearGradient(dest:SurfaceRegion, ramp:Dynamic, x0:Float, y0:Float, x1:Float, y1:Float, spread:GradientSpread = 'pad'):Void {
     var dw:Dynamic = cast _Runtime.UNDEFINED;

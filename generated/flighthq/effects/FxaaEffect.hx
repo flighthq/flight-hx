@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.FxaaEffect;
 
-@:expose("flighthq.effects.FxaaEffect")
 class FxaaEffect {
   public static function createFxaaEffect(?options:Dynamic):flighthq.types.FxaaEffect {
     if (options == null) options = cast ({  } : Dynamic);

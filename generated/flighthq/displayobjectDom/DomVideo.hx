@@ -17,7 +17,6 @@ import flighthq.types.Video;
 
 typedef DomVideoData__domVideo = Dynamic;
 
-@:expose("flighthq.displayobjectDom.DomVideo")
 class DomVideo {
   public static function createDomVideoData__domVideo(_state:RenderState, _source:Renderable):DomVideoData__domVideo {
     return cast _Runtime.callValue(createEntity, cast ([{ element: null }] : Array<Dynamic>));

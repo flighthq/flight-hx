@@ -7,7 +7,6 @@ import flighthq.adjustments.ColorMatrixAdjustment.getAdjustmentColorMatrix;
 import flighthq.types.ColorLutAdjustment;
 import flighthq.types.ColorTransformFunction;
 
-@:expose("flighthq.adjustments.ColorLutAdjustment")
 class ColorLutAdjustment {
   public static function getAdjustmentColorTransform(operation:{ var kind:String; }):Null<ColorTransformFunction> {
     var transform:Dynamic = cast _Runtime.UNDEFINED;

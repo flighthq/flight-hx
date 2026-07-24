@@ -11,7 +11,6 @@ import flighthq.types.BoundingSphere.BoundingSphereLike;
 import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.Vector3.Vector3Like;
 
-@:expose("flighthq.geometry.Aabb")
 class Aabb {
   public static function cloneAabb(source:AabbLike):flighthq.types.Aabb {
     return cast _Runtime.callValue(createAabb, cast ([_Runtime.field(_Runtime.field(source, 'min'), 'x'), _Runtime.field(_Runtime.field(source, 'min'), 'y'), _Runtime.field(_Runtime.field(source, 'min'), 'z'), _Runtime.field(_Runtime.field(source, 'max'), 'x'), _Runtime.field(_Runtime.field(source, 'max'), 'y'), _Runtime.field(_Runtime.field(source, 'max'), 'z')] : Array<Dynamic>));

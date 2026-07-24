@@ -11,7 +11,6 @@ import flighthq.types.CanvasShapeRegistry.CanvasShapeCommand;
 import flighthq.types.ImageResource;
 import flighthq.types.Matrix;
 
-@:expose("flighthq.displayobjectCanvas.CanvasShapeCommands")
 class CanvasShapeCommands {
   public static final _fillMatrixInverse__canvasShapeCommands:Matrix = _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>));
 

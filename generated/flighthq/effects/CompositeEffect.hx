@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.CompositeEffect;
 import flighthq.types.CompositeOperator;
 
-@:expose("flighthq.effects.CompositeEffect")
 class CompositeEffect {
   public static function createCompositeEffect(operator_:CompositeOperator, ?options:Dynamic):flighthq.types.CompositeEffect {
     if (options == null) options = cast ({  } : Dynamic);

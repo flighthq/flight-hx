@@ -12,7 +12,6 @@ typedef Subpath__reversePath = { var closed:Bool; var points:Array<SubpathPoint_
 
 typedef SubpathPoint__reversePath = Dynamic;
 
-@:expose("flighthq.path.ReversePath")
 class ReversePath {
   public static function reversePath(source:Path, out:Path):Void {
     var subpaths:Dynamic = cast _Runtime.UNDEFINED;

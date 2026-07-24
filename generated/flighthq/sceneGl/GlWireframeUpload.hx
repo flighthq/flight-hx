@@ -8,7 +8,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlWireframeProgram.GlWireframeUpload;
 import flighthq.types.MeshGeometry;
 
-@:expose("flighthq.sceneGl.GlWireframeUpload")
 class GlWireframeUpload {
   public static function destroyGlWireframeUpload(state:GlRenderState, upload:flighthq.types.GlWireframeProgram.GlWireframeUpload):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;

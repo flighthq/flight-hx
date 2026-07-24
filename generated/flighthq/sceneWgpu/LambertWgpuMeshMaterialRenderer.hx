@@ -25,7 +25,6 @@ import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._LambertMaterialValues.LambertMaterialKind;
 
-@:expose("flighthq.sceneWgpu.LambertWgpuMeshMaterialRenderer")
 class LambertWgpuMeshMaterialRenderer {
   public static final lambertWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;

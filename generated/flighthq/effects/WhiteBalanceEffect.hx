@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.WhiteBalanceEffect;
 
-@:expose("flighthq.effects.WhiteBalanceEffect")
 class WhiteBalanceEffect {
   public static function createWhiteBalanceEffect(?options:Dynamic):flighthq.types.WhiteBalanceEffect {
     if (options == null) options = cast ({  } : Dynamic);

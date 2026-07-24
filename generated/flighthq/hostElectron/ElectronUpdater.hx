@@ -9,7 +9,6 @@ import flighthq.types.Updater.UpdaterBackend;
 import flighthq.types.Updater.UpdaterConfig;
 import flighthq.types.Updater.UpdaterError;
 
-@:expose("flighthq.hostElectron.ElectronUpdater")
 class ElectronUpdater {
   public static function createElectronUpdaterBackend(electron:ElectronApi):UpdaterBackend {
     var autoUpdater:Dynamic = cast _Runtime.UNDEFINED;

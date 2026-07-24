@@ -9,7 +9,6 @@ import flighthq.types.GlFullscreenProgram;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
-@:expose("flighthq.renderGl.GlLinearToSrgbPass")
 class GlLinearToSrgbPass {
   public static function drawGlLinearToSrgbPass(state:GlRenderState, source:GlRenderTarget, dest:Null<GlRenderTarget>):Void {
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, _Runtime.callValue(GlLinearToSrgbPass.getGlLinearToSrgbProgram__glLinearToSrgbPass, cast ([state] : Array<Dynamic>)), cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, GlLinearToSrgbPass.NOOP__glLinearToSrgbPass] : Array<Dynamic>));

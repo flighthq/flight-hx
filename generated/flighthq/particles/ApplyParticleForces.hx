@@ -11,7 +11,6 @@ import flighthq.types.ParticleForce;
 import flighthq.types.ParticleObject;
 import flighthq.types.ParticleObjectsState;
 
-@:expose("flighthq.particles.ApplyParticleForces")
 class ApplyParticleForces {
   public static final accel__applyParticleForces:Array<Float> = cast ([0.0, 0.0, 0.0] : Array<Dynamic>);
 

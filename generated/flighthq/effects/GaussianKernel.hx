@@ -4,7 +4,6 @@ package flighthq.effects;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.effects.GaussianKernel")
 class GaussianKernel {
   public static function computeGaussianKernelWeights(sigma:Float, out:Array<Float>):Array<Float> {
     var size:Dynamic = cast _Runtime.UNDEFINED;

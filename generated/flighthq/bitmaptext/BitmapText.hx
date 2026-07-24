@@ -25,7 +25,6 @@ import flighthq.types.Rectangle;
 import flighthq.types.Types.BitmapTextKind;
 import flighthq.types._internal._BitmapTextValues.BitmapTextKind;
 
-@:expose("flighthq.bitmaptext.BitmapText")
 class BitmapText {
   public static final BITMAP_TEXT_DEFAULT_COLOR__bitmapText:Dynamic = 4294967295.0;
 

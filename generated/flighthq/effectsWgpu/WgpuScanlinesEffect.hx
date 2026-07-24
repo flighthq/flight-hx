@@ -10,7 +10,6 @@ import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
-@:expose("flighthq.effectsWgpu.WgpuScanlinesEffect")
 class WgpuScanlinesEffect {
   public static function applyScanlinesEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ScanlinesEffect):Void {
     var count:Dynamic = cast _Runtime.UNDEFINED;

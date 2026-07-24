@@ -7,7 +7,6 @@ import flighthq.types.Spritesheet;
 import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetValidationDiagnostic;
 
-@:expose("flighthq.spritesheet.SpritesheetValidation")
 class SpritesheetValidation {
   public static function validateSpritesheet(spritesheet:Spritesheet):Null<Array<SpritesheetValidationDiagnostic>> {
     var diagnostics:Array<SpritesheetValidationDiagnostic> = cast _Runtime.UNDEFINED;

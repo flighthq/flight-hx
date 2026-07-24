@@ -8,7 +8,6 @@ import flighthq.surface.Surface.createSurface;
 import flighthq.types.Surface;
 import flighthq.types.WgpuRenderState;
 
-@:expose("flighthq.renderWgpu.WgpuSurface")
 class WgpuSurface {
   public static function acquireWgpuFrameCaptureTexture(state:WgpuRenderState):Null<Dynamic> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

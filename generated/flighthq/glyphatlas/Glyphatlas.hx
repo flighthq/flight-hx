@@ -18,7 +18,6 @@ import flighthq.types.GlyphSource.GlyphRasterizerBackend;
 import flighthq.types.Rectangle;
 import flighthq.types.Surface;
 
-@:expose("flighthq.glyphatlas.Glyphatlas")
 class Glyphatlas {
   public static function clearGlyphAtlasDirty(atlas:GlyphAtlas):Void {
     _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlasDirty.clearGlyphAtlasDirty, cast ([atlas] : Array<Dynamic>));

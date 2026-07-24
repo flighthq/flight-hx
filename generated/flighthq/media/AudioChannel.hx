@@ -11,7 +11,6 @@ import flighthq.types.AudioResource.AudioPlayOptions;
 
 typedef AudioChannelRuntime__audioChannel = { var context:Dynamic; var destinationNode:Null<Dynamic>; var gainNode:Null<Dynamic>; var loopsRemaining:Float; var sourceNode:Null<Dynamic>; var startedAt:Float; };
 
-@:expose("flighthq.media.AudioChannel")
 class AudioChannel {
   public static function connectAudioChannelToNode(channel:flighthq.types.AudioResource.AudioChannel, destinationNode:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

@@ -10,7 +10,6 @@ import flighthq.glyphatlas.GlyphAtlasMetrics.getGlyphAtlasMetrics;
 import flighthq.types.GlyphSource;
 import flighthq.types.GlyphSource.GlyphAtlas;
 
-@:expose("flighthq.glyphatlas.GlyphSource")
 class GlyphSource {
   public static function createGlyphSourceFromGlyphAtlas(atlas:GlyphAtlas):flighthq.types.GlyphSource {
     return cast { getGlyphAtlasImage: function(page:Dynamic = 0.0) {

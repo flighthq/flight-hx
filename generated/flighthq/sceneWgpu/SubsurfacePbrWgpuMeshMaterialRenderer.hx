@@ -27,7 +27,6 @@ import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._SubsurfacePbrMaterialValues.SubsurfacePbrMaterialKind;
 
-@:expose("flighthq.sceneWgpu.SubsurfacePbrWgpuMeshMaterialRenderer")
 class SubsurfacePbrWgpuMeshMaterialRenderer {
   public static final subsurfacePbrWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;

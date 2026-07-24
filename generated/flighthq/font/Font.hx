@@ -14,7 +14,6 @@ import flighthq.types.Font;
 import flighthq.types.Font.FontUrl;
 import flighthq.types.FontResource;
 
-@:expose("flighthq.font.Font")
 class Font {
   public static function createFont(name:String):flighthq.types.Font {
     return cast _Runtime.callValue(createEntity, cast ([{ name: name }] : Array<Dynamic>));

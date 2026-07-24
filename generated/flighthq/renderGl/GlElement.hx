@@ -4,7 +4,6 @@ package flighthq.renderGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.renderGl.GlElement")
 class GlElement {
   public static function createGlCanvasElement(width:Float, height:Float, pixelRatio:Float = 1.0):Dynamic {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;

@@ -10,7 +10,6 @@ import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
-@:expose("flighthq.effectsWgpu.WgpuGlitchEffect")
 class WgpuGlitchEffect {
   public static function applyGlitchEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:GlitchEffect):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;

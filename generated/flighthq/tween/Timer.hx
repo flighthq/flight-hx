@@ -8,7 +8,6 @@ import flighthq.types.Tween;
 import flighthq.types.TweenManager;
 import flighthq.types.TweenOptions;
 
-@:expose("flighthq.tween.Timer")
 class Timer {
   public static function createTweenTimer(manager:TweenManager, duration:Float, ?options:TweenOptions):Tween<Dynamic> {
     return cast _Runtime.callValue(createTween, cast ([manager, {  }, duration, {  }, options] : Array<Dynamic>));

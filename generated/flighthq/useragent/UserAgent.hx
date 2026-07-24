@@ -9,7 +9,6 @@ import flighthq.types.Platform.PlatformKind;
 import flighthq.types.Platform.PlatformName;
 import flighthq.types.Platform.PlatformRuntime;
 
-@:expose("flighthq.useragent.UserAgent")
 class UserAgent {
   public static function detectEndianness():PlatformEndianness {
     try {

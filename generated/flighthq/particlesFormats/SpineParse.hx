@@ -16,7 +16,6 @@ import flighthq.types.SpineParticleSchema.SpineParsed;
 import flighthq.types.SpineParticleSchema.SpineParticleDocument;
 import flighthq.types.SpineParticleSchema.SpineTintKeyframe;
 
-@:expose("flighthq.particlesFormats.SpineParse")
 class SpineParse {
   public static final DEG2RAD__spineParse:Dynamic = (HxMath.PI / 180.0);
 

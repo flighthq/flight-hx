@@ -10,7 +10,6 @@ import flighthq.types.Menu.MenuBackend;
 import flighthq.types.Menu.MenuItemTemplate;
 import flighthq.types.MenuSignals;
 
-@:expose("flighthq.menu.Menu")
 class Menu {
   public static var _backend__menu:Null<MenuBackend> = _Runtime.explicitNull();
 

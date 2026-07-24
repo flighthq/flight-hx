@@ -8,7 +8,6 @@ import flighthq.types.Plane;
 import flighthq.types.Plane.PlaneLike;
 import flighthq.types.Vector3.Vector3Like;
 
-@:expose("flighthq.geometry.Plane")
 class Plane {
   public static function clonePlane(source:PlaneLike):flighthq.types.Plane {
     return cast _Runtime.callValue(createPlane, cast ([_Runtime.field(source, 'a'), _Runtime.field(source, 'b'), _Runtime.field(source, 'c'), _Runtime.field(source, 'd')] : Array<Dynamic>));

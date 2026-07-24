@@ -7,7 +7,6 @@ import flighthq.image.ImageResource.invalidateImageResource;
 import flighthq.types.Surface;
 import flighthq.types.SurfaceRegion;
 
-@:expose("flighthq.surface.SurfaceFill")
 class SurfaceFill {
   public static var _floodFillVisited__surfaceFill:Null<Dynamic> = _Runtime.explicitNull();
 

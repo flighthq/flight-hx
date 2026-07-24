@@ -7,7 +7,6 @@ import flighthq.types.Modifier;
 import flighthq.types.Texture;
 import flighthq.types.Vector3.Vector3Like;
 
-@:expose("flighthq.types._internal._VertexDisplaceModifierValues")
 class _VertexDisplaceModifierValues {
   public static final VertexDisplaceModifierSourceValue:Dynamic = { HeightMap: 'HeightMap', Sine: 'Sine' };
 

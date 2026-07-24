@@ -16,7 +16,6 @@ import flighthq.types.Sprite;
 import flighthq.types.SpriteRenderer;
 import flighthq.types.WgpuRenderState;
 
-@:expose("flighthq.displayobjectWgpu.WgpuSpriteRenderer")
 class WgpuSpriteRenderer {
   public static function submitWgpuSpriteNode__wgpuSpriteRenderer(state:WgpuRenderState, spriteNode:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

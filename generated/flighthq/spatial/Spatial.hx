@@ -11,7 +11,6 @@ import flighthq.types.Spatial.SpatialIndexBackend;
 import flighthq.types.Spatial.SpatialObjectId;
 import flighthq.types.Spatial.SpatialPair;
 
-@:expose("flighthq.spatial.Spatial")
 class Spatial {
   public static function clearSpatialIndex(index:SpatialIndex):Void {
     _Runtime.callValue(Facade_Spatial_flighthq_spatial_SpatialIndex.clearSpatialIndex, cast ([index] : Array<Dynamic>));

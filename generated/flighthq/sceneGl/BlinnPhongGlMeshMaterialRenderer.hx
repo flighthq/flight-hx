@@ -30,7 +30,6 @@ import flighthq.types.SceneRenderProxy;
 import flighthq.types.Types.BlinnPhongMaterialKind;
 import flighthq.types._internal._BlinnPhongMaterialValues.BlinnPhongMaterialKind;
 
-@:expose("flighthq.sceneGl.BlinnPhongGlMeshMaterialRenderer")
 class BlinnPhongGlMeshMaterialRenderer {
   public static final blinnPhongGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;

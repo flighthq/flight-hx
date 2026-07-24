@@ -15,7 +15,6 @@ import flighthq.types.LinearColor;
 import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
 import flighthq.types.Texture;
 
-@:expose("flighthq.sceneGl.GlPbrStandardBlock")
 class GlPbrStandardBlock {
   public static final GL_PBR_BASE_COLOR_TEXTURE_UNIT:Dynamic = 0.0;
 

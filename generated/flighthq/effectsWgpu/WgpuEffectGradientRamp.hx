@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.WgpuRenderState;
 
-@:expose("flighthq.effectsWgpu.WgpuEffectGradientRamp")
 class WgpuEffectGradientRamp {
   public static function getWgpuEffectGradientRampTexture(state:WgpuRenderState, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
     var cache:Dynamic = cast _Runtime.UNDEFINED;

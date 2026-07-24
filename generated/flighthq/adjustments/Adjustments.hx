@@ -39,7 +39,6 @@ import flighthq.types.LiftGammaGainAdjustment;
 import flighthq.types.LookupTableGradeAdjustment;
 import flighthq.types.SepiaAdjustment;
 
-@:expose("flighthq.adjustments.Adjustments")
 class Adjustments {
   public static function applyColorMatrixToColor(matrix:Array<Float>, packedRgba:Float):Float {
     return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.applyColorMatrixToColor, cast ([matrix, packedRgba] : Array<Dynamic>));

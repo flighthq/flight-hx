@@ -11,7 +11,6 @@ import flighthq.types.WgpuMaterialRenderer;
 import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
-@:expose("flighthq.renderWgpu.WgpuMaterialRegistry")
 class WgpuMaterialRegistry {
   public static function getWgpuMaterialRenderer(state:WgpuRenderState, kind:Kind):Null<WgpuMaterialRenderer> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.SurfaceConvolutionOptions;
 import flighthq.types.SurfaceRegion;
 
-@:expose("flighthq.surface.SurfaceConvolution")
 class SurfaceConvolution {
   public static function convolveSurface(out:Dynamic, source:SurfaceRegion, options:SurfaceConvolutionOptions):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;

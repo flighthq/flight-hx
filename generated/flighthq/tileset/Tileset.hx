@@ -11,7 +11,6 @@ import flighthq.types.ImageResource;
 import flighthq.types.TextureAtlas;
 import flighthq.types.Tileset;
 
-@:expose("flighthq.tileset.Tileset")
 class Tileset {
   public static function buildTilesetRegions(target:flighthq.types.Tileset):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;

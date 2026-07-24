@@ -13,7 +13,6 @@ import flighthq.types.RichText.RichTextRuntime;
 import flighthq.types.SelectableRichTextManager;
 import flighthq.types._internal._KeyCodeValues.KeyCodeValue;
 
-@:expose("flighthq.textinput.SelectableRichTextManager")
 class SelectableRichTextManager {
   public static function blurSelectableRichText(manager:flighthq.types.SelectableRichTextManager):Void {
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(manager, 'focused'), null))) {

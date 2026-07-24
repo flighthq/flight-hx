@@ -20,7 +20,6 @@ import flighthq.types.WgpuRenderState.WgpuImageResourceTextureEntry;
 import flighthq.types.WgpuRenderState.WgpuTextureEntry;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
-@:expose("flighthq.renderWgpu.WgpuDraw")
 class WgpuDraw {
   public static function applyWgpuBlendMode(state:WgpuRenderState, blendMode:Null<BlendMode>):Void {
     _Runtime.setField(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentBlendMode', blendMode);

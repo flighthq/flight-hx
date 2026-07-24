@@ -17,7 +17,6 @@ import flighthq.types.Rectangle;
 import flighthq.types.Types.HtmlViewKind;
 import flighthq.types._internal._HtmlViewValues.HtmlViewKind;
 
-@:expose("flighthq.displayobject.HtmlView")
 class HtmlView {
   public static function computeHtmlViewLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;

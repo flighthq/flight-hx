@@ -11,7 +11,6 @@ import flighthq.types.GlModifierSnippet;
 import flighthq.types.GlRenderState;
 import flighthq.types.ModifierKind;
 
-@:expose("flighthq.sceneGl.GlShadedModifierSnippet")
 class GlShadedModifierSnippet {
   public static function registerGlModifierSnippet(state:GlRenderState, snippet:GlModifierSnippet):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

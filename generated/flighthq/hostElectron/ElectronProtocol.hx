@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.ElectronApi;
 import flighthq.types.Protocol.ProtocolBackend;
 
-@:expose("flighthq.hostElectron.ElectronProtocol")
 class ElectronProtocol {
   public static function createElectronProtocolBackend(electron:ElectronApi):ProtocolBackend {
     var app:Dynamic = cast _Runtime.UNDEFINED;

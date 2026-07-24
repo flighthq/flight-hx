@@ -14,7 +14,6 @@ import flighthq.types.DisplayObjectRenderer;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.WgpuRenderState;
 
-@:expose("flighthq.displayobjectWgpu.WgpuDisplayObject")
 class WgpuDisplayObject {
   public static function drawWgpuDisplayObject(_state:WgpuRenderState, _renderProxy:RenderProxy2D):Void {
   }

@@ -8,7 +8,6 @@ import flighthq.types.Menu.MenuItemTemplate;
 import flighthq.types.TauriApi;
 import flighthq.types.TauriApi.TauriMenuItemHandle;
 
-@:expose("flighthq.hostTauri.TauriMenu")
 class TauriMenu {
   public static function createTauriMenuBackend(tauri:TauriApi):MenuBackend {
     var menuModule:Dynamic = cast _Runtime.UNDEFINED;

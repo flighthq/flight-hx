@@ -7,7 +7,6 @@ import flighthq.types.Modifier;
 import flighthq.types.ModifierSlot;
 import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 
-@:expose("flighthq.shading.OrderModifierStack")
 class OrderModifierStack {
   public static function orderModifierStack(stack:Array<Modifier>):Array<Modifier> {
     var indexed:Dynamic = cast _Runtime.UNDEFINED;

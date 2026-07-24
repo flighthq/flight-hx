@@ -13,7 +13,6 @@ import flighthq.types._internal._TextureAtlasFormatKindValues.TextureAtlasFormat
 import flighthq.types._internal._TextureAtlasFormatKindValues.TextureAtlasFormatKindStarling;
 import flighthq.types._internal._TextureAtlasFormatKindValues.TextureAtlasFormatKindTexturePacker;
 
-@:expose("flighthq.textureatlasFormats.TextureAtlasDetect")
 class TextureAtlasDetect {
   public static function detectTextureAtlasFormat(content:String):Null<TextureAtlasFormatKind> {
     var trimmed:Dynamic = cast _Runtime.UNDEFINED;

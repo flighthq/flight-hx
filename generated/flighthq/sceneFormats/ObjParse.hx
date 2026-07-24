@@ -26,7 +26,6 @@ import flighthq.types._internal._MeshValues.MeshKind;
 
 typedef MaterialBucket__objParse = { var dedup:Dynamic; var indices:Array<Float>; var vertices:Array<Float>; };
 
-@:expose("flighthq.sceneFormats.ObjParse")
 class ObjParse {
   public static function createSceneFromObj(source:String, ?materials:ObjMaterialLibrary, ?warnings:Array<String>):Scene {
     return cast _Runtime.callValue(createSceneFromDocument, cast ([_Runtime.callValue(parseObj, cast ([source, materials, warnings] : Array<Dynamic>))] : Array<Dynamic>));

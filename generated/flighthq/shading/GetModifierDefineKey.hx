@@ -8,7 +8,6 @@ import flighthq.shading.OrderModifierStack.orderModifierStack;
 import flighthq.types.Modifier;
 import flighthq.types.ModifierRegistry;
 
-@:expose("flighthq.shading.GetModifierDefineKey")
 class GetModifierDefineKey {
   public static function getModifierDefineKey(stack:Array<Modifier>, ?registry:ModifierRegistry):String {
     var ordered:Dynamic = cast _Runtime.UNDEFINED;

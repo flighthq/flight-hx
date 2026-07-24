@@ -10,7 +10,6 @@ import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
-@:expose("flighthq.effectsWgpu.WgpuKuwaharaEffect")
 class WgpuKuwaharaEffect {
   public static function applyKuwaharaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:KuwaharaEffect):Void {
     var radius:Dynamic = cast _Runtime.UNDEFINED;

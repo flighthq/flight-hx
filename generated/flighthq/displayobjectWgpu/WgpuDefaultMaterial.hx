@@ -10,7 +10,6 @@ import flighthq.types.WgpuMaterialRenderer;
 import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
-@:expose("flighthq.displayobjectWgpu.WgpuDefaultMaterial")
 class WgpuDefaultMaterial {
   public static function registerDefaultWgpuMaterial(state:WgpuRenderState):Void {
     _Runtime.callValue(registerWgpuMaterialRenderer, cast ([state, DefaultMaterialKind, defaultWgpuMaterialRenderer] : Array<Dynamic>));

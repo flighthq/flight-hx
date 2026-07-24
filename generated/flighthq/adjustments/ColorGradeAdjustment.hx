@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.ColorGradeAdjustment;
 import flighthq.types.ColorTransformFunction;
 
-@:expose("flighthq.adjustments.ColorGradeAdjustment")
 class ColorGradeAdjustment {
   public static function createColorGradeAdjustment(?options:Dynamic):flighthq.types.ColorGradeAdjustment {
     if (options == null) options = cast ({  } : Dynamic);

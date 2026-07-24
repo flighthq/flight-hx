@@ -13,7 +13,6 @@ import flighthq.types.Camera3D;
 import flighthq.types.Ray3D.Ray3DLike;
 import flighthq.types.Vector3.Vector3Like;
 
-@:expose("flighthq.camera.Picking")
 class Picking {
   public static function getCamera3DScreenToWorldRay(out:Ray3DLike, camera:Camera3D, ndcX:Float, ndcY:Float, aspect:Float):Bool {
     var m:Dynamic = cast _Runtime.UNDEFINED;

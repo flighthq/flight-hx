@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.pathFormats.SvgPathData as Facade_PathFormats_flighthq_pathFormats_SvgPathData;
 import flighthq.types.Path;
 
-@:expose("flighthq.pathFormats.PathFormats")
 class PathFormats {
   public static function appendSvgPathData(path:Path, d:String):Bool {
     return cast _Runtime.callValue(Facade_PathFormats_flighthq_pathFormats_SvgPathData.appendSvgPathData, cast ([path, d] : Array<Dynamic>));

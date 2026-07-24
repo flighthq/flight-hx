@@ -16,7 +16,6 @@ import flighthq.types.SpritesheetAnimation;
 import flighthq.types.TimelineLabel;
 import flighthq.types.TimelineSource;
 
-@:expose("flighthq.movieclip.Movieclip")
 class Movieclip {
   public static function addMovieClipFrameScript(clip:MovieClip, frame:Dynamic, script:FrameScript):Void {
     _Runtime.callValue(Facade_Movieclip_flighthq_movieclip_MovieClip.addMovieClipFrameScript, cast ([clip, frame, script] : Array<Dynamic>));

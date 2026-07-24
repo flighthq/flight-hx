@@ -20,7 +20,6 @@ typedef Md5AnimHierarchyEntry__md5AnimParse = { var flags:Float; var name:String
 
 typedef Md5AnimBaseframePose__md5AnimParse = { var orientationX:Float; var orientationY:Float; var orientationZ:Float; var positionX:Float; var positionY:Float; var positionZ:Float; };
 
-@:expose("flighthq.sceneFormats.Md5AnimParse")
 class Md5AnimParse {
   public static function parseMd5Anim(source:String, joints:Array<SceneNode>, ?warnings:Array<String>):Null<AnimationClip> {
     var lines:Dynamic = cast _Runtime.UNDEFINED;

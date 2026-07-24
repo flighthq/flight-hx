@@ -54,7 +54,6 @@ import flighthq.types.ShapeCommand.SpreadMethod;
 import flighthq.types.SpriteRenderer;
 import flighthq.types.TextLayout.TextMeasureFunction;
 
-@:expose("flighthq.displayobjectCanvas.DisplayobjectCanvas")
 class DisplayobjectCanvas {
   public static function applyCanvasBlendMode(state:Dynamic, value:Null<BlendMode>):Void {
     _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasMaterials.applyCanvasBlendMode, cast ([state, value] : Array<Dynamic>));

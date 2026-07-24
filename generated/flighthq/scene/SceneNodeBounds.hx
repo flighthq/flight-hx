@@ -15,7 +15,6 @@ import flighthq.scene.Mesh.isMesh;
 import flighthq.types.Aabb.AabbLike;
 import flighthq.types.SceneNode;
 
-@:expose("flighthq.scene.SceneNodeBounds")
 class SceneNodeBounds {
   public static function getSceneNodeWorldBounds(out:AabbLike, node:SceneNode):Void {
     _Runtime.callValue(setAabb, cast ([out, _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY'), _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY'), _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY'), _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY'), _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY'), _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY')] : Array<Dynamic>));

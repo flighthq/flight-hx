@@ -8,7 +8,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.OutlineEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasOutlineEffect")
 class CanvasOutlineEffect {
   public static function applyOutlineEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:OutlineEffect):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));

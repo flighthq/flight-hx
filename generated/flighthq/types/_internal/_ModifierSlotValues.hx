@@ -4,7 +4,6 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.types._internal._ModifierSlotValues")
 class _ModifierSlotValues {
   public static final ModifierSlotValue:Dynamic = { Diffuse: 'Diffuse', Effect: 'Effect', Emissive: 'Emissive', Normal: 'Normal', Specular: 'Specular', Vertex: 'Vertex' };
 }

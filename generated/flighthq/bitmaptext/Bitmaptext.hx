@@ -14,7 +14,6 @@ import flighthq.types.GlyphSource;
 import flighthq.types.QuadBatch;
 import flighthq.types.Rectangle;
 
-@:expose("flighthq.bitmaptext.Bitmaptext")
 class Bitmaptext {
   public static function computeBitmapTextLocalBoundsRectangle(out:Rectangle, source:BitmapText):Void {
     _Runtime.callValue(Facade_Bitmaptext_flighthq_bitmaptext_BitmapText.computeBitmapTextLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));

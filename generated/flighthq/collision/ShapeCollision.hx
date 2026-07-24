@@ -12,7 +12,6 @@ import flighthq.types.Collision.CollisionManifold;
 import flighthq.types.Collision.CollisionObb;
 import flighthq.types.Collision.CollisionPolygon;
 
-@:expose("flighthq.collision.ShapeCollision")
 class ShapeCollision {
   public static final EPS__shapeCollision:Dynamic = 1e-9;
 

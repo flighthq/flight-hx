@@ -4,7 +4,6 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.types._internal._TurbulenceForceValues")
 class _TurbulenceForceValues {
   public static final TurbulenceForceKind:Dynamic = 'TurbulenceForce';
 }

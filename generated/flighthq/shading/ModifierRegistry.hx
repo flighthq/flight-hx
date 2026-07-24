@@ -7,7 +7,6 @@ import flighthq.types.ModifierDefinition;
 import flighthq.types.ModifierKind;
 import flighthq.types.ModifierRegistry;
 
-@:expose("flighthq.shading.ModifierRegistry")
 class ModifierRegistry {
   public static function createModifierRegistry():flighthq.types.ModifierRegistry {
     return cast { definitions: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) };

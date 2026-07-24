@@ -44,7 +44,6 @@ import flighthq.types._internal._MeshValues as Facade_Scene_flighthq_types__inte
 import flighthq.types._internal._SceneNodeValues as Facade_Scene_flighthq_types__internal__SceneNodeValues;
 import flighthq.types._internal._SceneNodeValues.SceneNodeKind;
 
-@:expose("flighthq.scene.Scene")
 class Scene {
   public static function applyAnimationClipToScene(clip:AnimationClip, time:Float):Void {
     _Runtime.callValue(Facade_Scene_flighthq_scene_SceneAnimation.applyAnimationClipToScene, cast ([clip, time] : Array<Dynamic>));

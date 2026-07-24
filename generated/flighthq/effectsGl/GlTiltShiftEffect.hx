@@ -10,7 +10,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.TiltShiftEffect;
 
-@:expose("flighthq.effectsGl.GlTiltShiftEffect")
 class GlTiltShiftEffect {
   public static function applyTiltShiftEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:TiltShiftEffect):Void {
     var center:Dynamic = cast _Runtime.UNDEFINED;

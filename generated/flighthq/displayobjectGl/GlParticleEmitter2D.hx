@@ -15,7 +15,6 @@ import flighthq.types.ParticleEmitter2D;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.SpriteRenderer;
 
-@:expose("flighthq.displayobjectGl.GlParticleEmitter2D")
 class GlParticleEmitter2D {
   public static final INSTANCE_FLOATS__glParticleEmitter2D:Dynamic = 14.0;
 

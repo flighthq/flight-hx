@@ -13,7 +13,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.LinearColor;
 import flighthq.types.Texture;
 
-@:expose("flighthq.sceneGl.GlMatcapPrelude")
 class GlMatcapPrelude {
   public static function bindGlMatcapSurface(state:GlRenderState, program:GlMatcapProgram, tint:LinearColor, matcap:Null<Texture>, alphaCutoff:Float):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;

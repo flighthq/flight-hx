@@ -14,7 +14,6 @@ import flighthq.types.FileSystem.FileSystemUsage;
 import flighthq.types.FileSystem.FileWalkOptions;
 import flighthq.types.FileSystem.FileWatchEvent;
 
-@:expose("flighthq.filesystem.Filesystem")
 class Filesystem {
   public static var _backend__filesystem:Null<Dynamic> = _Runtime.explicitNull();
 

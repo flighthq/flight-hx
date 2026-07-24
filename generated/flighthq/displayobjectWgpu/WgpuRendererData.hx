@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.RendererData;
 
-@:expose("flighthq.displayobjectWgpu.WgpuRendererData")
 class WgpuRendererData {
   public static function createWgpuRendererData<T>(data:Dynamic):RendererData {
     return cast (cast (cast data : Dynamic) : RendererData);

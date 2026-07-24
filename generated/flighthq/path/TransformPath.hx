@@ -9,7 +9,6 @@ import flighthq.types.Path;
 import flighthq.types.Path.PathCommand;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
-@:expose("flighthq.path.TransformPath")
 class TransformPath {
   public static function transformPath(source:Path, matrix:MatrixLike, out:Path):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;

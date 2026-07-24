@@ -4,7 +4,6 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.types._internal._EntityValues")
 class _EntityValues {
   public static final EntityRuntimeKey:Dynamic = _Runtime.symbolFor('EntityRuntime');
 }

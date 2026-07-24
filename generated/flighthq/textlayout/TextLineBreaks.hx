@@ -4,7 +4,6 @@ package flighthq.textlayout;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.textlayout.TextLineBreaks")
 class TextLineBreaks {
   public static function getTextLineBreakIndex(lineBreaks:Array<Float>, startIndex:Dynamic = 0.0):Float {
     var lo:Dynamic = cast _Runtime.UNDEFINED;

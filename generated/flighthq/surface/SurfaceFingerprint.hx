@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Surface;
 import flighthq.types.SurfaceFingerprint;
 
-@:expose("flighthq.surface.SurfaceFingerprint")
 class SurfaceFingerprint {
   public static final HEX__surfaceFingerprint:Dynamic = '0123456789abcdef';
 

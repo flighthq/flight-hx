@@ -14,7 +14,6 @@ typedef BoxBlurEdgeColor__glEffectBoxBlur = Array<Float>;
 
 typedef BoxBlurShaderLocations__glEffectBoxBlur = Dynamic;
 
-@:expose("flighthq.effectsGl.GlEffectBoxBlur")
 class GlEffectBoxBlur {
   public static final BOX_BLUR_FRAGMENT_SRC__glEffectBoxBlur:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nuniform vec2 u_texelSize;\nuniform float u_radius;\nuniform vec2 u_direction;\nuniform vec4 u_edgeColor;\nuniform float u_useEdgeColor;\nout vec4 fragColor;\nvec4 sampleBlur(vec2 uv) {\n  if (u_useEdgeColor > 0.5 && (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0)) {\n    return u_edgeColor;\n  }\n  return texture(u_texture, uv);\n}\nvoid main() {\n  int r = max(0, int(u_radius));\n  if (r == 0) {\n    fragColor = sampleBlur(v_texCoord);\n    return;\n  }\n  vec4 sum = vec4(0.0);\n  int count = 2 * r + 1;\n  for (int i = -r; i <= r; i++) {\n    sum += sampleBlur(v_texCoord + float(i) * u_texelSize * u_direction);\n  }\n  fragColor = sum / float(count);\n}';
 

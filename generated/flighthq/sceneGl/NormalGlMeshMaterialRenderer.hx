@@ -21,7 +21,6 @@ import flighthq.types.SceneRenderProxy;
 import flighthq.types.Types.NormalMaterialKind;
 import flighthq.types._internal._NormalMaterialValues.NormalMaterialKind;
 
-@:expose("flighthq.sceneGl.NormalGlMeshMaterialRenderer")
 class NormalGlMeshMaterialRenderer {
   public static final normalGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;

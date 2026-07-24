@@ -12,7 +12,6 @@ import flighthq.types.GlDebugProgram.GlDebugDefineKey;
 import flighthq.types.GlRenderState;
 import flighthq.types.Texture;
 
-@:expose("flighthq.sceneGl.GlDebugPrelude")
 class GlDebugPrelude {
   public static function bindGlDebugNormalMap(state:GlRenderState, program:GlDebugProgram, normalMap:Null<Texture>, normalScale:Float):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;

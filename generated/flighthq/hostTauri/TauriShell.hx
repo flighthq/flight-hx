@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Shell.ShellBackend;
 import flighthq.types.TauriApi;
 
-@:expose("flighthq.hostTauri.TauriShell")
 class TauriShell {
   public static function createTauriShellBackend(tauri:TauriApi):ShellBackend {
     var opener:Dynamic = cast _Runtime.UNDEFINED;

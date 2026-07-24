@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.BrightnessContrastAdjustment;
 
-@:expose("flighthq.adjustments.BrightnessContrastAdjustment")
 class BrightnessContrastAdjustment {
   public static function createBrightnessContrastAdjustment(?options:Dynamic):flighthq.types.BrightnessContrastAdjustment {
     if (options == null) options = cast ({  } : Dynamic);

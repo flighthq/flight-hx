@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.Scale9Mapper;
 
-@:expose("flighthq.displayobjectGl.GlScale9Mapper")
 class GlScale9Mapper {
   public static function buildGlScale9Mapper(bounds:RectangleLike, scale9Grid:RectangleLike, scaleX:Float, scaleY:Float):Null<Scale9Mapper> {
     var gx:Dynamic = cast _Runtime.UNDEFINED;

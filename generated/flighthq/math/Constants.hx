@@ -4,7 +4,6 @@ package flighthq.math;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.math.Constants")
 class Constants {
   public static final EPSILON:Dynamic = 0.000001;
 

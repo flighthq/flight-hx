@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Light;
 import flighthq.types.Vector3;
 
-@:expose("flighthq.types._internal._AreaLightValues")
 class _AreaLightValues {
   public static final AreaLightKind:Dynamic = 'AreaLight';
 }

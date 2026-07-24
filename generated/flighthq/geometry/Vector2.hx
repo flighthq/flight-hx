@@ -8,7 +8,6 @@ import flighthq.types.Vector2;
 import flighthq.types.Vector2.Vector2Like;
 import flighthq.types.Vector3.Vector3Like;
 
-@:expose("flighthq.geometry.Vector2")
 class Vector2 {
   public static function addVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like):Void {
     _Runtime.setField(out, 'x', (_Runtime.field(a, 'x') + _Runtime.field(b, 'x')));

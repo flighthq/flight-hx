@@ -16,7 +16,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.Types.MAX_FORWARD_LIGHTS;
 import flighthq.types._internal._SceneLightBlockValues.MAX_FORWARD_LIGHTS;
 
-@:expose("flighthq.sceneGl.GlClassicPrelude")
 class GlClassicPrelude {
   public static function buildGlClassicDefineKey(key:GlClassicDefineKey):String {
     var model:Dynamic = cast _Runtime.UNDEFINED;

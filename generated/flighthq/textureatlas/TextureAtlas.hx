@@ -7,7 +7,6 @@ import flighthq.entity.Entity.createEntity;
 import flighthq.image.ImageResource.getImageResourceByteSize;
 import flighthq.types.TextureAtlas;
 
-@:expose("flighthq.textureatlas.TextureAtlas")
 class TextureAtlas {
   public static function createTextureAtlas(?obj:Dynamic):flighthq.types.TextureAtlas {
     return cast _Runtime.callValue(createEntity, cast ([{ image: _Runtime.coalesce(_Runtime.optionalField(obj, 'image'), function():Dynamic return cast null), regions: _Runtime.coalesce(_Runtime.optionalField(obj, 'regions'), function():Dynamic return cast cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));

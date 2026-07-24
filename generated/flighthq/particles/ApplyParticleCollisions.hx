@@ -14,7 +14,6 @@ import flighthq.types.PlaneCollider;
 import flighthq.types.RectangleCollider;
 import flighthq.types.SphereCollider;
 
-@:expose("flighthq.particles.ApplyParticleCollisions")
 class ApplyParticleCollisions {
   public static final s__applyParticleCollisions:Array<Float> = cast ([0.0, 0.0, 0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
 

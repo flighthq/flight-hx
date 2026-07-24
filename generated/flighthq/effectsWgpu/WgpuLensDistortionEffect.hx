@@ -10,7 +10,6 @@ import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
-@:expose("flighthq.effectsWgpu.WgpuLensDistortionEffect")
 class WgpuLensDistortionEffect {
   public static function applyLensDistortionEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:LensDistortionEffect):Void {
     var amount:Dynamic = cast _Runtime.UNDEFINED;

@@ -25,7 +25,6 @@ import flighthq.types.Mesh;
 import flighthq.types.SceneNode;
 import flighthq.types.SceneNode.SceneNodeTraits;
 
-@:expose("flighthq.sceneGl.GlShadowMap")
 class GlShadowMap {
   public static function drawGlSceneShadowMap(state:GlRenderState, scene:SceneNode, shadowCamera:Camera3D):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;

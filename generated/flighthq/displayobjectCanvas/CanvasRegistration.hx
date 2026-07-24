@@ -41,7 +41,6 @@ import flighthq.types._internal._TextLabelValues.TextLabelKind;
 import flighthq.types._internal._TilemapValues.TilemapKind;
 import flighthq.types._internal._VideoValues.VideoKind;
 
-@:expose("flighthq.displayobjectCanvas.CanvasRegistration")
 class CanvasRegistration {
   public static final canvasDisplayObjectRendererEntries:Array<Array<Dynamic>> = cast ([cast ([BitmapKind, defaultCanvasBitmapRenderer] : Array<Dynamic>), cast ([DisplayObjectKind, defaultCanvasDisplayObjectRenderer] : Array<Dynamic>), cast ([ParticleEmitter2DKind, defaultCanvasParticleEmitter2DRenderer] : Array<Dynamic>), cast ([QuadBatchKind, defaultCanvasQuadBatchRenderer] : Array<Dynamic>), cast ([RichTextKind, defaultCanvasRichTextRenderer] : Array<Dynamic>), cast ([Scale9ShapeKind, defaultCanvasScale9ShapeRenderer] : Array<Dynamic>), cast ([ShapeKind, defaultCanvasShapeRenderer] : Array<Dynamic>), cast ([SpriteKind, defaultCanvasSpriteRenderer] : Array<Dynamic>), cast ([TextLabelKind, defaultCanvasTextLabelRenderer] : Array<Dynamic>), cast ([TilemapKind, defaultCanvasTilemapRenderer] : Array<Dynamic>), cast ([VideoKind, defaultCanvasVideoRenderer] : Array<Dynamic>)] : Array<Dynamic>);
 

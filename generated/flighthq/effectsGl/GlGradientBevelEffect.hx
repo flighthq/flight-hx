@@ -24,7 +24,6 @@ typedef BevelEncodeLocations__glGradientBevelEffect = Dynamic;
 
 typedef BevelApplyLocations__glGradientBevelEffect = Dynamic;
 
-@:expose("flighthq.effectsGl.GlGradientBevelEffect")
 class GlGradientBevelEffect {
   public static final BEVEL_ENCODE_FRAGMENT_SRC__glGradientBevelEffect:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nuniform vec2 u_offset;\nout vec4 fragColor;\nvoid main() {\n  float high = texture(u_texture, v_texCoord - u_offset).a;\n  float low = texture(u_texture, v_texCoord + u_offset).a;\n  float bevelVal = clamp((high - low) * 0.5 + 0.5, 0.0, 1.0);\n  fragColor = vec4(bevelVal, 0.0, 0.0, 1.0);\n}';
 

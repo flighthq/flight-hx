@@ -4,7 +4,6 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.types._internal._BlendModeValues")
 class _BlendModeValues {
   public static final BlendModeValue:Dynamic = { Add: 'Add', Darken: 'Darken', Lighten: 'Lighten', Multiply: 'Multiply', Normal: 'Normal', Screen: 'Screen' };
 }

@@ -8,7 +8,6 @@ import flighthq.types.Accessibility.AccessibilityLiveness;
 import flighthq.types.Accessibility.AccessibilityNode;
 import flighthq.types.Accessibility.AccessibilityState;
 
-@:expose("flighthq.accessibility.Accessibility")
 class Accessibility {
   public static function _applyAccessibilityElementAttributes__accessibility(element:Dynamic, node:AccessibilityNode):Void {
     _Runtime.callProperty(element, 'setAttribute', cast (['role', _Runtime.field(node, 'role')] : Array<Dynamic>));

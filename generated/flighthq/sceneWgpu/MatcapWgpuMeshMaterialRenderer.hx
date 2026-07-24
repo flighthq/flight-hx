@@ -24,7 +24,6 @@ import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._MatcapMaterialValues.MatcapMaterialKind;
 
-@:expose("flighthq.sceneWgpu.MatcapWgpuMeshMaterialRenderer")
 class MatcapWgpuMeshMaterialRenderer {
   public static final matcapWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera3D) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;

@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.ColorLut;
 import flighthq.types.ColorTransformFunction;
 
-@:expose("flighthq.adjustments.ColorLut")
 class ColorLut {
   public static final COLOR_LUT_DEFAULT_SIZE:Dynamic = 32.0;
 

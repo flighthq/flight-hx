@@ -10,7 +10,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.LensDirtEffect;
 
-@:expose("flighthq.effectsGl.GlLensDirtEffect")
 class GlLensDirtEffect {
   public static function applyLensDirtEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:LensDirtEffect):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;

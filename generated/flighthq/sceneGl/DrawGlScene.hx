@@ -34,7 +34,6 @@ import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
 typedef DrawEntry__drawGlScene = { var alpha:Float; var clipW:Float; var material:Material; var mesh:Mesh; var renderer:GlMeshMaterialRenderer; var subset:MeshSubset; var worldMatrix:Matrix4; };
 
-@:expose("flighthq.sceneGl.DrawGlScene")
 class DrawGlScene {
   public static function isGpuSkinnedDraw__drawGlScene(mesh:Mesh):Bool {
     return cast _Runtime.andValue(!_Runtime.looseEquals(_Runtime.field(mesh, 'skin'), null), function():Dynamic return cast _Runtime.callValue(hasMeshGeometrySkin, cast ([_Runtime.field(mesh, 'geometry')] : Array<Dynamic>)));

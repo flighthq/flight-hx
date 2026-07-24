@@ -114,7 +114,6 @@ import flighthq.types.WgpuRenderTarget;
 import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 import flighthq.types.WhiteBalanceEffect;
 
-@:expose("flighthq.effectsWgpu.EffectsWgpu")
 class EffectsWgpu {
   public static function applyBevelEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:BevelEffect):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBevelEffect.applyBevelEffectToWgpu, cast ([state, source, dest, pool, effect] : Array<Dynamic>));

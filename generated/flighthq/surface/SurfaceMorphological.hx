@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.SurfaceRegion;
 
-@:expose("flighthq.surface.SurfaceMorphological")
 class SurfaceMorphological {
   public static function dilateSurface(out:Dynamic, source:SurfaceRegion, radius:Float):Void {
     _Runtime.callValue(SurfaceMorphological.applyMorphological__surfaceMorphological, cast ([out, source, radius, true] : Array<Dynamic>));

@@ -7,7 +7,6 @@ import flighthq.entity.Entity.createEntity;
 import flighthq.types.ColorTransform;
 import flighthq.types.ColorTransform.ColorTransformLike;
 
-@:expose("flighthq.materials.ColorTransform")
 class ColorTransform {
   public static function cloneColorTransform(source:ColorTransformLike):flighthq.types.ColorTransform {
     return cast _Runtime.callValue(createColorTransform, cast ([source] : Array<Dynamic>));

@@ -10,7 +10,6 @@ import flighthq.snapshot.RestoreSnapshot as Facade_Snapshot_flighthq_snapshot_Re
 import flighthq.types.Snapshot;
 import flighthq.types.Snapshot.SnapshotSchema;
 
-@:expose("flighthq.snapshot.Snapshot")
 class Snapshot {
   public static function captureSnapshot<T>(source:Dynamic):flighthq.types.Snapshot<Dynamic> {
     return cast _Runtime.callValue(Facade_Snapshot_flighthq_snapshot_CaptureSnapshot.captureSnapshot, cast ([source] : Array<Dynamic>));

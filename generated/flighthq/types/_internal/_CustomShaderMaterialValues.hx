@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.SurfaceMaterial;
 import flighthq.types.Texture;
 
-@:expose("flighthq.types._internal._CustomShaderMaterialValues")
 class _CustomShaderMaterialValues {
   public static final CustomShaderMaterialKind:Dynamic = 'CustomShaderMaterial';
 }

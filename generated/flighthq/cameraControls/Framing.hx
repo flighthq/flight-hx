@@ -10,7 +10,6 @@ import flighthq.types.Camera3D.PerspectiveProjection;
 import flighthq.types.Camera3D.Projection;
 import flighthq.types.OrbitCameraController;
 
-@:expose("flighthq.cameraControls.Framing")
 class Framing {
   public static function frameOrbitCameraControllerToSphere(controller:OrbitCameraController, projection:Projection, sphere:BoundingSphereLike, aspect:Float, padding:Dynamic = 1.0):Bool {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.compare(_Runtime.field(sphere, 'radius'), 0.0, '>=')), function():Dynamic return cast !_Runtime.truthy(_Runtime.compare(aspect, 0.0, '>'))), function():Dynamic return cast !_Runtime.truthy(_Runtime.compare(padding, 0.0, '>'))))) { return cast false; }

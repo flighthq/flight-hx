@@ -22,7 +22,6 @@ import flighthq.types.VideoTexture;
 
 typedef GlVideoData__glVideo = { var source:Null<VideoResource>; var videoTexture:Null<VideoTexture>; };
 
-@:expose("flighthq.displayobjectGl.GlVideo")
 class GlVideo {
   public static function createGlVideoData(_state:GlRenderState, _source:Renderable):RendererData {
     return cast (cast (cast { source: null, videoTexture: null } : Dynamic) : RendererData);

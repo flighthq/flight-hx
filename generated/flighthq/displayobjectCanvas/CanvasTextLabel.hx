@@ -19,7 +19,6 @@ import flighthq.types.TextFormat;
 import flighthq.types.TextLabel;
 import flighthq.types.TextLabel.TextLabelRuntime;
 
-@:expose("flighthq.displayobjectCanvas.CanvasTextLabel")
 class CanvasTextLabel {
   public static function drawCanvasTextLabel(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;

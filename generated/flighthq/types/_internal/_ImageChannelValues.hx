@@ -4,7 +4,6 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.types._internal._ImageChannelValues")
 class _ImageChannelValues {
   public static final ImageChannelValue:Dynamic = { Red: 0.0, Green: 1.0, Blue: 2.0, Alpha: 3.0 };
 }

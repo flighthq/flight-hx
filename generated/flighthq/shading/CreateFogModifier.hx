@@ -12,7 +12,6 @@ import flighthq.types._internal._FogModifierValues.FogModifierKind;
 import flighthq.types._internal._FogModifierValues.FogModifierModeValue;
 import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 
-@:expose("flighthq.shading.CreateFogModifier")
 class CreateFogModifier {
   public static function createFogModifier(options:FogModifierOptions):FogModifier {
     return cast { kind: FogModifierKind, slot: ModifierSlotValue.Effect, color: _Runtime.field(options, 'color'), mode: _Runtime.coalesce(_Runtime.field(options, 'mode'), function():Dynamic return cast FogModifierModeValue.Linear), near: _Runtime.coalesce(_Runtime.field(options, 'near'), function():Dynamic return cast 0.0), far: _Runtime.coalesce(_Runtime.field(options, 'far'), function():Dynamic return cast 1.0), density: _Runtime.coalesce(_Runtime.field(options, 'density'), function():Dynamic return cast 1.0) };

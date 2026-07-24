@@ -38,7 +38,6 @@ import flighthq.types.ElectronApi;
 import flighthq.types.ElectronBackendOptions;
 import flighthq.updater.Updater.setUpdaterBackend;
 
-@:expose("flighthq.hostElectron.ElectronRegister")
 class ElectronRegister {
   public static function registerElectronBackends(electron:ElectronApi, ?options:ElectronBackendOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);

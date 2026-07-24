@@ -8,7 +8,6 @@ import flighthq.types.ParticleDesignerSchema.ParticleDesignerSerializeOptions;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleSerializeResult;
 
-@:expose("flighthq.particlesFormats.ParticleDesignerSerialize")
 class ParticleDesignerSerialize {
   public static final RAD2DEG__particleDesignerSerialize:Dynamic = (180.0 / HxMath.PI);
 

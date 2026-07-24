@@ -20,7 +20,6 @@ import flighthq.types.Types.SceneNodeKind;
 import flighthq.types._internal._SceneNodeValues.SceneNodeKind;
 import flighthq.types._internal._SceneNodeValues.SceneNodeTraitsKey;
 
-@:expose("flighthq.scene.SceneNode")
 class SceneNode {
   public static function createSceneNode(?kind:Kind, ?obj:Dynamic):flighthq.types.SceneNode {
     if (kind == null) kind = cast (SceneNodeKind : Dynamic);

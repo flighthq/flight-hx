@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Cursor;
 import flighthq.types.Cursor.CursorBackend;
 
-@:expose("flighthq.interaction.CursorBackend")
 class CursorBackend {
   public static function createWebCursorBackend(element:Dynamic):flighthq.types.Cursor.CursorBackend {
     return cast { setCursor: function(cursor:Null<Cursor>) {

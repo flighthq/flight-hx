@@ -13,7 +13,6 @@ import flighthq.types.TimelineLabel;
 import flighthq.types.TimelineSignals;
 import flighthq.types.TimelineSource;
 
-@:expose("flighthq.timeline.Timeline")
 class Timeline {
   public static function addTimelineFrameScript(timeline:flighthq.types.Timeline, frame:Dynamic, script:FrameScript):Void {
     var resolved:Dynamic = cast _Runtime.UNDEFINED;

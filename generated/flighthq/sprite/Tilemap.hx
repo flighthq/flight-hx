@@ -21,7 +21,6 @@ import flighthq.types._internal._TilemapValues.TilemapKind;
 
 typedef TilemapWithSignals__tilemap = { @:optional var __tilemapSignalsSlot:TilemapSignals; };
 
-@:expose("flighthq.sprite.Tilemap")
 class Tilemap {
   public static function clearTilemap(tilemap:flighthq.types.Tilemap):Void {
     var signals:Dynamic = cast _Runtime.UNDEFINED;

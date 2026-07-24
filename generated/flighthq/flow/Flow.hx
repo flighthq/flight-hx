@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Flow.FlowStack;
 import flighthq.types.Flow.FlowState;
 
-@:expose("flighthq.flow.Flow")
 class Flow {
   public static function clearFlowStack(stack:FlowStack):Void {
     var states:Dynamic = cast _Runtime.UNDEFINED;

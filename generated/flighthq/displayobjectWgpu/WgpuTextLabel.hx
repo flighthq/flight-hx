@@ -35,7 +35,6 @@ import flighthq.types.WgpuRenderState;
 
 typedef WgpuTextLabelData__wgpuTextLabel = { var canvas:Dynamic; var ctx:Dynamic; var image:ImageResource; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; var lastPW:Float; var lastPH:Float; };
 
-@:expose("flighthq.displayobjectWgpu.WgpuTextLabel")
 class WgpuTextLabel {
   public static function createWgpuTextLabelData__wgpuTextLabel(_state:RenderState, _source:Renderable):RendererData {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;

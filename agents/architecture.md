@@ -124,7 +124,7 @@ Package bridges expose their compiled Haxe module and mechanically re-export val
 
 The harness mechanically redirects upstream imports to these bridges while leaving upstream test bodies and assertions unchanged. All 1,166 inventoried test files currently execute, and the harness never edits the upstream submodule.
 
-JavaScript exposure metadata is an output concern, not the canonical Haxe API. Avoid keeping all generated fields alive merely to simplify the bridge; preserve dead-code elimination for ordinary Haxe consumers.
+JavaScript exposure metadata is an output concern, not part of the canonical Haxe API or generated source. The parity harness adds it at its dedicated JavaScript build boundary; ordinary Haxe consumers retain dead-code elimination.
 
 ## Traceability
 

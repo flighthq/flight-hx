@@ -11,7 +11,6 @@ import flighthq.types.Material;
 import flighthq.types.Types.DefaultMaterialKind;
 import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
-@:expose("flighthq.renderGl.GlMaterialRegistry")
 class GlMaterialRegistry {
   public static function getGlMaterialRenderer(state:GlRenderState, kind:Kind):Null<GlMaterialRenderer> {
     return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'materialRendererMap'), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);

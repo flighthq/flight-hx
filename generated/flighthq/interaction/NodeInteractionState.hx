@@ -10,7 +10,6 @@ import flighthq.types.Node.NodeRuntime;
 import flighthq.types.NodeInteraction.HitArea;
 import flighthq.types.NodeInteractionState;
 
-@:expose("flighthq.interaction.NodeInteractionState")
 class NodeInteractionState {
   public static function createNodeInteractionState():flighthq.types.NodeInteractionState {
     return cast { cursor: null, focusable: false, hitArea: null, hitTestEnabled: false, tabIndex: -1.0 };

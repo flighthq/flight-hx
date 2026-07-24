@@ -11,7 +11,6 @@ import flighthq.types.MediaSession.MediaSessionMetadata;
 import flighthq.types.MediaSession.MediaSessionPlaybackState;
 import flighthq.types.MediaSession.MediaSessionPositionState;
 
-@:expose("flighthq.mediasession.Mediasession")
 class Mediasession {
   public static var _backend__mediasession:Null<MediaSessionBackend> = _Runtime.explicitNull();
 

@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ToneMapEffect;
 
-@:expose("flighthq.effects.ToneMapEffect")
 class ToneMapEffect {
   public static function createToneMapEffect(?options:Dynamic):flighthq.types.ToneMapEffect {
     if (options == null) options = cast ({  } : Dynamic);

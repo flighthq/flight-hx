@@ -8,7 +8,6 @@ import flighthq.types.ElectronApi.ElectronShortcutDetails;
 import flighthq.types.Shell.ShellBackend;
 import flighthq.types.Shell.ShellShortcutLink;
 
-@:expose("flighthq.hostElectron.ElectronShell")
 class ElectronShell {
   public static function createElectronShellBackend(electron:ElectronApi):ShellBackend {
     var shell:Dynamic = cast _Runtime.UNDEFINED;

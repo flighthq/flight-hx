@@ -9,7 +9,6 @@ import flighthq.types.ParticleEmitterCallbacks;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterState;
 
-@:expose("flighthq.particleemitter.PrewarmParticleEmitter3D")
 class PrewarmParticleEmitter3D {
   public static function prewarmParticleEmitter3D(emitter:ParticleEmitter3D, state:ParticleEmitterState, config:ParticleEmitterConfig, duration:Float, ?stepDeltaTime:Dynamic, ?callbacks:ParticleEmitterCallbacks):Void {
     if (stepDeltaTime == null) stepDeltaTime = cast ((1.0 / 60.0) : Dynamic);

@@ -15,7 +15,6 @@ import flighthq.useragent.UserAgentParse.parseUserAgentFormFactor;
 import flighthq.useragent.UserAgentParse.parseUserAgentOsName;
 import flighthq.useragent.UserAgentParse.parseUserAgentOsVersion;
 
-@:expose("flighthq.device.Device")
 class Device {
   public static var _backend__device:Null<DeviceBackend> = _Runtime.explicitNull();
 

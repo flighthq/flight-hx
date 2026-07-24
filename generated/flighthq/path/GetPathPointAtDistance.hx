@@ -7,7 +7,6 @@ import flighthq.path.FlattenPath.flattenPath;
 import flighthq.types.Path;
 import flighthq.types.Vector2.Vector2Like;
 
-@:expose("flighthq.path.GetPathPointAtDistance")
 class GetPathPointAtDistance {
   public static function getPathPointAtDistance(path:Path, distance:Float, out:Vector2Like, tolerance:Dynamic = 0.25):Bool {
     var contours:Dynamic = cast _Runtime.UNDEFINED;

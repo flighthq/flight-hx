@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Camera2D;
 import flighthq.types.Camera2D.Camera2DOptions;
 
-@:expose("flighthq.camera.Camera2d")
 class Camera2d {
   public static function createCamera2D(viewportWidth:Float, viewportHeight:Float, ?options:Camera2DOptions):Camera2D {
     return cast { rotation: _Runtime.coalesce(_Runtime.optionalField(options, 'rotation'), function():Dynamic return cast 0.0), viewportHeight: viewportHeight, viewportWidth: viewportWidth, x: _Runtime.coalesce(_Runtime.optionalField(options, 'x'), function():Dynamic return cast 0.0), y: _Runtime.coalesce(_Runtime.optionalField(options, 'y'), function():Dynamic return cast 0.0), zoom: _Runtime.coalesce(_Runtime.optionalField(options, 'zoom'), function():Dynamic return cast 1.0) };

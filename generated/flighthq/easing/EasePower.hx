@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
-@:expose("flighthq.easing.EasePower")
 class EasePower {
   public static function easeInOutPower(exponent:Float):EasingFunction {
     return cast function(t:Dynamic) {

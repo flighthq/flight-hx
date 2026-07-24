@@ -8,7 +8,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.SharpenEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasSharpenEffect")
 class CanvasSharpenEffect {
   public static function applySharpenEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:SharpenEffect):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));

@@ -7,7 +7,6 @@ import flighthq.types.Path;
 import flighthq.types.Path.PathCommand;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
-@:expose("flighthq.path.ContainsPathPoint")
 class ContainsPathPoint {
   public static function containsPathPoint(path:Path, px:Float, py:Float, tolerance:Dynamic = 0.25):Bool {
     var winding:Dynamic = cast _Runtime.UNDEFINED;

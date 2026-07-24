@@ -8,7 +8,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.LensDistortionEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasLensDistortionEffect")
 class CanvasLensDistortionEffect {
   public static function applyLensDistortionEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:LensDistortionEffect):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));

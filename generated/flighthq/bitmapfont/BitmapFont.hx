@@ -9,7 +9,6 @@ import flighthq.types.GlyphSource.GlyphEntry;
 import flighthq.types.GlyphSource.GlyphMetrics;
 import flighthq.types.TextureAtlas;
 
-@:expose("flighthq.bitmapfont.BitmapFont")
 class BitmapFont {
   public static function createBitmapFont(data:BitmapFontData):flighthq.types.BitmapFont {
     var pageCount:Dynamic = cast _Runtime.UNDEFINED;

@@ -4,7 +4,6 @@ package flighthq.displayobjectDom;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.displayobjectDom.DomTextHelpers")
 class DomTextHelpers {
   public static function escapeDomHtmlString(str:String):String {
     return cast _Runtime.replace(_Runtime.replace(_Runtime.replace(_Runtime.replace(str, _Runtime.regexp('&', 'g'), '&amp;', false), _Runtime.regexp('<', 'g'), '&lt;', false), _Runtime.regexp('>', 'g'), '&gt;', false), _Runtime.regexp(' ', 'g'), '&nbsp;', false);

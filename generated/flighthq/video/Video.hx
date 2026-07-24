@@ -10,7 +10,6 @@ import flighthq.video.VideoFormat as Facade_Video_flighthq_video_VideoFormat;
 import flighthq.video.VideoResource as Facade_Video_flighthq_video_VideoResource;
 import flighthq.video.VideoResourceFrom as Facade_Video_flighthq_video_VideoResourceFrom;
 
-@:expose("flighthq.video.Video")
 class Video {
   public static function canPlayVideoType(mimeType:String):Bool {
     return cast _Runtime.callValue(Facade_Video_flighthq_video_VideoFormat.canPlayVideoType, cast ([mimeType] : Array<Dynamic>));

@@ -8,7 +8,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.LensDirtEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasLensDirtEffect")
 class CanvasLensDirtEffect {
   public static function applyLensDirtEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:LensDirtEffect):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));

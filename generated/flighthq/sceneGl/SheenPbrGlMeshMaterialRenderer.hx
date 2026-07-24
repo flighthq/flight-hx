@@ -26,7 +26,6 @@ import flighthq.types.SheenPbrMaterial;
 import flighthq.types.Types.SheenPbrMaterialKind;
 import flighthq.types._internal._SheenPbrMaterialValues.SheenPbrMaterialKind;
 
-@:expose("flighthq.sceneGl.SheenPbrGlMeshMaterialRenderer")
 class SheenPbrGlMeshMaterialRenderer {
   public static final sheenPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;

@@ -8,7 +8,6 @@ import flighthq.sceneGl.GlSceneRuntime.getGlSceneRuntime;
 import flighthq.types.GlRenderState;
 import flighthq.types.Log.LogLevel;
 
-@:expose("flighthq.sceneGl.EnableGlSceneCustomShaderGuards")
 class EnableGlSceneCustomShaderGuards {
   public static function areGlSceneCustomShaderGuardsEnabled(state:GlRenderState):Bool {
     return cast !_Runtime.looseEquals(_Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'customShaderGuard'), null);

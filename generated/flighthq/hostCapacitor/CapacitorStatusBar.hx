@@ -9,7 +9,6 @@ import flighthq.types.StatusBar.StatusBarBackend;
 import flighthq.types.StatusBar.StatusBarInfo;
 import flighthq.types.StatusBar.StatusBarStyle;
 
-@:expose("flighthq.hostCapacitor.CapacitorStatusBar")
 class CapacitorStatusBar {
   public static function createCapacitorStatusBarBackend(capacitor:CapacitorApi):StatusBarBackend {
     var statusBar:Dynamic = cast _Runtime.UNDEFINED;

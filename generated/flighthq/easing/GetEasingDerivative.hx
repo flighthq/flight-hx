@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
-@:expose("flighthq.easing.GetEasingDerivative")
 class GetEasingDerivative {
   public static function getEasingDerivative(ease:EasingFunction, t:Float, epsilon:Float = 0.000001):Float {
     if (_Runtime.truthy(_Runtime.compare(t, epsilon, '<='))) {

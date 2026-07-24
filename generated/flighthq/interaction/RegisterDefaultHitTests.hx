@@ -43,7 +43,6 @@ import flighthq.types._internal._TextLabelValues.TextLabelKind;
 import flighthq.types._internal._TilemapValues.TilemapKind;
 import flighthq.types._internal._VideoValues.VideoKind;
 
-@:expose("flighthq.interaction.RegisterDefaultHitTests")
 class RegisterDefaultHitTests {
   public static function registerDefaultHitTests():Void {
     _Runtime.callValue(registerHitTest, cast ([BitmapKind, defaultBitmapHitTestHandler] : Array<Dynamic>));

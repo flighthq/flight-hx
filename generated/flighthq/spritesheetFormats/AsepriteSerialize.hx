@@ -12,7 +12,6 @@ import flighthq.types.AsepriteSchema.AsepriteMeta;
 import flighthq.types.AsepriteSchema.AsepriteSerializeOptions;
 import flighthq.types.SpritesheetData;
 
-@:expose("flighthq.spritesheetFormats.AsepriteSerialize")
 class AsepriteSerialize {
   public static function dataToMeta__asepriteSerialize(data:SpritesheetData, existing:Dynamic):AsepriteMeta {
     var tags:Dynamic = cast _Runtime.UNDEFINED;

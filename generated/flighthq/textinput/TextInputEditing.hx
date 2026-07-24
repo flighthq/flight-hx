@@ -24,7 +24,6 @@ import flighthq.types._internal._KeyCodeValues.KeyCodeValue;
 
 typedef KeyboardCommand__textInputEditing = String;
 
-@:expose("flighthq.textinput.TextInputEditing")
 class TextInputEditing {
   public static final DESIRED_CARET_X_UNSET__textInputEditing:Dynamic = -1.0;
 

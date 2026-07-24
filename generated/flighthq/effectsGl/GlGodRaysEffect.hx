@@ -10,7 +10,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.GodRaysEffect;
 
-@:expose("flighthq.effectsGl.GlGodRaysEffect")
 class GlGodRaysEffect {
   public static function applyGodRaysEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:GodRaysEffect):Void {
     var centerX:Dynamic = cast _Runtime.UNDEFINED;

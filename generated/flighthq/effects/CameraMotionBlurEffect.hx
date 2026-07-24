@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CameraMotionBlurEffect;
 
-@:expose("flighthq.effects.CameraMotionBlurEffect")
 class CameraMotionBlurEffect {
   public static function createCameraMotionBlurEffect(?options:Dynamic):flighthq.types.CameraMotionBlurEffect {
     if (options == null) options = cast ({  } : Dynamic);

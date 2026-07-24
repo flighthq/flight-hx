@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.CanvasEffectSourceMode;
 import flighthq.types.CanvasRenderTarget;
 
-@:expose("flighthq.effectsCanvas.CanvasSourceModeCompositing")
 class CanvasSourceModeCompositing {
   public static function clearCanvasTarget(dest:Dynamic):Void {
     var ctx:Dynamic = cast _Runtime.UNDEFINED;

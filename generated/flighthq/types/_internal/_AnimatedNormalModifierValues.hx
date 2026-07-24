@@ -7,7 +7,6 @@ import flighthq.types.Modifier;
 import flighthq.types.Texture;
 import flighthq.types.Vector2.Vector2Like;
 
-@:expose("flighthq.types._internal._AnimatedNormalModifierValues")
 class _AnimatedNormalModifierValues {
   public static final AnimatedNormalModifierKind:Dynamic = 'AnimatedNormalModifier';
 }

@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.VideoResource.VideoResourceUrl;
 
-@:expose("flighthq.video.VideoFormat")
 class VideoFormat {
   public static function canPlayVideoType(mimeType:String):Bool {
     var probe:Dynamic = cast _Runtime.UNDEFINED;

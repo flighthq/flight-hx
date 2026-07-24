@@ -16,7 +16,6 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
-@:expose("flighthq.renderWgpu.WgpuRenderState")
 class WgpuRenderState {
   public static final RING_SLOT_COUNT__wgpuRenderState:Dynamic = 4096.0;
 

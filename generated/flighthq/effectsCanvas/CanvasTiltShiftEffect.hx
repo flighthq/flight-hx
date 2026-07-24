@@ -8,7 +8,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.TiltShiftEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasTiltShiftEffect")
 class CanvasTiltShiftEffect {
   public static function applyTiltShiftEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:TiltShiftEffect):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));

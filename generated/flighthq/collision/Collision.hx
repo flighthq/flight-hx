@@ -16,7 +16,6 @@ import flighthq.types.Collision.CollisionPolygon;
 import flighthq.types.Collision.CollisionSegment;
 import flighthq.types.Collision.CollisionShape;
 
-@:expose("flighthq.collision.Collision")
 class Collision {
   public static function clearCollisionManifold(out:CollisionManifold):Void {
     _Runtime.callValue(Facade_Collision_flighthq_collision_Manifold.clearCollisionManifold, cast ([out] : Array<Dynamic>));

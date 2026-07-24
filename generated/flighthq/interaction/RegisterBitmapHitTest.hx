@@ -19,7 +19,6 @@ import flighthq.types.Types.BitmapKind;
 import flighthq.types._internal._BitmapValues.BitmapKind;
 import flighthq.types._internal._ImageChannelValues.ImageChannelValue;
 
-@:expose("flighthq.interaction.RegisterBitmapHitTest")
 class RegisterBitmapHitTest {
   public static function registerBitmapHitTest(alphaThreshold:Float = 1.0):Void {
     _Runtime.callValue(registerHitTestPrecise, cast ([BitmapKind, function(source:Dynamic, x:Dynamic, y:Dynamic) return _Runtime.callValue(RegisterBitmapHitTest.hitTestBitmapAlpha__registerBitmapHitTest, cast ([source, x, y, alphaThreshold] : Array<Dynamic>))] : Array<Dynamic>));

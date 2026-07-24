@@ -7,7 +7,6 @@ import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
 import flighthq.types.SurfaceMaterial;
 import flighthq.types.Texture;
 
-@:expose("flighthq.types._internal._IridescencePbrMaterialValues")
 class _IridescencePbrMaterialValues {
   public static final IridescencePbrMaterialKind:Dynamic = 'IridescencePbrMaterial';
 }

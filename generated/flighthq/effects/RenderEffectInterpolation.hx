@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.RenderEffect;
 
-@:expose("flighthq.effects.RenderEffectInterpolation")
 class RenderEffectInterpolation {
   public static function canLerpRenderEffects(a:RenderEffect, b:RenderEffect):Bool {
     return cast _Runtime.strictEquals(_Runtime.field(a, 'kind'), _Runtime.field(b, 'kind'));

@@ -8,7 +8,6 @@ import flighthq.types.ElectronApi.ElectronMenuItemOptions;
 import flighthq.types.Menu.MenuBackend;
 import flighthq.types.Menu.MenuItemTemplate;
 
-@:expose("flighthq.hostElectron.ElectronMenu")
 class ElectronMenu {
   public static function createElectronMenuBackend(electron:ElectronApi):MenuBackend {
     var selectListener:Null<Dynamic> = cast _Runtime.UNDEFINED;

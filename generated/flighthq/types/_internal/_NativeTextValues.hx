@@ -10,7 +10,6 @@ import flighthq.types.TextAutoSize;
 import flighthq.types.TextFormat.TextFormatAlign;
 import flighthq.types.TextVerticalAlign;
 
-@:expose("flighthq.types._internal._NativeTextValues")
 class _NativeTextValues {
   public static final NativeTextKind:Dynamic = 'NativeText';
 }

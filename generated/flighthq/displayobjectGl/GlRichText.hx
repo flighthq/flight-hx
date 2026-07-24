@@ -34,7 +34,6 @@ import flighthq.types.TextLabel.TextLabelRuntime;
 
 typedef GlRichTextData__glRichText = { var texture:Null<Dynamic>; };
 
-@:expose("flighthq.displayobjectGl.GlRichText")
 class GlRichText {
   public static var _offscreenCanvas__glRichText:Null<Dynamic> = _Runtime.explicitNull();
 

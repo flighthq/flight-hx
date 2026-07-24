@@ -8,7 +8,6 @@ import flighthq.types.BlurEffect;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderTarget;
 
-@:expose("flighthq.effectsCanvas.CanvasBlurEffect")
 class CanvasBlurEffect {
   public static function applyBlurEffectToCanvas(source:Dynamic, dest:Dynamic, effect:BlurEffect):Void {
     var blurX:Dynamic = cast _Runtime.UNDEFINED;

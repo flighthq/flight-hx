@@ -4,7 +4,6 @@ package flighthq.effects;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.effects.BlurDownsample")
 class BlurDownsample {
   public static function getBlurDownsampleLevel(sigma:Float):Float {
     if (_Runtime.truthy(_Runtime.compare(sigma, BlurDownsample.BLUR_DOWNSAMPLE_MAX_SIGMA__blurDownsample, '<='))) { return cast 0.0; }

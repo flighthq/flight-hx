@@ -12,7 +12,6 @@ import flighthq.types.GltfSchema.GltfDocument;
 import flighthq.types.SceneDocument;
 import flighthq.types.SceneResources.SceneDocumentLoadOptions;
 
-@:expose("flighthq.sceneResources.GltfLoad")
 class GltfLoad {
   public static function loadSceneDocumentFromGlbUrl(url:String, ?options:SceneDocumentLoadOptions):flighthq._internal._Promise<Null<SceneDocument>> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<SceneDocument>> {

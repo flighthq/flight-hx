@@ -23,7 +23,6 @@ import flighthq.types.Path;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.ShapeCommand.PathWinding;
 
-@:expose("flighthq.clip.ClipRegion")
 class ClipRegion {
   public static function acquireClipRegion():flighthq.types.ClipRegion {
     var region:Dynamic = cast _Runtime.UNDEFINED;

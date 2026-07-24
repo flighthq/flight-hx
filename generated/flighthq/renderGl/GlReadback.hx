@@ -7,7 +7,6 @@ import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
-@:expose("flighthq.renderGl.GlReadback")
 class GlReadback {
   public static function readGlRenderTargetPixels(state:GlRenderState, target:GlRenderTarget, x:Float, y:Float, width:Float, height:Float, out:Dynamic):Bool {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

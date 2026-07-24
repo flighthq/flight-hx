@@ -8,7 +8,6 @@ import flighthq.types.CanvasRenderState;
 import flighthq.types.DisplayObject;
 import flighthq.types.RenderProxy2D;
 
-@:expose("flighthq.displayobjectCanvas.CanvasCSSFilterBinding")
 class CanvasCSSFilterBinding {
   public static final _cssFilterBindings__canvasCSSFilterBinding:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 

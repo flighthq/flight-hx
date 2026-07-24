@@ -8,7 +8,6 @@ import flighthq.pathBoolean.ResolvePathRegions.resolvePathRegions;
 import flighthq.types.Path;
 import flighthq.types.PathBooleanOptions;
 
-@:expose("flighthq.pathBoolean.SimplifyPath")
 class SimplifyPath {
   public static function simplifyPath(path:Path, ?options:PathBooleanOptions):Path {
     var fillRule:Dynamic = cast _Runtime.UNDEFINED;

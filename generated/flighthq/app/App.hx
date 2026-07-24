@@ -13,7 +13,6 @@ import flighthq.types.App.AppLoginItemLike;
 import flighthq.types.App.AppPathKind;
 import flighthq.types.Menu.MenuItemTemplate;
 
-@:expose("flighthq.app.App")
 class App {
   public static var _backend__app:Null<AppBackend> = _Runtime.explicitNull();
 

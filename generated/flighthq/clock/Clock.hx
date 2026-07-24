@@ -10,7 +10,6 @@ import flighthq.types.Clock;
 import flighthq.types.ClockOptions;
 import flighthq.types.Signal;
 
-@:expose("flighthq.clock.Clock")
 class Clock {
   public static function addClockChild(parent:flighthq.types.Clock, child:flighthq.types.Clock):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(child, 'parent'), parent))) { return; }

@@ -35,7 +35,6 @@ import flighthq.types.StrokeStyle;
 import flighthq.types.Vector2.Vector2Like;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
-@:expose("flighthq.path.Path")
 class Path {
   public static function acquirePathMesh(path:flighthq.types.Path, ?tolerance:Dynamic):PathMesh {
     return cast _Runtime.callValue(Facade_Path_flighthq_path_PathMeshPool.acquirePathMesh, cast ([path, tolerance] : Array<Dynamic>));

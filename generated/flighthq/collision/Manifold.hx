@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Collision.CollisionManifold;
 
-@:expose("flighthq.collision.Manifold")
 class Manifold {
   public static function clearCollisionManifold(out:CollisionManifold):Void {
     _Runtime.setField(out, 'overlapping', false);

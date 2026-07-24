@@ -19,7 +19,6 @@ import flighthq.types.Renderable;
 import flighthq.types.RendererData;
 import flighthq.types.TextVerticalAlign;
 
-@:expose("flighthq.displayobjectDom.DomNativeText")
 class DomNativeText {
   public static function createDomNativeTextData__domNativeText(_state:RenderState, _source:Renderable):Null<RendererData> {
     return cast null;

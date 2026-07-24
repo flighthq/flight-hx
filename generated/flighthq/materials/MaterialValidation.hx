@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
 
-@:expose("flighthq.materials.MaterialValidation")
 class MaterialValidation {
   public static function clampStandardPbrMaterialProperties(out:StandardPbrMaterialProperties):StandardPbrMaterialProperties {
     _Runtime.setField(out, 'metallic', _Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.field(out, 'metallic')] : Array<Dynamic>))] : Array<Dynamic>)));

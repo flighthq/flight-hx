@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.Matrix;
 
-@:expose("flighthq.displayobjectCanvas.CanvasTransform")
 class CanvasTransform {
   public static function setCanvasTransform(state:Dynamic, context:Dynamic, transform:Matrix):Void {
     if (_Runtime.truthy(_Runtime.field(state, 'roundPixels'))) {

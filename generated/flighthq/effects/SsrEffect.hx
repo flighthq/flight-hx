@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.SsrEffect;
 
-@:expose("flighthq.effects.SsrEffect")
 class SsrEffect {
   public static function createSsrEffect(?options:Dynamic):flighthq.types.SsrEffect {
     if (options == null) options = cast ({  } : Dynamic);

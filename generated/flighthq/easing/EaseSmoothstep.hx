@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 import flighthq.types.ScalarRemap;
 
-@:expose("flighthq.easing.EaseSmoothstep")
 class EaseSmoothstep {
   public static final easeSmootherstep:EasingFunction = function(t:Dynamic) return (((t * t) * t) * ((t * ((t * 6.0) - 15.0)) + 10.0));
 

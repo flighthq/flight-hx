@@ -21,7 +21,6 @@ import flighthq.types.TextVerticalAlign;
 import flighthq.types.Types.NativeTextKind;
 import flighthq.types._internal._NativeTextValues.NativeTextKind;
 
-@:expose("flighthq.text.NativeText")
 class NativeText {
   public static function computeNativeTextLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
     var native:Dynamic = cast _Runtime.UNDEFINED;

@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.HslColor;
 
-@:expose("flighthq.color.HslColor")
 class HslColor {
   public static function allocateHslColor():flighthq.types.HslColor {
     return cast cast ([0.0, 0.0, 0.0] : Array<Dynamic>);

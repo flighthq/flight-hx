@@ -7,7 +7,6 @@ import flighthq.entity.Entity.createEntity;
 import flighthq.types.Sampler;
 import flighthq.types.Sampler.SamplerLike;
 
-@:expose("flighthq.texture.Sampler")
 class Sampler {
   public static function cloneSampler(source:SamplerLike):flighthq.types.Sampler {
     return cast _Runtime.callValue(createEntity, cast ([{ anisotropy: _Runtime.field(source, 'anisotropy'), magFilter: _Runtime.field(source, 'magFilter'), minFilter: _Runtime.field(source, 'minFilter'), mipmaps: _Runtime.field(source, 'mipmaps'), wrapU: _Runtime.field(source, 'wrapU'), wrapV: _Runtime.field(source, 'wrapV') }] : Array<Dynamic>));

@@ -29,7 +29,6 @@ import flighthq.types.VideoResource;
 import flighthq.types.VideoTexture;
 import flighthq.types.VideoTexture.VideoTextureLike;
 
-@:expose("flighthq.texture.Texture")
 class Texture {
   public static function advanceVideoTexture(videoTexture:VideoTextureLike):Float {
     return cast _Runtime.callValue(Facade_Texture_flighthq_texture_VideoTexture.advanceVideoTexture, cast ([videoTexture] : Array<Dynamic>));

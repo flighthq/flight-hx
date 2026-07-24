@@ -4,7 +4,6 @@ package flighthq.geometry;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.geometry.Typedarray")
 class Typedarray {
   public static function reserveFloat32Array(array:flighthq._internal._Float32Array, capacity:Float):flighthq._internal._Float32Array {
     var out:Dynamic = cast _Runtime.UNDEFINED;

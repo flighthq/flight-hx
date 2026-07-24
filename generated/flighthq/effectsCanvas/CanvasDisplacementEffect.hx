@@ -8,7 +8,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.DisplacementEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasDisplacementEffect")
 class CanvasDisplacementEffect {
   public static function applyDisplacementEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:DisplacementEffect):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));

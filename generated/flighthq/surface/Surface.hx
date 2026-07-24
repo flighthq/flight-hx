@@ -73,7 +73,6 @@ import flighthq.types.SurfaceResizeMode;
 import flighthq.types.SurfaceSharpenOptions;
 import flighthq.types.ThresholdOperation;
 
-@:expose("flighthq.surface.Surface")
 class Surface {
   public static function applySurfaceColorTransform(dest:SurfaceRegion, source:SurfaceRegion, ct:ColorTransformLike):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceTransform.applySurfaceColorTransform, cast ([dest, source, ct] : Array<Dynamic>));

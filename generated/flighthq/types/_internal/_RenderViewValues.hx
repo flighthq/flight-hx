@@ -7,7 +7,6 @@ import flighthq.types.DisplayObject;
 import flighthq.types.DisplayObject.DisplayObjectData;
 import flighthq.types.DisplayObject.DisplayObjectRuntime;
 
-@:expose("flighthq.types._internal._RenderViewValues")
 class _RenderViewValues {
   public static final RenderViewKind:Dynamic = 'RenderView';
 }

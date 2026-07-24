@@ -100,7 +100,6 @@ import flighthq.types._internal._VortexForceValues as Facade_Types_flighthq_type
 import flighthq.types._internal._WindForceValues as Facade_Types_flighthq_types__internal__WindForceValues;
 import flighthq.types._internal._WireframeMaterialValues as Facade_Types_flighthq_types__internal__WireframeMaterialValues;
 
-@:expose("flighthq.types.Types")
 class Types {
   public static final __enum_BatchBarrier:Dynamic = { Capacity: Facade_Types_flighthq_types_BatchBarrier_BatchBarrier.Capacity, Clip: Facade_Types_flighthq_types_BatchBarrier_BatchBarrier.Clip, Filter: Facade_Types_flighthq_types_BatchBarrier_BatchBarrier.Filter, RenderTarget: Facade_Types_flighthq_types_BatchBarrier_BatchBarrier.RenderTarget };
 

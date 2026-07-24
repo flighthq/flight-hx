@@ -12,7 +12,6 @@ import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderState.CanvasRenderStateRuntime;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
-@:expose("flighthq.displayobjectCanvas.CanvasRenderState")
 class CanvasRenderState {
   public static function createCanvasRenderState(canvas:Dynamic, ?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);

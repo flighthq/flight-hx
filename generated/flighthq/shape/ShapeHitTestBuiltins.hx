@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.shape.ShapeHitTestRegistry.registerShapeHitTestCommand;
 import flighthq.types.ShapeCommand.ShapeCommandToken;
 
-@:expose("flighthq.shape.ShapeHitTestBuiltins")
 class ShapeHitTestBuiltins {
   public static function enableShapeHitTesting():Void {
     _Runtime.callValue(registerShapeHitTestCommand, cast ([{ key: 'drawCircle', hitTest: function(x:Float, y:Float, buf:Array<ShapeCommandToken>, i:Float) {

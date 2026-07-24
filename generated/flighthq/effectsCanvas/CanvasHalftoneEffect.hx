@@ -8,7 +8,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.HalftoneEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasHalftoneEffect")
 class CanvasHalftoneEffect {
   public static function applyHalftoneEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:HalftoneEffect):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));

@@ -20,7 +20,6 @@ import flighthq.types.Scene;
 import flighthq.types.SceneDocument;
 import flighthq.types.SceneNode;
 
-@:expose("flighthq.sceneFormats.SceneFormats")
 class SceneFormats {
   public static function createSceneFrom3ds(bytes:Dynamic, ?warnings:Array<String>):Scene {
     return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_ThreeDsParse.createSceneFrom3ds, cast ([bytes, warnings] : Array<Dynamic>));

@@ -7,7 +7,6 @@ import flighthq.surface.Surface.createSurface;
 import flighthq.types.Surface;
 import flighthq.types.SurfaceMismatch;
 
-@:expose("flighthq.surface.SurfaceCompare")
 class SurfaceCompare {
   public static function compareSurface(source:Surface, other:Surface):Null<Surface> {
     var result:Dynamic = cast _Runtime.UNDEFINED;

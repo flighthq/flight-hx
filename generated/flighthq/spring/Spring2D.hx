@@ -9,7 +9,6 @@ import flighthq.spring.Spring.updateSpring;
 import flighthq.types.Spring.Spring2D;
 import flighthq.types.Spring.SpringConfig;
 
-@:expose("flighthq.spring.Spring2D")
 class Spring2D {
   public static function createSpring2D(valueX:Float = 0.0, valueY:Float = 0.0, velocityX:Float = 0.0, velocityY:Float = 0.0):flighthq.types.Spring.Spring2D {
     return cast { x: _Runtime.callValue(createSpring, cast ([valueX, velocityX] : Array<Dynamic>)), y: _Runtime.callValue(createSpring, cast ([valueY, velocityY] : Array<Dynamic>)) };

@@ -4,7 +4,6 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.types.TextureKind")
 class TextureKind {
   public static final CubeTextureKind:Dynamic = 'CubeTexture';
 

@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.CapacitorApi;
 import flighthq.types.Dialog.DialogBackend;
 
-@:expose("flighthq.hostCapacitor.CapacitorDialog")
 class CapacitorDialog {
   public static function createCapacitorDialogBackend(capacitor:CapacitorApi):DialogBackend {
     var dialog:Dynamic = cast _Runtime.UNDEFINED;

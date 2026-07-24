@@ -22,7 +22,6 @@ import flighthq.types.UnitySchema.UnityRotationOverLifetime;
 import flighthq.types.UnitySchema.UnityShape;
 import flighthq.types.UnitySchema.UnitySizeOverLifetime;
 
-@:expose("flighthq.particlesFormats.UnityParse")
 class UnityParse {
   public static final DEG2RAD__unityParse:Dynamic = (HxMath.PI / 180.0);
 

@@ -34,7 +34,6 @@ typedef WebOrientationSensor__sensors = Dynamic;
 
 typedef WebRotationRate__sensors = { @:optional var alpha:Null<Float>; @:optional var beta:Null<Float>; @:optional var gamma:Null<Float>; };
 
-@:expose("flighthq.sensors.Sensors")
 class Sensors {
   public static final _absoluteOrientation__sensors:OrientationReading = _Runtime.callValue(createOrientationReading, cast ([] : Array<Dynamic>));
 

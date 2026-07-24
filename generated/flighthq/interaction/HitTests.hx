@@ -24,7 +24,6 @@ import flighthq.types.NodeInteraction.HitArea;
 import flighthq.types.Path;
 import flighthq.types.Rectangle;
 
-@:expose("flighthq.interaction.HitTests")
 class HitTests {
   public static function describeGraphHit(node:NodeAny, x:Float, y:Float, out:HitTestResult):Void {
     var exact:Dynamic = cast _Runtime.UNDEFINED;

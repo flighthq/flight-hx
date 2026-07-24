@@ -21,7 +21,6 @@ import flighthq.types._internal._HemisphereLightValues.HemisphereLightKind;
 import flighthq.types._internal._PointLightValues.PointLightKind;
 import flighthq.types._internal._SpotLightValues.SpotLightKind;
 
-@:expose("flighthq.lighting.LightAnalysis")
 class LightAnalysis {
   public static function getLightInfluenceBounds(out:BoundingSphereLike, light:Light):Void {
     var kind:Dynamic = cast _Runtime.UNDEFINED;

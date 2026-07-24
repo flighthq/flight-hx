@@ -14,7 +14,6 @@ import flighthq.types.SceneDocument;
 import flighthq.types.SceneResources.SceneDocumentLoadOptions;
 import flighthq.types._internal._ImageResourceReferenceValues.ImageResourceReferenceKindValue;
 
-@:expose("flighthq.sceneResources.SceneDocumentSource")
 class SceneDocumentSource {
   public static function getSceneDocumentBasePathFromUrl(url:String):Null<String> {
     var query:Dynamic = cast _Runtime.UNDEFINED;

@@ -7,7 +7,6 @@ import flighthq.types.CapacitorApi;
 import flighthq.types.Share.ShareBackend;
 import flighthq.types.Share.ShareContent;
 
-@:expose("flighthq.hostCapacitor.CapacitorShare")
 class CapacitorShare {
   public static function createCapacitorShareBackend(capacitor:CapacitorApi):ShareBackend {
     var share:Dynamic = cast _Runtime.UNDEFINED;

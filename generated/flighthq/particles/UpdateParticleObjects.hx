@@ -10,7 +10,6 @@ import flighthq.types.ParticleObject;
 import flighthq.types.ParticleObjectsState;
 import flighthq.types.ParticleObjectsUpdateOptions;
 
-@:expose("flighthq.particles.UpdateParticleObjects")
 class UpdateParticleObjects {
   public static final TWO_PI__updateParticleObjects:Dynamic = (HxMath.PI * 2.0);
 

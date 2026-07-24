@@ -13,7 +13,6 @@ import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextLayout.TextMeasureFunction;
 import flighthq.types.TextVerticalAlign;
 
-@:expose("flighthq.types._internal._TextLabelValues")
 class _TextLabelValues {
   public static final TextLabelKind:Dynamic = 'TextLabel';
 }

@@ -8,7 +8,6 @@ import flighthq.types.Aabb.AabbLike;
 import flighthq.types.MeshSkinBindPose;
 import flighthq.types.Skeleton3D;
 
-@:expose("flighthq.skeleton3d.GetMeshSkinBounds")
 class GetMeshSkinBounds {
   public static function getMeshSkinConservativeBounds(out:AabbLike, bindPose:MeshSkinBindPose, skeleton:Skeleton3D):Void {
     var positions:Dynamic = cast _Runtime.UNDEFINED;

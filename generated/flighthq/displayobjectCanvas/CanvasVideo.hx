@@ -11,7 +11,6 @@ import flighthq.types.DisplayObjectRenderer;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.Video;
 
-@:expose("flighthq.displayobjectCanvas.CanvasVideo")
 class CanvasVideo {
   public static function drawCanvasVideo(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;

@@ -8,7 +8,6 @@ import flighthq.math.Interpolation.lerp;
 import flighthq.types.Snapshot;
 import flighthq.types.Snapshot.SnapshotSchema;
 
-@:expose("flighthq.snapshot.InterpolateSnapshots")
 class InterpolateSnapshots {
   public static function interpolateSnapshots<T>(a:Snapshot<Dynamic>, b:Snapshot<Dynamic>, t:Float, out:Dynamic, ?schema:SnapshotSchema):Void {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(a, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(a), 'object')), function():Dynamic return cast _Runtime.strictEquals(b, null)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(b), 'object')), function():Dynamic return cast _Runtime.strictEquals(out, null)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(out), 'object')))) {

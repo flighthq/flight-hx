@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.ImageFormat;
 import flighthq.types.Surface;
 
-@:expose("flighthq.surface.SurfaceEncode")
 class SurfaceEncode {
   public static function encodeSurface(source:Surface, format:ImageFormat = 'png', quality:Float = 0.9):Dynamic {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;

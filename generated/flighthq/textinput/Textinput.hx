@@ -20,7 +20,6 @@ import flighthq.types.TextInputState.TextInputOptions;
 import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextSelectionRectangle;
 
-@:expose("flighthq.textinput.Textinput")
 class Textinput {
   public static function appendTextInput(source:RichText, text:String):Void {
     _Runtime.callValue(Facade_Textinput_flighthq_textinput_TextInputEditing.appendTextInput, cast ([source, text] : Array<Dynamic>));

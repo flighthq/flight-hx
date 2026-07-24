@@ -105,7 +105,6 @@ typedef ParsedSkeletonAnimation__awdParse = { var name:String; var poses:Array<{
 
 typedef ParsedSkeletonPose__awdParse = { var jointTransforms:Array<Null<Dynamic>>; var name:String; };
 
-@:expose("flighthq.sceneFormats.AwdParse")
 class AwdParse {
   public static function createSceneFromAwd(bytes:Dynamic, ?warnings:Array<String>):Scene {
     return cast _Runtime.callValue(createSceneFromDocument, cast ([_Runtime.callValue(parseAwd, cast ([bytes, warnings] : Array<Dynamic>))] : Array<Dynamic>));

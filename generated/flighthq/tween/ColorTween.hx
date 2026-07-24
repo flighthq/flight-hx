@@ -11,7 +11,6 @@ import flighthq.types.TweenOptions;
 
 typedef ColorComponents__colorTween = { var b:Float; var g:Float; var r:Float; };
 
-@:expose("flighthq.tween.ColorTween")
 class ColorTween {
   public static function createColorTween(manager:TweenManager, target:Dynamic, property:String, duration:Float, toColor:Float, ?options:TweenOptions):Tween<ColorComponents__colorTween> {
     var fromColor:Dynamic = cast _Runtime.UNDEFINED;

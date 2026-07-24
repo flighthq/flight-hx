@@ -4,7 +4,6 @@ package flighthq.color;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.color.Oklab")
 class Oklab {
   public static function linearRgbToOklab(out:Array<Float>, r:Float, g:Float, b:Float):Void {
     var l:Dynamic = cast _Runtime.UNDEFINED;

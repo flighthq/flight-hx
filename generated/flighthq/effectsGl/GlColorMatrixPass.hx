@@ -8,7 +8,6 @@ import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
-@:expose("flighthq.effectsGl.GlColorMatrixPass")
 class GlColorMatrixPass {
   public static function applyColorMatrixPassToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, matrix:Array<Float>):Void {
     var m:Dynamic = cast _Runtime.UNDEFINED;

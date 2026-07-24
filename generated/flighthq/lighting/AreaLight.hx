@@ -14,7 +14,6 @@ import flighthq.types.Types.AreaLightKind;
 import flighthq.types.Vector3.Vector3Like;
 import flighthq.types._internal._AreaLightValues.AreaLightKind;
 
-@:expose("flighthq.lighting.AreaLight")
 class AreaLight {
   public static function cloneAreaLight(source:flighthq.types.AreaLight):flighthq.types.AreaLight {
     return cast _Runtime.callValue(createEntity, cast ([{ castsShadow: _Runtime.field(source, 'castsShadow'), color: _Runtime.field(source, 'color'), direction: _Runtime.callValue(cloneVector3, cast ([_Runtime.field(source, 'direction')] : Array<Dynamic>)), intensity: _Runtime.field(source, 'intensity'), kind: AreaLightKind, normalBias: _Runtime.field(source, 'normalBias'), pcfRadius: _Runtime.field(source, 'pcfRadius'), position: _Runtime.callValue(cloneVector3, cast ([_Runtime.field(source, 'position')] : Array<Dynamic>)), range: _Runtime.field(source, 'range'), right: _Runtime.callValue(cloneVector3, cast ([_Runtime.field(source, 'right')] : Array<Dynamic>)), shadowBias: _Runtime.field(source, 'shadowBias'), up: _Runtime.callValue(cloneVector3, cast ([_Runtime.field(source, 'up')] : Array<Dynamic>)) }] : Array<Dynamic>));

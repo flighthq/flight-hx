@@ -14,7 +14,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderState.GlRenderStateRuntime;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
-@:expose("flighthq.renderGl.GlRenderState")
 class GlRenderState {
   public static function createGlRenderState(canvas:Dynamic, ?options:GlRenderOptions):flighthq.types.GlRenderState {
     if (options == null) options = cast ({  } : Dynamic);

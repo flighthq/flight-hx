@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.AdvancedBlendMode;
 import flighthq.types.BlendEffect;
 
-@:expose("flighthq.effects.BlendEffect")
 class BlendEffect {
   public static function createBlendEffect(mode:AdvancedBlendMode, ?options:Dynamic):flighthq.types.BlendEffect {
     if (options == null) options = cast ({  } : Dynamic);

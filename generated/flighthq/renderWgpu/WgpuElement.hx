@@ -4,7 +4,6 @@ package flighthq.renderWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.renderWgpu.WgpuElement")
 class WgpuElement {
   public static function createWgpuCanvasElement(width:Float, height:Float, pixelRatio:Float = 1.0):Dynamic {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;

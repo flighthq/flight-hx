@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.font.FontShorthand.getFontShorthand;
 
-@:expose("flighthq.font.FontStatus")
 class FontStatus {
   public static function isFontLoaded(family:String, ?style:String):Bool {
     return cast _Runtime.callProperty(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'check', cast ([_Runtime.callValue(getFontShorthand, cast ([family, style] : Array<Dynamic>))] : Array<Dynamic>));

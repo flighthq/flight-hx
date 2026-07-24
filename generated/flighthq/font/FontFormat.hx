@@ -4,7 +4,6 @@ package flighthq.font;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.font.FontFormat")
 class FontFormat {
   public static function detectFontFormat(bytes:Dynamic):Null<String> {
     var b:Dynamic = cast _Runtime.UNDEFINED;

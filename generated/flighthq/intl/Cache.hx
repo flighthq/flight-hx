@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.LocaleInput;
 
-@:expose("flighthq.intl.Cache")
 class Cache {
   public static function getCached<T>(key:String, build:Dynamic):Dynamic {
     var existing:Dynamic = cast _Runtime.UNDEFINED;

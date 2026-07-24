@@ -25,7 +25,6 @@ import flighthq.types.SceneNode.SceneNodeTraits;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.WgpuRenderState;
 
-@:expose("flighthq.sceneWgpu.WgpuShadowMap")
 class WgpuShadowMap {
   public static function destroyWgpuSceneShadow(state:WgpuRenderState):Void {
     var scene:Dynamic = cast _Runtime.UNDEFINED;

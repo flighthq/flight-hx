@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.ColorTransform;
 import flighthq.types.ColorTransformAdjustment;
 
-@:expose("flighthq.adjustments.ColorTransformAdjustment")
 class ColorTransformAdjustment {
   public static function createColorTransformAdjustment(colorTransform:ColorTransform):flighthq.types.ColorTransformAdjustment {
     var colorMatrix:Dynamic = cast _Runtime.UNDEFINED;

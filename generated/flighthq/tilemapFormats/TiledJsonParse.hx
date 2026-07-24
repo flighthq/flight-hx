@@ -23,7 +23,6 @@ import flighthq.types.Vector2.Vector2Like;
 
 typedef JsonObject__tiledJsonParse = Dynamic;
 
-@:expose("flighthq.tilemapFormats.TiledJsonParse")
 class TiledJsonParse {
   public static function parseTiledTilesetJson(text:String, ?_options:TiledParseOptions):Null<TiledTileset> {
     var root:Dynamic = cast _Runtime.UNDEFINED;

@@ -15,7 +15,6 @@ typedef GridCell__uniformGrid = { var cx:Float; var cy:Float; var ids:Dynamic; }
 
 typedef UniformGrid__uniformGrid = { var cellSize:Float; var cells:Dynamic; var bounds:Dynamic; var minCellX:Float; var minCellY:Float; var maxCellX:Float; var maxCellY:Float; var empty:Bool; var seen:Dynamic; };
 
-@:expose("flighthq.spatial.UniformGrid")
 class UniformGrid {
   public static function createUniformGridSpatialBackend(cellSize:Float):SpatialIndexBackend {
     var grid:UniformGrid__uniformGrid = cast _Runtime.UNDEFINED;

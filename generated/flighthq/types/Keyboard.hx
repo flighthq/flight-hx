@@ -18,7 +18,6 @@ typedef SoftKeyboardBackend = { var getInfo:Dynamic; var subscribe:Dynamic; var 
 
 typedef SoftKeyboard = { var onShow:Signal<Dynamic>; var onHide:Signal<Dynamic>; var onResize:Signal<Dynamic>; var onWillShow:Signal<Dynamic>; var onWillHide:Signal<Dynamic>; var onWillResize:Signal<Dynamic>; var onDidShow:Signal<Dynamic>; var onDidHide:Signal<Dynamic>; var onDidResize:Signal<Dynamic>; };
 
-@:expose("flighthq.types.Keyboard")
 class Keyboard {
   public static final SoftKeyboardResizeNoneKind:Dynamic = 'None';
 

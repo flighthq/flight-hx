@@ -7,7 +7,6 @@ import flighthq.types.Entity;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
-@:expose("flighthq.entity.Guards")
 class Guards {
   public static function areEntityRuntimeGuardsEnabled():Bool {
     return cast Guards._guardsEnabled__guards;

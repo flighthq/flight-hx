@@ -28,7 +28,6 @@ import flighthq.types.WgpuRenderState.WgpuTextureEntry;
 
 typedef WgpuScale9ShapeData__wgpuScale9Shape = { var canvas:Dynamic; var ctx:Dynamic; var lastH:Float; var lastScaleX:Float; var lastScaleY:Float; var lastContentId:Float; var lastW:Float; var entry:Null<WgpuTextureEntry>; };
 
-@:expose("flighthq.displayobjectWgpu.WgpuScale9Shape")
 class WgpuScale9Shape {
   public static function createWgpuScale9ShapeData(_state:RenderState, _source:Renderable):RendererData {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;

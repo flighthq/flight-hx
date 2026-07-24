@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 
-@:expose("flighthq.effectsWgpu.WgpuRenderEffectRegistry")
 class WgpuRenderEffectRegistry {
   public static function getWgpuRenderEffectRunner(state:WgpuRenderState, kind:String):Null<WgpuRenderEffectRunner> {
     return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callProperty(WgpuRenderEffectRegistry._registries__wgpuRenderEffectRegistry, 'get', cast ([state] : Array<Dynamic>)), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);

@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.surface.SurfaceComposite.extractSurfacePixels;
 import flighthq.types.SurfaceRegion;
 
-@:expose("flighthq.surface.SurfaceDraw")
 class SurfaceDraw {
   public static function drawSurface(dest:Dynamic, source:SurfaceRegion, x:Float, y:Float):Void {
     var domImageData:Dynamic = cast _Runtime.UNDEFINED;

@@ -8,7 +8,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.ScanlinesEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasScanlinesEffect")
 class CanvasScanlinesEffect {
   public static function applyScanlinesEffectToCanvas(source:Dynamic, dest:Dynamic, effect:ScanlinesEffect):Void {
     var count:Dynamic = cast _Runtime.UNDEFINED;

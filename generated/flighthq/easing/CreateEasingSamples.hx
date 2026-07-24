@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
-@:expose("flighthq.easing.CreateEasingSamples")
 class CreateEasingSamples {
   public static function createEasingSamples(ease:EasingFunction, count:Float, ?out:flighthq._internal._Float32Array):flighthq._internal._Float32Array {
     var n:Dynamic = cast _Runtime.UNDEFINED;

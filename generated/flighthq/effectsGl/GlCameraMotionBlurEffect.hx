@@ -10,7 +10,6 @@ import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
-@:expose("flighthq.effectsGl.GlCameraMotionBlurEffect")
 class GlCameraMotionBlurEffect {
   public static function applyCameraMotionBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CameraMotionBlurEffect):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;

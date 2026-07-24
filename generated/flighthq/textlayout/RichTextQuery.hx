@@ -10,7 +10,6 @@ import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextLineMetrics;
 import flighthq.types.TextSelectionRectangle;
 
-@:expose("flighthq.textlayout.RichTextQuery")
 class RichTextQuery {
   public static function computeRichTextCharIndexAtPoint(layout:TextLayoutResult, x:Float, y:Float):Float {
     var closestLineIndex:Dynamic = cast _Runtime.UNDEFINED;

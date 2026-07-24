@@ -29,7 +29,6 @@ import flighthq.types.SceneNode;
 import flighthq.types.ScenePickOptions;
 import flighthq.types.Vector3;
 
-@:expose("flighthq.picking.PickScene")
 class PickScene {
   public static function createSceneHit():SceneHit {
     return cast _Runtime.callValue(createEntity, cast ([{ distance: 0.0, node: (cast (cast null : Dynamic) : Mesh), normalX: 0.0, normalY: 0.0, normalZ: 0.0, pointX: 0.0, pointY: 0.0, pointZ: 0.0, triangleIndex: -1.0, u: 0.0, v: 0.0, w: 0.0 }] : Array<Dynamic>));

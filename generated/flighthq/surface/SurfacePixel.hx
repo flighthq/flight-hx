@@ -7,7 +7,6 @@ import flighthq.image.ImageResource.invalidateImageResource;
 import flighthq.types.ImageChannel;
 import flighthq.types.Surface;
 
-@:expose("flighthq.surface.SurfacePixel")
 class SurfacePixel {
   public static final LUMA_R__surfacePixel:Dynamic = 0.2126;
 

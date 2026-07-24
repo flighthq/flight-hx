@@ -16,7 +16,6 @@ import flighthq.types.Node.NodeAny;
 import flighthq.types.Spatial.SpatialAabb;
 import flighthq.types.Spatial.SpatialObjectId;
 
-@:expose("flighthq.interaction.InteractionSpatialIndex")
 class InteractionSpatialIndex {
   public static function findSpatialInteractionTarget<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, precise:Bool = false):Null<Dynamic> {
     var index:Dynamic = cast _Runtime.UNDEFINED;

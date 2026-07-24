@@ -27,7 +27,6 @@ import flighthq.types.TextVerticalAlign;
 import flighthq.types.Types.TextLabelKind;
 import flighthq.types._internal._TextLabelValues.TextLabelKind;
 
-@:expose("flighthq.text.TextLabel")
 class TextLabel {
   public static function buildTextLabelLayoutParams__textLabel(source:flighthq.types.TextLabel, measure:TextMeasureFunction):TextLayoutParams {
     var data:Dynamic = cast _Runtime.UNDEFINED;

@@ -8,7 +8,6 @@ import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.GlRenderState;
 import flighthq.types.Log.LogLevel;
 
-@:expose("flighthq.displayobjectGl.EnableGlColorAdjustmentGuards")
 class EnableGlColorAdjustmentGuards {
   public static function areGlColorAdjustmentGuardsEnabled(state:GlRenderState):Bool {
     return cast !_Runtime.looseEquals(_Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'glColorAdjustmentGuard'), null);

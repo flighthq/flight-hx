@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.DropShadowEffect;
 
-@:expose("flighthq.effects.DropShadowEffect")
 class DropShadowEffect {
   public static function createDropShadowEffect(?options:Dynamic):flighthq.types.DropShadowEffect {
     if (options == null) options = cast ({  } : Dynamic);

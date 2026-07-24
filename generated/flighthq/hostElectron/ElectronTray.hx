@@ -14,7 +14,6 @@ import flighthq.types.Tray.TrayEventType;
 
 typedef TrayRecord__electronTray = { var tray:flighthq.types.ElectronApi.ElectronTray; var title:String; var tooltip:String; var menu:Null<ElectronMenu>; };
 
-@:expose("flighthq.hostElectron.ElectronTray")
 class ElectronTray {
   public static function createElectronTrayBackend(electron:ElectronApi):TrayBackend {
     var trays:Dynamic = cast _Runtime.UNDEFINED;

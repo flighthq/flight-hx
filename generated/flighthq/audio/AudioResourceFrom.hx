@@ -9,7 +9,6 @@ import flighthq.audio.AudioResource.createAudioResource;
 import flighthq.types.AudioResource;
 import flighthq.types.AudioResource.AudioResourceUrl;
 
-@:expose("flighthq.audio.AudioResourceFrom")
 class AudioResourceFrom {
   public static function createAudioResourceFromSamples(channels:Array<flighthq._internal._Float32Array>, sampleRate:Float):AudioResource {
     var numberOfChannels:Dynamic = cast _Runtime.UNDEFINED;

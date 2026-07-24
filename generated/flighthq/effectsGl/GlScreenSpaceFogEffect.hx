@@ -10,7 +10,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.ScreenSpaceFogEffect;
 
-@:expose("flighthq.effectsGl.GlScreenSpaceFogEffect")
 class GlScreenSpaceFogEffect {
   public static function applyScreenSpaceFogEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, depthTexture:Null<Dynamic>, effect:ScreenSpaceFogEffect):Void {
     var packed:Dynamic = cast _Runtime.UNDEFINED;

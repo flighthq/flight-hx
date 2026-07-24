@@ -15,7 +15,6 @@ import flighthq.types.AudioResource.AudioChannel;
 
 typedef AudioMixerRuntime__audioMixer = { var activeChannels:Dynamic; var buses:Dynamic; var busGainNodes:Dynamic; var busOutputNodes:Dynamic; var channelToBus:Dynamic; var context:Dynamic; var masterGainNode:Dynamic; };
 
-@:expose("flighthq.media.AudioMixer")
 class AudioMixer {
   public static function addAudioBusToMixer(mixer:flighthq.types.AudioBus.AudioMixer, bus:AudioBus):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

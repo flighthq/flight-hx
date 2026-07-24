@@ -21,7 +21,6 @@ import flighthq.types._internal._ResourceResolutionStateValues.ResourceResolutio
 
 typedef SceneResourceRevealOwner__revealSceneResourcesOnResolve = { var node:SceneNode; var pending:Dynamic; };
 
-@:expose("flighthq.sceneResources.RevealSceneResourcesOnResolve")
 class RevealSceneResourcesOnResolve {
   public static function revealSceneResourcesOnResolve(resolver:SceneResourceResolver, scene:SceneNode, tweenManager:TweenManager, ?options:SceneResourceRevealOptions):Dynamic {
     var fadeSeconds:Dynamic = cast _Runtime.UNDEFINED;

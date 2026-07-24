@@ -24,7 +24,6 @@ import flighthq.types._internal._ImageResourceReferenceValues.ImageResourceFailu
 import flighthq.types._internal._ImageResourceReferenceValues.ImageResourceReferenceKindValue;
 import flighthq.types._internal._ResourceResolutionStateValues.ResourceResolutionStateValue;
 
-@:expose("flighthq.sceneResources.ResolveSceneResources")
 class ResolveSceneResources {
   public static function resolveOneSceneResourceTexture(resolver:SceneResourceResolver, ref:ImageResourceReference, signal:Dynamic):flighthq._internal._Promise<Null<ImageResource>> {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(ref, 'kind'), ImageResourceReferenceKindValue.Embedded))) {

@@ -11,7 +11,6 @@ import flighthq.types.BoundingSphere.BoundingSphereLike;
 import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.Vector3.Vector3Like;
 
-@:expose("flighthq.geometry.BoundingSphere")
 class BoundingSphere {
   public static function cloneBoundingSphere(source:BoundingSphereLike):flighthq.types.BoundingSphere {
     return cast _Runtime.callValue(createBoundingSphere, cast ([_Runtime.field(_Runtime.field(source, 'center'), 'x'), _Runtime.field(_Runtime.field(source, 'center'), 'y'), _Runtime.field(_Runtime.field(source, 'center'), 'z'), _Runtime.field(source, 'radius')] : Array<Dynamic>));

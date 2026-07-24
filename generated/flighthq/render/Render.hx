@@ -49,7 +49,6 @@ import flighthq.types.SceneLights.SceneLightsLike;
 import flighthq.types.SceneNode;
 import flighthq.types.SceneRenderList;
 
-@:expose("flighthq.render.Render")
 class Render {
   public static function applyRenderProxyAdapter(state:RenderState, source:Renderable, data:Dynamic):Void {
     _Runtime.callValue(Facade_Render_flighthq_render_RenderProxyAdapter.applyRenderProxyAdapter, cast ([state, source, data] : Array<Dynamic>));

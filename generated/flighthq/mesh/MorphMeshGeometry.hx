@@ -8,7 +8,6 @@ import flighthq.types.MeshGeometry;
 import flighthq.types.MeshMorphBindPose;
 import flighthq.types.MorphTarget.MeshMorph;
 
-@:expose("flighthq.mesh.MorphMeshGeometry")
 class MorphMeshGeometry {
   public static function blendMeshGeometryMorph(geometry:MeshGeometry, morph:MeshMorph, bindPose:MeshMorphBindPose):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;

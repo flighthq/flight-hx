@@ -16,7 +16,6 @@ import flighthq.types.SceneResources.SceneResourceResolverOptions;
 import flighthq.types.SceneResources.SceneResourceResolverRuntimeKey;
 import flighthq.types.SceneResources.SceneResourceResolverWithRuntime;
 
-@:expose("flighthq.sceneResources.SceneResourceResolver")
 class SceneResourceResolver {
   public static function createBuiltInSceneResourceResolver(?options:SceneResourceResolverOptions):SceneResourceResolver {
     var resolver:Dynamic = cast _Runtime.UNDEFINED;

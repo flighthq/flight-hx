@@ -7,7 +7,6 @@ import flighthq.renderGl.GlFullscreenPass.compileGlFullscreenProgram;
 import flighthq.types.GlFullscreenProgram;
 import flighthq.types.GlRenderState;
 
-@:expose("flighthq.effectsGl.GlEffectProgramCache")
 class GlEffectProgramCache {
   public static function getGlEffectProgram(state:GlRenderState, key:String, fragmentSource:String):GlFullscreenProgram {
     var cache:Dynamic = cast _Runtime.UNDEFINED;

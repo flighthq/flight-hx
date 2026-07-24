@@ -11,7 +11,6 @@ import flighthq.types.DomRenderState;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderView;
 
-@:expose("flighthq.displayobjectDom.DomRenderView")
 class DomRenderView {
   public static function drawDomRenderView(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;

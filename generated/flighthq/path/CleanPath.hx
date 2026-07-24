@@ -8,7 +8,6 @@ import flighthq.types.Path;
 import flighthq.types.Path.PathCommand;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
-@:expose("flighthq.path.CleanPath")
 class CleanPath {
   public static function cleanPath(source:Path, tolerance:Float, out:Path, flattenTolerance:Dynamic = 0.25):Void {
     var contours:Dynamic = cast _Runtime.UNDEFINED;

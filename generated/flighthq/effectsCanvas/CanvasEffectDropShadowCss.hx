@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.DropShadowEffect;
 import flighthq.types.OuterGlowEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasEffectDropShadowCss")
 class CanvasEffectDropShadowCss {
   public static function computeDropShadowEffectCss(effect:DropShadowEffect):Null<String> {
     var blurX:Dynamic = cast _Runtime.UNDEFINED;

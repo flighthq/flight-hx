@@ -14,7 +14,6 @@ import flighthq.types.ScenePickOptions;
 import flighthq.types.Vector2.Vector2Like;
 import flighthq.types.Vector3.Vector3Like;
 
-@:expose("flighthq.picking.Picking")
 class Picking {
   public static function createSceneHit():SceneHit {
     return cast _Runtime.callValue(Facade_Picking_flighthq_picking_PickScene.createSceneHit, cast ([] : Array<Dynamic>));

@@ -4,7 +4,6 @@ package flighthq.math;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.math.Rounding")
 class Rounding {
   public static function ceilTo(value:Float, step:Float):Float {
     if (_Runtime.truthy(_Runtime.compare(step, 0.0, '<='))) { return cast value; }

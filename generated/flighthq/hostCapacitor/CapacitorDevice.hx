@@ -15,7 +15,6 @@ import flighthq.types.Types.DeviceFormFactorUnknown;
 import flighthq.types._internal._DeviceFormFactorValues.DeviceFormFactorPhone;
 import flighthq.types._internal._DeviceFormFactorValues.DeviceFormFactorUnknown;
 
-@:expose("flighthq.hostCapacitor.CapacitorDevice")
 class CapacitorDevice {
   public static function createCapacitorDeviceBackend(capacitor:CapacitorApi):DeviceBackend {
     var device:Dynamic = cast _Runtime.UNDEFINED;

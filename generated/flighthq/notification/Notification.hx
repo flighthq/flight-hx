@@ -13,7 +13,6 @@ import flighthq.types.Notification.ScheduledNotification;
 
 typedef ServiceWorkerRegistrationLike__notification = { var showNotification:Dynamic; var getNotifications:Dynamic; };
 
-@:expose("flighthq.notification.Notification")
 class Notification {
   public static var _backend__notification:Null<NotificationBackend> = _Runtime.explicitNull();
 

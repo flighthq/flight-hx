@@ -12,7 +12,6 @@ import flighthq.types.PartialNode;
 import flighthq.types.Types.DisplayObjectKind;
 import flighthq.types._internal._DisplayObjectValues.DisplayObjectKind;
 
-@:expose("flighthq.displayobject.DisplayContainer")
 class DisplayContainer {
   public static function createDisplayContainer(?obj:PartialNode<flighthq.types.DisplayContainer>):flighthq.types.DisplayContainer {
     return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([DisplayObjectKind, obj, _Runtime.field(_Runtime, 'UNDEFINED'), createDisplayContainerRuntime] : Array<Dynamic>)) : flighthq.types.DisplayContainer);

@@ -8,7 +8,6 @@ import flighthq.types.Rectangle;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.Vector2.Vector2Like;
 
-@:expose("flighthq.geometry.Rectangle")
 class Rectangle {
   public static function cloneRectangle(source:RectangleLike):flighthq.types.Rectangle {
     return cast _Runtime.callValue(createRectangle, cast ([_Runtime.field(source, 'x'), _Runtime.field(source, 'y'), _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));

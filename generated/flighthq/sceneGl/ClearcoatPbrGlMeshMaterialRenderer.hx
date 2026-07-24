@@ -24,7 +24,6 @@ import flighthq.types.SceneRenderProxy;
 import flighthq.types.Types.ClearcoatPbrMaterialKind;
 import flighthq.types._internal._ClearcoatPbrMaterialValues.ClearcoatPbrMaterialKind;
 
-@:expose("flighthq.sceneGl.ClearcoatPbrGlMeshMaterialRenderer")
 class ClearcoatPbrGlMeshMaterialRenderer {
   public static final clearcoatPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;

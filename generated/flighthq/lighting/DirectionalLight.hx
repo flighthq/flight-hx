@@ -12,7 +12,6 @@ import flighthq.types.DirectionalLightOptions;
 import flighthq.types.Types.DirectionalLightKind;
 import flighthq.types._internal._DirectionalLightValues.DirectionalLightKind;
 
-@:expose("flighthq.lighting.DirectionalLight")
 class DirectionalLight {
   public static function cloneDirectionalLight(source:flighthq.types.DirectionalLight):flighthq.types.DirectionalLight {
     return cast _Runtime.callValue(createEntity, cast ([{ castsShadow: _Runtime.field(source, 'castsShadow'), color: _Runtime.field(source, 'color'), direction: _Runtime.callValue(cloneVector3, cast ([_Runtime.field(source, 'direction')] : Array<Dynamic>)), intensity: _Runtime.field(source, 'intensity'), kind: DirectionalLightKind, normalBias: _Runtime.field(source, 'normalBias'), pcfRadius: _Runtime.field(source, 'pcfRadius'), shadowBias: _Runtime.field(source, 'shadowBias') }] : Array<Dynamic>));

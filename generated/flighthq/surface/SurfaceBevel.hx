@@ -8,7 +8,6 @@ import flighthq.surface.SurfaceBlur.blurSurfacePixelsVertical;
 import flighthq.types.SurfaceBevelOptions;
 import flighthq.types.SurfaceRegion;
 
-@:expose("flighthq.surface.SurfaceBevel")
 class SurfaceBevel {
   public static function bevelSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceBevelOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);

@@ -30,7 +30,6 @@ import flighthq.types.WgpuRenderEffectPipeline;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
-@:expose("flighthq.effectsWgpu.WgpuRenderEffectPipeline")
 class WgpuRenderEffectPipeline {
   public static function beginWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:flighthq.types.WgpuRenderEffectPipeline):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;

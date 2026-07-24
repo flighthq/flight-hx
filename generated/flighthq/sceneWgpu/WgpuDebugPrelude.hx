@@ -15,7 +15,6 @@ import flighthq.types.WgpuDebugPipeline.WgpuDebugDefineKey;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuSceneRuntime.WgpuMaterialBinding;
 
-@:expose("flighthq.sceneWgpu.WgpuDebugPrelude")
 class WgpuDebugPrelude {
   public static function bindWgpuDebugSurface(state:WgpuRenderState, pipeline:WgpuDebugPipeline, materialKey:Dynamic, near:Float, far:Float, normalScale:Float):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;

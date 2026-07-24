@@ -42,7 +42,6 @@ import flighthq.types.ToonModifierOptions;
 import flighthq.types.VertexDisplaceModifier;
 import flighthq.types.VertexDisplaceModifierOptions;
 
-@:expose("flighthq.shading.Shading")
 class Shading {
   public static final animatedNormalModifierDefinition:ModifierDefinition = Facade_Shading_flighthq_shading_RegisterBuiltInModifiers.animatedNormalModifierDefinition;
 

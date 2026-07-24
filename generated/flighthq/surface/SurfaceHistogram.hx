@@ -8,7 +8,6 @@ import flighthq.surface.SurfacePaletteMap.applySurfacePaletteMap;
 import flighthq.types.SurfaceHistogram;
 import flighthq.types.SurfaceRegion;
 
-@:expose("flighthq.surface.SurfaceHistogram")
 class SurfaceHistogram {
   public static function equalizeSurfaceHistogram(dest:SurfaceRegion, source:SurfaceRegion):Void {
     var histogram:Dynamic = cast _Runtime.UNDEFINED;

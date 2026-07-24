@@ -10,7 +10,6 @@ import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
-@:expose("flighthq.effectsGl.GlChromaticAberrationEffect")
 class GlChromaticAberrationEffect {
   public static function applyChromaticAberrationEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ChromaticAberrationEffect):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;

@@ -10,7 +10,6 @@ import flighthq.types.GlRenderState.GlScissorRect;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Rectangle.RectangleLike;
 
-@:expose("flighthq.displayobjectGl.GlClipRectangle")
 class GlClipRectangle {
   public static function popGlClipRectangle(state:GlRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

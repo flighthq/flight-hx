@@ -7,7 +7,6 @@ import flighthq.types.TiledGid;
 import flighthq.types.TiledMap;
 import flighthq.types.TiledTileset.TiledTilesetRef;
 
-@:expose("flighthq.tilemapFormats.TiledGid")
 class TiledGid {
   public static function decodeTiledGid(gid:Float):flighthq.types.TiledGid {
     var g:Dynamic = cast _Runtime.UNDEFINED;

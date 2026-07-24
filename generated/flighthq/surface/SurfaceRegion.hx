@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Surface;
 import flighthq.types.SurfaceRegion;
 
-@:expose("flighthq.surface.SurfaceRegion")
 class SurfaceRegion {
   public static function createSurfaceRegion(surface:Surface, x:Float = 0.0, y:Float = 0.0, ?width:Float, ?height:Float):flighthq.types.SurfaceRegion {
     if (width == null) width = cast (_Runtime.field(surface, 'width') : Dynamic);

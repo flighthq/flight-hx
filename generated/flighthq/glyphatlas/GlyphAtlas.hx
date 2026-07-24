@@ -9,7 +9,6 @@ import flighthq.types.GlyphSource.GlyphAtlasOptions;
 import flighthq.types.GlyphSource.GlyphMetrics;
 import flighthq.types.Surface;
 
-@:expose("flighthq.glyphatlas.GlyphAtlas")
 class GlyphAtlas {
   public static function createGlyphAtlas(options:GlyphAtlasOptions):flighthq.types.GlyphSource.GlyphAtlas {
     var padding:Dynamic = cast _Runtime.UNDEFINED;

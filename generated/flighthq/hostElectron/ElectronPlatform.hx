@@ -7,7 +7,6 @@ import flighthq.types.ElectronApi;
 import flighthq.types.Platform.PlatformBackend;
 import flighthq.types.Platform.PlatformName;
 
-@:expose("flighthq.hostElectron.ElectronPlatform")
 class ElectronPlatform {
   public static function createElectronPlatformBackend(electron:ElectronApi):PlatformBackend {
     return cast { getInfo: function(out:Dynamic) {

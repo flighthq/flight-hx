@@ -13,7 +13,6 @@ import flighthq.types.DisplayObjectRenderer;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.Shape;
 
-@:expose("flighthq.displayobjectCanvas.CanvasShape")
 class CanvasShape {
   public static function drawCanvasShape(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;

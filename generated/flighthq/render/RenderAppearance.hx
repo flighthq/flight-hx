@@ -11,7 +11,6 @@ import flighthq.types.Node;
 import flighthq.types.RenderProxy;
 import flighthq.types.RenderState;
 
-@:expose("flighthq.render.RenderAppearance")
 class RenderAppearance {
   public static function updateRenderProxyAppearance(state:RenderState, data:RenderProxy, ?parentData:RenderProxy):Bool {
     var appearanceId:Dynamic = cast _Runtime.UNDEFINED;

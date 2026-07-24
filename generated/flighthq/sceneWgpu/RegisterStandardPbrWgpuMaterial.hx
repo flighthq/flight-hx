@@ -9,7 +9,6 @@ import flighthq.types.Types.StandardPbrMaterialKind;
 import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKind;
 
-@:expose("flighthq.sceneWgpu.RegisterStandardPbrWgpuMaterial")
 class RegisterStandardPbrWgpuMaterial {
   public static function registerStandardPbrWgpuMaterial(state:WgpuRenderState):Void {
     _Runtime.callValue(registerWgpuMeshMaterialRenderer, cast ([state, StandardPbrMaterialKind, standardPbrWgpuMeshMaterialRenderer] : Array<Dynamic>));

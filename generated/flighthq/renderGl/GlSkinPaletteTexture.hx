@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.GlSkinPaletteTexture;
 
-@:expose("flighthq.renderGl.GlSkinPaletteTexture")
 class GlSkinPaletteTexture {
   public static function createGlSkinPaletteTexture(gl:Dynamic):flighthq.types.GlSkinPaletteTexture {
     return cast { jointCapacity: 0.0, texture: _Runtime.callProperty(gl, 'createTexture', cast ([] : Array<Dynamic>)) };

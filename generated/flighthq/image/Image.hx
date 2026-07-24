@@ -8,7 +8,6 @@ import flighthq.image.ImageResourceFrom as Facade_Image_flighthq_image_ImageReso
 import flighthq.types.ImageResource;
 import flighthq.types.ImageResourceCompressed;
 
-@:expose("flighthq.image.Image")
 class Image {
   public static function cloneImageResource(resource:ImageResource):ImageResource {
     return cast _Runtime.callValue(Facade_Image_flighthq_image_ImageResource.cloneImageResource, cast ([resource] : Array<Dynamic>));

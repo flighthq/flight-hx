@@ -38,7 +38,6 @@ import flighthq.types.UnitySchema.UnityParseOptions;
 import flighthq.types.UnitySchema.UnityParsed;
 import flighthq.types.UnitySchema.UnitySerializeOptions;
 
-@:expose("flighthq.particlesFormats.ParticlesFormats")
 class ParticlesFormats {
   public static function detectParticleFormat(text:String):Null<ParticleFormatKind> {
     return cast _Runtime.callValue(Facade_ParticlesFormats_flighthq_particlesFormats_Detect.detectParticleFormat, cast ([text] : Array<Dynamic>));

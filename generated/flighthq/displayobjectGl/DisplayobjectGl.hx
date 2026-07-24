@@ -63,7 +63,6 @@ import flighthq.types.SpriteRenderer;
 import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.Velocity.VelocityField;
 
-@:expose("flighthq.displayobjectGl.DisplayobjectGl")
 class DisplayobjectGl {
   public static function areGlColorAdjustmentGuardsEnabled(state:GlRenderState):Bool {
     return cast _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_EnableGlColorAdjustmentGuards.areGlColorAdjustmentGuardsEnabled, cast ([state] : Array<Dynamic>));

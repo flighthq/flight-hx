@@ -14,7 +14,6 @@ import flighthq.types.ApplicationWindow.WindowOptions;
 import flighthq.types.Matrix;
 import flighthq.types.RenderState;
 
-@:expose("flighthq.application.Window")
 class Window {
   public static final kClose__window:Dynamic = _Runtime.symbol();
 

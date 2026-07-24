@@ -12,7 +12,6 @@ import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.Transform3D;
 import flighthq.types.Transform3D.Transform3DLike;
 
-@:expose("flighthq.geometry.Transform3d")
 class Transform3d {
   public static function composeMatrix4FromTransform3D(out:Matrix4Like, source:Transform3DLike):Void {
     _Runtime.callValue(composeMatrix4, cast ([out, _Runtime.field(source, 'position'), _Runtime.field(source, 'rotation'), _Runtime.field(source, 'scale')] : Array<Dynamic>));

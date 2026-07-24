@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.Scale9Mapper;
 
-@:expose("flighthq.displayobjectCanvas.CanvasScale9Mapper")
 class CanvasScale9Mapper {
   public static function buildScale9Mapper(commands:Array<Dynamic>, scale9Grid:RectangleLike, scaleX:Float, scaleY:Float):Null<Scale9Mapper> {
     var bounds:Dynamic = cast _Runtime.UNDEFINED;

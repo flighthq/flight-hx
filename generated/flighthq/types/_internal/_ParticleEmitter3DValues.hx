@@ -8,7 +8,6 @@ import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
 import flighthq.types.SceneNode;
 import flighthq.types.SceneNode.SceneNodeRuntime;
 
-@:expose("flighthq.types._internal._ParticleEmitter3DValues")
 class _ParticleEmitter3DValues {
   public static final ParticleEmitter3DKind:Dynamic = 'ParticleEmitter3D';
 }

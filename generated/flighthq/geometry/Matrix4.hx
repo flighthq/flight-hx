@@ -15,7 +15,6 @@ import flighthq.types.Quaternion.QuaternionLike;
 import flighthq.types.Vector3.Vector3Like;
 import flighthq.types.Vector4.Vector4Like;
 
-@:expose("flighthq.geometry.Matrix4")
 class Matrix4 {
   public static function appendMatrix4(out:Matrix4Like, source:Matrix4Like, other:Matrix4Like):Void {
     _Runtime.callValue(multiplyMatrix4, cast ([out, source, other] : Array<Dynamic>));

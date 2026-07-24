@@ -9,7 +9,6 @@ import flighthq.types.SurfaceEdgeMode;
 import flighthq.types.SurfaceRegion;
 import flighthq.types.SurfaceResizeMode;
 
-@:expose("flighthq.surface.SurfaceRotate")
 class SurfaceRotate {
   public static function rotateSurface(dest:SurfaceRegion, source:SurfaceRegion, angle:Float, ?pivotX:Float, ?pivotY:Float, edgeMode:SurfaceEdgeMode = 'clamp', sampleMode:SurfaceResizeMode = 'bilinear'):Void {
     if (pivotX == null) pivotX = cast (((_Runtime.field(source, 'width') - 1.0) / 2.0) : Dynamic);

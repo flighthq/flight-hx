@@ -26,7 +26,6 @@ import flighthq.types.SubsurfacePbrMaterial;
 import flighthq.types.Types.SubsurfacePbrMaterialKind;
 import flighthq.types._internal._SubsurfacePbrMaterialValues.SubsurfacePbrMaterialKind;
 
-@:expose("flighthq.sceneGl.SubsurfacePbrGlMeshMaterialRenderer")
 class SubsurfacePbrGlMeshMaterialRenderer {
   public static final subsurfacePbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;

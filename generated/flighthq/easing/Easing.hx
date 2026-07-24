@@ -27,7 +27,6 @@ import flighthq.types.EasingSegment;
 import flighthq.types.ScalarRemap;
 import flighthq.types.StepPosition;
 
-@:expose("flighthq.easing.Easing")
 class Easing {
   public static function createEasingSamples(ease:EasingFunction, count:Float, ?out:flighthq._internal._Float32Array):flighthq._internal._Float32Array {
     return cast _Runtime.callValue(Facade_Easing_flighthq_easing_CreateEasingSamples.createEasingSamples, cast ([ease, count, out] : Array<Dynamic>));

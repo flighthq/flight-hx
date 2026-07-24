@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.RenderState;
 
-@:expose("flighthq.render.RenderColor")
 class RenderColor {
   public static function setRenderStateBackgroundColor(state:RenderState, color:Float):Void {
     var _state:Dynamic = cast _Runtime.UNDEFINED;

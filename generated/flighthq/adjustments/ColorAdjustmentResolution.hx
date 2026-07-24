@@ -8,7 +8,6 @@ import flighthq.adjustments.ColorMatrixMath.fuseColorMatrices;
 import flighthq.types.Adjustment;
 import flighthq.types.ColorTransform;
 
-@:expose("flighthq.adjustments.ColorAdjustmentResolution")
 class ColorAdjustmentResolution {
   public static final COLOR_ADJUSTMENT_NONE:Dynamic = 0.0;
 

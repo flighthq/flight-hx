@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.geometry.Quaternion.createQuaternion;
 import flighthq.types.Quaternion;
 
-@:expose("flighthq.geometry.QuaternionPool")
 class QuaternionPool {
   public static function acquireIdentityQuaternion():Quaternion {
     var q:Dynamic = cast _Runtime.UNDEFINED;

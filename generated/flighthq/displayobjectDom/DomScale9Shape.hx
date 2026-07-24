@@ -22,7 +22,6 @@ import flighthq.types.Scale9Shape;
 
 typedef DomScale9ShapeData__domScale9Shape = Dynamic;
 
-@:expose("flighthq.displayobjectDom.DomScale9Shape")
 class DomScale9Shape {
   public static final _remappedCommands__domScale9Shape:Array<Dynamic> = cast ([] : Array<Dynamic>);
 

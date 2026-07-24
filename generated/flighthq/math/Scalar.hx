@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.math.NextPowerOfTwo.nextPowerOfTwo;
 import flighthq.math.NextPowerOfTwo.previousPowerOfTwo;
 
-@:expose("flighthq.math.Scalar")
 class Scalar {
   public static function ceilPowerOfTwo(n:Float):Float {
     return cast _Runtime.callValue(nextPowerOfTwo, cast ([n] : Array<Dynamic>));

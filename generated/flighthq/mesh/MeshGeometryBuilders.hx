@@ -10,7 +10,6 @@ import flighthq.mesh.MeshGeometryCompute.computeMeshGeometryTangents;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
 
-@:expose("flighthq.mesh.MeshGeometryBuilders")
 class MeshGeometryBuilders {
   public static function createBoxMeshGeometry(width:Float = 1.0, height:Float = 1.0, depth:Float = 1.0):MeshGeometry {
     var hx:Dynamic = cast _Runtime.UNDEFINED;

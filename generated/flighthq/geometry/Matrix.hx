@@ -12,7 +12,6 @@ import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.Vector2.Vector2Like;
 import flighthq.types.Vector3.Vector3Like;
 
-@:expose("flighthq.geometry.Matrix")
 class Matrix {
   public static function cloneMatrix(source:MatrixLike):flighthq.types.Matrix {
     var m:Dynamic = cast _Runtime.UNDEFINED;

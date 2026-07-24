@@ -4,7 +4,6 @@ package flighthq.renderGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.renderGl.GlProgram")
 class GlProgram {
   public static function compileGlShader(gl:Dynamic, type:Float, source:String, label:Dynamic = 'GL'):Dynamic {
     var shader:Dynamic = cast _Runtime.UNDEFINED;

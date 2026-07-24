@@ -4,7 +4,6 @@ package flighthq.signals._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.signals._internal._Internal")
 class _Internal {
   public static final nullSignalEmit:Dynamic = function() {
   

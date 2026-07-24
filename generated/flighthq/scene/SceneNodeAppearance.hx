@@ -8,7 +8,6 @@ import flighthq.node.Revision.invalidateNodeAppearance;
 import flighthq.scene.SceneNode.getSceneNodeRuntime;
 import flighthq.types.SceneNode;
 
-@:expose("flighthq.scene.SceneNodeAppearance")
 class SceneNodeAppearance {
   public static function ensureSceneNodeWorldAlpha(source:SceneNode):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

@@ -10,7 +10,6 @@ import flighthq.types.Types.EnvReflectModifierKind;
 import flighthq.types._internal._EnvReflectModifierValues.EnvReflectModifierKind;
 import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 
-@:expose("flighthq.shading.CreateEnvReflectModifier")
 class CreateEnvReflectModifier {
   public static function createEnvReflectModifier(?options:EnvReflectModifierOptions):EnvReflectModifier {
     return cast { kind: EnvReflectModifierKind, slot: ModifierSlotValue.Effect, tint: _Runtime.coalesce(_Runtime.optionalField(options, 'tint'), function():Dynamic return cast 4294967295.0), intensity: _Runtime.coalesce(_Runtime.optionalField(options, 'intensity'), function():Dynamic return cast 1.0), fresnelBias: _Runtime.coalesce(_Runtime.optionalField(options, 'fresnelBias'), function():Dynamic return cast 0.04), roughness: _Runtime.coalesce(_Runtime.optionalField(options, 'roughness'), function():Dynamic return cast 0.0) };

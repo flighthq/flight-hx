@@ -91,7 +91,6 @@ import flighthq.types.ToneMapEffect;
 import flighthq.types.VignetteEffect;
 import flighthq.types.WhiteBalanceEffect;
 
-@:expose("flighthq.effectsCanvas.EffectsCanvas")
 class EffectsCanvas {
   public static function acquireCanvasRenderTarget(pool:Dynamic, width:Float, height:Float):Dynamic {
     return cast _Runtime.callValue(Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasRenderEffectPipeline.acquireCanvasRenderTarget, cast ([pool, width, height] : Array<Dynamic>));

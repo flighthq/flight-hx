@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.pathBoolean.MartinezKernel.createMartinezPathBooleanBackend;
 import flighthq.types.PathBooleanBackend;
 
-@:expose("flighthq.pathBoolean.PathBooleanBackend")
 class PathBooleanBackend {
   public static function createDefaultPathBooleanBackend():flighthq.types.PathBooleanBackend {
     return cast _Runtime.callValue(createMartinezPathBooleanBackend, cast ([] : Array<Dynamic>));

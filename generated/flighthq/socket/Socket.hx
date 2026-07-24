@@ -16,7 +16,6 @@ import flighthq.types.Socket.SocketReadyState;
 import flighthq.types.Socket.SocketRuntime;
 import flighthq.types.Socket.SocketSignals;
 
-@:expose("flighthq.socket.Socket")
 class Socket {
   public static var _backend__socket:Null<SocketBackend> = _Runtime.explicitNull();
 

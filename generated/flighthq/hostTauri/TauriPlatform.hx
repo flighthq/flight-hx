@@ -7,7 +7,6 @@ import flighthq.types.Platform.PlatformBackend;
 import flighthq.types.Platform.PlatformName;
 import flighthq.types.TauriApi;
 
-@:expose("flighthq.hostTauri.TauriPlatform")
 class TauriPlatform {
   public static function createTauriPlatformBackend(tauri:TauriApi):PlatformBackend {
     var os:Dynamic = cast _Runtime.UNDEFINED;

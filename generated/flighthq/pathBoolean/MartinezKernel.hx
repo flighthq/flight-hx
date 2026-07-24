@@ -14,7 +14,6 @@ typedef ArrangementSegment__martinezKernel = { var ax:Float; var ay:Float; var b
 
 typedef UniqueSegment__martinezKernel = { var ax:Float; var ay:Float; var bx:Float; var by:Float; var subjectDelta:Float; var clipDelta:Float; };
 
-@:expose("flighthq.pathBoolean.DirectedGraph__martinezKernel")
 class DirectedGraph__martinezKernel {
   private final keys:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
   private final xs:Array<Float> = cast ([] : Array<Dynamic>);
@@ -113,7 +112,6 @@ class DirectedGraph__martinezKernel {
   }
 }
 
-@:expose("flighthq.pathBoolean.EventHeap__martinezKernel")
 class EventHeap__martinezKernel {
   private final data:Array<Dynamic> = cast ([] : Array<Dynamic>);
   public function new():Void {
@@ -165,7 +163,6 @@ class EventHeap__martinezKernel {
   }
 }
 
-@:expose("flighthq.pathBoolean.MartinezKernel")
 class MartinezKernel {
   public static function createMartinezPathBooleanBackend():PathBooleanBackend {
     return cast { computePathBoolean: function(subject:Array<PathBooleanContour>, clip:Array<PathBooleanContour>, operation:PathBooleanOperation, fillRule:PathBooleanFillRule) {

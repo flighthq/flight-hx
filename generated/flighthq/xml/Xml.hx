@@ -7,7 +7,6 @@ import flighthq.types.XmlElement;
 import flighthq.xml.XmlParse as Facade_Xml_flighthq_xml_XmlParse;
 import flighthq.xml.XmlQuery as Facade_Xml_flighthq_xml_XmlQuery;
 
-@:expose("flighthq.xml.Xml")
 class Xml {
   public static function getXmlElementAttribute(element:XmlElement, name:String):Null<String> {
     return cast _Runtime.callValue(Facade_Xml_flighthq_xml_XmlQuery.getXmlElementAttribute, cast ([element, name] : Array<Dynamic>));

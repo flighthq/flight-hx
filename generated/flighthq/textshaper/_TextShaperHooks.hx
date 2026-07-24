@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.TextShaper.TextShaperBackend;
 
-@:expose("flighthq.textshaper._TextShaperHooks")
 class _TextShaperHooks {
   public static var _textShaperBackendHook:Null<Dynamic> = _Runtime.explicitNull();
 

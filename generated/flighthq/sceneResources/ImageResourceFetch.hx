@@ -7,7 +7,6 @@ import flighthq.image.ImageResourceFrom.loadImageResourceFromUrl;
 import flighthq.types.ImageResource;
 import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
 
-@:expose("flighthq.sceneResources.ImageResourceFetch")
 class ImageResourceFetch {
   public static function fetchWebImageResource(ref:ExternalImageResourceReference, signal:Dynamic):flighthq._internal._Promise<Null<ImageResource>> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<ImageResource>> {

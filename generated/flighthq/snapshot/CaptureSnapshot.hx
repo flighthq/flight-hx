@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Snapshot;
 
-@:expose("flighthq.snapshot.CaptureSnapshot")
 class CaptureSnapshot {
   public static function captureSnapshot<T>(source:Dynamic):Snapshot<Dynamic> {
     var clone:Dynamic = cast _Runtime.UNDEFINED;

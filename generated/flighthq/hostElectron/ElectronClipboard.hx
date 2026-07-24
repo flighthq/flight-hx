@@ -8,7 +8,6 @@ import flighthq.types.Clipboard.ClipboardBookmark;
 import flighthq.types.ElectronApi;
 import flighthq.types.ElectronApi.ElectronClipboardData;
 
-@:expose("flighthq.hostElectron.ElectronClipboard")
 class ElectronClipboard {
   public static function createElectronClipboardBackend(electron:ElectronApi):ClipboardBackend {
     var cb:Dynamic = cast _Runtime.UNDEFINED;

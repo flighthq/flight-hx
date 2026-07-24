@@ -4,7 +4,6 @@ package flighthq.effects;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.effects.BoxBlurMath")
 class BoxBlurMath {
   public static function computeBoxBlurPassRadius(sigma:Float, passes:Float, pass:Float):Float {
     var lowerWidth:Dynamic = cast _Runtime.UNDEFINED;

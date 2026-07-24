@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Tween;
 
-@:expose("flighthq.tween._internal._Internal")
 class _Internal {
   public static function initializeTween<T>(tween:Tween<Dynamic>):Void {
     var target:Dynamic = cast _Runtime.UNDEFINED;

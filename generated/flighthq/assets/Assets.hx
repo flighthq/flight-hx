@@ -11,7 +11,6 @@ import flighthq.types.Assets.AssetLoaderAdapter;
 import flighthq.types.Assets.AssetManifest;
 import flighthq.types.Assets.AssetType;
 
-@:expose("flighthq.assets.Assets")
 class Assets {
   public static function acquireAsset<T>(library:AssetLibrary, id:String):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Assets_flighthq_assets_AssetLibrary.acquireAsset, cast ([library, id] : Array<Dynamic>));

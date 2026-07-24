@@ -9,7 +9,6 @@ import flighthq.types.Collision.CollisionObb;
 import flighthq.types.Collision.CollisionPolygon;
 import flighthq.types.Collision.CollisionSegment;
 
-@:expose("flighthq.collision.SegmentCollision")
 class SegmentCollision {
   public static final EPS__segmentCollision:Dynamic = 1e-9;
 

@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Clipboard.ClipboardBackend;
 import flighthq.types.TauriApi;
 
-@:expose("flighthq.hostTauri.TauriClipboard")
 class TauriClipboard {
   public static function createTauriClipboardBackend(tauri:TauriApi):ClipboardBackend {
     var clipboard:Dynamic = cast _Runtime.UNDEFINED;

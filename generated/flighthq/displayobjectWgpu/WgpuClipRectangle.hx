@@ -10,7 +10,6 @@ import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuScissorRect;
 
-@:expose("flighthq.displayobjectWgpu.WgpuClipRectangle")
 class WgpuClipRectangle {
   public static function popWgpuClipRectangle(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

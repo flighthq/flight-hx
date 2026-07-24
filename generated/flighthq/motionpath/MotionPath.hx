@@ -12,7 +12,6 @@ import flighthq.types.MotionPath.MotionPathLoopMode;
 import flighthq.types.Path;
 import flighthq.types.Vector2.Vector2Like;
 
-@:expose("flighthq.motionpath.MotionPath")
 class MotionPath {
   public static function createMotionPath(path:Path, speed:Dynamic = 0.0, loopMode:MotionPathLoopMode = 'clamp', ?tolerance:Float):flighthq.types.MotionPath {
     return cast { direction: 1.0, distance: 0.0, length: _Runtime.callValue(getPathLength, cast ([path, tolerance] : Array<Dynamic>)), loopMode: loopMode, path: path, speed: speed };

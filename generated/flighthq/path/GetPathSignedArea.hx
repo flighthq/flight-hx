@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.path.FlattenPath.flattenPath;
 import flighthq.types.Path;
 
-@:expose("flighthq.path.GetPathSignedArea")
 class GetPathSignedArea {
   public static function getPathContourOrientation(path:Path, tolerance:Dynamic = 0.25):String {
     var contours:Dynamic = cast _Runtime.UNDEFINED;

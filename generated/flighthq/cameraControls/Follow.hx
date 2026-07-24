@@ -10,7 +10,6 @@ import flighthq.math.InterpolationAdvanced.damp;
 import flighthq.types.Camera2D;
 import flighthq.types.Camera2D.Camera2DFollowOptions;
 
-@:expose("flighthq.cameraControls.Follow")
 class Follow {
   public static function updateCamera2DFollow(camera:Camera2D, targetX:Float, targetY:Float, deltaTime:Float, ?options:Camera2DFollowOptions):Void {
     var camX:Dynamic = cast _Runtime.UNDEFINED;

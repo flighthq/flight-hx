@@ -18,7 +18,6 @@ import flighthq.types.SceneNode;
 import flighthq.types.Types.BillboardKind;
 import flighthq.types._internal._BillboardValues.BillboardKind;
 
-@:expose("flighthq.scene.Billboard")
 class Billboard {
   public static function createBillboard(geometry:MeshGeometry, materials:Array<Null<Material>>, mode:BillboardMode = 'full', ?kind:Kind, ?obj:Dynamic):flighthq.types.Billboard {
     if (kind == null) kind = cast (BillboardKind : Dynamic);

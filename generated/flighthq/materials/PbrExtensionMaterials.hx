@@ -27,7 +27,6 @@ import flighthq.types._internal._SpecularPbrMaterialValues.SpecularPbrMaterialKi
 import flighthq.types._internal._SubsurfacePbrMaterialValues.SubsurfacePbrMaterialKind;
 import flighthq.types._internal._TransmissionVolumePbrMaterialValues.TransmissionVolumePbrMaterialKind;
 
-@:expose("flighthq.materials.PbrExtensionMaterials")
 class PbrExtensionMaterials {
   public static function createAnisotropyPbrMaterial(?opts:Dynamic):AnisotropyPbrMaterial {
     var material:Dynamic = cast _Runtime.UNDEFINED;

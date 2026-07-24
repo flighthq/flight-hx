@@ -10,7 +10,6 @@ import flighthq.types.ShapeCommand.ShapeCommandToken;
 import flighthq.types.ShapeFillRegion;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
-@:expose("flighthq.shape.ShapeFill")
 class ShapeFill {
   public static function getShapeFillRegions(commands:Array<ShapeCommandToken>):Null<Array<ShapeFillRegion>> {
     var regions:Array<ShapeFillRegion> = cast _Runtime.UNDEFINED;

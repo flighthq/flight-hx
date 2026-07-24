@@ -29,7 +29,6 @@ import flighthq.types.Notification.NotificationBackend;
 import flighthq.types.Share.ShareBackend;
 import flighthq.types.StatusBar.StatusBarBackend;
 
-@:expose("flighthq.hostCapacitor.HostCapacitor")
 class HostCapacitor {
   public static function createCapacitorAppBackend(capacitor:CapacitorApi):AppBackend {
     return cast _Runtime.callValue(Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorApp.createCapacitorAppBackend, cast ([capacitor] : Array<Dynamic>));

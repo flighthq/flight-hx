@@ -11,7 +11,6 @@ import flighthq.types.RenderState.RenderStateRuntime;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
-@:expose("flighthq.render.RenderState")
 class RenderState {
   public static function createRenderState(?obj:Dynamic):flighthq.types.RenderState {
     var state:Dynamic = cast _Runtime.UNDEFINED;

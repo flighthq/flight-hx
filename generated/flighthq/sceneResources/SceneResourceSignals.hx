@@ -10,7 +10,6 @@ import flighthq.types.SceneResources.SceneResourceResolverRuntimeKey;
 import flighthq.types.SceneResources.SceneResourceResolverWithRuntime;
 import flighthq.types.SceneResources.SceneResourceSignals;
 
-@:expose("flighthq.sceneResources.SceneResourceSignals")
 class SceneResourceSignals {
   public static function createSceneResourceSignals():SceneResourceSignals {
     return cast _Runtime.callValue(createEntity, cast ([{ onResourceFailed: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onResourceResolved: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));

@@ -13,7 +13,6 @@ import flighthq.types.BitmapFontRecord.BitmapFontKerningRecord;
 import flighthq.types.BitmapFontRecord.BitmapFontPageRecord;
 import flighthq.types.GlyphSource.GlyphEntry;
 
-@:expose("flighthq.bitmapfontFormats.BitmapFontFnt")
 class BitmapFontFnt {
   public static function formatBitmapFontFnt(font:BitmapFont):String {
     var metrics:Dynamic = cast _Runtime.UNDEFINED;

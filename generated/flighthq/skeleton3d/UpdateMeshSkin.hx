@@ -12,7 +12,6 @@ import flighthq.skeleton3d.SkinMeshGeometry.skinMeshGeometry;
 import flighthq.skeleton3d.SkinMeshGeometry.updateMeshSkinBindPoseDeformInput;
 import flighthq.types.Mesh;
 
-@:expose("flighthq.skeleton3d.UpdateMeshSkin")
 class UpdateMeshSkin {
   public static function updateMeshSkin(mesh:Mesh):Void {
     var skin:Dynamic = cast _Runtime.UNDEFINED;

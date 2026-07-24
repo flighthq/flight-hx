@@ -10,7 +10,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.VignetteEffect;
 
-@:expose("flighthq.effectsGl.GlVignetteEffect")
 class GlVignetteEffect {
   public static function applyVignetteEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:VignetteEffect):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;

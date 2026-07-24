@@ -13,7 +13,6 @@ import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterState;
 import flighthq.types.ParticleForce;
 
-@:expose("flighthq.particleemitter.StepParticleEmitter2D")
 class StepParticleEmitter2D {
   public static function stepParticleEmitter2D(emitter:ParticleEmitter2D, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?callbacks:ParticleEmitterCallbacks):Void {
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.looseEquals(forces, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(forces, 'length'), 0.0, '>')))) {

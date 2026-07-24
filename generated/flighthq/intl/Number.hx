@@ -7,7 +7,6 @@ import flighthq.intl.Cache.getCacheKey;
 import flighthq.intl.Cache.getCached;
 import flighthq.types.LocaleInput;
 
-@:expose("flighthq.intl.Number")
 class Number {
   public static function formatCompactNumber(value:Float, locale:LocaleInput, ?options:Dynamic):String {
     return cast _Runtime.callProperty(_Runtime.callValue(Number.getNumberFormat__number, cast ([locale, _Runtime.mergeObjects([{ notation: 'compact' }, options])] : Array<Dynamic>)), 'format', cast ([value] : Array<Dynamic>));

@@ -8,7 +8,6 @@ import flighthq.types.Permission.PermissionBackend;
 import flighthq.types.Permission.PermissionName;
 import flighthq.types.Permission.PermissionState;
 
-@:expose("flighthq.permissions.Permissions")
 class Permissions {
   public static function createWebPermissionBackend():PermissionBackend {
     return cast _Runtime.callValue(Facade_Permissions_flighthq_permissions_Permission.createWebPermissionBackend, cast ([] : Array<Dynamic>));

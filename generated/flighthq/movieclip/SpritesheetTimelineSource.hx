@@ -12,7 +12,6 @@ import flighthq.types.Spritesheet;
 import flighthq.types.SpritesheetAnimation;
 import flighthq.types.TimelineSource;
 
-@:expose("flighthq.movieclip.SpritesheetTimelineSource")
 class SpritesheetTimelineSource {
   public static function createSpritesheetTimelineSource(spritesheet:Spritesheet, animation:SpritesheetAnimation):TimelineSource {
     var bitmaps:Dynamic = cast _Runtime.UNDEFINED;

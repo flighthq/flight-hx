@@ -8,7 +8,6 @@ import flighthq.types.Modifier;
 import flighthq.types.ModifierKind;
 import flighthq.types.ModifierRegistry;
 
-@:expose("flighthq.shading.GetUnregisteredModifierKinds")
 class GetUnregisteredModifierKinds {
   public static function getUnregisteredModifierKinds(registry:ModifierRegistry, stack:Array<Modifier>):Array<ModifierKind> {
     var unregistered:Array<ModifierKind> = cast _Runtime.UNDEFINED;

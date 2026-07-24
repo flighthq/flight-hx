@@ -12,7 +12,6 @@ import flighthq.types.Matrix3.Matrix3Like;
 import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.Vector3.Vector3Like;
 
-@:expose("flighthq.geometry.Matrix3")
 class Matrix3 {
   public static function cloneMatrix3(source:Matrix3Like):flighthq.types.Matrix3 {
     var m:Dynamic = cast _Runtime.UNDEFINED;

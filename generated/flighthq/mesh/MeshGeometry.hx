@@ -14,7 +14,6 @@ import flighthq.types.MeshMorphBindPose;
 import flighthq.types.MeshSkinBindPose;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
-@:expose("flighthq.mesh.MeshGeometry")
 class MeshGeometry {
   public static function cloneMeshGeometry(source:flighthq.types.MeshGeometry):flighthq.types.MeshGeometry {
     var vertices:Dynamic = cast _Runtime.UNDEFINED;

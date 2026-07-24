@@ -34,7 +34,6 @@ typedef BitmapTextToken__updateBitmapText = { var gap:Float; var word:BitmapText
 
 typedef BitmapTextWord__updateBitmapText = { var glyphs:Array<BitmapTextGlyph__updateBitmapText>; var width:Float; };
 
-@:expose("flighthq.bitmaptext.UpdateBitmapText")
 class UpdateBitmapText {
   public static final BITMAP_TEXT_DEFAULT_COLOR__updateBitmapText:Dynamic = 4294967295.0;
 

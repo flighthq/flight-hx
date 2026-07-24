@@ -14,7 +14,6 @@ import flighthq.types.RenderPassPreserve;
 
 typedef SavedGlPass__glRenderPass = { var framebuffer:Null<Dynamic>; var renderTarget:Null<GlRenderTarget>; var renderTargetViewport:Null<{ var width:Float; var height:Float; }>; var renderTransform2D:Null<Matrix>; };
 
-@:expose("flighthq.renderGl.GlRenderPass")
 class GlRenderPass {
   public static function beginGlRenderPass(state:GlRenderState, target:GlRenderTarget, ?preserve:RenderPassPreserve):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

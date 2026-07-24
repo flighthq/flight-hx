@@ -30,7 +30,6 @@ typedef ShapeCommandAppender__shapeJson = Dynamic;
 
 typedef SerializedShapeCommand__shapeJson = { var key:String; var args:Array<Dynamic>; };
 
-@:expose("flighthq.shapeFormats.ShapeJson")
 class ShapeJson {
   public static function formatShapeJson(shape:Shape, ?options:ShapeJsonFormatOptions):String {
     var commands:Dynamic = cast _Runtime.UNDEFINED;

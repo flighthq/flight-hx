@@ -4,7 +4,6 @@ package flighthq.math;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.math.Statistics")
 class Statistics {
   public static function mean(values:Array<Float>):Float {
     var sum:Dynamic = cast _Runtime.UNDEFINED;

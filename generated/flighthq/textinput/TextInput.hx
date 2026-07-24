@@ -9,7 +9,6 @@ import flighthq.types.RichText.RichTextRuntime;
 import flighthq.types.TextInputState;
 import flighthq.types.TextInputState.TextInputOptions;
 
-@:expose("flighthq.textinput.TextInput")
 class TextInput {
   public static function disableTextInput(node:RichText):Void {
     _Runtime.setField((cast _Runtime.callValue(getRichTextRuntime, cast ([node] : Array<Dynamic>)) : RichTextRuntime), 'input', null);

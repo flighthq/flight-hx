@@ -9,7 +9,6 @@ import flighthq.types.LibgdxParticleSchema.LibgdxSerializeOptions;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleSerializeResult;
 
-@:expose("flighthq.particlesFormats.LibgdxSerialize")
 class LibgdxSerialize {
   public static function serializeLibgdxParticle(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:LibgdxSerializeOptions):String {
     var textureSize:Dynamic = cast _Runtime.UNDEFINED;

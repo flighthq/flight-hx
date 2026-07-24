@@ -7,7 +7,6 @@ import flighthq.easing.EaseExponential.easeOutExponential;
 import flighthq.types.TweenManager;
 import flighthq.types.TweenManagerOptions;
 
-@:expose("flighthq.tween.TweenManager")
 class TweenManager {
   public static function createTweenManager(?options:TweenManagerOptions):flighthq.types.TweenManager {
     return cast { __brand: 'TweenManager', defaultEase: _Runtime.coalesce(_Runtime.optionalField(options, 'defaultEase'), function():Dynamic return cast easeOutExponential), tweens: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) };

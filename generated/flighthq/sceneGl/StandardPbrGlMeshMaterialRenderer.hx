@@ -21,7 +21,6 @@ import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.StandardPbrMaterial;
 
-@:expose("flighthq.sceneGl.StandardPbrGlMeshMaterialRenderer")
 class StandardPbrGlMeshMaterialRenderer {
   public static final standardPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;

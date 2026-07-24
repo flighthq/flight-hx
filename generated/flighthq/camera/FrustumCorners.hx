@@ -9,7 +9,6 @@ import flighthq.geometry.Matrix4.inverseMatrix4;
 import flighthq.types.Camera3D;
 import flighthq.types.Vector3.Vector3Like;
 
-@:expose("flighthq.camera.FrustumCorners")
 class FrustumCorners {
   public static function getCamera3DFrustumCorners(out:Array<Vector3Like>, camera:Camera3D, aspect:Float):Bool {
     var m:Dynamic = cast _Runtime.UNDEFINED;

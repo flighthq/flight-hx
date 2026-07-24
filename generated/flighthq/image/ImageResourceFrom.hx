@@ -7,7 +7,6 @@ import flighthq.entity.Entity.createEntity;
 import flighthq.imageCodec.DetectImageMimeType.detectImageMimeType;
 import flighthq.types.ImageResource;
 
-@:expose("flighthq.image.ImageResourceFrom")
 class ImageResourceFrom {
   public static function createCanvasFromImageResource(image:ImageResource):Null<Dynamic> {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;

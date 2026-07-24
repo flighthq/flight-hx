@@ -14,7 +14,6 @@ import flighthq.types.RenderPassPreserve;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
-@:expose("flighthq.renderWgpu.WgpuRenderTarget")
 class WgpuRenderTarget {
   public static function beginWgpuRenderPassEncoder__wgpuRenderTarget(state:WgpuRenderState, colorView:Dynamic, depthStencilView:Dynamic, width:Float, height:Float, loadOp:Dynamic, ?clearColor:Dynamic, depthLoadOp:Dynamic = 'clear', depthClearValue:Dynamic = 1.0):Dynamic {
     if (clearColor == null) clearColor = cast ({ r: 0.0, g: 0.0, b: 0.0, a: 0.0 } : Dynamic);

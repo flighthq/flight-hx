@@ -8,7 +8,6 @@ import flighthq.sceneGl.GlMeshProgram.ensureGlSceneProgram;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlWireframeProgram;
 
-@:expose("flighthq.sceneGl.GlWireframePrelude")
 class GlWireframePrelude {
   public static function compileGlWireframeProgram(gl:Dynamic):GlWireframeProgram {
     var program:Dynamic = cast _Runtime.UNDEFINED;

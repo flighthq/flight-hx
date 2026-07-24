@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.MedianEffect;
 
-@:expose("flighthq.effects.MedianEffect")
 class MedianEffect {
   public static function createMedianEffect(?options:Dynamic):flighthq.types.MedianEffect {
     if (options == null) options = cast ({  } : Dynamic);

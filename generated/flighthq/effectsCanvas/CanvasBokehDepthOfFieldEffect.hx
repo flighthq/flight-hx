@@ -8,7 +8,6 @@ import flighthq.types.BokehDepthOfFieldEffect;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderTarget;
 
-@:expose("flighthq.effectsCanvas.CanvasBokehDepthOfFieldEffect")
 class CanvasBokehDepthOfFieldEffect {
   public static function applyBokehDepthOfFieldEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:BokehDepthOfFieldEffect):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));

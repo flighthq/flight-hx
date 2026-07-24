@@ -36,7 +36,6 @@ import flighthq.types._internal._EmissiveModifierValues.EmissiveModifierFacingVa
 import flighthq.types._internal._FogModifierValues.FogModifierModeValue;
 import flighthq.types._internal._VertexDisplaceModifierValues.VertexDisplaceModifierSourceValue;
 
-@:expose("flighthq.sceneGl.GlShadedBuiltInModifiers")
 class GlShadedBuiltInModifiers {
   public static final animatedNormalGlModifierSnippet:GlModifierSnippet = _Runtime.mergeObjects([animatedNormalModifierDefinition, { bind: function(modifier:Modifier, context:GlModifierBindContext) {
     var animated:Dynamic = cast _Runtime.UNDEFINED;

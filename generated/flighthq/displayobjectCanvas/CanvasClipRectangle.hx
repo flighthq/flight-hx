@@ -9,7 +9,6 @@ import flighthq.types.Matrix;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.ShapeCommand.PathWinding;
 
-@:expose("flighthq.displayobjectCanvas.CanvasClipRectangle")
 class CanvasClipRectangle {
   public static function popCanvasClipRectangle(state:Dynamic):Void {
     _Runtime.callProperty(_Runtime.field(state, 'context'), 'restore', cast ([] : Array<Dynamic>));

@@ -66,7 +66,6 @@ import flighthq.types.Viewport.ViewportLike;
 import flighthq.types.ViewportAlign;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
-@:expose("flighthq.node.Node")
 class Node {
   public static function addNodeChild<Traits>(target:flighthq.types.Node<Traits>, child:flighthq.types.Node<Traits>):NodeOf<Traits> {
     return cast _Runtime.callValue(Facade_Node_flighthq_node_Hierarchy.addNodeChild, cast ([target, child] : Array<Dynamic>));

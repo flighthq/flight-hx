@@ -16,7 +16,6 @@ import flighthq.types.SceneResources.SceneResourceResolverWithRuntime;
 import flighthq.types.Texture;
 import flighthq.types._internal._ResourceResolutionStateValues.ResourceResolutionStateValue;
 
-@:expose("flighthq.sceneResources.ResolveSceneResourcesAndWait")
 class ResolveSceneResourcesAndWait {
   public static function loadSceneResources(scene:SceneNode, resolver:SceneResourceResolver, ?options:LoadSceneResourcesOptions):flighthq._internal._Promise<flighthq._internal._Nothing> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<flighthq._internal._Nothing> {

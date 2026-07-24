@@ -11,7 +11,6 @@ import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
-@:expose("flighthq.effectsGl.GlCustomShaderEffect")
 class GlCustomShaderEffect {
   public static function applyCustomShaderEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CustomShaderEffect):Void {
     var fragmentSource:Dynamic = cast _Runtime.UNDEFINED;

@@ -9,7 +9,6 @@ import flighthq.types.DisplayObject.DisplayObjectRuntime;
 import flighthq.types.MovieClipSignals;
 import flighthq.types.Timeline;
 
-@:expose("flighthq.types._internal._MovieClipValues")
 class _MovieClipValues {
   public static final MovieClipKind:Dynamic = 'MovieClip';
 }

@@ -13,7 +13,6 @@ import flighthq.types.Ipc.IpcTarget;
 import flighthq.types.Ipc.IpcTimeoutError;
 import flighthq.types.IpcSignals;
 
-@:expose("flighthq.ipc.Ipc")
 class Ipc {
   public static var _backend__ipc:Null<IpcBackend> = _Runtime.explicitNull();
 

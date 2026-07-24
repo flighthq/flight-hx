@@ -23,7 +23,6 @@ import flighthq.types.Types.ParticleEmitter2DKind;
 import flighthq.types.Vector2.Vector2Like;
 import flighthq.types._internal._ParticleEmitter2DValues.ParticleEmitter2DKind;
 
-@:expose("flighthq.particleemitter.ParticleEmitter")
 class ParticleEmitter {
   public static final PARTICLE_TRANSFORM_STRIDE__particleEmitter:Dynamic = 4.0;
 

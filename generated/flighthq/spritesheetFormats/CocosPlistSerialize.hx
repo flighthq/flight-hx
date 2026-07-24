@@ -8,7 +8,6 @@ import flighthq.types.CocosPlistSchema.CocosPlistFrame;
 import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
 
-@:expose("flighthq.spritesheetFormats.CocosPlistSerialize")
 class CocosPlistSerialize {
   public static function serializeCocosPlistSpritesheet(data:SpritesheetData, ?existing:Dynamic):String {
     var frames:Dynamic = cast _Runtime.UNDEFINED;

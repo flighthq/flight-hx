@@ -13,7 +13,6 @@ import flighthq.path.Path.appendPathMoveTo;
 import flighthq.path.Path.createPath;
 import flighthq.types.Path;
 
-@:expose("flighthq.pathFormats.SvgPathData")
 class SvgPathData {
   public static function appendSvgPathData(path:Path, d:String):Bool {
     var length:Dynamic = cast _Runtime.UNDEFINED;

@@ -7,7 +7,6 @@ import flighthq.camera.Projection2d.unprojectCamera2DPoint;
 import flighthq.geometry.Vector2.createVector2;
 import flighthq.types.Camera2D;
 
-@:expose("flighthq.camera.Zoom")
 class Zoom {
   public static function zoomCamera2DAtScreenPoint(camera:Camera2D, screenX:Float, screenY:Float, zoom:Float):Void {
     _Runtime.callValue(unprojectCamera2DPoint, cast ([camera, screenX, screenY, Zoom.scratchBefore__zoom] : Array<Dynamic>));

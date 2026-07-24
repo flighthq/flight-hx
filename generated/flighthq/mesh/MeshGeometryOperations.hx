@@ -16,7 +16,6 @@ import flighthq.types.MeshGeometry.VertexAttributeLayout;
 import flighthq.types.MeshGeometryFromAttributesOptions;
 import flighthq.types.MeshTriangleVertexIndices;
 
-@:expose("flighthq.mesh.MeshGeometryOperations")
 class MeshGeometryOperations {
   public static function createMeshGeometryFromAttributes(options:MeshGeometryFromAttributesOptions):MeshGeometry {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;

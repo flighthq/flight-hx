@@ -9,7 +9,6 @@ import flighthq.audio.AudioResourceFrom as Facade_Audio_flighthq_audio_AudioReso
 import flighthq.types.AudioResource;
 import flighthq.types.AudioResource.AudioResourceUrl;
 
-@:expose("flighthq.audio.Audio")
 class Audio {
   public static function canPlayAudioType(mimeType:String):Bool {
     return cast _Runtime.callValue(Facade_Audio_flighthq_audio_AudioFormat.canPlayAudioType, cast ([mimeType] : Array<Dynamic>));

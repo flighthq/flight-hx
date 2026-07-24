@@ -4,7 +4,6 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.types._internal._MouseButtonValues")
 class _MouseButtonValues {
   public static final MouseButtonValue:Dynamic = { LEFT: 0.0, MIDDLE: 1.0, RIGHT: 2.0 };
 }

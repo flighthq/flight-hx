@@ -9,7 +9,6 @@ import flighthq.types.EnvironmentOptions;
 import flighthq.types.Types.EnvironmentKind;
 import flighthq.types._internal._EnvironmentValues.EnvironmentKind;
 
-@:expose("flighthq.lighting.Environment")
 class Environment {
   public static function cloneEnvironment(source:flighthq.types.Environment):flighthq.types.Environment {
     return cast _Runtime.callValue(createEnvironment, cast ([{ environment: _Runtime.field(source, 'environment'), intensity: _Runtime.field(source, 'intensity') }] : Array<Dynamic>));

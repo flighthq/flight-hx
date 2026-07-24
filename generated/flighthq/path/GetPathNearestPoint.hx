@@ -7,7 +7,6 @@ import flighthq.path.FlattenPath.flattenPath;
 import flighthq.types.Path;
 import flighthq.types.Vector2.Vector2Like;
 
-@:expose("flighthq.path.GetPathNearestPoint")
 class GetPathNearestPoint {
   public static function getPathNearestPoint(path:Path, px:Float, py:Float, out:Vector2Like, tolerance:Dynamic = 0.25):Float {
     var contours:Dynamic = cast _Runtime.UNDEFINED;

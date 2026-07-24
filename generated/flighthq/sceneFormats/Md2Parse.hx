@@ -36,7 +36,6 @@ import flighthq.types._internal._SceneAnimationPathValues.SceneAnimationPathWeig
 
 typedef Md2Frame__md2Parse = { var normals:flighthq._internal._Float32Array; var positions:flighthq._internal._Float32Array; };
 
-@:expose("flighthq.sceneFormats.Md2Parse")
 class Md2Parse {
   public static function createSceneFromMd2(bytes:Dynamic, ?warnings:Array<String>):Scene {
     return cast _Runtime.callValue(createSceneFromDocument, cast ([_Runtime.callValue(parseMd2, cast ([bytes, warnings] : Array<Dynamic>))] : Array<Dynamic>));

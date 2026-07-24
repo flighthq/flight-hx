@@ -12,7 +12,6 @@ import flighthq.types.Geolocation.GeolocationRequestOptions;
 
 typedef GlobalGeolocationPosition__geolocation = Dynamic;
 
-@:expose("flighthq.geolocation.Geolocation")
 class Geolocation {
   public static var _backend__geolocation:Null<GeolocationBackend> = _Runtime.explicitNull();
 

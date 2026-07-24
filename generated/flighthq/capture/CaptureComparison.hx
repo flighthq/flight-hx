@@ -7,7 +7,6 @@ import flighthq.surface.SurfaceFingerprint.compareSurfaceFingerprints;
 import flighthq.surface.SurfaceFingerprint.parseSurfaceFingerprint;
 import flighthq.types.CaptureCheckResult;
 
-@:expose("flighthq.capture.CaptureComparison")
 class CaptureComparison {
   public static final CAPTURE_PARITY_TOLERANCE:Dynamic = 15.0;
 

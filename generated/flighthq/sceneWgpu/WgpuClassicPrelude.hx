@@ -18,7 +18,6 @@ import flighthq.types.WgpuClassicPipeline.WgpuClassicDefineKey;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuSceneRuntime.WgpuMaterialBinding;
 
-@:expose("flighthq.sceneWgpu.WgpuClassicPrelude")
 class WgpuClassicPrelude {
   public static function bindWgpuClassicSurface(state:WgpuRenderState, pipeline:WgpuClassicPipeline, materialKey:Dynamic, diffuse:LinearColor, specular:LinearColor, shininess:Float, alphaCutoff:Float, diffuseMap:Null<Texture>, specularMap:Null<Texture>, normalMap:Null<Texture>):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;

@@ -8,7 +8,6 @@ import flighthq.image.ImageResource.invalidateImageResource;
 import flighthq.types.Surface;
 import flighthq.types.SurfaceRegion;
 
-@:expose("flighthq.surface.SurfaceChannel")
 class SurfaceChannel {
   public static function mergeSurfaceChannels(out:SurfaceRegion, r:SurfaceRegion, g:SurfaceRegion, b:SurfaceRegion, a:SurfaceRegion):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;

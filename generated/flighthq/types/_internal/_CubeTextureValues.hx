@@ -9,7 +9,6 @@ import flighthq.types.ImageResource;
 import flighthq.types.Sampler;
 import flighthq.types.Texture.TextureColorSpace;
 
-@:expose("flighthq.types._internal._CubeTextureValues")
 class _CubeTextureValues {
   public static final CubeFacePositiveX:Dynamic = 0.0;
 

@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ScanlinesEffect;
 
-@:expose("flighthq.effects.ScanlinesEffect")
 class ScanlinesEffect {
   public static function createScanlinesEffect(?options:Dynamic):flighthq.types.ScanlinesEffect {
     if (options == null) options = cast ({  } : Dynamic);

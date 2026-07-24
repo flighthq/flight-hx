@@ -12,7 +12,6 @@ import flighthq.types.Rectangle;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderViewport2D;
 
-@:expose("flighthq.render.RenderViewport")
 class RenderViewport {
   public static function computeRenderProxyWorldBounds(out:Dynamic, source:Dynamic):Bool {
     var worldBounds:Dynamic = cast _Runtime.UNDEFINED;

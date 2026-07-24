@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.FontResource;
 
-@:expose("flighthq.displayobjectDom.DomFontSource")
 class DomFontSource {
   public static final _domFontAscentCache__domFontSource:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
 

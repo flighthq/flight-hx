@@ -10,7 +10,6 @@ import flighthq.types.Spatial.SpatialIndexBackend;
 import flighthq.types.Spatial.SpatialObjectId;
 import flighthq.types.Spatial.SpatialPair;
 
-@:expose("flighthq.spatial.SpatialIndex")
 class SpatialIndex {
   public static function clearSpatialIndex(index:flighthq.types.Spatial.SpatialIndex):Void {
     _Runtime.callProperty(_Runtime.field(_Runtime.field(index, 'runtime'), 'backend'), 'clearSpatialIndex', cast ([] : Array<Dynamic>));

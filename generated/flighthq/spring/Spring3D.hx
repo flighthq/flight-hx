@@ -9,7 +9,6 @@ import flighthq.spring.Spring.updateSpring;
 import flighthq.types.Spring.Spring3D;
 import flighthq.types.Spring.SpringConfig;
 
-@:expose("flighthq.spring.Spring3D")
 class Spring3D {
   public static function createSpring3D(valueX:Float = 0.0, valueY:Float = 0.0, valueZ:Float = 0.0, velocityX:Float = 0.0, velocityY:Float = 0.0, velocityZ:Float = 0.0):flighthq.types.Spring.Spring3D {
     return cast { x: _Runtime.callValue(createSpring, cast ([valueX, velocityX] : Array<Dynamic>)), y: _Runtime.callValue(createSpring, cast ([valueY, velocityY] : Array<Dynamic>)), z: _Runtime.callValue(createSpring, cast ([valueZ, velocityZ] : Array<Dynamic>)) };

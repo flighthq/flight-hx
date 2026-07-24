@@ -10,7 +10,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderTargetPool;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.PixelateEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasPixelateEffect")
 class CanvasPixelateEffect {
   public static function applyPixelateEffectToCanvas(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:PixelateEffect):Void {
     var size:Dynamic = cast _Runtime.UNDEFINED;

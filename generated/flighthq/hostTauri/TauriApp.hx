@@ -7,7 +7,6 @@ import flighthq.types.App.AppBackend;
 import flighthq.types.App.AppLoginItem;
 import flighthq.types.TauriApi;
 
-@:expose("flighthq.hostTauri.TauriApp")
 class TauriApp {
   public static function createTauriAppBackend(tauri:TauriApi):AppBackend {
     var app:Dynamic = cast _Runtime.UNDEFINED;

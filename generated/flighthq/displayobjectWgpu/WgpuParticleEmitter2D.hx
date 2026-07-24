@@ -15,7 +15,6 @@ import flighthq.types.WgpuRenderState;
 
 typedef WgpuParticleResources__wgpuParticleEmitter2D = { var pipelines:Dynamic; var pipelineLayout:Dynamic; var module:Dynamic; var instanceBindGroupLayout:Dynamic; };
 
-@:expose("flighthq.displayobjectWgpu.WgpuParticleEmitter2D")
 class WgpuParticleEmitter2D {
   public static final INSTANCE_FLOATS__wgpuParticleEmitter2D:Dynamic = 14.0;
 

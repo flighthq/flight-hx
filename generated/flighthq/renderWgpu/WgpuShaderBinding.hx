@@ -10,7 +10,6 @@ import flighthq.types.RenderProxy2D;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuBitmapShader;
 
-@:expose("flighthq.renderWgpu.WgpuShaderBinding")
 class WgpuShaderBinding {
   public static final _shaderBindings__wgpuShaderBinding:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 

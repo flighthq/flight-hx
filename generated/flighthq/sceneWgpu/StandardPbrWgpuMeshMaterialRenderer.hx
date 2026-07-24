@@ -29,7 +29,6 @@ import flighthq.types.WgpuPbrPipeline.WgpuPbrDefineKey;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuSceneRuntime.WgpuMaterialBinding;
 
-@:expose("flighthq.sceneWgpu.StandardPbrWgpuMeshMaterialRenderer")
 class StandardPbrWgpuMeshMaterialRenderer {
   public static final WGPU_PBR_MATERIAL_UNIFORM_FLOATS:Dynamic = 48.0;
 

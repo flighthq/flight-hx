@@ -13,7 +13,6 @@ import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
 import flighthq.types.TextureContainerLevel;
 
-@:expose("flighthq.textureFormats.ParseBasis")
 class ParseBasis {
   public static function parseBasis(bytes:Dynamic):Null<TextureContainer> {
     var header:Dynamic = cast _Runtime.UNDEFINED;

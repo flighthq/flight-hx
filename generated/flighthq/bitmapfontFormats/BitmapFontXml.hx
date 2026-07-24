@@ -17,7 +17,6 @@ import flighthq.xml.XmlQuery.getXmlElementAttributeNumber;
 import flighthq.xml.XmlQuery.getXmlElementChildByName;
 import flighthq.xml.XmlQuery.getXmlElementChildrenByName;
 
-@:expose("flighthq.bitmapfontFormats.BitmapFontXml")
 class BitmapFontXml {
   public static function parseBitmapFontXml(text:String, ?options:BitmapFontParseOptions):Null<BitmapFont> {
     var record:Dynamic = cast _Runtime.UNDEFINED;

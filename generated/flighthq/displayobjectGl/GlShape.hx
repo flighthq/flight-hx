@@ -29,7 +29,6 @@ import flighthq.types.Shape;
 
 typedef GlShapeData__glShape = { var canvas:Dynamic; var ctx:Dynamic; var image:ImageResource; var lastContentId:Float; var lastW:Float; var lastH:Float; var meshVersion:Float; var meshes:Null<Array<GlShapeMesh>>; };
 
-@:expose("flighthq.displayobjectGl.GlShape")
 class GlShape {
   public static function getGlShapeData__glShape(data:RendererData):GlShapeData__glShape {
     return cast (cast (cast data : Dynamic) : GlShapeData__glShape);

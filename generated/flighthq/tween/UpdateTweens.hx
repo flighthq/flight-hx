@@ -8,7 +8,6 @@ import flighthq.tween._internal._Internal.initializeTween;
 import flighthq.types.Tween;
 import flighthq.types.TweenManager;
 
-@:expose("flighthq.tween.UpdateTweens")
 class UpdateTweens {
   public static function completeTween<T>(tween:Tween<Dynamic>):Void {
     var effectiveT:Dynamic = cast _Runtime.UNDEFINED;

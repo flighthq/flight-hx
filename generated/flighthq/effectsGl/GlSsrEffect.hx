@@ -10,7 +10,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.SsrEffect;
 
-@:expose("flighthq.effectsGl.GlSsrEffect")
 class GlSsrEffect {
   public static function applySsrEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SsrEffect):Void {
     var program:Dynamic = cast _Runtime.UNDEFINED;

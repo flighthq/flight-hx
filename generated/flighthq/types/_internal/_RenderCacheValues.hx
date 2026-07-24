@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Entity;
 import flighthq.types.Matrix;
 
-@:expose("flighthq.types._internal._RenderCacheValues")
 class _RenderCacheValues {
   public static final RenderCacheKindValue:Dynamic = 'RenderCache';
 }

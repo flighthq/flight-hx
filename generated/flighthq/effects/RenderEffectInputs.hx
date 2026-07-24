@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.RenderEffect;
 import flighthq.types.RenderEffectInput;
 
-@:expose("flighthq.effects.RenderEffectInputs")
 class RenderEffectInputs {
   public static function getRenderEffectInputs(effect:RenderEffect):Array<RenderEffectInput> {
     return cast _Runtime.coalesce(_Runtime.getIndex(RenderEffectInputs.RENDER_EFFECT_INPUTS__renderEffectInputs, _Runtime.field(effect, 'kind')), function():Dynamic return cast cast ([] : Array<Dynamic>));

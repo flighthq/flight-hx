@@ -9,7 +9,6 @@ import flighthq.types.HasBoundsRectangle.HasBoundsRectangleRuntime;
 import flighthq.types.MethodsOf;
 import flighthq.types.Rectangle;
 
-@:expose("flighthq.node.HasBoundsRectangle")
 class HasBoundsRectangle {
   public static function defaultComputeLocalBoundsRectangle(_out:Rectangle, _source:BoundsNodeAny):Void {
   }

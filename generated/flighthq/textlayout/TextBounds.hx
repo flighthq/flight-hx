@@ -8,7 +8,6 @@ import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.TextBoundsSpec;
 import flighthq.types.TextLayout.TextLayoutResult;
 
-@:expose("flighthq.textlayout.TextBounds")
 class TextBounds {
   public static final TEXT_BOUNDS_GUTTER:Dynamic = 2.0;
 

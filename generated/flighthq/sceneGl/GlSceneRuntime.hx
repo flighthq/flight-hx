@@ -13,7 +13,6 @@ import flighthq.types.GlSceneRuntime;
 import flighthq.types.GlSkinPaletteTexture;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
-@:expose("flighthq.sceneGl.GlSceneRuntime")
 class GlSceneRuntime {
   public static function destroyGlSceneRuntime(state:GlRenderState):Void {
     var scene:Dynamic = cast _Runtime.UNDEFINED;

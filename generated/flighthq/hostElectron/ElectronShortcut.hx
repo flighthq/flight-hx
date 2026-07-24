@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.ElectronApi;
 import flighthq.types.Shortcut.ShortcutBackend;
 
-@:expose("flighthq.hostElectron.ElectronShortcut")
 class ElectronShortcut {
   public static function createElectronShortcutBackend(electron:ElectronApi):ShortcutBackend {
     var globalShortcut:Dynamic = cast _Runtime.UNDEFINED;

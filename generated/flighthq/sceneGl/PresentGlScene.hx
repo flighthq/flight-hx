@@ -13,7 +13,6 @@ import flighthq.types.GlRenderTarget;
 import flighthq.types.SceneLights.SceneLightsLike;
 import flighthq.types.SceneNode;
 
-@:expose("flighthq.sceneGl.PresentGlScene")
 class PresentGlScene {
   public static function presentGlScene(state:GlRenderState, target:GlRenderTarget, scene:SceneNode, camera:Camera3D, lights:SceneLightsLike):Void {
     _Runtime.callValue(beginGlRenderPass, cast ([state, target] : Array<Dynamic>));

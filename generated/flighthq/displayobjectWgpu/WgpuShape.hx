@@ -34,7 +34,6 @@ import flighthq.types.WgpuShapeMesh;
 
 typedef WgpuShapeData__wgpuShape = { var canvas:Dynamic; var ctx:Dynamic; var image:ImageResource; var lastContentId:Float; var lastW:Float; var lastH:Float; var meshVersion:Float; var meshes:Null<Array<WgpuShapeMesh>>; var meshBuffers:WgpuShapeMeshBuffers; };
 
-@:expose("flighthq.displayobjectWgpu.WgpuShape")
 class WgpuShape {
   public static function createWgpuShapeData__wgpuShape(_state:RenderState, _source:Renderable):RendererData {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;

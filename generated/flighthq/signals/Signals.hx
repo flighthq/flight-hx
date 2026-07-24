@@ -11,7 +11,6 @@ import flighthq.types.Signal;
 import flighthq.types.SignalConnectOptions;
 import flighthq.types.SignalThrottleOptions;
 
-@:expose("flighthq.signals.Signals")
 class Signals {
   public static function cancelSignal<T>(signal:Signal<Dynamic>):Void {
     _Runtime.callValue(Facade_Signals_flighthq_signals_Emitter.cancelSignal, cast ([signal] : Array<Dynamic>));

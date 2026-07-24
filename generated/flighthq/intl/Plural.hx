@@ -7,7 +7,6 @@ import flighthq.intl.Cache.getCacheKey;
 import flighthq.intl.Cache.getCached;
 import flighthq.types.LocaleInput;
 
-@:expose("flighthq.intl.Plural")
 class Plural {
   public static function selectOrdinalCategory(value:Float, locale:LocaleInput, ?options:Dynamic):Dynamic {
     return cast _Runtime.callProperty(_Runtime.callValue(Plural.getPluralRules__plural, cast ([locale, _Runtime.mergeObjects([{ type: 'ordinal' }, options])] : Array<Dynamic>)), 'select', cast ([value] : Array<Dynamic>));

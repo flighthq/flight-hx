@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ImageEncoder;
 
-@:expose("flighthq.imageCodec.ImageEncoderRegistry")
 class ImageEncoderRegistry {
   public static function clearImageEncoders():Void {
     _Runtime.callProperty(ImageEncoderRegistry.encoders__imageEncoderRegistry, 'clear', cast ([] : Array<Dynamic>));

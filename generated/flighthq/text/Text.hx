@@ -33,7 +33,6 @@ import flighthq.types.TextLineMetrics;
 import flighthq.types.TextMetrics;
 import flighthq.types.TextVerticalAlign;
 
-@:expose("flighthq.text.Text")
 class Text {
   public static function appendRichTextString(source:RichText, value:String):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.appendRichTextString, cast ([source, value] : Array<Dynamic>));

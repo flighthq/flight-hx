@@ -19,7 +19,6 @@ import flighthq.types.Shape;
 
 typedef DomShapeData__domShape = Dynamic;
 
-@:expose("flighthq.displayobjectDom.DomShape")
 class DomShape {
   public static function createDomShapeData__domShape(_state:RenderState, _source:Renderable):DomShapeData__domShape {
     return cast _Runtime.callValue(createEntity, cast ([{ canvas: null, context: null }] : Array<Dynamic>));

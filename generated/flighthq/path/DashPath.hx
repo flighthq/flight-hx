@@ -8,7 +8,6 @@ import flighthq.types.Path;
 import flighthq.types.Path.PathCommand;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
-@:expose("flighthq.path.DashPath")
 class DashPath {
   public static function dashPath(source:Path, dash:Array<Float>, dashOffset:Float, out:Path, tolerance:Dynamic = 0.25):Void {
     var totalDashLength:Dynamic = cast _Runtime.UNDEFINED;

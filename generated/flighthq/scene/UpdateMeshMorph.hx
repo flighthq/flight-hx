@@ -10,7 +10,6 @@ import flighthq.mesh.MorphMeshGeometry.blendMeshGeometryMorph;
 import flighthq.mesh.MorphMeshGeometry.captureMeshMorphBindPose;
 import flighthq.types.Mesh;
 
-@:expose("flighthq.scene.UpdateMeshMorph")
 class UpdateMeshMorph {
   public static function updateMeshMorph(mesh:Mesh):Void {
     var morph:Dynamic = cast _Runtime.UNDEFINED;

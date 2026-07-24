@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.textshaper.TextShaperRun.createShapedRun;
 import flighthq.types.ShapedRun;
 
-@:expose("flighthq.textshaper.TextShaperPool")
 class TextShaperPool {
   public static function acquireShapedRun():ShapedRun {
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(TextShaperPool._pool__textShaperPool, 'length'), 0.0, '>'))) { return cast _Runtime.callProperty(TextShaperPool._pool__textShaperPool, 'pop', cast ([] : Array<Dynamic>)); }

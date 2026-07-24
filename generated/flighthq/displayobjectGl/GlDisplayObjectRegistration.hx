@@ -42,7 +42,6 @@ import flighthq.types._internal._TextLabelValues.TextLabelKind;
 import flighthq.types._internal._TilemapValues.TilemapKind;
 import flighthq.types._internal._VideoValues.VideoKind;
 
-@:expose("flighthq.displayobjectGl.GlDisplayObjectRegistration")
 class GlDisplayObjectRegistration {
   public static function registerGlDisplayObjectRenderers(state:GlRenderState):Void {
     _Runtime.callValue(registerRenderer, cast ([state, BitmapKind, defaultGlBitmapRenderer] : Array<Dynamic>));

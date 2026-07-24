@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.HasClip;
 
-@:expose("flighthq.node.HasClip")
 class HasClip {
   public static function initClipTrait(target:flighthq.types.HasClip, ?obj:Dynamic):Void {
     _Runtime.setField(target, 'clip', _Runtime.coalesce(_Runtime.optionalField(obj, 'clip'), function():Dynamic return cast null));

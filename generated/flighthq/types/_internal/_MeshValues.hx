@@ -10,7 +10,6 @@ import flighthq.types.SceneNode;
 import flighthq.types.SceneNode.SceneNodeRuntime;
 import flighthq.types.Skin;
 
-@:expose("flighthq.types._internal._MeshValues")
 class _MeshValues {
   public static final MeshKind:Dynamic = 'Mesh';
 }

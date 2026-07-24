@@ -7,7 +7,6 @@ import flighthq.types.ParticleCurve;
 import flighthq.types.ParticleCurve.ColorKeyframe;
 import flighthq.types.ParticleCurve.CurveKeyframe;
 
-@:expose("flighthq.particles.Curve")
 class Curve {
   public static function buildParticleColorCurve(f:Dynamic, samples:Dynamic = 33.0):Array<Float> {
     var n:Dynamic = cast _Runtime.UNDEFINED;

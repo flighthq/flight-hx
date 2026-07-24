@@ -13,7 +13,6 @@ import flighthq.types.SpotLightOptions;
 import flighthq.types.Types.SpotLightKind;
 import flighthq.types._internal._SpotLightValues.SpotLightKind;
 
-@:expose("flighthq.lighting.SpotLight")
 class SpotLight {
   public static function cloneSpotLight(source:flighthq.types.SpotLight):flighthq.types.SpotLight {
     return cast _Runtime.callValue(createEntity, cast ([{ castsShadow: _Runtime.field(source, 'castsShadow'), color: _Runtime.field(source, 'color'), direction: _Runtime.callValue(cloneVector3, cast ([_Runtime.field(source, 'direction')] : Array<Dynamic>)), innerConeCos: _Runtime.field(source, 'innerConeCos'), intensity: _Runtime.field(source, 'intensity'), kind: SpotLightKind, normalBias: _Runtime.field(source, 'normalBias'), outerConeCos: _Runtime.field(source, 'outerConeCos'), pcfRadius: _Runtime.field(source, 'pcfRadius'), position: _Runtime.callValue(cloneVector3, cast ([_Runtime.field(source, 'position')] : Array<Dynamic>)), range: _Runtime.field(source, 'range'), shadowBias: _Runtime.field(source, 'shadowBias') }] : Array<Dynamic>));

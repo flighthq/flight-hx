@@ -7,7 +7,6 @@ import flighthq.types.SurfaceMaterial;
 import flighthq.types.Texture;
 import flighthq.types.VideoTexture;
 
-@:expose("flighthq.types._internal._UnlitMaterialValues")
 class _UnlitMaterialValues {
   public static final UnlitMaterialKind:Dynamic = 'UnlitMaterial';
 }

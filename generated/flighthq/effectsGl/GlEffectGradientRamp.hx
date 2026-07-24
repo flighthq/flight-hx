@@ -4,7 +4,6 @@ package flighthq.effectsGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.effectsGl.GlEffectGradientRamp")
 class GlEffectGradientRamp {
   public static function createGlEffectGradientRampTexture(gl:Dynamic, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
     var data:Dynamic = cast _Runtime.UNDEFINED;

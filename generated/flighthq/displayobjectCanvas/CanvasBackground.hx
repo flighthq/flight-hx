@@ -8,7 +8,6 @@ import flighthq.types.BlendMode;
 import flighthq.types.CanvasRenderState;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
-@:expose("flighthq.displayobjectCanvas.CanvasBackground")
 class CanvasBackground {
   public static function renderCanvasBackground(state:Dynamic):Void {
     _Runtime.setField(_Runtime.field(state, 'context'), 'globalCompositeOperation', 'source-over');

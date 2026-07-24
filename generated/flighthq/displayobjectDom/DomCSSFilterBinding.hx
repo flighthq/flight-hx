@@ -8,7 +8,6 @@ import flighthq.types.DisplayObject;
 import flighthq.types.DomRenderState;
 import flighthq.types.RenderProxy2D;
 
-@:expose("flighthq.displayobjectDom.DomCSSFilterBinding")
 class DomCSSFilterBinding {
   public static function enableDomCssFilterSupport(state:DomRenderState):Void {
     _Runtime.setField(state, 'domCssFilterResolver', getDomCssFilter);

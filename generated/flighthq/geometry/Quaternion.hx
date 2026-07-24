@@ -10,7 +10,6 @@ import flighthq.types.Quaternion;
 import flighthq.types.Quaternion.QuaternionLike;
 import flighthq.types.Vector3.Vector3Like;
 
-@:expose("flighthq.geometry.Quaternion")
 class Quaternion {
   public static function cloneQuaternion(source:QuaternionLike):flighthq.types.Quaternion {
     return cast _Runtime.callValue(createQuaternion, cast ([_Runtime.field(source, 'x'), _Runtime.field(source, 'y'), _Runtime.field(source, 'z'), _Runtime.field(source, 'w')] : Array<Dynamic>));

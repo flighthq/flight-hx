@@ -16,7 +16,6 @@ import flighthq.types.HslColor;
 import flighthq.types.HsvColor;
 import flighthq.types.LinearColor;
 
-@:expose("flighthq.color.Color")
 class Color {
   public static function allocateHslColor():HslColor {
     return cast _Runtime.callValue(Facade_Color_flighthq_color_HslColor.allocateHslColor, cast ([] : Array<Dynamic>));

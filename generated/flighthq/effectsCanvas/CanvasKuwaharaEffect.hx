@@ -8,7 +8,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.KuwaharaEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasKuwaharaEffect")
 class CanvasKuwaharaEffect {
   public static function applyKuwaharaEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:KuwaharaEffect):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));

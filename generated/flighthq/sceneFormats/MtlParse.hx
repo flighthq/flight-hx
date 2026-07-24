@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.ObjSchema.ObjMaterial;
 import flighthq.types.ObjSchema.ObjMaterialLibrary;
 
-@:expose("flighthq.sceneFormats.MtlParse")
 class MtlParse {
   public static function parseObjMaterialLibrary(source:String, ?warnings:Array<String>):ObjMaterialLibrary {
     var materials:Dynamic = cast _Runtime.UNDEFINED;

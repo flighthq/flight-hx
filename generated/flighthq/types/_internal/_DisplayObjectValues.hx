@@ -19,7 +19,6 @@ import flighthq.types.Node.NodeRuntimeFactory;
 import flighthq.types.Node.NodeTraits;
 import flighthq.types.Stage;
 
-@:expose("flighthq.types._internal._DisplayObjectValues")
 class _DisplayObjectValues {
   public static final DisplayObjectKind:Dynamic = 'DisplayObject';
 

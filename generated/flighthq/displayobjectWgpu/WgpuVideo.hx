@@ -20,7 +20,6 @@ import flighthq.types.WgpuRenderState.WgpuTextureEntry;
 
 typedef WgpuVideoData__wgpuVideo = { var entry:Null<WgpuTextureEntry>; var w:Float; var h:Float; };
 
-@:expose("flighthq.displayobjectWgpu.WgpuVideo")
 class WgpuVideo {
   public static function createWgpuVideoData(_state:RenderState, _source:Renderable):RendererData {
     return cast _Runtime.callValue(createWgpuRendererData, cast ([{ entry: null, h: 0.0, w: 0.0 }] : Array<Dynamic>));

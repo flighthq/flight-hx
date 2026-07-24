@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.interaction.HitTests.hitTestGraphLocalBounds;
 import flighthq.types.Node.NodeAny;
 
-@:expose("flighthq.interaction.DisplayHitTests")
 class DisplayHitTests {
   public static function defaultBitmapHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
     return cast _Runtime.callValue(hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>));

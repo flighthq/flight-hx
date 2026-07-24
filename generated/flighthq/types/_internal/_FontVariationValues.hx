@@ -4,7 +4,6 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.types._internal._FontVariationValues")
 class _FontVariationValues {
   public static final FontVariationItalic:Dynamic = 'ital';
 

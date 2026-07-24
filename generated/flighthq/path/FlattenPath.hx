@@ -7,7 +7,6 @@ import flighthq.types.Path;
 import flighthq.types.Path.PathCommand;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
-@:expose("flighthq.path.FlattenPath")
 class FlattenPath {
   public static function flattenPath(path:Path, tolerance:Dynamic = 0.25):Array<Array<Float>> {
     var commands:Dynamic = cast _Runtime.UNDEFINED;

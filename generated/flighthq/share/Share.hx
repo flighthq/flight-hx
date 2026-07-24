@@ -11,7 +11,6 @@ import flighthq.types.Share.ShareOptions;
 import flighthq.types.Share.ShareResult;
 import flighthq.types.ShareSignals;
 
-@:expose("flighthq.share.Share")
 class Share {
   public static var _backend__share:Null<ShareBackend> = _Runtime.explicitNull();
 

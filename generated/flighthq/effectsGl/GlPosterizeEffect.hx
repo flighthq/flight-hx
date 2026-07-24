@@ -10,7 +10,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.PosterizeEffect;
 
-@:expose("flighthq.effectsGl.GlPosterizeEffect")
 class GlPosterizeEffect {
   public static function applyPosterizeEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:PosterizeEffect):Void {
     var levels:Dynamic = cast _Runtime.UNDEFINED;

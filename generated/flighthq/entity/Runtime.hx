@@ -7,7 +7,6 @@ import flighthq.types.Entity;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
-@:expose("flighthq.entity.Runtime")
 class Runtime {
   public static function createEntityRuntime():EntityRuntime {
     return cast { binding: null };

@@ -10,7 +10,6 @@ import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
-@:expose("flighthq.effectsGl.GlCrtEffect")
 class GlCrtEffect {
   public static function applyCrtEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CrtEffect):Void {
     var curvature:Dynamic = cast _Runtime.UNDEFINED;

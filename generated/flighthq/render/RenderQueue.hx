@@ -13,7 +13,6 @@ import flighthq.types.RenderQueue.RenderSortKey;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 
-@:expose("flighthq.render.RenderQueue")
 class RenderQueue {
   public static function buildRenderQueue(state:RenderState, source:Renderable, out:flighthq.types.RenderQueue):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

@@ -4,7 +4,6 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.types._internal._LightUnitValues")
 class _LightUnitValues {
   public static final CandelaLightUnit:Dynamic = 'Candela';
 

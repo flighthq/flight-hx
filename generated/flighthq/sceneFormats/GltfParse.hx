@@ -73,7 +73,6 @@ import flighthq.types._internal._SceneNodeValues.SceneNodeKind;
 
 typedef ComponentArray__gltfParse = Dynamic;
 
-@:expose("flighthq.sceneFormats.GltfParse")
 class GltfParse {
   public static function createSceneFromGlb(bytes:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Scene {
     var container:Dynamic = cast _Runtime.UNDEFINED;

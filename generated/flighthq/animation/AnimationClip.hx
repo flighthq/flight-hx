@@ -10,7 +10,6 @@ import flighthq.types.AnimationChannel;
 import flighthq.types.AnimationClip;
 import flighthq.types.AnimationTrack;
 
-@:expose("flighthq.animation.AnimationClip")
 class AnimationClip {
   public static function cloneAnimationClip(clip:flighthq.types.AnimationClip):flighthq.types.AnimationClip {
     var channels:Array<AnimationChannel> = cast _Runtime.UNDEFINED;

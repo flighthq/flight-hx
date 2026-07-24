@@ -4,7 +4,6 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.types._internal._ResourceResolutionStateValues")
 class _ResourceResolutionStateValues {
   public static final ResourceResolutionStateValue:Dynamic = { Failed: 'Failed', Loading: 'Loading', Resolved: 'Resolved', Unresolved: 'Unresolved' };
 }

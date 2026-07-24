@@ -10,7 +10,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.SmaaEffect;
 
-@:expose("flighthq.effectsGl.GlSmaaEffect")
 class GlSmaaEffect {
   public static function applySmaaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SmaaEffect):Void {
     var threshold:Dynamic = cast _Runtime.UNDEFINED;

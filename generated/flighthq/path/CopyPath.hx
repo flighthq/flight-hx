@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Path;
 
-@:expose("flighthq.path.CopyPath")
 class CopyPath {
   public static function clonePath(source:Path):Path {
     return cast _Runtime.callValue(copyPath, cast ([source] : Array<Dynamic>));

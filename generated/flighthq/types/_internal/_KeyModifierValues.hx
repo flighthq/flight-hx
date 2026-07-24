@@ -4,7 +4,6 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.types._internal._KeyModifierValues")
 class _KeyModifierValues {
   public static final KeyModifierValue:Dynamic = { ALT: (Std.int(256.0) | Std.int(512.0)), CAPS_LOCK: 8192.0, CTRL: (Std.int(64.0) | Std.int(128.0)), LEFT_ALT: 256.0, LEFT_CTRL: 64.0, LEFT_META: 1024.0, LEFT_SHIFT: 1.0, META: (Std.int(1024.0) | Std.int(2048.0)), MODE: 16384.0, NONE: 0.0, NUM_LOCK: 4096.0, RIGHT_ALT: 512.0, RIGHT_CTRL: 128.0, RIGHT_META: 2048.0, RIGHT_SHIFT: 2.0, SHIFT: (Std.int(1.0) | Std.int(2.0)) };
 }

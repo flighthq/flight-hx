@@ -16,7 +16,6 @@ import flighthq.types.UnlitMaterial;
 import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKind;
 import flighthq.types._internal._UnlitMaterialValues.UnlitMaterialKind;
 
-@:expose("flighthq.sceneResources.SceneMaterialTextureRegistry")
 class SceneMaterialTextureRegistry {
   public static function createSceneMaterialTextureRegistry():SceneMaterialTextureRegistry {
     return cast _Runtime.callValue(createEntity, cast ([{ listers: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) }] : Array<Dynamic>));

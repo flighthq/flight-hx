@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.color.SrgbTransfer.srgbChannelToLinear;
 
-@:expose("flighthq.color.Luminance")
 class Luminance {
   public static function getColorContrastRatio(a:Float, b:Float):Float {
     var la:Dynamic = cast _Runtime.UNDEFINED;

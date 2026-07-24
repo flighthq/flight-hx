@@ -17,7 +17,6 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 
-@:expose("flighthq.effectsWgpu.WgpuDropShadowEffect")
 class WgpuDropShadowEffect {
   public static function applyDropShadowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:DropShadowEffect):Void {
     var src:Dynamic = cast _Runtime.UNDEFINED;

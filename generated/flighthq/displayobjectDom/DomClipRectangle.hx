@@ -14,7 +14,6 @@ import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.RenderProxy2D;
 
-@:expose("flighthq.displayobjectDom.DomClipRectangle")
 class DomClipRectangle {
   public static function applyDomClipRectangles(state:DomRenderState, data:RenderProxy2D, entries:Array<DomClipEntry>):Void {
     var element:Dynamic = cast _Runtime.UNDEFINED;

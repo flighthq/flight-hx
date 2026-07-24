@@ -11,7 +11,6 @@ import flighthq.types.VertexDisplaceModifierOptions;
 import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 import flighthq.types._internal._VertexDisplaceModifierValues.VertexDisplaceModifierKind;
 
-@:expose("flighthq.shading.CreateVertexDisplaceModifier")
 class CreateVertexDisplaceModifier {
   public static function createVertexDisplaceModifier(options:VertexDisplaceModifierOptions):VertexDisplaceModifier {
     var modifier:VertexDisplaceModifier = cast _Runtime.UNDEFINED;

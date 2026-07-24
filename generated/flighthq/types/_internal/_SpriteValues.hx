@@ -9,7 +9,6 @@ import flighthq.types.DisplayObject.DisplayObjectRuntime;
 import flighthq.types.Rectangle;
 import flighthq.types.TextureAtlas;
 
-@:expose("flighthq.types._internal._SpriteValues")
 class _SpriteValues {
   public static final SpriteKind:Dynamic = 'Sprite';
 }

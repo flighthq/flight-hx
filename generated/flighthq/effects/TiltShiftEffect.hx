@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.TiltShiftEffect;
 
-@:expose("flighthq.effects.TiltShiftEffect")
 class TiltShiftEffect {
   public static function createTiltShiftEffect(?options:Dynamic):flighthq.types.TiltShiftEffect {
     if (options == null) options = cast ({  } : Dynamic);

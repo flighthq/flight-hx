@@ -14,7 +14,6 @@ import flighthq.types.SceneResources.SceneResourceResolver;
 import flighthq.types.Texture;
 import flighthq.types._internal._ResourceResolutionStateValues.ResourceResolutionStateValue;
 
-@:expose("flighthq.sceneResources.SceneResourceRecovery")
 class SceneResourceRecovery {
   public static function explainImageResourceReferenceResolution(ref:ImageResourceReference):ImageResourceReferenceResolutionExplanation {
     return cast { failure: _Runtime.select(_Runtime.strictEquals(_Runtime.field(ref, 'failure'), null), function():Dynamic return cast null, function():Dynamic return cast _Runtime.mergeObjects([_Runtime.field(ref, 'failure')])), kind: _Runtime.field(ref, 'kind'), retryable: _Runtime.strictEquals(_Runtime.field(ref, 'state'), ResourceResolutionStateValue.Failed), state: _Runtime.field(ref, 'state') };

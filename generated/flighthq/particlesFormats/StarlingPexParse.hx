@@ -13,7 +13,6 @@ import flighthq.types.StarlingPexSchema.StarlingPexParseResult;
 
 typedef PexDict__starlingPexParse = Dynamic;
 
-@:expose("flighthq.particlesFormats.StarlingPexParse")
 class StarlingPexParse {
   public static function parseStarlingPex(xml:String, ?options:StarlingPexParseOptions):ParticleEmitterConfig {
     var d:Dynamic = cast _Runtime.UNDEFINED;

@@ -12,7 +12,6 @@ import flighthq.types.ParticleEmitter3D;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterState;
 
-@:expose("flighthq.particleemitter.EmitParticleBurst3D")
 class EmitParticleBurst3D {
   public static final PARTICLE_TRANSFORM_STRIDE__emitParticleBurst3D:Dynamic = 4.0;
 

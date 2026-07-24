@@ -13,7 +13,6 @@ import flighthq.types.Tray.TrayIcon;
 import flighthq.types.Tray.TrayIconOptions;
 import flighthq.types.Vector2.Vector2Like;
 
-@:expose("flighthq.tray.Tray")
 class Tray {
   public static var _backend__tray:Null<TrayBackend> = _Runtime.explicitNull();
 

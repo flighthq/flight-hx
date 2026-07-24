@@ -11,7 +11,6 @@ import flighthq.textureFormats.TextureLevelLayout.computeTextureContainerLevels;
 import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
 
-@:expose("flighthq.textureFormats.ParseDds")
 class ParseDds {
   public static function parseDds(bytes:Dynamic):Null<TextureContainer> {
     var reader:Dynamic = cast _Runtime.UNDEFINED;

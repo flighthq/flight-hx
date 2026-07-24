@@ -43,7 +43,6 @@ import flighthq.types.UnlitMaterial;
 import flighthq.types.VertexColorMaterial;
 import flighthq.types.WireframeMaterial;
 
-@:expose("flighthq.materials.Materials")
 class Materials {
   public static function clampStandardPbrMaterialProperties(out:StandardPbrMaterialProperties):StandardPbrMaterialProperties {
     return cast _Runtime.callValue(Facade_Materials_flighthq_materials_MaterialValidation.clampStandardPbrMaterialProperties, cast ([out] : Array<Dynamic>));

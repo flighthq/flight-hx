@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.invalidateImageResource;
 import flighthq.types.SurfaceRegion;
 
-@:expose("flighthq.surface.SurfaceDissolve")
 class SurfaceDissolve {
   public static function dissolveSurfacePixels(dest:SurfaceRegion, source:SurfaceRegion, seed:Float, pixelCount:Float, fillColor:Float = 0.0):Float {
     var width:Dynamic = cast _Runtime.UNDEFINED;

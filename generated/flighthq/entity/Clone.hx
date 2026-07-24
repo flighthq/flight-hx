@@ -8,7 +8,6 @@ import flighthq.types.Entity;
 import flighthq.types.Entity.EntityWithoutRuntime;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
-@:expose("flighthq.entity.Clone")
 class Clone {
   public static function cloneEntity<Type>(source:Type):Type {
     var copy:Dynamic = cast _Runtime.UNDEFINED;

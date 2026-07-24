@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.SketchEffect;
 
-@:expose("flighthq.effects.SketchEffect")
 class SketchEffect {
   public static function createSketchEffect(?options:Dynamic):flighthq.types.SketchEffect {
     if (options == null) options = cast ({  } : Dynamic);

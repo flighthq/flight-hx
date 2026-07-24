@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.mesh.MeshGeometryAttributes.getVertexAttributeFloatOffset;
 import flighthq.types.MeshGeometry;
 
-@:expose("flighthq.mesh.MeshGeometryUvs")
 class MeshGeometryUvs {
   public static function offsetMeshGeometryUvs(geometry:MeshGeometry, du:Float, dv:Float):Void {
     var floatOffset:Dynamic = cast _Runtime.UNDEFINED;

@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.SurfaceRegion;
 
-@:expose("flighthq.surface.SurfaceMedian")
 class SurfaceMedian {
   public static function medianSurface(out:Dynamic, source:SurfaceRegion, radius:Float):Void {
     var r:Dynamic = cast _Runtime.UNDEFINED;

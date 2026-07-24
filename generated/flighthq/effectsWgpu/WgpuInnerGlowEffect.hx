@@ -16,7 +16,6 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 
-@:expose("flighthq.effectsWgpu.WgpuInnerGlowEffect")
 class WgpuInnerGlowEffect {
   public static function applyInnerGlowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:InnerGlowEffect):Void {
     var src:Dynamic = cast _Runtime.UNDEFINED;

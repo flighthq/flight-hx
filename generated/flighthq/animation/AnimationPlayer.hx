@@ -14,7 +14,6 @@ import flighthq.types.Types.AnimationLoopModeRepeat;
 import flighthq.types._internal._AnimationLoopModeValues.AnimationLoopModePingPong;
 import flighthq.types._internal._AnimationLoopModeValues.AnimationLoopModeRepeat;
 
-@:expose("flighthq.animation.AnimationPlayer")
 class AnimationPlayer {
   public static function advanceAnimationPlayer(player:flighthq.types.AnimationPlayer, dt:Float):Void {
     var duration:Dynamic = cast _Runtime.UNDEFINED;

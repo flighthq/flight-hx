@@ -7,7 +7,6 @@ import flighthq.types.GlyphSource.GlyphRasterizeOptions;
 import flighthq.types.GlyphSource.GlyphRasterizedBitmap;
 import flighthq.types.GlyphSource.GlyphRasterizerBackend;
 
-@:expose("flighthq.glyphatlas.GlyphRasterizerBackend")
 class GlyphRasterizerBackend {
   public static function createStubGlyphRasterizerBackend():flighthq.types.GlyphSource.GlyphRasterizerBackend {
     return cast { rasterize: function(_codepoint:Dynamic, options:Dynamic) {

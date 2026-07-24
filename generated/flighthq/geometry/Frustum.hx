@@ -13,7 +13,6 @@ import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.Plane.PlaneLike;
 import flighthq.types.Vector3.Vector3Like;
 
-@:expose("flighthq.geometry.Frustum")
 class Frustum {
   public static function createFrustum():flighthq.types.Frustum {
     return cast _Runtime.callValue(createEntity, cast ([{ bottom: _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)), far: _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)), left: _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)), near: _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)), right: _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)), top: _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));

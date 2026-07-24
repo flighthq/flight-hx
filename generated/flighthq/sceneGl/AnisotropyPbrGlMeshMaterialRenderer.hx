@@ -24,7 +24,6 @@ import flighthq.types.SceneRenderProxy;
 import flighthq.types.Types.AnisotropyPbrMaterialKind;
 import flighthq.types._internal._AnisotropyPbrMaterialValues.AnisotropyPbrMaterialKind;
 
-@:expose("flighthq.sceneGl.AnisotropyPbrGlMeshMaterialRenderer")
 class AnisotropyPbrGlMeshMaterialRenderer {
   public static final anisotropyPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;

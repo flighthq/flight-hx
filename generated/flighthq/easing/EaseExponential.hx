@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
-@:expose("flighthq.easing.EaseExponential")
 class EaseExponential {
   public static final easeInExponential:EasingFunction = function(t:Dynamic) return _Runtime.select(_Runtime.strictEquals(t, 0.0), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.callProperty(HxMath, 'pow', cast ([2.0, ((10.0 * t) - 10.0)] : Array<Dynamic>)));
 

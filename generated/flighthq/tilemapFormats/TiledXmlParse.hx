@@ -26,7 +26,6 @@ import flighthq.xml.XmlQuery.getXmlElementAttribute;
 import flighthq.xml.XmlQuery.getXmlElementChildByName;
 import flighthq.xml.XmlQuery.getXmlElementChildrenByName;
 
-@:expose("flighthq.tilemapFormats.TiledXmlParse")
 class TiledXmlParse {
   public static function parseTiledTileset(text:String, ?_options:TiledParseOptions):Null<TiledTileset> {
     var root:Dynamic = cast _Runtime.UNDEFINED;

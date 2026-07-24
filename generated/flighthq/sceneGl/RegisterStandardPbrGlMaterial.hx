@@ -9,7 +9,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.Types.StandardPbrMaterialKind;
 import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKind;
 
-@:expose("flighthq.sceneGl.RegisterStandardPbrGlMaterial")
 class RegisterStandardPbrGlMaterial {
   public static function registerStandardPbrGlMaterial(state:GlRenderState):Void {
     _Runtime.callValue(registerGlMeshMaterialRenderer, cast ([state, StandardPbrMaterialKind, standardPbrGlMeshMaterialRenderer] : Array<Dynamic>));

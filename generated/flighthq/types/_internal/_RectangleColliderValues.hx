@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CollisionResponse;
 
-@:expose("flighthq.types._internal._RectangleColliderValues")
 class _RectangleColliderValues {
   public static final RectangleColliderKind:Dynamic = 'RectangleCollider';
 }

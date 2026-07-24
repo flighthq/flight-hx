@@ -12,7 +12,6 @@ import flighthq.types.TiledTileset;
 import flighthq.types.TiledTileset.TiledTilesetRef;
 import flighthq.types.TiledTileset.TiledTilesetTile;
 
-@:expose("flighthq.tilemapFormats.TiledTmxFormat")
 class TiledTmxFormat {
   public static function formatTiledTmx(map:TiledMap):String {
     var lines:Array<String> = cast _Runtime.UNDEFINED;

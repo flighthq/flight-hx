@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderState;
 
-@:expose("flighthq.effectsCanvas.CanvasRenderEffectRegistry")
 class CanvasRenderEffectRegistry {
   public static function getCanvasRenderEffectRunner(state:Dynamic, kind:String):Null<Dynamic> {
     return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callProperty(CanvasRenderEffectRegistry._registries__canvasRenderEffectRegistry, 'get', cast ([state] : Array<Dynamic>)), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);

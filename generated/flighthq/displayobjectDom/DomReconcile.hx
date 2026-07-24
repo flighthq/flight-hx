@@ -7,7 +7,6 @@ import flighthq.types.DomRenderState.DomRenderStateRuntime;
 import flighthq.types.Node;
 import flighthq.types.RenderProxy2D;
 
-@:expose("flighthq.displayobjectDom.DomReconcile")
 class DomReconcile {
   public static function hasDomStructureChanged(runtime:DomRenderStateRuntime, newLength:Float, needsReconcile:Bool):Bool {
     if (_Runtime.truthy(needsReconcile)) { return cast true; }

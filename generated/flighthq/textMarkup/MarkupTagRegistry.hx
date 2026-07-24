@@ -11,7 +11,6 @@ import flighthq.types.TextFormat;
 import flighthq.types.TextFormat.TextFormatAlign;
 import flighthq.types.TextFormat.TextFormatListMarker;
 
-@:expose("flighthq.textMarkup.MarkupTagRegistry")
 class MarkupTagRegistry {
   public static function createMarkupTagRegistry():flighthq.types.MarkupTagRegistry {
     return cast { handlers: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) };

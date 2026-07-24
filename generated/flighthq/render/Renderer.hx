@@ -10,7 +10,6 @@ import flighthq.types.Renderable;
 import flighthq.types.Renderer;
 import flighthq.types.RendererData;
 
-@:expose("flighthq.render.Renderer")
 class Renderer {
   public static function copyAllRenderersFromRenderState(target:RenderState, source:RenderState):Void {
     _Runtime.callValue(copyRenderersFromRenderState, cast ([target, source] : Array<Dynamic>));

@@ -8,7 +8,6 @@ import flighthq.types.Path.PathCommand;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
-@:expose("flighthq.path.GetPathBounds")
 class GetPathBounds {
   public static function getPathBounds(path:Path, out:RectangleLike):Bool {
     var commands:Dynamic = cast _Runtime.UNDEFINED;

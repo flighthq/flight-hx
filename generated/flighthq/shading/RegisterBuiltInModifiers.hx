@@ -36,7 +36,6 @@ import flighthq.types._internal._ToonModifierValues.ToonModifierKind;
 import flighthq.types._internal._VertexDisplaceModifierValues.VertexDisplaceModifierKind;
 import flighthq.types._internal._VertexDisplaceModifierValues.VertexDisplaceModifierSourceValue;
 
-@:expose("flighthq.shading.RegisterBuiltInModifiers")
 class RegisterBuiltInModifiers {
   public static final animatedNormalModifierDefinition:ModifierDefinition = { kind: AnimatedNormalModifierKind, slot: ModifierSlotValue.Normal, getDefineSignature: function(modifier:Modifier) {
     var animated:Dynamic = cast _Runtime.UNDEFINED;

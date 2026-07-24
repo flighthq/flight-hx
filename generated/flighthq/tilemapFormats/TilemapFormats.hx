@@ -20,7 +20,6 @@ import flighthq.types.TiledTileset;
 import flighthq.types.TiledTileset.TiledTilesetRef;
 import flighthq.types.Tilemap.TilemapData;
 
-@:expose("flighthq.tilemapFormats.TilemapFormats")
 class TilemapFormats {
   public static function buildTilemapLayersFromTiled(map:TiledMap, layerIndex:Float, resolveTileset:TiledTilesetResolver):Null<Array<TilemapData>> {
     return cast _Runtime.callValue(Facade_TilemapFormats_flighthq_tilemapFormats_TiledProject.buildTilemapLayersFromTiled, cast ([map, layerIndex, resolveTileset] : Array<Dynamic>));

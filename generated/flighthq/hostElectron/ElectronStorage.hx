@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.ElectronApi;
 import flighthq.types.Storage.StorageBackend;
 
-@:expose("flighthq.hostElectron.ElectronStorage")
 class ElectronStorage {
   public static function createElectronStorageBackend(electron:ElectronApi, fileName:Dynamic = 'storage.json'):StorageBackend {
     var fs:Dynamic = cast _Runtime.UNDEFINED;

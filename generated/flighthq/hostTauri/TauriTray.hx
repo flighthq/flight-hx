@@ -14,7 +14,6 @@ import flighthq.types.Tray.TrayEventType;
 
 typedef TrayRecord__tauriTray = { var icon:Null<TauriTrayIcon>; var title:String; var tooltip:String; };
 
-@:expose("flighthq.hostTauri.TauriTray")
 class TauriTray {
   public static function createTauriTrayBackend(tauri:TauriApi):TrayBackend {
     var trayModule:Dynamic = cast _Runtime.UNDEFINED;

@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Camera3D;
 
-@:expose("flighthq.camera.Depth")
 class Depth {
   public static function getCamera3DLinearDepth(camera:Camera3D, ndcZ:Float):Float {
     var near:Dynamic = cast _Runtime.UNDEFINED;

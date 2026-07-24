@@ -13,7 +13,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.Types.DefaultMaterialKind;
 import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
-@:expose("flighthq.displayobjectGl.GlDefaultMaterial")
 class GlDefaultMaterial {
   public static function registerDefaultGlMaterial(state:GlRenderState):Void {
     _Runtime.callValue(registerGlMaterialRenderer, cast ([state, DefaultMaterialKind, defaultGlMaterialRenderer] : Array<Dynamic>));

@@ -20,7 +20,6 @@ import flighthq.types.RenderProxy2D;
 import flighthq.types.RichText;
 import flighthq.types.TextSelectionRectangle;
 
-@:expose("flighthq.displayobjectCanvas.CanvasTextInput")
 class CanvasTextInput {
   public static function drawCanvasTextInputOverlay(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;

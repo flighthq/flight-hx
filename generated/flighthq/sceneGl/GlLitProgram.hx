@@ -25,7 +25,6 @@ import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_SPOT_STRIDE;
 
 typedef GlIblPlaceholders__glLitProgram = { var cube:Dynamic; var lut:Dynamic; };
 
-@:expose("flighthq.sceneGl.GlLitProgram")
 class GlLitProgram {
   public static final SHADOW_MAP_TEXTURE_UNIT__glLitProgram:Dynamic = 8.0;
 

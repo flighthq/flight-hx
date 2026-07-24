@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.PixelOrder;
 
-@:expose("flighthq.surface.SurfaceFormat")
 class SurfaceFormat {
   public static function convertSurfacePixelOrder(out:Dynamic, source:Dynamic, length:Float, from:PixelOrder, to:PixelOrder):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;

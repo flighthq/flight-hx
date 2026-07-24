@@ -20,7 +20,6 @@ import flighthq.types.DisplayObjectRenderer;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.WgpuRenderState;
 
-@:expose("flighthq.displayobjectWgpu.WgpuBitmap")
 class WgpuBitmap {
   public static function drawWgpuBitmap(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

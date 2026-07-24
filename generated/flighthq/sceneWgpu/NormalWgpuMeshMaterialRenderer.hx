@@ -21,7 +21,6 @@ import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._NormalMaterialValues.NormalMaterialKind;
 
-@:expose("flighthq.sceneWgpu.NormalWgpuMeshMaterialRenderer")
 class NormalWgpuMeshMaterialRenderer {
   public static final normalWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera3D) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;

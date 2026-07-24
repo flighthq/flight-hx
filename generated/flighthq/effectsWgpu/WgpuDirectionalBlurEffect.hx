@@ -10,7 +10,6 @@ import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
-@:expose("flighthq.effectsWgpu.WgpuDirectionalBlurEffect")
 class WgpuDirectionalBlurEffect {
   public static function applyDirectionalBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:DirectionalBlurEffect):Void {
     var angle:Dynamic = cast _Runtime.UNDEFINED;

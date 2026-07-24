@@ -26,7 +26,6 @@ import flighthq.types.SpecularPbrMaterial;
 import flighthq.types.Types.SpecularPbrMaterialKind;
 import flighthq.types._internal._SpecularPbrMaterialValues.SpecularPbrMaterialKind;
 
-@:expose("flighthq.sceneGl.SpecularPbrGlMeshMaterialRenderer")
 class SpecularPbrGlMeshMaterialRenderer {
   public static final specularPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;

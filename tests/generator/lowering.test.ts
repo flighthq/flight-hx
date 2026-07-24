@@ -38,8 +38,40 @@ describe('TypeScript lowering and Haxe emission', () => {
     const output = emitHaxeModule(module);
     expect(output).toBe(emitHaxeModule(module));
     expect(output).toContain('class MathFixture');
+    expect(output).not.toContain('@:expose');
     expect(output).toContain('static function clamp');
     expect(output).toContain('_Runtime.select');
+  });
+
+  it('leaves JavaScript exposure to target-specific build configuration', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/service.ts',
+      `
+        export class Service {
+          value: number;
+          constructor(value: number) {
+            this.value = value;
+          }
+        }
+        export function createService(value: number): Service {
+          return new Service(value);
+        }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+
+    expect(lowered.diagnostics).toEqual([]);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'Service',
+      packageName: '@flighthq/example',
+    });
+    expect(output).toContain('class Service');
+    expect(output).not.toContain('@:expose');
   });
 
   it('compiles and runs the generated module through Haxe', () => {

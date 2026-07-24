@@ -8,7 +8,6 @@ import flighthq.geometry.Matrix.createMatrix;
 import flighthq.types.Camera2D;
 import flighthq.types.Vector2.Vector2Like;
 
-@:expose("flighthq.camera.Parallax")
 class Parallax {
   public static function getCamera2DParallaxPoint(camera:Camera2D, factor:Float, out:Vector2Like):Void {
     _Runtime.callValue(getCamera2DViewMatrix, cast ([camera, Parallax.scratchMatrix__parallax] : Array<Dynamic>));

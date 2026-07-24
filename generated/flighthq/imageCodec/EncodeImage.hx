@@ -7,7 +7,6 @@ import flighthq.imageCodec.ImageEncoderRegistry.getImageEncoder;
 import flighthq.types.DecodedImage;
 import flighthq.types.ImageEncodeOptions;
 
-@:expose("flighthq.imageCodec.EncodeImage")
 class EncodeImage {
   public static function encodeImage(image:DecodedImage, mimeType:String, ?options:ImageEncodeOptions):flighthq._internal._Promise<Null<Dynamic>> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<Dynamic>> {

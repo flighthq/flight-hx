@@ -11,7 +11,6 @@ import flighthq.types.ImageResource;
 import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
 
-@:expose("flighthq.renderGl.GlCompressedTexture")
 class GlCompressedTexture {
   public static function detectGlCompressedTextureSupport(gl:Dynamic):GlCompressedTextureSupport {
     return cast { astc: !_Runtime.strictEquals(_Runtime.callProperty(gl, 'getExtension', cast (['WEBGL_compressed_texture_astc'] : Array<Dynamic>)), null), bptc: !_Runtime.strictEquals(_Runtime.callProperty(gl, 'getExtension', cast (['EXT_texture_compression_bptc'] : Array<Dynamic>)), null), etc: !_Runtime.strictEquals(_Runtime.callProperty(gl, 'getExtension', cast (['WEBGL_compressed_texture_etc'] : Array<Dynamic>)), null), pvrtc: !_Runtime.strictEquals(_Runtime.callProperty(gl, 'getExtension', cast (['WEBGL_compressed_texture_pvrtc'] : Array<Dynamic>)), null), rgtc: !_Runtime.strictEquals(_Runtime.callProperty(gl, 'getExtension', cast (['EXT_texture_compression_rgtc'] : Array<Dynamic>)), null), s3tc: _Runtime.andValue(!_Runtime.strictEquals(_Runtime.callProperty(gl, 'getExtension', cast (['WEBGL_compressed_texture_s3tc'] : Array<Dynamic>)), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.callProperty(gl, 'getExtension', cast (['WEBGL_compressed_texture_s3tc_srgb'] : Array<Dynamic>)), null)) };

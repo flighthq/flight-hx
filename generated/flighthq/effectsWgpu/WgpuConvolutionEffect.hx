@@ -10,7 +10,6 @@ import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
-@:expose("flighthq.effectsWgpu.WgpuConvolutionEffect")
 class WgpuConvolutionEffect {
   public static final MAX_CONVOLUTION_EFFECT_WGPU_KERNEL_SIZE:Dynamic = 49.0;
 

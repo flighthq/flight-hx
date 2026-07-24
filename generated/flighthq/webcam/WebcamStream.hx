@@ -9,7 +9,6 @@ import flighthq.types.WebcamStream;
 import flighthq.types.WebcamStreamRuntime;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
-@:expose("flighthq.webcam.WebcamStream")
 class WebcamStream {
   public static function createWebcamStreamEntity(data:{ var active:Bool; var deviceId:String; var facingMode:Null<WebcamFacingMode>; var frameRate:Float; var height:Float; var id:String; var width:Float; }):flighthq.types.WebcamStream {
     var stream:Dynamic = cast _Runtime.UNDEFINED;

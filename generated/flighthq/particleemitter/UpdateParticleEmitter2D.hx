@@ -17,7 +17,6 @@ import flighthq.types.ParticleEmitterCallbacks;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterState;
 
-@:expose("flighthq.particleemitter.UpdateParticleEmitter2D")
 class UpdateParticleEmitter2D {
   public static final PARTICLE_TRANSFORM_STRIDE__updateParticleEmitter2D:Dynamic = 4.0;
 

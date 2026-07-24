@@ -7,7 +7,6 @@ import flighthq.effects.RenderEffectInputs.getRenderEffectInputs;
 import flighthq.types.RenderEffect;
 import flighthq.types.RenderEffectInput;
 
-@:expose("flighthq.effects.RenderEffectValidation")
 class RenderEffectValidation {
   public static function validateRenderEffectList(effects:Array<RenderEffect>, available:Array<RenderEffectInput>):Null<RenderEffectInput> {
     for (effect in _Runtime.iterable(effects)) {

@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.DitherEffect;
 
-@:expose("flighthq.effects.DitherEffect")
 class DitherEffect {
   public static function createDitherEffect(?options:Dynamic):flighthq.types.DitherEffect {
     if (options == null) options = cast ({  } : Dynamic);

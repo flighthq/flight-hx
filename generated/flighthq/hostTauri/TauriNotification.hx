@@ -8,7 +8,6 @@ import flighthq.types.Notification.NotificationCapabilities;
 import flighthq.types.Notification.NotificationPermission;
 import flighthq.types.TauriApi;
 
-@:expose("flighthq.hostTauri.TauriNotification")
 class TauriNotification {
   public static function createTauriNotificationBackend(tauri:TauriApi):NotificationBackend {
     var notification:Dynamic = cast _Runtime.UNDEFINED;

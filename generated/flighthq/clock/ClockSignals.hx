@@ -7,7 +7,6 @@ import flighthq.signals.Signal.createSignal;
 import flighthq.types.Clock;
 import flighthq.types.Signal;
 
-@:expose("flighthq.clock.ClockSignals")
 class ClockSignals {
   public static function enableClockSignals(clock:Clock):Signal<Dynamic> {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(clock, 'onTick'), null))) {

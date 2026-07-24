@@ -4,7 +4,6 @@ package flighthq.sceneFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.sceneFormats.AwdSchema")
 class AwdSchema {
   public static final AWD_MAGIC_0:Dynamic = 65.0;
 

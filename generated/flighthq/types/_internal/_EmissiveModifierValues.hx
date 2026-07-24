@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Modifier;
 import flighthq.types.Texture;
 
-@:expose("flighthq.types._internal._EmissiveModifierValues")
 class _EmissiveModifierValues {
   public static final EmissiveModifierFacingValue:Dynamic = { AwayFromLight: 'AwayFromLight', Ignore: 'Ignore', TowardLight: 'TowardLight' };
 

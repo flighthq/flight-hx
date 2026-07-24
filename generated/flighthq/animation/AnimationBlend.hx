@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.AnimationSampleAccumulator;
 
-@:expose("flighthq.animation.AnimationBlend")
 class AnimationBlend {
   public static function accumulateAnimationSample(accumulator:AnimationSampleAccumulator, sample:Dynamic, weight:Float):Void {
     var components:Dynamic = cast _Runtime.UNDEFINED;

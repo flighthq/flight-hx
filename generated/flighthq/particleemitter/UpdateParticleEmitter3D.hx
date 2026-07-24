@@ -17,7 +17,6 @@ import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterState;
 import flighthq.types.SceneNode;
 
-@:expose("flighthq.particleemitter.UpdateParticleEmitter3D")
 class UpdateParticleEmitter3D {
   public static final PARTICLE_TRANSFORM_STRIDE__updateParticleEmitter3D:Dynamic = 4.0;
 

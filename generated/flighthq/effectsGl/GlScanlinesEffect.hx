@@ -10,7 +10,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.ScanlinesEffect;
 
-@:expose("flighthq.effectsGl.GlScanlinesEffect")
 class GlScanlinesEffect {
   public static function applyScanlinesEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ScanlinesEffect):Void {
     var count:Dynamic = cast _Runtime.UNDEFINED;

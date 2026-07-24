@@ -19,7 +19,6 @@ import flighthq.types.FlyCameraController.FlyCameraControllerOptions;
 import flighthq.types.OrbitCameraController;
 import flighthq.types.OrbitCameraController.OrbitCameraControllerOptions;
 
-@:expose("flighthq.cameraControls.CameraControls")
 class CameraControls {
   public static function cloneFlyCameraController(source:FlyCameraController):FlyCameraController {
     return cast _Runtime.callValue(Facade_CameraControls_flighthq_cameraControls_FlyCameraController.cloneFlyCameraController, cast ([source] : Array<Dynamic>));

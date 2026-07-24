@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.LensDirtEffect;
 
-@:expose("flighthq.effects.LensDirtEffect")
 class LensDirtEffect {
   public static function createLensDirtEffect(?options:Dynamic):flighthq.types.LensDirtEffect {
     if (options == null) options = cast ({  } : Dynamic);

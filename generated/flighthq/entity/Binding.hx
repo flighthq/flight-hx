@@ -8,7 +8,6 @@ import flighthq.entity.Runtime.getEntityRuntime;
 import flighthq.types.Entity;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
-@:expose("flighthq.entity.Binding")
 class Binding {
   public static function attachEntityBinding(entity:Entity, binding:Dynamic):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.getIndex(entity, EntityRuntimeKey), _Runtime.field(_Runtime, 'UNDEFINED')))) {

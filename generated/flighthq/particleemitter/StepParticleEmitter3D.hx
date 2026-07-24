@@ -14,7 +14,6 @@ import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterState;
 import flighthq.types.ParticleForce;
 
-@:expose("flighthq.particleemitter.StepParticleEmitter3D")
 class StepParticleEmitter3D {
   public static function stepParticleEmitter3D(emitter:ParticleEmitter3D, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?callbacks:ParticleEmitterCallbacks):Void {
     var asEmitter:Dynamic = cast _Runtime.UNDEFINED;

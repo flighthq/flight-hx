@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.ColorBlindSimulationAdjustment;
 import flighthq.types.ColorBlindSimulationAdjustment.ColorBlindType;
 
-@:expose("flighthq.adjustments.ColorBlindSimulationAdjustment")
 class ColorBlindSimulationAdjustment {
   public static function createColorBlindSimulationAdjustment(?options:Dynamic):flighthq.types.ColorBlindSimulationAdjustment {
     if (options == null) options = cast ({  } : Dynamic);

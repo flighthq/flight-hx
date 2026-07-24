@@ -8,7 +8,6 @@ import flighthq.textsegment.TextSegment.segmentWords;
 import flighthq.types.TextSegment;
 import flighthq.types.TextSegment.TextSegmentRange;
 
-@:expose("flighthq.textsegment.TextSegmentBoundary")
 class TextSegmentBoundary {
   public static function getNextGraphemeBoundary(text:String, index:Float, ?locale:String):Float {
     return cast _Runtime.callValue(TextSegmentBoundary.nextSegmentBoundary__textSegmentBoundary, cast ([_Runtime.callValue(segmentGraphemes, cast ([text, locale] : Array<Dynamic>)), index, _Runtime.field(text, 'length')] : Array<Dynamic>));

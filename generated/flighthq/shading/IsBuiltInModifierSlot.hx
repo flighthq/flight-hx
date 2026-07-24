@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.ModifierSlot;
 import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 
-@:expose("flighthq.shading.IsBuiltInModifierSlot")
 class IsBuiltInModifierSlot {
   public static function isBuiltInModifierSlot(value:String):Bool {
     return cast _Runtime.callProperty(IsBuiltInModifierSlot.BUILT_IN_SLOTS__isBuiltInModifierSlot, 'has', cast ([value] : Array<Dynamic>));

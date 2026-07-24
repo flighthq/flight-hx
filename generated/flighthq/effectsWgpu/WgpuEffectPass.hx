@@ -12,7 +12,6 @@ import flighthq.types.WgpuRenderTarget;
 
 typedef WgpuEffectPassState__wgpuEffectPass = { var uniformBuffer:Dynamic; var uniformData:flighthq._internal._Float32Array; var uniformDataI32:Dynamic; var uniformOffset:Float; var uniformStride:Float; var uniformSlots:Float; var uniformBGLayout:Dynamic; var uniformBG:Dynamic; var textureBGLayout:Dynamic; var textureBGs:Dynamic; var sampler:Dynamic; var format:Dynamic; };
 
-@:expose("flighthq.effectsWgpu.WgpuEffectPass")
 class WgpuEffectPass {
   public static final EFFECT_VERTEX_WGSL:Dynamic = '\nstruct VertexOut {\n  @builtin(position) position : vec4f,\n  @location(0) uv : vec2f,\n}\n\n@vertex\nfn vs_main(@builtin(vertex_index) vi : u32) -> VertexOut {\n  let xi = vi == 1u || vi == 2u || vi == 4u;\n  let yi = vi == 2u || vi == 4u || vi == 5u;\n  var out : VertexOut;\n  out.position = vec4f(select(-1.0, 1.0, xi), select(-1.0, 1.0, yi), 0.0, 1.0);\n  out.uv = vec2f(select(0.0, 1.0, xi), select(1.0, 0.0, yi));\n  return out;\n}\n';
 

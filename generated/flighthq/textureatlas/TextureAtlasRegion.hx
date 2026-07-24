@@ -10,7 +10,6 @@ import flighthq.types.TextureAtlasRegion;
 import flighthq.types.TextureAtlasRegion.TextureAtlasRegionLike;
 import flighthq.types.Vector2.Vector2Like;
 
-@:expose("flighthq.textureatlas.TextureAtlasRegion")
 class TextureAtlasRegion {
   public static function addTextureAtlasRegion(target:TextureAtlas, x:Float, y:Float, width:Float, height:Float, ?pivotX:Float, ?pivotY:Float, ?name:String):Void {
     _Runtime.callProperty(_Runtime.field(target, 'regions'), 'push', cast ([_Runtime.callValue(createTextureAtlasRegion, cast ([{ x: x, y: y, width: width, height: height, id: _Runtime.field(_Runtime.field(target, 'regions'), 'length'), pivotX: _Runtime.coalesce(pivotX, function():Dynamic return cast null), pivotY: _Runtime.coalesce(pivotY, function():Dynamic return cast null), name: _Runtime.coalesce(name, function():Dynamic return cast null) }] : Array<Dynamic>))] : Array<Dynamic>));

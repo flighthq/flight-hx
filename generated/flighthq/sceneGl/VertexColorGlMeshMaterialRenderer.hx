@@ -24,7 +24,6 @@ import flighthq.types.Types.VertexColorMaterialKind;
 import flighthq.types.VertexColorMaterial;
 import flighthq.types._internal._VertexColorMaterialValues.VertexColorMaterialKind;
 
-@:expose("flighthq.sceneGl.VertexColorGlMeshMaterialRenderer")
 class VertexColorGlMeshMaterialRenderer {
   public static final vertexColorGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;

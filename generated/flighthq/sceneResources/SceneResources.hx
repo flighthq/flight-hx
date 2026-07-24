@@ -41,7 +41,6 @@ import flighthq.types.SceneResources.SceneResourceSignals;
 import flighthq.types.Texture;
 import flighthq.types.TweenManager;
 
-@:expose("flighthq.sceneResources.SceneResources")
 class SceneResources {
   public static function areSceneResourceFailureGuardsEnabled(resolver:SceneResourceResolver):Bool {
     return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_EnableSceneResourceFailureGuards.areSceneResourceFailureGuardsEnabled, cast ([resolver] : Array<Dynamic>));

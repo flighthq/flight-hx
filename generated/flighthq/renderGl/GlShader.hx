@@ -11,7 +11,6 @@ import flighthq.types.GlShaderLocations.GlBitmapShader;
 import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
 
-@:expose("flighthq.renderGl.GlShader")
 class GlShader {
   public static final VERTEX_SRC__glShader:Dynamic = '#version 300 es\nin vec2 a_position;\nin vec2 a_texCoord;\nuniform mat3 u_matrix;\nout vec2 v_texCoord;\nvoid main() {\n  vec3 pos = u_matrix * vec3(a_position, 1.0);\n  gl_Position = vec4(pos.xy, 0.0, 1.0);\n  v_texCoord = a_texCoord;\n}';
 

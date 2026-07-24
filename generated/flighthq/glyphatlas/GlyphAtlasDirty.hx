@@ -7,7 +7,6 @@ import flighthq.geometry.Rectangle.createRectangle;
 import flighthq.types.GlyphSource.GlyphAtlas;
 import flighthq.types.Rectangle;
 
-@:expose("flighthq.glyphatlas.GlyphAtlasDirty")
 class GlyphAtlasDirty {
   public static function clearGlyphAtlasDirty(atlas:GlyphAtlas):Void {
     _Runtime.setField(_Runtime.field(atlas, 'runtime'), 'dirty', false);

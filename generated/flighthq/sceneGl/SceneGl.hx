@@ -99,7 +99,6 @@ import flighthq.types.Texture;
 import flighthq.types.Texture.TextureLike;
 import flighthq.types.VideoTexture;
 
-@:expose("flighthq.sceneGl.SceneGl")
 class SceneGl {
   public static final animatedNormalGlModifierSnippet:GlModifierSnippet = Facade_SceneGl_flighthq_sceneGl_GlShadedBuiltInModifiers.animatedNormalGlModifierSnippet;
 

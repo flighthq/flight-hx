@@ -4,7 +4,6 @@ package flighthq.tilemapFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.tilemapFormats.TiledColor")
 class TiledColor {
   public static function formatTiledColor(packed:Float):String {
     var p:Dynamic = cast _Runtime.UNDEFINED;

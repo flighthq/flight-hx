@@ -14,7 +14,6 @@ import flighthq.types.QuadBatch;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.SpriteRenderer;
 
-@:expose("flighthq.displayobjectCanvas.CanvasQuadBatch")
 class CanvasQuadBatch {
   public static function drawCanvasQuadBatch(state:Dynamic, quadBatch:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;

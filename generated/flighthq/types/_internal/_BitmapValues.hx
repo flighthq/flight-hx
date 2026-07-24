@@ -9,7 +9,6 @@ import flighthq.types.DisplayObject.DisplayObjectRuntime;
 import flighthq.types.ImageResource;
 import flighthq.types.Rectangle;
 
-@:expose("flighthq.types._internal._BitmapValues")
 class _BitmapValues {
   public static final BitmapKind:Dynamic = 'Bitmap';
 }

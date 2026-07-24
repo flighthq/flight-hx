@@ -12,7 +12,6 @@ import flighthq.types.DisplayObjectRenderer.DisplayObjectClipHooks;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
 
-@:expose("flighthq.displayobjectCanvas.CanvasClip")
 class CanvasClip {
   public static function enableCanvasClip(state:Dynamic):Void {
     _Runtime.setField(state, 'displayObjectClipHooks', CanvasClip.canvasClipHooks__canvasClip);

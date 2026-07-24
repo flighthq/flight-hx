@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.CapacitorApi;
 import flighthq.types.Clipboard.ClipboardBackend;
 
-@:expose("flighthq.hostCapacitor.CapacitorClipboard")
 class CapacitorClipboard {
   public static function createCapacitorClipboardBackend(capacitor:CapacitorApi):ClipboardBackend {
     var clipboard:Dynamic = cast _Runtime.UNDEFINED;

@@ -11,7 +11,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlShaderLocations.GlBitmapShader;
 import flighthq.types.RenderProxy2D;
 
-@:expose("flighthq.renderGl.GlShaderBinding")
 class GlShaderBinding {
   public static final _shaderBindings__glShaderBinding:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 

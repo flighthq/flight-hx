@@ -8,7 +8,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.VignetteEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasVignetteEffect")
 class CanvasVignetteEffect {
   public static function applyVignetteEffectToCanvas(source:Dynamic, dest:Dynamic, effect:VignetteEffect):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;

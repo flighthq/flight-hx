@@ -19,7 +19,6 @@ import flighthq.useragent.UserAgent.parseUserAgentPointerWidth;
 import flighthq.useragent.UserAgent.parseUserAgentRuntime;
 import flighthq.useragent.UserAgent.parseUserAgentVersion;
 
-@:expose("flighthq.platform.Platform")
 class Platform {
   public static var _backend__platform:Null<PlatformBackend> = _Runtime.explicitNull();
 

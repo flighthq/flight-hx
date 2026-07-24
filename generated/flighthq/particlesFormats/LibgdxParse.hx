@@ -12,7 +12,6 @@ import flighthq.types.ParticleEmitterConfig;
 
 typedef LibgdxSection__libgdxParse = Dynamic;
 
-@:expose("flighthq.particlesFormats.LibgdxParse")
 class LibgdxParse {
   public static function parseLibgdxParticle(text:String, ?options:LibgdxParseOptions):ParticleEmitterConfig {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;

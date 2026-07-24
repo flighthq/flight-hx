@@ -11,7 +11,6 @@ import flighthq.types.Bidi.BidiClassBackend;
 import flighthq.types.Bidi.BidiDirection;
 import flighthq.types.Bidi.BidiRun;
 
-@:expose("flighthq.textbidi.Textbidi")
 class Textbidi {
   public static function createCompactBidiClassBackend():BidiClassBackend {
     return cast _Runtime.callValue(Facade_Textbidi_flighthq_textbidi_BidiClassBackend.createCompactBidiClassBackend, cast ([] : Array<Dynamic>));

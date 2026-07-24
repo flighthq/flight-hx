@@ -13,7 +13,6 @@ import flighthq.types.Node;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
 
-@:expose("flighthq.render.RenderTransform2d")
 class RenderTransform2d {
   public static function updateRenderProxy2DTransform(state:RenderState, data:RenderProxy2D, ?parentData:RenderProxy2D):Bool {
     var localTransformId:Dynamic = cast _Runtime.UNDEFINED;

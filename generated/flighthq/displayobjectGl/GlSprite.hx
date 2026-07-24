@@ -11,7 +11,6 @@ import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.DisplayObject;
 import flighthq.types.GlRenderState;
 
-@:expose("flighthq.displayobjectGl.GlSprite")
 class GlSprite {
   public static function renderGlSprite(state:GlRenderState, source:DisplayObject):Void {
     var tempStack:Dynamic = cast _Runtime.UNDEFINED;

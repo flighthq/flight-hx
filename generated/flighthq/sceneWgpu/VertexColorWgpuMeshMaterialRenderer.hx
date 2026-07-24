@@ -24,7 +24,6 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuUnlitPipeline.WgpuUnlitDefineKey;
 import flighthq.types._internal._VertexColorMaterialValues.VertexColorMaterialKind;
 
-@:expose("flighthq.sceneWgpu.VertexColorWgpuMeshMaterialRenderer")
 class VertexColorWgpuMeshMaterialRenderer {
   public static final vertexColorWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera3D) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;

@@ -67,7 +67,6 @@ import flighthq.types.WgpuShapeMesh;
 import flighthq.types.WgpuVelocityWriter;
 import flighthq.types.WgpuVelocityWriter.WgpuVelocityContext;
 
-@:expose("flighthq.displayobjectWgpu.DisplayobjectWgpu")
 class DisplayobjectWgpu {
   public static function areWgpuColorAdjustmentGuardsEnabled(state:WgpuRenderState):Bool {
     return cast _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_EnableWgpuColorAdjustmentGuards.areWgpuColorAdjustmentGuardsEnabled, cast ([state] : Array<Dynamic>));

@@ -10,7 +10,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.LensDistortionEffect;
 
-@:expose("flighthq.effectsGl.GlLensDistortionEffect")
 class GlLensDistortionEffect {
   public static function applyLensDistortionEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:LensDistortionEffect):Void {
     var amount:Dynamic = cast _Runtime.UNDEFINED;

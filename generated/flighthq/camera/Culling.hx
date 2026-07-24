@@ -16,7 +16,6 @@ import flighthq.types.Camera3D;
 import flighthq.types.Frustum.FrustumLike;
 import flighthq.types.Vector3.Vector3Like;
 
-@:expose("flighthq.camera.Culling")
 class Culling {
   public static function getCamera3DFrustum(out:FrustumLike, camera:Camera3D, aspect:Float):Void {
     _Runtime.callValue(getCamera3DViewProjectionMatrix4, cast ([Culling.__scratchViewProjection__culling, camera, aspect] : Array<Dynamic>));

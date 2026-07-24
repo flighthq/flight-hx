@@ -17,7 +17,6 @@ import flighthq.types.WgpuSceneRuntime.WgpuMaterialBinding;
 import flighthq.types.WgpuUnlitPipeline;
 import flighthq.types.WgpuUnlitPipeline.WgpuUnlitDefineKey;
 
-@:expose("flighthq.sceneWgpu.WgpuUnlitPrelude")
 class WgpuUnlitPrelude {
   public static function bindWgpuUnlitSurface(state:WgpuRenderState, pipeline:WgpuUnlitPipeline, materialKey:Dynamic, color:LinearColor, intensity:Float, alphaCutoff:Float, colorMap:Null<Texture>):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;

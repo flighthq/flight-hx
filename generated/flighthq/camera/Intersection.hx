@@ -11,7 +11,6 @@ import flighthq.types.Plane.PlaneLike;
 import flighthq.types.Ray3D.Ray3DLike;
 import flighthq.types.Vector3.Vector3Like;
 
-@:expose("flighthq.camera.Intersection")
 class Intersection {
   public static function getCamera3DRayThroughBoundingSphere(out:Ray3DLike, camera:Camera3D, sphere:BoundingSphereLike, aspect:Float):Bool {
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(sphere, 'radius'), 0.0, '<'))) {

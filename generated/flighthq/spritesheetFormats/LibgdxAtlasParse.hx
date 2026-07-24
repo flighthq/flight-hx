@@ -18,7 +18,6 @@ typedef LibgdxPage__libgdxAtlasParse = { var filename:String; var height:Float; 
 
 typedef LibgdxRegion__libgdxAtlasParse = { var index:Float; var name:String; var offsetX:Float; var offsetY:Float; var page:LibgdxPage__libgdxAtlasParse; var rotated:Bool; var sourceHeight:Float; var sourceWidth:Float; var spriteHeight:Float; var spriteWidth:Float; var x:Float; var y:Float; };
 
-@:expose("flighthq.spritesheetFormats.LibgdxAtlasParse")
 class LibgdxAtlasParse {
   public static function parseIntPair__libgdxAtlasParse(value:String):Array<Float> {
     var parts:Dynamic = cast _Runtime.UNDEFINED;

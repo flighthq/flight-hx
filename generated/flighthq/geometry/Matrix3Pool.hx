@@ -7,7 +7,6 @@ import flighthq.geometry.Matrix3.createMatrix3;
 import flighthq.geometry.Matrix3.setMatrix3Identity;
 import flighthq.types.Matrix3;
 
-@:expose("flighthq.geometry.Matrix3Pool")
 class Matrix3Pool {
   public static function acquireIdentityMatrix3():Matrix3 {
     var m:Dynamic = cast _Runtime.UNDEFINED;

@@ -9,7 +9,6 @@ import flighthq.types.Material;
 import flighthq.types.Mesh;
 import flighthq.types.SceneNode;
 
-@:expose("flighthq.scene.SceneMaterial")
 class SceneMaterial {
   public static function findSceneMaterialByName(root:SceneNode, name:String):Null<Material> {
     var rootMatch:Dynamic = cast _Runtime.UNDEFINED;

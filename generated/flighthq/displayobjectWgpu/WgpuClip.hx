@@ -13,7 +13,6 @@ import flighthq.types.DisplayObjectRenderer.DisplayObjectClipHooks;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.WgpuRenderState;
 
-@:expose("flighthq.displayobjectWgpu.WgpuClip")
 class WgpuClip {
   public static function enableWgpuClipSupport(state:WgpuRenderState):Void {
     _Runtime.setField(state, 'displayObjectClipHooks', WgpuClip.webgpuClipHooks__wgpuClip);

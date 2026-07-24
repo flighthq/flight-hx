@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.WgpuRenderState;
 
-@:expose("flighthq.renderWgpu.WgpuMipmap")
 class WgpuMipmap {
   public static function generateWgpuMipmaps(state:WgpuRenderState, texture:Dynamic, width:Float, height:Float, format:Dynamic):Void {
     var levelCount:Dynamic = cast _Runtime.UNDEFINED;

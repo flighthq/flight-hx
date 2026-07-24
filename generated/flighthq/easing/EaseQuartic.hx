@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
-@:expose("flighthq.easing.EaseQuartic")
 class EaseQuartic {
   public static final easeInOutQuartic:EasingFunction = function(t:Dynamic) return _Runtime.select(_Runtime.compare(t, 0.5, '<'), function():Dynamic return cast ((((8.0 * t) * t) * t) * t), function():Dynamic return cast (1.0 - (_Runtime.callProperty(HxMath, 'pow', cast ([((-2.0 * t) + 2.0), 4.0] : Array<Dynamic>)) / 2.0)));
 

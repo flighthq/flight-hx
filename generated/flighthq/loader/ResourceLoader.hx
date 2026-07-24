@@ -20,7 +20,6 @@ typedef TokenBucket__resourceLoader = { var lastRefillMs:Float; var maxBytesPerS
 
 typedef ResourceLoaderInternal__resourceLoader = Dynamic;
 
-@:expose("flighthq.loader.ResourceLoader")
 class ResourceLoader {
   public static final AUTO_KEY_PREFIX__resourceLoader:Dynamic = '__item_';
 

@@ -11,7 +11,6 @@ import flighthq.types.SceneNode;
 import flighthq.types.SceneResources.SceneMaterialTextureRegistry;
 import flighthq.types.Texture;
 
-@:expose("flighthq.sceneResources.GetSceneResourceTextures")
 class GetSceneResourceTextures {
   public static function getSceneResourceTextures(scene:SceneNode, registry:SceneMaterialTextureRegistry, out:Array<Texture>):Void {
     var seen:Dynamic = cast _Runtime.UNDEFINED;

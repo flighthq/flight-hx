@@ -4,7 +4,6 @@ package flighthq.sceneFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.sceneFormats.Md2Schema")
 class Md2Schema {
   public static final MD2_MAGIC:Dynamic = 844121161.0;
 

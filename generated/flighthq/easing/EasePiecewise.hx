@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 import flighthq.types.EasingSegment;
 
-@:expose("flighthq.easing.EasePiecewise")
 class EasePiecewise {
   public static function easePiecewise(segments:Array<EasingSegment>):EasingFunction {
     var totalWeight:Dynamic = cast _Runtime.UNDEFINED;

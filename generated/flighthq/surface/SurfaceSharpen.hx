@@ -7,7 +7,6 @@ import flighthq.surface.SurfaceBlur.boxBlurSurface;
 import flighthq.types.SurfaceRegion;
 import flighthq.types.SurfaceSharpenOptions;
 
-@:expose("flighthq.surface.SurfaceSharpen")
 class SurfaceSharpen {
   public static function sharpenSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceSharpenOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);

@@ -7,7 +7,6 @@ import flighthq.path.TessellatePath.tessellatePath;
 import flighthq.types.Path;
 import flighthq.types.PathMeshTyped;
 
-@:expose("flighthq.path.TessellatePathTyped")
 class TessellatePathTyped {
   public static function tessellatePathTyped(path:Path, tolerance:Dynamic = 0.25):PathMeshTyped {
     var mesh:Dynamic = cast _Runtime.UNDEFINED;

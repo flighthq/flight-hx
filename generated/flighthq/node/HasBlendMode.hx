@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.HasBlendMode;
 
-@:expose("flighthq.node.HasBlendMode")
 class HasBlendMode {
   public static function initBlendModeTrait(target:flighthq.types.HasBlendMode, ?obj:Dynamic):Void {
     _Runtime.setField(target, 'blendMode', _Runtime.coalesce(_Runtime.optionalField(obj, 'blendMode'), function():Dynamic return cast null));

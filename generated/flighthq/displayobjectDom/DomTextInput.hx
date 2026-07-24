@@ -20,7 +20,6 @@ import flighthq.types.TextSelectionRectangle;
 
 typedef DomTextInputData__domTextInput = Dynamic;
 
-@:expose("flighthq.displayobjectDom.DomTextInput")
 class DomTextInput {
   public static var _keyframesInjected__domTextInput:Dynamic = false;
 

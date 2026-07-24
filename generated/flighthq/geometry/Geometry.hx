@@ -65,7 +65,6 @@ import flighthq.types.Vector3.Vector3Like;
 import flighthq.types.Vector4;
 import flighthq.types.Vector4.Vector4Like;
 
-@:expose("flighthq.geometry.Geometry")
 class Geometry {
   public static function acquireEmptyRectangle():Rectangle {
     return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_RectanglePool.acquireEmptyRectangle, cast ([] : Array<Dynamic>));

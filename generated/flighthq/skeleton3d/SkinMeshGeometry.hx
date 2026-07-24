@@ -11,7 +11,6 @@ import flighthq.types.MeshGeometry.VertexAttributeLayout;
 import flighthq.types.MeshSkinBindPose;
 import flighthq.types.Skeleton3D;
 
-@:expose("flighthq.skeleton3d.SkinMeshGeometry")
 class SkinMeshGeometry {
   public static function captureMeshSkinBindPose(geometry:MeshGeometry):MeshSkinBindPose {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;

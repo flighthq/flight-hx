@@ -9,7 +9,6 @@ import flighthq.bitmapfontFormats.BitmapFontXml as Facade_BitmapfontFormats_flig
 import flighthq.types.BitmapFont;
 import flighthq.types.BitmapFont.BitmapFontParseOptions;
 
-@:expose("flighthq.bitmapfontFormats.BitmapfontFormats")
 class BitmapfontFormats {
   public static function formatBitmapFontFnt(font:BitmapFont):String {
     return cast _Runtime.callValue(Facade_BitmapfontFormats_flighthq_bitmapfontFormats_BitmapFontFnt.formatBitmapFontFnt, cast ([font] : Array<Dynamic>));

@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.SceneNode;
 import flighthq.types.SceneNode.SceneNodeRuntime;
 
-@:expose("flighthq.types._internal._GroupValues")
 class _GroupValues {
   public static final GroupKind:Dynamic = 'Group';
 }

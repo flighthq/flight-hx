@@ -20,7 +20,6 @@ typedef WebWakeLock__power = { var request:Dynamic; };
 
 typedef WebWakeLockSentinel__power = { @:optional var addEventListener:Dynamic; @:optional var release:Dynamic; };
 
-@:expose("flighthq.power.Power")
 class Power {
   public static var _backend__power:Null<PowerBackend> = _Runtime.explicitNull();
 

@@ -10,7 +10,6 @@ import flighthq.types.DomRenderState;
 import flighthq.types._internal._AdvancedBlendModeValues.AdvancedBlendModeValue;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
-@:expose("flighthq.displayobjectDom.DomMaterials")
 class DomMaterials {
   public static final DOM_BLEND_MODE__domMaterials:Dynamic = _Runtime.objectFromPairs([{ key: BlendModeValue.Add, value: 'screen' }, { key: BlendModeValue.Darken, value: 'darken' }, { key: BlendModeValue.Lighten, value: 'lighten' }, { key: BlendModeValue.Multiply, value: 'multiply' }, { key: BlendModeValue.Normal, value: '' }, { key: BlendModeValue.Screen, value: 'screen' }, { key: AdvancedBlendModeValue.Color, value: 'color' }, { key: AdvancedBlendModeValue.ColorBurn, value: 'color-burn' }, { key: AdvancedBlendModeValue.ColorDodge, value: 'color-dodge' }, { key: AdvancedBlendModeValue.Difference, value: 'difference' }, { key: AdvancedBlendModeValue.Exclusion, value: 'exclusion' }, { key: AdvancedBlendModeValue.HardLight, value: 'hard-light' }, { key: AdvancedBlendModeValue.Hue, value: 'hue' }, { key: AdvancedBlendModeValue.Luminosity, value: 'luminosity' }, { key: AdvancedBlendModeValue.Overlay, value: 'overlay' }, { key: AdvancedBlendModeValue.Saturation, value: 'saturation' }, { key: AdvancedBlendModeValue.SoftLight, value: 'soft-light' }]);
 

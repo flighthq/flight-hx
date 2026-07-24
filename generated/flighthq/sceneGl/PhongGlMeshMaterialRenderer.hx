@@ -30,7 +30,6 @@ import flighthq.types.SceneRenderProxy;
 import flighthq.types.Types.PhongMaterialKind;
 import flighthq.types._internal._PhongMaterialValues.PhongMaterialKind;
 
-@:expose("flighthq.sceneGl.PhongGlMeshMaterialRenderer")
 class PhongGlMeshMaterialRenderer {
   public static final phongGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;

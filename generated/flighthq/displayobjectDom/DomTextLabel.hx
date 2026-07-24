@@ -26,7 +26,6 @@ import flighthq.types.TextLabel.TextLabelRuntime;
 
 typedef DomTextData__domTextLabel = Dynamic;
 
-@:expose("flighthq.displayobjectDom.DomTextLabel")
 class DomTextLabel {
   public static function createDomTextData__domTextLabel(_state:RenderState, _source:Renderable):DomTextData__domTextLabel {
     return cast _Runtime.callValue(createEntity, cast ([{ div: null }] : Array<Dynamic>));

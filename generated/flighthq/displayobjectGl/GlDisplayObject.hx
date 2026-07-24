@@ -14,7 +14,6 @@ import flighthq.types.DisplayObjectRenderer;
 import flighthq.types.GlRenderState;
 import flighthq.types.RenderProxy2D;
 
-@:expose("flighthq.displayobjectGl.GlDisplayObject")
 class GlDisplayObject {
   public static function drawGlDisplayObject(_state:GlRenderState, _renderProxy:RenderProxy2D):Void {
   }

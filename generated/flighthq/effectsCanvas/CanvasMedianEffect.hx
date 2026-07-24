@@ -8,7 +8,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.MedianEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasMedianEffect")
 class CanvasMedianEffect {
   public static function applyMedianEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:MedianEffect):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));

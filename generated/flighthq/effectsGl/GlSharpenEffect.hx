@@ -10,7 +10,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.SharpenEffect;
 
-@:expose("flighthq.effectsGl.GlSharpenEffect")
 class GlSharpenEffect {
   public static function applySharpenEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SharpenEffect):Void {
     var amount:Dynamic = cast _Runtime.UNDEFINED;

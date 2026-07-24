@@ -26,7 +26,6 @@ import flighthq.types.TransmissionVolumePbrMaterial;
 import flighthq.types.Types.TransmissionVolumePbrMaterialKind;
 import flighthq.types._internal._TransmissionVolumePbrMaterialValues.TransmissionVolumePbrMaterialKind;
 
-@:expose("flighthq.sceneGl.TransmissionVolumePbrGlMeshMaterialRenderer")
 class TransmissionVolumePbrGlMeshMaterialRenderer {
   public static final transmissionVolumePbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;

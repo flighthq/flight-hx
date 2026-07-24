@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
-@:expose("flighthq.easing.EaseCubic")
 class EaseCubic {
   public static final easeInCubic:EasingFunction = function(t:Dynamic) return ((t * t) * t);
 

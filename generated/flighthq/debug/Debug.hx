@@ -19,7 +19,6 @@ import flighthq.types.Log.LogLevel;
 import flighthq.types.Log.LogSink;
 import flighthq.types.Log.LogTimer;
 
-@:expose("flighthq.debug.Debug")
 class Debug {
   public static function _applyDebugLevels__debug(level:LogLevel, channels:Array<String>):Void {
     _Runtime.callValue(setLogLevel, cast ([level] : Array<Dynamic>));

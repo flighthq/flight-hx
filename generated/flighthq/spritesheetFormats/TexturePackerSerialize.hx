@@ -12,7 +12,6 @@ import flighthq.types.TexturePackerSchema.TexturePackerHashFrame;
 import flighthq.types.TexturePackerSchema.TexturePackerMeta;
 import flighthq.types.TexturePackerSchema.TexturePackerSerializeOptions;
 
-@:expose("flighthq.spritesheetFormats.TexturePackerSerialize")
 class TexturePackerSerialize {
   public static function dataToMeta__texturePackerSerialize(data:SpritesheetData, existing:Dynamic):TexturePackerMeta {
     return cast { app: _Runtime.coalesce(_Runtime.field(existing, 'app'), function():Dynamic return cast 'https://www.codeandweb.com/texturepacker'), format: _Runtime.coalesce(_Runtime.field(existing, 'format'), function():Dynamic return cast 'RGBA8888'), frameTags: _Runtime.select(_Runtime.field(_Runtime.field(data, 'animations'), 'length'), function():Dynamic return cast _Runtime.callProperty(_Runtime.field(data, 'animations'), 'map', cast ([function(anim:Dynamic) {

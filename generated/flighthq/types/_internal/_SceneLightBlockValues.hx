@@ -11,7 +11,6 @@ import flighthq.types.Types.SCENE_LIGHT_POINT_STRIDE;
 import flighthq.types.Types.SCENE_LIGHT_SPOT_OFFSET;
 import flighthq.types.Types.SCENE_LIGHT_SPOT_STRIDE;
 
-@:expose("flighthq.types._internal._SceneLightBlockValues")
 class _SceneLightBlockValues {
   public static final MAX_FORWARD_LIGHTS:Dynamic = 4.0;
 

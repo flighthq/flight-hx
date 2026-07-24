@@ -38,7 +38,6 @@ import flighthq.types.WgpuRichTextOverlay;
 
 typedef WgpuRichTextData__wgpuRichText = { var entry:Null<WgpuTextureEntry>; var w:Float; var h:Float; };
 
-@:expose("flighthq.displayobjectWgpu.WgpuRichText")
 class WgpuRichText {
   public static var _offscreenCanvas__wgpuRichText:Null<Dynamic> = _Runtime.explicitNull();
 

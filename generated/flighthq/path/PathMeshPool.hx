@@ -9,7 +9,6 @@ import flighthq.types.Path;
 import flighthq.types.PathMesh;
 import flighthq.types.PathMeshTyped;
 
-@:expose("flighthq.path.PathMeshPool")
 class PathMeshPool {
   public static function acquirePathMesh(path:Path, tolerance:Dynamic = 0.25):PathMesh {
     var mesh:Dynamic = cast _Runtime.UNDEFINED;

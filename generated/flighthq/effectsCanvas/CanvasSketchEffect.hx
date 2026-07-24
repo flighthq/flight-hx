@@ -8,7 +8,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.SketchEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasSketchEffect")
 class CanvasSketchEffect {
   public static function applySketchEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:SketchEffect):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));

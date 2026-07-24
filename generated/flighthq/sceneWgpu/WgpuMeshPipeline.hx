@@ -40,7 +40,6 @@ import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_POINT_STRIDE;
 import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_SPOT_OFFSET;
 import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_SPOT_STRIDE;
 
-@:expose("flighthq.sceneWgpu.WgpuMeshPipeline")
 class WgpuMeshPipeline {
   public static function beginWgpuMeshDraw(state:WgpuRenderState, pipeline:flighthq.types.WgpuMeshPipeline):Void {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;

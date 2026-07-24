@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
-@:expose("flighthq.easing.EaseElastic")
 class EaseElastic {
   public static final easeInElastic:EasingFunction = function(t:Dynamic) {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(t, 0.0), function():Dynamic return cast _Runtime.strictEquals(t, 1.0)))) { return cast t; }

@@ -8,7 +8,6 @@ import flighthq.types.SurfaceEdgeMode;
 import flighthq.types.SurfaceRegion;
 import flighthq.types.SurfaceResizeMode;
 
-@:expose("flighthq.surface.SurfaceWarp")
 class SurfaceWarp {
   public static function warpSurface(dest:SurfaceRegion, source:SurfaceRegion, matrix:Array<Float>, edgeMode:SurfaceEdgeMode = 'transparent', sampleMode:SurfaceResizeMode = 'bilinear'):Void {
     var dw:Dynamic = cast _Runtime.UNDEFINED;

@@ -13,7 +13,6 @@ typedef WgpuBakedCube__wgpuEnvironmentIblBake = { var texture:Dynamic; var view:
 
 typedef WgpuBakePrograms__wgpuEnvironmentIblBake = { var brdfPipeline:Dynamic; var irradiancePipeline:Dynamic; var prefilteredPipeline:Dynamic; var sampler:Dynamic; var sourceBindGroupLayout:Dynamic; var uniformBindGroup:Dynamic; var uniformBuffer:Dynamic; };
 
-@:expose("flighthq.sceneWgpu.WgpuEnvironmentIblBake")
 class WgpuEnvironmentIblBake {
   public static function bakeWgpuEnvironmentIbl(state:WgpuRenderState, environment:Environment):Void {
     var sourceCubeView:Dynamic = cast _Runtime.UNDEFINED;

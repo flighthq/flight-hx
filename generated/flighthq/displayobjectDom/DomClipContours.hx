@@ -7,7 +7,6 @@ import flighthq.types.DomRenderState.DomClipContourEntry;
 import flighthq.types.Matrix;
 import flighthq.types.ShapeCommand.PathWinding;
 
-@:expose("flighthq.displayobjectDom.DomClipContours")
 class DomClipContours {
   public static function buildDomContourClipPath(entry:DomClipContourEntry, mapPointToElement:Dynamic):String {
     var d:Dynamic = cast _Runtime.UNDEFINED;

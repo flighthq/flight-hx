@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Camera3D;
 import flighthq.types.Vector3.Vector3Like;
 
-@:expose("flighthq.camera.Basis")
 class Basis {
   public static function getCamera3DForward(out:Vector3Like, camera:Camera3D):Void {
     var m:Dynamic = cast _Runtime.UNDEFINED;

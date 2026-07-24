@@ -11,7 +11,6 @@ import flighthq.node.BoundsRectangle.getNodeWorldBoundsRectangle;
 import flighthq.types.DisplayObject;
 import flighthq.types.Rectangle;
 
-@:expose("flighthq.interaction.DisplayObjectOverlap")
 class DisplayObjectOverlap {
   public static function containsDisplayObject(outer:DisplayObject, inner:DisplayObject):Bool {
     return cast _Runtime.callValue(enclosesRectangle, cast ([_Runtime.callValue(getNodeWorldBoundsRectangle, cast ([outer] : Array<Dynamic>)), _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([inner] : Array<Dynamic>))] : Array<Dynamic>));

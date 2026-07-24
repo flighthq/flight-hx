@@ -8,7 +8,6 @@ import flighthq.types.WgpuRenderStats;
 
 typedef Mutable__wgpuRenderStats<T> = Dynamic;
 
-@:expose("flighthq.displayobjectWgpu.WgpuRenderStats")
 class WgpuRenderStats {
   public static function getWgpuRenderStats(state:WgpuRenderState):flighthq.types.WgpuRenderStats {
     return cast _Runtime.callValue(WgpuRenderStats.ensureWgpuRenderStatsMutable__wgpuRenderStats, cast ([state] : Array<Dynamic>));

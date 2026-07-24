@@ -7,7 +7,6 @@ import flighthq.geometry.Typedarray.reserveFloat32Array;
 import flighthq.types.ParticleObjectsState;
 import flighthq.types.RandomSource;
 
-@:expose("flighthq.particles.ParticleObjectsState")
 class ParticleObjectsState {
   public static function createParticleObjectsState(capacity:Float, ?random:RandomSource):flighthq.types.ParticleObjectsState {
     if (random == null) random = cast (HxMath.random : Dynamic);

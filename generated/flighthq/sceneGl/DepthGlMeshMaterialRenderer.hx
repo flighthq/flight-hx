@@ -21,7 +21,6 @@ import flighthq.types.SceneRenderProxy;
 import flighthq.types.Types.DepthMaterialKind;
 import flighthq.types._internal._DepthMaterialValues.DepthMaterialKind;
 
-@:expose("flighthq.sceneGl.DepthGlMeshMaterialRenderer")
 class DepthGlMeshMaterialRenderer {
   public static final depthGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;

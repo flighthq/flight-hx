@@ -9,7 +9,6 @@ import flighthq.types.HemisphereLightOptions;
 import flighthq.types.Types.HemisphereLightKind;
 import flighthq.types._internal._HemisphereLightValues.HemisphereLightKind;
 
-@:expose("flighthq.lighting.HemisphereLight")
 class HemisphereLight {
   public static function cloneHemisphereLight(source:flighthq.types.HemisphereLight):flighthq.types.HemisphereLight {
     return cast _Runtime.callValue(createHemisphereLight, cast ([{ groundColor: _Runtime.field(source, 'groundColor'), intensity: _Runtime.field(source, 'intensity'), skyColor: _Runtime.field(source, 'skyColor') }] : Array<Dynamic>));

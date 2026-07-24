@@ -17,7 +17,6 @@ import flighthq.types.StarlingSchema.StarlingParsed;
 import flighthq.types.StarlingSchema.StarlingSubTexture;
 import flighthq.types.TextureAtlasRegion;
 
-@:expose("flighthq.spritesheetFormats.StarlingParse")
 class StarlingParse {
   public static function parseAttrs__starlingParse(attrs:String):Dynamic {
     var result:Dynamic = cast _Runtime.UNDEFINED;

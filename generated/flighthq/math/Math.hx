@@ -22,7 +22,6 @@ import flighthq.types.RandomSource;
 import flighthq.types.Vector2.Vector2Like;
 import flighthq.types.Vector3.Vector3Like;
 
-@:expose("flighthq.math.Math")
 class Math {
   public static function approxEqual(a:Float, b:Float, ?epsilon:Float):Bool {
     return cast _Runtime.callValue(Facade_Math_flighthq_math_Comparison.approxEqual, cast ([a, b, epsilon] : Array<Dynamic>));

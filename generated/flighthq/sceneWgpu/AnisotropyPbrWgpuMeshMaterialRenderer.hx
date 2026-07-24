@@ -25,7 +25,6 @@ import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._AnisotropyPbrMaterialValues.AnisotropyPbrMaterialKind;
 
-@:expose("flighthq.sceneWgpu.AnisotropyPbrWgpuMeshMaterialRenderer")
 class AnisotropyPbrWgpuMeshMaterialRenderer {
   public static final anisotropyPbrWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;

@@ -13,7 +13,6 @@ import flighthq.types.Net.NetResponseBody;
 import flighthq.types.Net.NetResponseType;
 import flighthq.types.Signal;
 
-@:expose("flighthq.net.Net")
 class Net {
   public static var _backend__net:Null<NetBackend> = _Runtime.explicitNull();
 

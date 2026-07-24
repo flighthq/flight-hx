@@ -21,7 +21,6 @@ import flighthq.types.TextShaperCache;
 import flighthq.types.TextShaperOptions;
 import flighthq.types.TextShaperSignals;
 
-@:expose("flighthq.textshaper.Textshaper")
 class Textshaper {
   public static function acquireShapedRun():ShapedRun {
     return cast _Runtime.callValue(Facade_Textshaper_flighthq_textshaper_TextShaperPool.acquireShapedRun, cast ([] : Array<Dynamic>));

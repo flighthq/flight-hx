@@ -10,7 +10,6 @@ import flighthq.types.Screen.ScreenInfo;
 import flighthq.types.ScreenChangeEvent;
 import flighthq.types.ScreenChangeEvent.ScreenChangeKind;
 
-@:expose("flighthq.hostElectron.ElectronScreen")
 class ElectronScreen {
   public static function createElectronScreenBackend(electron:ElectronApi):ScreenBackend {
     var screen:Dynamic = cast _Runtime.UNDEFINED;

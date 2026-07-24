@@ -8,7 +8,6 @@ import flighthq.types.CustomShaderMaterial;
 import flighthq.types.Types.CustomShaderMaterialKind;
 import flighthq.types._internal._CustomShaderMaterialValues.CustomShaderMaterialKind;
 
-@:expose("flighthq.materials.CustomShaderMaterial")
 class CustomShaderMaterial {
   public static function createCustomShaderMaterial(?opts:Dynamic):flighthq.types.CustomShaderMaterial {
     var material:Dynamic = cast _Runtime.UNDEFINED;

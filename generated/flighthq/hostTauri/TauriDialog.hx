@@ -10,7 +10,6 @@ import flighthq.types.Dialog.MessageDialogKind;
 import flighthq.types.TauriApi;
 import flighthq.types.TauriApi.TauriDialogFilter;
 
-@:expose("flighthq.hostTauri.TauriDialog")
 class TauriDialog {
   public static function createTauriDialogBackend(tauri:TauriApi):DialogBackend {
     var dialog:Dynamic = cast _Runtime.UNDEFINED;

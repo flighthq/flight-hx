@@ -22,7 +22,6 @@ import flighthq.types.MeshGeometry;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.Texture.TextureLike;
 
-@:expose("flighthq.sceneGl.GlMeshProgram")
 class GlMeshProgram {
   public static function beginGlMeshDraw(state:GlRenderState, program:flighthq.types.GlMeshProgram, doubleSided:Bool):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;

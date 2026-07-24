@@ -12,7 +12,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderTargetPool;
 import flighthq.types.CanvasRenderTarget;
 
-@:expose("flighthq.effectsCanvas.CanvasBloomEffect")
 class CanvasBloomEffect {
   public static function applyBloomEffectToCanvas(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:BloomEffect):Void {
     var threshold:Dynamic = cast _Runtime.UNDEFINED;

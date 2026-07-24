@@ -7,7 +7,6 @@ import flighthq.geometry.Typedarray.reserveFloat32Array;
 import flighthq.types.ParticleEmitterState;
 import flighthq.types.RandomSource;
 
-@:expose("flighthq.particles.ParticleEmitterState")
 class ParticleEmitterState {
   public static final PARTICLE_VELOCITY_STRIDE:Dynamic = 3.0;
 

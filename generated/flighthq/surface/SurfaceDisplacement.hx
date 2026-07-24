@@ -7,7 +7,6 @@ import flighthq.types.SurfaceDisplacementMapOptions;
 import flighthq.types.SurfaceEdgeMode;
 import flighthq.types.SurfaceRegion;
 
-@:expose("flighthq.surface.SurfaceDisplacement")
 class SurfaceDisplacement {
   public static function displaceSurface(out:Dynamic, source:SurfaceRegion, options:SurfaceDisplacementMapOptions):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;

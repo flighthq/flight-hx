@@ -29,7 +29,6 @@ import flighthq.types._internal._UnlitMaterialValues.UnlitMaterialKind;
 import flighthq.types._internal._VertexColorMaterialValues.VertexColorMaterialKind;
 import flighthq.types._internal._WireframeMaterialValues.WireframeMaterialKind;
 
-@:expose("flighthq.materials.UnlitMaterials")
 class UnlitMaterials {
   public static function createDepthMaterial(?opts:Dynamic):DepthMaterial {
     var material:Dynamic = cast _Runtime.UNDEFINED;

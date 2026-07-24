@@ -9,7 +9,6 @@ import flighthq.types.PhongMaterial;
 import flighthq.types.StandardPbrMaterial;
 import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
 
-@:expose("flighthq.materials.PhongToPbr")
 class PhongToPbr {
   public static function convertPhongToStandardPbrMaterial(phong:PhongMaterial, ?opts:Dynamic):StandardPbrMaterial {
     return cast _Runtime.callValue(createStandardPbrMaterial, cast ([_Runtime.mergeObjects([{ baseColor: _Runtime.field(phong, 'diffuse') }, { baseColorMap: _Runtime.field(phong, 'diffuseMap') }, { metallic: _Runtime.callValue(getPbrMetallicFromPhongSpecular, cast ([_Runtime.field(phong, 'specular'), _Runtime.field(phong, 'diffuse')] : Array<Dynamic>)) }, { normalMap: _Runtime.field(phong, 'normalMap') }, { normalScale: _Runtime.field(phong, 'normalScale') }, { roughness: _Runtime.callValue(getPbrRoughnessFromPhongShininess, cast ([_Runtime.field(phong, 'shininess')] : Array<Dynamic>)) }, opts])] : Array<Dynamic>));

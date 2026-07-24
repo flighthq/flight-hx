@@ -9,7 +9,6 @@ import flighthq.types.DomImageSourceKind;
 import flighthq.types.DomRenderState;
 import flighthq.types.ImageResource;
 
-@:expose("flighthq.displayobjectDom.DomImageSource")
 class DomImageSource {
   public static function explainDomImageSource(image:ImageResource):DomImageSourceKind {
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(image, 'source'), null))) { return cast 'element'; }

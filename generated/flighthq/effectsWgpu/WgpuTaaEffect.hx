@@ -10,7 +10,6 @@ import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
-@:expose("flighthq.effectsWgpu.WgpuTaaEffect")
 class WgpuTaaEffect {
   public static function applyTaaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, _effect:TaaEffect):Void {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;

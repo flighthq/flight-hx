@@ -13,7 +13,6 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuSceneRuntime.WgpuMaterialBinding;
 import flighthq.types.WgpuWireframePipeline;
 
-@:expose("flighthq.sceneWgpu.WgpuWireframePrelude")
 class WgpuWireframePrelude {
   public static function bindWgpuWireframeColor(state:WgpuRenderState, pipeline:WgpuWireframePipeline, materialKey:Dynamic, color:LinearColor):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;

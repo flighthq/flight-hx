@@ -10,7 +10,6 @@ import flighthq.types.Environment;
 import flighthq.types.ImageResource;
 import flighthq.types.WgpuRenderState;
 
-@:expose("flighthq.sceneWgpu.WgpuEnvironmentCube")
 class WgpuEnvironmentCube {
   public static function ensureWgpuEnvironmentSourceCube(state:WgpuRenderState, environment:Environment):Null<Dynamic> {
     var scene:Dynamic = cast _Runtime.UNDEFINED;

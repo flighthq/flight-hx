@@ -29,7 +29,6 @@ import flighthq.types._internal._CustomShaderMaterialValues.CustomShaderMaterial
 
 typedef GlCustomShaderProgram__customShaderGlMeshMaterialRenderer = Dynamic;
 
-@:expose("flighthq.sceneGl.CustomShaderGlMeshMaterialRenderer")
 class CustomShaderGlMeshMaterialRenderer {
   public static final customShaderGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera3D) {
     var custom:Dynamic = cast _Runtime.UNDEFINED;

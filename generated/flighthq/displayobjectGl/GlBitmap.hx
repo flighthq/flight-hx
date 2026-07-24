@@ -21,7 +21,6 @@ import flighthq.types.RendererData;
 
 typedef GlBitmapData__glBitmap = { var image:Null<ImageResource>; };
 
-@:expose("flighthq.displayobjectGl.GlBitmap")
 class GlBitmap {
   public static function createGlBitmapData__glBitmap(_state:GlRenderState, _source:Renderable):Null<RendererData> {
     return cast (cast (cast { image: null } : Dynamic) : RendererData);

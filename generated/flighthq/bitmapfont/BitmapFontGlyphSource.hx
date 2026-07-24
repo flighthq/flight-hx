@@ -9,7 +9,6 @@ import flighthq.bitmapfont.BitmapFont.getBitmapFontMetrics;
 import flighthq.types.BitmapFont;
 import flighthq.types.GlyphSource;
 
-@:expose("flighthq.bitmapfont.BitmapFontGlyphSource")
 class BitmapFontGlyphSource {
   public static function createGlyphSourceFromBitmapFont(font:BitmapFont):GlyphSource {
     return cast { getGlyphAtlasImage: function(page:Dynamic = 0.0) {

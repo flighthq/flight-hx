@@ -10,7 +10,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.KuwaharaEffect;
 
-@:expose("flighthq.effectsGl.GlKuwaharaEffect")
 class GlKuwaharaEffect {
   public static function applyKuwaharaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:KuwaharaEffect):Void {
     var radius:Dynamic = cast _Runtime.UNDEFINED;

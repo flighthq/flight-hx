@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 import flighthq.types.StepPosition;
 
-@:expose("flighthq.easing.EaseSteps")
 class EaseSteps {
   public static function easeSteps(count:Float, position:StepPosition = 'jumpEnd'):EasingFunction {
     var jumps:Dynamic = cast _Runtime.UNDEFINED;

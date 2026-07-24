@@ -9,7 +9,6 @@ import flighthq.types.Haptics.HapticNotificationType;
 import flighthq.types.Haptics.HapticsBackend;
 import flighthq.types.Haptics.HapticsCapabilities;
 
-@:expose("flighthq.hostCapacitor.CapacitorHaptics")
 class CapacitorHaptics {
   public static function createCapacitorHapticsBackend(capacitor:CapacitorApi):HapticsBackend {
     var haptics:Dynamic = cast _Runtime.UNDEFINED;

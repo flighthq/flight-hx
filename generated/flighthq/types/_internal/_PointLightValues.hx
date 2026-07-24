@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Light;
 import flighthq.types.Vector3;
 
-@:expose("flighthq.types._internal._PointLightValues")
 class _PointLightValues {
   public static final PointLightKind:Dynamic = 'PointLight';
 }

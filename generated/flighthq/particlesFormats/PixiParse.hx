@@ -10,7 +10,6 @@ import flighthq.types.PixiParseResult;
 
 typedef PixiRaw__pixiParse = Dynamic;
 
-@:expose("flighthq.particlesFormats.PixiParse")
 class PixiParse {
   public static function parsePixiParticle(json:String):ParticleEmitterConfig {
     return cast _Runtime.callValue(PixiParse.rawToConfig__pixiParse, cast ([_Runtime.callValue(PixiParse.parsePixiJson__pixiParse, cast ([json] : Array<Dynamic>))] : Array<Dynamic>));

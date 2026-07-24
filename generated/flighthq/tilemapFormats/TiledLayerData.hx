@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.TiledParseOptions.TiledCompression;
 import flighthq.types.TiledParseOptions.TiledInflate;
 
-@:expose("flighthq.tilemapFormats.TiledLayerData")
 class TiledLayerData {
   public static function decodeTiledBase64Layer(text:String, compression:Null<TiledCompression>, ?inflate:TiledInflate):Null<Dynamic> {
     var bytes:Dynamic = cast _Runtime.UNDEFINED;

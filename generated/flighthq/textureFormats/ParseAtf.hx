@@ -11,7 +11,6 @@ import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
 import flighthq.types.TextureContainerLevel;
 
-@:expose("flighthq.textureFormats.ParseAtf")
 class ParseAtf {
   public static function parseAtf(bytes:Dynamic):Null<Array<TextureContainer>> {
     var versioned:Dynamic = cast _Runtime.UNDEFINED;

@@ -9,7 +9,6 @@ import flighthq.types.AmbientLightOptions;
 import flighthq.types.Types.AmbientLightKind;
 import flighthq.types._internal._AmbientLightValues.AmbientLightKind;
 
-@:expose("flighthq.lighting.AmbientLight")
 class AmbientLight {
   public static function cloneAmbientLight(source:flighthq.types.AmbientLight):flighthq.types.AmbientLight {
     return cast _Runtime.callValue(createAmbientLight, cast ([{ color: _Runtime.field(source, 'color'), intensity: _Runtime.field(source, 'intensity') }] : Array<Dynamic>));

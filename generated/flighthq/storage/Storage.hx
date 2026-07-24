@@ -13,7 +13,6 @@ import flighthq.types.Storage.StorageNamespace;
 import flighthq.types.Storage.StorageQuota;
 import flighthq.types.Storage.StorageSignals;
 
-@:expose("flighthq.storage.Storage")
 class Storage {
   public static var _backend__storage:Null<StorageBackend> = _Runtime.explicitNull();
 

@@ -7,7 +7,6 @@ import flighthq.text.TextFormatFont.computeTextFormatFontString;
 import flighthq.types.TextFormat;
 import flighthq.types.TextLayout.TextMeasureFunction;
 
-@:expose("flighthq.displayobjectCanvas.CanvasTextMeasure")
 class CanvasTextMeasure {
   public static function createCanvasTextMeasure():TextMeasureFunction {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;

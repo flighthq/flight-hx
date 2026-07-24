@@ -10,7 +10,6 @@ import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
-@:expose("flighthq.effectsWgpu.WgpuBokehDepthOfFieldEffect")
 class WgpuBokehDepthOfFieldEffect {
   public static function applyBokehDepthOfFieldEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:BokehDepthOfFieldEffect):Void {
     var maxBlur:Dynamic = cast _Runtime.UNDEFINED;

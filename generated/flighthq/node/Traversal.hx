@@ -10,7 +10,6 @@ import flighthq.types.Node.NodeOf;
 import flighthq.types.Node.NodeTraits;
 import flighthq.types.NodeDescendantVisitor;
 
-@:expose("flighthq.node.Traversal")
 class Traversal {
   public static function findNode<Traits>(source:Node<Traits>, predicate:Dynamic):Null<NodeOf<Traits>> {
     var children:Dynamic = cast _Runtime.UNDEFINED;

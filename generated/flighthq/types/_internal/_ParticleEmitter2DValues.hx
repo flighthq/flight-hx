@@ -9,7 +9,6 @@ import flighthq.types.DisplayObject.DisplayObjectRuntime;
 import flighthq.types.Rectangle;
 import flighthq.types.TextureAtlas;
 
-@:expose("flighthq.types._internal._ParticleEmitter2DValues")
 class _ParticleEmitter2DValues {
   public static final ParticleEmitter2DKind:Dynamic = 'ParticleEmitter2D';
 }

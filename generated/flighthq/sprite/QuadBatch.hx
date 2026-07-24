@@ -27,7 +27,6 @@ import flighthq.types._internal._QuadBatchValues.QuadBatchKind;
 
 typedef QuadBatchWithSignals__quadBatch = { @:optional var __quadBatchSignalsSlot:QuadBatchSignals; };
 
-@:expose("flighthq.sprite.QuadBatch")
 class QuadBatch {
   public static final QUAD_VECTOR2_STRIDE__quadBatch:Dynamic = 2.0;
 

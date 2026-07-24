@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Collision.CollisionShape;
 
-@:expose("flighthq.collision.PointContainment")
 class PointContainment {
   public static final EPS__pointContainment:Dynamic = 1e-9;
 

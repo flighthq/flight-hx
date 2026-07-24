@@ -47,7 +47,6 @@ typedef InteractionSignalPayload__interactionManager<Name> = Dynamic;
 
 typedef InteractionSignalSlot__interactionManager<Name> = Dynamic;
 
-@:expose("flighthq.interaction.InteractionManager")
 class InteractionManager {
   public static function captureInteractionPointer<N>(manager:flighthq.types.InteractionManager<Dynamic>, pointerId:Float, target:Dynamic):Void {
     _Runtime.callProperty(_Runtime.field(manager, 'pointerCaptures'), 'set', cast ([pointerId, target] : Array<Dynamic>));

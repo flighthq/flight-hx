@@ -7,7 +7,6 @@ import flighthq.path.FlattenPath.flattenPath;
 import flighthq.types.Path;
 import flighthq.types.PathMesh;
 
-@:expose("flighthq.path.TessellatePath")
 class TessellatePath {
   public static function tessellatePath(path:Path, tolerance:Dynamic = 0.25):PathMesh {
     var contours:Dynamic = cast _Runtime.UNDEFINED;

@@ -10,7 +10,6 @@ import flighthq.types.TextureAtlasPackerSchema.TextureAtlasPackerArrayFrame;
 import flighthq.types.TextureAtlasPackerSchema.TextureAtlasPackerDocument;
 import flighthq.types.TextureAtlasPackerSchema.TextureAtlasPackerHashFrame;
 
-@:expose("flighthq.textureatlasFormats.TextureAtlasPackerParse")
 class TextureAtlasPackerParse {
   public static function parseTextureAtlasPackerDocument(doc:TextureAtlasPackerDocument, atlas:TextureAtlas, ?options:TextureAtlasPackerParseOptions):TextureAtlas {
     _Runtime.callValue(TextureAtlasPackerParse.applyDocument__textureAtlasPackerParse, cast ([atlas, doc, _Runtime.coalesce(options, function():Dynamic return cast {  })] : Array<Dynamic>));

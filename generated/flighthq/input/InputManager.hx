@@ -32,7 +32,6 @@ import flighthq.types._internal._KeyModifierValues.KeyModifierValue;
 
 typedef GamepadPollState__inputManager = { var axes:Dynamic; var buttons:Dynamic; };
 
-@:expose("flighthq.input.InputManager")
 class InputManager {
   public static final MAX_GAMEPAD_AXES__inputManager:Dynamic = 32.0;
 

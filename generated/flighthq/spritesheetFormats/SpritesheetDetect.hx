@@ -21,7 +21,6 @@ typedef FormatEntry__spritesheetDetect = { var detect:Dynamic; var parse:Dynamic
 
 typedef FormatRegistry__spritesheetDetect = Dynamic;
 
-@:expose("flighthq.spritesheetFormats.SpritesheetDetect")
 class SpritesheetDetect {
   public static var _registry__spritesheetDetect:Null<FormatRegistry__spritesheetDetect> = _Runtime.explicitNull();
 

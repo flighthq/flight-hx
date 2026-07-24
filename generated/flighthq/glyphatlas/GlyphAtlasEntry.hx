@@ -11,7 +11,6 @@ import flighthq.types.GlyphSource.GlyphAtlasRuntime;
 import flighthq.types.GlyphSource.GlyphEntry;
 import flighthq.types.GlyphSource.GlyphRasterizedBitmap;
 
-@:expose("flighthq.glyphatlas.GlyphAtlasEntry")
 class GlyphAtlasEntry {
   public static function getGlyphAtlasEntry(atlas:GlyphAtlas, codepoint:Float):Null<GlyphEntry> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

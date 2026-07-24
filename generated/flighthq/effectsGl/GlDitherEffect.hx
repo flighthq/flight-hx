@@ -10,7 +10,6 @@ import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
-@:expose("flighthq.effectsGl.GlDitherEffect")
 class GlDitherEffect {
   public static function applyDitherEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:DitherEffect):Void {
     var levels:Dynamic = cast _Runtime.UNDEFINED;

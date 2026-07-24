@@ -8,7 +8,6 @@ import flighthq.geometry.Matrix.translateMatrixByVectorXY;
 import flighthq.types.Camera2D;
 import flighthq.types.Matrix.MatrixLike;
 
-@:expose("flighthq.camera.ViewMatrix")
 class ViewMatrix {
   public static function getCamera2DViewMatrix(camera:Camera2D, out:MatrixLike):Void {
     var zoom:Dynamic = cast _Runtime.UNDEFINED;

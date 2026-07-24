@@ -8,7 +8,6 @@ import flighthq.imageCodec.ImageDecoderRegistry.getImageDecoder;
 import flighthq.types.DecodedImage;
 import flighthq.types.ImageDecoder;
 
-@:expose("flighthq.imageCodec.DecodeImage")
 class DecodeImage {
   public static function decodeImage(bytes:Dynamic, ?mimeType:String):flighthq._internal._Promise<Null<DecodedImage>> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<DecodedImage>> {

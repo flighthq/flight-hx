@@ -14,7 +14,6 @@ typedef IpcMessageEvent = { var channel:String; var senderId:Float; var args:Arr
 
 typedef IpcTarget = { var windowId:Float; };
 
-@:expose("flighthq.types.IpcTimeoutError")
 class IpcTimeoutError extends haxe.Exception {
   public final channel:String;
   public final timeoutMs:Float;

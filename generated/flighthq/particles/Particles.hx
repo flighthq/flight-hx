@@ -28,7 +28,6 @@ import flighthq.types.ParticleObjectsState;
 import flighthq.types.ParticleObjectsUpdateOptions;
 import flighthq.types.RandomSource;
 
-@:expose("flighthq.particles.Particles")
 class Particles {
   public static function applyParticleCollisions(emitter:ParticleEmitter2D, state:ParticleEmitterState, colliders:Array<ParticleCollider>):Void {
     _Runtime.callValue(Facade_Particles_flighthq_particles_ApplyParticleCollisions.applyParticleCollisions, cast ([emitter, state, colliders] : Array<Dynamic>));

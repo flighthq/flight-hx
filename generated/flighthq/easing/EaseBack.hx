@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
-@:expose("flighthq.easing.EaseBack")
 class EaseBack {
   public static final easeInBack:EasingFunction = function(t:Dynamic) return ((t * t) * (((EaseBack.s__easeBack + 1.0) * t) - EaseBack.s__easeBack));
 

@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ImageResource;
 
-@:expose("flighthq.renderGl.GlTextureUpload")
 class GlTextureUpload {
   public static function uploadGlTextureData(gl:Dynamic, target:Float, width:Float, height:Float, data:Dynamic):Void {
     _Runtime.callProperty(gl, 'texImage2D', cast ([target, 0.0, _Runtime.field(gl, 'RGBA'), width, height, 0.0, _Runtime.field(gl, 'RGBA'), _Runtime.field(gl, 'UNSIGNED_BYTE'), (cast data : Dynamic)] : Array<Dynamic>));

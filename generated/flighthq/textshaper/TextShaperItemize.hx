@@ -9,7 +9,6 @@ import flighthq.types.TextFormat;
 import flighthq.types.TextItem;
 import flighthq.types.TextShaperOptions;
 
-@:expose("flighthq.textshaper.TextShaperItemize")
 class TextShaperItemize {
   public static function itemizeText(text:String, _format:TextFormat, ?options:TextShaperOptions):Array<TextItem> {
     var baseDirection:Dynamic = cast _Runtime.UNDEFINED;

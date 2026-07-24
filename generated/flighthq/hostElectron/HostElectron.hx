@@ -41,7 +41,6 @@ import flighthq.types.Storage.StorageBackend;
 import flighthq.types.Tray.TrayBackend;
 import flighthq.types.Updater.UpdaterBackend;
 
-@:expose("flighthq.hostElectron.HostElectron")
 class HostElectron {
   public static function createElectronAppBackend(electron:ElectronApi):AppBackend {
     return cast _Runtime.callValue(Facade_HostElectron_flighthq_hostElectron_ElectronApp.createElectronAppBackend, cast ([electron] : Array<Dynamic>));

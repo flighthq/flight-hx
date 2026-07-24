@@ -20,7 +20,6 @@ import flighthq.types.RenderState;
 
 typedef LoopState__application = { var fixedAccumulator:Float; var fpsBuffer:Array<Float>; var fpsHead:Float; var frameHandle:Dynamic; var frameRateAccumulated:Float; var lastTime:Float; var maxDeltaTime:Float; };
 
-@:expose("flighthq.application.Application")
 class Application {
   public static final _applicationLoopState__application:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 

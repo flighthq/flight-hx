@@ -36,7 +36,6 @@ import flighthq.types.Types.DisplayObjectKind;
 import flighthq.types._internal._DisplayObjectValues.DisplayObjectKind;
 import flighthq.types._internal._DisplayObjectValues.DisplayObjectTraitsKey;
 
-@:expose("flighthq.displayobject.DisplayObject")
 class DisplayObject {
   public static function addDisplayObjectColorAdjustment(source:flighthq.types.DisplayObject, adjustment:Adjustment):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

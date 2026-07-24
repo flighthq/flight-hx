@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ShapedRun;
 
-@:expose("flighthq.textshaper.TextShaperCluster")
 class TextShaperCluster {
   public static function getCaretPositionsForRun(run:ShapedRun):Array<Float> {
     var glyphs:Dynamic = cast _Runtime.UNDEFINED;

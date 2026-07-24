@@ -10,7 +10,6 @@ import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
-@:expose("flighthq.effectsGl.GlConvolutionEffect")
 class GlConvolutionEffect {
   public static final MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE:Dynamic = 49.0;
 

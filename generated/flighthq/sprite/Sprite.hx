@@ -34,7 +34,6 @@ import flighthq.types._internal._SpriteValues.SpriteKind;
 
 typedef SpriteWithSignals__sprite = { @:optional var __spriteSignalsSlot:SpriteSignals; };
 
-@:expose("flighthq.sprite.Sprite")
 class Sprite {
   public static function appendQuadBatchInstance(target:QuadBatch, id:Float, x:Float, y:Float):Float {
     return cast _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.appendQuadBatchInstance, cast ([target, id, x, y] : Array<Dynamic>));

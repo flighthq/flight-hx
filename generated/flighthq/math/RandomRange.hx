@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.RandomSource;
 
-@:expose("flighthq.math.RandomRange")
 class RandomRange {
   public static function randomBool(random:RandomSource, probability:Float = 0.5):Bool {
     return cast _Runtime.compare(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), probability, '<');

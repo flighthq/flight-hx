@@ -12,7 +12,6 @@ import flighthq.types.BitmapFont.BitmapFontParseOptions;
 import flighthq.types.BitmapFontRecord;
 import flighthq.types.TextureAtlas;
 
-@:expose("flighthq.bitmapfontFormats.BitmapFontRecord")
 class BitmapFontRecord {
   public static function buildBitmapFontFromRecord(record:flighthq.types.BitmapFontRecord, ?options:BitmapFontParseOptions):Null<BitmapFont> {
     var resolvePage:Dynamic = cast _Runtime.UNDEFINED;

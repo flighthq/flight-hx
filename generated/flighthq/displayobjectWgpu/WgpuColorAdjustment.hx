@@ -11,7 +11,6 @@ import flighthq.types.WgpuRenderState.WgpuColorAdjustmentFlush;
 import flighthq.types.WgpuRenderState.WgpuColorAdjustmentFold;
 import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 
-@:expose("flighthq.displayobjectWgpu.WgpuColorAdjustment")
 class WgpuColorAdjustment {
   public static function enableWgpuColorAdjustment(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

@@ -4,7 +4,6 @@ package flighthq.color;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.color.SrgbTransfer")
 class SrgbTransfer {
   public static function linearChannelToSrgb(value:Float):Float {
     return cast _Runtime.select(_Runtime.compare(value, 0.0031308, '<='), function():Dynamic return cast (value * 12.92), function():Dynamic return cast ((1.055 * HxMath.pow(value, (1.0 / 2.4))) - 0.055));

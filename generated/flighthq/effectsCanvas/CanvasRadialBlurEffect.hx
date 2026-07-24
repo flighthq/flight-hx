@@ -8,7 +8,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.RadialBlurEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasRadialBlurEffect")
 class CanvasRadialBlurEffect {
   public static function applyRadialBlurEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:RadialBlurEffect):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));

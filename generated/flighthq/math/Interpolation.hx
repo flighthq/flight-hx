@@ -4,7 +4,6 @@ package flighthq.math;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.math.Interpolation")
 class Interpolation {
   public static function inverseLerp(a:Float, b:Float, value:Float):Float {
     var range:Dynamic = cast _Runtime.UNDEFINED;

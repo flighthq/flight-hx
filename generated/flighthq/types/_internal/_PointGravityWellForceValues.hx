@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ForceFalloff;
 
-@:expose("flighthq.types._internal._PointGravityWellForceValues")
 class _PointGravityWellForceValues {
   public static final PointGravityWellForceKind:Dynamic = 'PointGravityWellForce';
 }

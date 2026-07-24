@@ -60,7 +60,6 @@ import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_SPOT_STRIDE;
 
 typedef PreparedScene__sceneRender = { var frustum:Frustum; var list:SceneRenderList; var meshes:Array<Mesh>; var viewProjection:Matrix4; var worldBounds:Aabb; };
 
-@:expose("flighthq.render.SceneRender")
 class SceneRender {
   public static function packSceneLightBlock(out:SceneLightBlock, lights:SceneLightsLike):Void {
     var directionalCount:Dynamic = cast _Runtime.UNDEFINED;

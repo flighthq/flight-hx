@@ -12,7 +12,6 @@ import flighthq.types.ShapeCommand.PathWinding;
 
 typedef ClipProgram__glClipContours = { var program:Dynamic; var buffer:Dynamic; var positionLocation:Float; var worldMatrixLocation:Null<Dynamic>; var projectionLocation:Null<Dynamic>; };
 
-@:expose("flighthq.displayobjectGl.GlClipContours")
 class GlClipContours {
   public static final VERTEX_SOURCE__glClipContours:Dynamic = '\nattribute vec2 a_position;\nuniform mat3 u_worldMatrix;   // node world transform2D (a,b,c,d,tx,ty) lifted to mat3\nuniform mat3 u_projection;    // device pixels -> clip space (same one the sprite/shape shaders use)\nvoid main() {\n  vec3 clip = u_projection * (u_worldMatrix * vec3(a_position, 1.0));\n  gl_Position = vec4(clip.xy, 0.0, 1.0);\n}\n';
 

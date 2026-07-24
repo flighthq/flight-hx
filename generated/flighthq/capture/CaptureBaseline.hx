@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.CaptureBaseline;
 import flighthq.types.CaptureColumnBaseline;
 
-@:expose("flighthq.capture.CaptureBaseline")
 class CaptureBaseline {
   public static function createCaptureBaseline():flighthq.types.CaptureBaseline {
     return cast {  };

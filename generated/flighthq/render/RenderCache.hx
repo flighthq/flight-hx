@@ -18,7 +18,6 @@ import flighthq.types.Renderable;
 import flighthq.types.Renderer;
 import flighthq.types._internal._RenderCacheValues.RenderCacheKindValue;
 
-@:expose("flighthq.render.RenderCache")
 class RenderCache {
   public static function createRenderCache():flighthq.types.RenderCache {
     return cast _Runtime.callValue(createEntity, cast ([{ kind: RenderCacheKindValue, transform: _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));

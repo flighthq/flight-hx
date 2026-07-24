@@ -17,7 +17,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.GlRenderTarget.GlRenderTargetPool;
 
-@:expose("flighthq.effectsGl.GlDropShadowEffect")
 class GlDropShadowEffect {
   public static function applyDropShadowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:DropShadowEffect):Void {
     var descriptor:Dynamic = cast _Runtime.UNDEFINED;

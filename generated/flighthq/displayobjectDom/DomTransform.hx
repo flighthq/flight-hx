@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Matrix;
 
-@:expose("flighthq.displayobjectDom.DomTransform")
 class DomTransform {
   public static function setDomTransform(element:Dynamic, transform:Matrix, roundPixels:Bool):Void {
     var tx:Dynamic = cast _Runtime.UNDEFINED;

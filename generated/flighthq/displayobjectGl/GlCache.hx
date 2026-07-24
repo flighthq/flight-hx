@@ -36,7 +36,6 @@ import flighthq.types.RenderCacheRefreshOptions;
 import flighthq.types.RenderProxy2D;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
-@:expose("flighthq.displayobjectGl.GlCache")
 class GlCache {
   public static function createGlCacheState(screenState:GlRenderState):GlRenderState {
     var screenRuntime:Dynamic = cast _Runtime.UNDEFINED;

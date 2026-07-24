@@ -18,7 +18,6 @@ import flighthq.types.LinearColor;
 import flighthq.types.Texture;
 import flighthq.types.VideoTexture;
 
-@:expose("flighthq.sceneGl.GlUnlitPrelude")
 class GlUnlitPrelude {
   public static function bindGlUnlitSurface(state:GlRenderState, program:GlUnlitProgram, color:LinearColor, intensity:Float, colorMap:Null<Texture>, alphaCutoff:Float):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;

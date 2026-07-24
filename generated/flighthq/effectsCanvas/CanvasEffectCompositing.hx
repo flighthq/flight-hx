@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CanvasRenderTarget;
 
-@:expose("flighthq.effectsCanvas.CanvasEffectCompositing")
 class CanvasEffectCompositing {
   public static function drawCanvasAccumulationPass(dest:Dynamic, source:Dynamic, samples:Float, perSampleTransform:Dynamic):Void {
     var clampedSamples:Dynamic = cast _Runtime.UNDEFINED;

@@ -9,7 +9,6 @@ import flighthq.types.Notification.NotificationBackend;
 import flighthq.types.Notification.NotificationCapabilities;
 import flighthq.types.Notification.NotificationPermission;
 
-@:expose("flighthq.hostElectron.ElectronNotification")
 class ElectronNotification {
   public static function createElectronNotificationBackend(electron:ElectronApi):NotificationBackend {
     var clickListener:Null<Dynamic> = cast _Runtime.UNDEFINED;

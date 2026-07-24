@@ -8,7 +8,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.GlitchEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasGlitchEffect")
 class CanvasGlitchEffect {
   public static function applyGlitchEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:GlitchEffect):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));

@@ -8,7 +8,6 @@ import flighthq.types.DisplayObject.DisplayObjectData;
 import flighthq.types.DisplayObject.DisplayObjectRuntime;
 import flighthq.types.VideoResource;
 
-@:expose("flighthq.types._internal._VideoValues")
 class _VideoValues {
   public static final VideoKind:Dynamic = 'Video';
 }

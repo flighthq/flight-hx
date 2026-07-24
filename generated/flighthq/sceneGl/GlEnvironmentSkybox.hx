@@ -14,7 +14,6 @@ import flighthq.types.Matrix4;
 
 typedef GlSkybox__glEnvironmentSkybox = { var locEnvCube:Null<Dynamic>; var locInverseViewProjection:Null<Dynamic>; var locIntensity:Null<Dynamic>; var program:Dynamic; var vao:Dynamic; };
 
-@:expose("flighthq.sceneGl.GlEnvironmentSkybox")
 class GlEnvironmentSkybox {
   public static function drawGlEnvironmentSkybox(state:GlRenderState, environment:Environment, camera:Camera3D, aspect:Float):Void {
     var cube:Dynamic = cast _Runtime.UNDEFINED;

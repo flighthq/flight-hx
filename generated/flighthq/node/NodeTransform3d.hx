@@ -24,7 +24,6 @@ import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Transform3D.Transform3DLike;
 import flighthq.types.Vector3.Vector3Like;
 
-@:expose("flighthq.node.NodeTransform3d")
 class NodeTransform3d {
   public static function convertNodeVector3GlobalToLocal<Traits>(out:Vector3Like, source:Transform3DNode<Traits>, point:Vector3Like):Void {
     var inv:Dynamic = cast _Runtime.UNDEFINED;

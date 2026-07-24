@@ -15,7 +15,6 @@ import flighthq.types.ImageDecoder;
 import flighthq.types.ImageEncodeOptions;
 import flighthq.types.ImageEncoder;
 
-@:expose("flighthq.imageCodec.ImageCodec")
 class ImageCodec {
   public static function clearImageDecoders():Void {
     _Runtime.callValue(Facade_ImageCodec_flighthq_imageCodec_ImageDecoderRegistry.clearImageDecoders, cast ([] : Array<Dynamic>));

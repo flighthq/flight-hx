@@ -11,7 +11,6 @@ import flighthq.types.AnimationClip;
 import flighthq.types.Mesh;
 import flighthq.types.SceneAnimationTarget;
 
-@:expose("flighthq.scene.SceneAnimation")
 class SceneAnimation {
   public static function applyAnimationClipToScene(clip:AnimationClip, time:Float):Void {
     var channels:Dynamic = cast _Runtime.UNDEFINED;

@@ -9,7 +9,6 @@ import flighthq.types.GlFullscreenProgram;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
-@:expose("flighthq.renderGl.GlFullscreenPass")
 class GlFullscreenPass {
   public static final FULLSCREEN_VERTEX_SRC__glFullscreenPass:Dynamic = '#version 300 es\nin vec2 a_position;\nin vec2 a_texCoord;\nout vec2 v_texCoord;\nvoid main() {\n  gl_Position = vec4(a_position, 0.0, 1.0);\n  v_texCoord = a_texCoord;\n}';
 

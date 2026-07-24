@@ -8,7 +8,6 @@ import flighthq.types.ParticleConfigParse.ParticleConfigParseResult;
 import flighthq.types.ParticleFormatCodec;
 import flighthq.types.ParticleFormatKind;
 
-@:expose("flighthq.particlesFormats.FormatRegistry")
 class FormatRegistry {
   public static function detectRegisteredParticleFormat(text:String):Null<String> {
     for (__iteration0 in _Runtime.iterable(FormatRegistry._registry__formatRegistry)) {

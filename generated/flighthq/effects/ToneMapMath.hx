@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.AgxToneMapOptions;
 import flighthq.types.FilmicToneMapOptions;
 
-@:expose("flighthq.effects.ToneMapMath")
 class ToneMapMath {
   public static function computeAcesToneMap(x:Float):Float {
     var a:Dynamic = cast _Runtime.UNDEFINED;

@@ -8,7 +8,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.SsaoEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasSsaoEffect")
 class CanvasSsaoEffect {
   public static function applySsaoEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:SsaoEffect):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));

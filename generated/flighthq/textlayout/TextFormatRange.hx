@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.TextFormat;
 import flighthq.types.TextFormatRange;
 
-@:expose("flighthq.textlayout.TextFormatRange")
 class TextFormatRange {
   public static function createTextFormatRange(format:TextFormat, start:Float, end:Float):flighthq.types.TextFormatRange {
     return cast { end: end, format: format, start: start };

@@ -13,7 +13,6 @@ import flighthq.types.TextureContainerFormat;
 import flighthq.types.TextureContainerLevel;
 import flighthq.types.TextureContainerSupercompression;
 
-@:expose("flighthq.textureFormats.ParseKtx2")
 class ParseKtx2 {
   public static function parseKtx2(bytes:Dynamic):Null<TextureContainer> {
     var reader:Dynamic = cast _Runtime.UNDEFINED;

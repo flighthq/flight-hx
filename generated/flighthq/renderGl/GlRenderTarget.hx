@@ -20,7 +20,6 @@ import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.RenderTarget.RenderTargetDescriptor;
 import flighthq.types.RenderTarget.RenderTargetFormat;
 
-@:expose("flighthq.renderGl.GlRenderTarget")
 class GlRenderTarget {
   public static function createGlRenderTarget(state:GlRenderState, descriptor:RenderTargetDescriptor):flighthq.types.GlRenderTarget {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

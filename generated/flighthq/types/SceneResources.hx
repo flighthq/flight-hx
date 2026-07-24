@@ -39,7 +39,6 @@ typedef ResolveSceneResourcesOptions = { @:optional var priority:Dynamic; @:opti
 
 typedef SceneResourceRevealOptions = { @:optional var ease:EasingFunction; @:optional var fadeSeconds:Float; @:optional var from:Float; };
 
-@:expose("flighthq.types.SceneResources")
 class SceneResources {
   public static final SceneResourceResolverRuntimeKey:Dynamic = _Runtime.symbol('SceneResourceResolverRuntime');
 }

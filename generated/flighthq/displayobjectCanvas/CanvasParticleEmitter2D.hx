@@ -9,7 +9,6 @@ import flighthq.types.ParticleEmitter2D;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.SpriteRenderer;
 
-@:expose("flighthq.displayobjectCanvas.CanvasParticleEmitter2D")
 class CanvasParticleEmitter2D {
   public static function drawCanvasParticleEmitter2D(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;

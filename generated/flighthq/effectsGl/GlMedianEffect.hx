@@ -10,7 +10,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.MedianEffect;
 
-@:expose("flighthq.effectsGl.GlMedianEffect")
 class GlMedianEffect {
   public static final MAX_MEDIAN_EFFECT_GL_RADIUS:Dynamic = 2.0;
 

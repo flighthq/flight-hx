@@ -11,7 +11,6 @@ import flighthq.types.Material;
 import flighthq.types.Types.DefaultMaterialKind;
 import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
-@:expose("flighthq.sceneGl.GlMeshMaterialRegistry")
 class GlMeshMaterialRegistry {
   public static function getGlMeshMaterialRenderer(state:GlRenderState, kind:Kind):Null<GlMeshMaterialRenderer> {
     return cast _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry'), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);

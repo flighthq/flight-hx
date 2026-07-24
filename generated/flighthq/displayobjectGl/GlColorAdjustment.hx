@@ -22,7 +22,6 @@ import flighthq.types.GlShapeMesh;
 import flighthq.types.GlShapeMeshBinding;
 import flighthq.types.RenderProxy2D;
 
-@:expose("flighthq.displayobjectGl.GlColorAdjustment")
 class GlColorAdjustment {
   public static function enableGlColorAdjustment(state:GlRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

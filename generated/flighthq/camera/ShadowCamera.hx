@@ -9,7 +9,6 @@ import flighthq.types.Aabb.AabbLike;
 import flighthq.types.Camera3D;
 import flighthq.types.Vector3.Vector3Like;
 
-@:expose("flighthq.camera.ShadowCamera")
 class ShadowCamera {
   public static function configureDirectionalShadowCamera3D(camera:Camera3D, lightDirection:Vector3Like, sceneBounds:AabbLike):Void {
     var min:Dynamic = cast _Runtime.UNDEFINED;

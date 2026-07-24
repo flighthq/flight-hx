@@ -25,7 +25,6 @@ import flighthq.shortcut.Shortcut.setShortcutBackend;
 import flighthq.tray.Tray.setTrayBackend;
 import flighthq.types.TauriApi;
 
-@:expose("flighthq.hostTauri.TauriRegister")
 class TauriRegister {
   public static function registerTauriBackends(tauri:TauriApi):Void {
     _Runtime.callValue(setPlatformBackend, cast ([_Runtime.callValue(createTauriPlatformBackend, cast ([tauri] : Array<Dynamic>))] : Array<Dynamic>));

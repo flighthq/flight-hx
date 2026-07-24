@@ -8,7 +8,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.ScreenSpaceFogEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasScreenSpaceFogEffect")
 class CanvasScreenSpaceFogEffect {
   public static function applyScreenSpaceFogEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:ScreenSpaceFogEffect):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));

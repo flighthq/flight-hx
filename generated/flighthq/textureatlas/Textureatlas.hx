@@ -12,7 +12,6 @@ import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
 import flighthq.types.Vector2.Vector2Like;
 
-@:expose("flighthq.textureatlas.Textureatlas")
 class Textureatlas {
   public static function addTextureAtlasRegion(target:TextureAtlas, x:Float, y:Float, width:Float, height:Float, ?pivotX:Float, ?pivotY:Float, ?name:String):Void {
     _Runtime.callValue(Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.addTextureAtlasRegion, cast ([target, x, y, width, height, pivotX, pivotY, name] : Array<Dynamic>));

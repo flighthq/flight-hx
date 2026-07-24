@@ -17,7 +17,6 @@ import flighthq.types.Types.TextLabelKind;
 import flighthq.types._internal._RichTextValues.RichTextKind;
 import flighthq.types._internal._TextLabelValues.TextLabelKind;
 
-@:expose("flighthq.interaction.RegisterTextHitTest")
 class RegisterTextHitTest {
   public static function registerTextHitTest():Void {
     _Runtime.callValue(registerHitTestPrecise, cast ([TextLabelKind, RegisterTextHitTest.resolveTextCharIndex__registerTextHitTest] : Array<Dynamic>));

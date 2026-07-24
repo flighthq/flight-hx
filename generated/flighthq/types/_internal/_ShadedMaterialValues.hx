@@ -7,7 +7,6 @@ import flighthq.types.Modifier;
 import flighthq.types.SurfaceMaterial;
 import flighthq.types.Texture;
 
-@:expose("flighthq.types._internal._ShadedMaterialValues")
 class _ShadedMaterialValues {
   public static final ShadedMaterialKind:Dynamic = 'ShadedMaterial';
 }

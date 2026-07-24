@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.VideoResource;
 
-@:expose("flighthq.video.VideoResource")
 class VideoResource {
   public static function createVideoResource(?element:Dynamic):flighthq.types.VideoResource {
     return cast { element: _Runtime.coalesce(element, function():Dynamic return cast null) };

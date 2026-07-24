@@ -37,7 +37,6 @@ import flighthq.effectsCanvas.CanvasWhiteBalanceEffect.defaultCanvasWhiteBalance
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderState;
 
-@:expose("flighthq.effectsCanvas.CanvasRenderEffectRegistration")
 class CanvasRenderEffectRegistration {
   public static function registerAllCanvasRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(registerBlurCanvasRenderEffects, cast ([state] : Array<Dynamic>));

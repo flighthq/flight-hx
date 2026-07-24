@@ -10,7 +10,6 @@ import flighthq.types.ObjSchema.ObjMaterialLibrary;
 import flighthq.types.SceneDocument;
 import flighthq.types.SceneResources.SceneDocumentLoadOptions;
 
-@:expose("flighthq.sceneResources.ObjLoad")
 class ObjLoad {
   public static function loadSceneDocumentFromObjUrl(url:String, ?materials:ObjMaterialLibrary, ?options:SceneDocumentLoadOptions):flighthq._internal._Promise<Null<SceneDocument>> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<SceneDocument>> {

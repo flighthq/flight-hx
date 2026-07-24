@@ -16,7 +16,6 @@ import flighthq.types.Types.ShapeKind;
 import flighthq.types._internal._Scale9ShapeValues.Scale9ShapeKind;
 import flighthq.types._internal._ShapeValues.ShapeKind;
 
-@:expose("flighthq.interaction.RegisterShapeHitTest")
 class RegisterShapeHitTest {
   public static function registerShapeHitTest():Void {
     _Runtime.callValue(registerHitTestPrecise, cast ([ShapeKind, RegisterShapeHitTest.hitTestShapeFill__registerShapeHitTest] : Array<Dynamic>));

@@ -20,7 +20,6 @@ import flighthq.types.Texture;
 import flighthq.types._internal._ImageResourceReferenceValues.ImageResourceReferenceKindValue;
 import flighthq.types._internal._ResourceResolutionStateValues.ResourceResolutionStateValue;
 
-@:expose("flighthq.sceneFormats.Shared")
 class Shared {
   public static final CANONICAL_FLOATS_PER_VERTEX:Dynamic = 12.0;
 

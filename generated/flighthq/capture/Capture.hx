@@ -9,7 +9,6 @@ import flighthq.types.CaptureBaseline;
 import flighthq.types.CaptureCheckResult;
 import flighthq.types.CaptureColumnBaseline;
 
-@:expose("flighthq.capture.Capture")
 class Capture {
   public static final CAPTURE_PARITY_TOLERANCE:Dynamic = Facade_Capture_flighthq_capture_CaptureComparison.CAPTURE_PARITY_TOLERANCE;
 

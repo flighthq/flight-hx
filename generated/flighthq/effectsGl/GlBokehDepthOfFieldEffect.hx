@@ -10,7 +10,6 @@ import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
-@:expose("flighthq.effectsGl.GlBokehDepthOfFieldEffect")
 class GlBokehDepthOfFieldEffect {
   public static function applyBokehDepthOfFieldEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, depthTexture:Null<Dynamic>, effect:BokehDepthOfFieldEffect):Void {
     var maxBlur:Dynamic = cast _Runtime.UNDEFINED;

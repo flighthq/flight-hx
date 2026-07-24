@@ -7,7 +7,6 @@ import flighthq.textbidi.ResolveBidiLevels.resolveBidiLevels;
 import flighthq.types.Bidi.BidiDirection;
 import flighthq.types.Bidi.BidiRun;
 
-@:expose("flighthq.textbidi.GetBidiRuns")
 class GetBidiRuns {
   public static function getBidiRuns(text:String, baseDirection:BidiDirection):Array<BidiRun> {
     var levels:Dynamic = cast _Runtime.UNDEFINED;

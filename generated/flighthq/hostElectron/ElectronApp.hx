@@ -10,7 +10,6 @@ import flighthq.types.ElectronApi;
 import flighthq.types.ElectronApi.ElectronMenuItemOptions;
 import flighthq.types.Menu.MenuItemTemplate;
 
-@:expose("flighthq.hostElectron.ElectronApp")
 class ElectronApp {
   public static function createElectronAppBackend(electron:ElectronApi):AppBackend {
     var app:Dynamic = cast _Runtime.UNDEFINED;

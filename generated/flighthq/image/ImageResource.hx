@@ -7,7 +7,6 @@ import flighthq.entity.Entity.createEntity;
 import flighthq.types.ImageResource;
 import flighthq.types.ImageResourceCompressed;
 
-@:expose("flighthq.image.ImageResource")
 class ImageResource {
   public static function cloneImageResource(resource:flighthq.types.ImageResource):flighthq.types.ImageResource {
     return cast _Runtime.callValue(createEntity, cast ([{ alphaType: _Runtime.field(resource, 'alphaType'), compressed: _Runtime.field(resource, 'compressed'), data: _Runtime.field(resource, 'data'), format: _Runtime.field(resource, 'format'), height: _Runtime.field(resource, 'height'), source: _Runtime.field(resource, 'source'), version: _Runtime.field(resource, 'version'), width: _Runtime.field(resource, 'width') }] : Array<Dynamic>));

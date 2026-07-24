@@ -11,7 +11,6 @@ import flighthq.types.GlRenderTarget;
 
 typedef TintShaderLocations__glEffectTintShader = Dynamic;
 
-@:expose("flighthq.effectsGl.GlEffectTintShader")
 class GlEffectTintShader {
   public static final TINT_FRAGMENT_SRC__glEffectTintShader:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nuniform vec3 u_color;\nuniform float u_alpha;\nuniform float u_strength;\nout vec4 fragColor;\nvoid main() {\n  float a = min(1.0, texture(u_texture, v_texCoord).a * u_alpha * u_strength);\n  fragColor = vec4(u_color * a, a);\n}';
 

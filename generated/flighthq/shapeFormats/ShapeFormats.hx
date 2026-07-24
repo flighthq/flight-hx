@@ -8,7 +8,6 @@ import flighthq.types.Shape;
 import flighthq.types.ShapeJson.ShapeJsonFormatOptions;
 import flighthq.types.ShapeJson.ShapeJsonParseOptions;
 
-@:expose("flighthq.shapeFormats.ShapeFormats")
 class ShapeFormats {
   public static function formatShapeJson(shape:Shape, ?options:ShapeJsonFormatOptions):String {
     return cast _Runtime.callValue(Facade_ShapeFormats_flighthq_shapeFormats_ShapeJson.formatShapeJson, cast ([shape, options] : Array<Dynamic>));

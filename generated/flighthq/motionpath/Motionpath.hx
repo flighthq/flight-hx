@@ -9,7 +9,6 @@ import flighthq.types.MotionPath.MotionPathLoopMode;
 import flighthq.types.Path;
 import flighthq.types.Vector2.Vector2Like;
 
-@:expose("flighthq.motionpath.Motionpath")
 class Motionpath {
   public static function createMotionPath(path:Path, ?speed:Dynamic, ?loopMode:MotionPathLoopMode, ?tolerance:Float):MotionPath {
     return cast _Runtime.callValue(Facade_Motionpath_flighthq_motionpath_MotionPath.createMotionPath, cast ([path, speed, loopMode, tolerance] : Array<Dynamic>));

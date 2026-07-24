@@ -16,7 +16,6 @@ import flighthq.types.Frustum.FrustumLike;
 import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.SceneNode;
 
-@:expose("flighthq.scene.SceneNodeCulling")
 class SceneNodeCulling {
   public static function buildSceneFrustum(out:FrustumLike, viewProjection:Matrix4Like):Void {
     _Runtime.callValue(setFrustumFromMatrix4, cast ([out, viewProjection] : Array<Dynamic>));

@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.VolumetricLightEffect;
 
-@:expose("flighthq.effects.VolumetricLightEffect")
 class VolumetricLightEffect {
   public static function createVolumetricLightEffect(?options:Dynamic):flighthq.types.VolumetricLightEffect {
     if (options == null) options = cast ({  } : Dynamic);

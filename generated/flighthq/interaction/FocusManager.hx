@@ -25,7 +25,6 @@ import flighthq.types.Signal;
 
 typedef FocusSignalName__focusManager = String;
 
-@:expose("flighthq.interaction.FocusManager")
 class FocusManager {
   public static function clearFocus<N>(manager:flighthq.types.FocusManager<Dynamic>):Void {
     _Runtime.callValue(setFocusedNode, cast ([manager, null] : Array<Dynamic>));

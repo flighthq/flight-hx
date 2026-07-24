@@ -4,7 +4,6 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.types._internal._SurfaceCompositeModeValues")
 class _SurfaceCompositeModeValues {
   public static final SurfaceCompositeModeValue:Dynamic = { Add: 'Add', Clear: 'Clear', ColorBurn: 'ColorBurn', ColorDodge: 'ColorDodge', Copy: 'Copy', Darken: 'Darken', DestinationAtop: 'DestinationAtop', DestinationIn: 'DestinationIn', DestinationOut: 'DestinationOut', DestinationOver: 'DestinationOver', Difference: 'Difference', Exclusion: 'Exclusion', HardLight: 'HardLight', Invert: 'Invert', Lighten: 'Lighten', Multiply: 'Multiply', Normal: 'Normal', Overlay: 'Overlay', Screen: 'Screen', SoftLight: 'SoftLight', SourceAtop: 'SourceAtop', SourceIn: 'SourceIn', SourceOut: 'SourceOut', SourceOver: 'SourceOver', Subtract: 'Subtract', Xor: 'Xor' };
 }

@@ -15,7 +15,6 @@ import flighthq.types.RenderProxy2D;
 import flighthq.types.Sprite;
 import flighthq.types.SpriteRenderer;
 
-@:expose("flighthq.displayobjectCanvas.CanvasSprite")
 class CanvasSprite {
   public static function drawCanvasSprite(state:Dynamic, spriteNode:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;

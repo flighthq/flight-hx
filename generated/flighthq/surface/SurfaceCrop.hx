@@ -8,7 +8,6 @@ import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.Surface;
 import flighthq.types.SurfaceEdgeMode;
 
-@:expose("flighthq.surface.SurfaceCrop")
 class SurfaceCrop {
   public static function cropSurface(source:Surface, rect:RectangleLike):Surface {
     var sw:Dynamic = cast _Runtime.UNDEFINED;

@@ -7,7 +7,6 @@ import flighthq.types.Velocity.Velocity2D;
 import flighthq.types.Velocity.VelocityField;
 import flighthq.types.Velocity.VelocitySample;
 
-@:expose("flighthq.velocity.VelocityField")
 class VelocityField {
   public static function addVelocity(out:Velocity2D, a:Velocity2D, b:Velocity2D):Velocity2D {
     var ax:Dynamic = cast _Runtime.UNDEFINED;

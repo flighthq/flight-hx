@@ -8,7 +8,6 @@ import flighthq.types.Path.PathCommand;
 import flighthq.types.PathSegment;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
-@:expose("flighthq.path.ForEachPathSegment")
 class ForEachPathSegment {
   public static function forEachPathSegment(path:Path, visitor:Dynamic):Void {
     var commands:Dynamic = cast _Runtime.UNDEFINED;

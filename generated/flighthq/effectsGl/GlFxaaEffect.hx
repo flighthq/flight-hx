@@ -10,7 +10,6 @@ import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
-@:expose("flighthq.effectsGl.GlFxaaEffect")
 class GlFxaaEffect {
   public static function applyFxaaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:FxaaEffect):Void {
     var edgeThreshold:Dynamic = cast _Runtime.UNDEFINED;

@@ -11,7 +11,6 @@ import flighthq.types.ShapeCommand.GradientType;
 import flighthq.types.ShapeCommand.InterpolationMethod;
 import flighthq.types.ShapeCommand.SpreadMethod;
 
-@:expose("flighthq.displayobjectCanvas.CanvasFillPattern")
 class CanvasFillPattern {
   public static final GRADIENT_HALF__canvasFillPattern:Dynamic = 819.2;
 

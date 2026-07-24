@@ -15,7 +15,6 @@ import flighthq.types.TextureAtlasPackerParseOptions;
 import flighthq.types.TextureAtlasPackerSchema.TextureAtlasPackerDocument;
 import flighthq.types.TextureAtlasStarlingParseOptions;
 
-@:expose("flighthq.textureatlasFormats.TextureatlasFormats")
 class TextureatlasFormats {
   public static function detectTextureAtlasFormat(content:String):Null<TextureAtlasFormatKind> {
     return cast _Runtime.callValue(Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasDetect.detectTextureAtlasFormat, cast ([content] : Array<Dynamic>));

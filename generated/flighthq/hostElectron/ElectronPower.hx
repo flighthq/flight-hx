@@ -7,7 +7,6 @@ import flighthq.types.ElectronApi;
 import flighthq.types.Power.PowerBackend;
 import flighthq.types.Power.PowerIdleState;
 
-@:expose("flighthq.hostElectron.ElectronPower")
 class ElectronPower {
   public static function createElectronPowerBackend(electron:ElectronApi):PowerBackend {
     var powerMonitor:Dynamic = cast _Runtime.UNDEFINED;

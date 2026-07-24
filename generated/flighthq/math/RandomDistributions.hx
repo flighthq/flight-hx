@@ -7,7 +7,6 @@ import flighthq.types.RandomSource;
 import flighthq.types.Vector2.Vector2Like;
 import flighthq.types.Vector3.Vector3Like;
 
-@:expose("flighthq.math.RandomDistributions")
 class RandomDistributions {
   public static function pick<T>(random:RandomSource, items:Array<Dynamic>):Null<Dynamic> {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(items, 'length'), 0.0))) { return cast _Runtime.field(_Runtime, 'UNDEFINED'); }

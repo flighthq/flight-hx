@@ -134,7 +134,6 @@ import flighthq.types.VignetteEffect;
 import flighthq.types.VolumetricLightEffect;
 import flighthq.types.WhiteBalanceEffect;
 
-@:expose("flighthq.effects.Effects")
 class Effects {
   public static function blendNonSeparableRgb(mode:AdvancedBlendMode, cbR:Float, cbG:Float, cbB:Float, csR:Float, csG:Float, csB:Float, out:Dynamic):Void {
     _Runtime.callValue(Facade_Effects_flighthq_effects_BlendModeMath.blendNonSeparableRgb, cast ([mode, cbR, cbG, cbB, csR, csG, csB, out] : Array<Dynamic>));

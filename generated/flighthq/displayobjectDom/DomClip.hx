@@ -13,7 +13,6 @@ import flighthq.types.DomRenderState;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
 
-@:expose("flighthq.displayobjectDom.DomClip")
 class DomClip {
   public static function enableDomClipSupport(state:DomRenderState):Void {
     _Runtime.setField(state, 'displayObjectClipHooks', DomClip.domDisplayObjectClipHooks__domClip);

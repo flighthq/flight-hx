@@ -8,7 +8,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.ToneMapEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasToneMapEffect")
 class CanvasToneMapEffect {
   public static function applyToneMapEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:ToneMapEffect):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));

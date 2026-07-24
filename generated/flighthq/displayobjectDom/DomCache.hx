@@ -18,7 +18,6 @@ import flighthq.types.RenderCache;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
 
-@:expose("flighthq.displayobjectDom.DomCache")
 class DomCache {
   public static function enableDomRenderCache(state:RenderState):Void {
     _Runtime.callValue(registerRenderCacheRenderer, cast ([state, defaultDomRenderCacheRenderer] : Array<Dynamic>));

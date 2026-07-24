@@ -16,7 +16,6 @@ import flighthq.types.WgpuMatcapPipeline.WgpuMatcapDefineKey;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuSceneRuntime.WgpuMaterialBinding;
 
-@:expose("flighthq.sceneWgpu.WgpuMatcapPrelude")
 class WgpuMatcapPrelude {
   public static function bindWgpuMatcapSurface(state:WgpuRenderState, pipeline:WgpuMatcapPipeline, materialKey:Dynamic, tint:LinearColor, alphaCutoff:Float):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;

@@ -10,7 +10,6 @@ import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
-@:expose("flighthq.effectsWgpu.WgpuMedianEffect")
 class WgpuMedianEffect {
   public static final MAX_MEDIAN_EFFECT_WGPU_RADIUS:Dynamic = 2.0;
 

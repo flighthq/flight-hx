@@ -10,7 +10,6 @@ import flighthq.types.ShapedRun;
 import flighthq.types.TextFormat;
 import flighthq.types.TextShaper.ShapeRunOptions;
 
-@:expose("flighthq.textshaper.TextShaperRun")
 class TextShaperRun {
   public static function clearShapedRun(run:ShapedRun):ShapedRun {
     _Runtime.setField(run, 'advanceWidth', 0.0);

@@ -24,7 +24,6 @@ import flighthq.types.TweenOptions;
 import flighthq.types.TweenPropertyDetail;
 import flighthq.types.TweenStaggerOptions;
 
-@:expose("flighthq.tween.Tween")
 class Tween {
   public static function applyTween<T>(manager:TweenManager, target:Dynamic, propertyMap:NumericProps<Dynamic>):Void {
     var t:Dynamic = cast _Runtime.UNDEFINED;

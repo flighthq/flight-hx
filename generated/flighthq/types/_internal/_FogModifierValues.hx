@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Modifier;
 
-@:expose("flighthq.types._internal._FogModifierValues")
 class _FogModifierValues {
   public static final FogModifierModeValue:Dynamic = { Exponential: 'Exponential', Exponential2: 'Exponential2', Linear: 'Linear' };
 

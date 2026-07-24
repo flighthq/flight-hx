@@ -4,7 +4,6 @@ package flighthq.textbidi;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.textbidi.ReorderBidiLine")
 class ReorderBidiLine {
   public static function reorderBidiLine(levels:Dynamic, start:Float, end:Float, out:Array<Float>):Void {
     var count:Dynamic = cast _Runtime.UNDEFINED;

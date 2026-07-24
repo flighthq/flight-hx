@@ -13,7 +13,6 @@ import flighthq.types.InteractionManager.InteractionSignalName;
 import flighthq.types.Log.LogLevel;
 import flighthq.types.Node.NodeAny;
 
-@:expose("flighthq.interaction.EnableInteractionGuards")
 class EnableInteractionGuards {
   public static function disableInteractionGuards():Void {
     _Runtime.callValue(setInteractionConnectGuard, cast ([null] : Array<Dynamic>));

@@ -29,7 +29,6 @@ import flighthq.share.Share.setShareBackend;
 import flighthq.statusbar.Statusbar.setStatusBarBackend;
 import flighthq.types.CapacitorApi;
 
-@:expose("flighthq.hostCapacitor.CapacitorRegister")
 class CapacitorRegister {
   public static function registerCapacitorBackends(capacitor:CapacitorApi):Void {
     _Runtime.callValue(setAppBackend, cast ([_Runtime.callValue(createCapacitorAppBackend, cast ([capacitor] : Array<Dynamic>))] : Array<Dynamic>));

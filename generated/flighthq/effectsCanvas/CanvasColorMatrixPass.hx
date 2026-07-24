@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasEffectCompositing.drawCanvasImageDataPass;
 import flighthq.types.CanvasRenderTarget;
 
-@:expose("flighthq.effectsCanvas.CanvasColorMatrixPass")
 class CanvasColorMatrixPass {
   public static function applyColorMatrixPassToCanvas(source:Dynamic, dest:Dynamic, matrix:Array<Float>):Void {
     var m0:Dynamic = cast _Runtime.UNDEFINED;

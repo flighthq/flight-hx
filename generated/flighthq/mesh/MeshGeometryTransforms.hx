@@ -9,7 +9,6 @@ import flighthq.mesh.MeshGeometryCompute.computeMeshGeometryBounds;
 import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.MeshGeometry;
 
-@:expose("flighthq.mesh.MeshGeometryTransforms")
 class MeshGeometryTransforms {
   public static function centerMeshGeometry(geometry:MeshGeometry):Void {
     var b:Dynamic = cast _Runtime.UNDEFINED;

@@ -31,7 +31,6 @@ import flighthq.types.TextLabel.TextLabelRuntime;
 
 typedef GlTextLabelData__glTextLabel = { var canvas:Dynamic; var ctx:Dynamic; var image:ImageResource; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; };
 
-@:expose("flighthq.displayobjectGl.GlTextLabel")
 class GlTextLabel {
   public static function getGlTextLabelData__glTextLabel(data:RendererData):GlTextLabelData__glTextLabel {
     return cast (cast (cast data : Dynamic) : GlTextLabelData__glTextLabel);

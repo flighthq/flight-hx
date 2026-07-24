@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.ColorTransformFunction;
 import flighthq.types.LiftGammaGainAdjustment;
 
-@:expose("flighthq.adjustments.LiftGammaGainAdjustment")
 class LiftGammaGainAdjustment {
   public static function createLiftGammaGainAdjustment(?options:Dynamic):flighthq.types.LiftGammaGainAdjustment {
     if (options == null) options = cast ({  } : Dynamic);

@@ -23,7 +23,6 @@ import flighthq.types.SceneDocument.SceneDocumentNode;
 import flighthq.types.SceneNode;
 import flighthq.types.Skin;
 
-@:expose("flighthq.scene.SceneDocument")
 class SceneDocument {
   public static function createSceneFromDocument(document:flighthq.types.SceneDocument, sceneIndex:Dynamic = 0.0):Scene {
     var nodes:Dynamic = cast _Runtime.UNDEFINED;

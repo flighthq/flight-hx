@@ -12,7 +12,6 @@ import flighthq.types.DomRenderState;
 import flighthq.types.DomRenderState.DomRenderStateRuntime;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
-@:expose("flighthq.displayobjectDom.DomRenderState")
 class DomRenderState {
   public static function createDomRenderState(element:Dynamic, ?options:Dynamic):flighthq.types.DomRenderState {
     if (options == null) options = cast ({  } : Dynamic);

@@ -10,7 +10,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.SketchEffect;
 
-@:expose("flighthq.effectsGl.GlSketchEffect")
 class GlSketchEffect {
   public static function applySketchEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SketchEffect):Void {
     var strength:Dynamic = cast _Runtime.UNDEFINED;

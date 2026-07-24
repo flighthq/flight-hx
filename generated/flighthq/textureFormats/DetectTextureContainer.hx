@@ -4,7 +4,6 @@ package flighthq.textureFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.textureFormats.DetectTextureContainer")
 class DetectTextureContainer {
   public static function detectTextureContainer(bytes:Dynamic):Null<String> {
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(_Runtime.field(bytes, 'byteLength'), 12.0, '>='), function():Dynamic return cast _Runtime.callValue(DetectTextureContainer.isKtx2Magic__detectTextureContainer, cast ([bytes] : Array<Dynamic>))))) { return cast 'ktx2'; }

@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.SepiaAdjustment;
 
-@:expose("flighthq.adjustments.SepiaAdjustment")
 class SepiaAdjustment {
   public static function createSepiaAdjustment(?options:Dynamic):flighthq.types.SepiaAdjustment {
     if (options == null) options = cast ({  } : Dynamic);

@@ -13,7 +13,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types._internal._AdvancedBlendModeValues.AdvancedBlendModeValue as AdvancedBlendModeValues;
 
-@:expose("flighthq.effectsGl.GlBlendEffect")
 class GlBlendEffect {
   public static function applyBlendEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:BlendEffect):Void {
     var backdrop:Dynamic = cast _Runtime.UNDEFINED;

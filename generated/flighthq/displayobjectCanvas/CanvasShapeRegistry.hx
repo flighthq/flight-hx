@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.CanvasShapeRegistry.CanvasShapeCommand;
 import flighthq.types.ShapeCommand.ShapeCommandKey;
 
-@:expose("flighthq.displayobjectCanvas.CanvasShapeRegistry")
 class CanvasShapeRegistry {
   public static final registry__canvasShapeRegistry:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
 

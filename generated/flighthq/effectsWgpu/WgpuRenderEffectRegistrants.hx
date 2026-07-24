@@ -50,7 +50,6 @@ import flighthq.effectsWgpu.WgpuVignetteEffect.defaultWgpuVignetteEffectRunner;
 import flighthq.effectsWgpu.WgpuWhiteBalanceEffect.defaultWgpuWhiteBalanceEffectRunner;
 import flighthq.types.WgpuRenderState;
 
-@:expose("flighthq.effectsWgpu.WgpuRenderEffectRegistrants")
 class WgpuRenderEffectRegistrants {
   public static function registerAntialiasingWgpuRenderEffects(state:WgpuRenderState):Void {
     _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'FxaaEffect', defaultWgpuFxaaEffectRunner] : Array<Dynamic>));

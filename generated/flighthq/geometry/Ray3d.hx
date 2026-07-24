@@ -12,7 +12,6 @@ import flighthq.types.Ray3D;
 import flighthq.types.Ray3D.Ray3DLike;
 import flighthq.types.Vector3.Vector3Like;
 
-@:expose("flighthq.geometry.Ray3d")
 class Ray3d {
   public static function createRay3D(?originX:Float, ?originY:Float, ?originZ:Float, ?directionX:Float, ?directionY:Float, ?directionZ:Float):Ray3D {
     return cast _Runtime.callValue(createEntity, cast ([{ direction: _Runtime.callValue(createVector3, cast ([_Runtime.coalesce(directionX, function():Dynamic return cast 0.0), _Runtime.coalesce(directionY, function():Dynamic return cast 0.0), _Runtime.coalesce(directionZ, function():Dynamic return cast 1.0)] : Array<Dynamic>)), origin: _Runtime.callValue(createVector3, cast ([_Runtime.coalesce(originX, function():Dynamic return cast 0.0), _Runtime.coalesce(originY, function():Dynamic return cast 0.0), _Runtime.coalesce(originZ, function():Dynamic return cast 0.0)] : Array<Dynamic>)) }] : Array<Dynamic>));

@@ -12,7 +12,6 @@ import flighthq.types.Platform.PlatformRuntime;
 import flighthq.useragent.UserAgent as Facade_Useragent_flighthq_useragent_UserAgent;
 import flighthq.useragent.UserAgentParse as Facade_Useragent_flighthq_useragent_UserAgentParse;
 
-@:expose("flighthq.useragent.Useragent")
 class Useragent {
   public static function detectEndianness():PlatformEndianness {
     return cast _Runtime.callValue(Facade_Useragent_flighthq_useragent_UserAgent.detectEndianness, cast ([] : Array<Dynamic>));

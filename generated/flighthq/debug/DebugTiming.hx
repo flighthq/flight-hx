@@ -9,7 +9,6 @@ import flighthq.log.Log.logDebug;
 import flighthq.log.Log.startLogTimer;
 import flighthq.types.Log.LogTimer;
 
-@:expose("flighthq.debug.DebugTiming")
 class DebugTiming {
   public static function beginDebugSpan(name:String, ?channel:Null<String>):Null<LogTimer> {
     if (channel == null) channel = cast (null : Dynamic);

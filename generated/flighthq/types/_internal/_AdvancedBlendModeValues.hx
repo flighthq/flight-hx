@@ -4,7 +4,6 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.types._internal._AdvancedBlendModeValues")
 class _AdvancedBlendModeValues {
   public static final AdvancedBlendModeValue:Dynamic = { Color: 'Color', ColorBurn: 'ColorBurn', ColorDodge: 'ColorDodge', Difference: 'Difference', Exclusion: 'Exclusion', HardLight: 'HardLight', Hue: 'Hue', Luminosity: 'Luminosity', Overlay: 'Overlay', Saturation: 'Saturation', SoftLight: 'SoftLight' };
 }

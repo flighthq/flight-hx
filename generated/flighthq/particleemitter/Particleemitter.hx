@@ -30,7 +30,6 @@ import flighthq.types.Rectangle;
 import flighthq.types.Vector2.Vector2Like;
 import flighthq.types.Vector3.Vector3Like;
 
-@:expose("flighthq.particleemitter.Particleemitter")
 class Particleemitter {
   public static function appendParticleEmitter2DParticle(target:ParticleEmitter2D, id:Float, x:Float, y:Float, rotation:Float, scale:Float):Float {
     return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.appendParticleEmitter2DParticle, cast ([target, id, x, y, rotation, scale] : Array<Dynamic>));

@@ -10,7 +10,6 @@ import flighthq.types.Types.DissolveModifierKind;
 import flighthq.types._internal._DissolveModifierValues.DissolveModifierKind;
 import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 
-@:expose("flighthq.shading.CreateDissolveModifier")
 class CreateDissolveModifier {
   public static function createDissolveModifier(options:DissolveModifierOptions):DissolveModifier {
     var modifier:DissolveModifier = cast _Runtime.UNDEFINED;

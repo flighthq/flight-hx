@@ -20,7 +20,6 @@ import flighthq.types.RichText;
 import flighthq.types.TextInputManager;
 import flighthq.types.TextInputManager.TextInputSource;
 
-@:expose("flighthq.textinput.TextInputManager")
 class TextInputManager {
   public static function blurTextInput(manager:flighthq.types.TextInputManager):Void {
     var target:Dynamic = cast _Runtime.UNDEFINED;

@@ -15,7 +15,6 @@ import flighthq.types.RichText;
 import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextSelectionRectangle;
 
-@:expose("flighthq.displayobjectGl.GlTextInput")
 class GlTextInput {
   public static function drawGlTextInputOverlay(context:Dynamic, source:RichText, result:TextLayoutResult, fieldW:Float, fieldH:Float, _text:String):Void {
     var input:Dynamic = cast _Runtime.UNDEFINED;

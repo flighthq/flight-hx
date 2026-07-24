@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.sceneGl.GlSceneRuntime.getGlSceneRuntime;
 import flighthq.types.GlRenderState;
 
-@:expose("flighthq.sceneGl.GlSceneTime")
 class GlSceneTime {
   public static function getGlSceneTime(state:GlRenderState):Float {
     return cast _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'time');

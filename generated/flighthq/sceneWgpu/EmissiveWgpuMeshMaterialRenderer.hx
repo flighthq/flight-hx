@@ -25,7 +25,6 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuUnlitPipeline.WgpuUnlitDefineKey;
 import flighthq.types._internal._EmissiveMaterialValues.EmissiveMaterialKind;
 
-@:expose("flighthq.sceneWgpu.EmissiveWgpuMeshMaterialRenderer")
 class EmissiveWgpuMeshMaterialRenderer {
   public static final emissiveWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera3D) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;

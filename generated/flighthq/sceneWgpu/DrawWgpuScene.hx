@@ -22,7 +22,6 @@ import flighthq.types.Types.DefaultMaterialKind;
 import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
-@:expose("flighthq.sceneWgpu.DrawWgpuScene")
 class DrawWgpuScene {
   public static function drawWgpuScene(state:WgpuRenderState, scene:SceneNode, camera:Camera3D, lights:SceneLightsLike):Void {
     var list:Dynamic = cast _Runtime.UNDEFINED;

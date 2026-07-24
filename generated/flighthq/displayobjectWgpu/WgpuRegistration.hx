@@ -43,7 +43,6 @@ import flighthq.types._internal._TextLabelValues.TextLabelKind;
 import flighthq.types._internal._TilemapValues.TilemapKind;
 import flighthq.types._internal._VideoValues.VideoKind;
 
-@:expose("flighthq.displayobjectWgpu.WgpuRegistration")
 class WgpuRegistration {
   public static function registerWgpuDisplayObjectRenderers(state:WgpuRenderState):Void {
     _Runtime.callValue(registerDefaultWgpuMaterial, cast ([state] : Array<Dynamic>));

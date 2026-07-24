@@ -9,7 +9,6 @@ import flighthq.types.Protocol.ParsedProtocolUrl;
 import flighthq.types.Protocol.ProtocolBackend;
 import flighthq.types.Protocol.ProtocolHandler;
 
-@:expose("flighthq.protocol.Protocol")
 class Protocol {
   public static var _backend__protocol:Null<ProtocolBackend> = _Runtime.explicitNull();
 

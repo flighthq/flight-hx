@@ -13,7 +13,6 @@ typedef DashSegment__strokePath = { var closed:Bool; var points:Array<Float>; };
 
 typedef StrokeSubpath__strokePath = { var closed:Bool; var points:Array<Float>; };
 
-@:expose("flighthq.path.StrokePath")
 class StrokePath {
   public static function strokePath(path:Path, style:StrokeStyle, tolerance:Dynamic = 0.25):Path {
     var width:Dynamic = cast _Runtime.UNDEFINED;

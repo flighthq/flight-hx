@@ -80,7 +80,6 @@ import flighthq.types.WgpuUnlitPipeline.WgpuUnlitDefineKey;
 import flighthq.types.WgpuWireframePipeline;
 import flighthq.types.WgpuWireframePipeline.WgpuWireframeUpload;
 
-@:expose("flighthq.sceneWgpu.SceneWgpu")
 class SceneWgpu {
   public static final anisotropyPbrWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = Facade_SceneWgpu_flighthq_sceneWgpu_AnisotropyPbrWgpuMeshMaterialRenderer.anisotropyPbrWgpuMeshMaterialRenderer;
 

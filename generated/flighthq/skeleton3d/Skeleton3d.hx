@@ -25,7 +25,6 @@ import flighthq.types.SceneNode;
 import flighthq.types.Skeleton3D;
 import flighthq.types.Skeleton3DValidationDiagnostic;
 
-@:expose("flighthq.skeleton3d.Skeleton3d")
 class Skeleton3d {
   public static final _invBind__skeleton3d:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
 

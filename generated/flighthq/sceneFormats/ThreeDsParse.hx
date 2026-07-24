@@ -58,7 +58,6 @@ import flighthq.types.Types.THREE_DS_UV_COORDS;
 import flighthq.types.Types.THREE_DS_VERTICES;
 import flighthq.types._internal._MeshValues.MeshKind;
 
-@:expose("flighthq.sceneFormats.ThreeDsParse")
 class ThreeDsParse {
   public static function createSceneFrom3ds(bytes:Dynamic, ?warnings:Array<String>):Scene {
     return cast _Runtime.callValue(createSceneFromDocument, cast ([_Runtime.callValue(parse3ds, cast ([bytes, warnings] : Array<Dynamic>))] : Array<Dynamic>));

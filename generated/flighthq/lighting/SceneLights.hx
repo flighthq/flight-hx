@@ -7,7 +7,6 @@ import flighthq.entity.Entity.createEntity;
 import flighthq.types.SceneLights;
 import flighthq.types.SceneLights.SceneLightsLike;
 
-@:expose("flighthq.lighting.SceneLights")
 class SceneLights {
   public static function createSceneLights(?options:Dynamic):flighthq.types.SceneLights {
     return cast _Runtime.callValue(createEntity, cast ([{ ambient: _Runtime.coalesce(_Runtime.optionalField(options, 'ambient'), function():Dynamic return cast null), directional: _Runtime.coalesce(_Runtime.optionalField(options, 'directional'), function():Dynamic return cast null), hemisphere: _Runtime.coalesce(_Runtime.optionalField(options, 'hemisphere'), function():Dynamic return cast cast ([] : Array<Dynamic>)), point: _Runtime.coalesce(_Runtime.optionalField(options, 'point'), function():Dynamic return cast cast ([] : Array<Dynamic>)), spot: _Runtime.coalesce(_Runtime.optionalField(options, 'spot'), function():Dynamic return cast cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));

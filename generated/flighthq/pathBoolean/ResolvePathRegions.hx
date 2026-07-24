@@ -12,7 +12,6 @@ import flighthq.types.Path;
 import flighthq.types.PathBooleanBackend.PathBooleanContour;
 import flighthq.types.PathBooleanFillRule;
 
-@:expose("flighthq.pathBoolean.ResolvePathRegions")
 class ResolvePathRegions {
   public static function resolvePathRegions(rings:Array<PathBooleanContour>, fillRule:PathBooleanFillRule):Path {
     var path:Dynamic = cast _Runtime.UNDEFINED;

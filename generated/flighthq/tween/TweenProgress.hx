@@ -7,7 +7,6 @@ import flighthq.signals.Emitter.emitSignal;
 import flighthq.tween._internal._Internal.initializeTween;
 import flighthq.types.Tween;
 
-@:expose("flighthq.tween.TweenProgress")
 class TweenProgress {
   public static function getTweenProgress(tween:Tween<Dynamic>):Float {
     var activeElapsed:Dynamic = cast _Runtime.UNDEFINED;

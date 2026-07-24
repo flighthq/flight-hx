@@ -9,7 +9,6 @@ import flighthq.sceneResources.SceneDocumentSource.setSceneDocumentResourceBaseP
 import flighthq.types.SceneDocument;
 import flighthq.types.SceneResources.SceneDocumentLoadOptions;
 
-@:expose("flighthq.sceneResources.AwdLoad")
 class AwdLoad {
   public static function loadSceneDocumentFromAwdUrl(url:String, ?options:SceneDocumentLoadOptions):flighthq._internal._Promise<Null<SceneDocument>> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<SceneDocument>> {

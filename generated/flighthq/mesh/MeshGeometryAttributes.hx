@@ -8,7 +8,6 @@ import flighthq.types.MeshGeometry.VertexAttribute;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
 import flighthq.types.MeshGeometry.VertexSemantic;
 
-@:expose("flighthq.mesh.MeshGeometryAttributes")
 class MeshGeometryAttributes {
   public static function getMeshGeometryVertexColor0(out:{ var w:Float; var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
     return cast _Runtime.callValue(MeshGeometryAttributes.getFourComponentAttribute__meshGeometryAttributes, cast ([out, geometry, vertexIndex, 'color0', true] : Array<Dynamic>));

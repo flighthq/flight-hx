@@ -8,7 +8,6 @@ import flighthq.types.App.AppLoginItem;
 import flighthq.types.CapacitorApi;
 import flighthq.types.CapacitorApi.CapacitorPluginListenerHandle;
 
-@:expose("flighthq.hostCapacitor.CapacitorApp")
 class CapacitorApp {
   public static function createCapacitorAppBackend(capacitor:CapacitorApi):AppBackend {
     var app:Dynamic = cast _Runtime.UNDEFINED;

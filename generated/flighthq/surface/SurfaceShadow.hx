@@ -12,7 +12,6 @@ import flighthq.types.SurfaceInnerShadowOptions;
 import flighthq.types.SurfaceRegion;
 import flighthq.types.SurfaceShadowBlurOptions;
 
-@:expose("flighthq.surface.SurfaceShadow")
 class SurfaceShadow {
   public static function dropShadowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceDropShadowOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);

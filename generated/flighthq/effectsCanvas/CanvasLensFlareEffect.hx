@@ -8,7 +8,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.LensFlareEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasLensFlareEffect")
 class CanvasLensFlareEffect {
   public static function applyLensFlareEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:LensFlareEffect):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));

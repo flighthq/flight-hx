@@ -25,7 +25,6 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WireframeMaterial;
 import flighthq.types._internal._WireframeMaterialValues.WireframeMaterialKind;
 
-@:expose("flighthq.sceneWgpu.WireframeWgpuMeshMaterialRenderer")
 class WireframeWgpuMeshMaterialRenderer {
   public static final wireframeWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera3D) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;

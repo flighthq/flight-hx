@@ -11,7 +11,6 @@ import flighthq.types.DisplayObject;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Rectangle.RectangleLike;
 
-@:expose("flighthq.render.RenderTarget")
 class RenderTarget {
   public static function computeDisplayObjectRenderTargetTransform(outRenderTransform:MatrixLike, source:DisplayObject, bounds:RectangleLike, contentX:Float = 0.0, contentY:Float = 0.0):Void {
     var localTransform:Dynamic = cast _Runtime.UNDEFINED;

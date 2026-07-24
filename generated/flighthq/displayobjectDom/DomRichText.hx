@@ -37,7 +37,6 @@ import flighthq.types.TextMetrics;
 
 typedef DomRichTextData__domRichText = Dynamic;
 
-@:expose("flighthq.displayobjectDom.DomRichText")
 class DomRichText {
   public static function createDomRichTextData__domRichText(_state:RenderState, _source:Renderable):DomRichTextData__domRichText {
     return cast _Runtime.callValue(createEntity, cast ([{ div: null }] : Array<Dynamic>));

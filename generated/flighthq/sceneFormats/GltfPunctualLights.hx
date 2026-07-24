@@ -11,7 +11,6 @@ import flighthq.types.GltfExtension.GltfExtensionHandler;
 import flighthq.types.GltfSchema.GltfPunctualLight;
 import flighthq.types.Light;
 
-@:expose("flighthq.sceneFormats.GltfPunctualLights")
 class GltfPunctualLights {
   public static final GltfPunctualLightsExtensionHandler:GltfExtensionHandler = { apply: function(context:Dynamic) {
     var definitions:Dynamic = cast _Runtime.UNDEFINED;

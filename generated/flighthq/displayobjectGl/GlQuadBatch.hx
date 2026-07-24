@@ -18,7 +18,6 @@ import flighthq.types.QuadBatch;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.SpriteRenderer;
 
-@:expose("flighthq.displayobjectGl.GlQuadBatch")
 class GlQuadBatch {
   public static final INSTANCE_FLOATS__glQuadBatch:Dynamic = 13.0;
 

@@ -17,7 +17,6 @@ import flighthq.types.VideoResource;
 import flighthq.types.VideoResource.VideoChannel;
 import flighthq.types.VideoResource.VideoPlayOptions;
 
-@:expose("flighthq.media.Media")
 class Media {
   public static function addAudioBusToMixer(mixer:AudioMixer, bus:AudioBus):Void {
     _Runtime.callValue(Facade_Media_flighthq_media_AudioMixer.addAudioBusToMixer, cast ([mixer, bus] : Array<Dynamic>));

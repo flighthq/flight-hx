@@ -10,7 +10,6 @@ import flighthq.types.Connectivity.ConnectivityBackend;
 import flighthq.types.Connectivity.ConnectivityConnectionType;
 import flighthq.types.Connectivity.ConnectivityStatus;
 
-@:expose("flighthq.hostCapacitor.CapacitorConnectivity")
 class CapacitorConnectivity {
   public static function createCapacitorConnectivityBackend(capacitor:CapacitorApi):ConnectivityBackend {
     var network:Dynamic = cast _Runtime.UNDEFINED;

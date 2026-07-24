@@ -10,7 +10,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.GlitchEffect;
 
-@:expose("flighthq.effectsGl.GlGlitchEffect")
 class GlGlitchEffect {
   public static function applyGlitchEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:GlitchEffect):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;

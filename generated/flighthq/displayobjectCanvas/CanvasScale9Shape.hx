@@ -15,7 +15,6 @@ import flighthq.types.RenderProxy2D;
 import flighthq.types.Scale9Mapper;
 import flighthq.types.Scale9Shape;
 
-@:expose("flighthq.displayobjectCanvas.CanvasScale9Shape")
 class CanvasScale9Shape {
   public static final _remappedCommands__canvasScale9Shape:Array<Dynamic> = cast ([] : Array<Dynamic>);
 

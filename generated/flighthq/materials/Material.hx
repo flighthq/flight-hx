@@ -7,7 +7,6 @@ import flighthq.entity.Entity.createEntity;
 import flighthq.types.Entity.Kind;
 import flighthq.types.Material;
 
-@:expose("flighthq.materials.Material")
 class Material {
   public static function cloneMaterial(source:flighthq.types.Material):flighthq.types.Material {
     var clone:Dynamic = cast _Runtime.UNDEFINED;

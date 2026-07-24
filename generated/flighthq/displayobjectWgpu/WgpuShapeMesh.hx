@@ -11,7 +11,6 @@ import flighthq.types.WgpuRenderState.WgpuShapeMeshBuffers;
 import flighthq.types.WgpuRenderState.WgpuShapeMeshPipeline;
 import flighthq.types.WgpuShapeMesh;
 
-@:expose("flighthq.displayobjectWgpu.WgpuShapeMesh")
 class WgpuShapeMesh {
   public static function drawWgpuShapeMeshes(state:WgpuRenderState, renderProxy:RenderProxy2D, meshes:Array<flighthq.types.WgpuShapeMesh>, buffers:WgpuShapeMeshBuffers):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

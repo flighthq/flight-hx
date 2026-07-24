@@ -11,7 +11,6 @@ import flighthq.types.GlShapeMesh;
 import flighthq.types.GlShapeMeshBinding;
 import flighthq.types.RenderProxy2D;
 
-@:expose("flighthq.displayobjectGl.GlShapeMesh")
 class GlShapeMesh {
   public static function drawGlShapeMeshBatch(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<flighthq.types.GlShapeMesh>, binding:GlShapeMeshBinding, ?onProgramBound:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

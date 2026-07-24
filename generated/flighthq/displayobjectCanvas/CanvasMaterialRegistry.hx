@@ -11,7 +11,6 @@ import flighthq.types.Material;
 import flighthq.types.Types.DefaultMaterialKind;
 import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
-@:expose("flighthq.displayobjectCanvas.CanvasMaterialRegistry")
 class CanvasMaterialRegistry {
   public static function applyCanvasMaterial(state:Dynamic, material:Null<Material>):Bool {
     var renderer:Dynamic = cast _Runtime.UNDEFINED;

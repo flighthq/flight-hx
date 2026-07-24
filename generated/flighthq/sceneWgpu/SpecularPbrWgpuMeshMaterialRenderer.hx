@@ -27,7 +27,6 @@ import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._SpecularPbrMaterialValues.SpecularPbrMaterialKind;
 
-@:expose("flighthq.sceneWgpu.SpecularPbrWgpuMeshMaterialRenderer")
 class SpecularPbrWgpuMeshMaterialRenderer {
   public static final specularPbrWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;

@@ -7,7 +7,6 @@ import flighthq.surface.SurfaceComposite.extractSurfacePixels;
 import flighthq.types.SurfaceBoxBlurOptions;
 import flighthq.types.SurfaceRegion;
 
-@:expose("flighthq.surface.SurfaceBlur")
 class SurfaceBlur {
   public static function blurSurfacePixelsHorizontal(out:Dynamic, source:Dynamic, width:Float, height:Float, radius:Float):Void {
     {

@@ -21,7 +21,6 @@ import flighthq.types.Sampler.TextureWrap;
 import flighthq.types.VideoTexture;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
-@:expose("flighthq.renderGl.GlDraw")
 class GlDraw {
   public static function applyGlBlendMode(state:GlRenderState, blendMode:Null<BlendMode>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

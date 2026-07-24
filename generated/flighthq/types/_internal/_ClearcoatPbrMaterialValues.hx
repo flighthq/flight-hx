@@ -7,7 +7,6 @@ import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
 import flighthq.types.SurfaceMaterial;
 import flighthq.types.Texture;
 
-@:expose("flighthq.types._internal._ClearcoatPbrMaterialValues")
 class _ClearcoatPbrMaterialValues {
   public static final ClearcoatPbrMaterialKind:Dynamic = 'ClearcoatPbrMaterial';
 }

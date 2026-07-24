@@ -10,7 +10,6 @@ import flighthq.types.Geolocation.GeoPositionResult;
 import flighthq.types.Geolocation.GeolocationBackend;
 import flighthq.types.Geolocation.GeolocationPermissionState;
 
-@:expose("flighthq.hostCapacitor.CapacitorGeolocation")
 class CapacitorGeolocation {
   public static function createCapacitorGeolocationBackend(capacitor:CapacitorApi):GeolocationBackend {
     var geolocation:Dynamic = cast _Runtime.UNDEFINED;

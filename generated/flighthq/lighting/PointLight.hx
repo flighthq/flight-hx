@@ -11,7 +11,6 @@ import flighthq.types.PointLightOptions;
 import flighthq.types.Types.PointLightKind;
 import flighthq.types._internal._PointLightValues.PointLightKind;
 
-@:expose("flighthq.lighting.PointLight")
 class PointLight {
   public static function clonePointLight(source:flighthq.types.PointLight):flighthq.types.PointLight {
     return cast _Runtime.callValue(createEntity, cast ([{ castsShadow: _Runtime.field(source, 'castsShadow'), color: _Runtime.field(source, 'color'), intensity: _Runtime.field(source, 'intensity'), kind: PointLightKind, normalBias: _Runtime.field(source, 'normalBias'), pcfRadius: _Runtime.field(source, 'pcfRadius'), position: _Runtime.callValue(cloneVector3, cast ([_Runtime.field(source, 'position')] : Array<Dynamic>)), range: _Runtime.field(source, 'range'), shadowBias: _Runtime.field(source, 'shadowBias') }] : Array<Dynamic>));

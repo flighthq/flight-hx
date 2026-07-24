@@ -10,7 +10,6 @@ import flighthq.types.ResourceLoader;
 import flighthq.types.ResourceLoaderItemSignals;
 import flighthq.types.ResourceLoaderOptions;
 
-@:expose("flighthq.loader.Loader")
 class Loader {
   public static function cancelResourceLoad(loader:ResourceLoader):Void {
     _Runtime.callValue(Facade_Loader_flighthq_loader_ResourceLoader.cancelResourceLoad, cast ([loader] : Array<Dynamic>));

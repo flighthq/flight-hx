@@ -31,7 +31,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.RenderEffect;
 
-@:expose("flighthq.effectsGl.GlRenderEffectPipeline")
 class GlRenderEffectPipeline {
   public static function beginGlRenderEffectPipeline(state:GlRenderState, pipeline:flighthq.types.GlRenderEffectPipeline):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;

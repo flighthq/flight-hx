@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Shortcut.ShortcutBackend;
 import flighthq.types.TauriApi;
 
-@:expose("flighthq.hostTauri.TauriShortcut")
 class TauriShortcut {
   public static function createTauriShortcutBackend(tauri:TauriApi):ShortcutBackend {
     var globalShortcut:Dynamic = cast _Runtime.UNDEFINED;

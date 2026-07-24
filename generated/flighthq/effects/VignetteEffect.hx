@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.VignetteEffect;
 
-@:expose("flighthq.effects.VignetteEffect")
 class VignetteEffect {
   public static function createVignetteEffect(?options:Dynamic):flighthq.types.VignetteEffect {
     if (options == null) options = cast ({  } : Dynamic);

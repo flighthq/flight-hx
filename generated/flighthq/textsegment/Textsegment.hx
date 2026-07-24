@@ -10,7 +10,6 @@ import flighthq.types.TextSegment;
 import flighthq.types.TextSegment.TextSegmentRange;
 import flighthq.types.TextSegment.TextSegmenterBackend;
 
-@:expose("flighthq.textsegment.Textsegment")
 class Textsegment {
   public static function createWebTextSegmenterBackend():TextSegmenterBackend {
     return cast _Runtime.callValue(Facade_Textsegment_flighthq_textsegment_TextSegmenterBackend.createWebTextSegmenterBackend, cast ([] : Array<Dynamic>));

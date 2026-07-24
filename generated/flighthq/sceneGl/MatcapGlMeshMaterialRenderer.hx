@@ -24,7 +24,6 @@ import flighthq.types.SceneRenderProxy;
 import flighthq.types.Types.MatcapMaterialKind;
 import flighthq.types._internal._MatcapMaterialValues.MatcapMaterialKind;
 
-@:expose("flighthq.sceneGl.MatcapGlMeshMaterialRenderer")
 class MatcapGlMeshMaterialRenderer {
   public static final matcapGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;

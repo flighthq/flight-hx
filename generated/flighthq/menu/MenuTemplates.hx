@@ -7,7 +7,6 @@ import flighthq.types.Menu.MenuItemTemplate;
 import flighthq.types.Types.WellKnownMenuItemRole;
 import flighthq.types.WellKnownMenuItemRole.WellKnownMenuItemRole;
 
-@:expose("flighthq.menu.MenuTemplates")
 class MenuTemplates {
   public static function createDefaultAppMenuTemplate(appName:String):MenuItemTemplate {
     return cast { label: appName, role: WellKnownMenuItemRole.appMenu, type: 'submenu', submenu: cast ([{ id: 'about', label: 'About ' + Std.string(appName) + '', role: WellKnownMenuItemRole.about, type: 'normal', enabled: true }, { type: 'separator', enabled: true }, { id: 'services', label: 'Services', role: WellKnownMenuItemRole.services, type: 'submenu', submenu: cast ([] : Array<Dynamic>), enabled: true }, { type: 'separator', enabled: true }, { id: 'hide', label: 'Hide ' + Std.string(appName) + '', role: WellKnownMenuItemRole.hide, accelerator: 'CmdOrCtrl+H', type: 'normal', enabled: true }, { id: 'hideOthers', label: 'Hide Others', role: WellKnownMenuItemRole.hideOthers, accelerator: 'CmdOrCtrl+Alt+H', type: 'normal', enabled: true }, { id: 'unhide', label: 'Show All', role: WellKnownMenuItemRole.unhide, type: 'normal', enabled: true }, { type: 'separator', enabled: true }, { id: 'quit', label: 'Quit ' + Std.string(appName) + '', role: WellKnownMenuItemRole.quit, accelerator: 'CmdOrCtrl+Q', type: 'normal', enabled: true }] : Array<Dynamic>), enabled: true };

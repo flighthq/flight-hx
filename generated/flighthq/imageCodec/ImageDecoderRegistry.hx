@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ImageDecoder;
 
-@:expose("flighthq.imageCodec.ImageDecoderRegistry")
 class ImageDecoderRegistry {
   public static function clearImageDecoders():Void {
     _Runtime.callProperty(ImageDecoderRegistry.decoders__imageDecoderRegistry, 'clear', cast ([] : Array<Dynamic>));

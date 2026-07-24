@@ -18,7 +18,6 @@ import flighthq.types.Video.VideoData;
 import flighthq.types.Video.VideoRuntime;
 import flighthq.types._internal._VideoValues.VideoKind;
 
-@:expose("flighthq.displayobject.Video")
 class Video {
   public static function computeVideoLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
     var element:Dynamic = cast _Runtime.UNDEFINED;

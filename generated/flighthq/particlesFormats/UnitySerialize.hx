@@ -14,7 +14,6 @@ import flighthq.types.UnitySchema.UnityMinMaxValue;
 import flighthq.types.UnitySchema.UnityParticleDocument;
 import flighthq.types.UnitySchema.UnitySerializeOptions;
 
-@:expose("flighthq.particlesFormats.UnitySerialize")
 class UnitySerialize {
   public static final RAD2DEG__unitySerialize:Dynamic = (180.0 / HxMath.PI);
 

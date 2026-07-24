@@ -11,7 +11,6 @@ import flighthq.types.SurfaceMaterial;
 import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
-@:expose("flighthq.materials.SurfaceMaterial")
 class SurfaceMaterial {
   public static function createSurfaceMaterial(kind:Kind):flighthq.types.SurfaceMaterial {
     var material:Dynamic = cast _Runtime.UNDEFINED;

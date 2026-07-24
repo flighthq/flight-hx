@@ -38,7 +38,6 @@ import flighthq.types.TriangleCulling;
 import flighthq.types.Types.ShapeKind;
 import flighthq.types._internal._ShapeValues.ShapeKind;
 
-@:expose("flighthq.shape.Shape")
 class Shape {
   public static function appendShapeArc(shape:flighthq.types.Shape, cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Dynamic):Void {
     _Runtime.callValue(Facade_Shape_flighthq_shape_ShapeCommands.appendShapeArc, cast ([shape, cx, cy, radius, startAngle, endAngle, anticlockwise] : Array<Dynamic>));

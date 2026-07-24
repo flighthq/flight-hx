@@ -13,7 +13,6 @@ import flighthq.types.Path;
 import flighthq.types.PathBooleanOperation;
 import flighthq.types.PathBooleanOptions;
 
-@:expose("flighthq.pathBoolean.BooleanPaths")
 class BooleanPaths {
   public static function booleanPaths(subject:Path, clip:Path, operation:PathBooleanOperation, ?out:Path, ?options:PathBooleanOptions):Path {
     var fillRule:Dynamic = cast _Runtime.UNDEFINED;

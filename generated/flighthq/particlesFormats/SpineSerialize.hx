@@ -12,7 +12,6 @@ import flighthq.types.SpineParticleSchema.SpineAlphaKeyframe;
 import flighthq.types.SpineParticleSchema.SpineParticleDocument;
 import flighthq.types.SpineParticleSchema.SpineTintKeyframe;
 
-@:expose("flighthq.particlesFormats.SpineSerialize")
 class SpineSerialize {
   public static final RAD2DEG__spineSerialize:Dynamic = (180.0 / HxMath.PI);
 

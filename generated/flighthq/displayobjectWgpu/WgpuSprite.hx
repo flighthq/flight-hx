@@ -11,7 +11,6 @@ import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.DisplayObject;
 import flighthq.types.WgpuRenderState;
 
-@:expose("flighthq.displayobjectWgpu.WgpuSprite")
 class WgpuSprite {
   public static function renderWgpuSprite(state:WgpuRenderState, source:DisplayObject):Void {
     var tempStack:Dynamic = cast _Runtime.UNDEFINED;

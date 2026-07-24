@@ -14,7 +14,6 @@ import flighthq.types.TextLabel.TextLabelRuntime;
 import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextMetrics;
 
-@:expose("flighthq.text.TextLabelLayout")
 class TextLabelLayout {
   public static function ensureTextLayout(source:TextLabel):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

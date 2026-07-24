@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ScreenSpaceFogEffect;
 
-@:expose("flighthq.effects.ScreenSpaceFogEffect")
 class ScreenSpaceFogEffect {
   public static function createScreenSpaceFogEffect(?options:Dynamic):flighthq.types.ScreenSpaceFogEffect {
     if (options == null) options = cast ({  } : Dynamic);

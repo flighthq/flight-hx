@@ -10,7 +10,6 @@ import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
-@:expose("flighthq.effectsWgpu.WgpuHalftoneEffect")
 class WgpuHalftoneEffect {
   public static function applyHalftoneEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:HalftoneEffect):Void {
     var scale:Dynamic = cast _Runtime.UNDEFINED;

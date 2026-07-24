@@ -1989,7 +1989,6 @@ import flighthq.webcam.Webcam as Facade_Sdk_flighthq_webcam_Webcam;
 import flighthq.xml.XmlParse as Facade_Sdk_flighthq_xml_XmlParse;
 import flighthq.xml.XmlQuery as Facade_Sdk_flighthq_xml_XmlQuery;
 
-@:expose("flighthq.sdk.Sdk")
 class Sdk {
   public static final __enum_BatchBarrier:Dynamic = { Capacity: Facade_Sdk_flighthq_types_BatchBarrier_BatchBarrier.Capacity, Clip: Facade_Sdk_flighthq_types_BatchBarrier_BatchBarrier.Clip, Filter: Facade_Sdk_flighthq_types_BatchBarrier_BatchBarrier.Filter, RenderTarget: Facade_Sdk_flighthq_types_BatchBarrier_BatchBarrier.RenderTarget };
 

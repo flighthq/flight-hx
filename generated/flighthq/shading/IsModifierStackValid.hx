@@ -7,7 +7,6 @@ import flighthq.shading.GetUnregisteredModifierKinds.getUnregisteredModifierKind
 import flighthq.types.Modifier;
 import flighthq.types.ModifierRegistry;
 
-@:expose("flighthq.shading.IsModifierStackValid")
 class IsModifierStackValid {
   public static function isModifierStackValid(registry:ModifierRegistry, stack:Array<Modifier>):Bool {
     return cast _Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getUnregisteredModifierKinds, cast ([registry, stack] : Array<Dynamic>)), 'length'), 0.0);

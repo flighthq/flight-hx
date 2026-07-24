@@ -37,7 +37,6 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
-@:expose("flighthq.displayobjectWgpu.WgpuCache")
 class WgpuCache {
   public static function createWgpuCacheState(screenState:WgpuRenderState):WgpuRenderState {
     var screenRuntime:Dynamic = cast _Runtime.UNDEFINED;

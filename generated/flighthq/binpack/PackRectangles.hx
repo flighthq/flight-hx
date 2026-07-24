@@ -14,7 +14,6 @@ typedef FreeRectangle__packRectangles = { var x:Float; var y:Float; var width:Fl
 
 typedef Placement__packRectangles = { var x:Float; var y:Float; var footprintWidth:Float; var footprintHeight:Float; var rotated:Bool; };
 
-@:expose("flighthq.binpack.PackRectangles")
 class PackRectangles {
   public static function packRectangles(rects:Array<PackableRectangle>, ?options:BinPackOptions):PackResult {
     var padding:Dynamic = cast _Runtime.UNDEFINED;

@@ -11,7 +11,6 @@ import flighthq.types.SpritesheetAnimation;
 import flighthq.types.SpritesheetFrame;
 import flighthq.types.SpritesheetPlayer;
 
-@:expose("flighthq.spritesheet.SpritesheetPlayer")
 class SpritesheetPlayer {
   public static function acquireSpritesheetPlayer():flighthq.types.SpritesheetPlayer {
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(SpritesheetPlayer.playerPool__spritesheetPlayer, 'length'), 0.0, '>'))) {

@@ -17,7 +17,6 @@ import flighthq.types.ShapeCommand.ShapeCommandToken;
 import flighthq.types.ShapeCommand.SpreadMethod;
 import flighthq.types.TriangleCulling;
 
-@:expose("flighthq.shape.ShapeCommands")
 class ShapeCommands {
   public static function appendShapeArc(shape:Shape, cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, anticlockwise:Dynamic = false):Void {
     var cmds:Dynamic = cast _Runtime.UNDEFINED;

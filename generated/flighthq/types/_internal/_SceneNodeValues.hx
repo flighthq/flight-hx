@@ -10,7 +10,6 @@ import flighthq.types.HasTransform3D.HasTransform3DRuntime;
 import flighthq.types.Node;
 import flighthq.types.Node.NodeRuntime;
 
-@:expose("flighthq.types._internal._SceneNodeValues")
 class _SceneNodeValues {
   public static final SceneNodeKind:Dynamic = 'SceneNode';
 

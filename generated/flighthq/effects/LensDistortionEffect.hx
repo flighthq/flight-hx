@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.LensDistortionEffect;
 
-@:expose("flighthq.effects.LensDistortionEffect")
 class LensDistortionEffect {
   public static function createLensDistortionEffect(?options:Dynamic):flighthq.types.LensDistortionEffect {
     if (options == null) options = cast ({  } : Dynamic);

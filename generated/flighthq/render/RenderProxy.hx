@@ -29,7 +29,6 @@ import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
 typedef AdaptHook__renderProxy = Dynamic;
 
-@:expose("flighthq.render.RenderProxy")
 class RenderProxy {
   public static function createRenderProxy(state:RenderState, source:Renderable):flighthq.types.RenderProxy {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

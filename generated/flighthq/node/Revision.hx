@@ -7,7 +7,6 @@ import flighthq.node.Node.getNodeRuntime;
 import flighthq.types.Node;
 import flighthq.types.Node.NodeRuntime;
 
-@:expose("flighthq.node.Revision")
 class Revision {
   public static function computeNodeWorldTransformRevision<Traits>(runtime:NodeRuntime<Traits>, ?parentRuntime:NodeRuntime<Traits>):Void {
     _Runtime.setField(runtime, 'worldTransformUsingLocalTransformId', _Runtime.field(runtime, 'localTransformId'));

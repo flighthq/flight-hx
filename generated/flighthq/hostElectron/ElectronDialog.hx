@@ -7,7 +7,6 @@ import flighthq.types.Dialog.DialogBackend;
 import flighthq.types.Dialog.FileDialogHandle;
 import flighthq.types.ElectronApi;
 
-@:expose("flighthq.hostElectron.ElectronDialog")
 class ElectronDialog {
   public static function createElectronDialogBackend(electron:ElectronApi):DialogBackend {
     var dialog:Dynamic = cast _Runtime.UNDEFINED;

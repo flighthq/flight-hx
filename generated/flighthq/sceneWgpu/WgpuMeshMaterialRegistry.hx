@@ -11,7 +11,6 @@ import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
-@:expose("flighthq.sceneWgpu.WgpuMeshMaterialRegistry")
 class WgpuMeshMaterialRegistry {
   public static function getWgpuMeshMaterialRenderer(state:WgpuRenderState, kind:Kind):Null<WgpuMeshMaterialRenderer> {
     return cast _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(_Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry'), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);

@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.effects.GaussianKernel.computeGaussianKernelWeights;
 import flighthq.effects.GaussianKernel.getGaussianKernelSize;
 
-@:expose("flighthq.effects.LinearSampledGaussian")
 class LinearSampledGaussian {
   public static function computeLinearSampledGaussian(sigma:Float, outWeights:Array<Float>, outOffsets:Array<Float>):Array<Float> {
     var size:Dynamic = cast _Runtime.UNDEFINED;

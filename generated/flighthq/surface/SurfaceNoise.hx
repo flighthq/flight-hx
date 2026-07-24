@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.invalidateImageResource;
 import flighthq.types.SurfaceRegion;
 
-@:expose("flighthq.surface.SurfaceNoise")
 class SurfaceNoise {
   public static function fillSurfaceNoise(dest:SurfaceRegion, seed:Float, low:Float = 0.0, high:Float = 255.0, grayScale:Bool = false):Void {
     var state:Dynamic = cast _Runtime.UNDEFINED;

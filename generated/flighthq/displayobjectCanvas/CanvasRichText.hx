@@ -28,7 +28,6 @@ import flighthq.types.TextFormat;
 import flighthq.types.TextLabel.TextLabelRuntime;
 import flighthq.types.TextSelectionRectangle;
 
-@:expose("flighthq.displayobjectCanvas.CanvasRichText")
 class CanvasRichText {
   public static function drawCanvasRichText(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(CanvasRichText.drawCanvasRichTextField__canvasRichText, cast ([state, renderProxy] : Array<Dynamic>));

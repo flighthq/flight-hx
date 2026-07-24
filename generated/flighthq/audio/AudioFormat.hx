@@ -4,7 +4,6 @@ package flighthq.audio;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.audio.AudioFormat")
 class AudioFormat {
   public static function canPlayAudioType(mimeType:String):Bool {
     if (_Runtime.truthy(_Runtime.strictEquals(mimeType, ''))) { return cast false; }

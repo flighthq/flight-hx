@@ -17,7 +17,6 @@ import flighthq.types.RenderProxy2D;
 import flighthq.types.Sprite;
 import flighthq.types.SpriteRenderer;
 
-@:expose("flighthq.displayobjectGl.GlSpriteRenderer")
 class GlSpriteRenderer {
   public static function submitGlSpriteNode__glSpriteRenderer(state:GlRenderState, spriteNode:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

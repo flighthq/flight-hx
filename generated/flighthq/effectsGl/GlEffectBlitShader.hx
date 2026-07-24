@@ -11,7 +11,6 @@ import flighthq.types.GlRenderTarget;
 
 typedef BlitOffsetShaderLocations__glEffectBlitShader = Dynamic;
 
-@:expose("flighthq.effectsGl.GlEffectBlitShader")
 class GlEffectBlitShader {
   public static final BLIT_OFFSET_FRAGMENT_SRC__glEffectBlitShader:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nuniform vec2 u_offset;\nout vec4 fragColor;\nvoid main() {\n  vec2 uv = v_texCoord + u_offset;\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {\n    fragColor = vec4(0.0);\n    return;\n  }\n  fragColor = texture(u_texture, uv);\n}';
 

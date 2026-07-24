@@ -22,7 +22,6 @@ import flighthq.types.Types.WireframeMaterialKind;
 import flighthq.types.WireframeMaterial;
 import flighthq.types._internal._WireframeMaterialValues.WireframeMaterialKind;
 
-@:expose("flighthq.sceneGl.WireframeGlMeshMaterialRenderer")
 class WireframeGlMeshMaterialRenderer {
   public static final wireframeGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;

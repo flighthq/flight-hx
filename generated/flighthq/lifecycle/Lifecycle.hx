@@ -11,7 +11,6 @@ import flighthq.types.Lifecycle.AppLifecycleState;
 import flighthq.types.Lifecycle.AppMemoryPressure;
 import flighthq.types.Lifecycle.LifecycleBackend;
 
-@:expose("flighthq.lifecycle.Lifecycle")
 class Lifecycle {
   public static var _backend__lifecycle:Null<LifecycleBackend> = _Runtime.explicitNull();
 

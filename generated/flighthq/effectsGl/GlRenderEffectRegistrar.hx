@@ -53,7 +53,6 @@ import flighthq.effectsGl.GlVignetteEffect.defaultGlVignetteEffectRunner;
 import flighthq.effectsGl.GlWhiteBalanceEffect.defaultGlWhiteBalanceEffectRunner;
 import flighthq.types.GlRenderState;
 
-@:expose("flighthq.effectsGl.GlRenderEffectRegistrar")
 class GlRenderEffectRegistrar {
   public static function getGlRenderEffectKinds():Array<String> {
     return cast GlRenderEffectRegistrar.ALL_GL_EFFECT_KINDS__glRenderEffectRegistrar;

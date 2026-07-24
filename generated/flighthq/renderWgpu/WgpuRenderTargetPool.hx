@@ -9,7 +9,6 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 
-@:expose("flighthq.renderWgpu.WgpuRenderTargetPool")
 class WgpuRenderTargetPool {
   public static function acquireWgpuRenderTarget(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool, descriptor:{ var width:Float; var height:Float; @:optional var format:Dynamic; }):WgpuRenderTarget {
     var w:Dynamic = cast _Runtime.UNDEFINED;

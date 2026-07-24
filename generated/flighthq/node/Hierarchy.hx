@@ -19,7 +19,6 @@ import flighthq.types.Node;
 import flighthq.types.Node.NodeOf;
 import flighthq.types.Node.NodeRuntime;
 
-@:expose("flighthq.node.Hierarchy")
 class Hierarchy {
   public static function addNodeChild<Traits>(target:Node<Traits>, child:Node<Traits>):NodeOf<Traits> {
     return cast _Runtime.callValue(addNodeChildAt, cast ([target, child, _Runtime.callValue(getNodeChildCount, cast ([target] : Array<Dynamic>))] : Array<Dynamic>));

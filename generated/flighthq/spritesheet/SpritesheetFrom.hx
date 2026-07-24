@@ -15,7 +15,6 @@ import flighthq.types.SpritesheetData;
 import flighthq.types.TextureAtlas;
 import flighthq.types.Tileset;
 
-@:expose("flighthq.spritesheet.SpritesheetFrom")
 class SpritesheetFrom {
   public static function createSpritesheetFromData(data:SpritesheetData, atlas:TextureAtlas):Spritesheet {
     var nameToRegionId:Dynamic = cast _Runtime.UNDEFINED;

@@ -45,7 +45,6 @@ import flighthq.types.NodeInteractionState;
 import flighthq.types.Rectangle;
 import flighthq.types.SignalConnectOptions;
 
-@:expose("flighthq.interaction.Interaction")
 class Interaction {
   public static function captureInteractionPointer<N>(manager:InteractionManager<Dynamic>, pointerId:Float, target:Dynamic):Void {
     _Runtime.callValue(Facade_Interaction_flighthq_interaction_InteractionManager.captureInteractionPointer, cast ([manager, pointerId, target] : Array<Dynamic>));

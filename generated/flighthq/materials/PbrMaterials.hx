@@ -13,7 +13,6 @@ import flighthq.types.Types.StandardPbrMaterialKind;
 import flighthq.types._internal._SpecularGlossinessPbrMaterialValues.SpecularGlossinessPbrMaterialKind;
 import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKind;
 
-@:expose("flighthq.materials.PbrMaterials")
 class PbrMaterials {
   public static function convertSpecularGlossinessToStandardPbr(out:StandardPbrMaterialProperties, source:SpecularGlossinessPbrMaterial):Void {
     var diffuse:Dynamic = cast _Runtime.UNDEFINED;

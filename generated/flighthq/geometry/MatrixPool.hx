@@ -7,7 +7,6 @@ import flighthq.geometry.Matrix.createMatrix;
 import flighthq.geometry.Matrix.setMatrixIdentity;
 import flighthq.types.Matrix;
 
-@:expose("flighthq.geometry.MatrixPool")
 class MatrixPool {
   public static function acquireIdentityMatrix():Matrix {
     var m:Dynamic = cast _Runtime.UNDEFINED;

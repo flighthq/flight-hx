@@ -4,7 +4,6 @@ package flighthq.displayobjectCanvas;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.displayobjectCanvas.CanvasElement")
 class CanvasElement {
   public static function createCanvasElement(width:Float, height:Float, pixelRatio:Float = 1.0):Dynamic {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;

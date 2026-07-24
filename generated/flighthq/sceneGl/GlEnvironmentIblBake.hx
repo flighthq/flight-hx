@@ -12,7 +12,6 @@ import flighthq.types.GlRenderState;
 
 typedef GlBakeProgram__glEnvironmentIblBake = { var buffer:Dynamic; var locEnvCube:Null<Dynamic>; var locFaceForward:Null<Dynamic>; var locFaceRight:Null<Dynamic>; var locFaceUp:Null<Dynamic>; var locRoughness:Null<Dynamic>; var program:Dynamic; var vao:Dynamic; };
 
-@:expose("flighthq.sceneGl.GlEnvironmentIblBake")
 class GlEnvironmentIblBake {
   public static function bakeEnvironmentIbl(state:GlRenderState, environment:Environment):Void {
     var sourceCube:Dynamic = cast _Runtime.UNDEFINED;

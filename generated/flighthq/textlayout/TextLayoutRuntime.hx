@@ -7,7 +7,6 @@ import flighthq.textlayout.TextLayout.createTextLayoutResult;
 import flighthq.types.TextLabel.TextLabelRuntime;
 import flighthq.types.TextLayout.TextLayoutResult;
 
-@:expose("flighthq.textlayout.TextLayoutRuntime")
 class TextLayoutRuntime {
   public static function clearTextLayoutResult(runtime:TextLabelRuntime):Void {
     _Runtime.setField(runtime, 'textLayout', null);

@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 
 typedef WellKnownMenuItemRoleValue = Dynamic;
 
-@:expose("flighthq.types.WellKnownMenuItemRole")
 class WellKnownMenuItemRole {
   public static final WellKnownMenuItemRole:Dynamic = { copy: 'copy', cut: 'cut', delete: 'delete', paste: 'paste', pasteAndMatchStyle: 'pasteAndMatchStyle', redo: 'redo', selectAll: 'selectAll', toggleSpellChecker: 'toggleSpellChecker', undo: 'undo', about: 'about', close: 'close', front: 'front', hide: 'hide', hideOthers: 'hideOthers', mergeAllWindows: 'mergeAllWindows', minimize: 'minimize', moveTabToNewWindow: 'moveTabToNewWindow', quit: 'quit', selectNextTab: 'selectNextTab', selectPreviousTab: 'selectPreviousTab', toggleTabBar: 'toggleTabBar', unhide: 'unhide', zoom: 'zoom', forceReload: 'forceReload', reload: 'reload', resetZoom: 'resetZoom', toggleDevTools: 'toggleDevTools', toggleFullscreen: 'toggleFullscreen', zoomIn: 'zoomIn', zoomOut: 'zoomOut', help: 'help', services: 'services', startSpeaking: 'startSpeaking', stopSpeaking: 'stopSpeaking', clearRecentDocuments: 'clearRecentDocuments', recentDocuments: 'recentDocuments', appMenu: 'appMenu', editMenu: 'editMenu', fileMenu: 'fileMenu', helpMenu: 'helpMenu', shareMenu: 'shareMenu', viewMenu: 'viewMenu', windowMenu: 'windowMenu' };
 }

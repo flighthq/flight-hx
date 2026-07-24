@@ -9,7 +9,6 @@ import flighthq.node.Node.getNodeRuntime;
 import flighthq.types.DisplayObject;
 import flighthq.types.Rectangle;
 
-@:expose("flighthq.interaction.SpatialQuery")
 class SpatialQuery {
   public static function hitTestAreaQuery(root:DisplayObject, rect:Rectangle, ?out:Array<DisplayObject>):Array<DisplayObject> {
     if (out == null) out = cast (cast ([] : Array<Dynamic>) : Dynamic);

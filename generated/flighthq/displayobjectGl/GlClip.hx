@@ -13,7 +13,6 @@ import flighthq.types.DisplayObjectRenderer.DisplayObjectClipHooks;
 import flighthq.types.GlRenderState;
 import flighthq.types.RenderProxy2D;
 
-@:expose("flighthq.displayobjectGl.GlClip")
 class GlClip {
   public static function enableGlClipSupport(state:GlRenderState):Void {
     _Runtime.setField(state, 'displayObjectClipHooks', GlClip.webglClipHooks__glClip);

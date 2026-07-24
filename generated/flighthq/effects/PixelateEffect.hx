@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.PixelateEffect;
 
-@:expose("flighthq.effects.PixelateEffect")
 class PixelateEffect {
   public static function createPixelateEffect(?options:Dynamic):flighthq.types.PixelateEffect {
     if (options == null) options = cast ({  } : Dynamic);

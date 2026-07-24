@@ -13,7 +13,6 @@ import flighthq.types.MeshGeometry;
 import flighthq.types.MeshMorphBindPose;
 import flighthq.types.MeshSkinBindPose;
 
-@:expose("flighthq.mesh.MeshGeometryDeformationClone")
 class MeshGeometryDeformationClone {
   public static function cloneMeshGeometryForDeformation(source:MeshGeometry):MeshGeometry {
     var clone:Dynamic = cast _Runtime.UNDEFINED;

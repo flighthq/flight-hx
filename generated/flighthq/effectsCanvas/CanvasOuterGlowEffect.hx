@@ -17,7 +17,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderTargetPool;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.OuterGlowEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasOuterGlowEffect")
 class CanvasOuterGlowEffect {
   public static function applyOuterGlowEffectToCanvas(source:Dynamic, dest:Dynamic, poolOrEffect:Dynamic, ?maybeEffect:OuterGlowEffect):Void {
     var effect:Dynamic = cast _Runtime.UNDEFINED;

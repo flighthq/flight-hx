@@ -25,7 +25,6 @@ import flighthq.types.Types.MAX_FORWARD_LIGHTS;
 import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 import flighthq.types._internal._SceneLightBlockValues.MAX_FORWARD_LIGHTS;
 
-@:expose("flighthq.sceneGl.GlShadedPrelude")
 class GlShadedPrelude {
   public static function buildGlShadedCacheKey(key:GlShadedDefineKey, modifierDefineKey:String):String {
     var base:Dynamic = cast _Runtime.UNDEFINED;

@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.KuwaharaEffect;
 
-@:expose("flighthq.effects.KuwaharaEffect")
 class KuwaharaEffect {
   public static function createKuwaharaEffect(?options:Dynamic):flighthq.types.KuwaharaEffect {
     if (options == null) options = cast ({  } : Dynamic);

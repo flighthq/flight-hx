@@ -27,7 +27,6 @@ typedef FileSystemWritableFileStream__dialog = { var write:Dynamic; var close:Dy
 
 typedef WindowWithFileSystemAccess__dialog = Dynamic;
 
-@:expose("flighthq.dialog.Dialog")
 class Dialog {
   public static var _backend__dialog:Null<DialogBackend> = _Runtime.explicitNull();
 

@@ -8,7 +8,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.GodRaysEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasGodRaysEffect")
 class CanvasGodRaysEffect {
   public static function applyGodRaysEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:GodRaysEffect):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));

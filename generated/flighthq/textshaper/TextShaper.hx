@@ -7,7 +7,6 @@ import flighthq.textshaper._TextShaperHooks._textShaperBackendHook;
 import flighthq.types.TextFormat;
 import flighthq.types.TextShaper.TextShaperBackend;
 
-@:expose("flighthq.textshaper.TextShaper")
 class TextShaper {
   public static function getTextShaperBackend():Null<TextShaperBackend> {
     return cast TextShaper._backend__textShaper;

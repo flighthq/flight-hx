@@ -18,7 +18,6 @@ import flighthq.types.Rectangle;
 import flighthq.types.Types.BitmapKind;
 import flighthq.types._internal._BitmapValues.BitmapKind;
 
-@:expose("flighthq.displayobject.Bitmap")
 class Bitmap {
   public static function computeBitmapLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
     var bitmapData:BitmapData = cast _Runtime.UNDEFINED;

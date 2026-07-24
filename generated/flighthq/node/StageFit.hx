@@ -12,7 +12,6 @@ import flighthq.types.Rectangle;
 import flighthq.types.StageFitContext;
 import flighthq.types.ViewportAlign;
 
-@:expose("flighthq.node.StageFit")
 class StageFit {
   public static function computeStageFitAlignX(scaledContentWidth:Float, viewWidth:Float, align:ViewportAlign):Float {
     if (_Runtime.truthy(_Runtime.includes(align, 'left'))) { return cast 0.0; }

@@ -26,7 +26,6 @@ import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Rectangle;
 import flighthq.types.Rectangle.RectangleLike;
 
-@:expose("flighthq.node.BoundsRectangle")
 class BoundsRectangle {
   public static function computeNodeBoundsRectangle<Traits>(out:RectangleLike, source:Spatial2DNode<Traits>, targetCoordinateSpace:Null<Spatial2DNode<Traits>>):Void {
     var bounds:Dynamic = cast _Runtime.UNDEFINED;

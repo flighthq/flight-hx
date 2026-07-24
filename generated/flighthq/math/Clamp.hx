@@ -4,7 +4,6 @@ package flighthq.math;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.math.Clamp")
 class Clamp {
   public static function clamp(value:Float, min:Float, max:Float):Float {
     return cast _Runtime.select(_Runtime.compare(value, min, '<'), function():Dynamic return cast min, function():Dynamic return cast _Runtime.select(_Runtime.compare(value, max, '>'), function():Dynamic return cast max, function():Dynamic return cast value));

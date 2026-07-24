@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.geometry.Rectangle.createRectangle;
 import flighthq.types.Rectangle;
 
-@:expose("flighthq.geometry.RectanglePool")
 class RectanglePool {
   public static function acquireEmptyRectangle():Rectangle {
     var r:Dynamic = cast _Runtime.UNDEFINED;

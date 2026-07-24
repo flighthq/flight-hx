@@ -15,7 +15,6 @@ typedef CanvasRenderStateHandles__canvasRenderTarget = { var canvas:Dynamic; var
 
 typedef SavedCanvasState__canvasRenderTarget = { var canvas:Dynamic; var context:Dynamic; var renderTransform2D:Null<Matrix>; };
 
-@:expose("flighthq.displayobjectCanvas.CanvasRenderTarget")
 class CanvasRenderTarget {
   public static final _targetStack__canvasRenderTarget:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 

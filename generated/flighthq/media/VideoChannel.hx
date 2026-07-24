@@ -11,7 +11,6 @@ import flighthq.types.VideoResource.VideoPlayOptions;
 
 typedef VideoChannelRuntime__videoChannel = { var loopsRemaining:Float; var onEnded:Dynamic; };
 
-@:expose("flighthq.media.VideoChannel")
 class VideoChannel {
   public static function getVideoChannelCurrentTime(channel:flighthq.types.VideoResource.VideoChannel):Float {
     var element:Dynamic = cast _Runtime.UNDEFINED;

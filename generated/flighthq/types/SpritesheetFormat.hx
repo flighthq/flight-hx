@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 
 typedef SpritesheetFormatKind = String;
 
-@:expose("flighthq.types.SpritesheetFormat")
 class SpritesheetFormat {
   public static final SpritesheetFormatKindAseprite:Dynamic = 'Aseprite';
 

@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.SurfaceRegion;
 
-@:expose("flighthq.surface.SurfaceQuery")
 class SurfaceQuery {
   public static function getSurfaceColorBoundsRectangle(source:SurfaceRegion, mask:Float, color:Float, findColor:Bool = true):Null<RectangleLike> {
     var data:Dynamic = cast _Runtime.UNDEFINED;

@@ -16,7 +16,6 @@ import flighthq.types.WgpuSceneRuntime.WgpuMaterialBinding;
 import flighthq.types.WgpuToonPipeline;
 import flighthq.types.WgpuToonPipeline.WgpuToonDefineKey;
 
-@:expose("flighthq.sceneWgpu.WgpuToonPrelude")
 class WgpuToonPrelude {
   public static function bindWgpuToonSurface(state:WgpuRenderState, pipeline:WgpuToonPipeline, materialKey:Dynamic, baseColor:Array<Float>, steps:Float, alphaCutoff:Float):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;

@@ -10,7 +10,6 @@ import flighthq.types.Environment;
 import flighthq.types.GlRenderState;
 import flighthq.types.ImageResource;
 
-@:expose("flighthq.sceneGl.GlEnvironmentCube")
 class GlEnvironmentCube {
   public static function ensureGlEnvironmentSourceCube(state:GlRenderState, environment:Environment):Null<Dynamic> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

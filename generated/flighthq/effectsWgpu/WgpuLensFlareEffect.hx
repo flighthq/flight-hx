@@ -10,7 +10,6 @@ import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
-@:expose("flighthq.effectsWgpu.WgpuLensFlareEffect")
 class WgpuLensFlareEffect {
   public static function applyLensFlareEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:LensFlareEffect):Void {
     var threshold:Dynamic = cast _Runtime.UNDEFINED;

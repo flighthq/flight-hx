@@ -34,7 +34,6 @@ import flighthq.types.SpotLightConeAngles;
 import flighthq.types.SpotLightOptions;
 import flighthq.types.Vector3.Vector3Like;
 
-@:expose("flighthq.lighting.Lighting")
 class Lighting {
   public static function applyLightExposure(intensity:Float, ev:Float):Float {
     return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_LightIntensity.applyLightExposure, cast ([intensity, ev] : Array<Dynamic>));

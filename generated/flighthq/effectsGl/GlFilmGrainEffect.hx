@@ -10,7 +10,6 @@ import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
-@:expose("flighthq.effectsGl.GlFilmGrainEffect")
 class GlFilmGrainEffect {
   public static function applyFilmGrainEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:FilmGrainEffect):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;

@@ -14,7 +14,6 @@ import flighthq.types.Connectivity.ConnectivityStatus;
 
 typedef WebConnectivityConnection__connectivity = { @:optional var type:String; @:optional var downlink:Float; @:optional var downlinkMax:Float; @:optional var effectiveType:String; @:optional var rtt:Float; @:optional var saveData:Bool; @:optional var addEventListener:Dynamic; @:optional var removeEventListener:Dynamic; };
 
-@:expose("flighthq.connectivity.Connectivity")
 class Connectivity {
   public static var _backend__connectivity:Null<ConnectivityBackend> = _Runtime.explicitNull();
 

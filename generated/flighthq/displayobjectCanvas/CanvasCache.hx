@@ -33,7 +33,6 @@ import flighthq.types.RenderState;
 
 typedef CanvasRenderStateHandles__canvasCache = { var canvas:Dynamic; var context:Dynamic; };
 
-@:expose("flighthq.displayobjectCanvas.CanvasCache")
 class CanvasCache {
   public static function createCanvasCacheState(screenState:Dynamic):Dynamic {
     var screen:Dynamic = cast _Runtime.UNDEFINED;

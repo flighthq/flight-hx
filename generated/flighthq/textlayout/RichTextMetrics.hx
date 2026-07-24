@@ -9,7 +9,6 @@ import flighthq.textlayout.TextBounds.computeTextBoundsWidth;
 import flighthq.types.RichText.RichTextData;
 import flighthq.types.TextLayout.TextLayoutResult;
 
-@:expose("flighthq.textlayout.RichTextMetrics")
 class RichTextMetrics {
   public static function computeRichTextBottomScrollV(data:RichTextData, layout:TextLayoutResult):Float {
     return cast _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(layout, 'numLines'), ((_Runtime.field(data, 'scrollV') + _Runtime.callValue(RichTextMetrics.getVisibleLineCount__richTextMetrics, cast ([data, layout] : Array<Dynamic>))) - 1.0)] : Array<Dynamic>));

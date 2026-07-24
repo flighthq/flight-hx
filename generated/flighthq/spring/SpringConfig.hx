@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.math.Constants.TAU;
 import flighthq.types.Spring.SpringConfig;
 
-@:expose("flighthq.spring.SpringConfig")
 class SpringConfig {
   public static function createSpringConfig(frequency:Float, dampingRatio:Float):flighthq.types.Spring.SpringConfig {
     return cast { dampingRatio: dampingRatio, frequency: frequency };

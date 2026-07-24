@@ -13,7 +13,6 @@ import flighthq.types.NodeInteractionState;
 import flighthq.types.NodeSignals;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
-@:expose("flighthq.types._internal._NodeValues")
 class _NodeValues {
   public static var NodeTraitsKey__Node:Dynamic;
 

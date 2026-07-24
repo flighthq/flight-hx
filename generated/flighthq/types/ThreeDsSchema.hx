@@ -8,7 +8,6 @@ typedef ThreeDsMaterial = { var ambient:Array<Float>; var diffuse:Array<Float>; 
 
 typedef ThreeDsMesh = { var faces:flighthq._internal._UInt16Array; var materialNames:Array<String>; var name:String; var uvs:Null<flighthq._internal._Float32Array>; var vertices:flighthq._internal._Float32Array; };
 
-@:expose("flighthq.types.ThreeDsSchema")
 class ThreeDsSchema {
   public static final THREE_DS_MAIN:Dynamic = 19789.0;
 

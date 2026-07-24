@@ -13,7 +13,6 @@ import flighthq.types.TextLabel;
 import flighthq.types.TextLabel.TextLabelData;
 import flighthq.types.TextLabel.TextLabelRuntime;
 
-@:expose("flighthq.types._internal._RichTextValues")
 class _RichTextValues {
   public static final RichTextKind:Dynamic = 'RichText';
 }

@@ -13,7 +13,6 @@ import flighthq.types.Camera3D;
 import flighthq.types.OrbitCameraController;
 import flighthq.types.OrbitCameraController.OrbitCameraControllerOptions;
 
-@:expose("flighthq.cameraControls.OrbitCameraController")
 class OrbitCameraController {
   public static function cloneOrbitCameraController(source:flighthq.types.OrbitCameraController):flighthq.types.OrbitCameraController {
     var clone:Dynamic = cast _Runtime.UNDEFINED;

@@ -4,7 +4,6 @@ package flighthq.font;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-@:expose("flighthq.font.FontShorthand")
 class FontShorthand {
   public static function getFontShorthand(family:String, ?style:String):String {
     var quoted:Dynamic = cast _Runtime.UNDEFINED;

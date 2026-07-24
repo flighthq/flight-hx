@@ -18,7 +18,6 @@ import flighthq.types.RendererData;
 
 typedef DomBitmapData__domBitmap = Dynamic;
 
-@:expose("flighthq.displayobjectDom.DomBitmap")
 class DomBitmap {
   public static function createDomBitmapData__domBitmap(_state:RenderState, _source:Renderable):DomBitmapData__domBitmap {
     return cast _Runtime.callValue(createEntity, cast ([{ canvas: null, context: null, image: null }] : Array<Dynamic>));

@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CustomShaderEffect;
 
-@:expose("flighthq.effects.CustomShaderEffect")
 class CustomShaderEffect {
   public static function createCustomShaderEffect(options:Dynamic):flighthq.types.CustomShaderEffect {
     return cast _Runtime.mergeObjects([{ kind: 'CustomShaderEffect' }, options]);

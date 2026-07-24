@@ -8,7 +8,6 @@ import flighthq.renderWgpu.WgpuSurface.acquireWgpuFrameCaptureTexture;
 import flighthq.renderWgpu.WgpuSurface.encodeWgpuFrameCapture;
 import flighthq.types.WgpuRenderState;
 
-@:expose("flighthq.renderWgpu.WgpuBackground")
 class WgpuBackground {
   public static function ensureWgpuDepthStencil__wgpuBackground(state:WgpuRenderState, width:Float, height:Float):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

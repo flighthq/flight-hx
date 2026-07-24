@@ -17,7 +17,6 @@ import flighthq.types.RenderView.RenderViewRuntime;
 import flighthq.types.Types.RenderViewKind;
 import flighthq.types._internal._RenderViewValues.RenderViewKind;
 
-@:expose("flighthq.displayobject.RenderView")
 class RenderView {
   public static function computeRenderViewLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;

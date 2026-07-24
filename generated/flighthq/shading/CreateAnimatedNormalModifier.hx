@@ -10,7 +10,6 @@ import flighthq.types.Types.AnimatedNormalModifierKind;
 import flighthq.types._internal._AnimatedNormalModifierValues.AnimatedNormalModifierKind;
 import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 
-@:expose("flighthq.shading.CreateAnimatedNormalModifier")
 class CreateAnimatedNormalModifier {
   public static function createAnimatedNormalModifier(options:AnimatedNormalModifierOptions):AnimatedNormalModifier {
     var modifier:AnimatedNormalModifier = cast _Runtime.UNDEFINED;

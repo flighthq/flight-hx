@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CollisionResponse;
 
-@:expose("flighthq.types._internal._CircleColliderValues")
 class _CircleColliderValues {
   public static final CircleColliderKind:Dynamic = 'CircleCollider';
 }

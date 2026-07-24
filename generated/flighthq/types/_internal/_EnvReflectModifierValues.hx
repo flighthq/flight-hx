@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Modifier;
 
-@:expose("flighthq.types._internal._EnvReflectModifierValues")
 class _EnvReflectModifierValues {
   public static final EnvReflectModifierKind:Dynamic = 'EnvReflectModifier';
 }

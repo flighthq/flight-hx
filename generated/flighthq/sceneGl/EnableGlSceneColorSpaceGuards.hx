@@ -8,7 +8,6 @@ import flighthq.sceneGl.GlSceneRuntime.getGlSceneRuntime;
 import flighthq.types.GlRenderState;
 import flighthq.types.Log.LogLevel;
 
-@:expose("flighthq.sceneGl.EnableGlSceneColorSpaceGuards")
 class EnableGlSceneColorSpaceGuards {
   public static function areGlSceneColorSpaceGuardsEnabled(state:GlRenderState):Bool {
     return cast !_Runtime.looseEquals(_Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'colorSpaceGuard'), null);

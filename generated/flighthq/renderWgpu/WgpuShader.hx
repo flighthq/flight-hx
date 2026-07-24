@@ -12,7 +12,6 @@ import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
 typedef StencilMode__wgpuShader = String;
 
-@:expose("flighthq.renderWgpu.WgpuShader")
 class WgpuShader {
   public static final UNIFORM_BYTE_SIZE:Dynamic = 128.0;
 

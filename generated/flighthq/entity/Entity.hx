@@ -12,7 +12,6 @@ import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.EntityWithoutRuntime;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
-@:expose("flighthq.entity.Entity")
 class Entity {
   public static function areEntityRuntimeGuardsEnabled():Bool {
     return cast _Runtime.callValue(Facade_Entity_flighthq_entity_Guards.areEntityRuntimeGuardsEnabled, cast ([] : Array<Dynamic>));

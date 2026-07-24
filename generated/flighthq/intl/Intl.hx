@@ -11,7 +11,6 @@ import flighthq.intl.Plural as Facade_Intl_flighthq_intl_Plural;
 import flighthq.intl.RelativeTime as Facade_Intl_flighthq_intl_RelativeTime;
 import flighthq.types.LocaleInput;
 
-@:expose("flighthq.intl.Intl")
 class Intl {
   public static function compareStrings(a:String, b:String, locale:LocaleInput, ?options:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Intl_flighthq_intl_Collator.compareStrings, cast ([a, b, locale, options] : Array<Dynamic>));

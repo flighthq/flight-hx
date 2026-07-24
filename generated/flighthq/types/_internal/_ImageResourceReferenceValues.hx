@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ResourceResolutionState;
 
-@:expose("flighthq.types._internal._ImageResourceReferenceValues")
 class _ImageResourceReferenceValues {
   public static final ImageResourceReferenceKindValue:Dynamic = { Embedded: 'Embedded', External: 'External' };
 

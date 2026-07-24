@@ -24,7 +24,6 @@ import flighthq.types.SceneRenderProxy;
 import flighthq.types.Types.IridescencePbrMaterialKind;
 import flighthq.types._internal._IridescencePbrMaterialValues.IridescencePbrMaterialKind;
 
-@:expose("flighthq.sceneGl.IridescencePbrGlMeshMaterialRenderer")
 class IridescencePbrGlMeshMaterialRenderer {
   public static final iridescencePbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;

@@ -9,7 +9,6 @@ import flighthq.types.WgpuEffectPipeline;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
-@:expose("flighthq.effectsWgpu.WgpuEffectBlitShader")
 class WgpuEffectBlitShader {
   public static final BLIT_OFFSET_WGSL__wgpuEffectBlitShader:Dynamic = '\nstruct Uniforms {\n  offset : vec2f,\n  _pad : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let shifted = uv + uni.offset;\n  if (shifted.x < 0.0 || shifted.x > 1.0 || shifted.y < 0.0 || shifted.y > 1.0) {\n    return vec4f(0.0);\n  }\n  return textureSampleLevel(tex, smp, shifted, 0.0);\n}';
 

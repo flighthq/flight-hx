@@ -9,7 +9,6 @@ import flighthq.types.Surface;
 import flighthq.types.SurfaceRegion;
 import flighthq.types.ThresholdOperation;
 
-@:expose("flighthq.surface.SurfaceTransform")
 class SurfaceTransform {
   public static var _scrollScratch__surfaceTransform:Null<Dynamic> = _Runtime.explicitNull();
 

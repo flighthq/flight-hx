@@ -14,7 +14,6 @@ import flighthq.types.SceneResources.SceneResourceResolver;
 
 typedef SceneResourceFailureGuard__enableSceneResourceFailureGuards = { var failed:Dynamic; var resolved:Dynamic; };
 
-@:expose("flighthq.sceneResources.EnableSceneResourceFailureGuards")
 class EnableSceneResourceFailureGuards {
   public static function areSceneResourceFailureGuardsEnabled(resolver:SceneResourceResolver):Bool {
     return cast _Runtime.callProperty(EnableSceneResourceFailureGuards._guards__enableSceneResourceFailureGuards, 'has', cast ([resolver] : Array<Dynamic>));

@@ -30,7 +30,6 @@ import flighthq.types.MeshSkinBindPose;
 import flighthq.types.MeshTriangleVertexIndices;
 import flighthq.types.MorphTarget.MeshMorph;
 
-@:expose("flighthq.mesh.Mesh")
 class Mesh {
   public static function addMeshGeometrySubset(geometry:MeshGeometry, subset:MeshSubset):Void {
     _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometrySubset.addMeshGeometrySubset, cast ([geometry, subset] : Array<Dynamic>));

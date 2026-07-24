@@ -16,7 +16,6 @@ import flighthq.types.GlToonProgram.GlToonDefineKey;
 import flighthq.types.Types.MAX_FORWARD_LIGHTS;
 import flighthq.types._internal._SceneLightBlockValues.MAX_FORWARD_LIGHTS;
 
-@:expose("flighthq.sceneGl.GlToonPrelude")
 class GlToonPrelude {
   public static function buildGlToonDefineKey(key:GlToonDefineKey):String {
     return cast '' + Std.string(_Runtime.select(_Runtime.field(key, 'alphaMaskEnabled'), function():Dynamic return cast 'm', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasBaseColorMap'), function():Dynamic return cast 'b', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasRamp'), function():Dynamic return cast 'r', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasUvTransform'), function():Dynamic return cast 'u', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast 'k', function():Dynamic return cast '-')) + '';

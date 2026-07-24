@@ -20,7 +20,6 @@ import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Transform2D.Transform2DLike;
 import flighthq.types.Vector2.Vector2Like;
 
-@:expose("flighthq.node.NodeTransform2d")
 class NodeTransform2d {
   public static function convertNodeVector2GlobalToLocal<Traits>(out:Vector2Like, source:Transform2DNode<Traits>, vector:Vector2Like):Void {
     _Runtime.callValue(inverseMatrixTransformPointXY, cast ([out, _Runtime.callValue(getNodeWorldMatrix, cast ([source] : Array<Dynamic>)), _Runtime.field(vector, 'x'), _Runtime.field(vector, 'y')] : Array<Dynamic>));

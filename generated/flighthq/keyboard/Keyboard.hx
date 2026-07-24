@@ -19,7 +19,6 @@ typedef VirtualKeyboard__keyboard = Dynamic;
 
 typedef WebKeyboardGeometry__keyboard = { var height:Float; var width:Float; var x:Float; var y:Float; };
 
-@:expose("flighthq.keyboard.Keyboard")
 class Keyboard {
   public static var _backend__keyboard:Null<SoftKeyboardBackend> = _Runtime.explicitNull();
 

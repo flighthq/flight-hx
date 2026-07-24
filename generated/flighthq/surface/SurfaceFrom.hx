@@ -8,7 +8,6 @@ import flighthq.image.ImageResourceFrom.createImageResourceFromCanvas;
 import flighthq.types.ImageResource;
 import flighthq.types.Surface;
 
-@:expose("flighthq.surface.SurfaceFrom")
 class SurfaceFrom {
   public static function createImageResourceFromSurface(surface:Surface):ImageResource {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;

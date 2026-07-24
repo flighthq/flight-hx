@@ -15,7 +15,6 @@ import flighthq.types.ShortcutSignals;
 
 typedef _Parsed__shortcut = { var key:String; var modifiers:Array<ShortcutModifier>; };
 
-@:expose("flighthq.shortcut.Shortcut")
 class Shortcut {
   public static var _backend__shortcut:Null<ShortcutBackend> = _Runtime.explicitNull();
 

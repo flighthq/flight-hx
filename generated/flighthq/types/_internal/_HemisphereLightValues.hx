@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Light;
 
-@:expose("flighthq.types._internal._HemisphereLightValues")
 class _HemisphereLightValues {
   public static final HemisphereLightKind:Dynamic = 'HemisphereLight';
 }

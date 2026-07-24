@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.renderGl.GlTextureUpload.uploadGlTextureElement;
 import flighthq.types.VideoTexture;
 
-@:expose("flighthq.renderGl.GlTextureVideoUpload")
 class GlTextureVideoUpload {
   public static function uploadGlTextureVideoFrame(gl:Dynamic, videoTexture:VideoTexture, uploadedFrameId:Float):Float {
     var element:Dynamic = cast _Runtime.UNDEFINED;

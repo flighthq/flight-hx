@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.HasAppearance;
 
-@:expose("flighthq.node.HasAppearance")
 class HasAppearance {
   public static function initAppearanceTrait(target:flighthq.types.HasAppearance, ?obj:Dynamic):Void {
     _Runtime.setField(target, 'alpha', _Runtime.coalesce(_Runtime.optionalField(obj, 'alpha'), function():Dynamic return cast 1.0));

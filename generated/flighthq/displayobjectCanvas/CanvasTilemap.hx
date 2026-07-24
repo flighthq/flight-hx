@@ -10,7 +10,6 @@ import flighthq.types.RenderProxy2D;
 import flighthq.types.SpriteRenderer;
 import flighthq.types.Tilemap;
 
-@:expose("flighthq.displayobjectCanvas.CanvasTilemap")
 class CanvasTilemap {
   public static function drawCanvasTilemap(state:Dynamic, tilemapNode:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;

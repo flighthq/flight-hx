@@ -14,7 +14,6 @@ import flighthq.types._internal._BlinnPhongMaterialValues.BlinnPhongMaterialKind
 import flighthq.types._internal._LambertMaterialValues.LambertMaterialKind;
 import flighthq.types._internal._PhongMaterialValues.PhongMaterialKind;
 
-@:expose("flighthq.materials.ClassicMaterials")
 class ClassicMaterials {
   public static function createBlinnPhongMaterial(?opts:Dynamic):BlinnPhongMaterial {
     var material:Dynamic = cast _Runtime.UNDEFINED;

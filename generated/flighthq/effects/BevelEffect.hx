@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.BevelEffect;
 
-@:expose("flighthq.effects.BevelEffect")
 class BevelEffect {
   public static function createBevelEffect(?options:Dynamic):flighthq.types.BevelEffect {
     if (options == null) options = cast ({  } : Dynamic);

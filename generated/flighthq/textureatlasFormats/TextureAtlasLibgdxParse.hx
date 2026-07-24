@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.textureatlas.TextureAtlasRegion.createTextureAtlasRegion;
 import flighthq.types.TextureAtlas;
 
-@:expose("flighthq.textureatlasFormats.TextureAtlasLibgdxParse")
 class TextureAtlasLibgdxParse {
   public static function parseTextureAtlasLibgdxAtlas(text:String, atlas:TextureAtlas):TextureAtlas {
     var lines:Dynamic = cast _Runtime.UNDEFINED;

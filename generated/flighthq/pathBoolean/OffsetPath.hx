@@ -10,7 +10,6 @@ import flighthq.types.PathOffsetEnd;
 import flighthq.types.PathOffsetJoin;
 import flighthq.types.PathOffsetOptions;
 
-@:expose("flighthq.pathBoolean.OffsetPath")
 class OffsetPath {
   public static function offsetPath(path:Path, delta:Float, ?options:PathOffsetOptions):Path {
     var join:Dynamic = cast _Runtime.UNDEFINED;

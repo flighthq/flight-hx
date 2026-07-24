@@ -17,7 +17,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderTargetPool;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.DropShadowEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasDropShadowEffect")
 class CanvasDropShadowEffect {
   public static function applyDropShadowEffectToCanvas(source:Dynamic, dest:Dynamic, poolOrEffect:Dynamic, ?maybeEffect:DropShadowEffect):Void {
     var effect:Dynamic = cast _Runtime.UNDEFINED;

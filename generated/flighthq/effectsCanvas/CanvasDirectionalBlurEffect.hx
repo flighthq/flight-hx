@@ -8,7 +8,6 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.DirectionalBlurEffect;
 
-@:expose("flighthq.effectsCanvas.CanvasDirectionalBlurEffect")
 class CanvasDirectionalBlurEffect {
   public static function applyDirectionalBlurEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:DirectionalBlurEffect):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));

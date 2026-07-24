@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.CubeTexture;
 import flighthq.types.Light;
 
-@:expose("flighthq.types._internal._EnvironmentValues")
 class _EnvironmentValues {
   public static final EnvironmentKind:Dynamic = 'Environment';
 }

@@ -18,7 +18,6 @@ import flighthq.types.Assets.AssetLoaderAdapter;
 import flighthq.types.Assets.AssetManifest;
 import flighthq.types.Assets.AssetType;
 
-@:expose("flighthq.assets.AssetLibrary")
 class AssetLibrary {
   public static function acquireAsset<T>(library:flighthq.types.Assets.AssetLibrary, id:String):flighthq._internal._Promise<Dynamic> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

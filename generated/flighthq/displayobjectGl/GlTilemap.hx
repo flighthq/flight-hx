@@ -18,7 +18,6 @@ import flighthq.types.RenderProxy2D;
 import flighthq.types.SpriteRenderer;
 import flighthq.types.Tilemap;
 
-@:expose("flighthq.displayobjectGl.GlTilemap")
 class GlTilemap {
   public static final INSTANCE_FLOATS__glTilemap:Dynamic = 13.0;
 

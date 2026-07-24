@@ -16,7 +16,6 @@ import flighthq.types.Types.ClipboardFormatBookmark;
 import flighthq.types.Types.ClipboardFormatHtml;
 import flighthq.types.Types.ClipboardFormatRtf;
 
-@:expose("flighthq.clipboard.Clipboard")
 class Clipboard {
   public static var _backend__clipboard:Null<ClipboardBackend> = _Runtime.explicitNull();
 

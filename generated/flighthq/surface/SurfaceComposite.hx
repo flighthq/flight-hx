@@ -8,7 +8,6 @@ import flighthq.types.SurfaceCompositeMode;
 import flighthq.types.SurfaceRegion;
 import flighthq.types._internal._SurfaceCompositeModeValues.SurfaceCompositeModeValue;
 
-@:expose("flighthq.surface.SurfaceComposite")
 class SurfaceComposite {
   public static function compositeSurfacePixels(dest:SurfaceRegion, pixels:Dynamic, ?mode:SurfaceCompositeMode):Void {
     if (mode == null) mode = cast (SurfaceCompositeModeValue.Normal : Dynamic);

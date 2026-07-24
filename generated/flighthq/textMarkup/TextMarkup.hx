@@ -18,7 +18,6 @@ import flighthq.types.RichTextContent;
 import flighthq.types.TextFormat;
 import flighthq.types.TextFormatRange;
 
-@:expose("flighthq.textMarkup.TextMarkup")
 class TextMarkup {
   public static function appendMarkupBreakBefore__textMarkup(content:RichTextContent):Void {
     var text:Dynamic = cast _Runtime.UNDEFINED;

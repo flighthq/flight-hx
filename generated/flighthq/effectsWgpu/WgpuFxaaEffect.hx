@@ -10,7 +10,6 @@ import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
-@:expose("flighthq.effectsWgpu.WgpuFxaaEffect")
 class WgpuFxaaEffect {
   public static function applyFxaaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:FxaaEffect):Void {
     var edgeThreshold:Dynamic = cast _Runtime.UNDEFINED;

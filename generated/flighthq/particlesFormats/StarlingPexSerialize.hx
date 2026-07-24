@@ -9,7 +9,6 @@ import flighthq.types.StarlingPexSchema.StarlingPexColor;
 import flighthq.types.StarlingPexSchema.StarlingPexDocument;
 import flighthq.types.StarlingPexSchema.StarlingPexSerializeOptions;
 
-@:expose("flighthq.particlesFormats.StarlingPexSerialize")
 class StarlingPexSerialize {
   public static function serializeStarlingPex(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:StarlingPexSerializeOptions):String {
     var textureSize:Dynamic = cast _Runtime.UNDEFINED;

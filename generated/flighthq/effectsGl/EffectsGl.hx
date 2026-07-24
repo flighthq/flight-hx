@@ -119,7 +119,6 @@ import flighthq.types.ToneMapEffect;
 import flighthq.types.VignetteEffect;
 import flighthq.types.WhiteBalanceEffect;
 
-@:expose("flighthq.effectsGl.EffectsGl")
 class EffectsGl {
   public static function applyBevelEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:BevelEffect):Void {
     _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlBevelEffect.applyBevelEffectToGl, cast ([state, source, dest, pool, effect] : Array<Dynamic>));

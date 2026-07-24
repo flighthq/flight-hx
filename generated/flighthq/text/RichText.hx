@@ -48,7 +48,6 @@ import flighthq.types.TextVerticalAlign;
 import flighthq.types.Types.RichTextKind;
 import flighthq.types._internal._RichTextValues.RichTextKind;
 
-@:expose("flighthq.text.RichText")
 class RichText {
   public static function appendRichTextString(source:flighthq.types.RichText, value:String):Void {
     var previousText:Dynamic = cast _Runtime.UNDEFINED;

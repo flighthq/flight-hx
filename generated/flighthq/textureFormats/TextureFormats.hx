@@ -14,7 +14,6 @@ import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
 import flighthq.types.TextureContainerLevel;
 
-@:expose("flighthq.textureFormats.TextureFormats")
 class TextureFormats {
   public static function computeTextureContainerLevels(format:TextureContainerFormat, baseWidth:Float, baseHeight:Float, mipLevels:Float, layers:Float, faces:Float, startOffset:Float):Null<{ var levels:Array<TextureContainerLevel>; var endOffset:Float; }> {
     return cast _Runtime.callValue(Facade_TextureFormats_flighthq_textureFormats_TextureLevelLayout.computeTextureContainerLevels, cast ([format, baseWidth, baseHeight, mipLevels, layers, faces, startOffset] : Array<Dynamic>));

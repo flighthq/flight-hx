@@ -8,7 +8,6 @@ import flighthq.types.DisplayObject.DisplayObjectData;
 import flighthq.types.DisplayObject.DisplayObjectRuntime;
 import flighthq.types.ShapeCommand.ShapeCommandToken;
 
-@:expose("flighthq.types._internal._ShapeValues")
 class _ShapeValues {
   public static final ShapeKind:Dynamic = 'Shape';
 }

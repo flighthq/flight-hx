@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.GlitchEffect;
 
-@:expose("flighthq.effects.GlitchEffect")
 class GlitchEffect {
   public static function createGlitchEffect(?options:Dynamic):flighthq.types.GlitchEffect {
     if (options == null) options = cast ({  } : Dynamic);

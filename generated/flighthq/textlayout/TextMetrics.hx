@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextMetrics;
 
-@:expose("flighthq.textlayout.TextMetrics")
 class TextMetrics {
   public static function createTextMetrics():flighthq.types.TextMetrics {
     return cast { height: 0.0, numLines: 0.0, width: 0.0 };

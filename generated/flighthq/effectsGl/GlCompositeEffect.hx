@@ -14,7 +14,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types._internal._CompositeOperatorValues.CompositeOperatorValue as CompositeOperatorValues;
 
-@:expose("flighthq.effectsGl.GlCompositeEffect")
 class GlCompositeEffect {
   public static function applyCompositeEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CompositeEffect):Void {
     var backdrop:Dynamic = cast _Runtime.UNDEFINED;

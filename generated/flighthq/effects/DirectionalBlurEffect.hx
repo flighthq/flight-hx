@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.DirectionalBlurEffect;
 
-@:expose("flighthq.effects.DirectionalBlurEffect")
 class DirectionalBlurEffect {
   public static function createDirectionalBlurEffect(?options:Dynamic):flighthq.types.DirectionalBlurEffect {
     if (options == null) options = cast ({  } : Dynamic);

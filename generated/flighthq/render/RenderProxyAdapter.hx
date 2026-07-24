@@ -13,7 +13,6 @@ import flighthq.types.RenderProxyAdapter;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 
-@:expose("flighthq.render.RenderProxyAdapter")
 class RenderProxyAdapter {
   public static function applyRenderProxyAdapter(state:RenderState, source:Renderable, data:Dynamic):Void {
     var renderAdapter:Dynamic = cast _Runtime.UNDEFINED;

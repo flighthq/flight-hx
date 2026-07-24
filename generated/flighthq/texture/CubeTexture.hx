@@ -12,7 +12,6 @@ import flighthq.types.CubeTexture;
 import flighthq.types.CubeTexture.CubeTextureLike;
 import flighthq.types.ImageResource;
 
-@:expose("flighthq.texture.CubeTexture")
 class CubeTexture {
   public static function cloneCubeTexture(source:CubeTextureLike):flighthq.types.CubeTexture {
     return cast _Runtime.callValue(createEntity, cast ([{ colorSpace: _Runtime.field(source, 'colorSpace'), faces: _Runtime.slice(_Runtime.field(source, 'faces'), 0, null), sampler: _Runtime.callValue(cloneSampler, cast ([_Runtime.field(source, 'sampler')] : Array<Dynamic>)) }] : Array<Dynamic>));

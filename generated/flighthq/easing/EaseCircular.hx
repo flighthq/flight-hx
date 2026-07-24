@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
-@:expose("flighthq.easing.EaseCircular")
 class EaseCircular {
   public static final easeInCircular:EasingFunction = function(t:Dynamic) return (1.0 - _Runtime.callProperty(HxMath, 'sqrt', cast ([(1.0 - (t * t))] : Array<Dynamic>)));
 

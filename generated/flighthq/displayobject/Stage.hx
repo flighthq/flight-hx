@@ -16,7 +16,6 @@ import flighthq.types.Stage.StageRuntime;
 import flighthq.types.StageSignals;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
-@:expose("flighthq.displayobject.Stage")
 class Stage {
   public static function createStage(?obj:Dynamic):flighthq.types.Stage {
     var root:Dynamic = cast _Runtime.UNDEFINED;

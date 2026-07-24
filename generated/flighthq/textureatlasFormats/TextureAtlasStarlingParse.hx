@@ -8,7 +8,6 @@ import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasStarlingParseOptions;
 import flighthq.xml.XmlParse.parseXmlDocument;
 
-@:expose("flighthq.textureatlasFormats.TextureAtlasStarlingParse")
 class TextureAtlasStarlingParse {
   public static function parseTextureAtlasStarlingXml(xml:String, atlas:TextureAtlas, ?_options:TextureAtlasStarlingParseOptions):TextureAtlas {
     var root:Dynamic = cast _Runtime.UNDEFINED;

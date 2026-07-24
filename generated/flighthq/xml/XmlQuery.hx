@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.XmlElement;
 
-@:expose("flighthq.xml.XmlQuery")
 class XmlQuery {
   public static function getXmlElementAttribute(element:XmlElement, name:String):Null<String> {
     var value:Dynamic = cast _Runtime.UNDEFINED;

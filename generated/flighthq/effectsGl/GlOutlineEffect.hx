@@ -10,7 +10,6 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.OutlineEffect;
 
-@:expose("flighthq.effectsGl.GlOutlineEffect")
 class GlOutlineEffect {
   public static function applyOutlineEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:OutlineEffect):Void {
     var threshold:Dynamic = cast _Runtime.UNDEFINED;

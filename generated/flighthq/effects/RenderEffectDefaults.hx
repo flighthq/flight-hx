@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.RenderEffect;
 
-@:expose("flighthq.effects.RenderEffectDefaults")
 class RenderEffectDefaults {
   public static function getRenderEffectDefaults(kind:String):Dynamic {
     var entry:Dynamic = cast _Runtime.UNDEFINED;

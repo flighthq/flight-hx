@@ -7,7 +7,6 @@ import flighthq.types.SpritesheetAnimationData;
 import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
 
-@:expose("flighthq.spritesheet.SpritesheetData")
 class SpritesheetData {
   public static function createSpritesheetAnimationData(?obj:Dynamic):SpritesheetAnimationData {
     return cast { direction: _Runtime.coalesce(_Runtime.optionalField(obj, 'direction'), function():Dynamic return cast 'forward'), frameDuration: _Runtime.coalesce(_Runtime.optionalField(obj, 'frameDuration'), function():Dynamic return cast 100.0), frameDurations: _Runtime.coalesce(_Runtime.optionalField(obj, 'frameDurations'), function():Dynamic return cast null), frameNames: _Runtime.coalesce(_Runtime.optionalField(obj, 'frameNames'), function():Dynamic return cast cast ([] : Array<Dynamic>)), loop: _Runtime.coalesce(_Runtime.optionalField(obj, 'loop'), function():Dynamic return cast true), name: _Runtime.coalesce(_Runtime.optionalField(obj, 'name'), function():Dynamic return cast ''), originX: _Runtime.coalesce(_Runtime.optionalField(obj, 'originX'), function():Dynamic return cast 0.0), originY: _Runtime.coalesce(_Runtime.optionalField(obj, 'originY'), function():Dynamic return cast 0.0) };

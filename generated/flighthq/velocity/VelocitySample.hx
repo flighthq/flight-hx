@@ -7,7 +7,6 @@ import flighthq.types.Matrix;
 import flighthq.types.Velocity.Velocity2D;
 import flighthq.types.Velocity.VelocitySample;
 
-@:expose("flighthq.velocity.VelocitySample")
 class VelocitySample {
   public static function getVelocitySampleAt(sample:flighthq.types.Velocity.VelocitySample, currentWorldTransform:Matrix, pointX:Float, pointY:Float, out:Velocity2D):Velocity2D {
     var cx:Dynamic = cast _Runtime.UNDEFINED;

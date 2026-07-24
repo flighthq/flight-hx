@@ -14,7 +14,6 @@ import flighthq.types.SpritesheetFrameData;
 import flighthq.types.XmlElement;
 import flighthq.xml.XmlParse.parseXmlDocument;
 
-@:expose("flighthq.spritesheetFormats.CocosPlistParse")
 class CocosPlistParse {
   public static function parsePlistPair__cocosPlistParse(s:String):Array<Float> {
     var m:Dynamic = cast _Runtime.UNDEFINED;

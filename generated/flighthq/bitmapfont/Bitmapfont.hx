@@ -12,7 +12,6 @@ import flighthq.types.GlyphSource.GlyphEntry;
 import flighthq.types.GlyphSource.GlyphMetrics;
 import flighthq.types.TextureAtlas;
 
-@:expose("flighthq.bitmapfont.Bitmapfont")
 class Bitmapfont {
   public static function createBitmapFont(data:BitmapFontData):BitmapFont {
     return cast _Runtime.callValue(Facade_Bitmapfont_flighthq_bitmapfont_BitmapFont.createBitmapFont, cast ([data] : Array<Dynamic>));

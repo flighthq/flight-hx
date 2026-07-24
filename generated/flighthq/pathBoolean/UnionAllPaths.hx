@@ -13,7 +13,6 @@ import flighthq.types.Path;
 import flighthq.types.PathBooleanBackend.PathBooleanContour;
 import flighthq.types.PathBooleanOptions;
 
-@:expose("flighthq.pathBoolean.UnionAllPaths")
 class UnionAllPaths {
   public static function unionAllPaths(paths:Array<Path>, ?out:Path, ?options:PathBooleanOptions):Path {
     var fillRule:Dynamic = cast _Runtime.UNDEFINED;

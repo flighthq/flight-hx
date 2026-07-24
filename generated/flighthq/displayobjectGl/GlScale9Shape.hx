@@ -27,7 +27,6 @@ import flighthq.types.Scale9Shape;
 
 typedef GlScale9ShapeData__glScale9Shape = { var canvas:Dynamic; var ctx:Dynamic; var lastH:Float; var lastScaleX:Float; var lastScaleY:Float; var lastContentId:Float; var lastW:Float; var texture:Dynamic; };
 
-@:expose("flighthq.displayobjectGl.GlScale9Shape")
 class GlScale9Shape {
   public static final _remappedCommands__glScale9Shape:Array<Dynamic> = cast ([] : Array<Dynamic>);
 

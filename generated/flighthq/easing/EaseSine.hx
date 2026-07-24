@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
-@:expose("flighthq.easing.EaseSine")
 class EaseSine {
   public static final easeInOutSine:EasingFunction = function(t:Dynamic) return (-(_Runtime.callProperty(HxMath, 'cos', cast ([(HxMath.PI * t)] : Array<Dynamic>)) - 1.0) / 2.0);
 

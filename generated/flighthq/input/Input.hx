@@ -15,7 +15,6 @@ import flighthq.types.InputSignals;
 import flighthq.types.InputState;
 import flighthq.types.MouseWheelMode;
 
-@:expose("flighthq.input.Input")
 class Input {
   public static function applyGamepadAxisDeadZone(value:Float, deadZone:Float):Float {
     return cast _Runtime.callValue(Facade_Input_flighthq_input_InputManager.applyGamepadAxisDeadZone, cast ([value, deadZone] : Array<Dynamic>));

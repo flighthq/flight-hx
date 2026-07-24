@@ -8,7 +8,6 @@ import flighthq.types.WgpuFullscreenPipeline;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
-@:expose("flighthq.renderWgpu.WgpuFullscreenPass")
 class WgpuFullscreenPass {
   public static function createWgpuFullscreenPipeline(state:WgpuRenderState, fragmentWgsl:String, textureInputCount:Dynamic = 1.0, ?format:Dynamic):WgpuFullscreenPipeline {
     if (format == null) format = cast (_Runtime.field(state, 'format') : Dynamic);

@@ -13,7 +13,6 @@ import flighthq.types.Tileset;
 
 typedef TilesetGroup__tiledProject = { var firstGid:Float; var tiles:flighthq._internal._Int16Array; var tileset:Tileset; };
 
-@:expose("flighthq.tilemapFormats.TiledProject")
 class TiledProject {
   public static function buildTilemapLayersFromTiled(map:TiledMap, layerIndex:Float, resolveTileset:TiledTilesetResolver):Null<Array<TilemapData>> {
     var layer:Dynamic = cast _Runtime.UNDEFINED;

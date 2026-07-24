@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CollisionResponse;
 
-@:expose("flighthq.types._internal._SphereColliderValues")
 class _SphereColliderValues {
   public static final SphereColliderKind:Dynamic = 'SphereCollider';
 }

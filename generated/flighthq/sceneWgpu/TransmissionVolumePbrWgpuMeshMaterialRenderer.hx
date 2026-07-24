@@ -27,7 +27,6 @@ import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._TransmissionVolumePbrMaterialValues.TransmissionVolumePbrMaterialKind;
 
-@:expose("flighthq.sceneWgpu.TransmissionVolumePbrWgpuMeshMaterialRenderer")
 class TransmissionVolumePbrWgpuMeshMaterialRenderer {
   public static final transmissionVolumePbrWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;

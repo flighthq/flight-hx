@@ -25,7 +25,6 @@ typedef WgpuParticle3DInstanceBuffer__wgpuParticleEmitter3D = { var buffer:Dynam
 
 typedef WgpuParticle3DResources__wgpuParticleEmitter3D = { var cornerBuffer:Dynamic; var frameBindGroup:Dynamic; var frameBuffer:Dynamic; var frameLayout:Dynamic; var indexBuffer:Dynamic; var instanceBuffers:Dynamic; var instanceData:flighthq._internal._Float32Array; var module:Dynamic; var pipelineLayout:Dynamic; var pipelines:Dynamic; var textureLayout:Dynamic; };
 
-@:expose("flighthq.sceneWgpu.WgpuParticleEmitter3D")
 class WgpuParticleEmitter3D {
   public static final INSTANCE_FLOATS__wgpuParticleEmitter3D:Dynamic = 16.0;
 

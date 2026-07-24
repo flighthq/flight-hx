@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.HalftoneEffect;
 
-@:expose("flighthq.effects.HalftoneEffect")
 class HalftoneEffect {
   public static function createHalftoneEffect(?options:Dynamic):flighthq.types.HalftoneEffect {
     if (options == null) options = cast ({  } : Dynamic);

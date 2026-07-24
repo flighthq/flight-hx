@@ -40,7 +40,6 @@ import flighthq.types.Video;
 import flighthq.types.Video.VideoData;
 import flighthq.types.Video.VideoRuntime;
 
-@:expose("flighthq.displayobject.Displayobject")
 class Displayobject {
   public static function addDisplayObjectColorAdjustment(source:DisplayObject, adjustment:Adjustment):Void {
     _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_DisplayObject.addDisplayObjectColorAdjustment, cast ([source, adjustment] : Array<Dynamic>));

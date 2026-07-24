@@ -10,7 +10,6 @@ import flighthq.types.GlyphSource;
 import flighthq.types.QuadBatch;
 import flighthq.types.Rectangle;
 
-@:expose("flighthq.types._internal._BitmapTextValues")
 class _BitmapTextValues {
   public static final BitmapTextKind:Dynamic = 'BitmapText';
 }

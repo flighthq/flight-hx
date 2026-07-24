@@ -20,7 +20,6 @@ import flighthq.types.InnerGlowEffect;
 
 typedef InnerClipLocations__glInnerGlowEffect = GlFullscreenProgram;
 
-@:expose("flighthq.effectsGl.GlInnerGlowEffect")
 class GlInnerGlowEffect {
   public static final INNER_CLIP_FRAGMENT_SRC__glInnerGlowEffect:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nout vec4 fragColor;\nvoid main() {\n  vec4 glow = texture(u_texture0, v_texCoord);\n  float srcAlpha = texture(u_texture1, v_texCoord).a;\n  fragColor = glow * srcAlpha;\n}';
 

@@ -19,7 +19,6 @@ import flighthq.types.SceneHit;
 import flighthq.types.Vector2.Vector2Like;
 import flighthq.types.Vector3.Vector3Like;
 
-@:expose("flighthq.picking.SceneHitAttributes")
 class SceneHitAttributes {
   public static function getSceneHitMaterial(hit:SceneHit):Null<Material> {
     var subsetIndex:Dynamic = cast _Runtime.UNDEFINED;

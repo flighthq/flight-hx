@@ -13,7 +13,6 @@ import flighthq.types.WebcamStream;
 import flighthq.types.WebcamStreamRuntime;
 import flighthq.webcam.WebcamStream as Facade_Webcam_flighthq_webcam_WebcamStream;
 
-@:expose("flighthq.webcam.Webcam")
 class Webcam {
   public static var _backend__webcam:Null<WebcamBackend> = _Runtime.explicitNull();
 

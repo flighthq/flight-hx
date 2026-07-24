@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.adjustments.ColorMatrixMath.COLOR_MATRIX_LENGTH;
 import flighthq.types.ColorMatrixAdjustment;
 
-@:expose("flighthq.adjustments.ColorMatrixAdjustment")
 class ColorMatrixAdjustment {
   public static function getAdjustmentColorMatrix(operation:{ var kind:String; }):Null<Array<Float>> {
     var matrix:Dynamic = cast _Runtime.UNDEFINED;

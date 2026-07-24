@@ -14,7 +14,6 @@ import flighthq.types.GlPbrProgram;
 import flighthq.types.GlPbrProgram.GlPbrDefineKey;
 import flighthq.types.GlRenderState;
 
-@:expose("flighthq.sceneGl.GlPbrProgramCache")
 class GlPbrProgramCache {
   public static function compileGlPbrProgram(gl:Dynamic, key:GlPbrDefineKey):GlPbrProgram {
     var vertexSource:Dynamic = cast _Runtime.UNDEFINED;

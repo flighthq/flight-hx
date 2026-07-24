@@ -26,7 +26,6 @@ import flighthq.types.SceneRenderProxy;
 import flighthq.types.Types.EmissiveMaterialKind;
 import flighthq.types._internal._EmissiveMaterialValues.EmissiveMaterialKind;
 
-@:expose("flighthq.sceneGl.EmissiveGlMeshMaterialRenderer")
 class EmissiveGlMeshMaterialRenderer {
   public static final emissiveGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;

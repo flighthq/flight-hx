@@ -8,7 +8,6 @@ import flighthq.types.DecodedImage;
 import flighthq.types.ImageDecodeOptions;
 import flighthq.types.ImageDecoder;
 
-@:expose("flighthq.imageCodec.RegisterWebImageDecoders")
 class RegisterWebImageDecoders {
   public static function registerWebImageDecoders():Void {
     for (mimeType in _Runtime.iterable(RegisterWebImageDecoders.webDecodableMimeTypes__registerWebImageDecoders)) {

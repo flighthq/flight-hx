@@ -7,7 +7,6 @@ import flighthq.types.SpritesheetData;
 import flighthq.types.StarlingSchema.StarlingDocument;
 import flighthq.types.StarlingSchema.StarlingSubTexture;
 
-@:expose("flighthq.spritesheetFormats.StarlingSerialize")
 class StarlingSerialize {
   public static function frameToSubTexture__starlingSerialize(frame:Dynamic):StarlingSubTexture {
     var st:StarlingSubTexture = cast _Runtime.UNDEFINED;
