@@ -9,6 +9,7 @@ import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.ParticleCurve.ColorKeyframe;
 import flighthq.types.DisplayObject;
+import flighthq.types.ImageResource;
 import flighthq.types.ParticleEmitter2D;
 import flighthq.types.ParticleForce;
 import lime.app.Application;
@@ -16,6 +17,7 @@ import lime.graphics.RenderContext;
 import lime.ui.KeyCode;
 import lime.ui.KeyModifier;
 import lime.ui.Window;
+import lime.utils.UInt8Array;
 
 class Main extends Application {
   // `scale` in the upstream render module is `window.devicePixelRatio || 1`; Lime exposes `window.scale`.
@@ -82,31 +84,25 @@ class Main extends Application {
     root = createDisplayObject();
 
     // Procedural spark texture: soft radial glow, warm white core fading to orange then transparent.
-    final sparkCanvas = _makeCanvas(16, 16);
-    final sparkCtx = sparkCanvas.getContext('2d');
-    final sparkGrad = sparkCtx.createRadialGradient(8, 8, 0, 8, 8, 8);
-    sparkGrad.addColorStop(0, 'rgba(255, 248, 170, 1)');
-    sparkGrad.addColorStop(0.25, 'rgba(255, 150, 20, 1)');
-    sparkGrad.addColorStop(0.6, 'rgba(255, 55, 0, 0.7)');
-    sparkGrad.addColorStop(1, 'rgba(150, 0, 0, 0)');
-    sparkCtx.fillStyle = sparkGrad;
-    sparkCtx.fillRect(0, 0, 16, 16);
+    final sparkImage = radialGlow(16, [
+      [0.0, 255, 248, 170, 255],
+      [0.25, 255, 150, 20, 255],
+      [0.6, 255, 55, 0, 178],
+      [1.0, 150, 0, 0, 0],
+    ]);
 
-    final fireAtlas = createTextureAtlas({image: createImageResource(sparkCanvas)});
+    final fireAtlas = createTextureAtlas({image: sparkImage});
     addTextureAtlasRegion(fireAtlas, 0, 0, 16, 16);
 
     // Procedural snowflake texture: soft white radial glow.
-    final snowCanvas = _makeCanvas(12, 12);
-    final snowCtx = snowCanvas.getContext('2d');
-    final snowGrad = snowCtx.createRadialGradient(6, 6, 0, 6, 6, 6);
-    snowGrad.addColorStop(0, 'rgba(255, 255, 255, 1)');
-    snowGrad.addColorStop(0.4, 'rgba(220, 235, 255, 0.8)');
-    snowGrad.addColorStop(0.7, 'rgba(180, 210, 255, 0.3)');
-    snowGrad.addColorStop(1, 'rgba(140, 180, 255, 0)');
-    snowCtx.fillStyle = snowGrad;
-    snowCtx.fillRect(0, 0, 12, 12);
+    final snowImage = radialGlow(12, [
+      [0.0, 255, 255, 255, 255],
+      [0.4, 220, 235, 255, 204],
+      [0.7, 180, 210, 255, 76],
+      [1.0, 140, 180, 255, 0],
+    ]);
 
-    final snowAtlas = createTextureAtlas({image: createImageResource(snowCanvas)});
+    final snowAtlas = createTextureAtlas({image: snowImage});
     addTextureAtlasRegion(snowAtlas, 0, 0, 12, 12);
 
     // Fire emitter: additive glow, follows mouse, world-space trail.
@@ -281,10 +277,54 @@ class Main extends Application {
     renderGlDisplayObject(renderState, root);
   }
 
-  // Minimal stand-in for `document.createElement('canvas')` -- keeps the procedural texture-painting
-  // call sites intact without a real Canvas-2D backend.
-  static function _makeCanvas(w:Int, h:Int):_CanvasStub {
-    return new _CanvasStub(w, h);
+  // Portable square radial texture defined by `[t, r, g, b, a]` colour stops (t in 0..1 along the radius),
+  // uploaded as real RGBA bytes through the ImageResource `data` path. This replaces the upstream Canvas-2D
+  // `createRadialGradient` painting; a bare `{width, height}` object would instead become `image.source`
+  // and hit the DOM-element `texImage2D` overload, which rejects a plain object.
+  function radialGlow(size:Int, stops:Array<Array<Float>>):ImageResource {
+    final pixels = new UInt8Array(size * size * 4);
+    final c = (size - 1) / 2;
+    for (y in 0...size) {
+      for (x in 0...size) {
+        final d = Math.min(1.0, Math.sqrt((x - c) * (x - c) + (y - c) * (y - c)) / (size / 2));
+        final rgba = sampleStops(stops, d);
+        final i = (y * size + x) * 4;
+        pixels[i] = Std.int(rgba[0]);
+        pixels[i + 1] = Std.int(rgba[1]);
+        pixels[i + 2] = Std.int(rgba[2]);
+        pixels[i + 3] = Std.int(rgba[3]);
+      }
+    }
+    return imageFromPixels(size, size, pixels);
+  }
+
+  // Linear interpolation across sorted colour stops.
+  function sampleStops(stops:Array<Array<Float>>, t:Float):Array<Float> {
+    var lo = stops[0];
+    var hi = stops[stops.length - 1];
+    for (i in 0...stops.length) {
+      if (stops[i][0] >= t) {
+        hi = stops[i];
+        lo = i > 0 ? stops[i - 1] : stops[i];
+        break;
+      }
+    }
+    final span = hi[0] - lo[0];
+    final f = span <= 0 ? 0.0 : (t - lo[0]) / span;
+    return [
+      lo[1] + (hi[1] - lo[1]) * f,
+      lo[2] + (hi[2] - lo[2]) * f,
+      lo[3] + (hi[3] - lo[3]) * f,
+      lo[4] + (hi[4] - lo[4]) * f,
+    ];
+  }
+
+  function imageFromPixels(width:Int, height:Int, pixels:UInt8Array):ImageResource {
+    final image = createImageResource();
+    image.width = width;
+    image.height = height;
+    image.data = pixels;
+    return image;
   }
 
   // Portable stand-in for JavaScript's `Number.prototype.toFixed`.
@@ -341,37 +381,4 @@ private class _GlCanvas {
     final webgl2 = renderContext.webgl2;
     return webgl2 == null ? renderContext.webgl : webgl2;
   }
-}
-
-// Stub for a 2D drawing canvas used only as an ImageResource source in this headless Lime port.
-private class _CanvasStub {
-  public var width:Int;
-  public var height:Int;
-
-  public function new(w:Int, h:Int) {
-    width = w;
-    height = h;
-  }
-
-  public function getContext(contextId:String):_Context2DStub {
-    return new _Context2DStub();
-  }
-}
-
-private class _Context2DStub {
-  public var fillStyle:Dynamic;
-
-  public function new() {}
-
-  public function createRadialGradient(x0:Float, y0:Float, r0:Float, x1:Float, y1:Float, r1:Float):_GradientStub {
-    return new _GradientStub();
-  }
-
-  public function fillRect(x:Float, y:Float, w:Float, h:Float):Void {}
-}
-
-private class _GradientStub {
-  public function new() {}
-
-  public function addColorStop(offset:Float, color:String):Void {}
 }

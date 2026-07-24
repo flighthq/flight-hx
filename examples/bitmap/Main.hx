@@ -2,16 +2,18 @@
 // the generated Flight Haxe surface (`flighthq.*`). It is a standalone `lime.app.Application`: the
 // browser `./render` module and `requestAnimationFrame` loop are replaced by Lime's window/render
 // lifecycle, and the Flight app backend is wired with `App.setAppBackend(createLimeAppBackend(this))`.
-// The browser Canvas-2D image painters become minimal stubs that hand `createImageResource` a
-// `{width, height}` image source, keeping every SDK call site identical.
+// The browser Canvas-2D image painters become portable procedural pixel generators that build an
+// `ImageResource` from real RGBA bytes (the `data` upload path), keeping every SDK call site identical.
 import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.Bitmap;
 import flighthq.types.DisplayObject;
+import flighthq.types.ImageResource;
 import lime.app.Application;
 import lime.graphics.RenderContext;
 import lime.ui.Window;
+import lime.utils.UInt8Array;
 
 class Main extends Application {
   // `scale` in the upstream render module is `window.devicePixelRatio || 1`; Lime exposes `window.scale`.
@@ -59,7 +61,7 @@ class Main extends Application {
     // Gradient square: a colorful linear gradient from top-left to bottom-right.
 
     gradientBitmap = createBitmap();
-    gradientBitmap.data.image = createImageResource(createGradientImage(128, 128));
+    gradientBitmap.data.image = createGradientImage(128, 128);
     gradientBitmap.x = 60;
     gradientBitmap.y = 60;
     addNodeChild(root, gradientBitmap);
@@ -67,7 +69,7 @@ class Main extends Application {
     // Checkerboard pattern: demonstrates procedural pattern generation.
 
     checkerBitmap = createBitmap();
-    checkerBitmap.data.image = createImageResource(createCheckerboardImage(128, 128));
+    checkerBitmap.data.image = createCheckerboardImage(128, 128);
     checkerBitmap.x = 340;
     checkerBitmap.y = 60;
     checkerBitmap.alpha = 0.5;
@@ -76,7 +78,7 @@ class Main extends Application {
     // Circle with radial gradient: scaled to 2x.
 
     circleBitmap = createBitmap();
-    circleBitmap.data.image = createImageResource(createRadialGradientImage(128, 128));
+    circleBitmap.data.image = createRadialGradientImage(128, 128);
     circleBitmap.x = 620;
     circleBitmap.y = 60;
     circleBitmap.scaleX = 2;
@@ -86,7 +88,7 @@ class Main extends Application {
     // Rotated gradient square: the same gradient image rotated 30 degrees.
 
     rotatedBitmap = createBitmap();
-    rotatedBitmap.data.image = createImageResource(createGradientImage(96, 96));
+    rotatedBitmap.data.image = createGradientImage(96, 96);
     rotatedBitmap.x = 200;
     rotatedBitmap.y = 340;
     rotatedBitmap.rotation = 30;
@@ -95,7 +97,7 @@ class Main extends Application {
     // Combined properties: scaled, semi-transparent, and rotated checkerboard.
 
     combinedBitmap = createBitmap();
-    combinedBitmap.data.image = createImageResource(createCheckerboardImage(80, 80));
+    combinedBitmap.data.image = createCheckerboardImage(80, 80);
     combinedBitmap.x = 500;
     combinedBitmap.y = 340;
     combinedBitmap.scaleX = 1.5;
@@ -115,18 +117,72 @@ class Main extends Application {
     renderGlDisplayObject(renderState, root);
   }
 
-  // Browser-only Canvas-2D image painters become headless stubs: the GL bitmap renderer only needs a
-  // sized image source, so hand back a `{width, height}` descriptor with the same call signature.
-  function createGradientImage(width:Float, height:Float):Dynamic {
-    return {width: width, height: height};
+  // The browser Canvas-2D painters are replaced with portable procedural pixel generators. Each returns
+  // an `ImageResource` backed by real RGBA bytes via the `data` upload path (`source` stays null), which
+  // the GL bitmap renderer uploads with the 9-argument `texImage2D(width, height, ..., data)` overload.
+  // Handing a bare `{width, height}` object instead becomes `image.source` and hits the DOM-element
+  // `texImage2D` overload, which rejects a plain object ("Overload resolution failed").
+  function imageFromPixels(width:Int, height:Int, pixels:UInt8Array):ImageResource {
+    final image = createImageResource();
+    image.width = width;
+    image.height = height;
+    image.data = pixels;
+    return image;
   }
 
-  function createCheckerboardImage(width:Float, height:Float):Dynamic {
-    return {width: width, height: height};
+  // Colorful linear gradient from top-left to bottom-right.
+  function createGradientImage(width:Int, height:Int):ImageResource {
+    final pixels = new UInt8Array(width * height * 4);
+    for (y in 0...height) {
+      for (x in 0...width) {
+        final i = (y * width + x) * 4;
+        final r = Std.int(255 * x / (width - 1));
+        final g = Std.int(255 * y / (height - 1));
+        pixels[i] = r;
+        pixels[i + 1] = g;
+        pixels[i + 2] = 255 - r;
+        pixels[i + 3] = 255;
+      }
+    }
+    return imageFromPixels(width, height, pixels);
   }
 
-  function createRadialGradientImage(width:Float, height:Float):Dynamic {
-    return {width: width, height: height};
+  // Two-tone checkerboard pattern.
+  function createCheckerboardImage(width:Int, height:Int):ImageResource {
+    final pixels = new UInt8Array(width * height * 4);
+    final cell = 16;
+    for (y in 0...height) {
+      for (x in 0...width) {
+        final i = (y * width + x) * 4;
+        final on = ((Std.int(x / cell) + Std.int(y / cell)) % 2) == 0;
+        final v = on ? 230 : 40;
+        pixels[i] = v;
+        pixels[i + 1] = v;
+        pixels[i + 2] = v;
+        pixels[i + 3] = 255;
+      }
+    }
+    return imageFromPixels(width, height, pixels);
+  }
+
+  // Radial gradient: bright center fading to the edges.
+  function createRadialGradientImage(width:Int, height:Int):ImageResource {
+    final pixels = new UInt8Array(width * height * 4);
+    final cx = (width - 1) / 2;
+    final cy = (height - 1) / 2;
+    final maxR = Math.min(cx, cy);
+    for (y in 0...height) {
+      for (x in 0...width) {
+        final i = (y * width + x) * 4;
+        final d = Math.sqrt((x - cx) * (x - cx) + (y - cy) * (y - cy));
+        final t = Math.max(0.0, 1.0 - d / maxR);
+        pixels[i] = Std.int(255 * t);
+        pixels[i + 1] = Std.int(120 * t);
+        pixels[i + 2] = Std.int(220 * t);
+        pixels[i + 3] = 255;
+      }
+    }
+    return imageFromPixels(width, height, pixels);
   }
 
   // Portable stand-in for JavaScript's `Number.prototype.toFixed`.

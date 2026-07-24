@@ -8,12 +8,14 @@ import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.DisplayObject;
+import flighthq.types.ImageResource;
 import flighthq.types.QuadBatch;
 import flighthq.types.TextLabel;
 import flighthq.types.TextureAtlas;
 import lime.app.Application;
 import lime.graphics.RenderContext;
 import lime.ui.Window;
+import lime.utils.UInt8Array;
 
 class Main extends Application {
   // `scale` in the upstream render module is `window.devicePixelRatio || 1`; Lime exposes `window.scale`.
@@ -69,16 +71,7 @@ class Main extends Application {
     registerRenderer(renderState, TextLabelKind, defaultGlTextLabelRenderer);
     enableGlBlendModeSupport(renderState);
 
-    final shapeCanvas = new _ShapeCanvas();
-    shapeCanvas.width = SHAPE_SIZE;
-    shapeCanvas.height = SHAPE_SIZE;
-    final ctx = shapeCanvas.getContext('2d');
-    ctx.fillStyle = '#44aaee';
-    ctx.beginPath();
-    ctx.arc(SHAPE_SIZE / 2, SHAPE_SIZE / 2, SHAPE_SIZE / 2 - 1, 0, Math.PI * 2);
-    ctx.fill();
-
-    atlas = createTextureAtlas({image: createImageResource(shapeCanvas)});
+    atlas = createTextureAtlas({image: createShapeImage()});
     addTextureAtlasRegion(atlas, 0, 0, SHAPE_SIZE, SHAPE_SIZE);
 
     root = createDisplayObject();
@@ -191,32 +184,37 @@ class Main extends Application {
   static inline function now():Float {
     return haxe.Timer.stamp() * 1000;
   }
-}
 
-// Minimal offscreen-canvas stub over the upstream `document.createElement('canvas')` shape painter.
-// It keeps the SDK call sites (`createImageResource(shapeCanvas)`) and reports its dimensions; the
-// per-pixel 2D painting is browser-only and is a no-op here.
-private class _ShapeCanvas {
-  public var width:Int = 0;
-  public var height:Int = 0;
-
-  public function new() {}
-
-  public function getContext(contextId:String):_ShapeContext {
-    return new _ShapeContext();
+  // Portable procedural shape sprite: a filled #44aaee disc, uploaded as real RGBA bytes through the
+  // ImageResource `data` path. A bare `{width, height}` object would instead become `image.source` and
+  // hit the DOM-element `texImage2D` overload, which rejects a plain object.
+  function createShapeImage():ImageResource {
+    final size = SHAPE_SIZE;
+    final pixels = new UInt8Array(size * size * 4);
+    final c = (size - 1) / 2;
+    final r = size / 2 - 1;
+    for (y in 0...size) {
+      for (x in 0...size) {
+        final d = Math.sqrt((x - c) * (x - c) + (y - c) * (y - c));
+        if (d <= r) {
+          final i = (y * size + x) * 4;
+          pixels[i] = 68;
+          pixels[i + 1] = 170;
+          pixels[i + 2] = 238;
+          pixels[i + 3] = 255;
+        }
+      }
+    }
+    return imageFromPixels(size, size, pixels);
   }
-}
 
-private class _ShapeContext {
-  public var fillStyle:String = '';
-
-  public function new() {}
-
-  public function beginPath():Void {}
-
-  public function arc(x:Float, y:Float, radius:Float, startAngle:Float, endAngle:Float):Void {}
-
-  public function fill():Void {}
+  function imageFromPixels(width:Int, height:Int, pixels:UInt8Array):ImageResource {
+    final image = createImageResource();
+    image.width = width;
+    image.height = height;
+    image.data = pixels;
+    return image;
+  }
 }
 
 // Minimal GL canvas adapter over the Lime window, matching the shape `createGlRenderState` expects.

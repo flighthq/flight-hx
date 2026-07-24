@@ -10,6 +10,8 @@ import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.Bitmap;
 import flighthq.types.DisplayObject;
+import flighthq.types.ImageResource;
+import lime.utils.UInt8Array;
 import flighthq.types.Spritesheet;
 import flighthq.types.SpritesheetPlayer;
 import lime.app.Application;
@@ -80,8 +82,7 @@ class Main extends Application {
 
     // Build the spritesheet from the procedural sprite strip.
 
-    final stripCanvas = createSpriteStrip();
-    imageResource = createImageResource(stripCanvas);
+    imageResource = createSpriteStrip();
 
     spritesheet = createSpritesheetFromGrid({
       columns: FRAME_COUNT,
@@ -163,10 +164,43 @@ class Main extends Application {
     ready = true;
   }
 
-  // Upstream builds the coin strip with the Canvas 2D API; that painting has no SDK call sites, so
-  // the port reduces it to a size-reporting stub the image resource wraps.
-  function createSpriteStrip():Dynamic {
-    return {width: STRIP_WIDTH, height: FRAME_SIZE};
+  // Portable procedural coin strip: FRAME_COUNT gold discs whose horizontal radius shrinks toward the
+  // middle frames to read as a spinning coin, uploaded as real RGBA bytes through the ImageResource
+  // `data` path (a bare `{width, height}` object would become `image.source` and hit the DOM-element
+  // `texImage2D` overload, which rejects a plain object).
+  function createSpriteStrip():ImageResource {
+    final pixels = new UInt8Array(STRIP_WIDTH * FRAME_SIZE * 4);
+    final ry = FRAME_SIZE * 0.42;
+    for (f in 0...FRAME_COUNT) {
+      final cx = f * FRAME_SIZE + FRAME_SIZE / 2;
+      final cy = FRAME_SIZE / 2;
+      final rx = 6 + (FRAME_SIZE * 0.42 - 6) * Math.abs(Math.cos(f / FRAME_COUNT * Math.PI));
+      for (y in 0...FRAME_SIZE) {
+        for (x in 0...FRAME_SIZE) {
+          final px = f * FRAME_SIZE + x;
+          final nx = (px - cx) / rx;
+          final ny = (y - cy) / ry;
+          final d = nx * nx + ny * ny;
+          if (d <= 1.0) {
+            final i = (y * STRIP_WIDTH + px) * 4;
+            final shade = 0.6 + 0.4 * (1.0 - d);
+            pixels[i] = Std.int(240 * shade);
+            pixels[i + 1] = Std.int(196 * shade);
+            pixels[i + 2] = Std.int(64 * shade);
+            pixels[i + 3] = 255;
+          }
+        }
+      }
+    }
+    return imageFromPixels(STRIP_WIDTH, FRAME_SIZE, pixels);
+  }
+
+  function imageFromPixels(width:Int, height:Int, pixels:UInt8Array):ImageResource {
+    final image = createImageResource();
+    image.width = width;
+    image.height = height;
+    image.data = pixels;
+    return image;
   }
 
   // Applies the current player frame's atlas region to a Bitmap's sourceRectangle.

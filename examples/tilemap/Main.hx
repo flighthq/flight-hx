@@ -8,6 +8,8 @@ import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.DisplayObject;
+import flighthq.types.ImageResource;
+import lime.utils.UInt8Array;
 import lime.app.Application;
 import lime.graphics.RenderContext;
 import lime.ui.Window;
@@ -55,8 +57,7 @@ class Main extends Application {
     root.scaleX = scale;
     root.scaleY = scale;
 
-    final tilesetCanvas = createTilesetCanvas();
-    final imageResource = createImageResource(tilesetCanvas);
+    final imageResource = createTilesetImage();
     final tileset = createTilesetFromImageResource(imageResource, TILE_SIZE, TILE_SIZE);
 
     final tilemap = createTilemap();
@@ -99,10 +100,38 @@ class Main extends Application {
     ready = true;
   }
 
-  // Browser-only Canvas-2D tileset painter becomes a headless stub: the GL tilemap renderer only needs
-  // a sized image source, so hand back a `{width, height}` descriptor matching the atlas dimensions.
-  function createTilesetCanvas():Dynamic {
-    return {width: TILE_SIZE * TILE_COUNT, height: TILE_SIZE};
+  // Portable procedural tileset: TILE_COUNT solid terrain tiles laid out horizontally, uploaded as real
+  // RGBA bytes through the ImageResource `data` path. A bare `{width, height}` object would instead become
+  // `image.source` and hit the DOM-element `texImage2D` overload, which rejects a plain object.
+  function createTilesetImage():ImageResource {
+    final width = TILE_SIZE * TILE_COUNT;
+    // Indices match the tile ids placed below: 0 grass, 1 water, 2 sand, 3 stone, 4 dirt, 5 snow, 6 lava, 7 void.
+    final colors = [
+      [86, 160, 64], [48, 110, 200], [214, 192, 120], [120, 120, 130],
+      [140, 96, 58], [235, 240, 248], [230, 90, 30], [20, 20, 28],
+    ];
+    final pixels = new UInt8Array(width * TILE_SIZE * 4);
+    for (y in 0...TILE_SIZE) {
+      for (x in 0...width) {
+        final c = colors[Std.int(x / TILE_SIZE)];
+        // Darken the top/left edge of each tile so tile boundaries read on the map.
+        final edge = (x % TILE_SIZE == 0 || y == 0) ? 0.7 : 1.0;
+        final i = (y * width + x) * 4;
+        pixels[i] = Std.int(c[0] * edge);
+        pixels[i + 1] = Std.int(c[1] * edge);
+        pixels[i + 2] = Std.int(c[2] * edge);
+        pixels[i + 3] = 255;
+      }
+    }
+    return imageFromPixels(width, TILE_SIZE, pixels);
+  }
+
+  function imageFromPixels(width:Int, height:Int, pixels:UInt8Array):ImageResource {
+    final image = createImageResource();
+    image.width = width;
+    image.height = height;
+    image.data = pixels;
+    return image;
   }
 
   // Upstream `render(root)`, driven by Lime's per-frame `render`.

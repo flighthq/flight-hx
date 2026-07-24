@@ -10,11 +10,13 @@ import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.DisplayObject;
+import flighthq.types.ImageResource;
 import flighthq.types.ParticleEmitter2D;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleForce;
 import flighthq.types.TextureAtlas;
 import flighthq.types._internal._BlendModeValues;
+import lime.utils.UInt8Array;
 import lime.app.Application;
 import lime.graphics.RenderContext;
 import lime.ui.KeyCode;
@@ -176,10 +178,8 @@ class Main extends Application {
 
     root = createDisplayObject();
 
-    // Procedural radial glow particle texture (Canvas 2D painting stubbed to size reporting).
-    final particleCanvas = createParticleTexture();
-
-    atlas = createTextureAtlas({image: createImageResource(particleCanvas)});
+    // Procedural radial glow particle texture, uploaded as real RGBA bytes via the ImageResource `data` path.
+    atlas = createTextureAtlas({image: createParticleTexture()});
     addTextureAtlasRegion(atlas, 0, 0, 16, 16);
 
     emitter = createParticleEmitter2D();
@@ -224,10 +224,33 @@ class Main extends Application {
     ready = true;
   }
 
-  // Upstream builds the glow sprite with the Canvas 2D radial-gradient API; that painting has no SDK
-  // call sites, so the port reduces it to a size-reporting stub the image resource wraps.
-  function createParticleTexture():Dynamic {
-    return {width: 16, height: 16};
+  // Portable procedural glow sprite: a soft white radial falloff, uploaded as real RGBA bytes through
+  // the ImageResource `data` path (a bare `{width, height}` object would become `image.source` and hit
+  // the DOM-element `texImage2D` overload, which rejects a plain object).
+  function createParticleTexture():ImageResource {
+    final size = 16;
+    final pixels = new UInt8Array(size * size * 4);
+    final c = (size - 1) / 2;
+    for (y in 0...size) {
+      for (x in 0...size) {
+        final d = Math.min(1.0, Math.sqrt((x - c) * (x - c) + (y - c) * (y - c)) / (size / 2));
+        final falloff = (1.0 - d) * (1.0 - d);
+        final i = (y * size + x) * 4;
+        pixels[i] = 255;
+        pixels[i + 1] = 255;
+        pixels[i + 2] = 255;
+        pixels[i + 3] = Std.int(255 * falloff);
+      }
+    }
+    return imageFromPixels(size, size, pixels);
+  }
+
+  function imageFromPixels(width:Int, height:Int, pixels:UInt8Array):ImageResource {
+    final image = createImageResource();
+    image.width = width;
+    image.height = height;
+    image.data = pixels;
+    return image;
   }
 
   function rebuildConfig():ParticleEmitterConfig {
