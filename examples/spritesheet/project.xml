@@ -2,7 +2,7 @@
 <project>
   <meta title="Flight Spritesheet" package="hq.flight.examples.spritesheet" version="0.0.1" />
   <app main="Main" file="FlightSpritesheet" />
-  <window width="800" height="500" fps="60" hardware="true" vsync="true" />
+  <window width="800" height="500" fps="60" hardware="true" vsync="true" antialiasing="4" />
   <!-- <haxelib name="flight" path="../../" /> -->
   <include path="../../" />
   <classpath name="." />

@@ -2,7 +2,7 @@
 <project>
   <meta title="Flight Camera2d" package="hq.flight.examples.camera2d" version="0.0.1" />
   <app main="Main" file="FlightCamera2d" />
-  <window width="800" height="600" fps="60" hardware="true" vsync="true" />
+  <window width="800" height="600" fps="60" hardware="true" vsync="true" antialiasing="4" />
   <!-- <haxelib name="flight" path="../../" /> -->
   <include path="../../" />
   <classpath name="." />

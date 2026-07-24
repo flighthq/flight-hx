@@ -2,7 +2,7 @@
 <project>
   <meta title="Flight Textinput" package="hq.flight.examples.textinput" version="0.0.1" />
   <app main="Main" file="FlightTextinput" />
-  <window width="800" height="600" fps="60" hardware="true" vsync="true" />
+  <window width="800" height="600" fps="60" hardware="true" vsync="true" antialiasing="4" />
   <!-- <haxelib name="flight" path="../../" /> -->
   <include path="../../" />
   <classpath name="." />

@@ -2,7 +2,7 @@
 <project>
   <meta title="Flight Flowstates" package="hq.flight.examples.flowstates" version="0.0.1" />
   <app main="Main" file="FlightFlowstates" />
-  <window width="600" height="400" fps="60" hardware="true" vsync="true" />
+  <window width="600" height="400" fps="60" hardware="true" vsync="true" antialiasing="4" />
   <!-- <haxelib name="flight" path="../../" /> -->
   <include path="../../" />
   <classpath name="." />

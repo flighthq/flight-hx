@@ -2,7 +2,7 @@
 <project>
   <meta title="Flight Spring" package="hq.flight.examples.spring" version="0.0.1" />
   <app main="Main" file="FlightSpring" />
-  <window width="600" height="400" fps="60" hardware="true" vsync="true" />
+  <window width="600" height="400" fps="60" hardware="true" vsync="true" antialiasing="4" />
   <!-- <haxelib name="flight" path="../../" /> -->
   <include path="../../" />
   <classpath name="." />
