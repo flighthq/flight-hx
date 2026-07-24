@@ -240,7 +240,7 @@ class Menu {
   }
 
   public static function showWebContextMenu__menu(items:Array<MenuItemTemplate>, x:Float, y:Float):flighthq._internal._Promise<Null<String>> {
-    return cast _Runtime.construct(_Runtime.globalValue('Promise'), [function(resolve:Dynamic) {
+    return cast flighthq._internal._Async.create(function(resolve:Dynamic) {
       var overlay:Dynamic = cast _Runtime.UNDEFINED;
       var menu:Dynamic = cast _Runtime.UNDEFINED;
       var clampMenu:Dynamic->Float->Float->Void = cast _Runtime.UNDEFINED;
@@ -322,7 +322,7 @@ class Menu {
       _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'body'), 'appendChild', cast ([overlay] : Array<Dynamic>));
       _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'body'), 'appendChild', cast ([menu] : Array<Dynamic>));
       _Runtime.callValue(clampMenu, cast ([menu, x, y] : Array<Dynamic>));
-    }]);
+    });
     return cast null;
   }
 

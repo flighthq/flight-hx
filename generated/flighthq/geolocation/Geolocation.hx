@@ -40,7 +40,7 @@ class Geolocation {
       } catch (__error:Dynamic) {
       }
     }, getCurrentPosition: function(options:Dynamic) {
-      return cast _Runtime.construct(_Runtime.globalValue('Promise'), [function(resolve:Dynamic) {
+      return cast flighthq._internal._Async.create(function(resolve:Dynamic) {
         var geo:Dynamic = cast _Runtime.UNDEFINED;
         geo = _Runtime.callValue(Geolocation.getWebGeolocation__geolocation, cast ([] : Array<Dynamic>));
         if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(geo, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(geo, 'getCurrentPosition')), 'function')))) {
@@ -52,9 +52,9 @@ class Geolocation {
         } catch (__error:Dynamic) {
           _Runtime.callValue(resolve, cast ([null] : Array<Dynamic>));
         }
-      }]);
+      });
     }, getCurrentPositionResult: function(options:Dynamic) {
-      return cast _Runtime.construct(_Runtime.globalValue('Promise'), [function(resolve:Dynamic) {
+      return cast flighthq._internal._Async.create(function(resolve:Dynamic) {
         var geo:Dynamic = cast _Runtime.UNDEFINED;
         geo = _Runtime.callValue(Geolocation.getWebGeolocation__geolocation, cast ([] : Array<Dynamic>));
         if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(geo, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(geo, 'getCurrentPosition')), 'function')))) {
@@ -66,32 +66,72 @@ class Geolocation {
         } catch (__error:Dynamic) {
           _Runtime.callValue(resolve, cast ([{ position: null, reason: 'unavailable' }] : Array<Dynamic>));
         }
-      }]);
-    }, getPermission: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      var permissions:Dynamic = cast _Runtime.UNDEFINED;
-      permissions = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'permissions'), function():Dynamic return cast null), function():Dynamic return cast null);
-      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(permissions, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(permissions, 'query')), 'function')))) {
-        try {
-          var status:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(permissions, 'query', cast ([{ name: 'geolocation' }] : Array<Dynamic>)));
-          return cast (cast _Runtime.field(status, 'state') : GeolocationPermissionState);
-        } catch (__error:Dynamic) {
-        }
-      }
-      return cast 'prompt';
-      return cast null;
-    }), requestPermission: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      var permissions:Dynamic = cast _Runtime.UNDEFINED;
-      permissions = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'permissions'), function():Dynamic return cast null), function():Dynamic return cast null);
-      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(permissions, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(permissions, 'query')), 'function')))) {
-        try {
-          var status:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(permissions, 'query', cast ([{ name: 'geolocation' }] : Array<Dynamic>)));
-          return cast _Runtime.strictEquals(_Runtime.field(status, 'state'), 'granted');
-        } catch (__error:Dynamic) {
-        }
-      }
-      return cast !_Runtime.strictEquals(flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.thisValue(), 'getCurrentPosition', cast ([{  }] : Array<Dynamic>))), null);
-      return cast null;
-    }), subscribePermission: function(listener:Dynamic) {
+      });
+    }, getPermission: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var permissions:Dynamic = cast _Runtime.UNDEFINED;
+          permissions = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'permissions'), function():Dynamic return cast null), function():Dynamic return cast null);
+          var __flowBranch0:Dynamic;
+          if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(permissions, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(permissions, 'query')), 'function')))) {
+            __flowBranch0 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+                var status:Dynamic = cast _Runtime.UNDEFINED;
+                return flighthq._internal._Async.flatMap(_Runtime.callProperty(permissions, 'query', cast ([{ name: 'geolocation' }] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
+                  status = __awaitValue1;
+                  return flighthq._internal._Async.flowReturn((cast _Runtime.field(status, 'state') : GeolocationPermissionState));
+                });
+              }), function(__caughtError:Dynamic):Dynamic {
+                var __error:Dynamic = __caughtError;
+                return flighthq._internal._Async.protect(function():Dynamic {
+                  return flighthq._internal._Async.flowNormal();
+                });
+              }), function():Dynamic {
+                return flighthq._internal._Async.flowNormal();
+              });
+            });
+          } else {
+            __flowBranch0 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch0, function():Dynamic {
+            return flighthq._internal._Async.flowReturn('prompt');
+          });
+        })
+      );
+    }, requestPermission: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var permissions:Dynamic = cast _Runtime.UNDEFINED;
+          permissions = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'permissions'), function():Dynamic return cast null), function():Dynamic return cast null);
+          var __flowBranch2:Dynamic;
+          if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(permissions, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(permissions, 'query')), 'function')))) {
+            __flowBranch2 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+                var status:Dynamic = cast _Runtime.UNDEFINED;
+                return flighthq._internal._Async.flatMap(_Runtime.callProperty(permissions, 'query', cast ([{ name: 'geolocation' }] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
+                  status = __awaitValue3;
+                  return flighthq._internal._Async.flowReturn(_Runtime.strictEquals(_Runtime.field(status, 'state'), 'granted'));
+                });
+              }), function(__caughtError:Dynamic):Dynamic {
+                var __error:Dynamic = __caughtError;
+                return flighthq._internal._Async.protect(function():Dynamic {
+                  return flighthq._internal._Async.flowNormal();
+                });
+              }), function():Dynamic {
+                return flighthq._internal._Async.flowNormal();
+              });
+            });
+          } else {
+            __flowBranch2 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch2, function():Dynamic {
+            return flighthq._internal._Async.flatMap(_Runtime.callProperty(_Runtime.thisValue(), 'getCurrentPosition', cast ([{  }] : Array<Dynamic>)), function(__awaitValue4:Dynamic):Dynamic {
+              return flighthq._internal._Async.flowReturn(!_Runtime.strictEquals(__awaitValue4, null));
+            });
+          });
+        })
+      );
+    }, subscribePermission: function(listener:Dynamic) {
       var permissions:Dynamic = cast _Runtime.UNDEFINED;
       var status:Null<Dynamic> = cast _Runtime.UNDEFINED;
       var handler:Null<Dynamic> = cast _Runtime.UNDEFINED;
@@ -99,13 +139,13 @@ class Geolocation {
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(permissions, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(permissions, 'query')), 'function')))) { return cast Geolocation._noopUnsubscribe__geolocation; }
       status = null;
       handler = null;
-      _Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(permissions, 'query', cast ([{ name: 'geolocation' }] : Array<Dynamic>)), 'then', cast ([function(s:Dynamic) {
+      flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(permissions, 'query', cast ([{ name: 'geolocation' }] : Array<Dynamic>)), 'then', cast ([function(s:Dynamic) {
         (status = cast (s : Dynamic));
         (handler = cast (function() return _Runtime.callValue(listener, cast ([(cast _Runtime.field(s, 'state') : GeolocationPermissionState)] : Array<Dynamic>)) : Dynamic));
         _Runtime.callProperty(s, 'addEventListener', cast (['change', handler] : Array<Dynamic>));
-      }] : Array<Dynamic>)), 'catch', cast ([function() {
+      }] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>));
+      });
       return cast function() {
         if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(status, null), function():Dynamic return cast !_Runtime.strictEquals(handler, null)))) {
           _Runtime.callProperty(status, 'removeEventListener', cast (['change', handler] : Array<Dynamic>));

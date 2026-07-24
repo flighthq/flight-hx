@@ -339,6 +339,283 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('_Async.resolve(7.0)');
   });
 
+  it('propagates returns through awaited conditional branches', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/sample.ts',
+      `
+        export async function choose(flag: boolean, pending: Promise<number>): Promise<number> {
+          if (flag) {
+            const value = await pending;
+            return value + 1;
+          }
+          return 2;
+        }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'AsyncBranchFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(output).not.toContain('_Async.make');
+    expect(output).not.toContain('_Async.awaitValue');
+    expect(output).toContain('_Async.finishFlow');
+    expect(output).toContain('_Async.flowReturn');
+
+    const fixtureDirectory = path.resolve('build/haxe-async-branch-fixture');
+    const packageDirectory = path.join(fixtureDirectory, 'flighthq');
+    rmSync(fixtureDirectory, { force: true, recursive: true });
+    mkdirSync(packageDirectory, { recursive: true });
+    writeFileSync(path.join(packageDirectory, 'AsyncBranchFixture.hx'), output);
+    writeFileSync(
+      path.join(fixtureDirectory, 'Main.hx'),
+      `
+        import flighthq.AsyncBranchFixture.choose;
+        import flighthq._internal._Async;
+        class Main {
+          static function main() {
+            var selected = 0;
+            choose(true, _Async.resolve(4)).then(function(value) {
+              selected = Std.int(value);
+              return value;
+            });
+            if (selected != 5) throw 'awaited true branch failed';
+            choose(false, _Async.resolve(9)).then(function(value) {
+              selected = Std.int(value);
+              return value;
+            });
+            if (selected != 2) throw 'synchronous false branch failed';
+          }
+        }
+      `,
+    );
+    expect(() =>
+      execFileSync(
+        'node',
+        ['tools/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '-cp', 'generated', '--main', 'Main', '--interp'],
+        {
+          cwd: path.resolve('.'),
+          stdio: 'pipe',
+        },
+      ),
+    ).not.toThrow();
+  });
+
+  it('preserves rejection recovery and finally overrides across awaits', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/sample.ts',
+      `
+        export async function recoverValue(pending: Promise<number>, cleanup: () => void): Promise<number> {
+          try {
+            return await pending;
+          } catch (error) {
+            return 6;
+          } finally {
+            cleanup();
+          }
+        }
+        export async function overrideValue(pending: Promise<number>): Promise<number> {
+          try {
+            return await pending;
+          } finally {
+            return 8;
+          }
+        }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'AsyncTryFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(output).not.toContain('_Async.make');
+    expect(output).not.toContain('_Async.awaitValue');
+    expect(output).toContain('_Async.recover');
+    expect(output).toContain('_Async.finalizeFlow');
+
+    const fixtureDirectory = path.resolve('build/haxe-async-try-fixture');
+    const packageDirectory = path.join(fixtureDirectory, 'flighthq');
+    rmSync(fixtureDirectory, { force: true, recursive: true });
+    mkdirSync(packageDirectory, { recursive: true });
+    writeFileSync(path.join(packageDirectory, 'AsyncTryFixture.hx'), output);
+    writeFileSync(
+      path.join(fixtureDirectory, 'Main.hx'),
+      `
+        import flighthq.AsyncTryFixture.overrideValue;
+        import flighthq.AsyncTryFixture.recoverValue;
+        import flighthq._internal._Async;
+        class Main {
+          static function main() {
+            var result = 0;
+            var cleanups = 0;
+            recoverValue(_Async.reject('expected'), function() cleanups++).then(function(value) {
+              result = Std.int(value);
+              return value;
+            });
+            if (result != 6 || cleanups != 1) throw 'async catch/finally failed';
+            overrideValue(_Async.resolve(4)).then(function(value) {
+              result = Std.int(value);
+              return value;
+            });
+            if (result != 8) throw 'async finally return override failed';
+          }
+        }
+      `,
+    );
+    expect(() =>
+      execFileSync(
+        'node',
+        ['tools/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '-cp', 'generated', '--main', 'Main', '--interp'],
+        {
+          cwd: path.resolve('.'),
+          stdio: 'pipe',
+        },
+      ),
+    ).not.toThrow();
+  });
+
+  it('lowers awaited for-of bodies with break and continue through a flow trampoline', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/sample.ts',
+      `
+        export async function sumSelected(
+          values: number[],
+          load: (value: number) => Promise<number>,
+        ): Promise<number> {
+          let total = 0;
+          for (const value of values) {
+            if (value === 2) continue;
+            total += await load(value);
+            if (total > 4) break;
+          }
+          return total;
+        }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'AsyncLoopFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(output).not.toContain('_Async.make');
+    expect(output).not.toContain('_Async.awaitValue');
+    expect(output).toContain('_Async.repeatFlow');
+    expect(output).toContain('_Async.flowContinue');
+    expect(output).toContain('_Async.flowBreak');
+
+    const fixtureDirectory = path.resolve('build/haxe-async-loop-fixture');
+    const packageDirectory = path.join(fixtureDirectory, 'flighthq');
+    rmSync(fixtureDirectory, { force: true, recursive: true });
+    mkdirSync(packageDirectory, { recursive: true });
+    writeFileSync(path.join(packageDirectory, 'AsyncLoopFixture.hx'), output);
+    writeFileSync(
+      path.join(fixtureDirectory, 'Main.hx'),
+      `
+        import flighthq.AsyncLoopFixture.sumSelected;
+        import flighthq._internal._Async;
+        class Main {
+          static function main() {
+            var result = 0;
+            sumSelected([1, 2, 3, 4], function(value) return _Async.resolve(value)).then(function(value) {
+              result = Std.int(value);
+              return value;
+            });
+            if (result != 8) throw 'async for-of control flow failed';
+          }
+        }
+      `,
+    );
+    expect(() =>
+      execFileSync(
+        'node',
+        ['tools/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '-cp', 'generated', '--main', 'Main', '--interp'],
+        {
+          cwd: path.resolve('.'),
+          stdio: 'pipe',
+        },
+      ),
+    ).not.toThrow();
+  });
+
+  it('lowers awaited while and for loops without recursive portable stack growth', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/sample.ts',
+      `
+        export async function count(load: (value: number) => Promise<number>): Promise<number> {
+          let total = 0;
+          while (total < 3) total += await load(1);
+          for (let index = 0; index < 2; index++) total += await load(1);
+          return total;
+        }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'AsyncNumericLoopFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(output).not.toContain('_Async.make');
+    expect(output.match(/_Async\.repeatFlow/gu)).toHaveLength(2);
+    expect(output).toContain('_Async.continueIteration');
+
+    const fixtureDirectory = path.resolve('build/haxe-async-numeric-loop-fixture');
+    const packageDirectory = path.join(fixtureDirectory, 'flighthq');
+    rmSync(fixtureDirectory, { force: true, recursive: true });
+    mkdirSync(packageDirectory, { recursive: true });
+    writeFileSync(path.join(packageDirectory, 'AsyncNumericLoopFixture.hx'), output);
+    writeFileSync(
+      path.join(fixtureDirectory, 'Main.hx'),
+      `
+        import flighthq.AsyncNumericLoopFixture.count;
+        import flighthq._internal._Async;
+        class Main {
+          static function main() {
+            var result = 0;
+            count(function(value) return _Async.resolve(value)).then(function(value) {
+              result = Std.int(value);
+              return value;
+            });
+            if (result != 5) throw 'async while/for lowering failed';
+          }
+        }
+      `,
+    );
+    expect(() =>
+      execFileSync(
+        'node',
+        ['tools/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '-cp', 'generated', '--main', 'Main', '--interp'],
+        {
+          cwd: path.resolve('.'),
+          stdio: 'pipe',
+        },
+      ),
+    ).not.toThrow();
+  });
+
   it('preserves computed object keys as runtime values', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/entity/src/sample.ts',
@@ -382,8 +659,8 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain("_Runtime.callProperty(task, 'catch'");
-    expect(output).not.toContain('.catchError(');
+    expect(output).toContain('flighthq._internal._Async.recover(task');
+    expect(output).not.toContain("_Runtime.callProperty(task, 'catch'");
   });
 
   it('preserves method receivers for spread calls', () => {

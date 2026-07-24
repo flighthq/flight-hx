@@ -15,25 +15,40 @@ class RegisterWebImageDecoders {
     }
   }
 
-  public static final decodeImageWithCanvas__registerWebImageDecoders:ImageDecoder = flighthq._internal._Async.make(function(bytes:Dynamic, ?options:ImageDecodeOptions):flighthq._internal._Promise<DecodedImage> {
-    var bitmap:Dynamic = cast _Runtime.UNDEFINED;
-    var width:Dynamic = cast _Runtime.UNDEFINED;
-    var height:Dynamic = cast _Runtime.UNDEFINED;
-    var canvas:Dynamic = cast _Runtime.UNDEFINED;
-    var context:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    bitmap = flighthq._internal._Async.awaitValue(_Runtime.callValue(_Runtime.globalValue('createImageBitmap'), cast ([_Runtime.construct(_Runtime.globalValue('Blob'), [cast ([_Runtime.slice(bytes, 0, null)] : Array<Dynamic>)])] : Array<Dynamic>)));
-    width = _Runtime.field(bitmap, 'width');
-    height = _Runtime.field(bitmap, 'height');
-    canvas = _Runtime.construct(_Runtime.globalValue('OffscreenCanvas'), [width, height]);
-    context = (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic);
-    flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([bitmap, 0.0, 0.0] : Array<Dynamic>));
-    _Runtime.callProperty(bitmap, 'close', cast ([] : Array<Dynamic>));
-    data = _Runtime.field(flighthq._internal.backend.Canvas2dBackend.call(context, 'getImageData', cast ([0.0, 0.0, width, height] : Array<Dynamic>)), 'data');
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.optionalField(options, 'premultiplyAlpha'), true))) { _Runtime.callValue(RegisterWebImageDecoders.premultiplyRgbaInPlace__registerWebImageDecoders, cast ([data] : Array<Dynamic>)); }
-    return cast { data: data, width: width, height: height };
-    return cast null;
-  });
+  public static final decodeImageWithCanvas__registerWebImageDecoders:ImageDecoder = function(bytes:Dynamic, ?options:ImageDecodeOptions):flighthq._internal._Promise<DecodedImage> {
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var bitmap:Dynamic = cast _Runtime.UNDEFINED;
+        var width:Dynamic = cast _Runtime.UNDEFINED;
+        var height:Dynamic = cast _Runtime.UNDEFINED;
+        var canvas:Dynamic = cast _Runtime.UNDEFINED;
+        var context:Dynamic = cast _Runtime.UNDEFINED;
+        var data:Dynamic = cast _Runtime.UNDEFINED;
+        return flighthq._internal._Async.flatMap(_Runtime.callValue(_Runtime.globalValue('createImageBitmap'), cast ([_Runtime.construct(_Runtime.globalValue('Blob'), [cast ([_Runtime.slice(bytes, 0, null)] : Array<Dynamic>)])] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
+          bitmap = __awaitValue2;
+          width = _Runtime.field(bitmap, 'width');
+          height = _Runtime.field(bitmap, 'height');
+          canvas = _Runtime.construct(_Runtime.globalValue('OffscreenCanvas'), [width, height]);
+          context = (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic);
+          flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([bitmap, 0.0, 0.0] : Array<Dynamic>));
+          _Runtime.callProperty(bitmap, 'close', cast ([] : Array<Dynamic>));
+          data = _Runtime.field(flighthq._internal.backend.Canvas2dBackend.call(context, 'getImageData', cast ([0.0, 0.0, width, height] : Array<Dynamic>)), 'data');
+          var __flowBranch3:Dynamic;
+          if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.optionalField(options, 'premultiplyAlpha'), true))) {
+            __flowBranch3 = flighthq._internal._Async.protect(function():Dynamic {
+              _Runtime.callValue(RegisterWebImageDecoders.premultiplyRgbaInPlace__registerWebImageDecoders, cast ([data] : Array<Dynamic>));
+              return flighthq._internal._Async.flowNormal();
+            });
+          } else {
+            __flowBranch3 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
+            return flighthq._internal._Async.flowReturn({ data: data, width: width, height: height });
+          });
+        });
+      })
+    );
+  };
 
   public static function premultiplyRgbaInPlace__registerWebImageDecoders(data:Dynamic):Void {
     {

@@ -164,20 +164,20 @@ class Power {
           (Power._wakeLockSentinel__power = cast (null : Dynamic));
           return cast true;
         }
-        _Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(wakeLock, 'request', cast (['screen'] : Array<Dynamic>)), 'then', cast ([function(sentinel:Dynamic) {
+        flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(wakeLock, 'request', cast (['screen'] : Array<Dynamic>)), 'then', cast ([function(sentinel:Dynamic) {
           (Power._wakeLockSentinel__power = cast (sentinel : Dynamic));
           _Runtime.callOptionalProperty(sentinel, 'addEventListener', cast (['release', function() {
             if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(Power._wakeLockSentinel__power, sentinel), function():Dynamic return cast !_Runtime.truthy(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'hidden'))))) {
-              _Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(wakeLock, 'request', cast (['screen'] : Array<Dynamic>)), 'then', cast ([function(newSentinel:Dynamic) {
+              flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(wakeLock, 'request', cast (['screen'] : Array<Dynamic>)), 'then', cast ([function(newSentinel:Dynamic) {
                 if (_Runtime.truthy(_Runtime.strictEquals(Power._wakeLockSentinel__power, sentinel))) { (Power._wakeLockSentinel__power = cast (newSentinel : Dynamic)); }
-              }] : Array<Dynamic>)), 'catch', cast ([function() {
+              }] : Array<Dynamic>)), function() {
               
-              }] : Array<Dynamic>));
+              });
             }
           }] : Array<Dynamic>));
-        }] : Array<Dynamic>)), 'catch', cast ([function() {
+        }] : Array<Dynamic>)), function() {
         
-        }] : Array<Dynamic>));
+        });
         return cast true;
       } catch (__error:Dynamic) {
         return cast false;
@@ -218,7 +218,7 @@ class Power {
         _Runtime.callValue(listener, cast ([] : Array<Dynamic>));
       };
       cancelled = false;
-      _Runtime.callProperty(_Runtime.callProperty(battery, 'then', cast ([function(m:Dynamic) {
+      flighthq._internal._Async.recover(_Runtime.callProperty(battery, 'then', cast ([function(m:Dynamic) {
         if (_Runtime.truthy(cancelled)) { return; }
         (manager = cast (m : Dynamic));
         (cachedLevel = cast (_Runtime.field(m, 'level') : Dynamic));
@@ -230,9 +230,9 @@ class Power {
         _Runtime.callOptionalProperty(m, 'addEventListener', cast (['chargingtimechange', onChargingTimeChange] : Array<Dynamic>));
         _Runtime.callOptionalProperty(m, 'addEventListener', cast (['dischargingtimechange', onDischargingTimeChange] : Array<Dynamic>));
         _Runtime.callValue(listener, cast ([] : Array<Dynamic>));
-      }] : Array<Dynamic>)), 'catch', cast ([function() {
+      }] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>));
+      });
       return cast function() {
         (cancelled = cast (true : Dynamic));
         _Runtime.callOptionalProperty(manager, 'removeEventListener', cast (['levelchange', onLevelChange] : Array<Dynamic>));

@@ -599,12 +599,12 @@ class InputManager {
   public static function requestInputPointerLock(element:Dynamic):flighthq._internal._Promise<Bool> {
     try {
       var result:Dynamic = _Runtime.callProperty(element, 'requestPointerLock', cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.isInstanceOf(result, _Runtime.globalValue('Promise')))) {
+      if (_Runtime.truthy(flighthq._internal._Async.isPromise(result))) {
         return cast _Runtime.callProperty(result, 'then', cast ([function() return true, function() return false] : Array<Dynamic>));
       }
-      return cast _Runtime.callProperty(_Runtime.globalValue('Promise'), 'resolve', cast ([true] : Array<Dynamic>));
+      return cast flighthq._internal._Async.resolve(true);
     } catch (__error:Dynamic) {
-      return cast _Runtime.callProperty(_Runtime.globalValue('Promise'), 'resolve', cast ([false] : Array<Dynamic>));
+      return cast flighthq._internal._Async.resolve(false);
     }
     return cast null;
   }

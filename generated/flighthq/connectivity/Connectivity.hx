@@ -99,35 +99,54 @@ class Connectivity {
       _Runtime.setField(out, 'saveData', _Runtime.strictEquals(_Runtime.optionalField(conn, 'saveData'), true));
       _Runtime.setField(out, 'metered', _Runtime.orValue(_Runtime.field(out, 'saveData'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(out, 'type'), 'cellular')));
       return cast out;
-    }, detectReachability: flighthq._internal._Async.make(function(options:Dynamic, out:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var timeout:Dynamic = cast _Runtime.UNDEFINED;
-      var controller:Dynamic = cast _Runtime.UNDEFINED;
-      var timerId:Dynamic = cast _Runtime.UNDEFINED;
-      var combinedSignal:Dynamic = cast _Runtime.UNDEFINED;
-      var start:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('fetch'), 'undefined'))) {
-        _Runtime.setField(out, 'reachable', false);
-        _Runtime.setField(out, 'latency', -1.0);
-        return cast out;
-      }
-      timeout = _Runtime.coalesce(_Runtime.field(options, 'timeout'), function():Dynamic return cast 5000.0);
-      controller = _Runtime.construct(_Runtime.globalValue('AbortController'), []);
-      timerId = _Runtime.setTimeout(function() return _Runtime.callProperty(controller, 'abort', cast ([] : Array<Dynamic>)), timeout);
-      combinedSignal = _Runtime.select(_Runtime.field(options, 'signal'), function():Dynamic return cast _Runtime.callValue(Connectivity.anyAbortSignal__connectivity, cast ([_Runtime.field(options, 'signal'), _Runtime.field(controller, 'signal')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(controller, 'signal'));
-      start = _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>));
-      try {
-        var response:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(_Runtime.globalValue('fetch'), cast ([_Runtime.field(options, 'url'), { method: 'HEAD', cache: 'no-store', signal: combinedSignal }] : Array<Dynamic>)));
-        _Runtime.clearTimeout(timerId);
-        _Runtime.setField(out, 'reachable', _Runtime.field(response, 'ok'));
-        _Runtime.setField(out, 'latency', (_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) - start));
-      } catch (__error:Dynamic) {
-        _Runtime.clearTimeout(timerId);
-        _Runtime.setField(out, 'reachable', false);
-        _Runtime.setField(out, 'latency', -1.0);
-      }
-      return cast out;
-      return cast null;
-    }), subscribe: function(listener:Dynamic) {
+    }, detectReachability: function(options:Dynamic, out:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var timeout:Dynamic = cast _Runtime.UNDEFINED;
+          var controller:Dynamic = cast _Runtime.UNDEFINED;
+          var timerId:Dynamic = cast _Runtime.UNDEFINED;
+          var combinedSignal:Dynamic = cast _Runtime.UNDEFINED;
+          var start:Dynamic = cast _Runtime.UNDEFINED;
+          var __flowBranch0:Dynamic;
+          if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('fetch'), 'undefined'))) {
+            __flowBranch0 = flighthq._internal._Async.protect(function():Dynamic {
+              _Runtime.setField(out, 'reachable', false);
+              _Runtime.setField(out, 'latency', -1.0);
+              return flighthq._internal._Async.flowReturn(out);
+            });
+          } else {
+            __flowBranch0 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch0, function():Dynamic {
+            timeout = _Runtime.coalesce(_Runtime.field(options, 'timeout'), function():Dynamic return cast 5000.0);
+            controller = _Runtime.construct(_Runtime.globalValue('AbortController'), []);
+            timerId = _Runtime.setTimeout(function() return _Runtime.callProperty(controller, 'abort', cast ([] : Array<Dynamic>)), timeout);
+            combinedSignal = _Runtime.select(_Runtime.field(options, 'signal'), function():Dynamic return cast _Runtime.callValue(Connectivity.anyAbortSignal__connectivity, cast ([_Runtime.field(options, 'signal'), _Runtime.field(controller, 'signal')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(controller, 'signal'));
+            start = _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>));
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              var response:Dynamic = cast _Runtime.UNDEFINED;
+              return flighthq._internal._Async.flatMap(_Runtime.callValue(_Runtime.globalValue('fetch'), cast ([_Runtime.field(options, 'url'), { method: 'HEAD', cache: 'no-store', signal: combinedSignal }] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
+                response = __awaitValue1;
+                _Runtime.clearTimeout(timerId);
+                _Runtime.setField(out, 'reachable', _Runtime.field(response, 'ok'));
+                _Runtime.setField(out, 'latency', (_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) - start));
+                return flighthq._internal._Async.flowNormal();
+              });
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                _Runtime.clearTimeout(timerId);
+                _Runtime.setField(out, 'reachable', false);
+                _Runtime.setField(out, 'latency', -1.0);
+                return flighthq._internal._Async.flowNormal();
+              });
+            }), function():Dynamic {
+              return flighthq._internal._Async.flowReturn(out);
+            });
+          });
+        })
+      );
+    }, subscribe: function(listener:Dynamic) {
       var conn:Dynamic = cast _Runtime.UNDEFINED;
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast function() {
       
@@ -155,7 +174,7 @@ class Connectivity {
   }
 
   public static function detectConnectivityReachability(options:ConnectivityReachabilityOptions, out:ConnectivityReachability):flighthq._internal._Promise<ConnectivityReachability> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<ConnectivityReachability> {
+    return cast flighthq._internal._Async.protect(function():Dynamic {
       var backend:Dynamic = cast _Runtime.UNDEFINED;
       var webBackend:Dynamic = cast _Runtime.UNDEFINED;
       backend = _Runtime.callValue(getConnectivityBackend, cast ([] : Array<Dynamic>));
@@ -171,7 +190,7 @@ class Connectivity {
       _Runtime.setField(out, 'latency', -1.0);
       return cast out;
       return cast null;
-    })();
+    });
   }
 
   public static function disposeConnectivity(net:flighthq.types.Connectivity):Void {

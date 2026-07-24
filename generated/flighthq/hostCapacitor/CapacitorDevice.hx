@@ -23,16 +23,16 @@ class CapacitorDevice {
     device = _Runtime.field(capacitor, 'device');
     cachedInfo = null;
     cachedId = '';
-    _Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(device, 'getInfo', cast ([] : Array<Dynamic>)), 'then', cast ([function(info:Dynamic) {
+    flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(device, 'getInfo', cast ([] : Array<Dynamic>)), 'then', cast ([function(info:Dynamic) {
       (cachedInfo = cast (info : Dynamic));
-    }] : Array<Dynamic>)), 'catch', cast ([function() {
+    }] : Array<Dynamic>)), function() {
     
-    }] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(device, 'getId', cast ([] : Array<Dynamic>)), 'then', cast ([function(id:Dynamic) {
+    });
+    flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(device, 'getId', cast ([] : Array<Dynamic>)), 'then', cast ([function(id:Dynamic) {
       (cachedId = cast (_Runtime.field(id, 'identifier') : Dynamic));
-    }] : Array<Dynamic>)), 'catch', cast ([function() {
+    }] : Array<Dynamic>)), function() {
     
-    }] : Array<Dynamic>));
+    });
     return cast { getCapabilities: function(out:DeviceCapabilities) {
       _Runtime.setField(out, 'hasKeyboard', false);
       _Runtime.setField(out, 'hasMouse', false);

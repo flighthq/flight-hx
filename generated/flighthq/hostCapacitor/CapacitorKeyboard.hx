@@ -24,18 +24,18 @@ class CapacitorKeyboard {
     keyboard = _Runtime.field(capacitor, 'keyboard');
     mirrorVisible = false;
     mirrorHeight = 0.0;
-    _Runtime.callProperty(_Runtime.callProperty(keyboard, 'addListener', cast (['keyboardWillShow', function(info:Dynamic) {
+    flighthq._internal._Async.recover(_Runtime.callProperty(keyboard, 'addListener', cast (['keyboardWillShow', function(info:Dynamic) {
       (mirrorVisible = cast (true : Dynamic));
       (mirrorHeight = cast (_Runtime.field(info, 'keyboardHeight') : Dynamic));
-    }] : Array<Dynamic>)), 'catch', cast ([function() {
+    }] : Array<Dynamic>)), function() {
     
-    }] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.callProperty(keyboard, 'addListener', cast (['keyboardWillHide', function() {
+    });
+    flighthq._internal._Async.recover(_Runtime.callProperty(keyboard, 'addListener', cast (['keyboardWillHide', function() {
       (mirrorVisible = cast (false : Dynamic));
       (mirrorHeight = cast (0.0 : Dynamic));
-    }] : Array<Dynamic>)), 'catch', cast ([function() {
+    }] : Array<Dynamic>)), function() {
     
-    }] : Array<Dynamic>));
+    });
     return cast { getInfo: function(out:SoftKeyboardInfo) {
       _Runtime.setField(out, 'visible', mirrorVisible);
       _Runtime.setField(out, 'height', mirrorHeight);
@@ -44,29 +44,29 @@ class CapacitorKeyboard {
       _Runtime.setField(out, 'width', 0.0);
       return cast out;
     }, hide: function() {
-      _Runtime.callProperty(_Runtime.callProperty(keyboard, 'hide', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
+      flighthq._internal._Async.recover(_Runtime.callProperty(keyboard, 'hide', cast ([] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>));
+      });
     }, setAccessoryBarVisible: function(visible:Bool) {
-      _Runtime.callProperty(_Runtime.callProperty(keyboard, 'setAccessoryBarVisible', cast ([{ isVisible: visible }] : Array<Dynamic>)), 'catch', cast ([function() {
+      flighthq._internal._Async.recover(_Runtime.callProperty(keyboard, 'setAccessoryBarVisible', cast ([{ isVisible: visible }] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>));
+      });
     }, setResizeMode: function(mode:SoftKeyboardResizeMode) {
-      _Runtime.callProperty(_Runtime.callProperty(keyboard, 'setResizeMode', cast ([{ mode: _Runtime.callValue(CapacitorKeyboard.toCapacitorResizeMode__capacitorKeyboard, cast ([mode] : Array<Dynamic>)) }] : Array<Dynamic>)), 'catch', cast ([function() {
+      flighthq._internal._Async.recover(_Runtime.callProperty(keyboard, 'setResizeMode', cast ([{ mode: _Runtime.callValue(CapacitorKeyboard.toCapacitorResizeMode__capacitorKeyboard, cast ([mode] : Array<Dynamic>)) }] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>));
+      });
     }, setScrollAssistEnabled: function(enabled:Bool) {
-      _Runtime.callProperty(_Runtime.callProperty(keyboard, 'setScroll', cast ([{ isDisabled: !_Runtime.truthy(enabled) }] : Array<Dynamic>)), 'catch', cast ([function() {
+      flighthq._internal._Async.recover(_Runtime.callProperty(keyboard, 'setScroll', cast ([{ isDisabled: !_Runtime.truthy(enabled) }] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>));
+      });
     }, setStyle: function(style:SoftKeyboardStyleKind) {
-      _Runtime.callProperty(_Runtime.callProperty(keyboard, 'setStyle', cast ([{ style: _Runtime.select(_Runtime.strictEquals(style, SoftKeyboardStyleDarkKind), function():Dynamic return cast 'DARK', function():Dynamic return cast 'DEFAULT') }] : Array<Dynamic>)), 'catch', cast ([function() {
+      flighthq._internal._Async.recover(_Runtime.callProperty(keyboard, 'setStyle', cast ([{ style: _Runtime.select(_Runtime.strictEquals(style, SoftKeyboardStyleDarkKind), function():Dynamic return cast 'DARK', function():Dynamic return cast 'DEFAULT') }] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>));
+      });
     }, show: function() {
-      _Runtime.callProperty(_Runtime.callProperty(keyboard, 'show', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
+      flighthq._internal._Async.recover(_Runtime.callProperty(keyboard, 'show', cast ([] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>));
+      });
     }, subscribe: function(listener:Dynamic) {
       var unsubShow:Dynamic = cast _Runtime.UNDEFINED;
       var unsubHide:Dynamic = cast _Runtime.UNDEFINED;
@@ -92,19 +92,19 @@ class CapacitorKeyboard {
     var handle:Null<CapacitorPluginListenerHandle> = cast _Runtime.UNDEFINED;
     removed = false;
     handle = null;
-    _Runtime.callProperty(_Runtime.callProperty(handlePromise, 'then', cast ([function(resolved:Dynamic) {
+    flighthq._internal._Async.recover(_Runtime.callProperty(handlePromise, 'then', cast ([function(resolved:Dynamic) {
       (handle = cast (resolved : Dynamic));
-      if (_Runtime.truthy(removed)) { _Runtime.callProperty(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
+      if (_Runtime.truthy(removed)) { flighthq._internal._Async.recover(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>)); }
-    }] : Array<Dynamic>)), 'catch', cast ([function() {
+      }); }
+    }] : Array<Dynamic>)), function() {
     
-    }] : Array<Dynamic>));
+    });
     return cast function() {
       (removed = cast (true : Dynamic));
-      if (_Runtime.truthy(!_Runtime.strictEquals(handle, null))) { _Runtime.callProperty(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
+      if (_Runtime.truthy(!_Runtime.strictEquals(handle, null))) { flighthq._internal._Async.recover(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>)); }
+      }); }
     };
     return cast null;
   }

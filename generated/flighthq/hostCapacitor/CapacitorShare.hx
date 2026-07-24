@@ -13,34 +13,73 @@ class CapacitorShare {
     var cachedAvailable:Dynamic = cast _Runtime.UNDEFINED;
     share = _Runtime.field(capacitor, 'share');
     cachedAvailable = false;
-    _Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(share, 'canShare', cast ([] : Array<Dynamic>)), 'then', cast ([function(result:Dynamic) {
+    flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(share, 'canShare', cast ([] : Array<Dynamic>)), 'then', cast ([function(result:Dynamic) {
       (cachedAvailable = cast (_Runtime.field(result, 'value') : Dynamic));
-    }] : Array<Dynamic>)), 'catch', cast ([function() {
+    }] : Array<Dynamic>)), function() {
     
-    }] : Array<Dynamic>));
+    });
     return cast { isAvailable: function() {
       return cast cachedAvailable;
     }, canShare: function(content:Dynamic) {
       return cast _Runtime.andValue(cachedAvailable, function():Dynamic return cast _Runtime.callValue(CapacitorShare.hasShareableText__capacitorShare, cast ([content] : Array<Dynamic>)));
-    }, share: flighthq._internal._Async.make(function(content:Dynamic, options:Dynamic):flighthq._internal._Promise<Dynamic> {
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(CapacitorShare.hasShareableText__capacitorShare, cast ([content] : Array<Dynamic>))))) { return cast false; }
-      try {
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(share, 'share', cast ([{ title: _Runtime.field(content, 'title'), text: _Runtime.field(content, 'text'), url: _Runtime.field(content, 'url'), dialogTitle: _Runtime.optionalField(options, 'chooserTitle') }] : Array<Dynamic>)));
-        return cast true;
-      } catch (__error:Dynamic) {
-        return cast false;
-      }
-      return cast null;
-    }), shareWithResult: flighthq._internal._Async.make(function(content:Dynamic, options:Dynamic):flighthq._internal._Promise<Dynamic> {
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(CapacitorShare.hasShareableText__capacitorShare, cast ([content] : Array<Dynamic>))))) { return cast { completed: false, activityType: null, dismissed: false }; }
-      try {
-        var result:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(share, 'share', cast ([{ title: _Runtime.field(content, 'title'), text: _Runtime.field(content, 'text'), url: _Runtime.field(content, 'url'), dialogTitle: _Runtime.optionalField(options, 'chooserTitle') }] : Array<Dynamic>)));
-        return cast { completed: true, activityType: _Runtime.coalesce(_Runtime.field(result, 'activityType'), function():Dynamic return cast null), dismissed: false };
-      } catch (__error:Dynamic) {
-        return cast { completed: false, activityType: null, dismissed: true };
-      }
-      return cast null;
-    }) };
+    }, share: function(content:Dynamic, options:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var __flowBranch0:Dynamic;
+          if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(CapacitorShare.hasShareableText__capacitorShare, cast ([content] : Array<Dynamic>))))) {
+            __flowBranch0 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(false);
+            });
+          } else {
+            __flowBranch0 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch0, function():Dynamic {
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flatMap(_Runtime.callProperty(share, 'share', cast ([{ title: _Runtime.field(content, 'title'), text: _Runtime.field(content, 'text'), url: _Runtime.field(content, 'url'), dialogTitle: _Runtime.optionalField(options, 'chooserTitle') }] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
+                __awaitValue1;
+                return flighthq._internal._Async.flowReturn(true);
+              });
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(false);
+              });
+            }), function():Dynamic {
+              return flighthq._internal._Async.flowNormal();
+            });
+          });
+        })
+      );
+    }, shareWithResult: function(content:Dynamic, options:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var __flowBranch2:Dynamic;
+          if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(CapacitorShare.hasShareableText__capacitorShare, cast ([content] : Array<Dynamic>))))) {
+            __flowBranch2 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn({ completed: false, activityType: null, dismissed: false });
+            });
+          } else {
+            __flowBranch2 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch2, function():Dynamic {
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              var result:Dynamic = cast _Runtime.UNDEFINED;
+              return flighthq._internal._Async.flatMap(_Runtime.callProperty(share, 'share', cast ([{ title: _Runtime.field(content, 'title'), text: _Runtime.field(content, 'text'), url: _Runtime.field(content, 'url'), dialogTitle: _Runtime.optionalField(options, 'chooserTitle') }] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
+                result = __awaitValue3;
+                return flighthq._internal._Async.flowReturn({ completed: true, activityType: _Runtime.coalesce(_Runtime.field(result, 'activityType'), function():Dynamic return cast null), dismissed: false });
+              });
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn({ completed: false, activityType: null, dismissed: true });
+              });
+            }), function():Dynamic {
+              return flighthq._internal._Async.flowNormal();
+            });
+          });
+        })
+      );
+    } };
     return cast null;
   }
 

@@ -193,7 +193,7 @@ class App {
       };
     }, subscribeReady: function(listener:Dynamic) {
       var id:Dynamic = cast _Runtime.UNDEFINED;
-      id = _Runtime.callProperty(_Runtime.callProperty(_Runtime.globalValue('Promise'), 'resolve', cast ([] : Array<Dynamic>)), 'then', cast ([function() return _Runtime.callValue(listener, cast ([] : Array<Dynamic>))] : Array<Dynamic>));
+      id = _Runtime.callProperty(flighthq._internal._Async.resolve(), 'then', cast ([function() return _Runtime.callValue(listener, cast ([] : Array<Dynamic>))] : Array<Dynamic>));
       _Runtime.voidValue(id);
       return cast function() {
       

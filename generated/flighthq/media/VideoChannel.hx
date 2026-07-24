@@ -151,8 +151,8 @@ class VideoChannel {
     if (_Runtime.truthy(_Runtime.strictEquals(element, null))) { return; }
     _Runtime.setField(element, 'currentTime', (_Runtime.field(channel, 'currentTime') / 1000.0));
     _Runtime.setField(channel, 'state', 'playing');
-    _Runtime.callProperty(_Runtime.callProperty(element, 'play', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
+    flighthq._internal._Async.recover(_Runtime.callProperty(element, 'play', cast ([] : Array<Dynamic>)), function() {
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(channel, 'state'), 'playing'))) { _Runtime.setField(channel, 'state', 'stopped'); }
-    }] : Array<Dynamic>));
+    });
   }
 }

@@ -19,16 +19,16 @@ class TauriApp {
     process = _Runtime.field(tauri, 'process');
     cachedName = '';
     cachedVersion = '';
-    _Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(app, 'getName', cast ([] : Array<Dynamic>)), 'then', cast ([function(name:Dynamic) {
+    flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(app, 'getName', cast ([] : Array<Dynamic>)), 'then', cast ([function(name:Dynamic) {
       (cachedName = cast (name : Dynamic));
-    }] : Array<Dynamic>)), 'catch', cast ([function() {
+    }] : Array<Dynamic>)), function() {
     
-    }] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(app, 'getVersion', cast ([] : Array<Dynamic>)), 'then', cast ([function(version:Dynamic) {
+    });
+    flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(app, 'getVersion', cast ([] : Array<Dynamic>)), 'then', cast ([function(version:Dynamic) {
       (cachedVersion = cast (version : Dynamic));
-    }] : Array<Dynamic>)), 'catch', cast ([function() {
+    }] : Array<Dynamic>)), function() {
     
-    }] : Array<Dynamic>));
+    });
     return cast { addRecentDocument: function() {
     
     }, bounceDock: function() {
@@ -68,20 +68,20 @@ class TauriApp {
     }, hasSingleInstanceLock: function() {
       return cast false;
     }, hideApp: function() {
-      _Runtime.callProperty(_Runtime.callProperty(app, 'hide', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
+      flighthq._internal._Async.recover(_Runtime.callProperty(app, 'hide', cast ([] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>));
+      });
       return cast true;
     }, isAppHidden: function() {
       return cast false;
     }, quit: function() {
-      _Runtime.callProperty(_Runtime.callProperty(process, 'exit', cast ([0.0] : Array<Dynamic>)), 'catch', cast ([function() {
+      flighthq._internal._Async.recover(_Runtime.callProperty(process, 'exit', cast ([0.0] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>));
+      });
     }, relaunch: function() {
-      _Runtime.callProperty(_Runtime.callProperty(process, 'relaunch', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
+      flighthq._internal._Async.recover(_Runtime.callProperty(process, 'relaunch', cast ([] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>));
+      });
     }, releaseSingleInstanceLock: function() {
     
     }, requestAttention: function() {
@@ -103,9 +103,9 @@ class TauriApp {
     }, setUserModelId: function() {
       return cast false;
     }, showApp: function() {
-      _Runtime.callProperty(_Runtime.callProperty(app, 'show', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
+      flighthq._internal._Async.recover(_Runtime.callProperty(app, 'show', cast ([] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>));
+      });
       return cast true;
     }, subscribeActivate: function() {
       return cast function() {

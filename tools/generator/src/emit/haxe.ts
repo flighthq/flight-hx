@@ -26,6 +26,7 @@ let currentAsyncReturnsNothing = false;
 let currentFinallyStack: IrStatement[] = [];
 
 interface ExtractedAwait {
+  awaited: boolean;
   expression: IrExpression;
   name: string;
 }
@@ -150,16 +151,13 @@ function emitModuleValue(declaration: Extract<IrDeclaration, { kind: 'function' 
     if (!declaration.haxeBody && canFlatMapStatements(declaration.body)) {
       return [`${signature} {`, ...indent(emitFlatMapFunctionBody(declaration.body, declaration.parameters)), '}'];
     }
+    if (!declaration.haxeBody && statementsContainAwait(declaration.body) && canFlowStatements(declaration.body)) {
+      return [`${signature} {`, ...indent(emitFlowFunctionBody(declaration.body, declaration.parameters)), '}'];
+    }
     if (!declaration.haxeBody && !statementsContainAwait(declaration.body)) {
       return [`${signature} {`, ...indent(emitPromiseProtectedBody(bodyLines)), '}'];
     }
-    return [
-      `${signature} {`,
-      `  return cast flighthq._internal._Async.make(function():${emitType(declaration.returns)} {`,
-      ...indent(indent(bodyLines)),
-      '  })();',
-      '}',
-    ];
+    throw new Error(`Generator async lowering does not support ${declaration.origin.source}:${declaration.name}`);
   }
   return [`${signature} {`, ...indent(bodyLines), '}'];
 }
@@ -295,12 +293,12 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
       if (method.async) {
         if (canFlatMapStatements(method.body)) {
           lines.push(...indent(indent(emitFlatMapFunctionBody(method.body, method.parameters))));
+        } else if (statementsContainAwait(method.body) && canFlowStatements(method.body)) {
+          lines.push(...indent(indent(emitFlowFunctionBody(method.body, method.parameters))));
         } else if (!statementsContainAwait(method.body)) {
           lines.push(...indent(indent(emitPromiseProtectedBody(bodyLines))));
         } else {
-          lines.push(`    return cast flighthq._internal._Async.make(function():${emitType(method.returns)} {`);
-          lines.push(...indent(indent(indent(bodyLines))));
-          lines.push('    })();');
+          throw new Error(`Generator async lowering does not support ${declaration.origin.source}:${method.name}`);
         }
       } else {
         lines.push(...indent(indent(bodyLines)));
@@ -388,16 +386,13 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
     if (!declaration.haxeBody && canFlatMapStatements(declaration.body)) {
       return [`${signature} {`, ...indent(emitFlatMapFunctionBody(declaration.body, declaration.parameters)), '}'];
     }
+    if (!declaration.haxeBody && statementsContainAwait(declaration.body) && canFlowStatements(declaration.body)) {
+      return [`${signature} {`, ...indent(emitFlowFunctionBody(declaration.body, declaration.parameters)), '}'];
+    }
     if (!declaration.haxeBody && !statementsContainAwait(declaration.body)) {
       return [`${signature} {`, ...indent(emitPromiseProtectedBody(bodyLines)), '}'];
     }
-    return [
-      `${signature} {`,
-      `  return cast flighthq._internal._Async.make(function():${emitType(declaration.returns)} {`,
-      ...indent(indent(bodyLines)),
-      '  })();',
-      '}',
-    ];
+    throw new Error(`Generator async lowering does not support ${declaration.origin.source}:${declaration.name}`);
   }
   return [`${signature} {`, ...indent(bodyLines), '}'];
 }
@@ -461,6 +456,225 @@ function emitFlatMapFunctionBody(statements: IrStatement[], parameters: IrParame
   }
 }
 
+function emitFlowFunctionBody(statements: IrStatement[], parameters: IrParameter[]): string[] {
+  const previousReturnRequiresValue = currentReturnRequiresValue;
+  const previousContinueIncrement = currentContinueIncrement;
+  const previousAsyncFunction = currentAsyncFunction;
+  const previousAsyncReturnsNothing = currentAsyncReturnsNothing;
+  const previousFinallyStack = currentFinallyStack;
+  currentReturnRequiresValue = true;
+  currentContinueIncrement = undefined;
+  currentAsyncFunction = true;
+  currentAsyncReturnsNothing = false;
+  currentFinallyStack = [];
+  try {
+    const body = [...emitParameterInitializers(parameters), ...emitFlowScopedStatements(statements)];
+    return [
+      'return cast flighthq._internal._Async.finishFlow(',
+      '  flighthq._internal._Async.protect(function():Dynamic {',
+      ...indent(indent(body)),
+      '  })',
+      ');',
+    ];
+  } finally {
+    currentReturnRequiresValue = previousReturnRequiresValue;
+    currentContinueIncrement = previousContinueIncrement;
+    currentAsyncFunction = previousAsyncFunction;
+    currentAsyncReturnsNothing = previousAsyncReturnsNothing;
+    currentFinallyStack = previousFinallyStack;
+  }
+}
+
+function emitFlowScopedStatements(statements: IrStatement[]): string[] {
+  const lines: string[] = [];
+  const variables = statements.flatMap((statement) => (statement.kind === 'variable' ? statement.declarations : []));
+  for (const variable of variables) {
+    lines.push(
+      `var ${safeName(variable.name)}:${variable.type ? emitType(variable.type) : 'Dynamic'} = cast _Runtime.UNDEFINED;`,
+    );
+  }
+  lines.push(...emitFlowStatements(statements));
+  return lines;
+}
+
+function emitFlowStatements(statements: IrStatement[], index = 0): string[] {
+  if (index >= statements.length) return ['return flighthq._internal._Async.flowNormal();'];
+  const statement = statements[index]!;
+  const continuation = () => emitFlowStatements(statements, index + 1);
+  switch (statement.kind) {
+    case 'break':
+      return ['return flighthq._internal._Async.flowBreak();'];
+    case 'continue':
+      return ['return flighthq._internal._Async.flowContinue();'];
+    case 'variable':
+      return emitFlatMapVariableInitializers(statement.declarations, 0, continuation);
+    case 'expression':
+      return emitAwaitedExpression(statement.expression, (value) => [`${value};`, ...continuation()]);
+    case 'return':
+      return statement.expression
+        ? emitAwaitedExpression(statement.expression, (value) => [
+            `return flighthq._internal._Async.flowReturn(${value});`,
+          ])
+        : ['return flighthq._internal._Async.flowReturn(_Runtime.UNDEFINED);'];
+    case 'throw':
+      return emitAwaitedExpression(statement.expression, (value) => [
+        `return flighthq._internal._Async.reject(${value});`,
+      ]);
+    case 'block':
+      return emitFlowThenContinue(emitFlowProtectedStatements(statement.statements), continuation);
+    case 'if':
+      return emitAwaitedExpression(statement.condition, (condition) => {
+        const branch = `__flowBranch${String(temporaryIndex++)}`;
+        const lines = [`var ${branch}:Dynamic;`, `if (_Runtime.truthy(${condition})) {`];
+        lines.push(
+          ...indent([`${branch} = ${emitFlowProtectedStatements(statementToStatements(statement.consequent))};`]),
+        );
+        if (statement.otherwise) {
+          lines.push('} else {');
+          lines.push(
+            ...indent([`${branch} = ${emitFlowProtectedStatements(statementToStatements(statement.otherwise))};`]),
+          );
+        } else {
+          lines.push('} else {', `  ${branch} = flighthq._internal._Async.flowNormal();`);
+        }
+        lines.push('}');
+        lines.push(...emitFlowThenContinue(branch, continuation));
+        return lines;
+      });
+    case 'while': {
+      if (!statementContainsAwait(statement)) return [...emitStatement(statement), ...continuation()];
+      const iteration = [
+        'function():Dynamic {',
+        ...indent(
+          emitAwaitedExpression(statement.condition, (condition) => [
+            `if (!_Runtime.truthy(${condition})) return flighthq._internal._Async.flowBreak();`,
+            `return ${emitFlowProtectedStatements(statementToStatements(statement.body))};`,
+          ]),
+        ),
+        '}',
+      ].join('\n');
+      return emitFlowThenContinue(`flighthq._internal._Async.repeatFlow(${iteration})`, continuation);
+    }
+    case 'for': {
+      if (!statementContainsAwait(statement)) return [...emitStatement(statement), ...continuation()];
+      const advance = statement.increment
+        ? emitAwaitedExpression(statement.increment, (value) => [
+            `${value};`,
+            'return flighthq._internal._Async.flowNormal();',
+          ])
+        : ['return flighthq._internal._Async.flowNormal();'];
+      const condition = statement.condition ?? { kind: 'literal', value: true };
+      const iteration = [
+        'function():Dynamic {',
+        ...indent(
+          emitAwaitedExpression(condition, (value) => [
+            `if (!_Runtime.truthy(${value})) return flighthq._internal._Async.flowBreak();`,
+            `return flighthq._internal._Async.continueIteration(${emitFlowProtectedStatements(statementToStatements(statement.body))}, function():Dynamic {`,
+            ...indent(advance),
+            '});',
+          ]),
+        ),
+        '}',
+      ].join('\n');
+      const loop = () => [`return flighthq._internal._Async.repeatFlow(${iteration});`];
+      let body: string[];
+      if (Array.isArray(statement.initializer)) {
+        body = statement.initializer.map(
+          (variable) =>
+            `var ${safeName(variable.name)}:${variable.type ? emitType(variable.type) : 'Dynamic'} = cast _Runtime.UNDEFINED;`,
+        );
+        body.push(...emitFlatMapVariableInitializers(statement.initializer, 0, loop));
+      } else if (statement.initializer) {
+        body = emitAwaitedExpression(statement.initializer, (value) => [`${value};`, ...loop()]);
+      } else {
+        body = loop();
+      }
+      const flow = ['flighthq._internal._Async.protect(function():Dynamic {', ...indent(body), '})'].join('\n');
+      return emitFlowThenContinue(flow, continuation);
+    }
+    case 'forOf':
+      if (!statementContainsAwait(statement)) return [...emitStatement(statement), ...continuation()];
+      return emitAwaitedExpression(statement.iterable, (iterable) => {
+        const iterator = `__flowIterator${String(temporaryIndex++)}`;
+        const indexName = `__flowIndex${String(temporaryIndex++)}`;
+        const bodyStatements: IrStatement[] = [
+          ...(statement.bindings.length > 0
+            ? [{ declarations: statement.bindings, kind: 'variable' } as IrStatement]
+            : []),
+          ...statementToStatements(statement.body),
+        ];
+        const body = emitFlowScopedStatements(bodyStatements);
+        const iteration = statement.async
+          ? [
+              'function():Dynamic {',
+              `  return flighthq._internal._Async.flatMap(_Runtime.callProperty(${iterator}, 'next', cast ([] : Array<Dynamic>)), function(__step:Dynamic):Dynamic {`,
+              `    if (_Runtime.truthy(_Runtime.field(__step, 'done'))) return flighthq._internal._Async.flowBreak();`,
+              `    var ${safeName(statement.variable)}:Dynamic = _Runtime.field(__step, 'value');`,
+              ...indent(indent(body)),
+              '  });',
+              '}',
+            ].join('\n')
+          : [
+              'function():Dynamic {',
+              `  if (${indexName} >= ${iterator}.length) return flighthq._internal._Async.flowBreak();`,
+              `  var ${safeName(statement.variable)}:Dynamic = ${iterator}[${indexName}++];`,
+              ...indent(body),
+              '}',
+            ].join('\n');
+        const lines = statement.async
+          ? [`var ${iterator}:Dynamic = _Runtime.asyncIterator(${iterable});`]
+          : [`var ${iterator}:Array<Dynamic> = _Runtime.iterable(${iterable});`, `var ${indexName}:Int = 0;`];
+        lines.push(...emitFlowThenContinue(`flighthq._internal._Async.repeatFlow(${iteration})`, continuation));
+        return lines;
+      });
+    case 'do':
+    case 'switch':
+      return [...emitStatement(statement), ...continuation()];
+    case 'try': {
+      let flow = emitFlowProtectedStatements(statementToStatements(statement.tryBody));
+      if (statement.catchBody) {
+        const error = safeName(statement.catchName ?? '__error');
+        flow = [
+          `flighthq._internal._Async.recover(${flow}, function(__caughtError:Dynamic):Dynamic {`,
+          `  var ${error}:Dynamic = __caughtError;`,
+          ...indent([`return ${emitFlowProtectedStatements(statementToStatements(statement.catchBody))};`]),
+          '})',
+        ].join('\n');
+      }
+      if (statement.finallyBody) {
+        flow = [
+          `flighthq._internal._Async.finalizeFlow(${flow}, function():Dynamic {`,
+          ...indent(emitFlowScopedStatements(statementToStatements(statement.finallyBody))),
+          '})',
+        ].join('\n');
+      }
+      return emitFlowThenContinue(flow, continuation);
+    }
+    default:
+      throw new Error('Flow lowering encountered an unsupported statement');
+  }
+}
+
+function emitFlowProtectedStatements(statements: IrStatement[]): string {
+  return [
+    'flighthq._internal._Async.protect(function():Dynamic {',
+    ...indent(emitFlowScopedStatements(statements)),
+    '})',
+  ].join('\n');
+}
+
+function emitFlowThenContinue(value: string, continuation: () => string[]): string[] {
+  return [
+    `return flighthq._internal._Async.continueFlow(${value}, function():Dynamic {`,
+    ...indent(continuation()),
+    '});',
+  ];
+}
+
+function statementToStatements(statement: IrStatement): IrStatement[] {
+  return statement.kind === 'block' ? statement.statements : [statement];
+}
+
 function emitFlatMapStatements(statements: IrStatement[], index = 0): string[] {
   if (index >= statements.length) {
     return ['return flighthq._internal._Async.resolve(_Runtime.UNDEFINED);'];
@@ -503,16 +717,47 @@ function emitFlatMapVariableInitializers(
 }
 
 function emitAwaitedExpression(expression: IrExpression, continuation: (value: string) => string[]): string[] {
+  if (expression.kind === 'conditional' && expressionContainsAwait(expression)) {
+    return emitAwaitedExpression(expression.condition, (condition) => [
+      `if (_Runtime.truthy(${condition})) {`,
+      ...indent(emitAwaitedExpression(expression.whenTrue, continuation)),
+      '} else {',
+      ...indent(emitAwaitedExpression(expression.whenFalse, continuation)),
+      '}',
+    ]);
+  }
+  if (
+    expression.kind === 'binary' &&
+    ['&&', '??', '??undefined', '||'].includes(expression.operator) &&
+    expressionContainsAwait(expression.right)
+  ) {
+    return emitAwaitedExpression(expression.left, (left) => {
+      const right = emitAwaitedExpression(expression.right, continuation);
+      if (expression.operator === '&&') {
+        return [`if (_Runtime.truthy(${left})) {`, ...indent(right), '} else {', ...indent(continuation(left)), '}'];
+      }
+      if (expression.operator === '||') {
+        return [`if (_Runtime.truthy(${left})) {`, ...indent(continuation(left)), '} else {', ...indent(right), '}'];
+      }
+      const absent =
+        expression.operator === '??undefined'
+          ? `_Runtime.strictEquals(${left}, _Runtime.UNDEFINED)`
+          : `_Runtime.strictEquals(${left}, null)`;
+      return [`if (${absent}) {`, ...indent(right), '} else {', ...indent(continuation(left)), '}'];
+    });
+  }
   const awaits: ExtractedAwait[] = [];
   const normalized = extractAwaits(expression, awaits);
   let lines = continuation(emitExpression(normalized));
   for (let index = awaits.length - 1; index >= 0; index -= 1) {
     const awaited = awaits[index]!;
-    lines = [
-      `return flighthq._internal._Async.flatMap(${emitExpression(awaited.expression)}, function(${awaited.name}:Dynamic):Dynamic {`,
-      ...indent(lines),
-      '});',
-    ];
+    lines = awaited.awaited
+      ? [
+          `return flighthq._internal._Async.flatMap(${emitExpression(awaited.expression)}, function(${awaited.name}:Dynamic):Dynamic {`,
+          ...indent(lines),
+          '});',
+        ]
+      : [`var ${awaited.name}:Dynamic = ${emitExpression(awaited.expression)};`, ...lines];
   }
   return lines;
 }
@@ -521,13 +766,29 @@ function extractAwaits(expression: IrExpression, awaits: ExtractedAwait[]): IrEx
   if (expression.kind === 'await') {
     const awaitedExpression = extractAwaits(expression.expression, awaits);
     const name = `__awaitValue${String(temporaryIndex++)}`;
-    awaits.push({ expression: awaitedExpression, name });
+    awaits.push({ awaited: true, expression: awaitedExpression, name });
     return { kind: 'identifier', name };
   }
   switch (expression.kind) {
     case 'array':
       return { ...expression, elements: expression.elements.map((item) => extractAwaits(item, awaits)) };
-    case 'assignment':
+    case 'assignment': {
+      let left = extractAwaits(expression.left, awaits);
+      if (expressionContainsAwait(expression.right)) {
+        if (left.kind === 'element') {
+          const object = extractSynchronousValue(left.object, awaits);
+          const index = extractSynchronousValue(left.index, awaits);
+          left = { ...left, index, object };
+        } else if (left.kind === 'property') {
+          left = { ...left, object: extractSynchronousValue(left.object, awaits) };
+        }
+      }
+      return {
+        ...expression,
+        left,
+        right: extractAwaits(expression.right, awaits),
+      };
+    }
     case 'binary':
       return {
         ...expression,
@@ -598,6 +859,12 @@ function extractAwaits(expression: IrExpression, awaits: ExtractedAwait[]): IrEx
   }
 }
 
+function extractSynchronousValue(expression: IrExpression, awaits: ExtractedAwait[]): IrExpression {
+  const name = `__beforeAwait${String(temporaryIndex++)}`;
+  awaits.push({ awaited: false, expression, name });
+  return { kind: 'identifier', name };
+}
+
 function canFlatMapStatements(statements: IrStatement[]): boolean {
   return statements.every((statement) => {
     switch (statement.kind) {
@@ -605,6 +872,70 @@ function canFlatMapStatements(statements: IrStatement[]): boolean {
       case 'return':
       case 'throw':
         return !statement.expression || expressionSupportsFlatMapExtraction(statement.expression);
+      case 'variable':
+        return statement.declarations.every(
+          (variable) => !variable.initializer || expressionSupportsFlatMapExtraction(variable.initializer),
+        );
+      default:
+        return false;
+    }
+  });
+}
+
+function canFlowStatements(statements: IrStatement[], inLoop = false): boolean {
+  return statements.every((statement) => {
+    switch (statement.kind) {
+      case 'block':
+        return canFlowStatements(statement.statements, inLoop);
+      case 'break':
+      case 'continue':
+        return inLoop;
+      case 'expression':
+      case 'return':
+      case 'throw':
+        return !statement.expression || expressionSupportsFlatMapExtraction(statement.expression);
+      case 'if':
+        return (
+          expressionSupportsFlatMapExtraction(statement.condition) &&
+          canFlowStatements(statementToStatements(statement.consequent), inLoop) &&
+          (!statement.otherwise || canFlowStatements(statementToStatements(statement.otherwise), inLoop))
+        );
+      case 'while':
+        return (
+          (!statementContainsAwait(statement) && !statementContainsReturn(statement)) ||
+          (expressionSupportsFlatMapExtraction(statement.condition) &&
+            canFlowStatements(statementToStatements(statement.body), true))
+        );
+      case 'for':
+        return (
+          (!statementContainsAwait(statement) && !statementContainsReturn(statement)) ||
+          ((Array.isArray(statement.initializer)
+            ? statement.initializer.every(
+                (variable) => !variable.initializer || expressionSupportsFlatMapExtraction(variable.initializer),
+              )
+            : !statement.initializer || expressionSupportsFlatMapExtraction(statement.initializer)) &&
+            (!statement.condition || expressionSupportsFlatMapExtraction(statement.condition)) &&
+            (!statement.increment || expressionSupportsFlatMapExtraction(statement.increment)) &&
+            canFlowStatements(statementToStatements(statement.body), true))
+        );
+      case 'forOf':
+        return (
+          (!statementContainsAwait(statement) && !statementContainsReturn(statement)) ||
+          (expressionSupportsFlatMapExtraction(statement.iterable) &&
+            statement.bindings.every(
+              (variable) => !variable.initializer || expressionSupportsFlatMapExtraction(variable.initializer),
+            ) &&
+            canFlowStatements(statementToStatements(statement.body), true))
+        );
+      case 'do':
+      case 'switch':
+        return !statementContainsAwait(statement) && !statementContainsReturn(statement);
+      case 'try':
+        return (
+          canFlowStatements(statementToStatements(statement.tryBody), inLoop) &&
+          (!statement.catchBody || canFlowStatements(statementToStatements(statement.catchBody), inLoop)) &&
+          (!statement.finallyBody || canFlowStatements(statementToStatements(statement.finallyBody), inLoop))
+        );
       case 'variable':
         return statement.declarations.every(
           (variable) => !variable.initializer || expressionSupportsFlatMapExtraction(variable.initializer),
@@ -623,16 +954,11 @@ function expressionSupportsFlatMapExtraction(expression: IrExpression): boolean 
       return expression.elements.every(expressionSupportsFlatMapExtraction);
     case 'assignment':
       return (
-        (!expressionContainsAwait(expression) || expression.left.kind === 'identifier') &&
-        expressionSupportsFlatMapExtraction(expression.left) &&
-        expressionSupportsFlatMapExtraction(expression.right)
+        expressionSupportsFlatMapExtraction(expression.left) && expressionSupportsFlatMapExtraction(expression.right)
       );
     case 'binary':
       return (
-        (!['&&', '??', '??undefined', '||'].includes(expression.operator) ||
-          !expressionContainsAwait(expression.right)) &&
-        expressionSupportsFlatMapExtraction(expression.left) &&
-        expressionSupportsFlatMapExtraction(expression.right)
+        expressionSupportsFlatMapExtraction(expression.left) && expressionSupportsFlatMapExtraction(expression.right)
       );
     case 'call':
       return (
@@ -646,8 +972,6 @@ function expressionSupportsFlatMapExtraction(expression: IrExpression): boolean 
       return expressionSupportsFlatMapExtraction(expression.expression);
     case 'conditional':
       return (
-        !expressionContainsAwait(expression.whenTrue) &&
-        !expressionContainsAwait(expression.whenFalse) &&
         expressionSupportsFlatMapExtraction(expression.condition) &&
         expressionSupportsFlatMapExtraction(expression.whenTrue) &&
         expressionSupportsFlatMapExtraction(expression.whenFalse)
@@ -748,6 +1072,40 @@ function statementContainsAwait(statement: IrStatement): boolean {
       return statement.declarations.some(
         (variable) => variable.initializer && expressionContainsAwait(variable.initializer),
       );
+  }
+}
+
+function statementContainsReturn(statement: IrStatement): boolean {
+  switch (statement.kind) {
+    case 'return':
+      return true;
+    case 'block':
+      return statement.statements.some(statementContainsReturn);
+    case 'do':
+    case 'while':
+      return statementContainsReturn(statement.body);
+    case 'for':
+    case 'forOf':
+      return statementContainsReturn(statement.body);
+    case 'if':
+      return (
+        statementContainsReturn(statement.consequent) ||
+        Boolean(statement.otherwise && statementContainsReturn(statement.otherwise))
+      );
+    case 'switch':
+      return statement.cases.some((case_) => case_.statements.some(statementContainsReturn));
+    case 'try':
+      return (
+        statementContainsReturn(statement.tryBody) ||
+        Boolean(statement.catchBody && statementContainsReturn(statement.catchBody)) ||
+        Boolean(statement.finallyBody && statementContainsReturn(statement.finallyBody))
+      );
+    case 'break':
+    case 'continue':
+    case 'expression':
+    case 'throw':
+    case 'variable':
+      return false;
   }
 }
 
@@ -1155,6 +1513,9 @@ function emitExpression(expression: IrExpression): string {
         if (expression.right.kind === 'identifier' && expression.right.name === 'Error') {
           return `_Runtime.isError(${emitExpression(expression.left)})`;
         }
+        if (emitExpression(expression.right) === "_Runtime.globalValue('Promise')") {
+          return `flighthq._internal._Async.isPromise(${emitExpression(expression.left)})`;
+        }
         if (
           expression.right.kind === 'identifier' &&
           ['Float64Array', 'Int32Array', 'Int8Array', 'Uint32Array', 'Uint8Array', 'Uint8ClampedArray'].includes(
@@ -1214,32 +1575,26 @@ function emitExpression(expression: IrExpression): string {
           const body = indent(emitFlatMapFunctionBody(statements, expression.parameters)).join('\n');
           return `function${name}(${parameters})${returns} {\n${body}\n}`;
         }
+        if (statementsContainAwait(statements) && canFlowStatements(statements)) {
+          const body = indent(emitFlowFunctionBody(statements, expression.parameters)).join('\n');
+          return `function${name}(${parameters})${returns} {\n${body}\n}`;
+        }
         if (!statementsContainAwait(statements)) {
           const bodyLines = emitFunctionBody(statements, expression.parameters, expression.returns, false);
           if (expression.returns && !isVoidType(expression.returns)) bodyLines.push('return cast null;');
           const body = indent(emitPromiseProtectedBody(bodyLines)).join('\n');
           return `function${name}(${parameters})${returns} {\n${body}\n}`;
         }
+        throw new Error('Generator async lowering does not support a nested async function');
       }
       if (expression.expression) {
-        if (expression.async) {
-          const output = `function${name}(${parameters})${returns} {\n#if js\n  return cast ${emitExpression(expression.expression)};\n#else\n  return cast null;\n#end\n}`;
-          return `flighthq._internal._Async.make(${output})`;
-        }
         const output = `function${name}(${parameters})${returns} return ${emitExpression(expression.expression)}`;
         return output;
       }
       const bodyLines = emitFunctionBody(expression.body, expression.parameters, expression.returns, expression.async);
-      if (expression.async) {
-        if (expression.returns && isPromiseNothingType(expression.returns)) {
-          bodyLines.push('#if js', 'return;', '#else', 'return cast null;', '#end');
-        } else {
-          bodyLines.push('return cast null;');
-        }
-      }
       const body = indent(bodyLines).join('\n');
       const output = `function${name}(${parameters})${returns} {\n${body}\n}`;
-      return expression.async ? `flighthq._internal._Async.make(${output})` : output;
+      return output;
     }
     case 'identifier':
       if (expression.name === 'super' || expression.name === 'this') return expression.name;
@@ -1256,6 +1611,12 @@ function emitExpression(expression: IrExpression): string {
         return `${String(expression.value)}.0`;
       return String(expression.value);
     case 'new':
+      if (
+        (expression.callee.kind === 'identifier' && expression.callee.name === 'Promise') ||
+        emitExpression(expression.callee) === "_Runtime.globalValue('Promise')"
+      ) {
+        return `flighthq._internal._Async.create(${expression.arguments.map(emitExpression).join(', ')})`;
+      }
       if (emitExpression(expression.callee) === 'TypeError') {
         return `_Runtime.typeError(${expression.arguments.map(emitExpression).join(', ')})`;
       }
@@ -1507,6 +1868,13 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
       return `Std.string(${expression.arguments.map(emitExpression).join(', ')})`;
     }
   }
+  if (
+    expression.callee.kind === 'property' &&
+    emitExpression(expression.callee.object) === "_Runtime.globalValue('Promise')" &&
+    ['all', 'allSettled', 'race', 'reject', 'resolve'].includes(expression.callee.name)
+  ) {
+    return `flighthq._internal._Async.${expression.callee.name}(${expression.arguments.map(emitExpression).join(', ')})`;
+  }
   if (expression.arguments.some((argument) => argument.kind === 'spread')) {
     const chunks = expression.arguments.map((argument) =>
       argument.kind === 'spread'
@@ -1625,6 +1993,9 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
       const start = expression.arguments[0] ? emitExpression(expression.arguments[0]) : '0';
       const end = expression.arguments[1] ? emitExpression(expression.arguments[1]) : 'null';
       return `_Runtime.slice(${owner}, ${start}, ${end})`;
+    }
+    if (name === 'catch' && expression.arguments.length === 1) {
+      return `flighthq._internal._Async.recover(${owner}, ${emitExpression(expression.arguments[0]!)})`;
     }
     if (name === 'codePointAt') {
       return `_Runtime.codePointAt(${owner}, ${expression.arguments.map(emitExpression).join(', ')})`;

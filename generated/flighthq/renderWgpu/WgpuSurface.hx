@@ -31,53 +31,63 @@ class WgpuSurface {
   }
 
   public static function createSurfaceFromWgpuRenderState(state:WgpuRenderState):flighthq._internal._Promise<Surface> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Surface> {
-      var runtime:Dynamic = cast _Runtime.UNDEFINED;
-      var buffer:Dynamic = cast _Runtime.UNDEFINED;
-      var width:Dynamic = cast _Runtime.UNDEFINED;
-      var height:Dynamic = cast _Runtime.UNDEFINED;
-      var bytesPerRow:Dynamic = cast _Runtime.UNDEFINED;
-      var mapped:Dynamic = cast _Runtime.UNDEFINED;
-      var surface:Dynamic = cast _Runtime.UNDEFINED;
-      var out:Dynamic = cast _Runtime.UNDEFINED;
-      var swizzleBGRA:Dynamic = cast _Runtime.UNDEFINED;
-      runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-      buffer = _Runtime.field(runtime, 'frameCaptureBuffer');
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(buffer, null), function():Dynamic return cast _Runtime.strictEquals(buffer, _Runtime.field(_Runtime, 'UNDEFINED'))))) {
-        throw _Runtime.error('createSurfaceFromWgpuRenderState requires enableWgpuFrameCapture(state) before rendering, then a submitWgpuRenderPass.');
-      }
-      width = _Runtime.field(runtime, 'frameCaptureWidth');
-      height = _Runtime.field(runtime, 'frameCaptureHeight');
-      bytesPerRow = _Runtime.field(runtime, 'frameCaptureBytesPerRow');
-      flighthq._internal._Async.awaitValue(_Runtime.callProperty(buffer, 'mapAsync', cast ([flighthq._internal.backend.WebGpuConstantsBackend.value('GPUMapMode', 'READ')] : Array<Dynamic>)));
-      mapped = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [_Runtime.callProperty(buffer, 'getMappedRange', cast ([] : Array<Dynamic>))]);
-      surface = _Runtime.callValue(createSurface, cast ([width, height] : Array<Dynamic>));
-      out = _Runtime.field(surface, 'data');
-      swizzleBGRA = _Runtime.orValue(_Runtime.strictEquals(_Runtime.field(state, 'format'), 'bgra8unorm'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(state, 'format'), 'bgra8unorm-srgb'));
-      {
-        var y:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(y, height, '<'))) {
-          var srcRow:Dynamic = (y * bytesPerRow);
-          var dstRow:Dynamic = ((y * width) * 4.0);
-          {
-            var x:Dynamic = 0.0;
-            while (_Runtime.truthy(_Runtime.compare(x, width, '<'))) {
-              var s:Dynamic = (srcRow + (x * 4.0));
-              var d:Dynamic = (dstRow + (x * 4.0));
-              _Runtime.setIndex(out, d, _Runtime.select(swizzleBGRA, function():Dynamic return cast _Runtime.getIndex(mapped, (s + 2.0)), function():Dynamic return cast _Runtime.getIndex(mapped, s)));
-              _Runtime.setIndex(out, (d + 1.0), _Runtime.getIndex(mapped, (s + 1.0)));
-              _Runtime.setIndex(out, (d + 2.0), _Runtime.select(swizzleBGRA, function():Dynamic return cast _Runtime.getIndex(mapped, s), function():Dynamic return cast _Runtime.getIndex(mapped, (s + 2.0))));
-              _Runtime.setIndex(out, (d + 3.0), _Runtime.getIndex(mapped, (s + 3.0)));
-              x++;
-            }
-          }
-          y++;
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var runtime:Dynamic = cast _Runtime.UNDEFINED;
+        var buffer:Dynamic = cast _Runtime.UNDEFINED;
+        var width:Dynamic = cast _Runtime.UNDEFINED;
+        var height:Dynamic = cast _Runtime.UNDEFINED;
+        var bytesPerRow:Dynamic = cast _Runtime.UNDEFINED;
+        var mapped:Dynamic = cast _Runtime.UNDEFINED;
+        var surface:Dynamic = cast _Runtime.UNDEFINED;
+        var out:Dynamic = cast _Runtime.UNDEFINED;
+        var swizzleBGRA:Dynamic = cast _Runtime.UNDEFINED;
+        runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
+        buffer = _Runtime.field(runtime, 'frameCaptureBuffer');
+        var __flowBranch0:Dynamic;
+        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(buffer, null), function():Dynamic return cast _Runtime.strictEquals(buffer, _Runtime.field(_Runtime, 'UNDEFINED'))))) {
+          __flowBranch0 = flighthq._internal._Async.protect(function():Dynamic {
+            return flighthq._internal._Async.reject(_Runtime.error('createSurfaceFromWgpuRenderState requires enableWgpuFrameCapture(state) before rendering, then a submitWgpuRenderPass.'));
+          });
+        } else {
+          __flowBranch0 = flighthq._internal._Async.flowNormal();
         }
-      }
-      _Runtime.callProperty(buffer, 'unmap', cast ([] : Array<Dynamic>));
-      return cast surface;
-      return cast null;
-    })();
+        return flighthq._internal._Async.continueFlow(__flowBranch0, function():Dynamic {
+          width = _Runtime.field(runtime, 'frameCaptureWidth');
+          height = _Runtime.field(runtime, 'frameCaptureHeight');
+          bytesPerRow = _Runtime.field(runtime, 'frameCaptureBytesPerRow');
+          return flighthq._internal._Async.flatMap(_Runtime.callProperty(buffer, 'mapAsync', cast ([flighthq._internal.backend.WebGpuConstantsBackend.value('GPUMapMode', 'READ')] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
+            __awaitValue1;
+            mapped = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [_Runtime.callProperty(buffer, 'getMappedRange', cast ([] : Array<Dynamic>))]);
+            surface = _Runtime.callValue(createSurface, cast ([width, height] : Array<Dynamic>));
+            out = _Runtime.field(surface, 'data');
+            swizzleBGRA = _Runtime.orValue(_Runtime.strictEquals(_Runtime.field(state, 'format'), 'bgra8unorm'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(state, 'format'), 'bgra8unorm-srgb'));
+            {
+              var y:Dynamic = 0.0;
+              while (_Runtime.truthy(_Runtime.compare(y, height, '<'))) {
+                var srcRow:Dynamic = (y * bytesPerRow);
+                var dstRow:Dynamic = ((y * width) * 4.0);
+                {
+                  var x:Dynamic = 0.0;
+                  while (_Runtime.truthy(_Runtime.compare(x, width, '<'))) {
+                    var s:Dynamic = (srcRow + (x * 4.0));
+                    var d:Dynamic = (dstRow + (x * 4.0));
+                    _Runtime.setIndex(out, d, _Runtime.select(swizzleBGRA, function():Dynamic return cast _Runtime.getIndex(mapped, (s + 2.0)), function():Dynamic return cast _Runtime.getIndex(mapped, s)));
+                    _Runtime.setIndex(out, (d + 1.0), _Runtime.getIndex(mapped, (s + 1.0)));
+                    _Runtime.setIndex(out, (d + 2.0), _Runtime.select(swizzleBGRA, function():Dynamic return cast _Runtime.getIndex(mapped, s), function():Dynamic return cast _Runtime.getIndex(mapped, (s + 2.0))));
+                    _Runtime.setIndex(out, (d + 3.0), _Runtime.getIndex(mapped, (s + 3.0)));
+                    x++;
+                  }
+                }
+                y++;
+              }
+            }
+            _Runtime.callProperty(buffer, 'unmap', cast ([] : Array<Dynamic>));
+            return flighthq._internal._Async.flowReturn(surface);
+          });
+        });
+      })
+    );
   }
 
   public static function enableWgpuFrameCapture(state:WgpuRenderState):Void {

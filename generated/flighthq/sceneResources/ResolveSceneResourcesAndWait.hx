@@ -18,58 +18,68 @@ import flighthq.types._internal._ResourceResolutionStateValues.ResourceResolutio
 
 class ResolveSceneResourcesAndWait {
   public static function loadSceneResources(scene:SceneNode, resolver:SceneResourceResolver, ?options:LoadSceneResourcesOptions):flighthq._internal._Promise<flighthq._internal._Nothing> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<flighthq._internal._Nothing> {
-      var refs:Dynamic = cast _Runtime.UNDEFINED;
-      var runtime:Dynamic = cast _Runtime.UNDEFINED;
-      var total:Dynamic = cast _Runtime.UNDEFINED;
-      var loaded:Dynamic = cast _Runtime.UNDEFINED;
-      var pending:Array<flighthq._internal._Promise<flighthq._internal._Nothing>> = cast _Runtime.UNDEFINED;
-      var progress:Dynamic = cast _Runtime.UNDEFINED;
-      refs = _Runtime.callValue(ResolveSceneResourcesAndWait.getSelectedSceneResourceReferences__resolveSceneResourcesAndWait, cast ([scene, resolver, options] : Array<Dynamic>));
-      _Runtime.callValue(resolveSceneResources, cast ([scene, resolver, options] : Array<Dynamic>));
-      runtime = _Runtime.getIndex((cast resolver : SceneResourceResolverWithRuntime), SceneResourceResolverRuntimeKey);
-      total = _Runtime.field(refs, 'size');
-      loaded = 0.0;
-      pending = cast ([] : Array<Dynamic>);
-      progress = _Runtime.optionalField(options, 'progress');
-      for (ref in _Runtime.iterable(refs)) {
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(ref, 'state'), ResourceResolutionStateValue.Resolved), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(ref, 'state'), ResourceResolutionStateValue.Failed)))) {
-          loaded++;
-          continue;
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var refs:Dynamic = cast _Runtime.UNDEFINED;
+        var runtime:Dynamic = cast _Runtime.UNDEFINED;
+        var total:Dynamic = cast _Runtime.UNDEFINED;
+        var loaded:Dynamic = cast _Runtime.UNDEFINED;
+        var pending:Array<flighthq._internal._Promise<flighthq._internal._Nothing>> = cast _Runtime.UNDEFINED;
+        var progress:Dynamic = cast _Runtime.UNDEFINED;
+        refs = _Runtime.callValue(ResolveSceneResourcesAndWait.getSelectedSceneResourceReferences__resolveSceneResourcesAndWait, cast ([scene, resolver, options] : Array<Dynamic>));
+        _Runtime.callValue(resolveSceneResources, cast ([scene, resolver, options] : Array<Dynamic>));
+        runtime = _Runtime.getIndex((cast resolver : SceneResourceResolverWithRuntime), SceneResourceResolverRuntimeKey);
+        total = _Runtime.field(refs, 'size');
+        loaded = 0.0;
+        pending = cast ([] : Array<Dynamic>);
+        progress = _Runtime.optionalField(options, 'progress');
+        for (ref in _Runtime.iterable(refs)) {
+          if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(ref, 'state'), ResourceResolutionStateValue.Resolved), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(ref, 'state'), ResourceResolutionStateValue.Failed)))) {
+            loaded++;
+            continue;
+          }
+          var entry:Dynamic = _Runtime.callProperty(_Runtime.field(runtime, 'inFlight'), 'get', cast ([ref] : Array<Dynamic>));
+          if (_Runtime.truthy(_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) { continue; }
+          _Runtime.callProperty(pending, 'push', cast ([_Runtime.callProperty(_Runtime.field(entry, 'promise'), 'then', cast ([function() {
+            loaded++;
+            if (_Runtime.truthy(!_Runtime.strictEquals(progress, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callValue(emitSignal, cast ([progress, { loaded: loaded, total: total }] : Array<Dynamic>)); }
+          }] : Array<Dynamic>))] : Array<Dynamic>));
         }
-        var entry:Dynamic = _Runtime.callProperty(_Runtime.field(runtime, 'inFlight'), 'get', cast ([ref] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) { continue; }
-        _Runtime.callProperty(pending, 'push', cast ([_Runtime.callProperty(_Runtime.field(entry, 'promise'), 'then', cast ([function() {
-          loaded++;
-          if (_Runtime.truthy(!_Runtime.strictEquals(progress, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callValue(emitSignal, cast ([progress, { loaded: loaded, total: total }] : Array<Dynamic>)); }
-        }] : Array<Dynamic>))] : Array<Dynamic>));
-      }
-      if (_Runtime.truthy(!_Runtime.strictEquals(progress, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callValue(emitSignal, cast ([progress, { loaded: loaded, total: total }] : Array<Dynamic>)); }
-      flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.globalValue('Promise'), 'allSettled', cast ([pending] : Array<Dynamic>)));
-      #if js
-      return;
-      #else
-      return cast null;
-      #end
-    })();
+        var __flowBranch4:Dynamic;
+        if (_Runtime.truthy(!_Runtime.strictEquals(progress, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+          __flowBranch4 = flighthq._internal._Async.protect(function():Dynamic {
+            _Runtime.callValue(emitSignal, cast ([progress, { loaded: loaded, total: total }] : Array<Dynamic>));
+            return flighthq._internal._Async.flowNormal();
+          });
+        } else {
+          __flowBranch4 = flighthq._internal._Async.flowNormal();
+        }
+        return flighthq._internal._Async.continueFlow(__flowBranch4, function():Dynamic {
+          return flighthq._internal._Async.flatMap(flighthq._internal._Async.allSettled(pending), function(__awaitValue5:Dynamic):Dynamic {
+            __awaitValue5;
+            return flighthq._internal._Async.flowNormal();
+          });
+        });
+      })
+    );
   }
 
   public static function waitForSceneResourceResolver(resolver:SceneResourceResolver):flighthq._internal._Promise<flighthq._internal._Nothing> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<flighthq._internal._Nothing> {
-      var runtime:Dynamic = cast _Runtime.UNDEFINED;
-      var promises:Array<flighthq._internal._Promise<flighthq._internal._Nothing>> = cast _Runtime.UNDEFINED;
-      runtime = _Runtime.getIndex((cast resolver : SceneResourceResolverWithRuntime), SceneResourceResolverRuntimeKey);
-      promises = cast ([] : Array<Dynamic>);
-      for (entry in _Runtime.iterable(_Runtime.callProperty(_Runtime.field(runtime, 'inFlight'), 'values', cast ([] : Array<Dynamic>)))) {
-        _Runtime.callProperty(promises, 'push', cast ([_Runtime.field(entry, 'promise')] : Array<Dynamic>));
-      }
-      flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.globalValue('Promise'), 'allSettled', cast ([promises] : Array<Dynamic>)));
-      #if js
-      return;
-      #else
-      return cast null;
-      #end
-    })();
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var runtime:Dynamic = cast _Runtime.UNDEFINED;
+        var promises:Array<flighthq._internal._Promise<flighthq._internal._Nothing>> = cast _Runtime.UNDEFINED;
+        runtime = _Runtime.getIndex((cast resolver : SceneResourceResolverWithRuntime), SceneResourceResolverRuntimeKey);
+        promises = cast ([] : Array<Dynamic>);
+        for (entry in _Runtime.iterable(_Runtime.callProperty(_Runtime.field(runtime, 'inFlight'), 'values', cast ([] : Array<Dynamic>)))) {
+          _Runtime.callProperty(promises, 'push', cast ([_Runtime.field(entry, 'promise')] : Array<Dynamic>));
+        }
+        return flighthq._internal._Async.flatMap(flighthq._internal._Async.allSettled(promises), function(__awaitValue10:Dynamic):Dynamic {
+          __awaitValue10;
+          return flighthq._internal._Async.flowNormal();
+        });
+      })
+    );
   }
 
   public static function getSelectedSceneResourceReferences__resolveSceneResourcesAndWait(scene:SceneNode, resolver:SceneResourceResolver, ?options:LoadSceneResourcesOptions):Dynamic {

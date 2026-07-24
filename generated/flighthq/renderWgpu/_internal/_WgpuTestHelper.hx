@@ -109,26 +109,25 @@ class _WgpuTestHelper {
   }
 
   public static function makeAdapter__wgpuTestHelper():Dynamic {
-    return cast (cast (cast { limits: { maxBindGroups: 8.0, minUniformBufferOffsetAlignment: 256.0 }, requestDevice: function() return _Runtime.callProperty(_Runtime.globalValue('Promise'), 'resolve', cast ([_Runtime.callValue(_WgpuTestHelper.makeDevice__wgpuTestHelper, cast ([] : Array<Dynamic>))] : Array<Dynamic>)) } : Dynamic) : Dynamic);
+    return cast (cast (cast { limits: { maxBindGroups: 8.0, minUniformBufferOffsetAlignment: 256.0 }, requestDevice: function() return flighthq._internal._Async.resolve(_Runtime.callValue(_WgpuTestHelper.makeDevice__wgpuTestHelper, cast ([] : Array<Dynamic>))) } : Dynamic) : Dynamic);
     return cast null;
   }
 
   public static function createWgpuRenderStateForTest():flighthq._internal._Promise<WgpuRenderState> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<WgpuRenderState> {
+    return cast flighthq._internal._Async.protect(function():Dynamic {
       var canvas:Dynamic = cast _Runtime.UNDEFINED;
       canvas = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
       flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', 800.0);
       flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', 600.0);
-      return cast _Runtime.callValue(createWgpuRenderState, cast ([canvas] : Array<Dynamic>));
-      return cast null;
-    })();
+      return flighthq._internal._Async.resolve(_Runtime.callValue(createWgpuRenderState, cast ([canvas] : Array<Dynamic>)));
+    });
   }
 
   public static function installWgpuMock():Void {
     var gpu:Dynamic = cast _Runtime.UNDEFINED;
     var origGetContext:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(_WgpuTestHelper.installWgpuConstants__wgpuTestHelper, cast ([] : Array<Dynamic>));
-    gpu = (cast (cast { getPreferredCanvasFormat: function() return (cast 'bgra8unorm' : Dynamic), requestAdapter: function() return _Runtime.callProperty(_Runtime.globalValue('Promise'), 'resolve', cast ([_Runtime.callValue(_WgpuTestHelper.makeAdapter__wgpuTestHelper, cast ([] : Array<Dynamic>))] : Array<Dynamic>)) } : Dynamic) : Dynamic);
+    gpu = (cast (cast { getPreferredCanvasFormat: function() return (cast 'bgra8unorm' : Dynamic), requestAdapter: function() return flighthq._internal._Async.resolve(_Runtime.callValue(_WgpuTestHelper.makeAdapter__wgpuTestHelper, cast ([] : Array<Dynamic>))) } : Dynamic) : Dynamic);
     if (_Runtime.truthy(_Runtime.looseEquals(_Runtime.field(_Runtime.globalValue('globalThis'), 'navigator'), null))) {
       flighthq._internal.DynamicObject.defineProperty(_Runtime.globalValue('globalThis'), 'navigator', { value: {  }, configurable: true, writable: true });
     }

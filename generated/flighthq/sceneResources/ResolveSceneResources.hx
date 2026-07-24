@@ -187,7 +187,7 @@ class ResolveSceneResources {
     }
   }
 
-  public static final _resolvedVoid__resolveSceneResources:flighthq._internal._Promise<flighthq._internal._Nothing> = _Runtime.callProperty(_Runtime.globalValue('Promise'), 'resolve', cast ([] : Array<Dynamic>));
+  public static final _resolvedVoid__resolveSceneResources:flighthq._internal._Promise<flighthq._internal._Nothing> = flighthq._internal._Async.resolve();
 
   public static function createImageResourceFailure__resolveSceneResources(cause:Dynamic):ImageResourceFailure {
     if (_Runtime.truthy(_Runtime.isError(cause))) {

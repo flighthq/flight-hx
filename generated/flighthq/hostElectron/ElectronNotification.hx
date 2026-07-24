@@ -23,51 +23,58 @@ class ElectronNotification {
     showListener = null;
     live = _Runtime.construct(_Runtime.globalValue('Map'), []);
     nextId = 0.0;
-    return cast { notify: flighthq._internal._Async.make(function(request:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var id:Dynamic = cast _Runtime.UNDEFINED;
-      var actions:Dynamic = cast _Runtime.UNDEFINED;
-      var n:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(_Runtime.field(electron, 'Notification'), 'isSupported', cast ([] : Array<Dynamic>))))) { return cast ''; }
-      id = _Runtime.coalesce(_Runtime.field(request, 'id'), function():Dynamic return cast 'notification-' + Std.string(nextId++) + '');
-      actions = _Runtime.coalesce(_Runtime.field(request, 'actions'), function():Dynamic return cast cast ([] : Array<Dynamic>));
-      n = _Runtime.construct(_Runtime.field(electron, 'Notification'), [{ title: _Runtime.field(request, 'title'), body: _Runtime.field(request, 'body'), icon: _Runtime.field(request, 'icon'), silent: _Runtime.field(request, 'silent'), actions: _Runtime.callProperty(actions, 'map', cast ([function(a:Dynamic) return { type: 'button', text: _Runtime.field(a, 'title') }] : Array<Dynamic>)) }]);
-      _Runtime.callProperty(n, 'on', cast (['show', function() return _Runtime.callOptionalValue(showListener, cast ([id] : Array<Dynamic>))] : Array<Dynamic>));
-      _Runtime.callProperty(n, 'on', cast (['click', function() return _Runtime.callOptionalValue(clickListener, cast ([id] : Array<Dynamic>))] : Array<Dynamic>));
-      _Runtime.callProperty(n, 'on', cast (['action', function(...args:Dynamic) {
-        var index:Dynamic = cast _Runtime.UNDEFINED;
-        index = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([_Runtime.getIndex(args, 1.0)] : Array<Dynamic>));
-        _Runtime.callOptionalValue(actionListener, cast ([id, Std.string(_Runtime.coalesce(_Runtime.optionalField(_Runtime.getIndex(actions, index), 'id'), function():Dynamic return cast ''))] : Array<Dynamic>));
-      }] : Array<Dynamic>));
-      _Runtime.callProperty(n, 'on', cast (['close', function() {
-        _Runtime.callProperty(live, 'delete', cast ([id] : Array<Dynamic>));
-        _Runtime.callOptionalValue(dismissListener, cast ([id] : Array<Dynamic>));
-      }] : Array<Dynamic>));
-      _Runtime.callProperty(live, 'set', cast ([id, n] : Array<Dynamic>));
-      _Runtime.callProperty(n, 'show', cast ([] : Array<Dynamic>));
-      return cast id;
-      return cast null;
-    }), requestPermission: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast _Runtime.select(_Runtime.callProperty(_Runtime.field(electron, 'Notification'), 'isSupported', cast ([] : Array<Dynamic>)), function():Dynamic return cast 'granted', function():Dynamic return cast 'denied');
-      return cast null;
-    }), getPermission: function() {
+    return cast { notify: function(request:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        var id:Dynamic = cast _Runtime.UNDEFINED;
+        var actions:Dynamic = cast _Runtime.UNDEFINED;
+        var n:Dynamic = cast _Runtime.UNDEFINED;
+        if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(_Runtime.field(electron, 'Notification'), 'isSupported', cast ([] : Array<Dynamic>))))) { return cast ''; }
+        id = _Runtime.coalesce(_Runtime.field(request, 'id'), function():Dynamic return cast 'notification-' + Std.string(nextId++) + '');
+        actions = _Runtime.coalesce(_Runtime.field(request, 'actions'), function():Dynamic return cast cast ([] : Array<Dynamic>));
+        n = _Runtime.construct(_Runtime.field(electron, 'Notification'), [{ title: _Runtime.field(request, 'title'), body: _Runtime.field(request, 'body'), icon: _Runtime.field(request, 'icon'), silent: _Runtime.field(request, 'silent'), actions: _Runtime.callProperty(actions, 'map', cast ([function(a:Dynamic) return { type: 'button', text: _Runtime.field(a, 'title') }] : Array<Dynamic>)) }]);
+        _Runtime.callProperty(n, 'on', cast (['show', function() return _Runtime.callOptionalValue(showListener, cast ([id] : Array<Dynamic>))] : Array<Dynamic>));
+        _Runtime.callProperty(n, 'on', cast (['click', function() return _Runtime.callOptionalValue(clickListener, cast ([id] : Array<Dynamic>))] : Array<Dynamic>));
+        _Runtime.callProperty(n, 'on', cast (['action', function(...args:Dynamic) {
+          var index:Dynamic = cast _Runtime.UNDEFINED;
+          index = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([_Runtime.getIndex(args, 1.0)] : Array<Dynamic>));
+          _Runtime.callOptionalValue(actionListener, cast ([id, Std.string(_Runtime.coalesce(_Runtime.optionalField(_Runtime.getIndex(actions, index), 'id'), function():Dynamic return cast ''))] : Array<Dynamic>));
+        }] : Array<Dynamic>));
+        _Runtime.callProperty(n, 'on', cast (['close', function() {
+          _Runtime.callProperty(live, 'delete', cast ([id] : Array<Dynamic>));
+          _Runtime.callOptionalValue(dismissListener, cast ([id] : Array<Dynamic>));
+        }] : Array<Dynamic>));
+        _Runtime.callProperty(live, 'set', cast ([id, n] : Array<Dynamic>));
+        _Runtime.callProperty(n, 'show', cast ([] : Array<Dynamic>));
+        return cast id;
+        return cast null;
+      });
+    }, requestPermission: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(_Runtime.select(_Runtime.callProperty(_Runtime.field(electron, 'Notification'), 'isSupported', cast ([] : Array<Dynamic>)), function():Dynamic return cast 'granted', function():Dynamic return cast 'denied'));
+      });
+    }, getPermission: function() {
       return cast _Runtime.select(_Runtime.callProperty(_Runtime.field(electron, 'Notification'), 'isSupported', cast ([] : Array<Dynamic>)), function():Dynamic return cast 'granted', function():Dynamic return cast 'denied');
     }, isSupported: function() {
       return cast _Runtime.callProperty(_Runtime.field(electron, 'Notification'), 'isSupported', cast ([] : Array<Dynamic>));
     }, getCapabilities: function() {
       return cast { actions: true, channels: false, coldStart: false, image: false, listActive: false, scheduling: false, textReply: false };
-    }, getLaunchNotification: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast null;
-      return cast null;
-    }), getActiveNotifications: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast cast ([] : Array<Dynamic>);
-      return cast null;
-    }), getPendingNotifications: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast cast ([] : Array<Dynamic>);
-      return cast null;
-    }), scheduleNotification: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast '';
-      return cast null;
-    }), cancelScheduledNotification: function() {
+    }, getLaunchNotification: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(null);
+      });
+    }, getActiveNotifications: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
+      });
+    }, getPendingNotifications: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
+      });
+    }, scheduleNotification: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve('');
+      });
+    }, cancelScheduledNotification: function() {
     
     }, closeNotification: function(id:Dynamic) {
       var n:Dynamic = cast _Runtime.UNDEFINED;
@@ -80,10 +87,11 @@ class ElectronNotification {
         _Runtime.callProperty(n, 'close', cast ([] : Array<Dynamic>));
       }
       _Runtime.callProperty(live, 'clear', cast ([] : Array<Dynamic>));
-    }, updateNotification: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast false;
-      return cast null;
-    }), subscribeClick: function(listener:Dynamic) {
+    }, updateNotification: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(false);
+      });
+    }, subscribeClick: function(listener:Dynamic) {
       (clickListener = cast (listener : Dynamic));
       return cast function() {
         if (_Runtime.truthy(_Runtime.strictEquals(clickListener, listener))) { (clickListener = cast (null : Dynamic)); }

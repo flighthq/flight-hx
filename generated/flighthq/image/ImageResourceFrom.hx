@@ -48,39 +48,32 @@ class ImageResourceFrom {
   }
 
   public static function loadImageResourceFromBase64(base64:String, mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<ImageResource> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<ImageResource> {
-      return cast _Runtime.callValue(loadImageResourceFromUrl, cast (['data:' + Std.string(mimeType) + ';base64,' + Std.string(base64) + '', _Runtime.field(_Runtime, 'UNDEFINED'), signal] : Array<Dynamic>));
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(_Runtime.callValue(loadImageResourceFromUrl, cast (['data:' + Std.string(mimeType) + ';base64,' + Std.string(base64) + '', _Runtime.field(_Runtime, 'UNDEFINED'), signal] : Array<Dynamic>)));
+    });
   }
 
   public static function loadImageResourceFromBlob(blob:Dynamic, ?signal:Dynamic):flighthq._internal._Promise<ImageResource> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<ImageResource> {
-      var url:Dynamic = cast _Runtime.UNDEFINED;
-      url = _Runtime.callProperty(_Runtime.globalValue('URL'), 'createObjectURL', cast ([blob] : Array<Dynamic>));
-      try {
-        try {
-          var __returnValue0:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(loadImageResourceFromUrl, cast ([url, _Runtime.field(_Runtime, 'UNDEFINED'), signal] : Array<Dynamic>)));
-          {
-            _Runtime.callProperty(_Runtime.globalValue('URL'), 'revokeObjectURL', cast ([url] : Array<Dynamic>));
-          }
-          return cast __returnValue0;
-        } catch (__error:Dynamic) { throw __error; }
-      } catch (__finallyError1:Dynamic) {
-        {
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var url:Dynamic = cast _Runtime.UNDEFINED;
+        url = _Runtime.callProperty(_Runtime.globalValue('URL'), 'createObjectURL', cast ([blob] : Array<Dynamic>));
+        return flighthq._internal._Async.continueFlow(flighthq._internal._Async.finalizeFlow(flighthq._internal._Async.protect(function():Dynamic {
+          return flighthq._internal._Async.flatMap(_Runtime.callValue(loadImageResourceFromUrl, cast ([url, _Runtime.field(_Runtime, 'UNDEFINED'), signal] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
+            return flighthq._internal._Async.flowReturn(__awaitValue2);
+          });
+        }), function():Dynamic {
           _Runtime.callProperty(_Runtime.globalValue('URL'), 'revokeObjectURL', cast ([url] : Array<Dynamic>));
-        }
-        throw __finallyError1;
-      }
-      {
-        _Runtime.callProperty(_Runtime.globalValue('URL'), 'revokeObjectURL', cast ([url] : Array<Dynamic>));
-      }
-      return cast null;
-    })();
+          return flighthq._internal._Async.flowNormal();
+        }), function():Dynamic {
+          return flighthq._internal._Async.flowNormal();
+        });
+      })
+    );
   }
 
   public static function loadImageResourceFromBytes(bytes:Dynamic, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<ImageResource> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<ImageResource> {
+    return cast flighthq._internal._Async.protect(function():Dynamic {
       var type:Dynamic = cast _Runtime.UNDEFINED;
       var buf:Dynamic = cast _Runtime.UNDEFINED;
       type = _Runtime.coalesce(mimeType, function():Dynamic return cast _Runtime.callValue(detectImageMimeType, cast ([bytes] : Array<Dynamic>)));
@@ -90,23 +83,47 @@ class ImageResourceFrom {
       buf = _Runtime.slice((cast _Runtime.field(bytes, 'buffer') : haxe.io.Bytes), _Runtime.field(bytes, 'byteOffset'), (_Runtime.field(bytes, 'byteOffset') + _Runtime.field(bytes, 'byteLength')));
       return cast _Runtime.callValue(loadImageResourceFromBlob, cast ([_Runtime.construct(_Runtime.globalValue('Blob'), [cast ([buf] : Array<Dynamic>), { type: type }]), signal] : Array<Dynamic>));
       return cast null;
-    })();
+    });
   }
 
   public static function loadImageResourceFromUrl(url:String, ?crossOrigin:String, ?signal:Dynamic):flighthq._internal._Promise<ImageResource> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<ImageResource> {
-      var img:Dynamic = cast _Runtime.UNDEFINED;
-      _Runtime.callOptionalProperty(signal, 'throwIfAborted', cast ([] : Array<Dynamic>));
-      img = _Runtime.construct(_Runtime.globalValue('Image'), []);
-      if (_Runtime.truthy(!_Runtime.strictEquals(crossOrigin, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(img, 'crossOrigin', crossOrigin); }
-      _Runtime.setField(img, 'src', url);
-      if (_Runtime.truthy(!_Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.globalValue('Promise'), 'race', cast ([cast ([_Runtime.callProperty(img, 'decode', cast ([] : Array<Dynamic>)), _Runtime.construct(_Runtime.globalValue('Promise'), [function(_:Dynamic, reject:Dynamic) return _Runtime.callProperty(signal, 'addEventListener', cast (['abort', function() return _Runtime.callValue(reject, cast ([_Runtime.field(signal, 'reason')] : Array<Dynamic>)), { once: true }] : Array<Dynamic>))])] : Array<Dynamic>)] : Array<Dynamic>)));
-      } else {
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(img, 'decode', cast ([] : Array<Dynamic>)));
-      }
-      return cast _Runtime.callValue(createImageResourceFromImageElement, cast ([img] : Array<Dynamic>));
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var img:Dynamic = cast _Runtime.UNDEFINED;
+        _Runtime.callOptionalProperty(signal, 'throwIfAborted', cast ([] : Array<Dynamic>));
+        img = _Runtime.construct(_Runtime.globalValue('Image'), []);
+        var __flowBranch3:Dynamic;
+        if (_Runtime.truthy(!_Runtime.strictEquals(crossOrigin, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+          __flowBranch3 = flighthq._internal._Async.protect(function():Dynamic {
+            _Runtime.setField(img, 'crossOrigin', crossOrigin);
+            return flighthq._internal._Async.flowNormal();
+          });
+        } else {
+          __flowBranch3 = flighthq._internal._Async.flowNormal();
+        }
+        return flighthq._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
+          _Runtime.setField(img, 'src', url);
+          var __flowBranch4:Dynamic;
+          if (_Runtime.truthy(!_Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+            __flowBranch4 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flatMap(flighthq._internal._Async.race(cast ([_Runtime.callProperty(img, 'decode', cast ([] : Array<Dynamic>)), flighthq._internal._Async.create(function(_:Dynamic, reject:Dynamic) return _Runtime.callProperty(signal, 'addEventListener', cast (['abort', function() return _Runtime.callValue(reject, cast ([_Runtime.field(signal, 'reason')] : Array<Dynamic>)), { once: true }] : Array<Dynamic>)))] : Array<Dynamic>)), function(__awaitValue5:Dynamic):Dynamic {
+                __awaitValue5;
+                return flighthq._internal._Async.flowNormal();
+              });
+            });
+          } else {
+            __flowBranch4 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flatMap(_Runtime.callProperty(img, 'decode', cast ([] : Array<Dynamic>)), function(__awaitValue6:Dynamic):Dynamic {
+                __awaitValue6;
+                return flighthq._internal._Async.flowNormal();
+              });
+            });
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch4, function():Dynamic {
+            return flighthq._internal._Async.flowReturn(_Runtime.callValue(createImageResourceFromImageElement, cast ([img] : Array<Dynamic>)));
+          });
+        });
+      })
+    );
   }
 }

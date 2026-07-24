@@ -13,7 +13,7 @@ class ElectronIpc {
     return cast { send: function() {
     
     }, invoke: function() {
-      return cast _Runtime.callProperty(_Runtime.globalValue('Promise'), 'resolve', cast ([_Runtime.field(_Runtime, 'UNDEFINED')] : Array<Dynamic>));
+      return cast flighthq._internal._Async.resolve(_Runtime.field(_Runtime, 'UNDEFINED'));
     }, subscribe: function(channel:Dynamic, listener:Dynamic) {
       var handler:Dynamic = cast _Runtime.UNDEFINED;
       handler = function(_event:Dynamic, ...args:Dynamic) return _Runtime.callValue(listener, cast ([args] : Array<Dynamic>));

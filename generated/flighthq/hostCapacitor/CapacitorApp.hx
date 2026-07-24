@@ -16,12 +16,12 @@ class CapacitorApp {
     app = _Runtime.field(capacitor, 'app');
     cachedName = '';
     cachedVersion = '';
-    _Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(app, 'getInfo', cast ([] : Array<Dynamic>)), 'then', cast ([function(info:Dynamic) {
+    flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(app, 'getInfo', cast ([] : Array<Dynamic>)), 'then', cast ([function(info:Dynamic) {
       (cachedName = cast (_Runtime.field(info, 'name') : Dynamic));
       (cachedVersion = cast (_Runtime.field(info, 'version') : Dynamic));
-    }] : Array<Dynamic>)), 'catch', cast ([function() {
+    }] : Array<Dynamic>)), function() {
     
-    }] : Array<Dynamic>));
+    });
     return cast { addRecentDocument: function() {
     
     }, bounceDock: function() {
@@ -59,16 +59,16 @@ class CapacitorApp {
     }, hasSingleInstanceLock: function() {
       return cast false;
     }, hideApp: function() {
-      _Runtime.callProperty(_Runtime.callProperty(app, 'minimizeApp', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
+      flighthq._internal._Async.recover(_Runtime.callProperty(app, 'minimizeApp', cast ([] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>));
+      });
       return cast true;
     }, isAppHidden: function() {
       return cast false;
     }, quit: function() {
-      _Runtime.callProperty(_Runtime.callProperty(app, 'exitApp', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
+      flighthq._internal._Async.recover(_Runtime.callProperty(app, 'exitApp', cast ([] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>));
+      });
     }, relaunch: function() {
     
     }, releaseSingleInstanceLock: function() {
@@ -124,19 +124,19 @@ class CapacitorApp {
     var handle:Null<CapacitorPluginListenerHandle> = cast _Runtime.UNDEFINED;
     removed = false;
     handle = null;
-    _Runtime.callProperty(_Runtime.callProperty(handlePromise, 'then', cast ([function(resolved:Dynamic) {
+    flighthq._internal._Async.recover(_Runtime.callProperty(handlePromise, 'then', cast ([function(resolved:Dynamic) {
       (handle = cast (resolved : Dynamic));
-      if (_Runtime.truthy(removed)) { _Runtime.callProperty(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
+      if (_Runtime.truthy(removed)) { flighthq._internal._Async.recover(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>)); }
-    }] : Array<Dynamic>)), 'catch', cast ([function() {
+      }); }
+    }] : Array<Dynamic>)), function() {
     
-    }] : Array<Dynamic>));
+    });
     return cast function() {
       (removed = cast (true : Dynamic));
-      if (_Runtime.truthy(!_Runtime.strictEquals(handle, null))) { _Runtime.callProperty(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
+      if (_Runtime.truthy(!_Runtime.strictEquals(handle, null))) { flighthq._internal._Async.recover(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>)); }
+      }); }
     };
     return cast null;
   }

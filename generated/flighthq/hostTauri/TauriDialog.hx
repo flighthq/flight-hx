@@ -14,34 +14,48 @@ class TauriDialog {
   public static function createTauriDialogBackend(tauri:TauriApi):DialogBackend {
     var dialog:Dynamic = cast _Runtime.UNDEFINED;
     dialog = _Runtime.field(tauri, 'dialog');
-    return cast { openFile: flighthq._internal._Async.make(function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var result:Dynamic = cast _Runtime.UNDEFINED;
-      var kind:Dynamic = cast _Runtime.UNDEFINED;
-      result = flighthq._internal._Async.awaitValue(_Runtime.callProperty(dialog, 'open', cast ([{ title: _Runtime.field(options, 'title'), defaultPath: _Runtime.field(options, 'defaultPath'), multiple: _Runtime.field(options, 'multiple'), directory: _Runtime.field(options, 'directory'), filters: _Runtime.callOptionalProperty(_Runtime.field(options, 'filters'), 'map', cast ([TauriDialog.toTauriFilter__tauriDialog] : Array<Dynamic>)) }] : Array<Dynamic>)));
-      kind = _Runtime.select(_Runtime.field(options, 'directory'), function():Dynamic return cast 'Directory', function():Dynamic return cast 'File');
-      return cast _Runtime.callValue(TauriDialog.toHandles__tauriDialog, cast ([result, kind] : Array<Dynamic>));
-      return cast null;
-    }), openDirectory: flighthq._internal._Async.make(function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var result:Dynamic = cast _Runtime.UNDEFINED;
-      result = flighthq._internal._Async.awaitValue(_Runtime.callProperty(dialog, 'open', cast ([{ title: _Runtime.field(options, 'title'), multiple: _Runtime.field(options, 'multiple'), directory: true }] : Array<Dynamic>)));
-      return cast _Runtime.callValue(TauriDialog.toHandles__tauriDialog, cast ([result, 'Directory'] : Array<Dynamic>));
-      return cast null;
-    }), saveFile: flighthq._internal._Async.make(function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var path:Dynamic = cast _Runtime.UNDEFINED;
-      path = flighthq._internal._Async.awaitValue(_Runtime.callProperty(dialog, 'save', cast ([{ title: _Runtime.field(options, 'title'), defaultPath: _Runtime.field(options, 'defaultPath'), filters: _Runtime.callOptionalProperty(_Runtime.field(options, 'filters'), 'map', cast ([TauriDialog.toTauriFilter__tauriDialog] : Array<Dynamic>)) }] : Array<Dynamic>)));
-      return cast _Runtime.select(_Runtime.strictEquals(path, null), function():Dynamic return cast null, function():Dynamic return cast _Runtime.callValue(TauriDialog.toFileHandle__tauriDialog, cast ([path, 'File'] : Array<Dynamic>)));
-      return cast null;
-    }), message: flighthq._internal._Async.make(function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
-      flighthq._internal._Async.awaitValue(_Runtime.callProperty(dialog, 'message', cast ([_Runtime.field(options, 'message'), { title: _Runtime.field(options, 'title'), kind: _Runtime.callValue(TauriDialog.toTauriMessageKind__tauriDialog, cast ([_Runtime.field(options, 'kind')] : Array<Dynamic>)) }] : Array<Dynamic>)));
-      return cast { buttonIndex: 0.0, cancelled: false, checkboxChecked: false };
-      return cast null;
-    }), confirm: flighthq._internal._Async.make(function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast _Runtime.callProperty(dialog, 'confirm', cast ([_Runtime.field(options, 'message'), { title: _Runtime.field(options, 'title'), kind: _Runtime.callValue(TauriDialog.toTauriMessageKind__tauriDialog, cast ([_Runtime.field(options, 'kind')] : Array<Dynamic>)) }] : Array<Dynamic>));
-      return cast null;
-    }), prompt: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast null;
-      return cast null;
-    }) };
+    return cast { openFile: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        var result:Dynamic = cast _Runtime.UNDEFINED;
+        var kind:Dynamic = cast _Runtime.UNDEFINED;
+        return flighthq._internal._Async.flatMap(_Runtime.callProperty(dialog, 'open', cast ([{ title: _Runtime.field(options, 'title'), defaultPath: _Runtime.field(options, 'defaultPath'), multiple: _Runtime.field(options, 'multiple'), directory: _Runtime.field(options, 'directory'), filters: _Runtime.callOptionalProperty(_Runtime.field(options, 'filters'), 'map', cast ([TauriDialog.toTauriFilter__tauriDialog] : Array<Dynamic>)) }] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
+          result = __awaitValue0;
+          kind = _Runtime.select(_Runtime.field(options, 'directory'), function():Dynamic return cast 'Directory', function():Dynamic return cast 'File');
+          return flighthq._internal._Async.resolve(_Runtime.callValue(TauriDialog.toHandles__tauriDialog, cast ([result, kind] : Array<Dynamic>)));
+        });
+      });
+    }, openDirectory: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        var result:Dynamic = cast _Runtime.UNDEFINED;
+        return flighthq._internal._Async.flatMap(_Runtime.callProperty(dialog, 'open', cast ([{ title: _Runtime.field(options, 'title'), multiple: _Runtime.field(options, 'multiple'), directory: true }] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
+          result = __awaitValue1;
+          return flighthq._internal._Async.resolve(_Runtime.callValue(TauriDialog.toHandles__tauriDialog, cast ([result, 'Directory'] : Array<Dynamic>)));
+        });
+      });
+    }, saveFile: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        var path:Dynamic = cast _Runtime.UNDEFINED;
+        return flighthq._internal._Async.flatMap(_Runtime.callProperty(dialog, 'save', cast ([{ title: _Runtime.field(options, 'title'), defaultPath: _Runtime.field(options, 'defaultPath'), filters: _Runtime.callOptionalProperty(_Runtime.field(options, 'filters'), 'map', cast ([TauriDialog.toTauriFilter__tauriDialog] : Array<Dynamic>)) }] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
+          path = __awaitValue2;
+          return flighthq._internal._Async.resolve(_Runtime.select(_Runtime.strictEquals(path, null), function():Dynamic return cast null, function():Dynamic return cast _Runtime.callValue(TauriDialog.toFileHandle__tauriDialog, cast ([path, 'File'] : Array<Dynamic>))));
+        });
+      });
+    }, message: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.flatMap(_Runtime.callProperty(dialog, 'message', cast ([_Runtime.field(options, 'message'), { title: _Runtime.field(options, 'title'), kind: _Runtime.callValue(TauriDialog.toTauriMessageKind__tauriDialog, cast ([_Runtime.field(options, 'kind')] : Array<Dynamic>)) }] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
+          __awaitValue3;
+          return flighthq._internal._Async.resolve({ buttonIndex: 0.0, cancelled: false, checkboxChecked: false });
+        });
+      });
+    }, confirm: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(_Runtime.callProperty(dialog, 'confirm', cast ([_Runtime.field(options, 'message'), { title: _Runtime.field(options, 'title'), kind: _Runtime.callValue(TauriDialog.toTauriMessageKind__tauriDialog, cast ([_Runtime.field(options, 'kind')] : Array<Dynamic>)) }] : Array<Dynamic>)));
+      });
+    }, prompt: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(null);
+      });
+    } };
     return cast null;
   }
 

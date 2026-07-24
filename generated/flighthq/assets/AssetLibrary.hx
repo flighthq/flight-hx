@@ -29,16 +29,16 @@ class AssetLibrary {
     runtime = _Runtime.field(library, 'runtime');
     descriptor = _Runtime.callProperty(_Runtime.field(runtime, 'descriptors'), 'get', cast ([id] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(descriptor, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      return cast _Runtime.callProperty(_Runtime.globalValue('Promise'), 'reject', cast ([_Runtime.error('assets: no descriptor for id "' + Std.string(id) + '" (registerAssetDescriptor first)')] : Array<Dynamic>));
+      return cast flighthq._internal._Async.reject(_Runtime.error('assets: no descriptor for id "' + Std.string(id) + '" (registerAssetDescriptor first)'));
     }
     adapter = _Runtime.callProperty(_Runtime.field(runtime, 'adapters'), 'get', cast ([_Runtime.field(descriptor, 'type')] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(adapter, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      return cast _Runtime.callProperty(_Runtime.globalValue('Promise'), 'reject', cast ([_Runtime.error('assets: no loader for type "' + Std.string(_Runtime.field(descriptor, 'type')) + '" (registerAssetLoader first)')] : Array<Dynamic>));
+      return cast flighthq._internal._Async.reject(_Runtime.error('assets: no loader for type "' + Std.string(_Runtime.field(descriptor, 'type')) + '" (registerAssetLoader first)'));
     }
     existing = _Runtime.callProperty(_Runtime.field(runtime, 'entries'), 'get', cast ([id] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.incrementField(existing, 'refcount', 1, true);
-      if (_Runtime.truthy(_Runtime.field(existing, 'resident'))) { return cast _Runtime.callProperty(_Runtime.globalValue('Promise'), 'resolve', cast ([(cast _Runtime.field(existing, 'value') : Dynamic)] : Array<Dynamic>)); }
+      if (_Runtime.truthy(_Runtime.field(existing, 'resident'))) { return cast flighthq._internal._Async.resolve((cast _Runtime.field(existing, 'value') : Dynamic)); }
       return cast (cast _Runtime.field(existing, 'loadPromise') : flighthq._internal._Promise<Dynamic>);
     }
     entry = { value: _Runtime.field(_Runtime, 'UNDEFINED'), refcount: 1.0, loadPromise: null, resident: false };
@@ -100,49 +100,77 @@ class AssetLibrary {
   }
 
   public static function loadAssetGroup(library:flighthq.types.Assets.AssetLibrary, name:String, ?options:AssetGroupLoadOptions):flighthq._internal._Promise<flighthq._internal._Nothing> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<flighthq._internal._Nothing> {
-      var runtime:Dynamic = cast _Runtime.UNDEFINED;
-      var ids:Dynamic = cast _Runtime.UNDEFINED;
-      var loader:Dynamic = cast _Runtime.UNDEFINED;
-      var progress:Dynamic = cast _Runtime.UNDEFINED;
-      var itemPromises:Array<flighthq._internal._Promise<Dynamic>> = cast _Runtime.UNDEFINED;
-      var settlements:Dynamic = cast _Runtime.UNDEFINED;
-      var results:Dynamic = cast _Runtime.UNDEFINED;
-      var failed:Dynamic = cast _Runtime.UNDEFINED;
-      runtime = _Runtime.field(library, 'runtime');
-      ids = _Runtime.callProperty(_Runtime.field(runtime, 'groups'), 'get', cast ([name] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(ids, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(ids, 'length'), 0.0)))) { #if js return; #else return cast null; #end }
-      loader = _Runtime.callValue(createResourceLoader, cast ([] : Array<Dynamic>));
-      progress = _Runtime.optionalField(options, 'progress');
-      if (_Runtime.truthy(!_Runtime.strictEquals(progress, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-        _Runtime.callValue(connectSignal, cast ([_Runtime.field(loader, 'onProgress'), function(loaded:Float, total:Float) {
-          _Runtime.callValue(emitSignal, cast ([progress, { loaded: loaded, total: total }] : Array<Dynamic>));
-        }] : Array<Dynamic>));
-      }
-      itemPromises = cast ([] : Array<Dynamic>);
-      for (id in _Runtime.iterable(ids)) {
-        var entry:Dynamic = _Runtime.callProperty(_Runtime.field(runtime, 'entries'), 'get', cast ([id] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.field(entry, 'resident')))) {
-          _Runtime.callProperty(itemPromises, 'push', cast ([_Runtime.callValue(acquireAsset, cast ([library, id] : Array<Dynamic>))] : Array<Dynamic>));
-          continue;
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var runtime:Dynamic = cast _Runtime.UNDEFINED;
+        var ids:Dynamic = cast _Runtime.UNDEFINED;
+        var loader:Dynamic = cast _Runtime.UNDEFINED;
+        var progress:Dynamic = cast _Runtime.UNDEFINED;
+        var itemPromises:Array<flighthq._internal._Promise<Dynamic>> = cast _Runtime.UNDEFINED;
+        var settlements:Dynamic = cast _Runtime.UNDEFINED;
+        var results:Dynamic = cast _Runtime.UNDEFINED;
+        var failed:Dynamic = cast _Runtime.UNDEFINED;
+        runtime = _Runtime.field(library, 'runtime');
+        ids = _Runtime.callProperty(_Runtime.field(runtime, 'groups'), 'get', cast ([name] : Array<Dynamic>));
+        var __flowBranch4:Dynamic;
+        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(ids, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(ids, 'length'), 0.0)))) {
+          __flowBranch4 = flighthq._internal._Async.protect(function():Dynamic {
+            return flighthq._internal._Async.flowReturn(_Runtime.UNDEFINED);
+          });
+        } else {
+          __flowBranch4 = flighthq._internal._Async.flowNormal();
         }
-        _Runtime.callProperty(itemPromises, 'push', cast ([_Runtime.field(_Runtime.callValue(queueResourceLoad, cast ([loader, function() return _Runtime.callValue(acquireAsset, cast ([library, id] : Array<Dynamic>))] : Array<Dynamic>)), 'promise')] : Array<Dynamic>));
-      }
-      settlements = _Runtime.callProperty(_Runtime.globalValue('Promise'), 'allSettled', cast ([itemPromises] : Array<Dynamic>));
-      flighthq._internal._Async.awaitValue(_Runtime.construct(_Runtime.globalValue('Promise'), [function(resolve:Dynamic) {
-        _Runtime.callValue(connectSignal, cast ([_Runtime.field(loader, 'onComplete'), function() return _Runtime.callValue(resolve, cast ([] : Array<Dynamic>))] : Array<Dynamic>));
-        _Runtime.callValue(startResourceLoad, cast ([loader] : Array<Dynamic>));
-      }]));
-      results = flighthq._internal._Async.awaitValue(settlements);
-      _Runtime.callValue(disposeResourceLoader, cast ([loader] : Array<Dynamic>));
-      failed = _Runtime.find(results, function(result:Dynamic) return _Runtime.strictEquals(_Runtime.field(result, 'status'), 'rejected'));
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.optionalField(failed, 'status'), 'rejected'))) { throw _Runtime.field(failed, 'reason'); }
-      #if js
-      return;
-      #else
-      return cast null;
-      #end
-    })();
+        return flighthq._internal._Async.continueFlow(__flowBranch4, function():Dynamic {
+          loader = _Runtime.callValue(createResourceLoader, cast ([] : Array<Dynamic>));
+          progress = _Runtime.optionalField(options, 'progress');
+          var __flowBranch5:Dynamic;
+          if (_Runtime.truthy(!_Runtime.strictEquals(progress, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+            __flowBranch5 = flighthq._internal._Async.protect(function():Dynamic {
+              _Runtime.callValue(connectSignal, cast ([_Runtime.field(loader, 'onProgress'), function(loaded:Float, total:Float) {
+                _Runtime.callValue(emitSignal, cast ([progress, { loaded: loaded, total: total }] : Array<Dynamic>));
+              }] : Array<Dynamic>));
+              return flighthq._internal._Async.flowNormal();
+            });
+          } else {
+            __flowBranch5 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch5, function():Dynamic {
+            itemPromises = cast ([] : Array<Dynamic>);
+            for (id in _Runtime.iterable(ids)) {
+              var entry:Dynamic = _Runtime.callProperty(_Runtime.field(runtime, 'entries'), 'get', cast ([id] : Array<Dynamic>));
+              if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.field(entry, 'resident')))) {
+                _Runtime.callProperty(itemPromises, 'push', cast ([_Runtime.callValue(acquireAsset, cast ([library, id] : Array<Dynamic>))] : Array<Dynamic>));
+                continue;
+              }
+              _Runtime.callProperty(itemPromises, 'push', cast ([_Runtime.field(_Runtime.callValue(queueResourceLoad, cast ([loader, function() return _Runtime.callValue(acquireAsset, cast ([library, id] : Array<Dynamic>))] : Array<Dynamic>)), 'promise')] : Array<Dynamic>));
+            }
+            settlements = flighthq._internal._Async.allSettled(itemPromises);
+            return flighthq._internal._Async.flatMap(flighthq._internal._Async.create(function(resolve:Dynamic) {
+              _Runtime.callValue(connectSignal, cast ([_Runtime.field(loader, 'onComplete'), function() return _Runtime.callValue(resolve, cast ([] : Array<Dynamic>))] : Array<Dynamic>));
+              _Runtime.callValue(startResourceLoad, cast ([loader] : Array<Dynamic>));
+            }), function(__awaitValue8:Dynamic):Dynamic {
+              __awaitValue8;
+              return flighthq._internal._Async.flatMap(settlements, function(__awaitValue9:Dynamic):Dynamic {
+                results = __awaitValue9;
+                _Runtime.callValue(disposeResourceLoader, cast ([loader] : Array<Dynamic>));
+                failed = _Runtime.find(results, function(result:Dynamic) return _Runtime.strictEquals(_Runtime.field(result, 'status'), 'rejected'));
+                var __flowBranch10:Dynamic;
+                if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.optionalField(failed, 'status'), 'rejected'))) {
+                  __flowBranch10 = flighthq._internal._Async.protect(function():Dynamic {
+                    return flighthq._internal._Async.reject(_Runtime.field(failed, 'reason'));
+                  });
+                } else {
+                  __flowBranch10 = flighthq._internal._Async.flowNormal();
+                }
+                return flighthq._internal._Async.continueFlow(__flowBranch10, function():Dynamic {
+                  return flighthq._internal._Async.flowNormal();
+                });
+              });
+            });
+          });
+        });
+      })
+    );
   }
 
   public static function registerAssetDescriptor(library:flighthq.types.Assets.AssetLibrary, descriptor:AssetDescriptor):Void {

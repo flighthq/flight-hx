@@ -31,14 +31,25 @@ class Clipboard {
   }
 
   public static function blobFromFormatData__clipboard(format:String, data:String):flighthq._internal._Promise<Dynamic> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      if (_Runtime.truthy(_Runtime.andValue(StringTools.startsWith(format, 'image/'), function():Dynamic return cast StringTools.startsWith(data, 'data:')))) {
-        var response:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(_Runtime.globalValue('fetch'), cast ([data] : Array<Dynamic>)));
-        return cast _Runtime.callProperty(response, 'blob', cast ([] : Array<Dynamic>));
-      }
-      return cast _Runtime.construct(_Runtime.globalValue('Blob'), [cast ([data] : Array<Dynamic>), { type: format }]);
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var __flowBranch0:Dynamic;
+        if (_Runtime.truthy(_Runtime.andValue(StringTools.startsWith(format, 'image/'), function():Dynamic return cast StringTools.startsWith(data, 'data:')))) {
+          __flowBranch0 = flighthq._internal._Async.protect(function():Dynamic {
+            var response:Dynamic = cast _Runtime.UNDEFINED;
+            return flighthq._internal._Async.flatMap(_Runtime.callValue(_Runtime.globalValue('fetch'), cast ([data] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
+              response = __awaitValue1;
+              return flighthq._internal._Async.flowReturn(_Runtime.callProperty(response, 'blob', cast ([] : Array<Dynamic>)));
+            });
+          });
+        } else {
+          __flowBranch0 = flighthq._internal._Async.flowNormal();
+        }
+        return flighthq._internal._Async.continueFlow(__flowBranch0, function():Dynamic {
+          return flighthq._internal._Async.flowReturn(_Runtime.construct(_Runtime.globalValue('Blob'), [cast ([data] : Array<Dynamic>), { type: format }]));
+        });
+      })
+    );
   }
 
   public static function clearClipboard():flighthq._internal._Promise<Bool> {
@@ -52,179 +63,465 @@ class Clipboard {
   }
 
   public static function createWebClipboardBackend():ClipboardBackend {
-    return cast { readFormat: flighthq._internal._Async.make(function(format:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var cb:Dynamic = cast _Runtime.UNDEFINED;
-      cb = _Runtime.callValue(Clipboard.getWebClipboard__clipboard, cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(cb, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(cb, 'read')), 'function')))) { return cast ''; }
-      try {
-        var items:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(cb, 'read', cast ([] : Array<Dynamic>)));
-        for (item in _Runtime.iterable(items)) {
-          if (_Runtime.truthy(_Runtime.includes(_Runtime.field(item, 'types'), format))) {
-            var blob:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(item, 'getType', cast ([format] : Array<Dynamic>)));
-            if (_Runtime.truthy(StringTools.startsWith(format, 'image/'))) { return cast _Runtime.callValue(Clipboard.readBlobAsDataUrl__clipboard, cast ([blob] : Array<Dynamic>)); }
-            return cast _Runtime.callProperty(blob, 'text', cast ([] : Array<Dynamic>));
+    return cast { readFormat: function(format:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var cb:Dynamic = cast _Runtime.UNDEFINED;
+          cb = _Runtime.callValue(Clipboard.getWebClipboard__clipboard, cast ([] : Array<Dynamic>));
+          var __flowBranch2:Dynamic;
+          if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(cb, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(cb, 'read')), 'function')))) {
+            __flowBranch2 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn('');
+            });
+          } else {
+            __flowBranch2 = flighthq._internal._Async.flowNormal();
           }
-        }
-      } catch (__error:Dynamic) {
-        return cast '';
-      }
-      return cast '';
-      return cast null;
-    }), writeFormat: flighthq._internal._Async.make(function(format:Dynamic, data:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var cb:Dynamic = cast _Runtime.UNDEFINED;
-      cb = _Runtime.callValue(Clipboard.getWritableWebClipboard__clipboard, cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(cb, null))) { return cast false; }
-      try {
-        var blob:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(Clipboard.blobFromFormatData__clipboard, cast ([format, data] : Array<Dynamic>)));
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(cb, 'write', cast ([cast ([_Runtime.construct(_Runtime.globalValue('ClipboardItem'), [_Runtime.objectFromPairs([{ key: format, value: blob }])])] : Array<Dynamic>)] : Array<Dynamic>)));
-        return cast true;
-      } catch (__error:Dynamic) {
-        return cast false;
-      }
-      return cast null;
-    }), hasFormat: flighthq._internal._Async.make(function(format:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var formats:Dynamic = cast _Runtime.UNDEFINED;
-      formats = flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.thisValue(), 'getFormats', cast ([] : Array<Dynamic>)));
-      return cast _Runtime.includes(formats, format);
-      return cast null;
-    }), getFormats: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      var cb:Dynamic = cast _Runtime.UNDEFINED;
-      cb = _Runtime.callValue(Clipboard.getWebClipboard__clipboard, cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(cb, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(cb, 'read')), 'function')))) { return cast cast ([] : Array<Dynamic>); }
-      try {
-        var items:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(cb, 'read', cast ([] : Array<Dynamic>)));
-        var out:Array<String> = cast ([] : Array<Dynamic>);
-        for (item in _Runtime.iterable(items)) {
-          for (t in _Runtime.iterable(_Runtime.field(item, 'types'))) {
-            if (_Runtime.truthy(!_Runtime.truthy(_Runtime.includes(out, t)))) { _Runtime.callProperty(out, 'push', cast ([t] : Array<Dynamic>)); }
+          return flighthq._internal._Async.continueFlow(__flowBranch2, function():Dynamic {
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              var items:Dynamic = cast _Runtime.UNDEFINED;
+              return flighthq._internal._Async.flatMap(_Runtime.callProperty(cb, 'read', cast ([] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
+                items = __awaitValue3;
+                var __flowIterator4:Array<Dynamic> = _Runtime.iterable(items);
+                var __flowIndex5:Int = 0;
+                return flighthq._internal._Async.continueFlow(flighthq._internal._Async.repeatFlow(function():Dynamic {
+                  if (__flowIndex5 >= __flowIterator4.length) return flighthq._internal._Async.flowBreak();
+                  var item:Dynamic = __flowIterator4[__flowIndex5++];
+                  var __flowBranch6:Dynamic;
+                  if (_Runtime.truthy(_Runtime.includes(_Runtime.field(item, 'types'), format))) {
+                    __flowBranch6 = flighthq._internal._Async.protect(function():Dynamic {
+                      var blob:Dynamic = cast _Runtime.UNDEFINED;
+                      return flighthq._internal._Async.flatMap(_Runtime.callProperty(item, 'getType', cast ([format] : Array<Dynamic>)), function(__awaitValue7:Dynamic):Dynamic {
+                        blob = __awaitValue7;
+                        var __flowBranch8:Dynamic;
+                        if (_Runtime.truthy(StringTools.startsWith(format, 'image/'))) {
+                          __flowBranch8 = flighthq._internal._Async.protect(function():Dynamic {
+                            return flighthq._internal._Async.flowReturn(_Runtime.callValue(Clipboard.readBlobAsDataUrl__clipboard, cast ([blob] : Array<Dynamic>)));
+                          });
+                        } else {
+                          __flowBranch8 = flighthq._internal._Async.flowNormal();
+                        }
+                        return flighthq._internal._Async.continueFlow(__flowBranch8, function():Dynamic {
+                          return flighthq._internal._Async.flowReturn(_Runtime.callProperty(blob, 'text', cast ([] : Array<Dynamic>)));
+                        });
+                      });
+                    });
+                  } else {
+                    __flowBranch6 = flighthq._internal._Async.flowNormal();
+                  }
+                  return flighthq._internal._Async.continueFlow(__flowBranch6, function():Dynamic {
+                    return flighthq._internal._Async.flowNormal();
+                  });
+                }), function():Dynamic {
+                  return flighthq._internal._Async.flowNormal();
+                });
+              });
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn('');
+              });
+            }), function():Dynamic {
+              return flighthq._internal._Async.flowReturn('');
+            });
+          });
+        })
+      );
+    }, writeFormat: function(format:Dynamic, data:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var cb:Dynamic = cast _Runtime.UNDEFINED;
+          cb = _Runtime.callValue(Clipboard.getWritableWebClipboard__clipboard, cast ([] : Array<Dynamic>));
+          var __flowBranch9:Dynamic;
+          if (_Runtime.truthy(_Runtime.strictEquals(cb, null))) {
+            __flowBranch9 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(false);
+            });
+          } else {
+            __flowBranch9 = flighthq._internal._Async.flowNormal();
           }
-        }
-        return cast out;
-      } catch (__error:Dynamic) {
-        return cast cast ([] : Array<Dynamic>);
-      }
-      return cast null;
-    }), writeItems: flighthq._internal._Async.make(function(items:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var cb:Dynamic = cast _Runtime.UNDEFINED;
-      cb = _Runtime.callValue(Clipboard.getWritableWebClipboard__clipboard, cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(cb, null))) { return cast false; }
-      try {
-        var entry:Dynamic = {  };
-        for (item in _Runtime.iterable(items)) {
-          _Runtime.setIndex(entry, _Runtime.field(item, 'format'), flighthq._internal._Async.awaitValue(_Runtime.callValue(Clipboard.blobFromFormatData__clipboard, cast ([_Runtime.field(item, 'format'), _Runtime.field(item, 'data')] : Array<Dynamic>))));
-        }
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(cb, 'write', cast ([cast ([_Runtime.construct(_Runtime.globalValue('ClipboardItem'), [entry])] : Array<Dynamic>)] : Array<Dynamic>)));
-        return cast true;
-      } catch (__error:Dynamic) {
-        return cast false;
-      }
-      return cast null;
-    }), readItems: flighthq._internal._Async.make(function(formats:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var cb:Dynamic = cast _Runtime.UNDEFINED;
-      cb = _Runtime.callValue(Clipboard.getWebClipboard__clipboard, cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(cb, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(cb, 'read')), 'function')))) { return cast {  }; }
-      try {
-        var clipItems:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(cb, 'read', cast ([] : Array<Dynamic>)));
-        var result:Dynamic = {  };
-        for (clipItem in _Runtime.iterable(clipItems)) {
-          for (format in _Runtime.iterable(formats)) {
-            if (_Runtime.truthy(_Runtime.andValue(_Runtime.includes(_Runtime.field(clipItem, 'types'), format), function():Dynamic return cast !_Runtime.truthy(_Runtime.hasField(result, format))))) {
-              var blob:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(clipItem, 'getType', cast ([format] : Array<Dynamic>)));
-              _Runtime.setIndex(result, format, _Runtime.select(StringTools.startsWith(format, 'image/'), function():Dynamic return cast flighthq._internal._Async.awaitValue(_Runtime.callValue(Clipboard.readBlobAsDataUrl__clipboard, cast ([blob] : Array<Dynamic>))), function():Dynamic return cast flighthq._internal._Async.awaitValue(_Runtime.callProperty(blob, 'text', cast ([] : Array<Dynamic>)))));
-            }
+          return flighthq._internal._Async.continueFlow(__flowBranch9, function():Dynamic {
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              var blob:Dynamic = cast _Runtime.UNDEFINED;
+              return flighthq._internal._Async.flatMap(_Runtime.callValue(Clipboard.blobFromFormatData__clipboard, cast ([format, data] : Array<Dynamic>)), function(__awaitValue10:Dynamic):Dynamic {
+                blob = __awaitValue10;
+                return flighthq._internal._Async.flatMap(_Runtime.callProperty(cb, 'write', cast ([cast ([_Runtime.construct(_Runtime.globalValue('ClipboardItem'), [_Runtime.objectFromPairs([{ key: format, value: blob }])])] : Array<Dynamic>)] : Array<Dynamic>)), function(__awaitValue11:Dynamic):Dynamic {
+                  __awaitValue11;
+                  return flighthq._internal._Async.flowReturn(true);
+                });
+              });
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(false);
+              });
+            }), function():Dynamic {
+              return flighthq._internal._Async.flowNormal();
+            });
+          });
+        })
+      );
+    }, hasFormat: function(format:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        var formats:Dynamic = cast _Runtime.UNDEFINED;
+        return flighthq._internal._Async.flatMap(_Runtime.callProperty(_Runtime.thisValue(), 'getFormats', cast ([] : Array<Dynamic>)), function(__awaitValue12:Dynamic):Dynamic {
+          formats = __awaitValue12;
+          return flighthq._internal._Async.resolve(_Runtime.includes(formats, format));
+        });
+      });
+    }, getFormats: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var cb:Dynamic = cast _Runtime.UNDEFINED;
+          cb = _Runtime.callValue(Clipboard.getWebClipboard__clipboard, cast ([] : Array<Dynamic>));
+          var __flowBranch13:Dynamic;
+          if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(cb, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(cb, 'read')), 'function')))) {
+            __flowBranch13 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(cast ([] : Array<Dynamic>));
+            });
+          } else {
+            __flowBranch13 = flighthq._internal._Async.flowNormal();
           }
-        }
-        return cast result;
-      } catch (__error:Dynamic) {
-        return cast {  };
-      }
-      return cast null;
-    }), readText: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      var cb:Dynamic = cast _Runtime.UNDEFINED;
-      cb = _Runtime.callValue(Clipboard.getWebClipboard__clipboard, cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(cb, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(cb, 'readText')), 'function')))) { return cast ''; }
-      try {
-        return cast flighthq._internal._Async.awaitValue(_Runtime.callProperty(cb, 'readText', cast ([] : Array<Dynamic>)));
-      } catch (__error:Dynamic) {
-        return cast '';
-      }
-      return cast null;
-    }), writeText: flighthq._internal._Async.make(function(text:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var cb:Dynamic = cast _Runtime.UNDEFINED;
-      cb = _Runtime.callValue(Clipboard.getWebClipboard__clipboard, cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(cb, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(cb, 'writeText')), 'function')))) { return cast false; }
-      try {
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(cb, 'writeText', cast ([text] : Array<Dynamic>)));
-        return cast true;
-      } catch (__error:Dynamic) {
-        return cast false;
-      }
-      return cast null;
-    }), readHtml: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast _Runtime.callProperty(_Runtime.thisValue(), 'readFormat', cast ([ClipboardFormatHtml] : Array<Dynamic>));
-      return cast null;
-    }), writeHtml: flighthq._internal._Async.make(function(html:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast _Runtime.callProperty(_Runtime.thisValue(), 'writeFormat', cast ([ClipboardFormatHtml, html] : Array<Dynamic>));
-      return cast null;
-    }), hasText: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast _Runtime.compare(_Runtime.field(flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.thisValue(), 'readText', cast ([] : Array<Dynamic>))), 'length'), 0.0, '>');
-      return cast null;
-    }), readImage: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      var cb:Dynamic = cast _Runtime.UNDEFINED;
-      cb = _Runtime.callValue(Clipboard.getWebClipboard__clipboard, cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(cb, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(cb, 'read')), 'function')))) { return cast ''; }
-      try {
-        var items:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(cb, 'read', cast ([] : Array<Dynamic>)));
-        for (item in _Runtime.iterable(items)) {
-          var type:Dynamic = _Runtime.find(_Runtime.field(item, 'types'), function(t:Dynamic) return StringTools.startsWith(t, 'image/'));
-          if (_Runtime.truthy(!_Runtime.strictEquals(type, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-            var blob:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(item, 'getType', cast ([type] : Array<Dynamic>)));
-            return cast _Runtime.callValue(Clipboard.readBlobAsDataUrl__clipboard, cast ([blob] : Array<Dynamic>));
+          return flighthq._internal._Async.continueFlow(__flowBranch13, function():Dynamic {
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              var items:Dynamic = cast _Runtime.UNDEFINED;
+              var out:Array<String> = cast _Runtime.UNDEFINED;
+              return flighthq._internal._Async.flatMap(_Runtime.callProperty(cb, 'read', cast ([] : Array<Dynamic>)), function(__awaitValue14:Dynamic):Dynamic {
+                items = __awaitValue14;
+                out = cast ([] : Array<Dynamic>);
+                for (item in _Runtime.iterable(items)) {
+                  for (t in _Runtime.iterable(_Runtime.field(item, 'types'))) {
+                    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.includes(out, t)))) { _Runtime.callProperty(out, 'push', cast ([t] : Array<Dynamic>)); }
+                  }
+                }
+                return flighthq._internal._Async.flowReturn(out);
+              });
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(cast ([] : Array<Dynamic>));
+              });
+            }), function():Dynamic {
+              return flighthq._internal._Async.flowNormal();
+            });
+          });
+        })
+      );
+    }, writeItems: function(items:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var cb:Dynamic = cast _Runtime.UNDEFINED;
+          cb = _Runtime.callValue(Clipboard.getWritableWebClipboard__clipboard, cast ([] : Array<Dynamic>));
+          var __flowBranch19:Dynamic;
+          if (_Runtime.truthy(_Runtime.strictEquals(cb, null))) {
+            __flowBranch19 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(false);
+            });
+          } else {
+            __flowBranch19 = flighthq._internal._Async.flowNormal();
           }
-        }
-      } catch (__error:Dynamic) {
-        return cast '';
-      }
-      return cast '';
-      return cast null;
-    }), writeImage: flighthq._internal._Async.make(function(dataUrl:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var cb:Dynamic = cast _Runtime.UNDEFINED;
-      cb = _Runtime.callValue(Clipboard.getWritableWebClipboard__clipboard, cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(cb, null))) { return cast false; }
-      try {
-        var response:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(_Runtime.globalValue('fetch'), cast ([dataUrl] : Array<Dynamic>)));
-        var blob:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(response, 'blob', cast ([] : Array<Dynamic>)));
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(cb, 'write', cast ([cast ([_Runtime.construct(_Runtime.globalValue('ClipboardItem'), [_Runtime.objectFromPairs([{ key: _Runtime.field(blob, 'type'), value: blob }])])] : Array<Dynamic>)] : Array<Dynamic>)));
-        return cast true;
-      } catch (__error:Dynamic) {
-        return cast false;
-      }
-      return cast null;
-    }), hasImage: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast _Runtime.compare(_Runtime.field(flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.thisValue(), 'readImage', cast ([] : Array<Dynamic>))), 'length'), 0.0, '>');
-      return cast null;
-    }), readRTF: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast _Runtime.callProperty(_Runtime.thisValue(), 'readFormat', cast ([ClipboardFormatRtf] : Array<Dynamic>));
-      return cast null;
-    }), writeRTF: flighthq._internal._Async.make(function(rtf:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast _Runtime.callProperty(_Runtime.thisValue(), 'writeFormat', cast ([ClipboardFormatRtf, rtf] : Array<Dynamic>));
-      return cast null;
-    }), readBookmark: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast null;
-      return cast null;
-    }), writeBookmark: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast false;
-      return cast null;
-    }), readFiles: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast cast ([] : Array<Dynamic>);
-      return cast null;
-    }), writeFiles: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast false;
-      return cast null;
-    }), clear: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast _Runtime.callProperty(_Runtime.thisValue(), 'writeText', cast ([''] : Array<Dynamic>));
-      return cast null;
-    }), getChangeCount: function() {
+          return flighthq._internal._Async.continueFlow(__flowBranch19, function():Dynamic {
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              var entry:Dynamic = cast _Runtime.UNDEFINED;
+              entry = {  };
+              var __flowIterator20:Array<Dynamic> = _Runtime.iterable(items);
+              var __flowIndex21:Int = 0;
+              return flighthq._internal._Async.continueFlow(flighthq._internal._Async.repeatFlow(function():Dynamic {
+                if (__flowIndex21 >= __flowIterator20.length) return flighthq._internal._Async.flowBreak();
+                var item:Dynamic = __flowIterator20[__flowIndex21++];
+                var __beforeAwait22:Dynamic = entry;
+                var __beforeAwait23:Dynamic = _Runtime.field(item, 'format');
+                return flighthq._internal._Async.flatMap(_Runtime.callValue(Clipboard.blobFromFormatData__clipboard, cast ([_Runtime.field(item, 'format'), _Runtime.field(item, 'data')] : Array<Dynamic>)), function(__awaitValue24:Dynamic):Dynamic {
+                  _Runtime.setIndex(__beforeAwait22, __beforeAwait23, __awaitValue24);
+                  return flighthq._internal._Async.flowNormal();
+                });
+              }), function():Dynamic {
+                return flighthq._internal._Async.flatMap(_Runtime.callProperty(cb, 'write', cast ([cast ([_Runtime.construct(_Runtime.globalValue('ClipboardItem'), [entry])] : Array<Dynamic>)] : Array<Dynamic>)), function(__awaitValue25:Dynamic):Dynamic {
+                  __awaitValue25;
+                  return flighthq._internal._Async.flowReturn(true);
+                });
+              });
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(false);
+              });
+            }), function():Dynamic {
+              return flighthq._internal._Async.flowNormal();
+            });
+          });
+        })
+      );
+    }, readItems: function(formats:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var cb:Dynamic = cast _Runtime.UNDEFINED;
+          cb = _Runtime.callValue(Clipboard.getWebClipboard__clipboard, cast ([] : Array<Dynamic>));
+          var __flowBranch26:Dynamic;
+          if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(cb, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(cb, 'read')), 'function')))) {
+            __flowBranch26 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn({  });
+            });
+          } else {
+            __flowBranch26 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch26, function():Dynamic {
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              var clipItems:Dynamic = cast _Runtime.UNDEFINED;
+              var result:Dynamic = cast _Runtime.UNDEFINED;
+              return flighthq._internal._Async.flatMap(_Runtime.callProperty(cb, 'read', cast ([] : Array<Dynamic>)), function(__awaitValue27:Dynamic):Dynamic {
+                clipItems = __awaitValue27;
+                result = {  };
+                var __flowIterator28:Array<Dynamic> = _Runtime.iterable(clipItems);
+                var __flowIndex29:Int = 0;
+                return flighthq._internal._Async.continueFlow(flighthq._internal._Async.repeatFlow(function():Dynamic {
+                  if (__flowIndex29 >= __flowIterator28.length) return flighthq._internal._Async.flowBreak();
+                  var clipItem:Dynamic = __flowIterator28[__flowIndex29++];
+                  var __flowIterator30:Array<Dynamic> = _Runtime.iterable(formats);
+                  var __flowIndex31:Int = 0;
+                  return flighthq._internal._Async.continueFlow(flighthq._internal._Async.repeatFlow(function():Dynamic {
+                    if (__flowIndex31 >= __flowIterator30.length) return flighthq._internal._Async.flowBreak();
+                    var format:Dynamic = __flowIterator30[__flowIndex31++];
+                    var __flowBranch32:Dynamic;
+                    if (_Runtime.truthy(_Runtime.andValue(_Runtime.includes(_Runtime.field(clipItem, 'types'), format), function():Dynamic return cast !_Runtime.truthy(_Runtime.hasField(result, format))))) {
+                      __flowBranch32 = flighthq._internal._Async.protect(function():Dynamic {
+                        var blob:Dynamic = cast _Runtime.UNDEFINED;
+                        return flighthq._internal._Async.flatMap(_Runtime.callProperty(clipItem, 'getType', cast ([format] : Array<Dynamic>)), function(__awaitValue33:Dynamic):Dynamic {
+                          blob = __awaitValue33;
+                          var __beforeAwait34:Dynamic = result;
+                          var __beforeAwait35:Dynamic = format;
+                          return flighthq._internal._Async.flatMap(_Runtime.callProperty(blob, 'text', cast ([] : Array<Dynamic>)), function(__awaitValue36:Dynamic):Dynamic {
+                            return flighthq._internal._Async.flatMap(_Runtime.callValue(Clipboard.readBlobAsDataUrl__clipboard, cast ([blob] : Array<Dynamic>)), function(__awaitValue37:Dynamic):Dynamic {
+                              _Runtime.setIndex(__beforeAwait34, __beforeAwait35, _Runtime.select(StringTools.startsWith(format, 'image/'), function():Dynamic return cast __awaitValue37, function():Dynamic return cast __awaitValue36));
+                              return flighthq._internal._Async.flowNormal();
+                            });
+                          });
+                        });
+                      });
+                    } else {
+                      __flowBranch32 = flighthq._internal._Async.flowNormal();
+                    }
+                    return flighthq._internal._Async.continueFlow(__flowBranch32, function():Dynamic {
+                      return flighthq._internal._Async.flowNormal();
+                    });
+                  }), function():Dynamic {
+                    return flighthq._internal._Async.flowNormal();
+                  });
+                }), function():Dynamic {
+                  return flighthq._internal._Async.flowReturn(result);
+                });
+              });
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn({  });
+              });
+            }), function():Dynamic {
+              return flighthq._internal._Async.flowNormal();
+            });
+          });
+        })
+      );
+    }, readText: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var cb:Dynamic = cast _Runtime.UNDEFINED;
+          cb = _Runtime.callValue(Clipboard.getWebClipboard__clipboard, cast ([] : Array<Dynamic>));
+          var __flowBranch38:Dynamic;
+          if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(cb, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(cb, 'readText')), 'function')))) {
+            __flowBranch38 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn('');
+            });
+          } else {
+            __flowBranch38 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch38, function():Dynamic {
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flatMap(_Runtime.callProperty(cb, 'readText', cast ([] : Array<Dynamic>)), function(__awaitValue39:Dynamic):Dynamic {
+                return flighthq._internal._Async.flowReturn(__awaitValue39);
+              });
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn('');
+              });
+            }), function():Dynamic {
+              return flighthq._internal._Async.flowNormal();
+            });
+          });
+        })
+      );
+    }, writeText: function(text:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var cb:Dynamic = cast _Runtime.UNDEFINED;
+          cb = _Runtime.callValue(Clipboard.getWebClipboard__clipboard, cast ([] : Array<Dynamic>));
+          var __flowBranch40:Dynamic;
+          if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(cb, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(cb, 'writeText')), 'function')))) {
+            __flowBranch40 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(false);
+            });
+          } else {
+            __flowBranch40 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch40, function():Dynamic {
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flatMap(_Runtime.callProperty(cb, 'writeText', cast ([text] : Array<Dynamic>)), function(__awaitValue41:Dynamic):Dynamic {
+                __awaitValue41;
+                return flighthq._internal._Async.flowReturn(true);
+              });
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(false);
+              });
+            }), function():Dynamic {
+              return flighthq._internal._Async.flowNormal();
+            });
+          });
+        })
+      );
+    }, readHtml: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(_Runtime.callProperty(_Runtime.thisValue(), 'readFormat', cast ([ClipboardFormatHtml] : Array<Dynamic>)));
+      });
+    }, writeHtml: function(html:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(_Runtime.callProperty(_Runtime.thisValue(), 'writeFormat', cast ([ClipboardFormatHtml, html] : Array<Dynamic>)));
+      });
+    }, hasText: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.flatMap(_Runtime.callProperty(_Runtime.thisValue(), 'readText', cast ([] : Array<Dynamic>)), function(__awaitValue42:Dynamic):Dynamic {
+          return flighthq._internal._Async.resolve(_Runtime.compare(_Runtime.field(__awaitValue42, 'length'), 0.0, '>'));
+        });
+      });
+    }, readImage: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var cb:Dynamic = cast _Runtime.UNDEFINED;
+          cb = _Runtime.callValue(Clipboard.getWebClipboard__clipboard, cast ([] : Array<Dynamic>));
+          var __flowBranch43:Dynamic;
+          if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(cb, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(cb, 'read')), 'function')))) {
+            __flowBranch43 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn('');
+            });
+          } else {
+            __flowBranch43 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch43, function():Dynamic {
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              var items:Dynamic = cast _Runtime.UNDEFINED;
+              return flighthq._internal._Async.flatMap(_Runtime.callProperty(cb, 'read', cast ([] : Array<Dynamic>)), function(__awaitValue44:Dynamic):Dynamic {
+                items = __awaitValue44;
+                var __flowIterator45:Array<Dynamic> = _Runtime.iterable(items);
+                var __flowIndex46:Int = 0;
+                return flighthq._internal._Async.continueFlow(flighthq._internal._Async.repeatFlow(function():Dynamic {
+                  if (__flowIndex46 >= __flowIterator45.length) return flighthq._internal._Async.flowBreak();
+                  var item:Dynamic = __flowIterator45[__flowIndex46++];
+                  var type:Dynamic = cast _Runtime.UNDEFINED;
+                  type = _Runtime.find(_Runtime.field(item, 'types'), function(t:Dynamic) return StringTools.startsWith(t, 'image/'));
+                  var __flowBranch47:Dynamic;
+                  if (_Runtime.truthy(!_Runtime.strictEquals(type, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+                    __flowBranch47 = flighthq._internal._Async.protect(function():Dynamic {
+                      var blob:Dynamic = cast _Runtime.UNDEFINED;
+                      return flighthq._internal._Async.flatMap(_Runtime.callProperty(item, 'getType', cast ([type] : Array<Dynamic>)), function(__awaitValue48:Dynamic):Dynamic {
+                        blob = __awaitValue48;
+                        return flighthq._internal._Async.flowReturn(_Runtime.callValue(Clipboard.readBlobAsDataUrl__clipboard, cast ([blob] : Array<Dynamic>)));
+                      });
+                    });
+                  } else {
+                    __flowBranch47 = flighthq._internal._Async.flowNormal();
+                  }
+                  return flighthq._internal._Async.continueFlow(__flowBranch47, function():Dynamic {
+                    return flighthq._internal._Async.flowNormal();
+                  });
+                }), function():Dynamic {
+                  return flighthq._internal._Async.flowNormal();
+                });
+              });
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn('');
+              });
+            }), function():Dynamic {
+              return flighthq._internal._Async.flowReturn('');
+            });
+          });
+        })
+      );
+    }, writeImage: function(dataUrl:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var cb:Dynamic = cast _Runtime.UNDEFINED;
+          cb = _Runtime.callValue(Clipboard.getWritableWebClipboard__clipboard, cast ([] : Array<Dynamic>));
+          var __flowBranch49:Dynamic;
+          if (_Runtime.truthy(_Runtime.strictEquals(cb, null))) {
+            __flowBranch49 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(false);
+            });
+          } else {
+            __flowBranch49 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch49, function():Dynamic {
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              var response:Dynamic = cast _Runtime.UNDEFINED;
+              var blob:Dynamic = cast _Runtime.UNDEFINED;
+              return flighthq._internal._Async.flatMap(_Runtime.callValue(_Runtime.globalValue('fetch'), cast ([dataUrl] : Array<Dynamic>)), function(__awaitValue50:Dynamic):Dynamic {
+                response = __awaitValue50;
+                return flighthq._internal._Async.flatMap(_Runtime.callProperty(response, 'blob', cast ([] : Array<Dynamic>)), function(__awaitValue51:Dynamic):Dynamic {
+                  blob = __awaitValue51;
+                  return flighthq._internal._Async.flatMap(_Runtime.callProperty(cb, 'write', cast ([cast ([_Runtime.construct(_Runtime.globalValue('ClipboardItem'), [_Runtime.objectFromPairs([{ key: _Runtime.field(blob, 'type'), value: blob }])])] : Array<Dynamic>)] : Array<Dynamic>)), function(__awaitValue52:Dynamic):Dynamic {
+                    __awaitValue52;
+                    return flighthq._internal._Async.flowReturn(true);
+                  });
+                });
+              });
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(false);
+              });
+            }), function():Dynamic {
+              return flighthq._internal._Async.flowNormal();
+            });
+          });
+        })
+      );
+    }, hasImage: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.flatMap(_Runtime.callProperty(_Runtime.thisValue(), 'readImage', cast ([] : Array<Dynamic>)), function(__awaitValue53:Dynamic):Dynamic {
+          return flighthq._internal._Async.resolve(_Runtime.compare(_Runtime.field(__awaitValue53, 'length'), 0.0, '>'));
+        });
+      });
+    }, readRTF: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(_Runtime.callProperty(_Runtime.thisValue(), 'readFormat', cast ([ClipboardFormatRtf] : Array<Dynamic>)));
+      });
+    }, writeRTF: function(rtf:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(_Runtime.callProperty(_Runtime.thisValue(), 'writeFormat', cast ([ClipboardFormatRtf, rtf] : Array<Dynamic>)));
+      });
+    }, readBookmark: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(null);
+      });
+    }, writeBookmark: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(false);
+      });
+    }, readFiles: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
+      });
+    }, writeFiles: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(false);
+      });
+    }, clear: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(_Runtime.callProperty(_Runtime.thisValue(), 'writeText', cast ([''] : Array<Dynamic>)));
+      });
+    }, getChangeCount: function() {
       return cast -1.0;
     }, subscribeClipboardChange: function(listener:Dynamic) {
       var target:Dynamic = cast _Runtime.UNDEFINED;
@@ -318,7 +615,7 @@ class Clipboard {
   }
 
   public static function readBlobAsDataUrl__clipboard(blob:Dynamic):flighthq._internal._Promise<String> {
-    return cast _Runtime.construct(_Runtime.globalValue('Promise'), [function(resolve:Dynamic) {
+    return cast flighthq._internal._Async.create(function(resolve:Dynamic) {
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('FileReader'), 'undefined'))) {
         _Runtime.callValue(resolve, cast ([''] : Array<Dynamic>));
         return;
@@ -331,7 +628,7 @@ class Clipboard {
       } catch (__error:Dynamic) {
         _Runtime.callValue(resolve, cast ([''] : Array<Dynamic>));
       }
-    }]);
+    });
     return cast null;
   }
 

@@ -10,7 +10,6 @@ import {
 } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { finished } from 'node:stream/promises';
-import os from 'node:os';
 import path from 'node:path';
 import process from 'node:process';
 import yazl from 'yazl';
@@ -55,7 +54,6 @@ const environment = {
   PATH: `${haxeDirectory}${path.delimiter}${process.env.PATH ?? ''}`,
 };
 run(haxelib, ['setup', repository], { env: environment });
-run(haxelib, ['dev', 'jsasync', resolveLibraryCachePath('jsasync')], { env: environment });
 run(haxelib, ['install', artifact, '--always', '--skip-dependencies'], { env: environment });
 const consumer = path.join(packageRoot, 'consumer');
 mkdirSync(consumer, { recursive: true });
@@ -68,13 +66,6 @@ run(haxe, ['-cp', '.', '-lib', 'flight', '--main', 'PackageSmoke', '--js', consu
 run(process.execPath, [consumerOutput], { cwd: consumer, env: environment });
 
 process.stdout.write(`Built, installed, and consumed ${path.relative(workspace, artifact)}.\n`);
-
-function resolveLibraryCachePath(name) {
-  const specification = readFileSync(path.join(workspace, 'haxe_libraries', `${name}.hxml`), 'utf8');
-  const relativePath = new RegExp(` into (${name}\\/[^\\s"]+)`, 'u').exec(specification)?.[1];
-  if (!relativePath) throw new Error(`Could not resolve the pinned ${name} cache path.`);
-  return path.join(process.env.HAXE_LIBCACHE ?? path.join(os.homedir(), 'haxe', 'haxe_libraries'), relativePath);
-}
 
 async function writeZip(directory, output) {
   const archive = new yazl.ZipFile();

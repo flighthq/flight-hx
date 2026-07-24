@@ -9,12 +9,12 @@ import flighthq.types.ImageEncodeOptions;
 
 class EncodeImage {
   public static function encodeImage(image:DecodedImage, mimeType:String, ?options:ImageEncodeOptions):flighthq._internal._Promise<Null<Dynamic>> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<Dynamic>> {
+    return cast flighthq._internal._Async.protect(function():Dynamic {
       var encoder:Dynamic = cast _Runtime.UNDEFINED;
       encoder = _Runtime.callValue(getImageEncoder, cast ([mimeType] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.strictEquals(encoder, null))) { return cast null; }
       return cast _Runtime.callValue(encoder, cast ([image, options] : Array<Dynamic>));
       return cast null;
-    })();
+    });
   }
 }

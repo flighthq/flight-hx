@@ -370,18 +370,38 @@ class Sensors {
       return cast !_Runtime.strictEquals(_Runtime.typeofValue(Sensors.DeviceOrientationEvent__sensors), 'undefined');
     }, isProximitySupported: function() {
       return cast false;
-    }, requestPermission: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      var request:Dynamic = cast _Runtime.UNDEFINED;
-      request = _Runtime.callValue(Sensors.getWebMotionPermissionRequest__sensors, cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(request, null))) { return cast true; }
-      try {
-        var state:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(request, cast ([] : Array<Dynamic>)));
-        return cast _Runtime.strictEquals(state, 'granted');
-      } catch (__error:Dynamic) {
-        return cast false;
-      }
-      return cast null;
-    }), subscribeAbsoluteOrientation: function(listener:Dynamic, ?options:SensorSubscribeOptions) {
+    }, requestPermission: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var request:Dynamic = cast _Runtime.UNDEFINED;
+          request = _Runtime.callValue(Sensors.getWebMotionPermissionRequest__sensors, cast ([] : Array<Dynamic>));
+          var __flowBranch0:Dynamic;
+          if (_Runtime.truthy(_Runtime.strictEquals(request, null))) {
+            __flowBranch0 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(true);
+            });
+          } else {
+            __flowBranch0 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch0, function():Dynamic {
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              var state:Dynamic = cast _Runtime.UNDEFINED;
+              return flighthq._internal._Async.flatMap(_Runtime.callValue(request, cast ([] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
+                state = __awaitValue1;
+                return flighthq._internal._Async.flowReturn(_Runtime.strictEquals(state, 'granted'));
+              });
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(false);
+              });
+            }), function():Dynamic {
+              return flighthq._internal._Async.flowNormal();
+            });
+          });
+        })
+      );
+    }, subscribeAbsoluteOrientation: function(listener:Dynamic, ?options:SensorSubscribeOptions) {
       var ctor:Dynamic = cast _Runtime.UNDEFINED;
       var handler:Dynamic = cast _Runtime.UNDEFINED;
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast function() {
@@ -668,26 +688,88 @@ class Sensors {
   }
 
   public static function getWebSensorsPermissionState__sensors(?sensor:String):flighthq._internal._Promise<SensorsPermissionState> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<SensorsPermissionState> {
-      var permissionName:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast 'unsupported'; }
-      permissionName = _Runtime.select(_Runtime.strictEquals(sensor, 'magnetometer'), function():Dynamic return cast 'magnetometer', function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(sensor, 'orientation'), function():Dynamic return cast 'gyroscope', function():Dynamic return cast 'accelerometer'));
-      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'permissions')))) {
-        try {
-          var status:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'permissions'), 'query', cast ([{ name: (cast permissionName : PermissionName) }] : Array<Dynamic>)));
-          if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(status, 'state'), 'granted'))) { return cast 'granted'; }
-          if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(status, 'state'), 'denied'))) { return cast 'denied'; }
-          return cast 'prompt';
-        } catch (__error:Dynamic) {
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var permissionName:Dynamic = cast _Runtime.UNDEFINED;
+        var __flowBranch2:Dynamic;
+        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) {
+          __flowBranch2 = flighthq._internal._Async.protect(function():Dynamic {
+            return flighthq._internal._Async.flowReturn('unsupported');
+          });
+        } else {
+          __flowBranch2 = flighthq._internal._Async.flowNormal();
         }
-      }
-      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(sensor, 'magnetometer'), function():Dynamic return cast !_Runtime.strictEquals(sensor, 'orientation')))) {
-        var hasMotion:Dynamic = !_Runtime.strictEquals(_Runtime.typeofGlobal('DeviceMotionEvent'), 'undefined');
-        if (_Runtime.truthy(!_Runtime.truthy(hasMotion))) { return cast 'unsupported'; }
-      }
-      return cast 'granted';
-      return cast null;
-    })();
+        return flighthq._internal._Async.continueFlow(__flowBranch2, function():Dynamic {
+          permissionName = _Runtime.select(_Runtime.strictEquals(sensor, 'magnetometer'), function():Dynamic return cast 'magnetometer', function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(sensor, 'orientation'), function():Dynamic return cast 'gyroscope', function():Dynamic return cast 'accelerometer'));
+          var __flowBranch3:Dynamic;
+          if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'permissions')))) {
+            __flowBranch3 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+                var status:Dynamic = cast _Runtime.UNDEFINED;
+                return flighthq._internal._Async.flatMap(_Runtime.callProperty(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'permissions'), 'query', cast ([{ name: (cast permissionName : PermissionName) }] : Array<Dynamic>)), function(__awaitValue4:Dynamic):Dynamic {
+                  status = __awaitValue4;
+                  var __flowBranch5:Dynamic;
+                  if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(status, 'state'), 'granted'))) {
+                    __flowBranch5 = flighthq._internal._Async.protect(function():Dynamic {
+                      return flighthq._internal._Async.flowReturn('granted');
+                    });
+                  } else {
+                    __flowBranch5 = flighthq._internal._Async.flowNormal();
+                  }
+                  return flighthq._internal._Async.continueFlow(__flowBranch5, function():Dynamic {
+                    var __flowBranch6:Dynamic;
+                    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(status, 'state'), 'denied'))) {
+                      __flowBranch6 = flighthq._internal._Async.protect(function():Dynamic {
+                        return flighthq._internal._Async.flowReturn('denied');
+                      });
+                    } else {
+                      __flowBranch6 = flighthq._internal._Async.flowNormal();
+                    }
+                    return flighthq._internal._Async.continueFlow(__flowBranch6, function():Dynamic {
+                      return flighthq._internal._Async.flowReturn('prompt');
+                    });
+                  });
+                });
+              }), function(__caughtError:Dynamic):Dynamic {
+                var __error:Dynamic = __caughtError;
+                return flighthq._internal._Async.protect(function():Dynamic {
+                  return flighthq._internal._Async.flowNormal();
+                });
+              }), function():Dynamic {
+                return flighthq._internal._Async.flowNormal();
+              });
+            });
+          } else {
+            __flowBranch3 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
+            var __flowBranch7:Dynamic;
+            if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(sensor, 'magnetometer'), function():Dynamic return cast !_Runtime.strictEquals(sensor, 'orientation')))) {
+              __flowBranch7 = flighthq._internal._Async.protect(function():Dynamic {
+                var hasMotion:Dynamic = cast _Runtime.UNDEFINED;
+                hasMotion = !_Runtime.strictEquals(_Runtime.typeofGlobal('DeviceMotionEvent'), 'undefined');
+                var __flowBranch8:Dynamic;
+                if (_Runtime.truthy(!_Runtime.truthy(hasMotion))) {
+                  __flowBranch8 = flighthq._internal._Async.protect(function():Dynamic {
+                    return flighthq._internal._Async.flowReturn('unsupported');
+                  });
+                } else {
+                  __flowBranch8 = flighthq._internal._Async.flowNormal();
+                }
+                return flighthq._internal._Async.continueFlow(__flowBranch8, function():Dynamic {
+                  return flighthq._internal._Async.flowNormal();
+                });
+              });
+            } else {
+              __flowBranch7 = flighthq._internal._Async.flowNormal();
+            }
+            return flighthq._internal._Async.continueFlow(__flowBranch7, function():Dynamic {
+              return flighthq._internal._Async.flowReturn('granted');
+            });
+          });
+        });
+      })
+    );
   }
 
   public static function hasAccelerometer():Bool {

@@ -48,7 +48,7 @@ class Ipc {
     return cast { send: function() {
     
     }, invoke: function() {
-      return cast _Runtime.callProperty(_Runtime.globalValue('Promise'), 'resolve', cast ([_Runtime.field(_Runtime, 'UNDEFINED')] : Array<Dynamic>));
+      return cast flighthq._internal._Async.resolve(_Runtime.field(_Runtime, 'UNDEFINED'));
     }, subscribe: function() {
       return cast function() {
       
@@ -101,12 +101,12 @@ class Ipc {
     var timeout:Dynamic = cast _Runtime.UNDEFINED;
     name = _Runtime.callValue(Ipc.resolveChannel__ipc, cast ([channel] : Array<Dynamic>));
     invoke = _Runtime.callProperty(_Runtime.callValue(getIpcBackend, cast ([] : Array<Dynamic>)), 'invoke', cast ([name, args] : Array<Dynamic>));
-    timeout = _Runtime.construct(_Runtime.globalValue('Promise'), [function(_:Dynamic, reject:Dynamic) {
+    timeout = flighthq._internal._Async.create(function(_:Dynamic, reject:Dynamic) {
       var id:Dynamic = cast _Runtime.UNDEFINED;
       id = _Runtime.setTimeout(function() return _Runtime.callValue(reject, cast ([new IpcTimeoutError(name, timeoutMs)] : Array<Dynamic>)), timeoutMs);
       _Runtime.callProperty(invoke, 'then', cast ([function() return _Runtime.clearTimeout(id), function() return _Runtime.clearTimeout(id)] : Array<Dynamic>));
-    }]);
-    return cast _Runtime.callProperty(_Runtime.globalValue('Promise'), 'race', cast ([cast ([invoke, timeout] : Array<Dynamic>)] : Array<Dynamic>));
+    });
+    return cast flighthq._internal._Async.race(cast ([invoke, timeout] : Array<Dynamic>));
     return cast null;
   }
 

@@ -11,15 +11,27 @@ import flighthq.types.SceneResources.SceneDocumentLoadOptions;
 
 class AwdLoad {
   public static function loadSceneDocumentFromAwdUrl(url:String, ?options:SceneDocumentLoadOptions):flighthq._internal._Promise<Null<SceneDocument>> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<SceneDocument>> {
-      var bytes:Dynamic = cast _Runtime.UNDEFINED;
-      var document:Dynamic = cast _Runtime.UNDEFINED;
-      bytes = flighthq._internal._Async.awaitValue(_Runtime.callValue(loadSceneDocumentBytesFromUrl, cast ([url, options] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(bytes, null))) { return cast null; }
-      document = _Runtime.callValue(parseAwd, cast ([bytes] : Array<Dynamic>));
-      _Runtime.callValue(setSceneDocumentResourceBasePathFromUrl, cast ([document, url] : Array<Dynamic>));
-      return cast document;
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var bytes:Dynamic = cast _Runtime.UNDEFINED;
+        var document:Dynamic = cast _Runtime.UNDEFINED;
+        return flighthq._internal._Async.flatMap(_Runtime.callValue(loadSceneDocumentBytesFromUrl, cast ([url, options] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
+          bytes = __awaitValue0;
+          var __flowBranch1:Dynamic;
+          if (_Runtime.truthy(_Runtime.strictEquals(bytes, null))) {
+            __flowBranch1 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(null);
+            });
+          } else {
+            __flowBranch1 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch1, function():Dynamic {
+            document = _Runtime.callValue(parseAwd, cast ([bytes] : Array<Dynamic>));
+            _Runtime.callValue(setSceneDocumentResourceBasePathFromUrl, cast ([document, url] : Array<Dynamic>));
+            return flighthq._internal._Async.flowReturn(document);
+          });
+        });
+      })
+    );
   }
 }

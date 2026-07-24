@@ -16,7 +16,7 @@ class ElectronMenu {
       _Runtime.callProperty(_Runtime.field(electron, 'Menu'), 'setApplicationMenu', cast ([_Runtime.callProperty(_Runtime.field(electron, 'Menu'), 'buildFromTemplate', cast ([_Runtime.callValue(ElectronMenu.toElectronTemplate__electronMenu, cast ([items, function(id:Dynamic) return _Runtime.callOptionalValue(selectListener, cast ([id] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
       return cast true;
     }, popupContextMenu: function(items:Dynamic, x:Dynamic, y:Dynamic) {
-      return cast _Runtime.construct(_Runtime.globalValue('Promise'), [function(resolve:Dynamic) {
+      return cast flighthq._internal._Async.create(function(resolve:Dynamic) {
         var menu:Dynamic = cast _Runtime.UNDEFINED;
         menu = _Runtime.callProperty(_Runtime.field(electron, 'Menu'), 'buildFromTemplate', cast ([_Runtime.callValue(ElectronMenu.toElectronTemplate__electronMenu, cast ([items, function(id:Dynamic) return _Runtime.callValue(resolve, cast ([id] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
         try {
@@ -24,7 +24,7 @@ class ElectronMenu {
         } catch (__error:Dynamic) {
           _Runtime.callValue(resolve, cast ([null] : Array<Dynamic>));
         }
-      }]);
+      });
     }, subscribeSelect: function(listener:Dynamic) {
       (selectListener = cast (listener : Dynamic));
       return cast function() {

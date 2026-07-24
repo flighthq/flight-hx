@@ -16,16 +16,16 @@ class CapacitorConnectivity {
     var mirror:CapacitorConnectionStatus = cast _Runtime.UNDEFINED;
     network = _Runtime.field(capacitor, 'network');
     mirror = { connected: false, connectionType: 'unknown' };
-    _Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(network, 'getStatus', cast ([] : Array<Dynamic>)), 'then', cast ([function(status:Dynamic) {
+    flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(network, 'getStatus', cast ([] : Array<Dynamic>)), 'then', cast ([function(status:Dynamic) {
       (mirror = cast (status : Dynamic));
-    }] : Array<Dynamic>)), 'catch', cast ([function() {
+    }] : Array<Dynamic>)), function() {
     
-    }] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.callProperty(network, 'addListener', cast (['networkStatusChange', function(status:Dynamic) {
+    });
+    flighthq._internal._Async.recover(_Runtime.callProperty(network, 'addListener', cast (['networkStatusChange', function(status:Dynamic) {
       (mirror = cast (status : Dynamic));
-    }] : Array<Dynamic>)), 'catch', cast ([function() {
+    }] : Array<Dynamic>)), function() {
     
-    }] : Array<Dynamic>));
+    });
     return cast { getStatus: function(out:ConnectivityStatus) {
       _Runtime.setField(out, 'online', _Runtime.field(mirror, 'connected'));
       _Runtime.setField(out, 'type', _Runtime.callValue(CapacitorConnectivity.toConnectionType__capacitorConnectivity, cast ([_Runtime.field(mirror, 'connectionType')] : Array<Dynamic>)));
@@ -55,19 +55,19 @@ class CapacitorConnectivity {
     var handle:Null<CapacitorPluginListenerHandle> = cast _Runtime.UNDEFINED;
     removed = false;
     handle = null;
-    _Runtime.callProperty(_Runtime.callProperty(handlePromise, 'then', cast ([function(resolved:Dynamic) {
+    flighthq._internal._Async.recover(_Runtime.callProperty(handlePromise, 'then', cast ([function(resolved:Dynamic) {
       (handle = cast (resolved : Dynamic));
-      if (_Runtime.truthy(removed)) { _Runtime.callProperty(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
+      if (_Runtime.truthy(removed)) { flighthq._internal._Async.recover(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>)); }
-    }] : Array<Dynamic>)), 'catch', cast ([function() {
+      }); }
+    }] : Array<Dynamic>)), function() {
     
-    }] : Array<Dynamic>));
+    });
     return cast function() {
       (removed = cast (true : Dynamic));
-      if (_Runtime.truthy(!_Runtime.strictEquals(handle, null))) { _Runtime.callProperty(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
+      if (_Runtime.truthy(!_Runtime.strictEquals(handle, null))) { flighthq._internal._Async.recover(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>)); }
+      }); }
     };
     return cast null;
   }

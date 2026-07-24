@@ -27,23 +27,47 @@ class SceneDocumentSource {
   }
 
   public static function loadSceneDocumentBytesFromUrl(url:String, ?options:SceneDocumentLoadOptions):flighthq._internal._Promise<Null<Dynamic>> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<Dynamic>> {
-      var response:Dynamic = cast _Runtime.UNDEFINED;
-      response = flighthq._internal._Async.awaitValue(_Runtime.callValue(sendNetRequest, cast ([{ method: 'GET', responseType: 'arraybuffer', url: url }, _Runtime.callValue(SceneDocumentSource.createSceneDocumentNetRequestOptions__sceneDocumentSource, cast ([url, options] : Array<Dynamic>))] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(response, 'ok')), function():Dynamic return cast !_Runtime.truthy(_Runtime.isInstanceOf(_Runtime.field(response, 'body'), _Runtime.globalValue('ArrayBuffer')))))) { return cast null; }
-      return cast _Runtime.construct(_Runtime.globalValue('Uint8Array'), [_Runtime.field(response, 'body')]);
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var response:Dynamic = cast _Runtime.UNDEFINED;
+        return flighthq._internal._Async.flatMap(_Runtime.callValue(sendNetRequest, cast ([{ method: 'GET', responseType: 'arraybuffer', url: url }, _Runtime.callValue(SceneDocumentSource.createSceneDocumentNetRequestOptions__sceneDocumentSource, cast ([url, options] : Array<Dynamic>))] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
+          response = __awaitValue0;
+          var __flowBranch1:Dynamic;
+          if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(response, 'ok')), function():Dynamic return cast !_Runtime.truthy(_Runtime.isInstanceOf(_Runtime.field(response, 'body'), _Runtime.globalValue('ArrayBuffer')))))) {
+            __flowBranch1 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(null);
+            });
+          } else {
+            __flowBranch1 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch1, function():Dynamic {
+            return flighthq._internal._Async.flowReturn(_Runtime.construct(_Runtime.globalValue('Uint8Array'), [_Runtime.field(response, 'body')]));
+          });
+        });
+      })
+    );
   }
 
   public static function loadSceneDocumentTextFromUrl(url:String, ?options:SceneDocumentLoadOptions):flighthq._internal._Promise<Null<String>> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<String>> {
-      var response:Dynamic = cast _Runtime.UNDEFINED;
-      response = flighthq._internal._Async.awaitValue(_Runtime.callValue(sendNetRequest, cast ([{ method: 'GET', responseType: 'text', url: url }, _Runtime.callValue(SceneDocumentSource.createSceneDocumentNetRequestOptions__sceneDocumentSource, cast ([url, options] : Array<Dynamic>))] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(response, 'ok')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(response, 'body')), 'string')))) { return cast null; }
-      return cast _Runtime.field(response, 'body');
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var response:Dynamic = cast _Runtime.UNDEFINED;
+        return flighthq._internal._Async.flatMap(_Runtime.callValue(sendNetRequest, cast ([{ method: 'GET', responseType: 'text', url: url }, _Runtime.callValue(SceneDocumentSource.createSceneDocumentNetRequestOptions__sceneDocumentSource, cast ([url, options] : Array<Dynamic>))] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
+          response = __awaitValue2;
+          var __flowBranch3:Dynamic;
+          if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(response, 'ok')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(response, 'body')), 'string')))) {
+            __flowBranch3 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(null);
+            });
+          } else {
+            __flowBranch3 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
+            return flighthq._internal._Async.flowReturn(_Runtime.field(response, 'body'));
+          });
+        });
+      })
+    );
   }
 
   public static function setSceneDocumentResourceBasePathFromUrl(document:SceneDocument, url:String):Void {

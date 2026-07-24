@@ -23,26 +23,26 @@ class CapacitorHaptics {
       _Runtime.setField(out, 'customEvents', false);
       return cast out;
     }, impact: function(style:HapticImpactStyle) {
-      _Runtime.callProperty(_Runtime.callProperty(haptics, 'impact', cast ([{ style: _Runtime.callValue(CapacitorHaptics.toCapacitorImpactStyle__capacitorHaptics, cast ([style] : Array<Dynamic>)) }] : Array<Dynamic>)), 'catch', cast ([function() {
+      flighthq._internal._Async.recover(_Runtime.callProperty(haptics, 'impact', cast ([{ style: _Runtime.callValue(CapacitorHaptics.toCapacitorImpactStyle__capacitorHaptics, cast ([style] : Array<Dynamic>)) }] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>));
+      });
       return cast true;
     }, isSupported: function() {
       return cast true;
     }, notification: function(type:HapticNotificationType) {
-      _Runtime.callProperty(_Runtime.callProperty(haptics, 'notification', cast ([{ type: _Runtime.callProperty(type, 'toUpperCase', cast ([] : Array<Dynamic>)) }] : Array<Dynamic>)), 'catch', cast ([function() {
+      flighthq._internal._Async.recover(_Runtime.callProperty(haptics, 'notification', cast ([{ type: _Runtime.callProperty(type, 'toUpperCase', cast ([] : Array<Dynamic>)) }] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>));
+      });
       return cast true;
     }, selection: function() {
-      _Runtime.callProperty(_Runtime.callProperty(haptics, 'selectionChanged', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
+      flighthq._internal._Async.recover(_Runtime.callProperty(haptics, 'selectionChanged', cast ([] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>));
+      });
       return cast true;
     }, vibrate: function(durationMs:Float) {
-      _Runtime.callProperty(_Runtime.callProperty(haptics, 'vibrate', cast ([{ duration: durationMs }] : Array<Dynamic>)), 'catch', cast ([function() {
+      flighthq._internal._Async.recover(_Runtime.callProperty(haptics, 'vibrate', cast ([{ duration: durationMs }] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>));
+      });
       return cast true;
     }, vibratePattern: function() {
       return cast false;

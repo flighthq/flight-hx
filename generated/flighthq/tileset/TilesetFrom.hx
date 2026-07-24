@@ -35,30 +35,34 @@ class TilesetFrom {
   }
 
   public static function loadTilesetFromBase64(base64:String, mimeType:String, tileWidth:Float, tileHeight:Float, margin:Float = 0.0, spacing:Float = 0.0, ?signal:Dynamic):flighthq._internal._Promise<Tileset> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Tileset> {
-      return cast _Runtime.callValue(createTilesetFromImageResource, cast ([flighthq._internal._Async.awaitValue(_Runtime.callValue(loadImageResourceFromBase64, cast ([base64, mimeType, signal] : Array<Dynamic>))), tileWidth, tileHeight, margin, spacing] : Array<Dynamic>));
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.flatMap(_Runtime.callValue(loadImageResourceFromBase64, cast ([base64, mimeType, signal] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
+        return flighthq._internal._Async.resolve(_Runtime.callValue(createTilesetFromImageResource, cast ([__awaitValue0, tileWidth, tileHeight, margin, spacing] : Array<Dynamic>)));
+      });
+    });
   }
 
   public static function loadTilesetFromBlob(blob:Dynamic, tileWidth:Float, tileHeight:Float, margin:Float = 0.0, spacing:Float = 0.0, ?signal:Dynamic):flighthq._internal._Promise<Tileset> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Tileset> {
-      return cast _Runtime.callValue(createTilesetFromImageResource, cast ([flighthq._internal._Async.awaitValue(_Runtime.callValue(loadImageResourceFromBlob, cast ([blob, signal] : Array<Dynamic>))), tileWidth, tileHeight, margin, spacing] : Array<Dynamic>));
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.flatMap(_Runtime.callValue(loadImageResourceFromBlob, cast ([blob, signal] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
+        return flighthq._internal._Async.resolve(_Runtime.callValue(createTilesetFromImageResource, cast ([__awaitValue1, tileWidth, tileHeight, margin, spacing] : Array<Dynamic>)));
+      });
+    });
   }
 
   public static function loadTilesetFromBytes(bytes:Dynamic, tileWidth:Float, tileHeight:Float, margin:Float = 0.0, spacing:Float = 0.0, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<Tileset> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Tileset> {
-      return cast _Runtime.callValue(createTilesetFromImageResource, cast ([flighthq._internal._Async.awaitValue(_Runtime.callValue(loadImageResourceFromBytes, cast ([bytes, mimeType, signal] : Array<Dynamic>))), tileWidth, tileHeight, margin, spacing] : Array<Dynamic>));
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.flatMap(_Runtime.callValue(loadImageResourceFromBytes, cast ([bytes, mimeType, signal] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
+        return flighthq._internal._Async.resolve(_Runtime.callValue(createTilesetFromImageResource, cast ([__awaitValue2, tileWidth, tileHeight, margin, spacing] : Array<Dynamic>)));
+      });
+    });
   }
 
   public static function loadTilesetFromUrl(url:String, tileWidth:Float, tileHeight:Float, margin:Float = 0.0, spacing:Float = 0.0, ?crossOrigin:String, ?signal:Dynamic):flighthq._internal._Promise<Tileset> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Tileset> {
-      return cast _Runtime.callValue(createTilesetFromImageResource, cast ([flighthq._internal._Async.awaitValue(_Runtime.callValue(loadImageResourceFromUrl, cast ([url, crossOrigin, signal] : Array<Dynamic>))), tileWidth, tileHeight, margin, spacing] : Array<Dynamic>));
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.flatMap(_Runtime.callValue(loadImageResourceFromUrl, cast ([url, crossOrigin, signal] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
+        return flighthq._internal._Async.resolve(_Runtime.callValue(createTilesetFromImageResource, cast ([__awaitValue3, tileWidth, tileHeight, margin, spacing] : Array<Dynamic>)));
+      });
+    });
   }
 }

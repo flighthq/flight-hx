@@ -23,7 +23,7 @@ class Webcam {
 
   public static function createWebWebcamBackend():WebcamBackend {
     return cast { capture: function(options:Dynamic) {
-      return cast _Runtime.construct(_Runtime.globalValue('Promise'), [function(resolve:Dynamic) {
+      return cast flighthq._internal._Async.create(function(resolve:Dynamic) {
         if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'createElement')), 'function')))) {
           _Runtime.callValue(resolve, cast ([null] : Array<Dynamic>));
           return;
@@ -52,9 +52,9 @@ class Webcam {
         } catch (__error:Dynamic) {
           _Runtime.callValue(resolve, cast ([null] : Array<Dynamic>));
         }
-      }]);
+      });
     }, captureVideo: function(options:Dynamic) {
-      return cast _Runtime.construct(_Runtime.globalValue('Promise'), [function(resolve:Dynamic) {
+      return cast flighthq._internal._Async.create(function(resolve:Dynamic) {
         if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'createElement')), 'function')))) {
           _Runtime.callValue(resolve, cast ([null] : Array<Dynamic>));
           return;
@@ -83,19 +83,49 @@ class Webcam {
         } catch (__error:Dynamic) {
           _Runtime.callValue(resolve, cast ([null] : Array<Dynamic>));
         }
-      }]);
-    }, requestPermission: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast false; }
-      try {
-        var permissions:Dynamic = flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'permissions');
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(permissions, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(permissions, 'query')), 'function')))) { return cast false; }
-        var status:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(permissions, 'query', cast ([{ name: (cast 'camera' : PermissionName) }] : Array<Dynamic>)));
-        return cast _Runtime.strictEquals(_Runtime.field(status, 'state'), 'granted');
-      } catch (__error:Dynamic) {
-        return cast false;
-      }
-      return cast null;
-    }) };
+      });
+    }, requestPermission: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var __flowBranch0:Dynamic;
+          if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) {
+            __flowBranch0 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(false);
+            });
+          } else {
+            __flowBranch0 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch0, function():Dynamic {
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              var permissions:Dynamic = cast _Runtime.UNDEFINED;
+              var status:Dynamic = cast _Runtime.UNDEFINED;
+              permissions = flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'permissions');
+              var __flowBranch1:Dynamic;
+              if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(permissions, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(permissions, 'query')), 'function')))) {
+                __flowBranch1 = flighthq._internal._Async.protect(function():Dynamic {
+                  return flighthq._internal._Async.flowReturn(false);
+                });
+              } else {
+                __flowBranch1 = flighthq._internal._Async.flowNormal();
+              }
+              return flighthq._internal._Async.continueFlow(__flowBranch1, function():Dynamic {
+                return flighthq._internal._Async.flatMap(_Runtime.callProperty(permissions, 'query', cast ([{ name: (cast 'camera' : PermissionName) }] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
+                  status = __awaitValue2;
+                  return flighthq._internal._Async.flowReturn(_Runtime.strictEquals(_Runtime.field(status, 'state'), 'granted'));
+                });
+              });
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(false);
+              });
+            }), function():Dynamic {
+              return flighthq._internal._Async.flowNormal();
+            });
+          });
+        })
+      );
+    } };
     return cast null;
   }
 

@@ -10,30 +10,42 @@ class CapacitorDialog {
   public static function createCapacitorDialogBackend(capacitor:CapacitorApi):DialogBackend {
     var dialog:Dynamic = cast _Runtime.UNDEFINED;
     dialog = _Runtime.field(capacitor, 'dialog');
-    return cast { openFile: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast cast ([] : Array<Dynamic>);
-      return cast null;
-    }), openDirectory: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast cast ([] : Array<Dynamic>);
-      return cast null;
-    }), saveFile: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast null;
-      return cast null;
-    }), message: flighthq._internal._Async.make(function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
-      flighthq._internal._Async.awaitValue(_Runtime.callProperty(dialog, 'alert', cast ([{ title: _Runtime.field(options, 'title'), message: _Runtime.field(options, 'message') }] : Array<Dynamic>)));
-      return cast { buttonIndex: 0.0, cancelled: false, checkboxChecked: false };
-      return cast null;
-    }), confirm: flighthq._internal._Async.make(function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var result:Dynamic = cast _Runtime.UNDEFINED;
-      result = flighthq._internal._Async.awaitValue(_Runtime.callProperty(dialog, 'confirm', cast ([{ title: _Runtime.field(options, 'title'), message: _Runtime.field(options, 'message') }] : Array<Dynamic>)));
-      return cast _Runtime.field(result, 'value');
-      return cast null;
-    }), prompt: flighthq._internal._Async.make(function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var result:Dynamic = cast _Runtime.UNDEFINED;
-      result = flighthq._internal._Async.awaitValue(_Runtime.callProperty(dialog, 'prompt', cast ([{ title: _Runtime.field(options, 'title'), message: _Runtime.field(options, 'message'), inputText: _Runtime.field(options, 'defaultValue'), inputPlaceholder: _Runtime.field(options, 'placeholder') }] : Array<Dynamic>)));
-      return cast _Runtime.select(_Runtime.field(result, 'cancelled'), function():Dynamic return cast null, function():Dynamic return cast _Runtime.field(result, 'value'));
-      return cast null;
-    }) };
+    return cast { openFile: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
+      });
+    }, openDirectory: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
+      });
+    }, saveFile: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(null);
+      });
+    }, message: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.flatMap(_Runtime.callProperty(dialog, 'alert', cast ([{ title: _Runtime.field(options, 'title'), message: _Runtime.field(options, 'message') }] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
+          __awaitValue0;
+          return flighthq._internal._Async.resolve({ buttonIndex: 0.0, cancelled: false, checkboxChecked: false });
+        });
+      });
+    }, confirm: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        var result:Dynamic = cast _Runtime.UNDEFINED;
+        return flighthq._internal._Async.flatMap(_Runtime.callProperty(dialog, 'confirm', cast ([{ title: _Runtime.field(options, 'title'), message: _Runtime.field(options, 'message') }] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
+          result = __awaitValue1;
+          return flighthq._internal._Async.resolve(_Runtime.field(result, 'value'));
+        });
+      });
+    }, prompt: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        var result:Dynamic = cast _Runtime.UNDEFINED;
+        return flighthq._internal._Async.flatMap(_Runtime.callProperty(dialog, 'prompt', cast ([{ title: _Runtime.field(options, 'title'), message: _Runtime.field(options, 'message'), inputText: _Runtime.field(options, 'defaultValue'), inputPlaceholder: _Runtime.field(options, 'placeholder') }] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
+          result = __awaitValue2;
+          return flighthq._internal._Async.resolve(_Runtime.select(_Runtime.field(result, 'cancelled'), function():Dynamic return cast null, function():Dynamic return cast _Runtime.field(result, 'value')));
+        });
+      });
+    } };
     return cast null;
   }
 }

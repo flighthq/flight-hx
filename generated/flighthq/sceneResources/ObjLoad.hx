@@ -12,15 +12,27 @@ import flighthq.types.SceneResources.SceneDocumentLoadOptions;
 
 class ObjLoad {
   public static function loadSceneDocumentFromObjUrl(url:String, ?materials:ObjMaterialLibrary, ?options:SceneDocumentLoadOptions):flighthq._internal._Promise<Null<SceneDocument>> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<SceneDocument>> {
-      var source:Dynamic = cast _Runtime.UNDEFINED;
-      var document:Dynamic = cast _Runtime.UNDEFINED;
-      source = flighthq._internal._Async.awaitValue(_Runtime.callValue(loadSceneDocumentTextFromUrl, cast ([url, options] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(source, null))) { return cast null; }
-      document = _Runtime.callValue(parseObj, cast ([source, materials] : Array<Dynamic>));
-      _Runtime.callValue(setSceneDocumentResourceBasePathFromUrl, cast ([document, url] : Array<Dynamic>));
-      return cast document;
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var source:Dynamic = cast _Runtime.UNDEFINED;
+        var document:Dynamic = cast _Runtime.UNDEFINED;
+        return flighthq._internal._Async.flatMap(_Runtime.callValue(loadSceneDocumentTextFromUrl, cast ([url, options] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
+          source = __awaitValue0;
+          var __flowBranch1:Dynamic;
+          if (_Runtime.truthy(_Runtime.strictEquals(source, null))) {
+            __flowBranch1 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(null);
+            });
+          } else {
+            __flowBranch1 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch1, function():Dynamic {
+            document = _Runtime.callValue(parseObj, cast ([source, materials] : Array<Dynamic>));
+            _Runtime.callValue(setSceneDocumentResourceBasePathFromUrl, cast ([document, url] : Array<Dynamic>));
+            return flighthq._internal._Async.flowReturn(document);
+          });
+        });
+      })
+    );
   }
 }

@@ -14,9 +14,6 @@ const environment = {
   HAXE_STD_PATH: path.join(process.cwd(), '.haxe', '4.3.7', 'std'),
 };
 const arguments_ = process.argv.slice(2);
-if (arguments_.some((argument) => argument === '-js' || argument === '--js')) {
-  arguments_.unshift('-lib', 'jsasync');
-}
 const result = spawnSync(executable, arguments_, { env: environment, stdio: 'inherit' });
 if (result.error) throw result.error;
 process.exit(result.status ?? 1);

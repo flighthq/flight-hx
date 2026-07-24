@@ -505,16 +505,34 @@ class Screen {
   }
 
   public static function getScreenDetailPermission():flighthq._internal._Promise<String> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<String> {
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.hasField(_Runtime.globalValue('navigator'), 'permissions'))))) { return cast 'prompt'; }
-      try {
-        var status:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'permissions'), 'query', cast ([{ name: (cast 'window-management' : PermissionName) }] : Array<Dynamic>)));
-        return cast (cast _Runtime.field(status, 'state') : String);
-      } catch (__error:Dynamic) {
-        return cast 'prompt';
-      }
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var __flowBranch10:Dynamic;
+        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.hasField(_Runtime.globalValue('navigator'), 'permissions'))))) {
+          __flowBranch10 = flighthq._internal._Async.protect(function():Dynamic {
+            return flighthq._internal._Async.flowReturn('prompt');
+          });
+        } else {
+          __flowBranch10 = flighthq._internal._Async.flowNormal();
+        }
+        return flighthq._internal._Async.continueFlow(__flowBranch10, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+            var status:Dynamic = cast _Runtime.UNDEFINED;
+            return flighthq._internal._Async.flatMap(_Runtime.callProperty(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'permissions'), 'query', cast ([{ name: (cast 'window-management' : PermissionName) }] : Array<Dynamic>)), function(__awaitValue11:Dynamic):Dynamic {
+              status = __awaitValue11;
+              return flighthq._internal._Async.flowReturn((cast _Runtime.field(status, 'state') : String));
+            });
+          }), function(__caughtError:Dynamic):Dynamic {
+            var __error:Dynamic = __caughtError;
+            return flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn('prompt');
+            });
+          }), function():Dynamic {
+            return flighthq._internal._Async.flowNormal();
+          });
+        });
+      })
+    );
   }
 
   public static function getScreenModes(screen:ScreenInfo, out:Array<ScreenMode>):Array<ScreenMode> {
@@ -677,13 +695,13 @@ class Screen {
     handleChange = function() {
       if (_Runtime.truthy(!_Runtime.strictEquals(status, null))) { _Runtime.callValue(listener, cast ([(cast _Runtime.field(status, 'state') : String)] : Array<Dynamic>)); }
     };
-    _Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'permissions'), 'query', cast ([{ name: (cast 'window-management' : PermissionName) }] : Array<Dynamic>)), 'then', cast ([function(s:Dynamic) {
+    flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'permissions'), 'query', cast ([{ name: (cast 'window-management' : PermissionName) }] : Array<Dynamic>)), 'then', cast ([function(s:Dynamic) {
       if (_Runtime.truthy(cancelled)) { return; }
       (status = cast (s : Dynamic));
       _Runtime.callProperty(s, 'addEventListener', cast (['change', handleChange] : Array<Dynamic>));
-    }] : Array<Dynamic>)), 'catch', cast ([function() {
+    }] : Array<Dynamic>)), function() {
     
-    }] : Array<Dynamic>));
+    });
     return cast function() {
       (cancelled = cast (true : Dynamic));
       _Runtime.callOptionalProperty(status, 'removeEventListener', cast (['change', handleChange] : Array<Dynamic>));
@@ -695,21 +713,49 @@ class Screen {
   }
 
   public static function requestScreenDetails():flighthq._internal._Promise<Bool> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Bool> {
-      var win:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast false; }
-      win = (cast _Runtime.globalValue('window') : { @:optional var getScreenDetails:Dynamic; });
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(win, 'getScreenDetails')), 'function'))) { return cast false; }
-      try {
-        var details:Dynamic = flighthq._internal._Async.awaitValue(flighthq._internal.backend.DomWindowBackend.call(win, 'getScreenDetails', cast ([] : Array<Dynamic>)));
-        var b:Dynamic = (cast _Runtime.callValue(getScreenBackend, cast ([] : Array<Dynamic>)) : Dynamic);
-        _Runtime.callOptionalProperty(b, '_upgrade', cast ([details] : Array<Dynamic>));
-        return cast true;
-      } catch (__error:Dynamic) {
-        return cast false;
-      }
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var win:Dynamic = cast _Runtime.UNDEFINED;
+        var __flowBranch20:Dynamic;
+        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) {
+          __flowBranch20 = flighthq._internal._Async.protect(function():Dynamic {
+            return flighthq._internal._Async.flowReturn(false);
+          });
+        } else {
+          __flowBranch20 = flighthq._internal._Async.flowNormal();
+        }
+        return flighthq._internal._Async.continueFlow(__flowBranch20, function():Dynamic {
+          win = (cast _Runtime.globalValue('window') : { @:optional var getScreenDetails:Dynamic; });
+          var __flowBranch21:Dynamic;
+          if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(win, 'getScreenDetails')), 'function'))) {
+            __flowBranch21 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(false);
+            });
+          } else {
+            __flowBranch21 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch21, function():Dynamic {
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              var details:Dynamic = cast _Runtime.UNDEFINED;
+              var b:Dynamic = cast _Runtime.UNDEFINED;
+              return flighthq._internal._Async.flatMap(flighthq._internal.backend.DomWindowBackend.call(win, 'getScreenDetails', cast ([] : Array<Dynamic>)), function(__awaitValue22:Dynamic):Dynamic {
+                details = __awaitValue22;
+                b = (cast _Runtime.callValue(getScreenBackend, cast ([] : Array<Dynamic>)) : Dynamic);
+                _Runtime.callOptionalProperty(b, '_upgrade', cast ([details] : Array<Dynamic>));
+                return flighthq._internal._Async.flowReturn(true);
+              });
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(false);
+              });
+            }), function():Dynamic {
+              return flighthq._internal._Async.flowNormal();
+            });
+          });
+        });
+      })
+    );
   }
 
   public static function screenToDipPoint(screen:ScreenInfo, point:Vector2Like, out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {

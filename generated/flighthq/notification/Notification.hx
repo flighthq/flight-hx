@@ -88,19 +88,48 @@ class Notification {
         _Runtime.callValue(fn, cast ([arg] : Array<Dynamic>));
       }
     };
-    _show = flighthq._internal._Async.make(function(request:NotificationRequest):flighthq._internal._Promise<String> {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined'))) { return cast ''; }
-      try {
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(_Runtime.globalValue('Notification'), 'permission'), 'granted'))) { return cast ''; }
-        var id:Dynamic = _Runtime.coalesce(_Runtime.field(request, 'id'), function():Dynamic return cast _Runtime.callValue(_generateId, cast ([] : Array<Dynamic>)));
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(registration, 'showNotification', cast ([_Runtime.field(request, 'title'), (cast { body: _Runtime.field(request, 'body'), badge: _Runtime.field(request, 'badge'), dir: _Runtime.field(request, 'dir'), icon: _Runtime.field(request, 'icon'), image: _Runtime.field(request, 'image'), lang: _Runtime.field(request, 'lang'), renotify: _Runtime.field(request, 'renotify'), requireInteraction: _Runtime.field(request, 'requireInteraction'), silent: _Runtime.field(request, 'silent'), tag: _Runtime.coalesce(_Runtime.field(request, 'tag'), function():Dynamic return cast id), timestamp: _Runtime.field(request, 'timestamp'), vibrate: _Runtime.select(_Runtime.field(request, 'vibrate'), function():Dynamic return cast _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(request, 'vibrate'))]), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), data: _Runtime.mergeObjects([(cast _Runtime.field(request, 'data') : Null<Dynamic>), { notificationId: id }]), actions: _Runtime.callOptionalProperty(_Runtime.field(request, 'actions'), 'map', cast ([function(a:Dynamic) return { action: _Runtime.field(a, 'id'), title: _Runtime.field(a, 'title'), icon: _Runtime.field(a, 'icon') }] : Array<Dynamic>)) } : Dynamic)] : Array<Dynamic>)));
-        _Runtime.callValue(_fire, cast ([_showListeners, id] : Array<Dynamic>));
-        return cast id;
-      } catch (__error:Dynamic) {
-        return cast '';
-      }
-      return cast null;
-    });
+    _show = function(request:NotificationRequest):flighthq._internal._Promise<String> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var __flowBranch2:Dynamic;
+          if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined'))) {
+            __flowBranch2 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn('');
+            });
+          } else {
+            __flowBranch2 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch2, function():Dynamic {
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              var id:Dynamic = cast _Runtime.UNDEFINED;
+              var __flowBranch3:Dynamic;
+              if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(_Runtime.globalValue('Notification'), 'permission'), 'granted'))) {
+                __flowBranch3 = flighthq._internal._Async.protect(function():Dynamic {
+                  return flighthq._internal._Async.flowReturn('');
+                });
+              } else {
+                __flowBranch3 = flighthq._internal._Async.flowNormal();
+              }
+              return flighthq._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
+                id = _Runtime.coalesce(_Runtime.field(request, 'id'), function():Dynamic return cast _Runtime.callValue(_generateId, cast ([] : Array<Dynamic>)));
+                return flighthq._internal._Async.flatMap(_Runtime.callProperty(registration, 'showNotification', cast ([_Runtime.field(request, 'title'), (cast { body: _Runtime.field(request, 'body'), badge: _Runtime.field(request, 'badge'), dir: _Runtime.field(request, 'dir'), icon: _Runtime.field(request, 'icon'), image: _Runtime.field(request, 'image'), lang: _Runtime.field(request, 'lang'), renotify: _Runtime.field(request, 'renotify'), requireInteraction: _Runtime.field(request, 'requireInteraction'), silent: _Runtime.field(request, 'silent'), tag: _Runtime.coalesce(_Runtime.field(request, 'tag'), function():Dynamic return cast id), timestamp: _Runtime.field(request, 'timestamp'), vibrate: _Runtime.select(_Runtime.field(request, 'vibrate'), function():Dynamic return cast _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(request, 'vibrate'))]), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), data: _Runtime.mergeObjects([(cast _Runtime.field(request, 'data') : Null<Dynamic>), { notificationId: id }]), actions: _Runtime.callOptionalProperty(_Runtime.field(request, 'actions'), 'map', cast ([function(a:Dynamic) return { action: _Runtime.field(a, 'id'), title: _Runtime.field(a, 'title'), icon: _Runtime.field(a, 'icon') }] : Array<Dynamic>)) } : Dynamic)] : Array<Dynamic>)), function(__awaitValue4:Dynamic):Dynamic {
+                  __awaitValue4;
+                  _Runtime.callValue(_fire, cast ([_showListeners, id] : Array<Dynamic>));
+                  return flighthq._internal._Async.flowReturn(id);
+                });
+              });
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn('');
+              });
+            }), function():Dynamic {
+              return flighthq._internal._Async.flowNormal();
+            });
+          });
+        })
+      );
+    };
     backend = { cancelScheduledNotification: function(id:Dynamic) {
       var entry:Dynamic = cast _Runtime.UNDEFINED;
       entry = _Runtime.callProperty(_scheduled, 'get', cast ([id] : Array<Dynamic>));
@@ -108,76 +137,135 @@ class Notification {
         _Runtime.clearTimeout(_Runtime.field(entry, 'timeout'));
         _Runtime.callProperty(_scheduled, 'delete', cast ([id] : Array<Dynamic>));
       }
-    }, closeAllNotifications: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      try {
-        var notifications:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(registration, 'getNotifications', cast ([] : Array<Dynamic>)));
-        for (n in _Runtime.iterable(notifications)) {
-          _Runtime.callProperty(n, 'close', cast ([] : Array<Dynamic>));
-        }
-      } catch (__error:Dynamic) {
-      }
-      return cast null;
-    }), closeNotification: flighthq._internal._Async.make(function(id:Dynamic):flighthq._internal._Promise<Dynamic> {
-      try {
-        var notifications:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(registration, 'getNotifications', cast ([{ tag: id }] : Array<Dynamic>)));
-        for (n in _Runtime.iterable(notifications)) {
-          _Runtime.callProperty(n, 'close', cast ([] : Array<Dynamic>));
-        }
-      } catch (__error:Dynamic) {
-      }
-      return cast null;
-    }), getCapabilities: function() {
+    }, closeAllNotifications: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+            var notifications:Dynamic = cast _Runtime.UNDEFINED;
+            return flighthq._internal._Async.flatMap(_Runtime.callProperty(registration, 'getNotifications', cast ([] : Array<Dynamic>)), function(__awaitValue5:Dynamic):Dynamic {
+              notifications = __awaitValue5;
+              for (n in _Runtime.iterable(notifications)) {
+                _Runtime.callProperty(n, 'close', cast ([] : Array<Dynamic>));
+              }
+              return flighthq._internal._Async.flowNormal();
+            });
+          }), function(__caughtError:Dynamic):Dynamic {
+            var __error:Dynamic = __caughtError;
+            return flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowNormal();
+            });
+          }), function():Dynamic {
+            return flighthq._internal._Async.flowNormal();
+          });
+        })
+      );
+    }, closeNotification: function(id:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+            var notifications:Dynamic = cast _Runtime.UNDEFINED;
+            return flighthq._internal._Async.flatMap(_Runtime.callProperty(registration, 'getNotifications', cast ([{ tag: id }] : Array<Dynamic>)), function(__awaitValue8:Dynamic):Dynamic {
+              notifications = __awaitValue8;
+              for (n in _Runtime.iterable(notifications)) {
+                _Runtime.callProperty(n, 'close', cast ([] : Array<Dynamic>));
+              }
+              return flighthq._internal._Async.flowNormal();
+            });
+          }), function(__caughtError:Dynamic):Dynamic {
+            var __error:Dynamic = __caughtError;
+            return flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowNormal();
+            });
+          }), function():Dynamic {
+            return flighthq._internal._Async.flowNormal();
+          });
+        })
+      );
+    }, getCapabilities: function() {
       return cast { actions: true, channels: false, coldStart: false, image: true, listActive: true, scheduling: true, textReply: false };
-    }, getLaunchNotification: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast null;
-      return cast null;
-    }), getActiveNotifications: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      try {
-        var notifications:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(registration, 'getNotifications', cast ([] : Array<Dynamic>)));
-        return cast _Runtime.callProperty(notifications, 'map', cast ([function(n:Dynamic) return { title: _Runtime.field(n, 'title'), tag: _Runtime.field(n, 'tag') }] : Array<Dynamic>));
-      } catch (__error:Dynamic) {
-        return cast cast ([] : Array<Dynamic>);
-      }
-      return cast null;
-    }), getPendingNotifications: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast _Runtime.callProperty(_Runtime.toArray(_Runtime.callProperty(_scheduled, 'values', cast ([] : Array<Dynamic>))), 'map', cast ([function(e:Dynamic) return _Runtime.field(e, 'entry')] : Array<Dynamic>));
-      return cast null;
-    }), getPermission: function() {
+    }, getLaunchNotification: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(null);
+      });
+    }, getActiveNotifications: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+            var notifications:Dynamic = cast _Runtime.UNDEFINED;
+            return flighthq._internal._Async.flatMap(_Runtime.callProperty(registration, 'getNotifications', cast ([] : Array<Dynamic>)), function(__awaitValue11:Dynamic):Dynamic {
+              notifications = __awaitValue11;
+              return flighthq._internal._Async.flowReturn(_Runtime.callProperty(notifications, 'map', cast ([function(n:Dynamic) return { title: _Runtime.field(n, 'title'), tag: _Runtime.field(n, 'tag') }] : Array<Dynamic>)));
+            });
+          }), function(__caughtError:Dynamic):Dynamic {
+            var __error:Dynamic = __caughtError;
+            return flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(cast ([] : Array<Dynamic>));
+            });
+          }), function():Dynamic {
+            return flighthq._internal._Async.flowNormal();
+          });
+        })
+      );
+    }, getPendingNotifications: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(_Runtime.callProperty(_Runtime.toArray(_Runtime.callProperty(_scheduled, 'values', cast ([] : Array<Dynamic>))), 'map', cast ([function(e:Dynamic) return _Runtime.field(e, 'entry')] : Array<Dynamic>)));
+      });
+    }, getPermission: function() {
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined'))) { return cast 'denied'; }
       return cast (cast _Runtime.field(_Runtime.globalValue('Notification'), 'permission') : Dynamic);
     }, isSupported: function() {
       return cast _Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined'), function():Dynamic return cast _Runtime.hasField(_Runtime.globalValue('navigator'), 'serviceWorker'));
-    }, notify: _show, requestPermission: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('Notification'), 'requestPermission')), 'function')))) { return cast 'denied'; }
-      try {
-        return cast (cast flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.globalValue('Notification'), 'requestPermission', cast ([] : Array<Dynamic>))) : Dynamic);
-      } catch (__error:Dynamic) {
-        return cast 'denied';
-      }
-      return cast null;
-    }), scheduleNotification: flighthq._internal._Async.make(function(request:Dynamic, schedule:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var id:Dynamic = cast _Runtime.UNDEFINED;
-      var delay:Dynamic = cast _Runtime.UNDEFINED;
-      var entry:ScheduledNotification = cast _Runtime.UNDEFINED;
-      var fireAndReschedule:Dynamic = cast _Runtime.UNDEFINED;
-      var timeout:Dynamic = cast _Runtime.UNDEFINED;
-      id = _Runtime.coalesce(_Runtime.field(request, 'id'), function():Dynamic return cast _Runtime.callValue(_generateId, cast ([] : Array<Dynamic>)));
-      delay = HxMath.max(0.0, (_Runtime.field(schedule, 'at') - _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>))));
-      entry = { id: id, request: request, schedule: schedule };
-      fireAndReschedule = function() {
-        _Runtime.callProperty(_scheduled, 'delete', cast ([id] : Array<Dynamic>));
-        _Runtime.voidValue(_Runtime.callValue(_show, cast ([_Runtime.mergeObjects([request, { id: id }])] : Array<Dynamic>)));
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(schedule, 'repeat'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
-          var ms:Dynamic = _Runtime.callValue(Notification._repeatMs__notification, cast ([_Runtime.field(schedule, 'repeat')] : Array<Dynamic>));
-          var timeout:Dynamic = _Runtime.setTimeout(fireAndReschedule, ms);
-          _Runtime.callProperty(_scheduled, 'set', cast ([id, { timeout: timeout, entry: { id: id, request: request, schedule: _Runtime.mergeObjects([schedule, { at: (_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) + ms) }]) } }] : Array<Dynamic>));
-        }
-      };
-      timeout = _Runtime.setTimeout(fireAndReschedule, delay);
-      _Runtime.callProperty(_scheduled, 'set', cast ([id, { timeout: timeout, entry: entry }] : Array<Dynamic>));
-      return cast id;
-      return cast null;
-    }), subscribeAction: function(listener:Dynamic) {
+    }, notify: _show, requestPermission: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var __flowBranch12:Dynamic;
+          if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('Notification'), 'requestPermission')), 'function')))) {
+            __flowBranch12 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn('denied');
+            });
+          } else {
+            __flowBranch12 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch12, function():Dynamic {
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flatMap(_Runtime.callProperty(_Runtime.globalValue('Notification'), 'requestPermission', cast ([] : Array<Dynamic>)), function(__awaitValue13:Dynamic):Dynamic {
+                return flighthq._internal._Async.flowReturn((cast __awaitValue13 : Dynamic));
+              });
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn('denied');
+              });
+            }), function():Dynamic {
+              return flighthq._internal._Async.flowNormal();
+            });
+          });
+        })
+      );
+    }, scheduleNotification: function(request:Dynamic, schedule:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        var id:Dynamic = cast _Runtime.UNDEFINED;
+        var delay:Dynamic = cast _Runtime.UNDEFINED;
+        var entry:ScheduledNotification = cast _Runtime.UNDEFINED;
+        var fireAndReschedule:Dynamic = cast _Runtime.UNDEFINED;
+        var timeout:Dynamic = cast _Runtime.UNDEFINED;
+        id = _Runtime.coalesce(_Runtime.field(request, 'id'), function():Dynamic return cast _Runtime.callValue(_generateId, cast ([] : Array<Dynamic>)));
+        delay = HxMath.max(0.0, (_Runtime.field(schedule, 'at') - _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>))));
+        entry = { id: id, request: request, schedule: schedule };
+        fireAndReschedule = function() {
+          _Runtime.callProperty(_scheduled, 'delete', cast ([id] : Array<Dynamic>));
+          _Runtime.voidValue(_Runtime.callValue(_show, cast ([_Runtime.mergeObjects([request, { id: id }])] : Array<Dynamic>)));
+          if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(schedule, 'repeat'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+            var ms:Dynamic = _Runtime.callValue(Notification._repeatMs__notification, cast ([_Runtime.field(schedule, 'repeat')] : Array<Dynamic>));
+            var timeout:Dynamic = _Runtime.setTimeout(fireAndReschedule, ms);
+            _Runtime.callProperty(_scheduled, 'set', cast ([id, { timeout: timeout, entry: { id: id, request: request, schedule: _Runtime.mergeObjects([schedule, { at: (_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) + ms) }]) } }] : Array<Dynamic>));
+          }
+        };
+        timeout = _Runtime.setTimeout(fireAndReschedule, delay);
+        _Runtime.callProperty(_scheduled, 'set', cast ([id, { timeout: timeout, entry: entry }] : Array<Dynamic>));
+        return flighthq._internal._Async.resolve(id);
+      });
+    }, subscribeAction: function(listener:Dynamic) {
       _Runtime.callProperty(_actionListeners, 'add', cast ([listener] : Array<Dynamic>));
       return cast function() {
         _Runtime.callProperty(_actionListeners, 'delete', cast ([listener] : Array<Dynamic>));
@@ -202,15 +290,31 @@ class Notification {
       return cast function() {
         _Runtime.callProperty(_showListeners, 'delete', cast ([listener] : Array<Dynamic>));
       };
-    }, updateNotification: flighthq._internal._Async.make(function(id:Dynamic, partial:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var merged:NotificationRequest = cast _Runtime.UNDEFINED;
-      flighthq._internal._Async.awaitValue(_Runtime.callProperty(backend, 'closeNotification', cast ([id] : Array<Dynamic>)));
-      merged = _Runtime.mergeObjects([(cast partial : NotificationRequest), { id: id }]);
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(merged, 'title'), _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast false; }
-      flighthq._internal._Async.awaitValue(_Runtime.callValue(_show, cast ([merged] : Array<Dynamic>)));
-      return cast true;
-      return cast null;
-    }) };
+    }, updateNotification: function(id:Dynamic, partial:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var merged:NotificationRequest = cast _Runtime.UNDEFINED;
+          return flighthq._internal._Async.flatMap(_Runtime.callProperty(backend, 'closeNotification', cast ([id] : Array<Dynamic>)), function(__awaitValue14:Dynamic):Dynamic {
+            __awaitValue14;
+            merged = _Runtime.mergeObjects([(cast partial : NotificationRequest), { id: id }]);
+            var __flowBranch15:Dynamic;
+            if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(merged, 'title'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+              __flowBranch15 = flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(false);
+              });
+            } else {
+              __flowBranch15 = flighthq._internal._Async.flowNormal();
+            }
+            return flighthq._internal._Async.continueFlow(__flowBranch15, function():Dynamic {
+              return flighthq._internal._Async.flatMap(_Runtime.callValue(_show, cast ([merged] : Array<Dynamic>)), function(__awaitValue16:Dynamic):Dynamic {
+                __awaitValue16;
+                return flighthq._internal._Async.flowReturn(true);
+              });
+            });
+          });
+        })
+      );
+    } };
     {
     }
     internal = (cast backend : Dynamic);
@@ -266,35 +370,37 @@ class Notification {
         _Runtime.callValue(fn, cast ([arg] : Array<Dynamic>));
       }
     };
-    _notify = flighthq._internal._Async.make(function(request:NotificationRequest):flighthq._internal._Promise<String> {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined'))) { return cast ''; }
-      try {
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(_Runtime.globalValue('Notification'), 'permission'), 'granted'))) { return cast ''; }
-        var id:Dynamic = _Runtime.coalesce(_Runtime.field(request, 'id'), function():Dynamic return cast _Runtime.callValue(_generateId, cast ([] : Array<Dynamic>)));
-        var n:Dynamic = _Runtime.construct(_Runtime.globalValue('Notification'), [_Runtime.field(request, 'title'), (cast { body: _Runtime.field(request, 'body'), badge: _Runtime.field(request, 'badge'), data: _Runtime.field(request, 'data'), dir: _Runtime.field(request, 'dir'), icon: _Runtime.field(request, 'icon'), image: _Runtime.field(request, 'image'), lang: _Runtime.field(request, 'lang'), renotify: _Runtime.field(request, 'renotify'), requireInteraction: _Runtime.field(request, 'requireInteraction'), silent: _Runtime.field(request, 'silent'), tag: _Runtime.coalesce(_Runtime.field(request, 'tag'), function():Dynamic return cast id), timestamp: _Runtime.field(request, 'timestamp'), vibrate: _Runtime.select(_Runtime.field(request, 'vibrate'), function():Dynamic return cast _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(request, 'vibrate'))]), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) } : Dynamic)]);
-        _Runtime.callProperty(_live, 'set', cast ([id, n] : Array<Dynamic>));
-        _Runtime.callProperty(_requests, 'set', cast ([id, request] : Array<Dynamic>));
-        _Runtime.setField(n, 'onshow', function() {
-          _Runtime.callValue(_fire, cast ([_showListeners, id] : Array<Dynamic>));
-        });
-        _Runtime.setField(n, 'onclick', function() {
-          _Runtime.callValue(_fire, cast ([_clickListeners, id] : Array<Dynamic>));
-        });
-        _Runtime.setField(n, 'onclose', function() {
-          _Runtime.callProperty(_live, 'delete', cast ([id] : Array<Dynamic>));
-          _Runtime.callProperty(_requests, 'delete', cast ([id] : Array<Dynamic>));
-          _Runtime.callValue(_fire, cast ([_dismissListeners, id] : Array<Dynamic>));
-        });
-        _Runtime.setField(n, 'onerror', function() {
-          _Runtime.callProperty(_live, 'delete', cast ([id] : Array<Dynamic>));
-          _Runtime.callProperty(_requests, 'delete', cast ([id] : Array<Dynamic>));
-        });
-        return cast id;
-      } catch (__error:Dynamic) {
-        return cast '';
-      }
-      return cast null;
-    });
+    _notify = function(request:NotificationRequest):flighthq._internal._Promise<String> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined'))) { return cast ''; }
+        try {
+          if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(_Runtime.globalValue('Notification'), 'permission'), 'granted'))) { return cast ''; }
+          var id:Dynamic = _Runtime.coalesce(_Runtime.field(request, 'id'), function():Dynamic return cast _Runtime.callValue(_generateId, cast ([] : Array<Dynamic>)));
+          var n:Dynamic = _Runtime.construct(_Runtime.globalValue('Notification'), [_Runtime.field(request, 'title'), (cast { body: _Runtime.field(request, 'body'), badge: _Runtime.field(request, 'badge'), data: _Runtime.field(request, 'data'), dir: _Runtime.field(request, 'dir'), icon: _Runtime.field(request, 'icon'), image: _Runtime.field(request, 'image'), lang: _Runtime.field(request, 'lang'), renotify: _Runtime.field(request, 'renotify'), requireInteraction: _Runtime.field(request, 'requireInteraction'), silent: _Runtime.field(request, 'silent'), tag: _Runtime.coalesce(_Runtime.field(request, 'tag'), function():Dynamic return cast id), timestamp: _Runtime.field(request, 'timestamp'), vibrate: _Runtime.select(_Runtime.field(request, 'vibrate'), function():Dynamic return cast _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(request, 'vibrate'))]), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) } : Dynamic)]);
+          _Runtime.callProperty(_live, 'set', cast ([id, n] : Array<Dynamic>));
+          _Runtime.callProperty(_requests, 'set', cast ([id, request] : Array<Dynamic>));
+          _Runtime.setField(n, 'onshow', function() {
+            _Runtime.callValue(_fire, cast ([_showListeners, id] : Array<Dynamic>));
+          });
+          _Runtime.setField(n, 'onclick', function() {
+            _Runtime.callValue(_fire, cast ([_clickListeners, id] : Array<Dynamic>));
+          });
+          _Runtime.setField(n, 'onclose', function() {
+            _Runtime.callProperty(_live, 'delete', cast ([id] : Array<Dynamic>));
+            _Runtime.callProperty(_requests, 'delete', cast ([id] : Array<Dynamic>));
+            _Runtime.callValue(_fire, cast ([_dismissListeners, id] : Array<Dynamic>));
+          });
+          _Runtime.setField(n, 'onerror', function() {
+            _Runtime.callProperty(_live, 'delete', cast ([id] : Array<Dynamic>));
+            _Runtime.callProperty(_requests, 'delete', cast ([id] : Array<Dynamic>));
+          });
+          return cast id;
+        } catch (__error:Dynamic) {
+          return cast '';
+        }
+        return cast null;
+      });
+    };
     return cast { cancelScheduledNotification: function(id:Dynamic) {
       var entry:Dynamic = cast _Runtime.UNDEFINED;
       entry = _Runtime.callProperty(_scheduled, 'get', cast ([id] : Array<Dynamic>));
@@ -326,54 +432,78 @@ class Notification {
       }
     }, getCapabilities: function() {
       return cast { actions: false, channels: false, coldStart: false, image: false, listActive: false, scheduling: true, textReply: false };
-    }, getLaunchNotification: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast null;
-      return cast null;
-    }), getActiveNotifications: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast cast ([] : Array<Dynamic>);
-      return cast null;
-    }), getPendingNotifications: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast _Runtime.callProperty(_Runtime.toArray(_Runtime.callProperty(_scheduled, 'values', cast ([] : Array<Dynamic>))), 'map', cast ([function(e:Dynamic) return _Runtime.field(e, 'entry')] : Array<Dynamic>));
-      return cast null;
-    }), getPermission: function() {
+    }, getLaunchNotification: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(null);
+      });
+    }, getActiveNotifications: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
+      });
+    }, getPendingNotifications: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(_Runtime.callProperty(_Runtime.toArray(_Runtime.callProperty(_scheduled, 'values', cast ([] : Array<Dynamic>))), 'map', cast ([function(e:Dynamic) return _Runtime.field(e, 'entry')] : Array<Dynamic>)));
+      });
+    }, getPermission: function() {
       var p:Dynamic = cast _Runtime.UNDEFINED;
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined'))) { return cast 'denied'; }
       p = (cast _Runtime.field(_Runtime.globalValue('Notification'), 'permission') : Dynamic);
       return cast p;
     }, isSupported: function() {
       return cast !_Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined');
-    }, notify: _notify, requestPermission: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('Notification'), 'requestPermission')), 'function')))) { return cast 'denied'; }
-      try {
-        var result:Dynamic = (cast flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.globalValue('Notification'), 'requestPermission', cast ([] : Array<Dynamic>))) : Dynamic);
-        return cast result;
-      } catch (__error:Dynamic) {
-        return cast 'denied';
-      }
-      return cast null;
-    }), scheduleNotification: flighthq._internal._Async.make(function(request:Dynamic, schedule:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var id:Dynamic = cast _Runtime.UNDEFINED;
-      var delay:Dynamic = cast _Runtime.UNDEFINED;
-      var entry:ScheduledNotification = cast _Runtime.UNDEFINED;
-      var fireAndReschedule:Dynamic = cast _Runtime.UNDEFINED;
-      var timeout:Dynamic = cast _Runtime.UNDEFINED;
-      id = _Runtime.coalesce(_Runtime.field(request, 'id'), function():Dynamic return cast _Runtime.callValue(_generateId, cast ([] : Array<Dynamic>)));
-      delay = HxMath.max(0.0, (_Runtime.field(schedule, 'at') - _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>))));
-      entry = { id: id, request: request, schedule: schedule };
-      fireAndReschedule = function() {
-        _Runtime.callProperty(_scheduled, 'delete', cast ([id] : Array<Dynamic>));
-        _Runtime.voidValue(_Runtime.callValue(_notify, cast ([_Runtime.mergeObjects([request, { id: id }])] : Array<Dynamic>)));
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(schedule, 'repeat'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
-          var ms:Dynamic = _Runtime.callValue(Notification._repeatMs__notification, cast ([_Runtime.field(schedule, 'repeat')] : Array<Dynamic>));
-          var timeout:Dynamic = _Runtime.setTimeout(fireAndReschedule, ms);
-          _Runtime.callProperty(_scheduled, 'set', cast ([id, { timeout: timeout, entry: { id: id, request: request, schedule: _Runtime.mergeObjects([schedule, { at: (_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) + ms) }]) } }] : Array<Dynamic>));
-        }
-      };
-      timeout = _Runtime.setTimeout(fireAndReschedule, delay);
-      _Runtime.callProperty(_scheduled, 'set', cast ([id, { timeout: timeout, entry: entry }] : Array<Dynamic>));
-      return cast id;
-      return cast null;
-    }), subscribeAction: function(listener:Dynamic) {
+    }, notify: _notify, requestPermission: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var __flowBranch25:Dynamic;
+          if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('Notification'), 'requestPermission')), 'function')))) {
+            __flowBranch25 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn('denied');
+            });
+          } else {
+            __flowBranch25 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch25, function():Dynamic {
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              var result:Dynamic = cast _Runtime.UNDEFINED;
+              return flighthq._internal._Async.flatMap(_Runtime.callProperty(_Runtime.globalValue('Notification'), 'requestPermission', cast ([] : Array<Dynamic>)), function(__awaitValue26:Dynamic):Dynamic {
+                result = (cast __awaitValue26 : Dynamic);
+                return flighthq._internal._Async.flowReturn(result);
+              });
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn('denied');
+              });
+            }), function():Dynamic {
+              return flighthq._internal._Async.flowNormal();
+            });
+          });
+        })
+      );
+    }, scheduleNotification: function(request:Dynamic, schedule:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        var id:Dynamic = cast _Runtime.UNDEFINED;
+        var delay:Dynamic = cast _Runtime.UNDEFINED;
+        var entry:ScheduledNotification = cast _Runtime.UNDEFINED;
+        var fireAndReschedule:Dynamic = cast _Runtime.UNDEFINED;
+        var timeout:Dynamic = cast _Runtime.UNDEFINED;
+        id = _Runtime.coalesce(_Runtime.field(request, 'id'), function():Dynamic return cast _Runtime.callValue(_generateId, cast ([] : Array<Dynamic>)));
+        delay = HxMath.max(0.0, (_Runtime.field(schedule, 'at') - _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>))));
+        entry = { id: id, request: request, schedule: schedule };
+        fireAndReschedule = function() {
+          _Runtime.callProperty(_scheduled, 'delete', cast ([id] : Array<Dynamic>));
+          _Runtime.voidValue(_Runtime.callValue(_notify, cast ([_Runtime.mergeObjects([request, { id: id }])] : Array<Dynamic>)));
+          if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(schedule, 'repeat'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+            var ms:Dynamic = _Runtime.callValue(Notification._repeatMs__notification, cast ([_Runtime.field(schedule, 'repeat')] : Array<Dynamic>));
+            var timeout:Dynamic = _Runtime.setTimeout(fireAndReschedule, ms);
+            _Runtime.callProperty(_scheduled, 'set', cast ([id, { timeout: timeout, entry: { id: id, request: request, schedule: _Runtime.mergeObjects([schedule, { at: (_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) + ms) }]) } }] : Array<Dynamic>));
+          }
+        };
+        timeout = _Runtime.setTimeout(fireAndReschedule, delay);
+        _Runtime.callProperty(_scheduled, 'set', cast ([id, { timeout: timeout, entry: entry }] : Array<Dynamic>));
+        return flighthq._internal._Async.resolve(id);
+      });
+    }, subscribeAction: function(listener:Dynamic) {
       _Runtime.callProperty(_actionListeners, 'add', cast ([listener] : Array<Dynamic>));
       return cast function() {
         _Runtime.callProperty(_actionListeners, 'delete', cast ([listener] : Array<Dynamic>));
@@ -398,24 +528,44 @@ class Notification {
       return cast function() {
         _Runtime.callProperty(_showListeners, 'delete', cast ([listener] : Array<Dynamic>));
       };
-    }, updateNotification: flighthq._internal._Async.make(function(id:Dynamic, partial:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var existing:Dynamic = cast _Runtime.UNDEFINED;
-      var originalRequest:Dynamic = cast _Runtime.UNDEFINED;
-      var merged:NotificationRequest = cast _Runtime.UNDEFINED;
-      existing = _Runtime.callProperty(_live, 'get', cast ([id] : Array<Dynamic>));
-      originalRequest = _Runtime.callProperty(_requests, 'get', cast ([id] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(originalRequest, _Runtime.field(_Runtime, 'UNDEFINED'))))) { return cast false; }
-      try {
-        _Runtime.callProperty(existing, 'close', cast ([] : Array<Dynamic>));
-        _Runtime.callProperty(_live, 'delete', cast ([id] : Array<Dynamic>));
-        _Runtime.callProperty(_requests, 'delete', cast ([id] : Array<Dynamic>));
-      } catch (__error:Dynamic) {
-      }
-      merged = _Runtime.mergeObjects([originalRequest, partial, { id: id }]);
-      flighthq._internal._Async.awaitValue(_Runtime.callValue(_notify, cast ([merged] : Array<Dynamic>)));
-      return cast true;
-      return cast null;
-    }) };
+    }, updateNotification: function(id:Dynamic, partial:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var existing:Dynamic = cast _Runtime.UNDEFINED;
+          var originalRequest:Dynamic = cast _Runtime.UNDEFINED;
+          var merged:NotificationRequest = cast _Runtime.UNDEFINED;
+          existing = _Runtime.callProperty(_live, 'get', cast ([id] : Array<Dynamic>));
+          originalRequest = _Runtime.callProperty(_requests, 'get', cast ([id] : Array<Dynamic>));
+          var __flowBranch27:Dynamic;
+          if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(originalRequest, _Runtime.field(_Runtime, 'UNDEFINED'))))) {
+            __flowBranch27 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(false);
+            });
+          } else {
+            __flowBranch27 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch27, function():Dynamic {
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              _Runtime.callProperty(existing, 'close', cast ([] : Array<Dynamic>));
+              _Runtime.callProperty(_live, 'delete', cast ([id] : Array<Dynamic>));
+              _Runtime.callProperty(_requests, 'delete', cast ([id] : Array<Dynamic>));
+              return flighthq._internal._Async.flowNormal();
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowNormal();
+              });
+            }), function():Dynamic {
+              merged = _Runtime.mergeObjects([originalRequest, partial, { id: id }]);
+              return flighthq._internal._Async.flatMap(_Runtime.callValue(_notify, cast ([merged] : Array<Dynamic>)), function(__awaitValue28:Dynamic):Dynamic {
+                __awaitValue28;
+                return flighthq._internal._Async.flowReturn(true);
+              });
+            });
+          });
+        })
+      );
+    } };
     return cast null;
   }
 

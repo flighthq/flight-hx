@@ -423,10 +423,10 @@ class Window {
 
   public static function exitApplicationPointerLock():flighthq._internal._Promise<flighthq._internal._Nothing> {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'exitPointerLock')), 'function')))) {
-      return cast _Runtime.callProperty(_Runtime.globalValue('Promise'), 'resolve', cast ([] : Array<Dynamic>));
+      return cast flighthq._internal._Async.resolve();
     }
     flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'exitPointerLock', cast ([] : Array<Dynamic>));
-    return cast _Runtime.callProperty(_Runtime.globalValue('Promise'), 'resolve', cast ([] : Array<Dynamic>));
+    return cast flighthq._internal._Async.resolve();
     return cast null;
   }
 
@@ -463,9 +463,9 @@ class Window {
 
   public static function lockApplicationPointer(element:Dynamic):flighthq._internal._Promise<flighthq._internal._Nothing> {
     var result:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(element, 'requestPointerLock')), 'function'))) { return cast _Runtime.callProperty(_Runtime.globalValue('Promise'), 'resolve', cast ([] : Array<Dynamic>)); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(element, 'requestPointerLock')), 'function'))) { return cast flighthq._internal._Async.resolve(); }
     result = _Runtime.callProperty(element, 'requestPointerLock', cast ([] : Array<Dynamic>));
-    return cast (cast _Runtime.select(_Runtime.isInstanceOf(result, _Runtime.globalValue('Promise')), function():Dynamic return cast result, function():Dynamic return cast _Runtime.callProperty(_Runtime.globalValue('Promise'), 'resolve', cast ([] : Array<Dynamic>))) : flighthq._internal._Promise<flighthq._internal._Nothing>);
+    return cast (cast _Runtime.select(flighthq._internal._Async.isPromise(result), function():Dynamic return cast result, function():Dynamic return cast flighthq._internal._Async.resolve()) : flighthq._internal._Promise<flighthq._internal._Nothing>);
     return cast null;
   }
 

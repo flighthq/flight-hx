@@ -347,21 +347,50 @@ class Storage {
   }
 
   public static function getStorageQuotaEstimate():flighthq._internal._Promise<Null<StorageQuota>> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<StorageQuota>> {
-      var storage:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
-      storage = flighthq._internal.backend.DomNavigatorBackend.field((cast _Runtime.globalValue('navigator') : { @:optional var storage:{ @:optional var estimate:Dynamic; }; }), 'storage');
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.optionalField(storage, 'estimate'), _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast null; }
-      try {
-        var estimate:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(storage, 'estimate', cast ([] : Array<Dynamic>)));
-        var used:Dynamic = _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(estimate, 'usage')), 'number'), function():Dynamic return cast _Runtime.field(estimate, 'usage'), function():Dynamic return cast -1.0);
-        var available:Dynamic = _Runtime.select(_Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(estimate, 'quota')), 'number'), function():Dynamic return cast _Runtime.compare(_Runtime.field(estimate, 'quota'), 0.0, '>=')), function():Dynamic return cast (_Runtime.field(estimate, 'quota') - _Runtime.select(_Runtime.compare(used, 0.0, '>='), function():Dynamic return cast used, function():Dynamic return cast 0.0)), function():Dynamic return cast -1.0);
-        return cast { used: used, available: available };
-      } catch (__error:Dynamic) {
-        return cast null;
-      }
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var storage:Dynamic = cast _Runtime.UNDEFINED;
+        var __flowBranch12:Dynamic;
+        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) {
+          __flowBranch12 = flighthq._internal._Async.protect(function():Dynamic {
+            return flighthq._internal._Async.flowReturn(null);
+          });
+        } else {
+          __flowBranch12 = flighthq._internal._Async.flowNormal();
+        }
+        return flighthq._internal._Async.continueFlow(__flowBranch12, function():Dynamic {
+          storage = flighthq._internal.backend.DomNavigatorBackend.field((cast _Runtime.globalValue('navigator') : { @:optional var storage:{ @:optional var estimate:Dynamic; }; }), 'storage');
+          var __flowBranch13:Dynamic;
+          if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.optionalField(storage, 'estimate'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+            __flowBranch13 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(null);
+            });
+          } else {
+            __flowBranch13 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch13, function():Dynamic {
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              var estimate:Dynamic = cast _Runtime.UNDEFINED;
+              var used:Dynamic = cast _Runtime.UNDEFINED;
+              var available:Dynamic = cast _Runtime.UNDEFINED;
+              return flighthq._internal._Async.flatMap(_Runtime.callProperty(storage, 'estimate', cast ([] : Array<Dynamic>)), function(__awaitValue14:Dynamic):Dynamic {
+                estimate = __awaitValue14;
+                used = _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(estimate, 'usage')), 'number'), function():Dynamic return cast _Runtime.field(estimate, 'usage'), function():Dynamic return cast -1.0);
+                available = _Runtime.select(_Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(estimate, 'quota')), 'number'), function():Dynamic return cast _Runtime.compare(_Runtime.field(estimate, 'quota'), 0.0, '>=')), function():Dynamic return cast (_Runtime.field(estimate, 'quota') - _Runtime.select(_Runtime.compare(used, 0.0, '>='), function():Dynamic return cast used, function():Dynamic return cast 0.0)), function():Dynamic return cast -1.0);
+                return flighthq._internal._Async.flowReturn({ used: used, available: available });
+              });
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(null);
+              });
+            }), function():Dynamic {
+              return flighthq._internal._Async.flowNormal();
+            });
+          });
+        });
+      })
+    );
   }
 
   public static function getStorageSignals():Null<StorageSignals> {

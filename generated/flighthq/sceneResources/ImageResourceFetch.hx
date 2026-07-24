@@ -9,17 +9,34 @@ import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
 
 class ImageResourceFetch {
   public static function fetchWebImageResource(ref:ExternalImageResourceReference, signal:Dynamic):flighthq._internal._Promise<Null<ImageResource>> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<ImageResource>> {
-      var url:Dynamic = cast _Runtime.UNDEFINED;
-      url = _Runtime.callValue(resolveImageResourceUri, cast ([_Runtime.field(ref, 'uri'), _Runtime.field(ref, 'basePath')] : Array<Dynamic>));
-      try {
-        return cast flighthq._internal._Async.awaitValue(_Runtime.callValue(loadImageResourceFromUrl, cast ([url, _Runtime.field(_Runtime, 'UNDEFINED'), signal] : Array<Dynamic>)));
-      } catch (error:Dynamic) {
-        if (_Runtime.truthy(_Runtime.field(signal, 'aborted'))) { throw error; }
-        return cast null;
-      }
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var url:Dynamic = cast _Runtime.UNDEFINED;
+        url = _Runtime.callValue(resolveImageResourceUri, cast ([_Runtime.field(ref, 'uri'), _Runtime.field(ref, 'basePath')] : Array<Dynamic>));
+        return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+          return flighthq._internal._Async.flatMap(_Runtime.callValue(loadImageResourceFromUrl, cast ([url, _Runtime.field(_Runtime, 'UNDEFINED'), signal] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
+            return flighthq._internal._Async.flowReturn(__awaitValue0);
+          });
+        }), function(__caughtError:Dynamic):Dynamic {
+          var error:Dynamic = __caughtError;
+          return flighthq._internal._Async.protect(function():Dynamic {
+            var __flowBranch1:Dynamic;
+            if (_Runtime.truthy(_Runtime.field(signal, 'aborted'))) {
+              __flowBranch1 = flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.reject(error);
+              });
+            } else {
+              __flowBranch1 = flighthq._internal._Async.flowNormal();
+            }
+            return flighthq._internal._Async.continueFlow(__flowBranch1, function():Dynamic {
+              return flighthq._internal._Async.flowReturn(null);
+            });
+          });
+        }), function():Dynamic {
+          return flighthq._internal._Async.flowNormal();
+        });
+      })
+    );
   }
 
   public static function resolveImageResourceUri(uri:String, basePath:Null<String>):String {

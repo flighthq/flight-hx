@@ -55,23 +55,40 @@ class Permission {
   }
 
   public static function readWebPermissionState__permission(name:PermissionName):flighthq._internal._Promise<PermissionState> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<PermissionState> {
-      var permissions:Dynamic = cast _Runtime.UNDEFINED;
-      permissions = _Runtime.callValue(Permission.getWebPermissions__permission, cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(permissions, null))) {
-        try {
-          var status:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(permissions, 'query', cast ([(cast (cast { name: _Runtime.callValue(Permission.getPermissionQueryDescriptorName__permission, cast ([name] : Array<Dynamic>)) } : Dynamic) : Dynamic)] : Array<Dynamic>)));
-          return cast (cast _Runtime.field(status, 'state') : PermissionState);
-        } catch (__error:Dynamic) {
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var permissions:Dynamic = cast _Runtime.UNDEFINED;
+        permissions = _Runtime.callValue(Permission.getWebPermissions__permission, cast ([] : Array<Dynamic>));
+        var __flowBranch0:Dynamic;
+        if (_Runtime.truthy(!_Runtime.strictEquals(permissions, null))) {
+          __flowBranch0 = flighthq._internal._Async.protect(function():Dynamic {
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              var status:Dynamic = cast _Runtime.UNDEFINED;
+              return flighthq._internal._Async.flatMap(_Runtime.callProperty(permissions, 'query', cast ([(cast (cast { name: _Runtime.callValue(Permission.getPermissionQueryDescriptorName__permission, cast ([name] : Array<Dynamic>)) } : Dynamic) : Dynamic)] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
+                status = __awaitValue1;
+                return flighthq._internal._Async.flowReturn((cast _Runtime.field(status, 'state') : PermissionState));
+              });
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowNormal();
+              });
+            }), function():Dynamic {
+              return flighthq._internal._Async.flowNormal();
+            });
+          });
+        } else {
+          __flowBranch0 = flighthq._internal._Async.flowNormal();
         }
-      }
-      return cast _Runtime.callValue(Permission.readWebFallbackPermissionState__permission, cast ([name] : Array<Dynamic>));
-      return cast null;
-    })();
+        return flighthq._internal._Async.continueFlow(__flowBranch0, function():Dynamic {
+          return flighthq._internal._Async.flowReturn(_Runtime.callValue(Permission.readWebFallbackPermissionState__permission, cast ([name] : Array<Dynamic>)));
+        });
+      })
+    );
   }
 
   public static function requestWebGeolocationPermission__permission():flighthq._internal._Promise<PermissionState> {
-    return cast _Runtime.construct(_Runtime.globalValue('Promise'), [function(resolve:Dynamic) {
+    return cast flighthq._internal._Async.create(function(resolve:Dynamic) {
       var geolocation:Dynamic = cast _Runtime.UNDEFINED;
       geolocation = _Runtime.callValue(Permission.getWebGeolocation__permission, cast ([] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(geolocation, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(geolocation, 'getCurrentPosition')), 'function')))) {
@@ -83,63 +100,134 @@ class Permission {
       } catch (__error:Dynamic) {
         _Runtime.callValue(resolve, cast (['prompt'] : Array<Dynamic>));
       }
-    }]);
+    });
     return cast null;
   }
 
   public static function requestWebMediaPermission__permission(kind:String):flighthq._internal._Promise<PermissionState> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<PermissionState> {
-      var mediaDevices:Dynamic = cast _Runtime.UNDEFINED;
-      mediaDevices = _Runtime.callValue(Permission.getWebMediaDevices__permission, cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(mediaDevices, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(mediaDevices, 'getUserMedia')), 'function')))) { return cast 'prompt'; }
-      try {
-        var stream:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(mediaDevices, 'getUserMedia', cast ([_Runtime.select(_Runtime.strictEquals(kind, 'video'), function():Dynamic return cast { video: true }, function():Dynamic return cast { audio: true })] : Array<Dynamic>)));
-        _Runtime.callValue(Permission.stopMediaStreamTracks__permission, cast ([stream] : Array<Dynamic>));
-        return cast 'granted';
-      } catch (__error:Dynamic) {
-        return cast 'denied';
-      }
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var mediaDevices:Dynamic = cast _Runtime.UNDEFINED;
+        mediaDevices = _Runtime.callValue(Permission.getWebMediaDevices__permission, cast ([] : Array<Dynamic>));
+        var __flowBranch2:Dynamic;
+        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(mediaDevices, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(mediaDevices, 'getUserMedia')), 'function')))) {
+          __flowBranch2 = flighthq._internal._Async.protect(function():Dynamic {
+            return flighthq._internal._Async.flowReturn('prompt');
+          });
+        } else {
+          __flowBranch2 = flighthq._internal._Async.flowNormal();
+        }
+        return flighthq._internal._Async.continueFlow(__flowBranch2, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+            var stream:Dynamic = cast _Runtime.UNDEFINED;
+            return flighthq._internal._Async.flatMap(_Runtime.callProperty(mediaDevices, 'getUserMedia', cast ([_Runtime.select(_Runtime.strictEquals(kind, 'video'), function():Dynamic return cast { video: true }, function():Dynamic return cast { audio: true })] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
+              stream = __awaitValue3;
+              _Runtime.callValue(Permission.stopMediaStreamTracks__permission, cast ([stream] : Array<Dynamic>));
+              return flighthq._internal._Async.flowReturn('granted');
+            });
+          }), function(__caughtError:Dynamic):Dynamic {
+            var __error:Dynamic = __caughtError;
+            return flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn('denied');
+            });
+          }), function():Dynamic {
+            return flighthq._internal._Async.flowNormal();
+          });
+        });
+      })
+    );
   }
 
   public static function requestWebNotificationPermission__permission():flighthq._internal._Promise<PermissionState> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<PermissionState> {
-      var notification:Dynamic = cast _Runtime.UNDEFINED;
-      notification = _Runtime.callValue(Permission.getWebNotification__permission, cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(notification, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(notification, 'requestPermission')), 'function')))) { return cast 'prompt'; }
-      try {
-        var result:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(notification, 'requestPermission', cast ([] : Array<Dynamic>)));
-        return cast _Runtime.select(_Runtime.strictEquals(result, 'default'), function():Dynamic return cast 'prompt', function():Dynamic return cast (cast result : PermissionState));
-      } catch (__error:Dynamic) {
-        return cast 'prompt';
-      }
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var notification:Dynamic = cast _Runtime.UNDEFINED;
+        notification = _Runtime.callValue(Permission.getWebNotification__permission, cast ([] : Array<Dynamic>));
+        var __flowBranch4:Dynamic;
+        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(notification, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(notification, 'requestPermission')), 'function')))) {
+          __flowBranch4 = flighthq._internal._Async.protect(function():Dynamic {
+            return flighthq._internal._Async.flowReturn('prompt');
+          });
+        } else {
+          __flowBranch4 = flighthq._internal._Async.flowNormal();
+        }
+        return flighthq._internal._Async.continueFlow(__flowBranch4, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+            var result:Dynamic = cast _Runtime.UNDEFINED;
+            return flighthq._internal._Async.flatMap(_Runtime.callProperty(notification, 'requestPermission', cast ([] : Array<Dynamic>)), function(__awaitValue5:Dynamic):Dynamic {
+              result = __awaitValue5;
+              return flighthq._internal._Async.flowReturn(_Runtime.select(_Runtime.strictEquals(result, 'default'), function():Dynamic return cast 'prompt', function():Dynamic return cast (cast result : PermissionState)));
+            });
+          }), function(__caughtError:Dynamic):Dynamic {
+            var __error:Dynamic = __caughtError;
+            return flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn('prompt');
+            });
+          }), function():Dynamic {
+            return flighthq._internal._Async.flowNormal();
+          });
+        });
+      })
+    );
   }
 
   public static function requestWebPersistentStoragePermission__permission():flighthq._internal._Promise<PermissionState> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<PermissionState> {
-      var storage:Dynamic = cast _Runtime.UNDEFINED;
-      storage = _Runtime.callValue(Permission.getWebStorageManager__permission, cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(storage, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(storage, 'persist')), 'function')))) { return cast 'prompt'; }
-      try {
-        return cast _Runtime.select(flighthq._internal._Async.awaitValue(_Runtime.callProperty(storage, 'persist', cast ([] : Array<Dynamic>))), function():Dynamic return cast 'granted', function():Dynamic return cast 'prompt');
-      } catch (__error:Dynamic) {
-        return cast 'prompt';
-      }
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var storage:Dynamic = cast _Runtime.UNDEFINED;
+        storage = _Runtime.callValue(Permission.getWebStorageManager__permission, cast ([] : Array<Dynamic>));
+        var __flowBranch6:Dynamic;
+        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(storage, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(storage, 'persist')), 'function')))) {
+          __flowBranch6 = flighthq._internal._Async.protect(function():Dynamic {
+            return flighthq._internal._Async.flowReturn('prompt');
+          });
+        } else {
+          __flowBranch6 = flighthq._internal._Async.flowNormal();
+        }
+        return flighthq._internal._Async.continueFlow(__flowBranch6, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+            return flighthq._internal._Async.flatMap(_Runtime.callProperty(storage, 'persist', cast ([] : Array<Dynamic>)), function(__awaitValue7:Dynamic):Dynamic {
+              if (_Runtime.truthy(__awaitValue7)) {
+                return flighthq._internal._Async.flowReturn('granted');
+              } else {
+                return flighthq._internal._Async.flowReturn('prompt');
+              }
+            });
+          }), function(__caughtError:Dynamic):Dynamic {
+            var __error:Dynamic = __caughtError;
+            return flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn('prompt');
+            });
+          }), function():Dynamic {
+            return flighthq._internal._Async.flowNormal();
+          });
+        });
+      })
+    );
   }
 
   public static function requestWebPermission__permission(name:PermissionName):flighthq._internal._Promise<PermissionState> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<PermissionState> {
-      var router:Dynamic = cast _Runtime.UNDEFINED;
-      router = _Runtime.getIndex(Permission._permissionRequestRouters__permission, name);
-      if (_Runtime.truthy(!_Runtime.strictEquals(router, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast flighthq._internal._Async.awaitValue(_Runtime.callValue(router, cast ([] : Array<Dynamic>))); }
-      return cast flighthq._internal._Async.awaitValue(_Runtime.callValue(Permission.readWebPermissionState__permission, cast ([name] : Array<Dynamic>)));
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var router:Dynamic = cast _Runtime.UNDEFINED;
+        router = _Runtime.getIndex(Permission._permissionRequestRouters__permission, name);
+        var __flowBranch8:Dynamic;
+        if (_Runtime.truthy(!_Runtime.strictEquals(router, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+          __flowBranch8 = flighthq._internal._Async.protect(function():Dynamic {
+            return flighthq._internal._Async.flatMap(_Runtime.callValue(router, cast ([] : Array<Dynamic>)), function(__awaitValue9:Dynamic):Dynamic {
+              return flighthq._internal._Async.flowReturn(__awaitValue9);
+            });
+          });
+        } else {
+          __flowBranch8 = flighthq._internal._Async.flowNormal();
+        }
+        return flighthq._internal._Async.continueFlow(__flowBranch8, function():Dynamic {
+          return flighthq._internal._Async.flatMap(_Runtime.callValue(Permission.readWebPermissionState__permission, cast ([name] : Array<Dynamic>)), function(__awaitValue10:Dynamic):Dynamic {
+            return flighthq._internal._Async.flowReturn(__awaitValue10);
+          });
+        });
+      })
+    );
   }
 
   public static function stopMediaStreamTracks__permission(stream:Dynamic):Void {

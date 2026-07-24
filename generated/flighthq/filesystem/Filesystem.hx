@@ -43,273 +43,800 @@ class Filesystem {
   }
 
   public static function createWebFileSystemBackend():Dynamic {
-    return cast { readTextFile: flighthq._internal._Async.make(function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var handle:Dynamic = cast _Runtime.UNDEFINED;
-      handle = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, false] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(handle, null))) { return cast null; }
-      try {
-        var file:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(handle, 'getFile', cast ([] : Array<Dynamic>)));
-        return cast flighthq._internal._Async.awaitValue(_Runtime.callProperty(file, 'text', cast ([] : Array<Dynamic>)));
-      } catch (__error:Dynamic) {
-        return cast null;
-      }
-      return cast null;
-    }), writeTextFile: flighthq._internal._Async.make(function(path:Dynamic, data:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast _Runtime.callValue(Filesystem.writeWebFile__filesystem, cast ([path, data] : Array<Dynamic>));
-      return cast null;
-    }), readBinaryFile: flighthq._internal._Async.make(function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var handle:Dynamic = cast _Runtime.UNDEFINED;
-      handle = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, false] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(handle, null))) { return cast null; }
-      try {
-        var file:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(handle, 'getFile', cast ([] : Array<Dynamic>)));
-        return cast _Runtime.construct(_Runtime.globalValue('Uint8Array'), [flighthq._internal._Async.awaitValue(_Runtime.callProperty(file, 'arrayBuffer', cast ([] : Array<Dynamic>)))]);
-      } catch (__error:Dynamic) {
-        return cast null;
-      }
-      return cast null;
-    }), readBinaryFileRange: flighthq._internal._Async.make(function(path:Dynamic, offset:Dynamic, length:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var handle:Dynamic = cast _Runtime.UNDEFINED;
-      handle = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, false] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(handle, null))) { return cast null; }
-      try {
-        var file:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(handle, 'getFile', cast ([] : Array<Dynamic>)));
-        if (_Runtime.truthy(_Runtime.compare(offset, _Runtime.field(file, 'size'), '>='))) { return cast _Runtime.construct(_Runtime.globalValue('Uint8Array'), [0.0]); }
-        var slice:Dynamic = _Runtime.slice(file, offset, (offset + length));
-        return cast _Runtime.construct(_Runtime.globalValue('Uint8Array'), [flighthq._internal._Async.awaitValue(_Runtime.callProperty(slice, 'arrayBuffer', cast ([] : Array<Dynamic>)))]);
-      } catch (__error:Dynamic) {
-        return cast null;
-      }
-      return cast null;
-    }), writeBinaryFile: flighthq._internal._Async.make(function(path:Dynamic, data:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast _Runtime.callValue(Filesystem.writeWebFile__filesystem, cast ([path, _Runtime.slice(data, 0, null)] : Array<Dynamic>));
-      return cast null;
-    }), fileExists: flighthq._internal._Async.make(function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast !_Runtime.strictEquals(flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, false] : Array<Dynamic>))), null);
-      return cast null;
-    }), directoryExists: flighthq._internal._Async.make(function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var root:Dynamic = cast _Runtime.UNDEFINED;
-      root = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebRoot__filesystem, cast ([] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(root, null))) { return cast false; }
-      return cast !_Runtime.strictEquals(flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebDirectoryHandle__filesystem, cast ([root, _Runtime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>)), false] : Array<Dynamic>))), null);
-      return cast null;
-    }), removeFile: flighthq._internal._Async.make(function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast _Runtime.callValue(Filesystem.writeWebRemove__filesystem, cast ([path, false] : Array<Dynamic>));
-      return cast null;
-    }), removeDirectory: flighthq._internal._Async.make(function(path:Dynamic, recursive:Dynamic = false):flighthq._internal._Promise<Dynamic> {
-      var root:Dynamic = cast _Runtime.UNDEFINED;
-      var segments:Dynamic = cast _Runtime.UNDEFINED;
-      var parent:Dynamic = cast _Runtime.UNDEFINED;
-      root = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebRoot__filesystem, cast ([] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(root, null))) { return cast false; }
-      segments = _Runtime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0))) { return cast false; }
-      parent = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebDirectoryHandle__filesystem, cast ([root, _Runtime.slice(segments, 0.0, -1.0), false] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(parent, null))) { return cast false; }
-      try {
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(parent, 'removeEntry', cast ([_Runtime.getIndex(segments, (_Runtime.field(segments, 'length') - 1.0)), { recursive: recursive }] : Array<Dynamic>)));
-        return cast true;
-      } catch (__error:Dynamic) {
-        return cast false;
-      }
-      return cast null;
-    }), makeDirectory: flighthq._internal._Async.make(function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var root:Dynamic = cast _Runtime.UNDEFINED;
-      var created:Dynamic = cast _Runtime.UNDEFINED;
-      root = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebRoot__filesystem, cast ([] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(root, null))) { return cast false; }
-      created = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebDirectoryHandle__filesystem, cast ([root, _Runtime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>)), true] : Array<Dynamic>)));
-      return cast !_Runtime.strictEquals(created, null);
-      return cast null;
-    }), readDirectory: flighthq._internal._Async.make(function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var root:Dynamic = cast _Runtime.UNDEFINED;
-      var dir:Dynamic = cast _Runtime.UNDEFINED;
-      var entries:Array<FileEntry> = cast _Runtime.UNDEFINED;
-      root = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebRoot__filesystem, cast ([] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(root, null))) { return cast cast ([] : Array<Dynamic>); }
-      dir = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebDirectoryHandle__filesystem, cast ([root, _Runtime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>)), false] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(dir, null))) { return cast cast ([] : Array<Dynamic>); }
-      entries = cast ([] : Array<Dynamic>);
-      try {
-        var base:Dynamic = _Runtime.callValue(Filesystem.normalizeWebPath__filesystem, cast ([path] : Array<Dynamic>));
-        {
-          var __asyncIterator0:Dynamic = _Runtime.asyncIterator(_Runtime.callValue(Filesystem.asAsyncEntries__filesystem, cast ([dir] : Array<Dynamic>)));
-          while (true) {
-            var __asyncStep1:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(__asyncIterator0, 'next', cast ([] : Array<Dynamic>)));
-            if (_Runtime.truthy(_Runtime.field(__asyncStep1, 'done'))) break;
-            var __iteration0:Dynamic = _Runtime.field(__asyncStep1, 'value');
-            var name:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
-            var handle:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
-            var isDirectory:Dynamic = _Runtime.strictEquals(_Runtime.field(handle, 'kind'), 'directory');
-            _Runtime.callProperty(entries, 'push', cast ([{ name: name, path: _Runtime.select(_Runtime.strictEquals(base, ''), function():Dynamic return cast name, function():Dynamic return cast '' + Std.string(base) + '/' + Std.string(name) + ''), isDirectory: isDirectory }] : Array<Dynamic>));
+    return cast { readTextFile: function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var handle:Dynamic = cast _Runtime.UNDEFINED;
+          return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, false] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
+            handle = __awaitValue0;
+            var __flowBranch1:Dynamic;
+            if (_Runtime.truthy(_Runtime.strictEquals(handle, null))) {
+              __flowBranch1 = flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(null);
+              });
+            } else {
+              __flowBranch1 = flighthq._internal._Async.flowNormal();
+            }
+            return flighthq._internal._Async.continueFlow(__flowBranch1, function():Dynamic {
+              return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+                var file:Dynamic = cast _Runtime.UNDEFINED;
+                return flighthq._internal._Async.flatMap(_Runtime.callProperty(handle, 'getFile', cast ([] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
+                  file = __awaitValue2;
+                  return flighthq._internal._Async.flatMap(_Runtime.callProperty(file, 'text', cast ([] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
+                    return flighthq._internal._Async.flowReturn(__awaitValue3);
+                  });
+                });
+              }), function(__caughtError:Dynamic):Dynamic {
+                var __error:Dynamic = __caughtError;
+                return flighthq._internal._Async.protect(function():Dynamic {
+                  return flighthq._internal._Async.flowReturn(null);
+                });
+              }), function():Dynamic {
+                return flighthq._internal._Async.flowNormal();
+              });
+            });
+          });
+        })
+      );
+    }, writeTextFile: function(path:Dynamic, data:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(_Runtime.callValue(Filesystem.writeWebFile__filesystem, cast ([path, data] : Array<Dynamic>)));
+      });
+    }, readBinaryFile: function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var handle:Dynamic = cast _Runtime.UNDEFINED;
+          return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, false] : Array<Dynamic>)), function(__awaitValue4:Dynamic):Dynamic {
+            handle = __awaitValue4;
+            var __flowBranch5:Dynamic;
+            if (_Runtime.truthy(_Runtime.strictEquals(handle, null))) {
+              __flowBranch5 = flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(null);
+              });
+            } else {
+              __flowBranch5 = flighthq._internal._Async.flowNormal();
+            }
+            return flighthq._internal._Async.continueFlow(__flowBranch5, function():Dynamic {
+              return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+                var file:Dynamic = cast _Runtime.UNDEFINED;
+                return flighthq._internal._Async.flatMap(_Runtime.callProperty(handle, 'getFile', cast ([] : Array<Dynamic>)), function(__awaitValue6:Dynamic):Dynamic {
+                  file = __awaitValue6;
+                  return flighthq._internal._Async.flatMap(_Runtime.callProperty(file, 'arrayBuffer', cast ([] : Array<Dynamic>)), function(__awaitValue7:Dynamic):Dynamic {
+                    return flighthq._internal._Async.flowReturn(_Runtime.construct(_Runtime.globalValue('Uint8Array'), [__awaitValue7]));
+                  });
+                });
+              }), function(__caughtError:Dynamic):Dynamic {
+                var __error:Dynamic = __caughtError;
+                return flighthq._internal._Async.protect(function():Dynamic {
+                  return flighthq._internal._Async.flowReturn(null);
+                });
+              }), function():Dynamic {
+                return flighthq._internal._Async.flowNormal();
+              });
+            });
+          });
+        })
+      );
+    }, readBinaryFileRange: function(path:Dynamic, offset:Dynamic, length:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var handle:Dynamic = cast _Runtime.UNDEFINED;
+          return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, false] : Array<Dynamic>)), function(__awaitValue8:Dynamic):Dynamic {
+            handle = __awaitValue8;
+            var __flowBranch9:Dynamic;
+            if (_Runtime.truthy(_Runtime.strictEquals(handle, null))) {
+              __flowBranch9 = flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(null);
+              });
+            } else {
+              __flowBranch9 = flighthq._internal._Async.flowNormal();
+            }
+            return flighthq._internal._Async.continueFlow(__flowBranch9, function():Dynamic {
+              return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+                var file:Dynamic = cast _Runtime.UNDEFINED;
+                var slice:Dynamic = cast _Runtime.UNDEFINED;
+                return flighthq._internal._Async.flatMap(_Runtime.callProperty(handle, 'getFile', cast ([] : Array<Dynamic>)), function(__awaitValue10:Dynamic):Dynamic {
+                  file = __awaitValue10;
+                  var __flowBranch11:Dynamic;
+                  if (_Runtime.truthy(_Runtime.compare(offset, _Runtime.field(file, 'size'), '>='))) {
+                    __flowBranch11 = flighthq._internal._Async.protect(function():Dynamic {
+                      return flighthq._internal._Async.flowReturn(_Runtime.construct(_Runtime.globalValue('Uint8Array'), [0.0]));
+                    });
+                  } else {
+                    __flowBranch11 = flighthq._internal._Async.flowNormal();
+                  }
+                  return flighthq._internal._Async.continueFlow(__flowBranch11, function():Dynamic {
+                    slice = _Runtime.slice(file, offset, (offset + length));
+                    return flighthq._internal._Async.flatMap(_Runtime.callProperty(slice, 'arrayBuffer', cast ([] : Array<Dynamic>)), function(__awaitValue12:Dynamic):Dynamic {
+                      return flighthq._internal._Async.flowReturn(_Runtime.construct(_Runtime.globalValue('Uint8Array'), [__awaitValue12]));
+                    });
+                  });
+                });
+              }), function(__caughtError:Dynamic):Dynamic {
+                var __error:Dynamic = __caughtError;
+                return flighthq._internal._Async.protect(function():Dynamic {
+                  return flighthq._internal._Async.flowReturn(null);
+                });
+              }), function():Dynamic {
+                return flighthq._internal._Async.flowNormal();
+              });
+            });
+          });
+        })
+      );
+    }, writeBinaryFile: function(path:Dynamic, data:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(_Runtime.callValue(Filesystem.writeWebFile__filesystem, cast ([path, _Runtime.slice(data, 0, null)] : Array<Dynamic>)));
+      });
+    }, fileExists: function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, false] : Array<Dynamic>)), function(__awaitValue13:Dynamic):Dynamic {
+          return flighthq._internal._Async.resolve(!_Runtime.strictEquals(__awaitValue13, null));
+        });
+      });
+    }, directoryExists: function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var root:Dynamic = cast _Runtime.UNDEFINED;
+          return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebRoot__filesystem, cast ([] : Array<Dynamic>)), function(__awaitValue14:Dynamic):Dynamic {
+            root = __awaitValue14;
+            var __flowBranch15:Dynamic;
+            if (_Runtime.truthy(_Runtime.strictEquals(root, null))) {
+              __flowBranch15 = flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(false);
+              });
+            } else {
+              __flowBranch15 = flighthq._internal._Async.flowNormal();
+            }
+            return flighthq._internal._Async.continueFlow(__flowBranch15, function():Dynamic {
+              return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebDirectoryHandle__filesystem, cast ([root, _Runtime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>)), false] : Array<Dynamic>)), function(__awaitValue16:Dynamic):Dynamic {
+                return flighthq._internal._Async.flowReturn(!_Runtime.strictEquals(__awaitValue16, null));
+              });
+            });
+          });
+        })
+      );
+    }, removeFile: function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(_Runtime.callValue(Filesystem.writeWebRemove__filesystem, cast ([path, false] : Array<Dynamic>)));
+      });
+    }, removeDirectory: function(path:Dynamic, recursive:Dynamic = false):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var root:Dynamic = cast _Runtime.UNDEFINED;
+          var segments:Dynamic = cast _Runtime.UNDEFINED;
+          var parent:Dynamic = cast _Runtime.UNDEFINED;
+          return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebRoot__filesystem, cast ([] : Array<Dynamic>)), function(__awaitValue17:Dynamic):Dynamic {
+            root = __awaitValue17;
+            var __flowBranch18:Dynamic;
+            if (_Runtime.truthy(_Runtime.strictEquals(root, null))) {
+              __flowBranch18 = flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(false);
+              });
+            } else {
+              __flowBranch18 = flighthq._internal._Async.flowNormal();
+            }
+            return flighthq._internal._Async.continueFlow(__flowBranch18, function():Dynamic {
+              segments = _Runtime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>));
+              var __flowBranch19:Dynamic;
+              if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0))) {
+                __flowBranch19 = flighthq._internal._Async.protect(function():Dynamic {
+                  return flighthq._internal._Async.flowReturn(false);
+                });
+              } else {
+                __flowBranch19 = flighthq._internal._Async.flowNormal();
+              }
+              return flighthq._internal._Async.continueFlow(__flowBranch19, function():Dynamic {
+                return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebDirectoryHandle__filesystem, cast ([root, _Runtime.slice(segments, 0.0, -1.0), false] : Array<Dynamic>)), function(__awaitValue20:Dynamic):Dynamic {
+                  parent = __awaitValue20;
+                  var __flowBranch21:Dynamic;
+                  if (_Runtime.truthy(_Runtime.strictEquals(parent, null))) {
+                    __flowBranch21 = flighthq._internal._Async.protect(function():Dynamic {
+                      return flighthq._internal._Async.flowReturn(false);
+                    });
+                  } else {
+                    __flowBranch21 = flighthq._internal._Async.flowNormal();
+                  }
+                  return flighthq._internal._Async.continueFlow(__flowBranch21, function():Dynamic {
+                    return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+                      return flighthq._internal._Async.flatMap(_Runtime.callProperty(parent, 'removeEntry', cast ([_Runtime.getIndex(segments, (_Runtime.field(segments, 'length') - 1.0)), { recursive: recursive }] : Array<Dynamic>)), function(__awaitValue22:Dynamic):Dynamic {
+                        __awaitValue22;
+                        return flighthq._internal._Async.flowReturn(true);
+                      });
+                    }), function(__caughtError:Dynamic):Dynamic {
+                      var __error:Dynamic = __caughtError;
+                      return flighthq._internal._Async.protect(function():Dynamic {
+                        return flighthq._internal._Async.flowReturn(false);
+                      });
+                    }), function():Dynamic {
+                      return flighthq._internal._Async.flowNormal();
+                    });
+                  });
+                });
+              });
+            });
+          });
+        })
+      );
+    }, makeDirectory: function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var root:Dynamic = cast _Runtime.UNDEFINED;
+          var created:Dynamic = cast _Runtime.UNDEFINED;
+          return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebRoot__filesystem, cast ([] : Array<Dynamic>)), function(__awaitValue23:Dynamic):Dynamic {
+            root = __awaitValue23;
+            var __flowBranch24:Dynamic;
+            if (_Runtime.truthy(_Runtime.strictEquals(root, null))) {
+              __flowBranch24 = flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(false);
+              });
+            } else {
+              __flowBranch24 = flighthq._internal._Async.flowNormal();
+            }
+            return flighthq._internal._Async.continueFlow(__flowBranch24, function():Dynamic {
+              return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebDirectoryHandle__filesystem, cast ([root, _Runtime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>)), true] : Array<Dynamic>)), function(__awaitValue25:Dynamic):Dynamic {
+                created = __awaitValue25;
+                return flighthq._internal._Async.flowReturn(!_Runtime.strictEquals(created, null));
+              });
+            });
+          });
+        })
+      );
+    }, readDirectory: function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var root:Dynamic = cast _Runtime.UNDEFINED;
+          var dir:Dynamic = cast _Runtime.UNDEFINED;
+          var entries:Array<FileEntry> = cast _Runtime.UNDEFINED;
+          return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebRoot__filesystem, cast ([] : Array<Dynamic>)), function(__awaitValue26:Dynamic):Dynamic {
+            root = __awaitValue26;
+            var __flowBranch27:Dynamic;
+            if (_Runtime.truthy(_Runtime.strictEquals(root, null))) {
+              __flowBranch27 = flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(cast ([] : Array<Dynamic>));
+              });
+            } else {
+              __flowBranch27 = flighthq._internal._Async.flowNormal();
+            }
+            return flighthq._internal._Async.continueFlow(__flowBranch27, function():Dynamic {
+              return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebDirectoryHandle__filesystem, cast ([root, _Runtime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>)), false] : Array<Dynamic>)), function(__awaitValue28:Dynamic):Dynamic {
+                dir = __awaitValue28;
+                var __flowBranch29:Dynamic;
+                if (_Runtime.truthy(_Runtime.strictEquals(dir, null))) {
+                  __flowBranch29 = flighthq._internal._Async.protect(function():Dynamic {
+                    return flighthq._internal._Async.flowReturn(cast ([] : Array<Dynamic>));
+                  });
+                } else {
+                  __flowBranch29 = flighthq._internal._Async.flowNormal();
+                }
+                return flighthq._internal._Async.continueFlow(__flowBranch29, function():Dynamic {
+                  entries = cast ([] : Array<Dynamic>);
+                  return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+                    var base:Dynamic = cast _Runtime.UNDEFINED;
+                    base = _Runtime.callValue(Filesystem.normalizeWebPath__filesystem, cast ([path] : Array<Dynamic>));
+                    var __flowIterator30:Dynamic = _Runtime.asyncIterator(_Runtime.callValue(Filesystem.asAsyncEntries__filesystem, cast ([dir] : Array<Dynamic>)));
+                    return flighthq._internal._Async.continueFlow(flighthq._internal._Async.repeatFlow(function():Dynamic {
+                      return flighthq._internal._Async.flatMap(_Runtime.callProperty(__flowIterator30, 'next', cast ([] : Array<Dynamic>)), function(__step:Dynamic):Dynamic {
+                        if (_Runtime.truthy(_Runtime.field(__step, 'done'))) return flighthq._internal._Async.flowBreak();
+                        var __iteration0:Dynamic = _Runtime.field(__step, 'value');
+                        var name:Dynamic = cast _Runtime.UNDEFINED;
+                        var handle:Dynamic = cast _Runtime.UNDEFINED;
+                        var isDirectory:Dynamic = cast _Runtime.UNDEFINED;
+                        name = _Runtime.getIndex(__iteration0, 0.0);
+                        handle = _Runtime.getIndex(__iteration0, 1.0);
+                        isDirectory = _Runtime.strictEquals(_Runtime.field(handle, 'kind'), 'directory');
+                        _Runtime.callProperty(entries, 'push', cast ([{ name: name, path: _Runtime.select(_Runtime.strictEquals(base, ''), function():Dynamic return cast name, function():Dynamic return cast '' + Std.string(base) + '/' + Std.string(name) + ''), isDirectory: isDirectory }] : Array<Dynamic>));
+                        return flighthq._internal._Async.flowNormal();
+                      });
+                    }), function():Dynamic {
+                      return flighthq._internal._Async.flowNormal();
+                    });
+                  }), function(__caughtError:Dynamic):Dynamic {
+                    var __error:Dynamic = __caughtError;
+                    return flighthq._internal._Async.protect(function():Dynamic {
+                      return flighthq._internal._Async.flowReturn(cast ([] : Array<Dynamic>));
+                    });
+                  }), function():Dynamic {
+                    return flighthq._internal._Async.flowReturn(entries);
+                  });
+                });
+              });
+            });
+          });
+        })
+      );
+    }, readDirectoryRecursive: function(path:Dynamic, options:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var root:Dynamic = cast _Runtime.UNDEFINED;
+          var dir:Dynamic = cast _Runtime.UNDEFINED;
+          var base:Dynamic = cast _Runtime.UNDEFINED;
+          var results:Array<FileEntry> = cast _Runtime.UNDEFINED;
+          return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebRoot__filesystem, cast ([] : Array<Dynamic>)), function(__awaitValue32:Dynamic):Dynamic {
+            root = __awaitValue32;
+            var __flowBranch33:Dynamic;
+            if (_Runtime.truthy(_Runtime.strictEquals(root, null))) {
+              __flowBranch33 = flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(cast ([] : Array<Dynamic>));
+              });
+            } else {
+              __flowBranch33 = flighthq._internal._Async.flowNormal();
+            }
+            return flighthq._internal._Async.continueFlow(__flowBranch33, function():Dynamic {
+              return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebDirectoryHandle__filesystem, cast ([root, _Runtime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>)), false] : Array<Dynamic>)), function(__awaitValue34:Dynamic):Dynamic {
+                dir = __awaitValue34;
+                var __flowBranch35:Dynamic;
+                if (_Runtime.truthy(_Runtime.strictEquals(dir, null))) {
+                  __flowBranch35 = flighthq._internal._Async.protect(function():Dynamic {
+                    return flighthq._internal._Async.flowReturn(cast ([] : Array<Dynamic>));
+                  });
+                } else {
+                  __flowBranch35 = flighthq._internal._Async.flowNormal();
+                }
+                return flighthq._internal._Async.continueFlow(__flowBranch35, function():Dynamic {
+                  base = _Runtime.callValue(Filesystem.normalizeWebPath__filesystem, cast ([path] : Array<Dynamic>));
+                  results = cast ([] : Array<Dynamic>);
+                  return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+                    return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.walkWebDirectory__filesystem, cast ([dir, base, results, 0.0, _Runtime.coalesce(_Runtime.optionalField(options, 'maxDepth'), function():Dynamic return cast HxMath.POSITIVE_INFINITY)] : Array<Dynamic>)), function(__awaitValue36:Dynamic):Dynamic {
+                      __awaitValue36;
+                      return flighthq._internal._Async.flowNormal();
+                    });
+                  }), function(__caughtError:Dynamic):Dynamic {
+                    var __error:Dynamic = __caughtError;
+                    return flighthq._internal._Async.protect(function():Dynamic {
+                      return flighthq._internal._Async.flowReturn(cast ([] : Array<Dynamic>));
+                    });
+                  }), function():Dynamic {
+                    return flighthq._internal._Async.flowReturn(results);
+                  });
+                });
+              });
+            });
+          });
+        })
+      );
+    }, statFile: function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var fileHandle:Dynamic = cast _Runtime.UNDEFINED;
+          var root:Dynamic = cast _Runtime.UNDEFINED;
+          var dir:Dynamic = cast _Runtime.UNDEFINED;
+          return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, false] : Array<Dynamic>)), function(__awaitValue37:Dynamic):Dynamic {
+            fileHandle = __awaitValue37;
+            var __flowBranch38:Dynamic;
+            if (_Runtime.truthy(!_Runtime.strictEquals(fileHandle, null))) {
+              __flowBranch38 = flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+                  var file:Dynamic = cast _Runtime.UNDEFINED;
+                  return flighthq._internal._Async.flatMap(_Runtime.callProperty(fileHandle, 'getFile', cast ([] : Array<Dynamic>)), function(__awaitValue39:Dynamic):Dynamic {
+                    file = __awaitValue39;
+                    return flighthq._internal._Async.flowReturn({ size: _Runtime.field(file, 'size'), isDirectory: false, modifiedTime: _Runtime.field(file, 'lastModified'), createdTime: _Runtime.field(file, 'lastModified'), isSymlink: false });
+                  });
+                }), function(__caughtError:Dynamic):Dynamic {
+                  var __error:Dynamic = __caughtError;
+                  return flighthq._internal._Async.protect(function():Dynamic {
+                    return flighthq._internal._Async.flowReturn(null);
+                  });
+                }), function():Dynamic {
+                  return flighthq._internal._Async.flowNormal();
+                });
+              });
+            } else {
+              __flowBranch38 = flighthq._internal._Async.flowNormal();
+            }
+            return flighthq._internal._Async.continueFlow(__flowBranch38, function():Dynamic {
+              return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebRoot__filesystem, cast ([] : Array<Dynamic>)), function(__awaitValue40:Dynamic):Dynamic {
+                root = __awaitValue40;
+                var __flowBranch41:Dynamic;
+                if (_Runtime.truthy(_Runtime.strictEquals(root, null))) {
+                  __flowBranch41 = flighthq._internal._Async.protect(function():Dynamic {
+                    return flighthq._internal._Async.flowReturn(null);
+                  });
+                } else {
+                  __flowBranch41 = flighthq._internal._Async.flowNormal();
+                }
+                return flighthq._internal._Async.continueFlow(__flowBranch41, function():Dynamic {
+                  return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebDirectoryHandle__filesystem, cast ([root, _Runtime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>)), false] : Array<Dynamic>)), function(__awaitValue42:Dynamic):Dynamic {
+                    dir = __awaitValue42;
+                    var __flowBranch43:Dynamic;
+                    if (_Runtime.truthy(_Runtime.strictEquals(dir, null))) {
+                      __flowBranch43 = flighthq._internal._Async.protect(function():Dynamic {
+                        return flighthq._internal._Async.flowReturn(null);
+                      });
+                    } else {
+                      __flowBranch43 = flighthq._internal._Async.flowNormal();
+                    }
+                    return flighthq._internal._Async.continueFlow(__flowBranch43, function():Dynamic {
+                      return flighthq._internal._Async.flowReturn({ size: 0.0, isDirectory: true, modifiedTime: 0.0, createdTime: 0.0, isSymlink: false });
+                    });
+                  });
+                });
+              });
+            });
+          });
+        })
+      );
+    }, rename: function(from:Dynamic, to:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          return flighthq._internal._Async.flatMap(_Runtime.callProperty(_Runtime.thisValue(), 'copy', cast ([from, to] : Array<Dynamic>)), function(__awaitValue44:Dynamic):Dynamic {
+            var __flowBranch45:Dynamic;
+            if (_Runtime.truthy(!_Runtime.truthy(__awaitValue44))) {
+              __flowBranch45 = flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(false);
+              });
+            } else {
+              __flowBranch45 = flighthq._internal._Async.flowNormal();
+            }
+            return flighthq._internal._Async.continueFlow(__flowBranch45, function():Dynamic {
+              return flighthq._internal._Async.flowReturn(_Runtime.callValue(Filesystem.writeWebRemove__filesystem, cast ([from, false] : Array<Dynamic>)));
+            });
+          });
+        })
+      );
+    }, copy: function(from:Dynamic, to:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var root:Dynamic = cast _Runtime.UNDEFINED;
+          var handle:Dynamic = cast _Runtime.UNDEFINED;
+          return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebRoot__filesystem, cast ([] : Array<Dynamic>)), function(__awaitValue46:Dynamic):Dynamic {
+            root = __awaitValue46;
+            var __flowBranch47:Dynamic;
+            if (_Runtime.truthy(_Runtime.strictEquals(root, null))) {
+              __flowBranch47 = flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(false);
+              });
+            } else {
+              __flowBranch47 = flighthq._internal._Async.flowNormal();
+            }
+            return flighthq._internal._Async.continueFlow(__flowBranch47, function():Dynamic {
+              return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([from, false] : Array<Dynamic>)), function(__awaitValue48:Dynamic):Dynamic {
+                handle = __awaitValue48;
+                var __flowBranch49:Dynamic;
+                if (_Runtime.truthy(_Runtime.strictEquals(handle, null))) {
+                  __flowBranch49 = flighthq._internal._Async.protect(function():Dynamic {
+                    return flighthq._internal._Async.flowReturn(false);
+                  });
+                } else {
+                  __flowBranch49 = flighthq._internal._Async.flowNormal();
+                }
+                return flighthq._internal._Async.continueFlow(__flowBranch49, function():Dynamic {
+                  return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+                    var file:Dynamic = cast _Runtime.UNDEFINED;
+                    var bytes:Dynamic = cast _Runtime.UNDEFINED;
+                    return flighthq._internal._Async.flatMap(_Runtime.callProperty(handle, 'getFile', cast ([] : Array<Dynamic>)), function(__awaitValue50:Dynamic):Dynamic {
+                      file = __awaitValue50;
+                      return flighthq._internal._Async.flatMap(_Runtime.callProperty(file, 'arrayBuffer', cast ([] : Array<Dynamic>)), function(__awaitValue51:Dynamic):Dynamic {
+                        bytes = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [__awaitValue51]);
+                        return flighthq._internal._Async.flowReturn(_Runtime.callValue(Filesystem.writeWebFile__filesystem, cast ([to, bytes] : Array<Dynamic>)));
+                      });
+                    });
+                  }), function(__caughtError:Dynamic):Dynamic {
+                    var __error:Dynamic = __caughtError;
+                    return flighthq._internal._Async.protect(function():Dynamic {
+                      return flighthq._internal._Async.flowReturn(false);
+                    });
+                  }), function():Dynamic {
+                    return flighthq._internal._Async.flowNormal();
+                  });
+                });
+              });
+            });
+          });
+        })
+      );
+    }, appendTextFile: function(path:Dynamic, data:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var handle:Dynamic = cast _Runtime.UNDEFINED;
+          var existing:Dynamic = cast _Runtime.UNDEFINED;
+          return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, false] : Array<Dynamic>)), function(__awaitValue52:Dynamic):Dynamic {
+            handle = __awaitValue52;
+            existing = '';
+            var __flowBranch53:Dynamic;
+            if (_Runtime.truthy(!_Runtime.strictEquals(handle, null))) {
+              __flowBranch53 = flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+                  return flighthq._internal._Async.flatMap(_Runtime.callProperty(handle, 'getFile', cast ([] : Array<Dynamic>)), function(__awaitValue54:Dynamic):Dynamic {
+                    return flighthq._internal._Async.flatMap(_Runtime.callProperty(__awaitValue54, 'text', cast ([] : Array<Dynamic>)), function(__awaitValue55:Dynamic):Dynamic {
+                      (existing = cast (__awaitValue55 : Dynamic));
+                      return flighthq._internal._Async.flowNormal();
+                    });
+                  });
+                }), function(__caughtError:Dynamic):Dynamic {
+                  var __error:Dynamic = __caughtError;
+                  return flighthq._internal._Async.protect(function():Dynamic {
+                    (existing = cast ('' : Dynamic));
+                    return flighthq._internal._Async.flowNormal();
+                  });
+                }), function():Dynamic {
+                  return flighthq._internal._Async.flowNormal();
+                });
+              });
+            } else {
+              __flowBranch53 = flighthq._internal._Async.flowNormal();
+            }
+            return flighthq._internal._Async.continueFlow(__flowBranch53, function():Dynamic {
+              return flighthq._internal._Async.flowReturn(_Runtime.callValue(Filesystem.writeWebFile__filesystem, cast ([path, (existing + data)] : Array<Dynamic>)));
+            });
+          });
+        })
+      );
+    }, openFileReadStream: function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var handle:Dynamic = cast _Runtime.UNDEFINED;
+          return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, false] : Array<Dynamic>)), function(__awaitValue56:Dynamic):Dynamic {
+            handle = __awaitValue56;
+            var __flowBranch57:Dynamic;
+            if (_Runtime.truthy(_Runtime.strictEquals(handle, null))) {
+              __flowBranch57 = flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(null);
+              });
+            } else {
+              __flowBranch57 = flighthq._internal._Async.flowNormal();
+            }
+            return flighthq._internal._Async.continueFlow(__flowBranch57, function():Dynamic {
+              return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+                var file:Dynamic = cast _Runtime.UNDEFINED;
+                return flighthq._internal._Async.flatMap(_Runtime.callProperty(handle, 'getFile', cast ([] : Array<Dynamic>)), function(__awaitValue58:Dynamic):Dynamic {
+                  file = __awaitValue58;
+                  return flighthq._internal._Async.flowReturn((cast (cast _Runtime.callProperty(file, 'stream', cast ([] : Array<Dynamic>)) : Dynamic) : Dynamic));
+                });
+              }), function(__caughtError:Dynamic):Dynamic {
+                var __error:Dynamic = __caughtError;
+                return flighthq._internal._Async.protect(function():Dynamic {
+                  return flighthq._internal._Async.flowReturn(null);
+                });
+              }), function():Dynamic {
+                return flighthq._internal._Async.flowNormal();
+              });
+            });
+          });
+        })
+      );
+    }, openFileWriteStream: function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var handle:Dynamic = cast _Runtime.UNDEFINED;
+          return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, true] : Array<Dynamic>)), function(__awaitValue59:Dynamic):Dynamic {
+            handle = __awaitValue59;
+            var __flowBranch60:Dynamic;
+            if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(handle, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(handle, 'createWritable')), 'function')))) {
+              __flowBranch60 = flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(null);
+              });
+            } else {
+              __flowBranch60 = flighthq._internal._Async.flowNormal();
+            }
+            return flighthq._internal._Async.continueFlow(__flowBranch60, function():Dynamic {
+              return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flatMap(_Runtime.callProperty(handle, 'createWritable', cast ([] : Array<Dynamic>)), function(__awaitValue61:Dynamic):Dynamic {
+                  return flighthq._internal._Async.flowReturn((cast (cast __awaitValue61 : Dynamic) : Dynamic));
+                });
+              }), function(__caughtError:Dynamic):Dynamic {
+                var __error:Dynamic = __caughtError;
+                return flighthq._internal._Async.protect(function():Dynamic {
+                  return flighthq._internal._Async.flowReturn(null);
+                });
+              }), function():Dynamic {
+                return flighthq._internal._Async.flowNormal();
+              });
+            });
+          });
+        })
+      );
+    }, writeFileAtomic: function(path:Dynamic, data:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var tmpPath:Dynamic = cast _Runtime.UNDEFINED;
+          var payload:Dynamic = cast _Runtime.UNDEFINED;
+          var tmpHandle:Dynamic = cast _Runtime.UNDEFINED;
+          tmpPath = (path + '.__atomic_tmp__');
+          payload = _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(data), 'string'), function():Dynamic return cast data, function():Dynamic return cast _Runtime.slice(data, 0, null));
+          return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.writeWebFile__filesystem, cast ([tmpPath, payload] : Array<Dynamic>)), function(__awaitValue62:Dynamic):Dynamic {
+            var __flowBranch63:Dynamic;
+            if (_Runtime.truthy(!_Runtime.truthy(__awaitValue62))) {
+              __flowBranch63 = flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(false);
+              });
+            } else {
+              __flowBranch63 = flighthq._internal._Async.flowNormal();
+            }
+            return flighthq._internal._Async.continueFlow(__flowBranch63, function():Dynamic {
+              return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([tmpPath, false] : Array<Dynamic>)), function(__awaitValue64:Dynamic):Dynamic {
+                tmpHandle = __awaitValue64;
+                var __flowBranch65:Dynamic;
+                if (_Runtime.truthy(!_Runtime.strictEquals(tmpHandle, null))) {
+                  __flowBranch65 = flighthq._internal._Async.protect(function():Dynamic {
+                    return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+                      var file:Dynamic = cast _Runtime.UNDEFINED;
+                      var bytes:Dynamic = cast _Runtime.UNDEFINED;
+                      var ok:Dynamic = cast _Runtime.UNDEFINED;
+                      return flighthq._internal._Async.flatMap(_Runtime.callProperty(tmpHandle, 'getFile', cast ([] : Array<Dynamic>)), function(__awaitValue66:Dynamic):Dynamic {
+                        file = __awaitValue66;
+                        return flighthq._internal._Async.flatMap(_Runtime.callProperty(file, 'arrayBuffer', cast ([] : Array<Dynamic>)), function(__awaitValue67:Dynamic):Dynamic {
+                          bytes = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [__awaitValue67]);
+                          return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.writeWebFile__filesystem, cast ([path, bytes] : Array<Dynamic>)), function(__awaitValue68:Dynamic):Dynamic {
+                            ok = __awaitValue68;
+                            return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.writeWebRemove__filesystem, cast ([tmpPath, false] : Array<Dynamic>)), function(__awaitValue69:Dynamic):Dynamic {
+                              __awaitValue69;
+                              return flighthq._internal._Async.flowReturn(ok);
+                            });
+                          });
+                        });
+                      });
+                    }), function(__caughtError:Dynamic):Dynamic {
+                      var __error:Dynamic = __caughtError;
+                      return flighthq._internal._Async.protect(function():Dynamic {
+                        return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.writeWebRemove__filesystem, cast ([tmpPath, false] : Array<Dynamic>)), function(__awaitValue70:Dynamic):Dynamic {
+                          __awaitValue70;
+                          return flighthq._internal._Async.flowReturn(false);
+                        });
+                      });
+                    }), function():Dynamic {
+                      return flighthq._internal._Async.flowNormal();
+                    });
+                  });
+                } else {
+                  __flowBranch65 = flighthq._internal._Async.flowNormal();
+                }
+                return flighthq._internal._Async.continueFlow(__flowBranch65, function():Dynamic {
+                  return flighthq._internal._Async.flowReturn(false);
+                });
+              });
+            });
+          });
+        })
+      );
+    }, createFileSymlink: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(false);
+      });
+    }, readFileSymlink: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(null);
+      });
+    }, getFileRealPath: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(null);
+      });
+    }, getFilePermissions: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(null);
+      });
+    }, setFilePermissions: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.protect(function():Dynamic {
+        return flighthq._internal._Async.resolve(false);
+      });
+    }, canAccessFile: function(path:Dynamic, mode:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var handle:Dynamic = cast _Runtime.UNDEFINED;
+          var __flowBranch71:Dynamic;
+          if (_Runtime.truthy(_Runtime.strictEquals(mode, 'executable'))) {
+            __flowBranch71 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(false);
+            });
+          } else {
+            __flowBranch71 = flighthq._internal._Async.flowNormal();
           }
-        }
-      } catch (__error:Dynamic) {
-        return cast cast ([] : Array<Dynamic>);
-      }
-      return cast entries;
-      return cast null;
-    }), readDirectoryRecursive: flighthq._internal._Async.make(function(path:Dynamic, options:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var root:Dynamic = cast _Runtime.UNDEFINED;
-      var dir:Dynamic = cast _Runtime.UNDEFINED;
-      var base:Dynamic = cast _Runtime.UNDEFINED;
-      var results:Array<FileEntry> = cast _Runtime.UNDEFINED;
-      root = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebRoot__filesystem, cast ([] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(root, null))) { return cast cast ([] : Array<Dynamic>); }
-      dir = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebDirectoryHandle__filesystem, cast ([root, _Runtime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>)), false] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(dir, null))) { return cast cast ([] : Array<Dynamic>); }
-      base = _Runtime.callValue(Filesystem.normalizeWebPath__filesystem, cast ([path] : Array<Dynamic>));
-      results = cast ([] : Array<Dynamic>);
-      try {
-        flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.walkWebDirectory__filesystem, cast ([dir, base, results, 0.0, _Runtime.coalesce(_Runtime.optionalField(options, 'maxDepth'), function():Dynamic return cast HxMath.POSITIVE_INFINITY)] : Array<Dynamic>)));
-      } catch (__error:Dynamic) {
-        return cast cast ([] : Array<Dynamic>);
-      }
-      return cast results;
-      return cast null;
-    }), statFile: flighthq._internal._Async.make(function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var fileHandle:Dynamic = cast _Runtime.UNDEFINED;
-      var root:Dynamic = cast _Runtime.UNDEFINED;
-      var dir:Dynamic = cast _Runtime.UNDEFINED;
-      fileHandle = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, false] : Array<Dynamic>)));
-      if (_Runtime.truthy(!_Runtime.strictEquals(fileHandle, null))) {
-        try {
-          var file:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(fileHandle, 'getFile', cast ([] : Array<Dynamic>)));
-          return cast { size: _Runtime.field(file, 'size'), isDirectory: false, modifiedTime: _Runtime.field(file, 'lastModified'), createdTime: _Runtime.field(file, 'lastModified'), isSymlink: false };
-        } catch (__error:Dynamic) {
-          return cast null;
-        }
-      }
-      root = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebRoot__filesystem, cast ([] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(root, null))) { return cast null; }
-      dir = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebDirectoryHandle__filesystem, cast ([root, _Runtime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>)), false] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(dir, null))) { return cast null; }
-      return cast { size: 0.0, isDirectory: true, modifiedTime: 0.0, createdTime: 0.0, isSymlink: false };
-      return cast null;
-    }), rename: flighthq._internal._Async.make(function(from:Dynamic, to:Dynamic):flighthq._internal._Promise<Dynamic> {
-      if (_Runtime.truthy(!_Runtime.truthy(flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.thisValue(), 'copy', cast ([from, to] : Array<Dynamic>)))))) { return cast false; }
-      return cast _Runtime.callValue(Filesystem.writeWebRemove__filesystem, cast ([from, false] : Array<Dynamic>));
-      return cast null;
-    }), copy: flighthq._internal._Async.make(function(from:Dynamic, to:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var root:Dynamic = cast _Runtime.UNDEFINED;
-      var handle:Dynamic = cast _Runtime.UNDEFINED;
-      root = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebRoot__filesystem, cast ([] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(root, null))) { return cast false; }
-      handle = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([from, false] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(handle, null))) { return cast false; }
-      try {
-        var file:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(handle, 'getFile', cast ([] : Array<Dynamic>)));
-        var bytes:Dynamic = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [flighthq._internal._Async.awaitValue(_Runtime.callProperty(file, 'arrayBuffer', cast ([] : Array<Dynamic>)))]);
-        return cast _Runtime.callValue(Filesystem.writeWebFile__filesystem, cast ([to, bytes] : Array<Dynamic>));
-      } catch (__error:Dynamic) {
-        return cast false;
-      }
-      return cast null;
-    }), appendTextFile: flighthq._internal._Async.make(function(path:Dynamic, data:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var handle:Dynamic = cast _Runtime.UNDEFINED;
-      var existing:Dynamic = cast _Runtime.UNDEFINED;
-      handle = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, false] : Array<Dynamic>)));
-      existing = '';
-      if (_Runtime.truthy(!_Runtime.strictEquals(handle, null))) {
-        try {
-          (existing = cast (flighthq._internal._Async.awaitValue(_Runtime.callProperty(flighthq._internal._Async.awaitValue(_Runtime.callProperty(handle, 'getFile', cast ([] : Array<Dynamic>))), 'text', cast ([] : Array<Dynamic>))) : Dynamic));
-        } catch (__error:Dynamic) {
-          (existing = cast ('' : Dynamic));
-        }
-      }
-      return cast _Runtime.callValue(Filesystem.writeWebFile__filesystem, cast ([path, (existing + data)] : Array<Dynamic>));
-      return cast null;
-    }), openFileReadStream: flighthq._internal._Async.make(function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var handle:Dynamic = cast _Runtime.UNDEFINED;
-      handle = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, false] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(handle, null))) { return cast null; }
-      try {
-        var file:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(handle, 'getFile', cast ([] : Array<Dynamic>)));
-        return cast (cast (cast _Runtime.callProperty(file, 'stream', cast ([] : Array<Dynamic>)) : Dynamic) : Dynamic);
-      } catch (__error:Dynamic) {
-        return cast null;
-      }
-      return cast null;
-    }), openFileWriteStream: flighthq._internal._Async.make(function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var handle:Dynamic = cast _Runtime.UNDEFINED;
-      handle = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, true] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(handle, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(handle, 'createWritable')), 'function')))) { return cast null; }
-      try {
-        return cast (cast (cast flighthq._internal._Async.awaitValue(_Runtime.callProperty(handle, 'createWritable', cast ([] : Array<Dynamic>))) : Dynamic) : Dynamic);
-      } catch (__error:Dynamic) {
-        return cast null;
-      }
-      return cast null;
-    }), writeFileAtomic: flighthq._internal._Async.make(function(path:Dynamic, data:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var tmpPath:Dynamic = cast _Runtime.UNDEFINED;
-      var payload:Dynamic = cast _Runtime.UNDEFINED;
-      var tmpHandle:Dynamic = cast _Runtime.UNDEFINED;
-      tmpPath = (path + '.__atomic_tmp__');
-      payload = _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(data), 'string'), function():Dynamic return cast data, function():Dynamic return cast _Runtime.slice(data, 0, null));
-      if (_Runtime.truthy(!_Runtime.truthy(flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.writeWebFile__filesystem, cast ([tmpPath, payload] : Array<Dynamic>)))))) { return cast false; }
-      tmpHandle = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([tmpPath, false] : Array<Dynamic>)));
-      if (_Runtime.truthy(!_Runtime.strictEquals(tmpHandle, null))) {
-        try {
-          var file:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(tmpHandle, 'getFile', cast ([] : Array<Dynamic>)));
-          var bytes:Dynamic = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [flighthq._internal._Async.awaitValue(_Runtime.callProperty(file, 'arrayBuffer', cast ([] : Array<Dynamic>)))]);
-          var ok:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.writeWebFile__filesystem, cast ([path, bytes] : Array<Dynamic>)));
-          flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.writeWebRemove__filesystem, cast ([tmpPath, false] : Array<Dynamic>)));
-          return cast ok;
-        } catch (__error:Dynamic) {
-          flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.writeWebRemove__filesystem, cast ([tmpPath, false] : Array<Dynamic>)));
-          return cast false;
-        }
-      }
-      return cast false;
-      return cast null;
-    }), createFileSymlink: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast false;
-      return cast null;
-    }), readFileSymlink: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast null;
-      return cast null;
-    }), getFileRealPath: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast null;
-      return cast null;
-    }), getFilePermissions: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast null;
-      return cast null;
-    }), setFilePermissions: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      return cast false;
-      return cast null;
-    }), canAccessFile: flighthq._internal._Async.make(function(path:Dynamic, mode:Dynamic):flighthq._internal._Promise<Dynamic> {
-      var handle:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(mode, 'executable'))) { return cast false; }
-      if (_Runtime.truthy(_Runtime.strictEquals(mode, 'readable'))) {
-        var handle:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, false] : Array<Dynamic>)));
-        if (_Runtime.truthy(!_Runtime.strictEquals(handle, null))) { return cast true; }
-        var root:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebRoot__filesystem, cast ([] : Array<Dynamic>)));
-        if (_Runtime.truthy(_Runtime.strictEquals(root, null))) { return cast false; }
-        return cast !_Runtime.strictEquals(flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebDirectoryHandle__filesystem, cast ([root, _Runtime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>)), false] : Array<Dynamic>))), null);
-      }
-      handle = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, false] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(handle, null))) { return cast false; }
-      try {
-        var writable:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(handle, 'createWritable', cast ([] : Array<Dynamic>)));
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(writable, 'abort', cast ([] : Array<Dynamic>)));
-        return cast true;
-      } catch (__error:Dynamic) {
-        return cast false;
-      }
-      return cast null;
-    }), getFileSystemUsage: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      var storage:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
-      storage = flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'storage');
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(storage, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(storage, 'estimate')), 'function')))) { return cast null; }
-      try {
-        var estimate:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(storage, 'estimate', cast ([] : Array<Dynamic>)));
-        return cast { usedBytes: _Runtime.coalesce(_Runtime.field(estimate, 'usage'), function():Dynamic return cast 0.0), quotaBytes: _Runtime.coalesce(_Runtime.field(estimate, 'quota'), function():Dynamic return cast 0.0) };
-      } catch (__error:Dynamic) {
-        return cast null;
-      }
-      return cast null;
-    }), watch: function() {
+          return flighthq._internal._Async.continueFlow(__flowBranch71, function():Dynamic {
+            var __flowBranch72:Dynamic;
+            if (_Runtime.truthy(_Runtime.strictEquals(mode, 'readable'))) {
+              __flowBranch72 = flighthq._internal._Async.protect(function():Dynamic {
+                var handle:Dynamic = cast _Runtime.UNDEFINED;
+                var root:Dynamic = cast _Runtime.UNDEFINED;
+                return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, false] : Array<Dynamic>)), function(__awaitValue73:Dynamic):Dynamic {
+                  handle = __awaitValue73;
+                  var __flowBranch74:Dynamic;
+                  if (_Runtime.truthy(!_Runtime.strictEquals(handle, null))) {
+                    __flowBranch74 = flighthq._internal._Async.protect(function():Dynamic {
+                      return flighthq._internal._Async.flowReturn(true);
+                    });
+                  } else {
+                    __flowBranch74 = flighthq._internal._Async.flowNormal();
+                  }
+                  return flighthq._internal._Async.continueFlow(__flowBranch74, function():Dynamic {
+                    return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebRoot__filesystem, cast ([] : Array<Dynamic>)), function(__awaitValue75:Dynamic):Dynamic {
+                      root = __awaitValue75;
+                      var __flowBranch76:Dynamic;
+                      if (_Runtime.truthy(_Runtime.strictEquals(root, null))) {
+                        __flowBranch76 = flighthq._internal._Async.protect(function():Dynamic {
+                          return flighthq._internal._Async.flowReturn(false);
+                        });
+                      } else {
+                        __flowBranch76 = flighthq._internal._Async.flowNormal();
+                      }
+                      return flighthq._internal._Async.continueFlow(__flowBranch76, function():Dynamic {
+                        return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebDirectoryHandle__filesystem, cast ([root, _Runtime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>)), false] : Array<Dynamic>)), function(__awaitValue77:Dynamic):Dynamic {
+                          return flighthq._internal._Async.flowReturn(!_Runtime.strictEquals(__awaitValue77, null));
+                        });
+                      });
+                    });
+                  });
+                });
+              });
+            } else {
+              __flowBranch72 = flighthq._internal._Async.flowNormal();
+            }
+            return flighthq._internal._Async.continueFlow(__flowBranch72, function():Dynamic {
+              return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, false] : Array<Dynamic>)), function(__awaitValue78:Dynamic):Dynamic {
+                handle = __awaitValue78;
+                var __flowBranch79:Dynamic;
+                if (_Runtime.truthy(_Runtime.strictEquals(handle, null))) {
+                  __flowBranch79 = flighthq._internal._Async.protect(function():Dynamic {
+                    return flighthq._internal._Async.flowReturn(false);
+                  });
+                } else {
+                  __flowBranch79 = flighthq._internal._Async.flowNormal();
+                }
+                return flighthq._internal._Async.continueFlow(__flowBranch79, function():Dynamic {
+                  return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+                    var writable:Dynamic = cast _Runtime.UNDEFINED;
+                    return flighthq._internal._Async.flatMap(_Runtime.callProperty(handle, 'createWritable', cast ([] : Array<Dynamic>)), function(__awaitValue80:Dynamic):Dynamic {
+                      writable = __awaitValue80;
+                      return flighthq._internal._Async.flatMap(_Runtime.callProperty(writable, 'abort', cast ([] : Array<Dynamic>)), function(__awaitValue81:Dynamic):Dynamic {
+                        __awaitValue81;
+                        return flighthq._internal._Async.flowReturn(true);
+                      });
+                    });
+                  }), function(__caughtError:Dynamic):Dynamic {
+                    var __error:Dynamic = __caughtError;
+                    return flighthq._internal._Async.protect(function():Dynamic {
+                      return flighthq._internal._Async.flowReturn(false);
+                    });
+                  }), function():Dynamic {
+                    return flighthq._internal._Async.flowNormal();
+                  });
+                });
+              });
+            });
+          });
+        })
+      );
+    }, getFileSystemUsage: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          var storage:Dynamic = cast _Runtime.UNDEFINED;
+          var __flowBranch82:Dynamic;
+          if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) {
+            __flowBranch82 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(null);
+            });
+          } else {
+            __flowBranch82 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch82, function():Dynamic {
+            storage = flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'storage');
+            var __flowBranch83:Dynamic;
+            if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(storage, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(storage, 'estimate')), 'function')))) {
+              __flowBranch83 = flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(null);
+              });
+            } else {
+              __flowBranch83 = flighthq._internal._Async.flowNormal();
+            }
+            return flighthq._internal._Async.continueFlow(__flowBranch83, function():Dynamic {
+              return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+                var estimate:Dynamic = cast _Runtime.UNDEFINED;
+                return flighthq._internal._Async.flatMap(_Runtime.callProperty(storage, 'estimate', cast ([] : Array<Dynamic>)), function(__awaitValue84:Dynamic):Dynamic {
+                  estimate = __awaitValue84;
+                  return flighthq._internal._Async.flowReturn({ usedBytes: _Runtime.coalesce(_Runtime.field(estimate, 'usage'), function():Dynamic return cast 0.0), quotaBytes: _Runtime.coalesce(_Runtime.field(estimate, 'quota'), function():Dynamic return cast 0.0) });
+                });
+              }), function(__caughtError:Dynamic):Dynamic {
+                var __error:Dynamic = __caughtError;
+                return flighthq._internal._Async.protect(function():Dynamic {
+                  return flighthq._internal._Async.flowReturn(null);
+                });
+              }), function():Dynamic {
+                return flighthq._internal._Async.flowNormal();
+              });
+            });
+          });
+        })
+      );
+    }, watch: function() {
       return cast function() {
       
       };
@@ -330,15 +857,27 @@ class Filesystem {
   }
 
   public static function findFiles(rootPath:String, pattern:String):flighthq._internal._Promise<Array<FileEntry>> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Array<FileEntry>> {
-      var all:Dynamic = cast _Runtime.UNDEFINED;
-      var re:Dynamic = cast _Runtime.UNDEFINED;
-      all = flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readDirectoryRecursive', cast ([rootPath] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(all, 'length'), 0.0))) { return cast cast ([] : Array<Dynamic>); }
-      re = _Runtime.callValue(Filesystem.globToRegExp__filesystem, cast ([pattern] : Array<Dynamic>));
-      return cast _Runtime.callProperty(all, 'filter', cast ([function(entry:Dynamic) return _Runtime.orValue(_Runtime.callProperty(re, 'test', cast ([_Runtime.field(entry, 'name')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callProperty(re, 'test', cast ([_Runtime.field(entry, 'path')] : Array<Dynamic>)))] : Array<Dynamic>));
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var all:Dynamic = cast _Runtime.UNDEFINED;
+        var re:Dynamic = cast _Runtime.UNDEFINED;
+        return flighthq._internal._Async.flatMap(_Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readDirectoryRecursive', cast ([rootPath] : Array<Dynamic>)), function(__awaitValue85:Dynamic):Dynamic {
+          all = __awaitValue85;
+          var __flowBranch86:Dynamic;
+          if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(all, 'length'), 0.0))) {
+            __flowBranch86 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(cast ([] : Array<Dynamic>));
+            });
+          } else {
+            __flowBranch86 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch86, function():Dynamic {
+            re = _Runtime.callValue(Filesystem.globToRegExp__filesystem, cast ([pattern] : Array<Dynamic>));
+            return flighthq._internal._Async.flowReturn(_Runtime.callProperty(all, 'filter', cast ([function(entry:Dynamic) return _Runtime.orValue(_Runtime.callProperty(re, 'test', cast ([_Runtime.field(entry, 'name')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callProperty(re, 'test', cast ([_Runtime.field(entry, 'path')] : Array<Dynamic>)))] : Array<Dynamic>)));
+          });
+        });
+      })
+    );
   }
 
   public static function getFileBaseName(path:String):String {
@@ -392,54 +931,133 @@ class Filesystem {
   }
 
   public static function getWebDirectoryHandle__filesystem(root:Dynamic, segments:Array<String>, create:Bool):flighthq._internal._Promise<Null<Dynamic>> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<Dynamic>> {
-      var current:Dynamic = cast _Runtime.UNDEFINED;
-      current = root;
-      try {
-        for (segment in _Runtime.iterable(segments)) {
-          (current = cast (flighthq._internal._Async.awaitValue(_Runtime.callProperty(current, 'getDirectoryHandle', cast ([segment, { create: create }] : Array<Dynamic>))) : Dynamic));
-        }
-        return cast current;
-      } catch (__error:Dynamic) {
-        return cast null;
-      }
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var current:Dynamic = cast _Runtime.UNDEFINED;
+        current = root;
+        return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+          var __flowIterator89:Array<Dynamic> = _Runtime.iterable(segments);
+          var __flowIndex90:Int = 0;
+          return flighthq._internal._Async.continueFlow(flighthq._internal._Async.repeatFlow(function():Dynamic {
+            if (__flowIndex90 >= __flowIterator89.length) return flighthq._internal._Async.flowBreak();
+            var segment:Dynamic = __flowIterator89[__flowIndex90++];
+            return flighthq._internal._Async.flatMap(_Runtime.callProperty(current, 'getDirectoryHandle', cast ([segment, { create: create }] : Array<Dynamic>)), function(__awaitValue91:Dynamic):Dynamic {
+              (current = cast (__awaitValue91 : Dynamic));
+              return flighthq._internal._Async.flowNormal();
+            });
+          }), function():Dynamic {
+            return flighthq._internal._Async.flowReturn(current);
+          });
+        }), function(__caughtError:Dynamic):Dynamic {
+          var __error:Dynamic = __caughtError;
+          return flighthq._internal._Async.protect(function():Dynamic {
+            return flighthq._internal._Async.flowReturn(null);
+          });
+        }), function():Dynamic {
+          return flighthq._internal._Async.flowNormal();
+        });
+      })
+    );
   }
 
   public static function getWebFileHandle__filesystem(path:String, create:Bool):flighthq._internal._Promise<Null<Dynamic>> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<Dynamic>> {
-      var root:Dynamic = cast _Runtime.UNDEFINED;
-      var segments:Dynamic = cast _Runtime.UNDEFINED;
-      var parent:Dynamic = cast _Runtime.UNDEFINED;
-      root = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebRoot__filesystem, cast ([] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(root, null))) { return cast null; }
-      segments = _Runtime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0))) { return cast null; }
-      parent = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebDirectoryHandle__filesystem, cast ([root, _Runtime.slice(segments, 0.0, -1.0), create] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(parent, null))) { return cast null; }
-      try {
-        return cast flighthq._internal._Async.awaitValue(_Runtime.callProperty(parent, 'getFileHandle', cast ([_Runtime.getIndex(segments, (_Runtime.field(segments, 'length') - 1.0)), { create: create }] : Array<Dynamic>)));
-      } catch (__error:Dynamic) {
-        return cast null;
-      }
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var root:Dynamic = cast _Runtime.UNDEFINED;
+        var segments:Dynamic = cast _Runtime.UNDEFINED;
+        var parent:Dynamic = cast _Runtime.UNDEFINED;
+        return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebRoot__filesystem, cast ([] : Array<Dynamic>)), function(__awaitValue92:Dynamic):Dynamic {
+          root = __awaitValue92;
+          var __flowBranch93:Dynamic;
+          if (_Runtime.truthy(_Runtime.strictEquals(root, null))) {
+            __flowBranch93 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(null);
+            });
+          } else {
+            __flowBranch93 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch93, function():Dynamic {
+            segments = _Runtime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>));
+            var __flowBranch94:Dynamic;
+            if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0))) {
+              __flowBranch94 = flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(null);
+              });
+            } else {
+              __flowBranch94 = flighthq._internal._Async.flowNormal();
+            }
+            return flighthq._internal._Async.continueFlow(__flowBranch94, function():Dynamic {
+              return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebDirectoryHandle__filesystem, cast ([root, _Runtime.slice(segments, 0.0, -1.0), create] : Array<Dynamic>)), function(__awaitValue95:Dynamic):Dynamic {
+                parent = __awaitValue95;
+                var __flowBranch96:Dynamic;
+                if (_Runtime.truthy(_Runtime.strictEquals(parent, null))) {
+                  __flowBranch96 = flighthq._internal._Async.protect(function():Dynamic {
+                    return flighthq._internal._Async.flowReturn(null);
+                  });
+                } else {
+                  __flowBranch96 = flighthq._internal._Async.flowNormal();
+                }
+                return flighthq._internal._Async.continueFlow(__flowBranch96, function():Dynamic {
+                  return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+                    return flighthq._internal._Async.flatMap(_Runtime.callProperty(parent, 'getFileHandle', cast ([_Runtime.getIndex(segments, (_Runtime.field(segments, 'length') - 1.0)), { create: create }] : Array<Dynamic>)), function(__awaitValue97:Dynamic):Dynamic {
+                      return flighthq._internal._Async.flowReturn(__awaitValue97);
+                    });
+                  }), function(__caughtError:Dynamic):Dynamic {
+                    var __error:Dynamic = __caughtError;
+                    return flighthq._internal._Async.protect(function():Dynamic {
+                      return flighthq._internal._Async.flowReturn(null);
+                    });
+                  }), function():Dynamic {
+                    return flighthq._internal._Async.flowNormal();
+                  });
+                });
+              });
+            });
+          });
+        });
+      })
+    );
   }
 
   public static function getWebRoot__filesystem():flighthq._internal._Promise<Null<Dynamic>> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<Dynamic>> {
-      var storage:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
-      storage = flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'storage');
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(storage, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(storage, 'getDirectory')), 'function')))) { return cast null; }
-      try {
-        return cast flighthq._internal._Async.awaitValue(_Runtime.callProperty(storage, 'getDirectory', cast ([] : Array<Dynamic>)));
-      } catch (__error:Dynamic) {
-        return cast null;
-      }
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var storage:Dynamic = cast _Runtime.UNDEFINED;
+        var __flowBranch98:Dynamic;
+        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) {
+          __flowBranch98 = flighthq._internal._Async.protect(function():Dynamic {
+            return flighthq._internal._Async.flowReturn(null);
+          });
+        } else {
+          __flowBranch98 = flighthq._internal._Async.flowNormal();
+        }
+        return flighthq._internal._Async.continueFlow(__flowBranch98, function():Dynamic {
+          storage = flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'storage');
+          var __flowBranch99:Dynamic;
+          if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(storage, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(storage, 'getDirectory')), 'function')))) {
+            __flowBranch99 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(null);
+            });
+          } else {
+            __flowBranch99 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch99, function():Dynamic {
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flatMap(_Runtime.callProperty(storage, 'getDirectory', cast ([] : Array<Dynamic>)), function(__awaitValue100:Dynamic):Dynamic {
+                return flighthq._internal._Async.flowReturn(__awaitValue100);
+              });
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(null);
+              });
+            }), function():Dynamic {
+              return flighthq._internal._Async.flowNormal();
+            });
+          });
+        });
+      })
+    );
   }
 
   public static function globToRegExp__filesystem(pattern:String):Dynamic {
@@ -535,41 +1153,113 @@ class Filesystem {
   }
 
   public static function readDialogHandleBinaryFile(handle:FileDialogHandle):flighthq._internal._Promise<Null<Dynamic>> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<Dynamic>> {
-      var fsHandle:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(handle, 'path'), null))) { return cast _Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readBinaryFile', cast ([_Runtime.field(handle, 'path')] : Array<Dynamic>)); }
-      fsHandle = _Runtime.callValue(getWebFileSystemHandle, cast ([handle] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(fsHandle, null))) {
-        try {
-          var file:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(fsHandle, 'getFile', cast ([] : Array<Dynamic>)));
-          return cast _Runtime.construct(_Runtime.globalValue('Uint8Array'), [flighthq._internal._Async.awaitValue(_Runtime.callProperty(file, 'arrayBuffer', cast ([] : Array<Dynamic>)))]);
-        } catch (__error:Dynamic) {
-          return cast null;
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var fsHandle:Dynamic = cast _Runtime.UNDEFINED;
+        var __flowBranch105:Dynamic;
+        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(handle, 'path'), null))) {
+          __flowBranch105 = flighthq._internal._Async.protect(function():Dynamic {
+            return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readBinaryFile', cast ([_Runtime.field(handle, 'path')] : Array<Dynamic>)));
+          });
+        } else {
+          __flowBranch105 = flighthq._internal._Async.flowNormal();
         }
-      }
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(handle, 'name'), ''))) { return cast null; }
-      return cast _Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readBinaryFile', cast ([_Runtime.field(handle, 'name')] : Array<Dynamic>));
-      return cast null;
-    })();
+        return flighthq._internal._Async.continueFlow(__flowBranch105, function():Dynamic {
+          fsHandle = _Runtime.callValue(getWebFileSystemHandle, cast ([handle] : Array<Dynamic>));
+          var __flowBranch106:Dynamic;
+          if (_Runtime.truthy(!_Runtime.strictEquals(fsHandle, null))) {
+            __flowBranch106 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+                var file:Dynamic = cast _Runtime.UNDEFINED;
+                return flighthq._internal._Async.flatMap(_Runtime.callProperty(fsHandle, 'getFile', cast ([] : Array<Dynamic>)), function(__awaitValue107:Dynamic):Dynamic {
+                  file = __awaitValue107;
+                  return flighthq._internal._Async.flatMap(_Runtime.callProperty(file, 'arrayBuffer', cast ([] : Array<Dynamic>)), function(__awaitValue108:Dynamic):Dynamic {
+                    return flighthq._internal._Async.flowReturn(_Runtime.construct(_Runtime.globalValue('Uint8Array'), [__awaitValue108]));
+                  });
+                });
+              }), function(__caughtError:Dynamic):Dynamic {
+                var __error:Dynamic = __caughtError;
+                return flighthq._internal._Async.protect(function():Dynamic {
+                  return flighthq._internal._Async.flowReturn(null);
+                });
+              }), function():Dynamic {
+                return flighthq._internal._Async.flowNormal();
+              });
+            });
+          } else {
+            __flowBranch106 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch106, function():Dynamic {
+            var __flowBranch109:Dynamic;
+            if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(handle, 'name'), ''))) {
+              __flowBranch109 = flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(null);
+              });
+            } else {
+              __flowBranch109 = flighthq._internal._Async.flowNormal();
+            }
+            return flighthq._internal._Async.continueFlow(__flowBranch109, function():Dynamic {
+              return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readBinaryFile', cast ([_Runtime.field(handle, 'name')] : Array<Dynamic>)));
+            });
+          });
+        });
+      })
+    );
   }
 
   public static function readDialogHandleTextFile(handle:FileDialogHandle):flighthq._internal._Promise<Null<String>> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<String>> {
-      var fsHandle:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(handle, 'path'), null))) { return cast _Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readTextFile', cast ([_Runtime.field(handle, 'path')] : Array<Dynamic>)); }
-      fsHandle = _Runtime.callValue(getWebFileSystemHandle, cast ([handle] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(fsHandle, null))) {
-        try {
-          var file:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(fsHandle, 'getFile', cast ([] : Array<Dynamic>)));
-          return cast flighthq._internal._Async.awaitValue(_Runtime.callProperty(file, 'text', cast ([] : Array<Dynamic>)));
-        } catch (__error:Dynamic) {
-          return cast null;
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var fsHandle:Dynamic = cast _Runtime.UNDEFINED;
+        var __flowBranch110:Dynamic;
+        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(handle, 'path'), null))) {
+          __flowBranch110 = flighthq._internal._Async.protect(function():Dynamic {
+            return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readTextFile', cast ([_Runtime.field(handle, 'path')] : Array<Dynamic>)));
+          });
+        } else {
+          __flowBranch110 = flighthq._internal._Async.flowNormal();
         }
-      }
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(handle, 'name'), ''))) { return cast null; }
-      return cast _Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readTextFile', cast ([_Runtime.field(handle, 'name')] : Array<Dynamic>));
-      return cast null;
-    })();
+        return flighthq._internal._Async.continueFlow(__flowBranch110, function():Dynamic {
+          fsHandle = _Runtime.callValue(getWebFileSystemHandle, cast ([handle] : Array<Dynamic>));
+          var __flowBranch111:Dynamic;
+          if (_Runtime.truthy(!_Runtime.strictEquals(fsHandle, null))) {
+            __flowBranch111 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+                var file:Dynamic = cast _Runtime.UNDEFINED;
+                return flighthq._internal._Async.flatMap(_Runtime.callProperty(fsHandle, 'getFile', cast ([] : Array<Dynamic>)), function(__awaitValue112:Dynamic):Dynamic {
+                  file = __awaitValue112;
+                  return flighthq._internal._Async.flatMap(_Runtime.callProperty(file, 'text', cast ([] : Array<Dynamic>)), function(__awaitValue113:Dynamic):Dynamic {
+                    return flighthq._internal._Async.flowReturn(__awaitValue113);
+                  });
+                });
+              }), function(__caughtError:Dynamic):Dynamic {
+                var __error:Dynamic = __caughtError;
+                return flighthq._internal._Async.protect(function():Dynamic {
+                  return flighthq._internal._Async.flowReturn(null);
+                });
+              }), function():Dynamic {
+                return flighthq._internal._Async.flowNormal();
+              });
+            });
+          } else {
+            __flowBranch111 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch111, function():Dynamic {
+            var __flowBranch114:Dynamic;
+            if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(handle, 'name'), ''))) {
+              __flowBranch114 = flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(null);
+              });
+            } else {
+              __flowBranch114 = flighthq._internal._Async.flowNormal();
+            }
+            return flighthq._internal._Async.continueFlow(__flowBranch114, function():Dynamic {
+              return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readTextFile', cast ([_Runtime.field(handle, 'name')] : Array<Dynamic>)));
+            });
+          });
+        });
+      })
+    );
   }
 
   public static function readDirectory(path:String):flighthq._internal._Promise<Array<FileEntry>> {
@@ -627,29 +1317,42 @@ class Filesystem {
   }
 
   public static function walkWebDirectory__filesystem(dir:Dynamic, basePath:String, out:Array<FileEntry>, depth:Float, maxDepth:Float):flighthq._internal._Promise<flighthq._internal._Nothing> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<flighthq._internal._Nothing> {
-      {
-        var __asyncIterator8:Dynamic = _Runtime.asyncIterator(_Runtime.callValue(Filesystem.asAsyncEntries__filesystem, cast ([dir] : Array<Dynamic>)));
-        while (true) {
-          var __asyncStep9:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(__asyncIterator8, 'next', cast ([] : Array<Dynamic>)));
-          if (_Runtime.truthy(_Runtime.field(__asyncStep9, 'done'))) break;
-          var __iteration1:Dynamic = _Runtime.field(__asyncStep9, 'value');
-          var name:Dynamic = _Runtime.getIndex(__iteration1, 0.0);
-          var handle:Dynamic = _Runtime.getIndex(__iteration1, 1.0);
-          var entryPath:Dynamic = _Runtime.select(_Runtime.strictEquals(basePath, ''), function():Dynamic return cast name, function():Dynamic return cast '' + Std.string(basePath) + '/' + Std.string(name) + '');
-          var isDirectory:Dynamic = _Runtime.strictEquals(_Runtime.field(handle, 'kind'), 'directory');
-          _Runtime.callProperty(out, 'push', cast ([{ name: name, path: entryPath, isDirectory: isDirectory }] : Array<Dynamic>));
-          if (_Runtime.truthy(_Runtime.andValue(isDirectory, function():Dynamic return cast _Runtime.compare(depth, maxDepth, '<')))) {
-            flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.walkWebDirectory__filesystem, cast ([(cast handle : Dynamic), entryPath, out, (depth + 1.0), maxDepth] : Array<Dynamic>)));
-          }
-        }
-      }
-      #if js
-      return;
-      #else
-      return cast null;
-      #end
-    })();
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var __flowIterator117:Dynamic = _Runtime.asyncIterator(_Runtime.callValue(Filesystem.asAsyncEntries__filesystem, cast ([dir] : Array<Dynamic>)));
+        return flighthq._internal._Async.continueFlow(flighthq._internal._Async.repeatFlow(function():Dynamic {
+          return flighthq._internal._Async.flatMap(_Runtime.callProperty(__flowIterator117, 'next', cast ([] : Array<Dynamic>)), function(__step:Dynamic):Dynamic {
+            if (_Runtime.truthy(_Runtime.field(__step, 'done'))) return flighthq._internal._Async.flowBreak();
+            var __iteration1:Dynamic = _Runtime.field(__step, 'value');
+            var name:Dynamic = cast _Runtime.UNDEFINED;
+            var handle:Dynamic = cast _Runtime.UNDEFINED;
+            var entryPath:Dynamic = cast _Runtime.UNDEFINED;
+            var isDirectory:Dynamic = cast _Runtime.UNDEFINED;
+            name = _Runtime.getIndex(__iteration1, 0.0);
+            handle = _Runtime.getIndex(__iteration1, 1.0);
+            entryPath = _Runtime.select(_Runtime.strictEquals(basePath, ''), function():Dynamic return cast name, function():Dynamic return cast '' + Std.string(basePath) + '/' + Std.string(name) + '');
+            isDirectory = _Runtime.strictEquals(_Runtime.field(handle, 'kind'), 'directory');
+            _Runtime.callProperty(out, 'push', cast ([{ name: name, path: entryPath, isDirectory: isDirectory }] : Array<Dynamic>));
+            var __flowBranch119:Dynamic;
+            if (_Runtime.truthy(_Runtime.andValue(isDirectory, function():Dynamic return cast _Runtime.compare(depth, maxDepth, '<')))) {
+              __flowBranch119 = flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.walkWebDirectory__filesystem, cast ([(cast handle : Dynamic), entryPath, out, (depth + 1.0), maxDepth] : Array<Dynamic>)), function(__awaitValue120:Dynamic):Dynamic {
+                  __awaitValue120;
+                  return flighthq._internal._Async.flowNormal();
+                });
+              });
+            } else {
+              __flowBranch119 = flighthq._internal._Async.flowNormal();
+            }
+            return flighthq._internal._Async.continueFlow(__flowBranch119, function():Dynamic {
+              return flighthq._internal._Async.flowNormal();
+            });
+          });
+        }), function():Dynamic {
+          return flighthq._internal._Async.flowNormal();
+        });
+      })
+    );
   }
 
   public static function watchPath(path:String, listener:Dynamic):Dynamic {
@@ -663,66 +1366,152 @@ class Filesystem {
   }
 
   public static function writeBinaryFileChunks(path:String, chunks:Dynamic):flighthq._internal._Promise<Bool> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Bool> {
-      var stream:Dynamic = cast _Runtime.UNDEFINED;
-      var writer:Dynamic = cast _Runtime.UNDEFINED;
-      stream = flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'openFileWriteStream', cast ([path] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(stream, null))) { return cast false; }
-      writer = _Runtime.callProperty(stream, 'getWriter', cast ([] : Array<Dynamic>));
-      try {
-        {
-          var __asyncIterator10:Dynamic = _Runtime.asyncIterator(chunks);
-          while (true) {
-            var __asyncStep11:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(__asyncIterator10, 'next', cast ([] : Array<Dynamic>)));
-            if (_Runtime.truthy(_Runtime.field(__asyncStep11, 'done'))) break;
-            var chunk:Dynamic = _Runtime.field(__asyncStep11, 'value');
-            flighthq._internal._Async.awaitValue(_Runtime.callProperty(writer, 'write', cast ([_Runtime.slice(chunk, 0, null)] : Array<Dynamic>)));
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var stream:Dynamic = cast _Runtime.UNDEFINED;
+        var writer:Dynamic = cast _Runtime.UNDEFINED;
+        return flighthq._internal._Async.flatMap(_Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'openFileWriteStream', cast ([path] : Array<Dynamic>)), function(__awaitValue123:Dynamic):Dynamic {
+          stream = __awaitValue123;
+          var __flowBranch124:Dynamic;
+          if (_Runtime.truthy(_Runtime.strictEquals(stream, null))) {
+            __flowBranch124 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(false);
+            });
+          } else {
+            __flowBranch124 = flighthq._internal._Async.flowNormal();
           }
-        }
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(writer, 'close', cast ([] : Array<Dynamic>)));
-        return cast true;
-      } catch (__error:Dynamic) {
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(writer, 'abort', cast ([] : Array<Dynamic>)));
-        return cast false;
-      }
-      return cast null;
-    })();
+          return flighthq._internal._Async.continueFlow(__flowBranch124, function():Dynamic {
+            writer = _Runtime.callProperty(stream, 'getWriter', cast ([] : Array<Dynamic>));
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              var __flowIterator125:Dynamic = _Runtime.asyncIterator(chunks);
+              return flighthq._internal._Async.continueFlow(flighthq._internal._Async.repeatFlow(function():Dynamic {
+                return flighthq._internal._Async.flatMap(_Runtime.callProperty(__flowIterator125, 'next', cast ([] : Array<Dynamic>)), function(__step:Dynamic):Dynamic {
+                  if (_Runtime.truthy(_Runtime.field(__step, 'done'))) return flighthq._internal._Async.flowBreak();
+                  var chunk:Dynamic = _Runtime.field(__step, 'value');
+                  return flighthq._internal._Async.flatMap(_Runtime.callProperty(writer, 'write', cast ([_Runtime.slice(chunk, 0, null)] : Array<Dynamic>)), function(__awaitValue127:Dynamic):Dynamic {
+                    __awaitValue127;
+                    return flighthq._internal._Async.flowNormal();
+                  });
+                });
+              }), function():Dynamic {
+                return flighthq._internal._Async.flatMap(_Runtime.callProperty(writer, 'close', cast ([] : Array<Dynamic>)), function(__awaitValue128:Dynamic):Dynamic {
+                  __awaitValue128;
+                  return flighthq._internal._Async.flowReturn(true);
+                });
+              });
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flatMap(_Runtime.callProperty(writer, 'abort', cast ([] : Array<Dynamic>)), function(__awaitValue129:Dynamic):Dynamic {
+                  __awaitValue129;
+                  return flighthq._internal._Async.flowReturn(false);
+                });
+              });
+            }), function():Dynamic {
+              return flighthq._internal._Async.flowNormal();
+            });
+          });
+        });
+      })
+    );
   }
 
   public static function writeDialogHandleBinaryFile(handle:FileDialogHandle, data:Dynamic):flighthq._internal._Promise<Bool> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Bool> {
-      var fsHandle:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(handle, 'path'), null))) { return cast _Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'writeBinaryFile', cast ([_Runtime.field(handle, 'path'), data] : Array<Dynamic>)); }
-      fsHandle = _Runtime.callValue(getWebFileSystemHandle, cast ([handle] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(fsHandle, null))) { return cast false; }
-      try {
-        var writable:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(fsHandle, 'createWritable', cast ([] : Array<Dynamic>)));
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(writable, 'write', cast ([_Runtime.slice(data, 0, null)] : Array<Dynamic>)));
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(writable, 'close', cast ([] : Array<Dynamic>)));
-        return cast true;
-      } catch (__error:Dynamic) {
-        return cast false;
-      }
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var fsHandle:Dynamic = cast _Runtime.UNDEFINED;
+        var __flowBranch130:Dynamic;
+        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(handle, 'path'), null))) {
+          __flowBranch130 = flighthq._internal._Async.protect(function():Dynamic {
+            return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'writeBinaryFile', cast ([_Runtime.field(handle, 'path'), data] : Array<Dynamic>)));
+          });
+        } else {
+          __flowBranch130 = flighthq._internal._Async.flowNormal();
+        }
+        return flighthq._internal._Async.continueFlow(__flowBranch130, function():Dynamic {
+          fsHandle = _Runtime.callValue(getWebFileSystemHandle, cast ([handle] : Array<Dynamic>));
+          var __flowBranch131:Dynamic;
+          if (_Runtime.truthy(_Runtime.strictEquals(fsHandle, null))) {
+            __flowBranch131 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(false);
+            });
+          } else {
+            __flowBranch131 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch131, function():Dynamic {
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              var writable:Dynamic = cast _Runtime.UNDEFINED;
+              return flighthq._internal._Async.flatMap(_Runtime.callProperty(fsHandle, 'createWritable', cast ([] : Array<Dynamic>)), function(__awaitValue132:Dynamic):Dynamic {
+                writable = __awaitValue132;
+                return flighthq._internal._Async.flatMap(_Runtime.callProperty(writable, 'write', cast ([_Runtime.slice(data, 0, null)] : Array<Dynamic>)), function(__awaitValue133:Dynamic):Dynamic {
+                  __awaitValue133;
+                  return flighthq._internal._Async.flatMap(_Runtime.callProperty(writable, 'close', cast ([] : Array<Dynamic>)), function(__awaitValue134:Dynamic):Dynamic {
+                    __awaitValue134;
+                    return flighthq._internal._Async.flowReturn(true);
+                  });
+                });
+              });
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(false);
+              });
+            }), function():Dynamic {
+              return flighthq._internal._Async.flowNormal();
+            });
+          });
+        });
+      })
+    );
   }
 
   public static function writeDialogHandleTextFile(handle:FileDialogHandle, data:String):flighthq._internal._Promise<Bool> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Bool> {
-      var fsHandle:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(handle, 'path'), null))) { return cast _Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'writeTextFile', cast ([_Runtime.field(handle, 'path'), data] : Array<Dynamic>)); }
-      fsHandle = _Runtime.callValue(getWebFileSystemHandle, cast ([handle] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(fsHandle, null))) { return cast false; }
-      try {
-        var writable:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(fsHandle, 'createWritable', cast ([] : Array<Dynamic>)));
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(writable, 'write', cast ([data] : Array<Dynamic>)));
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(writable, 'close', cast ([] : Array<Dynamic>)));
-        return cast true;
-      } catch (__error:Dynamic) {
-        return cast false;
-      }
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var fsHandle:Dynamic = cast _Runtime.UNDEFINED;
+        var __flowBranch135:Dynamic;
+        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(handle, 'path'), null))) {
+          __flowBranch135 = flighthq._internal._Async.protect(function():Dynamic {
+            return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'writeTextFile', cast ([_Runtime.field(handle, 'path'), data] : Array<Dynamic>)));
+          });
+        } else {
+          __flowBranch135 = flighthq._internal._Async.flowNormal();
+        }
+        return flighthq._internal._Async.continueFlow(__flowBranch135, function():Dynamic {
+          fsHandle = _Runtime.callValue(getWebFileSystemHandle, cast ([handle] : Array<Dynamic>));
+          var __flowBranch136:Dynamic;
+          if (_Runtime.truthy(_Runtime.strictEquals(fsHandle, null))) {
+            __flowBranch136 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(false);
+            });
+          } else {
+            __flowBranch136 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch136, function():Dynamic {
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              var writable:Dynamic = cast _Runtime.UNDEFINED;
+              return flighthq._internal._Async.flatMap(_Runtime.callProperty(fsHandle, 'createWritable', cast ([] : Array<Dynamic>)), function(__awaitValue137:Dynamic):Dynamic {
+                writable = __awaitValue137;
+                return flighthq._internal._Async.flatMap(_Runtime.callProperty(writable, 'write', cast ([data] : Array<Dynamic>)), function(__awaitValue138:Dynamic):Dynamic {
+                  __awaitValue138;
+                  return flighthq._internal._Async.flatMap(_Runtime.callProperty(writable, 'close', cast ([] : Array<Dynamic>)), function(__awaitValue139:Dynamic):Dynamic {
+                    __awaitValue139;
+                    return flighthq._internal._Async.flowReturn(true);
+                  });
+                });
+              });
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(false);
+              });
+            }), function():Dynamic {
+              return flighthq._internal._Async.flowNormal();
+            });
+          });
+        });
+      })
+    );
   }
 
   public static function writeFileAtomic(path:String, data:Dynamic):flighthq._internal._Promise<Bool> {
@@ -736,43 +1525,127 @@ class Filesystem {
   }
 
   public static function writeWebFile__filesystem(path:String, data:Dynamic):flighthq._internal._Promise<Bool> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Bool> {
-      var handle:Dynamic = cast _Runtime.UNDEFINED;
-      handle = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, true] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(handle, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(handle, 'createWritable')), 'function')))) { return cast false; }
-      try {
-        var writable:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(handle, 'createWritable', cast ([] : Array<Dynamic>)));
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(writable, 'write', cast ([(cast data : Dynamic)] : Array<Dynamic>)));
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(writable, 'close', cast ([] : Array<Dynamic>)));
-        return cast true;
-      } catch (__error:Dynamic) {
-        return cast false;
-      }
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var handle:Dynamic = cast _Runtime.UNDEFINED;
+        return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, true] : Array<Dynamic>)), function(__awaitValue140:Dynamic):Dynamic {
+          handle = __awaitValue140;
+          var __flowBranch141:Dynamic;
+          if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(handle, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(handle, 'createWritable')), 'function')))) {
+            __flowBranch141 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(false);
+            });
+          } else {
+            __flowBranch141 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch141, function():Dynamic {
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              var writable:Dynamic = cast _Runtime.UNDEFINED;
+              return flighthq._internal._Async.flatMap(_Runtime.callProperty(handle, 'createWritable', cast ([] : Array<Dynamic>)), function(__awaitValue142:Dynamic):Dynamic {
+                writable = __awaitValue142;
+                return flighthq._internal._Async.flatMap(_Runtime.callProperty(writable, 'write', cast ([(cast data : Dynamic)] : Array<Dynamic>)), function(__awaitValue143:Dynamic):Dynamic {
+                  __awaitValue143;
+                  return flighthq._internal._Async.flatMap(_Runtime.callProperty(writable, 'close', cast ([] : Array<Dynamic>)), function(__awaitValue144:Dynamic):Dynamic {
+                    __awaitValue144;
+                    return flighthq._internal._Async.flowReturn(true);
+                  });
+                });
+              });
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(false);
+              });
+            }), function():Dynamic {
+              return flighthq._internal._Async.flowNormal();
+            });
+          });
+        });
+      })
+    );
   }
 
   public static function writeWebRemove__filesystem(path:String, isDirectory:Bool):flighthq._internal._Promise<Bool> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Bool> {
-      var root:Dynamic = cast _Runtime.UNDEFINED;
-      var segments:Dynamic = cast _Runtime.UNDEFINED;
-      root = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebRoot__filesystem, cast ([] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(root, null))) { return cast false; }
-      segments = _Runtime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0))) { return cast false; }
-      try {
-        var parent:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebDirectoryHandle__filesystem, cast ([root, _Runtime.slice(segments, 0.0, -1.0), false] : Array<Dynamic>)));
-        if (_Runtime.truthy(_Runtime.strictEquals(parent, null))) { return cast false; }
-        if (_Runtime.truthy(!_Runtime.truthy(isDirectory))) {
-          var fileHandle:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, false] : Array<Dynamic>)));
-          if (_Runtime.truthy(_Runtime.strictEquals(fileHandle, null))) { return cast false; }
-        }
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(parent, 'removeEntry', cast ([_Runtime.getIndex(segments, (_Runtime.field(segments, 'length') - 1.0)), { recursive: false }] : Array<Dynamic>)));
-        return cast true;
-      } catch (__error:Dynamic) {
-        return cast false;
-      }
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var root:Dynamic = cast _Runtime.UNDEFINED;
+        var segments:Dynamic = cast _Runtime.UNDEFINED;
+        return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebRoot__filesystem, cast ([] : Array<Dynamic>)), function(__awaitValue145:Dynamic):Dynamic {
+          root = __awaitValue145;
+          var __flowBranch146:Dynamic;
+          if (_Runtime.truthy(_Runtime.strictEquals(root, null))) {
+            __flowBranch146 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(false);
+            });
+          } else {
+            __flowBranch146 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch146, function():Dynamic {
+            segments = _Runtime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>));
+            var __flowBranch147:Dynamic;
+            if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0))) {
+              __flowBranch147 = flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(false);
+              });
+            } else {
+              __flowBranch147 = flighthq._internal._Async.flowNormal();
+            }
+            return flighthq._internal._Async.continueFlow(__flowBranch147, function():Dynamic {
+              return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+                var parent:Dynamic = cast _Runtime.UNDEFINED;
+                return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebDirectoryHandle__filesystem, cast ([root, _Runtime.slice(segments, 0.0, -1.0), false] : Array<Dynamic>)), function(__awaitValue148:Dynamic):Dynamic {
+                  parent = __awaitValue148;
+                  var __flowBranch149:Dynamic;
+                  if (_Runtime.truthy(_Runtime.strictEquals(parent, null))) {
+                    __flowBranch149 = flighthq._internal._Async.protect(function():Dynamic {
+                      return flighthq._internal._Async.flowReturn(false);
+                    });
+                  } else {
+                    __flowBranch149 = flighthq._internal._Async.flowNormal();
+                  }
+                  return flighthq._internal._Async.continueFlow(__flowBranch149, function():Dynamic {
+                    var __flowBranch150:Dynamic;
+                    if (_Runtime.truthy(!_Runtime.truthy(isDirectory))) {
+                      __flowBranch150 = flighthq._internal._Async.protect(function():Dynamic {
+                        var fileHandle:Dynamic = cast _Runtime.UNDEFINED;
+                        return flighthq._internal._Async.flatMap(_Runtime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, false] : Array<Dynamic>)), function(__awaitValue151:Dynamic):Dynamic {
+                          fileHandle = __awaitValue151;
+                          var __flowBranch152:Dynamic;
+                          if (_Runtime.truthy(_Runtime.strictEquals(fileHandle, null))) {
+                            __flowBranch152 = flighthq._internal._Async.protect(function():Dynamic {
+                              return flighthq._internal._Async.flowReturn(false);
+                            });
+                          } else {
+                            __flowBranch152 = flighthq._internal._Async.flowNormal();
+                          }
+                          return flighthq._internal._Async.continueFlow(__flowBranch152, function():Dynamic {
+                            return flighthq._internal._Async.flowNormal();
+                          });
+                        });
+                      });
+                    } else {
+                      __flowBranch150 = flighthq._internal._Async.flowNormal();
+                    }
+                    return flighthq._internal._Async.continueFlow(__flowBranch150, function():Dynamic {
+                      return flighthq._internal._Async.flatMap(_Runtime.callProperty(parent, 'removeEntry', cast ([_Runtime.getIndex(segments, (_Runtime.field(segments, 'length') - 1.0)), { recursive: false }] : Array<Dynamic>)), function(__awaitValue153:Dynamic):Dynamic {
+                        __awaitValue153;
+                        return flighthq._internal._Async.flowReturn(true);
+                      });
+                    });
+                  });
+                });
+              }), function(__caughtError:Dynamic):Dynamic {
+                var __error:Dynamic = __caughtError;
+                return flighthq._internal._Async.protect(function():Dynamic {
+                  return flighthq._internal._Async.flowReturn(false);
+                });
+              }), function():Dynamic {
+                return flighthq._internal._Async.flowNormal();
+              });
+            });
+          });
+        });
+      })
+    );
   }
 }

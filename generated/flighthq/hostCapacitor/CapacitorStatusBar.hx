@@ -15,11 +15,11 @@ class CapacitorStatusBar {
     var cachedInfo:Null<CapacitorStatusBarInfoResult> = cast _Runtime.UNDEFINED;
     statusBar = _Runtime.field(capacitor, 'statusBar');
     cachedInfo = null;
-    _Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(statusBar, 'getInfo', cast ([] : Array<Dynamic>)), 'then', cast ([function(info:Dynamic) {
+    flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(statusBar, 'getInfo', cast ([] : Array<Dynamic>)), 'then', cast ([function(info:Dynamic) {
       (cachedInfo = cast (info : Dynamic));
-    }] : Array<Dynamic>)), 'catch', cast ([function() {
+    }] : Array<Dynamic>)), function() {
     
-    }] : Array<Dynamic>));
+    });
     return cast { getInfo: function(out:StatusBarInfo) {
       var info:Dynamic = cast _Runtime.UNDEFINED;
       info = cachedInfo;
@@ -30,23 +30,23 @@ class CapacitorStatusBar {
       _Runtime.setField(out, 'visible', _Runtime.coalesce(_Runtime.optionalField(info, 'visible'), function():Dynamic return cast true));
       return cast out;
     }, setBackgroundColor: function(color:Float) {
-      _Runtime.callProperty(_Runtime.callProperty(statusBar, 'setBackgroundColor', cast ([{ color: _Runtime.callValue(CapacitorStatusBar.rgbaToHex__capacitorStatusBar, cast ([color] : Array<Dynamic>)) }] : Array<Dynamic>)), 'catch', cast ([function() {
+      flighthq._internal._Async.recover(_Runtime.callProperty(statusBar, 'setBackgroundColor', cast ([{ color: _Runtime.callValue(CapacitorStatusBar.rgbaToHex__capacitorStatusBar, cast ([color] : Array<Dynamic>)) }] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>));
+      });
     }, setOverlaysContent: function(overlay:Bool) {
-      _Runtime.callProperty(_Runtime.callProperty(statusBar, 'setOverlaysWebView', cast ([{ overlay: overlay }] : Array<Dynamic>)), 'catch', cast ([function() {
+      flighthq._internal._Async.recover(_Runtime.callProperty(statusBar, 'setOverlaysWebView', cast ([{ overlay: overlay }] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>));
+      });
     }, setStyle: function(style:StatusBarStyle) {
-      _Runtime.callProperty(_Runtime.callProperty(statusBar, 'setStyle', cast ([{ style: _Runtime.callValue(CapacitorStatusBar.toCapacitorStyle__capacitorStatusBar, cast ([style] : Array<Dynamic>)) }] : Array<Dynamic>)), 'catch', cast ([function() {
+      flighthq._internal._Async.recover(_Runtime.callProperty(statusBar, 'setStyle', cast ([{ style: _Runtime.callValue(CapacitorStatusBar.toCapacitorStyle__capacitorStatusBar, cast ([style] : Array<Dynamic>)) }] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>));
+      });
     }, setVisible: function(visible:Bool) {
-      if (_Runtime.truthy(visible)) { _Runtime.callProperty(_Runtime.callProperty(statusBar, 'show', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
+      if (_Runtime.truthy(visible)) { flighthq._internal._Async.recover(_Runtime.callProperty(statusBar, 'show', cast ([] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>)); } else { _Runtime.callProperty(_Runtime.callProperty(statusBar, 'hide', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
+      }); } else { flighthq._internal._Async.recover(_Runtime.callProperty(statusBar, 'hide', cast ([] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>)); }
+      }); }
     }, subscribe: function() {
       return cast function() {
       

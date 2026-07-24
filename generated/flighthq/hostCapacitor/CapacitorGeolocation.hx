@@ -18,57 +18,98 @@ class CapacitorGeolocation {
     geolocation = _Runtime.field(capacitor, 'geolocation');
     nextWatchId = 1.0;
     watchIds = _Runtime.construct(_Runtime.globalValue('Map'), []);
-    return cast { getCurrentPosition: flighthq._internal._Async.make(function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
-      try {
-        return cast _Runtime.callValue(CapacitorGeolocation.toGeoPosition__capacitorGeolocation, cast ([flighthq._internal._Async.awaitValue(_Runtime.callProperty(geolocation, 'getCurrentPosition', cast ([options] : Array<Dynamic>)))] : Array<Dynamic>));
-      } catch (__error:Dynamic) {
-        return cast null;
-      }
-      return cast null;
-    }), getCurrentPositionResult: flighthq._internal._Async.make(function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
-      try {
-        return cast { position: _Runtime.callValue(CapacitorGeolocation.toGeoPosition__capacitorGeolocation, cast ([flighthq._internal._Async.awaitValue(_Runtime.callProperty(geolocation, 'getCurrentPosition', cast ([options] : Array<Dynamic>)))] : Array<Dynamic>)), reason: null };
-      } catch (__error:Dynamic) {
-        var out:GeoPositionResult = { position: null, reason: 'unavailable' };
-        return cast out;
-      }
-      return cast null;
-    }), getPermission: flighthq._internal._Async.make(function():flighthq._internal._Promise<GeolocationPermissionState> {
-      try {
-        return cast _Runtime.callValue(CapacitorGeolocation.toPermissionState__capacitorGeolocation, cast ([_Runtime.field(flighthq._internal._Async.awaitValue(_Runtime.callProperty(geolocation, 'checkPermissions', cast ([] : Array<Dynamic>))), 'location')] : Array<Dynamic>));
-      } catch (__error:Dynamic) {
-        return cast 'prompt';
-      }
-      return cast null;
-    }), watchPosition: function(listener:Dynamic, options:Dynamic, onError:Dynamic) {
+    return cast { getCurrentPosition: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+            return flighthq._internal._Async.flatMap(_Runtime.callProperty(geolocation, 'getCurrentPosition', cast ([options] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
+              return flighthq._internal._Async.flowReturn(_Runtime.callValue(CapacitorGeolocation.toGeoPosition__capacitorGeolocation, cast ([__awaitValue0] : Array<Dynamic>)));
+            });
+          }), function(__caughtError:Dynamic):Dynamic {
+            var __error:Dynamic = __caughtError;
+            return flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(null);
+            });
+          }), function():Dynamic {
+            return flighthq._internal._Async.flowNormal();
+          });
+        })
+      );
+    }, getCurrentPositionResult: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+            return flighthq._internal._Async.flatMap(_Runtime.callProperty(geolocation, 'getCurrentPosition', cast ([options] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
+              return flighthq._internal._Async.flowReturn({ position: _Runtime.callValue(CapacitorGeolocation.toGeoPosition__capacitorGeolocation, cast ([__awaitValue1] : Array<Dynamic>)), reason: null });
+            });
+          }), function(__caughtError:Dynamic):Dynamic {
+            var __error:Dynamic = __caughtError;
+            return flighthq._internal._Async.protect(function():Dynamic {
+              var out:GeoPositionResult = cast _Runtime.UNDEFINED;
+              out = { position: null, reason: 'unavailable' };
+              return flighthq._internal._Async.flowReturn(out);
+            });
+          }), function():Dynamic {
+            return flighthq._internal._Async.flowNormal();
+          });
+        })
+      );
+    }, getPermission: function():flighthq._internal._Promise<GeolocationPermissionState> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+            return flighthq._internal._Async.flatMap(_Runtime.callProperty(geolocation, 'checkPermissions', cast ([] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
+              return flighthq._internal._Async.flowReturn(_Runtime.callValue(CapacitorGeolocation.toPermissionState__capacitorGeolocation, cast ([_Runtime.field(__awaitValue2, 'location')] : Array<Dynamic>)));
+            });
+          }), function(__caughtError:Dynamic):Dynamic {
+            var __error:Dynamic = __caughtError;
+            return flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn('prompt');
+            });
+          }), function():Dynamic {
+            return flighthq._internal._Async.flowNormal();
+          });
+        })
+      );
+    }, watchPosition: function(listener:Dynamic, options:Dynamic, onError:Dynamic) {
       var numericId:Dynamic = cast _Runtime.UNDEFINED;
       numericId = nextWatchId++;
       _Runtime.callProperty(watchIds, 'set', cast ([numericId, null] : Array<Dynamic>));
-      _Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(geolocation, 'watchPosition', cast ([options, function(position:Dynamic, err:Dynamic) {
+      flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(geolocation, 'watchPosition', cast ([options, function(position:Dynamic, err:Dynamic) {
         if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(position, null), function():Dynamic return cast !_Runtime.strictEquals(position, _Runtime.field(_Runtime, 'UNDEFINED'))))) { _Runtime.callValue(listener, cast ([_Runtime.callValue(CapacitorGeolocation.toGeoPosition__capacitorGeolocation, cast ([position] : Array<Dynamic>))] : Array<Dynamic>)); } else { if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(err, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(onError, _Runtime.field(_Runtime, 'UNDEFINED'))))) { _Runtime.callValue(onError, cast (['unavailable'] : Array<Dynamic>)); } }
       }] : Array<Dynamic>)), 'then', cast ([function(stringId:Dynamic) {
-        if (_Runtime.truthy(_Runtime.callProperty(watchIds, 'has', cast ([numericId] : Array<Dynamic>)))) { _Runtime.callProperty(watchIds, 'set', cast ([numericId, stringId] : Array<Dynamic>)); } else { _Runtime.callProperty(_Runtime.callProperty(geolocation, 'clearWatch', cast ([{ id: stringId }] : Array<Dynamic>)), 'catch', cast ([function() {
+        if (_Runtime.truthy(_Runtime.callProperty(watchIds, 'has', cast ([numericId] : Array<Dynamic>)))) { _Runtime.callProperty(watchIds, 'set', cast ([numericId, stringId] : Array<Dynamic>)); } else { flighthq._internal._Async.recover(_Runtime.callProperty(geolocation, 'clearWatch', cast ([{ id: stringId }] : Array<Dynamic>)), function() {
         
-        }] : Array<Dynamic>)); }
-      }] : Array<Dynamic>)), 'catch', cast ([function() {
+        }); }
+      }] : Array<Dynamic>)), function() {
         _Runtime.callProperty(watchIds, 'delete', cast ([numericId] : Array<Dynamic>));
-      }] : Array<Dynamic>));
+      });
       return cast numericId;
     }, clearWatch: function(id:Dynamic) {
       var stringId:Dynamic = cast _Runtime.UNDEFINED;
       stringId = _Runtime.callProperty(watchIds, 'get', cast ([id] : Array<Dynamic>));
       _Runtime.callProperty(watchIds, 'delete', cast ([id] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(stringId, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(stringId, null)))) { _Runtime.callProperty(_Runtime.callProperty(geolocation, 'clearWatch', cast ([{ id: stringId }] : Array<Dynamic>)), 'catch', cast ([function() {
+      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(stringId, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(stringId, null)))) { flighthq._internal._Async.recover(_Runtime.callProperty(geolocation, 'clearWatch', cast ([{ id: stringId }] : Array<Dynamic>)), function() {
       
-      }] : Array<Dynamic>)); }
-    }, requestPermission: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      try {
-        return cast _Runtime.strictEquals(_Runtime.field(flighthq._internal._Async.awaitValue(_Runtime.callProperty(geolocation, 'requestPermissions', cast ([] : Array<Dynamic>))), 'location'), 'granted');
-      } catch (__error:Dynamic) {
-        return cast false;
-      }
-      return cast null;
-    }), subscribePermission: function() {
+      }); }
+    }, requestPermission: function():flighthq._internal._Promise<Dynamic> {
+      return cast flighthq._internal._Async.finishFlow(
+        flighthq._internal._Async.protect(function():Dynamic {
+          return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+            return flighthq._internal._Async.flatMap(_Runtime.callProperty(geolocation, 'requestPermissions', cast ([] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
+              return flighthq._internal._Async.flowReturn(_Runtime.strictEquals(_Runtime.field(__awaitValue3, 'location'), 'granted'));
+            });
+          }), function(__caughtError:Dynamic):Dynamic {
+            var __error:Dynamic = __caughtError;
+            return flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(false);
+            });
+          }), function():Dynamic {
+            return flighthq._internal._Async.flowNormal();
+          });
+        })
+      );
+    }, subscribePermission: function() {
       return cast function() {
       
       };

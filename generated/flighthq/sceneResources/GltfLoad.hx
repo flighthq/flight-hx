@@ -14,63 +14,115 @@ import flighthq.types.SceneResources.SceneDocumentLoadOptions;
 
 class GltfLoad {
   public static function loadSceneDocumentFromGlbUrl(url:String, ?options:SceneDocumentLoadOptions):flighthq._internal._Promise<Null<SceneDocument>> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<SceneDocument>> {
-      var bytes:Dynamic = cast _Runtime.UNDEFINED;
-      bytes = flighthq._internal._Async.awaitValue(_Runtime.callValue(loadSceneDocumentBytesFromUrl, cast ([url, options] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(bytes, null))) { return cast null; }
-      return cast _Runtime.callValue(parseGlb, cast ([bytes, _Runtime.field(_Runtime, 'UNDEFINED'), { basePath: _Runtime.callValue(getSceneDocumentBasePathFromUrl, cast ([url] : Array<Dynamic>)) }] : Array<Dynamic>));
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var bytes:Dynamic = cast _Runtime.UNDEFINED;
+        return flighthq._internal._Async.flatMap(_Runtime.callValue(loadSceneDocumentBytesFromUrl, cast ([url, options] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
+          bytes = __awaitValue0;
+          var __flowBranch1:Dynamic;
+          if (_Runtime.truthy(_Runtime.strictEquals(bytes, null))) {
+            __flowBranch1 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(null);
+            });
+          } else {
+            __flowBranch1 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch1, function():Dynamic {
+            return flighthq._internal._Async.flowReturn(_Runtime.callValue(parseGlb, cast ([bytes, _Runtime.field(_Runtime, 'UNDEFINED'), { basePath: _Runtime.callValue(getSceneDocumentBasePathFromUrl, cast ([url] : Array<Dynamic>)) }] : Array<Dynamic>)));
+          });
+        });
+      })
+    );
   }
 
   public static function loadSceneDocumentFromGltfUrl(url:String, ?options:SceneDocumentLoadOptions):flighthq._internal._Promise<Null<SceneDocument>> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<SceneDocument>> {
-      var source:Dynamic = cast _Runtime.UNDEFINED;
-      var gltf:GltfDocument = cast _Runtime.UNDEFINED;
-      var basePath:Dynamic = cast _Runtime.UNDEFINED;
-      var externalBuffers:Dynamic = cast _Runtime.UNDEFINED;
-      source = flighthq._internal._Async.awaitValue(_Runtime.callValue(loadSceneDocumentTextFromUrl, cast ([url, options] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(source, null))) { return cast null; }
-      try {
-        (gltf = cast ((cast _Runtime.jsonParse(source) : GltfDocument) : Dynamic));
-      } catch (__error:Dynamic) {
-        return cast null;
-      }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(gltf, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(gltf), 'object')))) { return cast null; }
-      basePath = _Runtime.callValue(getSceneDocumentBasePathFromUrl, cast ([url] : Array<Dynamic>));
-      externalBuffers = flighthq._internal._Async.awaitValue(_Runtime.callValue(GltfLoad.loadGltfExternalBuffers__gltfLoad, cast ([gltf, basePath, options] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(externalBuffers, null))) { return cast null; }
-      return cast _Runtime.callValue(parseGltf, cast ([gltf, _Runtime.field(_Runtime, 'UNDEFINED'), { basePath: basePath, externalBuffers: externalBuffers }] : Array<Dynamic>));
-      return cast null;
-    })();
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var source:Dynamic = cast _Runtime.UNDEFINED;
+        var gltf:GltfDocument = cast _Runtime.UNDEFINED;
+        var basePath:Dynamic = cast _Runtime.UNDEFINED;
+        var externalBuffers:Dynamic = cast _Runtime.UNDEFINED;
+        return flighthq._internal._Async.flatMap(_Runtime.callValue(loadSceneDocumentTextFromUrl, cast ([url, options] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
+          source = __awaitValue2;
+          var __flowBranch3:Dynamic;
+          if (_Runtime.truthy(_Runtime.strictEquals(source, null))) {
+            __flowBranch3 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn(null);
+            });
+          } else {
+            __flowBranch3 = flighthq._internal._Async.flowNormal();
+          }
+          return flighthq._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
+            return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+              (gltf = cast ((cast _Runtime.jsonParse(source) : GltfDocument) : Dynamic));
+              return flighthq._internal._Async.flowNormal();
+            }), function(__caughtError:Dynamic):Dynamic {
+              var __error:Dynamic = __caughtError;
+              return flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flowReturn(null);
+              });
+            }), function():Dynamic {
+              var __flowBranch4:Dynamic;
+              if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(gltf, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(gltf), 'object')))) {
+                __flowBranch4 = flighthq._internal._Async.protect(function():Dynamic {
+                  return flighthq._internal._Async.flowReturn(null);
+                });
+              } else {
+                __flowBranch4 = flighthq._internal._Async.flowNormal();
+              }
+              return flighthq._internal._Async.continueFlow(__flowBranch4, function():Dynamic {
+                basePath = _Runtime.callValue(getSceneDocumentBasePathFromUrl, cast ([url] : Array<Dynamic>));
+                return flighthq._internal._Async.flatMap(_Runtime.callValue(GltfLoad.loadGltfExternalBuffers__gltfLoad, cast ([gltf, basePath, options] : Array<Dynamic>)), function(__awaitValue5:Dynamic):Dynamic {
+                  externalBuffers = __awaitValue5;
+                  var __flowBranch6:Dynamic;
+                  if (_Runtime.truthy(_Runtime.strictEquals(externalBuffers, null))) {
+                    __flowBranch6 = flighthq._internal._Async.protect(function():Dynamic {
+                      return flighthq._internal._Async.flowReturn(null);
+                    });
+                  } else {
+                    __flowBranch6 = flighthq._internal._Async.flowNormal();
+                  }
+                  return flighthq._internal._Async.continueFlow(__flowBranch6, function():Dynamic {
+                    return flighthq._internal._Async.flowReturn(_Runtime.callValue(parseGltf, cast ([gltf, _Runtime.field(_Runtime, 'UNDEFINED'), { basePath: basePath, externalBuffers: externalBuffers }] : Array<Dynamic>)));
+                  });
+                });
+              });
+            });
+          });
+        });
+      })
+    );
   }
 
   public static function loadGltfExternalBuffers__gltfLoad(gltf:GltfDocument, basePath:Null<String>, ?options:SceneDocumentLoadOptions):flighthq._internal._Promise<Null<Dynamic>> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<Dynamic>> {
-      var uris:Dynamic = cast _Runtime.UNDEFINED;
-      var externalBuffers:Dynamic = cast _Runtime.UNDEFINED;
-      var entries:Dynamic = cast _Runtime.UNDEFINED;
-      var bytes:Dynamic = cast _Runtime.UNDEFINED;
-      uris = _Runtime.construct(_Runtime.globalValue('Set'), []);
-      for (buffer in _Runtime.iterable(_Runtime.coalesce(_Runtime.field(gltf, 'buffers'), function():Dynamic return cast cast ([] : Array<Dynamic>)))) {
-        var uri:Dynamic = _Runtime.field(buffer, 'uri');
-        if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(uri, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.truthy(StringTools.startsWith(uri, 'data:'))))) { _Runtime.callProperty(uris, 'add', cast ([uri] : Array<Dynamic>)); }
-      }
-      externalBuffers = {  };
-      entries = _Runtime.concatArrays([_Runtime.toArray(uris)]);
-      bytes = flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.globalValue('Promise'), 'all', cast ([_Runtime.callProperty(entries, 'map', cast ([function(uri:Dynamic) return _Runtime.callValue(loadSceneDocumentBytesFromUrl, cast ([_Runtime.callValue(GltfLoad.resolveGltfBufferUrl__gltfLoad, cast ([uri, basePath] : Array<Dynamic>)), options] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>)));
-      {
-        var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(entries, 'length'), '<'))) {
-          var value:Dynamic = _Runtime.getIndex(bytes, i);
-          if (_Runtime.truthy(_Runtime.strictEquals(value, null))) { return cast null; }
-          _Runtime.setIndex(externalBuffers, _Runtime.getIndex(entries, i), value);
-          i++;
+    return cast flighthq._internal._Async.finishFlow(
+      flighthq._internal._Async.protect(function():Dynamic {
+        var uris:Dynamic = cast _Runtime.UNDEFINED;
+        var externalBuffers:Dynamic = cast _Runtime.UNDEFINED;
+        var entries:Dynamic = cast _Runtime.UNDEFINED;
+        var bytes:Dynamic = cast _Runtime.UNDEFINED;
+        uris = _Runtime.construct(_Runtime.globalValue('Set'), []);
+        for (buffer in _Runtime.iterable(_Runtime.coalesce(_Runtime.field(gltf, 'buffers'), function():Dynamic return cast cast ([] : Array<Dynamic>)))) {
+          var uri:Dynamic = _Runtime.field(buffer, 'uri');
+          if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(uri, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.truthy(StringTools.startsWith(uri, 'data:'))))) { _Runtime.callProperty(uris, 'add', cast ([uri] : Array<Dynamic>)); }
         }
-      }
-      return cast externalBuffers;
-      return cast null;
-    })();
+        externalBuffers = {  };
+        entries = _Runtime.concatArrays([_Runtime.toArray(uris)]);
+        return flighthq._internal._Async.flatMap(flighthq._internal._Async.all(_Runtime.callProperty(entries, 'map', cast ([function(uri:Dynamic) return _Runtime.callValue(loadSceneDocumentBytesFromUrl, cast ([_Runtime.callValue(GltfLoad.resolveGltfBufferUrl__gltfLoad, cast ([uri, basePath] : Array<Dynamic>)), options] : Array<Dynamic>))] : Array<Dynamic>))), function(__awaitValue11:Dynamic):Dynamic {
+          bytes = __awaitValue11;
+          {
+            var i:Dynamic = 0.0;
+            while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(entries, 'length'), '<'))) {
+              var value:Dynamic = _Runtime.getIndex(bytes, i);
+              if (_Runtime.truthy(_Runtime.strictEquals(value, null))) { return cast null; }
+              _Runtime.setIndex(externalBuffers, _Runtime.getIndex(entries, i), value);
+              i++;
+            }
+          }
+          return flighthq._internal._Async.flowReturn(externalBuffers);
+        });
+      })
+    );
   }
 
   public static function resolveGltfBufferUrl__gltfLoad(uri:String, basePath:Null<String>):String {
