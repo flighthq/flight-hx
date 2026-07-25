@@ -483,8 +483,10 @@ class WebGl2Backend {
     #if (lime && !js)
     final raw:Dynamic = param;
     gl.pixelStorei(Std.int(pname), Std.isOfType(raw, Bool) ? ((raw : Bool) ? 1 : 0) : Std.int(raw));
-    #else
+    #elseif js
     js.Syntax.code('{0}.pixelStorei({1}, {2})', gl, Std.int(pname), param);
+    #else
+    gl.pixelStorei(Std.int(pname), param);
     #end
   }
 
