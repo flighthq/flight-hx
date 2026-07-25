@@ -37,6 +37,11 @@ class NativeCanvas2dContext {
   /** The owning canvas stand-in, mirrored back through the `canvas` field. */
   public var canvas:Dynamic;
 
+  /** When owned by a scratch canvas, its size fields are re-checked before
+   * every operation: generated code assigns them through a structural type,
+   * which cannot be observed through property setters on every target. */
+  public var scratchOwner:NativeScratchCanvas;
+
   public var fillStyle:Dynamic = '#000000';
   public var strokeStyle:Dynamic = '#000000';
   public var globalAlpha:Float = 1.0;
@@ -80,9 +85,17 @@ class NativeCanvas2dContext {
     cairo.lineWidth = lineWidth;
   }
 
-  inline function context():Cairo {
+  function context():Cairo {
+    syncWithOwner();
     if (cairo == null) resize(width, height);
     return cairo;
+  }
+
+  /** Reallocates the surface if the owning canvas was resized structurally. */
+  public function syncWithOwner():Void {
+    if (scratchOwner != null && (scratchOwner.width != width || scratchOwner.height != height)) {
+      resize(scratchOwner.width, scratchOwner.height);
+    }
   }
 
   // ---- paths ----
@@ -94,6 +107,29 @@ class NativeCanvas2dContext {
   public function lineTo(x:Float, y:Float):Void context().lineTo(x, y);
 
   public function rect(x:Float, y:Float, w:Float, h:Float):Void context().rectangle(x, y, w, h);
+
+  public function closePath():Void context().closePath();
+
+  public function bezierCurveTo(c1x:Float, c1y:Float, c2x:Float, c2y:Float, x:Float, y:Float):Void {
+    context().curveTo(c1x, c1y, c2x, c2y, x, y);
+  }
+
+  public function quadraticCurveTo(cx:Float, cy:Float, x:Float, y:Float):Void {
+    // cairo paths are cubic; elevate the quadratic control point.
+    final ctx = context();
+    final current = ctx.hasCurrentPoint ? ctx.currentPoint : new lime.math.Vector2(0, 0);
+    ctx.curveTo(current.x + 2 / 3 * (cx - current.x), current.y + 2 / 3 * (cy - current.y), x + 2 / 3 * (cx - x),
+      y + 2 / 3 * (cy - y), x, y);
+  }
+
+  public function arc(x:Float, y:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Bool):Void {
+    if (anticlockwise == true) context().arcNegative(x, y, radius, startAngle, endAngle);
+    else context().arc(x, y, radius, startAngle, endAngle);
+  }
+
+  public function scale(x:Float, y:Float):Void context().scale(x, y);
+
+  public function rotate(angle:Float):Void context().rotate(angle);
 
   public function fill(?fillRule:Dynamic):Void {
     final ctx = context();

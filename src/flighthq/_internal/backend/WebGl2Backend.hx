@@ -654,6 +654,7 @@ class WebGl2Backend {
       throw 'WebGl2Backend: unsupported texImage2D source on native GL targets (expected a scratch canvas)';
     }
     final canvasContext = (cast source : NativeScratchCanvas).nativeContext();
+    canvasContext.syncWithOwner();
     if (canvasContext.surface == null) {
       gl.texImage2D(Std.int(target), Std.int(level), Std.int(internalformat), 0, 0, 0, Std.int(format), Std.int(type),
         null);
@@ -671,6 +672,15 @@ class WebGl2Backend {
       rgba[offset + 2] = bgra[offset];
       rgba[offset + 3] = bgra[offset + 3];
     }
+    #if (flight_gl_trace && sys)
+    if (textureDumps < 4) {
+      textureDumps++;
+      final bytes = haxe.io.Bytes.alloc(canvasWidth * canvasHeight * 4);
+      for (index in 0...canvasWidth * canvasHeight * 4) bytes.set(index, rgba[index]);
+      sys.io.File.saveBytes('flight-tex-' + textureDumps + '.rgba', bytes);
+      glTrace('texture dumped: flight-tex-' + textureDumps + '.rgba ' + canvasWidth + 'x' + canvasHeight);
+    }
+    #end
     gl.texImage2D(Std.int(target), Std.int(level), Std.int(internalformat), canvasWidth, canvasHeight, 0,
       Std.int(format), Std.int(type), rgba);
     #elseif (lime && !js)
@@ -841,6 +851,8 @@ class WebGl2Backend {
   static var lastViewportY = 0;
   static var lastViewportW = 0;
   static var lastViewportH = 0;
+  static var dumpAt = -1;
+  static var textureDumps = 0;
 
   /** Rate-limited GL call log for the `-D flight_gl_trace` diagnostic build. */
   static function glTrace(message:String):Void {
@@ -868,7 +880,11 @@ class WebGl2Backend {
       glTrace('probe grid -> ' + samples.join(' | ')
         + (probeError != 0 ? ' (probe getError 0x' + StringTools.hex(probeError, 4) + ')' : ''));
       #if sys
-      if (drawProbes == 20 && lastViewportW > 0) {
+      if (dumpAt < 0) {
+        final configured = Sys.getEnv('FLIGHT_GL_DUMP_AT');
+        dumpAt = configured == null ? 20 : Std.parseInt(configured);
+      }
+      if (drawProbes == dumpAt && lastViewportW > 0) {
         // One-shot framebuffer dump for offline inspection (RGBA rows, bottom-up).
         final frame = new lime.utils.UInt8Array(lastViewportW * lastViewportH * 4);
         gl.readPixels(lastViewportX, lastViewportY, lastViewportW, lastViewportH, RGBA, UNSIGNED_BYTE, frame);

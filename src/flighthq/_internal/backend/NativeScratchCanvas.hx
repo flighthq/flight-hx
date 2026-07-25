@@ -9,16 +9,20 @@ package flighthq._internal.backend;
  * `width`/`height` reallocates and clears the surface).
  */
 // Reached reflectively from generated code, so full DCE must not strip it.
+// `width`/`height` stay plain physical fields: generated code assigns them
+// through a structural canvas type, which bypasses property setters on some
+// targets, so the 2D context re-checks them lazily before every operation.
 @:keep
 class NativeScratchCanvas {
-  public var width(default, set):Int = 0;
-  public var height(default, set):Int = 0;
+  public var width:Int = 0;
+  public var height:Int = 0;
 
   #if (lime && !js && lime_cairo)
   final context:NativeCanvas2dContext = new NativeCanvas2dContext();
 
   public function new() {
     context.canvas = this;
+    context.scratchOwner = this;
   }
 
   public function getContext(contextId:String, ?options:Dynamic):Dynamic {
@@ -30,26 +34,11 @@ class NativeScratchCanvas {
     return context;
   }
 
-  function set_width(value:Int):Int {
-    width = value;
-    context.resize(width, height);
-    return value;
-  }
-
-  function set_height(value:Int):Int {
-    height = value;
-    context.resize(width, height);
-    return value;
-  }
   #else
   public function new() {}
 
   public function getContext(contextId:String, ?options:Dynamic):Dynamic {
     return null;
   }
-
-  function set_width(value:Int):Int return width = value;
-
-  function set_height(value:Int):Int return height = value;
   #end
 }

@@ -125,6 +125,14 @@ class Canvas2dBackend {
     }
     final ctx:NativeCanvas2dContext = context;
     switch (name) {
+      case 'arc': ctx.arc(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5]); return null;
+      case 'bezierCurveTo':
+        ctx.bezierCurveTo(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5]);
+        return null;
+      case 'closePath': ctx.closePath(); return null;
+      case 'quadraticCurveTo': ctx.quadraticCurveTo(arguments[0], arguments[1], arguments[2], arguments[3]); return null;
+      case 'rotate': ctx.rotate(arguments[0]); return null;
+      case 'scale': ctx.scale(arguments[0], arguments[1]); return null;
       case 'beginPath': ctx.beginPath(); return null;
       case 'clearRect': ctx.clearRect(arguments[0], arguments[1], arguments[2], arguments[3]); return null;
       case 'clip': ctx.clip(); return null;
