@@ -31,4 +31,4 @@ Confirmed unused in current generated output (do not need endpoint forms): optio
 - ~95 `public static inline final` Int constants with spec values.
 - Genuinely polymorphic returns stay `Dynamic` (`getParameter`, `getExtension`, `getProgramParameter`, `getShaderParameter`); everything else is typed.
 
-Transition: the legacy `call`/`field` string switch remains in the module until the regenerated output lands, then it is deleted. Either half can merge first without breaking the other.
+The transitional `call`/`field` string switch has been deleted: regenerated output references only the typed endpoints and constants.

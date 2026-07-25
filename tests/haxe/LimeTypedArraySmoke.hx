@@ -33,17 +33,15 @@ class LimeTypedArraySmoke {
     if (!Std.isOfType(_LimeTypedArray.unwrap(storage), Array)) throw 'native unwrap';
 
     final gl = new FakeGl();
-    WebGl2Backend.call(gl, 'bufferData', [1, floats, 2]);
+    WebGl2Backend.bufferData(gl, 1, floats, 2);
     if (!Std.isOfType(gl.upload, Array)) throw 'GL upload did not receive native storage';
-    WebGl2Backend.call(gl, 'shaderSource', [
-      null,
-      '#version 300 es\nprecision highp float;\nuniform highp sampler2D texture;\nvoid main() {}',
-    ]);
+    WebGl2Backend.shaderSource(gl, null,
+      '#version 300 es\nprecision highp float;\nuniform highp sampler2D texture;\nvoid main() {}');
     if (!StringTools.startsWith(gl.shader, '#version 330 core\n')) throw 'desktop shader version';
     if (gl.shader.indexOf('precision') >= 0 || gl.shader.indexOf('highp') >= 0) throw 'desktop shader precision';
 
     gl.type = 'opengles';
-    WebGl2Backend.call(gl, 'shaderSource', [null, '#version 300 es\nprecision highp float;']);
+    WebGl2Backend.shaderSource(gl, null, '#version 300 es\nprecision highp float;');
     if (!StringTools.startsWith(gl.shader, '#version 300 es\n')) throw 'ES shader changed';
   }
 }

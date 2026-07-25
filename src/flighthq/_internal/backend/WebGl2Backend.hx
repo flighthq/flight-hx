@@ -58,14 +58,19 @@ abstract GlFloatList(Dynamic) from flighthq._internal._Float32Array from Array<F
 abstract GlIntList(Dynamic) from Array<Int> from Array<Float> from Array<Dynamic> {}
 
 /** Typed-array view accepted by buffer and texture upload entry points. */
-abstract GlBufferSource(Dynamic) from flighthq._internal._Float32Array from flighthq._internal._Int16Array
-  from flighthq._internal._UInt16Array from flighthq._internal._UInt8Array {}
+abstract GlBufferSource(Dynamic) from flighthq._internal._Float32Array from flighthq._internal._Float64Array
+  from flighthq._internal._Int8Array from flighthq._internal._Int16Array from flighthq._internal._Int32Array
+  from flighthq._internal._UInt8Array from flighthq._internal._UInt8ClampedArray
+  from flighthq._internal._UInt16Array from flighthq._internal._UInt32Array {}
 
 /** `bufferData` second argument: a byte size or a typed-array view. The
  * upstream overload cannot be split mechanically without checker types, so the
  * discrimination is a single runtime test inside the endpoint. */
 abstract GlBufferDataSource(Dynamic) from Float from Int from flighthq._internal._Float32Array
-  from flighthq._internal._Int16Array from flighthq._internal._UInt16Array from flighthq._internal._UInt8Array {}
+  from flighthq._internal._Float64Array from flighthq._internal._Int8Array from flighthq._internal._Int16Array
+  from flighthq._internal._Int32Array from flighthq._internal._UInt8Array
+  from flighthq._internal._UInt8ClampedArray from flighthq._internal._UInt16Array
+  from flighthq._internal._UInt32Array {}
 
 /**
  * Strictly typed static endpoints for every WebGL2 member reached by generated
@@ -74,10 +79,6 @@ abstract GlBufferDataSource(Dynamic) from Float from Int from flighthq._internal
  * `Std.int` coercion its underlying GL signature requires, so the generator
  * emits arguments unchanged. Constants are receiver-less `inline final` Int
  * values fixed by the WebGL specification and identical on every target.
- *
- * The legacy `call`/`field` name-string surface at the bottom dispatches into
- * the typed endpoints and remains only until regenerated output stops
- * referencing it.
  */
 class WebGl2Backend {
   public static inline final ACTIVE_UNIFORMS:Int = 35718;
@@ -181,6 +182,10 @@ class WebGl2Backend {
 
   public static inline function activeTexture(gl:GlContext, texture:Float):Void {
     gl.activeTexture(Std.int(texture));
+    #if flight_gl_trace
+    final e:Int = gl.getError();
+    if (e != 0) glTrace('activeTexture getError -> 0x' + StringTools.hex(e, 4));
+    #end
   }
 
   public static inline function attachShader(gl:GlContext, program:GlProgram, shader:GlShader):Void {
@@ -202,6 +207,10 @@ class WebGl2Backend {
 
   public static inline function bindTexture(gl:GlContext, target:Float, texture:Null<GlTexture>):Void {
     gl.bindTexture(Std.int(target), texture);
+    #if flight_gl_trace
+    final e:Int = gl.getError();
+    if (e != 0) glTrace('bindTexture getError -> 0x' + StringTools.hex(e, 4));
+    #end
   }
 
   public static inline function bindVertexArray(gl:GlContext, vertexArray:Null<GlVertexArray>):Void {
@@ -227,12 +236,21 @@ class WebGl2Backend {
     final raw:Dynamic = sizeOrData;
     #if (lime && !js)
     if (Std.isOfType(raw, Int) || Std.isOfType(raw, Float)) {
-      gl.bufferData(Std.int(target), new lime.utils.UInt8Array(Std.int(raw)), Std.int(usage));
+      final sizeView = new lime.utils.UInt8Array(Std.int(raw));
+      #if flight_gl_trace
+      glTrace('bufferData size-form: requested=' + Std.int(raw) + ', view.byteLength='
+        + (sizeView : lime.utils.ArrayBufferView).byteLength + ', view.length=' + (sizeView : lime.utils.ArrayBufferView).length);
+      #end
+      gl.bufferData(Std.int(target), sizeView, Std.int(usage));
     } else {
       gl.bufferData(Std.int(target), nativeView(cast raw), Std.int(usage));
     }
     #else
     gl.bufferData(Std.int(target), raw, Std.int(usage));
+    #end
+    #if flight_gl_trace
+    final e:Int = gl.getError();
+    if (e != 0) glTrace('bufferData getError -> 0x' + StringTools.hex(e, 4));
     #end
   }
 
@@ -240,6 +258,11 @@ class WebGl2Backend {
       srcOffset:Float = 0, ?length:Float):Void {
     #if (lime && !js)
     final data = nativeView(source);
+    #if flight_gl_trace
+    glTrace('bufferSubData(target=' + Std.int(target) + ', dstByteOffset=' + Std.int(dstByteOffset) + ', srcOffset='
+      + srcOffset + ', length=' + Std.string(length) + ', view.byteLength=' + data.byteLength + ', view.length='
+      + data.length + ')');
+    #end
     if (length == null) {
       gl.bufferSubData(Std.int(target), Std.int(dstByteOffset), data);
     } else {
@@ -261,6 +284,10 @@ class WebGl2Backend {
     } else {
       gl.bufferSubData(Std.int(target), Std.int(dstByteOffset), source, Std.int(srcOffset), Std.int(length));
     }
+    #end
+    #if flight_gl_trace
+    final e:Int = gl.getError();
+    if (e != 0) glTrace('bufferSubData getError -> 0x' + StringTools.hex(e, 4));
     #end
   }
 
@@ -341,7 +368,12 @@ class WebGl2Backend {
   }
 
   public static inline function createTexture(gl:GlContext):GlTexture {
-    return gl.createTexture();
+    final result = gl.createTexture();
+    #if flight_gl_trace
+    final e:Int = gl.getError();
+    if (e != 0) glTrace('createTexture getError -> 0x' + StringTools.hex(e, 4));
+    #end
+    return result;
   }
 
   public static inline function createVertexArray(gl:GlContext):GlVertexArray {
@@ -578,9 +610,11 @@ class WebGl2Backend {
       height:Float, border:Float, format:Float, type:Float, pixels:Null<GlBufferSource>):Void {
     #if (lime && !js)
     #if flight_gl_trace
+    final priorError:Int = gl.getError();
     glTrace('texImage2D(target=' + Std.int(target) + ', level=' + Std.int(level) + ', internal=' + Std.int(internalformat)
       + ', ' + Std.int(width) + 'x' + Std.int(height) + ', fmt=' + Std.int(format) + ', type=' + Std.int(type)
-      + ', pixels=' + (pixels == null ? 'null' : 'view') + ')');
+      + ', pixels=' + (pixels == null ? 'null' : 'view')
+      + (priorError != 0 ? ', PRIOR getError 0x' + StringTools.hex(priorError, 4) : '') + ')');
     #end
     gl.texImage2D(Std.int(target), Std.int(level), Std.int(internalformat), Std.int(width), Std.int(height),
       Std.int(border), Std.int(format), Std.int(type), pixels == null ? null : nativeView(pixels));
@@ -671,6 +705,10 @@ class WebGl2Backend {
 
   public static inline function uniform1i(gl:GlContext, location:Null<GlUniformLocation>, x:Float):Void {
     gl.uniform1i(location, Std.int(x));
+    #if flight_gl_trace
+    final e:Int = gl.getError();
+    if (e != 0) glTrace('uniform1i getError -> 0x' + StringTools.hex(e, 4));
+    #end
   }
 
   public static inline function uniform2f(gl:GlContext, location:Null<GlUniformLocation>, x:Float, y:Float):Void {
@@ -739,6 +777,11 @@ class WebGl2Backend {
 
   public static inline function vertexAttribDivisor(gl:GlContext, index:Float, divisor:Float):Void {
     gl.vertexAttribDivisor(Std.int(index), Std.int(divisor));
+  }
+
+  public static inline function vertexAttribIPointer(gl:GlContext, index:Float, size:Float, type:Float, stride:Float,
+      offset:Float):Void {
+    gl.vertexAttribIPointer(Std.int(index), Std.int(size), Std.int(type), Std.int(stride), Std.int(offset));
   }
 
   public static inline function vertexAttribPointer(gl:GlContext, index:Float, size:Float, type:Float, normalized:Bool,
@@ -821,233 +864,4 @@ class WebGl2Backend {
   }
   #end
 
-  // Legacy name-string surface: dispatches into the typed endpoints so
-  // pre-regeneration generated output keeps compiling. Delete once regenerated
-  // code emits the typed endpoints directly.
-
-  public static function call(context:Dynamic, name:String, a:Array<Dynamic>):Dynamic {
-    if (context == null) return null;
-    final gl:GlContext = context;
-    switch (name) {
-      case 'activeTexture': activeTexture(gl, a[0]);
-      case 'attachShader': attachShader(gl, a[0], a[1]);
-      case 'bindBuffer': bindBuffer(gl, a[0], a[1]);
-      case 'bindFramebuffer': bindFramebuffer(gl, a[0], a[1]);
-      case 'bindRenderbuffer': bindRenderbuffer(gl, a[0], a[1]);
-      case 'bindTexture': bindTexture(gl, a[0], a[1]);
-      case 'bindVertexArray': bindVertexArray(gl, a[0]);
-      case 'blendEquation': blendEquation(gl, a[0]);
-      case 'blendFunc': blendFunc(gl, a[0], a[1]);
-      case 'blitFramebuffer': blitFramebuffer(gl, a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7], a[8], a[9]);
-      case 'bufferData': bufferData(gl, a[0], a[1], a[2]);
-      case 'bufferSubData':
-        if (a.length == 5) bufferSubData(gl, a[0], a[1], a[2], a[3], a[4]);
-        else bufferSubData(gl, a[0], a[1], a[2]);
-      case 'checkFramebufferStatus': return checkFramebufferStatus(gl, a[0]);
-      case 'clear': clear(gl, a[0]);
-      case 'clearBufferfi': clearBufferfi(gl, a[0], a[1], a[2], a[3]);
-      case 'clearBufferfv': clearBufferfv(gl, a[0], a[1], a[2]);
-      case 'clearColor': clearColor(gl, a[0], a[1], a[2], a[3]);
-      case 'colorMask': colorMask(gl, a[0], a[1], a[2], a[3]);
-      case 'compileShader': compileShader(gl, a[0]);
-      case 'compressedTexImage2D': compressedTexImage2D(gl, a[0], a[1], a[2], a[3], a[4], a[5], a[6]);
-      case 'compressedTexSubImage3D': compressedTexSubImage3D(gl, a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7], a[8], a[9]);
-      case 'createBuffer': return createBuffer(gl);
-      case 'createFramebuffer': return createFramebuffer(gl);
-      case 'createProgram': return createProgram(gl);
-      case 'createRenderbuffer': return createRenderbuffer(gl);
-      case 'createShader': return createShader(gl, a[0]);
-      case 'createTexture': return createTexture(gl);
-      case 'createVertexArray': return createVertexArray(gl);
-      case 'cullFace': cullFace(gl, a[0]);
-      case 'deleteBuffer': deleteBuffer(gl, a[0]);
-      case 'deleteFramebuffer': deleteFramebuffer(gl, a[0]);
-      case 'deleteProgram': deleteProgram(gl, a[0]);
-      case 'deleteRenderbuffer': deleteRenderbuffer(gl, a[0]);
-      case 'deleteShader': deleteShader(gl, a[0]);
-      case 'deleteTexture': deleteTexture(gl, a[0]);
-      case 'deleteVertexArray': deleteVertexArray(gl, a[0]);
-      case 'depthFunc': depthFunc(gl, a[0]);
-      case 'depthMask': depthMask(gl, a[0]);
-      case 'disable': disable(gl, a[0]);
-      case 'disableVertexAttribArray': disableVertexAttribArray(gl, a[0]);
-      case 'drawArrays': drawArrays(gl, a[0], a[1], a[2]);
-      case 'drawBuffers': drawBuffers(gl, a[0]);
-      case 'drawElements': drawElements(gl, a[0], a[1], a[2], a[3]);
-      case 'drawElementsInstanced': drawElementsInstanced(gl, a[0], a[1], a[2], a[3], a[4]);
-      case 'enable': enable(gl, a[0]);
-      case 'enableVertexAttribArray': enableVertexAttribArray(gl, a[0]);
-      case 'flush': flush(gl);
-      case 'framebufferRenderbuffer': framebufferRenderbuffer(gl, a[0], a[1], a[2], a[3]);
-      case 'framebufferTexture2D': framebufferTexture2D(gl, a[0], a[1], a[2], a[3], a[4]);
-      case 'generateMipmap': generateMipmap(gl, a[0]);
-      case 'getActiveUniform': return getActiveUniform(gl, a[0], a[1]);
-      case 'getAttribLocation': return getAttribLocation(gl, a[0], a[1]);
-      case 'getExtension': return getExtension(gl, a[0]);
-      case 'getParameter': return getParameter(gl, a[0]);
-      case 'getProgramInfoLog': return getProgramInfoLog(gl, a[0]);
-      case 'getProgramParameter': return getProgramParameter(gl, a[0], a[1]);
-      case 'getShaderInfoLog': return getShaderInfoLog(gl, a[0]);
-      case 'getShaderParameter': return getShaderParameter(gl, a[0], a[1]);
-      case 'getUniformLocation': return getUniformLocation(gl, a[0], a[1]);
-      case 'linkProgram': linkProgram(gl, a[0]);
-      case 'pixelStorei': pixelStorei(gl, a[0], a[1]);
-      case 'readBuffer': readBuffer(gl, a[0]);
-      case 'readPixels': readPixels(gl, a[0], a[1], a[2], a[3], a[4], a[5], a[6]);
-      case 'renderbufferStorage': renderbufferStorage(gl, a[0], a[1], a[2], a[3]);
-      case 'renderbufferStorageMultisample': renderbufferStorageMultisample(gl, a[0], a[1], a[2], a[3], a[4]);
-      case 'scissor': scissor(gl, a[0], a[1], a[2], a[3]);
-      case 'shaderSource': shaderSource(gl, a[0], a[1]);
-      case 'stencilFunc': stencilFunc(gl, a[0], a[1], a[2]);
-      case 'stencilMask': stencilMask(gl, a[0]);
-      case 'stencilOp': stencilOp(gl, a[0], a[1], a[2]);
-      case 'stencilOpSeparate': stencilOpSeparate(gl, a[0], a[1], a[2], a[3]);
-      case 'texImage2D':
-        if (a.length == 6) texImage2DSource(gl, a[0], a[1], a[2], a[3], a[4], a[5]);
-        else texImage2D(gl, a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7], a[8]);
-      case 'texImage3D': texImage3D(gl, a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7], a[8], a[9]);
-      case 'texParameterf': texParameterf(gl, a[0], a[1], a[2]);
-      case 'texParameteri': texParameteri(gl, a[0], a[1], a[2]);
-      case 'texStorage3D': texStorage3D(gl, a[0], a[1], a[2], a[3], a[4], a[5]);
-      case 'texSubImage2D': texSubImage2D(gl, a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7], a[8]);
-      case 'uniform1f': uniform1f(gl, a[0], a[1]);
-      case 'uniform1fv': uniform1fv(gl, a[0], a[1]);
-      case 'uniform1i': uniform1i(gl, a[0], a[1]);
-      case 'uniform2f': uniform2f(gl, a[0], a[1], a[2]);
-      case 'uniform2fv': uniform2fv(gl, a[0], a[1]);
-      case 'uniform3f': uniform3f(gl, a[0], a[1], a[2], a[3]);
-      case 'uniform3fv': uniform3fv(gl, a[0], a[1]);
-      case 'uniform4f': uniform4f(gl, a[0], a[1], a[2], a[3], a[4]);
-      case 'uniform4fv': uniform4fv(gl, a[0], a[1]);
-      case 'uniformMatrix3fv': uniformMatrix3fv(gl, a[0], a[1], a[2]);
-      case 'uniformMatrix4fv': uniformMatrix4fv(gl, a[0], a[1], a[2]);
-      case 'useProgram': useProgram(gl, a[0]);
-      case 'vertexAttrib4f': vertexAttrib4f(gl, a[0], a[1], a[2], a[3], a[4]);
-      case 'vertexAttribDivisor': vertexAttribDivisor(gl, a[0], a[1]);
-      case 'vertexAttribPointer': vertexAttribPointer(gl, a[0], a[1], a[2], a[3], a[4], a[5]);
-      case 'viewport': viewport(gl, a[0], a[1], a[2], a[3]);
-      default:
-        throw 'WebGl2Backend: unmapped GL method ' + name;
-    }
-    return null;
-  }
-
-  public static function callOptional(context:Dynamic, name:String, arguments:Array<Dynamic>):Dynamic {
-    if (context == null) return _Runtime.UNDEFINED;
-    return call(context, name, arguments);
-  }
-
-  public static function field(context:Dynamic, name:String):Dynamic {
-    return switch (name) {
-      case 'ACTIVE_UNIFORMS': ACTIVE_UNIFORMS;
-      case 'ALWAYS': ALWAYS;
-      case 'ARRAY_BUFFER': ARRAY_BUFFER;
-      case 'BACK': BACK;
-      case 'BLEND': BLEND;
-      case 'CLAMP_TO_EDGE': CLAMP_TO_EDGE;
-      case 'COLOR': COLOR;
-      case 'COLOR_ATTACHMENT0': COLOR_ATTACHMENT0;
-      case 'COLOR_BUFFER_BIT': COLOR_BUFFER_BIT;
-      case 'COMPILE_STATUS': COMPILE_STATUS;
-      case 'CULL_FACE': CULL_FACE;
-      case 'DECR_WRAP': DECR_WRAP;
-      case 'DEPTH24_STENCIL8': DEPTH24_STENCIL8;
-      case 'DEPTH_BUFFER_BIT': DEPTH_BUFFER_BIT;
-      case 'DEPTH_STENCIL': DEPTH_STENCIL;
-      case 'DEPTH_STENCIL_ATTACHMENT': DEPTH_STENCIL_ATTACHMENT;
-      case 'DEPTH_TEST': DEPTH_TEST;
-      case 'DRAW_FRAMEBUFFER': DRAW_FRAMEBUFFER;
-      case 'DST_COLOR': DST_COLOR;
-      case 'DYNAMIC_DRAW': DYNAMIC_DRAW;
-      case 'ELEMENT_ARRAY_BUFFER': ELEMENT_ARRAY_BUFFER;
-      case 'EQUAL': EQUAL;
-      case 'FLOAT': FLOAT;
-      case 'FLOAT_MAT2': FLOAT_MAT2;
-      case 'FLOAT_MAT3': FLOAT_MAT3;
-      case 'FLOAT_MAT4': FLOAT_MAT4;
-      case 'FLOAT_VEC2': FLOAT_VEC2;
-      case 'FLOAT_VEC3': FLOAT_VEC3;
-      case 'FLOAT_VEC4': FLOAT_VEC4;
-      case 'FRAGMENT_SHADER': FRAGMENT_SHADER;
-      case 'FRAMEBUFFER': FRAMEBUFFER;
-      case 'FRAMEBUFFER_BINDING': FRAMEBUFFER_BINDING;
-      case 'FRAMEBUFFER_COMPLETE': FRAMEBUFFER_COMPLETE;
-      case 'FRONT': FRONT;
-      case 'FUNC_ADD': FUNC_ADD;
-      case 'FUNC_REVERSE_SUBTRACT': FUNC_REVERSE_SUBTRACT;
-      case 'HALF_FLOAT': HALF_FLOAT;
-      case 'INCR_WRAP': INCR_WRAP;
-      case 'INVERT': INVERT;
-      case 'KEEP': KEEP;
-      case 'LESS': LESS;
-      case 'LINEAR': LINEAR;
-      case 'LINEAR_MIPMAP_LINEAR': LINEAR_MIPMAP_LINEAR;
-      case 'LINEAR_MIPMAP_NEAREST': LINEAR_MIPMAP_NEAREST;
-      case 'LINES': LINES;
-      case 'LINE_STRIP': LINE_STRIP;
-      case 'LINK_STATUS': LINK_STATUS;
-      case 'MAX': MAX;
-      case 'MAX_SAMPLES': MAX_SAMPLES;
-      case 'MIN': MIN;
-      case 'MIRRORED_REPEAT': MIRRORED_REPEAT;
-      case 'NEAREST': NEAREST;
-      case 'NEAREST_MIPMAP_LINEAR': NEAREST_MIPMAP_LINEAR;
-      case 'NEAREST_MIPMAP_NEAREST': NEAREST_MIPMAP_NEAREST;
-      case 'NONE': NONE;
-      case 'NOTEQUAL': NOTEQUAL;
-      case 'ONE': ONE;
-      case 'ONE_MINUS_SRC_ALPHA': ONE_MINUS_SRC_ALPHA;
-      case 'ONE_MINUS_SRC_COLOR': ONE_MINUS_SRC_COLOR;
-      case 'POINTS': POINTS;
-      case 'READ_FRAMEBUFFER': READ_FRAMEBUFFER;
-      case 'RENDERBUFFER': RENDERBUFFER;
-      case 'REPEAT': REPEAT;
-      case 'RGBA': RGBA;
-      case 'RGBA16F': RGBA16F;
-      case 'RGBA32F': RGBA32F;
-      case 'RGBA8': RGBA8;
-      case 'SCISSOR_TEST': SCISSOR_TEST;
-      case 'SRC_ALPHA': SRC_ALPHA;
-      case 'STATIC_DRAW': STATIC_DRAW;
-      case 'STENCIL_BUFFER_BIT': STENCIL_BUFFER_BIT;
-      case 'STENCIL_TEST': STENCIL_TEST;
-      case 'STREAM_DRAW': STREAM_DRAW;
-      case 'TEXTURE0': TEXTURE0;
-      case 'TEXTURE1': TEXTURE1;
-      case 'TEXTURE2': TEXTURE2;
-      case 'TEXTURE_2D': TEXTURE_2D;
-      case 'TEXTURE_2D_ARRAY': TEXTURE_2D_ARRAY;
-      case 'TEXTURE_3D': TEXTURE_3D;
-      case 'TEXTURE_CUBE_MAP': TEXTURE_CUBE_MAP;
-      case 'TEXTURE_CUBE_MAP_POSITIVE_X': TEXTURE_CUBE_MAP_POSITIVE_X;
-      case 'TEXTURE_MAG_FILTER': TEXTURE_MAG_FILTER;
-      case 'TEXTURE_MAX_LEVEL': TEXTURE_MAX_LEVEL;
-      case 'TEXTURE_MIN_FILTER': TEXTURE_MIN_FILTER;
-      case 'TEXTURE_WRAP_R': TEXTURE_WRAP_R;
-      case 'TEXTURE_WRAP_S': TEXTURE_WRAP_S;
-      case 'TEXTURE_WRAP_T': TEXTURE_WRAP_T;
-      case 'TRIANGLES': TRIANGLES;
-      case 'TRIANGLE_FAN': TRIANGLE_FAN;
-      case 'TRIANGLE_STRIP': TRIANGLE_STRIP;
-      case 'UNPACK_PREMULTIPLY_ALPHA_WEBGL': UNPACK_PREMULTIPLY_ALPHA_WEBGL;
-      case 'UNSIGNED_BYTE': UNSIGNED_BYTE;
-      case 'UNSIGNED_INT': UNSIGNED_INT;
-      case 'UNSIGNED_INT_24_8': UNSIGNED_INT_24_8;
-      case 'UNSIGNED_SHORT': UNSIGNED_SHORT;
-      case 'VERTEX_SHADER': VERTEX_SHADER;
-      case 'VIEWPORT': VIEWPORT;
-      case 'ZERO': ZERO;
-      default:
-        throw 'WebGl2Backend: unmapped GL constant ' + name;
-    };
-  }
-
-  public static function setField(context:Dynamic, name:String, value:Dynamic):Dynamic {
-    Reflect.setField(context, name, value);
-    return value;
-  }
-
-  public static function deleteField(context:Dynamic, name:String):Bool {
-    return Reflect.deleteField(context, name);
-  }
 }
