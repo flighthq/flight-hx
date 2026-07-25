@@ -224,23 +224,14 @@ class _Runtime {
       case 'WeakMap': _WeakMap;
       case 'WeakSet': _WeakSet;
       case 'Uint8ClampedArray': _UInt8ClampedArray.construct;
-      // Numeric-array globals outside the wrapped typed-array kinds: Haxe
-      // Float is a double, so a plain prefilled array is exact for Float64Array
-      // and adequate for the integer variants until the generator routes them
-      // to dedicated wrappers (overflow wrapping on write is not emulated).
-      case 'Float64Array', 'Uint32Array', 'Int32Array', 'Int8Array': createNumericArray;
+      case 'Float64Array': _Float64Array.construct;
+      case 'Int32Array': _Int32Array.construct;
+      case 'Int8Array': _Int8Array.construct;
+      case 'Uint32Array': _UInt32Array.construct;
       default: null;
     };
     #end
   }
-
-  #if !js
-  static function createNumericArray(?source:Dynamic):Dynamic {
-    if (source == null) return [];
-    if (Std.isOfType(source, Int) || Std.isOfType(source, Float)) return [for (_ in 0...Std.int(source)) 0.0];
-    return [for (value in iterable(source)) (value : Float)];
-  }
-  #end
 
   public static function getIndex(source:Dynamic, key:Dynamic):Dynamic {
     #if js
@@ -921,6 +912,12 @@ class _Runtime {
   public static inline function unsignedShiftRight(value:Int, bits:Int):Float {
     final shifted = value >>> bits;
     return bits == 0 && shifted < 0 ? shifted + 4294967296.0 : shifted;
+  }
+
+  /** JavaScript `ToUint32`: like `ToInt32` but reinterpreted as unsigned. */
+  public static inline function toUint32(value:Float):Float {
+    final signed = toInt32(value);
+    return signed < 0 ? signed + 4294967296.0 : signed;
   }
 
   /**

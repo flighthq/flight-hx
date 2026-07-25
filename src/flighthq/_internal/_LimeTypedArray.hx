@@ -54,6 +54,21 @@ class _LimeTypedArray {
       case 'uint8', 'uint8clamped':
         final values:lime.utils.UInt8Array = cast nativeView;
         values[index];
+      case 'int8':
+        final values:lime.utils.Int8Array = cast nativeView;
+        values[index];
+      case 'int32':
+        final values:lime.utils.Int32Array = cast nativeView;
+        values[index];
+      case 'uint32':
+        // Lime stores 32-bit words as signed Int; present JavaScript's
+        // unsigned value range.
+        final values:lime.utils.UInt32Array = cast nativeView;
+        final word:Int = values[index];
+        word < 0 ? word + 4294967296.0 : (word : Float);
+      case 'float64':
+        final values:lime.utils.Float64Array = cast nativeView;
+        values[index];
       default:
         throw 'Unsupported Lime typed-array kind: ' + kind;
     };
@@ -88,6 +103,18 @@ class _LimeTypedArray {
         final values:lime.utils.UInt8Array = cast nativeView;
         final rounded = Math.round(value);
         values[index] = rounded < 0 ? 0 : rounded > 255 ? 255 : Std.int(rounded);
+      case 'int8':
+        final values:lime.utils.Int8Array = cast nativeView;
+        values[index] = (_Runtime.toInt32(value) << 24) >> 24;
+      case 'int32':
+        final values:lime.utils.Int32Array = cast nativeView;
+        values[index] = _Runtime.toInt32(value);
+      case 'uint32':
+        final values:lime.utils.UInt32Array = cast nativeView;
+        values[index] = _Runtime.toInt32(value);
+      case 'float64':
+        final values:lime.utils.Float64Array = cast nativeView;
+        values[index] = (value : Float);
       default:
         throw 'Unsupported Lime typed-array kind: ' + kind;
     };
@@ -149,6 +176,10 @@ class _LimeTypedArray {
       case 'int16': new lime.utils.Int16Array(length);
       case 'uint16': new lime.utils.UInt16Array(length);
       case 'uint8', 'uint8clamped': new lime.utils.UInt8Array(length);
+      case 'int8': new lime.utils.Int8Array(length);
+      case 'int32': new lime.utils.Int32Array(length);
+      case 'uint32': new lime.utils.UInt32Array(length);
+      case 'float64': new lime.utils.Float64Array(length);
       default: throw 'Unsupported Lime typed-array kind: ' + kind;
     };
   }
@@ -159,6 +190,10 @@ class _LimeTypedArray {
       case 'int16': new lime.utils.Int16Array(null, buffer, null, null, byteOffset, length);
       case 'uint16': new lime.utils.UInt16Array(null, buffer, null, null, byteOffset, length);
       case 'uint8', 'uint8clamped': new lime.utils.UInt8Array(null, buffer, null, null, byteOffset, length);
+      case 'int8': new lime.utils.Int8Array(null, buffer, null, null, byteOffset, length);
+      case 'int32': new lime.utils.Int32Array(null, buffer, null, null, byteOffset, length);
+      case 'uint32': new lime.utils.UInt32Array(null, buffer, null, null, byteOffset, length);
+      case 'float64': new lime.utils.Float64Array(null, buffer, null, null, byteOffset, length);
       default: throw 'Unsupported Lime typed-array kind: ' + kind;
     };
   }
