@@ -460,6 +460,9 @@ class WebGl2Backend {
   }
 
   public static inline function enableVertexAttribArray(gl:GlContext, index:Float):Void {
+    #if flight_gl_trace
+    if (Std.int(index) < 0) glTrace('enableVertexAttribArray(NEGATIVE index=' + Std.int(index) + ')');
+    #end
     gl.enableVertexAttribArray(Std.int(index));
   }
 
@@ -821,10 +824,14 @@ class WebGl2Backend {
       drawProbes++;
       #if (lime && !js)
       final pixels = new lime.utils.UInt8Array(4);
-      gl.readPixels(lastViewportX + (lastViewportW >> 1), lastViewportY + (lastViewportH >> 1), 1, 1, RGBA, UNSIGNED_BYTE,
-        pixels);
+      final samples = [];
+      for (point in [[2, 2], [1, 1], [3, 1], [1, 3], [3, 3]]) {
+        gl.readPixels(lastViewportX + ((lastViewportW * point[0]) >> 2), lastViewportY + ((lastViewportH * point[1]) >> 2),
+          1, 1, RGBA, UNSIGNED_BYTE, pixels);
+        samples.push(pixels[0] + ',' + pixels[1] + ',' + pixels[2] + ',' + pixels[3]);
+      }
       final probeError:Int = gl.getError();
-      glTrace('probe center -> ' + pixels[0] + ',' + pixels[1] + ',' + pixels[2] + ',' + pixels[3]
+      glTrace('probe grid -> ' + samples.join(' | ')
         + (probeError != 0 ? ' (probe getError 0x' + StringTools.hex(probeError, 4) + ')' : ''));
       #end
     }
