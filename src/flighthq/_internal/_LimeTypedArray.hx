@@ -51,7 +51,7 @@ class _LimeTypedArray {
       case 'uint16':
         final values:lime.utils.UInt16Array = cast nativeView;
         values[index];
-      case 'uint8':
+      case 'uint8', 'uint8clamped':
         final values:lime.utils.UInt8Array = cast nativeView;
         values[index];
       default:
@@ -84,6 +84,10 @@ class _LimeTypedArray {
       case 'uint8':
         final values:lime.utils.UInt8Array = cast nativeView;
         values[index] = Std.int(value) & 0xff;
+      case 'uint8clamped':
+        final values:lime.utils.UInt8Array = cast nativeView;
+        final rounded = Math.round(value);
+        values[index] = rounded < 0 ? 0 : rounded > 255 ? 255 : Std.int(rounded);
       default:
         throw 'Unsupported Lime typed-array kind: ' + kind;
     };
@@ -105,12 +109,46 @@ class _LimeTypedArray {
     return Std.isOfType(value, _LimeTypedArray) ? (cast value : _LimeTypedArray).nativeView : value;
   }
 
+  /** Element read from a raw Lime `ArrayBufferView` (as produced by
+   * `lime.utils.UInt8Array` and friends in host code), keyed on its
+   * `TypedArrayType` so the element width and sign are honored. */
+  public static function readRaw(view:lime.utils.ArrayBufferView, index:Int):Dynamic {
+    return switch (view.type) {
+      case lime.utils.ArrayBufferView.TypedArrayType.Int8: (cast view : lime.utils.Int8Array)[index];
+      case lime.utils.ArrayBufferView.TypedArrayType.Int16: (cast view : lime.utils.Int16Array)[index];
+      case lime.utils.ArrayBufferView.TypedArrayType.Int32: (cast view : lime.utils.Int32Array)[index];
+      case lime.utils.ArrayBufferView.TypedArrayType.Uint8, lime.utils.ArrayBufferView.TypedArrayType.Uint8Clamped:
+        (cast view : lime.utils.UInt8Array)[index];
+      case lime.utils.ArrayBufferView.TypedArrayType.Uint16: (cast view : lime.utils.UInt16Array)[index];
+      case lime.utils.ArrayBufferView.TypedArrayType.Uint32: (cast view : lime.utils.UInt32Array)[index];
+      case lime.utils.ArrayBufferView.TypedArrayType.Float32: (cast view : lime.utils.Float32Array)[index];
+      case lime.utils.ArrayBufferView.TypedArrayType.Float64: (cast view : lime.utils.Float64Array)[index];
+      default: throw 'Unsupported Lime ArrayBufferView type: ' + view.type;
+    };
+  }
+
+  /** Element write to a raw Lime `ArrayBufferView`; see `readRaw`. */
+  public static function writeRaw(view:lime.utils.ArrayBufferView, index:Int, value:Dynamic):Dynamic {
+    return switch (view.type) {
+      case lime.utils.ArrayBufferView.TypedArrayType.Int8: (cast view : lime.utils.Int8Array)[index] = Std.int(value);
+      case lime.utils.ArrayBufferView.TypedArrayType.Int16: (cast view : lime.utils.Int16Array)[index] = Std.int(value);
+      case lime.utils.ArrayBufferView.TypedArrayType.Int32: (cast view : lime.utils.Int32Array)[index] = Std.int(value);
+      case lime.utils.ArrayBufferView.TypedArrayType.Uint8, lime.utils.ArrayBufferView.TypedArrayType.Uint8Clamped:
+        (cast view : lime.utils.UInt8Array)[index] = Std.int(value);
+      case lime.utils.ArrayBufferView.TypedArrayType.Uint16: (cast view : lime.utils.UInt16Array)[index] = Std.int(value);
+      case lime.utils.ArrayBufferView.TypedArrayType.Uint32: (cast view : lime.utils.UInt32Array)[index] = Std.int(value);
+      case lime.utils.ArrayBufferView.TypedArrayType.Float32: (cast view : lime.utils.Float32Array)[index] = value;
+      case lime.utils.ArrayBufferView.TypedArrayType.Float64: (cast view : lime.utils.Float64Array)[index] = value;
+      default: throw 'Unsupported Lime ArrayBufferView type: ' + view.type;
+    };
+  }
+
   static function createView(kind:String, length:Int):Dynamic {
     return switch (kind) {
       case 'float32': new lime.utils.Float32Array(length);
       case 'int16': new lime.utils.Int16Array(length);
       case 'uint16': new lime.utils.UInt16Array(length);
-      case 'uint8': new lime.utils.UInt8Array(length);
+      case 'uint8', 'uint8clamped': new lime.utils.UInt8Array(length);
       default: throw 'Unsupported Lime typed-array kind: ' + kind;
     };
   }
@@ -120,7 +158,7 @@ class _LimeTypedArray {
       case 'float32': new lime.utils.Float32Array(null, buffer, null, null, byteOffset, length);
       case 'int16': new lime.utils.Int16Array(null, buffer, null, null, byteOffset, length);
       case 'uint16': new lime.utils.UInt16Array(null, buffer, null, null, byteOffset, length);
-      case 'uint8': new lime.utils.UInt8Array(null, buffer, null, null, byteOffset, length);
+      case 'uint8', 'uint8clamped': new lime.utils.UInt8Array(null, buffer, null, null, byteOffset, length);
       default: throw 'Unsupported Lime typed-array kind: ' + kind;
     };
   }

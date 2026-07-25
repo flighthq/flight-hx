@@ -192,6 +192,7 @@ class WebGl2Backend {
   }
 
   public static inline function bindFramebuffer(gl:GlContext, target:Float, framebuffer:Null<GlFramebuffer>):Void {
+    #if flight_gl_trace glTrace('bindFramebuffer(' + Std.int(target) + ', ' + (framebuffer == null ? 'DEFAULT' : 'fbo') + ')'); #end
     gl.bindFramebuffer(Std.int(target), framebuffer);
   }
 
@@ -222,6 +223,7 @@ class WebGl2Backend {
   }
 
   public static function bufferData(gl:GlContext, target:Float, sizeOrData:GlBufferDataSource, usage:Float):Void {
+    #if flight_gl_trace glTrace('bufferData(target=' + Std.int(target) + ', usage=' + Std.int(usage) + ')'); #end
     final raw:Dynamic = sizeOrData;
     #if (lime && !js)
     if (Std.isOfType(raw, Int) || Std.isOfType(raw, Float)) {
@@ -267,6 +269,7 @@ class WebGl2Backend {
   }
 
   public static inline function clear(gl:GlContext, mask:Float):Void {
+    #if flight_gl_trace glTrace('clear(0x' + StringTools.hex(Std.int(mask)) + ')'); #end
     gl.clear(Std.int(mask));
   }
 
@@ -283,6 +286,7 @@ class WebGl2Backend {
   }
 
   public static inline function clearColor(gl:GlContext, red:Float, green:Float, blue:Float, alpha:Float):Void {
+    #if flight_gl_trace glTrace('clearColor(' + red + ',' + green + ',' + blue + ',' + alpha + ')'); #end
     gl.clearColor(red, green, blue, alpha);
   }
 
@@ -393,7 +397,9 @@ class WebGl2Backend {
   }
 
   public static inline function drawArrays(gl:GlContext, mode:Float, first:Float, count:Float):Void {
+    #if flight_gl_trace glTrace('drawArrays(mode=' + Std.int(mode) + ', first=' + Std.int(first) + ', count=' + Std.int(count) + ')'); #end
     gl.drawArrays(Std.int(mode), Std.int(first), Std.int(count));
+    #if flight_gl_trace debugAfterDraw(gl); #end
   }
 
   public static inline function drawBuffers(gl:GlContext, buffers:GlIntList):Void {
@@ -405,12 +411,16 @@ class WebGl2Backend {
   }
 
   public static inline function drawElements(gl:GlContext, mode:Float, count:Float, type:Float, offset:Float):Void {
+    #if flight_gl_trace glTrace('drawElements(mode=' + Std.int(mode) + ', count=' + Std.int(count) + ', type=' + Std.int(type) + ', offset=' + Std.int(offset) + ')'); #end
     gl.drawElements(Std.int(mode), Std.int(count), Std.int(type), Std.int(offset));
+    #if flight_gl_trace debugAfterDraw(gl); #end
   }
 
   public static inline function drawElementsInstanced(gl:GlContext, mode:Float, count:Float, type:Float, offset:Float,
       instanceCount:Float):Void {
+    #if flight_gl_trace glTrace('drawElementsInstanced(count=' + Std.int(count) + ', instances=' + Std.int(instanceCount) + ')'); #end
     gl.drawElementsInstanced(Std.int(mode), Std.int(count), Std.int(type), Std.int(offset), Std.int(instanceCount));
+    #if flight_gl_trace debugAfterDraw(gl); #end
   }
 
   public static inline function enable(gl:GlContext, cap:Float):Void {
@@ -444,7 +454,9 @@ class WebGl2Backend {
   }
 
   public static inline function getAttribLocation(gl:GlContext, program:GlProgram, name:String):Int {
-    return gl.getAttribLocation(program, name);
+    final result = gl.getAttribLocation(program, name);
+    #if flight_gl_trace glTrace('getAttribLocation(' + name + ') -> ' + result); #end
+    return result;
   }
 
   public static inline function getExtension(gl:GlContext, name:String):Dynamic {
@@ -456,23 +468,33 @@ class WebGl2Backend {
   }
 
   public static inline function getProgramInfoLog(gl:GlContext, program:GlProgram):String {
-    return gl.getProgramInfoLog(program);
+    final result = gl.getProgramInfoLog(program);
+    #if flight_gl_trace if (result != null && result != '') glTrace('programInfoLog: ' + result); #end
+    return result;
   }
 
   public static inline function getProgramParameter(gl:GlContext, program:GlProgram, pname:Float):Dynamic {
-    return gl.getProgramParameter(program, Std.int(pname));
+    final result:Dynamic = gl.getProgramParameter(program, Std.int(pname));
+    #if flight_gl_trace glTrace('getProgramParameter(' + Std.int(pname) + ') -> ' + Std.string(result)); #end
+    return result;
   }
 
   public static inline function getShaderInfoLog(gl:GlContext, shader:GlShader):String {
-    return gl.getShaderInfoLog(shader);
+    final result = gl.getShaderInfoLog(shader);
+    #if flight_gl_trace if (result != null && result != '') glTrace('shaderInfoLog: ' + result); #end
+    return result;
   }
 
   public static inline function getShaderParameter(gl:GlContext, shader:GlShader, pname:Float):Dynamic {
-    return gl.getShaderParameter(shader, Std.int(pname));
+    final result:Dynamic = gl.getShaderParameter(shader, Std.int(pname));
+    #if flight_gl_trace glTrace('getShaderParameter(' + Std.int(pname) + ') -> ' + Std.string(result)); #end
+    return result;
   }
 
   public static inline function getUniformLocation(gl:GlContext, program:GlProgram, name:String):GlUniformLocation {
-    return gl.getUniformLocation(program, name);
+    final result = gl.getUniformLocation(program, name);
+    #if flight_gl_trace glTrace('getUniformLocation(' + name + ') -> ' + (result == null ? 'NULL' : Std.string(result))); #end
+    return result;
   }
 
   public static inline function linkProgram(gl:GlContext, program:GlProgram):Void {
@@ -481,6 +503,10 @@ class WebGl2Backend {
 
   public static inline function pixelStorei(gl:GlContext, pname:Float, param:EitherType<Float, Bool>):Void {
     #if (lime && !js)
+    // WebGL-only pack parameters (UNPACK_FLIP_Y_WEBGL, UNPACK_PREMULTIPLY_ALPHA_WEBGL,
+    // UNPACK_COLORSPACE_CONVERSION_WEBGL) do not exist in native GL and would
+    // poison getError; Flight performs those conversions CPU-side on this path.
+    if (Std.int(pname) >= 0x9240 && Std.int(pname) <= 0x9243) return;
     final raw:Dynamic = param;
     gl.pixelStorei(Std.int(pname), Std.isOfType(raw, Bool) ? ((raw : Bool) ? 1 : 0) : Std.int(raw));
     #elseif js
@@ -516,12 +542,17 @@ class WebGl2Backend {
   }
 
   public static inline function scissor(gl:GlContext, x:Float, y:Float, width:Float, height:Float):Void {
+    #if flight_gl_trace glTrace('scissor(' + Std.int(x) + ',' + Std.int(y) + ',' + Std.int(width) + 'x' + Std.int(height) + ')'); #end
     gl.scissor(Std.int(x), Std.int(y), Std.int(width), Std.int(height));
   }
 
   public static inline function shaderSource(gl:GlContext, shader:GlShader, source:String):Void {
     #if (lime && !js)
-    gl.shaderSource(shader, adaptShaderSource(gl, source));
+    final adapted = adaptShaderSource(gl, source);
+    #if flight_gl_trace
+    glTrace('shaderSource: context.type=' + Std.string(Reflect.field(gl, 'type')) + ', head=' + StringTools.replace(adapted.substr(0, 40), '\n', '\\n'));
+    #end
+    gl.shaderSource(shader, adapted);
     #else
     gl.shaderSource(shader, source);
     #end
@@ -546,8 +577,17 @@ class WebGl2Backend {
   public static inline function texImage2D(gl:GlContext, target:Float, level:Float, internalformat:Float, width:Float,
       height:Float, border:Float, format:Float, type:Float, pixels:Null<GlBufferSource>):Void {
     #if (lime && !js)
+    #if flight_gl_trace
+    glTrace('texImage2D(target=' + Std.int(target) + ', level=' + Std.int(level) + ', internal=' + Std.int(internalformat)
+      + ', ' + Std.int(width) + 'x' + Std.int(height) + ', fmt=' + Std.int(format) + ', type=' + Std.int(type)
+      + ', pixels=' + (pixels == null ? 'null' : 'view') + ')');
+    #end
     gl.texImage2D(Std.int(target), Std.int(level), Std.int(internalformat), Std.int(width), Std.int(height),
       Std.int(border), Std.int(format), Std.int(type), pixels == null ? null : nativeView(pixels));
+    #if flight_gl_trace
+    final uploadError:Int = gl.getError();
+    if (uploadError != 0) glTrace('texImage2D getError -> 0x' + StringTools.hex(uploadError, 4));
+    #end
     #elseif js
     js.Syntax.code('{0}.texImage2D({1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9})', gl, Std.int(target), Std.int(level),
       Std.int(internalformat), Std.int(width), Std.int(height), Std.int(border), Std.int(format), Std.int(type), pixels);
@@ -592,6 +632,7 @@ class WebGl2Backend {
   }
 
   public static inline function texParameteri(gl:GlContext, target:Float, pname:Float, param:Float):Void {
+    #if flight_gl_trace glTrace('texParameteri(' + Std.int(target) + ', ' + Std.int(pname) + ', ' + Std.int(param) + ')'); #end
     gl.texParameteri(Std.int(target), Std.int(pname), Std.int(param));
   }
 
@@ -688,6 +729,7 @@ class WebGl2Backend {
   }
 
   public static inline function useProgram(gl:GlContext, program:Null<GlProgram>):Void {
+    #if flight_gl_trace glTrace('useProgram(' + (program == null ? 'null' : 'program') + ')'); #end
     gl.useProgram(program);
   }
 
@@ -705,8 +747,46 @@ class WebGl2Backend {
   }
 
   public static inline function viewport(gl:GlContext, x:Float, y:Float, width:Float, height:Float):Void {
+    #if flight_gl_trace
+    lastViewportX = Std.int(x); lastViewportY = Std.int(y); lastViewportW = Std.int(width); lastViewportH = Std.int(height);
+    glTrace('viewport(' + Std.int(x) + ',' + Std.int(y) + ',' + Std.int(width) + 'x' + Std.int(height) + ')');
+    #end
     gl.viewport(Std.int(x), Std.int(y), Std.int(width), Std.int(height));
   }
+
+  #if flight_gl_trace
+  static var traceLines = 0;
+  static var drawProbes = 0;
+  static var lastViewportX = 0;
+  static var lastViewportY = 0;
+  static var lastViewportW = 0;
+  static var lastViewportH = 0;
+
+  /** Rate-limited GL call log for the `-D flight_gl_trace` diagnostic build. */
+  static function glTrace(message:String):Void {
+    if (traceLines >= 700) return;
+    traceLines++;
+    haxe.Log.trace('[gl] ' + message, null);
+  }
+
+  /** After-draw probe: surfaces GL errors and samples the center pixel of the
+   * last viewport so framebuffer contents are observable without a display. */
+  static function debugAfterDraw(gl:GlContext):Void {
+    final error:Int = gl.getError();
+    if (error != 0) glTrace('getError -> 0x' + StringTools.hex(error, 4));
+    if (drawProbes < 40) {
+      drawProbes++;
+      #if (lime && !js)
+      final pixels = new lime.utils.UInt8Array(4);
+      gl.readPixels(lastViewportX + (lastViewportW >> 1), lastViewportY + (lastViewportH >> 1), 1, 1, RGBA, UNSIGNED_BYTE,
+        pixels);
+      final probeError:Int = gl.getError();
+      glTrace('probe center -> ' + pixels[0] + ',' + pixels[1] + ',' + pixels[2] + ',' + pixels[3]
+        + (probeError != 0 ? ' (probe getError 0x' + StringTools.hex(probeError, 4) + ')' : ''));
+      #end
+    }
+  }
+  #end
 
   #if (lime && !js)
   /**

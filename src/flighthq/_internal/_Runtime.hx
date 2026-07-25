@@ -31,22 +31,41 @@ class _Runtime {
   }
 
   public static inline function apply(callable:Dynamic, arguments:Array<Dynamic>):Dynamic {
-    return Reflect.callMethod(null, callable, arguments);
+    return Reflect.callMethod(null, callable, adjustArguments(callable, arguments));
   }
 
   public static inline function callValue(callable:Dynamic, arguments:Array<Dynamic>):Dynamic {
     #if !js
     if (callable == null) return null;
     #end
-    return Reflect.callMethod(null, callable, arguments);
+    return Reflect.callMethod(null, callable, adjustArguments(callable, arguments));
+  }
+
+  /**
+   * JavaScript calls tolerate arity mismatches: extra arguments are dropped and
+   * missing ones become undefined. Neko instead over-applies (calling the
+   * result) or rejects the call, so dynamic dispatch matches the callee's real
+   * arity here. Other targets keep the arguments untouched.
+   */
+  static function adjustArguments(callable:Dynamic, arguments:Array<Dynamic>):Array<Dynamic> {
+    #if neko
+    final arity:Int = untyped __dollar__nargs(callable);
+    if (arity >= 0 && arguments.length > arity) return arguments.slice(0, arity);
+    if (arity >= 0 && arguments.length < arity) {
+      final padded = arguments.copy();
+      while (padded.length < arity) padded.push(null);
+      return padded;
+    }
+    #end
+    return arguments;
   }
 
   public static inline function callProperty(owner:Dynamic, name:String, arguments:Array<Dynamic>):Dynamic {
     #if !js
     if (owner == null) return null;
-    final callable = Reflect.field(owner, name);
+    final callable = resolveMethod(owner, name);
     if (callable == null) return null;
-    return Reflect.callMethod(owner, callable, arguments);
+    return Reflect.callMethod(owner, callable, adjustArguments(callable, arguments));
     #else
     return Reflect.callMethod(owner, Reflect.field(owner, name), arguments);
     #end
@@ -54,12 +73,22 @@ class _Runtime {
 
   public static inline function callOptionalProperty(owner:Dynamic, name:String, arguments:Array<Dynamic>):Dynamic {
     if (owner == null) return UNDEFINED;
+    final callable = resolveMethod(owner, name);
+    return callable == null ? UNDEFINED : Reflect.callMethod(owner, callable, adjustArguments(callable, arguments));
+  }
+
+  static function resolveMethod(owner:Dynamic, name:String):Dynamic {
     final callable = Reflect.field(owner, name);
-    return callable == null ? UNDEFINED : Reflect.callMethod(owner, callable, arguments);
+    #if !js
+    // Maintained collection classes spell the reserved `delete` member with a
+    // trailing underscore; map the JavaScript name onto it.
+    if (callable == null && name == 'delete') return Reflect.field(owner, 'delete_');
+    #end
+    return callable;
   }
 
   public static inline function callOptionalValue(callable:Dynamic, arguments:Array<Dynamic>):Dynamic {
-    return callable == null ? UNDEFINED : Reflect.callMethod(null, callable, arguments);
+    return callable == null ? UNDEFINED : Reflect.callMethod(null, callable, adjustArguments(callable, arguments));
   }
 
   public static function concatArrays<T>(values:Dynamic):Array<T> {
@@ -76,8 +105,16 @@ class _Runtime {
     #if js
     return js.Syntax.code('globalThis.Reflect.construct({0}, {1})', constructor, arguments);
     #else
-    if (constructor == null) return {};
-    return Type.createInstance(cast constructor, arguments);
+    // A null constructor means a JavaScript global with no portable mapping in
+    // `globalValue`. Constructing a placeholder here would silently no-op every
+    // later method call on it, so fail loudly at the construction site instead.
+    if (constructor == null) throw 'Runtime: cannot construct a JavaScript global that has no portable implementation on this target';
+    // Abstract-typed globals map to factory functions instead of classes.
+    if (Reflect.isFunction(constructor)) return Reflect.callMethod(null, constructor, arguments);
+    // `Type.createInstance` passes arguments positionally without filling
+    // optional parameters on every target (neko rejects the arity mismatch),
+    // and each portable global takes one optional source argument.
+    return Type.createInstance(cast constructor, arguments.length == 0 ? [null] : arguments);
     #end
   }
 
@@ -179,9 +216,31 @@ class _Runtime {
     #if js
     return js.Syntax.code('globalThis[{0}]', name);
     #else
-    return null;
+    // Portable JavaScript built-ins map to maintained classes; anything else
+    // stays null so `typeof X` feature checks report the global as absent.
+    return switch (name) {
+      case 'Map': _Map;
+      case 'Set': _Set;
+      case 'WeakMap': _WeakMap;
+      case 'WeakSet': _WeakSet;
+      case 'Uint8ClampedArray': _UInt8ClampedArray.construct;
+      // Numeric-array globals outside the wrapped typed-array kinds: Haxe
+      // Float is a double, so a plain prefilled array is exact for Float64Array
+      // and adequate for the integer variants until the generator routes them
+      // to dedicated wrappers (overflow wrapping on write is not emulated).
+      case 'Float64Array', 'Uint32Array', 'Int32Array', 'Int8Array': createNumericArray;
+      default: null;
+    };
     #end
   }
+
+  #if !js
+  static function createNumericArray(?source:Dynamic):Dynamic {
+    if (source == null) return [];
+    if (Std.isOfType(source, Int) || Std.isOfType(source, Float)) return [for (_ in 0...Std.int(source)) 0.0];
+    return [for (value in iterable(source)) (value : Float)];
+  }
+  #end
 
   public static function getIndex(source:Dynamic, key:Dynamic):Dynamic {
     #if js
@@ -191,6 +250,7 @@ class _Runtime {
     if (Std.isOfType(source, Array)) return (cast source : Array<Dynamic>)[Std.int(key)];
     #if (lime && !js)
     if (Std.isOfType(source, _LimeTypedArray)) return (cast source : _LimeTypedArray).get(Std.int(key));
+    if (Std.isOfType(source, lime.utils.ArrayBufferView)) return _LimeTypedArray.readRaw(cast source, Std.int(key));
     #end
     return Reflect.field(source, Std.string(key));
     #end
@@ -399,7 +459,7 @@ class _Runtime {
     #if js
     return js.Syntax.code('typeof globalThis[{0}]', name);
     #else
-    return 'undefined';
+    return globalValue(name) == null ? 'undefined' : 'function';
     #end
   }
 
@@ -494,6 +554,8 @@ class _Runtime {
     #if (lime && !js)
     } else if (Std.isOfType(target, _LimeTypedArray)) {
       (cast target : _LimeTypedArray).setValue(Std.int(key), value);
+    } else if (Std.isOfType(target, lime.utils.ArrayBufferView)) {
+      _LimeTypedArray.writeRaw(cast target, Std.int(key), value);
     #end
     } else {
       Reflect.setField(target, Std.string(key), value);
@@ -859,6 +921,24 @@ class _Runtime {
   public static inline function unsignedShiftRight(value:Int, bits:Int):Float {
     final shifted = value >>> bits;
     return bits == 0 && shifted < 0 ? shifted + 4294967296.0 : shifted;
+  }
+
+  /**
+   * JavaScript `ToInt32`: truncate toward zero, wrap modulo 2^32, reinterpret
+   * as signed. `Std.int` is not a substitute — on neko it saturates
+   * out-of-range floats to -2147483648, collapsing 32-bit color packing.
+   * Bitwise operand coercion in generated code must use this instead.
+   */
+  public static function toInt32(value:Float):Int {
+    #if js
+    return js.Syntax.code('({0} | 0)', value);
+    #else
+    if (Math.isNaN(value) || !Math.isFinite(value)) return 0;
+    var truncated = value < 0 ? Math.fceil(value) : Math.ffloor(value);
+    var wrapped = truncated % 4294967296.0;
+    if (wrapped < 0) wrapped += 4294967296.0;
+    return wrapped >= 2147483648.0 ? Std.int(wrapped - 4294967296.0) : Std.int(wrapped);
+    #end
   }
 
   public static function warn(values:Array<Dynamic>):Void {

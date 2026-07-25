@@ -1,20 +1,29 @@
 // Maintained runtime support for generated Flight Haxe.
 package flighthq._internal;
 
+// Reached only reflectively (constructed through `_Runtime.globalValue`), so
+// full dead-code elimination must not strip the class or its members.
+@:keep
 class _Map {
   private final items:Array<{key:Dynamic, value:Dynamic}> = [];
-  public var size(get, never):Int;
 
-  public function new(source:Dynamic) {
+  // Physical field so generated `map.size` reads resolve reflectively.
+  public var size(default, null):Int = 0;
+
+  public function new(?source:Dynamic) {
     if (source != null) for (pair in (cast source : Array<Dynamic>)) set(pair[0], pair[1]);
   }
 
-  public function clear():Void items.resize(0);
+  public function clear():Void {
+    items.resize(0);
+    size = 0;
+  }
 
   public function delete_(key:Dynamic):Bool {
     final index = indexOf(key);
     if (index < 0) return false;
     items.splice(index, 1);
+    size = items.length;
     return true;
   }
 
@@ -28,8 +37,6 @@ class _Map {
     final index = indexOf(key);
     return index < 0 ? null : items[index].value;
   }
-
-  private inline function get_size():Int return items.length;
 
   public inline function has(key:Dynamic):Bool return indexOf(key) >= 0;
 
@@ -45,6 +52,7 @@ class _Map {
   public function set(key:Dynamic, value:Dynamic):_Map {
     final index = indexOf(key);
     if (index < 0) items.push({key: key, value: value}); else items[index].value = value;
+    size = items.length;
     return this;
   }
 

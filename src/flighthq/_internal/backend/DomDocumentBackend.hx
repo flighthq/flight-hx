@@ -16,6 +16,15 @@ import flighthq._internal._Runtime;
  */
 class DomDocumentBackend {
   public static function call(obj:Dynamic, name:String, arguments:Array<Dynamic>):Dynamic {
+    #if (lime && !js)
+    // Flight's GL renderers eagerly create scratch canvases for raster
+    // fallbacks. There is no DOM document on native Lime (obj is null here),
+    // but creation must succeed for the GPU mesh path to run, so hand out the
+    // native stand-in; its 2D context fails loudly on first actual use.
+    if (name == 'createElement' && arguments.length > 0 && Std.string(arguments[0]) == 'canvas') {
+      return new NativeScratchCanvas();
+    }
+    #end
     if (obj == null) return null;
     #if (js && html5)
     switch (name) {
