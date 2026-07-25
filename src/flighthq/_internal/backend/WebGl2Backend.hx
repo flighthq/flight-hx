@@ -520,7 +520,11 @@ class WebGl2Backend {
   }
 
   public static inline function shaderSource(gl:GlContext, shader:GlShader, source:String):Void {
+    #if (lime && !js)
+    gl.shaderSource(shader, adaptShaderSource(gl, source));
+    #else
     gl.shaderSource(shader, source);
+    #end
   }
 
   public static inline function stencilFunc(gl:GlContext, func:Float, ref:Float, mask:Float):Void {
@@ -705,13 +709,23 @@ class WebGl2Backend {
   }
 
   #if (lime && !js)
+  /**
+   * Flight shaders target WebGL2's GLSL ES 3.00 dialect. Lime's compatibility
+   * context on desktop is OpenGL, where the equivalent language is GLSL 3.30
+   * core and ES precision declarations are invalid.
+   */
+  public static function adaptShaderSource(context:Dynamic, source:String):String {
+    if (Reflect.field(context, 'type') != 'opengl') return source;
+    final version = ~/^\s*#version\s+300\s+es[^\n]*\n?/;
+    var result = version.match(source)
+      ? version.replace(source, '#version 330 core\n')
+      : '#version 330 core\n' + source;
+    result = ~/^\s*precision\s+\w+\s+\w+\s*;\s*$/gm.replace(result, '');
+    return ~/\b(lowp|mediump|highp)\s+/g.replace(result, '');
+  }
+
   static function nativeFloats(values:GlFloatList):lime.utils.ArrayBufferView {
-    final raw:Dynamic = values;
-    if (Std.isOfType(raw, _LimeTypedArray)) return cast (raw : _LimeTypedArray).nativeView;
-    final array:Array<Dynamic> = cast raw;
-    final view = new lime.utils.Float32Array(array.length);
-    for (index in 0...array.length) view[index] = array[index];
-    return cast view;
+    return nativeView(cast values);
   }
 
   static function nativeInts(values:GlIntList):Array<Int> {
@@ -722,7 +736,8 @@ class WebGl2Backend {
   static function nativeView(source:GlBufferSource):lime.utils.ArrayBufferView {
     final raw:Dynamic = source;
     if (Std.isOfType(raw, _LimeTypedArray)) return cast (raw : _LimeTypedArray).nativeView;
-    throw 'WebGl2Backend: expected a Flight typed array for a native GL buffer upload';
+    if (Std.isOfType(raw, Array)) return cast new lime.utils.Float32Array(null, null, cast raw);
+    return cast raw;
   }
   #end
 

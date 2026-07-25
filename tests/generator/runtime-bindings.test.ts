@@ -37,7 +37,9 @@ describe('maintained runtime bindings', () => {
       path.join(workspace, 'src', 'flighthq', '_internal', 'backend', 'WebGl2Backend.hx'),
       'utf8',
     );
-    expect(gl).toContain('inputArguments.map(_LimeTypedArray.unwrap)');
+    expect(gl).toContain('typedef GlContext = lime.graphics.WebGL2RenderContext;');
+    expect(gl).toContain('static function nativeView(source:GlBufferSource):lime.utils.ArrayBufferView');
+    expect(gl).toContain('(raw : _LimeTypedArray).nativeView');
 
     execFileSync(
       process.execPath,
