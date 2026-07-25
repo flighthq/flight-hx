@@ -52,17 +52,17 @@ class GlColorLutPass {
     }
     texture = _Runtime.field(cache, 'texture');
     if (_Runtime.truthy(_Runtime.strictEquals(texture, null))) {
-      (texture = cast (flighthq._internal.backend.WebGl2Backend.call(gl, 'createTexture', cast ([] : Array<Dynamic>)) : Dynamic));
+      (texture = cast (flighthq._internal.backend.WebGl2Backend.createTexture(gl) : Dynamic));
       _Runtime.setField(cache, 'texture', texture);
     }
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_3D'), texture] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'texImage3D', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_3D'), 0.0, flighthq._internal.backend.WebGl2Backend.field(gl, 'RGBA8'), n, n, n, 0.0, flighthq._internal.backend.WebGl2Backend.field(gl, 'RGBA'), flighthq._internal.backend.WebGl2Backend.field(gl, 'UNSIGNED_BYTE'), data] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'texParameteri', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_3D'), flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_MIN_FILTER'), flighthq._internal.backend.WebGl2Backend.field(gl, 'LINEAR')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'texParameteri', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_3D'), flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_MAG_FILTER'), flighthq._internal.backend.WebGl2Backend.field(gl, 'LINEAR')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'texParameteri', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_3D'), flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_WRAP_S'), flighthq._internal.backend.WebGl2Backend.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'texParameteri', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_3D'), flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_WRAP_T'), flighthq._internal.backend.WebGl2Backend.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'texParameteri', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_3D'), flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_WRAP_R'), flighthq._internal.backend.WebGl2Backend.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_3D'), null] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_3D, texture);
+    flighthq._internal.backend.WebGl2Backend.texImage3D(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_3D, 0.0, flighthq._internal.backend.WebGl2Backend.RGBA8, n, n, n, 0.0, flighthq._internal.backend.WebGl2Backend.RGBA, flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE, data);
+    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_3D, flighthq._internal.backend.WebGl2Backend.TEXTURE_MIN_FILTER, flighthq._internal.backend.WebGl2Backend.LINEAR);
+    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_3D, flighthq._internal.backend.WebGl2Backend.TEXTURE_MAG_FILTER, flighthq._internal.backend.WebGl2Backend.LINEAR);
+    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_3D, flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_S, flighthq._internal.backend.WebGl2Backend.CLAMP_TO_EDGE);
+    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_3D, flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_T, flighthq._internal.backend.WebGl2Backend.CLAMP_TO_EDGE);
+    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_3D, flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_R, flighthq._internal.backend.WebGl2Backend.CLAMP_TO_EDGE);
+    flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_3D, null);
     _Runtime.setField(cache, 'lut', lut);
     return cast texture;
     return cast null;

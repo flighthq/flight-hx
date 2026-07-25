@@ -63,7 +63,7 @@ class GlTextLabel {
     image = _Runtime.field(__destructure0, 'image');
     entry = _Runtime.callProperty(_Runtime.field(runtime, 'imageResourceTextureCache'), 'get', cast ([image] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      flighthq._internal.backend.WebGl2Backend.call(_Runtime.field(state, 'gl'), 'deleteTexture', cast ([_Runtime.field(entry, 'texture')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.deleteTexture(_Runtime.field(state, 'gl'), _Runtime.field(entry, 'texture'));
       _Runtime.callProperty(_Runtime.field(runtime, 'imageResourceTextureCache'), 'delete', cast ([image] : Array<Dynamic>));
     }
   }

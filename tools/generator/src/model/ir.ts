@@ -37,7 +37,13 @@ export type IrExpression =
   | { kind: 'call'; arguments: IrExpression[]; callee: IrExpression; optional?: boolean; typeArguments: IrType[] }
   | { kind: 'cast'; expression: IrExpression; type: IrType }
   | { kind: 'conditional'; condition: IrExpression; whenFalse: IrExpression; whenTrue: IrExpression }
-  | { kind: 'element'; object: IrExpression; index: IrExpression; optional?: boolean | undefined }
+  | {
+      binding?: 'WebGl2Backend' | undefined;
+      kind: 'element';
+      object: IrExpression;
+      index: IrExpression;
+      optional?: boolean | undefined;
+    }
   | {
       async?: boolean | undefined;
       kind: 'function';

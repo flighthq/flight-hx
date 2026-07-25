@@ -51,7 +51,7 @@ class GlRichText {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     __destructure0 = (cast (cast data : Dynamic) : GlRichTextData__glRichText);
     texture = _Runtime.field(__destructure0, 'texture');
-    if (_Runtime.truthy(!_Runtime.strictEquals(texture, null))) { flighthq._internal.backend.WebGl2Backend.call(_Runtime.field(state, 'gl'), 'deleteTexture', cast ([texture] : Array<Dynamic>)); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(texture, null))) { flighthq._internal.backend.WebGl2Backend.deleteTexture(_Runtime.field(state, 'gl'), texture); }
   }
 
   public static function drawGlRichText(state:GlRenderState, renderProxy:RenderProxy2D):Void {

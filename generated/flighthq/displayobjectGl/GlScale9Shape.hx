@@ -50,7 +50,7 @@ class GlScale9Shape {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     __destructure0 = (cast (cast data : Dynamic) : GlScale9ShapeData__glScale9Shape);
     texture = _Runtime.field(__destructure0, 'texture');
-    flighthq._internal.backend.WebGl2Backend.call(_Runtime.field(state, 'gl'), 'deleteTexture', cast ([texture] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.deleteTexture(_Runtime.field(state, 'gl'), texture);
   }
 
   public static function drawGlScale9Shape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
@@ -109,7 +109,7 @@ class GlScale9Shape {
     _Runtime.callValue(useGlProgram, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'currentTexture'), _Runtime.field(shapeData, 'texture')))) {
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'bindTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'), _Runtime.field(shapeData, 'texture')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, _Runtime.field(shapeData, 'texture'));
       _Runtime.setField(runtime, 'currentTexture', _Runtime.field(shapeData, 'texture'));
     }
     __destructure2 = runtime;

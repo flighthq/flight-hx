@@ -13,7 +13,7 @@ import flighthq.types.TextureContainerFormat;
 
 class GlCompressedTexture {
   public static function detectGlCompressedTextureSupport(gl:Dynamic):GlCompressedTextureSupport {
-    return cast { astc: !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.call(gl, 'getExtension', cast (['WEBGL_compressed_texture_astc'] : Array<Dynamic>)), null), bptc: !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.call(gl, 'getExtension', cast (['EXT_texture_compression_bptc'] : Array<Dynamic>)), null), etc: !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.call(gl, 'getExtension', cast (['WEBGL_compressed_texture_etc'] : Array<Dynamic>)), null), pvrtc: !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.call(gl, 'getExtension', cast (['WEBGL_compressed_texture_pvrtc'] : Array<Dynamic>)), null), rgtc: !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.call(gl, 'getExtension', cast (['EXT_texture_compression_rgtc'] : Array<Dynamic>)), null), s3tc: _Runtime.andValue(!_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.call(gl, 'getExtension', cast (['WEBGL_compressed_texture_s3tc'] : Array<Dynamic>)), null), function():Dynamic return cast !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.call(gl, 'getExtension', cast (['WEBGL_compressed_texture_s3tc_srgb'] : Array<Dynamic>)), null)) };
+    return cast { astc: !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'WEBGL_compressed_texture_astc'), null), bptc: !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'EXT_texture_compression_bptc'), null), etc: !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'WEBGL_compressed_texture_etc'), null), pvrtc: !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'WEBGL_compressed_texture_pvrtc'), null), rgtc: !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'EXT_texture_compression_rgtc'), null), s3tc: _Runtime.andValue(!_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'WEBGL_compressed_texture_s3tc'), null), function():Dynamic return cast !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'WEBGL_compressed_texture_s3tc_srgb'), null)) };
     return cast null;
   }
 
@@ -26,13 +26,13 @@ class GlCompressedTexture {
     var astc:Dynamic = cast _Runtime.UNDEFINED;
     var pvrtc:Dynamic = cast _Runtime.UNDEFINED;
     var enumFromExt:Dynamic = cast _Runtime.UNDEFINED;
-    s3tc = (cast flighthq._internal.backend.WebGl2Backend.call(gl, 'getExtension', cast (['WEBGL_compressed_texture_s3tc'] : Array<Dynamic>)) : Null<Dynamic>);
-    s3tcSrgb = (cast flighthq._internal.backend.WebGl2Backend.call(gl, 'getExtension', cast (['WEBGL_compressed_texture_s3tc_srgb'] : Array<Dynamic>)) : Null<Dynamic>);
-    rgtc = (cast flighthq._internal.backend.WebGl2Backend.call(gl, 'getExtension', cast (['EXT_texture_compression_rgtc'] : Array<Dynamic>)) : Null<Dynamic>);
-    bptc = (cast flighthq._internal.backend.WebGl2Backend.call(gl, 'getExtension', cast (['EXT_texture_compression_bptc'] : Array<Dynamic>)) : Null<Dynamic>);
-    etc = (cast flighthq._internal.backend.WebGl2Backend.call(gl, 'getExtension', cast (['WEBGL_compressed_texture_etc'] : Array<Dynamic>)) : Null<Dynamic>);
-    astc = (cast flighthq._internal.backend.WebGl2Backend.call(gl, 'getExtension', cast (['WEBGL_compressed_texture_astc'] : Array<Dynamic>)) : Null<Dynamic>);
-    pvrtc = (cast flighthq._internal.backend.WebGl2Backend.call(gl, 'getExtension', cast (['WEBGL_compressed_texture_pvrtc'] : Array<Dynamic>)) : Null<Dynamic>);
+    s3tc = (cast flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'WEBGL_compressed_texture_s3tc') : Null<Dynamic>);
+    s3tcSrgb = (cast flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'WEBGL_compressed_texture_s3tc_srgb') : Null<Dynamic>);
+    rgtc = (cast flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'EXT_texture_compression_rgtc') : Null<Dynamic>);
+    bptc = (cast flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'EXT_texture_compression_bptc') : Null<Dynamic>);
+    etc = (cast flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'WEBGL_compressed_texture_etc') : Null<Dynamic>);
+    astc = (cast flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'WEBGL_compressed_texture_astc') : Null<Dynamic>);
+    pvrtc = (cast flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'WEBGL_compressed_texture_pvrtc') : Null<Dynamic>);
     enumFromExt = function(ext:Null<Dynamic>, key:String) return _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.optionalIndex(ext, key)), 'number'), function():Dynamic return cast _Runtime.getIndex(ext, key), function():Dynamic return cast -1.0);
     {
       var __switchValue = format;
@@ -215,7 +215,7 @@ class GlCompressedTexture {
     mipLevels = _Runtime.field(container, 'mipLevels');
     if (_Runtime.truthy(!_Runtime.strictEquals(nativeFormat, -1.0))) {
       if (_Runtime.truthy(_Runtime.compare(layers, 1.0, '>'))) {
-        flighthq._internal.backend.WebGl2Backend.call(gl, 'texStorage3D', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D_ARRAY'), mipLevels, nativeFormat, _Runtime.field(container, 'width'), _Runtime.field(container, 'height'), layers] : Array<Dynamic>));
+        flighthq._internal.backend.WebGl2Backend.texStorage3D(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D_ARRAY, mipLevels, nativeFormat, _Runtime.field(container, 'width'), _Runtime.field(container, 'height'), layers);
       }
       {
         var index:Dynamic = 0.0;
@@ -227,10 +227,10 @@ class GlCompressedTexture {
           var face:Dynamic = (faceLayer % faces);
           var layer:Dynamic = ((faceLayer - face) / faces);
           if (_Runtime.truthy(_Runtime.compare(layers, 1.0, '>'))) {
-            flighthq._internal.backend.WebGl2Backend.call(gl, 'compressedTexSubImage3D', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D_ARRAY'), mip, 0.0, 0.0, layer, _Runtime.field(entry, 'width'), _Runtime.field(entry, 'height'), 1.0, nativeFormat, view] : Array<Dynamic>));
+            flighthq._internal.backend.WebGl2Backend.compressedTexSubImage3D(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D_ARRAY, mip, 0.0, 0.0, layer, _Runtime.field(entry, 'width'), _Runtime.field(entry, 'height'), 1.0, nativeFormat, view);
           } else {
-            var target:Dynamic = _Runtime.select(_Runtime.strictEquals(faces, 6.0), function():Dynamic return cast (flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_CUBE_MAP_POSITIVE_X') + face), function():Dynamic return cast flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'));
-            flighthq._internal.backend.WebGl2Backend.call(gl, 'compressedTexImage2D', cast ([target, mip, nativeFormat, _Runtime.field(entry, 'width'), _Runtime.field(entry, 'height'), 0.0, view] : Array<Dynamic>));
+            var target:Dynamic = _Runtime.select(_Runtime.strictEquals(faces, 6.0), function():Dynamic return cast (flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP_POSITIVE_X + face), function():Dynamic return cast flighthq._internal.backend.WebGl2Backend.TEXTURE_2D);
+            flighthq._internal.backend.WebGl2Backend.compressedTexImage2D(gl, target, mip, nativeFormat, _Runtime.field(entry, 'width'), _Runtime.field(entry, 'height'), 0.0, view);
           }
           (index = cast ((index + 1.0) : Dynamic));
         }
@@ -245,7 +245,7 @@ class GlCompressedTexture {
         var view:Dynamic = new flighthq._internal._UInt8Array(_Runtime.field(payload, 'buffer'), (_Runtime.field(payload, 'byteOffset') + _Runtime.field(entry, 'byteOffset')), _Runtime.field(entry, 'byteLength'));
         var rgba:Dynamic = _Runtime.callValue(decode, cast ([_Runtime.field(container, 'format'), _Runtime.field(entry, 'width'), _Runtime.field(entry, 'height'), view] : Array<Dynamic>));
         if (_Runtime.truthy(_Runtime.strictEquals(rgba, null))) { return cast false; }
-        flighthq._internal.backend.WebGl2Backend.call(gl, 'texImage2D', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'), mip, flighthq._internal.backend.WebGl2Backend.field(gl, 'RGBA'), _Runtime.field(entry, 'width'), _Runtime.field(entry, 'height'), 0.0, flighthq._internal.backend.WebGl2Backend.field(gl, 'RGBA'), flighthq._internal.backend.WebGl2Backend.field(gl, 'UNSIGNED_BYTE'), rgba] : Array<Dynamic>));
+        flighthq._internal.backend.WebGl2Backend.texImage2D(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, mip, flighthq._internal.backend.WebGl2Backend.RGBA, _Runtime.field(entry, 'width'), _Runtime.field(entry, 'height'), 0.0, flighthq._internal.backend.WebGl2Backend.RGBA, flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE, rgba);
         (mip = cast ((mip + 1.0) : Dynamic));
       }
     }

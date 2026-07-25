@@ -31,25 +31,25 @@ class GlCustomShaderEffect {
         if (_Runtime.truthy(_Runtime.strictEquals(location, null))) { continue; }
         var value:Dynamic = _Runtime.getIndex(uniforms, name);
         if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(value), 'number'))) {
-          flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([location, value] : Array<Dynamic>));
+          flighthq._internal.backend.WebGl2Backend.uniform1f(gl, location, value);
           continue;
         }
         {
           var __switchValue = _Runtime.field(value, 'length');
           if (__switchValue == 1.0) {
-            flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([location, _Runtime.getIndex(value, 0.0)] : Array<Dynamic>));
+            flighthq._internal.backend.WebGl2Backend.uniform1f(gl, location, _Runtime.getIndex(value, 0.0));
           }
           else if (__switchValue == 2.0) {
-            flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform2fv', cast ([location, value] : Array<Dynamic>));
+            flighthq._internal.backend.WebGl2Backend.uniform2fv(gl, location, value);
           }
           else if (__switchValue == 3.0) {
-            flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform3fv', cast ([location, value] : Array<Dynamic>));
+            flighthq._internal.backend.WebGl2Backend.uniform3fv(gl, location, value);
           }
           else if (__switchValue == 4.0) {
-            flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform4fv', cast ([location, value] : Array<Dynamic>));
+            flighthq._internal.backend.WebGl2Backend.uniform4fv(gl, location, value);
           }
           else  {
-            flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1fv', cast ([location, value] : Array<Dynamic>));
+            flighthq._internal.backend.WebGl2Backend.uniform1fv(gl, location, value);
           }
         }
       }

@@ -46,58 +46,58 @@ class GlLitProgram {
     gl = _Runtime.field(state, 'gl');
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.callProperty(GlLitProgram._uploadedLightVersion__glLitProgram, 'get', cast ([program] : Array<Dynamic>)), _Runtime.field(lights, 'version')))) {
       var data:Dynamic = _Runtime.field(lights, 'data');
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform4f', cast ([_Runtime.field(program, 'locDirectional'), _Runtime.getIndex(data, 0.0), _Runtime.getIndex(data, 1.0), _Runtime.getIndex(data, 2.0), 0.0] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform4f', cast ([_Runtime.field(program, 'locDirectionalRadiance'), _Runtime.getIndex(data, 4.0), _Runtime.getIndex(data, 5.0), _Runtime.getIndex(data, 6.0), 0.0] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform3f', cast ([_Runtime.field(program, 'locAmbientRadiance'), _Runtime.getIndex(data, 8.0), _Runtime.getIndex(data, 9.0), _Runtime.getIndex(data, 10.0)] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locDirectionalCount'), _Runtime.field(lights, 'directionalCount')] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locAmbientCount'), _Runtime.field(lights, 'ambientCount')] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform4fv', cast ([_Runtime.field(program, 'locPointLights'), data.subarray(Std.int(SCENE_LIGHT_POINT_OFFSET), Std.int((SCENE_LIGHT_POINT_OFFSET + (SCENE_LIGHT_POINT_STRIDE * MAX_FORWARD_LIGHTS))))] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform4fv', cast ([_Runtime.field(program, 'locSpotLights'), data.subarray(Std.int(SCENE_LIGHT_SPOT_OFFSET), Std.int((SCENE_LIGHT_SPOT_OFFSET + (SCENE_LIGHT_SPOT_STRIDE * MAX_FORWARD_LIGHTS))))] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform4fv', cast ([_Runtime.field(program, 'locHemisphereLights'), data.subarray(Std.int(SCENE_LIGHT_HEMISPHERE_OFFSET), Std.int((SCENE_LIGHT_HEMISPHERE_OFFSET + (SCENE_LIGHT_HEMISPHERE_STRIDE * MAX_FORWARD_LIGHTS))))] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1i', cast ([_Runtime.field(program, 'locPointCount'), _Runtime.field(lights, 'pointCount')] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1i', cast ([_Runtime.field(program, 'locSpotCount'), _Runtime.field(lights, 'spotCount')] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1i', cast ([_Runtime.field(program, 'locHemisphereCount'), _Runtime.field(lights, 'hemisphereCount')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locDirectional'), _Runtime.getIndex(data, 0.0), _Runtime.getIndex(data, 1.0), _Runtime.getIndex(data, 2.0), 0.0);
+      flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locDirectionalRadiance'), _Runtime.getIndex(data, 4.0), _Runtime.getIndex(data, 5.0), _Runtime.getIndex(data, 6.0), 0.0);
+      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(program, 'locAmbientRadiance'), _Runtime.getIndex(data, 8.0), _Runtime.getIndex(data, 9.0), _Runtime.getIndex(data, 10.0));
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locDirectionalCount'), _Runtime.field(lights, 'directionalCount'));
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAmbientCount'), _Runtime.field(lights, 'ambientCount'));
+      flighthq._internal.backend.WebGl2Backend.uniform4fv(gl, _Runtime.field(program, 'locPointLights'), data.subarray(Std.int(SCENE_LIGHT_POINT_OFFSET), Std.int((SCENE_LIGHT_POINT_OFFSET + (SCENE_LIGHT_POINT_STRIDE * MAX_FORWARD_LIGHTS)))));
+      flighthq._internal.backend.WebGl2Backend.uniform4fv(gl, _Runtime.field(program, 'locSpotLights'), data.subarray(Std.int(SCENE_LIGHT_SPOT_OFFSET), Std.int((SCENE_LIGHT_SPOT_OFFSET + (SCENE_LIGHT_SPOT_STRIDE * MAX_FORWARD_LIGHTS)))));
+      flighthq._internal.backend.WebGl2Backend.uniform4fv(gl, _Runtime.field(program, 'locHemisphereLights'), data.subarray(Std.int(SCENE_LIGHT_HEMISPHERE_OFFSET), Std.int((SCENE_LIGHT_HEMISPHERE_OFFSET + (SCENE_LIGHT_HEMISPHERE_STRIDE * MAX_FORWARD_LIGHTS)))));
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locPointCount'), _Runtime.field(lights, 'pointCount'));
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locSpotCount'), _Runtime.field(lights, 'spotCount'));
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locHemisphereCount'), _Runtime.field(lights, 'hemisphereCount'));
       _Runtime.callProperty(GlLitProgram._uploadedLightVersion__glLitProgram, 'set', cast ([program, _Runtime.field(lights, 'version')] : Array<Dynamic>));
     }
     runtime = _Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>));
     shadow = _Runtime.field(runtime, 'shadow');
     if (_Runtime.truthy(!_Runtime.strictEquals(shadow, null))) {
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'activeTexture', cast ([(flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE0') + GlLitProgram.SHADOW_MAP_TEXTURE_UNIT__glLitProgram)] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'bindTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'), _Runtime.field(shadow, 'texture')] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1i', cast ([_Runtime.field(program, 'locShadowMap'), GlLitProgram.SHADOW_MAP_TEXTURE_UNIT__glLitProgram] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniformMatrix4fv', cast ([_Runtime.field(program, 'locShadowMatrix'), false, _Runtime.field(_Runtime.field(shadow, 'matrix'), 'm')] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locShadowEnabled'), 1.0] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + GlLitProgram.SHADOW_MAP_TEXTURE_UNIT__glLitProgram));
+      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, _Runtime.field(shadow, 'texture'));
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locShadowMap'), GlLitProgram.SHADOW_MAP_TEXTURE_UNIT__glLitProgram);
+      flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(program, 'locShadowMatrix'), false, _Runtime.field(_Runtime.field(shadow, 'matrix'), 'm'));
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locShadowEnabled'), 1.0);
     } else {
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locShadowEnabled'), 0.0] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locShadowEnabled'), 0.0);
     }
     ibl = _Runtime.field(runtime, 'ibl');
     if (_Runtime.truthy(!_Runtime.strictEquals(ibl, null))) {
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'activeTexture', cast ([(flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE0') + GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram)] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'bindTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_CUBE_MAP'), _Runtime.field(ibl, 'irradianceCube')] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1i', cast ([_Runtime.field(program, 'locIblIrradiance'), GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'activeTexture', cast ([(flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE0') + GlLitProgram.IBL_PREFILTERED_TEXTURE_UNIT__glLitProgram)] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'bindTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_CUBE_MAP'), _Runtime.field(ibl, 'prefilteredCube')] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1i', cast ([_Runtime.field(program, 'locIblPrefiltered'), GlLitProgram.IBL_PREFILTERED_TEXTURE_UNIT__glLitProgram] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'activeTexture', cast ([(flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE0') + GlLitProgram.IBL_BRDF_TEXTURE_UNIT__glLitProgram)] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'bindTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'), _Runtime.field(ibl, 'brdfLut')] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1i', cast ([_Runtime.field(program, 'locIblBrdf'), GlLitProgram.IBL_BRDF_TEXTURE_UNIT__glLitProgram] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locIblEnabled'), 1.0] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locIblIntensity'), _Runtime.field(ibl, 'intensity')] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locIblMaxMip'), (_Runtime.field(ibl, 'prefilteredMipCount') - 1.0)] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'activeTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE0')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram));
+      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, _Runtime.field(ibl, 'irradianceCube'));
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locIblIrradiance'), GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram);
+      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + GlLitProgram.IBL_PREFILTERED_TEXTURE_UNIT__glLitProgram));
+      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, _Runtime.field(ibl, 'prefilteredCube'));
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locIblPrefiltered'), GlLitProgram.IBL_PREFILTERED_TEXTURE_UNIT__glLitProgram);
+      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + GlLitProgram.IBL_BRDF_TEXTURE_UNIT__glLitProgram));
+      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, _Runtime.field(ibl, 'brdfLut'));
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locIblBrdf'), GlLitProgram.IBL_BRDF_TEXTURE_UNIT__glLitProgram);
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locIblEnabled'), 1.0);
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locIblIntensity'), _Runtime.field(ibl, 'intensity'));
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locIblMaxMip'), (_Runtime.field(ibl, 'prefilteredMipCount') - 1.0));
+      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);
     } else {
       var placeholders:Dynamic = _Runtime.callValue(GlLitProgram.ensureGlIblPlaceholders__glLitProgram, cast ([state] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'activeTexture', cast ([(flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE0') + GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram)] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'bindTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_CUBE_MAP'), _Runtime.field(placeholders, 'cube')] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1i', cast ([_Runtime.field(program, 'locIblIrradiance'), GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'activeTexture', cast ([(flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE0') + GlLitProgram.IBL_PREFILTERED_TEXTURE_UNIT__glLitProgram)] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'bindTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_CUBE_MAP'), _Runtime.field(placeholders, 'cube')] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1i', cast ([_Runtime.field(program, 'locIblPrefiltered'), GlLitProgram.IBL_PREFILTERED_TEXTURE_UNIT__glLitProgram] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'activeTexture', cast ([(flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE0') + GlLitProgram.IBL_BRDF_TEXTURE_UNIT__glLitProgram)] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'bindTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'), _Runtime.field(placeholders, 'lut')] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1i', cast ([_Runtime.field(program, 'locIblBrdf'), GlLitProgram.IBL_BRDF_TEXTURE_UNIT__glLitProgram] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locIblEnabled'), 0.0] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'activeTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE0')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram));
+      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, _Runtime.field(placeholders, 'cube'));
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locIblIrradiance'), GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram);
+      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + GlLitProgram.IBL_PREFILTERED_TEXTURE_UNIT__glLitProgram));
+      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, _Runtime.field(placeholders, 'cube'));
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locIblPrefiltered'), GlLitProgram.IBL_PREFILTERED_TEXTURE_UNIT__glLitProgram);
+      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + GlLitProgram.IBL_BRDF_TEXTURE_UNIT__glLitProgram));
+      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, _Runtime.field(placeholders, 'lut'));
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locIblBrdf'), GlLitProgram.IBL_BRDF_TEXTURE_UNIT__glLitProgram);
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locIblEnabled'), 0.0);
+      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);
     }
   }
 
@@ -110,24 +110,24 @@ class GlLitProgram {
     placeholders = _Runtime.callProperty(GlLitProgram._iblPlaceholders__glLitProgram, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(placeholders, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast placeholders; }
     gl = _Runtime.field(state, 'gl');
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'activeTexture', cast ([(flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE0') + GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram)] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram));
     black = new flighthq._internal._UInt8Array(cast ([0.0, 0.0, 0.0, 255.0] : Array<Dynamic>));
-    cube = flighthq._internal.backend.WebGl2Backend.call(gl, 'createTexture', cast ([] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_CUBE_MAP'), cube] : Array<Dynamic>));
+    cube = flighthq._internal.backend.WebGl2Backend.createTexture(gl);
+    flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, cube);
     {
       var face:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(face, 6.0, '<'))) {
-        flighthq._internal.backend.WebGl2Backend.call(gl, 'texImage2D', cast ([(flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_CUBE_MAP_POSITIVE_X') + face), 0.0, flighthq._internal.backend.WebGl2Backend.field(gl, 'RGBA'), 1.0, 1.0, 0.0, flighthq._internal.backend.WebGl2Backend.field(gl, 'RGBA'), flighthq._internal.backend.WebGl2Backend.field(gl, 'UNSIGNED_BYTE'), black] : Array<Dynamic>));
+        flighthq._internal.backend.WebGl2Backend.texImage2D(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP_POSITIVE_X + face), 0.0, flighthq._internal.backend.WebGl2Backend.RGBA, 1.0, 1.0, 0.0, flighthq._internal.backend.WebGl2Backend.RGBA, flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE, black);
         face++;
       }
     }
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'texParameteri', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_CUBE_MAP'), flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_MIN_FILTER'), flighthq._internal.backend.WebGl2Backend.field(gl, 'LINEAR')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'texParameteri', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_CUBE_MAP'), flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_MAG_FILTER'), flighthq._internal.backend.WebGl2Backend.field(gl, 'LINEAR')] : Array<Dynamic>));
-    lut = flighthq._internal.backend.WebGl2Backend.call(gl, 'createTexture', cast ([] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'), lut] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'texImage2D', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'), 0.0, flighthq._internal.backend.WebGl2Backend.field(gl, 'RGBA'), 1.0, 1.0, 0.0, flighthq._internal.backend.WebGl2Backend.field(gl, 'RGBA'), flighthq._internal.backend.WebGl2Backend.field(gl, 'UNSIGNED_BYTE'), black] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'texParameteri', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'), flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_MIN_FILTER'), flighthq._internal.backend.WebGl2Backend.field(gl, 'LINEAR')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'texParameteri', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'), flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_MAG_FILTER'), flighthq._internal.backend.WebGl2Backend.field(gl, 'LINEAR')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, flighthq._internal.backend.WebGl2Backend.TEXTURE_MIN_FILTER, flighthq._internal.backend.WebGl2Backend.LINEAR);
+    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, flighthq._internal.backend.WebGl2Backend.TEXTURE_MAG_FILTER, flighthq._internal.backend.WebGl2Backend.LINEAR);
+    lut = flighthq._internal.backend.WebGl2Backend.createTexture(gl);
+    flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, lut);
+    flighthq._internal.backend.WebGl2Backend.texImage2D(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, 0.0, flighthq._internal.backend.WebGl2Backend.RGBA, 1.0, 1.0, 0.0, flighthq._internal.backend.WebGl2Backend.RGBA, flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE, black);
+    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, flighthq._internal.backend.WebGl2Backend.TEXTURE_MIN_FILTER, flighthq._internal.backend.WebGl2Backend.LINEAR);
+    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, flighthq._internal.backend.WebGl2Backend.TEXTURE_MAG_FILTER, flighthq._internal.backend.WebGl2Backend.LINEAR);
     (placeholders = cast ({ cube: cube, lut: lut } : Dynamic));
     _Runtime.callProperty(GlLitProgram._iblPlaceholders__glLitProgram, 'set', cast ([state, placeholders] : Array<Dynamic>));
     return cast placeholders;
@@ -135,7 +135,7 @@ class GlLitProgram {
   }
 
   public static function resolveGlLitLocations(gl:Dynamic, program:Dynamic):Dynamic {
-    return cast { locAmbientCount: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_ambientCount'] : Array<Dynamic>)), locAmbientRadiance: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_ambientRadiance'] : Array<Dynamic>)), locCameraPosition: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_cameraPosition'] : Array<Dynamic>)), locDirectional: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_directional'] : Array<Dynamic>)), locDirectionalCount: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_directionalCount'] : Array<Dynamic>)), locDirectionalRadiance: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_directionalRadiance'] : Array<Dynamic>)), locHemisphereCount: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_hemisphereCount'] : Array<Dynamic>)), locHemisphereLights: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_hemisphereLights'] : Array<Dynamic>)), locIblBrdf: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_iblBrdf'] : Array<Dynamic>)), locIblEnabled: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_iblEnabled'] : Array<Dynamic>)), locIblIntensity: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_iblIntensity'] : Array<Dynamic>)), locIblIrradiance: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_iblIrradiance'] : Array<Dynamic>)), locIblMaxMip: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_iblMaxMip'] : Array<Dynamic>)), locIblPrefiltered: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_iblPrefiltered'] : Array<Dynamic>)), locPointCount: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_pointCount'] : Array<Dynamic>)), locPointLights: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_pointLights'] : Array<Dynamic>)), locShadowEnabled: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_shadowEnabled'] : Array<Dynamic>)), locShadowMap: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_shadowMap'] : Array<Dynamic>)), locShadowMatrix: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_shadowMatrix'] : Array<Dynamic>)), locSpotCount: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_spotCount'] : Array<Dynamic>)), locSpotLights: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_spotLights'] : Array<Dynamic>)) };
+    return cast { locAmbientCount: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_ambientCount'), locAmbientRadiance: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_ambientRadiance'), locCameraPosition: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_cameraPosition'), locDirectional: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_directional'), locDirectionalCount: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_directionalCount'), locDirectionalRadiance: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_directionalRadiance'), locHemisphereCount: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_hemisphereCount'), locHemisphereLights: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_hemisphereLights'), locIblBrdf: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_iblBrdf'), locIblEnabled: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_iblEnabled'), locIblIntensity: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_iblIntensity'), locIblIrradiance: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_iblIrradiance'), locIblMaxMip: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_iblMaxMip'), locIblPrefiltered: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_iblPrefiltered'), locPointCount: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_pointCount'), locPointLights: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_pointLights'), locShadowEnabled: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_shadowEnabled'), locShadowMap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_shadowMap'), locShadowMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_shadowMatrix'), locSpotCount: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_spotCount'), locSpotLights: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_spotLights') };
     return cast null;
   }
 

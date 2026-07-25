@@ -19,8 +19,8 @@ class GlLensDistortionEffect {
     scale = _Runtime.coalesce(_Runtime.field(effect, 'scale'), function():Dynamic return cast 1.0);
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'lens.lensDistortion', GlLensDistortionEffect.LENS_DISTORTION_FRAGMENT_SRC__glLensDistortionEffect] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_amount'] : Array<Dynamic>)), amount] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_scale'] : Array<Dynamic>)), scale] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_amount'), amount);
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_scale'), scale);
     }] : Array<Dynamic>));
   }
 

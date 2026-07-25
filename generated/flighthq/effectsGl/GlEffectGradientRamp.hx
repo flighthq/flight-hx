@@ -9,14 +9,14 @@ class GlEffectGradientRamp {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.callValue(GlEffectGradientRamp.buildRampData__glEffectGradientRamp, cast ([colors, alphas, ratios] : Array<Dynamic>));
-    texture = flighthq._internal.backend.WebGl2Backend.call(gl, 'createTexture', cast ([] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'), texture] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'texImage2D', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'), 0.0, flighthq._internal.backend.WebGl2Backend.field(gl, 'RGBA8'), 256.0, 1.0, 0.0, flighthq._internal.backend.WebGl2Backend.field(gl, 'RGBA'), flighthq._internal.backend.WebGl2Backend.field(gl, 'UNSIGNED_BYTE'), data] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'texParameteri', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'), flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_MIN_FILTER'), flighthq._internal.backend.WebGl2Backend.field(gl, 'LINEAR')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'texParameteri', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'), flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_MAG_FILTER'), flighthq._internal.backend.WebGl2Backend.field(gl, 'LINEAR')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'texParameteri', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'), flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_WRAP_S'), flighthq._internal.backend.WebGl2Backend.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'texParameteri', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'), flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_WRAP_T'), flighthq._internal.backend.WebGl2Backend.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'), null] : Array<Dynamic>));
+    texture = flighthq._internal.backend.WebGl2Backend.createTexture(gl);
+    flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, texture);
+    flighthq._internal.backend.WebGl2Backend.texImage2D(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, 0.0, flighthq._internal.backend.WebGl2Backend.RGBA8, 256.0, 1.0, 0.0, flighthq._internal.backend.WebGl2Backend.RGBA, flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE, data);
+    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, flighthq._internal.backend.WebGl2Backend.TEXTURE_MIN_FILTER, flighthq._internal.backend.WebGl2Backend.LINEAR);
+    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, flighthq._internal.backend.WebGl2Backend.TEXTURE_MAG_FILTER, flighthq._internal.backend.WebGl2Backend.LINEAR);
+    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_S, flighthq._internal.backend.WebGl2Backend.CLAMP_TO_EDGE);
+    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_T, flighthq._internal.backend.WebGl2Backend.CLAMP_TO_EDGE);
+    flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, null);
     return cast texture;
     return cast null;
   }

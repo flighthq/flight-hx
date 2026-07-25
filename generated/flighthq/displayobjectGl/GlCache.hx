@@ -150,8 +150,8 @@ class GlCache {
       _Runtime.setField(cacheRuntime, 'currentTexture', null);
       _Runtime.setField(cacheRuntime, 'currentBlendMode', null);
       _Runtime.setField(cacheRuntime, 'currentScissorRect', null);
-      flighthq._internal.backend.WebGl2Backend.call(_Runtime.field(cacheState, 'gl'), 'clearColor', cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.call(_Runtime.field(cacheState, 'gl'), 'clear', cast ([flighthq._internal.backend.WebGl2Backend.field(_Runtime.field(cacheState, 'gl'), 'COLOR_BUFFER_BIT')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.clearColor(_Runtime.field(cacheState, 'gl'), 0.0, 0.0, 0.0, 0.0);
+      flighthq._internal.backend.WebGl2Backend.clear(_Runtime.field(cacheState, 'gl'), flighthq._internal.backend.WebGl2Backend.COLOR_BUFFER_BIT);
       _Runtime.callValue(renderGlDisplayObject, cast ([cacheState, source] : Array<Dynamic>));
     }
     _Runtime.callValue(endGlRenderPass, cast ([cacheState] : Array<Dynamic>));

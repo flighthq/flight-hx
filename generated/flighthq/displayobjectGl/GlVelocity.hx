@@ -251,9 +251,9 @@ class GlVelocity {
     clipY0 = (1.0 - ((y / _Runtime.field(ctx, 'height')) * 2.0));
     clipWidth = ((width / _Runtime.field(ctx, 'width')) * 2.0);
     clipHeight = -((height / _Runtime.field(ctx, 'height')) * 2.0);
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform4f', cast ([_Runtime.field(program, 'locClipRect'), clipX0, clipY0, clipWidth, clipHeight] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform2f', cast ([_Runtime.field(program, 'locVelocity'), (velocityX * _Runtime.field(ctx, 'pixelRatio')), (velocityY * _Runtime.field(ctx, 'pixelRatio'))] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'drawArrays', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TRIANGLES'), 0.0, 6.0] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locClipRect'), clipX0, clipY0, clipWidth, clipHeight);
+    flighthq._internal.backend.WebGl2Backend.uniform2f(gl, _Runtime.field(program, 'locVelocity'), (velocityX * _Runtime.field(ctx, 'pixelRatio')), (velocityY * _Runtime.field(ctx, 'pixelRatio')));
+    flighthq._internal.backend.WebGl2Backend.drawArrays(gl, flighthq._internal.backend.WebGl2Backend.TRIANGLES, 0.0, 6.0);
   }
 
   public static function getGlVelocityWriter(state:GlRenderState, kind:Kind):Null<GlVelocityWriter> {
@@ -279,19 +279,19 @@ class GlVelocity {
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
     program = _Runtime.callValue(GlVelocity.ensureGlVelocityProgram__glVelocity, cast ([state] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindFramebuffer', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'FRAMEBUFFER'), _Runtime.field(target, 'framebuffer')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'viewport', cast ([0.0, 0.0, _Runtime.field(target, 'width'), _Runtime.field(target, 'height')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'disable', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'BLEND')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'clearColor', cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'clear', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'COLOR_BUFFER_BIT')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'useProgram', cast ([_Runtime.field(program, 'program')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindBuffer', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ARRAY_BUFFER'), _Runtime.field(program, 'quadBuffer')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'enableVertexAttribArray', cast ([_Runtime.field(program, 'locCorner')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'vertexAttribPointer', cast ([_Runtime.field(program, 'locCorner'), 2.0, flighthq._internal.backend.WebGl2Backend.field(gl, 'FLOAT'), false, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER, _Runtime.field(target, 'framebuffer'));
+    flighthq._internal.backend.WebGl2Backend.viewport(gl, 0.0, 0.0, _Runtime.field(target, 'width'), _Runtime.field(target, 'height'));
+    flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.BLEND);
+    flighthq._internal.backend.WebGl2Backend.clearColor(gl, 0.0, 0.0, 0.0, 0.0);
+    flighthq._internal.backend.WebGl2Backend.clear(gl, flighthq._internal.backend.WebGl2Backend.COLOR_BUFFER_BIT);
+    flighthq._internal.backend.WebGl2Backend.useProgram(gl, _Runtime.field(program, 'program'));
+    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(program, 'quadBuffer'));
+    flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, _Runtime.field(program, 'locCorner'));
+    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, _Runtime.field(program, 'locCorner'), 2.0, flighthq._internal.backend.WebGl2Backend.FLOAT, false, 0.0, 0.0);
     ctx = { state: state, field: field, width: _Runtime.field(target, 'width'), height: _Runtime.field(target, 'height'), pixelRatio: _Runtime.field(state, 'pixelRatio') };
     _Runtime.callValue(GlVelocity.visitGlVelocity__glVelocity, cast ([ctx, root] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindFramebuffer', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'FRAMEBUFFER'), _Runtime.field(runtime, 'currentFramebuffer')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'disableVertexAttribArray', cast ([_Runtime.field(program, 'locCorner')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER, _Runtime.field(runtime, 'currentFramebuffer'));
+    flighthq._internal.backend.WebGl2Backend.disableVertexAttribArray(gl, _Runtime.field(program, 'locCorner'));
   }
 
   public static function ensureGlVelocityProgram__glVelocity(state:GlRenderState):GlVelocityProgram__glVelocity {
@@ -303,10 +303,10 @@ class GlVelocity {
     if (_Runtime.truthy(!_Runtime.strictEquals(program, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast program; }
     gl = _Runtime.field(state, 'gl');
     glProgram = _Runtime.callValue(createGlProgram, cast ([gl, GlVelocity.VELOCITY_VERTEX_SRC__glVelocity, GlVelocity.VELOCITY_FRAGMENT_SRC__glVelocity, 'Velocity'] : Array<Dynamic>));
-    quadBuffer = flighthq._internal.backend.WebGl2Backend.call(gl, 'createBuffer', cast ([] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindBuffer', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ARRAY_BUFFER'), quadBuffer] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.call(gl, 'bufferData', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ARRAY_BUFFER'), new flighthq._internal._Float32Array(cast ([0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0] : Array<Dynamic>)), flighthq._internal.backend.WebGl2Backend.field(gl, 'STATIC_DRAW')] : Array<Dynamic>));
-    (program = cast ({ program: glProgram, quadBuffer: quadBuffer, locCorner: flighthq._internal.backend.WebGl2Backend.call(gl, 'getAttribLocation', cast ([glProgram, 'a_corner'] : Array<Dynamic>)), locClipRect: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([glProgram, 'u_clipRect'] : Array<Dynamic>)), locVelocity: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([glProgram, 'u_velocity'] : Array<Dynamic>)) } : Dynamic));
+    quadBuffer = flighthq._internal.backend.WebGl2Backend.createBuffer(gl);
+    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, quadBuffer);
+    flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, new flighthq._internal._Float32Array(cast ([0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0] : Array<Dynamic>)), flighthq._internal.backend.WebGl2Backend.STATIC_DRAW);
+    (program = cast ({ program: glProgram, quadBuffer: quadBuffer, locCorner: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, glProgram, 'a_corner'), locClipRect: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, glProgram, 'u_clipRect'), locVelocity: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, glProgram, 'u_velocity') } : Dynamic));
     _Runtime.callProperty(GlVelocity._velocityPrograms__glVelocity, 'set', cast ([state, program] : Array<Dynamic>));
     return cast program;
     return cast null;

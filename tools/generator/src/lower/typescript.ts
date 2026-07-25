@@ -1488,6 +1488,9 @@ function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpre
   }
   if (ts.isElementAccessExpression(node) && node.argumentExpression) {
     return {
+      binding: isBoundPlatformExpression(node.expression, context, 'WebGL2RenderingContext')
+        ? 'WebGl2Backend'
+        : undefined,
       index: lowerExpression(node.argumentExpression, context),
       kind: 'element',
       object: lowerExpression(node.expression, context),

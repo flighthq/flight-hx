@@ -70,7 +70,7 @@ class GlInnerGlowEffect {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlInnerGlowEffect.getClipShader__glInnerGlowEffect, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(glow, 'texture'), _Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
-      flighthq._internal.backend.WebGl2Backend.call(gl, 'blendFunc', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ONE'), flighthq._internal.backend.WebGl2Backend.field(gl, 'ZERO')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.ONE, flighthq._internal.backend.WebGl2Backend.ZERO);
     }] : Array<Dynamic>));
   }
 

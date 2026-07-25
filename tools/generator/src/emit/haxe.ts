@@ -14,6 +14,204 @@ const binaryOperatorMap: Readonly<Record<string, string>> = {
   '??': '??',
 };
 
+const webGl2MethodEndpoints = new Set([
+  'activeTexture',
+  'attachShader',
+  'bindBuffer',
+  'bindFramebuffer',
+  'bindRenderbuffer',
+  'bindTexture',
+  'bindVertexArray',
+  'blendEquation',
+  'blendFunc',
+  'blitFramebuffer',
+  'bufferData',
+  'bufferSubData',
+  'checkFramebufferStatus',
+  'clear',
+  'clearBufferfi',
+  'clearBufferfv',
+  'clearColor',
+  'colorMask',
+  'compileShader',
+  'compressedTexImage2D',
+  'compressedTexSubImage3D',
+  'createBuffer',
+  'createFramebuffer',
+  'createProgram',
+  'createRenderbuffer',
+  'createShader',
+  'createTexture',
+  'createVertexArray',
+  'cullFace',
+  'deleteBuffer',
+  'deleteFramebuffer',
+  'deleteProgram',
+  'deleteRenderbuffer',
+  'deleteShader',
+  'deleteTexture',
+  'deleteVertexArray',
+  'depthFunc',
+  'depthMask',
+  'disable',
+  'disableVertexAttribArray',
+  'drawArrays',
+  'drawBuffers',
+  'drawElements',
+  'drawElementsInstanced',
+  'enable',
+  'enableVertexAttribArray',
+  'flush',
+  'framebufferRenderbuffer',
+  'framebufferTexture2D',
+  'generateMipmap',
+  'getActiveUniform',
+  'getAttribLocation',
+  'getExtension',
+  'getParameter',
+  'getProgramInfoLog',
+  'getProgramParameter',
+  'getShaderInfoLog',
+  'getShaderParameter',
+  'getUniformLocation',
+  'linkProgram',
+  'pixelStorei',
+  'readBuffer',
+  'readPixels',
+  'renderbufferStorage',
+  'renderbufferStorageMultisample',
+  'scissor',
+  'shaderSource',
+  'stencilFunc',
+  'stencilMask',
+  'stencilOp',
+  'stencilOpSeparate',
+  'texImage2D',
+  'texImage2DSource',
+  'texImage3D',
+  'texParameterf',
+  'texParameteri',
+  'texStorage3D',
+  'texSubImage2D',
+  'uniform1f',
+  'uniform1fv',
+  'uniform1i',
+  'uniform2f',
+  'uniform2fv',
+  'uniform3f',
+  'uniform3fv',
+  'uniform4f',
+  'uniform4fv',
+  'uniformMatrix3fv',
+  'uniformMatrix4fv',
+  'useProgram',
+  'vertexAttrib4f',
+  'vertexAttribDivisor',
+  'vertexAttribPointer',
+  'viewport',
+]);
+
+const webGl2ConstantEndpoints = new Set([
+  'ACTIVE_UNIFORMS',
+  'ALWAYS',
+  'ARRAY_BUFFER',
+  'BACK',
+  'BLEND',
+  'CLAMP_TO_EDGE',
+  'COLOR',
+  'COLOR_ATTACHMENT0',
+  'COLOR_BUFFER_BIT',
+  'COMPILE_STATUS',
+  'CULL_FACE',
+  'DECR_WRAP',
+  'DEPTH24_STENCIL8',
+  'DEPTH_BUFFER_BIT',
+  'DEPTH_STENCIL',
+  'DEPTH_STENCIL_ATTACHMENT',
+  'DEPTH_TEST',
+  'DRAW_FRAMEBUFFER',
+  'DST_COLOR',
+  'DYNAMIC_DRAW',
+  'ELEMENT_ARRAY_BUFFER',
+  'EQUAL',
+  'FLOAT',
+  'FLOAT_MAT2',
+  'FLOAT_MAT3',
+  'FLOAT_MAT4',
+  'FLOAT_VEC2',
+  'FLOAT_VEC3',
+  'FLOAT_VEC4',
+  'FRAGMENT_SHADER',
+  'FRAMEBUFFER',
+  'FRAMEBUFFER_BINDING',
+  'FRAMEBUFFER_COMPLETE',
+  'FRONT',
+  'FUNC_ADD',
+  'FUNC_REVERSE_SUBTRACT',
+  'HALF_FLOAT',
+  'INCR_WRAP',
+  'INVERT',
+  'KEEP',
+  'LESS',
+  'LINEAR',
+  'LINEAR_MIPMAP_LINEAR',
+  'LINEAR_MIPMAP_NEAREST',
+  'LINES',
+  'LINE_STRIP',
+  'LINK_STATUS',
+  'MAX',
+  'MAX_SAMPLES',
+  'MIN',
+  'MIRRORED_REPEAT',
+  'NEAREST',
+  'NEAREST_MIPMAP_LINEAR',
+  'NEAREST_MIPMAP_NEAREST',
+  'NONE',
+  'NOTEQUAL',
+  'ONE',
+  'ONE_MINUS_SRC_ALPHA',
+  'ONE_MINUS_SRC_COLOR',
+  'POINTS',
+  'READ_FRAMEBUFFER',
+  'RENDERBUFFER',
+  'REPEAT',
+  'RGBA',
+  'RGBA16F',
+  'RGBA32F',
+  'RGBA8',
+  'SCISSOR_TEST',
+  'SRC_ALPHA',
+  'STATIC_DRAW',
+  'STENCIL_BUFFER_BIT',
+  'STENCIL_TEST',
+  'STREAM_DRAW',
+  'TEXTURE0',
+  'TEXTURE1',
+  'TEXTURE2',
+  'TEXTURE_2D',
+  'TEXTURE_2D_ARRAY',
+  'TEXTURE_3D',
+  'TEXTURE_CUBE_MAP',
+  'TEXTURE_CUBE_MAP_POSITIVE_X',
+  'TEXTURE_MAG_FILTER',
+  'TEXTURE_MAX_LEVEL',
+  'TEXTURE_MIN_FILTER',
+  'TEXTURE_WRAP_R',
+  'TEXTURE_WRAP_S',
+  'TEXTURE_WRAP_T',
+  'TRIANGLES',
+  'TRIANGLE_FAN',
+  'TRIANGLE_STRIP',
+  'UNPACK_PREMULTIPLY_ALPHA_WEBGL',
+  'UNSIGNED_BYTE',
+  'UNSIGNED_INT',
+  'UNSIGNED_INT_24_8',
+  'UNSIGNED_SHORT',
+  'VERTEX_SHADER',
+  'VIEWPORT',
+  'ZERO',
+]);
+
 let temporaryIndex = 0;
 let currentHaxePackage = 'flighthq';
 let currentModuleName = '';
@@ -1426,6 +1624,9 @@ function emitExpression(expression: IrExpression): string {
         return `_Runtime.setLength(${owner}, ${value})`;
       }
       if (expression.kind === 'assignment' && expression.left.kind === 'element') {
+        if (expression.left.binding === 'WebGl2Backend') {
+          throw new Error('WebGL2 computed property assignments have no typed backend endpoint');
+        }
         const object = emitExpression(expression.left.object);
         const index = emitExpression(expression.left.index);
         if (expression.operator === '=') {
@@ -1442,12 +1643,14 @@ function emitExpression(expression: IrExpression): string {
         return `_Runtime.setIndex(${object}, ${index}, ${value})`;
       }
       if (expression.kind === 'assignment' && expression.left.kind === 'property') {
+        if (expression.left.binding === 'WebGl2Backend') {
+          throw new Error(`WebGL2 property assignment has no typed backend endpoint: ${expression.left.name}`);
+        }
         const object = emitExpression(expression.left.object);
         if (
           expression.left.binding === 'Canvas2dBackend' ||
           expression.left.binding === 'CanvasElementBackend' ||
           expression.left.binding === 'DomDocumentBackend' ||
-          expression.left.binding === 'WebGl2Backend' ||
           expression.left.binding === 'WebGpuCanvasContextBackend' ||
           expression.left.binding === 'WebGpuDeviceBackend' ||
           expression.left.binding === 'WebGpuQueueBackend'
@@ -1562,6 +1765,12 @@ function emitExpression(expression: IrExpression): string {
     case 'conditional':
       return `_Runtime.select(${emitExpression(expression.condition)}, function():Dynamic return cast ${emitExpression(expression.whenTrue)}, function():Dynamic return cast ${emitExpression(expression.whenFalse)})`;
     case 'element':
+      if (expression.binding === 'WebGl2Backend') {
+        if (expression.optional) {
+          throw new Error('Optional WebGL2 computed property access has no typed backend endpoint');
+        }
+        return emitWebGl2ComputedConstant(expression.index);
+      }
       return `_Runtime.${expression.optional ? 'optionalIndex' : 'getIndex'}(${emitExpression(expression.object)}, ${emitExpression(expression.index)})`;
     case 'function': {
       const name = expression.name && !expression.async ? ` ${safeName(expression.name)}` : '';
@@ -1698,13 +1907,18 @@ function emitExpression(expression: IrExpression): string {
       if (expression.binding === 'WebGpuConstantsBackend') {
         return `flighthq._internal.backend.WebGpuConstantsBackend.value(${emitExpression(expression.object)}, ${quote(expression.name)})`;
       }
+      if (expression.binding === 'WebGl2Backend') {
+        if (expression.optional) {
+          throw new Error(`Optional WebGL2 constant access has no typed backend endpoint: ${expression.name}`);
+        }
+        return `flighthq._internal.backend.WebGl2Backend.${webGl2ConstantEndpoint(expression.name)}`;
+      }
       if (
         expression.binding === 'Canvas2dBackend' ||
         expression.binding === 'CanvasElementBackend' ||
         expression.binding === 'DomDocumentBackend' ||
         expression.binding === 'DomNavigatorBackend' ||
         expression.binding === 'DomWindowBackend' ||
-        expression.binding === 'WebGl2Backend' ||
         expression.binding === 'WebGpuCanvasContextBackend' ||
         expression.binding === 'WebGpuDeviceBackend' ||
         expression.binding === 'WebGpuLimitsBackend' ||
@@ -1743,13 +1957,18 @@ function emitExpression(expression: IrExpression): string {
     case 'unary':
       if (expression.operator === 'delete') {
         if (expression.operand.kind === 'element') {
+          if (expression.operand.binding === 'WebGl2Backend') {
+            throw new Error('WebGL2 computed property deletion has no typed backend endpoint');
+          }
           return `_Runtime.deleteIndex(${emitExpression(expression.operand.object)}, ${emitExpression(expression.operand.index)})`;
+        }
+        if (expression.operand.kind === 'property' && expression.operand.binding === 'WebGl2Backend') {
+          throw new Error(`WebGL2 property deletion has no typed backend endpoint: ${expression.operand.name}`);
         }
         if (
           expression.operand.kind === 'property' &&
           (expression.operand.binding === 'Canvas2dBackend' ||
             expression.operand.binding === 'CanvasElementBackend' ||
-            expression.operand.binding === 'WebGl2Backend' ||
             expression.operand.binding === 'WebGpuCanvasContextBackend' ||
             expression.operand.binding === 'WebGpuDeviceBackend' ||
             expression.operand.binding === 'WebGpuQueueBackend')
@@ -1767,9 +1986,15 @@ function emitExpression(expression: IrExpression): string {
       if (expression.operator === '!') return `!_Runtime.truthy(${emitExpression(expression.operand)})`;
       if (expression.operator === '~') return `~Std.int(${emitExpression(expression.operand)})`;
       if (expression.operand.kind === 'element' && (expression.operator === '++' || expression.operator === '--')) {
+        if (expression.operand.binding === 'WebGl2Backend') {
+          throw new Error('WebGL2 computed property mutation has no typed backend endpoint');
+        }
         return `_Runtime.incrementIndex(${emitExpression(expression.operand.object)}, ${emitExpression(expression.operand.index)}, ${expression.operator === '++' ? '1' : '-1'}, ${expression.postfix ? 'true' : 'false'})`;
       }
       if (expression.operand.kind === 'property' && (expression.operator === '++' || expression.operator === '--')) {
+        if (expression.operand.binding === 'WebGl2Backend') {
+          throw new Error(`WebGL2 property mutation has no typed backend endpoint: ${expression.operand.name}`);
+        }
         return `_Runtime.incrementField(${emitExpression(expression.operand.object)}, ${quote(expression.operand.name)}, ${expression.operator === '++' ? '1' : '-1'}, ${expression.postfix ? 'true' : 'false'})`;
       }
       return expression.postfix
@@ -1842,6 +2067,9 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
   if (expression.callee.kind === 'identifier' && currentDirectFunctions.has(expression.callee.name)) {
     return `${currentModuleName}.${safeName(expression.callee.name)}(cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
   }
+  if (expression.callee.kind === 'element' && expression.callee.binding === 'WebGl2Backend') {
+    throw new Error('WebGL2 computed method calls have no typed backend endpoint');
+  }
   if (
     expression.callee.kind === 'element' &&
     expression.callee.object.kind === 'identifier' &&
@@ -1886,13 +2114,15 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
         : `[${emitExpression(argument)}]`,
     );
     if (expression.callee.kind === 'property') {
+      if (expression.callee.binding === 'WebGl2Backend') {
+        throw new Error(`WebGL2 spread call has no typed backend endpoint: ${expression.callee.name}`);
+      }
       if (
         expression.callee.binding === 'Canvas2dBackend' ||
         expression.callee.binding === 'CanvasElementBackend' ||
         expression.callee.binding === 'DomDocumentBackend' ||
         expression.callee.binding === 'DomNavigatorBackend' ||
         expression.callee.binding === 'DomWindowBackend' ||
-        expression.callee.binding === 'WebGl2Backend' ||
         expression.callee.binding === 'WebGpuCanvasContextBackend' ||
         expression.callee.binding === 'WebGpuDeviceBackend' ||
         expression.callee.binding === 'WebGpuQueueBackend'
@@ -1911,13 +2141,20 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
     if (expression.callee.binding === 'DynamicObject') {
       return `flighthq._internal.DynamicObject.${safeName(name)}(${expression.arguments.map(emitExpression).join(', ')})`;
     }
+    if (expression.callee.binding === 'WebGl2Backend') {
+      if (expression.optional || expression.callee.optional) {
+        throw new Error(`Optional WebGL2 call has no typed backend endpoint: ${name}`);
+      }
+      const endpoint = webGl2MethodEndpoint(name, expression.arguments.length);
+      const arguments_ = [owner, ...expression.arguments.map(emitExpression)].join(', ');
+      return `flighthq._internal.backend.WebGl2Backend.${endpoint}(${arguments_})`;
+    }
     if (
       expression.callee.binding === 'Canvas2dBackend' ||
       expression.callee.binding === 'CanvasElementBackend' ||
       expression.callee.binding === 'DomDocumentBackend' ||
       expression.callee.binding === 'DomNavigatorBackend' ||
       expression.callee.binding === 'DomWindowBackend' ||
-      expression.callee.binding === 'WebGl2Backend' ||
       expression.callee.binding === 'WebGpuCanvasContextBackend' ||
       expression.callee.binding === 'WebGpuDeviceBackend' ||
       expression.callee.binding === 'WebGpuQueueBackend'
@@ -2164,6 +2401,36 @@ export function emitType(type: IrType): string {
 
 function quote(value: string): string {
   return `'${value.replaceAll('\\', '\\\\').replaceAll("'", "\\'").replaceAll('$', '$$$$').replaceAll('\n', '\\n').replaceAll('\r', '\\r')}'`;
+}
+
+function webGl2MethodEndpoint(name: string, argumentCount: number): string {
+  let endpoint = name;
+  if (name === 'texImage2D') {
+    if (argumentCount === 6) endpoint = 'texImage2DSource';
+    else if (argumentCount !== 9) {
+      throw new Error(`WebGL2 method texImage2D has no typed backend endpoint for ${String(argumentCount)} arguments`);
+    }
+  } else if (name === 'texImage2DSource') {
+    throw new Error('WebGL2 source method is not in the typed backend inventory: texImage2DSource');
+  }
+  if (!webGl2MethodEndpoints.has(endpoint)) {
+    throw new Error(`WebGL2 method is not in the typed backend inventory: ${name}`);
+  }
+  return endpoint;
+}
+
+function webGl2ConstantEndpoint(name: string): string {
+  if (!webGl2ConstantEndpoints.has(name)) {
+    throw new Error(`WebGL2 constant is not in the typed backend inventory: ${name}`);
+  }
+  return name;
+}
+
+function emitWebGl2ComputedConstant(index: IrExpression): string {
+  const cases = [...webGl2ConstantEndpoints]
+    .map((name) => `case ${quote(name)}: flighthq._internal.backend.WebGl2Backend.${name};`)
+    .join(' ');
+  return `(switch (${emitExpression(index)}) { ${cases} default: throw 'WebGL2 computed constant is not in the typed backend inventory'; })`;
 }
 
 function indent(lines: string[]): string[] {

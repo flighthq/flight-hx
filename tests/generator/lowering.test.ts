@@ -691,6 +691,9 @@ describe('TypeScript lowering and Haxe emission', () => {
           gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
           const alias = gl;
           alias.drawArrays(gl.TRIANGLES, 0, 3);
+          gl.bufferData(gl.ARRAY_BUFFER, 64, gl.STATIC_DRAW);
+          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, null);
+          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
         }
         export const configure = (gl: any) => gl.clear(gl.COLOR_BUFFER_BIT);
       `,
@@ -707,11 +710,74 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain("flighthq._internal.backend.WebGl2Backend.call(gl, 'bindBuffer'");
-    expect(output).toContain("flighthq._internal.backend.WebGl2Backend.field(gl, 'ARRAY_BUFFER')");
-    expect(output).toContain("flighthq._internal.backend.WebGl2Backend.call(alias, 'drawArrays'");
-    expect(output).toContain("flighthq._internal.backend.WebGl2Backend.call(gl, 'clear'");
+    expect(output).toContain(
+      'flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, buffer)',
+    );
+    expect(output).toContain(
+      'flighthq._internal.backend.WebGl2Backend.drawArrays(alias, flighthq._internal.backend.WebGl2Backend.TRIANGLES, 0.0, 3.0)',
+    );
+    expect(output).toContain('flighthq._internal.backend.WebGl2Backend.bufferData(');
+    expect(output).not.toContain('WebGl2Backend.bufferDataSize(');
+    expect(output).toContain('flighthq._internal.backend.WebGl2Backend.texImage2DSource(');
+    expect(output).toContain('flighthq._internal.backend.WebGl2Backend.texImage2D(');
+    expect(output).toContain(
+      'flighthq._internal.backend.WebGl2Backend.clear(gl, flighthq._internal.backend.WebGl2Backend.COLOR_BUFFER_BIT)',
+    );
+    expect(output).not.toContain('WebGl2Backend.call(');
+    expect(output).not.toContain('WebGl2Backend.field(');
     expect(output).not.toContain("_Runtime.callProperty(gl, 'bindBuffer'");
+  });
+
+  it('fails generation for WebGL2 members absent from the typed endpoint inventory', () => {
+    const emit = (body: string) => {
+      const source = ts.createSourceFile(
+        '/workspace/upstream/packages/render-gl/src/sample.ts',
+        `export function use(gl: WebGL2RenderingContext) { ${body} }`,
+        ts.ScriptTarget.Latest,
+        true,
+        ts.ScriptKind.TS,
+      );
+      const lowered = lowerTypeScriptSource(source, '@flighthq/render-gl', '/workspace');
+      expect(lowered.diagnostics).toEqual([]);
+      return () =>
+        emitHaxeModule({
+          declarations: lowered.declarations,
+          imports: [],
+          name: 'WebGlInventoryFixture',
+          packageName: '@flighthq/render-gl',
+        });
+    };
+
+    expect(emit('gl.futureMethod();')).toThrow('WebGL2 method is not in the typed backend inventory: futureMethod');
+    expect(emit('return gl.FUTURE_CONSTANT;')).toThrow(
+      'WebGL2 constant is not in the typed backend inventory: FUTURE_CONSTANT',
+    );
+    expect(emit('gl.clear(...[gl.COLOR_BUFFER_BIT]);')).toThrow(
+      'WebGL2 spread call has no typed backend endpoint: clear',
+    );
+  });
+
+  it('lowers computed WebGL2 constants to an exhaustive typed constant switch', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/render-gl/src/sample.ts',
+      `export function read(gl: WebGL2RenderingContext, name: string) { return gl[name]; }`,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/render-gl', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'WebGlComputedConstantFixture',
+      packageName: '@flighthq/render-gl',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain("(switch (name) { case 'ACTIVE_UNIFORMS':");
+    expect(output).toContain("case 'MIN': flighthq._internal.backend.WebGl2Backend.MIN;");
+    expect(output).toContain("default: throw 'WebGL2 computed constant is not in the typed backend inventory';");
+    expect(output).not.toContain('_Runtime.getIndex(gl, name)');
   });
 
   it('routes Canvas 2D context access through its maintained internal binding', () => {

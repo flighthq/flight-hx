@@ -12,7 +12,7 @@ class GlWireframePrelude {
   public static function compileGlWireframeProgram(gl:Dynamic):GlWireframeProgram {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(compileGlProgram, cast ([gl, _Runtime.callValue(getGlWireframeVertexSource, cast ([] : Array<Dynamic>)), _Runtime.callValue(getGlWireframeFragmentSource, cast ([] : Array<Dynamic>))] : Array<Dynamic>));
-    return cast { locColor: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_color'] : Array<Dynamic>)), locModel: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_model'] : Array<Dynamic>)), locNormalMatrix: null, locViewProjection: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_viewProjection'] : Array<Dynamic>)), program: program };
+    return cast { locColor: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_color'), locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model'), locNormalMatrix: null, locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection'), program: program };
     return cast null;
   }
 
