@@ -10,25 +10,23 @@ C++/hxcpp remains unverified in the current workspace because neither `g++` nor 
 
 ## WebGL2 Binding
 
-Generated WebGL2 method and constant names remain literal inputs to `flighthq._internal.WebGl2RenderingContext`. Compile-time macros expand each used binding to:
+Generated WebGL2 method and constant names remain literal inputs to `flighthq._internal.backend.WebGl2Backend`. Its target branches dispatch each used binding to:
 
 - the caller-provided `lime.graphics.WebGL2RenderContext` when `lime` is defined on a native target;
 - `js.html.webgl.WebGL2RenderingContext` methods and constants when both `js` and `html5` are defined;
 - a non-rendering sentinel on headless targets so otherwise-portable packages can still type-check.
 
-This expansion contains no `Reflect.field` or `Reflect.callMethod`. Because it emits only the literal operation used at each call site, it also does not retain a runtime switch containing every WebGL API during dead-code elimination.
+The Lime and browser branches contain no reflective method calls. The native branch also adapts browser-shaped booleans, typed arrays, byte offsets, and GLSL source to Lime's concrete API.
 
-## Remaining Native Lime Renderer Blockers
+## Native Lime Renderer
 
-The typed Lime context route is wired, but desktop OpenGL/OpenGL ES rendering is not complete. Flight currently supplies WebGL-shaped arguments, while Lime's native context API uses explicit byte counts and `DataPointer` values. A native adapter is still required for:
+The maintained `_Float32Array`, `_Int16Array`, `_UInt16Array`, and `_UInt8Array` abstractions keep their JavaScript implementations on JS, own Lime-native typed-array storage on non-JS Lime targets, and retain ordinary Haxe arrays as the generic portable fallback. The generator emits these maintained wrappers directly, and the native GL boundary unwraps them to Lime views before dispatch. Runtime index, fill, iteration, `set`, and `subarray` operations preserve the wrapper while it owns native storage.
 
-- buffer uploads and partial uploads (`bufferData`, `bufferSubData`);
-- typed-array upload/readback operations, including `clearBufferfv`, `readPixels`, `texImage2D`, `texImage3D`, `texSubImage2D`, compressed texture uploads, vector uniforms, and matrix uniforms;
-- six-argument `texImage2D` calls whose source is an HTML image, video, or canvas, because native Lime needs a decoded pixel buffer and explicit dimensions.
+`WebGl2Backend` supplies Lime's concrete `ArrayBufferView`, `Float32Array`, boolean, string, byte-offset, and buffer-size argument forms. Desktop Lime exposes OpenGL through its WebGL compatibility context, so the backend also converts final `#version 300 es` shader sources to equivalent `#version 330 core` sources and removes GLSL ES precision syntax. OpenGL ES and browser sources remain unchanged.
 
-The maintained `_Float32Array`, `_Int16Array`, and `_UInt16Array` abstractions now keep their JavaScript implementations on JS, own Lime-native typed-array storage on non-JS Lime targets, and retain ordinary Haxe arrays as the generic portable fallback. Generated `Float32Array` constructors use the maintained wrapper directly, and the native GL boundary unwraps the wrapper to its Lime view before dispatch. Runtime index, fill, iteration, `set`, and `subarray` operations preserve the wrapper while it owns that native storage.
+The typed-array and shader branches have an Eval regression test against an API-shaped Lime shim. The bitmap and platformer examples compile to Neko against the pinned Lime source. The packaged Lime 8.3.2 release also supplies the native library successfully; this headless workspace cannot complete a live render because SDL has no video device.
 
-The typed-array branch and GL unwrapping have an Eval regression test against an API-shaped Lime shim. A real Lime/Haxelib installation is still required to validate every native GL method signature and desktop driver call. The next native-rendering step is therefore the target-specific method adapters listed above, especially explicit byte-count/`DataPointer` buffer calls and image-source texture decoding, not changes to generated source.
+The remaining source-kind exception is the six-argument `texImage2D` overload for an HTML image, video, or canvas. Native Lime needs a decoded pixel buffer and explicit dimensions, while the portable examples use the supported nine-argument pixel-buffer form.
 
 ## Browser-Only Runtime Areas
 

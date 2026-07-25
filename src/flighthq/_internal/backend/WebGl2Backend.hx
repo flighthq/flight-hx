@@ -227,7 +227,7 @@ class WebGl2Backend {
         gl.scissor(arguments[0], arguments[1], arguments[2], arguments[3]);
         return null;
       case 'shaderSource':
-        gl.shaderSource(arguments[0], cast arguments[1]);
+        gl.shaderSource(arguments[0], adaptShaderSource(context, cast arguments[1]));
         return null;
       case 'stencilFunc':
         gl.stencilFunc(arguments[0], arguments[1], arguments[2]);
@@ -331,6 +331,21 @@ class WebGl2Backend {
 
   static inline function asBool(value:Dynamic):Bool {
     return value == true || value == 1;
+  }
+
+  /**
+   * Flight shaders target WebGL2's GLSL ES 3.00 dialect. Lime's compatibility
+   * context on desktop is OpenGL, where the equivalent language is GLSL 3.30
+   * core and ES precision declarations are invalid.
+   */
+  public static function adaptShaderSource(context:Dynamic, source:String):String {
+    if (Reflect.field(context, 'type') != 'opengl') return source;
+    final version = ~/^\s*#version\s+300\s+es[^\n]*\n?/;
+    var result = version.match(source)
+      ? version.replace(source, '#version 330 core\n')
+      : '#version 330 core\n' + source;
+    result = ~/^\s*precision\s+\w+\s+\w+\s*;\s*$/gm.replace(result, '');
+    return ~/\b(lowp|mediump|highp)\s+/g.replace(result, '');
   }
 
   public static function callOptional(context:Dynamic, name:String, arguments:Array<Dynamic>):Dynamic {

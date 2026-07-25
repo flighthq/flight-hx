@@ -35,15 +35,31 @@ class LimeTypedArraySmoke {
     final gl = new FakeGl();
     WebGl2Backend.call(gl, 'bufferData', [1, floats, 2]);
     if (!Std.isOfType(gl.upload, Array)) throw 'GL upload did not receive native storage';
+    WebGl2Backend.call(gl, 'shaderSource', [
+      null,
+      '#version 300 es\nprecision highp float;\nuniform highp sampler2D texture;\nvoid main() {}',
+    ]);
+    if (!StringTools.startsWith(gl.shader, '#version 330 core\n')) throw 'desktop shader version';
+    if (gl.shader.indexOf('precision') >= 0 || gl.shader.indexOf('highp') >= 0) throw 'desktop shader precision';
+
+    gl.type = 'opengles';
+    WebGl2Backend.call(gl, 'shaderSource', [null, '#version 300 es\nprecision highp float;']);
+    if (!StringTools.startsWith(gl.shader, '#version 300 es\n')) throw 'ES shader changed';
   }
 }
 
 class FakeGl {
+  public var type = 'opengl';
   public var upload:Dynamic;
+  public var shader:String;
 
   public function new() {}
 
   public function bufferData(target:Dynamic, data:Dynamic, usage:Dynamic):Void {
     upload = data;
+  }
+
+  public function shaderSource(shader:Dynamic, source:String):Void {
+    this.shader = source;
   }
 }
