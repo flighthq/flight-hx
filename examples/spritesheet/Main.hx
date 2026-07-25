@@ -11,7 +11,7 @@ import flighthq.sdk.Sdk.*;
 import flighthq.types.Bitmap;
 import flighthq.types.DisplayObject;
 import flighthq.types.ImageResource;
-import lime.utils.UInt8Array;
+import flighthq._internal._UInt8ClampedArray;
 import flighthq.types.Spritesheet;
 import flighthq.types.SpritesheetPlayer;
 import lime.app.Application;
@@ -169,7 +169,7 @@ class Main extends Application {
   // `data` path (a bare `{width, height}` object would become `image.source` and hit the DOM-element
   // `texImage2D` overload, which rejects a plain object).
   function createSpriteStrip():ImageResource {
-    final pixels = new UInt8Array(STRIP_WIDTH * FRAME_SIZE * 4);
+    final pixels = new _UInt8ClampedArray(STRIP_WIDTH * FRAME_SIZE * 4);
     final ry = FRAME_SIZE * 0.42;
     for (f in 0...FRAME_COUNT) {
       final cx = f * FRAME_SIZE + FRAME_SIZE / 2;
@@ -195,7 +195,7 @@ class Main extends Application {
     return imageFromPixels(STRIP_WIDTH, FRAME_SIZE, pixels);
   }
 
-  function imageFromPixels(width:Int, height:Int, pixels:UInt8Array):ImageResource {
+  function imageFromPixels(width:Int, height:Int, pixels:_UInt8ClampedArray):ImageResource {
     final image = createImageResource();
     image.width = width;
     image.height = height;

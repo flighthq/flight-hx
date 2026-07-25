@@ -17,7 +17,7 @@ import lime.graphics.RenderContext;
 import lime.ui.KeyCode;
 import lime.ui.KeyModifier;
 import lime.ui.Window;
-import lime.utils.UInt8Array;
+import flighthq._internal._UInt8ClampedArray;
 
 class Main extends Application {
   // `scale` in the upstream render module is `window.devicePixelRatio || 1`; Lime exposes `window.scale`.
@@ -282,7 +282,7 @@ class Main extends Application {
   // `createRadialGradient` painting; a bare `{width, height}` object would instead become `image.source`
   // and hit the DOM-element `texImage2D` overload, which rejects a plain object.
   function radialGlow(size:Int, stops:Array<Array<Float>>):ImageResource {
-    final pixels = new UInt8Array(size * size * 4);
+    final pixels = new _UInt8ClampedArray(size * size * 4);
     final c = (size - 1) / 2;
     for (y in 0...size) {
       for (x in 0...size) {
@@ -319,7 +319,7 @@ class Main extends Application {
     ];
   }
 
-  function imageFromPixels(width:Int, height:Int, pixels:UInt8Array):ImageResource {
+  function imageFromPixels(width:Int, height:Int, pixels:_UInt8ClampedArray):ImageResource {
     final image = createImageResource();
     image.width = width;
     image.height = height;

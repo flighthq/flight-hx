@@ -16,7 +16,7 @@ import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleForce;
 import flighthq.types.TextureAtlas;
 import flighthq.types._internal._BlendModeValues;
-import lime.utils.UInt8Array;
+import flighthq._internal._UInt8ClampedArray;
 import lime.app.Application;
 import lime.graphics.RenderContext;
 import lime.ui.KeyCode;
@@ -229,7 +229,7 @@ class Main extends Application {
   // the DOM-element `texImage2D` overload, which rejects a plain object).
   function createParticleTexture():ImageResource {
     final size = 16;
-    final pixels = new UInt8Array(size * size * 4);
+    final pixels = new _UInt8ClampedArray(size * size * 4);
     final c = (size - 1) / 2;
     for (y in 0...size) {
       for (x in 0...size) {
@@ -245,7 +245,7 @@ class Main extends Application {
     return imageFromPixels(size, size, pixels);
   }
 
-  function imageFromPixels(width:Int, height:Int, pixels:UInt8Array):ImageResource {
+  function imageFromPixels(width:Int, height:Int, pixels:_UInt8ClampedArray):ImageResource {
     final image = createImageResource();
     image.width = width;
     image.height = height;

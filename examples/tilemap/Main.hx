@@ -9,7 +9,7 @@ import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.DisplayObject;
 import flighthq.types.ImageResource;
-import lime.utils.UInt8Array;
+import flighthq._internal._UInt8ClampedArray;
 import lime.app.Application;
 import lime.graphics.RenderContext;
 import lime.ui.Window;
@@ -110,7 +110,7 @@ class Main extends Application {
       [86, 160, 64], [48, 110, 200], [214, 192, 120], [120, 120, 130],
       [140, 96, 58], [235, 240, 248], [230, 90, 30], [20, 20, 28],
     ];
-    final pixels = new UInt8Array(width * TILE_SIZE * 4);
+    final pixels = new _UInt8ClampedArray(width * TILE_SIZE * 4);
     for (y in 0...TILE_SIZE) {
       for (x in 0...width) {
         final c = colors[Std.int(x / TILE_SIZE)];
@@ -126,7 +126,7 @@ class Main extends Application {
     return imageFromPixels(width, TILE_SIZE, pixels);
   }
 
-  function imageFromPixels(width:Int, height:Int, pixels:UInt8Array):ImageResource {
+  function imageFromPixels(width:Int, height:Int, pixels:_UInt8ClampedArray):ImageResource {
     final image = createImageResource();
     image.width = width;
     image.height = height;

@@ -13,7 +13,7 @@ import flighthq.types.ImageResource;
 import lime.app.Application;
 import lime.graphics.RenderContext;
 import lime.ui.Window;
-import lime.utils.UInt8Array;
+import flighthq._internal._UInt8ClampedArray;
 
 class Main extends Application {
   // `scale` in the upstream render module is `window.devicePixelRatio || 1`; Lime exposes `window.scale`.
@@ -122,7 +122,7 @@ class Main extends Application {
   // the GL bitmap renderer uploads with the 9-argument `texImage2D(width, height, ..., data)` overload.
   // Handing a bare `{width, height}` object instead becomes `image.source` and hits the DOM-element
   // `texImage2D` overload, which rejects a plain object ("Overload resolution failed").
-  function imageFromPixels(width:Int, height:Int, pixels:UInt8Array):ImageResource {
+  function imageFromPixels(width:Int, height:Int, pixels:_UInt8ClampedArray):ImageResource {
     final image = createImageResource();
     image.width = width;
     image.height = height;
@@ -132,7 +132,7 @@ class Main extends Application {
 
   // Colorful linear gradient from top-left to bottom-right.
   function createGradientImage(width:Int, height:Int):ImageResource {
-    final pixels = new UInt8Array(width * height * 4);
+    final pixels = new _UInt8ClampedArray(width * height * 4);
     for (y in 0...height) {
       for (x in 0...width) {
         final i = (y * width + x) * 4;
@@ -149,7 +149,7 @@ class Main extends Application {
 
   // Two-tone checkerboard pattern.
   function createCheckerboardImage(width:Int, height:Int):ImageResource {
-    final pixels = new UInt8Array(width * height * 4);
+    final pixels = new _UInt8ClampedArray(width * height * 4);
     final cell = 16;
     for (y in 0...height) {
       for (x in 0...width) {
@@ -167,7 +167,7 @@ class Main extends Application {
 
   // Radial gradient: bright center fading to the edges.
   function createRadialGradientImage(width:Int, height:Int):ImageResource {
-    final pixels = new UInt8Array(width * height * 4);
+    final pixels = new _UInt8ClampedArray(width * height * 4);
     final cx = (width - 1) / 2;
     final cy = (height - 1) / 2;
     final maxR = Math.min(cx, cy);
