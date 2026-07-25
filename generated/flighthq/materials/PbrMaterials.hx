@@ -19,6 +19,7 @@ class PbrMaterials {
     var specular:Dynamic = cast _Runtime.UNDEFINED;
     var glossiness:Dynamic = cast _Runtime.UNDEFINED;
     var diffuseMap:Dynamic = cast _Runtime.UNDEFINED;
+    var specularGlossinessMap:Dynamic = cast _Runtime.UNDEFINED;
     var emissive:Dynamic = cast _Runtime.UNDEFINED;
     var emissiveMap:Dynamic = cast _Runtime.UNDEFINED;
     var emissiveStrength:Dynamic = cast _Runtime.UNDEFINED;
@@ -46,6 +47,7 @@ class PbrMaterials {
     specular = _Runtime.field(source, 'specular');
     glossiness = _Runtime.field(source, 'glossiness');
     diffuseMap = _Runtime.field(source, 'diffuseMap');
+    specularGlossinessMap = _Runtime.field(source, 'specularGlossinessMap');
     emissive = _Runtime.field(source, 'emissive');
     emissiveMap = _Runtime.field(source, 'emissiveMap');
     emissiveStrength = _Runtime.field(source, 'emissiveStrength');
@@ -77,7 +79,7 @@ class PbrMaterials {
     _Runtime.setField(out, 'emissiveMap', emissiveMap);
     _Runtime.setField(out, 'emissiveStrength', emissiveStrength);
     _Runtime.setField(out, 'metallic', metallic);
-    _Runtime.setField(out, 'metallicRoughnessMap', null);
+    _Runtime.setField(out, 'metallicRoughnessMap', specularGlossinessMap);
     _Runtime.setField(out, 'normalMap', normalMap);
     _Runtime.setField(out, 'normalScale', normalScale);
     _Runtime.setField(out, 'occlusionMap', occlusionMap);
@@ -143,7 +145,7 @@ class PbrMaterials {
   }
 
   public static function packLinear__pbrMaterials(r:Float, g:Float, b:Float, a:Float):Float {
-    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(PbrMaterials.linearChannelToSrgb8__pbrMaterials, cast ([r] : Array<Dynamic>))) << _Runtime.toInt32(24.0))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(PbrMaterials.linearChannelToSrgb8__pbrMaterials, cast ([g] : Array<Dynamic>))) << _Runtime.toInt32(16.0))))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(PbrMaterials.linearChannelToSrgb8__pbrMaterials, cast ([b] : Array<Dynamic>))) << _Runtime.toInt32(8.0))))) | _Runtime.toInt32(HxMath.round((a * 255.0))))), _Runtime.toInt32(0.0));
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(PbrMaterials.linearChannelToSrgb8__pbrMaterials, cast ([r] : Array<Dynamic>))) << 24)) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(PbrMaterials.linearChannelToSrgb8__pbrMaterials, cast ([g] : Array<Dynamic>))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(PbrMaterials.linearChannelToSrgb8__pbrMaterials, cast ([b] : Array<Dynamic>))) << 8)))) | _Runtime.toInt32(HxMath.round((a * 255.0))))), 0);
     return cast null;
   }
 

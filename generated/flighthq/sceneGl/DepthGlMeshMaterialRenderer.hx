@@ -6,11 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.sceneGl.GlDebugPrelude.bindGlDebugRange;
 import flighthq.sceneGl.GlDebugPrelude.ensureGlDebugProgram;
 import flighthq.sceneGl.GlMeshMaterialRegistry.registerGlMeshMaterialRenderer;
-import flighthq.sceneGl.GlMeshProgram.beginGlMeshDraw;
-import flighthq.sceneGl.GlMeshProgram.drawGlMeshSubset;
-import flighthq.sceneGl.GlMeshProgram.setGlMeshViewProjection;
-import flighthq.sceneGl.GlSceneRuntime.getGlSceneRuntime;
-import flighthq.types.Camera3D;
+import flighthq.sceneGl._internal._GlMeshProgramValues.beginGlMeshDraw;
+import flighthq.sceneGl._internal._GlMeshProgramValues.drawGlMeshSubset;
+import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshViewProjection;
+import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
+import flighthq.types.Camera;
 import flighthq.types.DepthMaterial;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlRenderState;
@@ -22,7 +22,7 @@ import flighthq.types.Types.DepthMaterialKind;
 import flighthq.types._internal._DepthMaterialValues.DepthMaterialKind;
 
 class DepthGlMeshMaterialRenderer {
-  public static final depthGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera3D) {
+  public static final depthGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var depth:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;

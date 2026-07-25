@@ -5,9 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.displayobjectCanvas.CanvasRenderState.getCanvasRenderStateRuntime;
 import flighthq.image.ImageResourceFrom.createCanvasFromImageResource;
-import flighthq.types.CanvasImageSourceKind;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.ImageResource;
+
+typedef CanvasImageSourceKind = String;
 
 class CanvasImageSource {
   public static function explainCanvasImageSource(image:ImageResource):Dynamic {

@@ -43,7 +43,7 @@ class CanvasFilmGrainEffect {
         {
           var x:Dynamic = 0.0;
           while (_Runtime.truthy(_Runtime.compare(x, cells, '<'))) {
-            (s = cast ((_Runtime.toInt32(((s * 1103515245.0) + 12345.0)) & _Runtime.toInt32(2147483647.0)) : Dynamic));
+            (s = cast ((_Runtime.toInt32(((s * 1103515245.0) + 12345.0)) & 2147483647) : Dynamic));
             var v:Dynamic = HxMath.floor(((s / 2147483647.0) * 255.0));
             flighthq._internal.backend.Canvas2dBackend.setField(nctx, 'fillStyle', 'rgb(' + Std.string(v) + ',' + Std.string(v) + ',' + Std.string(v) + ')');
             flighthq._internal.backend.Canvas2dBackend.call(nctx, 'fillRect', cast ([(x * size), (y * size), size, size] : Array<Dynamic>));

@@ -17,7 +17,7 @@ class SurfaceQuery {
     var maxY:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
     surfaceWidth = _Runtime.field(_Runtime.field(source, 'surface'), 'width');
-    maskedColor = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(0.0))) & _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(mask), _Runtime.toInt32(0.0))));
+    maskedColor = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 0)) & _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(mask), 0)));
     minX = HxMath.POSITIVE_INFINITY;
     minY = HxMath.POSITIVE_INFINITY;
     maxX = -1.0;
@@ -33,7 +33,7 @@ class SurfaceQuery {
             var x:Dynamic = (_Runtime.field(source, 'x') + px);
             if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(x, 0.0, '<'), function():Dynamic return cast _Runtime.compare(x, surfaceWidth, '>=')))) { px++; continue; }
             var i:Dynamic = (((y * surfaceWidth) + x) * 4.0);
-            var pixel:Dynamic = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(data, i)) << _Runtime.toInt32(24.0))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(data, (i + 1.0))) << _Runtime.toInt32(16.0))))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(data, (i + 2.0))) << _Runtime.toInt32(8.0))))) | _Runtime.toInt32(_Runtime.getIndex(data, (i + 3.0))))), _Runtime.toInt32(0.0))) & _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(mask), _Runtime.toInt32(0.0))));
+            var pixel:Dynamic = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(data, i)) << 24)) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(data, (i + 1.0))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(data, (i + 2.0))) << 8)))) | _Runtime.toInt32(_Runtime.getIndex(data, (i + 3.0))))), 0)) & _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(mask), 0)));
             var matches:Dynamic = _Runtime.strictEquals(pixel, maskedColor);
             if (_Runtime.truthy(_Runtime.strictEquals(matches, findColor))) {
               if (_Runtime.truthy(_Runtime.compare(x, minX, '<'))) { (minX = cast (x : Dynamic)); }

@@ -20,25 +20,25 @@ class NextPowerOfTwo {
 
   public static function nextPowerOfTwo(n:Float):Float {
     if (_Runtime.truthy(_Runtime.compare(n, 1.0, '<='))) { return cast 1.0; }
-    (n = cast ((_Runtime.toInt32((n - 1.0)) | _Runtime.toInt32(0.0)) : Dynamic));
-    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> _Runtime.toInt32(1.0)))));
-    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> _Runtime.toInt32(2.0)))));
-    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> _Runtime.toInt32(4.0)))));
-    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> _Runtime.toInt32(8.0)))));
-    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> _Runtime.toInt32(16.0)))));
-    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((n + 1.0)), _Runtime.toInt32(0.0));
+    (n = cast ((_Runtime.toInt32((n - 1.0)) | 0) : Dynamic));
+    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> 1))));
+    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> 2))));
+    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> 4))));
+    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> 8))));
+    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> 16))));
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((n + 1.0)), 0);
     return cast null;
   }
 
   public static function previousPowerOfTwo(n:Float):Float {
     if (_Runtime.truthy(_Runtime.compare(n, 1.0, '<='))) { return cast 1.0; }
-    (n = cast ((_Runtime.toInt32(n) | _Runtime.toInt32(0.0)) : Dynamic));
-    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> _Runtime.toInt32(1.0)))));
-    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> _Runtime.toInt32(2.0)))));
-    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> _Runtime.toInt32(4.0)))));
-    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> _Runtime.toInt32(8.0)))));
-    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> _Runtime.toInt32(16.0)))));
-    return cast (_Runtime.toInt32((n + 1.0)) >> _Runtime.toInt32(1.0));
+    (n = cast ((_Runtime.toInt32(n) | 0) : Dynamic));
+    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> 1))));
+    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> 2))));
+    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> 4))));
+    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> 8))));
+    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> 16))));
+    return cast (_Runtime.toInt32((n + 1.0)) >> 1);
     return cast null;
   }
 }

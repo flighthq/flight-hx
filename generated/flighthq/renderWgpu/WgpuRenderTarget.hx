@@ -170,7 +170,7 @@ class WgpuRenderTarget {
     var packed:Dynamic = cast _Runtime.UNDEFINED;
     packed = _Runtime.getIndex(_Runtime.field(target, 'clearColors'), 0.0);
     if (_Runtime.truthy(_Runtime.strictEquals(packed, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast { r: 0.0, g: 0.0, b: 0.0, a: 0.0 }; }
-    return cast { r: ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0)) / 255.0), g: ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) / 255.0), b: ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) / 255.0), a: ((_Runtime.toInt32(packed) & _Runtime.toInt32(255.0)) / 255.0) };
+    return cast { r: ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 24)) & 255) / 255.0), g: ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 16)) & 255) / 255.0), b: ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 8)) & 255) / 255.0), a: ((_Runtime.toInt32(packed) & 255) / 255.0) };
     return cast null;
   }
 

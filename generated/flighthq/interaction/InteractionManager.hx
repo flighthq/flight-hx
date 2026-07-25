@@ -10,7 +10,7 @@ import flighthq.interaction.InteractionSpatialIndex.findSpatialInteractionTarget
 import flighthq.interaction.NodeInteractionState.getNodeCursor;
 import flighthq.node.Hierarchy.getNodeParent;
 import flighthq.node.Node.getNodeRuntime;
-import flighthq.node.NodeTransform2d.getNodeWorldMatrix;
+import flighthq.node.Transform2d.getNodeWorldMatrix;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.signals.Slot.connectSignal;
@@ -21,7 +21,6 @@ import flighthq.types.FocusEventData;
 import flighthq.types.HasTransform2D.Transform2DNode;
 import flighthq.types.InputKeyboardData;
 import flighthq.types.InputPointerData;
-import flighthq.types.InteractionConnectGuard;
 import flighthq.types.InteractionManager;
 import flighthq.types.InteractionManager.AnyInteractionSignalSlot;
 import flighthq.types.InteractionManager.InteractionInputSource;
@@ -42,6 +41,8 @@ typedef KeyboardSignalName__interactionManager = String;
 typedef FocusSignalName__interactionManager = String;
 
 typedef PointerSignalName__interactionManager = InteractionSignalName;
+
+typedef InteractionConnectGuard = Dynamic;
 
 typedef InteractionSignalPayload__interactionManager<Name> = Dynamic;
 
@@ -480,7 +481,7 @@ class InteractionManager {
   public static function setPointerData__interactionManager(target:Null<NodeAny>, currentTarget:Null<NodeAny>, x:Float, y:Float, button:Float, deltaX:Float = 0.0, deltaY:Float = 0.0, ?options:InteractionPointerOptions):Void {
     _Runtime.setField(InteractionManager._pointerData__interactionManager, 'altKey', _Runtime.coalesce(_Runtime.optionalField(options, 'altKey'), function():Dynamic return cast false));
     _Runtime.setField(InteractionManager._pointerData__interactionManager, 'button', button);
-    _Runtime.setField(InteractionManager._pointerData__interactionManager, 'buttons', _Runtime.coalesce(_Runtime.optionalField(options, 'buttons'), function():Dynamic return cast _Runtime.select(_Runtime.compare(button, 0.0, '>='), function():Dynamic return cast (_Runtime.toInt32(1.0) << _Runtime.toInt32(button)), function():Dynamic return cast 0.0)));
+    _Runtime.setField(InteractionManager._pointerData__interactionManager, 'buttons', _Runtime.coalesce(_Runtime.optionalField(options, 'buttons'), function():Dynamic return cast _Runtime.select(_Runtime.compare(button, 0.0, '>='), function():Dynamic return cast (1 << _Runtime.toInt32(button)), function():Dynamic return cast 0.0)));
     _Runtime.setField(InteractionManager._pointerData__interactionManager, 'ctrlKey', _Runtime.coalesce(_Runtime.optionalField(options, 'ctrlKey'), function():Dynamic return cast false));
     _Runtime.setField(InteractionManager._pointerData__interactionManager, 'currentTarget', currentTarget);
     _Runtime.setField(InteractionManager._pointerData__interactionManager, 'deltaX', deltaX);

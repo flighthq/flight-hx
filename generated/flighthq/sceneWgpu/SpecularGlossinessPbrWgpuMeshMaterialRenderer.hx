@@ -11,11 +11,11 @@ import flighthq.sceneWgpu.StandardPbrWgpuMeshMaterialRenderer.getWgpuPbrMaterial
 import flighthq.sceneWgpu.StandardPbrWgpuMeshMaterialRenderer.writeWgpuPbrMaterialUniform;
 import flighthq.sceneWgpu.StandardPbrWgpuMeshMaterialRenderer.writeWgpuPbrStandardBlock;
 import flighthq.sceneWgpu.WgpuMeshMaterialRegistry.registerWgpuMeshMaterialRenderer;
-import flighthq.sceneWgpu.WgpuMeshPipeline.beginWgpuMeshDraw;
-import flighthq.sceneWgpu.WgpuMeshPipeline.drawWgpuMeshSubset;
-import flighthq.sceneWgpu.WgpuMeshPipeline.writeWgpuFrameUniform;
 import flighthq.sceneWgpu.WgpuPbrPipelineCache.ensureWgpuPbrPipeline;
-import flighthq.types.Camera3D;
+import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.beginWgpuMeshDraw;
+import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.drawWgpuMeshSubset;
+import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.writeWgpuFrameUniform;
+import flighthq.types.Camera;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
@@ -29,7 +29,7 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._SpecularGlossinessPbrMaterialValues.SpecularGlossinessPbrMaterialKind;
 
 class SpecularGlossinessPbrWgpuMeshMaterialRenderer {
-  public static final specularGlossinessPbrWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
+  public static final specularGlossinessPbrWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     var specGloss:Dynamic = cast _Runtime.UNDEFINED;
@@ -99,10 +99,10 @@ class SpecularGlossinessPbrWgpuMeshMaterialRenderer {
       var srgb:Dynamic = cast _Runtime.UNDEFINED;
       clamped = HxMath.min(HxMath.max(linear, 0.0), 1.0);
       srgb = _Runtime.select(_Runtime.compare(clamped, 0.0031308, '<='), function():Dynamic return cast (clamped * 12.92), function():Dynamic return cast ((1.055 * HxMath.pow(clamped, (1.0 / 2.4))) - 0.055));
-      return cast (_Runtime.toInt32(HxMath.round((srgb * 255.0))) & _Runtime.toInt32(255.0));
+      return cast (_Runtime.toInt32(HxMath.round((srgb * 255.0))) & 255);
     };
-    alpha = (_Runtime.toInt32(HxMath.round((HxMath.min(HxMath.max(a, 0.0), 1.0) * 255.0))) & _Runtime.toInt32(255.0));
-    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(toByte, cast ([r] : Array<Dynamic>))) << _Runtime.toInt32(24.0))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(toByte, cast ([g] : Array<Dynamic>))) << _Runtime.toInt32(16.0))))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(toByte, cast ([b] : Array<Dynamic>))) << _Runtime.toInt32(8.0))))) | _Runtime.toInt32(alpha))), _Runtime.toInt32(0.0));
+    alpha = (_Runtime.toInt32(HxMath.round((HxMath.min(HxMath.max(a, 0.0), 1.0) * 255.0))) & 255);
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(toByte, cast ([r] : Array<Dynamic>))) << 24)) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(toByte, cast ([g] : Array<Dynamic>))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(toByte, cast ([b] : Array<Dynamic>))) << 8)))) | _Runtime.toInt32(alpha))), 0);
     return cast null;
   }
 

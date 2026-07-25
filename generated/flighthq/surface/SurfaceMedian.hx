@@ -62,7 +62,7 @@ class SurfaceMedian {
                 ky++;
               }
             }
-            var mid:Dynamic = (_Runtime.toInt32(n) >> _Runtime.toInt32(1.0));
+            var mid:Dynamic = (_Runtime.toInt32(n) >> 1);
             var di:Dynamic = (((py * w) + px) * 4.0);
             _Runtime.setIndex(out, di, _Runtime.callValue(SurfaceMedian.medianOf__surfaceMedian, cast ([rs, n, mid] : Array<Dynamic>)));
             _Runtime.setIndex(out, (di + 1.0), _Runtime.callValue(SurfaceMedian.medianOf__surfaceMedian, cast ([gs, n, mid] : Array<Dynamic>)));

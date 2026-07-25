@@ -14,7 +14,7 @@ class TextLineBreaks {
     hi = (_Runtime.field(lineBreaks, 'length') - 1.0);
     result = -1.0;
     while (_Runtime.truthy(_Runtime.compare(lo, hi, '<='))) {
-      var mid:Dynamic = _Runtime.unsignedShiftRight(_Runtime.toInt32((lo + hi)), _Runtime.toInt32(1.0));
+      var mid:Dynamic = _Runtime.unsignedShiftRight(_Runtime.toInt32((lo + hi)), 1);
       if (_Runtime.truthy(_Runtime.compare(_Runtime.getIndex(lineBreaks, mid), startIndex, '>='))) {
         (result = cast (_Runtime.getIndex(lineBreaks, mid) : Dynamic));
         (hi = cast ((mid - 1.0) : Dynamic));

@@ -22,9 +22,9 @@ class GlScreenSpaceFogEffect {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     var inputs:Dynamic = cast _Runtime.UNDEFINED;
     packed = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 3369262335.0);
-    r = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0)) / 255.0);
-    g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) / 255.0);
-    b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) / 255.0);
+    r = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 24)) & 255) / 255.0);
+    g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 16)) & 255) / 255.0);
+    b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 8)) & 255) / 255.0);
     density = _Runtime.coalesce(_Runtime.field(effect, 'density'), function():Dynamic return cast 1.0);
     near = _Runtime.coalesce(_Runtime.field(effect, 'near'), function():Dynamic return cast 0.0);
     far = _Runtime.coalesce(_Runtime.field(effect, 'far'), function():Dynamic return cast 1.0);

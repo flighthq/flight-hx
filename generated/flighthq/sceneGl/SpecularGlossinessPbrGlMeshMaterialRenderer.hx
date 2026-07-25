@@ -4,17 +4,17 @@ package flighthq.sceneGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.color.PackColor.unpackColorToLinear;
-import flighthq.sceneGl.GlLitProgram.bindGlMeshLightBlock;
 import flighthq.sceneGl.GlMeshMaterialRegistry.registerGlMeshMaterialRenderer;
-import flighthq.sceneGl.GlMeshProgram.beginGlMeshDraw;
-import flighthq.sceneGl.GlMeshProgram.drawGlMeshSubset;
-import flighthq.sceneGl.GlMeshProgram.setGlMeshCameraPosition;
-import flighthq.sceneGl.GlMeshProgram.setGlMeshViewProjection;
 import flighthq.sceneGl.GlPbrProgramCache.ensureGlPbrProgram;
 import flighthq.sceneGl.GlPbrStandardBlock.bindGlPbrStandardBlock;
 import flighthq.sceneGl.GlPbrStandardBlock.buildGlPbrStandardDefineKey;
-import flighthq.sceneGl.GlSceneRuntime.getGlSceneRuntime;
-import flighthq.types.Camera3D;
+import flighthq.sceneGl._internal._GlLitProgramValues.bindGlMeshLightBlock;
+import flighthq.sceneGl._internal._GlMeshProgramValues.beginGlMeshDraw;
+import flighthq.sceneGl._internal._GlMeshProgramValues.drawGlMeshSubset;
+import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshCameraPosition;
+import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshViewProjection;
+import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
+import flighthq.types.Camera;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlRenderState;
 import flighthq.types.LinearColor;
@@ -28,7 +28,7 @@ import flighthq.types.Types.SpecularGlossinessPbrMaterialKind;
 import flighthq.types._internal._SpecularGlossinessPbrMaterialValues.SpecularGlossinessPbrMaterialKind;
 
 class SpecularGlossinessPbrGlMeshMaterialRenderer {
-  public static final specularGlossinessPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
+  public static final specularGlossinessPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var specGloss:Dynamic = cast _Runtime.UNDEFINED;
     var standard:Dynamic = cast _Runtime.UNDEFINED;
@@ -90,10 +90,10 @@ class SpecularGlossinessPbrGlMeshMaterialRenderer {
       var srgb:Dynamic = cast _Runtime.UNDEFINED;
       clamped = HxMath.min(HxMath.max(linear, 0.0), 1.0);
       srgb = _Runtime.select(_Runtime.compare(clamped, 0.0031308, '<='), function():Dynamic return cast (clamped * 12.92), function():Dynamic return cast ((1.055 * HxMath.pow(clamped, (1.0 / 2.4))) - 0.055));
-      return cast (_Runtime.toInt32(HxMath.round((srgb * 255.0))) & _Runtime.toInt32(255.0));
+      return cast (_Runtime.toInt32(HxMath.round((srgb * 255.0))) & 255);
     };
-    alpha = (_Runtime.toInt32(HxMath.round((HxMath.min(HxMath.max(a, 0.0), 1.0) * 255.0))) & _Runtime.toInt32(255.0));
-    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(toByte, cast ([r] : Array<Dynamic>))) << _Runtime.toInt32(24.0))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(toByte, cast ([g] : Array<Dynamic>))) << _Runtime.toInt32(16.0))))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(toByte, cast ([b] : Array<Dynamic>))) << _Runtime.toInt32(8.0))))) | _Runtime.toInt32(alpha))), _Runtime.toInt32(0.0));
+    alpha = (_Runtime.toInt32(HxMath.round((HxMath.min(HxMath.max(a, 0.0), 1.0) * 255.0))) & 255);
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(toByte, cast ([r] : Array<Dynamic>))) << 24)) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(toByte, cast ([g] : Array<Dynamic>))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(toByte, cast ([b] : Array<Dynamic>))) << 8)))) | _Runtime.toInt32(alpha))), 0);
     return cast null;
   }
 

@@ -7,7 +7,7 @@ import flighthq.types.DomRenderState;
 
 class DomBackground {
   public static function renderDomBackground(state:DomRenderState):Void {
-    if (_Runtime.truthy(!_Runtime.strictEquals((_Runtime.toInt32(_Runtime.field(state, 'backgroundColor')) & _Runtime.toInt32(255.0)), 0.0))) {
+    if (_Runtime.truthy(!_Runtime.strictEquals((_Runtime.toInt32(_Runtime.field(state, 'backgroundColor')) & 255), 0.0))) {
       _Runtime.setField(_Runtime.field(_Runtime.field(state, 'element'), 'style'), 'backgroundColor', _Runtime.field(state, 'backgroundColorString'));
     } else {
       _Runtime.setField(_Runtime.field(_Runtime.field(state, 'element'), 'style'), 'backgroundColor', '');

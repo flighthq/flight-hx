@@ -39,15 +39,15 @@ class WgpuEffectGradientRamp {
         var a:Dynamic = 0.0;
         if (_Runtime.truthy(_Runtime.compare(t, _Runtime.getIndex(ratios, 0.0), '<='))) {
           var c:Dynamic = _Runtime.getIndex(colors, 0.0);
-          (r = cast ((_Runtime.toInt32((_Runtime.toInt32(c) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) : Dynamic));
-          (g = cast ((_Runtime.toInt32((_Runtime.toInt32(c) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) : Dynamic));
-          (b = cast ((_Runtime.toInt32(c) & _Runtime.toInt32(255.0)) : Dynamic));
+          (r = cast ((_Runtime.toInt32((_Runtime.toInt32(c) >> 16)) & 255) : Dynamic));
+          (g = cast ((_Runtime.toInt32((_Runtime.toInt32(c) >> 8)) & 255) : Dynamic));
+          (b = cast ((_Runtime.toInt32(c) & 255) : Dynamic));
           (a = cast (HxMath.round((_Runtime.getIndex(alphas, 0.0) * 255.0)) : Dynamic));
         } else { if (_Runtime.truthy(_Runtime.compare(t, _Runtime.getIndex(ratios, (_Runtime.field(ratios, 'length') - 1.0)), '>='))) {
           var c:Dynamic = _Runtime.getIndex(colors, (_Runtime.field(colors, 'length') - 1.0));
-          (r = cast ((_Runtime.toInt32((_Runtime.toInt32(c) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) : Dynamic));
-          (g = cast ((_Runtime.toInt32((_Runtime.toInt32(c) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) : Dynamic));
-          (b = cast ((_Runtime.toInt32(c) & _Runtime.toInt32(255.0)) : Dynamic));
+          (r = cast ((_Runtime.toInt32((_Runtime.toInt32(c) >> 16)) & 255) : Dynamic));
+          (g = cast ((_Runtime.toInt32((_Runtime.toInt32(c) >> 8)) & 255) : Dynamic));
+          (b = cast ((_Runtime.toInt32(c) & 255) : Dynamic));
           (a = cast (HxMath.round((_Runtime.getIndex(alphas, (_Runtime.field(alphas, 'length') - 1.0)) * 255.0)) : Dynamic));
         } else {
           {
@@ -59,9 +59,9 @@ class WgpuEffectGradientRamp {
                 var blend:Dynamic = _Runtime.select(_Runtime.compare(r1, r0, '>'), function():Dynamic return cast ((t - r0) / (r1 - r0)), function():Dynamic return cast 0.0);
                 var c0:Dynamic = _Runtime.getIndex(colors, j);
                 var c1:Dynamic = _Runtime.getIndex(colors, (j + 1.0));
-                (r = cast (HxMath.round((((_Runtime.toInt32((_Runtime.toInt32(c0) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) * (1.0 - blend)) + ((_Runtime.toInt32((_Runtime.toInt32(c1) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) * blend))) : Dynamic));
-                (g = cast (HxMath.round((((_Runtime.toInt32((_Runtime.toInt32(c0) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) * (1.0 - blend)) + ((_Runtime.toInt32((_Runtime.toInt32(c1) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) * blend))) : Dynamic));
-                (b = cast (HxMath.round((((_Runtime.toInt32(c0) & _Runtime.toInt32(255.0)) * (1.0 - blend)) + ((_Runtime.toInt32(c1) & _Runtime.toInt32(255.0)) * blend))) : Dynamic));
+                (r = cast (HxMath.round((((_Runtime.toInt32((_Runtime.toInt32(c0) >> 16)) & 255) * (1.0 - blend)) + ((_Runtime.toInt32((_Runtime.toInt32(c1) >> 16)) & 255) * blend))) : Dynamic));
+                (g = cast (HxMath.round((((_Runtime.toInt32((_Runtime.toInt32(c0) >> 8)) & 255) * (1.0 - blend)) + ((_Runtime.toInt32((_Runtime.toInt32(c1) >> 8)) & 255) * blend))) : Dynamic));
+                (b = cast (HxMath.round((((_Runtime.toInt32(c0) & 255) * (1.0 - blend)) + ((_Runtime.toInt32(c1) & 255) * blend))) : Dynamic));
                 (a = cast (HxMath.round((((_Runtime.getIndex(alphas, j) * 255.0) * (1.0 - blend)) + ((_Runtime.getIndex(alphas, (j + 1.0)) * 255.0) * blend))) : Dynamic));
                 break;
               }

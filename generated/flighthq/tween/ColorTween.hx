@@ -17,10 +17,10 @@ class ColorTween {
     var components:ColorComponents__colorTween = cast _Runtime.UNDEFINED;
     var tween:Dynamic = cast _Runtime.UNDEFINED;
     fromColor = _Runtime.coalesce(_Runtime.getIndex(target, property), function():Dynamic return cast 0.0);
-    components = { b: (_Runtime.toInt32(fromColor) & _Runtime.toInt32(255.0)), g: (_Runtime.toInt32((_Runtime.toInt32(fromColor) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)), r: (_Runtime.toInt32((_Runtime.toInt32(fromColor) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) };
-    tween = _Runtime.callValue(createTween, cast ([manager, components, duration, { b: (_Runtime.toInt32(toColor) & _Runtime.toInt32(255.0)), g: (_Runtime.toInt32((_Runtime.toInt32(toColor) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)), r: (_Runtime.toInt32((_Runtime.toInt32(toColor) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) }, options] : Array<Dynamic>));
+    components = { b: (_Runtime.toInt32(fromColor) & 255), g: (_Runtime.toInt32((_Runtime.toInt32(fromColor) >> 8)) & 255), r: (_Runtime.toInt32((_Runtime.toInt32(fromColor) >> 16)) & 255) };
+    tween = _Runtime.callValue(createTween, cast ([manager, components, duration, { b: (_Runtime.toInt32(toColor) & 255), g: (_Runtime.toInt32((_Runtime.toInt32(toColor) >> 8)) & 255), r: (_Runtime.toInt32((_Runtime.toInt32(toColor) >> 16)) & 255) }, options] : Array<Dynamic>));
     _Runtime.callValue(connectSignal, cast ([_Runtime.field(tween, 'onUpdate'), function() {
-      _Runtime.setIndex(target, property, (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.round(_Runtime.field(components, 'r'))) & _Runtime.toInt32(255.0))) << _Runtime.toInt32(16.0))) | _Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.round(_Runtime.field(components, 'g'))) & _Runtime.toInt32(255.0))) << _Runtime.toInt32(8.0))))) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round(_Runtime.field(components, 'b'))) & _Runtime.toInt32(255.0)))));
+      _Runtime.setIndex(target, property, (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.round(_Runtime.field(components, 'r'))) & 255)) << 16)) | _Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.round(_Runtime.field(components, 'g'))) & 255)) << 8)))) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round(_Runtime.field(components, 'b'))) & 255))));
     }] : Array<Dynamic>));
     return cast tween;
     return cast null;

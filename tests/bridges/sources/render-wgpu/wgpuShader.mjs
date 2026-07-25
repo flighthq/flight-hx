@@ -13,3 +13,4 @@ export const setWgpuMatrixFromTransform = api.setWgpuMatrixFromTransform;
 export const UNIFORM_BYTE_SIZE = api.UNIFORM_BYTE_SIZE;
 export const writeWgpuMatrixOnlyUniforms = api.writeWgpuMatrixOnlyUniforms;
 export const writeWgpuQuadUniforms = api.writeWgpuQuadUniforms;
+export { WgpuBitmapShader } from '@flighthq/types';

@@ -5,5 +5,5 @@ const api = compiled.flighthq.camera.Depth;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const getCamera3DLinearDepth = api.getCamera3DLinearDepth;
-export const getCamera3DViewSpaceZ = api.getCamera3DViewSpaceZ;
+export const getCameraLinearDepth = api.getCameraLinearDepth;
+export const getCameraViewSpaceZ = api.getCameraViewSpaceZ;

@@ -6,17 +6,19 @@ import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.hasImageResourcePixels;
 import flighthq.renderGl.GlDraw.bindGlImageResourceTexture;
 import flighthq.renderGl.GlDraw.bindGlVideoTexture;
-import flighthq.sceneGl.GlMeshProgram.GL_SKIN_VERTEX_DECLARATIONS_GLSL;
-import flighthq.sceneGl.GlMeshProgram.GL_UV_TRANSFORM_VERTEX_GLSL;
-import flighthq.sceneGl.GlMeshProgram.compileGlProgram;
-import flighthq.sceneGl.GlMeshProgram.ensureGlSceneProgram;
-import flighthq.sceneGl.GlSceneRuntime.getGlSceneRuntime;
+import flighthq.sceneGl._internal._GlMeshProgramValues.GL_SKIN_VERTEX_DECLARATIONS_GLSL;
+import flighthq.sceneGl._internal._GlMeshProgramValues.GL_UV_TRANSFORM_VERTEX_GLSL;
+import flighthq.sceneGl._internal._GlMeshProgramValues.compileGlProgram;
+import flighthq.sceneGl._internal._GlMeshProgramValues.ensureGlSceneProgram;
+import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlUnlitProgram;
-import flighthq.types.GlUnlitProgram.GlUnlitDefineKey;
 import flighthq.types.LinearColor;
 import flighthq.types.Texture;
 import flighthq.types.VideoTexture;
+
+typedef GlUnlitDefineKey = { var alphaMaskEnabled:Bool; var hasColorMap:Bool; @:optional var hasSkin:Bool; var hasUvTransform:Bool; var vertexColor:Bool; };
+
+typedef GlUnlitProgram = Dynamic;
 
 class GlUnlitPrelude {
   public static function bindGlUnlitSurface(state:GlRenderState, program:GlUnlitProgram, color:LinearColor, intensity:Float, colorMap:Null<Texture>, alphaCutoff:Float):Void {

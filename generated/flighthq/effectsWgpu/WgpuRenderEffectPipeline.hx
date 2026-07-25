@@ -149,11 +149,11 @@ class WgpuRenderEffectPipeline {
     var g:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
     var a:Dynamic = cast _Runtime.UNDEFINED;
-    r = (_Runtime.toInt32(HxMath.round((_Runtime.coalesce(_Runtime.getIndex(rgba, 0.0), function():Dynamic return cast 0.0) * 255.0))) & _Runtime.toInt32(255.0));
-    g = (_Runtime.toInt32(HxMath.round((_Runtime.coalesce(_Runtime.getIndex(rgba, 1.0), function():Dynamic return cast 0.0) * 255.0))) & _Runtime.toInt32(255.0));
-    b = (_Runtime.toInt32(HxMath.round((_Runtime.coalesce(_Runtime.getIndex(rgba, 2.0), function():Dynamic return cast 0.0) * 255.0))) & _Runtime.toInt32(255.0));
-    a = (_Runtime.toInt32(HxMath.round((_Runtime.coalesce(_Runtime.getIndex(rgba, 3.0), function():Dynamic return cast 0.0) * 255.0))) & _Runtime.toInt32(255.0));
-    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(r) << _Runtime.toInt32(24.0))) | _Runtime.toInt32((_Runtime.toInt32(g) << _Runtime.toInt32(16.0))))) | _Runtime.toInt32((_Runtime.toInt32(b) << _Runtime.toInt32(8.0))))) | _Runtime.toInt32(a))), _Runtime.toInt32(0.0));
+    r = (_Runtime.toInt32(HxMath.round((_Runtime.coalesce(_Runtime.getIndex(rgba, 0.0), function():Dynamic return cast 0.0) * 255.0))) & 255);
+    g = (_Runtime.toInt32(HxMath.round((_Runtime.coalesce(_Runtime.getIndex(rgba, 1.0), function():Dynamic return cast 0.0) * 255.0))) & 255);
+    b = (_Runtime.toInt32(HxMath.round((_Runtime.coalesce(_Runtime.getIndex(rgba, 2.0), function():Dynamic return cast 0.0) * 255.0))) & 255);
+    a = (_Runtime.toInt32(HxMath.round((_Runtime.coalesce(_Runtime.getIndex(rgba, 3.0), function():Dynamic return cast 0.0) * 255.0))) & 255);
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(r) << 24)) | _Runtime.toInt32((_Runtime.toInt32(g) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(b) << 8)))) | _Runtime.toInt32(a))), 0);
     return cast null;
   }
 

@@ -73,13 +73,13 @@ class SurfaceTransform {
             if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(sx, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sx, _Runtime.field(_Runtime.field(source, 'surface'), 'width'), '>=')), function():Dynamic return cast _Runtime.compare(dx, 0.0, '<')), function():Dynamic return cast _Runtime.compare(dx, _Runtime.field(_Runtime.field(dest, 'surface'), 'width'), '>=')))) { px++; continue; }
             var si:Dynamic = (((sy * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sx) * 4.0);
             var di:Dynamic = (((dy * _Runtime.field(_Runtime.field(dest, 'surface'), 'width')) + dx) * 4.0);
-            var pixel:Dynamic = _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(sd, si)) << _Runtime.toInt32(24.0))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(sd, (si + 1.0))) << _Runtime.toInt32(16.0))))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(sd, (si + 2.0))) << _Runtime.toInt32(8.0))))) | _Runtime.toInt32(_Runtime.getIndex(sd, (si + 3.0))))) & _Runtime.toInt32(mask))), _Runtime.toInt32(0.0));
-            var passes:Dynamic = _Runtime.callValue(SurfaceTransform.compare__surfaceTransform, cast ([pixel, operation, _Runtime.unsignedShiftRight(_Runtime.toInt32(thresholdValue), _Runtime.toInt32(0.0))] : Array<Dynamic>));
+            var pixel:Dynamic = _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(sd, si)) << 24)) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(sd, (si + 1.0))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(sd, (si + 2.0))) << 8)))) | _Runtime.toInt32(_Runtime.getIndex(sd, (si + 3.0))))) & _Runtime.toInt32(mask))), 0);
+            var passes:Dynamic = _Runtime.callValue(SurfaceTransform.compare__surfaceTransform, cast ([pixel, operation, _Runtime.unsignedShiftRight(_Runtime.toInt32(thresholdValue), 0)] : Array<Dynamic>));
             if (_Runtime.truthy(passes)) {
-              _Runtime.setIndex(dd, di, (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0)));
-              _Runtime.setIndex(dd, (di + 1.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)));
-              _Runtime.setIndex(dd, (di + 2.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)));
-              _Runtime.setIndex(dd, (di + 3.0), (_Runtime.toInt32(color) & _Runtime.toInt32(255.0)));
+              _Runtime.setIndex(dd, di, (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255));
+              _Runtime.setIndex(dd, (di + 1.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255));
+              _Runtime.setIndex(dd, (di + 2.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255));
+              _Runtime.setIndex(dd, (di + 3.0), (_Runtime.toInt32(color) & 255));
               changed++;
             } else { if (_Runtime.truthy(copySource)) {
               _Runtime.setIndex(dd, di, _Runtime.getIndex(sd, si));

@@ -3,70 +3,10 @@ package flighthq.mesh;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.mesh.MeshGeometry.cloneMeshGeometry;
-import flighthq.mesh.MeshGeometry.getMeshGeometryVertexCount;
+import flighthq.mesh.MeshGeometry.createMeshGeometry;
 import flighthq.types.MeshGeometry;
 
 class MeshGeometryIndex {
-  public static function compactMeshGeometryVertices(geometry:MeshGeometry):MeshGeometry {
-    var sourceIndices:Dynamic = cast _Runtime.UNDEFINED;
-    var stride:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceByteLength:Dynamic = cast _Runtime.UNDEFINED;
-    var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceToCompact:Dynamic = cast _Runtime.UNDEFINED;
-    var compactCount:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceBytes:Dynamic = cast _Runtime.UNDEFINED;
-    var compactBuffer:Dynamic = cast _Runtime.UNDEFINED;
-    var compactBytes:Dynamic = cast _Runtime.UNDEFINED;
-    var indices:Dynamic = cast _Runtime.UNDEFINED;
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    sourceIndices = _Runtime.field(geometry, 'indices');
-    stride = _Runtime.field(_Runtime.field(geometry, 'layout'), 'stride');
-    sourceByteLength = _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteLength');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(sourceIndices, null), function():Dynamic return cast _Runtime.compare(stride, 0.0, '<=')), function():Dynamic return cast !_Runtime.strictEquals((stride % 4.0), 0.0)), function():Dynamic return cast !_Runtime.strictEquals((sourceByteLength % stride), 0.0)))) {
-      return cast _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>));
-    }
-    vertexCount = (sourceByteLength / stride);
-    sourceToCompact = new flighthq._internal._UInt32Array(vertexCount);
-    _Runtime.fill(sourceToCompact, MeshGeometryIndex.UINT32_UNMAPPED__meshGeometryIndex, 0, null, 1);
-    compactCount = 0.0;
-    {
-      var element:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(element, _Runtime.field(sourceIndices, 'length'), '<'))) {
-        var sourceIndex:Dynamic = _Runtime.getIndex(sourceIndices, element);
-        if (_Runtime.truthy(_Runtime.compare(sourceIndex, vertexCount, '>='))) { return cast _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>)); }
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.getIndex(sourceToCompact, sourceIndex), MeshGeometryIndex.UINT32_UNMAPPED__meshGeometryIndex))) { _Runtime.setIndex(sourceToCompact, sourceIndex, compactCount++); }
-        element++;
-      }
-    }
-    sourceBytes = new flighthq._internal._UInt8Array(_Runtime.field(_Runtime.field(geometry, 'vertices'), 'buffer'), _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteOffset'), _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteLength'));
-    compactBuffer = _Runtime.construct(_Runtime.globalValue('ArrayBuffer'), [(compactCount * stride)]);
-    compactBytes = new flighthq._internal._UInt8Array(compactBuffer);
-    {
-      var sourceIndex:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(sourceIndex, vertexCount, '<'))) {
-        var compactIndex:Dynamic = _Runtime.getIndex(sourceToCompact, sourceIndex);
-        if (_Runtime.truthy(_Runtime.strictEquals(compactIndex, MeshGeometryIndex.UINT32_UNMAPPED__meshGeometryIndex))) { sourceIndex++; continue; }
-        var sourceOffset:Dynamic = (sourceIndex * stride);
-        _Runtime.callProperty(compactBytes, 'set', cast ([sourceBytes.subarray(Std.int(sourceOffset), Std.int((sourceOffset + stride))), (compactIndex * stride)] : Array<Dynamic>));
-        sourceIndex++;
-      }
-    }
-    indices = _Runtime.select(_Runtime.compare(compactCount, MeshGeometryIndex.UINT16_INDEX_CEILING__meshGeometryIndex, '>'), function():Dynamic return cast new flighthq._internal._UInt32Array(_Runtime.field(sourceIndices, 'length')), function():Dynamic return cast new flighthq._internal._UInt16Array(_Runtime.field(sourceIndices, 'length')));
-    {
-      var element:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(element, _Runtime.field(sourceIndices, 'length'), '<'))) {
-        _Runtime.setIndex(indices, element, _Runtime.getIndex(sourceToCompact, _Runtime.getIndex(sourceIndices, element)));
-        element++;
-      }
-    }
-    out = _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>));
-    _Runtime.setField(out, 'vertices', new flighthq._internal._Float32Array(compactBuffer));
-    _Runtime.setField(out, 'indices', indices);
-    return cast out;
-    return cast null;
-  }
-
   public static function computeMeshGeometryWireframeIndices(geometry:MeshGeometry):Dynamic {
     var useUint32:Dynamic = cast _Runtime.UNDEFINED;
     var indices:Dynamic = cast _Runtime.UNDEFINED;
@@ -123,11 +63,14 @@ class MeshGeometryIndex {
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var sourceVertices:Dynamic = cast _Runtime.UNDEFINED;
     var vertices:Dynamic = cast _Runtime.UNDEFINED;
-    var out:Dynamic = cast _Runtime.UNDEFINED;
     indices = _Runtime.field(geometry, 'indices');
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
     sourceVertices = _Runtime.field(geometry, 'vertices');
-    if (_Runtime.truthy(!_Runtime.truthy(indices))) { return cast _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>)); }
+    if (_Runtime.truthy(!_Runtime.truthy(indices))) {
+      var vertices:Dynamic = new flighthq._internal._Float32Array(_Runtime.field(sourceVertices, 'length'));
+      _Runtime.callProperty(vertices, 'set', cast ([sourceVertices] : Array<Dynamic>));
+      return cast _Runtime.callValue(createMeshGeometry, cast ([{ indices: null, layout: _Runtime.field(geometry, 'layout'), topology: _Runtime.field(geometry, 'topology'), vertices: vertices }] : Array<Dynamic>));
+    }
     vertices = new flighthq._internal._Float32Array((_Runtime.field(indices, 'length') * floatsPerVertex));
     {
       var i:Dynamic = 0.0;
@@ -144,131 +87,7 @@ class MeshGeometryIndex {
         i++;
       }
     }
-    out = _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>));
-    _Runtime.setField(out, 'indices', null);
-    _Runtime.setField(out, 'vertices', vertices);
-    return cast out;
+    return cast _Runtime.callValue(createMeshGeometry, cast ([{ indices: null, layout: _Runtime.field(geometry, 'layout'), topology: _Runtime.field(geometry, 'topology'), vertices: vertices }] : Array<Dynamic>));
     return cast null;
   }
-
-  public static function indexMeshGeometryVertices(geometry:MeshGeometry):MeshGeometry {
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
-    var indices:Dynamic = cast _Runtime.UNDEFINED;
-    out = _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(out, 'indices'), null))) { return cast out; }
-    vertexCount = _Runtime.callValue(getMeshGeometryVertexCount, cast ([out] : Array<Dynamic>));
-    indices = _Runtime.select(_Runtime.compare(vertexCount, MeshGeometryIndex.UINT16_INDEX_CEILING__meshGeometryIndex, '>'), function():Dynamic return cast new flighthq._internal._UInt32Array(vertexCount), function():Dynamic return cast new flighthq._internal._UInt16Array(vertexCount));
-    {
-      var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, vertexCount, '<'))) {
-        _Runtime.setIndex(indices, i, i);
-        i++;
-      }
-    }
-    _Runtime.setField(out, 'indices', indices);
-    return cast out;
-    return cast null;
-  }
-
-  public static function weldMeshGeometryVertices(geometry:MeshGeometry):MeshGeometry {
-    var stride:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceByteLength:Dynamic = cast _Runtime.UNDEFINED;
-    var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceBytes:Dynamic = cast _Runtime.UNDEFINED;
-    var uniqueBytes:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceToUnique:Dynamic = cast _Runtime.UNDEFINED;
-    var candidatesByHash:Dynamic = cast _Runtime.UNDEFINED;
-    var uniqueCount:Dynamic = cast _Runtime.UNDEFINED;
-    var elementCount:Dynamic = cast _Runtime.UNDEFINED;
-    var indices:Dynamic = cast _Runtime.UNDEFINED;
-    var weldedBuffer:Dynamic = cast _Runtime.UNDEFINED;
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    stride = _Runtime.field(_Runtime.field(geometry, 'layout'), 'stride');
-    sourceByteLength = _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteLength');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(stride, 0.0, '<='), function():Dynamic return cast !_Runtime.strictEquals((stride % 4.0), 0.0)), function():Dynamic return cast !_Runtime.strictEquals((sourceByteLength % stride), 0.0)))) { return cast _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>)); }
-    vertexCount = (sourceByteLength / stride);
-    sourceBytes = new flighthq._internal._UInt8Array(_Runtime.field(_Runtime.field(geometry, 'vertices'), 'buffer'), _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteOffset'), _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteLength'));
-    uniqueBytes = new flighthq._internal._UInt8Array(sourceByteLength);
-    sourceToUnique = new flighthq._internal._UInt32Array(vertexCount);
-    candidatesByHash = _Runtime.construct(_Runtime.globalValue('Map'), []);
-    uniqueCount = 0.0;
-    {
-      var vertex:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(vertex, vertexCount, '<'))) {
-        var sourceOffset:Dynamic = (vertex * stride);
-        var hash:Dynamic = _Runtime.callValue(MeshGeometryIndex.hashVertexRecord__meshGeometryIndex, cast ([sourceBytes, sourceOffset, stride] : Array<Dynamic>));
-        var candidates:Dynamic = _Runtime.callProperty(candidatesByHash, 'get', cast ([hash] : Array<Dynamic>));
-        var uniqueIndex:Dynamic = -1.0;
-        if (_Runtime.truthy(!_Runtime.strictEquals(candidates, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-          {
-            var i:Dynamic = 0.0;
-            while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(candidates, 'length'), '<'))) {
-              var candidate:Dynamic = _Runtime.getIndex(candidates, i);
-              if (_Runtime.truthy(_Runtime.callValue(MeshGeometryIndex.equalVertexRecord__meshGeometryIndex, cast ([sourceBytes, sourceOffset, uniqueBytes, (candidate * stride), stride] : Array<Dynamic>)))) {
-                (uniqueIndex = cast (candidate : Dynamic));
-                break;
-              }
-              i++;
-            }
-          }
-        }
-        if (_Runtime.truthy(_Runtime.compare(uniqueIndex, 0.0, '<'))) {
-          (uniqueIndex = cast (uniqueCount++ : Dynamic));
-          _Runtime.callProperty(uniqueBytes, 'set', cast ([sourceBytes.subarray(Std.int(sourceOffset), Std.int((sourceOffset + stride))), (uniqueIndex * stride)] : Array<Dynamic>));
-          if (_Runtime.truthy(_Runtime.strictEquals(candidates, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(candidatesByHash, 'set', cast ([hash, cast ([uniqueIndex] : Array<Dynamic>)] : Array<Dynamic>)); } else { _Runtime.callProperty(candidates, 'push', cast ([uniqueIndex] : Array<Dynamic>)); }
-        }
-        _Runtime.setIndex(sourceToUnique, vertex, uniqueIndex);
-        vertex++;
-      }
-    }
-    elementCount = _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(geometry, 'indices'), 'length'), function():Dynamic return cast vertexCount);
-    indices = _Runtime.select(_Runtime.compare(uniqueCount, MeshGeometryIndex.UINT16_INDEX_CEILING__meshGeometryIndex, '>'), function():Dynamic return cast new flighthq._internal._UInt32Array(elementCount), function():Dynamic return cast new flighthq._internal._UInt16Array(elementCount));
-    {
-      var element:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(element, elementCount, '<'))) {
-        var sourceIndex:Dynamic = _Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(geometry, 'indices'), element), function():Dynamic return cast element);
-        if (_Runtime.truthy(_Runtime.compare(sourceIndex, vertexCount, '>='))) { return cast _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>)); }
-        _Runtime.setIndex(indices, element, _Runtime.getIndex(sourceToUnique, sourceIndex));
-        element++;
-      }
-    }
-    weldedBuffer = _Runtime.slice(_Runtime.field(uniqueBytes, 'buffer'), 0.0, (uniqueCount * stride));
-    out = _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>));
-    _Runtime.setField(out, 'vertices', new flighthq._internal._Float32Array(weldedBuffer));
-    _Runtime.setField(out, 'indices', indices);
-    return cast out;
-    return cast null;
-  }
-
-  public static function equalVertexRecord__meshGeometryIndex(a:flighthq._internal._UInt8Array, aOffset:Float, b:flighthq._internal._UInt8Array, bOffset:Float, byteLength:Float):Bool {
-    {
-      var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, byteLength, '<'))) {
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(a, (aOffset + i)), _Runtime.getIndex(b, (bOffset + i))))) { return cast false; }
-        i++;
-      }
-    }
-    return cast true;
-    return cast null;
-  }
-
-  public static function hashVertexRecord__meshGeometryIndex(bytes:flighthq._internal._UInt8Array, offset:Float, byteLength:Float):Float {
-    var hash:Dynamic = cast _Runtime.UNDEFINED;
-    hash = 2166136261.0;
-    {
-      var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, byteLength, '<'))) {
-        (hash = (_Runtime.toInt32(hash) ^ _Runtime.toInt32(_Runtime.getIndex(bytes, (offset + i)))));
-        (hash = cast (_Runtime.imul(_Runtime.toInt32(hash), _Runtime.toInt32(16777619.0)) : Dynamic));
-        i++;
-      }
-    }
-    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32(hash), _Runtime.toInt32(0.0));
-    return cast null;
-  }
-
-  public static final UINT16_INDEX_CEILING__meshGeometryIndex:Dynamic = 65535.0;
-
-  public static final UINT32_UNMAPPED__meshGeometryIndex:Dynamic = 4294967295.0;
 }

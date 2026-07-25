@@ -14,10 +14,10 @@ class SurfaceCoverage {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var totalPixels:Dynamic = cast _Runtime.UNDEFINED;
     var covered:Dynamic = cast _Runtime.UNDEFINED;
-    br = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(backgroundColor), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0));
-    bg = (_Runtime.toInt32((_Runtime.toInt32(backgroundColor) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0));
-    bb = (_Runtime.toInt32((_Runtime.toInt32(backgroundColor) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0));
-    ba = (_Runtime.toInt32(backgroundColor) & _Runtime.toInt32(255.0));
+    br = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(backgroundColor), 24)) & 255);
+    bg = (_Runtime.toInt32((_Runtime.toInt32(backgroundColor) >> 16)) & 255);
+    bb = (_Runtime.toInt32((_Runtime.toInt32(backgroundColor) >> 8)) & 255);
+    ba = (_Runtime.toInt32(backgroundColor) & 255);
     data = _Runtime.field(source, 'data');
     totalPixels = (_Runtime.field(source, 'width') * _Runtime.field(source, 'height'));
     if (_Runtime.truthy(_Runtime.strictEquals(totalPixels, 0.0))) { return cast 0.0; }

@@ -46,10 +46,10 @@ class WgpuConvolutionEffect {
       _Runtime.setIndex(f32, 5.0, bias);
       _Runtime.setIndex(i32, 6.0, _Runtime.select(clampEdge, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0));
       _Runtime.setIndex(i32, 7.0, _Runtime.select(preserveAlpha, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0));
-      _Runtime.setIndex(f32, 8.0, ((_Runtime.toInt32((_Runtime.toInt32(edgeColor) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) / 255.0));
-      _Runtime.setIndex(f32, 9.0, ((_Runtime.toInt32((_Runtime.toInt32(edgeColor) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) / 255.0));
-      _Runtime.setIndex(f32, 10.0, ((_Runtime.toInt32(edgeColor) & _Runtime.toInt32(255.0)) / 255.0));
-      _Runtime.setIndex(f32, 11.0, ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(edgeColor), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0)) / 255.0));
+      _Runtime.setIndex(f32, 8.0, ((_Runtime.toInt32((_Runtime.toInt32(edgeColor) >> 16)) & 255) / 255.0));
+      _Runtime.setIndex(f32, 9.0, ((_Runtime.toInt32((_Runtime.toInt32(edgeColor) >> 8)) & 255) / 255.0));
+      _Runtime.setIndex(f32, 10.0, ((_Runtime.toInt32(edgeColor) & 255) / 255.0));
+      _Runtime.setIndex(f32, 11.0, ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(edgeColor), 24)) & 255) / 255.0));
       {
         var i:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(i, (matrixX * matrixY), '<'))) {

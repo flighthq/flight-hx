@@ -80,10 +80,10 @@ class EmitParticleBurst3D {
     hasRotSpeed = _Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(config, 'rotationSpeedMin'), 0.0), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(config, 'rotationSpeedMax'), 0.0));
     random = _Runtime.field(state, 'random');
     hasTint = !_Runtime.strictEquals(tint, _Runtime.field(_Runtime, 'UNDEFINED'));
-    tintR = _Runtime.select(hasTint, function():Dynamic return cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(tint), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0)) / 255.0), function():Dynamic return cast 1.0);
-    tintG = _Runtime.select(hasTint, function():Dynamic return cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(tint), _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) / 255.0), function():Dynamic return cast 1.0);
-    tintB = _Runtime.select(hasTint, function():Dynamic return cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(tint), _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) / 255.0), function():Dynamic return cast 1.0);
-    tintA = _Runtime.select(hasTint, function():Dynamic return cast ((_Runtime.toInt32(tint) & _Runtime.toInt32(255.0)) / 255.0), function():Dynamic return cast 1.0);
+    tintR = _Runtime.select(hasTint, function():Dynamic return cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(tint), 24)) & 255) / 255.0), function():Dynamic return cast 1.0);
+    tintG = _Runtime.select(hasTint, function():Dynamic return cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(tint), 16)) & 255) / 255.0), function():Dynamic return cast 1.0);
+    tintB = _Runtime.select(hasTint, function():Dynamic return cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(tint), 8)) & 255) / 255.0), function():Dynamic return cast 1.0);
+    tintA = _Runtime.select(hasTint, function():Dynamic return cast ((_Runtime.toInt32(tint) & 255) / 255.0), function():Dynamic return cast 1.0);
     dirLen = HxMath.sqrt((((_Runtime.field(config, 'directionX') * _Runtime.field(config, 'directionX')) + (_Runtime.field(config, 'directionY') * _Runtime.field(config, 'directionY'))) + (_Runtime.field(config, 'directionZ') * _Runtime.field(config, 'directionZ'))));
     dirNx = _Runtime.select(_Runtime.compare(dirLen, 0.000001, '>'), function():Dynamic return cast (_Runtime.field(config, 'directionX') / dirLen), function():Dynamic return cast 0.0);
     dirNy = _Runtime.select(_Runtime.compare(dirLen, 0.000001, '>'), function():Dynamic return cast (_Runtime.field(config, 'directionY') / dirLen), function():Dynamic return cast -1.0);
@@ -223,7 +223,7 @@ class EmitParticleBurst3D {
             _Runtime.setIndex(_Runtime.field(state, 'colorDeath'), (ct + 2.0), (_Runtime.getIndex(_Runtime.field(state, 'colorDeath'), (ct + 2.0)) * tintB));
           }
         }
-        _Runtime.setIndex(_Runtime.field(data, 'ids'), idx, (regionIdMin + _Runtime.select(_Runtime.compare(_Runtime.field(config, 'frameCount'), 1.0, '>'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(regionRange, 0.0, '>'), function():Dynamic return cast (_Runtime.toInt32((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * regionRange)) | _Runtime.toInt32(0.0)), function():Dynamic return cast 0.0))));
+        _Runtime.setIndex(_Runtime.field(data, 'ids'), idx, (regionIdMin + _Runtime.select(_Runtime.compare(_Runtime.field(config, 'frameCount'), 1.0, '>'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(regionRange, 0.0, '>'), function():Dynamic return cast (_Runtime.toInt32((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * regionRange)) | 0), function():Dynamic return cast 0.0))));
         _Runtime.setIndex(_Runtime.field(state, 'rotationSpeeds'), idx, _Runtime.select(hasRotSpeed, function():Dynamic return cast (_Runtime.field(config, 'rotationSpeedMin') + (_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * rotSpeedRange)), function():Dynamic return cast 0.0));
         sIdx++;
       }

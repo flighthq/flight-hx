@@ -111,7 +111,7 @@ class TextMarkup {
   }
 
   public static function formatMarkupColor__textMarkup(color:Float):String {
-    return cast '#' + Std.string(_Runtime.padStart(_Runtime.numberToString((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(0.0))) & _Runtime.toInt32(16777215.0)), 16.0), 6.0, '0')) + '';
+    return cast '#' + Std.string(_Runtime.padStart(_Runtime.numberToString((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 0)) & 16777215), 16.0), 6.0, '0')) + '';
     return cast null;
   }
 

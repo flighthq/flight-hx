@@ -23,7 +23,6 @@ import flighthq.textlayout.TextLayout.computeTextLayout;
 import flighthq.textlayout.TextLayoutRuntime.getTextLayoutResult;
 import flighthq.types.DisplayObjectRenderer;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRichTextOverlay;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
@@ -31,8 +30,11 @@ import flighthq.types.RichText;
 import flighthq.types.RichText.RichTextRuntime;
 import flighthq.types.TextFormat;
 import flighthq.types.TextLabel.TextLabelRuntime;
+import flighthq.types.TextLayout.TextLayoutResult;
 
 typedef GlRichTextData__glRichText = { var texture:Null<Dynamic>; };
+
+typedef GlRichTextOverlay = Dynamic;
 
 class GlRichText {
   public static var _offscreenCanvas__glRichText:Null<Dynamic> = _Runtime.explicitNull();

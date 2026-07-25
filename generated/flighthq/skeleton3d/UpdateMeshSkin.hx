@@ -5,11 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.mesh.MeshGeometry.getMeshGeometrySkinBindPose;
 import flighthq.mesh.MeshGeometry.setMeshGeometrySkinBindPose;
-import flighthq.mesh.MeshGeometryCompute.refreshMeshGeometryBounds;
 import flighthq.skeleton3d.Skeleton3d.computeSkeleton3DJointMatrices;
 import flighthq.skeleton3d.SkinMeshGeometry.captureMeshSkinBindPose;
 import flighthq.skeleton3d.SkinMeshGeometry.skinMeshGeometry;
-import flighthq.skeleton3d.SkinMeshGeometry.updateMeshSkinBindPoseDeformInput;
 import flighthq.types.Mesh;
 
 class UpdateMeshSkin {
@@ -25,10 +23,7 @@ class UpdateMeshSkin {
     if (_Runtime.truthy(_Runtime.strictEquals(bindPose, null))) {
       (bindPose = cast (_Runtime.callValue(captureMeshSkinBindPose, cast ([geometry] : Array<Dynamic>)) : Dynamic));
       _Runtime.callValue(setMeshGeometrySkinBindPose, cast ([geometry, bindPose] : Array<Dynamic>));
-    } else { if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(mesh, 'morph'), null))) {
-      _Runtime.callValue(updateMeshSkinBindPoseDeformInput, cast ([bindPose, geometry] : Array<Dynamic>));
-    } }
+    }
     _Runtime.callValue(skinMeshGeometry, cast ([geometry, _Runtime.field(skin, 'skeleton'), bindPose] : Array<Dynamic>));
-    _Runtime.callValue(refreshMeshGeometryBounds, cast ([geometry] : Array<Dynamic>));
   }
 }

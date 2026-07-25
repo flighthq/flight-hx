@@ -11,10 +11,11 @@ import flighthq.types.ImageResource;
 import flighthq.types.Material;
 import flighthq.types.Material.MaterialData;
 import flighthq.types.WgpuMaterialRenderer;
-import flighthq.types.WgpuQuadBatchResources;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuSpriteBatchBufferSlot;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
+
+typedef WgpuQuadBatchResources = { var instanceBindGroupLayout:Dynamic; var materialBindGroupLayout:Dynamic; var basePipelineLayout:Dynamic; var materialPipelineLayout:Dynamic; var pipelines:Dynamic; };
 
 class WgpuSpriteBatch {
   public static final SPRITE_INSTANCE_FLOATS:Dynamic = 13.0;
@@ -275,7 +276,7 @@ class WgpuSpriteBatch {
     var ih:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     uniformOffset = _Runtime.field(runtime, 'uniformOffset');
-    floatBase = (_Runtime.toInt32(uniformOffset) >> _Runtime.toInt32(2.0));
+    floatBase = (_Runtime.toInt32(uniformOffset) >> 2);
     __destructure3 = runtime;
     uniformData = _Runtime.field(__destructure3, 'uniformData');
     viewport = _Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));

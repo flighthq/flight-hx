@@ -13,3 +13,5 @@ export const setGlAttributes = api.setGlAttributes;
 export const setGlBaseUniforms = api.setGlBaseUniforms;
 export const setGlMatrixFromTransform = api.setGlMatrixFromTransform;
 export const setGlMatrixFromValues = api.setGlMatrixFromValues;
+export { GlBitmapShader } from './glShaderTypes.mjs';
+export { GlShaderLocations } from './glShaderTypes.mjs';

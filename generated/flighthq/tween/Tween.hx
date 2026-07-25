@@ -12,6 +12,7 @@ import flighthq.tween.TweenManager as Facade_Tween_flighthq_tween_TweenManager;
 import flighthq.tween.TweenManager.defaultManager;
 import flighthq.tween.TweenProgress as Facade_Tween_flighthq_tween_TweenProgress;
 import flighthq.tween.TweenStagger as Facade_Tween_flighthq_tween_TweenStagger;
+import flighthq.tween.TweenStagger.TweenStaggerOptions;
 import flighthq.tween.UpdateTweens as Facade_Tween_flighthq_tween_UpdateTweens;
 import flighthq.tween._internal._Internal.initializeTween;
 import flighthq.types.EasingFunction;
@@ -22,7 +23,6 @@ import flighthq.types.TweenManager;
 import flighthq.types.TweenManagerOptions;
 import flighthq.types.TweenOptions;
 import flighthq.types.TweenPropertyDetail;
-import flighthq.types.TweenStaggerOptions;
 
 class Tween {
   public static function applyTween<T>(manager:TweenManager, target:Dynamic, propertyMap:NumericProps<Dynamic>):Void {

@@ -5,18 +5,18 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.color.PackColor.unpackColorToLinear;
 import flighthq.sceneGl.GlMeshMaterialRegistry.registerGlMeshMaterialRenderer;
-import flighthq.sceneGl.GlMeshProgram.beginGlMeshDraw;
-import flighthq.sceneGl.GlMeshProgram.bindGlUvTransform;
-import flighthq.sceneGl.GlMeshProgram.drawGlMeshSubset;
-import flighthq.sceneGl.GlMeshProgram.hasGlUvTransform;
-import flighthq.sceneGl.GlMeshProgram.setGlMeshViewProjection;
-import flighthq.sceneGl.GlSceneRuntime.getGlSceneRuntime;
+import flighthq.sceneGl.GlUnlitPrelude.GlUnlitDefineKey;
 import flighthq.sceneGl.GlUnlitPrelude.bindGlUnlitSurface;
 import flighthq.sceneGl.GlUnlitPrelude.ensureGlUnlitProgram;
-import flighthq.types.Camera3D;
+import flighthq.sceneGl._internal._GlMeshProgramValues.beginGlMeshDraw;
+import flighthq.sceneGl._internal._GlMeshProgramValues.bindGlUvTransform;
+import flighthq.sceneGl._internal._GlMeshProgramValues.drawGlMeshSubset;
+import flighthq.sceneGl._internal._GlMeshProgramValues.hasGlUvTransform;
+import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshViewProjection;
+import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
+import flighthq.types.Camera;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlUnlitProgram.GlUnlitDefineKey;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
@@ -27,7 +27,7 @@ import flighthq.types.UnlitMaterial;
 import flighthq.types._internal._UnlitMaterialValues.UnlitMaterialKind;
 
 class UnlitGlMeshMaterialRenderer {
-  public static final unlitGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera3D) {
+  public static final unlitGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var unlit:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;

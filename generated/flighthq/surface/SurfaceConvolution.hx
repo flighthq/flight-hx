@@ -3,8 +3,10 @@ package flighthq.surface;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.SurfaceConvolutionOptions;
+import flighthq.types.SurfaceEdgeMode;
 import flighthq.types.SurfaceRegion;
+
+typedef SurfaceConvolutionOptions = { @:optional var bias:Float; @:optional var edge:SurfaceEdgeMode; @:optional var divisor:Float; var matrix:Array<Float>; var matrixX:Float; var matrixY:Float; @:optional var preserveAlpha:Bool; };
 
 class SurfaceConvolution {
   public static function convolveSurface(out:flighthq._internal._UInt8ClampedArray, source:SurfaceRegion, options:SurfaceConvolutionOptions):Void {

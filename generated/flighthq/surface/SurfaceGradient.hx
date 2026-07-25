@@ -3,11 +3,14 @@ package flighthq.surface;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.surface.SurfaceBevel.SurfaceBevelType;
 import flighthq.surface.SurfaceBlur.blurSurfacePixelsHorizontal;
 import flighthq.surface.SurfaceBlur.blurSurfacePixelsVertical;
-import flighthq.types.SurfaceGradientBevelOptions;
-import flighthq.types.SurfaceGradientGlowOptions;
 import flighthq.types.SurfaceRegion;
+
+typedef SurfaceGradientBevelOptions = { @:optional var angle:Float; @:optional var distance:Float; @:optional var radiusX:Float; @:optional var radiusY:Float; @:optional var passes:Float; @:optional var intensity:Float; @:optional var type:SurfaceBevelType; };
+
+typedef SurfaceGradientGlowOptions = { @:optional var radiusX:Float; @:optional var radiusY:Float; @:optional var passes:Float; @:optional var intensity:Float; };
 
 class SurfaceGradient {
   public static function buildSurfaceGradientRamp(out:flighthq._internal._UInt8ClampedArray, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Void {
@@ -25,23 +28,23 @@ class SurfaceGradient {
         var b:Float = cast _Runtime.UNDEFINED;
         var a:Float = cast _Runtime.UNDEFINED;
         if (_Runtime.truthy(_Runtime.compare(i, _Runtime.getIndex(ratios, 0.0), '<='))) {
-          (r = cast ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(colors, 0.0)) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) : Dynamic));
-          (g = cast ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(colors, 0.0)) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) : Dynamic));
-          (b = cast ((_Runtime.toInt32(_Runtime.getIndex(colors, 0.0)) & _Runtime.toInt32(255.0)) : Dynamic));
+          (r = cast ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(colors, 0.0)) >> 16)) & 255) : Dynamic));
+          (g = cast ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(colors, 0.0)) >> 8)) & 255) : Dynamic));
+          (b = cast ((_Runtime.toInt32(_Runtime.getIndex(colors, 0.0)) & 255) : Dynamic));
           (a = cast (_Runtime.getIndex(alphas, 0.0) : Dynamic));
         } else { if (_Runtime.truthy(_Runtime.compare(i, _Runtime.getIndex(ratios, (n - 1.0)), '>='))) {
-          (r = cast ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(colors, (n - 1.0))) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) : Dynamic));
-          (g = cast ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(colors, (n - 1.0))) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) : Dynamic));
-          (b = cast ((_Runtime.toInt32(_Runtime.getIndex(colors, (n - 1.0))) & _Runtime.toInt32(255.0)) : Dynamic));
+          (r = cast ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(colors, (n - 1.0))) >> 16)) & 255) : Dynamic));
+          (g = cast ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(colors, (n - 1.0))) >> 8)) & 255) : Dynamic));
+          (b = cast ((_Runtime.toInt32(_Runtime.getIndex(colors, (n - 1.0))) & 255) : Dynamic));
           (a = cast (_Runtime.getIndex(alphas, (n - 1.0)) : Dynamic));
         } else {
           var j:Dynamic = 0.0;
           while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(j, (n - 1.0), '<'), function():Dynamic return cast _Runtime.compare(_Runtime.getIndex(ratios, (j + 1.0)), i, '<')))) { j++; }
           var span:Dynamic = (_Runtime.getIndex(ratios, (j + 1.0)) - _Runtime.getIndex(ratios, j));
           var t:Dynamic = _Runtime.select(_Runtime.compare(span, 0.0, '>'), function():Dynamic return cast ((i - _Runtime.getIndex(ratios, j)) / span), function():Dynamic return cast 0.0);
-          (r = cast (_Runtime.callValue(SurfaceGradient.lerp__surfaceGradient, cast ([(_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(colors, j)) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)), (_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(colors, (j + 1.0))) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)), t] : Array<Dynamic>)) : Dynamic));
-          (g = cast (_Runtime.callValue(SurfaceGradient.lerp__surfaceGradient, cast ([(_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(colors, j)) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)), (_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(colors, (j + 1.0))) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)), t] : Array<Dynamic>)) : Dynamic));
-          (b = cast (_Runtime.callValue(SurfaceGradient.lerp__surfaceGradient, cast ([(_Runtime.toInt32(_Runtime.getIndex(colors, j)) & _Runtime.toInt32(255.0)), (_Runtime.toInt32(_Runtime.getIndex(colors, (j + 1.0))) & _Runtime.toInt32(255.0)), t] : Array<Dynamic>)) : Dynamic));
+          (r = cast (_Runtime.callValue(SurfaceGradient.lerp__surfaceGradient, cast ([(_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(colors, j)) >> 16)) & 255), (_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(colors, (j + 1.0))) >> 16)) & 255), t] : Array<Dynamic>)) : Dynamic));
+          (g = cast (_Runtime.callValue(SurfaceGradient.lerp__surfaceGradient, cast ([(_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(colors, j)) >> 8)) & 255), (_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(colors, (j + 1.0))) >> 8)) & 255), t] : Array<Dynamic>)) : Dynamic));
+          (b = cast (_Runtime.callValue(SurfaceGradient.lerp__surfaceGradient, cast ([(_Runtime.toInt32(_Runtime.getIndex(colors, j)) & 255), (_Runtime.toInt32(_Runtime.getIndex(colors, (j + 1.0))) & 255), t] : Array<Dynamic>)) : Dynamic));
           (a = cast (_Runtime.callValue(SurfaceGradient.lerp__surfaceGradient, cast ([_Runtime.getIndex(alphas, j), _Runtime.getIndex(alphas, (j + 1.0)), t] : Array<Dynamic>)) : Dynamic));
         } }
         var oi:Dynamic = (i * 4.0);

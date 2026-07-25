@@ -5,12 +5,17 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.surface.SurfaceBlur.blurSurfacePixelsHorizontal;
 import flighthq.surface.SurfaceBlur.blurSurfacePixelsVertical;
-import flighthq.types.SurfaceDropShadowOptions;
-import flighthq.types.SurfaceGlowOptions;
-import flighthq.types.SurfaceInnerGlowOptions;
-import flighthq.types.SurfaceInnerShadowOptions;
 import flighthq.types.SurfaceRegion;
-import flighthq.types.SurfaceShadowBlurOptions;
+
+typedef SurfaceShadowBlurOptions = { @:optional var radiusX:Float; @:optional var radiusY:Float; @:optional var passes:Float; };
+
+typedef SurfaceDropShadowOptions = Dynamic;
+
+typedef SurfaceGlowOptions = Dynamic;
+
+typedef SurfaceInnerGlowOptions = Dynamic;
+
+typedef SurfaceInnerShadowOptions = Dynamic;
 
 class SurfaceShadow {
   public static function dropShadowSurface(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:SurfaceRegion, ?options:SurfaceDropShadowOptions):Void {
@@ -97,10 +102,10 @@ class SurfaceShadow {
       }
     }
     _Runtime.callValue(SurfaceShadow.applyBlurPasses__surfaceShadow, cast ([out, scratch, w, h, options] : Array<Dynamic>));
-    cr = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0));
-    cg = (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0));
-    cb = (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0));
-    ca = ((_Runtime.toInt32(color) & _Runtime.toInt32(255.0)) / 255.0);
+    cr = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255);
+    cg = (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255);
+    cb = (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255);
+    ca = ((_Runtime.toInt32(color) & 255) / 255.0);
     scale = (HxMath.max(0.0, _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0)) * ca);
     {
       var py:Dynamic = 0.0;
@@ -139,10 +144,10 @@ class SurfaceShadow {
     var cb:Dynamic = cast _Runtime.UNDEFINED;
     var ca:Dynamic = cast _Runtime.UNDEFINED;
     var alphaScale:Dynamic = cast _Runtime.UNDEFINED;
-    cr = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0));
-    cg = (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0));
-    cb = (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0));
-    ca = ((_Runtime.toInt32(color) & _Runtime.toInt32(255.0)) / 255.0);
+    cr = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255);
+    cg = (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255);
+    cb = (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255);
+    ca = ((_Runtime.toInt32(color) & 255) / 255.0);
     alphaScale = (HxMath.max(0.0, intensity) * ca);
     {
       var py:Dynamic = 0.0;

@@ -15,10 +15,10 @@ class SurfaceFill {
     var g:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
     var a:Dynamic = cast _Runtime.UNDEFINED;
-    r = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0));
-    g = (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0));
-    b = (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0));
-    a = (_Runtime.toInt32(color) & _Runtime.toInt32(255.0));
+    r = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255);
+    g = (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255);
+    b = (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255);
+    a = (_Runtime.toInt32(color) & 255);
     {
       var py:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(dest, 'height'), '<'))) {
@@ -57,10 +57,10 @@ class SurfaceFill {
     var visited:Dynamic = cast _Runtime.UNDEFINED;
     var stack:Array<Float> = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(x, 0.0, '<'), function():Dynamic return cast _Runtime.compare(x, _Runtime.field(out, 'width'), '>=')), function():Dynamic return cast _Runtime.compare(y, 0.0, '<')), function():Dynamic return cast _Runtime.compare(y, _Runtime.field(out, 'height'), '>=')))) { return; }
-    fillR = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0));
-    fillG = (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0));
-    fillB = (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0));
-    fillA = (_Runtime.toInt32(color) & _Runtime.toInt32(255.0));
+    fillR = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255);
+    fillG = (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255);
+    fillB = (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255);
+    fillA = (_Runtime.toInt32(color) & 255);
     targetI = (((y * _Runtime.field(out, 'width')) + x) * 4.0);
     targetR = _Runtime.getIndex(_Runtime.field(out, 'data'), targetI);
     targetG = _Runtime.getIndex(_Runtime.field(out, 'data'), (targetI + 1.0));

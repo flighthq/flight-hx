@@ -5,8 +5,5 @@ const api = compiled.flighthq.mesh.MeshGeometryIndex;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const compactMeshGeometryVertices = api.compactMeshGeometryVertices;
 export const computeMeshGeometryWireframeIndices = api.computeMeshGeometryWireframeIndices;
 export const expandMeshGeometryIndices = api.expandMeshGeometryIndices;
-export const indexMeshGeometryVertices = api.indexMeshGeometryVertices;
-export const weldMeshGeometryVertices = api.weldMeshGeometryVertices;

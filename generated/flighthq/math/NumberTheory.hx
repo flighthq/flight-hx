@@ -40,12 +40,12 @@ class NumberTheory {
   }
 
   public static function isEven(n:Float):Bool {
-    return cast _Runtime.strictEquals((_Runtime.toInt32(n) & _Runtime.toInt32(1.0)), 0.0);
+    return cast _Runtime.strictEquals((_Runtime.toInt32(n) & 1), 0.0);
     return cast null;
   }
 
   public static function isOdd(n:Float):Bool {
-    return cast _Runtime.strictEquals((_Runtime.toInt32(n) & _Runtime.toInt32(1.0)), 1.0);
+    return cast _Runtime.strictEquals((_Runtime.toInt32(n) & 1), 1.0);
     return cast null;
   }
 

@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const destroyGlMeshUpload = api.destroyGlMeshUpload;
 export const ensureGlMeshUpload = api.ensureGlMeshUpload;
+export const hasGlMeshGeometryUv1 = api.hasGlMeshGeometryUv1;

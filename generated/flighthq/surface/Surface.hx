@@ -8,16 +8,20 @@ import flighthq.image.ImageResource.invalidateImageResource;
 import flighthq.surface.SurfaceAffine as Facade_Surface_flighthq_surface_SurfaceAffine;
 import flighthq.surface.SurfaceAlpha as Facade_Surface_flighthq_surface_SurfaceAlpha;
 import flighthq.surface.SurfaceBevel as Facade_Surface_flighthq_surface_SurfaceBevel;
+import flighthq.surface.SurfaceBevel.SurfaceBevelOptions;
 import flighthq.surface.SurfaceBlur as Facade_Surface_flighthq_surface_SurfaceBlur;
+import flighthq.surface.SurfaceBlur.SurfaceBoxBlurOptions;
 import flighthq.surface.SurfaceChannel as Facade_Surface_flighthq_surface_SurfaceChannel;
 import flighthq.surface.SurfaceColorMatrix as Facade_Surface_flighthq_surface_SurfaceColorMatrix;
 import flighthq.surface.SurfaceCompare as Facade_Surface_flighthq_surface_SurfaceCompare;
 import flighthq.surface.SurfaceComposite as Facade_Surface_flighthq_surface_SurfaceComposite;
 import flighthq.surface.SurfaceConvolution as Facade_Surface_flighthq_surface_SurfaceConvolution;
+import flighthq.surface.SurfaceConvolution.SurfaceConvolutionOptions;
 import flighthq.surface.SurfaceCopy as Facade_Surface_flighthq_surface_SurfaceCopy;
 import flighthq.surface.SurfaceCoverage as Facade_Surface_flighthq_surface_SurfaceCoverage;
 import flighthq.surface.SurfaceCrop as Facade_Surface_flighthq_surface_SurfaceCrop;
 import flighthq.surface.SurfaceDisplacement as Facade_Surface_flighthq_surface_SurfaceDisplacement;
+import flighthq.surface.SurfaceDisplacement.SurfaceDisplacementMapOptions;
 import flighthq.surface.SurfaceDissolve as Facade_Surface_flighthq_surface_SurfaceDissolve;
 import flighthq.surface.SurfaceDraw as Facade_Surface_flighthq_surface_SurfaceDraw;
 import flighthq.surface.SurfaceEncode as Facade_Surface_flighthq_surface_SurfaceEncode;
@@ -27,6 +31,8 @@ import flighthq.surface.SurfaceFlip as Facade_Surface_flighthq_surface_SurfaceFl
 import flighthq.surface.SurfaceFormat as Facade_Surface_flighthq_surface_SurfaceFormat;
 import flighthq.surface.SurfaceFrom as Facade_Surface_flighthq_surface_SurfaceFrom;
 import flighthq.surface.SurfaceGradient as Facade_Surface_flighthq_surface_SurfaceGradient;
+import flighthq.surface.SurfaceGradient.SurfaceGradientBevelOptions;
+import flighthq.surface.SurfaceGradient.SurfaceGradientGlowOptions;
 import flighthq.surface.SurfaceGradientFill as Facade_Surface_flighthq_surface_SurfaceGradientFill;
 import flighthq.surface.SurfaceHistogram as Facade_Surface_flighthq_surface_SurfaceHistogram;
 import flighthq.surface.SurfaceMedian as Facade_Surface_flighthq_surface_SurfaceMedian;
@@ -40,7 +46,12 @@ import flighthq.surface.SurfaceRegion as Facade_Surface_flighthq_surface_Surface
 import flighthq.surface.SurfaceResize as Facade_Surface_flighthq_surface_SurfaceResize;
 import flighthq.surface.SurfaceRotate as Facade_Surface_flighthq_surface_SurfaceRotate;
 import flighthq.surface.SurfaceShadow as Facade_Surface_flighthq_surface_SurfaceShadow;
+import flighthq.surface.SurfaceShadow.SurfaceDropShadowOptions;
+import flighthq.surface.SurfaceShadow.SurfaceGlowOptions;
+import flighthq.surface.SurfaceShadow.SurfaceInnerGlowOptions;
+import flighthq.surface.SurfaceShadow.SurfaceInnerShadowOptions;
 import flighthq.surface.SurfaceSharpen as Facade_Surface_flighthq_surface_SurfaceSharpen;
+import flighthq.surface.SurfaceSharpen.SurfaceSharpenOptions;
 import flighthq.surface.SurfaceTone as Facade_Surface_flighthq_surface_SurfaceTone;
 import flighthq.surface.SurfaceTransform as Facade_Surface_flighthq_surface_SurfaceTransform;
 import flighthq.surface.SurfaceWarp as Facade_Surface_flighthq_surface_SurfaceWarp;
@@ -53,24 +64,13 @@ import flighthq.types.ImageResource;
 import flighthq.types.PixelOrder;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.Surface;
-import flighthq.types.SurfaceBevelOptions;
-import flighthq.types.SurfaceBoxBlurOptions;
 import flighthq.types.SurfaceCompositeMode;
-import flighthq.types.SurfaceConvolutionOptions;
-import flighthq.types.SurfaceDisplacementMapOptions;
-import flighthq.types.SurfaceDropShadowOptions;
 import flighthq.types.SurfaceEdgeMode;
 import flighthq.types.SurfaceFingerprint;
-import flighthq.types.SurfaceGlowOptions;
-import flighthq.types.SurfaceGradientBevelOptions;
-import flighthq.types.SurfaceGradientGlowOptions;
 import flighthq.types.SurfaceHistogram;
-import flighthq.types.SurfaceInnerGlowOptions;
-import flighthq.types.SurfaceInnerShadowOptions;
 import flighthq.types.SurfaceMismatch;
 import flighthq.types.SurfaceRegion;
 import flighthq.types.SurfaceResizeMode;
-import flighthq.types.SurfaceSharpenOptions;
 import flighthq.types.ThresholdOperation;
 
 class Surface {
@@ -255,10 +255,10 @@ class Surface {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     data = new flighthq._internal._UInt8ClampedArray(((width * height) * 4.0));
     if (_Runtime.truthy(!_Runtime.strictEquals(color, 0.0))) {
-      var r:Dynamic = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0));
-      var g:Dynamic = (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0));
-      var b:Dynamic = (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0));
-      var a:Dynamic = (_Runtime.toInt32(color) & _Runtime.toInt32(255.0));
+      var r:Dynamic = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255);
+      var g:Dynamic = (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255);
+      var b:Dynamic = (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255);
+      var a:Dynamic = (_Runtime.toInt32(color) & 255);
       {
         var i:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(data, 'length'), '<'))) {

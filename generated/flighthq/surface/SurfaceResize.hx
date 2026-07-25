@@ -7,7 +7,8 @@ import flighthq.image.ImageResource.invalidateImageResource;
 import flighthq.types.SurfaceEdgeMode;
 import flighthq.types.SurfaceRegion;
 import flighthq.types.SurfaceResizeMode;
-import flighthq.types.SurfaceResizeOptions;
+
+typedef SurfaceResizeOptions = { @:optional var mode:SurfaceResizeMode; @:optional var edgeMode:SurfaceEdgeMode; @:optional var premultiplied:Bool; };
 
 class SurfaceResize {
   public static function resizeSurface(dest:SurfaceRegion, source:SurfaceRegion, options:Dynamic = 'bilinear'):Void {

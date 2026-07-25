@@ -6,7 +6,8 @@ import flighthq._internal._Runtime;
 import flighthq.signals.Slot.connectSignal;
 import flighthq.signals.Slot.disconnectSignal;
 import flighthq.types.Signal;
-import flighthq.types.SignalThrottleOptions;
+
+typedef SignalThrottleOptions = { @:optional var leading:Bool; @:optional var trailing:Bool; };
 
 class Throttle {
   public static function connectSignalAtFrameRate(source:Signal<Dynamic>, fps:Float, slot:Dynamic):Dynamic {

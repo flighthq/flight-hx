@@ -3,98 +3,72 @@ package flighthq.sceneFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.geometry.Transform3d.createTransform3D;
 import flighthq.materials.ClassicMaterials.createBlinnPhongMaterial;
 import flighthq.mesh.MeshGeometry.createMeshGeometry;
-import flighthq.scene.SceneDocument.createSceneFromDocument;
+import flighthq.node.Hierarchy.addNodeChild;
+import flighthq.scene.Mesh.createMesh;
+import flighthq.scene.Scene.createScene;
 import flighthq.sceneFormats.Shared.CANONICAL_FLOATS_PER_VERTEX;
 import flighthq.sceneFormats.Shared.CANONICAL_LAYOUT;
 import flighthq.sceneFormats.Shared.convertPositionsZUpToYUp;
 import flighthq.sceneFormats.Shared.createExternalTextureRef;
+import flighthq.sceneFormats.ThreeDsSchema.THREE_DS_CHUNK_HEADER_BYTES;
+import flighthq.sceneFormats.ThreeDsSchema.THREE_DS_COLOR_BYTE;
+import flighthq.sceneFormats.ThreeDsSchema.THREE_DS_COLOR_FLOAT;
+import flighthq.sceneFormats.ThreeDsSchema.THREE_DS_EDITOR;
+import flighthq.sceneFormats.ThreeDsSchema.THREE_DS_FACES;
+import flighthq.sceneFormats.ThreeDsSchema.THREE_DS_FACE_MATERIAL;
+import flighthq.sceneFormats.ThreeDsSchema.THREE_DS_MAIN;
+import flighthq.sceneFormats.ThreeDsSchema.THREE_DS_MATERIAL;
+import flighthq.sceneFormats.ThreeDsSchema.THREE_DS_MATERIAL_AMBIENT;
+import flighthq.sceneFormats.ThreeDsSchema.THREE_DS_MATERIAL_DIFFUSE;
+import flighthq.sceneFormats.ThreeDsSchema.THREE_DS_MATERIAL_NAME;
+import flighthq.sceneFormats.ThreeDsSchema.THREE_DS_MATERIAL_SPECULAR;
+import flighthq.sceneFormats.ThreeDsSchema.THREE_DS_MATERIAL_TEXTURE_FILENAME;
+import flighthq.sceneFormats.ThreeDsSchema.THREE_DS_MATERIAL_TEXTURE_MAP;
+import flighthq.sceneFormats.ThreeDsSchema.THREE_DS_OBJECT;
+import flighthq.sceneFormats.ThreeDsSchema.THREE_DS_TRIMESH;
+import flighthq.sceneFormats.ThreeDsSchema.THREE_DS_UV_COORDS;
+import flighthq.sceneFormats.ThreeDsSchema.THREE_DS_VERTICES;
+import flighthq.sceneFormats.ThreeDsSchema.ThreeDsMaterial;
+import flighthq.sceneFormats.ThreeDsSchema.ThreeDsMesh;
 import flighthq.types.Material;
-import flighthq.types.Material.MaterialLike;
 import flighthq.types.Scene;
-import flighthq.types.SceneDocument;
-import flighthq.types.SceneDocument.SceneDocumentMesh;
-import flighthq.types.SceneDocument.SceneDocumentNode;
-import flighthq.types.ThreeDsSchema.THREE_DS_CHUNK_HEADER_BYTES;
-import flighthq.types.ThreeDsSchema.THREE_DS_COLOR_BYTE;
-import flighthq.types.ThreeDsSchema.THREE_DS_COLOR_FLOAT;
-import flighthq.types.ThreeDsSchema.THREE_DS_EDITOR;
-import flighthq.types.ThreeDsSchema.THREE_DS_FACES;
-import flighthq.types.ThreeDsSchema.THREE_DS_FACE_MATERIAL;
-import flighthq.types.ThreeDsSchema.THREE_DS_MAIN;
-import flighthq.types.ThreeDsSchema.THREE_DS_MATERIAL;
-import flighthq.types.ThreeDsSchema.THREE_DS_MATERIAL_AMBIENT;
-import flighthq.types.ThreeDsSchema.THREE_DS_MATERIAL_DIFFUSE;
-import flighthq.types.ThreeDsSchema.THREE_DS_MATERIAL_NAME;
-import flighthq.types.ThreeDsSchema.THREE_DS_MATERIAL_SPECULAR;
-import flighthq.types.ThreeDsSchema.THREE_DS_MATERIAL_TEXTURE_FILENAME;
-import flighthq.types.ThreeDsSchema.THREE_DS_MATERIAL_TEXTURE_MAP;
-import flighthq.types.ThreeDsSchema.THREE_DS_OBJECT;
-import flighthq.types.ThreeDsSchema.THREE_DS_TRIMESH;
-import flighthq.types.ThreeDsSchema.THREE_DS_UV_COORDS;
-import flighthq.types.ThreeDsSchema.THREE_DS_VERTICES;
-import flighthq.types.ThreeDsSchema.ThreeDsMaterial;
-import flighthq.types.ThreeDsSchema.ThreeDsMesh;
-import flighthq.types.Types.MeshKind;
-import flighthq.types.Types.THREE_DS_CHUNK_HEADER_BYTES;
-import flighthq.types.Types.THREE_DS_COLOR_BYTE;
-import flighthq.types.Types.THREE_DS_COLOR_FLOAT;
-import flighthq.types.Types.THREE_DS_EDITOR;
-import flighthq.types.Types.THREE_DS_FACES;
-import flighthq.types.Types.THREE_DS_FACE_MATERIAL;
-import flighthq.types.Types.THREE_DS_MAIN;
-import flighthq.types.Types.THREE_DS_MATERIAL;
-import flighthq.types.Types.THREE_DS_MATERIAL_AMBIENT;
-import flighthq.types.Types.THREE_DS_MATERIAL_DIFFUSE;
-import flighthq.types.Types.THREE_DS_MATERIAL_NAME;
-import flighthq.types.Types.THREE_DS_MATERIAL_SPECULAR;
-import flighthq.types.Types.THREE_DS_MATERIAL_TEXTURE_FILENAME;
-import flighthq.types.Types.THREE_DS_MATERIAL_TEXTURE_MAP;
-import flighthq.types.Types.THREE_DS_OBJECT;
-import flighthq.types.Types.THREE_DS_TRIMESH;
-import flighthq.types.Types.THREE_DS_UV_COORDS;
-import flighthq.types.Types.THREE_DS_VERTICES;
-import flighthq.types._internal._MeshValues.MeshKind;
+import flighthq.types.SceneNode;
 
 class ThreeDsParse {
   public static function createSceneFrom3ds(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>):Scene {
-    return cast _Runtime.callValue(createSceneFromDocument, cast ([_Runtime.callValue(parse3ds, cast ([bytes, warnings] : Array<Dynamic>))] : Array<Dynamic>));
-    return cast null;
-  }
-
-  public static function parse3ds(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>):SceneDocument {
-    var document:SceneDocument = cast _Runtime.UNDEFINED;
+    var scene:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var view:Dynamic = cast _Runtime.UNDEFINED;
     var mainId:Dynamic = cast _Runtime.UNDEFINED;
     var materials:Dynamic = cast _Runtime.UNDEFINED;
     var meshes:Dynamic = cast _Runtime.UNDEFINED;
-    var materialIndexByName:Dynamic = cast _Runtime.UNDEFINED;
-    document = { animations: cast ([] : Array<Dynamic>), cameras: cast ([] : Array<Dynamic>), lights: cast ([] : Array<Dynamic>), materials: cast ([] : Array<Dynamic>), meshes: cast ([] : Array<Dynamic>), metadata: null, nodes: cast ([] : Array<Dynamic>), resources: cast ([] : Array<Dynamic>), scenes: cast ([{ rootNodes: cast ([] : Array<Dynamic>) }] : Array<Dynamic>), skins: cast ([] : Array<Dynamic>) };
+    var resolved:Dynamic = cast _Runtime.UNDEFINED;
+    scene = _Runtime.callValue(createScene, cast ([] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(bytes, 'byteLength'), THREE_DS_CHUNK_HEADER_BYTES, '<'))) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFrom3ds: input is smaller than the minimum chunk header (6 bytes)'] : Array<Dynamic>));
-      return cast document;
+      return cast scene;
     }
     source = (cast bytes : flighthq._internal._UInt8Array);
     view = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(source, 'buffer'), _Runtime.field(source, 'byteOffset'), _Runtime.field(source, 'byteLength')]);
     mainId = _Runtime.callProperty(view, 'getUint16', cast ([0.0, true] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(mainId, THREE_DS_MAIN))) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFrom3ds: expected main chunk ID 0x4D4D but found 0x' + Std.string(_Runtime.padStart(_Runtime.callProperty(_Runtime.numberToString(mainId, 16.0), 'toUpperCase', cast ([] : Array<Dynamic>)), 4.0, '0')) + ''] : Array<Dynamic>));
-      return cast document;
+      return cast scene;
     }
     materials = _Runtime.construct(_Runtime.globalValue('Map'), []);
     meshes = _Runtime.callValue(ThreeDsParse.collectMeshes__threeDsParse, cast ([view, 0.0, materials, warnings] : Array<Dynamic>));
-    materialIndexByName = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    resolved = _Runtime.construct(_Runtime.globalValue('Map'), []);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(meshes, 'length'), '<'))) {
-        _Runtime.callValue(ThreeDsParse.appendMeshDocument__threeDsParse, cast ([_Runtime.getIndex(meshes, i), materials, materialIndexByName, document] : Array<Dynamic>));
+        var meshNode:Dynamic = _Runtime.callValue(ThreeDsParse.buildMeshNode__threeDsParse, cast ([_Runtime.getIndex(meshes, i), materials, resolved] : Array<Dynamic>));
+        if (_Runtime.truthy(!_Runtime.strictEquals(meshNode, null))) { _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), meshNode] : Array<Dynamic>)); }
         i++;
       }
     }
-    return cast document;
+    return cast scene;
     return cast null;
   }
 
@@ -308,7 +282,7 @@ class ThreeDsParse {
     return cast null;
   }
 
-  public static function appendMeshDocument__threeDsParse(mesh:ThreeDsMesh, materials:Dynamic, materialIndexByName:Dynamic, document:SceneDocument):Void {
+  public static function buildMeshNode__threeDsParse(mesh:ThreeDsMesh, materials:Dynamic, resolved:Dynamic):Null<SceneNode> {
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
     var faceCount:Dynamic = cast _Runtime.UNDEFINED;
     var positions:Dynamic = cast _Runtime.UNDEFINED;
@@ -316,15 +290,11 @@ class ThreeDsParse {
     var normals:Dynamic = cast _Runtime.UNDEFINED;
     var indices:Dynamic = cast _Runtime.UNDEFINED;
     var geometry:Dynamic = cast _Runtime.UNDEFINED;
-    var meshMaterials:Array<Float> = cast _Runtime.UNDEFINED;
+    var meshMaterials:Array<Material> = cast _Runtime.UNDEFINED;
     var seen:Dynamic = cast _Runtime.UNDEFINED;
-    var documentMesh:SceneDocumentMesh = cast _Runtime.UNDEFINED;
-    var meshIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var node:SceneDocumentNode = cast _Runtime.UNDEFINED;
-    var nodeIndex:Dynamic = cast _Runtime.UNDEFINED;
     vertexCount = (_Runtime.field(_Runtime.field(mesh, 'vertices'), 'length') / 3.0);
     faceCount = (_Runtime.field(_Runtime.field(mesh, 'faces'), 'length') / 3.0);
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(vertexCount, 0.0), function():Dynamic return cast _Runtime.strictEquals(faceCount, 0.0)))) { return; }
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(vertexCount, 0.0), function():Dynamic return cast _Runtime.strictEquals(faceCount, 0.0)))) { return cast null; }
     positions = _Runtime.toArray(_Runtime.field(mesh, 'vertices'));
     _Runtime.callValue(convertPositionsZUpToYUp, cast ([positions] : Array<Dynamic>));
     vertices = new flighthq._internal._Float32Array((vertexCount * CANONICAL_FLOATS_PER_VERTEX));
@@ -400,27 +370,20 @@ class ThreeDsParse {
       _Runtime.callProperty(seen, 'add', cast ([materialName] : Array<Dynamic>));
       var parsed:Dynamic = _Runtime.callProperty(materials, 'get', cast ([materialName] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.strictEquals(parsed, _Runtime.field(_Runtime, 'UNDEFINED')))) { continue; }
-      var index:Dynamic = _Runtime.callProperty(materialIndexByName, 'get', cast ([materialName] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(index, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-        (index = cast (_Runtime.field(_Runtime.field(document, 'materials'), 'length') : Dynamic));
-        _Runtime.callProperty(_Runtime.field(document, 'materials'), 'push', cast ([(cast (cast _Runtime.callValue(ThreeDsParse.threeDsMaterialToBlinnPhong__threeDsParse, cast ([parsed, document] : Array<Dynamic>)) : Dynamic) : MaterialLike)] : Array<Dynamic>));
-        _Runtime.callProperty(materialIndexByName, 'set', cast ([materialName, index] : Array<Dynamic>));
+      var material:Dynamic = _Runtime.callProperty(resolved, 'get', cast ([materialName] : Array<Dynamic>));
+      if (_Runtime.truthy(_Runtime.strictEquals(material, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+        (material = cast (_Runtime.callValue(ThreeDsParse.threeDsMaterialToBlinnPhong__threeDsParse, cast ([parsed] : Array<Dynamic>)) : Dynamic));
+        _Runtime.callProperty(resolved, 'set', cast ([materialName, material] : Array<Dynamic>));
       }
-      _Runtime.callProperty(meshMaterials, 'push', cast ([index] : Array<Dynamic>));
+      _Runtime.callProperty(meshMaterials, 'push', cast ([material] : Array<Dynamic>));
     }
-    documentMesh = { geometry: geometry, materials: meshMaterials };
-    meshIndex = _Runtime.field(_Runtime.field(document, 'meshes'), 'length');
-    _Runtime.callProperty(_Runtime.field(document, 'meshes'), 'push', cast ([documentMesh] : Array<Dynamic>));
-    node = { children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>)) };
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(mesh, 'name'), 'length'), 0.0, '>'))) { _Runtime.setField(node, 'name', _Runtime.field(mesh, 'name')); }
-    nodeIndex = _Runtime.field(_Runtime.field(document, 'nodes'), 'length');
-    _Runtime.callProperty(_Runtime.field(document, 'nodes'), 'push', cast ([node] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.field(_Runtime.getIndex(_Runtime.field(document, 'scenes'), 0.0), 'rootNodes'), 'push', cast ([nodeIndex] : Array<Dynamic>));
+    return cast (cast (cast _Runtime.callValue(createMesh, cast ([geometry, meshMaterials, _Runtime.field(_Runtime, 'UNDEFINED'), _Runtime.select(_Runtime.compare(_Runtime.field(_Runtime.field(mesh, 'name'), 'length'), 0.0, '>'), function():Dynamic return cast { name: _Runtime.field(mesh, 'name') }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>)) : Dynamic) : SceneNode);
+    return cast null;
   }
 
-  public static function threeDsMaterialToBlinnPhong__threeDsParse(material:ThreeDsMaterial, document:SceneDocument):Material {
+  public static function threeDsMaterialToBlinnPhong__threeDsParse(material:ThreeDsMaterial):Material {
     var result:Dynamic = cast _Runtime.UNDEFINED;
-    result = (cast (cast _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuse: _Runtime.callValue(ThreeDsParse.packThreeDsColor__threeDsParse, cast ([_Runtime.field(material, 'diffuse')] : Array<Dynamic>)), diffuseMap: _Runtime.select(!_Runtime.strictEquals(_Runtime.field(material, 'textureFilename'), null), function():Dynamic return cast _Runtime.callValue(createExternalTextureRef, cast ([_Runtime.field(material, 'textureFilename'), null, _Runtime.field(document, 'resources')] : Array<Dynamic>)), function():Dynamic return cast null), specular: _Runtime.callValue(ThreeDsParse.packThreeDsColor__threeDsParse, cast ([_Runtime.field(material, 'specular')] : Array<Dynamic>)) }] : Array<Dynamic>)) : Dynamic) : Material);
+    result = (cast (cast _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuse: _Runtime.callValue(ThreeDsParse.packThreeDsColor__threeDsParse, cast ([_Runtime.field(material, 'diffuse')] : Array<Dynamic>)), diffuseMap: _Runtime.select(!_Runtime.strictEquals(_Runtime.field(material, 'textureFilename'), null), function():Dynamic return cast _Runtime.callValue(createExternalTextureRef, cast ([_Runtime.field(material, 'textureFilename')] : Array<Dynamic>)), function():Dynamic return cast null), specular: _Runtime.callValue(ThreeDsParse.packThreeDsColor__threeDsParse, cast ([_Runtime.field(material, 'specular')] : Array<Dynamic>)) }] : Array<Dynamic>)) : Dynamic) : Material);
     _Runtime.setField(result, 'name', _Runtime.select(_Runtime.compare(_Runtime.field(_Runtime.field(material, 'name'), 'length'), 0.0, '>'), function():Dynamic return cast _Runtime.field(material, 'name'), function():Dynamic return cast null));
     return cast result;
     return cast null;
@@ -508,7 +471,7 @@ class ThreeDsParse {
     r = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, _Runtime.getIndex(rgb, 0.0))) * 255.0));
     g = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, _Runtime.getIndex(rgb, 1.0))) * 255.0));
     b = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, _Runtime.getIndex(rgb, 2.0))) * 255.0));
-    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(r) << _Runtime.toInt32(24.0))) | _Runtime.toInt32((_Runtime.toInt32(g) << _Runtime.toInt32(16.0))))) | _Runtime.toInt32((_Runtime.toInt32(b) << _Runtime.toInt32(8.0))))) | _Runtime.toInt32(255.0))), _Runtime.toInt32(0.0));
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(r) << 24)) | _Runtime.toInt32((_Runtime.toInt32(g) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(b) << 8)))) | 255)), 0);
     return cast null;
   }
 

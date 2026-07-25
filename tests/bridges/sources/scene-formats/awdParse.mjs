@@ -6,5 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createSceneFromAwd = api.createSceneFromAwd;
-export const parseAwd = api.parseAwd;
 export const parseAwdSkeletonAnimations = api.parseAwdSkeletonAnimations;

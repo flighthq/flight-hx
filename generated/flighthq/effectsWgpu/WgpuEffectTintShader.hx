@@ -3,12 +3,12 @@ package flighthq.effectsWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.effectsWgpu.WgpuEffectPass.WgpuDualSourceEffectPipeline;
+import flighthq.effectsWgpu.WgpuEffectPass.WgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.createWgpuDualSourceEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.createWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuDualSourceEffectPass;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
-import flighthq.types.WgpuDualSourceEffectPipeline;
-import flighthq.types.WgpuEffectPipeline;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
@@ -99,7 +99,7 @@ class WgpuEffectTintShader {
   }
 
   public static function packColor__wgpuEffectTintShader(color:Float):Array<Float> {
-    return cast cast ([((_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) / 255.0), ((_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) / 255.0), ((_Runtime.toInt32(color) & _Runtime.toInt32(255.0)) / 255.0)] : Array<Dynamic>);
+    return cast cast ([((_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255) / 255.0), ((_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255) / 255.0), ((_Runtime.toInt32(color) & 255) / 255.0)] : Array<Dynamic>);
     return cast null;
   }
 

@@ -3,7 +3,8 @@ package flighthq.sceneWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.WgpuPbrPipeline.WgpuPbrDefineKey;
+
+typedef WgpuPbrDefineKey = { var alphaMaskEnabled:Bool; var anisotropyEnabled:Bool; var clearcoatEnabled:Bool; var doubleSided:Bool; var hasBaseColorMap:Bool; var hasEmissiveMap:Bool; var hasMetallicRoughnessMap:Bool; var hasNormalMap:Bool; var hasOcclusionMap:Bool; var iridescenceEnabled:Bool; var sheenEnabled:Bool; var specularEnabled:Bool; var subsurfaceEnabled:Bool; var transmissionEnabled:Bool; };
 
 class WgpuPbrPrelude {
   public static function buildWgpuPbrDefineKey(key:WgpuPbrDefineKey):String {

@@ -194,7 +194,7 @@ class StrokePath {
       }
     }
     current = null;
-    n = (_Runtime.toInt32(_Runtime.field(pts, 'length')) >> _Runtime.toInt32(1.0));
+    n = (_Runtime.toInt32(_Runtime.field(pts, 'length')) >> 1);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, (n - 1.0), '<'))) {
@@ -436,7 +436,7 @@ class StrokePath {
     var left:Array<Float> = cast _Runtime.UNDEFINED;
     var right:Array<Float> = cast _Runtime.UNDEFINED;
     var normals:Dynamic = cast _Runtime.UNDEFINED;
-    n = (_Runtime.toInt32(_Runtime.field(pts, 'length')) >> _Runtime.toInt32(1.0));
+    n = (_Runtime.toInt32(_Runtime.field(pts, 'length')) >> 1);
     if (_Runtime.truthy(_Runtime.compare(n, 2.0, '<'))) { return; }
     left = cast ([] : Array<Dynamic>);
     right = cast ([] : Array<Dynamic>);

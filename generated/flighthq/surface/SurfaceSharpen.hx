@@ -5,7 +5,8 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.surface.SurfaceBlur.boxBlurSurface;
 import flighthq.types.SurfaceRegion;
-import flighthq.types.SurfaceSharpenOptions;
+
+typedef SurfaceSharpenOptions = { @:optional var amount:Float; @:optional var radiusX:Float; @:optional var radiusY:Float; @:optional var passes:Float; };
 
 class SurfaceSharpen {
   public static function sharpenSurface(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:SurfaceRegion, ?options:SurfaceSharpenOptions):Void {

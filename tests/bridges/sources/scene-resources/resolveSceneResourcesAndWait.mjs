@@ -5,5 +5,4 @@ const api = compiled.flighthq.sceneResources.ResolveSceneResourcesAndWait;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const loadSceneResources = api.loadSceneResources;
-export const waitForSceneResourceResolver = api.waitForSceneResourceResolver;
+export const resolveSceneResourcesAndWait = api.resolveSceneResourcesAndWait;

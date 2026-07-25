@@ -9,4 +9,3 @@ export const cloneMaterial = api.cloneMaterial;
 export const copyMaterial = api.copyMaterial;
 export const createMaterial = api.createMaterial;
 export const equalsMaterial = api.equalsMaterial;
-export const getMaterialOfKind = api.getMaterialOfKind;

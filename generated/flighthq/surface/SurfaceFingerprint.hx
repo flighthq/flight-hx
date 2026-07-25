@@ -94,7 +94,7 @@ class SurfaceFingerprint {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(cells, 'length'), '<'))) {
-        (hex = cast ((hex + (_Runtime.getIndex(SurfaceFingerprint.HEX__surfaceFingerprint, (_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(cells, i)) >> _Runtime.toInt32(4.0))) & _Runtime.toInt32(15.0))) + _Runtime.getIndex(SurfaceFingerprint.HEX__surfaceFingerprint, (_Runtime.toInt32(_Runtime.getIndex(cells, i)) & _Runtime.toInt32(15.0))))) : Dynamic));
+        (hex = cast ((hex + (_Runtime.getIndex(SurfaceFingerprint.HEX__surfaceFingerprint, (_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(cells, i)) >> 4)) & 15)) + _Runtime.getIndex(SurfaceFingerprint.HEX__surfaceFingerprint, (_Runtime.toInt32(_Runtime.getIndex(cells, i)) & 15)))) : Dynamic));
         i++;
       }
     }
@@ -120,7 +120,7 @@ class SurfaceFingerprint {
         var hi:Dynamic = _Runtime.callProperty(SurfaceFingerprint.HEX__surfaceFingerprint, 'indexOf', cast ([_Runtime.getIndex(hex, (i * 2.0))] : Array<Dynamic>));
         var lo:Dynamic = _Runtime.callProperty(SurfaceFingerprint.HEX__surfaceFingerprint, 'indexOf', cast ([_Runtime.getIndex(hex, ((i * 2.0) + 1.0))] : Array<Dynamic>));
         if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(hi, 0.0, '<'), function():Dynamic return cast _Runtime.compare(lo, 0.0, '<')))) { return cast null; }
-        _Runtime.setIndex(cells, i, (_Runtime.toInt32((_Runtime.toInt32(hi) << _Runtime.toInt32(4.0))) | _Runtime.toInt32(lo)));
+        _Runtime.setIndex(cells, i, (_Runtime.toInt32((_Runtime.toInt32(hi) << 4)) | _Runtime.toInt32(lo)));
         i++;
       }
     }

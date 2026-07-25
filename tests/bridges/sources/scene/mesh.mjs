@@ -12,4 +12,6 @@ export const getMeshDeformer = api.getMeshDeformer;
 export const getMeshRuntime = api.getMeshRuntime;
 export const getMeshSignals = api.getMeshSignals;
 export const isMesh = api.isMesh;
+export { Mesh } from '@flighthq/types';
 export { MeshKind } from '@flighthq/types';
+export { MeshRuntime } from '@flighthq/types';

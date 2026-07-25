@@ -122,7 +122,7 @@ class WgpuShader {
     var viewport:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     byteOffset = _Runtime.field(runtime, 'uniformOffset');
-    floatBase = (_Runtime.toInt32(byteOffset) >> _Runtime.toInt32(2.0));
+    floatBase = (_Runtime.toInt32(byteOffset) >> 2);
     __destructure1 = runtime;
     uniformData = _Runtime.field(__destructure1, 'uniformData');
     uniformDataU32 = _Runtime.field(__destructure1, 'uniformDataU32');

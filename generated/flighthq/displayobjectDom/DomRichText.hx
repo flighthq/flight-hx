@@ -24,7 +24,6 @@ import flighthq.textlayout.TextLayout.computeTextLayout;
 import flighthq.textlayout.TextLayoutRuntime.getTextLayoutResult;
 import flighthq.types.DisplayObjectRenderer;
 import flighthq.types.DomRenderState;
-import flighthq.types.DomTextInputOverlay;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
@@ -36,6 +35,8 @@ import flighthq.types.TextLabel.TextLabelRuntime;
 import flighthq.types.TextMetrics;
 
 typedef DomRichTextData__domRichText = Dynamic;
+
+typedef DomTextInputOverlay = Dynamic;
 
 class DomRichText {
   public static function createDomRichTextData__domRichText(_state:RenderState, _source:Renderable):DomRichTextData__domRichText {

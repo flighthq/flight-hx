@@ -5,9 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.HemisphereLight;
-import flighthq.types.HemisphereLightOptions;
 import flighthq.types.Types.HemisphereLightKind;
 import flighthq.types._internal._HemisphereLightValues.HemisphereLightKind;
+
+typedef HemisphereLightOptions = { @:optional var groundColor:Float; @:optional var intensity:Float; @:optional var skyColor:Float; };
 
 class HemisphereLight {
   public static function cloneHemisphereLight(source:flighthq.types.HemisphereLight):flighthq.types.HemisphereLight {

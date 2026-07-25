@@ -14,7 +14,7 @@ class CanvasBackground {
     _Runtime.setField(_Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentBlendMode', BlendModeValue.Normal);
     _Runtime.callProperty(_Runtime.field(state, 'context'), 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
     _Runtime.setField(_Runtime.field(state, 'context'), 'globalAlpha', 1.0);
-    if (_Runtime.truthy(!_Runtime.strictEquals((_Runtime.toInt32(_Runtime.field(state, 'backgroundColor')) & _Runtime.toInt32(255.0)), 0.0))) {
+    if (_Runtime.truthy(!_Runtime.strictEquals((_Runtime.toInt32(_Runtime.field(state, 'backgroundColor')) & 255), 0.0))) {
       _Runtime.setField(_Runtime.field(state, 'context'), 'fillStyle', _Runtime.field(state, 'backgroundColorString'));
       _Runtime.callProperty(_Runtime.field(state, 'context'), 'fillRect', cast ([0.0, 0.0, flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'width'), flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'height')] : Array<Dynamic>));
     } else {

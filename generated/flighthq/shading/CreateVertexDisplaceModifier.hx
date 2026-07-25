@@ -4,12 +4,15 @@ package flighthq.shading;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ModifierSlot;
+import flighthq.types.Texture;
 import flighthq.types.Types.VertexDisplaceModifierKind;
 import flighthq.types.Vector3.Vector3Like;
 import flighthq.types.VertexDisplaceModifier;
-import flighthq.types.VertexDisplaceModifierOptions;
+import flighthq.types.VertexDisplaceModifier.VertexDisplaceModifierSource;
 import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 import flighthq.types._internal._VertexDisplaceModifierValues.VertexDisplaceModifierKind;
+
+typedef VertexDisplaceModifierOptions = { var source:VertexDisplaceModifierSource; var amplitude:Float; @:optional var axis:Vector3Like; @:optional var map:Texture; @:optional var frequency:Float; @:optional var speed:Float; @:optional var direction:Vector3Like; };
 
 class CreateVertexDisplaceModifier {
   public static function createVertexDisplaceModifier(options:VertexDisplaceModifierOptions):VertexDisplaceModifier {

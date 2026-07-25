@@ -3,30 +3,29 @@ package flighthq.sceneGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.camera.Camera.getCamera3DViewProjectionMatrix4;
+import flighthq.camera.Camera.getCameraViewProjectionMatrix4;
 import flighthq.geometry.Matrix4.createMatrix4;
 import flighthq.mesh.MeshGeometry.hasMeshGeometrySkin;
-import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
+import flighthq.node.Transform3d.getNodeWorldMatrix4;
 import flighthq.node.Traversal.forEachNodeDescendant;
 import flighthq.renderGl.GlRenderTarget.createGlRenderTarget;
 import flighthq.renderGl.GlSkinPaletteTexture.uploadGlSkinPaletteTexture;
 import flighthq.scene.UpdateMeshMorph.updateMeshMorph;
-import flighthq.sceneGl.GlMeshProgram.GL_SKIN_VERTEX_DECLARATIONS_GLSL;
-import flighthq.sceneGl.GlMeshProgram.SKIN_PALETTE_TEXTURE_UNIT;
-import flighthq.sceneGl.GlMeshProgram.compileGlProgram;
-import flighthq.sceneGl.GlMeshProgram.ensureGlSceneProgram;
 import flighthq.sceneGl.GlMeshUpload.ensureGlMeshUpload;
-import flighthq.sceneGl.GlSceneRuntime.ensureGlSkinPalette;
-import flighthq.sceneGl.GlSceneRuntime.getGlSceneRuntime;
-import flighthq.types.Camera3D;
-import flighthq.types.GlMeshProgram;
+import flighthq.sceneGl._internal._GlMeshProgramValues.GL_SKIN_VERTEX_DECLARATIONS_GLSL;
+import flighthq.sceneGl._internal._GlMeshProgramValues.SKIN_PALETTE_TEXTURE_UNIT;
+import flighthq.sceneGl._internal._GlMeshProgramValues.compileGlProgram;
+import flighthq.sceneGl._internal._GlMeshProgramValues.ensureGlSceneProgram;
+import flighthq.sceneGl._internal._GlSceneRuntimeValues.ensureGlSkinPalette;
+import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
+import flighthq.types.Camera;
 import flighthq.types.GlRenderState;
 import flighthq.types.Mesh;
 import flighthq.types.SceneNode;
 import flighthq.types.SceneNode.SceneNodeTraits;
 
 class GlShadowMap {
-  public static function drawGlSceneShadowMap(state:GlRenderState, scene:SceneNode, shadowCamera:Camera3D):Void {
+  public static function drawGlSceneShadowMap(state:GlRenderState, scene:SceneNode, shadowCamera:Camera):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
@@ -43,7 +42,7 @@ class GlShadowMap {
     }
     target = _Runtime.field(runtime, 'shadowTarget');
     matrix = _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(runtime, 'shadow'), 'matrix'), function():Dynamic return cast _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)));
-    _Runtime.callValue(getCamera3DViewProjectionMatrix4, cast ([matrix, shadowCamera, 1.0] : Array<Dynamic>));
+    _Runtime.callValue(getCameraViewProjectionMatrix4, cast ([matrix, shadowCamera, 1.0] : Array<Dynamic>));
     rigidProgram = _Runtime.callValue(ensureGlSceneProgram, cast ([state, 'shadow:depth', GlShadowMap.compileShadowDepthProgram__glShadowMap] : Array<Dynamic>));
     skinnedProgram = null;
     prevFramebuffer = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER_BINDING) : Null<Dynamic>);
@@ -76,15 +75,15 @@ class GlShadowMap {
       if (_Runtime.truthy(skinned)) {
         var jointMatrices:Dynamic = _Runtime.field(_Runtime.field(_Runtime.field(mesh, 'skin'), 'skeleton'), 'jointMatrices');
         flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + SKIN_PALETTE_TEXTURE_UNIT));
-        _Runtime.callValue(uploadGlSkinPaletteTexture, cast ([gl, _Runtime.callValue(ensureGlSkinPalette, cast ([state] : Array<Dynamic>)), jointMatrices, (_Runtime.toInt32((_Runtime.field(jointMatrices, 'length') / 16.0)) | _Runtime.toInt32(0.0))] : Array<Dynamic>));
+        _Runtime.callValue(uploadGlSkinPaletteTexture, cast ([gl, _Runtime.callValue(ensureGlSkinPalette, cast ([state] : Array<Dynamic>)), jointMatrices, (_Runtime.toInt32((_Runtime.field(jointMatrices, 'length') / 16.0)) | 0)] : Array<Dynamic>));
         flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.coalesce(_Runtime.field(program, 'locJointTexture'), function():Dynamic return cast null), SKIN_PALETTE_TEXTURE_UNIT);
       }
       upload = _Runtime.callValue(ensureGlMeshUpload, cast ([state, _Runtime.field(mesh, 'geometry'), skinned] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, _Runtime.field(upload, 'vao'));
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(upload, 'indexBuffer'), null))) {
-        flighthq._internal.backend.WebGl2Backend.drawElements(gl, _Runtime.field(upload, 'primitiveMode'), _Runtime.field(upload, 'indexCount'), _Runtime.field(upload, 'indexType'), 0.0);
+        flighthq._internal.backend.WebGl2Backend.drawElements(gl, flighthq._internal.backend.WebGl2Backend.TRIANGLES, _Runtime.field(upload, 'indexCount'), _Runtime.field(upload, 'indexType'), 0.0);
       } else {
-        flighthq._internal.backend.WebGl2Backend.drawArrays(gl, _Runtime.field(upload, 'primitiveMode'), 0.0, _Runtime.field(upload, 'indexCount'));
+        flighthq._internal.backend.WebGl2Backend.drawArrays(gl, flighthq._internal.backend.WebGl2Backend.TRIANGLES, 0.0, _Runtime.field(upload, 'indexCount'));
       }
     }] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);

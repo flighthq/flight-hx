@@ -6,7 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
-import flighthq.types.PixiParseResult;
+
+typedef PixiParseResult = { var config:ParticleEmitterConfig; var warnings:Array<String>; };
+
+typedef PixiParsed = PixiParseResult;
 
 typedef PixiRaw__pixiParse = Dynamic;
 
@@ -104,7 +107,7 @@ class PixiParse {
     var blendModeStr:Dynamic = cast _Runtime.UNDEFINED;
     var blendMode:Null<ParticleBlendMode> = cast _Runtime.UNDEFINED;
     var rotationSpeed:Dynamic = cast _Runtime.UNDEFINED;
-    maxParticles = (_Runtime.toInt32(_Runtime.callValue(PixiParse.rn__pixiParse, cast ([_Runtime.field(raw, 'maxParticles'), 1000.0] : Array<Dynamic>))) | _Runtime.toInt32(0.0));
+    maxParticles = (_Runtime.toInt32(_Runtime.callValue(PixiParse.rn__pixiParse, cast ([_Runtime.field(raw, 'maxParticles'), 1000.0] : Array<Dynamic>))) | 0);
     frequency = _Runtime.callValue(PixiParse.rn__pixiParse, cast ([_Runtime.field(raw, 'frequency'), 0.1] : Array<Dynamic>));
     spawnRate = _Runtime.select(_Runtime.compare(frequency, 0.0, '>'), function():Dynamic return cast (1.0 / frequency), function():Dynamic return cast 10.0);
     life = (cast _Runtime.field(raw, 'lifetime') : Null<{ @:optional var min:Dynamic; @:optional var max:Dynamic; }>);

@@ -3,15 +3,14 @@ package flighthq.sceneWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.sceneWgpu.WgpuSceneRuntime.getWgpuSceneRuntime;
+import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues.getWgpuSceneRuntime;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.MeshGeometryRuntime;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuSceneRuntime.WgpuMeshUpload;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class WgpuMeshUpload {
-  public static function ensureWgpuMeshUpload(state:WgpuRenderState, geometry:MeshGeometry):Null<flighthq.types.WgpuSceneRuntime.WgpuMeshUpload> {
+  public static function ensureWgpuMeshUpload(state:WgpuRenderState, geometry:MeshGeometry):Null<Dynamic> {
     var indices:Dynamic = cast _Runtime.UNDEFINED;
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var upload:Dynamic = cast _Runtime.UNDEFINED;
@@ -48,7 +47,7 @@ class WgpuMeshUpload {
   }
 
   public static function alignTo4__wgpuMeshUpload(byteLength:Float):Float {
-    return cast (_Runtime.toInt32((byteLength + 3.0)) & _Runtime.toInt32(~_Runtime.toInt32(3.0)));
+    return cast (_Runtime.toInt32((byteLength + 3.0)) & _Runtime.toInt32(~3));
     return cast null;
   }
 }

@@ -5,9 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.AmbientLight;
-import flighthq.types.AmbientLightOptions;
 import flighthq.types.Types.AmbientLightKind;
 import flighthq.types._internal._AmbientLightValues.AmbientLightKind;
+
+typedef AmbientLightOptions = { @:optional var color:Float; @:optional var intensity:Float; };
 
 class AmbientLight {
   public static function cloneAmbientLight(source:flighthq.types.AmbientLight):flighthq.types.AmbientLight {

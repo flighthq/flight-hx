@@ -3,20 +3,24 @@ package flighthq.sceneWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.sceneWgpu.WgpuMeshPipeline.WGPU_MESH_PRELUDE_WGSL;
-import flighthq.sceneWgpu.WgpuMeshPipeline.createWgpuMeshPipeline;
-import flighthq.sceneWgpu.WgpuMeshPipeline.ensureWgpuScenePipeline;
-import flighthq.sceneWgpu.WgpuMeshPipeline.ensureWgpuShadowSampleLayout;
-import flighthq.sceneWgpu.WgpuMeshPipeline.getWgpuMaterialSampler;
-import flighthq.sceneWgpu.WgpuMeshPipeline.resolveWgpuMaterialTextureView;
-import flighthq.sceneWgpu.WgpuMeshPipeline.stashWgpuUvTransform;
-import flighthq.sceneWgpu.WgpuSceneRuntime.getWgpuSceneRuntime;
+import flighthq.sceneWgpu.WgpuSceneRuntime.WgpuMaterialBinding;
+import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.WGPU_MESH_PRELUDE_WGSL;
+import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.createWgpuMeshPipeline;
+import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.ensureWgpuScenePipeline;
+import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.ensureWgpuShadowSampleLayout;
+import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.getWgpuMaterialSampler;
+import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.resolveWgpuMaterialTextureView;
+import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.stashWgpuUvTransform;
+import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues.getWgpuSceneRuntime;
 import flighthq.types.LinearColor;
 import flighthq.types.Texture;
-import flighthq.types.WgpuClassicPipeline;
-import flighthq.types.WgpuClassicPipeline.WgpuClassicDefineKey;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuSceneRuntime.WgpuMaterialBinding;
+
+typedef WgpuClassicLightingModel = String;
+
+typedef WgpuClassicPipeline = Dynamic;
+
+typedef WgpuClassicDefineKey = { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; var lightingModel:WgpuClassicLightingModel; };
 
 class WgpuClassicPrelude {
   public static function bindWgpuClassicSurface(state:WgpuRenderState, pipeline:WgpuClassicPipeline, materialKey:Dynamic, diffuse:LinearColor, specular:LinearColor, shininess:Float, alphaCutoff:Float, diffuseMap:Null<Texture>, specularMap:Null<Texture>, normalMap:Null<Texture>):Dynamic {

@@ -60,7 +60,7 @@ class WgpuInnerGlowEffect {
   public static function getInvertTintEdgeColor__wgpuInnerGlowEffect(color:Float, alpha:Float, strength:Float):Array<Float> {
     var edgeAlpha:Dynamic = cast _Runtime.UNDEFINED;
     edgeAlpha = HxMath.min(1.0, (alpha * strength));
-    return cast cast ([(((_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) / 255.0) * edgeAlpha), (((_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) / 255.0) * edgeAlpha), (((_Runtime.toInt32(color) & _Runtime.toInt32(255.0)) / 255.0) * edgeAlpha), edgeAlpha] : Array<Dynamic>);
+    return cast cast ([(((_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255) / 255.0) * edgeAlpha), (((_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255) / 255.0) * edgeAlpha), (((_Runtime.toInt32(color) & 255) / 255.0) * edgeAlpha), edgeAlpha] : Array<Dynamic>);
     return cast null;
   }
 }

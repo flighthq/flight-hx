@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.render.EnableColorAdjustmentGuards as Facade_Render_flighthq_render_EnableColorAdjustmentGuards;
 import flighthq.render.ExplainDisplayObjectRender as Facade_Render_flighthq_render_ExplainDisplayObjectRender;
+import flighthq.render.ExplainDisplayObjectRender.DisplayObjectRenderExplanation;
 import flighthq.render.RenderAppearance as Facade_Render_flighthq_render_RenderAppearance;
 import flighthq.render.RenderCache as Facade_Render_flighthq_render_RenderCache;
 import flighthq.render.RenderColor as Facade_Render_flighthq_render_RenderColor;
@@ -12,6 +13,7 @@ import flighthq.render.RenderColorTransform as Facade_Render_flighthq_render_Ren
 import flighthq.render.RenderMaterial as Facade_Render_flighthq_render_RenderMaterial;
 import flighthq.render.RenderProxy as Facade_Render_flighthq_render_RenderProxy;
 import flighthq.render.RenderProxy.AdaptHook__renderProxy;
+import flighthq.render.RenderProxy.RenderProxyVisitor;
 import flighthq.render.RenderProxyAdapter as Facade_Render_flighthq_render_RenderProxyAdapter;
 import flighthq.render.RenderQueue as Facade_Render_flighthq_render_RenderQueue;
 import flighthq.render.RenderState as Facade_Render_flighthq_render_RenderState;
@@ -20,9 +22,8 @@ import flighthq.render.RenderTransform2d as Facade_Render_flighthq_render_Render
 import flighthq.render.RenderViewport as Facade_Render_flighthq_render_RenderViewport;
 import flighthq.render.Renderer as Facade_Render_flighthq_render_Renderer;
 import flighthq.render.SceneRender as Facade_Render_flighthq_render_SceneRender;
-import flighthq.types.Camera3D;
+import flighthq.types.Camera;
 import flighthq.types.DisplayObject;
-import flighthq.types.DisplayObjectRenderExplanation;
 import flighthq.types.Entity.Kind;
 import flighthq.types.HasBoundsRectangle;
 import flighthq.types.HasTransform2D;
@@ -34,7 +35,6 @@ import flighthq.types.RenderCacheAdapter;
 import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderProxyAdapter;
-import flighthq.types.RenderProxyVisitor;
 import flighthq.types.RenderQueue;
 import flighthq.types.RenderQueue.RenderQueueEntry;
 import flighthq.types.RenderQueue.RenderSortKey;
@@ -45,7 +45,7 @@ import flighthq.types.Renderable;
 import flighthq.types.Renderer;
 import flighthq.types.RendererData;
 import flighthq.types.SceneLightBlock;
-import flighthq.types.SceneLights.SceneLightsLike;
+import flighthq.types.SceneLights;
 import flighthq.types.SceneNode;
 import flighthq.types.SceneRenderList;
 
@@ -228,7 +228,7 @@ class Render {
     return cast null;
   }
 
-  public static function packSceneLightBlock(out:SceneLightBlock, lights:SceneLightsLike):Void {
+  public static function packSceneLightBlock(out:SceneLightBlock, lights:SceneLights):Void {
     _Runtime.callValue(Facade_Render_flighthq_render_SceneRender.packSceneLightBlock, cast ([out, lights] : Array<Dynamic>));
   }
 
@@ -237,7 +237,7 @@ class Render {
     return cast null;
   }
 
-  public static function prepareSceneRender(state:RenderState, scene:SceneNode, camera:Camera3D, lights:SceneLightsLike):SceneRenderList {
+  public static function prepareSceneRender(state:RenderState, scene:SceneNode, camera:Camera, lights:SceneLights):SceneRenderList {
     return cast _Runtime.callValue(Facade_Render_flighthq_render_SceneRender.prepareSceneRender, cast ([state, scene, camera, lights] : Array<Dynamic>));
     return cast null;
   }

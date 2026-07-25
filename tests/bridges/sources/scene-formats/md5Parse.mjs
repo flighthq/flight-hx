@@ -6,4 +6,3 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createSceneFromMd5Mesh = api.createSceneFromMd5Mesh;
-export const parseMd5Mesh = api.parseMd5Mesh;

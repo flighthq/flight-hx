@@ -75,14 +75,14 @@ class SegmentCollision {
     var points:Dynamic = cast _Runtime.UNDEFINED;
     var pn:Dynamic = cast _Runtime.UNDEFINED;
     points = _Runtime.field(b, 'points');
-    pn = (_Runtime.toInt32(_Runtime.field(points, 'length')) >> _Runtime.toInt32(1.0));
+    pn = (_Runtime.toInt32(_Runtime.field(points, 'length')) >> 1);
     if (_Runtime.truthy(_Runtime.callValue(SegmentCollision.isPointInConvexPolygon__segmentCollision, cast ([_Runtime.field(a, 'x0'), _Runtime.field(a, 'y0'), points, pn] : Array<Dynamic>)))) { return cast true; }
     if (_Runtime.truthy(_Runtime.callValue(SegmentCollision.isPointInConvexPolygon__segmentCollision, cast ([_Runtime.field(a, 'x1'), _Runtime.field(a, 'y1'), points, pn] : Array<Dynamic>)))) { return cast true; }
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, pn, '<'))) {
         var j:Dynamic = ((i + 1.0) % pn);
-        if (_Runtime.truthy(_Runtime.callValue(SegmentCollision.isSegmentsIntersecting__segmentCollision, cast ([_Runtime.field(a, 'x0'), _Runtime.field(a, 'y0'), _Runtime.field(a, 'x1'), _Runtime.field(a, 'y1'), _Runtime.getIndex(points, (_Runtime.toInt32(i) << _Runtime.toInt32(1.0))), _Runtime.getIndex(points, ((_Runtime.toInt32(i) << _Runtime.toInt32(1.0)) + 1.0)), _Runtime.getIndex(points, (_Runtime.toInt32(j) << _Runtime.toInt32(1.0))), _Runtime.getIndex(points, ((_Runtime.toInt32(j) << _Runtime.toInt32(1.0)) + 1.0))] : Array<Dynamic>)))) {
+        if (_Runtime.truthy(_Runtime.callValue(SegmentCollision.isSegmentsIntersecting__segmentCollision, cast ([_Runtime.field(a, 'x0'), _Runtime.field(a, 'y0'), _Runtime.field(a, 'x1'), _Runtime.field(a, 'y1'), _Runtime.getIndex(points, (_Runtime.toInt32(i) << 1)), _Runtime.getIndex(points, ((_Runtime.toInt32(i) << 1) + 1.0)), _Runtime.getIndex(points, (_Runtime.toInt32(j) << 1)), _Runtime.getIndex(points, ((_Runtime.toInt32(j) << 1) + 1.0))] : Array<Dynamic>)))) {
           return cast true;
         }
         i++;
@@ -106,10 +106,10 @@ class SegmentCollision {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, pn, '<'))) {
         var j:Dynamic = ((i + 1.0) % pn);
-        var x0:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(i) << _Runtime.toInt32(1.0)));
-        var y0:Dynamic = _Runtime.getIndex(px, ((_Runtime.toInt32(i) << _Runtime.toInt32(1.0)) + 1.0));
-        var x1:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(j) << _Runtime.toInt32(1.0)));
-        var y1:Dynamic = _Runtime.getIndex(px, ((_Runtime.toInt32(j) << _Runtime.toInt32(1.0)) + 1.0));
+        var x0:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(i) << 1));
+        var y0:Dynamic = _Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0));
+        var x1:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(j) << 1));
+        var y1:Dynamic = _Runtime.getIndex(px, ((_Runtime.toInt32(j) << 1) + 1.0));
         var cross:Dynamic = (((x1 - x0) * (y - y0)) - ((y1 - y0) * (x - x0)));
         if (_Runtime.truthy(_Runtime.compare(cross, SegmentCollision.EPS__segmentCollision, '>'))) { (positive = cast (true : Dynamic)); } else { if (_Runtime.truthy(_Runtime.compare(cross, -SegmentCollision.EPS__segmentCollision, '<'))) { (negative = cast (true : Dynamic)); } }
         if (_Runtime.truthy(_Runtime.andValue(positive, function():Dynamic return cast negative))) { return cast false; }

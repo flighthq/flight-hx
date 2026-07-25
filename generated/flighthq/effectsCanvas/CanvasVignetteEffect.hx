@@ -32,7 +32,7 @@ class CanvasVignetteEffect {
     radius = _Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 0.75);
     softness = _Runtime.coalesce(_Runtime.field(effect, 'softness'), function():Dynamic return cast 0.45);
     color = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 255.0);
-    colorAlpha = ((_Runtime.toInt32(color) & _Runtime.toInt32(255.0)) / 255.0);
+    colorAlpha = ((_Runtime.toInt32(color) & 255) / 255.0);
     darken = HxMath.max(0.0, HxMath.min(1.0, (intensity * colorAlpha)));
     _Runtime.callValue(drawCanvasEffectPass, cast ([dest, source, 'none'] : Array<Dynamic>));
     ctx = _Runtime.field(dest, 'context');
@@ -44,9 +44,9 @@ class CanvasVignetteEffect {
     inner = (HxMath.max(0.0, HxMath.min(radius, 1.0)) * outer);
     ramp = HxMath.max(0.0, (inner - (softness * outer)));
     gradient = flighthq._internal.backend.Canvas2dBackend.call(ctx, 'createRadialGradient', cast ([cx, cy, ramp, cx, cy, outer] : Array<Dynamic>));
-    r = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0));
-    g = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0));
-    b = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0));
+    r = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255);
+    g = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255);
+    b = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255);
     _Runtime.callProperty(gradient, 'addColorStop', cast ([0.0, 'rgba(' + Std.string(r) + ',' + Std.string(g) + ',' + Std.string(b) + ',0)'] : Array<Dynamic>));
     _Runtime.callProperty(gradient, 'addColorStop', cast ([1.0, 'rgba(' + Std.string(r) + ',' + Std.string(g) + ',' + Std.string(b) + ',' + Std.string(_Runtime.toFixed(darken, 4.0)) + ')'] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));

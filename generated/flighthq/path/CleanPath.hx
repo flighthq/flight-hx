@@ -20,7 +20,7 @@ class CleanPath {
     _Runtime.setLength(_Runtime.field(out, 'data'), 0.0);
     _Runtime.setField(out, 'winding', winding);
     for (contour in _Runtime.iterable(contours)) {
-      var n:Dynamic = (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> _Runtime.toInt32(1.0));
+      var n:Dynamic = (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> 1);
       if (_Runtime.truthy(_Runtime.compare(n, 2.0, '<'))) { continue; }
       var closed:Dynamic = _Runtime.andValue(_Runtime.compare(n, 3.0, '>='), function():Dynamic return cast _Runtime.callValue(CleanPath.withinTolerance__cleanPath, cast ([_Runtime.getIndex(contour, 0.0), _Runtime.getIndex(contour, 1.0), _Runtime.getIndex(contour, ((n * 2.0) - 2.0)), _Runtime.getIndex(contour, ((n * 2.0) - 1.0)), toleranceSq] : Array<Dynamic>)));
       var count:Dynamic = _Runtime.select(closed, function():Dynamic return cast (n - 1.0), function():Dynamic return cast n);
@@ -33,7 +33,7 @@ class CleanPath {
         }
       }
       if (_Runtime.truthy(closed)) { _Runtime.callValue(CleanPath.collapseClosedSeam__cleanPath, cast ([kept, toleranceSq] : Array<Dynamic>)); }
-      var keptCount:Dynamic = (_Runtime.toInt32(_Runtime.field(kept, 'length')) >> _Runtime.toInt32(1.0));
+      var keptCount:Dynamic = (_Runtime.toInt32(_Runtime.field(kept, 'length')) >> 1);
       if (_Runtime.truthy(_Runtime.select(closed, function():Dynamic return cast _Runtime.compare(keptCount, 3.0, '<'), function():Dynamic return cast _Runtime.compare(keptCount, 2.0, '<')))) { continue; }
       _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
       _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.getIndex(kept, 0.0), _Runtime.getIndex(kept, 1.0)] : Array<Dynamic>));
@@ -52,9 +52,9 @@ class CleanPath {
   public static function collapseClosedSeam__cleanPath(kept:Array<Float>, toleranceSq:Float):Void {
     var changed:Dynamic = cast _Runtime.UNDEFINED;
     changed = true;
-    while (_Runtime.truthy(_Runtime.andValue(changed, function():Dynamic return cast _Runtime.compare((_Runtime.toInt32(_Runtime.field(kept, 'length')) >> _Runtime.toInt32(1.0)), 3.0, '>')))) {
+    while (_Runtime.truthy(_Runtime.andValue(changed, function():Dynamic return cast _Runtime.compare((_Runtime.toInt32(_Runtime.field(kept, 'length')) >> 1), 3.0, '>')))) {
       (changed = cast (false : Dynamic));
-      var last:Dynamic = (_Runtime.toInt32(_Runtime.field(kept, 'length')) >> _Runtime.toInt32(1.0));
+      var last:Dynamic = (_Runtime.toInt32(_Runtime.field(kept, 'length')) >> 1);
       if (_Runtime.truthy(_Runtime.callValue(CleanPath.isMiddleRemovable__cleanPath, cast ([kept, (last - 2.0), (last - 1.0), 0.0, toleranceSq] : Array<Dynamic>)))) {
         _Runtime.setLength(kept, (kept.length - 2.0));
         (changed = cast (true : Dynamic));

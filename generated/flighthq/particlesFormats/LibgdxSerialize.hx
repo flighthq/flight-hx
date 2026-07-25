@@ -3,11 +3,12 @@ package flighthq.particlesFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.LibgdxParticleSchema.LibgdxParticleDocument;
-import flighthq.types.LibgdxParticleSchema.LibgdxRangeValue;
-import flighthq.types.LibgdxParticleSchema.LibgdxSerializeOptions;
+import flighthq.particlesFormats.LibgdxSchema.LibgdxParticleDocument;
+import flighthq.particlesFormats.LibgdxSchema.LibgdxRangeValue;
+import flighthq.particlesFormats.SerializeResult.ParticleSerializeResult;
 import flighthq.types.ParticleEmitterConfig;
-import flighthq.types.ParticleSerializeResult;
+
+typedef LibgdxSerializeOptions = { @:optional var textureSize:Float; };
 
 class LibgdxSerialize {
   public static function serializeLibgdxParticle(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:LibgdxSerializeOptions):String {

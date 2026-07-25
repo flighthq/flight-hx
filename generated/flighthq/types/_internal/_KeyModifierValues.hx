@@ -5,5 +5,5 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _KeyModifierValues {
-  public static final KeyModifierValue:Dynamic = { ALT: (_Runtime.toInt32(256.0) | _Runtime.toInt32(512.0)), CAPS_LOCK: 8192.0, CTRL: (_Runtime.toInt32(64.0) | _Runtime.toInt32(128.0)), LEFT_ALT: 256.0, LEFT_CTRL: 64.0, LEFT_META: 1024.0, LEFT_SHIFT: 1.0, META: (_Runtime.toInt32(1024.0) | _Runtime.toInt32(2048.0)), MODE: 16384.0, NONE: 0.0, NUM_LOCK: 4096.0, RIGHT_ALT: 512.0, RIGHT_CTRL: 128.0, RIGHT_META: 2048.0, RIGHT_SHIFT: 2.0, SHIFT: (_Runtime.toInt32(1.0) | _Runtime.toInt32(2.0)) };
+  public static final KeyModifierValue:Dynamic = { ALT: (256 | 512), CAPS_LOCK: 8192.0, CTRL: (64 | 128), LEFT_ALT: 256.0, LEFT_CTRL: 64.0, LEFT_META: 1024.0, LEFT_SHIFT: 1.0, META: (1024 | 2048), MODE: 16384.0, NONE: 0.0, NUM_LOCK: 4096.0, RIGHT_ALT: 512.0, RIGHT_CTRL: 128.0, RIGHT_META: 2048.0, RIGHT_SHIFT: 2.0, SHIFT: (1 | 2) };
 }

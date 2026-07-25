@@ -283,13 +283,13 @@ class InputManager {
     onPointerDown = function(data:InputPointerData) {
       var prev:Dynamic = cast _Runtime.UNDEFINED;
       prev = _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(state, 'pointerButtonsDown'), 'get', cast ([_Runtime.field(data, 'pointerId')] : Array<Dynamic>)), function():Dynamic return cast 0.0);
-      _Runtime.callProperty(_Runtime.field(state, 'pointerButtonsDown'), 'set', cast ([_Runtime.field(data, 'pointerId'), (_Runtime.toInt32(prev) | _Runtime.toInt32((_Runtime.toInt32(1.0) << _Runtime.toInt32(_Runtime.field(data, 'button')))))] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.field(state, 'pointerButtonsDown'), 'set', cast ([_Runtime.field(data, 'pointerId'), (_Runtime.toInt32(prev) | _Runtime.toInt32((1 << _Runtime.toInt32(_Runtime.field(data, 'button')))))] : Array<Dynamic>));
     };
     onPointerUp = function(data:InputPointerData) {
       var prev:Dynamic = cast _Runtime.UNDEFINED;
       var next:Dynamic = cast _Runtime.UNDEFINED;
       prev = _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(state, 'pointerButtonsDown'), 'get', cast ([_Runtime.field(data, 'pointerId')] : Array<Dynamic>)), function():Dynamic return cast 0.0);
-      next = (_Runtime.toInt32(prev) & _Runtime.toInt32(~_Runtime.toInt32((_Runtime.toInt32(1.0) << _Runtime.toInt32(_Runtime.field(data, 'button'))))));
+      next = (_Runtime.toInt32(prev) & _Runtime.toInt32(~_Runtime.toInt32((1 << _Runtime.toInt32(_Runtime.field(data, 'button'))))));
       if (_Runtime.truthy(_Runtime.strictEquals(next, 0.0))) {
         _Runtime.callProperty(_Runtime.field(state, 'pointerButtonsDown'), 'delete', cast ([_Runtime.field(data, 'pointerId')] : Array<Dynamic>));
       } else {
@@ -533,7 +533,7 @@ class InputManager {
   }
 
   public static function isInputPointerButtonDown(state:InputState, pointerId:Float, button:Float):Bool {
-    return cast !_Runtime.strictEquals((_Runtime.toInt32(_Runtime.coalesce(_Runtime.callProperty(_Runtime.field(state, 'pointerButtonsDown'), 'get', cast ([pointerId] : Array<Dynamic>)), function():Dynamic return cast 0.0)) & _Runtime.toInt32((_Runtime.toInt32(1.0) << _Runtime.toInt32(button)))), 0.0);
+    return cast !_Runtime.strictEquals((_Runtime.toInt32(_Runtime.coalesce(_Runtime.callProperty(_Runtime.field(state, 'pointerButtonsDown'), 'get', cast ([pointerId] : Array<Dynamic>)), function():Dynamic return cast 0.0)) & _Runtime.toInt32((1 << _Runtime.toInt32(button)))), 0.0);
     return cast null;
   }
 

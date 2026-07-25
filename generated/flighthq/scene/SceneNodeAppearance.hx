@@ -30,7 +30,7 @@ class SceneNodeAppearance {
       _Runtime.setField(runtime, 'worldAlpha', (parentWorldAlpha * _Runtime.field(source, 'alpha')));
       _Runtime.setField(runtime, 'worldAlphaUsingAppearanceId', appearanceId);
       _Runtime.setField(runtime, 'worldAlphaUsingParentAppearanceId', parentWorldAppearanceId);
-      (SceneNodeAppearance._worldAppearanceRevisionCounter__sceneNodeAppearance = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((SceneNodeAppearance._worldAppearanceRevisionCounter__sceneNodeAppearance + 1.0)), _Runtime.toInt32(0.0)) : Dynamic));
+      (SceneNodeAppearance._worldAppearanceRevisionCounter__sceneNodeAppearance = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((SceneNodeAppearance._worldAppearanceRevisionCounter__sceneNodeAppearance + 1.0)), 0) : Dynamic));
       if (_Runtime.truthy(_Runtime.strictEquals(SceneNodeAppearance._worldAppearanceRevisionCounter__sceneNodeAppearance, 0.0))) { (SceneNodeAppearance._worldAppearanceRevisionCounter__sceneNodeAppearance = cast (1.0 : Dynamic)); }
       _Runtime.setField(runtime, 'worldAppearanceId', SceneNodeAppearance._worldAppearanceRevisionCounter__sceneNodeAppearance);
     }

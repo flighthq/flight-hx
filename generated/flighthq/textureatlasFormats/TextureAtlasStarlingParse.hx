@@ -5,8 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textureatlas.TextureAtlasRegion.createTextureAtlasRegion;
 import flighthq.types.TextureAtlas;
-import flighthq.types.TextureAtlasStarlingParseOptions;
 import flighthq.xml.XmlParse.parseXmlDocument;
+
+typedef TextureAtlasStarlingParseOptions = { @:optional var imageWidth:Float; @:optional var imageHeight:Float; };
 
 class TextureAtlasStarlingParse {
   public static function parseTextureAtlasStarlingXml(xml:String, atlas:TextureAtlas, ?_options:TextureAtlasStarlingParseOptions):TextureAtlas {

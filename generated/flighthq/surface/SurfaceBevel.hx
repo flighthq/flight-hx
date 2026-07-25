@@ -5,8 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.surface.SurfaceBlur.blurSurfacePixelsHorizontal;
 import flighthq.surface.SurfaceBlur.blurSurfacePixelsVertical;
-import flighthq.types.SurfaceBevelOptions;
 import flighthq.types.SurfaceRegion;
+
+typedef SurfaceBevelType = String;
+
+typedef SurfaceBevelOptions = { @:optional var angle:Float; @:optional var distance:Float; @:optional var radiusX:Float; @:optional var radiusY:Float; @:optional var passes:Float; @:optional var highlightColor:Float; @:optional var shadowColor:Float; @:optional var intensity:Float; @:optional var type:SurfaceBevelType; };
 
 class SurfaceBevel {
   public static function bevelSurface(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:SurfaceRegion, ?options:SurfaceBevelOptions):Void {
@@ -60,12 +63,12 @@ class SurfaceBevel {
             var shade:Dynamic = _Runtime.callValue(SurfaceBevel.sampleField__surfaceBevel, cast ([scratch, w, h, (px + offsetX), (py + offsetY)] : Array<Dynamic>));
             var gradient:Dynamic = (lit - shade);
             var color:Dynamic = _Runtime.select(_Runtime.compare(gradient, 0.0, '>='), function():Dynamic return cast highlightColor, function():Dynamic return cast shadowColor);
-            var colorAlpha:Dynamic = ((_Runtime.toInt32(color) & _Runtime.toInt32(255.0)) / 255.0);
+            var colorAlpha:Dynamic = ((_Runtime.toInt32(color) & 255) / 255.0);
             var clip:Dynamic = _Runtime.select(_Runtime.strictEquals(type, 'inner'), function():Dynamic return cast (_Runtime.callValue(SurfaceBevel.readSourceAlpha__surfaceBevel, cast ([source, px, py] : Array<Dynamic>)) / 255.0), function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(type, 'outer'), function():Dynamic return cast (1.0 - (_Runtime.callValue(SurfaceBevel.readSourceAlpha__surfaceBevel, cast ([source, px, py] : Array<Dynamic>)) / 255.0)), function():Dynamic return cast 1.0));
             var edgeIntensity:Dynamic = HxMath.min(1.0, (HxMath.abs(gradient) * intensity));
-            _Runtime.setIndex(out, di, (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0)));
-            _Runtime.setIndex(out, (di + 1.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)));
-            _Runtime.setIndex(out, (di + 2.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)));
+            _Runtime.setIndex(out, di, (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255));
+            _Runtime.setIndex(out, (di + 1.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255));
+            _Runtime.setIndex(out, (di + 2.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255));
             _Runtime.setIndex(out, (di + 3.0), HxMath.round((((edgeIntensity * colorAlpha) * clip) * 255.0)));
             px++;
           }

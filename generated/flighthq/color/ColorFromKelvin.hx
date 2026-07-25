@@ -5,7 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class ColorFromKelvin {
-  public static function colorFromKelvin(kelvin:Float):Float {
+  public static function createColorFromKelvin(kelvin:Float):Float {
     var temp:Dynamic = cast _Runtime.UNDEFINED;
     var r:Float = cast _Runtime.UNDEFINED;
     var g:Float = cast _Runtime.UNDEFINED;
@@ -34,7 +34,7 @@ class ColorFromKelvin {
     ri = HxMath.max(0.0, HxMath.min(255.0, HxMath.round(r)));
     gi = HxMath.max(0.0, HxMath.min(255.0, HxMath.round(g)));
     bi = HxMath.max(0.0, HxMath.min(255.0, HxMath.round(b)));
-    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(ri) << _Runtime.toInt32(24.0))) | _Runtime.toInt32((_Runtime.toInt32(gi) << _Runtime.toInt32(16.0))))) | _Runtime.toInt32((_Runtime.toInt32(bi) << _Runtime.toInt32(8.0))))) | _Runtime.toInt32(255.0))), _Runtime.toInt32(0.0));
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(ri) << 24)) | _Runtime.toInt32((_Runtime.toInt32(gi) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(bi) << 8)))) | 255)), 0);
     return cast null;
   }
 }

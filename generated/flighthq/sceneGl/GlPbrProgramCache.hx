@@ -3,16 +3,17 @@ package flighthq.sceneGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.sceneGl.GlLitProgram.resolveGlLitLocations;
-import flighthq.sceneGl.GlMeshProgram.compileGlProgram;
-import flighthq.sceneGl.GlMeshProgram.ensureGlSceneProgram;
+import flighthq.sceneGl.GlPbrPrelude.GlPbrDefineKey;
 import flighthq.sceneGl.GlPbrPrelude.buildGlPbrDefineKey;
 import flighthq.sceneGl.GlPbrPrelude.getGlPbrFragmentSourceForKey;
 import flighthq.sceneGl.GlPbrPrelude.getGlPbrVertexSourceForKey;
-import flighthq.sceneGl.GlSceneRuntime.getGlSceneRuntime;
-import flighthq.types.GlPbrProgram;
-import flighthq.types.GlPbrProgram.GlPbrDefineKey;
+import flighthq.sceneGl._internal._GlLitProgramValues.resolveGlLitLocations;
+import flighthq.sceneGl._internal._GlMeshProgramValues.compileGlProgram;
+import flighthq.sceneGl._internal._GlMeshProgramValues.ensureGlSceneProgram;
+import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
 import flighthq.types.GlRenderState;
+
+typedef GlPbrProgram = Dynamic;
 
 class GlPbrProgramCache {
   public static function compileGlPbrProgram(gl:Dynamic, key:GlPbrDefineKey):GlPbrProgram {

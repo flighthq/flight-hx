@@ -3,8 +3,8 @@ package flighthq.sceneFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ObjSchema.ObjMaterial;
-import flighthq.types.ObjSchema.ObjMaterialLibrary;
+import flighthq.sceneFormats.ObjSchema.ObjMaterial;
+import flighthq.sceneFormats.ObjSchema.ObjMaterialLibrary;
 
 class MtlParse {
   public static function parseObjMaterialLibrary(source:String, ?warnings:Array<String>):ObjMaterialLibrary {

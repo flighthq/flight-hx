@@ -380,9 +380,9 @@ class CanvasShapeCommands {
     var r:Dynamic = cast _Runtime.UNDEFINED;
     var g:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
-    r = (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0));
-    g = (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0));
-    b = (_Runtime.toInt32(color) & _Runtime.toInt32(255.0));
+    r = (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255);
+    g = (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255);
+    b = (_Runtime.toInt32(color) & 255);
     return cast 'rgba(' + Std.string(r) + ',' + Std.string(g) + ',' + Std.string(b) + ',' + Std.string(alpha) + ')';
     return cast null;
   }

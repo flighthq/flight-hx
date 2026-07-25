@@ -69,10 +69,10 @@ class SurfaceCrop {
     dh = ((sh + top) + bottom);
     data = new flighthq._internal._UInt8ClampedArray(((dw * dh) * 4.0));
     sd = _Runtime.field(source, 'data');
-    fr = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(fillColor), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0));
-    fg = (_Runtime.toInt32((_Runtime.toInt32(fillColor) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0));
-    fb = (_Runtime.toInt32((_Runtime.toInt32(fillColor) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0));
-    fa = (_Runtime.toInt32(fillColor) & _Runtime.toInt32(255.0));
+    fr = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(fillColor), 24)) & 255);
+    fg = (_Runtime.toInt32((_Runtime.toInt32(fillColor) >> 16)) & 255);
+    fb = (_Runtime.toInt32((_Runtime.toInt32(fillColor) >> 8)) & 255);
+    fa = (_Runtime.toInt32(fillColor) & 255);
     {
       var py:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(py, dh, '<'))) {

@@ -479,12 +479,12 @@ class ResolveBidiLevels {
   }
 
   public static function nextEven__resolveBidiLevels(level:Float):Float {
-    return cast (_Runtime.toInt32((level + 2.0)) & _Runtime.toInt32(~_Runtime.toInt32(1.0)));
+    return cast (_Runtime.toInt32((level + 2.0)) & _Runtime.toInt32(~1));
     return cast null;
   }
 
   public static function nextOdd__resolveBidiLevels(level:Float):Float {
-    return cast (_Runtime.toInt32((level + 1.0)) | _Runtime.toInt32(1.0));
+    return cast (_Runtime.toInt32((level + 1.0)) | 1);
     return cast null;
   }
 }

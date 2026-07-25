@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.shading.GetUnregisteredModifierKinds.getUnregisteredModifierKinds;
 import flighthq.types.Modifier;
-import flighthq.types.ModifierRegistry;
 
 class IsModifierStackValid {
   public static function isModifierStackValid(registry:ModifierRegistry, stack:Array<Modifier>):Bool {

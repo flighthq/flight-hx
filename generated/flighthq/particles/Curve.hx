@@ -11,7 +11,7 @@ class Curve {
   public static function buildParticleColorCurve(f:Dynamic, samples:Dynamic = 33.0):Array<Float> {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     var lut:Dynamic = cast _Runtime.UNDEFINED;
-    n = HxMath.max(2.0, (_Runtime.toInt32(samples) | _Runtime.toInt32(0.0)));
+    n = HxMath.max(2.0, (_Runtime.toInt32(samples) | 0));
     lut = _Runtime.createArray((n * 3.0));
     {
       var i:Dynamic = 0.0;
@@ -33,7 +33,7 @@ class Curve {
   public static function buildParticleCurve(f:Dynamic, samples:Dynamic = 33.0):Array<Float> {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     var lut:Dynamic = cast _Runtime.UNDEFINED;
-    n = HxMath.max(2.0, (_Runtime.toInt32(samples) | _Runtime.toInt32(0.0)));
+    n = HxMath.max(2.0, (_Runtime.toInt32(samples) | 0));
     lut = _Runtime.createArray(n);
     {
       var i:Dynamic = 0.0;
@@ -268,7 +268,7 @@ class Curve {
       return;
     }
     x = (_Runtime.select(_Runtime.compare(t, 0.0, '<='), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(t, 1.0, '>='), function():Dynamic return cast 1.0, function():Dynamic return cast t)) * (n - 1.0));
-    i = (_Runtime.toInt32(x) | _Runtime.toInt32(0.0));
+    i = (_Runtime.toInt32(x) | 0);
     if (_Runtime.truthy(_Runtime.compare(i, (n - 1.0), '>='))) {
       var base:Dynamic = ((n - 1.0) * 3.0);
       _Runtime.setIndex(out, offset, _Runtime.getIndex(lut, base));
@@ -292,7 +292,7 @@ class Curve {
     if (_Runtime.truthy(_Runtime.strictEquals(n, 0.0))) { return cast 0.0; }
     if (_Runtime.truthy(_Runtime.strictEquals(n, 1.0))) { return cast _Runtime.getIndex(lut, 0.0); }
     x = (_Runtime.select(_Runtime.compare(t, 0.0, '<='), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(t, 1.0, '>='), function():Dynamic return cast 1.0, function():Dynamic return cast t)) * (n - 1.0));
-    i = (_Runtime.toInt32(x) | _Runtime.toInt32(0.0));
+    i = (_Runtime.toInt32(x) | 0);
     if (_Runtime.truthy(_Runtime.compare(i, (n - 1.0), '>='))) { return cast _Runtime.getIndex(lut, (n - 1.0)); }
     return cast (_Runtime.getIndex(lut, i) + ((_Runtime.getIndex(lut, (i + 1.0)) - _Runtime.getIndex(lut, i)) * (x - i)));
     return cast null;

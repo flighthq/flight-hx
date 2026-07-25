@@ -3,11 +3,11 @@ package flighthq.hostElectron;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.hostElectron.ElectronModule.ElectronApi;
+import flighthq.hostElectron.ElectronModule.ElectronBrowserWindow;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.types.ApplicationWindow;
 import flighthq.types.ApplicationWindow.WindowBackend;
-import flighthq.types.ElectronApi;
-import flighthq.types.ElectronApi.ElectronBrowserWindow;
 
 class ElectronWindow {
   public static function createElectronWindowBackend(electron:ElectronApi):WindowBackend {

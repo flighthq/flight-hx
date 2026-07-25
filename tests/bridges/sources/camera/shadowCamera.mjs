@@ -5,4 +5,4 @@ const api = compiled.flighthq.camera.ShadowCamera;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const configureDirectionalShadowCamera3D = api.configureDirectionalShadowCamera3D;
+export const configureDirectionalShadowCamera = api.configureDirectionalShadowCamera;

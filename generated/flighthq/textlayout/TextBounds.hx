@@ -5,8 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textlayout.TextLayout.TEXT_LAYOUT_GUTTER;
 import flighthq.types.Rectangle.RectangleLike;
-import flighthq.types.TextBoundsSpec;
+import flighthq.types.TextAutoSize;
 import flighthq.types.TextLayout.TextLayoutResult;
+
+typedef TextBoundsSpec = { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Bool; };
 
 class TextBounds {
   public static final TEXT_BOUNDS_GUTTER:Dynamic = 2.0;

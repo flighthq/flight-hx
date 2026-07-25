@@ -5,10 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ModifierSlot;
 import flighthq.types.ToonModifier;
-import flighthq.types.ToonModifierOptions;
 import flighthq.types.Types.ToonModifierKind;
 import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 import flighthq.types._internal._ToonModifierValues.ToonModifierKind;
+
+typedef ToonModifierOptions = { var steps:Float; @:optional var smoothness:Float; };
 
 class CreateToonModifier {
   public static function createToonModifier(options:ToonModifierOptions):ToonModifier {

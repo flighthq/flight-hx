@@ -3,11 +3,11 @@ package flighthq.sceneGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.camera.Camera.getCamera3DInverseViewProjectionMatrix4;
+import flighthq.camera.Camera.getCameraInverseViewProjectionMatrix4;
 import flighthq.geometry.Matrix4.createMatrix4;
 import flighthq.renderGl.GlProgram.createGlProgram;
 import flighthq.sceneGl.GlEnvironmentCube.ensureGlEnvironmentSourceCube;
-import flighthq.types.Camera3D;
+import flighthq.types.Camera;
 import flighthq.types.Environment;
 import flighthq.types.GlRenderState;
 import flighthq.types.Matrix4;
@@ -15,7 +15,7 @@ import flighthq.types.Matrix4;
 typedef GlSkybox__glEnvironmentSkybox = { var locEnvCube:Null<Dynamic>; var locInverseViewProjection:Null<Dynamic>; var locIntensity:Null<Dynamic>; var program:Dynamic; var vao:Dynamic; };
 
 class GlEnvironmentSkybox {
-  public static function drawGlEnvironmentSkybox(state:GlRenderState, environment:Environment, camera:Camera3D, aspect:Float):Void {
+  public static function drawGlEnvironmentSkybox(state:GlRenderState, environment:Environment, camera:Camera, aspect:Float):Void {
     var cube:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var sky:Dynamic = cast _Runtime.UNDEFINED;
@@ -24,7 +24,7 @@ class GlEnvironmentSkybox {
     if (_Runtime.truthy(_Runtime.strictEquals(cube, null))) { return; }
     gl = _Runtime.field(state, 'gl');
     sky = _Runtime.callValue(GlEnvironmentSkybox.ensureGlSkybox__glEnvironmentSkybox, cast ([state] : Array<Dynamic>));
-    _Runtime.callValue(getCamera3DInverseViewProjectionMatrix4, cast ([GlEnvironmentSkybox._inverseViewProjection__glEnvironmentSkybox, camera, aspect] : Array<Dynamic>));
+    _Runtime.callValue(getCameraInverseViewProjectionMatrix4, cast ([GlEnvironmentSkybox._inverseViewProjection__glEnvironmentSkybox, camera, aspect] : Array<Dynamic>));
     prevDepthTest = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.DEPTH_TEST) : Bool);
     flighthq._internal.backend.WebGl2Backend.depthMask(gl, false);
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.DEPTH_TEST);

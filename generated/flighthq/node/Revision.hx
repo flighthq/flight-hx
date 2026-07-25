@@ -11,7 +11,7 @@ class Revision {
   public static function computeNodeWorldTransformRevision<Traits>(runtime:NodeRuntime<Traits>, ?parentRuntime:NodeRuntime<Traits>):Void {
     _Runtime.setField(runtime, 'worldTransformUsingLocalTransformId', _Runtime.field(runtime, 'localTransformId'));
     _Runtime.setField(runtime, 'worldTransformUsingParentTransformId', _Runtime.select(parentRuntime, function():Dynamic return cast _Runtime.field(parentRuntime, 'worldTransformId'), function():Dynamic return cast 0.0));
-    (Revision._worldTransformRevisionCounter__revision = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((Revision._worldTransformRevisionCounter__revision + 1.0)), _Runtime.toInt32(0.0)) : Dynamic));
+    (Revision._worldTransformRevisionCounter__revision = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((Revision._worldTransformRevisionCounter__revision + 1.0)), 0) : Dynamic));
     if (_Runtime.truthy(_Runtime.strictEquals(Revision._worldTransformRevisionCounter__revision, 0.0))) { (Revision._worldTransformRevisionCounter__revision = cast (1.0 : Dynamic)); }
     _Runtime.setField(runtime, 'worldTransformId', Revision._worldTransformRevisionCounter__revision);
   }
@@ -58,25 +58,25 @@ class Revision {
   public static function invalidateNodeAppearance<Traits>(target:Node<Traits>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>)) : NodeRuntime<Traits>);
-    _Runtime.setField(runtime, 'appearanceId', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(runtime, 'appearanceId') + 1.0)), _Runtime.toInt32(0.0)));
+    _Runtime.setField(runtime, 'appearanceId', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(runtime, 'appearanceId') + 1.0)), 0));
   }
 
   public static function invalidateNodeLocalBounds<Traits>(target:Node<Traits>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>)) : NodeRuntime<Traits>);
-    _Runtime.setField(runtime, 'localBoundsId', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(runtime, 'localBoundsId') + 1.0)), _Runtime.toInt32(0.0)));
+    _Runtime.setField(runtime, 'localBoundsId', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(runtime, 'localBoundsId') + 1.0)), 0));
   }
 
   public static function invalidateNodeLocalContent<Traits>(target:Node<Traits>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>)) : NodeRuntime<Traits>);
-    _Runtime.setField(runtime, 'localContentId', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(runtime, 'localContentId') + 1.0)), _Runtime.toInt32(0.0)));
+    _Runtime.setField(runtime, 'localContentId', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(runtime, 'localContentId') + 1.0)), 0));
   }
 
   public static function invalidateNodeLocalTransform<Traits>(target:Node<Traits>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>)) : NodeRuntime<Traits>);
-    _Runtime.setField(runtime, 'localTransformId', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(runtime, 'localTransformId') + 1.0)), _Runtime.toInt32(0.0)));
+    _Runtime.setField(runtime, 'localTransformId', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(runtime, 'localTransformId') + 1.0)), 0));
   }
 
   public static function invalidateNodeParentReference<Traits>(target:Node<Traits>):Void {

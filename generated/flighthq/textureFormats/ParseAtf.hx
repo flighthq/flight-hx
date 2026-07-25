@@ -3,10 +3,10 @@ package flighthq.textureFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.textureFormats.ByteReader.createByteReader;
-import flighthq.textureFormats.ByteReader.hasByteReaderBytes;
-import flighthq.textureFormats.ByteReader.readByteReaderU24BigEndian;
-import flighthq.textureFormats.ByteReader.readByteReaderU32BigEndian;
+import flighthq.textureFormats._internal._ByteReaderValues.createByteReader;
+import flighthq.textureFormats._internal._ByteReaderValues.hasByteReaderBytes;
+import flighthq.textureFormats._internal._ByteReaderValues.readByteReaderU24BigEndian;
+import flighthq.textureFormats._internal._ByteReaderValues.readByteReaderU32BigEndian;
 import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
 import flighthq.types.TextureContainerLevel;
@@ -53,8 +53,8 @@ class ParseAtf {
     if (_Runtime.truthy(_Runtime.compare(mipCount, 1.0, '<'))) { return cast null; }
     cube = !_Runtime.strictEquals((_Runtime.toInt32(typeFormatByte) & _Runtime.toInt32(ParseAtf.atfCubeFlag__parseAtf)), 0.0);
     faces = _Runtime.select(cube, function():Dynamic return cast 6.0, function():Dynamic return cast 1.0);
-    width = (_Runtime.toInt32(1.0) << _Runtime.toInt32(log2Width));
-    height = (_Runtime.toInt32(1.0) << _Runtime.toInt32(log2Height));
+    width = (1 << _Runtime.toInt32(log2Width));
+    height = (1 << _Runtime.toInt32(log2Height));
     slotFormats = _Runtime.select(alpha, function():Dynamic return cast ParseAtf.atfAlphaSlotFormats__parseAtf, function():Dynamic return cast ParseAtf.atfOpaqueSlotFormats__parseAtf);
     slotCount = _Runtime.select(_Runtime.compare(version, ParseAtf.atfEtc2Version__parseAtf, '<'), function():Dynamic return cast ParseAtf.atfBaseSlotCount__parseAtf, function():Dynamic return cast (ParseAtf.atfBaseSlotCount__parseAtf + 1.0));
     perSlotLevels = cast ([] : Array<Dynamic>);

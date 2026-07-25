@@ -6,13 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.tilemapFormats.TiledColor.parseTiledColor;
 import flighthq.tilemapFormats.TiledLayerData.decodeTiledBase64Layer;
 import flighthq.tilemapFormats.TiledLayerData.decodeTiledCsvLayer;
+import flighthq.tilemapFormats.TiledOptions.TiledCompression;
+import flighthq.tilemapFormats.TiledOptions.TiledParseOptions;
 import flighthq.types.TiledLayer;
 import flighthq.types.TiledMap;
 import flighthq.types.TiledMap.TiledOrientation;
 import flighthq.types.TiledMap.TiledRenderOrder;
 import flighthq.types.TiledObject;
-import flighthq.types.TiledParseOptions;
-import flighthq.types.TiledParseOptions.TiledCompression;
 import flighthq.types.TiledProperty;
 import flighthq.types.TiledProperty.TiledPropertyType;
 import flighthq.types.TiledTileset;
@@ -90,7 +90,7 @@ class TiledJsonParse {
     data = _Runtime.field(obj, 'data');
     decoded = null;
     if (_Runtime.truthy(_Runtime.isArray(data))) {
-      (decoded = cast (_Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([data, function(v:Dynamic) return _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(v), 'number'), function():Dynamic return cast _Runtime.unsignedShiftRight(_Runtime.toInt32(v), _Runtime.toInt32(0.0)), function():Dynamic return cast 0.0)] : Array<Dynamic>)) : Dynamic));
+      (decoded = cast (_Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([data, function(v:Dynamic) return _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(v), 'number'), function():Dynamic return cast _Runtime.unsignedShiftRight(_Runtime.toInt32(v), 0), function():Dynamic return cast 0.0)] : Array<Dynamic>)) : Dynamic));
     } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(data), 'string'))) {
       (decoded = cast (_Runtime.select(_Runtime.strictEquals(_Runtime.callValue(TiledJsonParse.strField__tiledJsonParse, cast ([obj, 'encoding'] : Array<Dynamic>)), 'csv'), function():Dynamic return cast _Runtime.callValue(decodeTiledCsvLayer, cast ([data] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(decodeTiledBase64Layer, cast ([data, _Runtime.callValue(TiledJsonParse.asCompression__tiledJsonParse, cast ([_Runtime.callValue(TiledJsonParse.strField__tiledJsonParse, cast ([obj, 'compression'] : Array<Dynamic>))] : Array<Dynamic>)), _Runtime.optionalField(options, 'inflate')] : Array<Dynamic>))) : Dynamic));
     } }
@@ -126,7 +126,7 @@ class TiledJsonParse {
   public static function buildTiledObjectFromJson__tiledJsonParse(obj:JsonObject__tiledJsonParse):TiledObject {
     var gid:Dynamic = cast _Runtime.UNDEFINED;
     gid = _Runtime.field(obj, 'gid');
-    return cast { ellipse: _Runtime.callValue(TiledJsonParse.boolField__tiledJsonParse, cast ([obj, 'ellipse', false] : Array<Dynamic>)), gid: _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(gid), 'number'), function():Dynamic return cast _Runtime.unsignedShiftRight(_Runtime.toInt32(gid), _Runtime.toInt32(0.0)), function():Dynamic return cast null), height: _Runtime.callValue(TiledJsonParse.numField__tiledJsonParse, cast ([obj, 'height', 0.0] : Array<Dynamic>)), id: _Runtime.callValue(TiledJsonParse.numField__tiledJsonParse, cast ([obj, 'id', 0.0] : Array<Dynamic>)), name: _Runtime.coalesce(_Runtime.callValue(TiledJsonParse.strField__tiledJsonParse, cast ([obj, 'name'] : Array<Dynamic>)), function():Dynamic return cast ''), point: _Runtime.callValue(TiledJsonParse.boolField__tiledJsonParse, cast ([obj, 'point', false] : Array<Dynamic>)), polygon: _Runtime.callValue(TiledJsonParse.parsePointsField__tiledJsonParse, cast ([obj, 'polygon'] : Array<Dynamic>)), polyline: _Runtime.callValue(TiledJsonParse.parsePointsField__tiledJsonParse, cast ([obj, 'polyline'] : Array<Dynamic>)), properties: _Runtime.callValue(TiledJsonParse.buildTiledPropertiesFromJson__tiledJsonParse, cast ([obj] : Array<Dynamic>)), type: _Runtime.coalesce(_Runtime.coalesce(_Runtime.callValue(TiledJsonParse.strField__tiledJsonParse, cast ([obj, 'type'] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(TiledJsonParse.strField__tiledJsonParse, cast ([obj, 'class'] : Array<Dynamic>))), function():Dynamic return cast ''), width: _Runtime.callValue(TiledJsonParse.numField__tiledJsonParse, cast ([obj, 'width', 0.0] : Array<Dynamic>)), x: _Runtime.callValue(TiledJsonParse.numField__tiledJsonParse, cast ([obj, 'x', 0.0] : Array<Dynamic>)), y: _Runtime.callValue(TiledJsonParse.numField__tiledJsonParse, cast ([obj, 'y', 0.0] : Array<Dynamic>)) };
+    return cast { ellipse: _Runtime.callValue(TiledJsonParse.boolField__tiledJsonParse, cast ([obj, 'ellipse', false] : Array<Dynamic>)), gid: _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(gid), 'number'), function():Dynamic return cast _Runtime.unsignedShiftRight(_Runtime.toInt32(gid), 0), function():Dynamic return cast null), height: _Runtime.callValue(TiledJsonParse.numField__tiledJsonParse, cast ([obj, 'height', 0.0] : Array<Dynamic>)), id: _Runtime.callValue(TiledJsonParse.numField__tiledJsonParse, cast ([obj, 'id', 0.0] : Array<Dynamic>)), name: _Runtime.coalesce(_Runtime.callValue(TiledJsonParse.strField__tiledJsonParse, cast ([obj, 'name'] : Array<Dynamic>)), function():Dynamic return cast ''), point: _Runtime.callValue(TiledJsonParse.boolField__tiledJsonParse, cast ([obj, 'point', false] : Array<Dynamic>)), polygon: _Runtime.callValue(TiledJsonParse.parsePointsField__tiledJsonParse, cast ([obj, 'polygon'] : Array<Dynamic>)), polyline: _Runtime.callValue(TiledJsonParse.parsePointsField__tiledJsonParse, cast ([obj, 'polyline'] : Array<Dynamic>)), properties: _Runtime.callValue(TiledJsonParse.buildTiledPropertiesFromJson__tiledJsonParse, cast ([obj] : Array<Dynamic>)), type: _Runtime.coalesce(_Runtime.coalesce(_Runtime.callValue(TiledJsonParse.strField__tiledJsonParse, cast ([obj, 'type'] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(TiledJsonParse.strField__tiledJsonParse, cast ([obj, 'class'] : Array<Dynamic>))), function():Dynamic return cast ''), width: _Runtime.callValue(TiledJsonParse.numField__tiledJsonParse, cast ([obj, 'width', 0.0] : Array<Dynamic>)), x: _Runtime.callValue(TiledJsonParse.numField__tiledJsonParse, cast ([obj, 'x', 0.0] : Array<Dynamic>)), y: _Runtime.callValue(TiledJsonParse.numField__tiledJsonParse, cast ([obj, 'y', 0.0] : Array<Dynamic>)) };
     return cast null;
   }
 

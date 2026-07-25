@@ -9,9 +9,9 @@ class TiledColor {
     var p:Dynamic = cast _Runtime.UNDEFINED;
     var alpha:Dynamic = cast _Runtime.UNDEFINED;
     var rgb:Dynamic = cast _Runtime.UNDEFINED;
-    p = _Runtime.unsignedShiftRight(_Runtime.toInt32(packed), _Runtime.toInt32(0.0));
-    alpha = (_Runtime.toInt32(p) & _Runtime.toInt32(255.0));
-    rgb = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(p), _Runtime.toInt32(8.0))) & _Runtime.toInt32(16777215.0));
+    p = _Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 0);
+    alpha = (_Runtime.toInt32(p) & 255);
+    rgb = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(p), 8)) & 16777215);
     return cast '#' + Std.string(_Runtime.callValue(TiledColor.hex2__tiledColor, cast ([alpha] : Array<Dynamic>))) + '' + Std.string(_Runtime.callValue(TiledColor.hex6__tiledColor, cast ([rgb] : Array<Dynamic>))) + '';
     return cast null;
   }
@@ -23,13 +23,13 @@ class TiledColor {
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(_Runtime.regexp('^[0-9a-fA-F]+$$', ''), 'test', cast ([s] : Array<Dynamic>))))) { return cast null; }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(s, 'length'), 6.0))) {
       var rgb:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([s, 16.0] : Array<Dynamic>));
-      return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(rgb) << _Runtime.toInt32(8.0))) | _Runtime.toInt32(255.0))), _Runtime.toInt32(0.0));
+      return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(rgb) << 8)) | 255)), 0);
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(s, 'length'), 8.0))) {
       var argb:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([s, 16.0] : Array<Dynamic>));
-      var alpha:Dynamic = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(argb), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0));
-      var rgb:Dynamic = (_Runtime.toInt32(argb) & _Runtime.toInt32(16777215.0));
-      return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(rgb) << _Runtime.toInt32(8.0))) | _Runtime.toInt32(alpha))), _Runtime.toInt32(0.0));
+      var alpha:Dynamic = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(argb), 24)) & 255);
+      var rgb:Dynamic = (_Runtime.toInt32(argb) & 16777215);
+      return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(rgb) << 8)) | _Runtime.toInt32(alpha))), 0);
     }
     return cast null;
     return cast null;

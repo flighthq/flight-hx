@@ -41,7 +41,7 @@ class SurfaceRotate {
       var data:Dynamic = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
       var stride:Dynamic = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
       var total:Dynamic = (w * h);
-      var half:Dynamic = (_Runtime.toInt32(total) >> _Runtime.toInt32(1.0));
+      var half:Dynamic = (_Runtime.toInt32(total) >> 1);
       {
         var k:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(k, half, '<'))) {

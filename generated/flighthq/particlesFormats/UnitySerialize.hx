@@ -5,14 +5,15 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.particles.Curve.particleColorCurveToKeyframes;
 import flighthq.particles.Curve.particleCurveToKeyframes;
+import flighthq.particlesFormats.SerializeResult.ParticleSerializeResult;
+import flighthq.particlesFormats.UnitySchema.UnityAnimationCurve;
+import flighthq.particlesFormats.UnitySchema.UnityColor;
+import flighthq.particlesFormats.UnitySchema.UnityGradient;
+import flighthq.particlesFormats.UnitySchema.UnityMinMaxValue;
+import flighthq.particlesFormats.UnitySchema.UnityParticleDocument;
 import flighthq.types.ParticleEmitterConfig;
-import flighthq.types.ParticleSerializeResult;
-import flighthq.types.UnitySchema.UnityAnimationCurve;
-import flighthq.types.UnitySchema.UnityColor;
-import flighthq.types.UnitySchema.UnityGradient;
-import flighthq.types.UnitySchema.UnityMinMaxValue;
-import flighthq.types.UnitySchema.UnityParticleDocument;
-import flighthq.types.UnitySchema.UnitySerializeOptions;
+
+typedef UnitySerializeOptions = { @:optional var pixelsPerUnit:Float; };
 
 class UnitySerialize {
   public static final RAD2DEG__unitySerialize:Dynamic = (180.0 / HxMath.PI);

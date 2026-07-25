@@ -7,7 +7,7 @@ import flighthq._internal._Runtime;
 class SkinVertices {
   public static function skinVertices(outPositions:flighthq._internal._Float32Array, outNormals:flighthq._internal._Float32Array, positions:flighthq._internal._Float32Array, normals:flighthq._internal._Float32Array, joints:Dynamic, weights:flighthq._internal._Float32Array, jointMatrices:flighthq._internal._Float32Array):Void {
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
-    vertexCount = (_Runtime.toInt32((_Runtime.field(positions, 'length') / 3.0)) | _Runtime.toInt32(0.0));
+    vertexCount = (_Runtime.toInt32((_Runtime.field(positions, 'length') / 3.0)) | 0);
     {
       var v:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(v, vertexCount, '<'))) {

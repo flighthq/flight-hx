@@ -4,7 +4,7 @@ package flighthq.bitmapfont;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.bitmapfont.BitmapFont as Facade_Bitmapfont_flighthq_bitmapfont_BitmapFont;
-import flighthq.bitmapfont.BitmapFontGlyphSource as Facade_Bitmapfont_flighthq_bitmapfont_BitmapFontGlyphSource;
+import flighthq.bitmapfont.GlyphSource as Facade_Bitmapfont_flighthq_bitmapfont_GlyphSource;
 import flighthq.types.BitmapFont;
 import flighthq.types.BitmapFont.BitmapFontData;
 import flighthq.types.GlyphSource;
@@ -19,7 +19,7 @@ class Bitmapfont {
   }
 
   public static function createGlyphSourceFromBitmapFont(font:BitmapFont):GlyphSource {
-    return cast _Runtime.callValue(Facade_Bitmapfont_flighthq_bitmapfont_BitmapFontGlyphSource.createGlyphSourceFromBitmapFont, cast ([font] : Array<Dynamic>));
+    return cast _Runtime.callValue(Facade_Bitmapfont_flighthq_bitmapfont_GlyphSource.createGlyphSourceFromBitmapFont, cast ([font] : Array<Dynamic>));
     return cast null;
   }
 

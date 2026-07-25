@@ -4,11 +4,15 @@ package flighthq.particlesFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
-import flighthq.types.LibgdxParticleSchema.LibgdxParseOptions;
-import flighthq.types.LibgdxParticleSchema.LibgdxParseResult;
-import flighthq.types.LibgdxParticleSchema.LibgdxParticleDocument;
-import flighthq.types.LibgdxParticleSchema.LibgdxRangeValue;
+import flighthq.particlesFormats.LibgdxSchema.LibgdxParticleDocument;
+import flighthq.particlesFormats.LibgdxSchema.LibgdxRangeValue;
 import flighthq.types.ParticleEmitterConfig;
+
+typedef LibgdxParseOptions = { @:optional var textureSize:Float; };
+
+typedef LibgdxParseResult = { var config:ParticleEmitterConfig; var document:LibgdxParticleDocument; var warnings:Array<String>; };
+
+typedef LibgdxParsed = LibgdxParseResult;
 
 typedef LibgdxSection__libgdxParse = Dynamic;
 
@@ -279,9 +283,9 @@ class LibgdxParse {
     var scaling:Array<Float> = cast _Runtime.UNDEFINED;
     var tlCount:Dynamic = cast _Runtime.UNDEFINED;
     var timeline:Array<Float> = cast _Runtime.UNDEFINED;
-    count = (_Runtime.toInt32(_Runtime.callValue(LibgdxParse.numKey__libgdxParse, cast ([section, 'scalingCount', 1.0] : Array<Dynamic>))) | _Runtime.toInt32(0.0));
+    count = (_Runtime.toInt32(_Runtime.callValue(LibgdxParse.numKey__libgdxParse, cast ([section, 'scalingCount', 1.0] : Array<Dynamic>))) | 0);
     scaling = cast ([] : Array<Dynamic>);
-    tlCount = (_Runtime.toInt32(_Runtime.callValue(LibgdxParse.numKey__libgdxParse, cast ([section, 'timelineCount', 1.0] : Array<Dynamic>))) | _Runtime.toInt32(0.0));
+    tlCount = (_Runtime.toInt32(_Runtime.callValue(LibgdxParse.numKey__libgdxParse, cast ([section, 'timelineCount', 1.0] : Array<Dynamic>))) | 0);
     timeline = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
@@ -363,7 +367,7 @@ class LibgdxParse {
       }] : Array<Dynamic>));
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(tintColors, 'length'), 0.0))) { _Runtime.callProperty(tintColors, 'push', cast (['ffffff'] : Array<Dynamic>)); }
-    tintTlCount = _Runtime.orValue((_Runtime.toInt32(_Runtime.callValue(LibgdxParse.numKey__libgdxParse, cast ([tintSection, 'timelineCount', 1.0] : Array<Dynamic>))) | _Runtime.toInt32(0.0)), function():Dynamic return cast 1.0);
+    tintTlCount = _Runtime.orValue((_Runtime.toInt32(_Runtime.callValue(LibgdxParse.numKey__libgdxParse, cast ([tintSection, 'timelineCount', 1.0] : Array<Dynamic>))) | 0), function():Dynamic return cast 1.0);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, tintTlCount, '<'))) {

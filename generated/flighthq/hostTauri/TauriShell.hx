@@ -3,8 +3,8 @@ package flighthq.hostTauri;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.hostTauri.TauriModule.TauriApi;
 import flighthq.types.Shell.ShellBackend;
-import flighthq.types.TauriApi;
 
 class TauriShell {
   public static function createTauriShellBackend(tauri:TauriApi):ShellBackend {

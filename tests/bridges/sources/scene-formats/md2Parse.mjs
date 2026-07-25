@@ -6,4 +6,3 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createSceneFromMd2 = api.createSceneFromMd2;
-export const parseMd2 = api.parseMd2;

@@ -9,5 +9,3 @@ export const createSceneFromGlb = api.createSceneFromGlb;
 export const createSceneFromGltf = api.createSceneFromGltf;
 export const createScenesFromGlb = api.createScenesFromGlb;
 export const createScenesFromGltf = api.createScenesFromGltf;
-export const parseGlb = api.parseGlb;
-export const parseGltf = api.parseGltf;

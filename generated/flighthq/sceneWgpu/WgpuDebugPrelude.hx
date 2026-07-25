@@ -4,16 +4,18 @@ package flighthq.sceneWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
-import flighthq.sceneWgpu.WgpuMeshPipeline.WGPU_MESH_PRELUDE_WGSL;
-import flighthq.sceneWgpu.WgpuMeshPipeline.createWgpuMeshPipeline;
-import flighthq.sceneWgpu.WgpuMeshPipeline.ensureWgpuPlaceholderTextureView;
-import flighthq.sceneWgpu.WgpuMeshPipeline.ensureWgpuScenePipeline;
-import flighthq.sceneWgpu.WgpuMeshPipeline.stashWgpuUvTransform;
-import flighthq.sceneWgpu.WgpuSceneRuntime.getWgpuSceneRuntime;
-import flighthq.types.WgpuDebugPipeline;
-import flighthq.types.WgpuDebugPipeline.WgpuDebugDefineKey;
+import flighthq.sceneWgpu.WgpuSceneRuntime.WgpuMaterialBinding;
+import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.WGPU_MESH_PRELUDE_WGSL;
+import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.createWgpuMeshPipeline;
+import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.ensureWgpuPlaceholderTextureView;
+import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.ensureWgpuScenePipeline;
+import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.stashWgpuUvTransform;
+import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues.getWgpuSceneRuntime;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuSceneRuntime.WgpuMaterialBinding;
+
+typedef WgpuDebugDefineKey = { var hasNormalMap:Bool; var mode:String; };
+
+typedef WgpuDebugPipeline = Dynamic;
 
 class WgpuDebugPrelude {
   public static function bindWgpuDebugSurface(state:WgpuRenderState, pipeline:WgpuDebugPipeline, materialKey:Dynamic, near:Float, far:Float, normalScale:Float):Dynamic {

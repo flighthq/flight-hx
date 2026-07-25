@@ -18,10 +18,10 @@ class EdgeDetectMath {
     threshold = HxMath.max(0.0, _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.1));
     feather = (threshold * 0.5);
     color = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 255.0);
-    r = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0)) / 255.0);
-    g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) / 255.0);
-    b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) / 255.0);
-    a = ((_Runtime.toInt32(color) & _Runtime.toInt32(255.0)) / 255.0);
+    r = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255) / 255.0);
+    g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255) / 255.0);
+    b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255) / 255.0);
+    a = ((_Runtime.toInt32(color) & 255) / 255.0);
     _Runtime.setIndex(out, 0.0, threshold);
     _Runtime.setIndex(out, 1.0, feather);
     _Runtime.setIndex(out, 2.0, r);

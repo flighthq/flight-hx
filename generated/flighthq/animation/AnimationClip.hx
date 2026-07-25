@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.animation.AnimationTrack.cloneAnimationTrack;
 import flighthq.animation.AnimationTrack.sampleAnimationTrack;
-import flighthq.entity.Entity.createEntity;
 import flighthq.types.AnimationChannel;
 import flighthq.types.AnimationClip;
 import flighthq.types.AnimationTrack;
@@ -17,17 +16,17 @@ class AnimationClip {
     for (channel in _Runtime.iterable(_Runtime.field(clip, 'channels'))) {
       _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([_Runtime.callValue(cloneAnimationTrack, cast ([_Runtime.field(channel, 'track')] : Array<Dynamic>)), _Runtime.field(channel, 'targetRef')] : Array<Dynamic>))] : Array<Dynamic>));
     }
-    return cast _Runtime.callValue(createEntity, cast ([{ channels: channels, duration: _Runtime.field(clip, 'duration') }] : Array<Dynamic>));
+    return cast { channels: channels, duration: _Runtime.field(clip, 'duration') };
     return cast null;
   }
 
   public static function createAnimationChannel(track:AnimationTrack, targetRef:Dynamic):AnimationChannel {
-    return cast _Runtime.callValue(createEntity, cast ([{ targetRef: targetRef, track: track }] : Array<Dynamic>));
+    return cast { targetRef: targetRef, track: track };
     return cast null;
   }
 
   public static function createAnimationClip(channels:Array<AnimationChannel>, ?duration:Float):flighthq.types.AnimationClip {
-    return cast _Runtime.callValue(createEntity, cast ([{ channels: channels, duration: _Runtime.coalesce(duration, function():Dynamic return cast _Runtime.callValue(AnimationClip.computeChannelsDuration__animationClip, cast ([channels] : Array<Dynamic>))) }] : Array<Dynamic>));
+    return cast { channels: channels, duration: _Runtime.coalesce(duration, function():Dynamic return cast _Runtime.callValue(AnimationClip.computeChannelsDuration__animationClip, cast ([channels] : Array<Dynamic>))) };
     return cast null;
   }
 

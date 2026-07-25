@@ -270,7 +270,7 @@ class SpritesheetPlayer {
       var lo:Dynamic = 0.0;
       var hi:Dynamic = (virtualCount - 1.0);
       while (_Runtime.truthy(_Runtime.compare(lo, hi, '<'))) {
-        var mid:Dynamic = (_Runtime.toInt32(((lo + hi) + 1.0)) >> _Runtime.toInt32(1.0));
+        var mid:Dynamic = (_Runtime.toInt32(((lo + hi) + 1.0)) >> 1);
         if (_Runtime.truthy(_Runtime.compare(_Runtime.getIndex(arr, mid), timeInLoop, '<='))) {
           (lo = cast (mid : Dynamic));
         } else {

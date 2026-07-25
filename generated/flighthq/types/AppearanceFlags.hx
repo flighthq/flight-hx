@@ -6,12 +6,12 @@ import flighthq._internal._Runtime;
 
 enum abstract AppearanceFlags(Int) from Int to Int {
   public static inline var None:AppearanceFlags = 0;
-  public static inline var Visible:AppearanceFlags = (_Runtime.toInt32(1.0) << _Runtime.toInt32(0.0));
-  public static inline var Alpha:AppearanceFlags = (_Runtime.toInt32(1.0) << _Runtime.toInt32(1.0));
-  public static inline var BlendMode:AppearanceFlags = (_Runtime.toInt32(1.0) << _Runtime.toInt32(2.0));
-  public static inline var Clip:AppearanceFlags = (_Runtime.toInt32(1.0) << _Runtime.toInt32(3.0));
-  public static inline var Scale9Grid:AppearanceFlags = (_Runtime.toInt32(1.0) << _Runtime.toInt32(4.0));
-  public static inline var Any:AppearanceFlags = (_Runtime.toInt32(1.0) << _Runtime.toInt32(31.0));
+  public static inline var Visible:AppearanceFlags = (1 << 0);
+  public static inline var Alpha:AppearanceFlags = (1 << 1);
+  public static inline var BlendMode:AppearanceFlags = (1 << 2);
+  public static inline var Clip:AppearanceFlags = (1 << 3);
+  public static inline var Scale9Grid:AppearanceFlags = (1 << 4);
+  public static inline var Any:AppearanceFlags = (1 << 31);
   public static function any(flags:AppearanceFlags, test:AppearanceFlags):Bool {
     return cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(test)), 0.0);
     return cast null;

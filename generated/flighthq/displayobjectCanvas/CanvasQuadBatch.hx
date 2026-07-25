@@ -69,7 +69,7 @@ class CanvasQuadBatch {
         if (_Runtime.truthy(_Runtime.strictEquals(stride, 2.0))) {
           var dx:Dynamic = _Runtime.getIndex(transforms, offset);
           var dy:Dynamic = _Runtime.getIndex(transforms, (offset + 1.0));
-          flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([image, _Runtime.field(region, 'x'), _Runtime.field(region, 'y'), _Runtime.field(region, 'width'), _Runtime.field(region, 'height'), _Runtime.select(roundPixels, function():Dynamic return cast (_Runtime.toInt32(dx) | _Runtime.toInt32(0.0)), function():Dynamic return cast dx), _Runtime.select(roundPixels, function():Dynamic return cast (_Runtime.toInt32(dy) | _Runtime.toInt32(0.0)), function():Dynamic return cast dy), _Runtime.field(region, 'width'), _Runtime.field(region, 'height')] : Array<Dynamic>));
+          flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([image, _Runtime.field(region, 'x'), _Runtime.field(region, 'y'), _Runtime.field(region, 'width'), _Runtime.field(region, 'height'), _Runtime.select(roundPixels, function():Dynamic return cast (_Runtime.toInt32(dx) | 0), function():Dynamic return cast dx), _Runtime.select(roundPixels, function():Dynamic return cast (_Runtime.toInt32(dy) | 0), function():Dynamic return cast dy), _Runtime.field(region, 'width'), _Runtime.field(region, 'height')] : Array<Dynamic>));
         } else {
           _Runtime.callValue(setMatrixFromFloat32Array, cast ([quadTransform, offset, transforms] : Array<Dynamic>));
           _Runtime.callValue(multiplyMatrix, cast ([quadTransform, transform, quadTransform] : Array<Dynamic>));

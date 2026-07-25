@@ -4,8 +4,9 @@ package flighthq.surface;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.surface.SurfaceComposite.extractSurfacePixels;
-import flighthq.types.SurfaceBoxBlurOptions;
 import flighthq.types.SurfaceRegion;
+
+typedef SurfaceBoxBlurOptions = { @:optional var radiusX:Float; @:optional var radiusY:Float; @:optional var passes:Float; };
 
 class SurfaceBlur {
   public static function blurSurfacePixelsHorizontal(out:flighthq._internal._UInt8ClampedArray, source:flighthq._internal._UInt8ClampedArray, width:Float, height:Float, radius:Float):Void {
@@ -67,7 +68,7 @@ class SurfaceBlur {
 
   public static function blurSurfacePixelsHorizontalWeighted(out:flighthq._internal._UInt8ClampedArray, source:flighthq._internal._UInt8ClampedArray, width:Float, height:Float, kernel:flighthq._internal._Float32Array):Void {
     var radius:Dynamic = cast _Runtime.UNDEFINED;
-    radius = (_Runtime.toInt32((_Runtime.field(kernel, 'length') - 1.0)) >> _Runtime.toInt32(1.0));
+    radius = (_Runtime.toInt32((_Runtime.field(kernel, 'length') - 1.0)) >> 1);
     {
       var y:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(y, height, '<'))) {
@@ -162,7 +163,7 @@ class SurfaceBlur {
 
   public static function blurSurfacePixelsVerticalWeighted(out:flighthq._internal._UInt8ClampedArray, source:flighthq._internal._UInt8ClampedArray, width:Float, height:Float, kernel:flighthq._internal._Float32Array):Void {
     var radius:Dynamic = cast _Runtime.UNDEFINED;
-    radius = (_Runtime.toInt32((_Runtime.field(kernel, 'length') - 1.0)) >> _Runtime.toInt32(1.0));
+    radius = (_Runtime.toInt32((_Runtime.field(kernel, 'length') - 1.0)) >> 1);
     {
       var y:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(y, height, '<'))) {

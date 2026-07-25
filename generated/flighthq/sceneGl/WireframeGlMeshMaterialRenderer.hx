@@ -5,12 +5,12 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.color.PackColor.unpackColorToLinear;
 import flighthq.sceneGl.GlMeshMaterialRegistry.registerGlMeshMaterialRenderer;
-import flighthq.sceneGl.GlMeshProgram.beginGlMeshDraw;
-import flighthq.sceneGl.GlMeshProgram.setGlMeshViewProjection;
-import flighthq.sceneGl.GlSceneRuntime.getGlSceneRuntime;
 import flighthq.sceneGl.GlWireframePrelude.ensureGlWireframeProgram;
-import flighthq.sceneGl.GlWireframeUpload.ensureGlWireframeUpload;
-import flighthq.types.Camera3D;
+import flighthq.sceneGl._internal._GlMeshProgramValues.beginGlMeshDraw;
+import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshViewProjection;
+import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
+import flighthq.sceneGl._internal._GlWireframeUploadValues.ensureGlWireframeUpload;
+import flighthq.types.Camera;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlRenderState;
 import flighthq.types.LinearColor;
@@ -23,7 +23,7 @@ import flighthq.types.WireframeMaterial;
 import flighthq.types._internal._WireframeMaterialValues.WireframeMaterialKind;
 
 class WireframeGlMeshMaterialRenderer {
-  public static final wireframeGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera3D) {
+  public static final wireframeGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var wireframe:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;

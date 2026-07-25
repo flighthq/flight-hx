@@ -3,17 +3,17 @@ package flighthq.sceneGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.sceneGl.GlLitProgram.bindGlMeshLightBlock;
 import flighthq.sceneGl.GlMeshMaterialRegistry.registerGlMeshMaterialRenderer;
-import flighthq.sceneGl.GlMeshProgram.beginGlMeshDraw;
-import flighthq.sceneGl.GlMeshProgram.drawGlMeshSubset;
-import flighthq.sceneGl.GlMeshProgram.setGlMeshCameraPosition;
-import flighthq.sceneGl.GlMeshProgram.setGlMeshViewProjection;
 import flighthq.sceneGl.GlPbrProgramCache.ensureGlPbrProgram;
 import flighthq.sceneGl.GlPbrStandardBlock.bindGlPbrStandardBlock;
 import flighthq.sceneGl.GlPbrStandardBlock.buildGlPbrStandardDefineKey;
-import flighthq.sceneGl.GlSceneRuntime.getGlSceneRuntime;
-import flighthq.types.Camera3D;
+import flighthq.sceneGl._internal._GlLitProgramValues.bindGlMeshLightBlock;
+import flighthq.sceneGl._internal._GlMeshProgramValues.beginGlMeshDraw;
+import flighthq.sceneGl._internal._GlMeshProgramValues.drawGlMeshSubset;
+import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshCameraPosition;
+import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshViewProjection;
+import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
+import flighthq.types.Camera;
 import flighthq.types.ClearcoatPbrMaterial;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlRenderState;
@@ -25,7 +25,7 @@ import flighthq.types.Types.ClearcoatPbrMaterialKind;
 import flighthq.types._internal._ClearcoatPbrMaterialValues.ClearcoatPbrMaterialKind;
 
 class ClearcoatPbrGlMeshMaterialRenderer {
-  public static final clearcoatPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
+  public static final clearcoatPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var clearcoat:Dynamic = cast _Runtime.UNDEFINED;
     var standard:Dynamic = cast _Runtime.UNDEFINED;

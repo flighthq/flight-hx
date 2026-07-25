@@ -3,7 +3,6 @@ package flighthq.animation;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.entity.Entity.createEntity;
 import flighthq.types.AnimationInterpolation;
 import flighthq.types.AnimationTrack;
 import flighthq.types.AnimationTrackValidationDiagnostic;
@@ -12,12 +11,12 @@ import flighthq.types._internal._AnimationInterpolationValues.AnimationInterpola
 
 class AnimationTrack {
   public static function cloneAnimationTrack(track:flighthq.types.AnimationTrack):flighthq.types.AnimationTrack {
-    return cast _Runtime.callValue(createEntity, cast ([{ components: _Runtime.field(track, 'components'), easing: _Runtime.field(track, 'easing'), interpolation: _Runtime.field(track, 'interpolation'), quaternion: _Runtime.field(track, 'quaternion'), times: _Runtime.callValue(AnimationTrack.cloneNumberBuffer__animationTrack, cast ([_Runtime.field(track, 'times')] : Array<Dynamic>)), values: _Runtime.callValue(AnimationTrack.cloneNumberBuffer__animationTrack, cast ([_Runtime.field(track, 'values')] : Array<Dynamic>)) }] : Array<Dynamic>));
+    return cast { components: _Runtime.field(track, 'components'), easing: _Runtime.field(track, 'easing'), interpolation: _Runtime.field(track, 'interpolation'), quaternion: _Runtime.field(track, 'quaternion'), times: _Runtime.callValue(AnimationTrack.cloneNumberBuffer__animationTrack, cast ([_Runtime.field(track, 'times')] : Array<Dynamic>)), values: _Runtime.callValue(AnimationTrack.cloneNumberBuffer__animationTrack, cast ([_Runtime.field(track, 'values')] : Array<Dynamic>)) };
     return cast null;
   }
 
   public static function createAnimationTrack(opts:{ var times:Dynamic; var values:Dynamic; @:optional var components:Float; @:optional var interpolation:AnimationInterpolation; @:optional var quaternion:Bool; @:optional var easing:Dynamic; }):flighthq.types.AnimationTrack {
-    return cast _Runtime.callValue(createEntity, cast ([{ components: _Runtime.coalesce(_Runtime.field(opts, 'components'), function():Dynamic return cast 1.0), easing: _Runtime.coalesce(_Runtime.field(opts, 'easing'), function():Dynamic return cast null), interpolation: _Runtime.coalesce(_Runtime.field(opts, 'interpolation'), function():Dynamic return cast AnimationInterpolationLinear), quaternion: _Runtime.coalesce(_Runtime.field(opts, 'quaternion'), function():Dynamic return cast false), times: _Runtime.field(opts, 'times'), values: _Runtime.field(opts, 'values') }] : Array<Dynamic>));
+    return cast { components: _Runtime.coalesce(_Runtime.field(opts, 'components'), function():Dynamic return cast 1.0), easing: _Runtime.coalesce(_Runtime.field(opts, 'easing'), function():Dynamic return cast null), interpolation: _Runtime.coalesce(_Runtime.field(opts, 'interpolation'), function():Dynamic return cast AnimationInterpolationLinear), quaternion: _Runtime.coalesce(_Runtime.field(opts, 'quaternion'), function():Dynamic return cast false), times: _Runtime.field(opts, 'times'), values: _Runtime.field(opts, 'values') };
     return cast null;
   }
 
@@ -61,7 +60,7 @@ class AnimationTrack {
     lo = 0.0;
     hi = (count - 1.0);
     while (_Runtime.truthy(_Runtime.compare(lo, hi, '<'))) {
-      var mid:Dynamic = (_Runtime.toInt32(((lo + hi) + 1.0)) >> _Runtime.toInt32(1.0));
+      var mid:Dynamic = (_Runtime.toInt32(((lo + hi) + 1.0)) >> 1);
       if (_Runtime.truthy(_Runtime.compare(_Runtime.getIndex(times, mid), t, '<='))) { (lo = cast (mid : Dynamic)); } else { (hi = cast ((mid - 1.0) : Dynamic)); }
     }
     i = lo;
@@ -125,7 +124,7 @@ class AnimationTrack {
         k++;
       }
     }
-    return cast _Runtime.callValue(createEntity, cast ([{ components: components, easing: _Runtime.field(track, 'easing'), interpolation: _Runtime.field(track, 'interpolation'), quaternion: _Runtime.field(track, 'quaternion'), times: outTimes, values: outValues }] : Array<Dynamic>));
+    return cast { components: components, easing: _Runtime.field(track, 'easing'), interpolation: _Runtime.field(track, 'interpolation'), quaternion: _Runtime.field(track, 'quaternion'), times: outTimes, values: outValues };
     return cast null;
   }
 

@@ -3,8 +3,8 @@ package flighthq.particleemitter;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.node.NodeTransform3d.getNodeLocalMatrix4;
-import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
+import flighthq.node.Transform3d.getNodeLocalMatrix4;
+import flighthq.node.Transform3d.getNodeWorldMatrix4;
 import flighthq.particleemitter.ParticleEmitter3D.reserveParticleEmitter3D;
 import flighthq.particles.Curve.sampleParticleColorCurve;
 import flighthq.particles.Curve.sampleParticleCurve;
@@ -395,7 +395,7 @@ class UpdateParticleEmitter3D {
             _Runtime.setIndex(_Runtime.field(data, 'colors'), (ct + 1.0), colorStartG);
             _Runtime.setIndex(_Runtime.field(data, 'colors'), (ct + 2.0), colorStartB);
           } }
-          _Runtime.setIndex(_Runtime.field(data, 'ids'), idx, (regionIdMin + _Runtime.select(_Runtime.compare(_Runtime.field(config, 'frameCount'), 1.0, '>'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(regionRange, 0.0, '>'), function():Dynamic return cast (_Runtime.toInt32((_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>)) * regionRange)) | _Runtime.toInt32(0.0)), function():Dynamic return cast 0.0))));
+          _Runtime.setIndex(_Runtime.field(data, 'ids'), idx, (regionIdMin + _Runtime.select(_Runtime.compare(_Runtime.field(config, 'frameCount'), 1.0, '>'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(regionRange, 0.0, '>'), function():Dynamic return cast (_Runtime.toInt32((_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>)) * regionRange)) | 0), function():Dynamic return cast 0.0))));
           _Runtime.setIndex(_Runtime.field(state, 'rotationSpeeds'), idx, _Runtime.select(hasRotSpeed, function():Dynamic return cast (_Runtime.field(config, 'rotationSpeedMin') + (_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>)) * rotSpeedRange)), function():Dynamic return cast 0.0));
           _Runtime.callOptionalValue(onSpawn, cast ([spawnX, spawnY, spawnZ] : Array<Dynamic>));
           if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) {

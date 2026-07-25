@@ -4,13 +4,12 @@ package flighthq.bitmapfontFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.bitmapfont.BitmapFont.getBitmapFontMetrics;
-import flighthq.bitmapfontFormats.BitmapFontRecord.buildBitmapFontFromRecord;
+import flighthq.bitmapfontFormats.BitmapFontRecord.BitmapFontCharRecord;
+import flighthq.bitmapfontFormats.BitmapFontRecord.BitmapFontKerningRecord;
+import flighthq.bitmapfontFormats.BitmapFontRecord.BitmapFontPageRecord;
+import flighthq.bitmapfontFormats._internal._BitmapFontRecordValues.buildBitmapFontFromRecord;
 import flighthq.types.BitmapFont;
 import flighthq.types.BitmapFont.BitmapFontParseOptions;
-import flighthq.types.BitmapFontRecord;
-import flighthq.types.BitmapFontRecord.BitmapFontCharRecord;
-import flighthq.types.BitmapFontRecord.BitmapFontKerningRecord;
-import flighthq.types.BitmapFontRecord.BitmapFontPageRecord;
 import flighthq.types.GlyphSource.GlyphEntry;
 
 class BitmapFontFnt {
@@ -52,8 +51,8 @@ class BitmapFontFnt {
     _Runtime.callProperty(lines, 'push', cast (['kernings count=' + Std.string(_Runtime.field(kernKeys, 'length')) + ''] : Array<Dynamic>));
     for (key in _Runtime.iterable(kernKeys)) {
       var amount:Dynamic = (cast _Runtime.callProperty(_Runtime.field(font, 'kerning'), 'get', cast ([key] : Array<Dynamic>)) : Float);
-      var first:Dynamic = _Runtime.unsignedShiftRight(_Runtime.toInt32(key), _Runtime.toInt32(16.0));
-      var second:Dynamic = (_Runtime.toInt32(key) & _Runtime.toInt32(65535.0));
+      var first:Dynamic = _Runtime.unsignedShiftRight(_Runtime.toInt32(key), 16);
+      var second:Dynamic = (_Runtime.toInt32(key) & 65535);
       _Runtime.callProperty(lines, 'push', cast (['kerning first=' + Std.string(first) + ' second=' + Std.string(second) + ' amount=' + Std.string(amount) + ''] : Array<Dynamic>));
     }
     return cast (_Runtime.join(lines, '\n') + '\n');

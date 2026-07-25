@@ -5,4 +5,4 @@ const api = compiled.flighthq.color.ColorFromKelvin;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const colorFromKelvin = api.colorFromKelvin;
+export const createColorFromKelvin = api.createColorFromKelvin;

@@ -4,17 +4,22 @@ package flighthq.particles;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.particles.ParticleEmitterState.PARTICLE_VELOCITY_STRIDE;
+import flighthq.types.AttractorForce;
+import flighthq.types.DragForce;
 import flighthq.types.ForceFalloff;
-import flighthq.types.ParticleEmitter2D;
+import flighthq.types.ParticleEmitter;
 import flighthq.types.ParticleEmitterState;
 import flighthq.types.ParticleForce;
 import flighthq.types.ParticleObject;
 import flighthq.types.ParticleObjectsState;
+import flighthq.types.TurbulenceForce;
+import flighthq.types.VortexForce;
+import flighthq.types.WindForce;
 
 class ApplyParticleForces {
   public static final accel__applyParticleForces:Array<Float> = cast ([0.0, 0.0, 0.0] : Array<Dynamic>);
 
-  public static function applyParticleForces(emitter:ParticleEmitter2D, state:ParticleEmitterState, forces:Array<ParticleForce>, deltaTime:Float):Void {
+  public static function applyParticleForces(emitter:ParticleEmitter, state:ParticleEmitterState, forces:Array<ParticleForce>, deltaTime:Float):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var transforms:Dynamic = cast _Runtime.UNDEFINED;
@@ -185,10 +190,10 @@ class ApplyParticleForces {
 
   public static function hash2__applyParticleForces(x:Float, y:Float, seed:Float):Float {
     var h:Dynamic = cast _Runtime.UNDEFINED;
-    h = (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.imul(_Runtime.toInt32(x), _Runtime.toInt32(668265261.0))) ^ _Runtime.toInt32(_Runtime.imul(_Runtime.toInt32(y), _Runtime.toInt32(374761393.0))))) ^ _Runtime.toInt32(_Runtime.imul(_Runtime.toInt32((seed + 1.0)), _Runtime.toInt32(2654435761.0))))) | _Runtime.toInt32(0.0));
-    (h = cast (_Runtime.imul(_Runtime.toInt32((_Runtime.toInt32(h) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(h), _Runtime.toInt32(15.0))))), _Runtime.toInt32(2246822507.0)) : Dynamic));
-    (h = cast (_Runtime.imul(_Runtime.toInt32((_Runtime.toInt32(h) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(h), _Runtime.toInt32(13.0))))), _Runtime.toInt32(3266489909.0)) : Dynamic));
-    return cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(h) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(h), _Runtime.toInt32(16.0))))), _Runtime.toInt32(0.0)) / 4294967296.0);
+    h = (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.imul(_Runtime.toInt32(x), 668265261)) ^ _Runtime.toInt32(_Runtime.imul(_Runtime.toInt32(y), 374761393)))) ^ _Runtime.toInt32(_Runtime.imul(_Runtime.toInt32((seed + 1.0)), _Runtime.toInt32(2654435761.0))))) | 0);
+    (h = cast (_Runtime.imul(_Runtime.toInt32((_Runtime.toInt32(h) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(h), 15)))), _Runtime.toInt32(2246822507.0)) : Dynamic));
+    (h = cast (_Runtime.imul(_Runtime.toInt32((_Runtime.toInt32(h) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(h), 13)))), _Runtime.toInt32(3266489909.0)) : Dynamic));
+    return cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(h) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(h), 16)))), 0) / 4294967296.0);
     return cast null;
   }
 }

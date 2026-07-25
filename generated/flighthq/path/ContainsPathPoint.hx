@@ -11,7 +11,7 @@ class ContainsPathPoint {
   public static function containsPathPoint(path:Path, px:Float, py:Float, tolerance:Dynamic = 0.25):Bool {
     var winding:Dynamic = cast _Runtime.UNDEFINED;
     winding = _Runtime.callValue(ContainsPathPoint.computePathWindingNumber__containsPathPoint, cast ([path, px, py, tolerance] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(path, 'winding'), 'evenOdd'))) { return cast !_Runtime.strictEquals((_Runtime.toInt32(winding) & _Runtime.toInt32(1.0)), 0.0); }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(path, 'winding'), 'evenOdd'))) { return cast !_Runtime.strictEquals((_Runtime.toInt32(winding) & 1), 0.0); }
     return cast !_Runtime.strictEquals(winding, 0.0);
     return cast null;
   }

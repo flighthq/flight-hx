@@ -3,10 +3,11 @@ package flighthq.particlesFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ParticleDesignerSchema.ParticleDesignerDocument;
-import flighthq.types.ParticleDesignerSchema.ParticleDesignerSerializeOptions;
+import flighthq.particlesFormats.ParticleDesignerSchema.ParticleDesignerDocument;
+import flighthq.particlesFormats.SerializeResult.ParticleSerializeResult;
 import flighthq.types.ParticleEmitterConfig;
-import flighthq.types.ParticleSerializeResult;
+
+typedef ParticleDesignerSerializeOptions = { @:optional var textureSize:Float; };
 
 class ParticleDesignerSerialize {
   public static final RAD2DEG__particleDesignerSerialize:Dynamic = (180.0 / HxMath.PI);

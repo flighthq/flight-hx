@@ -22,9 +22,14 @@ import flighthq.shape.ShapeCommands.appendShapeMoveTo;
 import flighthq.shape.ShapeCommands.appendShapePath;
 import flighthq.shape.ShapeCommands.appendShapeRectangle;
 import flighthq.shape.ShapeCommands.appendShapeRoundRectangle;
+import flighthq.types.ImageResource;
 import flighthq.types.Shape;
-import flighthq.types.ShapeJson.ShapeJsonFormatOptions;
-import flighthq.types.ShapeJson.ShapeJsonParseOptions;
+
+typedef ShapeBitmapReference = { var index:Float; };
+
+typedef ShapeJsonFormatOptions = { @:optional var space:Dynamic; };
+
+typedef ShapeJsonParseOptions = { @:optional var resolveBitmap:Dynamic; };
 
 typedef ShapeCommandAppender__shapeJson = Dynamic;
 
