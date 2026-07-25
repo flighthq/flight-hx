@@ -755,12 +755,23 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(emit('gl.clear(...[gl.COLOR_BUFFER_BIT]);')).toThrow(
       'WebGL2 spread call has no typed backend endpoint: clear',
     );
+    expect(emit("const name = 'ARRAY_BUFFER'; return gl[name];")).toThrow(
+      'WebGL2 computed property access is not a recognized closed string-literal constant union',
+    );
   });
 
   it('lowers computed WebGL2 constants to an exhaustive typed constant switch', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/render-gl/src/sample.ts',
-      `export function read(gl: WebGL2RenderingContext, name: string) { return gl[name]; }`,
+      `
+        export function read(
+          gl: WebGL2RenderingContext,
+          realization: { src: string; equation?: string },
+        ) {
+          gl.blendEquation(gl[realization.equation ?? 'FUNC_ADD']);
+          return gl[realization.src];
+        }
+      `,
       ts.ScriptTarget.Latest,
       true,
       ts.ScriptKind.TS,
@@ -774,10 +785,19 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain("(switch (name) { case 'ACTIVE_UNIFORMS':");
+    expect(output).toContain(
+      "(switch (_Runtime.coalesce(_Runtime.field(realization, 'equation'), function():Dynamic return cast 'FUNC_ADD')) { case 'FUNC_ADD':",
+    );
     expect(output).toContain("case 'MIN': flighthq._internal.backend.WebGl2Backend.MIN;");
-    expect(output).toContain("default: throw 'WebGL2 computed constant is not in the typed backend inventory';");
-    expect(output).not.toContain('_Runtime.getIndex(gl, name)');
+    expect(output).toContain(
+      "default: throw 'WebGL2 computed constant is outside the closed GlBlendEquation domain: upstream/packages/render-gl/src/sample.ts';",
+    );
+    expect(output).toContain("(switch (_Runtime.field(realization, 'src')) { case 'DST_COLOR':");
+    expect(output).toContain(
+      "default: throw 'WebGL2 computed constant is outside the closed GlBlendFactor domain: upstream/packages/render-gl/src/sample.ts';",
+    );
+    expect(output).not.toContain("case 'ACTIVE_UNIFORMS':");
+    expect(output).not.toContain('_Runtime.getIndex(gl,');
   });
 
   it('routes Canvas 2D context access through its maintained internal binding', () => {

@@ -1281,6 +1281,32 @@ function lowerBindingPattern(
   });
 }
 
+function webGlComputedConstantDomain(node: ts.Expression): 'GlBlendEquation' | 'GlBlendFactor' | undefined {
+  if (
+    ts.isParenthesizedExpression(node) ||
+    ts.isAsExpression(node) ||
+    ts.isTypeAssertionExpression(node) ||
+    ts.isNonNullExpression(node) ||
+    ts.isSatisfiesExpression(node)
+  ) {
+    return webGlComputedConstantDomain(node.expression);
+  }
+  if (ts.isPropertyAccessExpression(node)) {
+    if (node.name.text === 'equation') return 'GlBlendEquation';
+    if (node.name.text === 'src' || node.name.text === 'dst') return 'GlBlendFactor';
+    return undefined;
+  }
+  if (
+    ts.isBinaryExpression(node) &&
+    node.operatorToken.kind === ts.SyntaxKind.QuestionQuestionToken &&
+    ts.isStringLiteral(node.right) &&
+    node.right.text === 'FUNC_ADD'
+  ) {
+    return webGlComputedConstantDomain(node.left) === 'GlBlendEquation' ? 'GlBlendEquation' : undefined;
+  }
+  return undefined;
+}
+
 function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpression {
   if (ts.isParenthesizedExpression(node)) return lowerExpression(node.expression, context);
   if (ts.isAsExpression(node) || ts.isTypeAssertionExpression(node)) {
@@ -1487,14 +1513,14 @@ function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpre
     };
   }
   if (ts.isElementAccessExpression(node) && node.argumentExpression) {
+    const webGlBinding = isBoundPlatformExpression(node.expression, context, 'WebGL2RenderingContext');
     return {
-      binding: isBoundPlatformExpression(node.expression, context, 'WebGL2RenderingContext')
-        ? 'WebGl2Backend'
-        : undefined,
+      binding: webGlBinding ? 'WebGl2Backend' : undefined,
       index: lowerExpression(node.argumentExpression, context),
       kind: 'element',
       object: lowerExpression(node.expression, context),
       optional: ts.isOptionalChain(node),
+      webGlComputedDomain: webGlBinding ? webGlComputedConstantDomain(node.argumentExpression) : undefined,
     };
   }
   if (ts.isCallExpression(node)) {

@@ -7,6 +7,7 @@ import type {
   IrType,
   IrVariable,
 } from '../model/ir.ts';
+import { type WebGl2ComputedConstantDomain, webGl2ComputedConstantDomains } from './webgl2-endpoints.ts';
 
 const binaryOperatorMap: Readonly<Record<string, string>> = {
   '===': '==',
@@ -215,6 +216,7 @@ const webGl2ConstantEndpoints = new Set([
 let temporaryIndex = 0;
 let currentHaxePackage = 'flighthq';
 let currentModuleName = '';
+let currentSourceIdentity = '';
 let currentModuleValues = new Set<string>();
 let currentDirectFunctions = new Set<string>();
 let currentReturnRequiresValue = false;
@@ -233,6 +235,8 @@ export function emitHaxeModule(module: IrModule): string {
   temporaryIndex = 0;
   currentHaxePackage = module.haxePackage ?? 'flighthq';
   currentModuleName = module.name;
+  currentSourceIdentity =
+    module.source ?? module.declarations[0]?.origin.source ?? `${module.packageName}/${module.name}`;
   currentModuleValues = new Set(
     module.declarations
       .filter(
@@ -1769,7 +1773,10 @@ function emitExpression(expression: IrExpression): string {
         if (expression.optional) {
           throw new Error('Optional WebGL2 computed property access has no typed backend endpoint');
         }
-        return emitWebGl2ComputedConstant(expression.index);
+        if (!expression.webGlComputedDomain) {
+          throw new Error('WebGL2 computed property access is not a recognized closed string-literal constant union');
+        }
+        return emitWebGl2ComputedConstant(expression.index, expression.webGlComputedDomain);
       }
       return `_Runtime.${expression.optional ? 'optionalIndex' : 'getIndex'}(${emitExpression(expression.object)}, ${emitExpression(expression.index)})`;
     case 'function': {
@@ -2426,11 +2433,11 @@ function webGl2ConstantEndpoint(name: string): string {
   return name;
 }
 
-function emitWebGl2ComputedConstant(index: IrExpression): string {
-  const cases = [...webGl2ConstantEndpoints]
-    .map((name) => `case ${quote(name)}: flighthq._internal.backend.WebGl2Backend.${name};`)
+function emitWebGl2ComputedConstant(index: IrExpression, domain: WebGl2ComputedConstantDomain): string {
+  const cases = webGl2ComputedConstantDomains[domain]
+    .map((name) => `case ${quote(name)}: flighthq._internal.backend.WebGl2Backend.${webGl2ConstantEndpoint(name)};`)
     .join(' ');
-  return `(switch (${emitExpression(index)}) { ${cases} default: throw 'WebGL2 computed constant is not in the typed backend inventory'; })`;
+  return `(switch (${emitExpression(index)}) { ${cases} default: throw ${quote(`WebGL2 computed constant is outside the closed ${domain} domain: ${currentSourceIdentity}`)}; })`;
 }
 
 function indent(lines: string[]): string[] {

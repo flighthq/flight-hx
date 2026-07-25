@@ -43,6 +43,7 @@ export type IrExpression =
       object: IrExpression;
       index: IrExpression;
       optional?: boolean | undefined;
+      webGlComputedDomain?: 'GlBlendEquation' | 'GlBlendFactor' | undefined;
     }
   | {
       async?: boolean | undefined;

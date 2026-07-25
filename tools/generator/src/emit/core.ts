@@ -25,6 +25,7 @@ import type {
 import { applySemanticPatches } from '../patch/apply.ts';
 import { emitHaxeModule, setSelfShadowTypeModules, setShadowedTypeNames } from './haxe.ts';
 import { stableJson, writeOrCheck } from './reports.ts';
+import { validateWebGl2ComputedConstantDomains } from './webgl2-endpoints.ts';
 
 export interface CoreGenerationReport {
   excludedPackages: Array<{ packageName: string; reason: string }>;
@@ -50,6 +51,7 @@ interface LoweredPackageEntry {
 }
 
 export function generateCoreModules(workspaceDirectory: string, check: boolean): CoreGenerationReport {
+  validateWebGl2ComputedConstantDomains(workspaceDirectory);
   const inventory = analyzeUpstream(workspaceDirectory);
   const inventoryByName = new Map(inventory.packages.map((item) => [item.name, item]));
   const packagesDirectory = path.join(workspaceDirectory, 'upstream', 'packages');
