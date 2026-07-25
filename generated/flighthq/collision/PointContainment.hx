@@ -33,7 +33,7 @@ class PointContainment {
         }
       }
       else if (__switchValue == 'polygon') {
-        return cast _Runtime.callValue(PointContainment.isPointInConvexPolygon__pointContainment, cast ([x, y, _Runtime.field(shape, 'points'), (Std.int(_Runtime.field(_Runtime.field(shape, 'points'), 'length')) >> Std.int(1.0))] : Array<Dynamic>));
+        return cast _Runtime.callValue(PointContainment.isPointInConvexPolygon__pointContainment, cast ([x, y, _Runtime.field(shape, 'points'), (_Runtime.toInt32(_Runtime.field(_Runtime.field(shape, 'points'), 'length')) >> _Runtime.toInt32(1.0))] : Array<Dynamic>));
       }
       else if (__switchValue == 'segment') {
         {
@@ -75,10 +75,10 @@ class PointContainment {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, pn, '<'))) {
         var j:Dynamic = ((i + 1.0) % pn);
-        var x0:Dynamic = _Runtime.getIndex(px, (Std.int(i) << Std.int(1.0)));
-        var y0:Dynamic = _Runtime.getIndex(px, ((Std.int(i) << Std.int(1.0)) + 1.0));
-        var x1:Dynamic = _Runtime.getIndex(px, (Std.int(j) << Std.int(1.0)));
-        var y1:Dynamic = _Runtime.getIndex(px, ((Std.int(j) << Std.int(1.0)) + 1.0));
+        var x0:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(i) << _Runtime.toInt32(1.0)));
+        var y0:Dynamic = _Runtime.getIndex(px, ((_Runtime.toInt32(i) << _Runtime.toInt32(1.0)) + 1.0));
+        var x1:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(j) << _Runtime.toInt32(1.0)));
+        var y1:Dynamic = _Runtime.getIndex(px, ((_Runtime.toInt32(j) << _Runtime.toInt32(1.0)) + 1.0));
         var cross:Dynamic = (((x1 - x0) * (y - y0)) - ((y1 - y0) * (x - x0)));
         if (_Runtime.truthy(_Runtime.compare(cross, PointContainment.EPS__pointContainment, '>'))) { (positive = cast (true : Dynamic)); } else { if (_Runtime.truthy(_Runtime.compare(cross, -PointContainment.EPS__pointContainment, '<'))) { (negative = cast (true : Dynamic)); } }
         if (_Runtime.truthy(_Runtime.andValue(positive, function():Dynamic return cast negative))) { return cast false; }

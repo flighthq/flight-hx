@@ -17,7 +17,7 @@ class GlyphRasterizerBackend {
       size = HxMath.max(1.0, HxMath.round(_Runtime.field(options, 'fontSize')));
       width = HxMath.max(1.0, HxMath.round((size * 0.6)));
       height = HxMath.max(1.0, HxMath.round((size * 0.7)));
-      pixels = _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [((width * height) * 4.0)]);
+      pixels = new flighthq._internal._UInt8ClampedArray(((width * height) * 4.0));
       _Runtime.fill(pixels, 255.0, 0, null, 1);
       return cast { advance: (width + HxMath.max(1.0, HxMath.round((size * 0.1)))), bearingX: 0.0, bearingY: height, height: height, pixels: pixels, width: width };
     } };
@@ -104,7 +104,7 @@ class GlyphRasterizerBackend {
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', '#ffffff');
     flighthq._internal.backend.Canvas2dBackend.call(context, 'fillText', cast ([text, (guard + left), (guard + ascent)] : Array<Dynamic>));
     image = flighthq._internal.backend.Canvas2dBackend.call(context, 'getImageData', cast ([0.0, 0.0, width, height] : Array<Dynamic>));
-    return cast { advance: advance, bearingX: -left, bearingY: ascent, height: height, pixels: _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [_Runtime.field(image, 'data')]), width: width };
+    return cast { advance: advance, bearingX: -left, bearingY: ascent, height: height, pixels: new flighthq._internal._UInt8ClampedArray(_Runtime.field(image, 'data')), width: width };
     return cast null;
   }
 }

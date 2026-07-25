@@ -10,7 +10,7 @@ import flighthq.types.SurfaceRegion;
 import flighthq.types.ThresholdOperation;
 
 class SurfaceTransform {
-  public static var _scrollScratch__surfaceTransform:Null<Dynamic> = _Runtime.explicitNull();
+  public static var _scrollScratch__surfaceTransform:Null<flighthq._internal._UInt8ClampedArray> = _Runtime.explicitNull();
 
   public static function applySurfaceColorTransform(dest:SurfaceRegion, source:SurfaceRegion, ct:ColorTransformLike):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;
@@ -73,13 +73,13 @@ class SurfaceTransform {
             if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(sx, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sx, _Runtime.field(_Runtime.field(source, 'surface'), 'width'), '>=')), function():Dynamic return cast _Runtime.compare(dx, 0.0, '<')), function():Dynamic return cast _Runtime.compare(dx, _Runtime.field(_Runtime.field(dest, 'surface'), 'width'), '>=')))) { px++; continue; }
             var si:Dynamic = (((sy * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sx) * 4.0);
             var di:Dynamic = (((dy * _Runtime.field(_Runtime.field(dest, 'surface'), 'width')) + dx) * 4.0);
-            var pixel:Dynamic = _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int((Std.int((Std.int(_Runtime.getIndex(sd, si)) << Std.int(24.0))) | Std.int((Std.int(_Runtime.getIndex(sd, (si + 1.0))) << Std.int(16.0))))) | Std.int((Std.int(_Runtime.getIndex(sd, (si + 2.0))) << Std.int(8.0))))) | Std.int(_Runtime.getIndex(sd, (si + 3.0))))) & Std.int(mask))), Std.int(0.0));
-            var passes:Dynamic = _Runtime.callValue(SurfaceTransform.compare__surfaceTransform, cast ([pixel, operation, _Runtime.unsignedShiftRight(Std.int(thresholdValue), Std.int(0.0))] : Array<Dynamic>));
+            var pixel:Dynamic = _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(sd, si)) << _Runtime.toInt32(24.0))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(sd, (si + 1.0))) << _Runtime.toInt32(16.0))))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(sd, (si + 2.0))) << _Runtime.toInt32(8.0))))) | _Runtime.toInt32(_Runtime.getIndex(sd, (si + 3.0))))) & _Runtime.toInt32(mask))), _Runtime.toInt32(0.0));
+            var passes:Dynamic = _Runtime.callValue(SurfaceTransform.compare__surfaceTransform, cast ([pixel, operation, _Runtime.unsignedShiftRight(_Runtime.toInt32(thresholdValue), _Runtime.toInt32(0.0))] : Array<Dynamic>));
             if (_Runtime.truthy(passes)) {
-              _Runtime.setIndex(dd, di, (Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(24.0))) & Std.int(255.0)));
-              _Runtime.setIndex(dd, (di + 1.0), (Std.int((Std.int(color) >> Std.int(16.0))) & Std.int(255.0)));
-              _Runtime.setIndex(dd, (di + 2.0), (Std.int((Std.int(color) >> Std.int(8.0))) & Std.int(255.0)));
-              _Runtime.setIndex(dd, (di + 3.0), (Std.int(color) & Std.int(255.0)));
+              _Runtime.setIndex(dd, di, (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0)));
+              _Runtime.setIndex(dd, (di + 1.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)));
+              _Runtime.setIndex(dd, (di + 2.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)));
+              _Runtime.setIndex(dd, (di + 3.0), (_Runtime.toInt32(color) & _Runtime.toInt32(255.0)));
               changed++;
             } else { if (_Runtime.truthy(copySource)) {
               _Runtime.setIndex(dd, di, _Runtime.getIndex(sd, si));
@@ -138,7 +138,7 @@ class SurfaceTransform {
     var needed:Dynamic = cast _Runtime.UNDEFINED;
     needed = _Runtime.field(_Runtime.field(out, 'data'), 'length');
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(SurfaceTransform._scrollScratch__surfaceTransform, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(SurfaceTransform._scrollScratch__surfaceTransform, 'length'), needed, '<')))) {
-      (SurfaceTransform._scrollScratch__surfaceTransform = cast (_Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [needed]) : Dynamic));
+      (SurfaceTransform._scrollScratch__surfaceTransform = cast (new flighthq._internal._UInt8ClampedArray(needed) : Dynamic));
     }
     _Runtime.callProperty(SurfaceTransform._scrollScratch__surfaceTransform, 'set', cast ([_Runtime.field(out, 'data'), 0.0] : Array<Dynamic>));
     {

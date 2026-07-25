@@ -80,13 +80,13 @@ class WgpuBevelEffect {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     pipeline = _Runtime.callValue(WgpuBevelEffect.getWgpuBevelCompositeShader__wgpuBevelEffect, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuDualSourceEffectPass, cast ([state, field, source, dest, pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, ((Std.int((Std.int(_Runtime.field(params, 'highlightColor')) >> Std.int(16.0))) & Std.int(255.0)) / 255.0));
-      _Runtime.setIndex(f32, 1.0, ((Std.int((Std.int(_Runtime.field(params, 'highlightColor')) >> Std.int(8.0))) & Std.int(255.0)) / 255.0));
-      _Runtime.setIndex(f32, 2.0, ((Std.int(_Runtime.field(params, 'highlightColor')) & Std.int(255.0)) / 255.0));
+      _Runtime.setIndex(f32, 0.0, ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(params, 'highlightColor')) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) / 255.0));
+      _Runtime.setIndex(f32, 1.0, ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(params, 'highlightColor')) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) / 255.0));
+      _Runtime.setIndex(f32, 2.0, ((_Runtime.toInt32(_Runtime.field(params, 'highlightColor')) & _Runtime.toInt32(255.0)) / 255.0));
       _Runtime.setIndex(f32, 3.0, _Runtime.field(params, 'highlightAlpha'));
-      _Runtime.setIndex(f32, 4.0, ((Std.int((Std.int(_Runtime.field(params, 'shadowColor')) >> Std.int(16.0))) & Std.int(255.0)) / 255.0));
-      _Runtime.setIndex(f32, 5.0, ((Std.int((Std.int(_Runtime.field(params, 'shadowColor')) >> Std.int(8.0))) & Std.int(255.0)) / 255.0));
-      _Runtime.setIndex(f32, 6.0, ((Std.int(_Runtime.field(params, 'shadowColor')) & Std.int(255.0)) / 255.0));
+      _Runtime.setIndex(f32, 4.0, ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(params, 'shadowColor')) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) / 255.0));
+      _Runtime.setIndex(f32, 5.0, ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(params, 'shadowColor')) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) / 255.0));
+      _Runtime.setIndex(f32, 6.0, ((_Runtime.toInt32(_Runtime.field(params, 'shadowColor')) & _Runtime.toInt32(255.0)) / 255.0));
       _Runtime.setIndex(f32, 7.0, _Runtime.field(params, 'shadowAlpha'));
       _Runtime.setIndex(f32, 8.0, _Runtime.field(params, 'offsetX'));
       _Runtime.setIndex(f32, 9.0, _Runtime.field(params, 'offsetY'));

@@ -109,7 +109,7 @@ class GlMeshUpload {
     __destructure0 = bindPose;
     normals = _Runtime.field(__destructure0, 'normals');
     positions = _Runtime.field(__destructure0, 'positions');
-    vertexCount = (Std.int((_Runtime.field(positions, 'length') / 3.0)) | Std.int(0.0));
+    vertexCount = (_Runtime.toInt32((_Runtime.field(positions, 'length') / 3.0)) | _Runtime.toInt32(0.0));
     {
       var v:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(v, vertexCount, '<'))) {

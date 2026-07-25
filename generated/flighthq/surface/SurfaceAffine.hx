@@ -64,7 +64,7 @@ class SurfaceAffine {
     _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  public static function sampleSurface__surfaceAffine(dd:Dynamic, di:Float, sd:Dynamic, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, sHeight:Float, sx:Float, sy:Float, sampleMode:SurfaceResizeMode, edgeMode:SurfaceEdgeMode):Void {
+  public static function sampleSurface__surfaceAffine(dd:flighthq._internal._UInt8ClampedArray, di:Float, sd:flighthq._internal._UInt8ClampedArray, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, sHeight:Float, sx:Float, sy:Float, sampleMode:SurfaceResizeMode, edgeMode:SurfaceEdgeMode):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(sampleMode, 'nearest'))) {
       var ix:Dynamic = HxMath.round(sx);
       var iy:Dynamic = HxMath.round(sy);
@@ -88,7 +88,7 @@ class SurfaceAffine {
     _Runtime.callValue(SurfaceAffine.sampleBilinear__surfaceAffine, cast ([dd, di, sd, sw, sh, originX, originY, sStride, sHeight, sx, sy, edgeMode] : Array<Dynamic>));
   }
 
-  public static function sampleBilinear__surfaceAffine(dd:Dynamic, di:Float, sd:Dynamic, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, _sHeight:Float, sx:Float, sy:Float, edgeMode:SurfaceEdgeMode):Void {
+  public static function sampleBilinear__surfaceAffine(dd:flighthq._internal._UInt8ClampedArray, di:Float, sd:flighthq._internal._UInt8ClampedArray, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, _sHeight:Float, sx:Float, sy:Float, edgeMode:SurfaceEdgeMode):Void {
     var x0:Dynamic = cast _Runtime.UNDEFINED;
     var y0:Dynamic = cast _Runtime.UNDEFINED;
     var tx:Dynamic = cast _Runtime.UNDEFINED;
@@ -120,7 +120,7 @@ class SurfaceAffine {
     }
   }
 
-  public static function sampleBicubic__surfaceAffine(dd:Dynamic, di:Float, sd:Dynamic, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, _sHeight:Float, sx:Float, sy:Float, edgeMode:SurfaceEdgeMode):Void {
+  public static function sampleBicubic__surfaceAffine(dd:flighthq._internal._UInt8ClampedArray, di:Float, sd:flighthq._internal._UInt8ClampedArray, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, _sHeight:Float, sx:Float, sy:Float, edgeMode:SurfaceEdgeMode):Void {
     var x1:Dynamic = cast _Runtime.UNDEFINED;
     var y1:Dynamic = cast _Runtime.UNDEFINED;
     var tx:Dynamic = cast _Runtime.UNDEFINED;
@@ -190,7 +190,7 @@ class SurfaceAffine {
     return cast null;
   }
 
-  public static function writeTransparent__surfaceAffine(dd:Dynamic, di:Float):Void {
+  public static function writeTransparent__surfaceAffine(dd:flighthq._internal._UInt8ClampedArray, di:Float):Void {
     _Runtime.setIndex(dd, di, 0.0);
     _Runtime.setIndex(dd, (di + 1.0), 0.0);
     _Runtime.setIndex(dd, (di + 2.0), 0.0);

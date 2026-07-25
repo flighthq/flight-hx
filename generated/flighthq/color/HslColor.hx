@@ -39,9 +39,9 @@ class HslColor {
     var d:Dynamic = cast _Runtime.UNDEFINED;
     var s:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
-    r = ((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(24.0))) & Std.int(255.0)) / 255.0);
-    g = ((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(16.0))) & Std.int(255.0)) / 255.0);
-    b = ((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(8.0))) & Std.int(255.0)) / 255.0);
+    r = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0)) / 255.0);
+    g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) / 255.0);
+    b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) / 255.0);
     max = HxMath.max(HxMath.max(r, g), b);
     min = HxMath.min(HxMath.min(r, g), b);
     l = ((max + min) / 2.0);

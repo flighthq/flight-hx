@@ -283,13 +283,13 @@ class InputManager {
     onPointerDown = function(data:InputPointerData) {
       var prev:Dynamic = cast _Runtime.UNDEFINED;
       prev = _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(state, 'pointerButtonsDown'), 'get', cast ([_Runtime.field(data, 'pointerId')] : Array<Dynamic>)), function():Dynamic return cast 0.0);
-      _Runtime.callProperty(_Runtime.field(state, 'pointerButtonsDown'), 'set', cast ([_Runtime.field(data, 'pointerId'), (Std.int(prev) | Std.int((Std.int(1.0) << Std.int(_Runtime.field(data, 'button')))))] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.field(state, 'pointerButtonsDown'), 'set', cast ([_Runtime.field(data, 'pointerId'), (_Runtime.toInt32(prev) | _Runtime.toInt32((_Runtime.toInt32(1.0) << _Runtime.toInt32(_Runtime.field(data, 'button')))))] : Array<Dynamic>));
     };
     onPointerUp = function(data:InputPointerData) {
       var prev:Dynamic = cast _Runtime.UNDEFINED;
       var next:Dynamic = cast _Runtime.UNDEFINED;
       prev = _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(state, 'pointerButtonsDown'), 'get', cast ([_Runtime.field(data, 'pointerId')] : Array<Dynamic>)), function():Dynamic return cast 0.0);
-      next = (Std.int(prev) & Std.int(~Std.int((Std.int(1.0) << Std.int(_Runtime.field(data, 'button'))))));
+      next = (_Runtime.toInt32(prev) & _Runtime.toInt32(~_Runtime.toInt32((_Runtime.toInt32(1.0) << _Runtime.toInt32(_Runtime.field(data, 'button'))))));
       if (_Runtime.truthy(_Runtime.strictEquals(next, 0.0))) {
         _Runtime.callProperty(_Runtime.field(state, 'pointerButtonsDown'), 'delete', cast ([_Runtime.field(data, 'pointerId')] : Array<Dynamic>));
       } else {
@@ -499,12 +499,12 @@ class InputManager {
   public static function getKeyModifierFromDomKeyboardEvent(event:Dynamic):Float {
     var modifier:Dynamic = cast _Runtime.UNDEFINED;
     modifier = KeyModifierValue.NONE;
-    if (_Runtime.truthy(_Runtime.field(event, 'altKey'))) { (modifier = (Std.int(modifier) | Std.int(_Runtime.select(_Runtime.strictEquals(_Runtime.field(event, 'location'), _Runtime.field(_Runtime.globalValue('KeyboardEvent'), 'DOM_KEY_LOCATION_RIGHT')), function():Dynamic return cast KeyModifierValue.RIGHT_ALT, function():Dynamic return cast KeyModifierValue.LEFT_ALT)))); }
-    if (_Runtime.truthy(_Runtime.field(event, 'ctrlKey'))) { (modifier = (Std.int(modifier) | Std.int(_Runtime.select(_Runtime.strictEquals(_Runtime.field(event, 'location'), _Runtime.field(_Runtime.globalValue('KeyboardEvent'), 'DOM_KEY_LOCATION_RIGHT')), function():Dynamic return cast KeyModifierValue.RIGHT_CTRL, function():Dynamic return cast KeyModifierValue.LEFT_CTRL)))); }
-    if (_Runtime.truthy(_Runtime.field(event, 'metaKey'))) { (modifier = (Std.int(modifier) | Std.int(_Runtime.select(_Runtime.strictEquals(_Runtime.field(event, 'location'), _Runtime.field(_Runtime.globalValue('KeyboardEvent'), 'DOM_KEY_LOCATION_RIGHT')), function():Dynamic return cast KeyModifierValue.RIGHT_META, function():Dynamic return cast KeyModifierValue.LEFT_META)))); }
-    if (_Runtime.truthy(_Runtime.field(event, 'shiftKey'))) { (modifier = (Std.int(modifier) | Std.int(_Runtime.select(_Runtime.strictEquals(_Runtime.field(event, 'location'), _Runtime.field(_Runtime.globalValue('KeyboardEvent'), 'DOM_KEY_LOCATION_RIGHT')), function():Dynamic return cast KeyModifierValue.RIGHT_SHIFT, function():Dynamic return cast KeyModifierValue.LEFT_SHIFT)))); }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callOptionalProperty(event, 'getModifierState', cast (['CapsLock'] : Array<Dynamic>)), true))) { (modifier = (Std.int(modifier) | Std.int(KeyModifierValue.CAPS_LOCK))); }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callOptionalProperty(event, 'getModifierState', cast (['NumLock'] : Array<Dynamic>)), true))) { (modifier = (Std.int(modifier) | Std.int(KeyModifierValue.NUM_LOCK))); }
+    if (_Runtime.truthy(_Runtime.field(event, 'altKey'))) { (modifier = (_Runtime.toInt32(modifier) | _Runtime.toInt32(_Runtime.select(_Runtime.strictEquals(_Runtime.field(event, 'location'), _Runtime.field(_Runtime.globalValue('KeyboardEvent'), 'DOM_KEY_LOCATION_RIGHT')), function():Dynamic return cast KeyModifierValue.RIGHT_ALT, function():Dynamic return cast KeyModifierValue.LEFT_ALT)))); }
+    if (_Runtime.truthy(_Runtime.field(event, 'ctrlKey'))) { (modifier = (_Runtime.toInt32(modifier) | _Runtime.toInt32(_Runtime.select(_Runtime.strictEquals(_Runtime.field(event, 'location'), _Runtime.field(_Runtime.globalValue('KeyboardEvent'), 'DOM_KEY_LOCATION_RIGHT')), function():Dynamic return cast KeyModifierValue.RIGHT_CTRL, function():Dynamic return cast KeyModifierValue.LEFT_CTRL)))); }
+    if (_Runtime.truthy(_Runtime.field(event, 'metaKey'))) { (modifier = (_Runtime.toInt32(modifier) | _Runtime.toInt32(_Runtime.select(_Runtime.strictEquals(_Runtime.field(event, 'location'), _Runtime.field(_Runtime.globalValue('KeyboardEvent'), 'DOM_KEY_LOCATION_RIGHT')), function():Dynamic return cast KeyModifierValue.RIGHT_META, function():Dynamic return cast KeyModifierValue.LEFT_META)))); }
+    if (_Runtime.truthy(_Runtime.field(event, 'shiftKey'))) { (modifier = (_Runtime.toInt32(modifier) | _Runtime.toInt32(_Runtime.select(_Runtime.strictEquals(_Runtime.field(event, 'location'), _Runtime.field(_Runtime.globalValue('KeyboardEvent'), 'DOM_KEY_LOCATION_RIGHT')), function():Dynamic return cast KeyModifierValue.RIGHT_SHIFT, function():Dynamic return cast KeyModifierValue.LEFT_SHIFT)))); }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callOptionalProperty(event, 'getModifierState', cast (['CapsLock'] : Array<Dynamic>)), true))) { (modifier = (_Runtime.toInt32(modifier) | _Runtime.toInt32(KeyModifierValue.CAPS_LOCK))); }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callOptionalProperty(event, 'getModifierState', cast (['NumLock'] : Array<Dynamic>)), true))) { (modifier = (_Runtime.toInt32(modifier) | _Runtime.toInt32(KeyModifierValue.NUM_LOCK))); }
     return cast modifier;
     return cast null;
   }
@@ -533,7 +533,7 @@ class InputManager {
   }
 
   public static function isInputPointerButtonDown(state:InputState, pointerId:Float, button:Float):Bool {
-    return cast !_Runtime.strictEquals((Std.int(_Runtime.coalesce(_Runtime.callProperty(_Runtime.field(state, 'pointerButtonsDown'), 'get', cast ([pointerId] : Array<Dynamic>)), function():Dynamic return cast 0.0)) & Std.int((Std.int(1.0) << Std.int(button)))), 0.0);
+    return cast !_Runtime.strictEquals((_Runtime.toInt32(_Runtime.coalesce(_Runtime.callProperty(_Runtime.field(state, 'pointerButtonsDown'), 'get', cast ([pointerId] : Array<Dynamic>)), function():Dynamic return cast 0.0)) & _Runtime.toInt32((_Runtime.toInt32(1.0) << _Runtime.toInt32(button)))), 0.0);
     return cast null;
   }
 
@@ -650,7 +650,7 @@ class InputManager {
     var modifier:Dynamic = cast _Runtime.UNDEFINED;
     modifier = _Runtime.callValue(getKeyModifierFromDomKeyboardEvent, cast ([event] : Array<Dynamic>));
     _Runtime.setField(out, 'altKey', _Runtime.field(event, 'altKey'));
-    _Runtime.setField(out, 'capsLock', !_Runtime.strictEquals((Std.int(modifier) & Std.int(KeyModifierValue.CAPS_LOCK)), 0.0));
+    _Runtime.setField(out, 'capsLock', !_Runtime.strictEquals((_Runtime.toInt32(modifier) & _Runtime.toInt32(KeyModifierValue.CAPS_LOCK)), 0.0));
     _Runtime.setField(out, 'code', _Runtime.field(event, 'code'));
     _Runtime.setField(out, 'ctrlKey', _Runtime.field(event, 'ctrlKey'));
     _Runtime.setField(out, 'key', _Runtime.field(event, 'key'));
@@ -658,7 +658,7 @@ class InputManager {
     _Runtime.setField(out, 'location', _Runtime.field(event, 'location'));
     _Runtime.setField(out, 'metaKey', _Runtime.field(event, 'metaKey'));
     _Runtime.setField(out, 'modifier', modifier);
-    _Runtime.setField(out, 'numLock', !_Runtime.strictEquals((Std.int(modifier) & Std.int(KeyModifierValue.NUM_LOCK)), 0.0));
+    _Runtime.setField(out, 'numLock', !_Runtime.strictEquals((_Runtime.toInt32(modifier) & _Runtime.toInt32(KeyModifierValue.NUM_LOCK)), 0.0));
     _Runtime.setField(out, 'repeat', _Runtime.field(event, 'repeat'));
     _Runtime.setField(out, 'shiftKey', _Runtime.field(event, 'shiftKey'));
     _Runtime.setField(out, 'timeStamp', _Runtime.field(event, 'timeStamp'));

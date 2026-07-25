@@ -89,21 +89,21 @@ import flighthq.types._internal._SceneNodeValues.SceneNodeKind;
 
 typedef ParsedGeometry__awdParse = { var geometry:Dynamic; var skinned:Bool; };
 
-typedef ParsedContainer__awdParse = { var name:String; var parentId:Float; var transform:Dynamic; };
+typedef ParsedContainer__awdParse = { var name:String; var parentId:Float; var transform:flighthq._internal._Float64Array; };
 
-typedef ParsedMeshInstance__awdParse = { var geometryId:Float; var materialIds:Array<Float>; var name:String; var parentId:Float; var transform:Dynamic; };
+typedef ParsedMeshInstance__awdParse = { var geometryId:Float; var materialIds:Array<Float>; var name:String; var parentId:Float; var transform:flighthq._internal._Float64Array; };
 
 typedef ParsedMaterial__awdParse = { var color:Null<Float>; var diffuseTextureId:Float; var name:String; };
 
 typedef ParsedTexture__awdParse = { var bytes:Null<flighthq._internal._UInt8Array>; var mimeType:Null<String>; var name:String; var url:Null<String>; };
 
-typedef ParsedJoint__awdParse = { var name:String; var parentIndex:Float; var transform:Dynamic; };
+typedef ParsedJoint__awdParse = { var name:String; var parentIndex:Float; var transform:flighthq._internal._Float64Array; };
 
 typedef ParsedSkeleton__awdParse = { var joints:Array<ParsedJoint__awdParse>; var name:String; };
 
 typedef ParsedSkeletonAnimation__awdParse = { var name:String; var poses:Array<{ var duration:Float; var poseBlockId:Float; }>; };
 
-typedef ParsedSkeletonPose__awdParse = { var jointTransforms:Array<Null<Dynamic>>; var name:String; };
+typedef ParsedSkeletonPose__awdParse = { var jointTransforms:Array<Null<flighthq._internal._Float64Array>>; var name:String; };
 
 class AwdParse {
   public static function createSceneFromAwd(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>):Scene {
@@ -166,8 +166,8 @@ class AwdParse {
         _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromAwd: block length runs past the end of the body'] : Array<Dynamic>));
         break;
       }
-      var matrixWide:Dynamic = !_Runtime.strictEquals((Std.int(blockFlags) & Std.int(1.0)), 0.0);
-      var geometryWide:Dynamic = !_Runtime.strictEquals((Std.int(blockFlags) & Std.int(2.0)), 0.0);
+      var matrixWide:Dynamic = !_Runtime.strictEquals((_Runtime.toInt32(blockFlags) & _Runtime.toInt32(1.0)), 0.0);
+      var geometryWide:Dynamic = !_Runtime.strictEquals((_Runtime.toInt32(blockFlags) & _Runtime.toInt32(2.0)), 0.0);
       if (_Runtime.truthy(_Runtime.strictEquals(namespace, AWD_NAMESPACE_CORE))) {
         if (_Runtime.truthy(_Runtime.strictEquals(blockType, AWD_BLOCK_TRIANGLE_GEOMETRY))) {
           var geoms:Dynamic = _Runtime.callValue(AwdParse.parseTriangleGeometryBlock__awdParse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), geometryWide, warnings] : Array<Dynamic>));
@@ -338,7 +338,7 @@ class AwdParse {
         _Runtime.callOptionalProperty(warnings, 'push', cast (['parseAwdSkeletonAnimations: block length runs past the end of the body'] : Array<Dynamic>));
         break;
       }
-      var matrixWide:Dynamic = !_Runtime.strictEquals((Std.int(blockFlags) & Std.int(1.0)), 0.0);
+      var matrixWide:Dynamic = !_Runtime.strictEquals((_Runtime.toInt32(blockFlags) & _Runtime.toInt32(1.0)), 0.0);
       if (_Runtime.truthy(_Runtime.strictEquals(namespace, AWD_NAMESPACE_CORE))) {
         if (_Runtime.truthy(_Runtime.strictEquals(blockType, AWD_BLOCK_SKELETON))) {
           var skeleton:Dynamic = _Runtime.callValue(AwdParse.parseSkeletonBlock__awdParse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), matrixWide, warnings] : Array<Dynamic>));
@@ -469,7 +469,7 @@ class AwdParse {
       var blockDataStart:Dynamic = (offset + AWD_BLOCK_HEADER_BYTES);
       if (_Runtime.truthy(_Runtime.compare((blockDataStart + blockLength), bodyEnd, '>'))) { break; }
       var blockId:Dynamic = _Runtime.callProperty(view, 'getUint32', cast ([offset, true] : Array<Dynamic>));
-      var matrixWide:Dynamic = !_Runtime.strictEquals((Std.int(blockFlags) & Std.int(1.0)), 0.0);
+      var matrixWide:Dynamic = !_Runtime.strictEquals((_Runtime.toInt32(blockFlags) & _Runtime.toInt32(1.0)), 0.0);
       if (_Runtime.truthy(_Runtime.strictEquals(namespace, AWD_NAMESPACE_CORE))) {
         if (_Runtime.truthy(_Runtime.strictEquals(blockType, AWD_BLOCK_SKELETON))) {
           var skeleton:Dynamic = _Runtime.callValue(AwdParse.parseSkeletonBlock__awdParse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), matrixWide] : Array<Dynamic>));
@@ -649,12 +649,12 @@ class AwdParse {
     return cast null;
   }
 
-  public static function readAwdTransform__awdParse(view:Dynamic, offset:Float, widePrecision:Bool):{ var end:Float; var transform:Dynamic; } {
+  public static function readAwdTransform__awdParse(view:Dynamic, offset:Float, widePrecision:Bool):{ var end:Float; var transform:flighthq._internal._Float64Array; } {
     var dv:Dynamic = cast _Runtime.UNDEFINED;
     var transform:Dynamic = cast _Runtime.UNDEFINED;
     var floatSize:Dynamic = cast _Runtime.UNDEFINED;
     dv = (cast view : Dynamic);
-    transform = _Runtime.construct(_Runtime.globalValue('Float64Array'), [12.0]);
+    transform = new flighthq._internal._Float64Array(12.0);
     floatSize = _Runtime.select(widePrecision, function():Dynamic return cast 8.0, function():Dynamic return cast 4.0);
     {
       var i:Dynamic = 0.0;
@@ -668,7 +668,7 @@ class AwdParse {
     return cast null;
   }
 
-  public static function awdTransformToTransform3D__awdParse(transform:Dynamic):Transform3D {
+  public static function awdTransformToTransform3D__awdParse(transform:flighthq._internal._Float64Array):Transform3D {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(AwdParse.awdTransformToMatrix4__awdParse, cast ([AwdParse._awdTransformScratch__awdParse, transform] : Array<Dynamic>));
     out = _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>));
@@ -679,7 +679,7 @@ class AwdParse {
 
   public static final _awdTransformScratch__awdParse:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
 
-  public static function awdTransformToMatrix4__awdParse(out:Matrix4, transform:Dynamic):Void {
+  public static function awdTransformToMatrix4__awdParse(out:Matrix4, transform:flighthq._internal._Float64Array):Void {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     m = _Runtime.field(out, 'm');
     _Runtime.setIndex(m, 0.0, _Runtime.getIndex(transform, 0.0));
@@ -1171,7 +1171,7 @@ class AwdParse {
   }
 
   public static function awdColorToRgba__awdParse(color:Float):Float {
-    return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int(color) << Std.int(8.0))) | Std.int(255.0))), Std.int(0.0));
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(color) << _Runtime.toInt32(8.0))) | _Runtime.toInt32(255.0))), _Runtime.toInt32(0.0));
     return cast null;
   }
 
@@ -1235,7 +1235,7 @@ class AwdParse {
     var offset:Dynamic = cast _Runtime.UNDEFINED;
     var nameResult:Dynamic = cast _Runtime.UNDEFINED;
     var jointCount:Dynamic = cast _Runtime.UNDEFINED;
-    var jointTransforms:Array<Null<Dynamic>> = cast _Runtime.UNDEFINED;
+    var jointTransforms:Array<Null<flighthq._internal._Float64Array>> = cast _Runtime.UNDEFINED;
     dv = (cast view : Dynamic);
     offset = start;
     if (_Runtime.truthy(_Runtime.compare((offset + 2.0), end, '>'))) {

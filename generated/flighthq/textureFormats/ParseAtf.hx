@@ -46,15 +46,15 @@ class ParseAtf {
     log2Width = _Runtime.getIndex(bytes, (headerOffset + 1.0));
     log2Height = _Runtime.getIndex(bytes, (headerOffset + 2.0));
     mipCount = _Runtime.getIndex(bytes, (headerOffset + 3.0));
-    formatCode = (Std.int(typeFormatByte) & Std.int(ParseAtf.atfFormatCodeMask__parseAtf));
+    formatCode = (_Runtime.toInt32(typeFormatByte) & _Runtime.toInt32(ParseAtf.atfFormatCodeMask__parseAtf));
     alpha = _Runtime.callProperty(ParseAtf.atfAlphaFormatCodes__parseAtf, 'has', cast ([formatCode] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.truthy(alpha), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(ParseAtf.atfOpaqueFormatCodes__parseAtf, 'has', cast ([formatCode] : Array<Dynamic>)))))) { return cast null; }
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(log2Width, ParseAtf.atfMaxLog2Dimension__parseAtf, '>'), function():Dynamic return cast _Runtime.compare(log2Height, ParseAtf.atfMaxLog2Dimension__parseAtf, '>')))) { return cast null; }
     if (_Runtime.truthy(_Runtime.compare(mipCount, 1.0, '<'))) { return cast null; }
-    cube = !_Runtime.strictEquals((Std.int(typeFormatByte) & Std.int(ParseAtf.atfCubeFlag__parseAtf)), 0.0);
+    cube = !_Runtime.strictEquals((_Runtime.toInt32(typeFormatByte) & _Runtime.toInt32(ParseAtf.atfCubeFlag__parseAtf)), 0.0);
     faces = _Runtime.select(cube, function():Dynamic return cast 6.0, function():Dynamic return cast 1.0);
-    width = (Std.int(1.0) << Std.int(log2Width));
-    height = (Std.int(1.0) << Std.int(log2Height));
+    width = (_Runtime.toInt32(1.0) << _Runtime.toInt32(log2Width));
+    height = (_Runtime.toInt32(1.0) << _Runtime.toInt32(log2Height));
     slotFormats = _Runtime.select(alpha, function():Dynamic return cast ParseAtf.atfAlphaSlotFormats__parseAtf, function():Dynamic return cast ParseAtf.atfOpaqueSlotFormats__parseAtf);
     slotCount = _Runtime.select(_Runtime.compare(version, ParseAtf.atfEtc2Version__parseAtf, '<'), function():Dynamic return cast ParseAtf.atfBaseSlotCount__parseAtf, function():Dynamic return cast (ParseAtf.atfBaseSlotCount__parseAtf + 1.0));
     perSlotLevels = cast ([] : Array<Dynamic>);
@@ -82,7 +82,7 @@ class ParseAtf {
                 if (_Runtime.truthy(_Runtime.strictEquals(blockLength, 0.0))) { (slot = cast ((slot + 1.0) : Dynamic)); continue; }
                 var byteOffset:Dynamic = _Runtime.field(reader, 'offset');
                 _Runtime.setField(reader, 'offset', (_Runtime.field(reader, 'offset') + blockLength));
-                _Runtime.callProperty(_Runtime.getIndex(perSlotLevels, slot), 'push', cast ([{ byteLength: blockLength, byteOffset: byteOffset, height: HxMath.max(1.0, (Std.int(height) >> Std.int(level))), width: HxMath.max(1.0, (Std.int(width) >> Std.int(level))) }] : Array<Dynamic>));
+                _Runtime.callProperty(_Runtime.getIndex(perSlotLevels, slot), 'push', cast ([{ byteLength: blockLength, byteOffset: byteOffset, height: HxMath.max(1.0, (_Runtime.toInt32(height) >> _Runtime.toInt32(level))), width: HxMath.max(1.0, (_Runtime.toInt32(width) >> _Runtime.toInt32(level))) }] : Array<Dynamic>));
                 (slot = cast ((slot + 1.0) : Dynamic));
               }
             }

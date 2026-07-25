@@ -50,7 +50,7 @@ class RegisterWebImageDecoders {
     );
   };
 
-  public static function premultiplyRgbaInPlace__registerWebImageDecoders(data:Dynamic):Void {
+  public static function premultiplyRgbaInPlace__registerWebImageDecoders(data:flighthq._internal._UInt8ClampedArray):Void {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(data, 'length'), '<'))) {

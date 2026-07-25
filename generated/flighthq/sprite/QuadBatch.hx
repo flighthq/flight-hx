@@ -240,7 +240,7 @@ class QuadBatch {
     var transformCapacity:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(source, 'data');
     stride = _Runtime.callValue(getQuadBatchTransformStride, cast ([_Runtime.field(data, 'transformType')] : Array<Dynamic>));
-    transformCapacity = (Std.int((_Runtime.field(_Runtime.field(data, 'transforms'), 'length') / stride)) | Std.int(0.0));
+    transformCapacity = (_Runtime.toInt32((_Runtime.field(_Runtime.field(data, 'transforms'), 'length') / stride)) | _Runtime.toInt32(0.0));
     return cast HxMath.min(_Runtime.field(_Runtime.field(data, 'ids'), 'length'), transformCapacity);
     return cast null;
   }

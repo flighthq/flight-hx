@@ -10,7 +10,7 @@ import flighthq.types.WgpuEffectPipeline;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
-typedef WgpuEffectPassState__wgpuEffectPass = { var uniformBuffer:Dynamic; var uniformData:flighthq._internal._Float32Array; var uniformDataI32:Dynamic; var uniformOffset:Float; var uniformStride:Float; var uniformSlots:Float; var uniformBGLayout:Dynamic; var uniformBG:Dynamic; var textureBGLayout:Dynamic; var textureBGs:Dynamic; var sampler:Dynamic; var format:Dynamic; };
+typedef WgpuEffectPassState__wgpuEffectPass = { var uniformBuffer:Dynamic; var uniformData:flighthq._internal._Float32Array; var uniformDataI32:flighthq._internal._Int32Array; var uniformOffset:Float; var uniformStride:Float; var uniformSlots:Float; var uniformBGLayout:Dynamic; var uniformBG:Dynamic; var textureBGLayout:Dynamic; var textureBGs:Dynamic; var sampler:Dynamic; var format:Dynamic; };
 
 class WgpuEffectPass {
   public static final EFFECT_VERTEX_WGSL:Dynamic = '\nstruct VertexOut {\n  @builtin(position) position : vec4f,\n  @location(0) uv : vec2f,\n}\n\n@vertex\nfn vs_main(@builtin(vertex_index) vi : u32) -> VertexOut {\n  let xi = vi == 1u || vi == 2u || vi == 4u;\n  let yi = vi == 2u || vi == 4u || vi == 5u;\n  var out : VertexOut;\n  out.position = vec4f(select(-1.0, 1.0, xi), select(-1.0, 1.0, yi), 0.0, 1.0);\n  out.uv = vec2f(select(0.0, 1.0, xi), select(1.0, 0.0, yi));\n  return out;\n}\n';
@@ -44,9 +44,9 @@ class WgpuEffectPass {
     format = _Runtime.field(__destructure0, 'format');
     SLOTS = 512.0;
     STRIDE = 256.0;
-    uniformBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: (SLOTS * STRIDE), usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
+    uniformBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: (SLOTS * STRIDE), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
     uniformData = new flighthq._internal._Float32Array(((SLOTS * STRIDE) / 4.0));
-    uniformDataI32 = _Runtime.construct(_Runtime.globalValue('Int32Array'), [_Runtime.field(uniformData, 'buffer')]);
+    uniformDataI32 = new flighthq._internal._Int32Array(_Runtime.field(uniformData, 'buffer'));
     uniformBGLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), buffer: { type: 'uniform', hasDynamicOffset: true } }] : Array<Dynamic>) }] : Array<Dynamic>));
     uniformBG = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: uniformBGLayout, entries: cast ([{ binding: 0.0, resource: { buffer: uniformBuffer, size: STRIDE } }] : Array<Dynamic>) }] : Array<Dynamic>));
     textureBGLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), texture: {  } }, { binding: 1.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), sampler: {  } }] : Array<Dynamic>) }] : Array<Dynamic>));

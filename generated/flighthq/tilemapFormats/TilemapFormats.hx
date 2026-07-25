@@ -26,12 +26,12 @@ class TilemapFormats {
     return cast null;
   }
 
-  public static function decodeTiledBase64Layer(text:String, compression:Null<TiledCompression>, ?inflate:TiledInflate):Null<Dynamic> {
+  public static function decodeTiledBase64Layer(text:String, compression:Null<TiledCompression>, ?inflate:TiledInflate):Null<flighthq._internal._UInt32Array> {
     return cast _Runtime.callValue(Facade_TilemapFormats_flighthq_tilemapFormats_TiledLayerData.decodeTiledBase64Layer, cast ([text, compression, inflate] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function decodeTiledCsvLayer(text:String):Dynamic {
+  public static function decodeTiledCsvLayer(text:String):flighthq._internal._UInt32Array {
     return cast _Runtime.callValue(Facade_TilemapFormats_flighthq_tilemapFormats_TiledLayerData.decodeTiledCsvLayer, cast ([text] : Array<Dynamic>));
     return cast null;
   }

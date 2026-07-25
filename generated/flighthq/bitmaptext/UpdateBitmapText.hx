@@ -136,7 +136,7 @@ class UpdateBitmapText {
       _Runtime.callValue(setDisplayObjectColorAdjustments, cast ([quadBatch, null] : Array<Dynamic>));
       return;
     }
-    colorTransform = _Runtime.callValue(createColorTransform, cast ([{ redMultiplier: ((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(24.0))) & Std.int(255.0)) / 255.0), greenMultiplier: ((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(16.0))) & Std.int(255.0)) / 255.0), blueMultiplier: ((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(8.0))) & Std.int(255.0)) / 255.0), alphaMultiplier: ((Std.int(color) & Std.int(255.0)) / 255.0) }] : Array<Dynamic>));
+    colorTransform = _Runtime.callValue(createColorTransform, cast ([{ redMultiplier: ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0)) / 255.0), greenMultiplier: ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) / 255.0), blueMultiplier: ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) / 255.0), alphaMultiplier: ((_Runtime.toInt32(color) & _Runtime.toInt32(255.0)) / 255.0) }] : Array<Dynamic>));
     _Runtime.callValue(setDisplayObjectColorAdjustments, cast ([quadBatch, cast ([_Runtime.callValue(createColorTransformAdjustment, cast ([colorTransform] : Array<Dynamic>))] : Array<Dynamic>)] : Array<Dynamic>));
   }
 

@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 
 typedef TiledLayerBase = { var id:Float; var name:String; var opacity:Float; var visible:Bool; var offsetX:Float; var offsetY:Float; var properties:Array<TiledProperty>; };
 
-typedef TiledTileLayer = { var id:Float; var name:String; var opacity:Float; var visible:Bool; var offsetX:Float; var offsetY:Float; var properties:Array<TiledProperty>; var type:String; var width:Float; var height:Float; var data:Dynamic; };
+typedef TiledTileLayer = { var id:Float; var name:String; var opacity:Float; var visible:Bool; var offsetX:Float; var offsetY:Float; var properties:Array<TiledProperty>; var type:String; var width:Float; var height:Float; var data:flighthq._internal._UInt32Array; };
 
 typedef TiledObjectGroup = { var id:Float; var name:String; var opacity:Float; var visible:Bool; var offsetX:Float; var offsetY:Float; var properties:Array<TiledProperty>; var type:String; var objects:Array<TiledObject>; };
 

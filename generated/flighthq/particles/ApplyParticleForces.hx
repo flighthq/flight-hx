@@ -185,10 +185,10 @@ class ApplyParticleForces {
 
   public static function hash2__applyParticleForces(x:Float, y:Float, seed:Float):Float {
     var h:Dynamic = cast _Runtime.UNDEFINED;
-    h = (Std.int((Std.int((Std.int(_Runtime.imul(Std.int(x), Std.int(668265261.0))) ^ Std.int(_Runtime.imul(Std.int(y), Std.int(374761393.0))))) ^ Std.int(_Runtime.imul(Std.int((seed + 1.0)), Std.int(2654435761.0))))) | Std.int(0.0));
-    (h = cast (_Runtime.imul(Std.int((Std.int(h) ^ Std.int(_Runtime.unsignedShiftRight(Std.int(h), Std.int(15.0))))), Std.int(2246822507.0)) : Dynamic));
-    (h = cast (_Runtime.imul(Std.int((Std.int(h) ^ Std.int(_Runtime.unsignedShiftRight(Std.int(h), Std.int(13.0))))), Std.int(3266489909.0)) : Dynamic));
-    return cast (_Runtime.unsignedShiftRight(Std.int((Std.int(h) ^ Std.int(_Runtime.unsignedShiftRight(Std.int(h), Std.int(16.0))))), Std.int(0.0)) / 4294967296.0);
+    h = (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.imul(_Runtime.toInt32(x), _Runtime.toInt32(668265261.0))) ^ _Runtime.toInt32(_Runtime.imul(_Runtime.toInt32(y), _Runtime.toInt32(374761393.0))))) ^ _Runtime.toInt32(_Runtime.imul(_Runtime.toInt32((seed + 1.0)), _Runtime.toInt32(2654435761.0))))) | _Runtime.toInt32(0.0));
+    (h = cast (_Runtime.imul(_Runtime.toInt32((_Runtime.toInt32(h) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(h), _Runtime.toInt32(15.0))))), _Runtime.toInt32(2246822507.0)) : Dynamic));
+    (h = cast (_Runtime.imul(_Runtime.toInt32((_Runtime.toInt32(h) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(h), _Runtime.toInt32(13.0))))), _Runtime.toInt32(3266489909.0)) : Dynamic));
+    return cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(h) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(h), _Runtime.toInt32(16.0))))), _Runtime.toInt32(0.0)) / 4294967296.0);
     return cast null;
   }
 }

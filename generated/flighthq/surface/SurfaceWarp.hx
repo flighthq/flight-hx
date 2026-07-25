@@ -97,7 +97,7 @@ class SurfaceWarp {
     _Runtime.callValue(warpSurface, cast ([dest, source, Hinv, edgeMode, sampleMode] : Array<Dynamic>));
   }
 
-  public static function warpSampleSurface__surfaceWarp(dd:Dynamic, di:Float, sd:Dynamic, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, sHeight:Float, sx:Float, sy:Float, sampleMode:SurfaceResizeMode, edgeMode:SurfaceEdgeMode):Void {
+  public static function warpSampleSurface__surfaceWarp(dd:flighthq._internal._UInt8ClampedArray, di:Float, sd:flighthq._internal._UInt8ClampedArray, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, sHeight:Float, sx:Float, sy:Float, sampleMode:SurfaceResizeMode, edgeMode:SurfaceEdgeMode):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(sampleMode, 'nearest'))) {
       var ix:Dynamic = HxMath.round(sx);
       var iy:Dynamic = HxMath.round(sy);
@@ -124,7 +124,7 @@ class SurfaceWarp {
     _Runtime.callValue(SurfaceWarp.warpSampleBilinear__surfaceWarp, cast ([dd, di, sd, sw, sh, originX, originY, sStride, sHeight, sx, sy, edgeMode] : Array<Dynamic>));
   }
 
-  public static function warpSampleBilinear__surfaceWarp(dd:Dynamic, di:Float, sd:Dynamic, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, _sHeight:Float, sx:Float, sy:Float, edgeMode:SurfaceEdgeMode):Void {
+  public static function warpSampleBilinear__surfaceWarp(dd:flighthq._internal._UInt8ClampedArray, di:Float, sd:flighthq._internal._UInt8ClampedArray, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, _sHeight:Float, sx:Float, sy:Float, edgeMode:SurfaceEdgeMode):Void {
     var x0:Dynamic = cast _Runtime.UNDEFINED;
     var y0:Dynamic = cast _Runtime.UNDEFINED;
     var tx:Dynamic = cast _Runtime.UNDEFINED;
@@ -156,7 +156,7 @@ class SurfaceWarp {
     }
   }
 
-  public static function warpSampleBicubic__surfaceWarp(dd:Dynamic, di:Float, sd:Dynamic, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, _sHeight:Float, sx:Float, sy:Float, edgeMode:SurfaceEdgeMode):Void {
+  public static function warpSampleBicubic__surfaceWarp(dd:flighthq._internal._UInt8ClampedArray, di:Float, sd:flighthq._internal._UInt8ClampedArray, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, _sHeight:Float, sx:Float, sy:Float, edgeMode:SurfaceEdgeMode):Void {
     var x1:Dynamic = cast _Runtime.UNDEFINED;
     var y1:Dynamic = cast _Runtime.UNDEFINED;
     var tx:Dynamic = cast _Runtime.UNDEFINED;

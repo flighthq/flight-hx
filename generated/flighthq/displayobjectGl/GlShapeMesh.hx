@@ -37,9 +37,9 @@ class GlShapeMesh {
         if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(mesh, 'indices'), 'length'), 0.0))) { i++; continue; }
         var a:Dynamic = (_Runtime.field(mesh, 'alpha') * nodeAlpha);
         if (_Runtime.truthy(_Runtime.compare(a, 0.0, '<='))) { i++; continue; }
-        var r:Dynamic = ((Std.int((Std.int(_Runtime.field(mesh, 'color')) >> Std.int(16.0))) & Std.int(255.0)) / 255.0);
-        var g:Dynamic = ((Std.int((Std.int(_Runtime.field(mesh, 'color')) >> Std.int(8.0))) & Std.int(255.0)) / 255.0);
-        var b:Dynamic = ((Std.int(_Runtime.field(mesh, 'color')) & Std.int(255.0)) / 255.0);
+        var r:Dynamic = ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(mesh, 'color')) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) / 255.0);
+        var g:Dynamic = ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(mesh, 'color')) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) / 255.0);
+        var b:Dynamic = ((_Runtime.toInt32(_Runtime.field(mesh, 'color')) & _Runtime.toInt32(255.0)) / 255.0);
         flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(binding, 'colorLocation'), (r * a), (g * a), (b * a), a);
         flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(mesh, 'vertices'), flighthq._internal.backend.WebGl2Backend.STREAM_DRAW);
         flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER, _Runtime.field(mesh, 'indices'), flighthq._internal.backend.WebGl2Backend.STREAM_DRAW);

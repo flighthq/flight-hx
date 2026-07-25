@@ -14,17 +14,17 @@ class PackColor {
   }
 
   public static function computeRgbHexString(color:Float):String {
-    return cast '#' + Std.string(_Runtime.padStart(_Runtime.numberToString((Std.int(color) & Std.int(16777215.0)), 16.0), 6.0, '0')) + '';
+    return cast '#' + Std.string(_Runtime.padStart(_Runtime.numberToString((_Runtime.toInt32(color) & _Runtime.toInt32(16777215.0)), 16.0), 6.0, '0')) + '';
     return cast null;
   }
 
   public static function getColorAlpha(color:Float):Float {
-    return cast ((Std.int(color) & Std.int(255.0)) / 255.0);
+    return cast ((_Runtime.toInt32(color) & _Runtime.toInt32(255.0)) / 255.0);
     return cast null;
   }
 
   public static function getColorRgb(color:Float):Float {
-    return cast (Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(8.0))) & Std.int(16777215.0));
+    return cast (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(8.0))) & _Runtime.toInt32(16777215.0));
     return cast null;
   }
 
@@ -37,7 +37,7 @@ class PackColor {
     gi = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, g)) * 255.0));
     bi = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, b)) * 255.0));
     ai = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, a)) * 255.0));
-    return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int((Std.int(ri) << Std.int(24.0))) | Std.int((Std.int(gi) << Std.int(16.0))))) | Std.int((Std.int(bi) << Std.int(8.0))))) | Std.int(ai))), Std.int(0.0));
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(ri) << _Runtime.toInt32(24.0))) | _Runtime.toInt32((_Runtime.toInt32(gi) << _Runtime.toInt32(16.0))))) | _Runtime.toInt32((_Runtime.toInt32(bi) << _Runtime.toInt32(8.0))))) | _Runtime.toInt32(ai))), _Runtime.toInt32(0.0));
     return cast null;
   }
 
@@ -50,34 +50,34 @@ class PackColor {
     g = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, _Runtime.callValue(linearChannelToSrgb, cast ([_Runtime.getIndex(color, 1.0)] : Array<Dynamic>)))) * 255.0));
     b = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, _Runtime.callValue(linearChannelToSrgb, cast ([_Runtime.getIndex(color, 2.0)] : Array<Dynamic>)))) * 255.0));
     a = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, _Runtime.getIndex(color, 3.0))) * 255.0));
-    return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int((Std.int(r) << Std.int(24.0))) | Std.int((Std.int(g) << Std.int(16.0))))) | Std.int((Std.int(b) << Std.int(8.0))))) | Std.int(a))), Std.int(0.0));
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(r) << _Runtime.toInt32(24.0))) | _Runtime.toInt32((_Runtime.toInt32(g) << _Runtime.toInt32(16.0))))) | _Runtime.toInt32((_Runtime.toInt32(b) << _Runtime.toInt32(8.0))))) | _Runtime.toInt32(a))), _Runtime.toInt32(0.0));
     return cast null;
   }
 
   public static function packOpaqueColor(rgb:Float):Float {
-    return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int(rgb) & Std.int(16777215.0))) << Std.int(8.0))) | Std.int(255.0))), Std.int(0.0));
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(rgb) & _Runtime.toInt32(16777215.0))) << _Runtime.toInt32(8.0))) | _Runtime.toInt32(255.0))), _Runtime.toInt32(0.0));
     return cast null;
   }
 
   public static function setColorAlpha(color:Float, alpha:Float):Float {
     var a:Dynamic = cast _Runtime.UNDEFINED;
     a = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, alpha)) * 255.0));
-    return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int(color) & Std.int(4294967040.0))) | Std.int(a))), Std.int(0.0));
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(color) & _Runtime.toInt32(4294967040.0))) | _Runtime.toInt32(a))), _Runtime.toInt32(0.0));
     return cast null;
   }
 
   public static function unpackColorRgba(out:Array<Float>, color:Float):Void {
-    _Runtime.setIndex(out, 0.0, ((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(24.0))) & Std.int(255.0)) / 255.0));
-    _Runtime.setIndex(out, 1.0, ((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(16.0))) & Std.int(255.0)) / 255.0));
-    _Runtime.setIndex(out, 2.0, ((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(8.0))) & Std.int(255.0)) / 255.0));
-    _Runtime.setIndex(out, 3.0, ((Std.int(color) & Std.int(255.0)) / 255.0));
+    _Runtime.setIndex(out, 0.0, ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0)) / 255.0));
+    _Runtime.setIndex(out, 1.0, ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) / 255.0));
+    _Runtime.setIndex(out, 2.0, ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) / 255.0));
+    _Runtime.setIndex(out, 3.0, ((_Runtime.toInt32(color) & _Runtime.toInt32(255.0)) / 255.0));
   }
 
   public static function unpackColorToLinear(out:LinearColor, color:Float):LinearColor {
-    _Runtime.setIndex(out, 0.0, _Runtime.callValue(srgbChannelToLinear, cast ([((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(24.0))) & Std.int(255.0)) / 255.0)] : Array<Dynamic>)));
-    _Runtime.setIndex(out, 1.0, _Runtime.callValue(srgbChannelToLinear, cast ([((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(16.0))) & Std.int(255.0)) / 255.0)] : Array<Dynamic>)));
-    _Runtime.setIndex(out, 2.0, _Runtime.callValue(srgbChannelToLinear, cast ([((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(8.0))) & Std.int(255.0)) / 255.0)] : Array<Dynamic>)));
-    _Runtime.setIndex(out, 3.0, ((Std.int(color) & Std.int(255.0)) / 255.0));
+    _Runtime.setIndex(out, 0.0, _Runtime.callValue(srgbChannelToLinear, cast ([((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0)) / 255.0)] : Array<Dynamic>)));
+    _Runtime.setIndex(out, 1.0, _Runtime.callValue(srgbChannelToLinear, cast ([((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) / 255.0)] : Array<Dynamic>)));
+    _Runtime.setIndex(out, 2.0, _Runtime.callValue(srgbChannelToLinear, cast ([((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) / 255.0)] : Array<Dynamic>)));
+    _Runtime.setIndex(out, 3.0, ((_Runtime.toInt32(color) & _Runtime.toInt32(255.0)) / 255.0));
     return cast out;
     return cast null;
   }

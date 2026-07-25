@@ -249,7 +249,7 @@ class WgpuSpriteBatch {
   }
 
   public static function createWgpuSpriteBatchBuffer__wgpuSpriteBatch(state:WgpuRenderState, size:Float):Dynamic {
-    return cast flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: size, usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'STORAGE')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
+    return cast flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: size, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'STORAGE')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -275,7 +275,7 @@ class WgpuSpriteBatch {
     var ih:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     uniformOffset = _Runtime.field(runtime, 'uniformOffset');
-    floatBase = (Std.int(uniformOffset) >> Std.int(2.0));
+    floatBase = (_Runtime.toInt32(uniformOffset) >> _Runtime.toInt32(2.0));
     __destructure3 = runtime;
     uniformData = _Runtime.field(__destructure3, 'uniformData');
     viewport = _Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));

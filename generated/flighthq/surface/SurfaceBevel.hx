@@ -9,7 +9,7 @@ import flighthq.types.SurfaceBevelOptions;
 import flighthq.types.SurfaceRegion;
 
 class SurfaceBevel {
-  public static function bevelSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceBevelOptions):Void {
+  public static function bevelSurface(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:SurfaceRegion, ?options:SurfaceBevelOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
@@ -60,12 +60,12 @@ class SurfaceBevel {
             var shade:Dynamic = _Runtime.callValue(SurfaceBevel.sampleField__surfaceBevel, cast ([scratch, w, h, (px + offsetX), (py + offsetY)] : Array<Dynamic>));
             var gradient:Dynamic = (lit - shade);
             var color:Dynamic = _Runtime.select(_Runtime.compare(gradient, 0.0, '>='), function():Dynamic return cast highlightColor, function():Dynamic return cast shadowColor);
-            var colorAlpha:Dynamic = ((Std.int(color) & Std.int(255.0)) / 255.0);
+            var colorAlpha:Dynamic = ((_Runtime.toInt32(color) & _Runtime.toInt32(255.0)) / 255.0);
             var clip:Dynamic = _Runtime.select(_Runtime.strictEquals(type, 'inner'), function():Dynamic return cast (_Runtime.callValue(SurfaceBevel.readSourceAlpha__surfaceBevel, cast ([source, px, py] : Array<Dynamic>)) / 255.0), function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(type, 'outer'), function():Dynamic return cast (1.0 - (_Runtime.callValue(SurfaceBevel.readSourceAlpha__surfaceBevel, cast ([source, px, py] : Array<Dynamic>)) / 255.0)), function():Dynamic return cast 1.0));
             var edgeIntensity:Dynamic = HxMath.min(1.0, (HxMath.abs(gradient) * intensity));
-            _Runtime.setIndex(out, di, (Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(24.0))) & Std.int(255.0)));
-            _Runtime.setIndex(out, (di + 1.0), (Std.int((Std.int(color) >> Std.int(16.0))) & Std.int(255.0)));
-            _Runtime.setIndex(out, (di + 2.0), (Std.int((Std.int(color) >> Std.int(8.0))) & Std.int(255.0)));
+            _Runtime.setIndex(out, di, (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0)));
+            _Runtime.setIndex(out, (di + 1.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)));
+            _Runtime.setIndex(out, (di + 2.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)));
             _Runtime.setIndex(out, (di + 3.0), HxMath.round((((edgeIntensity * colorAlpha) * clip) * 255.0)));
             px++;
           }
@@ -75,7 +75,7 @@ class SurfaceBevel {
     }
   }
 
-  public static function blurField__surfaceBevel(field:Dynamic, scratch:Dynamic, w:Float, h:Float, radiusX:Null<Float>, radiusY:Null<Float>, passes:Null<Float>):Void {
+  public static function blurField__surfaceBevel(field:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, w:Float, h:Float, radiusX:Null<Float>, radiusY:Null<Float>, passes:Null<Float>):Void {
     var rx:Dynamic = cast _Runtime.UNDEFINED;
     var ry:Dynamic = cast _Runtime.UNDEFINED;
     var p:Dynamic = cast _Runtime.UNDEFINED;
@@ -117,7 +117,7 @@ class SurfaceBevel {
     return cast null;
   }
 
-  public static function sampleField__surfaceBevel(field:Dynamic, w:Float, h:Float, x:Float, y:Float):Float {
+  public static function sampleField__surfaceBevel(field:flighthq._internal._UInt8ClampedArray, w:Float, h:Float, x:Float, y:Float):Float {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(x, 0.0, '<'), function():Dynamic return cast _Runtime.compare(x, w, '>=')), function():Dynamic return cast _Runtime.compare(y, 0.0, '<')), function():Dynamic return cast _Runtime.compare(y, h, '>=')))) { return cast 0.0; }
     return cast (_Runtime.getIndex(field, ((((y * w) + x) * 4.0) + 3.0)) / 255.0);
     return cast null;

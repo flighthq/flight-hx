@@ -183,7 +183,7 @@ class SpritesheetPlayer {
     return cast null;
   }
 
-  public static function getCumulativeDurations__spritesheetPlayer(animation:SpritesheetAnimation):Dynamic {
+  public static function getCumulativeDurations__spritesheetPlayer(animation:SpritesheetAnimation):flighthq._internal._Float64Array {
     var cached:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure6:Dynamic = cast _Runtime.UNDEFINED;
     var frames:Dynamic = cast _Runtime.UNDEFINED;
@@ -201,7 +201,7 @@ class SpritesheetPlayer {
     frameDurations = _Runtime.field(__destructure6, 'frameDurations');
     n = _Runtime.field(frames, 'length');
     virtualCount = _Runtime.callValue(SpritesheetPlayer.resolveVirtualFrameCount__spritesheetPlayer, cast ([animation] : Array<Dynamic>));
-    arr = _Runtime.construct(_Runtime.globalValue('Float64Array'), [(virtualCount + 1.0)]);
+    arr = new flighthq._internal._Float64Array((virtualCount + 1.0));
     t = 0.0;
     {
       var vi:Dynamic = 0.0;
@@ -270,7 +270,7 @@ class SpritesheetPlayer {
       var lo:Dynamic = 0.0;
       var hi:Dynamic = (virtualCount - 1.0);
       while (_Runtime.truthy(_Runtime.compare(lo, hi, '<'))) {
-        var mid:Dynamic = (Std.int(((lo + hi) + 1.0)) >> Std.int(1.0));
+        var mid:Dynamic = (_Runtime.toInt32(((lo + hi) + 1.0)) >> _Runtime.toInt32(1.0));
         if (_Runtime.truthy(_Runtime.compare(_Runtime.getIndex(arr, mid), timeInLoop, '<='))) {
           (lo = cast (mid : Dynamic));
         } else {

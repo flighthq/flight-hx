@@ -72,8 +72,8 @@ class ShapeHitTestBuiltins {
       ry = (cast _Runtime.getIndex(buf, (i + 1.0)) : Float);
       rw = (cast _Runtime.getIndex(buf, (i + 2.0)) : Float);
       rh = (cast _Runtime.getIndex(buf, (i + 3.0)) : Float);
-      arx = _Runtime.orValue((Std.int(((cast _Runtime.getIndex(buf, (i + 4.0)) : Float) / 2.0)) | Std.int(0.0)), function():Dynamic return cast ((cast _Runtime.getIndex(buf, (i + 4.0)) : Float) / 2.0));
-      ary = _Runtime.orValue((Std.int(((cast _Runtime.getIndex(buf, (i + 5.0)) : Float) / 2.0)) | Std.int(0.0)), function():Dynamic return cast ((cast _Runtime.getIndex(buf, (i + 5.0)) : Float) / 2.0));
+      arx = _Runtime.orValue((_Runtime.toInt32(((cast _Runtime.getIndex(buf, (i + 4.0)) : Float) / 2.0)) | _Runtime.toInt32(0.0)), function():Dynamic return cast ((cast _Runtime.getIndex(buf, (i + 4.0)) : Float) / 2.0));
+      ary = _Runtime.orValue((_Runtime.toInt32(((cast _Runtime.getIndex(buf, (i + 5.0)) : Float) / 2.0)) | _Runtime.toInt32(0.0)), function():Dynamic return cast ((cast _Runtime.getIndex(buf, (i + 5.0)) : Float) / 2.0));
       cx = HxMath.min(arx, (rw / 2.0));
       cy = HxMath.min(ary, (rh / 2.0));
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(x, rx, '<'), function():Dynamic return cast _Runtime.compare(x, (rx + rw), '>')), function():Dynamic return cast _Runtime.compare(y, ry, '<')), function():Dynamic return cast _Runtime.compare(y, (ry + rh), '>')))) { return cast false; }

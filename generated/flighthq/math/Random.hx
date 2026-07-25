@@ -8,13 +8,13 @@ import flighthq.types.RandomSource;
 class Random {
   public static function createRandomSource(seed:Float):RandomSource {
     var a:Dynamic = cast _Runtime.UNDEFINED;
-    a = _Runtime.select(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([seed] : Array<Dynamic>)), function():Dynamic return cast _Runtime.unsignedShiftRight(Std.int(seed), Std.int(0.0)), function():Dynamic return cast 0.0);
+    a = _Runtime.select(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([seed] : Array<Dynamic>)), function():Dynamic return cast _Runtime.unsignedShiftRight(_Runtime.toInt32(seed), _Runtime.toInt32(0.0)), function():Dynamic return cast 0.0);
     return cast function seededRandom() {
       var t:Dynamic = cast _Runtime.UNDEFINED;
-      (a = cast ((Std.int((a + 1831565813.0)) | Std.int(0.0)) : Dynamic));
-      t = _Runtime.imul(Std.int((Std.int(a) ^ Std.int(_Runtime.unsignedShiftRight(Std.int(a), Std.int(15.0))))), Std.int((Std.int(1.0) | Std.int(a))));
-      (t = cast ((Std.int((t + _Runtime.imul(Std.int((Std.int(t) ^ Std.int(_Runtime.unsignedShiftRight(Std.int(t), Std.int(7.0))))), Std.int((Std.int(61.0) | Std.int(t)))))) ^ Std.int(t)) : Dynamic));
-      return cast (_Runtime.unsignedShiftRight(Std.int((Std.int(t) ^ Std.int(_Runtime.unsignedShiftRight(Std.int(t), Std.int(14.0))))), Std.int(0.0)) / 4294967296.0);
+      (a = cast ((_Runtime.toInt32((a + 1831565813.0)) | _Runtime.toInt32(0.0)) : Dynamic));
+      t = _Runtime.imul(_Runtime.toInt32((_Runtime.toInt32(a) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(a), _Runtime.toInt32(15.0))))), _Runtime.toInt32((_Runtime.toInt32(1.0) | _Runtime.toInt32(a))));
+      (t = cast ((_Runtime.toInt32((t + _Runtime.imul(_Runtime.toInt32((_Runtime.toInt32(t) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(t), _Runtime.toInt32(7.0))))), _Runtime.toInt32((_Runtime.toInt32(61.0) | _Runtime.toInt32(t)))))) ^ _Runtime.toInt32(t)) : Dynamic));
+      return cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(t) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(t), _Runtime.toInt32(14.0))))), _Runtime.toInt32(0.0)) / 4294967296.0);
     };
     return cast null;
   }

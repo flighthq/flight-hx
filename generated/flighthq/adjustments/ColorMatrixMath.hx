@@ -16,15 +16,15 @@ class ColorMatrixMath {
     var gOut:Dynamic = cast _Runtime.UNDEFINED;
     var bOut:Dynamic = cast _Runtime.UNDEFINED;
     var aOut:Dynamic = cast _Runtime.UNDEFINED;
-    r = (Std.int(_Runtime.unsignedShiftRight(Std.int(packedRgba), Std.int(24.0))) & Std.int(255.0));
-    g = (Std.int(_Runtime.unsignedShiftRight(Std.int(packedRgba), Std.int(16.0))) & Std.int(255.0));
-    b = (Std.int(_Runtime.unsignedShiftRight(Std.int(packedRgba), Std.int(8.0))) & Std.int(255.0));
-    a = (Std.int(packedRgba) & Std.int(255.0));
+    r = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packedRgba), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0));
+    g = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packedRgba), _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0));
+    b = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packedRgba), _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0));
+    a = (_Runtime.toInt32(packedRgba) & _Runtime.toInt32(255.0));
     rOut = _Runtime.callValue(ColorMatrixMath.clampByte__colorMatrixMath, cast ([(((((_Runtime.getIndex(matrix, 0.0) * r) + (_Runtime.getIndex(matrix, 1.0) * g)) + (_Runtime.getIndex(matrix, 2.0) * b)) + (_Runtime.getIndex(matrix, 3.0) * a)) + _Runtime.getIndex(matrix, 4.0))] : Array<Dynamic>));
     gOut = _Runtime.callValue(ColorMatrixMath.clampByte__colorMatrixMath, cast ([(((((_Runtime.getIndex(matrix, 5.0) * r) + (_Runtime.getIndex(matrix, 6.0) * g)) + (_Runtime.getIndex(matrix, 7.0) * b)) + (_Runtime.getIndex(matrix, 8.0) * a)) + _Runtime.getIndex(matrix, 9.0))] : Array<Dynamic>));
     bOut = _Runtime.callValue(ColorMatrixMath.clampByte__colorMatrixMath, cast ([(((((_Runtime.getIndex(matrix, 10.0) * r) + (_Runtime.getIndex(matrix, 11.0) * g)) + (_Runtime.getIndex(matrix, 12.0) * b)) + (_Runtime.getIndex(matrix, 13.0) * a)) + _Runtime.getIndex(matrix, 14.0))] : Array<Dynamic>));
     aOut = _Runtime.callValue(ColorMatrixMath.clampByte__colorMatrixMath, cast ([(((((_Runtime.getIndex(matrix, 15.0) * r) + (_Runtime.getIndex(matrix, 16.0) * g)) + (_Runtime.getIndex(matrix, 17.0) * b)) + (_Runtime.getIndex(matrix, 18.0) * a)) + _Runtime.getIndex(matrix, 19.0))] : Array<Dynamic>));
-    return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int((Std.int(rOut) << Std.int(24.0))) | Std.int((Std.int(gOut) << Std.int(16.0))))) | Std.int((Std.int(bOut) << Std.int(8.0))))) | Std.int(aOut))), Std.int(0.0));
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(rOut) << _Runtime.toInt32(24.0))) | _Runtime.toInt32((_Runtime.toInt32(gOut) << _Runtime.toInt32(16.0))))) | _Runtime.toInt32((_Runtime.toInt32(bOut) << _Runtime.toInt32(8.0))))) | _Runtime.toInt32(aOut))), _Runtime.toInt32(0.0));
     return cast null;
   }
 
@@ -60,9 +60,9 @@ class ColorMatrixMath {
     var tg:Dynamic = cast _Runtime.UNDEFINED;
     var tb:Dynamic = cast _Runtime.UNDEFINED;
     var keep:Dynamic = cast _Runtime.UNDEFINED;
-    tr = ((Std.int(_Runtime.unsignedShiftRight(Std.int(packedRgba), Std.int(24.0))) & Std.int(255.0)) * amount);
-    tg = ((Std.int(_Runtime.unsignedShiftRight(Std.int(packedRgba), Std.int(16.0))) & Std.int(255.0)) * amount);
-    tb = ((Std.int(_Runtime.unsignedShiftRight(Std.int(packedRgba), Std.int(8.0))) & Std.int(255.0)) * amount);
+    tr = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packedRgba), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0)) * amount);
+    tg = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packedRgba), _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) * amount);
+    tb = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packedRgba), _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) * amount);
     keep = (1.0 - amount);
     return cast cast ([keep, 0.0, 0.0, 0.0, tr, 0.0, keep, 0.0, 0.0, tg, 0.0, 0.0, keep, 0.0, tb, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;

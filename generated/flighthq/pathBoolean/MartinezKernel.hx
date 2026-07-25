@@ -127,7 +127,7 @@ class EventHeap__martinezKernel {
     _Runtime.callProperty(data, 'push', cast ([event] : Array<Dynamic>));
     i = (_Runtime.field(data, 'length') - 1.0);
     while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>'))) {
-      var parent:Dynamic = (Std.int((i - 1.0)) >> Std.int(1.0));
+      var parent:Dynamic = (_Runtime.toInt32((i - 1.0)) >> _Runtime.toInt32(1.0));
       if (_Runtime.truthy(_Runtime.compare(_Runtime.callValue(MartinezKernel.compareEvents__martinezKernel, cast ([_Runtime.getIndex(data, i), _Runtime.getIndex(data, parent)] : Array<Dynamic>)), 0.0, '<'))) {
         _Runtime.callValue(MartinezKernel.swap__martinezKernel, cast ([data, i, parent] : Array<Dynamic>));
         (i = cast (parent : Dynamic));
@@ -237,7 +237,7 @@ class MartinezKernel {
 
   public static function fillQueue__martinezKernel(contours:Array<PathBooleanContour>, isSubject:Bool, heap:EventHeap__martinezKernel):Void {
     for (contour in _Runtime.iterable(contours)) {
-      var count:Dynamic = (Std.int(_Runtime.field(contour, 'length')) >> Std.int(1.0));
+      var count:Dynamic = (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> _Runtime.toInt32(1.0));
       if (_Runtime.truthy(_Runtime.compare(count, 2.0, '<'))) { continue; }
       if (_Runtime.truthy(_Runtime.andValue(_Runtime.callValue(MartinezKernel.approxEqual__martinezKernel, cast ([_Runtime.getIndex(contour, 0.0), _Runtime.getIndex(contour, ((count - 1.0) * 2.0))] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(MartinezKernel.approxEqual__martinezKernel, cast ([_Runtime.getIndex(contour, 1.0), _Runtime.getIndex(contour, (((count - 1.0) * 2.0) + 1.0))] : Array<Dynamic>))))) {
         (count = cast ((count - 1.0) : Dynamic));
@@ -345,7 +345,7 @@ class MartinezKernel {
     lo = 0.0;
     hi = _Runtime.field(status, 'length');
     while (_Runtime.truthy(_Runtime.compare(lo, hi, '<'))) {
-      var mid:Dynamic = (Std.int((lo + hi)) >> Std.int(1.0));
+      var mid:Dynamic = (_Runtime.toInt32((lo + hi)) >> _Runtime.toInt32(1.0));
       if (_Runtime.truthy(_Runtime.compare(_Runtime.callValue(MartinezKernel.compareSegments__martinezKernel, cast ([_Runtime.getIndex(status, mid), event] : Array<Dynamic>)), 0.0, '<'))) { (lo = cast ((mid + 1.0) : Dynamic)); } else { (hi = cast (mid : Dynamic)); }
     }
     _Runtime.splice(status, Std.int(lo), Std.int(0.0), [event]);
@@ -558,7 +558,7 @@ class MartinezKernel {
     {
       var __switchValue = fillRule;
       if (__switchValue == 'evenOdd') {
-        return cast _Runtime.strictEquals((Std.int(HxMath.abs(winding)) & Std.int(1.0)), 1.0);
+        return cast _Runtime.strictEquals((_Runtime.toInt32(HxMath.abs(winding)) & _Runtime.toInt32(1.0)), 1.0);
       }
       else if (__switchValue == 'positive') {
         return cast _Runtime.compare(winding, 0.0, '>');

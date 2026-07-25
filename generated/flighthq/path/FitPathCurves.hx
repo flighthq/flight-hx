@@ -18,11 +18,11 @@ class FitPathCurves {
     _Runtime.setField(out, 'winding', _Runtime.field(source, 'winding'));
     toleranceSq = (tolerance * tolerance);
     for (contour in _Runtime.iterable(contours)) {
-      var n:Dynamic = (Std.int(_Runtime.field(contour, 'length')) >> Std.int(1.0));
+      var n:Dynamic = (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> _Runtime.toInt32(1.0));
       if (_Runtime.truthy(_Runtime.compare(n, 2.0, '<'))) { continue; }
       var closed:Dynamic = _Runtime.andValue(_Runtime.andValue(_Runtime.compare(n, 3.0, '>='), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(contour, 0.0), _Runtime.getIndex(contour, (_Runtime.field(contour, 'length') - 2.0)))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(contour, 1.0), _Runtime.getIndex(contour, (_Runtime.field(contour, 'length') - 1.0))));
       var pts:Dynamic = _Runtime.select(closed, function():Dynamic return cast _Runtime.slice(contour, 0.0, ((n - 1.0) * 2.0)), function():Dynamic return cast contour);
-      var pn:Dynamic = (Std.int(_Runtime.field(pts, 'length')) >> Std.int(1.0));
+      var pn:Dynamic = (_Runtime.toInt32(_Runtime.field(pts, 'length')) >> _Runtime.toInt32(1.0));
       if (_Runtime.truthy(_Runtime.compare(pn, 2.0, '<'))) { continue; }
       if (_Runtime.truthy(_Runtime.strictEquals(pn, 2.0))) {
         _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
@@ -227,7 +227,7 @@ class FitPathCurves {
     var maxDist:Dynamic = cast _Runtime.UNDEFINED;
     var splitPoint:Dynamic = cast _Runtime.UNDEFINED;
     maxDist = 0.0;
-    splitPoint = (Std.int(((last - first) + 1.0)) >> Std.int(1.0));
+    splitPoint = (_Runtime.toInt32(((last - first) + 1.0)) >> _Runtime.toInt32(1.0));
     {
       var i:Dynamic = 1.0;
       while (_Runtime.truthy(_Runtime.compare(i, (last - first), '<'))) {

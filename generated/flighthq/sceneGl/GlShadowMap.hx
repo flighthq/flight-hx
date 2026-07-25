@@ -47,7 +47,7 @@ class GlShadowMap {
     rigidProgram = _Runtime.callValue(ensureGlSceneProgram, cast ([state, 'shadow:depth', GlShadowMap.compileShadowDepthProgram__glShadowMap] : Array<Dynamic>));
     skinnedProgram = null;
     prevFramebuffer = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER_BINDING) : Null<Dynamic>);
-    prevViewport = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.VIEWPORT) : Dynamic);
+    prevViewport = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.VIEWPORT) : flighthq._internal._Int32Array);
     flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER, _Runtime.field(target, 'framebuffer'));
     flighthq._internal.backend.WebGl2Backend.viewport(gl, 0.0, 0.0, _Runtime.field(target, 'width'), _Runtime.field(target, 'height'));
     flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.DEPTH_TEST);
@@ -55,7 +55,7 @@ class GlShadowMap {
     flighthq._internal.backend.WebGl2Backend.depthMask(gl, true);
     flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.CULL_FACE);
     flighthq._internal.backend.WebGl2Backend.cullFace(gl, flighthq._internal.backend.WebGl2Backend.FRONT);
-    flighthq._internal.backend.WebGl2Backend.clear(gl, (Std.int(flighthq._internal.backend.WebGl2Backend.DEPTH_BUFFER_BIT) | Std.int(flighthq._internal.backend.WebGl2Backend.COLOR_BUFFER_BIT)));
+    flighthq._internal.backend.WebGl2Backend.clear(gl, (_Runtime.toInt32(flighthq._internal.backend.WebGl2Backend.DEPTH_BUFFER_BIT) | _Runtime.toInt32(flighthq._internal.backend.WebGl2Backend.COLOR_BUFFER_BIT)));
     boundProgram = null;
     _Runtime.callValue(forEachNodeDescendant, cast ([scene, function(node:Dynamic) {
       var mesh:Dynamic = cast _Runtime.UNDEFINED;
@@ -76,7 +76,7 @@ class GlShadowMap {
       if (_Runtime.truthy(skinned)) {
         var jointMatrices:Dynamic = _Runtime.field(_Runtime.field(_Runtime.field(mesh, 'skin'), 'skeleton'), 'jointMatrices');
         flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + SKIN_PALETTE_TEXTURE_UNIT));
-        _Runtime.callValue(uploadGlSkinPaletteTexture, cast ([gl, _Runtime.callValue(ensureGlSkinPalette, cast ([state] : Array<Dynamic>)), jointMatrices, (Std.int((_Runtime.field(jointMatrices, 'length') / 16.0)) | Std.int(0.0))] : Array<Dynamic>));
+        _Runtime.callValue(uploadGlSkinPaletteTexture, cast ([gl, _Runtime.callValue(ensureGlSkinPalette, cast ([state] : Array<Dynamic>)), jointMatrices, (_Runtime.toInt32((_Runtime.field(jointMatrices, 'length') / 16.0)) | _Runtime.toInt32(0.0))] : Array<Dynamic>));
         flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.coalesce(_Runtime.field(program, 'locJointTexture'), function():Dynamic return cast null), SKIN_PALETTE_TEXTURE_UNIT);
       }
       upload = _Runtime.callValue(ensureGlMeshUpload, cast ([state, _Runtime.field(mesh, 'geometry'), skinned] : Array<Dynamic>));

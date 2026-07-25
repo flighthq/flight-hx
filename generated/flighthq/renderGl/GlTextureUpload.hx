@@ -6,8 +6,8 @@ import flighthq._internal._Runtime;
 import flighthq.types.ImageResource;
 
 class GlTextureUpload {
-  public static function uploadGlTextureData(gl:Dynamic, target:Float, width:Float, height:Float, data:Dynamic):Void {
-    flighthq._internal.backend.WebGl2Backend.texImage2D(gl, target, 0.0, flighthq._internal.backend.WebGl2Backend.RGBA, width, height, 0.0, flighthq._internal.backend.WebGl2Backend.RGBA, flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE, (cast data : Dynamic));
+  public static function uploadGlTextureData(gl:Dynamic, target:Float, width:Float, height:Float, data:flighthq._internal._UInt8ClampedArray):Void {
+    flighthq._internal.backend.WebGl2Backend.texImage2D(gl, target, 0.0, flighthq._internal.backend.WebGl2Backend.RGBA, width, height, 0.0, flighthq._internal.backend.WebGl2Backend.RGBA, flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE, (cast data : flighthq._internal._UInt8ClampedArray));
   }
 
   public static function uploadGlTextureElement(gl:Dynamic, target:Float, source:Dynamic):Void {

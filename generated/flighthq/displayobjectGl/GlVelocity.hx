@@ -116,8 +116,8 @@ class GlVelocity {
         {
           var c:Dynamic = 0.0;
           while (_Runtime.truthy(_Runtime.compare(c, 4.0, '<'))) {
-            var lx:Dynamic = ((Std.int(c) & Std.int(1.0)) * rw);
-            var ly:Dynamic = ((Std.int(c) >> Std.int(1.0)) * rh);
+            var lx:Dynamic = ((_Runtime.toInt32(c) & _Runtime.toInt32(1.0)) * rw);
+            var ly:Dynamic = ((_Runtime.toInt32(c) >> _Runtime.toInt32(1.0)) * rh);
             var rx:Dynamic = (((cosScale * lx) - (sinScale * ly)) + px);
             var ry:Dynamic = (((sinScale * lx) + (cosScale * ly)) + py);
             var wx:Dynamic = _Runtime.select(worldSpace, function():Dynamic return cast rx, function():Dynamic return cast (((wa * rx) + (wc * ry)) + wtx));

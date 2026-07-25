@@ -6,15 +6,15 @@ import flighthq._internal._Runtime;
 import flighthq.types.SurfaceRegion;
 
 class SurfaceMorphological {
-  public static function dilateSurface(out:Dynamic, source:SurfaceRegion, radius:Float):Void {
+  public static function dilateSurface(out:flighthq._internal._UInt8ClampedArray, source:SurfaceRegion, radius:Float):Void {
     _Runtime.callValue(SurfaceMorphological.applyMorphological__surfaceMorphological, cast ([out, source, radius, true] : Array<Dynamic>));
   }
 
-  public static function erodeSurface(out:Dynamic, source:SurfaceRegion, radius:Float):Void {
+  public static function erodeSurface(out:flighthq._internal._UInt8ClampedArray, source:SurfaceRegion, radius:Float):Void {
     _Runtime.callValue(SurfaceMorphological.applyMorphological__surfaceMorphological, cast ([out, source, radius, false] : Array<Dynamic>));
   }
 
-  public static function applyMorphological__surfaceMorphological(out:Dynamic, source:SurfaceRegion, radius:Float, dilate:Bool):Void {
+  public static function applyMorphological__surfaceMorphological(out:flighthq._internal._UInt8ClampedArray, source:SurfaceRegion, radius:Float, dilate:Bool):Void {
     var r:Dynamic = cast _Runtime.UNDEFINED;
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;

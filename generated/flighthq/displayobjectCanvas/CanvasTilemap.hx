@@ -65,7 +65,7 @@ class CanvasTilemap {
             if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(region, 'width'), 0.0, '<='), function():Dynamic return cast _Runtime.compare(_Runtime.field(region, 'height'), 0.0, '<=')))) { col++; continue; }
             var dx:Dynamic = (col * tileWidth);
             var dy:Dynamic = (row * tileHeight);
-            flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([image, _Runtime.field(region, 'x'), _Runtime.field(region, 'y'), _Runtime.field(region, 'width'), _Runtime.field(region, 'height'), _Runtime.select(roundPixels, function():Dynamic return cast (Std.int(dx) | Std.int(0.0)), function():Dynamic return cast dx), _Runtime.select(roundPixels, function():Dynamic return cast (Std.int(dy) | Std.int(0.0)), function():Dynamic return cast dy), _Runtime.field(region, 'width'), _Runtime.field(region, 'height')] : Array<Dynamic>));
+            flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([image, _Runtime.field(region, 'x'), _Runtime.field(region, 'y'), _Runtime.field(region, 'width'), _Runtime.field(region, 'height'), _Runtime.select(roundPixels, function():Dynamic return cast (_Runtime.toInt32(dx) | _Runtime.toInt32(0.0)), function():Dynamic return cast dx), _Runtime.select(roundPixels, function():Dynamic return cast (_Runtime.toInt32(dy) | _Runtime.toInt32(0.0)), function():Dynamic return cast dy), _Runtime.field(region, 'width'), _Runtime.field(region, 'height')] : Array<Dynamic>));
             col++;
           }
         }

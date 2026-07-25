@@ -110,6 +110,7 @@ export function generateCoreModules(workspaceDirectory: string, check: boolean):
   }
   fillGenericArguments(loweredPackages.flatMap((item) => item.lowered.declarations));
   flattenStructuralTypes(types.lowered.declarations);
+  padContextualObjectFunctionParameters(loweredPackages.flatMap((item) => item.lowered.declarations));
   for (const item of loweredPackages) inlineDefaultConstants(item.lowered.declarations);
   const declarationsBeforePatches = loweredPackages.flatMap((item) => item.lowered.declarations);
   const patchAudit = applySemanticPatches(declarationsBeforePatches, patches, workspaceDirectory);
@@ -600,7 +601,9 @@ function computeExternalTypeNames(modules: IrModule[]): Set<string> {
     if (!value || typeof value !== 'object') return;
     const record = value as Record<string, unknown>;
     if (record.kind === 'named' && typeof record.name === 'string') referenced.add(record.name);
-    Object.values(record).forEach(collect);
+    Object.entries(record).forEach(([key, item]) => {
+      if (key !== 'contextualParameters') collect(item);
+    });
   };
   for (const module of modules) collect(module.declarations);
   const external = new Set<string>();
@@ -927,7 +930,9 @@ function collectReferencedNamedTypes(value: unknown, canonicalNames: ReadonlySet
   if (record.kind === 'named' && typeof record.name === 'string' && canonicalNames.has(record.name)) {
     output.add(record.name);
   }
-  Object.values(record).forEach((item) => collectReferencedNamedTypes(item, canonicalNames, output));
+  Object.entries(record).forEach(([key, item]) => {
+    if (key !== 'contextualParameters') collectReferencedNamedTypes(item, canonicalNames, output);
+  });
 }
 
 function removeStaleGeneratedModules(directory: string, expected: ReadonlySet<string>, check: boolean): void {
@@ -1056,6 +1061,61 @@ function typeSpecificity(type: IrType): number {
     case 'dynamic':
       return 0;
   }
+}
+
+export function padContextualObjectFunctionParameters(declarations: IrDeclaration[]): void {
+  const definitions = new Map(
+    declarations
+      .filter((declaration) => declaration.kind === 'type')
+      .map((declaration) => [declaration.name, declaration.type]),
+  );
+  const fieldsForType = (type: IrType, stack: ReadonlySet<string> = new Set()): IrTypeField[] => {
+    if (type.kind === 'anonymous') {
+      return [...type.extends.flatMap((parent) => fieldsForType(parent, stack)), ...type.fields];
+    }
+    if (type.kind === 'nullable') return fieldsForType(type.inner, stack);
+    if (type.kind !== 'named' || stack.has(type.name)) return [];
+    const definition = definitions.get(type.name);
+    return definition ? fieldsForType(definition, new Set([...stack, type.name])) : [];
+  };
+  const isType = (value: unknown): value is IrType =>
+    Boolean(
+      value &&
+      typeof value === 'object' &&
+      ['anonymous', 'array', 'dynamic', 'function', 'named', 'nullable', 'primitive'].includes(
+        (value as { kind?: string }).kind ?? '',
+      ),
+    );
+  const visit = (value: unknown): void => {
+    if (Array.isArray(value)) {
+      value.forEach(visit);
+      return;
+    }
+    if (!value || typeof value !== 'object') return;
+    const record = value as Record<string, unknown>;
+    if (
+      record.initializer &&
+      typeof record.initializer === 'object' &&
+      (record.initializer as { kind?: string }).kind === 'object' &&
+      isType(record.type)
+    ) {
+      const initializer = record.initializer as Extract<IrExpression, { kind: 'object' }>;
+      const fields = new Map(fieldsForType(record.type).map((field) => [field.name, field]));
+      for (const property of initializer.properties) {
+        if (property.kind !== 'property' || property.value.kind !== 'function') continue;
+        const contextual = fields.get(property.name)?.contextualParameters;
+        if (!contextual || property.value.parameters.length >= contextual.length) continue;
+        property.value.parameters.push(
+          ...contextual.slice(property.value.parameters.length).map((parameter) => ({
+            ...parameter,
+            initializer: undefined,
+          })),
+        );
+      }
+    }
+    Object.values(record).forEach(visit);
+  };
+  declarations.forEach(visit);
 }
 
 function fillGenericArguments(declarations: IrDeclaration[]): void {

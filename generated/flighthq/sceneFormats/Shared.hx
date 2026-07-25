@@ -64,7 +64,7 @@ class Shared {
     }
   }
 
-  public static function convertTransformLhToRh(transform:Dynamic):Void {
+  public static function convertTransformLhToRh(transform:flighthq._internal._Float64Array):Void {
     _Runtime.setIndex(transform, 2.0, _Runtime.normalizeZero(-_Runtime.getIndex(transform, 2.0)));
     _Runtime.setIndex(transform, 5.0, _Runtime.normalizeZero(-_Runtime.getIndex(transform, 5.0)));
     _Runtime.setIndex(transform, 6.0, _Runtime.normalizeZero(-_Runtime.getIndex(transform, 6.0)));

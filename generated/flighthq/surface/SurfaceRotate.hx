@@ -41,7 +41,7 @@ class SurfaceRotate {
       var data:Dynamic = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
       var stride:Dynamic = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
       var total:Dynamic = (w * h);
-      var half:Dynamic = (Std.int(total) >> Std.int(1.0));
+      var half:Dynamic = (_Runtime.toInt32(total) >> _Runtime.toInt32(1.0));
       {
         var k:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(k, half, '<'))) {
@@ -154,7 +154,7 @@ class SurfaceRotate {
     _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  public static function copyPixel__surfaceRotate(dest:Dynamic, di:Float, source:Dynamic, si:Float):Void {
+  public static function copyPixel__surfaceRotate(dest:flighthq._internal._UInt8ClampedArray, di:Float, source:flighthq._internal._UInt8ClampedArray, si:Float):Void {
     _Runtime.setIndex(dest, di, _Runtime.getIndex(source, si));
     _Runtime.setIndex(dest, (di + 1.0), _Runtime.getIndex(source, (si + 1.0)));
     _Runtime.setIndex(dest, (di + 2.0), _Runtime.getIndex(source, (si + 2.0)));
@@ -171,7 +171,7 @@ class SurfaceRotate {
     return cast null;
   }
 
-  public static function swapPixels__surfaceRotate(data:Dynamic, a:Float, b:Float):Void {
+  public static function swapPixels__surfaceRotate(data:flighthq._internal._UInt8ClampedArray, a:Float, b:Float):Void {
     {
       var c:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(c, 4.0, '<'))) {

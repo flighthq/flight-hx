@@ -86,7 +86,7 @@ class Md2Parse {
     view = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(bytes, 'buffer'), _Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')]);
     magic = _Runtime.callProperty(view, 'getInt32', cast ([0.0, true] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(magic, MD2_MAGIC))) {
-      _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd2: invalid magic 0x' + Std.string(_Runtime.numberToString(_Runtime.unsignedShiftRight(Std.int(magic), Std.int(0.0)), 16.0)) + ', expected 0x32504449 (IDP2)'] : Array<Dynamic>));
+      _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd2: invalid magic 0x' + Std.string(_Runtime.numberToString(_Runtime.unsignedShiftRight(_Runtime.toInt32(magic), _Runtime.toInt32(0.0)), 16.0)) + ', expected 0x32504449 (IDP2)'] : Array<Dynamic>));
       return cast _Runtime.callValue(Md2Parse.emptyMd2Document__md2Parse, cast ([] : Array<Dynamic>));
     }
     version = _Runtime.callProperty(view, 'getInt32', cast ([4.0, true] : Array<Dynamic>));

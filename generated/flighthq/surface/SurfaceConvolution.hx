@@ -7,7 +7,7 @@ import flighthq.types.SurfaceConvolutionOptions;
 import flighthq.types.SurfaceRegion;
 
 class SurfaceConvolution {
-  public static function convolveSurface(out:Dynamic, source:SurfaceRegion, options:SurfaceConvolutionOptions):Void {
+  public static function convolveSurface(out:flighthq._internal._UInt8ClampedArray, source:SurfaceRegion, options:SurfaceConvolutionOptions):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var matrix:Dynamic = cast _Runtime.UNDEFINED;
     var matrixX:Dynamic = cast _Runtime.UNDEFINED;

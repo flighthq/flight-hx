@@ -10,11 +10,11 @@ class PremultiplyColorAlpha {
     var r:Dynamic = cast _Runtime.UNDEFINED;
     var g:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
-    a = ((Std.int(color) & Std.int(255.0)) / 255.0);
-    r = HxMath.round(((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(24.0))) & Std.int(255.0)) * a));
-    g = HxMath.round(((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(16.0))) & Std.int(255.0)) * a));
-    b = HxMath.round(((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(8.0))) & Std.int(255.0)) * a));
-    return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int((Std.int(r) << Std.int(24.0))) | Std.int((Std.int(g) << Std.int(16.0))))) | Std.int((Std.int(b) << Std.int(8.0))))) | Std.int((Std.int(color) & Std.int(255.0))))), Std.int(0.0));
+    a = ((_Runtime.toInt32(color) & _Runtime.toInt32(255.0)) / 255.0);
+    r = HxMath.round(((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0)) * a));
+    g = HxMath.round(((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) * a));
+    b = HxMath.round(((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) * a));
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(r) << _Runtime.toInt32(24.0))) | _Runtime.toInt32((_Runtime.toInt32(g) << _Runtime.toInt32(16.0))))) | _Runtime.toInt32((_Runtime.toInt32(b) << _Runtime.toInt32(8.0))))) | _Runtime.toInt32((_Runtime.toInt32(color) & _Runtime.toInt32(255.0))))), _Runtime.toInt32(0.0));
     return cast null;
   }
 
@@ -23,12 +23,12 @@ class PremultiplyColorAlpha {
     var r:Dynamic = cast _Runtime.UNDEFINED;
     var g:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
-    a = ((Std.int(color) & Std.int(255.0)) / 255.0);
+    a = ((_Runtime.toInt32(color) & _Runtime.toInt32(255.0)) / 255.0);
     if (_Runtime.truthy(_Runtime.strictEquals(a, 0.0))) { return cast color; }
-    r = HxMath.min(255.0, HxMath.round(((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(24.0))) & Std.int(255.0)) / a)));
-    g = HxMath.min(255.0, HxMath.round(((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(16.0))) & Std.int(255.0)) / a)));
-    b = HxMath.min(255.0, HxMath.round(((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(8.0))) & Std.int(255.0)) / a)));
-    return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int((Std.int(r) << Std.int(24.0))) | Std.int((Std.int(g) << Std.int(16.0))))) | Std.int((Std.int(b) << Std.int(8.0))))) | Std.int((Std.int(color) & Std.int(255.0))))), Std.int(0.0));
+    r = HxMath.min(255.0, HxMath.round(((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0)) / a)));
+    g = HxMath.min(255.0, HxMath.round(((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) / a)));
+    b = HxMath.min(255.0, HxMath.round(((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) / a)));
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(r) << _Runtime.toInt32(24.0))) | _Runtime.toInt32((_Runtime.toInt32(g) << _Runtime.toInt32(16.0))))) | _Runtime.toInt32((_Runtime.toInt32(b) << _Runtime.toInt32(8.0))))) | _Runtime.toInt32((_Runtime.toInt32(color) & _Runtime.toInt32(255.0))))), _Runtime.toInt32(0.0));
     return cast null;
   }
 }

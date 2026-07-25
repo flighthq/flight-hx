@@ -57,9 +57,9 @@ class CanvasSourceModeCompositing {
     var g:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
     var a:Dynamic = cast _Runtime.UNDEFINED;
-    r = (Std.int((Std.int(color) >> Std.int(16.0))) & Std.int(255.0));
-    g = (Std.int((Std.int(color) >> Std.int(8.0))) & Std.int(255.0));
-    b = (Std.int(color) & Std.int(255.0));
+    r = (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0));
+    g = (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0));
+    b = (_Runtime.toInt32(color) & _Runtime.toInt32(255.0));
     a = HxMath.max(0.0, HxMath.min(1.0, alpha));
     return cast 'rgba(' + Std.string(r) + ',' + Std.string(g) + ',' + Std.string(b) + ',' + Std.string(_Runtime.toFixed(a, 3.0)) + ')';
     return cast null;

@@ -32,16 +32,16 @@ class SurfaceDissolve {
     total = (width * height);
     if (_Runtime.truthy(_Runtime.compare(total, 0.0, '<='))) { return cast seed; }
     bits = 0.0;
-    while (_Runtime.truthy(_Runtime.compare((Std.int(1.0) << Std.int(bits)), total, '<'))) { bits++; }
-    period = (Std.int(1.0) << Std.int(bits));
+    while (_Runtime.truthy(_Runtime.compare((_Runtime.toInt32(1.0) << _Runtime.toInt32(bits)), total, '<'))) { bits++; }
+    period = (_Runtime.toInt32(1.0) << _Runtime.toInt32(bits));
     mask = (period - 1.0);
-    cursor = _Runtime.select(_Runtime.compare(seed, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(seed, period, '>'), function():Dynamic return cast period, function():Dynamic return cast (Std.int(seed) | Std.int(0.0))));
+    cursor = _Runtime.select(_Runtime.compare(seed, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(seed, period, '>'), function():Dynamic return cast period, function():Dynamic return cast (_Runtime.toInt32(seed) | _Runtime.toInt32(0.0))));
     if (_Runtime.truthy(_Runtime.compare(pixelCount, 0.0, '<='))) { return cast cursor; }
     toFill = _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(source, 'surface'), _Runtime.field(dest, 'surface')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(source, 'x'), _Runtime.field(dest, 'x'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(source, 'y'), _Runtime.field(dest, 'y'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(source, 'width'), _Runtime.field(dest, 'width'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(source, 'height'), _Runtime.field(dest, 'height')));
-    fillR = (Std.int(_Runtime.unsignedShiftRight(Std.int(fillColor), Std.int(24.0))) & Std.int(255.0));
-    fillG = (Std.int((Std.int(fillColor) >> Std.int(16.0))) & Std.int(255.0));
-    fillB = (Std.int((Std.int(fillColor) >> Std.int(8.0))) & Std.int(255.0));
-    fillA = (Std.int(fillColor) & Std.int(255.0));
+    fillR = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(fillColor), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0));
+    fillG = (_Runtime.toInt32((_Runtime.toInt32(fillColor) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0));
+    fillB = (_Runtime.toInt32((_Runtime.toInt32(fillColor) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0));
+    fillA = (_Runtime.toInt32(fillColor) & _Runtime.toInt32(255.0));
     destData = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
     destStride = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
     destSurfaceHeight = _Runtime.field(_Runtime.field(dest, 'surface'), 'height');
@@ -55,7 +55,7 @@ class SurfaceDissolve {
       if (_Runtime.truthy(_Runtime.compare(pixelIndex, total, '>='))) { continue; }
       dissolved++;
       var px:Dynamic = (pixelIndex % width);
-      var py:Dynamic = (Std.int((pixelIndex / width)) | Std.int(0.0));
+      var py:Dynamic = (_Runtime.toInt32((pixelIndex / width)) | _Runtime.toInt32(0.0));
       var dx:Dynamic = (_Runtime.field(dest, 'x') + px);
       var dy:Dynamic = (_Runtime.field(dest, 'y') + py);
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(dx, 0.0, '<'), function():Dynamic return cast _Runtime.compare(dx, destStride, '>=')), function():Dynamic return cast _Runtime.compare(dy, 0.0, '<')), function():Dynamic return cast _Runtime.compare(dy, destSurfaceHeight, '>=')))) { continue; }
@@ -84,13 +84,13 @@ class SurfaceDissolve {
   public static function permutePixelIndex__surfaceDissolve(cursor:Float, bits:Float, mask:Float):Float {
     var v:Dynamic = cast _Runtime.UNDEFINED;
     var shift:Dynamic = cast _Runtime.UNDEFINED;
-    v = (Std.int(cursor) & Std.int(mask));
-    shift = _Runtime.select(_Runtime.compare(bits, 1.0, '>'), function():Dynamic return cast (Std.int(bits) >> Std.int(1.0)), function():Dynamic return cast 1.0);
-    (v = cast ((Std.int(_Runtime.imul(Std.int(v), Std.int(2654435761.0))) & Std.int(mask)) : Dynamic));
-    (v = (Std.int(v) ^ Std.int(_Runtime.unsignedShiftRight(Std.int(v), Std.int(shift)))));
-    (v = cast ((Std.int(_Runtime.imul(Std.int(v), Std.int(2246822519.0))) & Std.int(mask)) : Dynamic));
-    (v = (Std.int(v) ^ Std.int((Std.int(668265263.0) & Std.int(mask)))));
-    return cast (Std.int(v) & Std.int(mask));
+    v = (_Runtime.toInt32(cursor) & _Runtime.toInt32(mask));
+    shift = _Runtime.select(_Runtime.compare(bits, 1.0, '>'), function():Dynamic return cast (_Runtime.toInt32(bits) >> _Runtime.toInt32(1.0)), function():Dynamic return cast 1.0);
+    (v = cast ((_Runtime.toInt32(_Runtime.imul(_Runtime.toInt32(v), _Runtime.toInt32(2654435761.0))) & _Runtime.toInt32(mask)) : Dynamic));
+    (v = (_Runtime.toInt32(v) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(v), _Runtime.toInt32(shift)))));
+    (v = cast ((_Runtime.toInt32(_Runtime.imul(_Runtime.toInt32(v), _Runtime.toInt32(2246822519.0))) & _Runtime.toInt32(mask)) : Dynamic));
+    (v = (_Runtime.toInt32(v) ^ _Runtime.toInt32((_Runtime.toInt32(668265263.0) & _Runtime.toInt32(mask)))));
+    return cast (_Runtime.toInt32(v) & _Runtime.toInt32(mask));
     return cast null;
   }
 }

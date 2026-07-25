@@ -101,7 +101,7 @@ class GlInnerShadowEffect {
   public static function getInvertTintEdgeColor__glInnerShadowEffect(color:Float, alpha:Float, strength:Float):Array<Float> {
     var edgeAlpha:Dynamic = cast _Runtime.UNDEFINED;
     edgeAlpha = HxMath.min(1.0, (alpha * strength));
-    return cast cast ([(((Std.int((Std.int(color) >> Std.int(16.0))) & Std.int(255.0)) / 255.0) * edgeAlpha), (((Std.int((Std.int(color) >> Std.int(8.0))) & Std.int(255.0)) / 255.0) * edgeAlpha), (((Std.int(color) & Std.int(255.0)) / 255.0) * edgeAlpha), edgeAlpha] : Array<Dynamic>);
+    return cast cast ([(((_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) / 255.0) * edgeAlpha), (((_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) / 255.0) * edgeAlpha), (((_Runtime.toInt32(color) & _Runtime.toInt32(255.0)) / 255.0) * edgeAlpha), edgeAlpha] : Array<Dynamic>);
     return cast null;
   }
 }

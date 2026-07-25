@@ -1640,9 +1640,9 @@ function emitExpression(expression: IrExpression): string {
         const current = `_Runtime.getIndex(${object}, ${index})`;
         const value =
           operator === '>>>'
-            ? `_Runtime.unsignedShiftRight(Std.int(${current}), Std.int(${emitExpression(expression.right)}))`
+            ? `_Runtime.unsignedShiftRight(_Runtime.toInt32(${current}), _Runtime.toInt32(${emitExpression(expression.right)}))`
             : ['&', '|', '^', '<<', '>>'].includes(operator)
-              ? `(Std.int(${current}) ${operator} Std.int(${emitExpression(expression.right)}))`
+              ? `(_Runtime.toInt32(${current}) ${operator} _Runtime.toInt32(${emitExpression(expression.right)}))`
               : `(${current} ${operator} ${emitExpression(expression.right)})`;
         return `_Runtime.setIndex(${object}, ${index}, ${value})`;
       }
@@ -1738,17 +1738,17 @@ function emitExpression(expression: IrExpression): string {
         return expression.operator.startsWith('!') ? `!${equal}` : equal;
       }
       if (expression.kind === 'binary' && ['&', '|', '^', '<<', '>>'].includes(expression.operator)) {
-        return `(Std.int(${emitExpression(expression.left)}) ${expression.operator} Std.int(${emitExpression(expression.right)}))`;
+        return `(_Runtime.toInt32(${emitExpression(expression.left)}) ${expression.operator} _Runtime.toInt32(${emitExpression(expression.right)}))`;
       }
       if (expression.kind === 'binary' && expression.operator === '>>>') {
-        return `_Runtime.unsignedShiftRight(Std.int(${emitExpression(expression.left)}), Std.int(${emitExpression(expression.right)}))`;
+        return `_Runtime.unsignedShiftRight(_Runtime.toInt32(${emitExpression(expression.left)}), _Runtime.toInt32(${emitExpression(expression.right)}))`;
       }
       if (expression.kind === 'assignment' && ['&=', '|=', '^=', '<<=', '>>=', '>>>='].includes(expression.operator)) {
         const operator = expression.operator.slice(0, -1);
         const value =
           operator === '>>>'
-            ? `_Runtime.unsignedShiftRight(Std.int(${emitExpression(expression.left)}), Std.int(${emitExpression(expression.right)}))`
-            : `(Std.int(${emitExpression(expression.left)}) ${operator} Std.int(${emitExpression(expression.right)}))`;
+            ? `_Runtime.unsignedShiftRight(_Runtime.toInt32(${emitExpression(expression.left)}), _Runtime.toInt32(${emitExpression(expression.right)}))`
+            : `(_Runtime.toInt32(${emitExpression(expression.left)}) ${operator} _Runtime.toInt32(${emitExpression(expression.right)}))`;
         return `(${emitExpression(expression.left)} = ${value})`;
       }
       if (expression.kind === 'assignment' && ['+=', '-=', '*=', '/=', '%='].includes(expression.operator)) {
@@ -1991,7 +1991,7 @@ function emitExpression(expression: IrExpression): string {
       }
       if (expression.operator === 'void') return `_Runtime.voidValue(${emitExpression(expression.operand)})`;
       if (expression.operator === '!') return `!_Runtime.truthy(${emitExpression(expression.operand)})`;
-      if (expression.operator === '~') return `~Std.int(${emitExpression(expression.operand)})`;
+      if (expression.operator === '~') return `~_Runtime.toInt32(${emitExpression(expression.operand)})`;
       if (expression.operand.kind === 'element' && (expression.operator === '++' || expression.operator === '--')) {
         if (expression.operand.binding === 'WebGl2Backend') {
           throw new Error('WebGL2 computed property mutation has no typed backend endpoint');
@@ -2212,7 +2212,7 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
     }
     if (owner === 'Date' && name === 'now') return '_Runtime.nowMilliseconds()';
     if (owner === 'HxMath' && name === 'imul') {
-      return `_Runtime.imul(${expression.arguments.map((argument) => `Std.int(${emitExpression(argument)})`).join(', ')})`;
+      return `_Runtime.imul(${expression.arguments.map((argument) => `_Runtime.toInt32(${emitExpression(argument)})`).join(', ')})`;
     }
     if (owner === 'HxMath' && (name === 'max' || name === 'min') && expression.arguments.length > 2) {
       return expression.arguments
@@ -2367,9 +2367,14 @@ function typedArrayConstructor(expression: IrExpression): string | undefined {
   if (!name) return undefined;
   return {
     Float32Array: 'flighthq._internal._Float32Array',
+    Float64Array: 'flighthq._internal._Float64Array',
     Int16Array: 'flighthq._internal._Int16Array',
+    Int32Array: 'flighthq._internal._Int32Array',
+    Int8Array: 'flighthq._internal._Int8Array',
     Uint16Array: 'flighthq._internal._UInt16Array',
+    Uint32Array: 'flighthq._internal._UInt32Array',
     Uint8Array: 'flighthq._internal._UInt8Array',
+    Uint8ClampedArray: 'flighthq._internal._UInt8ClampedArray',
   }[name];
 }
 

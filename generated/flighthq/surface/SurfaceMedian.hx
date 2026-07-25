@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.SurfaceRegion;
 
 class SurfaceMedian {
-  public static function medianSurface(out:Dynamic, source:SurfaceRegion, radius:Float):Void {
+  public static function medianSurface(out:flighthq._internal._UInt8ClampedArray, source:SurfaceRegion, radius:Float):Void {
     var r:Dynamic = cast _Runtime.UNDEFINED;
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
@@ -62,7 +62,7 @@ class SurfaceMedian {
                 ky++;
               }
             }
-            var mid:Dynamic = (Std.int(n) >> Std.int(1.0));
+            var mid:Dynamic = (_Runtime.toInt32(n) >> _Runtime.toInt32(1.0));
             var di:Dynamic = (((py * w) + px) * 4.0);
             _Runtime.setIndex(out, di, _Runtime.callValue(SurfaceMedian.medianOf__surfaceMedian, cast ([rs, n, mid] : Array<Dynamic>)));
             _Runtime.setIndex(out, (di + 1.0), _Runtime.callValue(SurfaceMedian.medianOf__surfaceMedian, cast ([gs, n, mid] : Array<Dynamic>)));

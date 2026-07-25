@@ -239,9 +239,9 @@ class GlDraw {
     _Runtime.callValue(uploadGlTextureData, cast ([gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, _Runtime.field(image, 'width'), _Runtime.field(image, 'height'), data] : Array<Dynamic>));
   }
 
-  public static function premultiplyStraightRgba8__glDraw(data:Dynamic):Dynamic {
+  public static function premultiplyStraightRgba8__glDraw(data:flighthq._internal._UInt8ClampedArray):flighthq._internal._UInt8ClampedArray {
     var out:Dynamic = cast _Runtime.UNDEFINED;
-    out = _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [_Runtime.field(data, 'length')]);
+    out = new flighthq._internal._UInt8ClampedArray(_Runtime.field(data, 'length'));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(data, 'length'), '<'))) {

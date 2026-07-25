@@ -30,7 +30,7 @@ class SkinMeshGeometry {
     layout = _Runtime.field(__destructure0, 'layout');
     vertices = _Runtime.field(__destructure0, 'vertices');
     floatsPerVertex = (_Runtime.field(layout, 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast (Std.int((_Runtime.field(vertices, 'length') / floatsPerVertex)) | Std.int(0.0)), function():Dynamic return cast 0.0);
+    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast (_Runtime.toInt32((_Runtime.field(vertices, 'length') / floatsPerVertex)) | _Runtime.toInt32(0.0)), function():Dynamic return cast 0.0);
     positionOffset = _Runtime.callValue(SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry, cast ([layout, 'position'] : Array<Dynamic>));
     normalOffset = _Runtime.callValue(SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry, cast ([layout, 'normal'] : Array<Dynamic>));
     positions = new flighthq._internal._Float32Array((vertexCount * 3.0));
@@ -95,7 +95,7 @@ class SkinMeshGeometry {
     __destructure2 = bindPose;
     skinnedNormals = _Runtime.field(__destructure2, 'skinnedNormals');
     skinnedPositions = _Runtime.field(__destructure2, 'skinnedPositions');
-    vertexCount = (Std.int((_Runtime.field(skinnedPositions, 'length') / 3.0)) | Std.int(0.0));
+    vertexCount = (_Runtime.toInt32((_Runtime.field(skinnedPositions, 'length') / 3.0)) | _Runtime.toInt32(0.0));
     {
       var v:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(v, vertexCount, '<'))) {
@@ -129,7 +129,7 @@ class SkinMeshGeometry {
     layout = _Runtime.field(__destructure3, 'layout');
     vertices = _Runtime.field(__destructure3, 'vertices');
     floatsPerVertex = (_Runtime.field(layout, 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.min((Std.int((_Runtime.field(vertices, 'length') / floatsPerVertex)) | Std.int(0.0)), (_Runtime.field(_Runtime.field(bindPose, 'positions'), 'length') / 3.0)), function():Dynamic return cast 0.0);
+    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.min((_Runtime.toInt32((_Runtime.field(vertices, 'length') / floatsPerVertex)) | _Runtime.toInt32(0.0)), (_Runtime.field(_Runtime.field(bindPose, 'positions'), 'length') / 3.0)), function():Dynamic return cast 0.0);
     positionOffset = _Runtime.callValue(SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry, cast ([layout, 'position'] : Array<Dynamic>));
     normalOffset = _Runtime.callValue(SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry, cast ([layout, 'normal'] : Array<Dynamic>));
     {

@@ -8,7 +8,7 @@ import flighthq.types.SurfaceRegion;
 import flighthq.types.SurfaceSharpenOptions;
 
 class SurfaceSharpen {
-  public static function sharpenSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceSharpenOptions):Void {
+  public static function sharpenSurface(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:SurfaceRegion, ?options:SurfaceSharpenOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     var amount:Dynamic = cast _Runtime.UNDEFINED;
     var w:Dynamic = cast _Runtime.UNDEFINED;

@@ -11,7 +11,7 @@ class TessellatePathTyped {
   public static function tessellatePathTyped(path:Path, tolerance:Dynamic = 0.25):PathMeshTyped {
     var mesh:Dynamic = cast _Runtime.UNDEFINED;
     mesh = _Runtime.callValue(tessellatePath, cast ([path, tolerance] : Array<Dynamic>));
-    return cast { vertices: new flighthq._internal._Float32Array(_Runtime.field(mesh, 'vertices')), indices: _Runtime.construct(_Runtime.globalValue('Uint32Array'), [_Runtime.field(mesh, 'indices')]) };
+    return cast { vertices: new flighthq._internal._Float32Array(_Runtime.field(mesh, 'vertices')), indices: new flighthq._internal._UInt32Array(_Runtime.field(mesh, 'indices')) };
     return cast null;
   }
 }

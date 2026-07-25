@@ -17,7 +17,7 @@ class SurfaceFlip {
     data = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
     stride = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
     if (_Runtime.truthy(_Runtime.callValue(SurfaceFlip.isSameRegion__surfaceFlip, cast ([dest, source] : Array<Dynamic>)))) {
-      var half:Dynamic = (Std.int(w) >> Std.int(1.0));
+      var half:Dynamic = (_Runtime.toInt32(w) >> _Runtime.toInt32(1.0));
       {
         var py:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(py, h, '<'))) {
@@ -52,7 +52,7 @@ class SurfaceFlip {
     data = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
     stride = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
     if (_Runtime.truthy(_Runtime.callValue(SurfaceFlip.isSameRegion__surfaceFlip, cast ([dest, source] : Array<Dynamic>)))) {
-      var half:Dynamic = (Std.int(h) >> Std.int(1.0));
+      var half:Dynamic = (_Runtime.toInt32(h) >> _Runtime.toInt32(1.0));
       {
         var py:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(py, half, '<'))) {
@@ -117,7 +117,7 @@ class SurfaceFlip {
     return cast null;
   }
 
-  public static function swapPixels__surfaceFlip(data:Dynamic, a:Float, b:Float):Void {
+  public static function swapPixels__surfaceFlip(data:flighthq._internal._UInt8ClampedArray, a:Float, b:Float):Void {
     {
       var c:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(c, 4.0, '<'))) {

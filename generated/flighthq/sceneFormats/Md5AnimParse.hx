@@ -152,22 +152,22 @@ class Md5AnimParse {
             var qy:Dynamic = _Runtime.field(base, 'orientationY');
             var qz:Dynamic = _Runtime.field(base, 'orientationZ');
             var componentOffset:Dynamic = _Runtime.field(entry, 'startIndex');
-            if (_Runtime.truthy((Std.int(flags) & Std.int(Md5AnimParse.FLAG_TX__md5AnimParse)))) {
+            if (_Runtime.truthy((_Runtime.toInt32(flags) & _Runtime.toInt32(Md5AnimParse.FLAG_TX__md5AnimParse)))) {
               (tx = cast (_Runtime.coalesce(_Runtime.getIndex(frameData, componentOffset++), function():Dynamic return cast tx) : Dynamic));
             }
-            if (_Runtime.truthy((Std.int(flags) & Std.int(Md5AnimParse.FLAG_TY__md5AnimParse)))) {
+            if (_Runtime.truthy((_Runtime.toInt32(flags) & _Runtime.toInt32(Md5AnimParse.FLAG_TY__md5AnimParse)))) {
               (ty = cast (_Runtime.coalesce(_Runtime.getIndex(frameData, componentOffset++), function():Dynamic return cast ty) : Dynamic));
             }
-            if (_Runtime.truthy((Std.int(flags) & Std.int(Md5AnimParse.FLAG_TZ__md5AnimParse)))) {
+            if (_Runtime.truthy((_Runtime.toInt32(flags) & _Runtime.toInt32(Md5AnimParse.FLAG_TZ__md5AnimParse)))) {
               (tz = cast (_Runtime.coalesce(_Runtime.getIndex(frameData, componentOffset++), function():Dynamic return cast tz) : Dynamic));
             }
-            if (_Runtime.truthy((Std.int(flags) & Std.int(Md5AnimParse.FLAG_QX__md5AnimParse)))) {
+            if (_Runtime.truthy((_Runtime.toInt32(flags) & _Runtime.toInt32(Md5AnimParse.FLAG_QX__md5AnimParse)))) {
               (qx = cast (_Runtime.coalesce(_Runtime.getIndex(frameData, componentOffset++), function():Dynamic return cast qx) : Dynamic));
             }
-            if (_Runtime.truthy((Std.int(flags) & Std.int(Md5AnimParse.FLAG_QY__md5AnimParse)))) {
+            if (_Runtime.truthy((_Runtime.toInt32(flags) & _Runtime.toInt32(Md5AnimParse.FLAG_QY__md5AnimParse)))) {
               (qy = cast (_Runtime.coalesce(_Runtime.getIndex(frameData, componentOffset++), function():Dynamic return cast qy) : Dynamic));
             }
-            if (_Runtime.truthy((Std.int(flags) & Std.int(Md5AnimParse.FLAG_QZ__md5AnimParse)))) {
+            if (_Runtime.truthy((_Runtime.toInt32(flags) & _Runtime.toInt32(Md5AnimParse.FLAG_QZ__md5AnimParse)))) {
               (qz = cast (_Runtime.coalesce(_Runtime.getIndex(frameData, componentOffset++), function():Dynamic return cast qz) : Dynamic));
             }
             var sumSq:Dynamic = (((qx * qx) + (qy * qy)) + (qz * qz));

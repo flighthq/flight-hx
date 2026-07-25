@@ -13,29 +13,29 @@ import flighthq.types.SurfaceRegion;
 import flighthq.types.SurfaceShadowBlurOptions;
 
 class SurfaceShadow {
-  public static function dropShadowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceDropShadowOptions):Void {
+  public static function dropShadowSurface(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:SurfaceRegion, ?options:SurfaceDropShadowOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     _Runtime.callValue(SurfaceShadow.tintSurfaceAlphaMask__surfaceShadow, cast ([out, source, _Runtime.coalesce(_Runtime.field(options, 'color'), function():Dynamic return cast 255.0), _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0)] : Array<Dynamic>));
     _Runtime.callValue(SurfaceShadow.applyBlurPasses__surfaceShadow, cast ([out, scratch, _Runtime.field(source, 'width'), _Runtime.field(source, 'height'), options] : Array<Dynamic>));
   }
 
-  public static function glowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceGlowOptions):Void {
+  public static function glowSurface(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:SurfaceRegion, ?options:SurfaceGlowOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     _Runtime.callValue(SurfaceShadow.tintSurfaceAlphaMask__surfaceShadow, cast ([out, source, _Runtime.coalesce(_Runtime.field(options, 'color'), function():Dynamic return cast 4278190335.0), _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0)] : Array<Dynamic>));
     _Runtime.callValue(SurfaceShadow.applyBlurPasses__surfaceShadow, cast ([out, scratch, _Runtime.field(source, 'width'), _Runtime.field(source, 'height'), options] : Array<Dynamic>));
   }
 
-  public static function innerGlowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceInnerGlowOptions):Void {
+  public static function innerGlowSurface(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:SurfaceRegion, ?options:SurfaceInnerGlowOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     _Runtime.callValue(SurfaceShadow.applyInnerEffect__surfaceShadow, cast ([out, scratch, source, _Runtime.coalesce(_Runtime.field(options, 'color'), function():Dynamic return cast 4278190335.0), options, 0.0, 0.0] : Array<Dynamic>));
   }
 
-  public static function innerShadowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceInnerShadowOptions):Void {
+  public static function innerShadowSurface(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:SurfaceRegion, ?options:SurfaceInnerShadowOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     _Runtime.callValue(SurfaceShadow.applyInnerEffect__surfaceShadow, cast ([out, scratch, source, _Runtime.coalesce(_Runtime.field(options, 'color'), function():Dynamic return cast 255.0), options, _Runtime.coalesce(_Runtime.field(options, 'offsetX'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.field(options, 'offsetY'), function():Dynamic return cast 0.0)] : Array<Dynamic>));
   }
 
-  public static function applyBlurPasses__surfaceShadow(out:Dynamic, scratch:Dynamic, width:Float, height:Float, options:SurfaceShadowBlurOptions):Void {
+  public static function applyBlurPasses__surfaceShadow(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, width:Float, height:Float, options:SurfaceShadowBlurOptions):Void {
     var radiusX:Dynamic = cast _Runtime.UNDEFINED;
     var radiusY:Dynamic = cast _Runtime.UNDEFINED;
     var passes:Dynamic = cast _Runtime.UNDEFINED;
@@ -69,7 +69,7 @@ class SurfaceShadow {
     }
   }
 
-  public static function applyInnerEffect__surfaceShadow(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, color:Float, options:Dynamic, offsetX:Float, offsetY:Float):Void {
+  public static function applyInnerEffect__surfaceShadow(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:SurfaceRegion, color:Float, options:Dynamic, offsetX:Float, offsetY:Float):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var cr:Dynamic = cast _Runtime.UNDEFINED;
@@ -97,10 +97,10 @@ class SurfaceShadow {
       }
     }
     _Runtime.callValue(SurfaceShadow.applyBlurPasses__surfaceShadow, cast ([out, scratch, w, h, options] : Array<Dynamic>));
-    cr = (Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(24.0))) & Std.int(255.0));
-    cg = (Std.int((Std.int(color) >> Std.int(16.0))) & Std.int(255.0));
-    cb = (Std.int((Std.int(color) >> Std.int(8.0))) & Std.int(255.0));
-    ca = ((Std.int(color) & Std.int(255.0)) / 255.0);
+    cr = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0));
+    cg = (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0));
+    cb = (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0));
+    ca = ((_Runtime.toInt32(color) & _Runtime.toInt32(255.0)) / 255.0);
     scale = (HxMath.max(0.0, _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0)) * ca);
     {
       var py:Dynamic = 0.0;
@@ -133,16 +133,16 @@ class SurfaceShadow {
     return cast null;
   }
 
-  public static function tintSurfaceAlphaMask__surfaceShadow(out:Dynamic, source:SurfaceRegion, color:Float, intensity:Float):Void {
+  public static function tintSurfaceAlphaMask__surfaceShadow(out:flighthq._internal._UInt8ClampedArray, source:SurfaceRegion, color:Float, intensity:Float):Void {
     var cr:Dynamic = cast _Runtime.UNDEFINED;
     var cg:Dynamic = cast _Runtime.UNDEFINED;
     var cb:Dynamic = cast _Runtime.UNDEFINED;
     var ca:Dynamic = cast _Runtime.UNDEFINED;
     var alphaScale:Dynamic = cast _Runtime.UNDEFINED;
-    cr = (Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(24.0))) & Std.int(255.0));
-    cg = (Std.int((Std.int(color) >> Std.int(16.0))) & Std.int(255.0));
-    cb = (Std.int((Std.int(color) >> Std.int(8.0))) & Std.int(255.0));
-    ca = ((Std.int(color) & Std.int(255.0)) / 255.0);
+    cr = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0));
+    cg = (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0));
+    cb = (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0));
+    ca = ((_Runtime.toInt32(color) & _Runtime.toInt32(255.0)) / 255.0);
     alphaScale = (HxMath.max(0.0, intensity) * ca);
     {
       var py:Dynamic = 0.0;

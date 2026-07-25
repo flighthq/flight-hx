@@ -21,9 +21,14 @@ const portableTypeReferenceMap: Readonly<Record<string, string>> = {
   ArrayBuffer: 'haxe.io.Bytes',
   ArrayBufferView: 'haxe.io.ArrayBufferView',
   Float32Array: 'flighthq._internal._Float32Array',
+  Float64Array: 'flighthq._internal._Float64Array',
   Int16Array: 'flighthq._internal._Int16Array',
+  Int32Array: 'flighthq._internal._Int32Array',
+  Int8Array: 'flighthq._internal._Int8Array',
   Uint16Array: 'flighthq._internal._UInt16Array',
+  Uint32Array: 'flighthq._internal._UInt32Array',
   Uint8Array: 'flighthq._internal._UInt8Array',
+  Uint8ClampedArray: 'flighthq._internal._UInt8ClampedArray',
 };
 
 const platformDynamicTypes = new Set([
@@ -1024,6 +1029,9 @@ function lowerExpressionWithTypeArguments(node: ts.ExpressionWithTypeArguments, 
 function lowerTypeMember(node: ts.TypeElement, context: LoweringContext) {
   if (ts.isPropertySignature(node) && node.type) {
     return {
+      contextualParameters: ts.isFunctionTypeNode(node.type)
+        ? lowerParameterList(node.type.parameters, context).parameters
+        : undefined,
       name: propertyName(node.name, context),
       optional: Boolean(node.questionToken) || ts.isComputedPropertyName(node.name),
       type: lowerType(node.type, context),
@@ -1031,6 +1039,7 @@ function lowerTypeMember(node: ts.TypeElement, context: LoweringContext) {
   }
   if (ts.isMethodSignature(node)) {
     return {
+      contextualParameters: lowerParameterList(node.parameters, context).parameters,
       name: propertyName(node.name, context),
       optional: Boolean(node.questionToken),
       type: { kind: 'dynamic' as const },

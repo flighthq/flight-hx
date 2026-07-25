@@ -195,7 +195,7 @@ class MeshGeometryCompute {
     vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
     indices = _Runtime.field(geometry, 'indices');
     indexCount = _Runtime.select(indices, function():Dynamic return cast _Runtime.field(indices, 'length'), function():Dynamic return cast vertexCount);
-    accum = _Runtime.construct(_Runtime.globalValue('Float64Array'), [(vertexCount * 3.0)]);
+    accum = new flighthq._internal._Float64Array((vertexCount * 3.0));
     {
       var t:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare((t + 2.0), indexCount, '<'))) {
@@ -262,8 +262,8 @@ class MeshGeometryCompute {
     vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
     indices = _Runtime.field(geometry, 'indices');
     indexCount = _Runtime.select(indices, function():Dynamic return cast _Runtime.field(indices, 'length'), function():Dynamic return cast vertexCount);
-    tan = _Runtime.construct(_Runtime.globalValue('Float64Array'), [(vertexCount * 3.0)]);
-    bitan = _Runtime.construct(_Runtime.globalValue('Float64Array'), [(vertexCount * 3.0)]);
+    tan = new flighthq._internal._Float64Array((vertexCount * 3.0));
+    bitan = new flighthq._internal._Float64Array((vertexCount * 3.0));
     {
       var t:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare((t + 2.0), indexCount, '<'))) {

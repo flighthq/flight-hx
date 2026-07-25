@@ -508,7 +508,7 @@ class ThreeDsParse {
     r = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, _Runtime.getIndex(rgb, 0.0))) * 255.0));
     g = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, _Runtime.getIndex(rgb, 1.0))) * 255.0));
     b = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, _Runtime.getIndex(rgb, 2.0))) * 255.0));
-    return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int((Std.int(r) << Std.int(24.0))) | Std.int((Std.int(g) << Std.int(16.0))))) | Std.int((Std.int(b) << Std.int(8.0))))) | Std.int(255.0))), Std.int(0.0));
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(r) << _Runtime.toInt32(24.0))) | _Runtime.toInt32((_Runtime.toInt32(g) << _Runtime.toInt32(16.0))))) | _Runtime.toInt32((_Runtime.toInt32(b) << _Runtime.toInt32(8.0))))) | _Runtime.toInt32(255.0))), _Runtime.toInt32(0.0));
     return cast null;
   }
 

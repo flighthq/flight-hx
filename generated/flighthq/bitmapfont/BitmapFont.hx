@@ -56,7 +56,7 @@ class BitmapFont {
   }
 
   public static function packBitmapFontKerningKey__bitmapFont(left:Float, right:Float):Float {
-    return cast (Std.int((Std.int(left) << Std.int(16.0))) | Std.int(right));
+    return cast (_Runtime.toInt32((_Runtime.toInt32(left) << _Runtime.toInt32(16.0))) | _Runtime.toInt32(right));
     return cast null;
   }
 }

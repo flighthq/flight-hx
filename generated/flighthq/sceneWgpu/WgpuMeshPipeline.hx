@@ -110,7 +110,7 @@ class WgpuMeshPipeline {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'frameBuffer'), null))) {
-      _Runtime.setField(scene, 'frameBuffer', flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: WgpuMeshPipeline.FRAME_UNIFORM_BYTES__wgpuMeshPipeline, usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
+      _Runtime.setField(scene, 'frameBuffer', flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: WgpuMeshPipeline.FRAME_UNIFORM_BYTES__wgpuMeshPipeline, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'frameBindGroup'), null))) {
       _Runtime.setField(scene, 'frameBindGroup', flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(_Runtime.callValue(ensureWgpuSceneLayouts, cast ([state] : Array<Dynamic>)), 'frameBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: { buffer: _Runtime.field(scene, 'frameBuffer') } }] : Array<Dynamic>) }] : Array<Dynamic>)));
@@ -130,15 +130,15 @@ class WgpuMeshPipeline {
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
     device = _Runtime.field(state, 'device');
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'iblUniformBuffer'), null))) {
-      _Runtime.setField(scene, 'iblUniformBuffer', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: WgpuMeshPipeline.IBL_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline, usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
+      _Runtime.setField(scene, 'iblUniformBuffer', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: WgpuMeshPipeline.IBL_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'iblSampler'), null))) {
       _Runtime.setField(scene, 'iblSampler', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createSampler', cast ([{ magFilter: 'linear', minFilter: 'linear', mipmapFilter: 'linear' }] : Array<Dynamic>)));
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'iblDummyCubeView'), null))) {
-      _Runtime.setField(scene, 'iblDummyCubeTexture', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([1.0, 1.0, 6.0] : Array<Dynamic>), format: WgpuMeshPipeline.IBL_DUMMY_FORMAT__wgpuMeshPipeline, usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
+      _Runtime.setField(scene, 'iblDummyCubeTexture', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([1.0, 1.0, 6.0] : Array<Dynamic>), format: WgpuMeshPipeline.IBL_DUMMY_FORMAT__wgpuMeshPipeline, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
       _Runtime.setField(scene, 'iblDummyCubeView', _Runtime.callProperty(_Runtime.field(scene, 'iblDummyCubeTexture'), 'createView', cast ([{ dimension: 'cube' }] : Array<Dynamic>)));
-      _Runtime.setField(scene, 'iblDummyLutTexture', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([1.0, 1.0, 1.0] : Array<Dynamic>), format: WgpuMeshPipeline.IBL_DUMMY_FORMAT__wgpuMeshPipeline, usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
+      _Runtime.setField(scene, 'iblDummyLutTexture', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([1.0, 1.0, 1.0] : Array<Dynamic>), format: WgpuMeshPipeline.IBL_DUMMY_FORMAT__wgpuMeshPipeline, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
       _Runtime.setField(scene, 'iblDummyLutView', _Runtime.callProperty(_Runtime.field(scene, 'iblDummyLutTexture'), 'createView', cast ([] : Array<Dynamic>)));
     }
     ibl = _Runtime.field(scene, 'ibl');
@@ -189,25 +189,25 @@ class WgpuMeshPipeline {
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
     device = _Runtime.field(state, 'device');
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'shadowUniformBuffer'), null))) {
-      _Runtime.setField(scene, 'shadowUniformBuffer', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: WgpuMeshPipeline.SHADOW_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline, usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
+      _Runtime.setField(scene, 'shadowUniformBuffer', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: WgpuMeshPipeline.SHADOW_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'shadowComparisonSampler'), null))) {
       _Runtime.setField(scene, 'shadowComparisonSampler', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createSampler', cast ([{ compare: 'less-equal' }] : Array<Dynamic>)));
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'shadowDummyView'), null))) {
-      _Runtime.setField(scene, 'shadowDummyTexture', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([1.0, 1.0, 1.0] : Array<Dynamic>), format: SHADOW_DEPTH_FORMAT, usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>)));
+      _Runtime.setField(scene, 'shadowDummyTexture', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([1.0, 1.0, 1.0] : Array<Dynamic>), format: SHADOW_DEPTH_FORMAT, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>)));
       _Runtime.setField(scene, 'shadowDummyView', _Runtime.callProperty(_Runtime.field(scene, 'shadowDummyTexture'), 'createView', cast ([] : Array<Dynamic>)));
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'iblUniformBuffer'), null))) {
-      _Runtime.setField(scene, 'iblUniformBuffer', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: WgpuMeshPipeline.IBL_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline, usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
+      _Runtime.setField(scene, 'iblUniformBuffer', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: WgpuMeshPipeline.IBL_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'iblSampler'), null))) {
       _Runtime.setField(scene, 'iblSampler', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createSampler', cast ([{ magFilter: 'linear', minFilter: 'linear', mipmapFilter: 'linear' }] : Array<Dynamic>)));
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'iblDummyCubeView'), null))) {
-      _Runtime.setField(scene, 'iblDummyCubeTexture', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([1.0, 1.0, 6.0] : Array<Dynamic>), format: WgpuMeshPipeline.IBL_DUMMY_FORMAT__wgpuMeshPipeline, usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
+      _Runtime.setField(scene, 'iblDummyCubeTexture', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([1.0, 1.0, 6.0] : Array<Dynamic>), format: WgpuMeshPipeline.IBL_DUMMY_FORMAT__wgpuMeshPipeline, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
       _Runtime.setField(scene, 'iblDummyCubeView', _Runtime.callProperty(_Runtime.field(scene, 'iblDummyCubeTexture'), 'createView', cast ([{ dimension: 'cube' }] : Array<Dynamic>)));
-      _Runtime.setField(scene, 'iblDummyLutTexture', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([1.0, 1.0, 1.0] : Array<Dynamic>), format: WgpuMeshPipeline.IBL_DUMMY_FORMAT__wgpuMeshPipeline, usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
+      _Runtime.setField(scene, 'iblDummyLutTexture', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([1.0, 1.0, 1.0] : Array<Dynamic>), format: WgpuMeshPipeline.IBL_DUMMY_FORMAT__wgpuMeshPipeline, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
       _Runtime.setField(scene, 'iblDummyLutView', _Runtime.callProperty(_Runtime.field(scene, 'iblDummyLutTexture'), 'createView', cast ([] : Array<Dynamic>)));
     }
     shadow = _Runtime.field(scene, 'shadow');
@@ -282,7 +282,7 @@ class WgpuMeshPipeline {
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
     view = _Runtime.field(scene, 'placeholderView');
     if (_Runtime.truthy(_Runtime.strictEquals(view, null))) {
-      var texture:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([1.0, 1.0, 1.0] : Array<Dynamic>), format: 'rgba8unorm', usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>));
+      var texture:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([1.0, 1.0, 1.0] : Array<Dynamic>), format: 'rgba8unorm', usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>));
       flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeTexture', cast ([{ texture: texture }, WgpuMeshPipeline.WHITE_PIXEL__wgpuMeshPipeline, { bytesPerRow: 4.0 }, cast ([1.0, 1.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
       (view = cast (_Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>)) : Dynamic));
       _Runtime.setField(scene, 'placeholderView', view);
@@ -296,7 +296,7 @@ class WgpuMeshPipeline {
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(scene, 'frameBindGroupLayout'), null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(scene, 'drawBindGroupLayout'), null)))) {
       var device:Dynamic = _Runtime.field(state, 'device');
-      _Runtime.setField(scene, 'frameBindGroupLayout', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'))), buffer: { type: 'uniform' } }] : Array<Dynamic>) }] : Array<Dynamic>)));
+      _Runtime.setField(scene, 'frameBindGroupLayout', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'))), buffer: { type: 'uniform' } }] : Array<Dynamic>) }] : Array<Dynamic>)));
       _Runtime.setField(scene, 'drawBindGroupLayout', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX'), buffer: { type: 'uniform', hasDynamicOffset: true } }] : Array<Dynamic>) }] : Array<Dynamic>)));
     }
     return cast { drawBindGroupLayout: _Runtime.field(scene, 'drawBindGroupLayout'), frameBindGroupLayout: _Runtime.field(scene, 'frameBindGroupLayout') };
@@ -325,13 +325,13 @@ class WgpuMeshPipeline {
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
     device = _Runtime.field(state, 'device');
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'shadowUniformBuffer'), null))) {
-      _Runtime.setField(scene, 'shadowUniformBuffer', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: WgpuMeshPipeline.SHADOW_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline, usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
+      _Runtime.setField(scene, 'shadowUniformBuffer', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: WgpuMeshPipeline.SHADOW_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'shadowComparisonSampler'), null))) {
       _Runtime.setField(scene, 'shadowComparisonSampler', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createSampler', cast ([{ compare: 'less-equal' }] : Array<Dynamic>)));
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'shadowDummyView'), null))) {
-      _Runtime.setField(scene, 'shadowDummyTexture', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([1.0, 1.0, 1.0] : Array<Dynamic>), format: SHADOW_DEPTH_FORMAT, usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>)));
+      _Runtime.setField(scene, 'shadowDummyTexture', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([1.0, 1.0, 1.0] : Array<Dynamic>), format: SHADOW_DEPTH_FORMAT, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>)));
       _Runtime.setField(scene, 'shadowDummyView', _Runtime.callProperty(_Runtime.field(scene, 'shadowDummyTexture'), 'createView', cast ([] : Array<Dynamic>)));
     }
     shadow = _Runtime.field(scene, 'shadow');
@@ -617,7 +617,7 @@ class WgpuMeshPipeline {
 
   public static final _frameScratch__wgpuMeshPipeline:Dynamic = new flighthq._internal._Float32Array((WgpuMeshPipeline.FRAME_UNIFORM_BYTES__wgpuMeshPipeline / 4.0));
 
-  public static final _dynamicOffsets__wgpuMeshPipeline:Dynamic = _Runtime.construct(_Runtime.globalValue('Uint32Array'), [1.0]);
+  public static final _dynamicOffsets__wgpuMeshPipeline:Dynamic = new flighthq._internal._UInt32Array(1.0);
 
   public static final _shadowSampleScratch__wgpuMeshPipeline:Dynamic = new flighthq._internal._Float32Array((WgpuMeshPipeline.SHADOW_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline / 4.0));
 

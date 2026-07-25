@@ -34,7 +34,7 @@ class GlEnvironmentIblBake {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'iblBakeFramebuffer'), null))) { _Runtime.setField(runtime, 'iblBakeFramebuffer', flighthq._internal.backend.WebGl2Backend.createFramebuffer(gl)); }
     fbo = _Runtime.field(runtime, 'iblBakeFramebuffer');
     prevFramebuffer = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER_BINDING) : Null<Dynamic>);
-    prevViewport = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.VIEWPORT) : Dynamic);
+    prevViewport = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.VIEWPORT) : flighthq._internal._Int32Array);
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.DEPTH_TEST);
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.CULL_FACE);
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.BLEND);
@@ -93,7 +93,7 @@ class GlEnvironmentIblBake {
     {
       var mip:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(mip, mipCount, '<'))) {
-        var mipSize:Dynamic = HxMath.max(1.0, (Std.int(GlEnvironmentIblBake.PREFILTERED_SIZE__glEnvironmentIblBake) >> Std.int(mip)));
+        var mipSize:Dynamic = HxMath.max(1.0, (_Runtime.toInt32(GlEnvironmentIblBake.PREFILTERED_SIZE__glEnvironmentIblBake) >> _Runtime.toInt32(mip)));
         var roughness:Dynamic = _Runtime.select(_Runtime.compare(mipCount, 1.0, '>'), function():Dynamic return cast (mip / (mipCount - 1.0)), function():Dynamic return cast 0.0);
         flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locRoughness'), roughness);
         _Runtime.callValue(GlEnvironmentIblBake.renderGlBakeCubeFaces__glEnvironmentIblBake, cast ([state, fbo, program, cube, mipSize, mip] : Array<Dynamic>));
@@ -155,7 +155,7 @@ class GlEnvironmentIblBake {
     {
       var mip:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(mip, levels, '<'))) {
-        var mipSize:Dynamic = HxMath.max(1.0, (Std.int(size) >> Std.int(mip)));
+        var mipSize:Dynamic = HxMath.max(1.0, (_Runtime.toInt32(size) >> _Runtime.toInt32(mip)));
         {
           var face:Dynamic = 0.0;
           while (_Runtime.truthy(_Runtime.compare(face, 6.0, '<'))) {

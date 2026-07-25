@@ -13,29 +13,29 @@ class Hash {
   }
 
   public static function hash2D(x:Float, y:Float):Float {
-    return cast _Runtime.callValue(hashCombine, cast ([_Runtime.callValue(hashUint32, cast ([(Std.int(x) | Std.int(0.0))] : Array<Dynamic>)), (Std.int(y) | Std.int(0.0))] : Array<Dynamic>));
+    return cast _Runtime.callValue(hashCombine, cast ([_Runtime.callValue(hashUint32, cast ([(_Runtime.toInt32(x) | _Runtime.toInt32(0.0))] : Array<Dynamic>)), (_Runtime.toInt32(y) | _Runtime.toInt32(0.0))] : Array<Dynamic>));
     return cast null;
   }
 
   public static function hash3D(x:Float, y:Float, z:Float):Float {
-    return cast _Runtime.callValue(hashCombine, cast ([_Runtime.callValue(hash2D, cast ([x, y] : Array<Dynamic>)), (Std.int(z) | Std.int(0.0))] : Array<Dynamic>));
+    return cast _Runtime.callValue(hashCombine, cast ([_Runtime.callValue(hash2D, cast ([x, y] : Array<Dynamic>)), (_Runtime.toInt32(z) | _Runtime.toInt32(0.0))] : Array<Dynamic>));
     return cast null;
   }
 
   public static function hashCombine(seed:Float, value:Float):Float {
-    return cast _Runtime.callValue(hashUint32, cast ([(Std.int(seed) ^ Std.int((((value + 2654435769.0) + (Std.int(seed) << Std.int(6.0))) + (Std.int(seed) >> Std.int(2.0)))))] : Array<Dynamic>));
+    return cast _Runtime.callValue(hashUint32, cast ([(_Runtime.toInt32(seed) ^ _Runtime.toInt32((((value + 2654435769.0) + (_Runtime.toInt32(seed) << _Runtime.toInt32(6.0))) + (_Runtime.toInt32(seed) >> _Runtime.toInt32(2.0)))))] : Array<Dynamic>));
     return cast null;
   }
 
   public static function hashUint32(value:Float):Float {
     var h:Dynamic = cast _Runtime.UNDEFINED;
-    h = (Std.int(value) | Std.int(0.0));
-    (h = (Std.int(h) ^ Std.int(_Runtime.unsignedShiftRight(Std.int(h), Std.int(16.0)))));
-    (h = cast ((Std.int(_Runtime.imul(Std.int(h), Std.int(2246822507.0))) | Std.int(0.0)) : Dynamic));
-    (h = (Std.int(h) ^ Std.int(_Runtime.unsignedShiftRight(Std.int(h), Std.int(13.0)))));
-    (h = cast ((Std.int(_Runtime.imul(Std.int(h), Std.int(3266489909.0))) | Std.int(0.0)) : Dynamic));
-    (h = (Std.int(h) ^ Std.int(_Runtime.unsignedShiftRight(Std.int(h), Std.int(16.0)))));
-    return cast _Runtime.unsignedShiftRight(Std.int(h), Std.int(0.0));
+    h = (_Runtime.toInt32(value) | _Runtime.toInt32(0.0));
+    (h = (_Runtime.toInt32(h) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(h), _Runtime.toInt32(16.0)))));
+    (h = cast ((_Runtime.toInt32(_Runtime.imul(_Runtime.toInt32(h), _Runtime.toInt32(2246822507.0))) | _Runtime.toInt32(0.0)) : Dynamic));
+    (h = (_Runtime.toInt32(h) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(h), _Runtime.toInt32(13.0)))));
+    (h = cast ((_Runtime.toInt32(_Runtime.imul(_Runtime.toInt32(h), _Runtime.toInt32(3266489909.0))) | _Runtime.toInt32(0.0)) : Dynamic));
+    (h = (_Runtime.toInt32(h) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(h), _Runtime.toInt32(16.0)))));
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32(h), _Runtime.toInt32(0.0));
     return cast null;
   }
 }

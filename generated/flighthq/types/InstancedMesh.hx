@@ -9,6 +9,6 @@ import flighthq.types.Node.NodeRuntime;
 import flighthq.types.SceneNode.SceneNodeRuntime;
 import flighthq.types.SceneNode.SceneNodeTraits;
 
-typedef InstancedMesh = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<SceneNodeTraits>>; var alpha:Float; var visible:Bool; var position:Vector3; var rotation:Quaternion; var scale:Vector3; var geometry:MeshGeometry; var instanceColors:Null<Dynamic>; var instanceCount:Float; var instanceMatrices:Array<Matrix4>; var materials:Array<Null<Material>>; };
+typedef InstancedMesh = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<SceneNodeTraits>>; var alpha:Float; var visible:Bool; var position:Vector3; var rotation:Quaternion; var scale:Vector3; var geometry:MeshGeometry; var instanceColors:Null<flighthq._internal._UInt32Array>; var instanceCount:Float; var instanceMatrices:Array<Matrix4>; var materials:Array<Null<Material>>; };
 
 typedef InstancedMeshRuntime = SceneNodeRuntime;

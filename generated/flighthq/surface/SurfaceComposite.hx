@@ -9,7 +9,7 @@ import flighthq.types.SurfaceRegion;
 import flighthq.types._internal._SurfaceCompositeModeValues.SurfaceCompositeModeValue;
 
 class SurfaceComposite {
-  public static function compositeSurfacePixels(dest:SurfaceRegion, pixels:Dynamic, ?mode:SurfaceCompositeMode):Void {
+  public static function compositeSurfacePixels(dest:SurfaceRegion, pixels:flighthq._internal._UInt8ClampedArray, ?mode:SurfaceCompositeMode):Void {
     if (mode == null) mode = cast (SurfaceCompositeModeValue.Normal : Dynamic);
     {
       var py:Dynamic = 0.0;
@@ -61,7 +61,7 @@ class SurfaceComposite {
     _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  public static function extractSurfacePixels(out:Dynamic, source:SurfaceRegion):Void {
+  public static function extractSurfacePixels(out:flighthq._internal._UInt8ClampedArray, source:SurfaceRegion):Void {
     {
       var py:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(source, 'height'), '<'))) {
@@ -86,7 +86,7 @@ class SurfaceComposite {
     }
   }
 
-  public static function extractSurfacePixels32(out:Dynamic, source:SurfaceRegion):Void {
+  public static function extractSurfacePixels32(out:flighthq._internal._UInt32Array, source:SurfaceRegion):Void {
     {
       var py:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(source, 'height'), '<'))) {
@@ -98,7 +98,7 @@ class SurfaceComposite {
             var sourceX:Dynamic = (_Runtime.field(source, 'x') + px);
             if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(sourceX, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sourceX, _Runtime.field(_Runtime.field(source, 'surface'), 'width'), '>=')))) { px++; continue; }
             var si:Dynamic = (((sourceY * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sourceX) * 4.0);
-            _Runtime.setIndex(out, ((py * _Runtime.field(source, 'width')) + px), _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int((Std.int(_Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), si)) << Std.int(24.0))) | Std.int((Std.int(_Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 1.0))) << Std.int(16.0))))) | Std.int((Std.int(_Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 2.0))) << Std.int(8.0))))) | Std.int(_Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 3.0))))), Std.int(0.0)));
+            _Runtime.setIndex(out, ((py * _Runtime.field(source, 'width')) + px), _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), si)) << _Runtime.toInt32(24.0))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 1.0))) << _Runtime.toInt32(16.0))))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 2.0))) << _Runtime.toInt32(8.0))))) | _Runtime.toInt32(_Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 3.0))))), _Runtime.toInt32(0.0)));
             px++;
           }
         }
@@ -107,7 +107,7 @@ class SurfaceComposite {
     }
   }
 
-  public static function writeSurfacePixels(dest:SurfaceRegion, pixels:Dynamic):Void {
+  public static function writeSurfacePixels(dest:SurfaceRegion, pixels:flighthq._internal._UInt8ClampedArray):Void {
     {
       var py:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(dest, 'height'), '<'))) {
@@ -133,7 +133,7 @@ class SurfaceComposite {
     _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  public static function writeSurfacePixels32(dest:SurfaceRegion, pixels:Dynamic):Void {
+  public static function writeSurfacePixels32(dest:SurfaceRegion, pixels:flighthq._internal._UInt32Array):Void {
     {
       var py:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(dest, 'height'), '<'))) {
@@ -146,10 +146,10 @@ class SurfaceComposite {
             if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(x, 0.0, '<'), function():Dynamic return cast _Runtime.compare(x, _Runtime.field(_Runtime.field(dest, 'surface'), 'width'), '>=')))) { px++; continue; }
             var color:Dynamic = _Runtime.getIndex(pixels, ((py * _Runtime.field(dest, 'width')) + px));
             var di:Dynamic = (((y * _Runtime.field(_Runtime.field(dest, 'surface'), 'width')) + x) * 4.0);
-            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), di, (Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(24.0))) & Std.int(255.0)));
-            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (di + 1.0), (Std.int((Std.int(color) >> Std.int(16.0))) & Std.int(255.0)));
-            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (di + 2.0), (Std.int((Std.int(color) >> Std.int(8.0))) & Std.int(255.0)));
-            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (di + 3.0), (Std.int(color) & Std.int(255.0)));
+            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), di, (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0)));
+            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (di + 1.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)));
+            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (di + 2.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)));
+            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (di + 3.0), (_Runtime.toInt32(color) & _Runtime.toInt32(255.0)));
             px++;
           }
         }
@@ -264,7 +264,7 @@ class SurfaceComposite {
     return cast null;
   }
 
-  public static function compositePixelInto__surfaceComposite(dest:Dynamic, di:Float, r:Float, g:Float, b:Float, a:Float, mode:SurfaceCompositeMode):Void {
+  public static function compositePixelInto__surfaceComposite(dest:flighthq._internal._UInt8ClampedArray, di:Float, r:Float, g:Float, b:Float, a:Float, mode:SurfaceCompositeMode):Void {
     var srcA:Dynamic = cast _Runtime.UNDEFINED;
     var dstA:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;

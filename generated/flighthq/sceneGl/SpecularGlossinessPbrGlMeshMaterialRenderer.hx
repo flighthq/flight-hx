@@ -90,10 +90,10 @@ class SpecularGlossinessPbrGlMeshMaterialRenderer {
       var srgb:Dynamic = cast _Runtime.UNDEFINED;
       clamped = HxMath.min(HxMath.max(linear, 0.0), 1.0);
       srgb = _Runtime.select(_Runtime.compare(clamped, 0.0031308, '<='), function():Dynamic return cast (clamped * 12.92), function():Dynamic return cast ((1.055 * HxMath.pow(clamped, (1.0 / 2.4))) - 0.055));
-      return cast (Std.int(HxMath.round((srgb * 255.0))) & Std.int(255.0));
+      return cast (_Runtime.toInt32(HxMath.round((srgb * 255.0))) & _Runtime.toInt32(255.0));
     };
-    alpha = (Std.int(HxMath.round((HxMath.min(HxMath.max(a, 0.0), 1.0) * 255.0))) & Std.int(255.0));
-    return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int((Std.int(_Runtime.callValue(toByte, cast ([r] : Array<Dynamic>))) << Std.int(24.0))) | Std.int((Std.int(_Runtime.callValue(toByte, cast ([g] : Array<Dynamic>))) << Std.int(16.0))))) | Std.int((Std.int(_Runtime.callValue(toByte, cast ([b] : Array<Dynamic>))) << Std.int(8.0))))) | Std.int(alpha))), Std.int(0.0));
+    alpha = (_Runtime.toInt32(HxMath.round((HxMath.min(HxMath.max(a, 0.0), 1.0) * 255.0))) & _Runtime.toInt32(255.0));
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(toByte, cast ([r] : Array<Dynamic>))) << _Runtime.toInt32(24.0))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(toByte, cast ([g] : Array<Dynamic>))) << _Runtime.toInt32(16.0))))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(toByte, cast ([b] : Array<Dynamic>))) << _Runtime.toInt32(8.0))))) | _Runtime.toInt32(alpha))), _Runtime.toInt32(0.0));
     return cast null;
   }
 

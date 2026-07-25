@@ -67,12 +67,12 @@ class ColorTransform {
   }
 
   public static function getColorTransformOffsetRgb(source:ColorTransformLike):Float {
-    return cast (Std.int((Std.int((Std.int(HxMath.fround(_Runtime.field(source, 'redOffset'))) << Std.int(16.0))) | Std.int((Std.int(HxMath.fround(_Runtime.field(source, 'greenOffset'))) << Std.int(8.0))))) | Std.int(HxMath.fround(_Runtime.field(source, 'blueOffset'))));
+    return cast (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.fround(_Runtime.field(source, 'redOffset'))) << _Runtime.toInt32(16.0))) | _Runtime.toInt32((_Runtime.toInt32(HxMath.fround(_Runtime.field(source, 'greenOffset'))) << _Runtime.toInt32(8.0))))) | _Runtime.toInt32(HxMath.fround(_Runtime.field(source, 'blueOffset'))));
     return cast null;
   }
 
   public static function getColorTransformOffsetRgba(source:ColorTransformLike):Float {
-    return cast (Std.int((Std.int((Std.int((Std.int(HxMath.fround(_Runtime.field(source, 'redOffset'))) << Std.int(24.0))) | Std.int((Std.int(HxMath.fround(_Runtime.field(source, 'greenOffset'))) << Std.int(16.0))))) | Std.int((Std.int(HxMath.fround(_Runtime.field(source, 'blueOffset'))) << Std.int(8.0))))) | Std.int(HxMath.fround(_Runtime.field(source, 'alphaOffset'))));
+    return cast (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.fround(_Runtime.field(source, 'redOffset'))) << _Runtime.toInt32(24.0))) | _Runtime.toInt32((_Runtime.toInt32(HxMath.fround(_Runtime.field(source, 'greenOffset'))) << _Runtime.toInt32(16.0))))) | _Runtime.toInt32((_Runtime.toInt32(HxMath.fround(_Runtime.field(source, 'blueOffset'))) << _Runtime.toInt32(8.0))))) | _Runtime.toInt32(HxMath.fround(_Runtime.field(source, 'alphaOffset'))));
     return cast null;
   }
 
@@ -108,9 +108,9 @@ class ColorTransform {
   }
 
   public static function setColorTransformOffsetRgb(out:ColorTransformLike, value:Float):Void {
-    _Runtime.setField(out, 'redOffset', (Std.int((Std.int(value) >> Std.int(16.0))) & Std.int(255.0)));
-    _Runtime.setField(out, 'greenOffset', (Std.int((Std.int(value) >> Std.int(8.0))) & Std.int(255.0)));
-    _Runtime.setField(out, 'blueOffset', (Std.int(value) & Std.int(255.0)));
+    _Runtime.setField(out, 'redOffset', (_Runtime.toInt32((_Runtime.toInt32(value) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)));
+    _Runtime.setField(out, 'greenOffset', (_Runtime.toInt32((_Runtime.toInt32(value) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)));
+    _Runtime.setField(out, 'blueOffset', (_Runtime.toInt32(value) & _Runtime.toInt32(255.0)));
     _Runtime.setField(out, 'alphaOffset', 0.0);
     _Runtime.setField(out, 'redMultiplier', 0.0);
     _Runtime.setField(out, 'greenMultiplier', 0.0);
@@ -119,10 +119,10 @@ class ColorTransform {
   }
 
   public static function setColorTransformOffsetRgba(out:ColorTransformLike, value:Float):Void {
-    _Runtime.setField(out, 'redOffset', (Std.int((Std.int(value) >> Std.int(24.0))) & Std.int(255.0)));
-    _Runtime.setField(out, 'greenOffset', (Std.int((Std.int(value) >> Std.int(16.0))) & Std.int(255.0)));
-    _Runtime.setField(out, 'blueOffset', (Std.int((Std.int(value) >> Std.int(8.0))) & Std.int(255.0)));
-    _Runtime.setField(out, 'alphaOffset', (Std.int(value) & Std.int(255.0)));
+    _Runtime.setField(out, 'redOffset', (_Runtime.toInt32((_Runtime.toInt32(value) >> _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0)));
+    _Runtime.setField(out, 'greenOffset', (_Runtime.toInt32((_Runtime.toInt32(value) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)));
+    _Runtime.setField(out, 'blueOffset', (_Runtime.toInt32((_Runtime.toInt32(value) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)));
+    _Runtime.setField(out, 'alphaOffset', (_Runtime.toInt32(value) & _Runtime.toInt32(255.0)));
     _Runtime.setField(out, 'redMultiplier', 0.0);
     _Runtime.setField(out, 'greenMultiplier', 0.0);
     _Runtime.setField(out, 'blueMultiplier', 0.0);

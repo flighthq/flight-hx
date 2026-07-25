@@ -143,7 +143,7 @@ class PbrMaterials {
   }
 
   public static function packLinear__pbrMaterials(r:Float, g:Float, b:Float, a:Float):Float {
-    return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int((Std.int(_Runtime.callValue(PbrMaterials.linearChannelToSrgb8__pbrMaterials, cast ([r] : Array<Dynamic>))) << Std.int(24.0))) | Std.int((Std.int(_Runtime.callValue(PbrMaterials.linearChannelToSrgb8__pbrMaterials, cast ([g] : Array<Dynamic>))) << Std.int(16.0))))) | Std.int((Std.int(_Runtime.callValue(PbrMaterials.linearChannelToSrgb8__pbrMaterials, cast ([b] : Array<Dynamic>))) << Std.int(8.0))))) | Std.int(HxMath.round((a * 255.0))))), Std.int(0.0));
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(PbrMaterials.linearChannelToSrgb8__pbrMaterials, cast ([r] : Array<Dynamic>))) << _Runtime.toInt32(24.0))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(PbrMaterials.linearChannelToSrgb8__pbrMaterials, cast ([g] : Array<Dynamic>))) << _Runtime.toInt32(16.0))))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(PbrMaterials.linearChannelToSrgb8__pbrMaterials, cast ([b] : Array<Dynamic>))) << _Runtime.toInt32(8.0))))) | _Runtime.toInt32(HxMath.round((a * 255.0))))), _Runtime.toInt32(0.0));
     return cast null;
   }
 

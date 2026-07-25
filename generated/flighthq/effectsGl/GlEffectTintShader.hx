@@ -24,7 +24,7 @@ class GlEffectTintShader {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlEffectTintShader.getGlInvertTintShader__glEffectTintShader, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
-      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(loc, 'locColor'), ((Std.int((Std.int(color) >> Std.int(16.0))) & Std.int(255.0)) / 255.0), ((Std.int((Std.int(color) >> Std.int(8.0))) & Std.int(255.0)) / 255.0), ((Std.int(color) & Std.int(255.0)) / 255.0));
+      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(loc, 'locColor'), ((_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) / 255.0), ((_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) / 255.0), ((_Runtime.toInt32(color) & _Runtime.toInt32(255.0)) / 255.0));
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(loc, 'locAlpha'), alpha);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(loc, 'locStrength'), strength);
       flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.ONE, flighthq._internal.backend.WebGl2Backend.ZERO);
@@ -35,7 +35,7 @@ class GlEffectTintShader {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlEffectTintShader.getGlTintShader__glEffectTintShader, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
-      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(loc, 'locColor'), ((Std.int((Std.int(color) >> Std.int(16.0))) & Std.int(255.0)) / 255.0), ((Std.int((Std.int(color) >> Std.int(8.0))) & Std.int(255.0)) / 255.0), ((Std.int(color) & Std.int(255.0)) / 255.0));
+      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(loc, 'locColor'), ((_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) / 255.0), ((_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) / 255.0), ((_Runtime.toInt32(color) & _Runtime.toInt32(255.0)) / 255.0));
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(loc, 'locAlpha'), alpha);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(loc, 'locStrength'), strength);
       flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.ONE, flighthq._internal.backend.WebGl2Backend.ZERO);

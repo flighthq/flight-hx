@@ -24,7 +24,7 @@ class SurfaceCrop {
     ry = HxMath.round(_Runtime.field(rect, 'y'));
     rw = HxMath.max(0.0, HxMath.round(_Runtime.field(rect, 'width')));
     rh = HxMath.max(0.0, HxMath.round(_Runtime.field(rect, 'height')));
-    data = _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [((rw * rh) * 4.0)]);
+    data = new flighthq._internal._UInt8ClampedArray(((rw * rh) * 4.0));
     sd = _Runtime.field(source, 'data');
     {
       var py:Dynamic = 0.0;
@@ -67,12 +67,12 @@ class SurfaceCrop {
     sh = _Runtime.field(source, 'height');
     dw = ((sw + left) + right);
     dh = ((sh + top) + bottom);
-    data = _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [((dw * dh) * 4.0)]);
+    data = new flighthq._internal._UInt8ClampedArray(((dw * dh) * 4.0));
     sd = _Runtime.field(source, 'data');
-    fr = (Std.int(_Runtime.unsignedShiftRight(Std.int(fillColor), Std.int(24.0))) & Std.int(255.0));
-    fg = (Std.int((Std.int(fillColor) >> Std.int(16.0))) & Std.int(255.0));
-    fb = (Std.int((Std.int(fillColor) >> Std.int(8.0))) & Std.int(255.0));
-    fa = (Std.int(fillColor) & Std.int(255.0));
+    fr = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(fillColor), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0));
+    fg = (_Runtime.toInt32((_Runtime.toInt32(fillColor) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0));
+    fb = (_Runtime.toInt32((_Runtime.toInt32(fillColor) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0));
+    fa = (_Runtime.toInt32(fillColor) & _Runtime.toInt32(255.0));
     {
       var py:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(py, dh, '<'))) {
@@ -149,7 +149,7 @@ class SurfaceCrop {
       }
     }
     if (_Runtime.truthy(_Runtime.compare(maxX, 0.0, '<'))) {
-      return cast _Runtime.callValue(createEntity, cast ([{ alphaType: _Runtime.field(source, 'alphaType'), colorSpace: _Runtime.field(source, 'colorSpace'), compressed: null, data: _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [4.0]), format: _Runtime.field(source, 'format'), height: 1.0, source: null, version: 0.0, width: 1.0 }] : Array<Dynamic>));
+      return cast _Runtime.callValue(createEntity, cast ([{ alphaType: _Runtime.field(source, 'alphaType'), colorSpace: _Runtime.field(source, 'colorSpace'), compressed: null, data: new flighthq._internal._UInt8ClampedArray(4.0), format: _Runtime.field(source, 'format'), height: 1.0, source: null, version: 0.0, width: 1.0 }] : Array<Dynamic>));
     }
     return cast _Runtime.callValue(cropSurface, cast ([source, { x: minX, y: minY, width: ((maxX - minX) + 1.0), height: ((maxY - minY) + 1.0) }] : Array<Dynamic>));
     return cast null;

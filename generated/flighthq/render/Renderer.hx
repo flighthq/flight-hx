@@ -31,7 +31,7 @@ class Renderer {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime.field(runtime, 'rendererMap'), 'get', cast ([kind] : Array<Dynamic>)), renderer))) { return; }
-    _Runtime.setField(runtime, 'rendererMapId', _Runtime.unsignedShiftRight(Std.int((_Runtime.field(runtime, 'rendererMapId') + 1.0)), Std.int(0.0)));
+    _Runtime.setField(runtime, 'rendererMapId', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(runtime, 'rendererMapId') + 1.0)), _Runtime.toInt32(0.0)));
     _Runtime.callProperty(_Runtime.field(runtime, 'rendererMap'), 'set', cast ([kind, renderer] : Array<Dynamic>));
   }
 }

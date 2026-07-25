@@ -88,7 +88,7 @@ class WgpuColorLutPass {
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(cache, 'texture'), null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(cache, 'lut'), lut)))) { return cast _Runtime.field(cache, 'texture'); }
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(cache, 'texture'), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(cache, 'size'), n)))) {
       _Runtime.callOptionalProperty(_Runtime.field(cache, 'texture'), 'destroy', cast ([] : Array<Dynamic>));
-      _Runtime.setField(cache, 'texture', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([n, n, n] : Array<Dynamic>), dimension: '3d', format: 'rgba8unorm', usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
+      _Runtime.setField(cache, 'texture', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([n, n, n] : Array<Dynamic>), dimension: '3d', format: 'rgba8unorm', usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
       _Runtime.setField(cache, 'size', n);
     }
     samples = _Runtime.field(lut, 'samples');

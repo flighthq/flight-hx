@@ -10,8 +10,8 @@ import flighthq.types.TiledTileset.TiledTilesetRef;
 class TiledGid {
   public static function decodeTiledGid(gid:Float):flighthq.types.TiledGid {
     var g:Dynamic = cast _Runtime.UNDEFINED;
-    g = _Runtime.unsignedShiftRight(Std.int(gid), Std.int(0.0));
-    return cast { flipDiagonal: !_Runtime.strictEquals((Std.int(g) & Std.int(TiledGid.FLIP_DIAGONAL__tiledGid)), 0.0), flipHorizontal: !_Runtime.strictEquals((Std.int(g) & Std.int(TiledGid.FLIP_HORIZONTAL__tiledGid)), 0.0), flipVertical: !_Runtime.strictEquals((Std.int(g) & Std.int(TiledGid.FLIP_VERTICAL__tiledGid)), 0.0), tileId: (Std.int(g) & Std.int(TiledGid.TILE_ID_MASK__tiledGid)) };
+    g = _Runtime.unsignedShiftRight(_Runtime.toInt32(gid), _Runtime.toInt32(0.0));
+    return cast { flipDiagonal: !_Runtime.strictEquals((_Runtime.toInt32(g) & _Runtime.toInt32(TiledGid.FLIP_DIAGONAL__tiledGid)), 0.0), flipHorizontal: !_Runtime.strictEquals((_Runtime.toInt32(g) & _Runtime.toInt32(TiledGid.FLIP_HORIZONTAL__tiledGid)), 0.0), flipVertical: !_Runtime.strictEquals((_Runtime.toInt32(g) & _Runtime.toInt32(TiledGid.FLIP_VERTICAL__tiledGid)), 0.0), tileId: (_Runtime.toInt32(g) & _Runtime.toInt32(TiledGid.TILE_ID_MASK__tiledGid)) };
     return cast null;
   }
 

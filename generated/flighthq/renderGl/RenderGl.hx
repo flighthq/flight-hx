@@ -349,7 +349,7 @@ class RenderGl {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlSkinPaletteTexture.uploadGlSkinPaletteTexture, cast ([gl, palette, jointMatrices, jointCount] : Array<Dynamic>));
   }
 
-  public static function uploadGlTextureData(gl:Dynamic, target:Float, width:Float, height:Float, data:Dynamic):Void {
+  public static function uploadGlTextureData(gl:Dynamic, target:Float, width:Float, height:Float, data:flighthq._internal._UInt8ClampedArray):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlTextureUpload.uploadGlTextureData, cast ([gl, target, width, height, data] : Array<Dynamic>));
   }
 

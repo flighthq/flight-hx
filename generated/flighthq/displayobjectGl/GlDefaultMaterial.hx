@@ -10,6 +10,7 @@ import flighthq.displayobjectGl.GlSpriteBatch.useGlQuadBatchProgram;
 import flighthq.renderGl.GlMaterialRegistry.registerGlMaterialRenderer;
 import flighthq.types.GlMaterialRenderer;
 import flighthq.types.GlRenderState;
+import flighthq.types.Material;
 import flighthq.types.Types.DefaultMaterialKind;
 import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
@@ -18,7 +19,7 @@ class GlDefaultMaterial {
     _Runtime.callValue(registerGlMaterialRenderer, cast ([state, DefaultMaterialKind, defaultGlMaterialRenderer] : Array<Dynamic>));
   }
 
-  public static final defaultGlMaterialRenderer:GlMaterialRenderer = { instanceFloatCount: 0.0, bind: function(state:GlRenderState) {
+  public static final defaultGlMaterialRenderer:GlMaterialRenderer = { instanceFloatCount: 0.0, bind: function(state:GlRenderState, material:Null<Material>) {
     var shader:Dynamic = cast _Runtime.UNDEFINED;
     shader = _Runtime.callValue(ensureGlQuadBatchShader, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(useGlQuadBatchProgram, cast ([state, _Runtime.field(shader, 'program')] : Array<Dynamic>));

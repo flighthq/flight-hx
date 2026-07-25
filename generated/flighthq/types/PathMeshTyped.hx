@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef PathMeshTyped = { var vertices:flighthq._internal._Float32Array; var indices:Dynamic; };
+typedef PathMeshTyped = { var vertices:flighthq._internal._Float32Array; var indices:flighthq._internal._UInt32Array; };

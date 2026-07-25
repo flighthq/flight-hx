@@ -58,7 +58,7 @@ class SurfaceTone {
     wp = HxMath.max((bp + 1.0), HxMath.min(255.0, whitePoint));
     span = (wp - bp);
     invGamma = _Runtime.select(_Runtime.compare(gamma, 0.0, '>'), function():Dynamic return cast (1.0 / gamma), function():Dynamic return cast 1.0);
-    lut = _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [256.0]);
+    lut = new flighthq._internal._UInt8ClampedArray(256.0);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, 256.0, '<'))) {

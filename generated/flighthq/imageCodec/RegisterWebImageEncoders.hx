@@ -24,7 +24,7 @@ class RegisterWebImageEncoders {
         var blob:Dynamic = cast _Runtime.UNDEFINED;
         canvas = _Runtime.construct(_Runtime.globalValue('OffscreenCanvas'), [_Runtime.field(image, 'width'), _Runtime.field(image, 'height')]);
         context = (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic);
-        pixels = _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [_Runtime.field(image, 'data')]);
+        pixels = new flighthq._internal._UInt8ClampedArray(_Runtime.field(image, 'data'));
         flighthq._internal.backend.Canvas2dBackend.call(context, 'putImageData', cast ([_Runtime.construct(_Runtime.globalValue('ImageData'), [pixels, _Runtime.field(image, 'width'), _Runtime.field(image, 'height')]), 0.0, 0.0] : Array<Dynamic>));
         return flighthq._internal._Async.flatMap(flighthq._internal.backend.CanvasElementBackend.call(canvas, 'convertToBlob', cast ([{ type: mimeType, quality: _Runtime.optionalField(options, 'quality') }] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
           blob = __awaitValue2;

@@ -16,7 +16,7 @@ class DecimatePath {
     _Runtime.setLength(_Runtime.field(out, 'data'), 0.0);
     _Runtime.setField(out, 'winding', _Runtime.field(source, 'winding'));
     for (contour in _Runtime.iterable(contours)) {
-      var n:Dynamic = (Std.int(_Runtime.field(contour, 'length')) >> Std.int(1.0));
+      var n:Dynamic = (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> _Runtime.toInt32(1.0));
       if (_Runtime.truthy(_Runtime.compare(n, 2.0, '<'))) { continue; }
       var closed:Dynamic = _Runtime.andValue(_Runtime.andValue(_Runtime.compare(n, 3.0, '>='), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(contour, 0.0), _Runtime.getIndex(contour, (_Runtime.field(contour, 'length') - 2.0)))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(contour, 1.0), _Runtime.getIndex(contour, (_Runtime.field(contour, 'length') - 1.0))));
       var last:Dynamic = _Runtime.select(closed, function():Dynamic return cast (n - 1.0), function():Dynamic return cast n);

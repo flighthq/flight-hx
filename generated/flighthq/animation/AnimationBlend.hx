@@ -73,7 +73,7 @@ class AnimationBlend {
 
   public static function createAnimationSampleAccumulator(components:Float, quaternion:Dynamic = false):AnimationSampleAccumulator {
     var width:Dynamic = cast _Runtime.UNDEFINED;
-    width = HxMath.max(0.0, (Std.int(components) | Std.int(0.0)));
+    width = HxMath.max(0.0, (_Runtime.toInt32(components) | _Runtime.toInt32(0.0)));
     return cast _Runtime.callValue(createEntity, cast ([{ components: width, quaternion: quaternion, values: new flighthq._internal._Float32Array(width), weight: 0.0 }] : Array<Dynamic>));
     return cast null;
   }

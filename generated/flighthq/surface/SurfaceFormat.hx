@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.PixelOrder;
 
 class SurfaceFormat {
-  public static function convertSurfacePixelOrder(out:Dynamic, source:Dynamic, length:Float, from:PixelOrder, to:PixelOrder):Void {
+  public static function convertSurfacePixelOrder(out:flighthq._internal._UInt8ClampedArray, source:flighthq._internal._UInt8ClampedArray, length:Float, from:PixelOrder, to:PixelOrder):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var srcR:Dynamic = cast _Runtime.UNDEFINED;
     var srcG:Dynamic = cast _Runtime.UNDEFINED;
@@ -47,7 +47,7 @@ class SurfaceFormat {
     }
   }
 
-  public static function premultiplySurfacePixels(out:Dynamic, source:Dynamic, length:Float):Void {
+  public static function premultiplySurfacePixels(out:flighthq._internal._UInt8ClampedArray, source:flighthq._internal._UInt8ClampedArray, length:Float):Void {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, length, '<'))) {
@@ -61,7 +61,7 @@ class SurfaceFormat {
     }
   }
 
-  public static function unpremultiplySurfacePixels(out:Dynamic, source:Dynamic, length:Float):Void {
+  public static function unpremultiplySurfacePixels(out:flighthq._internal._UInt8ClampedArray, source:flighthq._internal._UInt8ClampedArray, length:Float):Void {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, length, '<'))) {

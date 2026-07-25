@@ -55,11 +55,11 @@ class ParseDds {
     aMask = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
     _Runtime.setField(reader, 'offset', 112.0);
     caps2 = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals((Std.int(caps2) & Std.int(ParseDds.ddsCaps2Volume__parseDds)), 0.0), function():Dynamic return cast _Runtime.compare(dwDepth, 1.0, '>')))) { return cast null; }
-    cube = !_Runtime.strictEquals((Std.int(caps2) & Std.int(ParseDds.ddsCaps2Cubemap__parseDds)), 0.0);
+    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals((_Runtime.toInt32(caps2) & _Runtime.toInt32(ParseDds.ddsCaps2Volume__parseDds)), 0.0), function():Dynamic return cast _Runtime.compare(dwDepth, 1.0, '>')))) { return cast null; }
+    cube = !_Runtime.strictEquals((_Runtime.toInt32(caps2) & _Runtime.toInt32(ParseDds.ddsCaps2Cubemap__parseDds)), 0.0);
     layers = 1.0;
     dataOffset = ParseDds.ddsDataOffset__parseDds;
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals((Std.int(pfFlags) & Std.int(ParseDds.ddsPfFourCC__parseDds)), 0.0), function():Dynamic return cast _Runtime.strictEquals(fourCC, ParseDds.ddsFourCcDx10__parseDds)))) {
+    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals((_Runtime.toInt32(pfFlags) & _Runtime.toInt32(ParseDds.ddsPfFourCC__parseDds)), 0.0), function():Dynamic return cast _Runtime.strictEquals(fourCC, ParseDds.ddsFourCcDx10__parseDds)))) {
       if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(hasByteReaderBytes, cast ([_Runtime.callValue(createByteReader, cast ([bytes, ParseDds.ddsDataOffset__parseDds] : Array<Dynamic>)), 20.0] : Array<Dynamic>))))) { return cast null; }
       var dx10:Dynamic = _Runtime.callValue(createByteReader, cast ([bytes, ParseDds.ddsDataOffset__parseDds] : Array<Dynamic>));
       var dxgiFormat:Dynamic = _Runtime.callValue(readByteReaderU32, cast ([dx10] : Array<Dynamic>));
@@ -67,12 +67,12 @@ class ParseDds {
       var miscFlag:Dynamic = _Runtime.callValue(readByteReaderU32, cast ([dx10] : Array<Dynamic>));
       var arraySize:Dynamic = _Runtime.callValue(readByteReaderU32, cast ([dx10] : Array<Dynamic>));
       (format = cast (_Runtime.coalesce(_Runtime.getIndex(ParseDds.ddsDxgiFormat__parseDds, dxgiFormat), function():Dynamic return cast null) : Dynamic));
-      (cube = cast (_Runtime.orValue(cube, function():Dynamic return cast !_Runtime.strictEquals((Std.int(miscFlag) & Std.int(ParseDds.ddsDx10MiscCube__parseDds)), 0.0)) : Dynamic));
+      (cube = cast (_Runtime.orValue(cube, function():Dynamic return cast !_Runtime.strictEquals((_Runtime.toInt32(miscFlag) & _Runtime.toInt32(ParseDds.ddsDx10MiscCube__parseDds)), 0.0)) : Dynamic));
       (layers = cast (HxMath.max(1.0, arraySize) : Dynamic));
       (dataOffset = cast ((ParseDds.ddsDataOffset__parseDds + 20.0) : Dynamic));
-    } else { if (_Runtime.truthy(!_Runtime.strictEquals((Std.int(pfFlags) & Std.int(ParseDds.ddsPfFourCC__parseDds)), 0.0))) {
+    } else { if (_Runtime.truthy(!_Runtime.strictEquals((_Runtime.toInt32(pfFlags) & _Runtime.toInt32(ParseDds.ddsPfFourCC__parseDds)), 0.0))) {
       (format = cast (_Runtime.coalesce(_Runtime.getIndex(ParseDds.ddsFourCcFormat__parseDds, fourCC), function():Dynamic return cast null) : Dynamic));
-    } else { if (_Runtime.truthy(!_Runtime.strictEquals((Std.int(pfFlags) & Std.int(ParseDds.ddsPfRgb__parseDds)), 0.0))) {
+    } else { if (_Runtime.truthy(!_Runtime.strictEquals((_Runtime.toInt32(pfFlags) & _Runtime.toInt32(ParseDds.ddsPfRgb__parseDds)), 0.0))) {
       (format = cast (_Runtime.callValue(ParseDds.mapDdsUncompressed__parseDds, cast ([rgbBitCount, rMask, gMask, bMask, aMask] : Array<Dynamic>)) : Dynamic));
     } else {
       (format = cast (null : Dynamic));

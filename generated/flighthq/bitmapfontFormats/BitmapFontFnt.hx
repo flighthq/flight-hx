@@ -52,8 +52,8 @@ class BitmapFontFnt {
     _Runtime.callProperty(lines, 'push', cast (['kernings count=' + Std.string(_Runtime.field(kernKeys, 'length')) + ''] : Array<Dynamic>));
     for (key in _Runtime.iterable(kernKeys)) {
       var amount:Dynamic = (cast _Runtime.callProperty(_Runtime.field(font, 'kerning'), 'get', cast ([key] : Array<Dynamic>)) : Float);
-      var first:Dynamic = _Runtime.unsignedShiftRight(Std.int(key), Std.int(16.0));
-      var second:Dynamic = (Std.int(key) & Std.int(65535.0));
+      var first:Dynamic = _Runtime.unsignedShiftRight(_Runtime.toInt32(key), _Runtime.toInt32(16.0));
+      var second:Dynamic = (_Runtime.toInt32(key) & _Runtime.toInt32(65535.0));
       _Runtime.callProperty(lines, 'push', cast (['kerning first=' + Std.string(first) + ' second=' + Std.string(second) + ' amount=' + Std.string(amount) + ''] : Array<Dynamic>));
     }
     return cast (_Runtime.join(lines, '\n') + '\n');

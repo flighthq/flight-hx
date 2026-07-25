@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 
-typedef Surface = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var alphaType:AlphaType; var compressed:Null<ImageResourceCompressed>; var data:Null<Dynamic>; var format:PixelFormat; var height:Float; var source:Null<Dynamic>; var version:Float; var width:Float; var colorSpace:String; };
+typedef Surface = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var alphaType:AlphaType; var compressed:Null<ImageResourceCompressed>; var data:Null<flighthq._internal._UInt8ClampedArray>; var format:PixelFormat; var height:Float; var source:Null<Dynamic>; var version:Float; var width:Float; var colorSpace:String; };

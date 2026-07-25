@@ -8,7 +8,7 @@ import flighthq.types.SurfaceEdgeMode;
 import flighthq.types.SurfaceRegion;
 
 class SurfaceDisplacement {
-  public static function displaceSurface(out:Dynamic, source:SurfaceRegion, options:SurfaceDisplacementMapOptions):Void {
+  public static function displaceSurface(out:flighthq._internal._UInt8ClampedArray, source:SurfaceRegion, options:SurfaceDisplacementMapOptions):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var map:Dynamic = cast _Runtime.UNDEFINED;
@@ -33,10 +33,10 @@ class SurfaceDisplacement {
     edgeMode = _Runtime.field(options, 'edgeMode');
     mode = _Runtime.coalesce(_Runtime.field(options, 'mode'), function():Dynamic return cast 'wrap');
     fillColor = _Runtime.coalesce(_Runtime.field(options, 'fillColor'), function():Dynamic return cast 0.0);
-    fillR = (Std.int(_Runtime.unsignedShiftRight(Std.int(fillColor), Std.int(24.0))) & Std.int(255.0));
-    fillG = (Std.int((Std.int(fillColor) >> Std.int(16.0))) & Std.int(255.0));
-    fillB = (Std.int((Std.int(fillColor) >> Std.int(8.0))) & Std.int(255.0));
-    fillA = (Std.int(fillColor) & Std.int(255.0));
+    fillR = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(fillColor), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0));
+    fillG = (_Runtime.toInt32((_Runtime.toInt32(fillColor) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0));
+    fillB = (_Runtime.toInt32((_Runtime.toInt32(fillColor) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0));
+    fillA = (_Runtime.toInt32(fillColor) & _Runtime.toInt32(255.0));
     {
       var py:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(py, h, '<'))) {

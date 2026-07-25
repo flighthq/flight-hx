@@ -73,7 +73,7 @@ class ShapeCollision {
     var bPoints:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(ShapeCollision.writeAabbVertices__shapeCollision, cast ([a, ShapeCollision.scratchA__shapeCollision] : Array<Dynamic>));
     bPoints = _Runtime.field(b, 'points');
-    return cast _Runtime.callValue(ShapeCollision.satConvexOverlap__shapeCollision, cast ([ShapeCollision.scratchA__shapeCollision, 4.0, bPoints, (Std.int(_Runtime.field(bPoints, 'length')) >> Std.int(1.0)), out] : Array<Dynamic>));
+    return cast _Runtime.callValue(ShapeCollision.satConvexOverlap__shapeCollision, cast ([ShapeCollision.scratchA__shapeCollision, 4.0, bPoints, (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> _Runtime.toInt32(1.0)), out] : Array<Dynamic>));
     return cast null;
   }
 
@@ -159,7 +159,7 @@ class ShapeCollision {
   public static function testCirclePolygonCollision(a:CollisionCircle, b:CollisionPolygon, out:CollisionManifold):Bool {
     var points:Dynamic = cast _Runtime.UNDEFINED;
     points = _Runtime.field(b, 'points');
-    return cast _Runtime.callValue(ShapeCollision.satCircleConvexOverlap__shapeCollision, cast ([_Runtime.field(a, 'x'), _Runtime.field(a, 'y'), _Runtime.field(a, 'radius'), points, (Std.int(_Runtime.field(points, 'length')) >> Std.int(1.0)), out] : Array<Dynamic>));
+    return cast _Runtime.callValue(ShapeCollision.satCircleConvexOverlap__shapeCollision, cast ([_Runtime.field(a, 'x'), _Runtime.field(a, 'y'), _Runtime.field(a, 'radius'), points, (_Runtime.toInt32(_Runtime.field(points, 'length')) >> _Runtime.toInt32(1.0)), out] : Array<Dynamic>));
     return cast null;
   }
 
@@ -174,7 +174,7 @@ class ShapeCollision {
     var bPoints:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(ShapeCollision.writeObbVertices__shapeCollision, cast ([a, ShapeCollision.scratchA__shapeCollision] : Array<Dynamic>));
     bPoints = _Runtime.field(b, 'points');
-    return cast _Runtime.callValue(ShapeCollision.satConvexOverlap__shapeCollision, cast ([ShapeCollision.scratchA__shapeCollision, 4.0, bPoints, (Std.int(_Runtime.field(bPoints, 'length')) >> Std.int(1.0)), out] : Array<Dynamic>));
+    return cast _Runtime.callValue(ShapeCollision.satConvexOverlap__shapeCollision, cast ([ShapeCollision.scratchA__shapeCollision, 4.0, bPoints, (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> _Runtime.toInt32(1.0)), out] : Array<Dynamic>));
     return cast null;
   }
 
@@ -183,7 +183,7 @@ class ShapeCollision {
     var bPoints:Dynamic = cast _Runtime.UNDEFINED;
     aPoints = _Runtime.field(a, 'points');
     bPoints = _Runtime.field(b, 'points');
-    return cast _Runtime.callValue(ShapeCollision.satConvexOverlap__shapeCollision, cast ([aPoints, (Std.int(_Runtime.field(aPoints, 'length')) >> Std.int(1.0)), bPoints, (Std.int(_Runtime.field(bPoints, 'length')) >> Std.int(1.0)), out] : Array<Dynamic>));
+    return cast _Runtime.callValue(ShapeCollision.satConvexOverlap__shapeCollision, cast ([aPoints, (_Runtime.toInt32(_Runtime.field(aPoints, 'length')) >> _Runtime.toInt32(1.0)), bPoints, (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> _Runtime.toInt32(1.0)), out] : Array<Dynamic>));
     return cast null;
   }
 
@@ -265,10 +265,10 @@ class ShapeCollision {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, pn, '<'))) {
         var j:Dynamic = ((i + 1.0) % pn);
-        var x0:Dynamic = _Runtime.getIndex(px, (Std.int(i) << Std.int(1.0)));
-        var y0:Dynamic = _Runtime.getIndex(px, ((Std.int(i) << Std.int(1.0)) + 1.0));
-        var x1:Dynamic = _Runtime.getIndex(px, (Std.int(j) << Std.int(1.0)));
-        var y1:Dynamic = _Runtime.getIndex(px, ((Std.int(j) << Std.int(1.0)) + 1.0));
+        var x0:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(i) << _Runtime.toInt32(1.0)));
+        var y0:Dynamic = _Runtime.getIndex(px, ((_Runtime.toInt32(i) << _Runtime.toInt32(1.0)) + 1.0));
+        var x1:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(j) << _Runtime.toInt32(1.0)));
+        var y1:Dynamic = _Runtime.getIndex(px, ((_Runtime.toInt32(j) << _Runtime.toInt32(1.0)) + 1.0));
         _Runtime.setField(ShapeCollision.scratchAxis__shapeCollision, 'x', (y1 - y0));
         _Runtime.setField(ShapeCollision.scratchAxis__shapeCollision, 'y', -(x1 - x0));
         var len:Dynamic = _Runtime.callValue(normalizeVector2, cast ([ShapeCollision.scratchAxis__shapeCollision, ShapeCollision.scratchAxis__shapeCollision] : Array<Dynamic>));
@@ -294,8 +294,8 @@ class ShapeCollision {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, pn, '<'))) {
-        var vx:Dynamic = _Runtime.getIndex(px, (Std.int(i) << Std.int(1.0)));
-        var vy:Dynamic = _Runtime.getIndex(px, ((Std.int(i) << Std.int(1.0)) + 1.0));
+        var vx:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(i) << _Runtime.toInt32(1.0)));
+        var vy:Dynamic = _Runtime.getIndex(px, ((_Runtime.toInt32(i) << _Runtime.toInt32(1.0)) + 1.0));
         var ddx:Dynamic = (cx - vx);
         var ddy:Dynamic = (cy - vy);
         var d2:Dynamic = ((ddx * ddx) + (ddy * ddy));
@@ -333,8 +333,8 @@ class ShapeCollision {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, pn, '<'))) {
-        (centroidX = cast ((centroidX + _Runtime.getIndex(px, (Std.int(i) << Std.int(1.0)))) : Dynamic));
-        (centroidY = cast ((centroidY + _Runtime.getIndex(px, ((Std.int(i) << Std.int(1.0)) + 1.0))) : Dynamic));
+        (centroidX = cast ((centroidX + _Runtime.getIndex(px, (_Runtime.toInt32(i) << _Runtime.toInt32(1.0)))) : Dynamic));
+        (centroidY = cast ((centroidY + _Runtime.getIndex(px, ((_Runtime.toInt32(i) << _Runtime.toInt32(1.0)) + 1.0))) : Dynamic));
         i++;
       }
     }
@@ -365,7 +365,7 @@ class ShapeCollision {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, pn, '<'))) {
-        var d:Dynamic = ((_Runtime.getIndex(px, (Std.int(i) << Std.int(1.0))) * axisX) + (_Runtime.getIndex(px, ((Std.int(i) << Std.int(1.0)) + 1.0)) * axisY));
+        var d:Dynamic = ((_Runtime.getIndex(px, (_Runtime.toInt32(i) << _Runtime.toInt32(1.0))) * axisX) + (_Runtime.getIndex(px, ((_Runtime.toInt32(i) << _Runtime.toInt32(1.0)) + 1.0)) * axisY));
         if (_Runtime.truthy(_Runtime.compare(d, minP, '<'))) { (minP = cast (d : Dynamic)); }
         if (_Runtime.truthy(_Runtime.compare(d, maxP, '>'))) { (maxP = cast (d : Dynamic)); }
         i++;
@@ -401,8 +401,8 @@ class ShapeCollision {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, an, '<'))) {
-        (aCentroidX = cast ((aCentroidX + _Runtime.getIndex(ax, (Std.int(i) << Std.int(1.0)))) : Dynamic));
-        (aCentroidY = cast ((aCentroidY + _Runtime.getIndex(ax, ((Std.int(i) << Std.int(1.0)) + 1.0))) : Dynamic));
+        (aCentroidX = cast ((aCentroidX + _Runtime.getIndex(ax, (_Runtime.toInt32(i) << _Runtime.toInt32(1.0)))) : Dynamic));
+        (aCentroidY = cast ((aCentroidY + _Runtime.getIndex(ax, ((_Runtime.toInt32(i) << _Runtime.toInt32(1.0)) + 1.0))) : Dynamic));
         i++;
       }
     }
@@ -413,8 +413,8 @@ class ShapeCollision {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, bn, '<'))) {
-        (bCentroidX = cast ((bCentroidX + _Runtime.getIndex(bx, (Std.int(i) << Std.int(1.0)))) : Dynamic));
-        (bCentroidY = cast ((bCentroidY + _Runtime.getIndex(bx, ((Std.int(i) << Std.int(1.0)) + 1.0))) : Dynamic));
+        (bCentroidX = cast ((bCentroidX + _Runtime.getIndex(bx, (_Runtime.toInt32(i) << _Runtime.toInt32(1.0)))) : Dynamic));
+        (bCentroidY = cast ((bCentroidY + _Runtime.getIndex(bx, ((_Runtime.toInt32(i) << _Runtime.toInt32(1.0)) + 1.0))) : Dynamic));
         i++;
       }
     }
@@ -439,10 +439,10 @@ class ShapeCollision {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, sn, '<'))) {
         var j:Dynamic = ((i + 1.0) % sn);
-        var x0:Dynamic = _Runtime.getIndex(sx, (Std.int(i) << Std.int(1.0)));
-        var y0:Dynamic = _Runtime.getIndex(sx, ((Std.int(i) << Std.int(1.0)) + 1.0));
-        var x1:Dynamic = _Runtime.getIndex(sx, (Std.int(j) << Std.int(1.0)));
-        var y1:Dynamic = _Runtime.getIndex(sx, ((Std.int(j) << Std.int(1.0)) + 1.0));
+        var x0:Dynamic = _Runtime.getIndex(sx, (_Runtime.toInt32(i) << _Runtime.toInt32(1.0)));
+        var y0:Dynamic = _Runtime.getIndex(sx, ((_Runtime.toInt32(i) << _Runtime.toInt32(1.0)) + 1.0));
+        var x1:Dynamic = _Runtime.getIndex(sx, (_Runtime.toInt32(j) << _Runtime.toInt32(1.0)));
+        var y1:Dynamic = _Runtime.getIndex(sx, ((_Runtime.toInt32(j) << _Runtime.toInt32(1.0)) + 1.0));
         _Runtime.setField(ShapeCollision.scratchAxis__shapeCollision, 'x', (y1 - y0));
         _Runtime.setField(ShapeCollision.scratchAxis__shapeCollision, 'y', -(x1 - x0));
         var len:Dynamic = _Runtime.callValue(normalizeVector2, cast ([ShapeCollision.scratchAxis__shapeCollision, ShapeCollision.scratchAxis__shapeCollision] : Array<Dynamic>));
@@ -478,7 +478,7 @@ class ShapeCollision {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, an, '<'))) {
-        var d:Dynamic = ((_Runtime.getIndex(ax, (Std.int(i) << Std.int(1.0))) * axisX) + (_Runtime.getIndex(ax, ((Std.int(i) << Std.int(1.0)) + 1.0)) * axisY));
+        var d:Dynamic = ((_Runtime.getIndex(ax, (_Runtime.toInt32(i) << _Runtime.toInt32(1.0))) * axisX) + (_Runtime.getIndex(ax, ((_Runtime.toInt32(i) << _Runtime.toInt32(1.0)) + 1.0)) * axisY));
         if (_Runtime.truthy(_Runtime.compare(d, minA, '<'))) { (minA = cast (d : Dynamic)); }
         if (_Runtime.truthy(_Runtime.compare(d, maxA, '>'))) { (maxA = cast (d : Dynamic)); }
         i++;
@@ -489,7 +489,7 @@ class ShapeCollision {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, bn, '<'))) {
-        var d:Dynamic = ((_Runtime.getIndex(bx, (Std.int(i) << Std.int(1.0))) * axisX) + (_Runtime.getIndex(bx, ((Std.int(i) << Std.int(1.0)) + 1.0)) * axisY));
+        var d:Dynamic = ((_Runtime.getIndex(bx, (_Runtime.toInt32(i) << _Runtime.toInt32(1.0))) * axisX) + (_Runtime.getIndex(bx, ((_Runtime.toInt32(i) << _Runtime.toInt32(1.0)) + 1.0)) * axisY));
         if (_Runtime.truthy(_Runtime.compare(d, minB, '<'))) { (minB = cast (d : Dynamic)); }
         if (_Runtime.truthy(_Runtime.compare(d, maxB, '>'))) { (maxB = cast (d : Dynamic)); }
         i++;
@@ -501,7 +501,7 @@ class ShapeCollision {
     return cast null;
   }
 
-  public static function writeAabbVertices__shapeCollision(aabb:CollisionAabb, out:Dynamic):Void {
+  public static function writeAabbVertices__shapeCollision(aabb:CollisionAabb, out:flighthq._internal._Float64Array):Void {
     var minX:Dynamic = cast _Runtime.UNDEFINED;
     var minY:Dynamic = cast _Runtime.UNDEFINED;
     var maxX:Dynamic = cast _Runtime.UNDEFINED;
@@ -520,7 +520,7 @@ class ShapeCollision {
     _Runtime.setIndex(out, 7.0, maxY);
   }
 
-  public static function writeObbVertices__shapeCollision(obb:CollisionObb, out:Dynamic):Void {
+  public static function writeObbVertices__shapeCollision(obb:CollisionObb, out:flighthq._internal._Float64Array):Void {
     var cx:Dynamic = cast _Runtime.UNDEFINED;
     var cy:Dynamic = cast _Runtime.UNDEFINED;
     var halfW:Dynamic = cast _Runtime.UNDEFINED;
@@ -551,9 +551,9 @@ class ShapeCollision {
     _Runtime.setIndex(out, 7.0, ((cy - wy) + hy));
   }
 
-  public static final scratchA__shapeCollision:Dynamic = _Runtime.construct(_Runtime.globalValue('Float64Array'), [8.0]);
+  public static final scratchA__shapeCollision:Dynamic = new flighthq._internal._Float64Array(8.0);
 
-  public static final scratchB__shapeCollision:Dynamic = _Runtime.construct(_Runtime.globalValue('Float64Array'), [8.0]);
+  public static final scratchB__shapeCollision:Dynamic = new flighthq._internal._Float64Array(8.0);
 
   public static final scratchAxis__shapeCollision:Dynamic = _Runtime.callValue(createVector2, cast ([] : Array<Dynamic>));
 

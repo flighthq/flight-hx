@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 
 class NextPowerOfTwo {
   public static function isPowerOfTwo(n:Float):Bool {
-    return cast _Runtime.andValue(_Runtime.compare(n, 0.0, '>'), function():Dynamic return cast _Runtime.strictEquals((Std.int(n) & Std.int((n - 1.0))), 0.0));
+    return cast _Runtime.andValue(_Runtime.compare(n, 0.0, '>'), function():Dynamic return cast _Runtime.strictEquals((_Runtime.toInt32(n) & _Runtime.toInt32((n - 1.0))), 0.0));
     return cast null;
   }
 
@@ -20,25 +20,25 @@ class NextPowerOfTwo {
 
   public static function nextPowerOfTwo(n:Float):Float {
     if (_Runtime.truthy(_Runtime.compare(n, 1.0, '<='))) { return cast 1.0; }
-    (n = cast ((Std.int((n - 1.0)) | Std.int(0.0)) : Dynamic));
-    (n = (Std.int(n) | Std.int((Std.int(n) >> Std.int(1.0)))));
-    (n = (Std.int(n) | Std.int((Std.int(n) >> Std.int(2.0)))));
-    (n = (Std.int(n) | Std.int((Std.int(n) >> Std.int(4.0)))));
-    (n = (Std.int(n) | Std.int((Std.int(n) >> Std.int(8.0)))));
-    (n = (Std.int(n) | Std.int((Std.int(n) >> Std.int(16.0)))));
-    return cast _Runtime.unsignedShiftRight(Std.int((n + 1.0)), Std.int(0.0));
+    (n = cast ((_Runtime.toInt32((n - 1.0)) | _Runtime.toInt32(0.0)) : Dynamic));
+    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> _Runtime.toInt32(1.0)))));
+    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> _Runtime.toInt32(2.0)))));
+    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> _Runtime.toInt32(4.0)))));
+    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> _Runtime.toInt32(8.0)))));
+    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> _Runtime.toInt32(16.0)))));
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((n + 1.0)), _Runtime.toInt32(0.0));
     return cast null;
   }
 
   public static function previousPowerOfTwo(n:Float):Float {
     if (_Runtime.truthy(_Runtime.compare(n, 1.0, '<='))) { return cast 1.0; }
-    (n = cast ((Std.int(n) | Std.int(0.0)) : Dynamic));
-    (n = (Std.int(n) | Std.int((Std.int(n) >> Std.int(1.0)))));
-    (n = (Std.int(n) | Std.int((Std.int(n) >> Std.int(2.0)))));
-    (n = (Std.int(n) | Std.int((Std.int(n) >> Std.int(4.0)))));
-    (n = (Std.int(n) | Std.int((Std.int(n) >> Std.int(8.0)))));
-    (n = (Std.int(n) | Std.int((Std.int(n) >> Std.int(16.0)))));
-    return cast (Std.int((n + 1.0)) >> Std.int(1.0));
+    (n = cast ((_Runtime.toInt32(n) | _Runtime.toInt32(0.0)) : Dynamic));
+    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> _Runtime.toInt32(1.0)))));
+    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> _Runtime.toInt32(2.0)))));
+    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> _Runtime.toInt32(4.0)))));
+    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> _Runtime.toInt32(8.0)))));
+    (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> _Runtime.toInt32(16.0)))));
+    return cast (_Runtime.toInt32((n + 1.0)) >> _Runtime.toInt32(1.0));
     return cast null;
   }
 }

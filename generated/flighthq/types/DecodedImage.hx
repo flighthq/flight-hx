@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef DecodedImage = { var data:Dynamic; var width:Float; var height:Float; };
+typedef DecodedImage = { var data:flighthq._internal._UInt8ClampedArray; var width:Float; var height:Float; };

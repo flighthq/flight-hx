@@ -56,7 +56,7 @@ class MeshGeometryOperations {
       var src:Dynamic = _Runtime.field(options, 'indices');
       var needsUint32:Dynamic = _Runtime.compare(vertexCount, MeshGeometryOperations.UINT16_INDEX_CEILING__meshGeometryOperations, '>');
       if (_Runtime.truthy(needsUint32)) {
-        var a:Dynamic = _Runtime.construct(_Runtime.globalValue('Uint32Array'), [_Runtime.field(src, 'length')]);
+        var a:Dynamic = new flighthq._internal._UInt32Array(_Runtime.field(src, 'length'));
         {
           var i:Dynamic = 0.0;
           while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(src, 'length'), '<'))) {
@@ -116,7 +116,7 @@ class MeshGeometryOperations {
       (element0 = cast (triangleIndex : Dynamic));
       (element1 = cast ((triangleIndex + 1.0) : Dynamic));
       (element2 = cast ((triangleIndex + 2.0) : Dynamic));
-      if (_Runtime.truthy(!_Runtime.strictEquals((Std.int(triangleIndex) & Std.int(1.0)), 0.0))) {
+      if (_Runtime.truthy(!_Runtime.strictEquals((_Runtime.toInt32(triangleIndex) & _Runtime.toInt32(1.0)), 0.0))) {
         var swap:Dynamic = element0;
         (element0 = cast (element1 : Dynamic));
         (element1 = cast (swap : Dynamic));
@@ -174,7 +174,7 @@ class MeshGeometryOperations {
     }
     mergedVertices = new flighthq._internal._Float32Array(totalVertexFloats);
     needsUint32 = _Runtime.compare((totalVertexFloats / floatsPerVertex), MeshGeometryOperations.UINT16_INDEX_CEILING__meshGeometryOperations, '>');
-    mergedIndices = _Runtime.select(_Runtime.orValue(allIndexed, function():Dynamic return cast _Runtime.compare(totalIndexCount, 0.0, '>')), function():Dynamic return cast _Runtime.select(needsUint32, function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Uint32Array'), [totalIndexCount]), function():Dynamic return cast new flighthq._internal._UInt16Array(totalIndexCount)), function():Dynamic return cast null);
+    mergedIndices = _Runtime.select(_Runtime.orValue(allIndexed, function():Dynamic return cast _Runtime.compare(totalIndexCount, 0.0, '>')), function():Dynamic return cast _Runtime.select(needsUint32, function():Dynamic return cast new flighthq._internal._UInt32Array(totalIndexCount), function():Dynamic return cast new flighthq._internal._UInt16Array(totalIndexCount)), function():Dynamic return cast null);
     mergedSubsets = cast ([] : Array<Dynamic>);
     vertexOffset = 0.0;
     indexOffset = 0.0;

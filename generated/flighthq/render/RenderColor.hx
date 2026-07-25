@@ -14,12 +14,12 @@ class RenderColor {
     var b:Dynamic = cast _Runtime.UNDEFINED;
     var a:Dynamic = cast _Runtime.UNDEFINED;
     _state = (cast state : { var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; });
-    uint = _Runtime.unsignedShiftRight(Std.int(color), Std.int(0.0));
+    uint = _Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(0.0));
     _Runtime.setField(_state, 'backgroundColor', uint);
-    r = _Runtime.unsignedShiftRight(Std.int((Std.int(uint) & Std.int(4278190080.0))), Std.int(24.0));
-    g = _Runtime.unsignedShiftRight(Std.int((Std.int(uint) & Std.int(16711680.0))), Std.int(16.0));
-    b = _Runtime.unsignedShiftRight(Std.int((Std.int(uint) & Std.int(65280.0))), Std.int(8.0));
-    a = (Std.int(uint) & Std.int(255.0));
+    r = _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(uint) & _Runtime.toInt32(4278190080.0))), _Runtime.toInt32(24.0));
+    g = _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(uint) & _Runtime.toInt32(16711680.0))), _Runtime.toInt32(16.0));
+    b = _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(uint) & _Runtime.toInt32(65280.0))), _Runtime.toInt32(8.0));
+    a = (_Runtime.toInt32(uint) & _Runtime.toInt32(255.0));
     _Runtime.setIndex(_Runtime.field(_state, 'backgroundColorRgba'), 0.0, (r / 255.0));
     _Runtime.setIndex(_Runtime.field(_state, 'backgroundColorRgba'), 1.0, (g / 255.0));
     _Runtime.setIndex(_Runtime.field(_state, 'backgroundColorRgba'), 2.0, (b / 255.0));

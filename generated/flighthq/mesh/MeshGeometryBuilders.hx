@@ -876,7 +876,7 @@ class MeshGeometryBuilders {
         i++;
       }
     }
-    indexArray = _Runtime.construct(_Runtime.globalValue('Uint32Array'), [_Runtime.field(indices, 'length')]);
+    indexArray = new flighthq._internal._UInt32Array(_Runtime.field(indices, 'length'));
     _Runtime.callProperty(indexArray, 'set', cast ([indices] : Array<Dynamic>));
     geometry = _Runtime.callValue(createMeshGeometry, cast ([{ indices: indexArray, layout: MeshGeometryBuilders.CANONICAL_VERTEX_LAYOUT__meshGeometryBuilders, vertices: vertices }] : Array<Dynamic>));
     _Runtime.callValue(computeMeshGeometryTangents, cast ([geometry, geometry] : Array<Dynamic>));

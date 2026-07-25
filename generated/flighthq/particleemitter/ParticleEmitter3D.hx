@@ -181,9 +181,9 @@ class ParticleEmitter3D {
     var transformCapacity:Dynamic = cast _Runtime.UNDEFINED;
     var velocityCapacity:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(source, 'data');
-    colorCapacity = (Std.int((_Runtime.field(_Runtime.field(data, 'colors'), 'length') / ParticleEmitter3D.PARTICLE_COLOR_STRIDE__particleEmitter3D)) | Std.int(0.0));
-    transformCapacity = (Std.int((_Runtime.field(_Runtime.field(data, 'transforms'), 'length') / ParticleEmitter3D.PARTICLE_TRANSFORM_STRIDE__particleEmitter3D)) | Std.int(0.0));
-    velocityCapacity = (Std.int((_Runtime.field(_Runtime.field(data, 'velocities'), 'length') / ParticleEmitter3D.PARTICLE_VELOCITY_STRIDE__particleEmitter3D)) | Std.int(0.0));
+    colorCapacity = (_Runtime.toInt32((_Runtime.field(_Runtime.field(data, 'colors'), 'length') / ParticleEmitter3D.PARTICLE_COLOR_STRIDE__particleEmitter3D)) | _Runtime.toInt32(0.0));
+    transformCapacity = (_Runtime.toInt32((_Runtime.field(_Runtime.field(data, 'transforms'), 'length') / ParticleEmitter3D.PARTICLE_TRANSFORM_STRIDE__particleEmitter3D)) | _Runtime.toInt32(0.0));
+    velocityCapacity = (_Runtime.toInt32((_Runtime.field(_Runtime.field(data, 'velocities'), 'length') / ParticleEmitter3D.PARTICLE_VELOCITY_STRIDE__particleEmitter3D)) | _Runtime.toInt32(0.0));
     return cast HxMath.min(HxMath.min(HxMath.min(HxMath.min(HxMath.min(_Runtime.field(_Runtime.field(data, 'ids'), 'length'), _Runtime.field(_Runtime.field(data, 'alphas'), 'length')), _Runtime.field(_Runtime.field(data, 'positionsZ'), 'length')), colorCapacity), transformCapacity), velocityCapacity);
     return cast null;
   }
@@ -300,7 +300,7 @@ class ParticleEmitter3D {
     _Runtime.setIndex(_Runtime.field(_Runtime.field(target, 'data'), 'velocities'), (vt + 2.0), vz);
   }
 
-  public static function sortParticleEmitter3DIndicesByViewDepth(outIndices:Dynamic, outViewDepths:Dynamic, source:flighthq.types.ParticleEmitter3D, positionToView:Matrix4Like):Bool {
+  public static function sortParticleEmitter3DIndicesByViewDepth(outIndices:flighthq._internal._UInt32Array, outViewDepths:flighthq._internal._Float64Array, source:flighthq.types.ParticleEmitter3D, positionToView:Matrix4Like):Bool {
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var matrix:Dynamic = cast _Runtime.UNDEFINED;
     var transforms:Dynamic = cast _Runtime.UNDEFINED;
@@ -325,7 +325,7 @@ class ParticleEmitter3D {
       }
     }
     {
-      var start:Dynamic = ((Std.int(count) >> Std.int(1.0)) - 1.0);
+      var start:Dynamic = ((_Runtime.toInt32(count) >> _Runtime.toInt32(1.0)) - 1.0);
       while (_Runtime.truthy(_Runtime.compare(start, 0.0, '>='))) {
         _Runtime.callValue(ParticleEmitter3D.siftParticleDepthMaxHeap__particleEmitter3D, cast ([outIndices, outViewDepths, start, count] : Array<Dynamic>));
         start--;
@@ -345,7 +345,7 @@ class ParticleEmitter3D {
     return cast null;
   }
 
-  public static function isParticleDepthGreater__particleEmitter3D(a:Float, b:Float, depths:Dynamic):Bool {
+  public static function isParticleDepthGreater__particleEmitter3D(a:Float, b:Float, depths:flighthq._internal._Float64Array):Bool {
     var aDepth:Dynamic = cast _Runtime.UNDEFINED;
     var bDepth:Dynamic = cast _Runtime.UNDEFINED;
     aDepth = _Runtime.getIndex(depths, a);
@@ -354,7 +354,7 @@ class ParticleEmitter3D {
     return cast null;
   }
 
-  public static function siftParticleDepthMaxHeap__particleEmitter3D(indices:Dynamic, depths:Dynamic, root:Float, length:Float):Void {
+  public static function siftParticleDepthMaxHeap__particleEmitter3D(indices:flighthq._internal._UInt32Array, depths:flighthq._internal._Float64Array, root:Float, length:Float):Void {
     while (_Runtime.truthy(true)) {
       var left:Dynamic = ((root * 2.0) + 1.0);
       if (_Runtime.truthy(_Runtime.compare(left, length, '>='))) { return; }

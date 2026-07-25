@@ -6,8 +6,8 @@ import flighthq._internal._Runtime;
 import flighthq.types.ImageResource;
 
 class WgpuTextureUpload {
-  public static function uploadWgpuTextureData(device:Dynamic, texture:Dynamic, origin:Dynamic, width:Float, height:Float, data:Dynamic):Void {
-    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeTexture', cast ([{ texture: texture, origin: origin }, (cast data : Dynamic), { bytesPerRow: (width * 4.0), rowsPerImage: height }, cast ([width, height, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
+  public static function uploadWgpuTextureData(device:Dynamic, texture:Dynamic, origin:Dynamic, width:Float, height:Float, data:flighthq._internal._UInt8ClampedArray):Void {
+    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeTexture', cast ([{ texture: texture, origin: origin }, (cast data : flighthq._internal._UInt8ClampedArray), { bytesPerRow: (width * 4.0), rowsPerImage: height }, cast ([width, height, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
   }
 
   public static function uploadWgpuTextureElement(device:Dynamic, texture:Dynamic, origin:Dynamic, width:Float, height:Float, source:Dynamic):Void {

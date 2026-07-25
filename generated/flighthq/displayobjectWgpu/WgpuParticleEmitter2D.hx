@@ -77,7 +77,7 @@ class WgpuParticleEmitter2D {
       _Runtime.callProperty(_Runtime.coalesce(_Runtime.field(runtime, 'retiredBuffers'), function():Dynamic return cast _Runtime.setField(runtime, 'retiredBuffers', cast ([] : Array<Dynamic>))), 'push', cast ([_Runtime.field(runtime, 'particleInstanceBuffer')] : Array<Dynamic>));
     }
     newCapacity = HxMath.max(needed, (_Runtime.orValue(_Runtime.field(runtime, 'particleInstanceCapacity'), function():Dynamic return cast 0.0) * 2.0));
-    _Runtime.setField(runtime, 'particleInstanceBuffer', flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: HxMath.max(newCapacity, WgpuParticleEmitter2D.INSTANCE_STRIDE__wgpuParticleEmitter2D), usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'STORAGE')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
+    _Runtime.setField(runtime, 'particleInstanceBuffer', flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: HxMath.max(newCapacity, WgpuParticleEmitter2D.INSTANCE_STRIDE__wgpuParticleEmitter2D), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'STORAGE')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
     _Runtime.setField(runtime, 'particleInstanceCapacity', newCapacity);
     _Runtime.setField(runtime, 'particleInstanceData', new flighthq._internal._Float32Array((newCapacity / 4.0)));
   }
@@ -179,7 +179,7 @@ class WgpuParticleEmitter2D {
     device = _Runtime.field(__destructure3, 'device');
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([_Runtime.field(runtime, 'particleInstanceBuffer'), 0.0, _Runtime.field(instanceData, 'buffer'), 0.0, (drawCount * WgpuParticleEmitter2D.INSTANCE_STRIDE__wgpuParticleEmitter2D)] : Array<Dynamic>));
     uniformOffset = _Runtime.field(runtime, 'uniformOffset');
-    floatBase = (Std.int(uniformOffset) >> Std.int(2.0));
+    floatBase = (_Runtime.toInt32(uniformOffset) >> _Runtime.toInt32(2.0));
     __destructure4 = runtime;
     uniformData = _Runtime.field(__destructure4, 'uniformData');
     uniformDataU32 = _Runtime.field(__destructure4, 'uniformDataU32');

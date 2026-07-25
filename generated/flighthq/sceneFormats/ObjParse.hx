@@ -318,7 +318,7 @@ class ObjParse {
     g = _Runtime.callValue(ObjParse.clampChannel__objParse, cast ([_Runtime.getIndex(rgb, 1.0)] : Array<Dynamic>));
     b = _Runtime.callValue(ObjParse.clampChannel__objParse, cast ([_Runtime.getIndex(rgb, 2.0)] : Array<Dynamic>));
     a = _Runtime.callValue(ObjParse.clampChannel__objParse, cast ([alpha] : Array<Dynamic>));
-    return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int((Std.int(r) << Std.int(24.0))) | Std.int((Std.int(g) << Std.int(16.0))))) | Std.int((Std.int(b) << Std.int(8.0))))) | Std.int(a))), Std.int(0.0));
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(r) << _Runtime.toInt32(24.0))) | _Runtime.toInt32((_Runtime.toInt32(g) << _Runtime.toInt32(16.0))))) | _Runtime.toInt32((_Runtime.toInt32(b) << _Runtime.toInt32(8.0))))) | _Runtime.toInt32(a))), _Runtime.toInt32(0.0));
     return cast null;
   }
 

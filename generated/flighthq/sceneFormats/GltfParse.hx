@@ -337,7 +337,7 @@ class GltfParse {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     var stack:Array<Float> = cast _Runtime.UNDEFINED;
     var transforms:Array<Transform3D> = cast _Runtime.UNDEFINED;
-    parents = _Runtime.construct(_Runtime.globalValue('Int32Array'), [_Runtime.field(nodes, 'length')]);
+    parents = new flighthq._internal._Int32Array(_Runtime.field(nodes, 'length'));
     _Runtime.fill(parents, -1.0, 0, null, 1);
     {
       var parent:Dynamic = 0.0;
@@ -696,10 +696,10 @@ class GltfParse {
         var c1:Dynamic = _Runtime.callProperty(table, 'indexOf', cast ([_Runtime.getIndex(stripped, (i + 1.0))] : Array<Dynamic>));
         var c2:Dynamic = _Runtime.select(_Runtime.compare((i + 2.0), _Runtime.field(stripped, 'length'), '<'), function():Dynamic return cast _Runtime.callProperty(table, 'indexOf', cast ([_Runtime.getIndex(stripped, (i + 2.0))] : Array<Dynamic>)), function():Dynamic return cast -1.0);
         var c3:Dynamic = _Runtime.select(_Runtime.compare((i + 3.0), _Runtime.field(stripped, 'length'), '<'), function():Dynamic return cast _Runtime.callProperty(table, 'indexOf', cast ([_Runtime.getIndex(stripped, (i + 3.0))] : Array<Dynamic>)), function():Dynamic return cast -1.0);
-        var n:Dynamic = (Std.int((Std.int((Std.int((Std.int(c0) << Std.int(18.0))) | Std.int((Std.int(c1) << Std.int(12.0))))) | Std.int((Std.int(_Runtime.select(_Runtime.compare(c2, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast c2)) << Std.int(6.0))))) | Std.int(_Runtime.select(_Runtime.compare(c3, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast c3)));
-        _Runtime.callProperty(out, 'push', cast ([(Std.int((Std.int(n) >> Std.int(16.0))) & Std.int(255.0))] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.compare(c2, 0.0, '>='))) { _Runtime.callProperty(out, 'push', cast ([(Std.int((Std.int(n) >> Std.int(8.0))) & Std.int(255.0))] : Array<Dynamic>)); }
-        if (_Runtime.truthy(_Runtime.compare(c3, 0.0, '>='))) { _Runtime.callProperty(out, 'push', cast ([(Std.int(n) & Std.int(255.0))] : Array<Dynamic>)); }
+        var n:Dynamic = (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(c0) << _Runtime.toInt32(18.0))) | _Runtime.toInt32((_Runtime.toInt32(c1) << _Runtime.toInt32(12.0))))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.select(_Runtime.compare(c2, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast c2)) << _Runtime.toInt32(6.0))))) | _Runtime.toInt32(_Runtime.select(_Runtime.compare(c3, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast c3)));
+        _Runtime.callProperty(out, 'push', cast ([(_Runtime.toInt32((_Runtime.toInt32(n) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0))] : Array<Dynamic>));
+        if (_Runtime.truthy(_Runtime.compare(c2, 0.0, '>='))) { _Runtime.callProperty(out, 'push', cast ([(_Runtime.toInt32((_Runtime.toInt32(n) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0))] : Array<Dynamic>)); }
+        if (_Runtime.truthy(_Runtime.compare(c3, 0.0, '>='))) { _Runtime.callProperty(out, 'push', cast ([(_Runtime.toInt32(n) & _Runtime.toInt32(255.0))] : Array<Dynamic>)); }
         (i = cast ((i + 4.0) : Dynamic));
       }
     }
@@ -818,7 +818,7 @@ class GltfParse {
     return cast null;
   }
 
-  public static function buildGltfPrimitiveElements__gltfParse(mode:Float, source:Null<Dynamic>, vertexCount:Float, ?warnings:Array<String>):{ var indices:Null<Dynamic>; var topology:PrimitiveTopology; } {
+  public static function buildGltfPrimitiveElements__gltfParse(mode:Float, source:Null<flighthq._internal._UInt32Array>, vertexCount:Float, ?warnings:Array<String>):{ var indices:Null<flighthq._internal._UInt32Array>; var topology:PrimitiveTopology; } {
     {
       var __switchValue = mode;
       if (__switchValue == 0.0) {
@@ -844,18 +844,18 @@ class GltfParse {
       }
       else  {
         _Runtime.callOptionalProperty(warnings, 'push', cast (['primitiveToGeometry: primitive mode ' + Std.string(mode) + ' is not a glTF 2.0 mode; primitive omitted'] : Array<Dynamic>));
-        return cast { indices: _Runtime.construct(_Runtime.globalValue('Uint32Array'), [0.0]), topology: 'triangle-list' };
+        return cast { indices: new flighthq._internal._UInt32Array(0.0), topology: 'triangle-list' };
       }
     }
     return cast null;
   }
 
-  public static function buildGltfLineLoopIndices__gltfParse(source:Null<Dynamic>, vertexCount:Float):Dynamic {
+  public static function buildGltfLineLoopIndices__gltfParse(source:Null<flighthq._internal._UInt32Array>, vertexCount:Float):flighthq._internal._UInt32Array {
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var out:Dynamic = cast _Runtime.UNDEFINED;
     count = _Runtime.coalesce(_Runtime.optionalField(source, 'length'), function():Dynamic return cast vertexCount);
-    if (_Runtime.truthy(_Runtime.compare(count, 2.0, '<'))) { return cast _Runtime.construct(_Runtime.globalValue('Uint32Array'), [0.0]); }
-    out = _Runtime.construct(_Runtime.globalValue('Uint32Array'), [(count * 2.0)]);
+    if (_Runtime.truthy(_Runtime.compare(count, 2.0, '<'))) { return cast new flighthq._internal._UInt32Array(0.0); }
+    out = new flighthq._internal._UInt32Array((count * 2.0));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, count, '<'))) {
@@ -868,13 +868,13 @@ class GltfParse {
     return cast null;
   }
 
-  public static function buildGltfTriangleFanIndices__gltfParse(source:Null<Dynamic>, vertexCount:Float):Dynamic {
+  public static function buildGltfTriangleFanIndices__gltfParse(source:Null<flighthq._internal._UInt32Array>, vertexCount:Float):flighthq._internal._UInt32Array {
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var out:Dynamic = cast _Runtime.UNDEFINED;
     var first:Dynamic = cast _Runtime.UNDEFINED;
     count = _Runtime.coalesce(_Runtime.optionalField(source, 'length'), function():Dynamic return cast vertexCount);
-    if (_Runtime.truthy(_Runtime.compare(count, 3.0, '<'))) { return cast _Runtime.construct(_Runtime.globalValue('Uint32Array'), [0.0]); }
-    out = _Runtime.construct(_Runtime.globalValue('Uint32Array'), [((count - 2.0) * 3.0)]);
+    if (_Runtime.truthy(_Runtime.compare(count, 3.0, '<'))) { return cast new flighthq._internal._UInt32Array(0.0); }
+    out = new flighthq._internal._UInt32Array(((count - 2.0) * 3.0));
     first = _Runtime.coalesce(_Runtime.optionalIndex(source, 0.0), function():Dynamic return cast 0.0);
     {
       var i:Dynamic = 1.0;
@@ -1143,7 +1143,7 @@ class GltfParse {
     {
       var __switchValue = componentType;
       if (__switchValue == 5120.0) {
-        return cast _Runtime.construct(_Runtime.globalValue('Int8Array'), [length]);
+        return cast new flighthq._internal._Int8Array(length);
       }
       else if (__switchValue == 5121.0) {
         return cast new flighthq._internal._UInt8Array(length);
@@ -1155,7 +1155,7 @@ class GltfParse {
         return cast new flighthq._internal._UInt16Array(length);
       }
       else if (__switchValue == 5125.0) {
-        return cast _Runtime.construct(_Runtime.globalValue('Uint32Array'), [length]);
+        return cast new flighthq._internal._UInt32Array(length);
       }
       else  {
         return cast new flighthq._internal._Float32Array(length);

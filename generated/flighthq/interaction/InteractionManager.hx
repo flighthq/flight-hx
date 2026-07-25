@@ -480,7 +480,7 @@ class InteractionManager {
   public static function setPointerData__interactionManager(target:Null<NodeAny>, currentTarget:Null<NodeAny>, x:Float, y:Float, button:Float, deltaX:Float = 0.0, deltaY:Float = 0.0, ?options:InteractionPointerOptions):Void {
     _Runtime.setField(InteractionManager._pointerData__interactionManager, 'altKey', _Runtime.coalesce(_Runtime.optionalField(options, 'altKey'), function():Dynamic return cast false));
     _Runtime.setField(InteractionManager._pointerData__interactionManager, 'button', button);
-    _Runtime.setField(InteractionManager._pointerData__interactionManager, 'buttons', _Runtime.coalesce(_Runtime.optionalField(options, 'buttons'), function():Dynamic return cast _Runtime.select(_Runtime.compare(button, 0.0, '>='), function():Dynamic return cast (Std.int(1.0) << Std.int(button)), function():Dynamic return cast 0.0)));
+    _Runtime.setField(InteractionManager._pointerData__interactionManager, 'buttons', _Runtime.coalesce(_Runtime.optionalField(options, 'buttons'), function():Dynamic return cast _Runtime.select(_Runtime.compare(button, 0.0, '>='), function():Dynamic return cast (_Runtime.toInt32(1.0) << _Runtime.toInt32(button)), function():Dynamic return cast 0.0)));
     _Runtime.setField(InteractionManager._pointerData__interactionManager, 'ctrlKey', _Runtime.coalesce(_Runtime.optionalField(options, 'ctrlKey'), function():Dynamic return cast false));
     _Runtime.setField(InteractionManager._pointerData__interactionManager, 'currentTarget', currentTarget);
     _Runtime.setField(InteractionManager._pointerData__interactionManager, 'deltaX', deltaX);

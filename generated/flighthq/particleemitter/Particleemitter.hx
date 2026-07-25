@@ -234,7 +234,7 @@ class Particleemitter {
     _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter3D.setParticleEmitter3DParticleVelocity, cast ([target, index, vx, vy, vz] : Array<Dynamic>));
   }
 
-  public static function sortParticleEmitter3DIndicesByViewDepth(outIndices:Dynamic, outViewDepths:Dynamic, source:ParticleEmitter3D, positionToView:Matrix4Like):Bool {
+  public static function sortParticleEmitter3DIndicesByViewDepth(outIndices:flighthq._internal._UInt32Array, outViewDepths:flighthq._internal._Float64Array, source:ParticleEmitter3D, positionToView:Matrix4Like):Bool {
     return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter3D.sortParticleEmitter3DIndicesByViewDepth, cast ([outIndices, outViewDepths, source, positionToView] : Array<Dynamic>));
     return cast null;
   }

@@ -36,7 +36,7 @@ class MorphMeshGeometry {
     normals = _Runtime.field(__destructure0, 'normals');
     positions = _Runtime.field(__destructure0, 'positions');
     tangents = _Runtime.field(__destructure0, 'tangents');
-    vertexCount = (Std.int((_Runtime.field(positions, 'length') / 3.0)) | Std.int(0.0));
+    vertexCount = (_Runtime.toInt32((_Runtime.field(positions, 'length') / 3.0)) | _Runtime.toInt32(0.0));
     floats = (vertexCount * 3.0);
     _Runtime.callProperty(blendedPositions, 'set', cast ([positions.subarray(Std.int(0.0), Std.int(floats))] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(blendedNormals, null), function():Dynamic return cast !_Runtime.strictEquals(normals, null)))) { _Runtime.callProperty(blendedNormals, 'set', cast ([normals.subarray(Std.int(0.0), Std.int(floats))] : Array<Dynamic>)); }
@@ -109,7 +109,7 @@ class MorphMeshGeometry {
     layout = _Runtime.field(__destructure2, 'layout');
     vertices = _Runtime.field(__destructure2, 'vertices');
     floatsPerVertex = (_Runtime.field(layout, 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast (Std.int((_Runtime.field(vertices, 'length') / floatsPerVertex)) | Std.int(0.0)), function():Dynamic return cast 0.0);
+    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast (_Runtime.toInt32((_Runtime.field(vertices, 'length') / floatsPerVertex)) | _Runtime.toInt32(0.0)), function():Dynamic return cast 0.0);
     positionOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'position'] : Array<Dynamic>));
     normalOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'normal'] : Array<Dynamic>));
     tangentOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'tangent'] : Array<Dynamic>));

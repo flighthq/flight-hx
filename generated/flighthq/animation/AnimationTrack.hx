@@ -61,7 +61,7 @@ class AnimationTrack {
     lo = 0.0;
     hi = (count - 1.0);
     while (_Runtime.truthy(_Runtime.compare(lo, hi, '<'))) {
-      var mid:Dynamic = (Std.int(((lo + hi) + 1.0)) >> Std.int(1.0));
+      var mid:Dynamic = (_Runtime.toInt32(((lo + hi) + 1.0)) >> _Runtime.toInt32(1.0));
       if (_Runtime.truthy(_Runtime.compare(_Runtime.getIndex(times, mid), t, '<='))) { (lo = cast (mid : Dynamic)); } else { (hi = cast ((mid - 1.0) : Dynamic)); }
     }
     i = lo;

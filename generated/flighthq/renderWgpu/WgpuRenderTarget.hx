@@ -60,7 +60,7 @@ class WgpuRenderTarget {
     device = _Runtime.field(state, 'device');
     w = HxMath.max(1.0, HxMath.ceil(width));
     h = HxMath.max(1.0, HxMath.ceil(height));
-    texture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([w, h, 1.0] : Array<Dynamic>), format: format, usage: (Std.int((Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')))) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_SRC'))) }] : Array<Dynamic>));
+    texture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([w, h, 1.0] : Array<Dynamic>), format: format, usage: (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')))) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_SRC'))) }] : Array<Dynamic>));
     view = _Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>));
     bindGroup = _Runtime.callValue(buildWgpuRenderTargetBindGroup, cast ([state, view] : Array<Dynamic>));
     depthStencilTexture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([w, h, 1.0] : Array<Dynamic>), format: 'depth24plus-stencil8', usage: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT') }] : Array<Dynamic>));
@@ -151,7 +151,7 @@ class WgpuRenderTarget {
     _Runtime.setField(target, 'height', h);
     _Runtime.callProperty(_Runtime.field(target, 'texture'), 'destroy', cast ([] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(target, 'depthStencilTexture'), 'destroy', cast ([] : Array<Dynamic>));
-    newTexture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([w, h, 1.0] : Array<Dynamic>), format: format, usage: (Std.int((Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')))) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_SRC'))) }] : Array<Dynamic>));
+    newTexture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([w, h, 1.0] : Array<Dynamic>), format: format, usage: (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')))) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_SRC'))) }] : Array<Dynamic>));
     _Runtime.setField(target, 'texture', newTexture);
     _Runtime.setField(target, 'view', _Runtime.callProperty(newTexture, 'createView', cast ([] : Array<Dynamic>)));
     _Runtime.setField(target, 'bindGroup', _Runtime.callValue(buildWgpuRenderTargetBindGroup, cast ([state, _Runtime.field(target, 'view')] : Array<Dynamic>)));
@@ -170,7 +170,7 @@ class WgpuRenderTarget {
     var packed:Dynamic = cast _Runtime.UNDEFINED;
     packed = _Runtime.getIndex(_Runtime.field(target, 'clearColors'), 0.0);
     if (_Runtime.truthy(_Runtime.strictEquals(packed, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast { r: 0.0, g: 0.0, b: 0.0, a: 0.0 }; }
-    return cast { r: ((Std.int(_Runtime.unsignedShiftRight(Std.int(packed), Std.int(24.0))) & Std.int(255.0)) / 255.0), g: ((Std.int(_Runtime.unsignedShiftRight(Std.int(packed), Std.int(16.0))) & Std.int(255.0)) / 255.0), b: ((Std.int(_Runtime.unsignedShiftRight(Std.int(packed), Std.int(8.0))) & Std.int(255.0)) / 255.0), a: ((Std.int(packed) & Std.int(255.0)) / 255.0) };
+    return cast { r: ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0)) / 255.0), g: ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) / 255.0), b: ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) / 255.0), a: ((_Runtime.toInt32(packed) & _Runtime.toInt32(255.0)) / 255.0) };
     return cast null;
   }
 

@@ -30,7 +30,7 @@ class WgpuWireframeUpload {
     device = _Runtime.field(state, 'device');
     if (_Runtime.truthy(!_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(_Runtime.field(upload, 'lineIndexBuffer'), 'destroy', cast ([] : Array<Dynamic>)); }
     lines = _Runtime.callValue(WgpuWireframeUpload.buildLineIndices__wgpuWireframeUpload, cast ([geometry] : Array<Dynamic>));
-    lineIndexBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: HxMath.max(4.0, _Runtime.callValue(WgpuWireframeUpload.alignTo4__wgpuWireframeUpload, cast ([_Runtime.field(lines, 'byteLength')] : Array<Dynamic>))), usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'INDEX')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
+    lineIndexBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: HxMath.max(4.0, _Runtime.callValue(WgpuWireframeUpload.alignTo4__wgpuWireframeUpload, cast ([_Runtime.field(lines, 'byteLength')] : Array<Dynamic>))), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'INDEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([lineIndexBuffer, 0.0, _Runtime.field(lines, 'buffer'), _Runtime.field(lines, 'byteOffset'), _Runtime.field(lines, 'byteLength')] : Array<Dynamic>));
     (upload = cast ({ indexFormat: _Runtime.select(_Runtime.isInstanceOf(lines, _Runtime.globalValue('Uint32Array')), function():Dynamic return cast 'uint32', function():Dynamic return cast 'uint16'), lineIndexBuffer: lineIndexBuffer, version: _Runtime.field(geometry, 'version'), vertexBuffer: _Runtime.field(meshUpload, 'vertexBuffer') } : Dynamic));
     _Runtime.callProperty(perState, 'set', cast ([(cast geometry : MeshGeometry), upload] : Array<Dynamic>));
@@ -48,7 +48,7 @@ class WgpuWireframeUpload {
     triangleCount = HxMath.floor((_Runtime.field(triangleIndices, 'length') / 3.0));
     lineCount = (triangleCount * 6.0);
     useUint32 = _Runtime.orValue(_Runtime.isInstanceOf(triangleIndices, _Runtime.globalValue('Uint32Array')), function():Dynamic return cast _Runtime.compare(lineCount, 65535.0, '>'));
-    lines = _Runtime.select(useUint32, function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Uint32Array'), [lineCount]), function():Dynamic return cast new flighthq._internal._UInt16Array(lineCount));
+    lines = _Runtime.select(useUint32, function():Dynamic return cast new flighthq._internal._UInt32Array(lineCount), function():Dynamic return cast new flighthq._internal._UInt16Array(lineCount));
     {
       var t:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(t, triangleCount, '<'))) {
@@ -71,7 +71,7 @@ class WgpuWireframeUpload {
   }
 
   public static function alignTo4__wgpuWireframeUpload(byteLength:Float):Float {
-    return cast (Std.int((byteLength + 3.0)) & Std.int(~Std.int(3.0)));
+    return cast (_Runtime.toInt32((byteLength + 3.0)) & _Runtime.toInt32(~_Runtime.toInt32(3.0)));
     return cast null;
   }
 

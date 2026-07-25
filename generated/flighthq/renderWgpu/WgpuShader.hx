@@ -26,7 +26,7 @@ class WgpuShader {
   public static function createWgpuBindGroupLayouts(device:Dynamic):{ var uniformBindGroupLayout:Dynamic; var textureBindGroupLayout:Dynamic; } {
     var uniformBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
     var textureBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
-    uniformBindGroupLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'))), buffer: { type: 'uniform', hasDynamicOffset: true, minBindingSize: UNIFORM_BYTE_SIZE } }] : Array<Dynamic>) }] : Array<Dynamic>));
+    uniformBindGroupLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'))), buffer: { type: 'uniform', hasDynamicOffset: true, minBindingSize: UNIFORM_BYTE_SIZE } }] : Array<Dynamic>) }] : Array<Dynamic>));
     textureBindGroupLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), texture: { sampleType: 'float' } }, { binding: 1.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), sampler: { type: 'filtering' } }] : Array<Dynamic>) }] : Array<Dynamic>));
     return cast { uniformBindGroupLayout: uniformBindGroupLayout, textureBindGroupLayout: textureBindGroupLayout };
     return cast null;
@@ -122,7 +122,7 @@ class WgpuShader {
     var viewport:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     byteOffset = _Runtime.field(runtime, 'uniformOffset');
-    floatBase = (Std.int(byteOffset) >> Std.int(2.0));
+    floatBase = (_Runtime.toInt32(byteOffset) >> _Runtime.toInt32(2.0));
     __destructure1 = runtime;
     uniformData = _Runtime.field(__destructure1, 'uniformData');
     uniformDataU32 = _Runtime.field(__destructure1, 'uniformDataU32');

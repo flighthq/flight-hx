@@ -85,12 +85,12 @@ class WgpuRenderState {
                     __flowBranch5 = flighthq._internal._Async.flowNormal();
                   }
                   return flighthq._internal._Async.continueFlow(__flowBranch5, function():Dynamic {
-                    flighthq._internal.backend.WebGpuCanvasContextBackend.call(context, 'configure', cast ([{ device: device, format: format, alphaMode: 'premultiplied', usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_SRC'))) }] : Array<Dynamic>));
+                    flighthq._internal.backend.WebGpuCanvasContextBackend.call(context, 'configure', cast ([{ device: device, format: format, alphaMode: 'premultiplied', usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_SRC'))) }] : Array<Dynamic>));
                     uniformStride = HxMath.max(HxMath.max(256.0, flighthq._internal.backend.WebGpuLimitsBackend.field(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'limits'), 'minUniformBufferOffsetAlignment')), UNIFORM_BYTE_SIZE);
                     ringByteSize = (uniformStride * WgpuRenderState.RING_SLOT_COUNT__wgpuRenderState);
-                    uniformBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: ringByteSize, usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
+                    uniformBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: ringByteSize, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
                     uniformData = new flighthq._internal._Float32Array((ringByteSize / 4.0));
-                    uniformDataU32 = _Runtime.construct(_Runtime.globalValue('Uint32Array'), [_Runtime.field(uniformData, 'buffer')]);
+                    uniformDataU32 = new flighthq._internal._UInt32Array(_Runtime.field(uniformData, 'buffer'));
                     __destructure0 = _Runtime.callValue(createWgpuBindGroupLayouts, cast ([device] : Array<Dynamic>));
                     uniformBindGroupLayout = _Runtime.field(__destructure0, 'uniformBindGroupLayout');
                     textureBindGroupLayout = _Runtime.field(__destructure0, 'textureBindGroupLayout');

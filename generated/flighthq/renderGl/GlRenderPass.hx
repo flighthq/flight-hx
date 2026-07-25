@@ -101,10 +101,10 @@ class GlRenderPass {
     var bg:Dynamic = cast _Runtime.UNDEFINED;
     packed = _Runtime.getIndex(_Runtime.field(target, 'clearColors'), index);
     if (_Runtime.truthy(!_Runtime.strictEquals(packed, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      _Runtime.setIndex(out, 0.0, ((Std.int(_Runtime.unsignedShiftRight(Std.int(packed), Std.int(24.0))) & Std.int(255.0)) / 255.0));
-      _Runtime.setIndex(out, 1.0, ((Std.int(_Runtime.unsignedShiftRight(Std.int(packed), Std.int(16.0))) & Std.int(255.0)) / 255.0));
-      _Runtime.setIndex(out, 2.0, ((Std.int(_Runtime.unsignedShiftRight(Std.int(packed), Std.int(8.0))) & Std.int(255.0)) / 255.0));
-      _Runtime.setIndex(out, 3.0, ((Std.int(packed) & Std.int(255.0)) / 255.0));
+      _Runtime.setIndex(out, 0.0, ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0)) / 255.0));
+      _Runtime.setIndex(out, 1.0, ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) / 255.0));
+      _Runtime.setIndex(out, 2.0, ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) / 255.0));
+      _Runtime.setIndex(out, 3.0, ((_Runtime.toInt32(packed) & _Runtime.toInt32(255.0)) / 255.0));
       return;
     }
     bg = _Runtime.field(state, 'backgroundColorRgba');

@@ -46,12 +46,12 @@ class TessellatePath {
       }
     }
     contour = pts;
-    count = (Std.int(_Runtime.field(contour, 'length')) >> Std.int(1.0));
+    count = (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> _Runtime.toInt32(1.0));
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(count, 2.0, '>='), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(contour, 0.0), _Runtime.getIndex(contour, ((count - 1.0) * 2.0)))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(contour, 1.0), _Runtime.getIndex(contour, (((count - 1.0) * 2.0) + 1.0)))))) {
       (count = cast ((count - 1.0) : Dynamic));
     }
     if (_Runtime.truthy(_Runtime.compare(count, 3.0, '<'))) { return; }
-    base = (Std.int(_Runtime.field(vertices, 'length')) >> Std.int(1.0));
+    base = (_Runtime.toInt32(_Runtime.field(vertices, 'length')) >> _Runtime.toInt32(1.0));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, count, '<'))) {

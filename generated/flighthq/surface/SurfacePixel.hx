@@ -17,7 +17,7 @@ class SurfacePixel {
   public static function getSurfacePixel(source:Surface, x:Float, y:Float):Float {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     i = (((y * _Runtime.field(source, 'width')) + x) * 4.0);
-    return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int((Std.int(_Runtime.getIndex(_Runtime.field(source, 'data'), i)) << Std.int(24.0))) | Std.int((Std.int(_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 1.0))) << Std.int(16.0))))) | Std.int((Std.int(_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 2.0))) << Std.int(8.0))))) | Std.int(_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 3.0))))), Std.int(0.0));
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(_Runtime.field(source, 'data'), i)) << _Runtime.toInt32(24.0))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 1.0))) << _Runtime.toInt32(16.0))))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 2.0))) << _Runtime.toInt32(8.0))))) | _Runtime.toInt32(_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 3.0))))), _Runtime.toInt32(0.0));
     return cast null;
   }
 
@@ -36,26 +36,26 @@ class SurfacePixel {
   public static function getSurfacePixelRgb(source:Surface, x:Float, y:Float):Float {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     i = (((y * _Runtime.field(source, 'width')) + x) * 4.0);
-    return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int(_Runtime.getIndex(_Runtime.field(source, 'data'), i)) << Std.int(16.0))) | Std.int((Std.int(_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 1.0))) << Std.int(8.0))))) | Std.int(_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 2.0))))), Std.int(0.0));
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(_Runtime.field(source, 'data'), i)) << _Runtime.toInt32(16.0))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 1.0))) << _Runtime.toInt32(8.0))))) | _Runtime.toInt32(_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 2.0))))), _Runtime.toInt32(0.0));
     return cast null;
   }
 
   public static function setSurfacePixel(out:Surface, x:Float, y:Float, color:Float):Void {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     i = (((y * _Runtime.field(out, 'width')) + x) * 4.0);
-    _Runtime.setIndex(_Runtime.field(out, 'data'), i, (Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(24.0))) & Std.int(255.0)));
-    _Runtime.setIndex(_Runtime.field(out, 'data'), (i + 1.0), (Std.int((Std.int(color) >> Std.int(16.0))) & Std.int(255.0)));
-    _Runtime.setIndex(_Runtime.field(out, 'data'), (i + 2.0), (Std.int((Std.int(color) >> Std.int(8.0))) & Std.int(255.0)));
-    _Runtime.setIndex(_Runtime.field(out, 'data'), (i + 3.0), (Std.int(color) & Std.int(255.0)));
+    _Runtime.setIndex(_Runtime.field(out, 'data'), i, (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0)));
+    _Runtime.setIndex(_Runtime.field(out, 'data'), (i + 1.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)));
+    _Runtime.setIndex(_Runtime.field(out, 'data'), (i + 2.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)));
+    _Runtime.setIndex(_Runtime.field(out, 'data'), (i + 3.0), (_Runtime.toInt32(color) & _Runtime.toInt32(255.0)));
     _Runtime.callValue(invalidateImageResource, cast ([out] : Array<Dynamic>));
   }
 
   public static function setSurfacePixelRgb(out:Surface, x:Float, y:Float, color:Float):Void {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     i = (((y * _Runtime.field(out, 'width')) + x) * 4.0);
-    _Runtime.setIndex(_Runtime.field(out, 'data'), i, (Std.int((Std.int(color) >> Std.int(16.0))) & Std.int(255.0)));
-    _Runtime.setIndex(_Runtime.field(out, 'data'), (i + 1.0), (Std.int((Std.int(color) >> Std.int(8.0))) & Std.int(255.0)));
-    _Runtime.setIndex(_Runtime.field(out, 'data'), (i + 2.0), (Std.int(color) & Std.int(255.0)));
+    _Runtime.setIndex(_Runtime.field(out, 'data'), i, (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)));
+    _Runtime.setIndex(_Runtime.field(out, 'data'), (i + 1.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)));
+    _Runtime.setIndex(_Runtime.field(out, 'data'), (i + 2.0), (_Runtime.toInt32(color) & _Runtime.toInt32(255.0)));
     _Runtime.callValue(invalidateImageResource, cast ([out] : Array<Dynamic>));
   }
 }

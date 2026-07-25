@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.SurfaceRegion;
 
 class SurfacePixelate {
-  public static function pixelateSurface(out:Dynamic, source:SurfaceRegion, blockSize:Float):Void {
+  public static function pixelateSurface(out:flighthq._internal._UInt8ClampedArray, source:SurfaceRegion, blockSize:Float):Void {
     var block:Dynamic = cast _Runtime.UNDEFINED;
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;

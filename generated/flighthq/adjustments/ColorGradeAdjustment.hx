@@ -62,7 +62,7 @@ class ColorGradeAdjustment {
   }
 
   public static function unpackRgb__colorGradeAdjustment(c:Float):Array<Float> {
-    return cast cast ([((Std.int(_Runtime.unsignedShiftRight(Std.int(c), Std.int(24.0))) & Std.int(255.0)) / 255.0), ((Std.int(_Runtime.unsignedShiftRight(Std.int(c), Std.int(16.0))) & Std.int(255.0)) / 255.0), ((Std.int(_Runtime.unsignedShiftRight(Std.int(c), Std.int(8.0))) & Std.int(255.0)) / 255.0)] : Array<Dynamic>);
+    return cast cast ([((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(c), _Runtime.toInt32(24.0))) & _Runtime.toInt32(255.0)) / 255.0), ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(c), _Runtime.toInt32(16.0))) & _Runtime.toInt32(255.0)) / 255.0), ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(c), _Runtime.toInt32(8.0))) & _Runtime.toInt32(255.0)) / 255.0)] : Array<Dynamic>);
     return cast null;
   }
 }

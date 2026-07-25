@@ -38,7 +38,7 @@ class GetPathSignedArea {
   public static function shoelaceArea__getPathSignedArea(contour:Array<Float>):Float {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     var area:Dynamic = cast _Runtime.UNDEFINED;
-    n = (Std.int(_Runtime.field(contour, 'length')) >> Std.int(1.0));
+    n = (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> _Runtime.toInt32(1.0));
     if (_Runtime.truthy(_Runtime.compare(n, 3.0, '<'))) { return cast 0.0; }
     area = 0.0;
     {

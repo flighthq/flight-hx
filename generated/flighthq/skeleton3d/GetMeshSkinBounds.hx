@@ -34,7 +34,7 @@ class GetMeshSkinBounds {
     var maxY:Dynamic = cast _Runtime.UNDEFINED;
     var maxZ:Dynamic = cast _Runtime.UNDEFINED;
     positions = _Runtime.field(bindPose, 'positions');
-    restVertexCount = (Std.int((_Runtime.field(positions, 'length') / 3.0)) | Std.int(0.0));
+    restVertexCount = (_Runtime.toInt32((_Runtime.field(positions, 'length') / 3.0)) | _Runtime.toInt32(0.0));
     restMinX = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
     restMinY = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
     restMinZ = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
@@ -73,7 +73,7 @@ class GetMeshSkinBounds {
     ey = ((restMaxY - restMinY) * 0.5);
     ez = ((restMaxZ - restMinZ) * 0.5);
     palette = _Runtime.field(skeleton, 'jointMatrices');
-    jointCount = (Std.int((_Runtime.field(palette, 'length') / 16.0)) | Std.int(0.0));
+    jointCount = (_Runtime.toInt32((_Runtime.field(palette, 'length') / 16.0)) | _Runtime.toInt32(0.0));
     referenced = _Runtime.callValue(GetMeshSkinBounds.getReferencedJoints__getMeshSkinBounds, cast ([_Runtime.field(bindPose, 'joints'), _Runtime.field(bindPose, 'weights'), jointCount] : Array<Dynamic>));
     minX = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
     minY = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
@@ -120,7 +120,7 @@ class GetMeshSkinBounds {
     var maxZ:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(skinVertices, cast ([_Runtime.field(bindPose, 'skinnedPositions'), _Runtime.field(bindPose, 'skinnedNormals'), _Runtime.field(bindPose, 'positions'), _Runtime.field(bindPose, 'normals'), _Runtime.field(bindPose, 'joints'), _Runtime.field(bindPose, 'weights'), _Runtime.field(skeleton, 'jointMatrices')] : Array<Dynamic>));
     skinned = _Runtime.field(bindPose, 'skinnedPositions');
-    vertexCount = (Std.int((_Runtime.field(skinned, 'length') / 3.0)) | Std.int(0.0));
+    vertexCount = (_Runtime.toInt32((_Runtime.field(skinned, 'length') / 3.0)) | _Runtime.toInt32(0.0));
     minX = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
     minY = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
     minZ = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
@@ -160,7 +160,7 @@ class GetMeshSkinBounds {
       var k:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(k, influenceCount, '<'))) {
         if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.getIndex(weights, k), 0.0))) { k++; continue; }
-        var j:Dynamic = (Std.int(_Runtime.getIndex(joints, k)) | Std.int(0.0));
+        var j:Dynamic = (_Runtime.toInt32(_Runtime.getIndex(joints, k)) | _Runtime.toInt32(0.0));
         if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(j, 0.0, '>='), function():Dynamic return cast _Runtime.compare(j, jointCount, '<')))) { _Runtime.setIndex(referenced, j, 1.0); }
         k++;
       }

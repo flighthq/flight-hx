@@ -3,6 +3,7 @@ import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import ts from 'typescript';
 
+import { padContextualObjectFunctionParameters } from '../../tools/generator/src/emit/core.ts';
 import { emitHaxeModule } from '../../tools/generator/src/emit/haxe.ts';
 import { lowerTypeScriptSource } from '../../tools/generator/src/lower/typescript.ts';
 
@@ -1212,9 +1213,14 @@ describe('TypeScript lowering and Haxe emission', () => {
       `export function createArrays() {
         return {
           floats: new Float32Array(4),
+          doubles: new Float64Array([1, 2]),
           signed: new Int16Array([1, -2]),
+          signedWords: new Int32Array([1, -2]),
+          signedBytes: new Int8Array([127, 128]),
           unsigned: new Uint16Array([1, 2]),
+          unsignedWords: new Uint32Array([1, 4294967295]),
           bytes: new Uint8Array([255, 256]),
+          clamped: new Uint8ClampedArray([255, 256]),
         };
       }`,
       ts.ScriptTarget.Latest,
@@ -1231,10 +1237,96 @@ describe('TypeScript lowering and Haxe emission', () => {
 
     expect(lowered.diagnostics).toEqual([]);
     expect(output).toContain('new flighthq._internal._Float32Array(4.0)');
+    expect(output).toContain('new flighthq._internal._Float64Array(');
     expect(output).toContain('new flighthq._internal._Int16Array(');
+    expect(output).toContain('new flighthq._internal._Int32Array(');
+    expect(output).toContain('new flighthq._internal._Int8Array(');
     expect(output).toContain('new flighthq._internal._UInt16Array(');
+    expect(output).toContain('new flighthq._internal._UInt32Array(');
     expect(output).toContain('new flighthq._internal._UInt8Array(');
-    expect(output).not.toContain("_Runtime.construct(_Runtime.globalValue('Float32Array')");
+    expect(output).toContain('new flighthq._internal._UInt8ClampedArray(');
+    for (const name of [
+      'Float32Array',
+      'Float64Array',
+      'Int16Array',
+      'Int32Array',
+      'Int8Array',
+      'Uint16Array',
+      'Uint32Array',
+      'Uint8Array',
+      'Uint8ClampedArray',
+    ]) {
+      expect(output).not.toContain(`_Runtime.construct(_Runtime.globalValue('${name}')`);
+    }
+  });
+
+  it('uses JavaScript ToInt32 coercion for bitwise and shift operands', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/sample.ts',
+      `
+        export function bits(value: number, output: number[]) {
+          output[0] |= value;
+          let result = value | 0;
+          result >>>= 1;
+          return ~Math.imul(result, 4042322175);
+        }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'BitwiseFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('_Runtime.toInt32(_Runtime.getIndex(output, 0.0))');
+    expect(output).toContain('(_Runtime.toInt32(value) | _Runtime.toInt32(0.0))');
+    expect(output).toContain('_Runtime.unsignedShiftRight(_Runtime.toInt32(result), _Runtime.toInt32(1.0))');
+    expect(output).toContain(
+      '~_Runtime.toInt32(_Runtime.imul(_Runtime.toInt32(result), _Runtime.toInt32(4042322175.0)))',
+    );
+    expect(output).not.toContain('unsignedShiftRight(Std.int(');
+  });
+
+  it('pads object-literal closures to their declared contextual method arity', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/sample.ts',
+      `
+        interface BaseRenderer {
+          finish(state: number, result: string): void;
+        }
+        interface Renderer extends BaseRenderer {
+          bind(state: number, material: string | null): void;
+          pack: (state: number, offset: number) => void;
+        }
+        export const renderer: Renderer = {
+          finish(state: number) {},
+          bind(state: number) {},
+          pack: (state: number) => {},
+        };
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+    padContextualObjectFunctionParameters(lowered.declarations);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'ContextualClosureFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('finish: function(state:Float, result:String)');
+    expect(output).toContain('bind: function(state:Float, material:Null<String>)');
+    expect(output).toContain('pack: function(state:Float, offset:Float)');
   });
 
   it('preserves negative-zero normalization and fractional sort comparators', () => {

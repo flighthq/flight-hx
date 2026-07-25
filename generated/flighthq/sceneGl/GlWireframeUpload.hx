@@ -69,7 +69,7 @@ class GlWireframeUpload {
     triangleCount = _Runtime.select(!_Runtime.strictEquals(triangleIndices, null), function():Dynamic return cast HxMath.floor((_Runtime.field(triangleIndices, 'length') / 3.0)), function():Dynamic return cast HxMath.floor((((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') * 4.0) / _Runtime.field(_Runtime.field(geometry, 'layout'), 'stride')) / 3.0)));
     lineCount = (triangleCount * 6.0);
     useUint32 = _Runtime.orValue(_Runtime.isInstanceOf(triangleIndices, _Runtime.globalValue('Uint32Array')), function():Dynamic return cast _Runtime.compare(lineCount, 65535.0, '>'));
-    lines = _Runtime.select(useUint32, function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Uint32Array'), [lineCount]), function():Dynamic return cast new flighthq._internal._UInt16Array(lineCount));
+    lines = _Runtime.select(useUint32, function():Dynamic return cast new flighthq._internal._UInt32Array(lineCount), function():Dynamic return cast new flighthq._internal._UInt16Array(lineCount));
     {
       var t:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(t, triangleCount, '<'))) {

@@ -64,7 +64,7 @@ class Statusbar {
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(hex, 'length'), 6.0))) { return cast 0.0; }
     rgb = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([hex, 16.0] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([rgb] : Array<Dynamic>)))) { return cast 0.0; }
-    return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int(rgb) << Std.int(8.0))) | Std.int(255.0))), Std.int(0.0));
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(rgb) << _Runtime.toInt32(8.0))) | _Runtime.toInt32(255.0))), _Runtime.toInt32(0.0));
     return cast null;
   }
 
@@ -159,7 +159,7 @@ class Statusbar {
 
   public static function packedRgbaToHexColor__statusbar(color:Float):String {
     var rgb:Dynamic = cast _Runtime.UNDEFINED;
-    rgb = (Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(8.0))) & Std.int(16777215.0));
+    rgb = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(8.0))) & _Runtime.toInt32(16777215.0));
     return cast ('#' + _Runtime.padStart(_Runtime.numberToString(rgb, 16.0), 6.0, '0'));
     return cast null;
   }

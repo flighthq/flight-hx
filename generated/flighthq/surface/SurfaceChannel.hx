@@ -67,10 +67,10 @@ class SurfaceChannel {
     w = _Runtime.field(source, 'width');
     h = _Runtime.field(source, 'height');
     sd = _Runtime.field(source, 'data');
-    rData = _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [((w * h) * 4.0)]);
-    gData = _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [((w * h) * 4.0)]);
-    bData = _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [((w * h) * 4.0)]);
-    aData = _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [((w * h) * 4.0)]);
+    rData = new flighthq._internal._UInt8ClampedArray(((w * h) * 4.0));
+    gData = new flighthq._internal._UInt8ClampedArray(((w * h) * 4.0));
+    bData = new flighthq._internal._UInt8ClampedArray(((w * h) * 4.0));
+    aData = new flighthq._internal._UInt8ClampedArray(((w * h) * 4.0));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, (w * h), '<'))) {
@@ -102,7 +102,7 @@ class SurfaceChannel {
     return cast null;
   }
 
-  public static function makeSurface__surfaceChannel(data:Dynamic, width:Float, height:Float, source:Surface):Surface {
+  public static function makeSurface__surfaceChannel(data:flighthq._internal._UInt8ClampedArray, width:Float, height:Float, source:Surface):Surface {
     return cast _Runtime.callValue(createEntity, cast ([{ alphaType: _Runtime.field(source, 'alphaType'), colorSpace: _Runtime.field(source, 'colorSpace'), compressed: null, data: data, format: _Runtime.field(source, 'format'), height: height, source: null, version: 0.0, width: width }] : Array<Dynamic>));
     return cast null;
   }

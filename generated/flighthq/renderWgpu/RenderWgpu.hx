@@ -298,7 +298,7 @@ class RenderWgpu {
     _Runtime.callValue(Facade_RenderWgpu_flighthq_renderWgpu_WgpuDraw.updateWgpuTextureEntry, cast ([state, entry, canvas] : Array<Dynamic>));
   }
 
-  public static function uploadWgpuTextureData(device:Dynamic, texture:Dynamic, origin:Dynamic, width:Float, height:Float, data:Dynamic):Void {
+  public static function uploadWgpuTextureData(device:Dynamic, texture:Dynamic, origin:Dynamic, width:Float, height:Float, data:flighthq._internal._UInt8ClampedArray):Void {
     _Runtime.callValue(Facade_RenderWgpu_flighthq_renderWgpu_WgpuTextureUpload.uploadWgpuTextureData, cast ([device, texture, origin, width, height, data] : Array<Dynamic>));
   }
 

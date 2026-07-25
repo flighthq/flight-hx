@@ -24,8 +24,8 @@ class TextureLevelLayout {
             {
               var mip:Dynamic = 0.0;
               while (_Runtime.truthy(_Runtime.compare(mip, mipLevels, '<'))) {
-                var width:Dynamic = HxMath.max(1.0, (Std.int(baseWidth) >> Std.int(mip)));
-                var height:Dynamic = HxMath.max(1.0, (Std.int(baseHeight) >> Std.int(mip)));
+                var width:Dynamic = HxMath.max(1.0, (_Runtime.toInt32(baseWidth) >> _Runtime.toInt32(mip)));
+                var height:Dynamic = HxMath.max(1.0, (_Runtime.toInt32(baseHeight) >> _Runtime.toInt32(mip)));
                 var byteLength:Dynamic = _Runtime.callValue(getTextureContainerLevelByteLength, cast ([format, width, height] : Array<Dynamic>));
                 _Runtime.callProperty(levels, 'push', cast ([{ byteOffset: offset, byteLength: byteLength, height: height, width: width }] : Array<Dynamic>));
                 (offset = cast ((offset + byteLength) : Dynamic));

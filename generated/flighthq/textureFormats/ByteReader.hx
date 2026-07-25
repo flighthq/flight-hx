@@ -30,7 +30,7 @@ class ByteReader {
     var value:Dynamic = cast _Runtime.UNDEFINED;
     view = _Runtime.field(reader, 'view');
     offset = _Runtime.field(reader, 'offset');
-    value = (Std.int((Std.int(_Runtime.callProperty(view, 'getUint8', cast ([offset] : Array<Dynamic>))) | Std.int((Std.int(_Runtime.callProperty(view, 'getUint8', cast ([(offset + 1.0)] : Array<Dynamic>))) << Std.int(8.0))))) | Std.int((Std.int(_Runtime.callProperty(view, 'getUint8', cast ([(offset + 2.0)] : Array<Dynamic>))) << Std.int(16.0))));
+    value = (_Runtime.toInt32((_Runtime.toInt32(_Runtime.callProperty(view, 'getUint8', cast ([offset] : Array<Dynamic>))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callProperty(view, 'getUint8', cast ([(offset + 1.0)] : Array<Dynamic>))) << _Runtime.toInt32(8.0))))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callProperty(view, 'getUint8', cast ([(offset + 2.0)] : Array<Dynamic>))) << _Runtime.toInt32(16.0))));
     _Runtime.setField(reader, 'offset', (_Runtime.field(reader, 'offset') + 3.0));
     return cast value;
     return cast null;
@@ -42,7 +42,7 @@ class ByteReader {
     var value:Dynamic = cast _Runtime.UNDEFINED;
     view = _Runtime.field(reader, 'view');
     offset = _Runtime.field(reader, 'offset');
-    value = (Std.int((Std.int((Std.int(_Runtime.callProperty(view, 'getUint8', cast ([offset] : Array<Dynamic>))) << Std.int(16.0))) | Std.int((Std.int(_Runtime.callProperty(view, 'getUint8', cast ([(offset + 1.0)] : Array<Dynamic>))) << Std.int(8.0))))) | Std.int(_Runtime.callProperty(view, 'getUint8', cast ([(offset + 2.0)] : Array<Dynamic>))));
+    value = (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.callProperty(view, 'getUint8', cast ([offset] : Array<Dynamic>))) << _Runtime.toInt32(16.0))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callProperty(view, 'getUint8', cast ([(offset + 1.0)] : Array<Dynamic>))) << _Runtime.toInt32(8.0))))) | _Runtime.toInt32(_Runtime.callProperty(view, 'getUint8', cast ([(offset + 2.0)] : Array<Dynamic>))));
     _Runtime.setField(reader, 'offset', (_Runtime.field(reader, 'offset') + 3.0));
     return cast value;
     return cast null;

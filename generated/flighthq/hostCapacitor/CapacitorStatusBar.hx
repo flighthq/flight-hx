@@ -71,7 +71,7 @@ class CapacitorStatusBar {
 
   public static function rgbaToHex__capacitorStatusBar(color:Float):String {
     var rgb:Dynamic = cast _Runtime.UNDEFINED;
-    rgb = (Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(8.0))) & Std.int(16777215.0));
+    rgb = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), _Runtime.toInt32(8.0))) & _Runtime.toInt32(16777215.0));
     return cast '#' + Std.string(_Runtime.padStart(_Runtime.numberToString(rgb, 16.0), 6.0, '0')) + '';
     return cast null;
   }
@@ -79,8 +79,8 @@ class CapacitorStatusBar {
   public static function hexToRgba__capacitorStatusBar(hex:String):Float {
     var digits:Dynamic = cast _Runtime.UNDEFINED;
     digits = _Runtime.replace(hex, _Runtime.regexp('^#', ''), '', false);
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(digits, 'length'), 8.0))) { return cast _Runtime.unsignedShiftRight(Std.int(_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([digits, 16.0] : Array<Dynamic>))), Std.int(0.0)); }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(digits, 'length'), 6.0))) { return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int(_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([digits, 16.0] : Array<Dynamic>))) << Std.int(8.0))) | Std.int(255.0))), Std.int(0.0)); }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(digits, 'length'), 8.0))) { return cast _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([digits, 16.0] : Array<Dynamic>))), _Runtime.toInt32(0.0)); }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(digits, 'length'), 6.0))) { return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([digits, 16.0] : Array<Dynamic>))) << _Runtime.toInt32(8.0))) | _Runtime.toInt32(255.0))), _Runtime.toInt32(0.0)); }
     return cast 0.0;
     return cast null;
   }

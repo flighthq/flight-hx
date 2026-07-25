@@ -37,8 +37,8 @@ class ResolveBidiLevels {
       }
     }
     paragraphLevel = _Runtime.select(_Runtime.strictEquals(baseDirection, 'ltr'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(baseDirection, 'rtl'), function():Dynamic return cast 1.0, function():Dynamic return cast _Runtime.callValue(ResolveBidiLevels.computeParagraphLevel__resolveBidiLevels, cast ([original, 0.0, length] : Array<Dynamic>))));
-    matchingPdi = _Runtime.fill(_Runtime.construct(_Runtime.globalValue('Int32Array'), [length]), length, 0, null, 1);
-    matchingInitiator = _Runtime.fill(_Runtime.construct(_Runtime.globalValue('Int32Array'), [length]), -1.0, 0, null, 1);
+    matchingPdi = _Runtime.fill(new flighthq._internal._Int32Array(length), length, 0, null, 1);
+    matchingInitiator = _Runtime.fill(new flighthq._internal._Int32Array(length), -1.0, 0, null, 1);
     _Runtime.callValue(ResolveBidiLevels.pairIsolates__resolveBidiLevels, cast ([original, matchingPdi, matchingInitiator] : Array<Dynamic>));
     working = _Runtime.slice(original, 0, null);
     levelArray = _Runtime.createArray(length);
@@ -78,7 +78,7 @@ class ResolveBidiLevels {
     return cast null;
   }
 
-  public static function pairIsolates__resolveBidiLevels(types:Array<BidiClass>, matchingPdi:Dynamic, matchingInitiator:Dynamic):Void {
+  public static function pairIsolates__resolveBidiLevels(types:Array<BidiClass>, matchingPdi:flighthq._internal._Int32Array, matchingInitiator:flighthq._internal._Int32Array):Void {
     var stack:Array<Float> = cast _Runtime.UNDEFINED;
     stack = cast ([] : Array<Dynamic>);
     {
@@ -97,7 +97,7 @@ class ResolveBidiLevels {
     }
   }
 
-  public static function applyExplicitLevels__resolveBidiLevels(original:Array<BidiClass>, working:Array<BidiClass>, levelArray:Array<Float>, matchingPdi:Dynamic, paragraphLevel:Float):Void {
+  public static function applyExplicitLevels__resolveBidiLevels(original:Array<BidiClass>, working:Array<BidiClass>, levelArray:Array<Float>, matchingPdi:flighthq._internal._Int32Array, paragraphLevel:Float):Void {
     var MAX_DEPTH:Dynamic = cast _Runtime.UNDEFINED;
     var stackLevel:Array<Float> = cast _Runtime.UNDEFINED;
     var stackOverride:Array<Null<BidiClass>> = cast _Runtime.UNDEFINED;
@@ -213,7 +213,7 @@ class ResolveBidiLevels {
     }
   }
 
-  public static function resolveIsolatingRunSequences__resolveBidiLevels(original:Array<BidiClass>, working:Array<BidiClass>, levelArray:Array<Float>, matchingPdi:Dynamic, matchingInitiator:Dynamic, paragraphLevel:Float):Void {
+  public static function resolveIsolatingRunSequences__resolveBidiLevels(original:Array<BidiClass>, working:Array<BidiClass>, levelArray:Array<Float>, matchingPdi:flighthq._internal._Int32Array, matchingInitiator:flighthq._internal._Int32Array, paragraphLevel:Float):Void {
     var length:Dynamic = cast _Runtime.UNDEFINED;
     var kept:Array<Float> = cast _Runtime.UNDEFINED;
     var runs:Array<{ var indices:Array<Float>; var keptStart:Float; var keptEnd:Float; }> = cast _Runtime.UNDEFINED;
@@ -294,7 +294,7 @@ class ResolveBidiLevels {
     }
   }
 
-  public static function resolveSequence__resolveBidiLevels(original:Array<BidiClass>, working:Array<BidiClass>, levelArray:Array<Float>, kept:Array<Float>, sequence:Array<Float>, keptStart:Float, keptEnd:Float, matchingPdi:Dynamic, paragraphLevel:Float):Void {
+  public static function resolveSequence__resolveBidiLevels(original:Array<BidiClass>, working:Array<BidiClass>, levelArray:Array<Float>, kept:Array<Float>, sequence:Array<Float>, keptStart:Float, keptEnd:Float, matchingPdi:flighthq._internal._Int32Array, paragraphLevel:Float):Void {
     var seqLevel:Dynamic = cast _Runtime.UNDEFINED;
     var prevLevel:Dynamic = cast _Runtime.UNDEFINED;
     var sos:Dynamic = cast _Runtime.UNDEFINED;
@@ -479,12 +479,12 @@ class ResolveBidiLevels {
   }
 
   public static function nextEven__resolveBidiLevels(level:Float):Float {
-    return cast (Std.int((level + 2.0)) & Std.int(~Std.int(1.0)));
+    return cast (_Runtime.toInt32((level + 2.0)) & _Runtime.toInt32(~_Runtime.toInt32(1.0)));
     return cast null;
   }
 
   public static function nextOdd__resolveBidiLevels(level:Float):Float {
-    return cast (Std.int((level + 1.0)) | Std.int(1.0));
+    return cast (_Runtime.toInt32((level + 1.0)) | _Runtime.toInt32(1.0));
     return cast null;
   }
 }

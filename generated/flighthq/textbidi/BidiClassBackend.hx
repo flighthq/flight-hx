@@ -30,7 +30,7 @@ class BidiClassBackend {
     lo = 0.0;
     hi = (BidiClassBackend._rangeCount__bidiClassBackend - 1.0);
     while (_Runtime.truthy(_Runtime.compare(lo, hi, '<='))) {
-      var mid:Dynamic = (Std.int((lo + hi)) >> Std.int(1.0));
+      var mid:Dynamic = (_Runtime.toInt32((lo + hi)) >> _Runtime.toInt32(1.0));
       var base:Dynamic = (mid * 3.0);
       var start:Dynamic = _Runtime.getIndex(BidiClassBackend._ranges__bidiClassBackend, base);
       if (_Runtime.truthy(_Runtime.compare(codepoint, start, '<'))) {

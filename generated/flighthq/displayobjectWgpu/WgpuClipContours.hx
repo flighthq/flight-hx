@@ -92,7 +92,7 @@ class WgpuClipContours {
     _Runtime.setIndex(m, 8.0, ((_Runtime.field(t, 'tx') * iw) - 1.0));
     _Runtime.setIndex(m, 9.0, ((-_Runtime.field(t, 'ty') * ih) + 1.0));
     _Runtime.setIndex(m, 10.0, 1.0);
-    buffer = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: WgpuClipContours.CLIP_UNIFORM_BYTES__wgpuClipContours, usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
+    buffer = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: WgpuClipContours.CLIP_UNIFORM_BYTES__wgpuClipContours, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([buffer, 0.0, m] : Array<Dynamic>));
     return cast buffer;
     return cast null;
@@ -108,7 +108,7 @@ class WgpuClipContours {
       var c:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(c, _Runtime.field(contours, 'length'), '<'))) {
         var contour:Dynamic = _Runtime.getIndex(contours, c);
-        var pointCount:Dynamic = (Std.int(_Runtime.field(contour, 'length')) >> Std.int(1.0));
+        var pointCount:Dynamic = (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> _Runtime.toInt32(1.0));
         if (_Runtime.truthy(_Runtime.compare(pointCount, 3.0, '<'))) { c++; continue; }
         {
           var i:Dynamic = 1.0;
@@ -121,8 +121,8 @@ class WgpuClipContours {
       }
     }
     data = new flighthq._internal._Float32Array(tris);
-    vertexCount = (Std.int(_Runtime.field(data, 'length')) >> Std.int(1.0));
-    vertexBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: HxMath.max(4.0, _Runtime.field(data, 'byteLength')), usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'VERTEX')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
+    vertexCount = (_Runtime.toInt32(_Runtime.field(data, 'length')) >> _Runtime.toInt32(1.0));
+    vertexBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: HxMath.max(4.0, _Runtime.field(data, 'byteLength')), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'VERTEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(data, 'byteLength'), 0.0, '>'))) { flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([vertexBuffer, 0.0, data] : Array<Dynamic>)); }
     return cast { vertexBuffer: vertexBuffer, vertexCount: vertexCount };
     return cast null;

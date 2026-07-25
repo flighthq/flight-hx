@@ -65,7 +65,7 @@ class WgpuShadowMap {
     sceneRuntime = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
     shadow = _Runtime.field(sceneRuntime, 'shadow');
     if (_Runtime.truthy(_Runtime.strictEquals(shadow, null))) {
-      var depthTexture:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([WgpuShadowMap.SHADOW_MAP_SIZE__wgpuShadowMap, WgpuShadowMap.SHADOW_MAP_SIZE__wgpuShadowMap, 1.0] : Array<Dynamic>), format: SHADOW_DEPTH_FORMAT, usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING'))) }] : Array<Dynamic>));
+      var depthTexture:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([WgpuShadowMap.SHADOW_MAP_SIZE__wgpuShadowMap, WgpuShadowMap.SHADOW_MAP_SIZE__wgpuShadowMap, 1.0] : Array<Dynamic>), format: SHADOW_DEPTH_FORMAT, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING'))) }] : Array<Dynamic>));
       (shadow = cast ({ depthTexture: depthTexture, depthView: _Runtime.callProperty(depthTexture, 'createView', cast ([] : Array<Dynamic>)), matrix: (cast _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) : Matrix4) } : Dynamic));
       _Runtime.setField(sceneRuntime, 'shadow', shadow);
     }
@@ -121,5 +121,5 @@ class WgpuShadowMap {
 
   public static final _shadowProxy__wgpuShadowMap:SceneRenderProxy = { material: (cast {  } : Material), normalMatrix: (cast _Runtime.callValue(createMatrix3, cast ([] : Array<Dynamic>)) : Matrix3), subset: { indexCount: 0.0, indexOffset: 0.0 }, worldMatrix: (cast _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) : Matrix4) };
 
-  public static final _dynamicOffsets__wgpuShadowMap:Dynamic = _Runtime.construct(_Runtime.globalValue('Uint32Array'), [1.0]);
+  public static final _dynamicOffsets__wgpuShadowMap:Dynamic = new flighthq._internal._UInt32Array(1.0);
 }

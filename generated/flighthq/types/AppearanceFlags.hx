@@ -6,26 +6,26 @@ import flighthq._internal._Runtime;
 
 enum abstract AppearanceFlags(Int) from Int to Int {
   public static inline var None:AppearanceFlags = 0;
-  public static inline var Visible:AppearanceFlags = (Std.int(1.0) << Std.int(0.0));
-  public static inline var Alpha:AppearanceFlags = (Std.int(1.0) << Std.int(1.0));
-  public static inline var BlendMode:AppearanceFlags = (Std.int(1.0) << Std.int(2.0));
-  public static inline var Clip:AppearanceFlags = (Std.int(1.0) << Std.int(3.0));
-  public static inline var Scale9Grid:AppearanceFlags = (Std.int(1.0) << Std.int(4.0));
-  public static inline var Any:AppearanceFlags = (Std.int(1.0) << Std.int(31.0));
+  public static inline var Visible:AppearanceFlags = (_Runtime.toInt32(1.0) << _Runtime.toInt32(0.0));
+  public static inline var Alpha:AppearanceFlags = (_Runtime.toInt32(1.0) << _Runtime.toInt32(1.0));
+  public static inline var BlendMode:AppearanceFlags = (_Runtime.toInt32(1.0) << _Runtime.toInt32(2.0));
+  public static inline var Clip:AppearanceFlags = (_Runtime.toInt32(1.0) << _Runtime.toInt32(3.0));
+  public static inline var Scale9Grid:AppearanceFlags = (_Runtime.toInt32(1.0) << _Runtime.toInt32(4.0));
+  public static inline var Any:AppearanceFlags = (_Runtime.toInt32(1.0) << _Runtime.toInt32(31.0));
   public static function any(flags:AppearanceFlags, test:AppearanceFlags):Bool {
-    return cast !_Runtime.strictEquals((Std.int(flags) & Std.int(test)), 0.0);
+    return cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(test)), 0.0);
     return cast null;
   }
   public static function has(flags:AppearanceFlags, test:AppearanceFlags):Bool {
-    return cast _Runtime.strictEquals((Std.int(flags) & Std.int(test)), test);
+    return cast _Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(test)), test);
     return cast null;
   }
   public static function add(flags:AppearanceFlags, add:AppearanceFlags):AppearanceFlags {
-    return cast (Std.int(flags) | Std.int(add));
+    return cast (_Runtime.toInt32(flags) | _Runtime.toInt32(add));
     return cast null;
   }
   public static function remove(flags:AppearanceFlags, remove:AppearanceFlags):AppearanceFlags {
-    return cast (Std.int(flags) & Std.int(~Std.int(remove)));
+    return cast (_Runtime.toInt32(flags) & _Runtime.toInt32(~_Runtime.toInt32(remove)));
     return cast null;
   }
   public static function clear():AppearanceFlags {

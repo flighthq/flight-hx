@@ -89,7 +89,7 @@ class WgpuDraw {
       (height = cast (_Runtime.orValue(_Runtime.field(imageSource, 'height'), function():Dynamic return cast 1.0) : Dynamic));
     } } } } }
     mipLevelCount = _Runtime.select(generateMips, function():Dynamic return cast _Runtime.callValue(getWgpuMipLevelCount, cast ([width, height] : Array<Dynamic>)), function():Dynamic return cast 1.0);
-    texture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([width, height, 1.0] : Array<Dynamic>), format: 'rgba8unorm', mipLevelCount: mipLevelCount, usage: (Std.int((Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')))) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
+    texture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([width, height, 1.0] : Array<Dynamic>), format: 'rgba8unorm', mipLevelCount: mipLevelCount, usage: (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')))) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'copyExternalImageToTexture', cast ([{ source: (cast imageSource : Dynamic), flipY: false }, { texture: texture, premultipliedAlpha: true }, cast ([width, height] : Array<Dynamic>)] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.compare(mipLevelCount, 1.0, '>'))) { _Runtime.callValue(generateWgpuMipmaps, cast ([state, texture, width, height, 'rgba8unorm'] : Array<Dynamic>)); }
     view = _Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>));
@@ -129,7 +129,7 @@ class WgpuDraw {
     textureBindGroupLayout = _Runtime.field(__destructure3, 'textureBindGroupLayout');
     w = HxMath.max(1.0, width);
     h = HxMath.max(1.0, height);
-    texture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([w, h, 1.0] : Array<Dynamic>), format: 'rgba8unorm', usage: (Std.int((Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')))) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
+    texture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([w, h, 1.0] : Array<Dynamic>), format: 'rgba8unorm', usage: (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')))) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'copyExternalImageToTexture', cast ([{ source: (cast canvas : Dynamic), flipY: false }, { texture: texture, premultipliedAlpha: true }, cast ([w, h] : Array<Dynamic>)] : Array<Dynamic>));
     view = _Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>));
     sampler = _Runtime.select(_Runtime.field(state, 'allowSmoothing'), function():Dynamic return cast _Runtime.field(runtime, 'linearSampler'), function():Dynamic return cast _Runtime.field(runtime, 'nearestSampler'));
@@ -199,9 +199,9 @@ class WgpuDraw {
     _Runtime.callValue(getWgpuPipeline, cast ([state, BlendModeValue.Add, 'normal'] : Array<Dynamic>));
   }
 
-  public static function premultiplyStraightRgba8__wgpuDraw(data:Dynamic):Dynamic {
+  public static function premultiplyStraightRgba8__wgpuDraw(data:flighthq._internal._UInt8ClampedArray):flighthq._internal._UInt8ClampedArray {
     var out:Dynamic = cast _Runtime.UNDEFINED;
-    out = _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [_Runtime.field(data, 'length')]);
+    out = new flighthq._internal._UInt8ClampedArray(_Runtime.field(data, 'length'));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(data, 'length'), '<'))) {
@@ -234,7 +234,7 @@ class WgpuDraw {
     width = _Runtime.orValue(_Runtime.field(image, 'width'), function():Dynamic return cast 1.0);
     height = _Runtime.orValue(_Runtime.field(image, 'height'), function():Dynamic return cast 1.0);
     mipLevelCount = _Runtime.select(generateMips, function():Dynamic return cast _Runtime.callValue(getWgpuMipLevelCount, cast ([width, height] : Array<Dynamic>)), function():Dynamic return cast 1.0);
-    texture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([width, height, 1.0] : Array<Dynamic>), format: 'rgba8unorm', mipLevelCount: mipLevelCount, usage: (Std.int((Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')))) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
+    texture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([width, height, 1.0] : Array<Dynamic>), format: 'rgba8unorm', mipLevelCount: mipLevelCount, usage: (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')))) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(image, 'source'), null))) {
       flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'copyExternalImageToTexture', cast ([{ source: (cast _Runtime.field(image, 'source') : Dynamic), flipY: false }, { texture: texture, premultipliedAlpha: true }, cast ([width, height] : Array<Dynamic>)] : Array<Dynamic>));
     } else {

@@ -13,7 +13,7 @@ class SurfaceNoise {
     var span:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var surfaceWidth:Dynamic = cast _Runtime.UNDEFINED;
-    state = _Runtime.orValue(_Runtime.unsignedShiftRight(Std.int((Std.int(seed) | Std.int(0.0))), Std.int(0.0)), function():Dynamic return cast 1.0);
+    state = _Runtime.orValue(_Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(seed) | _Runtime.toInt32(0.0))), _Runtime.toInt32(0.0)), function():Dynamic return cast 1.0);
     lo = HxMath.max(0.0, HxMath.min(255.0, low));
     span = (HxMath.max(0.0, HxMath.min(255.0, high)) - lo);
     data = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
@@ -80,24 +80,24 @@ class SurfaceNoise {
             var nx:Dynamic = _Runtime.select(stitch, function():Dynamic return cast _Runtime.callValue(SurfaceNoise.stitchedCoord__surfaceNoise, cast ([(px * fx0), (w * fx0)] : Array<Dynamic>)), function():Dynamic return cast (px * fx0));
             var ny:Dynamic = _Runtime.select(stitch, function():Dynamic return cast _Runtime.callValue(SurfaceNoise.stitchedCoord__surfaceNoise, cast ([(py * fy0), (h * fy0)] : Array<Dynamic>)), function():Dynamic return cast (py * fy0));
             if (_Runtime.truthy(grayScale)) {
-              var value:Dynamic = _Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, (Std.int(seed) | Std.int(0.0))] : Array<Dynamic>));
+              var value:Dynamic = _Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, (_Runtime.toInt32(seed) | _Runtime.toInt32(0.0))] : Array<Dynamic>));
               var byte:Dynamic = HxMath.round((value * 255.0));
-              if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_R)))) { _Runtime.setIndex(data, di, byte); }
-              if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_G)))) { _Runtime.setIndex(data, (di + 1.0), byte); }
-              if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_B)))) { _Runtime.setIndex(data, (di + 2.0), byte); }
+              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_R)))) { _Runtime.setIndex(data, di, byte); }
+              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_G)))) { _Runtime.setIndex(data, (di + 1.0), byte); }
+              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_B)))) { _Runtime.setIndex(data, (di + 2.0), byte); }
             } else {
-              if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_R)))) {
-                _Runtime.setIndex(data, di, HxMath.round((_Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, (Std.int(seed) | Std.int(0.0))] : Array<Dynamic>)) * 255.0)));
+              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_R)))) {
+                _Runtime.setIndex(data, di, HxMath.round((_Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, (_Runtime.toInt32(seed) | _Runtime.toInt32(0.0))] : Array<Dynamic>)) * 255.0)));
               }
-              if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_G)))) {
-                _Runtime.setIndex(data, (di + 1.0), HxMath.round((_Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, ((Std.int(seed) | Std.int(0.0)) + 2654435761.0)] : Array<Dynamic>)) * 255.0)));
+              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_G)))) {
+                _Runtime.setIndex(data, (di + 1.0), HxMath.round((_Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | _Runtime.toInt32(0.0)) + 2654435761.0)] : Array<Dynamic>)) * 255.0)));
               }
-              if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_B)))) {
-                _Runtime.setIndex(data, (di + 2.0), HxMath.round((_Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, ((Std.int(seed) | Std.int(0.0)) + 2654435762.0)] : Array<Dynamic>)) * 255.0)));
+              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_B)))) {
+                _Runtime.setIndex(data, (di + 2.0), HxMath.round((_Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | _Runtime.toInt32(0.0)) + 2654435762.0)] : Array<Dynamic>)) * 255.0)));
               }
             }
-            if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_A)))) {
-              _Runtime.setIndex(data, (di + 3.0), HxMath.round((_Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, ((Std.int(seed) | Std.int(0.0)) + 2654435763.0)] : Array<Dynamic>)) * 255.0)));
+            if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_A)))) {
+              _Runtime.setIndex(data, (di + 3.0), HxMath.round((_Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | _Runtime.toInt32(0.0)) + 2654435763.0)] : Array<Dynamic>)) * 255.0)));
             } else {
               _Runtime.setIndex(data, (di + 3.0), 255.0);
             }
@@ -139,24 +139,24 @@ class SurfaceNoise {
             var nx:Dynamic = _Runtime.select(stitch, function():Dynamic return cast _Runtime.callValue(SurfaceNoise.stitchedCoord__surfaceNoise, cast ([(px * fx0), (w * fx0)] : Array<Dynamic>)), function():Dynamic return cast (px * fx0));
             var ny:Dynamic = _Runtime.select(stitch, function():Dynamic return cast _Runtime.callValue(SurfaceNoise.stitchedCoord__surfaceNoise, cast ([(py * fy0), (h * fy0)] : Array<Dynamic>)), function():Dynamic return cast (py * fy0));
             if (_Runtime.truthy(grayScale)) {
-              var value:Dynamic = _Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, (Std.int(seed) | Std.int(0.0))] : Array<Dynamic>));
+              var value:Dynamic = _Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, (_Runtime.toInt32(seed) | _Runtime.toInt32(0.0))] : Array<Dynamic>));
               var byte:Dynamic = HxMath.round((value * 255.0));
-              if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_R)))) { _Runtime.setIndex(data, di, byte); }
-              if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_G)))) { _Runtime.setIndex(data, (di + 1.0), byte); }
-              if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_B)))) { _Runtime.setIndex(data, (di + 2.0), byte); }
+              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_R)))) { _Runtime.setIndex(data, di, byte); }
+              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_G)))) { _Runtime.setIndex(data, (di + 1.0), byte); }
+              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_B)))) { _Runtime.setIndex(data, (di + 2.0), byte); }
             } else {
-              if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_R)))) {
-                _Runtime.setIndex(data, di, HxMath.round((_Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, (Std.int(seed) | Std.int(0.0))] : Array<Dynamic>)) * 255.0)));
+              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_R)))) {
+                _Runtime.setIndex(data, di, HxMath.round((_Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, (_Runtime.toInt32(seed) | _Runtime.toInt32(0.0))] : Array<Dynamic>)) * 255.0)));
               }
-              if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_G)))) {
-                _Runtime.setIndex(data, (di + 1.0), HxMath.round((_Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, ((Std.int(seed) | Std.int(0.0)) + 2654435761.0)] : Array<Dynamic>)) * 255.0)));
+              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_G)))) {
+                _Runtime.setIndex(data, (di + 1.0), HxMath.round((_Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | _Runtime.toInt32(0.0)) + 2654435761.0)] : Array<Dynamic>)) * 255.0)));
               }
-              if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_B)))) {
-                _Runtime.setIndex(data, (di + 2.0), HxMath.round((_Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, ((Std.int(seed) | Std.int(0.0)) + 2654435762.0)] : Array<Dynamic>)) * 255.0)));
+              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_B)))) {
+                _Runtime.setIndex(data, (di + 2.0), HxMath.round((_Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | _Runtime.toInt32(0.0)) + 2654435762.0)] : Array<Dynamic>)) * 255.0)));
               }
             }
-            if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_A)))) {
-              _Runtime.setIndex(data, (di + 3.0), HxMath.round((_Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, ((Std.int(seed) | Std.int(0.0)) + 2654435763.0)] : Array<Dynamic>)) * 255.0)));
+            if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_A)))) {
+              _Runtime.setIndex(data, (di + 3.0), HxMath.round((_Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | _Runtime.toInt32(0.0)) + 2654435763.0)] : Array<Dynamic>)) * 255.0)));
             } else {
               _Runtime.setIndex(data, (di + 3.0), 255.0);
             }
@@ -202,18 +202,18 @@ class SurfaceNoise {
 
   public static function hashLattice__surfaceNoise(ix:Float, iy:Float, seed:Float):Float {
     var h:Dynamic = cast _Runtime.UNDEFINED;
-    h = (Std.int(((_Runtime.imul(Std.int(ix), Std.int(374761393.0)) + _Runtime.imul(Std.int(iy), Std.int(668265263.0))) + _Runtime.imul(Std.int(seed), Std.int(2654435761.0)))) | Std.int(0.0));
-    (h = cast (_Runtime.imul(Std.int((Std.int(h) ^ Std.int(_Runtime.unsignedShiftRight(Std.int(h), Std.int(13.0))))), Std.int(1274126177.0)) : Dynamic));
-    return cast (_Runtime.unsignedShiftRight(Std.int((Std.int(h) ^ Std.int(_Runtime.unsignedShiftRight(Std.int(h), Std.int(16.0))))), Std.int(0.0)) / 4294967296.0);
+    h = (_Runtime.toInt32(((_Runtime.imul(_Runtime.toInt32(ix), _Runtime.toInt32(374761393.0)) + _Runtime.imul(_Runtime.toInt32(iy), _Runtime.toInt32(668265263.0))) + _Runtime.imul(_Runtime.toInt32(seed), _Runtime.toInt32(2654435761.0)))) | _Runtime.toInt32(0.0));
+    (h = cast (_Runtime.imul(_Runtime.toInt32((_Runtime.toInt32(h) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(h), _Runtime.toInt32(13.0))))), _Runtime.toInt32(1274126177.0)) : Dynamic));
+    return cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(h) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(h), _Runtime.toInt32(16.0))))), _Runtime.toInt32(0.0)) / 4294967296.0);
     return cast null;
   }
 
   public static function nextRandomState__surfaceNoise(state:Float):Float {
     var t:Dynamic = cast _Runtime.UNDEFINED;
-    t = (Std.int((state + 1831565813.0)) | Std.int(0.0));
-    (t = cast (_Runtime.imul(Std.int((Std.int(t) ^ Std.int(_Runtime.unsignedShiftRight(Std.int(t), Std.int(15.0))))), Std.int((Std.int(t) | Std.int(1.0)))) : Dynamic));
-    (t = (Std.int(t) ^ Std.int((t + _Runtime.imul(Std.int((Std.int(t) ^ Std.int(_Runtime.unsignedShiftRight(Std.int(t), Std.int(7.0))))), Std.int((Std.int(t) | Std.int(61.0))))))));
-    return cast _Runtime.orValue(_Runtime.unsignedShiftRight(Std.int((Std.int(t) ^ Std.int(_Runtime.unsignedShiftRight(Std.int(t), Std.int(14.0))))), Std.int(0.0)), function():Dynamic return cast 1.0);
+    t = (_Runtime.toInt32((state + 1831565813.0)) | _Runtime.toInt32(0.0));
+    (t = cast (_Runtime.imul(_Runtime.toInt32((_Runtime.toInt32(t) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(t), _Runtime.toInt32(15.0))))), _Runtime.toInt32((_Runtime.toInt32(t) | _Runtime.toInt32(1.0)))) : Dynamic));
+    (t = (_Runtime.toInt32(t) ^ _Runtime.toInt32((t + _Runtime.imul(_Runtime.toInt32((_Runtime.toInt32(t) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(t), _Runtime.toInt32(7.0))))), _Runtime.toInt32((_Runtime.toInt32(t) | _Runtime.toInt32(61.0))))))));
+    return cast _Runtime.orValue(_Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(t) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(t), _Runtime.toInt32(14.0))))), _Runtime.toInt32(0.0)), function():Dynamic return cast 1.0);
     return cast null;
   }
 

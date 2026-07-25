@@ -16,6 +16,7 @@ export type IrType =
   | { kind: 'primitive'; name: 'Bool' | 'Float' | 'Int' | 'String' | 'Void' };
 
 export interface IrTypeField {
+  contextualParameters?: IrParameter[] | undefined;
   name: string;
   optional: boolean;
   type: IrType;

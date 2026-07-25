@@ -10,7 +10,7 @@ typedef GlyphEntry = { var advance:Float; var bearingX:Float; var bearingY:Float
 
 typedef GlyphMetrics = { var ascent:Float; var descent:Float; var lineGap:Float; };
 
-typedef GlyphRasterizedBitmap = { var advance:Float; var bearingX:Float; var bearingY:Float; var height:Float; var pixels:Dynamic; var width:Float; };
+typedef GlyphRasterizedBitmap = { var advance:Float; var bearingX:Float; var bearingY:Float; var height:Float; var pixels:flighthq._internal._UInt8ClampedArray; var width:Float; };
 
 typedef GlyphRasterizeOptions = { var fontFamily:String; var fontSize:Float; @:optional var fontStyle:String; @:optional var fontWeight:Dynamic; };
 
