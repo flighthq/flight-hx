@@ -1285,11 +1285,14 @@ describe('TypeScript lowering and Haxe emission', () => {
 
     expect(lowered.diagnostics).toEqual([]);
     expect(output).toContain('_Runtime.toInt32(_Runtime.getIndex(output, 0.0))');
-    expect(output).toContain('(_Runtime.toInt32(value) | _Runtime.toInt32(0.0))');
-    expect(output).toContain('_Runtime.unsignedShiftRight(_Runtime.toInt32(result), _Runtime.toInt32(1.0))');
+    // Literal operands that are exact Int32 values fold to plain integer
+    // literals so const-enum inline initializers stay compile-time constants.
+    expect(output).toContain('(_Runtime.toInt32(value) | 0)');
+    expect(output).toContain('_Runtime.unsignedShiftRight(_Runtime.toInt32(result), 1)');
     expect(output).toContain(
       '~_Runtime.toInt32(_Runtime.imul(_Runtime.toInt32(result), _Runtime.toInt32(4042322175.0)))',
     );
+    expect(output).not.toContain('_Runtime.toInt32(0.0)');
     expect(output).not.toContain('unsignedShiftRight(Std.int(');
   });
 

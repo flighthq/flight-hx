@@ -108,6 +108,7 @@ const webGl2MethodEndpoints = new Set([
   'useProgram',
   'vertexAttrib4f',
   'vertexAttribDivisor',
+  'vertexAttribIPointer',
   'vertexAttribPointer',
   'viewport',
 ]);
@@ -1587,6 +1588,22 @@ function emitLoopEmbedded(statement: IrStatement): string {
   }
 }
 
+function emitInt32Operand(expression: IrExpression): string {
+  // Literal operands that are already exact 32-bit integers stay plain integer
+  // literals: `_Runtime.toInt32` on them is redundant, and inline-variable
+  // initializers (const enum flags) must remain compile-time constants.
+  if (
+    expression.kind === 'literal' &&
+    typeof expression.value === 'number' &&
+    Number.isInteger(expression.value) &&
+    expression.value >= -2147483648 &&
+    expression.value <= 2147483647
+  ) {
+    return String(expression.value);
+  }
+  return `_Runtime.toInt32(${emitExpression(expression)})`;
+}
+
 function emitExpression(expression: IrExpression): string {
   switch (expression.kind) {
     case 'array':
@@ -1640,9 +1657,9 @@ function emitExpression(expression: IrExpression): string {
         const current = `_Runtime.getIndex(${object}, ${index})`;
         const value =
           operator === '>>>'
-            ? `_Runtime.unsignedShiftRight(_Runtime.toInt32(${current}), _Runtime.toInt32(${emitExpression(expression.right)}))`
+            ? `_Runtime.unsignedShiftRight(_Runtime.toInt32(${current}), ${emitInt32Operand(expression.right)})`
             : ['&', '|', '^', '<<', '>>'].includes(operator)
-              ? `(_Runtime.toInt32(${current}) ${operator} _Runtime.toInt32(${emitExpression(expression.right)}))`
+              ? `(_Runtime.toInt32(${current}) ${operator} ${emitInt32Operand(expression.right)})`
               : `(${current} ${operator} ${emitExpression(expression.right)})`;
         return `_Runtime.setIndex(${object}, ${index}, ${value})`;
       }
@@ -1738,17 +1755,17 @@ function emitExpression(expression: IrExpression): string {
         return expression.operator.startsWith('!') ? `!${equal}` : equal;
       }
       if (expression.kind === 'binary' && ['&', '|', '^', '<<', '>>'].includes(expression.operator)) {
-        return `(_Runtime.toInt32(${emitExpression(expression.left)}) ${expression.operator} _Runtime.toInt32(${emitExpression(expression.right)}))`;
+        return `(${emitInt32Operand(expression.left)} ${expression.operator} ${emitInt32Operand(expression.right)})`;
       }
       if (expression.kind === 'binary' && expression.operator === '>>>') {
-        return `_Runtime.unsignedShiftRight(_Runtime.toInt32(${emitExpression(expression.left)}), _Runtime.toInt32(${emitExpression(expression.right)}))`;
+        return `_Runtime.unsignedShiftRight(${emitInt32Operand(expression.left)}, ${emitInt32Operand(expression.right)})`;
       }
       if (expression.kind === 'assignment' && ['&=', '|=', '^=', '<<=', '>>=', '>>>='].includes(expression.operator)) {
         const operator = expression.operator.slice(0, -1);
         const value =
           operator === '>>>'
-            ? `_Runtime.unsignedShiftRight(_Runtime.toInt32(${emitExpression(expression.left)}), _Runtime.toInt32(${emitExpression(expression.right)}))`
-            : `(_Runtime.toInt32(${emitExpression(expression.left)}) ${operator} _Runtime.toInt32(${emitExpression(expression.right)}))`;
+            ? `_Runtime.unsignedShiftRight(${emitInt32Operand(expression.left)}, ${emitInt32Operand(expression.right)})`
+            : `(${emitInt32Operand(expression.left)} ${operator} ${emitInt32Operand(expression.right)})`;
         return `(${emitExpression(expression.left)} = ${value})`;
       }
       if (expression.kind === 'assignment' && ['+=', '-=', '*=', '/=', '%='].includes(expression.operator)) {
@@ -1991,7 +2008,7 @@ function emitExpression(expression: IrExpression): string {
       }
       if (expression.operator === 'void') return `_Runtime.voidValue(${emitExpression(expression.operand)})`;
       if (expression.operator === '!') return `!_Runtime.truthy(${emitExpression(expression.operand)})`;
-      if (expression.operator === '~') return `~_Runtime.toInt32(${emitExpression(expression.operand)})`;
+      if (expression.operator === '~') return `~${emitInt32Operand(expression.operand)}`;
       if (expression.operand.kind === 'element' && (expression.operator === '++' || expression.operator === '--')) {
         if (expression.operand.binding === 'WebGl2Backend') {
           throw new Error('WebGL2 computed property mutation has no typed backend endpoint');
@@ -2212,7 +2229,7 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
     }
     if (owner === 'Date' && name === 'now') return '_Runtime.nowMilliseconds()';
     if (owner === 'HxMath' && name === 'imul') {
-      return `_Runtime.imul(${expression.arguments.map((argument) => `_Runtime.toInt32(${emitExpression(argument)})`).join(', ')})`;
+      return `_Runtime.imul(${expression.arguments.map((argument) => emitInt32Operand(argument)).join(', ')})`;
     }
     if (owner === 'HxMath' && (name === 'max' || name === 'min') && expression.arguments.length > 2) {
       return expression.arguments
