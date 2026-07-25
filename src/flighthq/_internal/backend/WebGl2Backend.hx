@@ -263,6 +263,13 @@ class WebGl2Backend {
       + srcOffset + ', length=' + Std.string(length) + ', view.byteLength=' + data.byteLength + ', view.length='
       + data.length + ')');
     #end
+    #if neko
+    // glBufferSubData through the neko CFFI raises GL_INVALID_VALUE for valid
+    // arguments (under investigation); re-uploading the whole view through
+    // glBufferData is correct for Flight's usage, where the view spans the
+    // buffer store and ranged uploads always start at offset zero.
+    gl.bufferData(Std.int(target), data, DYNAMIC_DRAW);
+    #else
     if (length == null) {
       gl.bufferSubData(Std.int(target), Std.int(dstByteOffset), data);
     } else {
@@ -271,6 +278,7 @@ class WebGl2Backend {
       gl.bufferSubData(Std.int(target), Std.int(dstByteOffset), data, Std.int(srcOffset) * bytesPerElement,
         Std.int(length) * bytesPerElement);
     }
+    #end
     #elseif js
     if (length == null) {
       js.Syntax.code('{0}.bufferSubData({1}, {2}, {3})', gl, Std.int(target), Std.int(dstByteOffset), source);
@@ -634,13 +642,39 @@ class WebGl2Backend {
     #end
   }
 
-  /** The 6-argument DOM-source overload of `texImage2D`. The source is a host
-   * object (canvas, image, video, ImageData), which has no native GL
-   * equivalent; native texture uploads use the 9-argument pixel form. */
+  /** The 6-argument DOM-source overload of `texImage2D`. On native the only
+   * supported source is the cairo-backed scratch canvas: its premultiplied
+   * ARGB32 pixels are reordered to RGBA and uploaded through the pixel form
+   * (Flight's premultiply pack flag is a native no-op, so premultiplied texel
+   * content matches the html5 result). */
   public static inline function texImage2DSource(gl:GlContext, target:Float, level:Float, internalformat:Float,
       format:Float, type:Float, source:Dynamic):Void {
-    #if (lime && !js)
-    throw 'WebGl2Backend: texImage2D from a DOM source is not supported on native GL targets';
+    #if (lime && !js && lime_cairo)
+    if (!Std.isOfType(source, NativeScratchCanvas)) {
+      throw 'WebGl2Backend: unsupported texImage2D source on native GL targets (expected a scratch canvas)';
+    }
+    final canvasContext = (cast source : NativeScratchCanvas).nativeContext();
+    if (canvasContext.surface == null) {
+      gl.texImage2D(Std.int(target), Std.int(level), Std.int(internalformat), 0, 0, 0, Std.int(format), Std.int(type),
+        null);
+      return;
+    }
+    canvasContext.surface.flush();
+    final canvasWidth = canvasContext.width;
+    final canvasHeight = canvasContext.height;
+    final bgra = canvasContext.pixels;
+    final rgba = new lime.utils.UInt8Array(canvasWidth * canvasHeight * 4);
+    for (index in 0...canvasWidth * canvasHeight) {
+      final offset = index * 4;
+      rgba[offset] = bgra[offset + 2];
+      rgba[offset + 1] = bgra[offset + 1];
+      rgba[offset + 2] = bgra[offset];
+      rgba[offset + 3] = bgra[offset + 3];
+    }
+    gl.texImage2D(Std.int(target), Std.int(level), Std.int(internalformat), canvasWidth, canvasHeight, 0,
+      Std.int(format), Std.int(type), rgba);
+    #elseif (lime && !js)
+    throw 'WebGl2Backend: texImage2D from a canvas source requires Lime\'s cairo feature';
     #elseif js
     js.Syntax.code('{0}.texImage2D({1}, {2}, {3}, {4}, {5}, {6})', gl, Std.int(target), Std.int(level),
       Std.int(internalformat), Std.int(format), Std.int(type), source);
@@ -833,6 +867,17 @@ class WebGl2Backend {
       final probeError:Int = gl.getError();
       glTrace('probe grid -> ' + samples.join(' | ')
         + (probeError != 0 ? ' (probe getError 0x' + StringTools.hex(probeError, 4) + ')' : ''));
+      #if sys
+      if (drawProbes == 20 && lastViewportW > 0) {
+        // One-shot framebuffer dump for offline inspection (RGBA rows, bottom-up).
+        final frame = new lime.utils.UInt8Array(lastViewportW * lastViewportH * 4);
+        gl.readPixels(lastViewportX, lastViewportY, lastViewportW, lastViewportH, RGBA, UNSIGNED_BYTE, frame);
+        final bytes = haxe.io.Bytes.alloc(lastViewportW * lastViewportH * 4);
+        for (index in 0...lastViewportW * lastViewportH * 4) bytes.set(index, frame[index]);
+        sys.io.File.saveBytes('flight-gl-dump.rgba', bytes);
+        glTrace('framebuffer dumped: flight-gl-dump.rgba ' + lastViewportW + 'x' + lastViewportH);
+      }
+      #end
       #end
     }
   }

@@ -1,0 +1,421 @@
+// Maintained runtime support for generated Flight Haxe.
+package flighthq._internal.backend;
+
+#if (lime && !js && lime_cairo)
+import flighthq._internal._Runtime;
+import lime.graphics.cairo.Cairo;
+import lime.graphics.cairo.CairoFillRule;
+import lime.graphics.cairo.CairoImageSurface;
+import lime.graphics.cairo.CairoOperator;
+import lime.graphics.cairo.CairoPattern;
+import lime.math.Matrix3;
+import lime.utils.UInt8Array;
+
+/**
+ * Native Canvas2D implementation over Lime's bundled cairo, backing
+ * `Canvas2dBackend` where the browser context does not exist. Offscreen
+ * contexts own their pixel storage (an ARGB32 cairo image surface created over
+ * a caller-owned byte view, so pixels are directly readable for GL texture
+ * uploads and `getImageData`); a context can also wrap an externally owned
+ * `Cairo` (a Lime cairo window context) for direct-to-window presentation.
+ *
+ * Text uses cairo's toy font API with the default face: sizes and colors are
+ * honored, `measureText` is a width heuristic until a FreeType face loader
+ * exists. `textAlign`/`textBaseline` are stored but only 'left'/alphabetic
+ * rendering is applied.
+ */
+// Gradient handles and `measureText` results are reached reflectively from
+// generated code, so full DCE must not strip these classes.
+@:keep
+class NativeCanvas2dContext {
+  public var width(default, null):Int = 0;
+  public var height(default, null):Int = 0;
+  public var pixels(default, null):UInt8Array;
+  public var surface(default, null):CairoImageSurface;
+  public var cairo(default, null):Cairo;
+
+  /** The owning canvas stand-in, mirrored back through the `canvas` field. */
+  public var canvas:Dynamic;
+
+  public var fillStyle:Dynamic = '#000000';
+  public var strokeStyle:Dynamic = '#000000';
+  public var globalAlpha:Float = 1.0;
+  public var globalCompositeOperation:String = 'source-over';
+  public var font:String = '10px sans-serif';
+  public var textAlign:String = 'left';
+  public var textBaseline:String = 'alphabetic';
+  public var imageSmoothingEnabled:Bool = true;
+  public var imageSmoothingQuality:String = 'low';
+  public var filter:String = 'none';
+  public var lineWidth(default, set):Float = 1.0;
+
+  final ownsSurface:Bool;
+  final stateStack:Array<{fillStyle:Dynamic, strokeStyle:Dynamic, globalAlpha:Float, globalCompositeOperation:String,
+    font:String, textAlign:String, textBaseline:String, lineWidth:Float}> = [];
+
+  public function new(?windowContext:Cairo) {
+    ownsSurface = windowContext == null;
+    if (windowContext != null) cairo = windowContext;
+  }
+
+  function set_lineWidth(value:Float):Float {
+    lineWidth = value;
+    if (cairo != null) cairo.lineWidth = value;
+    return value;
+  }
+
+  /** (Re)allocates the owned ARGB32 surface; canvas semantics clear content. */
+  public function resize(newWidth:Int, newHeight:Int):Void {
+    if (!ownsSurface) {
+      width = newWidth;
+      height = newHeight;
+      return;
+    }
+    width = newWidth < 1 ? 1 : newWidth;
+    height = newHeight < 1 ? 1 : newHeight;
+    final stride = width * 4;
+    pixels = new UInt8Array(stride * height);
+    surface = cast CairoImageSurface.create(pixels, lime.graphics.cairo.CairoFormat.ARGB32, width, height, stride);
+    cairo = new Cairo(surface);
+    cairo.lineWidth = lineWidth;
+  }
+
+  inline function context():Cairo {
+    if (cairo == null) resize(width, height);
+    return cairo;
+  }
+
+  // ---- paths ----
+
+  public function beginPath():Void context().newPath();
+
+  public function moveTo(x:Float, y:Float):Void context().moveTo(x, y);
+
+  public function lineTo(x:Float, y:Float):Void context().lineTo(x, y);
+
+  public function rect(x:Float, y:Float, w:Float, h:Float):Void context().rectangle(x, y, w, h);
+
+  public function fill(?fillRule:Dynamic):Void {
+    final ctx = context();
+    ctx.fillRule = Std.string(fillRule) == 'evenodd' ? CairoFillRule.EVEN_ODD : CairoFillRule.WINDING;
+    applyStyle(fillStyle);
+    ctx.fillPreserve();
+  }
+
+  public function stroke():Void {
+    applyStyle(strokeStyle);
+    context().strokePreserve();
+  }
+
+  public function clip():Void context().clipPreserve();
+
+  // ---- rectangles ----
+
+  public function fillRect(x:Float, y:Float, w:Float, h:Float):Void {
+    final ctx = context();
+    ctx.newPath();
+    ctx.rectangle(x, y, w, h);
+    applyStyle(fillStyle);
+    ctx.fill();
+  }
+
+  public function strokeRect(x:Float, y:Float, w:Float, h:Float):Void {
+    final ctx = context();
+    ctx.newPath();
+    ctx.rectangle(x, y, w, h);
+    applyStyle(strokeStyle);
+    ctx.stroke();
+  }
+
+  public function clearRect(x:Float, y:Float, w:Float, h:Float):Void {
+    final ctx = context();
+    final previous = ctx.getOperator();
+    ctx.setOperator(CairoOperator.CLEAR);
+    ctx.newPath();
+    ctx.rectangle(x, y, w, h);
+    ctx.fill();
+    ctx.setOperator(previous);
+  }
+
+  // ---- state ----
+
+  public function save():Void {
+    stateStack.push({
+      fillStyle: fillStyle, strokeStyle: strokeStyle, globalAlpha: globalAlpha,
+      globalCompositeOperation: globalCompositeOperation, font: font, textAlign: textAlign,
+      textBaseline: textBaseline, lineWidth: lineWidth,
+    });
+    context().save();
+  }
+
+  public function restore():Void {
+    final saved = stateStack.pop();
+    if (saved != null) {
+      fillStyle = saved.fillStyle;
+      strokeStyle = saved.strokeStyle;
+      globalAlpha = saved.globalAlpha;
+      globalCompositeOperation = saved.globalCompositeOperation;
+      font = saved.font;
+      textAlign = saved.textAlign;
+      textBaseline = saved.textBaseline;
+      lineWidth = saved.lineWidth;
+    }
+    context().restore();
+  }
+
+  // ---- transforms ----
+
+  public function translate(x:Float, y:Float):Void context().translate(x, y);
+
+  public function transform(a:Float, b:Float, c:Float, d:Float, e:Float, f:Float):Void {
+    context().transform(new Matrix3(a, b, c, d, e, f));
+  }
+
+  public function setTransform(a:Float, b:Float, c:Float, d:Float, e:Float, f:Float):Void {
+    context().matrix = new Matrix3(a, b, c, d, e, f);
+  }
+
+  // ---- styles ----
+
+  public function createLinearGradient(x0:Float, y0:Float, x1:Float, y1:Float):NativeCanvasGradient {
+    return new NativeCanvasGradient(CairoPattern.createLinear(x0, y0, x1, y1));
+  }
+
+  public function createRadialGradient(x0:Float, y0:Float, r0:Float, x1:Float, y1:Float, r1:Float):NativeCanvasGradient {
+    return new NativeCanvasGradient(CairoPattern.createRadial(x0, y0, r0, x1, y1, r1));
+  }
+
+  public function createPattern(source:Dynamic, repetition:Dynamic):Dynamic {
+    final patternSurface = sourceSurface(source);
+    if (patternSurface == null) return null;
+    final pattern = CairoPattern.createForSurface(patternSurface);
+    pattern.extend = Std.string(repetition) == 'no-repeat' ? lime.graphics.cairo.CairoExtend.NONE
+      : lime.graphics.cairo.CairoExtend.REPEAT;
+    return new NativeCanvasGradient(pattern);
+  }
+
+  function applyStyle(style:Dynamic):Void {
+    final ctx = context();
+    if (Std.isOfType(style, NativeCanvasGradient)) {
+      ctx.source = (cast style : NativeCanvasGradient).pattern;
+      return;
+    }
+    final rgba = parseCssColor(Std.string(style));
+    ctx.setSourceRGBA(rgba.r, rgba.g, rgba.b, rgba.a * globalAlpha);
+  }
+
+  /** Parses the CSS color forms Flight emits: #rgb[a], #rrggbb[aa], rgb()/rgba(). */
+  public static function parseCssColor(value:String):{r:Float, g:Float, b:Float, a:Float} {
+    var text = StringTools.trim(value);
+    if (text == 'transparent' || text == '') return {r: 0, g: 0, b: 0, a: 0};
+    if (StringTools.startsWith(text, '#')) {
+      final hex = text.substr(1);
+      inline function channel(pair:String):Float return Std.parseInt('0x' + pair) / 255.0;
+      return switch (hex.length) {
+        case 3: {r: channel(hex.charAt(0) + hex.charAt(0)), g: channel(hex.charAt(1) + hex.charAt(1)),
+          b: channel(hex.charAt(2) + hex.charAt(2)), a: 1.0};
+        case 4: {r: channel(hex.charAt(0) + hex.charAt(0)), g: channel(hex.charAt(1) + hex.charAt(1)),
+          b: channel(hex.charAt(2) + hex.charAt(2)), a: channel(hex.charAt(3) + hex.charAt(3))};
+        case 6: {r: channel(hex.substr(0, 2)), g: channel(hex.substr(2, 2)), b: channel(hex.substr(4, 2)), a: 1.0};
+        case 8: {r: channel(hex.substr(0, 2)), g: channel(hex.substr(2, 2)), b: channel(hex.substr(4, 2)),
+          a: channel(hex.substr(6, 2))};
+        default: {r: 0, g: 0, b: 0, a: 1.0};
+      };
+    }
+    final open = text.indexOf('(');
+    final close = text.lastIndexOf(')');
+    if (open >= 0 && close > open) {
+      final parts = text.substring(open + 1, close).split(',').map(StringTools.trim);
+      if (parts.length >= 3) {
+        inline function component(part:String):Float {
+          return StringTools.endsWith(part, '%') ? Std.parseFloat(part) / 100.0 : Std.parseFloat(part) / 255.0;
+        }
+        final alpha = parts.length >= 4 ? Std.parseFloat(parts[3]) : 1.0;
+        return {r: component(parts[0]), g: component(parts[1]), b: component(parts[2]), a: alpha};
+      }
+    }
+    return switch (text) {
+      case 'black': {r: 0, g: 0, b: 0, a: 1.0};
+      case 'white': {r: 1, g: 1, b: 1, a: 1.0};
+      case 'red': {r: 1, g: 0, b: 0, a: 1.0};
+      case 'green': {r: 0, g: 0.5, b: 0, a: 1.0};
+      case 'blue': {r: 0, g: 0, b: 1, a: 1.0};
+      default: {r: 0, g: 0, b: 0, a: 1.0};
+    };
+  }
+
+  // ---- text ----
+
+  public function fillText(text:String, x:Float, y:Float):Void {
+    final ctx = context();
+    ctx.save();
+    ctx.setFontSize(parseFontSize(font));
+    applyStyle(fillStyle);
+    ctx.moveTo(x, y);
+    ctx.showText(text);
+    ctx.restore();
+  }
+
+  public function measureText(text:String):Dynamic {
+    // Width heuristic until a FreeType font face loader provides real extents.
+    return {width: parseFontSize(font) * 0.55 * text.length};
+  }
+
+  static function parseFontSize(fontValue:String):Float {
+    for (token in fontValue.split(' ')) {
+      if (StringTools.endsWith(token, 'px')) {
+        final size = Std.parseFloat(token);
+        if (!Math.isNaN(size)) return size;
+      }
+    }
+    return 10.0;
+  }
+
+  // ---- images and pixels ----
+
+  public function drawImage(source:Dynamic, a:Float, b:Float, ?c:Float, ?d:Float, ?e:Float, ?f:Float, ?g:Float,
+      ?h:Float):Void {
+    final imageSurface = sourceSurface(source);
+    if (imageSurface == null) return;
+    final ctx = context();
+    ctx.save();
+    if (c == null) {
+      // drawImage(source, dx, dy)
+      ctx.setSourceSurface(imageSurface, a, b);
+      ctx.newPath();
+      ctx.rectangle(a, b, imageSurface.width, imageSurface.height);
+      ctx.fill();
+    } else if (e == null) {
+      // drawImage(source, dx, dy, dw, dh)
+      ctx.translate(a, b);
+      ctx.scale(c / imageSurface.width, d / imageSurface.height);
+      ctx.setSourceSurface(imageSurface, 0, 0);
+      ctx.newPath();
+      ctx.rectangle(0, 0, imageSurface.width, imageSurface.height);
+      ctx.fill();
+    } else {
+      // drawImage(source, sx, sy, sw, sh, dx, dy, dw, dh)
+      ctx.translate(e, f);
+      ctx.scale(g / c, h / d);
+      ctx.setSourceSurface(imageSurface, -a, -b);
+      ctx.newPath();
+      ctx.rectangle(0, 0, c, d);
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  public function getImageData(x:Float, y:Float, w:Float, h:Float):Dynamic {
+    final startX = Std.int(x);
+    final startY = Std.int(y);
+    final outWidth = Std.int(w);
+    final outHeight = Std.int(h);
+    final data = new flighthq._internal._UInt8ClampedArray(outWidth * outHeight * 4);
+    if (surface != null) {
+      surface.flush();
+      for (row in 0...outHeight) {
+        final sourceY = startY + row;
+        if (sourceY < 0 || sourceY >= height) continue;
+        for (column in 0...outWidth) {
+          final sourceX = startX + column;
+          if (sourceX < 0 || sourceX >= width) continue;
+          final src = (sourceY * width + sourceX) * 4;
+          final dst = (row * outWidth + column) * 4;
+          // ARGB32 little-endian bytes are B,G,R,A and premultiplied.
+          final alpha = pixels[src + 3];
+          final scale = alpha == 0 ? 0.0 : 255.0 / alpha;
+          data[dst] = Math.round(pixels[src + 2] * scale);
+          data[dst + 1] = Math.round(pixels[src + 1] * scale);
+          data[dst + 2] = Math.round(pixels[src] * scale);
+          data[dst + 3] = alpha;
+        }
+      }
+    }
+    return {width: outWidth, height: outHeight, data: data};
+  }
+
+  public function putImageData(imageData:Dynamic, x:Float, y:Float):Void {
+    if (surface == null) return;
+    surface.flush();
+    final sourceWidth = Std.int(_Runtime.field(imageData, 'width'));
+    final sourceHeight = Std.int(_Runtime.field(imageData, 'height'));
+    final data:Dynamic = _Runtime.field(imageData, 'data');
+    final startX = Std.int(x);
+    final startY = Std.int(y);
+    for (row in 0...sourceHeight) {
+      final targetY = startY + row;
+      if (targetY < 0 || targetY >= height) continue;
+      for (column in 0...sourceWidth) {
+        final targetX = startX + column;
+        if (targetX < 0 || targetX >= width) continue;
+        final src = (row * sourceWidth + column) * 4;
+        final dst = (targetY * width + targetX) * 4;
+        final red:Int = _Runtime.getIndex(data, src);
+        final green:Int = _Runtime.getIndex(data, src + 1);
+        final blue:Int = _Runtime.getIndex(data, src + 2);
+        final alpha:Int = _Runtime.getIndex(data, src + 3);
+        pixels[dst] = Std.int(blue * alpha / 255);
+        pixels[dst + 1] = Std.int(green * alpha / 255);
+        pixels[dst + 2] = Std.int(red * alpha / 255);
+        pixels[dst + 3] = alpha;
+      }
+    }
+    // Lime exposes no cairo_surface_mark_dirty; direct writes to the caller-owned
+    // buffer are visible because image surfaces read it on each operation.
+  }
+
+  public function getContextAttributes():Dynamic {
+    return {alpha: true, desynchronized: false, willReadFrequently: false};
+  }
+
+  /** Resolves a drawable source to a cairo surface: another native canvas, or
+   * an object carrying RGBA pixel `data` with `width`/`height`. */
+  static function sourceSurface(source:Dynamic):CairoImageSurface {
+    if (source == null) return null;
+    if (Std.isOfType(source, NativeScratchCanvas)) {
+      final ctx = (cast source : NativeScratchCanvas).nativeContext();
+      if (ctx.surface != null) ctx.surface.flush();
+      return ctx.surface;
+    }
+    if (Std.isOfType(source, NativeCanvas2dContext)) {
+      final ctx:NativeCanvas2dContext = cast source;
+      if (ctx.surface != null) ctx.surface.flush();
+      return ctx.surface;
+    }
+    final data:Dynamic = _Runtime.field(source, 'data');
+    final sourceWidth = Std.int(_Runtime.field(source, 'width'));
+    final sourceHeight = Std.int(_Runtime.field(source, 'height'));
+    if (data == null || sourceWidth <= 0 || sourceHeight <= 0) return null;
+    final stride = sourceWidth * 4;
+    final premultiplied = new UInt8Array(stride * sourceHeight);
+    for (index in 0...sourceWidth * sourceHeight) {
+      final src = index * 4;
+      final red:Int = _Runtime.getIndex(data, src);
+      final green:Int = _Runtime.getIndex(data, src + 1);
+      final blue:Int = _Runtime.getIndex(data, src + 2);
+      final alpha:Int = _Runtime.getIndex(data, src + 3);
+      premultiplied[src] = Std.int(blue * alpha / 255);
+      premultiplied[src + 1] = Std.int(green * alpha / 255);
+      premultiplied[src + 2] = Std.int(red * alpha / 255);
+      premultiplied[src + 3] = alpha;
+    }
+    return cast CairoImageSurface.create(premultiplied, lime.graphics.cairo.CairoFormat.ARGB32, sourceWidth,
+      sourceHeight, stride);
+  }
+}
+
+/** Canvas gradient/pattern handle; `addColorStop` is reached reflectively. */
+@:keep
+class NativeCanvasGradient {
+  public final pattern:CairoPattern;
+
+  public function new(pattern:CairoPattern) {
+    this.pattern = pattern;
+  }
+
+  public function addColorStop(offset:Float, color:String):Void {
+    final rgba = NativeCanvas2dContext.parseCssColor(color);
+    pattern.addColorStopRGBA(offset, rgba.r, rgba.g, rgba.b, rgba.a);
+  }
+}
+#end
