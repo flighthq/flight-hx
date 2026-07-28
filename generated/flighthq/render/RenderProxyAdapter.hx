@@ -17,7 +17,7 @@ class RenderProxyAdapter {
   public static function applyRenderProxyAdapter(state:RenderState, source:Renderable, data:Dynamic):Void {
     var renderAdapter:Dynamic = cast _Runtime.UNDEFINED;
     var traverseChildren:Dynamic = cast _Runtime.UNDEFINED;
-    renderAdapter = _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderProxyAdapterMap'), 'get', cast ([source] : Array<Dynamic>)), function():Dynamic return cast null);
+    renderAdapter = _Runtime.coalesce(((cast _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderProxyAdapterMap') : flighthq._internal._WeakMap).get(source)), function():Dynamic return cast null);
     traverseChildren = true;
     if (_Runtime.truthy(!_Runtime.strictEquals(renderAdapter, null))) {
       var result:Dynamic = _Runtime.callProperty(renderAdapter, 'adapt', cast ([state, source, data] : Array<Dynamic>));
@@ -30,7 +30,7 @@ class RenderProxyAdapter {
   }
 
   public static function getRenderProxyAdapter(state:RenderState, source:Renderable):Null<flighthq.types.RenderProxyAdapter> {
-    return cast _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderProxyAdapterMap'), 'get', cast ([source] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderProxyAdapterMap') : flighthq._internal._WeakMap).get(source)), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -41,9 +41,9 @@ class RenderProxyAdapter {
     }
     runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(adapter, null))) {
-      _Runtime.callProperty(_Runtime.field(runtime, 'renderProxyAdapterMap'), 'delete', cast ([source] : Array<Dynamic>));
+      ((cast _Runtime.field(runtime, 'renderProxyAdapterMap') : flighthq._internal._WeakMap).delete_(source));
     } else {
-      _Runtime.callProperty(_Runtime.field(runtime, 'renderProxyAdapterMap'), 'set', cast ([source, adapter] : Array<Dynamic>));
+      ((cast _Runtime.field(runtime, 'renderProxyAdapterMap') : flighthq._internal._WeakMap).set(source, adapter));
     }
     _Runtime.callValue(invalidateNodeAppearance, cast ([(cast source : Node<Dynamic>)] : Array<Dynamic>));
   }

@@ -37,7 +37,7 @@ class AsepriteParse {
     var firstDuration:Dynamic = cast _Runtime.UNDEFINED;
     var uniform:Dynamic = cast _Runtime.UNDEFINED;
     tagFrameNames = _Runtime.slice(frameNames, _Runtime.field(tag, 'from'), (_Runtime.field(tag, 'to') + 1.0));
-    durations = _Runtime.callProperty(tagFrameNames, 'map', cast ([function(n:Dynamic) return _Runtime.coalesce(_Runtime.callProperty(durationMap, 'get', cast ([n] : Array<Dynamic>)), function():Dynamic return cast 100.0)] : Array<Dynamic>));
+    durations = _Runtime.callProperty(tagFrameNames, 'map', cast ([function(n:Dynamic) return _Runtime.coalesce(((cast durationMap : flighthq._internal._Map).get(n)), function():Dynamic return cast 100.0)] : Array<Dynamic>));
     firstDuration = _Runtime.coalesce(_Runtime.getIndex(durations, 0.0), function():Dynamic return cast 100.0);
     uniform = _Runtime.callProperty(durations, 'every', cast ([function(d:Dynamic) return _Runtime.strictEquals(d, firstDuration)] : Array<Dynamic>));
     return cast _Runtime.callValue(createSpritesheetAnimationData, cast ([{ direction: _Runtime.coalesce(_Runtime.field(tag, 'direction'), function():Dynamic return cast 'forward'), frameDuration: firstDuration, frameDurations: _Runtime.select(uniform, function():Dynamic return cast null, function():Dynamic return cast durations), frameNames: tagFrameNames, loop: true, name: _Runtime.field(tag, 'name') }] : Array<Dynamic>));
@@ -58,13 +58,13 @@ class AsepriteParse {
     durationMap = _Runtime.construct(_Runtime.globalValue('Map'), []);
     if (_Runtime.truthy(_Runtime.isArray(_Runtime.field(doc, 'frames')))) {
       for (entry in _Runtime.iterable((cast _Runtime.field(doc, 'frames') : Array<AsepriteArrayFrame>))) {
-        _Runtime.callProperty(durationMap, 'set', cast ([_Runtime.field(entry, 'filename'), _Runtime.field(entry, 'duration')] : Array<Dynamic>));
+        ((cast durationMap : flighthq._internal._Map).set(_Runtime.field(entry, 'filename'), _Runtime.field(entry, 'duration')));
       }
     } else {
       for (__iteration0 in _Runtime.iterable(flighthq._internal.DynamicObject.entries(_Runtime.field(doc, 'frames')))) {
         var name:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
         var entry:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
-        _Runtime.callProperty(durationMap, 'set', cast ([name, _Runtime.field(entry, 'duration')] : Array<Dynamic>));
+        ((cast durationMap : flighthq._internal._Map).set(name, _Runtime.field(entry, 'duration')));
       }
     }
     __destructure1 = doc;

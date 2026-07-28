@@ -277,7 +277,7 @@ class TextMarkup {
       return;
     }
     top = _Runtime.getIndex(stack, (_Runtime.field(stack, 'length') - 1.0));
-    handler = _Runtime.callProperty(handlers, 'get', cast ([name] : Array<Dynamic>));
+    handler = ((cast handlers : flighthq._internal._Map).get(name));
     if (_Runtime.truthy(_Runtime.strictEquals(handler, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       if (_Runtime.truthy(!_Runtime.truthy(selfClosing))) { _Runtime.callProperty(stack, 'push', cast ([_Runtime.mergeObjects([top])] : Array<Dynamic>)); }
       return;

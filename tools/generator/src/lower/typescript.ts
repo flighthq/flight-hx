@@ -17,6 +17,15 @@ import type {
 
 const fingerprintPrinter = ts.createPrinter({ removeComments: true });
 
+const collectionMembers = {
+  MapCollection: new Set(['clear', 'delete', 'entries', 'forEach', 'get', 'has', 'keys', 'set', 'size', 'values']),
+  SetCollection: new Set(['add', 'clear', 'delete', 'entries', 'forEach', 'has', 'keys', 'size', 'values']),
+  WeakMapCollection: new Set(['delete', 'get', 'has', 'set']),
+  WeakSetCollection: new Set(['add', 'delete', 'has']),
+} as const;
+
+type CollectionBinding = keyof typeof collectionMembers;
+
 const portableTypeReferenceMap: Readonly<Record<string, string>> = {
   ArrayBuffer: 'haxe.io.Bytes',
   ArrayBufferView: 'haxe.io.ArrayBufferView',
@@ -310,6 +319,7 @@ export function lowerTypeScriptSource(
   sourceFile: ts.SourceFile,
   packageName: string,
   workspaceDirectory: string,
+  checker?: ts.TypeChecker,
 ): LoweringResult {
   const diagnostics: LoweringDiagnostic[] = [];
   const declarations: IrDeclaration[] = [];
@@ -376,6 +386,7 @@ export function lowerTypeScriptSource(
     canvasBindingNames,
     canvasElementBindingNames,
     classThis: false,
+    checker,
     diagnostics,
     domDocumentBindingNames,
     domNavigatorBindingNames,
@@ -654,6 +665,7 @@ function isBoundPlatformExpression(
   if (ts.isParenthesizedExpression(node) || ts.isAsExpression(node) || ts.isNonNullExpression(node)) {
     return isBoundPlatformExpression(node.expression, context, typeName);
   }
+  if (typeIncludesNamed(context.checker?.getTypeAtLocation(node), context.checker, new Set([typeName]))) return true;
   if (ts.isIdentifier(node)) {
     const parameter = findEnclosingParameter(node);
     if (parameter) {
@@ -671,6 +683,44 @@ function isBoundPlatformExpression(
   return typeName === 'CanvasRenderingContext2D'
     ? isCanvasValueExpression(node, context.canvasBindingNames)
     : isWebGlValueExpression(node, context.webGlBindingNames);
+}
+
+function collectionBinding(
+  node: ts.Expression,
+  member: string,
+  context: LoweringContext,
+): CollectionBinding | undefined {
+  const type = context.checker?.getTypeAtLocation(node);
+  const checker = context.checker;
+  if (!type || !checker) return undefined;
+  const candidates: Array<[CollectionBinding, ReadonlySet<string>, ReadonlySet<string>]> = [
+    ['MapCollection', new Set(['Map', 'ReadonlyMap']), collectionMembers.MapCollection],
+    ['SetCollection', new Set(['ReadonlySet', 'Set']), collectionMembers.SetCollection],
+    ['WeakMapCollection', new Set(['WeakMap']), collectionMembers.WeakMapCollection],
+    ['WeakSetCollection', new Set(['WeakSet']), collectionMembers.WeakSetCollection],
+  ];
+  return candidates.find(([, names, members]) => members.has(member) && typeIncludesNamed(type, checker, names))?.[0];
+}
+
+function typeIncludesNamed(
+  type: ts.Type | undefined,
+  checker: ts.TypeChecker | undefined,
+  names: ReadonlySet<string>,
+  seen = new Set<ts.Type>(),
+): boolean {
+  if (!type || !checker || seen.has(type)) return false;
+  seen.add(type);
+  if (type.isUnionOrIntersection() && type.types.some((item) => typeIncludesNamed(item, checker, names, seen))) {
+    return true;
+  }
+  const symbols = [type.aliasSymbol, type.getSymbol()];
+  if (symbols.some((symbol) => symbol && names.has(symbol.getName()))) return true;
+  if (symbols.some((symbol) => symbol?.getName() === 'Readonly')) {
+    const arguments_ = type.aliasTypeArguments ?? checker.getTypeArguments(type as ts.TypeReference);
+    if (arguments_[0] && typeIncludesNamed(arguments_[0], checker, names, seen)) return true;
+  }
+  const constraint = checker.getBaseConstraintOfType(type);
+  return constraint !== undefined && constraint !== type && typeIncludesNamed(constraint, checker, names, seen);
 }
 
 function findEnclosingParameter(identifier: ts.Identifier): ts.ParameterDeclaration | undefined {
@@ -691,6 +741,7 @@ interface LoweringContext {
   canvasBindingNames: ReadonlySet<string>;
   canvasElementBindingNames: ReadonlySet<string>;
   classThis: boolean;
+  checker?: ts.TypeChecker | undefined;
   diagnostics: LoweringDiagnostic[];
   domDocumentBindingNames: ReadonlySet<string>;
   domNavigatorBindingNames: ReadonlySet<string>;
@@ -1487,6 +1538,7 @@ function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpre
     const objectIsDomNavigator =
       domNavigatorMembers.has(node.name.text) &&
       isBoundGlobalRootExpression(node.expression, context, 'navigator', context.domNavigatorBindingNames);
+    const objectIsCollection = collectionBinding(node.expression, node.name.text, context);
     return {
       binding: webGpuConstantNamespace
         ? 'WebGpuConstantsBackend'
@@ -1506,13 +1558,15 @@ function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpre
                       ? 'DomDocumentBackend'
                       : objectIsDomNavigator
                         ? 'DomNavigatorBackend'
-                        : objectIsGlobalObject
-                          ? 'DynamicObject'
-                          : isBoundPlatformExpression(node.expression, context, 'CanvasRenderingContext2D')
-                            ? 'Canvas2dBackend'
-                            : isBoundPlatformExpression(node.expression, context, 'WebGL2RenderingContext')
-                              ? 'WebGl2Backend'
-                              : undefined,
+                        : objectIsCollection
+                          ? objectIsCollection
+                          : objectIsGlobalObject
+                            ? 'DynamicObject'
+                            : isBoundPlatformExpression(node.expression, context, 'CanvasRenderingContext2D')
+                              ? 'Canvas2dBackend'
+                              : isBoundPlatformExpression(node.expression, context, 'WebGL2RenderingContext')
+                                ? 'WebGl2Backend'
+                                : undefined,
       kind: 'property',
       name: node.name.text,
       object: webGpuConstantNamespace

@@ -36,8 +36,8 @@ class GetSceneResourceTextures {
           var j:Dynamic = 0.0;
           while (_Runtime.truthy(_Runtime.compare(j, _Runtime.field(slots, 'length'), '<'))) {
             var texture:Dynamic = _Runtime.getIndex(slots, j);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.looseEquals(_Runtime.field(texture, 'resource'), null), function():Dynamic return cast _Runtime.callProperty(seen, 'has', cast ([texture] : Array<Dynamic>))))) { j++; continue; }
-            _Runtime.callProperty(seen, 'add', cast ([texture] : Array<Dynamic>));
+            if (_Runtime.truthy(_Runtime.orValue(_Runtime.looseEquals(_Runtime.field(texture, 'resource'), null), function():Dynamic return cast ((cast seen : flighthq._internal._Set).has(texture))))) { j++; continue; }
+            ((cast seen : flighthq._internal._Set).add(texture));
             _Runtime.callProperty(out, 'push', cast ([texture] : Array<Dynamic>));
             j++;
           }

@@ -210,13 +210,13 @@ class WgpuRenderState {
     effectiveFilter = _Runtime.select(_Runtime.compare(anisotropy, 1.0, '>'), function():Dynamic return cast 'linear', function():Dynamic return cast filter);
     effectiveMipmapFilter = _Runtime.select(_Runtime.compare(anisotropy, 1.0, '>'), function():Dynamic return cast 'linear', function():Dynamic return cast mipmapFilter);
     key = '' + Std.string(effectiveFilter) + '|' + Std.string(wrapU) + '|' + Std.string(wrapV) + '|' + Std.string(_Runtime.coalesce(effectiveMipmapFilter, function():Dynamic return cast 'none')) + '|' + Std.string(anisotropy) + '';
-    sampler = _Runtime.callProperty(_Runtime.field(runtime, 'samplerCache'), 'get', cast ([key] : Array<Dynamic>));
+    sampler = ((cast _Runtime.field(runtime, 'samplerCache') : flighthq._internal._Map).get(key));
     if (_Runtime.truthy(_Runtime.strictEquals(sampler, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       var descriptor:Dynamic = { minFilter: effectiveFilter, magFilter: effectiveFilter, addressModeU: wrapU, addressModeV: wrapV };
       if (_Runtime.truthy(!_Runtime.strictEquals(effectiveMipmapFilter, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(descriptor, 'mipmapFilter', effectiveMipmapFilter); }
       if (_Runtime.truthy(_Runtime.compare(anisotropy, 1.0, '>'))) { _Runtime.setField(descriptor, 'maxAnisotropy', anisotropy); }
       (sampler = cast (flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createSampler', cast ([descriptor] : Array<Dynamic>)) : Dynamic));
-      _Runtime.callProperty(_Runtime.field(runtime, 'samplerCache'), 'set', cast ([key, sampler] : Array<Dynamic>));
+      ((cast _Runtime.field(runtime, 'samplerCache') : flighthq._internal._Map).set(key, sampler));
     }
     return cast sampler;
     return cast null;

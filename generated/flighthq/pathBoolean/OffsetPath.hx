@@ -89,7 +89,7 @@ class OffsetPath {
         var previousEndY:Dynamic = (vy + (signedDelta * _Runtime.getIndex(normalY, previous)));
         var thisStartX:Dynamic = (vx + (signedDelta * _Runtime.getIndex(normalX, k)));
         var thisStartY:Dynamic = (vy + (signedDelta * _Runtime.getIndex(normalY, k)));
-        if (_Runtime.truthy(_Runtime.callProperty(capIndices, 'has', cast ([k] : Array<Dynamic>)))) {
+        if (_Runtime.truthy(((cast capIndices : flighthq._internal._Set).has(k)))) {
           _Runtime.callValue(OffsetPath.emitOffsetEndCap__offsetPath, cast ([ring, vx, vy, previousEndX, previousEndY, thisStartX, thisStartY, _Runtime.getIndex(dirX, previous), _Runtime.getIndex(dirY, previous), _Runtime.getIndex(dirX, k), _Runtime.getIndex(dirY, k), HxMath.abs(signedDelta), end, arcTolerance] : Array<Dynamic>));
         } else {
           _Runtime.callValue(OffsetPath.emitOffsetJoin__offsetPath, cast ([ring, vx, vy, previousEndX, previousEndY, thisStartX, thisStartY, _Runtime.getIndex(dirX, previous), _Runtime.getIndex(dirY, previous), _Runtime.getIndex(dirX, k), _Runtime.getIndex(dirY, k), signedDelta, join, miterLimit, arcTolerance] : Array<Dynamic>));

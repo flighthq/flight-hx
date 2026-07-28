@@ -154,8 +154,8 @@ class DomRichText {
       var fontStr:Dynamic = _Runtime.callValue(computeTextFormatFontString, cast ([fmt] : Array<Dynamic>));
       var fontAscent:Dynamic = _Runtime.callValue(DomRichText.getDomFontAscent__domRichText, cast ([ctx, fontStr] : Array<Dynamic>));
       var y:Dynamic = (((_Runtime.field(group, 'offsetY') + _Runtime.field(group, 'ascent')) - fontAscent) - scrollYOffset);
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.field(fmt, 'bullet'), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(bulletLines, 'has', cast ([_Runtime.field(group, 'lineIndex')] : Array<Dynamic>)))))) {
-        _Runtime.callProperty(bulletLines, 'add', cast ([_Runtime.field(group, 'lineIndex')] : Array<Dynamic>));
+      if (_Runtime.truthy(_Runtime.andValue(_Runtime.field(fmt, 'bullet'), function():Dynamic return cast !_Runtime.truthy(((cast bulletLines : flighthq._internal._Set).has(_Runtime.field(group, 'lineIndex'))))))) {
+        ((cast bulletLines : flighthq._internal._Set).add(_Runtime.field(group, 'lineIndex')));
         var bulletSize:Dynamic = _Runtime.coalesce(_Runtime.field(fmt, 'size'), function():Dynamic return cast 12.0);
         var bulletX:Dynamic = ((x - (bulletSize * 0.7)) - DomRichText.DOM_BULLET_GAP__domRichText);
         var bulletStyle:Dynamic = 'position:absolute;left:' + Std.string(bulletX) + 'px;top:' + Std.string(y) + 'px;font:' + Std.string(fontStr) + ';line-height:1;color:' + Std.string(_Runtime.callValue(computeRgbHexString, cast ([_Runtime.coalesce(_Runtime.field(fmt, 'color'), function():Dynamic return cast _Runtime.field(_Runtime.field(source, 'data'), 'textColor'))] : Array<Dynamic>))) + ';white-space:nowrap;';

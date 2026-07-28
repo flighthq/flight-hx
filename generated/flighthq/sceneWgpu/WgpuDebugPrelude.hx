@@ -22,13 +22,13 @@ class WgpuDebugPrelude {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var binding:Null<WgpuMaterialBinding> = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
-    binding = _Runtime.callProperty(_Runtime.field(scene, 'materialBindGroups'), 'get', cast ([materialKey] : Array<Dynamic>));
+    binding = ((cast _Runtime.field(scene, 'materialBindGroups') : flighthq._internal._WeakMap).get(materialKey));
     if (_Runtime.truthy(_Runtime.strictEquals(binding, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       var stateRuntime:Dynamic = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
       var buffer:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: WgpuDebugPrelude.DEBUG_UNIFORM_BYTES__wgpuDebugPrelude, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
       var bindGroup:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(pipeline, 'materialBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: { buffer: buffer } }, { binding: 1.0, resource: _Runtime.field(stateRuntime, 'linearSampler') }, { binding: 2.0, resource: _Runtime.callValue(ensureWgpuPlaceholderTextureView, cast ([state] : Array<Dynamic>)) }] : Array<Dynamic>) }] : Array<Dynamic>));
       (binding = cast ({ bindGroup: bindGroup, buffer: buffer } : Dynamic));
-      _Runtime.callProperty(_Runtime.field(scene, 'materialBindGroups'), 'set', cast ([materialKey, binding] : Array<Dynamic>));
+      ((cast _Runtime.field(scene, 'materialBindGroups') : flighthq._internal._WeakMap).set(materialKey, binding));
     }
     _Runtime.setIndex(WgpuDebugPrelude._scratch__wgpuDebugPrelude, 0.0, near);
     _Runtime.setIndex(WgpuDebugPrelude._scratch__wgpuDebugPrelude, 1.0, far);

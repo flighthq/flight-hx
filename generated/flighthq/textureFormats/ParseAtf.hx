@@ -47,8 +47,8 @@ class ParseAtf {
     log2Height = _Runtime.getIndex(bytes, (headerOffset + 2.0));
     mipCount = _Runtime.getIndex(bytes, (headerOffset + 3.0));
     formatCode = (_Runtime.toInt32(typeFormatByte) & _Runtime.toInt32(ParseAtf.atfFormatCodeMask__parseAtf));
-    alpha = _Runtime.callProperty(ParseAtf.atfAlphaFormatCodes__parseAtf, 'has', cast ([formatCode] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.truthy(alpha), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(ParseAtf.atfOpaqueFormatCodes__parseAtf, 'has', cast ([formatCode] : Array<Dynamic>)))))) { return cast null; }
+    alpha = ((cast ParseAtf.atfAlphaFormatCodes__parseAtf : flighthq._internal._Set).has(formatCode));
+    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.truthy(alpha), function():Dynamic return cast !_Runtime.truthy(((cast ParseAtf.atfOpaqueFormatCodes__parseAtf : flighthq._internal._Set).has(formatCode)))))) { return cast null; }
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(log2Width, ParseAtf.atfMaxLog2Dimension__parseAtf, '>'), function():Dynamic return cast _Runtime.compare(log2Height, ParseAtf.atfMaxLog2Dimension__parseAtf, '>')))) { return cast null; }
     if (_Runtime.truthy(_Runtime.compare(mipCount, 1.0, '<'))) { return cast null; }
     cube = !_Runtime.strictEquals((_Runtime.toInt32(typeFormatByte) & _Runtime.toInt32(ParseAtf.atfCubeFlag__parseAtf)), 0.0);

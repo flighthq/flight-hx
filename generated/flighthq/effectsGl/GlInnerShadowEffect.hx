@@ -87,12 +87,12 @@ class GlInnerShadowEffect {
 
   public static function getClipShader__glInnerShadowEffect(state:GlRenderState):InnerClipLocations__glInnerShadowEffect {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
-    loc = _Runtime.callProperty(GlInnerShadowEffect.clipShaders__glInnerShadowEffect, 'get', cast ([state] : Array<Dynamic>));
+    loc = ((cast GlInnerShadowEffect.clipShaders__glInnerShadowEffect : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       var gl:Dynamic = _Runtime.field(state, 'gl');
       var base:Dynamic = _Runtime.callValue(compileGlFullscreenProgram, cast ([gl, GlInnerShadowEffect.INNER_CLIP_FRAGMENT_SRC__glInnerShadowEffect] : Array<Dynamic>));
       (loc = cast (_Runtime.mergeObjects([base]) : Dynamic));
-      _Runtime.callProperty(GlInnerShadowEffect.clipShaders__glInnerShadowEffect, 'set', cast ([state, loc] : Array<Dynamic>));
+      ((cast GlInnerShadowEffect.clipShaders__glInnerShadowEffect : flighthq._internal._WeakMap).set(state, loc));
     }
     return cast loc;
     return cast null;

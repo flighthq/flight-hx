@@ -42,7 +42,7 @@ class Screen {
         _Runtime.callValue(emitSignal, cast ([_Runtime.field(signals, 'onScreenMetricsChanged'), event] : Array<Dynamic>));
       } }
     }] : Array<Dynamic>));
-    _Runtime.callProperty(Screen._signalSubscriptions__screen, 'set', cast ([signals, unsubscribe] : Array<Dynamic>));
+    ((cast Screen._signalSubscriptions__screen : flighthq._internal._WeakMap).set(signals, unsubscribe));
   }
 
   public static function copyScreenInfo__screen(src:ScreenInfo, dst:ScreenInfo):Void {
@@ -317,10 +317,10 @@ class Screen {
 
   public static function detachScreenSignals(signals:ScreenSignals):Void {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
-    unsubscribe = _Runtime.callProperty(Screen._signalSubscriptions__screen, 'get', cast ([signals] : Array<Dynamic>));
+    unsubscribe = ((cast Screen._signalSubscriptions__screen : flighthq._internal._WeakMap).get(signals));
     if (_Runtime.truthy(!_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.callValue(unsubscribe, cast ([] : Array<Dynamic>));
-      _Runtime.callProperty(Screen._signalSubscriptions__screen, 'delete', cast ([signals] : Array<Dynamic>));
+      ((cast Screen._signalSubscriptions__screen : flighthq._internal._WeakMap).delete_(signals));
     }
   }
 

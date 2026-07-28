@@ -88,12 +88,12 @@ class GlEffectBoxBlur {
 
   public static function getBoxBlurShader__glEffectBoxBlur(state:GlRenderState):BoxBlurShaderLocations__glEffectBoxBlur {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
-    loc = _Runtime.callProperty(GlEffectBoxBlur.boxBlurShaders__glEffectBoxBlur, 'get', cast ([state] : Array<Dynamic>));
+    loc = ((cast GlEffectBoxBlur.boxBlurShaders__glEffectBoxBlur : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       var gl:Dynamic = _Runtime.field(state, 'gl');
       var base:Dynamic = _Runtime.callValue(compileGlFullscreenProgram, cast ([gl, GlEffectBoxBlur.BOX_BLUR_FRAGMENT_SRC__glEffectBoxBlur] : Array<Dynamic>));
       (loc = cast (_Runtime.mergeObjects([base, { locTexelSize: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_texelSize') }, { locRadius: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_radius') }, { locDirection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_direction') }, { locEdgeColor: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_edgeColor') }, { locUseEdgeColor: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_useEdgeColor') }]) : Dynamic));
-      _Runtime.callProperty(GlEffectBoxBlur.boxBlurShaders__glEffectBoxBlur, 'set', cast ([state, loc] : Array<Dynamic>));
+      ((cast GlEffectBoxBlur.boxBlurShaders__glEffectBoxBlur : flighthq._internal._WeakMap).set(state, loc));
     }
     return cast loc;
     return cast null;

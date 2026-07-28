@@ -49,7 +49,7 @@ class RegisterBitmapHitTest {
   public static function surfaceForImage__registerBitmapHitTest(image:ImageResource):Null<Surface> {
     var cached:Dynamic = cast _Runtime.UNDEFINED;
     var surface:Null<Surface> = cast _Runtime.UNDEFINED;
-    cached = _Runtime.callProperty(RegisterBitmapHitTest.surfaceCache__registerBitmapHitTest, 'get', cast ([image] : Array<Dynamic>));
+    cached = ((cast RegisterBitmapHitTest.surfaceCache__registerBitmapHitTest : flighthq._internal._WeakMap).get(image));
     if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast cached; }
     surface = null;
     try {
@@ -57,7 +57,7 @@ class RegisterBitmapHitTest {
     } catch (__error:Dynamic) {
       (surface = cast (null : Dynamic));
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(surface, null))) { _Runtime.callProperty(RegisterBitmapHitTest.surfaceCache__registerBitmapHitTest, 'set', cast ([image, surface] : Array<Dynamic>)); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(surface, null))) { ((cast RegisterBitmapHitTest.surfaceCache__registerBitmapHitTest : flighthq._internal._WeakMap).set(image, surface)); }
     return cast surface;
     return cast null;
   }

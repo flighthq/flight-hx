@@ -76,12 +76,12 @@ class GlInnerGlowEffect {
 
   public static function getClipShader__glInnerGlowEffect(state:GlRenderState):InnerClipLocations__glInnerGlowEffect {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
-    loc = _Runtime.callProperty(GlInnerGlowEffect.clipShaders__glInnerGlowEffect, 'get', cast ([state] : Array<Dynamic>));
+    loc = ((cast GlInnerGlowEffect.clipShaders__glInnerGlowEffect : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       var gl:Dynamic = _Runtime.field(state, 'gl');
       var base:Dynamic = _Runtime.callValue(compileGlFullscreenProgram, cast ([gl, GlInnerGlowEffect.INNER_CLIP_FRAGMENT_SRC__glInnerGlowEffect] : Array<Dynamic>));
       (loc = cast (_Runtime.mergeObjects([base]) : Dynamic));
-      _Runtime.callProperty(GlInnerGlowEffect.clipShaders__glInnerGlowEffect, 'set', cast ([state, loc] : Array<Dynamic>));
+      ((cast GlInnerGlowEffect.clipShaders__glInnerGlowEffect : flighthq._internal._WeakMap).set(state, loc));
     }
     return cast loc;
     return cast null;

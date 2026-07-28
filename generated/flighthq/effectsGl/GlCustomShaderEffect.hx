@@ -61,18 +61,18 @@ class GlCustomShaderEffect {
   };
 
   public static function getGlCustomShaderSource(state:GlRenderState, shaderKey:String):Null<String> {
-    return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callProperty(GlCustomShaderEffect._customShaders__glCustomShaderEffect, 'get', cast ([state] : Array<Dynamic>)), 'get', cast ([shaderKey] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection2:Dynamic = ((cast GlCustomShaderEffect._customShaders__glCustomShaderEffect : flighthq._internal._WeakMap).get(state)); __collection2 == null ? _Runtime.UNDEFINED : ((cast __collection2 : flighthq._internal._Map).get(shaderKey)); }), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function registerGlCustomShaderSource(state:GlRenderState, shaderKey:String, fragmentSource:String):Void {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
-    registry = _Runtime.callProperty(GlCustomShaderEffect._customShaders__glCustomShaderEffect, 'get', cast ([state] : Array<Dynamic>));
+    registry = ((cast GlCustomShaderEffect._customShaders__glCustomShaderEffect : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (registry = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
-      _Runtime.callProperty(GlCustomShaderEffect._customShaders__glCustomShaderEffect, 'set', cast ([state, registry] : Array<Dynamic>));
+      ((cast GlCustomShaderEffect._customShaders__glCustomShaderEffect : flighthq._internal._WeakMap).set(state, registry));
     }
-    _Runtime.callProperty(registry, 'set', cast ([shaderKey, fragmentSource] : Array<Dynamic>));
+    ((cast registry : flighthq._internal._Map).set(shaderKey, fragmentSource));
   }
 
   public static final NO_UNIFORMS__glCustomShaderEffect:Dynamic = function() {

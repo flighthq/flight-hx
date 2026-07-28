@@ -35,7 +35,7 @@ class TauriTray {
       var record:TrayRecord__tauriTray = cast _Runtime.UNDEFINED;
       id = nextId++;
       record = { icon: null, title: _Runtime.coalesce(_Runtime.field(options, 'title'), function():Dynamic return cast ''), tooltip: _Runtime.coalesce(_Runtime.field(options, 'tooltip'), function():Dynamic return cast '') };
-      _Runtime.callProperty(trays, 'set', cast ([id, record] : Array<Dynamic>));
+      ((cast trays : flighthq._internal._Map).set(id, record));
       flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(_Runtime.field(trayModule, 'TrayIcon'), 'new', cast ([{ icon: _Runtime.field(options, 'icon'), title: _Runtime.field(options, 'title'), tooltip: _Runtime.field(options, 'tooltip'), action: function(event:Dynamic) {
         var type:Dynamic = cast _Runtime.UNDEFINED;
         type = _Runtime.callValue(TauriTray.toTrayEventType__tauriTray, cast ([event] : Array<Dynamic>));
@@ -48,12 +48,12 @@ class TauriTray {
       return cast id;
     }, destroy: function(id:Dynamic) {
       var record:Dynamic = cast _Runtime.UNDEFINED;
-      record = _Runtime.callProperty(trays, 'get', cast ([id] : Array<Dynamic>));
+      record = ((cast trays : flighthq._internal._Map).get(id));
       if (_Runtime.truthy(!_Runtime.truthy(record))) { return; }
       _Runtime.callOptionalProperty(_Runtime.callOptionalProperty(_Runtime.field(record, 'icon'), 'close', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
       
       }] : Array<Dynamic>));
-      _Runtime.callProperty(trays, 'delete', cast ([id] : Array<Dynamic>));
+      ((cast trays : flighthq._internal._Map).delete_(id));
     }, displayBalloon: function() {
     
     }, removeBalloon: function() {
@@ -63,18 +63,18 @@ class TauriTray {
     }, getCapabilities: function() {
       return cast { balloon: false, bounds: false, clickEvents: true, dropFiles: false, pressedIcon: false, title: true };
     }, getTitle: function(id:Dynamic) {
-      return cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.callProperty(trays, 'get', cast ([id] : Array<Dynamic>)), 'title'), function():Dynamic return cast '');
+      return cast _Runtime.coalesce(_Runtime.optionalField(((cast trays : flighthq._internal._Map).get(id)), 'title'), function():Dynamic return cast '');
     }, getTooltip: function(id:Dynamic) {
-      return cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.callProperty(trays, 'get', cast ([id] : Array<Dynamic>)), 'tooltip'), function():Dynamic return cast '');
+      return cast _Runtime.coalesce(_Runtime.optionalField(((cast trays : flighthq._internal._Map).get(id)), 'tooltip'), function():Dynamic return cast '');
     }, isDestroyed: function(id:Dynamic) {
-      return cast !_Runtime.truthy(_Runtime.callProperty(trays, 'has', cast ([id] : Array<Dynamic>)));
+      return cast !_Runtime.truthy(((cast trays : flighthq._internal._Map).has(id)));
     }, listIds: function() {
-      return cast _Runtime.concatArrays([_Runtime.toArray(_Runtime.callProperty(trays, 'keys', cast ([] : Array<Dynamic>)))]);
+      return cast _Runtime.concatArrays([_Runtime.toArray(((cast trays : flighthq._internal._Map).keys()))]);
     }, popUpContextMenu: function(id:Dynamic) {
       _Runtime.voidValue(id);
     }, setContextMenu: function(id:Dynamic, items:Dynamic) {
       var record:Dynamic = cast _Runtime.UNDEFINED;
-      record = _Runtime.callProperty(trays, 'get', cast ([id] : Array<Dynamic>));
+      record = ((cast trays : flighthq._internal._Map).get(id));
       if (_Runtime.truthy(!_Runtime.truthy(record))) { return; }
       _Runtime.voidValue(flighthq._internal._Async.recover(_Runtime.callValue(function():flighthq._internal._Promise<Dynamic> {
         return cast flighthq._internal._Async.protect(function():Dynamic {
@@ -95,7 +95,7 @@ class TauriTray {
       
       }));
     }, setIcon: function(id:Dynamic, icon:Dynamic) {
-      _Runtime.callOptionalProperty(_Runtime.callOptionalProperty(_Runtime.optionalField(_Runtime.callProperty(trays, 'get', cast ([id] : Array<Dynamic>)), 'icon'), 'setIcon', cast ([icon] : Array<Dynamic>)), 'catch', cast ([function() {
+      _Runtime.callOptionalProperty(_Runtime.callOptionalProperty(_Runtime.optionalField(((cast trays : flighthq._internal._Map).get(id)), 'icon'), 'setIcon', cast ([icon] : Array<Dynamic>)), 'catch', cast ([function() {
       
       }] : Array<Dynamic>));
     }, setIgnoreDoubleClickEvents: function() {
@@ -106,7 +106,7 @@ class TauriTray {
     
     }, setTitle: function(id:Dynamic, title:Dynamic) {
       var record:Dynamic = cast _Runtime.UNDEFINED;
-      record = _Runtime.callProperty(trays, 'get', cast ([id] : Array<Dynamic>));
+      record = ((cast trays : flighthq._internal._Map).get(id));
       if (_Runtime.truthy(!_Runtime.truthy(record))) { return; }
       _Runtime.setField(record, 'title', title);
       _Runtime.callOptionalProperty(_Runtime.callOptionalProperty(_Runtime.field(record, 'icon'), 'setTitle', cast ([title] : Array<Dynamic>)), 'catch', cast ([function() {
@@ -114,7 +114,7 @@ class TauriTray {
       }] : Array<Dynamic>));
     }, setTooltip: function(id:Dynamic, tooltip:Dynamic) {
       var record:Dynamic = cast _Runtime.UNDEFINED;
-      record = _Runtime.callProperty(trays, 'get', cast ([id] : Array<Dynamic>));
+      record = ((cast trays : flighthq._internal._Map).get(id));
       if (_Runtime.truthy(!_Runtime.truthy(record))) { return; }
       _Runtime.setField(record, 'tooltip', tooltip);
       _Runtime.callOptionalProperty(_Runtime.callOptionalProperty(_Runtime.field(record, 'icon'), 'setTooltip', cast ([tooltip] : Array<Dynamic>)), 'catch', cast ([function() {

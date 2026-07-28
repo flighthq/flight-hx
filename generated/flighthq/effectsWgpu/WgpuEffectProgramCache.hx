@@ -12,15 +12,15 @@ class WgpuEffectProgramCache {
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var compiled:Dynamic = cast _Runtime.UNDEFINED;
-    cache = _Runtime.callProperty(WgpuEffectProgramCache._pipelines__wgpuEffectProgramCache, 'get', cast ([state] : Array<Dynamic>));
+    cache = ((cast WgpuEffectProgramCache._pipelines__wgpuEffectProgramCache : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (cache = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
-      _Runtime.callProperty(WgpuEffectProgramCache._pipelines__wgpuEffectProgramCache, 'set', cast ([state, cache] : Array<Dynamic>));
+      ((cast WgpuEffectProgramCache._pipelines__wgpuEffectProgramCache : flighthq._internal._WeakMap).set(state, cache));
     }
-    existing = _Runtime.callProperty(cache, 'get', cast ([key] : Array<Dynamic>));
+    existing = ((cast cache : flighthq._internal._Map).get(key));
     if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast existing; }
     compiled = _Runtime.callValue(createWgpuEffectPipeline, cast ([state, fragmentWGSL, blend] : Array<Dynamic>));
-    _Runtime.callProperty(cache, 'set', cast ([key, compiled] : Array<Dynamic>));
+    ((cast cache : flighthq._internal._Map).set(key, compiled));
     return cast compiled;
     return cast null;
   }

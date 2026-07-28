@@ -27,11 +27,11 @@ class DomCache {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     targets = _Runtime.callValue(DomCache.getTargets__domCache, cast ([state] : Array<Dynamic>));
-    target = _Runtime.callProperty(targets, 'get', cast ([cache] : Array<Dynamic>));
+    target = ((cast targets : flighthq._internal._WeakMap).get(cache));
     if (_Runtime.truthy(_Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (target = cast (_Runtime.callValue(createCanvasRenderTarget, cast ([width, height] : Array<Dynamic>)) : Dynamic));
       _Runtime.callValue(prepareDomElement, cast ([_Runtime.field(target, 'canvas')] : Array<Dynamic>));
-      _Runtime.callProperty(targets, 'set', cast ([cache, target] : Array<Dynamic>));
+      ((cast targets : flighthq._internal._WeakMap).set(cache, target));
     } else {
       _Runtime.callValue(resizeCanvasRenderTarget, cast ([target, width, height] : Array<Dynamic>));
     }
@@ -40,12 +40,12 @@ class DomCache {
   }
 
   public static function getDomRenderCacheTarget(state:DomRenderState, cache:RenderCache):Null<Dynamic> {
-    return cast _Runtime.coalesce(_Runtime.callProperty(_Runtime.callValue(DomCache.getTargets__domCache, cast ([state] : Array<Dynamic>)), 'get', cast ([cache] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast _Runtime.callValue(DomCache.getTargets__domCache, cast ([state] : Array<Dynamic>)) : flighthq._internal._WeakMap).get(cache)), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function releaseDomRenderCache(state:DomRenderState, cache:RenderCache):Void {
-    _Runtime.callProperty(_Runtime.callValue(DomCache.getTargets__domCache, cast ([state] : Array<Dynamic>)), 'delete', cast ([cache] : Array<Dynamic>));
+    ((cast _Runtime.callValue(DomCache.getTargets__domCache, cast ([state] : Array<Dynamic>)) : flighthq._internal._WeakMap).delete_(cache));
   }
 
   public static function drawDomRenderCache__domCache(state:RenderState, data:RenderProxy2D):Void {
@@ -56,7 +56,7 @@ class DomCache {
     cache = _Runtime.callValue(getRenderProxyCache, cast ([state, _Runtime.field(data, 'source')] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(cache, null))) { return; }
     domState = (cast state : DomRenderState);
-    target = _Runtime.callProperty(_Runtime.callValue(DomCache.getTargets__domCache, cast ([domState] : Array<Dynamic>)), 'get', cast ([cache] : Array<Dynamic>));
+    target = ((cast _Runtime.callValue(DomCache.getTargets__domCache, cast ([domState] : Array<Dynamic>)) : flighthq._internal._WeakMap).get(cache));
     if (_Runtime.truthy(_Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
     canvas = _Runtime.field(target, 'canvas');
     _Runtime.callValue(setDomTransformWithOffset, cast ([canvas, _Runtime.field(data, 'transform2D'), 0.0, 0.0, _Runtime.field(domState, 'roundPixels')] : Array<Dynamic>));
@@ -68,10 +68,10 @@ class DomCache {
 
   public static function getTargets__domCache(state:DomRenderState):Dynamic {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
-    targets = _Runtime.callProperty(DomCache._renderCacheTargets__domCache, 'get', cast ([state] : Array<Dynamic>));
+    targets = ((cast DomCache._renderCacheTargets__domCache : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(targets, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (targets = cast (_Runtime.construct(_Runtime.globalValue('WeakMap'), []) : Dynamic));
-      _Runtime.callProperty(DomCache._renderCacheTargets__domCache, 'set', cast ([state, targets] : Array<Dynamic>));
+      ((cast DomCache._renderCacheTargets__domCache : flighthq._internal._WeakMap).set(state, targets));
     }
     return cast targets;
     return cast null;

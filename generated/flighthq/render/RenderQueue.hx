@@ -29,7 +29,7 @@ class RenderQueue {
     sceneOrder = 0.0;
     while (_Runtime.truthy(_Runtime.compare(stackLength, 0.0, '>'))) {
       var current:Dynamic = _Runtime.getIndex(stack, --stackLength);
-      var proxy:Dynamic = _Runtime.callProperty(renderProxyMap, 'get', cast ([current] : Array<Dynamic>));
+      var proxy:Dynamic = ((cast renderProxyMap : flighthq._internal._WeakMap).get(current));
       if (_Runtime.truthy(_Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED')))) { continue; }
       if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(proxy, 'visible')))) { continue; }
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(proxy, 'renderer'), null))) {

@@ -21,10 +21,10 @@ class GlRenderPass {
     var stack:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    stack = _Runtime.callProperty(GlRenderPass._passStack__glRenderPass, 'get', cast ([state] : Array<Dynamic>));
+    stack = ((cast GlRenderPass._passStack__glRenderPass : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(stack, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (stack = cast (cast ([] : Array<Dynamic>) : Dynamic));
-      _Runtime.callProperty(GlRenderPass._passStack__glRenderPass, 'set', cast ([state, stack] : Array<Dynamic>));
+      ((cast GlRenderPass._passStack__glRenderPass : flighthq._internal._WeakMap).set(state, stack));
     }
     _Runtime.callProperty(stack, 'push', cast ([{ framebuffer: _Runtime.field(runtime, 'currentFramebuffer'), renderTarget: _Runtime.coalesce(_Runtime.field(runtime, 'currentRenderTarget'), function():Dynamic return cast null), renderTargetViewport: _Runtime.field(runtime, 'renderTargetViewport'), renderTransform2D: _Runtime.field(state, 'renderTransform2D') }] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER, _Runtime.field(target, 'framebuffer'));
@@ -45,7 +45,7 @@ class GlRenderPass {
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
     ended = _Runtime.coalesce(_Runtime.field(runtime, 'currentRenderTarget'), function():Dynamic return cast null);
-    saved = _Runtime.callOptionalProperty(_Runtime.callProperty(GlRenderPass._passStack__glRenderPass, 'get', cast ([state] : Array<Dynamic>)), 'pop', cast ([] : Array<Dynamic>));
+    saved = _Runtime.callOptionalProperty(((cast GlRenderPass._passStack__glRenderPass : flighthq._internal._WeakMap).get(state)), 'pop', cast ([] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(saved, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER, _Runtime.field(saved, 'framebuffer'));
       var viewport:Dynamic = _Runtime.coalesce(_Runtime.field(saved, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));

@@ -21,7 +21,7 @@ class DomClipRectangle {
     var rect:Dynamic = cast _Runtime.UNDEFINED;
     var local:Dynamic = cast _Runtime.UNDEFINED;
     var clipPath:Dynamic = cast _Runtime.UNDEFINED;
-    element = _Runtime.callProperty(_Runtime.field(_Runtime.callValue(getDomRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'domElementMap'), 'get', cast ([data] : Array<Dynamic>));
+    element = ((cast _Runtime.field(_Runtime.callValue(getDomRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'domElementMap') : flighthq._internal._WeakMap).get(data));
     if (_Runtime.truthy(_Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
     contour = null;
     {

@@ -18,7 +18,7 @@ class CanvasMaterials {
     runtime = _Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(value, _Runtime.field(runtime, 'currentBlendMode')))) { return; }
     _Runtime.setField(runtime, 'currentBlendMode', value);
-    _Runtime.setField(_Runtime.field(state, 'context'), 'globalCompositeOperation', _Runtime.coalesce(_Runtime.select(!_Runtime.strictEquals(value, null), function():Dynamic return cast _Runtime.getIndex(CanvasMaterials.CANVAS_BLEND_MODE__canvasMaterials, value), function():Dynamic return cast null), function():Dynamic return cast 'source-over'));
+    flighthq._internal.backend.Canvas2dBackend.setField(_Runtime.field(state, 'context'), 'globalCompositeOperation', _Runtime.coalesce(_Runtime.select(!_Runtime.strictEquals(value, null), function():Dynamic return cast _Runtime.getIndex(CanvasMaterials.CANVAS_BLEND_MODE__canvasMaterials, value), function():Dynamic return cast null), function():Dynamic return cast 'source-over'));
   }
 
   public static function enableCanvasBlendMode(state:Dynamic):Void {

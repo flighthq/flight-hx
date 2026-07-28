@@ -36,9 +36,9 @@ class _SceneResourceResolverValues {
   public static function disposeSceneResourceResolver(resolver:SceneResourceResolver):Void {
     _Runtime.callValue(cancelResourceLoad, cast ([_Runtime.field(resolver, 'loader')] : Array<Dynamic>));
     _Runtime.callValue(disposeResourceLoader, cast ([_Runtime.field(resolver, 'loader')] : Array<Dynamic>));
-    for (entry in _Runtime.iterable(_Runtime.callProperty(_Runtime.field(resolver, 'inFlight'), 'values', cast ([] : Array<Dynamic>)))) {
+    for (entry in _Runtime.iterable(((cast _Runtime.field(resolver, 'inFlight') : flighthq._internal._Map).values()))) {
       _Runtime.callProperty(_Runtime.field(entry, 'controller'), 'abort', cast ([] : Array<Dynamic>));
     }
-    _Runtime.callProperty(_Runtime.field(resolver, 'inFlight'), 'clear', cast ([] : Array<Dynamic>));
+    ((cast _Runtime.field(resolver, 'inFlight') : flighthq._internal._Map).clear());
   }
 }

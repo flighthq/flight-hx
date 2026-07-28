@@ -84,12 +84,12 @@ class GlGradientGlowEffect {
 
   public static function getLookupShader__glGradientGlowEffect(state:GlRenderState):GradientLookupLocations__glGradientGlowEffect {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
-    loc = _Runtime.callProperty(GlGradientGlowEffect.lookupShaders__glGradientGlowEffect, 'get', cast ([state] : Array<Dynamic>));
+    loc = ((cast GlGradientGlowEffect.lookupShaders__glGradientGlowEffect : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       var gl:Dynamic = _Runtime.field(state, 'gl');
       var base:Dynamic = _Runtime.callValue(compileGlFullscreenProgram, cast ([gl, GlGradientGlowEffect.GRADIENT_LOOKUP_FRAGMENT_SRC__glGradientGlowEffect] : Array<Dynamic>));
       (loc = cast (_Runtime.mergeObjects([base, { locRamp: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_ramp') }]) : Dynamic));
-      _Runtime.callProperty(GlGradientGlowEffect.lookupShaders__glGradientGlowEffect, 'set', cast ([state, loc] : Array<Dynamic>));
+      ((cast GlGradientGlowEffect.lookupShaders__glGradientGlowEffect : flighthq._internal._WeakMap).set(state, loc));
     }
     return cast loc;
     return cast null;

@@ -86,7 +86,7 @@ class GlCache {
     _Runtime.setField(cacheRuntime, 'spriteBatchInstanceBuffer', null);
     _Runtime.setField(cacheRuntime, 'spriteBatchInstanceData', new flighthq._internal._Float32Array(0.0));
     _Runtime.setField(cacheRuntime, 'spriteBatchTexture', null);
-    _Runtime.callProperty(GlCache._cacheStateScreen__glCache, 'set', cast ([cacheState, screenState] : Array<Dynamic>));
+    ((cast GlCache._cacheStateScreen__glCache : flighthq._internal._WeakMap).set(cacheState, screenState));
     return cast cacheState;
     return cast null;
   }
@@ -99,10 +99,10 @@ class GlCache {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     targets = _Runtime.callValue(GlCache.getTargets__glCache, cast ([state] : Array<Dynamic>));
-    target = _Runtime.callProperty(targets, 'get', cast ([cache] : Array<Dynamic>));
+    target = ((cast targets : flighthq._internal._WeakMap).get(cache));
     if (_Runtime.truthy(_Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (target = cast (_Runtime.callValue(createGlRenderTarget, cast ([state, { width: width, height: height }] : Array<Dynamic>)) : Dynamic));
-      _Runtime.callProperty(targets, 'set', cast ([cache, target] : Array<Dynamic>));
+      ((cast targets : flighthq._internal._WeakMap).set(cache, target));
     } else {
       _Runtime.callValue(resizeGlRenderTarget, cast ([state, target, width, height] : Array<Dynamic>));
     }
@@ -111,7 +111,7 @@ class GlCache {
   }
 
   public static function getGlRenderCacheTarget(state:GlRenderState, cache:RenderCache):Null<GlRenderTarget> {
-    return cast _Runtime.coalesce(_Runtime.callProperty(_Runtime.callValue(GlCache.getTargets__glCache, cast ([state] : Array<Dynamic>)), 'get', cast ([cache] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast _Runtime.callValue(GlCache.getTargets__glCache, cast ([state] : Array<Dynamic>)) : flighthq._internal._WeakMap).get(cache)), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -128,7 +128,7 @@ class GlCache {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     var dirty:Dynamic = cast _Runtime.UNDEFINED;
     var screenRuntime:Dynamic = cast _Runtime.UNDEFINED;
-    screenState = _Runtime.coalesce(_Runtime.callProperty(GlCache._cacheStateScreen__glCache, 'get', cast ([cacheState] : Array<Dynamic>)), function():Dynamic return cast cacheState);
+    screenState = _Runtime.coalesce(((cast GlCache._cacheStateScreen__glCache : flighthq._internal._WeakMap).get(cacheState)), function():Dynamic return cast cacheState);
     padding = _Runtime.coalesce(_Runtime.optionalField(options, 'padding'), function():Dynamic return cast 0.0);
     minWidth = _Runtime.coalesce(_Runtime.optionalField(options, 'minWidth'), function():Dynamic return cast 1.0);
     minHeight = _Runtime.coalesce(_Runtime.optionalField(options, 'minHeight'), function():Dynamic return cast 1.0);
@@ -168,10 +168,10 @@ class GlCache {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     targets = _Runtime.callValue(GlCache.getTargets__glCache, cast ([state] : Array<Dynamic>));
-    target = _Runtime.callProperty(targets, 'get', cast ([cache] : Array<Dynamic>));
+    target = ((cast targets : flighthq._internal._WeakMap).get(cache));
     if (_Runtime.truthy(_Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
     _Runtime.callValue(destroyGlRenderTarget, cast ([state, target] : Array<Dynamic>));
-    _Runtime.callProperty(targets, 'delete', cast ([cache] : Array<Dynamic>));
+    ((cast targets : flighthq._internal._WeakMap).delete_(cache));
   }
 
   public static function drawGlRenderCache__glCache(state:GlRenderState, renderProxy:RenderProxy2D):Void {
@@ -179,7 +179,7 @@ class GlCache {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     cache = _Runtime.callValue(getRenderProxyCache, cast ([state, _Runtime.field(renderProxy, 'source')] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(cache, null))) { return; }
-    target = _Runtime.callProperty(_Runtime.callValue(GlCache.getTargets__glCache, cast ([state] : Array<Dynamic>)), 'get', cast ([cache] : Array<Dynamic>));
+    target = ((cast _Runtime.callValue(GlCache.getTargets__glCache, cast ([state] : Array<Dynamic>)) : flighthq._internal._WeakMap).get(cache));
     if (_Runtime.truthy(_Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
     _Runtime.callValue(flushGlSpriteBatch, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawGlRenderTargetResult, cast ([state, renderProxy, target, GlCache._identity__glCache] : Array<Dynamic>));
@@ -187,10 +187,10 @@ class GlCache {
 
   public static function getTargets__glCache(state:GlRenderState):Dynamic {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
-    targets = _Runtime.callProperty(GlCache._renderCacheTargets__glCache, 'get', cast ([state] : Array<Dynamic>));
+    targets = ((cast GlCache._renderCacheTargets__glCache : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(targets, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (targets = cast (_Runtime.construct(_Runtime.globalValue('WeakMap'), []) : Dynamic));
-      _Runtime.callProperty(GlCache._renderCacheTargets__glCache, 'set', cast ([state, targets] : Array<Dynamic>));
+      ((cast GlCache._renderCacheTargets__glCache : flighthq._internal._WeakMap).set(state, targets));
     }
     return cast targets;
     return cast null;

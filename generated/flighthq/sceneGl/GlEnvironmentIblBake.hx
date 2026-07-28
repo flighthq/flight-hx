@@ -52,15 +52,15 @@ class GlEnvironmentIblBake {
   public static function destroyGlBakePrograms(state:GlRenderState):Void {
     var byState:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
-    byState = _Runtime.callProperty(GlEnvironmentIblBake._bakePrograms__glEnvironmentIblBake, 'get', cast ([state] : Array<Dynamic>));
+    byState = ((cast GlEnvironmentIblBake._bakePrograms__glEnvironmentIblBake : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(byState, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
     gl = _Runtime.field(state, 'gl');
-    for (baked in _Runtime.iterable(_Runtime.callProperty(byState, 'values', cast ([] : Array<Dynamic>)))) {
+    for (baked in _Runtime.iterable(((cast byState : flighthq._internal._Map).values()))) {
       flighthq._internal.backend.WebGl2Backend.deleteProgram(gl, _Runtime.field(baked, 'program'));
       flighthq._internal.backend.WebGl2Backend.deleteVertexArray(gl, _Runtime.field(baked, 'vao'));
       flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, _Runtime.field(baked, 'buffer'));
     }
-    _Runtime.callProperty(GlEnvironmentIblBake._bakePrograms__glEnvironmentIblBake, 'delete', cast ([state] : Array<Dynamic>));
+    ((cast GlEnvironmentIblBake._bakePrograms__glEnvironmentIblBake : flighthq._internal._WeakMap).delete_(state));
   }
 
   public static function bakeGlIrradiance__glEnvironmentIblBake(state:GlRenderState, fbo:Dynamic, sourceCube:Dynamic):Dynamic {
@@ -191,12 +191,12 @@ class GlEnvironmentIblBake {
     var vao:Dynamic = cast _Runtime.UNDEFINED;
     var buffer:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
-    byState = _Runtime.callProperty(GlEnvironmentIblBake._bakePrograms__glEnvironmentIblBake, 'get', cast ([state] : Array<Dynamic>));
+    byState = ((cast GlEnvironmentIblBake._bakePrograms__glEnvironmentIblBake : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(byState, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (byState = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
-      _Runtime.callProperty(GlEnvironmentIblBake._bakePrograms__glEnvironmentIblBake, 'set', cast ([state, byState] : Array<Dynamic>));
+      ((cast GlEnvironmentIblBake._bakePrograms__glEnvironmentIblBake : flighthq._internal._WeakMap).set(state, byState));
     }
-    baked = _Runtime.callProperty(byState, 'get', cast ([key] : Array<Dynamic>));
+    baked = ((cast byState : flighthq._internal._Map).get(key));
     if (_Runtime.truthy(!_Runtime.strictEquals(baked, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast baked; }
     program = _Runtime.callValue(GlEnvironmentIblBake.linkGlBakeProgram__glEnvironmentIblBake, cast ([gl, fragment] : Array<Dynamic>));
     vao = flighthq._internal.backend.WebGl2Backend.createVertexArray(gl);
@@ -208,7 +208,7 @@ class GlEnvironmentIblBake {
     flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 0.0, 2.0, flighthq._internal.backend.WebGl2Backend.FLOAT, false, 0.0, 0.0);
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, null);
     (baked = cast ({ buffer: buffer, locEnvCube: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_envCube'), locFaceForward: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_faceForward'), locFaceRight: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_faceRight'), locFaceUp: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_faceUp'), locRoughness: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_roughness'), program: program, vao: vao } : Dynamic));
-    _Runtime.callProperty(byState, 'set', cast ([key, baked] : Array<Dynamic>));
+    ((cast byState : flighthq._internal._Map).set(key, baked));
     return cast baked;
     return cast null;
   }

@@ -38,7 +38,7 @@ class WgpuSpriteBatch {
     var materialPipelineLayout:Dynamic = cast _Runtime.UNDEFINED;
     var resources:WgpuQuadBatchResources = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    existing = _Runtime.callProperty(WgpuSpriteBatch._quadBatchResources__wgpuSpriteBatch, 'get', cast ([_Runtime.field(state, 'device')] : Array<Dynamic>));
+    existing = ((cast WgpuSpriteBatch._quadBatchResources__wgpuSpriteBatch : flighthq._internal._WeakMap).get(_Runtime.field(state, 'device')));
     if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast existing; }
     __destructure0 = state;
     device = _Runtime.field(__destructure0, 'device');
@@ -50,7 +50,7 @@ class WgpuSpriteBatch {
     basePipelineLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([uniformBindGroupLayout, textureBindGroupLayout, instanceBindGroupLayout] : Array<Dynamic>) }] : Array<Dynamic>));
     materialPipelineLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([uniformBindGroupLayout, textureBindGroupLayout, instanceBindGroupLayout, materialBindGroupLayout] : Array<Dynamic>) }] : Array<Dynamic>));
     resources = { instanceBindGroupLayout: instanceBindGroupLayout, materialBindGroupLayout: materialBindGroupLayout, basePipelineLayout: basePipelineLayout, materialPipelineLayout: materialPipelineLayout, pipelines: _Runtime.construct(_Runtime.globalValue('WeakMap'), []) };
-    _Runtime.callProperty(WgpuSpriteBatch._quadBatchResources__wgpuSpriteBatch, 'set', cast ([device, resources] : Array<Dynamic>));
+    ((cast WgpuSpriteBatch._quadBatchResources__wgpuSpriteBatch : flighthq._internal._WeakMap).set(device, resources));
     return cast resources;
     return cast null;
   }
@@ -143,15 +143,15 @@ class WgpuSpriteBatch {
     var stencilFace:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    perModule = _Runtime.callProperty(_Runtime.field(resources, 'pipelines'), 'get', cast ([module] : Array<Dynamic>));
+    perModule = ((cast _Runtime.field(resources, 'pipelines') : flighthq._internal._WeakMap).get(module));
     if (_Runtime.truthy(_Runtime.strictEquals(perModule, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (perModule = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
-      _Runtime.callProperty(_Runtime.field(resources, 'pipelines'), 'set', cast ([module, perModule] : Array<Dynamic>));
+      ((cast _Runtime.field(resources, 'pipelines') : flighthq._internal._WeakMap).set(module, perModule));
     }
     stencilMode = _Runtime.select(_Runtime.field(runtime, 'maskWriteMode'), function():Dynamic return cast 'maskwrite', function():Dynamic return cast _Runtime.select(_Runtime.compare(_Runtime.field(runtime, 'currentMaskDepth'), 0.0, '>'), function():Dynamic return cast 'masked', function():Dynamic return cast 'normal'));
     format = _Runtime.coalesce(_Runtime.field(runtime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
     key = '' + Std.string(_Runtime.coalesce(blendMode, function():Dynamic return cast 'null')) + '-' + Std.string(stencilMode) + '-' + Std.string(format) + '';
-    cached = _Runtime.callProperty(perModule, 'get', cast ([key] : Array<Dynamic>));
+    cached = ((cast perModule : flighthq._internal._Map).get(key));
     if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast cached; }
     __destructure2 = state;
     device = _Runtime.field(__destructure2, 'device');
@@ -165,7 +165,7 @@ class WgpuSpriteBatch {
       (stencilFace = cast ({ compare: 'always', passOp: 'keep', failOp: 'keep', depthFailOp: 'keep' } : Dynamic));
     } }
     pipeline = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: _Runtime.select(hasMaterialData, function():Dynamic return cast _Runtime.field(resources, 'materialPipelineLayout'), function():Dynamic return cast _Runtime.field(resources, 'basePipelineLayout')), vertex: { module: module, entryPoint: 'vs_main' }, fragment: { module: module, entryPoint: 'fs_main', targets: cast ([{ format: format, blend: _Runtime.select(isMaskWrite, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'), function():Dynamic return cast blend), writeMask: _Runtime.select(isMaskWrite, function():Dynamic return cast 0.0, function():Dynamic return cast flighthq._internal.backend.WebGpuConstantsBackend.value('GPUColorWrite', 'ALL')) }] : Array<Dynamic>) }, depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: false, depthCompare: 'always', stencilFront: stencilFace, stencilBack: stencilFace, stencilReadMask: 255.0, stencilWriteMask: _Runtime.select(isMaskWrite, function():Dynamic return cast 255.0, function():Dynamic return cast 0.0) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
-    _Runtime.callProperty(perModule, 'set', cast ([key, pipeline] : Array<Dynamic>));
+    ((cast perModule : flighthq._internal._Map).set(key, pipeline));
     return cast pipeline;
     return cast null;
   }

@@ -288,7 +288,7 @@ class MeshGeometryBuilders {
       var len:Dynamic = cast _Runtime.UNDEFINED;
       var idx:Dynamic = cast _Runtime.UNDEFINED;
       key = _Runtime.select(_Runtime.compare(a, b, '<'), function():Dynamic return cast '' + Std.string(a) + '_' + Std.string(b) + '', function():Dynamic return cast '' + Std.string(b) + '_' + Std.string(a) + '');
-      cached = _Runtime.callProperty(midpointCache, 'get', cast ([key] : Array<Dynamic>));
+      cached = ((cast midpointCache : flighthq._internal._Map).get(key));
       if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast cached; }
       va = _Runtime.getIndex(verts, a);
       vb = _Runtime.getIndex(verts, b);
@@ -301,7 +301,7 @@ class MeshGeometryBuilders {
       (mz = cast ((mz / len) : Dynamic));
       idx = _Runtime.field(verts, 'length');
       _Runtime.callProperty(verts, 'push', cast ([cast ([mx, my, mz] : Array<Dynamic>)] : Array<Dynamic>));
-      _Runtime.callProperty(midpointCache, 'set', cast ([key, idx] : Array<Dynamic>));
+      ((cast midpointCache : flighthq._internal._Map).set(key, idx));
       return cast idx;
     };
     {
@@ -318,7 +318,7 @@ class MeshGeometryBuilders {
           _Runtime.pushMany(newFaces, cast ([cast ([a, ab, ca] : Array<Dynamic>), cast ([b, bc, ab] : Array<Dynamic>), cast ([c, ca, bc] : Array<Dynamic>), cast ([ab, bc, ca] : Array<Dynamic>)] : Array<Dynamic>));
         }
         (faces = cast (newFaces : Dynamic));
-        _Runtime.callProperty(midpointCache, 'clear', cast ([] : Array<Dynamic>));
+        ((cast midpointCache : flighthq._internal._Map).clear());
         s++;
       }
     }
@@ -451,7 +451,7 @@ class MeshGeometryBuilders {
         var mlen:Dynamic = cast _Runtime.UNDEFINED;
         var idx:Dynamic = cast _Runtime.UNDEFINED;
         key = _Runtime.select(_Runtime.compare(a, b, '<'), function():Dynamic return cast '' + Std.string(a) + '_' + Std.string(b) + '', function():Dynamic return cast '' + Std.string(b) + '_' + Std.string(a) + '');
-        hit = _Runtime.callProperty(midCache, 'get', cast ([key] : Array<Dynamic>));
+        hit = ((cast midCache : flighthq._internal._Map).get(key));
         if (_Runtime.truthy(!_Runtime.strictEquals(hit, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast hit; }
         va = _Runtime.getIndex(verts, a);
         vb = _Runtime.getIndex(verts, b);
@@ -464,7 +464,7 @@ class MeshGeometryBuilders {
         (mz = cast ((mz / mlen) : Dynamic));
         idx = _Runtime.field(verts, 'length');
         _Runtime.callProperty(verts, 'push', cast ([cast ([mx, my, mz] : Array<Dynamic>)] : Array<Dynamic>));
-        _Runtime.callProperty(midCache, 'set', cast ([key, idx] : Array<Dynamic>));
+        ((cast midCache : flighthq._internal._Map).set(key, idx));
         return cast idx;
       };
       {
@@ -481,7 +481,7 @@ class MeshGeometryBuilders {
             _Runtime.pushMany(newFaces, cast ([cast ([a, ab, ca] : Array<Dynamic>), cast ([b, bc, ab] : Array<Dynamic>), cast ([c, ca, bc] : Array<Dynamic>), cast ([ab, bc, ca] : Array<Dynamic>)] : Array<Dynamic>));
           }
           (faces = cast (newFaces : Dynamic));
-          _Runtime.callProperty(midCache, 'clear', cast ([] : Array<Dynamic>));
+          ((cast midCache : flighthq._internal._Map).clear());
           s++;
         }
       }

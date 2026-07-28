@@ -86,10 +86,10 @@ class VelocityField {
 
   public static function ensureVelocitySample(field:flighthq.types.Velocity.VelocityField, source:Dynamic):VelocitySample {
     var sample:Dynamic = cast _Runtime.UNDEFINED;
-    sample = _Runtime.callProperty(_Runtime.field(field, 'samples'), 'get', cast ([source] : Array<Dynamic>));
+    sample = ((cast _Runtime.field(field, 'samples') : flighthq._internal._WeakMap).get(source));
     if (_Runtime.truthy(_Runtime.strictEquals(sample, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (sample = cast ({ previousWorldTransform: null, velocity: { x: 0.0, y: 0.0 }, lastFrameId: -1.0, explicitFrameId: -1.0 } : Dynamic));
-      _Runtime.callProperty(_Runtime.field(field, 'samples'), 'set', cast ([source, sample] : Array<Dynamic>));
+      ((cast _Runtime.field(field, 'samples') : flighthq._internal._WeakMap).set(source, sample));
     }
     return cast sample;
     return cast null;
@@ -97,7 +97,7 @@ class VelocityField {
 
   public static function getVelocity(field:flighthq.types.Velocity.VelocityField, source:Dynamic, out:Velocity2D):Velocity2D {
     var sample:Dynamic = cast _Runtime.UNDEFINED;
-    sample = _Runtime.callProperty(_Runtime.field(field, 'samples'), 'get', cast ([source] : Array<Dynamic>));
+    sample = ((cast _Runtime.field(field, 'samples') : flighthq._internal._WeakMap).get(source));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(sample, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(sample, 'lastFrameId'), _Runtime.field(field, 'frameId'))))) {
       _Runtime.setField(out, 'x', 0.0);
       _Runtime.setField(out, 'y', 0.0);
@@ -111,7 +111,7 @@ class VelocityField {
 
   public static function hasVelocity(field:flighthq.types.Velocity.VelocityField, source:Dynamic):Bool {
     var sample:Dynamic = cast _Runtime.UNDEFINED;
-    sample = _Runtime.callProperty(_Runtime.field(field, 'samples'), 'get', cast ([source] : Array<Dynamic>));
+    sample = ((cast _Runtime.field(field, 'samples') : flighthq._internal._WeakMap).get(source));
     return cast _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(sample, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(sample, 'lastFrameId'), _Runtime.field(field, 'frameId'))), function():Dynamic return cast _Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(_Runtime.field(sample, 'velocity'), 'x'), 0.0), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(sample, 'velocity'), 'y'), 0.0)));
     return cast null;
   }

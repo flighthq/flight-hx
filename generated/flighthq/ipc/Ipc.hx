@@ -22,20 +22,20 @@ class Ipc {
 
   public static function _trackListener__ipc(channel:String, unsubscribe:Dynamic):Void {
     var set:Dynamic = cast _Runtime.UNDEFINED;
-    set = _Runtime.callProperty(Ipc._listeners__ipc, 'get', cast ([channel] : Array<Dynamic>));
+    set = ((cast Ipc._listeners__ipc : flighthq._internal._Map).get(channel));
     if (_Runtime.truthy(_Runtime.strictEquals(set, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (set = cast (_Runtime.construct(_Runtime.globalValue('Set'), []) : Dynamic));
-      _Runtime.callProperty(Ipc._listeners__ipc, 'set', cast ([channel, set] : Array<Dynamic>));
+      ((cast Ipc._listeners__ipc : flighthq._internal._Map).set(channel, set));
     }
-    _Runtime.callProperty(set, 'add', cast ([unsubscribe] : Array<Dynamic>));
+    ((cast set : flighthq._internal._Set).add(unsubscribe));
   }
 
   public static function _untrackListener__ipc(channel:String, unsubscribe:Dynamic):Void {
     var set:Dynamic = cast _Runtime.UNDEFINED;
-    set = _Runtime.callProperty(Ipc._listeners__ipc, 'get', cast ([channel] : Array<Dynamic>));
+    set = ((cast Ipc._listeners__ipc : flighthq._internal._Map).get(channel));
     if (_Runtime.truthy(!_Runtime.strictEquals(set, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      _Runtime.callProperty(set, 'delete', cast ([unsubscribe] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(set, 'size'), 0.0))) { _Runtime.callProperty(Ipc._listeners__ipc, 'delete', cast ([channel] : Array<Dynamic>)); }
+      ((cast set : flighthq._internal._Set).delete_(unsubscribe));
+      if (_Runtime.truthy(_Runtime.strictEquals((cast set : flighthq._internal._Set).size, 0.0))) { ((cast Ipc._listeners__ipc : flighthq._internal._Map).delete_(channel)); }
     }
   }
 
@@ -76,7 +76,7 @@ class Ipc {
   public static function getIpcListenerCount(channel:Dynamic):Float {
     var name:Dynamic = cast _Runtime.UNDEFINED;
     name = _Runtime.callValue(Ipc.resolveChannel__ipc, cast ([channel] : Array<Dynamic>));
-    return cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.callProperty(Ipc._listeners__ipc, 'get', cast ([name] : Array<Dynamic>)), 'size'), function():Dynamic return cast 0.0);
+    return cast _Runtime.coalesce(({ final __collection0:Dynamic = ((cast Ipc._listeners__ipc : flighthq._internal._Map).get(name)); __collection0 == null ? _Runtime.UNDEFINED : (cast __collection0 : flighthq._internal._Set).size; }), function():Dynamic return cast 0.0);
     return cast null;
   }
 
@@ -183,7 +183,7 @@ class Ipc {
   public static function removeAllIpcListeners(?channel:Dynamic):Void {
     if (_Runtime.truthy(!_Runtime.strictEquals(channel, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       var name:Dynamic = _Runtime.callValue(Ipc.resolveChannel__ipc, cast ([channel] : Array<Dynamic>));
-      var set:Dynamic = _Runtime.callProperty(Ipc._listeners__ipc, 'get', cast ([name] : Array<Dynamic>));
+      var set:Dynamic = ((cast Ipc._listeners__ipc : flighthq._internal._Map).get(name));
       if (_Runtime.truthy(!_Runtime.strictEquals(set, _Runtime.field(_Runtime, 'UNDEFINED')))) {
         for (unsubscribe in _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray(set)]))) {
           _Runtime.callValue(unsubscribe, cast ([] : Array<Dynamic>));

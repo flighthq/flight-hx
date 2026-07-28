@@ -68,11 +68,11 @@ class GlShapeMesh {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     var created:GlShapeMeshBinding = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
-    existing = _Runtime.callProperty(GlShapeMesh.shapeMeshPrograms__glShapeMesh, 'get', cast ([gl] : Array<Dynamic>));
+    existing = ((cast GlShapeMesh.shapeMeshPrograms__glShapeMesh : flighthq._internal._WeakMap).get(gl));
     if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast existing; }
     program = _Runtime.callValue(GlShapeMesh.compileShapeMeshProgram__glShapeMesh, cast ([gl] : Array<Dynamic>));
     created = { program: program, vertexBuffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), indexBuffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), positionLocation: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_position'), matrixLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_matrix'), colorLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_color') };
-    _Runtime.callProperty(GlShapeMesh.shapeMeshPrograms__glShapeMesh, 'set', cast ([gl, created] : Array<Dynamic>));
+    ((cast GlShapeMesh.shapeMeshPrograms__glShapeMesh : flighthq._internal._WeakMap).set(gl, created));
     return cast created;
     return cast null;
   }

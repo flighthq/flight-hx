@@ -37,9 +37,9 @@ class CanvasDisplayObject {
       if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(isRenderProxyVisible, cast ([data] : Array<Dynamic>))))) { continue; }
       _Runtime.callOptionalProperty(clipHooks, 'pushClip', cast ([state, data, current] : Array<Dynamic>));
       var filter:Dynamic = _Runtime.callValue(resolveCanvasCssFilter, cast ([state, data] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(filter, null))) { _Runtime.setField(_Runtime.field(state, 'context'), 'filter', filter); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(filter, null))) { flighthq._internal.backend.Canvas2dBackend.setField(_Runtime.field(state, 'context'), 'filter', filter); }
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(data, 'renderer'), null))) { _Runtime.callProperty(_Runtime.field(data, 'renderer'), 'submit', cast ([state, data] : Array<Dynamic>)); }
-      if (_Runtime.truthy(!_Runtime.strictEquals(filter, null))) { _Runtime.setField(_Runtime.field(state, 'context'), 'filter', 'none'); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(filter, null))) { flighthq._internal.backend.Canvas2dBackend.setField(_Runtime.field(state, 'context'), 'filter', 'none'); }
       if (_Runtime.truthy(_Runtime.field(data, 'traverseChildren'))) {
         var children:Dynamic = _Runtime.field(_Runtime.callValue(getDisplayObjectRuntime, cast ([current] : Array<Dynamic>)), 'children');
         if (_Runtime.truthy(!_Runtime.strictEquals(children, null))) {

@@ -23,7 +23,7 @@ class _SceneMaterialTextureRegistryValues {
 
   public static function getSceneMaterialTextures(registry:SceneMaterialTextureRegistry, material:Material, out:Array<Texture>):Void {
     var lister:Dynamic = cast _Runtime.UNDEFINED;
-    lister = _Runtime.callProperty(_Runtime.field(registry, 'listers'), 'get', cast ([_Runtime.field(material, 'kind')] : Array<Dynamic>));
+    lister = ((cast _Runtime.field(registry, 'listers') : flighthq._internal._Map).get(_Runtime.field(material, 'kind')));
     if (_Runtime.truthy(!_Runtime.strictEquals(lister, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callValue(lister, cast ([material, out] : Array<Dynamic>)); }
   }
 
@@ -33,7 +33,7 @@ class _SceneMaterialTextureRegistryValues {
   }
 
   public static function registerSceneMaterialTextures(registry:SceneMaterialTextureRegistry, kind:Kind, lister:SceneMaterialTextureLister):Void {
-    _Runtime.callProperty(_Runtime.field(registry, 'listers'), 'set', cast ([kind, lister] : Array<Dynamic>));
+    ((cast _Runtime.field(registry, 'listers') : flighthq._internal._Map).set(kind, lister));
   }
 
   public static function listStandardPbrMaterialTextures__sceneMaterialTextureRegistry(material:Material, out:Array<Texture>):Void {

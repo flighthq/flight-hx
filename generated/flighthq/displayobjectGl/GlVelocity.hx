@@ -257,18 +257,18 @@ class GlVelocity {
   }
 
   public static function getGlVelocityWriter(state:GlRenderState, kind:Kind):Null<GlVelocityWriter> {
-    return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callProperty(GlVelocity._velocityWriters__glVelocity, 'get', cast ([state] : Array<Dynamic>)), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection0:Dynamic = ((cast GlVelocity._velocityWriters__glVelocity : flighthq._internal._WeakMap).get(state)); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(kind)); }), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function registerGlVelocityWriter(state:GlRenderState, kind:Kind, writer:GlVelocityWriter):Void {
     var writers:Dynamic = cast _Runtime.UNDEFINED;
-    writers = _Runtime.callProperty(GlVelocity._velocityWriters__glVelocity, 'get', cast ([state] : Array<Dynamic>));
+    writers = ((cast GlVelocity._velocityWriters__glVelocity : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(writers, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (writers = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
-      _Runtime.callProperty(GlVelocity._velocityWriters__glVelocity, 'set', cast ([state, writers] : Array<Dynamic>));
+      ((cast GlVelocity._velocityWriters__glVelocity : flighthq._internal._WeakMap).set(state, writers));
     }
-    _Runtime.callProperty(writers, 'set', cast ([kind, writer] : Array<Dynamic>));
+    ((cast writers : flighthq._internal._Map).set(kind, writer));
   }
 
   public static function renderGlVelocity<Traits>(state:GlRenderState, root:Transform2DNode<Traits>, field:VelocityField, target:GlRenderTarget):Void {
@@ -299,7 +299,7 @@ class GlVelocity {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var glProgram:Dynamic = cast _Runtime.UNDEFINED;
     var quadBuffer:Dynamic = cast _Runtime.UNDEFINED;
-    program = _Runtime.callProperty(GlVelocity._velocityPrograms__glVelocity, 'get', cast ([state] : Array<Dynamic>));
+    program = ((cast GlVelocity._velocityPrograms__glVelocity : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(!_Runtime.strictEquals(program, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast program; }
     gl = _Runtime.field(state, 'gl');
     glProgram = _Runtime.callValue(createGlProgram, cast ([gl, GlVelocity.VELOCITY_VERTEX_SRC__glVelocity, GlVelocity.VELOCITY_FRAGMENT_SRC__glVelocity, 'Velocity'] : Array<Dynamic>));
@@ -307,7 +307,7 @@ class GlVelocity {
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, quadBuffer);
     flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, new flighthq._internal._Float32Array(cast ([0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0] : Array<Dynamic>)), flighthq._internal.backend.WebGl2Backend.STATIC_DRAW);
     (program = cast ({ program: glProgram, quadBuffer: quadBuffer, locCorner: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, glProgram, 'a_corner'), locClipRect: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, glProgram, 'u_clipRect'), locVelocity: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, glProgram, 'u_velocity') } : Dynamic));
-    _Runtime.callProperty(GlVelocity._velocityPrograms__glVelocity, 'set', cast ([state, program] : Array<Dynamic>));
+    ((cast GlVelocity._velocityPrograms__glVelocity : flighthq._internal._WeakMap).set(state, program));
     return cast program;
     return cast null;
   }

@@ -27,20 +27,20 @@ class DomReconcile {
     var appearanceDirty:Dynamic = cast _Runtime.UNDEFINED;
     var transformDirty:Dynamic = cast _Runtime.UNDEFINED;
     var needsReconcile:Dynamic = cast _Runtime.UNDEFINED;
-    isNew = !_Runtime.truthy(_Runtime.callProperty(_Runtime.field(runtime, 'domElementMap'), 'has', cast ([data] : Array<Dynamic>)));
+    isNew = !_Runtime.truthy(((cast _Runtime.field(runtime, 'domElementMap') : flighthq._internal._WeakMap).has(data)));
     appearanceDirty = _Runtime.strictEquals(_Runtime.field(data, 'appearanceFrameId'), currentFrameId);
     transformDirty = _Runtime.strictEquals(_Runtime.field(data, 'transformFrameId'), currentFrameId);
     needsReconcile = false;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(isNew, function():Dynamic return cast appearanceDirty), function():Dynamic return cast transformDirty), function():Dynamic return cast forceDraw))) {
-      var prevElement:Dynamic = _Runtime.select(isNew, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'), function():Dynamic return cast _Runtime.callProperty(_Runtime.field(runtime, 'domElementMap'), 'get', cast ([data] : Array<Dynamic>)));
+      var prevElement:Dynamic = _Runtime.select(isNew, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'), function():Dynamic return cast ((cast _Runtime.field(runtime, 'domElementMap') : flighthq._internal._WeakMap).get(data)));
       _Runtime.setField(runtime, 'domCurrentElement', null);
       _Runtime.callValue(drawFn, cast ([] : Array<Dynamic>));
       var newElement:Dynamic = _Runtime.field(runtime, 'domCurrentElement');
       if (_Runtime.truthy(!_Runtime.strictEquals(newElement, null))) {
-        _Runtime.callProperty(_Runtime.field(runtime, 'domElementMap'), 'set', cast ([data, newElement] : Array<Dynamic>));
+        ((cast _Runtime.field(runtime, 'domElementMap') : flighthq._internal._WeakMap).set(data, newElement));
         if (_Runtime.truthy(!_Runtime.strictEquals(newElement, prevElement))) { (needsReconcile = cast (true : Dynamic)); }
       } else { if (_Runtime.truthy(!_Runtime.strictEquals(prevElement, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-        _Runtime.callProperty(_Runtime.field(runtime, 'domElementMap'), 'delete', cast ([data] : Array<Dynamic>));
+        ((cast _Runtime.field(runtime, 'domElementMap') : flighthq._internal._WeakMap).delete_(data));
         (needsReconcile = cast (true : Dynamic));
       } }
     }
@@ -60,22 +60,22 @@ class DomReconcile {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, newLength, '<'))) {
-        var el:Dynamic = _Runtime.callProperty(_Runtime.field(runtime, 'domElementMap'), 'get', cast ([_Runtime.getIndex(_Runtime.field(runtime, 'domNextOrderList'), i)] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(el, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(keepSet, 'add', cast ([el] : Array<Dynamic>)); }
+        var el:Dynamic = ((cast _Runtime.field(runtime, 'domElementMap') : flighthq._internal._WeakMap).get(_Runtime.getIndex(_Runtime.field(runtime, 'domNextOrderList'), i)));
+        if (_Runtime.truthy(!_Runtime.strictEquals(el, _Runtime.field(_Runtime, 'UNDEFINED')))) { ((cast keepSet : flighthq._internal._Set).add(el)); }
         i++;
       }
     }
     child = _Runtime.field(container, 'firstChild');
     while (_Runtime.truthy(!_Runtime.strictEquals(child, null))) {
       var next:Dynamic = _Runtime.field(child, 'nextSibling');
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(keepSet, 'has', cast ([(cast child : Dynamic)] : Array<Dynamic>))))) { _Runtime.callProperty(container, 'removeChild', cast ([child] : Array<Dynamic>)); }
+      if (_Runtime.truthy(!_Runtime.truthy(((cast keepSet : flighthq._internal._Set).has((cast child : Dynamic)))))) { _Runtime.callProperty(container, 'removeChild', cast ([child] : Array<Dynamic>)); }
       (child = cast (next : Dynamic));
     }
     nextSibling = null;
     {
       var i:Dynamic = (newLength - 1.0);
       while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>='))) {
-        var el:Dynamic = _Runtime.callProperty(_Runtime.field(runtime, 'domElementMap'), 'get', cast ([_Runtime.getIndex(_Runtime.field(runtime, 'domNextOrderList'), i)] : Array<Dynamic>));
+        var el:Dynamic = ((cast _Runtime.field(runtime, 'domElementMap') : flighthq._internal._WeakMap).get(_Runtime.getIndex(_Runtime.field(runtime, 'domNextOrderList'), i)));
         if (_Runtime.truthy(_Runtime.strictEquals(el, _Runtime.field(_Runtime, 'UNDEFINED')))) { i--; continue; }
         if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(el, 'nextSibling'), nextSibling), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(el, 'parentNode'), container)))) {
           _Runtime.callProperty(container, 'insertBefore', cast ([el, nextSibling] : Array<Dynamic>));

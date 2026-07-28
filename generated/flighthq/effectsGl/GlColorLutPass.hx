@@ -21,11 +21,11 @@ class GlColorLutPass {
     texture = _Runtime.callValue(GlColorLutPass.uploadLutTexture__glColorLutPass, cast ([gl, lut, cache] : Array<Dynamic>));
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'adjustment.colorLut', GlColorLutPass.COLOR_LUT_FRAGMENT_SRC__glColorLutPass] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(glc:Dynamic, p:Dynamic) {
-      _Runtime.callProperty(glc, 'uniform1f', cast ([_Runtime.callProperty(glc, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_lutSize'] : Array<Dynamic>)), size] : Array<Dynamic>));
-      _Runtime.callProperty(glc, 'activeTexture', cast ([_Runtime.field(glc, 'TEXTURE1')] : Array<Dynamic>));
-      _Runtime.callProperty(glc, 'bindTexture', cast ([_Runtime.field(glc, 'TEXTURE_3D'), texture] : Array<Dynamic>));
-      _Runtime.callProperty(glc, 'uniform1i', cast ([_Runtime.callProperty(glc, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_lut'] : Array<Dynamic>)), 1.0] : Array<Dynamic>));
-      _Runtime.callProperty(glc, 'activeTexture', cast ([_Runtime.field(glc, 'TEXTURE0')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.uniform1f(glc, flighthq._internal.backend.WebGl2Backend.getUniformLocation(glc, _Runtime.field(p, 'program'), 'u_lutSize'), size);
+      flighthq._internal.backend.WebGl2Backend.activeTexture(glc, flighthq._internal.backend.WebGl2Backend.TEXTURE1);
+      flighthq._internal.backend.WebGl2Backend.bindTexture(glc, flighthq._internal.backend.WebGl2Backend.TEXTURE_3D, texture);
+      flighthq._internal.backend.WebGl2Backend.uniform1i(glc, flighthq._internal.backend.WebGl2Backend.getUniformLocation(glc, _Runtime.field(p, 'program'), 'u_lut'), 1.0);
+      flighthq._internal.backend.WebGl2Backend.activeTexture(glc, flighthq._internal.backend.WebGl2Backend.TEXTURE0);
     }] : Array<Dynamic>));
   }
 

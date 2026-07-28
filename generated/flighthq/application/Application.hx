@@ -40,10 +40,10 @@ class Application {
     var observers:Dynamic = cast _Runtime.UNDEFINED;
     var handler:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Application.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
-    _Runtime.callOptionalValue(_Runtime.callProperty(observers, 'get', cast ([Application.kExit__application] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
+    _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map).get(Application.kExit__application)), cast ([] : Array<Dynamic>));
     handler = function() return _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onExit')] : Array<Dynamic>));
     flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'addEventListener', cast (['beforeunload', handler] : Array<Dynamic>));
-    _Runtime.callProperty(observers, 'set', cast ([Application.kExit__application, function() return flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'removeEventListener', cast (['beforeunload', handler] : Array<Dynamic>))] : Array<Dynamic>));
+    ((cast observers : flighthq._internal._Map).set(Application.kExit__application, function() return flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'removeEventListener', cast (['beforeunload', handler] : Array<Dynamic>))));
   }
 
   public static function attachApplicationLifecycle(app:flighthq.types.Application, win:ApplicationWindow):Void {
@@ -51,13 +51,13 @@ class Application {
     var observers:Dynamic = cast _Runtime.UNDEFINED;
     var onDeactivate:Dynamic = cast _Runtime.UNDEFINED;
     var onActivate:Dynamic = cast _Runtime.UNDEFINED;
-    kLifecycle = _Runtime.callProperty(Application._lifecycleKeys__application, 'get', cast ([win] : Array<Dynamic>));
+    kLifecycle = ((cast Application._lifecycleKeys__application : flighthq._internal._WeakMap).get(win));
     if (_Runtime.truthy(_Runtime.strictEquals(kLifecycle, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (kLifecycle = cast (_Runtime.symbol() : Dynamic));
-      _Runtime.callProperty(Application._lifecycleKeys__application, 'set', cast ([win, kLifecycle] : Array<Dynamic>));
+      ((cast Application._lifecycleKeys__application : flighthq._internal._WeakMap).set(win, kLifecycle));
     }
     observers = _Runtime.callValue(Application.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
-    _Runtime.callOptionalValue(_Runtime.callProperty(observers, 'get', cast ([kLifecycle] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
+    _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map).get(kLifecycle)), cast ([] : Array<Dynamic>));
     onDeactivate = function() {
       _Runtime.callValue(pauseApplicationLoop, cast ([app] : Array<Dynamic>));
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(app, 'onDeactivate'), null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onDeactivate')] : Array<Dynamic>)); }
@@ -68,10 +68,10 @@ class Application {
     };
     _Runtime.callValue(connectSignal, cast ([_Runtime.field(win, 'onDeactivate'), onDeactivate] : Array<Dynamic>));
     _Runtime.callValue(connectSignal, cast ([_Runtime.field(win, 'onActivate'), onActivate] : Array<Dynamic>));
-    _Runtime.callProperty(observers, 'set', cast ([kLifecycle, function() {
+    ((cast observers : flighthq._internal._Map).set(kLifecycle, function() {
       _Runtime.callValue(disconnectSignal, cast ([_Runtime.field(win, 'onDeactivate'), onDeactivate] : Array<Dynamic>));
       _Runtime.callValue(disconnectSignal, cast ([_Runtime.field(win, 'onActivate'), onActivate] : Array<Dynamic>));
-    }] : Array<Dynamic>));
+    }));
   }
 
   public static function attachWindowClose(win:ApplicationWindow):Void {
@@ -165,8 +165,8 @@ class Application {
   public static function detachApplicationExit(app:flighthq.types.Application):Void {
     var observers:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Application.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
-    _Runtime.callOptionalValue(_Runtime.callProperty(observers, 'get', cast ([Application.kExit__application] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(observers, 'delete', cast ([Application.kExit__application] : Array<Dynamic>));
+    _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map).get(Application.kExit__application)), cast ([] : Array<Dynamic>));
+    ((cast observers : flighthq._internal._Map).delete_(Application.kExit__application));
   }
 
   public static function detachWindowClose(win:ApplicationWindow):Void {
@@ -212,10 +212,10 @@ class Application {
   public static function disposeApplication(app:flighthq.types.Application):Void {
     var observers:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Application.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
-    for (cleanup in _Runtime.iterable(_Runtime.callProperty(observers, 'values', cast ([] : Array<Dynamic>)))) {
+    for (cleanup in _Runtime.iterable(((cast observers : flighthq._internal._Map).values()))) {
       _Runtime.callValue(cleanup, cast ([] : Array<Dynamic>));
     }
-    _Runtime.callProperty(observers, 'clear', cast ([] : Array<Dynamic>));
+    ((cast observers : flighthq._internal._Map).clear());
     _Runtime.setField(app, 'isRunning', false);
   }
 
@@ -261,7 +261,7 @@ class Application {
     var total:Dynamic = cast _Runtime.UNDEFINED;
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var avgDelta:Dynamic = cast _Runtime.UNDEFINED;
-    state = _Runtime.callProperty(Application._applicationLoopState__application, 'get', cast ([(cast app : flighthq.types.Application)] : Array<Dynamic>));
+    state = ((cast Application._applicationLoopState__application : flighthq._internal._WeakMap).get((cast app : flighthq.types.Application)));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.field(state, 'fpsBuffer'), 'length'), 2.0, '<')))) { return cast 0.0; }
     buf = _Runtime.field(state, 'fpsBuffer');
     len = _Runtime.field(buf, 'length');
@@ -284,16 +284,16 @@ class Application {
   }
 
   public static function getApplicationMainWindow(app:flighthq.types.Application):Null<ApplicationWindow> {
-    return cast _Runtime.coalesce(_Runtime.coalesce(_Runtime.callProperty(Application._mainWindows__application, 'get', cast ([(cast app : flighthq.types.Application)] : Array<Dynamic>)), function():Dynamic return cast _Runtime.getIndex(_Runtime.field(app, 'windows'), 0.0)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(_Runtime.coalesce(((cast Application._mainWindows__application : flighthq._internal._WeakMap).get((cast app : flighthq.types.Application))), function():Dynamic return cast _Runtime.getIndex(_Runtime.field(app, 'windows'), 0.0)), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getApplicationObservers__application(app:flighthq.types.Application):Dynamic {
     var observers:Dynamic = cast _Runtime.UNDEFINED;
-    observers = _Runtime.callProperty(Application._applicationObservers__application, 'get', cast ([app] : Array<Dynamic>));
+    observers = ((cast Application._applicationObservers__application : flighthq._internal._WeakMap).get(app));
     if (_Runtime.truthy(_Runtime.strictEquals(observers, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (observers = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
-      _Runtime.callProperty(Application._applicationObservers__application, 'set', cast ([app, observers] : Array<Dynamic>));
+      ((cast Application._applicationObservers__application : flighthq._internal._WeakMap).set(app, observers));
     }
     return cast observers;
     return cast null;
@@ -361,11 +361,11 @@ class Application {
   public static function pauseApplicationLoop(app:flighthq.types.Application):Void {
     var observers:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Application.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(app, 'isRunning')), function():Dynamic return cast _Runtime.callProperty(observers, 'has', cast ([Application.kPaused__application] : Array<Dynamic>))))) { return; }
+    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(app, 'isRunning')), function():Dynamic return cast ((cast observers : flighthq._internal._Map).has(Application.kPaused__application))))) { return; }
     _Runtime.setField(app, 'isRunning', false);
-    _Runtime.callProperty(observers, 'set', cast ([Application.kPaused__application, function() {
+    ((cast observers : flighthq._internal._Map).set(Application.kPaused__application, function() {
     
-    }] : Array<Dynamic>));
+    }));
   }
 
   public static function prepareElementForInput(element:Dynamic):Void {
@@ -408,9 +408,9 @@ class Application {
     var observers:Dynamic = cast _Runtime.UNDEFINED;
     var loopState:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Application.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(observers, 'has', cast ([Application.kPaused__application] : Array<Dynamic>))))) { return; }
-    _Runtime.callProperty(observers, 'delete', cast ([Application.kPaused__application] : Array<Dynamic>));
-    loopState = _Runtime.callProperty(Application._applicationLoopState__application, 'get', cast ([app] : Array<Dynamic>));
+    if (_Runtime.truthy(!_Runtime.truthy(((cast observers : flighthq._internal._Map).has(Application.kPaused__application))))) { return; }
+    ((cast observers : flighthq._internal._Map).delete_(Application.kPaused__application));
+    loopState = ((cast Application._applicationLoopState__application : flighthq._internal._WeakMap).get(app));
     if (_Runtime.truthy(!_Runtime.strictEquals(loopState, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.setField(loopState, 'lastTime', -1.0);
       _Runtime.setField(loopState, 'fixedAccumulator', 0.0);
@@ -423,7 +423,7 @@ class Application {
 
   public static function setApplicationMainWindow(app:flighthq.types.Application, win:ApplicationWindow):Void {
     _Runtime.callValue(registerApplicationWindow, cast ([app, win] : Array<Dynamic>));
-    _Runtime.callProperty(Application._mainWindows__application, 'set', cast ([app, win] : Array<Dynamic>));
+    ((cast Application._mainWindows__application : flighthq._internal._WeakMap).set(app, win));
   }
 
   public static function setLoopBackend(backend:Null<LoopBackend>):Void {
@@ -516,8 +516,8 @@ class Application {
     var loopState:LoopState__application = cast _Runtime.UNDEFINED;
     var tick:Float->Void = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Application.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
-    _Runtime.callOptionalValue(_Runtime.callProperty(observers, 'get', cast ([Application.kLoop__application] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(observers, 'delete', cast ([Application.kPaused__application] : Array<Dynamic>));
+    _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map).get(Application.kLoop__application)), cast ([] : Array<Dynamic>));
+    ((cast observers : flighthq._internal._Map).delete_(Application.kPaused__application));
     backend = _Runtime.callValue(getLoopBackend, cast ([] : Array<Dynamic>));
     maxDeltaTime = _Runtime.coalesce(_Runtime.field(options, 'maxDeltaTime'), function():Dynamic return cast Application.DEFAULT_MAX_DELTA_TIME__application);
     targetFrameRate = _Runtime.coalesce(_Runtime.field(options, 'targetFrameRate'), function():Dynamic return cast 0.0);
@@ -527,7 +527,7 @@ class Application {
     frameInterval = _Runtime.select(_Runtime.compare(targetFrameRate, 0.0, '>'), function():Dynamic return cast (1000.0 / targetFrameRate), function():Dynamic return cast 0.0);
     bgInterval = _Runtime.select(_Runtime.compare(backgroundFrameRate, 0.0, '>'), function():Dynamic return cast (1000.0 / backgroundFrameRate), function():Dynamic return cast 0.0);
     loopState = { fixedAccumulator: 0.0, fpsBuffer: cast ([] : Array<Dynamic>), fpsHead: 0.0, frameHandle: (cast null : Dynamic), frameRateAccumulated: 0.0, lastTime: -1.0, maxDeltaTime: maxDeltaTime };
-    _Runtime.callProperty(Application._applicationLoopState__application, 'set', cast ([app, loopState] : Array<Dynamic>));
+    ((cast Application._applicationLoopState__application : flighthq._internal._WeakMap).set(app, loopState));
     _Runtime.setField(app, 'isRunning', true);
     tick = function tick(time:Float):Void {
       var isFirstTick:Dynamic = cast _Runtime.UNDEFINED;
@@ -537,7 +537,7 @@ class Application {
       var clamped:Dynamic = cast _Runtime.UNDEFINED;
       if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(app, 'isRunning')))) {
         _Runtime.setField(loopState, 'frameHandle', _Runtime.callProperty(backend, 'requestFrame', cast ([tick] : Array<Dynamic>)));
-        _Runtime.callProperty(observers, 'set', cast ([Application.kLoop__application, function() return _Runtime.callProperty(backend, 'cancelFrame', cast ([_Runtime.field(loopState, 'frameHandle')] : Array<Dynamic>))] : Array<Dynamic>));
+        ((cast observers : flighthq._internal._Map).set(Application.kLoop__application, function() return _Runtime.callProperty(backend, 'cancelFrame', cast ([_Runtime.field(loopState, 'frameHandle')] : Array<Dynamic>))));
         return;
       }
       isFirstTick = _Runtime.compare(_Runtime.field(loopState, 'lastTime'), 0.0, '<');
@@ -548,7 +548,7 @@ class Application {
         _Runtime.setField(loopState, 'frameRateAccumulated', (_Runtime.field(loopState, 'frameRateAccumulated') + raw));
         if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(activeInterval, 0.0, '>'), function():Dynamic return cast _Runtime.compare(_Runtime.field(loopState, 'frameRateAccumulated'), activeInterval, '<')))) {
           _Runtime.setField(loopState, 'frameHandle', _Runtime.callProperty(backend, 'requestFrame', cast ([tick] : Array<Dynamic>)));
-          _Runtime.callProperty(observers, 'set', cast ([Application.kLoop__application, function() return _Runtime.callProperty(backend, 'cancelFrame', cast ([_Runtime.field(loopState, 'frameHandle')] : Array<Dynamic>))] : Array<Dynamic>));
+          ((cast observers : flighthq._internal._Map).set(Application.kLoop__application, function() return _Runtime.callProperty(backend, 'cancelFrame', cast ([_Runtime.field(loopState, 'frameHandle')] : Array<Dynamic>))));
           return;
         }
       }
@@ -596,17 +596,17 @@ class Application {
         _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onRender')] : Array<Dynamic>));
       }
       _Runtime.setField(loopState, 'frameHandle', _Runtime.callProperty(backend, 'requestFrame', cast ([tick] : Array<Dynamic>)));
-      _Runtime.callProperty(observers, 'set', cast ([Application.kLoop__application, function() return _Runtime.callProperty(backend, 'cancelFrame', cast ([_Runtime.field(loopState, 'frameHandle')] : Array<Dynamic>))] : Array<Dynamic>));
+      ((cast observers : flighthq._internal._Map).set(Application.kLoop__application, function() return _Runtime.callProperty(backend, 'cancelFrame', cast ([_Runtime.field(loopState, 'frameHandle')] : Array<Dynamic>))));
     };
     _Runtime.setField(loopState, 'frameHandle', _Runtime.callProperty(backend, 'requestFrame', cast ([tick] : Array<Dynamic>)));
-    _Runtime.callProperty(observers, 'set', cast ([Application.kLoop__application, function() return _Runtime.callProperty(backend, 'cancelFrame', cast ([_Runtime.field(loopState, 'frameHandle')] : Array<Dynamic>))] : Array<Dynamic>));
+    ((cast observers : flighthq._internal._Map).set(Application.kLoop__application, function() return _Runtime.callProperty(backend, 'cancelFrame', cast ([_Runtime.field(loopState, 'frameHandle')] : Array<Dynamic>))));
   }
 
   public static function stepApplicationLoop(app:flighthq.types.Application, deltaTime:Float):Void {
     var loopState:Dynamic = cast _Runtime.UNDEFINED;
     var maxDelta:Dynamic = cast _Runtime.UNDEFINED;
     var clamped:Dynamic = cast _Runtime.UNDEFINED;
-    loopState = _Runtime.callProperty(Application._applicationLoopState__application, 'get', cast ([app] : Array<Dynamic>));
+    loopState = ((cast Application._applicationLoopState__application : flighthq._internal._WeakMap).get(app));
     maxDelta = _Runtime.coalesce(_Runtime.optionalField(loopState, 'maxDeltaTime'), function():Dynamic return cast Application.DEFAULT_MAX_DELTA_TIME__application);
     clamped = HxMath.min(deltaTime, maxDelta);
     _Runtime.setField(app, 'deltaTime', clamped);
@@ -634,10 +634,10 @@ class Application {
   public static function stopApplicationLoop(app:flighthq.types.Application):Void {
     var observers:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Application.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
-    _Runtime.callOptionalValue(_Runtime.callProperty(observers, 'get', cast ([Application.kLoop__application] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(observers, 'delete', cast ([Application.kLoop__application] : Array<Dynamic>));
-    _Runtime.callProperty(observers, 'delete', cast ([Application.kPaused__application] : Array<Dynamic>));
-    _Runtime.callProperty(Application._applicationLoopState__application, 'delete', cast ([app] : Array<Dynamic>));
+    _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map).get(Application.kLoop__application)), cast ([] : Array<Dynamic>));
+    ((cast observers : flighthq._internal._Map).delete_(Application.kLoop__application));
+    ((cast observers : flighthq._internal._Map).delete_(Application.kPaused__application));
+    ((cast Application._applicationLoopState__application : flighthq._internal._WeakMap).delete_(app));
     _Runtime.setField(app, 'isRunning', false);
   }
 
@@ -645,6 +645,6 @@ class Application {
     var idx:Dynamic = cast _Runtime.UNDEFINED;
     idx = _Runtime.callProperty(_Runtime.field(app, 'windows'), 'indexOf', cast ([win] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(idx, -1.0))) { _Runtime.splice(_Runtime.field(app, 'windows'), Std.int(idx), Std.int(1.0), []); }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(Application._mainWindows__application, 'get', cast ([app] : Array<Dynamic>)), win))) { _Runtime.callProperty(Application._mainWindows__application, 'delete', cast ([app] : Array<Dynamic>)); }
+    if (_Runtime.truthy(_Runtime.strictEquals(((cast Application._mainWindows__application : flighthq._internal._WeakMap).get(app)), win))) { ((cast Application._mainWindows__application : flighthq._internal._WeakMap).delete_(app)); }
   }
 }

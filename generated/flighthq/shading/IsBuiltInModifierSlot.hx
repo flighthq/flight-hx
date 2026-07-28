@@ -8,7 +8,7 @@ import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 
 class IsBuiltInModifierSlot {
   public static function isBuiltInModifierSlot(value:String):Bool {
-    return cast _Runtime.callProperty(IsBuiltInModifierSlot.BUILT_IN_SLOTS__isBuiltInModifierSlot, 'has', cast ([value] : Array<Dynamic>));
+    return cast ((cast IsBuiltInModifierSlot.BUILT_IN_SLOTS__isBuiltInModifierSlot : flighthq._internal._Set).has(value));
     return cast null;
   }
 

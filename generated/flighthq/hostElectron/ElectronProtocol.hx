@@ -15,12 +15,12 @@ class ElectronProtocol {
     return cast { register: function(scheme:Dynamic) {
       var ok:Dynamic = cast _Runtime.UNDEFINED;
       ok = _Runtime.callProperty(app, 'setAsDefaultProtocolClient', cast ([scheme] : Array<Dynamic>));
-      if (_Runtime.truthy(ok)) { _Runtime.callProperty(registered, 'add', cast ([scheme] : Array<Dynamic>)); }
+      if (_Runtime.truthy(ok)) { ((cast registered : flighthq._internal._Set).add(scheme)); }
       return cast ok;
     }, unregister: function(scheme:Dynamic) {
       var ok:Dynamic = cast _Runtime.UNDEFINED;
       ok = _Runtime.callProperty(app, 'removeAsDefaultProtocolClient', cast ([scheme] : Array<Dynamic>));
-      _Runtime.callProperty(registered, 'delete', cast ([scheme] : Array<Dynamic>));
+      ((cast registered : flighthq._internal._Set).delete_(scheme));
       return cast ok;
     }, isRegistered: function(scheme:Dynamic) {
       return cast _Runtime.callProperty(app, 'isDefaultProtocolClient', cast ([scheme] : Array<Dynamic>));
@@ -29,7 +29,7 @@ class ElectronProtocol {
     }, setAsDefault: function(scheme:Dynamic) {
       var ok:Dynamic = cast _Runtime.UNDEFINED;
       ok = _Runtime.callProperty(app, 'setAsDefaultProtocolClient', cast ([scheme] : Array<Dynamic>));
-      if (_Runtime.truthy(ok)) { _Runtime.callProperty(registered, 'add', cast ([scheme] : Array<Dynamic>)); }
+      if (_Runtime.truthy(ok)) { ((cast registered : flighthq._internal._Set).add(scheme)); }
       return cast ok;
     }, isDefault: function(scheme:Dynamic) {
       return cast _Runtime.callProperty(app, 'isDefaultProtocolClient', cast ([scheme] : Array<Dynamic>));

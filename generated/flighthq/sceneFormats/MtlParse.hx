@@ -34,7 +34,7 @@ class MtlParse {
           if (__switchValue == 'newmtl') {
             {
               (current = cast (_Runtime.callValue(MtlParse.createDefaultObjMaterial__mtlParse, cast ([args] : Array<Dynamic>)) : Dynamic));
-              _Runtime.callProperty(materials, 'set', cast ([args, current] : Array<Dynamic>));
+              ((cast materials : flighthq._internal._Map).set(args, current));
             }
           }
           else if (__switchValue == 'Ka') {

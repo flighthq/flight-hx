@@ -164,22 +164,22 @@ class AwdParse {
       if (_Runtime.truthy(_Runtime.strictEquals(namespace, AWD_NAMESPACE_CORE))) {
         if (_Runtime.truthy(_Runtime.strictEquals(blockType, AWD_BLOCK_TRIANGLE_GEOMETRY))) {
           var geoms:Dynamic = _Runtime.callValue(AwdParse.parseTriangleGeometryBlock__awdParse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), geometryWide, warnings] : Array<Dynamic>));
-          _Runtime.callProperty(geometryBlocks, 'set', cast ([blockId, geoms] : Array<Dynamic>));
+          ((cast geometryBlocks : flighthq._internal._Map).set(blockId, geoms));
         } else { if (_Runtime.truthy(_Runtime.strictEquals(blockType, AWD_BLOCK_CONTAINER))) {
           var container:Dynamic = _Runtime.callValue(AwdParse.parseContainerBlock__awdParse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), matrixWide, warnings] : Array<Dynamic>));
-          if (_Runtime.truthy(!_Runtime.strictEquals(container, null))) { _Runtime.callProperty(containerBlocks, 'set', cast ([blockId, container] : Array<Dynamic>)); }
+          if (_Runtime.truthy(!_Runtime.strictEquals(container, null))) { ((cast containerBlocks : flighthq._internal._Map).set(blockId, container)); }
         } else { if (_Runtime.truthy(_Runtime.strictEquals(blockType, AWD_BLOCK_MESH_INSTANCE))) {
           var meshInst:Dynamic = _Runtime.callValue(AwdParse.parseMeshInstanceBlock__awdParse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), matrixWide, warnings] : Array<Dynamic>));
-          if (_Runtime.truthy(!_Runtime.strictEquals(meshInst, null))) { _Runtime.callProperty(meshInstanceBlocks, 'set', cast ([blockId, meshInst] : Array<Dynamic>)); }
+          if (_Runtime.truthy(!_Runtime.strictEquals(meshInst, null))) { ((cast meshInstanceBlocks : flighthq._internal._Map).set(blockId, meshInst)); }
         } else { if (_Runtime.truthy(_Runtime.strictEquals(blockType, AWD_BLOCK_MATERIAL))) {
           var material:Dynamic = _Runtime.callValue(AwdParse.parseMaterialBlock__awdParse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), warnings] : Array<Dynamic>));
-          if (_Runtime.truthy(!_Runtime.strictEquals(material, null))) { _Runtime.callProperty(materialBlocks, 'set', cast ([blockId, material] : Array<Dynamic>)); }
+          if (_Runtime.truthy(!_Runtime.strictEquals(material, null))) { ((cast materialBlocks : flighthq._internal._Map).set(blockId, material)); }
         } else { if (_Runtime.truthy(_Runtime.strictEquals(blockType, AWD_BLOCK_TEXTURE))) {
           var texture:Dynamic = _Runtime.callValue(AwdParse.parseTextureBlock__awdParse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), warnings] : Array<Dynamic>));
-          if (_Runtime.truthy(!_Runtime.strictEquals(texture, null))) { _Runtime.callProperty(textureBlocks, 'set', cast ([blockId, texture] : Array<Dynamic>)); }
+          if (_Runtime.truthy(!_Runtime.strictEquals(texture, null))) { ((cast textureBlocks : flighthq._internal._Map).set(blockId, texture)); }
         } else { if (_Runtime.truthy(_Runtime.strictEquals(blockType, AWD_BLOCK_SKELETON))) {
           var skeleton:Dynamic = _Runtime.callValue(AwdParse.parseSkeletonBlock__awdParse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), matrixWide, warnings] : Array<Dynamic>));
-          if (_Runtime.truthy(!_Runtime.strictEquals(skeleton, null))) { _Runtime.callProperty(skeletonBlocks, 'set', cast ([blockId, skeleton] : Array<Dynamic>)); }
+          if (_Runtime.truthy(!_Runtime.strictEquals(skeleton, null))) { ((cast skeletonBlocks : flighthq._internal._Map).set(blockId, skeleton)); }
         } } } } } }
       }
       (offset = cast ((blockDataStart + blockLength) : Dynamic));
@@ -187,12 +187,12 @@ class AwdParse {
     scene = _Runtime.callValue(createScene, cast ([] : Array<Dynamic>));
     sceneNodes = _Runtime.construct(_Runtime.globalValue('Map'), []);
     skin = null;
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(skeletonBlocks, 'size'), 0.0, '>'))) {
-      var built:Dynamic = _Runtime.callValue(AwdParse.buildAwdSkeleton__awdParse, cast ([_Runtime.field(_Runtime.callProperty(_Runtime.callProperty(skeletonBlocks, 'values', cast ([] : Array<Dynamic>)), 'next', cast ([] : Array<Dynamic>)), 'value')] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.compare((cast skeletonBlocks : flighthq._internal._Map).size, 0.0, '>'))) {
+      var built:Dynamic = _Runtime.callValue(AwdParse.buildAwdSkeleton__awdParse, cast ([_Runtime.field(_Runtime.callProperty(((cast skeletonBlocks : flighthq._internal._Map).values()), 'next', cast ([] : Array<Dynamic>)), 'value')] : Array<Dynamic>));
       _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), _Runtime.field(built, 'skeletonRoot')] : Array<Dynamic>));
       (skin = cast ({ skeleton: _Runtime.field(built, 'skeleton'), skeletonRoot: _Runtime.field(built, 'skeletonRoot') } : Dynamic));
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(skeletonBlocks, 'size'), 1.0, '>'))) {
-        _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromAwd: file has ' + Std.string(_Runtime.field(skeletonBlocks, 'size')) + ' skeletons; every skinned mesh binds to the first'] : Array<Dynamic>));
+      if (_Runtime.truthy(_Runtime.compare((cast skeletonBlocks : flighthq._internal._Map).size, 1.0, '>'))) {
+        _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromAwd: file has ' + Std.string((cast skeletonBlocks : flighthq._internal._Map).size) + ' skeletons; every skinned mesh binds to the first'] : Array<Dynamic>));
       }
     }
     for (__iteration0 in _Runtime.iterable(containerBlocks)) {
@@ -200,7 +200,7 @@ class AwdParse {
       var container:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
       var node:Dynamic = _Runtime.callValue(createSceneNode, cast ([_Runtime.field(_Runtime, 'UNDEFINED'), { name: _Runtime.orValue(_Runtime.field(container, 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) }] : Array<Dynamic>));
       _Runtime.callValue(AwdParse.applyAwdTransform__awdParse, cast ([node, _Runtime.field(container, 'transform')] : Array<Dynamic>));
-      _Runtime.callProperty(sceneNodes, 'set', cast ([blockId, node] : Array<Dynamic>));
+      ((cast sceneNodes : flighthq._internal._Map).set(blockId, node));
     }
     resolvedMaterials = _Runtime.construct(_Runtime.globalValue('Map'), []);
     materialForSubset = function(meshInst:ParsedMeshInstance__awdParse, subsetIndex:Float) {
@@ -213,7 +213,7 @@ class AwdParse {
     for (__iteration1 in _Runtime.iterable(meshInstanceBlocks)) {
       var blockId:Dynamic = _Runtime.getIndex(__iteration1, 0.0);
       var meshInst:Dynamic = _Runtime.getIndex(__iteration1, 1.0);
-      var geometries:Dynamic = _Runtime.callProperty(geometryBlocks, 'get', cast ([_Runtime.field(meshInst, 'geometryId')] : Array<Dynamic>));
+      var geometries:Dynamic = ((cast geometryBlocks : flighthq._internal._Map).get(_Runtime.field(meshInst, 'geometryId')));
       var node:SceneNode = cast _Runtime.UNDEFINED;
       if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(geometries, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.compare(_Runtime.field(geometries, 'length'), 0.0, '>')))) {
         if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(geometries, 'length'), 1.0))) {
@@ -239,17 +239,17 @@ class AwdParse {
         }
       }
       _Runtime.callValue(AwdParse.applyAwdTransform__awdParse, cast ([node, _Runtime.field(meshInst, 'transform')] : Array<Dynamic>));
-      _Runtime.callProperty(sceneNodes, 'set', cast ([blockId, node] : Array<Dynamic>));
+      ((cast sceneNodes : flighthq._internal._Map).set(blockId, node));
     }
     parented = _Runtime.construct(_Runtime.globalValue('Set'), []);
     for (__iteration2 in _Runtime.iterable(containerBlocks)) {
       var blockId:Dynamic = _Runtime.getIndex(__iteration2, 0.0);
       var container:Dynamic = _Runtime.getIndex(__iteration2, 1.0);
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(container, 'parentId'), 0.0))) {
-        var parent:Dynamic = _Runtime.callProperty(sceneNodes, 'get', cast ([_Runtime.field(container, 'parentId')] : Array<Dynamic>));
+        var parent:Dynamic = ((cast sceneNodes : flighthq._internal._Map).get(_Runtime.field(container, 'parentId')));
         if (_Runtime.truthy(!_Runtime.strictEquals(parent, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-          _Runtime.callValue(addNodeChild, cast ([parent, _Runtime.callProperty(sceneNodes, 'get', cast ([blockId] : Array<Dynamic>))] : Array<Dynamic>));
-          _Runtime.callProperty(parented, 'add', cast ([blockId] : Array<Dynamic>));
+          _Runtime.callValue(addNodeChild, cast ([parent, ((cast sceneNodes : flighthq._internal._Map).get(blockId))] : Array<Dynamic>));
+          ((cast parented : flighthq._internal._Set).add(blockId));
         }
       }
     }
@@ -257,17 +257,17 @@ class AwdParse {
       var blockId:Dynamic = _Runtime.getIndex(__iteration3, 0.0);
       var meshInst:Dynamic = _Runtime.getIndex(__iteration3, 1.0);
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(meshInst, 'parentId'), 0.0))) {
-        var parent:Dynamic = _Runtime.callProperty(sceneNodes, 'get', cast ([_Runtime.field(meshInst, 'parentId')] : Array<Dynamic>));
+        var parent:Dynamic = ((cast sceneNodes : flighthq._internal._Map).get(_Runtime.field(meshInst, 'parentId')));
         if (_Runtime.truthy(!_Runtime.strictEquals(parent, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-          _Runtime.callValue(addNodeChild, cast ([parent, _Runtime.callProperty(sceneNodes, 'get', cast ([blockId] : Array<Dynamic>))] : Array<Dynamic>));
-          _Runtime.callProperty(parented, 'add', cast ([blockId] : Array<Dynamic>));
+          _Runtime.callValue(addNodeChild, cast ([parent, ((cast sceneNodes : flighthq._internal._Map).get(blockId))] : Array<Dynamic>));
+          ((cast parented : flighthq._internal._Set).add(blockId));
         }
       }
     }
     for (__iteration4 in _Runtime.iterable(sceneNodes)) {
       var blockId:Dynamic = _Runtime.getIndex(__iteration4, 0.0);
       var node:Dynamic = _Runtime.getIndex(__iteration4, 1.0);
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(parented, 'has', cast ([blockId] : Array<Dynamic>))))) {
+      if (_Runtime.truthy(!_Runtime.truthy(((cast parented : flighthq._internal._Set).has(blockId))))) {
         _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), node] : Array<Dynamic>));
       }
     }
@@ -326,33 +326,33 @@ class AwdParse {
       if (_Runtime.truthy(_Runtime.strictEquals(namespace, AWD_NAMESPACE_CORE))) {
         if (_Runtime.truthy(_Runtime.strictEquals(blockType, AWD_BLOCK_SKELETON))) {
           var skeleton:Dynamic = _Runtime.callValue(AwdParse.parseSkeletonBlock__awdParse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), matrixWide, warnings] : Array<Dynamic>));
-          if (_Runtime.truthy(!_Runtime.strictEquals(skeleton, null))) { _Runtime.callProperty(skeletonBlocks, 'set', cast ([blockId, skeleton] : Array<Dynamic>)); }
+          if (_Runtime.truthy(!_Runtime.strictEquals(skeleton, null))) { ((cast skeletonBlocks : flighthq._internal._Map).set(blockId, skeleton)); }
         } else { if (_Runtime.truthy(_Runtime.strictEquals(blockType, AWD_BLOCK_SKELETON_POSE))) {
           var pose:Dynamic = _Runtime.callValue(AwdParse.parseSkeletonPoseBlock__awdParse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), matrixWide, warnings] : Array<Dynamic>));
-          if (_Runtime.truthy(!_Runtime.strictEquals(pose, null))) { _Runtime.callProperty(poseBlocks, 'set', cast ([blockId, pose] : Array<Dynamic>)); }
+          if (_Runtime.truthy(!_Runtime.strictEquals(pose, null))) { ((cast poseBlocks : flighthq._internal._Map).set(blockId, pose)); }
         } else { if (_Runtime.truthy(_Runtime.strictEquals(blockType, AWD_BLOCK_SKELETON_ANIMATION))) {
           var anim:Dynamic = _Runtime.callValue(AwdParse.parseSkeletonAnimationBlock__awdParse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), warnings] : Array<Dynamic>));
-          if (_Runtime.truthy(!_Runtime.strictEquals(anim, null))) { _Runtime.callProperty(animationBlocks, 'set', cast ([blockId, anim] : Array<Dynamic>)); }
+          if (_Runtime.truthy(!_Runtime.strictEquals(anim, null))) { ((cast animationBlocks : flighthq._internal._Map).set(blockId, anim)); }
         } } }
       }
       (offset = cast ((blockDataStart + blockLength) : Dynamic));
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(skeletonBlocks, 'size'), 0.0))) {
+    if (_Runtime.truthy(_Runtime.strictEquals((cast skeletonBlocks : flighthq._internal._Map).size, 0.0))) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['parseAwdSkeletonAnimations: no skeleton blocks found'] : Array<Dynamic>));
       return cast {  };
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(animationBlocks, 'size'), 0.0))) {
+    if (_Runtime.truthy(_Runtime.strictEquals((cast animationBlocks : flighthq._internal._Map).size, 0.0))) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['parseAwdSkeletonAnimations: no skeleton animation blocks found'] : Array<Dynamic>));
       return cast {  };
     }
-    parsedSkeleton = _Runtime.field(_Runtime.callProperty(_Runtime.callProperty(skeletonBlocks, 'values', cast ([] : Array<Dynamic>)), 'next', cast ([] : Array<Dynamic>)), 'value');
+    parsedSkeleton = _Runtime.field(_Runtime.callProperty(((cast skeletonBlocks : flighthq._internal._Map).values()), 'next', cast ([] : Array<Dynamic>)), 'value');
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(joints, 'length'), _Runtime.field(_Runtime.field(parsedSkeleton, 'joints'), 'length'), '<'))) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['parseAwdSkeletonAnimations: joints array has ' + Std.string(_Runtime.field(joints, 'length')) + ' nodes but skeleton has ' + Std.string(_Runtime.field(_Runtime.field(parsedSkeleton, 'joints'), 'length')) + ' joints'] : Array<Dynamic>));
       return cast {  };
     }
     out = {  };
     index = 0.0;
-    for (parsedAnimation in _Runtime.iterable(_Runtime.callProperty(animationBlocks, 'values', cast ([] : Array<Dynamic>)))) {
+    for (parsedAnimation in _Runtime.iterable(((cast animationBlocks : flighthq._internal._Map).values()))) {
       var clip:Dynamic = _Runtime.callValue(AwdParse.buildAwdSkeletonAnimationClip__awdParse, cast ([parsedAnimation, _Runtime.field(_Runtime.field(parsedSkeleton, 'joints'), 'length'), poseBlocks, joints, warnings] : Array<Dynamic>));
       if (_Runtime.truthy(!_Runtime.strictEquals(clip, null))) { _Runtime.setIndex(out, _Runtime.orValue(_Runtime.field(parsedAnimation, 'name'), function():Dynamic return cast 'animation' + Std.string(index) + ''), clip); }
       index++;
@@ -395,7 +395,7 @@ class AwdParse {
           var p:Dynamic = 0.0;
           while (_Runtime.truthy(_Runtime.compare(p, poseCount, '<'))) {
             var poseBlockId:Dynamic = _Runtime.field(_Runtime.getIndex(_Runtime.field(parsedAnimation, 'poses'), p), 'poseBlockId');
-            var pose:Dynamic = _Runtime.callProperty(poseBlocks, 'get', cast ([poseBlockId] : Array<Dynamic>));
+            var pose:Dynamic = ((cast poseBlocks : flighthq._internal._Map).get(poseBlockId));
             if (_Runtime.truthy(_Runtime.strictEquals(pose, _Runtime.field(_Runtime, 'UNDEFINED')))) {
               _Runtime.callOptionalProperty(warnings, 'push', cast (['parseAwdSkeletonAnimations: pose block ' + Std.string(poseBlockId) + ' referenced by animation not found; using identity'] : Array<Dynamic>));
               _Runtime.pushMany(translationValues, cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
@@ -962,7 +962,7 @@ class AwdParse {
       var fieldLength:Dynamic = _Runtime.callProperty(dv, 'getUint32', cast ([offset, true] : Array<Dynamic>));
       (offset = cast ((offset + 4.0) : Dynamic));
       if (_Runtime.truthy(_Runtime.compare((offset + fieldLength), listEnd, '>'))) { break; }
-      _Runtime.callProperty(values, 'set', cast ([key, { length: fieldLength, offset: offset }] : Array<Dynamic>));
+      ((cast values : flighthq._internal._Map).set(key, { length: fieldLength, offset: offset }));
       (offset = cast ((offset + fieldLength) : Dynamic));
     }
     return cast { end: listEnd, values: values };
@@ -971,7 +971,7 @@ class AwdParse {
 
   public static function readAwdPropertyUint32__awdParse(view:Dynamic, values:Dynamic, key:Float):Null<Float> {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
-    entry = _Runtime.callProperty(values, 'get', cast ([key] : Array<Dynamic>));
+    entry = ((cast values : flighthq._internal._Map).get(key));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.compare(_Runtime.field(entry, 'length'), 4.0, '<')))) { return cast null; }
     return cast _Runtime.callProperty((cast view : Dynamic), 'getUint32', cast ([_Runtime.field(entry, 'offset'), true] : Array<Dynamic>));
     return cast null;
@@ -983,12 +983,12 @@ class AwdParse {
     var diffuseTexture:Dynamic = cast _Runtime.UNDEFINED;
     var material:Null<Material> = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(materialId, 0.0))) { return cast null; }
-    cached = _Runtime.callProperty(cache, 'get', cast ([materialId] : Array<Dynamic>));
+    cached = ((cast cache : flighthq._internal._Map).get(materialId));
     if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast cached; }
-    parsed = _Runtime.callProperty(materialBlocks, 'get', cast ([materialId] : Array<Dynamic>));
+    parsed = ((cast materialBlocks : flighthq._internal._Map).get(materialId));
     if (_Runtime.truthy(_Runtime.strictEquals(parsed, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromAwd: mesh references material block ' + Std.string(materialId) + ' which was not found'] : Array<Dynamic>));
-      _Runtime.callProperty(cache, 'set', cast ([materialId, null] : Array<Dynamic>));
+      ((cast cache : flighthq._internal._Map).set(materialId, null));
       return cast null;
     }
     diffuseTexture = _Runtime.select(!_Runtime.strictEquals(_Runtime.field(parsed, 'diffuseTextureId'), 0.0), function():Dynamic return cast _Runtime.callValue(AwdParse.resolveAwdTexture__awdParse, cast ([_Runtime.field(parsed, 'diffuseTextureId'), textureBlocks, warnings] : Array<Dynamic>)), function():Dynamic return cast null);
@@ -997,14 +997,14 @@ class AwdParse {
       (material = cast ((cast (cast _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuse: _Runtime.select(!_Runtime.strictEquals(_Runtime.field(parsed, 'color'), null), function():Dynamic return cast _Runtime.callValue(AwdParse.awdColorToRgba__awdParse, cast ([_Runtime.field(parsed, 'color')] : Array<Dynamic>)), function():Dynamic return cast 4294967295.0), diffuseMap: diffuseTexture }] : Array<Dynamic>)) : Dynamic) : Material) : Dynamic));
       _Runtime.setField(material, 'name', _Runtime.select(_Runtime.compare(_Runtime.field(_Runtime.field(parsed, 'name'), 'length'), 0.0, '>'), function():Dynamic return cast _Runtime.field(parsed, 'name'), function():Dynamic return cast null));
     }
-    _Runtime.callProperty(cache, 'set', cast ([materialId, material] : Array<Dynamic>));
+    ((cast cache : flighthq._internal._Map).set(materialId, material));
     return cast material;
     return cast null;
   }
 
   public static function resolveAwdTexture__awdParse(textureId:Float, textureBlocks:Dynamic, ?warnings:Array<String>):Null<Texture> {
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
-    parsed = _Runtime.callProperty(textureBlocks, 'get', cast ([textureId] : Array<Dynamic>));
+    parsed = ((cast textureBlocks : flighthq._internal._Map).get(textureId));
     if (_Runtime.truthy(_Runtime.strictEquals(parsed, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromAwd: material references texture block ' + Std.string(textureId) + ' which was not found'] : Array<Dynamic>));
       return cast null;

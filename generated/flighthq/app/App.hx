@@ -45,14 +45,14 @@ class App {
     }] : Array<Dynamic>));
     unsubscribeReady = _Runtime.callProperty(backend, 'subscribeReady', cast ([function() return _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onReady')] : Array<Dynamic>))] : Array<Dynamic>));
     unsubscribeSecondInstance = _Runtime.callProperty(backend, 'subscribeSecondInstance', cast ([function(argv:Dynamic) return _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onSecondInstance'), argv] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callProperty(App._subscriptions__app, 'set', cast ([app, function() {
+    ((cast App._subscriptions__app : flighthq._internal._WeakMap).set(app, function() {
       _Runtime.callValue(unsubscribeActivate, cast ([] : Array<Dynamic>));
       _Runtime.callValue(unsubscribeAllWindowsClosed, cast ([] : Array<Dynamic>));
       _Runtime.callValue(unsubscribeOpenFile, cast ([] : Array<Dynamic>));
       _Runtime.callValue(unsubscribeQuitRequest, cast ([] : Array<Dynamic>));
       _Runtime.callValue(unsubscribeReady, cast ([] : Array<Dynamic>));
       _Runtime.callValue(unsubscribeSecondInstance, cast ([] : Array<Dynamic>));
-    }] : Array<Dynamic>));
+    }));
   }
 
   public static function bounceAppDock():Float {
@@ -208,10 +208,10 @@ class App {
 
   public static function detachApp(app:flighthq.types.App):Void {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
-    unsubscribe = _Runtime.callProperty(App._subscriptions__app, 'get', cast ([app] : Array<Dynamic>));
+    unsubscribe = ((cast App._subscriptions__app : flighthq._internal._WeakMap).get(app));
     if (_Runtime.truthy(!_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.callValue(unsubscribe, cast ([] : Array<Dynamic>));
-      _Runtime.callProperty(App._subscriptions__app, 'delete', cast ([app] : Array<Dynamic>));
+      ((cast App._subscriptions__app : flighthq._internal._WeakMap).delete_(app));
     }
   }
 

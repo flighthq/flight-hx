@@ -16,7 +16,7 @@ class Menu {
   public static var _menuSignals__menu:Null<MenuSignals> = _Runtime.explicitNull();
 
   public static function _validateItem__menu(item:MenuItemTemplate, seen:Dynamic):Null<String> {
-    if (_Runtime.truthy(_Runtime.callProperty(seen, 'has', cast ([item] : Array<Dynamic>)))) {
+    if (_Runtime.truthy(((cast seen : flighthq._internal._Set).has(item)))) {
       throw _Runtime.error('validateMenuItemTemplate: cyclic submenu reference detected');
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(item, 'type'), 'separator'))) {
@@ -35,12 +35,12 @@ class Menu {
       return cast 'item type "' + Std.string(_Runtime.coalesce(_Runtime.field(item, 'type'), function():Dynamic return cast 'normal')) + '" has a submenu (only type "submenu" should carry children)';
     }
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(item, 'submenu'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      _Runtime.callProperty(seen, 'add', cast ([item] : Array<Dynamic>));
+      ((cast seen : flighthq._internal._Set).add(item));
       for (child in _Runtime.iterable(_Runtime.field(item, 'submenu'))) {
         var err:Dynamic = _Runtime.callValue(Menu._validateItem__menu, cast ([child, seen] : Array<Dynamic>));
         if (_Runtime.truthy(!_Runtime.strictEquals(err, null))) { return cast err; }
       }
-      _Runtime.callProperty(seen, 'delete', cast ([item] : Array<Dynamic>));
+      ((cast seen : flighthq._internal._Set).delete_(item));
     }
     return cast null;
     return cast null;

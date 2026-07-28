@@ -101,7 +101,7 @@ class ThreeDsParse {
         if (_Runtime.truthy(!_Runtime.strictEquals(mesh, null))) { _Runtime.callProperty(meshes, 'push', cast ([mesh] : Array<Dynamic>)); }
       } else { if (_Runtime.truthy(_Runtime.strictEquals(chunkId, THREE_DS_MATERIAL))) {
         var material:Dynamic = _Runtime.callValue(ThreeDsParse.parseMaterial__threeDsParse, cast ([view, cursor, chunkEnd] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(material, 'name'), 'length'), 0.0, '>'))) { _Runtime.callProperty(materials, 'set', cast ([_Runtime.field(material, 'name'), material] : Array<Dynamic>)); }
+        if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(material, 'name'), 'length'), 0.0, '>'))) { ((cast materials : flighthq._internal._Map).set(_Runtime.field(material, 'name'), material)); }
       } } }
       (cursor = cast (chunkEnd : Dynamic));
     }
@@ -366,14 +366,14 @@ class ThreeDsParse {
     meshMaterials = cast ([] : Array<Dynamic>);
     seen = _Runtime.construct(_Runtime.globalValue('Set'), []);
     for (materialName in _Runtime.iterable(_Runtime.field(mesh, 'materialNames'))) {
-      if (_Runtime.truthy(_Runtime.callProperty(seen, 'has', cast ([materialName] : Array<Dynamic>)))) { continue; }
-      _Runtime.callProperty(seen, 'add', cast ([materialName] : Array<Dynamic>));
-      var parsed:Dynamic = _Runtime.callProperty(materials, 'get', cast ([materialName] : Array<Dynamic>));
+      if (_Runtime.truthy(((cast seen : flighthq._internal._Set).has(materialName)))) { continue; }
+      ((cast seen : flighthq._internal._Set).add(materialName));
+      var parsed:Dynamic = ((cast materials : flighthq._internal._Map).get(materialName));
       if (_Runtime.truthy(_Runtime.strictEquals(parsed, _Runtime.field(_Runtime, 'UNDEFINED')))) { continue; }
-      var material:Dynamic = _Runtime.callProperty(resolved, 'get', cast ([materialName] : Array<Dynamic>));
+      var material:Dynamic = ((cast resolved : flighthq._internal._Map).get(materialName));
       if (_Runtime.truthy(_Runtime.strictEquals(material, _Runtime.field(_Runtime, 'UNDEFINED')))) {
         (material = cast (_Runtime.callValue(ThreeDsParse.threeDsMaterialToBlinnPhong__threeDsParse, cast ([parsed] : Array<Dynamic>)) : Dynamic));
-        _Runtime.callProperty(resolved, 'set', cast ([materialName, material] : Array<Dynamic>));
+        ((cast resolved : flighthq._internal._Map).set(materialName, material));
       }
       _Runtime.callProperty(meshMaterials, 'push', cast ([material] : Array<Dynamic>));
     }

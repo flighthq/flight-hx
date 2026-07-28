@@ -17,9 +17,9 @@ class Renderer {
   }
 
   public static function copyRenderersFromRenderState(target:RenderState, source:RenderState):Void {
-    _Runtime.callProperty(_Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([source] : Array<Dynamic>)), 'rendererMap'), 'forEach', cast ([function(renderer:Dynamic, kind:Dynamic) {
+    ((cast _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([source] : Array<Dynamic>)), 'rendererMap') : flighthq._internal._Map).forEach(function(renderer:Dynamic, kind:Dynamic) {
       _Runtime.callValue(registerRenderer, cast ([target, kind, renderer] : Array<Dynamic>));
-    }] : Array<Dynamic>));
+    }));
   }
 
   public static function noopRendererData(_state:RenderState, _source:Renderable):Null<RendererData> {
@@ -30,8 +30,8 @@ class Renderer {
   public static function registerRenderer(state:RenderState, kind:Kind, renderer:flighthq.types.Renderer):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime.field(runtime, 'rendererMap'), 'get', cast ([kind] : Array<Dynamic>)), renderer))) { return; }
+    if (_Runtime.truthy(_Runtime.strictEquals(((cast _Runtime.field(runtime, 'rendererMap') : flighthq._internal._Map).get(kind)), renderer))) { return; }
     _Runtime.setField(runtime, 'rendererMapId', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(runtime, 'rendererMapId') + 1.0)), 0));
-    _Runtime.callProperty(_Runtime.field(runtime, 'rendererMap'), 'set', cast ([kind, renderer] : Array<Dynamic>));
+    ((cast _Runtime.field(runtime, 'rendererMap') : flighthq._internal._Map).set(kind, renderer));
   }
 }

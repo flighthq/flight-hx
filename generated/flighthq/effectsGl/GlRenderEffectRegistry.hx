@@ -8,23 +8,23 @@ import flighthq.types.GlRenderState;
 
 class GlRenderEffectRegistry {
   public static function getGlRenderEffectRunner(state:GlRenderState, kind:String):Null<GlRenderEffectRunner> {
-    return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callProperty(GlRenderEffectRegistry._registries__glRenderEffectRegistry, 'get', cast ([state] : Array<Dynamic>)), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection0:Dynamic = ((cast GlRenderEffectRegistry._registries__glRenderEffectRegistry : flighthq._internal._WeakMap).get(state)); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(kind)); }), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function hasGlRenderEffectRunner(state:GlRenderState, kind:String):Bool {
-    return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callProperty(GlRenderEffectRegistry._registries__glRenderEffectRegistry, 'get', cast ([state] : Array<Dynamic>)), 'has', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast false);
+    return cast _Runtime.coalesce(({ final __collection1:Dynamic = ((cast GlRenderEffectRegistry._registries__glRenderEffectRegistry : flighthq._internal._WeakMap).get(state)); __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map).has(kind)); }), function():Dynamic return cast false);
     return cast null;
   }
 
   public static function registerGlRenderEffect(state:GlRenderState, kind:String, runner:GlRenderEffectRunner):Void {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
-    registry = _Runtime.callProperty(GlRenderEffectRegistry._registries__glRenderEffectRegistry, 'get', cast ([state] : Array<Dynamic>));
+    registry = ((cast GlRenderEffectRegistry._registries__glRenderEffectRegistry : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (registry = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
-      _Runtime.callProperty(GlRenderEffectRegistry._registries__glRenderEffectRegistry, 'set', cast ([state, registry] : Array<Dynamic>));
+      ((cast GlRenderEffectRegistry._registries__glRenderEffectRegistry : flighthq._internal._WeakMap).set(state, registry));
     }
-    _Runtime.callProperty(registry, 'set', cast ([kind, runner] : Array<Dynamic>));
+    ((cast registry : flighthq._internal._Map).set(kind, runner));
   }
 
   public static final _registries__glRenderEffectRegistry:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);

@@ -27,7 +27,7 @@ class Clipboard {
     unsubscribe = _Runtime.callProperty(_Runtime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'subscribeClipboardChange', cast ([function() {
       _Runtime.callValue(emitSignal, cast ([_Runtime.field(watch, 'onChange')] : Array<Dynamic>));
     }] : Array<Dynamic>));
-    _Runtime.callProperty(Clipboard._watchSubscriptions__clipboard, 'set', cast ([watch, unsubscribe] : Array<Dynamic>));
+    ((cast Clipboard._watchSubscriptions__clipboard : flighthq._internal._WeakMap).set(watch, unsubscribe));
   }
 
   public static function blobFromFormatData__clipboard(format:String, data:String):flighthq._internal._Promise<Dynamic> {
@@ -543,10 +543,10 @@ class Clipboard {
 
   public static function detachClipboardWatch(watch:ClipboardWatch):Void {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
-    unsubscribe = _Runtime.callProperty(Clipboard._watchSubscriptions__clipboard, 'get', cast ([watch] : Array<Dynamic>));
+    unsubscribe = ((cast Clipboard._watchSubscriptions__clipboard : flighthq._internal._WeakMap).get(watch));
     if (_Runtime.truthy(!_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.callValue(unsubscribe, cast ([] : Array<Dynamic>));
-      _Runtime.callProperty(Clipboard._watchSubscriptions__clipboard, 'delete', cast ([watch] : Array<Dynamic>));
+      ((cast Clipboard._watchSubscriptions__clipboard : flighthq._internal._WeakMap).delete_(watch));
     }
   }
 

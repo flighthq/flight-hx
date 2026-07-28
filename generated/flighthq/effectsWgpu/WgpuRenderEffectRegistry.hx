@@ -8,23 +8,23 @@ import flighthq.types.WgpuRenderState;
 
 class WgpuRenderEffectRegistry {
   public static function getWgpuRenderEffectRunner(state:WgpuRenderState, kind:String):Null<WgpuRenderEffectRunner> {
-    return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callProperty(WgpuRenderEffectRegistry._registries__wgpuRenderEffectRegistry, 'get', cast ([state] : Array<Dynamic>)), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection0:Dynamic = ((cast WgpuRenderEffectRegistry._registries__wgpuRenderEffectRegistry : flighthq._internal._WeakMap).get(state)); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(kind)); }), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function hasWgpuRenderEffectRunner(state:WgpuRenderState, kind:String):Bool {
-    return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callProperty(WgpuRenderEffectRegistry._registries__wgpuRenderEffectRegistry, 'get', cast ([state] : Array<Dynamic>)), 'has', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast false);
+    return cast _Runtime.coalesce(({ final __collection1:Dynamic = ((cast WgpuRenderEffectRegistry._registries__wgpuRenderEffectRegistry : flighthq._internal._WeakMap).get(state)); __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map).has(kind)); }), function():Dynamic return cast false);
     return cast null;
   }
 
   public static function registerWgpuRenderEffect(state:WgpuRenderState, kind:String, runner:WgpuRenderEffectRunner):Void {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
-    registry = _Runtime.callProperty(WgpuRenderEffectRegistry._registries__wgpuRenderEffectRegistry, 'get', cast ([state] : Array<Dynamic>));
+    registry = ((cast WgpuRenderEffectRegistry._registries__wgpuRenderEffectRegistry : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (registry = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
-      _Runtime.callProperty(WgpuRenderEffectRegistry._registries__wgpuRenderEffectRegistry, 'set', cast ([state, registry] : Array<Dynamic>));
+      ((cast WgpuRenderEffectRegistry._registries__wgpuRenderEffectRegistry : flighthq._internal._WeakMap).set(state, registry));
     }
-    _Runtime.callProperty(registry, 'set', cast ([kind, runner] : Array<Dynamic>));
+    ((cast registry : flighthq._internal._Map).set(kind, runner));
   }
 
   public static final _registries__wgpuRenderEffectRegistry:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);

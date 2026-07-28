@@ -81,10 +81,10 @@ class CanvasTextInput {
   public static function getCaretVisible__canvasTextInput(source:Dynamic, focused:Bool):Bool {
     var wasFocused:Dynamic = cast _Runtime.UNDEFINED;
     var elapsed:Dynamic = cast _Runtime.UNDEFINED;
-    wasFocused = _Runtime.coalesce(_Runtime.callProperty(CanvasTextInput._prevFocused__canvasTextInput, 'get', cast ([source] : Array<Dynamic>)), function():Dynamic return cast false);
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.truthy(wasFocused), function():Dynamic return cast focused))) { _Runtime.callProperty(CanvasTextInput._blinkStart__canvasTextInput, 'set', cast ([source, _Runtime.callProperty(_Runtime.globalValue('performance'), 'now', cast ([] : Array<Dynamic>))] : Array<Dynamic>)); }
-    _Runtime.callProperty(CanvasTextInput._prevFocused__canvasTextInput, 'set', cast ([source, focused] : Array<Dynamic>));
-    elapsed = (_Runtime.callProperty(_Runtime.globalValue('performance'), 'now', cast ([] : Array<Dynamic>)) - _Runtime.coalesce(_Runtime.callProperty(CanvasTextInput._blinkStart__canvasTextInput, 'get', cast ([source] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callProperty(_Runtime.globalValue('performance'), 'now', cast ([] : Array<Dynamic>))));
+    wasFocused = _Runtime.coalesce(((cast CanvasTextInput._prevFocused__canvasTextInput : flighthq._internal._WeakMap).get(source)), function():Dynamic return cast false);
+    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.truthy(wasFocused), function():Dynamic return cast focused))) { ((cast CanvasTextInput._blinkStart__canvasTextInput : flighthq._internal._WeakMap).set(source, _Runtime.callProperty(_Runtime.globalValue('performance'), 'now', cast ([] : Array<Dynamic>)))); }
+    ((cast CanvasTextInput._prevFocused__canvasTextInput : flighthq._internal._WeakMap).set(source, focused));
+    elapsed = (_Runtime.callProperty(_Runtime.globalValue('performance'), 'now', cast ([] : Array<Dynamic>)) - _Runtime.coalesce(((cast CanvasTextInput._blinkStart__canvasTextInput : flighthq._internal._WeakMap).get(source)), function():Dynamic return cast _Runtime.callProperty(_Runtime.globalValue('performance'), 'now', cast ([] : Array<Dynamic>))));
     return cast _Runtime.compare((elapsed % (CanvasTextInput.CARET_BLINK_MS__canvasTextInput * 2.0)), CanvasTextInput.CARET_BLINK_MS__canvasTextInput, '<');
     return cast null;
   }

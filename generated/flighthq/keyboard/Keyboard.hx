@@ -63,7 +63,7 @@ class Keyboard {
         }
       }
     }] : Array<Dynamic>));
-    _Runtime.callProperty(Keyboard._subscriptions__keyboard, 'set', cast ([keyboard, unsubscribe] : Array<Dynamic>));
+    ((cast Keyboard._subscriptions__keyboard : flighthq._internal._WeakMap).set(keyboard, unsubscribe));
   }
 
   public static function createSoftKeyboard():SoftKeyboard {
@@ -134,10 +134,10 @@ class Keyboard {
 
   public static function detachSoftKeyboard(keyboard:SoftKeyboard):Void {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
-    unsubscribe = _Runtime.callProperty(Keyboard._subscriptions__keyboard, 'get', cast ([keyboard] : Array<Dynamic>));
+    unsubscribe = ((cast Keyboard._subscriptions__keyboard : flighthq._internal._WeakMap).get(keyboard));
     if (_Runtime.truthy(!_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.callValue(unsubscribe, cast ([] : Array<Dynamic>));
-      _Runtime.callProperty(Keyboard._subscriptions__keyboard, 'delete', cast ([keyboard] : Array<Dynamic>));
+      ((cast Keyboard._subscriptions__keyboard : flighthq._internal._WeakMap).delete_(keyboard));
     }
   }
 

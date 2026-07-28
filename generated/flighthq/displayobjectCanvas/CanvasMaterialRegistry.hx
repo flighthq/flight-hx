@@ -29,14 +29,14 @@ class CanvasMaterialRegistry {
   }
 
   public static function getCanvasMaterialRenderer(state:Dynamic, kind:Kind):Null<Dynamic> {
-    return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.field(_Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'materialRendererMap'), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection0:Dynamic = _Runtime.field(_Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'materialRendererMap'); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(kind)); }), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function registerCanvasMaterialRenderer(state:Dynamic, kind:Kind, renderer:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.setField(runtime, 'materialRendererMap', (_Runtime.field(runtime, 'materialRendererMap') ?? _Runtime.construct(_Runtime.globalValue('Map'), []))), 'set', cast ([kind, renderer] : Array<Dynamic>));
+    ((cast _Runtime.setField(runtime, 'materialRendererMap', (_Runtime.field(runtime, 'materialRendererMap') ?? _Runtime.construct(_Runtime.globalValue('Map'), []))) : flighthq._internal._Map).set(kind, renderer));
   }
 
   public static function resolveCanvasMaterialRenderer(state:Dynamic, material:Null<Material>):Null<Dynamic> {
@@ -44,10 +44,10 @@ class CanvasMaterialRegistry {
     map = _Runtime.field(_Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'materialRendererMap');
     if (_Runtime.truthy(_Runtime.strictEquals(map, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast null; }
     if (_Runtime.truthy(!_Runtime.strictEquals(material, null))) {
-      var renderer:Dynamic = _Runtime.callProperty(map, 'get', cast ([_Runtime.field(material, 'kind')] : Array<Dynamic>));
+      var renderer:Dynamic = ((cast map : flighthq._internal._Map).get(_Runtime.field(material, 'kind')));
       if (_Runtime.truthy(!_Runtime.strictEquals(renderer, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast renderer; }
     }
-    return cast _Runtime.coalesce(_Runtime.callProperty(map, 'get', cast ([DefaultMaterialKind] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast map : flighthq._internal._Map).get(DefaultMaterialKind)), function():Dynamic return cast null);
     return cast null;
   }
 }

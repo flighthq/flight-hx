@@ -13,22 +13,22 @@ import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
 class WgpuMeshMaterialRegistry {
   public static function getWgpuMeshMaterialRenderer(state:WgpuRenderState, kind:Kind):Null<WgpuMeshMaterialRenderer> {
-    return cast _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(_Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry'), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast _Runtime.field(_Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry') : flighthq._internal._Map).get(kind)), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function registerWgpuMeshMaterialRenderer(state:WgpuRenderState, kind:Kind, renderer:WgpuMeshMaterialRenderer):Void {
-    _Runtime.callProperty(_Runtime.field(_Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry'), 'set', cast ([kind, renderer] : Array<Dynamic>));
+    ((cast _Runtime.field(_Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry') : flighthq._internal._Map).set(kind, renderer));
   }
 
   public static function resolveWgpuMeshMaterialRenderer(state:WgpuRenderState, material:Null<Material>):Null<WgpuMeshMaterialRenderer> {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = _Runtime.field(_Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry');
     if (_Runtime.truthy(!_Runtime.strictEquals(material, null))) {
-      var renderer:Dynamic = _Runtime.callProperty(registry, 'get', cast ([_Runtime.field(material, 'kind')] : Array<Dynamic>));
+      var renderer:Dynamic = ((cast registry : flighthq._internal._Map).get(_Runtime.field(material, 'kind')));
       if (_Runtime.truthy(!_Runtime.strictEquals(renderer, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast renderer; }
     }
-    return cast _Runtime.coalesce(_Runtime.callProperty(registry, 'get', cast ([DefaultMaterialKind] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast registry : flighthq._internal._Map).get(DefaultMaterialKind)), function():Dynamic return cast null);
     return cast null;
   }
 }

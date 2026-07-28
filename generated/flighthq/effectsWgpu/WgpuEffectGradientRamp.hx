@@ -10,16 +10,16 @@ class WgpuEffectGradientRamp {
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var key:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
-    cache = _Runtime.callProperty(WgpuEffectGradientRamp.rampCaches__wgpuEffectGradientRamp, 'get', cast ([state] : Array<Dynamic>));
+    cache = ((cast WgpuEffectGradientRamp.rampCaches__wgpuEffectGradientRamp : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (cache = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
-      _Runtime.callProperty(WgpuEffectGradientRamp.rampCaches__wgpuEffectGradientRamp, 'set', cast ([state, cache] : Array<Dynamic>));
+      ((cast WgpuEffectGradientRamp.rampCaches__wgpuEffectGradientRamp : flighthq._internal._WeakMap).set(state, cache));
     }
     key = '' + Std.string(_Runtime.join(colors, ',')) + '|' + Std.string(_Runtime.join(alphas, ',')) + '|' + Std.string(_Runtime.join(ratios, ',')) + '';
-    texture = _Runtime.callProperty(cache, 'get', cast ([key] : Array<Dynamic>));
+    texture = ((cast cache : flighthq._internal._Map).get(key));
     if (_Runtime.truthy(_Runtime.strictEquals(texture, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (texture = cast (_Runtime.callValue(WgpuEffectGradientRamp.createWgpuEffectGradientRampTexture__wgpuEffectGradientRamp, cast ([state, colors, alphas, ratios] : Array<Dynamic>)) : Dynamic));
-      _Runtime.callProperty(cache, 'set', cast ([key, texture] : Array<Dynamic>));
+      ((cast cache : flighthq._internal._Map).set(key, texture));
     }
     return cast texture;
     return cast null;

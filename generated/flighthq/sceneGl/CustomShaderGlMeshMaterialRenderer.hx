@@ -59,7 +59,7 @@ class CustomShaderGlMeshMaterialRenderer {
   } };
 
   public static function getGlCustomMaterialShaderSource(state:GlRenderState, shaderKey:String):Null<GlCustomMaterialShaderSource> {
-    return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callProperty(CustomShaderGlMeshMaterialRenderer._customMaterialShaders__customShaderGlMeshMaterialRenderer, 'get', cast ([state] : Array<Dynamic>)), 'get', cast ([shaderKey] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection0:Dynamic = ((cast CustomShaderGlMeshMaterialRenderer._customMaterialShaders__customShaderGlMeshMaterialRenderer : flighthq._internal._WeakMap).get(state)); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(shaderKey)); }), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -69,12 +69,12 @@ class CustomShaderGlMeshMaterialRenderer {
 
   public static function registerGlCustomMaterialShader(state:GlRenderState, shaderKey:String, source:GlCustomMaterialShaderSource):Void {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
-    registry = _Runtime.callProperty(CustomShaderGlMeshMaterialRenderer._customMaterialShaders__customShaderGlMeshMaterialRenderer, 'get', cast ([state] : Array<Dynamic>));
+    registry = ((cast CustomShaderGlMeshMaterialRenderer._customMaterialShaders__customShaderGlMeshMaterialRenderer : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (registry = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
-      _Runtime.callProperty(CustomShaderGlMeshMaterialRenderer._customMaterialShaders__customShaderGlMeshMaterialRenderer, 'set', cast ([state, registry] : Array<Dynamic>));
+      ((cast CustomShaderGlMeshMaterialRenderer._customMaterialShaders__customShaderGlMeshMaterialRenderer : flighthq._internal._WeakMap).set(state, registry));
     }
-    _Runtime.callProperty(registry, 'set', cast ([shaderKey, source] : Array<Dynamic>));
+    ((cast registry : flighthq._internal._Map).set(shaderKey, source));
   }
 
   public static function ensureGlCustomShaderProgram__customShaderGlMeshMaterialRenderer(state:GlRenderState, shaderKey:String, source:GlCustomMaterialShaderSource):GlCustomShaderProgram__customShaderGlMeshMaterialRenderer {

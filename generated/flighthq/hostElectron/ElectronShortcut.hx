@@ -17,7 +17,7 @@ class ElectronShortcut {
     }, register: function(accelerator:Dynamic, listener:Dynamic) {
       var ok:Dynamic = cast _Runtime.UNDEFINED;
       ok = _Runtime.callProperty(globalShortcut, 'register', cast ([accelerator, function() return _Runtime.callValue(listener, cast ([{ accelerator: accelerator }] : Array<Dynamic>))] : Array<Dynamic>));
-      if (_Runtime.truthy(ok)) { _Runtime.callProperty(registered, 'add', cast ([accelerator] : Array<Dynamic>)); }
+      if (_Runtime.truthy(ok)) { ((cast registered : flighthq._internal._Set).add(accelerator)); }
       return cast ok;
     }, setAllEnabled: function(_enabled:Dynamic) {
     
@@ -25,11 +25,11 @@ class ElectronShortcut {
       return cast false;
     }, unregister: function(accelerator:Dynamic) {
       _Runtime.callProperty(globalShortcut, 'unregister', cast ([accelerator] : Array<Dynamic>));
-      _Runtime.callProperty(registered, 'delete', cast ([accelerator] : Array<Dynamic>));
+      ((cast registered : flighthq._internal._Set).delete_(accelerator));
       return cast true;
     }, unregisterAll: function() {
       _Runtime.callProperty(globalShortcut, 'unregisterAll', cast ([] : Array<Dynamic>));
-      _Runtime.callProperty(registered, 'clear', cast ([] : Array<Dynamic>));
+      ((cast registered : flighthq._internal._Set).clear());
     }, isRegistered: function(accelerator:Dynamic) {
       return cast _Runtime.callProperty(globalShortcut, 'isRegistered', cast ([accelerator] : Array<Dynamic>));
     } };

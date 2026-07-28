@@ -9,14 +9,14 @@ class Cache {
   public static function getCached<T>(key:String, build:Dynamic):Dynamic {
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var built:Dynamic = cast _Runtime.UNDEFINED;
-    existing = _Runtime.callProperty(Cache.formatterCache__cache, 'get', cast ([key] : Array<Dynamic>));
+    existing = ((cast Cache.formatterCache__cache : flighthq._internal._Map).get(key));
     if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast (cast existing : Dynamic); }
     built = _Runtime.callValue(build, cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(Cache.formatterCache__cache, 'size'), Cache.cacheCapacity__cache, '>='))) {
-      var oldest:Dynamic = _Runtime.field(_Runtime.callProperty(_Runtime.callProperty(Cache.formatterCache__cache, 'keys', cast ([] : Array<Dynamic>)), 'next', cast ([] : Array<Dynamic>)), 'value');
-      if (_Runtime.truthy(!_Runtime.strictEquals(oldest, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(Cache.formatterCache__cache, 'delete', cast ([oldest] : Array<Dynamic>)); }
+    if (_Runtime.truthy(_Runtime.compare((cast Cache.formatterCache__cache : flighthq._internal._Map).size, Cache.cacheCapacity__cache, '>='))) {
+      var oldest:Dynamic = _Runtime.field(_Runtime.callProperty(((cast Cache.formatterCache__cache : flighthq._internal._Map).keys()), 'next', cast ([] : Array<Dynamic>)), 'value');
+      if (_Runtime.truthy(!_Runtime.strictEquals(oldest, _Runtime.field(_Runtime, 'UNDEFINED')))) { ((cast Cache.formatterCache__cache : flighthq._internal._Map).delete_(oldest)); }
     }
-    _Runtime.callProperty(Cache.formatterCache__cache, 'set', cast ([key, built] : Array<Dynamic>));
+    ((cast Cache.formatterCache__cache : flighthq._internal._Map).set(key, built));
     return cast built;
     return cast null;
   }

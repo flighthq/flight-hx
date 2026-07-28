@@ -78,13 +78,7 @@ class _Runtime {
   }
 
   static function resolveMethod(owner:Dynamic, name:String):Dynamic {
-    final callable = Reflect.field(owner, name);
-    #if !js
-    // Maintained collection classes spell the reserved `delete` member with a
-    // trailing underscore; map the JavaScript name onto it.
-    if (callable == null && name == 'delete') return Reflect.field(owner, 'delete_');
-    #end
-    return callable;
+    return Reflect.field(owner, name);
   }
 
   public static inline function callOptionalValue(callable:Dynamic, arguments:Array<Dynamic>):Dynamic {
@@ -162,11 +156,27 @@ class _Runtime {
     #end
   }
 
+  public static function createWeakMap(source:Dynamic):Dynamic {
+    #if js
+    return js.Syntax.code('new WeakMap({0} ?? undefined)', source);
+    #else
+    return new _WeakMap(source);
+    #end
+  }
+
   public static function createSet(source:Dynamic):Dynamic {
     #if js
     return js.Syntax.code('new Set({0} ?? undefined)', source);
     #else
     return new _Set(source);
+    #end
+  }
+
+  public static function createWeakSet(source:Dynamic):Dynamic {
+    #if js
+    return js.Syntax.code('new WeakSet({0} ?? undefined)', source);
+    #else
+    return new _WeakSet(source);
     #end
   }
 

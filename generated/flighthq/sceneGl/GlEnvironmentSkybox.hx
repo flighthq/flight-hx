@@ -49,7 +49,7 @@ class GlEnvironmentSkybox {
     var vao:Dynamic = cast _Runtime.UNDEFINED;
     var buffer:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
-    sky = _Runtime.callProperty(GlEnvironmentSkybox._skyboxes__glEnvironmentSkybox, 'get', cast ([state] : Array<Dynamic>));
+    sky = ((cast GlEnvironmentSkybox._skyboxes__glEnvironmentSkybox : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(!_Runtime.strictEquals(sky, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast sky; }
     program = _Runtime.callValue(GlEnvironmentSkybox.linkGlSkyboxProgram__glEnvironmentSkybox, cast ([gl] : Array<Dynamic>));
     vao = flighthq._internal.backend.WebGl2Backend.createVertexArray(gl);
@@ -61,7 +61,7 @@ class GlEnvironmentSkybox {
     flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 0.0, 2.0, flighthq._internal.backend.WebGl2Backend.FLOAT, false, 0.0, 0.0);
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, null);
     (sky = cast ({ locEnvCube: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_envCube'), locInverseViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_inverseViewProjection'), locIntensity: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_intensity'), program: program, vao: vao } : Dynamic));
-    _Runtime.callProperty(GlEnvironmentSkybox._skyboxes__glEnvironmentSkybox, 'set', cast ([state, sky] : Array<Dynamic>));
+    ((cast GlEnvironmentSkybox._skyboxes__glEnvironmentSkybox : flighthq._internal._WeakMap).set(state, sky));
     return cast sky;
     return cast null;
   }

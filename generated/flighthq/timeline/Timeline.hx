@@ -17,7 +17,7 @@ class Timeline {
   public static function addTimelineFrameScript(timeline:flighthq.types.Timeline, frame:Dynamic, script:FrameScript):Void {
     var resolved:Dynamic = cast _Runtime.UNDEFINED;
     resolved = _Runtime.callValue(Timeline.resolveFrame__timeline, cast ([timeline, frame] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.setField(timeline, 'frameScripts', (_Runtime.field(timeline, 'frameScripts') ?? _Runtime.construct(_Runtime.globalValue('Map'), []))), 'set', cast ([resolved, script] : Array<Dynamic>));
+    ((cast _Runtime.setField(timeline, 'frameScripts', (_Runtime.field(timeline, 'frameScripts') ?? _Runtime.construct(_Runtime.globalValue('Map'), []))) : flighthq._internal._Map).set(resolved, script));
   }
 
   public static function advanceFrame__timeline(timeline:flighthq.types.Timeline, deltaTime:Float):Float {
@@ -109,7 +109,7 @@ class Timeline {
     if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(signals, 'onEnterFrame'), frameEvent] : Array<Dynamic>)); }
     if (_Runtime.truthy(!_Runtime.strictEquals(target, null))) { _Runtime.callOptionalProperty(_Runtime.field(timeline, 'source'), 'constructFrame', cast ([target, current] : Array<Dynamic>)); }
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(timeline, 'frameScripts'), null))) {
-      var script:Dynamic = _Runtime.callProperty(_Runtime.field(timeline, 'frameScripts'), 'get', cast ([current] : Array<Dynamic>));
+      var script:Dynamic = ((cast _Runtime.field(timeline, 'frameScripts') : flighthq._internal._Map).get(current));
       if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(script, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(target, null)))) { _Runtime.callValue(script, cast ([target, current] : Array<Dynamic>)); }
     }
     if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(signals, 'onFrameConstructed'), frameEvent] : Array<Dynamic>)); }
@@ -140,7 +140,7 @@ class Timeline {
     var resolved:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(timeline, 'frameScripts'), null))) { return cast null; }
     resolved = _Runtime.callValue(Timeline.resolveFrame__timeline, cast ([timeline, frame] : Array<Dynamic>));
-    return cast _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(timeline, 'frameScripts'), 'get', cast ([resolved] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast _Runtime.field(timeline, 'frameScripts') : flighthq._internal._Map).get(resolved)), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -187,8 +187,8 @@ class Timeline {
     var resolved:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(timeline, 'frameScripts'), null))) { return; }
     resolved = _Runtime.callValue(Timeline.resolveFrame__timeline, cast ([timeline, frame] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.field(timeline, 'frameScripts'), 'delete', cast ([resolved] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(timeline, 'frameScripts'), 'size'), 0.0))) { _Runtime.setField(timeline, 'frameScripts', null); }
+    ((cast _Runtime.field(timeline, 'frameScripts') : flighthq._internal._Map).delete_(resolved));
+    if (_Runtime.truthy(_Runtime.strictEquals((cast _Runtime.field(timeline, 'frameScripts') : flighthq._internal._Map).size, 0.0))) { _Runtime.setField(timeline, 'frameScripts', null); }
   }
 
   public static function resolveFrame__timeline(timeline:flighthq.types.Timeline, frame:Dynamic):Float {

@@ -31,18 +31,18 @@ class RenderEffectInterpolation {
       var va:Dynamic = _Runtime.getIndex(aRec, key);
       var vb:Dynamic = _Runtime.getIndex(bRec, key);
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofValue(va), 'number'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'number')))) {
-        _Runtime.callProperty(numericKeys, 'add', cast ([key] : Array<Dynamic>));
+        ((cast numericKeys : flighthq._internal._Set).add(key));
       } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofValue(va), 'boolean'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'boolean')))) {
-        _Runtime.callProperty(booleanKeys, 'add', cast ([key] : Array<Dynamic>));
+        ((cast booleanKeys : flighthq._internal._Set).add(key));
       } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofValue(va), 'string'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'string')))) {
-        _Runtime.callProperty(stringKeys, 'add', cast ([key] : Array<Dynamic>));
+        ((cast stringKeys : flighthq._internal._Set).add(key));
       } } }
     }
     for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(bRec))) {
       if (_Runtime.truthy(_Runtime.strictEquals(key, 'kind'))) { continue; }
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.truthy(_Runtime.callProperty(numericKeys, 'has', cast ([key] : Array<Dynamic>))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(booleanKeys, 'has', cast ([key] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(stringKeys, 'has', cast ([key] : Array<Dynamic>)))))) {
+      if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.truthy(((cast numericKeys : flighthq._internal._Set).has(key))), function():Dynamic return cast !_Runtime.truthy(((cast booleanKeys : flighthq._internal._Set).has(key)))), function():Dynamic return cast !_Runtime.truthy(((cast stringKeys : flighthq._internal._Set).has(key)))))) {
         var vb:Dynamic = _Runtime.getIndex(bRec, key);
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(vb), 'number'))) { _Runtime.callProperty(numericKeys, 'add', cast ([key] : Array<Dynamic>)); } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(vb), 'boolean'))) { _Runtime.callProperty(booleanKeys, 'add', cast ([key] : Array<Dynamic>)); } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(vb), 'string'))) { _Runtime.callProperty(stringKeys, 'add', cast ([key] : Array<Dynamic>)); } } }
+        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(vb), 'number'))) { ((cast numericKeys : flighthq._internal._Set).add(key)); } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(vb), 'boolean'))) { ((cast booleanKeys : flighthq._internal._Set).add(key)); } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(vb), 'string'))) { ((cast stringKeys : flighthq._internal._Set).add(key)); } } }
       }
     }
     outRecord = (cast (cast out : Dynamic) : Dynamic);

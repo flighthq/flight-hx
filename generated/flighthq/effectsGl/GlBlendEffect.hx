@@ -51,22 +51,22 @@ class GlBlendEffect {
 
   public static function getGlBlendEffectBackdrop(state:GlRenderState, backdropKey:Null<String>):Null<Dynamic> {
     if (_Runtime.truthy(_Runtime.strictEquals(backdropKey, null))) { return cast null; }
-    return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callProperty(GlBlendEffect._backdrops__glBlendEffect, 'get', cast ([state] : Array<Dynamic>)), 'get', cast ([backdropKey] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection0:Dynamic = ((cast GlBlendEffect._backdrops__glBlendEffect : flighthq._internal._WeakMap).get(state)); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(backdropKey)); }), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function registerGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String, texture:Dynamic):Void {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
-    registry = _Runtime.callProperty(GlBlendEffect._backdrops__glBlendEffect, 'get', cast ([state] : Array<Dynamic>));
+    registry = ((cast GlBlendEffect._backdrops__glBlendEffect : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (registry = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
-      _Runtime.callProperty(GlBlendEffect._backdrops__glBlendEffect, 'set', cast ([state, registry] : Array<Dynamic>));
+      ((cast GlBlendEffect._backdrops__glBlendEffect : flighthq._internal._WeakMap).set(state, registry));
     }
-    _Runtime.callProperty(registry, 'set', cast ([backdropKey, texture] : Array<Dynamic>));
+    ((cast registry : flighthq._internal._Map).set(backdropKey, texture));
   }
 
   public static function unregisterGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String):Bool {
-    return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callProperty(GlBlendEffect._backdrops__glBlendEffect, 'get', cast ([state] : Array<Dynamic>)), 'delete', cast ([backdropKey] : Array<Dynamic>)), function():Dynamic return cast false);
+    return cast _Runtime.coalesce(({ final __collection1:Dynamic = ((cast GlBlendEffect._backdrops__glBlendEffect : flighthq._internal._WeakMap).get(state)); __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map).delete_(backdropKey)); }), function():Dynamic return cast false);
     return cast null;
   }
 

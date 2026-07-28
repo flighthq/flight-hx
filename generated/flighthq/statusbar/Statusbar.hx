@@ -78,7 +78,7 @@ class Statusbar {
       info = _Runtime.callProperty(backend, 'getInfo', cast ([Statusbar._scratchInfo__statusbar] : Array<Dynamic>));
       _Runtime.callValue(emitSignal, cast ([_Runtime.field(bar, 'onChange'), info] : Array<Dynamic>));
     }] : Array<Dynamic>));
-    _Runtime.callProperty(Statusbar._subscriptions__statusbar, 'set', cast ([bar, unsubscribe] : Array<Dynamic>));
+    ((cast Statusbar._subscriptions__statusbar : flighthq._internal._WeakMap).set(bar, unsubscribe));
   }
 
   public static function createStatusBar():StatusBar {
@@ -128,10 +128,10 @@ class Statusbar {
 
   public static function detachStatusBar(bar:StatusBar):Void {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
-    unsubscribe = _Runtime.callProperty(Statusbar._subscriptions__statusbar, 'get', cast ([bar] : Array<Dynamic>));
+    unsubscribe = ((cast Statusbar._subscriptions__statusbar : flighthq._internal._WeakMap).get(bar));
     if (_Runtime.truthy(!_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.callValue(unsubscribe, cast ([] : Array<Dynamic>));
-      _Runtime.callProperty(Statusbar._subscriptions__statusbar, 'delete', cast ([bar] : Array<Dynamic>));
+      ((cast Statusbar._subscriptions__statusbar : flighthq._internal._WeakMap).delete_(bar));
     }
   }
 

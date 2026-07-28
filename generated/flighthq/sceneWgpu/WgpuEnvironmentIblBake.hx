@@ -71,7 +71,7 @@ class WgpuEnvironmentIblBake {
     _Runtime.setField(scene, 'iblSampleCubeView', null);
     _Runtime.setField(scene, 'pbrSampleBindGroup', null);
     _Runtime.setField(scene, 'pbrSampleIblCubeView', null);
-    _Runtime.callProperty(WgpuEnvironmentIblBake._bakePrograms__wgpuEnvironmentIblBake, 'delete', cast ([state] : Array<Dynamic>));
+    ((cast WgpuEnvironmentIblBake._bakePrograms__wgpuEnvironmentIblBake : flighthq._internal._WeakMap).delete_(state));
   }
 
   public static function bakeWgpuIrradiance__wgpuEnvironmentIblBake(state:WgpuRenderState, programs:WgpuBakePrograms__wgpuEnvironmentIblBake, sourceBindGroup:Dynamic):WgpuBakedCube__wgpuEnvironmentIblBake {
@@ -171,7 +171,7 @@ class WgpuEnvironmentIblBake {
     var prefilteredModule:Dynamic = cast _Runtime.UNDEFINED;
     var brdfModule:Dynamic = cast _Runtime.UNDEFINED;
     var uniformBuffer:Dynamic = cast _Runtime.UNDEFINED;
-    programs = _Runtime.callProperty(WgpuEnvironmentIblBake._bakePrograms__wgpuEnvironmentIblBake, 'get', cast ([state] : Array<Dynamic>));
+    programs = ((cast WgpuEnvironmentIblBake._bakePrograms__wgpuEnvironmentIblBake : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(!_Runtime.strictEquals(programs, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast programs; }
     device = _Runtime.field(state, 'device');
     uniformBindGroupLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), buffer: { type: 'uniform' } }] : Array<Dynamic>) }] : Array<Dynamic>));
@@ -183,7 +183,7 @@ class WgpuEnvironmentIblBake {
     brdfModule = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: (WgpuEnvironmentIblBake.BAKE_VERTEX_WGSL__wgpuEnvironmentIblBake + WgpuEnvironmentIblBake.BRDF_LUT_FRAGMENT_WGSL__wgpuEnvironmentIblBake) }] : Array<Dynamic>));
     uniformBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: WgpuEnvironmentIblBake.BAKE_UNIFORM_BYTES__wgpuEnvironmentIblBake, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
     (programs = cast ({ brdfPipeline: flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: brdfLayout, vertex: { module: brdfModule, entryPoint: 'vs_main' }, fragment: { module: brdfModule, entryPoint: 'fs_main', targets: cast ([{ format: WgpuEnvironmentIblBake.IBL_BAKE_FORMAT__wgpuEnvironmentIblBake }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>)), irradiancePipeline: flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: cubeLayout, vertex: { module: irradianceModule, entryPoint: 'vs_main' }, fragment: { module: irradianceModule, entryPoint: 'fs_main', targets: cast ([{ format: WgpuEnvironmentIblBake.IBL_BAKE_FORMAT__wgpuEnvironmentIblBake }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>)), prefilteredPipeline: flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: cubeLayout, vertex: { module: prefilteredModule, entryPoint: 'vs_main' }, fragment: { module: prefilteredModule, entryPoint: 'fs_main', targets: cast ([{ format: WgpuEnvironmentIblBake.IBL_BAKE_FORMAT__wgpuEnvironmentIblBake }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>)), sampler: flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createSampler', cast ([{ magFilter: 'linear', minFilter: 'linear' }] : Array<Dynamic>)), sourceBindGroupLayout: sourceBindGroupLayout, uniformBindGroup: flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: uniformBindGroupLayout, entries: cast ([{ binding: 0.0, resource: { buffer: uniformBuffer } }] : Array<Dynamic>) }] : Array<Dynamic>)), uniformBuffer: uniformBuffer } : Dynamic));
-    _Runtime.callProperty(WgpuEnvironmentIblBake._bakePrograms__wgpuEnvironmentIblBake, 'set', cast ([state, programs] : Array<Dynamic>));
+    ((cast WgpuEnvironmentIblBake._bakePrograms__wgpuEnvironmentIblBake : flighthq._internal._WeakMap).set(state, programs));
     return cast programs;
     return cast null;
   }

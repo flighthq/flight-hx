@@ -27,9 +27,9 @@ class UniformGrid {
     }, removeSpatialObject: function(id:Dynamic) {
       _Runtime.callValue(UniformGrid._removeFromGrid__uniformGrid, cast ([grid, id] : Array<Dynamic>));
     }, clearSpatialIndex: function() {
-      _Runtime.callProperty(_Runtime.field(grid, 'cells'), 'clear', cast ([] : Array<Dynamic>));
-      _Runtime.callProperty(_Runtime.field(grid, 'bounds'), 'clear', cast ([] : Array<Dynamic>));
-      _Runtime.callProperty(_Runtime.field(grid, 'seen'), 'clear', cast ([] : Array<Dynamic>));
+      ((cast _Runtime.field(grid, 'cells') : flighthq._internal._Map).clear());
+      ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).clear());
+      ((cast _Runtime.field(grid, 'seen') : flighthq._internal._Set).clear());
       _Runtime.setField(grid, 'empty', true);
     }, querySpatialPairs: function(out:Dynamic) {
       _Runtime.callValue(UniformGrid._queryGridPairs__uniformGrid, cast ([grid, out] : Array<Dynamic>));
@@ -71,7 +71,7 @@ class UniformGrid {
     cx1 = _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([_Runtime.field(bounds, 'maxX'), cs] : Array<Dynamic>));
     cy0 = _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([_Runtime.field(bounds, 'minY'), cs] : Array<Dynamic>));
     cy1 = _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([_Runtime.field(bounds, 'maxY'), cs] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.field(grid, 'bounds'), 'set', cast ([id, { minX: _Runtime.field(bounds, 'minX'), minY: _Runtime.field(bounds, 'minY'), maxX: _Runtime.field(bounds, 'maxX'), maxY: _Runtime.field(bounds, 'maxY') }] : Array<Dynamic>));
+    ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).set(id, { minX: _Runtime.field(bounds, 'minX'), minY: _Runtime.field(bounds, 'minY'), maxX: _Runtime.field(bounds, 'maxX'), maxY: _Runtime.field(bounds, 'maxY') }));
     {
       var cy:Dynamic = cy0;
       while (_Runtime.truthy(_Runtime.compare(cy, cy1, '<='))) {
@@ -79,12 +79,12 @@ class UniformGrid {
           var cx:Dynamic = cx0;
           while (_Runtime.truthy(_Runtime.compare(cx, cx1, '<='))) {
             var key:Dynamic = _Runtime.callValue(UniformGrid._cellKey__uniformGrid, cast ([cx, cy] : Array<Dynamic>));
-            var cell:Dynamic = _Runtime.callProperty(_Runtime.field(grid, 'cells'), 'get', cast ([key] : Array<Dynamic>));
+            var cell:Dynamic = ((cast _Runtime.field(grid, 'cells') : flighthq._internal._Map).get(key));
             if (_Runtime.truthy(_Runtime.strictEquals(cell, _Runtime.field(_Runtime, 'UNDEFINED')))) {
               (cell = cast ({ cx: cx, cy: cy, ids: _Runtime.construct(_Runtime.globalValue('Set'), []) } : Dynamic));
-              _Runtime.callProperty(_Runtime.field(grid, 'cells'), 'set', cast ([key, cell] : Array<Dynamic>));
+              ((cast _Runtime.field(grid, 'cells') : flighthq._internal._Map).set(key, cell));
             }
-            _Runtime.callProperty(_Runtime.field(cell, 'ids'), 'add', cast ([id] : Array<Dynamic>));
+            ((cast _Runtime.field(cell, 'ids') : flighthq._internal._Set).add(id));
             cx++;
           }
         }
@@ -163,7 +163,7 @@ class UniformGrid {
     var cx1:Dynamic = cast _Runtime.UNDEFINED;
     var cy0:Dynamic = cast _Runtime.UNDEFINED;
     var cy1:Dynamic = cast _Runtime.UNDEFINED;
-    bounds = _Runtime.callProperty(_Runtime.field(grid, 'bounds'), 'get', cast ([id] : Array<Dynamic>));
+    bounds = ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).get(id));
     if (_Runtime.truthy(_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
     cs = _Runtime.field(grid, 'cellSize');
     cx0 = _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([_Runtime.field(bounds, 'minX'), cs] : Array<Dynamic>));
@@ -177,27 +177,27 @@ class UniformGrid {
           var cx:Dynamic = cx0;
           while (_Runtime.truthy(_Runtime.compare(cx, cx1, '<='))) {
             var key:Dynamic = _Runtime.callValue(UniformGrid._cellKey__uniformGrid, cast ([cx, cy] : Array<Dynamic>));
-            var cell:Dynamic = _Runtime.callProperty(_Runtime.field(grid, 'cells'), 'get', cast ([key] : Array<Dynamic>));
+            var cell:Dynamic = ((cast _Runtime.field(grid, 'cells') : flighthq._internal._Map).get(key));
             if (_Runtime.truthy(_Runtime.strictEquals(cell, _Runtime.field(_Runtime, 'UNDEFINED')))) { cx++; continue; }
-            _Runtime.callProperty(_Runtime.field(cell, 'ids'), 'delete', cast ([id] : Array<Dynamic>));
-            if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(cell, 'ids'), 'size'), 0.0))) { _Runtime.callProperty(_Runtime.field(grid, 'cells'), 'delete', cast ([key] : Array<Dynamic>)); }
+            ((cast _Runtime.field(cell, 'ids') : flighthq._internal._Set).delete_(id));
+            if (_Runtime.truthy(_Runtime.strictEquals((cast _Runtime.field(cell, 'ids') : flighthq._internal._Set).size, 0.0))) { ((cast _Runtime.field(grid, 'cells') : flighthq._internal._Map).delete_(key)); }
             cx++;
           }
         }
         cy++;
       }
     }
-    _Runtime.callProperty(_Runtime.field(grid, 'bounds'), 'delete', cast ([id] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(grid, 'bounds'), 'size'), 0.0))) { _Runtime.setField(grid, 'empty', true); }
+    ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).delete_(id));
+    if (_Runtime.truthy(_Runtime.strictEquals((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).size, 0.0))) { _Runtime.setField(grid, 'empty', true); }
   }
 
   public static function _queryGridPairs__uniformGrid(grid:UniformGrid__uniformGrid, out:Array<SpatialPair>):Void {
     var cs:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.setLength(out, 0.0);
     cs = _Runtime.field(grid, 'cellSize');
-    for (cell in _Runtime.iterable(_Runtime.callProperty(_Runtime.field(grid, 'cells'), 'values', cast ([] : Array<Dynamic>)))) {
+    for (cell in _Runtime.iterable(((cast _Runtime.field(grid, 'cells') : flighthq._internal._Map).values()))) {
       var ids:Dynamic = _Runtime.field(cell, 'ids');
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(ids, 'size'), 2.0, '<'))) { continue; }
+      if (_Runtime.truthy(_Runtime.compare((cast ids : flighthq._internal._Set).size, 2.0, '<'))) { continue; }
       var list:Dynamic = _Runtime.concatArrays([_Runtime.toArray(ids)]);
       {
         var i:Dynamic = 0.0;
@@ -212,8 +212,8 @@ class UniformGrid {
                 (a = cast (b : Dynamic));
                 (b = cast (t : Dynamic));
               }
-              var ab:Dynamic = _Runtime.callProperty(_Runtime.field(grid, 'bounds'), 'get', cast ([a] : Array<Dynamic>));
-              var bb:Dynamic = _Runtime.callProperty(_Runtime.field(grid, 'bounds'), 'get', cast ([b] : Array<Dynamic>));
+              var ab:Dynamic = ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).get(a));
+              var bb:Dynamic = ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).get(b));
               if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(ab, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(bb, _Runtime.field(_Runtime, 'UNDEFINED'))))) { j++; continue; }
               var canonicalX:Dynamic = HxMath.max(_Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([_Runtime.field(ab, 'minX'), cs] : Array<Dynamic>)), _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([_Runtime.field(bb, 'minX'), cs] : Array<Dynamic>)));
               var canonicalY:Dynamic = HxMath.max(_Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([_Runtime.field(ab, 'minY'), cs] : Array<Dynamic>)), _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([_Runtime.field(bb, 'minY'), cs] : Array<Dynamic>)));
@@ -232,10 +232,10 @@ class UniformGrid {
     var cell:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.setLength(out, 0.0);
     cs = _Runtime.field(grid, 'cellSize');
-    cell = _Runtime.callProperty(_Runtime.field(grid, 'cells'), 'get', cast ([_Runtime.callValue(UniformGrid._cellKey__uniformGrid, cast ([_Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([x, cs] : Array<Dynamic>)), _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([y, cs] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
+    cell = ((cast _Runtime.field(grid, 'cells') : flighthq._internal._Map).get(_Runtime.callValue(UniformGrid._cellKey__uniformGrid, cast ([_Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([x, cs] : Array<Dynamic>)), _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([y, cs] : Array<Dynamic>))] : Array<Dynamic>))));
     if (_Runtime.truthy(_Runtime.strictEquals(cell, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
     for (id in _Runtime.iterable(_Runtime.field(cell, 'ids'))) {
-      var bounds:Dynamic = _Runtime.callProperty(_Runtime.field(grid, 'bounds'), 'get', cast ([id] : Array<Dynamic>));
+      var bounds:Dynamic = ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).get(id));
       if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callValue(UniformGrid._isSpatialAabbContainsPoint__uniformGrid, cast ([bounds, x, y] : Array<Dynamic>))))) { _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>)); }
     }
   }
@@ -263,7 +263,7 @@ class UniformGrid {
     if (_Runtime.truthy(_Runtime.field(grid, 'empty'))) { return; }
     cs = _Runtime.field(grid, 'cellSize');
     seen = _Runtime.field(grid, 'seen');
-    _Runtime.callProperty(seen, 'clear', cast ([] : Array<Dynamic>));
+    ((cast seen : flighthq._internal._Set).clear());
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(dx, 0.0), function():Dynamic return cast _Runtime.strictEquals(dy, 0.0)))) {
       _Runtime.callValue(UniformGrid._queryGridPoint__uniformGrid, cast ([grid, ox, oy, out] : Array<Dynamic>));
       return;
@@ -301,10 +301,10 @@ class UniformGrid {
       var step:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(step, maxSteps, '<='))) {
         if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(cx, _Runtime.field(grid, 'minCellX'), '<'), function():Dynamic return cast _Runtime.compare(cx, _Runtime.field(grid, 'maxCellX'), '>')), function():Dynamic return cast _Runtime.compare(cy, _Runtime.field(grid, 'minCellY'), '<')), function():Dynamic return cast _Runtime.compare(cy, _Runtime.field(grid, 'maxCellY'), '>')))) { break; }
-        var cell:Dynamic = _Runtime.callProperty(_Runtime.field(grid, 'cells'), 'get', cast ([_Runtime.callValue(UniformGrid._cellKey__uniformGrid, cast ([cx, cy] : Array<Dynamic>))] : Array<Dynamic>));
+        var cell:Dynamic = ((cast _Runtime.field(grid, 'cells') : flighthq._internal._Map).get(_Runtime.callValue(UniformGrid._cellKey__uniformGrid, cast ([cx, cy] : Array<Dynamic>))));
         if (_Runtime.truthy(!_Runtime.strictEquals(cell, _Runtime.field(_Runtime, 'UNDEFINED')))) {
           for (id in _Runtime.iterable(_Runtime.field(cell, 'ids'))) {
-            _Runtime.callProperty(seen, 'add', cast ([id] : Array<Dynamic>));
+            ((cast seen : flighthq._internal._Set).add(id));
           }
         }
         if (_Runtime.truthy(_Runtime.compare(tMaxX, tMaxY, '<'))) {
@@ -318,7 +318,7 @@ class UniformGrid {
       }
     }
     for (id in _Runtime.iterable(seen)) {
-      var bounds:Dynamic = _Runtime.callProperty(_Runtime.field(grid, 'bounds'), 'get', cast ([id] : Array<Dynamic>));
+      var bounds:Dynamic = ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).get(id));
       if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(UniformGrid._rayBoxEntryT__uniformGrid, cast ([ox, oy, dx, dy, _Runtime.field(bounds, 'minX'), _Runtime.field(bounds, 'minY'), _Runtime.field(bounds, 'maxX'), _Runtime.field(bounds, 'maxY')] : Array<Dynamic>)), 0.0, '>=')))) {
         _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>));
       }
@@ -335,7 +335,7 @@ class UniformGrid {
     _Runtime.setLength(out, 0.0);
     cs = _Runtime.field(grid, 'cellSize');
     seen = _Runtime.field(grid, 'seen');
-    _Runtime.callProperty(seen, 'clear', cast ([] : Array<Dynamic>));
+    ((cast seen : flighthq._internal._Set).clear());
     cx0 = _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([_Runtime.field(region, 'minX'), cs] : Array<Dynamic>));
     cx1 = _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([_Runtime.field(region, 'maxX'), cs] : Array<Dynamic>));
     cy0 = _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([_Runtime.field(region, 'minY'), cs] : Array<Dynamic>));
@@ -346,12 +346,12 @@ class UniformGrid {
         {
           var cx:Dynamic = cx0;
           while (_Runtime.truthy(_Runtime.compare(cx, cx1, '<='))) {
-            var cell:Dynamic = _Runtime.callProperty(_Runtime.field(grid, 'cells'), 'get', cast ([_Runtime.callValue(UniformGrid._cellKey__uniformGrid, cast ([cx, cy] : Array<Dynamic>))] : Array<Dynamic>));
+            var cell:Dynamic = ((cast _Runtime.field(grid, 'cells') : flighthq._internal._Map).get(_Runtime.callValue(UniformGrid._cellKey__uniformGrid, cast ([cx, cy] : Array<Dynamic>))));
             if (_Runtime.truthy(_Runtime.strictEquals(cell, _Runtime.field(_Runtime, 'UNDEFINED')))) { cx++; continue; }
             for (id in _Runtime.iterable(_Runtime.field(cell, 'ids'))) {
-              if (_Runtime.truthy(_Runtime.callProperty(seen, 'has', cast ([id] : Array<Dynamic>)))) { continue; }
-              _Runtime.callProperty(seen, 'add', cast ([id] : Array<Dynamic>));
-              var bounds:Dynamic = _Runtime.callProperty(_Runtime.field(grid, 'bounds'), 'get', cast ([id] : Array<Dynamic>));
+              if (_Runtime.truthy(((cast seen : flighthq._internal._Set).has(id)))) { continue; }
+              ((cast seen : flighthq._internal._Set).add(id));
+              var bounds:Dynamic = ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).get(id));
               if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callValue(UniformGrid._isSpatialAabbOverlapping__uniformGrid, cast ([bounds, region] : Array<Dynamic>))))) { _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>)); }
             }
             cx++;

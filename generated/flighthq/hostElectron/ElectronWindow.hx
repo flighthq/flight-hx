@@ -15,8 +15,8 @@ class ElectronWindow {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
       var onUnmaximize:Dynamic = cast _Runtime.UNDEFINED;
       bw = _Runtime.construct(_Runtime.field(electron, 'BrowserWindow'), [{ title: _Runtime.field(options, 'title'), x: _Runtime.field(options, 'x'), y: _Runtime.field(options, 'y'), width: _Runtime.field(options, 'width'), height: _Runtime.field(options, 'height'), resizable: _Runtime.field(options, 'resizable'), alwaysOnTop: _Runtime.field(options, 'alwaysOnTop'), fullscreen: _Runtime.field(options, 'fullscreen'), show: _Runtime.field(options, 'visible'), minWidth: _Runtime.field(options, 'minWidth'), minHeight: _Runtime.field(options, 'minHeight'), maxWidth: _Runtime.field(options, 'maxWidth'), maxHeight: _Runtime.field(options, 'maxHeight'), frame: _Runtime.field(options, 'frame'), transparent: _Runtime.field(options, 'transparent') }]);
-      _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'set', cast ([win, bw] : Array<Dynamic>));
-      _Runtime.callProperty(ElectronWindow._windowsById__electronWindow, 'set', cast ([_Runtime.field(bw, 'id'), win] : Array<Dynamic>));
+      ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).set(win, bw));
+      ((cast ElectronWindow._windowsById__electronWindow : flighthq._internal._Map).set(_Runtime.field(bw, 'id'), win));
       _Runtime.callProperty(bw, 'on', cast (['move', function() {
         var bounds:Dynamic = cast _Runtime.UNDEFINED;
         bounds = _Runtime.callProperty(bw, 'getBounds', cast ([] : Array<Dynamic>));
@@ -66,17 +66,17 @@ class ElectronWindow {
       return cast true;
     }, close: function(win:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       try {
         _Runtime.callProperty(bw, 'close', cast ([] : Array<Dynamic>));
       } catch (__error:Dynamic) {
       }
-      _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'delete', cast ([win] : Array<Dynamic>));
-      _Runtime.callProperty(ElectronWindow._windowsById__electronWindow, 'delete', cast ([_Runtime.field(bw, 'id')] : Array<Dynamic>));
+      ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).delete_(win));
+      ((cast ElectronWindow._windowsById__electronWindow : flighthq._internal._Map).delete_(_Runtime.field(bw, 'id')));
     }, setTitle: function(win:Dynamic, title:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       try {
         _Runtime.callProperty(bw, 'setTitle', cast ([title] : Array<Dynamic>));
@@ -84,7 +84,7 @@ class ElectronWindow {
       }
     }, setPosition: function(win:Dynamic, x:Dynamic, y:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       try {
         _Runtime.callProperty(bw, 'setPosition', cast ([x, y] : Array<Dynamic>));
@@ -92,7 +92,7 @@ class ElectronWindow {
       }
     }, setSize: function(win:Dynamic, width:Dynamic, height:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       try {
         _Runtime.callProperty(bw, 'setSize', cast ([width, height] : Array<Dynamic>));
@@ -100,7 +100,7 @@ class ElectronWindow {
       }
     }, getBounds: function(win:Dynamic, out:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) {
         _Runtime.setField(out, 'x', _Runtime.field(win, 'x'));
         _Runtime.setField(out, 'y', _Runtime.field(win, 'y'));
@@ -123,7 +123,7 @@ class ElectronWindow {
       return cast out;
     }, minimize: function(win:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       try {
         _Runtime.callProperty(bw, 'minimize', cast ([] : Array<Dynamic>));
@@ -131,7 +131,7 @@ class ElectronWindow {
       }
     }, maximize: function(win:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       try {
         _Runtime.callProperty(bw, 'maximize', cast ([] : Array<Dynamic>));
@@ -139,7 +139,7 @@ class ElectronWindow {
       }
     }, restore: function(win:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       try {
         if (_Runtime.truthy(_Runtime.callProperty(bw, 'isMinimized', cast ([] : Array<Dynamic>)))) { _Runtime.callProperty(bw, 'restore', cast ([] : Array<Dynamic>)); } else { _Runtime.callProperty(bw, 'unmaximize', cast ([] : Array<Dynamic>)); }
@@ -147,7 +147,7 @@ class ElectronWindow {
       }
     }, focus: function(win:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       try {
         _Runtime.callProperty(bw, 'focus', cast ([] : Array<Dynamic>));
@@ -155,7 +155,7 @@ class ElectronWindow {
       }
     }, show: function(win:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       try {
         _Runtime.callProperty(bw, 'show', cast ([] : Array<Dynamic>));
@@ -163,7 +163,7 @@ class ElectronWindow {
       }
     }, hide: function(win:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       try {
         _Runtime.callProperty(bw, 'hide', cast ([] : Array<Dynamic>));
@@ -171,7 +171,7 @@ class ElectronWindow {
       }
     }, center: function(win:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       try {
         _Runtime.callProperty(bw, 'center', cast ([] : Array<Dynamic>));
@@ -179,7 +179,7 @@ class ElectronWindow {
       }
     }, setResizable: function(win:Dynamic, resizable:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       try {
         _Runtime.callProperty(bw, 'setResizable', cast ([resizable] : Array<Dynamic>));
@@ -187,7 +187,7 @@ class ElectronWindow {
       }
     }, setAlwaysOnTop: function(win:Dynamic, alwaysOnTop:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       try {
         _Runtime.callProperty(bw, 'setAlwaysOnTop', cast ([alwaysOnTop] : Array<Dynamic>));
@@ -195,7 +195,7 @@ class ElectronWindow {
       }
     }, setMinimumSize: function(win:Dynamic, width:Dynamic, height:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       try {
         _Runtime.callProperty(bw, 'setMinimumSize', cast ([width, height] : Array<Dynamic>));
@@ -203,7 +203,7 @@ class ElectronWindow {
       }
     }, setMaximumSize: function(win:Dynamic, width:Dynamic, height:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       try {
         _Runtime.callProperty(bw, 'setMaximumSize', cast ([width, height] : Array<Dynamic>));
@@ -211,7 +211,7 @@ class ElectronWindow {
       }
     }, setFullscreen: function(win:Dynamic, fullscreen:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       try {
         _Runtime.callProperty(bw, 'setFullScreen', cast ([fullscreen] : Array<Dynamic>));
@@ -219,7 +219,7 @@ class ElectronWindow {
       }
     }, setIcon: function(win:Dynamic, icon:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       try {
         _Runtime.callProperty(bw, 'setIcon', cast ([icon] : Array<Dynamic>));
@@ -227,7 +227,7 @@ class ElectronWindow {
       }
     }, setOpacity: function(win:Dynamic, opacity:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       try {
         _Runtime.callProperty(bw, 'setOpacity', cast ([opacity] : Array<Dynamic>));
@@ -235,7 +235,7 @@ class ElectronWindow {
       }
     }, setSkipTaskbar: function(win:Dynamic, skip:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       try {
         _Runtime.callProperty(bw, 'setSkipTaskbar', cast ([skip] : Array<Dynamic>));
@@ -243,7 +243,7 @@ class ElectronWindow {
       }
     }, setMenuBarVisible: function(win:Dynamic, visible:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       try {
         _Runtime.callProperty(bw, 'setMenuBarVisibility', cast ([visible] : Array<Dynamic>));
@@ -252,16 +252,16 @@ class ElectronWindow {
     }, setParent: function(win:Dynamic, parent:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
       var parentBw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
-      parentBw = _Runtime.select(_Runtime.strictEquals(parent, null), function():Dynamic return cast null, function():Dynamic return cast _Runtime.coalesce(_Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([parent] : Array<Dynamic>)), function():Dynamic return cast null));
+      parentBw = _Runtime.select(_Runtime.strictEquals(parent, null), function():Dynamic return cast null, function():Dynamic return cast _Runtime.coalesce(((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(parent)), function():Dynamic return cast null));
       try {
         _Runtime.callProperty(bw, 'setParentWindow', cast ([parentBw] : Array<Dynamic>));
       } catch (__error:Dynamic) {
       }
     }, setProgress: function(win:Dynamic, progress:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       try {
         _Runtime.callProperty(bw, 'setProgressBar', cast ([progress] : Array<Dynamic>));
@@ -269,7 +269,7 @@ class ElectronWindow {
       }
     }, requestAttention: function(win:Dynamic, attention:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       try {
         _Runtime.callProperty(bw, 'flashFrame', cast ([attention] : Array<Dynamic>));
@@ -277,7 +277,7 @@ class ElectronWindow {
       }
     }, setContentProtection: function(win:Dynamic, enabled:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       try {
         _Runtime.callProperty(bw, 'setContentProtection', cast ([enabled] : Array<Dynamic>));
@@ -285,7 +285,7 @@ class ElectronWindow {
       }
     }, flashWindowFrame: function(win:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       try {
         _Runtime.callProperty(bw, 'flashFrame', cast ([true] : Array<Dynamic>));
@@ -293,7 +293,7 @@ class ElectronWindow {
       }
     }, setHasShadow: function(win:Dynamic, hasShadow:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([win] : Array<Dynamic>));
+      bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       try {
         _Runtime.callProperty(bw, 'setHasShadow', cast ([hasShadow] : Array<Dynamic>));
@@ -304,17 +304,17 @@ class ElectronWindow {
   }
 
   public static function getApplicationWindowForElectronId(id:Float):Null<ApplicationWindow> {
-    return cast _Runtime.coalesce(_Runtime.callProperty(ElectronWindow._windowsById__electronWindow, 'get', cast ([id] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast ElectronWindow._windowsById__electronWindow : flighthq._internal._Map).get(id)), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getElectronBrowserWindow(win:ApplicationWindow):Null<ElectronBrowserWindow> {
-    return cast _Runtime.coalesce(_Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([(cast win : ApplicationWindow)] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get((cast win : ApplicationWindow))), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getElectronWindowId(win:ApplicationWindow):Float {
-    return cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.callProperty(ElectronWindow._windows__electronWindow, 'get', cast ([(cast win : ApplicationWindow)] : Array<Dynamic>)), 'id'), function():Dynamic return cast -1.0);
+    return cast _Runtime.coalesce(_Runtime.optionalField(((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get((cast win : ApplicationWindow))), 'id'), function():Dynamic return cast -1.0);
     return cast null;
   }
 

@@ -35,7 +35,7 @@ class RenderProxy {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var renderer:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    renderer = _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(runtime, 'rendererMap'), 'get', cast ([_Runtime.field(source, 'kind')] : Array<Dynamic>)), function():Dynamic return cast null);
+    renderer = _Runtime.coalesce(((cast _Runtime.field(runtime, 'rendererMap') : flighthq._internal._Map).get(_Runtime.field(source, 'kind'))), function():Dynamic return cast null);
     return cast _Runtime.callValue(createEntity, cast ([{ source: source, kind: _Runtime.field(source, 'kind'), next: null, alpha: 1.0, appearanceFrameId: -1.0, blendMode: BlendModeValue.Normal, colorTransform: null, material: null, materialData: null, lastAppearanceId: -1.0, lastLocalContentId: -1.0, lastLocalTransformId: -1.0, name: null, renderer: renderer, rendererData: _Runtime.coalesce(_Runtime.callOptionalProperty(renderer, 'createData', cast ([state, source] : Array<Dynamic>)), function():Dynamic return cast null), rendererDataSource: source, rendererMapId: _Runtime.field(runtime, 'rendererMapId'), transformFrameId: -1.0, visible: true }] : Array<Dynamic>));
     return cast null;
   }
@@ -58,10 +58,10 @@ class RenderProxy {
     var renderProxyMap:Dynamic = cast _Runtime.UNDEFINED;
     var node:Dynamic = cast _Runtime.UNDEFINED;
     renderProxyMap = _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderProxyMap');
-    node = _Runtime.callProperty(renderProxyMap, 'get', cast ([source] : Array<Dynamic>));
+    node = ((cast renderProxyMap : flighthq._internal._WeakMap).get(source));
     if (_Runtime.truthy(_Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(node, 'rendererData'), null))) { _Runtime.callOptionalProperty(_Runtime.field(node, 'renderer'), 'destroyData', cast ([state, _Runtime.field(node, 'rendererData')] : Array<Dynamic>)); }
-    _Runtime.callProperty(renderProxyMap, 'delete', cast ([source] : Array<Dynamic>));
+    ((cast renderProxyMap : flighthq._internal._WeakMap).delete_(source));
   }
 
   public static function getOrCreateRenderProxy2D(state:RenderState, source:Renderable):RenderProxy2D {
@@ -70,10 +70,10 @@ class RenderProxy {
     var node:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
     renderProxyMap = _Runtime.field(runtime, 'renderProxyMap');
-    node = (cast _Runtime.callProperty(renderProxyMap, 'get', cast ([source] : Array<Dynamic>)) : Null<RenderProxy2D>);
+    node = (cast ((cast renderProxyMap : flighthq._internal._WeakMap).get(source)) : Null<RenderProxy2D>);
     if (_Runtime.truthy(!_Runtime.truthy(node))) {
       (node = cast (_Runtime.callValue(createRenderProxy2D, cast ([state, (cast source : Dynamic)] : Array<Dynamic>)) : Dynamic));
-      _Runtime.callProperty(renderProxyMap, 'set', cast ([source, node] : Array<Dynamic>));
+      ((cast renderProxyMap : flighthq._internal._WeakMap).set(source, node));
     }
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(node, 'rendererMapId'), _Runtime.field(runtime, 'rendererMapId')))) {
       _Runtime.callValue(updateRenderProxyRenderer, cast ([state, node] : Array<Dynamic>));
@@ -83,7 +83,7 @@ class RenderProxy {
   }
 
   public static function getRenderProxy2D(state:RenderState, source:Renderable):Null<RenderProxy2D> {
-    return cast (cast _Runtime.callProperty(_Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderProxyMap'), 'get', cast ([source] : Array<Dynamic>)) : Null<RenderProxy2D>);
+    return cast (cast ((cast _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderProxyMap') : flighthq._internal._WeakMap).get(source)) : Null<RenderProxy2D>);
     return cast null;
   }
 
@@ -132,7 +132,7 @@ class RenderProxy {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var renderer:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    renderer = _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(runtime, 'rendererMap'), 'get', cast ([_Runtime.field(node, 'kind')] : Array<Dynamic>)), function():Dynamic return cast null);
+    renderer = _Runtime.coalesce(((cast _Runtime.field(runtime, 'rendererMap') : flighthq._internal._Map).get(_Runtime.field(node, 'kind'))), function():Dynamic return cast null);
     if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(node, 'renderer'), renderer), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(node, 'rendererDataSource'), _Runtime.field(node, 'source'))))) {
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(node, 'rendererData'), null))) { _Runtime.callOptionalProperty(_Runtime.field(node, 'renderer'), 'destroyData', cast ([state, _Runtime.field(node, 'rendererData')] : Array<Dynamic>)); }
       _Runtime.setField(node, 'renderer', renderer);

@@ -77,7 +77,7 @@ class GlClipContours {
   public static final clipPrograms__glClipContours:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function clipProgramFor__glClipContours(state:GlRenderState):ClipProgram__glClipContours {
-    return cast _Runtime.callProperty(GlClipContours.clipPrograms__glClipContours, 'get', cast ([_Runtime.field(state, 'gl')] : Array<Dynamic>));
+    return cast ((cast GlClipContours.clipPrograms__glClipContours : flighthq._internal._WeakMap).get(_Runtime.field(state, 'gl')));
     return cast null;
   }
 
@@ -85,9 +85,9 @@ class GlClipContours {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
-    if (_Runtime.truthy(_Runtime.callProperty(GlClipContours.clipPrograms__glClipContours, 'has', cast ([gl] : Array<Dynamic>)))) { return; }
+    if (_Runtime.truthy(((cast GlClipContours.clipPrograms__glClipContours : flighthq._internal._WeakMap).has(gl)))) { return; }
     program = _Runtime.callValue(GlClipContours.compileProgram__glClipContours, cast ([gl, GlClipContours.VERTEX_SOURCE__glClipContours, GlClipContours.FRAGMENT_SOURCE__glClipContours] : Array<Dynamic>));
-    _Runtime.callProperty(GlClipContours.clipPrograms__glClipContours, 'set', cast ([gl, { program: program, buffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), positionLocation: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_position'), worldMatrixLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_worldMatrix'), projectionLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_projection') }] : Array<Dynamic>));
+    ((cast GlClipContours.clipPrograms__glClipContours : flighthq._internal._WeakMap).set(gl, { program: program, buffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), positionLocation: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_position'), worldMatrixLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_worldMatrix'), projectionLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_projection') }));
   }
 
   public static function compileProgram__glClipContours(gl:Dynamic, vertex:String, fragment:String):Dynamic {

@@ -85,8 +85,8 @@ class StarlingParse {
       var base:Dynamic = _Runtime.getIndex(__destructure0, 1.0);
       var numStr:Dynamic = _Runtime.getIndex(__destructure0, 2.0);
       var index:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([numStr, 10.0] : Array<Dynamic>));
-      var bucket:Dynamic = _Runtime.callProperty(groups, 'get', cast ([base] : Array<Dynamic>));
-      if (_Runtime.truthy(bucket)) { _Runtime.callProperty(bucket, 'push', cast ([{ index: index, name: name }] : Array<Dynamic>)); } else { _Runtime.callProperty(groups, 'set', cast ([base, cast ([{ index: index, name: name }] : Array<Dynamic>)] : Array<Dynamic>)); }
+      var bucket:Dynamic = ((cast groups : flighthq._internal._Map).get(base));
+      if (_Runtime.truthy(bucket)) { _Runtime.callProperty(bucket, 'push', cast ([{ index: index, name: name }] : Array<Dynamic>)); } else { ((cast groups : flighthq._internal._Map).set(base, cast ([{ index: index, name: name }] : Array<Dynamic>))); }
     }
     animations = cast ([] : Array<Dynamic>);
     for (__iteration1 in _Runtime.iterable(groups)) {

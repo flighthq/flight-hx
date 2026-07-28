@@ -31,7 +31,7 @@ class WgpuDraw {
     var built:Dynamic = cast _Runtime.UNDEFINED;
     var entry:WgpuImageResourceTextureEntry = cast _Runtime.UNDEFINED;
     cache = _Runtime.field(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'imageResourceTextureCache');
-    cached = _Runtime.callProperty(cache, 'get', cast ([image] : Array<Dynamic>));
+    cached = ((cast cache : flighthq._internal._WeakMap).get(image));
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(cached, 'version'), _Runtime.field(image, 'version'))))) { return cast cached; }
     built = _Runtime.callValue(WgpuDraw.uploadWgpuImageResourceEntry__wgpuDraw, cast ([state, image, generateMips] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -43,7 +43,7 @@ class WgpuDraw {
       return cast cached;
     }
     entry = _Runtime.mergeObjects([built, { version: _Runtime.field(image, 'version') }]);
-    _Runtime.callProperty(cache, 'set', cast ([image, entry] : Array<Dynamic>));
+    ((cast cache : flighthq._internal._WeakMap).set(image, entry));
     return cast entry;
     return cast null;
   }
@@ -64,7 +64,7 @@ class WgpuDraw {
     var bindGroup:Dynamic = cast _Runtime.UNDEFINED;
     var entry:WgpuTextureEntry = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    cached = _Runtime.callProperty(_Runtime.field(runtime, 'textureCache'), 'get', cast ([imageSource] : Array<Dynamic>));
+    cached = ((cast _Runtime.field(runtime, 'textureCache') : flighthq._internal._WeakMap).get(imageSource));
     if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast cached; }
     __destructure0 = state;
     device = _Runtime.field(__destructure0, 'device');
@@ -96,7 +96,7 @@ class WgpuDraw {
     sampler = _Runtime.select(_Runtime.field(state, 'allowSmoothing'), function():Dynamic return cast _Runtime.field(runtime, 'linearSampler'), function():Dynamic return cast _Runtime.field(runtime, 'nearestSampler'));
     bindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: textureBindGroupLayout, entries: cast ([{ binding: 0.0, resource: view }, { binding: 1.0, resource: sampler }] : Array<Dynamic>) }] : Array<Dynamic>));
     entry = { texture: texture, view: view, bindGroup: bindGroup };
-    _Runtime.callProperty(_Runtime.field(runtime, 'textureCache'), 'set', cast ([imageSource, entry] : Array<Dynamic>));
+    ((cast _Runtime.field(runtime, 'textureCache') : flighthq._internal._WeakMap).set(imageSource, entry));
     return cast entry;
     return cast null;
   }

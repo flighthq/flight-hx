@@ -23,7 +23,7 @@ class GlyphAtlasEntry {
     var placement:Dynamic = cast _Runtime.UNDEFINED;
     var entry:GlyphEntry = cast _Runtime.UNDEFINED;
     runtime = _Runtime.field(atlas, 'runtime');
-    existing = _Runtime.callProperty(_Runtime.field(runtime, 'entries'), 'get', cast ([codepoint] : Array<Dynamic>));
+    existing = ((cast _Runtime.field(runtime, 'entries') : flighthq._internal._Map).get(codepoint));
     if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.callValue(GlyphAtlasEntry._touchGlyphLru__glyphAtlasEntry, cast ([runtime, codepoint] : Array<Dynamic>));
       return cast existing;
@@ -35,7 +35,7 @@ class GlyphAtlasEntry {
     usableHeight = (_Runtime.field(_Runtime.field(runtime, 'surface'), 'height') - (2.0 * padding));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(bitmap, 'width'), usableWidth, '>'), function():Dynamic return cast _Runtime.compare(_Runtime.field(bitmap, 'height'), usableHeight, '>')))) { return cast null; }
     needsRepack = false;
-    while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(_Runtime.field(runtime, 'maxGlyphs'), 0.0, '>'), function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.field(runtime, 'entries'), 'size'), _Runtime.field(runtime, 'maxGlyphs'), '>=')))) {
+    while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(_Runtime.field(runtime, 'maxGlyphs'), 0.0, '>'), function():Dynamic return cast _Runtime.compare((cast _Runtime.field(runtime, 'entries') : flighthq._internal._Map).size, _Runtime.field(runtime, 'maxGlyphs'), '>=')))) {
       if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(GlyphAtlasEntry._evictLeastRecentlyUsedGlyph__glyphAtlasEntry, cast ([runtime] : Array<Dynamic>))))) { break; }
       (needsRepack = cast (true : Dynamic));
     }
@@ -45,14 +45,14 @@ class GlyphAtlasEntry {
       (placement = cast (_Runtime.callValue(GlyphAtlasEntry._placeGlyphOnShelf__glyphAtlasEntry, cast ([runtime, _Runtime.field(bitmap, 'width'), _Runtime.field(bitmap, 'height')] : Array<Dynamic>)) : Dynamic));
     }
     while (_Runtime.truthy(_Runtime.strictEquals(placement, null))) {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(runtime, 'entries'), 'size'), 0.0))) { return cast null; }
+      if (_Runtime.truthy(_Runtime.strictEquals((cast _Runtime.field(runtime, 'entries') : flighthq._internal._Map).size, 0.0))) { return cast null; }
       _Runtime.callValue(GlyphAtlasEntry._evictLeastRecentlyUsedGlyph__glyphAtlasEntry, cast ([runtime] : Array<Dynamic>));
       _Runtime.callValue(GlyphAtlasEntry._repackGlyphAtlas__glyphAtlasEntry, cast ([runtime] : Array<Dynamic>));
       (placement = cast (_Runtime.callValue(GlyphAtlasEntry._placeGlyphOnShelf__glyphAtlasEntry, cast ([runtime, _Runtime.field(bitmap, 'width'), _Runtime.field(bitmap, 'height')] : Array<Dynamic>)) : Dynamic));
     }
     entry = { advance: _Runtime.field(bitmap, 'advance'), bearingX: _Runtime.field(bitmap, 'bearingX'), bearingY: _Runtime.field(bitmap, 'bearingY'), height: _Runtime.field(bitmap, 'height'), page: 0.0, width: _Runtime.field(bitmap, 'width'), x: _Runtime.field(placement, 'x'), y: _Runtime.field(placement, 'y') };
-    _Runtime.callProperty(_Runtime.field(runtime, 'entries'), 'set', cast ([codepoint, entry] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.field(runtime, 'bitmaps'), 'set', cast ([codepoint, bitmap] : Array<Dynamic>));
+    ((cast _Runtime.field(runtime, 'entries') : flighthq._internal._Map).set(codepoint, entry));
+    ((cast _Runtime.field(runtime, 'bitmaps') : flighthq._internal._Map).set(codepoint, bitmap));
     _Runtime.callProperty(_Runtime.field(runtime, 'lru'), 'push', cast ([codepoint] : Array<Dynamic>));
     _Runtime.callValue(GlyphAtlasEntry._blitGlyphIntoAtlasSurface__glyphAtlasEntry, cast ([runtime, entry, bitmap] : Array<Dynamic>));
     return cast entry;
@@ -70,8 +70,8 @@ class GlyphAtlasEntry {
     var codepoint:Dynamic = cast _Runtime.UNDEFINED;
     codepoint = _Runtime.callProperty(_Runtime.field(runtime, 'lru'), 'shift', cast ([] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(codepoint, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast false; }
-    _Runtime.callProperty(_Runtime.field(runtime, 'entries'), 'delete', cast ([codepoint] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.field(runtime, 'bitmaps'), 'delete', cast ([codepoint] : Array<Dynamic>));
+    ((cast _Runtime.field(runtime, 'entries') : flighthq._internal._Map).delete_(codepoint));
+    ((cast _Runtime.field(runtime, 'bitmaps') : flighthq._internal._Map).delete_(codepoint));
     return cast true;
     return cast null;
   }
@@ -135,18 +135,18 @@ class GlyphAtlasEntry {
     _Runtime.setLength(_Runtime.field(runtime, 'shelves'), 0.0);
     _Runtime.setField(runtime, 'packBottom', _Runtime.field(runtime, 'padding'));
     _Runtime.fill(_Runtime.field(_Runtime.field(runtime, 'surface'), 'data'), 0.0, 0, null, 1);
-    codepoints = _Runtime.callProperty(_Runtime.concatArrays([_Runtime.toArray(_Runtime.callProperty(_Runtime.field(runtime, 'entries'), 'keys', cast ([] : Array<Dynamic>)))]), 'sort', cast ([function(a:Dynamic, b:Dynamic) {
+    codepoints = _Runtime.callProperty(_Runtime.concatArrays([_Runtime.toArray(((cast _Runtime.field(runtime, 'entries') : flighthq._internal._Map).keys()))]), 'sort', cast ([function(a:Dynamic, b:Dynamic) {
       var heightDelta:Dynamic = cast _Runtime.UNDEFINED;
-      heightDelta = (_Runtime.field(_Runtime.callProperty(_Runtime.field(runtime, 'entries'), 'get', cast ([b] : Array<Dynamic>)), 'height') - _Runtime.field(_Runtime.callProperty(_Runtime.field(runtime, 'entries'), 'get', cast ([a] : Array<Dynamic>)), 'height'));
+      heightDelta = (_Runtime.field(((cast _Runtime.field(runtime, 'entries') : flighthq._internal._Map).get(b)), 'height') - _Runtime.field(((cast _Runtime.field(runtime, 'entries') : flighthq._internal._Map).get(a)), 'height'));
       return cast _Runtime.select(!_Runtime.strictEquals(heightDelta, 0.0), function():Dynamic return cast heightDelta, function():Dynamic return cast (a - b));
     }] : Array<Dynamic>));
     for (codepoint in _Runtime.iterable(codepoints)) {
-      var entry:Dynamic = _Runtime.callProperty(_Runtime.field(runtime, 'entries'), 'get', cast ([codepoint] : Array<Dynamic>));
-      var bitmap:Dynamic = _Runtime.callProperty(_Runtime.field(runtime, 'bitmaps'), 'get', cast ([codepoint] : Array<Dynamic>));
+      var entry:Dynamic = ((cast _Runtime.field(runtime, 'entries') : flighthq._internal._Map).get(codepoint));
+      var bitmap:Dynamic = ((cast _Runtime.field(runtime, 'bitmaps') : flighthq._internal._Map).get(codepoint));
       var placement:Dynamic = _Runtime.callValue(GlyphAtlasEntry._placeGlyphOnShelf__glyphAtlasEntry, cast ([runtime, _Runtime.field(bitmap, 'width'), _Runtime.field(bitmap, 'height')] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.strictEquals(placement, null))) {
-        _Runtime.callProperty(_Runtime.field(runtime, 'entries'), 'delete', cast ([codepoint] : Array<Dynamic>));
-        _Runtime.callProperty(_Runtime.field(runtime, 'bitmaps'), 'delete', cast ([codepoint] : Array<Dynamic>));
+        ((cast _Runtime.field(runtime, 'entries') : flighthq._internal._Map).delete_(codepoint));
+        ((cast _Runtime.field(runtime, 'bitmaps') : flighthq._internal._Map).delete_(codepoint));
         var lruIndex:Dynamic = _Runtime.callProperty(_Runtime.field(runtime, 'lru'), 'indexOf', cast ([codepoint] : Array<Dynamic>));
         if (_Runtime.truthy(!_Runtime.strictEquals(lruIndex, -1.0))) { _Runtime.splice(_Runtime.field(runtime, 'lru'), Std.int(lruIndex), Std.int(1.0), []); }
         continue;

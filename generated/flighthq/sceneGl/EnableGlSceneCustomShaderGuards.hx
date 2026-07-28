@@ -53,8 +53,8 @@ class EnableGlSceneCustomShaderGuards {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var expected:Dynamic = cast _Runtime.UNDEFINED;
     var count:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.callProperty(EnableGlSceneCustomShaderGuards._checkedPrograms__enableGlSceneCustomShaderGuards, 'has', cast ([program] : Array<Dynamic>)))) { return; }
-    _Runtime.callProperty(EnableGlSceneCustomShaderGuards._checkedPrograms__enableGlSceneCustomShaderGuards, 'add', cast ([program] : Array<Dynamic>));
+    if (_Runtime.truthy(((cast EnableGlSceneCustomShaderGuards._checkedPrograms__enableGlSceneCustomShaderGuards : flighthq._internal._WeakSet).has(program)))) { return; }
+    ((cast EnableGlSceneCustomShaderGuards._checkedPrograms__enableGlSceneCustomShaderGuards : flighthq._internal._WeakSet).add(program));
     gl = _Runtime.field(state, 'gl');
     expected = _Runtime.construct(_Runtime.globalValue('Map'), [cast ([cast (['u_model', flighthq._internal.backend.WebGl2Backend.FLOAT_MAT4] : Array<Dynamic>), cast (['u_viewProjection', flighthq._internal.backend.WebGl2Backend.FLOAT_MAT4] : Array<Dynamic>), cast (['u_normalMatrix', flighthq._internal.backend.WebGl2Backend.FLOAT_MAT3] : Array<Dynamic>), cast (['u_cameraPosition', flighthq._internal.backend.WebGl2Backend.FLOAT_VEC3] : Array<Dynamic>)] : Array<Dynamic>)]);
     count = (cast flighthq._internal.backend.WebGl2Backend.getProgramParameter(gl, program, flighthq._internal.backend.WebGl2Backend.ACTIVE_UNIFORMS) : Float);
@@ -63,7 +63,7 @@ class EnableGlSceneCustomShaderGuards {
       while (_Runtime.truthy(_Runtime.compare(i, count, '<'))) {
         var info:Dynamic = flighthq._internal.backend.WebGl2Backend.getActiveUniform(gl, program, i);
         if (_Runtime.truthy(_Runtime.strictEquals(info, null))) { i++; continue; }
-        var want:Dynamic = _Runtime.callProperty(expected, 'get', cast ([_Runtime.field(info, 'name')] : Array<Dynamic>));
+        var want:Dynamic = ((cast expected : flighthq._internal._Map).get(_Runtime.field(info, 'name')));
         if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(want, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(info, 'type'), want)))) { i++; continue; }
         _Runtime.callValue(logOnce, cast (['scene-gl:custom-shader-uniform-type:' + Std.string(shaderKey) + ':' + Std.string(_Runtime.field(info, 'name')) + '', LogLevel.Warn, { message: 'customShaderGlMeshMaterialRenderer: shader "' + Std.string(shaderKey) + '" declares ' + Std.string(_Runtime.field(info, 'name')) + ' as ' + Std.string(_Runtime.callValue(EnableGlSceneCustomShaderGuards.glUniformTypeName__enableGlSceneCustomShaderGuards, cast ([gl, _Runtime.field(info, 'type')] : Array<Dynamic>))) + ' but the renderer uploads it as ' + Std.string(_Runtime.callValue(EnableGlSceneCustomShaderGuards.glUniformTypeName__enableGlSceneCustomShaderGuards, cast ([gl, want] : Array<Dynamic>))) + ' — the mismatched upload raises a silent GL_INVALID_OPERATION and the draw is dropped. Declare \'' + Std.string(_Runtime.callValue(EnableGlSceneCustomShaderGuards.glUniformTypeName__enableGlSceneCustomShaderGuards, cast ([gl, want] : Array<Dynamic>))) + ' ' + Std.string(_Runtime.field(info, 'name')) + '\' in the shader.' }, 'scene-gl'] : Array<Dynamic>));
         i++;

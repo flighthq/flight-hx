@@ -132,10 +132,10 @@ class Notification {
     };
     backend = { cancelScheduledNotification: function(id:Dynamic) {
       var entry:Dynamic = cast _Runtime.UNDEFINED;
-      entry = _Runtime.callProperty(_scheduled, 'get', cast ([id] : Array<Dynamic>));
+      entry = ((cast _scheduled : flighthq._internal._Map).get(id));
       if (_Runtime.truthy(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
         _Runtime.clearTimeout(_Runtime.field(entry, 'timeout'));
-        _Runtime.callProperty(_scheduled, 'delete', cast ([id] : Array<Dynamic>));
+        ((cast _scheduled : flighthq._internal._Map).delete_(id));
       }
     }, closeAllNotifications: function():flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.finishFlow(
@@ -208,7 +208,7 @@ class Notification {
       );
     }, getPendingNotifications: function():flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve(_Runtime.callProperty(_Runtime.toArray(_Runtime.callProperty(_scheduled, 'values', cast ([] : Array<Dynamic>))), 'map', cast ([function(e:Dynamic) return _Runtime.field(e, 'entry')] : Array<Dynamic>)));
+        return flighthq._internal._Async.resolve(_Runtime.callProperty(_Runtime.toArray(((cast _scheduled : flighthq._internal._Map).values())), 'map', cast ([function(e:Dynamic) return _Runtime.field(e, 'entry')] : Array<Dynamic>)));
       });
     }, getPermission: function() {
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined'))) { return cast 'denied'; }
@@ -253,42 +253,42 @@ class Notification {
         delay = HxMath.max(0.0, (_Runtime.field(schedule, 'at') - _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>))));
         entry = { id: id, request: request, schedule: schedule };
         fireAndReschedule = function() {
-          _Runtime.callProperty(_scheduled, 'delete', cast ([id] : Array<Dynamic>));
+          ((cast _scheduled : flighthq._internal._Map).delete_(id));
           _Runtime.voidValue(_Runtime.callValue(_show, cast ([_Runtime.mergeObjects([request, { id: id }])] : Array<Dynamic>)));
           if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(schedule, 'repeat'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
             var ms:Dynamic = _Runtime.callValue(Notification._repeatMs__notification, cast ([_Runtime.field(schedule, 'repeat')] : Array<Dynamic>));
             var timeout:Dynamic = _Runtime.setTimeout(fireAndReschedule, ms);
-            _Runtime.callProperty(_scheduled, 'set', cast ([id, { timeout: timeout, entry: { id: id, request: request, schedule: _Runtime.mergeObjects([schedule, { at: (_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) + ms) }]) } }] : Array<Dynamic>));
+            ((cast _scheduled : flighthq._internal._Map).set(id, { timeout: timeout, entry: { id: id, request: request, schedule: _Runtime.mergeObjects([schedule, { at: (_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) + ms) }]) } }));
           }
         };
         timeout = _Runtime.setTimeout(fireAndReschedule, delay);
-        _Runtime.callProperty(_scheduled, 'set', cast ([id, { timeout: timeout, entry: entry }] : Array<Dynamic>));
+        ((cast _scheduled : flighthq._internal._Map).set(id, { timeout: timeout, entry: entry }));
         return flighthq._internal._Async.resolve(id);
       });
     }, subscribeAction: function(listener:Dynamic) {
-      _Runtime.callProperty(_actionListeners, 'add', cast ([listener] : Array<Dynamic>));
+      ((cast _actionListeners : flighthq._internal._Set).add(listener));
       return cast function() {
-        _Runtime.callProperty(_actionListeners, 'delete', cast ([listener] : Array<Dynamic>));
+        ((cast _actionListeners : flighthq._internal._Set).delete_(listener));
       };
     }, subscribeClick: function(listener:Dynamic) {
-      _Runtime.callProperty(_clickListeners, 'add', cast ([listener] : Array<Dynamic>));
+      ((cast _clickListeners : flighthq._internal._Set).add(listener));
       return cast function() {
-        _Runtime.callProperty(_clickListeners, 'delete', cast ([listener] : Array<Dynamic>));
+        ((cast _clickListeners : flighthq._internal._Set).delete_(listener));
       };
     }, subscribeDismiss: function(listener:Dynamic) {
-      _Runtime.callProperty(_dismissListeners, 'add', cast ([listener] : Array<Dynamic>));
+      ((cast _dismissListeners : flighthq._internal._Set).add(listener));
       return cast function() {
-        _Runtime.callProperty(_dismissListeners, 'delete', cast ([listener] : Array<Dynamic>));
+        ((cast _dismissListeners : flighthq._internal._Set).delete_(listener));
       };
     }, subscribeReply: function(listener:Dynamic) {
-      _Runtime.callProperty(_replyListeners, 'add', cast ([listener] : Array<Dynamic>));
+      ((cast _replyListeners : flighthq._internal._Set).add(listener));
       return cast function() {
-        _Runtime.callProperty(_replyListeners, 'delete', cast ([listener] : Array<Dynamic>));
+        ((cast _replyListeners : flighthq._internal._Set).delete_(listener));
       };
     }, subscribeShow: function(listener:Dynamic) {
-      _Runtime.callProperty(_showListeners, 'add', cast ([listener] : Array<Dynamic>));
+      ((cast _showListeners : flighthq._internal._Set).add(listener));
       return cast function() {
-        _Runtime.callProperty(_showListeners, 'delete', cast ([listener] : Array<Dynamic>));
+        ((cast _showListeners : flighthq._internal._Set).delete_(listener));
       };
     }, updateNotification: function(id:Dynamic, partial:Dynamic):flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.finishFlow(
@@ -377,8 +377,8 @@ class Notification {
           if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(_Runtime.globalValue('Notification'), 'permission'), 'granted'))) { return cast ''; }
           var id:Dynamic = _Runtime.coalesce(_Runtime.field(request, 'id'), function():Dynamic return cast _Runtime.callValue(_generateId, cast ([] : Array<Dynamic>)));
           var n:Dynamic = _Runtime.construct(_Runtime.globalValue('Notification'), [_Runtime.field(request, 'title'), (cast { body: _Runtime.field(request, 'body'), badge: _Runtime.field(request, 'badge'), data: _Runtime.field(request, 'data'), dir: _Runtime.field(request, 'dir'), icon: _Runtime.field(request, 'icon'), image: _Runtime.field(request, 'image'), lang: _Runtime.field(request, 'lang'), renotify: _Runtime.field(request, 'renotify'), requireInteraction: _Runtime.field(request, 'requireInteraction'), silent: _Runtime.field(request, 'silent'), tag: _Runtime.coalesce(_Runtime.field(request, 'tag'), function():Dynamic return cast id), timestamp: _Runtime.field(request, 'timestamp'), vibrate: _Runtime.select(_Runtime.field(request, 'vibrate'), function():Dynamic return cast _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(request, 'vibrate'))]), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) } : Dynamic)]);
-          _Runtime.callProperty(_live, 'set', cast ([id, n] : Array<Dynamic>));
-          _Runtime.callProperty(_requests, 'set', cast ([id, request] : Array<Dynamic>));
+          ((cast _live : flighthq._internal._Map).set(id, n));
+          ((cast _requests : flighthq._internal._Map).set(id, request));
           _Runtime.setField(n, 'onshow', function() {
             _Runtime.callValue(_fire, cast ([_showListeners, id] : Array<Dynamic>));
           });
@@ -386,13 +386,13 @@ class Notification {
             _Runtime.callValue(_fire, cast ([_clickListeners, id] : Array<Dynamic>));
           });
           _Runtime.setField(n, 'onclose', function() {
-            _Runtime.callProperty(_live, 'delete', cast ([id] : Array<Dynamic>));
-            _Runtime.callProperty(_requests, 'delete', cast ([id] : Array<Dynamic>));
+            ((cast _live : flighthq._internal._Map).delete_(id));
+            ((cast _requests : flighthq._internal._Map).delete_(id));
             _Runtime.callValue(_fire, cast ([_dismissListeners, id] : Array<Dynamic>));
           });
           _Runtime.setField(n, 'onerror', function() {
-            _Runtime.callProperty(_live, 'delete', cast ([id] : Array<Dynamic>));
-            _Runtime.callProperty(_requests, 'delete', cast ([id] : Array<Dynamic>));
+            ((cast _live : flighthq._internal._Map).delete_(id));
+            ((cast _requests : flighthq._internal._Map).delete_(id));
           });
           return cast id;
         } catch (__error:Dynamic) {
@@ -403,10 +403,10 @@ class Notification {
     };
     return cast { cancelScheduledNotification: function(id:Dynamic) {
       var entry:Dynamic = cast _Runtime.UNDEFINED;
-      entry = _Runtime.callProperty(_scheduled, 'get', cast ([id] : Array<Dynamic>));
+      entry = ((cast _scheduled : flighthq._internal._Map).get(id));
       if (_Runtime.truthy(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
         _Runtime.clearTimeout(_Runtime.field(entry, 'timeout'));
-        _Runtime.callProperty(_scheduled, 'delete', cast ([id] : Array<Dynamic>));
+        ((cast _scheduled : flighthq._internal._Map).delete_(id));
       }
     }, closeAllNotifications: function() {
       for (__iteration0 in _Runtime.iterable(_live)) {
@@ -416,19 +416,19 @@ class Notification {
           _Runtime.callProperty(n, 'close', cast ([] : Array<Dynamic>));
         } catch (__error:Dynamic) {
         }
-        _Runtime.callProperty(_live, 'delete', cast ([id] : Array<Dynamic>));
-        _Runtime.callProperty(_requests, 'delete', cast ([id] : Array<Dynamic>));
+        ((cast _live : flighthq._internal._Map).delete_(id));
+        ((cast _requests : flighthq._internal._Map).delete_(id));
       }
     }, closeNotification: function(id:Dynamic) {
       var n:Dynamic = cast _Runtime.UNDEFINED;
-      n = _Runtime.callProperty(_live, 'get', cast ([id] : Array<Dynamic>));
+      n = ((cast _live : flighthq._internal._Map).get(id));
       if (_Runtime.truthy(!_Runtime.strictEquals(n, _Runtime.field(_Runtime, 'UNDEFINED')))) {
         try {
           _Runtime.callProperty(n, 'close', cast ([] : Array<Dynamic>));
         } catch (__error:Dynamic) {
         }
-        _Runtime.callProperty(_live, 'delete', cast ([id] : Array<Dynamic>));
-        _Runtime.callProperty(_requests, 'delete', cast ([id] : Array<Dynamic>));
+        ((cast _live : flighthq._internal._Map).delete_(id));
+        ((cast _requests : flighthq._internal._Map).delete_(id));
       }
     }, getCapabilities: function() {
       return cast { actions: false, channels: false, coldStart: false, image: false, listActive: false, scheduling: true, textReply: false };
@@ -442,7 +442,7 @@ class Notification {
       });
     }, getPendingNotifications: function():flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve(_Runtime.callProperty(_Runtime.toArray(_Runtime.callProperty(_scheduled, 'values', cast ([] : Array<Dynamic>))), 'map', cast ([function(e:Dynamic) return _Runtime.field(e, 'entry')] : Array<Dynamic>)));
+        return flighthq._internal._Async.resolve(_Runtime.callProperty(_Runtime.toArray(((cast _scheduled : flighthq._internal._Map).values())), 'map', cast ([function(e:Dynamic) return _Runtime.field(e, 'entry')] : Array<Dynamic>)));
       });
     }, getPermission: function() {
       var p:Dynamic = cast _Runtime.UNDEFINED;
@@ -491,42 +491,42 @@ class Notification {
         delay = HxMath.max(0.0, (_Runtime.field(schedule, 'at') - _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>))));
         entry = { id: id, request: request, schedule: schedule };
         fireAndReschedule = function() {
-          _Runtime.callProperty(_scheduled, 'delete', cast ([id] : Array<Dynamic>));
+          ((cast _scheduled : flighthq._internal._Map).delete_(id));
           _Runtime.voidValue(_Runtime.callValue(_notify, cast ([_Runtime.mergeObjects([request, { id: id }])] : Array<Dynamic>)));
           if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(schedule, 'repeat'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
             var ms:Dynamic = _Runtime.callValue(Notification._repeatMs__notification, cast ([_Runtime.field(schedule, 'repeat')] : Array<Dynamic>));
             var timeout:Dynamic = _Runtime.setTimeout(fireAndReschedule, ms);
-            _Runtime.callProperty(_scheduled, 'set', cast ([id, { timeout: timeout, entry: { id: id, request: request, schedule: _Runtime.mergeObjects([schedule, { at: (_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) + ms) }]) } }] : Array<Dynamic>));
+            ((cast _scheduled : flighthq._internal._Map).set(id, { timeout: timeout, entry: { id: id, request: request, schedule: _Runtime.mergeObjects([schedule, { at: (_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) + ms) }]) } }));
           }
         };
         timeout = _Runtime.setTimeout(fireAndReschedule, delay);
-        _Runtime.callProperty(_scheduled, 'set', cast ([id, { timeout: timeout, entry: entry }] : Array<Dynamic>));
+        ((cast _scheduled : flighthq._internal._Map).set(id, { timeout: timeout, entry: entry }));
         return flighthq._internal._Async.resolve(id);
       });
     }, subscribeAction: function(listener:Dynamic) {
-      _Runtime.callProperty(_actionListeners, 'add', cast ([listener] : Array<Dynamic>));
+      ((cast _actionListeners : flighthq._internal._Set).add(listener));
       return cast function() {
-        _Runtime.callProperty(_actionListeners, 'delete', cast ([listener] : Array<Dynamic>));
+        ((cast _actionListeners : flighthq._internal._Set).delete_(listener));
       };
     }, subscribeClick: function(listener:Dynamic) {
-      _Runtime.callProperty(_clickListeners, 'add', cast ([listener] : Array<Dynamic>));
+      ((cast _clickListeners : flighthq._internal._Set).add(listener));
       return cast function() {
-        _Runtime.callProperty(_clickListeners, 'delete', cast ([listener] : Array<Dynamic>));
+        ((cast _clickListeners : flighthq._internal._Set).delete_(listener));
       };
     }, subscribeDismiss: function(listener:Dynamic) {
-      _Runtime.callProperty(_dismissListeners, 'add', cast ([listener] : Array<Dynamic>));
+      ((cast _dismissListeners : flighthq._internal._Set).add(listener));
       return cast function() {
-        _Runtime.callProperty(_dismissListeners, 'delete', cast ([listener] : Array<Dynamic>));
+        ((cast _dismissListeners : flighthq._internal._Set).delete_(listener));
       };
     }, subscribeReply: function(listener:Dynamic) {
-      _Runtime.callProperty(_replyListeners, 'add', cast ([listener] : Array<Dynamic>));
+      ((cast _replyListeners : flighthq._internal._Set).add(listener));
       return cast function() {
-        _Runtime.callProperty(_replyListeners, 'delete', cast ([listener] : Array<Dynamic>));
+        ((cast _replyListeners : flighthq._internal._Set).delete_(listener));
       };
     }, subscribeShow: function(listener:Dynamic) {
-      _Runtime.callProperty(_showListeners, 'add', cast ([listener] : Array<Dynamic>));
+      ((cast _showListeners : flighthq._internal._Set).add(listener));
       return cast function() {
-        _Runtime.callProperty(_showListeners, 'delete', cast ([listener] : Array<Dynamic>));
+        ((cast _showListeners : flighthq._internal._Set).delete_(listener));
       };
     }, updateNotification: function(id:Dynamic, partial:Dynamic):flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.finishFlow(
@@ -534,8 +534,8 @@ class Notification {
           var existing:Dynamic = cast _Runtime.UNDEFINED;
           var originalRequest:Dynamic = cast _Runtime.UNDEFINED;
           var merged:NotificationRequest = cast _Runtime.UNDEFINED;
-          existing = _Runtime.callProperty(_live, 'get', cast ([id] : Array<Dynamic>));
-          originalRequest = _Runtime.callProperty(_requests, 'get', cast ([id] : Array<Dynamic>));
+          existing = ((cast _live : flighthq._internal._Map).get(id));
+          originalRequest = ((cast _requests : flighthq._internal._Map).get(id));
           var __flowBranch27:Dynamic;
           if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(originalRequest, _Runtime.field(_Runtime, 'UNDEFINED'))))) {
             __flowBranch27 = flighthq._internal._Async.protect(function():Dynamic {
@@ -547,8 +547,8 @@ class Notification {
           return flighthq._internal._Async.continueFlow(__flowBranch27, function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
               _Runtime.callProperty(existing, 'close', cast ([] : Array<Dynamic>));
-              _Runtime.callProperty(_live, 'delete', cast ([id] : Array<Dynamic>));
-              _Runtime.callProperty(_requests, 'delete', cast ([id] : Array<Dynamic>));
+              ((cast _live : flighthq._internal._Map).delete_(id));
+              ((cast _requests : flighthq._internal._Map).delete_(id));
               return flighthq._internal._Async.flowNormal();
             }), function(__caughtError:Dynamic):Dynamic {
               var __error:Dynamic = __caughtError;

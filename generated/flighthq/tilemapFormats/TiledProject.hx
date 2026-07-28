@@ -42,16 +42,16 @@ class TiledProject {
         if (_Runtime.truthy(_Runtime.compare(tileId, 0.0, '<='))) { i++; continue; }
         var ref:Dynamic = _Runtime.callValue(getTiledTilesetRefForGid, cast ([map, tileId] : Array<Dynamic>));
         if (_Runtime.truthy(_Runtime.strictEquals(ref, null))) { i++; continue; }
-        var group:Dynamic = _Runtime.callProperty(byFirstGid, 'get', cast ([_Runtime.field(ref, 'firstGid')] : Array<Dynamic>));
+        var group:Dynamic = ((cast byFirstGid : flighthq._internal._Map).get(_Runtime.field(ref, 'firstGid')));
         if (_Runtime.truthy(_Runtime.strictEquals(group, _Runtime.field(_Runtime, 'UNDEFINED')))) {
           var tileset:Dynamic = _Runtime.callValue(resolveTileset, cast ([ref] : Array<Dynamic>));
           if (_Runtime.truthy(_Runtime.strictEquals(tileset, null))) {
-            _Runtime.callProperty(byFirstGid, 'set', cast ([_Runtime.field(ref, 'firstGid'), null] : Array<Dynamic>));
+            ((cast byFirstGid : flighthq._internal._Map).set(_Runtime.field(ref, 'firstGid'), null));
             (group = cast (null : Dynamic));
           } else {
             (anyResolved = cast (true : Dynamic));
             (group = cast ({ firstGid: _Runtime.field(ref, 'firstGid'), tiles: _Runtime.fill(new flighthq._internal._Int16Array(cellCount), -1.0, 0, null, 1), tileset: tileset } : Dynamic));
-            _Runtime.callProperty(byFirstGid, 'set', cast ([_Runtime.field(ref, 'firstGid'), group] : Array<Dynamic>));
+            ((cast byFirstGid : flighthq._internal._Map).set(_Runtime.field(ref, 'firstGid'), group));
             _Runtime.callProperty(groups, 'push', cast ([group] : Array<Dynamic>));
           }
         }

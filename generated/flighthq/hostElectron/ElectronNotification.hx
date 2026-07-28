@@ -39,10 +39,10 @@ class ElectronNotification {
           _Runtime.callOptionalValue(actionListener, cast ([id, Std.string(_Runtime.coalesce(_Runtime.optionalField(_Runtime.getIndex(actions, index), 'id'), function():Dynamic return cast ''))] : Array<Dynamic>));
         }] : Array<Dynamic>));
         _Runtime.callProperty(n, 'on', cast (['close', function() {
-          _Runtime.callProperty(live, 'delete', cast ([id] : Array<Dynamic>));
+          ((cast live : flighthq._internal._Map).delete_(id));
           _Runtime.callOptionalValue(dismissListener, cast ([id] : Array<Dynamic>));
         }] : Array<Dynamic>));
-        _Runtime.callProperty(live, 'set', cast ([id, n] : Array<Dynamic>));
+        ((cast live : flighthq._internal._Map).set(id, n));
         _Runtime.callProperty(n, 'show', cast ([] : Array<Dynamic>));
         return cast id;
         return cast null;
@@ -77,15 +77,15 @@ class ElectronNotification {
     
     }, closeNotification: function(id:Dynamic) {
       var n:Dynamic = cast _Runtime.UNDEFINED;
-      n = _Runtime.callProperty(live, 'get', cast ([id] : Array<Dynamic>));
+      n = ((cast live : flighthq._internal._Map).get(id));
       if (_Runtime.truthy(!_Runtime.truthy(n))) { return; }
       _Runtime.callProperty(n, 'close', cast ([] : Array<Dynamic>));
-      _Runtime.callProperty(live, 'delete', cast ([id] : Array<Dynamic>));
+      ((cast live : flighthq._internal._Map).delete_(id));
     }, closeAllNotifications: function() {
-      for (n in _Runtime.iterable(_Runtime.callProperty(live, 'values', cast ([] : Array<Dynamic>)))) {
+      for (n in _Runtime.iterable(((cast live : flighthq._internal._Map).values()))) {
         _Runtime.callProperty(n, 'close', cast ([] : Array<Dynamic>));
       }
-      _Runtime.callProperty(live, 'clear', cast ([] : Array<Dynamic>));
+      ((cast live : flighthq._internal._Map).clear());
     }, updateNotification: function():flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);

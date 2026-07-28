@@ -22,8 +22,8 @@ class OrderModifierStack {
 
   public static function getModifierSlotRank__orderModifierStack(slot:ModifierSlot):Float {
     var rank:Dynamic = cast _Runtime.UNDEFINED;
-    rank = _Runtime.callProperty(OrderModifierStack.SLOT_RANK__orderModifierStack, 'get', cast ([slot] : Array<Dynamic>));
-    return cast _Runtime.select(!_Runtime.strictEquals(rank, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast rank, function():Dynamic return cast OrderModifierStack.SLOT_RANK__orderModifierStack.size);
+    rank = ((cast OrderModifierStack.SLOT_RANK__orderModifierStack : flighthq._internal._Map).get(slot));
+    return cast _Runtime.select(!_Runtime.strictEquals(rank, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast rank, function():Dynamic return cast (cast OrderModifierStack.SLOT_RANK__orderModifierStack : flighthq._internal._Map).size);
     return cast null;
   }
 

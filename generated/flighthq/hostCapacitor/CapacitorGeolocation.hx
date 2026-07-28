@@ -74,21 +74,21 @@ class CapacitorGeolocation {
     }, watchPosition: function(listener:Dynamic, options:Dynamic, onError:Dynamic) {
       var numericId:Dynamic = cast _Runtime.UNDEFINED;
       numericId = nextWatchId++;
-      _Runtime.callProperty(watchIds, 'set', cast ([numericId, null] : Array<Dynamic>));
+      ((cast watchIds : flighthq._internal._Map).set(numericId, null));
       flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(geolocation, 'watchPosition', cast ([options, function(position:Dynamic, err:Dynamic) {
         if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(position, null), function():Dynamic return cast !_Runtime.strictEquals(position, _Runtime.field(_Runtime, 'UNDEFINED'))))) { _Runtime.callValue(listener, cast ([_Runtime.callValue(CapacitorGeolocation.toGeoPosition__capacitorGeolocation, cast ([position] : Array<Dynamic>))] : Array<Dynamic>)); } else { if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(err, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(onError, _Runtime.field(_Runtime, 'UNDEFINED'))))) { _Runtime.callValue(onError, cast (['unavailable'] : Array<Dynamic>)); } }
       }] : Array<Dynamic>)), 'then', cast ([function(stringId:Dynamic) {
-        if (_Runtime.truthy(_Runtime.callProperty(watchIds, 'has', cast ([numericId] : Array<Dynamic>)))) { _Runtime.callProperty(watchIds, 'set', cast ([numericId, stringId] : Array<Dynamic>)); } else { flighthq._internal._Async.recover(_Runtime.callProperty(geolocation, 'clearWatch', cast ([{ id: stringId }] : Array<Dynamic>)), function() {
+        if (_Runtime.truthy(((cast watchIds : flighthq._internal._Map).has(numericId)))) { ((cast watchIds : flighthq._internal._Map).set(numericId, stringId)); } else { flighthq._internal._Async.recover(_Runtime.callProperty(geolocation, 'clearWatch', cast ([{ id: stringId }] : Array<Dynamic>)), function() {
         
         }); }
       }] : Array<Dynamic>)), function() {
-        _Runtime.callProperty(watchIds, 'delete', cast ([numericId] : Array<Dynamic>));
+        ((cast watchIds : flighthq._internal._Map).delete_(numericId));
       });
       return cast numericId;
     }, clearWatch: function(id:Dynamic) {
       var stringId:Dynamic = cast _Runtime.UNDEFINED;
-      stringId = _Runtime.callProperty(watchIds, 'get', cast ([id] : Array<Dynamic>));
-      _Runtime.callProperty(watchIds, 'delete', cast ([id] : Array<Dynamic>));
+      stringId = ((cast watchIds : flighthq._internal._Map).get(id));
+      ((cast watchIds : flighthq._internal._Map).delete_(id));
       if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(stringId, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(stringId, null)))) { flighthq._internal._Async.recover(_Runtime.callProperty(geolocation, 'clearWatch', cast ([{ id: stringId }] : Array<Dynamic>)), function() {
       
       }); }

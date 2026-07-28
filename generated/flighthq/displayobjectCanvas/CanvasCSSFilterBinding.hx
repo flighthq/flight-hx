@@ -16,12 +16,12 @@ class CanvasCSSFilterBinding {
   }
 
   public static function getCanvasCssFilter(renderProxy:RenderProxy2D):Null<String> {
-    return cast _Runtime.callProperty(CanvasCSSFilterBinding._cssFilterBindings__canvasCSSFilterBinding, 'get', cast ([renderProxy] : Array<Dynamic>));
+    return cast ((cast CanvasCSSFilterBinding._cssFilterBindings__canvasCSSFilterBinding : flighthq._internal._WeakMap).get(renderProxy));
     return cast null;
   }
 
   public static function resolveCanvasCssFilter(_state:Dynamic, renderProxy:RenderProxy2D):Null<String> {
-    return cast _Runtime.coalesce(_Runtime.callProperty(CanvasCSSFilterBinding._cssFilterBindings__canvasCSSFilterBinding, 'get', cast ([renderProxy] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast CanvasCSSFilterBinding._cssFilterBindings__canvasCSSFilterBinding : flighthq._internal._WeakMap).get(renderProxy)), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -29,9 +29,9 @@ class CanvasCSSFilterBinding {
     var renderProxy:Dynamic = cast _Runtime.UNDEFINED;
     renderProxy = _Runtime.callValue(getOrCreateRenderProxy2D, cast ([state, node] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(filter, null))) {
-      _Runtime.callProperty(CanvasCSSFilterBinding._cssFilterBindings__canvasCSSFilterBinding, 'delete', cast ([renderProxy] : Array<Dynamic>));
+      ((cast CanvasCSSFilterBinding._cssFilterBindings__canvasCSSFilterBinding : flighthq._internal._WeakMap).delete_(renderProxy));
       return;
     }
-    _Runtime.callProperty(CanvasCSSFilterBinding._cssFilterBindings__canvasCSSFilterBinding, 'set', cast ([renderProxy, filter] : Array<Dynamic>));
+    ((cast CanvasCSSFilterBinding._cssFilterBindings__canvasCSSFilterBinding : flighthq._internal._WeakMap).set(renderProxy, filter));
   }
 }

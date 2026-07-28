@@ -86,7 +86,7 @@ class Power {
         _Runtime.callValue(emitSignal, cast ([idleSignal] : Array<Dynamic>));
       }
     }, Power._idlePollingIntervalMs__power);
-    _Runtime.callProperty(Power._subscriptions__power, 'set', cast ([power, function() {
+    ((cast Power._subscriptions__power : flighthq._internal._WeakMap).set(power, function() {
       _Runtime.callValue(unsubscribeChange, cast ([] : Array<Dynamic>));
       _Runtime.callValue(unsubscribeLockScreen, cast ([] : Array<Dynamic>));
       _Runtime.callValue(unsubscribeLowPowerModeChange, cast ([] : Array<Dynamic>));
@@ -95,7 +95,7 @@ class Power {
       _Runtime.callValue(unsubscribeThermalStateChange, cast ([] : Array<Dynamic>));
       _Runtime.callValue(unsubscribeUnlockScreen, cast ([] : Array<Dynamic>));
       _Runtime.clearInterval(idleIntervalId);
-    }] : Array<Dynamic>));
+    }));
   }
 
   public static function createPower():flighthq.types.Power {
@@ -275,10 +275,10 @@ class Power {
 
   public static function detachPower(power:flighthq.types.Power):Void {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
-    unsubscribe = _Runtime.callProperty(Power._subscriptions__power, 'get', cast ([power] : Array<Dynamic>));
+    unsubscribe = ((cast Power._subscriptions__power : flighthq._internal._WeakMap).get(power));
     if (_Runtime.truthy(!_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.callValue(unsubscribe, cast ([] : Array<Dynamic>));
-      _Runtime.callProperty(Power._subscriptions__power, 'delete', cast ([power] : Array<Dynamic>));
+      ((cast Power._subscriptions__power : flighthq._internal._WeakMap).delete_(power));
     }
   }
 

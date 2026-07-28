@@ -101,7 +101,7 @@ class WgpuCache {
     _Runtime.setField(cacheRuntime, 'scissorStack', cast ([] : Array<Dynamic>));
     _Runtime.setField(cacheRuntime, 'renderTargetViewport', null);
     _Runtime.setField(cacheRuntime, 'renderTargetStack', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(WgpuCache._cacheStateScreen__wgpuCache, 'set', cast ([cacheState, screenState] : Array<Dynamic>));
+    ((cast WgpuCache._cacheStateScreen__wgpuCache : flighthq._internal._WeakMap).set(cacheState, screenState));
     return cast cacheState;
     return cast null;
   }
@@ -114,10 +114,10 @@ class WgpuCache {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     targets = _Runtime.callValue(WgpuCache.getTargets__wgpuCache, cast ([state] : Array<Dynamic>));
-    target = _Runtime.callProperty(targets, 'get', cast ([cache] : Array<Dynamic>));
+    target = ((cast targets : flighthq._internal._WeakMap).get(cache));
     if (_Runtime.truthy(_Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (target = cast (_Runtime.callValue(createWgpuRenderTarget, cast ([state, width, height] : Array<Dynamic>)) : Dynamic));
-      _Runtime.callProperty(targets, 'set', cast ([cache, target] : Array<Dynamic>));
+      ((cast targets : flighthq._internal._WeakMap).set(cache, target));
     } else {
       _Runtime.callValue(resizeWgpuRenderTarget, cast ([state, target, width, height] : Array<Dynamic>));
     }
@@ -126,7 +126,7 @@ class WgpuCache {
   }
 
   public static function getWgpuRenderCacheTarget(state:WgpuRenderState, cache:RenderCache):Null<WgpuRenderTarget> {
-    return cast _Runtime.coalesce(_Runtime.callProperty(_Runtime.callValue(WgpuCache.getTargets__wgpuCache, cast ([state] : Array<Dynamic>)), 'get', cast ([cache] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast _Runtime.callValue(WgpuCache.getTargets__wgpuCache, cast ([state] : Array<Dynamic>)) : flighthq._internal._WeakMap).get(cache)), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -144,7 +144,7 @@ class WgpuCache {
     var resized:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     var dirty:Dynamic = cast _Runtime.UNDEFINED;
-    screenState = _Runtime.coalesce(_Runtime.callProperty(WgpuCache._cacheStateScreen__wgpuCache, 'get', cast ([cacheState] : Array<Dynamic>)), function():Dynamic return cast cacheState);
+    screenState = _Runtime.coalesce(((cast WgpuCache._cacheStateScreen__wgpuCache : flighthq._internal._WeakMap).get(cacheState)), function():Dynamic return cast cacheState);
     cacheRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([cacheState] : Array<Dynamic>));
     screenRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([screenState] : Array<Dynamic>));
     _Runtime.setField(cacheRuntime, 'commandEncoder', _Runtime.field(screenRuntime, 'commandEncoder'));
@@ -193,10 +193,10 @@ class WgpuCache {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     targets = _Runtime.callValue(WgpuCache.getTargets__wgpuCache, cast ([state] : Array<Dynamic>));
-    target = _Runtime.callProperty(targets, 'get', cast ([cache] : Array<Dynamic>));
+    target = ((cast targets : flighthq._internal._WeakMap).get(cache));
     if (_Runtime.truthy(_Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
     _Runtime.callValue(destroyWgpuRenderTarget, cast ([state, target] : Array<Dynamic>));
-    _Runtime.callProperty(targets, 'delete', cast ([cache] : Array<Dynamic>));
+    ((cast targets : flighthq._internal._WeakMap).delete_(cache));
   }
 
   public static function drawWgpuRenderCache__wgpuCache(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
@@ -204,7 +204,7 @@ class WgpuCache {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     cache = _Runtime.callValue(getRenderProxyCache, cast ([state, _Runtime.field(renderProxy, 'source')] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(cache, null))) { return; }
-    target = _Runtime.callProperty(_Runtime.callValue(WgpuCache.getTargets__wgpuCache, cast ([state] : Array<Dynamic>)), 'get', cast ([cache] : Array<Dynamic>));
+    target = ((cast _Runtime.callValue(WgpuCache.getTargets__wgpuCache, cast ([state] : Array<Dynamic>)) : flighthq._internal._WeakMap).get(cache));
     if (_Runtime.truthy(_Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
     _Runtime.callValue(flushWgpuSpriteBatch, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuRenderTargetResult, cast ([state, renderProxy, target, WgpuCache._identity__wgpuCache] : Array<Dynamic>));
@@ -212,10 +212,10 @@ class WgpuCache {
 
   public static function getTargets__wgpuCache(state:WgpuRenderState):Dynamic {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
-    targets = _Runtime.callProperty(WgpuCache._renderCacheTargets__wgpuCache, 'get', cast ([state] : Array<Dynamic>));
+    targets = ((cast WgpuCache._renderCacheTargets__wgpuCache : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(targets, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (targets = cast (_Runtime.construct(_Runtime.globalValue('WeakMap'), []) : Dynamic));
-      _Runtime.callProperty(WgpuCache._renderCacheTargets__wgpuCache, 'set', cast ([state, targets] : Array<Dynamic>));
+      ((cast WgpuCache._renderCacheTargets__wgpuCache : flighthq._internal._WeakMap).set(state, targets));
     }
     return cast targets;
     return cast null;

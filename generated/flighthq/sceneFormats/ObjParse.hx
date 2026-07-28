@@ -161,10 +161,10 @@ class ObjParse {
 
   public static function getOrCreateBucket__objParse(buckets:Dynamic, material:String):MaterialBucket__objParse {
     var bucket:Dynamic = cast _Runtime.UNDEFINED;
-    bucket = _Runtime.callProperty(buckets, 'get', cast ([material] : Array<Dynamic>));
+    bucket = ((cast buckets : flighthq._internal._Map).get(material));
     if (_Runtime.truthy(_Runtime.strictEquals(bucket, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (bucket = cast ({ dedup: _Runtime.construct(_Runtime.globalValue('Map'), []), indices: cast ([] : Array<Dynamic>), vertices: cast ([] : Array<Dynamic>) } : Dynamic));
-      _Runtime.callProperty(buckets, 'set', cast ([material, bucket] : Array<Dynamic>));
+      ((cast buckets : flighthq._internal._Map).set(material, bucket));
     }
     return cast bucket;
     return cast null;
@@ -219,7 +219,7 @@ class ObjParse {
       }
     }
     key = '' + Std.string(posIdx) + '/' + Std.string(uvIdx) + '/' + Std.string(normalIdx) + '';
-    existing = _Runtime.callProperty(_Runtime.field(bucket, 'dedup'), 'get', cast ([key] : Array<Dynamic>));
+    existing = ((cast _Runtime.field(bucket, 'dedup') : flighthq._internal._Map).get(key));
     if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast existing; }
     vertexIndex = (_Runtime.field(_Runtime.field(bucket, 'vertices'), 'length') / CANONICAL_FLOATS_PER_VERTEX);
     _Runtime.pushMany(_Runtime.field(bucket, 'vertices'), cast ([_Runtime.getIndex(positions, (posIdx * 3.0)), _Runtime.getIndex(positions, ((posIdx * 3.0) + 1.0)), _Runtime.getIndex(positions, ((posIdx * 3.0) + 2.0))] : Array<Dynamic>));
@@ -234,7 +234,7 @@ class ObjParse {
     } else {
       _Runtime.pushMany(_Runtime.field(bucket, 'vertices'), cast ([0.0, 0.0] : Array<Dynamic>));
     }
-    _Runtime.callProperty(_Runtime.field(bucket, 'dedup'), 'set', cast ([key, vertexIndex] : Array<Dynamic>));
+    ((cast _Runtime.field(bucket, 'dedup') : flighthq._internal._Map).set(key, vertexIndex));
     return cast vertexIndex;
     return cast null;
   }
@@ -313,12 +313,12 @@ class ObjParse {
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
     var material:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(name, ''))) { return cast null; }
-    cached = _Runtime.callProperty(cache, 'get', cast ([name] : Array<Dynamic>));
+    cached = ((cast cache : flighthq._internal._Map).get(name));
     if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast cached; }
-    parsed = _Runtime.callOptionalProperty(_Runtime.optionalField(library, 'materials'), 'get', cast ([name] : Array<Dynamic>));
+    parsed = ({ final __collection2:Dynamic = _Runtime.optionalField(library, 'materials'); __collection2 == null ? _Runtime.UNDEFINED : ((cast __collection2 : flighthq._internal._Map).get(name)); });
     material = _Runtime.select(!_Runtime.strictEquals(parsed, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast (cast (cast _Runtime.callValue(ObjParse.objMaterialToBlinnPhong__objParse, cast ([parsed] : Array<Dynamic>)) : Dynamic) : Material), function():Dynamic return cast null);
     if (_Runtime.truthy(!_Runtime.strictEquals(material, null))) { _Runtime.setField(material, 'name', name); }
-    _Runtime.callProperty(cache, 'set', cast ([name, material] : Array<Dynamic>));
+    ((cast cache : flighthq._internal._Map).set(name, material));
     return cast material;
     return cast null;
   }

@@ -16,11 +16,11 @@ class _ModifierRegistryValues {
   }
 
   public static function registerModifier(registry:ModifierRegistry, definition:ModifierDefinition):Void {
-    _Runtime.callProperty(_Runtime.field(registry, 'definitions'), 'set', cast ([_Runtime.field(definition, 'kind'), definition] : Array<Dynamic>));
+    ((cast _Runtime.field(registry, 'definitions') : flighthq._internal._Map).set(_Runtime.field(definition, 'kind'), definition));
   }
 
   public static function resolveModifier(registry:ModifierRegistry, kind:ModifierKind):Null<ModifierDefinition> {
-    return cast _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(registry, 'definitions'), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast _Runtime.field(registry, 'definitions') : flighthq._internal._Map).get(kind)), function():Dynamic return cast null);
     return cast null;
   }
 }

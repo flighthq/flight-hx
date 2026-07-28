@@ -16,7 +16,7 @@ class WgpuRenderStats {
 
   public static function recordWgpuBatchFlush(state:WgpuRenderState, instances:Float):Void {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
-    entry = _Runtime.callProperty(WgpuRenderStats._stats__wgpuRenderStats, 'get', cast ([state] : Array<Dynamic>));
+    entry = ((cast WgpuRenderStats._stats__wgpuRenderStats : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
     _Runtime.incrementField(entry, 'drawCallCount', 1, true);
     _Runtime.setField(entry, 'instanceCount', (_Runtime.field(entry, 'instanceCount') + instances));
@@ -25,7 +25,7 @@ class WgpuRenderStats {
 
   public static function recordWgpuTextureUpload(state:WgpuRenderState):Void {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
-    entry = _Runtime.callProperty(WgpuRenderStats._stats__wgpuRenderStats, 'get', cast ([state] : Array<Dynamic>));
+    entry = ((cast WgpuRenderStats._stats__wgpuRenderStats : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
     _Runtime.incrementField(entry, 'textureUploadCount', 1, true);
   }
@@ -41,10 +41,10 @@ class WgpuRenderStats {
 
   public static function ensureWgpuRenderStatsMutable__wgpuRenderStats(state:WgpuRenderState):Mutable__wgpuRenderStats<flighthq.types.WgpuRenderStats> {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
-    entry = _Runtime.callProperty(WgpuRenderStats._stats__wgpuRenderStats, 'get', cast ([state] : Array<Dynamic>));
+    entry = ((cast WgpuRenderStats._stats__wgpuRenderStats : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (entry = cast ({ batchFlushCount: 0.0, drawCallCount: 0.0, instanceCount: 0.0, textureUploadCount: 0.0 } : Dynamic));
-      _Runtime.callProperty(WgpuRenderStats._stats__wgpuRenderStats, 'set', cast ([state, entry] : Array<Dynamic>));
+      ((cast WgpuRenderStats._stats__wgpuRenderStats : flighthq._internal._WeakMap).set(state, entry));
     }
     return cast entry;
     return cast null;

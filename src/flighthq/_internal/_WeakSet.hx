@@ -6,8 +6,8 @@ package flighthq._internal;
  * JavaScript targets construct the native `WeakSet` instead (see
  * `_Runtime.globalValue`); entries are held strongly on the other targets.
  */
-// Reached only reflectively (constructed through `_Runtime.globalValue`), so
-// full dead-code elimination must not strip the class or its members.
+// Constructed through `_Runtime` and used as the typed receiver surface for
+// generated WeakSet operations.
 @:keep
 class _WeakSet {
   final entries:haxe.ds.ObjectMap<{}, Bool> = new haxe.ds.ObjectMap();
@@ -21,6 +21,9 @@ class _WeakSet {
     return this;
   }
 
+  #if js
+  @:native("delete")
+  #end
   public function delete_(value:Dynamic):Bool {
     return value != null && entries.remove(cast value);
   }

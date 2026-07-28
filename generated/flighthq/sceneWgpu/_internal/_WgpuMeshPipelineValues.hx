@@ -307,10 +307,10 @@ class _WgpuMeshPipelineValues {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
-    pipeline = _Runtime.callProperty(_Runtime.field(runtime, 'pipelineCache'), 'get', cast ([key] : Array<Dynamic>));
+    pipeline = ((cast _Runtime.field(runtime, 'pipelineCache') : flighthq._internal._Map).get(key));
     if (_Runtime.truthy(_Runtime.strictEquals(pipeline, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (pipeline = cast (_Runtime.callValue(compile, cast ([] : Array<Dynamic>)) : Dynamic));
-      _Runtime.callProperty(_Runtime.field(runtime, 'pipelineCache'), 'set', cast ([key, pipeline] : Array<Dynamic>));
+      ((cast _Runtime.field(runtime, 'pipelineCache') : flighthq._internal._Map).set(key, pipeline));
     }
     return cast (cast pipeline : Dynamic);
     return cast null;

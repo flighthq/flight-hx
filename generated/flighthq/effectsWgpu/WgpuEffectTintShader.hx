@@ -67,10 +67,10 @@ class WgpuEffectTintShader {
 
   public static function getWgpuInnerClipShader__wgpuEffectTintShader(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
     var p:Dynamic = cast _Runtime.UNDEFINED;
-    p = _Runtime.callProperty(WgpuEffectTintShader.innerClipPipelines__wgpuEffectTintShader, 'get', cast ([state] : Array<Dynamic>));
+    p = ((cast WgpuEffectTintShader.innerClipPipelines__wgpuEffectTintShader : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (p = cast (_Runtime.callValue(createWgpuDualSourceEffectPipeline, cast ([state, WgpuEffectTintShader.INNER_CLIP_WGSL__wgpuEffectTintShader, 'replace'] : Array<Dynamic>)) : Dynamic));
-      _Runtime.callProperty(WgpuEffectTintShader.innerClipPipelines__wgpuEffectTintShader, 'set', cast ([state, p] : Array<Dynamic>));
+      ((cast WgpuEffectTintShader.innerClipPipelines__wgpuEffectTintShader : flighthq._internal._WeakMap).set(state, p));
     }
     return cast p;
     return cast null;
@@ -78,10 +78,10 @@ class WgpuEffectTintShader {
 
   public static function getWgpuInvertTintShader__wgpuEffectTintShader(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Dynamic = cast _Runtime.UNDEFINED;
-    p = _Runtime.callProperty(WgpuEffectTintShader.invertTintPipelines__wgpuEffectTintShader, 'get', cast ([state] : Array<Dynamic>));
+    p = ((cast WgpuEffectTintShader.invertTintPipelines__wgpuEffectTintShader : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (p = cast (_Runtime.callValue(createWgpuEffectPipeline, cast ([state, WgpuEffectTintShader.INVERT_TINT_WGSL__wgpuEffectTintShader, 'replace'] : Array<Dynamic>)) : Dynamic));
-      _Runtime.callProperty(WgpuEffectTintShader.invertTintPipelines__wgpuEffectTintShader, 'set', cast ([state, p] : Array<Dynamic>));
+      ((cast WgpuEffectTintShader.invertTintPipelines__wgpuEffectTintShader : flighthq._internal._WeakMap).set(state, p));
     }
     return cast p;
     return cast null;
@@ -89,10 +89,10 @@ class WgpuEffectTintShader {
 
   public static function getWgpuTintShader__wgpuEffectTintShader(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Dynamic = cast _Runtime.UNDEFINED;
-    p = _Runtime.callProperty(WgpuEffectTintShader.tintPipelines__wgpuEffectTintShader, 'get', cast ([state] : Array<Dynamic>));
+    p = ((cast WgpuEffectTintShader.tintPipelines__wgpuEffectTintShader : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (p = cast (_Runtime.callValue(createWgpuEffectPipeline, cast ([state, WgpuEffectTintShader.TINT_WGSL__wgpuEffectTintShader, 'replace'] : Array<Dynamic>)) : Dynamic));
-      _Runtime.callProperty(WgpuEffectTintShader.tintPipelines__wgpuEffectTintShader, 'set', cast ([state, p] : Array<Dynamic>));
+      ((cast WgpuEffectTintShader.tintPipelines__wgpuEffectTintShader : flighthq._internal._WeakMap).set(state, p));
     }
     return cast p;
     return cast null;

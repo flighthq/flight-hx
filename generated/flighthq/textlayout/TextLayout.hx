@@ -70,7 +70,7 @@ class TextLayout {
       return;
     }
     _Runtime.callValue(getTextLineBreaks, cast ([TextLayout._lineBreaks__textLayout, text] : Array<Dynamic>));
-    _Runtime.callProperty(TextLayout._paragraphLastLines__textLayout, 'clear', cast ([] : Array<Dynamic>));
+    ((cast TextLayout._paragraphLastLines__textLayout : flighthq._internal._Set).clear());
     _Runtime.callValue(TextLayout.buildGroups__textLayout, cast ([_Runtime.field(out, 'groups'), TextLayout._paragraphLastLines__textLayout, text, formatRanges, TextLayout._lineBreaks__textLayout, width, measure, wordWrap, multiline, maxLines, truncationCharacter] : Array<Dynamic>));
     _Runtime.callValue(TextLayout.writeLineMetrics__textLayout, cast ([out, _Runtime.field(out, 'groups')] : Array<Dynamic>));
     _Runtime.callValue(TextLayout.applyAlignment__textLayout, cast ([_Runtime.field(out, 'groups'), width, _Runtime.field(out, 'lineWidths'), direction, justification, TextLayout._paragraphLastLines__textLayout, text] : Array<Dynamic>));
@@ -442,7 +442,7 @@ class TextLayout {
           (activeGroup = cast (null : Dynamic));
         }
         _Runtime.callValue(commitLine, cast ([] : Array<Dynamic>));
-        _Runtime.callProperty(paragraphLastLines, 'add', cast ([(lineIndex - 1.0)] : Array<Dynamic>));
+        ((cast paragraphLastLines : flighthq._internal._Set).add((lineIndex - 1.0)));
         if (_Runtime.truthy(_Runtime.callValue(checkTruncation, cast ([] : Array<Dynamic>)))) { break; }
         if (_Runtime.truthy(!_Runtime.truthy(multiline))) { break; }
         (textIndex = cast ((breakIndex + 1.0) : Dynamic));
@@ -495,7 +495,7 @@ class TextLayout {
         i--;
       }
     }
-    _Runtime.callProperty(paragraphLastLines, 'add', cast ([lineIndex] : Array<Dynamic>));
+    ((cast paragraphLastLines : flighthq._internal._Set).add(lineIndex));
   }
 
   public static function applyAlignment__textLayout(groups:Array<TextLayoutGroup>, containerWidth:Float, lineWidths:Array<Float>, direction:TextDirection, justification:TextJustification, paragraphLastLines:Dynamic, text:String):Void {
@@ -534,7 +534,7 @@ class TextLayout {
     {
       var li:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(li, lineCount, '<'))) {
-        if (_Runtime.truthy(_Runtime.callProperty(paragraphLastLines, 'has', cast ([li] : Array<Dynamic>)))) { li++; continue; }
+        if (_Runtime.truthy(((cast paragraphLastLines : flighthq._internal._Set).has(li)))) { li++; continue; }
         var lineGroups:Array<TextLayoutGroup> = cast ([] : Array<Dynamic>);
         for (g in _Runtime.iterable(groups)) {
           if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(g, 'lineIndex'), li), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(g, 'format'), 'align'), 'justify')))) { _Runtime.callProperty(lineGroups, 'push', cast ([g] : Array<Dynamic>)); }

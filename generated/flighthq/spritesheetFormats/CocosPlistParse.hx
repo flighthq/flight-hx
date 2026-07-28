@@ -41,7 +41,7 @@ class CocosPlistParse {
         var keyEl:Dynamic = _Runtime.getIndex(children, i);
         var valEl:Dynamic = _Runtime.getIndex(children, (i + 1.0));
         if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.optionalField(keyEl, 'name'), 'key'), function():Dynamic return cast valEl))) {
-          _Runtime.callProperty(map, 'set', cast ([_Runtime.field(keyEl, 'text'), valEl] : Array<Dynamic>));
+          ((cast map : flighthq._internal._Map).set(_Runtime.field(keyEl, 'text'), valEl));
         }
         (i = cast ((i + 2.0) : Dynamic));
       }
@@ -82,13 +82,13 @@ class CocosPlistParse {
     } }
     if (_Runtime.truthy(!_Runtime.truthy(rootDict))) { return cast { frames: {  }, metadata: { format: 0.0, size: '{0,0}', textureFileName: '' } }; }
     rootMap = _Runtime.callValue(CocosPlistParse.dictToMap__cocosPlistParse, cast ([rootDict] : Array<Dynamic>));
-    metaEl = _Runtime.callProperty(rootMap, 'get', cast (['metadata'] : Array<Dynamic>));
+    metaEl = ((cast rootMap : flighthq._internal._Map).get('metadata'));
     metadata = { format: 0.0, size: '{0,0}', textureFileName: '' };
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.optionalField(metaEl, 'name'), 'dict'))) {
       var metaMap:Dynamic = _Runtime.callValue(CocosPlistParse.dictToMap__cocosPlistParse, cast ([metaEl] : Array<Dynamic>));
-      (metadata = cast ({ format: _Runtime.callValue(CocosPlistParse.getIntValue__cocosPlistParse, cast ([_Runtime.callProperty(metaMap, 'get', cast (['format'] : Array<Dynamic>))] : Array<Dynamic>)), size: _Runtime.callValue(CocosPlistParse.getTextValue__cocosPlistParse, cast ([_Runtime.callProperty(metaMap, 'get', cast (['size'] : Array<Dynamic>))] : Array<Dynamic>)), textureFileName: _Runtime.orValue(_Runtime.callValue(CocosPlistParse.getTextValue__cocosPlistParse, cast ([_Runtime.callProperty(metaMap, 'get', cast (['textureFileName'] : Array<Dynamic>))] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(CocosPlistParse.getTextValue__cocosPlistParse, cast ([_Runtime.callProperty(metaMap, 'get', cast (['realTextureFileName'] : Array<Dynamic>))] : Array<Dynamic>))) } : Dynamic));
+      (metadata = cast ({ format: _Runtime.callValue(CocosPlistParse.getIntValue__cocosPlistParse, cast ([((cast metaMap : flighthq._internal._Map).get('format'))] : Array<Dynamic>)), size: _Runtime.callValue(CocosPlistParse.getTextValue__cocosPlistParse, cast ([((cast metaMap : flighthq._internal._Map).get('size'))] : Array<Dynamic>)), textureFileName: _Runtime.orValue(_Runtime.callValue(CocosPlistParse.getTextValue__cocosPlistParse, cast ([((cast metaMap : flighthq._internal._Map).get('textureFileName'))] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(CocosPlistParse.getTextValue__cocosPlistParse, cast ([((cast metaMap : flighthq._internal._Map).get('realTextureFileName'))] : Array<Dynamic>))) } : Dynamic));
     }
-    framesEl = _Runtime.callProperty(rootMap, 'get', cast (['frames'] : Array<Dynamic>));
+    framesEl = ((cast rootMap : flighthq._internal._Map).get('frames'));
     frames = {  };
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.optionalField(framesEl, 'name'), 'dict'))) {
       var framesMap:Dynamic = _Runtime.callValue(CocosPlistParse.dictToMap__cocosPlistParse, cast ([framesEl] : Array<Dynamic>));
@@ -97,16 +97,16 @@ class CocosPlistParse {
         var frameEl:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
         if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(frameEl, 'name'), 'dict'))) { continue; }
         var fm:Dynamic = _Runtime.callValue(CocosPlistParse.dictToMap__cocosPlistParse, cast ([frameEl] : Array<Dynamic>));
-        var hasSpriteFields:Dynamic = _Runtime.callProperty(fm, 'has', cast (['spriteOffset'] : Array<Dynamic>));
-        var hasFrame:Dynamic = _Runtime.orValue(_Runtime.callProperty(fm, 'has', cast (['frame'] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callProperty(fm, 'has', cast (['textureRect'] : Array<Dynamic>)));
+        var hasSpriteFields:Dynamic = ((cast fm : flighthq._internal._Map).has('spriteOffset'));
+        var hasFrame:Dynamic = _Runtime.orValue(((cast fm : flighthq._internal._Map).has('frame')), function():Dynamic return cast ((cast fm : flighthq._internal._Map).has('textureRect')));
         if (_Runtime.truthy(_Runtime.andValue(!_Runtime.truthy(hasFrame), function():Dynamic return cast !_Runtime.truthy(hasSpriteFields)))) { continue; }
-        var rectStr:Dynamic = _Runtime.callValue(CocosPlistParse.getTextValue__cocosPlistParse, cast ([_Runtime.coalesce(_Runtime.callProperty(fm, 'get', cast (['frame'] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callProperty(fm, 'get', cast (['textureRect'] : Array<Dynamic>)))] : Array<Dynamic>));
-        var rotated:Dynamic = _Runtime.callValue(CocosPlistParse.getBoolValue__cocosPlistParse, cast ([_Runtime.coalesce(_Runtime.callProperty(fm, 'get', cast (['textureRotated'] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callProperty(fm, 'get', cast (['rotated'] : Array<Dynamic>)))] : Array<Dynamic>));
-        var offsetStr:Dynamic = _Runtime.callValue(CocosPlistParse.getTextValue__cocosPlistParse, cast ([_Runtime.coalesce(_Runtime.callProperty(fm, 'get', cast (['spriteOffset'] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callProperty(fm, 'get', cast (['offset'] : Array<Dynamic>)))] : Array<Dynamic>));
-        var sourceSizeStr:Dynamic = _Runtime.callValue(CocosPlistParse.getTextValue__cocosPlistParse, cast ([_Runtime.coalesce(_Runtime.callProperty(fm, 'get', cast (['spriteSourceSize'] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callProperty(fm, 'get', cast (['sourceSize'] : Array<Dynamic>)))] : Array<Dynamic>));
-        var sizeStr:Dynamic = _Runtime.callValue(CocosPlistParse.getTextValue__cocosPlistParse, cast ([_Runtime.coalesce(_Runtime.callProperty(fm, 'get', cast (['spriteSize'] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callProperty(fm, 'get', cast (['size'] : Array<Dynamic>)))] : Array<Dynamic>));
-        var trimmed:Dynamic = _Runtime.callValue(CocosPlistParse.getBoolValue__cocosPlistParse, cast ([_Runtime.coalesce(_Runtime.callProperty(fm, 'get', cast (['spriteTrimmed'] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callProperty(fm, 'get', cast (['trimmed'] : Array<Dynamic>)))] : Array<Dynamic>));
-        var aliasEl:Dynamic = _Runtime.callProperty(fm, 'get', cast (['aliases'] : Array<Dynamic>));
+        var rectStr:Dynamic = _Runtime.callValue(CocosPlistParse.getTextValue__cocosPlistParse, cast ([_Runtime.coalesce(((cast fm : flighthq._internal._Map).get('frame')), function():Dynamic return cast ((cast fm : flighthq._internal._Map).get('textureRect')))] : Array<Dynamic>));
+        var rotated:Dynamic = _Runtime.callValue(CocosPlistParse.getBoolValue__cocosPlistParse, cast ([_Runtime.coalesce(((cast fm : flighthq._internal._Map).get('textureRotated')), function():Dynamic return cast ((cast fm : flighthq._internal._Map).get('rotated')))] : Array<Dynamic>));
+        var offsetStr:Dynamic = _Runtime.callValue(CocosPlistParse.getTextValue__cocosPlistParse, cast ([_Runtime.coalesce(((cast fm : flighthq._internal._Map).get('spriteOffset')), function():Dynamic return cast ((cast fm : flighthq._internal._Map).get('offset')))] : Array<Dynamic>));
+        var sourceSizeStr:Dynamic = _Runtime.callValue(CocosPlistParse.getTextValue__cocosPlistParse, cast ([_Runtime.coalesce(((cast fm : flighthq._internal._Map).get('spriteSourceSize')), function():Dynamic return cast ((cast fm : flighthq._internal._Map).get('sourceSize')))] : Array<Dynamic>));
+        var sizeStr:Dynamic = _Runtime.callValue(CocosPlistParse.getTextValue__cocosPlistParse, cast ([_Runtime.coalesce(((cast fm : flighthq._internal._Map).get('spriteSize')), function():Dynamic return cast ((cast fm : flighthq._internal._Map).get('size')))] : Array<Dynamic>));
+        var trimmed:Dynamic = _Runtime.callValue(CocosPlistParse.getBoolValue__cocosPlistParse, cast ([_Runtime.coalesce(((cast fm : flighthq._internal._Map).get('spriteTrimmed')), function():Dynamic return cast ((cast fm : flighthq._internal._Map).get('trimmed')))] : Array<Dynamic>));
+        var aliasEl:Dynamic = ((cast fm : flighthq._internal._Map).get('aliases'));
         var aliases:Array<String> = cast ([] : Array<Dynamic>);
         if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.optionalField(aliasEl, 'name'), 'array'))) {
           for (child in _Runtime.iterable(_Runtime.field(aliasEl, 'children'))) {

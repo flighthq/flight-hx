@@ -107,10 +107,10 @@ class GlFullscreenPass {
     var v:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    quadVao = _Runtime.callProperty(GlFullscreenPass._quadVaos__glFullscreenPass, 'get', cast ([state] : Array<Dynamic>));
+    quadVao = ((cast GlFullscreenPass._quadVaos__glFullscreenPass : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(quadVao, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (quadVao = cast (flighthq._internal.backend.WebGl2Backend.createVertexArray(gl) : Dynamic));
-      _Runtime.callProperty(GlFullscreenPass._quadVaos__glFullscreenPass, 'set', cast ([state, quadVao] : Array<Dynamic>));
+      ((cast GlFullscreenPass._quadVaos__glFullscreenPass : flighthq._internal._WeakMap).set(state, quadVao));
     }
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, quadVao);
     v = _Runtime.field(runtime, 'quadVertexData');

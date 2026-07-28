@@ -33,7 +33,7 @@ class Lifecycle {
       _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onStateChange'), state] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(state, 'active'), function():Dynamic return cast !_Runtime.strictEquals(previous, 'active')))) {
         _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onResume')] : Array<Dynamic>));
-        var saved:Dynamic = _Runtime.callProperty(Lifecycle._savedState__lifecycle, 'get', cast ([app] : Array<Dynamic>));
+        var saved:Dynamic = ((cast Lifecycle._savedState__lifecycle : flighthq._internal._WeakMap).get(app));
         if (_Runtime.truthy(!_Runtime.strictEquals(saved, _Runtime.field(_Runtime, 'UNDEFINED')))) {
           _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onRestoreState'), saved] : Array<Dynamic>));
         }
@@ -41,7 +41,7 @@ class Lifecycle {
         _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onPause')] : Array<Dynamic>));
         var stateBag:Dynamic = {  };
         _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onSaveState'), stateBag] : Array<Dynamic>));
-        _Runtime.callProperty(Lifecycle._savedState__lifecycle, 'set', cast ([app, stateBag] : Array<Dynamic>));
+        ((cast Lifecycle._savedState__lifecycle : flighthq._internal._WeakMap).set(app, stateBag));
       } }
       (previous = cast (state : Dynamic));
     }] : Array<Dynamic>));
@@ -51,10 +51,10 @@ class Lifecycle {
         _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onMemoryWarning'), level] : Array<Dynamic>));
       }] : Array<Dynamic>)) : Dynamic));
     }
-    _Runtime.callProperty(Lifecycle._subscriptions__lifecycle, 'set', cast ([app, function() {
+    ((cast Lifecycle._subscriptions__lifecycle : flighthq._internal._WeakMap).set(app, function() {
       _Runtime.callValue(unsubscribeState, cast ([] : Array<Dynamic>));
       _Runtime.callOptionalValue(unsubscribeMemory, cast ([] : Array<Dynamic>));
-    }] : Array<Dynamic>));
+    }));
   }
 
   public static function createAppLifecycle():AppLifecycle {
@@ -136,16 +136,16 @@ class Lifecycle {
 
   public static function detachAppLifecycle(app:AppLifecycle):Void {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
-    unsubscribe = _Runtime.callProperty(Lifecycle._subscriptions__lifecycle, 'get', cast ([app] : Array<Dynamic>));
+    unsubscribe = ((cast Lifecycle._subscriptions__lifecycle : flighthq._internal._WeakMap).get(app));
     if (_Runtime.truthy(!_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.callValue(unsubscribe, cast ([] : Array<Dynamic>));
-      _Runtime.callProperty(Lifecycle._subscriptions__lifecycle, 'delete', cast ([app] : Array<Dynamic>));
+      ((cast Lifecycle._subscriptions__lifecycle : flighthq._internal._WeakMap).delete_(app));
     }
   }
 
   public static function disposeAppLifecycle(app:AppLifecycle):Void {
     _Runtime.callValue(detachAppLifecycle, cast ([app] : Array<Dynamic>));
-    _Runtime.callProperty(Lifecycle._savedState__lifecycle, 'delete', cast ([app] : Array<Dynamic>));
+    ((cast Lifecycle._savedState__lifecycle : flighthq._internal._WeakMap).delete_(app));
   }
 
   public static function getAppLaunchKind():AppLaunchKind {

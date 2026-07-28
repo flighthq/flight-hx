@@ -131,7 +131,7 @@ class Md5AnimParse {
     }
     nodeByName = _Runtime.construct(_Runtime.globalValue('Map'), []);
     for (joint in _Runtime.iterable(joints)) {
-      if (_Runtime.truthy(_Runtime.field(joint, 'name'))) { _Runtime.callProperty(nodeByName, 'set', cast ([_Runtime.field(joint, 'name'), joint] : Array<Dynamic>)); }
+      if (_Runtime.truthy(_Runtime.field(joint, 'name'))) { ((cast nodeByName : flighthq._internal._Map).set(_Runtime.field(joint, 'name'), joint)); }
     }
     {
       var j:Dynamic = 0.0;
@@ -179,7 +179,7 @@ class Md5AnimParse {
         }
         _Runtime.callValue(convertPositionsZUpToYUp, cast ([translationValues] : Array<Dynamic>));
         _Runtime.callValue(convertQuaternionsZUpToYUp, cast ([rotationValues] : Array<Dynamic>));
-        var node:Dynamic = _Runtime.coalesce(_Runtime.callProperty(nodeByName, 'get', cast ([_Runtime.field(entry, 'name')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.getIndex(joints, j));
+        var node:Dynamic = _Runtime.coalesce(((cast nodeByName : flighthq._internal._Map).get(_Runtime.field(entry, 'name'))), function():Dynamic return cast _Runtime.getIndex(joints, j));
         var translationTrack:Dynamic = _Runtime.callValue(createAnimationTrack, cast ([{ components: 3.0, times: times, values: translationValues }] : Array<Dynamic>));
         _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([translationTrack, { node: node, path: SceneAnimationPathTranslation }] : Array<Dynamic>))] : Array<Dynamic>));
         var rotationTrack:Dynamic = _Runtime.callValue(createAnimationTrack, cast ([{ components: 4.0, quaternion: true, times: times, values: rotationValues }] : Array<Dynamic>));

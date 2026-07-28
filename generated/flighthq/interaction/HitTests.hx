@@ -31,7 +31,7 @@ class HitTests {
     _Runtime.callValue(inverseMatrixTransformPointXY, cast ([HitTests.hitTestScratchPoint__hitTests, _Runtime.callValue(getNodeWorldMatrix, cast ([(cast node : DisplayObject)] : Array<Dynamic>)), x, y] : Array<Dynamic>));
     _Runtime.setField(out, 'localX', _Runtime.field(HitTests.hitTestScratchPoint__hitTests, 'x'));
     _Runtime.setField(out, 'localY', _Runtime.field(HitTests.hitTestScratchPoint__hitTests, 'y'));
-    exact = _Runtime.callProperty(HitTests.hitTestExactRegistry__hitTests, 'get', cast ([_Runtime.field(node, 'kind')] : Array<Dynamic>));
+    exact = ((cast HitTests.hitTestExactRegistry__hitTests : flighthq._internal._Map).get(_Runtime.field(node, 'kind')));
     _Runtime.setField(out, 'subIndex', _Runtime.select(exact, function():Dynamic return cast _Runtime.callValue(exact, cast ([node, x, y] : Array<Dynamic>)), function():Dynamic return cast -1.0));
   }
 
@@ -94,11 +94,11 @@ class HitTests {
   }
 
   public static function registerHitTest(kind:Kind, fn:HitTestFunction):Void {
-    _Runtime.callProperty(HitTests.hitTestRegistry__hitTests, 'set', cast ([kind, fn] : Array<Dynamic>));
+    ((cast HitTests.hitTestRegistry__hitTests : flighthq._internal._Map).set(kind, fn));
   }
 
   public static function registerHitTestPrecise(kind:Kind, fn:HitTestPreciseFunction):Void {
-    _Runtime.callProperty(HitTests.hitTestExactRegistry__hitTests, 'set', cast ([kind, fn] : Array<Dynamic>));
+    ((cast HitTests.hitTestExactRegistry__hitTests : flighthq._internal._Map).set(kind, fn));
   }
 
   public static function findFirstHit__hitTests(node:NodeAny, x:Float, y:Float, precise:Bool):Null<NodeAny> {
@@ -179,10 +179,10 @@ class HitTests {
   public static function testNodeGeometry__hitTests(node:NodeAny, x:Float, y:Float, precise:Bool):Bool {
     var coarse:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(precise)) {
-      var exact:Dynamic = _Runtime.callProperty(HitTests.hitTestExactRegistry__hitTests, 'get', cast ([_Runtime.field(node, 'kind')] : Array<Dynamic>));
+      var exact:Dynamic = ((cast HitTests.hitTestExactRegistry__hitTests : flighthq._internal._Map).get(_Runtime.field(node, 'kind')));
       if (_Runtime.truthy(!_Runtime.strictEquals(exact, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast _Runtime.compare(_Runtime.callValue(exact, cast ([node, x, y] : Array<Dynamic>)), 0.0, '>='); }
     }
-    coarse = _Runtime.callProperty(HitTests.hitTestRegistry__hitTests, 'get', cast ([_Runtime.field(node, 'kind')] : Array<Dynamic>));
+    coarse = ((cast HitTests.hitTestRegistry__hitTests : flighthq._internal._Map).get(_Runtime.field(node, 'kind')));
     return cast _Runtime.select(coarse, function():Dynamic return cast _Runtime.callValue(coarse, cast ([node, x, y] : Array<Dynamic>)), function():Dynamic return cast false);
     return cast null;
   }
@@ -193,7 +193,7 @@ class HitTests {
     if (_Runtime.truthy(_Runtime.strictEquals(hitArea, 'bounds'))) { return cast _Runtime.callValue(hitTestGraphLocalBounds, cast ([node, x, y] : Array<Dynamic>)); }
     if (_Runtime.truthy(_Runtime.hasField(hitArea, 'kind'))) {
       var proxy:Dynamic = (cast hitArea : NodeAny);
-      var proxyHit:Dynamic = _Runtime.callProperty(HitTests.hitTestRegistry__hitTests, 'get', cast ([_Runtime.field(proxy, 'kind')] : Array<Dynamic>));
+      var proxyHit:Dynamic = ((cast HitTests.hitTestRegistry__hitTests : flighthq._internal._Map).get(_Runtime.field(proxy, 'kind')));
       return cast _Runtime.select(proxyHit, function():Dynamic return cast _Runtime.callValue(proxyHit, cast ([proxy, x, y] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(hitTestGraphLocalBounds, cast ([proxy, x, y] : Array<Dynamic>)));
     }
     _Runtime.callValue(inverseMatrixTransformPointXY, cast ([HitTests.hitTestScratchPoint__hitTests, _Runtime.callValue(getNodeWorldMatrix, cast ([(cast node : DisplayObject)] : Array<Dynamic>)), x, y] : Array<Dynamic>));

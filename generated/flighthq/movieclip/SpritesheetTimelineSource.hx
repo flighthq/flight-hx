@@ -22,12 +22,12 @@ class SpritesheetTimelineSource {
       var sheetFrame:Dynamic = cast _Runtime.UNDEFINED;
       atlas = _Runtime.field(spritesheet, 'atlas');
       if (_Runtime.truthy(_Runtime.strictEquals(atlas, null))) { return; }
-      bitmap = _Runtime.callProperty(bitmaps, 'get', cast ([target] : Array<Dynamic>));
+      bitmap = ((cast bitmaps : flighthq._internal._WeakMap).get(target));
       if (_Runtime.truthy(_Runtime.strictEquals(bitmap, _Runtime.field(_Runtime, 'UNDEFINED')))) {
         (bitmap = cast (_Runtime.callValue(createBitmap, cast ([] : Array<Dynamic>)) : Dynamic));
         _Runtime.setField(_Runtime.field(bitmap, 'data'), 'image', _Runtime.field(atlas, 'image'));
         _Runtime.callValue(addNodeChild, cast ([target, bitmap] : Array<Dynamic>));
-        _Runtime.callProperty(bitmaps, 'set', cast ([target, bitmap] : Array<Dynamic>));
+        ((cast bitmaps : flighthq._internal._WeakMap).set(target, bitmap));
       }
       sheetFrame = _Runtime.getIndex(_Runtime.field(spritesheet, 'frames'), _Runtime.getIndex(_Runtime.field(animation, 'frames'), (frame - 1.0)));
       if (_Runtime.truthy(_Runtime.strictEquals(sheetFrame, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }

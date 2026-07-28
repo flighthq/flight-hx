@@ -38,7 +38,7 @@ class Protocol {
       _Runtime.callValue(emitSignal, cast ([_Runtime.field(handler, 'onOpenUrl'), url] : Array<Dynamic>));
     }
     unsubscribe = _Runtime.callProperty(backend, 'subscribe', cast ([function(url:Dynamic) return _Runtime.callValue(emitSignal, cast ([_Runtime.field(handler, 'onOpenUrl'), url] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callProperty(Protocol._subscriptions__protocol, 'set', cast ([handler, unsubscribe] : Array<Dynamic>));
+    ((cast Protocol._subscriptions__protocol : flighthq._internal._WeakMap).set(handler, unsubscribe));
   }
 
   public static function createProtocolHandler():ProtocolHandler {
@@ -133,10 +133,10 @@ class Protocol {
 
   public static function detachProtocolHandler(handler:ProtocolHandler):Void {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
-    unsubscribe = _Runtime.callProperty(Protocol._subscriptions__protocol, 'get', cast ([handler] : Array<Dynamic>));
+    unsubscribe = ((cast Protocol._subscriptions__protocol : flighthq._internal._WeakMap).get(handler));
     if (_Runtime.truthy(!_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.callValue(unsubscribe, cast ([] : Array<Dynamic>));
-      _Runtime.callProperty(Protocol._subscriptions__protocol, 'delete', cast ([handler] : Array<Dynamic>));
+      ((cast Protocol._subscriptions__protocol : flighthq._internal._WeakMap).delete_(handler));
     }
   }
 
@@ -174,7 +174,7 @@ class Protocol {
     var lower:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.typeofValue(scheme), 'string'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(scheme, 'length'), 0.0)))) { return cast false; }
     lower = _Runtime.callProperty(scheme, 'toLowerCase', cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.callProperty(Protocol._reservedSchemes__protocol, 'has', cast ([lower] : Array<Dynamic>)))) { return cast false; }
+    if (_Runtime.truthy(((cast Protocol._reservedSchemes__protocol : flighthq._internal._Set).has(lower)))) { return cast false; }
     return cast _Runtime.callProperty(Protocol._schemePattern__protocol, 'test', cast ([lower] : Array<Dynamic>));
     return cast null;
   }

@@ -17,7 +17,7 @@ class TauriWindow {
     windows = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
     run = function(win:ApplicationWindow, fn:Dynamic) {
       var w:Dynamic = cast _Runtime.UNDEFINED;
-      w = _Runtime.callProperty(windows, 'get', cast ([win] : Array<Dynamic>));
+      w = ((cast windows : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(w, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       flighthq._internal._Async.recover(_Runtime.callValue(fn, cast ([w] : Array<Dynamic>)), function() {
       
@@ -26,7 +26,7 @@ class TauriWindow {
     return cast { open: function(win:Dynamic, options:Dynamic) {
       var w:Dynamic = cast _Runtime.UNDEFINED;
       w = _Runtime.callProperty(windowModule, 'getCurrentWindow', cast ([] : Array<Dynamic>));
-      _Runtime.callProperty(windows, 'set', cast ([win, w] : Array<Dynamic>));
+      ((cast windows : flighthq._internal._WeakMap).set(win, w));
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'title'), _Runtime.field(_Runtime, 'UNDEFINED')))) { flighthq._internal._Async.recover(_Runtime.callProperty(w, 'setTitle', cast ([_Runtime.field(options, 'title')] : Array<Dynamic>)), function() {
       
       }); }
@@ -99,12 +99,12 @@ class TauriWindow {
       return cast true;
     }, close: function(win:Dynamic) {
       var w:Dynamic = cast _Runtime.UNDEFINED;
-      w = _Runtime.callProperty(windows, 'get', cast ([win] : Array<Dynamic>));
+      w = ((cast windows : flighthq._internal._WeakMap).get(win));
       if (_Runtime.truthy(_Runtime.strictEquals(w, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
       flighthq._internal._Async.recover(_Runtime.callProperty(w, 'close', cast ([] : Array<Dynamic>)), function() {
       
       });
-      _Runtime.callProperty(windows, 'delete', cast ([win] : Array<Dynamic>));
+      ((cast windows : flighthq._internal._WeakMap).delete_(win));
     }, setTitle: function(win:Dynamic, title:Dynamic) {
       _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'setTitle', cast ([title] : Array<Dynamic>))] : Array<Dynamic>));
     }, setPosition: function(win:Dynamic, x:Dynamic, y:Dynamic) {

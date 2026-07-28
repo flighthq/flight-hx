@@ -116,7 +116,7 @@ class WgpuGradientBevelEffect {
 
   public static function getApplyPipeline__wgpuGradientBevelEffect(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Dynamic = cast _Runtime.UNDEFINED;
-    p = _Runtime.callProperty(WgpuGradientBevelEffect.applyPipelines__wgpuGradientBevelEffect, 'get', cast ([state] : Array<Dynamic>));
+    p = ((cast WgpuGradientBevelEffect.applyPipelines__wgpuGradientBevelEffect : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       var fs:Dynamic = _Runtime.callValue(getWgpuEffectPassState, cast ([state] : Array<Dynamic>));
       var __destructure1:Dynamic = state;
@@ -126,7 +126,7 @@ class WgpuGradientBevelEffect {
       var pipelineLayout:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([_Runtime.field(fs, 'uniformBGLayout'), _Runtime.field(fs, 'textureBGLayout'), _Runtime.field(fs, 'textureBGLayout'), _Runtime.field(fs, 'textureBGLayout')] : Array<Dynamic>) }] : Array<Dynamic>));
       var pipeline:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: pipelineLayout, vertex: { module: shaderModule, entryPoint: 'vs_main' }, fragment: { module: shaderModule, entryPoint: 'fs_main', targets: cast ([{ format: format }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
       (p = cast ({ pipeline: pipeline, blendMode: 'premul' } : Dynamic));
-      _Runtime.callProperty(WgpuGradientBevelEffect.applyPipelines__wgpuGradientBevelEffect, 'set', cast ([state, p] : Array<Dynamic>));
+      ((cast WgpuGradientBevelEffect.applyPipelines__wgpuGradientBevelEffect : flighthq._internal._WeakMap).set(state, p));
     }
     return cast p;
     return cast null;
@@ -134,7 +134,7 @@ class WgpuGradientBevelEffect {
 
   public static function getEncodePipeline__wgpuGradientBevelEffect(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Dynamic = cast _Runtime.UNDEFINED;
-    p = _Runtime.callProperty(WgpuGradientBevelEffect.encodePipelines__wgpuGradientBevelEffect, 'get', cast ([state] : Array<Dynamic>));
+    p = ((cast WgpuGradientBevelEffect.encodePipelines__wgpuGradientBevelEffect : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       var fs:Dynamic = _Runtime.callValue(getWgpuEffectPassState, cast ([state] : Array<Dynamic>));
       var __destructure2:Dynamic = state;
@@ -144,7 +144,7 @@ class WgpuGradientBevelEffect {
       var pipelineLayout:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([_Runtime.field(fs, 'uniformBGLayout'), _Runtime.field(fs, 'textureBGLayout')] : Array<Dynamic>) }] : Array<Dynamic>));
       var pipeline:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: pipelineLayout, vertex: { module: shaderModule, entryPoint: 'vs_main' }, fragment: { module: shaderModule, entryPoint: 'fs_main', targets: cast ([{ format: format }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
       (p = cast ({ pipeline: pipeline, blendMode: 'replace' } : Dynamic));
-      _Runtime.callProperty(WgpuGradientBevelEffect.encodePipelines__wgpuGradientBevelEffect, 'set', cast ([state, p] : Array<Dynamic>));
+      ((cast WgpuGradientBevelEffect.encodePipelines__wgpuGradientBevelEffect : flighthq._internal._WeakMap).set(state, p));
     }
     return cast p;
     return cast null;

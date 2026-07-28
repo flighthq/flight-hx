@@ -28,12 +28,12 @@ class _GlWireframeUploadValues {
     var byteOffset:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     meshUpload = _Runtime.callValue(ensureGlMeshUpload, cast ([state, geometry] : Array<Dynamic>));
-    perState = _Runtime.callProperty(_GlWireframeUploadValues.wireframeUploads__glWireframeUpload, 'get', cast ([state] : Array<Dynamic>));
+    perState = ((cast _GlWireframeUploadValues.wireframeUploads__glWireframeUpload : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(perState, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (perState = cast (_Runtime.construct(_Runtime.globalValue('WeakMap'), []) : Dynamic));
-      _Runtime.callProperty(_GlWireframeUploadValues.wireframeUploads__glWireframeUpload, 'set', cast ([state, perState] : Array<Dynamic>));
+      ((cast _GlWireframeUploadValues.wireframeUploads__glWireframeUpload : flighthq._internal._WeakMap).set(state, perState));
     }
-    upload = _Runtime.callProperty(perState, 'get', cast ([(cast geometry : MeshGeometry)] : Array<Dynamic>));
+    upload = ((cast perState : flighthq._internal._WeakMap).get((cast geometry : MeshGeometry)));
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(upload, 'version'), _Runtime.field(geometry, 'version'))))) {
       flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, _Runtime.field(upload, 'vao'));
       return cast upload;
@@ -42,7 +42,7 @@ class _GlWireframeUploadValues {
     indexType = _Runtime.select(_Runtime.isInstanceOf(lineIndices, _Runtime.globalValue('Uint32Array')), function():Dynamic return cast flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT, function():Dynamic return cast flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT);
     if (_Runtime.truthy(_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (upload = cast ({ indexType: indexType, lineIndexBuffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), vao: flighthq._internal.backend.WebGl2Backend.createVertexArray(gl), version: -1.0 } : Dynamic));
-      _Runtime.callProperty(perState, 'set', cast ([(cast geometry : MeshGeometry), upload] : Array<Dynamic>));
+      ((cast perState : flighthq._internal._WeakMap).set((cast geometry : MeshGeometry), upload));
     }
     _Runtime.setField(upload, 'indexType', indexType);
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, _Runtime.field(upload, 'vao'));

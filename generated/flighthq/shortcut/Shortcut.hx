@@ -94,12 +94,12 @@ class Shortcut {
     key = null;
     for (token in _Runtime.iterable(tokens)) {
       var lower:Dynamic = _Runtime.callProperty(token, 'toLowerCase', cast ([] : Array<Dynamic>));
-      var mod:Dynamic = _Runtime.callProperty(Shortcut._modifierAliases__shortcut, 'get', cast ([lower] : Array<Dynamic>));
+      var mod:Dynamic = ((cast Shortcut._modifierAliases__shortcut : flighthq._internal._Map).get(lower));
       if (_Runtime.truthy(!_Runtime.strictEquals(mod, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-        if (_Runtime.truthy(_Runtime.callProperty(seenModifiers, 'has', cast ([mod] : Array<Dynamic>)))) {
+        if (_Runtime.truthy(((cast seenModifiers : flighthq._internal._Set).has(mod)))) {
           return cast { reason: 'duplicate-modifier', token: token };
         }
-        _Runtime.callProperty(seenModifiers, 'add', cast ([mod] : Array<Dynamic>));
+        ((cast seenModifiers : flighthq._internal._Set).add(mod));
         _Runtime.callProperty(modifiers, 'push', cast ([mod] : Array<Dynamic>));
       } else {
         if (_Runtime.truthy(!_Runtime.strictEquals(key, null))) {
@@ -111,7 +111,7 @@ class Shortcut {
     if (_Runtime.truthy(_Runtime.strictEquals(key, null))) {
       return cast { reason: 'missing-key', token: '' };
     }
-    canonicalKey = _Runtime.callProperty(Shortcut._keyAliases__shortcut, 'get', cast ([_Runtime.callProperty(key, 'toLowerCase', cast ([] : Array<Dynamic>))] : Array<Dynamic>));
+    canonicalKey = ((cast Shortcut._keyAliases__shortcut : flighthq._internal._Map).get(_Runtime.callProperty(key, 'toLowerCase', cast ([] : Array<Dynamic>))));
     if (_Runtime.truthy(_Runtime.strictEquals(canonicalKey, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       return cast { reason: 'unknown-key', token: key };
     }
@@ -209,7 +209,7 @@ class Shortcut {
   }
 
   public static function getAcceleratorKeyLabel(key:String):String {
-    return cast _Runtime.coalesce(_Runtime.callProperty(Shortcut._keyDisplayNames__shortcut, 'get', cast ([key] : Array<Dynamic>)), function():Dynamic return cast key);
+    return cast _Runtime.coalesce(((cast Shortcut._keyDisplayNames__shortcut : flighthq._internal._Map).get(key)), function():Dynamic return cast key);
     return cast null;
   }
 

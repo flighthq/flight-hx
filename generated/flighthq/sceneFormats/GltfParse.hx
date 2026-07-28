@@ -902,13 +902,13 @@ class GltfParse {
     var roots:Array<Float> = cast _Runtime.UNDEFINED;
     referenced = _Runtime.construct(_Runtime.globalValue('Set'), []);
     for (node in _Runtime.iterable(nodes)) {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(node, 'children'), _Runtime.field(_Runtime, 'UNDEFINED')))) { for (c in _Runtime.iterable(_Runtime.field(node, 'children'))) {   _Runtime.callProperty(referenced, 'add', cast ([c] : Array<Dynamic>)); } }
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(node, 'children'), _Runtime.field(_Runtime, 'UNDEFINED')))) { for (c in _Runtime.iterable(_Runtime.field(node, 'children'))) {   ((cast referenced : flighthq._internal._Set).add(c)); } }
     }
     roots = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(nodes, 'length'), '<'))) {
-        if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(referenced, 'has', cast ([i] : Array<Dynamic>))))) { _Runtime.callProperty(roots, 'push', cast ([i] : Array<Dynamic>)); }
+        if (_Runtime.truthy(!_Runtime.truthy(((cast referenced : flighthq._internal._Set).has(i))))) { _Runtime.callProperty(roots, 'push', cast ([i] : Array<Dynamic>)); }
         i++;
       }
     }

@@ -24,7 +24,7 @@ class SpritesheetValidation {
       {
         var fi:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(fi, _Runtime.field(frames, 'length'), '<'))) {
-          if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(regionIds, 'has', cast ([_Runtime.field(_Runtime.getIndex(frames, fi), 'id')] : Array<Dynamic>))))) {
+          if (_Runtime.truthy(!_Runtime.truthy(((cast regionIds : flighthq._internal._Set).has(_Runtime.field(_Runtime.getIndex(frames, fi), 'id')))))) {
             _Runtime.callProperty(diagnostics, 'push', cast ([{ animationName: null, frameIndex: fi, message: 'Frame ' + Std.string(fi) + ' references atlas region id ' + Std.string(_Runtime.field(_Runtime.getIndex(frames, fi), 'id')) + ' which does not exist in the atlas.', severity: 'error' }] : Array<Dynamic>));
           }
           fi++;
@@ -65,7 +65,7 @@ class SpritesheetValidation {
     frameNameSet = _Runtime.construct(_Runtime.globalValue('Set'), []);
     for (fd in _Runtime.iterable(frames)) {
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(fd, 'name'), ''))) {
-        _Runtime.callProperty(frameNameSet, 'add', cast ([_Runtime.field(fd, 'name')] : Array<Dynamic>));
+        ((cast frameNameSet : flighthq._internal._Set).add(_Runtime.field(fd, 'name')));
       }
     }
     for (ad in _Runtime.iterable(animations)) {
@@ -76,7 +76,7 @@ class SpritesheetValidation {
           var ai:Dynamic = 0.0;
           while (_Runtime.truthy(_Runtime.compare(ai, _Runtime.field(_Runtime.field(ad, 'frameNames'), 'length'), '<'))) {
             var fname:Dynamic = _Runtime.getIndex(_Runtime.field(ad, 'frameNames'), ai);
-            if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(frameNameSet, 'has', cast ([fname] : Array<Dynamic>))))) {
+            if (_Runtime.truthy(!_Runtime.truthy(((cast frameNameSet : flighthq._internal._Set).has(fname))))) {
               _Runtime.callProperty(diagnostics, 'push', cast ([{ animationName: _Runtime.field(ad, 'name'), frameIndex: ai, message: 'Animation "' + Std.string(_Runtime.field(ad, 'name')) + '" references frame name "' + Std.string(fname) + '" which is not present in the data frame list.', severity: 'error' }] : Array<Dynamic>));
             }
             ai++;

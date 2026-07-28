@@ -26,19 +26,19 @@ class CanvasRenderTarget {
     var preserved:Dynamic = cast _Runtime.UNDEFINED;
     handles = (cast state : Dynamic);
     runtime = _Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    stack = _Runtime.callProperty(CanvasRenderTarget._targetStack__canvasRenderTarget, 'get', cast ([state] : Array<Dynamic>));
+    stack = ((cast CanvasRenderTarget._targetStack__canvasRenderTarget : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(stack, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (stack = cast (cast ([] : Array<Dynamic>) : Dynamic));
-      _Runtime.callProperty(CanvasRenderTarget._targetStack__canvasRenderTarget, 'set', cast ([state, stack] : Array<Dynamic>));
+      ((cast CanvasRenderTarget._targetStack__canvasRenderTarget : flighthq._internal._WeakMap).set(state, stack));
     }
     _Runtime.callProperty(stack, 'push', cast ([{ canvas: _Runtime.field(handles, 'canvas'), context: _Runtime.field(handles, 'context'), renderTransform2D: _Runtime.field(handles, 'renderTransform2D') }] : Array<Dynamic>));
     _Runtime.setField(handles, 'canvas', _Runtime.field(target, 'canvas'));
     _Runtime.setField(handles, 'context', _Runtime.field(target, 'context'));
-    _Runtime.setField(_Runtime.field(handles, 'context'), 'imageSmoothingEnabled', _Runtime.field(runtime, 'imageSmoothingEnabled'));
-    _Runtime.setField(_Runtime.field(handles, 'context'), 'imageSmoothingQuality', _Runtime.field(runtime, 'imageSmoothingQuality'));
+    flighthq._internal.backend.Canvas2dBackend.setField(_Runtime.field(handles, 'context'), 'imageSmoothingEnabled', _Runtime.field(runtime, 'imageSmoothingEnabled'));
+    flighthq._internal.backend.Canvas2dBackend.setField(_Runtime.field(handles, 'context'), 'imageSmoothingQuality', _Runtime.field(runtime, 'imageSmoothingQuality'));
     preserveColor = _Runtime.optionalField(preserve, 'preserveColor');
     preserved = _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(preserveColor), 'boolean'), function():Dynamic return cast preserveColor, function():Dynamic return cast _Runtime.strictEquals(_Runtime.optionalIndex(preserveColor, 0.0), true));
-    if (_Runtime.truthy(!_Runtime.truthy(preserved))) { _Runtime.callProperty(_Runtime.field(handles, 'context'), 'clearRect', cast ([0.0, 0.0, _Runtime.field(target, 'width'), _Runtime.field(target, 'height')] : Array<Dynamic>)); }
+    if (_Runtime.truthy(!_Runtime.truthy(preserved))) { flighthq._internal.backend.Canvas2dBackend.call(_Runtime.field(handles, 'context'), 'clearRect', cast ([0.0, 0.0, _Runtime.field(target, 'width'), _Runtime.field(target, 'height')] : Array<Dynamic>)); }
   }
 
   public static function createCanvasRenderTarget(width:Float, height:Float):Dynamic {
@@ -63,7 +63,7 @@ class CanvasRenderTarget {
     var handles:Dynamic = cast _Runtime.UNDEFINED;
     var saved:Dynamic = cast _Runtime.UNDEFINED;
     handles = (cast state : Dynamic);
-    saved = _Runtime.callOptionalProperty(_Runtime.callProperty(CanvasRenderTarget._targetStack__canvasRenderTarget, 'get', cast ([state] : Array<Dynamic>)), 'pop', cast ([] : Array<Dynamic>));
+    saved = _Runtime.callOptionalProperty(((cast CanvasRenderTarget._targetStack__canvasRenderTarget : flighthq._internal._WeakMap).get(state)), 'pop', cast ([] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(saved, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
     _Runtime.setField(handles, 'canvas', _Runtime.field(saved, 'canvas'));
     _Runtime.setField(handles, 'context', _Runtime.field(saved, 'context'));

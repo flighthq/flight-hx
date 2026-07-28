@@ -27,7 +27,7 @@ class GlMeshUpload {
     var stride:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     cache = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'uploadCache');
-    upload = _Runtime.callProperty(cache, 'get', cast ([(cast geometry : MeshGeometry)] : Array<Dynamic>));
+    upload = ((cast cache : flighthq._internal._WeakMap).get((cast geometry : MeshGeometry)));
     bindPose = _Runtime.select(gpuSkinned, function():Dynamic return cast _Runtime.callValue(getMeshGeometrySkinBindPose, cast ([geometry] : Array<Dynamic>)), function():Dynamic return cast null);
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.select(!_Runtime.strictEquals(bindPose, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(upload, 'skinBindUploaded'), true), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(upload, 'version'), _Runtime.field(geometry, 'version')))))) {
       flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, _Runtime.field(upload, 'vao'));
@@ -35,7 +35,7 @@ class GlMeshUpload {
     }
     if (_Runtime.truthy(_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (upload = cast ({ indexBuffer: null, indexCount: 0.0, indexType: flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT, vao: flighthq._internal.backend.WebGl2Backend.createVertexArray(gl), version: -1.0, vertexBuffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl) } : Dynamic));
-      _Runtime.callProperty(cache, 'set', cast ([(cast geometry : MeshGeometry), upload] : Array<Dynamic>));
+      ((cast cache : flighthq._internal._WeakMap).set((cast geometry : MeshGeometry), upload));
     }
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, _Runtime.field(upload, 'vao'));
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(upload, 'vertexBuffer'));

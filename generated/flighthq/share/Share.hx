@@ -18,7 +18,7 @@ class Share {
 
   public static function attachShareSignals(signals:ShareSignals):Void {
     _Runtime.callValue(detachShareSignals, cast ([signals] : Array<Dynamic>));
-    _Runtime.callProperty(Share._signalListeners__share, 'set', cast ([signals, true] : Array<Dynamic>));
+    ((cast Share._signalListeners__share : flighthq._internal._Map).set(signals, true));
   }
 
   public static function canShareContent(content:ShareContent):Bool {
@@ -104,7 +104,7 @@ class Share {
   }
 
   public static function detachShareSignals(signals:ShareSignals):Void {
-    _Runtime.callProperty(Share._signalListeners__share, 'delete', cast ([signals] : Array<Dynamic>));
+    ((cast Share._signalListeners__share : flighthq._internal._Map).delete_(signals));
   }
 
   public static function disposeShareSignals(signals:ShareSignals):Void {
@@ -175,9 +175,9 @@ class Share {
           return flighthq._internal._Async.flatMap(_Runtime.callProperty(_Runtime.callValue(getShareBackend, cast ([] : Array<Dynamic>)), 'shareWithResult', cast ([content, options] : Array<Dynamic>)), function(__awaitValue7:Dynamic):Dynamic {
             result = __awaitValue7;
             var __flowBranch8:Dynamic;
-            if (_Runtime.truthy(_Runtime.compare(_Runtime.field(Share._signalListeners__share, 'size'), 0.0, '>'))) {
+            if (_Runtime.truthy(_Runtime.compare((cast Share._signalListeners__share : flighthq._internal._Map).size, 0.0, '>'))) {
               __flowBranch8 = flighthq._internal._Async.protect(function():Dynamic {
-                for (signals in _Runtime.iterable(_Runtime.callProperty(Share._signalListeners__share, 'keys', cast ([] : Array<Dynamic>)))) {
+                for (signals in _Runtime.iterable(((cast Share._signalListeners__share : flighthq._internal._Map).keys()))) {
                   _Runtime.callValue(emitSignal, cast ([_Runtime.field(signals, 'onShareResult'), result] : Array<Dynamic>));
                 }
                 return flighthq._internal._Async.flowNormal();

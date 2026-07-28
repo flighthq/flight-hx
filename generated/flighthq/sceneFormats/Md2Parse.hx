@@ -157,7 +157,7 @@ class Md2Parse {
               continue;
             }
             var key:Dynamic = '' + Std.string(vertIdx) + '/' + Std.string(texIdx) + '';
-            var idx:Dynamic = _Runtime.callProperty(dedup, 'get', cast ([key] : Array<Dynamic>));
+            var idx:Dynamic = ((cast dedup : flighthq._internal._Map).get(key));
             if (_Runtime.truthy(_Runtime.strictEquals(idx, _Runtime.field(_Runtime, 'UNDEFINED')))) {
               (idx = cast ((_Runtime.field(interleavedVertices, 'length') / CANONICAL_FLOATS_PER_VERTEX) : Dynamic));
               var p:Dynamic = (vertIdx * 3.0);
@@ -166,7 +166,7 @@ class Md2Parse {
               _Runtime.pushMany(interleavedVertices, cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
               _Runtime.pushMany(interleavedVertices, cast ([_Runtime.getIndex(texS, texIdx), _Runtime.getIndex(texT, texIdx)] : Array<Dynamic>));
               _Runtime.callProperty(sourceVertexIndices, 'push', cast ([vertIdx] : Array<Dynamic>));
-              _Runtime.callProperty(dedup, 'set', cast ([key, idx] : Array<Dynamic>));
+              ((cast dedup : flighthq._internal._Map).set(key, idx));
             }
             _Runtime.callProperty(indices, 'push', cast ([idx] : Array<Dynamic>));
             c++;

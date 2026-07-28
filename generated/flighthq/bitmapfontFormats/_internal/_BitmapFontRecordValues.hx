@@ -29,20 +29,20 @@ class _BitmapFontRecordValues {
       for (page in _Runtime.iterable(_Runtime.field(record, 'pages'))) {
         var atlas:Dynamic = _Runtime.callValue(resolvePage, cast ([_Runtime.field(page, 'id'), _Runtime.field(page, 'file')] : Array<Dynamic>));
         if (_Runtime.truthy(!_Runtime.strictEquals(atlas, null))) {
-          _Runtime.callProperty(resolved, 'set', cast ([_Runtime.field(page, 'id'), atlas] : Array<Dynamic>));
+          ((cast resolved : flighthq._internal._Map).set(_Runtime.field(page, 'id'), atlas));
           if (_Runtime.truthy(_Runtime.compare(_Runtime.field(page, 'id'), maxPageId, '>'))) { (maxPageId = cast (_Runtime.field(page, 'id') : Dynamic)); }
         }
       }
     }
     for (char in _Runtime.iterable(_Runtime.field(record, 'chars'))) {
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(resolved, 'has', cast ([_Runtime.field(char, 'page')] : Array<Dynamic>))))) { return cast null; }
+      if (_Runtime.truthy(!_Runtime.truthy(((cast resolved : flighthq._internal._Map).has(_Runtime.field(char, 'page')))))) { return cast null; }
       if (_Runtime.truthy(_Runtime.compare(_Runtime.field(char, 'page'), maxPageId, '>'))) { (maxPageId = cast (_Runtime.field(char, 'page') : Dynamic)); }
     }
     pages = cast ([] : Array<Dynamic>);
     {
       var id:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(id, maxPageId, '<='))) {
-        var atlas:Dynamic = _Runtime.callProperty(resolved, 'get', cast ([id] : Array<Dynamic>));
+        var atlas:Dynamic = ((cast resolved : flighthq._internal._Map).get(id));
         if (_Runtime.truthy(!_Runtime.strictEquals(atlas, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(pages, id, atlas); }
         id++;
       }

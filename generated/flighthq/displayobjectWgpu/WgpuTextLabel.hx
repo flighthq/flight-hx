@@ -54,10 +54,10 @@ class WgpuTextLabel {
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     textLabelData = _Runtime.callValue(getWgpuRendererData, cast ([data] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(textLabelData, null))) { return; }
-    entry = _Runtime.callProperty(_Runtime.field(runtime, 'imageResourceTextureCache'), 'get', cast ([_Runtime.field(textLabelData, 'image')] : Array<Dynamic>));
+    entry = ((cast _Runtime.field(runtime, 'imageResourceTextureCache') : flighthq._internal._WeakMap).get(_Runtime.field(textLabelData, 'image')));
     if (_Runtime.truthy(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.callProperty(_Runtime.field(entry, 'texture'), 'destroy', cast ([] : Array<Dynamic>));
-      _Runtime.callProperty(_Runtime.field(runtime, 'imageResourceTextureCache'), 'delete', cast ([_Runtime.field(textLabelData, 'image')] : Array<Dynamic>));
+      ((cast _Runtime.field(runtime, 'imageResourceTextureCache') : flighthq._internal._WeakMap).delete_(_Runtime.field(textLabelData, 'image')));
     }
   }
 

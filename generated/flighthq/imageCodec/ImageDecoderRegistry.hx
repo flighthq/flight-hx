@@ -7,25 +7,25 @@ import flighthq.types.ImageDecoder;
 
 class ImageDecoderRegistry {
   public static function clearImageDecoders():Void {
-    _Runtime.callProperty(ImageDecoderRegistry.decoders__imageDecoderRegistry, 'clear', cast ([] : Array<Dynamic>));
+    ((cast ImageDecoderRegistry.decoders__imageDecoderRegistry : flighthq._internal._Map).clear());
   }
 
   public static function getImageDecoder(mimeType:String):Null<ImageDecoder> {
-    return cast _Runtime.coalesce(_Runtime.callProperty(ImageDecoderRegistry.decoders__imageDecoderRegistry, 'get', cast ([mimeType] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast ImageDecoderRegistry.decoders__imageDecoderRegistry : flighthq._internal._Map).get(mimeType)), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function hasImageDecoder(mimeType:String):Bool {
-    return cast _Runtime.callProperty(ImageDecoderRegistry.decoders__imageDecoderRegistry, 'has', cast ([mimeType] : Array<Dynamic>));
+    return cast ((cast ImageDecoderRegistry.decoders__imageDecoderRegistry : flighthq._internal._Map).has(mimeType));
     return cast null;
   }
 
   public static function registerImageDecoder(mimeType:String, decoder:ImageDecoder):Void {
-    _Runtime.callProperty(ImageDecoderRegistry.decoders__imageDecoderRegistry, 'set', cast ([mimeType, decoder] : Array<Dynamic>));
+    ((cast ImageDecoderRegistry.decoders__imageDecoderRegistry : flighthq._internal._Map).set(mimeType, decoder));
   }
 
   public static function unregisterImageDecoder(mimeType:String):Void {
-    _Runtime.callProperty(ImageDecoderRegistry.decoders__imageDecoderRegistry, 'delete', cast ([mimeType] : Array<Dynamic>));
+    ((cast ImageDecoderRegistry.decoders__imageDecoderRegistry : flighthq._internal._Map).delete_(mimeType));
   }
 
   public static final decoders__imageDecoderRegistry:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);

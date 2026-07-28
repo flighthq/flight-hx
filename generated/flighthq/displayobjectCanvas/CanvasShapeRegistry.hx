@@ -10,12 +10,12 @@ class CanvasShapeRegistry {
   public static final registry__canvasShapeRegistry:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
 
   public static function getCanvasShapeCommand(key:String):Null<Dynamic> {
-    return cast _Runtime.callProperty(CanvasShapeRegistry.registry__canvasShapeRegistry, 'get', cast ([key] : Array<Dynamic>));
+    return cast ((cast CanvasShapeRegistry.registry__canvasShapeRegistry : flighthq._internal._Map).get(key));
     return cast null;
   }
 
   public static function registerCanvasShapeCommand<K>(command:Dynamic):Void {
-    _Runtime.callProperty(CanvasShapeRegistry.registry__canvasShapeRegistry, 'set', cast ([_Runtime.field(command, 'key'), (cast command : Dynamic)] : Array<Dynamic>));
+    ((cast CanvasShapeRegistry.registry__canvasShapeRegistry : flighthq._internal._Map).set(_Runtime.field(command, 'key'), (cast command : Dynamic)));
   }
 
   public static function registerCanvasShapeCommands(commands:Array<Dynamic>):Void {

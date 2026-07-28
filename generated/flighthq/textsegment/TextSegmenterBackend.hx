@@ -35,14 +35,14 @@ class TextSegmenterBackend {
     var built:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('Intl'), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('Intl'), 'Segmenter')), 'undefined')))) { return cast null; }
     key = '' + Std.string(_Runtime.coalesce(locale, function():Dynamic return cast '')) + '|' + Std.string(granularity) + '';
-    existing = _Runtime.callProperty(TextSegmenterBackend._segmenterCache__textSegmenterBackend, 'get', cast ([key] : Array<Dynamic>));
+    existing = ((cast TextSegmenterBackend._segmenterCache__textSegmenterBackend : flighthq._internal._Map).get(key));
     if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast existing; }
     built = _Runtime.construct(_Runtime.field(_Runtime.globalValue('Intl'), 'Segmenter'), [locale, { granularity: granularity }]);
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(TextSegmenterBackend._segmenterCache__textSegmenterBackend, 'size'), TextSegmenterBackend._segmenterCacheCapacity__textSegmenterBackend, '>='))) {
-      var oldest:Dynamic = _Runtime.field(_Runtime.callProperty(_Runtime.callProperty(TextSegmenterBackend._segmenterCache__textSegmenterBackend, 'keys', cast ([] : Array<Dynamic>)), 'next', cast ([] : Array<Dynamic>)), 'value');
-      if (_Runtime.truthy(!_Runtime.strictEquals(oldest, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(TextSegmenterBackend._segmenterCache__textSegmenterBackend, 'delete', cast ([oldest] : Array<Dynamic>)); }
+    if (_Runtime.truthy(_Runtime.compare((cast TextSegmenterBackend._segmenterCache__textSegmenterBackend : flighthq._internal._Map).size, TextSegmenterBackend._segmenterCacheCapacity__textSegmenterBackend, '>='))) {
+      var oldest:Dynamic = _Runtime.field(_Runtime.callProperty(((cast TextSegmenterBackend._segmenterCache__textSegmenterBackend : flighthq._internal._Map).keys()), 'next', cast ([] : Array<Dynamic>)), 'value');
+      if (_Runtime.truthy(!_Runtime.strictEquals(oldest, _Runtime.field(_Runtime, 'UNDEFINED')))) { ((cast TextSegmenterBackend._segmenterCache__textSegmenterBackend : flighthq._internal._Map).delete_(oldest)); }
     }
-    _Runtime.callProperty(TextSegmenterBackend._segmenterCache__textSegmenterBackend, 'set', cast ([key, built] : Array<Dynamic>));
+    ((cast TextSegmenterBackend._segmenterCache__textSegmenterBackend : flighthq._internal._Map).set(key, built));
     return cast built;
     return cast null;
   }

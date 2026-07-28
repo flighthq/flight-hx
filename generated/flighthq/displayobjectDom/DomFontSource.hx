@@ -9,21 +9,21 @@ class DomFontSource {
   public static final _domFontAscentCache__domFontSource:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
 
   public static function getDomFontAscentCached(font:String):Null<Float> {
-    return cast _Runtime.callProperty(DomFontSource._domFontAscentCache__domFontSource, 'get', cast ([font] : Array<Dynamic>));
+    return cast ((cast DomFontSource._domFontAscentCache__domFontSource : flighthq._internal._Map).get(font));
     return cast null;
   }
 
   public static function invalidateDomFontResource(source:FontResource):Void {
     var family:Dynamic = cast _Runtime.UNDEFINED;
     family = _Runtime.field(source, 'family');
-    for (key in _Runtime.iterable(_Runtime.callProperty(DomFontSource._domFontAscentCache__domFontSource, 'keys', cast ([] : Array<Dynamic>)))) {
+    for (key in _Runtime.iterable(((cast DomFontSource._domFontAscentCache__domFontSource : flighthq._internal._Map).keys()))) {
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.includes(key, '\'' + Std.string(family) + '\''), function():Dynamic return cast _Runtime.includes(key, '"' + Std.string(family) + '"')))) {
-        _Runtime.callProperty(DomFontSource._domFontAscentCache__domFontSource, 'delete', cast ([key] : Array<Dynamic>));
+        ((cast DomFontSource._domFontAscentCache__domFontSource : flighthq._internal._Map).delete_(key));
       }
     }
   }
 
   public static function setDomFontAscentCached(font:String, ascent:Float):Void {
-    _Runtime.callProperty(DomFontSource._domFontAscentCache__domFontSource, 'set', cast ([font, ascent] : Array<Dynamic>));
+    ((cast DomFontSource._domFontAscentCache__domFontSource : flighthq._internal._Map).set(font, ascent));
   }
 }

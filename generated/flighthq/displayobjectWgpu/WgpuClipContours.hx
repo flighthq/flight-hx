@@ -143,7 +143,7 @@ class WgpuClipContours {
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     format = _Runtime.coalesce(_Runtime.field(runtime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
     cache = _Runtime.coalesce(_Runtime.field(runtime, 'clipContourPipelines'), function():Dynamic return cast _Runtime.setField(runtime, 'clipContourPipelines', _Runtime.construct(_Runtime.globalValue('Map'), [])));
-    existing = _Runtime.callProperty(cache, 'get', cast ([format] : Array<Dynamic>));
+    existing = ((cast cache : flighthq._internal._Map).get(format));
     if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast existing; }
     device = _Runtime.field(state, 'device');
     module = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: WgpuClipContours.CLIP_WGSL__wgpuClipContours }] : Array<Dynamic>));
@@ -152,7 +152,7 @@ class WgpuClipContours {
     vertexBuffers = cast ([{ arrayStride: 8.0, attributes: cast ([{ shaderLocation: 0.0, offset: 0.0, format: 'float32x2' }] : Array<Dynamic>) }] : Array<Dynamic>);
     make = function(passOp:Dynamic) return flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: layout, vertex: { module: module, entryPoint: 'vs_main', buffers: vertexBuffers }, fragment: { module: module, entryPoint: 'fs_main', targets: cast ([{ format: format, writeMask: 0.0 }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list', cullMode: 'none' }, depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: false, depthCompare: 'always', stencilFront: { compare: 'equal', passOp: passOp, failOp: 'keep', depthFailOp: 'keep' }, stencilBack: { compare: 'equal', passOp: passOp, failOp: 'keep', depthFailOp: 'keep' }, stencilReadMask: 255.0, stencilWriteMask: 255.0 } }] : Array<Dynamic>));
     pipelines = { write: _Runtime.callValue(make, cast (['increment-clamp'] : Array<Dynamic>)), erase: _Runtime.callValue(make, cast (['decrement-clamp'] : Array<Dynamic>)), bindGroupLayout: bindGroupLayout };
-    _Runtime.callProperty(cache, 'set', cast ([format, pipelines] : Array<Dynamic>));
+    ((cast cache : flighthq._internal._Map).set(format, pipelines));
     return cast pipelines;
     return cast null;
   }

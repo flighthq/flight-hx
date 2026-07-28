@@ -30,10 +30,10 @@ class CanvasImageSource {
       (cache = cast (_Runtime.construct(_Runtime.globalValue('WeakMap'), []) : Dynamic));
       _Runtime.setField(runtime, 'imageResourceElementCache', cache);
     }
-    entry = _Runtime.callProperty(cache, 'get', cast ([image] : Array<Dynamic>));
+    entry = ((cast cache : flighthq._internal._WeakMap).get(image));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(entry, 'version'), _Runtime.field(image, 'version'))))) {
       (entry = cast ({ element: _Runtime.callValue(createCanvasFromImageResource, cast ([image] : Array<Dynamic>)), version: _Runtime.field(image, 'version') } : Dynamic));
-      _Runtime.callProperty(cache, 'set', cast ([image, entry] : Array<Dynamic>));
+      ((cast cache : flighthq._internal._WeakMap).set(image, entry));
     }
     return cast _Runtime.field(entry, 'element');
     return cast null;

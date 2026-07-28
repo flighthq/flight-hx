@@ -6,6 +6,8 @@ import flighthq._internal._Runtime;
 import lime.graphics.cairo.Cairo;
 import lime.graphics.cairo.CairoFillRule;
 import lime.graphics.cairo.CairoImageSurface;
+import lime.graphics.cairo.CairoLineCap;
+import lime.graphics.cairo.CairoLineJoin;
 import lime.graphics.cairo.CairoOperator;
 import lime.graphics.cairo.CairoPattern;
 import lime.math.Matrix3;
@@ -52,20 +54,60 @@ class NativeCanvas2dContext {
   public var imageSmoothingEnabled:Bool = true;
   public var imageSmoothingQuality:String = 'low';
   public var filter:String = 'none';
+  public var lineCap(default, set):String = 'butt';
+  public var lineJoin(default, set):String = 'miter';
   public var lineWidth(default, set):Float = 1.0;
+  public var miterLimit(default, set):Float = 10.0;
 
   final ownsSurface:Bool;
   final stateStack:Array<{fillStyle:Dynamic, strokeStyle:Dynamic, globalAlpha:Float, globalCompositeOperation:String,
-    font:String, textAlign:String, textBaseline:String, lineWidth:Float}> = [];
+    font:String, textAlign:String, textBaseline:String, lineCap:String, lineJoin:String, lineWidth:Float,
+    miterLimit:Float}> = [];
 
   public function new(?windowContext:Cairo) {
     ownsSurface = windowContext == null;
-    if (windowContext != null) cairo = windowContext;
+    if (windowContext != null) {
+      cairo = windowContext;
+      set_lineCap(lineCap);
+      set_lineJoin(lineJoin);
+      set_lineWidth(lineWidth);
+      set_miterLimit(miterLimit);
+    }
   }
 
   function set_lineWidth(value:Float):Float {
     lineWidth = value;
     if (cairo != null) cairo.lineWidth = value;
+    return value;
+  }
+
+  function set_lineCap(value:String):String {
+    lineCap = value;
+    if (cairo != null) {
+      cairo.lineCap = switch (value) {
+        case 'round': CairoLineCap.ROUND;
+        case 'square': CairoLineCap.SQUARE;
+        default: CairoLineCap.BUTT;
+      };
+    }
+    return value;
+  }
+
+  function set_lineJoin(value:String):String {
+    lineJoin = value;
+    if (cairo != null) {
+      cairo.lineJoin = switch (value) {
+        case 'round': CairoLineJoin.ROUND;
+        case 'bevel': CairoLineJoin.BEVEL;
+        default: CairoLineJoin.MITER;
+      };
+    }
+    return value;
+  }
+
+  function set_miterLimit(value:Float):Float {
+    miterLimit = value;
+    if (cairo != null) cairo.miterLimit = value;
     return value;
   }
 
@@ -82,7 +124,10 @@ class NativeCanvas2dContext {
     pixels = new UInt8Array(stride * height);
     surface = cast CairoImageSurface.create(pixels, lime.graphics.cairo.CairoFormat.ARGB32, width, height, stride);
     cairo = new Cairo(surface);
+    set_lineCap(lineCap);
+    set_lineJoin(lineJoin);
     cairo.lineWidth = lineWidth;
+    cairo.miterLimit = miterLimit;
   }
 
   function context():Cairo {
@@ -125,6 +170,41 @@ class NativeCanvas2dContext {
   public function arc(x:Float, y:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Bool):Void {
     if (anticlockwise == true) context().arcNegative(x, y, radius, startAngle, endAngle);
     else context().arc(x, y, radius, startAngle, endAngle);
+  }
+
+  public function ellipse(x:Float, y:Float, radiusX:Float, radiusY:Float, rotation:Float, startAngle:Float,
+      endAngle:Float, ?anticlockwise:Bool):Void {
+    final ctx = context();
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(rotation);
+    ctx.scale(radiusX, radiusY);
+    if (anticlockwise == true) ctx.arcNegative(0, 0, 1, startAngle, endAngle);
+    else ctx.arc(0, 0, 1, startAngle, endAngle);
+    ctx.restore();
+  }
+
+  public function roundRect(x:Float, y:Float, width:Float, height:Float, radius:Dynamic):Void {
+    final left = Math.min(x, x + width);
+    final right = Math.max(x, x + width);
+    final top = Math.min(y, y + height);
+    final bottom = Math.max(y, y + height);
+    final r = Math.min(Math.abs((radius : Float)), Math.min((right - left) / 2, (bottom - top) / 2));
+    final ctx = context();
+    if (r <= 0) {
+      ctx.rectangle(left, top, right - left, bottom - top);
+      return;
+    }
+    ctx.moveTo(left + r, top);
+    ctx.lineTo(right - r, top);
+    ctx.arc(right - r, top + r, r, -Math.PI / 2, 0);
+    ctx.lineTo(right, bottom - r);
+    ctx.arc(right - r, bottom - r, r, 0, Math.PI / 2);
+    ctx.lineTo(left + r, bottom);
+    ctx.arc(left + r, bottom - r, r, Math.PI / 2, Math.PI);
+    ctx.lineTo(left, top + r);
+    ctx.arc(left + r, top + r, r, Math.PI, Math.PI * 3 / 2);
+    ctx.closePath();
   }
 
   public function scale(x:Float, y:Float):Void context().scale(x, y);
@@ -179,7 +259,8 @@ class NativeCanvas2dContext {
     stateStack.push({
       fillStyle: fillStyle, strokeStyle: strokeStyle, globalAlpha: globalAlpha,
       globalCompositeOperation: globalCompositeOperation, font: font, textAlign: textAlign,
-      textBaseline: textBaseline, lineWidth: lineWidth,
+      textBaseline: textBaseline, lineCap: lineCap, lineJoin: lineJoin, lineWidth: lineWidth,
+      miterLimit: miterLimit,
     });
     context().save();
   }
@@ -194,7 +275,10 @@ class NativeCanvas2dContext {
       font = saved.font;
       textAlign = saved.textAlign;
       textBaseline = saved.textBaseline;
+      lineCap = saved.lineCap;
+      lineJoin = saved.lineJoin;
       lineWidth = saved.lineWidth;
+      miterLimit = saved.miterLimit;
     }
     context().restore();
   }

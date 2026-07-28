@@ -193,7 +193,7 @@ class SpritesheetPlayer {
     var virtualCount:Dynamic = cast _Runtime.UNDEFINED;
     var arr:Dynamic = cast _Runtime.UNDEFINED;
     var t:Dynamic = cast _Runtime.UNDEFINED;
-    cached = _Runtime.callProperty(SpritesheetPlayer.cumulativeDurationsCache__spritesheetPlayer, 'get', cast ([animation] : Array<Dynamic>));
+    cached = ((cast SpritesheetPlayer.cumulativeDurationsCache__spritesheetPlayer : flighthq._internal._WeakMap).get(animation));
     if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast cached; }
     __destructure6 = animation;
     frames = _Runtime.field(__destructure6, 'frames');
@@ -213,7 +213,7 @@ class SpritesheetPlayer {
       }
     }
     _Runtime.setIndex(arr, virtualCount, _Runtime.orValue(t, function():Dynamic return cast 1.0));
-    _Runtime.callProperty(SpritesheetPlayer.cumulativeDurationsCache__spritesheetPlayer, 'set', cast ([animation, arr] : Array<Dynamic>));
+    ((cast SpritesheetPlayer.cumulativeDurationsCache__spritesheetPlayer : flighthq._internal._WeakMap).set(animation, arr));
     return cast arr;
     return cast null;
   }

@@ -97,10 +97,10 @@ class WgpuBevelEffect {
 
   public static function getWgpuBevelCompositeShader__wgpuBevelEffect(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
     var p:Dynamic = cast _Runtime.UNDEFINED;
-    p = _Runtime.callProperty(WgpuBevelEffect.bevelCompositePipelines__wgpuBevelEffect, 'get', cast ([state] : Array<Dynamic>));
+    p = ((cast WgpuBevelEffect.bevelCompositePipelines__wgpuBevelEffect : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (p = cast (_Runtime.callValue(createWgpuDualSourceEffectPipeline, cast ([state, WgpuBevelEffect.BEVEL_COMPOSITE_WGSL__wgpuBevelEffect] : Array<Dynamic>)) : Dynamic));
-      _Runtime.callProperty(WgpuBevelEffect.bevelCompositePipelines__wgpuBevelEffect, 'set', cast ([state, p] : Array<Dynamic>));
+      ((cast WgpuBevelEffect.bevelCompositePipelines__wgpuBevelEffect : flighthq._internal._WeakMap).set(state, p));
     }
     return cast p;
     return cast null;

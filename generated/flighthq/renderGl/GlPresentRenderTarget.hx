@@ -22,10 +22,10 @@ class GlPresentRenderTarget {
 
   public static function getGlCopyProgram__glPresentRenderTarget(state:GlRenderState):GlFullscreenProgram {
     var program:Dynamic = cast _Runtime.UNDEFINED;
-    program = _Runtime.callProperty(GlPresentRenderTarget._programs__glPresentRenderTarget, 'get', cast ([state] : Array<Dynamic>));
+    program = ((cast GlPresentRenderTarget._programs__glPresentRenderTarget : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(program, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (program = cast (_Runtime.callValue(compileGlFullscreenProgram, cast ([_Runtime.field(state, 'gl'), GlPresentRenderTarget.COPY_FRAGMENT_SRC__glPresentRenderTarget] : Array<Dynamic>)) : Dynamic));
-      _Runtime.callProperty(GlPresentRenderTarget._programs__glPresentRenderTarget, 'set', cast ([state, program] : Array<Dynamic>));
+      ((cast GlPresentRenderTarget._programs__glPresentRenderTarget : flighthq._internal._WeakMap).set(state, program));
     }
     return cast program;
     return cast null;

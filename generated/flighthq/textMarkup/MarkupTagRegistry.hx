@@ -18,7 +18,7 @@ class MarkupTagRegistry {
   }
 
   public static function registerMarkupTag(registry:flighthq.types.MarkupTagRegistry, name:String, handler:MarkupTagHandler):Void {
-    _Runtime.callProperty(_Runtime.field(registry, 'handlers'), 'set', cast ([_Runtime.callProperty(name, 'toLowerCase', cast ([] : Array<Dynamic>)), handler] : Array<Dynamic>));
+    ((cast _Runtime.field(registry, 'handlers') : flighthq._internal._Map).set(_Runtime.callProperty(name, 'toLowerCase', cast ([] : Array<Dynamic>)), handler));
   }
 
   public static function registerStandardMarkupTags(registry:flighthq.types.MarkupTagRegistry):Void {

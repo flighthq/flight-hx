@@ -2,6 +2,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import ts from 'typescript';
 
+import { upstreamTypeScriptProgram } from './program.ts';
 import { lowerTypeScriptSource } from '../lower/typescript.ts';
 import type { LoweringDiagnostic } from '../model/ir.ts';
 
@@ -26,13 +27,14 @@ export interface LoweringAudit {
 }
 
 export function auditLowering(workspaceDirectory: string): LoweringAudit {
+  const { checker, program } = upstreamTypeScriptProgram(workspaceDirectory);
   const packagesDirectory = path.join(workspaceDirectory, 'upstream', 'packages');
   const packages = readdirSync(packagesDirectory, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
     .map((entry) => path.join(packagesDirectory, entry.name))
     .map((directory) => ({ directory, metadata: readPackageMetadata(directory) }))
     .sort((left, right) => left.metadata.name.localeCompare(right.metadata.name))
-    .map(({ directory, metadata }) => auditPackage(directory, metadata.name, workspaceDirectory));
+    .map(({ directory, metadata }) => auditPackage(directory, metadata.name, workspaceDirectory, program, checker));
 
   return {
     packages,
@@ -47,22 +49,23 @@ export function auditLowering(workspaceDirectory: string): LoweringAudit {
   };
 }
 
-function auditPackage(directory: string, packageName: string, workspaceDirectory: string): PackageLoweringAudit {
+function auditPackage(
+  directory: string,
+  packageName: string,
+  workspaceDirectory: string,
+  program: ts.Program,
+  checker: ts.TypeChecker,
+): PackageLoweringAudit {
   const sourceDirectory = path.join(directory, 'src');
   const files = walkTypeScriptSources(sourceDirectory);
   let declarations = 0;
   let lowered = 0;
   const diagnostics: LoweringDiagnostic[] = [];
   for (const file of files) {
-    const source = ts.createSourceFile(
-      file,
-      readFileSync(file, 'utf8'),
-      ts.ScriptTarget.Latest,
-      true,
-      ts.ScriptKind.TS,
-    );
+    const source = program.getSourceFile(file);
+    if (!source) throw new Error(`Upstream TypeScript program is missing source: ${file}`);
     declarations += source.statements.filter(isCandidateDeclaration).length;
-    const result = lowerTypeScriptSource(source, packageName, workspaceDirectory);
+    const result = lowerTypeScriptSource(source, packageName, workspaceDirectory, checker);
     lowered += result.accountedDeclarations;
     diagnostics.push(...result.diagnostics);
   }

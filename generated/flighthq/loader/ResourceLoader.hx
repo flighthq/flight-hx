@@ -97,7 +97,7 @@ class ResourceLoader {
     }
     _Runtime.setField(internal, 'pending', cast ([] : Array<Dynamic>));
     _Runtime.callValue(emitSignal, cast ([_Runtime.field(loader, 'onCancel')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(internal, 'inFlight'), 'size'), 0.0))) {
+    if (_Runtime.truthy(_Runtime.strictEquals((cast _Runtime.field(internal, 'inFlight') : flighthq._internal._Set).size, 0.0))) {
       _Runtime.callValue(emitSignal, cast ([_Runtime.field(loader, 'onProgress'), _Runtime.field(internal, 'loaded'), _Runtime.field(internal, 'total')] : Array<Dynamic>));
       _Runtime.callValue(emitSignal, cast ([_Runtime.field(loader, 'onComplete'), _Runtime.field(internal, 'reports')] : Array<Dynamic>));
     }
@@ -218,7 +218,7 @@ class ResourceLoader {
     onBytesProgress = _Runtime.field(descriptor, 'onBytesProgress');
     dedupe = !_Runtime.strictEquals(_Runtime.field(_Runtime.field(internal, 'options'), 'dedupe'), false);
     if (_Runtime.truthy(_Runtime.andValue(dedupe, function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(descriptor, 'key'), _Runtime.field(_Runtime, 'UNDEFINED'))))) {
-      var existing:Dynamic = _Runtime.callProperty(_Runtime.field(internal, 'dedupeMap'), 'get', cast ([key] : Array<Dynamic>));
+      var existing:Dynamic = ((cast _Runtime.field(internal, 'dedupeMap') : flighthq._internal._Map).get(key));
       if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast (cast existing : ResourceLoadHandle<Dynamic>); }
     }
     promise = flighthq._internal._Async.create(function(res:Dynamic, rej:Dynamic) {
@@ -244,7 +244,7 @@ class ResourceLoader {
     _Runtime.setField(internal, 'totalWeight', (_Runtime.field(internal, 'totalWeight') + weight));
     handle = { key: key, promise: promise };
     if (_Runtime.truthy(_Runtime.andValue(dedupe, function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(descriptor, 'key'), _Runtime.field(_Runtime, 'UNDEFINED'))))) {
-      _Runtime.callProperty(_Runtime.field(internal, 'dedupeMap'), 'set', cast ([key, (cast handle : ResourceLoadHandle<Dynamic>)] : Array<Dynamic>));
+      ((cast _Runtime.field(internal, 'dedupeMap') : flighthq._internal._Map).set(key, (cast handle : ResourceLoadHandle<Dynamic>)));
     }
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.field(internal, 'started'), function():Dynamic return cast _Runtime.field(internal, 'streaming')))) {
       _Runtime.voidValue(_Runtime.callValue(ResourceLoader.drainQueue__resourceLoader, cast ([internal, loader] : Array<Dynamic>)));
@@ -264,8 +264,8 @@ class ResourceLoader {
       _Runtime.callValue(ResourceLoader.releasePendingEntry__resourceLoader, cast ([entry] : Array<Dynamic>));
     }
     _Runtime.setField(internal, 'cancelled', false);
-    _Runtime.callProperty(_Runtime.field(internal, 'dedupeMap'), 'clear', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.field(internal, 'inFlight'), 'clear', cast ([] : Array<Dynamic>));
+    ((cast _Runtime.field(internal, 'dedupeMap') : flighthq._internal._Map).clear());
+    ((cast _Runtime.field(internal, 'inFlight') : flighthq._internal._Set).clear());
     _Runtime.setField(internal, 'loaded', 0.0);
     _Runtime.setField(internal, 'paused', false);
     _Runtime.setField(internal, 'pending', cast ([] : Array<Dynamic>));
@@ -331,7 +331,7 @@ class ResourceLoader {
         var maxConcurrent:Dynamic = cast _Runtime.UNDEFINED;
         maxConcurrent = _Runtime.select(_Runtime.compare(_Runtime.field(internal, 'maxConcurrent'), 0.0, '<='), function():Dynamic return cast HxMath.POSITIVE_INFINITY, function():Dynamic return cast _Runtime.field(internal, 'maxConcurrent'));
         return flighthq._internal._Async.continueFlow(flighthq._internal._Async.repeatFlow(function():Dynamic {
-          if (!_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(_Runtime.field(_Runtime.field(internal, 'pending'), 'length'), 0.0, '>'), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(internal, 'paused'))), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(internal, 'cancelled'))), function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.field(internal, 'inFlight'), 'size'), maxConcurrent, '<')))) return flighthq._internal._Async.flowBreak();
+          if (!_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(_Runtime.field(_Runtime.field(internal, 'pending'), 'length'), 0.0, '>'), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(internal, 'paused'))), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(internal, 'cancelled'))), function():Dynamic return cast _Runtime.compare((cast _Runtime.field(internal, 'inFlight') : flighthq._internal._Set).size, maxConcurrent, '<')))) return flighthq._internal._Async.flowBreak();
           return flighthq._internal._Async.protect(function():Dynamic {
             var entry:Dynamic = cast _Runtime.UNDEFINED;
             _Runtime.callValue(ResourceLoader.sortPendingByPriority__resourceLoader, cast ([_Runtime.field(internal, 'pending')] : Array<Dynamic>));
@@ -381,7 +381,7 @@ class ResourceLoader {
               }
               return flighthq._internal._Async.continueFlow(__flowBranch13, function():Dynamic {
                 _Runtime.callProperty(_Runtime.field(internal, 'pending'), 'shift', cast ([] : Array<Dynamic>));
-                _Runtime.callProperty(_Runtime.field(internal, 'inFlight'), 'add', cast ([entry] : Array<Dynamic>));
+                ((cast _Runtime.field(internal, 'inFlight') : flighthq._internal._Set).add(entry));
                 _Runtime.setField(entry, 'startedAt', _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)));
                 _Runtime.voidValue(_Runtime.callValue(ResourceLoader.runEntry__resourceLoader, cast ([entry, internal, loader, 0.0] : Array<Dynamic>)));
                 return flighthq._internal._Async.flowNormal();
@@ -455,7 +455,7 @@ class ResourceLoader {
                   var __flowBranch21:Dynamic;
                   if (_Runtime.truthy(_Runtime.field(internal, 'cancelled'))) {
                     __flowBranch21 = flighthq._internal._Async.protect(function():Dynamic {
-                      _Runtime.callProperty(_Runtime.field(internal, 'inFlight'), 'delete', cast ([entry] : Array<Dynamic>));
+                      ((cast _Runtime.field(internal, 'inFlight') : flighthq._internal._Set).delete_(entry));
                       _Runtime.incrementField(internal, 'loaded', 1, true);
                       _Runtime.callValue(ResourceLoader.releasePendingEntry__resourceLoader, cast ([entry] : Array<Dynamic>));
                       _Runtime.callValue(ResourceLoader.checkCompleteAfterCancel__resourceLoader, cast ([internal, loader] : Array<Dynamic>));
@@ -509,7 +509,7 @@ class ResourceLoader {
                       report = { attempts: (attempt + 1.0), bytes: _Runtime.field(entry, 'bytesLoaded'), elapsedMs: (_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) - _Runtime.field(entry, 'startedAt')), group: _Runtime.field(entry, 'group'), key: _Runtime.field(entry, 'key'), status: 'cancelled' };
                       _Runtime.callProperty(_Runtime.field(internal, 'reports'), 'push', cast ([report] : Array<Dynamic>));
                       _Runtime.callProperty(entry, 'reject', cast ([error] : Array<Dynamic>));
-                      _Runtime.callProperty(_Runtime.field(internal, 'inFlight'), 'delete', cast ([entry] : Array<Dynamic>));
+                      ((cast _Runtime.field(internal, 'inFlight') : flighthq._internal._Set).delete_(entry));
                       _Runtime.incrementField(internal, 'loaded', 1, true);
                       _Runtime.callValue(ResourceLoader.releasePendingEntry__resourceLoader, cast ([entry] : Array<Dynamic>));
                       _Runtime.callValue(ResourceLoader.checkCompleteAfterCancel__resourceLoader, cast ([internal, loader] : Array<Dynamic>));
@@ -540,7 +540,7 @@ class ResourceLoader {
                             var __flowBranch28:Dynamic;
                             if (_Runtime.truthy(_Runtime.field(internal, 'cancelled'))) {
                               __flowBranch28 = flighthq._internal._Async.protect(function():Dynamic {
-                                _Runtime.callProperty(_Runtime.field(internal, 'inFlight'), 'delete', cast ([entry] : Array<Dynamic>));
+                                ((cast _Runtime.field(internal, 'inFlight') : flighthq._internal._Set).delete_(entry));
                                 _Runtime.incrementField(internal, 'loaded', 1, true);
                                 _Runtime.callValue(ResourceLoader.releasePendingEntry__resourceLoader, cast ([entry] : Array<Dynamic>));
                                 _Runtime.callValue(ResourceLoader.checkCompleteAfterCancel__resourceLoader, cast ([internal, loader] : Array<Dynamic>));
@@ -604,7 +604,7 @@ class ResourceLoader {
   }
 
   public static function checkCompleteAfterCancel__resourceLoader(internal:ResourceLoaderInternal__resourceLoader, loader:flighthq.types.ResourceLoader):Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(internal, 'inFlight'), 'size'), 0.0))) {
+    if (_Runtime.truthy(_Runtime.strictEquals((cast _Runtime.field(internal, 'inFlight') : flighthq._internal._Set).size, 0.0))) {
       _Runtime.callValue(emitSignal, cast ([_Runtime.field(loader, 'onProgress'), _Runtime.field(internal, 'loaded'), _Runtime.field(internal, 'total')] : Array<Dynamic>));
       _Runtime.callValue(emitSignal, cast ([_Runtime.field(loader, 'onComplete'), _Runtime.field(internal, 'reports')] : Array<Dynamic>));
     }
@@ -642,7 +642,7 @@ class ResourceLoader {
   }
 
   public static function settleEntry__resourceLoader(entry:PendingEntry__resourceLoader, internal:ResourceLoaderInternal__resourceLoader, loader:flighthq.types.ResourceLoader):Void {
-    _Runtime.callProperty(_Runtime.field(internal, 'inFlight'), 'delete', cast ([entry] : Array<Dynamic>));
+    ((cast _Runtime.field(internal, 'inFlight') : flighthq._internal._Set).delete_(entry));
     _Runtime.incrementField(internal, 'loaded', 1, true);
     _Runtime.callValue(emitSignal, cast ([_Runtime.field(loader, 'onProgress'), _Runtime.field(internal, 'loaded'), _Runtime.field(internal, 'total')] : Array<Dynamic>));
     _Runtime.callValue(ResourceLoader.releasePendingEntry__resourceLoader, cast ([entry] : Array<Dynamic>));

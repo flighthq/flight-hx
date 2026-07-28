@@ -1,8 +1,16 @@
 # Project Status
 
-Last updated: 2026-07-24
+Last updated: 2026-07-28
 
 ## Current State
+
+Typed receiver lowering now uses one cached TypeScript `Program` for the pinned upstream tree. This preserves imported, aliased, and contextual receiver types during generation.
+
+- Every resolved `CanvasRenderingContext2D` call crosses `Canvas2dBackend` and is checked against a closed generation-time method/field inventory. Contextually typed shape-command callbacks no longer escape to `_Runtime.callProperty`. The maintained browser and native Cairo implementations cover the current upstream surface, including curves, arcs, ellipse/round-rectangle paths, and stroke cap/join/miter state.
+- Resolved `Map`, `Set`, `WeakMap`, and `WeakSet` operations emit direct calls through `_Map`, `_Set`, `_WeakMap`, and `_WeakSet`; 1,174 generated receiver sites use this path. JavaScript-sensitive methods remain non-inline so Haxe dispatches to native collection members, and `delete` is mapped at compile time instead of by `_Runtime`.
+- The design-only next phase is recorded in [`typed-struct-model.md`](typed-struct-model.md). Direct struct expression emission is not enabled.
+- `npm run check`, focused generator/runtime tests, full Eval namespace compilation, browser HTML5 Canvas compilation, native Lime/Cairo Canvas compilation, and Eval/JavaScript/Python portability checks pass. C++ portability remains unavailable because this host has no C++ compiler.
+- The complete 131-package parity runner executes after the collection change: 100 package suites pass and 31 expose existing non-collection gaps (chiefly missing value objects such as `BlendMode`/`PathCommand`, existing async/backend seams, and the absent optional Playwright dependency). Collection-heavy focused suites pass with no remaining `Map`/`Set` receiver failure.
 
 The initial full port was completed through Phase 9 for upstream revision `5d24729f7360475e28a105ae0caeeaa2e1328260`. A source-derived namespace realignment is now implemented in the generator but cannot complete regeneration against that pinned upstream revision until its 12 Haxe identity collisions are reorganized upstream.
 

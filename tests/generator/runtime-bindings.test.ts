@@ -6,6 +6,18 @@ import { describe, expect, it } from 'vitest';
 const workspace = process.cwd();
 
 describe('maintained runtime bindings', () => {
+  it('keeps typed collection calls dispatchable on native JavaScript collections', () => {
+    for (const name of ['_Map', '_Set']) {
+      const source = readFileSync(path.join(workspace, 'src', 'flighthq', '_internal', `${name}.hx`), 'utf8');
+      expect(source).toContain('public function has(');
+      expect(source).not.toContain('public inline function has(');
+      expect(source).toContain('@:native("delete")');
+    }
+
+    const runtime = readFileSync(path.join(workspace, 'src', 'flighthq', '_internal', '_Runtime.hx'), 'utf8');
+    expect(runtime).not.toContain("name == 'delete'");
+  });
+
   it('expands WebGL2 operations to typed target APIs without reflection', () => {
     const source = readFileSync(
       path.join(workspace, 'src', 'flighthq', '_internal', 'WebGl2RenderingContext.hx'),

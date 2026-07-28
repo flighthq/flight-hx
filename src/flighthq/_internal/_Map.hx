@@ -1,13 +1,12 @@
 // Maintained runtime support for generated Flight Haxe.
 package flighthq._internal;
 
-// Reached only reflectively (constructed through `_Runtime.globalValue`), so
-// full dead-code elimination must not strip the class or its members.
+// Constructed through `_Runtime` and used as the typed receiver surface for
+// generated Map operations.
 @:keep
 class _Map {
   private final items:Array<{key:Dynamic, value:Dynamic}> = [];
 
-  // Physical field so generated `map.size` reads resolve reflectively.
   public var size(default, null):Int = 0;
 
   public function new(?source:Dynamic) {
@@ -19,6 +18,9 @@ class _Map {
     size = 0;
   }
 
+  #if js
+  @:native("delete")
+  #end
   public function delete_(key:Dynamic):Bool {
     final index = indexOf(key);
     if (index < 0) return false;
@@ -29,8 +31,8 @@ class _Map {
 
   public function entries():Array<Array<Dynamic>> return [for (item in items) [item.key, item.value]];
 
-  public function forEach(callback:(Dynamic, Dynamic, _Map)->Void):Void {
-    for (item in items) callback(item.value, item.key, this);
+  public function forEach(callback:Dynamic):Void {
+    for (item in items) _Runtime.callValue(callback, [item.value, item.key, this]);
   }
 
   public function get(key:Dynamic):Dynamic {
@@ -38,7 +40,7 @@ class _Map {
     return index < 0 ? null : items[index].value;
   }
 
-  public inline function has(key:Dynamic):Bool return indexOf(key) >= 0;
+  public function has(key:Dynamic):Bool return indexOf(key) >= 0;
 
   private function indexOf(key:Dynamic):Int {
     for (index in 0...items.length) if (items[index].key == key) return index;

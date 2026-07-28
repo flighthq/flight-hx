@@ -26,18 +26,18 @@ class FormatRegistry {
   }
 
   public static function getParticleFormatCodec(kind:ParticleFormatKind):Null<ParticleFormatCodec> {
-    return cast _Runtime.coalesce(_Runtime.callProperty(FormatRegistry._registry__formatRegistry, 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast FormatRegistry._registry__formatRegistry : flighthq._internal._Map).get(kind)), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getRegisteredParticleFormats():Array<String> {
-    return cast _Runtime.concatArrays([_Runtime.toArray(_Runtime.callProperty(FormatRegistry._registry__formatRegistry, 'keys', cast ([] : Array<Dynamic>)))]);
+    return cast _Runtime.concatArrays([_Runtime.toArray(((cast FormatRegistry._registry__formatRegistry : flighthq._internal._Map).keys()))]);
     return cast null;
   }
 
   public static function parseRegisteredParticleFormat(text:String, kind:String):ParticleConfigParseResult {
     var codec:Dynamic = cast _Runtime.UNDEFINED;
-    codec = _Runtime.callProperty(FormatRegistry._registry__formatRegistry, 'get', cast ([kind] : Array<Dynamic>));
+    codec = ((cast FormatRegistry._registry__formatRegistry : flighthq._internal._Map).get(kind));
     if (_Runtime.truthy(!_Runtime.truthy(codec))) {
       return cast { config: _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>)), format: kind, warnings: cast (['unknown-format: format \'' + Std.string(kind) + '\' has no registered codec'] : Array<Dynamic>) };
     }
@@ -51,11 +51,11 @@ class FormatRegistry {
   }
 
   public static function registerParticleFormat(kind:ParticleFormatKind, codec:ParticleFormatCodec):Void {
-    _Runtime.callProperty(FormatRegistry._registry__formatRegistry, 'set', cast ([kind, codec] : Array<Dynamic>));
+    ((cast FormatRegistry._registry__formatRegistry : flighthq._internal._Map).set(kind, codec));
   }
 
   public static function unregisterParticleFormat(kind:ParticleFormatKind):Bool {
-    return cast _Runtime.callProperty(FormatRegistry._registry__formatRegistry, 'delete', cast ([kind] : Array<Dynamic>));
+    return cast ((cast FormatRegistry._registry__formatRegistry : flighthq._internal._Map).delete_(kind));
     return cast null;
   }
 

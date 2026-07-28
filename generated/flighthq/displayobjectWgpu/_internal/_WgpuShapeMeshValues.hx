@@ -103,7 +103,7 @@ class _WgpuShapeMeshValues {
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     format = _Runtime.coalesce(_Runtime.field(runtime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
     cache = _Runtime.coalesce(_Runtime.field(runtime, 'shapeMeshPipelines'), function():Dynamic return cast _Runtime.setField(runtime, 'shapeMeshPipelines', _Runtime.construct(_Runtime.globalValue('Map'), [])));
-    existing = _Runtime.callProperty(cache, 'get', cast ([format] : Array<Dynamic>));
+    existing = ((cast cache : flighthq._internal._Map).get(format));
     if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast existing; }
     device = _Runtime.field(state, 'device');
     module = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: _WgpuShapeMeshValues.SHAPE_MESH_WGSL__wgpuShapeMesh }] : Array<Dynamic>));
@@ -112,7 +112,7 @@ class _WgpuShapeMeshValues {
     vertexBuffers = cast ([{ arrayStride: 8.0, attributes: cast ([{ shaderLocation: 0.0, offset: 0.0, format: 'float32x2' }] : Array<Dynamic>) }] : Array<Dynamic>);
     pipeline = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: layout, vertex: { module: module, entryPoint: 'vs_main', buffers: vertexBuffers }, fragment: { module: module, entryPoint: 'fs_main', targets: cast ([{ format: format, blend: { color: { srcFactor: 'one', dstFactor: 'one-minus-src-alpha', operation: 'add' }, alpha: { srcFactor: 'one', dstFactor: 'one-minus-src-alpha', operation: 'add' } } }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list', cullMode: 'none' }, depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: false, depthCompare: 'always', stencilFront: { compare: 'equal', passOp: 'keep', failOp: 'keep', depthFailOp: 'keep' }, stencilBack: { compare: 'equal', passOp: 'keep', failOp: 'keep', depthFailOp: 'keep' }, stencilReadMask: 255.0, stencilWriteMask: 0.0 } }] : Array<Dynamic>));
     entry = { pipeline: pipeline, bindGroupLayout: bindGroupLayout };
-    _Runtime.callProperty(cache, 'set', cast ([format, entry] : Array<Dynamic>));
+    ((cast cache : flighthq._internal._Map).set(format, entry));
     return cast entry;
     return cast null;
   }

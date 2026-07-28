@@ -102,12 +102,12 @@ class GlBevelEffect {
 
   public static function getGlBevelCompositeShader__glBevelEffect(state:GlRenderState):BevelCompositeLocations__glBevelEffect {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
-    loc = _Runtime.callProperty(GlBevelEffect.bevelCompositeShaders__glBevelEffect, 'get', cast ([state] : Array<Dynamic>));
+    loc = ((cast GlBevelEffect.bevelCompositeShaders__glBevelEffect : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       var gl:Dynamic = _Runtime.field(state, 'gl');
       var base:Dynamic = _Runtime.callValue(compileGlFullscreenProgram, cast ([gl, GlBevelEffect.BEVEL_COMPOSITE_FRAGMENT_SRC__glBevelEffect] : Array<Dynamic>));
       (loc = cast (_Runtime.mergeObjects([base, { locHighlight: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_highlight') }, { locShadow: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_shadow') }, { locOffset: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_offset') }, { locIntensity: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_intensity') }, { locClipMode: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_clipMode') }]) : Dynamic));
-      _Runtime.callProperty(GlBevelEffect.bevelCompositeShaders__glBevelEffect, 'set', cast ([state, loc] : Array<Dynamic>));
+      ((cast GlBevelEffect.bevelCompositeShaders__glBevelEffect : flighthq._internal._WeakMap).set(state, loc));
     }
     return cast loc;
     return cast null;

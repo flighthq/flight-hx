@@ -12,6 +12,7 @@ import {
   sourcePathToImplementationModule,
   sourcePathToModule,
 } from '../analyze/inventory.ts';
+import { upstreamTypeScriptProgram } from '../analyze/program.ts';
 import { lowerTypeScriptSource } from '../lower/typescript.ts';
 import type {
   IrDeclaration,
@@ -1547,15 +1548,11 @@ function lowerFiles(workspaceDirectory: string, packageName: string, files: stri
   const declarations: IrDeclaration[] = [];
   const diagnostics: LoweringDiagnostic[] = [];
   const sources: LoweredSource[] = [];
+  const { checker, program } = upstreamTypeScriptProgram(workspaceDirectory);
   for (const file of files) {
-    const source = ts.createSourceFile(
-      file,
-      readFileSync(file, 'utf8'),
-      ts.ScriptTarget.Latest,
-      true,
-      ts.ScriptKind.TS,
-    );
-    const result = lowerTypeScriptSource(source, packageName, workspaceDirectory);
+    const source = program.getSourceFile(file);
+    if (!source) throw new Error(`Upstream TypeScript program is missing source: ${file}`);
+    const result = lowerTypeScriptSource(source, packageName, workspaceDirectory, checker);
     namespacePrivateDeclarations(result.declarations);
     declarations.push(...result.declarations);
     diagnostics.push(...result.diagnostics);

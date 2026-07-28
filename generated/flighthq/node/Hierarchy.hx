@@ -173,15 +173,15 @@ class Hierarchy {
     var cur:Dynamic = cast _Runtime.UNDEFINED;
     var bCur:Null<Node<Traits>> = cast _Runtime.UNDEFINED;
     aAncestors = _Runtime.construct(_Runtime.globalValue('Set'), []);
-    _Runtime.callProperty(aAncestors, 'add', cast ([(cast a : Node<Traits>)] : Array<Dynamic>));
+    ((cast aAncestors : flighthq._internal._Set).add((cast a : Node<Traits>)));
     cur = _Runtime.callValue(getNodeParent, cast ([(cast a : Node<Traits>)] : Array<Dynamic>));
     while (_Runtime.truthy(!_Runtime.strictEquals(cur, null))) {
-      _Runtime.callProperty(aAncestors, 'add', cast ([cur] : Array<Dynamic>));
+      ((cast aAncestors : flighthq._internal._Set).add(cur));
       (cur = cast (_Runtime.callValue(getNodeParent, cast ([cur] : Array<Dynamic>)) : Dynamic));
     }
     bCur = (cast b : Node<Traits>);
     while (_Runtime.truthy(!_Runtime.strictEquals(bCur, null))) {
-      if (_Runtime.truthy(_Runtime.callProperty(aAncestors, 'has', cast ([bCur] : Array<Dynamic>)))) { return cast (cast bCur : NodeOf<Traits>); }
+      if (_Runtime.truthy(((cast aAncestors : flighthq._internal._Set).has(bCur)))) { return cast (cast bCur : NodeOf<Traits>); }
       (bCur = cast (_Runtime.callValue(getNodeParent, cast ([bCur] : Array<Dynamic>)) : Dynamic));
     }
     return cast null;

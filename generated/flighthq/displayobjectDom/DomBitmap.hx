@@ -88,12 +88,12 @@ class DomBitmap {
     _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'width', '' + Std.string(drawWidth) + 'px');
     _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'height', '' + Std.string(drawHeight) + 'px');
     ctx = _Runtime.field(data, 'context');
-    if (_Runtime.truthy(!_Runtime.strictEquals(pixelRatio, 1.0))) { _Runtime.callProperty(ctx, 'scale', cast ([pixelRatio, pixelRatio] : Array<Dynamic>)); }
-    _Runtime.setField(ctx, 'imageSmoothingEnabled', smoothing);
+    if (_Runtime.truthy(!_Runtime.strictEquals(pixelRatio, 1.0))) { flighthq._internal.backend.Canvas2dBackend.call(ctx, 'scale', cast ([pixelRatio, pixelRatio] : Array<Dynamic>)); }
+    flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'imageSmoothingEnabled', smoothing);
     if (_Runtime.truthy(!_Runtime.strictEquals(sourceRectangle, null))) {
-      _Runtime.callProperty(ctx, 'drawImage', cast ([src, _Runtime.field(sourceRectangle, 'x'), _Runtime.field(sourceRectangle, 'y'), _Runtime.field(sourceRectangle, 'width'), _Runtime.field(sourceRectangle, 'height'), 0.0, 0.0, _Runtime.field(sourceRectangle, 'width'), _Runtime.field(sourceRectangle, 'height')] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([src, _Runtime.field(sourceRectangle, 'x'), _Runtime.field(sourceRectangle, 'y'), _Runtime.field(sourceRectangle, 'width'), _Runtime.field(sourceRectangle, 'height'), 0.0, 0.0, _Runtime.field(sourceRectangle, 'width'), _Runtime.field(sourceRectangle, 'height')] : Array<Dynamic>));
     } else {
-      _Runtime.callProperty(ctx, 'drawImage', cast ([src, 0.0, 0.0, width, height] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([src, 0.0, 0.0, width, height] : Array<Dynamic>));
     }
     _Runtime.callValue(applyDomStyle, cast ([state, _Runtime.field(data, 'canvas'), renderProxy] : Array<Dynamic>));
     _Runtime.callValue(setDomRendererElement, cast ([state, _Runtime.field(data, 'canvas')] : Array<Dynamic>));

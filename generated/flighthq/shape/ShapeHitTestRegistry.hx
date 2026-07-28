@@ -16,13 +16,13 @@ class ShapeHitTestRegistry {
     var key:Dynamic = cast _Runtime.UNDEFINED;
     var fn:Dynamic = cast _Runtime.UNDEFINED;
     key = (cast _Runtime.getIndex(buf, i) : String);
-    fn = _Runtime.callProperty(ShapeHitTestRegistry.hitTests__shapeHitTestRegistry, 'get', cast ([key] : Array<Dynamic>));
+    fn = ((cast ShapeHitTestRegistry.hitTests__shapeHitTestRegistry : flighthq._internal._Map).get(key));
     if (_Runtime.truthy(_Runtime.strictEquals(fn, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast null; }
     return cast _Runtime.callValue(fn, cast ([x, y, buf, (i + 2.0)] : Array<Dynamic>));
     return cast null;
   }
 
   public static function registerShapeHitTestCommand<K>(command:ShapeHitTestCommand<Dynamic>):Void {
-    _Runtime.callProperty(ShapeHitTestRegistry.hitTests__shapeHitTestRegistry, 'set', cast ([_Runtime.field(command, 'key'), (cast _Runtime.field(command, 'hitTest') : AnyHitTestFn__shapeHitTestRegistry)] : Array<Dynamic>));
+    ((cast ShapeHitTestRegistry.hitTests__shapeHitTestRegistry : flighthq._internal._Map).set(_Runtime.field(command, 'key'), (cast _Runtime.field(command, 'hitTest') : AnyHitTestFn__shapeHitTestRegistry)));
   }
 }

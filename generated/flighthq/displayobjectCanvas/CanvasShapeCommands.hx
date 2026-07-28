@@ -94,10 +94,10 @@ class CanvasShapeCommands {
     anchorX = (cast _Runtime.getIndex(buf, (i + 4.0)) : Float);
     anchorY = (cast _Runtime.getIndex(buf, (i + 5.0)) : Float);
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'hasCurrentPoint')))) {
-      _Runtime.callProperty(context, 'moveTo', cast ([0.0, 0.0] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([0.0, 0.0] : Array<Dynamic>));
       _Runtime.setField(state, 'hasCurrentPoint', true);
     }
-    _Runtime.callProperty(context, 'bezierCurveTo', cast ([controlX1, controlY1, controlX2, controlY2, anchorX, anchorY] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(context, 'bezierCurveTo', cast ([controlX1, controlY1, controlX2, controlY2, anchorX, anchorY] : Array<Dynamic>));
     _Runtime.setField(state, 'hasPendingPath', true);
   } };
 
@@ -111,10 +111,10 @@ class CanvasShapeCommands {
     anchorX = (cast _Runtime.getIndex(buf, (i + 2.0)) : Float);
     anchorY = (cast _Runtime.getIndex(buf, (i + 3.0)) : Float);
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'hasCurrentPoint')))) {
-      _Runtime.callProperty(context, 'moveTo', cast ([0.0, 0.0] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([0.0, 0.0] : Array<Dynamic>));
       _Runtime.setField(state, 'hasCurrentPoint', true);
     }
-    _Runtime.callProperty(context, 'quadraticCurveTo', cast ([controlX, controlY, anchorX, anchorY] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(context, 'quadraticCurveTo', cast ([controlX, controlY, anchorX, anchorY] : Array<Dynamic>));
     _Runtime.setField(state, 'hasPendingPath', true);
   } };
 
@@ -125,8 +125,8 @@ class CanvasShapeCommands {
     x = (cast _Runtime.getIndex(buf, i) : Float);
     y = (cast _Runtime.getIndex(buf, (i + 1.0)) : Float);
     radius = (cast _Runtime.getIndex(buf, (i + 2.0)) : Float);
-    _Runtime.callProperty(context, 'moveTo', cast ([(x + radius), y] : Array<Dynamic>));
-    _Runtime.callProperty(context, 'arc', cast ([x, y, radius, 0.0, (HxMath.PI * 2.0), true] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([(x + radius), y] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(context, 'arc', cast ([x, y, radius, 0.0, (HxMath.PI * 2.0), true] : Array<Dynamic>));
     _Runtime.setField(state, 'hasPendingPath', true);
     _Runtime.setField(state, 'hasCurrentPoint', true);
   } };
@@ -144,8 +144,8 @@ class CanvasShapeCommands {
     height = (cast _Runtime.getIndex(buf, (i + 3.0)) : Float);
     ex = (x + (width / 2.0));
     ey = (y + (height / 2.0));
-    _Runtime.callProperty(context, 'moveTo', cast ([(ex + (width / 2.0)), ey] : Array<Dynamic>));
-    _Runtime.callProperty(context, 'ellipse', cast ([ex, ey, (width / 2.0), (height / 2.0), 0.0, 0.0, (HxMath.PI * 2.0)] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([(ex + (width / 2.0)), ey] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(context, 'ellipse', cast ([ex, ey, (width / 2.0), (height / 2.0), 0.0, 0.0, (HxMath.PI * 2.0)] : Array<Dynamic>));
     _Runtime.setField(state, 'hasPendingPath', true);
     _Runtime.setField(state, 'hasCurrentPoint', true);
   } };
@@ -164,50 +164,50 @@ class CanvasShapeCommands {
       {
         var __switchValue = pc;
         if (__switchValue == 0.0 || __switchValue == 1.0) {
-          _Runtime.callProperty(context, 'moveTo', cast ([_Runtime.getIndex(data, di), _Runtime.getIndex(data, (di + 1.0))] : Array<Dynamic>));
+          flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([_Runtime.getIndex(data, di), _Runtime.getIndex(data, (di + 1.0))] : Array<Dynamic>));
           (di = cast ((di + 2.0) : Dynamic));
           _Runtime.setField(state, 'hasPendingPath', true);
           _Runtime.setField(state, 'hasCurrentPoint', true);
         }
         else if (__switchValue == 2.0) {
           if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'hasCurrentPoint')))) {
-            _Runtime.callProperty(context, 'moveTo', cast ([0.0, 0.0] : Array<Dynamic>));
+            flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([0.0, 0.0] : Array<Dynamic>));
             _Runtime.setField(state, 'hasCurrentPoint', true);
           }
-          _Runtime.callProperty(context, 'lineTo', cast ([_Runtime.getIndex(data, di), _Runtime.getIndex(data, (di + 1.0))] : Array<Dynamic>));
+          flighthq._internal.backend.Canvas2dBackend.call(context, 'lineTo', cast ([_Runtime.getIndex(data, di), _Runtime.getIndex(data, (di + 1.0))] : Array<Dynamic>));
           (di = cast ((di + 2.0) : Dynamic));
           _Runtime.setField(state, 'hasPendingPath', true);
         }
         else if (__switchValue == 3.0) {
           if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'hasCurrentPoint')))) {
-            _Runtime.callProperty(context, 'moveTo', cast ([0.0, 0.0] : Array<Dynamic>));
+            flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([0.0, 0.0] : Array<Dynamic>));
             _Runtime.setField(state, 'hasCurrentPoint', true);
           }
-          _Runtime.callProperty(context, 'quadraticCurveTo', cast ([_Runtime.getIndex(data, di), _Runtime.getIndex(data, (di + 1.0)), _Runtime.getIndex(data, (di + 2.0)), _Runtime.getIndex(data, (di + 3.0))] : Array<Dynamic>));
+          flighthq._internal.backend.Canvas2dBackend.call(context, 'quadraticCurveTo', cast ([_Runtime.getIndex(data, di), _Runtime.getIndex(data, (di + 1.0)), _Runtime.getIndex(data, (di + 2.0)), _Runtime.getIndex(data, (di + 3.0))] : Array<Dynamic>));
           (di = cast ((di + 4.0) : Dynamic));
           _Runtime.setField(state, 'hasPendingPath', true);
         }
         else if (__switchValue == 4.0) {
-          _Runtime.callProperty(context, 'moveTo', cast ([_Runtime.getIndex(data, (di + 2.0)), _Runtime.getIndex(data, (di + 3.0))] : Array<Dynamic>));
+          flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([_Runtime.getIndex(data, (di + 2.0)), _Runtime.getIndex(data, (di + 3.0))] : Array<Dynamic>));
           (di = cast ((di + 4.0) : Dynamic));
           _Runtime.setField(state, 'hasPendingPath', true);
           _Runtime.setField(state, 'hasCurrentPoint', true);
         }
         else if (__switchValue == 5.0) {
           if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'hasCurrentPoint')))) {
-            _Runtime.callProperty(context, 'moveTo', cast ([0.0, 0.0] : Array<Dynamic>));
+            flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([0.0, 0.0] : Array<Dynamic>));
             _Runtime.setField(state, 'hasCurrentPoint', true);
           }
-          _Runtime.callProperty(context, 'lineTo', cast ([_Runtime.getIndex(data, (di + 2.0)), _Runtime.getIndex(data, (di + 3.0))] : Array<Dynamic>));
+          flighthq._internal.backend.Canvas2dBackend.call(context, 'lineTo', cast ([_Runtime.getIndex(data, (di + 2.0)), _Runtime.getIndex(data, (di + 3.0))] : Array<Dynamic>));
           (di = cast ((di + 4.0) : Dynamic));
           _Runtime.setField(state, 'hasPendingPath', true);
         }
         else if (__switchValue == 6.0) {
           if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'hasCurrentPoint')))) {
-            _Runtime.callProperty(context, 'moveTo', cast ([0.0, 0.0] : Array<Dynamic>));
+            flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([0.0, 0.0] : Array<Dynamic>));
             _Runtime.setField(state, 'hasCurrentPoint', true);
           }
-          _Runtime.callProperty(context, 'bezierCurveTo', cast ([_Runtime.getIndex(data, di), _Runtime.getIndex(data, (di + 1.0)), _Runtime.getIndex(data, (di + 2.0)), _Runtime.getIndex(data, (di + 3.0)), _Runtime.getIndex(data, (di + 4.0)), _Runtime.getIndex(data, (di + 5.0))] : Array<Dynamic>));
+          flighthq._internal.backend.Canvas2dBackend.call(context, 'bezierCurveTo', cast ([_Runtime.getIndex(data, di), _Runtime.getIndex(data, (di + 1.0)), _Runtime.getIndex(data, (di + 2.0)), _Runtime.getIndex(data, (di + 3.0)), _Runtime.getIndex(data, (di + 4.0)), _Runtime.getIndex(data, (di + 5.0))] : Array<Dynamic>));
           (di = cast ((di + 6.0) : Dynamic));
           _Runtime.setField(state, 'hasPendingPath', true);
         }
@@ -243,11 +243,11 @@ class CanvasShapeCommands {
       }
       if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(canOptimize, function():Dynamic return cast _Runtime.compare(sl, 0.0, '>=')), function():Dynamic return cast _Runtime.compare(st, 0.0, '>=')), function():Dynamic return cast _Runtime.compare(sr, _Runtime.field(state, 'bitmapW'), '<=')), function():Dynamic return cast _Runtime.compare(sb, _Runtime.field(state, 'bitmapH'), '<=')))) {
         if (_Runtime.truthy(_Runtime.andValue(_Runtime.field(state, 'hasPendingPath'), function():Dynamic return cast _Runtime.orValue(_Runtime.field(state, 'hasFill'), function():Dynamic return cast _Runtime.field(state, 'hasStroke'))))) { _Runtime.callProperty(state, 'flush', cast ([] : Array<Dynamic>)); }
-        _Runtime.callProperty(context, 'drawImage', cast ([_Runtime.field(state, 'bitmapSrc'), sl, st, (sr - sl), (sb - st), x, y, width, height] : Array<Dynamic>));
+        flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([_Runtime.field(state, 'bitmapSrc'), sl, st, (sr - sl), (sb - st), x, y, width, height] : Array<Dynamic>));
         return;
       }
     }
-    _Runtime.callProperty(context, 'rect', cast ([x, y, width, height] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(context, 'rect', cast ([x, y, width, height] : Array<Dynamic>));
     _Runtime.setField(state, 'hasPendingPath', true);
     _Runtime.setField(state, 'hasCurrentPoint', true);
   } };
@@ -271,10 +271,10 @@ class CanvasShapeCommands {
     rx = HxMath.min((ellipseWidth / 2.0), (width / 2.0));
     ry = HxMath.min((ellipseHeight / 2.0), (height / 2.0));
     radius = HxMath.min(rx, ry);
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(context, 'roundRect')), 'function'))) {
-      _Runtime.callProperty(context, 'roundRect', cast ([x, y, width, height, radius] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.strictEquals('function', 'function'))) {
+      flighthq._internal.backend.Canvas2dBackend.call(context, 'roundRect', cast ([x, y, width, height, radius] : Array<Dynamic>));
     } else {
-      _Runtime.callProperty(context, 'rect', cast ([x, y, width, height] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(context, 'rect', cast ([x, y, width, height] : Array<Dynamic>));
     }
     _Runtime.setField(state, 'hasPendingPath', true);
     _Runtime.setField(state, 'hasCurrentPoint', true);
@@ -345,9 +345,9 @@ class CanvasShapeCommands {
     if (_Runtime.truthy(_Runtime.field(state, 'hasStroke'))) {
       _Runtime.setField(state, 'strokeWidth', thickness);
       _Runtime.setField(state, 'strokeStyle', _Runtime.callValue(CanvasShapeCommands.rgbaString__canvasShapeCommands, cast ([color, alpha] : Array<Dynamic>)));
-      _Runtime.setField(context, 'lineCap', _Runtime.select(_Runtime.strictEquals(caps, 'none'), function():Dynamic return cast 'butt', function():Dynamic return cast (cast caps : Dynamic)));
-      _Runtime.setField(context, 'lineJoin', (cast joints : Dynamic));
-      _Runtime.setField(context, 'miterLimit', miterLimit);
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'lineCap', _Runtime.select(_Runtime.strictEquals(caps, 'none'), function():Dynamic return cast 'butt', function():Dynamic return cast (cast caps : Dynamic)));
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'lineJoin', (cast joints : Dynamic));
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'miterLimit', miterLimit);
     }
   } };
 
@@ -357,10 +357,10 @@ class CanvasShapeCommands {
     x = (cast _Runtime.getIndex(buf, i) : Float);
     y = (cast _Runtime.getIndex(buf, (i + 1.0)) : Float);
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'hasCurrentPoint')))) {
-      _Runtime.callProperty(context, 'moveTo', cast ([0.0, 0.0] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([0.0, 0.0] : Array<Dynamic>));
       _Runtime.setField(state, 'hasCurrentPoint', true);
     }
-    _Runtime.callProperty(context, 'lineTo', cast ([x, y] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(context, 'lineTo', cast ([x, y] : Array<Dynamic>));
     _Runtime.setField(state, 'hasPendingPath', true);
   } };
 
@@ -369,7 +369,7 @@ class CanvasShapeCommands {
     var y:Dynamic = cast _Runtime.UNDEFINED;
     x = (cast _Runtime.getIndex(buf, i) : Float);
     y = (cast _Runtime.getIndex(buf, (i + 1.0)) : Float);
-    _Runtime.callProperty(context, 'moveTo', cast ([x, y] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([x, y] : Array<Dynamic>));
     _Runtime.setField(state, 'hasPendingPath', true);
     _Runtime.setField(state, 'hasCurrentPoint', true);
   } };

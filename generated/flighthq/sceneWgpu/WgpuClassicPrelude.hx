@@ -27,12 +27,12 @@ class WgpuClassicPrelude {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var binding:Null<WgpuMaterialBinding> = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
-    binding = _Runtime.callProperty(_Runtime.field(scene, 'materialBindGroups'), 'get', cast ([materialKey] : Array<Dynamic>));
+    binding = ((cast _Runtime.field(scene, 'materialBindGroups') : flighthq._internal._WeakMap).get(materialKey));
     if (_Runtime.truthy(_Runtime.strictEquals(binding, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       var buffer:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: WgpuClassicPrelude.CLASSIC_UNIFORM_BYTES__wgpuClassicPrelude, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
       var bindGroup:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(pipeline, 'materialBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: { buffer: buffer } }, { binding: 1.0, resource: _Runtime.callValue(getWgpuMaterialSampler, cast ([state, diffuseMap] : Array<Dynamic>)) }, { binding: 2.0, resource: _Runtime.callValue(resolveWgpuMaterialTextureView, cast ([state, diffuseMap] : Array<Dynamic>)) }, { binding: 3.0, resource: _Runtime.callValue(resolveWgpuMaterialTextureView, cast ([state, specularMap] : Array<Dynamic>)) }, { binding: 4.0, resource: _Runtime.callValue(resolveWgpuMaterialTextureView, cast ([state, normalMap] : Array<Dynamic>)) }] : Array<Dynamic>) }] : Array<Dynamic>));
       (binding = cast ({ bindGroup: bindGroup, buffer: buffer } : Dynamic));
-      _Runtime.callProperty(_Runtime.field(scene, 'materialBindGroups'), 'set', cast ([materialKey, binding] : Array<Dynamic>));
+      ((cast _Runtime.field(scene, 'materialBindGroups') : flighthq._internal._WeakMap).set(materialKey, binding));
     }
     _Runtime.setIndex(WgpuClassicPrelude._scratch__wgpuClassicPrelude, 0.0, _Runtime.getIndex(diffuse, 0.0));
     _Runtime.setIndex(WgpuClassicPrelude._scratch__wgpuClassicPrelude, 1.0, _Runtime.getIndex(diffuse, 1.0));

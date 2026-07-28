@@ -71,7 +71,7 @@ class Connectivity {
         _Runtime.callValue(emitSignal, cast ([_Runtime.field(net, 'onMeteredChange'), _Runtime.field(status, 'metered')] : Array<Dynamic>));
       }
     }] : Array<Dynamic>));
-    _Runtime.callProperty(Connectivity._subscriptions__connectivity, 'set', cast ([net, unsubscribe] : Array<Dynamic>));
+    ((cast Connectivity._subscriptions__connectivity : flighthq._internal._WeakMap).set(net, unsubscribe));
   }
 
   public static function createConnectivity():flighthq.types.Connectivity {
@@ -166,10 +166,10 @@ class Connectivity {
 
   public static function detachConnectivity(net:flighthq.types.Connectivity):Void {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
-    unsubscribe = _Runtime.callProperty(Connectivity._subscriptions__connectivity, 'get', cast ([net] : Array<Dynamic>));
+    unsubscribe = ((cast Connectivity._subscriptions__connectivity : flighthq._internal._WeakMap).get(net));
     if (_Runtime.truthy(!_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.callValue(unsubscribe, cast ([] : Array<Dynamic>));
-      _Runtime.callProperty(Connectivity._subscriptions__connectivity, 'delete', cast ([net] : Array<Dynamic>));
+      ((cast Connectivity._subscriptions__connectivity : flighthq._internal._WeakMap).delete_(net));
     }
   }
 

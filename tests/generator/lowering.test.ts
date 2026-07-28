@@ -7,6 +7,24 @@ import { padContextualObjectFunctionParameters } from '../../tools/generator/src
 import { emitHaxeModule } from '../../tools/generator/src/emit/haxe.ts';
 import { lowerTypeScriptSource } from '../../tools/generator/src/lower/typescript.ts';
 
+function typedSource(fileName: string, text: string): { checker: ts.TypeChecker; source: ts.SourceFile } {
+  const options: ts.CompilerOptions = {
+    lib: ['lib.es2022.d.ts', 'lib.dom.d.ts'],
+    skipLibCheck: true,
+    strict: true,
+    target: ts.ScriptTarget.ESNext,
+  };
+  const source = ts.createSourceFile(fileName, text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
+  const host = ts.createCompilerHost(options);
+  const getSourceFile = host.getSourceFile.bind(host);
+  host.getSourceFile = (requested, languageVersion, onError, shouldCreateNewSourceFile) =>
+    requested === fileName ? source : getSourceFile(requested, languageVersion, onError, shouldCreateNewSourceFile);
+  const program = ts.createProgram([fileName], options, host);
+  const programSource = program.getSourceFile(fileName);
+  if (!programSource) throw new Error(`Fixture program is missing ${fileName}`);
+  return { checker: program.getTypeChecker(), source: programSource };
+}
+
 describe('TypeScript lowering and Haxe emission', () => {
   it('normalizes pure functions into deterministic executable Haxe', () => {
     const source = ts.createSourceFile(
@@ -802,20 +820,29 @@ describe('TypeScript lowering and Haxe emission', () => {
   });
 
   it('routes Canvas 2D context access through its maintained internal binding', () => {
-    const source = ts.createSourceFile(
+    const { checker, source } = typedSource(
       '/workspace/upstream/packages/render-canvas/src/sample.ts',
       `
-        export function draw(ctx: CanvasRenderingContext2D) {
-          ctx.fillStyle = '#fff';
-          ctx.fillRect(0, 0, 10, 10);
-        }
+        interface Command { draw(context: CanvasRenderingContext2D): void }
+        export const command: Command = {
+          draw(ctx) {
+            ctx.fillStyle = '#fff';
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'bevel';
+            ctx.miterLimit = 4;
+            ctx.beginPath();
+            ctx.quadraticCurveTo(1, 2, 3, 4);
+            ctx.bezierCurveTo(1, 2, 3, 4, 5, 6);
+            ctx.ellipse(5, 5, 2, 3, 0, 0, Math.PI * 2);
+            if (typeof ctx.roundRect === 'function') ctx.roundRect(0, 0, 10, 10, 2);
+            ctx.closePath();
+            ctx.fillRect(0, 0, 10, 10);
+          },
+        };
         export const runner = (ctx: any) => ctx.source;
       `,
-      ts.ScriptTarget.Latest,
-      true,
-      ts.ScriptKind.TS,
     );
-    const lowered = lowerTypeScriptSource(source, '@flighthq/render-canvas', '/workspace');
+    const lowered = lowerTypeScriptSource(source, '@flighthq/render-canvas', '/workspace', checker);
     const output = emitHaxeModule({
       declarations: lowered.declarations,
       imports: [],
@@ -825,10 +852,101 @@ describe('TypeScript lowering and Haxe emission', () => {
 
     expect(lowered.diagnostics).toEqual([]);
     expect(output).toContain("flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'fillStyle'");
+    expect(output).toContain("flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'lineCap'");
+    expect(output).toContain("flighthq._internal.backend.Canvas2dBackend.call(ctx, 'quadraticCurveTo'");
+    expect(output).toContain("flighthq._internal.backend.Canvas2dBackend.call(ctx, 'bezierCurveTo'");
+    expect(output).toContain("flighthq._internal.backend.Canvas2dBackend.call(ctx, 'ellipse'");
+    expect(output).toContain("flighthq._internal.backend.Canvas2dBackend.call(ctx, 'roundRect'");
+    expect(output).toContain("flighthq._internal.backend.Canvas2dBackend.call(ctx, 'closePath'");
     expect(output).toContain("flighthq._internal.backend.Canvas2dBackend.call(ctx, 'fillRect'");
+    expect(output).not.toContain("_Runtime.callProperty(ctx, 'quadraticCurveTo'");
+    expect(output).not.toContain("Canvas2dBackend.field(ctx, 'roundRect')");
     expect(output).not.toContain("_Runtime.callProperty(ctx, 'fillRect'");
     expect(output).toContain("_Runtime.field(ctx, 'source')");
     expect(output).not.toContain("Canvas2dBackend.field(ctx, 'source')");
+  });
+
+  it('fails generation for Canvas 2D members absent from the typed endpoint inventory', () => {
+    const emit = (body: string) => {
+      const { checker, source } = typedSource(
+        '/workspace/upstream/packages/render-canvas/src/sample.ts',
+        `export function use(ctx: CanvasRenderingContext2D) { ${body} }`,
+      );
+      const lowered = lowerTypeScriptSource(source, '@flighthq/render-canvas', '/workspace', checker);
+      expect(lowered.diagnostics).toEqual([]);
+      return () =>
+        emitHaxeModule({
+          declarations: lowered.declarations,
+          imports: [],
+          name: 'CanvasInventoryFixture',
+          packageName: '@flighthq/render-canvas',
+        });
+    };
+
+    expect(emit('ctx.arcTo(0, 0, 1, 1, 2);')).toThrow('Canvas2D method is not in the typed backend inventory: arcTo');
+    expect(emit('return ctx.direction;')).toThrow('Canvas2D field is not in the typed backend inventory: direction');
+    expect(emit("ctx.direction = 'rtl';")).toThrow(
+      'Canvas2D property is not in the typed backend inventory: direction',
+    );
+  });
+
+  it('lowers typed collection receivers to maintained wrapper calls', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/entity/src/collections.ts',
+      `
+        type AliasMap = Map<string, number>;
+        export function collections(
+          map: AliasMap,
+          readonlyMap: ReadonlyMap<string, number>,
+          wrappedMap: Readonly<Map<string, number>>,
+          maybeMap: Map<string, number> | undefined,
+          set: Set<string>,
+          weakMap: WeakMap<object, number>,
+          weakSet: WeakSet<object>,
+          key: object,
+          dynamic: any,
+        ) {
+          map.set('one', 1);
+          map.get('one');
+          map.has('one');
+          map.delete('one');
+          map.forEach((value) => value);
+          readonlyMap.entries();
+          wrappedMap.get('one');
+          maybeMap?.get('one');
+          set.add('one');
+          set.delete('one');
+          set.values();
+          weakMap.set(key, 1);
+          weakMap.delete(key);
+          weakSet.add(key);
+          weakSet.has(key);
+          dynamic.get('one');
+          return map.size + set.size;
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/entity', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'CollectionFixture',
+      packageName: '@flighthq/entity',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('(cast map : flighthq._internal._Map).set(');
+    expect(output).toContain('(cast map : flighthq._internal._Map).delete_(');
+    expect(output).toContain('(cast readonlyMap : flighthq._internal._Map).entries(');
+    expect(output).toContain('(cast wrappedMap : flighthq._internal._Map).get(');
+    expect(output).toContain('(cast set : flighthq._internal._Set).add(');
+    expect(output).toContain('(cast weakMap : flighthq._internal._WeakMap).set(');
+    expect(output).toContain('(cast weakSet : flighthq._internal._WeakSet).has(');
+    expect(output).toContain('(cast map : flighthq._internal._Map).size');
+    expect(output).toContain('__collection');
+    expect(output).not.toContain("_Runtime.callProperty(map, 'get'");
+    expect(output).not.toContain("_Runtime.field(map, 'size')");
+    expect(output).toContain("_Runtime.callProperty(dynamic_, 'get'");
   });
 
   it('routes typed canvas-element operations separately from the Canvas 2D context', () => {

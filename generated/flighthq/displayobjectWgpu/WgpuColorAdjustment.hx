@@ -107,10 +107,10 @@ class WgpuColorAdjustment {
   public static function getWgpuSpriteBatchColorTransformModule__wgpuColorAdjustment(state:WgpuRenderState):Dynamic {
     var cached:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
-    cached = _Runtime.callProperty(WgpuColorAdjustment._colorTransformModules__wgpuColorAdjustment, 'get', cast ([_Runtime.field(state, 'device')] : Array<Dynamic>));
+    cached = ((cast WgpuColorAdjustment._colorTransformModules__wgpuColorAdjustment : flighthq._internal._WeakMap).get(_Runtime.field(state, 'device')));
     if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast cached; }
     module = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createShaderModule', cast ([{ code: (_Runtime.callValue(getWgpuQuadBatchPreludeWGSL, cast ([] : Array<Dynamic>)) + WgpuColorAdjustment.COLOR_TRANSFORM_WGSL__wgpuColorAdjustment) }] : Array<Dynamic>));
-    _Runtime.callProperty(WgpuColorAdjustment._colorTransformModules__wgpuColorAdjustment, 'set', cast ([_Runtime.field(state, 'device'), module] : Array<Dynamic>));
+    ((cast WgpuColorAdjustment._colorTransformModules__wgpuColorAdjustment : flighthq._internal._WeakMap).set(_Runtime.field(state, 'device'), module));
     return cast module;
     return cast null;
   }

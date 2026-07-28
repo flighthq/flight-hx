@@ -40,7 +40,7 @@ class WgpuEffectPass {
     var uniformBG:Dynamic = cast _Runtime.UNDEFINED;
     var textureBGLayout:Dynamic = cast _Runtime.UNDEFINED;
     var sampler:Dynamic = cast _Runtime.UNDEFINED;
-    fs = _Runtime.callProperty(WgpuEffectPass.effectPassStates__wgpuEffectPass, 'get', cast ([state] : Array<Dynamic>));
+    fs = ((cast WgpuEffectPass.effectPassStates__wgpuEffectPass : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(!_Runtime.strictEquals(fs, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast fs; }
     __destructure0 = state;
     device = _Runtime.field(__destructure0, 'device');
@@ -55,17 +55,17 @@ class WgpuEffectPass {
     textureBGLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), texture: {  } }, { binding: 1.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), sampler: {  } }] : Array<Dynamic>) }] : Array<Dynamic>));
     sampler = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createSampler', cast ([{ minFilter: 'linear', magFilter: 'linear', addressModeU: 'clamp-to-edge', addressModeV: 'clamp-to-edge' }] : Array<Dynamic>));
     (fs = cast ({ uniformBuffer: uniformBuffer, uniformData: uniformData, uniformDataI32: uniformDataI32, uniformOffset: 0.0, uniformStride: STRIDE, uniformSlots: SLOTS, uniformBGLayout: uniformBGLayout, uniformBG: uniformBG, textureBGLayout: textureBGLayout, textureBGs: _Runtime.construct(_Runtime.globalValue('WeakMap'), []), sampler: sampler, format: format } : Dynamic));
-    _Runtime.callProperty(WgpuEffectPass.effectPassStates__wgpuEffectPass, 'set', cast ([state, fs] : Array<Dynamic>));
+    ((cast WgpuEffectPass.effectPassStates__wgpuEffectPass : flighthq._internal._WeakMap).set(state, fs));
     return cast fs;
     return cast null;
   }
 
   public static function getOrCreateTextureBG__wgpuEffectPass(fs:WgpuEffectPassState__wgpuEffectPass, device:Dynamic, view:Dynamic):Dynamic {
     var bg:Dynamic = cast _Runtime.UNDEFINED;
-    bg = _Runtime.callProperty(_Runtime.field(fs, 'textureBGs'), 'get', cast ([view] : Array<Dynamic>));
+    bg = ((cast _Runtime.field(fs, 'textureBGs') : flighthq._internal._WeakMap).get(view));
     if (_Runtime.truthy(_Runtime.strictEquals(bg, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (bg = cast (flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: _Runtime.field(fs, 'textureBGLayout'), entries: cast ([{ binding: 0.0, resource: view }, { binding: 1.0, resource: _Runtime.field(fs, 'sampler') }] : Array<Dynamic>) }] : Array<Dynamic>)) : Dynamic));
-      _Runtime.callProperty(_Runtime.field(fs, 'textureBGs'), 'set', cast ([view, bg] : Array<Dynamic>));
+      ((cast _Runtime.field(fs, 'textureBGs') : flighthq._internal._WeakMap).set(view, bg));
     }
     return cast bg;
     return cast null;
@@ -122,10 +122,10 @@ class WgpuEffectPass {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(pipeline, 'compileForFormat'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(pipeline, 'variants'), _Runtime.field(_Runtime, 'UNDEFINED'))), function():Dynamic return cast _Runtime.strictEquals(targetFormat, canvasFormat)))) {
       return cast _Runtime.field(pipeline, 'pipeline');
     }
-    variant = _Runtime.callProperty(_Runtime.field(pipeline, 'variants'), 'get', cast ([targetFormat] : Array<Dynamic>));
+    variant = ((cast _Runtime.field(pipeline, 'variants') : flighthq._internal._Map).get(targetFormat));
     if (_Runtime.truthy(_Runtime.strictEquals(variant, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (variant = cast (_Runtime.callProperty(pipeline, 'compileForFormat', cast ([targetFormat] : Array<Dynamic>)) : Dynamic));
-      _Runtime.callProperty(_Runtime.field(pipeline, 'variants'), 'set', cast ([targetFormat, variant] : Array<Dynamic>));
+      ((cast _Runtime.field(pipeline, 'variants') : flighthq._internal._Map).set(targetFormat, variant));
     }
     return cast variant;
     return cast null;

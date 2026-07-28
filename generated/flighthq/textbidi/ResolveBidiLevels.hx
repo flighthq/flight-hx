@@ -253,7 +253,7 @@ class ResolveBidiLevels {
     {
       var r:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(r, _Runtime.field(runs, 'length'), '<'))) {
-        _Runtime.callProperty(runByFirst, 'set', cast ([_Runtime.getIndex(_Runtime.field(_Runtime.getIndex(runs, r), 'indices'), 0.0), r] : Array<Dynamic>));
+        ((cast runByFirst : flighthq._internal._Map).set(_Runtime.getIndex(_Runtime.field(_Runtime.getIndex(runs, r), 'indices'), 0.0), r));
         r++;
       }
     }
@@ -280,7 +280,7 @@ class ResolveBidiLevels {
             var lastIdx:Dynamic = _Runtime.getIndex(_Runtime.field(run, 'indices'), (_Runtime.field(_Runtime.field(run, 'indices'), 'length') - 1.0));
             var lastType:Dynamic = _Runtime.getIndex(original, lastIdx);
             if (_Runtime.truthy(_Runtime.andValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(lastType, 'LRI'), function():Dynamic return cast _Runtime.strictEquals(lastType, 'RLI')), function():Dynamic return cast _Runtime.strictEquals(lastType, 'FSI')), function():Dynamic return cast _Runtime.compare(_Runtime.getIndex(matchingPdi, lastIdx), length, '<')))) {
-              var next:Dynamic = _Runtime.callProperty(runByFirst, 'get', cast ([_Runtime.getIndex(matchingPdi, lastIdx)] : Array<Dynamic>));
+              var next:Dynamic = ((cast runByFirst : flighthq._internal._Map).get(_Runtime.getIndex(matchingPdi, lastIdx)));
               if (_Runtime.truthy(_Runtime.strictEquals(next, _Runtime.field(_Runtime, 'UNDEFINED')))) { break; }
               (current = cast (next : Dynamic));
             } else {

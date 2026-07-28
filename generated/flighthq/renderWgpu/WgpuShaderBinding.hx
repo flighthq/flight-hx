@@ -14,7 +14,7 @@ class WgpuShaderBinding {
   public static final _shaderBindings__wgpuShaderBinding:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function getWgpuShader(renderProxy:RenderProxy2D):Null<WgpuBitmapShader> {
-    return cast _Runtime.callProperty(WgpuShaderBinding._shaderBindings__wgpuShaderBinding, 'get', cast ([renderProxy] : Array<Dynamic>));
+    return cast ((cast WgpuShaderBinding._shaderBindings__wgpuShaderBinding : flighthq._internal._WeakMap).get(renderProxy));
     return cast null;
   }
 
@@ -35,10 +35,10 @@ class WgpuShaderBinding {
     var renderProxy:Dynamic = cast _Runtime.UNDEFINED;
     renderProxy = _Runtime.callValue(getOrCreateRenderProxy2D, cast ([state, node] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(shader, null))) {
-      _Runtime.callProperty(WgpuShaderBinding._shaderBindings__wgpuShaderBinding, 'delete', cast ([renderProxy] : Array<Dynamic>));
+      ((cast WgpuShaderBinding._shaderBindings__wgpuShaderBinding : flighthq._internal._WeakMap).delete_(renderProxy));
       return;
     }
-    _Runtime.callProperty(WgpuShaderBinding._shaderBindings__wgpuShaderBinding, 'set', cast ([renderProxy, shader] : Array<Dynamic>));
+    ((cast WgpuShaderBinding._shaderBindings__wgpuShaderBinding : flighthq._internal._WeakMap).set(renderProxy, shader));
     _Runtime.setField(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'webgpuShaderBindingResolver', getWgpuShader);
   }
 }

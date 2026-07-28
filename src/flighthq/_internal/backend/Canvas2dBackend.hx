@@ -23,9 +23,14 @@ class Canvas2dBackend {
     if (context == null) return null;
     final ctx:js.html.CanvasRenderingContext2D = context;
     switch (name) {
+      case 'arc': ctx.arc(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5]); return null;
       case 'beginPath': ctx.beginPath(); return null;
+      case 'bezierCurveTo':
+        ctx.bezierCurveTo(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5]);
+        return null;
       case 'clearRect': ctx.clearRect(arguments[0], arguments[1], arguments[2], arguments[3]); return null;
       case 'clip': ctx.clip(); return null;
+      case 'closePath': ctx.closePath(); return null;
       case 'createLinearGradient': return ctx.createLinearGradient(arguments[0], arguments[1], arguments[2], arguments[3]);
       case 'createPattern': return ctx.createPattern(arguments[0], arguments[1]);
       case 'createRadialGradient':
@@ -43,6 +48,10 @@ class Canvas2dBackend {
             throw 'Canvas2dBackend: unexpected arity for drawImage';
         }
         return null;
+      case 'ellipse':
+        js.Syntax.code('{0}.ellipse({1}, {2}, {3}, {4}, {5}, {6}, {7}, {8})', context, arguments[0], arguments[1],
+          arguments[2], arguments[3], arguments[4], arguments[5], arguments[6], arguments[7]);
+        return null;
       case 'fill': ctx.fill(arguments[0]); return null;
       case 'fillRect': ctx.fillRect(arguments[0], arguments[1], arguments[2], arguments[3]); return null;
       case 'fillText': ctx.fillText(arguments[0], arguments[1], arguments[2]); return null;
@@ -57,9 +66,16 @@ class Canvas2dBackend {
       case 'measureText': return ctx.measureText(arguments[0]);
       case 'moveTo': ctx.moveTo(arguments[0], arguments[1]); return null;
       case 'putImageData': ctx.putImageData(arguments[0], arguments[1], arguments[2]); return null;
+      case 'quadraticCurveTo': ctx.quadraticCurveTo(arguments[0], arguments[1], arguments[2], arguments[3]); return null;
       case 'rect': ctx.rect(arguments[0], arguments[1], arguments[2], arguments[3]); return null;
       case 'restore': ctx.restore(); return null;
+      case 'rotate': ctx.rotate(arguments[0]); return null;
+      case 'roundRect':
+        js.Syntax.code('{0}.roundRect({1}, {2}, {3}, {4}, {5})', context, arguments[0], arguments[1], arguments[2],
+          arguments[3], arguments[4]);
+        return null;
       case 'save': ctx.save(); return null;
+      case 'scale': ctx.scale(arguments[0], arguments[1]); return null;
       case 'setTransform':
         ctx.setTransform(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5]);
         return null;
@@ -102,7 +118,10 @@ class Canvas2dBackend {
       case 'imageSmoothingEnabled': ctx.imageSmoothingEnabled = value;
       // Not present on the Haxe 2D-context extern; assign the browser property directly.
       case 'imageSmoothingQuality': js.Syntax.code('{0}.imageSmoothingQuality = {1}', context, value);
+      case 'lineCap': ctx.lineCap = cast value;
+      case 'lineJoin': ctx.lineJoin = cast value;
       case 'lineWidth': ctx.lineWidth = value;
+      case 'miterLimit': ctx.miterLimit = value;
       case 'textAlign': ctx.textAlign = value;
       case 'textBaseline': ctx.textBaseline = value;
       default:
@@ -153,6 +172,10 @@ class Canvas2dBackend {
             throw 'Canvas2dBackend: unexpected arity for drawImage';
         }
         return null;
+      case 'ellipse':
+        ctx.ellipse(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5], arguments[6],
+          arguments[7]);
+        return null;
       case 'fill': ctx.fill(arguments[0]); return null;
       case 'fillRect': ctx.fillRect(arguments[0], arguments[1], arguments[2], arguments[3]); return null;
       case 'fillText': ctx.fillText(arguments[0], arguments[1], arguments[2]); return null;
@@ -164,6 +187,7 @@ class Canvas2dBackend {
       case 'putImageData': ctx.putImageData(arguments[0], arguments[1], arguments[2]); return null;
       case 'rect': ctx.rect(arguments[0], arguments[1], arguments[2], arguments[3]); return null;
       case 'restore': ctx.restore(); return null;
+      case 'roundRect': ctx.roundRect(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4]); return null;
       case 'save': ctx.save(); return null;
       case 'setTransform':
         ctx.setTransform(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5]);
@@ -206,7 +230,10 @@ class Canvas2dBackend {
       case 'globalCompositeOperation': ctx.globalCompositeOperation = Std.string(value);
       case 'imageSmoothingEnabled': ctx.imageSmoothingEnabled = value == true;
       case 'imageSmoothingQuality': ctx.imageSmoothingQuality = Std.string(value);
+      case 'lineCap': ctx.lineCap = Std.string(value);
+      case 'lineJoin': ctx.lineJoin = Std.string(value);
       case 'lineWidth': ctx.lineWidth = value;
+      case 'miterLimit': ctx.miterLimit = value;
       case 'textAlign': ctx.textAlign = Std.string(value);
       case 'textBaseline': ctx.textBaseline = Std.string(value);
       default:

@@ -91,12 +91,12 @@ class GlRenderState {
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
     programs = _Runtime.construct(_Runtime.globalValue('Set'), []);
-    if (_Runtime.truthy(_Runtime.field(runtime, 'shaderLoc'))) { _Runtime.callProperty(programs, 'add', cast ([_Runtime.field(_Runtime.field(runtime, 'shaderLoc'), 'program')] : Array<Dynamic>)); }
-    if (_Runtime.truthy(_Runtime.field(runtime, 'defaultBitmapShader'))) { _Runtime.callProperty(programs, 'add', cast ([_Runtime.field(_Runtime.field(runtime, 'defaultBitmapShader'), 'program')] : Array<Dynamic>)); }
-    if (_Runtime.truthy(_Runtime.field(runtime, 'particleShader'))) { _Runtime.callProperty(programs, 'add', cast ([_Runtime.field(_Runtime.field(runtime, 'particleShader'), 'program')] : Array<Dynamic>)); }
-    if (_Runtime.truthy(_Runtime.field(runtime, 'quadBatchShader'))) { _Runtime.callProperty(programs, 'add', cast ([_Runtime.field(_Runtime.field(runtime, 'quadBatchShader'), 'program')] : Array<Dynamic>)); }
-    if (_Runtime.truthy(_Runtime.field(runtime, 'colorTransformInstancedShader'))) { _Runtime.callProperty(programs, 'add', cast ([_Runtime.field(_Runtime.field(runtime, 'colorTransformInstancedShader'), 'program')] : Array<Dynamic>)); }
-    if (_Runtime.truthy(_Runtime.field(runtime, 'uniformColorTransformShader'))) { _Runtime.callProperty(programs, 'add', cast ([_Runtime.field(_Runtime.field(runtime, 'uniformColorTransformShader'), 'program')] : Array<Dynamic>)); }
+    if (_Runtime.truthy(_Runtime.field(runtime, 'shaderLoc'))) { ((cast programs : flighthq._internal._Set).add(_Runtime.field(_Runtime.field(runtime, 'shaderLoc'), 'program'))); }
+    if (_Runtime.truthy(_Runtime.field(runtime, 'defaultBitmapShader'))) { ((cast programs : flighthq._internal._Set).add(_Runtime.field(_Runtime.field(runtime, 'defaultBitmapShader'), 'program'))); }
+    if (_Runtime.truthy(_Runtime.field(runtime, 'particleShader'))) { ((cast programs : flighthq._internal._Set).add(_Runtime.field(_Runtime.field(runtime, 'particleShader'), 'program'))); }
+    if (_Runtime.truthy(_Runtime.field(runtime, 'quadBatchShader'))) { ((cast programs : flighthq._internal._Set).add(_Runtime.field(_Runtime.field(runtime, 'quadBatchShader'), 'program'))); }
+    if (_Runtime.truthy(_Runtime.field(runtime, 'colorTransformInstancedShader'))) { ((cast programs : flighthq._internal._Set).add(_Runtime.field(_Runtime.field(runtime, 'colorTransformInstancedShader'), 'program'))); }
+    if (_Runtime.truthy(_Runtime.field(runtime, 'uniformColorTransformShader'))) { ((cast programs : flighthq._internal._Set).add(_Runtime.field(_Runtime.field(runtime, 'uniformColorTransformShader'), 'program'))); }
     for (program in _Runtime.iterable(programs)) {
       flighthq._internal.backend.WebGl2Backend.deleteProgram(gl, program);
     }

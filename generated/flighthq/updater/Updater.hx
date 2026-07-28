@@ -18,9 +18,9 @@ class Updater {
   public static function _setState__updater(updater:AppUpdater, update:Dynamic):Void {
     var prev:Dynamic = cast _Runtime.UNDEFINED;
     var next:Dynamic = cast _Runtime.UNDEFINED;
-    prev = _Runtime.coalesce(_Runtime.callProperty(Updater._states__updater, 'get', cast ([updater] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createUpdaterState, cast ([] : Array<Dynamic>)));
+    prev = _Runtime.coalesce(((cast Updater._states__updater : flighthq._internal._WeakMap).get(updater)), function():Dynamic return cast _Runtime.callValue(createUpdaterState, cast ([] : Array<Dynamic>)));
     next = _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(update), 'function'), function():Dynamic return cast _Runtime.callValue(update, cast ([prev] : Array<Dynamic>)), function():Dynamic return cast update);
-    _Runtime.callProperty(Updater._states__updater, 'set', cast ([updater, next] : Array<Dynamic>));
+    ((cast Updater._states__updater : flighthq._internal._WeakMap).set(updater, next));
   }
 
   public static final _states__updater:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
@@ -62,11 +62,11 @@ class Updater {
       _Runtime.callValue(Updater._setState__updater, cast ([updater, function(prev:Dynamic) return _Runtime.mergeObjects([prev, { phase: 'Idle' }, { info: null }, { progress: null }, { error: null }])] : Array<Dynamic>));
       _Runtime.callValue(emitSignal, cast ([_Runtime.field(updater, 'onUpdateRolledBack')] : Array<Dynamic>));
     }] : Array<Dynamic>))] : Array<Dynamic>);
-    _Runtime.callProperty(Updater._subscriptions__updater, 'set', cast ([updater, function() {
+    ((cast Updater._subscriptions__updater : flighthq._internal._WeakMap).set(updater, function() {
       for (unsubscribe in _Runtime.iterable(unsubscribes)) {
         _Runtime.callValue(unsubscribe, cast ([] : Array<Dynamic>));
       }
-    }] : Array<Dynamic>));
+    }));
   }
 
   public static function cancelAppUpdateDownload():Void {
@@ -89,7 +89,7 @@ class Updater {
   public static function createAppUpdater():AppUpdater {
     var updater:AppUpdater = cast _Runtime.UNDEFINED;
     updater = { onChecking: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onDownloadProgress: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onError: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onUpdateAvailable: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onUpdateCancelled: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onUpdateDownloaded: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onUpdateNotAvailable: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onUpdateRolledBack: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onUpdateStaging: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onUpdateVerified: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
-    _Runtime.callProperty(Updater._states__updater, 'set', cast ([updater, _Runtime.callValue(createUpdaterState, cast ([] : Array<Dynamic>))] : Array<Dynamic>));
+    ((cast Updater._states__updater : flighthq._internal._WeakMap).set(updater, _Runtime.callValue(createUpdaterState, cast ([] : Array<Dynamic>))));
     return cast updater;
     return cast null;
   }
@@ -177,10 +177,10 @@ class Updater {
 
   public static function detachAppUpdater(updater:AppUpdater):Void {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
-    unsubscribe = _Runtime.callProperty(Updater._subscriptions__updater, 'get', cast ([updater] : Array<Dynamic>));
+    unsubscribe = ((cast Updater._subscriptions__updater : flighthq._internal._WeakMap).get(updater));
     if (_Runtime.truthy(!_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.callValue(unsubscribe, cast ([] : Array<Dynamic>));
-      _Runtime.callProperty(Updater._subscriptions__updater, 'delete', cast ([updater] : Array<Dynamic>));
+      ((cast Updater._subscriptions__updater : flighthq._internal._WeakMap).delete_(updater));
     }
   }
 
@@ -193,7 +193,7 @@ class Updater {
   }
 
   public static function getAppUpdaterState(updater:AppUpdater):UpdaterState {
-    return cast _Runtime.coalesce(_Runtime.callProperty(Updater._states__updater, 'get', cast ([updater] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createUpdaterState, cast ([] : Array<Dynamic>)));
+    return cast _Runtime.coalesce(((cast Updater._states__updater : flighthq._internal._WeakMap).get(updater)), function():Dynamic return cast _Runtime.callValue(createUpdaterState, cast ([] : Array<Dynamic>)));
     return cast null;
   }
 

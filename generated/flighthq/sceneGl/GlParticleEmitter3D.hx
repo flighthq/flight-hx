@@ -62,10 +62,10 @@ class GlParticleEmitter3D {
 
   public static function ensureParticle3DShader__glParticleEmitter3D(state:GlRenderState):GlParticle3DShader__glParticleEmitter3D {
     var shader:Dynamic = cast _Runtime.UNDEFINED;
-    shader = _Runtime.callProperty(GlParticleEmitter3D.shaderCache__glParticleEmitter3D, 'get', cast ([state] : Array<Dynamic>));
+    shader = ((cast GlParticleEmitter3D.shaderCache__glParticleEmitter3D : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(!_Runtime.strictEquals(shader, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast shader; }
     (shader = cast (_Runtime.callValue(GlParticleEmitter3D.compileParticle3DShader__glParticleEmitter3D, cast ([_Runtime.field(state, 'gl')] : Array<Dynamic>)) : Dynamic));
-    _Runtime.callProperty(GlParticleEmitter3D.shaderCache__glParticleEmitter3D, 'set', cast ([state, shader] : Array<Dynamic>));
+    ((cast GlParticleEmitter3D.shaderCache__glParticleEmitter3D : flighthq._internal._WeakMap).set(state, shader));
     return cast shader;
     return cast null;
   }
@@ -262,14 +262,14 @@ class GlParticleEmitter3D {
   public static function destroyGlParticleEmitter3DShader(state:GlRenderState):Void {
     var shader:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
-    shader = _Runtime.callProperty(GlParticleEmitter3D.shaderCache__glParticleEmitter3D, 'get', cast ([state] : Array<Dynamic>));
+    shader = ((cast GlParticleEmitter3D.shaderCache__glParticleEmitter3D : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(shader, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
     gl = _Runtime.field(state, 'gl');
     flighthq._internal.backend.WebGl2Backend.deleteProgram(gl, _Runtime.field(shader, 'program'));
     flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, _Runtime.field(shader, 'cornerBuffer'));
     flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, _Runtime.field(shader, 'indexBuffer'));
     flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, _Runtime.field(shader, 'instanceBuffer'));
-    _Runtime.callProperty(GlParticleEmitter3D.shaderCache__glParticleEmitter3D, 'delete', cast ([state] : Array<Dynamic>));
+    ((cast GlParticleEmitter3D.shaderCache__glParticleEmitter3D : flighthq._internal._WeakMap).delete_(state));
   }
 
   public static function drawGlSceneParticleEmitters(state:GlRenderState, scene:SceneNode, camera:Camera, lights:SceneLights):Void {

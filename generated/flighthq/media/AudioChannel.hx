@@ -14,7 +14,7 @@ typedef AudioChannelRuntime__audioChannel = { var context:Dynamic; var destinati
 class AudioChannel {
   public static function connectAudioChannelToNode(channel:flighthq.types.AudioResource.AudioChannel, destinationNode:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callProperty(AudioChannel.channelRuntime__audioChannel, 'get', cast ([channel] : Array<Dynamic>));
+    runtime = ((cast AudioChannel.channelRuntime__audioChannel : flighthq._internal._WeakMap).get(channel));
     if (_Runtime.truthy(_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'gainNode'), null))) {
       _Runtime.callProperty(_Runtime.field(runtime, 'gainNode'), 'disconnect', cast ([] : Array<Dynamic>));
@@ -27,7 +27,7 @@ class AudioChannel {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     var now:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callProperty(AudioChannel.channelRuntime__audioChannel, 'get', cast ([channel] : Array<Dynamic>));
+    runtime = ((cast AudioChannel.channelRuntime__audioChannel : flighthq._internal._WeakMap).get(channel));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.optionalField(runtime, 'gainNode'), null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.optionalField(runtime, 'gainNode'), _Runtime.field(_Runtime, 'UNDEFINED'))))) {
       _Runtime.setField(channel, 'gain', targetGain);
       return;
@@ -42,7 +42,7 @@ class AudioChannel {
 
   public static function getAudioChannelCurrentTime(channel:flighthq.types.AudioResource.AudioChannel):Float {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callProperty(AudioChannel.channelRuntime__audioChannel, 'get', cast ([channel] : Array<Dynamic>));
+    runtime = ((cast AudioChannel.channelRuntime__audioChannel : flighthq._internal._WeakMap).get(channel));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(channel, 'state'), 'playing')))) { return cast _Runtime.field(channel, 'currentTime'); }
     return cast HxMath.min(((_Runtime.field(_Runtime.field(runtime, 'context'), 'currentTime') - _Runtime.field(runtime, 'startedAt')) * 1000.0), _Runtime.field(channel, 'length'));
     return cast null;
@@ -55,14 +55,14 @@ class AudioChannel {
 
   public static function getAudioChannelInputNode(channel:flighthq.types.AudioResource.AudioChannel):Null<Dynamic> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callProperty(AudioChannel.channelRuntime__audioChannel, 'get', cast ([channel] : Array<Dynamic>));
+    runtime = ((cast AudioChannel.channelRuntime__audioChannel : flighthq._internal._WeakMap).get(channel));
     return cast _Runtime.coalesce(_Runtime.optionalField(runtime, 'sourceNode'), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getAudioChannelOutputNode(channel:flighthq.types.AudioResource.AudioChannel):Null<Dynamic> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callProperty(AudioChannel.channelRuntime__audioChannel, 'get', cast ([channel] : Array<Dynamic>));
+    runtime = ((cast AudioChannel.channelRuntime__audioChannel : flighthq._internal._WeakMap).get(channel));
     return cast _Runtime.coalesce(_Runtime.optionalField(runtime, 'gainNode'), function():Dynamic return cast null);
     return cast null;
   }
@@ -83,7 +83,7 @@ class AudioChannel {
     var channel:flighthq.types.AudioResource.AudioChannel = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(source, 'buffer'), null))) { return cast null; }
     channel = { currentTime: _Runtime.coalesce(_Runtime.optionalField(options, 'currentTime'), function():Dynamic return cast 0.0), gain: _Runtime.coalesce(_Runtime.optionalField(options, 'gain'), function():Dynamic return cast 1.0), length: (_Runtime.field(_Runtime.field(source, 'buffer'), 'duration') * 1000.0), loops: _Runtime.coalesce(_Runtime.optionalField(options, 'loops'), function():Dynamic return cast 0.0), playbackRate: _Runtime.coalesce(_Runtime.optionalField(options, 'playbackRate'), function():Dynamic return cast 1.0), source: source, state: 'stopped', onComplete: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
-    _Runtime.callProperty(AudioChannel.channelRuntime__audioChannel, 'set', cast ([channel, { context: context, destinationNode: null, gainNode: null, loopsRemaining: _Runtime.field(channel, 'loops'), sourceNode: null, startedAt: 0.0 }] : Array<Dynamic>));
+    ((cast AudioChannel.channelRuntime__audioChannel : flighthq._internal._WeakMap).set(channel, { context: context, destinationNode: null, gainNode: null, loopsRemaining: _Runtime.field(channel, 'loops'), sourceNode: null, startedAt: 0.0 }));
     _Runtime.callValue(AudioChannel.startAudioChannel__audioChannel, cast ([channel] : Array<Dynamic>));
     return cast channel;
     return cast null;
@@ -107,7 +107,7 @@ class AudioChannel {
   public static function setAudioChannelGain(channel:flighthq.types.AudioResource.AudioChannel, value:Float):Float {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.setField(channel, 'gain', value);
-    runtime = _Runtime.callProperty(AudioChannel.channelRuntime__audioChannel, 'get', cast ([channel] : Array<Dynamic>));
+    runtime = ((cast AudioChannel.channelRuntime__audioChannel : flighthq._internal._WeakMap).get(channel));
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.optionalField(runtime, 'gainNode'), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.optionalField(runtime, 'gainNode'), _Runtime.field(_Runtime, 'UNDEFINED'))))) { _Runtime.setField(_Runtime.field(_Runtime.field(runtime, 'gainNode'), 'gain'), 'value', value); }
     return cast _Runtime.field(channel, 'gain');
     return cast null;
@@ -116,7 +116,7 @@ class AudioChannel {
   public static function setAudioChannelPlaybackRate(channel:flighthq.types.AudioResource.AudioChannel, value:Float):Float {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.setField(channel, 'playbackRate', value);
-    runtime = _Runtime.callProperty(AudioChannel.channelRuntime__audioChannel, 'get', cast ([channel] : Array<Dynamic>));
+    runtime = ((cast AudioChannel.channelRuntime__audioChannel : flighthq._internal._WeakMap).get(channel));
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.optionalField(runtime, 'sourceNode'), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.optionalField(runtime, 'sourceNode'), _Runtime.field(_Runtime, 'UNDEFINED'))))) { _Runtime.setField(_Runtime.field(_Runtime.field(runtime, 'sourceNode'), 'playbackRate'), 'value', value); }
     return cast _Runtime.field(channel, 'playbackRate');
     return cast null;
@@ -137,7 +137,7 @@ class AudioChannel {
 
   public static function completeAudioChannel__audioChannel(channel:flighthq.types.AudioResource.AudioChannel):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callProperty(AudioChannel.channelRuntime__audioChannel, 'get', cast ([channel] : Array<Dynamic>));
+    runtime = ((cast AudioChannel.channelRuntime__audioChannel : flighthq._internal._WeakMap).get(channel));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(channel, 'state'), 'playing')))) { return; }
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'loopsRemaining'), 0.0))) {
       if (_Runtime.truthy(_Runtime.compare(_Runtime.field(runtime, 'loopsRemaining'), 0.0, '>'))) { _Runtime.incrementField(runtime, 'loopsRemaining', -1, true); }
@@ -158,7 +158,7 @@ class AudioChannel {
     var sourceNode:Dynamic = cast _Runtime.UNDEFINED;
     var gainNode:Dynamic = cast _Runtime.UNDEFINED;
     var currentTime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callProperty(AudioChannel.channelRuntime__audioChannel, 'get', cast ([channel] : Array<Dynamic>));
+    runtime = ((cast AudioChannel.channelRuntime__audioChannel : flighthq._internal._WeakMap).get(channel));
     buffer = _Runtime.field(_Runtime.field(channel, 'source'), 'buffer');
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(buffer, null)))) { return; }
     sourceNode = _Runtime.callProperty(_Runtime.field(runtime, 'context'), 'createBufferSource', cast ([] : Array<Dynamic>));
@@ -186,7 +186,7 @@ class AudioChannel {
   public static function stopActiveNode__audioChannel(channel:flighthq.types.AudioResource.AudioChannel, complete:Bool):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var sourceNode:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callProperty(AudioChannel.channelRuntime__audioChannel, 'get', cast ([channel] : Array<Dynamic>));
+    runtime = ((cast AudioChannel.channelRuntime__audioChannel : flighthq._internal._WeakMap).get(channel));
     sourceNode = _Runtime.optionalField(runtime, 'sourceNode');
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(sourceNode, null)), function():Dynamic return cast _Runtime.strictEquals(sourceNode, _Runtime.field(_Runtime, 'UNDEFINED'))))) { return; }
     _Runtime.setField(runtime, 'sourceNode', null);

@@ -43,7 +43,7 @@ class _GlLitProgramValues {
     var shadow:Dynamic = cast _Runtime.UNDEFINED;
     var ibl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.callProperty(_GlLitProgramValues._uploadedLightVersion__glLitProgram, 'get', cast ([program] : Array<Dynamic>)), _Runtime.field(lights, 'version')))) {
+    if (_Runtime.truthy(!_Runtime.strictEquals(((cast _GlLitProgramValues._uploadedLightVersion__glLitProgram : flighthq._internal._WeakMap).get(program)), _Runtime.field(lights, 'version')))) {
       var data:Dynamic = _Runtime.field(lights, 'data');
       flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locDirectional'), _Runtime.getIndex(data, 0.0), _Runtime.getIndex(data, 1.0), _Runtime.getIndex(data, 2.0), 0.0);
       flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locDirectionalRadiance'), _Runtime.getIndex(data, 4.0), _Runtime.getIndex(data, 5.0), _Runtime.getIndex(data, 6.0), 0.0);
@@ -56,7 +56,7 @@ class _GlLitProgramValues {
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locPointCount'), _Runtime.field(lights, 'pointCount'));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locSpotCount'), _Runtime.field(lights, 'spotCount'));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locHemisphereCount'), _Runtime.field(lights, 'hemisphereCount'));
-      _Runtime.callProperty(_GlLitProgramValues._uploadedLightVersion__glLitProgram, 'set', cast ([program, _Runtime.field(lights, 'version')] : Array<Dynamic>));
+      ((cast _GlLitProgramValues._uploadedLightVersion__glLitProgram : flighthq._internal._WeakMap).set(program, _Runtime.field(lights, 'version')));
     }
     runtime = _Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>));
     shadow = _Runtime.field(runtime, 'shadow');
@@ -106,7 +106,7 @@ class _GlLitProgramValues {
     var black:Dynamic = cast _Runtime.UNDEFINED;
     var cube:Dynamic = cast _Runtime.UNDEFINED;
     var lut:Dynamic = cast _Runtime.UNDEFINED;
-    placeholders = _Runtime.callProperty(_GlLitProgramValues._iblPlaceholders__glLitProgram, 'get', cast ([state] : Array<Dynamic>));
+    placeholders = ((cast _GlLitProgramValues._iblPlaceholders__glLitProgram : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(!_Runtime.strictEquals(placeholders, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast placeholders; }
     gl = _Runtime.field(state, 'gl');
     flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + _GlLitProgramValues.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram));
@@ -128,7 +128,7 @@ class _GlLitProgramValues {
     flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, flighthq._internal.backend.WebGl2Backend.TEXTURE_MIN_FILTER, flighthq._internal.backend.WebGl2Backend.LINEAR);
     flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, flighthq._internal.backend.WebGl2Backend.TEXTURE_MAG_FILTER, flighthq._internal.backend.WebGl2Backend.LINEAR);
     (placeholders = cast ({ cube: cube, lut: lut } : Dynamic));
-    _Runtime.callProperty(_GlLitProgramValues._iblPlaceholders__glLitProgram, 'set', cast ([state, placeholders] : Array<Dynamic>));
+    ((cast _GlLitProgramValues._iblPlaceholders__glLitProgram : flighthq._internal._WeakMap).set(state, placeholders));
     return cast placeholders;
     return cast null;
   }

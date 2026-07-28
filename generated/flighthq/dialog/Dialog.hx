@@ -131,12 +131,12 @@ class Dialog {
   }
 
   public static function getWebDirectorySystemHandle(handle:FileDialogHandle):Null<Dynamic> {
-    return cast _Runtime.coalesce(_Runtime.callProperty(Dialog._fileSystemDirectoryHandleRegistry__dialog, 'get', cast ([(cast handle : FileDialogHandle)] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast Dialog._fileSystemDirectoryHandleRegistry__dialog : flighthq._internal._WeakMap).get((cast handle : FileDialogHandle))), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getWebFileSystemHandle(handle:FileDialogHandle):Null<Dynamic> {
-    return cast _Runtime.coalesce(_Runtime.callProperty(Dialog._fileSystemHandleRegistry__dialog, 'get', cast ([(cast handle : FileDialogHandle)] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast Dialog._fileSystemHandleRegistry__dialog : flighthq._internal._WeakMap).get((cast handle : FileDialogHandle))), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -184,7 +184,7 @@ class Dialog {
               return flighthq._internal._Async.flatMap(flighthq._internal.backend.DomWindowBackend.call(win, 'showDirectoryPicker', cast ([pickerOptions] : Array<Dynamic>)), function(__awaitValue13:Dynamic):Dynamic {
                 nativeHandle = __awaitValue13;
                 handle = { kind: 'Directory', name: _Runtime.field(nativeHandle, 'name'), path: null };
-                _Runtime.callProperty(Dialog._fileSystemDirectoryHandleRegistry__dialog, 'set', cast ([handle, nativeHandle] : Array<Dynamic>));
+                ((cast Dialog._fileSystemDirectoryHandleRegistry__dialog : flighthq._internal._WeakMap).set(handle, nativeHandle));
                 return flighthq._internal._Async.flowReturn(cast ([handle] : Array<Dynamic>));
               });
             });
@@ -261,7 +261,7 @@ class Dialog {
                   handles = cast ([] : Array<Dynamic>);
                   for (nativeHandle in _Runtime.iterable(nativeHandles)) {
                     var handle:FileDialogHandle = { kind: 'File', name: _Runtime.field(nativeHandle, 'name'), path: null };
-                    _Runtime.callProperty(Dialog._fileSystemHandleRegistry__dialog, 'set', cast ([handle, nativeHandle] : Array<Dynamic>));
+                    ((cast Dialog._fileSystemHandleRegistry__dialog : flighthq._internal._WeakMap).set(handle, nativeHandle));
                     _Runtime.callProperty(handles, 'push', cast ([handle] : Array<Dynamic>));
                   }
                   return flighthq._internal._Async.flowReturn(handles);
@@ -310,8 +310,8 @@ class Dialog {
             while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(files, 'length'), '<'))) {
               var rel:Dynamic = _Runtime.coalesce(_Runtime.field((cast _Runtime.getIndex(files, i) : { @:optional var webkitRelativePath:String; }), 'webkitRelativePath'), function():Dynamic return cast '');
               var dirName:Dynamic = _Runtime.orValue(_Runtime.getIndex(_Runtime.callProperty(rel, 'split', cast (['/'] : Array<Dynamic>)), 0.0), function():Dynamic return cast _Runtime.field(_Runtime.getIndex(files, i), 'name'));
-              if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(seenDirs, 'has', cast ([dirName] : Array<Dynamic>))))) {
-                _Runtime.callProperty(seenDirs, 'add', cast ([dirName] : Array<Dynamic>));
+              if (_Runtime.truthy(!_Runtime.truthy(((cast seenDirs : flighthq._internal._Set).has(dirName))))) {
+                ((cast seenDirs : flighthq._internal._Set).add(dirName));
                 _Runtime.callProperty(handles, 'push', cast ([{ kind: 'Directory', name: dirName, path: null }] : Array<Dynamic>));
               }
               i++;
@@ -453,7 +453,7 @@ class Dialog {
                   return flighthq._internal._Async.flatMap(flighthq._internal.backend.DomWindowBackend.call(win, 'showSaveFilePicker', cast ([pickerOptions] : Array<Dynamic>)), function(__awaitValue29:Dynamic):Dynamic {
                     nativeHandle = __awaitValue29;
                     handle = { kind: 'File', name: _Runtime.field(nativeHandle, 'name'), path: null };
-                    _Runtime.callProperty(Dialog._fileSystemHandleRegistry__dialog, 'set', cast ([handle, nativeHandle] : Array<Dynamic>));
+                    ((cast Dialog._fileSystemHandleRegistry__dialog : flighthq._internal._WeakMap).set(handle, nativeHandle));
                     return flighthq._internal._Async.flowReturn(handle);
                   });
                 });
@@ -529,7 +529,7 @@ class Dialog {
   public static function toFileSystemAccessStartIn__dialog(startIn:FileDialogStartIn):Null<String> {
     var allowed:Dynamic = cast _Runtime.UNDEFINED;
     allowed = _Runtime.construct(_Runtime.globalValue('Set'), [cast (['desktop', 'documents', 'downloads', 'music', 'pictures', 'videos'] : Array<Dynamic>)]);
-    return cast _Runtime.select(_Runtime.callProperty(allowed, 'has', cast ([startIn] : Array<Dynamic>)), function():Dynamic return cast startIn, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
+    return cast _Runtime.select(((cast allowed : flighthq._internal._Set).has(startIn)), function():Dynamic return cast startIn, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
     return cast null;
   }
 }

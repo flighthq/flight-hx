@@ -46,10 +46,10 @@ class WgpuMotionBlurEffect {
 
   public static function getMotionBlurPipeline__wgpuMotionBlurEffect(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
-    pipeline = _Runtime.callProperty(WgpuMotionBlurEffect._motionBlurPipelines__wgpuMotionBlurEffect, 'get', cast ([state] : Array<Dynamic>));
+    pipeline = ((cast WgpuMotionBlurEffect._motionBlurPipelines__wgpuMotionBlurEffect : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(pipeline, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (pipeline = cast (_Runtime.callValue(createWgpuDualSourceEffectPipeline, cast ([state, WgpuMotionBlurEffect.MOTION_BLUR_FRAGMENT_WGSL__wgpuMotionBlurEffect, 'replace'] : Array<Dynamic>)) : Dynamic));
-      _Runtime.callProperty(WgpuMotionBlurEffect._motionBlurPipelines__wgpuMotionBlurEffect, 'set', cast ([state, pipeline] : Array<Dynamic>));
+      ((cast WgpuMotionBlurEffect._motionBlurPipelines__wgpuMotionBlurEffect : flighthq._internal._WeakMap).set(state, pipeline));
     }
     return cast pipeline;
     return cast null;

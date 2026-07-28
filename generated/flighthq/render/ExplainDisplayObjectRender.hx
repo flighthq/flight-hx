@@ -25,7 +25,7 @@ class ExplainDisplayObjectRender {
     var effectiveAlpha:Dynamic = cast _Runtime.UNDEFINED;
     var reason:DisplayObjectRenderBlankReason = cast _Runtime.UNDEFINED;
     kind = _Runtime.field(source, 'kind');
-    hasRenderer = !_Runtime.strictEquals(_Runtime.callProperty(_Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'rendererMap'), 'get', cast ([kind] : Array<Dynamic>)), _Runtime.field(_Runtime, 'UNDEFINED'));
+    hasRenderer = !_Runtime.strictEquals(((cast _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'rendererMap') : flighthq._internal._Map).get(kind)), _Runtime.field(_Runtime, 'UNDEFINED'));
     proxy = _Runtime.callValue(getRenderProxy2D, cast ([state, source] : Array<Dynamic>));
     prepared = !_Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED'));
     appearance = (cast (cast source : Dynamic) : HasAppearance);

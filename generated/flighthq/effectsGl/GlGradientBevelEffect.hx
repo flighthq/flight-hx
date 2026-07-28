@@ -112,12 +112,12 @@ class GlGradientBevelEffect {
 
   public static function getApplyShader__glGradientBevelEffect(state:GlRenderState):BevelApplyLocations__glGradientBevelEffect {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
-    loc = _Runtime.callProperty(GlGradientBevelEffect.applyShaders__glGradientBevelEffect, 'get', cast ([state] : Array<Dynamic>));
+    loc = ((cast GlGradientBevelEffect.applyShaders__glGradientBevelEffect : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       var gl:Dynamic = _Runtime.field(state, 'gl');
       var base:Dynamic = _Runtime.callValue(compileGlFullscreenProgram, cast ([gl, GlGradientBevelEffect.BEVEL_APPLY_FRAGMENT_SRC__glGradientBevelEffect] : Array<Dynamic>));
       (loc = cast (_Runtime.mergeObjects([base, { locRamp: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_ramp') }, { locSource: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_source') }]) : Dynamic));
-      _Runtime.callProperty(GlGradientBevelEffect.applyShaders__glGradientBevelEffect, 'set', cast ([state, loc] : Array<Dynamic>));
+      ((cast GlGradientBevelEffect.applyShaders__glGradientBevelEffect : flighthq._internal._WeakMap).set(state, loc));
     }
     return cast loc;
     return cast null;
@@ -125,12 +125,12 @@ class GlGradientBevelEffect {
 
   public static function getEncodeShader__glGradientBevelEffect(state:GlRenderState):BevelEncodeLocations__glGradientBevelEffect {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
-    loc = _Runtime.callProperty(GlGradientBevelEffect.encodeShaders__glGradientBevelEffect, 'get', cast ([state] : Array<Dynamic>));
+    loc = ((cast GlGradientBevelEffect.encodeShaders__glGradientBevelEffect : flighthq._internal._WeakMap).get(state));
     if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       var gl:Dynamic = _Runtime.field(state, 'gl');
       var base:Dynamic = _Runtime.callValue(compileGlFullscreenProgram, cast ([gl, GlGradientBevelEffect.BEVEL_ENCODE_FRAGMENT_SRC__glGradientBevelEffect] : Array<Dynamic>));
       (loc = cast (_Runtime.mergeObjects([base, { locOffset: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_offset') }]) : Dynamic));
-      _Runtime.callProperty(GlGradientBevelEffect.encodeShaders__glGradientBevelEffect, 'set', cast ([state, loc] : Array<Dynamic>));
+      ((cast GlGradientBevelEffect.encodeShaders__glGradientBevelEffect : flighthq._internal._WeakMap).set(state, loc));
     }
     return cast loc;
     return cast null;

@@ -119,8 +119,8 @@ class GlShadedPrelude {
       var trimmed:Dynamic = StringTools.trim(Std.string(line));
       var isSharedDeclaration:Dynamic = _Runtime.andValue(StringTools.startsWith(trimmed, 'uniform '), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.regexp('_\\d+\\b', ''), 'test', cast ([trimmed] : Array<Dynamic>))));
       if (_Runtime.truthy(isSharedDeclaration)) {
-        if (_Runtime.truthy(_Runtime.callProperty(seen, 'has', cast ([trimmed] : Array<Dynamic>)))) { continue; }
-        _Runtime.callProperty(seen, 'add', cast ([trimmed] : Array<Dynamic>));
+        if (_Runtime.truthy(((cast seen : flighthq._internal._Set).has(trimmed)))) { continue; }
+        ((cast seen : flighthq._internal._Set).add(trimmed));
       }
       (result = cast ((result + '' + Std.string(line) + '\n') : Dynamic));
     }

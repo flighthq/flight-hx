@@ -15,6 +15,67 @@ const binaryOperatorMap: Readonly<Record<string, string>> = {
   '??': '??',
 };
 
+const canvas2dMethodEndpoints = new Set([
+  'arc',
+  'beginPath',
+  'bezierCurveTo',
+  'clearRect',
+  'clip',
+  'closePath',
+  'createLinearGradient',
+  'createPattern',
+  'createRadialGradient',
+  'drawImage',
+  'ellipse',
+  'fill',
+  'fillRect',
+  'fillText',
+  'getContextAttributes',
+  'getImageData',
+  'lineTo',
+  'measureText',
+  'moveTo',
+  'putImageData',
+  'quadraticCurveTo',
+  'rect',
+  'restore',
+  'rotate',
+  'roundRect',
+  'save',
+  'scale',
+  'setTransform',
+  'stroke',
+  'strokeRect',
+  'transform',
+  'translate',
+]);
+
+const canvas2dReadableFieldEndpoints = new Set(['canvas', 'imageSmoothingEnabled']);
+
+const canvas2dWritableFieldEndpoints = new Set([
+  'fillStyle',
+  'filter',
+  'font',
+  'globalAlpha',
+  'globalCompositeOperation',
+  'imageSmoothingEnabled',
+  'imageSmoothingQuality',
+  'lineCap',
+  'lineJoin',
+  'lineWidth',
+  'miterLimit',
+  'strokeStyle',
+  'textAlign',
+  'textBaseline',
+]);
+
+const collectionBindingTypes = {
+  MapCollection: 'flighthq._internal._Map',
+  SetCollection: 'flighthq._internal._Set',
+  WeakMapCollection: 'flighthq._internal._WeakMap',
+  WeakSetCollection: 'flighthq._internal._WeakSet',
+} as const;
+
 const webGl2MethodEndpoints = new Set([
   'activeTexture',
   'attachShader',
@@ -1668,6 +1729,9 @@ function emitExpression(expression: IrExpression): string {
           throw new Error(`WebGL2 property assignment has no typed backend endpoint: ${expression.left.name}`);
         }
         const object = emitExpression(expression.left.object);
+        if (expression.left.binding && expression.left.binding in collectionBindingTypes) {
+          throw new Error(`Typed collection property assignment is not supported: ${expression.left.name}`);
+        }
         if (
           expression.left.binding === 'Canvas2dBackend' ||
           expression.left.binding === 'CanvasElementBackend' ||
@@ -1676,6 +1740,14 @@ function emitExpression(expression: IrExpression): string {
           expression.left.binding === 'WebGpuDeviceBackend' ||
           expression.left.binding === 'WebGpuQueueBackend'
         ) {
+          if (expression.left.binding === 'Canvas2dBackend') {
+            canvas2dWritableFieldEndpoint(expression.left.name);
+            if (expression.operator !== '=') {
+              throw new Error(
+                `Canvas2D compound property assignment has no typed backend endpoint: ${expression.left.name}`,
+              );
+            }
+          }
           const binding = `flighthq._internal.backend.${expression.left.binding}`;
           const current = `${binding}.field(${object}, ${quote(expression.left.name)})`;
           const value =
@@ -1866,11 +1938,17 @@ function emitExpression(expression: IrExpression): string {
       if (emitExpression(expression.callee) === 'Proxy') {
         return `_Runtime.createProxy(${expression.arguments.map(emitExpression).join(', ')})`;
       }
-      if (expression.callee.kind === 'identifier' && ['Map', 'WeakMap'].includes(expression.callee.name)) {
+      if (expression.callee.kind === 'identifier' && expression.callee.name === 'Map') {
         return `_Runtime.createMap(${expression.arguments[0] ? emitExpression(expression.arguments[0]) : 'null'})`;
       }
-      if (expression.callee.kind === 'identifier' && ['Set', 'WeakSet'].includes(expression.callee.name)) {
+      if (expression.callee.kind === 'identifier' && expression.callee.name === 'WeakMap') {
+        return `_Runtime.createWeakMap(${expression.arguments[0] ? emitExpression(expression.arguments[0]) : 'null'})`;
+      }
+      if (expression.callee.kind === 'identifier' && expression.callee.name === 'Set') {
         return `_Runtime.createSet(${expression.arguments[0] ? emitExpression(expression.arguments[0]) : 'null'})`;
+      }
+      if (expression.callee.kind === 'identifier' && expression.callee.name === 'WeakSet') {
+        return `_Runtime.createWeakSet(${expression.arguments[0] ? emitExpression(expression.arguments[0]) : 'null'})`;
       }
       if (expression.callee.kind === 'identifier' && expression.callee.name === 'Array') {
         return `_Runtime.createArray(${expression.arguments[0] ? emitExpression(expression.arguments[0]) : '0'})`;
@@ -1937,6 +2015,16 @@ function emitExpression(expression: IrExpression): string {
         }
         return `flighthq._internal.backend.WebGl2Backend.${webGl2ConstantEndpoint(expression.name)}`;
       }
+      if (expression.binding && expression.binding in collectionBindingTypes) {
+        if (expression.name !== 'size') {
+          throw new Error(`Typed collection method references are not supported: ${expression.name}`);
+        }
+        const owner = emitExpression(expression.object);
+        const collectionType = collectionBindingTypes[expression.binding as keyof typeof collectionBindingTypes];
+        if (!expression.optional) return `(cast ${owner} : ${collectionType}).size`;
+        const temporary = `__collection${String(temporaryIndex++)}`;
+        return `({ final ${temporary}:Dynamic = ${owner}; ${temporary} == null ? _Runtime.UNDEFINED : (cast ${temporary} : ${collectionType}).size; })`;
+      }
       if (
         expression.binding === 'Canvas2dBackend' ||
         expression.binding === 'CanvasElementBackend' ||
@@ -1948,6 +2036,7 @@ function emitExpression(expression: IrExpression): string {
         expression.binding === 'WebGpuLimitsBackend' ||
         expression.binding === 'WebGpuQueueBackend'
       ) {
+        if (expression.binding === 'Canvas2dBackend') canvas2dReadableFieldEndpoint(expression.name);
         return `flighthq._internal.backend.${expression.binding}.field(${emitExpression(expression.object)}, ${quote(expression.name)})`;
       }
       if (
@@ -1997,6 +2086,9 @@ function emitExpression(expression: IrExpression): string {
             expression.operand.binding === 'WebGpuDeviceBackend' ||
             expression.operand.binding === 'WebGpuQueueBackend')
         ) {
+          if (expression.operand.binding === 'Canvas2dBackend') {
+            throw new Error(`Canvas2D property deletion has no typed backend endpoint: ${expression.operand.name}`);
+          }
           return `flighthq._internal.backend.${expression.operand.binding}.deleteField(${emitExpression(expression.operand.object)}, ${quote(expression.operand.name)})`;
         }
         if (expression.operand.kind === 'property')
@@ -2004,6 +2096,10 @@ function emitExpression(expression: IrExpression): string {
         return `_Runtime.deleteValue(${emitExpression(expression.operand)})`;
       }
       if (expression.operator === 'typeof') {
+        if (expression.operand.kind === 'property' && expression.operand.binding === 'Canvas2dBackend') {
+          canvas2dMethodEndpoint(expression.operand.name);
+          return quote('function');
+        }
         return `_Runtime.typeofValue(${emitExpression(expression.operand)})`;
       }
       if (expression.operator === 'void') return `_Runtime.voidValue(${emitExpression(expression.operand)})`;
@@ -2141,6 +2237,9 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
       if (expression.callee.binding === 'WebGl2Backend') {
         throw new Error(`WebGL2 spread call has no typed backend endpoint: ${expression.callee.name}`);
       }
+      if (expression.callee.binding && expression.callee.binding in collectionBindingTypes) {
+        throw new Error(`Typed collection spread call has no direct endpoint: ${expression.callee.name}`);
+      }
       if (
         expression.callee.binding === 'Canvas2dBackend' ||
         expression.callee.binding === 'CanvasElementBackend' ||
@@ -2151,6 +2250,7 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
         expression.callee.binding === 'WebGpuDeviceBackend' ||
         expression.callee.binding === 'WebGpuQueueBackend'
       ) {
+        if (expression.callee.binding === 'Canvas2dBackend') canvas2dMethodEndpoint(expression.callee.name);
         return `flighthq._internal.backend.${expression.callee.binding}.call(${emitExpression(expression.callee.object)}, ${quote(expression.callee.name)}, _Runtime.concatArrays([${chunks.join(', ')}]))`;
       }
       const method = expression.optional || expression.callee.optional ? 'callOptionalProperty' : 'callProperty';
@@ -2173,6 +2273,15 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
       const arguments_ = [owner, ...expression.arguments.map(emitExpression)].join(', ');
       return `flighthq._internal.backend.WebGl2Backend.${endpoint}(${arguments_})`;
     }
+    if (expression.callee.binding && expression.callee.binding in collectionBindingTypes) {
+      const collectionType = collectionBindingTypes[expression.callee.binding as keyof typeof collectionBindingTypes];
+      const method = expression.callee.name === 'delete' ? 'delete_' : safeName(expression.callee.name);
+      const call = (target: string) =>
+        `((cast ${target} : ${collectionType}).${method}(${expression.arguments.map(emitExpression).join(', ')}))`;
+      if (!(expression.optional || expression.callee.optional)) return call(owner);
+      const temporary = `__collection${String(temporaryIndex++)}`;
+      return `({ final ${temporary}:Dynamic = ${owner}; ${temporary} == null ? _Runtime.UNDEFINED : ${call(temporary)}; })`;
+    }
     if (
       expression.callee.binding === 'Canvas2dBackend' ||
       expression.callee.binding === 'CanvasElementBackend' ||
@@ -2183,6 +2292,7 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
       expression.callee.binding === 'WebGpuDeviceBackend' ||
       expression.callee.binding === 'WebGpuQueueBackend'
     ) {
+      if (expression.callee.binding === 'Canvas2dBackend') canvas2dMethodEndpoint(name);
       const method = expression.optional || expression.callee.optional ? 'callOptional' : 'call';
       return `flighthq._internal.backend.${expression.callee.binding}.${method}(${owner}, ${quote(name)}, cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
     }
@@ -2446,6 +2556,27 @@ function webGl2MethodEndpoint(name: string, argumentCount: number): string {
     throw new Error(`WebGL2 method is not in the typed backend inventory: ${name}`);
   }
   return endpoint;
+}
+
+function canvas2dMethodEndpoint(name: string): string {
+  if (!canvas2dMethodEndpoints.has(name)) {
+    throw new Error(`Canvas2D method is not in the typed backend inventory: ${name}`);
+  }
+  return name;
+}
+
+function canvas2dReadableFieldEndpoint(name: string): string {
+  if (!canvas2dReadableFieldEndpoints.has(name)) {
+    throw new Error(`Canvas2D field is not in the typed backend inventory: ${name}`);
+  }
+  return name;
+}
+
+function canvas2dWritableFieldEndpoint(name: string): string {
+  if (!canvas2dWritableFieldEndpoints.has(name)) {
+    throw new Error(`Canvas2D property is not in the typed backend inventory: ${name}`);
+  }
+  return name;
 }
 
 function webGl2ConstantEndpoint(name: string): string {

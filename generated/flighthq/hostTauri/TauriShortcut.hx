@@ -15,13 +15,13 @@ class TauriShortcut {
     return cast { getRegistered: function() {
       return cast _Runtime.concatArrays([_Runtime.toArray(registered)]);
     }, isRegistered: function(accelerator:Dynamic) {
-      return cast _Runtime.callProperty(registered, 'has', cast ([accelerator] : Array<Dynamic>));
+      return cast ((cast registered : flighthq._internal._Set).has(accelerator));
     }, register: function(accelerator:Dynamic, listener:Dynamic) {
-      _Runtime.callProperty(registered, 'add', cast ([accelerator] : Array<Dynamic>));
+      ((cast registered : flighthq._internal._Set).add(accelerator));
       flighthq._internal._Async.recover(_Runtime.callProperty(globalShortcut, 'register', cast ([accelerator, function(event:Dynamic) {
         if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(event, 'state'), 'Pressed'))) { _Runtime.callValue(listener, cast ([{ accelerator: accelerator }] : Array<Dynamic>)); }
       }] : Array<Dynamic>)), function() {
-        _Runtime.callProperty(registered, 'delete', cast ([accelerator] : Array<Dynamic>));
+        ((cast registered : flighthq._internal._Set).delete_(accelerator));
       });
       return cast true;
     }, setAllEnabled: function() {
@@ -29,13 +29,13 @@ class TauriShortcut {
     }, setEnabled: function() {
       return cast false;
     }, unregister: function(accelerator:Dynamic) {
-      _Runtime.callProperty(registered, 'delete', cast ([accelerator] : Array<Dynamic>));
+      ((cast registered : flighthq._internal._Set).delete_(accelerator));
       flighthq._internal._Async.recover(_Runtime.callProperty(globalShortcut, 'unregister', cast ([accelerator] : Array<Dynamic>)), function() {
       
       });
       return cast true;
     }, unregisterAll: function() {
-      _Runtime.callProperty(registered, 'clear', cast ([] : Array<Dynamic>));
+      ((cast registered : flighthq._internal._Set).clear());
       flighthq._internal._Async.recover(_Runtime.callProperty(globalShortcut, 'unregisterAll', cast ([] : Array<Dynamic>)), function() {
       
       });

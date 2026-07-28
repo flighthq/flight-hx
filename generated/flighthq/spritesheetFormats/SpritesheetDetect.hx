@@ -60,11 +60,11 @@ class SpritesheetDetect {
   public static function getRegistry__spritesheetDetect():FormatRegistry__spritesheetDetect {
     if (_Runtime.truthy(!_Runtime.strictEquals(SpritesheetDetect._registry__spritesheetDetect, null))) { return cast SpritesheetDetect._registry__spritesheetDetect; }
     (SpritesheetDetect._registry__spritesheetDetect = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
-    _Runtime.callProperty(SpritesheetDetect._registry__spritesheetDetect, 'set', cast ([ASEPRITE, { detect: SpritesheetDetect.detectAseprite__spritesheetDetect, parse: function(text:Dynamic) return _Runtime.callValue(parseAsepriteSpritesheet, cast ([text] : Array<Dynamic>)) }] : Array<Dynamic>));
-    _Runtime.callProperty(SpritesheetDetect._registry__spritesheetDetect, 'set', cast ([COCOS_PLIST, { detect: SpritesheetDetect.detectCocosPlist__spritesheetDetect, parse: function(text:Dynamic) return _Runtime.callValue(parseCocosPlistSpritesheet, cast ([text] : Array<Dynamic>)) }] : Array<Dynamic>));
-    _Runtime.callProperty(SpritesheetDetect._registry__spritesheetDetect, 'set', cast ([TEXTURE_PACKER, { detect: SpritesheetDetect.detectTexturePacker__spritesheetDetect, parse: function(text:Dynamic) return _Runtime.callValue(parseTexturePackerSpritesheet, cast ([text] : Array<Dynamic>)) }] : Array<Dynamic>));
-    _Runtime.callProperty(SpritesheetDetect._registry__spritesheetDetect, 'set', cast ([STARLING, { detect: SpritesheetDetect.detectStarling__spritesheetDetect, parse: function(text:Dynamic, opts:Dynamic) return _Runtime.callValue(parseStarlingSpritesheet, cast ([text, { frameDuration: _Runtime.field(opts, 'frameDuration') }] : Array<Dynamic>)) }] : Array<Dynamic>));
-    _Runtime.callProperty(SpritesheetDetect._registry__spritesheetDetect, 'set', cast ([LIBGDX_ATLAS, { detect: SpritesheetDetect.detectLibgdxAtlas__spritesheetDetect, parse: function(text:Dynamic, opts:Dynamic) return _Runtime.callValue(parseLibgdxAtlasSpritesheet, cast ([text, { frameDuration: _Runtime.field(opts, 'frameDuration') }] : Array<Dynamic>)) }] : Array<Dynamic>));
+    ((cast SpritesheetDetect._registry__spritesheetDetect : flighthq._internal._Map).set(ASEPRITE, { detect: SpritesheetDetect.detectAseprite__spritesheetDetect, parse: function(text:Dynamic) return _Runtime.callValue(parseAsepriteSpritesheet, cast ([text] : Array<Dynamic>)) }));
+    ((cast SpritesheetDetect._registry__spritesheetDetect : flighthq._internal._Map).set(COCOS_PLIST, { detect: SpritesheetDetect.detectCocosPlist__spritesheetDetect, parse: function(text:Dynamic) return _Runtime.callValue(parseCocosPlistSpritesheet, cast ([text] : Array<Dynamic>)) }));
+    ((cast SpritesheetDetect._registry__spritesheetDetect : flighthq._internal._Map).set(TEXTURE_PACKER, { detect: SpritesheetDetect.detectTexturePacker__spritesheetDetect, parse: function(text:Dynamic) return _Runtime.callValue(parseTexturePackerSpritesheet, cast ([text] : Array<Dynamic>)) }));
+    ((cast SpritesheetDetect._registry__spritesheetDetect : flighthq._internal._Map).set(STARLING, { detect: SpritesheetDetect.detectStarling__spritesheetDetect, parse: function(text:Dynamic, opts:Dynamic) return _Runtime.callValue(parseStarlingSpritesheet, cast ([text, { frameDuration: _Runtime.field(opts, 'frameDuration') }] : Array<Dynamic>)) }));
+    ((cast SpritesheetDetect._registry__spritesheetDetect : flighthq._internal._Map).set(LIBGDX_ATLAS, { detect: SpritesheetDetect.detectLibgdxAtlas__spritesheetDetect, parse: function(text:Dynamic, opts:Dynamic) return _Runtime.callValue(parseLibgdxAtlasSpritesheet, cast ([text, { frameDuration: _Runtime.field(opts, 'frameDuration') }] : Array<Dynamic>)) }));
     return cast SpritesheetDetect._registry__spritesheetDetect;
     return cast null;
   }
@@ -80,7 +80,7 @@ class SpritesheetDetect {
   }
 
   public static function getSpritesheetFormat(kind:SpritesheetFormatKind):Null<{ var detect:Dynamic; var parse:Dynamic; }> {
-    return cast _Runtime.coalesce(_Runtime.callProperty(_Runtime.callValue(SpritesheetDetect.getRegistry__spritesheetDetect, cast ([] : Array<Dynamic>)), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast _Runtime.callValue(SpritesheetDetect.getRegistry__spritesheetDetect, cast ([] : Array<Dynamic>)) : flighthq._internal._Map).get(kind)), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -91,13 +91,13 @@ class SpritesheetDetect {
     opts = _Runtime.coalesce(options, function():Dynamic return cast {  });
     kind = _Runtime.coalesce(formatKind, function():Dynamic return cast _Runtime.callValue(detectSpritesheetFormat, cast ([text] : Array<Dynamic>)));
     if (_Runtime.truthy(!_Runtime.truthy(kind))) { return cast null; }
-    entry = _Runtime.callProperty(_Runtime.callValue(SpritesheetDetect.getRegistry__spritesheetDetect, cast ([] : Array<Dynamic>)), 'get', cast ([kind] : Array<Dynamic>));
+    entry = ((cast _Runtime.callValue(SpritesheetDetect.getRegistry__spritesheetDetect, cast ([] : Array<Dynamic>)) : flighthq._internal._Map).get(kind));
     if (_Runtime.truthy(!_Runtime.truthy(entry))) { return cast null; }
     return cast _Runtime.callProperty(entry, 'parse', cast ([text, opts] : Array<Dynamic>));
     return cast null;
   }
 
   public static function registerSpritesheetFormat(kind:SpritesheetFormatKind, entry:{ var detect:Dynamic; var parse:Dynamic; }):Void {
-    _Runtime.callProperty(_Runtime.callValue(SpritesheetDetect.getRegistry__spritesheetDetect, cast ([] : Array<Dynamic>)), 'set', cast ([kind, entry] : Array<Dynamic>));
+    ((cast _Runtime.callValue(SpritesheetDetect.getRegistry__spritesheetDetect, cast ([] : Array<Dynamic>)) : flighthq._internal._Map).set(kind, entry));
   }
 }

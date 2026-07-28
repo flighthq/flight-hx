@@ -100,10 +100,10 @@ class DirectedGraph__martinezKernel {
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var index:Dynamic = cast _Runtime.UNDEFINED;
     key = '' + Std.string(_Runtime.callValue(MartinezKernel.snap__martinezKernel, cast ([x] : Array<Dynamic>))) + ',' + Std.string(_Runtime.callValue(MartinezKernel.snap__martinezKernel, cast ([y] : Array<Dynamic>))) + '';
-    existing = _Runtime.callProperty(_Runtime.field(this, 'keys'), 'get', cast ([key] : Array<Dynamic>));
+    existing = ((cast _Runtime.field(this, 'keys') : flighthq._internal._Map).get(key));
     if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast existing; }
     index = _Runtime.field(_Runtime.field(this, 'xs'), 'length');
-    _Runtime.callProperty(_Runtime.field(this, 'keys'), 'set', cast ([key, index] : Array<Dynamic>));
+    ((cast _Runtime.field(this, 'keys') : flighthq._internal._Map).set(key, index));
     _Runtime.callProperty(_Runtime.field(this, 'xs'), 'push', cast ([x] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(this, 'ys'), 'push', cast ([y] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(this, 'outgoing'), 'push', cast ([cast ([] : Array<Dynamic>)] : Array<Dynamic>));
@@ -483,14 +483,14 @@ class MartinezKernel {
         (by = cast (_Runtime.field(seg, 'ay') : Dynamic));
       }
       var key:Dynamic = '' + Std.string(_Runtime.callValue(MartinezKernel.snap__martinezKernel, cast ([ax] : Array<Dynamic>))) + ',' + Std.string(_Runtime.callValue(MartinezKernel.snap__martinezKernel, cast ([ay] : Array<Dynamic>))) + ',' + Std.string(_Runtime.callValue(MartinezKernel.snap__martinezKernel, cast ([bx] : Array<Dynamic>))) + ',' + Std.string(_Runtime.callValue(MartinezKernel.snap__martinezKernel, cast ([by] : Array<Dynamic>))) + '';
-      var unique:Dynamic = _Runtime.callProperty(map, 'get', cast ([key] : Array<Dynamic>));
+      var unique:Dynamic = ((cast map : flighthq._internal._Map).get(key));
       if (_Runtime.truthy(_Runtime.strictEquals(unique, _Runtime.field(_Runtime, 'UNDEFINED')))) {
         (unique = cast ({ ax: ax, ay: ay, bx: bx, by: by, subjectDelta: 0.0, clipDelta: 0.0 } : Dynamic));
-        _Runtime.callProperty(map, 'set', cast ([key, unique] : Array<Dynamic>));
+        ((cast map : flighthq._internal._Map).set(key, unique));
       }
       if (_Runtime.truthy(_Runtime.field(seg, 'isSubject'))) { _Runtime.setField(unique, 'subjectDelta', (_Runtime.field(unique, 'subjectDelta') + _Runtime.field(seg, 'windingDelta'))); } else { _Runtime.setField(unique, 'clipDelta', (_Runtime.field(unique, 'clipDelta') + _Runtime.field(seg, 'windingDelta'))); }
     }
-    return cast _Runtime.concatArrays([_Runtime.toArray(_Runtime.callProperty(map, 'values', cast ([] : Array<Dynamic>)))]);
+    return cast _Runtime.concatArrays([_Runtime.toArray(((cast map : flighthq._internal._Map).values()))]);
     return cast null;
   }
 

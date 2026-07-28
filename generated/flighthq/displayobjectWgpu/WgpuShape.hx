@@ -53,10 +53,10 @@ class WgpuShape {
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     shapeData = _Runtime.callValue(getWgpuRendererData, cast ([data] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(shapeData, null))) { return; }
-    entry = _Runtime.callProperty(_Runtime.field(runtime, 'imageResourceTextureCache'), 'get', cast ([_Runtime.field(shapeData, 'image')] : Array<Dynamic>));
+    entry = ((cast _Runtime.field(runtime, 'imageResourceTextureCache') : flighthq._internal._WeakMap).get(_Runtime.field(shapeData, 'image')));
     if (_Runtime.truthy(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.callProperty(_Runtime.field(entry, 'texture'), 'destroy', cast ([] : Array<Dynamic>));
-      _Runtime.callProperty(_Runtime.field(runtime, 'imageResourceTextureCache'), 'delete', cast ([_Runtime.field(shapeData, 'image')] : Array<Dynamic>));
+      ((cast _Runtime.field(runtime, 'imageResourceTextureCache') : flighthq._internal._WeakMap).delete_(_Runtime.field(shapeData, 'image')));
     }
     b = _Runtime.field(shapeData, 'meshBuffers');
     _Runtime.callOptionalProperty(_Runtime.field(b, 'vertexBuffer'), 'destroy', cast ([] : Array<Dynamic>));

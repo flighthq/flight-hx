@@ -24,7 +24,7 @@ class InteractionSpatialIndex {
     var bestRank:Dynamic = cast _Runtime.UNDEFINED;
     index = _Runtime.field(manager, 'spatialIndex');
     if (_Runtime.truthy(_Runtime.strictEquals(index, null))) { return cast null; }
-    nodes = _Runtime.callProperty(InteractionSpatialIndex.managerCandidates__interactionSpatialIndex, 'get', cast ([manager] : Array<Dynamic>));
+    nodes = ((cast InteractionSpatialIndex.managerCandidates__interactionSpatialIndex : flighthq._internal._WeakMap).get(manager));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(nodes, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(nodes, 'length'), 0.0)))) { return cast null; }
     _Runtime.callValue(querySpatialPoint, cast ([index, x, y, InteractionSpatialIndex.spatialQueryOut__interactionSpatialIndex] : Array<Dynamic>));
     best = null;
@@ -53,7 +53,7 @@ class InteractionSpatialIndex {
     if (_Runtime.truthy(_Runtime.strictEquals(index, null))) { return; }
     nodes = cast ([] : Array<Dynamic>);
     _Runtime.callValue(InteractionSpatialIndex.collectSpatialCandidates__interactionSpatialIndex, cast ([_Runtime.field(manager, 'root'), nodes] : Array<Dynamic>));
-    _Runtime.callProperty(InteractionSpatialIndex.managerCandidates__interactionSpatialIndex, 'set', cast ([manager, nodes] : Array<Dynamic>));
+    ((cast InteractionSpatialIndex.managerCandidates__interactionSpatialIndex : flighthq._internal._WeakMap).set(manager, nodes));
     _Runtime.callValue(clearSpatialIndex, cast ([index] : Array<Dynamic>));
     {
       var rank:Dynamic = 0.0;

@@ -14,7 +14,7 @@ class DomCSSFilterBinding {
   }
 
   public static function getDomCssFilter(renderProxy:RenderProxy2D):Null<String> {
-    return cast _Runtime.callProperty(DomCSSFilterBinding._cssFilterBindings__domCSSFilterBinding, 'get', cast ([renderProxy] : Array<Dynamic>));
+    return cast ((cast DomCSSFilterBinding._cssFilterBindings__domCSSFilterBinding : flighthq._internal._WeakMap).get(renderProxy));
     return cast null;
   }
 
@@ -22,10 +22,10 @@ class DomCSSFilterBinding {
     var renderProxy:Dynamic = cast _Runtime.UNDEFINED;
     renderProxy = _Runtime.callValue(getOrCreateRenderProxy2D, cast ([state, node] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(filter, null))) {
-      _Runtime.callProperty(DomCSSFilterBinding._cssFilterBindings__domCSSFilterBinding, 'delete', cast ([renderProxy] : Array<Dynamic>));
+      ((cast DomCSSFilterBinding._cssFilterBindings__domCSSFilterBinding : flighthq._internal._WeakMap).delete_(renderProxy));
       return;
     }
-    _Runtime.callProperty(DomCSSFilterBinding._cssFilterBindings__domCSSFilterBinding, 'set', cast ([renderProxy, filter] : Array<Dynamic>));
+    ((cast DomCSSFilterBinding._cssFilterBindings__domCSSFilterBinding : flighthq._internal._WeakMap).set(renderProxy, filter));
   }
 
   public static final _cssFilterBindings__domCSSFilterBinding:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);

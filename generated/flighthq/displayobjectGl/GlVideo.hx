@@ -39,10 +39,10 @@ class GlVideo {
     videoTexture = _Runtime.field(__destructure0, 'videoTexture');
     if (_Runtime.truthy(_Runtime.strictEquals(videoTexture, null))) { return; }
     cache = _Runtime.field(runtime, 'videoTextureCache');
-    entry = _Runtime.callOptionalProperty(cache, 'get', cast ([videoTexture] : Array<Dynamic>));
+    entry = ({ final __collection0:Dynamic = cache; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._WeakMap).get(videoTexture)); });
     if (_Runtime.truthy(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       flighthq._internal.backend.WebGl2Backend.deleteTexture(_Runtime.field(state, 'gl'), _Runtime.field(entry, 'texture'));
-      _Runtime.callProperty(cache, 'delete', cast ([videoTexture] : Array<Dynamic>));
+      ((cast cache : flighthq._internal._WeakMap).delete_(videoTexture));
     }
   }
 

@@ -77,7 +77,7 @@ class UpdateTweens {
         }
         i--;
       }
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(list, 'length'), 0.0))) { _Runtime.callProperty(_Runtime.field(manager, 'tweens'), 'delete', cast ([target] : Array<Dynamic>)); }
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(list, 'length'), 0.0))) { ((cast _Runtime.field(manager, 'tweens') : flighthq._internal._Map).delete_(target)); }
     }
   }
 }

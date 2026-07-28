@@ -102,7 +102,7 @@ class Sensors {
     unsubscribeQuaternion = _Runtime.callProperty(backend, 'subscribeQuaternion', cast ([function(reading:Dynamic) {
       _Runtime.callValue(emitSignal, cast ([_Runtime.field(sensors, 'onQuaternion'), reading] : Array<Dynamic>));
     }] : Array<Dynamic>));
-    _Runtime.callProperty(Sensors._subscriptions__sensors, 'set', cast ([sensors, function() {
+    ((cast Sensors._subscriptions__sensors : flighthq._internal._WeakMap).set(sensors, function() {
       _Runtime.callValue(unsubscribeAbsoluteOrientation, cast ([] : Array<Dynamic>));
       _Runtime.callValue(unsubscribeAmbientLight, cast ([] : Array<Dynamic>));
       _Runtime.callValue(unsubscribeBarometer, cast ([] : Array<Dynamic>));
@@ -113,7 +113,7 @@ class Sensors {
       _Runtime.callValue(unsubscribeOrientation, cast ([] : Array<Dynamic>));
       _Runtime.callValue(unsubscribeProximity, cast ([] : Array<Dynamic>));
       _Runtime.callValue(unsubscribeQuaternion, cast ([] : Array<Dynamic>));
-    }] : Array<Dynamic>));
+    }));
   }
 
   public static function computeEulerFromQuaternion(out:OrientationReading, quaternion:QuaternionReading):Void {
@@ -637,10 +637,10 @@ class Sensors {
 
   public static function detachSensors(sensors:flighthq.types.Sensors):Void {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
-    unsubscribe = _Runtime.callProperty(Sensors._subscriptions__sensors, 'get', cast ([sensors] : Array<Dynamic>));
+    unsubscribe = ((cast Sensors._subscriptions__sensors : flighthq._internal._WeakMap).get(sensors));
     if (_Runtime.truthy(!_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.callValue(unsubscribe, cast ([] : Array<Dynamic>));
-      _Runtime.callProperty(Sensors._subscriptions__sensors, 'delete', cast ([sensors] : Array<Dynamic>));
+      ((cast Sensors._subscriptions__sensors : flighthq._internal._WeakMap).delete_(sensors));
     }
   }
 

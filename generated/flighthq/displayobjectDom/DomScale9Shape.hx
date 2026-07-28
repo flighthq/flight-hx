@@ -66,7 +66,7 @@ class DomScale9Shape {
     ctx = _Runtime.field(data, 'context');
     _Runtime.callValue(mapCanvasScale9ShapeCommands, cast ([DomScale9Shape._remappedCommands__domScale9Shape, commands, mapper] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(bounds, 'x'), 0.0), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(bounds, 'y'), 0.0)))) {
-      _Runtime.callProperty(ctx, 'translate', cast ([-_Runtime.field(bounds, 'x'), -_Runtime.field(bounds, 'y')] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'translate', cast ([-_Runtime.field(bounds, 'x'), -_Runtime.field(bounds, 'y')] : Array<Dynamic>));
     }
     _Runtime.callValue(renderCanvasShapeCommands, cast ([ctx, DomScale9Shape._remappedCommands__domScale9Shape] : Array<Dynamic>));
     _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'opacity', _Runtime.select(_Runtime.compare(_Runtime.field(renderProxy, 'alpha'), 1.0, '<'), function():Dynamic return cast Std.string(_Runtime.field(renderProxy, 'alpha')), function():Dynamic return cast ''));

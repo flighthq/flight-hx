@@ -8,8 +8,8 @@ package flighthq._internal;
  * entries are held strongly: Flight removes entries explicitly, and weakness is
  * a collector nicety rather than observable semantics.
  */
-// Reached only reflectively (constructed through `_Runtime.globalValue`), so
-// full dead-code elimination must not strip the class or its members.
+// Constructed through `_Runtime` and used as the typed receiver surface for
+// generated WeakMap operations.
 @:keep
 class _WeakMap {
   final entries:haxe.ds.ObjectMap<{}, Dynamic> = new haxe.ds.ObjectMap();
@@ -18,6 +18,9 @@ class _WeakMap {
     if (source != null) for (pair in (cast source : Array<Dynamic>)) set(pair[0], pair[1]);
   }
 
+  #if js
+  @:native("delete")
+  #end
   public function delete_(key:Dynamic):Bool {
     return key != null && entries.remove(cast key);
   }

@@ -98,10 +98,10 @@ class _GlMeshProgramValues {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>));
-    program = _Runtime.callProperty(_Runtime.field(runtime, 'programCache'), 'get', cast ([key] : Array<Dynamic>));
+    program = ((cast _Runtime.field(runtime, 'programCache') : flighthq._internal._Map).get(key));
     if (_Runtime.truthy(_Runtime.strictEquals(program, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (program = cast (_Runtime.callValue(compile, cast ([_Runtime.field(state, 'gl')] : Array<Dynamic>)) : Dynamic));
-      _Runtime.callProperty(_Runtime.field(runtime, 'programCache'), 'set', cast ([key, program] : Array<Dynamic>));
+      ((cast _Runtime.field(runtime, 'programCache') : flighthq._internal._Map).set(key, program));
     }
     return cast (cast program : Dynamic);
     return cast null;
