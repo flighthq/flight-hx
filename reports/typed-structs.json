@@ -1,0 +1,395 @@
+{
+  "candidates": [
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 186,
+        "writes": 136
+      },
+      "declarationFingerprint": "sha256:b7c136ecc5b32d5cd063b9b9437334ad8e1145d1026f64b8ec8473a62410dd62",
+      "declarationKind": "interface",
+      "eligible": true,
+      "escapes": [],
+      "fields": [
+        {
+          "name": "x",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "y",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/Vector2.ts#Vector2",
+      "memberEscapes": [
+        {
+          "member": "[EntityRuntimeKey]",
+          "reason": "computed-symbol-member",
+          "source": "upstream/packages/types/src/Entity.ts:3"
+        }
+      ],
+      "name": "Vector2",
+      "packageName": "@flighthq/types",
+      "purpose": "two-component numeric geometry leaf",
+      "reasons": [],
+      "source": "upstream/packages/types/src/Vector2.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 735,
+        "writes": 405
+      },
+      "declarationFingerprint": "sha256:4e24edc270be813be011b6acb2a947aa33cc2d50934088d08954905ae3e497c0",
+      "declarationKind": "interface",
+      "eligible": true,
+      "escapes": [],
+      "fields": [
+        {
+          "name": "x",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "y",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "z",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/Vector3.ts#Vector3",
+      "memberEscapes": [
+        {
+          "member": "[EntityRuntimeKey]",
+          "reason": "computed-symbol-member",
+          "source": "upstream/packages/types/src/Entity.ts:3"
+        }
+      ],
+      "name": "Vector3",
+      "packageName": "@flighthq/types",
+      "purpose": "three-component numeric geometry leaf",
+      "reasons": [],
+      "source": "upstream/packages/types/src/Vector3.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 84,
+        "writes": 132
+      },
+      "declarationFingerprint": "sha256:4c26914e14fa1460f7650189dc991a220e1efb5bcc96ed852feb1693d4f5ec36",
+      "declarationKind": "interface",
+      "eligible": true,
+      "escapes": [],
+      "fields": [
+        {
+          "name": "w",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "x",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "y",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "z",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/Quaternion.ts#Quaternion",
+      "memberEscapes": [
+        {
+          "member": "[EntityRuntimeKey]",
+          "reason": "computed-symbol-member",
+          "source": "upstream/packages/types/src/Entity.ts:3"
+        }
+      ],
+      "name": "Quaternion",
+      "packageName": "@flighthq/types",
+      "purpose": "four-component rotation leaf",
+      "reasons": [],
+      "source": "upstream/packages/types/src/Quaternion.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 49,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:1dd682a2f18f302041b5c8236cc9661efacec65b5af270e201390fca5910b2d3",
+      "declarationKind": "interface",
+      "eligible": true,
+      "escapes": [],
+      "fields": [
+        {
+          "name": "m",
+          "optional": false,
+          "readonly": true,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Float32Array<ArrayBufferLike>"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/Matrix3.ts#Matrix3",
+      "memberEscapes": [
+        {
+          "member": "[EntityRuntimeKey]",
+          "reason": "computed-symbol-member",
+          "source": "upstream/packages/types/src/Entity.ts:3"
+        }
+      ],
+      "name": "Matrix3",
+      "packageName": "@flighthq/types",
+      "purpose": "3x3 matrix holder",
+      "reasons": [],
+      "source": "upstream/packages/types/src/Matrix3.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 115,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:e0189d7efd4bd4cd11bccad543eda6bd532b98e5c3f1c0a9cb72d5b9f6d12a7e",
+      "declarationKind": "interface",
+      "eligible": true,
+      "escapes": [],
+      "fields": [
+        {
+          "name": "m",
+          "optional": false,
+          "readonly": true,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Float32Array<ArrayBufferLike>"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/Matrix4.ts#Matrix4",
+      "memberEscapes": [
+        {
+          "member": "[EntityRuntimeKey]",
+          "reason": "computed-symbol-member",
+          "source": "upstream/packages/types/src/Entity.ts:3"
+        }
+      ],
+      "name": "Matrix4",
+      "packageName": "@flighthq/types",
+      "purpose": "4x4 matrix holder",
+      "reasons": [],
+      "source": "upstream/packages/types/src/Matrix4.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 422,
+        "writes": 214
+      },
+      "declarationFingerprint": "sha256:a9ecbfbf0841ea1a0d47b8480c419819b40456e51a9e8b25618ffca45387048b",
+      "declarationKind": "interface",
+      "eligible": false,
+      "escapes": [
+        {
+          "column": 7,
+          "reason": "presence-sensitive",
+          "source": "upstream/packages/interaction/src/hitTests.ts",
+          "line": 238
+        },
+        {
+          "column": 7,
+          "reason": "presence-sensitive",
+          "source": "upstream/packages/interaction/src/hitTests.ts",
+          "line": 247
+        }
+      ],
+      "fields": [
+        {
+          "name": "height",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "width",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "x",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "y",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/Rectangle.ts#Rectangle",
+      "memberEscapes": [
+        {
+          "member": "[EntityRuntimeKey]",
+          "reason": "computed-symbol-member",
+          "source": "upstream/packages/types/src/Entity.ts:3"
+        }
+      ],
+      "name": "Rectangle",
+      "packageName": "@flighthq/types",
+      "purpose": "four-component rectangle leaf",
+      "reasons": [
+        "presence-sensitive-use"
+      ],
+      "source": "upstream/packages/types/src/Rectangle.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 159,
+        "writes": 56
+      },
+      "declarationFingerprint": "sha256:f9f9ced8012658f172b2ddf822467b3392b7396be923f4e6df88055a25371ce4",
+      "declarationKind": "interface",
+      "eligible": true,
+      "escapes": [],
+      "fields": [
+        {
+          "name": "alphaMultiplier",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "alphaOffset",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "blueMultiplier",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "blueOffset",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "greenMultiplier",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "greenOffset",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "redMultiplier",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "redOffset",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/ColorTransform.ts#ColorTransform",
+      "memberEscapes": [
+        {
+          "member": "[EntityRuntimeKey]",
+          "reason": "computed-symbol-member",
+          "source": "upstream/packages/types/src/Entity.ts:3"
+        }
+      ],
+      "name": "ColorTransform",
+      "packageName": "@flighthq/types",
+      "purpose": "render-hot RGBA multiplier and offset record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/ColorTransform.ts"
+    }
+  ],
+  "schemaVersion": 1,
+  "summary": {
+    "bindableAccesses": 2057,
+    "candidates": 7,
+    "eligible": 6,
+    "escapes": 2,
+    "fields": 23,
+    "ineligible": 1
+  },
+  "upstreamCommit": "5d24729f7360475e28a105ae0caeeaa2e1328260"
+}

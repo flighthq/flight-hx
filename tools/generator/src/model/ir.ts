@@ -30,6 +30,17 @@ export interface IrParameter {
   type: IrType;
 }
 
+export interface IrTypedStructBinding {
+  field: {
+    name: string;
+    optional: boolean;
+    readonly: boolean;
+    requiredUndefined: boolean;
+  };
+  schemaId: string;
+  schemaName: string;
+}
+
 export type IrExpression =
   | { kind: 'array'; elements: IrExpression[] }
   | { kind: 'await'; expression: IrExpression }
@@ -82,6 +93,7 @@ export type IrExpression =
       name: string;
       object: IrExpression;
       optional?: boolean | undefined;
+      typedStructBinding?: IrTypedStructBinding | undefined;
     }
   | { flags: string; kind: 'regexp'; pattern: string }
   | { kind: 'template'; parts: Array<IrExpression | string> }

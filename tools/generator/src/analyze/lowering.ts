@@ -3,6 +3,7 @@ import path from 'node:path';
 import ts from 'typescript';
 
 import { upstreamTypeScriptProgram } from './program.ts';
+import { typedStructRegistry, type TypedStructRegistry } from './typed-structs.ts';
 import { lowerTypeScriptSource } from '../lower/typescript.ts';
 import type { LoweringDiagnostic } from '../model/ir.ts';
 
@@ -26,15 +27,19 @@ export interface LoweringAudit {
   };
 }
 
-export function auditLowering(workspaceDirectory: string): LoweringAudit {
+export function auditLowering(workspaceDirectory: string, typedStructs?: TypedStructRegistry): LoweringAudit {
   const { checker, program } = upstreamTypeScriptProgram(workspaceDirectory);
+  const structRegistry =
+    typedStructs ?? typedStructRegistry(workspaceDirectory, 'not-recorded', undefined, { checker, program });
   const packagesDirectory = path.join(workspaceDirectory, 'upstream', 'packages');
   const packages = readdirSync(packagesDirectory, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
     .map((entry) => path.join(packagesDirectory, entry.name))
     .map((directory) => ({ directory, metadata: readPackageMetadata(directory) }))
     .sort((left, right) => left.metadata.name.localeCompare(right.metadata.name))
-    .map(({ directory, metadata }) => auditPackage(directory, metadata.name, workspaceDirectory, program, checker));
+    .map(({ directory, metadata }) =>
+      auditPackage(directory, metadata.name, workspaceDirectory, program, checker, structRegistry),
+    );
 
   return {
     packages,
@@ -55,6 +60,7 @@ function auditPackage(
   workspaceDirectory: string,
   program: ts.Program,
   checker: ts.TypeChecker,
+  typedStructs: TypedStructRegistry,
 ): PackageLoweringAudit {
   const sourceDirectory = path.join(directory, 'src');
   const files = walkTypeScriptSources(sourceDirectory);
@@ -65,7 +71,7 @@ function auditPackage(
     const source = program.getSourceFile(file);
     if (!source) throw new Error(`Upstream TypeScript program is missing source: ${file}`);
     declarations += source.statements.filter(isCandidateDeclaration).length;
-    const result = lowerTypeScriptSource(source, packageName, workspaceDirectory, checker);
+    const result = lowerTypeScriptSource(source, packageName, workspaceDirectory, checker, typedStructs);
     lowered += result.accountedDeclarations;
     diagnostics.push(...result.diagnostics);
   }

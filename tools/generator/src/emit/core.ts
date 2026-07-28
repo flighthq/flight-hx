@@ -13,6 +13,7 @@ import {
   sourcePathToModule,
 } from '../analyze/inventory.ts';
 import { upstreamTypeScriptProgram } from '../analyze/program.ts';
+import { typedStructRegistry, type TypedStructRegistry } from '../analyze/typed-structs.ts';
 import { lowerTypeScriptSource } from '../lower/typescript.ts';
 import type {
   IrDeclaration,
@@ -51,9 +52,14 @@ interface LoweredPackageEntry {
   packageName: string;
 }
 
-export function generateCoreModules(workspaceDirectory: string, check: boolean): CoreGenerationReport {
+export function generateCoreModules(
+  workspaceDirectory: string,
+  check: boolean,
+  typedStructs?: TypedStructRegistry,
+): CoreGenerationReport {
   validateWebGl2ComputedConstantDomains(workspaceDirectory);
   const inventory = analyzeUpstream(workspaceDirectory);
+  const structRegistry = typedStructs ?? typedStructRegistry(workspaceDirectory, inventory.upstreamCommit);
   const inventoryByName = new Map(inventory.packages.map((item) => [item.name, item]));
   const packagesDirectory = path.join(workspaceDirectory, 'upstream', 'packages');
   const loweredPackages = readdirSync(packagesDirectory, { withFileTypes: true })
@@ -67,7 +73,7 @@ export function generateCoreModules(workspaceDirectory: string, check: boolean):
       );
       return {
         directoryName: entry.name,
-        lowered: lowerPackage(workspaceDirectory, entry.name, packageName, publicSourceNames),
+        lowered: lowerPackage(workspaceDirectory, entry.name, packageName, publicSourceNames, structRegistry),
         moduleName: packageNameToModule(packageName),
         packageName,
       };
@@ -1544,7 +1550,12 @@ function inlineDefaultConstants(declarations: IrDeclaration[]): void {
   }
 }
 
-function lowerFiles(workspaceDirectory: string, packageName: string, files: string[]) {
+function lowerFiles(
+  workspaceDirectory: string,
+  packageName: string,
+  files: string[],
+  typedStructs: TypedStructRegistry,
+) {
   const declarations: IrDeclaration[] = [];
   const diagnostics: LoweringDiagnostic[] = [];
   const sources: LoweredSource[] = [];
@@ -1552,7 +1563,7 @@ function lowerFiles(workspaceDirectory: string, packageName: string, files: stri
   for (const file of files) {
     const source = program.getSourceFile(file);
     if (!source) throw new Error(`Upstream TypeScript program is missing source: ${file}`);
-    const result = lowerTypeScriptSource(source, packageName, workspaceDirectory, checker);
+    const result = lowerTypeScriptSource(source, packageName, workspaceDirectory, checker, typedStructs);
     namespacePrivateDeclarations(result.declarations);
     declarations.push(...result.declarations);
     diagnostics.push(...result.diagnostics);
@@ -1837,6 +1848,7 @@ function lowerPackage(
   directoryName: string,
   packageName: string,
   publicSourceNames: ReadonlySet<string>,
+  typedStructs: TypedStructRegistry,
 ) {
   const directory = path.join(workspaceDirectory, 'upstream', 'packages', directoryName, 'src');
   const files = readdirSync(directory)
@@ -1849,5 +1861,5 @@ function lowerPackage(
     )
     .map((file) => path.join(directory, file))
     .sort();
-  return { ...lowerFiles(workspaceDirectory, packageName, files), files };
+  return { ...lowerFiles(workspaceDirectory, packageName, files, typedStructs), files };
 }

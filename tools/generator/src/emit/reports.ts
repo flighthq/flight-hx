@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
+import type { TypedStructAudit } from '../analyze/typed-structs.ts';
 import type { ApiReport, UpstreamInventory } from '../model/inventory.ts';
 import type { LoweringAudit } from '../analyze/lowering.ts';
 
@@ -60,6 +61,35 @@ export function loweringSummary(audit: LoweringAudit): string {
   ];
   for (const item of audit.packages) {
     lines.push(`| \`${item.packageName}\` | ${item.declarations} | ${item.lowered} | ${item.diagnostics.length} |`);
+  }
+  lines.push('');
+  return lines.join('\n');
+}
+
+export function typedStructSummary(audit: TypedStructAudit): string {
+  const lines = [
+    '# Typed Struct Audit',
+    '',
+    `Upstream commit: \`${audit.upstreamCommit}\``,
+    '',
+    'This report is analysis-only. Typed-struct expression emission is not enabled.',
+    '',
+    '| Metric | Count |',
+    '| --- | ---: |',
+    `| Candidates | ${audit.summary.candidates} |`,
+    `| Eligible | ${audit.summary.eligible} |`,
+    `| Ineligible | ${audit.summary.ineligible} |`,
+    `| Declared fields | ${audit.summary.fields} |`,
+    `| Bindable accesses | ${audit.summary.bindableAccesses} |`,
+    `| Dynamic escapes | ${audit.summary.escapes} |`,
+    '',
+    '| Candidate | Purpose | Fields | Reads | Writes | Calls | Escapes | Eligible | Reasons |',
+    '| --- | --- | ---: | ---: | ---: | ---: | ---: | :---: | --- |',
+  ];
+  for (const candidate of audit.candidates) {
+    lines.push(
+      `| \`${candidate.name}\` | ${candidate.purpose} | ${candidate.fields.length} | ${candidate.accesses.reads} | ${candidate.accesses.writes} | ${candidate.accesses.calls} | ${candidate.escapes.length} | ${candidate.eligible ? 'yes' : 'no'} | ${candidate.reasons.length > 0 ? candidate.reasons.map((reason) => `\`${reason}\``).join(', ') : '—'} |`,
+    );
   }
   lines.push('');
   return lines.join('\n');

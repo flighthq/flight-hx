@@ -1,6 +1,6 @@
 # Typed Struct Lowering Proposal
 
-Status: design for review; no struct-expression emission is authorized by this document.
+Status: design approved; schema analysis and IR binding are authorized, but struct-expression emission remains disabled pending review of the checked-in audit.
 
 ## Goal
 
@@ -38,7 +38,7 @@ The following remain nominal or dynamic:
 - callable/constructable objects and interfaces whose methods depend on JavaScript `this`;
 - shapes involved in declaration merging that cannot be represented by one closed typedef.
 
-An interface may contain callback-valued fields and remain structural. A method signature is eligible only after it is proven to be used as a callback value without receiver-sensitive `this`; otherwise that schema remains dynamic for the first tranche.
+An interface may contain callback-valued fields and remain structural. Receiver-sensitive methods escape at member granularity: those members remain dynamic while independent data fields on the same schema may bind directly. Whole-schema fallback is reserved for cases where the emitter cannot split the accesses cleanly.
 
 Direct access is based on the resolved receiver schema, not the spelling of the variable. Aliases, `Readonly<T>`, generic instantiations, unions whose non-null members resolve to the same schema, and contextual object literals therefore share the same binding. A union of unrelated shapes does not.
 
@@ -51,11 +51,13 @@ The port has an intentional target split:
 
 Typed struct lowering must preserve that existing contract rather than imply a distinction the native representation cannot provide.
 
-Both `field?: T` and `field: T | undefined` are absent-capable in the Haxe type and emit as `Null<T>` where `T` is not already nullable or dynamic. An optional declaration also carries `@:optional`. This is required for primitive fields: an absent `number` or `boolean` must not become `0` or `false`.
+Both `field?: T` and `field: T | undefined` emit as `Null<T>` where `T` is not already nullable or dynamic. Only `field?: T` carries `@:optional`. A required `field: T | undefined` remains required in object literals and never gains `@:optional`; its value may be `_Runtime.UNDEFINED`, which is `null` on non-JavaScript targets. This preserves the distinction between declaration presence and value undefinedness wherever the target can represent it.
 
 Object literals continue to omit fields that were omitted in TypeScript. Explicit `undefined` initializes the field with `_Runtime.UNDEFINED`; that remains distinguishable from omission on JavaScript and collapses to `null` on native targets. Reads become direct `owner.field`. Existing strict-undefined checks continue to compare the result with `_Runtime.UNDEFINED`.
 
 Operations that observably distinguish ownership from value, including `'field' in value`, `Object.hasOwn`, and serialization policies based on property presence, do not infer presence from `owner.field != null`. They use a dedicated presence seam. Until that seam exists on all targets, any schema used by such an operation remains on the dynamic access path for that operation.
+
+No native absent-value sentinel is planned for the near phases. Presence-sensitive schemas stay on the dynamic path; a distinct sentinel is reconsidered only if the audit identifies a hot allowlisted case that cannot be handled at the boundary.
 
 Optional receiver chains must evaluate the receiver once and skip argument or right-hand-side evaluation when nullish. The emitter can use a scoped Haxe block temporary, as typed collection lowering does; it must not duplicate an effectful receiver expression.
 
@@ -73,6 +75,8 @@ Unknown property names never silently become direct access. If TypeScript says a
 
 Readonly is enforced during lowering: a generated assignment to a readonly field is an error even if Haxe's anonymous structure would permit it.
 
+Internal typed-structure flows preserve reference identity and never copy. Haxe anonymous structures retain Flight's out-parameter and aliasing behavior. Boundary normalization may copy or validate only external dynamic ingress at runtime seam 3; it must not be inserted between internal producers and consumers.
+
 ## Index signatures and dynamic-key escapes
 
 Declared, statically named fields may use direct access even when a schema also has an index signature. Computed access remains dynamic:
@@ -89,7 +93,7 @@ The generator should record every escape with a stable reason in a struct-loweri
 
 Migration is leaf-first so compile failures remain local and each step reduces reflection measurably:
 
-1. Numeric leaf values with closed fields: `Vector2`, `Vector3`, colors, rectangles, quaternions, and matrix holders such as `Matrix3`/`Matrix4`.
+1. Numeric leaf values with closed fields: `Vector2`, `Vector3`, `Quaternion`, `Matrix3`, `Matrix4`, `Rectangle`, and the render-hot RGBA multiplier/offset record `ColorTransform`.
 2. Small immutable options and result records composed only of primitives and migrated leaves.
 3. Node transforms, bounds, camera data, and other hot geometry aggregates.
 4. Renderer state records and material descriptors after their platform handles are marked as dynamic leaf fields.
@@ -97,6 +101,18 @@ Migration is leaf-first so compile failures remain local and each step reduces r
 6. Open dictionaries, mapped types, and presence-sensitive records only after their runtime seams and audits are proven.
 
 Each tranche starts with an allowlist of canonical schema identities. Expanding the allowlist is reviewed from the audit diff; eligibility must not silently widen because an upstream alias changed.
+
+The initial canonical candidate allowlist is:
+
+- `@flighthq/types:upstream/packages/types/src/Vector2.ts#Vector2`
+- `@flighthq/types:upstream/packages/types/src/Vector3.ts#Vector3`
+- `@flighthq/types:upstream/packages/types/src/Quaternion.ts#Quaternion`
+- `@flighthq/types:upstream/packages/types/src/Matrix3.ts#Matrix3`
+- `@flighthq/types:upstream/packages/types/src/Matrix4.ts#Matrix4`
+- `@flighthq/types:upstream/packages/types/src/Rectangle.ts#Rectangle`
+- `@flighthq/types:upstream/packages/types/src/ColorTransform.ts#ColorTransform`
+
+The generated audit determines which candidates are eligible for an emission tranche. A candidate with a schema-level reason remains unbound until review resolves or accepts that reason.
 
 The initial performance acceptance target is removal of `_Runtime.field/setField` for the migrated leaf schemas in camera2d and shape/render hot paths, with a generated before/after count. Correctness gates remain more important than the count.
 
@@ -111,20 +127,17 @@ Basic direct reads and writes need no new runtime API. The complete model needs 
 
 `UNDEFINED` should not become a new native sentinel object as part of the first implementation. That would be a repository-wide semantic change and must be reviewed separately.
 
+After tranches 1–3 land and are measured, evaluate Haxe `@:structInit` classes for the leaf types as an hxcpp performance follow-up. Anonymous-structure access remains hash-based on hxcpp; semantic parity and alias preservation come first, so this is explicitly not part of the current implementation.
+
 ## Implementation and verification gates
 
 Implementation should be split into reviewable phases:
 
-1. Add schema analysis and a checked-in audit report without changing emitted expressions.
-2. Add IR bindings and negative tests for unknown, readonly, computed, union, and presence-sensitive access.
-3. Enable the leaf allowlist and regenerate.
+1. Add schema analysis and a checked-in audit report without changing emitted expressions. Authorized.
+2. Add IR bindings and negative tests for unknown, readonly, computed, union, and presence-sensitive access. Authorized.
+3. Enable the leaf allowlist and regenerate. Not authorized until the phase-1 audit diff is reviewed.
 4. Expand through the migration order only after each prior tranche passes.
 
 Every phase runs generator unit tests, `npm run generate:check`, `npm run test:haxe:all`, the portability matrix, and all 131 upstream Vitest suites. A tranche is incomplete if a migrated schema still reaches `_Runtime.field`, `_Runtime.setField`, or `_Runtime.hasField` at an allowlisted source site.
 
-Before implementation begins, review must settle:
-
-- whether required `T | undefined` fields should carry `@:optional` or only `Null<T>`;
-- whether native ownership checks justify a distinct absent sentinel in a later phase;
-- the initial canonical leaf allowlist;
-- whether receiver-sensitive method signatures make an entire schema dynamic or only escape those members.
+The audit report is generated as `reports/typed-structs.json` with a compact review table in `reports/typed-structs.md`. It records canonical identities, field optionality/readonly/undefinedability, member-level escapes, bindable access counts, and source locations for every dynamic escape.

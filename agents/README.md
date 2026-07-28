@@ -7,7 +7,7 @@ This directory records the durable design and execution context for the Flight H
 - [`patches.md`](patches.md): semantic patch model, operations, validation, and audit requirements.
 - [`quality.md`](quality.md): implemented npm scripts, checks, test layers, and completion gates.
 - [`non-html5.md`](non-html5.md): verified cross-target compile status and remaining native Lime renderer boundaries.
-- [`typed-struct-model.md`](typed-struct-model.md): review proposal for direct structural field lowering and its optional/dynamic escape semantics.
+- [`typed-struct-model.md`](typed-struct-model.md): approved direct structural field-lowering model, audit gates, and optional/dynamic escape semantics.
 - [`plan.md`](plan.md): completed implementation phases and the upstream-update workflow.
 - [`status.md`](status.md): current decisions, verified state, prerequisites, and release decisions.
 - [`flight-port-core.md`](flight-port-core.md): plan to extract the language-neutral kernel into a shared core with Haxe and Rust emitters over one oracle.

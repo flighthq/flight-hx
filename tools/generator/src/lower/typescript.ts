@@ -2,12 +2,14 @@ import { createHash } from 'node:crypto';
 import path from 'node:path';
 import ts from 'typescript';
 
+import type { TypedStructRegistry } from '../analyze/typed-structs.ts';
 import type {
   IrDeclaration,
   IrExpression,
   IrFunctionDeclaration,
   IrParameter,
   IrStatement,
+  IrTypedStructBinding,
   IrType,
   IrVariable,
   LoweringDiagnostic,
@@ -320,6 +322,7 @@ export function lowerTypeScriptSource(
   packageName: string,
   workspaceDirectory: string,
   checker?: ts.TypeChecker,
+  typedStructs?: TypedStructRegistry,
 ): LoweringResult {
   const diagnostics: LoweringDiagnostic[] = [];
   const declarations: IrDeclaration[] = [];
@@ -398,6 +401,7 @@ export function lowerTypeScriptSource(
     scopeBindings: new WeakMap(),
     sourceFile,
     temporaryIndex: 0,
+    typedStructs,
     webGpuCanvasContextBindingNames,
     webGpuDeviceBindingNames,
     webGpuLimitsBindingNames,
@@ -753,6 +757,7 @@ interface LoweringContext {
   scopeBindings: WeakMap<ts.Node, ReadonlySet<string>>;
   sourceFile: ts.SourceFile;
   temporaryIndex: number;
+  typedStructs?: TypedStructRegistry | undefined;
   webGpuCanvasContextBindingNames: ReadonlySet<string>;
   webGpuDeviceBindingNames: ReadonlySet<string>;
   webGpuLimitsBindingNames: ReadonlySet<string>;
@@ -1367,6 +1372,57 @@ function webGlComputedConstantDomain(node: ts.Expression): 'GlBlendEquation' | '
   return undefined;
 }
 
+function typedStructPropertyBinding(
+  node: ts.PropertyAccessExpression,
+  context: LoweringContext,
+): IrTypedStructBinding | undefined {
+  const checker = context.checker;
+  const registry = context.typedStructs;
+  if (!checker || !registry) return undefined;
+  const resolution = registry.resolve(checker.getTypeAtLocation(node.expression));
+  if (resolution.kind !== 'matched') return undefined;
+  if (node.name.text === 'hasOwnProperty' && ts.isCallExpression(node.parent) && node.parent.expression === node) {
+    return undefined;
+  }
+  const schema = resolution.schemas[0]!;
+  if (!schema.eligible) return undefined;
+  const field = schema.fields.find((candidate) => candidate.name === node.name.text);
+  if (!field) {
+    return unsupported(node, context, `unknown typed-struct field ${schema.name}.${node.name.text}`);
+  }
+  if (field.receiverSensitive) return undefined;
+  if (ts.isDeleteExpression(node.parent)) return undefined;
+  if (field.readonly && isTypedStructWrite(node)) {
+    return unsupported(node, context, `assignment to readonly typed-struct field ${schema.name}.${node.name.text}`);
+  }
+  return {
+    field: {
+      name: field.name,
+      optional: field.optional,
+      readonly: field.readonly,
+      requiredUndefined: field.requiredUndefined,
+    },
+    schemaId: schema.id,
+    schemaName: schema.name,
+  };
+}
+
+function isTypedStructWrite(node: ts.PropertyAccessExpression): boolean {
+  const parent = node.parent;
+  if (
+    ts.isBinaryExpression(parent) &&
+    parent.left === node &&
+    parent.operatorToken.kind >= ts.SyntaxKind.FirstAssignment &&
+    parent.operatorToken.kind <= ts.SyntaxKind.LastAssignment
+  ) {
+    return true;
+  }
+  return (
+    (ts.isPrefixUnaryExpression(parent) || ts.isPostfixUnaryExpression(parent)) &&
+    (parent.operator === ts.SyntaxKind.PlusPlusToken || parent.operator === ts.SyntaxKind.MinusMinusToken)
+  );
+}
+
 function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpression {
   if (ts.isParenthesizedExpression(node)) return lowerExpression(node.expression, context);
   if (ts.isAsExpression(node) || ts.isTypeAssertionExpression(node)) {
@@ -1539,6 +1595,7 @@ function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpre
       domNavigatorMembers.has(node.name.text) &&
       isBoundGlobalRootExpression(node.expression, context, 'navigator', context.domNavigatorBindingNames);
     const objectIsCollection = collectionBinding(node.expression, node.name.text, context);
+    const typedStructBinding = typedStructPropertyBinding(node, context);
     return {
       binding: webGpuConstantNamespace
         ? 'WebGpuConstantsBackend'
@@ -1573,6 +1630,7 @@ function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpre
         ? { kind: 'literal', value: webGpuConstantNamespace }
         : lowerExpression(node.expression, context),
       optional: ts.isOptionalChain(node),
+      typedStructBinding,
     };
   }
   if (ts.isElementAccessExpression(node) && node.argumentExpression) {

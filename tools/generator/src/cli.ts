@@ -4,8 +4,16 @@ import path from 'node:path';
 import { portConfig } from '../port.config.ts';
 import { analyzeUpstream } from './analyze/inventory.ts';
 import { auditLowering } from './analyze/lowering.ts';
+import { typedStructRegistry } from './analyze/typed-structs.ts';
 import { generateCoreModules } from './emit/core.ts';
-import { createApiReport, inventorySummary, loweringSummary, stableJson, writeOrCheck } from './emit/reports.ts';
+import {
+  createApiReport,
+  inventorySummary,
+  loweringSummary,
+  stableJson,
+  typedStructSummary,
+  writeOrCheck,
+} from './emit/reports.ts';
 
 const argumentsSet = new Set(process.argv.slice(2));
 const check = argumentsSet.has('--check');
@@ -16,7 +24,8 @@ const reportsDirectory = path.join(workspaceDirectory, portConfig.reportsDirecto
 
 try {
   const inventory = analyzeUpstream(workspaceDirectory);
-  const lowering = apiOnly ? undefined : auditLowering(workspaceDirectory);
+  const typedStructs = apiOnly ? undefined : typedStructRegistry(workspaceDirectory, inventory.upstreamCommit);
+  const lowering = apiOnly ? undefined : auditLowering(workspaceDirectory, typedStructs);
   const api = createApiReport(inventory);
 
   if (jsonOnly) {
@@ -24,7 +33,7 @@ try {
   } else {
     mkdirSync(reportsDirectory, { recursive: true });
     if (!apiOnly) {
-      const core = generateCoreModules(workspaceDirectory, check);
+      const core = generateCoreModules(workspaceDirectory, check, typedStructs);
       for (const excluded of core.excludedPackages) {
         process.stderr.write(`Excluded (not translated): ${excluded.packageName} — ${excluded.reason}\n`);
       }
@@ -33,6 +42,9 @@ try {
       if (!lowering) throw new Error('Expected lowering audit');
       writeOrCheck(path.join(reportsDirectory, 'lowering.json'), stableJson(lowering), check);
       writeOrCheck(path.join(reportsDirectory, 'lowering.md'), loweringSummary(lowering), check);
+      if (!typedStructs) throw new Error('Expected typed-struct audit');
+      writeOrCheck(path.join(reportsDirectory, 'typed-structs.json'), stableJson(typedStructs.report), check);
+      writeOrCheck(path.join(reportsDirectory, 'typed-structs.md'), typedStructSummary(typedStructs.report), check);
     }
     writeOrCheck(path.join(reportsDirectory, 'api.json'), stableJson(api), check);
     process.stdout.write(

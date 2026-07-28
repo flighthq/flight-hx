@@ -32,7 +32,14 @@ for (const file of ['haxelib.json', 'extraParams.hxml', 'README.md', 'LICENSE.md
 cpSync(path.join(workspace, 'src'), path.join(stage, 'src'), { recursive: true });
 cpSync(path.join(workspace, 'generated'), path.join(stage, 'generated'), { recursive: true });
 mkdirSync(path.join(stage, 'generation'), { recursive: true });
-for (const file of ['api.json', 'inventory.json', 'core.json', 'patches.json', 'upstream-parity.json']) {
+for (const file of [
+  'api.json',
+  'inventory.json',
+  'core.json',
+  'patches.json',
+  'typed-structs.json',
+  'upstream-parity.json',
+]) {
   cpSync(path.join(workspace, 'reports', file), path.join(stage, 'generation', file));
 }
 const upstreamRevision = capture('git', ['-C', path.join(workspace, 'upstream'), 'rev-parse', 'HEAD']).trim();
