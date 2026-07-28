@@ -40,6 +40,7 @@ presets:
     agents:
       review:
         role: review
+        directs: [builder]
       builder:
         role: builder
         runtimeProfile: codex-sbx
