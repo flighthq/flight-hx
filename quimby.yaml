@@ -41,6 +41,8 @@ presets:
       review:
         role: review
         directs: [builder]
+        nudge: always
       builder:
         role: builder
+        nudge: always
         runtimeProfile: codex-sbx
