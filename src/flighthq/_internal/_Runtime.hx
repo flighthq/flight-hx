@@ -82,14 +82,20 @@ class _Runtime {
     if (callable == null) return null;
     return Reflect.callMethod(owner, callable, adjustArguments(callable, arguments));
     #else
-    return Reflect.callMethod(owner, Reflect.field(owner, name), arguments);
+    // Property lookup with JavaScript member semantics: Reflect.field misses
+    // prototype methods of Haxe classes, while `owner[name]` resolves both.
+    return js.Syntax.code('{0}[{1}](...{2})', owner, name, arguments);
     #end
   }
 
   public static inline function callOptionalProperty(owner:Dynamic, name:String, arguments:Array<Dynamic>):Dynamic {
     if (owner == null) return UNDEFINED;
+    #if js
+    return js.Syntax.code('{0}[{1}] == null ? undefined : {0}[{1}](...{2})', owner, name, arguments);
+    #else
     final callable = resolveMethod(owner, name);
     return callable == null ? UNDEFINED : Reflect.callMethod(owner, callable, adjustArguments(callable, arguments));
+    #end
   }
 
   #if !js
