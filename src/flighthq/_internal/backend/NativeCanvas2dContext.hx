@@ -64,8 +64,14 @@ class NativeCanvas2dContext {
     font:String, textAlign:String, textBaseline:String, lineCap:String, lineJoin:String, lineWidth:Float,
     miterLimit:Float}> = [];
 
-  public function new(?windowContext:Cairo) {
-    ownsSurface = windowContext == null;
+  /** Live source for a window-owned `Cairo`: Lime creates it at first render
+   * lock (not window creation) and may recreate it when the surface changes,
+   * so window-mode contexts re-fetch it instead of caching one instance. */
+  public var windowContextProvider:Void->Cairo;
+
+  public function new(?windowContext:Cairo, ?provider:Void->Cairo) {
+    ownsSurface = windowContext == null && provider == null;
+    windowContextProvider = provider;
     if (windowContext != null) {
       cairo = windowContext;
       set_lineCap(lineCap);
@@ -132,7 +138,20 @@ class NativeCanvas2dContext {
 
   function context():Cairo {
     syncWithOwner();
-    if (cairo == null) resize(width, height);
+    if (!ownsSurface && windowContextProvider != null) {
+      final live = windowContextProvider();
+      if (live != null && live != cairo) {
+        cairo = live;
+        cairo.lineWidth = lineWidth;
+        set_lineCap(lineCap);
+        set_lineJoin(lineJoin);
+        set_miterLimit(miterLimit);
+      }
+    }
+    if (cairo == null) {
+      if (!ownsSurface) throw 'Window cairo context is not available yet (created at first render lock).';
+      resize(width, height);
+    }
     return cairo;
   }
 

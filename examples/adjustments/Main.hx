@@ -344,9 +344,11 @@ private class _CairoCanvas {
   public function new(window:Window) {
     this.window = window;
     #if (lime && !js && lime_cairo)
-    final cairo = window.context.cairo;
-    if (cairo == null) throw 'The cairo branch requires a software (hardware="false") window.';
-    context = new flighthq._internal.backend.NativeCanvas2dContext(cairo);
+    // Lime creates (and can recreate) the window Cairo at render-surface lock,
+    // so hand the context a live provider instead of one cached instance.
+    final windowRef = window;
+    context = new flighthq._internal.backend.NativeCanvas2dContext(window.context.cairo,
+      () -> windowRef.context.cairo);
     #else
     context = null;
     #end
