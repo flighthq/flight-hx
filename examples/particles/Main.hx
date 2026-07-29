@@ -10,7 +10,7 @@ import flighthq.sdk.Sdk.*;
 import flighthq.types.ParticleCurve.ColorKeyframe;
 import flighthq.types.DisplayObject;
 import flighthq.types.ImageResource;
-import flighthq.types.ParticleEmitter2D;
+import flighthq.types.ParticleEmitter;
 import flighthq.types.ParticleForce;
 import lime.app.Application;
 import lime.graphics.RenderContext;
@@ -24,6 +24,7 @@ class Main extends Application {
   var scale:Float = 1.0;
   var renderState:Dynamic;
   var ready = false;
+  var usingCairo = false;
 
   final WIDTH = 800;
   final HEIGHT = 500;
@@ -31,12 +32,12 @@ class Main extends Application {
   // Root container holds both emitters and the HUD label.
   var root:DisplayObject;
 
-  var fireEmitter:ParticleEmitter2D;
+  var fireEmitter:ParticleEmitter;
   var fireConfig:Dynamic;
   var fireForces:Array<ParticleForce>;
   var fireSimState:Dynamic;
 
-  var snowEmitter:ParticleEmitter2D;
+  var snowEmitter:ParticleEmitter;
   var snowConfig:Dynamic;
   var snowForces:Array<ParticleForce>;
   var snowSimState:Dynamic;
@@ -59,23 +60,38 @@ class Main extends Application {
   // Lime: window/GL are ready. Wire the Flight Lime backend, set up the GL renderer, build the scene.
   override public function onWindowCreate():Void {
     App.setAppBackend(LimeApp.createLimeAppBackend(this));
+    trace('window context type: ' + window.context.type);
     switch (window.context.type) {
+      case CAIRO:
+        usingCairo = true;
       case OPENGL, OPENGLES, WEBGL:
       default:
-        throw 'Flight examples require an OpenGL/WebGL render context.';
+        throw 'Flight examples require an OpenGL/WebGL or cairo render context.';
     }
     scale = window.scale;
-    final canvas = new _GlCanvas(window);
-    renderState = createGlRenderState(canvas, {
-      pixelRatio: window.scale,
-      backgroundColor: 0x0a0a14ff,
-      contextAttributes: {alpha: false, preserveDrawingBuffer: true},
-      sceneGraphSyncPolicy: 'requiresInvalidation',
-    });
-    registerDefaultGlMaterial(renderState);
-    registerRenderer(renderState, ParticleEmitter2DKind, defaultGlParticleEmitter2DRenderer);
-    registerRenderer(renderState, TextLabelKind, defaultGlTextLabelRenderer);
-    enableGlBlendModeSupport(renderState);
+    if (usingCairo) {
+      final canvas = new _CairoCanvas(window);
+      renderState = createCanvasRenderState(canvas, {
+        pixelRatio: window.scale,
+        backgroundColor: 0x0a0a14ff,
+        sceneGraphSyncPolicy: 'requiresInvalidation',
+      });
+      registerRenderer(renderState, ParticleEmitterKind, defaultCanvasParticleEmitterRenderer);
+      registerRenderer(renderState, TextLabelKind, defaultCanvasTextLabelRenderer);
+      enableCanvasBlendMode(renderState);
+    } else {
+      final canvas = new _GlCanvas(window);
+      renderState = createGlRenderState(canvas, {
+        pixelRatio: window.scale,
+        backgroundColor: 0x0a0a14ff,
+        contextAttributes: {alpha: false, preserveDrawingBuffer: true},
+        sceneGraphSyncPolicy: 'requiresInvalidation',
+      });
+      registerDefaultGlMaterial(renderState);
+      registerRenderer(renderState, ParticleEmitterKind, defaultGlParticleEmitterRenderer);
+      registerRenderer(renderState, TextLabelKind, defaultGlTextLabelRenderer);
+      enableGlBlendModeSupport(renderState);
+    }
 
     mouseX = (WIDTH * scale) / 4;
     mouseY = (HEIGHT * scale) / 2;
@@ -106,7 +122,7 @@ class Main extends Application {
     addTextureAtlasRegion(snowAtlas, 0, 0, 12, 12);
 
     // Fire emitter: additive glow, follows mouse, world-space trail.
-    fireEmitter = createParticleEmitter2D();
+    fireEmitter = createParticleEmitter();
     fireEmitter.data.atlas = fireAtlas;
     // BlendMode.Add -- `BlendMode` is a string typedef in the port, so its member is the literal.
     fireEmitter.blendMode = 'Add';
@@ -157,7 +173,7 @@ class Main extends Application {
     fireSimState = createParticleEmitterState();
 
     // Snow emitter: normal blend, fixed position at top-right, gentle downward drift.
-    snowEmitter = createParticleEmitter2D();
+    snowEmitter = createParticleEmitter();
     snowEmitter.data.atlas = snowAtlas;
     snowEmitter.scaleX = 1;
     snowEmitter.scaleY = 1;
@@ -255,12 +271,12 @@ class Main extends Application {
 
     // World-space emitter: it bakes spawns through its own node world transform (set above), so nothing to pass.
     applyParticleForces(fireEmitter, fireSimState, fireForces, dt);
-    updateParticleEmitter2D(fireEmitter, fireSimState, fireConfig, dt);
+    updateParticleEmitter(fireEmitter, fireSimState, fireConfig, dt);
     invalidateNodeAppearance(fireEmitter);
 
     // Snow emitter stays fixed at its node position.
     applyParticleForces(snowEmitter, snowSimState, snowForces, dt);
-    updateParticleEmitter2D(snowEmitter, snowSimState, snowConfig, dt);
+    updateParticleEmitter(snowEmitter, snowSimState, snowConfig, dt);
     invalidateNodeAppearance(snowEmitter);
 
     // Update the particle count label.
@@ -273,8 +289,13 @@ class Main extends Application {
   override public function render(context:RenderContext):Void {
     if (!ready || root == null) return;
     if (!prepareDisplayObjectRender(renderState, root)) return;
-    renderGlBackground(renderState);
-    renderGlDisplayObject(renderState, root);
+    if (usingCairo) {
+      renderCanvasBackground(renderState);
+      renderCanvasDisplayObject(renderState, root);
+    } else {
+      renderGlBackground(renderState);
+      renderGlDisplayObject(renderState, root);
+    }
   }
 
   // Portable square radial texture defined by `[t, r, g, b, a]` colour stops (t in 0..1 along the radius),
@@ -383,5 +404,41 @@ private class _GlCanvas {
     if (renderContext == null) return null;
     final webgl2 = renderContext.webgl2;
     return webgl2 == null ? renderContext.webgl : webgl2;
+  }
+}
+
+// Canvas adapter presenting the Lime software window's cairo context as the 2D
+// canvas `createCanvasRenderState` expects (the cairo counterpart of _GlCanvas).
+@:keep
+private class _CairoCanvas {
+  public var width:Int = 0;
+  public var height:Int = 0;
+
+  final window:Window;
+  final context:Dynamic;
+
+  public function new(window:Window) {
+    this.window = window;
+    #if (lime && !js && lime_cairo)
+    final cairo = window.context.cairo;
+    if (cairo == null) throw 'The cairo branch requires a software (hardware="false") window.';
+    context = new flighthq._internal.backend.NativeCanvas2dContext(cairo);
+    #else
+    context = null;
+    #end
+    syncSize();
+    window.onResize.add((_, _) -> syncSize());
+  }
+
+  public function getContext(contextId:String, ?attributes:Dynamic):Dynamic {
+    return context;
+  }
+
+  function syncSize():Void {
+    width = Std.int(window.width * window.scale);
+    height = Std.int(window.height * window.scale);
+    #if (lime && !js && lime_cairo)
+    (cast context : flighthq._internal.backend.NativeCanvas2dContext).resize(width, height);
+    #end
   }
 }

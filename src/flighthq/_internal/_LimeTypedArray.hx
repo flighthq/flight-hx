@@ -7,6 +7,12 @@ package flighthq._internal;
  * can pass to native graphics APIs as an `ArrayBufferView`.
  */
 class _LimeTypedArray {
+  #if neko
+  // Generated modules allocate typed-array scratch values during static initialization. Make
+  // FPHelper initialize first so those writes cannot observe its thread-local helpers as null.
+  static final __fpHelperReady = haxe.io.FPHelper.floatToI32(0.0);
+  #end
+
   public final nativeView:Dynamic;
   public var length(default, null):Int;
 
