@@ -850,6 +850,13 @@ class _Runtime {
       final text:String = cast value;
       return until == null ? text.substr(from) : text.substring(from, until);
     }
+    #if (lime && !js)
+    if (Std.isOfType(value, _LimeTypedArray)) {
+      // Typed-array slice copies, which is exactly what subarray does here.
+      final typed:_LimeTypedArray = cast value;
+      return typed.subarray(from, until == null ? typed.length : until);
+    }
+    #end
     final values:Array<Dynamic> = cast value;
     return until == null ? values.slice(from) : values.slice(from, until);
     #end
