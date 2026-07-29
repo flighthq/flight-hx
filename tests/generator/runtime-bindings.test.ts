@@ -68,6 +68,33 @@ describe('maintained runtime bindings', () => {
         '--interp',
         '-D',
         'lime',
+        '-dce',
+        'full',
+      ],
+      { cwd: workspace, stdio: 'pipe' },
+    );
+  });
+
+  it('packs scene lights through Lime typed-array views under full DCE', () => {
+    execFileSync(
+      process.execPath,
+      [
+        'tools/haxe.mjs',
+        '-cp',
+        'src',
+        '-cp',
+        'generated',
+        '-cp',
+        'tests/haxe',
+        '-cp',
+        'tests/fake-lime',
+        '--main',
+        'SceneLightSmoke',
+        '--interp',
+        '-D',
+        'lime',
+        '-dce',
+        'full',
       ],
       { cwd: workspace, stdio: 'pipe' },
     );

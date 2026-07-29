@@ -126,6 +126,7 @@ class _LimeTypedArray {
     };
   }
 
+  @:keep
   public function subarray(?begin:Int, ?end:Int):_LimeTypedArray {
     final start = begin == null ? 0 : begin;
     final stop = end == null ? length : end;
