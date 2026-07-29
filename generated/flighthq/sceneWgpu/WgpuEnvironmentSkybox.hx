@@ -35,7 +35,7 @@ class WgpuEnvironmentSkybox {
     sky = _Runtime.callValue(WgpuEnvironmentSkybox.ensureWgpuSkyboxPipeline__wgpuEnvironmentSkybox, cast ([state, format] : Array<Dynamic>));
     _Runtime.callValue(getCameraInverseViewProjectionMatrix4, cast ([WgpuEnvironmentSkybox._inverseViewProjection__wgpuEnvironmentSkybox, camera, aspect] : Array<Dynamic>));
     u = WgpuEnvironmentSkybox._skyScratch__wgpuEnvironmentSkybox;
-    m = _Runtime.field(WgpuEnvironmentSkybox._inverseViewProjection__wgpuEnvironmentSkybox, 'm');
+    m = WgpuEnvironmentSkybox._inverseViewProjection__wgpuEnvironmentSkybox.m;
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, 16.0, '<'))) {

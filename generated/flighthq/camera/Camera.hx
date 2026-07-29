@@ -152,8 +152,8 @@ class Camera {
   }
 
   public static function setCameraJitter(camera:flighthq.types.Camera, x:Float, y:Float):Void {
-    _Runtime.setField(_Runtime.field(camera, 'jitter'), 'x', x);
-    _Runtime.setField(_Runtime.field(camera, 'jitter'), 'y', y);
+    (_Runtime.field(camera, 'jitter').x = cast (x : Dynamic));
+    (_Runtime.field(camera, 'jitter').y = cast (y : Dynamic));
   }
 
   public static function setCameraViewMatrix4FromLookAt(camera:flighthq.types.Camera, eye:Vector3Like, target:Vector3Like, up:Vector3Like):Void {
@@ -161,7 +161,7 @@ class Camera {
   }
 
   public static function setCameraViewMatrix4FromMatrix4(camera:flighthq.types.Camera, view:Matrix4Like):Void {
-    _Runtime.callProperty(_Runtime.field(_Runtime.field(camera, 'view'), 'm'), 'set', cast ([_Runtime.field(view, 'm')] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.field(camera, 'view').m, 'set', cast ([view.m] : Array<Dynamic>));
   }
 
   public static function setProjectionMatrix4(out:Matrix4Like, projection:Projection, aspect:Float, near:Float, far:Float):Void {
@@ -172,7 +172,7 @@ class Camera {
     var ok:Dynamic = cast _Runtime.UNDEFINED;
     ok = _Runtime.callValue(getCameraInverseViewProjectionMatrix4, cast ([Camera.__scratchInverse__camera, camera, aspect] : Array<Dynamic>));
     if (_Runtime.truthy(ok)) {
-      _Runtime.callProperty(_Runtime.field(_Runtime.field(camera, 'inverseViewProjection'), 'm'), 'set', cast ([_Runtime.field(Camera.__scratchInverse__camera, 'm')] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.field(camera, 'inverseViewProjection').m, 'set', cast ([Camera.__scratchInverse__camera.m] : Array<Dynamic>));
     }
     return cast ok;
     return cast null;

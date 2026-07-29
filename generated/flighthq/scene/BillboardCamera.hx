@@ -75,7 +75,7 @@ class BillboardCamera {
     var ul:Dynamic = cast _Runtime.UNDEFINED;
     var bl:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(inverseMatrix4, cast ([BillboardCamera._cameraWorld__billboardCamera, _Runtime.field(camera, 'view')] : Array<Dynamic>));
-    m = _Runtime.field(BillboardCamera._cameraWorld__billboardCamera, 'm');
+    m = BillboardCamera._cameraWorld__billboardCamera.m;
     (BillboardCamera._cameraEyeX__billboardCamera = cast (_Runtime.getIndex(m, 12.0) : Dynamic));
     (BillboardCamera._cameraEyeY__billboardCamera = cast (_Runtime.getIndex(m, 13.0) : Dynamic));
     (BillboardCamera._cameraEyeZ__billboardCamera = cast (_Runtime.getIndex(m, 14.0) : Dynamic));
@@ -119,12 +119,12 @@ class BillboardCamera {
     var ny:Float = cast _Runtime.UNDEFINED;
     var nz:Float = cast _Runtime.UNDEFINED;
     var m:Dynamic = cast _Runtime.UNDEFINED;
-    px = _Runtime.field(BillboardCamera._position__billboardCamera, 'x');
-    py = _Runtime.field(BillboardCamera._position__billboardCamera, 'y');
-    pz = _Runtime.field(BillboardCamera._position__billboardCamera, 'z');
-    sx = _Runtime.field(BillboardCamera._scale__billboardCamera, 'x');
-    sy = _Runtime.field(BillboardCamera._scale__billboardCamera, 'y');
-    sz = _Runtime.field(BillboardCamera._scale__billboardCamera, 'z');
+    px = BillboardCamera._position__billboardCamera.x;
+    py = BillboardCamera._position__billboardCamera.y;
+    pz = BillboardCamera._position__billboardCamera.z;
+    sx = BillboardCamera._scale__billboardCamera.x;
+    sy = BillboardCamera._scale__billboardCamera.y;
+    sz = BillboardCamera._scale__billboardCamera.z;
     if (_Runtime.truthy(_Runtime.strictEquals(mode, 'screenAligned'))) {
       (rx = cast (BillboardCamera._cameraRightX__billboardCamera : Dynamic));
       (ry = cast (BillboardCamera._cameraRightY__billboardCamera : Dynamic));
@@ -196,7 +196,7 @@ class BillboardCamera {
       (uy = cast (((nz * rx) - (nx * rz)) : Dynamic));
       (uz = cast (((nx * ry) - (ny * rx)) : Dynamic));
     } }
-    m = _Runtime.field(out, 'm');
+    m = out.m;
     _Runtime.setIndex(m, 0.0, (rx * sx));
     _Runtime.setIndex(m, 1.0, (ry * sx));
     _Runtime.setIndex(m, 2.0, (rz * sx));

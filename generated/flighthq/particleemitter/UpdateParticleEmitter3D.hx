@@ -81,10 +81,10 @@ class UpdateParticleEmitter3D {
     var maxNew:Dynamic = cast _Runtime.UNDEFINED;
     var liveVelocityCount:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(emitter, 'data');
-    worldM = _Runtime.select(_Runtime.field(config, 'worldSpace'), function():Dynamic return cast _Runtime.field(_Runtime.callValue(getNodeWorldMatrix4, cast ([(cast (cast emitter : Dynamic) : SceneNode)] : Array<Dynamic>)), 'm'), function():Dynamic return cast null);
+    worldM = _Runtime.select(_Runtime.field(config, 'worldSpace'), function():Dynamic return cast _Runtime.callValue(getNodeWorldMatrix4, cast ([(cast (cast emitter : Dynamic) : SceneNode)] : Array<Dynamic>)).m, function():Dynamic return cast null);
     _Runtime.setField(data, 'worldSpace', !_Runtime.strictEquals(worldM, null));
     if (_Runtime.truthy(_Runtime.compare(deltaTime, 0.0, '<='))) { return; }
-    originM = _Runtime.select(!_Runtime.strictEquals(worldM, null), function():Dynamic return cast worldM, function():Dynamic return cast _Runtime.field(_Runtime.callValue(getNodeLocalMatrix4, cast ([(cast (cast emitter : Dynamic) : SceneNode)] : Array<Dynamic>)), 'm'));
+    originM = _Runtime.select(!_Runtime.strictEquals(worldM, null), function():Dynamic return cast worldM, function():Dynamic return cast _Runtime.callValue(getNodeLocalMatrix4, cast ([(cast (cast emitter : Dynamic) : SceneNode)] : Array<Dynamic>)).m);
     trackX = _Runtime.getIndex(originM, 12.0);
     trackY = _Runtime.getIndex(originM, 13.0);
     trackZ = _Runtime.getIndex(originM, 14.0);

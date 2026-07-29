@@ -55,12 +55,12 @@ class Skeleton3d {
         {
           var i:Dynamic = 0.0;
           while (_Runtime.truthy(_Runtime.compare(i, 16.0, '<'))) {
-            _Runtime.setIndex(_Runtime.field(Skeleton3d._invBind__skeleton3d, 'm'), i, _Runtime.getIndex(inverseBindMatrices, (base + i)));
+            _Runtime.setIndex(Skeleton3d._invBind__skeleton3d.m, i, _Runtime.getIndex(inverseBindMatrices, (base + i)));
             i++;
           }
         }
         _Runtime.callValue(multiplyMatrix4, cast ([Skeleton3d._result__skeleton3d, _Runtime.callValue(getNodeWorldMatrix4, cast ([_Runtime.getIndex(joints, j)] : Array<Dynamic>)), Skeleton3d._invBind__skeleton3d] : Array<Dynamic>));
-        _Runtime.callProperty(jointMatrices, 'set', cast ([_Runtime.field(Skeleton3d._result__skeleton3d, 'm'), base] : Array<Dynamic>));
+        _Runtime.callProperty(jointMatrices, 'set', cast ([Skeleton3d._result__skeleton3d.m, base] : Array<Dynamic>));
         j++;
       }
     }
@@ -154,7 +154,7 @@ class Skeleton3d {
       var j:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(j, _Runtime.field(joints, 'length'), '<'))) {
         _Runtime.callValue(inverseMatrix4, cast ([Skeleton3d._result__skeleton3d, _Runtime.callValue(getNodeWorldMatrix4, cast ([_Runtime.getIndex(joints, j)] : Array<Dynamic>))] : Array<Dynamic>));
-        _Runtime.callProperty(inverseBindMatrices, 'set', cast ([_Runtime.field(Skeleton3d._result__skeleton3d, 'm'), (j * 16.0)] : Array<Dynamic>));
+        _Runtime.callProperty(inverseBindMatrices, 'set', cast ([Skeleton3d._result__skeleton3d.m, (j * 16.0)] : Array<Dynamic>));
         j++;
       }
     }

@@ -109,8 +109,8 @@ class Tilemap {
     col = _Runtime.callValue(getTilemapColumnAtX, cast ([source, x] : Array<Dynamic>));
     row = _Runtime.callValue(getTilemapRowAtY, cast ([source, y] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(col, 0.0, '<'), function():Dynamic return cast _Runtime.compare(row, 0.0, '<')))) { return cast false; }
-    _Runtime.setField(out, 'x', col);
-    _Runtime.setField(out, 'y', row);
+    (out.x = cast (col : Dynamic));
+    (out.y = cast (row : Dynamic));
     return cast true;
     return cast null;
   }
@@ -155,7 +155,7 @@ class Tilemap {
   }
 
   public static function getTilemapTileAtPoint(source:flighthq.types.Tilemap, point:Vector2Like):Float {
-    return cast _Runtime.callValue(getTilemapTileAtPointXY, cast ([source, _Runtime.field(point, 'x'), _Runtime.field(point, 'y')] : Array<Dynamic>));
+    return cast _Runtime.callValue(getTilemapTileAtPointXY, cast ([source, point.x, point.y] : Array<Dynamic>));
     return cast null;
   }
 

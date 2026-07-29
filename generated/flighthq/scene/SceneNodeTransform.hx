@@ -25,12 +25,12 @@ class SceneNodeTransform {
     var yy:Dynamic = cast _Runtime.UNDEFINED;
     var yz:Dynamic = cast _Runtime.UNDEFINED;
     var m:Dynamic = cast _Runtime.UNDEFINED;
-    eyeX = _Runtime.field(eye, 'x');
-    eyeY = _Runtime.field(eye, 'y');
-    eyeZ = _Runtime.field(eye, 'z');
-    zx = (eyeX - _Runtime.field(target, 'x'));
-    zy = (eyeY - _Runtime.field(target, 'y'));
-    zz = (eyeZ - _Runtime.field(target, 'z'));
+    eyeX = eye.x;
+    eyeY = eye.y;
+    eyeZ = eye.z;
+    zx = (eyeX - target.x);
+    zy = (eyeY - target.y);
+    zz = (eyeZ - target.z);
     zl = HxMath.sqrt((((zx * zx) + (zy * zy)) + (zz * zz)));
     if (_Runtime.truthy(_Runtime.strictEquals(zl, 0.0))) {
       (zz = cast (1.0 : Dynamic));
@@ -39,9 +39,9 @@ class SceneNodeTransform {
     (zx = cast ((zx / zl) : Dynamic));
     (zy = cast ((zy / zl) : Dynamic));
     (zz = cast ((zz / zl) : Dynamic));
-    xx = ((_Runtime.field(up, 'y') * zz) - (_Runtime.field(up, 'z') * zy));
-    xy = ((_Runtime.field(up, 'z') * zx) - (_Runtime.field(up, 'x') * zz));
-    xz = ((_Runtime.field(up, 'x') * zy) - (_Runtime.field(up, 'y') * zx));
+    xx = ((up.y * zz) - (up.z * zy));
+    xy = ((up.z * zx) - (up.x * zz));
+    xz = ((up.x * zy) - (up.y * zx));
     xl = HxMath.sqrt((((xx * xx) + (xy * xy)) + (xz * xz)));
     if (_Runtime.truthy(!_Runtime.strictEquals(xl, 0.0))) {
       (xx = cast ((xx / xl) : Dynamic));
@@ -51,7 +51,7 @@ class SceneNodeTransform {
     yx = ((zy * xz) - (zz * xy));
     yy = ((zz * xx) - (zx * xz));
     yz = ((zx * xy) - (zy * xx));
-    m = _Runtime.field(SceneNodeTransform._scratchMatrix__sceneNodeTransform, 'm');
+    m = SceneNodeTransform._scratchMatrix__sceneNodeTransform.m;
     _Runtime.setIndex(m, 0.0, xx);
     _Runtime.setIndex(m, 1.0, xy);
     _Runtime.setIndex(m, 2.0, xz);

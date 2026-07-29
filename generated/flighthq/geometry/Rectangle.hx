@@ -34,7 +34,7 @@ class Rectangle {
   }
 
   public static function containsRectanglePoint(source:RectangleLike, vector:Vector2Like):Bool {
-    return cast _Runtime.callValue(containsRectanglePointXY, cast ([source, _Runtime.field(vector, 'x'), _Runtime.field(vector, 'y')] : Array<Dynamic>));
+    return cast _Runtime.callValue(containsRectanglePointXY, cast ([source, vector.x, vector.y] : Array<Dynamic>));
     return cast null;
   }
 
@@ -94,7 +94,7 @@ class Rectangle {
   }
 
   public static function expandRectangleToPoint(out:RectangleLike, sourceRect:RectangleLike, sourceVec2:Vector2Like):Void {
-    _Runtime.callValue(inflateRectangle, cast ([out, sourceRect, _Runtime.field(sourceVec2, 'x'), _Runtime.field(sourceVec2, 'y')] : Array<Dynamic>));
+    _Runtime.callValue(inflateRectangle, cast ([out, sourceRect, sourceVec2.x, sourceVec2.y] : Array<Dynamic>));
   }
 
   public static function getRectangleBottom(source:RectangleLike):Float {
@@ -103,8 +103,8 @@ class Rectangle {
   }
 
   public static function getRectangleBottomRight(out:Vector2Like, source:RectangleLike):Void {
-    _Runtime.setField(out, 'x', (_Runtime.field(source, 'x') + _Runtime.field(source, 'width')));
-    _Runtime.setField(out, 'y', (_Runtime.field(source, 'y') + _Runtime.field(source, 'height')));
+    (out.x = cast ((_Runtime.field(source, 'x') + _Runtime.field(source, 'width')) : Dynamic));
+    (out.y = cast ((_Runtime.field(source, 'y') + _Runtime.field(source, 'height')) : Dynamic));
   }
 
   public static function getRectangleLeft(source:RectangleLike):Float {
@@ -133,13 +133,13 @@ class Rectangle {
   }
 
   public static function getRectangleNormalizedBottomRight(out:Vector2Like, source:RectangleLike):Void {
-    _Runtime.setField(out, 'x', _Runtime.callValue(getRectangleMaxX, cast ([source] : Array<Dynamic>)));
-    _Runtime.setField(out, 'y', _Runtime.callValue(getRectangleMaxY, cast ([source] : Array<Dynamic>)));
+    (out.x = cast (_Runtime.callValue(getRectangleMaxX, cast ([source] : Array<Dynamic>)) : Dynamic));
+    (out.y = cast (_Runtime.callValue(getRectangleMaxY, cast ([source] : Array<Dynamic>)) : Dynamic));
   }
 
   public static function getRectangleNormalizedTopLeft(out:Vector2Like, source:RectangleLike):Void {
-    _Runtime.setField(out, 'x', _Runtime.callValue(getRectangleMinX, cast ([source] : Array<Dynamic>)));
-    _Runtime.setField(out, 'y', _Runtime.callValue(getRectangleMinY, cast ([source] : Array<Dynamic>)));
+    (out.x = cast (_Runtime.callValue(getRectangleMinX, cast ([source] : Array<Dynamic>)) : Dynamic));
+    (out.y = cast (_Runtime.callValue(getRectangleMinY, cast ([source] : Array<Dynamic>)) : Dynamic));
   }
 
   public static function getRectangleRight(source:RectangleLike):Float {
@@ -148,8 +148,8 @@ class Rectangle {
   }
 
   public static function getRectangleSize(out:Vector2Like, source:RectangleLike):Void {
-    _Runtime.setField(out, 'x', _Runtime.field(source, 'width'));
-    _Runtime.setField(out, 'y', _Runtime.field(source, 'height'));
+    (out.x = cast (_Runtime.field(source, 'width') : Dynamic));
+    (out.y = cast (_Runtime.field(source, 'height') : Dynamic));
   }
 
   public static function getRectangleTop(source:RectangleLike):Float {
@@ -158,8 +158,8 @@ class Rectangle {
   }
 
   public static function getRectangleTopLeft(out:Vector2Like, source:RectangleLike):Void {
-    _Runtime.setField(out, 'x', _Runtime.field(source, 'x'));
-    _Runtime.setField(out, 'y', _Runtime.field(source, 'y'));
+    (out.x = cast (_Runtime.field(source, 'x') : Dynamic));
+    (out.y = cast (_Runtime.field(source, 'y') : Dynamic));
   }
 
   public static function inflateRectangle(out:RectangleLike, source:RectangleLike, dx:Float, dy:Float):Void {
@@ -263,8 +263,8 @@ class Rectangle {
   }
 
   public static function offsetRectangleByPoint(out:RectangleLike, source:RectangleLike, point:Vector2Like):Void {
-    _Runtime.setField(out, 'x', (_Runtime.field(source, 'x') + _Runtime.field(point, 'x')));
-    _Runtime.setField(out, 'y', (_Runtime.field(source, 'y') + _Runtime.field(point, 'y')));
+    _Runtime.setField(out, 'x', (_Runtime.field(source, 'x') + point.x));
+    _Runtime.setField(out, 'y', (_Runtime.field(source, 'y') + point.y));
     _Runtime.setField(out, 'width', _Runtime.field(source, 'width'));
     _Runtime.setField(out, 'height', _Runtime.field(source, 'height'));
   }
@@ -285,8 +285,8 @@ class Rectangle {
   }
 
   public static function setRectangleBottomRight(target:RectangleLike, point:Vector2Like):Void {
-    _Runtime.setField(target, 'width', (_Runtime.field(point, 'x') - _Runtime.field(target, 'x')));
-    _Runtime.setField(target, 'height', (_Runtime.field(point, 'y') - _Runtime.field(target, 'y')));
+    _Runtime.setField(target, 'width', (point.x - _Runtime.field(target, 'x')));
+    _Runtime.setField(target, 'height', (point.y - _Runtime.field(target, 'y')));
   }
 
   public static function setRectangleLeft(target:RectangleLike, value:Float):Void {
@@ -299,8 +299,8 @@ class Rectangle {
   }
 
   public static function setRectangleSize(out:RectangleLike, size:Vector2Like):Void {
-    _Runtime.setField(out, 'width', _Runtime.field(size, 'x'));
-    _Runtime.setField(out, 'height', _Runtime.field(size, 'y'));
+    _Runtime.setField(out, 'width', size.x);
+    _Runtime.setField(out, 'height', size.y);
   }
 
   public static function setRectangleTop(target:RectangleLike, value:Float):Void {
@@ -309,7 +309,7 @@ class Rectangle {
   }
 
   public static function setRectangleTopLeft(out:RectangleLike, point:Vector2Like):Void {
-    _Runtime.setField(out, 'x', _Runtime.field(point, 'x'));
-    _Runtime.setField(out, 'y', _Runtime.field(point, 'y'));
+    _Runtime.setField(out, 'x', point.x);
+    _Runtime.setField(out, 'y', point.y);
   }
 }

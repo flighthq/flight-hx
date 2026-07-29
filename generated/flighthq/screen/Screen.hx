@@ -341,8 +341,8 @@ class Screen {
   public static function dipToScreenPoint(screen:ScreenInfo, point:Vector2Like, out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
     var px:Dynamic = cast _Runtime.UNDEFINED;
     var py:Dynamic = cast _Runtime.UNDEFINED;
-    px = _Runtime.field(point, 'x');
-    py = _Runtime.field(point, 'y');
+    px = point.x;
+    py = point.y;
     _Runtime.setField(out, 'x', ((px - _Runtime.field(screen, 'x')) * _Runtime.field(screen, 'scaleFactor')));
     _Runtime.setField(out, 'y', ((py - _Runtime.field(screen, 'y')) * _Runtime.field(screen, 'scaleFactor')));
     return cast out;
@@ -559,7 +559,7 @@ class Screen {
       return cast out;
     }
     for (screen in _Runtime.iterable(screens)) {
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(_Runtime.field(point, 'x'), _Runtime.field(screen, 'x'), '>='), function():Dynamic return cast _Runtime.compare(_Runtime.field(point, 'x'), (_Runtime.field(screen, 'x') + _Runtime.field(screen, 'width')), '<')), function():Dynamic return cast _Runtime.compare(_Runtime.field(point, 'y'), _Runtime.field(screen, 'y'), '>=')), function():Dynamic return cast _Runtime.compare(_Runtime.field(point, 'y'), (_Runtime.field(screen, 'y') + _Runtime.field(screen, 'height')), '<')))) {
+      if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(point.x, _Runtime.field(screen, 'x'), '>='), function():Dynamic return cast _Runtime.compare(point.x, (_Runtime.field(screen, 'x') + _Runtime.field(screen, 'width')), '<')), function():Dynamic return cast _Runtime.compare(point.y, _Runtime.field(screen, 'y'), '>=')), function():Dynamic return cast _Runtime.compare(point.y, (_Runtime.field(screen, 'y') + _Runtime.field(screen, 'height')), '<')))) {
         _Runtime.callValue(Screen.copyScreenInfo__screen, cast ([screen, out] : Array<Dynamic>));
         return cast out;
       }
@@ -569,8 +569,8 @@ class Screen {
     for (screen in _Runtime.iterable(screens)) {
       var cx:Dynamic = (_Runtime.field(screen, 'x') + (_Runtime.field(screen, 'width') / 2.0));
       var cy:Dynamic = (_Runtime.field(screen, 'y') + (_Runtime.field(screen, 'height') / 2.0));
-      var dx:Dynamic = (_Runtime.field(point, 'x') - cx);
-      var dy:Dynamic = (_Runtime.field(point, 'y') - cy);
+      var dx:Dynamic = (point.x - cx);
+      var dy:Dynamic = (point.y - cy);
       var dist:Dynamic = ((dx * dx) + (dy * dy));
       if (_Runtime.truthy(_Runtime.compare(dist, bestDist, '<'))) {
         (bestDist = cast (dist : Dynamic));
@@ -761,8 +761,8 @@ class Screen {
   public static function screenToDipPoint(screen:ScreenInfo, point:Vector2Like, out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
     var px:Dynamic = cast _Runtime.UNDEFINED;
     var py:Dynamic = cast _Runtime.UNDEFINED;
-    px = _Runtime.field(point, 'x');
-    py = _Runtime.field(point, 'y');
+    px = point.x;
+    py = point.y;
     _Runtime.setField(out, 'x', ((px / _Runtime.field(screen, 'scaleFactor')) + _Runtime.field(screen, 'x')));
     _Runtime.setField(out, 'y', ((py / _Runtime.field(screen, 'scaleFactor')) + _Runtime.field(screen, 'y')));
     return cast out;

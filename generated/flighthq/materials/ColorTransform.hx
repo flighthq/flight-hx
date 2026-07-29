@@ -14,36 +14,36 @@ class ColorTransform {
   }
 
   public static function concatColorTransform(out:ColorTransformLike, source:ColorTransformLike, other:ColorTransformLike):Void {
-    _Runtime.setField(out, 'redOffset', ((_Runtime.field(source, 'redMultiplier') * _Runtime.field(other, 'redOffset')) + _Runtime.field(source, 'redOffset')));
-    _Runtime.setField(out, 'greenOffset', ((_Runtime.field(source, 'greenMultiplier') * _Runtime.field(other, 'greenOffset')) + _Runtime.field(source, 'greenOffset')));
-    _Runtime.setField(out, 'blueOffset', ((_Runtime.field(source, 'blueMultiplier') * _Runtime.field(other, 'blueOffset')) + _Runtime.field(source, 'blueOffset')));
-    _Runtime.setField(out, 'alphaOffset', ((_Runtime.field(source, 'alphaMultiplier') * _Runtime.field(other, 'alphaOffset')) + _Runtime.field(source, 'alphaOffset')));
-    _Runtime.setField(out, 'redMultiplier', (_Runtime.field(source, 'redMultiplier') * _Runtime.field(other, 'redMultiplier')));
-    _Runtime.setField(out, 'greenMultiplier', (_Runtime.field(source, 'greenMultiplier') * _Runtime.field(other, 'greenMultiplier')));
-    _Runtime.setField(out, 'blueMultiplier', (_Runtime.field(source, 'blueMultiplier') * _Runtime.field(other, 'blueMultiplier')));
-    _Runtime.setField(out, 'alphaMultiplier', (_Runtime.field(source, 'alphaMultiplier') * _Runtime.field(other, 'alphaMultiplier')));
+    (out.redOffset = cast (((source.redMultiplier * other.redOffset) + source.redOffset) : Dynamic));
+    (out.greenOffset = cast (((source.greenMultiplier * other.greenOffset) + source.greenOffset) : Dynamic));
+    (out.blueOffset = cast (((source.blueMultiplier * other.blueOffset) + source.blueOffset) : Dynamic));
+    (out.alphaOffset = cast (((source.alphaMultiplier * other.alphaOffset) + source.alphaOffset) : Dynamic));
+    (out.redMultiplier = cast ((source.redMultiplier * other.redMultiplier) : Dynamic));
+    (out.greenMultiplier = cast ((source.greenMultiplier * other.greenMultiplier) : Dynamic));
+    (out.blueMultiplier = cast ((source.blueMultiplier * other.blueMultiplier) : Dynamic));
+    (out.alphaMultiplier = cast ((source.alphaMultiplier * other.alphaMultiplier) : Dynamic));
   }
 
   public static function copyColorTransform(out:ColorTransformLike, source:ColorTransformLike):Void {
-    _Runtime.setField(out, 'redMultiplier', _Runtime.field(source, 'redMultiplier'));
-    _Runtime.setField(out, 'greenMultiplier', _Runtime.field(source, 'greenMultiplier'));
-    _Runtime.setField(out, 'blueMultiplier', _Runtime.field(source, 'blueMultiplier'));
-    _Runtime.setField(out, 'alphaMultiplier', _Runtime.field(source, 'alphaMultiplier'));
-    _Runtime.setField(out, 'redOffset', _Runtime.field(source, 'redOffset'));
-    _Runtime.setField(out, 'greenOffset', _Runtime.field(source, 'greenOffset'));
-    _Runtime.setField(out, 'blueOffset', _Runtime.field(source, 'blueOffset'));
-    _Runtime.setField(out, 'alphaOffset', _Runtime.field(source, 'alphaOffset'));
+    (out.redMultiplier = cast (source.redMultiplier : Dynamic));
+    (out.greenMultiplier = cast (source.greenMultiplier : Dynamic));
+    (out.blueMultiplier = cast (source.blueMultiplier : Dynamic));
+    (out.alphaMultiplier = cast (source.alphaMultiplier : Dynamic));
+    (out.redOffset = cast (source.redOffset : Dynamic));
+    (out.greenOffset = cast (source.greenOffset : Dynamic));
+    (out.blueOffset = cast (source.blueOffset : Dynamic));
+    (out.alphaOffset = cast (source.alphaOffset : Dynamic));
   }
 
   public static function copyColorTransformToArrays(outColorMultipliers:Array<Float>, outColorOffsets:Array<Float>, source:ColorTransformLike):Void {
-    _Runtime.setIndex(outColorMultipliers, 0.0, _Runtime.field(source, 'redMultiplier'));
-    _Runtime.setIndex(outColorMultipliers, 1.0, _Runtime.field(source, 'greenMultiplier'));
-    _Runtime.setIndex(outColorMultipliers, 2.0, _Runtime.field(source, 'blueMultiplier'));
-    _Runtime.setIndex(outColorMultipliers, 3.0, _Runtime.field(source, 'alphaMultiplier'));
-    _Runtime.setIndex(outColorOffsets, 0.0, _Runtime.field(source, 'redOffset'));
-    _Runtime.setIndex(outColorOffsets, 1.0, _Runtime.field(source, 'greenOffset'));
-    _Runtime.setIndex(outColorOffsets, 2.0, _Runtime.field(source, 'blueOffset'));
-    _Runtime.setIndex(outColorOffsets, 3.0, _Runtime.field(source, 'alphaOffset'));
+    _Runtime.setIndex(outColorMultipliers, 0.0, source.redMultiplier);
+    _Runtime.setIndex(outColorMultipliers, 1.0, source.greenMultiplier);
+    _Runtime.setIndex(outColorMultipliers, 2.0, source.blueMultiplier);
+    _Runtime.setIndex(outColorMultipliers, 3.0, source.alphaMultiplier);
+    _Runtime.setIndex(outColorOffsets, 0.0, source.redOffset);
+    _Runtime.setIndex(outColorOffsets, 1.0, source.greenOffset);
+    _Runtime.setIndex(outColorOffsets, 2.0, source.blueOffset);
+    _Runtime.setIndex(outColorOffsets, 3.0, source.alphaOffset);
   }
 
   public static function createColorTransform(?opts:Dynamic):flighthq.types.ColorTransform {
@@ -57,34 +57,34 @@ class ColorTransform {
   }
 
   public static function equalsColorTransformMultipliers(a:ColorTransformLike, b:ColorTransformLike, compareAlpha:Bool = true):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(a, 'redMultiplier'), _Runtime.field(b, 'redMultiplier')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'greenMultiplier'), _Runtime.field(b, 'greenMultiplier'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'blueMultiplier'), _Runtime.field(b, 'blueMultiplier'))), function():Dynamic return cast _Runtime.orValue(!_Runtime.truthy(compareAlpha), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'alphaMultiplier'), _Runtime.field(b, 'alphaMultiplier'))));
+    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(a.redMultiplier, b.redMultiplier), function():Dynamic return cast _Runtime.strictEquals(a.greenMultiplier, b.greenMultiplier)), function():Dynamic return cast _Runtime.strictEquals(a.blueMultiplier, b.blueMultiplier)), function():Dynamic return cast _Runtime.orValue(!_Runtime.truthy(compareAlpha), function():Dynamic return cast _Runtime.strictEquals(a.alphaMultiplier, b.alphaMultiplier)));
     return cast null;
   }
 
   public static function equalsColorTransformOffsets(a:ColorTransformLike, b:ColorTransformLike, compareAlpha:Bool = true):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(a, 'redOffset'), _Runtime.field(b, 'redOffset')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'greenOffset'), _Runtime.field(b, 'greenOffset'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'blueOffset'), _Runtime.field(b, 'blueOffset'))), function():Dynamic return cast _Runtime.orValue(!_Runtime.truthy(compareAlpha), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'alphaOffset'), _Runtime.field(b, 'alphaOffset'))));
+    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(a.redOffset, b.redOffset), function():Dynamic return cast _Runtime.strictEquals(a.greenOffset, b.greenOffset)), function():Dynamic return cast _Runtime.strictEquals(a.blueOffset, b.blueOffset)), function():Dynamic return cast _Runtime.orValue(!_Runtime.truthy(compareAlpha), function():Dynamic return cast _Runtime.strictEquals(a.alphaOffset, b.alphaOffset)));
     return cast null;
   }
 
   public static function getColorTransformOffsetRgb(source:ColorTransformLike):Float {
-    return cast (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.fround(_Runtime.field(source, 'redOffset'))) << 16)) | _Runtime.toInt32((_Runtime.toInt32(HxMath.fround(_Runtime.field(source, 'greenOffset'))) << 8)))) | _Runtime.toInt32(HxMath.fround(_Runtime.field(source, 'blueOffset'))));
+    return cast (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.fround(source.redOffset)) << 16)) | _Runtime.toInt32((_Runtime.toInt32(HxMath.fround(source.greenOffset)) << 8)))) | _Runtime.toInt32(HxMath.fround(source.blueOffset)));
     return cast null;
   }
 
   public static function getColorTransformOffsetRgba(source:ColorTransformLike):Float {
-    return cast (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.fround(_Runtime.field(source, 'redOffset'))) << 24)) | _Runtime.toInt32((_Runtime.toInt32(HxMath.fround(_Runtime.field(source, 'greenOffset'))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(HxMath.fround(_Runtime.field(source, 'blueOffset'))) << 8)))) | _Runtime.toInt32(HxMath.fround(_Runtime.field(source, 'alphaOffset'))));
+    return cast (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.fround(source.redOffset)) << 24)) | _Runtime.toInt32((_Runtime.toInt32(HxMath.fround(source.greenOffset)) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(HxMath.fround(source.blueOffset)) << 8)))) | _Runtime.toInt32(HxMath.fround(source.alphaOffset)));
     return cast null;
   }
 
   public static function invertColorTransform(out:ColorTransformLike, source:ColorTransformLike):Void {
-    _Runtime.setField(out, 'redMultiplier', _Runtime.select(!_Runtime.strictEquals(_Runtime.field(source, 'redMultiplier'), 0.0), function():Dynamic return cast (1.0 / _Runtime.field(source, 'redMultiplier')), function():Dynamic return cast 1.0));
-    _Runtime.setField(out, 'greenMultiplier', _Runtime.select(!_Runtime.strictEquals(_Runtime.field(source, 'greenMultiplier'), 0.0), function():Dynamic return cast (1.0 / _Runtime.field(source, 'greenMultiplier')), function():Dynamic return cast 1.0));
-    _Runtime.setField(out, 'blueMultiplier', _Runtime.select(!_Runtime.strictEquals(_Runtime.field(source, 'blueMultiplier'), 0.0), function():Dynamic return cast (1.0 / _Runtime.field(source, 'blueMultiplier')), function():Dynamic return cast 1.0));
-    _Runtime.setField(out, 'alphaMultiplier', _Runtime.select(!_Runtime.strictEquals(_Runtime.field(source, 'alphaMultiplier'), 0.0), function():Dynamic return cast (1.0 / _Runtime.field(source, 'alphaMultiplier')), function():Dynamic return cast 1.0));
-    _Runtime.setField(out, 'redOffset', -_Runtime.field(source, 'redOffset'));
-    _Runtime.setField(out, 'greenOffset', -_Runtime.field(source, 'greenOffset'));
-    _Runtime.setField(out, 'blueOffset', -_Runtime.field(source, 'blueOffset'));
-    _Runtime.setField(out, 'alphaOffset', -_Runtime.field(source, 'alphaOffset'));
+    (out.redMultiplier = cast (_Runtime.select(!_Runtime.strictEquals(source.redMultiplier, 0.0), function():Dynamic return cast (1.0 / source.redMultiplier), function():Dynamic return cast 1.0) : Dynamic));
+    (out.greenMultiplier = cast (_Runtime.select(!_Runtime.strictEquals(source.greenMultiplier, 0.0), function():Dynamic return cast (1.0 / source.greenMultiplier), function():Dynamic return cast 1.0) : Dynamic));
+    (out.blueMultiplier = cast (_Runtime.select(!_Runtime.strictEquals(source.blueMultiplier, 0.0), function():Dynamic return cast (1.0 / source.blueMultiplier), function():Dynamic return cast 1.0) : Dynamic));
+    (out.alphaMultiplier = cast (_Runtime.select(!_Runtime.strictEquals(source.alphaMultiplier, 0.0), function():Dynamic return cast (1.0 / source.alphaMultiplier), function():Dynamic return cast 1.0) : Dynamic));
+    (out.redOffset = cast (-source.redOffset : Dynamic));
+    (out.greenOffset = cast (-source.greenOffset : Dynamic));
+    (out.blueOffset = cast (-source.blueOffset : Dynamic));
+    (out.alphaOffset = cast (-source.alphaOffset : Dynamic));
   }
 
   public static function isIdentityColorTransform(source:ColorTransformLike, compareAlphaMultiplier:Bool = true):Bool {
@@ -93,14 +93,14 @@ class ColorTransform {
   }
 
   public static function setColorTransform(out:ColorTransformLike, redMultiplier:Float, greenMultiplier:Float, blueMultiplier:Float, alphaMultiplier:Float, redOffset:Float, greenOffset:Float, blueOffset:Float, alphaOffset:Float):Void {
-    _Runtime.setField(out, 'redMultiplier', redMultiplier);
-    _Runtime.setField(out, 'greenMultiplier', greenMultiplier);
-    _Runtime.setField(out, 'blueMultiplier', blueMultiplier);
-    _Runtime.setField(out, 'alphaMultiplier', alphaMultiplier);
-    _Runtime.setField(out, 'redOffset', redOffset);
-    _Runtime.setField(out, 'greenOffset', greenOffset);
-    _Runtime.setField(out, 'blueOffset', blueOffset);
-    _Runtime.setField(out, 'alphaOffset', alphaOffset);
+    (out.redMultiplier = cast (redMultiplier : Dynamic));
+    (out.greenMultiplier = cast (greenMultiplier : Dynamic));
+    (out.blueMultiplier = cast (blueMultiplier : Dynamic));
+    (out.alphaMultiplier = cast (alphaMultiplier : Dynamic));
+    (out.redOffset = cast (redOffset : Dynamic));
+    (out.greenOffset = cast (greenOffset : Dynamic));
+    (out.blueOffset = cast (blueOffset : Dynamic));
+    (out.alphaOffset = cast (alphaOffset : Dynamic));
   }
 
   public static function setColorTransformIdentity(out:flighthq.types.ColorTransform):Void {
@@ -108,25 +108,25 @@ class ColorTransform {
   }
 
   public static function setColorTransformOffsetRgb(out:ColorTransformLike, value:Float):Void {
-    _Runtime.setField(out, 'redOffset', (_Runtime.toInt32((_Runtime.toInt32(value) >> 16)) & 255));
-    _Runtime.setField(out, 'greenOffset', (_Runtime.toInt32((_Runtime.toInt32(value) >> 8)) & 255));
-    _Runtime.setField(out, 'blueOffset', (_Runtime.toInt32(value) & 255));
-    _Runtime.setField(out, 'alphaOffset', 0.0);
-    _Runtime.setField(out, 'redMultiplier', 0.0);
-    _Runtime.setField(out, 'greenMultiplier', 0.0);
-    _Runtime.setField(out, 'blueMultiplier', 0.0);
-    _Runtime.setField(out, 'alphaMultiplier', 1.0);
+    (out.redOffset = cast ((_Runtime.toInt32((_Runtime.toInt32(value) >> 16)) & 255) : Dynamic));
+    (out.greenOffset = cast ((_Runtime.toInt32((_Runtime.toInt32(value) >> 8)) & 255) : Dynamic));
+    (out.blueOffset = cast ((_Runtime.toInt32(value) & 255) : Dynamic));
+    (out.alphaOffset = cast (0.0 : Dynamic));
+    (out.redMultiplier = cast (0.0 : Dynamic));
+    (out.greenMultiplier = cast (0.0 : Dynamic));
+    (out.blueMultiplier = cast (0.0 : Dynamic));
+    (out.alphaMultiplier = cast (1.0 : Dynamic));
   }
 
   public static function setColorTransformOffsetRgba(out:ColorTransformLike, value:Float):Void {
-    _Runtime.setField(out, 'redOffset', (_Runtime.toInt32((_Runtime.toInt32(value) >> 24)) & 255));
-    _Runtime.setField(out, 'greenOffset', (_Runtime.toInt32((_Runtime.toInt32(value) >> 16)) & 255));
-    _Runtime.setField(out, 'blueOffset', (_Runtime.toInt32((_Runtime.toInt32(value) >> 8)) & 255));
-    _Runtime.setField(out, 'alphaOffset', (_Runtime.toInt32(value) & 255));
-    _Runtime.setField(out, 'redMultiplier', 0.0);
-    _Runtime.setField(out, 'greenMultiplier', 0.0);
-    _Runtime.setField(out, 'blueMultiplier', 0.0);
-    _Runtime.setField(out, 'alphaMultiplier', 0.0);
+    (out.redOffset = cast ((_Runtime.toInt32((_Runtime.toInt32(value) >> 24)) & 255) : Dynamic));
+    (out.greenOffset = cast ((_Runtime.toInt32((_Runtime.toInt32(value) >> 16)) & 255) : Dynamic));
+    (out.blueOffset = cast ((_Runtime.toInt32((_Runtime.toInt32(value) >> 8)) & 255) : Dynamic));
+    (out.alphaOffset = cast ((_Runtime.toInt32(value) & 255) : Dynamic));
+    (out.redMultiplier = cast (0.0 : Dynamic));
+    (out.greenMultiplier = cast (0.0 : Dynamic));
+    (out.blueMultiplier = cast (0.0 : Dynamic));
+    (out.alphaMultiplier = cast (0.0 : Dynamic));
   }
 
   public static final _identity__colorTransform:flighthq.types.ColorTransform = _Runtime.callValue(createColorTransform, cast ([] : Array<Dynamic>));

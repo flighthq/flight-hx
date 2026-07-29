@@ -42,18 +42,18 @@ class Ray3d {
     var denom:Dynamic = cast _Runtime.UNDEFINED;
     var ta:Float = cast _Runtime.UNDEFINED;
     var tb:Float = cast _Runtime.UNDEFINED;
-    aox = _Runtime.field(_Runtime.field(a, 'origin'), 'x');
-    aoy = _Runtime.field(_Runtime.field(a, 'origin'), 'y');
-    aoz = _Runtime.field(_Runtime.field(a, 'origin'), 'z');
-    adx = _Runtime.field(_Runtime.field(a, 'direction'), 'x');
-    ady = _Runtime.field(_Runtime.field(a, 'direction'), 'y');
-    adz = _Runtime.field(_Runtime.field(a, 'direction'), 'z');
-    box = _Runtime.field(_Runtime.field(b, 'origin'), 'x');
-    boy = _Runtime.field(_Runtime.field(b, 'origin'), 'y');
-    boz = _Runtime.field(_Runtime.field(b, 'origin'), 'z');
-    bdx = _Runtime.field(_Runtime.field(b, 'direction'), 'x');
-    bdy = _Runtime.field(_Runtime.field(b, 'direction'), 'y');
-    bdz = _Runtime.field(_Runtime.field(b, 'direction'), 'z');
+    aox = _Runtime.field(a, 'origin').x;
+    aoy = _Runtime.field(a, 'origin').y;
+    aoz = _Runtime.field(a, 'origin').z;
+    adx = _Runtime.field(a, 'direction').x;
+    ady = _Runtime.field(a, 'direction').y;
+    adz = _Runtime.field(a, 'direction').z;
+    box = _Runtime.field(b, 'origin').x;
+    boy = _Runtime.field(b, 'origin').y;
+    boz = _Runtime.field(b, 'origin').z;
+    bdx = _Runtime.field(b, 'direction').x;
+    bdy = _Runtime.field(b, 'direction').y;
+    bdz = _Runtime.field(b, 'direction').z;
     aa = (((adx * adx) + (ady * ady)) + (adz * adz));
     bb = (((bdx * bdx) + (bdy * bdy)) + (bdz * bdz));
     ab = (((adx * bdx) + (ady * bdy)) + (adz * bdz));
@@ -75,12 +75,12 @@ class Ray3d {
       (ta = cast (_Runtime.select(!_Runtime.strictEquals(aa, 0.0), function():Dynamic return cast (-ar / aa), function():Dynamic return cast 0.0) : Dynamic));
       if (_Runtime.truthy(_Runtime.compare(ta, 0.0, '<'))) { (ta = cast (0.0 : Dynamic)); }
     }
-    _Runtime.setField(outA, 'x', (aox + (adx * ta)));
-    _Runtime.setField(outA, 'y', (aoy + (ady * ta)));
-    _Runtime.setField(outA, 'z', (aoz + (adz * ta)));
-    _Runtime.setField(outB, 'x', (box + (bdx * tb)));
-    _Runtime.setField(outB, 'y', (boy + (bdy * tb)));
-    _Runtime.setField(outB, 'z', (boz + (bdz * tb)));
+    (outA.x = cast ((aox + (adx * ta)) : Dynamic));
+    (outA.y = cast ((aoy + (ady * ta)) : Dynamic));
+    (outA.z = cast ((aoz + (adz * ta)) : Dynamic));
+    (outB.x = cast ((box + (bdx * tb)) : Dynamic));
+    (outB.y = cast ((boy + (bdy * tb)) : Dynamic));
+    (outB.z = cast ((boz + (bdz * tb)) : Dynamic));
   }
 
   public static function getClosestPointOnRay3D(out:Vector3Like, ray:Ray3DLike, point:Vector3Like):Void {
@@ -95,21 +95,21 @@ class Ray3d {
     var pz:Dynamic = cast _Runtime.UNDEFINED;
     var lenSq:Dynamic = cast _Runtime.UNDEFINED;
     var t:Dynamic = cast _Runtime.UNDEFINED;
-    ox = _Runtime.field(_Runtime.field(ray, 'origin'), 'x');
-    oy = _Runtime.field(_Runtime.field(ray, 'origin'), 'y');
-    oz = _Runtime.field(_Runtime.field(ray, 'origin'), 'z');
-    dx = _Runtime.field(_Runtime.field(ray, 'direction'), 'x');
-    dy = _Runtime.field(_Runtime.field(ray, 'direction'), 'y');
-    dz = _Runtime.field(_Runtime.field(ray, 'direction'), 'z');
-    px = _Runtime.field(point, 'x');
-    py = _Runtime.field(point, 'y');
-    pz = _Runtime.field(point, 'z');
+    ox = _Runtime.field(ray, 'origin').x;
+    oy = _Runtime.field(ray, 'origin').y;
+    oz = _Runtime.field(ray, 'origin').z;
+    dx = _Runtime.field(ray, 'direction').x;
+    dy = _Runtime.field(ray, 'direction').y;
+    dz = _Runtime.field(ray, 'direction').z;
+    px = point.x;
+    py = point.y;
+    pz = point.z;
     lenSq = (((dx * dx) + (dy * dy)) + (dz * dz));
     t = _Runtime.select(!_Runtime.strictEquals(lenSq, 0.0), function():Dynamic return cast (((((px - ox) * dx) + ((py - oy) * dy)) + ((pz - oz) * dz)) / lenSq), function():Dynamic return cast 0.0);
     if (_Runtime.truthy(_Runtime.compare(t, 0.0, '<'))) { (t = cast (0.0 : Dynamic)); }
-    _Runtime.setField(out, 'x', (ox + (dx * t)));
-    _Runtime.setField(out, 'y', (oy + (dy * t)));
-    _Runtime.setField(out, 'z', (oz + (dz * t)));
+    (out.x = cast ((ox + (dx * t)) : Dynamic));
+    (out.y = cast ((oy + (dy * t)) : Dynamic));
+    (out.z = cast ((oz + (dz * t)) : Dynamic));
   }
 
   public static function getRay3DPointAt(out:Vector3Like, ray:Ray3DLike, t:Float):Void {
@@ -119,15 +119,15 @@ class Ray3d {
     var dx:Dynamic = cast _Runtime.UNDEFINED;
     var dy:Dynamic = cast _Runtime.UNDEFINED;
     var dz:Dynamic = cast _Runtime.UNDEFINED;
-    ox = _Runtime.field(_Runtime.field(ray, 'origin'), 'x');
-    oy = _Runtime.field(_Runtime.field(ray, 'origin'), 'y');
-    oz = _Runtime.field(_Runtime.field(ray, 'origin'), 'z');
-    dx = _Runtime.field(_Runtime.field(ray, 'direction'), 'x');
-    dy = _Runtime.field(_Runtime.field(ray, 'direction'), 'y');
-    dz = _Runtime.field(_Runtime.field(ray, 'direction'), 'z');
-    _Runtime.setField(out, 'x', (ox + (dx * t)));
-    _Runtime.setField(out, 'y', (oy + (dy * t)));
-    _Runtime.setField(out, 'z', (oz + (dz * t)));
+    ox = _Runtime.field(ray, 'origin').x;
+    oy = _Runtime.field(ray, 'origin').y;
+    oz = _Runtime.field(ray, 'origin').z;
+    dx = _Runtime.field(ray, 'direction').x;
+    dy = _Runtime.field(ray, 'direction').y;
+    dz = _Runtime.field(ray, 'direction').z;
+    (out.x = cast ((ox + (dx * t)) : Dynamic));
+    (out.y = cast ((oy + (dy * t)) : Dynamic));
+    (out.z = cast ((oz + (dz * t)) : Dynamic));
   }
 
   public static function intersectRay3DAabb(ray:Ray3DLike, aabb:AabbLike):Float {
@@ -139,18 +139,18 @@ class Ray3d {
     var dz:Dynamic = cast _Runtime.UNDEFINED;
     var tMin:Dynamic = cast _Runtime.UNDEFINED;
     var tMax:Dynamic = cast _Runtime.UNDEFINED;
-    ox = _Runtime.field(_Runtime.field(ray, 'origin'), 'x');
-    oy = _Runtime.field(_Runtime.field(ray, 'origin'), 'y');
-    oz = _Runtime.field(_Runtime.field(ray, 'origin'), 'z');
-    dx = _Runtime.field(_Runtime.field(ray, 'direction'), 'x');
-    dy = _Runtime.field(_Runtime.field(ray, 'direction'), 'y');
-    dz = _Runtime.field(_Runtime.field(ray, 'direction'), 'z');
+    ox = _Runtime.field(ray, 'origin').x;
+    oy = _Runtime.field(ray, 'origin').y;
+    oz = _Runtime.field(ray, 'origin').z;
+    dx = _Runtime.field(ray, 'direction').x;
+    dy = _Runtime.field(ray, 'direction').y;
+    dz = _Runtime.field(ray, 'direction').z;
     tMin = 0.0;
     tMax = HxMath.POSITIVE_INFINITY;
     if (_Runtime.truthy(!_Runtime.strictEquals(dx, 0.0))) {
       var invDx:Dynamic = (1.0 / dx);
-      var t1:Dynamic = ((_Runtime.field(_Runtime.field(aabb, 'min'), 'x') - ox) * invDx);
-      var t2:Dynamic = ((_Runtime.field(_Runtime.field(aabb, 'max'), 'x') - ox) * invDx);
+      var t1:Dynamic = ((_Runtime.field(aabb, 'min').x - ox) * invDx);
+      var t2:Dynamic = ((_Runtime.field(aabb, 'max').x - ox) * invDx);
       if (_Runtime.truthy(_Runtime.compare(t1, t2, '>'))) {
         var tmp:Dynamic = t1;
         (t1 = cast (t2 : Dynamic));
@@ -159,13 +159,13 @@ class Ray3d {
       (tMin = cast (HxMath.max(tMin, t1) : Dynamic));
       (tMax = cast (HxMath.min(tMax, t2) : Dynamic));
       if (_Runtime.truthy(_Runtime.compare(tMin, tMax, '>'))) { return cast -1.0; }
-    } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(ox, _Runtime.field(_Runtime.field(aabb, 'min'), 'x'), '<'), function():Dynamic return cast _Runtime.compare(ox, _Runtime.field(_Runtime.field(aabb, 'max'), 'x'), '>')))) {
+    } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(ox, _Runtime.field(aabb, 'min').x, '<'), function():Dynamic return cast _Runtime.compare(ox, _Runtime.field(aabb, 'max').x, '>')))) {
       return cast -1.0;
     } }
     if (_Runtime.truthy(!_Runtime.strictEquals(dy, 0.0))) {
       var invDy:Dynamic = (1.0 / dy);
-      var t1:Dynamic = ((_Runtime.field(_Runtime.field(aabb, 'min'), 'y') - oy) * invDy);
-      var t2:Dynamic = ((_Runtime.field(_Runtime.field(aabb, 'max'), 'y') - oy) * invDy);
+      var t1:Dynamic = ((_Runtime.field(aabb, 'min').y - oy) * invDy);
+      var t2:Dynamic = ((_Runtime.field(aabb, 'max').y - oy) * invDy);
       if (_Runtime.truthy(_Runtime.compare(t1, t2, '>'))) {
         var tmp:Dynamic = t1;
         (t1 = cast (t2 : Dynamic));
@@ -174,13 +174,13 @@ class Ray3d {
       (tMin = cast (HxMath.max(tMin, t1) : Dynamic));
       (tMax = cast (HxMath.min(tMax, t2) : Dynamic));
       if (_Runtime.truthy(_Runtime.compare(tMin, tMax, '>'))) { return cast -1.0; }
-    } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(oy, _Runtime.field(_Runtime.field(aabb, 'min'), 'y'), '<'), function():Dynamic return cast _Runtime.compare(oy, _Runtime.field(_Runtime.field(aabb, 'max'), 'y'), '>')))) {
+    } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(oy, _Runtime.field(aabb, 'min').y, '<'), function():Dynamic return cast _Runtime.compare(oy, _Runtime.field(aabb, 'max').y, '>')))) {
       return cast -1.0;
     } }
     if (_Runtime.truthy(!_Runtime.strictEquals(dz, 0.0))) {
       var invDz:Dynamic = (1.0 / dz);
-      var t1:Dynamic = ((_Runtime.field(_Runtime.field(aabb, 'min'), 'z') - oz) * invDz);
-      var t2:Dynamic = ((_Runtime.field(_Runtime.field(aabb, 'max'), 'z') - oz) * invDz);
+      var t1:Dynamic = ((_Runtime.field(aabb, 'min').z - oz) * invDz);
+      var t2:Dynamic = ((_Runtime.field(aabb, 'max').z - oz) * invDz);
       if (_Runtime.truthy(_Runtime.compare(t1, t2, '>'))) {
         var tmp:Dynamic = t1;
         (t1 = cast (t2 : Dynamic));
@@ -189,7 +189,7 @@ class Ray3d {
       (tMin = cast (HxMath.max(tMin, t1) : Dynamic));
       (tMax = cast (HxMath.min(tMax, t2) : Dynamic));
       if (_Runtime.truthy(_Runtime.compare(tMin, tMax, '>'))) { return cast -1.0; }
-    } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(oz, _Runtime.field(_Runtime.field(aabb, 'min'), 'z'), '<'), function():Dynamic return cast _Runtime.compare(oz, _Runtime.field(_Runtime.field(aabb, 'max'), 'z'), '>')))) {
+    } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(oz, _Runtime.field(aabb, 'min').z, '<'), function():Dynamic return cast _Runtime.compare(oz, _Runtime.field(aabb, 'max').z, '>')))) {
       return cast -1.0;
     } }
     return cast tMin;
@@ -199,9 +199,9 @@ class Ray3d {
   public static function intersectRay3DPlane(ray:Ray3DLike, plane:PlaneLike):Float {
     var denom:Dynamic = cast _Runtime.UNDEFINED;
     var t:Dynamic = cast _Runtime.UNDEFINED;
-    denom = (((_Runtime.field(plane, 'a') * _Runtime.field(_Runtime.field(ray, 'direction'), 'x')) + (_Runtime.field(plane, 'b') * _Runtime.field(_Runtime.field(ray, 'direction'), 'y'))) + (_Runtime.field(plane, 'c') * _Runtime.field(_Runtime.field(ray, 'direction'), 'z')));
+    denom = (((_Runtime.field(plane, 'a') * _Runtime.field(ray, 'direction').x) + (_Runtime.field(plane, 'b') * _Runtime.field(ray, 'direction').y)) + (_Runtime.field(plane, 'c') * _Runtime.field(ray, 'direction').z));
     if (_Runtime.truthy(_Runtime.compare(HxMath.abs(denom), 1e-10, '<'))) { return cast -1.0; }
-    t = (-((((_Runtime.field(plane, 'a') * _Runtime.field(_Runtime.field(ray, 'origin'), 'x')) + (_Runtime.field(plane, 'b') * _Runtime.field(_Runtime.field(ray, 'origin'), 'y'))) + (_Runtime.field(plane, 'c') * _Runtime.field(_Runtime.field(ray, 'origin'), 'z'))) + _Runtime.field(plane, 'd')) / denom);
+    t = (-((((_Runtime.field(plane, 'a') * _Runtime.field(ray, 'origin').x) + (_Runtime.field(plane, 'b') * _Runtime.field(ray, 'origin').y)) + (_Runtime.field(plane, 'c') * _Runtime.field(ray, 'origin').z)) + _Runtime.field(plane, 'd')) / denom);
     return cast _Runtime.select(_Runtime.compare(t, 0.0, '>='), function():Dynamic return cast t, function():Dynamic return cast -1.0);
     return cast null;
   }
@@ -221,12 +221,12 @@ class Ray3d {
     var t:Dynamic = cast _Runtime.UNDEFINED;
     var t2:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(sphere, 'radius'), 0.0, '<'))) { return cast -1.0; }
-    ox = (_Runtime.field(_Runtime.field(ray, 'origin'), 'x') - _Runtime.field(_Runtime.field(sphere, 'center'), 'x'));
-    oy = (_Runtime.field(_Runtime.field(ray, 'origin'), 'y') - _Runtime.field(_Runtime.field(sphere, 'center'), 'y'));
-    oz = (_Runtime.field(_Runtime.field(ray, 'origin'), 'z') - _Runtime.field(_Runtime.field(sphere, 'center'), 'z'));
-    dx = _Runtime.field(_Runtime.field(ray, 'direction'), 'x');
-    dy = _Runtime.field(_Runtime.field(ray, 'direction'), 'y');
-    dz = _Runtime.field(_Runtime.field(ray, 'direction'), 'z');
+    ox = (_Runtime.field(ray, 'origin').x - _Runtime.field(sphere, 'center').x);
+    oy = (_Runtime.field(ray, 'origin').y - _Runtime.field(sphere, 'center').y);
+    oz = (_Runtime.field(ray, 'origin').z - _Runtime.field(sphere, 'center').z);
+    dx = _Runtime.field(ray, 'direction').x;
+    dy = _Runtime.field(ray, 'direction').y;
+    dz = _Runtime.field(ray, 'direction').z;
     a = (((dx * dx) + (dy * dy)) + (dz * dz));
     if (_Runtime.truthy(_Runtime.strictEquals(a, 0.0))) { return cast -1.0; }
     b = (((ox * dx) + (oy * dy)) + (oz * dz));
@@ -265,24 +265,24 @@ class Ray3d {
     var qz:Dynamic = cast _Runtime.UNDEFINED;
     var v:Dynamic = cast _Runtime.UNDEFINED;
     var t:Dynamic = cast _Runtime.UNDEFINED;
-    e1x = (_Runtime.field(b, 'x') - _Runtime.field(a, 'x'));
-    e1y = (_Runtime.field(b, 'y') - _Runtime.field(a, 'y'));
-    e1z = (_Runtime.field(b, 'z') - _Runtime.field(a, 'z'));
-    e2x = (_Runtime.field(c, 'x') - _Runtime.field(a, 'x'));
-    e2y = (_Runtime.field(c, 'y') - _Runtime.field(a, 'y'));
-    e2z = (_Runtime.field(c, 'z') - _Runtime.field(a, 'z'));
-    dx = _Runtime.field(_Runtime.field(ray, 'direction'), 'x');
-    dy = _Runtime.field(_Runtime.field(ray, 'direction'), 'y');
-    dz = _Runtime.field(_Runtime.field(ray, 'direction'), 'z');
+    e1x = (b.x - a.x);
+    e1y = (b.y - a.y);
+    e1z = (b.z - a.z);
+    e2x = (c.x - a.x);
+    e2y = (c.y - a.y);
+    e2z = (c.z - a.z);
+    dx = _Runtime.field(ray, 'direction').x;
+    dy = _Runtime.field(ray, 'direction').y;
+    dz = _Runtime.field(ray, 'direction').z;
     hx = ((dy * e2z) - (dz * e2y));
     hy = ((dz * e2x) - (dx * e2z));
     hz = ((dx * e2y) - (dy * e2x));
     det = (((e1x * hx) + (e1y * hy)) + (e1z * hz));
     if (_Runtime.truthy(_Runtime.compare(HxMath.abs(det), 1e-10, '<'))) { return cast -1.0; }
     invDet = (1.0 / det);
-    sx = (_Runtime.field(_Runtime.field(ray, 'origin'), 'x') - _Runtime.field(a, 'x'));
-    sy = (_Runtime.field(_Runtime.field(ray, 'origin'), 'y') - _Runtime.field(a, 'y'));
-    sz = (_Runtime.field(_Runtime.field(ray, 'origin'), 'z') - _Runtime.field(a, 'z'));
+    sx = (_Runtime.field(ray, 'origin').x - a.x);
+    sy = (_Runtime.field(ray, 'origin').y - a.y);
+    sz = (_Runtime.field(ray, 'origin').z - a.z);
     u = ((((sx * hx) + (sy * hy)) + (sz * hz)) * invDet);
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(u, 0.0, '<'), function():Dynamic return cast _Runtime.compare(u, 1.0, '>')))) { return cast -1.0; }
     qx = ((sy * e1z) - (sz * e1y));
@@ -302,17 +302,17 @@ class Ray3d {
     var dx:Dynamic = cast _Runtime.UNDEFINED;
     var dy:Dynamic = cast _Runtime.UNDEFINED;
     var dz:Dynamic = cast _Runtime.UNDEFINED;
-    ox = _Runtime.field(origin, 'x');
-    oy = _Runtime.field(origin, 'y');
-    oz = _Runtime.field(origin, 'z');
-    dx = _Runtime.field(direction, 'x');
-    dy = _Runtime.field(direction, 'y');
-    dz = _Runtime.field(direction, 'z');
-    _Runtime.setField(_Runtime.field(out, 'origin'), 'x', ox);
-    _Runtime.setField(_Runtime.field(out, 'origin'), 'y', oy);
-    _Runtime.setField(_Runtime.field(out, 'origin'), 'z', oz);
-    _Runtime.setField(_Runtime.field(out, 'direction'), 'x', dx);
-    _Runtime.setField(_Runtime.field(out, 'direction'), 'y', dy);
-    _Runtime.setField(_Runtime.field(out, 'direction'), 'z', dz);
+    ox = origin.x;
+    oy = origin.y;
+    oz = origin.z;
+    dx = direction.x;
+    dy = direction.y;
+    dz = direction.z;
+    (_Runtime.field(out, 'origin').x = cast (ox : Dynamic));
+    (_Runtime.field(out, 'origin').y = cast (oy : Dynamic));
+    (_Runtime.field(out, 'origin').z = cast (oz : Dynamic));
+    (_Runtime.field(out, 'direction').x = cast (dx : Dynamic));
+    (_Runtime.field(out, 'direction').y = cast (dy : Dynamic));
+    (_Runtime.field(out, 'direction').z = cast (dz : Dynamic));
   }
 }

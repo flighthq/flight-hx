@@ -13,22 +13,22 @@ import flighthq.types.Vector3.Vector3Like;
 
 class Aabb {
   public static function cloneAabb(source:AabbLike):flighthq.types.Aabb {
-    return cast _Runtime.callValue(createAabb, cast ([_Runtime.field(_Runtime.field(source, 'min'), 'x'), _Runtime.field(_Runtime.field(source, 'min'), 'y'), _Runtime.field(_Runtime.field(source, 'min'), 'z'), _Runtime.field(_Runtime.field(source, 'max'), 'x'), _Runtime.field(_Runtime.field(source, 'max'), 'y'), _Runtime.field(_Runtime.field(source, 'max'), 'z')] : Array<Dynamic>));
+    return cast _Runtime.callValue(createAabb, cast ([_Runtime.field(source, 'min').x, _Runtime.field(source, 'min').y, _Runtime.field(source, 'min').z, _Runtime.field(source, 'max').x, _Runtime.field(source, 'max').y, _Runtime.field(source, 'max').z] : Array<Dynamic>));
     return cast null;
   }
 
   public static function containsAabbPoint(aabb:AabbLike, point:Vector3Like):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(_Runtime.field(point, 'x'), _Runtime.field(_Runtime.field(aabb, 'min'), 'x'), '>='), function():Dynamic return cast _Runtime.compare(_Runtime.field(point, 'x'), _Runtime.field(_Runtime.field(aabb, 'max'), 'x'), '<=')), function():Dynamic return cast _Runtime.compare(_Runtime.field(point, 'y'), _Runtime.field(_Runtime.field(aabb, 'min'), 'y'), '>=')), function():Dynamic return cast _Runtime.compare(_Runtime.field(point, 'y'), _Runtime.field(_Runtime.field(aabb, 'max'), 'y'), '<=')), function():Dynamic return cast _Runtime.compare(_Runtime.field(point, 'z'), _Runtime.field(_Runtime.field(aabb, 'min'), 'z'), '>=')), function():Dynamic return cast _Runtime.compare(_Runtime.field(point, 'z'), _Runtime.field(_Runtime.field(aabb, 'max'), 'z'), '<='));
+    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(point.x, _Runtime.field(aabb, 'min').x, '>='), function():Dynamic return cast _Runtime.compare(point.x, _Runtime.field(aabb, 'max').x, '<=')), function():Dynamic return cast _Runtime.compare(point.y, _Runtime.field(aabb, 'min').y, '>=')), function():Dynamic return cast _Runtime.compare(point.y, _Runtime.field(aabb, 'max').y, '<=')), function():Dynamic return cast _Runtime.compare(point.z, _Runtime.field(aabb, 'min').z, '>=')), function():Dynamic return cast _Runtime.compare(point.z, _Runtime.field(aabb, 'max').z, '<='));
     return cast null;
   }
 
   public static function copyAabb(out:AabbLike, source:AabbLike):Void {
-    _Runtime.setField(_Runtime.field(out, 'min'), 'x', _Runtime.field(_Runtime.field(source, 'min'), 'x'));
-    _Runtime.setField(_Runtime.field(out, 'min'), 'y', _Runtime.field(_Runtime.field(source, 'min'), 'y'));
-    _Runtime.setField(_Runtime.field(out, 'min'), 'z', _Runtime.field(_Runtime.field(source, 'min'), 'z'));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'x', _Runtime.field(_Runtime.field(source, 'max'), 'x'));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'y', _Runtime.field(_Runtime.field(source, 'max'), 'y'));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'z', _Runtime.field(_Runtime.field(source, 'max'), 'z'));
+    (_Runtime.field(out, 'min').x = cast (_Runtime.field(source, 'min').x : Dynamic));
+    (_Runtime.field(out, 'min').y = cast (_Runtime.field(source, 'min').y : Dynamic));
+    (_Runtime.field(out, 'min').z = cast (_Runtime.field(source, 'min').z : Dynamic));
+    (_Runtime.field(out, 'max').x = cast (_Runtime.field(source, 'max').x : Dynamic));
+    (_Runtime.field(out, 'max').y = cast (_Runtime.field(source, 'max').y : Dynamic));
+    (_Runtime.field(out, 'max').z = cast (_Runtime.field(source, 'max').z : Dynamic));
   }
 
   public static function createAabb(?minX:Float, ?minY:Float, ?minZ:Float, ?maxX:Float, ?maxY:Float, ?maxZ:Float):flighthq.types.Aabb {
@@ -44,15 +44,15 @@ class Aabb {
     var px:Dynamic = cast _Runtime.UNDEFINED;
     var py:Dynamic = cast _Runtime.UNDEFINED;
     var pz:Dynamic = cast _Runtime.UNDEFINED;
-    px = _Runtime.field(point, 'x');
-    py = _Runtime.field(point, 'y');
-    pz = _Runtime.field(point, 'z');
-    _Runtime.setField(_Runtime.field(out, 'min'), 'x', HxMath.min(_Runtime.field(_Runtime.field(aabb, 'min'), 'x'), px));
-    _Runtime.setField(_Runtime.field(out, 'min'), 'y', HxMath.min(_Runtime.field(_Runtime.field(aabb, 'min'), 'y'), py));
-    _Runtime.setField(_Runtime.field(out, 'min'), 'z', HxMath.min(_Runtime.field(_Runtime.field(aabb, 'min'), 'z'), pz));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'x', HxMath.max(_Runtime.field(_Runtime.field(aabb, 'max'), 'x'), px));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'y', HxMath.max(_Runtime.field(_Runtime.field(aabb, 'max'), 'y'), py));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'z', HxMath.max(_Runtime.field(_Runtime.field(aabb, 'max'), 'z'), pz));
+    px = point.x;
+    py = point.y;
+    pz = point.z;
+    (_Runtime.field(out, 'min').x = cast (HxMath.min(_Runtime.field(aabb, 'min').x, px) : Dynamic));
+    (_Runtime.field(out, 'min').y = cast (HxMath.min(_Runtime.field(aabb, 'min').y, py) : Dynamic));
+    (_Runtime.field(out, 'min').z = cast (HxMath.min(_Runtime.field(aabb, 'min').z, pz) : Dynamic));
+    (_Runtime.field(out, 'max').x = cast (HxMath.max(_Runtime.field(aabb, 'max').x, px) : Dynamic));
+    (_Runtime.field(out, 'max').y = cast (HxMath.max(_Runtime.field(aabb, 'max').y, py) : Dynamic));
+    (_Runtime.field(out, 'max').z = cast (HxMath.max(_Runtime.field(aabb, 'max').z, pz) : Dynamic));
   }
 
   public static function expandAabbBySphere(out:AabbLike, aabb:AabbLike, sphere:BoundingSphereLike):Void {
@@ -61,54 +61,54 @@ class Aabb {
     var cz:Dynamic = cast _Runtime.UNDEFINED;
     var r:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(sphere, 'radius'), 0.0, '<'))) {
-      _Runtime.setField(_Runtime.field(out, 'min'), 'x', _Runtime.field(_Runtime.field(aabb, 'min'), 'x'));
-      _Runtime.setField(_Runtime.field(out, 'min'), 'y', _Runtime.field(_Runtime.field(aabb, 'min'), 'y'));
-      _Runtime.setField(_Runtime.field(out, 'min'), 'z', _Runtime.field(_Runtime.field(aabb, 'min'), 'z'));
-      _Runtime.setField(_Runtime.field(out, 'max'), 'x', _Runtime.field(_Runtime.field(aabb, 'max'), 'x'));
-      _Runtime.setField(_Runtime.field(out, 'max'), 'y', _Runtime.field(_Runtime.field(aabb, 'max'), 'y'));
-      _Runtime.setField(_Runtime.field(out, 'max'), 'z', _Runtime.field(_Runtime.field(aabb, 'max'), 'z'));
+      (_Runtime.field(out, 'min').x = cast (_Runtime.field(aabb, 'min').x : Dynamic));
+      (_Runtime.field(out, 'min').y = cast (_Runtime.field(aabb, 'min').y : Dynamic));
+      (_Runtime.field(out, 'min').z = cast (_Runtime.field(aabb, 'min').z : Dynamic));
+      (_Runtime.field(out, 'max').x = cast (_Runtime.field(aabb, 'max').x : Dynamic));
+      (_Runtime.field(out, 'max').y = cast (_Runtime.field(aabb, 'max').y : Dynamic));
+      (_Runtime.field(out, 'max').z = cast (_Runtime.field(aabb, 'max').z : Dynamic));
       return;
     }
-    cx = _Runtime.field(_Runtime.field(sphere, 'center'), 'x');
-    cy = _Runtime.field(_Runtime.field(sphere, 'center'), 'y');
-    cz = _Runtime.field(_Runtime.field(sphere, 'center'), 'z');
+    cx = _Runtime.field(sphere, 'center').x;
+    cy = _Runtime.field(sphere, 'center').y;
+    cz = _Runtime.field(sphere, 'center').z;
     r = _Runtime.field(sphere, 'radius');
-    _Runtime.setField(_Runtime.field(out, 'min'), 'x', HxMath.min(_Runtime.field(_Runtime.field(aabb, 'min'), 'x'), (cx - r)));
-    _Runtime.setField(_Runtime.field(out, 'min'), 'y', HxMath.min(_Runtime.field(_Runtime.field(aabb, 'min'), 'y'), (cy - r)));
-    _Runtime.setField(_Runtime.field(out, 'min'), 'z', HxMath.min(_Runtime.field(_Runtime.field(aabb, 'min'), 'z'), (cz - r)));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'x', HxMath.max(_Runtime.field(_Runtime.field(aabb, 'max'), 'x'), (cx + r)));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'y', HxMath.max(_Runtime.field(_Runtime.field(aabb, 'max'), 'y'), (cy + r)));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'z', HxMath.max(_Runtime.field(_Runtime.field(aabb, 'max'), 'z'), (cz + r)));
+    (_Runtime.field(out, 'min').x = cast (HxMath.min(_Runtime.field(aabb, 'min').x, (cx - r)) : Dynamic));
+    (_Runtime.field(out, 'min').y = cast (HxMath.min(_Runtime.field(aabb, 'min').y, (cy - r)) : Dynamic));
+    (_Runtime.field(out, 'min').z = cast (HxMath.min(_Runtime.field(aabb, 'min').z, (cz - r)) : Dynamic));
+    (_Runtime.field(out, 'max').x = cast (HxMath.max(_Runtime.field(aabb, 'max').x, (cx + r)) : Dynamic));
+    (_Runtime.field(out, 'max').y = cast (HxMath.max(_Runtime.field(aabb, 'max').y, (cy + r)) : Dynamic));
+    (_Runtime.field(out, 'max').z = cast (HxMath.max(_Runtime.field(aabb, 'max').z, (cz + r)) : Dynamic));
   }
 
   public static function getAabbCenter(out:Vector3Like, aabb:AabbLike):Void {
-    _Runtime.setField(out, 'x', ((_Runtime.field(_Runtime.field(aabb, 'min'), 'x') + _Runtime.field(_Runtime.field(aabb, 'max'), 'x')) * 0.5));
-    _Runtime.setField(out, 'y', ((_Runtime.field(_Runtime.field(aabb, 'min'), 'y') + _Runtime.field(_Runtime.field(aabb, 'max'), 'y')) * 0.5));
-    _Runtime.setField(out, 'z', ((_Runtime.field(_Runtime.field(aabb, 'min'), 'z') + _Runtime.field(_Runtime.field(aabb, 'max'), 'z')) * 0.5));
+    (out.x = cast (((_Runtime.field(aabb, 'min').x + _Runtime.field(aabb, 'max').x) * 0.5) : Dynamic));
+    (out.y = cast (((_Runtime.field(aabb, 'min').y + _Runtime.field(aabb, 'max').y) * 0.5) : Dynamic));
+    (out.z = cast (((_Runtime.field(aabb, 'min').z + _Runtime.field(aabb, 'max').z) * 0.5) : Dynamic));
   }
 
   public static function getAabbExtents(out:Vector3Like, aabb:AabbLike):Void {
-    _Runtime.setField(out, 'x', ((_Runtime.field(_Runtime.field(aabb, 'max'), 'x') - _Runtime.field(_Runtime.field(aabb, 'min'), 'x')) * 0.5));
-    _Runtime.setField(out, 'y', ((_Runtime.field(_Runtime.field(aabb, 'max'), 'y') - _Runtime.field(_Runtime.field(aabb, 'min'), 'y')) * 0.5));
-    _Runtime.setField(out, 'z', ((_Runtime.field(_Runtime.field(aabb, 'max'), 'z') - _Runtime.field(_Runtime.field(aabb, 'min'), 'z')) * 0.5));
+    (out.x = cast (((_Runtime.field(aabb, 'max').x - _Runtime.field(aabb, 'min').x) * 0.5) : Dynamic));
+    (out.y = cast (((_Runtime.field(aabb, 'max').y - _Runtime.field(aabb, 'min').y) * 0.5) : Dynamic));
+    (out.z = cast (((_Runtime.field(aabb, 'max').z - _Runtime.field(aabb, 'min').z) * 0.5) : Dynamic));
   }
 
   public static function getAabbSize(out:Vector3Like, aabb:AabbLike):Void {
-    _Runtime.setField(out, 'x', (_Runtime.field(_Runtime.field(aabb, 'max'), 'x') - _Runtime.field(_Runtime.field(aabb, 'min'), 'x')));
-    _Runtime.setField(out, 'y', (_Runtime.field(_Runtime.field(aabb, 'max'), 'y') - _Runtime.field(_Runtime.field(aabb, 'min'), 'y')));
-    _Runtime.setField(out, 'z', (_Runtime.field(_Runtime.field(aabb, 'max'), 'z') - _Runtime.field(_Runtime.field(aabb, 'min'), 'z')));
+    (out.x = cast ((_Runtime.field(aabb, 'max').x - _Runtime.field(aabb, 'min').x) : Dynamic));
+    (out.y = cast ((_Runtime.field(aabb, 'max').y - _Runtime.field(aabb, 'min').y) : Dynamic));
+    (out.z = cast ((_Runtime.field(aabb, 'max').z - _Runtime.field(aabb, 'min').z) : Dynamic));
   }
 
   public static function getClosestPointOnAabb(out:Vector3Like, aabb:AabbLike, point:Vector3Like):Void {
     var px:Dynamic = cast _Runtime.UNDEFINED;
     var py:Dynamic = cast _Runtime.UNDEFINED;
     var pz:Dynamic = cast _Runtime.UNDEFINED;
-    px = _Runtime.field(point, 'x');
-    py = _Runtime.field(point, 'y');
-    pz = _Runtime.field(point, 'z');
-    _Runtime.setField(out, 'x', HxMath.min(HxMath.max(px, _Runtime.field(_Runtime.field(aabb, 'min'), 'x')), _Runtime.field(_Runtime.field(aabb, 'max'), 'x')));
-    _Runtime.setField(out, 'y', HxMath.min(HxMath.max(py, _Runtime.field(_Runtime.field(aabb, 'min'), 'y')), _Runtime.field(_Runtime.field(aabb, 'max'), 'y')));
-    _Runtime.setField(out, 'z', HxMath.min(HxMath.max(pz, _Runtime.field(_Runtime.field(aabb, 'min'), 'z')), _Runtime.field(_Runtime.field(aabb, 'max'), 'z')));
+    px = point.x;
+    py = point.y;
+    pz = point.z;
+    (out.x = cast (HxMath.min(HxMath.max(px, _Runtime.field(aabb, 'min').x), _Runtime.field(aabb, 'max').x) : Dynamic));
+    (out.y = cast (HxMath.min(HxMath.max(py, _Runtime.field(aabb, 'min').y), _Runtime.field(aabb, 'max').y) : Dynamic));
+    (out.z = cast (HxMath.min(HxMath.max(pz, _Runtime.field(aabb, 'min').z), _Runtime.field(aabb, 'max').z) : Dynamic));
   }
 
   public static function intersectAabb(out:AabbLike, a:AabbLike, b:AabbLike):Void {
@@ -124,38 +124,38 @@ class Aabb {
     var bMaxX:Dynamic = cast _Runtime.UNDEFINED;
     var bMaxY:Dynamic = cast _Runtime.UNDEFINED;
     var bMaxZ:Dynamic = cast _Runtime.UNDEFINED;
-    aMinX = _Runtime.field(_Runtime.field(a, 'min'), 'x');
-    aMinY = _Runtime.field(_Runtime.field(a, 'min'), 'y');
-    aMinZ = _Runtime.field(_Runtime.field(a, 'min'), 'z');
-    aMaxX = _Runtime.field(_Runtime.field(a, 'max'), 'x');
-    aMaxY = _Runtime.field(_Runtime.field(a, 'max'), 'y');
-    aMaxZ = _Runtime.field(_Runtime.field(a, 'max'), 'z');
-    bMinX = _Runtime.field(_Runtime.field(b, 'min'), 'x');
-    bMinY = _Runtime.field(_Runtime.field(b, 'min'), 'y');
-    bMinZ = _Runtime.field(_Runtime.field(b, 'min'), 'z');
-    bMaxX = _Runtime.field(_Runtime.field(b, 'max'), 'x');
-    bMaxY = _Runtime.field(_Runtime.field(b, 'max'), 'y');
-    bMaxZ = _Runtime.field(_Runtime.field(b, 'max'), 'z');
-    _Runtime.setField(_Runtime.field(out, 'min'), 'x', HxMath.max(aMinX, bMinX));
-    _Runtime.setField(_Runtime.field(out, 'min'), 'y', HxMath.max(aMinY, bMinY));
-    _Runtime.setField(_Runtime.field(out, 'min'), 'z', HxMath.max(aMinZ, bMinZ));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'x', HxMath.min(aMaxX, bMaxX));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'y', HxMath.min(aMaxY, bMaxY));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'z', HxMath.min(aMaxZ, bMaxZ));
+    aMinX = _Runtime.field(a, 'min').x;
+    aMinY = _Runtime.field(a, 'min').y;
+    aMinZ = _Runtime.field(a, 'min').z;
+    aMaxX = _Runtime.field(a, 'max').x;
+    aMaxY = _Runtime.field(a, 'max').y;
+    aMaxZ = _Runtime.field(a, 'max').z;
+    bMinX = _Runtime.field(b, 'min').x;
+    bMinY = _Runtime.field(b, 'min').y;
+    bMinZ = _Runtime.field(b, 'min').z;
+    bMaxX = _Runtime.field(b, 'max').x;
+    bMaxY = _Runtime.field(b, 'max').y;
+    bMaxZ = _Runtime.field(b, 'max').z;
+    (_Runtime.field(out, 'min').x = cast (HxMath.max(aMinX, bMinX) : Dynamic));
+    (_Runtime.field(out, 'min').y = cast (HxMath.max(aMinY, bMinY) : Dynamic));
+    (_Runtime.field(out, 'min').z = cast (HxMath.max(aMinZ, bMinZ) : Dynamic));
+    (_Runtime.field(out, 'max').x = cast (HxMath.min(aMaxX, bMaxX) : Dynamic));
+    (_Runtime.field(out, 'max').y = cast (HxMath.min(aMaxY, bMaxY) : Dynamic));
+    (_Runtime.field(out, 'max').z = cast (HxMath.min(aMaxZ, bMaxZ) : Dynamic));
   }
 
   public static function isAabbIntersectingAabb(a:AabbLike, b:AabbLike):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(_Runtime.field(_Runtime.field(a, 'min'), 'x'), _Runtime.field(_Runtime.field(b, 'max'), 'x'), '<='), function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.field(a, 'max'), 'x'), _Runtime.field(_Runtime.field(b, 'min'), 'x'), '>=')), function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.field(a, 'min'), 'y'), _Runtime.field(_Runtime.field(b, 'max'), 'y'), '<=')), function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.field(a, 'max'), 'y'), _Runtime.field(_Runtime.field(b, 'min'), 'y'), '>=')), function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.field(a, 'min'), 'z'), _Runtime.field(_Runtime.field(b, 'max'), 'z'), '<=')), function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.field(a, 'max'), 'z'), _Runtime.field(_Runtime.field(b, 'min'), 'z'), '>='));
+    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(_Runtime.field(a, 'min').x, _Runtime.field(b, 'max').x, '<='), function():Dynamic return cast _Runtime.compare(_Runtime.field(a, 'max').x, _Runtime.field(b, 'min').x, '>=')), function():Dynamic return cast _Runtime.compare(_Runtime.field(a, 'min').y, _Runtime.field(b, 'max').y, '<=')), function():Dynamic return cast _Runtime.compare(_Runtime.field(a, 'max').y, _Runtime.field(b, 'min').y, '>=')), function():Dynamic return cast _Runtime.compare(_Runtime.field(a, 'min').z, _Runtime.field(b, 'max').z, '<=')), function():Dynamic return cast _Runtime.compare(_Runtime.field(a, 'max').z, _Runtime.field(b, 'min').z, '>='));
     return cast null;
   }
 
   public static function setAabb(out:AabbLike, minX:Float, minY:Float, minZ:Float, maxX:Float, maxY:Float, maxZ:Float):Void {
-    _Runtime.setField(_Runtime.field(out, 'min'), 'x', minX);
-    _Runtime.setField(_Runtime.field(out, 'min'), 'y', minY);
-    _Runtime.setField(_Runtime.field(out, 'min'), 'z', minZ);
-    _Runtime.setField(_Runtime.field(out, 'max'), 'x', maxX);
-    _Runtime.setField(_Runtime.field(out, 'max'), 'y', maxY);
-    _Runtime.setField(_Runtime.field(out, 'max'), 'z', maxZ);
+    (_Runtime.field(out, 'min').x = cast (minX : Dynamic));
+    (_Runtime.field(out, 'min').y = cast (minY : Dynamic));
+    (_Runtime.field(out, 'min').z = cast (minZ : Dynamic));
+    (_Runtime.field(out, 'max').x = cast (maxX : Dynamic));
+    (_Runtime.field(out, 'max').y = cast (maxY : Dynamic));
+    (_Runtime.field(out, 'max').z = cast (maxZ : Dynamic));
   }
 
   public static function setAabbFromPoints(out:AabbLike, points:Array<Vector3Like>):Void {
@@ -175,21 +175,21 @@ class Aabb {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(points, 'length'), '<'))) {
         var p:Dynamic = _Runtime.getIndex(points, i);
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.field(p, 'x'), minX, '<'))) { (minX = cast (_Runtime.field(p, 'x') : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.field(p, 'y'), minY, '<'))) { (minY = cast (_Runtime.field(p, 'y') : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.field(p, 'z'), minZ, '<'))) { (minZ = cast (_Runtime.field(p, 'z') : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.field(p, 'x'), maxX, '>'))) { (maxX = cast (_Runtime.field(p, 'x') : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.field(p, 'y'), maxY, '>'))) { (maxY = cast (_Runtime.field(p, 'y') : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.field(p, 'z'), maxZ, '>'))) { (maxZ = cast (_Runtime.field(p, 'z') : Dynamic)); }
+        if (_Runtime.truthy(_Runtime.compare(p.x, minX, '<'))) { (minX = cast (p.x : Dynamic)); }
+        if (_Runtime.truthy(_Runtime.compare(p.y, minY, '<'))) { (minY = cast (p.y : Dynamic)); }
+        if (_Runtime.truthy(_Runtime.compare(p.z, minZ, '<'))) { (minZ = cast (p.z : Dynamic)); }
+        if (_Runtime.truthy(_Runtime.compare(p.x, maxX, '>'))) { (maxX = cast (p.x : Dynamic)); }
+        if (_Runtime.truthy(_Runtime.compare(p.y, maxY, '>'))) { (maxY = cast (p.y : Dynamic)); }
+        if (_Runtime.truthy(_Runtime.compare(p.z, maxZ, '>'))) { (maxZ = cast (p.z : Dynamic)); }
         i++;
       }
     }
-    _Runtime.setField(_Runtime.field(out, 'min'), 'x', minX);
-    _Runtime.setField(_Runtime.field(out, 'min'), 'y', minY);
-    _Runtime.setField(_Runtime.field(out, 'min'), 'z', minZ);
-    _Runtime.setField(_Runtime.field(out, 'max'), 'x', maxX);
-    _Runtime.setField(_Runtime.field(out, 'max'), 'y', maxY);
-    _Runtime.setField(_Runtime.field(out, 'max'), 'z', maxZ);
+    (_Runtime.field(out, 'min').x = cast (minX : Dynamic));
+    (_Runtime.field(out, 'min').y = cast (minY : Dynamic));
+    (_Runtime.field(out, 'min').z = cast (minZ : Dynamic));
+    (_Runtime.field(out, 'max').x = cast (maxX : Dynamic));
+    (_Runtime.field(out, 'max').y = cast (maxY : Dynamic));
+    (_Runtime.field(out, 'max').z = cast (maxZ : Dynamic));
   }
 
   public static function transformAabbByMatrix4(out:AabbLike, aabb:AabbLike, m:Matrix4Like):Void {
@@ -212,31 +212,31 @@ class Aabb {
     var tex:Dynamic = cast _Runtime.UNDEFINED;
     var tey:Dynamic = cast _Runtime.UNDEFINED;
     var tez:Dynamic = cast _Runtime.UNDEFINED;
-    minX = _Runtime.field(_Runtime.field(aabb, 'min'), 'x');
-    minY = _Runtime.field(_Runtime.field(aabb, 'min'), 'y');
-    minZ = _Runtime.field(_Runtime.field(aabb, 'min'), 'z');
-    maxX = _Runtime.field(_Runtime.field(aabb, 'max'), 'x');
-    maxY = _Runtime.field(_Runtime.field(aabb, 'max'), 'y');
-    maxZ = _Runtime.field(_Runtime.field(aabb, 'max'), 'z');
+    minX = _Runtime.field(aabb, 'min').x;
+    minY = _Runtime.field(aabb, 'min').y;
+    minZ = _Runtime.field(aabb, 'min').z;
+    maxX = _Runtime.field(aabb, 'max').x;
+    maxY = _Runtime.field(aabb, 'max').y;
+    maxZ = _Runtime.field(aabb, 'max').z;
     cx = ((minX + maxX) * 0.5);
     cy = ((minY + maxY) * 0.5);
     cz = ((minZ + maxZ) * 0.5);
     ex = ((maxX - minX) * 0.5);
     ey = ((maxY - minY) * 0.5);
     ez = ((maxZ - minZ) * 0.5);
-    _m = _Runtime.field(m, 'm');
+    _m = m.m;
     tcx = ((((_Runtime.getIndex(_m, 0.0) * cx) + (_Runtime.getIndex(_m, 4.0) * cy)) + (_Runtime.getIndex(_m, 8.0) * cz)) + _Runtime.getIndex(_m, 12.0));
     tcy = ((((_Runtime.getIndex(_m, 1.0) * cx) + (_Runtime.getIndex(_m, 5.0) * cy)) + (_Runtime.getIndex(_m, 9.0) * cz)) + _Runtime.getIndex(_m, 13.0));
     tcz = ((((_Runtime.getIndex(_m, 2.0) * cx) + (_Runtime.getIndex(_m, 6.0) * cy)) + (_Runtime.getIndex(_m, 10.0) * cz)) + _Runtime.getIndex(_m, 14.0));
     tex = (((HxMath.abs(_Runtime.getIndex(_m, 0.0)) * ex) + (HxMath.abs(_Runtime.getIndex(_m, 4.0)) * ey)) + (HxMath.abs(_Runtime.getIndex(_m, 8.0)) * ez));
     tey = (((HxMath.abs(_Runtime.getIndex(_m, 1.0)) * ex) + (HxMath.abs(_Runtime.getIndex(_m, 5.0)) * ey)) + (HxMath.abs(_Runtime.getIndex(_m, 9.0)) * ez));
     tez = (((HxMath.abs(_Runtime.getIndex(_m, 2.0)) * ex) + (HxMath.abs(_Runtime.getIndex(_m, 6.0)) * ey)) + (HxMath.abs(_Runtime.getIndex(_m, 10.0)) * ez));
-    _Runtime.setField(_Runtime.field(out, 'min'), 'x', (tcx - tex));
-    _Runtime.setField(_Runtime.field(out, 'min'), 'y', (tcy - tey));
-    _Runtime.setField(_Runtime.field(out, 'min'), 'z', (tcz - tez));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'x', (tcx + tex));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'y', (tcy + tey));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'z', (tcz + tez));
+    (_Runtime.field(out, 'min').x = cast ((tcx - tex) : Dynamic));
+    (_Runtime.field(out, 'min').y = cast ((tcy - tey) : Dynamic));
+    (_Runtime.field(out, 'min').z = cast ((tcz - tez) : Dynamic));
+    (_Runtime.field(out, 'max').x = cast ((tcx + tex) : Dynamic));
+    (_Runtime.field(out, 'max').y = cast ((tcy + tey) : Dynamic));
+    (_Runtime.field(out, 'max').z = cast ((tcz + tez) : Dynamic));
   }
 
   public static function unionAabb(out:AabbLike, a:AabbLike, b:AabbLike):Void {
@@ -252,23 +252,23 @@ class Aabb {
     var bMaxX:Dynamic = cast _Runtime.UNDEFINED;
     var bMaxY:Dynamic = cast _Runtime.UNDEFINED;
     var bMaxZ:Dynamic = cast _Runtime.UNDEFINED;
-    aMinX = _Runtime.field(_Runtime.field(a, 'min'), 'x');
-    aMinY = _Runtime.field(_Runtime.field(a, 'min'), 'y');
-    aMinZ = _Runtime.field(_Runtime.field(a, 'min'), 'z');
-    aMaxX = _Runtime.field(_Runtime.field(a, 'max'), 'x');
-    aMaxY = _Runtime.field(_Runtime.field(a, 'max'), 'y');
-    aMaxZ = _Runtime.field(_Runtime.field(a, 'max'), 'z');
-    bMinX = _Runtime.field(_Runtime.field(b, 'min'), 'x');
-    bMinY = _Runtime.field(_Runtime.field(b, 'min'), 'y');
-    bMinZ = _Runtime.field(_Runtime.field(b, 'min'), 'z');
-    bMaxX = _Runtime.field(_Runtime.field(b, 'max'), 'x');
-    bMaxY = _Runtime.field(_Runtime.field(b, 'max'), 'y');
-    bMaxZ = _Runtime.field(_Runtime.field(b, 'max'), 'z');
-    _Runtime.setField(_Runtime.field(out, 'min'), 'x', HxMath.min(aMinX, bMinX));
-    _Runtime.setField(_Runtime.field(out, 'min'), 'y', HxMath.min(aMinY, bMinY));
-    _Runtime.setField(_Runtime.field(out, 'min'), 'z', HxMath.min(aMinZ, bMinZ));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'x', HxMath.max(aMaxX, bMaxX));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'y', HxMath.max(aMaxY, bMaxY));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'z', HxMath.max(aMaxZ, bMaxZ));
+    aMinX = _Runtime.field(a, 'min').x;
+    aMinY = _Runtime.field(a, 'min').y;
+    aMinZ = _Runtime.field(a, 'min').z;
+    aMaxX = _Runtime.field(a, 'max').x;
+    aMaxY = _Runtime.field(a, 'max').y;
+    aMaxZ = _Runtime.field(a, 'max').z;
+    bMinX = _Runtime.field(b, 'min').x;
+    bMinY = _Runtime.field(b, 'min').y;
+    bMinZ = _Runtime.field(b, 'min').z;
+    bMaxX = _Runtime.field(b, 'max').x;
+    bMaxY = _Runtime.field(b, 'max').y;
+    bMaxZ = _Runtime.field(b, 'max').z;
+    (_Runtime.field(out, 'min').x = cast (HxMath.min(aMinX, bMinX) : Dynamic));
+    (_Runtime.field(out, 'min').y = cast (HxMath.min(aMinY, bMinY) : Dynamic));
+    (_Runtime.field(out, 'min').z = cast (HxMath.min(aMinZ, bMinZ) : Dynamic));
+    (_Runtime.field(out, 'max').x = cast (HxMath.max(aMaxX, bMaxX) : Dynamic));
+    (_Runtime.field(out, 'max').y = cast (HxMath.max(aMaxY, bMaxY) : Dynamic));
+    (_Runtime.field(out, 'max').z = cast (HxMath.max(aMaxZ, bMaxZ) : Dynamic));
   }
 }

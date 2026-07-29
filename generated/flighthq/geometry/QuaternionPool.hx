@@ -10,10 +10,10 @@ class QuaternionPool {
   public static function acquireIdentityQuaternion():Quaternion {
     var q:Dynamic = cast _Runtime.UNDEFINED;
     q = _Runtime.callValue(acquireQuaternion, cast ([] : Array<Dynamic>));
-    _Runtime.setField(q, 'x', 0.0);
-    _Runtime.setField(q, 'y', 0.0);
-    _Runtime.setField(q, 'z', 0.0);
-    _Runtime.setField(q, 'w', 1.0);
+    (q.x = cast (0.0 : Dynamic));
+    (q.y = cast (0.0 : Dynamic));
+    (q.z = cast (0.0 : Dynamic));
+    (q.w = cast (1.0 : Dynamic));
     return cast q;
     return cast null;
   }

@@ -48,12 +48,12 @@ class GlShadedBuiltInModifiers {
     suffix = '_' + Std.string(_Runtime.field(context, 'index')) + '';
     _Runtime.callValue(GlShadedBuiltInModifiers.bindGlModifierTexture__glShadedBuiltInModifiers, cast ([context, _Runtime.field(animated, 'map'), 'u_animNormalMap' + Std.string(suffix) + ''] : Array<Dynamic>));
     scroll = _Runtime.field(animated, 'scroll');
-    flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_animNormalScroll' + Std.string(suffix) + ''), _Runtime.field(scroll, 'x'), _Runtime.field(scroll, 'y'));
+    flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_animNormalScroll' + Std.string(suffix) + ''), scroll.x, scroll.y);
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_animNormalStrength' + Std.string(suffix) + ''), _Runtime.coalesce(_Runtime.field(animated, 'strength'), function():Dynamic return cast 1.0));
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(animated, 'secondaryMap'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.callValue(GlShadedBuiltInModifiers.bindGlModifierTexture__glShadedBuiltInModifiers, cast ([context, _Runtime.field(animated, 'secondaryMap'), 'u_animNormalMap2' + Std.string(suffix) + ''] : Array<Dynamic>));
       var secondary:Dynamic = _Runtime.coalesce(_Runtime.field(animated, 'secondaryScroll'), function():Dynamic return cast scroll);
-      flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_animNormalScroll2' + Std.string(suffix) + ''), _Runtime.field(secondary, 'x'), _Runtime.field(secondary, 'y'));
+      flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_animNormalScroll2' + Std.string(suffix) + ''), secondary.x, secondary.y);
     }
   } }, { contribution: function(modifier:Modifier, index:Float) {
     var animated:Dynamic = cast _Runtime.UNDEFINED;
@@ -264,7 +264,7 @@ class GlShadedBuiltInModifiers {
     suffix = '_' + Std.string(_Runtime.field(context, 'index')) + '';
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_vDisplaceAmplitude' + Std.string(suffix) + ''), _Runtime.field(displace, 'amplitude'));
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(displace, 'axis'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_vDisplaceAxis' + Std.string(suffix) + ''), _Runtime.field(_Runtime.field(displace, 'axis'), 'x'), _Runtime.field(_Runtime.field(displace, 'axis'), 'y'), _Runtime.field(_Runtime.field(displace, 'axis'), 'z'));
+      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_vDisplaceAxis' + Std.string(suffix) + ''), _Runtime.field(displace, 'axis').x, _Runtime.field(displace, 'axis').y, _Runtime.field(displace, 'axis').z);
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(displace, 'source'), VertexDisplaceModifierSourceValue.HeightMap))) {
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(displace, 'map'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callValue(GlShadedBuiltInModifiers.bindGlModifierTexture__glShadedBuiltInModifiers, cast ([context, _Runtime.field(displace, 'map'), 'u_vDisplaceMap' + Std.string(suffix) + ''] : Array<Dynamic>)); }
@@ -272,7 +272,7 @@ class GlShadedBuiltInModifiers {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_vDisplaceFrequency' + Std.string(suffix) + ''), _Runtime.coalesce(_Runtime.field(displace, 'frequency'), function():Dynamic return cast 1.0));
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_vDisplaceSpeed' + Std.string(suffix) + ''), _Runtime.coalesce(_Runtime.field(displace, 'speed'), function():Dynamic return cast 1.0));
       var dir:Dynamic = _Runtime.coalesce(_Runtime.field(displace, 'direction'), function():Dynamic return cast { x: 1.0, y: 0.0, z: 0.0 });
-      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_vDisplaceDir' + Std.string(suffix) + ''), _Runtime.field(dir, 'x'), _Runtime.field(dir, 'y'), _Runtime.field(dir, 'z'));
+      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_vDisplaceDir' + Std.string(suffix) + ''), dir.x, dir.y, dir.z);
     }
   } }, { contribution: function(modifier:Modifier, index:Float) {
     var displace:Dynamic = cast _Runtime.UNDEFINED;

@@ -13,7 +13,7 @@ import flighthq.types.Vector3.Vector3Like;
 
 class BoundingSphere {
   public static function cloneBoundingSphere(source:BoundingSphereLike):flighthq.types.BoundingSphere {
-    return cast _Runtime.callValue(createBoundingSphere, cast ([_Runtime.field(_Runtime.field(source, 'center'), 'x'), _Runtime.field(_Runtime.field(source, 'center'), 'y'), _Runtime.field(_Runtime.field(source, 'center'), 'z'), _Runtime.field(source, 'radius')] : Array<Dynamic>));
+    return cast _Runtime.callValue(createBoundingSphere, cast ([_Runtime.field(source, 'center').x, _Runtime.field(source, 'center').y, _Runtime.field(source, 'center').z, _Runtime.field(source, 'radius')] : Array<Dynamic>));
     return cast null;
   }
 
@@ -22,17 +22,17 @@ class BoundingSphere {
     var dy:Dynamic = cast _Runtime.UNDEFINED;
     var dz:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(sphere, 'radius'), 0.0, '<'))) { return cast false; }
-    dx = (_Runtime.field(point, 'x') - _Runtime.field(_Runtime.field(sphere, 'center'), 'x'));
-    dy = (_Runtime.field(point, 'y') - _Runtime.field(_Runtime.field(sphere, 'center'), 'y'));
-    dz = (_Runtime.field(point, 'z') - _Runtime.field(_Runtime.field(sphere, 'center'), 'z'));
+    dx = (point.x - _Runtime.field(sphere, 'center').x);
+    dy = (point.y - _Runtime.field(sphere, 'center').y);
+    dz = (point.z - _Runtime.field(sphere, 'center').z);
     return cast _Runtime.compare((((dx * dx) + (dy * dy)) + (dz * dz)), (_Runtime.field(sphere, 'radius') * _Runtime.field(sphere, 'radius')), '<=');
     return cast null;
   }
 
   public static function copyBoundingSphere(out:BoundingSphereLike, source:BoundingSphereLike):Void {
-    _Runtime.setField(_Runtime.field(out, 'center'), 'x', _Runtime.field(_Runtime.field(source, 'center'), 'x'));
-    _Runtime.setField(_Runtime.field(out, 'center'), 'y', _Runtime.field(_Runtime.field(source, 'center'), 'y'));
-    _Runtime.setField(_Runtime.field(out, 'center'), 'z', _Runtime.field(_Runtime.field(source, 'center'), 'z'));
+    (_Runtime.field(out, 'center').x = cast (_Runtime.field(source, 'center').x : Dynamic));
+    (_Runtime.field(out, 'center').y = cast (_Runtime.field(source, 'center').y : Dynamic));
+    (_Runtime.field(out, 'center').z = cast (_Runtime.field(source, 'center').z : Dynamic));
     _Runtime.setField(out, 'radius', _Runtime.field(source, 'radius'));
   }
 
@@ -53,30 +53,30 @@ class BoundingSphere {
     var dz:Dynamic = cast _Runtime.UNDEFINED;
     var dist:Dynamic = cast _Runtime.UNDEFINED;
     var scale:Dynamic = cast _Runtime.UNDEFINED;
-    cx = _Runtime.field(_Runtime.field(sphere, 'center'), 'x');
-    cy = _Runtime.field(_Runtime.field(sphere, 'center'), 'y');
-    cz = _Runtime.field(_Runtime.field(sphere, 'center'), 'z');
+    cx = _Runtime.field(sphere, 'center').x;
+    cy = _Runtime.field(sphere, 'center').y;
+    cz = _Runtime.field(sphere, 'center').z;
     r = _Runtime.field(sphere, 'radius');
     if (_Runtime.truthy(_Runtime.compare(r, 0.0, '<'))) {
-      _Runtime.setField(out, 'x', cx);
-      _Runtime.setField(out, 'y', cy);
-      _Runtime.setField(out, 'z', cz);
+      (out.x = cast (cx : Dynamic));
+      (out.y = cast (cy : Dynamic));
+      (out.z = cast (cz : Dynamic));
       return;
     }
-    dx = (_Runtime.field(point, 'x') - cx);
-    dy = (_Runtime.field(point, 'y') - cy);
-    dz = (_Runtime.field(point, 'z') - cz);
+    dx = (point.x - cx);
+    dy = (point.y - cy);
+    dz = (point.z - cz);
     dist = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
     if (_Runtime.truthy(_Runtime.strictEquals(dist, 0.0))) {
-      _Runtime.setField(out, 'x', (cx + r));
-      _Runtime.setField(out, 'y', cy);
-      _Runtime.setField(out, 'z', cz);
+      (out.x = cast ((cx + r) : Dynamic));
+      (out.y = cast (cy : Dynamic));
+      (out.z = cast (cz : Dynamic));
       return;
     }
     scale = (r / dist);
-    _Runtime.setField(out, 'x', (cx + (dx * scale)));
-    _Runtime.setField(out, 'y', (cy + (dy * scale)));
-    _Runtime.setField(out, 'z', (cz + (dz * scale)));
+    (out.x = cast ((cx + (dx * scale)) : Dynamic));
+    (out.y = cast ((cy + (dy * scale)) : Dynamic));
+    (out.z = cast ((cz + (dz * scale)) : Dynamic));
   }
 
   public static function isBoundingSphereIntersectingBoundingSphere(a:BoundingSphereLike, b:BoundingSphereLike):Bool {
@@ -86,9 +86,9 @@ class BoundingSphere {
     var distSq:Dynamic = cast _Runtime.UNDEFINED;
     var sumR:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(a, 'radius'), 0.0, '<'), function():Dynamic return cast _Runtime.compare(_Runtime.field(b, 'radius'), 0.0, '<')))) { return cast false; }
-    dx = (_Runtime.field(_Runtime.field(a, 'center'), 'x') - _Runtime.field(_Runtime.field(b, 'center'), 'x'));
-    dy = (_Runtime.field(_Runtime.field(a, 'center'), 'y') - _Runtime.field(_Runtime.field(b, 'center'), 'y'));
-    dz = (_Runtime.field(_Runtime.field(a, 'center'), 'z') - _Runtime.field(_Runtime.field(b, 'center'), 'z'));
+    dx = (_Runtime.field(a, 'center').x - _Runtime.field(b, 'center').x);
+    dy = (_Runtime.field(a, 'center').y - _Runtime.field(b, 'center').y);
+    dz = (_Runtime.field(a, 'center').z - _Runtime.field(b, 'center').z);
     distSq = (((dx * dx) + (dy * dy)) + (dz * dz));
     sumR = (_Runtime.field(a, 'radius') + _Runtime.field(b, 'radius'));
     return cast _Runtime.compare(distSq, (sumR * sumR), '<=');
@@ -111,57 +111,57 @@ class BoundingSphere {
     var newRadius:Dynamic = cast _Runtime.UNDEFINED;
     var t:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(a, 'radius'), 0.0, '<'))) {
-      _Runtime.setField(_Runtime.field(out, 'center'), 'x', _Runtime.field(_Runtime.field(b, 'center'), 'x'));
-      _Runtime.setField(_Runtime.field(out, 'center'), 'y', _Runtime.field(_Runtime.field(b, 'center'), 'y'));
-      _Runtime.setField(_Runtime.field(out, 'center'), 'z', _Runtime.field(_Runtime.field(b, 'center'), 'z'));
+      (_Runtime.field(out, 'center').x = cast (_Runtime.field(b, 'center').x : Dynamic));
+      (_Runtime.field(out, 'center').y = cast (_Runtime.field(b, 'center').y : Dynamic));
+      (_Runtime.field(out, 'center').z = cast (_Runtime.field(b, 'center').z : Dynamic));
       _Runtime.setField(out, 'radius', _Runtime.field(b, 'radius'));
       return;
     }
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(b, 'radius'), 0.0, '<'))) {
-      _Runtime.setField(_Runtime.field(out, 'center'), 'x', _Runtime.field(_Runtime.field(a, 'center'), 'x'));
-      _Runtime.setField(_Runtime.field(out, 'center'), 'y', _Runtime.field(_Runtime.field(a, 'center'), 'y'));
-      _Runtime.setField(_Runtime.field(out, 'center'), 'z', _Runtime.field(_Runtime.field(a, 'center'), 'z'));
+      (_Runtime.field(out, 'center').x = cast (_Runtime.field(a, 'center').x : Dynamic));
+      (_Runtime.field(out, 'center').y = cast (_Runtime.field(a, 'center').y : Dynamic));
+      (_Runtime.field(out, 'center').z = cast (_Runtime.field(a, 'center').z : Dynamic));
       _Runtime.setField(out, 'radius', _Runtime.field(a, 'radius'));
       return;
     }
-    acx = _Runtime.field(_Runtime.field(a, 'center'), 'x');
-    acy = _Runtime.field(_Runtime.field(a, 'center'), 'y');
-    acz = _Runtime.field(_Runtime.field(a, 'center'), 'z');
+    acx = _Runtime.field(a, 'center').x;
+    acy = _Runtime.field(a, 'center').y;
+    acz = _Runtime.field(a, 'center').z;
     ar = _Runtime.field(a, 'radius');
-    bcx = _Runtime.field(_Runtime.field(b, 'center'), 'x');
-    bcy = _Runtime.field(_Runtime.field(b, 'center'), 'y');
-    bcz = _Runtime.field(_Runtime.field(b, 'center'), 'z');
+    bcx = _Runtime.field(b, 'center').x;
+    bcy = _Runtime.field(b, 'center').y;
+    bcz = _Runtime.field(b, 'center').z;
     br = _Runtime.field(b, 'radius');
     dx = (bcx - acx);
     dy = (bcy - acy);
     dz = (bcz - acz);
     dist = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
     if (_Runtime.truthy(_Runtime.compare((dist + br), ar, '<='))) {
-      _Runtime.setField(_Runtime.field(out, 'center'), 'x', acx);
-      _Runtime.setField(_Runtime.field(out, 'center'), 'y', acy);
-      _Runtime.setField(_Runtime.field(out, 'center'), 'z', acz);
+      (_Runtime.field(out, 'center').x = cast (acx : Dynamic));
+      (_Runtime.field(out, 'center').y = cast (acy : Dynamic));
+      (_Runtime.field(out, 'center').z = cast (acz : Dynamic));
       _Runtime.setField(out, 'radius', ar);
       return;
     }
     if (_Runtime.truthy(_Runtime.compare((dist + ar), br, '<='))) {
-      _Runtime.setField(_Runtime.field(out, 'center'), 'x', bcx);
-      _Runtime.setField(_Runtime.field(out, 'center'), 'y', bcy);
-      _Runtime.setField(_Runtime.field(out, 'center'), 'z', bcz);
+      (_Runtime.field(out, 'center').x = cast (bcx : Dynamic));
+      (_Runtime.field(out, 'center').y = cast (bcy : Dynamic));
+      (_Runtime.field(out, 'center').z = cast (bcz : Dynamic));
       _Runtime.setField(out, 'radius', br);
       return;
     }
     newRadius = (((dist + ar) + br) * 0.5);
     t = _Runtime.select(!_Runtime.strictEquals(dist, 0.0), function():Dynamic return cast ((newRadius - ar) / dist), function():Dynamic return cast 0.0);
-    _Runtime.setField(_Runtime.field(out, 'center'), 'x', (acx + (dx * t)));
-    _Runtime.setField(_Runtime.field(out, 'center'), 'y', (acy + (dy * t)));
-    _Runtime.setField(_Runtime.field(out, 'center'), 'z', (acz + (dz * t)));
+    (_Runtime.field(out, 'center').x = cast ((acx + (dx * t)) : Dynamic));
+    (_Runtime.field(out, 'center').y = cast ((acy + (dy * t)) : Dynamic));
+    (_Runtime.field(out, 'center').z = cast ((acz + (dz * t)) : Dynamic));
     _Runtime.setField(out, 'radius', newRadius);
   }
 
   public static function setBoundingSphere(out:BoundingSphereLike, centerX:Float, centerY:Float, centerZ:Float, radius:Float):Void {
-    _Runtime.setField(_Runtime.field(out, 'center'), 'x', centerX);
-    _Runtime.setField(_Runtime.field(out, 'center'), 'y', centerY);
-    _Runtime.setField(_Runtime.field(out, 'center'), 'z', centerZ);
+    (_Runtime.field(out, 'center').x = cast (centerX : Dynamic));
+    (_Runtime.field(out, 'center').y = cast (centerY : Dynamic));
+    (_Runtime.field(out, 'center').z = cast (centerZ : Dynamic));
     _Runtime.setField(out, 'radius', radius);
   }
 
@@ -178,16 +178,16 @@ class BoundingSphere {
     var ex:Dynamic = cast _Runtime.UNDEFINED;
     var ey:Dynamic = cast _Runtime.UNDEFINED;
     var ez:Dynamic = cast _Runtime.UNDEFINED;
-    minX = _Runtime.field(_Runtime.field(aabb, 'min'), 'x');
-    minY = _Runtime.field(_Runtime.field(aabb, 'min'), 'y');
-    minZ = _Runtime.field(_Runtime.field(aabb, 'min'), 'z');
-    maxX = _Runtime.field(_Runtime.field(aabb, 'max'), 'x');
-    maxY = _Runtime.field(_Runtime.field(aabb, 'max'), 'y');
-    maxZ = _Runtime.field(_Runtime.field(aabb, 'max'), 'z');
+    minX = _Runtime.field(aabb, 'min').x;
+    minY = _Runtime.field(aabb, 'min').y;
+    minZ = _Runtime.field(aabb, 'min').z;
+    maxX = _Runtime.field(aabb, 'max').x;
+    maxY = _Runtime.field(aabb, 'max').y;
+    maxZ = _Runtime.field(aabb, 'max').z;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(minX, maxX, '>'), function():Dynamic return cast _Runtime.compare(minY, maxY, '>')), function():Dynamic return cast _Runtime.compare(minZ, maxZ, '>')))) {
-      _Runtime.setField(_Runtime.field(out, 'center'), 'x', 0.0);
-      _Runtime.setField(_Runtime.field(out, 'center'), 'y', 0.0);
-      _Runtime.setField(_Runtime.field(out, 'center'), 'z', 0.0);
+      (_Runtime.field(out, 'center').x = cast (0.0 : Dynamic));
+      (_Runtime.field(out, 'center').y = cast (0.0 : Dynamic));
+      (_Runtime.field(out, 'center').z = cast (0.0 : Dynamic));
       _Runtime.setField(out, 'radius', -1.0);
       return;
     }
@@ -197,9 +197,9 @@ class BoundingSphere {
     ex = ((maxX - minX) * 0.5);
     ey = ((maxY - minY) * 0.5);
     ez = ((maxZ - minZ) * 0.5);
-    _Runtime.setField(_Runtime.field(out, 'center'), 'x', cx);
-    _Runtime.setField(_Runtime.field(out, 'center'), 'y', cy);
-    _Runtime.setField(_Runtime.field(out, 'center'), 'z', cz);
+    (_Runtime.field(out, 'center').x = cast (cx : Dynamic));
+    (_Runtime.field(out, 'center').y = cast (cy : Dynamic));
+    (_Runtime.field(out, 'center').z = cast (cz : Dynamic));
     _Runtime.setField(out, 'radius', HxMath.sqrt((((ex * ex) + (ey * ey)) + (ez * ez))));
   }
 
@@ -216,11 +216,11 @@ class BoundingSphere {
     var sy:Dynamic = cast _Runtime.UNDEFINED;
     var sz:Dynamic = cast _Runtime.UNDEFINED;
     var maxScale:Dynamic = cast _Runtime.UNDEFINED;
-    cx = _Runtime.field(_Runtime.field(sphere, 'center'), 'x');
-    cy = _Runtime.field(_Runtime.field(sphere, 'center'), 'y');
-    cz = _Runtime.field(_Runtime.field(sphere, 'center'), 'z');
+    cx = _Runtime.field(sphere, 'center').x;
+    cy = _Runtime.field(sphere, 'center').y;
+    cz = _Runtime.field(sphere, 'center').z;
     radius = _Runtime.field(sphere, 'radius');
-    _m = _Runtime.field(m, 'm');
+    _m = m.m;
     tcx = ((((_Runtime.getIndex(_m, 0.0) * cx) + (_Runtime.getIndex(_m, 4.0) * cy)) + (_Runtime.getIndex(_m, 8.0) * cz)) + _Runtime.getIndex(_m, 12.0));
     tcy = ((((_Runtime.getIndex(_m, 1.0) * cx) + (_Runtime.getIndex(_m, 5.0) * cy)) + (_Runtime.getIndex(_m, 9.0) * cz)) + _Runtime.getIndex(_m, 13.0));
     tcz = ((((_Runtime.getIndex(_m, 2.0) * cx) + (_Runtime.getIndex(_m, 6.0) * cy)) + (_Runtime.getIndex(_m, 10.0) * cz)) + _Runtime.getIndex(_m, 14.0));
@@ -228,9 +228,9 @@ class BoundingSphere {
     sy = HxMath.sqrt((((_Runtime.getIndex(_m, 4.0) * _Runtime.getIndex(_m, 4.0)) + (_Runtime.getIndex(_m, 5.0) * _Runtime.getIndex(_m, 5.0))) + (_Runtime.getIndex(_m, 6.0) * _Runtime.getIndex(_m, 6.0))));
     sz = HxMath.sqrt((((_Runtime.getIndex(_m, 8.0) * _Runtime.getIndex(_m, 8.0)) + (_Runtime.getIndex(_m, 9.0) * _Runtime.getIndex(_m, 9.0))) + (_Runtime.getIndex(_m, 10.0) * _Runtime.getIndex(_m, 10.0))));
     maxScale = HxMath.max(HxMath.max(sx, sy), sz);
-    _Runtime.setField(_Runtime.field(out, 'center'), 'x', tcx);
-    _Runtime.setField(_Runtime.field(out, 'center'), 'y', tcy);
-    _Runtime.setField(_Runtime.field(out, 'center'), 'z', tcz);
+    (_Runtime.field(out, 'center').x = cast (tcx : Dynamic));
+    (_Runtime.field(out, 'center').y = cast (tcy : Dynamic));
+    (_Runtime.field(out, 'center').z = cast (tcz : Dynamic));
     _Runtime.setField(out, 'radius', _Runtime.select(_Runtime.compare(radius, 0.0, '<'), function():Dynamic return cast radius, function():Dynamic return cast (radius * maxScale)));
   }
 }

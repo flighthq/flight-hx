@@ -68,10 +68,10 @@ class GlShadowMap {
       program = _Runtime.select(skinned, function():Dynamic return cast (skinnedProgram ??= _Runtime.callValue(ensureGlSceneProgram, cast ([state, 'shadow:depth:skin', GlShadowMap.compileShadowDepthSkinnedProgram__glShadowMap] : Array<Dynamic>))), function():Dynamic return cast rigidProgram);
       if (_Runtime.truthy(!_Runtime.strictEquals(program, boundProgram))) {
         flighthq._internal.backend.WebGl2Backend.useProgram(gl, _Runtime.field(program, 'program'));
-        flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(program, 'locViewProjection'), false, _Runtime.field(matrix, 'm'));
+        flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(program, 'locViewProjection'), false, matrix.m);
         (boundProgram = cast (program : Dynamic));
       }
-      flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(program, 'locModel'), false, _Runtime.field(_Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>)), 'm'));
+      flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(program, 'locModel'), false, _Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>)).m);
       if (_Runtime.truthy(skinned)) {
         var jointMatrices:Dynamic = _Runtime.field(_Runtime.field(_Runtime.field(mesh, 'skin'), 'skeleton'), 'jointMatrices');
         flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + SKIN_PALETTE_TEXTURE_UNIT));

@@ -12,8 +12,8 @@ class Zoom {
     _Runtime.callValue(unprojectCamera2DPoint, cast ([camera, screenX, screenY, Zoom.scratchBefore__zoom] : Array<Dynamic>));
     _Runtime.setField(camera, 'zoom', zoom);
     _Runtime.callValue(unprojectCamera2DPoint, cast ([camera, screenX, screenY, Zoom.scratchAfter__zoom] : Array<Dynamic>));
-    _Runtime.setField(camera, 'x', (_Runtime.field(camera, 'x') + (_Runtime.field(Zoom.scratchBefore__zoom, 'x') - _Runtime.field(Zoom.scratchAfter__zoom, 'x'))));
-    _Runtime.setField(camera, 'y', (_Runtime.field(camera, 'y') + (_Runtime.field(Zoom.scratchBefore__zoom, 'y') - _Runtime.field(Zoom.scratchAfter__zoom, 'y'))));
+    _Runtime.setField(camera, 'x', (_Runtime.field(camera, 'x') + (Zoom.scratchBefore__zoom.x - Zoom.scratchAfter__zoom.x)));
+    _Runtime.setField(camera, 'y', (_Runtime.field(camera, 'y') + (Zoom.scratchBefore__zoom.y - Zoom.scratchAfter__zoom.y)));
   }
 
   public static final scratchAfter__zoom:Dynamic = _Runtime.callValue(createVector2, cast ([] : Array<Dynamic>));

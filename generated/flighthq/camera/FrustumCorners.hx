@@ -18,7 +18,7 @@ class FrustumCorners {
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(inverseMatrix4, cast ([FrustumCorners.__scratchInverseVP__frustumCorners, FrustumCorners.__scratchViewProjection__frustumCorners] : Array<Dynamic>))))) {
       return cast false;
     }
-    m = _Runtime.field(FrustumCorners.__scratchInverseVP__frustumCorners, 'm');
+    m = FrustumCorners.__scratchInverseVP__frustumCorners.m;
     ndcCorners = cast ([cast ([-1.0, -1.0, -1.0] : Array<Dynamic>), cast ([1.0, -1.0, -1.0] : Array<Dynamic>), cast ([-1.0, 1.0, -1.0] : Array<Dynamic>), cast ([1.0, 1.0, -1.0] : Array<Dynamic>), cast ([-1.0, -1.0, 1.0] : Array<Dynamic>), cast ([1.0, -1.0, 1.0] : Array<Dynamic>), cast ([-1.0, 1.0, 1.0] : Array<Dynamic>), cast ([1.0, 1.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>);
     results = cast ([] : Array<Dynamic>);
     {
@@ -45,9 +45,9 @@ class FrustumCorners {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, 8.0, '<'))) {
-        _Runtime.setField(_Runtime.getIndex(out, i), 'x', _Runtime.getIndex(_Runtime.getIndex(results, i), 0.0));
-        _Runtime.setField(_Runtime.getIndex(out, i), 'y', _Runtime.getIndex(_Runtime.getIndex(results, i), 1.0));
-        _Runtime.setField(_Runtime.getIndex(out, i), 'z', _Runtime.getIndex(_Runtime.getIndex(results, i), 2.0));
+        (_Runtime.getIndex(out, i).x = cast (_Runtime.getIndex(_Runtime.getIndex(results, i), 0.0) : Dynamic));
+        (_Runtime.getIndex(out, i).y = cast (_Runtime.getIndex(_Runtime.getIndex(results, i), 1.0) : Dynamic));
+        (_Runtime.getIndex(out, i).z = cast (_Runtime.getIndex(_Runtime.getIndex(results, i), 2.0) : Dynamic));
         i++;
       }
     }

@@ -9,10 +9,10 @@ import flighthq.types.Vector3.Vector3Like;
 class Basis {
   public static function getCameraForward(out:Vector3Like, camera:Camera):Void {
     var m:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.field(_Runtime.field(camera, 'view'), 'm');
-    _Runtime.setField(out, 'x', -_Runtime.getIndex(m, 2.0));
-    _Runtime.setField(out, 'y', -_Runtime.getIndex(m, 6.0));
-    _Runtime.setField(out, 'z', -_Runtime.getIndex(m, 10.0));
+    m = _Runtime.field(camera, 'view').m;
+    (out.x = cast (-_Runtime.getIndex(m, 2.0) : Dynamic));
+    (out.y = cast (-_Runtime.getIndex(m, 6.0) : Dynamic));
+    (out.z = cast (-_Runtime.getIndex(m, 10.0) : Dynamic));
   }
 
   public static function getCameraPosition(out:Vector3Like, camera:Camera):Void {
@@ -29,7 +29,7 @@ class Basis {
     var tx:Dynamic = cast _Runtime.UNDEFINED;
     var ty:Dynamic = cast _Runtime.UNDEFINED;
     var tz:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.field(_Runtime.field(camera, 'view'), 'm');
+    m = _Runtime.field(camera, 'view').m;
     m00 = _Runtime.getIndex(m, 0.0);
     m01 = _Runtime.getIndex(m, 1.0);
     m02 = _Runtime.getIndex(m, 2.0);
@@ -42,24 +42,24 @@ class Basis {
     tx = _Runtime.getIndex(m, 12.0);
     ty = _Runtime.getIndex(m, 13.0);
     tz = _Runtime.getIndex(m, 14.0);
-    _Runtime.setField(out, 'x', -(((m00 * tx) + (m01 * ty)) + (m02 * tz)));
-    _Runtime.setField(out, 'y', -(((m10 * tx) + (m11 * ty)) + (m12 * tz)));
-    _Runtime.setField(out, 'z', -(((m20 * tx) + (m21 * ty)) + (m22 * tz)));
+    (out.x = cast (-(((m00 * tx) + (m01 * ty)) + (m02 * tz)) : Dynamic));
+    (out.y = cast (-(((m10 * tx) + (m11 * ty)) + (m12 * tz)) : Dynamic));
+    (out.z = cast (-(((m20 * tx) + (m21 * ty)) + (m22 * tz)) : Dynamic));
   }
 
   public static function getCameraRight(out:Vector3Like, camera:Camera):Void {
     var m:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.field(_Runtime.field(camera, 'view'), 'm');
-    _Runtime.setField(out, 'x', _Runtime.getIndex(m, 0.0));
-    _Runtime.setField(out, 'y', _Runtime.getIndex(m, 4.0));
-    _Runtime.setField(out, 'z', _Runtime.getIndex(m, 8.0));
+    m = _Runtime.field(camera, 'view').m;
+    (out.x = cast (_Runtime.getIndex(m, 0.0) : Dynamic));
+    (out.y = cast (_Runtime.getIndex(m, 4.0) : Dynamic));
+    (out.z = cast (_Runtime.getIndex(m, 8.0) : Dynamic));
   }
 
   public static function getCameraUp(out:Vector3Like, camera:Camera):Void {
     var m:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.field(_Runtime.field(camera, 'view'), 'm');
-    _Runtime.setField(out, 'x', _Runtime.getIndex(m, 1.0));
-    _Runtime.setField(out, 'y', _Runtime.getIndex(m, 5.0));
-    _Runtime.setField(out, 'z', _Runtime.getIndex(m, 9.0));
+    m = _Runtime.field(camera, 'view').m;
+    (out.x = cast (_Runtime.getIndex(m, 1.0) : Dynamic));
+    (out.y = cast (_Runtime.getIndex(m, 5.0) : Dynamic));
+    (out.z = cast (_Runtime.getIndex(m, 9.0) : Dynamic));
   }
 }

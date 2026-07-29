@@ -44,7 +44,7 @@ class MeshGeometry {
     bounds = null;
     if (_Runtime.truthy(_Runtime.field(source, 'bounds'))) {
       var b:Dynamic = _Runtime.field(source, 'bounds');
-      (bounds = cast (_Runtime.callValue(createAabb, cast ([_Runtime.field(_Runtime.field(b, 'min'), 'x'), _Runtime.field(_Runtime.field(b, 'min'), 'y'), _Runtime.field(_Runtime.field(b, 'min'), 'z'), _Runtime.field(_Runtime.field(b, 'max'), 'x'), _Runtime.field(_Runtime.field(b, 'max'), 'y'), _Runtime.field(_Runtime.field(b, 'max'), 'z')] : Array<Dynamic>)) : Dynamic));
+      (bounds = cast (_Runtime.callValue(createAabb, cast ([_Runtime.field(b, 'min').x, _Runtime.field(b, 'min').y, _Runtime.field(b, 'min').z, _Runtime.field(b, 'max').x, _Runtime.field(b, 'max').y, _Runtime.field(b, 'max').z] : Array<Dynamic>)) : Dynamic));
     }
     return cast _Runtime.callValue(MeshGeometry.createMeshGeometryRuntime__meshGeometry, cast ([{ bounds: bounds, indices: indices, layout: _Runtime.field(source, 'layout'), subsets: subsets, topology: _Runtime.field(source, 'topology'), version: 0.0, vertices: vertices }] : Array<Dynamic>));
     return cast null;

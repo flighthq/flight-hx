@@ -16,7 +16,7 @@ class TextureAtlasRegion {
   }
 
   public static function addTextureAtlasRegionRectangle(target:TextureAtlas, rect:RectangleLike, ?pivot:Vector2Like, ?name:String):Void {
-    _Runtime.callValue(addTextureAtlasRegion, cast ([target, _Runtime.field(rect, 'x'), _Runtime.field(rect, 'y'), _Runtime.field(rect, 'width'), _Runtime.field(rect, 'height'), _Runtime.select(pivot, function():Dynamic return cast _Runtime.field(pivot, 'x'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), _Runtime.select(pivot, function():Dynamic return cast _Runtime.field(pivot, 'y'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), name] : Array<Dynamic>));
+    _Runtime.callValue(addTextureAtlasRegion, cast ([target, _Runtime.field(rect, 'x'), _Runtime.field(rect, 'y'), _Runtime.field(rect, 'width'), _Runtime.field(rect, 'height'), _Runtime.select(pivot, function():Dynamic return cast pivot.x, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), _Runtime.select(pivot, function():Dynamic return cast pivot.y, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), name] : Array<Dynamic>));
   }
 
   public static function addTextureAtlasRegionRectangleXY(target:TextureAtlas, ax:Float, ay:Float, bx:Float, by:Float, ?pivotX:Float, ?pivotY:Float, ?name:String):Void {
@@ -24,7 +24,7 @@ class TextureAtlasRegion {
   }
 
   public static function addTextureAtlasRegionVector2(target:TextureAtlas, a:Vector2Like, b:Vector2Like, ?pivot:Vector2Like, ?name:String):Void {
-    _Runtime.callValue(addTextureAtlasRegion, cast ([target, _Runtime.field(a, 'x'), _Runtime.field(a, 'y'), (_Runtime.field(b, 'x') - _Runtime.field(a, 'x')), (_Runtime.field(b, 'y') - _Runtime.field(a, 'y')), _Runtime.select(pivot, function():Dynamic return cast _Runtime.field(pivot, 'x'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), _Runtime.select(pivot, function():Dynamic return cast _Runtime.field(pivot, 'y'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), name] : Array<Dynamic>));
+    _Runtime.callValue(addTextureAtlasRegion, cast ([target, a.x, a.y, (b.x - a.x), (b.y - a.y), _Runtime.select(pivot, function():Dynamic return cast pivot.x, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), _Runtime.select(pivot, function():Dynamic return cast pivot.y, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), name] : Array<Dynamic>));
   }
 
   public static function createTextureAtlasRegion(?obj:Dynamic):flighthq.types.TextureAtlasRegion {

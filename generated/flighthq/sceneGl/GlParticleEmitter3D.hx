@@ -157,7 +157,7 @@ class GlParticleEmitter3D {
     iw = _Runtime.select(hasAtlas, function():Dynamic return cast (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'width'), function():Dynamic return cast 1.0)), function():Dynamic return cast 0.0);
     ih = _Runtime.select(hasAtlas, function():Dynamic return cast (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'height'), function():Dynamic return cast 1.0)), function():Dynamic return cast 0.0);
     worldMatrix = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([(cast (cast emitter : Dynamic) : SceneNode)] : Array<Dynamic>)) : Matrix4);
-    wm = _Runtime.field(worldMatrix, 'm');
+    wm = worldMatrix.m;
     worldSpace = _Runtime.field(data, 'worldSpace');
     instanceData = _Runtime.field(shader, 'instanceData');
     base = 0.0;
@@ -284,8 +284,8 @@ class GlParticleEmitter3D {
     shader = _Runtime.callValue(GlParticleEmitter3D.ensureParticle3DShader__glParticleEmitter3D, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
     flighthq._internal.backend.WebGl2Backend.useProgram(gl, _Runtime.field(shader, 'program'));
-    flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(shader, 'locViewProjection'), false, _Runtime.field(_Runtime.field(list, 'viewProjection'), 'm'));
-    vm = _Runtime.field(_Runtime.field(camera, 'view'), 'm');
+    flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(shader, 'locViewProjection'), false, _Runtime.field(list, 'viewProjection').m);
+    vm = _Runtime.field(camera, 'view').m;
     flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(shader, 'locCameraRight'), _Runtime.getIndex(vm, 0.0), _Runtime.getIndex(vm, 4.0), _Runtime.getIndex(vm, 8.0));
     flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(shader, 'locCameraUp'), _Runtime.getIndex(vm, 1.0), _Runtime.getIndex(vm, 5.0), _Runtime.getIndex(vm, 9.0));
     flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.DEPTH_TEST);

@@ -213,7 +213,7 @@ class _WgpuMeshPipelineValues {
     shadow = _Runtime.field(scene, 'shadow');
     s = _WgpuMeshPipelineValues._shadowSampleScratch__wgpuMeshPipeline;
     if (_Runtime.truthy(!_Runtime.strictEquals(shadow, null))) {
-      var m:Dynamic = _Runtime.field(_Runtime.field(shadow, 'matrix'), 'm');
+      var m:Dynamic = _Runtime.field(shadow, 'matrix').m;
       {
         var i:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(i, 16.0, '<'))) {
@@ -337,7 +337,7 @@ class _WgpuMeshPipelineValues {
     shadow = _Runtime.field(scene, 'shadow');
     s = _WgpuMeshPipelineValues._shadowSampleScratch__wgpuMeshPipeline;
     if (_Runtime.truthy(!_Runtime.strictEquals(shadow, null))) {
-      var m:Dynamic = _Runtime.field(_Runtime.field(shadow, 'matrix'), 'm');
+      var m:Dynamic = _Runtime.field(shadow, 'matrix').m;
       {
         var i:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(i, 16.0, '<'))) {
@@ -419,7 +419,7 @@ class _WgpuMeshPipelineValues {
       return;
     }
     _Runtime.callValue(getTextureUvMatrix, cast ([_WgpuMeshPipelineValues.scratchUvMatrix__wgpuMeshPipeline, texture] : Array<Dynamic>));
-    m = _Runtime.field(_WgpuMeshPipelineValues.scratchUvMatrix__wgpuMeshPipeline, 'm');
+    m = _WgpuMeshPipelineValues.scratchUvMatrix__wgpuMeshPipeline.m;
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, 9.0, '<'))) {
@@ -446,7 +446,7 @@ class _WgpuMeshPipelineValues {
     offset = _Runtime.field(stateRuntime, 'uniformOffset');
     floatOffset = (offset / 4.0);
     u = _Runtime.field(stateRuntime, 'uniformData');
-    world = _Runtime.field(_Runtime.field(proxy, 'worldMatrix'), 'm');
+    world = _Runtime.field(proxy, 'worldMatrix').m;
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, 16.0, '<'))) {
@@ -454,7 +454,7 @@ class _WgpuMeshPipelineValues {
         i++;
       }
     }
-    n = _Runtime.field(_Runtime.field(proxy, 'normalMatrix'), 'm');
+    n = _Runtime.field(proxy, 'normalMatrix').m;
     _Runtime.setIndex(u, (floatOffset + 16.0), _Runtime.getIndex(n, 0.0));
     _Runtime.setIndex(u, (floatOffset + 17.0), _Runtime.getIndex(n, 1.0));
     _Runtime.setIndex(u, (floatOffset + 18.0), _Runtime.getIndex(n, 2.0));
@@ -501,7 +501,7 @@ class _WgpuMeshPipelineValues {
     f = _WgpuMeshPipelineValues._frameScratch__wgpuMeshPipeline;
     aspect = _Runtime.select(_Runtime.strictEquals(_Runtime.field(_Runtime.field(camera, 'projection'), 'kind'), 'perspective'), function():Dynamic return cast _Runtime.field(_Runtime.field(camera, 'projection'), 'aspect'), function():Dynamic return cast 1.0);
     _Runtime.callValue(getCameraViewProjectionMatrix4, cast ([_WgpuMeshPipelineValues.scratchViewProjection__wgpuMeshPipeline, camera, _Runtime.select(!_Runtime.strictEquals(aspect, 0.0), function():Dynamic return cast aspect, function():Dynamic return cast 1.0)] : Array<Dynamic>));
-    vp = _Runtime.field(_WgpuMeshPipelineValues.scratchViewProjection__wgpuMeshPipeline, 'm');
+    vp = _WgpuMeshPipelineValues.scratchViewProjection__wgpuMeshPipeline.m;
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, 16.0, '<'))) {
@@ -528,7 +528,7 @@ class _WgpuMeshPipelineValues {
     _Runtime.setIndex(f, 29.0, _Runtime.getIndex(data, 9.0));
     _Runtime.setIndex(f, 30.0, _Runtime.getIndex(data, 10.0));
     _Runtime.setIndex(f, 31.0, _Runtime.field(lights, 'ambientCount'));
-    view = _Runtime.field(_Runtime.field(camera, 'view'), 'm');
+    view = _Runtime.field(camera, 'view').m;
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, 16.0, '<'))) {

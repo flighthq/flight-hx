@@ -72,7 +72,7 @@ export function typedStructSummary(audit: TypedStructAudit): string {
     '',
     `Upstream commit: \`${audit.upstreamCommit}\``,
     '',
-    'This report is analysis-only. Typed-struct expression emission is not enabled.',
+    'Direct typed-struct expression emission is enabled for every eligible schema.',
     '',
     '| Metric | Count |',
     '| --- | ---: |',
@@ -81,14 +81,16 @@ export function typedStructSummary(audit: TypedStructAudit): string {
     `| Ineligible | ${audit.summary.ineligible} |`,
     `| Declared fields | ${audit.summary.fields} |`,
     `| Bindable accesses | ${audit.summary.bindableAccesses} |`,
+    `| Directly emitted accesses | ${audit.summary.directAccesses} |`,
+    `| Reflective survivors | ${audit.summary.reflectiveSurvivors} |`,
     `| Dynamic escapes | ${audit.summary.escapes} |`,
     '',
-    '| Candidate | Purpose | Fields | Reads | Writes | Calls | Escapes | Eligible | Reasons |',
-    '| --- | --- | ---: | ---: | ---: | ---: | ---: | :---: | --- |',
+    '| Candidate | Purpose | Fields | Reads | Writes | Calls | Direct | Reflective survivors | Escapes | Eligible | Reasons |',
+    '| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | :---: | --- |',
   ];
   for (const candidate of audit.candidates) {
     lines.push(
-      `| \`${candidate.name}\` | ${candidate.purpose} | ${candidate.fields.length} | ${candidate.accesses.reads} | ${candidate.accesses.writes} | ${candidate.accesses.calls} | ${candidate.escapes.length} | ${candidate.eligible ? 'yes' : 'no'} | ${candidate.reasons.length > 0 ? candidate.reasons.map((reason) => `\`${reason}\``).join(', ') : '—'} |`,
+      `| \`${candidate.name}\` | ${candidate.purpose} | ${candidate.fields.length} | ${candidate.accesses.reads} | ${candidate.accesses.writes} | ${candidate.accesses.calls} | ${candidate.emission.directAccesses} | ${candidate.emission.reflectiveSurvivors.reduce((total, survivor) => total + survivor.accesses, 0)} | ${candidate.escapes.length} | ${candidate.eligible ? 'yes' : 'no'} | ${candidate.reasons.length > 0 ? candidate.reasons.map((reason) => `\`${reason}\``).join(', ') : '—'} |`,
     );
   }
   lines.push('');

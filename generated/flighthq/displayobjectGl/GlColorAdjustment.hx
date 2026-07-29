@@ -56,8 +56,8 @@ class GlColorAdjustment {
     _Runtime.callValue(useGlQuadBatchProgram, cast ([state, _Runtime.field(shader, 'program')] : Array<Dynamic>));
     _Runtime.callValue(setGlQuadBatchWorldAndTexture, cast ([state, _Runtime.field(shader, 'locWorldMatrix'), _Runtime.field(shader, 'locTexture')] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(shader, 'locColorMultiplier'), _Runtime.field(colorTransform, 'redMultiplier'), _Runtime.field(colorTransform, 'greenMultiplier'), _Runtime.field(colorTransform, 'blueMultiplier'), _Runtime.field(colorTransform, 'alphaMultiplier'));
-    flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(shader, 'locColorOffset'), (_Runtime.field(colorTransform, 'redOffset') / 255.0), (_Runtime.field(colorTransform, 'greenOffset') / 255.0), (_Runtime.field(colorTransform, 'blueOffset') / 255.0), (_Runtime.field(colorTransform, 'alphaOffset') / 255.0));
+    flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(shader, 'locColorMultiplier'), colorTransform.redMultiplier, colorTransform.greenMultiplier, colorTransform.blueMultiplier, colorTransform.alphaMultiplier);
+    flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(shader, 'locColorOffset'), (colorTransform.redOffset / 255.0), (colorTransform.greenOffset / 255.0), (colorTransform.blueOffset / 255.0), (colorTransform.alphaOffset / 255.0));
     _Runtime.callValue(bindGlQuadBatchBaseAttributes, cast ([state, _Runtime.field(shader, 'locCorner')] : Array<Dynamic>));
   }
 
@@ -109,7 +109,7 @@ class GlColorAdjustment {
   public static function equalsRecordedColorTransform__glColorAdjustment(a:Null<ColorTransform>, b:Null<ColorTransform>):Bool {
     if (_Runtime.truthy(_Runtime.strictEquals(a, b))) { return cast true; }
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(a, null), function():Dynamic return cast _Runtime.strictEquals(b, null)))) { return cast false; }
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(a, 'redMultiplier'), _Runtime.field(b, 'redMultiplier')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'greenMultiplier'), _Runtime.field(b, 'greenMultiplier'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'blueMultiplier'), _Runtime.field(b, 'blueMultiplier'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'alphaMultiplier'), _Runtime.field(b, 'alphaMultiplier'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'redOffset'), _Runtime.field(b, 'redOffset'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'greenOffset'), _Runtime.field(b, 'greenOffset'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'blueOffset'), _Runtime.field(b, 'blueOffset'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'alphaOffset'), _Runtime.field(b, 'alphaOffset')));
+    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(a.redMultiplier, b.redMultiplier), function():Dynamic return cast _Runtime.strictEquals(a.greenMultiplier, b.greenMultiplier)), function():Dynamic return cast _Runtime.strictEquals(a.blueMultiplier, b.blueMultiplier)), function():Dynamic return cast _Runtime.strictEquals(a.alphaMultiplier, b.alphaMultiplier)), function():Dynamic return cast _Runtime.strictEquals(a.redOffset, b.redOffset)), function():Dynamic return cast _Runtime.strictEquals(a.greenOffset, b.greenOffset)), function():Dynamic return cast _Runtime.strictEquals(a.blueOffset, b.blueOffset)), function():Dynamic return cast _Runtime.strictEquals(a.alphaOffset, b.alphaOffset));
     return cast null;
   }
 
@@ -191,14 +191,14 @@ class GlColorAdjustment {
       (data = cast (grown : Dynamic));
     }
     if (_Runtime.truthy(!_Runtime.strictEquals(colorTransform, null))) {
-      _Runtime.setIndex(data, offset, _Runtime.field(colorTransform, 'redMultiplier'));
-      _Runtime.setIndex(data, (offset + 1.0), _Runtime.field(colorTransform, 'greenMultiplier'));
-      _Runtime.setIndex(data, (offset + 2.0), _Runtime.field(colorTransform, 'blueMultiplier'));
-      _Runtime.setIndex(data, (offset + 3.0), _Runtime.field(colorTransform, 'alphaMultiplier'));
-      _Runtime.setIndex(data, (offset + 4.0), (_Runtime.field(colorTransform, 'redOffset') / 255.0));
-      _Runtime.setIndex(data, (offset + 5.0), (_Runtime.field(colorTransform, 'greenOffset') / 255.0));
-      _Runtime.setIndex(data, (offset + 6.0), (_Runtime.field(colorTransform, 'blueOffset') / 255.0));
-      _Runtime.setIndex(data, (offset + 7.0), (_Runtime.field(colorTransform, 'alphaOffset') / 255.0));
+      _Runtime.setIndex(data, offset, colorTransform.redMultiplier);
+      _Runtime.setIndex(data, (offset + 1.0), colorTransform.greenMultiplier);
+      _Runtime.setIndex(data, (offset + 2.0), colorTransform.blueMultiplier);
+      _Runtime.setIndex(data, (offset + 3.0), colorTransform.alphaMultiplier);
+      _Runtime.setIndex(data, (offset + 4.0), (colorTransform.redOffset / 255.0));
+      _Runtime.setIndex(data, (offset + 5.0), (colorTransform.greenOffset / 255.0));
+      _Runtime.setIndex(data, (offset + 6.0), (colorTransform.blueOffset / 255.0));
+      _Runtime.setIndex(data, (offset + 7.0), (colorTransform.alphaOffset / 255.0));
     } else {
       _Runtime.setIndex(data, offset, 1.0);
       _Runtime.setIndex(data, (offset + 1.0), 1.0);
@@ -227,8 +227,8 @@ class GlColorAdjustment {
     _Runtime.callValue(drawGlShapeMeshBatch, cast ([state, renderProxy, meshes, binding, function(bound:Dynamic) {
       var gl:Dynamic = cast _Runtime.UNDEFINED;
       gl = _Runtime.field(bound, 'gl');
-      flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(shader, 'colorMultiplierLocation'), _Runtime.field(colorTransform, 'redMultiplier'), _Runtime.field(colorTransform, 'greenMultiplier'), _Runtime.field(colorTransform, 'blueMultiplier'), _Runtime.field(colorTransform, 'alphaMultiplier'));
-      flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(shader, 'colorOffsetLocation'), (_Runtime.field(colorTransform, 'redOffset') / 255.0), (_Runtime.field(colorTransform, 'greenOffset') / 255.0), (_Runtime.field(colorTransform, 'blueOffset') / 255.0), (_Runtime.field(colorTransform, 'alphaOffset') / 255.0));
+      flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(shader, 'colorMultiplierLocation'), colorTransform.redMultiplier, colorTransform.greenMultiplier, colorTransform.blueMultiplier, colorTransform.alphaMultiplier);
+      flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(shader, 'colorOffsetLocation'), (colorTransform.redOffset / 255.0), (colorTransform.greenOffset / 255.0), (colorTransform.blueOffset / 255.0), (colorTransform.alphaOffset / 255.0));
     }] : Array<Dynamic>));
   }
 

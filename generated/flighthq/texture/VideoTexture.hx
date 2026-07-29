@@ -73,13 +73,13 @@ class VideoTexture {
     var sinR:Dynamic = cast _Runtime.UNDEFINED;
     var m:Dynamic = cast _Runtime.UNDEFINED;
     r = _Runtime.field(videoTexture, 'uvRotation');
-    sx = _Runtime.field(_Runtime.field(videoTexture, 'uvScale'), 'x');
-    sy = _Runtime.field(_Runtime.field(videoTexture, 'uvScale'), 'y');
-    tx = _Runtime.field(_Runtime.field(videoTexture, 'uvOffset'), 'x');
-    ty = _Runtime.field(_Runtime.field(videoTexture, 'uvOffset'), 'y');
+    sx = _Runtime.field(videoTexture, 'uvScale').x;
+    sy = _Runtime.field(videoTexture, 'uvScale').y;
+    tx = _Runtime.field(videoTexture, 'uvOffset').x;
+    ty = _Runtime.field(videoTexture, 'uvOffset').y;
     cosR = HxMath.cos(r);
     sinR = HxMath.sin(r);
-    m = _Runtime.field(out, 'm');
+    m = out.m;
     _Runtime.setIndex(m, 0.0, (sx * cosR));
     _Runtime.setIndex(m, 1.0, (sx * sinR));
     _Runtime.setIndex(m, 2.0, 0.0);

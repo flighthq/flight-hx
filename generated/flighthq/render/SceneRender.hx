@@ -226,9 +226,9 @@ class SceneRender {
 
   public static function packDirectionalLight__sceneRender(data:flighthq._internal._Float32Array, directional:DirectionalLight):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.setIndex(data, (SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET + 0.0), _Runtime.field(_Runtime.field(directional, 'direction'), 'x'));
-    _Runtime.setIndex(data, (SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET + 1.0), _Runtime.field(_Runtime.field(directional, 'direction'), 'y'));
-    _Runtime.setIndex(data, (SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET + 2.0), _Runtime.field(_Runtime.field(directional, 'direction'), 'z'));
+    _Runtime.setIndex(data, (SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET + 0.0), _Runtime.field(directional, 'direction').x);
+    _Runtime.setIndex(data, (SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET + 1.0), _Runtime.field(directional, 'direction').y);
+    _Runtime.setIndex(data, (SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET + 2.0), _Runtime.field(directional, 'direction').z);
     _Runtime.callValue(unpackColorToLinear, cast ([SceneRender.scratchColor__sceneRender, _Runtime.field(directional, 'color')] : Array<Dynamic>));
     intensity = _Runtime.field(directional, 'intensity');
     _Runtime.setIndex(data, (SCENE_LIGHT_DIRECTIONAL_RADIANCE_OFFSET + 0.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 0.0) * intensity));
@@ -256,9 +256,9 @@ class SceneRender {
     var range:Dynamic = cast _Runtime.UNDEFINED;
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     range = _Runtime.field(point, 'range');
-    _Runtime.setIndex(data, (offset + 0.0), _Runtime.field(_Runtime.field(point, 'position'), 'x'));
-    _Runtime.setIndex(data, (offset + 1.0), _Runtime.field(_Runtime.field(point, 'position'), 'y'));
-    _Runtime.setIndex(data, (offset + 2.0), _Runtime.field(_Runtime.field(point, 'position'), 'z'));
+    _Runtime.setIndex(data, (offset + 0.0), _Runtime.field(point, 'position').x);
+    _Runtime.setIndex(data, (offset + 1.0), _Runtime.field(point, 'position').y);
+    _Runtime.setIndex(data, (offset + 2.0), _Runtime.field(point, 'position').z);
     _Runtime.setIndex(data, (offset + 3.0), range);
     _Runtime.callValue(unpackColorToLinear, cast ([SceneRender.scratchColor__sceneRender, _Runtime.field(point, 'color')] : Array<Dynamic>));
     intensity = _Runtime.field(point, 'intensity');
@@ -272,9 +272,9 @@ class SceneRender {
     var range:Dynamic = cast _Runtime.UNDEFINED;
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     range = _Runtime.field(spot, 'range');
-    _Runtime.setIndex(data, (offset + 0.0), _Runtime.field(_Runtime.field(spot, 'position'), 'x'));
-    _Runtime.setIndex(data, (offset + 1.0), _Runtime.field(_Runtime.field(spot, 'position'), 'y'));
-    _Runtime.setIndex(data, (offset + 2.0), _Runtime.field(_Runtime.field(spot, 'position'), 'z'));
+    _Runtime.setIndex(data, (offset + 0.0), _Runtime.field(spot, 'position').x);
+    _Runtime.setIndex(data, (offset + 1.0), _Runtime.field(spot, 'position').y);
+    _Runtime.setIndex(data, (offset + 2.0), _Runtime.field(spot, 'position').z);
     _Runtime.setIndex(data, (offset + 3.0), range);
     _Runtime.callValue(unpackColorToLinear, cast ([SceneRender.scratchColor__sceneRender, _Runtime.field(spot, 'color')] : Array<Dynamic>));
     intensity = _Runtime.field(spot, 'intensity');
@@ -282,9 +282,9 @@ class SceneRender {
     _Runtime.setIndex(data, (offset + 5.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 1.0) * intensity));
     _Runtime.setIndex(data, (offset + 6.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 2.0) * intensity));
     _Runtime.setIndex(data, (offset + 7.0), _Runtime.select(_Runtime.compare(range, 0.0, '>'), function():Dynamic return cast (1.0 / (range * range)), function():Dynamic return cast 0.0));
-    _Runtime.setIndex(data, (offset + 8.0), _Runtime.field(_Runtime.field(spot, 'direction'), 'x'));
-    _Runtime.setIndex(data, (offset + 9.0), _Runtime.field(_Runtime.field(spot, 'direction'), 'y'));
-    _Runtime.setIndex(data, (offset + 10.0), _Runtime.field(_Runtime.field(spot, 'direction'), 'z'));
+    _Runtime.setIndex(data, (offset + 8.0), _Runtime.field(spot, 'direction').x);
+    _Runtime.setIndex(data, (offset + 9.0), _Runtime.field(spot, 'direction').y);
+    _Runtime.setIndex(data, (offset + 10.0), _Runtime.field(spot, 'direction').z);
     _Runtime.setIndex(data, (offset + 12.0), _Runtime.field(spot, 'innerConeCos'));
     _Runtime.setIndex(data, (offset + 13.0), _Runtime.field(spot, 'outerConeCos'));
   }

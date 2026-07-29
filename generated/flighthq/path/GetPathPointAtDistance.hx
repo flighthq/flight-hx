@@ -43,8 +43,8 @@ class GetPathPointAtDistance {
         var contour:Dynamic = _Runtime.getIndex(contours, ci);
         if (_Runtime.truthy(_Runtime.compare(_Runtime.field(contour, 'length'), 2.0, '<'))) { ci++; continue; }
         if (_Runtime.truthy(_Runtime.compare(remaining, 0.0, '<='))) {
-          _Runtime.setField(out, 'x', _Runtime.getIndex(contour, 0.0));
-          _Runtime.setField(out, 'y', _Runtime.getIndex(contour, 1.0));
+          (out.x = cast (_Runtime.getIndex(contour, 0.0) : Dynamic));
+          (out.y = cast (_Runtime.getIndex(contour, 1.0) : Dynamic));
           return cast true;
         }
         {
@@ -55,8 +55,8 @@ class GetPathPointAtDistance {
             var segLen:Dynamic = HxMath.sqrt(((dx * dx) + (dy * dy)));
             if (_Runtime.truthy(_Runtime.compare(remaining, segLen, '<='))) {
               var t:Dynamic = _Runtime.select(_Runtime.compare(segLen, 0.0, '>'), function():Dynamic return cast (remaining / segLen), function():Dynamic return cast 0.0);
-              _Runtime.setField(out, 'x', (_Runtime.getIndex(contour, (i - 2.0)) + (t * dx)));
-              _Runtime.setField(out, 'y', (_Runtime.getIndex(contour, (i - 1.0)) + (t * dy)));
+              (out.x = cast ((_Runtime.getIndex(contour, (i - 2.0)) + (t * dx)) : Dynamic));
+              (out.y = cast ((_Runtime.getIndex(contour, (i - 1.0)) + (t * dy)) : Dynamic));
               return cast true;
             }
             (remaining = cast ((remaining - segLen) : Dynamic));
@@ -67,8 +67,8 @@ class GetPathPointAtDistance {
       }
     }
     last = _Runtime.getIndex(contours, (_Runtime.field(contours, 'length') - 1.0));
-    _Runtime.setField(out, 'x', _Runtime.getIndex(last, (_Runtime.field(last, 'length') - 2.0)));
-    _Runtime.setField(out, 'y', _Runtime.getIndex(last, (_Runtime.field(last, 'length') - 1.0)));
+    (out.x = cast (_Runtime.getIndex(last, (_Runtime.field(last, 'length') - 2.0)) : Dynamic));
+    (out.y = cast (_Runtime.getIndex(last, (_Runtime.field(last, 'length') - 1.0)) : Dynamic));
     return cast true;
     return cast null;
   }
@@ -78,8 +78,8 @@ class GetPathPointAtDistance {
     var lastTx:Dynamic = cast _Runtime.UNDEFINED;
     var lastTy:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(contours, 'length'), 0.0))) {
-      _Runtime.setField(out, 'x', 1.0);
-      _Runtime.setField(out, 'y', 0.0);
+      (out.x = cast (1.0 : Dynamic));
+      (out.y = cast (0.0 : Dynamic));
       return cast false;
     }
     remaining = distance;
@@ -102,8 +102,8 @@ class GetPathPointAtDistance {
               (lastTy = cast ((dy * invLen) : Dynamic));
             }
             if (_Runtime.truthy(_Runtime.compare(remaining, segLen, '<='))) {
-              _Runtime.setField(out, 'x', lastTx);
-              _Runtime.setField(out, 'y', lastTy);
+              (out.x = cast (lastTx : Dynamic));
+              (out.y = cast (lastTy : Dynamic));
               return cast true;
             }
             (remaining = cast ((remaining - segLen) : Dynamic));
@@ -113,8 +113,8 @@ class GetPathPointAtDistance {
         ci++;
       }
     }
-    _Runtime.setField(out, 'x', lastTx);
-    _Runtime.setField(out, 'y', lastTy);
+    (out.x = cast (lastTx : Dynamic));
+    (out.y = cast (lastTy : Dynamic));
     return cast true;
     return cast null;
   }

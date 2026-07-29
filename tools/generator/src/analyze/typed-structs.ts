@@ -56,6 +56,13 @@ export interface TypedStructSchemaAudit {
   declarationFingerprint: string;
   declarationKind: 'interface' | 'type';
   eligible: boolean;
+  emission: {
+    directAccesses: number;
+    reflectiveSurvivors: Array<{
+      accesses: number;
+      reason: string;
+    }>;
+  };
   escapes: TypedStructEscape[];
   fields: TypedStructField[];
   id: string;
@@ -77,14 +84,16 @@ export interface TypedStructSchemaAudit {
 
 export interface TypedStructAudit {
   candidates: TypedStructSchemaAudit[];
-  schemaVersion: 1;
+  schemaVersion: 2;
   summary: {
     bindableAccesses: number;
     candidates: number;
+    directAccesses: number;
     eligible: number;
     escapes: number;
     fields: number;
     ineligible: number;
+    reflectiveSurvivors: number;
   };
   upstreamCommit: string;
 }
@@ -205,6 +214,9 @@ export function createTypedStructRegistry(
       addReason(schema.audit, 'instanceof-use');
     }
     schema.audit.eligible = schema.audit.reasons.length === 0;
+    schema.audit.emission.directAccesses = schema.audit.eligible
+      ? sum(Object.values(schema.audit.accesses), (count) => count)
+      : 0;
     schema.audit.escapes.sort(compareEscapes);
     schema.audit.memberEscapes.sort(
       (left, right) =>
@@ -216,16 +228,20 @@ export function createTypedStructRegistry(
 
   const report: TypedStructAudit = {
     candidates: schemas.map((schema) => schema.audit),
-    schemaVersion: 1,
+    schemaVersion: 2,
     summary: {
       bindableAccesses: sum(schemas, (schema) =>
         schema.audit.eligible ? sum(Object.values(schema.audit.accesses), (count) => count) : 0,
       ),
       candidates: schemas.length,
+      directAccesses: sum(schemas, (schema) => schema.audit.emission.directAccesses),
       eligible: schemas.filter((schema) => schema.audit.eligible).length,
       escapes: sum(schemas, (schema) => schema.audit.escapes.length),
       fields: sum(schemas, (schema) => schema.audit.fields.length),
       ineligible: schemas.filter((schema) => !schema.audit.eligible).length,
+      reflectiveSurvivors: sum(schemas, (schema) =>
+        sum(schema.audit.emission.reflectiveSurvivors, (survivor) => survivor.accesses),
+      ),
     },
     upstreamCommit,
   };
@@ -328,6 +344,7 @@ function analyzeCandidate(
     declarationFingerprint: fingerprint(declaration, source),
     declarationKind: ts.isInterfaceDeclaration(declaration) ? 'interface' : 'type',
     eligible: false,
+    emission: { directAccesses: 0, reflectiveSurvivors: [] },
     escapes: [],
     fields,
     id: `${candidate.packageName}:${candidate.source}#${candidate.name}`,

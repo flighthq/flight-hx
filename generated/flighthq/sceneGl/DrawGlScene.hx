@@ -73,10 +73,10 @@ class DrawGlScene {
         var mesh:Dynamic = _Runtime.getIndex(_Runtime.field(list, 'visibleMeshes'), m);
         var subsets:Dynamic = _Runtime.field(_Runtime.field(mesh, 'geometry'), 'subsets');
         var worldMatrix:Dynamic = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>)) : Matrix4);
-        var wx:Dynamic = _Runtime.getIndex(_Runtime.field(worldMatrix, 'm'), 12.0);
-        var wy:Dynamic = _Runtime.getIndex(_Runtime.field(worldMatrix, 'm'), 13.0);
-        var wz:Dynamic = _Runtime.getIndex(_Runtime.field(worldMatrix, 'm'), 14.0);
-        var vp:Dynamic = _Runtime.field(viewProjection, 'm');
+        var wx:Dynamic = _Runtime.getIndex(worldMatrix.m, 12.0);
+        var wy:Dynamic = _Runtime.getIndex(worldMatrix.m, 13.0);
+        var wz:Dynamic = _Runtime.getIndex(worldMatrix.m, 14.0);
+        var vp:Dynamic = viewProjection.m;
         var clipW:Dynamic = ((((_Runtime.getIndex(vp, 3.0) * wx) + (_Runtime.getIndex(vp, 7.0) * wy)) + (_Runtime.getIndex(vp, 11.0) * wz)) + _Runtime.getIndex(vp, 15.0));
         var objectAlpha:Dynamic = _Runtime.callValue(getSceneNodeWorldAlpha, cast ([mesh] : Array<Dynamic>));
         {

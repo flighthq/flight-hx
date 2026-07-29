@@ -263,12 +263,12 @@ class QuadBatch {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, instanceCount, '>=')))) { return cast false; }
     if (_Runtime.truthy(_Runtime.strictEquals(transformType, 'vector2'))) {
       var o:Dynamic = (index * QuadBatch.QUAD_VECTOR2_STRIDE__quadBatch);
-      _Runtime.setField(out, 'x', _Runtime.getIndex(transforms, o));
-      _Runtime.setField(out, 'y', _Runtime.getIndex(transforms, (o + 1.0)));
+      (out.x = cast (_Runtime.getIndex(transforms, o) : Dynamic));
+      (out.y = cast (_Runtime.getIndex(transforms, (o + 1.0)) : Dynamic));
     } else {
       var o:Dynamic = (index * QuadBatch.QUAD_MATRIX3X2_STRIDE__quadBatch);
-      _Runtime.setField(out, 'x', _Runtime.getIndex(transforms, (o + 4.0)));
-      _Runtime.setField(out, 'y', _Runtime.getIndex(transforms, (o + 5.0)));
+      (out.x = cast (_Runtime.getIndex(transforms, (o + 4.0)) : Dynamic));
+      (out.y = cast (_Runtime.getIndex(transforms, (o + 5.0)) : Dynamic));
     }
     return cast true;
     return cast null;
@@ -290,12 +290,12 @@ class QuadBatch {
   }
 
   public static function hitTestQuadBatchPoint(source:flighthq.types.QuadBatch, point:Vector2Like):Float {
-    return cast _Runtime.callValue(hitTestQuadBatchPointXY, cast ([source, _Runtime.field(point, 'x'), _Runtime.field(point, 'y')] : Array<Dynamic>));
+    return cast _Runtime.callValue(hitTestQuadBatchPointXY, cast ([source, point.x, point.y] : Array<Dynamic>));
     return cast null;
   }
 
   public static function hitTestQuadBatchPointExact(source:flighthq.types.QuadBatch, point:Vector2Like):Float {
-    return cast _Runtime.callValue(hitTestQuadBatchPointExactXY, cast ([source, _Runtime.field(point, 'x'), _Runtime.field(point, 'y')] : Array<Dynamic>));
+    return cast _Runtime.callValue(hitTestQuadBatchPointExactXY, cast ([source, point.x, point.y] : Array<Dynamic>));
     return cast null;
   }
 

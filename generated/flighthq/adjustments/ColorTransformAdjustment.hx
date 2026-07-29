@@ -9,7 +9,7 @@ import flighthq.types.ColorTransformAdjustment;
 class ColorTransformAdjustment {
   public static function createColorTransformAdjustment(colorTransform:ColorTransform):flighthq.types.ColorTransformAdjustment {
     var colorMatrix:Dynamic = cast _Runtime.UNDEFINED;
-    colorMatrix = cast ([_Runtime.field(colorTransform, 'redMultiplier'), 0.0, 0.0, 0.0, _Runtime.field(colorTransform, 'redOffset'), 0.0, _Runtime.field(colorTransform, 'greenMultiplier'), 0.0, 0.0, _Runtime.field(colorTransform, 'greenOffset'), 0.0, 0.0, _Runtime.field(colorTransform, 'blueMultiplier'), 0.0, _Runtime.field(colorTransform, 'blueOffset'), 0.0, 0.0, 0.0, _Runtime.field(colorTransform, 'alphaMultiplier'), _Runtime.field(colorTransform, 'alphaOffset')] : Array<Dynamic>);
+    colorMatrix = cast ([colorTransform.redMultiplier, 0.0, 0.0, 0.0, colorTransform.redOffset, 0.0, colorTransform.greenMultiplier, 0.0, 0.0, colorTransform.greenOffset, 0.0, 0.0, colorTransform.blueMultiplier, 0.0, colorTransform.blueOffset, 0.0, 0.0, 0.0, colorTransform.alphaMultiplier, colorTransform.alphaOffset] : Array<Dynamic>);
     return cast { kind: 'ColorTransformAdjustment', colorTransform: (cast colorTransform : ColorTransform), colorMatrix: colorMatrix };
     return cast null;
   }

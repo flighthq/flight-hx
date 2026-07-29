@@ -146,6 +146,7 @@ export function generateCoreModules(
       });
     }
   }
+  verifyTypedStructEmissionCoverage(modules, structRegistry);
   const shadowedTypeNames = markShadowedSecondaryTypes(modules);
   populateSourceImports(
     modules,
@@ -259,6 +260,43 @@ export function generateCoreModules(
   writeOrCheck(path.join(workspaceDirectory, 'reports', 'core.json'), stableJson(report), check);
   writeOrCheck(path.join(workspaceDirectory, 'reports', 'patches.json'), stableJson(patchAudit), check);
   return report;
+}
+
+function verifyTypedStructEmissionCoverage(modules: IrModule[], registry: TypedStructRegistry): void {
+  const counts = new Map<string, number>();
+  const visit = (value: unknown): void => {
+    if (Array.isArray(value)) {
+      value.forEach(visit);
+      return;
+    }
+    if (!value || typeof value !== 'object') return;
+    const record = value as Record<string, unknown>;
+    if (record.kind === 'property' && record.typedStructBinding) {
+      const binding = record.typedStructBinding as { schemaId: string };
+      counts.set(binding.schemaId, (counts.get(binding.schemaId) ?? 0) + 1);
+    }
+    for (const [key, child] of Object.entries(record)) {
+      if (key !== 'typedStructBinding') visit(child);
+    }
+  };
+  visit(modules);
+
+  const mismatches = registry.report.candidates.flatMap((candidate) => {
+    const actual = counts.get(candidate.id) ?? 0;
+    const expected = candidate.emission.directAccesses;
+    return actual === expected ? [] : [`${candidate.name}: expected ${String(expected)}, emitted ${String(actual)}`];
+  });
+  if (mismatches.length > 0) {
+    throw new Error(
+      `Typed-struct direct-emission coverage drift:\n${mismatches.map((item) => `- ${item}`).join('\n')}`,
+    );
+  }
+  const total = [...counts.values()].reduce((sum, count) => sum + count, 0);
+  if (total !== registry.report.summary.directAccesses) {
+    throw new Error(
+      `Typed-struct direct-emission total drift: expected ${String(registry.report.summary.directAccesses)}, emitted ${String(total)}`,
+    );
+  }
 }
 
 function buildSourceModules(packageName: string, source: LoweredSource, workspaceDirectory: string): IrModule[] {

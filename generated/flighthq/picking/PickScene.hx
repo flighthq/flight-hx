@@ -148,8 +148,8 @@ class PickScene {
     _Runtime.callValue(ensureNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>));
     worldMatrix = _Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(inverseMatrix4, cast ([PickScene._inverseWorld__pickScene, worldMatrix] : Array<Dynamic>))))) { return; }
-    _Runtime.callValue(PickScene.transformPointByMatrix4__pickScene, cast ([_Runtime.field(PickScene._localRay__pickScene, 'origin'), _Runtime.field(ray, 'origin'), _Runtime.field(PickScene._inverseWorld__pickScene, 'm')] : Array<Dynamic>));
-    _Runtime.callValue(PickScene.transformDirectionByMatrix4__pickScene, cast ([_Runtime.field(PickScene._localRay__pickScene, 'direction'), _Runtime.field(ray, 'direction'), _Runtime.field(PickScene._inverseWorld__pickScene, 'm')] : Array<Dynamic>));
+    _Runtime.callValue(PickScene.transformPointByMatrix4__pickScene, cast ([_Runtime.field(PickScene._localRay__pickScene, 'origin'), _Runtime.field(ray, 'origin'), PickScene._inverseWorld__pickScene.m] : Array<Dynamic>));
+    _Runtime.callValue(PickScene.transformDirectionByMatrix4__pickScene, cast ([_Runtime.field(PickScene._localRay__pickScene, 'direction'), _Runtime.field(ray, 'direction'), PickScene._inverseWorld__pickScene.m] : Array<Dynamic>));
     geometry = _Runtime.field(mesh, 'geometry');
     indices = _Runtime.field(geometry, 'indices');
     triangleCount = _Runtime.callValue(getMeshGeometryTriangleCount, cast ([geometry] : Array<Dynamic>));
@@ -165,24 +165,24 @@ class PickScene {
         _Runtime.callValue(getMeshGeometryVertexPosition, cast ([PickScene._c__pickScene, geometry, i2] : Array<Dynamic>));
         var t:Dynamic = _Runtime.callValue(intersectRay3DTriangle, cast ([PickScene._localRay__pickScene, PickScene._a__pickScene, PickScene._b__pickScene, PickScene._c__pickScene] : Array<Dynamic>));
         if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(t, 0.0, '<'), function():Dynamic return cast _Runtime.compare(t, maxDistance, '>')))) { triangle++; continue; }
-        _Runtime.callValue(PickScene.transformPointByMatrix4__pickScene, cast ([PickScene._wa__pickScene, PickScene._a__pickScene, _Runtime.field(worldMatrix, 'm')] : Array<Dynamic>));
-        _Runtime.callValue(PickScene.transformPointByMatrix4__pickScene, cast ([PickScene._wb__pickScene, PickScene._b__pickScene, _Runtime.field(worldMatrix, 'm')] : Array<Dynamic>));
-        _Runtime.callValue(PickScene.transformPointByMatrix4__pickScene, cast ([PickScene._wc__pickScene, PickScene._c__pickScene, _Runtime.field(worldMatrix, 'm')] : Array<Dynamic>));
+        _Runtime.callValue(PickScene.transformPointByMatrix4__pickScene, cast ([PickScene._wa__pickScene, PickScene._a__pickScene, worldMatrix.m] : Array<Dynamic>));
+        _Runtime.callValue(PickScene.transformPointByMatrix4__pickScene, cast ([PickScene._wb__pickScene, PickScene._b__pickScene, worldMatrix.m] : Array<Dynamic>));
+        _Runtime.callValue(PickScene.transformPointByMatrix4__pickScene, cast ([PickScene._wc__pickScene, PickScene._c__pickScene, worldMatrix.m] : Array<Dynamic>));
         if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(PickScene.writeFaceNormal__pickScene, cast ([PickScene._worldNormal__pickScene, PickScene._wa__pickScene, PickScene._wb__pickScene, PickScene._wc__pickScene] : Array<Dynamic>))))) { triangle++; continue; }
-        if (_Runtime.truthy(_Runtime.andValue(cullBackfaces, function():Dynamic return cast _Runtime.compare((((_Runtime.field(_Runtime.field(ray, 'direction'), 'x') * _Runtime.field(PickScene._worldNormal__pickScene, 'x')) + (_Runtime.field(_Runtime.field(ray, 'direction'), 'y') * _Runtime.field(PickScene._worldNormal__pickScene, 'y'))) + (_Runtime.field(_Runtime.field(ray, 'direction'), 'z') * _Runtime.field(PickScene._worldNormal__pickScene, 'z'))), 0.0, '>')))) {
+        if (_Runtime.truthy(_Runtime.andValue(cullBackfaces, function():Dynamic return cast _Runtime.compare((((_Runtime.field(ray, 'direction').x * PickScene._worldNormal__pickScene.x) + (_Runtime.field(ray, 'direction').y * PickScene._worldNormal__pickScene.y)) + (_Runtime.field(ray, 'direction').z * PickScene._worldNormal__pickScene.z)), 0.0, '>')))) {
           triangle++;
           continue;
         }
         _Runtime.setField(PickScene._hit__pickScene, 'node', mesh);
         _Runtime.setField(PickScene._hit__pickScene, 'distance', t);
         _Runtime.setField(PickScene._hit__pickScene, 'triangleIndex', triangle);
-        _Runtime.setField(PickScene._hit__pickScene, 'normalX', _Runtime.field(PickScene._worldNormal__pickScene, 'x'));
-        _Runtime.setField(PickScene._hit__pickScene, 'normalY', _Runtime.field(PickScene._worldNormal__pickScene, 'y'));
-        _Runtime.setField(PickScene._hit__pickScene, 'normalZ', _Runtime.field(PickScene._worldNormal__pickScene, 'z'));
+        _Runtime.setField(PickScene._hit__pickScene, 'normalX', PickScene._worldNormal__pickScene.x);
+        _Runtime.setField(PickScene._hit__pickScene, 'normalY', PickScene._worldNormal__pickScene.y);
+        _Runtime.setField(PickScene._hit__pickScene, 'normalZ', PickScene._worldNormal__pickScene.z);
         _Runtime.callValue(getRay3DPointAt, cast ([PickScene._worldPoint__pickScene, ray, t] : Array<Dynamic>));
-        _Runtime.setField(PickScene._hit__pickScene, 'pointX', _Runtime.field(PickScene._worldPoint__pickScene, 'x'));
-        _Runtime.setField(PickScene._hit__pickScene, 'pointY', _Runtime.field(PickScene._worldPoint__pickScene, 'y'));
-        _Runtime.setField(PickScene._hit__pickScene, 'pointZ', _Runtime.field(PickScene._worldPoint__pickScene, 'z'));
+        _Runtime.setField(PickScene._hit__pickScene, 'pointX', PickScene._worldPoint__pickScene.x);
+        _Runtime.setField(PickScene._hit__pickScene, 'pointY', PickScene._worldPoint__pickScene.y);
+        _Runtime.setField(PickScene._hit__pickScene, 'pointZ', PickScene._worldPoint__pickScene.z);
         _Runtime.callValue(getRay3DPointAt, cast ([PickScene._localPoint__pickScene, PickScene._localRay__pickScene, t] : Array<Dynamic>));
         _Runtime.callValue(PickScene.writeBarycentric__pickScene, cast ([PickScene._hit__pickScene, PickScene._localPoint__pickScene, PickScene._a__pickScene, PickScene._b__pickScene, PickScene._c__pickScene] : Array<Dynamic>));
         _Runtime.callValue(onHit, cast ([PickScene._hit__pickScene] : Array<Dynamic>));
@@ -203,21 +203,21 @@ class PickScene {
     var nz:Dynamic = cast _Runtime.UNDEFINED;
     var lengthSquared:Dynamic = cast _Runtime.UNDEFINED;
     var inv:Dynamic = cast _Runtime.UNDEFINED;
-    e1x = (_Runtime.field(b, 'x') - _Runtime.field(a, 'x'));
-    e1y = (_Runtime.field(b, 'y') - _Runtime.field(a, 'y'));
-    e1z = (_Runtime.field(b, 'z') - _Runtime.field(a, 'z'));
-    e2x = (_Runtime.field(c, 'x') - _Runtime.field(a, 'x'));
-    e2y = (_Runtime.field(c, 'y') - _Runtime.field(a, 'y'));
-    e2z = (_Runtime.field(c, 'z') - _Runtime.field(a, 'z'));
+    e1x = (b.x - a.x);
+    e1y = (b.y - a.y);
+    e1z = (b.z - a.z);
+    e2x = (c.x - a.x);
+    e2y = (c.y - a.y);
+    e2z = (c.z - a.z);
     nx = ((e1y * e2z) - (e1z * e2y));
     ny = ((e1z * e2x) - (e1x * e2z));
     nz = ((e1x * e2y) - (e1y * e2x));
     lengthSquared = (((nx * nx) + (ny * ny)) + (nz * nz));
     if (_Runtime.truthy(_Runtime.strictEquals(lengthSquared, 0.0))) { return cast false; }
     inv = (1.0 / HxMath.sqrt(lengthSquared));
-    _Runtime.setField(out, 'x', (nx * inv));
-    _Runtime.setField(out, 'y', (ny * inv));
-    _Runtime.setField(out, 'z', (nz * inv));
+    (out.x = cast ((nx * inv) : Dynamic));
+    (out.y = cast ((ny * inv) : Dynamic));
+    (out.z = cast ((nz * inv) : Dynamic));
     return cast true;
     return cast null;
   }
@@ -241,15 +241,15 @@ class PickScene {
     var inv:Dynamic = cast _Runtime.UNDEFINED;
     var v:Dynamic = cast _Runtime.UNDEFINED;
     var w:Dynamic = cast _Runtime.UNDEFINED;
-    v0x = (_Runtime.field(b, 'x') - _Runtime.field(a, 'x'));
-    v0y = (_Runtime.field(b, 'y') - _Runtime.field(a, 'y'));
-    v0z = (_Runtime.field(b, 'z') - _Runtime.field(a, 'z'));
-    v1x = (_Runtime.field(c, 'x') - _Runtime.field(a, 'x'));
-    v1y = (_Runtime.field(c, 'y') - _Runtime.field(a, 'y'));
-    v1z = (_Runtime.field(c, 'z') - _Runtime.field(a, 'z'));
-    v2x = (_Runtime.field(p, 'x') - _Runtime.field(a, 'x'));
-    v2y = (_Runtime.field(p, 'y') - _Runtime.field(a, 'y'));
-    v2z = (_Runtime.field(p, 'z') - _Runtime.field(a, 'z'));
+    v0x = (b.x - a.x);
+    v0y = (b.y - a.y);
+    v0z = (b.z - a.z);
+    v1x = (c.x - a.x);
+    v1y = (c.y - a.y);
+    v1z = (c.z - a.z);
+    v2x = (p.x - a.x);
+    v2y = (p.y - a.y);
+    v2z = (p.z - a.z);
     d00 = (((v0x * v0x) + (v0y * v0y)) + (v0z * v0z));
     d01 = (((v0x * v1x) + (v0y * v1y)) + (v0z * v1z));
     d11 = (((v1x * v1x) + (v1y * v1y)) + (v1z * v1z));
@@ -274,24 +274,24 @@ class PickScene {
     var x:Dynamic = cast _Runtime.UNDEFINED;
     var y:Dynamic = cast _Runtime.UNDEFINED;
     var z:Dynamic = cast _Runtime.UNDEFINED;
-    x = _Runtime.field(p, 'x');
-    y = _Runtime.field(p, 'y');
-    z = _Runtime.field(p, 'z');
-    _Runtime.setField(out, 'x', ((((_Runtime.getIndex(m, 0.0) * x) + (_Runtime.getIndex(m, 4.0) * y)) + (_Runtime.getIndex(m, 8.0) * z)) + _Runtime.getIndex(m, 12.0)));
-    _Runtime.setField(out, 'y', ((((_Runtime.getIndex(m, 1.0) * x) + (_Runtime.getIndex(m, 5.0) * y)) + (_Runtime.getIndex(m, 9.0) * z)) + _Runtime.getIndex(m, 13.0)));
-    _Runtime.setField(out, 'z', ((((_Runtime.getIndex(m, 2.0) * x) + (_Runtime.getIndex(m, 6.0) * y)) + (_Runtime.getIndex(m, 10.0) * z)) + _Runtime.getIndex(m, 14.0)));
+    x = p.x;
+    y = p.y;
+    z = p.z;
+    (out.x = cast (((((_Runtime.getIndex(m, 0.0) * x) + (_Runtime.getIndex(m, 4.0) * y)) + (_Runtime.getIndex(m, 8.0) * z)) + _Runtime.getIndex(m, 12.0)) : Dynamic));
+    (out.y = cast (((((_Runtime.getIndex(m, 1.0) * x) + (_Runtime.getIndex(m, 5.0) * y)) + (_Runtime.getIndex(m, 9.0) * z)) + _Runtime.getIndex(m, 13.0)) : Dynamic));
+    (out.z = cast (((((_Runtime.getIndex(m, 2.0) * x) + (_Runtime.getIndex(m, 6.0) * y)) + (_Runtime.getIndex(m, 10.0) * z)) + _Runtime.getIndex(m, 14.0)) : Dynamic));
   }
 
   public static function transformDirectionByMatrix4__pickScene(out:Vector3, d:Vector3, m:flighthq._internal._Float32Array):Void {
     var x:Dynamic = cast _Runtime.UNDEFINED;
     var y:Dynamic = cast _Runtime.UNDEFINED;
     var z:Dynamic = cast _Runtime.UNDEFINED;
-    x = _Runtime.field(d, 'x');
-    y = _Runtime.field(d, 'y');
-    z = _Runtime.field(d, 'z');
-    _Runtime.setField(out, 'x', (((_Runtime.getIndex(m, 0.0) * x) + (_Runtime.getIndex(m, 4.0) * y)) + (_Runtime.getIndex(m, 8.0) * z)));
-    _Runtime.setField(out, 'y', (((_Runtime.getIndex(m, 1.0) * x) + (_Runtime.getIndex(m, 5.0) * y)) + (_Runtime.getIndex(m, 9.0) * z)));
-    _Runtime.setField(out, 'z', (((_Runtime.getIndex(m, 2.0) * x) + (_Runtime.getIndex(m, 6.0) * y)) + (_Runtime.getIndex(m, 10.0) * z)));
+    x = d.x;
+    y = d.y;
+    z = d.z;
+    (out.x = cast ((((_Runtime.getIndex(m, 0.0) * x) + (_Runtime.getIndex(m, 4.0) * y)) + (_Runtime.getIndex(m, 8.0) * z)) : Dynamic));
+    (out.y = cast ((((_Runtime.getIndex(m, 1.0) * x) + (_Runtime.getIndex(m, 5.0) * y)) + (_Runtime.getIndex(m, 9.0) * z)) : Dynamic));
+    (out.z = cast ((((_Runtime.getIndex(m, 2.0) * x) + (_Runtime.getIndex(m, 6.0) * y)) + (_Runtime.getIndex(m, 10.0) * z)) : Dynamic));
   }
 
   public static final _cameraRay__pickScene:Dynamic = _Runtime.callValue(createRay3D, cast ([] : Array<Dynamic>));

@@ -10,7 +10,7 @@ import flighthq.types.MotionPath;
 class GetMotionPathHeading {
   public static function getMotionPathHeading(mp:MotionPath):Float {
     _Runtime.callValue(getPathTangentAtDistance, cast ([_Runtime.field(mp, 'path'), _Runtime.field(mp, 'distance'), GetMotionPathHeading.scratchTangent__getMotionPathHeading] : Array<Dynamic>));
-    return cast HxMath.atan2(_Runtime.field(GetMotionPathHeading.scratchTangent__getMotionPathHeading, 'y'), _Runtime.field(GetMotionPathHeading.scratchTangent__getMotionPathHeading, 'x'));
+    return cast HxMath.atan2(GetMotionPathHeading.scratchTangent__getMotionPathHeading.y, GetMotionPathHeading.scratchTangent__getMotionPathHeading.x);
     return cast null;
   }
 

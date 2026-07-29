@@ -19,7 +19,7 @@ class Intersection {
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(getCameraWorldToScreen, cast ([Intersection.__scratchNdc__intersection, camera, _Runtime.field(sphere, 'center'), aspect] : Array<Dynamic>))))) {
       return cast false;
     }
-    return cast _Runtime.callValue(getCameraScreenToWorldRay, cast ([out, camera, _Runtime.field(Intersection.__scratchNdc__intersection, 'x'), _Runtime.field(Intersection.__scratchNdc__intersection, 'y'), aspect] : Array<Dynamic>));
+    return cast _Runtime.callValue(getCameraScreenToWorldRay, cast ([out, camera, Intersection.__scratchNdc__intersection.x, Intersection.__scratchNdc__intersection.y, aspect] : Array<Dynamic>));
     return cast null;
   }
 
@@ -36,12 +36,12 @@ class Intersection {
     var d:Dynamic = cast _Runtime.UNDEFINED;
     var denom:Dynamic = cast _Runtime.UNDEFINED;
     var t:Dynamic = cast _Runtime.UNDEFINED;
-    dx = _Runtime.field(_Runtime.field(ray, 'direction'), 'x');
-    dy = _Runtime.field(_Runtime.field(ray, 'direction'), 'y');
-    dz = _Runtime.field(_Runtime.field(ray, 'direction'), 'z');
-    ox = _Runtime.field(_Runtime.field(ray, 'origin'), 'x');
-    oy = _Runtime.field(_Runtime.field(ray, 'origin'), 'y');
-    oz = _Runtime.field(_Runtime.field(ray, 'origin'), 'z');
+    dx = _Runtime.field(ray, 'direction').x;
+    dy = _Runtime.field(ray, 'direction').y;
+    dz = _Runtime.field(ray, 'direction').z;
+    ox = _Runtime.field(ray, 'origin').x;
+    oy = _Runtime.field(ray, 'origin').y;
+    oz = _Runtime.field(ray, 'origin').z;
     a = _Runtime.field(plane, 'a');
     b = _Runtime.field(plane, 'b');
     c = _Runtime.field(plane, 'c');
@@ -54,9 +54,9 @@ class Intersection {
     if (_Runtime.truthy(_Runtime.compare(t, 0.0, '<'))) {
       return cast false;
     }
-    _Runtime.setField(out, 'x', (ox + (t * dx)));
-    _Runtime.setField(out, 'y', (oy + (t * dy)));
-    _Runtime.setField(out, 'z', (oz + (t * dz)));
+    (out.x = cast ((ox + (t * dx)) : Dynamic));
+    (out.y = cast ((oy + (t * dy)) : Dynamic));
+    (out.z = cast ((oz + (t * dz)) : Dynamic));
     return cast true;
     return cast null;
   }

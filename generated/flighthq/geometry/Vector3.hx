@@ -11,9 +11,9 @@ import flighthq.types.Vector4.Vector4Like;
 
 class Vector3 {
   public static function addVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
-    _Runtime.setField(out, 'x', (_Runtime.field(a, 'x') + _Runtime.field(b, 'x')));
-    _Runtime.setField(out, 'y', (_Runtime.field(a, 'y') + _Runtime.field(b, 'y')));
-    _Runtime.setField(out, 'z', (_Runtime.field(a, 'z') + _Runtime.field(b, 'z')));
+    (out.x = cast ((a.x + b.x) : Dynamic));
+    (out.y = cast ((a.y + b.y) : Dynamic));
+    (out.z = cast ((a.z + b.z) : Dynamic));
   }
 
   public static function clampVector3(out:Vector3Like, value:Vector3Like, min:Vector3Like, max:Vector3Like):Void {
@@ -26,29 +26,29 @@ class Vector3 {
     var maxX:Dynamic = cast _Runtime.UNDEFINED;
     var maxY:Dynamic = cast _Runtime.UNDEFINED;
     var maxZ:Dynamic = cast _Runtime.UNDEFINED;
-    vx = _Runtime.field(value, 'x');
-    vy = _Runtime.field(value, 'y');
-    vz = _Runtime.field(value, 'z');
-    minX = _Runtime.field(min, 'x');
-    minY = _Runtime.field(min, 'y');
-    minZ = _Runtime.field(min, 'z');
-    maxX = _Runtime.field(max, 'x');
-    maxY = _Runtime.field(max, 'y');
-    maxZ = _Runtime.field(max, 'z');
-    _Runtime.setField(out, 'x', _Runtime.select(_Runtime.compare(vx, minX, '<'), function():Dynamic return cast minX, function():Dynamic return cast _Runtime.select(_Runtime.compare(vx, maxX, '>'), function():Dynamic return cast maxX, function():Dynamic return cast vx)));
-    _Runtime.setField(out, 'y', _Runtime.select(_Runtime.compare(vy, minY, '<'), function():Dynamic return cast minY, function():Dynamic return cast _Runtime.select(_Runtime.compare(vy, maxY, '>'), function():Dynamic return cast maxY, function():Dynamic return cast vy)));
-    _Runtime.setField(out, 'z', _Runtime.select(_Runtime.compare(vz, minZ, '<'), function():Dynamic return cast minZ, function():Dynamic return cast _Runtime.select(_Runtime.compare(vz, maxZ, '>'), function():Dynamic return cast maxZ, function():Dynamic return cast vz)));
+    vx = value.x;
+    vy = value.y;
+    vz = value.z;
+    minX = min.x;
+    minY = min.y;
+    minZ = min.z;
+    maxX = max.x;
+    maxY = max.y;
+    maxZ = max.z;
+    (out.x = cast (_Runtime.select(_Runtime.compare(vx, minX, '<'), function():Dynamic return cast minX, function():Dynamic return cast _Runtime.select(_Runtime.compare(vx, maxX, '>'), function():Dynamic return cast maxX, function():Dynamic return cast vx)) : Dynamic));
+    (out.y = cast (_Runtime.select(_Runtime.compare(vy, minY, '<'), function():Dynamic return cast minY, function():Dynamic return cast _Runtime.select(_Runtime.compare(vy, maxY, '>'), function():Dynamic return cast maxY, function():Dynamic return cast vy)) : Dynamic));
+    (out.z = cast (_Runtime.select(_Runtime.compare(vz, minZ, '<'), function():Dynamic return cast minZ, function():Dynamic return cast _Runtime.select(_Runtime.compare(vz, maxZ, '>'), function():Dynamic return cast maxZ, function():Dynamic return cast vz)) : Dynamic));
   }
 
   public static function cloneVector3(source:Vector3Like):flighthq.types.Vector3 {
-    return cast _Runtime.callValue(createVector3, cast ([_Runtime.field(source, 'x'), _Runtime.field(source, 'y'), _Runtime.field(source, 'z')] : Array<Dynamic>));
+    return cast _Runtime.callValue(createVector3, cast ([source.x, source.y, source.z] : Array<Dynamic>));
     return cast null;
   }
 
   public static function copyVector3(out:Vector3Like, source:Vector3Like):Void {
-    _Runtime.setField(out, 'x', _Runtime.field(source, 'x'));
-    _Runtime.setField(out, 'y', _Runtime.field(source, 'y'));
-    _Runtime.setField(out, 'z', _Runtime.field(source, 'z'));
+    (out.x = cast (source.x : Dynamic));
+    (out.y = cast (source.y : Dynamic));
+    (out.z = cast (source.z : Dynamic));
   }
 
   public static function createVector3(?x:Float, ?y:Float, ?z:Float):flighthq.types.Vector3 {
@@ -68,12 +68,12 @@ class Vector3 {
     var x:Dynamic = cast _Runtime.UNDEFINED;
     var y:Dynamic = cast _Runtime.UNDEFINED;
     var z:Dynamic = cast _Runtime.UNDEFINED;
-    x = ((_Runtime.field(source, 'y') * _Runtime.field(other, 'z')) - (_Runtime.field(source, 'z') * _Runtime.field(other, 'y')));
-    y = ((_Runtime.field(source, 'z') * _Runtime.field(other, 'x')) - (_Runtime.field(source, 'x') * _Runtime.field(other, 'z')));
-    z = ((_Runtime.field(source, 'x') * _Runtime.field(other, 'y')) - (_Runtime.field(source, 'y') * _Runtime.field(other, 'x')));
-    _Runtime.setField(out, 'x', x);
-    _Runtime.setField(out, 'y', y);
-    _Runtime.setField(out, 'z', z);
+    x = ((source.y * other.z) - (source.z * other.y));
+    y = ((source.z * other.x) - (source.x * other.z));
+    z = ((source.x * other.y) - (source.y * other.x));
+    (out.x = cast (x : Dynamic));
+    (out.y = cast (y : Dynamic));
+    (out.z = cast (z : Dynamic));
   }
 
   public static function divideVector3(out:Vector3Like, source:Vector3Like, divisor:Vector3Like):Void {
@@ -83,20 +83,20 @@ class Vector3 {
     var dx:Dynamic = cast _Runtime.UNDEFINED;
     var dy:Dynamic = cast _Runtime.UNDEFINED;
     var dz:Dynamic = cast _Runtime.UNDEFINED;
-    sx = _Runtime.field(source, 'x');
-    sy = _Runtime.field(source, 'y');
-    sz = _Runtime.field(source, 'z');
-    dx = _Runtime.field(divisor, 'x');
-    dy = _Runtime.field(divisor, 'y');
-    dz = _Runtime.field(divisor, 'z');
-    _Runtime.setField(out, 'x', _Runtime.select(!_Runtime.strictEquals(dx, 0.0), function():Dynamic return cast (sx / dx), function():Dynamic return cast 0.0));
-    _Runtime.setField(out, 'y', _Runtime.select(!_Runtime.strictEquals(dy, 0.0), function():Dynamic return cast (sy / dy), function():Dynamic return cast 0.0));
-    _Runtime.setField(out, 'z', _Runtime.select(!_Runtime.strictEquals(dz, 0.0), function():Dynamic return cast (sz / dz), function():Dynamic return cast 0.0));
+    sx = source.x;
+    sy = source.y;
+    sz = source.z;
+    dx = divisor.x;
+    dy = divisor.y;
+    dz = divisor.z;
+    (out.x = cast (_Runtime.select(!_Runtime.strictEquals(dx, 0.0), function():Dynamic return cast (sx / dx), function():Dynamic return cast 0.0) : Dynamic));
+    (out.y = cast (_Runtime.select(!_Runtime.strictEquals(dy, 0.0), function():Dynamic return cast (sy / dy), function():Dynamic return cast 0.0) : Dynamic));
+    (out.z = cast (_Runtime.select(!_Runtime.strictEquals(dz, 0.0), function():Dynamic return cast (sz / dz), function():Dynamic return cast 0.0) : Dynamic));
   }
 
   public static function equalsVector3(a:Null<Vector3Like>, b:Null<Vector3Like>):Bool {
     if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(a), function():Dynamic return cast !_Runtime.truthy(b)))) { return cast false; }
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(a, 'x'), _Runtime.field(b, 'x')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'y'), _Runtime.field(b, 'y'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'z'), _Runtime.field(b, 'z')));
+    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(a.x, b.x), function():Dynamic return cast _Runtime.strictEquals(a.y, b.y)), function():Dynamic return cast _Runtime.strictEquals(a.z, b.z));
     return cast null;
   }
 
@@ -116,9 +116,9 @@ class Vector3 {
     var x:Float = cast _Runtime.UNDEFINED;
     var y:Float = cast _Runtime.UNDEFINED;
     var z:Float = cast _Runtime.UNDEFINED;
-    x = (_Runtime.field(b, 'x') - _Runtime.field(a, 'x'));
-    y = (_Runtime.field(b, 'y') - _Runtime.field(a, 'y'));
-    z = (_Runtime.field(b, 'z') - _Runtime.field(a, 'z'));
+    x = (b.x - a.x);
+    y = (b.y - a.y);
+    z = (b.z - a.z);
     return cast HxMath.sqrt(((HxMath.pow(x, 2.0) + HxMath.pow(y, 2.0)) + HxMath.pow(z, 2.0)));
     return cast null;
   }
@@ -127,25 +127,25 @@ class Vector3 {
     var x:Float = cast _Runtime.UNDEFINED;
     var y:Float = cast _Runtime.UNDEFINED;
     var z:Float = cast _Runtime.UNDEFINED;
-    x = (_Runtime.field(b, 'x') - _Runtime.field(a, 'x'));
-    y = (_Runtime.field(b, 'y') - _Runtime.field(a, 'y'));
-    z = (_Runtime.field(b, 'z') - _Runtime.field(a, 'z'));
+    x = (b.x - a.x);
+    y = (b.y - a.y);
+    z = (b.z - a.z);
     return cast ((HxMath.pow(x, 2.0) + HxMath.pow(y, 2.0)) + HxMath.pow(z, 2.0));
     return cast null;
   }
 
   public static function getVector3Dot(a:Vector3Like, b:Vector3Like):Float {
-    return cast (((_Runtime.field(a, 'x') * _Runtime.field(b, 'x')) + (_Runtime.field(a, 'y') * _Runtime.field(b, 'y'))) + (_Runtime.field(a, 'z') * _Runtime.field(b, 'z')));
+    return cast (((a.x * b.x) + (a.y * b.y)) + (a.z * b.z));
     return cast null;
   }
 
   public static function getVector3Length(source:Vector3Like):Float {
-    return cast HxMath.sqrt(((HxMath.pow(_Runtime.field(source, 'x'), 2.0) + HxMath.pow(_Runtime.field(source, 'y'), 2.0)) + HxMath.pow(_Runtime.field(source, 'z'), 2.0)));
+    return cast HxMath.sqrt(((HxMath.pow(source.x, 2.0) + HxMath.pow(source.y, 2.0)) + HxMath.pow(source.z, 2.0)));
     return cast null;
   }
 
   public static function getVector3LengthSquared(source:Vector3Like):Float {
-    return cast ((HxMath.pow(_Runtime.field(source, 'x'), 2.0) + HxMath.pow(_Runtime.field(source, 'y'), 2.0)) + HxMath.pow(_Runtime.field(source, 'z'), 2.0));
+    return cast ((HxMath.pow(source.x, 2.0) + HxMath.pow(source.y, 2.0)) + HxMath.pow(source.z, 2.0));
     return cast null;
   }
 
@@ -154,87 +154,87 @@ class Vector3 {
     var y:Dynamic = cast _Runtime.UNDEFINED;
     var z:Dynamic = cast _Runtime.UNDEFINED;
     var radius:Dynamic = cast _Runtime.UNDEFINED;
-    x = _Runtime.field(source, 'x');
-    y = _Runtime.field(source, 'y');
-    z = _Runtime.field(source, 'z');
+    x = source.x;
+    y = source.y;
+    z = source.z;
     radius = HxMath.sqrt((((x * x) + (y * y)) + (z * z)));
     if (_Runtime.truthy(_Runtime.strictEquals(radius, 0.0))) {
-      _Runtime.setField(out, 'x', 0.0);
-      _Runtime.setField(out, 'y', 0.0);
-      _Runtime.setField(out, 'z', 0.0);
+      (out.x = cast (0.0 : Dynamic));
+      (out.y = cast (0.0 : Dynamic));
+      (out.z = cast (0.0 : Dynamic));
       return;
     }
-    _Runtime.setField(out, 'x', radius);
-    _Runtime.setField(out, 'y', HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, (y / radius)))));
-    _Runtime.setField(out, 'z', HxMath.atan2(z, x));
+    (out.x = cast (radius : Dynamic));
+    (out.y = cast (HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, (y / radius)))) : Dynamic));
+    (out.z = cast (HxMath.atan2(z, x) : Dynamic));
   }
 
   public static function interpolateVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like, t:Float):Void {
     var ax:Dynamic = cast _Runtime.UNDEFINED;
     var ay:Dynamic = cast _Runtime.UNDEFINED;
     var az:Dynamic = cast _Runtime.UNDEFINED;
-    ax = _Runtime.field(a, 'x');
-    ay = _Runtime.field(a, 'y');
-    az = _Runtime.field(a, 'z');
-    _Runtime.setField(out, 'x', (ax + (t * (_Runtime.field(b, 'x') - ax))));
-    _Runtime.setField(out, 'y', (ay + (t * (_Runtime.field(b, 'y') - ay))));
-    _Runtime.setField(out, 'z', (az + (t * (_Runtime.field(b, 'z') - az))));
+    ax = a.x;
+    ay = a.y;
+    az = a.z;
+    (out.x = cast ((ax + (t * (b.x - ax))) : Dynamic));
+    (out.y = cast ((ay + (t * (b.y - ay))) : Dynamic));
+    (out.z = cast ((az + (t * (b.z - az))) : Dynamic));
   }
 
   public static function maxVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
-    _Runtime.setField(out, 'x', _Runtime.select(_Runtime.compare(_Runtime.field(a, 'x'), _Runtime.field(b, 'x'), '>'), function():Dynamic return cast _Runtime.field(a, 'x'), function():Dynamic return cast _Runtime.field(b, 'x')));
-    _Runtime.setField(out, 'y', _Runtime.select(_Runtime.compare(_Runtime.field(a, 'y'), _Runtime.field(b, 'y'), '>'), function():Dynamic return cast _Runtime.field(a, 'y'), function():Dynamic return cast _Runtime.field(b, 'y')));
-    _Runtime.setField(out, 'z', _Runtime.select(_Runtime.compare(_Runtime.field(a, 'z'), _Runtime.field(b, 'z'), '>'), function():Dynamic return cast _Runtime.field(a, 'z'), function():Dynamic return cast _Runtime.field(b, 'z')));
+    (out.x = cast (_Runtime.select(_Runtime.compare(a.x, b.x, '>'), function():Dynamic return cast a.x, function():Dynamic return cast b.x) : Dynamic));
+    (out.y = cast (_Runtime.select(_Runtime.compare(a.y, b.y, '>'), function():Dynamic return cast a.y, function():Dynamic return cast b.y) : Dynamic));
+    (out.z = cast (_Runtime.select(_Runtime.compare(a.z, b.z, '>'), function():Dynamic return cast a.z, function():Dynamic return cast b.z) : Dynamic));
   }
 
   public static function minVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
-    _Runtime.setField(out, 'x', _Runtime.select(_Runtime.compare(_Runtime.field(a, 'x'), _Runtime.field(b, 'x'), '<'), function():Dynamic return cast _Runtime.field(a, 'x'), function():Dynamic return cast _Runtime.field(b, 'x')));
-    _Runtime.setField(out, 'y', _Runtime.select(_Runtime.compare(_Runtime.field(a, 'y'), _Runtime.field(b, 'y'), '<'), function():Dynamic return cast _Runtime.field(a, 'y'), function():Dynamic return cast _Runtime.field(b, 'y')));
-    _Runtime.setField(out, 'z', _Runtime.select(_Runtime.compare(_Runtime.field(a, 'z'), _Runtime.field(b, 'z'), '<'), function():Dynamic return cast _Runtime.field(a, 'z'), function():Dynamic return cast _Runtime.field(b, 'z')));
+    (out.x = cast (_Runtime.select(_Runtime.compare(a.x, b.x, '<'), function():Dynamic return cast a.x, function():Dynamic return cast b.x) : Dynamic));
+    (out.y = cast (_Runtime.select(_Runtime.compare(a.y, b.y, '<'), function():Dynamic return cast a.y, function():Dynamic return cast b.y) : Dynamic));
+    (out.z = cast (_Runtime.select(_Runtime.compare(a.z, b.z, '<'), function():Dynamic return cast a.z, function():Dynamic return cast b.z) : Dynamic));
   }
 
   public static function multiplyVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
-    _Runtime.setField(out, 'x', (_Runtime.field(a, 'x') * _Runtime.field(b, 'x')));
-    _Runtime.setField(out, 'y', (_Runtime.field(a, 'y') * _Runtime.field(b, 'y')));
-    _Runtime.setField(out, 'z', (_Runtime.field(a, 'z') * _Runtime.field(b, 'z')));
+    (out.x = cast ((a.x * b.x) : Dynamic));
+    (out.y = cast ((a.y * b.y) : Dynamic));
+    (out.z = cast ((a.z * b.z) : Dynamic));
   }
 
   public static function nearEqualsVector3(a:Vector3Like, b:Vector3Like, tolerance:Float = 0.000001):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.compare(HxMath.abs((_Runtime.field(a, 'x') - _Runtime.field(b, 'x'))), tolerance, '<'), function():Dynamic return cast _Runtime.compare(HxMath.abs((_Runtime.field(a, 'y') - _Runtime.field(b, 'y'))), tolerance, '<')), function():Dynamic return cast _Runtime.compare(HxMath.abs((_Runtime.field(a, 'z') - _Runtime.field(b, 'z'))), tolerance, '<'));
+    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.compare(HxMath.abs((a.x - b.x)), tolerance, '<'), function():Dynamic return cast _Runtime.compare(HxMath.abs((a.y - b.y)), tolerance, '<')), function():Dynamic return cast _Runtime.compare(HxMath.abs((a.z - b.z)), tolerance, '<'));
     return cast null;
   }
 
   public static function negateVector3(out:Vector3Like, source:Vector3Like):Void {
-    _Runtime.setField(out, 'x', (_Runtime.field(source, 'x') * -1.0));
-    _Runtime.setField(out, 'y', (_Runtime.field(source, 'y') * -1.0));
-    _Runtime.setField(out, 'z', (_Runtime.field(source, 'z') * -1.0));
+    (out.x = cast ((source.x * -1.0) : Dynamic));
+    (out.y = cast ((source.y * -1.0) : Dynamic));
+    (out.z = cast ((source.z * -1.0) : Dynamic));
   }
 
   public static function normalizeVector3(out:Vector3Like, source:Vector3Like):Float {
     var l:Dynamic = cast _Runtime.UNDEFINED;
     l = _Runtime.callValue(getVector3Length, cast ([source] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(l, 0.0))) {
-      _Runtime.setField(out, 'x', (_Runtime.field(source, 'x') / l));
-      _Runtime.setField(out, 'y', (_Runtime.field(source, 'y') / l));
-      _Runtime.setField(out, 'z', (_Runtime.field(source, 'z') / l));
+      (out.x = cast ((source.x / l) : Dynamic));
+      (out.y = cast ((source.y / l) : Dynamic));
+      (out.z = cast ((source.z / l) : Dynamic));
     } else {
-      _Runtime.setField(out, 'x', 0.0);
-      _Runtime.setField(out, 'y', 0.0);
-      _Runtime.setField(out, 'z', 0.0);
+      (out.x = cast (0.0 : Dynamic));
+      (out.y = cast (0.0 : Dynamic));
+      (out.z = cast (0.0 : Dynamic));
     }
     return cast l;
     return cast null;
   }
 
   public static function offsetVector3(out:Vector3Like, source:Vector3Like, dx:Float, dy:Float, dz:Float):Void {
-    _Runtime.setField(out, 'x', (_Runtime.field(source, 'x') + dx));
-    _Runtime.setField(out, 'y', (_Runtime.field(source, 'y') + dy));
-    _Runtime.setField(out, 'z', (_Runtime.field(source, 'z') + dz));
+    (out.x = cast ((source.x + dx) : Dynamic));
+    (out.y = cast ((source.y + dy) : Dynamic));
+    (out.z = cast ((source.z + dz) : Dynamic));
   }
 
   public static function projectVector3(out:Vector2Like, source:Vector3Like):Void {
-    _Runtime.setField(out, 'x', (_Runtime.field(source, 'x') / _Runtime.field(source, 'z')));
-    _Runtime.setField(out, 'y', (_Runtime.field(source, 'y') / _Runtime.field(source, 'z')));
+    (out.x = cast ((source.x / source.z) : Dynamic));
+    (out.y = cast ((source.y / source.z) : Dynamic));
   }
 
   public static function reflectVector3(out:Vector3Like, incident:Vector3Like, normal:Vector3Like):Void {
@@ -245,42 +245,42 @@ class Vector3 {
     var ny:Dynamic = cast _Runtime.UNDEFINED;
     var nz:Dynamic = cast _Runtime.UNDEFINED;
     var twoDot:Dynamic = cast _Runtime.UNDEFINED;
-    ix = _Runtime.field(incident, 'x');
-    iy = _Runtime.field(incident, 'y');
-    iz = _Runtime.field(incident, 'z');
-    nx = _Runtime.field(normal, 'x');
-    ny = _Runtime.field(normal, 'y');
-    nz = _Runtime.field(normal, 'z');
+    ix = incident.x;
+    iy = incident.y;
+    iz = incident.z;
+    nx = normal.x;
+    ny = normal.y;
+    nz = normal.z;
     twoDot = (2.0 * (((ix * nx) + (iy * ny)) + (iz * nz)));
-    _Runtime.setField(out, 'x', (ix - (twoDot * nx)));
-    _Runtime.setField(out, 'y', (iy - (twoDot * ny)));
-    _Runtime.setField(out, 'z', (iz - (twoDot * nz)));
+    (out.x = cast ((ix - (twoDot * nx)) : Dynamic));
+    (out.y = cast ((iy - (twoDot * ny)) : Dynamic));
+    (out.z = cast ((iz - (twoDot * nz)) : Dynamic));
   }
 
   public static function scaleVector3(out:Vector3Like, source:Vector3Like, scalar:Float):Void {
-    _Runtime.setField(out, 'x', (_Runtime.field(source, 'x') * scalar));
-    _Runtime.setField(out, 'y', (_Runtime.field(source, 'y') * scalar));
-    _Runtime.setField(out, 'z', (_Runtime.field(source, 'z') * scalar));
+    (out.x = cast ((source.x * scalar) : Dynamic));
+    (out.y = cast ((source.y * scalar) : Dynamic));
+    (out.z = cast ((source.z * scalar) : Dynamic));
   }
 
   public static function setVector3(out:Vector3Like, x:Float, y:Float, z:Float):Void {
-    _Runtime.setField(out, 'x', x);
-    _Runtime.setField(out, 'y', y);
-    _Runtime.setField(out, 'z', z);
+    (out.x = cast (x : Dynamic));
+    (out.y = cast (y : Dynamic));
+    (out.z = cast (z : Dynamic));
   }
 
   public static function setVector3FromFloat32Array(out:Vector3Like, offset:Float, source:flighthq._internal._Float32Array):Void {
-    _Runtime.setField(out, 'x', _Runtime.getIndex(source, offset));
-    _Runtime.setField(out, 'y', _Runtime.getIndex(source, (offset + 1.0)));
-    _Runtime.setField(out, 'z', _Runtime.getIndex(source, (offset + 2.0)));
+    (out.x = cast (_Runtime.getIndex(source, offset) : Dynamic));
+    (out.y = cast (_Runtime.getIndex(source, (offset + 1.0)) : Dynamic));
+    (out.z = cast (_Runtime.getIndex(source, (offset + 2.0)) : Dynamic));
   }
 
   public static function setVector3FromSpherical(out:Vector3Like, radius:Float, theta:Float, phi:Float):Void {
     var sinTheta:Dynamic = cast _Runtime.UNDEFINED;
     sinTheta = HxMath.sin(theta);
-    _Runtime.setField(out, 'x', ((radius * sinTheta) * HxMath.cos(phi)));
-    _Runtime.setField(out, 'y', (radius * HxMath.cos(theta)));
-    _Runtime.setField(out, 'z', ((radius * sinTheta) * HxMath.sin(phi)));
+    (out.x = cast (((radius * sinTheta) * HxMath.cos(phi)) : Dynamic));
+    (out.y = cast ((radius * HxMath.cos(theta)) : Dynamic));
+    (out.z = cast (((radius * sinTheta) * HxMath.sin(phi)) : Dynamic));
   }
 
   public static function setVector3FromVector4(out:Vector3Like, source:Vector4Like):Void {
@@ -290,15 +290,15 @@ class Vector3 {
     x = _Runtime.field(source, 'x');
     y = _Runtime.field(source, 'y');
     z = _Runtime.field(source, 'z');
-    _Runtime.setField(out, 'x', x);
-    _Runtime.setField(out, 'y', y);
-    _Runtime.setField(out, 'z', z);
+    (out.x = cast (x : Dynamic));
+    (out.y = cast (y : Dynamic));
+    (out.z = cast (z : Dynamic));
   }
 
   public static function subtractVector3(out:Vector3Like, source:Vector3Like, other:Vector3Like):Void {
-    _Runtime.setField(out, 'x', (_Runtime.field(source, 'x') - _Runtime.field(other, 'x')));
-    _Runtime.setField(out, 'y', (_Runtime.field(source, 'y') - _Runtime.field(other, 'y')));
-    _Runtime.setField(out, 'z', (_Runtime.field(source, 'z') - _Runtime.field(other, 'z')));
+    (out.x = cast ((source.x - other.x) : Dynamic));
+    (out.y = cast ((source.y - other.y) : Dynamic));
+    (out.z = cast ((source.z - other.z) : Dynamic));
   }
 
   public static function transformVector3ByMatrix3(out:Vector3Like, source:Vector3Like, matrix:{ var m:flighthq._internal._Float32Array; }):Void {
@@ -307,18 +307,18 @@ class Vector3 {
     var y:Dynamic = cast _Runtime.UNDEFINED;
     var z:Dynamic = cast _Runtime.UNDEFINED;
     m = _Runtime.field(matrix, 'm');
-    x = _Runtime.field(source, 'x');
-    y = _Runtime.field(source, 'y');
-    z = _Runtime.field(source, 'z');
-    _Runtime.setField(out, 'x', (((_Runtime.getIndex(m, 0.0) * x) + (_Runtime.getIndex(m, 3.0) * y)) + (_Runtime.getIndex(m, 6.0) * z)));
-    _Runtime.setField(out, 'y', (((_Runtime.getIndex(m, 1.0) * x) + (_Runtime.getIndex(m, 4.0) * y)) + (_Runtime.getIndex(m, 7.0) * z)));
-    _Runtime.setField(out, 'z', (((_Runtime.getIndex(m, 2.0) * x) + (_Runtime.getIndex(m, 5.0) * y)) + (_Runtime.getIndex(m, 8.0) * z)));
+    x = source.x;
+    y = source.y;
+    z = source.z;
+    (out.x = cast ((((_Runtime.getIndex(m, 0.0) * x) + (_Runtime.getIndex(m, 3.0) * y)) + (_Runtime.getIndex(m, 6.0) * z)) : Dynamic));
+    (out.y = cast ((((_Runtime.getIndex(m, 1.0) * x) + (_Runtime.getIndex(m, 4.0) * y)) + (_Runtime.getIndex(m, 7.0) * z)) : Dynamic));
+    (out.z = cast ((((_Runtime.getIndex(m, 2.0) * x) + (_Runtime.getIndex(m, 5.0) * y)) + (_Runtime.getIndex(m, 8.0) * z)) : Dynamic));
   }
 
   public static function writeVector3ToFloat32Array(out:flighthq._internal._Float32Array, offset:Float, source:Vector3Like):Void {
-    _Runtime.setIndex(out, offset, _Runtime.field(source, 'x'));
-    _Runtime.setIndex(out, (offset + 1.0), _Runtime.field(source, 'y'));
-    _Runtime.setIndex(out, (offset + 2.0), _Runtime.field(source, 'z'));
+    _Runtime.setIndex(out, offset, source.x);
+    _Runtime.setIndex(out, (offset + 1.0), source.y);
+    _Runtime.setIndex(out, (offset + 2.0), source.z);
   }
 
   public static final VECTOR3_X_AXIS:flighthq.types.Vector3 = _Runtime.callValue(createVector3, cast ([1.0, 0.0, 0.0] : Array<Dynamic>));

@@ -76,7 +76,7 @@ class ElectronTray {
       var record:Dynamic = cast _Runtime.UNDEFINED;
       record = ((cast trays : flighthq._internal._Map).get(id));
       if (_Runtime.truthy(!_Runtime.truthy(record))) { return; }
-      _Runtime.callProperty(_Runtime.field(record, 'tray'), 'popUpContextMenu', cast ([_Runtime.coalesce(_Runtime.field(record, 'menu'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), _Runtime.select(position, function():Dynamic return cast { x: _Runtime.field(position, 'x'), y: _Runtime.field(position, 'y') }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.field(record, 'tray'), 'popUpContextMenu', cast ([_Runtime.coalesce(_Runtime.field(record, 'menu'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), _Runtime.select(position, function():Dynamic return cast { x: position.x, y: position.y }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>));
     }, setContextMenu: function(id:Dynamic, items:Dynamic) {
       var record:Dynamic = cast _Runtime.UNDEFINED;
       var menu:Dynamic = cast _Runtime.UNDEFINED;

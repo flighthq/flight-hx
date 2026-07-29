@@ -269,12 +269,12 @@ class ShapeCollision {
         var y0:Dynamic = _Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0));
         var x1:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(j) << 1));
         var y1:Dynamic = _Runtime.getIndex(px, ((_Runtime.toInt32(j) << 1) + 1.0));
-        _Runtime.setField(ShapeCollision.scratchAxis__shapeCollision, 'x', (y1 - y0));
-        _Runtime.setField(ShapeCollision.scratchAxis__shapeCollision, 'y', -(x1 - x0));
+        (ShapeCollision.scratchAxis__shapeCollision.x = cast ((y1 - y0) : Dynamic));
+        (ShapeCollision.scratchAxis__shapeCollision.y = cast (-(x1 - x0) : Dynamic));
         var len:Dynamic = _Runtime.callValue(normalizeVector2, cast ([ShapeCollision.scratchAxis__shapeCollision, ShapeCollision.scratchAxis__shapeCollision] : Array<Dynamic>));
         if (_Runtime.truthy(_Runtime.compare(len, ShapeCollision.EPS__shapeCollision, '<'))) { i++; continue; }
-        var axisX:Dynamic = _Runtime.field(ShapeCollision.scratchAxis__shapeCollision, 'x');
-        var axisY:Dynamic = _Runtime.field(ShapeCollision.scratchAxis__shapeCollision, 'y');
+        var axisX:Dynamic = ShapeCollision.scratchAxis__shapeCollision.x;
+        var axisY:Dynamic = ShapeCollision.scratchAxis__shapeCollision.y;
         var overlap:Dynamic = _Runtime.callValue(ShapeCollision.circlePolygonAxisOverlap__shapeCollision, cast ([axisX, axisY, cx, cy, radius, px, pn] : Array<Dynamic>));
         if (_Runtime.truthy(_Runtime.compare(overlap, 0.0, '<='))) {
           _Runtime.callValue(clearCollisionManifold, cast ([out] : Array<Dynamic>));
@@ -307,12 +307,12 @@ class ShapeCollision {
         i++;
       }
     }
-    _Runtime.setField(ShapeCollision.scratchAxis__shapeCollision, 'x', (cx - nearestX));
-    _Runtime.setField(ShapeCollision.scratchAxis__shapeCollision, 'y', (cy - nearestY));
+    (ShapeCollision.scratchAxis__shapeCollision.x = cast ((cx - nearestX) : Dynamic));
+    (ShapeCollision.scratchAxis__shapeCollision.y = cast ((cy - nearestY) : Dynamic));
     vertexAxisLen = _Runtime.callValue(normalizeVector2, cast ([ShapeCollision.scratchAxis__shapeCollision, ShapeCollision.scratchAxis__shapeCollision] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.compare(vertexAxisLen, ShapeCollision.EPS__shapeCollision, '>'))) {
-      var axisX:Dynamic = _Runtime.field(ShapeCollision.scratchAxis__shapeCollision, 'x');
-      var axisY:Dynamic = _Runtime.field(ShapeCollision.scratchAxis__shapeCollision, 'y');
+      var axisX:Dynamic = ShapeCollision.scratchAxis__shapeCollision.x;
+      var axisY:Dynamic = ShapeCollision.scratchAxis__shapeCollision.y;
       var overlap:Dynamic = _Runtime.callValue(ShapeCollision.circlePolygonAxisOverlap__shapeCollision, cast ([axisX, axisY, cx, cy, radius, px, pn] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.compare(overlap, 0.0, '<='))) {
         _Runtime.callValue(clearCollisionManifold, cast ([out] : Array<Dynamic>));
@@ -443,12 +443,12 @@ class ShapeCollision {
         var y0:Dynamic = _Runtime.getIndex(sx, ((_Runtime.toInt32(i) << 1) + 1.0));
         var x1:Dynamic = _Runtime.getIndex(sx, (_Runtime.toInt32(j) << 1));
         var y1:Dynamic = _Runtime.getIndex(sx, ((_Runtime.toInt32(j) << 1) + 1.0));
-        _Runtime.setField(ShapeCollision.scratchAxis__shapeCollision, 'x', (y1 - y0));
-        _Runtime.setField(ShapeCollision.scratchAxis__shapeCollision, 'y', -(x1 - x0));
+        (ShapeCollision.scratchAxis__shapeCollision.x = cast ((y1 - y0) : Dynamic));
+        (ShapeCollision.scratchAxis__shapeCollision.y = cast (-(x1 - x0) : Dynamic));
         var len:Dynamic = _Runtime.callValue(normalizeVector2, cast ([ShapeCollision.scratchAxis__shapeCollision, ShapeCollision.scratchAxis__shapeCollision] : Array<Dynamic>));
         if (_Runtime.truthy(_Runtime.compare(len, ShapeCollision.EPS__shapeCollision, '<'))) { i++; continue; }
-        var axisX:Dynamic = _Runtime.field(ShapeCollision.scratchAxis__shapeCollision, 'x');
-        var axisY:Dynamic = _Runtime.field(ShapeCollision.scratchAxis__shapeCollision, 'y');
+        var axisX:Dynamic = ShapeCollision.scratchAxis__shapeCollision.x;
+        var axisY:Dynamic = ShapeCollision.scratchAxis__shapeCollision.y;
         var overlap:Dynamic = _Runtime.callValue(ShapeCollision.polygonAxisOverlap__shapeCollision, cast ([axisX, axisY, ax, an, bx, bn] : Array<Dynamic>));
         if (_Runtime.truthy(_Runtime.compare(overlap, 0.0, '<='))) {
           _Runtime.callValue(clearCollisionManifold, cast ([out] : Array<Dynamic>));

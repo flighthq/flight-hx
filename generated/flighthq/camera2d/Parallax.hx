@@ -11,8 +11,8 @@ import flighthq.types.Vector2.Vector2Like;
 class Parallax {
   public static function getCamera2DParallaxPoint(camera:Camera2D, factor:Float, out:Vector2Like):Void {
     _Runtime.callValue(getCamera2DViewMatrix, cast ([camera, Parallax.scratchMatrix__parallax] : Array<Dynamic>));
-    _Runtime.setField(out, 'x', ((_Runtime.field(Parallax.scratchMatrix__parallax, 'tx') - (_Runtime.field(camera, 'viewportWidth') * 0.5)) * factor));
-    _Runtime.setField(out, 'y', ((_Runtime.field(Parallax.scratchMatrix__parallax, 'ty') - (_Runtime.field(camera, 'viewportHeight') * 0.5)) * factor));
+    (out.x = cast (((_Runtime.field(Parallax.scratchMatrix__parallax, 'tx') - (_Runtime.field(camera, 'viewportWidth') * 0.5)) * factor) : Dynamic));
+    (out.y = cast (((_Runtime.field(Parallax.scratchMatrix__parallax, 'ty') - (_Runtime.field(camera, 'viewportHeight') * 0.5)) * factor) : Dynamic));
   }
 
   public static final scratchMatrix__parallax:Dynamic = _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>));

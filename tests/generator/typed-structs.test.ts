@@ -27,7 +27,7 @@ describe('typed struct analysis', () => {
     const color = report.candidates.find((candidate) => candidate.name === 'ColorTransform');
 
     expect(report.summary.candidates).toBe(7);
-    expect(report.summary.bindableAccesses).toBeGreaterThan(2_000);
+    expect(report.summary.bindableAccesses).toBe(2_057);
     expect(rectangle?.eligible).toBe(false);
     expect(rectangle?.reasons).toContain('presence-sensitive-use');
     expect(rectangle?.escapes).toEqual(
@@ -40,9 +40,12 @@ describe('typed struct analysis', () => {
     );
     expect(color?.eligible).toBe(true);
     expect(color?.purpose).toContain('RGBA');
+    expect(report.summary.directAccesses).toBe(2_057);
+    expect(report.summary.reflectiveSurvivors).toBe(0);
+    expect(rectangle?.emission).toEqual({ directAccesses: 0, reflectiveSurvivors: [] });
   });
 
-  it('binds safe named fields in the IR while preserving reflective emission', () => {
+  it('emits bound fields directly while preserving optional and receiver-sensitive semantics', () => {
     const result = lowerFixture(`
       export interface Vector2 {
         readonly x: number;
@@ -54,9 +57,14 @@ describe('typed struct analysis', () => {
       }
       export function update(value: Vector2): number {
         value.y = value.x;
+        value.y += 1;
+        value.y++;
         value.callback(value.y);
         value.method();
         return value.optional ?? value.requiredUndefined ?? 0;
+      }
+      export function readOptional(factory: () => Vector2 | undefined): number | undefined {
+        return factory()?.optional;
       }
     `);
     const bindings = collectTypedStructBindings(result.lowered.declarations);
@@ -72,9 +80,12 @@ describe('typed struct analysis', () => {
       'y',
       'x',
       'y',
+      'y',
+      'y',
       'callback',
       'optional',
       'requiredUndefined',
+      'optional',
     ]);
     expect(bindings.find((binding) => binding.field.name === 'optional')?.field).toMatchObject({
       optional: true,
@@ -85,9 +96,16 @@ describe('typed struct analysis', () => {
       requiredUndefined: true,
     });
     expect(bindings.some((binding) => binding.field.name === 'method')).toBe(false);
-    expect(output).toContain("_Runtime.field(value, 'x')");
-    expect(output).toContain("_Runtime.setField(value, 'y'");
-    expect(output).not.toContain('value.x');
+    expect(output).toContain('(value.y = cast (value.x : Dynamic))');
+    expect(output).toContain('(value.y += 1.0)');
+    expect(output).toContain('value.y++');
+    expect(output).toContain('_Runtime.callValue(value.callback');
+    expect(output).toContain("_Runtime.callProperty(value, 'method'");
+    expect(output).toContain('final __typedStruct0 = _Runtime.callValue(factory');
+    expect(output).toContain('__typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.optional');
+    expect(output).not.toContain("_Runtime.field(value, '");
+    expect(output).not.toContain("_Runtime.setField(value, '");
+    expect(output).not.toContain("_Runtime.incrementField(value, '");
   });
 
   it('resolves aliases and Readonly wrappers to the canonical schema identity', () => {

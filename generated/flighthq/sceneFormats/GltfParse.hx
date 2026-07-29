@@ -476,11 +476,11 @@ class GltfParse {
 
   public static function applyGltfTextureTransform__gltfParse(texture:Texture, transform:Null<Dynamic>):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(transform, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
-    _Runtime.setField(_Runtime.field(texture, 'uvOffset'), 'x', _Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(transform, 'offset'), 0.0), function():Dynamic return cast 0.0));
-    _Runtime.setField(_Runtime.field(texture, 'uvOffset'), 'y', _Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(transform, 'offset'), 1.0), function():Dynamic return cast 0.0));
+    (_Runtime.field(texture, 'uvOffset').x = cast (_Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(transform, 'offset'), 0.0), function():Dynamic return cast 0.0) : Dynamic));
+    (_Runtime.field(texture, 'uvOffset').y = cast (_Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(transform, 'offset'), 1.0), function():Dynamic return cast 0.0) : Dynamic));
     _Runtime.setField(texture, 'uvRotation', _Runtime.coalesce(_Runtime.field(transform, 'rotation'), function():Dynamic return cast 0.0));
-    _Runtime.setField(_Runtime.field(texture, 'uvScale'), 'x', _Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(transform, 'scale'), 0.0), function():Dynamic return cast 1.0));
-    _Runtime.setField(_Runtime.field(texture, 'uvScale'), 'y', _Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(transform, 'scale'), 1.0), function():Dynamic return cast 1.0));
+    (_Runtime.field(texture, 'uvScale').x = cast (_Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(transform, 'scale'), 0.0), function():Dynamic return cast 1.0) : Dynamic));
+    (_Runtime.field(texture, 'uvScale').y = cast (_Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(transform, 'scale'), 1.0), function():Dynamic return cast 1.0) : Dynamic));
   }
 
   public static function gltfImageToTexture__gltfParse(doc:GltfDocument, buffers:Array<flighthq._internal._UInt8Array>, image:GltfImage, options:Null<GltfImportOptions>):Null<Texture> {

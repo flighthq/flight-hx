@@ -77,7 +77,7 @@ class WgpuColorAdjustment {
   public static function equalsRecordedColorTransform__wgpuColorAdjustment(a:Null<ColorTransform>, b:Null<ColorTransform>):Bool {
     if (_Runtime.truthy(_Runtime.strictEquals(a, b))) { return cast true; }
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(a, null), function():Dynamic return cast _Runtime.strictEquals(b, null)))) { return cast false; }
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(a, 'redMultiplier'), _Runtime.field(b, 'redMultiplier')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'greenMultiplier'), _Runtime.field(b, 'greenMultiplier'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'blueMultiplier'), _Runtime.field(b, 'blueMultiplier'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'alphaMultiplier'), _Runtime.field(b, 'alphaMultiplier'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'redOffset'), _Runtime.field(b, 'redOffset'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'greenOffset'), _Runtime.field(b, 'greenOffset'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'blueOffset'), _Runtime.field(b, 'blueOffset'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'alphaOffset'), _Runtime.field(b, 'alphaOffset')));
+    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(a.redMultiplier, b.redMultiplier), function():Dynamic return cast _Runtime.strictEquals(a.greenMultiplier, b.greenMultiplier)), function():Dynamic return cast _Runtime.strictEquals(a.blueMultiplier, b.blueMultiplier)), function():Dynamic return cast _Runtime.strictEquals(a.alphaMultiplier, b.alphaMultiplier)), function():Dynamic return cast _Runtime.strictEquals(a.redOffset, b.redOffset)), function():Dynamic return cast _Runtime.strictEquals(a.greenOffset, b.greenOffset)), function():Dynamic return cast _Runtime.strictEquals(a.blueOffset, b.blueOffset)), function():Dynamic return cast _Runtime.strictEquals(a.alphaOffset, b.alphaOffset));
     return cast null;
   }
 
@@ -133,14 +133,14 @@ class WgpuColorAdjustment {
     _Runtime.callValue(WgpuColorAdjustment.ensureWgpuColorTransformCapacity__wgpuColorAdjustment, cast ([runtime, (offset + WgpuColorAdjustment.COLOR_TRANSFORM_FLOATS__wgpuColorAdjustment)] : Array<Dynamic>));
     out = _Runtime.field(runtime, 'spriteBatchColorTransformData');
     if (_Runtime.truthy(!_Runtime.strictEquals(colorTransform, null))) {
-      _Runtime.setIndex(out, offset, _Runtime.field(colorTransform, 'redMultiplier'));
-      _Runtime.setIndex(out, (offset + 1.0), _Runtime.field(colorTransform, 'greenMultiplier'));
-      _Runtime.setIndex(out, (offset + 2.0), _Runtime.field(colorTransform, 'blueMultiplier'));
-      _Runtime.setIndex(out, (offset + 3.0), _Runtime.field(colorTransform, 'alphaMultiplier'));
-      _Runtime.setIndex(out, (offset + 4.0), (_Runtime.field(colorTransform, 'redOffset') / 255.0));
-      _Runtime.setIndex(out, (offset + 5.0), (_Runtime.field(colorTransform, 'greenOffset') / 255.0));
-      _Runtime.setIndex(out, (offset + 6.0), (_Runtime.field(colorTransform, 'blueOffset') / 255.0));
-      _Runtime.setIndex(out, (offset + 7.0), (_Runtime.field(colorTransform, 'alphaOffset') / 255.0));
+      _Runtime.setIndex(out, offset, colorTransform.redMultiplier);
+      _Runtime.setIndex(out, (offset + 1.0), colorTransform.greenMultiplier);
+      _Runtime.setIndex(out, (offset + 2.0), colorTransform.blueMultiplier);
+      _Runtime.setIndex(out, (offset + 3.0), colorTransform.alphaMultiplier);
+      _Runtime.setIndex(out, (offset + 4.0), (colorTransform.redOffset / 255.0));
+      _Runtime.setIndex(out, (offset + 5.0), (colorTransform.greenOffset / 255.0));
+      _Runtime.setIndex(out, (offset + 6.0), (colorTransform.blueOffset / 255.0));
+      _Runtime.setIndex(out, (offset + 7.0), (colorTransform.alphaOffset / 255.0));
     } else {
       _Runtime.setIndex(out, offset, 1.0);
       _Runtime.setIndex(out, (offset + 1.0), 1.0);

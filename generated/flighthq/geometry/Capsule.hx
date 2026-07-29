@@ -44,9 +44,9 @@ class Capsule {
     bx = _Runtime.field(capsule, 'endX');
     by = _Runtime.field(capsule, 'endY');
     bz = _Runtime.field(capsule, 'endZ');
-    px = _Runtime.field(point, 'x');
-    py = _Runtime.field(point, 'y');
-    pz = _Runtime.field(point, 'z');
+    px = point.x;
+    py = point.y;
+    pz = point.z;
     r = _Runtime.field(capsule, 'radius');
     abx = (bx - ax);
     aby = (by - ay);
@@ -67,14 +67,14 @@ class Capsule {
     dz = (pz - closestZ);
     dist = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
     if (_Runtime.truthy(_Runtime.compare(dist, 1e-10, '<'))) {
-      _Runtime.setField(out, 'x', (closestX + r));
-      _Runtime.setField(out, 'y', closestY);
-      _Runtime.setField(out, 'z', closestZ);
+      (out.x = cast ((closestX + r) : Dynamic));
+      (out.y = cast (closestY : Dynamic));
+      (out.z = cast (closestZ : Dynamic));
     } else {
       var inv:Dynamic = (r / dist);
-      _Runtime.setField(out, 'x', (closestX + (dx * inv)));
-      _Runtime.setField(out, 'y', (closestY + (dy * inv)));
-      _Runtime.setField(out, 'z', (closestZ + (dz * inv)));
+      (out.x = cast ((closestX + (dx * inv)) : Dynamic));
+      (out.y = cast ((closestY + (dy * inv)) : Dynamic));
+      (out.z = cast ((closestZ + (dz * inv)) : Dynamic));
     }
   }
 
@@ -115,12 +115,12 @@ class Capsule {
     var qc:Dynamic = cast _Runtime.UNDEFINED;
     var tA:Dynamic = cast _Runtime.UNDEFINED;
     var tB:Dynamic = cast _Runtime.UNDEFINED;
-    ox = _Runtime.field(_Runtime.field(ray, 'origin'), 'x');
-    oy = _Runtime.field(_Runtime.field(ray, 'origin'), 'y');
-    oz = _Runtime.field(_Runtime.field(ray, 'origin'), 'z');
-    dx = _Runtime.field(_Runtime.field(ray, 'direction'), 'x');
-    dy = _Runtime.field(_Runtime.field(ray, 'direction'), 'y');
-    dz = _Runtime.field(_Runtime.field(ray, 'direction'), 'z');
+    ox = _Runtime.field(ray, 'origin').x;
+    oy = _Runtime.field(ray, 'origin').y;
+    oz = _Runtime.field(ray, 'origin').z;
+    dx = _Runtime.field(ray, 'direction').x;
+    dy = _Runtime.field(ray, 'direction').y;
+    dz = _Runtime.field(ray, 'direction').z;
     ax = _Runtime.field(capsule, 'startX');
     ay = _Runtime.field(capsule, 'startY');
     az = _Runtime.field(capsule, 'startZ');
@@ -214,7 +214,7 @@ class Capsule {
     var dist2:Dynamic = cast _Runtime.UNDEFINED;
     var sumR:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(capsule, 'radius'), 0.0, '<'), function():Dynamic return cast _Runtime.compare(_Runtime.field(sphere, 'radius'), 0.0, '<')))) { return cast false; }
-    dist2 = _Runtime.callValue(Capsule.pointToSegmentDistanceSq__capsule, cast ([_Runtime.field(_Runtime.field(sphere, 'center'), 'x'), _Runtime.field(_Runtime.field(sphere, 'center'), 'y'), _Runtime.field(_Runtime.field(sphere, 'center'), 'z'), _Runtime.field(capsule, 'startX'), _Runtime.field(capsule, 'startY'), _Runtime.field(capsule, 'startZ'), _Runtime.field(capsule, 'endX'), _Runtime.field(capsule, 'endY'), _Runtime.field(capsule, 'endZ')] : Array<Dynamic>));
+    dist2 = _Runtime.callValue(Capsule.pointToSegmentDistanceSq__capsule, cast ([_Runtime.field(sphere, 'center').x, _Runtime.field(sphere, 'center').y, _Runtime.field(sphere, 'center').z, _Runtime.field(capsule, 'startX'), _Runtime.field(capsule, 'startY'), _Runtime.field(capsule, 'startZ'), _Runtime.field(capsule, 'endX'), _Runtime.field(capsule, 'endY'), _Runtime.field(capsule, 'endZ')] : Array<Dynamic>));
     sumR = (_Runtime.field(capsule, 'radius') + _Runtime.field(sphere, 'radius'));
     return cast _Runtime.compare(dist2, (sumR * sumR), '<=');
     return cast null;

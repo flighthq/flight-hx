@@ -21,9 +21,9 @@ class MeshGeometryTransforms {
       _Runtime.setField(geometry, 'bounds', bounds);
     }
     b = _Runtime.field(geometry, 'bounds');
-    cx = ((_Runtime.field(_Runtime.field(b, 'min'), 'x') + _Runtime.field(_Runtime.field(b, 'max'), 'x')) * 0.5);
-    cy = ((_Runtime.field(_Runtime.field(b, 'min'), 'y') + _Runtime.field(_Runtime.field(b, 'max'), 'y')) * 0.5);
-    cz = ((_Runtime.field(_Runtime.field(b, 'min'), 'z') + _Runtime.field(_Runtime.field(b, 'max'), 'z')) * 0.5);
+    cx = ((_Runtime.field(b, 'min').x + _Runtime.field(b, 'max').x) * 0.5);
+    cy = ((_Runtime.field(b, 'min').y + _Runtime.field(b, 'max').y) * 0.5);
+    cz = ((_Runtime.field(b, 'min').z + _Runtime.field(b, 'max').z) * 0.5);
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(cx, 0.0), function():Dynamic return cast _Runtime.strictEquals(cy, 0.0)), function():Dynamic return cast _Runtime.strictEquals(cz, 0.0)))) { return; }
     _Runtime.callValue(translateMeshGeometry, cast ([geometry, -cx, -cy, -cz] : Array<Dynamic>));
   }
@@ -49,7 +49,7 @@ class MeshGeometryTransforms {
     var dstVerts:Dynamic = cast _Runtime.UNDEFINED;
     invT = _Runtime.callValue(MeshGeometryTransforms.computeMatrix3x3InverseTranspose__meshGeometryTransforms, cast ([matrix] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.truthy(invT))) { return cast false; }
-    m = _Runtime.field(matrix, 'm');
+    m = matrix.m;
     posFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(source, 'layout'), 'position'] : Array<Dynamic>));
     normFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(source, 'layout'), 'normal'] : Array<Dynamic>));
     tanFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(source, 'layout'), 'tangent'] : Array<Dynamic>));
@@ -144,12 +144,12 @@ class MeshGeometryTransforms {
     }
     _Runtime.incrementField(geometry, 'version', 1, true);
     if (_Runtime.truthy(_Runtime.field(geometry, 'bounds'))) {
-      _Runtime.setField(_Runtime.field(_Runtime.field(geometry, 'bounds'), 'min'), 'x', (_Runtime.field(_Runtime.field(_Runtime.field(geometry, 'bounds'), 'min'), 'x') + x));
-      _Runtime.setField(_Runtime.field(_Runtime.field(geometry, 'bounds'), 'min'), 'y', (_Runtime.field(_Runtime.field(_Runtime.field(geometry, 'bounds'), 'min'), 'y') + y));
-      _Runtime.setField(_Runtime.field(_Runtime.field(geometry, 'bounds'), 'min'), 'z', (_Runtime.field(_Runtime.field(_Runtime.field(geometry, 'bounds'), 'min'), 'z') + z));
-      _Runtime.setField(_Runtime.field(_Runtime.field(geometry, 'bounds'), 'max'), 'x', (_Runtime.field(_Runtime.field(_Runtime.field(geometry, 'bounds'), 'max'), 'x') + x));
-      _Runtime.setField(_Runtime.field(_Runtime.field(geometry, 'bounds'), 'max'), 'y', (_Runtime.field(_Runtime.field(_Runtime.field(geometry, 'bounds'), 'max'), 'y') + y));
-      _Runtime.setField(_Runtime.field(_Runtime.field(geometry, 'bounds'), 'max'), 'z', (_Runtime.field(_Runtime.field(_Runtime.field(geometry, 'bounds'), 'max'), 'z') + z));
+      (_Runtime.field(_Runtime.field(geometry, 'bounds'), 'min').x += x);
+      (_Runtime.field(_Runtime.field(geometry, 'bounds'), 'min').y += y);
+      (_Runtime.field(_Runtime.field(geometry, 'bounds'), 'min').z += z);
+      (_Runtime.field(_Runtime.field(geometry, 'bounds'), 'max').x += x);
+      (_Runtime.field(_Runtime.field(geometry, 'bounds'), 'max').y += y);
+      (_Runtime.field(_Runtime.field(geometry, 'bounds'), 'max').z += z);
     }
   }
 
@@ -176,7 +176,7 @@ class MeshGeometryTransforms {
     var det:Dynamic = cast _Runtime.UNDEFINED;
     var invDet:Dynamic = cast _Runtime.UNDEFINED;
     var out:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.field(matrix, 'm');
+    m = matrix.m;
     a00 = _Runtime.getIndex(m, 0.0);
     a01 = _Runtime.getIndex(m, 1.0);
     a02 = _Runtime.getIndex(m, 2.0);

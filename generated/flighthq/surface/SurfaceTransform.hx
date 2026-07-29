@@ -35,10 +35,10 @@ class SurfaceTransform {
             var g:Dynamic = _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 1.0));
             var b:Dynamic = _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 2.0));
             var a:Dynamic = _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 3.0));
-            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), di, HxMath.max(0.0, HxMath.min(255.0, HxMath.round(((r * _Runtime.field(ct, 'redMultiplier')) + _Runtime.field(ct, 'redOffset'))))));
-            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (di + 1.0), HxMath.max(0.0, HxMath.min(255.0, HxMath.round(((g * _Runtime.field(ct, 'greenMultiplier')) + _Runtime.field(ct, 'greenOffset'))))));
-            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (di + 2.0), HxMath.max(0.0, HxMath.min(255.0, HxMath.round(((b * _Runtime.field(ct, 'blueMultiplier')) + _Runtime.field(ct, 'blueOffset'))))));
-            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (di + 3.0), HxMath.max(0.0, HxMath.min(255.0, HxMath.round(((a * _Runtime.field(ct, 'alphaMultiplier')) + _Runtime.field(ct, 'alphaOffset'))))));
+            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), di, HxMath.max(0.0, HxMath.min(255.0, HxMath.round(((r * ct.redMultiplier) + ct.redOffset)))));
+            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (di + 1.0), HxMath.max(0.0, HxMath.min(255.0, HxMath.round(((g * ct.greenMultiplier) + ct.greenOffset)))));
+            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (di + 2.0), HxMath.max(0.0, HxMath.min(255.0, HxMath.round(((b * ct.blueMultiplier) + ct.blueOffset)))));
+            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (di + 3.0), HxMath.max(0.0, HxMath.min(255.0, HxMath.round(((a * ct.alphaMultiplier) + ct.alphaOffset)))));
             px++;
           }
         }

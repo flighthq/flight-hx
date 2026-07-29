@@ -27,9 +27,9 @@ class LightAnalysis {
     var kind:Dynamic = cast _Runtime.UNDEFINED;
     kind = _Runtime.field(light, 'kind');
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(kind, AmbientLightKind), function():Dynamic return cast _Runtime.strictEquals(kind, HemisphereLightKind)), function():Dynamic return cast _Runtime.strictEquals(kind, EnvironmentKind)), function():Dynamic return cast _Runtime.strictEquals(kind, DirectionalLightKind)))) {
-      _Runtime.setField(_Runtime.field(out, 'center'), 'x', 0.0);
-      _Runtime.setField(_Runtime.field(out, 'center'), 'y', 0.0);
-      _Runtime.setField(_Runtime.field(out, 'center'), 'z', 0.0);
+      (_Runtime.field(out, 'center').x = cast (0.0 : Dynamic));
+      (_Runtime.field(out, 'center').y = cast (0.0 : Dynamic));
+      (_Runtime.field(out, 'center').z = cast (0.0 : Dynamic));
       _Runtime.setField(out, 'radius', -1.0);
       return;
     }
@@ -37,21 +37,21 @@ class LightAnalysis {
       var spatial:Dynamic = (cast light : PointLight);
       var range:Dynamic = _Runtime.field(spatial, 'range');
       if (_Runtime.truthy(_Runtime.compare(range, 0.0, '<'))) {
-        _Runtime.setField(_Runtime.field(out, 'center'), 'x', 0.0);
-        _Runtime.setField(_Runtime.field(out, 'center'), 'y', 0.0);
-        _Runtime.setField(_Runtime.field(out, 'center'), 'z', 0.0);
+        (_Runtime.field(out, 'center').x = cast (0.0 : Dynamic));
+        (_Runtime.field(out, 'center').y = cast (0.0 : Dynamic));
+        (_Runtime.field(out, 'center').z = cast (0.0 : Dynamic));
         _Runtime.setField(out, 'radius', -1.0);
         return;
       }
-      _Runtime.setField(_Runtime.field(out, 'center'), 'x', _Runtime.field(_Runtime.field(spatial, 'position'), 'x'));
-      _Runtime.setField(_Runtime.field(out, 'center'), 'y', _Runtime.field(_Runtime.field(spatial, 'position'), 'y'));
-      _Runtime.setField(_Runtime.field(out, 'center'), 'z', _Runtime.field(_Runtime.field(spatial, 'position'), 'z'));
+      (_Runtime.field(out, 'center').x = cast (_Runtime.field(spatial, 'position').x : Dynamic));
+      (_Runtime.field(out, 'center').y = cast (_Runtime.field(spatial, 'position').y : Dynamic));
+      (_Runtime.field(out, 'center').z = cast (_Runtime.field(spatial, 'position').z : Dynamic));
       _Runtime.setField(out, 'radius', range);
       return;
     }
-    _Runtime.setField(_Runtime.field(out, 'center'), 'x', 0.0);
-    _Runtime.setField(_Runtime.field(out, 'center'), 'y', 0.0);
-    _Runtime.setField(_Runtime.field(out, 'center'), 'z', 0.0);
+    (_Runtime.field(out, 'center').x = cast (0.0 : Dynamic));
+    (_Runtime.field(out, 'center').y = cast (0.0 : Dynamic));
+    (_Runtime.field(out, 'center').z = cast (0.0 : Dynamic));
     _Runtime.setField(out, 'radius', -1.0);
   }
 
@@ -84,9 +84,9 @@ class LightAnalysis {
     _Runtime.callValue(getLightInfluenceBounds, cast ([LightAnalysis.scratchSphere__lightAnalysis, light] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(LightAnalysis.scratchSphere__lightAnalysis, 'radius'), 0.0, '<'))) { return cast true; }
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(bounds, 'radius'), 0.0, '<'))) { return cast false; }
-    dx = (_Runtime.field(_Runtime.field(LightAnalysis.scratchSphere__lightAnalysis, 'center'), 'x') - _Runtime.field(_Runtime.field(bounds, 'center'), 'x'));
-    dy = (_Runtime.field(_Runtime.field(LightAnalysis.scratchSphere__lightAnalysis, 'center'), 'y') - _Runtime.field(_Runtime.field(bounds, 'center'), 'y'));
-    dz = (_Runtime.field(_Runtime.field(LightAnalysis.scratchSphere__lightAnalysis, 'center'), 'z') - _Runtime.field(_Runtime.field(bounds, 'center'), 'z'));
+    dx = (_Runtime.field(LightAnalysis.scratchSphere__lightAnalysis, 'center').x - _Runtime.field(bounds, 'center').x);
+    dy = (_Runtime.field(LightAnalysis.scratchSphere__lightAnalysis, 'center').y - _Runtime.field(bounds, 'center').y);
+    dz = (_Runtime.field(LightAnalysis.scratchSphere__lightAnalysis, 'center').z - _Runtime.field(bounds, 'center').z);
     distSq = (((dx * dx) + (dy * dy)) + (dz * dz));
     radSum = (_Runtime.field(LightAnalysis.scratchSphere__lightAnalysis, 'radius') + _Runtime.field(bounds, 'radius'));
     return cast _Runtime.compare(distSq, (radSum * radSum), '<=');

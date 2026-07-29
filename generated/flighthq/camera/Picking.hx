@@ -30,7 +30,7 @@ class Picking {
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(inverseMatrix4, cast ([Picking.__scratchInverseVP__picking, Picking.__scratchViewProjection__picking] : Array<Dynamic>))))) {
       return cast false;
     }
-    m = _Runtime.field(Picking.__scratchInverseVP__picking, 'm');
+    m = Picking.__scratchInverseVP__picking.m;
     nx = ndcX;
     ny = ndcY;
     nearX = ((((_Runtime.getIndex(m, 0.0) * nx) + (_Runtime.getIndex(m, 4.0) * ny)) + (_Runtime.getIndex(m, 8.0) * -1.0)) + _Runtime.getIndex(m, 12.0));
@@ -53,20 +53,20 @@ class Picking {
       (farY = cast ((farY * invW) : Dynamic));
       (farZ = cast ((farZ * invW) : Dynamic));
     }
-    _Runtime.setField(Picking.__scratchNear__picking, 'x', nearX);
-    _Runtime.setField(Picking.__scratchNear__picking, 'y', nearY);
-    _Runtime.setField(Picking.__scratchNear__picking, 'z', nearZ);
-    _Runtime.setField(Picking.__scratchFar__picking, 'x', farX);
-    _Runtime.setField(Picking.__scratchFar__picking, 'y', farY);
-    _Runtime.setField(Picking.__scratchFar__picking, 'z', farZ);
+    (Picking.__scratchNear__picking.x = cast (nearX : Dynamic));
+    (Picking.__scratchNear__picking.y = cast (nearY : Dynamic));
+    (Picking.__scratchNear__picking.z = cast (nearZ : Dynamic));
+    (Picking.__scratchFar__picking.x = cast (farX : Dynamic));
+    (Picking.__scratchFar__picking.y = cast (farY : Dynamic));
+    (Picking.__scratchFar__picking.z = cast (farZ : Dynamic));
     _Runtime.callValue(subtractVector3, cast ([Picking.__scratchDir__picking, Picking.__scratchFar__picking, Picking.__scratchNear__picking] : Array<Dynamic>));
     _Runtime.callValue(normalizeVector3, cast ([Picking.__scratchDir__picking, Picking.__scratchDir__picking] : Array<Dynamic>));
-    _Runtime.setField(_Runtime.field(out, 'origin'), 'x', nearX);
-    _Runtime.setField(_Runtime.field(out, 'origin'), 'y', nearY);
-    _Runtime.setField(_Runtime.field(out, 'origin'), 'z', nearZ);
-    _Runtime.setField(_Runtime.field(out, 'direction'), 'x', _Runtime.field(Picking.__scratchDir__picking, 'x'));
-    _Runtime.setField(_Runtime.field(out, 'direction'), 'y', _Runtime.field(Picking.__scratchDir__picking, 'y'));
-    _Runtime.setField(_Runtime.field(out, 'direction'), 'z', _Runtime.field(Picking.__scratchDir__picking, 'z'));
+    (_Runtime.field(out, 'origin').x = cast (nearX : Dynamic));
+    (_Runtime.field(out, 'origin').y = cast (nearY : Dynamic));
+    (_Runtime.field(out, 'origin').z = cast (nearZ : Dynamic));
+    (_Runtime.field(out, 'direction').x = cast (Picking.__scratchDir__picking.x : Dynamic));
+    (_Runtime.field(out, 'direction').y = cast (Picking.__scratchDir__picking.y : Dynamic));
+    (_Runtime.field(out, 'direction').z = cast (Picking.__scratchDir__picking.z : Dynamic));
     return cast true;
     return cast null;
   }
@@ -82,10 +82,10 @@ class Picking {
     var clipW:Dynamic = cast _Runtime.UNDEFINED;
     var invW:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(getCameraViewProjectionMatrix4, cast ([Picking.__scratchViewProjection__picking, camera, aspect] : Array<Dynamic>));
-    m = _Runtime.field(Picking.__scratchViewProjection__picking, 'm');
-    wx = _Runtime.field(worldPoint, 'x');
-    wy = _Runtime.field(worldPoint, 'y');
-    wz = _Runtime.field(worldPoint, 'z');
+    m = Picking.__scratchViewProjection__picking.m;
+    wx = worldPoint.x;
+    wy = worldPoint.y;
+    wz = worldPoint.z;
     clipX = ((((_Runtime.getIndex(m, 0.0) * wx) + (_Runtime.getIndex(m, 4.0) * wy)) + (_Runtime.getIndex(m, 8.0) * wz)) + _Runtime.getIndex(m, 12.0));
     clipY = ((((_Runtime.getIndex(m, 1.0) * wx) + (_Runtime.getIndex(m, 5.0) * wy)) + (_Runtime.getIndex(m, 9.0) * wz)) + _Runtime.getIndex(m, 13.0));
     clipZ = ((((_Runtime.getIndex(m, 2.0) * wx) + (_Runtime.getIndex(m, 6.0) * wy)) + (_Runtime.getIndex(m, 10.0) * wz)) + _Runtime.getIndex(m, 14.0));
@@ -94,9 +94,9 @@ class Picking {
       return cast false;
     }
     invW = (1.0 / clipW);
-    _Runtime.setField(out, 'x', (clipX * invW));
-    _Runtime.setField(out, 'y', (clipY * invW));
-    _Runtime.setField(out, 'z', (clipZ * invW));
+    (out.x = cast ((clipX * invW) : Dynamic));
+    (out.y = cast ((clipY * invW) : Dynamic));
+    (out.z = cast ((clipZ * invW) : Dynamic));
     return cast true;
     return cast null;
   }

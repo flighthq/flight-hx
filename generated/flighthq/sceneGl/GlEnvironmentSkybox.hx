@@ -30,7 +30,7 @@ class GlEnvironmentSkybox {
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.DEPTH_TEST);
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.BLEND);
     flighthq._internal.backend.WebGl2Backend.useProgram(gl, _Runtime.field(sky, 'program'));
-    flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(sky, 'locInverseViewProjection'), false, _Runtime.field(GlEnvironmentSkybox._inverseViewProjection__glEnvironmentSkybox, 'm'));
+    flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(sky, 'locInverseViewProjection'), false, GlEnvironmentSkybox._inverseViewProjection__glEnvironmentSkybox.m);
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(sky, 'locIntensity'), _Runtime.field(environment, 'intensity'));
     flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, cube);

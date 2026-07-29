@@ -405,7 +405,7 @@ class AwdParse {
               _Runtime.pushMany(translationValues, cast ([_Runtime.getIndex(transform, 9.0), _Runtime.getIndex(transform, 10.0), _Runtime.getIndex(transform, 11.0)] : Array<Dynamic>));
               _Runtime.callValue(AwdParse.awdTransformToMatrix4__awdParse, cast ([rotationMatrix, transform] : Array<Dynamic>));
               _Runtime.callValue(setQuaternionFromMatrix4, cast ([rotationQuat, rotationMatrix] : Array<Dynamic>));
-              _Runtime.pushMany(rotationValues, cast ([_Runtime.field(rotationQuat, 'x'), _Runtime.field(rotationQuat, 'y'), _Runtime.field(rotationQuat, 'z'), _Runtime.field(rotationQuat, 'w')] : Array<Dynamic>));
+              _Runtime.pushMany(rotationValues, cast ([rotationQuat.x, rotationQuat.y, rotationQuat.z, rotationQuat.w] : Array<Dynamic>));
             } else {
               _Runtime.pushMany(translationValues, cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
               _Runtime.pushMany(rotationValues, cast ([0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
@@ -467,7 +467,7 @@ class AwdParse {
       var j:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(j, jointCount, '<'))) {
         _Runtime.callValue(AwdParse.awdTransformToMatrix4__awdParse, cast ([invBind, _Runtime.field(_Runtime.getIndex(_Runtime.field(parsedSkeleton, 'joints'), j), 'transform')] : Array<Dynamic>));
-        _Runtime.callProperty(inverseBindMatrices, 'set', cast ([_Runtime.field(invBind, 'm'), (j * 16.0)] : Array<Dynamic>));
+        _Runtime.callProperty(inverseBindMatrices, 'set', cast ([invBind.m, (j * 16.0)] : Array<Dynamic>));
         var bw:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
         _Runtime.callValue(inverseMatrix4, cast ([bw, invBind] : Array<Dynamic>));
         _Runtime.callProperty(bindWorld, 'push', cast ([bw] : Array<Dynamic>));
@@ -534,7 +534,7 @@ class AwdParse {
 
   public static function awdTransformToMatrix4__awdParse(out:Matrix4, transform:flighthq._internal._Float64Array):Void {
     var m:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.field(out, 'm');
+    m = out.m;
     _Runtime.setIndex(m, 0.0, _Runtime.getIndex(transform, 0.0));
     _Runtime.setIndex(m, 1.0, _Runtime.getIndex(transform, 1.0));
     _Runtime.setIndex(m, 2.0, _Runtime.getIndex(transform, 2.0));

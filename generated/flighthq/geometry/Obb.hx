@@ -49,9 +49,9 @@ class Obb {
     hx = _Runtime.field(obb, 'halfExtentX');
     hy = _Runtime.field(obb, 'halfExtentY');
     hz = _Runtime.field(obb, 'halfExtentZ');
-    px = _Runtime.field(point, 'x');
-    py = _Runtime.field(point, 'y');
-    pz = _Runtime.field(point, 'z');
+    px = point.x;
+    py = point.y;
+    pz = point.z;
     __destructure0 = _Runtime.callValue(Obb.obbLocalAxes__obb, cast ([obb] : Array<Dynamic>));
     ax0 = _Runtime.getIndex(__destructure0, 0.0);
     ay0 = _Runtime.getIndex(__destructure0, 1.0);
@@ -68,9 +68,9 @@ class Obb {
     d0 = HxMath.min(HxMath.max((((dx * ax0) + (dy * ay0)) + (dz * az0)), -hx), hx);
     d1 = HxMath.min(HxMath.max((((dx * ax1) + (dy * ay1)) + (dz * az1)), -hy), hy);
     d2 = HxMath.min(HxMath.max((((dx * ax2) + (dy * ay2)) + (dz * az2)), -hz), hz);
-    _Runtime.setField(out, 'x', (((cx + (d0 * ax0)) + (d1 * ax1)) + (d2 * ax2)));
-    _Runtime.setField(out, 'y', (((cy + (d0 * ay0)) + (d1 * ay1)) + (d2 * ay2)));
-    _Runtime.setField(out, 'z', (((cz + (d0 * az0)) + (d1 * az1)) + (d2 * az2)));
+    (out.x = cast ((((cx + (d0 * ax0)) + (d1 * ax1)) + (d2 * ax2)) : Dynamic));
+    (out.y = cast ((((cy + (d0 * ay0)) + (d1 * ay1)) + (d2 * ay2)) : Dynamic));
+    (out.z = cast ((((cz + (d0 * az0)) + (d1 * az1)) + (d2 * az2)) : Dynamic));
   }
 
   public static function intersectRay3DObb(ray:Ray3DLike, obb:ObbLike):Float {
@@ -98,12 +98,12 @@ class Obb {
     var halfExts:Dynamic = cast _Runtime.UNDEFINED;
     var tMin:Dynamic = cast _Runtime.UNDEFINED;
     var tMax:Dynamic = cast _Runtime.UNDEFINED;
-    ox = (_Runtime.field(_Runtime.field(ray, 'origin'), 'x') - _Runtime.field(obb, 'centerX'));
-    oy = (_Runtime.field(_Runtime.field(ray, 'origin'), 'y') - _Runtime.field(obb, 'centerY'));
-    oz = (_Runtime.field(_Runtime.field(ray, 'origin'), 'z') - _Runtime.field(obb, 'centerZ'));
-    dx = _Runtime.field(_Runtime.field(ray, 'direction'), 'x');
-    dy = _Runtime.field(_Runtime.field(ray, 'direction'), 'y');
-    dz = _Runtime.field(_Runtime.field(ray, 'direction'), 'z');
+    ox = (_Runtime.field(ray, 'origin').x - _Runtime.field(obb, 'centerX'));
+    oy = (_Runtime.field(ray, 'origin').y - _Runtime.field(obb, 'centerY'));
+    oz = (_Runtime.field(ray, 'origin').z - _Runtime.field(obb, 'centerZ'));
+    dx = _Runtime.field(ray, 'direction').x;
+    dy = _Runtime.field(ray, 'direction').y;
+    dz = _Runtime.field(ray, 'direction').z;
     hx = _Runtime.field(obb, 'halfExtentX');
     hy = _Runtime.field(obb, 'halfExtentY');
     hz = _Runtime.field(obb, 'halfExtentZ');
@@ -170,12 +170,12 @@ class Obb {
     var tx:Dynamic = cast _Runtime.UNDEFINED;
     var ty:Dynamic = cast _Runtime.UNDEFINED;
     var tz:Dynamic = cast _Runtime.UNDEFINED;
-    acx = ((_Runtime.field(_Runtime.field(aabb, 'min'), 'x') + _Runtime.field(_Runtime.field(aabb, 'max'), 'x')) * 0.5);
-    acy = ((_Runtime.field(_Runtime.field(aabb, 'min'), 'y') + _Runtime.field(_Runtime.field(aabb, 'max'), 'y')) * 0.5);
-    acz = ((_Runtime.field(_Runtime.field(aabb, 'min'), 'z') + _Runtime.field(_Runtime.field(aabb, 'max'), 'z')) * 0.5);
-    ahx = ((_Runtime.field(_Runtime.field(aabb, 'max'), 'x') - _Runtime.field(_Runtime.field(aabb, 'min'), 'x')) * 0.5);
-    ahy = ((_Runtime.field(_Runtime.field(aabb, 'max'), 'y') - _Runtime.field(_Runtime.field(aabb, 'min'), 'y')) * 0.5);
-    ahz = ((_Runtime.field(_Runtime.field(aabb, 'max'), 'z') - _Runtime.field(_Runtime.field(aabb, 'min'), 'z')) * 0.5);
+    acx = ((_Runtime.field(aabb, 'min').x + _Runtime.field(aabb, 'max').x) * 0.5);
+    acy = ((_Runtime.field(aabb, 'min').y + _Runtime.field(aabb, 'max').y) * 0.5);
+    acz = ((_Runtime.field(aabb, 'min').z + _Runtime.field(aabb, 'max').z) * 0.5);
+    ahx = ((_Runtime.field(aabb, 'max').x - _Runtime.field(aabb, 'min').x) * 0.5);
+    ahy = ((_Runtime.field(aabb, 'max').y - _Runtime.field(aabb, 'min').y) * 0.5);
+    ahz = ((_Runtime.field(aabb, 'max').z - _Runtime.field(aabb, 'min').z) * 0.5);
     __destructure2 = _Runtime.callValue(Obb.obbLocalAxes__obb, cast ([obb] : Array<Dynamic>));
     ax0 = _Runtime.getIndex(__destructure2, 0.0);
     ay0 = _Runtime.getIndex(__destructure2, 1.0);
@@ -299,7 +299,7 @@ class Obb {
     oqy = _Runtime.field(obb, 'orientationY');
     oqz = _Runtime.field(obb, 'orientationZ');
     oqw = _Runtime.field(obb, 'orientationW');
-    _m = _Runtime.field(m, 'm');
+    _m = m.m;
     newCx = ((((_Runtime.getIndex(_m, 0.0) * cx) + (_Runtime.getIndex(_m, 4.0) * cy)) + (_Runtime.getIndex(_m, 8.0) * cz)) + _Runtime.getIndex(_m, 12.0));
     newCy = ((((_Runtime.getIndex(_m, 1.0) * cx) + (_Runtime.getIndex(_m, 5.0) * cy)) + (_Runtime.getIndex(_m, 9.0) * cz)) + _Runtime.getIndex(_m, 13.0));
     newCz = ((((_Runtime.getIndex(_m, 2.0) * cx) + (_Runtime.getIndex(_m, 6.0) * cy)) + (_Runtime.getIndex(_m, 10.0) * cz)) + _Runtime.getIndex(_m, 14.0));

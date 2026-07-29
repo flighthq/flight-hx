@@ -31,23 +31,23 @@ class Plane {
     var py:Dynamic = cast _Runtime.UNDEFINED;
     var pz:Dynamic = cast _Runtime.UNDEFINED;
     var dist:Dynamic = cast _Runtime.UNDEFINED;
-    px = _Runtime.field(point, 'x');
-    py = _Runtime.field(point, 'y');
-    pz = _Runtime.field(point, 'z');
+    px = point.x;
+    py = point.y;
+    pz = point.z;
     dist = ((((_Runtime.field(plane, 'a') * px) + (_Runtime.field(plane, 'b') * py)) + (_Runtime.field(plane, 'c') * pz)) + _Runtime.field(plane, 'd'));
-    _Runtime.setField(out, 'x', (px - (dist * _Runtime.field(plane, 'a'))));
-    _Runtime.setField(out, 'y', (py - (dist * _Runtime.field(plane, 'b'))));
-    _Runtime.setField(out, 'z', (pz - (dist * _Runtime.field(plane, 'c'))));
+    (out.x = cast ((px - (dist * _Runtime.field(plane, 'a'))) : Dynamic));
+    (out.y = cast ((py - (dist * _Runtime.field(plane, 'b'))) : Dynamic));
+    (out.z = cast ((pz - (dist * _Runtime.field(plane, 'c'))) : Dynamic));
   }
 
   public static function getPlaneCoplanarPoint(out:Vector3Like, plane:PlaneLike):Void {
-    _Runtime.setField(out, 'x', (-_Runtime.field(plane, 'a') * _Runtime.field(plane, 'd')));
-    _Runtime.setField(out, 'y', (-_Runtime.field(plane, 'b') * _Runtime.field(plane, 'd')));
-    _Runtime.setField(out, 'z', (-_Runtime.field(plane, 'c') * _Runtime.field(plane, 'd')));
+    (out.x = cast ((-_Runtime.field(plane, 'a') * _Runtime.field(plane, 'd')) : Dynamic));
+    (out.y = cast ((-_Runtime.field(plane, 'b') * _Runtime.field(plane, 'd')) : Dynamic));
+    (out.z = cast ((-_Runtime.field(plane, 'c') * _Runtime.field(plane, 'd')) : Dynamic));
   }
 
   public static function getPlaneSignedDistanceToPoint(plane:PlaneLike, point:Vector3Like):Float {
-    return cast ((((_Runtime.field(plane, 'a') * _Runtime.field(point, 'x')) + (_Runtime.field(plane, 'b') * _Runtime.field(point, 'y'))) + (_Runtime.field(plane, 'c') * _Runtime.field(point, 'z'))) + _Runtime.field(plane, 'd'));
+    return cast ((((_Runtime.field(plane, 'a') * point.x) + (_Runtime.field(plane, 'b') * point.y)) + (_Runtime.field(plane, 'c') * point.z)) + _Runtime.field(plane, 'd'));
     return cast null;
   }
 
@@ -82,13 +82,13 @@ class Plane {
     var py:Dynamic = cast _Runtime.UNDEFINED;
     var pz:Dynamic = cast _Runtime.UNDEFINED;
     var dist:Dynamic = cast _Runtime.UNDEFINED;
-    px = _Runtime.field(point, 'x');
-    py = _Runtime.field(point, 'y');
-    pz = _Runtime.field(point, 'z');
+    px = point.x;
+    py = point.y;
+    pz = point.z;
     dist = ((((_Runtime.field(plane, 'a') * px) + (_Runtime.field(plane, 'b') * py)) + (_Runtime.field(plane, 'c') * pz)) + _Runtime.field(plane, 'd'));
-    _Runtime.setField(out, 'x', (px - (dist * _Runtime.field(plane, 'a'))));
-    _Runtime.setField(out, 'y', (py - (dist * _Runtime.field(plane, 'b'))));
-    _Runtime.setField(out, 'z', (pz - (dist * _Runtime.field(plane, 'c'))));
+    (out.x = cast ((px - (dist * _Runtime.field(plane, 'a'))) : Dynamic));
+    (out.y = cast ((py - (dist * _Runtime.field(plane, 'b'))) : Dynamic));
+    (out.z = cast ((pz - (dist * _Runtime.field(plane, 'c'))) : Dynamic));
   }
 
   public static function setPlane(out:PlaneLike, a:Float, b:Float, c:Float, d:Float):Void {
@@ -99,10 +99,10 @@ class Plane {
   }
 
   public static function setPlaneFromNormalAndPoint(out:PlaneLike, normal:Vector3Like, point:Vector3Like):Void {
-    _Runtime.setField(out, 'a', _Runtime.field(normal, 'x'));
-    _Runtime.setField(out, 'b', _Runtime.field(normal, 'y'));
-    _Runtime.setField(out, 'c', _Runtime.field(normal, 'z'));
-    _Runtime.setField(out, 'd', -(((_Runtime.field(normal, 'x') * _Runtime.field(point, 'x')) + (_Runtime.field(normal, 'y') * _Runtime.field(point, 'y'))) + (_Runtime.field(normal, 'z') * _Runtime.field(point, 'z'))));
+    _Runtime.setField(out, 'a', normal.x);
+    _Runtime.setField(out, 'b', normal.y);
+    _Runtime.setField(out, 'c', normal.z);
+    _Runtime.setField(out, 'd', -(((normal.x * point.x) + (normal.y * point.y)) + (normal.z * point.z)));
   }
 
   public static function setPlaneFromPoints(out:PlaneLike, a:Vector3Like, b:Vector3Like, c:Vector3Like):Void {
@@ -117,12 +117,12 @@ class Plane {
     var nz:Dynamic = cast _Runtime.UNDEFINED;
     var len:Dynamic = cast _Runtime.UNDEFINED;
     var inv:Dynamic = cast _Runtime.UNDEFINED;
-    e1x = (_Runtime.field(b, 'x') - _Runtime.field(a, 'x'));
-    e1y = (_Runtime.field(b, 'y') - _Runtime.field(a, 'y'));
-    e1z = (_Runtime.field(b, 'z') - _Runtime.field(a, 'z'));
-    e2x = (_Runtime.field(c, 'x') - _Runtime.field(a, 'x'));
-    e2y = (_Runtime.field(c, 'y') - _Runtime.field(a, 'y'));
-    e2z = (_Runtime.field(c, 'z') - _Runtime.field(a, 'z'));
+    e1x = (b.x - a.x);
+    e1y = (b.y - a.y);
+    e1z = (b.z - a.z);
+    e2x = (c.x - a.x);
+    e2y = (c.y - a.y);
+    e2z = (c.z - a.z);
     nx = ((e1y * e2z) - (e1z * e2y));
     ny = ((e1z * e2x) - (e1x * e2z));
     nz = ((e1x * e2y) - (e1y * e2x));
@@ -138,6 +138,6 @@ class Plane {
     _Runtime.setField(out, 'a', (nx * inv));
     _Runtime.setField(out, 'b', (ny * inv));
     _Runtime.setField(out, 'c', (nz * inv));
-    _Runtime.setField(out, 'd', -(((_Runtime.field(out, 'a') * _Runtime.field(a, 'x')) + (_Runtime.field(out, 'b') * _Runtime.field(a, 'y'))) + (_Runtime.field(out, 'c') * _Runtime.field(a, 'z'))));
+    _Runtime.setField(out, 'd', -(((_Runtime.field(out, 'a') * a.x) + (_Runtime.field(out, 'b') * a.y)) + (_Runtime.field(out, 'c') * a.z)));
   }
 }

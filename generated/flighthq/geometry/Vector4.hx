@@ -220,9 +220,9 @@ class Vector4 {
   }
 
   public static function projectVector4(out:Vector3Like, source:Vector4Like):Void {
-    _Runtime.setField(out, 'x', (_Runtime.field(source, 'x') / _Runtime.field(source, 'w')));
-    _Runtime.setField(out, 'y', (_Runtime.field(source, 'y') / _Runtime.field(source, 'w')));
-    _Runtime.setField(out, 'z', (_Runtime.field(source, 'z') / _Runtime.field(source, 'w')));
+    (out.x = cast ((_Runtime.field(source, 'x') / _Runtime.field(source, 'w')) : Dynamic));
+    (out.y = cast ((_Runtime.field(source, 'y') / _Runtime.field(source, 'w')) : Dynamic));
+    (out.z = cast ((_Runtime.field(source, 'z') / _Runtime.field(source, 'w')) : Dynamic));
   }
 
   public static function reflectVector4(out:Vector4Like, incident:Vector4Like, normal:Vector4Like):Void {
@@ -275,9 +275,9 @@ class Vector4 {
     var x:Dynamic = cast _Runtime.UNDEFINED;
     var y:Dynamic = cast _Runtime.UNDEFINED;
     var z:Dynamic = cast _Runtime.UNDEFINED;
-    x = _Runtime.field(source, 'x');
-    y = _Runtime.field(source, 'y');
-    z = _Runtime.field(source, 'z');
+    x = source.x;
+    y = source.y;
+    z = source.z;
     _Runtime.setField(out, 'x', x);
     _Runtime.setField(out, 'y', y);
     _Runtime.setField(out, 'z', z);

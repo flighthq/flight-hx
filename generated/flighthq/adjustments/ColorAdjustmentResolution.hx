@@ -36,14 +36,14 @@ class ColorAdjustmentResolution {
       }
     }
     fused = _Runtime.callValue(fuseColorMatrices, cast ([matrices] : Array<Dynamic>));
-    _Runtime.setField(out, 'redMultiplier', _Runtime.getIndex(fused, 0.0));
-    _Runtime.setField(out, 'greenMultiplier', _Runtime.getIndex(fused, 6.0));
-    _Runtime.setField(out, 'blueMultiplier', _Runtime.getIndex(fused, 12.0));
-    _Runtime.setField(out, 'alphaMultiplier', _Runtime.getIndex(fused, 18.0));
-    _Runtime.setField(out, 'redOffset', _Runtime.getIndex(fused, 4.0));
-    _Runtime.setField(out, 'greenOffset', _Runtime.getIndex(fused, 9.0));
-    _Runtime.setField(out, 'blueOffset', _Runtime.getIndex(fused, 14.0));
-    _Runtime.setField(out, 'alphaOffset', _Runtime.getIndex(fused, 19.0));
+    (out.redMultiplier = cast (_Runtime.getIndex(fused, 0.0) : Dynamic));
+    (out.greenMultiplier = cast (_Runtime.getIndex(fused, 6.0) : Dynamic));
+    (out.blueMultiplier = cast (_Runtime.getIndex(fused, 12.0) : Dynamic));
+    (out.alphaMultiplier = cast (_Runtime.getIndex(fused, 18.0) : Dynamic));
+    (out.redOffset = cast (_Runtime.getIndex(fused, 4.0) : Dynamic));
+    (out.greenOffset = cast (_Runtime.getIndex(fused, 9.0) : Dynamic));
+    (out.blueOffset = cast (_Runtime.getIndex(fused, 14.0) : Dynamic));
+    (out.alphaOffset = cast (_Runtime.getIndex(fused, 19.0) : Dynamic));
     return cast _Runtime.select(_Runtime.andValue(inlineable, function():Dynamic return cast _Runtime.callValue(isAffineColorMatrix, cast ([fused] : Array<Dynamic>))), function():Dynamic return cast COLOR_ADJUSTMENT_AFFINE, function():Dynamic return cast COLOR_ADJUSTMENT_CHANNEL_MIXING);
     return cast null;
   }

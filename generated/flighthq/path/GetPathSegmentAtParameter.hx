@@ -20,8 +20,8 @@ class GetPathSegmentAtParameter {
     u3 = (u2 * u);
     t2 = (t * t);
     t3 = (t2 * t);
-    _Runtime.setField(out, 'x', ((((u3 * x0) + (((3.0 * u2) * t) * c1x)) + (((3.0 * u) * t2) * c2x)) + (t3 * x1)));
-    _Runtime.setField(out, 'y', ((((u3 * y0) + (((3.0 * u2) * t) * c1y)) + (((3.0 * u) * t2) * c2y)) + (t3 * y1)));
+    (out.x = cast (((((u3 * x0) + (((3.0 * u2) * t) * c1x)) + (((3.0 * u) * t2) * c2x)) + (t3 * x1)) : Dynamic));
+    (out.y = cast (((((u3 * y0) + (((3.0 * u2) * t) * c1y)) + (((3.0 * u) * t2) * c2y)) + (t3 * y1)) : Dynamic));
     return cast out;
     return cast null;
   }
@@ -33,8 +33,8 @@ class GetPathSegmentAtParameter {
     u = (1.0 - t);
     u2 = (u * u);
     t2 = (t * t);
-    _Runtime.setField(out, 'x', (3.0 * (((u2 * (c1x - x0)) + (((2.0 * u) * t) * (c2x - c1x))) + (t2 * (x1 - c2x)))));
-    _Runtime.setField(out, 'y', (3.0 * (((u2 * (c1y - y0)) + (((2.0 * u) * t) * (c2y - c1y))) + (t2 * (y1 - c2y)))));
+    (out.x = cast ((3.0 * (((u2 * (c1x - x0)) + (((2.0 * u) * t) * (c2x - c1x))) + (t2 * (x1 - c2x)))) : Dynamic));
+    (out.y = cast ((3.0 * (((u2 * (c1y - y0)) + (((2.0 * u) * t) * (c2y - c1y))) + (t2 * (y1 - c2y)))) : Dynamic));
     return cast out;
     return cast null;
   }
@@ -52,8 +52,8 @@ class GetPathSegmentAtParameter {
   public static function getQuadraticBezierPoint(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float, out:Vector2Like):Vector2Like {
     var u:Dynamic = cast _Runtime.UNDEFINED;
     u = (1.0 - t);
-    _Runtime.setField(out, 'x', ((((u * u) * x0) + (((2.0 * u) * t) * cx)) + ((t * t) * x1)));
-    _Runtime.setField(out, 'y', ((((u * u) * y0) + (((2.0 * u) * t) * cy)) + ((t * t) * y1)));
+    (out.x = cast (((((u * u) * x0) + (((2.0 * u) * t) * cx)) + ((t * t) * x1)) : Dynamic));
+    (out.y = cast (((((u * u) * y0) + (((2.0 * u) * t) * cy)) + ((t * t) * y1)) : Dynamic));
     return cast out;
     return cast null;
   }
@@ -61,8 +61,8 @@ class GetPathSegmentAtParameter {
   public static function getQuadraticBezierTangent(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float, out:Vector2Like):Vector2Like {
     var u:Dynamic = cast _Runtime.UNDEFINED;
     u = (1.0 - t);
-    _Runtime.setField(out, 'x', (2.0 * ((u * (cx - x0)) + (t * (x1 - cx)))));
-    _Runtime.setField(out, 'y', (2.0 * ((u * (cy - y0)) + (t * (y1 - cy)))));
+    (out.x = cast ((2.0 * ((u * (cx - x0)) + (t * (x1 - cx)))) : Dynamic));
+    (out.y = cast ((2.0 * ((u * (cy - y0)) + (t * (y1 - cy)))) : Dynamic));
     return cast out;
     return cast null;
   }
@@ -98,11 +98,11 @@ class GetPathSegmentAtParameter {
           (di = cast ((di + 2.0) : Dynamic));
           if (_Runtime.truthy(_Runtime.strictEquals(currentSegment, segmentIndex))) {
             if (_Runtime.truthy(wantTangent)) {
-              _Runtime.setField(out, 'x', (x1 - x));
-              _Runtime.setField(out, 'y', (y1 - y));
+              (out.x = cast ((x1 - x) : Dynamic));
+              (out.y = cast ((y1 - y) : Dynamic));
             } else {
-              _Runtime.setField(out, 'x', (x + (t * (x1 - x))));
-              _Runtime.setField(out, 'y', (y + (t * (y1 - y))));
+              (out.x = cast ((x + (t * (x1 - x))) : Dynamic));
+              (out.y = cast ((y + (t * (y1 - y))) : Dynamic));
             }
             return cast true;
           }
@@ -115,11 +115,11 @@ class GetPathSegmentAtParameter {
           (di = cast ((di + 4.0) : Dynamic));
           if (_Runtime.truthy(_Runtime.strictEquals(currentSegment, segmentIndex))) {
             if (_Runtime.truthy(wantTangent)) {
-              _Runtime.setField(out, 'x', (x1 - x));
-              _Runtime.setField(out, 'y', (y1 - y));
+              (out.x = cast ((x1 - x) : Dynamic));
+              (out.y = cast ((y1 - y) : Dynamic));
             } else {
-              _Runtime.setField(out, 'x', (x + (t * (x1 - x))));
-              _Runtime.setField(out, 'y', (y + (t * (y1 - y))));
+              (out.x = cast ((x + (t * (x1 - x))) : Dynamic));
+              (out.y = cast ((y + (t * (y1 - y))) : Dynamic));
             }
             return cast true;
           }

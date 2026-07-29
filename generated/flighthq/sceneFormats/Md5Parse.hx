@@ -115,10 +115,10 @@ class Md5Parse {
             (localPx = cast (_Runtime.field(relPos, 'x') : Dynamic));
             (localPy = cast (_Runtime.field(relPos, 'y') : Dynamic));
             (localPz = cast (_Runtime.field(relPos, 'z') : Dynamic));
-            (localQx = cast (_Runtime.field(relQuat, 'x') : Dynamic));
-            (localQy = cast (_Runtime.field(relQuat, 'y') : Dynamic));
-            (localQz = cast (_Runtime.field(relQuat, 'z') : Dynamic));
-            (localQw = cast (_Runtime.field(relQuat, 'w') : Dynamic));
+            (localQx = cast (relQuat.x : Dynamic));
+            (localQy = cast (relQuat.y : Dynamic));
+            (localQz = cast (relQuat.z : Dynamic));
+            (localQw = cast (relQuat.w : Dynamic));
           } else { if (_Runtime.truthy(_Runtime.compare(parentIndex, _Runtime.field(joints, 'length'), '>='))) {
             _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: joint ' + Std.string(j) + ' has out-of-range parent index ' + Std.string(parentIndex) + ''] : Array<Dynamic>));
           } }

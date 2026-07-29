@@ -218,8 +218,8 @@ class Sprite {
     region = _Runtime.callValue(getSpriteRegion, cast ([source] : Array<Dynamic>));
     pivotX = _Runtime.select(!_Runtime.strictEquals(region, null), function():Dynamic return cast _Runtime.coalesce(_Runtime.field(region, 'pivotX'), function():Dynamic return cast 0.0), function():Dynamic return cast 0.0);
     pivotY = _Runtime.select(!_Runtime.strictEquals(region, null), function():Dynamic return cast _Runtime.coalesce(_Runtime.field(region, 'pivotY'), function():Dynamic return cast 0.0), function():Dynamic return cast 0.0);
-    _Runtime.setField(out, 'x', _Runtime.select(_Runtime.strictEquals(pivotX, 0.0), function():Dynamic return cast 0.0, function():Dynamic return cast -pivotX));
-    _Runtime.setField(out, 'y', _Runtime.select(_Runtime.strictEquals(pivotY, 0.0), function():Dynamic return cast 0.0, function():Dynamic return cast -pivotY));
+    (out.x = cast (_Runtime.select(_Runtime.strictEquals(pivotX, 0.0), function():Dynamic return cast 0.0, function():Dynamic return cast -pivotX) : Dynamic));
+    (out.y = cast (_Runtime.select(_Runtime.strictEquals(pivotY, 0.0), function():Dynamic return cast 0.0, function():Dynamic return cast -pivotY) : Dynamic));
   }
 
   public static function getSpriteRegion(source:flighthq.types.Sprite):Null<TextureAtlasRegion> {

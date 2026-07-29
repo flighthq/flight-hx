@@ -23,7 +23,7 @@ class Frustum {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     var ndcCorners:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var len:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.field(inverseViewProjection, 'm');
+    m = inverseViewProjection.m;
     ndcCorners = cast ([cast ([-1.0, -1.0, -1.0] : Array<Dynamic>), cast ([1.0, -1.0, -1.0] : Array<Dynamic>), cast ([1.0, 1.0, -1.0] : Array<Dynamic>), cast ([-1.0, 1.0, -1.0] : Array<Dynamic>), cast ([-1.0, -1.0, 1.0] : Array<Dynamic>), cast ([1.0, -1.0, 1.0] : Array<Dynamic>), cast ([1.0, 1.0, 1.0] : Array<Dynamic>), cast ([-1.0, 1.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>);
     len = HxMath.min(_Runtime.field(out, 'length'), _Runtime.field(ndcCorners, 'length'));
     {
@@ -39,9 +39,9 @@ class Frustum {
         var w:Dynamic = ((((_Runtime.getIndex(m, 3.0) * nx) + (_Runtime.getIndex(m, 7.0) * ny)) + (_Runtime.getIndex(m, 11.0) * nz)) + _Runtime.getIndex(m, 15.0));
         var invW:Dynamic = _Runtime.select(!_Runtime.strictEquals(w, 0.0), function():Dynamic return cast (1.0 / w), function():Dynamic return cast 1.0);
         var corner:Dynamic = _Runtime.getIndex(out, i);
-        _Runtime.setField(corner, 'x', (x * invW));
-        _Runtime.setField(corner, 'y', (y * invW));
-        _Runtime.setField(corner, 'z', (z * invW));
+        (corner.x = cast ((x * invW) : Dynamic));
+        (corner.y = cast ((y * invW) : Dynamic));
+        (corner.z = cast ((z * invW) : Dynamic));
         i++;
       }
     }
@@ -83,7 +83,7 @@ class Frustum {
     var r31:Dynamic = cast _Runtime.UNDEFINED;
     var r32:Dynamic = cast _Runtime.UNDEFINED;
     var r33:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.field(viewProjection, 'm');
+    m = viewProjection.m;
     r00 = _Runtime.getIndex(m, 0.0);
     r01 = _Runtime.getIndex(m, 4.0);
     r02 = _Runtime.getIndex(m, 8.0);
@@ -112,15 +112,15 @@ class Frustum {
     var px:Dynamic = cast _Runtime.UNDEFINED;
     var py:Dynamic = cast _Runtime.UNDEFINED;
     var pz:Dynamic = cast _Runtime.UNDEFINED;
-    px = _Runtime.select(_Runtime.compare(_Runtime.field(plane, 'a'), 0.0, '>='), function():Dynamic return cast _Runtime.field(_Runtime.field(aabb, 'max'), 'x'), function():Dynamic return cast _Runtime.field(_Runtime.field(aabb, 'min'), 'x'));
-    py = _Runtime.select(_Runtime.compare(_Runtime.field(plane, 'b'), 0.0, '>='), function():Dynamic return cast _Runtime.field(_Runtime.field(aabb, 'max'), 'y'), function():Dynamic return cast _Runtime.field(_Runtime.field(aabb, 'min'), 'y'));
-    pz = _Runtime.select(_Runtime.compare(_Runtime.field(plane, 'c'), 0.0, '>='), function():Dynamic return cast _Runtime.field(_Runtime.field(aabb, 'max'), 'z'), function():Dynamic return cast _Runtime.field(_Runtime.field(aabb, 'min'), 'z'));
+    px = _Runtime.select(_Runtime.compare(_Runtime.field(plane, 'a'), 0.0, '>='), function():Dynamic return cast _Runtime.field(aabb, 'max').x, function():Dynamic return cast _Runtime.field(aabb, 'min').x);
+    py = _Runtime.select(_Runtime.compare(_Runtime.field(plane, 'b'), 0.0, '>='), function():Dynamic return cast _Runtime.field(aabb, 'max').y, function():Dynamic return cast _Runtime.field(aabb, 'min').y);
+    pz = _Runtime.select(_Runtime.compare(_Runtime.field(plane, 'c'), 0.0, '>='), function():Dynamic return cast _Runtime.field(aabb, 'max').z, function():Dynamic return cast _Runtime.field(aabb, 'min').z);
     return cast _Runtime.compare(((((_Runtime.field(plane, 'a') * px) + (_Runtime.field(plane, 'b') * py)) + (_Runtime.field(plane, 'c') * pz)) + _Runtime.field(plane, 'd')), 0.0, '>=');
     return cast null;
   }
 
   public static function __planeSignedDistance__frustum(plane:PlaneLike, point:Vector3Like):Float {
-    return cast ((((_Runtime.field(plane, 'a') * _Runtime.field(point, 'x')) + (_Runtime.field(plane, 'b') * _Runtime.field(point, 'y'))) + (_Runtime.field(plane, 'c') * _Runtime.field(point, 'z'))) + _Runtime.field(plane, 'd'));
+    return cast ((((_Runtime.field(plane, 'a') * point.x) + (_Runtime.field(plane, 'b') * point.y)) + (_Runtime.field(plane, 'c') * point.z)) + _Runtime.field(plane, 'd'));
     return cast null;
   }
 

@@ -1776,6 +1776,16 @@ function emitExpression(expression: IrExpression): string {
               : `(${current} ${expression.operator.slice(0, -1)} ${emitExpression(expression.right)})`;
           return `${binding}.setField(${object}, ${quote(expression.left.name)}, ${value})`;
         }
+        if (expression.left.typedStructBinding) {
+          if (expression.left.optional) {
+            throw new Error(`Optional typed-struct assignment is not supported: ${expression.left.name}`);
+          }
+          const field = directTypedStructField(expression.left, object);
+          if (expression.operator === '=') {
+            return `(${field} = cast (${emitExpression(expression.right)} : Dynamic))`;
+          }
+          return `(${field} ${expression.operator} ${emitExpression(expression.right)})`;
+        }
         if (expression.left.object.kind === 'identifier' && expression.left.object.name === 'this') {
           if (expression.operator === '=') {
             return `(this.${safeName(expression.left.name)} = cast (${emitExpression(expression.right)} : Dynamic))`;
@@ -2059,6 +2069,7 @@ function emitExpression(expression: IrExpression): string {
         if (expression.binding === 'Canvas2dBackend') canvas2dReadableFieldEndpoint(expression.name);
         return `flighthq._internal.backend.${expression.binding}.field(${emitExpression(expression.object)}, ${quote(expression.name)})`;
       }
+      if (expression.typedStructBinding) return emitTypedStructRead(expression);
       if (
         expression.object.kind === 'identifier' &&
         expression.object.name === 'HxMath' &&
@@ -2135,6 +2146,13 @@ function emitExpression(expression: IrExpression): string {
         if (expression.operand.binding === 'WebGl2Backend') {
           throw new Error(`WebGL2 property mutation has no typed backend endpoint: ${expression.operand.name}`);
         }
+        if (expression.operand.typedStructBinding) {
+          if (expression.operand.optional) {
+            throw new Error(`Optional typed-struct mutation is not supported: ${expression.operand.name}`);
+          }
+          const field = directTypedStructField(expression.operand);
+          return expression.postfix ? `${field}${expression.operator}` : `${expression.operator}${field}`;
+        }
         return `_Runtime.incrementField(${emitExpression(expression.operand.object)}, ${quote(expression.operand.name)}, ${expression.operator === '++' ? '1' : '-1'}, ${expression.postfix ? 'true' : 'false'})`;
       }
       return expression.postfix
@@ -2201,6 +2219,24 @@ function emitPendingFinalizers(): string[] {
     currentFinallyStack = pending;
   }
   return lines;
+}
+
+function directTypedStructField(
+  expression: Extract<IrExpression, { kind: 'property' }>,
+  owner = emitExpression(expression.object),
+): string {
+  const binding = expression.typedStructBinding;
+  if (!binding || binding.field.name !== expression.name) {
+    throw new Error(`Invalid typed-struct field binding: ${currentSourceIdentity}:${expression.name}`);
+  }
+  return `${owner}.${safeName(binding.field.name)}`;
+}
+
+function emitTypedStructRead(expression: Extract<IrExpression, { kind: 'property' }>): string {
+  const owner = emitExpression(expression.object);
+  if (!expression.optional) return directTypedStructField(expression, owner);
+  const temporary = `__typedStruct${String(temporaryIndex++)}`;
+  return `({ final ${temporary} = ${owner}; ${temporary} == null ? _Runtime.UNDEFINED : ${directTypedStructField(expression, temporary)}; })`;
 }
 
 function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
@@ -2286,6 +2322,10 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
       arguments_ = `({ final ${temporary}:Array<Dynamic> = _Runtime.concatArrays([${chunks.join(', ')}]); _Runtime.concatArrays([${temporary}.slice(0, ${index}), [${temporary}.slice(${index})]]); })`;
     }
     if (expression.callee.kind === 'property') {
+      if (expression.callee.typedStructBinding) {
+        const method = expression.optional || expression.callee.optional ? 'callOptionalValue' : 'callValue';
+        return `_Runtime.${method}(${emitTypedStructRead(expression.callee)}, ${arguments_})`;
+      }
       const method = expression.optional || expression.callee.optional ? 'callOptionalProperty' : 'callProperty';
       return `_Runtime.${method}(${emitExpression(expression.callee.object)}, ${quote(expression.callee.name)}, ${arguments_})`;
     }
@@ -2317,6 +2357,10 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
       ) {
         if (expression.callee.binding === 'Canvas2dBackend') canvas2dMethodEndpoint(expression.callee.name);
         return `flighthq._internal.backend.${expression.callee.binding}.call(${emitExpression(expression.callee.object)}, ${quote(expression.callee.name)}, _Runtime.concatArrays([${chunks.join(', ')}]))`;
+      }
+      if (expression.callee.typedStructBinding) {
+        const method = expression.optional || expression.callee.optional ? 'callOptionalValue' : 'apply';
+        return `_Runtime.${method}(${emitTypedStructRead(expression.callee)}, _Runtime.concatArrays([${chunks.join(', ')}]))`;
       }
       const method = expression.optional || expression.callee.optional ? 'callOptionalProperty' : 'callProperty';
       return `_Runtime.${method}(${emitExpression(expression.callee.object)}, ${quote(expression.callee.name)}, _Runtime.concatArrays([${chunks.join(', ')}]))`;
@@ -2360,6 +2404,10 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
       if (expression.callee.binding === 'Canvas2dBackend') canvas2dMethodEndpoint(name);
       const method = expression.optional || expression.callee.optional ? 'callOptional' : 'call';
       return `flighthq._internal.backend.${expression.callee.binding}.${method}(${owner}, ${quote(name)}, cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
+    }
+    if (expression.callee.typedStructBinding) {
+      const method = expression.optional || expression.callee.optional ? 'callOptionalValue' : 'callValue';
+      return `_Runtime.${method}(${emitTypedStructRead(expression.callee)}, cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
     }
     if (expression.callee.generatedClass) {
       const generatedClass = expression.callee.generatedClass;

@@ -10,8 +10,8 @@ class Vector2Pool {
   public static function acquireEmptyVector2():Vector2 {
     var v:Dynamic = cast _Runtime.UNDEFINED;
     v = _Runtime.callValue(acquireVector2, cast ([] : Array<Dynamic>));
-    _Runtime.setField(v, 'x', 0.0);
-    _Runtime.setField(v, 'y', 0.0);
+    (v.x = cast (0.0 : Dynamic));
+    (v.y = cast (0.0 : Dynamic));
     return cast v;
     return cast null;
   }

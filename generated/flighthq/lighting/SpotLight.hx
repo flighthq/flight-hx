@@ -66,9 +66,9 @@ class SpotLight {
     var dy:Dynamic = cast _Runtime.UNDEFINED;
     var dz:Dynamic = cast _Runtime.UNDEFINED;
     var len:Dynamic = cast _Runtime.UNDEFINED;
-    px = _Runtime.field(_Runtime.field(out, 'position'), 'x');
-    py = _Runtime.field(_Runtime.field(out, 'position'), 'y');
-    pz = _Runtime.field(_Runtime.field(out, 'position'), 'z');
+    px = _Runtime.field(out, 'position').x;
+    py = _Runtime.field(out, 'position').y;
+    pz = _Runtime.field(out, 'position').z;
     dx = (targetX - px);
     dy = (targetY - py);
     dz = (targetZ - pz);

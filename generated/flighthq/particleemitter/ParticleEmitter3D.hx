@@ -125,12 +125,12 @@ class ParticleEmitter3D {
     positionsZ = _Runtime.field(__destructure0, 'positionsZ');
     transforms = _Runtime.field(__destructure0, 'transforms');
     if (_Runtime.truthy(_Runtime.strictEquals(particleCount, 0.0))) {
-      _Runtime.setField(_Runtime.field(out, 'min'), 'x', 0.0);
-      _Runtime.setField(_Runtime.field(out, 'min'), 'y', 0.0);
-      _Runtime.setField(_Runtime.field(out, 'min'), 'z', 0.0);
-      _Runtime.setField(_Runtime.field(out, 'max'), 'x', 0.0);
-      _Runtime.setField(_Runtime.field(out, 'max'), 'y', 0.0);
-      _Runtime.setField(_Runtime.field(out, 'max'), 'z', 0.0);
+      (_Runtime.field(out, 'min').x = cast (0.0 : Dynamic));
+      (_Runtime.field(out, 'min').y = cast (0.0 : Dynamic));
+      (_Runtime.field(out, 'min').z = cast (0.0 : Dynamic));
+      (_Runtime.field(out, 'max').x = cast (0.0 : Dynamic));
+      (_Runtime.field(out, 'max').y = cast (0.0 : Dynamic));
+      (_Runtime.field(out, 'max').z = cast (0.0 : Dynamic));
       return;
     }
     minX = HxMath.POSITIVE_INFINITY;
@@ -157,12 +157,12 @@ class ParticleEmitter3D {
         i++;
       }
     }
-    _Runtime.setField(_Runtime.field(out, 'min'), 'x', minX);
-    _Runtime.setField(_Runtime.field(out, 'min'), 'y', minY);
-    _Runtime.setField(_Runtime.field(out, 'min'), 'z', minZ);
-    _Runtime.setField(_Runtime.field(out, 'max'), 'x', maxX);
-    _Runtime.setField(_Runtime.field(out, 'max'), 'y', maxY);
-    _Runtime.setField(_Runtime.field(out, 'max'), 'z', maxZ);
+    (_Runtime.field(out, 'min').x = cast (minX : Dynamic));
+    (_Runtime.field(out, 'min').y = cast (minY : Dynamic));
+    (_Runtime.field(out, 'min').z = cast (minZ : Dynamic));
+    (_Runtime.field(out, 'max').x = cast (maxX : Dynamic));
+    (_Runtime.field(out, 'max').y = cast (maxY : Dynamic));
+    (_Runtime.field(out, 'max').z = cast (maxZ : Dynamic));
   }
 
   public static function createParticleEmitter3D(?obj:PartialNode<flighthq.types.ParticleEmitter3D>):flighthq.types.ParticleEmitter3D {
@@ -199,9 +199,9 @@ class ParticleEmitter3D {
     var vt:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(source, 'data'), 'particleCount'), '>=')))) { return cast false; }
     vt = (index * ParticleEmitter3D.PARTICLE_VELOCITY_STRIDE__particleEmitter3D);
-    _Runtime.setField(out, 'x', _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'data'), 'velocities'), vt));
-    _Runtime.setField(out, 'y', _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'data'), 'velocities'), (vt + 1.0)));
-    _Runtime.setField(out, 'z', _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'data'), 'velocities'), (vt + 2.0)));
+    (out.x = cast (_Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'data'), 'velocities'), vt) : Dynamic));
+    (out.y = cast (_Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'data'), 'velocities'), (vt + 1.0)) : Dynamic));
+    (out.z = cast (_Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'data'), 'velocities'), (vt + 2.0)) : Dynamic));
     return cast true;
     return cast null;
   }

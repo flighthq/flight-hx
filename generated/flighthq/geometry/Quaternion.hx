@@ -12,22 +12,22 @@ import flighthq.types.Vector3.Vector3Like;
 
 class Quaternion {
   public static function cloneQuaternion(source:QuaternionLike):flighthq.types.Quaternion {
-    return cast _Runtime.callValue(createQuaternion, cast ([_Runtime.field(source, 'x'), _Runtime.field(source, 'y'), _Runtime.field(source, 'z'), _Runtime.field(source, 'w')] : Array<Dynamic>));
+    return cast _Runtime.callValue(createQuaternion, cast ([source.x, source.y, source.z, source.w] : Array<Dynamic>));
     return cast null;
   }
 
   public static function conjugateQuaternion(out:QuaternionLike, source:QuaternionLike):Void {
-    _Runtime.setField(out, 'x', -_Runtime.field(source, 'x'));
-    _Runtime.setField(out, 'y', -_Runtime.field(source, 'y'));
-    _Runtime.setField(out, 'z', -_Runtime.field(source, 'z'));
-    _Runtime.setField(out, 'w', _Runtime.field(source, 'w'));
+    (out.x = cast (-source.x : Dynamic));
+    (out.y = cast (-source.y : Dynamic));
+    (out.z = cast (-source.z : Dynamic));
+    (out.w = cast (source.w : Dynamic));
   }
 
   public static function copyQuaternion(out:QuaternionLike, source:QuaternionLike):Void {
-    _Runtime.setField(out, 'x', _Runtime.field(source, 'x'));
-    _Runtime.setField(out, 'y', _Runtime.field(source, 'y'));
-    _Runtime.setField(out, 'z', _Runtime.field(source, 'z'));
-    _Runtime.setField(out, 'w', _Runtime.field(source, 'w'));
+    (out.x = cast (source.x : Dynamic));
+    (out.y = cast (source.y : Dynamic));
+    (out.z = cast (source.z : Dynamic));
+    (out.w = cast (source.w : Dynamic));
   }
 
   public static function createQuaternion(?x:Float, ?y:Float, ?z:Float, ?w:Float):flighthq.types.Quaternion {
@@ -38,7 +38,7 @@ class Quaternion {
   public static function equalsQuaternion(a:Null<QuaternionLike>, b:Null<QuaternionLike>):Bool {
     if (_Runtime.truthy(_Runtime.strictEquals(a, b))) { return cast true; }
     if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(a), function():Dynamic return cast !_Runtime.truthy(b)))) { return cast false; }
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(a, 'x'), _Runtime.field(b, 'x')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'y'), _Runtime.field(b, 'y'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'z'), _Runtime.field(b, 'z'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'w'), _Runtime.field(b, 'w')));
+    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(a.x, b.x), function():Dynamic return cast _Runtime.strictEquals(a.y, b.y)), function():Dynamic return cast _Runtime.strictEquals(a.z, b.z)), function():Dynamic return cast _Runtime.strictEquals(a.w, b.w));
     return cast null;
   }
 
@@ -50,7 +50,7 @@ class Quaternion {
   }
 
   public static function getQuaternionDot(a:QuaternionLike, b:QuaternionLike):Float {
-    return cast ((((_Runtime.field(a, 'x') * _Runtime.field(b, 'x')) + (_Runtime.field(a, 'y') * _Runtime.field(b, 'y'))) + (_Runtime.field(a, 'z') * _Runtime.field(b, 'z'))) + (_Runtime.field(a, 'w') * _Runtime.field(b, 'w')));
+    return cast ((((a.x * b.x) + (a.y * b.y)) + (a.z * b.z)) + (a.w * b.w));
     return cast null;
   }
 
@@ -77,10 +77,10 @@ class Quaternion {
     var m20:Dynamic = cast _Runtime.UNDEFINED;
     var m21:Dynamic = cast _Runtime.UNDEFINED;
     var m22:Dynamic = cast _Runtime.UNDEFINED;
-    x = _Runtime.field(source, 'x');
-    y = _Runtime.field(source, 'y');
-    z = _Runtime.field(source, 'z');
-    w = _Runtime.field(source, 'w');
+    x = source.x;
+    y = source.y;
+    z = source.z;
+    w = source.w;
     xx = (x * x);
     yy = (y * y);
     zz = (z * z);
@@ -103,73 +103,73 @@ class Quaternion {
       var __switchValue = order;
       if (__switchValue == 'XYZ') {
         {
-          _Runtime.setField(out, 'y', HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, m02))));
+          (out.y = cast (HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, m02))) : Dynamic));
           if (_Runtime.truthy(_Runtime.compare(HxMath.abs(m02), 0.9999999, '<'))) {
-            _Runtime.setField(out, 'x', HxMath.atan2(-m12, m22));
-            _Runtime.setField(out, 'z', HxMath.atan2(-m01, m00));
+            (out.x = cast (HxMath.atan2(-m12, m22) : Dynamic));
+            (out.z = cast (HxMath.atan2(-m01, m00) : Dynamic));
           } else {
-            _Runtime.setField(out, 'x', HxMath.atan2(m21, m11));
-            _Runtime.setField(out, 'z', 0.0);
+            (out.x = cast (HxMath.atan2(m21, m11) : Dynamic));
+            (out.z = cast (0.0 : Dynamic));
           }
         }
       }
       else if (__switchValue == 'XZY') {
         {
-          _Runtime.setField(out, 'z', HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, -m01))));
+          (out.z = cast (HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, -m01))) : Dynamic));
           if (_Runtime.truthy(_Runtime.compare(HxMath.abs(m01), 0.9999999, '<'))) {
-            _Runtime.setField(out, 'x', HxMath.atan2(m21, m11));
-            _Runtime.setField(out, 'y', HxMath.atan2(m02, m00));
+            (out.x = cast (HxMath.atan2(m21, m11) : Dynamic));
+            (out.y = cast (HxMath.atan2(m02, m00) : Dynamic));
           } else {
-            _Runtime.setField(out, 'x', HxMath.atan2(-m12, m22));
-            _Runtime.setField(out, 'y', 0.0);
+            (out.x = cast (HxMath.atan2(-m12, m22) : Dynamic));
+            (out.y = cast (0.0 : Dynamic));
           }
         }
       }
       else if (__switchValue == 'YXZ') {
         {
-          _Runtime.setField(out, 'x', HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, -m12))));
+          (out.x = cast (HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, -m12))) : Dynamic));
           if (_Runtime.truthy(_Runtime.compare(HxMath.abs(m12), 0.9999999, '<'))) {
-            _Runtime.setField(out, 'y', HxMath.atan2(m02, m22));
-            _Runtime.setField(out, 'z', HxMath.atan2(m10, m11));
+            (out.y = cast (HxMath.atan2(m02, m22) : Dynamic));
+            (out.z = cast (HxMath.atan2(m10, m11) : Dynamic));
           } else {
-            _Runtime.setField(out, 'y', HxMath.atan2(-m20, m00));
-            _Runtime.setField(out, 'z', 0.0);
+            (out.y = cast (HxMath.atan2(-m20, m00) : Dynamic));
+            (out.z = cast (0.0 : Dynamic));
           }
         }
       }
       else if (__switchValue == 'YZX') {
         {
-          _Runtime.setField(out, 'z', HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, m10))));
+          (out.z = cast (HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, m10))) : Dynamic));
           if (_Runtime.truthy(_Runtime.compare(HxMath.abs(m10), 0.9999999, '<'))) {
-            _Runtime.setField(out, 'x', HxMath.atan2(-m12, m11));
-            _Runtime.setField(out, 'y', HxMath.atan2(-m20, m00));
+            (out.x = cast (HxMath.atan2(-m12, m11) : Dynamic));
+            (out.y = cast (HxMath.atan2(-m20, m00) : Dynamic));
           } else {
-            _Runtime.setField(out, 'x', 0.0);
-            _Runtime.setField(out, 'y', HxMath.atan2(m02, m22));
+            (out.x = cast (0.0 : Dynamic));
+            (out.y = cast (HxMath.atan2(m02, m22) : Dynamic));
           }
         }
       }
       else if (__switchValue == 'ZXY') {
         {
-          _Runtime.setField(out, 'x', HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, m21))));
+          (out.x = cast (HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, m21))) : Dynamic));
           if (_Runtime.truthy(_Runtime.compare(HxMath.abs(m21), 0.9999999, '<'))) {
-            _Runtime.setField(out, 'y', HxMath.atan2(-m20, m22));
-            _Runtime.setField(out, 'z', HxMath.atan2(-m01, m11));
+            (out.y = cast (HxMath.atan2(-m20, m22) : Dynamic));
+            (out.z = cast (HxMath.atan2(-m01, m11) : Dynamic));
           } else {
-            _Runtime.setField(out, 'y', 0.0);
-            _Runtime.setField(out, 'z', HxMath.atan2(m10, m00));
+            (out.y = cast (0.0 : Dynamic));
+            (out.z = cast (HxMath.atan2(m10, m00) : Dynamic));
           }
         }
       }
       else if (__switchValue == 'ZYX') {
         {
-          _Runtime.setField(out, 'y', HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, -m20))));
+          (out.y = cast (HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, -m20))) : Dynamic));
           if (_Runtime.truthy(_Runtime.compare(HxMath.abs(m20), 0.9999999, '<'))) {
-            _Runtime.setField(out, 'x', HxMath.atan2(m21, m22));
-            _Runtime.setField(out, 'z', HxMath.atan2(m10, m00));
+            (out.x = cast (HxMath.atan2(m21, m22) : Dynamic));
+            (out.z = cast (HxMath.atan2(m10, m00) : Dynamic));
           } else {
-            _Runtime.setField(out, 'x', 0.0);
-            _Runtime.setField(out, 'z', HxMath.atan2(-m01, m11));
+            (out.x = cast (0.0 : Dynamic));
+            (out.z = cast (HxMath.atan2(-m01, m11) : Dynamic));
           }
         }
       }
@@ -183,23 +183,23 @@ class Quaternion {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var lenSq:Dynamic = cast _Runtime.UNDEFINED;
     var inv:Dynamic = cast _Runtime.UNDEFINED;
-    x = _Runtime.field(source, 'x');
-    y = _Runtime.field(source, 'y');
-    z = _Runtime.field(source, 'z');
-    w = _Runtime.field(source, 'w');
+    x = source.x;
+    y = source.y;
+    z = source.z;
+    w = source.w;
     lenSq = ((((x * x) + (y * y)) + (z * z)) + (w * w));
     if (_Runtime.truthy(_Runtime.strictEquals(lenSq, 0.0))) {
-      _Runtime.setField(out, 'x', 0.0);
-      _Runtime.setField(out, 'y', 0.0);
-      _Runtime.setField(out, 'z', 0.0);
-      _Runtime.setField(out, 'w', 1.0);
+      (out.x = cast (0.0 : Dynamic));
+      (out.y = cast (0.0 : Dynamic));
+      (out.z = cast (0.0 : Dynamic));
+      (out.w = cast (1.0 : Dynamic));
       return;
     }
     inv = (1.0 / lenSq);
-    _Runtime.setField(out, 'x', (-x * inv));
-    _Runtime.setField(out, 'y', (-y * inv));
-    _Runtime.setField(out, 'z', (-z * inv));
-    _Runtime.setField(out, 'w', (w * inv));
+    (out.x = cast ((-x * inv) : Dynamic));
+    (out.y = cast ((-y * inv) : Dynamic));
+    (out.z = cast ((-z * inv) : Dynamic));
+    (out.w = cast ((w * inv) : Dynamic));
   }
 
   public static function multiplyQuaternion(out:QuaternionLike, a:QuaternionLike, b:QuaternionLike):Void {
@@ -211,18 +211,18 @@ class Quaternion {
     var by:Dynamic = cast _Runtime.UNDEFINED;
     var bz:Dynamic = cast _Runtime.UNDEFINED;
     var bw:Dynamic = cast _Runtime.UNDEFINED;
-    ax = _Runtime.field(a, 'x');
-    ay = _Runtime.field(a, 'y');
-    az = _Runtime.field(a, 'z');
-    aw = _Runtime.field(a, 'w');
-    bx = _Runtime.field(b, 'x');
-    by = _Runtime.field(b, 'y');
-    bz = _Runtime.field(b, 'z');
-    bw = _Runtime.field(b, 'w');
-    _Runtime.setField(out, 'x', ((((aw * bx) + (ax * bw)) + (ay * bz)) - (az * by)));
-    _Runtime.setField(out, 'y', ((((aw * by) - (ax * bz)) + (ay * bw)) + (az * bx)));
-    _Runtime.setField(out, 'z', ((((aw * bz) + (ax * by)) - (ay * bx)) + (az * bw)));
-    _Runtime.setField(out, 'w', ((((aw * bw) - (ax * bx)) - (ay * by)) - (az * bz)));
+    ax = a.x;
+    ay = a.y;
+    az = a.z;
+    aw = a.w;
+    bx = b.x;
+    by = b.y;
+    bz = b.z;
+    bw = b.w;
+    (out.x = cast (((((aw * bx) + (ax * bw)) + (ay * bz)) - (az * by)) : Dynamic));
+    (out.y = cast (((((aw * by) - (ax * bz)) + (ay * bw)) + (az * bx)) : Dynamic));
+    (out.z = cast (((((aw * bz) + (ax * by)) - (ay * bx)) + (az * bw)) : Dynamic));
+    (out.w = cast (((((aw * bw) - (ax * bx)) - (ay * by)) - (az * bz)) : Dynamic));
   }
 
   public static function normalizeQuaternion(out:QuaternionLike, source:QuaternionLike):Float {
@@ -231,22 +231,22 @@ class Quaternion {
     var z:Dynamic = cast _Runtime.UNDEFINED;
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var l:Dynamic = cast _Runtime.UNDEFINED;
-    x = _Runtime.field(source, 'x');
-    y = _Runtime.field(source, 'y');
-    z = _Runtime.field(source, 'z');
-    w = _Runtime.field(source, 'w');
+    x = source.x;
+    y = source.y;
+    z = source.z;
+    w = source.w;
     l = HxMath.sqrt(((((x * x) + (y * y)) + (z * z)) + (w * w)));
     if (_Runtime.truthy(!_Runtime.strictEquals(l, 0.0))) {
       var inv:Dynamic = (1.0 / l);
-      _Runtime.setField(out, 'x', (x * inv));
-      _Runtime.setField(out, 'y', (y * inv));
-      _Runtime.setField(out, 'z', (z * inv));
-      _Runtime.setField(out, 'w', (w * inv));
+      (out.x = cast ((x * inv) : Dynamic));
+      (out.y = cast ((y * inv) : Dynamic));
+      (out.z = cast ((z * inv) : Dynamic));
+      (out.w = cast ((w * inv) : Dynamic));
     } else {
-      _Runtime.setField(out, 'x', 0.0);
-      _Runtime.setField(out, 'y', 0.0);
-      _Runtime.setField(out, 'z', 0.0);
-      _Runtime.setField(out, 'w', 1.0);
+      (out.x = cast (0.0 : Dynamic));
+      (out.y = cast (0.0 : Dynamic));
+      (out.z = cast (0.0 : Dynamic));
+      (out.w = cast (1.0 : Dynamic));
     }
     return cast l;
     return cast null;
@@ -263,26 +263,26 @@ class Quaternion {
     var tx:Dynamic = cast _Runtime.UNDEFINED;
     var ty:Dynamic = cast _Runtime.UNDEFINED;
     var tz:Dynamic = cast _Runtime.UNDEFINED;
-    qx = _Runtime.field(q, 'x');
-    qy = _Runtime.field(q, 'y');
-    qz = _Runtime.field(q, 'z');
-    qw = _Runtime.field(q, 'w');
-    vx = _Runtime.field(vector, 'x');
-    vy = _Runtime.field(vector, 'y');
-    vz = _Runtime.field(vector, 'z');
+    qx = q.x;
+    qy = q.y;
+    qz = q.z;
+    qw = q.w;
+    vx = vector.x;
+    vy = vector.y;
+    vz = vector.z;
     tx = (2.0 * ((qy * vz) - (qz * vy)));
     ty = (2.0 * ((qz * vx) - (qx * vz)));
     tz = (2.0 * ((qx * vy) - (qy * vx)));
-    _Runtime.setField(out, 'x', ((vx + (qw * tx)) + ((qy * tz) - (qz * ty))));
-    _Runtime.setField(out, 'y', ((vy + (qw * ty)) + ((qz * tx) - (qx * tz))));
-    _Runtime.setField(out, 'z', ((vz + (qw * tz)) + ((qx * ty) - (qy * tx))));
+    (out.x = cast (((vx + (qw * tx)) + ((qy * tz) - (qz * ty))) : Dynamic));
+    (out.y = cast (((vy + (qw * ty)) + ((qz * tx) - (qx * tz))) : Dynamic));
+    (out.z = cast (((vz + (qw * tz)) + ((qx * ty) - (qy * tx))) : Dynamic));
   }
 
   public static function setQuaternion(out:QuaternionLike, x:Float, y:Float, z:Float, w:Float):Void {
-    _Runtime.setField(out, 'x', x);
-    _Runtime.setField(out, 'y', y);
-    _Runtime.setField(out, 'z', z);
-    _Runtime.setField(out, 'w', w);
+    (out.x = cast (x : Dynamic));
+    (out.y = cast (y : Dynamic));
+    (out.z = cast (z : Dynamic));
+    (out.w = cast (w : Dynamic));
   }
 
   public static function setQuaternionFromAxisAngle(out:QuaternionLike, axis:Vector3Like, angle:Float):Void {
@@ -290,10 +290,10 @@ class Quaternion {
     var s:Dynamic = cast _Runtime.UNDEFINED;
     half = (angle * 0.5);
     s = HxMath.sin(half);
-    _Runtime.setField(out, 'x', (_Runtime.field(axis, 'x') * s));
-    _Runtime.setField(out, 'y', (_Runtime.field(axis, 'y') * s));
-    _Runtime.setField(out, 'z', (_Runtime.field(axis, 'z') * s));
-    _Runtime.setField(out, 'w', HxMath.cos(half));
+    (out.x = cast ((axis.x * s) : Dynamic));
+    (out.y = cast ((axis.y * s) : Dynamic));
+    (out.z = cast ((axis.z * s) : Dynamic));
+    (out.w = cast (HxMath.cos(half) : Dynamic));
   }
 
   public static function setQuaternionFromEuler(out:QuaternionLike, x:Float, y:Float, z:Float, order:EulerOrder = 'XYZ'):Void {
@@ -312,40 +312,40 @@ class Quaternion {
     {
       var __switchValue = order;
       if (__switchValue == 'XYZ') {
-        _Runtime.setField(out, 'x', (((s1 * c2) * c3) + ((c1 * s2) * s3)));
-        _Runtime.setField(out, 'y', (((c1 * s2) * c3) - ((s1 * c2) * s3)));
-        _Runtime.setField(out, 'z', (((c1 * c2) * s3) + ((s1 * s2) * c3)));
-        _Runtime.setField(out, 'w', (((c1 * c2) * c3) - ((s1 * s2) * s3)));
+        (out.x = cast ((((s1 * c2) * c3) + ((c1 * s2) * s3)) : Dynamic));
+        (out.y = cast ((((c1 * s2) * c3) - ((s1 * c2) * s3)) : Dynamic));
+        (out.z = cast ((((c1 * c2) * s3) + ((s1 * s2) * c3)) : Dynamic));
+        (out.w = cast ((((c1 * c2) * c3) - ((s1 * s2) * s3)) : Dynamic));
       }
       else if (__switchValue == 'XZY') {
-        _Runtime.setField(out, 'x', (((s1 * c2) * c3) - ((c1 * s2) * s3)));
-        _Runtime.setField(out, 'y', (((c1 * s2) * c3) - ((s1 * c2) * s3)));
-        _Runtime.setField(out, 'z', (((c1 * c2) * s3) + ((s1 * s2) * c3)));
-        _Runtime.setField(out, 'w', (((c1 * c2) * c3) + ((s1 * s2) * s3)));
+        (out.x = cast ((((s1 * c2) * c3) - ((c1 * s2) * s3)) : Dynamic));
+        (out.y = cast ((((c1 * s2) * c3) - ((s1 * c2) * s3)) : Dynamic));
+        (out.z = cast ((((c1 * c2) * s3) + ((s1 * s2) * c3)) : Dynamic));
+        (out.w = cast ((((c1 * c2) * c3) + ((s1 * s2) * s3)) : Dynamic));
       }
       else if (__switchValue == 'YXZ') {
-        _Runtime.setField(out, 'x', (((s1 * c2) * c3) + ((c1 * s2) * s3)));
-        _Runtime.setField(out, 'y', (((c1 * s2) * c3) - ((s1 * c2) * s3)));
-        _Runtime.setField(out, 'z', (((c1 * c2) * s3) - ((s1 * s2) * c3)));
-        _Runtime.setField(out, 'w', (((c1 * c2) * c3) + ((s1 * s2) * s3)));
+        (out.x = cast ((((s1 * c2) * c3) + ((c1 * s2) * s3)) : Dynamic));
+        (out.y = cast ((((c1 * s2) * c3) - ((s1 * c2) * s3)) : Dynamic));
+        (out.z = cast ((((c1 * c2) * s3) - ((s1 * s2) * c3)) : Dynamic));
+        (out.w = cast ((((c1 * c2) * c3) + ((s1 * s2) * s3)) : Dynamic));
       }
       else if (__switchValue == 'YZX') {
-        _Runtime.setField(out, 'x', (((s1 * c2) * c3) + ((c1 * s2) * s3)));
-        _Runtime.setField(out, 'y', (((c1 * s2) * c3) + ((s1 * c2) * s3)));
-        _Runtime.setField(out, 'z', (((c1 * c2) * s3) - ((s1 * s2) * c3)));
-        _Runtime.setField(out, 'w', (((c1 * c2) * c3) - ((s1 * s2) * s3)));
+        (out.x = cast ((((s1 * c2) * c3) + ((c1 * s2) * s3)) : Dynamic));
+        (out.y = cast ((((c1 * s2) * c3) + ((s1 * c2) * s3)) : Dynamic));
+        (out.z = cast ((((c1 * c2) * s3) - ((s1 * s2) * c3)) : Dynamic));
+        (out.w = cast ((((c1 * c2) * c3) - ((s1 * s2) * s3)) : Dynamic));
       }
       else if (__switchValue == 'ZXY') {
-        _Runtime.setField(out, 'x', (((s1 * c2) * c3) - ((c1 * s2) * s3)));
-        _Runtime.setField(out, 'y', (((c1 * s2) * c3) + ((s1 * c2) * s3)));
-        _Runtime.setField(out, 'z', (((c1 * c2) * s3) + ((s1 * s2) * c3)));
-        _Runtime.setField(out, 'w', (((c1 * c2) * c3) - ((s1 * s2) * s3)));
+        (out.x = cast ((((s1 * c2) * c3) - ((c1 * s2) * s3)) : Dynamic));
+        (out.y = cast ((((c1 * s2) * c3) + ((s1 * c2) * s3)) : Dynamic));
+        (out.z = cast ((((c1 * c2) * s3) + ((s1 * s2) * c3)) : Dynamic));
+        (out.w = cast ((((c1 * c2) * c3) - ((s1 * s2) * s3)) : Dynamic));
       }
       else if (__switchValue == 'ZYX') {
-        _Runtime.setField(out, 'x', (((s1 * c2) * c3) - ((c1 * s2) * s3)));
-        _Runtime.setField(out, 'y', (((c1 * s2) * c3) + ((s1 * c2) * s3)));
-        _Runtime.setField(out, 'z', (((c1 * c2) * s3) - ((s1 * s2) * c3)));
-        _Runtime.setField(out, 'w', (((c1 * c2) * c3) + ((s1 * s2) * s3)));
+        (out.x = cast ((((s1 * c2) * c3) - ((c1 * s2) * s3)) : Dynamic));
+        (out.y = cast ((((c1 * s2) * c3) + ((s1 * c2) * s3)) : Dynamic));
+        (out.z = cast ((((c1 * c2) * s3) - ((s1 * s2) * c3)) : Dynamic));
+        (out.w = cast ((((c1 * c2) * c3) + ((s1 * s2) * s3)) : Dynamic));
       }
     }
   }
@@ -362,7 +362,7 @@ class Quaternion {
     var m12:Dynamic = cast _Runtime.UNDEFINED;
     var m22:Dynamic = cast _Runtime.UNDEFINED;
     var trace:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.field(source, 'm');
+    m = source.m;
     m00 = _Runtime.getIndex(m, 0.0);
     m10 = _Runtime.getIndex(m, 4.0);
     m20 = _Runtime.getIndex(m, 8.0);
@@ -375,28 +375,28 @@ class Quaternion {
     trace = ((m00 + m11) + m22);
     if (_Runtime.truthy(_Runtime.compare(trace, 0.0, '>'))) {
       var s:Dynamic = (0.5 / HxMath.sqrt((trace + 1.0)));
-      _Runtime.setField(out, 'w', (0.25 / s));
-      _Runtime.setField(out, 'x', ((m12 - m21) * s));
-      _Runtime.setField(out, 'y', ((m20 - m02) * s));
-      _Runtime.setField(out, 'z', ((m01 - m10) * s));
+      (out.w = cast ((0.25 / s) : Dynamic));
+      (out.x = cast (((m12 - m21) * s) : Dynamic));
+      (out.y = cast (((m20 - m02) * s) : Dynamic));
+      (out.z = cast (((m01 - m10) * s) : Dynamic));
     } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(m00, m11, '>'), function():Dynamic return cast _Runtime.compare(m00, m22, '>')))) {
       var s:Dynamic = (2.0 * HxMath.sqrt((((1.0 + m00) - m11) - m22)));
-      _Runtime.setField(out, 'w', ((m12 - m21) / s));
-      _Runtime.setField(out, 'x', (0.25 * s));
-      _Runtime.setField(out, 'y', ((m10 + m01) / s));
-      _Runtime.setField(out, 'z', ((m20 + m02) / s));
+      (out.w = cast (((m12 - m21) / s) : Dynamic));
+      (out.x = cast ((0.25 * s) : Dynamic));
+      (out.y = cast (((m10 + m01) / s) : Dynamic));
+      (out.z = cast (((m20 + m02) / s) : Dynamic));
     } else { if (_Runtime.truthy(_Runtime.compare(m11, m22, '>'))) {
       var s:Dynamic = (2.0 * HxMath.sqrt((((1.0 + m11) - m00) - m22)));
-      _Runtime.setField(out, 'w', ((m20 - m02) / s));
-      _Runtime.setField(out, 'x', ((m10 + m01) / s));
-      _Runtime.setField(out, 'y', (0.25 * s));
-      _Runtime.setField(out, 'z', ((m21 + m12) / s));
+      (out.w = cast (((m20 - m02) / s) : Dynamic));
+      (out.x = cast (((m10 + m01) / s) : Dynamic));
+      (out.y = cast ((0.25 * s) : Dynamic));
+      (out.z = cast (((m21 + m12) / s) : Dynamic));
     } else {
       var s:Dynamic = (2.0 * HxMath.sqrt((((1.0 + m22) - m00) - m11)));
-      _Runtime.setField(out, 'w', ((m01 - m10) / s));
-      _Runtime.setField(out, 'x', ((m20 + m02) / s));
-      _Runtime.setField(out, 'y', ((m21 + m12) / s));
-      _Runtime.setField(out, 'z', (0.25 * s));
+      (out.w = cast (((m01 - m10) / s) : Dynamic));
+      (out.x = cast (((m20 + m02) / s) : Dynamic));
+      (out.y = cast (((m21 + m12) / s) : Dynamic));
+      (out.z = cast ((0.25 * s) : Dynamic));
     } } }
   }
 
@@ -412,12 +412,12 @@ class Quaternion {
     var cy:Dynamic = cast _Runtime.UNDEFINED;
     var cz:Dynamic = cast _Runtime.UNDEFINED;
     var len:Dynamic = cast _Runtime.UNDEFINED;
-    fx = _Runtime.field(from, 'x');
-    fy = _Runtime.field(from, 'y');
-    fz = _Runtime.field(from, 'z');
-    tx = _Runtime.field(to, 'x');
-    ty = _Runtime.field(to, 'y');
-    tz = _Runtime.field(to, 'z');
+    fx = from.x;
+    fy = from.y;
+    fz = from.z;
+    tx = to.x;
+    ty = to.y;
+    tz = to.z;
     dot = (((fx * tx) + (fy * ty)) + (fz * tz));
     if (_Runtime.truthy(_Runtime.compare(dot, 0.999999, '>'))) {
       _Runtime.callValue(setQuaternionIdentity, cast ([out] : Array<Dynamic>));
@@ -439,34 +439,34 @@ class Quaternion {
       (px = cast ((px / pLen) : Dynamic));
       (py = cast ((py / pLen) : Dynamic));
       (pz = cast ((pz / pLen) : Dynamic));
-      _Runtime.setField(out, 'x', px);
-      _Runtime.setField(out, 'y', py);
-      _Runtime.setField(out, 'z', pz);
-      _Runtime.setField(out, 'w', 0.0);
+      (out.x = cast (px : Dynamic));
+      (out.y = cast (py : Dynamic));
+      (out.z = cast (pz : Dynamic));
+      (out.w = cast (0.0 : Dynamic));
       return;
     }
     cx = ((fy * tz) - (fz * ty));
     cy = ((fz * tx) - (fx * tz));
     cz = ((fx * ty) - (fy * tx));
-    _Runtime.setField(out, 'x', cx);
-    _Runtime.setField(out, 'y', cy);
-    _Runtime.setField(out, 'z', cz);
-    _Runtime.setField(out, 'w', (1.0 + dot));
-    len = HxMath.sqrt(((((_Runtime.field(out, 'x') * _Runtime.field(out, 'x')) + (_Runtime.field(out, 'y') * _Runtime.field(out, 'y'))) + (_Runtime.field(out, 'z') * _Runtime.field(out, 'z'))) + (_Runtime.field(out, 'w') * _Runtime.field(out, 'w'))));
+    (out.x = cast (cx : Dynamic));
+    (out.y = cast (cy : Dynamic));
+    (out.z = cast (cz : Dynamic));
+    (out.w = cast ((1.0 + dot) : Dynamic));
+    len = HxMath.sqrt(((((out.x * out.x) + (out.y * out.y)) + (out.z * out.z)) + (out.w * out.w)));
     if (_Runtime.truthy(!_Runtime.strictEquals(len, 0.0))) {
       var inv:Dynamic = (1.0 / len);
-      _Runtime.setField(out, 'x', (_Runtime.field(out, 'x') * inv));
-      _Runtime.setField(out, 'y', (_Runtime.field(out, 'y') * inv));
-      _Runtime.setField(out, 'z', (_Runtime.field(out, 'z') * inv));
-      _Runtime.setField(out, 'w', (_Runtime.field(out, 'w') * inv));
+      (out.x *= inv);
+      (out.y *= inv);
+      (out.z *= inv);
+      (out.w *= inv);
     }
   }
 
   public static function setQuaternionIdentity(out:QuaternionLike):Void {
-    _Runtime.setField(out, 'x', 0.0);
-    _Runtime.setField(out, 'y', 0.0);
-    _Runtime.setField(out, 'z', 0.0);
-    _Runtime.setField(out, 'w', 1.0);
+    (out.x = cast (0.0 : Dynamic));
+    (out.y = cast (0.0 : Dynamic));
+    (out.z = cast (0.0 : Dynamic));
+    (out.w = cast (1.0 : Dynamic));
   }
 
   public static function setQuaternionLookRotation(out:QuaternionLike, forward:Vector3Like, up:Vector3Like):Void {
@@ -494,12 +494,12 @@ class Quaternion {
     var m21:Dynamic = cast _Runtime.UNDEFINED;
     var m22:Dynamic = cast _Runtime.UNDEFINED;
     var trace:Dynamic = cast _Runtime.UNDEFINED;
-    fx = _Runtime.field(forward, 'x');
-    fy = _Runtime.field(forward, 'y');
-    fz = _Runtime.field(forward, 'z');
-    ux = _Runtime.field(up, 'x');
-    uy = _Runtime.field(up, 'y');
-    uz = _Runtime.field(up, 'z');
+    fx = forward.x;
+    fy = forward.y;
+    fz = forward.z;
+    ux = up.x;
+    uy = up.y;
+    uz = up.z;
     rx = ((uy * fz) - (uz * fy));
     ry = ((uz * fx) - (ux * fz));
     rz = ((ux * fy) - (uy * fx));
@@ -527,28 +527,28 @@ class Quaternion {
     trace = ((m00 + m11) + m22);
     if (_Runtime.truthy(_Runtime.compare(trace, 0.0, '>'))) {
       var s:Dynamic = (0.5 / HxMath.sqrt((trace + 1.0)));
-      _Runtime.setField(out, 'w', (0.25 / s));
-      _Runtime.setField(out, 'x', ((m12 - m21) * s));
-      _Runtime.setField(out, 'y', ((m20 - m02) * s));
-      _Runtime.setField(out, 'z', ((m01 - m10) * s));
+      (out.w = cast ((0.25 / s) : Dynamic));
+      (out.x = cast (((m12 - m21) * s) : Dynamic));
+      (out.y = cast (((m20 - m02) * s) : Dynamic));
+      (out.z = cast (((m01 - m10) * s) : Dynamic));
     } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(m00, m11, '>'), function():Dynamic return cast _Runtime.compare(m00, m22, '>')))) {
       var s:Dynamic = (2.0 * HxMath.sqrt((((1.0 + m00) - m11) - m22)));
-      _Runtime.setField(out, 'w', ((m12 - m21) / s));
-      _Runtime.setField(out, 'x', (0.25 * s));
-      _Runtime.setField(out, 'y', ((m10 + m01) / s));
-      _Runtime.setField(out, 'z', ((m20 + m02) / s));
+      (out.w = cast (((m12 - m21) / s) : Dynamic));
+      (out.x = cast ((0.25 * s) : Dynamic));
+      (out.y = cast (((m10 + m01) / s) : Dynamic));
+      (out.z = cast (((m20 + m02) / s) : Dynamic));
     } else { if (_Runtime.truthy(_Runtime.compare(m11, m22, '>'))) {
       var s:Dynamic = (2.0 * HxMath.sqrt((((1.0 + m11) - m00) - m22)));
-      _Runtime.setField(out, 'w', ((m20 - m02) / s));
-      _Runtime.setField(out, 'x', ((m10 + m01) / s));
-      _Runtime.setField(out, 'y', (0.25 * s));
-      _Runtime.setField(out, 'z', ((m21 + m12) / s));
+      (out.w = cast (((m20 - m02) / s) : Dynamic));
+      (out.x = cast (((m10 + m01) / s) : Dynamic));
+      (out.y = cast ((0.25 * s) : Dynamic));
+      (out.z = cast (((m21 + m12) / s) : Dynamic));
     } else {
       var s:Dynamic = (2.0 * HxMath.sqrt((((1.0 + m22) - m00) - m11)));
-      _Runtime.setField(out, 'w', ((m01 - m10) / s));
-      _Runtime.setField(out, 'x', ((m20 + m02) / s));
-      _Runtime.setField(out, 'y', ((m21 + m12) / s));
-      _Runtime.setField(out, 'z', (0.25 * s));
+      (out.w = cast (((m01 - m10) / s) : Dynamic));
+      (out.x = cast (((m20 + m02) / s) : Dynamic));
+      (out.y = cast (((m21 + m12) / s) : Dynamic));
+      (out.z = cast ((0.25 * s) : Dynamic));
     } } }
   }
 
@@ -564,14 +564,14 @@ class Quaternion {
     var cosHalfTheta:Dynamic = cast _Runtime.UNDEFINED;
     var scaleA:Float = cast _Runtime.UNDEFINED;
     var scaleB:Float = cast _Runtime.UNDEFINED;
-    ax = _Runtime.field(a, 'x');
-    ay = _Runtime.field(a, 'y');
-    az = _Runtime.field(a, 'z');
-    aw = _Runtime.field(a, 'w');
-    bx = _Runtime.field(b, 'x');
-    by = _Runtime.field(b, 'y');
-    bz = _Runtime.field(b, 'z');
-    bw = _Runtime.field(b, 'w');
+    ax = a.x;
+    ay = a.y;
+    az = a.z;
+    aw = a.w;
+    bx = b.x;
+    by = b.y;
+    bz = b.z;
+    bw = b.w;
     cosHalfTheta = ((((ax * bx) + (ay * by)) + (az * bz)) + (aw * bw));
     if (_Runtime.truthy(_Runtime.compare(cosHalfTheta, 0.0, '<'))) {
       (cosHalfTheta = cast (-cosHalfTheta : Dynamic));
@@ -589,9 +589,9 @@ class Quaternion {
       (scaleA = cast ((1.0 - t) : Dynamic));
       (scaleB = cast (t : Dynamic));
     }
-    _Runtime.setField(out, 'x', ((ax * scaleA) + (bx * scaleB)));
-    _Runtime.setField(out, 'y', ((ay * scaleA) + (by * scaleB)));
-    _Runtime.setField(out, 'z', ((az * scaleA) + (bz * scaleB)));
-    _Runtime.setField(out, 'w', ((aw * scaleA) + (bw * scaleB)));
+    (out.x = cast (((ax * scaleA) + (bx * scaleB)) : Dynamic));
+    (out.y = cast (((ay * scaleA) + (by * scaleB)) : Dynamic));
+    (out.z = cast (((az * scaleA) + (bz * scaleB)) : Dynamic));
+    (out.w = cast (((aw * scaleA) + (bw * scaleB)) : Dynamic));
   }
 }

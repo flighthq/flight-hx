@@ -187,7 +187,7 @@ class WgpuParticleEmitter3D {
     iw = _Runtime.select(hasAtlas, function():Dynamic return cast (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'width'), function():Dynamic return cast 1.0)), function():Dynamic return cast 0.0);
     ih = _Runtime.select(hasAtlas, function():Dynamic return cast (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'height'), function():Dynamic return cast 1.0)), function():Dynamic return cast 0.0);
     worldMatrix = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([(cast (cast emitter : Dynamic) : SceneNode)] : Array<Dynamic>)) : Matrix4);
-    wm = _Runtime.field(worldMatrix, 'm');
+    wm = worldMatrix.m;
     worldSpace = _Runtime.field(data, 'worldSpace');
     instanceData = _Runtime.field(resources, 'instanceData');
     base = 0.0;
@@ -306,7 +306,7 @@ class WgpuParticleEmitter3D {
     list = _Runtime.callValue(prepareSceneRender, cast ([state, scene, camera, lights] : Array<Dynamic>));
     resources = _Runtime.callValue(WgpuParticleEmitter3D.ensureParticle3DResources__wgpuParticleEmitter3D, cast ([state] : Array<Dynamic>));
     f = WgpuParticleEmitter3D.frameScratch__wgpuParticleEmitter3D;
-    vp = _Runtime.field(_Runtime.field(list, 'viewProjection'), 'm');
+    vp = _Runtime.field(list, 'viewProjection').m;
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, 16.0, '<'))) {
@@ -314,7 +314,7 @@ class WgpuParticleEmitter3D {
         i++;
       }
     }
-    vm = _Runtime.field(_Runtime.field(camera, 'view'), 'm');
+    vm = _Runtime.field(camera, 'view').m;
     _Runtime.setIndex(f, 16.0, _Runtime.getIndex(vm, 0.0));
     _Runtime.setIndex(f, 17.0, _Runtime.getIndex(vm, 4.0));
     _Runtime.setIndex(f, 18.0, _Runtime.getIndex(vm, 8.0));

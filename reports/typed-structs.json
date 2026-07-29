@@ -9,6 +9,10 @@
       "declarationFingerprint": "sha256:b7c136ecc5b32d5cd063b9b9437334ad8e1145d1026f64b8ec8473a62410dd62",
       "declarationKind": "interface",
       "eligible": true,
+      "emission": {
+        "directAccesses": 322,
+        "reflectiveSurvivors": []
+      },
       "escapes": [],
       "fields": [
         {
@@ -51,6 +55,10 @@
       "declarationFingerprint": "sha256:4e24edc270be813be011b6acb2a947aa33cc2d50934088d08954905ae3e497c0",
       "declarationKind": "interface",
       "eligible": true,
+      "emission": {
+        "directAccesses": 1140,
+        "reflectiveSurvivors": []
+      },
       "escapes": [],
       "fields": [
         {
@@ -101,6 +109,10 @@
       "declarationFingerprint": "sha256:4c26914e14fa1460f7650189dc991a220e1efb5bcc96ed852feb1693d4f5ec36",
       "declarationKind": "interface",
       "eligible": true,
+      "emission": {
+        "directAccesses": 216,
+        "reflectiveSurvivors": []
+      },
       "escapes": [],
       "fields": [
         {
@@ -159,6 +171,10 @@
       "declarationFingerprint": "sha256:1dd682a2f18f302041b5c8236cc9661efacec65b5af270e201390fca5910b2d3",
       "declarationKind": "interface",
       "eligible": true,
+      "emission": {
+        "directAccesses": 49,
+        "reflectiveSurvivors": []
+      },
       "escapes": [],
       "fields": [
         {
@@ -193,6 +209,10 @@
       "declarationFingerprint": "sha256:e0189d7efd4bd4cd11bccad543eda6bd532b98e5c3f1c0a9cb72d5b9f6d12a7e",
       "declarationKind": "interface",
       "eligible": true,
+      "emission": {
+        "directAccesses": 115,
+        "reflectiveSurvivors": []
+      },
       "escapes": [],
       "fields": [
         {
@@ -227,6 +247,10 @@
       "declarationFingerprint": "sha256:a9ecbfbf0841ea1a0d47b8480c419819b40456e51a9e8b25618ffca45387048b",
       "declarationKind": "interface",
       "eligible": false,
+      "emission": {
+        "directAccesses": 0,
+        "reflectiveSurvivors": []
+      },
       "escapes": [
         {
           "column": 7,
@@ -300,6 +324,10 @@
       "declarationFingerprint": "sha256:f9f9ced8012658f172b2ddf822467b3392b7396be923f4e6df88055a25371ce4",
       "declarationKind": "interface",
       "eligible": true,
+      "emission": {
+        "directAccesses": 215,
+        "reflectiveSurvivors": []
+      },
       "escapes": [],
       "fields": [
         {
@@ -382,14 +410,16 @@
       "source": "upstream/packages/types/src/ColorTransform.ts"
     }
   ],
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "summary": {
     "bindableAccesses": 2057,
     "candidates": 7,
+    "directAccesses": 2057,
     "eligible": 6,
     "escapes": 2,
     "fields": 23,
-    "ineligible": 1
+    "ineligible": 1,
+    "reflectiveSurvivors": 0
   },
   "upstreamCommit": "5d24729f7360475e28a105ae0caeeaa2e1328260"
 }

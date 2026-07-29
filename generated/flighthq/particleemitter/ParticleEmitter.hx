@@ -239,8 +239,8 @@ class ParticleEmitter {
     var vt:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(source, 'data'), 'particleCount'), '>=')))) { return cast false; }
     vt = (index * ParticleEmitter.PARTICLE_VELOCITY_STRIDE__particleEmitter);
-    _Runtime.setField(out, 'x', _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'data'), 'velocities'), vt));
-    _Runtime.setField(out, 'y', _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'data'), 'velocities'), (vt + 1.0)));
+    (out.x = cast (_Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'data'), 'velocities'), vt) : Dynamic));
+    (out.y = cast (_Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'data'), 'velocities'), (vt + 1.0)) : Dynamic));
     return cast true;
     return cast null;
   }

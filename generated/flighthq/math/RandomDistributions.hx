@@ -57,8 +57,8 @@ class RandomDistributions {
       (x = cast (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * 2.0) - 1.0) : Dynamic));
       (y = cast (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * 2.0) - 1.0) : Dynamic));
     } while (_Runtime.truthy(_Runtime.compare(((x * x) + (y * y)), 1.0, '>')));
-    _Runtime.setField(out, 'x', x);
-    _Runtime.setField(out, 'y', y);
+    (out.x = cast (x : Dynamic));
+    (out.y = cast (y : Dynamic));
   }
 
   public static function randomInsideUnitSphere(random:RandomSource, out:Vector3Like):Void {
@@ -70,9 +70,9 @@ class RandomDistributions {
       (y = cast (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * 2.0) - 1.0) : Dynamic));
       (z = cast (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * 2.0) - 1.0) : Dynamic));
     } while (_Runtime.truthy(_Runtime.compare((((x * x) + (y * y)) + (z * z)), 1.0, '>')));
-    _Runtime.setField(out, 'x', x);
-    _Runtime.setField(out, 'y', y);
-    _Runtime.setField(out, 'z', z);
+    (out.x = cast (x : Dynamic));
+    (out.y = cast (y : Dynamic));
+    (out.z = cast (z : Dynamic));
   }
 
   public static function randomOnUnitCircle(random:RandomSource, out:Vector2Like):Void {
@@ -82,8 +82,8 @@ class RandomDistributions {
     angle = ((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * HxMath.PI) * 2.0);
     x = HxMath.cos(angle);
     y = HxMath.sin(angle);
-    _Runtime.setField(out, 'x', x);
-    _Runtime.setField(out, 'y', y);
+    (out.x = cast (x : Dynamic));
+    (out.y = cast (y : Dynamic));
   }
 
   public static function randomOnUnitSphere(random:RandomSource, out:Vector3Like):Void {
@@ -103,9 +103,9 @@ class RandomDistributions {
     rx = (x * f);
     ry = (y * f);
     rz = (1.0 - (2.0 * s));
-    _Runtime.setField(out, 'x', rx);
-    _Runtime.setField(out, 'y', ry);
-    _Runtime.setField(out, 'z', rz);
+    (out.x = cast (rx : Dynamic));
+    (out.y = cast (ry : Dynamic));
+    (out.z = cast (rz : Dynamic));
   }
 
   public static function randomPoisson(random:RandomSource, lambda:Float = 1.0):Float {

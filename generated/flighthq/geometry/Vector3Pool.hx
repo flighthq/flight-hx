@@ -10,9 +10,9 @@ class Vector3Pool {
   public static function acquireEmptyVector3():Vector3 {
     var v:Dynamic = cast _Runtime.UNDEFINED;
     v = _Runtime.callValue(acquireVector3, cast ([] : Array<Dynamic>));
-    _Runtime.setField(v, 'x', 0.0);
-    _Runtime.setField(v, 'y', 0.0);
-    _Runtime.setField(v, 'z', 0.0);
+    (v.x = cast (0.0 : Dynamic));
+    (v.y = cast (0.0 : Dynamic));
+    (v.z = cast (0.0 : Dynamic));
     return cast v;
     return cast null;
   }
