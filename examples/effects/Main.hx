@@ -65,7 +65,7 @@ class Main extends Application {
       registerStandardGlRenderEffects(renderState);
       enableGlBlendModeSupport(renderState);
     }
-    pipeline = createGlRenderEffectPipeline(renderState);
+    pipeline = usingCairo ? createCanvasRenderEffectPipeline(renderState) : createGlRenderEffectPipeline(renderState);
 
     root = createDisplayContainer();
     root.scaleX = scale;
@@ -117,15 +117,17 @@ class Main extends Application {
   override public function render(context:RenderContext):Void {
     if (!ready || root == null) return;
     if (!prepareDisplayObjectRender(renderState, root)) return;
-    beginGlRenderEffectPipeline(renderState, pipeline);
     if (usingCairo) {
+      beginCanvasRenderEffectPipeline(renderState, pipeline);
       renderCanvasBackground(renderState);
       renderCanvasDisplayObject(renderState, root);
+      endCanvasRenderEffectPipeline(renderState, pipeline, cast effects);
     } else {
+      beginGlRenderEffectPipeline(renderState, pipeline);
       renderGlBackground(renderState);
       renderGlDisplayObject(renderState, root);
+      endGlRenderEffectPipeline(renderState, pipeline, cast effects);
     }
-    endGlRenderEffectPipeline(renderState, pipeline, cast effects);
   }
 }
 

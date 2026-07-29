@@ -320,6 +320,10 @@ class WebGl2Backend {
     #end
   }
 
+  public static inline function clearDepth(gl:GlContext, depth:Float):Void {
+    gl.clearDepth(depth);
+  }
+
   public static inline function clearColor(gl:GlContext, red:Float, green:Float, blue:Float, alpha:Float):Void {
     #if flight_gl_trace glTrace('clearColor(' + red + ',' + green + ',' + blue + ',' + alpha + ')'); #end
     gl.clearColor(red, green, blue, alpha);

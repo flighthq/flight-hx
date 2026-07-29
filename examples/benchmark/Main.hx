@@ -138,7 +138,7 @@ class Main extends Application {
     if (!ready) return;
 
     final count:Int = quadBatch.data.instanceCount;
-    final transforms:Dynamic = quadBatch.data.transforms;
+    final transforms:flighthq._internal._Float32Array = quadBatch.data.transforms;
 
     for (i in 0...count) {
       posX[i] += speedX[i];

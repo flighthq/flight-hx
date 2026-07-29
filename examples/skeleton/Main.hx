@@ -223,10 +223,10 @@ class Main extends Application {
     if (!ready || scene == null) return;
     beginGlRenderEffectPipeline(renderState, pipeline);
     renderGlBackground(renderState);
-    final gl = renderState.gl;
-    gl.depthMask(true);
-    gl.clearDepth(1);
-    gl.clear(gl.DEPTH_BUFFER_BIT);
+    final gl:Dynamic = renderState.gl;
+    flighthq._internal.backend.WebGl2Backend.depthMask(gl, true);
+    flighthq._internal.backend.WebGl2Backend.clearDepth(gl, 1);
+    flighthq._internal.backend.WebGl2Backend.clear(gl, flighthq._internal.backend.WebGl2Backend.DEPTH_BUFFER_BIT);
     prepareSceneRender(renderState, scene, camera, lights);
     drawGlScene(renderState, scene, camera, lights);
     endGlRenderEffectPipeline(renderState, pipeline, []);

@@ -63,6 +63,7 @@ class _Runtime {
    */
   static function adjustArguments(callable:Dynamic, arguments:Array<Dynamic>):Array<Dynamic> {
     #if neko
+    if (callable == null || !Reflect.isFunction(callable)) return arguments;
     final arity:Int = untyped __dollar__nargs(callable);
     if (arity >= 0 && arguments.length > arity) return arguments.slice(0, arity);
     if (arity >= 0 && arguments.length < arity) {
@@ -90,6 +91,50 @@ class _Runtime {
     final callable = resolveMethod(owner, name);
     return callable == null ? UNDEFINED : Reflect.callMethod(owner, callable, adjustArguments(callable, arguments));
   }
+
+  #if !js
+  /** Minimal namespace stand-in so `globalThis.<Name>` constructor reads keep
+   * working; only names with portable factories are populated. */
+  static var globalThisValue:Dynamic;
+
+  static function globalThisNamespace():Dynamic {
+    if (globalThisValue == null) globalThisValue = {ImageData: createImageData, AudioBuffer: createAudioBuffer};
+    return globalThisValue;
+  }
+
+  /** Portable `new ImageData(width, height)`: the struct shape the canvas
+   * backend's `getImageData`/`putImageData` already speak. */
+  static function createImageData(?width:Dynamic, ?height:Dynamic):Dynamic {
+    final w = Std.int(width == null ? 0 : width);
+    final h = Std.int(height == null ? 0 : height);
+    return {width: w, height: h, data: new _UInt8ClampedArray(w * h * 4)};
+  }
+
+  /** Portable `new AudioBuffer(options)`: channel storage and accessors only —
+   * playback needs a native audio backend. */
+  static function createAudioBuffer(?options:Dynamic):Dynamic {
+    final length = Std.int(field(options, 'length'));
+    final channelCount = Std.int(field(options, 'numberOfChannels'));
+    final channels = [for (_ in 0...channelCount) new _Float32Array(length)];
+    return {
+      length: length,
+      numberOfChannels: channelCount,
+      sampleRate: field(options, 'sampleRate'),
+      duration: sampleRate_(options, length),
+      getChannelData: function(index:Dynamic):Dynamic return channels[Std.int(index)],
+      copyToChannel: function(source:Dynamic, index:Dynamic, ?startInChannel:Dynamic):Dynamic {
+        final channel:_Float32Array = channels[Std.int(index)];
+        channel.set(source, startInChannel == null ? 0 : (startInChannel : Float));
+        return null;
+      },
+    };
+  }
+
+  static function sampleRate_(options:Dynamic, length:Int):Float {
+    final rate:Float = field(options, 'sampleRate');
+    return rate > 0 ? length / rate : 0;
+  }
+  #end
 
   static function resolveMethod(owner:Dynamic, name:String):Dynamic {
     return Reflect.field(owner, name);
@@ -248,6 +293,9 @@ class _Runtime {
       case 'WeakMap': _WeakMap;
       case 'WeakSet': _WeakSet;
       case 'Uint8ClampedArray': _UInt8ClampedArray.construct;
+      case 'ImageData': createImageData;
+      case 'AudioBuffer': createAudioBuffer;
+      case 'globalThis': globalThisNamespace();
       case 'Float64Array': _Float64Array.construct;
       case 'Int32Array': _Int32Array.construct;
       case 'Int8Array': _Int8Array.construct;
@@ -443,7 +491,7 @@ class _Runtime {
   public static function toArray(value:Dynamic, ?map:Dynamic, ?thisArg:Dynamic):Array<Dynamic> {
     final values = iterable(value);
     if (map == null) return values;
-    return [for (index in 0...values.length) Reflect.callMethod(thisArg, map, [values[index], index])];
+    return [for (index in 0...values.length) Reflect.callMethod(thisArg, map, adjustArguments(map, [values[index], index]))];
   }
 
   public static function truthy(value:Dynamic):Bool {
@@ -723,7 +771,7 @@ class _Runtime {
   public static function findIndex(value:Dynamic, predicate:Dynamic):Int {
     final values = iterable(value);
     for (index in 0...values.length) {
-      if (truthy(Reflect.callMethod(null, predicate, [values[index], index, value]))) return index;
+      if (truthy(Reflect.callMethod(null, predicate, adjustArguments(predicate, [values[index], index, value])))) return index;
     }
     return -1;
   }
@@ -751,7 +799,7 @@ class _Runtime {
     var accumulator = initial;
     if (accumulator == null && values.length > 0) accumulator = values[index++];
     while (index < values.length) {
-      accumulator = Reflect.callMethod(null, callback, [accumulator, values[index], index, value]);
+      accumulator = Reflect.callMethod(null, callback, adjustArguments(callback, [accumulator, values[index], index, value]));
       index++;
     }
     return accumulator;
@@ -769,7 +817,7 @@ class _Runtime {
       if (Reflect.isFunction(replacement)) {
         final position = text.indexOf(needle);
         if (position < 0) return text;
-        final next = Std.string(Reflect.callMethod(null, replacement, [needle, position, text]));
+        final next = Std.string(Reflect.callMethod(null, replacement, adjustArguments(replacement, [needle, position, text])));
         return text.substring(0, position) + next + text.substring(position + needle.length);
       }
       if (all) return StringTools.replace(text, needle, Std.string(replacement));
@@ -858,10 +906,19 @@ class _Runtime {
     try {
       return (cast value : Array<Dynamic>).copy();
     } catch (_:Dynamic) {}
-    final iterator = Reflect.callMethod(value, Reflect.field(value, 'iterator'), []);
+    final iteratorFn = Reflect.field(value, 'iterator');
+    if (iteratorFn == null) {
+      // haxe.Rest exposes toArray() but no reflectable iterator on every target.
+      final toArrayFn = Reflect.field(value, 'toArray');
+      if (toArrayFn != null) return Reflect.callMethod(value, toArrayFn, []);
+      return [];
+    }
+    final iterator = Reflect.callMethod(value, iteratorFn, adjustArguments(iteratorFn, []));
     final output:Array<Dynamic> = [];
-    while (Reflect.callMethod(iterator, Reflect.field(iterator, 'hasNext'), [])) {
-      output.push(Reflect.callMethod(iterator, Reflect.field(iterator, 'next'), []));
+    final hasNextFn = Reflect.field(iterator, 'hasNext');
+    final nextFn = Reflect.field(iterator, 'next');
+    while (Reflect.callMethod(iterator, hasNextFn, adjustArguments(hasNextFn, []))) {
+      output.push(Reflect.callMethod(iterator, nextFn, adjustArguments(nextFn, [])));
     }
     return output;
     #end
