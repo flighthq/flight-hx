@@ -59,10 +59,10 @@ class TweenProgress {
       var value:Dynamic = _Runtime.field(__iteration0, 'value');
       _Runtime.setIndex(target, key, value);
     }
-    _Runtime.callValue(emitSignal, cast ([_Runtime.field(tween, 'onUpdate')] : Array<Dynamic>));
+    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(tween, 'onUpdate')]]), 1);
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(t, 1.0, '>='), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(tween, 'complete'))))) {
       _Runtime.setField(tween, 'complete', true);
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(tween, 'onComplete')] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(tween, 'onComplete')]]), 1);
     }
   }
 

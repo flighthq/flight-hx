@@ -28,9 +28,7 @@ const collectionMembers = {
 
 type CollectionBinding = keyof typeof collectionMembers;
 
-const portableTypeReferenceMap: Readonly<Record<string, string>> = {
-  ArrayBuffer: 'haxe.io.Bytes',
-  ArrayBufferView: 'haxe.io.ArrayBufferView',
+const typedArrayTypeReferenceMap = {
   Float32Array: 'flighthq._internal._Float32Array',
   Float64Array: 'flighthq._internal._Float64Array',
   Int16Array: 'flighthq._internal._Int16Array',
@@ -40,6 +38,14 @@ const portableTypeReferenceMap: Readonly<Record<string, string>> = {
   Uint32Array: 'flighthq._internal._UInt32Array',
   Uint8Array: 'flighthq._internal._UInt8Array',
   Uint8ClampedArray: 'flighthq._internal._UInt8ClampedArray',
+} as const;
+
+type TypedArrayBinding = keyof typeof typedArrayTypeReferenceMap;
+
+const portableTypeReferenceMap: Readonly<Record<string, string>> = {
+  ArrayBuffer: 'haxe.io.Bytes',
+  ArrayBufferView: 'haxe.io.ArrayBufferView',
+  ...typedArrayTypeReferenceMap,
 };
 
 const platformDynamicTypes = new Set([
@@ -704,6 +710,40 @@ function collectionBinding(
     ['WeakSetCollection', new Set(['WeakSet']), collectionMembers.WeakSetCollection],
   ];
   return candidates.find(([, names, members]) => members.has(member) && typeIncludesNamed(type, checker, names))?.[0];
+}
+
+function typedArrayBinding(
+  node: ts.Expression,
+  member: string,
+  context: LoweringContext,
+): TypedArrayBinding | undefined {
+  if (member !== 'subarray') return undefined;
+  const type = context.checker?.getTypeAtLocation(node);
+  const checker = context.checker;
+  if (!type || !checker) return undefined;
+  return (Object.keys(typedArrayTypeReferenceMap) as TypedArrayBinding[]).find((name) =>
+    typeIncludesNamed(type, checker, new Set([name])),
+  );
+}
+
+function variadicCallConvention(
+  node: ts.CallExpression,
+  context: LoweringContext,
+): { haxeRestIndex: number } | { packedVariadicRestIndex: number } | undefined {
+  const checker = context.checker;
+  if (!checker) return undefined;
+  const type = checker.getTypeAtLocation(node.expression);
+  if ((type.flags & ts.TypeFlags.TypeParameter) !== 0) return undefined;
+  for (const signature of checker.getSignaturesOfType(type, ts.SignatureKind.Call)) {
+    const declaration = signature.getDeclaration();
+    if (!declaration || declaration.getSourceFile().isDeclarationFile) continue;
+    const index = declaration.parameters.findIndex((parameter) => parameter.dotDotDotToken !== undefined);
+    if (index < 0) continue;
+    return ts.isFunctionDeclaration(declaration) || ts.isMethodDeclaration(declaration)
+      ? { haxeRestIndex: index }
+      : { packedVariadicRestIndex: index };
+  }
+  return undefined;
 }
 
 function typeIncludesNamed(
@@ -1549,6 +1589,15 @@ function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpre
     };
   }
   if (ts.isPropertyAccessExpression(node)) {
+    if (
+      ts.isIdentifier(node.expression) &&
+      node.expression.text === 'Number' &&
+      !isLexicallyBound(node.expression, context)
+    ) {
+      if (['EPSILON', 'MAX_SAFE_INTEGER', 'NEGATIVE_INFINITY', 'POSITIVE_INFINITY'].includes(node.name.text)) {
+        return { kind: 'property', name: node.name.text, object: { kind: 'identifier', name: 'Number' } };
+      }
+    }
     const webGpuConstantNamespace =
       ts.isIdentifier(node.expression) &&
       webGpuConstantNamespaces.has(node.expression.text) &&
@@ -1595,6 +1644,7 @@ function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpre
       domNavigatorMembers.has(node.name.text) &&
       isBoundGlobalRootExpression(node.expression, context, 'navigator', context.domNavigatorBindingNames);
     const objectIsCollection = collectionBinding(node.expression, node.name.text, context);
+    const objectIsTypedArray = typedArrayBinding(node.expression, node.name.text, context);
     const typedStructBinding = typedStructPropertyBinding(node, context);
     return {
       binding: webGpuConstantNamespace
@@ -1623,7 +1673,7 @@ function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpre
                               ? 'Canvas2dBackend'
                               : isBoundPlatformExpression(node.expression, context, 'WebGL2RenderingContext')
                                 ? 'WebGl2Backend'
-                                : undefined,
+                                : objectIsTypedArray,
       kind: 'property',
       name: node.name.text,
       object: webGpuConstantNamespace
@@ -1645,11 +1695,13 @@ function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpre
     };
   }
   if (ts.isCallExpression(node)) {
+    const variadic = variadicCallConvention(node, context);
     return {
       arguments: node.arguments.map((argument) => lowerExpression(argument, context)),
       callee: lowerExpression(node.expression, context),
       kind: 'call',
       optional: Boolean(node.questionDotToken),
+      ...variadic,
       typeArguments: node.typeArguments?.map((argument) => lowerType(argument, context)) ?? [],
     };
   }

@@ -252,7 +252,7 @@ class Tween {
         if (_Runtime.truthy(_Runtime.field(tween, 'snapping'))) { (value = cast (HxMath.round(value) : Dynamic)); }
         _Runtime.setIndex(t, _Runtime.field(detail, 'key'), value);
       }
-      if (_Runtime.truthy(doSendEvent)) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(tween, 'onComplete')] : Array<Dynamic>)); }
+      if (_Runtime.truthy(doSendEvent)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(tween, 'onComplete')]]), 1); }
     }
     _Runtime.setField(tween, 'complete', true);
   }

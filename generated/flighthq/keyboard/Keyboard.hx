@@ -42,23 +42,23 @@ class Keyboard {
       nowVisible = _Runtime.field(info, 'visible');
       if (_Runtime.truthy(_Runtime.strictEquals(phase, 'will'))) {
         if (_Runtime.truthy(_Runtime.andValue(nowVisible, function():Dynamic return cast !_Runtime.truthy(prevVisible)))) {
-          _Runtime.callValue(emitSignal, cast ([_Runtime.field(keyboard, 'onWillShow'), transition] : Array<Dynamic>));
+          _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(keyboard, 'onWillShow')], [transition]]), 1);
         } else { if (_Runtime.truthy(_Runtime.andValue(!_Runtime.truthy(nowVisible), function():Dynamic return cast prevVisible))) {
-          _Runtime.callValue(emitSignal, cast ([_Runtime.field(keyboard, 'onWillHide'), transition] : Array<Dynamic>));
+          _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(keyboard, 'onWillHide')], [transition]]), 1);
         } else {
-          _Runtime.callValue(emitSignal, cast ([_Runtime.field(keyboard, 'onWillResize'), transition] : Array<Dynamic>));
+          _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(keyboard, 'onWillResize')], [transition]]), 1);
         } }
       } else {
-        _Runtime.callValue(emitSignal, cast ([_Runtime.field(keyboard, 'onDidResize'), _Runtime.field(info, 'height')] : Array<Dynamic>));
-        _Runtime.callValue(emitSignal, cast ([_Runtime.field(keyboard, 'onResize'), _Runtime.field(info, 'height')] : Array<Dynamic>));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(keyboard, 'onDidResize')], [_Runtime.field(info, 'height')]]), 1);
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(keyboard, 'onResize')], [_Runtime.field(info, 'height')]]), 1);
         if (_Runtime.truthy(!_Runtime.strictEquals(nowVisible, prevVisible))) {
           (wasVisible = cast (nowVisible : Dynamic));
           if (_Runtime.truthy(nowVisible)) {
-            _Runtime.callValue(emitSignal, cast ([_Runtime.field(keyboard, 'onDidShow'), _Runtime.field(info, 'height')] : Array<Dynamic>));
-            _Runtime.callValue(emitSignal, cast ([_Runtime.field(keyboard, 'onShow'), _Runtime.field(info, 'height')] : Array<Dynamic>));
+            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(keyboard, 'onDidShow')], [_Runtime.field(info, 'height')]]), 1);
+            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(keyboard, 'onShow')], [_Runtime.field(info, 'height')]]), 1);
           } else {
-            _Runtime.callValue(emitSignal, cast ([_Runtime.field(keyboard, 'onDidHide')] : Array<Dynamic>));
-            _Runtime.callValue(emitSignal, cast ([_Runtime.field(keyboard, 'onHide')] : Array<Dynamic>));
+            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(keyboard, 'onDidHide')]]), 1);
+            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(keyboard, 'onHide')]]), 1);
           }
         }
       }

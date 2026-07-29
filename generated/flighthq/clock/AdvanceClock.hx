@@ -13,7 +13,7 @@ class AdvanceClock {
     scaledDelta = _Runtime.select(_Runtime.field(clock, 'paused'), function():Dynamic return cast 0.0, function():Dynamic return cast (deltaSeconds * _Runtime.field(clock, 'scale')));
     _Runtime.setField(clock, 'deltaTime', scaledDelta);
     _Runtime.setField(clock, 'elapsed', (_Runtime.field(clock, 'elapsed') + scaledDelta));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(clock, 'onTick'), null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(clock, 'onTick'), scaledDelta] : Array<Dynamic>)); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(clock, 'onTick'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(clock, 'onTick')], [scaledDelta]]), 1); }
     children = _Runtime.field(clock, 'children');
     {
       var i:Dynamic = 0.0;

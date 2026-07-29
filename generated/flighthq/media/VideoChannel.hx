@@ -142,7 +142,7 @@ class VideoChannel {
     }
     _Runtime.setField(channel, 'currentTime', _Runtime.field(channel, 'length'));
     _Runtime.setField(channel, 'state', 'complete');
-    _Runtime.callValue(emitSignal, cast ([_Runtime.field(channel, 'onComplete')] : Array<Dynamic>));
+    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(channel, 'onComplete')]]), 1);
   }
 
   public static function startVideoChannel__videoChannel(channel:flighthq.types.VideoResource.VideoChannel):Void {

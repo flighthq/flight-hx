@@ -24,7 +24,7 @@ class UpdateTweens {
       _Runtime.setIndex(target, _Runtime.field(detail, 'key'), value);
     }
     _Runtime.setField(tween, 'complete', true);
-    _Runtime.callValue(emitSignal, cast ([_Runtime.field(tween, 'onComplete')] : Array<Dynamic>));
+    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(tween, 'onComplete')]]), 1);
   }
 
   public static function updateTween__updateTweens<T>(tween:Tween<Dynamic>, deltaTime:Float):Void {
@@ -47,19 +47,19 @@ class UpdateTweens {
       if (_Runtime.truthy(_Runtime.field(tween, 'snapping'))) { (value = cast (HxMath.round(value) : Dynamic)); }
       _Runtime.setIndex(target, _Runtime.field(detail, 'key'), value);
     }
-    _Runtime.callValue(emitSignal, cast ([_Runtime.field(tween, 'onUpdate')] : Array<Dynamic>));
+    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(tween, 'onUpdate')]]), 1);
     if (_Runtime.truthy(_Runtime.compare(t, 1.0, '>='))) {
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(tween, 'repeat'), 0.0))) {
         _Runtime.setField(tween, 'complete', true);
-        _Runtime.callValue(emitSignal, cast ([_Runtime.field(tween, 'onComplete')] : Array<Dynamic>));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(tween, 'onComplete')]]), 1);
       } else {
         if (_Runtime.truthy(_Runtime.field(tween, 'reflect'))) {
           _Runtime.setField(tween, 'reverse', !_Runtime.truthy(_Runtime.field(tween, 'reverse')));
-          _Runtime.callValue(emitSignal, cast ([_Runtime.field(tween, 'onYoyo')] : Array<Dynamic>));
+          _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(tween, 'onYoyo')]]), 1);
         }
         _Runtime.setField(tween, 'elapsed', _Runtime.field(tween, 'delay'));
         if (_Runtime.truthy(_Runtime.compare(_Runtime.field(tween, 'repeat'), 0.0, '>'))) { _Runtime.incrementField(tween, 'repeat', -1, true); }
-        _Runtime.callValue(emitSignal, cast ([_Runtime.field(tween, 'onRepeat')] : Array<Dynamic>));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(tween, 'onRepeat')]]), 1);
       }
     }
   }

@@ -47,7 +47,7 @@ class Throttle {
         (timer = cast (null : Dynamic));
       }
     };
-    handler = (cast function(...args:Dynamic) {
+    handler = (cast function(args:Array<Dynamic>) {
       (lastArgs = cast (args : Dynamic));
       if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(leading, function():Dynamic return cast _Runtime.strictEquals(timer, null)), function():Dynamic return cast !_Runtime.truthy(leadingFired)))) {
         (leadingFired = cast (true : Dynamic));
@@ -90,7 +90,7 @@ class Throttle {
         (trailingTimer = cast (null : Dynamic));
       }
     };
-    handler = (cast function(...args:Dynamic) {
+    handler = (cast function(args:Array<Dynamic>) {
       var now:Dynamic = cast _Runtime.UNDEFINED;
       var remaining:Dynamic = cast _Runtime.UNDEFINED;
       now = _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>));

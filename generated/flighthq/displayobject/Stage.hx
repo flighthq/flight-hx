@@ -73,7 +73,7 @@ class Stage {
     _Runtime.setField(source, 'stageWidth', width);
     _Runtime.setField(source, 'stageHeight', height);
     runtime = (cast _Runtime.getIndex(source, EntityRuntimeKey) : Null<StageRuntime>);
-    if (_Runtime.truthy(_Runtime.optionalField(runtime, 'stageSignals'))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(_Runtime.field(runtime, 'stageSignals'), 'onResize')] : Array<Dynamic>)); }
+    if (_Runtime.truthy(_Runtime.optionalField(runtime, 'stageSignals'))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(_Runtime.field(runtime, 'stageSignals'), 'onResize')]]), 1); }
   }
 
   public static function ensureStageRuntime__stage(source:flighthq.types.Stage):StageRuntime {

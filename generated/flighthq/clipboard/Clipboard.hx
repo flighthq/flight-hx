@@ -25,7 +25,7 @@ class Clipboard {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(detachClipboardWatch, cast ([watch] : Array<Dynamic>));
     unsubscribe = _Runtime.callProperty(_Runtime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'subscribeClipboardChange', cast ([function() {
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(watch, 'onChange')] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(watch, 'onChange')]]), 1);
     }] : Array<Dynamic>));
     ((cast Clipboard._watchSubscriptions__clipboard : flighthq._internal._WeakMap).set(watch, unsubscribe));
   }

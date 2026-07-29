@@ -76,24 +76,24 @@ class TauriWindow {
       flighthq._internal._Async.recover(_Runtime.callProperty(w, 'onMoved', cast ([function(event:Dynamic) {
         _Runtime.setField(win, 'x', _Runtime.field(_Runtime.field(event, 'payload'), 'x'));
         _Runtime.setField(win, 'y', _Runtime.field(_Runtime.field(event, 'payload'), 'y'));
-        _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onMove')] : Array<Dynamic>));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onMove')]]), 1);
       }] : Array<Dynamic>)), function() {
       
       });
       flighthq._internal._Async.recover(_Runtime.callProperty(w, 'onResized', cast ([function(event:Dynamic) {
         _Runtime.setField(win, 'width', _Runtime.field(_Runtime.field(event, 'payload'), 'width'));
         _Runtime.setField(win, 'height', _Runtime.field(_Runtime.field(event, 'payload'), 'height'));
-        _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onResize')] : Array<Dynamic>));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onResize')]]), 1);
       }] : Array<Dynamic>)), function() {
       
       });
       flighthq._internal._Async.recover(_Runtime.callProperty(w, 'onFocusChanged', cast ([function(event:Dynamic) {
         _Runtime.setField(win, 'focused', _Runtime.field(event, 'payload'));
-        _Runtime.callValue(emitSignal, cast ([_Runtime.select(_Runtime.field(event, 'payload'), function():Dynamic return cast _Runtime.field(win, 'onFocusIn'), function():Dynamic return cast _Runtime.field(win, 'onFocusOut'))] : Array<Dynamic>));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.select(_Runtime.field(event, 'payload'), function():Dynamic return cast _Runtime.field(win, 'onFocusIn'), function():Dynamic return cast _Runtime.field(win, 'onFocusOut'))]]), 1);
       }] : Array<Dynamic>)), function() {
       
       });
-      flighthq._internal._Async.recover(_Runtime.callProperty(w, 'onCloseRequested', cast ([function() return _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onClose')] : Array<Dynamic>))] : Array<Dynamic>)), function() {
+      flighthq._internal._Async.recover(_Runtime.callProperty(w, 'onCloseRequested', cast ([function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onClose')]]), 1)] : Array<Dynamic>)), function() {
       
       });
       return cast true;

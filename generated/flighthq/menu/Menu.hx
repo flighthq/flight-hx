@@ -91,7 +91,7 @@ class Menu {
           accelEl = _Runtime.callProperty(li, 'querySelector', cast (['span:last-child'] : Array<Dynamic>));
           if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(accelEl, null), function():Dynamic return cast !_Runtime.strictEquals(accelEl, labelEl)))) { _Runtime.setField(_Runtime.field(accelEl, 'style'), 'color', 'rgba(255,255,255,.7)'); }
           if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(Menu._menuSignals__menu, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(item, 'id'), _Runtime.field(_Runtime, 'UNDEFINED'))))) {
-            _Runtime.callValue(emitSignal, cast ([_Runtime.field(Menu._menuSignals__menu, 'onMenuItemHighlight'), _Runtime.field(item, 'id')] : Array<Dynamic>));
+            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(Menu._menuSignals__menu, 'onMenuItemHighlight')], [_Runtime.field(item, 'id')]]), 1);
           }
         }] : Array<Dynamic>));
         _Runtime.callProperty(li, 'addEventListener', cast (['mouseleave', function() {
@@ -213,7 +213,7 @@ class Menu {
   public static function onMenuSelect(listener:Dynamic):Dynamic {
     return cast _Runtime.callProperty(_Runtime.callValue(getMenuBackend, cast ([] : Array<Dynamic>)), 'subscribeSelect', cast ([function(id:Dynamic) {
       _Runtime.callValue(listener, cast ([id] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(Menu._menuSignals__menu, null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(Menu._menuSignals__menu, 'onMenuItemSelect'), id] : Array<Dynamic>)); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(Menu._menuSignals__menu, null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(Menu._menuSignals__menu, 'onMenuItemSelect')], [id]]), 1); }
     }] : Array<Dynamic>));
     return cast null;
   }
@@ -229,11 +229,11 @@ class Menu {
 
   public static function showContextMenu(items:Array<MenuItemTemplate>, x:Float, y:Float):flighthq._internal._Promise<Null<String>> {
     var promise:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.strictEquals(Menu._menuSignals__menu, null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(Menu._menuSignals__menu, 'onContextMenuOpen')] : Array<Dynamic>)); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(Menu._menuSignals__menu, null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(Menu._menuSignals__menu, 'onContextMenuOpen')]]), 1); }
     promise = _Runtime.callProperty(_Runtime.callValue(getMenuBackend, cast ([] : Array<Dynamic>)), 'popupContextMenu', cast ([items, x, y] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(Menu._menuSignals__menu, null))) {
       var signals:Dynamic = Menu._menuSignals__menu;
-      _Runtime.voidValue(_Runtime.callProperty(promise, 'then', cast ([function() return _Runtime.callValue(emitSignal, cast ([_Runtime.field(signals, 'onContextMenuClose')] : Array<Dynamic>))] : Array<Dynamic>)));
+      _Runtime.voidValue(_Runtime.callProperty(promise, 'then', cast ([function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onContextMenuClose')]]), 1)] : Array<Dynamic>)));
     }
     return cast promise;
     return cast null;
@@ -295,7 +295,7 @@ class Menu {
         if (_Runtime.truthy(!_Runtime.strictEquals(Menu._menuSignals__menu, null))) {
           var focused:Dynamic = _Runtime.getIndex(items, focusIndex);
           var itemId:Dynamic = _Runtime.optionalIndex(_Runtime.optionalField(focused, 'dataset'), 'itemId');
-          if (_Runtime.truthy(!_Runtime.strictEquals(itemId, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(Menu._menuSignals__menu, 'onMenuItemHighlight'), itemId] : Array<Dynamic>)); }
+          if (_Runtime.truthy(!_Runtime.strictEquals(itemId, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(Menu._menuSignals__menu, 'onMenuItemHighlight')], [itemId]]), 1); }
         }
       };
       onKeyDown = function onKeyDown(e:Dynamic):Void {

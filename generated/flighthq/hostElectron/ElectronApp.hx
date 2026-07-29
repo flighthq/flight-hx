@@ -96,12 +96,12 @@ class ElectronApp {
       return cast function() return _Runtime.callProperty(app, 'removeListener', cast (['window-all-closed', listener] : Array<Dynamic>));
     }, subscribeOpenFile: function(listener:Dynamic) {
       var handler:Dynamic = cast _Runtime.UNDEFINED;
-      handler = function(...args:Dynamic) return _Runtime.callValue(listener, cast ([Std.string(_Runtime.coalesce(_Runtime.getIndex(args, 1.0), function():Dynamic return cast ''))] : Array<Dynamic>));
+      handler = function(args:Array<Dynamic>) return _Runtime.callValue(listener, cast ([Std.string(_Runtime.coalesce(_Runtime.getIndex(args, 1.0), function():Dynamic return cast ''))] : Array<Dynamic>));
       _Runtime.callProperty(app, 'on', cast (['open-file', handler] : Array<Dynamic>));
       return cast function() return _Runtime.callProperty(app, 'removeListener', cast (['open-file', handler] : Array<Dynamic>));
     }, subscribeQuitRequest: function(listener:Dynamic) {
       var handler:Dynamic = cast _Runtime.UNDEFINED;
-      handler = function(...args:Dynamic) {
+      handler = function(args:Array<Dynamic>) {
         var event:Dynamic = cast _Runtime.UNDEFINED;
         event = (cast _Runtime.getIndex(args, 0.0) : Null<{ @:optional var preventDefault:Dynamic; }>);
         _Runtime.callValue(listener, cast ([function() return _Runtime.callOptionalProperty(event, 'preventDefault', cast ([] : Array<Dynamic>))] : Array<Dynamic>));
@@ -113,7 +113,7 @@ class ElectronApp {
       return cast function() return _Runtime.callProperty(app, 'removeListener', cast (['ready', listener] : Array<Dynamic>));
     }, subscribeSecondInstance: function(listener:Dynamic) {
       var handler:Dynamic = cast _Runtime.UNDEFINED;
-      handler = function(...args:Dynamic) return _Runtime.callValue(listener, cast ([_Runtime.coalesce((cast _Runtime.getIndex(args, 1.0) : Array<String>), function():Dynamic return cast cast ([] : Array<Dynamic>))] : Array<Dynamic>));
+      handler = function(args:Array<Dynamic>) return _Runtime.callValue(listener, cast ([_Runtime.coalesce((cast _Runtime.getIndex(args, 1.0) : Array<String>), function():Dynamic return cast cast ([] : Array<Dynamic>))] : Array<Dynamic>));
       _Runtime.callProperty(app, 'on', cast (['second-instance', handler] : Array<Dynamic>));
       return cast function() return _Runtime.callProperty(app, 'removeListener', cast (['second-instance', handler] : Array<Dynamic>));
     } };

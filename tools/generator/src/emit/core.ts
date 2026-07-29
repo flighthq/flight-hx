@@ -769,6 +769,7 @@ function buildPublicFacades(
       });
       return;
     }
+    const restIndex = origin.parameters.findIndex((parameter) => parameter.rest);
     const call: IrExpression = {
       arguments: origin.parameters.map((parameter) =>
         parameter.rest
@@ -776,6 +777,7 @@ function buildPublicFacades(
           : { kind: 'identifier', name: parameter.name },
       ),
       callee: { kind: 'identifier', name: alias },
+      ...(restIndex < 0 ? {} : { haxeRestIndex: restIndex }),
       kind: 'call',
       typeArguments: [],
     };

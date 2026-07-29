@@ -106,7 +106,7 @@ class GlyphAtlasEntry {
     surface = _Runtime.field(runtime, 'surface');
     rightLimit = (_Runtime.field(surface, 'width') - padding);
     best = null;
-    bestSlack = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
+    bestSlack = HxMath.POSITIVE_INFINITY;
     for (shelf in _Runtime.iterable(_Runtime.field(runtime, 'shelves'))) {
       if (_Runtime.truthy(_Runtime.compare(_Runtime.field(shelf, 'height'), height, '<'))) { continue; }
       if (_Runtime.truthy(_Runtime.compare((_Runtime.field(shelf, 'cursorX') + width), rightLimit, '>'))) { continue; }

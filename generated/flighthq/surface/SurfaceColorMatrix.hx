@@ -7,13 +7,13 @@ import flighthq.types.SurfaceRegion;
 
 class SurfaceColorMatrix {
   public static function buildSurfaceBrightnessColorMatrix(out:Array<Float>, amount:Float):Void {
-    _Runtime.callValue(SurfaceColorMatrix.setColorMatrix__surfaceColorMatrix, cast ([out, amount, 0.0, 0.0, 0.0, 0.0, 0.0, amount, 0.0, 0.0, 0.0, 0.0, 0.0, amount, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
+    _Runtime.callHaxeRestValue(SurfaceColorMatrix.setColorMatrix__surfaceColorMatrix, _Runtime.concatArrays([[out], [amount], [0.0], [0.0], [0.0], [0.0], [0.0], [amount], [0.0], [0.0], [0.0], [0.0], [0.0], [amount], [0.0], [0.0], [0.0], [0.0], [0.0], [1.0], [0.0]]), 1);
   }
 
   public static function buildSurfaceContrastColorMatrix(out:Array<Float>, amount:Float):Void {
     var t:Dynamic = cast _Runtime.UNDEFINED;
     t = (127.5 * (1.0 - amount));
-    _Runtime.callValue(SurfaceColorMatrix.setColorMatrix__surfaceColorMatrix, cast ([out, amount, 0.0, 0.0, 0.0, t, 0.0, amount, 0.0, 0.0, t, 0.0, 0.0, amount, 0.0, t, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
+    _Runtime.callHaxeRestValue(SurfaceColorMatrix.setColorMatrix__surfaceColorMatrix, _Runtime.concatArrays([[out], [amount], [0.0], [0.0], [0.0], [t], [0.0], [amount], [0.0], [0.0], [t], [0.0], [0.0], [amount], [0.0], [t], [0.0], [0.0], [0.0], [1.0], [0.0]]), 1);
   }
 
   public static function buildSurfaceGrayscaleColorMatrix(out:Array<Float>):Void {
@@ -27,11 +27,11 @@ class SurfaceColorMatrix {
     radians = ((degrees * HxMath.PI) / 180.0);
     c = HxMath.cos(radians);
     s = HxMath.sin(radians);
-    _Runtime.callValue(SurfaceColorMatrix.setColorMatrix__surfaceColorMatrix, cast ([out, ((0.213 + (c * 0.787)) - (s * 0.213)), ((0.715 - (c * 0.715)) - (s * 0.715)), ((0.072 - (c * 0.072)) + (s * 0.928)), 0.0, 0.0, ((0.213 - (c * 0.213)) + (s * 0.143)), ((0.715 + (c * 0.285)) + (s * 0.14)), ((0.072 - (c * 0.072)) - (s * 0.283)), 0.0, 0.0, ((0.213 - (c * 0.213)) - (s * 0.787)), ((0.715 - (c * 0.715)) + (s * 0.715)), ((0.072 + (c * 0.928)) + (s * 0.072)), 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
+    _Runtime.callHaxeRestValue(SurfaceColorMatrix.setColorMatrix__surfaceColorMatrix, _Runtime.concatArrays([[out], [((0.213 + (c * 0.787)) - (s * 0.213))], [((0.715 - (c * 0.715)) - (s * 0.715))], [((0.072 - (c * 0.072)) + (s * 0.928))], [0.0], [0.0], [((0.213 - (c * 0.213)) + (s * 0.143))], [((0.715 + (c * 0.285)) + (s * 0.14))], [((0.072 - (c * 0.072)) - (s * 0.283))], [0.0], [0.0], [((0.213 - (c * 0.213)) - (s * 0.787))], [((0.715 - (c * 0.715)) + (s * 0.715))], [((0.072 + (c * 0.928)) + (s * 0.072))], [0.0], [0.0], [0.0], [0.0], [0.0], [1.0], [0.0]]), 1);
   }
 
   public static function buildSurfaceInvertColorMatrix(out:Array<Float>):Void {
-    _Runtime.callValue(SurfaceColorMatrix.setColorMatrix__surfaceColorMatrix, cast ([out, -1.0, 0.0, 0.0, 0.0, 255.0, 0.0, -1.0, 0.0, 0.0, 255.0, 0.0, 0.0, -1.0, 0.0, 255.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
+    _Runtime.callHaxeRestValue(SurfaceColorMatrix.setColorMatrix__surfaceColorMatrix, _Runtime.concatArrays([[out], [-1.0], [0.0], [0.0], [0.0], [255.0], [0.0], [-1.0], [0.0], [0.0], [255.0], [0.0], [0.0], [-1.0], [0.0], [255.0], [0.0], [0.0], [0.0], [1.0], [0.0]]), 1);
   }
 
   public static function buildSurfaceSaturationColorMatrix(out:Array<Float>, amount:Float):Void {
@@ -43,11 +43,11 @@ class SurfaceColorMatrix {
     r = (SurfaceColorMatrix.LUMA_R__surfaceColorMatrix * inv);
     g = (SurfaceColorMatrix.LUMA_G__surfaceColorMatrix * inv);
     b = (SurfaceColorMatrix.LUMA_B__surfaceColorMatrix * inv);
-    _Runtime.callValue(SurfaceColorMatrix.setColorMatrix__surfaceColorMatrix, cast ([out, (r + amount), g, b, 0.0, 0.0, r, (g + amount), b, 0.0, 0.0, r, g, (b + amount), 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
+    _Runtime.callHaxeRestValue(SurfaceColorMatrix.setColorMatrix__surfaceColorMatrix, _Runtime.concatArrays([[out], [(r + amount)], [g], [b], [0.0], [0.0], [r], [(g + amount)], [b], [0.0], [0.0], [r], [g], [(b + amount)], [0.0], [0.0], [0.0], [0.0], [0.0], [1.0], [0.0]]), 1);
   }
 
   public static function buildSurfaceSepiaColorMatrix(out:Array<Float>):Void {
-    _Runtime.callValue(SurfaceColorMatrix.setColorMatrix__surfaceColorMatrix, cast ([out, 0.393, 0.769, 0.189, 0.0, 0.0, 0.349, 0.686, 0.168, 0.0, 0.0, 0.272, 0.534, 0.131, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
+    _Runtime.callHaxeRestValue(SurfaceColorMatrix.setColorMatrix__surfaceColorMatrix, _Runtime.concatArrays([[out], [0.393], [0.769], [0.189], [0.0], [0.0], [0.349], [0.686], [0.168], [0.0], [0.0], [0.272], [0.534], [0.131], [0.0], [0.0], [0.0], [0.0], [0.0], [1.0], [0.0]]), 1);
   }
 
   public static function colorMatrixSurface(out:flighthq._internal._UInt8ClampedArray, source:SurfaceRegion, matrix:Array<Float>):Void {
@@ -105,7 +105,7 @@ class SurfaceColorMatrix {
   }
 
   public static function setSurfaceColorMatrixIdentity(out:Array<Float>):Void {
-    _Runtime.callValue(SurfaceColorMatrix.setColorMatrix__surfaceColorMatrix, cast ([out, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
+    _Runtime.callHaxeRestValue(SurfaceColorMatrix.setColorMatrix__surfaceColorMatrix, _Runtime.concatArrays([[out], [1.0], [0.0], [0.0], [0.0], [0.0], [0.0], [1.0], [0.0], [0.0], [0.0], [0.0], [0.0], [1.0], [0.0], [0.0], [0.0], [0.0], [0.0], [1.0], [0.0]]), 1);
   }
 
   public static final LUMA_R__surfaceColorMatrix:Dynamic = 0.213;

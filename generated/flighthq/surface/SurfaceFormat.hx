@@ -18,7 +18,7 @@ class SurfaceFormat {
     var dstB:Dynamic = cast _Runtime.UNDEFINED;
     var dstA:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(from, to))) {
-      if (_Runtime.truthy(!_Runtime.strictEquals(out, source))) { _Runtime.callProperty(out, 'set', cast ([source.subarray(Std.int(0.0), Std.int(length))] : Array<Dynamic>)); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(out, source))) { _Runtime.callProperty(out, 'set', cast ([(cast source : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int(length))] : Array<Dynamic>)); }
       return;
     }
     __destructure0 = _Runtime.callValue(SurfaceFormat.channelOffsets__surfaceFormat, cast ([from] : Array<Dynamic>));

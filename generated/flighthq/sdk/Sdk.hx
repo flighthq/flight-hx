@@ -2166,7 +2166,7 @@ class Sdk {
   }
 
   public static function addNodeChildren<Traits>(target:Node<Traits>, ...children:Node<Traits>):Void {
-    _Runtime.apply(Facade_Sdk_flighthq_node_Hierarchy.addNodeChildren, _Runtime.concatArrays([[target], _Runtime.toArray(children)]));
+    _Runtime.callHaxeRestValue(Facade_Sdk_flighthq_node_Hierarchy.addNodeChildren, _Runtime.concatArrays([[target], _Runtime.toArray(children)]), 1);
   }
 
   public static function addTextureAtlasRegion(target:TextureAtlas, x:Float, y:Float, width:Float, height:Float, ?pivotX:Float, ?pivotY:Float, ?name:String):Void {
@@ -5964,7 +5964,7 @@ class Sdk {
   }
 
   public static function createFanoutLogSink(...sinks:LogSink):LogSink {
-    return cast _Runtime.apply(Facade_Sdk_flighthq_log_Log.createFanoutLogSink, _Runtime.concatArrays([_Runtime.toArray(sinks)]));
+    return cast _Runtime.callHaxeRestValue(Facade_Sdk_flighthq_log_Log.createFanoutLogSink, _Runtime.concatArrays([_Runtime.toArray(sinks)]), 0);
     return cast null;
   }
 
@@ -9841,7 +9841,7 @@ class Sdk {
   }
 
   public static function emitSignal<T>(signal:Signal<Dynamic>, ...args:Dynamic):Void {
-    _Runtime.apply(Facade_Sdk_flighthq_signals_Emitter.emitSignal, _Runtime.concatArrays([[signal], _Runtime.toArray(args)]));
+    _Runtime.callHaxeRestValue(Facade_Sdk_flighthq_signals_Emitter.emitSignal, _Runtime.concatArrays([[signal], _Runtime.toArray(args)]), 1);
   }
 
   public static function enableAnimationPlayerSignals(player:AnimationPlayer):Void {
@@ -14871,12 +14871,12 @@ class Sdk {
   }
 
   public static function invokeIpc(channel:Dynamic, ...args:Dynamic):flighthq._internal._Promise<Dynamic> {
-    return cast _Runtime.apply(Facade_Sdk_flighthq_ipc_Ipc.invokeIpc, _Runtime.concatArrays([[channel], _Runtime.toArray(args)]));
+    return cast _Runtime.callHaxeRestValue(Facade_Sdk_flighthq_ipc_Ipc.invokeIpc, _Runtime.concatArrays([[channel], _Runtime.toArray(args)]), 1);
     return cast null;
   }
 
   public static function invokeIpcWithTimeout(channel:Dynamic, timeoutMs:Float, ...args:Dynamic):flighthq._internal._Promise<Dynamic> {
-    return cast _Runtime.apply(Facade_Sdk_flighthq_ipc_Ipc.invokeIpcWithTimeout, _Runtime.concatArrays([[channel], [timeoutMs], _Runtime.toArray(args)]));
+    return cast _Runtime.callHaxeRestValue(Facade_Sdk_flighthq_ipc_Ipc.invokeIpcWithTimeout, _Runtime.concatArrays([[channel], [timeoutMs], _Runtime.toArray(args)]), 2);
     return cast null;
   }
 
@@ -15471,7 +15471,7 @@ class Sdk {
   }
 
   public static function joinFilePath(...segments:String):String {
-    return cast _Runtime.apply(Facade_Sdk_flighthq_filesystem_Filesystem.joinFilePath, _Runtime.concatArrays([_Runtime.toArray(segments)]));
+    return cast _Runtime.callHaxeRestValue(Facade_Sdk_flighthq_filesystem_Filesystem.joinFilePath, _Runtime.concatArrays([_Runtime.toArray(segments)]), 0);
     return cast null;
   }
 
@@ -18756,11 +18756,11 @@ class Sdk {
   }
 
   public static function sendIpcMessage(channel:Dynamic, ...args:Dynamic):Void {
-    _Runtime.apply(Facade_Sdk_flighthq_ipc_Ipc.sendIpcMessage, _Runtime.concatArrays([[channel], _Runtime.toArray(args)]));
+    _Runtime.callHaxeRestValue(Facade_Sdk_flighthq_ipc_Ipc.sendIpcMessage, _Runtime.concatArrays([[channel], _Runtime.toArray(args)]), 1);
   }
 
   public static function sendIpcMessageTo(target:IpcTarget, channel:Dynamic, ...args:Dynamic):Void {
-    _Runtime.apply(Facade_Sdk_flighthq_ipc_Ipc.sendIpcMessageTo, _Runtime.concatArrays([[target], [channel], _Runtime.toArray(args)]));
+    _Runtime.callHaxeRestValue(Facade_Sdk_flighthq_ipc_Ipc.sendIpcMessageTo, _Runtime.concatArrays([[target], [channel], _Runtime.toArray(args)]), 2);
   }
 
   public static function sendNetRequest(request:NetRequest, ?options:NetRequestOptions):flighthq._internal._Promise<NetResponse> {

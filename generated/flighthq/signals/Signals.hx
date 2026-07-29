@@ -49,7 +49,7 @@ class Signals {
   }
 
   public static function emitSignal<T>(signal:Signal<Dynamic>, ...args:Dynamic):Void {
-    _Runtime.apply(Facade_Signals_flighthq_signals_Emitter.emitSignal, _Runtime.concatArrays([[signal], _Runtime.toArray(args)]));
+    _Runtime.callHaxeRestValue(Facade_Signals_flighthq_signals_Emitter.emitSignal, _Runtime.concatArrays([[signal], _Runtime.toArray(args)]), 1);
   }
 
   public static function hasSignalSlots<T>(signal:Signal<Dynamic>):Bool {

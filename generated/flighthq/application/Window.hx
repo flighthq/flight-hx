@@ -43,13 +43,13 @@ class Window {
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map).get(Window.kClose__window)), cast ([] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return; }
     onBeforeUnload = function(e:Dynamic) {
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onCloseRequest')] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onCloseRequest')]]), 1);
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.optionalField(_Runtime.field(_Runtime.field(win, 'onCloseRequest'), 'data'), 'cancelled'), true))) {
         _Runtime.callProperty(e, 'preventDefault', cast ([] : Array<Dynamic>));
         _Runtime.setField(e, 'returnValue', '');
       }
     };
-    onPageHide = function() return _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onClose')] : Array<Dynamic>));
+    onPageHide = function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onClose')]]), 1);
     flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'addEventListener', cast (['beforeunload', onBeforeUnload] : Array<Dynamic>));
     flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'addEventListener', cast (['pagehide', onPageHide] : Array<Dynamic>));
     ((cast observers : flighthq._internal._Map).set(Window.kClose__window, function() {
@@ -68,7 +68,7 @@ class Window {
     onDrop = function(e:Dynamic) {
       _Runtime.callProperty(e, 'preventDefault', cast ([] : Array<Dynamic>));
       for (file in _Runtime.iterable(_Runtime.toArray(_Runtime.coalesce(_Runtime.optionalField(_Runtime.field(e, 'dataTransfer'), 'files'), function():Dynamic return cast cast ([] : Array<Dynamic>))))) {
-        _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onDropFile'), _Runtime.field(file, 'name')] : Array<Dynamic>));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onDropFile')], [_Runtime.field(file, 'name')]]), 1);
       }
     };
     _Runtime.callProperty(element, 'addEventListener', cast (['dragover', onDragOver] : Array<Dynamic>));
@@ -85,8 +85,8 @@ class Window {
     var onBlur:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Window.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map).get(Window.kFocus__window)), cast ([] : Array<Dynamic>));
-    onFocus = function() return _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onFocusIn')] : Array<Dynamic>));
-    onBlur = function() return _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onFocusOut')] : Array<Dynamic>));
+    onFocus = function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onFocusIn')]]), 1);
+    onBlur = function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onFocusOut')]]), 1);
     _Runtime.callProperty(element, 'addEventListener', cast (['focus', onFocus] : Array<Dynamic>));
     _Runtime.callProperty(element, 'addEventListener', cast (['blur', onBlur] : Array<Dynamic>));
     ((cast observers : flighthq._internal._Map).set(Window.kFocus__window, function() {
@@ -100,7 +100,7 @@ class Window {
     var handler:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Window.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map).get(Window.kFullscreen__window)), cast ([] : Array<Dynamic>));
-    handler = function() return _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onFullscreenChanged')] : Array<Dynamic>));
+    handler = function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onFullscreenChanged')]]), 1);
     flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'addEventListener', cast (['fullscreenchange', handler] : Array<Dynamic>));
     ((cast observers : flighthq._internal._Map).set(Window.kFullscreen__window, function() return flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'removeEventListener', cast (['fullscreenchange', handler] : Array<Dynamic>))));
   }
@@ -118,7 +118,7 @@ class Window {
         if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(win, 'x'), x), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(win, 'y'), y)))) {
           _Runtime.setField(win, 'x', x);
           _Runtime.setField(win, 'y', y);
-          _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onMove')] : Array<Dynamic>));
+          _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onMove')]]), 1);
         }
       }
     };
@@ -132,7 +132,7 @@ class Window {
     observers = _Runtime.callValue(Window.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map).get(Window.kOrientation__window)), cast ([] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(_Runtime.globalValue('screen'), 'orientation')))) { return; }
-    handler = function() return _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onOrientationChanged')] : Array<Dynamic>));
+    handler = function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onOrientationChanged')]]), 1);
     _Runtime.callProperty(_Runtime.field(_Runtime.globalValue('screen'), 'orientation'), 'addEventListener', cast (['change', handler] : Array<Dynamic>));
     ((cast observers : flighthq._internal._Map).set(Window.kOrientation__window, function() return _Runtime.callProperty(_Runtime.field(_Runtime.globalValue('screen'), 'orientation'), 'removeEventListener', cast (['change', handler] : Array<Dynamic>))));
   }
@@ -145,9 +145,9 @@ class Window {
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map).get(Window.kRenderContext__window)), cast ([] : Array<Dynamic>));
     onContextLost = function(e:Dynamic) {
       _Runtime.callProperty(e, 'preventDefault', cast ([] : Array<Dynamic>));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onRenderContextLost')] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onRenderContextLost')]]), 1);
     };
-    onContextRestored = function() return _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onRenderContextRestored')] : Array<Dynamic>));
+    onContextRestored = function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onRenderContextRestored')]]), 1);
     flighthq._internal.backend.CanvasElementBackend.call(canvas, 'addEventListener', cast (['webglcontextlost', onContextLost] : Array<Dynamic>));
     flighthq._internal.backend.CanvasElementBackend.call(canvas, 'addEventListener', cast (['webglcontextrestored', onContextRestored] : Array<Dynamic>));
     ((cast observers : flighthq._internal._Map).set(Window.kRenderContext__window, function() {
@@ -181,7 +181,7 @@ class Window {
         _Runtime.setField(win, 'width', HxMath.round(_Runtime.field(_Runtime.field(entry, 'contentRect'), 'width')));
         _Runtime.setField(win, 'height', HxMath.round(_Runtime.field(_Runtime.field(entry, 'contentRect'), 'height')));
         _Runtime.setField(win, 'devicePixelRatio', _Runtime.orValue(flighthq._internal.backend.DomWindowBackend.field(_Runtime.globalValue('window'), 'devicePixelRatio'), function():Dynamic return cast 1.0));
-        _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onResize')] : Array<Dynamic>));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onResize')]]), 1);
       }
     }]);
     _Runtime.callProperty(observer, 'observe', cast ([element] : Array<Dynamic>));
@@ -195,9 +195,9 @@ class Window {
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map).get(Window.kVisibility__window)), cast ([] : Array<Dynamic>));
     handler = function() {
       if (_Runtime.truthy(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'hidden'))) {
-        _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onDeactivate')] : Array<Dynamic>));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onDeactivate')]]), 1);
       } else {
-        _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onActivate')] : Array<Dynamic>));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onActivate')]]), 1);
       }
     };
     flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'addEventListener', cast (['visibilitychange', handler] : Array<Dynamic>));
@@ -211,7 +211,7 @@ class Window {
   public static function closeWindow(win:ApplicationWindow):Bool {
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(requestWindowClose, cast ([win] : Array<Dynamic>))))) { return cast false; }
     _Runtime.callProperty(_Runtime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'close', cast ([win] : Array<Dynamic>));
-    _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onClose')] : Array<Dynamic>));
+    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onClose')]]), 1);
     return cast true;
     return cast null;
   }
@@ -473,14 +473,14 @@ class Window {
     if (_Runtime.truthy(_Runtime.field(win, 'maximized'))) { return; }
     _Runtime.setField(win, 'maximized', true);
     _Runtime.callProperty(_Runtime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'maximize', cast ([win] : Array<Dynamic>));
-    _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onMaximize')] : Array<Dynamic>));
+    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onMaximize')]]), 1);
   }
 
   public static function minimizeWindow(win:ApplicationWindow):Void {
     if (_Runtime.truthy(_Runtime.field(win, 'minimized'))) { return; }
     _Runtime.setField(win, 'minimized', true);
     _Runtime.callProperty(_Runtime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'minimize', cast ([win] : Array<Dynamic>));
-    _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onMinimize')] : Array<Dynamic>));
+    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onMinimize')]]), 1);
   }
 
   public static function openWindow(win:ApplicationWindow, ?options:WindowOptions):Bool {
@@ -527,7 +527,7 @@ class Window {
   }
 
   public static function requestWindowClose(win:ApplicationWindow):Bool {
-    _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onCloseRequest')] : Array<Dynamic>));
+    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onCloseRequest')]]), 1);
     return cast !_Runtime.strictEquals(_Runtime.optionalField(_Runtime.field(_Runtime.field(win, 'onCloseRequest'), 'data'), 'cancelled'), true);
     return cast null;
   }
@@ -537,7 +537,7 @@ class Window {
     _Runtime.setField(win, 'minimized', false);
     _Runtime.setField(win, 'maximized', false);
     _Runtime.callProperty(_Runtime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'restore', cast ([win] : Array<Dynamic>));
-    _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onRestore')] : Array<Dynamic>));
+    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onRestore')]]), 1);
   }
 
   public static function setWindowAlwaysOnTop(win:ApplicationWindow, alwaysOnTop:Bool):Void {
@@ -557,7 +557,7 @@ class Window {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(win, 'fullscreen'), fullscreen))) { return; }
     _Runtime.setField(win, 'fullscreen', fullscreen);
     _Runtime.callProperty(_Runtime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'setFullscreen', cast ([win, fullscreen] : Array<Dynamic>));
-    _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onFullscreenChanged')] : Array<Dynamic>));
+    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onFullscreenChanged')]]), 1);
   }
 
   public static function setWindowHasShadow(win:ApplicationWindow, hasShadow:Bool):Void {
@@ -598,7 +598,7 @@ class Window {
     _Runtime.setField(win, 'x', x);
     _Runtime.setField(win, 'y', y);
     _Runtime.callProperty(_Runtime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'setPosition', cast ([win, x, y] : Array<Dynamic>));
-    _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onMove')] : Array<Dynamic>));
+    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onMove')]]), 1);
   }
 
   public static function setWindowProgress(win:ApplicationWindow, progress:Float):Void {
@@ -614,7 +614,7 @@ class Window {
     _Runtime.setField(win, 'width', width);
     _Runtime.setField(win, 'height', height);
     _Runtime.callProperty(_Runtime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'setSize', cast ([win, width, height] : Array<Dynamic>));
-    _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onResize')] : Array<Dynamic>));
+    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onResize')]]), 1);
   }
 
   public static function setWindowSkipTaskbar(win:ApplicationWindow, skip:Bool):Void {

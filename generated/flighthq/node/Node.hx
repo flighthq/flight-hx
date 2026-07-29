@@ -75,7 +75,7 @@ class Node {
   }
 
   public static function addNodeChildren<Traits>(target:flighthq.types.Node<Traits>, ...children:flighthq.types.Node<Traits>):Void {
-    _Runtime.apply(Facade_Node_flighthq_node_Hierarchy.addNodeChildren, _Runtime.concatArrays([[target], _Runtime.toArray(children)]));
+    _Runtime.callHaxeRestValue(Facade_Node_flighthq_node_Hierarchy.addNodeChildren, _Runtime.concatArrays([[target], _Runtime.toArray(children)]), 1);
   }
 
   public static function computeNodeBoundsRectangle<Traits>(out:RectangleLike, source:Spatial2DNode<Traits>, targetCoordinateSpace:Null<Spatial2DNode<Traits>>):Void {

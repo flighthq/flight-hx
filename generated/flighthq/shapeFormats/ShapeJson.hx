@@ -108,7 +108,7 @@ class ShapeJson {
         _Runtime.callProperty(args, 'push', cast ([reconstructed] : Array<Dynamic>));
       }
       if (_Runtime.truthy(drop)) { continue; }
-      _Runtime.apply(appender, _Runtime.concatArrays([[shape], _Runtime.toArray((cast args : Array<Dynamic>))]));
+      _Runtime.callValue(appender, cast ([shape, _Runtime.toArray((cast args : Array<Dynamic>))] : Array<Dynamic>));
     }
     return cast shape;
     return cast null;

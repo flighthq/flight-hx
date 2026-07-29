@@ -178,7 +178,7 @@ class Share {
             if (_Runtime.truthy(_Runtime.compare((cast Share._signalListeners__share : flighthq._internal._Map).size, 0.0, '>'))) {
               __flowBranch8 = flighthq._internal._Async.protect(function():Dynamic {
                 for (signals in _Runtime.iterable(((cast Share._signalListeners__share : flighthq._internal._Map).keys()))) {
-                  _Runtime.callValue(emitSignal, cast ([_Runtime.field(signals, 'onShareResult'), result] : Array<Dynamic>));
+                  _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onShareResult')], [result]]), 1);
                 }
                 return flighthq._internal._Async.flowNormal();
               });

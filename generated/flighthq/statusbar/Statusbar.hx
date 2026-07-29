@@ -76,7 +76,7 @@ class Statusbar {
     unsubscribe = _Runtime.callProperty(backend, 'subscribe', cast ([function() {
       var info:Dynamic = cast _Runtime.UNDEFINED;
       info = _Runtime.callProperty(backend, 'getInfo', cast ([Statusbar._scratchInfo__statusbar] : Array<Dynamic>));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(bar, 'onChange'), info] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(bar, 'onChange')], [info]]), 1);
     }] : Array<Dynamic>));
     ((cast Statusbar._subscriptions__statusbar : flighthq._internal._WeakMap).set(bar, unsubscribe));
   }

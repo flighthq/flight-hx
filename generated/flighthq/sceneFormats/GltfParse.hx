@@ -875,7 +875,7 @@ class GltfParse {
         _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromGlb: chunk length runs past the end of the container'] : Array<Dynamic>));
         break;
       }
-      var chunkData:Dynamic = source.subarray(Std.int(dataStart), Std.int((dataStart + chunkLength)));
+      var chunkData:Dynamic = (cast source : flighthq._internal._UInt8Array).subarray(Std.int(dataStart), Std.int((dataStart + chunkLength)));
       if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(chunkType, GltfParse.GLB_JSON_CHUNK__gltfParse), function():Dynamic return cast _Runtime.strictEquals(document, null)))) {
         var json:Dynamic = _Runtime.callProperty(_Runtime.construct(_Runtime.globalValue('TextDecoder'), []), 'decode', cast ([chunkData] : Array<Dynamic>));
         try {

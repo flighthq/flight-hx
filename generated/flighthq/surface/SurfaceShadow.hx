@@ -70,7 +70,7 @@ class SurfaceShadow {
       }
     }
     if (_Runtime.truthy(!_Runtime.strictEquals(a, out))) {
-      _Runtime.callProperty(out, 'set', cast ([a.subarray(Std.int(0.0), Std.int(((width * height) * 4.0)))] : Array<Dynamic>));
+      _Runtime.callProperty(out, 'set', cast ([(cast a : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int(((width * height) * 4.0)))] : Array<Dynamic>));
     }
   }
 

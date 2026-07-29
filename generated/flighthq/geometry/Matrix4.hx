@@ -796,7 +796,7 @@ class Matrix4 {
   }
 
   public static function setMatrix4FromFloat32Array(out:Matrix4Like, offset:Float, source:flighthq._internal._Float32Array):Void {
-    _Runtime.callProperty(_Runtime.field(out, 'm'), 'set', cast ([source.subarray(Std.int(offset), Std.int((offset + 16.0)))] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.field(out, 'm'), 'set', cast ([(cast source : flighthq._internal._Float32Array).subarray(Std.int(offset), Std.int((offset + 16.0)))] : Array<Dynamic>));
   }
 
   public static function setMatrix4FromMatrix(out:Matrix4Like, source:MatrixLike):Void {

@@ -193,7 +193,7 @@ class SurfaceGradient {
         pass++;
       }
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(a, field))) { _Runtime.callProperty(field, 'set', cast ([a.subarray(Std.int(0.0), Std.int(((w * h) * 4.0)))] : Array<Dynamic>)); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(a, field))) { _Runtime.callProperty(field, 'set', cast ([(cast a : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int(((w * h) * 4.0)))] : Array<Dynamic>)); }
   }
 
   public static function lerp__surfaceGradient(from:Float, to:Float, t:Float):Float {

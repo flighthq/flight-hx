@@ -72,35 +72,35 @@ class Sensors {
     _Runtime.callValue(detachSensors, cast ([sensors] : Array<Dynamic>));
     backend = _Runtime.callValue(getSensorsBackend, cast ([] : Array<Dynamic>));
     unsubscribeMotion = _Runtime.callProperty(backend, 'subscribeMotion', cast ([function(acceleration:Dynamic, rotationRate:Dynamic) {
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(sensors, 'onAccelerometer'), acceleration] : Array<Dynamic>));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(sensors, 'onGyroscope'), rotationRate] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(sensors, 'onAccelerometer')], [acceleration]]), 1);
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(sensors, 'onGyroscope')], [rotationRate]]), 1);
     }] : Array<Dynamic>));
     unsubscribeLinearAcceleration = _Runtime.callProperty(backend, 'subscribeLinearAcceleration', cast ([function(reading:Dynamic) {
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(sensors, 'onLinearAcceleration'), reading] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(sensors, 'onLinearAcceleration')], [reading]]), 1);
     }] : Array<Dynamic>));
     unsubscribeGravity = _Runtime.callProperty(backend, 'subscribeGravity', cast ([function(reading:Dynamic) {
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(sensors, 'onGravity'), reading] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(sensors, 'onGravity')], [reading]]), 1);
     }] : Array<Dynamic>));
     unsubscribeOrientation = _Runtime.callProperty(backend, 'subscribeOrientation', cast ([function(orientation:Dynamic) {
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(sensors, 'onOrientation'), orientation] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(sensors, 'onOrientation')], [orientation]]), 1);
     }] : Array<Dynamic>));
     unsubscribeAbsoluteOrientation = _Runtime.callProperty(backend, 'subscribeAbsoluteOrientation', cast ([function(orientation:Dynamic) {
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(sensors, 'onAbsoluteOrientation'), orientation] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(sensors, 'onAbsoluteOrientation')], [orientation]]), 1);
     }] : Array<Dynamic>));
     unsubscribeMagnetometer = _Runtime.callProperty(backend, 'subscribeMagnetometer', cast ([function(reading:Dynamic) {
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(sensors, 'onMagnetometer'), reading] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(sensors, 'onMagnetometer')], [reading]]), 1);
     }] : Array<Dynamic>));
     unsubscribeAmbientLight = _Runtime.callProperty(backend, 'subscribeAmbientLight', cast ([function(reading:Dynamic) {
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(sensors, 'onAmbientLight'), reading] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(sensors, 'onAmbientLight')], [reading]]), 1);
     }] : Array<Dynamic>));
     unsubscribeBarometer = _Runtime.callProperty(backend, 'subscribeBarometer', cast ([function(reading:Dynamic) {
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(sensors, 'onBarometer'), reading] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(sensors, 'onBarometer')], [reading]]), 1);
     }] : Array<Dynamic>));
     unsubscribeProximity = _Runtime.callProperty(backend, 'subscribeProximity', cast ([function(reading:Dynamic) {
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(sensors, 'onProximity'), reading] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(sensors, 'onProximity')], [reading]]), 1);
     }] : Array<Dynamic>));
     unsubscribeQuaternion = _Runtime.callProperty(backend, 'subscribeQuaternion', cast ([function(reading:Dynamic) {
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(sensors, 'onQuaternion'), reading] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(sensors, 'onQuaternion')], [reading]]), 1);
     }] : Array<Dynamic>));
     ((cast Sensors._subscriptions__sensors : flighthq._internal._WeakMap).set(sensors, function() {
       _Runtime.callValue(unsubscribeAbsoluteOrientation, cast ([] : Array<Dynamic>));

@@ -18,7 +18,7 @@ class RandomDistributions {
     var u:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.compare(rate, 0.0, '<='))) { throw _Runtime.rangeError('randomExponential: rate must be > 0'); }
     u = _Runtime.callValue(random, cast ([] : Array<Dynamic>));
-    return cast (-HxMath.log(_Runtime.select(_Runtime.strictEquals(u, 0.0), function():Dynamic return cast _Runtime.field(_Runtime.globalValue('Number'), 'EPSILON'), function():Dynamic return cast u)) / rate);
+    return cast (-HxMath.log(_Runtime.select(_Runtime.strictEquals(u, 0.0), function():Dynamic return cast _Runtime.NUMBER_EPSILON, function():Dynamic return cast u)) / rate);
     return cast null;
   }
 
@@ -28,7 +28,7 @@ class RandomDistributions {
     var z:Dynamic = cast _Runtime.UNDEFINED;
     u1 = _Runtime.callValue(random, cast ([] : Array<Dynamic>));
     u2 = _Runtime.callValue(random, cast ([] : Array<Dynamic>));
-    z = (HxMath.sqrt((-2.0 * HxMath.log(_Runtime.select(_Runtime.strictEquals(u1, 0.0), function():Dynamic return cast _Runtime.field(_Runtime.globalValue('Number'), 'EPSILON'), function():Dynamic return cast u1)))) * HxMath.cos(((HxMath.PI * 2.0) * u2)));
+    z = (HxMath.sqrt((-2.0 * HxMath.log(_Runtime.select(_Runtime.strictEquals(u1, 0.0), function():Dynamic return cast _Runtime.NUMBER_EPSILON, function():Dynamic return cast u1)))) * HxMath.cos(((HxMath.PI * 2.0) * u2)));
     return cast (mean + (z * standardDeviation));
     return cast null;
   }
@@ -42,7 +42,7 @@ class RandomDistributions {
     var z1:Dynamic = cast _Runtime.UNDEFINED;
     u1 = _Runtime.callValue(random, cast ([] : Array<Dynamic>));
     u2 = _Runtime.callValue(random, cast ([] : Array<Dynamic>));
-    mag = HxMath.sqrt((-2.0 * HxMath.log(_Runtime.select(_Runtime.strictEquals(u1, 0.0), function():Dynamic return cast _Runtime.field(_Runtime.globalValue('Number'), 'EPSILON'), function():Dynamic return cast u1))));
+    mag = HxMath.sqrt((-2.0 * HxMath.log(_Runtime.select(_Runtime.strictEquals(u1, 0.0), function():Dynamic return cast _Runtime.NUMBER_EPSILON, function():Dynamic return cast u1))));
     angle = ((HxMath.PI * 2.0) * u2);
     z0 = (mean + ((mag * HxMath.cos(angle)) * standardDeviation));
     z1 = (mean + ((mag * HxMath.sin(angle)) * standardDeviation));

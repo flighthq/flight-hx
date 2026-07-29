@@ -32,12 +32,12 @@ class MeshGeometryCompute {
       _Runtime.setField(out, 'radius', -1.0);
       return;
     }
-    minX = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
-    minY = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
-    minZ = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
-    maxX = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
-    maxY = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
-    maxZ = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
+    minX = HxMath.POSITIVE_INFINITY;
+    minY = HxMath.POSITIVE_INFINITY;
+    minZ = HxMath.POSITIVE_INFINITY;
+    maxX = HxMath.NEGATIVE_INFINITY;
+    maxY = HxMath.NEGATIVE_INFINITY;
+    maxZ = HxMath.NEGATIVE_INFINITY;
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, vertexCount, '<'))) {
@@ -89,12 +89,12 @@ class MeshGeometryCompute {
     vertices = _Runtime.field(geometry, 'vertices');
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
     vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
-    minX = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
-    minY = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
-    minZ = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
-    maxX = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
-    maxY = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
-    maxZ = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
+    minX = HxMath.POSITIVE_INFINITY;
+    minY = HxMath.POSITIVE_INFINITY;
+    minZ = HxMath.POSITIVE_INFINITY;
+    maxX = HxMath.NEGATIVE_INFINITY;
+    maxY = HxMath.NEGATIVE_INFINITY;
+    maxZ = HxMath.NEGATIVE_INFINITY;
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, vertexCount, '<'))) {

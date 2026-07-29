@@ -57,18 +57,18 @@ class Connectivity {
     unsubscribe = _Runtime.callProperty(backend, 'subscribe', cast ([function() {
       var status:Dynamic = cast _Runtime.UNDEFINED;
       status = _Runtime.callProperty(backend, 'getStatus', cast ([Connectivity._scratch__connectivity] : Array<Dynamic>));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(net, 'onChange'), status] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(net, 'onChange')], [status]]), 1);
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(status, 'online'), wasOnline))) {
         (wasOnline = cast (_Runtime.field(status, 'online') : Dynamic));
-        _Runtime.callValue(emitSignal, cast ([_Runtime.select(_Runtime.field(status, 'online'), function():Dynamic return cast _Runtime.field(net, 'onOnline'), function():Dynamic return cast _Runtime.field(net, 'onOffline'))] : Array<Dynamic>));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.select(_Runtime.field(status, 'online'), function():Dynamic return cast _Runtime.field(net, 'onOnline'), function():Dynamic return cast _Runtime.field(net, 'onOffline'))]]), 1);
       }
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(status, 'type'), wasType))) {
         (wasType = cast (_Runtime.field(status, 'type') : Dynamic));
-        _Runtime.callValue(emitSignal, cast ([_Runtime.field(net, 'onConnectionTypeChange'), _Runtime.field(status, 'type')] : Array<Dynamic>));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(net, 'onConnectionTypeChange')], [_Runtime.field(status, 'type')]]), 1);
       }
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(status, 'metered'), wasMetered))) {
         (wasMetered = cast (_Runtime.field(status, 'metered') : Dynamic));
-        _Runtime.callValue(emitSignal, cast ([_Runtime.field(net, 'onMeteredChange'), _Runtime.field(status, 'metered')] : Array<Dynamic>));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(net, 'onMeteredChange')], [_Runtime.field(status, 'metered')]]), 1);
       }
     }] : Array<Dynamic>));
     ((cast Connectivity._subscriptions__connectivity : flighthq._internal._WeakMap).set(net, unsubscribe));

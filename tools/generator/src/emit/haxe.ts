@@ -76,6 +76,18 @@ const collectionBindingTypes = {
   WeakSetCollection: 'flighthq._internal._WeakSet',
 } as const;
 
+const typedArrayBindingTypes = {
+  Float32Array: 'flighthq._internal._Float32Array',
+  Float64Array: 'flighthq._internal._Float64Array',
+  Int16Array: 'flighthq._internal._Int16Array',
+  Int32Array: 'flighthq._internal._Int32Array',
+  Int8Array: 'flighthq._internal._Int8Array',
+  Uint16Array: 'flighthq._internal._UInt16Array',
+  Uint32Array: 'flighthq._internal._UInt32Array',
+  Uint8Array: 'flighthq._internal._UInt8Array',
+  Uint8ClampedArray: 'flighthq._internal._UInt8ClampedArray',
+} as const;
+
 const webGl2MethodEndpoints = new Set([
   'activeTexture',
   'attachShader',
@@ -670,17 +682,20 @@ function isSuperCall(statement: IrStatement): boolean {
   );
 }
 
-function emitParameters(parameters: IrParameter[]): string {
+function emitParameters(parameters: IrParameter[], packedRest = false): string {
   return parameters
     .map((parameter) => {
       const constantInitializer = parameter.initializer && isHaxeConstant(parameter.initializer);
       const prefix = parameter.rest
-        ? '...'
+        ? packedRest
+          ? ''
+          : '...'
         : parameter.optional || (parameter.initializer && !constantInitializer)
           ? '?'
           : '';
       const initializer = constantInitializer ? ` = ${emitExpression(parameter.initializer!)}` : '';
-      const type = parameter.rest && parameter.type.kind === 'array' ? parameter.type.element : parameter.type;
+      const type =
+        parameter.rest && !packedRest && parameter.type.kind === 'array' ? parameter.type.element : parameter.type;
       return `${prefix}${safeName(parameter.name)}:${emitType(type)}${initializer}`;
     })
     .join(', ');
@@ -1870,7 +1885,7 @@ function emitExpression(expression: IrExpression): string {
       return `_Runtime.${expression.optional ? 'optionalIndex' : 'getIndex'}(${emitExpression(expression.object)}, ${emitExpression(expression.index)})`;
     case 'function': {
       const name = expression.name && !expression.async ? ` ${safeName(expression.name)}` : '';
-      const parameters = emitParameters(expression.parameters);
+      const parameters = emitParameters(expression.parameters, true);
       const returns = expression.returns ? `:${emitType(expression.returns)}` : '';
       if (expression.async) {
         const statements: IrStatement[] = expression.expression
@@ -2227,6 +2242,51 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
   ) {
     return `flighthq._internal._Async.${expression.callee.name}(${expression.arguments.map(emitExpression).join(', ')})`;
   }
+  if (expression.haxeRestIndex !== undefined) {
+    if (expression.callee.kind === 'property') {
+      throw new Error('Dynamic Haxe Rest method calls have no packed receiver-preserving endpoint');
+    }
+    const chunks = expression.arguments.map((argument) =>
+      argument.kind === 'spread'
+        ? `_Runtime.toArray(${emitExpression(argument.expression)})`
+        : `[${emitExpression(argument)}]`,
+    );
+    return `_Runtime.callHaxeRestValue(${emitExpression(expression.callee)}, _Runtime.concatArrays([${chunks.join(', ')}]), ${expression.haxeRestIndex})`;
+  }
+  if (expression.packedVariadicRestIndex !== undefined) {
+    const index = expression.packedVariadicRestIndex;
+    const fixed = expression.arguments.slice(0, index);
+    const rest = expression.arguments.slice(index);
+    let arguments_: string;
+    if (fixed.every((argument) => argument.kind !== 'spread')) {
+      const restChunks = rest.map((argument) =>
+        argument.kind === 'spread'
+          ? `_Runtime.toArray(${emitExpression(argument.expression)})`
+          : `[${emitExpression(argument)}]`,
+      );
+      const restArray =
+        rest.length === 1 && rest[0]?.kind === 'spread'
+          ? restChunks[0]!
+          : rest.every((argument) => argument.kind !== 'spread')
+            ? `cast ([${rest.map(emitExpression).join(', ')}] : Array<Dynamic>)`
+            : `_Runtime.concatArrays([${restChunks.join(', ')}])`;
+      arguments_ = `cast ([${[...fixed.map(emitExpression), restArray].join(', ')}] : Array<Dynamic>)`;
+    } else {
+      const chunks = expression.arguments.map((argument) =>
+        argument.kind === 'spread'
+          ? `_Runtime.toArray(${emitExpression(argument.expression)})`
+          : `[${emitExpression(argument)}]`,
+      );
+      const temporary = `__variadic${String(temporaryIndex++)}`;
+      arguments_ = `({ final ${temporary}:Array<Dynamic> = _Runtime.concatArrays([${chunks.join(', ')}]); _Runtime.concatArrays([${temporary}.slice(0, ${index}), [${temporary}.slice(${index})]]); })`;
+    }
+    if (expression.callee.kind === 'property') {
+      const method = expression.optional || expression.callee.optional ? 'callOptionalProperty' : 'callProperty';
+      return `_Runtime.${method}(${emitExpression(expression.callee.object)}, ${quote(expression.callee.name)}, ${arguments_})`;
+    }
+    const method = expression.optional ? 'callOptionalValue' : 'callValue';
+    return `_Runtime.${method}(${emitExpression(expression.callee)}, ${arguments_})`;
+  }
   if (expression.arguments.some((argument) => argument.kind === 'spread')) {
     const chunks = expression.arguments.map((argument) =>
       argument.kind === 'spread'
@@ -2363,6 +2423,10 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
     }
     if (owner === 'Number' && ['isFinite', 'isInteger'].includes(name)) {
       return `_Runtime.${name}(${expression.arguments.map(emitExpression).join(', ')})`;
+    }
+    if (expression.callee.binding && expression.callee.binding in typedArrayBindingTypes) {
+      const typedArrayType = typedArrayBindingTypes[expression.callee.binding as keyof typeof typedArrayBindingTypes];
+      return `(cast ${owner} : ${typedArrayType}).${safeName(name)}(${expression.arguments.map((argument) => `Std.int(${emitExpression(argument)})`).join(', ')})`;
     }
     if (name === 'slice') {
       const start = expression.arguments[0] ? emitExpression(expression.arguments[0]) : '0';

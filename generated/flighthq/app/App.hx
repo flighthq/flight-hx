@@ -32,19 +32,19 @@ class App {
     var unsubscribeSecondInstance:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(detachApp, cast ([app] : Array<Dynamic>));
     backend = _Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>));
-    unsubscribeActivate = _Runtime.callProperty(backend, 'subscribeActivate', cast ([function() return _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onActivate')] : Array<Dynamic>))] : Array<Dynamic>));
-    unsubscribeAllWindowsClosed = _Runtime.callProperty(backend, 'subscribeAllWindowsClosed', cast ([function() return _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onAllWindowsClosed')] : Array<Dynamic>))] : Array<Dynamic>));
-    unsubscribeOpenFile = _Runtime.callProperty(backend, 'subscribeOpenFile', cast ([function(path:Dynamic) return _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onOpenFile'), path] : Array<Dynamic>))] : Array<Dynamic>));
+    unsubscribeActivate = _Runtime.callProperty(backend, 'subscribeActivate', cast ([function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onActivate')]]), 1)] : Array<Dynamic>));
+    unsubscribeAllWindowsClosed = _Runtime.callProperty(backend, 'subscribeAllWindowsClosed', cast ([function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onAllWindowsClosed')]]), 1)] : Array<Dynamic>));
+    unsubscribeOpenFile = _Runtime.callProperty(backend, 'subscribeOpenFile', cast ([function(path:Dynamic) return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onOpenFile')], [path]]), 1)] : Array<Dynamic>));
     unsubscribeQuitRequest = _Runtime.callProperty(backend, 'subscribeQuitRequest', cast ([function(cancelHost:Dynamic) {
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onQuitRequest')] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onQuitRequest')]]), 1);
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.optionalField(_Runtime.field(_Runtime.field(app, 'onQuitRequest'), 'data'), 'cancelled'), true))) {
         _Runtime.callValue(cancelHost, cast ([] : Array<Dynamic>));
       } else {
         _Runtime.callProperty(backend, 'quit', cast ([] : Array<Dynamic>));
       }
     }] : Array<Dynamic>));
-    unsubscribeReady = _Runtime.callProperty(backend, 'subscribeReady', cast ([function() return _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onReady')] : Array<Dynamic>))] : Array<Dynamic>));
-    unsubscribeSecondInstance = _Runtime.callProperty(backend, 'subscribeSecondInstance', cast ([function(argv:Dynamic) return _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onSecondInstance'), argv] : Array<Dynamic>))] : Array<Dynamic>));
+    unsubscribeReady = _Runtime.callProperty(backend, 'subscribeReady', cast ([function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onReady')]]), 1)] : Array<Dynamic>));
+    unsubscribeSecondInstance = _Runtime.callProperty(backend, 'subscribeSecondInstance', cast ([function(argv:Dynamic) return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onSecondInstance')], [argv]]), 1)] : Array<Dynamic>));
     ((cast App._subscriptions__app : flighthq._internal._WeakMap).set(app, function() {
       _Runtime.callValue(unsubscribeActivate, cast ([] : Array<Dynamic>));
       _Runtime.callValue(unsubscribeAllWindowsClosed, cast ([] : Array<Dynamic>));

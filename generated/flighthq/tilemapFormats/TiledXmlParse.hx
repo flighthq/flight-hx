@@ -130,7 +130,7 @@ class TiledXmlParse {
       (decoded = cast (_Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([_Runtime.callProperty(_Runtime.callValue(getXmlElementChildrenByName, cast ([data, 'tile'] : Array<Dynamic>)), 'map', cast ([function(tile:Dynamic) return _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.callValue(TiledXmlParse.attrNumber__tiledXmlParse, cast ([tile, 'gid', 0.0] : Array<Dynamic>))), 0)] : Array<Dynamic>))] : Array<Dynamic>)) : Dynamic));
     } }
     if (_Runtime.truthy(_Runtime.strictEquals(decoded, null))) { return cast grid; }
-    _Runtime.callProperty(grid, 'set', cast ([decoded.subarray(Std.int(0.0), Std.int(_Runtime.field(grid, 'length')))] : Array<Dynamic>));
+    _Runtime.callProperty(grid, 'set', cast ([(cast decoded : flighthq._internal._UInt32Array).subarray(Std.int(0.0), Std.int(_Runtime.field(grid, 'length')))] : Array<Dynamic>));
     return cast grid;
     return cast null;
   }

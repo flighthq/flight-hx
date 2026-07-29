@@ -129,7 +129,7 @@ class GlColorAdjustment {
         _Runtime.setField(runtime, 'spriteBatchColorTransformBuffer', flighthq._internal.backend.WebGl2Backend.createBuffer(gl));
       }
       flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(runtime, 'spriteBatchColorTransformBuffer'));
-      flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(runtime, 'spriteBatchColorTransformData').subarray(Std.int(0.0), Std.int((count * GlColorAdjustment.COLOR_TRANSFORM_FLOATS__glColorAdjustment))), flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW);
+      flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, (cast _Runtime.field(runtime, 'spriteBatchColorTransformData') : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int((count * GlColorAdjustment.COLOR_TRANSFORM_FLOATS__glColorAdjustment))), flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW);
       _Runtime.callValue(GlColorAdjustment.bindGlSpriteBatchInstancedColorTransform__glColorAdjustment, cast ([state] : Array<Dynamic>));
       return cast true;
     }

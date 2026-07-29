@@ -18,6 +18,8 @@ class LimeTypedArraySmoke {
     final copied = new _Float32Array(4);
     _Runtime.callProperty(copied, 'set', [floats, 1]);
     if (copied[1] != 1 || copied[2] != 4.5 || copied[3] != 3) throw 'float set';
+    final sliced = (cast (floats : Dynamic) : _Float32Array).subarray(1, 3);
+    if (sliced.length != 2 || sliced[0] != 4.5 || sliced[1] != 3) throw 'float subarray';
 
     final signed = new _Int16Array([0x8000, 0xffff]);
     if (signed[0] != -32768 || signed[1] != -1) throw 'signed conversion';

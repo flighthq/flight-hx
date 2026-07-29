@@ -172,10 +172,10 @@ class SpritesheetPlayer {
       var lastVi:Dynamic = (_Runtime.callValue(SpritesheetPlayer.resolveVirtualFrameCount__spritesheetPlayer, cast ([animation] : Array<Dynamic>)) - 1.0);
       _Runtime.setField(player, 'frameIndex', _Runtime.callValue(SpritesheetPlayer.resolveVirtualIndexToDisplayIndex__spritesheetPlayer, cast ([animation, lastVi] : Array<Dynamic>)));
       _Runtime.setField(player, 'complete', true);
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(player, 'onComplete')] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(player, 'onComplete')]]), 1);
       return cast true;
     }
-    if (_Runtime.truthy(_Runtime.compare(HxMath.floor((_Runtime.field(player, 'elapsed') / totalTime)), prevLoopCount, '>'))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(player, 'onLoop')] : Array<Dynamic>)); }
+    if (_Runtime.truthy(_Runtime.compare(HxMath.floor((_Runtime.field(player, 'elapsed') / totalTime)), prevLoopCount, '>'))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(player, 'onLoop')]]), 1); }
     timeInLoop = (_Runtime.field(player, 'elapsed') % totalTime);
     vi = _Runtime.callValue(SpritesheetPlayer.resolveVirtualIndexFromTime__spritesheetPlayer, cast ([animation, timeInLoop] : Array<Dynamic>));
     _Runtime.setField(player, 'frameIndex', _Runtime.callValue(SpritesheetPlayer.resolveVirtualIndexToDisplayIndex__spritesheetPlayer, cast ([animation, vi] : Array<Dynamic>)));

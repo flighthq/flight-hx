@@ -146,7 +146,7 @@ class Ray3d {
     dy = _Runtime.field(_Runtime.field(ray, 'direction'), 'y');
     dz = _Runtime.field(_Runtime.field(ray, 'direction'), 'z');
     tMin = 0.0;
-    tMax = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
+    tMax = HxMath.POSITIVE_INFINITY;
     if (_Runtime.truthy(!_Runtime.strictEquals(dx, 0.0))) {
       var invDx:Dynamic = (1.0 / dx);
       var t1:Dynamic = ((_Runtime.field(_Runtime.field(aabb, 'min'), 'x') - ox) * invDx);

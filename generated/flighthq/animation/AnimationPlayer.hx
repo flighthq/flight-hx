@@ -137,11 +137,11 @@ class AnimationPlayer {
   }
 
   public static function emitAnimationPlayerFinished__animationPlayer(player:flighthq.types.AnimationPlayer):Void {
-    if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(player, 'onFinished'), null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(player, 'onFinished')] : Array<Dynamic>)); }
+    if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(player, 'onFinished'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(player, 'onFinished')]]), 1); }
   }
 
   public static function emitAnimationPlayerLooped__animationPlayer(player:flighthq.types.AnimationPlayer):Void {
-    if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(player, 'onLooped'), null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(player, 'onLooped')] : Array<Dynamic>)); }
+    if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(player, 'onLooped'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(player, 'onLooped')]]), 1); }
   }
 
   public static function finishAnimationPlayerAt__animationPlayer(player:flighthq.types.AnimationPlayer, time:Float):Void {

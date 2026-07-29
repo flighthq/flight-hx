@@ -97,17 +97,17 @@ class Socket {
     return cast { handleSocketOpen: function() {
       if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(runtime, 'delivering')))) { return; }
       _Runtime.setField(runtime, 'readyState', 'open');
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'signals'), null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(_Runtime.field(runtime, 'signals'), 'onSocketOpen')] : Array<Dynamic>)); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'signals'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(_Runtime.field(runtime, 'signals'), 'onSocketOpen')]]), 1); }
     }, handleSocketMessage: function(message:Dynamic) {
       if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(runtime, 'delivering')))) { return; }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'signals'), null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(_Runtime.field(runtime, 'signals'), 'onSocketMessage'), message] : Array<Dynamic>)); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'signals'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(_Runtime.field(runtime, 'signals'), 'onSocketMessage')], [message]]), 1); }
     }, handleSocketClose: function(info:Dynamic) {
       if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(runtime, 'delivering')))) { return; }
       _Runtime.setField(runtime, 'readyState', 'closed');
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'signals'), null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(_Runtime.field(runtime, 'signals'), 'onSocketClose'), info] : Array<Dynamic>)); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'signals'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(_Runtime.field(runtime, 'signals'), 'onSocketClose')], [info]]), 1); }
     }, handleSocketError: function() {
       if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(runtime, 'delivering')))) { return; }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'signals'), null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(_Runtime.field(runtime, 'signals'), 'onSocketError')] : Array<Dynamic>)); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'signals'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(_Runtime.field(runtime, 'signals'), 'onSocketError')]]), 1); }
     } };
     return cast null;
   }

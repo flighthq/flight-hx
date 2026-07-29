@@ -76,7 +76,7 @@ class FocusManager {
     originX = _Runtime.field(origin, 'x');
     originY = _Runtime.field(origin, 'y');
     best = null;
-    bestScore = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
+    bestScore = HxMath.POSITIVE_INFINITY;
     for (candidate in _Runtime.iterable(order)) {
       if (_Runtime.truthy(_Runtime.strictEquals(candidate, current))) { continue; }
       var center:Dynamic = _Runtime.callValue(FocusManager.boundsCenter__focusManager, cast ([candidate, FocusManager._candidateCenter__focusManager] : Array<Dynamic>));
@@ -201,7 +201,7 @@ class FocusManager {
         (perpendicular = cast (dx : Dynamic));
       }
     }
-    if (_Runtime.truthy(_Runtime.compare(along, FocusManager.DIRECTION_EPSILON__focusManager, '<='))) { return cast _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY'); }
+    if (_Runtime.truthy(_Runtime.compare(along, FocusManager.DIRECTION_EPSILON__focusManager, '<='))) { return cast HxMath.POSITIVE_INFINITY; }
     return cast (along + (2.0 * HxMath.abs(perpendicular)));
     return cast null;
   }
@@ -215,7 +215,7 @@ class FocusManager {
       _Runtime.setField(FocusManager._focusData__focusManager, 'currentTarget', current);
       var signals:Dynamic = _Runtime.callValue(getInteractionSignals, cast ([current] : Array<Dynamic>));
       var signal:Dynamic = _Runtime.select(!_Runtime.strictEquals(signals, null), function():Dynamic return cast _Runtime.getIndex(signals, name), function():Dynamic return cast null);
-      if (_Runtime.truthy(!_Runtime.strictEquals(signal, null))) { _Runtime.callValue(emitSignal, cast ([(cast signal : Signal<Dynamic>), FocusManager._focusData__focusManager] : Array<Dynamic>)); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(signal, null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signal : Signal<Dynamic>)], [FocusManager._focusData__focusManager]]), 1); }
       if (_Runtime.truthy(_Runtime.strictEquals(current, root))) { break; }
       (current = cast ((cast _Runtime.callValue(getNodeParent, cast ([current] : Array<Dynamic>)) : Null<NodeAny>) : Dynamic));
     }
@@ -224,7 +224,7 @@ class FocusManager {
   public static function focusOrderKey__focusManager(node:NodeAny):Float {
     var tabIndex:Dynamic = cast _Runtime.UNDEFINED;
     tabIndex = _Runtime.callValue(getNodeTabIndex, cast ([node] : Array<Dynamic>));
-    return cast _Runtime.select(_Runtime.compare(tabIndex, 0.0, '<'), function():Dynamic return cast _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY'), function():Dynamic return cast tabIndex);
+    return cast _Runtime.select(_Runtime.compare(tabIndex, 0.0, '<'), function():Dynamic return cast HxMath.POSITIVE_INFINITY, function():Dynamic return cast tabIndex);
     return cast null;
   }
 

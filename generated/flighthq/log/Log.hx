@@ -86,8 +86,8 @@ class Log {
       _Runtime.callValue(sink, cast ([entry] : Array<Dynamic>));
     }
     if (_Runtime.truthy(!_Runtime.strictEquals(Log._logSignals__log, null))) {
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(Log._logSignals__log, 'onLogEntry'), entry] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(entry, 'level'), LogLevel.Error))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(Log._logSignals__log, 'onLogError'), entry] : Array<Dynamic>)); }
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(Log._logSignals__log, 'onLogEntry')], [entry]]), 1);
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(entry, 'level'), LogLevel.Error))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(Log._logSignals__log, 'onLogError')], [entry]]), 1); }
     }
   }
 

@@ -18,6 +18,10 @@ class CoreSmoke {
     if (flighthq.geometry.Geometry.getVector2Length(vector) != 5) throw 'geometry failed';
     final sdkVector = flighthq.sdk.Sdk.createVector2(6, 8);
     if (flighthq.sdk.Sdk.getVector2Length(sdkVector) != 10) throw 'sdk facade failed';
+    final box = flighthq.mesh.Mesh.createBoxMeshGeometry(2, 4, 6);
+    if (box.bounds == null || box.bounds.min.x != -1 || box.bounds.max.y != 2 || box.bounds.max.z != 3) {
+      throw 'mesh bounds failed';
+    }
     final entity = flighthq.entity.Entity.createEntity({value: 1});
     if (entity.value != 1) throw 'entity failed';
     final signal:flighthq.types.Signal<Void->Void> = flighthq.signals.Signals.createSignal();
@@ -25,6 +29,11 @@ class CoreSmoke {
     flighthq.signals.Signals.connectSignal(signal, function() emitted = true);
     flighthq.signals.Signals.emitSignal(signal);
     if (!emitted) throw 'signals failed';
+    final valueSignal:flighthq.types.Signal<Float->Void> = flighthq.signals.Signals.createSignal();
+    var emittedValue = 0.0;
+    flighthq.signals.Signals.connectSignal(valueSignal, function(value:Float) emittedValue = value);
+    flighthq.signals.Signals.emitSignal(valueSignal, 4.5);
+    if (emittedValue != 4.5) throw 'signal arguments failed';
 
     #if !js
     var asyncValue = 0;

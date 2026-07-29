@@ -41,7 +41,7 @@ class ElectronProtocol {
       return cast cast ([] : Array<Dynamic>);
     }, subscribe: function(listener:Dynamic) {
       var handler:Dynamic = cast _Runtime.UNDEFINED;
-      handler = function(...args:Dynamic) return _Runtime.callValue(listener, cast ([Std.string(_Runtime.coalesce(_Runtime.getIndex(args, 1.0), function():Dynamic return cast ''))] : Array<Dynamic>));
+      handler = function(args:Array<Dynamic>) return _Runtime.callValue(listener, cast ([Std.string(_Runtime.coalesce(_Runtime.getIndex(args, 1.0), function():Dynamic return cast ''))] : Array<Dynamic>));
       _Runtime.callProperty(app, 'on', cast (['open-url', handler] : Array<Dynamic>));
       return cast function() return _Runtime.callProperty(app, 'removeListener', cast (['open-url', handler] : Array<Dynamic>));
     } };

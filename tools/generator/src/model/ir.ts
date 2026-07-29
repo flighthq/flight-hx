@@ -46,7 +46,15 @@ export type IrExpression =
   | { kind: 'await'; expression: IrExpression }
   | { kind: 'assignment'; left: IrExpression; operator: string; right: IrExpression }
   | { kind: 'binary'; left: IrExpression; operator: string; right: IrExpression }
-  | { kind: 'call'; arguments: IrExpression[]; callee: IrExpression; optional?: boolean; typeArguments: IrType[] }
+  | {
+      kind: 'call';
+      arguments: IrExpression[];
+      callee: IrExpression;
+      haxeRestIndex?: number;
+      optional?: boolean;
+      packedVariadicRestIndex?: number;
+      typeArguments: IrType[];
+    }
   | { kind: 'cast'; expression: IrExpression; type: IrType }
   | { kind: 'conditional'; condition: IrExpression; whenFalse: IrExpression; whenTrue: IrExpression }
   | {
@@ -74,12 +82,21 @@ export type IrExpression =
       binding?:
         | 'Canvas2dBackend'
         | 'CanvasElementBackend'
+        | 'Float32Array'
+        | 'Float64Array'
+        | 'Int16Array'
+        | 'Int32Array'
+        | 'Int8Array'
         | 'MapCollection'
         | 'DomDocumentBackend'
         | 'DomNavigatorBackend'
         | 'DomWindowBackend'
         | 'DynamicObject'
         | 'SetCollection'
+        | 'Uint16Array'
+        | 'Uint32Array'
+        | 'Uint8Array'
+        | 'Uint8ClampedArray'
         | 'WeakMapCollection'
         | 'WeakSetCollection'
         | 'WebGl2Backend'

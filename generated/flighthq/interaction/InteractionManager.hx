@@ -347,7 +347,7 @@ class InteractionManager {
   public static function emitInteractionSignalDirect__interactionManager<N, Name>(target:Dynamic, name:Name, data:InteractionSignalPayload__interactionManager<Name>):Void {
     var signal:Dynamic = cast _Runtime.UNDEFINED;
     signal = _Runtime.callValue(InteractionManager.getInteractionSignal__interactionManager, cast ([target, name] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(signal, null))) { _Runtime.callValue(emitSignal, cast ([(cast signal : Signal<Dynamic>), data] : Array<Dynamic>)); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(signal, null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signal : Signal<Dynamic>)], [data]]), 1); }
   }
 
   public static function decrementInteractionSignalSubscriberCount__interactionManager<N>(manager:flighthq.types.InteractionManager<Dynamic>, name:InteractionSignalName):Void {

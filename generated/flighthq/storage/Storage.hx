@@ -19,7 +19,7 @@ class Storage {
   public static var _crossTabUnsubscribe__storage:Null<Dynamic> = _Runtime.explicitNull();
 
   public static function _emitStorageChange__storage(change:StorageChange):Void {
-    if (_Runtime.truthy(!_Runtime.strictEquals(Storage._signals__storage, null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(Storage._signals__storage, 'onChange'), change] : Array<Dynamic>)); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(Storage._signals__storage, null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(Storage._signals__storage, 'onChange')], [change]]), 1); }
   }
 
   public static function _namespacedKey__storage(namespace:StorageNamespace, key:String):String {

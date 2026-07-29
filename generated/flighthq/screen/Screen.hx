@@ -35,11 +35,11 @@ class Screen {
     _Runtime.callValue(detachScreenSignals, cast ([signals] : Array<Dynamic>));
     unsubscribe = _Runtime.callProperty(_Runtime.callValue(getScreenBackend, cast ([] : Array<Dynamic>)), 'subscribe', cast ([function(event:Dynamic) {
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(event, 'kind'), 'ScreenAdded'))) {
-        _Runtime.callValue(emitSignal, cast ([_Runtime.field(signals, 'onScreenAdded'), _Runtime.field(event, 'screen')] : Array<Dynamic>));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onScreenAdded')], [_Runtime.field(event, 'screen')]]), 1);
       } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(event, 'kind'), 'ScreenRemoved'))) {
-        _Runtime.callValue(emitSignal, cast ([_Runtime.field(signals, 'onScreenRemoved'), _Runtime.field(event, 'screen')] : Array<Dynamic>));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onScreenRemoved')], [_Runtime.field(event, 'screen')]]), 1);
       } else {
-        _Runtime.callValue(emitSignal, cast ([_Runtime.field(signals, 'onScreenMetricsChanged'), event] : Array<Dynamic>));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onScreenMetricsChanged')], [event]]), 1);
       } }
     }] : Array<Dynamic>));
     ((cast Screen._signalSubscriptions__screen : flighthq._internal._WeakMap).set(signals, unsubscribe));

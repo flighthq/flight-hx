@@ -153,7 +153,7 @@ class Net {
             var buffer:Dynamic = cast _Runtime.UNDEFINED;
             return flighthq._internal._Async.flatMap(_Runtime.callProperty(response, 'arrayBuffer', cast ([] : Array<Dynamic>)), function(__awaitValue12:Dynamic):Dynamic {
               buffer = __awaitValue12;
-              _Runtime.callValue(emitSignal, cast ([progress, { phase: 'download', loaded: _Runtime.field(buffer, 'byteLength'), total: _Runtime.select(_Runtime.compare(total, 0.0, '>='), function():Dynamic return cast total, function():Dynamic return cast _Runtime.field(buffer, 'byteLength')) }] : Array<Dynamic>));
+              _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[progress], [{ phase: 'download', loaded: _Runtime.field(buffer, 'byteLength'), total: _Runtime.select(_Runtime.compare(total, 0.0, '>='), function():Dynamic return cast total, function():Dynamic return cast _Runtime.field(buffer, 'byteLength')) }]]), 1);
               return flighthq._internal._Async.flowReturn(buffer);
             });
           });
@@ -195,7 +195,7 @@ class Net {
                     return flighthq._internal._Async.continueFlow(__flowBranch15, function():Dynamic {
                       _Runtime.callProperty(chunks, 'push', cast ([value] : Array<Dynamic>));
                       (loaded = cast ((loaded + _Runtime.field(value, 'byteLength')) : Dynamic));
-                      _Runtime.callValue(emitSignal, cast ([progress, { phase: 'download', loaded: loaded, total: _Runtime.select(_Runtime.compare(total, 0.0, '>='), function():Dynamic return cast total, function():Dynamic return cast 0.0) }] : Array<Dynamic>));
+                      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[progress], [{ phase: 'download', loaded: loaded, total: _Runtime.select(_Runtime.compare(total, 0.0, '>='), function():Dynamic return cast total, function():Dynamic return cast 0.0) }]]), 1);
                       return flighthq._internal._Async.flowNormal();
                     });
                   });

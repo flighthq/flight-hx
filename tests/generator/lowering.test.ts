@@ -702,6 +702,42 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain("_Runtime.callProperty(target, 'push', _Runtime.concatArrays");
   });
 
+  it('uses packed arrays for dynamically called variadic function values', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/signals/src/sample.ts',
+      `
+        type Emitter = { emit: (...args: any[]) => void };
+        export function makeDispatch(slot: (value: number) => void) {
+          return (...args: any[]) => slot(...args);
+        }
+        export function emit(emitter: Emitter, ...args: any[]) {
+          emitter.emit(...args);
+        }
+        export function forward(emitter: Emitter, ...args: any[]) {
+          emit(emitter, ...args);
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/signals', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'VariadicValueFixture',
+      packageName: '@flighthq/signals',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('function(args:Array<Dynamic>)');
+    expect(output).not.toContain('function(...args:Dynamic)');
+    expect(output).toContain('_Runtime.apply(slot, _Runtime.concatArrays([_Runtime.toArray(args)]))');
+    expect(output).toContain(
+      "_Runtime.callProperty(emitter, 'emit', cast ([_Runtime.toArray(args)] : Array<Dynamic>))",
+    );
+    expect(output).toContain(
+      '_Runtime.callHaxeRestValue(emit, _Runtime.concatArrays([[emitter], _Runtime.toArray(args)]), 1)',
+    );
+  });
+
   it('routes WebGL2 context access through its maintained internal binding', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/render-gl/src/sample.ts',
@@ -1376,6 +1412,60 @@ describe('TypeScript lowering and Haxe emission', () => {
     ]) {
       expect(output).not.toContain(`_Runtime.construct(_Runtime.globalValue('${name}')`);
     }
+  });
+
+  it('keeps typed-array subarray calls on maintained wrapper receivers', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/sample.ts',
+      `
+        export function views(floats: Float32Array, bytes: Uint8Array) {
+          const data = floats;
+          return [data.subarray(1, 3), bytes.subarray(2)];
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'TypedArrayViewFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('(cast data : flighthq._internal._Float32Array).subarray(Std.int(1.0), Std.int(3.0))');
+    expect(output).toContain('(cast bytes : flighthq._internal._UInt8Array).subarray(Std.int(2.0))');
+    expect(output).not.toContain('data.subarray(');
+    expect(output).not.toContain('bytes.subarray(');
+  });
+
+  it('lowers Number constants without nullable global namespace lookups', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/sample.ts',
+      `export const limits = [
+        Number.POSITIVE_INFINITY,
+        Number.NEGATIVE_INFINITY,
+        Number.EPSILON,
+        Number.MAX_SAFE_INTEGER,
+      ];`,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'NumberConstantFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('HxMath.POSITIVE_INFINITY');
+    expect(output).toContain('HxMath.NEGATIVE_INFINITY');
+    expect(output).toContain('_Runtime.NUMBER_EPSILON');
+    expect(output).toContain('_Runtime.MAX_SAFE_INTEGER');
+    expect(output).not.toContain("_Runtime.globalValue('Number')");
   });
 
   it('uses JavaScript ToInt32 coercion for bitwise and shift operands', () => {

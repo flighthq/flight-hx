@@ -35,12 +35,12 @@ class GetMeshSkinBounds {
     var maxZ:Dynamic = cast _Runtime.UNDEFINED;
     positions = _Runtime.field(bindPose, 'positions');
     restVertexCount = (_Runtime.toInt32((_Runtime.field(positions, 'length') / 3.0)) | 0);
-    restMinX = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
-    restMinY = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
-    restMinZ = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
-    restMaxX = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
-    restMaxY = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
-    restMaxZ = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
+    restMinX = HxMath.POSITIVE_INFINITY;
+    restMinY = HxMath.POSITIVE_INFINITY;
+    restMinZ = HxMath.POSITIVE_INFINITY;
+    restMaxX = HxMath.NEGATIVE_INFINITY;
+    restMaxY = HxMath.NEGATIVE_INFINITY;
+    restMaxZ = HxMath.NEGATIVE_INFINITY;
     {
       var v:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(v, restVertexCount, '<'))) {
@@ -58,12 +58,12 @@ class GetMeshSkinBounds {
       }
     }
     if (_Runtime.truthy(_Runtime.strictEquals(restVertexCount, 0.0))) {
-      _Runtime.setField(_Runtime.field(out, 'min'), 'x', _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY'));
-      _Runtime.setField(_Runtime.field(out, 'min'), 'y', _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY'));
-      _Runtime.setField(_Runtime.field(out, 'min'), 'z', _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY'));
-      _Runtime.setField(_Runtime.field(out, 'max'), 'x', _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY'));
-      _Runtime.setField(_Runtime.field(out, 'max'), 'y', _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY'));
-      _Runtime.setField(_Runtime.field(out, 'max'), 'z', _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY'));
+      _Runtime.setField(_Runtime.field(out, 'min'), 'x', HxMath.POSITIVE_INFINITY);
+      _Runtime.setField(_Runtime.field(out, 'min'), 'y', HxMath.POSITIVE_INFINITY);
+      _Runtime.setField(_Runtime.field(out, 'min'), 'z', HxMath.POSITIVE_INFINITY);
+      _Runtime.setField(_Runtime.field(out, 'max'), 'x', HxMath.NEGATIVE_INFINITY);
+      _Runtime.setField(_Runtime.field(out, 'max'), 'y', HxMath.NEGATIVE_INFINITY);
+      _Runtime.setField(_Runtime.field(out, 'max'), 'z', HxMath.NEGATIVE_INFINITY);
       return;
     }
     cx = ((restMinX + restMaxX) * 0.5);
@@ -75,12 +75,12 @@ class GetMeshSkinBounds {
     palette = _Runtime.field(skeleton, 'jointMatrices');
     jointCount = (_Runtime.toInt32((_Runtime.field(palette, 'length') / 16.0)) | 0);
     referenced = _Runtime.callValue(GetMeshSkinBounds.getReferencedJoints__getMeshSkinBounds, cast ([_Runtime.field(bindPose, 'joints'), _Runtime.field(bindPose, 'weights'), jointCount] : Array<Dynamic>));
-    minX = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
-    minY = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
-    minZ = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
-    maxX = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
-    maxY = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
-    maxZ = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
+    minX = HxMath.POSITIVE_INFINITY;
+    minY = HxMath.POSITIVE_INFINITY;
+    minZ = HxMath.POSITIVE_INFINITY;
+    maxX = HxMath.NEGATIVE_INFINITY;
+    maxY = HxMath.NEGATIVE_INFINITY;
+    maxZ = HxMath.NEGATIVE_INFINITY;
     {
       var j:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(j, jointCount, '<'))) {
@@ -121,12 +121,12 @@ class GetMeshSkinBounds {
     _Runtime.callValue(skinVertices, cast ([_Runtime.field(bindPose, 'skinnedPositions'), _Runtime.field(bindPose, 'skinnedNormals'), _Runtime.field(bindPose, 'positions'), _Runtime.field(bindPose, 'normals'), _Runtime.field(bindPose, 'joints'), _Runtime.field(bindPose, 'weights'), _Runtime.field(skeleton, 'jointMatrices')] : Array<Dynamic>));
     skinned = _Runtime.field(bindPose, 'skinnedPositions');
     vertexCount = (_Runtime.toInt32((_Runtime.field(skinned, 'length') / 3.0)) | 0);
-    minX = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
-    minY = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
-    minZ = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
-    maxX = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
-    maxY = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
-    maxZ = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
+    minX = HxMath.POSITIVE_INFINITY;
+    minY = HxMath.POSITIVE_INFINITY;
+    minZ = HxMath.POSITIVE_INFINITY;
+    maxX = HxMath.NEGATIVE_INFINITY;
+    maxY = HxMath.NEGATIVE_INFINITY;
+    maxZ = HxMath.NEGATIVE_INFINITY;
     {
       var v:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(v, vertexCount, '<'))) {

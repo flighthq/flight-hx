@@ -44,7 +44,7 @@ class ElectronUpdater {
       return cast function() return _Runtime.callProperty(autoUpdater, 'removeListener', cast (['checking-for-update', listener] : Array<Dynamic>));
     }, subscribeUpdateAvailable: function(listener:Dynamic) {
       var handler:Dynamic = cast _Runtime.UNDEFINED;
-      handler = function(...args:Dynamic) return _Runtime.callValue(listener, cast ([_Runtime.callValue(ElectronUpdater.toUpdateInfo__electronUpdater, cast ([args] : Array<Dynamic>))] : Array<Dynamic>));
+      handler = function(args:Array<Dynamic>) return _Runtime.callValue(listener, cast ([_Runtime.callValue(ElectronUpdater.toUpdateInfo__electronUpdater, cast ([args] : Array<Dynamic>))] : Array<Dynamic>));
       _Runtime.callProperty(autoUpdater, 'on', cast (['update-available', handler] : Array<Dynamic>));
       return cast function() return _Runtime.callProperty(autoUpdater, 'removeListener', cast (['update-available', handler] : Array<Dynamic>));
     }, subscribeUpdateNotAvailable: function(listener:Dynamic) {
@@ -56,12 +56,12 @@ class ElectronUpdater {
       };
     }, subscribeUpdateDownloaded: function(listener:Dynamic) {
       var handler:Dynamic = cast _Runtime.UNDEFINED;
-      handler = function(...args:Dynamic) return _Runtime.callValue(listener, cast ([_Runtime.callValue(ElectronUpdater.toUpdateInfo__electronUpdater, cast ([args] : Array<Dynamic>))] : Array<Dynamic>));
+      handler = function(args:Array<Dynamic>) return _Runtime.callValue(listener, cast ([_Runtime.callValue(ElectronUpdater.toUpdateInfo__electronUpdater, cast ([args] : Array<Dynamic>))] : Array<Dynamic>));
       _Runtime.callProperty(autoUpdater, 'on', cast (['update-downloaded', handler] : Array<Dynamic>));
       return cast function() return _Runtime.callProperty(autoUpdater, 'removeListener', cast (['update-downloaded', handler] : Array<Dynamic>));
     }, subscribeError: function(listener:Dynamic) {
       var handler:Dynamic = cast _Runtime.UNDEFINED;
-      handler = function(...args:Dynamic) {
+      handler = function(args:Array<Dynamic>) {
         var raw:Dynamic = cast _Runtime.UNDEFINED;
         var message:Dynamic = cast _Runtime.UNDEFINED;
         var error:UpdaterError = cast _Runtime.UNDEFINED;

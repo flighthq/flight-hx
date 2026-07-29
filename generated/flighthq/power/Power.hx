@@ -49,30 +49,30 @@ class Power {
     unsubscribeChange = _Runtime.callProperty(backend, 'subscribe', cast ([function() {
       var status:Dynamic = cast _Runtime.UNDEFINED;
       status = _Runtime.callProperty(backend, 'getStatus', cast ([Power._scratch__power] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(power, 'onChange'), null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(power, 'onChange'), status] : Array<Dynamic>)); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(power, 'onChange'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onChange')], [status]]), 1); }
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(status, 'isCharging'), wasCharging))) {
         (wasCharging = cast (_Runtime.field(status, 'isCharging') : Dynamic));
         var transition:Dynamic = _Runtime.select(_Runtime.field(status, 'isCharging'), function():Dynamic return cast _Runtime.field(power, 'onCharging'), function():Dynamic return cast _Runtime.field(power, 'onDischarging'));
-        if (_Runtime.truthy(!_Runtime.strictEquals(transition, null))) { _Runtime.callValue(emitSignal, cast ([transition] : Array<Dynamic>)); }
+        if (_Runtime.truthy(!_Runtime.strictEquals(transition, null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[transition]]), 1); }
       }
     }] : Array<Dynamic>));
     unsubscribeLockScreen = _Runtime.callProperty(backend, 'subscribeLockScreen', cast ([function() {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(power, 'onLockScreen'), null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(power, 'onLockScreen')] : Array<Dynamic>)); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(power, 'onLockScreen'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onLockScreen')]]), 1); }
     }] : Array<Dynamic>));
     unsubscribeLowPowerModeChange = _Runtime.callProperty(backend, 'subscribeLowPowerModeChange', cast ([function() {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(power, 'onLowPowerModeChange'), null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(power, 'onLowPowerModeChange')] : Array<Dynamic>)); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(power, 'onLowPowerModeChange'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onLowPowerModeChange')]]), 1); }
     }] : Array<Dynamic>));
     unsubscribeResume = _Runtime.callProperty(backend, 'subscribeResume', cast ([function() {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(power, 'onResume'), null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(power, 'onResume')] : Array<Dynamic>)); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(power, 'onResume'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onResume')]]), 1); }
     }] : Array<Dynamic>));
     unsubscribeSuspend = _Runtime.callProperty(backend, 'subscribeSuspend', cast ([function() {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(power, 'onSuspend'), null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(power, 'onSuspend')] : Array<Dynamic>)); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(power, 'onSuspend'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onSuspend')]]), 1); }
     }] : Array<Dynamic>));
     unsubscribeThermalStateChange = _Runtime.callProperty(backend, 'subscribeThermalStateChange', cast ([function() {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(power, 'onThermalStateChange'), null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(power, 'onThermalStateChange')] : Array<Dynamic>)); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(power, 'onThermalStateChange'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onThermalStateChange')]]), 1); }
     }] : Array<Dynamic>));
     unsubscribeUnlockScreen = _Runtime.callProperty(backend, 'subscribeUnlockScreen', cast ([function() {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(power, 'onUnlockScreen'), null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(power, 'onUnlockScreen')] : Array<Dynamic>)); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(power, 'onUnlockScreen'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onUnlockScreen')]]), 1); }
     }] : Array<Dynamic>));
     lastIdleState = _Runtime.callProperty(backend, 'getSystemIdleState', cast ([idleThresholdSeconds] : Array<Dynamic>));
     idleIntervalId = _Runtime.setInterval(function() {
@@ -83,7 +83,7 @@ class Power {
       current = _Runtime.callProperty(backend, 'getSystemIdleState', cast ([idleThresholdSeconds] : Array<Dynamic>));
       if (_Runtime.truthy(!_Runtime.strictEquals(current, lastIdleState))) {
         (lastIdleState = cast (current : Dynamic));
-        _Runtime.callValue(emitSignal, cast ([idleSignal] : Array<Dynamic>));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[idleSignal]]), 1);
       }
     }, Power._idlePollingIntervalMs__power);
     ((cast Power._subscriptions__power : flighthq._internal._WeakMap).set(power, function() {

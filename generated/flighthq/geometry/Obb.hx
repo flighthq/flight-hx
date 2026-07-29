@@ -121,7 +121,7 @@ class Obb {
     dirs = cast ([(((dx * ax0) + (dy * ay0)) + (dz * az0)), (((dx * ax1) + (dy * ay1)) + (dz * az1)), (((dx * ax2) + (dy * ay2)) + (dz * az2))] : Array<Dynamic>);
     halfExts = cast ([hx, hy, hz] : Array<Dynamic>);
     tMin = 0.0;
-    tMax = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
+    tMax = HxMath.POSITIVE_INFINITY;
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, 3.0, '<'))) {

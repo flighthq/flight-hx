@@ -89,7 +89,7 @@ class ResolveSceneResources {
     signals = _Runtime.field(resolver, 'signals');
     if (_Runtime.truthy(_Runtime.strictEquals(signals, null))) { return; }
     event = { ref: ref, texture: texture };
-    _Runtime.callValue(emitSignal, cast ([_Runtime.select(resolved, function():Dynamic return cast _Runtime.field(signals, 'onResourceResolved'), function():Dynamic return cast _Runtime.field(signals, 'onResourceFailed')), event] : Array<Dynamic>));
+    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.select(resolved, function():Dynamic return cast _Runtime.field(signals, 'onResourceResolved'), function():Dynamic return cast _Runtime.field(signals, 'onResourceFailed'))], [event]]), 1);
   }
 
   public static function requestWorkingResolutions__resolveSceneResources(resolver:SceneResourceResolver, working:Dynamic, ?options:ResolveSceneResourcesOptions):Void {

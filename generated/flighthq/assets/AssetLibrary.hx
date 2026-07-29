@@ -119,7 +119,7 @@ class AssetLibrary {
           if (_Runtime.truthy(!_Runtime.strictEquals(progress, _Runtime.field(_Runtime, 'UNDEFINED')))) {
             __flowBranch5 = flighthq._internal._Async.protect(function():Dynamic {
               _Runtime.callValue(connectSignal, cast ([_Runtime.field(loader, 'onProgress'), function(loaded:Float, total:Float) {
-                _Runtime.callValue(emitSignal, cast ([progress, { loaded: loaded, total: total }] : Array<Dynamic>));
+                _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[progress], [{ loaded: loaded, total: total }]]), 1);
               }] : Array<Dynamic>));
               return flighthq._internal._Async.flowNormal();
             });

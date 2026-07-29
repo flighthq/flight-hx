@@ -83,7 +83,7 @@ class InputManager {
       _Runtime.setField(InputManager._connectData__inputManager, 'gamepad', _Runtime.field(pad, 'index'));
       _Runtime.setField(InputManager._connectData__inputManager, 'id', _Runtime.field(pad, 'id'));
       _Runtime.setField(InputManager._connectData__inputManager, 'mapping', _Runtime.select(_Runtime.strictEquals(_Runtime.field(pad, 'mapping'), 'standard'), function():Dynamic return cast 'standard', function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(_Runtime.field(pad, 'mapping'), ''), function():Dynamic return cast '', function():Dynamic return cast 'raw')));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(manager, 'onGamepadConnect'), InputManager._connectData__inputManager] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onGamepadConnect')], [InputManager._connectData__inputManager]]), 1);
     };
     onGamepadDisconnected = function(e:Dynamic) {
       var pad:Dynamic = cast _Runtime.UNDEFINED;
@@ -96,7 +96,7 @@ class InputManager {
       _Runtime.setField(InputManager._connectData__inputManager, 'gamepad', _Runtime.field(pad, 'index'));
       _Runtime.setField(InputManager._connectData__inputManager, 'id', _Runtime.field(pad, 'id'));
       _Runtime.setField(InputManager._connectData__inputManager, 'mapping', _Runtime.select(_Runtime.strictEquals(_Runtime.field(pad, 'mapping'), 'standard'), function():Dynamic return cast 'standard', function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(_Runtime.field(pad, 'mapping'), ''), function():Dynamic return cast '', function():Dynamic return cast 'raw')));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(manager, 'onGamepadDisconnect'), InputManager._connectData__inputManager] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onGamepadDisconnect')], [InputManager._connectData__inputManager]]), 1);
     };
     rafId = 0.0;
     loop = function() {
@@ -125,7 +125,7 @@ class InputManager {
       ke = (cast e : Dynamic);
       if (_Runtime.truthy(preventDefault)) { _Runtime.callProperty(ke, 'preventDefault', cast ([] : Array<Dynamic>)); }
       _Runtime.callValue(InputManager.setInputKeyboardData__inputManager, cast ([InputManager._keyboardData__inputManager, ke] : Array<Dynamic>));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(manager, 'onKeyDown'), InputManager._keyboardData__inputManager] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onKeyDown')], [InputManager._keyboardData__inputManager]]), 1);
     };
     onKeyUp = function(e:Dynamic) {
       var ke:Dynamic = cast _Runtime.UNDEFINED;
@@ -133,7 +133,7 @@ class InputManager {
       ke = (cast e : Dynamic);
       if (_Runtime.truthy(preventDefault)) { _Runtime.callProperty(ke, 'preventDefault', cast ([] : Array<Dynamic>)); }
       _Runtime.callValue(InputManager.setInputKeyboardData__inputManager, cast ([InputManager._keyboardData__inputManager, ke] : Array<Dynamic>));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(manager, 'onKeyUp'), InputManager._keyboardData__inputManager] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onKeyUp')], [InputManager._keyboardData__inputManager]]), 1);
     };
     _Runtime.callProperty(target, 'addEventListener', cast (['keydown', onKeyDown] : Array<Dynamic>));
     _Runtime.callProperty(target, 'addEventListener', cast (['keyup', onKeyUp] : Array<Dynamic>));
@@ -158,25 +158,25 @@ class InputManager {
       if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(manager, 'enabled')))) { return; }
       if (_Runtime.truthy(preventDefault)) { _Runtime.callProperty(e, 'preventDefault', cast ([] : Array<Dynamic>)); }
       _Runtime.callValue(InputManager.setInputPointerData__inputManager, cast ([InputManager._pointerData__inputManager, (cast e : Dynamic), 0.0, 0.0] : Array<Dynamic>));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(manager, 'onPointerCancel'), InputManager._pointerData__inputManager] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onPointerCancel')], [InputManager._pointerData__inputManager]]), 1);
     };
     onPointerDown = function(e:Dynamic) {
       if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(manager, 'enabled')))) { return; }
       if (_Runtime.truthy(preventDefault)) { _Runtime.callProperty(e, 'preventDefault', cast ([] : Array<Dynamic>)); }
       _Runtime.callValue(InputManager.setInputPointerData__inputManager, cast ([InputManager._pointerData__inputManager, (cast e : Dynamic), 0.0, 0.0] : Array<Dynamic>));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(manager, 'onPointerDown'), InputManager._pointerData__inputManager] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onPointerDown')], [InputManager._pointerData__inputManager]]), 1);
     };
     onPointerMove = function(e:Dynamic) {
       if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(manager, 'enabled')))) { return; }
       if (_Runtime.truthy(preventDefault)) { _Runtime.callProperty(e, 'preventDefault', cast ([] : Array<Dynamic>)); }
       _Runtime.callValue(InputManager.setInputPointerData__inputManager, cast ([InputManager._pointerData__inputManager, (cast e : Dynamic), 0.0, 0.0] : Array<Dynamic>));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(manager, 'onPointerMove'), InputManager._pointerData__inputManager] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onPointerMove')], [InputManager._pointerData__inputManager]]), 1);
     };
     onPointerUp = function(e:Dynamic) {
       if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(manager, 'enabled')))) { return; }
       if (_Runtime.truthy(preventDefault)) { _Runtime.callProperty(e, 'preventDefault', cast ([] : Array<Dynamic>)); }
       _Runtime.callValue(InputManager.setInputPointerData__inputManager, cast ([InputManager._pointerData__inputManager, (cast e : Dynamic), 0.0, 0.0] : Array<Dynamic>));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(manager, 'onPointerUp'), InputManager._pointerData__inputManager] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onPointerUp')], [InputManager._pointerData__inputManager]]), 1);
     };
     _Runtime.callProperty(element, 'addEventListener', cast (['contextmenu', onContextMenu] : Array<Dynamic>));
     _Runtime.callProperty(element, 'addEventListener', cast (['pointercancel', onPointerCancel] : Array<Dynamic>));
@@ -204,7 +204,7 @@ class InputManager {
       me = (cast e : Dynamic);
       if (_Runtime.truthy(preventDefault)) { _Runtime.callProperty(me, 'preventDefault', cast ([] : Array<Dynamic>)); }
       _Runtime.callValue(InputManager.setInputPointerData__inputManager, cast ([InputManager._pointerData__inputManager, me, _Runtime.field(me, 'movementX'), _Runtime.field(me, 'movementY')] : Array<Dynamic>));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(manager, 'onPointerMoveRelative'), InputManager._pointerData__inputManager] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onPointerMoveRelative')], [InputManager._pointerData__inputManager]]), 1);
     };
     _Runtime.callProperty(target, 'addEventListener', cast (['mousemove', handler] : Array<Dynamic>));
     _Runtime.callValue(InputManager.setInputBinding__inputManager, cast ([manager, element, InputManager.kRelativePointerInput__inputManager, function() return _Runtime.callProperty(target, 'removeEventListener', cast (['mousemove', handler] : Array<Dynamic>))] : Array<Dynamic>));
@@ -221,7 +221,7 @@ class InputManager {
       text = _Runtime.coalesce(_Runtime.field(ie, 'data'), function():Dynamic return cast '');
       _Runtime.setField(InputManager._textData__inputManager, 'isComposing', _Runtime.field(ie, 'isComposing'));
       _Runtime.setField(InputManager._textData__inputManager, 'text', text);
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(manager, 'onTextInput'), InputManager._textData__inputManager] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onTextInput')], [InputManager._textData__inputManager]]), 1);
     };
     onCompositionUpdate = function(e:Dynamic) {
       var ce:Dynamic = cast _Runtime.UNDEFINED;
@@ -231,7 +231,7 @@ class InputManager {
       text = _Runtime.coalesce(_Runtime.field(ce, 'data'), function():Dynamic return cast '');
       _Runtime.setField(InputManager._textData__inputManager, 'isComposing', true);
       _Runtime.setField(InputManager._textData__inputManager, 'text', text);
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(manager, 'onTextEdit'), InputManager._textData__inputManager] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onTextEdit')], [InputManager._textData__inputManager]]), 1);
     };
     _Runtime.callProperty(element, 'addEventListener', cast (['beforeinput', onBeforeInput] : Array<Dynamic>));
     _Runtime.callProperty(element, 'addEventListener', cast (['compositionupdate', onCompositionUpdate] : Array<Dynamic>));
@@ -253,7 +253,7 @@ class InputManager {
       if (_Runtime.truthy(preventDefault)) { _Runtime.callProperty(we, 'preventDefault', cast ([] : Array<Dynamic>)); }
       _Runtime.callValue(InputManager.setInputPointerData__inputManager, cast ([InputManager._pointerData__inputManager, we, _Runtime.field(we, 'deltaX'), _Runtime.field(we, 'deltaY')] : Array<Dynamic>));
       _Runtime.setField(InputManager._pointerData__inputManager, 'wheelMode', _Runtime.callValue(getMouseWheelModeFromDomWheelEvent, cast ([we] : Array<Dynamic>)));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(manager, 'onWheel'), InputManager._pointerData__inputManager] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onWheel')], [InputManager._pointerData__inputManager]]), 1);
     };
     _Runtime.callProperty(element, 'addEventListener', cast (['wheel', handler, { passive: !_Runtime.truthy(preventDefault) }] : Array<Dynamic>));
     _Runtime.callValue(InputManager.setInputBinding__inputManager, cast ([manager, element, InputManager.kWheelInput__inputManager, function() return _Runtime.callProperty(element, 'removeEventListener', cast (['wheel', handler] : Array<Dynamic>))] : Array<Dynamic>));
@@ -559,7 +559,7 @@ class InputManager {
             _Runtime.setField(InputManager._axisData__inputManager, 'gamepad', _Runtime.field(pad, 'index'));
             _Runtime.setField(InputManager._axisData__inputManager, 'timeStamp', now);
             _Runtime.setField(InputManager._axisData__inputManager, 'value', value);
-            _Runtime.callValue(emitSignal, cast ([_Runtime.field(manager, 'onGamepadAxisMove'), InputManager._axisData__inputManager] : Array<Dynamic>));
+            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onGamepadAxisMove')], [InputManager._axisData__inputManager]]), 1);
           }
           i++;
         }
@@ -576,9 +576,9 @@ class InputManager {
             _Runtime.setField(InputManager._buttonData__inputManager, 'timeStamp', now);
             _Runtime.setField(InputManager._buttonData__inputManager, 'value', _Runtime.field(btn, 'value'));
             if (_Runtime.truthy(_Runtime.field(btn, 'pressed'))) {
-              _Runtime.callValue(emitSignal, cast ([_Runtime.field(manager, 'onGamepadButtonDown'), InputManager._buttonData__inputManager] : Array<Dynamic>));
+              _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onGamepadButtonDown')], [InputManager._buttonData__inputManager]]), 1);
             } else {
-              _Runtime.callValue(emitSignal, cast ([_Runtime.field(manager, 'onGamepadButtonUp'), InputManager._buttonData__inputManager] : Array<Dynamic>));
+              _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onGamepadButtonUp')], [InputManager._buttonData__inputManager]]), 1);
             }
           }
           i++;

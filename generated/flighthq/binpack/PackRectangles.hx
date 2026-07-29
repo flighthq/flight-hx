@@ -119,8 +119,8 @@ class PackRectangles {
     var bestShort:Dynamic = cast _Runtime.UNDEFINED;
     var bestLong:Dynamic = cast _Runtime.UNDEFINED;
     best = null;
-    bestShort = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
-    bestLong = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
+    bestShort = HxMath.POSITIVE_INFINITY;
+    bestLong = HxMath.POSITIVE_INFINITY;
     for (node in _Runtime.iterable(free)) {
       {
         var rotated:Dynamic = 0.0;

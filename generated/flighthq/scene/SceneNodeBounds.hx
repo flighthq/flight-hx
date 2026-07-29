@@ -17,7 +17,7 @@ import flighthq.types.SceneNode;
 
 class SceneNodeBounds {
   public static function getSceneNodeWorldBounds(out:AabbLike, node:SceneNode):Void {
-    _Runtime.callValue(setAabb, cast ([out, _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY'), _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY'), _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY'), _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY'), _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY'), _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY')] : Array<Dynamic>));
+    _Runtime.callValue(setAabb, cast ([out, HxMath.POSITIVE_INFINITY, HxMath.POSITIVE_INFINITY, HxMath.POSITIVE_INFINITY, HxMath.NEGATIVE_INFINITY, HxMath.NEGATIVE_INFINITY, HxMath.NEGATIVE_INFINITY] : Array<Dynamic>));
     _Runtime.callValue(SceneNodeBounds._accumulateWorldBounds__sceneNodeBounds, cast ([out, node] : Array<Dynamic>));
   }
 

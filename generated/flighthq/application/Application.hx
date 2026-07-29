@@ -41,7 +41,7 @@ class Application {
     var handler:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Application.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map).get(Application.kExit__application)), cast ([] : Array<Dynamic>));
-    handler = function() return _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onExit')] : Array<Dynamic>));
+    handler = function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onExit')]]), 1);
     flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'addEventListener', cast (['beforeunload', handler] : Array<Dynamic>));
     ((cast observers : flighthq._internal._Map).set(Application.kExit__application, function() return flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'removeEventListener', cast (['beforeunload', handler] : Array<Dynamic>))));
   }
@@ -60,11 +60,11 @@ class Application {
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map).get(kLifecycle)), cast ([] : Array<Dynamic>));
     onDeactivate = function() {
       _Runtime.callValue(pauseApplicationLoop, cast ([app] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(app, 'onDeactivate'), null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onDeactivate')] : Array<Dynamic>)); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(app, 'onDeactivate'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onDeactivate')]]), 1); }
     };
     onActivate = function() {
       _Runtime.callValue(resumeApplicationLoop, cast ([app] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(app, 'onActivate'), null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onActivate')] : Array<Dynamic>)); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(app, 'onActivate'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onActivate')]]), 1); }
     };
     _Runtime.callValue(connectSignal, cast ([_Runtime.field(win, 'onDeactivate'), onDeactivate] : Array<Dynamic>));
     _Runtime.callValue(connectSignal, cast ([_Runtime.field(win, 'onActivate'), onActivate] : Array<Dynamic>));
@@ -567,12 +567,12 @@ class Application {
           iters++;
           if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(app, 'onError'), null))) {
             try {
-              _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onFixedUpdate'), fixedTimeStep] : Array<Dynamic>));
+              _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onFixedUpdate')], [fixedTimeStep]]), 1);
             } catch (err:Dynamic) {
-              _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onError'), err] : Array<Dynamic>));
+              _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onError')], [err]]), 1);
             }
           } else {
-            _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onFixedUpdate'), fixedTimeStep] : Array<Dynamic>));
+            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onFixedUpdate')], [fixedTimeStep]]), 1);
           }
         }
         if (_Runtime.truthy(_Runtime.compare(iters, maxUpdatesPerFrame, '>='))) { _Runtime.setField(loopState, 'fixedAccumulator', 0.0); }
@@ -582,18 +582,18 @@ class Application {
       }
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(app, 'onError'), null))) {
         try {
-          _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onUpdate'), clamped] : Array<Dynamic>));
+          _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onUpdate')], [clamped]]), 1);
         } catch (err:Dynamic) {
-          _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onError'), err] : Array<Dynamic>));
+          _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onError')], [err]]), 1);
         }
         try {
-          _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onRender')] : Array<Dynamic>));
+          _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onRender')]]), 1);
         } catch (err:Dynamic) {
-          _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onError'), err] : Array<Dynamic>));
+          _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onError')], [err]]), 1);
         }
       } else {
-        _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onUpdate'), clamped] : Array<Dynamic>));
-        _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onRender')] : Array<Dynamic>));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onUpdate')], [clamped]]), 1);
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onRender')]]), 1);
       }
       _Runtime.setField(loopState, 'frameHandle', _Runtime.callProperty(backend, 'requestFrame', cast ([tick] : Array<Dynamic>)));
       ((cast observers : flighthq._internal._Map).set(Application.kLoop__application, function() return _Runtime.callProperty(backend, 'cancelFrame', cast ([_Runtime.field(loopState, 'frameHandle')] : Array<Dynamic>))));
@@ -616,18 +616,18 @@ class Application {
     if (_Runtime.truthy(!_Runtime.strictEquals(loopState, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callValue(Application.recordFpsSample__application, cast ([loopState, clamped] : Array<Dynamic>)); }
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(app, 'onError'), null))) {
       try {
-        _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onUpdate'), clamped] : Array<Dynamic>));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onUpdate')], [clamped]]), 1);
       } catch (err:Dynamic) {
-        _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onError'), err] : Array<Dynamic>));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onError')], [err]]), 1);
       }
       try {
-        _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onRender')] : Array<Dynamic>));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onRender')]]), 1);
       } catch (err:Dynamic) {
-        _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onError'), err] : Array<Dynamic>));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onError')], [err]]), 1);
       }
     } else {
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onUpdate'), clamped] : Array<Dynamic>));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onRender')] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onUpdate')], [clamped]]), 1);
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onRender')]]), 1);
     }
   }
 

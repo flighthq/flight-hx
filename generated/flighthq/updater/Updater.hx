@@ -34,33 +34,33 @@ class Updater {
     backend = _Runtime.callValue(getUpdaterBackend, cast ([] : Array<Dynamic>));
     unsubscribes = cast ([_Runtime.callProperty(backend, 'subscribeChecking', cast ([function() {
       _Runtime.callValue(Updater._setState__updater, cast ([updater, { phase: 'Checking', info: null, progress: null, error: null }] : Array<Dynamic>));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(updater, 'onChecking')] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(updater, 'onChecking')]]), 1);
     }] : Array<Dynamic>)), _Runtime.callProperty(backend, 'subscribeUpdateAvailable', cast ([function(info:Dynamic) {
       _Runtime.callValue(Updater._setState__updater, cast ([updater, { phase: 'UpdateAvailable', info: info, progress: null, error: null }] : Array<Dynamic>));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(updater, 'onUpdateAvailable'), info] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(updater, 'onUpdateAvailable')], [info]]), 1);
     }] : Array<Dynamic>)), _Runtime.callProperty(backend, 'subscribeUpdateNotAvailable', cast ([function() {
       _Runtime.callValue(Updater._setState__updater, cast ([updater, function(prev:Dynamic) return _Runtime.mergeObjects([prev, { phase: 'Idle' }])] : Array<Dynamic>));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(updater, 'onUpdateNotAvailable')] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(updater, 'onUpdateNotAvailable')]]), 1);
     }] : Array<Dynamic>)), _Runtime.callProperty(backend, 'subscribeDownloadProgress', cast ([function(progress:Dynamic) {
       _Runtime.callValue(Updater._setState__updater, cast ([updater, function(prev:Dynamic) return _Runtime.mergeObjects([prev, { phase: 'Downloading' }, { progress: progress }])] : Array<Dynamic>));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(updater, 'onDownloadProgress'), progress] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(updater, 'onDownloadProgress')], [progress]]), 1);
     }] : Array<Dynamic>)), _Runtime.callProperty(backend, 'subscribeUpdateDownloaded', cast ([function(info:Dynamic) {
       _Runtime.callValue(Updater._setState__updater, cast ([updater, function(prev:Dynamic) return _Runtime.mergeObjects([prev, { phase: 'Downloaded' }, { info: info }, { progress: null }])] : Array<Dynamic>));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(updater, 'onUpdateDownloaded'), info] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(updater, 'onUpdateDownloaded')], [info]]), 1);
     }] : Array<Dynamic>)), _Runtime.callProperty(backend, 'subscribeError', cast ([function(error:Dynamic) {
       _Runtime.callValue(Updater._setState__updater, cast ([updater, function(prev:Dynamic) return _Runtime.mergeObjects([prev, { phase: 'Error' }, { error: error }])] : Array<Dynamic>));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(updater, 'onError'), error] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(updater, 'onError')], [error]]), 1);
     }] : Array<Dynamic>)), _Runtime.callProperty(backend, 'subscribeUpdateCancelled', cast ([function() {
       _Runtime.callValue(Updater._setState__updater, cast ([updater, function(prev:Dynamic) return _Runtime.mergeObjects([prev, { phase: 'Idle' }])] : Array<Dynamic>));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(updater, 'onUpdateCancelled')] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(updater, 'onUpdateCancelled')]]), 1);
     }] : Array<Dynamic>)), _Runtime.callProperty(backend, 'subscribeUpdateStaging', cast ([function() {
       _Runtime.callValue(Updater._setState__updater, cast ([updater, function(prev:Dynamic) return _Runtime.mergeObjects([prev, { phase: 'Staging' }])] : Array<Dynamic>));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(updater, 'onUpdateStaging')] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(updater, 'onUpdateStaging')]]), 1);
     }] : Array<Dynamic>)), _Runtime.callProperty(backend, 'subscribeUpdateVerified', cast ([function() {
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(updater, 'onUpdateVerified')] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(updater, 'onUpdateVerified')]]), 1);
     }] : Array<Dynamic>)), _Runtime.callProperty(backend, 'subscribeUpdateRolledBack', cast ([function() {
       _Runtime.callValue(Updater._setState__updater, cast ([updater, function(prev:Dynamic) return _Runtime.mergeObjects([prev, { phase: 'Idle' }, { info: null }, { progress: null }, { error: null }])] : Array<Dynamic>));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(updater, 'onUpdateRolledBack')] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(updater, 'onUpdateRolledBack')]]), 1);
     }] : Array<Dynamic>))] : Array<Dynamic>);
     ((cast Updater._subscriptions__updater : flighthq._internal._WeakMap).set(updater, function() {
       for (unsubscribe in _Runtime.iterable(unsubscribes)) {

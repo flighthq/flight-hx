@@ -36,12 +36,12 @@ class Timeline {
           _Runtime.setField(timeline, 'isPlaying', false);
           var completed:Dynamic = totalFrames;
           var signals:Dynamic = _Runtime.field(timeline, 'signals');
-          if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(signals, 'onComplete')] : Array<Dynamic>)); }
+          if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onComplete')]]), 1); }
           return cast completed;
         }
         (next = cast ((((next - 1.0) % totalFrames) + 1.0) : Dynamic));
         var signals:Dynamic = _Runtime.field(timeline, 'signals');
-        if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(signals, 'onLoop')] : Array<Dynamic>)); }
+        if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onLoop')]]), 1); }
       }
       return cast next;
     }
@@ -50,11 +50,11 @@ class Timeline {
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(timeline, 'playMode'), 'once'))) {
         _Runtime.setField(timeline, 'isPlaying', false);
         var signals:Dynamic = _Runtime.field(timeline, 'signals');
-        if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(signals, 'onComplete')] : Array<Dynamic>)); }
+        if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onComplete')]]), 1); }
         return cast totalFrames;
       }
       var signals:Dynamic = _Runtime.field(timeline, 'signals');
-      if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(signals, 'onLoop')] : Array<Dynamic>)); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onLoop')]]), 1); }
       return cast 1.0;
     }
     return cast next;
@@ -104,15 +104,15 @@ class Timeline {
     signals = _Runtime.field(timeline, 'signals');
     target = _Runtime.field(timeline, 'target');
     frameEvent = { frame: current, previousFrame: previous };
-    if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(signals, 'onExitFrame'), frameEvent] : Array<Dynamic>)); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onExitFrame')], [frameEvent]]), 1); }
     _Runtime.setField(timeline, 'lastFrameUpdate', current);
-    if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(signals, 'onEnterFrame'), frameEvent] : Array<Dynamic>)); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onEnterFrame')], [frameEvent]]), 1); }
     if (_Runtime.truthy(!_Runtime.strictEquals(target, null))) { _Runtime.callOptionalProperty(_Runtime.field(timeline, 'source'), 'constructFrame', cast ([target, current] : Array<Dynamic>)); }
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(timeline, 'frameScripts'), null))) {
       var script:Dynamic = ((cast _Runtime.field(timeline, 'frameScripts') : flighthq._internal._Map).get(current));
       if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(script, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(target, null)))) { _Runtime.callValue(script, cast ([target, current] : Array<Dynamic>)); }
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(signals, 'onFrameConstructed'), frameEvent] : Array<Dynamic>)); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onFrameConstructed')], [frameEvent]]), 1); }
   }
 
   public static function getTimelineCurrentLabel(timeline:flighthq.types.Timeline):Null<TimelineLabel> {

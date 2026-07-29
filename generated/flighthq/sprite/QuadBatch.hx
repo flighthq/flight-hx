@@ -449,7 +449,7 @@ class QuadBatch {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, instanceCount, '<'))) {
-        _Runtime.callValue(visitor, cast ([i, _Runtime.getIndex(ids, i), transforms.subarray(Std.int((i * stride)), Std.int(((i * stride) + stride)))] : Array<Dynamic>));
+        _Runtime.callValue(visitor, cast ([i, _Runtime.getIndex(ids, i), (cast transforms : flighthq._internal._Float32Array).subarray(Std.int((i * stride)), Std.int(((i * stride) + stride)))] : Array<Dynamic>));
         i++;
       }
     }

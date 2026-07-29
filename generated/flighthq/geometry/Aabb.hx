@@ -34,8 +34,8 @@ class Aabb {
   public static function createAabb(?minX:Float, ?minY:Float, ?minZ:Float, ?maxX:Float, ?maxY:Float, ?maxZ:Float):flighthq.types.Aabb {
     var min:Dynamic = cast _Runtime.UNDEFINED;
     var max:Dynamic = cast _Runtime.UNDEFINED;
-    min = _Runtime.callValue(createVector3, cast ([_Runtime.coalesce(minX, function():Dynamic return cast _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY')), _Runtime.coalesce(minY, function():Dynamic return cast _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY')), _Runtime.coalesce(minZ, function():Dynamic return cast _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY'))] : Array<Dynamic>));
-    max = _Runtime.callValue(createVector3, cast ([_Runtime.coalesce(maxX, function():Dynamic return cast _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY')), _Runtime.coalesce(maxY, function():Dynamic return cast _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY')), _Runtime.coalesce(maxZ, function():Dynamic return cast _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY'))] : Array<Dynamic>));
+    min = _Runtime.callValue(createVector3, cast ([_Runtime.coalesce(minX, function():Dynamic return cast HxMath.POSITIVE_INFINITY), _Runtime.coalesce(minY, function():Dynamic return cast HxMath.POSITIVE_INFINITY), _Runtime.coalesce(minZ, function():Dynamic return cast HxMath.POSITIVE_INFINITY)] : Array<Dynamic>));
+    max = _Runtime.callValue(createVector3, cast ([_Runtime.coalesce(maxX, function():Dynamic return cast HxMath.NEGATIVE_INFINITY), _Runtime.coalesce(maxY, function():Dynamic return cast HxMath.NEGATIVE_INFINITY), _Runtime.coalesce(maxZ, function():Dynamic return cast HxMath.NEGATIVE_INFINITY)] : Array<Dynamic>));
     return cast _Runtime.callValue(createEntity, cast ([{ max: max, min: min }] : Array<Dynamic>));
     return cast null;
   }
@@ -165,12 +165,12 @@ class Aabb {
     var maxX:Dynamic = cast _Runtime.UNDEFINED;
     var maxY:Dynamic = cast _Runtime.UNDEFINED;
     var maxZ:Dynamic = cast _Runtime.UNDEFINED;
-    minX = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
-    minY = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
-    minZ = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
-    maxX = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
-    maxY = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
-    maxZ = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
+    minX = HxMath.POSITIVE_INFINITY;
+    minY = HxMath.POSITIVE_INFINITY;
+    minZ = HxMath.POSITIVE_INFINITY;
+    maxX = HxMath.NEGATIVE_INFINITY;
+    maxY = HxMath.NEGATIVE_INFINITY;
+    maxZ = HxMath.NEGATIVE_INFINITY;
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(points, 'length'), '<'))) {

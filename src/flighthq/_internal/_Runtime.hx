@@ -41,6 +41,20 @@ class _Runtime {
     return Reflect.callMethod(null, callable, adjustArguments(callable, arguments));
   }
 
+  public static inline function callHaxeRestValue(
+    callable:Dynamic,
+    arguments:Array<Dynamic>,
+    restIndex:Int
+  ):Dynamic {
+    #if js
+    return Reflect.callMethod(null, callable, arguments);
+    #else
+    final packed = arguments.slice(0, restIndex);
+    packed.push(arguments.slice(restIndex));
+    return Reflect.callMethod(null, callable, packed);
+    #end
+  }
+
   /**
    * JavaScript calls tolerate arity mismatches: extra arguments are dropped and
    * missing ones become undefined. Neko instead over-applies (calling the

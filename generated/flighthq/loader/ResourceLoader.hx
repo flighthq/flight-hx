@@ -96,10 +96,10 @@ class ResourceLoader {
       _Runtime.callValue(ResourceLoader.releasePendingEntry__resourceLoader, cast ([entry] : Array<Dynamic>));
     }
     _Runtime.setField(internal, 'pending', cast ([] : Array<Dynamic>));
-    _Runtime.callValue(emitSignal, cast ([_Runtime.field(loader, 'onCancel')] : Array<Dynamic>));
+    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(loader, 'onCancel')]]), 1);
     if (_Runtime.truthy(_Runtime.strictEquals((cast _Runtime.field(internal, 'inFlight') : flighthq._internal._Set).size, 0.0))) {
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(loader, 'onProgress'), _Runtime.field(internal, 'loaded'), _Runtime.field(internal, 'total')] : Array<Dynamic>));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(loader, 'onComplete'), _Runtime.field(internal, 'reports')] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(loader, 'onProgress')], [_Runtime.field(internal, 'loaded')], [_Runtime.field(internal, 'total')]]), 1);
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(loader, 'onComplete')], [_Runtime.field(internal, 'reports')]]), 1);
     }
   }
 
@@ -183,7 +183,7 @@ class ResourceLoader {
     internal = (cast loader : ResourceLoaderInternal__resourceLoader);
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(internal, 'started')), function():Dynamic return cast _Runtime.field(internal, 'paused')), function():Dynamic return cast _Runtime.field(internal, 'cancelled')))) { return; }
     _Runtime.setField(internal, 'paused', true);
-    _Runtime.callValue(emitSignal, cast ([_Runtime.field(loader, 'onPause')] : Array<Dynamic>));
+    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(loader, 'onPause')]]), 1);
   }
 
   public static function queueResourceLoad<T>(loader:flighthq.types.ResourceLoader, item:Dynamic):ResourceLoadHandle<Dynamic> {
@@ -285,7 +285,7 @@ class ResourceLoader {
     internal = (cast loader : ResourceLoaderInternal__resourceLoader);
     if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(internal, 'paused')), function():Dynamic return cast _Runtime.field(internal, 'cancelled')))) { return; }
     _Runtime.setField(internal, 'paused', false);
-    _Runtime.callValue(emitSignal, cast ([_Runtime.field(loader, 'onResume')] : Array<Dynamic>));
+    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(loader, 'onResume')]]), 1);
     _Runtime.voidValue(_Runtime.callValue(ResourceLoader.drainQueue__resourceLoader, cast ([internal, loader] : Array<Dynamic>)));
   }
 
@@ -314,8 +314,8 @@ class ResourceLoader {
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.field(internal, 'started'), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(internal, 'streaming'))))) { return; }
     _Runtime.setField(internal, 'started', true);
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(internal, 'total'), 0.0))) {
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(loader, 'onProgress'), 0.0, 0.0] : Array<Dynamic>));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(loader, 'onComplete'), cast ([] : Array<Dynamic>)] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(loader, 'onProgress')], [0.0], [0.0]]), 1);
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(loader, 'onComplete')], [cast ([] : Array<Dynamic>)]]), 1);
       return;
     }
     _Runtime.voidValue(_Runtime.callValue(ResourceLoader.drainQueue__resourceLoader, cast ([internal, loader] : Array<Dynamic>)));
@@ -416,7 +416,7 @@ class ResourceLoader {
         var __flowBranch17:Dynamic;
         if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(internal, 'itemSignals'), null))) {
           __flowBranch17 = flighthq._internal._Async.protect(function():Dynamic {
-            _Runtime.callValue(emitSignal, cast ([_Runtime.field(_Runtime.field(internal, 'itemSignals'), 'onItemStart'), _Runtime.field(entry, 'key')] : Array<Dynamic>));
+            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(_Runtime.field(internal, 'itemSignals'), 'onItemStart')], [_Runtime.field(entry, 'key')]]), 1);
             return flighthq._internal._Async.flowNormal();
           });
         } else {
@@ -473,7 +473,7 @@ class ResourceLoader {
                     var __flowBranch22:Dynamic;
                     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(internal, 'itemSignals'), null))) {
                       __flowBranch22 = flighthq._internal._Async.protect(function():Dynamic {
-                        _Runtime.callValue(emitSignal, cast ([_Runtime.field(_Runtime.field(internal, 'itemSignals'), 'onItemComplete'), _Runtime.field(entry, 'key'), value] : Array<Dynamic>));
+                        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(_Runtime.field(internal, 'itemSignals'), 'onItemComplete')], [_Runtime.field(entry, 'key')], [value]]), 1);
                         return flighthq._internal._Async.flowNormal();
                       });
                     } else {
@@ -528,7 +528,7 @@ class ResourceLoader {
                         var __flowBranch26:Dynamic;
                         if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(internal, 'itemSignals'), null))) {
                           __flowBranch26 = flighthq._internal._Async.protect(function():Dynamic {
-                            _Runtime.callValue(emitSignal, cast ([_Runtime.field(_Runtime.field(internal, 'itemSignals'), 'onItemRetry'), _Runtime.field(entry, 'key'), (attempt + 1.0), delayMs] : Array<Dynamic>));
+                            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(_Runtime.field(internal, 'itemSignals'), 'onItemRetry')], [_Runtime.field(entry, 'key')], [(attempt + 1.0)], [delayMs]]), 1);
                             return flighthq._internal._Async.flowNormal();
                           });
                         } else {
@@ -566,7 +566,7 @@ class ResourceLoader {
                       var __flowBranch29:Dynamic;
                       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(internal, 'itemSignals'), null))) {
                         __flowBranch29 = flighthq._internal._Async.protect(function():Dynamic {
-                          _Runtime.callValue(emitSignal, cast ([_Runtime.field(_Runtime.field(internal, 'itemSignals'), 'onItemError'), _Runtime.field(entry, 'key'), error, (attempt + 1.0)] : Array<Dynamic>));
+                          _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(_Runtime.field(internal, 'itemSignals'), 'onItemError')], [_Runtime.field(entry, 'key')], [error], [(attempt + 1.0)]]), 1);
                           return flighthq._internal._Async.flowNormal();
                         });
                       } else {
@@ -574,7 +574,7 @@ class ResourceLoader {
                       }
                       return flighthq._internal._Async.continueFlow(__flowBranch29, function():Dynamic {
                         _Runtime.callProperty(entry, 'reject', cast ([error] : Array<Dynamic>));
-                        _Runtime.callValue(emitSignal, cast ([_Runtime.field(loader, 'onError'), error, _Runtime.field(entry, 'key')] : Array<Dynamic>));
+                        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(loader, 'onError')], [error], [_Runtime.field(entry, 'key')]]), 1);
                         var __flowBranch30:Dynamic;
                         if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(internal, 'errorPolicy'), 'fail-fast'))) {
                           __flowBranch30 = flighthq._internal._Async.protect(function():Dynamic {
@@ -605,8 +605,8 @@ class ResourceLoader {
 
   public static function checkCompleteAfterCancel__resourceLoader(internal:ResourceLoaderInternal__resourceLoader, loader:flighthq.types.ResourceLoader):Void {
     if (_Runtime.truthy(_Runtime.strictEquals((cast _Runtime.field(internal, 'inFlight') : flighthq._internal._Set).size, 0.0))) {
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(loader, 'onProgress'), _Runtime.field(internal, 'loaded'), _Runtime.field(internal, 'total')] : Array<Dynamic>));
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(loader, 'onComplete'), _Runtime.field(internal, 'reports')] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(loader, 'onProgress')], [_Runtime.field(internal, 'loaded')], [_Runtime.field(internal, 'total')]]), 1);
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(loader, 'onComplete')], [_Runtime.field(internal, 'reports')]]), 1);
     }
   }
 
@@ -644,10 +644,10 @@ class ResourceLoader {
   public static function settleEntry__resourceLoader(entry:PendingEntry__resourceLoader, internal:ResourceLoaderInternal__resourceLoader, loader:flighthq.types.ResourceLoader):Void {
     ((cast _Runtime.field(internal, 'inFlight') : flighthq._internal._Set).delete_(entry));
     _Runtime.incrementField(internal, 'loaded', 1, true);
-    _Runtime.callValue(emitSignal, cast ([_Runtime.field(loader, 'onProgress'), _Runtime.field(internal, 'loaded'), _Runtime.field(internal, 'total')] : Array<Dynamic>));
+    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(loader, 'onProgress')], [_Runtime.field(internal, 'loaded')], [_Runtime.field(internal, 'total')]]), 1);
     _Runtime.callValue(ResourceLoader.releasePendingEntry__resourceLoader, cast ([entry] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(internal, 'loaded'), _Runtime.field(internal, 'total')))) {
-      _Runtime.callValue(emitSignal, cast ([_Runtime.field(loader, 'onComplete'), _Runtime.field(internal, 'reports')] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(loader, 'onComplete')], [_Runtime.field(internal, 'reports')]]), 1);
       return;
     }
     _Runtime.voidValue(_Runtime.callValue(ResourceLoader.drainQueue__resourceLoader, cast ([internal, loader] : Array<Dynamic>)));

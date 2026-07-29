@@ -95,7 +95,7 @@ class TiledJsonParse {
       (decoded = cast (_Runtime.select(_Runtime.strictEquals(_Runtime.callValue(TiledJsonParse.strField__tiledJsonParse, cast ([obj, 'encoding'] : Array<Dynamic>)), 'csv'), function():Dynamic return cast _Runtime.callValue(decodeTiledCsvLayer, cast ([data] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(decodeTiledBase64Layer, cast ([data, _Runtime.callValue(TiledJsonParse.asCompression__tiledJsonParse, cast ([_Runtime.callValue(TiledJsonParse.strField__tiledJsonParse, cast ([obj, 'compression'] : Array<Dynamic>))] : Array<Dynamic>)), _Runtime.optionalField(options, 'inflate')] : Array<Dynamic>))) : Dynamic));
     } }
     if (_Runtime.truthy(_Runtime.strictEquals(decoded, null))) { return cast grid; }
-    _Runtime.callProperty(grid, 'set', cast ([decoded.subarray(Std.int(0.0), Std.int(_Runtime.field(grid, 'length')))] : Array<Dynamic>));
+    _Runtime.callProperty(grid, 'set', cast ([(cast decoded : flighthq._internal._UInt32Array).subarray(Std.int(0.0), Std.int(_Runtime.field(grid, 'length')))] : Array<Dynamic>));
     return cast grid;
     return cast null;
   }

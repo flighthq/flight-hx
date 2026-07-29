@@ -84,8 +84,8 @@ class WgpuEffectPass {
     var slotF32:Dynamic = cast _Runtime.UNDEFINED;
     var slotI32:Dynamic = cast _Runtime.UNDEFINED;
     f32Start = (slotOffset / 4.0);
-    slotF32 = _Runtime.field(fs, 'uniformData').subarray(Std.int(f32Start), Std.int((f32Start + (_Runtime.field(fs, 'uniformStride') / 4.0))));
-    slotI32 = _Runtime.field(fs, 'uniformDataI32').subarray(Std.int(f32Start), Std.int((f32Start + (_Runtime.field(fs, 'uniformStride') / 4.0))));
+    slotF32 = (cast _Runtime.field(fs, 'uniformData') : flighthq._internal._Float32Array).subarray(Std.int(f32Start), Std.int((f32Start + (_Runtime.field(fs, 'uniformStride') / 4.0))));
+    slotI32 = (cast _Runtime.field(fs, 'uniformDataI32') : flighthq._internal._Int32Array).subarray(Std.int(f32Start), Std.int((f32Start + (_Runtime.field(fs, 'uniformStride') / 4.0))));
     _Runtime.callValue(setUniforms, cast ([slotF32, slotI32] : Array<Dynamic>));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(fs, 'uniformBuffer'), slotOffset, _Runtime.field(_Runtime.field(fs, 'uniformData'), 'buffer'), slotOffset, _Runtime.field(fs, 'uniformStride')] : Array<Dynamic>));
   }
