@@ -513,9 +513,14 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
   if (declaration.kind === 'class') {
     const generics = declaration.typeParameters.length > 0 ? `<${declaration.typeParameters.join(', ')}>` : '';
     const parent = declaration.extends ? ` extends ${emitType(declaration.extends)}` : '';
-    const lines = declaration.packagePrivate
-      ? [`private class ${safeName(declaration.name)}${generics}${parent} {`]
-      : [`class ${safeName(declaration.name)}${generics}${parent} {`];
+    // Spread calls and method references still use dynamic dispatch, so internal-class
+    // members need a DCE retention belt even though ordinary typed calls are direct.
+    const lines = [
+      ...(!declaration.exported ? ['@:keep'] : []),
+      declaration.packagePrivate
+        ? `private class ${safeName(declaration.name)}${generics}${parent} {`
+        : `class ${safeName(declaration.name)}${generics}${parent} {`,
+    ];
     for (const field of declaration.fields) {
       const fieldAccess = field.public ? 'public ' : 'private ';
       const static_ = field.static ? 'static ' : '';
@@ -2355,6 +2360,14 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
       if (expression.callee.binding === 'Canvas2dBackend') canvas2dMethodEndpoint(name);
       const method = expression.optional || expression.callee.optional ? 'callOptional' : 'call';
       return `flighthq._internal.backend.${expression.callee.binding}.${method}(${owner}, ${quote(name)}, cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
+    }
+    if (expression.callee.generatedClass) {
+      const generatedClass = expression.callee.generatedClass;
+      const call = (target: string) =>
+        `(cast ${target} : ${safeName(generatedClass)}).${safeName(name)}(${expression.arguments.map(emitExpression).join(', ')})`;
+      if (!(expression.optional || expression.callee.optional)) return call(owner);
+      const temporary = `__generatedClass${String(temporaryIndex++)}`;
+      return `({ final ${temporary}:Dynamic = ${owner}; ${temporary} == null ? _Runtime.UNDEFINED : ${call(temporary)}; })`;
     }
     if (expression.callee.optional) {
       return `_Runtime.callOptionalProperty(${owner}, ${quote(name)}, cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;

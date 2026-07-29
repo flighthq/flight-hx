@@ -110,6 +110,7 @@ export type IrExpression =
       name: string;
       object: IrExpression;
       optional?: boolean | undefined;
+      generatedClass?: string | undefined;
       typedStructBinding?: IrTypedStructBinding | undefined;
     }
   | { flags: string; kind: 'regexp'; pattern: string }

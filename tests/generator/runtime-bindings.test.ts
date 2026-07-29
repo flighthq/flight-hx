@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { mkdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 
@@ -98,5 +98,31 @@ describe('maintained runtime bindings', () => {
       ],
       { cwd: workspace, stdio: 'pipe' },
     );
+  });
+
+  it('executes generated internal-class methods in path booleans under full JavaScript DCE', () => {
+    const outputDirectory = path.join(workspace, 'build', 'haxe-js');
+    const output = path.join(outputDirectory, 'path-boolean-dce.cjs');
+    mkdirSync(outputDirectory, { recursive: true });
+    execFileSync(
+      process.execPath,
+      [
+        'tools/haxe.mjs',
+        '-cp',
+        'src',
+        '-cp',
+        'generated',
+        '-cp',
+        'tests/haxe',
+        '--main',
+        'PathBooleanDceSmoke',
+        '-dce',
+        'full',
+        '--js',
+        output,
+      ],
+      { cwd: workspace, stdio: 'pipe' },
+    );
+    execFileSync(process.execPath, [output], { cwd: workspace, stdio: 'pipe' });
   });
 });

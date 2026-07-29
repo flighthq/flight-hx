@@ -14,6 +14,7 @@ typedef ArrangementSegment__martinezKernel = { var ax:Float; var ay:Float; var b
 
 typedef UniqueSegment__martinezKernel = { var ax:Float; var ay:Float; var bx:Float; var by:Float; var subjectDelta:Float; var clipDelta:Float; };
 
+@:keep
 class DirectedGraph__martinezKernel {
   private final keys:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
   private final xs:Array<Float> = cast ([] : Array<Dynamic>);
@@ -28,8 +29,8 @@ class DirectedGraph__martinezKernel {
     var from:Dynamic = cast _Runtime.UNDEFINED;
     var to:Dynamic = cast _Runtime.UNDEFINED;
     var edge:Dynamic = cast _Runtime.UNDEFINED;
-    from = _Runtime.callProperty(this, 'vertex', cast ([fromX, fromY] : Array<Dynamic>));
-    to = _Runtime.callProperty(this, 'vertex', cast ([toX, toY] : Array<Dynamic>));
+    from = (cast this : DirectedGraph__martinezKernel).vertex(fromX, fromY);
+    to = (cast this : DirectedGraph__martinezKernel).vertex(toX, toY);
     if (_Runtime.truthy(_Runtime.strictEquals(from, to))) { return; }
     edge = _Runtime.field(_Runtime.field(this, 'edgeFrom'), 'length');
     _Runtime.callProperty(_Runtime.field(this, 'edgeFrom'), 'push', cast ([from] : Array<Dynamic>));
@@ -44,7 +45,7 @@ class DirectedGraph__martinezKernel {
       var start:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(start, _Runtime.field(_Runtime.field(this, 'edgeFrom'), 'length'), '<'))) {
         if (_Runtime.truthy(_Runtime.getIndex(_Runtime.field(this, 'used'), start))) { start++; continue; }
-        var ring:Dynamic = _Runtime.callProperty(this, 'walk', cast ([start] : Array<Dynamic>));
+        var ring:Dynamic = (cast this : DirectedGraph__martinezKernel).walk(start);
         if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(ring, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(ring, 'length'), 6.0, '>=')))) { _Runtime.callProperty(rings, 'push', cast ([ring] : Array<Dynamic>)); }
         start++;
       }
@@ -66,7 +67,7 @@ class DirectedGraph__martinezKernel {
       var from:Dynamic = _Runtime.getIndex(_Runtime.field(this, 'edgeFrom'), edge);
       _Runtime.pushMany(ring, cast ([_Runtime.getIndex(_Runtime.field(this, 'xs'), from), _Runtime.getIndex(_Runtime.field(this, 'ys'), from)] : Array<Dynamic>));
       var to:Dynamic = _Runtime.getIndex(_Runtime.field(this, 'edgeTo'), edge);
-      var next:Dynamic = _Runtime.callProperty(this, 'nextEdge', cast ([to, from] : Array<Dynamic>));
+      var next:Dynamic = (cast this : DirectedGraph__martinezKernel).nextEdge(to, from);
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(next, -1.0), function():Dynamic return cast _Runtime.strictEquals(next, startEdge)), function():Dynamic return cast _Runtime.getIndex(_Runtime.field(this, 'used'), next)))) { break; }
       (edge = cast (next : Dynamic));
     }
@@ -112,6 +113,7 @@ class DirectedGraph__martinezKernel {
   }
 }
 
+@:keep
 class EventHeap__martinezKernel {
   private final data:Array<Dynamic> = cast ([] : Array<Dynamic>);
   public function new():Void {
@@ -205,8 +207,8 @@ class MartinezKernel {
     _Runtime.callValue(MartinezKernel.fillQueue__martinezKernel, cast ([clip, false, heap] : Array<Dynamic>));
     status = cast ([] : Array<Dynamic>);
     segments = cast ([] : Array<Dynamic>);
-    while (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(heap, 'isEmpty', cast ([] : Array<Dynamic>))))) {
-      var event:Dynamic = _Runtime.callProperty(heap, 'pop', cast ([] : Array<Dynamic>));
+    while (_Runtime.truthy(!_Runtime.truthy((cast heap : EventHeap__martinezKernel).isEmpty()))) {
+      var event:Dynamic = (cast heap : EventHeap__martinezKernel).pop();
       if (_Runtime.truthy(_Runtime.field(event, 'left'))) {
         var index:Dynamic = _Runtime.callValue(MartinezKernel.insertStatus__martinezKernel, cast ([status, event] : Array<Dynamic>));
         var prev:Dynamic = _Runtime.select(_Runtime.compare(index, 0.0, '>'), function():Dynamic return cast _Runtime.getIndex(status, (index - 1.0)), function():Dynamic return cast null);
@@ -273,8 +275,8 @@ class MartinezKernel {
       _Runtime.setField(b, 'left', true);
       _Runtime.setField(b, 'windingDelta', -1.0);
     }
-    _Runtime.callProperty(heap, 'push', cast ([a] : Array<Dynamic>));
-    _Runtime.callProperty(heap, 'push', cast ([b] : Array<Dynamic>));
+    (cast heap : EventHeap__martinezKernel).push(a);
+    (cast heap : EventHeap__martinezKernel).push(b);
   }
 
   public static function createEvent__martinezKernel(x:Float, y:Float, isSubject:Bool):Dynamic {
@@ -317,8 +319,8 @@ class MartinezKernel {
     _Runtime.setField(newLeft, 'windingDelta', _Runtime.field(le, 'windingDelta'));
     _Runtime.setField(le, 'otherEvent', newRight);
     _Runtime.setField(right, 'otherEvent', newLeft);
-    _Runtime.callProperty(heap, 'push', cast ([newLeft] : Array<Dynamic>));
-    _Runtime.callProperty(heap, 'push', cast ([newRight] : Array<Dynamic>));
+    (cast heap : EventHeap__martinezKernel).push(newLeft);
+    (cast heap : EventHeap__martinezKernel).push(newRight);
   }
 
   public static function pointOnEndpoint__martinezKernel(le:Dynamic, x:Float, y:Float):Bool {
@@ -577,9 +579,9 @@ class MartinezKernel {
     var graph:Dynamic = cast _Runtime.UNDEFINED;
     graph = new DirectedGraph__martinezKernel();
     for (e in _Runtime.iterable(edges)) {
-      _Runtime.callProperty(graph, 'addEdge', cast ([_Runtime.getIndex(e, 0.0), _Runtime.getIndex(e, 1.0), _Runtime.getIndex(e, 2.0), _Runtime.getIndex(e, 3.0)] : Array<Dynamic>));
+      (cast graph : DirectedGraph__martinezKernel).addEdge(_Runtime.getIndex(e, 0.0), _Runtime.getIndex(e, 1.0), _Runtime.getIndex(e, 2.0), _Runtime.getIndex(e, 3.0));
     }
-    return cast _Runtime.callProperty(graph, 'traceRings', cast ([] : Array<Dynamic>));
+    return cast (cast graph : DirectedGraph__martinezKernel).traceRings();
     return cast null;
   }
 

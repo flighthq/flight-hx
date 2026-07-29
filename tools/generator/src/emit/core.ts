@@ -1710,6 +1710,7 @@ function namespacePrivateDeclarations(declarations: IrDeclaration[]): void {
         break;
       case 'property':
         expression(value.object);
+        if (value.generatedClass) value.generatedClass = typeNames.get(value.generatedClass) ?? value.generatedClass;
         break;
       case 'spread':
         expression(value.expression);

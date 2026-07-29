@@ -726,6 +726,35 @@ function typedArrayBinding(
   );
 }
 
+/** Preserve the nominal receiver for methods on classes generated from this source file. */
+function generatedClassBinding(node: ts.Expression, context: LoweringContext): string | undefined {
+  const checker = context.checker;
+  if (!checker) return undefined;
+  const names = new Set<string>();
+  const seen = new Set<ts.Type>();
+  const visit = (type: ts.Type): void => {
+    if (seen.has(type)) return;
+    seen.add(type);
+    if (type.isUnionOrIntersection()) {
+      type.types.forEach(visit);
+      return;
+    }
+    for (const declaration of type.getSymbol()?.declarations ?? []) {
+      if (
+        ts.isClassDeclaration(declaration) &&
+        declaration.name &&
+        declaration.getSourceFile() === context.sourceFile
+      ) {
+        names.add(declaration.name.text);
+      }
+    }
+    const constraint = checker.getBaseConstraintOfType(type);
+    if (constraint && constraint !== type) visit(constraint);
+  };
+  visit(checker.getTypeAtLocation(node));
+  return names.size === 1 ? [...names][0] : undefined;
+}
+
 function variadicCallConvention(
   node: ts.CallExpression,
   context: LoweringContext,
@@ -1645,6 +1674,7 @@ function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpre
       isBoundGlobalRootExpression(node.expression, context, 'navigator', context.domNavigatorBindingNames);
     const objectIsCollection = collectionBinding(node.expression, node.name.text, context);
     const objectIsTypedArray = typedArrayBinding(node.expression, node.name.text, context);
+    const generatedClass = generatedClassBinding(node.expression, context);
     const typedStructBinding = typedStructPropertyBinding(node, context);
     return {
       binding: webGpuConstantNamespace
@@ -1674,6 +1704,7 @@ function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpre
                               : isBoundPlatformExpression(node.expression, context, 'WebGL2RenderingContext')
                                 ? 'WebGl2Backend'
                                 : objectIsTypedArray,
+      generatedClass,
       kind: 'property',
       name: node.name.text,
       object: webGpuConstantNamespace

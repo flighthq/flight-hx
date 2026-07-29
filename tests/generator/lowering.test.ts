@@ -985,6 +985,46 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain("_Runtime.callProperty(dynamic_, 'get'");
   });
 
+  it('emits direct calls for generated class receivers and retains internal-class fallbacks', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/internalClass.ts',
+      `
+        class Counter {
+          private value = 0;
+          bump(delta: number): void {
+            this.add(delta);
+          }
+          private add(delta: number): void {
+            this.value += delta;
+          }
+        }
+        export function advance(counter: Counter, maybe: Counter | undefined, dynamic: any): void {
+          counter.bump(1);
+          maybe?.bump(2);
+          counter.bump(...([4] as [number]));
+          dynamic.bump(3);
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'InternalClassFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('@:keep\nclass Counter');
+    expect(output).toContain('(cast this : Counter).add(delta)');
+    expect(output).toContain('(cast counter : Counter).bump(1.0)');
+    expect(output).toContain('(cast __generatedClass');
+    expect(output).toContain(': Counter).bump(2.0)');
+    expect(output).toContain("_Runtime.callProperty(counter, 'bump', _Runtime.concatArrays");
+    expect(output).toContain("_Runtime.callProperty(dynamic_, 'bump'");
+    expect(output).not.toContain("_Runtime.callProperty(counter, 'bump', cast ([1.0]");
+  });
+
   it('routes typed canvas-element operations separately from the Canvas 2D context', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/render-gl/src/sample.ts',
