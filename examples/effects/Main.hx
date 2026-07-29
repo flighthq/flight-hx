@@ -19,6 +19,7 @@ class Main extends Application {
   var scale:Float = 1.0;
   var renderState:Dynamic;
   var ready = false;
+  var usingCairo = false;
 
   var root:DisplayContainer;
   // Effect chain: bloom -> vignette -> tone map, plus the GL effect pipeline that applies it.
@@ -32,23 +33,38 @@ class Main extends Application {
   // Lime: window/GL are ready. Wire the Flight Lime backend, set up the GL renderer, build the scene.
   override public function onWindowCreate():Void {
     App.setAppBackend(LimeApp.createLimeAppBackend(this));
+    trace('window context type: ' + window.context.type);
     switch (window.context.type) {
+      case CAIRO:
+        usingCairo = true;
       case OPENGL, OPENGLES, WEBGL:
       default:
-        throw 'Flight examples require an OpenGL/WebGL render context.';
+        throw 'Flight examples require an OpenGL/WebGL or cairo render context.';
     }
     scale = window.scale;
-    final canvas = new _GlCanvas(window);
-    renderState = createGlRenderState(canvas, {
-      pixelRatio: window.scale,
-      backgroundColor: 0x0a0c14ff,
-      contextAttributes: {alpha: false, preserveDrawingBuffer: true},
-    });
-    registerDefaultGlMaterial(renderState);
-    registerRenderer(renderState, ShapeKind, defaultGlShapeRenderer);
-    registerGlShapeCommands(defaultGlShapeCommands);
-    registerStandardGlRenderEffects(renderState);
-    enableGlBlendModeSupport(renderState);
+    if (usingCairo) {
+      final canvas = new _CairoCanvas(window);
+      renderState = createCanvasRenderState(canvas, {
+        pixelRatio: window.scale,
+        backgroundColor: 0x0a0c14ff,
+      });
+      registerRenderer(renderState, ShapeKind, defaultCanvasShapeRenderer);
+      registerCanvasShapeCommands(defaultCanvasShapeCommands);
+      registerAllCanvasRenderEffects(renderState);
+      enableCanvasBlendMode(renderState);
+    } else {
+      final canvas = new _GlCanvas(window);
+      renderState = createGlRenderState(canvas, {
+        pixelRatio: window.scale,
+        backgroundColor: 0x0a0c14ff,
+        contextAttributes: {alpha: false, preserveDrawingBuffer: true},
+      });
+      registerDefaultGlMaterial(renderState);
+      registerRenderer(renderState, ShapeKind, defaultGlShapeRenderer);
+      registerGlShapeCommands(defaultGlShapeCommands);
+      registerStandardGlRenderEffects(renderState);
+      enableGlBlendModeSupport(renderState);
+    }
     pipeline = createGlRenderEffectPipeline(renderState);
 
     root = createDisplayContainer();
@@ -102,8 +118,13 @@ class Main extends Application {
     if (!ready || root == null) return;
     if (!prepareDisplayObjectRender(renderState, root)) return;
     beginGlRenderEffectPipeline(renderState, pipeline);
-    renderGlBackground(renderState);
-    renderGlDisplayObject(renderState, root);
+    if (usingCairo) {
+      renderCanvasBackground(renderState);
+      renderCanvasDisplayObject(renderState, root);
+    } else {
+      renderGlBackground(renderState);
+      renderGlDisplayObject(renderState, root);
+    }
     endGlRenderEffectPipeline(renderState, pipeline, cast effects);
   }
 }
@@ -147,5 +168,43 @@ private class _GlCanvas {
     if (renderContext == null) return null;
     final webgl2 = renderContext.webgl2;
     return webgl2 == null ? renderContext.webgl : webgl2;
+  }
+}
+
+// Canvas adapter presenting the Lime software window's cairo context as the 2D
+// canvas `createCanvasRenderState` expects (the cairo counterpart of _GlCanvas).
+@:keep
+private class _CairoCanvas {
+  public var width:Int = 0;
+  public var height:Int = 0;
+
+  final window:Window;
+  final context:Dynamic;
+
+  public function new(window:Window) {
+    this.window = window;
+    #if (lime && !js && lime_cairo)
+    // Lime creates (and can recreate) the window Cairo at render-surface lock,
+    // so hand the context a live provider instead of one cached instance.
+    final windowRef = window;
+    context = new flighthq._internal.backend.NativeCanvas2dContext(window.context.cairo,
+      () -> windowRef.context.cairo);
+    #else
+    context = null;
+    #end
+    syncSize();
+    window.onResize.add((_, _) -> syncSize());
+  }
+
+  public function getContext(contextId:String, ?attributes:Dynamic):Dynamic {
+    return context;
+  }
+
+  function syncSize():Void {
+    width = Std.int(window.width * window.scale);
+    height = Std.int(window.height * window.scale);
+    #if (lime && !js && lime_cairo)
+    (cast context : flighthq._internal.backend.NativeCanvas2dContext).resize(width, height);
+    #end
   }
 }
