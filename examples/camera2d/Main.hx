@@ -571,6 +571,7 @@ class Main extends Application {
 
   override public function render(context:RenderContext):Void {
     if (!ready || root == null) return;
+    #if sys
     if (Sys.getEnv('FLIGHT_PERF_FRAMES') != null) {
       if (perfFrames == 0) perfStart = haxe.Timer.stamp();
       perfFrames++;
@@ -581,6 +582,7 @@ class Main extends Application {
         lime.system.System.exit(0);
       }
     }
+    #end
     if (!prepareDisplayObjectRender(renderState, root)) return;
     if (usingCairo) {
       renderCanvasBackground(renderState);
