@@ -285,7 +285,7 @@ class GlParticleEmitter3D {
     gl = _Runtime.field(state, 'gl');
     flighthq._internal.backend.WebGl2Backend.useProgram(gl, _Runtime.field(shader, 'program'));
     flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(shader, 'locViewProjection'), false, _Runtime.field(list, 'viewProjection').m);
-    vm = _Runtime.field(camera, 'view').m;
+    vm = camera.view.m;
     flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(shader, 'locCameraRight'), _Runtime.getIndex(vm, 0.0), _Runtime.getIndex(vm, 4.0), _Runtime.getIndex(vm, 8.0));
     flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(shader, 'locCameraUp'), _Runtime.getIndex(vm, 1.0), _Runtime.getIndex(vm, 5.0), _Runtime.getIndex(vm, 9.0));
     flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.DEPTH_TEST);

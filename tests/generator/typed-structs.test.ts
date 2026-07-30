@@ -20,7 +20,7 @@ const fixtureCandidate: TypedStructCandidate = {
 };
 
 describe('typed struct analysis', () => {
-  it('audits the canonical allowlist without enabling Rectangle or tranche five prematurely', () => {
+  it('enables the eligible allowlist through tranche five while leaving Rectangle dynamic', () => {
     const workspace = path.resolve('.');
     const programAndChecker = upstreamTypeScriptProgram(workspace);
     const report = typedStructRegistry(workspace, 'fixture', undefined, programAndChecker).report;
@@ -31,16 +31,17 @@ describe('typed struct analysis', () => {
     const perspective = report.candidates.find((candidate) => candidate.name === 'PerspectiveProjection');
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 20,
+      auditOnlySchemas: 0,
       bindableAccesses: 3_271,
       candidates: 55,
-      directAccesses: 2_284,
-      directSchemas: 34,
+      directAccesses: 3_271,
+      directSchemas: 54,
       eligible: 54,
       escapes: 154,
       fields: 243,
       ineligible: 1,
-      pendingAccesses: 987,
+      pendingAccesses: 0,
+      reflectiveSurvivors: 152,
     });
     expect(rectangle?.eligible).toBe(false);
     expect(rectangle?.reasons).toContain('presence-sensitive-use');
@@ -54,8 +55,7 @@ describe('typed struct analysis', () => {
     );
     expect(color?.eligible).toBe(true);
     expect(color?.purpose).toContain('RGBA');
-    expect(report.summary.directAccesses).toBe(2_284);
-    expect(report.summary.reflectiveSurvivors).toBe(0);
+    expect(report.summary.directAccesses).toBe(3_271);
     expect(rectangle?.emission).toEqual({
       directAccesses: 0,
       mode: 'direct',
@@ -63,14 +63,27 @@ describe('typed struct analysis', () => {
       reflectiveSurvivors: [],
     });
     expect(camera2D?.emission).toEqual({
-      directAccesses: 0,
-      mode: 'audit-only',
-      pendingAccesses: 17,
+      directAccesses: 17,
+      mode: 'direct',
+      pendingAccesses: 0,
       reflectiveSurvivors: [],
     });
-    expect(transform2DRuntime?.emission.pendingAccesses).toBe(27);
+    expect(transform2DRuntime?.emission).toEqual({
+      directAccesses: 27,
+      mode: 'direct',
+      pendingAccesses: 0,
+      reflectiveSurvivors: [
+        { accesses: 41, reason: 'incompatible-union' },
+        { accesses: 9, reason: 'unknown-member' },
+      ],
+    });
     expect(transform2DRuntime?.escapes).toHaveLength(50);
-    expect(perspective?.emission.pendingAccesses).toBe(7);
+    expect(perspective?.emission).toEqual({
+      directAccesses: 7,
+      mode: 'direct',
+      pendingAccesses: 0,
+      reflectiveSurvivors: [{ accesses: 7, reason: 'incompatible-union' }],
+    });
     expect(perspective?.escapes).toHaveLength(7);
     expect(perspective?.escapes.every((escape) => escape.reason === 'incompatible-union')).toBe(true);
   });

@@ -63,7 +63,7 @@ class ApplyParticleForces {
         _Runtime.setIndex(ApplyParticleForces.accel__applyParticleForces, 0.0, 0.0);
         _Runtime.setIndex(ApplyParticleForces.accel__applyParticleForces, 1.0, 0.0);
         _Runtime.setIndex(ApplyParticleForces.accel__applyParticleForces, 2.0, 0.0);
-        _Runtime.callValue(ApplyParticleForces.accumulateForces__applyParticleForces, cast ([forces, _Runtime.field(_Runtime.getIndex(objects, i), 'x'), _Runtime.field(_Runtime.getIndex(objects, i), 'y'), 0.0, _Runtime.getIndex(velocities, vt), _Runtime.getIndex(velocities, (vt + 1.0)), 0.0, ApplyParticleForces.accel__applyParticleForces] : Array<Dynamic>));
+        _Runtime.callValue(ApplyParticleForces.accumulateForces__applyParticleForces, cast ([forces, _Runtime.getIndex(objects, i).x, _Runtime.getIndex(objects, i).y, 0.0, _Runtime.getIndex(velocities, vt), _Runtime.getIndex(velocities, (vt + 1.0)), 0.0, ApplyParticleForces.accel__applyParticleForces] : Array<Dynamic>));
         _Runtime.setIndex(velocities, vt, (_Runtime.getIndex(velocities, vt) + (_Runtime.getIndex(ApplyParticleForces.accel__applyParticleForces, 0.0) * deltaTime)));
         _Runtime.setIndex(velocities, (vt + 1.0), (_Runtime.getIndex(velocities, (vt + 1.0)) + (_Runtime.getIndex(ApplyParticleForces.accel__applyParticleForces, 1.0) * deltaTime)));
         i++;

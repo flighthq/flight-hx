@@ -42,18 +42,18 @@ class Ray3d {
     var denom:Dynamic = cast _Runtime.UNDEFINED;
     var ta:Float = cast _Runtime.UNDEFINED;
     var tb:Float = cast _Runtime.UNDEFINED;
-    aox = _Runtime.field(a, 'origin').x;
-    aoy = _Runtime.field(a, 'origin').y;
-    aoz = _Runtime.field(a, 'origin').z;
-    adx = _Runtime.field(a, 'direction').x;
-    ady = _Runtime.field(a, 'direction').y;
-    adz = _Runtime.field(a, 'direction').z;
-    box = _Runtime.field(b, 'origin').x;
-    boy = _Runtime.field(b, 'origin').y;
-    boz = _Runtime.field(b, 'origin').z;
-    bdx = _Runtime.field(b, 'direction').x;
-    bdy = _Runtime.field(b, 'direction').y;
-    bdz = _Runtime.field(b, 'direction').z;
+    aox = a.origin.x;
+    aoy = a.origin.y;
+    aoz = a.origin.z;
+    adx = a.direction.x;
+    ady = a.direction.y;
+    adz = a.direction.z;
+    box = b.origin.x;
+    boy = b.origin.y;
+    boz = b.origin.z;
+    bdx = b.direction.x;
+    bdy = b.direction.y;
+    bdz = b.direction.z;
     aa = (((adx * adx) + (ady * ady)) + (adz * adz));
     bb = (((bdx * bdx) + (bdy * bdy)) + (bdz * bdz));
     ab = (((adx * bdx) + (ady * bdy)) + (adz * bdz));
@@ -95,12 +95,12 @@ class Ray3d {
     var pz:Dynamic = cast _Runtime.UNDEFINED;
     var lenSq:Dynamic = cast _Runtime.UNDEFINED;
     var t:Dynamic = cast _Runtime.UNDEFINED;
-    ox = _Runtime.field(ray, 'origin').x;
-    oy = _Runtime.field(ray, 'origin').y;
-    oz = _Runtime.field(ray, 'origin').z;
-    dx = _Runtime.field(ray, 'direction').x;
-    dy = _Runtime.field(ray, 'direction').y;
-    dz = _Runtime.field(ray, 'direction').z;
+    ox = ray.origin.x;
+    oy = ray.origin.y;
+    oz = ray.origin.z;
+    dx = ray.direction.x;
+    dy = ray.direction.y;
+    dz = ray.direction.z;
     px = point.x;
     py = point.y;
     pz = point.z;
@@ -119,12 +119,12 @@ class Ray3d {
     var dx:Dynamic = cast _Runtime.UNDEFINED;
     var dy:Dynamic = cast _Runtime.UNDEFINED;
     var dz:Dynamic = cast _Runtime.UNDEFINED;
-    ox = _Runtime.field(ray, 'origin').x;
-    oy = _Runtime.field(ray, 'origin').y;
-    oz = _Runtime.field(ray, 'origin').z;
-    dx = _Runtime.field(ray, 'direction').x;
-    dy = _Runtime.field(ray, 'direction').y;
-    dz = _Runtime.field(ray, 'direction').z;
+    ox = ray.origin.x;
+    oy = ray.origin.y;
+    oz = ray.origin.z;
+    dx = ray.direction.x;
+    dy = ray.direction.y;
+    dz = ray.direction.z;
     (out.x = cast ((ox + (dx * t)) : Dynamic));
     (out.y = cast ((oy + (dy * t)) : Dynamic));
     (out.z = cast ((oz + (dz * t)) : Dynamic));
@@ -139,18 +139,18 @@ class Ray3d {
     var dz:Dynamic = cast _Runtime.UNDEFINED;
     var tMin:Dynamic = cast _Runtime.UNDEFINED;
     var tMax:Dynamic = cast _Runtime.UNDEFINED;
-    ox = _Runtime.field(ray, 'origin').x;
-    oy = _Runtime.field(ray, 'origin').y;
-    oz = _Runtime.field(ray, 'origin').z;
-    dx = _Runtime.field(ray, 'direction').x;
-    dy = _Runtime.field(ray, 'direction').y;
-    dz = _Runtime.field(ray, 'direction').z;
+    ox = ray.origin.x;
+    oy = ray.origin.y;
+    oz = ray.origin.z;
+    dx = ray.direction.x;
+    dy = ray.direction.y;
+    dz = ray.direction.z;
     tMin = 0.0;
     tMax = HxMath.POSITIVE_INFINITY;
     if (_Runtime.truthy(!_Runtime.strictEquals(dx, 0.0))) {
       var invDx:Dynamic = (1.0 / dx);
-      var t1:Dynamic = ((_Runtime.field(aabb, 'min').x - ox) * invDx);
-      var t2:Dynamic = ((_Runtime.field(aabb, 'max').x - ox) * invDx);
+      var t1:Dynamic = ((aabb.min.x - ox) * invDx);
+      var t2:Dynamic = ((aabb.max.x - ox) * invDx);
       if (_Runtime.truthy(_Runtime.compare(t1, t2, '>'))) {
         var tmp:Dynamic = t1;
         (t1 = cast (t2 : Dynamic));
@@ -159,13 +159,13 @@ class Ray3d {
       (tMin = cast (HxMath.max(tMin, t1) : Dynamic));
       (tMax = cast (HxMath.min(tMax, t2) : Dynamic));
       if (_Runtime.truthy(_Runtime.compare(tMin, tMax, '>'))) { return cast -1.0; }
-    } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(ox, _Runtime.field(aabb, 'min').x, '<'), function():Dynamic return cast _Runtime.compare(ox, _Runtime.field(aabb, 'max').x, '>')))) {
+    } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(ox, aabb.min.x, '<'), function():Dynamic return cast _Runtime.compare(ox, aabb.max.x, '>')))) {
       return cast -1.0;
     } }
     if (_Runtime.truthy(!_Runtime.strictEquals(dy, 0.0))) {
       var invDy:Dynamic = (1.0 / dy);
-      var t1:Dynamic = ((_Runtime.field(aabb, 'min').y - oy) * invDy);
-      var t2:Dynamic = ((_Runtime.field(aabb, 'max').y - oy) * invDy);
+      var t1:Dynamic = ((aabb.min.y - oy) * invDy);
+      var t2:Dynamic = ((aabb.max.y - oy) * invDy);
       if (_Runtime.truthy(_Runtime.compare(t1, t2, '>'))) {
         var tmp:Dynamic = t1;
         (t1 = cast (t2 : Dynamic));
@@ -174,13 +174,13 @@ class Ray3d {
       (tMin = cast (HxMath.max(tMin, t1) : Dynamic));
       (tMax = cast (HxMath.min(tMax, t2) : Dynamic));
       if (_Runtime.truthy(_Runtime.compare(tMin, tMax, '>'))) { return cast -1.0; }
-    } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(oy, _Runtime.field(aabb, 'min').y, '<'), function():Dynamic return cast _Runtime.compare(oy, _Runtime.field(aabb, 'max').y, '>')))) {
+    } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(oy, aabb.min.y, '<'), function():Dynamic return cast _Runtime.compare(oy, aabb.max.y, '>')))) {
       return cast -1.0;
     } }
     if (_Runtime.truthy(!_Runtime.strictEquals(dz, 0.0))) {
       var invDz:Dynamic = (1.0 / dz);
-      var t1:Dynamic = ((_Runtime.field(aabb, 'min').z - oz) * invDz);
-      var t2:Dynamic = ((_Runtime.field(aabb, 'max').z - oz) * invDz);
+      var t1:Dynamic = ((aabb.min.z - oz) * invDz);
+      var t2:Dynamic = ((aabb.max.z - oz) * invDz);
       if (_Runtime.truthy(_Runtime.compare(t1, t2, '>'))) {
         var tmp:Dynamic = t1;
         (t1 = cast (t2 : Dynamic));
@@ -189,7 +189,7 @@ class Ray3d {
       (tMin = cast (HxMath.max(tMin, t1) : Dynamic));
       (tMax = cast (HxMath.min(tMax, t2) : Dynamic));
       if (_Runtime.truthy(_Runtime.compare(tMin, tMax, '>'))) { return cast -1.0; }
-    } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(oz, _Runtime.field(aabb, 'min').z, '<'), function():Dynamic return cast _Runtime.compare(oz, _Runtime.field(aabb, 'max').z, '>')))) {
+    } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(oz, aabb.min.z, '<'), function():Dynamic return cast _Runtime.compare(oz, aabb.max.z, '>')))) {
       return cast -1.0;
     } }
     return cast tMin;
@@ -199,9 +199,9 @@ class Ray3d {
   public static function intersectRay3DPlane(ray:Ray3DLike, plane:PlaneLike):Float {
     var denom:Dynamic = cast _Runtime.UNDEFINED;
     var t:Dynamic = cast _Runtime.UNDEFINED;
-    denom = (((_Runtime.field(plane, 'a') * _Runtime.field(ray, 'direction').x) + (_Runtime.field(plane, 'b') * _Runtime.field(ray, 'direction').y)) + (_Runtime.field(plane, 'c') * _Runtime.field(ray, 'direction').z));
+    denom = (((plane.a * ray.direction.x) + (plane.b * ray.direction.y)) + (plane.c * ray.direction.z));
     if (_Runtime.truthy(_Runtime.compare(HxMath.abs(denom), 1e-10, '<'))) { return cast -1.0; }
-    t = (-((((_Runtime.field(plane, 'a') * _Runtime.field(ray, 'origin').x) + (_Runtime.field(plane, 'b') * _Runtime.field(ray, 'origin').y)) + (_Runtime.field(plane, 'c') * _Runtime.field(ray, 'origin').z)) + _Runtime.field(plane, 'd')) / denom);
+    t = (-((((plane.a * ray.origin.x) + (plane.b * ray.origin.y)) + (plane.c * ray.origin.z)) + plane.d) / denom);
     return cast _Runtime.select(_Runtime.compare(t, 0.0, '>='), function():Dynamic return cast t, function():Dynamic return cast -1.0);
     return cast null;
   }
@@ -220,17 +220,17 @@ class Ray3d {
     var sqrtDisc:Dynamic = cast _Runtime.UNDEFINED;
     var t:Dynamic = cast _Runtime.UNDEFINED;
     var t2:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(sphere, 'radius'), 0.0, '<'))) { return cast -1.0; }
-    ox = (_Runtime.field(ray, 'origin').x - _Runtime.field(sphere, 'center').x);
-    oy = (_Runtime.field(ray, 'origin').y - _Runtime.field(sphere, 'center').y);
-    oz = (_Runtime.field(ray, 'origin').z - _Runtime.field(sphere, 'center').z);
-    dx = _Runtime.field(ray, 'direction').x;
-    dy = _Runtime.field(ray, 'direction').y;
-    dz = _Runtime.field(ray, 'direction').z;
+    if (_Runtime.truthy(_Runtime.compare(sphere.radius, 0.0, '<'))) { return cast -1.0; }
+    ox = (ray.origin.x - sphere.center.x);
+    oy = (ray.origin.y - sphere.center.y);
+    oz = (ray.origin.z - sphere.center.z);
+    dx = ray.direction.x;
+    dy = ray.direction.y;
+    dz = ray.direction.z;
     a = (((dx * dx) + (dy * dy)) + (dz * dz));
     if (_Runtime.truthy(_Runtime.strictEquals(a, 0.0))) { return cast -1.0; }
     b = (((ox * dx) + (oy * dy)) + (oz * dz));
-    c = ((((ox * ox) + (oy * oy)) + (oz * oz)) - (_Runtime.field(sphere, 'radius') * _Runtime.field(sphere, 'radius')));
+    c = ((((ox * ox) + (oy * oy)) + (oz * oz)) - (sphere.radius * sphere.radius));
     disc = ((b * b) - (a * c));
     if (_Runtime.truthy(_Runtime.compare(disc, 0.0, '<'))) { return cast -1.0; }
     sqrtDisc = HxMath.sqrt(disc);
@@ -271,18 +271,18 @@ class Ray3d {
     e2x = (c.x - a.x);
     e2y = (c.y - a.y);
     e2z = (c.z - a.z);
-    dx = _Runtime.field(ray, 'direction').x;
-    dy = _Runtime.field(ray, 'direction').y;
-    dz = _Runtime.field(ray, 'direction').z;
+    dx = ray.direction.x;
+    dy = ray.direction.y;
+    dz = ray.direction.z;
     hx = ((dy * e2z) - (dz * e2y));
     hy = ((dz * e2x) - (dx * e2z));
     hz = ((dx * e2y) - (dy * e2x));
     det = (((e1x * hx) + (e1y * hy)) + (e1z * hz));
     if (_Runtime.truthy(_Runtime.compare(HxMath.abs(det), 1e-10, '<'))) { return cast -1.0; }
     invDet = (1.0 / det);
-    sx = (_Runtime.field(ray, 'origin').x - a.x);
-    sy = (_Runtime.field(ray, 'origin').y - a.y);
-    sz = (_Runtime.field(ray, 'origin').z - a.z);
+    sx = (ray.origin.x - a.x);
+    sy = (ray.origin.y - a.y);
+    sz = (ray.origin.z - a.z);
     u = ((((sx * hx) + (sy * hy)) + (sz * hz)) * invDet);
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(u, 0.0, '<'), function():Dynamic return cast _Runtime.compare(u, 1.0, '>')))) { return cast -1.0; }
     qx = ((sy * e1z) - (sz * e1y));
@@ -308,11 +308,11 @@ class Ray3d {
     dx = direction.x;
     dy = direction.y;
     dz = direction.z;
-    (_Runtime.field(out, 'origin').x = cast (ox : Dynamic));
-    (_Runtime.field(out, 'origin').y = cast (oy : Dynamic));
-    (_Runtime.field(out, 'origin').z = cast (oz : Dynamic));
-    (_Runtime.field(out, 'direction').x = cast (dx : Dynamic));
-    (_Runtime.field(out, 'direction').y = cast (dy : Dynamic));
-    (_Runtime.field(out, 'direction').z = cast (dz : Dynamic));
+    (out.origin.x = cast (ox : Dynamic));
+    (out.origin.y = cast (oy : Dynamic));
+    (out.origin.z = cast (oz : Dynamic));
+    (out.direction.x = cast (dx : Dynamic));
+    (out.direction.y = cast (dy : Dynamic));
+    (out.direction.z = cast (dz : Dynamic));
   }
 }

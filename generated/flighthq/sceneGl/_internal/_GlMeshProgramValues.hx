@@ -113,14 +113,14 @@ class _GlMeshProgramValues {
   }
 
   public static function setGlMeshCameraPosition(gl:Dynamic, locCameraPosition:Null<Dynamic>, camera:Camera):Void {
-    _Runtime.callValue(inverseMatrix4, cast ([_GlMeshProgramValues.scratchInverseView__glMeshProgram, _Runtime.field(camera, 'view')] : Array<Dynamic>));
+    _Runtime.callValue(inverseMatrix4, cast ([_GlMeshProgramValues.scratchInverseView__glMeshProgram, camera.view] : Array<Dynamic>));
     _Runtime.callValue(getMatrix4Position, cast ([_GlMeshProgramValues.scratchCameraPosition__glMeshProgram, _GlMeshProgramValues.scratchInverseView__glMeshProgram] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.uniform3f(gl, locCameraPosition, _Runtime.field(_GlMeshProgramValues.scratchCameraPosition__glMeshProgram, 'x'), _Runtime.field(_GlMeshProgramValues.scratchCameraPosition__glMeshProgram, 'y'), _Runtime.field(_GlMeshProgramValues.scratchCameraPosition__glMeshProgram, 'z'));
   }
 
   public static function setGlMeshViewProjection(gl:Dynamic, locViewProjection:Null<Dynamic>, camera:Camera):Void {
     var aspect:Dynamic = cast _Runtime.UNDEFINED;
-    aspect = _Runtime.select(_Runtime.strictEquals(_Runtime.field(_Runtime.field(camera, 'projection'), 'kind'), 'perspective'), function():Dynamic return cast _Runtime.field(_Runtime.field(camera, 'projection'), 'aspect'), function():Dynamic return cast 1.0);
+    aspect = _Runtime.select(_Runtime.strictEquals(_Runtime.field(camera.projection, 'kind'), 'perspective'), function():Dynamic return cast camera.projection.aspect, function():Dynamic return cast 1.0);
     _Runtime.callValue(getCameraViewProjectionMatrix4, cast ([_GlMeshProgramValues.scratchViewProjection__glMeshProgram, camera, _Runtime.select(!_Runtime.strictEquals(aspect, 0.0), function():Dynamic return cast aspect, function():Dynamic return cast 1.0)] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, locViewProjection, false, _GlMeshProgramValues.scratchViewProjection__glMeshProgram.m);
   }

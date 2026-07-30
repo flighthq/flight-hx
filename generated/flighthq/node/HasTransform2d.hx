@@ -9,22 +9,22 @@ import flighthq.types.MethodsOf;
 
 class HasTransform2d {
   public static function initTransform2DRuntimeTrait(target:HasTransform2DRuntime, ?_methods:Dynamic):Void {
-    _Runtime.setField(target, 'localMatrix', null);
-    _Runtime.setField(target, 'rotationAngle', 0.0);
-    _Runtime.setField(target, 'rotationCosine', 1.0);
-    _Runtime.setField(target, 'rotationSine', 0.0);
-    _Runtime.setField(target, 'worldMatrix', null);
+    (target.localMatrix = cast (null : Dynamic));
+    (target.rotationAngle = cast (0.0 : Dynamic));
+    (target.rotationCosine = cast (1.0 : Dynamic));
+    (target.rotationSine = cast (0.0 : Dynamic));
+    (target.worldMatrix = cast (null : Dynamic));
   }
 
   public static function initTransform2DTrait(target:HasTransform2D, ?obj:Dynamic):Void {
-    _Runtime.setField(target, 'pivotX', _Runtime.coalesce(_Runtime.optionalField(obj, 'pivotX'), function():Dynamic return cast 0.0));
-    _Runtime.setField(target, 'pivotY', _Runtime.coalesce(_Runtime.optionalField(obj, 'pivotY'), function():Dynamic return cast 0.0));
-    _Runtime.setField(target, 'rotation', _Runtime.coalesce(_Runtime.optionalField(obj, 'rotation'), function():Dynamic return cast 0.0));
-    _Runtime.setField(target, 'scaleX', _Runtime.coalesce(_Runtime.optionalField(obj, 'scaleX'), function():Dynamic return cast 1.0));
-    _Runtime.setField(target, 'scaleY', _Runtime.coalesce(_Runtime.optionalField(obj, 'scaleY'), function():Dynamic return cast 1.0));
-    _Runtime.setField(target, 'skewX', _Runtime.coalesce(_Runtime.optionalField(obj, 'skewX'), function():Dynamic return cast 0.0));
-    _Runtime.setField(target, 'skewY', _Runtime.coalesce(_Runtime.optionalField(obj, 'skewY'), function():Dynamic return cast 0.0));
-    _Runtime.setField(target, 'x', _Runtime.coalesce(_Runtime.optionalField(obj, 'x'), function():Dynamic return cast 0.0));
-    _Runtime.setField(target, 'y', _Runtime.coalesce(_Runtime.optionalField(obj, 'y'), function():Dynamic return cast 0.0));
+    (target.pivotX = cast (_Runtime.coalesce(_Runtime.optionalField(obj, 'pivotX'), function():Dynamic return cast 0.0) : Dynamic));
+    (target.pivotY = cast (_Runtime.coalesce(_Runtime.optionalField(obj, 'pivotY'), function():Dynamic return cast 0.0) : Dynamic));
+    (target.rotation = cast (_Runtime.coalesce(_Runtime.optionalField(obj, 'rotation'), function():Dynamic return cast 0.0) : Dynamic));
+    (target.scaleX = cast (_Runtime.coalesce(_Runtime.optionalField(obj, 'scaleX'), function():Dynamic return cast 1.0) : Dynamic));
+    (target.scaleY = cast (_Runtime.coalesce(_Runtime.optionalField(obj, 'scaleY'), function():Dynamic return cast 1.0) : Dynamic));
+    (target.skewX = cast (_Runtime.coalesce(_Runtime.optionalField(obj, 'skewX'), function():Dynamic return cast 0.0) : Dynamic));
+    (target.skewY = cast (_Runtime.coalesce(_Runtime.optionalField(obj, 'skewY'), function():Dynamic return cast 0.0) : Dynamic));
+    (target.x = cast (_Runtime.coalesce(_Runtime.optionalField(obj, 'x'), function():Dynamic return cast 0.0) : Dynamic));
+    (target.y = cast (_Runtime.coalesce(_Runtime.optionalField(obj, 'y'), function():Dynamic return cast 0.0) : Dynamic));
   }
 }

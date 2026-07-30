@@ -30,7 +30,7 @@ class SceneNodeBounds {
         _Runtime.callValue(computeMeshGeometryBounds, cast ([SceneNodeBounds._scratchLocalAabb__sceneNodeBounds, geom] : Array<Dynamic>));
         (localBounds = cast (SceneNodeBounds._scratchLocalAabb__sceneNodeBounds : Dynamic));
       }
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(localBounds, 'min').x, _Runtime.field(localBounds, 'max').x, '<='))) {
+      if (_Runtime.truthy(_Runtime.compare(localBounds.min.x, localBounds.max.x, '<='))) {
         _Runtime.callValue(ensureNodeWorldMatrix4, cast ([node] : Array<Dynamic>));
         var worldMatrix:Dynamic = _Runtime.callValue(getNodeWorldMatrix4, cast ([node] : Array<Dynamic>));
         _Runtime.callValue(transformAabbByMatrix4, cast ([SceneNodeBounds._scratchWorldAabb__sceneNodeBounds, localBounds, worldMatrix] : Array<Dynamic>));

@@ -93,13 +93,13 @@ class BoundsRectangle {
 
   public static function getNodeLocalBoundsRectangle<Traits>(target:BoundsNode<Traits>):Rectangle {
     _Runtime.callValue(ensureNodeLocalBoundsRectangle, cast ([target] : Array<Dynamic>));
-    return cast _Runtime.field((cast _Runtime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : HasBoundsRectangleRuntime), 'localBoundsRectangle');
+    return cast (cast _Runtime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : HasBoundsRectangleRuntime).localBoundsRectangle;
     return cast null;
   }
 
   public static function getNodeParentBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Rectangle {
     _Runtime.callValue(ensureNodeParentBoundsRectangle, cast ([target] : Array<Dynamic>));
-    return cast _Runtime.field((cast _Runtime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : HasBoundsRectangleRuntime), 'boundsRectangle');
+    return cast (cast _Runtime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : HasBoundsRectangleRuntime).boundsRectangle;
     return cast null;
   }
 
@@ -111,32 +111,32 @@ class BoundsRectangle {
 
   public static function getNodeWorldBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Rectangle {
     _Runtime.callValue(ensureNodeWorldBoundsRectangle, cast ([target] : Array<Dynamic>));
-    return cast _Runtime.field((cast _Runtime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : HasBoundsRectangleRuntime), 'worldBoundsRectangle');
+    return cast (cast _Runtime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : HasBoundsRectangleRuntime).worldBoundsRectangle;
     return cast null;
   }
 
   public static function setNodeHeight<Traits>(target:Spatial2DNode<Traits>, value:Float):Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(target, 'scaleY'), 0.0))) { return; }
-    _Runtime.setField(target, 'scaleY', ((value * _Runtime.field(target, 'scaleY')) / _Runtime.callValue(getNodeHeight, cast ([target] : Array<Dynamic>))));
+    if (_Runtime.truthy(_Runtime.strictEquals(target.scaleY, 0.0))) { return; }
+    (target.scaleY = cast (((value * target.scaleY) / _Runtime.callValue(getNodeHeight, cast ([target] : Array<Dynamic>))) : Dynamic));
     _Runtime.callValue(invalidateNodeLocalTransform, cast ([target] : Array<Dynamic>));
   }
 
   public static function setNodeWidth<Traits>(target:Spatial2DNode<Traits>, value:Float):Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(target, 'scaleX'), 0.0))) { return; }
-    _Runtime.setField(target, 'scaleX', ((value * _Runtime.field(target, 'scaleX')) / _Runtime.callValue(getNodeWidth, cast ([target] : Array<Dynamic>))));
+    if (_Runtime.truthy(_Runtime.strictEquals(target.scaleX, 0.0))) { return; }
+    (target.scaleX = cast (((value * target.scaleX) / _Runtime.callValue(getNodeWidth, cast ([target] : Array<Dynamic>))) : Dynamic));
     _Runtime.callValue(invalidateNodeLocalTransform, cast ([target] : Array<Dynamic>));
   }
 
   public static function recomputeNodeBoundsRectangle__boundsRectangle<Traits>(target:Spatial2DNode<Traits>, runtime:Dynamic):Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'boundsRectangle'), null))) { _Runtime.setField(runtime, 'boundsRectangle', _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>))); }
-    _Runtime.callValue(matrixTransformRectangle, cast ([_Runtime.field(runtime, 'boundsRectangle'), _Runtime.callValue(getNodeLocalMatrix, cast ([target] : Array<Dynamic>)), _Runtime.callValue(getNodeLocalBoundsRectangle, cast ([target] : Array<Dynamic>))] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.strictEquals(runtime.boundsRectangle, null))) { (runtime.boundsRectangle = cast (_Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    _Runtime.callValue(matrixTransformRectangle, cast ([runtime.boundsRectangle, _Runtime.callValue(getNodeLocalMatrix, cast ([target] : Array<Dynamic>)), _Runtime.callValue(getNodeLocalBoundsRectangle, cast ([target] : Array<Dynamic>))] : Array<Dynamic>));
     _Runtime.setField(runtime, 'boundsUsingLocalBoundsId', _Runtime.field(runtime, 'localBoundsId'));
     _Runtime.setField(runtime, 'boundsUsingLocalTransformId', _Runtime.field(runtime, 'localTransformId'));
   }
 
   public static function recomputeLocalBoundsRectangle__boundsRectangle<Traits>(target:BoundsNode<Traits>, runtime:Dynamic):Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'localBoundsRectangle'), null))) { _Runtime.setField(runtime, 'localBoundsRectangle', _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>))); }
-    _Runtime.callProperty(runtime, 'computeLocalBoundsRectangle', cast ([_Runtime.field(runtime, 'localBoundsRectangle'), target] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.strictEquals(runtime.localBoundsRectangle, null))) { (runtime.localBoundsRectangle = cast (_Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    _Runtime.callValue(runtime.computeLocalBoundsRectangle, cast ([runtime.localBoundsRectangle, target] : Array<Dynamic>));
     _Runtime.setField(runtime, 'localBoundsUsingLocalBoundsId', _Runtime.field(runtime, 'localBoundsId'));
   }
 

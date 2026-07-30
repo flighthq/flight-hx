@@ -1,6 +1,6 @@
 # Typed Struct Lowering Proposal
 
-Status: design approved; schema analysis, IR binding, and direct expression emission for the six audit-eligible leaf schemas are enabled. `Rectangle` remains dynamic because of presence-sensitive use.
+Status: design approved; schema analysis, declaration-owned IR binding, and direct expression emission for 54 eligible schemas through migration tranches 1–3 are enabled. `Rectangle` remains dynamic because of presence-sensitive use.
 
 ## Goal
 
@@ -138,7 +138,8 @@ Implementation should be split into reviewable phases:
 1. Add schema analysis and a checked-in audit report without changing emitted expressions. Authorized.
 2. Add IR bindings and negative tests for unknown, readonly, computed, union, and presence-sensitive access. Authorized.
 3. Enable the six audit-eligible leaf schemas and regenerate. Authorized and implemented after review of the phase-1 audit.
-4. Expand through the migration order only after each prior tranche passes.
+4. Expand through the small-record and hot transform/bounds/camera tranches. Authorized and implemented after separate audit and mechanism reviews.
+5. Continue through the migration order only after each prior tranche passes.
 
 Every phase runs generator unit tests, `npm run generate:check`, `npm run test:haxe:all`, the portability matrix, and all 131 upstream Vitest suites. A tranche is incomplete if a migrated schema still reaches `_Runtime.field`, `_Runtime.setField`, or `_Runtime.hasField` at an allowlisted source site.
 

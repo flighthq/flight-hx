@@ -64,15 +64,15 @@ class ApplyParticleCollisions {
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(objects, 'length'), '<'))) {
         if (_Runtime.truthy(_Runtime.compare(_Runtime.getIndex(lifetimes, ((i * 2.0) + 1.0)), 0.0, '<='))) { i++; continue; }
         var vt:Dynamic = (i * 2.0);
-        _Runtime.setIndex(ApplyParticleCollisions.s__applyParticleCollisions, 0.0, _Runtime.field(_Runtime.getIndex(objects, i), 'x'));
-        _Runtime.setIndex(ApplyParticleCollisions.s__applyParticleCollisions, 1.0, _Runtime.field(_Runtime.getIndex(objects, i), 'y'));
+        _Runtime.setIndex(ApplyParticleCollisions.s__applyParticleCollisions, 0.0, _Runtime.getIndex(objects, i).x);
+        _Runtime.setIndex(ApplyParticleCollisions.s__applyParticleCollisions, 1.0, _Runtime.getIndex(objects, i).y);
         _Runtime.setIndex(ApplyParticleCollisions.s__applyParticleCollisions, 2.0, 0.0);
         _Runtime.setIndex(ApplyParticleCollisions.s__applyParticleCollisions, 3.0, _Runtime.getIndex(velocities, vt));
         _Runtime.setIndex(ApplyParticleCollisions.s__applyParticleCollisions, 4.0, _Runtime.getIndex(velocities, (vt + 1.0)));
         _Runtime.setIndex(ApplyParticleCollisions.s__applyParticleCollisions, 5.0, 0.0);
         if (_Runtime.truthy(_Runtime.callValue(ApplyParticleCollisions.resolveColliders__applyParticleCollisions, cast ([colliders, ApplyParticleCollisions.s__applyParticleCollisions] : Array<Dynamic>)))) {
-          _Runtime.setField(_Runtime.getIndex(objects, i), 'x', _Runtime.getIndex(ApplyParticleCollisions.s__applyParticleCollisions, 0.0));
-          _Runtime.setField(_Runtime.getIndex(objects, i), 'y', _Runtime.getIndex(ApplyParticleCollisions.s__applyParticleCollisions, 1.0));
+          (_Runtime.getIndex(objects, i).x = cast (_Runtime.getIndex(ApplyParticleCollisions.s__applyParticleCollisions, 0.0) : Dynamic));
+          (_Runtime.getIndex(objects, i).y = cast (_Runtime.getIndex(ApplyParticleCollisions.s__applyParticleCollisions, 1.0) : Dynamic));
           _Runtime.setIndex(velocities, vt, _Runtime.getIndex(ApplyParticleCollisions.s__applyParticleCollisions, 3.0));
           _Runtime.setIndex(velocities, (vt + 1.0), _Runtime.getIndex(ApplyParticleCollisions.s__applyParticleCollisions, 4.0));
         }

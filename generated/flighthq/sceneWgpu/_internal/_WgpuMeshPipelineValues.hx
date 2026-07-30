@@ -499,7 +499,7 @@ class _WgpuMeshPipelineValues {
     _Runtime.callValue(ensureWgpuFrameBindGroup, cast ([state] : Array<Dynamic>));
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
     f = _WgpuMeshPipelineValues._frameScratch__wgpuMeshPipeline;
-    aspect = _Runtime.select(_Runtime.strictEquals(_Runtime.field(_Runtime.field(camera, 'projection'), 'kind'), 'perspective'), function():Dynamic return cast _Runtime.field(_Runtime.field(camera, 'projection'), 'aspect'), function():Dynamic return cast 1.0);
+    aspect = _Runtime.select(_Runtime.strictEquals(_Runtime.field(camera.projection, 'kind'), 'perspective'), function():Dynamic return cast camera.projection.aspect, function():Dynamic return cast 1.0);
     _Runtime.callValue(getCameraViewProjectionMatrix4, cast ([_WgpuMeshPipelineValues.scratchViewProjection__wgpuMeshPipeline, camera, _Runtime.select(!_Runtime.strictEquals(aspect, 0.0), function():Dynamic return cast aspect, function():Dynamic return cast 1.0)] : Array<Dynamic>));
     vp = _WgpuMeshPipelineValues.scratchViewProjection__wgpuMeshPipeline.m;
     {
@@ -509,7 +509,7 @@ class _WgpuMeshPipelineValues {
         i++;
       }
     }
-    _Runtime.callValue(inverseMatrix4, cast ([_WgpuMeshPipelineValues.scratchInverseView__wgpuMeshPipeline, _Runtime.field(camera, 'view')] : Array<Dynamic>));
+    _Runtime.callValue(inverseMatrix4, cast ([_WgpuMeshPipelineValues.scratchInverseView__wgpuMeshPipeline, camera.view] : Array<Dynamic>));
     _Runtime.callValue(getMatrix4Position, cast ([_WgpuMeshPipelineValues.scratchCameraPosition__wgpuMeshPipeline, _WgpuMeshPipelineValues.scratchInverseView__wgpuMeshPipeline] : Array<Dynamic>));
     _Runtime.setIndex(f, 16.0, _Runtime.field(_WgpuMeshPipelineValues.scratchCameraPosition__wgpuMeshPipeline, 'x'));
     _Runtime.setIndex(f, 17.0, _Runtime.field(_WgpuMeshPipelineValues.scratchCameraPosition__wgpuMeshPipeline, 'y'));
@@ -528,7 +528,7 @@ class _WgpuMeshPipelineValues {
     _Runtime.setIndex(f, 29.0, _Runtime.getIndex(data, 9.0));
     _Runtime.setIndex(f, 30.0, _Runtime.getIndex(data, 10.0));
     _Runtime.setIndex(f, 31.0, _Runtime.field(lights, 'ambientCount'));
-    view = _Runtime.field(camera, 'view').m;
+    view = camera.view.m;
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, 16.0, '<'))) {

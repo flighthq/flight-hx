@@ -74,7 +74,7 @@ class BillboardCamera {
     var rl:Dynamic = cast _Runtime.UNDEFINED;
     var ul:Dynamic = cast _Runtime.UNDEFINED;
     var bl:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(inverseMatrix4, cast ([BillboardCamera._cameraWorld__billboardCamera, _Runtime.field(camera, 'view')] : Array<Dynamic>));
+    _Runtime.callValue(inverseMatrix4, cast ([BillboardCamera._cameraWorld__billboardCamera, camera.view] : Array<Dynamic>));
     m = BillboardCamera._cameraWorld__billboardCamera.m;
     (BillboardCamera._cameraEyeX__billboardCamera = cast (_Runtime.getIndex(m, 12.0) : Dynamic));
     (BillboardCamera._cameraEyeY__billboardCamera = cast (_Runtime.getIndex(m, 13.0) : Dynamic));

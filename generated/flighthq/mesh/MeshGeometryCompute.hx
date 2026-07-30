@@ -26,10 +26,10 @@ class MeshGeometryCompute {
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
     vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
     if (_Runtime.truthy(_Runtime.strictEquals(vertexCount, 0.0))) {
-      (_Runtime.field(out, 'center').x = cast (0.0 : Dynamic));
-      (_Runtime.field(out, 'center').y = cast (0.0 : Dynamic));
-      (_Runtime.field(out, 'center').z = cast (0.0 : Dynamic));
-      _Runtime.setField(out, 'radius', -1.0);
+      (out.center.x = cast (0.0 : Dynamic));
+      (out.center.y = cast (0.0 : Dynamic));
+      (out.center.z = cast (0.0 : Dynamic));
+      (out.radius = cast (-1.0 : Dynamic));
       return;
     }
     minX = HxMath.POSITIVE_INFINITY;
@@ -70,10 +70,10 @@ class MeshGeometryCompute {
         i++;
       }
     }
-    (_Runtime.field(out, 'center').x = cast (cx : Dynamic));
-    (_Runtime.field(out, 'center').y = cast (cy : Dynamic));
-    (_Runtime.field(out, 'center').z = cast (cz : Dynamic));
-    _Runtime.setField(out, 'radius', HxMath.sqrt(radiusSq));
+    (out.center.x = cast (cx : Dynamic));
+    (out.center.y = cast (cy : Dynamic));
+    (out.center.z = cast (cz : Dynamic));
+    (out.radius = cast (HxMath.sqrt(radiusSq) : Dynamic));
   }
 
   public static function computeMeshGeometryBounds(out:AabbLike, geometry:MeshGeometry):Void {
@@ -111,12 +111,12 @@ class MeshGeometryCompute {
         i++;
       }
     }
-    (_Runtime.field(out, 'min').x = cast (minX : Dynamic));
-    (_Runtime.field(out, 'min').y = cast (minY : Dynamic));
-    (_Runtime.field(out, 'min').z = cast (minZ : Dynamic));
-    (_Runtime.field(out, 'max').x = cast (maxX : Dynamic));
-    (_Runtime.field(out, 'max').y = cast (maxY : Dynamic));
-    (_Runtime.field(out, 'max').z = cast (maxZ : Dynamic));
+    (out.min.x = cast (minX : Dynamic));
+    (out.min.y = cast (minY : Dynamic));
+    (out.min.z = cast (minZ : Dynamic));
+    (out.max.x = cast (maxX : Dynamic));
+    (out.max.y = cast (maxY : Dynamic));
+    (out.max.z = cast (maxZ : Dynamic));
   }
 
   public static function computeMeshGeometryFlatNormals(out:MeshGeometry, geometry:MeshGeometry):Void {

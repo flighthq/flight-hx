@@ -23,8 +23,8 @@ class ShadowCamera {
     var dz:Dynamic = cast _Runtime.UNDEFINED;
     var distance:Dynamic = cast _Runtime.UNDEFINED;
     var up:Dynamic = cast _Runtime.UNDEFINED;
-    min = _Runtime.field(sceneBounds, 'min');
-    max = _Runtime.field(sceneBounds, 'max');
+    min = sceneBounds.min;
+    max = sceneBounds.max;
     cx = ((min.x + max.x) * 0.5);
     cy = ((min.y + max.y) * 0.5);
     cz = ((min.z + max.z) * 0.5);
@@ -43,9 +43,9 @@ class ShadowCamera {
     (ShadowCamera._target__shadowCamera.z = cast (cz : Dynamic));
     up = _Runtime.select(_Runtime.compare(HxMath.abs(dy), 0.99, '>'), function():Dynamic return cast ShadowCamera._upZ__shadowCamera, function():Dynamic return cast ShadowCamera._upY__shadowCamera);
     _Runtime.callValue(setCameraViewMatrix4FromLookAt, cast ([camera, ShadowCamera._eye__shadowCamera, ShadowCamera._target__shadowCamera, up] : Array<Dynamic>));
-    _Runtime.setField(camera, 'near', radius);
-    _Runtime.setField(camera, 'far', (radius * 3.0));
-    _Runtime.setField(camera, 'projection', _Runtime.callValue(createOrthographicProjection, cast ([{ halfHeight: radius, halfWidth: radius }] : Array<Dynamic>)));
+    (camera.near = cast (radius : Dynamic));
+    (camera.far = cast ((radius * 3.0) : Dynamic));
+    (camera.projection = cast (_Runtime.callValue(createOrthographicProjection, cast ([{ halfHeight: radius, halfWidth: radius }] : Array<Dynamic>)) : Dynamic));
   }
 
   public static final _eye__shadowCamera:Vector3Like = { x: 0.0, y: 0.0, z: 0.0 };

@@ -11,8 +11,8 @@ class Depth {
     var far:Dynamic = cast _Runtime.UNDEFINED;
     var range:Dynamic = cast _Runtime.UNDEFINED;
     var denominator:Dynamic = cast _Runtime.UNDEFINED;
-    near = _Runtime.field(camera, 'near');
-    far = _Runtime.field(camera, 'far');
+    near = camera.near;
+    far = camera.far;
     range = (far - near);
     if (_Runtime.truthy(_Runtime.strictEquals(range, 0.0))) {
       return cast 0.0;

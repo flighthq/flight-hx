@@ -38,16 +38,16 @@ class Capsule {
     var dy:Dynamic = cast _Runtime.UNDEFINED;
     var dz:Dynamic = cast _Runtime.UNDEFINED;
     var dist:Dynamic = cast _Runtime.UNDEFINED;
-    ax = _Runtime.field(capsule, 'startX');
-    ay = _Runtime.field(capsule, 'startY');
-    az = _Runtime.field(capsule, 'startZ');
-    bx = _Runtime.field(capsule, 'endX');
-    by = _Runtime.field(capsule, 'endY');
-    bz = _Runtime.field(capsule, 'endZ');
+    ax = capsule.startX;
+    ay = capsule.startY;
+    az = capsule.startZ;
+    bx = capsule.endX;
+    by = capsule.endY;
+    bz = capsule.endZ;
     px = point.x;
     py = point.y;
     pz = point.z;
-    r = _Runtime.field(capsule, 'radius');
+    r = capsule.radius;
     abx = (bx - ax);
     aby = (by - ay);
     abz = (bz - az);
@@ -115,19 +115,19 @@ class Capsule {
     var qc:Dynamic = cast _Runtime.UNDEFINED;
     var tA:Dynamic = cast _Runtime.UNDEFINED;
     var tB:Dynamic = cast _Runtime.UNDEFINED;
-    ox = _Runtime.field(ray, 'origin').x;
-    oy = _Runtime.field(ray, 'origin').y;
-    oz = _Runtime.field(ray, 'origin').z;
-    dx = _Runtime.field(ray, 'direction').x;
-    dy = _Runtime.field(ray, 'direction').y;
-    dz = _Runtime.field(ray, 'direction').z;
-    ax = _Runtime.field(capsule, 'startX');
-    ay = _Runtime.field(capsule, 'startY');
-    az = _Runtime.field(capsule, 'startZ');
-    bx = _Runtime.field(capsule, 'endX');
-    by = _Runtime.field(capsule, 'endY');
-    bz = _Runtime.field(capsule, 'endZ');
-    r = _Runtime.field(capsule, 'radius');
+    ox = ray.origin.x;
+    oy = ray.origin.y;
+    oz = ray.origin.z;
+    dx = ray.direction.x;
+    dy = ray.direction.y;
+    dz = ray.direction.z;
+    ax = capsule.startX;
+    ay = capsule.startY;
+    az = capsule.startZ;
+    bx = capsule.endX;
+    by = capsule.endY;
+    bz = capsule.endZ;
+    r = capsule.radius;
     abx = (bx - ax);
     aby = (by - ay);
     abz = (bz - az);
@@ -203,9 +203,9 @@ class Capsule {
   public static function isCapsuleIntersectingCapsule(a:CapsuleLike, b:CapsuleLike):Bool {
     var dist:Dynamic = cast _Runtime.UNDEFINED;
     var sumR:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(a, 'radius'), 0.0, '<'), function():Dynamic return cast _Runtime.compare(_Runtime.field(b, 'radius'), 0.0, '<')))) { return cast false; }
-    dist = _Runtime.callValue(Capsule.segmentToSegmentDistanceSq__capsule, cast ([_Runtime.field(a, 'startX'), _Runtime.field(a, 'startY'), _Runtime.field(a, 'startZ'), _Runtime.field(a, 'endX'), _Runtime.field(a, 'endY'), _Runtime.field(a, 'endZ'), _Runtime.field(b, 'startX'), _Runtime.field(b, 'startY'), _Runtime.field(b, 'startZ'), _Runtime.field(b, 'endX'), _Runtime.field(b, 'endY'), _Runtime.field(b, 'endZ')] : Array<Dynamic>));
-    sumR = (_Runtime.field(a, 'radius') + _Runtime.field(b, 'radius'));
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(a.radius, 0.0, '<'), function():Dynamic return cast _Runtime.compare(b.radius, 0.0, '<')))) { return cast false; }
+    dist = _Runtime.callValue(Capsule.segmentToSegmentDistanceSq__capsule, cast ([a.startX, a.startY, a.startZ, a.endX, a.endY, a.endZ, b.startX, b.startY, b.startZ, b.endX, b.endY, b.endZ] : Array<Dynamic>));
+    sumR = (a.radius + b.radius);
     return cast _Runtime.compare(dist, (sumR * sumR), '<=');
     return cast null;
   }
@@ -213,21 +213,21 @@ class Capsule {
   public static function isCapsuleIntersectingSphere(capsule:CapsuleLike, sphere:BoundingSphereLike):Bool {
     var dist2:Dynamic = cast _Runtime.UNDEFINED;
     var sumR:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(capsule, 'radius'), 0.0, '<'), function():Dynamic return cast _Runtime.compare(_Runtime.field(sphere, 'radius'), 0.0, '<')))) { return cast false; }
-    dist2 = _Runtime.callValue(Capsule.pointToSegmentDistanceSq__capsule, cast ([_Runtime.field(sphere, 'center').x, _Runtime.field(sphere, 'center').y, _Runtime.field(sphere, 'center').z, _Runtime.field(capsule, 'startX'), _Runtime.field(capsule, 'startY'), _Runtime.field(capsule, 'startZ'), _Runtime.field(capsule, 'endX'), _Runtime.field(capsule, 'endY'), _Runtime.field(capsule, 'endZ')] : Array<Dynamic>));
-    sumR = (_Runtime.field(capsule, 'radius') + _Runtime.field(sphere, 'radius'));
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(capsule.radius, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sphere.radius, 0.0, '<')))) { return cast false; }
+    dist2 = _Runtime.callValue(Capsule.pointToSegmentDistanceSq__capsule, cast ([sphere.center.x, sphere.center.y, sphere.center.z, capsule.startX, capsule.startY, capsule.startZ, capsule.endX, capsule.endY, capsule.endZ] : Array<Dynamic>));
+    sumR = (capsule.radius + sphere.radius);
     return cast _Runtime.compare(dist2, (sumR * sumR), '<=');
     return cast null;
   }
 
   public static function setCapsule(out:CapsuleLike, startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):Void {
-    _Runtime.setField(out, 'startX', startX);
-    _Runtime.setField(out, 'startY', startY);
-    _Runtime.setField(out, 'startZ', startZ);
-    _Runtime.setField(out, 'endX', endX);
-    _Runtime.setField(out, 'endY', endY);
-    _Runtime.setField(out, 'endZ', endZ);
-    _Runtime.setField(out, 'radius', radius);
+    (out.startX = cast (startX : Dynamic));
+    (out.startY = cast (startY : Dynamic));
+    (out.startZ = cast (startZ : Dynamic));
+    (out.endX = cast (endX : Dynamic));
+    (out.endY = cast (endY : Dynamic));
+    (out.endZ = cast (endZ : Dynamic));
+    (out.radius = cast (radius : Dynamic));
   }
 
   public static function pointToSegmentDistanceSq__capsule(px:Float, py:Float, pz:Float, ax:Float, ay:Float, az:Float, bx:Float, by:Float, bz:Float):Float {

@@ -13,10 +13,10 @@ import flighthq.types.Vector3.Vector3Like;
 
 class Intersection {
   public static function getCameraRayThroughBoundingSphere(out:Ray3DLike, camera:Camera, sphere:BoundingSphereLike, aspect:Float):Bool {
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(sphere, 'radius'), 0.0, '<'))) {
+    if (_Runtime.truthy(_Runtime.compare(sphere.radius, 0.0, '<'))) {
       return cast false;
     }
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(getCameraWorldToScreen, cast ([Intersection.__scratchNdc__intersection, camera, _Runtime.field(sphere, 'center'), aspect] : Array<Dynamic>))))) {
+    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(getCameraWorldToScreen, cast ([Intersection.__scratchNdc__intersection, camera, sphere.center, aspect] : Array<Dynamic>))))) {
       return cast false;
     }
     return cast _Runtime.callValue(getCameraScreenToWorldRay, cast ([out, camera, Intersection.__scratchNdc__intersection.x, Intersection.__scratchNdc__intersection.y, aspect] : Array<Dynamic>));
@@ -36,16 +36,16 @@ class Intersection {
     var d:Dynamic = cast _Runtime.UNDEFINED;
     var denom:Dynamic = cast _Runtime.UNDEFINED;
     var t:Dynamic = cast _Runtime.UNDEFINED;
-    dx = _Runtime.field(ray, 'direction').x;
-    dy = _Runtime.field(ray, 'direction').y;
-    dz = _Runtime.field(ray, 'direction').z;
-    ox = _Runtime.field(ray, 'origin').x;
-    oy = _Runtime.field(ray, 'origin').y;
-    oz = _Runtime.field(ray, 'origin').z;
-    a = _Runtime.field(plane, 'a');
-    b = _Runtime.field(plane, 'b');
-    c = _Runtime.field(plane, 'c');
-    d = _Runtime.field(plane, 'd');
+    dx = ray.direction.x;
+    dy = ray.direction.y;
+    dz = ray.direction.z;
+    ox = ray.origin.x;
+    oy = ray.origin.y;
+    oz = ray.origin.z;
+    a = plane.a;
+    b = plane.b;
+    c = plane.c;
+    d = plane.d;
     denom = (((a * dx) + (b * dy)) + (c * dz));
     if (_Runtime.truthy(_Runtime.strictEquals(denom, 0.0))) {
       return cast false;

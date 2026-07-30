@@ -24,12 +24,12 @@ class Follow {
     var goalY:Dynamic = cast _Runtime.UNDEFINED;
     var nextX:Float = cast _Runtime.UNDEFINED;
     var nextY:Float = cast _Runtime.UNDEFINED;
-    camX = _Runtime.field(camera, 'x');
-    camY = _Runtime.field(camera, 'y');
-    deadHalfW = _Runtime.coalesce(_Runtime.optionalField(options, 'deadzoneHalfWidth'), function():Dynamic return cast 0.0);
-    deadHalfH = _Runtime.coalesce(_Runtime.optionalField(options, 'deadzoneHalfHeight'), function():Dynamic return cast 0.0);
-    smoothTime = _Runtime.coalesce(_Runtime.optionalField(options, 'smoothTime'), function():Dynamic return cast 0.0);
-    worldBounds = _Runtime.optionalField(options, 'worldBounds');
+    camX = camera.x;
+    camY = camera.y;
+    deadHalfW = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.deadzoneHalfWidth; }), function():Dynamic return cast 0.0);
+    deadHalfH = _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.deadzoneHalfHeight; }), function():Dynamic return cast 0.0);
+    smoothTime = _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.smoothTime; }), function():Dynamic return cast 0.0);
+    worldBounds = ({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.worldBounds; });
     dx = (targetX - camX);
     goalX = camX;
     if (_Runtime.truthy(_Runtime.compare(dx, deadHalfW, '>'))) { (goalX = cast ((targetX - deadHalfW) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.compare(dx, -deadHalfW, '<'))) { (goalX = cast ((targetX + deadHalfW) : Dynamic)); } }
@@ -59,8 +59,8 @@ class Follow {
         (nextY = cast (_Runtime.callValue(clamp, cast ([nextY, (_Runtime.field(worldBounds, 'y') + halfVisH), ((_Runtime.field(worldBounds, 'y') + _Runtime.field(worldBounds, 'height')) - halfVisH)] : Array<Dynamic>)) : Dynamic));
       }
     }
-    _Runtime.setField(camera, 'x', nextX);
-    _Runtime.setField(camera, 'y', nextY);
+    (camera.x = cast (nextX : Dynamic));
+    (camera.y = cast (nextY : Dynamic));
   }
 
   public static final scratchBounds__follow:Dynamic = _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>));

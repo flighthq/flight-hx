@@ -48,20 +48,20 @@ class Frustum {
   }
 
   public static function isFrustumContainingPoint(frustum:FrustumLike, point:Vector3Like):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(_Runtime.callValue(Frustum.__planeSignedDistance__frustum, cast ([_Runtime.field(frustum, 'left'), point] : Array<Dynamic>)), 0.0, '>='), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(Frustum.__planeSignedDistance__frustum, cast ([_Runtime.field(frustum, 'right'), point] : Array<Dynamic>)), 0.0, '>=')), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(Frustum.__planeSignedDistance__frustum, cast ([_Runtime.field(frustum, 'bottom'), point] : Array<Dynamic>)), 0.0, '>=')), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(Frustum.__planeSignedDistance__frustum, cast ([_Runtime.field(frustum, 'top'), point] : Array<Dynamic>)), 0.0, '>=')), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(Frustum.__planeSignedDistance__frustum, cast ([_Runtime.field(frustum, 'near'), point] : Array<Dynamic>)), 0.0, '>=')), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(Frustum.__planeSignedDistance__frustum, cast ([_Runtime.field(frustum, 'far'), point] : Array<Dynamic>)), 0.0, '>='));
+    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(_Runtime.callValue(Frustum.__planeSignedDistance__frustum, cast ([frustum.left, point] : Array<Dynamic>)), 0.0, '>='), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(Frustum.__planeSignedDistance__frustum, cast ([frustum.right, point] : Array<Dynamic>)), 0.0, '>=')), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(Frustum.__planeSignedDistance__frustum, cast ([frustum.bottom, point] : Array<Dynamic>)), 0.0, '>=')), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(Frustum.__planeSignedDistance__frustum, cast ([frustum.top, point] : Array<Dynamic>)), 0.0, '>=')), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(Frustum.__planeSignedDistance__frustum, cast ([frustum.near, point] : Array<Dynamic>)), 0.0, '>=')), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(Frustum.__planeSignedDistance__frustum, cast ([frustum.far, point] : Array<Dynamic>)), 0.0, '>='));
     return cast null;
   }
 
   public static function isFrustumIntersectingAabb(frustum:FrustumLike, aabb:AabbLike):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.callValue(Frustum.__planeIntersectsAabb__frustum, cast ([_Runtime.field(frustum, 'left'), aabb] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(Frustum.__planeIntersectsAabb__frustum, cast ([_Runtime.field(frustum, 'right'), aabb] : Array<Dynamic>))), function():Dynamic return cast _Runtime.callValue(Frustum.__planeIntersectsAabb__frustum, cast ([_Runtime.field(frustum, 'bottom'), aabb] : Array<Dynamic>))), function():Dynamic return cast _Runtime.callValue(Frustum.__planeIntersectsAabb__frustum, cast ([_Runtime.field(frustum, 'top'), aabb] : Array<Dynamic>))), function():Dynamic return cast _Runtime.callValue(Frustum.__planeIntersectsAabb__frustum, cast ([_Runtime.field(frustum, 'near'), aabb] : Array<Dynamic>))), function():Dynamic return cast _Runtime.callValue(Frustum.__planeIntersectsAabb__frustum, cast ([_Runtime.field(frustum, 'far'), aabb] : Array<Dynamic>)));
+    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.callValue(Frustum.__planeIntersectsAabb__frustum, cast ([frustum.left, aabb] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(Frustum.__planeIntersectsAabb__frustum, cast ([frustum.right, aabb] : Array<Dynamic>))), function():Dynamic return cast _Runtime.callValue(Frustum.__planeIntersectsAabb__frustum, cast ([frustum.bottom, aabb] : Array<Dynamic>))), function():Dynamic return cast _Runtime.callValue(Frustum.__planeIntersectsAabb__frustum, cast ([frustum.top, aabb] : Array<Dynamic>))), function():Dynamic return cast _Runtime.callValue(Frustum.__planeIntersectsAabb__frustum, cast ([frustum.near, aabb] : Array<Dynamic>))), function():Dynamic return cast _Runtime.callValue(Frustum.__planeIntersectsAabb__frustum, cast ([frustum.far, aabb] : Array<Dynamic>)));
     return cast null;
   }
 
   public static function isFrustumIntersectingSphere(frustum:FrustumLike, sphere:BoundingSphereLike):Bool {
     var r:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(sphere, 'radius'), 0.0, '<'))) { return cast false; }
-    r = _Runtime.field(sphere, 'radius');
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(_Runtime.callValue(Frustum.__planeSignedDistance__frustum, cast ([_Runtime.field(frustum, 'left'), _Runtime.field(sphere, 'center')] : Array<Dynamic>)), -r, '>='), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(Frustum.__planeSignedDistance__frustum, cast ([_Runtime.field(frustum, 'right'), _Runtime.field(sphere, 'center')] : Array<Dynamic>)), -r, '>=')), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(Frustum.__planeSignedDistance__frustum, cast ([_Runtime.field(frustum, 'bottom'), _Runtime.field(sphere, 'center')] : Array<Dynamic>)), -r, '>=')), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(Frustum.__planeSignedDistance__frustum, cast ([_Runtime.field(frustum, 'top'), _Runtime.field(sphere, 'center')] : Array<Dynamic>)), -r, '>=')), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(Frustum.__planeSignedDistance__frustum, cast ([_Runtime.field(frustum, 'near'), _Runtime.field(sphere, 'center')] : Array<Dynamic>)), -r, '>=')), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(Frustum.__planeSignedDistance__frustum, cast ([_Runtime.field(frustum, 'far'), _Runtime.field(sphere, 'center')] : Array<Dynamic>)), -r, '>='));
+    if (_Runtime.truthy(_Runtime.compare(sphere.radius, 0.0, '<'))) { return cast false; }
+    r = sphere.radius;
+    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(_Runtime.callValue(Frustum.__planeSignedDistance__frustum, cast ([frustum.left, sphere.center] : Array<Dynamic>)), -r, '>='), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(Frustum.__planeSignedDistance__frustum, cast ([frustum.right, sphere.center] : Array<Dynamic>)), -r, '>=')), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(Frustum.__planeSignedDistance__frustum, cast ([frustum.bottom, sphere.center] : Array<Dynamic>)), -r, '>=')), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(Frustum.__planeSignedDistance__frustum, cast ([frustum.top, sphere.center] : Array<Dynamic>)), -r, '>=')), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(Frustum.__planeSignedDistance__frustum, cast ([frustum.near, sphere.center] : Array<Dynamic>)), -r, '>=')), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(Frustum.__planeSignedDistance__frustum, cast ([frustum.far, sphere.center] : Array<Dynamic>)), -r, '>='));
     return cast null;
   }
 
@@ -100,27 +100,27 @@ class Frustum {
     r31 = _Runtime.getIndex(m, 7.0);
     r32 = _Runtime.getIndex(m, 11.0);
     r33 = _Runtime.getIndex(m, 15.0);
-    _Runtime.callValue(Frustum.__setPlane__frustum, cast ([_Runtime.field(out, 'left'), (r30 + r00), (r31 + r01), (r32 + r02), (r33 + r03)] : Array<Dynamic>));
-    _Runtime.callValue(Frustum.__setPlane__frustum, cast ([_Runtime.field(out, 'right'), (r30 - r00), (r31 - r01), (r32 - r02), (r33 - r03)] : Array<Dynamic>));
-    _Runtime.callValue(Frustum.__setPlane__frustum, cast ([_Runtime.field(out, 'bottom'), (r30 + r10), (r31 + r11), (r32 + r12), (r33 + r13)] : Array<Dynamic>));
-    _Runtime.callValue(Frustum.__setPlane__frustum, cast ([_Runtime.field(out, 'top'), (r30 - r10), (r31 - r11), (r32 - r12), (r33 - r13)] : Array<Dynamic>));
-    _Runtime.callValue(Frustum.__setPlane__frustum, cast ([_Runtime.field(out, 'near'), (r30 + r20), (r31 + r21), (r32 + r22), (r33 + r23)] : Array<Dynamic>));
-    _Runtime.callValue(Frustum.__setPlane__frustum, cast ([_Runtime.field(out, 'far'), (r30 - r20), (r31 - r21), (r32 - r22), (r33 - r23)] : Array<Dynamic>));
+    _Runtime.callValue(Frustum.__setPlane__frustum, cast ([out.left, (r30 + r00), (r31 + r01), (r32 + r02), (r33 + r03)] : Array<Dynamic>));
+    _Runtime.callValue(Frustum.__setPlane__frustum, cast ([out.right, (r30 - r00), (r31 - r01), (r32 - r02), (r33 - r03)] : Array<Dynamic>));
+    _Runtime.callValue(Frustum.__setPlane__frustum, cast ([out.bottom, (r30 + r10), (r31 + r11), (r32 + r12), (r33 + r13)] : Array<Dynamic>));
+    _Runtime.callValue(Frustum.__setPlane__frustum, cast ([out.top, (r30 - r10), (r31 - r11), (r32 - r12), (r33 - r13)] : Array<Dynamic>));
+    _Runtime.callValue(Frustum.__setPlane__frustum, cast ([out.near, (r30 + r20), (r31 + r21), (r32 + r22), (r33 + r23)] : Array<Dynamic>));
+    _Runtime.callValue(Frustum.__setPlane__frustum, cast ([out.far, (r30 - r20), (r31 - r21), (r32 - r22), (r33 - r23)] : Array<Dynamic>));
   }
 
   public static function __planeIntersectsAabb__frustum(plane:PlaneLike, aabb:AabbLike):Bool {
     var px:Dynamic = cast _Runtime.UNDEFINED;
     var py:Dynamic = cast _Runtime.UNDEFINED;
     var pz:Dynamic = cast _Runtime.UNDEFINED;
-    px = _Runtime.select(_Runtime.compare(_Runtime.field(plane, 'a'), 0.0, '>='), function():Dynamic return cast _Runtime.field(aabb, 'max').x, function():Dynamic return cast _Runtime.field(aabb, 'min').x);
-    py = _Runtime.select(_Runtime.compare(_Runtime.field(plane, 'b'), 0.0, '>='), function():Dynamic return cast _Runtime.field(aabb, 'max').y, function():Dynamic return cast _Runtime.field(aabb, 'min').y);
-    pz = _Runtime.select(_Runtime.compare(_Runtime.field(plane, 'c'), 0.0, '>='), function():Dynamic return cast _Runtime.field(aabb, 'max').z, function():Dynamic return cast _Runtime.field(aabb, 'min').z);
-    return cast _Runtime.compare(((((_Runtime.field(plane, 'a') * px) + (_Runtime.field(plane, 'b') * py)) + (_Runtime.field(plane, 'c') * pz)) + _Runtime.field(plane, 'd')), 0.0, '>=');
+    px = _Runtime.select(_Runtime.compare(plane.a, 0.0, '>='), function():Dynamic return cast aabb.max.x, function():Dynamic return cast aabb.min.x);
+    py = _Runtime.select(_Runtime.compare(plane.b, 0.0, '>='), function():Dynamic return cast aabb.max.y, function():Dynamic return cast aabb.min.y);
+    pz = _Runtime.select(_Runtime.compare(plane.c, 0.0, '>='), function():Dynamic return cast aabb.max.z, function():Dynamic return cast aabb.min.z);
+    return cast _Runtime.compare(((((plane.a * px) + (plane.b * py)) + (plane.c * pz)) + plane.d), 0.0, '>=');
     return cast null;
   }
 
   public static function __planeSignedDistance__frustum(plane:PlaneLike, point:Vector3Like):Float {
-    return cast ((((_Runtime.field(plane, 'a') * point.x) + (_Runtime.field(plane, 'b') * point.y)) + (_Runtime.field(plane, 'c') * point.z)) + _Runtime.field(plane, 'd'));
+    return cast ((((plane.a * point.x) + (plane.b * point.y)) + (plane.c * point.z)) + plane.d);
     return cast null;
   }
 
@@ -129,15 +129,15 @@ class Frustum {
     l = HxMath.sqrt((((a * a) + (b * b)) + (c * c)));
     if (_Runtime.truthy(!_Runtime.strictEquals(l, 0.0))) {
       var inv:Dynamic = (1.0 / l);
-      _Runtime.setField(out, 'a', (a * inv));
-      _Runtime.setField(out, 'b', (b * inv));
-      _Runtime.setField(out, 'c', (c * inv));
-      _Runtime.setField(out, 'd', (d * inv));
+      (out.a = cast ((a * inv) : Dynamic));
+      (out.b = cast ((b * inv) : Dynamic));
+      (out.c = cast ((c * inv) : Dynamic));
+      (out.d = cast ((d * inv) : Dynamic));
     } else {
-      _Runtime.setField(out, 'a', a);
-      _Runtime.setField(out, 'b', b);
-      _Runtime.setField(out, 'c', c);
-      _Runtime.setField(out, 'd', d);
+      (out.a = cast (a : Dynamic));
+      (out.b = cast (b : Dynamic));
+      (out.c = cast (c : Dynamic));
+      (out.d = cast (d : Dynamic));
     }
   }
 }
