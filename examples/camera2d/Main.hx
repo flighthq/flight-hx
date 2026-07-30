@@ -318,9 +318,13 @@ class Main extends Application {
   }
 
   function seededRandom(seed:Int):Void->Float {
-    var s = seed;
+    // Float state with explicit floor-division modulo: upstream JS numbers are
+    // doubles (s * 16807 needs ~45 bits), Int32 targets would wrap, and neko's
+    // `%` coerces the float operand back to Int32 — so avoid `%` entirely.
+    var s:Float = seed;
     return function():Float {
-      s = (s * 16807 + 0) % 2147483647;
+      s = s * 16807 + 0;
+      s -= Math.ffloor(s / 2147483647) * 2147483647;
       return s / 2147483647;
     };
   }
