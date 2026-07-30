@@ -59,7 +59,7 @@ class SurfaceConvolution {
                   var kx:Dynamic = 0.0;
                   while ((cast ((cast kx : Float) < (cast matrixX : Float)) : Bool)) {
                     var rawSampleX:Dynamic = (((_Runtime.field(source, 'x') + px) + kx) - offsetX);
-                    var weight:Dynamic = _Runtime.getIndex(matrix, (weight_row_start + kx));
+                    var weight:Dynamic = flighthq._internal._StaticIndex.readArray(matrix, (weight_row_start + kx));
                     var sampleX:Float = cast _Runtime.UNDEFINED;
                     var sampleY:Float = cast _Runtime.UNDEFINED;
                     if ((cast ((cast ((cast ((cast ((cast rawSampleY : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast rawSampleY : Float) >= (cast surfaceHeight : Float)) : Bool)) : Bool) || (cast ((cast rawSampleX : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast rawSampleX : Float) >= (cast surfaceWidth : Float)) : Bool)) : Bool)) {
@@ -81,10 +81,10 @@ class SurfaceConvolution {
                       (sampleY = cast (rawSampleY : Dynamic));
                     }
                     var i:Dynamic = (((sampleY * surfaceWidth) + sampleX) * 4.0);
-                    (r = cast ((r + (_Runtime.getIndex(data, i) * weight)) : Dynamic));
-                    (g = cast ((g + (_Runtime.getIndex(data, (i + 1.0)) * weight)) : Dynamic));
-                    (b = cast ((b + (_Runtime.getIndex(data, (i + 2.0)) * weight)) : Dynamic));
-                    (a = cast ((a + (_Runtime.getIndex(data, (i + 3.0)) * weight)) : Dynamic));
+                    (r = cast ((r + (flighthq._internal._StaticIndex.readUint8ClampedArray(data, i) * weight)) : Dynamic));
+                    (g = cast ((g + (flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)) * weight)) : Dynamic));
+                    (b = cast ((b + (flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)) * weight)) : Dynamic));
+                    (a = cast ((a + (flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0)) * weight)) : Dynamic));
                     kx++;
                   }
                 }
@@ -92,15 +92,15 @@ class SurfaceConvolution {
               }
             }
             var di:Dynamic = (((py * _Runtime.field(source, 'width')) + px) * 4.0);
-            _Runtime.setIndex(out, di, _Runtime.callValue(SurfaceConvolution.clampByte__surfaceConvolution, cast ([((r / divisor) + bias)] : Array<Dynamic>)));
-            _Runtime.setIndex(out, (di + 1.0), _Runtime.callValue(SurfaceConvolution.clampByte__surfaceConvolution, cast ([((g / divisor) + bias)] : Array<Dynamic>)));
-            _Runtime.setIndex(out, (di + 2.0), _Runtime.callValue(SurfaceConvolution.clampByte__surfaceConvolution, cast ([((b / divisor) + bias)] : Array<Dynamic>)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, _Runtime.callValue(SurfaceConvolution.clampByte__surfaceConvolution, cast ([((r / divisor) + bias)] : Array<Dynamic>)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), _Runtime.callValue(SurfaceConvolution.clampByte__surfaceConvolution, cast ([((g / divisor) + bias)] : Array<Dynamic>)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), _Runtime.callValue(SurfaceConvolution.clampByte__surfaceConvolution, cast ([((b / divisor) + bias)] : Array<Dynamic>)));
             if ((cast preserveAlpha : Bool)) {
               var cy:Dynamic = HxMath.max(0.0, HxMath.min((surfaceHeight - 1.0), (_Runtime.field(source, 'y') + py)));
               var cx:Dynamic = HxMath.max(0.0, HxMath.min((surfaceWidth - 1.0), (_Runtime.field(source, 'x') + px)));
-              _Runtime.setIndex(out, (di + 3.0), _Runtime.getIndex(data, ((((cy * surfaceWidth) + cx) * 4.0) + 3.0)));
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), flighthq._internal._StaticIndex.readUint8ClampedArray(data, ((((cy * surfaceWidth) + cx) * 4.0) + 3.0)));
             } else {
-              _Runtime.setIndex(out, (di + 3.0), _Runtime.callValue(SurfaceConvolution.clampByte__surfaceConvolution, cast ([((a / divisor) + bias)] : Array<Dynamic>)));
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), _Runtime.callValue(SurfaceConvolution.clampByte__surfaceConvolution, cast ([((a / divisor) + bias)] : Array<Dynamic>)));
             }
             px++;
           }
@@ -121,7 +121,7 @@ class SurfaceConvolution {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
-        (sum = cast ((sum + _Runtime.getIndex(matrix, i)) : Dynamic));
+        (sum = cast ((sum + flighthq._internal._StaticIndex.readArray(matrix, i)) : Dynamic));
         i++;
       }
     }

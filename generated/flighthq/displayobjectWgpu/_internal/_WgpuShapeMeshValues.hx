@@ -37,7 +37,7 @@ class _WgpuShapeMeshValues {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(meshes, 'length') : Float)) : Bool)) {
-        var mesh:Dynamic = _Runtime.getIndex(meshes, i);
+        var mesh:Dynamic = flighthq._internal._StaticIndex.readArray(meshes, i);
         if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(mesh, 'indices'), 'length'), 0.0) : Bool)) { i++; continue; }
         var a:Dynamic = (_Runtime.field(mesh, 'alpha') * nodeAlpha);
         if ((cast ((cast a : Float) <= (cast 0.0 : Float)) : Bool)) { i++; continue; }
@@ -48,10 +48,10 @@ class _WgpuShapeMeshValues {
         var r:Dynamic = ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(mesh, 'color')) >> 16)) & 255) / 255.0);
         var g:Dynamic = ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(mesh, 'color')) >> 8)) & 255) / 255.0);
         var b:Dynamic = ((_Runtime.toInt32(_Runtime.field(mesh, 'color')) & 255) / 255.0);
-        _Runtime.setIndex(uniform, 12.0, (r * a));
-        _Runtime.setIndex(uniform, 13.0, (g * a));
-        _Runtime.setIndex(uniform, 14.0, (b * a));
-        _Runtime.setIndex(uniform, 15.0, a);
+        flighthq._internal._StaticIndex.writeFloat32Array(uniform, 12.0, (r * a));
+        flighthq._internal._StaticIndex.writeFloat32Array(uniform, 13.0, (g * a));
+        flighthq._internal._StaticIndex.writeFloat32Array(uniform, 14.0, (b * a));
+        flighthq._internal._StaticIndex.writeFloat32Array(uniform, 15.0, a);
         flighthq._internal.backend.WebGpuQueueBackend.call(queue, 'writeBuffer', cast ([_Runtime.field(buffers, 'uniformBuffer'), 0.0, _Runtime.field(uniform, 'buffer'), _Runtime.field(uniform, 'byteOffset'), _Runtime.field(uniform, 'byteLength')] : Array<Dynamic>));
         _Runtime.callProperty(pass, 'setVertexBuffer', cast ([0.0, vertexBuffer] : Array<Dynamic>));
         _Runtime.callProperty(pass, 'setIndexBuffer', cast ([indexBuffer, 'uint16'] : Array<Dynamic>));
@@ -142,18 +142,18 @@ class _WgpuShapeMeshValues {
     ih = (2.0 / _Runtime.orValue(_Runtime.field(viewport, 'height'), function():Dynamic return cast 1.0));
     t = _Runtime.field(renderProxy, 'transform2D');
     m = _WgpuShapeMeshValues._shapeMeshUniformScratch__wgpuShapeMesh;
-    _Runtime.setIndex(m, 0.0, (_Runtime.field(t, 'a') * iw));
-    _Runtime.setIndex(m, 1.0, (-_Runtime.field(t, 'b') * ih));
-    _Runtime.setIndex(m, 2.0, 0.0);
-    _Runtime.setIndex(m, 3.0, 0.0);
-    _Runtime.setIndex(m, 4.0, (_Runtime.field(t, 'c') * iw));
-    _Runtime.setIndex(m, 5.0, (-_Runtime.field(t, 'd') * ih));
-    _Runtime.setIndex(m, 6.0, 0.0);
-    _Runtime.setIndex(m, 7.0, 0.0);
-    _Runtime.setIndex(m, 8.0, ((_Runtime.field(t, 'tx') * iw) - 1.0));
-    _Runtime.setIndex(m, 9.0, ((-_Runtime.field(t, 'ty') * ih) + 1.0));
-    _Runtime.setIndex(m, 10.0, 1.0);
-    _Runtime.setIndex(m, 11.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, (_Runtime.field(t, 'a') * iw));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, (-_Runtime.field(t, 'b') * ih));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 2.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 3.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 4.0, (_Runtime.field(t, 'c') * iw));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 5.0, (-_Runtime.field(t, 'd') * ih));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 6.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 7.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 8.0, ((_Runtime.field(t, 'tx') * iw) - 1.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 9.0, ((-_Runtime.field(t, 'ty') * ih) + 1.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 10.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 11.0, 0.0);
     return cast m;
     return cast null;
   }

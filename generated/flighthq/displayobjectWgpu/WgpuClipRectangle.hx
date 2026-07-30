@@ -20,7 +20,7 @@ class WgpuClipRectangle {
     _Runtime.callValue(flushWgpuSpriteBatch, cast ([state] : Array<Dynamic>));
     stack = _Runtime.field(runtime, 'scissorStack');
     _Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>));
-    previous = ((cast ((cast _Runtime.field(stack, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.getIndex(stack, (_Runtime.field(stack, 'length') - 1.0)) : Dynamic) : (cast null : Dynamic));
+    previous = ((cast ((cast _Runtime.field(stack, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(stack, (_Runtime.field(stack, 'length') - 1.0)) : Dynamic) : (cast null : Dynamic));
     _Runtime.setField(runtime, 'currentScissorRect', previous);
     pass = _Runtime.field(runtime, 'renderPass');
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }

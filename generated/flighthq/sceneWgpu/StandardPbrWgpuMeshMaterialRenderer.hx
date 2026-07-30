@@ -65,43 +65,43 @@ class StandardPbrWgpuMeshMaterialRenderer {
   public static function writeWgpuPbrStandardBlock(out:flighthq._internal._Float32Array, standard:Null<StandardPbrMaterialProperties>, alphaCutoff:Float):Void {
     var strength:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(standard, null) : Bool)) {
-      _Runtime.setIndex(out, 0.0, 1.0);
-      _Runtime.setIndex(out, 1.0, 1.0);
-      _Runtime.setIndex(out, 2.0, 1.0);
-      _Runtime.setIndex(out, 3.0, 1.0);
-      _Runtime.setIndex(out, 4.0, 0.0);
-      _Runtime.setIndex(out, 5.0, 0.0);
-      _Runtime.setIndex(out, 6.0, 0.0);
-      _Runtime.setIndex(out, 7.0, 0.0);
-      _Runtime.setIndex(out, 8.0, 0.0);
-      _Runtime.setIndex(out, 9.0, 1.0);
-      _Runtime.setIndex(out, 10.0, 1.0);
-      _Runtime.setIndex(out, 11.0, 1.0);
-      _Runtime.setIndex(out, 12.0, alphaCutoff);
-      _Runtime.setIndex(out, 13.0, 0.0);
-      _Runtime.setIndex(out, 14.0, 0.0);
-      _Runtime.setIndex(out, 15.0, 0.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 0.0, 1.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 1.0, 1.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 2.0, 1.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 3.0, 1.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 4.0, 0.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 5.0, 0.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 6.0, 0.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 7.0, 0.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 8.0, 0.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 9.0, 1.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 10.0, 1.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 11.0, 1.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 12.0, alphaCutoff);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 13.0, 0.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 14.0, 0.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 15.0, 0.0);
       return;
     }
     _Runtime.callValue(unpackColorToLinear, cast ([StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, _Runtime.field(standard, 'baseColor')] : Array<Dynamic>));
-    _Runtime.setIndex(out, 0.0, _Runtime.getIndex(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 0.0));
-    _Runtime.setIndex(out, 1.0, _Runtime.getIndex(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 1.0));
-    _Runtime.setIndex(out, 2.0, _Runtime.getIndex(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 2.0));
-    _Runtime.setIndex(out, 3.0, _Runtime.getIndex(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 3.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 0.0, flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 0.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 1.0, flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 1.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 2.0, flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 2.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 3.0, flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 3.0));
     _Runtime.callValue(unpackColorToLinear, cast ([StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, _Runtime.field(standard, 'emissive')] : Array<Dynamic>));
     strength = _Runtime.field(standard, 'emissiveStrength');
-    _Runtime.setIndex(out, 4.0, (_Runtime.getIndex(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 0.0) * strength));
-    _Runtime.setIndex(out, 5.0, (_Runtime.getIndex(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 1.0) * strength));
-    _Runtime.setIndex(out, 6.0, (_Runtime.getIndex(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 2.0) * strength));
-    _Runtime.setIndex(out, 7.0, 0.0);
-    _Runtime.setIndex(out, 8.0, _Runtime.field(standard, 'metallic'));
-    _Runtime.setIndex(out, 9.0, _Runtime.field(standard, 'roughness'));
-    _Runtime.setIndex(out, 10.0, _Runtime.field(standard, 'normalScale'));
-    _Runtime.setIndex(out, 11.0, _Runtime.field(standard, 'occlusionStrength'));
-    _Runtime.setIndex(out, 12.0, alphaCutoff);
-    _Runtime.setIndex(out, 13.0, 0.0);
-    _Runtime.setIndex(out, 14.0, 0.0);
-    _Runtime.setIndex(out, 15.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 4.0, (flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 0.0) * strength));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 5.0, (flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 1.0) * strength));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 6.0, (flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 2.0) * strength));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 7.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 8.0, _Runtime.field(standard, 'metallic'));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 9.0, _Runtime.field(standard, 'roughness'));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 10.0, _Runtime.field(standard, 'normalScale'));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 11.0, _Runtime.field(standard, 'occlusionStrength'));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 12.0, alphaCutoff);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 13.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 14.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 15.0, 0.0);
   }
 
   public static final standardPbrWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera) {

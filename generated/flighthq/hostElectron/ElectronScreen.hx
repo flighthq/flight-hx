@@ -23,8 +23,8 @@ class ElectronScreen {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(displays, 'length') : Float)) : Bool)) {
-          var display:Dynamic = _Runtime.getIndex(displays, i);
-          _Runtime.setIndex(out, i, _Runtime.callValue(ElectronScreen.fillScreenInfo__electronScreen, cast ([(cast {  } : ScreenInfo), display, _Runtime.strictEquals(_Runtime.field(display, 'id'), primaryId)] : Array<Dynamic>)));
+          var display:Dynamic = flighthq._internal._StaticIndex.readArray(displays, i);
+          flighthq._internal._StaticIndex.writeArray(out, i, _Runtime.callValue(ElectronScreen.fillScreenInfo__electronScreen, cast ([(cast {  } : ScreenInfo), display, _Runtime.strictEquals(_Runtime.field(display, 'id'), primaryId)] : Array<Dynamic>)));
           i++;
         }
       }
@@ -47,7 +47,7 @@ class ElectronScreen {
       makeHandler = function(kind:ScreenChangeKind) return function(args:Array<Dynamic>) {
         var display:Dynamic = cast _Runtime.UNDEFINED;
         var event:Dynamic = cast _Runtime.UNDEFINED;
-        display = (cast _Runtime.getIndex(args, 1.0) : Null<ElectronDisplay>);
+        display = (cast flighthq._internal._StaticIndex.readArray(args, 1.0) : Null<ElectronDisplay>);
         event = { kind: kind, screen: _Runtime.select(display, function():Dynamic return cast _Runtime.callValue(ElectronScreen.fillScreenInfo__electronScreen, cast ([(cast {  } : ScreenInfo), display, _Runtime.strictEquals(_Runtime.field(display, 'id'), _Runtime.callValue(primaryId, cast ([] : Array<Dynamic>)))] : Array<Dynamic>)), function():Dynamic return cast (cast {  } : ScreenInfo)), changedMetrics: ((cast _Runtime.strictEquals(kind, 'ScreenMetricsChanged') : Bool) ? (cast { bounds: true, workArea: true, scaleFactor: true, orientation: true } : Dynamic) : (cast null : Dynamic)) };
         _Runtime.callValue(listener, cast ([event] : Array<Dynamic>));
       };

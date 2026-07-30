@@ -14,13 +14,13 @@ class TextShaperCluster {
     glyphs = _Runtime.field(run, 'glyphs');
     count = _Runtime.field(run, 'glyphCount');
     positions = _Runtime.createArray((count + 1.0));
-    _Runtime.setIndex(positions, 0.0, 0.0);
+    flighthq._internal._StaticIndex.writeArray(positions, 0.0, 0.0);
     x = 0.0;
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        (x = cast ((x + _Runtime.field(_Runtime.getIndex(glyphs, i), 'xAdvance')) : Dynamic));
-        _Runtime.setIndex(positions, (i + 1.0), x);
+        (x = cast ((x + _Runtime.field(flighthq._internal._StaticIndex.readArray(glyphs, i), 'xAdvance')) : Dynamic));
+        flighthq._internal._StaticIndex.writeArray(positions, (i + 1.0), x);
         i++;
       }
     }
@@ -38,8 +38,8 @@ class TextShaperCluster {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(glyphs, 'length') : Float)) : Bool)) {
-        if ((cast ((cast _Runtime.field(_Runtime.getIndex(glyphs, i), 'cluster') : Float) <= (cast stringIndex : Float)) : Bool)) {
-          (best = cast (_Runtime.field(_Runtime.getIndex(glyphs, i), 'cluster') : Dynamic));
+        if ((cast ((cast _Runtime.field(flighthq._internal._StaticIndex.readArray(glyphs, i), 'cluster') : Float) <= (cast stringIndex : Float)) : Bool)) {
+          (best = cast (_Runtime.field(flighthq._internal._StaticIndex.readArray(glyphs, i), 'cluster') : Dynamic));
         }
         i++;
       }
@@ -55,13 +55,13 @@ class TextShaperCluster {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(glyphs, 'length') : Float)) : Bool)) {
-        if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.getIndex(glyphs, i), 'cluster'), cluster) : Bool)) {
+        if ((cast _Runtime.strictEquals(_Runtime.field(flighthq._internal._StaticIndex.readArray(glyphs, i), 'cluster'), cluster) : Bool)) {
           var end:Null<Float> = cast _Runtime.UNDEFINED;
           {
             var j:Dynamic = (i + 1.0);
             while ((cast ((cast j : Float) < (cast _Runtime.field(glyphs, 'length') : Float)) : Bool)) {
-              if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.getIndex(glyphs, j), 'cluster'), cluster) : Bool)) {
-                (end = cast (_Runtime.field(_Runtime.getIndex(glyphs, j), 'cluster') : Dynamic));
+              if ((cast !_Runtime.strictEquals(_Runtime.field(flighthq._internal._StaticIndex.readArray(glyphs, j), 'cluster'), cluster) : Bool)) {
+                (end = cast (_Runtime.field(flighthq._internal._StaticIndex.readArray(glyphs, j), 'cluster') : Dynamic));
                 break;
               }
               j++;

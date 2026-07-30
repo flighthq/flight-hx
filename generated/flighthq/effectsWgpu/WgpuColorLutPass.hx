@@ -31,7 +31,7 @@ class WgpuColorLutPass {
     pipeline = _Runtime.callValue(WgpuColorLutPass.getLutPipeline__wgpuColorLutPass, cast ([state, _Runtime.field((cast dest : WgpuRenderTarget), 'format')] : Array<Dynamic>));
     slotOffset = _Runtime.callProperty(fs, 'acquireSlot', cast ([] : Array<Dynamic>));
     _Runtime.callProperty(fs, 'writeSlot', cast ([slotOffset, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, _Runtime.field(lut, 'size'));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, _Runtime.field(lut, 'size'));
     }] : Array<Dynamic>));
     pass = _Runtime.callProperty(fs, 'beginPass', cast ([(cast dest : WgpuRenderTarget), 'load'] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setPipeline', cast ([_Runtime.field(pipeline, 'pipeline')] : Array<Dynamic>));
@@ -98,10 +98,10 @@ class WgpuColorLutPass {
       var j:Dynamic = 0.0;
       var o:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast ((n * n) * n) : Float)) : Bool)) {
-        _Runtime.setIndex(data, o++, HxMath.round((_Runtime.callValue(WgpuColorLutPass.clamp01__wgpuColorLutPass, cast ([_Runtime.getIndex(samples, j++)] : Array<Dynamic>)) * 255.0)));
-        _Runtime.setIndex(data, o++, HxMath.round((_Runtime.callValue(WgpuColorLutPass.clamp01__wgpuColorLutPass, cast ([_Runtime.getIndex(samples, j++)] : Array<Dynamic>)) * 255.0)));
-        _Runtime.setIndex(data, o++, HxMath.round((_Runtime.callValue(WgpuColorLutPass.clamp01__wgpuColorLutPass, cast ([_Runtime.getIndex(samples, j++)] : Array<Dynamic>)) * 255.0)));
-        _Runtime.setIndex(data, o++, 255.0);
+        flighthq._internal._StaticIndex.writeUint8Array(data, o++, HxMath.round((_Runtime.callValue(WgpuColorLutPass.clamp01__wgpuColorLutPass, cast ([flighthq._internal._StaticIndex.readArray(samples, j++)] : Array<Dynamic>)) * 255.0)));
+        flighthq._internal._StaticIndex.writeUint8Array(data, o++, HxMath.round((_Runtime.callValue(WgpuColorLutPass.clamp01__wgpuColorLutPass, cast ([flighthq._internal._StaticIndex.readArray(samples, j++)] : Array<Dynamic>)) * 255.0)));
+        flighthq._internal._StaticIndex.writeUint8Array(data, o++, HxMath.round((_Runtime.callValue(WgpuColorLutPass.clamp01__wgpuColorLutPass, cast ([flighthq._internal._StaticIndex.readArray(samples, j++)] : Array<Dynamic>)) * 255.0)));
+        flighthq._internal._StaticIndex.writeUint8Array(data, o++, 255.0);
         i++;
       }
     }

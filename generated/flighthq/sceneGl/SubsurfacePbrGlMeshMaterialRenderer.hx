@@ -48,7 +48,7 @@ class SubsurfacePbrGlMeshMaterialRenderer {
     if ((cast !_Runtime.strictEquals(subsurface, null) : Bool)) {
       _Runtime.callValue(unpackColorToLinear, cast ([SubsurfacePbrGlMeshMaterialRenderer.scratchRgba__subsurfacePbrGlMeshMaterialRenderer, _Runtime.field(subsurface, 'subsurfaceColor')] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locSubsurface'), _Runtime.field(subsurface, 'subsurface'));
-      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(program, 'locSubsurfaceColor'), _Runtime.getIndex(SubsurfacePbrGlMeshMaterialRenderer.scratchRgba__subsurfacePbrGlMeshMaterialRenderer, 0.0), _Runtime.getIndex(SubsurfacePbrGlMeshMaterialRenderer.scratchRgba__subsurfacePbrGlMeshMaterialRenderer, 1.0), _Runtime.getIndex(SubsurfacePbrGlMeshMaterialRenderer.scratchRgba__subsurfacePbrGlMeshMaterialRenderer, 2.0));
+      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(program, 'locSubsurfaceColor'), flighthq._internal._StaticIndex.readArray(SubsurfacePbrGlMeshMaterialRenderer.scratchRgba__subsurfacePbrGlMeshMaterialRenderer, 0.0), flighthq._internal._StaticIndex.readArray(SubsurfacePbrGlMeshMaterialRenderer.scratchRgba__subsurfacePbrGlMeshMaterialRenderer, 1.0), flighthq._internal._StaticIndex.readArray(SubsurfacePbrGlMeshMaterialRenderer.scratchRgba__subsurfacePbrGlMeshMaterialRenderer, 2.0));
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locThickness'), _Runtime.field(subsurface, 'thickness'));
     } else {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locSubsurface'), 0.0);

@@ -42,7 +42,7 @@ class SceneNodeBounds {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-          _Runtime.callValue(SceneNodeBounds._accumulateWorldBounds__sceneNodeBounds, cast ([out, (cast _Runtime.getIndex(children, i) : SceneNode)] : Array<Dynamic>));
+          _Runtime.callValue(SceneNodeBounds._accumulateWorldBounds__sceneNodeBounds, cast ([out, (cast flighthq._internal._StaticIndex.readArray(children, i) : SceneNode)] : Array<Dynamic>));
           i++;
         }
       }

@@ -16,17 +16,17 @@ class TextureAtlasLibgdxParse {
     i = 0.0;
     id = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
-      while ((cast ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool) && (cast _Runtime.strictEquals(StringTools.trim(Std.string(_Runtime.getIndex(lines, i))), '') : Bool)) : Bool)) { i++; }
+      while ((cast ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool) && (cast _Runtime.strictEquals(StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i))), '') : Bool)) : Bool)) { i++; }
       if ((cast ((cast i : Float) >= (cast _Runtime.field(lines, 'length') : Float)) : Bool)) { break; }
-      var maybeImage:Dynamic = StringTools.trim(Std.string(_Runtime.getIndex(lines, i)));
+      var maybeImage:Dynamic = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
       if ((cast !(cast _Runtime.includes(maybeImage, ':') : Bool) : Bool)) {
         i++;
-        while ((cast ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool) && (cast !_Runtime.strictEquals(StringTools.trim(Std.string(_Runtime.getIndex(lines, i))), '') : Bool)) : Bool)) {
-          if ((cast _Runtime.includes(StringTools.trim(Std.string(_Runtime.getIndex(lines, i))), ':') : Bool)) { i++; } else { break; }
+        while ((cast ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool) && (cast !_Runtime.strictEquals(StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i))), '') : Bool)) : Bool)) {
+          if ((cast _Runtime.includes(StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i))), ':') : Bool)) { i++; } else { break; }
         }
       }
-      while ((cast ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool) && (cast !_Runtime.strictEquals(StringTools.trim(Std.string(_Runtime.getIndex(lines, i))), '') : Bool)) : Bool)) {
-        var line:Dynamic = StringTools.trim(Std.string(_Runtime.getIndex(lines, i)));
+      while ((cast ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool) && (cast !_Runtime.strictEquals(StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i))), '') : Bool)) : Bool)) {
+        var line:Dynamic = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
         if ((cast !(cast _Runtime.includes(line, ':') : Bool) : Bool)) {
           var regionName:Dynamic = line;
           i++;
@@ -41,7 +41,7 @@ class TextureAtlasLibgdxParse {
           var rotated:Dynamic = false;
           var index:Dynamic = -1.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
-            var kv:Dynamic = StringTools.trim(Std.string(_Runtime.getIndex(lines, i)));
+            var kv:Dynamic = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
             if ((cast ((cast _Runtime.strictEquals(kv, '') : Bool) || (cast !(cast _Runtime.includes(kv, ':') : Bool) : Bool)) : Bool)) { break; }
             var colon:Dynamic = _Runtime.callProperty(kv, 'indexOf', cast ([':'] : Array<Dynamic>));
             var key:Dynamic = StringTools.trim(Std.string(_Runtime.slice(kv, 0.0, colon)));
@@ -55,29 +55,29 @@ class TextureAtlasLibgdxParse {
               else if (__switchValue == 'xy') {
                 {
                   var parts:Dynamic = _Runtime.callProperty(value, 'split', cast ([','] : Array<Dynamic>));
-                  (atlasX = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.getIndex(parts, 0.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
-                  (atlasY = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.getIndex(parts, 1.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
+                  (atlasX = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(flighthq._internal._StaticIndex.readArray(parts, 0.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
+                  (atlasY = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(flighthq._internal._StaticIndex.readArray(parts, 1.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
                 }
               }
               else if (__switchValue == 'size') {
                 {
                   var parts:Dynamic = _Runtime.callProperty(value, 'split', cast ([','] : Array<Dynamic>));
-                  (atlasW = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.getIndex(parts, 0.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
-                  (atlasH = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.getIndex(parts, 1.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
+                  (atlasW = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(flighthq._internal._StaticIndex.readArray(parts, 0.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
+                  (atlasH = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(flighthq._internal._StaticIndex.readArray(parts, 1.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
                 }
               }
               else if (__switchValue == 'orig') {
                 {
                   var parts:Dynamic = _Runtime.callProperty(value, 'split', cast ([','] : Array<Dynamic>));
-                  (origW = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.getIndex(parts, 0.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
-                  (origH = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.getIndex(parts, 1.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
+                  (origW = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(flighthq._internal._StaticIndex.readArray(parts, 0.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
+                  (origH = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(flighthq._internal._StaticIndex.readArray(parts, 1.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
                 }
               }
               else if (__switchValue == 'offset') {
                 {
                   var parts:Dynamic = _Runtime.callProperty(value, 'split', cast ([','] : Array<Dynamic>));
-                  (offsetX = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.getIndex(parts, 0.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
-                  (offsetY = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.getIndex(parts, 1.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
+                  (offsetX = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(flighthq._internal._StaticIndex.readArray(parts, 0.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
+                  (offsetY = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(flighthq._internal._StaticIndex.readArray(parts, 1.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
                 }
               }
               else if (__switchValue == 'index') {

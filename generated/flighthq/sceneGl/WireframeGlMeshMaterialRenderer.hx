@@ -37,7 +37,7 @@ class WireframeGlMeshMaterialRenderer {
       return;
     }
     _Runtime.callValue(unpackColorToLinear, cast ([WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, _Runtime.field(wireframe, 'color')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locColor'), _Runtime.getIndex(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 0.0), _Runtime.getIndex(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 1.0), _Runtime.getIndex(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 2.0), _Runtime.getIndex(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 3.0));
+    flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locColor'), flighthq._internal._StaticIndex.readArray(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 0.0), flighthq._internal._StaticIndex.readArray(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 1.0), flighthq._internal._StaticIndex.readArray(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 2.0), flighthq._internal._StaticIndex.readArray(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 3.0));
   }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;

@@ -90,41 +90,41 @@ class GlQuadBatch {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
-        var id:Dynamic = _Runtime.getIndex(ids, i);
+        var id:Dynamic = flighthq._internal._StaticIndex.readUint16Array(ids, i);
         if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
-        var region:Dynamic = _Runtime.getIndex(regions, id);
+        var region:Dynamic = flighthq._internal._StaticIndex.readArray(regions, id);
         if ((cast ((cast ((cast _Runtime.field(region, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(region, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
         if ((cast isVector2 : Bool)) {
-          var dx:Dynamic = _Runtime.getIndex(transforms, (i * 2.0));
-          var dy:Dynamic = _Runtime.getIndex(transforms, ((i * 2.0) + 1.0));
-          _Runtime.setIndex(instanceData, writeBase, pa);
-          _Runtime.setIndex(instanceData, (writeBase + 1.0), pb);
-          _Runtime.setIndex(instanceData, (writeBase + 2.0), pc);
-          _Runtime.setIndex(instanceData, (writeBase + 3.0), pd);
-          _Runtime.setIndex(instanceData, (writeBase + 4.0), (((pa * dx) + (pc * dy)) + ptx));
-          _Runtime.setIndex(instanceData, (writeBase + 5.0), (((pb * dx) + (pd * dy)) + pty));
+          var dx:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (i * 2.0));
+          var dy:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, ((i * 2.0) + 1.0));
+          flighthq._internal._StaticIndex.writeFloat32Array(instanceData, writeBase, pa);
+          flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 1.0), pb);
+          flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 2.0), pc);
+          flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 3.0), pd);
+          flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 4.0), (((pa * dx) + (pc * dy)) + ptx));
+          flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 5.0), (((pb * dx) + (pd * dy)) + pty));
         } else {
           var offset:Dynamic = (i * 6.0);
-          var la:Dynamic = _Runtime.getIndex(transforms, offset);
-          var lb:Dynamic = _Runtime.getIndex(transforms, (offset + 1.0));
-          var lc:Dynamic = _Runtime.getIndex(transforms, (offset + 2.0));
-          var ld:Dynamic = _Runtime.getIndex(transforms, (offset + 3.0));
-          var ltx:Dynamic = _Runtime.getIndex(transforms, (offset + 4.0));
-          var lty:Dynamic = _Runtime.getIndex(transforms, (offset + 5.0));
-          _Runtime.setIndex(instanceData, writeBase, ((pa * la) + (pc * lb)));
-          _Runtime.setIndex(instanceData, (writeBase + 1.0), ((pb * la) + (pd * lb)));
-          _Runtime.setIndex(instanceData, (writeBase + 2.0), ((pa * lc) + (pc * ld)));
-          _Runtime.setIndex(instanceData, (writeBase + 3.0), ((pb * lc) + (pd * ld)));
-          _Runtime.setIndex(instanceData, (writeBase + 4.0), (((pa * ltx) + (pc * lty)) + ptx));
-          _Runtime.setIndex(instanceData, (writeBase + 5.0), (((pb * ltx) + (pd * lty)) + pty));
+          var la:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, offset);
+          var lb:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (offset + 1.0));
+          var lc:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (offset + 2.0));
+          var ld:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (offset + 3.0));
+          var ltx:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (offset + 4.0));
+          var lty:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (offset + 5.0));
+          flighthq._internal._StaticIndex.writeFloat32Array(instanceData, writeBase, ((pa * la) + (pc * lb)));
+          flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 1.0), ((pb * la) + (pd * lb)));
+          flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 2.0), ((pa * lc) + (pc * ld)));
+          flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 3.0), ((pb * lc) + (pd * ld)));
+          flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 4.0), (((pa * ltx) + (pc * lty)) + ptx));
+          flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 5.0), (((pb * ltx) + (pd * lty)) + pty));
         }
-        _Runtime.setIndex(instanceData, (writeBase + 6.0), _Runtime.field(region, 'width'));
-        _Runtime.setIndex(instanceData, (writeBase + 7.0), _Runtime.field(region, 'height'));
-        _Runtime.setIndex(instanceData, (writeBase + 8.0), (_Runtime.field(region, 'x') * iw));
-        _Runtime.setIndex(instanceData, (writeBase + 9.0), (_Runtime.field(region, 'y') * ih));
-        _Runtime.setIndex(instanceData, (writeBase + 10.0), ((_Runtime.field(region, 'x') + _Runtime.field(region, 'width')) * iw));
-        _Runtime.setIndex(instanceData, (writeBase + 11.0), ((_Runtime.field(region, 'y') + _Runtime.field(region, 'height')) * ih));
-        _Runtime.setIndex(instanceData, (writeBase + 12.0), alpha);
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 6.0), _Runtime.field(region, 'width'));
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 7.0), _Runtime.field(region, 'height'));
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 8.0), (_Runtime.field(region, 'x') * iw));
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 9.0), (_Runtime.field(region, 'y') * ih));
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 10.0), ((_Runtime.field(region, 'x') + _Runtime.field(region, 'width')) * iw));
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 11.0), ((_Runtime.field(region, 'y') + _Runtime.field(region, 'height')) * ih));
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 12.0), alpha);
         _Runtime.callValue(packGlSpriteBatchMaterialInstance, cast ([state, nodeMaterialData, (startCount + drawCount)] : Array<Dynamic>));
         var colorTransform:Dynamic = _Runtime.coalesce((cast _Runtime.optionalIndex(perQuadColorTransform, i) : Null<ColorTransform>), function():Dynamic return cast nodeColorTransform);
         _Runtime.callValue(recordGlSpriteBatchColorTransform, cast ([state, colorTransform, (startCount + drawCount)] : Array<Dynamic>));

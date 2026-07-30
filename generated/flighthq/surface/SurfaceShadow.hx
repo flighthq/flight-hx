@@ -91,10 +91,10 @@ class SurfaceShadow {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
             var di:Dynamic = (((py * w) + px) * 4.0);
-            _Runtime.setIndex(out, di, 0.0);
-            _Runtime.setIndex(out, (di + 1.0), 0.0);
-            _Runtime.setIndex(out, (di + 2.0), 0.0);
-            _Runtime.setIndex(out, (di + 3.0), (255.0 - _Runtime.callValue(SurfaceShadow.readSourceAlpha__surfaceShadow, cast ([source, (px - offsetX), (py - offsetY)] : Array<Dynamic>))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, 0.0);
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), 0.0);
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), 0.0);
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), (255.0 - _Runtime.callValue(SurfaceShadow.readSourceAlpha__surfaceShadow, cast ([source, (px - offsetX), (py - offsetY)] : Array<Dynamic>))));
             px++;
           }
         }
@@ -114,12 +114,12 @@ class SurfaceShadow {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
             var di:Dynamic = (((py * w) + px) * 4.0);
-            var blurred:Dynamic = _Runtime.getIndex(out, (di + 3.0));
+            var blurred:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(out, (di + 3.0));
             var sourceAlpha:Dynamic = _Runtime.callValue(SurfaceShadow.readSourceAlpha__surfaceShadow, cast ([source, px, py] : Array<Dynamic>));
-            _Runtime.setIndex(out, di, cr);
-            _Runtime.setIndex(out, (di + 1.0), cg);
-            _Runtime.setIndex(out, (di + 2.0), cb);
-            _Runtime.setIndex(out, (di + 3.0), HxMath.min(255.0, HxMath.round((((blurred * sourceAlpha) * scale) / 255.0))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, cr);
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), cg);
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), cb);
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), HxMath.min(255.0, HxMath.round((((blurred * sourceAlpha) * scale) / 255.0))));
             px++;
           }
         }
@@ -134,7 +134,7 @@ class SurfaceShadow {
     sx = (_Runtime.field(source, 'x') + px);
     sy = (_Runtime.field(source, 'y') + py);
     if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'height') : Float)) : Bool)) : Bool)) { return cast 0.0; }
-    return cast _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), ((((sy * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sx) * 4.0) + 3.0));
+    return cast flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), ((((sy * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sx) * 4.0) + 3.0));
     return cast null;
   }
 
@@ -161,10 +161,10 @@ class SurfaceShadow {
             if ((cast ((cast ((cast sourceX : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceX : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'width') : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Dynamic = (((sourceY * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sourceX) * 4.0);
             var di:Dynamic = (((py * _Runtime.field(source, 'width')) + px) * 4.0);
-            _Runtime.setIndex(out, di, cr);
-            _Runtime.setIndex(out, (di + 1.0), cg);
-            _Runtime.setIndex(out, (di + 2.0), cb);
-            _Runtime.setIndex(out, (di + 3.0), HxMath.min(255.0, HxMath.round((_Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 3.0)) * alphaScale))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, cr);
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), cg);
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), cb);
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), HxMath.min(255.0, HxMath.round((flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 3.0)) * alphaScale))));
             px++;
           }
         }

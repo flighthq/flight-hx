@@ -27,7 +27,7 @@ class BitmapFontFnt {
     metrics = _Runtime.callValue(getBitmapFontMetrics, cast ([font] : Array<Dynamic>));
     lineHeight = ((metrics.ascent + metrics.descent) + metrics.lineGap);
     base = metrics.ascent;
-    primaryImage = _Runtime.coalesce(_Runtime.optionalField(_Runtime.getIndex(_Runtime.field(font, 'pages'), 0.0), 'image'), function():Dynamic return cast null);
+    primaryImage = _Runtime.coalesce(_Runtime.optionalField(flighthq._internal._StaticIndex.readArray(_Runtime.field(font, 'pages'), 0.0), 'image'), function():Dynamic return cast null);
     scaleW = ((cast !_Runtime.strictEquals(primaryImage, null) : Bool) ? (cast _Runtime.field(primaryImage, 'width') : Dynamic) : (cast 0.0 : Dynamic));
     scaleH = ((cast !_Runtime.strictEquals(primaryImage, null) : Bool) ? (cast _Runtime.field(primaryImage, 'height') : Dynamic) : (cast 0.0 : Dynamic));
     pageCount = HxMath.max(_Runtime.field(_Runtime.field(font, 'pages'), 'length'), 1.0);

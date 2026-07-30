@@ -1445,7 +1445,7 @@ function indexedReceiver(
   if (seen.has(type)) return undefined;
   seen.add(type);
   if (type.isUnion()) {
-    const bindings = type.types.map((item) => indexedReceiver(item, checker, seen));
+    const bindings = type.types.map((item) => indexedReceiver(item, checker, new Set(seen)));
     const first = bindings[0];
     return first && bindings.every((binding) => binding === first) ? first : undefined;
   }

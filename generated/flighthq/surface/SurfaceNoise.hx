@@ -38,10 +38,10 @@ class SurfaceNoise {
             var x:Dynamic = (_Runtime.field(dest, 'x') + px);
             if ((cast ((cast ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool) || (cast ((cast x : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast x : Float) >= (cast surfaceWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var i:Dynamic = (((y * surfaceWidth) + x) * 4.0);
-            _Runtime.setIndex(data, i, HxMath.round(r));
-            _Runtime.setIndex(data, (i + 1.0), HxMath.round(g));
-            _Runtime.setIndex(data, (i + 2.0), HxMath.round(b));
-            _Runtime.setIndex(data, (i + 3.0), 255.0);
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(data, i, HxMath.round(r));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 1.0), HxMath.round(g));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 2.0), HxMath.round(b));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 3.0), 255.0);
             px++;
           }
         }
@@ -82,24 +82,24 @@ class SurfaceNoise {
             if ((cast grayScale : Bool)) {
               var value:Dynamic = _Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, (_Runtime.toInt32(seed) | 0)] : Array<Dynamic>));
               var byte:Dynamic = HxMath.round((value * 255.0));
-              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_R)))) { _Runtime.setIndex(data, di, byte); }
-              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_G)))) { _Runtime.setIndex(data, (di + 1.0), byte); }
-              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_B)))) { _Runtime.setIndex(data, (di + 2.0), byte); }
+              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_R)))) { flighthq._internal._StaticIndex.writeUint8ClampedArray(data, di, byte); }
+              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_G)))) { flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 1.0), byte); }
+              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_B)))) { flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 2.0), byte); }
             } else {
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_R)))) {
-                _Runtime.setIndex(data, di, HxMath.round((_Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, (_Runtime.toInt32(seed) | 0)] : Array<Dynamic>)) * 255.0)));
+                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, di, HxMath.round((_Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, (_Runtime.toInt32(seed) | 0)] : Array<Dynamic>)) * 255.0)));
               }
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_G)))) {
-                _Runtime.setIndex(data, (di + 1.0), HxMath.round((_Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435761.0)] : Array<Dynamic>)) * 255.0)));
+                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 1.0), HxMath.round((_Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435761.0)] : Array<Dynamic>)) * 255.0)));
               }
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_B)))) {
-                _Runtime.setIndex(data, (di + 2.0), HxMath.round((_Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435762.0)] : Array<Dynamic>)) * 255.0)));
+                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 2.0), HxMath.round((_Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435762.0)] : Array<Dynamic>)) * 255.0)));
               }
             }
             if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_A)))) {
-              _Runtime.setIndex(data, (di + 3.0), HxMath.round((_Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435763.0)] : Array<Dynamic>)) * 255.0)));
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 3.0), HxMath.round((_Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435763.0)] : Array<Dynamic>)) * 255.0)));
             } else {
-              _Runtime.setIndex(data, (di + 3.0), 255.0);
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 3.0), 255.0);
             }
             px++;
           }
@@ -141,24 +141,24 @@ class SurfaceNoise {
             if ((cast grayScale : Bool)) {
               var value:Dynamic = _Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, (_Runtime.toInt32(seed) | 0)] : Array<Dynamic>));
               var byte:Dynamic = HxMath.round((value * 255.0));
-              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_R)))) { _Runtime.setIndex(data, di, byte); }
-              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_G)))) { _Runtime.setIndex(data, (di + 1.0), byte); }
-              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_B)))) { _Runtime.setIndex(data, (di + 2.0), byte); }
+              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_R)))) { flighthq._internal._StaticIndex.writeUint8ClampedArray(data, di, byte); }
+              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_G)))) { flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 1.0), byte); }
+              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_B)))) { flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 2.0), byte); }
             } else {
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_R)))) {
-                _Runtime.setIndex(data, di, HxMath.round((_Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, (_Runtime.toInt32(seed) | 0)] : Array<Dynamic>)) * 255.0)));
+                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, di, HxMath.round((_Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, (_Runtime.toInt32(seed) | 0)] : Array<Dynamic>)) * 255.0)));
               }
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_G)))) {
-                _Runtime.setIndex(data, (di + 1.0), HxMath.round((_Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435761.0)] : Array<Dynamic>)) * 255.0)));
+                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 1.0), HxMath.round((_Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435761.0)] : Array<Dynamic>)) * 255.0)));
               }
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_B)))) {
-                _Runtime.setIndex(data, (di + 2.0), HxMath.round((_Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435762.0)] : Array<Dynamic>)) * 255.0)));
+                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 2.0), HxMath.round((_Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435762.0)] : Array<Dynamic>)) * 255.0)));
               }
             }
             if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_A)))) {
-              _Runtime.setIndex(data, (di + 3.0), HxMath.round((_Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435763.0)] : Array<Dynamic>)) * 255.0)));
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 3.0), HxMath.round((_Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435763.0)] : Array<Dynamic>)) * 255.0)));
             } else {
-              _Runtime.setIndex(data, (di + 3.0), 255.0);
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 3.0), 255.0);
             }
             px++;
           }

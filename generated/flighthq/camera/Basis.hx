@@ -10,9 +10,9 @@ class Basis {
   public static function getCameraForward(out:Vector3Like, camera:Camera):Void {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     m = camera.view.m;
-    (out.x = cast (-_Runtime.getIndex(m, 2.0) : Dynamic));
-    (out.y = cast (-_Runtime.getIndex(m, 6.0) : Dynamic));
-    (out.z = cast (-_Runtime.getIndex(m, 10.0) : Dynamic));
+    (out.x = cast (-flighthq._internal._StaticIndex.readFloat32Array(m, 2.0) : Dynamic));
+    (out.y = cast (-flighthq._internal._StaticIndex.readFloat32Array(m, 6.0) : Dynamic));
+    (out.z = cast (-flighthq._internal._StaticIndex.readFloat32Array(m, 10.0) : Dynamic));
   }
 
   public static function getCameraPosition(out:Vector3Like, camera:Camera):Void {
@@ -30,18 +30,18 @@ class Basis {
     var ty:Dynamic = cast _Runtime.UNDEFINED;
     var tz:Dynamic = cast _Runtime.UNDEFINED;
     m = camera.view.m;
-    m00 = _Runtime.getIndex(m, 0.0);
-    m01 = _Runtime.getIndex(m, 1.0);
-    m02 = _Runtime.getIndex(m, 2.0);
-    m10 = _Runtime.getIndex(m, 4.0);
-    m11 = _Runtime.getIndex(m, 5.0);
-    m12 = _Runtime.getIndex(m, 6.0);
-    m20 = _Runtime.getIndex(m, 8.0);
-    m21 = _Runtime.getIndex(m, 9.0);
-    m22 = _Runtime.getIndex(m, 10.0);
-    tx = _Runtime.getIndex(m, 12.0);
-    ty = _Runtime.getIndex(m, 13.0);
-    tz = _Runtime.getIndex(m, 14.0);
+    m00 = flighthq._internal._StaticIndex.readFloat32Array(m, 0.0);
+    m01 = flighthq._internal._StaticIndex.readFloat32Array(m, 1.0);
+    m02 = flighthq._internal._StaticIndex.readFloat32Array(m, 2.0);
+    m10 = flighthq._internal._StaticIndex.readFloat32Array(m, 4.0);
+    m11 = flighthq._internal._StaticIndex.readFloat32Array(m, 5.0);
+    m12 = flighthq._internal._StaticIndex.readFloat32Array(m, 6.0);
+    m20 = flighthq._internal._StaticIndex.readFloat32Array(m, 8.0);
+    m21 = flighthq._internal._StaticIndex.readFloat32Array(m, 9.0);
+    m22 = flighthq._internal._StaticIndex.readFloat32Array(m, 10.0);
+    tx = flighthq._internal._StaticIndex.readFloat32Array(m, 12.0);
+    ty = flighthq._internal._StaticIndex.readFloat32Array(m, 13.0);
+    tz = flighthq._internal._StaticIndex.readFloat32Array(m, 14.0);
     (out.x = cast (-(((m00 * tx) + (m01 * ty)) + (m02 * tz)) : Dynamic));
     (out.y = cast (-(((m10 * tx) + (m11 * ty)) + (m12 * tz)) : Dynamic));
     (out.z = cast (-(((m20 * tx) + (m21 * ty)) + (m22 * tz)) : Dynamic));
@@ -50,16 +50,16 @@ class Basis {
   public static function getCameraRight(out:Vector3Like, camera:Camera):Void {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     m = camera.view.m;
-    (out.x = cast (_Runtime.getIndex(m, 0.0) : Dynamic));
-    (out.y = cast (_Runtime.getIndex(m, 4.0) : Dynamic));
-    (out.z = cast (_Runtime.getIndex(m, 8.0) : Dynamic));
+    (out.x = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 0.0) : Dynamic));
+    (out.y = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 4.0) : Dynamic));
+    (out.z = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 8.0) : Dynamic));
   }
 
   public static function getCameraUp(out:Vector3Like, camera:Camera):Void {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     m = camera.view.m;
-    (out.x = cast (_Runtime.getIndex(m, 1.0) : Dynamic));
-    (out.y = cast (_Runtime.getIndex(m, 5.0) : Dynamic));
-    (out.z = cast (_Runtime.getIndex(m, 9.0) : Dynamic));
+    (out.x = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 1.0) : Dynamic));
+    (out.y = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 5.0) : Dynamic));
+    (out.z = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 9.0) : Dynamic));
   }
 }

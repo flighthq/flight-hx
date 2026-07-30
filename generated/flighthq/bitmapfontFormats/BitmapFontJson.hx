@@ -53,7 +53,7 @@ class BitmapFontJson {
       {
         var id:Dynamic = 0.0;
         while ((cast ((cast id : Float) < (cast _Runtime.field(_Runtime.field(root, 'pages'), 'length') : Float)) : Bool)) {
-          var file:Dynamic = _Runtime.getIndex(_Runtime.field(root, 'pages'), id);
+          var file:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(root, 'pages'), id);
           _Runtime.callProperty(pages, 'push', cast ([{ file: ((cast _Runtime.strictEquals(_Runtime.typeofValue(file), 'string') : Bool) ? (cast file : Dynamic) : (cast '' : Dynamic)), id: id }] : Array<Dynamic>));
           id++;
         }

@@ -362,7 +362,7 @@ class CapacitorFileSystem {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(binary, 'length') : Float)) : Bool)) {
-        _Runtime.setIndex(bytes, i, _Runtime.charCodeAt(binary, i));
+        flighthq._internal._StaticIndex.writeUint8Array(bytes, i, _Runtime.charCodeAt(binary, i));
         i++;
       }
     }
@@ -376,7 +376,7 @@ class CapacitorFileSystem {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(bytes, 'length') : Float)) : Bool)) {
-        (binary = cast ((binary + _Runtime.callProperty(String, 'fromCharCode', cast ([_Runtime.getIndex(bytes, i)] : Array<Dynamic>))) : Dynamic));
+        (binary = cast ((binary + _Runtime.callProperty(String, 'fromCharCode', cast ([flighthq._internal._StaticIndex.readUint8Array(bytes, i)] : Array<Dynamic>))) : Dynamic));
         i++;
       }
     }

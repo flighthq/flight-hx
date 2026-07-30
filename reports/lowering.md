@@ -20,19 +20,21 @@
 | Proven indexed expressions | 7327 |
 | Proven indexed reads | 4524 |
 | Proven indexed writes | 2917 |
+| Direct indexed reads | 4521 |
+| Direct indexed writes | 2915 |
 
-| Indexed receiver | Expressions | Reads | Writes |
-| --- | ---: | ---: | ---: |
-| `Array` | 2944 | 2512 | 455 |
-| `Float32Array` | 3307 | 1392 | 1979 |
-| `Float64Array` | 83 | 59 | 51 |
-| `Int16Array` | 9 | 5 | 4 |
-| `Int32Array` | 20 | 13 | 7 |
-| `Int8Array` | 0 | 0 | 0 |
-| `Uint16Array` | 63 | 37 | 26 |
-| `Uint32Array` | 10 | 2 | 8 |
-| `Uint8Array` | 192 | 164 | 28 |
-| `Uint8ClampedArray` | 699 | 340 | 359 |
+| Indexed receiver | Proven expressions | Proven reads | Proven writes | Direct reads | Direct writes |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `Array` | 2944 | 2512 | 455 | 2509 | 453 |
+| `Float32Array` | 3307 | 1392 | 1979 | 1392 | 1979 |
+| `Float64Array` | 83 | 59 | 51 | 59 | 51 |
+| `Int16Array` | 9 | 5 | 4 | 5 | 4 |
+| `Int32Array` | 20 | 13 | 7 | 13 | 7 |
+| `Int8Array` | 0 | 0 | 0 | 0 | 0 |
+| `Uint16Array` | 63 | 37 | 26 | 37 | 26 |
+| `Uint32Array` | 10 | 2 | 8 | 2 | 8 |
+| `Uint8Array` | 192 | 164 | 28 | 164 | 28 |
+| `Uint8ClampedArray` | 699 | 340 | 359 | 340 | 359 |
 
 | Package | Declarations | Lowered | Diagnostics | Boolean truthiness | Numeric relations | Indexed calls |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |

@@ -35,8 +35,8 @@ class ElectronNotification {
         _Runtime.callProperty(n, 'on', cast (['click', function() return _Runtime.callOptionalValue(clickListener, cast ([id] : Array<Dynamic>))] : Array<Dynamic>));
         _Runtime.callProperty(n, 'on', cast (['action', function(args:Dynamic) {
           var index:Dynamic = cast _Runtime.UNDEFINED;
-          index = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([_Runtime.getIndex(args, 1.0)] : Array<Dynamic>));
-          _Runtime.callOptionalValue(actionListener, cast ([id, Std.string(_Runtime.coalesce(_Runtime.optionalField(_Runtime.getIndex(actions, index), 'id'), function():Dynamic return cast ''))] : Array<Dynamic>));
+          index = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([flighthq._internal._StaticIndex.readArray(args, 1.0)] : Array<Dynamic>));
+          _Runtime.callOptionalValue(actionListener, cast ([id, Std.string(_Runtime.coalesce(_Runtime.optionalField(flighthq._internal._StaticIndex.readArray(actions, index), 'id'), function():Dynamic return cast ''))] : Array<Dynamic>));
         }] : Array<Dynamic>));
         _Runtime.callProperty(n, 'on', cast (['close', function() {
           ((cast live : flighthq._internal._Map).delete_(id));

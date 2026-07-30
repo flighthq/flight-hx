@@ -23,12 +23,12 @@ class WgpuCrtEffect {
     aberration = _Runtime.coalesce(_Runtime.field(effect, 'aberration'), function():Dynamic return cast 0.005);
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'stylization.crt', WgpuCrtEffect.CRT_FRAGMENT_WGSL__wgpuCrtEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, curvature);
-      _Runtime.setIndex(f32, 1.0, scanlineIntensity);
-      _Runtime.setIndex(f32, 2.0, vignette);
-      _Runtime.setIndex(f32, 3.0, aberration);
-      _Runtime.setIndex(f32, 4.0, _Runtime.field(source, 'width'));
-      _Runtime.setIndex(f32, 5.0, _Runtime.field(source, 'height'));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, curvature);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, scanlineIntensity);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, vignette);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, aberration);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, _Runtime.field(source, 'width'));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 5.0, _Runtime.field(source, 'height'));
     }] : Array<Dynamic>));
   }
 

@@ -16,7 +16,7 @@ class CreateEasingSamples {
     n = HxMath.floor(count);
     result = _Runtime.coalesce(out, function():Dynamic return cast new flighthq._internal._Float32Array(n));
     if ((cast _Runtime.strictEquals(n, 1.0) : Bool)) {
-      _Runtime.setIndex(result, 0.0, _Runtime.callValue(ease, cast ([0.5] : Array<Dynamic>)));
+      flighthq._internal._StaticIndex.writeFloat32Array(result, 0.0, _Runtime.callValue(ease, cast ([0.5] : Array<Dynamic>)));
       return cast result;
     }
     step = (1.0 / (n - 1.0));
@@ -24,12 +24,12 @@ class CreateEasingSamples {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
         var t:Dynamic = (i * step);
-        _Runtime.setIndex(result, i, _Runtime.callValue(ease, cast ([((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast t : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic))] : Array<Dynamic>)));
+        flighthq._internal._StaticIndex.writeFloat32Array(result, i, _Runtime.callValue(ease, cast ([((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast t : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic))] : Array<Dynamic>)));
         i++;
       }
     }
-    _Runtime.setIndex(result, 0.0, _Runtime.callValue(ease, cast ([0.0] : Array<Dynamic>)));
-    _Runtime.setIndex(result, (n - 1.0), _Runtime.callValue(ease, cast ([1.0] : Array<Dynamic>)));
+    flighthq._internal._StaticIndex.writeFloat32Array(result, 0.0, _Runtime.callValue(ease, cast ([0.0] : Array<Dynamic>)));
+    flighthq._internal._StaticIndex.writeFloat32Array(result, (n - 1.0), _Runtime.callValue(ease, cast ([1.0] : Array<Dynamic>)));
     return cast result;
     return cast null;
   }

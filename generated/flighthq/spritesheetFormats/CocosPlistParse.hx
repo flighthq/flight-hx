@@ -38,8 +38,8 @@ class CocosPlistParse {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-        var keyEl:Dynamic = _Runtime.getIndex(children, i);
-        var valEl:Dynamic = _Runtime.getIndex(children, (i + 1.0));
+        var keyEl:Dynamic = flighthq._internal._StaticIndex.readArray(children, i);
+        var valEl:Dynamic = flighthq._internal._StaticIndex.readArray(children, (i + 1.0));
         if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.optionalField(keyEl, 'name'), 'key'), function():Dynamic return cast valEl))) {
           ((cast map : flighthq._internal._Map).set(_Runtime.field(keyEl, 'text'), valEl));
         }

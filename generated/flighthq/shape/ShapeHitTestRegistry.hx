@@ -15,7 +15,7 @@ class ShapeHitTestRegistry {
   public static function hitTestShapeCommandPoint(buf:Array<ShapeCommandToken>, i:Float, x:Float, y:Float):Null<Bool> {
     var key:Dynamic = cast _Runtime.UNDEFINED;
     var fn:Dynamic = cast _Runtime.UNDEFINED;
-    key = (cast _Runtime.getIndex(buf, i) : String);
+    key = (cast flighthq._internal._StaticIndex.readArray(buf, i) : String);
     fn = ((cast ShapeHitTestRegistry.hitTests__shapeHitTestRegistry : flighthq._internal._Map).get(key));
     if ((cast _Runtime.strictEquals(fn, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
     return cast _Runtime.callValue(fn, cast ([x, y, buf, (i + 2.0)] : Array<Dynamic>));

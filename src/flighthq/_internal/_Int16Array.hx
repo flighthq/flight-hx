@@ -80,6 +80,7 @@ abstract _Int16Array(Dynamic) {
   }
 
   private static inline function toInt16(value:Dynamic):Int {
-    return (Std.int(value) << 16) >> 16;
+    final wrapped = _Runtime.toInt32(value) & 0xffff;
+    return wrapped >= 0x8000 ? wrapped - 0x10000 : wrapped;
   }
 }

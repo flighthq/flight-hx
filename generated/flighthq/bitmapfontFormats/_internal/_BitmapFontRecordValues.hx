@@ -43,7 +43,7 @@ class _BitmapFontRecordValues {
       var id:Dynamic = 0.0;
       while ((cast ((cast id : Float) <= (cast maxPageId : Float)) : Bool)) {
         var atlas:Dynamic = ((cast resolved : flighthq._internal._Map).get(id));
-        if ((cast !_Runtime.strictEquals(atlas, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(pages, id, atlas); }
+        if ((cast !_Runtime.strictEquals(atlas, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeArray(pages, id, atlas); }
         id++;
       }
     }

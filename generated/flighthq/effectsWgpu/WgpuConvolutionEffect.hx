@@ -38,22 +38,22 @@ class WgpuConvolutionEffect {
     divisor = _Runtime.coalesce(_Runtime.field(effect, 'divisor'), function():Dynamic return cast _Runtime.callValue(WgpuConvolutionEffect.getAutoDivisor__wgpuConvolutionEffect, cast ([matrix, (matrixX * matrixY)] : Array<Dynamic>)));
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'stylization.convolution', WgpuConvolutionEffect.CONVOLUTION_WGSL__wgpuConvolutionEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic, i32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, (1.0 / _Runtime.field(source, 'width')));
-      _Runtime.setIndex(f32, 1.0, (1.0 / _Runtime.field(source, 'height')));
-      _Runtime.setIndex(i32, 2.0, matrixX);
-      _Runtime.setIndex(i32, 3.0, matrixY);
-      _Runtime.setIndex(f32, 4.0, divisor);
-      _Runtime.setIndex(f32, 5.0, bias);
-      _Runtime.setIndex(i32, 6.0, ((cast clampEdge : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
-      _Runtime.setIndex(i32, 7.0, ((cast preserveAlpha : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
-      _Runtime.setIndex(f32, 8.0, ((_Runtime.toInt32((_Runtime.toInt32(edgeColor) >> 16)) & 255) / 255.0));
-      _Runtime.setIndex(f32, 9.0, ((_Runtime.toInt32((_Runtime.toInt32(edgeColor) >> 8)) & 255) / 255.0));
-      _Runtime.setIndex(f32, 10.0, ((_Runtime.toInt32(edgeColor) & 255) / 255.0));
-      _Runtime.setIndex(f32, 11.0, ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(edgeColor), 24)) & 255) / 255.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, (1.0 / _Runtime.field(source, 'width')));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, (1.0 / _Runtime.field(source, 'height')));
+      flighthq._internal._StaticIndex.writeInt32Array(i32, 2.0, matrixX);
+      flighthq._internal._StaticIndex.writeInt32Array(i32, 3.0, matrixY);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, divisor);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 5.0, bias);
+      flighthq._internal._StaticIndex.writeInt32Array(i32, 6.0, ((cast clampEdge : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
+      flighthq._internal._StaticIndex.writeInt32Array(i32, 7.0, ((cast preserveAlpha : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 8.0, ((_Runtime.toInt32((_Runtime.toInt32(edgeColor) >> 16)) & 255) / 255.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 9.0, ((_Runtime.toInt32((_Runtime.toInt32(edgeColor) >> 8)) & 255) / 255.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 10.0, ((_Runtime.toInt32(edgeColor) & 255) / 255.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 11.0, ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(edgeColor), 24)) & 255) / 255.0));
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast (matrixX * matrixY) : Float)) : Bool)) {
-          _Runtime.setIndex(f32, (12.0 + i), _Runtime.getIndex(matrix, i));
+          flighthq._internal._StaticIndex.writeFloat32Array(f32, (12.0 + i), flighthq._internal._StaticIndex.readArray(matrix, i));
           i++;
         }
       }
@@ -70,7 +70,7 @@ class WgpuConvolutionEffect {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
-        (sum = cast ((sum + _Runtime.getIndex(matrix, i)) : Dynamic));
+        (sum = cast ((sum + flighthq._internal._StaticIndex.readArray(matrix, i)) : Dynamic));
         i++;
       }
     }

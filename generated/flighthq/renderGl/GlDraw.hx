@@ -142,22 +142,22 @@ class GlDraw {
     quadIndexBuffer = _Runtime.field(__destructure0, 'quadIndexBuffer');
     shaderLoc = _Runtime.field(__destructure0, 'shaderLoc');
     v = quadVertexData;
-    _Runtime.setIndex(v, 0.0, x0);
-    _Runtime.setIndex(v, 1.0, y0);
-    _Runtime.setIndex(v, 2.0, u0);
-    _Runtime.setIndex(v, 3.0, v0);
-    _Runtime.setIndex(v, 4.0, x1);
-    _Runtime.setIndex(v, 5.0, y0);
-    _Runtime.setIndex(v, 6.0, u1);
-    _Runtime.setIndex(v, 7.0, v0);
-    _Runtime.setIndex(v, 8.0, x1);
-    _Runtime.setIndex(v, 9.0, y1);
-    _Runtime.setIndex(v, 10.0, u1);
-    _Runtime.setIndex(v, 11.0, v1);
-    _Runtime.setIndex(v, 12.0, x0);
-    _Runtime.setIndex(v, 13.0, y1);
-    _Runtime.setIndex(v, 14.0, u0);
-    _Runtime.setIndex(v, 15.0, v1);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 0.0, x0);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 1.0, y0);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 2.0, u0);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 3.0, v0);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 4.0, x1);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 5.0, y0);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 6.0, u1);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 7.0, v0);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 8.0, x1);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 9.0, y1);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 10.0, u1);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 11.0, v1);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 12.0, x0);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 13.0, y1);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 14.0, u0);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 15.0, v1);
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, quadVertexBuffer);
     flighthq._internal.backend.WebGl2Backend.bufferSubData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, 0.0, v);
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER, quadIndexBuffer);
@@ -245,11 +245,11 @@ class GlDraw {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
-        var a:Dynamic = _Runtime.getIndex(data, (i + 3.0));
-        _Runtime.setIndex(out, i, ((_Runtime.getIndex(data, i) * a) / 255.0));
-        _Runtime.setIndex(out, (i + 1.0), ((_Runtime.getIndex(data, (i + 1.0)) * a) / 255.0));
-        _Runtime.setIndex(out, (i + 2.0), ((_Runtime.getIndex(data, (i + 2.0)) * a) / 255.0));
-        _Runtime.setIndex(out, (i + 3.0), a);
+        var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, i, ((flighthq._internal._StaticIndex.readUint8ClampedArray(data, i) * a) / 255.0));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 1.0), ((flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)) * a) / 255.0));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 2.0), ((flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)) * a) / 255.0));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 3.0), a);
         (i = cast ((i + 4.0) : Dynamic));
       }
     }

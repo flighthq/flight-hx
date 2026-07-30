@@ -213,50 +213,50 @@ class Shape {
     };
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-      var key:Dynamic = (cast _Runtime.getIndex(commands, i) : String);
-      var argCount:Dynamic = (cast _Runtime.getIndex(commands, (i + 1.0)) : Float);
+      var key:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
+      var argCount:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float);
       var b:Dynamic = (i + 2.0);
       {
         var __switchValue = key;
         if (__switchValue == 'drawRectangle' || __switchValue == 'drawRoundRectangle') {
           {
-            var x:Dynamic = (cast _Runtime.getIndex(commands, b) : Float);
-            var y:Dynamic = (cast _Runtime.getIndex(commands, (b + 1.0)) : Float);
-            var w:Dynamic = (cast _Runtime.getIndex(commands, (b + 2.0)) : Float);
-            var h:Dynamic = (cast _Runtime.getIndex(commands, (b + 3.0)) : Float);
+            var x:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, b) : Float);
+            var y:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 1.0)) : Float);
+            var w:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 2.0)) : Float);
+            var h:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 3.0)) : Float);
             _Runtime.callValue(expand, cast ([x, y] : Array<Dynamic>));
             _Runtime.callValue(expand, cast ([(x + w), (y + h)] : Array<Dynamic>));
           }
         }
         else if (__switchValue == 'drawCircle') {
           {
-            var x:Dynamic = (cast _Runtime.getIndex(commands, b) : Float);
-            var y:Dynamic = (cast _Runtime.getIndex(commands, (b + 1.0)) : Float);
-            var r:Dynamic = (cast _Runtime.getIndex(commands, (b + 2.0)) : Float);
+            var x:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, b) : Float);
+            var y:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 1.0)) : Float);
+            var r:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 2.0)) : Float);
             _Runtime.callValue(expand, cast ([(x - r), (y - r)] : Array<Dynamic>));
             _Runtime.callValue(expand, cast ([(x + r), (y + r)] : Array<Dynamic>));
           }
         }
         else if (__switchValue == 'drawEllipse') {
           {
-            var x:Dynamic = (cast _Runtime.getIndex(commands, b) : Float);
-            var y:Dynamic = (cast _Runtime.getIndex(commands, (b + 1.0)) : Float);
-            var w:Dynamic = (cast _Runtime.getIndex(commands, (b + 2.0)) : Float);
-            var h:Dynamic = (cast _Runtime.getIndex(commands, (b + 3.0)) : Float);
+            var x:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, b) : Float);
+            var y:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 1.0)) : Float);
+            var w:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 2.0)) : Float);
+            var h:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 3.0)) : Float);
             _Runtime.callValue(expand, cast ([x, y] : Array<Dynamic>));
             _Runtime.callValue(expand, cast ([(x + w), (y + h)] : Array<Dynamic>));
           }
         }
         else if (__switchValue == 'moveTo') {
           {
-            (penX = cast ((cast _Runtime.getIndex(commands, b) : Float) : Dynamic));
-            (penY = cast ((cast _Runtime.getIndex(commands, (b + 1.0)) : Float) : Dynamic));
+            (penX = cast ((cast flighthq._internal._StaticIndex.readArray(commands, b) : Float) : Dynamic));
+            (penY = cast ((cast flighthq._internal._StaticIndex.readArray(commands, (b + 1.0)) : Float) : Dynamic));
           }
         }
         else if (__switchValue == 'lineTo') {
           {
-            var x:Dynamic = (cast _Runtime.getIndex(commands, b) : Float);
-            var y:Dynamic = (cast _Runtime.getIndex(commands, (b + 1.0)) : Float);
+            var x:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, b) : Float);
+            var y:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 1.0)) : Float);
             _Runtime.callValue(expand, cast ([penX, penY] : Array<Dynamic>));
             _Runtime.callValue(expand, cast ([x, y] : Array<Dynamic>));
             (penX = cast (x : Dynamic));
@@ -265,10 +265,10 @@ class Shape {
         }
         else if (__switchValue == 'curveTo') {
           {
-            var controlX:Dynamic = (cast _Runtime.getIndex(commands, b) : Float);
-            var controlY:Dynamic = (cast _Runtime.getIndex(commands, (b + 1.0)) : Float);
-            var anchorX:Dynamic = (cast _Runtime.getIndex(commands, (b + 2.0)) : Float);
-            var anchorY:Dynamic = (cast _Runtime.getIndex(commands, (b + 3.0)) : Float);
+            var controlX:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, b) : Float);
+            var controlY:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 1.0)) : Float);
+            var anchorX:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 2.0)) : Float);
+            var anchorY:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 3.0)) : Float);
             _Runtime.callValue(expand, cast ([penX, penY] : Array<Dynamic>));
             var denomX:Dynamic = ((penX - (2.0 * controlX)) + anchorX);
             if ((cast !_Runtime.strictEquals(denomX, 0.0) : Bool)) {
@@ -287,12 +287,12 @@ class Shape {
         }
         else if (__switchValue == 'cubicCurveTo') {
           {
-            var control1X:Dynamic = (cast _Runtime.getIndex(commands, b) : Float);
-            var control1Y:Dynamic = (cast _Runtime.getIndex(commands, (b + 1.0)) : Float);
-            var control2X:Dynamic = (cast _Runtime.getIndex(commands, (b + 2.0)) : Float);
-            var control2Y:Dynamic = (cast _Runtime.getIndex(commands, (b + 3.0)) : Float);
-            var anchorX:Dynamic = (cast _Runtime.getIndex(commands, (b + 4.0)) : Float);
-            var anchorY:Dynamic = (cast _Runtime.getIndex(commands, (b + 5.0)) : Float);
+            var control1X:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, b) : Float);
+            var control1Y:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 1.0)) : Float);
+            var control2X:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 2.0)) : Float);
+            var control2Y:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 3.0)) : Float);
+            var anchorX:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 4.0)) : Float);
+            var anchorY:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 5.0)) : Float);
             _Runtime.callValue(expand, cast ([penX, penY] : Array<Dynamic>));
             _Runtime.callValue(expand, cast ([anchorX, anchorY] : Array<Dynamic>));
             _Runtime.callValue(expandCubicExtrema, cast ([penX, penY, control1X, control1Y, control2X, control2Y, anchorX, anchorY] : Array<Dynamic>));
@@ -302,35 +302,35 @@ class Shape {
         }
         else if (__switchValue == 'lineStyle') {
           {
-            (strokeHalf = cast (((cast _Runtime.getIndex(commands, b) : Float) / 2.0) : Dynamic));
+            (strokeHalf = cast (((cast flighthq._internal._StaticIndex.readArray(commands, b) : Float) / 2.0) : Dynamic));
           }
         }
         else if (__switchValue == 'drawPath') {
           {
-            var pathCmds:Dynamic = (cast _Runtime.getIndex(commands, b) : Array<Float>);
-            var data:Dynamic = (cast _Runtime.getIndex(commands, (b + 1.0)) : Array<Float>);
+            var pathCmds:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, b) : Array<Float>);
+            var data:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 1.0)) : Array<Float>);
             var di:Dynamic = 0.0;
             for (pc in _Runtime.iterable(pathCmds)) {
               {
                 var __switchValue = pc;
                 if (__switchValue == 1.0) {
-                  (penX = cast (_Runtime.getIndex(data, di) : Dynamic));
-                  (penY = cast (_Runtime.getIndex(data, (di + 1.0)) : Dynamic));
+                  (penX = cast (flighthq._internal._StaticIndex.readArray(data, di) : Dynamic));
+                  (penY = cast (flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Dynamic));
                   (di = cast ((di + 2.0) : Dynamic));
                 }
                 else if (__switchValue == 2.0) {
                   _Runtime.callValue(expand, cast ([penX, penY] : Array<Dynamic>));
-                  _Runtime.callValue(expand, cast ([_Runtime.getIndex(data, di), _Runtime.getIndex(data, (di + 1.0))] : Array<Dynamic>));
-                  (penX = cast (_Runtime.getIndex(data, di) : Dynamic));
-                  (penY = cast (_Runtime.getIndex(data, (di + 1.0)) : Dynamic));
+                  _Runtime.callValue(expand, cast ([flighthq._internal._StaticIndex.readArray(data, di), flighthq._internal._StaticIndex.readArray(data, (di + 1.0))] : Array<Dynamic>));
+                  (penX = cast (flighthq._internal._StaticIndex.readArray(data, di) : Dynamic));
+                  (penY = cast (flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Dynamic));
                   (di = cast ((di + 2.0) : Dynamic));
                 }
                 else if (__switchValue == 3.0) {
                   {
-                    var qcx:Dynamic = _Runtime.getIndex(data, di);
-                    var qcy:Dynamic = _Runtime.getIndex(data, (di + 1.0));
-                    var qax:Dynamic = _Runtime.getIndex(data, (di + 2.0));
-                    var qay:Dynamic = _Runtime.getIndex(data, (di + 3.0));
+                    var qcx:Dynamic = flighthq._internal._StaticIndex.readArray(data, di);
+                    var qcy:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
+                    var qax:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
+                    var qay:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
                     _Runtime.callValue(expand, cast ([penX, penY] : Array<Dynamic>));
                     var qdx:Dynamic = ((penX - (2.0 * qcx)) + qax);
                     if ((cast !_Runtime.strictEquals(qdx, 0.0) : Bool)) {
@@ -349,24 +349,24 @@ class Shape {
                   }
                 }
                 else if (__switchValue == 4.0) {
-                  (penX = cast (_Runtime.getIndex(data, (di + 2.0)) : Dynamic));
-                  (penY = cast (_Runtime.getIndex(data, (di + 3.0)) : Dynamic));
+                  (penX = cast (flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Dynamic));
+                  (penY = cast (flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Dynamic));
                   (di = cast ((di + 4.0) : Dynamic));
                 }
                 else if (__switchValue == 5.0) {
                   _Runtime.callValue(expand, cast ([penX, penY] : Array<Dynamic>));
-                  _Runtime.callValue(expand, cast ([_Runtime.getIndex(data, (di + 2.0)), _Runtime.getIndex(data, (di + 3.0))] : Array<Dynamic>));
-                  (penX = cast (_Runtime.getIndex(data, (di + 2.0)) : Dynamic));
-                  (penY = cast (_Runtime.getIndex(data, (di + 3.0)) : Dynamic));
+                  _Runtime.callValue(expand, cast ([flighthq._internal._StaticIndex.readArray(data, (di + 2.0)), flighthq._internal._StaticIndex.readArray(data, (di + 3.0))] : Array<Dynamic>));
+                  (penX = cast (flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Dynamic));
+                  (penY = cast (flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Dynamic));
                   (di = cast ((di + 4.0) : Dynamic));
                 }
                 else if (__switchValue == 6.0) {
                   {
                     _Runtime.callValue(expand, cast ([penX, penY] : Array<Dynamic>));
-                    var ax:Dynamic = _Runtime.getIndex(data, (di + 4.0));
-                    var ay:Dynamic = _Runtime.getIndex(data, (di + 5.0));
+                    var ax:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 4.0));
+                    var ay:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 5.0));
                     _Runtime.callValue(expand, cast ([ax, ay] : Array<Dynamic>));
-                    _Runtime.callValue(expandCubicExtrema, cast ([penX, penY, _Runtime.getIndex(data, di), _Runtime.getIndex(data, (di + 1.0)), _Runtime.getIndex(data, (di + 2.0)), _Runtime.getIndex(data, (di + 3.0)), ax, ay] : Array<Dynamic>));
+                    _Runtime.callValue(expandCubicExtrema, cast ([penX, penY, flighthq._internal._StaticIndex.readArray(data, di), flighthq._internal._StaticIndex.readArray(data, (di + 1.0)), flighthq._internal._StaticIndex.readArray(data, (di + 2.0)), flighthq._internal._StaticIndex.readArray(data, (di + 3.0)), ax, ay] : Array<Dynamic>));
                     (penX = cast (ax : Dynamic));
                     (penY = cast (ay : Dynamic));
                     (di = cast ((di + 6.0) : Dynamic));
@@ -378,11 +378,11 @@ class Shape {
         }
         else if (__switchValue == 'drawTriangles') {
           {
-            var vertices:Dynamic = (cast _Runtime.getIndex(commands, b) : Array<Float>);
+            var vertices:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, b) : Array<Float>);
             {
               var vi:Dynamic = 0.0;
               while ((cast ((cast vi : Float) < (cast _Runtime.field(vertices, 'length') : Float)) : Bool)) {
-                _Runtime.callValue(expand, cast ([_Runtime.getIndex(vertices, vi), _Runtime.getIndex(vertices, (vi + 1.0))] : Array<Dynamic>));
+                _Runtime.callValue(expand, cast ([flighthq._internal._StaticIndex.readArray(vertices, vi), flighthq._internal._StaticIndex.readArray(vertices, (vi + 1.0))] : Array<Dynamic>));
                 (vi = cast ((vi + 2.0) : Dynamic));
               }
             }
@@ -461,7 +461,7 @@ class Shape {
     count = 0.0;
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-      var argCount:Dynamic = (cast _Runtime.getIndex(commands, (i + 1.0)) : Float);
+      var argCount:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float);
       count++;
       (i = cast ((i + (argCount + 2.0)) : Dynamic));
     }

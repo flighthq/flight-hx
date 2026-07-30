@@ -80,18 +80,18 @@ class WgpuBevelEffect {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     pipeline = _Runtime.callValue(WgpuBevelEffect.getWgpuBevelCompositeShader__wgpuBevelEffect, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuDualSourceEffectPass, cast ([state, field, source, dest, pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(params, 'highlightColor')) >> 16)) & 255) / 255.0));
-      _Runtime.setIndex(f32, 1.0, ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(params, 'highlightColor')) >> 8)) & 255) / 255.0));
-      _Runtime.setIndex(f32, 2.0, ((_Runtime.toInt32(_Runtime.field(params, 'highlightColor')) & 255) / 255.0));
-      _Runtime.setIndex(f32, 3.0, _Runtime.field(params, 'highlightAlpha'));
-      _Runtime.setIndex(f32, 4.0, ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(params, 'shadowColor')) >> 16)) & 255) / 255.0));
-      _Runtime.setIndex(f32, 5.0, ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(params, 'shadowColor')) >> 8)) & 255) / 255.0));
-      _Runtime.setIndex(f32, 6.0, ((_Runtime.toInt32(_Runtime.field(params, 'shadowColor')) & 255) / 255.0));
-      _Runtime.setIndex(f32, 7.0, _Runtime.field(params, 'shadowAlpha'));
-      _Runtime.setIndex(f32, 8.0, _Runtime.field(params, 'offsetX'));
-      _Runtime.setIndex(f32, 9.0, _Runtime.field(params, 'offsetY'));
-      _Runtime.setIndex(f32, 10.0, _Runtime.field(params, 'intensity'));
-      _Runtime.setIndex(f32, 11.0, _Runtime.field(params, 'clipMode'));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(params, 'highlightColor')) >> 16)) & 255) / 255.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(params, 'highlightColor')) >> 8)) & 255) / 255.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, ((_Runtime.toInt32(_Runtime.field(params, 'highlightColor')) & 255) / 255.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, _Runtime.field(params, 'highlightAlpha'));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(params, 'shadowColor')) >> 16)) & 255) / 255.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 5.0, ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(params, 'shadowColor')) >> 8)) & 255) / 255.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 6.0, ((_Runtime.toInt32(_Runtime.field(params, 'shadowColor')) & 255) / 255.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 7.0, _Runtime.field(params, 'shadowAlpha'));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 8.0, _Runtime.field(params, 'offsetX'));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 9.0, _Runtime.field(params, 'offsetY'));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 10.0, _Runtime.field(params, 'intensity'));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 11.0, _Runtime.field(params, 'clipMode'));
     }] : Array<Dynamic>));
   }
 

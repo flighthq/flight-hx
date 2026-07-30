@@ -17,16 +17,16 @@ class VideoFormat {
     var b:Dynamic = cast _Runtime.UNDEFINED;
     b = ((cast _Runtime.isInstanceOf(data, _Runtime.globalValue('Uint8Array')) : Bool) ? (cast data : Dynamic) : (cast new flighthq._internal._UInt8Array(data) : Dynamic));
     if ((cast ((cast _Runtime.field(b, 'byteLength') : Float) < (cast 4.0 : Float)) : Bool)) { return cast null; }
-    if ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.field(b, 'byteLength') : Float) >= (cast 8.0 : Float)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(b, 4.0), 102.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(b, 5.0), 116.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(b, 6.0), 121.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(b, 7.0), 112.0) : Bool)) : Bool)) { return cast 'video/mp4'; }
-    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.getIndex(b, 0.0), 26.0) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(b, 1.0), 69.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(b, 2.0), 223.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(b, 3.0), 163.0) : Bool)) : Bool)) { return cast 'video/webm'; }
-    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.getIndex(b, 0.0), 79.0) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(b, 1.0), 103.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(b, 2.0), 103.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(b, 3.0), 83.0) : Bool)) : Bool)) { return cast 'video/ogg'; }
+    if ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.field(b, 'byteLength') : Float) >= (cast 8.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 4.0), 102.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 5.0), 116.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 6.0), 121.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 7.0), 112.0) : Bool)) : Bool)) { return cast 'video/mp4'; }
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 0.0), 26.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 1.0), 69.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 2.0), 223.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 3.0), 163.0) : Bool)) : Bool)) { return cast 'video/webm'; }
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 0.0), 79.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 1.0), 103.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 2.0), 103.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 3.0), 83.0) : Bool)) : Bool)) { return cast 'video/ogg'; }
     return cast null;
     return cast null;
   }
 
   public static function inferVideoMimeType(url:String):Null<String> {
     var ext:Dynamic = cast _Runtime.UNDEFINED;
-    ext = _Runtime.callOptionalProperty(_Runtime.callProperty(_Runtime.callProperty(_Runtime.getIndex(_Runtime.callProperty(url, 'split', cast (['?'] : Array<Dynamic>)), 0.0), 'split', cast (['.'] : Array<Dynamic>)), 'pop', cast ([] : Array<Dynamic>)), 'toLowerCase', cast ([] : Array<Dynamic>));
+    ext = _Runtime.callOptionalProperty(_Runtime.callProperty(_Runtime.callProperty(flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(url, 'split', cast (['?'] : Array<Dynamic>)), 0.0), 'split', cast (['.'] : Array<Dynamic>)), 'pop', cast ([] : Array<Dynamic>)), 'toLowerCase', cast ([] : Array<Dynamic>));
     {
       var __switchValue = ext;
       if (__switchValue == 'mp4' || __switchValue == 'm4v') {

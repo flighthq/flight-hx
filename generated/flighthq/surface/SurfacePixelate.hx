@@ -43,10 +43,10 @@ class SurfacePixelate {
                     var sx:Dynamic = (_Runtime.field(source, 'x') + px);
                     if ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast surfaceWidth : Float)) : Bool)) : Bool)) { px++; continue; }
                     var si:Dynamic = (((sy * surfaceWidth) + sx) * 4.0);
-                    (r = cast ((r + _Runtime.getIndex(data, si)) : Dynamic));
-                    (g = cast ((g + _Runtime.getIndex(data, (si + 1.0))) : Dynamic));
-                    (b = cast ((b + _Runtime.getIndex(data, (si + 2.0))) : Dynamic));
-                    (a = cast ((a + _Runtime.getIndex(data, (si + 3.0))) : Dynamic));
+                    (r = cast ((r + flighthq._internal._StaticIndex.readUint8ClampedArray(data, si)) : Dynamic));
+                    (g = cast ((g + flighthq._internal._StaticIndex.readUint8ClampedArray(data, (si + 1.0))) : Dynamic));
+                    (b = cast ((b + flighthq._internal._StaticIndex.readUint8ClampedArray(data, (si + 2.0))) : Dynamic));
+                    (a = cast ((a + flighthq._internal._StaticIndex.readUint8ClampedArray(data, (si + 3.0))) : Dynamic));
                     count++;
                     px++;
                   }
@@ -66,10 +66,10 @@ class SurfacePixelate {
                   var px:Dynamic = bx;
                   while ((cast ((cast px : Float) < (cast xEnd : Float)) : Bool)) {
                     var di:Dynamic = (((py * w) + px) * 4.0);
-                    _Runtime.setIndex(out, di, ar);
-                    _Runtime.setIndex(out, (di + 1.0), ag);
-                    _Runtime.setIndex(out, (di + 2.0), ab);
-                    _Runtime.setIndex(out, (di + 3.0), aa);
+                    flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, ar);
+                    flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), ag);
+                    flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), ab);
+                    flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), aa);
                     px++;
                   }
                 }

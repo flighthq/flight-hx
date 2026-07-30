@@ -45,9 +45,9 @@ class GetMeshSkinBounds {
       var v:Dynamic = 0.0;
       while ((cast ((cast v : Float) < (cast restVertexCount : Float)) : Bool)) {
         var p:Dynamic = (v * 3.0);
-        var px:Dynamic = _Runtime.getIndex(positions, p);
-        var py:Dynamic = _Runtime.getIndex(positions, (p + 1.0));
-        var pz:Dynamic = _Runtime.getIndex(positions, (p + 2.0));
+        var px:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(positions, p);
+        var py:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(positions, (p + 1.0));
+        var pz:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(positions, (p + 2.0));
         if ((cast ((cast px : Float) < (cast restMinX : Float)) : Bool)) { (restMinX = cast (px : Dynamic)); }
         if ((cast ((cast py : Float) < (cast restMinY : Float)) : Bool)) { (restMinY = cast (py : Dynamic)); }
         if ((cast ((cast pz : Float) < (cast restMinZ : Float)) : Bool)) { (restMinZ = cast (pz : Dynamic)); }
@@ -84,14 +84,14 @@ class GetMeshSkinBounds {
     {
       var j:Dynamic = 0.0;
       while ((cast ((cast j : Float) < (cast jointCount : Float)) : Bool)) {
-        if ((cast !_Runtime.truthy(_Runtime.getIndex(referenced, j)) : Bool)) { j++; continue; }
+        if ((cast !_Runtime.truthy(flighthq._internal._StaticIndex.readUint8Array(referenced, j)) : Bool)) { j++; continue; }
         var m:Dynamic = (j * 16.0);
-        var tcx:Dynamic = ((((_Runtime.getIndex(palette, m) * cx) + (_Runtime.getIndex(palette, (m + 4.0)) * cy)) + (_Runtime.getIndex(palette, (m + 8.0)) * cz)) + _Runtime.getIndex(palette, (m + 12.0)));
-        var tcy:Dynamic = ((((_Runtime.getIndex(palette, (m + 1.0)) * cx) + (_Runtime.getIndex(palette, (m + 5.0)) * cy)) + (_Runtime.getIndex(palette, (m + 9.0)) * cz)) + _Runtime.getIndex(palette, (m + 13.0)));
-        var tcz:Dynamic = ((((_Runtime.getIndex(palette, (m + 2.0)) * cx) + (_Runtime.getIndex(palette, (m + 6.0)) * cy)) + (_Runtime.getIndex(palette, (m + 10.0)) * cz)) + _Runtime.getIndex(palette, (m + 14.0)));
-        var tex:Dynamic = (((HxMath.abs(_Runtime.getIndex(palette, m)) * ex) + (HxMath.abs(_Runtime.getIndex(palette, (m + 4.0))) * ey)) + (HxMath.abs(_Runtime.getIndex(palette, (m + 8.0))) * ez));
-        var tey:Dynamic = (((HxMath.abs(_Runtime.getIndex(palette, (m + 1.0))) * ex) + (HxMath.abs(_Runtime.getIndex(palette, (m + 5.0))) * ey)) + (HxMath.abs(_Runtime.getIndex(palette, (m + 9.0))) * ez));
-        var tez:Dynamic = (((HxMath.abs(_Runtime.getIndex(palette, (m + 2.0))) * ex) + (HxMath.abs(_Runtime.getIndex(palette, (m + 6.0))) * ey)) + (HxMath.abs(_Runtime.getIndex(palette, (m + 10.0))) * ez));
+        var tcx:Dynamic = ((((flighthq._internal._StaticIndex.readFloat32Array(palette, m) * cx) + (flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 4.0)) * cy)) + (flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 8.0)) * cz)) + flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 12.0)));
+        var tcy:Dynamic = ((((flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 1.0)) * cx) + (flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 5.0)) * cy)) + (flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 9.0)) * cz)) + flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 13.0)));
+        var tcz:Dynamic = ((((flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 2.0)) * cx) + (flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 6.0)) * cy)) + (flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 10.0)) * cz)) + flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 14.0)));
+        var tex:Dynamic = (((HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, m)) * ex) + (HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 4.0))) * ey)) + (HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 8.0))) * ez));
+        var tey:Dynamic = (((HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 1.0))) * ex) + (HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 5.0))) * ey)) + (HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 9.0))) * ez));
+        var tez:Dynamic = (((HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 2.0))) * ex) + (HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 6.0))) * ey)) + (HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 10.0))) * ez));
         if ((cast ((cast (tcx - tex) : Float) < (cast minX : Float)) : Bool)) { (minX = cast ((tcx - tex) : Dynamic)); }
         if ((cast ((cast (tcy - tey) : Float) < (cast minY : Float)) : Bool)) { (minY = cast ((tcy - tey) : Dynamic)); }
         if ((cast ((cast (tcz - tez) : Float) < (cast minZ : Float)) : Bool)) { (minZ = cast ((tcz - tez) : Dynamic)); }
@@ -131,9 +131,9 @@ class GetMeshSkinBounds {
       var v:Dynamic = 0.0;
       while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
         var p:Dynamic = (v * 3.0);
-        var px:Dynamic = _Runtime.getIndex(skinned, p);
-        var py:Dynamic = _Runtime.getIndex(skinned, (p + 1.0));
-        var pz:Dynamic = _Runtime.getIndex(skinned, (p + 2.0));
+        var px:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(skinned, p);
+        var py:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(skinned, (p + 1.0));
+        var pz:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(skinned, (p + 2.0));
         if ((cast ((cast px : Float) < (cast minX : Float)) : Bool)) { (minX = cast (px : Dynamic)); }
         if ((cast ((cast py : Float) < (cast minY : Float)) : Bool)) { (minY = cast (py : Dynamic)); }
         if ((cast ((cast pz : Float) < (cast minZ : Float)) : Bool)) { (minZ = cast (pz : Dynamic)); }
@@ -159,9 +159,9 @@ class GetMeshSkinBounds {
     {
       var k:Dynamic = 0.0;
       while ((cast ((cast k : Float) < (cast influenceCount : Float)) : Bool)) {
-        if ((cast _Runtime.strictEquals(_Runtime.getIndex(weights, k), 0.0) : Bool)) { k++; continue; }
-        var j:Dynamic = (_Runtime.toInt32(_Runtime.getIndex(joints, k)) | 0);
-        if ((cast ((cast ((cast j : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast j : Float) < (cast jointCount : Float)) : Bool)) : Bool)) { _Runtime.setIndex(referenced, j, 1.0); }
+        if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloat32Array(weights, k), 0.0) : Bool)) { k++; continue; }
+        var j:Dynamic = (_Runtime.toInt32(flighthq._internal._StaticIndex.readFloat32Array(joints, k)) | 0);
+        if ((cast ((cast ((cast j : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast j : Float) < (cast jointCount : Float)) : Bool)) : Bool)) { flighthq._internal._StaticIndex.writeUint8Array(referenced, j, 1.0); }
         k++;
       }
     }

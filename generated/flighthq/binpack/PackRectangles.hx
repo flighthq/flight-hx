@@ -190,12 +190,12 @@ class PackRectangles {
         {
           var j:Dynamic = (i + 1.0);
           while ((cast ((cast j : Float) < (cast _Runtime.field(free, 'length') : Float)) : Bool)) {
-            if ((cast _Runtime.callValue(PackRectangles.isFreeRectangleContained__packRectangles, cast ([_Runtime.getIndex(free, i), _Runtime.getIndex(free, j)] : Array<Dynamic>)) : Bool)) {
+            if ((cast _Runtime.callValue(PackRectangles.isFreeRectangleContained__packRectangles, cast ([flighthq._internal._StaticIndex.readArray(free, i), flighthq._internal._StaticIndex.readArray(free, j)] : Array<Dynamic>)) : Bool)) {
               _Runtime.splice(free, Std.int(i), Std.int(1.0), []);
               i--;
               break;
             }
-            if ((cast _Runtime.callValue(PackRectangles.isFreeRectangleContained__packRectangles, cast ([_Runtime.getIndex(free, j), _Runtime.getIndex(free, i)] : Array<Dynamic>)) : Bool)) {
+            if ((cast _Runtime.callValue(PackRectangles.isFreeRectangleContained__packRectangles, cast ([flighthq._internal._StaticIndex.readArray(free, j), flighthq._internal._StaticIndex.readArray(free, i)] : Array<Dynamic>)) : Bool)) {
               _Runtime.splice(free, Std.int(j), Std.int(1.0), []);
               j--;
             }
@@ -235,7 +235,7 @@ class PackRectangles {
     {
       var i:Dynamic = (_Runtime.field(free, 'length') - 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-        var node:Dynamic = _Runtime.getIndex(free, i);
+        var node:Dynamic = flighthq._internal._StaticIndex.readArray(free, i);
         if ((cast !(cast _Runtime.callValue(intersectsRectangle, cast ([node, used] : Array<Dynamic>)) : Bool) : Bool)) { i--; continue; }
         var nodeRight:Dynamic = (_Runtime.field(node, 'x') + _Runtime.field(node, 'width'));
         var nodeBottom:Dynamic = (_Runtime.field(node, 'y') + _Runtime.field(node, 'height'));

@@ -1,9 +1,10 @@
 {
-  "completedAt": "2026-07-22T11:53:40.328Z",
+  "completedAt": "2026-07-30T23:49:36.951Z",
   "failedPackages": 0,
+  "jobs": 12,
   "packages": [
     {
-      "durationMs": 7407,
+      "durationMs": 17673,
       "exitCode": 0,
       "package": "geometry",
       "signal": null,
@@ -14,5 +15,5 @@
   ],
   "schemaVersion": 1,
   "selectedPackage": "geometry",
-  "startedAt": "2026-07-22T11:53:32.921Z"
+  "startedAt": "2026-07-30T23:49:19.277Z"
 }

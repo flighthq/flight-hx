@@ -239,7 +239,7 @@ class Filesystem {
                   }
                   return flighthq._internal._Async.continueFlow(__flowBranch21, function():Dynamic {
                     return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-                      return flighthq._internal._Async.flatMap(_Runtime.callProperty(parent, 'removeEntry', cast ([_Runtime.getIndex(segments, (_Runtime.field(segments, 'length') - 1.0)), { recursive: recursive }] : Array<Dynamic>)), function(__awaitValue22:Dynamic):Dynamic {
+                      return flighthq._internal._Async.flatMap(_Runtime.callProperty(parent, 'removeEntry', cast ([flighthq._internal._StaticIndex.readArray(segments, (_Runtime.field(segments, 'length') - 1.0)), { recursive: recursive }] : Array<Dynamic>)), function(__awaitValue22:Dynamic):Dynamic {
                         __awaitValue22;
                         return flighthq._internal._Async.flowReturn(true);
                       });
@@ -883,7 +883,7 @@ class Filesystem {
   public static function getFileBaseName(path:String):String {
     var segments:Dynamic = cast _Runtime.UNDEFINED;
     segments = _Runtime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>));
-    return cast ((cast _Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0) : Bool) ? (cast '' : Dynamic) : (cast (cast _Runtime.getIndex(segments, (_Runtime.field(segments, 'length') - 1.0)) : String) : Dynamic));
+    return cast ((cast _Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0) : Bool) ? (cast '' : Dynamic) : (cast (cast flighthq._internal._StaticIndex.readArray(segments, (_Runtime.field(segments, 'length') - 1.0)) : String) : Dynamic));
     return cast null;
   }
 
@@ -999,7 +999,7 @@ class Filesystem {
                 }
                 return flighthq._internal._Async.continueFlow(__flowBranch96, function():Dynamic {
                   return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-                    return flighthq._internal._Async.flatMap(_Runtime.callProperty(parent, 'getFileHandle', cast ([_Runtime.getIndex(segments, (_Runtime.field(segments, 'length') - 1.0)), { create: create }] : Array<Dynamic>)), function(__awaitValue97:Dynamic):Dynamic {
+                    return flighthq._internal._Async.flatMap(_Runtime.callProperty(parent, 'getFileHandle', cast ([flighthq._internal._StaticIndex.readArray(segments, (_Runtime.field(segments, 'length') - 1.0)), { create: create }] : Array<Dynamic>)), function(__awaitValue97:Dynamic):Dynamic {
                       return flighthq._internal._Async.flowReturn(__awaitValue97);
                     });
                   }), function(__caughtError:Dynamic):Dynamic {
@@ -1108,7 +1108,7 @@ class Filesystem {
         _Runtime.callProperty(parts, 'push', cast ([part] : Array<Dynamic>));
       }
     }
-    prefix = ((cast ((cast ((cast ((cast _Runtime.field(segments, 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.getIndex(segments, 0.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) && (cast StringTools.startsWith(_Runtime.getIndex(segments, 0.0), '/') : Bool)) : Bool) ? (cast '/' : Dynamic) : (cast '' : Dynamic));
+    prefix = ((cast ((cast ((cast ((cast _Runtime.field(segments, 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(segments, 0.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) && (cast StringTools.startsWith(flighthq._internal._StaticIndex.readArray(segments, 0.0), '/') : Bool)) : Bool) ? (cast '/' : Dynamic) : (cast '' : Dynamic));
     return cast (prefix + _Runtime.join(parts, '/'));
     return cast null;
   }
@@ -1627,7 +1627,7 @@ class Filesystem {
                       __flowBranch150 = flighthq._internal._Async.flowNormal();
                     }
                     return flighthq._internal._Async.continueFlow(__flowBranch150, function():Dynamic {
-                      return flighthq._internal._Async.flatMap(_Runtime.callProperty(parent, 'removeEntry', cast ([_Runtime.getIndex(segments, (_Runtime.field(segments, 'length') - 1.0)), { recursive: false }] : Array<Dynamic>)), function(__awaitValue153:Dynamic):Dynamic {
+                      return flighthq._internal._Async.flatMap(_Runtime.callProperty(parent, 'removeEntry', cast ([flighthq._internal._StaticIndex.readArray(segments, (_Runtime.field(segments, 'length') - 1.0)), { recursive: false }] : Array<Dynamic>)), function(__awaitValue153:Dynamic):Dynamic {
                         __awaitValue153;
                         return flighthq._internal._Async.flowReturn(true);
                       });

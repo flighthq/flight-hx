@@ -1,0 +1,169 @@
+package;
+
+import flighthq._internal._Float32Array;
+import flighthq._internal._Float64Array;
+import flighthq._internal._Int16Array;
+import flighthq._internal._Int32Array;
+import flighthq._internal._Int8Array;
+import flighthq._internal._StaticIndex;
+import flighthq._internal._UInt16Array;
+import flighthq._internal._UInt32Array;
+import flighthq._internal._UInt8Array;
+import flighthq._internal._UInt8ClampedArray;
+
+class StaticIndexSmoke {
+  static var ordered:Array<Dynamic>;
+  static var order = '';
+
+  public static function run():Void {
+    final values:Array<Dynamic> = [10, 20];
+    #if js
+    if (_StaticIndex.readArray(values, 1.5) != null) throw 'JS fractional array read was truncated';
+    if (_StaticIndex.writeArray(values, 1.5, 7) != 7) throw 'array setter lost its right-hand value';
+    if (values[1] != 20 || _StaticIndex.readArray(values, 1.5) != 7) {
+      throw 'JS fractional array write was truncated';
+    }
+    #else
+    if (_StaticIndex.readArray(values, 1.5) != 20) throw 'portable fractional array read was not truncated';
+    if (_StaticIndex.writeArray(values, 1.5, 7) != 7 || values[1] != 7) {
+      throw 'portable fractional array write was not truncated';
+    }
+    #end
+    if (_StaticIndex.readArray(values, 99) != null) throw 'array out-of-bounds read was not nullish';
+
+    final fractional = new _Float32Array([10, 20]);
+    #if js
+    if (_StaticIndex.readFloat32Array(fractional, 1.5) != null) {
+      throw 'JS fractional typed-array read was truncated';
+    }
+    if (_StaticIndex.writeFloat32Array(fractional, 1.5, 7) != 7) {
+      throw 'typed-array fractional setter lost its right-hand value';
+    }
+    if (_StaticIndex.readFloat32Array(fractional, 1) != 20) {
+      throw 'JS fractional typed-array write changed an integer element';
+    }
+    #else
+    if (_StaticIndex.readFloat32Array(fractional, 1.5) != 20) {
+      throw 'portable fractional typed-array read was not truncated';
+    }
+    if (_StaticIndex.writeFloat32Array(fractional, 1.5, 7) != 7
+      || _StaticIndex.readFloat32Array(fractional, 1) != 7) {
+      throw 'portable fractional typed-array write was not truncated';
+    }
+    #end
+    if (_StaticIndex.readFloat32Array(fractional, 99) != null) {
+      throw 'typed-array out-of-bounds read was not nullish';
+    }
+
+    assertWrite(
+      _StaticIndex.writeFloat32Array(new _Float32Array(1), 0, 1.25),
+      1.25,
+      'Float32Array setter result',
+    );
+    assertStoredFloat32(1.25);
+    assertWrite(
+      _StaticIndex.writeFloat64Array(new _Float64Array(1), 0, 2.5),
+      2.5,
+      'Float64Array setter result',
+    );
+    assertWrite(_StaticIndex.writeInt16Array(new _Int16Array(1), 0, 65535), 65535, 'Int16Array setter result');
+    assertStoredInt16(-1);
+    assertWrite(
+      _StaticIndex.writeInt32Array(new _Int32Array(1), 0, 4294967295.0),
+      4294967295.0,
+      'Int32Array setter result',
+    );
+    assertStoredInt32(-1);
+    assertWrite(_StaticIndex.writeInt8Array(new _Int8Array(1), 0, 255), 255, 'Int8Array setter result');
+    assertStoredInt8(-1);
+    assertWrite(_StaticIndex.writeUint16Array(new _UInt16Array(1), 0, -1), -1, 'Uint16Array setter result');
+    assertStoredUint16(65535);
+    assertWrite(_StaticIndex.writeUint32Array(new _UInt32Array(1), 0, -1), -1, 'Uint32Array setter result');
+    assertStoredUint32(4294967295.0);
+    assertWrite(_StaticIndex.writeUint8Array(new _UInt8Array(1), 0, 300), 300, 'Uint8Array setter result');
+    assertStoredUint8(44);
+    assertWrite(
+      _StaticIndex.writeUint8ClampedArray(new _UInt8ClampedArray(1), 0, 300),
+      300,
+      'Uint8ClampedArray setter result',
+    );
+    assertStoredClamped(255);
+
+    ordered = [0];
+    order = '';
+    if (_StaticIndex.writeArray(orderedSource(), orderedKey(), orderedValue()) != 9 || order != 'rkv') {
+      throw 'indexed endpoint argument evaluation order changed';
+    }
+  }
+
+  static function assertWrite(actual:Dynamic, expected:Dynamic, label:String):Void {
+    if (actual != expected) throw label;
+  }
+
+  static function assertStoredFloat32(expected:Float):Void {
+    final value = new _Float32Array(1);
+    _StaticIndex.writeFloat32Array(value, 0, expected);
+    if (_StaticIndex.readFloat32Array(value, 0) != expected) throw 'Float32Array write coercion';
+  }
+
+  static function assertStoredInt16(expected:Int):Void {
+    final value = new _Int16Array(1);
+    _StaticIndex.writeInt16Array(value, 0, 65535);
+    if (_StaticIndex.readInt16Array(value, 0) != expected) throw 'Int16Array write coercion';
+  }
+
+  static function assertStoredInt32(expected:Int):Void {
+    final value = new _Int32Array(1);
+    _StaticIndex.writeInt32Array(value, 0, 4294967295.0);
+    if (_StaticIndex.readInt32Array(value, 0) != expected) throw 'Int32Array write coercion';
+  }
+
+  static function assertStoredInt8(expected:Int):Void {
+    final value = new _Int8Array(1);
+    _StaticIndex.writeInt8Array(value, 0, 255);
+    if (_StaticIndex.readInt8Array(value, 0) != expected) throw 'Int8Array write coercion';
+  }
+
+  static function assertStoredUint16(expected:Int):Void {
+    final value = new _UInt16Array(1);
+    _StaticIndex.writeUint16Array(value, 0, -1);
+    if (_StaticIndex.readUint16Array(value, 0) != expected) throw 'Uint16Array write coercion';
+  }
+
+  static function assertStoredUint32(expected:Float):Void {
+    final value = new _UInt32Array(1);
+    _StaticIndex.writeUint32Array(value, 0, -1);
+    if (_StaticIndex.readUint32Array(value, 0) != expected) throw 'Uint32Array write coercion';
+  }
+
+  static function assertStoredUint8(expected:Int):Void {
+    final value = new _UInt8Array(1);
+    _StaticIndex.writeUint8Array(value, 0, 300);
+    if (_StaticIndex.readUint8Array(value, 0) != expected) throw 'Uint8Array write coercion';
+  }
+
+  static function assertStoredClamped(expected:Int):Void {
+    final value = new _UInt8ClampedArray(1);
+    _StaticIndex.writeUint8ClampedArray(value, 0, 300);
+    if (_StaticIndex.readUint8ClampedArray(value, 0) != expected) throw 'Uint8ClampedArray write coercion';
+  }
+
+  static function orderedSource():Array<Dynamic> {
+    order += 'r';
+    return ordered;
+  }
+
+  static function orderedKey():Float {
+    order += 'k';
+    return 0;
+  }
+
+  static function orderedValue():Dynamic {
+    order += 'v';
+    return 9;
+  }
+
+  static function main():Void {
+    run();
+  }
+}

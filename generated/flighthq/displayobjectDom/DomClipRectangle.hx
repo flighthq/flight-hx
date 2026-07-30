@@ -27,7 +27,7 @@ class DomClipRectangle {
     {
       var i:Dynamic = (_Runtime.field(entries, 'length') - 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-        var entry:Dynamic = _Runtime.getIndex(entries, i);
+        var entry:Dynamic = flighthq._internal._StaticIndex.readArray(entries, i);
         if ((cast _Runtime.hasField(entry, 'kind') : Bool)) {
           (contour = cast (entry : Dynamic));
           break;
@@ -122,7 +122,7 @@ class DomClipRectangle {
       return cast { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 0.0 };
     }
     parts = _Runtime.callProperty(_Runtime.callProperty(_Runtime.getIndex(match, 1.0), 'split', cast ([','] : Array<Dynamic>)), 'map', cast ([function(value:Dynamic) return _Runtime.callValue(_Runtime.globalValue('Number'), cast ([StringTools.trim(Std.string(value))] : Array<Dynamic>))] : Array<Dynamic>));
-    return cast { a: _Runtime.coalesce(_Runtime.getIndex(parts, 0.0), function():Dynamic return cast 1.0), b: _Runtime.coalesce(_Runtime.getIndex(parts, 1.0), function():Dynamic return cast 0.0), c: _Runtime.coalesce(_Runtime.getIndex(parts, 2.0), function():Dynamic return cast 0.0), d: _Runtime.coalesce(_Runtime.getIndex(parts, 3.0), function():Dynamic return cast 1.0), tx: _Runtime.coalesce(_Runtime.getIndex(parts, 4.0), function():Dynamic return cast 0.0), ty: _Runtime.coalesce(_Runtime.getIndex(parts, 5.0), function():Dynamic return cast 0.0) };
+    return cast { a: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 0.0), function():Dynamic return cast 1.0), b: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 1.0), function():Dynamic return cast 0.0), c: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 2.0), function():Dynamic return cast 0.0), d: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 3.0), function():Dynamic return cast 1.0), tx: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 4.0), function():Dynamic return cast 0.0), ty: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 5.0), function():Dynamic return cast 0.0) };
     return cast null;
   }
 

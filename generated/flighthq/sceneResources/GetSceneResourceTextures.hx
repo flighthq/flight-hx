@@ -28,14 +28,14 @@ class GetSceneResourceTextures {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
-        var material:Dynamic = (cast _Runtime.getIndex(materials, i) : Null<Material>);
+        var material:Dynamic = (cast flighthq._internal._StaticIndex.readArray(materials, i) : Null<Material>);
         if ((cast _Runtime.strictEquals(material, null) : Bool)) { i++; continue; }
         _Runtime.setLength(slots, 0.0);
         _Runtime.callValue(getSceneMaterialTextures, cast ([registry, material, slots] : Array<Dynamic>));
         {
           var j:Dynamic = 0.0;
           while ((cast ((cast j : Float) < (cast _Runtime.field(slots, 'length') : Float)) : Bool)) {
-            var texture:Dynamic = _Runtime.getIndex(slots, j);
+            var texture:Dynamic = flighthq._internal._StaticIndex.readArray(slots, j);
             if ((cast ((cast _Runtime.looseEquals(_Runtime.field(texture, 'resource'), null) : Bool) || (cast ((cast seen : flighthq._internal._Set).has(texture)) : Bool)) : Bool)) { j++; continue; }
             ((cast seen : flighthq._internal._Set).add(texture));
             _Runtime.callProperty(out, 'push', cast ([texture] : Array<Dynamic>));

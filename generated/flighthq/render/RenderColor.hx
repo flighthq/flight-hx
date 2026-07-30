@@ -20,10 +20,10 @@ class RenderColor {
     g = _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(uint) & 16711680)), 16);
     b = _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(uint) & 65280)), 8);
     a = (_Runtime.toInt32(uint) & 255);
-    _Runtime.setIndex(_Runtime.field(_state, 'backgroundColorRgba'), 0.0, (r / 255.0));
-    _Runtime.setIndex(_Runtime.field(_state, 'backgroundColorRgba'), 1.0, (g / 255.0));
-    _Runtime.setIndex(_Runtime.field(_state, 'backgroundColorRgba'), 2.0, (b / 255.0));
-    _Runtime.setIndex(_Runtime.field(_state, 'backgroundColorRgba'), 3.0, (a / 255.0));
+    flighthq._internal._StaticIndex.writeArray(_Runtime.field(_state, 'backgroundColorRgba'), 0.0, (r / 255.0));
+    flighthq._internal._StaticIndex.writeArray(_Runtime.field(_state, 'backgroundColorRgba'), 1.0, (g / 255.0));
+    flighthq._internal._StaticIndex.writeArray(_Runtime.field(_state, 'backgroundColorRgba'), 2.0, (b / 255.0));
+    flighthq._internal._StaticIndex.writeArray(_Runtime.field(_state, 'backgroundColorRgba'), 3.0, (a / 255.0));
     _Runtime.setField(_state, 'backgroundColorString', ('#' + _Runtime.callProperty(_Runtime.padStart(_Runtime.numberToString(uint, 16.0), 8.0, '0'), 'toUpperCase', cast ([] : Array<Dynamic>))));
   }
 }

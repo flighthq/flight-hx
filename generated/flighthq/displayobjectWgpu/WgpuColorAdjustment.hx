@@ -133,23 +133,23 @@ class WgpuColorAdjustment {
     _Runtime.callValue(WgpuColorAdjustment.ensureWgpuColorTransformCapacity__wgpuColorAdjustment, cast ([runtime, (offset + WgpuColorAdjustment.COLOR_TRANSFORM_FLOATS__wgpuColorAdjustment)] : Array<Dynamic>));
     out = _Runtime.field(runtime, 'spriteBatchColorTransformData');
     if ((cast !_Runtime.strictEquals(colorTransform, null) : Bool)) {
-      _Runtime.setIndex(out, offset, colorTransform.redMultiplier);
-      _Runtime.setIndex(out, (offset + 1.0), colorTransform.greenMultiplier);
-      _Runtime.setIndex(out, (offset + 2.0), colorTransform.blueMultiplier);
-      _Runtime.setIndex(out, (offset + 3.0), colorTransform.alphaMultiplier);
-      _Runtime.setIndex(out, (offset + 4.0), (colorTransform.redOffset / 255.0));
-      _Runtime.setIndex(out, (offset + 5.0), (colorTransform.greenOffset / 255.0));
-      _Runtime.setIndex(out, (offset + 6.0), (colorTransform.blueOffset / 255.0));
-      _Runtime.setIndex(out, (offset + 7.0), (colorTransform.alphaOffset / 255.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(out, offset, colorTransform.redMultiplier);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 1.0), colorTransform.greenMultiplier);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 2.0), colorTransform.blueMultiplier);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 3.0), colorTransform.alphaMultiplier);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 4.0), (colorTransform.redOffset / 255.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 5.0), (colorTransform.greenOffset / 255.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 6.0), (colorTransform.blueOffset / 255.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 7.0), (colorTransform.alphaOffset / 255.0));
     } else {
-      _Runtime.setIndex(out, offset, 1.0);
-      _Runtime.setIndex(out, (offset + 1.0), 1.0);
-      _Runtime.setIndex(out, (offset + 2.0), 1.0);
-      _Runtime.setIndex(out, (offset + 3.0), 1.0);
-      _Runtime.setIndex(out, (offset + 4.0), 0.0);
-      _Runtime.setIndex(out, (offset + 5.0), 0.0);
-      _Runtime.setIndex(out, (offset + 6.0), 0.0);
-      _Runtime.setIndex(out, (offset + 7.0), 0.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, offset, 1.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 1.0), 1.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 2.0), 1.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 3.0), 1.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 4.0), 0.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 5.0), 0.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 6.0), 0.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 7.0), 0.0);
     }
   }
 

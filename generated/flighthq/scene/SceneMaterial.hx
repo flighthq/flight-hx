@@ -33,7 +33,7 @@ class SceneMaterial {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
-        var material:Dynamic = _Runtime.getIndex(materials, i);
+        var material:Dynamic = flighthq._internal._StaticIndex.readArray(materials, i);
         if ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'name'), name) : Bool)) : Bool)) { return cast material; }
         i++;
       }

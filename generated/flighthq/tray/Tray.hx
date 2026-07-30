@@ -164,10 +164,10 @@ class Tray {
     
     }; }
     index = 0.0;
-    _Runtime.callValue(setTrayIcon, cast ([tray, _Runtime.getIndex(frames, index)] : Array<Dynamic>));
+    _Runtime.callValue(setTrayIcon, cast ([tray, flighthq._internal._StaticIndex.readArray(frames, index)] : Array<Dynamic>));
     handle = _Runtime.setInterval(function() {
       (index = cast (_Runtime.fmod((index + 1.0), _Runtime.field(frames, 'length')) : Dynamic));
-      _Runtime.callValue(setTrayIcon, cast ([tray, _Runtime.getIndex(frames, index)] : Array<Dynamic>));
+      _Runtime.callValue(setTrayIcon, cast ([tray, flighthq._internal._StaticIndex.readArray(frames, index)] : Array<Dynamic>));
     }, intervalMs);
     return cast function() return _Runtime.clearInterval(handle);
     return cast null;

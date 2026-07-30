@@ -12,12 +12,12 @@ class SkinVertices {
       var v:Dynamic = 0.0;
       while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
         var p:Dynamic = (v * 3.0);
-        var px:Dynamic = _Runtime.getIndex(positions, p);
-        var py:Dynamic = _Runtime.getIndex(positions, (p + 1.0));
-        var pz:Dynamic = _Runtime.getIndex(positions, (p + 2.0));
-        var nx:Dynamic = _Runtime.getIndex(normals, p);
-        var ny:Dynamic = _Runtime.getIndex(normals, (p + 1.0));
-        var nz:Dynamic = _Runtime.getIndex(normals, (p + 2.0));
+        var px:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(positions, p);
+        var py:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(positions, (p + 1.0));
+        var pz:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(positions, (p + 2.0));
+        var nx:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(normals, p);
+        var ny:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(normals, (p + 1.0));
+        var nz:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(normals, (p + 2.0));
         var opx:Dynamic = 0.0;
         var opy:Dynamic = 0.0;
         var opz:Dynamic = 0.0;
@@ -28,33 +28,33 @@ class SkinVertices {
         {
           var k:Dynamic = 0.0;
           while ((cast ((cast k : Float) < (cast 4.0 : Float)) : Bool)) {
-            var weight:Dynamic = _Runtime.getIndex(weights, (w + k));
+            var weight:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(weights, (w + k));
             if ((cast _Runtime.strictEquals(weight, 0.0) : Bool)) { k++; continue; }
             var m:Dynamic = (_Runtime.getIndex(joints, (w + k)) * 16.0);
-            var m0:Dynamic = _Runtime.getIndex(jointMatrices, m);
-            var m1:Dynamic = _Runtime.getIndex(jointMatrices, (m + 1.0));
-            var m2:Dynamic = _Runtime.getIndex(jointMatrices, (m + 2.0));
-            var m4:Dynamic = _Runtime.getIndex(jointMatrices, (m + 4.0));
-            var m5:Dynamic = _Runtime.getIndex(jointMatrices, (m + 5.0));
-            var m6:Dynamic = _Runtime.getIndex(jointMatrices, (m + 6.0));
-            var m8:Dynamic = _Runtime.getIndex(jointMatrices, (m + 8.0));
-            var m9:Dynamic = _Runtime.getIndex(jointMatrices, (m + 9.0));
-            var m10:Dynamic = _Runtime.getIndex(jointMatrices, (m + 10.0));
-            (opx = cast ((opx + (weight * ((((m0 * px) + (m4 * py)) + (m8 * pz)) + _Runtime.getIndex(jointMatrices, (m + 12.0))))) : Dynamic));
-            (opy = cast ((opy + (weight * ((((m1 * px) + (m5 * py)) + (m9 * pz)) + _Runtime.getIndex(jointMatrices, (m + 13.0))))) : Dynamic));
-            (opz = cast ((opz + (weight * ((((m2 * px) + (m6 * py)) + (m10 * pz)) + _Runtime.getIndex(jointMatrices, (m + 14.0))))) : Dynamic));
+            var m0:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(jointMatrices, m);
+            var m1:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(jointMatrices, (m + 1.0));
+            var m2:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(jointMatrices, (m + 2.0));
+            var m4:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(jointMatrices, (m + 4.0));
+            var m5:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(jointMatrices, (m + 5.0));
+            var m6:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(jointMatrices, (m + 6.0));
+            var m8:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(jointMatrices, (m + 8.0));
+            var m9:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(jointMatrices, (m + 9.0));
+            var m10:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(jointMatrices, (m + 10.0));
+            (opx = cast ((opx + (weight * ((((m0 * px) + (m4 * py)) + (m8 * pz)) + flighthq._internal._StaticIndex.readFloat32Array(jointMatrices, (m + 12.0))))) : Dynamic));
+            (opy = cast ((opy + (weight * ((((m1 * px) + (m5 * py)) + (m9 * pz)) + flighthq._internal._StaticIndex.readFloat32Array(jointMatrices, (m + 13.0))))) : Dynamic));
+            (opz = cast ((opz + (weight * ((((m2 * px) + (m6 * py)) + (m10 * pz)) + flighthq._internal._StaticIndex.readFloat32Array(jointMatrices, (m + 14.0))))) : Dynamic));
             (onx = cast ((onx + (weight * (((m0 * nx) + (m4 * ny)) + (m8 * nz)))) : Dynamic));
             (ony = cast ((ony + (weight * (((m1 * nx) + (m5 * ny)) + (m9 * nz)))) : Dynamic));
             (onz = cast ((onz + (weight * (((m2 * nx) + (m6 * ny)) + (m10 * nz)))) : Dynamic));
             k++;
           }
         }
-        _Runtime.setIndex(outPositions, p, opx);
-        _Runtime.setIndex(outPositions, (p + 1.0), opy);
-        _Runtime.setIndex(outPositions, (p + 2.0), opz);
-        _Runtime.setIndex(outNormals, p, onx);
-        _Runtime.setIndex(outNormals, (p + 1.0), ony);
-        _Runtime.setIndex(outNormals, (p + 2.0), onz);
+        flighthq._internal._StaticIndex.writeFloat32Array(outPositions, p, opx);
+        flighthq._internal._StaticIndex.writeFloat32Array(outPositions, (p + 1.0), opy);
+        flighthq._internal._StaticIndex.writeFloat32Array(outPositions, (p + 2.0), opz);
+        flighthq._internal._StaticIndex.writeFloat32Array(outNormals, p, onx);
+        flighthq._internal._StaticIndex.writeFloat32Array(outNormals, (p + 1.0), ony);
+        flighthq._internal._StaticIndex.writeFloat32Array(outNormals, (p + 2.0), onz);
         v++;
       }
     }

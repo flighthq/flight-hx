@@ -18,7 +18,7 @@ abstract _Int8Array(Dynamic) {
       this = [for (_ in 0...Std.int(source)) 0];
     } else {
       final values:Array<Dynamic> = _Runtime.iterable(source);
-      this = [for (value in values) (_Runtime.toInt32(value) << 24) >> 24];
+      this = [for (value in values) toInt8(value)];
     }
     #end
   }
@@ -45,7 +45,7 @@ abstract _Int8Array(Dynamic) {
     js.Syntax.code('{0}[{1}] = {2}', this, index, value);
     return this[index];
     #else
-    return this[index] = (_Runtime.toInt32(value) << 24) >> 24;
+    return this[index] = toInt8(value);
     #end
   }
 
@@ -91,5 +91,10 @@ abstract _Int8Array(Dynamic) {
     #else
     return new _Int8Array((cast this : Array<Int>).slice(start, stop));
     #end
+  }
+
+  private static inline function toInt8(value:Float):Int {
+    final wrapped = _Runtime.toInt32(value) & 0xff;
+    return wrapped >= 0x80 ? wrapped - 0x100 : wrapped;
   }
 }

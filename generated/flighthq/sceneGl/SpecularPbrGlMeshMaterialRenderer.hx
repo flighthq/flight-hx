@@ -48,7 +48,7 @@ class SpecularPbrGlMeshMaterialRenderer {
     if ((cast !_Runtime.strictEquals(specular, null) : Bool)) {
       _Runtime.callValue(unpackColorToLinear, cast ([SpecularPbrGlMeshMaterialRenderer.scratchRgba__specularPbrGlMeshMaterialRenderer, _Runtime.field(specular, 'specularColor')] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locSpecular'), _Runtime.field(specular, 'specular'));
-      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(program, 'locSpecularColor'), _Runtime.getIndex(SpecularPbrGlMeshMaterialRenderer.scratchRgba__specularPbrGlMeshMaterialRenderer, 0.0), _Runtime.getIndex(SpecularPbrGlMeshMaterialRenderer.scratchRgba__specularPbrGlMeshMaterialRenderer, 1.0), _Runtime.getIndex(SpecularPbrGlMeshMaterialRenderer.scratchRgba__specularPbrGlMeshMaterialRenderer, 2.0));
+      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(program, 'locSpecularColor'), flighthq._internal._StaticIndex.readArray(SpecularPbrGlMeshMaterialRenderer.scratchRgba__specularPbrGlMeshMaterialRenderer, 0.0), flighthq._internal._StaticIndex.readArray(SpecularPbrGlMeshMaterialRenderer.scratchRgba__specularPbrGlMeshMaterialRenderer, 1.0), flighthq._internal._StaticIndex.readArray(SpecularPbrGlMeshMaterialRenderer.scratchRgba__specularPbrGlMeshMaterialRenderer, 2.0));
     } else {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locSpecular'), 1.0);
       flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(program, 'locSpecularColor'), 1.0, 1.0, 1.0);

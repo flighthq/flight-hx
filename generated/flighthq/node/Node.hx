@@ -206,7 +206,7 @@ class Node {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(snapshot, 'length') : Float)) : Bool)) {
-          _Runtime.callValue(disposeNode, cast ([_Runtime.getIndex(snapshot, i)] : Array<Dynamic>));
+          _Runtime.callValue(disposeNode, cast ([flighthq._internal._StaticIndex.readArray(snapshot, i)] : Array<Dynamic>));
           i++;
         }
       }

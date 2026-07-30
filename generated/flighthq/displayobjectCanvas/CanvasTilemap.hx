@@ -59,9 +59,9 @@ class CanvasTilemap {
         {
           var col:Dynamic = 0.0;
           while ((cast ((cast col : Float) < (cast columns : Float)) : Bool)) {
-            var id:Dynamic = _Runtime.getIndex(tiles, ((row * columns) + col));
+            var id:Dynamic = flighthq._internal._StaticIndex.readInt16Array(tiles, ((row * columns) + col));
             if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { col++; continue; }
-            var region:Dynamic = _Runtime.getIndex(regions, id);
+            var region:Dynamic = flighthq._internal._StaticIndex.readArray(regions, id);
             if ((cast ((cast ((cast _Runtime.field(region, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(region, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { col++; continue; }
             var dx:Dynamic = (col * tileWidth);
             var dy:Dynamic = (row * tileHeight);

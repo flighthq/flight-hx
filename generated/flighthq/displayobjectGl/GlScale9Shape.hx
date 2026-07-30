@@ -130,19 +130,19 @@ class GlScale9Shape {
     _Runtime.callValue(mapCanvasScale9ShapeCommands, cast ([out, source, mapper] : Array<Dynamic>));
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(out, 'length') : Float)) : Bool)) {
-      var key:Dynamic = (cast _Runtime.getIndex(out, i) : String);
-      var argCount:Dynamic = (cast _Runtime.getIndex(out, (i + 1.0)) : Float);
+      var key:Dynamic = (cast flighthq._internal._StaticIndex.readArray(out, i) : String);
+      var argCount:Dynamic = (cast flighthq._internal._StaticIndex.readArray(out, (i + 1.0)) : Float);
       if ((cast _Runtime.strictEquals(key, 'drawPath') : Bool)) {
-        var pathData:Dynamic = (cast _Runtime.getIndex(out, (i + 3.0)) : Array<Float>);
+        var pathData:Dynamic = (cast flighthq._internal._StaticIndex.readArray(out, (i + 3.0)) : Array<Float>);
         _Runtime.setLength(GlScale9Shape._remappedPathData__glScale9Shape, _Runtime.field(pathData, 'length'));
         {
           var k:Dynamic = 0.0;
           while ((cast ((cast k : Float) < (cast _Runtime.field(pathData, 'length') : Float)) : Bool)) {
-            _Runtime.setIndex(GlScale9Shape._remappedPathData__glScale9Shape, k, _Runtime.getIndex(pathData, k));
+            flighthq._internal._StaticIndex.writeArray(GlScale9Shape._remappedPathData__glScale9Shape, k, flighthq._internal._StaticIndex.readArray(pathData, k));
             k++;
           }
         }
-        _Runtime.setIndex(out, (i + 3.0), GlScale9Shape._remappedPathData__glScale9Shape);
+        flighthq._internal._StaticIndex.writeArray(out, (i + 3.0), GlScale9Shape._remappedPathData__glScale9Shape);
       }
       (i = cast ((i + (argCount + 2.0)) : Dynamic));
     }

@@ -20,9 +20,9 @@ class ColorTemperatureMath {
       (g = cast (((288.1221695283 * HxMath.pow((temp - 60.0), -0.0755148492)) / 255.0) : Dynamic));
       (b = cast (1.0 : Dynamic));
     }
-    _Runtime.setIndex(out, 0.0, HxMath.max(0.0, HxMath.min(1.0, r)));
-    _Runtime.setIndex(out, 1.0, HxMath.max(0.0, HxMath.min(1.0, g)));
-    _Runtime.setIndex(out, 2.0, HxMath.max(0.0, HxMath.min(1.0, b)));
+    flighthq._internal._StaticIndex.writeArray(out, 0.0, HxMath.max(0.0, HxMath.min(1.0, r)));
+    flighthq._internal._StaticIndex.writeArray(out, 1.0, HxMath.max(0.0, HxMath.min(1.0, g)));
+    flighthq._internal._StaticIndex.writeArray(out, 2.0, HxMath.max(0.0, HxMath.min(1.0, b)));
   }
 
   public static function computeWhiteBalanceMultipliers(temperature:Float, tint:Float, out:Array<Float>):Void {
@@ -31,8 +31,8 @@ class ColorTemperatureMath {
     kelvin = (6500.0 - (temperature * 4500.0));
     _Runtime.callValue(computeColorTemperatureRgb, cast ([kelvin, out] : Array<Dynamic>));
     greenShift = (-tint * 0.1);
-    _Runtime.setIndex(out, 0.0, HxMath.max(0.0, _Runtime.getIndex(out, 0.0)));
-    _Runtime.setIndex(out, 1.0, HxMath.max(0.0, (_Runtime.getIndex(out, 1.0) + greenShift)));
-    _Runtime.setIndex(out, 2.0, HxMath.max(0.0, _Runtime.getIndex(out, 2.0)));
+    flighthq._internal._StaticIndex.writeArray(out, 0.0, HxMath.max(0.0, flighthq._internal._StaticIndex.readArray(out, 0.0)));
+    flighthq._internal._StaticIndex.writeArray(out, 1.0, HxMath.max(0.0, (flighthq._internal._StaticIndex.readArray(out, 1.0) + greenShift)));
+    flighthq._internal._StaticIndex.writeArray(out, 2.0, HxMath.max(0.0, flighthq._internal._StaticIndex.readArray(out, 2.0)));
   }
 }

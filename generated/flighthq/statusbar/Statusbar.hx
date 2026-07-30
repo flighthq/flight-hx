@@ -25,7 +25,7 @@ class Statusbar {
     {
       var i:Dynamic = (_Runtime.field(Statusbar._styleStack__statusbar, 'length') - 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-        var e:Dynamic = _Runtime.field(_Runtime.getIndex(Statusbar._styleStack__statusbar, i), 'entry');
+        var e:Dynamic = _Runtime.field(flighthq._internal._StaticIndex.readArray(Statusbar._styleStack__statusbar, i), 'entry');
         if ((cast ((cast _Runtime.strictEquals(style, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(e, 'style'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (style = cast (_Runtime.field(e, 'style') : Dynamic)); }
         if ((cast ((cast _Runtime.strictEquals(visible, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(e, 'visible'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (visible = cast (_Runtime.field(e, 'visible') : Dynamic)); }
         if ((cast ((cast _Runtime.strictEquals(color, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(e, 'color'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (color = cast (_Runtime.field(e, 'color') : Dynamic)); }

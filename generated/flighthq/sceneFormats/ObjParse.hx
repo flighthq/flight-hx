@@ -45,7 +45,7 @@ class ObjParse {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
-        var raw:Dynamic = StringTools.trim(Std.string(_Runtime.getIndex(lines, i)));
+        var raw:Dynamic = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
         if ((cast ((cast _Runtime.strictEquals(_Runtime.field(raw, 'length'), 0.0) : Bool) || (cast _Runtime.strictEquals(_Runtime.charCodeAt(raw, 0.0), 35.0) : Bool)) : Bool)) { i++; continue; }
         var spaceIndex:Dynamic = _Runtime.callProperty(raw, 'indexOf', cast ([' '] : Array<Dynamic>));
         if ((cast ((cast spaceIndex : Float) < (cast 0.0 : Float)) : Bool)) { i++; continue; }
@@ -60,9 +60,9 @@ class ObjParse {
                 _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromObj: v on line ' + Std.string((i + 1.0)) + ' has fewer than 3 components'] : Array<Dynamic>));
                 break;
               }
-              var x:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(parts, 0.0)] : Array<Dynamic>));
-              var y:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(parts, 1.0)] : Array<Dynamic>));
-              var z:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(parts, 2.0)] : Array<Dynamic>));
+              var x:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(parts, 0.0)] : Array<Dynamic>));
+              var y:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(parts, 1.0)] : Array<Dynamic>));
+              var z:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(parts, 2.0)] : Array<Dynamic>));
               if ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([x] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([y] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([z] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
                 _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromObj: v on line ' + Std.string((i + 1.0)) + ' has non-numeric components'] : Array<Dynamic>));
                 break;
@@ -77,9 +77,9 @@ class ObjParse {
                 _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromObj: vn on line ' + Std.string((i + 1.0)) + ' has fewer than 3 components'] : Array<Dynamic>));
                 break;
               }
-              var x:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(parts, 0.0)] : Array<Dynamic>));
-              var y:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(parts, 1.0)] : Array<Dynamic>));
-              var z:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(parts, 2.0)] : Array<Dynamic>));
+              var x:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(parts, 0.0)] : Array<Dynamic>));
+              var y:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(parts, 1.0)] : Array<Dynamic>));
+              var z:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(parts, 2.0)] : Array<Dynamic>));
               if ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([x] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([y] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([z] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
                 _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromObj: vn on line ' + Std.string((i + 1.0)) + ' has non-numeric components'] : Array<Dynamic>));
                 break;
@@ -94,8 +94,8 @@ class ObjParse {
                 _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromObj: vt on line ' + Std.string((i + 1.0)) + ' has fewer than 2 components'] : Array<Dynamic>));
                 break;
               }
-              var u:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(parts, 0.0)] : Array<Dynamic>));
-              var v:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(parts, 1.0)] : Array<Dynamic>));
+              var u:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(parts, 0.0)] : Array<Dynamic>));
+              var v:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(parts, 1.0)] : Array<Dynamic>));
               if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([u] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
                 _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromObj: vt on line ' + Std.string((i + 1.0)) + ' has non-numeric components'] : Array<Dynamic>));
                 break;
@@ -115,7 +115,7 @@ class ObjParse {
               {
                 var vi:Dynamic = 0.0;
                 while ((cast ((cast vi : Float) < (cast _Runtime.field(vertexTokens, 'length') : Float)) : Bool)) {
-                  var idx:Dynamic = _Runtime.callValue(ObjParse.parseFaceVertex__objParse, cast ([_Runtime.getIndex(vertexTokens, vi), positions, uvs, normals, bucket, warnings, i] : Array<Dynamic>));
+                  var idx:Dynamic = _Runtime.callValue(ObjParse.parseFaceVertex__objParse, cast ([flighthq._internal._StaticIndex.readArray(vertexTokens, vi), positions, uvs, normals, bucket, warnings, i] : Array<Dynamic>));
                   if ((cast ((cast idx : Float) < (cast 0.0 : Float)) : Bool)) { break; }
                   _Runtime.callProperty(faceIndices, 'push', cast ([idx] : Array<Dynamic>));
                   vi++;
@@ -125,7 +125,7 @@ class ObjParse {
                 {
                   var t:Dynamic = 1.0;
                   while ((cast ((cast t : Float) < (cast (_Runtime.field(faceIndices, 'length') - 1.0) : Float)) : Bool)) {
-                    _Runtime.pushMany(_Runtime.field(bucket, 'indices'), cast ([_Runtime.getIndex(faceIndices, 0.0), _Runtime.getIndex(faceIndices, t), _Runtime.getIndex(faceIndices, (t + 1.0))] : Array<Dynamic>));
+                    _Runtime.pushMany(_Runtime.field(bucket, 'indices'), cast ([flighthq._internal._StaticIndex.readArray(faceIndices, 0.0), flighthq._internal._StaticIndex.readArray(faceIndices, t), flighthq._internal._StaticIndex.readArray(faceIndices, (t + 1.0))] : Array<Dynamic>));
                     t++;
                   }
                 }
@@ -186,7 +186,7 @@ class ObjParse {
     posCount = (_Runtime.field(positions, 'length') / 3.0);
     uvCount = (_Runtime.field(uvs, 'length') / 2.0);
     normalCount = (_Runtime.field(normals, 'length') / 3.0);
-    rawPosIdx = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(parts, 0.0), 10.0] : Array<Dynamic>));
+    rawPosIdx = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(parts, 0.0), 10.0] : Array<Dynamic>));
     if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([rawPosIdx] : Array<Dynamic>)) : Bool) : Bool) || (cast _Runtime.strictEquals(rawPosIdx, 0.0) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromObj: invalid face vertex index \'' + Std.string(token) + '\' on line ' + Std.string((lineIndex + 1.0)) + ''] : Array<Dynamic>));
       return cast -1.0;
@@ -197,8 +197,8 @@ class ObjParse {
       return cast -1.0;
     }
     uvIdx = -1.0;
-    if ((cast ((cast ((cast _Runtime.field(parts, 'length') : Float) >= (cast 2.0 : Float)) : Bool) && (cast ((cast _Runtime.field(_Runtime.getIndex(parts, 1.0), 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      var rawUvIdx:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(parts, 1.0), 10.0] : Array<Dynamic>));
+    if ((cast ((cast ((cast _Runtime.field(parts, 'length') : Float) >= (cast 2.0 : Float)) : Bool) && (cast ((cast _Runtime.field(flighthq._internal._StaticIndex.readArray(parts, 1.0), 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+      var rawUvIdx:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(parts, 1.0), 10.0] : Array<Dynamic>));
       if ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([rawUvIdx] : Array<Dynamic>)) : Bool) && (cast !_Runtime.strictEquals(rawUvIdx, 0.0) : Bool)) : Bool)) {
         (uvIdx = cast (((cast ((cast rawUvIdx : Float) > (cast 0.0 : Float)) : Bool) ? (cast (rawUvIdx - 1.0) : Dynamic) : (cast (uvCount + rawUvIdx) : Dynamic)) : Dynamic));
         if ((cast ((cast ((cast uvIdx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast uvIdx : Float) >= (cast uvCount : Float)) : Bool)) : Bool)) {
@@ -208,8 +208,8 @@ class ObjParse {
       }
     }
     normalIdx = -1.0;
-    if ((cast ((cast ((cast _Runtime.field(parts, 'length') : Float) >= (cast 3.0 : Float)) : Bool) && (cast ((cast _Runtime.field(_Runtime.getIndex(parts, 2.0), 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      var rawNormalIdx:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(parts, 2.0), 10.0] : Array<Dynamic>));
+    if ((cast ((cast ((cast _Runtime.field(parts, 'length') : Float) >= (cast 3.0 : Float)) : Bool) && (cast ((cast _Runtime.field(flighthq._internal._StaticIndex.readArray(parts, 2.0), 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+      var rawNormalIdx:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(parts, 2.0), 10.0] : Array<Dynamic>));
       if ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([rawNormalIdx] : Array<Dynamic>)) : Bool) && (cast !_Runtime.strictEquals(rawNormalIdx, 0.0) : Bool)) : Bool)) {
         (normalIdx = cast (((cast ((cast rawNormalIdx : Float) > (cast 0.0 : Float)) : Bool) ? (cast (rawNormalIdx - 1.0) : Dynamic) : (cast (normalCount + rawNormalIdx) : Dynamic)) : Dynamic));
         if ((cast ((cast ((cast normalIdx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast normalIdx : Float) >= (cast normalCount : Float)) : Bool)) : Bool)) {
@@ -222,15 +222,15 @@ class ObjParse {
     existing = ((cast _Runtime.field(bucket, 'dedup') : flighthq._internal._Map).get(key));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
     vertexIndex = (_Runtime.field(_Runtime.field(bucket, 'vertices'), 'length') / CANONICAL_FLOATS_PER_VERTEX);
-    _Runtime.pushMany(_Runtime.field(bucket, 'vertices'), cast ([_Runtime.getIndex(positions, (posIdx * 3.0)), _Runtime.getIndex(positions, ((posIdx * 3.0) + 1.0)), _Runtime.getIndex(positions, ((posIdx * 3.0) + 2.0))] : Array<Dynamic>));
+    _Runtime.pushMany(_Runtime.field(bucket, 'vertices'), cast ([flighthq._internal._StaticIndex.readArray(positions, (posIdx * 3.0)), flighthq._internal._StaticIndex.readArray(positions, ((posIdx * 3.0) + 1.0)), flighthq._internal._StaticIndex.readArray(positions, ((posIdx * 3.0) + 2.0))] : Array<Dynamic>));
     if ((cast ((cast normalIdx : Float) >= (cast 0.0 : Float)) : Bool)) {
-      _Runtime.pushMany(_Runtime.field(bucket, 'vertices'), cast ([_Runtime.getIndex(normals, (normalIdx * 3.0)), _Runtime.getIndex(normals, ((normalIdx * 3.0) + 1.0)), _Runtime.getIndex(normals, ((normalIdx * 3.0) + 2.0))] : Array<Dynamic>));
+      _Runtime.pushMany(_Runtime.field(bucket, 'vertices'), cast ([flighthq._internal._StaticIndex.readArray(normals, (normalIdx * 3.0)), flighthq._internal._StaticIndex.readArray(normals, ((normalIdx * 3.0) + 1.0)), flighthq._internal._StaticIndex.readArray(normals, ((normalIdx * 3.0) + 2.0))] : Array<Dynamic>));
     } else {
       _Runtime.pushMany(_Runtime.field(bucket, 'vertices'), cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
     }
     _Runtime.pushMany(_Runtime.field(bucket, 'vertices'), cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
     if ((cast ((cast uvIdx : Float) >= (cast 0.0 : Float)) : Bool)) {
-      _Runtime.pushMany(_Runtime.field(bucket, 'vertices'), cast ([_Runtime.getIndex(uvs, (uvIdx * 2.0)), _Runtime.getIndex(uvs, ((uvIdx * 2.0) + 1.0))] : Array<Dynamic>));
+      _Runtime.pushMany(_Runtime.field(bucket, 'vertices'), cast ([flighthq._internal._StaticIndex.readArray(uvs, (uvIdx * 2.0)), flighthq._internal._StaticIndex.readArray(uvs, ((uvIdx * 2.0) + 1.0))] : Array<Dynamic>));
     } else {
       _Runtime.pushMany(_Runtime.field(bucket, 'vertices'), cast ([0.0, 0.0] : Array<Dynamic>));
     }
@@ -258,14 +258,14 @@ class ObjParse {
       {
         var k:Dynamic = 0.0;
         while ((cast ((cast k : Float) < (cast _Runtime.field(_Runtime.field(bucket, 'indices'), 'length') : Float)) : Bool)) {
-          _Runtime.callProperty(indices, 'push', cast ([(_Runtime.getIndex(_Runtime.field(bucket, 'indices'), k) + vertexBase)] : Array<Dynamic>));
+          _Runtime.callProperty(indices, 'push', cast ([(flighthq._internal._StaticIndex.readArray(_Runtime.field(bucket, 'indices'), k) + vertexBase)] : Array<Dynamic>));
           k++;
         }
       }
       {
         var k:Dynamic = 0.0;
         while ((cast ((cast k : Float) < (cast _Runtime.field(_Runtime.field(bucket, 'vertices'), 'length') : Float)) : Bool)) {
-          _Runtime.callProperty(vertices, 'push', cast ([_Runtime.getIndex(_Runtime.field(bucket, 'vertices'), k)] : Array<Dynamic>));
+          _Runtime.callProperty(vertices, 'push', cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(bucket, 'vertices'), k)] : Array<Dynamic>));
           k++;
         }
       }
@@ -295,9 +295,9 @@ class ObjParse {
     var g:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
     var a:Dynamic = cast _Runtime.UNDEFINED;
-    r = _Runtime.callValue(ObjParse.clampChannel__objParse, cast ([_Runtime.getIndex(rgb, 0.0)] : Array<Dynamic>));
-    g = _Runtime.callValue(ObjParse.clampChannel__objParse, cast ([_Runtime.getIndex(rgb, 1.0)] : Array<Dynamic>));
-    b = _Runtime.callValue(ObjParse.clampChannel__objParse, cast ([_Runtime.getIndex(rgb, 2.0)] : Array<Dynamic>));
+    r = _Runtime.callValue(ObjParse.clampChannel__objParse, cast ([flighthq._internal._StaticIndex.readArray(rgb, 0.0)] : Array<Dynamic>));
+    g = _Runtime.callValue(ObjParse.clampChannel__objParse, cast ([flighthq._internal._StaticIndex.readArray(rgb, 1.0)] : Array<Dynamic>));
+    b = _Runtime.callValue(ObjParse.clampChannel__objParse, cast ([flighthq._internal._StaticIndex.readArray(rgb, 2.0)] : Array<Dynamic>));
     a = _Runtime.callValue(ObjParse.clampChannel__objParse, cast ([alpha] : Array<Dynamic>));
     return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(r) << 24)) | _Runtime.toInt32((_Runtime.toInt32(g) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(b) << 8)))) | _Runtime.toInt32(a))), 0);
     return cast null;

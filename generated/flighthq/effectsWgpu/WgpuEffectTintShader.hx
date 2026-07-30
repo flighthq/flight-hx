@@ -37,11 +37,11 @@ class WgpuEffectTintShader {
     b = _Runtime.getIndex(__destructure0, 2.0);
     pipeline = _Runtime.callValue(WgpuEffectTintShader.getWgpuInvertTintShader__wgpuEffectTintShader, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, source, dest, pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, r);
-      _Runtime.setIndex(f32, 1.0, g);
-      _Runtime.setIndex(f32, 2.0, b);
-      _Runtime.setIndex(f32, 3.0, alpha);
-      _Runtime.setIndex(f32, 4.0, strength);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, r);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, g);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, b);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, alpha);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, strength);
     }] : Array<Dynamic>));
   }
 
@@ -57,11 +57,11 @@ class WgpuEffectTintShader {
     b = _Runtime.getIndex(__destructure1, 2.0);
     pipeline = _Runtime.callValue(WgpuEffectTintShader.getWgpuTintShader__wgpuEffectTintShader, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, source, dest, pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, r);
-      _Runtime.setIndex(f32, 1.0, g);
-      _Runtime.setIndex(f32, 2.0, b);
-      _Runtime.setIndex(f32, 3.0, alpha);
-      _Runtime.setIndex(f32, 4.0, strength);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, r);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, g);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, b);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, alpha);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, strength);
     }] : Array<Dynamic>));
   }
 

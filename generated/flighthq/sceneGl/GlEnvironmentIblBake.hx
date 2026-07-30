@@ -44,7 +44,7 @@ class GlEnvironmentIblBake {
     prefilteredMipCount = _Runtime.field(__destructure0, 'prefilteredMipCount');
     brdfLut = _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(runtime, 'ibl'), 'brdfLut'), function():Dynamic return cast _Runtime.callValue(GlEnvironmentIblBake.bakeGlBrdfLut__glEnvironmentIblBake, cast ([state, fbo] : Array<Dynamic>)));
     flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER, prevFramebuffer);
-    flighthq._internal.backend.WebGl2Backend.viewport(gl, _Runtime.getIndex(prevViewport, 0.0), _Runtime.getIndex(prevViewport, 1.0), _Runtime.getIndex(prevViewport, 2.0), _Runtime.getIndex(prevViewport, 3.0));
+    flighthq._internal.backend.WebGl2Backend.viewport(gl, flighthq._internal._StaticIndex.readInt32Array(prevViewport, 0.0), flighthq._internal._StaticIndex.readInt32Array(prevViewport, 1.0), flighthq._internal._StaticIndex.readInt32Array(prevViewport, 2.0), flighthq._internal._StaticIndex.readInt32Array(prevViewport, 3.0));
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, null);
     _Runtime.setField(runtime, 'ibl', { brdfLut: brdfLut, intensity: _Runtime.field(environment, 'intensity'), irradianceCube: irradianceCube, prefilteredCube: prefilteredCube, prefilteredMipCount: prefilteredMipCount });
   }
@@ -134,10 +134,10 @@ class GlEnvironmentIblBake {
       var face:Dynamic = 0.0;
       while ((cast ((cast face : Float) < (cast 6.0 : Float)) : Bool)) {
         flighthq._internal.backend.WebGl2Backend.framebufferTexture2D(gl, flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER, flighthq._internal.backend.WebGl2Backend.COLOR_ATTACHMENT0, _Runtime.callValue(getGlCubeFaceTarget, cast ([gl, face] : Array<Dynamic>)), cube, mipLevel);
-        var b:Dynamic = _Runtime.getIndex(GlEnvironmentIblBake.CUBE_FACE_BASIS__glEnvironmentIblBake, face);
-        flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(program, 'locFaceForward'), _Runtime.getIndex(b, 0.0), _Runtime.getIndex(b, 1.0), _Runtime.getIndex(b, 2.0));
-        flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(program, 'locFaceRight'), _Runtime.getIndex(b, 3.0), _Runtime.getIndex(b, 4.0), _Runtime.getIndex(b, 5.0));
-        flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(program, 'locFaceUp'), _Runtime.getIndex(b, 6.0), _Runtime.getIndex(b, 7.0), _Runtime.getIndex(b, 8.0));
+        var b:Dynamic = flighthq._internal._StaticIndex.readArray(GlEnvironmentIblBake.CUBE_FACE_BASIS__glEnvironmentIblBake, face);
+        flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(program, 'locFaceForward'), flighthq._internal._StaticIndex.readArray(b, 0.0), flighthq._internal._StaticIndex.readArray(b, 1.0), flighthq._internal._StaticIndex.readArray(b, 2.0));
+        flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(program, 'locFaceRight'), flighthq._internal._StaticIndex.readArray(b, 3.0), flighthq._internal._StaticIndex.readArray(b, 4.0), flighthq._internal._StaticIndex.readArray(b, 5.0));
+        flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(program, 'locFaceUp'), flighthq._internal._StaticIndex.readArray(b, 6.0), flighthq._internal._StaticIndex.readArray(b, 7.0), flighthq._internal._StaticIndex.readArray(b, 8.0));
         _Runtime.callValue(GlEnvironmentIblBake.drawGlBakeQuad__glEnvironmentIblBake, cast ([state, program] : Array<Dynamic>));
         face++;
       }

@@ -43,12 +43,12 @@ class WgpuBlurEffect {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'blur.gaussian', WgpuBlurEffect.GAUSSIAN_BLUR_WGSL__wgpuBlurEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, (1.0 / _Runtime.field(source, 'width')));
-      _Runtime.setIndex(f32, 1.0, (1.0 / _Runtime.field(source, 'height')));
-      _Runtime.setIndex(f32, 2.0, dirX);
-      _Runtime.setIndex(f32, 3.0, dirY);
-      _Runtime.setIndex(f32, 4.0, radius);
-      _Runtime.setIndex(f32, 5.0, sigma);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, (1.0 / _Runtime.field(source, 'width')));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, (1.0 / _Runtime.field(source, 'height')));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, dirX);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, dirY);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, radius);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 5.0, sigma);
     }] : Array<Dynamic>));
   }
 

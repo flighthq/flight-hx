@@ -14,7 +14,7 @@ class DomReconcile {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast newLength : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(runtime, 'domNextOrderList'), i), _Runtime.getIndex(_Runtime.field(runtime, 'domOrderList'), i)) : Bool)) { return cast true; }
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(_Runtime.field(runtime, 'domNextOrderList'), i), flighthq._internal._StaticIndex.readArray(_Runtime.field(runtime, 'domOrderList'), i)) : Bool)) { return cast true; }
         i++;
       }
     }
@@ -47,7 +47,7 @@ class DomReconcile {
     if ((cast ((cast newLength : Float) >= (cast _Runtime.field(_Runtime.field(runtime, 'domNextOrderList'), 'length') : Float)) : Bool)) {
       _Runtime.setLength(_Runtime.field(runtime, 'domNextOrderList'), (newLength + 16.0));
     }
-    _Runtime.setIndex(_Runtime.field(runtime, 'domNextOrderList'), newLength, data);
+    flighthq._internal._StaticIndex.writeArray(_Runtime.field(runtime, 'domNextOrderList'), newLength, data);
     return cast { newLength: (newLength + 1.0), needsReconcile: needsReconcile };
     return cast null;
   }
@@ -60,7 +60,7 @@ class DomReconcile {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast newLength : Float)) : Bool)) {
-        var el:Dynamic = ((cast _Runtime.field(runtime, 'domElementMap') : flighthq._internal._WeakMap).get(_Runtime.getIndex(_Runtime.field(runtime, 'domNextOrderList'), i)));
+        var el:Dynamic = ((cast _Runtime.field(runtime, 'domElementMap') : flighthq._internal._WeakMap).get(flighthq._internal._StaticIndex.readArray(_Runtime.field(runtime, 'domNextOrderList'), i)));
         if ((cast !_Runtime.strictEquals(el, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast keepSet : flighthq._internal._Set).add(el)); }
         i++;
       }
@@ -75,7 +75,7 @@ class DomReconcile {
     {
       var i:Dynamic = (newLength - 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-        var el:Dynamic = ((cast _Runtime.field(runtime, 'domElementMap') : flighthq._internal._WeakMap).get(_Runtime.getIndex(_Runtime.field(runtime, 'domNextOrderList'), i)));
+        var el:Dynamic = ((cast _Runtime.field(runtime, 'domElementMap') : flighthq._internal._WeakMap).get(flighthq._internal._StaticIndex.readArray(_Runtime.field(runtime, 'domNextOrderList'), i)));
         if ((cast _Runtime.strictEquals(el, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i--; continue; }
         if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(el, 'nextSibling'), nextSibling) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(el, 'parentNode'), container) : Bool)) : Bool)) {
           _Runtime.callProperty(container, 'insertBefore', cast ([el, nextSibling] : Array<Dynamic>));

@@ -79,7 +79,7 @@ class GlEffectBoxBlur {
         flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(loc, 'locEdgeColor'), 0.0, 0.0, 0.0, 0.0);
         flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(loc, 'locUseEdgeColor'), 0.0);
       } else {
-        flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(loc, 'locEdgeColor'), _Runtime.getIndex(edgeColor, 0.0), _Runtime.getIndex(edgeColor, 1.0), _Runtime.getIndex(edgeColor, 2.0), _Runtime.getIndex(edgeColor, 3.0));
+        flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(loc, 'locEdgeColor'), flighthq._internal._StaticIndex.readArray(edgeColor, 0.0), flighthq._internal._StaticIndex.readArray(edgeColor, 1.0), flighthq._internal._StaticIndex.readArray(edgeColor, 2.0), flighthq._internal._StaticIndex.readArray(edgeColor, 3.0));
         flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(loc, 'locUseEdgeColor'), 1.0);
       }
       flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.ONE, flighthq._internal.backend.WebGl2Backend.ZERO);

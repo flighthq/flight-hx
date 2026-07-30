@@ -34,7 +34,7 @@ class GlShapeMesh {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(meshes, 'length') : Float)) : Bool)) {
-        var mesh:Dynamic = _Runtime.getIndex(meshes, i);
+        var mesh:Dynamic = flighthq._internal._StaticIndex.readArray(meshes, i);
         if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(mesh, 'indices'), 'length'), 0.0) : Bool)) { i++; continue; }
         var a:Dynamic = (_Runtime.field(mesh, 'alpha') * nodeAlpha);
         if ((cast ((cast a : Float) <= (cast 0.0 : Float)) : Bool)) { i++; continue; }

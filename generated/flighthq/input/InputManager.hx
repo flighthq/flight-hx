@@ -472,13 +472,13 @@ class InputManager {
 
   public static function getGamepadAxisName(mapping:GamepadMappingKind, index:Float):Null<GamepadAxisKind> {
     if ((cast !_Runtime.strictEquals(mapping, 'standard') : Bool)) { return cast null; }
-    return cast _Runtime.coalesce(_Runtime.getIndex(InputManager._standardAxisNames__inputManager, index), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(InputManager._standardAxisNames__inputManager, index), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getGamepadButtonName(mapping:GamepadMappingKind, index:Float):Null<GamepadButtonKind> {
     if ((cast !_Runtime.strictEquals(mapping, 'standard') : Bool)) { return cast null; }
-    return cast _Runtime.coalesce(_Runtime.getIndex(InputManager._standardButtonNames__inputManager, index), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(InputManager._standardButtonNames__inputManager, index), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -552,9 +552,9 @@ class InputManager {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(pad, 'axes'), 'length') : Float)) : Bool)) {
-          var value:Dynamic = _Runtime.getIndex(_Runtime.field(pad, 'axes'), i);
-          if ((cast !_Runtime.strictEquals(value, _Runtime.getIndex(prevAxes, i)) : Bool)) {
-            _Runtime.setIndex(prevAxes, i, value);
+          var value:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(pad, 'axes'), i);
+          if ((cast !_Runtime.strictEquals(value, flighthq._internal._StaticIndex.readArray(prevAxes, i)) : Bool)) {
+            flighthq._internal._StaticIndex.writeArray(prevAxes, i, value);
             (InputManager._axisData__inputManager.axis = cast (i : Dynamic));
             (InputManager._axisData__inputManager.gamepad = cast (_Runtime.field(pad, 'index') : Dynamic));
             (InputManager._axisData__inputManager.timeStamp = cast (now : Dynamic));
@@ -567,10 +567,10 @@ class InputManager {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(pad, 'buttons'), 'length') : Float)) : Bool)) {
-          var btn:Dynamic = _Runtime.getIndex(_Runtime.field(pad, 'buttons'), i);
-          var wasPressed:Dynamic = _Runtime.coalesce(_Runtime.getIndex(prevButtons, i), function():Dynamic return cast false);
+          var btn:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(pad, 'buttons'), i);
+          var wasPressed:Dynamic = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(prevButtons, i), function():Dynamic return cast false);
           if ((cast !_Runtime.strictEquals(_Runtime.field(btn, 'pressed'), wasPressed) : Bool)) {
-            _Runtime.setIndex(prevButtons, i, _Runtime.field(btn, 'pressed'));
+            flighthq._internal._StaticIndex.writeArray(prevButtons, i, _Runtime.field(btn, 'pressed'));
             (InputManager._buttonData__inputManager.button = cast (i : Dynamic));
             (InputManager._buttonData__inputManager.gamepad = cast (_Runtime.field(pad, 'index') : Dynamic));
             (InputManager._buttonData__inputManager.timeStamp = cast (now : Dynamic));

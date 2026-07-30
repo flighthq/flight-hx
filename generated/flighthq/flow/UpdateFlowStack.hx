@@ -14,10 +14,10 @@ class UpdateFlowStack {
     if ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool)) {
       return;
     }
-    _Runtime.callOptionalProperty(_Runtime.getIndex(states, index), 'onUpdate', cast ([deltaTime] : Array<Dynamic>));
-    while (_Runtime.truthy(_Runtime.andValue(((cast index : Float) > (cast 0.0 : Float)), function():Dynamic return cast _Runtime.field(_Runtime.getIndex(states, index), 'updateBelow')))) {
+    _Runtime.callOptionalProperty(flighthq._internal._StaticIndex.readArray(states, index), 'onUpdate', cast ([deltaTime] : Array<Dynamic>));
+    while (_Runtime.truthy(_Runtime.andValue(((cast index : Float) > (cast 0.0 : Float)), function():Dynamic return cast _Runtime.field(flighthq._internal._StaticIndex.readArray(states, index), 'updateBelow')))) {
       index--;
-      _Runtime.callOptionalProperty(_Runtime.getIndex(states, index), 'onUpdate', cast ([deltaTime] : Array<Dynamic>));
+      _Runtime.callOptionalProperty(flighthq._internal._StaticIndex.readArray(states, index), 'onUpdate', cast ([deltaTime] : Array<Dynamic>));
     }
   }
 }

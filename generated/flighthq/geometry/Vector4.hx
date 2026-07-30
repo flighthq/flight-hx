@@ -265,10 +265,10 @@ class Vector4 {
   }
 
   public static function setVector4FromFloat32Array(out:Vector4Like, offset:Float, source:flighthq._internal._Float32Array):Void {
-    _Runtime.setField(out, 'x', _Runtime.getIndex(source, offset));
-    _Runtime.setField(out, 'y', _Runtime.getIndex(source, (offset + 1.0)));
-    _Runtime.setField(out, 'z', _Runtime.getIndex(source, (offset + 2.0)));
-    _Runtime.setField(out, 'w', _Runtime.getIndex(source, (offset + 3.0)));
+    _Runtime.setField(out, 'x', flighthq._internal._StaticIndex.readFloat32Array(source, offset));
+    _Runtime.setField(out, 'y', flighthq._internal._StaticIndex.readFloat32Array(source, (offset + 1.0)));
+    _Runtime.setField(out, 'z', flighthq._internal._StaticIndex.readFloat32Array(source, (offset + 2.0)));
+    _Runtime.setField(out, 'w', flighthq._internal._StaticIndex.readFloat32Array(source, (offset + 3.0)));
   }
 
   public static function setVector4FromVector3(out:Vector4Like, source:Vector3Like, w:Dynamic = 0.0):Void {
@@ -292,10 +292,10 @@ class Vector4 {
   }
 
   public static function writeVector4ToFloat32Array(out:flighthq._internal._Float32Array, offset:Float, source:Vector4Like):Void {
-    _Runtime.setIndex(out, offset, _Runtime.field(source, 'x'));
-    _Runtime.setIndex(out, (offset + 1.0), _Runtime.field(source, 'y'));
-    _Runtime.setIndex(out, (offset + 2.0), _Runtime.field(source, 'z'));
-    _Runtime.setIndex(out, (offset + 3.0), _Runtime.field(source, 'w'));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, offset, _Runtime.field(source, 'x'));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 1.0), _Runtime.field(source, 'y'));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 2.0), _Runtime.field(source, 'z'));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 3.0), _Runtime.field(source, 'w'));
   }
 
   public static final VECTOR4_W_UNIT:flighthq.types.Vector4 = _Runtime.callValue(createVector4, cast ([0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));

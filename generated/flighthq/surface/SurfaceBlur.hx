@@ -24,10 +24,10 @@ class SurfaceBlur {
           var x:Dynamic = 0.0;
           while ((cast ((cast x : Float) < (cast initEnd : Float)) : Bool)) {
             var i:Dynamic = ((rowOffset + x) * 4.0);
-            (r = cast ((r + _Runtime.getIndex(source, i)) : Dynamic));
-            (g = cast ((g + _Runtime.getIndex(source, (i + 1.0))) : Dynamic));
-            (b = cast ((b + _Runtime.getIndex(source, (i + 2.0))) : Dynamic));
-            (a = cast ((a + _Runtime.getIndex(source, (i + 3.0))) : Dynamic));
+            (r = cast ((r + flighthq._internal._StaticIndex.readUint8ClampedArray(source, i)) : Dynamic));
+            (g = cast ((g + flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 1.0))) : Dynamic));
+            (b = cast ((b + flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 2.0))) : Dynamic));
+            (a = cast ((a + flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 3.0))) : Dynamic));
             count++;
             x++;
           }
@@ -36,26 +36,26 @@ class SurfaceBlur {
           var x:Dynamic = 0.0;
           while ((cast ((cast x : Float) < (cast width : Float)) : Bool)) {
             var di:Dynamic = ((rowOffset + x) * 4.0);
-            _Runtime.setIndex(out, di, HxMath.round((r / count)));
-            _Runtime.setIndex(out, (di + 1.0), HxMath.round((g / count)));
-            _Runtime.setIndex(out, (di + 2.0), HxMath.round((b / count)));
-            _Runtime.setIndex(out, (di + 3.0), HxMath.round((a / count)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, HxMath.round((r / count)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), HxMath.round((g / count)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), HxMath.round((b / count)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), HxMath.round((a / count)));
             var leaving:Dynamic = (x - radius);
             if ((cast ((cast leaving : Float) >= (cast 0.0 : Float)) : Bool)) {
               var li:Dynamic = ((rowOffset + leaving) * 4.0);
-              (r = cast ((r - _Runtime.getIndex(source, li)) : Dynamic));
-              (g = cast ((g - _Runtime.getIndex(source, (li + 1.0))) : Dynamic));
-              (b = cast ((b - _Runtime.getIndex(source, (li + 2.0))) : Dynamic));
-              (a = cast ((a - _Runtime.getIndex(source, (li + 3.0))) : Dynamic));
+              (r = cast ((r - flighthq._internal._StaticIndex.readUint8ClampedArray(source, li)) : Dynamic));
+              (g = cast ((g - flighthq._internal._StaticIndex.readUint8ClampedArray(source, (li + 1.0))) : Dynamic));
+              (b = cast ((b - flighthq._internal._StaticIndex.readUint8ClampedArray(source, (li + 2.0))) : Dynamic));
+              (a = cast ((a - flighthq._internal._StaticIndex.readUint8ClampedArray(source, (li + 3.0))) : Dynamic));
               count--;
             }
             var entering:Dynamic = ((x + radius) + 1.0);
             if ((cast ((cast entering : Float) < (cast width : Float)) : Bool)) {
               var ei:Dynamic = ((rowOffset + entering) * 4.0);
-              (r = cast ((r + _Runtime.getIndex(source, ei)) : Dynamic));
-              (g = cast ((g + _Runtime.getIndex(source, (ei + 1.0))) : Dynamic));
-              (b = cast ((b + _Runtime.getIndex(source, (ei + 2.0))) : Dynamic));
-              (a = cast ((a + _Runtime.getIndex(source, (ei + 3.0))) : Dynamic));
+              (r = cast ((r + flighthq._internal._StaticIndex.readUint8ClampedArray(source, ei)) : Dynamic));
+              (g = cast ((g + flighthq._internal._StaticIndex.readUint8ClampedArray(source, (ei + 1.0))) : Dynamic));
+              (b = cast ((b + flighthq._internal._StaticIndex.readUint8ClampedArray(source, (ei + 2.0))) : Dynamic));
+              (a = cast ((a + flighthq._internal._StaticIndex.readUint8ClampedArray(source, (ei + 3.0))) : Dynamic));
               count++;
             }
             x++;
@@ -84,19 +84,19 @@ class SurfaceBlur {
               while ((cast ((cast k : Float) < (cast _Runtime.field(kernel, 'length') : Float)) : Bool)) {
                 var px:Dynamic = HxMath.max(0.0, HxMath.min((width - 1.0), ((x + k) - radius)));
                 var i:Dynamic = (((y * width) + px) * 4.0);
-                var w:Dynamic = _Runtime.getIndex(kernel, k);
-                (r = cast ((r + (_Runtime.getIndex(source, i) * w)) : Dynamic));
-                (g = cast ((g + (_Runtime.getIndex(source, (i + 1.0)) * w)) : Dynamic));
-                (b = cast ((b + (_Runtime.getIndex(source, (i + 2.0)) * w)) : Dynamic));
-                (a = cast ((a + (_Runtime.getIndex(source, (i + 3.0)) * w)) : Dynamic));
+                var w:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(kernel, k);
+                (r = cast ((r + (flighthq._internal._StaticIndex.readUint8ClampedArray(source, i) * w)) : Dynamic));
+                (g = cast ((g + (flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 1.0)) * w)) : Dynamic));
+                (b = cast ((b + (flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 2.0)) * w)) : Dynamic));
+                (a = cast ((a + (flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 3.0)) * w)) : Dynamic));
                 k++;
               }
             }
             var di:Dynamic = (((y * width) + x) * 4.0);
-            _Runtime.setIndex(out, di, HxMath.round(r));
-            _Runtime.setIndex(out, (di + 1.0), HxMath.round(g));
-            _Runtime.setIndex(out, (di + 2.0), HxMath.round(b));
-            _Runtime.setIndex(out, (di + 3.0), HxMath.round(a));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, HxMath.round(r));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), HxMath.round(g));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), HxMath.round(b));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), HxMath.round(a));
             x++;
           }
         }
@@ -119,10 +119,10 @@ class SurfaceBlur {
           var y:Dynamic = 0.0;
           while ((cast ((cast y : Float) < (cast initEnd : Float)) : Bool)) {
             var i:Dynamic = (((y * width) + x) * 4.0);
-            (r = cast ((r + _Runtime.getIndex(source, i)) : Dynamic));
-            (g = cast ((g + _Runtime.getIndex(source, (i + 1.0))) : Dynamic));
-            (b = cast ((b + _Runtime.getIndex(source, (i + 2.0))) : Dynamic));
-            (a = cast ((a + _Runtime.getIndex(source, (i + 3.0))) : Dynamic));
+            (r = cast ((r + flighthq._internal._StaticIndex.readUint8ClampedArray(source, i)) : Dynamic));
+            (g = cast ((g + flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 1.0))) : Dynamic));
+            (b = cast ((b + flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 2.0))) : Dynamic));
+            (a = cast ((a + flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 3.0))) : Dynamic));
             count++;
             y++;
           }
@@ -131,26 +131,26 @@ class SurfaceBlur {
           var y:Dynamic = 0.0;
           while ((cast ((cast y : Float) < (cast height : Float)) : Bool)) {
             var di:Dynamic = (((y * width) + x) * 4.0);
-            _Runtime.setIndex(out, di, HxMath.round((r / count)));
-            _Runtime.setIndex(out, (di + 1.0), HxMath.round((g / count)));
-            _Runtime.setIndex(out, (di + 2.0), HxMath.round((b / count)));
-            _Runtime.setIndex(out, (di + 3.0), HxMath.round((a / count)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, HxMath.round((r / count)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), HxMath.round((g / count)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), HxMath.round((b / count)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), HxMath.round((a / count)));
             var leaving:Dynamic = (y - radius);
             if ((cast ((cast leaving : Float) >= (cast 0.0 : Float)) : Bool)) {
               var li:Dynamic = (((leaving * width) + x) * 4.0);
-              (r = cast ((r - _Runtime.getIndex(source, li)) : Dynamic));
-              (g = cast ((g - _Runtime.getIndex(source, (li + 1.0))) : Dynamic));
-              (b = cast ((b - _Runtime.getIndex(source, (li + 2.0))) : Dynamic));
-              (a = cast ((a - _Runtime.getIndex(source, (li + 3.0))) : Dynamic));
+              (r = cast ((r - flighthq._internal._StaticIndex.readUint8ClampedArray(source, li)) : Dynamic));
+              (g = cast ((g - flighthq._internal._StaticIndex.readUint8ClampedArray(source, (li + 1.0))) : Dynamic));
+              (b = cast ((b - flighthq._internal._StaticIndex.readUint8ClampedArray(source, (li + 2.0))) : Dynamic));
+              (a = cast ((a - flighthq._internal._StaticIndex.readUint8ClampedArray(source, (li + 3.0))) : Dynamic));
               count--;
             }
             var entering:Dynamic = ((y + radius) + 1.0);
             if ((cast ((cast entering : Float) < (cast height : Float)) : Bool)) {
               var ei:Dynamic = (((entering * width) + x) * 4.0);
-              (r = cast ((r + _Runtime.getIndex(source, ei)) : Dynamic));
-              (g = cast ((g + _Runtime.getIndex(source, (ei + 1.0))) : Dynamic));
-              (b = cast ((b + _Runtime.getIndex(source, (ei + 2.0))) : Dynamic));
-              (a = cast ((a + _Runtime.getIndex(source, (ei + 3.0))) : Dynamic));
+              (r = cast ((r + flighthq._internal._StaticIndex.readUint8ClampedArray(source, ei)) : Dynamic));
+              (g = cast ((g + flighthq._internal._StaticIndex.readUint8ClampedArray(source, (ei + 1.0))) : Dynamic));
+              (b = cast ((b + flighthq._internal._StaticIndex.readUint8ClampedArray(source, (ei + 2.0))) : Dynamic));
+              (a = cast ((a + flighthq._internal._StaticIndex.readUint8ClampedArray(source, (ei + 3.0))) : Dynamic));
               count++;
             }
             y++;
@@ -179,19 +179,19 @@ class SurfaceBlur {
               while ((cast ((cast k : Float) < (cast _Runtime.field(kernel, 'length') : Float)) : Bool)) {
                 var py:Dynamic = HxMath.max(0.0, HxMath.min((height - 1.0), ((y + k) - radius)));
                 var i:Dynamic = (((py * width) + x) * 4.0);
-                var w:Dynamic = _Runtime.getIndex(kernel, k);
-                (r = cast ((r + (_Runtime.getIndex(source, i) * w)) : Dynamic));
-                (g = cast ((g + (_Runtime.getIndex(source, (i + 1.0)) * w)) : Dynamic));
-                (b = cast ((b + (_Runtime.getIndex(source, (i + 2.0)) * w)) : Dynamic));
-                (a = cast ((a + (_Runtime.getIndex(source, (i + 3.0)) * w)) : Dynamic));
+                var w:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(kernel, k);
+                (r = cast ((r + (flighthq._internal._StaticIndex.readUint8ClampedArray(source, i) * w)) : Dynamic));
+                (g = cast ((g + (flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 1.0)) * w)) : Dynamic));
+                (b = cast ((b + (flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 2.0)) * w)) : Dynamic));
+                (a = cast ((a + (flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 3.0)) * w)) : Dynamic));
                 k++;
               }
             }
             var di:Dynamic = (((y * width) + x) * 4.0);
-            _Runtime.setIndex(out, di, HxMath.round(r));
-            _Runtime.setIndex(out, (di + 1.0), HxMath.round(g));
-            _Runtime.setIndex(out, (di + 2.0), HxMath.round(b));
-            _Runtime.setIndex(out, (di + 3.0), HxMath.round(a));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, HxMath.round(r));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), HxMath.round(g));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), HxMath.round(b));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), HxMath.round(a));
             x++;
           }
         }
@@ -243,7 +243,7 @@ class SurfaceBlur {
     len = ((2.0 * radius) + 1.0);
     if ((cast ((cast sigma : Float) <= (cast 0.0 : Float)) : Bool)) {
       _Runtime.fill(out, 0.0, 0.0, len, 3);
-      _Runtime.setIndex(out, radius, 1.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, radius, 1.0);
       return;
     }
     sum = 0.0;
@@ -252,15 +252,15 @@ class SurfaceBlur {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast len : Float)) : Bool)) {
         var x:Dynamic = (i - radius);
-        _Runtime.setIndex(out, i, HxMath.exp((-(x * x) / twoSigmaSq)));
-        (sum = cast ((sum + _Runtime.getIndex(out, i)) : Dynamic));
+        flighthq._internal._StaticIndex.writeFloat32Array(out, i, HxMath.exp((-(x * x) / twoSigmaSq)));
+        (sum = cast ((sum + flighthq._internal._StaticIndex.readFloat32Array(out, i)) : Dynamic));
         i++;
       }
     }
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast len : Float)) : Bool)) {
-        _Runtime.setIndex(out, i, (_Runtime.getIndex(out, i) / sum));
+        ({ var __indexedObject0:Dynamic = out; var __indexedKey1:Dynamic = i; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject0, __indexedKey1, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject0, __indexedKey1) / sum)); });
         i++;
       }
     }

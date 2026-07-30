@@ -35,8 +35,8 @@ class Platform {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast len : Float)) : Bool)) {
-        var aNum:Dynamic = ((cast ((cast i : Float) < (cast _Runtime.field(aParts, 'length') : Float)) : Bool) ? (cast _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(aParts, i), 10.0] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
-        var bNum:Dynamic = ((cast ((cast i : Float) < (cast _Runtime.field(bParts, 'length') : Float)) : Bool) ? (cast _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(bParts, i), 10.0] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
+        var aNum:Dynamic = ((cast ((cast i : Float) < (cast _Runtime.field(aParts, 'length') : Float)) : Bool) ? (cast _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(aParts, i), 10.0] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
+        var bNum:Dynamic = ((cast ((cast i : Float) < (cast _Runtime.field(bParts, 'length') : Float)) : Bool) ? (cast _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(bParts, i), 10.0] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
         var aN:Dynamic = ((cast _Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([aNum] : Array<Dynamic>)) : Bool) ? (cast 0.0 : Dynamic) : (cast aNum : Dynamic));
         var bN:Dynamic = ((cast _Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([bNum] : Array<Dynamic>)) : Bool) ? (cast 0.0 : Dynamic) : (cast bNum : Dynamic));
         if ((cast ((cast aN : Float) < (cast bN : Float)) : Bool)) { return cast -1.0; }

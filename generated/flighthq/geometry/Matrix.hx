@@ -360,29 +360,29 @@ class Matrix {
   }
 
   public static function setMatrixFromFloat32Array(out:MatrixLike, offset:Float, source:flighthq._internal._Float32Array):Void {
-    _Runtime.setField(out, 'a', _Runtime.getIndex(source, offset));
-    _Runtime.setField(out, 'b', _Runtime.getIndex(source, (offset + 1.0)));
-    _Runtime.setField(out, 'c', _Runtime.getIndex(source, (offset + 2.0)));
-    _Runtime.setField(out, 'd', _Runtime.getIndex(source, (offset + 3.0)));
-    _Runtime.setField(out, 'tx', _Runtime.getIndex(source, (offset + 4.0)));
-    _Runtime.setField(out, 'ty', _Runtime.getIndex(source, (offset + 5.0)));
+    _Runtime.setField(out, 'a', flighthq._internal._StaticIndex.readFloat32Array(source, offset));
+    _Runtime.setField(out, 'b', flighthq._internal._StaticIndex.readFloat32Array(source, (offset + 1.0)));
+    _Runtime.setField(out, 'c', flighthq._internal._StaticIndex.readFloat32Array(source, (offset + 2.0)));
+    _Runtime.setField(out, 'd', flighthq._internal._StaticIndex.readFloat32Array(source, (offset + 3.0)));
+    _Runtime.setField(out, 'tx', flighthq._internal._StaticIndex.readFloat32Array(source, (offset + 4.0)));
+    _Runtime.setField(out, 'ty', flighthq._internal._StaticIndex.readFloat32Array(source, (offset + 5.0)));
   }
 
   public static function setMatrixFromMatrix3(out:MatrixLike, source:Matrix3Like):Void {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     m = source.m;
-    _Runtime.callValue(setMatrix, cast ([out, _Runtime.getIndex(m, 0.0), _Runtime.getIndex(m, 3.0), _Runtime.getIndex(m, 1.0), _Runtime.getIndex(m, 4.0), _Runtime.getIndex(m, 6.0), _Runtime.getIndex(m, 7.0)] : Array<Dynamic>));
+    _Runtime.callValue(setMatrix, cast ([out, flighthq._internal._StaticIndex.readFloat32Array(m, 0.0), flighthq._internal._StaticIndex.readFloat32Array(m, 3.0), flighthq._internal._StaticIndex.readFloat32Array(m, 1.0), flighthq._internal._StaticIndex.readFloat32Array(m, 4.0), flighthq._internal._StaticIndex.readFloat32Array(m, 6.0), flighthq._internal._StaticIndex.readFloat32Array(m, 7.0)] : Array<Dynamic>));
   }
 
   public static function setMatrixFromMatrix4(out:MatrixLike, source:Matrix4Like):Void {
     var s:Dynamic = cast _Runtime.UNDEFINED;
     s = source.m;
-    _Runtime.setField(out, 'a', _Runtime.getIndex(s, 0.0));
-    _Runtime.setField(out, 'b', _Runtime.getIndex(s, 4.0));
-    _Runtime.setField(out, 'tx', _Runtime.getIndex(s, 12.0));
-    _Runtime.setField(out, 'c', _Runtime.getIndex(s, 1.0));
-    _Runtime.setField(out, 'd', _Runtime.getIndex(s, 5.0));
-    _Runtime.setField(out, 'ty', _Runtime.getIndex(s, 13.0));
+    _Runtime.setField(out, 'a', flighthq._internal._StaticIndex.readFloat32Array(s, 0.0));
+    _Runtime.setField(out, 'b', flighthq._internal._StaticIndex.readFloat32Array(s, 4.0));
+    _Runtime.setField(out, 'tx', flighthq._internal._StaticIndex.readFloat32Array(s, 12.0));
+    _Runtime.setField(out, 'c', flighthq._internal._StaticIndex.readFloat32Array(s, 1.0));
+    _Runtime.setField(out, 'd', flighthq._internal._StaticIndex.readFloat32Array(s, 5.0));
+    _Runtime.setField(out, 'ty', flighthq._internal._StaticIndex.readFloat32Array(s, 13.0));
   }
 
   public static function setMatrixIdentity(out:MatrixLike):Void {
@@ -422,11 +422,11 @@ class Matrix {
   }
 
   public static function writeMatrixToFloat32Array(out:flighthq._internal._Float32Array, offset:Float, source:MatrixLike):Void {
-    _Runtime.setIndex(out, offset, _Runtime.field(source, 'a'));
-    _Runtime.setIndex(out, (offset + 1.0), _Runtime.field(source, 'b'));
-    _Runtime.setIndex(out, (offset + 2.0), _Runtime.field(source, 'c'));
-    _Runtime.setIndex(out, (offset + 3.0), _Runtime.field(source, 'd'));
-    _Runtime.setIndex(out, (offset + 4.0), _Runtime.field(source, 'tx'));
-    _Runtime.setIndex(out, (offset + 5.0), _Runtime.field(source, 'ty'));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, offset, _Runtime.field(source, 'a'));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 1.0), _Runtime.field(source, 'b'));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 2.0), _Runtime.field(source, 'c'));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 3.0), _Runtime.field(source, 'd'));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 4.0), _Runtime.field(source, 'tx'));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 5.0), _Runtime.field(source, 'ty'));
   }
 }

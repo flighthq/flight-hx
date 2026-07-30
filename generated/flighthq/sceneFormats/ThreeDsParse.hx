@@ -63,7 +63,7 @@ class ThreeDsParse {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(meshes, 'length') : Float)) : Bool)) {
-        var meshNode:Dynamic = _Runtime.callValue(ThreeDsParse.buildMeshNode__threeDsParse, cast ([_Runtime.getIndex(meshes, i), materials, resolved] : Array<Dynamic>));
+        var meshNode:Dynamic = _Runtime.callValue(ThreeDsParse.buildMeshNode__threeDsParse, cast ([flighthq._internal._StaticIndex.readArray(meshes, i), materials, resolved] : Array<Dynamic>));
         if ((cast !_Runtime.strictEquals(meshNode, null) : Bool)) { _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), meshNode] : Array<Dynamic>)); }
         i++;
       }
@@ -92,7 +92,7 @@ class ThreeDsParse {
         {
           var i:Dynamic = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(inner, 'length') : Float)) : Bool)) {
-            _Runtime.callProperty(meshes, 'push', cast ([_Runtime.getIndex(inner, i)] : Array<Dynamic>));
+            _Runtime.callProperty(meshes, 'push', cast ([flighthq._internal._StaticIndex.readArray(inner, i)] : Array<Dynamic>));
             i++;
           }
         }
@@ -195,7 +195,7 @@ class ThreeDsParse {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast floatsNeeded : Float)) : Bool)) {
-        _Runtime.setIndex(vertices, i, _Runtime.callProperty(view, 'getFloat32', cast ([offset, true] : Array<Dynamic>)));
+        flighthq._internal._StaticIndex.writeFloat32Array(vertices, i, _Runtime.callProperty(view, 'getFloat32', cast ([offset, true] : Array<Dynamic>)));
         (offset = cast ((offset + 4.0) : Dynamic));
         i++;
       }
@@ -226,9 +226,9 @@ class ThreeDsParse {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        _Runtime.setIndex(faces, (i * 3.0), _Runtime.callProperty(view, 'getUint16', cast ([offset, true] : Array<Dynamic>)));
-        _Runtime.setIndex(faces, ((i * 3.0) + 1.0), _Runtime.callProperty(view, 'getUint16', cast ([(offset + 2.0), true] : Array<Dynamic>)));
-        _Runtime.setIndex(faces, ((i * 3.0) + 2.0), _Runtime.callProperty(view, 'getUint16', cast ([(offset + 4.0), true] : Array<Dynamic>)));
+        flighthq._internal._StaticIndex.writeUint16Array(faces, (i * 3.0), _Runtime.callProperty(view, 'getUint16', cast ([offset, true] : Array<Dynamic>)));
+        flighthq._internal._StaticIndex.writeUint16Array(faces, ((i * 3.0) + 1.0), _Runtime.callProperty(view, 'getUint16', cast ([(offset + 2.0), true] : Array<Dynamic>)));
+        flighthq._internal._StaticIndex.writeUint16Array(faces, ((i * 3.0) + 2.0), _Runtime.callProperty(view, 'getUint16', cast ([(offset + 4.0), true] : Array<Dynamic>)));
         (offset = cast ((offset + 8.0) : Dynamic));
         i++;
       }
@@ -273,7 +273,7 @@ class ThreeDsParse {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast floatsNeeded : Float)) : Bool)) {
-        _Runtime.setIndex(uvCoords, i, _Runtime.callProperty(view, 'getFloat32', cast ([offset, true] : Array<Dynamic>)));
+        flighthq._internal._StaticIndex.writeFloat32Array(uvCoords, i, _Runtime.callProperty(view, 'getFloat32', cast ([offset, true] : Array<Dynamic>)));
         (offset = cast ((offset + 4.0) : Dynamic));
         i++;
       }
@@ -302,18 +302,18 @@ class ThreeDsParse {
     {
       var f:Dynamic = 0.0;
       while ((cast ((cast f : Float) < (cast faceCount : Float)) : Bool)) {
-        var i0:Dynamic = _Runtime.getIndex(_Runtime.field(mesh, 'faces'), (f * 3.0));
-        var i1:Dynamic = _Runtime.getIndex(_Runtime.field(mesh, 'faces'), ((f * 3.0) + 1.0));
-        var i2:Dynamic = _Runtime.getIndex(_Runtime.field(mesh, 'faces'), ((f * 3.0) + 2.0));
-        var x0:Dynamic = _Runtime.getIndex(positions, (i0 * 3.0));
-        var y0:Dynamic = _Runtime.getIndex(positions, ((i0 * 3.0) + 1.0));
-        var z0:Dynamic = _Runtime.getIndex(positions, ((i0 * 3.0) + 2.0));
-        var x1:Dynamic = _Runtime.getIndex(positions, (i1 * 3.0));
-        var y1:Dynamic = _Runtime.getIndex(positions, ((i1 * 3.0) + 1.0));
-        var z1:Dynamic = _Runtime.getIndex(positions, ((i1 * 3.0) + 2.0));
-        var x2:Dynamic = _Runtime.getIndex(positions, (i2 * 3.0));
-        var y2:Dynamic = _Runtime.getIndex(positions, ((i2 * 3.0) + 1.0));
-        var z2:Dynamic = _Runtime.getIndex(positions, ((i2 * 3.0) + 2.0));
+        var i0:Dynamic = flighthq._internal._StaticIndex.readUint16Array(_Runtime.field(mesh, 'faces'), (f * 3.0));
+        var i1:Dynamic = flighthq._internal._StaticIndex.readUint16Array(_Runtime.field(mesh, 'faces'), ((f * 3.0) + 1.0));
+        var i2:Dynamic = flighthq._internal._StaticIndex.readUint16Array(_Runtime.field(mesh, 'faces'), ((f * 3.0) + 2.0));
+        var x0:Dynamic = flighthq._internal._StaticIndex.readArray(positions, (i0 * 3.0));
+        var y0:Dynamic = flighthq._internal._StaticIndex.readArray(positions, ((i0 * 3.0) + 1.0));
+        var z0:Dynamic = flighthq._internal._StaticIndex.readArray(positions, ((i0 * 3.0) + 2.0));
+        var x1:Dynamic = flighthq._internal._StaticIndex.readArray(positions, (i1 * 3.0));
+        var y1:Dynamic = flighthq._internal._StaticIndex.readArray(positions, ((i1 * 3.0) + 1.0));
+        var z1:Dynamic = flighthq._internal._StaticIndex.readArray(positions, ((i1 * 3.0) + 2.0));
+        var x2:Dynamic = flighthq._internal._StaticIndex.readArray(positions, (i2 * 3.0));
+        var y2:Dynamic = flighthq._internal._StaticIndex.readArray(positions, ((i2 * 3.0) + 1.0));
+        var z2:Dynamic = flighthq._internal._StaticIndex.readArray(positions, ((i2 * 3.0) + 2.0));
         var e1x:Dynamic = (x1 - x0);
         var e1y:Dynamic = (y1 - y0);
         var e1z:Dynamic = (z1 - z0);
@@ -323,15 +323,15 @@ class ThreeDsParse {
         var nx:Dynamic = ((e1y * e2z) - (e1z * e2y));
         var ny:Dynamic = ((e1z * e2x) - (e1x * e2z));
         var nz:Dynamic = ((e1x * e2y) - (e1y * e2x));
-        _Runtime.setIndex(normals, (i0 * 3.0), (_Runtime.getIndex(normals, (i0 * 3.0)) + nx));
-        _Runtime.setIndex(normals, ((i0 * 3.0) + 1.0), (_Runtime.getIndex(normals, ((i0 * 3.0) + 1.0)) + ny));
-        _Runtime.setIndex(normals, ((i0 * 3.0) + 2.0), (_Runtime.getIndex(normals, ((i0 * 3.0) + 2.0)) + nz));
-        _Runtime.setIndex(normals, (i1 * 3.0), (_Runtime.getIndex(normals, (i1 * 3.0)) + nx));
-        _Runtime.setIndex(normals, ((i1 * 3.0) + 1.0), (_Runtime.getIndex(normals, ((i1 * 3.0) + 1.0)) + ny));
-        _Runtime.setIndex(normals, ((i1 * 3.0) + 2.0), (_Runtime.getIndex(normals, ((i1 * 3.0) + 2.0)) + nz));
-        _Runtime.setIndex(normals, (i2 * 3.0), (_Runtime.getIndex(normals, (i2 * 3.0)) + nx));
-        _Runtime.setIndex(normals, ((i2 * 3.0) + 1.0), (_Runtime.getIndex(normals, ((i2 * 3.0) + 1.0)) + ny));
-        _Runtime.setIndex(normals, ((i2 * 3.0) + 2.0), (_Runtime.getIndex(normals, ((i2 * 3.0) + 2.0)) + nz));
+        ({ var __indexedObject0:Dynamic = normals; var __indexedKey1:Dynamic = (i0 * 3.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject0, __indexedKey1, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject0, __indexedKey1) + nx)); });
+        ({ var __indexedObject2:Dynamic = normals; var __indexedKey3:Dynamic = ((i0 * 3.0) + 1.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject2, __indexedKey3, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject2, __indexedKey3) + ny)); });
+        ({ var __indexedObject4:Dynamic = normals; var __indexedKey5:Dynamic = ((i0 * 3.0) + 2.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject4, __indexedKey5, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject4, __indexedKey5) + nz)); });
+        ({ var __indexedObject6:Dynamic = normals; var __indexedKey7:Dynamic = (i1 * 3.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject6, __indexedKey7, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject6, __indexedKey7) + nx)); });
+        ({ var __indexedObject8:Dynamic = normals; var __indexedKey9:Dynamic = ((i1 * 3.0) + 1.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject8, __indexedKey9, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject8, __indexedKey9) + ny)); });
+        ({ var __indexedObject10:Dynamic = normals; var __indexedKey11:Dynamic = ((i1 * 3.0) + 2.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject10, __indexedKey11, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject10, __indexedKey11) + nz)); });
+        ({ var __indexedObject12:Dynamic = normals; var __indexedKey13:Dynamic = (i2 * 3.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject12, __indexedKey13, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject12, __indexedKey13) + nx)); });
+        ({ var __indexedObject14:Dynamic = normals; var __indexedKey15:Dynamic = ((i2 * 3.0) + 1.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject14, __indexedKey15, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject14, __indexedKey15) + ny)); });
+        ({ var __indexedObject16:Dynamic = normals; var __indexedKey17:Dynamic = ((i2 * 3.0) + 2.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject16, __indexedKey17, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject16, __indexedKey17) + nz)); });
         f++;
       }
     }
@@ -339,24 +339,24 @@ class ThreeDsParse {
       var v:Dynamic = 0.0;
       while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
         var o:Dynamic = (v * CANONICAL_FLOATS_PER_VERTEX);
-        _Runtime.setIndex(vertices, o, _Runtime.getIndex(positions, (v * 3.0)));
-        _Runtime.setIndex(vertices, (o + 1.0), _Runtime.getIndex(positions, ((v * 3.0) + 1.0)));
-        _Runtime.setIndex(vertices, (o + 2.0), _Runtime.getIndex(positions, ((v * 3.0) + 2.0)));
-        var nnx:Dynamic = _Runtime.getIndex(normals, (v * 3.0));
-        var nny:Dynamic = _Runtime.getIndex(normals, ((v * 3.0) + 1.0));
-        var nnz:Dynamic = _Runtime.getIndex(normals, ((v * 3.0) + 2.0));
+        flighthq._internal._StaticIndex.writeFloat32Array(vertices, o, flighthq._internal._StaticIndex.readArray(positions, (v * 3.0)));
+        flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 1.0), flighthq._internal._StaticIndex.readArray(positions, ((v * 3.0) + 1.0)));
+        flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 2.0), flighthq._internal._StaticIndex.readArray(positions, ((v * 3.0) + 2.0)));
+        var nnx:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(normals, (v * 3.0));
+        var nny:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(normals, ((v * 3.0) + 1.0));
+        var nnz:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(normals, ((v * 3.0) + 2.0));
         var len:Dynamic = HxMath.sqrt((((nnx * nnx) + (nny * nny)) + (nnz * nnz)));
         if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
           (nnx = cast ((nnx / len) : Dynamic));
           (nny = cast ((nny / len) : Dynamic));
           (nnz = cast ((nnz / len) : Dynamic));
         }
-        _Runtime.setIndex(vertices, (o + 3.0), nnx);
-        _Runtime.setIndex(vertices, (o + 4.0), nny);
-        _Runtime.setIndex(vertices, (o + 5.0), nnz);
+        flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 3.0), nnx);
+        flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 4.0), nny);
+        flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 5.0), nnz);
         if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(mesh, 'uvs'), null) : Bool) && (cast ((cast v : Float) < (cast (_Runtime.field(_Runtime.field(mesh, 'uvs'), 'length') / 2.0) : Float)) : Bool)) : Bool)) {
-          _Runtime.setIndex(vertices, (o + 10.0), _Runtime.getIndex(_Runtime.field(mesh, 'uvs'), (v * 2.0)));
-          _Runtime.setIndex(vertices, (o + 11.0), (1.0 - _Runtime.getIndex(_Runtime.field(mesh, 'uvs'), ((v * 2.0) + 1.0))));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 10.0), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(mesh, 'uvs'), (v * 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 11.0), (1.0 - flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(mesh, 'uvs'), ((v * 2.0) + 1.0))));
         }
         v++;
       }
@@ -468,9 +468,9 @@ class ThreeDsParse {
     var r:Dynamic = cast _Runtime.UNDEFINED;
     var g:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
-    r = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, _Runtime.getIndex(rgb, 0.0))) * 255.0));
-    g = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, _Runtime.getIndex(rgb, 1.0))) * 255.0));
-    b = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, _Runtime.getIndex(rgb, 2.0))) * 255.0));
+    r = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, flighthq._internal._StaticIndex.readArray(rgb, 0.0))) * 255.0));
+    g = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, flighthq._internal._StaticIndex.readArray(rgb, 1.0))) * 255.0));
+    b = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, flighthq._internal._StaticIndex.readArray(rgb, 2.0))) * 255.0));
     return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(r) << 24)) | _Runtime.toInt32((_Runtime.toInt32(g) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(b) << 8)))) | 255)), 0);
     return cast null;
   }

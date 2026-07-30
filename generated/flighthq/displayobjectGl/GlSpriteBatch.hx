@@ -217,15 +217,15 @@ class GlSpriteBatch {
     clipW = (2.0 / _Runtime.field(viewport, 'width'));
     clipH = (2.0 / _Runtime.field(viewport, 'height'));
     m = _Runtime.field(runtime, 'matrixArray');
-    _Runtime.setIndex(m, 0.0, clipW);
-    _Runtime.setIndex(m, 1.0, 0.0);
-    _Runtime.setIndex(m, 2.0, 0.0);
-    _Runtime.setIndex(m, 3.0, 0.0);
-    _Runtime.setIndex(m, 4.0, -clipH);
-    _Runtime.setIndex(m, 5.0, 0.0);
-    _Runtime.setIndex(m, 6.0, -1.0);
-    _Runtime.setIndex(m, 7.0, 1.0);
-    _Runtime.setIndex(m, 8.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, clipW);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 2.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 3.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 4.0, -clipH);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 5.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 6.0, -1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 7.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 8.0, 1.0);
     flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, locWorldMatrix, false, m);
     flighthq._internal.backend.WebGl2Backend.uniform1i(gl, locTexture, 0.0);
   }

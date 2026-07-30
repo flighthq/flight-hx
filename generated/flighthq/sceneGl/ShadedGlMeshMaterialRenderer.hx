@@ -78,7 +78,7 @@ class ShadedGlMeshMaterialRenderer {
     {
       var index:Dynamic = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(ordered, 'length') : Float)) : Bool)) {
-        var modifier:Dynamic = _Runtime.getIndex(ordered, index);
+        var modifier:Dynamic = flighthq._internal._StaticIndex.readArray(ordered, index);
         var snippet:Dynamic = (cast _Runtime.callValue(resolveModifier, cast ([registry, _Runtime.field(modifier, 'kind')] : Array<Dynamic>)) : Null<GlModifierSnippet>);
         if ((cast ((cast _Runtime.strictEquals(snippet, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(snippet, 'bind'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { index++; continue; }
         _Runtime.setField(context, 'index', index);
@@ -103,9 +103,9 @@ class ShadedGlMeshMaterialRenderer {
       return;
     }
     _Runtime.callValue(unpackColorToLinear, cast ([ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, _Runtime.field(material, 'diffuse')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locDiffuse'), _Runtime.getIndex(ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, 0.0), _Runtime.getIndex(ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, 1.0), _Runtime.getIndex(ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, 2.0), _Runtime.getIndex(ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, 3.0));
+    flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locDiffuse'), flighthq._internal._StaticIndex.readArray(ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, 0.0), flighthq._internal._StaticIndex.readArray(ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, 1.0), flighthq._internal._StaticIndex.readArray(ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, 2.0), flighthq._internal._StaticIndex.readArray(ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, 3.0));
     _Runtime.callValue(unpackColorToLinear, cast ([ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, _Runtime.field(material, 'specular')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locSpecular'), _Runtime.getIndex(ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, 0.0), _Runtime.getIndex(ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, 1.0), _Runtime.getIndex(ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, 2.0), _Runtime.getIndex(ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, 3.0));
+    flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locSpecular'), flighthq._internal._StaticIndex.readArray(ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, 0.0), flighthq._internal._StaticIndex.readArray(ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, 1.0), flighthq._internal._StaticIndex.readArray(ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, 2.0), flighthq._internal._StaticIndex.readArray(ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, 3.0));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locShininess'), _Runtime.field(material, 'shininess'));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locNormalScale'), _Runtime.field(material, 'normalScale'));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), _Runtime.field(material, 'alphaCutoff'));

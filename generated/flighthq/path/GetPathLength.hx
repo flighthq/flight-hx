@@ -15,7 +15,7 @@ class GetPathLength {
     {
       var ci:Dynamic = 0.0;
       while ((cast ((cast ci : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
-        (total = cast ((total + _Runtime.callValue(GetPathLength.contourLength__getPathLength, cast ([_Runtime.getIndex(contours, ci)] : Array<Dynamic>))) : Dynamic));
+        (total = cast ((total + _Runtime.callValue(GetPathLength.contourLength__getPathLength, cast ([flighthq._internal._StaticIndex.readArray(contours, ci)] : Array<Dynamic>))) : Dynamic));
         ci++;
       }
     }
@@ -29,8 +29,8 @@ class GetPathLength {
     {
       var i:Dynamic = 2.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
-        var dx:Dynamic = (_Runtime.getIndex(contour, i) - _Runtime.getIndex(contour, (i - 2.0)));
-        var dy:Dynamic = (_Runtime.getIndex(contour, (i + 1.0)) - _Runtime.getIndex(contour, (i - 1.0)));
+        var dx:Dynamic = (flighthq._internal._StaticIndex.readArray(contour, i) - flighthq._internal._StaticIndex.readArray(contour, (i - 2.0)));
+        var dy:Dynamic = (flighthq._internal._StaticIndex.readArray(contour, (i + 1.0)) - flighthq._internal._StaticIndex.readArray(contour, (i - 1.0)));
         (len = cast ((len + HxMath.sqrt(((dx * dx) + (dy * dy)))) : Dynamic));
         (i = cast ((i + 2.0) : Dynamic));
       }

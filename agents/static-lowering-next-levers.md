@@ -1,6 +1,6 @@
 # Static Lowering Next Levers
 
-Status: the shared static-facts mechanism and primitive Boolean/numeric emission are enabled. Indexed access remains audit-only pending its separate review gate.
+Status: the shared static-facts mechanism, primitive Boolean/numeric emission, and the first typed indexed-access tranche are enabled. The remaining gate is review's Step 3 script benchmark against the post-Step 2 baseline.
 
 This proposal covers two independent generator optimizations after typed-struct tranche 5:
 
@@ -9,7 +9,7 @@ This proposal covers two independent generator optimizations after typed-struct 
 
 The census uses the same non-test, non-barrel TypeScript source set as `lowerPackage`. Generated-call counts are from the current `generated/` tree.
 
-## Indexed access census
+## Indexed access census before enablement
 
 The generated tree contains 8,371 dynamic indexed-access helper calls:
 
@@ -67,6 +67,28 @@ A scratch endpoint proof passed Haxe Eval and JS execution for ordinary arrays, 
 
 The first implementation should convert ordinary reads, simple writes, and the current get/set pair used for compound assignments. Increment, delete, optional access, mixed unions, and synthetic destructuring remain on their existing helpers.
 
+## Enabled indexed result
+
+Generation now emits `_StaticIndex` inline endpoints for the ten proven receiver families. Exact final-output counters, collected after speculative emission has been discarded, report 7,436 direct operations:
+
+| Receiver            | Direct reads | Direct writes |     Total |
+| ------------------- | -----------: | ------------: | --------: |
+| `Array`             |        2,509 |           453 |     2,962 |
+| `Float32Array`      |        1,392 |         1,979 |     3,371 |
+| `Float64Array`      |           59 |            51 |       110 |
+| `Int16Array`        |            5 |             4 |         9 |
+| `Int32Array`        |           13 |             7 |        20 |
+| `Int8Array`         |            0 |             0 |         0 |
+| `Uint16Array`       |           37 |            26 |        63 |
+| `Uint32Array`       |            2 |             8 |        10 |
+| `Uint8Array`        |          164 |            28 |       192 |
+| `Uint8ClampedArray` |          340 |           359 |       699 |
+| **Total**           |    **4,521** |     **2,915** | **7,436** |
+
+The generated tree retains 783 `_Runtime.getIndex` and 141 `_Runtime.setIndex` calls. The broader pre-emission fact audit is higher by three reads and two writes, all on `Array`; the exact emission counters are authoritative because the fact audit runs before final module/patch selection and includes source destructuring targets that deliberately remain dynamic.
+
+Adversarial coverage includes all ten families, locally shadowed types, unconstrained and constrained generics, same-family and mixed-family unions, readonly wrappers, fractional keys, side-effecting receiver/key/value expressions, out-of-bounds reads, setter result identity, and signed/unsigned/clamped coercion. The endpoint smoke passes Eval, JavaScript, and Python. It also replaces fixed-width-shift coercion in the portable `Int8Array`/`Int16Array` fallbacks, which was incorrect on Python's unbounded integers.
+
 ## Truthiness and comparison census
 
 The current generated tree contains 8,137 explicit `_Runtime.truthy` calls and 4,030 `_Runtime.compare` calls: 12,167 visible dynamic helper calls.
@@ -105,10 +127,10 @@ Direct numeric relation preserves `NaN`, infinities, signed zero, evaluation ord
 
 ## Recommended sequence
 
-1. Land the shared static-facts mechanism with adversarial lowering tests and no emission change.
-2. Enable Boolean truthiness plus numeric relations. This is the smallest emission change and removes almost the entire 12.2k visible helper surface.
-3. Enable typed indexed endpoints for the ten single-family receiver bindings.
-4. Measure each change in review's update-and-prepare benchmark before considering Boolean conditional/logical helpers.
+1. Land the shared static-facts mechanism with adversarial lowering tests and no emission change. Completed.
+2. Enable Boolean truthiness plus numeric relations. Completed; review measured script frame cost at about 8.8 ms versus 15.2 ms before enablement.
+3. Enable typed indexed endpoints for the ten single-family receiver bindings. Completed locally with exact generated counters and cross-target smoke coverage.
+4. Measure Step 3 in review's update-and-prepare benchmark against the new 8.8 ms baseline before considering additional helpers.
 5. Consider emitter-known synthetic arrays and homogeneous mixed typed-array unions only as separately audited follow-ups.
 
 Each enablement should retain exact generated coverage counters, analogous to typed-struct direct-emission coverage, so a checker or upstream drift cannot silently change the optimized surface.

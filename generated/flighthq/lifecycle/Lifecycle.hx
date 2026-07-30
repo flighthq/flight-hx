@@ -100,7 +100,7 @@ class Lifecycle {
       var entries:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('performance'), 'undefined') : Bool)) { return cast 'cold'; }
       entries = (cast _Runtime.callProperty(_Runtime.globalValue('performance'), 'getEntriesByType', cast (['navigation'] : Array<Dynamic>)) : Array<Dynamic>);
-      if ((cast ((cast ((cast _Runtime.field(entries, 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(_Runtime.getIndex(entries, 0.0), 'type'), 'back_forward') : Bool)) : Bool)) { return cast 'warm'; }
+      if ((cast ((cast ((cast _Runtime.field(entries, 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(flighthq._internal._StaticIndex.readArray(entries, 0.0), 'type'), 'back_forward') : Bool)) : Bool)) { return cast 'warm'; }
       return cast 'cold';
     }, subscribeMemoryWarning: function(listener:Dynamic) {
       var onPressure:Dynamic = cast _Runtime.UNDEFINED;

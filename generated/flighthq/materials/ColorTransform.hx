@@ -36,14 +36,14 @@ class ColorTransform {
   }
 
   public static function copyColorTransformToArrays(outColorMultipliers:Array<Float>, outColorOffsets:Array<Float>, source:ColorTransformLike):Void {
-    _Runtime.setIndex(outColorMultipliers, 0.0, source.redMultiplier);
-    _Runtime.setIndex(outColorMultipliers, 1.0, source.greenMultiplier);
-    _Runtime.setIndex(outColorMultipliers, 2.0, source.blueMultiplier);
-    _Runtime.setIndex(outColorMultipliers, 3.0, source.alphaMultiplier);
-    _Runtime.setIndex(outColorOffsets, 0.0, source.redOffset);
-    _Runtime.setIndex(outColorOffsets, 1.0, source.greenOffset);
-    _Runtime.setIndex(outColorOffsets, 2.0, source.blueOffset);
-    _Runtime.setIndex(outColorOffsets, 3.0, source.alphaOffset);
+    flighthq._internal._StaticIndex.writeArray(outColorMultipliers, 0.0, source.redMultiplier);
+    flighthq._internal._StaticIndex.writeArray(outColorMultipliers, 1.0, source.greenMultiplier);
+    flighthq._internal._StaticIndex.writeArray(outColorMultipliers, 2.0, source.blueMultiplier);
+    flighthq._internal._StaticIndex.writeArray(outColorMultipliers, 3.0, source.alphaMultiplier);
+    flighthq._internal._StaticIndex.writeArray(outColorOffsets, 0.0, source.redOffset);
+    flighthq._internal._StaticIndex.writeArray(outColorOffsets, 1.0, source.greenOffset);
+    flighthq._internal._StaticIndex.writeArray(outColorOffsets, 2.0, source.blueOffset);
+    flighthq._internal._StaticIndex.writeArray(outColorOffsets, 3.0, source.alphaOffset);
   }
 
   public static function createColorTransform(?opts:Dynamic):flighthq.types.ColorTransform {

@@ -51,7 +51,7 @@ class SceneNodeCulling {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-          _Runtime.callValue(SceneNodeCulling._cullNode__sceneNodeCulling, cast ([out, (cast _Runtime.getIndex(children, i) : SceneNode), frustum] : Array<Dynamic>));
+          _Runtime.callValue(SceneNodeCulling._cullNode__sceneNodeCulling, cast ([out, (cast flighthq._internal._StaticIndex.readArray(children, i) : SceneNode), frustum] : Array<Dynamic>));
           i++;
         }
       }

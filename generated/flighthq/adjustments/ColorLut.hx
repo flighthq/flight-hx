@@ -31,19 +31,19 @@ class ColorLut {
             {
               var ri:Dynamic = 0.0;
               while ((cast ((cast ri : Float) < (cast n : Float)) : Bool)) {
-                _Runtime.setIndex(cell, 0.0, (ri / denom));
-                _Runtime.setIndex(cell, 1.0, g);
-                _Runtime.setIndex(cell, 2.0, b);
+                flighthq._internal._StaticIndex.writeArray(cell, 0.0, (ri / denom));
+                flighthq._internal._StaticIndex.writeArray(cell, 1.0, g);
+                flighthq._internal._StaticIndex.writeArray(cell, 2.0, b);
                 {
                   var k:Dynamic = 0.0;
                   while ((cast ((cast k : Float) < (cast _Runtime.field(transforms, 'length') : Float)) : Bool)) {
-                    _Runtime.callValue(_Runtime.getIndex(transforms, k), cast ([cell, _Runtime.getIndex(cell, 0.0), _Runtime.getIndex(cell, 1.0), _Runtime.getIndex(cell, 2.0)] : Array<Dynamic>));
+                    _Runtime.callValue(flighthq._internal._StaticIndex.readArray(transforms, k), cast ([cell, flighthq._internal._StaticIndex.readArray(cell, 0.0), flighthq._internal._StaticIndex.readArray(cell, 1.0), flighthq._internal._StaticIndex.readArray(cell, 2.0)] : Array<Dynamic>));
                     k++;
                   }
                 }
-                _Runtime.setIndex(samples, i++, _Runtime.callValue(ColorLut.clamp01__colorLut, cast ([_Runtime.getIndex(cell, 0.0)] : Array<Dynamic>)));
-                _Runtime.setIndex(samples, i++, _Runtime.callValue(ColorLut.clamp01__colorLut, cast ([_Runtime.getIndex(cell, 1.0)] : Array<Dynamic>)));
-                _Runtime.setIndex(samples, i++, _Runtime.callValue(ColorLut.clamp01__colorLut, cast ([_Runtime.getIndex(cell, 2.0)] : Array<Dynamic>)));
+                flighthq._internal._StaticIndex.writeArray(samples, i++, _Runtime.callValue(ColorLut.clamp01__colorLut, cast ([flighthq._internal._StaticIndex.readArray(cell, 0.0)] : Array<Dynamic>)));
+                flighthq._internal._StaticIndex.writeArray(samples, i++, _Runtime.callValue(ColorLut.clamp01__colorLut, cast ([flighthq._internal._StaticIndex.readArray(cell, 1.0)] : Array<Dynamic>)));
+                flighthq._internal._StaticIndex.writeArray(samples, i++, _Runtime.callValue(ColorLut.clamp01__colorLut, cast ([flighthq._internal._StaticIndex.readArray(cell, 2.0)] : Array<Dynamic>)));
                 ri++;
               }
             }
@@ -91,21 +91,21 @@ class ColorLut {
     {
       var c:Dynamic = 0.0;
       while ((cast ((cast c : Float) < (cast 3.0 : Float)) : Bool)) {
-        var c000:Dynamic = _Runtime.getIndex(s, ((((((b0 * n) + g0) * n) + r0) * 3.0) + c));
-        var c100:Dynamic = _Runtime.getIndex(s, ((((((b0 * n) + g0) * n) + r1) * 3.0) + c));
-        var c010:Dynamic = _Runtime.getIndex(s, ((((((b0 * n) + g1) * n) + r0) * 3.0) + c));
-        var c110:Dynamic = _Runtime.getIndex(s, ((((((b0 * n) + g1) * n) + r1) * 3.0) + c));
-        var c001:Dynamic = _Runtime.getIndex(s, ((((((b1 * n) + g0) * n) + r0) * 3.0) + c));
-        var c101:Dynamic = _Runtime.getIndex(s, ((((((b1 * n) + g0) * n) + r1) * 3.0) + c));
-        var c011:Dynamic = _Runtime.getIndex(s, ((((((b1 * n) + g1) * n) + r0) * 3.0) + c));
-        var c111:Dynamic = _Runtime.getIndex(s, ((((((b1 * n) + g1) * n) + r1) * 3.0) + c));
+        var c000:Dynamic = flighthq._internal._StaticIndex.readArray(s, ((((((b0 * n) + g0) * n) + r0) * 3.0) + c));
+        var c100:Dynamic = flighthq._internal._StaticIndex.readArray(s, ((((((b0 * n) + g0) * n) + r1) * 3.0) + c));
+        var c010:Dynamic = flighthq._internal._StaticIndex.readArray(s, ((((((b0 * n) + g1) * n) + r0) * 3.0) + c));
+        var c110:Dynamic = flighthq._internal._StaticIndex.readArray(s, ((((((b0 * n) + g1) * n) + r1) * 3.0) + c));
+        var c001:Dynamic = flighthq._internal._StaticIndex.readArray(s, ((((((b1 * n) + g0) * n) + r0) * 3.0) + c));
+        var c101:Dynamic = flighthq._internal._StaticIndex.readArray(s, ((((((b1 * n) + g0) * n) + r1) * 3.0) + c));
+        var c011:Dynamic = flighthq._internal._StaticIndex.readArray(s, ((((((b1 * n) + g1) * n) + r0) * 3.0) + c));
+        var c111:Dynamic = flighthq._internal._StaticIndex.readArray(s, ((((((b1 * n) + g1) * n) + r1) * 3.0) + c));
         var c00:Dynamic = (c000 + ((c100 - c000) * dr));
         var c10:Dynamic = (c010 + ((c110 - c010) * dr));
         var c01:Dynamic = (c001 + ((c101 - c001) * dr));
         var c11:Dynamic = (c011 + ((c111 - c011) * dr));
         var c0:Dynamic = (c00 + ((c10 - c00) * dg));
         var c1:Dynamic = (c01 + ((c11 - c01) * dg));
-        _Runtime.setIndex(out, c, (c0 + ((c1 - c0) * db)));
+        flighthq._internal._StaticIndex.writeArray(out, c, (c0 + ((c1 - c0) * db)));
         c++;
       }
     }

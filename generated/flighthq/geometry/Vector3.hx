@@ -270,9 +270,9 @@ class Vector3 {
   }
 
   public static function setVector3FromFloat32Array(out:Vector3Like, offset:Float, source:flighthq._internal._Float32Array):Void {
-    (out.x = cast (_Runtime.getIndex(source, offset) : Dynamic));
-    (out.y = cast (_Runtime.getIndex(source, (offset + 1.0)) : Dynamic));
-    (out.z = cast (_Runtime.getIndex(source, (offset + 2.0)) : Dynamic));
+    (out.x = cast (flighthq._internal._StaticIndex.readFloat32Array(source, offset) : Dynamic));
+    (out.y = cast (flighthq._internal._StaticIndex.readFloat32Array(source, (offset + 1.0)) : Dynamic));
+    (out.z = cast (flighthq._internal._StaticIndex.readFloat32Array(source, (offset + 2.0)) : Dynamic));
   }
 
   public static function setVector3FromSpherical(out:Vector3Like, radius:Float, theta:Float, phi:Float):Void {
@@ -310,15 +310,15 @@ class Vector3 {
     x = source.x;
     y = source.y;
     z = source.z;
-    (out.x = cast ((((_Runtime.getIndex(m, 0.0) * x) + (_Runtime.getIndex(m, 3.0) * y)) + (_Runtime.getIndex(m, 6.0) * z)) : Dynamic));
-    (out.y = cast ((((_Runtime.getIndex(m, 1.0) * x) + (_Runtime.getIndex(m, 4.0) * y)) + (_Runtime.getIndex(m, 7.0) * z)) : Dynamic));
-    (out.z = cast ((((_Runtime.getIndex(m, 2.0) * x) + (_Runtime.getIndex(m, 5.0) * y)) + (_Runtime.getIndex(m, 8.0) * z)) : Dynamic));
+    (out.x = cast ((((flighthq._internal._StaticIndex.readFloat32Array(m, 0.0) * x) + (flighthq._internal._StaticIndex.readFloat32Array(m, 3.0) * y)) + (flighthq._internal._StaticIndex.readFloat32Array(m, 6.0) * z)) : Dynamic));
+    (out.y = cast ((((flighthq._internal._StaticIndex.readFloat32Array(m, 1.0) * x) + (flighthq._internal._StaticIndex.readFloat32Array(m, 4.0) * y)) + (flighthq._internal._StaticIndex.readFloat32Array(m, 7.0) * z)) : Dynamic));
+    (out.z = cast ((((flighthq._internal._StaticIndex.readFloat32Array(m, 2.0) * x) + (flighthq._internal._StaticIndex.readFloat32Array(m, 5.0) * y)) + (flighthq._internal._StaticIndex.readFloat32Array(m, 8.0) * z)) : Dynamic));
   }
 
   public static function writeVector3ToFloat32Array(out:flighthq._internal._Float32Array, offset:Float, source:Vector3Like):Void {
-    _Runtime.setIndex(out, offset, source.x);
-    _Runtime.setIndex(out, (offset + 1.0), source.y);
-    _Runtime.setIndex(out, (offset + 2.0), source.z);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, offset, source.x);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 1.0), source.y);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 2.0), source.z);
   }
 
   public static final VECTOR3_X_AXIS:flighthq.types.Vector3 = _Runtime.callValue(createVector3, cast ([1.0, 0.0, 0.0] : Array<Dynamic>));

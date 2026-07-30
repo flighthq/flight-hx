@@ -27,31 +27,31 @@ class SurfaceGradient {
         var g:Float = cast _Runtime.UNDEFINED;
         var b:Float = cast _Runtime.UNDEFINED;
         var a:Float = cast _Runtime.UNDEFINED;
-        if ((cast ((cast i : Float) <= (cast _Runtime.getIndex(ratios, 0.0) : Float)) : Bool)) {
-          (r = cast ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(colors, 0.0)) >> 16)) & 255) : Dynamic));
-          (g = cast ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(colors, 0.0)) >> 8)) & 255) : Dynamic));
-          (b = cast ((_Runtime.toInt32(_Runtime.getIndex(colors, 0.0)) & 255) : Dynamic));
-          (a = cast (_Runtime.getIndex(alphas, 0.0) : Dynamic));
-        } else { if ((cast ((cast i : Float) >= (cast _Runtime.getIndex(ratios, (n - 1.0)) : Float)) : Bool)) {
-          (r = cast ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(colors, (n - 1.0))) >> 16)) & 255) : Dynamic));
-          (g = cast ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(colors, (n - 1.0))) >> 8)) & 255) : Dynamic));
-          (b = cast ((_Runtime.toInt32(_Runtime.getIndex(colors, (n - 1.0))) & 255) : Dynamic));
-          (a = cast (_Runtime.getIndex(alphas, (n - 1.0)) : Dynamic));
+        if ((cast ((cast i : Float) <= (cast flighthq._internal._StaticIndex.readArray(ratios, 0.0) : Float)) : Bool)) {
+          (r = cast ((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readArray(colors, 0.0)) >> 16)) & 255) : Dynamic));
+          (g = cast ((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readArray(colors, 0.0)) >> 8)) & 255) : Dynamic));
+          (b = cast ((_Runtime.toInt32(flighthq._internal._StaticIndex.readArray(colors, 0.0)) & 255) : Dynamic));
+          (a = cast (flighthq._internal._StaticIndex.readArray(alphas, 0.0) : Dynamic));
+        } else { if ((cast ((cast i : Float) >= (cast flighthq._internal._StaticIndex.readArray(ratios, (n - 1.0)) : Float)) : Bool)) {
+          (r = cast ((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readArray(colors, (n - 1.0))) >> 16)) & 255) : Dynamic));
+          (g = cast ((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readArray(colors, (n - 1.0))) >> 8)) & 255) : Dynamic));
+          (b = cast ((_Runtime.toInt32(flighthq._internal._StaticIndex.readArray(colors, (n - 1.0))) & 255) : Dynamic));
+          (a = cast (flighthq._internal._StaticIndex.readArray(alphas, (n - 1.0)) : Dynamic));
         } else {
           var j:Dynamic = 0.0;
-          while ((cast ((cast ((cast j : Float) < (cast (n - 1.0) : Float)) : Bool) && (cast ((cast _Runtime.getIndex(ratios, (j + 1.0)) : Float) < (cast i : Float)) : Bool)) : Bool)) { j++; }
-          var span:Dynamic = (_Runtime.getIndex(ratios, (j + 1.0)) - _Runtime.getIndex(ratios, j));
-          var t:Dynamic = ((cast ((cast span : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((i - _Runtime.getIndex(ratios, j)) / span) : Dynamic) : (cast 0.0 : Dynamic));
-          (r = cast (_Runtime.callValue(SurfaceGradient.lerp__surfaceGradient, cast ([(_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(colors, j)) >> 16)) & 255), (_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(colors, (j + 1.0))) >> 16)) & 255), t] : Array<Dynamic>)) : Dynamic));
-          (g = cast (_Runtime.callValue(SurfaceGradient.lerp__surfaceGradient, cast ([(_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(colors, j)) >> 8)) & 255), (_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(colors, (j + 1.0))) >> 8)) & 255), t] : Array<Dynamic>)) : Dynamic));
-          (b = cast (_Runtime.callValue(SurfaceGradient.lerp__surfaceGradient, cast ([(_Runtime.toInt32(_Runtime.getIndex(colors, j)) & 255), (_Runtime.toInt32(_Runtime.getIndex(colors, (j + 1.0))) & 255), t] : Array<Dynamic>)) : Dynamic));
-          (a = cast (_Runtime.callValue(SurfaceGradient.lerp__surfaceGradient, cast ([_Runtime.getIndex(alphas, j), _Runtime.getIndex(alphas, (j + 1.0)), t] : Array<Dynamic>)) : Dynamic));
+          while ((cast ((cast ((cast j : Float) < (cast (n - 1.0) : Float)) : Bool) && (cast ((cast flighthq._internal._StaticIndex.readArray(ratios, (j + 1.0)) : Float) < (cast i : Float)) : Bool)) : Bool)) { j++; }
+          var span:Dynamic = (flighthq._internal._StaticIndex.readArray(ratios, (j + 1.0)) - flighthq._internal._StaticIndex.readArray(ratios, j));
+          var t:Dynamic = ((cast ((cast span : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((i - flighthq._internal._StaticIndex.readArray(ratios, j)) / span) : Dynamic) : (cast 0.0 : Dynamic));
+          (r = cast (_Runtime.callValue(SurfaceGradient.lerp__surfaceGradient, cast ([(_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readArray(colors, j)) >> 16)) & 255), (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readArray(colors, (j + 1.0))) >> 16)) & 255), t] : Array<Dynamic>)) : Dynamic));
+          (g = cast (_Runtime.callValue(SurfaceGradient.lerp__surfaceGradient, cast ([(_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readArray(colors, j)) >> 8)) & 255), (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readArray(colors, (j + 1.0))) >> 8)) & 255), t] : Array<Dynamic>)) : Dynamic));
+          (b = cast (_Runtime.callValue(SurfaceGradient.lerp__surfaceGradient, cast ([(_Runtime.toInt32(flighthq._internal._StaticIndex.readArray(colors, j)) & 255), (_Runtime.toInt32(flighthq._internal._StaticIndex.readArray(colors, (j + 1.0))) & 255), t] : Array<Dynamic>)) : Dynamic));
+          (a = cast (_Runtime.callValue(SurfaceGradient.lerp__surfaceGradient, cast ([flighthq._internal._StaticIndex.readArray(alphas, j), flighthq._internal._StaticIndex.readArray(alphas, (j + 1.0)), t] : Array<Dynamic>)) : Dynamic));
         } }
         var oi:Dynamic = (i * 4.0);
-        _Runtime.setIndex(out, oi, HxMath.round(r));
-        _Runtime.setIndex(out, (oi + 1.0), HxMath.round(g));
-        _Runtime.setIndex(out, (oi + 2.0), HxMath.round(b));
-        _Runtime.setIndex(out, (oi + 3.0), HxMath.round((a * 255.0)));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, oi, HxMath.round(r));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (oi + 1.0), HxMath.round(g));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (oi + 2.0), HxMath.round(b));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (oi + 3.0), HxMath.round((a * 255.0)));
         i++;
       }
     }
@@ -82,10 +82,10 @@ class SurfaceGradient {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
             var di:Dynamic = (((py * w) + px) * 4.0);
-            _Runtime.setIndex(scratch, di, 0.0);
-            _Runtime.setIndex(scratch, (di + 1.0), 0.0);
-            _Runtime.setIndex(scratch, (di + 2.0), 0.0);
-            _Runtime.setIndex(scratch, (di + 3.0), _Runtime.callValue(SurfaceGradient.readSourceAlpha__surfaceGradient, cast ([source, px, py] : Array<Dynamic>)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(scratch, di, 0.0);
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(scratch, (di + 1.0), 0.0);
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(scratch, (di + 2.0), 0.0);
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(scratch, (di + 3.0), _Runtime.callValue(SurfaceGradient.readSourceAlpha__surfaceGradient, cast ([source, px, py] : Array<Dynamic>)));
             px++;
           }
         }
@@ -106,10 +106,10 @@ class SurfaceGradient {
             var idx:Dynamic = HxMath.max(0.0, HxMath.min(255.0, HxMath.round((((gradient * 0.5) + 0.5) * 255.0))));
             var ri:Dynamic = (idx * 4.0);
             var clip:Dynamic = ((cast _Runtime.strictEquals(type, 'inner') : Bool) ? (cast (_Runtime.callValue(SurfaceGradient.readSourceAlpha__surfaceGradient, cast ([source, px, py] : Array<Dynamic>)) / 255.0) : Dynamic) : (cast ((cast _Runtime.strictEquals(type, 'outer') : Bool) ? (cast (1.0 - (_Runtime.callValue(SurfaceGradient.readSourceAlpha__surfaceGradient, cast ([source, px, py] : Array<Dynamic>)) / 255.0)) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
-            _Runtime.setIndex(out, di, _Runtime.getIndex(ramp, ri));
-            _Runtime.setIndex(out, (di + 1.0), _Runtime.getIndex(ramp, (ri + 1.0)));
-            _Runtime.setIndex(out, (di + 2.0), _Runtime.getIndex(ramp, (ri + 2.0)));
-            _Runtime.setIndex(out, (di + 3.0), HxMath.min(255.0, HxMath.round(((_Runtime.getIndex(ramp, (ri + 3.0)) * intensity) * clip))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, ri));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, (ri + 1.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, (ri + 2.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), HxMath.min(255.0, HxMath.round(((flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, (ri + 3.0)) * intensity) * clip))));
             px++;
           }
         }
@@ -133,10 +133,10 @@ class SurfaceGradient {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
             var di:Dynamic = (((py * w) + px) * 4.0);
-            _Runtime.setIndex(out, di, 0.0);
-            _Runtime.setIndex(out, (di + 1.0), 0.0);
-            _Runtime.setIndex(out, (di + 2.0), 0.0);
-            _Runtime.setIndex(out, (di + 3.0), _Runtime.callValue(SurfaceGradient.readSourceAlpha__surfaceGradient, cast ([source, px, py] : Array<Dynamic>)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, 0.0);
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), 0.0);
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), 0.0);
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), _Runtime.callValue(SurfaceGradient.readSourceAlpha__surfaceGradient, cast ([source, px, py] : Array<Dynamic>)));
             px++;
           }
         }
@@ -151,11 +151,11 @@ class SurfaceGradient {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
             var di:Dynamic = (((py * w) + px) * 4.0);
-            var ri:Dynamic = (_Runtime.getIndex(out, (di + 3.0)) * 4.0);
-            _Runtime.setIndex(out, di, _Runtime.getIndex(ramp, ri));
-            _Runtime.setIndex(out, (di + 1.0), _Runtime.getIndex(ramp, (ri + 1.0)));
-            _Runtime.setIndex(out, (di + 2.0), _Runtime.getIndex(ramp, (ri + 2.0)));
-            _Runtime.setIndex(out, (di + 3.0), HxMath.min(255.0, HxMath.round((_Runtime.getIndex(ramp, (ri + 3.0)) * intensity))));
+            var ri:Dynamic = (flighthq._internal._StaticIndex.readUint8ClampedArray(out, (di + 3.0)) * 4.0);
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, ri));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, (ri + 1.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, (ri + 2.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), HxMath.min(255.0, HxMath.round((flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, (ri + 3.0)) * intensity))));
             px++;
           }
         }
@@ -207,13 +207,13 @@ class SurfaceGradient {
     sx = (_Runtime.field(source, 'x') + px);
     sy = (_Runtime.field(source, 'y') + py);
     if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'height') : Float)) : Bool)) : Bool)) { return cast 0.0; }
-    return cast _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), ((((sy * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sx) * 4.0) + 3.0));
+    return cast flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), ((((sy * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sx) * 4.0) + 3.0));
     return cast null;
   }
 
   public static function sampleField__surfaceGradient(field:flighthq._internal._UInt8ClampedArray, w:Float, h:Float, x:Float, y:Float):Float {
     if ((cast ((cast ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast w : Float)) : Bool)) : Bool) || (cast ((cast y : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast y : Float) >= (cast h : Float)) : Bool)) : Bool)) { return cast 0.0; }
-    return cast (_Runtime.getIndex(field, ((((y * w) + x) * 4.0) + 3.0)) / 255.0);
+    return cast (flighthq._internal._StaticIndex.readUint8ClampedArray(field, ((((y * w) + x) * 4.0) + 3.0)) / 255.0);
     return cast null;
   }
 }

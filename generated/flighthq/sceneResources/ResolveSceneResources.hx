@@ -37,7 +37,7 @@ class ResolveSceneResources {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(pending, 'length') : Float)) : Bool)) {
-        var texture:Dynamic = _Runtime.getIndex(pending, i);
+        var texture:Dynamic = flighthq._internal._StaticIndex.readArray(pending, i);
         var ref:Dynamic = _Runtime.field(texture, 'resource');
         if ((cast _Runtime.looseEquals(ref, null) : Bool)) { i++; continue; }
         if ((cast ((cast _Runtime.strictEquals(_Runtime.optionalField(options, 'select'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.callProperty(options, 'select', cast ([texture, ref] : Array<Dynamic>)) : Bool)) : Bool)) { ((cast working : flighthq._internal._Set).add(texture)); }

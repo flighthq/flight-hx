@@ -111,7 +111,7 @@ class GlClipContours {
     {
       var c:Dynamic = 0.0;
       while ((cast ((cast c : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
-        var contour:Dynamic = _Runtime.getIndex(contours, c);
+        var contour:Dynamic = flighthq._internal._StaticIndex.readArray(contours, c);
         if ((cast ((cast _Runtime.field(contour, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { c++; continue; }
         flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, new flighthq._internal._Float32Array(contour), flighthq._internal.backend.WebGl2Backend.STREAM_DRAW);
         flighthq._internal.backend.WebGl2Backend.drawArrays(gl, flighthq._internal.backend.WebGl2Backend.TRIANGLE_FAN, 0.0, (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> 1));

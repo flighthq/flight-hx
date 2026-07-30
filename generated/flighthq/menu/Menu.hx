@@ -293,7 +293,7 @@ class Menu {
           }
         }] : Array<Dynamic>));
         if ((cast !_Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool)) {
-          var focused:Dynamic = _Runtime.getIndex(items, focusIndex);
+          var focused:Dynamic = flighthq._internal._StaticIndex.readArray(items, focusIndex);
           var itemId:Dynamic = _Runtime.optionalIndex(_Runtime.optionalField(focused, 'dataset'), 'itemId');
           if ((cast !_Runtime.strictEquals(itemId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(Menu._menuSignals__menu, 'onMenuItemHighlight')], [itemId]]), 1); }
         }
@@ -310,7 +310,7 @@ class Menu {
           _Runtime.callValue(moveFocus, cast ([-1.0] : Array<Dynamic>));
         } else { if ((cast ((cast _Runtime.strictEquals(_Runtime.field(e, 'key'), 'Enter') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(e, 'key'), ' ') : Bool)) : Bool)) {
           _Runtime.callProperty(e, 'preventDefault', cast ([] : Array<Dynamic>));
-          var focused:Dynamic = _Runtime.getIndex(_Runtime.toArray(focusableItems), focusIndex);
+          var focused:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.toArray(focusableItems), focusIndex);
           if ((cast !_Runtime.strictEquals(focused, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
             var itemId:Dynamic = _Runtime.getIndex(_Runtime.field(focused, 'dataset'), 'itemId');
             if ((cast !_Runtime.strictEquals(itemId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callValue(close, cast ([itemId] : Array<Dynamic>)); }

@@ -32,13 +32,13 @@ class BidiClassBackend {
     while ((cast ((cast lo : Float) <= (cast hi : Float)) : Bool)) {
       var mid:Dynamic = (_Runtime.toInt32((lo + hi)) >> 1);
       var base:Dynamic = (mid * 3.0);
-      var start:Dynamic = _Runtime.getIndex(BidiClassBackend._ranges__bidiClassBackend, base);
+      var start:Dynamic = flighthq._internal._StaticIndex.readArray(BidiClassBackend._ranges__bidiClassBackend, base);
       if ((cast ((cast codepoint : Float) < (cast start : Float)) : Bool)) {
         (hi = cast ((mid - 1.0) : Dynamic));
-      } else { if ((cast ((cast codepoint : Float) > (cast _Runtime.getIndex(BidiClassBackend._ranges__bidiClassBackend, (base + 1.0)) : Float)) : Bool)) {
+      } else { if ((cast ((cast codepoint : Float) > (cast flighthq._internal._StaticIndex.readArray(BidiClassBackend._ranges__bidiClassBackend, (base + 1.0)) : Float)) : Bool)) {
         (lo = cast ((mid + 1.0) : Dynamic));
       } else {
-        return cast _Runtime.getIndex(BidiClassBackend._classOrder__bidiClassBackend, _Runtime.getIndex(BidiClassBackend._ranges__bidiClassBackend, (base + 2.0)));
+        return cast flighthq._internal._StaticIndex.readArray(BidiClassBackend._classOrder__bidiClassBackend, flighthq._internal._StaticIndex.readArray(BidiClassBackend._ranges__bidiClassBackend, (base + 2.0)));
       } }
     }
     return cast 'L';

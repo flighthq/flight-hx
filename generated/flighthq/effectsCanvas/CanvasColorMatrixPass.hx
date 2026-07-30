@@ -28,39 +28,39 @@ class CanvasColorMatrixPass {
     var m17:Dynamic = cast _Runtime.UNDEFINED;
     var m18:Dynamic = cast _Runtime.UNDEFINED;
     var m19:Dynamic = cast _Runtime.UNDEFINED;
-    m0 = _Runtime.coalesce(_Runtime.getIndex(matrix, 0.0), function():Dynamic return cast 0.0);
-    m1 = _Runtime.coalesce(_Runtime.getIndex(matrix, 1.0), function():Dynamic return cast 0.0);
-    m2 = _Runtime.coalesce(_Runtime.getIndex(matrix, 2.0), function():Dynamic return cast 0.0);
-    m3 = _Runtime.coalesce(_Runtime.getIndex(matrix, 3.0), function():Dynamic return cast 0.0);
-    m4 = _Runtime.coalesce(_Runtime.getIndex(matrix, 4.0), function():Dynamic return cast 0.0);
-    m5 = _Runtime.coalesce(_Runtime.getIndex(matrix, 5.0), function():Dynamic return cast 0.0);
-    m6 = _Runtime.coalesce(_Runtime.getIndex(matrix, 6.0), function():Dynamic return cast 0.0);
-    m7 = _Runtime.coalesce(_Runtime.getIndex(matrix, 7.0), function():Dynamic return cast 0.0);
-    m8 = _Runtime.coalesce(_Runtime.getIndex(matrix, 8.0), function():Dynamic return cast 0.0);
-    m9 = _Runtime.coalesce(_Runtime.getIndex(matrix, 9.0), function():Dynamic return cast 0.0);
-    m10 = _Runtime.coalesce(_Runtime.getIndex(matrix, 10.0), function():Dynamic return cast 0.0);
-    m11 = _Runtime.coalesce(_Runtime.getIndex(matrix, 11.0), function():Dynamic return cast 0.0);
-    m12 = _Runtime.coalesce(_Runtime.getIndex(matrix, 12.0), function():Dynamic return cast 0.0);
-    m13 = _Runtime.coalesce(_Runtime.getIndex(matrix, 13.0), function():Dynamic return cast 0.0);
-    m14 = _Runtime.coalesce(_Runtime.getIndex(matrix, 14.0), function():Dynamic return cast 0.0);
-    m15 = _Runtime.coalesce(_Runtime.getIndex(matrix, 15.0), function():Dynamic return cast 0.0);
-    m16 = _Runtime.coalesce(_Runtime.getIndex(matrix, 16.0), function():Dynamic return cast 0.0);
-    m17 = _Runtime.coalesce(_Runtime.getIndex(matrix, 17.0), function():Dynamic return cast 0.0);
-    m18 = _Runtime.coalesce(_Runtime.getIndex(matrix, 18.0), function():Dynamic return cast 0.0);
-    m19 = _Runtime.coalesce(_Runtime.getIndex(matrix, 19.0), function():Dynamic return cast 0.0);
+    m0 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 0.0), function():Dynamic return cast 0.0);
+    m1 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 1.0), function():Dynamic return cast 0.0);
+    m2 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 2.0), function():Dynamic return cast 0.0);
+    m3 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 3.0), function():Dynamic return cast 0.0);
+    m4 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 4.0), function():Dynamic return cast 0.0);
+    m5 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 5.0), function():Dynamic return cast 0.0);
+    m6 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 6.0), function():Dynamic return cast 0.0);
+    m7 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 7.0), function():Dynamic return cast 0.0);
+    m8 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 8.0), function():Dynamic return cast 0.0);
+    m9 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 9.0), function():Dynamic return cast 0.0);
+    m10 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 10.0), function():Dynamic return cast 0.0);
+    m11 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 11.0), function():Dynamic return cast 0.0);
+    m12 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 12.0), function():Dynamic return cast 0.0);
+    m13 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 13.0), function():Dynamic return cast 0.0);
+    m14 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 14.0), function():Dynamic return cast 0.0);
+    m15 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 15.0), function():Dynamic return cast 0.0);
+    m16 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 16.0), function():Dynamic return cast 0.0);
+    m17 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 17.0), function():Dynamic return cast 0.0);
+    m18 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 18.0), function():Dynamic return cast 0.0);
+    m19 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 19.0), function():Dynamic return cast 0.0);
     _Runtime.callValue(drawCanvasImageDataPass, cast ([dest, source, function(data:Dynamic, pixelCount:Dynamic) {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast pixelCount : Float)) : Bool)) {
           var p:Dynamic = (i * 4.0);
-          var r:Dynamic = _Runtime.getIndex(data, p);
-          var g:Dynamic = _Runtime.getIndex(data, (p + 1.0));
-          var b:Dynamic = _Runtime.getIndex(data, (p + 2.0));
-          var a:Dynamic = _Runtime.getIndex(data, (p + 3.0));
-          _Runtime.setIndex(data, p, (((((m0 * r) + (m1 * g)) + (m2 * b)) + (m3 * a)) + m4));
-          _Runtime.setIndex(data, (p + 1.0), (((((m5 * r) + (m6 * g)) + (m7 * b)) + (m8 * a)) + m9));
-          _Runtime.setIndex(data, (p + 2.0), (((((m10 * r) + (m11 * g)) + (m12 * b)) + (m13 * a)) + m14));
-          _Runtime.setIndex(data, (p + 3.0), (((((m15 * r) + (m16 * g)) + (m17 * b)) + (m18 * a)) + m19));
+          var r:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, p);
+          var g:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (p + 1.0));
+          var b:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (p + 2.0));
+          var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (p + 3.0));
+          flighthq._internal._StaticIndex.writeUint8ClampedArray(data, p, (((((m0 * r) + (m1 * g)) + (m2 * b)) + (m3 * a)) + m4));
+          flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (p + 1.0), (((((m5 * r) + (m6 * g)) + (m7 * b)) + (m8 * a)) + m9));
+          flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (p + 2.0), (((((m10 * r) + (m11 * g)) + (m12 * b)) + (m13 * a)) + m14));
+          flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (p + 3.0), (((((m15 * r) + (m16 * g)) + (m17 * b)) + (m18 * a)) + m19));
           i++;
         }
       }

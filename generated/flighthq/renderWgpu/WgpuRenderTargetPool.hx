@@ -20,7 +20,7 @@ class WgpuRenderTargetPool {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(pool, 'free'), 'length') : Float)) : Bool)) {
-        var candidate:Dynamic = _Runtime.getIndex(_Runtime.field(pool, 'free'), i);
+        var candidate:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(pool, 'free'), i);
         if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(candidate, 'width'), w) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(candidate, 'height'), h) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(candidate, 'format'), format) : Bool)) : Bool)) {
           _Runtime.splice(_Runtime.field(pool, 'free'), Std.int(i), Std.int(1.0), []);
           return cast candidate;

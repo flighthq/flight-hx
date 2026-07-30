@@ -54,10 +54,10 @@ class SheenPbrWgpuMeshMaterialRenderer {
     _Runtime.fill(out, 0.0, 16.0, null, 2);
     if ((cast !_Runtime.strictEquals(sheen, null) : Bool)) {
       _Runtime.callValue(unpackColorToLinear, cast ([SheenPbrWgpuMeshMaterialRenderer._colorScratch__sheenPbrWgpuMeshMaterialRenderer, _Runtime.field(sheen, 'sheenColor')] : Array<Dynamic>));
-      _Runtime.setIndex(out, 20.0, _Runtime.getIndex(SheenPbrWgpuMeshMaterialRenderer._colorScratch__sheenPbrWgpuMeshMaterialRenderer, 0.0));
-      _Runtime.setIndex(out, 21.0, _Runtime.getIndex(SheenPbrWgpuMeshMaterialRenderer._colorScratch__sheenPbrWgpuMeshMaterialRenderer, 1.0));
-      _Runtime.setIndex(out, 22.0, _Runtime.getIndex(SheenPbrWgpuMeshMaterialRenderer._colorScratch__sheenPbrWgpuMeshMaterialRenderer, 2.0));
-      _Runtime.setIndex(out, 23.0, _Runtime.field(sheen, 'sheenRoughness'));
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 20.0, flighthq._internal._StaticIndex.readArray(SheenPbrWgpuMeshMaterialRenderer._colorScratch__sheenPbrWgpuMeshMaterialRenderer, 0.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 21.0, flighthq._internal._StaticIndex.readArray(SheenPbrWgpuMeshMaterialRenderer._colorScratch__sheenPbrWgpuMeshMaterialRenderer, 1.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 22.0, flighthq._internal._StaticIndex.readArray(SheenPbrWgpuMeshMaterialRenderer._colorScratch__sheenPbrWgpuMeshMaterialRenderer, 2.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 23.0, _Runtime.field(sheen, 'sheenRoughness'));
     }
     _Runtime.callValue(writeWgpuPbrMaterialUniform, cast ([state, binding] : Array<Dynamic>));
     _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));

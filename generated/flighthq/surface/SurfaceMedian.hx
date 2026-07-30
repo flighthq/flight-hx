@@ -51,10 +51,10 @@ class SurfaceMedian {
                   while ((cast ((cast kx : Float) <= (cast r : Float)) : Bool)) {
                     var sx:Dynamic = HxMath.max(0.0, HxMath.min((surfaceWidth - 1.0), ((_Runtime.field(source, 'x') + px) + kx)));
                     var si:Dynamic = (((sy * surfaceWidth) + sx) * 4.0);
-                    _Runtime.setIndex(rs, n, _Runtime.getIndex(data, si));
-                    _Runtime.setIndex(gs, n, _Runtime.getIndex(data, (si + 1.0)));
-                    _Runtime.setIndex(bs, n, _Runtime.getIndex(data, (si + 2.0)));
-                    _Runtime.setIndex(as, n, _Runtime.getIndex(data, (si + 3.0)));
+                    flighthq._internal._StaticIndex.writeUint8Array(rs, n, flighthq._internal._StaticIndex.readUint8ClampedArray(data, si));
+                    flighthq._internal._StaticIndex.writeUint8Array(gs, n, flighthq._internal._StaticIndex.readUint8ClampedArray(data, (si + 1.0)));
+                    flighthq._internal._StaticIndex.writeUint8Array(bs, n, flighthq._internal._StaticIndex.readUint8ClampedArray(data, (si + 2.0)));
+                    flighthq._internal._StaticIndex.writeUint8Array(as, n, flighthq._internal._StaticIndex.readUint8ClampedArray(data, (si + 3.0)));
                     n++;
                     kx++;
                   }
@@ -64,10 +64,10 @@ class SurfaceMedian {
             }
             var mid:Dynamic = (_Runtime.toInt32(n) >> 1);
             var di:Dynamic = (((py * w) + px) * 4.0);
-            _Runtime.setIndex(out, di, _Runtime.callValue(SurfaceMedian.medianOf__surfaceMedian, cast ([rs, n, mid] : Array<Dynamic>)));
-            _Runtime.setIndex(out, (di + 1.0), _Runtime.callValue(SurfaceMedian.medianOf__surfaceMedian, cast ([gs, n, mid] : Array<Dynamic>)));
-            _Runtime.setIndex(out, (di + 2.0), _Runtime.callValue(SurfaceMedian.medianOf__surfaceMedian, cast ([bs, n, mid] : Array<Dynamic>)));
-            _Runtime.setIndex(out, (di + 3.0), _Runtime.callValue(SurfaceMedian.medianOf__surfaceMedian, cast ([as, n, mid] : Array<Dynamic>)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, _Runtime.callValue(SurfaceMedian.medianOf__surfaceMedian, cast ([rs, n, mid] : Array<Dynamic>)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), _Runtime.callValue(SurfaceMedian.medianOf__surfaceMedian, cast ([gs, n, mid] : Array<Dynamic>)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), _Runtime.callValue(SurfaceMedian.medianOf__surfaceMedian, cast ([bs, n, mid] : Array<Dynamic>)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), _Runtime.callValue(SurfaceMedian.medianOf__surfaceMedian, cast ([as, n, mid] : Array<Dynamic>)));
             px++;
           }
         }
@@ -80,17 +80,17 @@ class SurfaceMedian {
     {
       var i:Dynamic = 1.0;
       while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
-        var v:Dynamic = _Runtime.getIndex(values, i);
+        var v:Dynamic = flighthq._internal._StaticIndex.readUint8Array(values, i);
         var j:Dynamic = (i - 1.0);
-        while ((cast ((cast ((cast j : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast _Runtime.getIndex(values, j) : Float) > (cast v : Float)) : Bool)) : Bool)) {
-          _Runtime.setIndex(values, (j + 1.0), _Runtime.getIndex(values, j));
+        while ((cast ((cast ((cast j : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast flighthq._internal._StaticIndex.readUint8Array(values, j) : Float) > (cast v : Float)) : Bool)) : Bool)) {
+          flighthq._internal._StaticIndex.writeUint8Array(values, (j + 1.0), flighthq._internal._StaticIndex.readUint8Array(values, j));
           j--;
         }
-        _Runtime.setIndex(values, (j + 1.0), v);
+        flighthq._internal._StaticIndex.writeUint8Array(values, (j + 1.0), v);
         i++;
       }
     }
-    return cast _Runtime.getIndex(values, mid);
+    return cast flighthq._internal._StaticIndex.readUint8Array(values, mid);
     return cast null;
   }
 

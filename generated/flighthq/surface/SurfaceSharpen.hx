@@ -36,13 +36,13 @@ class SurfaceSharpen {
             if ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast surfaceWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Dynamic = (((sy * surfaceWidth) + sx) * 4.0);
             var di:Dynamic = (((py * w) + px) * 4.0);
-            var r:Dynamic = _Runtime.getIndex(data, si);
-            var g:Dynamic = _Runtime.getIndex(data, (si + 1.0));
-            var b:Dynamic = _Runtime.getIndex(data, (si + 2.0));
-            _Runtime.setIndex(out, di, (r + (amount * (r - _Runtime.getIndex(out, di)))));
-            _Runtime.setIndex(out, (di + 1.0), (g + (amount * (g - _Runtime.getIndex(out, (di + 1.0))))));
-            _Runtime.setIndex(out, (di + 2.0), (b + (amount * (b - _Runtime.getIndex(out, (di + 2.0))))));
-            _Runtime.setIndex(out, (di + 3.0), _Runtime.getIndex(data, (si + 3.0)));
+            var r:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, si);
+            var g:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (si + 1.0));
+            var b:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (si + 2.0));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, (r + (amount * (r - flighthq._internal._StaticIndex.readUint8ClampedArray(out, di)))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), (g + (amount * (g - flighthq._internal._StaticIndex.readUint8ClampedArray(out, (di + 1.0))))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), (b + (amount * (b - flighthq._internal._StaticIndex.readUint8ClampedArray(out, (di + 2.0))))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), flighthq._internal._StaticIndex.readUint8ClampedArray(data, (si + 3.0)));
             px++;
           }
         }

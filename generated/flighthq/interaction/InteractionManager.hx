@@ -289,7 +289,7 @@ class InteractionManager {
     {
       var i:Dynamic = (_Runtime.field(newChain, 'length') - 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-        var node:Dynamic = _Runtime.getIndex(newChain, i);
+        var node:Dynamic = flighthq._internal._StaticIndex.readArray(newChain, i);
         if ((cast _Runtime.strictEquals(_Runtime.callProperty(oldChain, 'indexOf', cast ([node] : Array<Dynamic>)), -1.0) : Bool)) {
           _Runtime.callValue(InteractionManager.setInteractionSignalCurrentTarget__interactionManager, cast ([InteractionManager._pointerData__interactionManager, node, node] : Array<Dynamic>));
           _Runtime.callValue(InteractionManager.emitInteractionSignalDirect__interactionManager, cast ([node, 'onPointerRollOver', InteractionManager._pointerData__interactionManager] : Array<Dynamic>));

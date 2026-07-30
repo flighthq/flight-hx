@@ -26,7 +26,7 @@ class GlEnvironmentCube {
     {
       var face:Dynamic = 0.0;
       while ((cast ((cast face : Float) < (cast 6.0 : Float)) : Bool)) {
-        _Runtime.callValue(uploadGlTextureImageResource, cast ([gl, _Runtime.callValue(getGlCubeFaceTarget, cast ([gl, face] : Array<Dynamic>)), _Runtime.getIndex(_Runtime.field(cube, 'faces'), face)] : Array<Dynamic>));
+        _Runtime.callValue(uploadGlTextureImageResource, cast ([gl, _Runtime.callValue(getGlCubeFaceTarget, cast ([gl, face] : Array<Dynamic>)), flighthq._internal._StaticIndex.readArray(_Runtime.field(cube, 'faces'), face)] : Array<Dynamic>));
         face++;
       }
     }
@@ -63,7 +63,7 @@ class GlEnvironmentCube {
     {
       var face:Dynamic = 0.0;
       while ((cast ((cast face : Float) < (cast 6.0 : Float)) : Bool)) {
-        var image:Dynamic = _Runtime.getIndex(_Runtime.field(cube, 'faces'), face);
+        var image:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(cube, 'faces'), face);
         if ((cast ((cast _Runtime.looseEquals(image, null) : Bool) || (cast _Runtime.andValue(_Runtime.looseEquals(_Runtime.field(image, 'source'), null), function():Dynamic return cast _Runtime.looseEquals(_Runtime.field(image, 'data'), null)) : Bool)) : Bool)) { return cast false; }
         face++;
       }

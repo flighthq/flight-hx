@@ -21,9 +21,9 @@ class WgpuBokehDepthOfFieldEffect {
     height = _Runtime.field(source, 'height');
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'lens.bokehDoF', WgpuBokehDepthOfFieldEffect.BOKEH_DOF_FRAGMENT_WGSL__wgpuBokehDepthOfFieldEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, maxBlur);
-      _Runtime.setIndex(f32, 2.0, width);
-      _Runtime.setIndex(f32, 3.0, height);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, maxBlur);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, width);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, height);
     }] : Array<Dynamic>));
   }
 

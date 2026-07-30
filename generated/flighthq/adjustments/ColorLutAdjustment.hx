@@ -25,9 +25,9 @@ class ColorLutAdjustment {
 
   public static function colorMatrixTransform__colorLutAdjustment(m:Array<Float>):ColorTransformFunction {
     return cast function(out:Dynamic, r:Dynamic, g:Dynamic, b:Dynamic) {
-      _Runtime.setIndex(out, 0.0, (((((_Runtime.getIndex(m, 0.0) * r) + (_Runtime.getIndex(m, 1.0) * g)) + (_Runtime.getIndex(m, 2.0) * b)) + _Runtime.getIndex(m, 3.0)) + (_Runtime.getIndex(m, 4.0) / 255.0)));
-      _Runtime.setIndex(out, 1.0, (((((_Runtime.getIndex(m, 5.0) * r) + (_Runtime.getIndex(m, 6.0) * g)) + (_Runtime.getIndex(m, 7.0) * b)) + _Runtime.getIndex(m, 8.0)) + (_Runtime.getIndex(m, 9.0) / 255.0)));
-      _Runtime.setIndex(out, 2.0, (((((_Runtime.getIndex(m, 10.0) * r) + (_Runtime.getIndex(m, 11.0) * g)) + (_Runtime.getIndex(m, 12.0) * b)) + _Runtime.getIndex(m, 13.0)) + (_Runtime.getIndex(m, 14.0) / 255.0)));
+      flighthq._internal._StaticIndex.writeArray(out, 0.0, (((((flighthq._internal._StaticIndex.readArray(m, 0.0) * r) + (flighthq._internal._StaticIndex.readArray(m, 1.0) * g)) + (flighthq._internal._StaticIndex.readArray(m, 2.0) * b)) + flighthq._internal._StaticIndex.readArray(m, 3.0)) + (flighthq._internal._StaticIndex.readArray(m, 4.0) / 255.0)));
+      flighthq._internal._StaticIndex.writeArray(out, 1.0, (((((flighthq._internal._StaticIndex.readArray(m, 5.0) * r) + (flighthq._internal._StaticIndex.readArray(m, 6.0) * g)) + (flighthq._internal._StaticIndex.readArray(m, 7.0) * b)) + flighthq._internal._StaticIndex.readArray(m, 8.0)) + (flighthq._internal._StaticIndex.readArray(m, 9.0) / 255.0)));
+      flighthq._internal._StaticIndex.writeArray(out, 2.0, (((((flighthq._internal._StaticIndex.readArray(m, 10.0) * r) + (flighthq._internal._StaticIndex.readArray(m, 11.0) * g)) + (flighthq._internal._StaticIndex.readArray(m, 12.0) * b)) + flighthq._internal._StaticIndex.readArray(m, 13.0)) + (flighthq._internal._StaticIndex.readArray(m, 14.0) / 255.0)));
     };
     return cast null;
   }

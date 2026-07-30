@@ -12,7 +12,7 @@ class Statistics {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(values, 'length') : Float)) : Bool)) {
-        (sum = cast ((sum + _Runtime.getIndex(values, i)) : Dynamic));
+        (sum = cast ((sum + flighthq._internal._StaticIndex.readArray(values, i)) : Dynamic));
         i++;
       }
     }
@@ -26,7 +26,7 @@ class Statistics {
     if ((cast _Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0) : Bool)) { return cast HxMath.NaN; }
     sorted = _Runtime.sortAndReturn(_Runtime.slice(values, 0, null), function(a:Dynamic, b:Dynamic) return (a - b));
     mid = HxMath.floor((_Runtime.field(sorted, 'length') / 2.0));
-    return cast ((cast !_Runtime.strictEquals(_Runtime.fmod(_Runtime.field(sorted, 'length'), 2.0), 0.0) : Bool) ? (cast _Runtime.getIndex(sorted, mid) : Dynamic) : (cast ((_Runtime.getIndex(sorted, (mid - 1.0)) + _Runtime.getIndex(sorted, mid)) / 2.0) : Dynamic));
+    return cast ((cast !_Runtime.strictEquals(_Runtime.fmod(_Runtime.field(sorted, 'length'), 2.0), 0.0) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(sorted, mid) : Dynamic) : (cast ((flighthq._internal._StaticIndex.readArray(sorted, (mid - 1.0)) + flighthq._internal._StaticIndex.readArray(sorted, mid)) / 2.0) : Dynamic));
     return cast null;
   }
 
@@ -44,7 +44,7 @@ class Statistics {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(values, 'length') : Float)) : Bool)) {
-        var d:Dynamic = (_Runtime.getIndex(values, i) - m);
+        var d:Dynamic = (flighthq._internal._StaticIndex.readArray(values, i) - m);
         (sum = cast ((sum + (d * d)) : Dynamic));
         i++;
       }
@@ -65,8 +65,8 @@ class Statistics {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(values, 'length') : Float)) : Bool)) {
-        (sumWeights = cast ((sumWeights + _Runtime.getIndex(weights, i)) : Dynamic));
-        (sumProduct = cast ((sumProduct + (_Runtime.getIndex(values, i) * _Runtime.getIndex(weights, i))) : Dynamic));
+        (sumWeights = cast ((sumWeights + flighthq._internal._StaticIndex.readArray(weights, i)) : Dynamic));
+        (sumProduct = cast ((sumProduct + (flighthq._internal._StaticIndex.readArray(values, i) * flighthq._internal._StaticIndex.readArray(weights, i))) : Dynamic));
         i++;
       }
     }

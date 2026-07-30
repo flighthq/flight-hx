@@ -30,7 +30,7 @@ class ParseBasis {
     header = _Runtime.callValue(createByteReader, cast ([bytes, ParseBasis.basisTotalSlicesOffset__parseBasis] : Array<Dynamic>));
     totalSlices = _Runtime.callValue(readByteReaderU16, cast ([header] : Array<Dynamic>));
     totalImages = _Runtime.callValue(readByteReaderU16, cast ([header] : Array<Dynamic>));
-    format = _Runtime.getIndex(ParseBasis.basisTexFormat__parseBasis, _Runtime.getIndex(bytes, ParseBasis.basisTexFormatOffset__parseBasis));
+    format = _Runtime.getIndex(ParseBasis.basisTexFormat__parseBasis, flighthq._internal._StaticIndex.readUint8Array(bytes, ParseBasis.basisTexFormatOffset__parseBasis));
     if ((cast _Runtime.strictEquals(format, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
     if ((cast _Runtime.strictEquals(totalSlices, 0.0) : Bool)) { return cast null; }
     sliceDescReader = _Runtime.callValue(createByteReader, cast ([bytes, ParseBasis.basisSliceDescOffsetField__parseBasis] : Array<Dynamic>));
@@ -64,12 +64,12 @@ class ParseBasis {
         (slice = cast ((slice + 1.0) : Dynamic));
       }
     }
-    return cast { depth: 1.0, faces: 1.0, format: format, height: _Runtime.orValue(baseHeight, function():Dynamic return cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.getIndex(levels, 0.0), 'height'), function():Dynamic return cast 0.0)), layers: HxMath.max(1.0, totalImages), levels: levels, mipLevels: HxMath.max(1.0, maxLevel), supercompression: 'None', width: _Runtime.orValue(baseWidth, function():Dynamic return cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.getIndex(levels, 0.0), 'width'), function():Dynamic return cast 0.0)) };
+    return cast { depth: 1.0, faces: 1.0, format: format, height: _Runtime.orValue(baseHeight, function():Dynamic return cast _Runtime.coalesce(_Runtime.optionalField(flighthq._internal._StaticIndex.readArray(levels, 0.0), 'height'), function():Dynamic return cast 0.0)), layers: HxMath.max(1.0, totalImages), levels: levels, mipLevels: HxMath.max(1.0, maxLevel), supercompression: 'None', width: _Runtime.orValue(baseWidth, function():Dynamic return cast _Runtime.coalesce(_Runtime.optionalField(flighthq._internal._StaticIndex.readArray(levels, 0.0), 'width'), function():Dynamic return cast 0.0)) };
     return cast null;
   }
 
   public static function hasBasisSignature__parseBasis(bytes:flighthq._internal._UInt8Array):Bool {
-    return cast ((cast ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) >= (cast 2.0 : Float)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(bytes, 0.0), 115.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(bytes, 1.0), 66.0) : Bool));
+    return cast ((cast ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) >= (cast 2.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 0.0), 115.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 1.0), 66.0) : Bool));
     return cast null;
   }
 

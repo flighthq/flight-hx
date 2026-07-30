@@ -50,8 +50,8 @@ class AnisotropyPbrWgpuMeshMaterialRenderer {
     out = _Runtime.callValue(getWgpuPbrMaterialScratch, cast ([] : Array<Dynamic>));
     _Runtime.callValue(writeWgpuPbrStandardBlock, cast ([out, standard, ((cast !_Runtime.strictEquals(anisotropy, null) : Bool) ? (cast _Runtime.field(anisotropy, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic))] : Array<Dynamic>));
     _Runtime.fill(out, 0.0, 16.0, null, 2);
-    _Runtime.setIndex(out, 24.0, ((cast !_Runtime.strictEquals(anisotropy, null) : Bool) ? (cast _Runtime.field(anisotropy, 'anisotropyStrength') : Dynamic) : (cast 0.0 : Dynamic)));
-    _Runtime.setIndex(out, 25.0, ((cast !_Runtime.strictEquals(anisotropy, null) : Bool) ? (cast _Runtime.field(anisotropy, 'anisotropyRotation') : Dynamic) : (cast 0.0 : Dynamic)));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 24.0, ((cast !_Runtime.strictEquals(anisotropy, null) : Bool) ? (cast _Runtime.field(anisotropy, 'anisotropyStrength') : Dynamic) : (cast 0.0 : Dynamic)));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 25.0, ((cast !_Runtime.strictEquals(anisotropy, null) : Bool) ? (cast _Runtime.field(anisotropy, 'anisotropyRotation') : Dynamic) : (cast 0.0 : Dynamic)));
     _Runtime.callValue(writeWgpuPbrMaterialUniform, cast ([state, binding] : Array<Dynamic>));
     _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, _Runtime.field(binding, 'bindGroup')] : Array<Dynamic>));

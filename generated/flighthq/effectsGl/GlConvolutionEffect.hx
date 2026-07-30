@@ -41,7 +41,7 @@ class GlConvolutionEffect {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast (matrixX * matrixY) : Float)) : Bool)) {
-        _Runtime.setIndex(matrixData, i, _Runtime.getIndex(matrix, i));
+        flighthq._internal._StaticIndex.writeFloat32Array(matrixData, i, flighthq._internal._StaticIndex.readArray(matrix, i));
         i++;
       }
     }
@@ -69,7 +69,7 @@ class GlConvolutionEffect {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
-        (sum = cast ((sum + _Runtime.getIndex(matrix, i)) : Dynamic));
+        (sum = cast ((sum + flighthq._internal._StaticIndex.readArray(matrix, i)) : Dynamic));
         i++;
       }
     }

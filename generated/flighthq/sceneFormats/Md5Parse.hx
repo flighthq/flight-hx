@@ -51,11 +51,11 @@ class Md5Parse {
     lines = _Runtime.callProperty(source, 'split', cast (['\n'] : Array<Dynamic>));
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
-      var line:Dynamic = StringTools.trim(Std.string(_Runtime.getIndex(lines, i)));
+      var line:Dynamic = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
       i++;
       if ((cast ((cast _Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0) : Bool) || (cast StringTools.startsWith(line, '//') : Bool)) : Bool)) { continue; }
       if ((cast StringTools.startsWith(line, 'MD5Version') : Bool)) {
-        var version:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>));
+        var version:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>));
         if ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([version] : Array<Dynamic>)) : Bool) && (cast !_Runtime.strictEquals(version, 10.0) : Bool)) : Bool)) {
           _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: unsupported MD5Version ' + Std.string(version) + ' (expected 10)'] : Array<Dynamic>));
         }
@@ -94,23 +94,23 @@ class Md5Parse {
       {
         var j:Dynamic = 0.0;
         while ((cast ((cast j : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) {
-          var joint:Dynamic = _Runtime.getIndex(joints, j);
+          var joint:Dynamic = flighthq._internal._StaticIndex.readArray(joints, j);
           var node:Dynamic = _Runtime.callValue(createSceneNode, cast ([_Runtime.field(_Runtime, 'UNDEFINED'), { name: _Runtime.field(joint, 'name') }] : Array<Dynamic>));
           var pi:Dynamic = (j * 3.0);
           var qi:Dynamic = (j * 4.0);
           var parentIndex:Dynamic = _Runtime.field(joint, 'parentIndex');
-          var localPx:Dynamic = _Runtime.getIndex(jointPositions, pi);
-          var localPy:Dynamic = _Runtime.getIndex(jointPositions, (pi + 1.0));
-          var localPz:Dynamic = _Runtime.getIndex(jointPositions, (pi + 2.0));
-          var localQx:Dynamic = _Runtime.getIndex(jointOrientations, qi);
-          var localQy:Dynamic = _Runtime.getIndex(jointOrientations, (qi + 1.0));
-          var localQz:Dynamic = _Runtime.getIndex(jointOrientations, (qi + 2.0));
-          var localQw:Dynamic = _Runtime.getIndex(jointOrientations, (qi + 3.0));
+          var localPx:Dynamic = flighthq._internal._StaticIndex.readArray(jointPositions, pi);
+          var localPy:Dynamic = flighthq._internal._StaticIndex.readArray(jointPositions, (pi + 1.0));
+          var localPz:Dynamic = flighthq._internal._StaticIndex.readArray(jointPositions, (pi + 2.0));
+          var localQx:Dynamic = flighthq._internal._StaticIndex.readArray(jointOrientations, qi);
+          var localQy:Dynamic = flighthq._internal._StaticIndex.readArray(jointOrientations, (qi + 1.0));
+          var localQz:Dynamic = flighthq._internal._StaticIndex.readArray(jointOrientations, (qi + 2.0));
+          var localQw:Dynamic = flighthq._internal._StaticIndex.readArray(jointOrientations, (qi + 3.0));
           if ((cast ((cast ((cast parentIndex : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast parentIndex : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) : Bool)) {
             var ppi:Dynamic = (parentIndex * 3.0);
             var pqi:Dynamic = (parentIndex * 4.0);
-            _Runtime.callValue(conjugateQuaternion, cast ([parentConj, { w: _Runtime.getIndex(jointOrientations, (pqi + 3.0)), x: _Runtime.getIndex(jointOrientations, pqi), y: _Runtime.getIndex(jointOrientations, (pqi + 1.0)), z: _Runtime.getIndex(jointOrientations, (pqi + 2.0)) }] : Array<Dynamic>));
-            _Runtime.callValue(rotateVector3ByQuaternion, cast ([relPos, { x: (localPx - _Runtime.getIndex(jointPositions, ppi)), y: (localPy - _Runtime.getIndex(jointPositions, (ppi + 1.0))), z: (localPz - _Runtime.getIndex(jointPositions, (ppi + 2.0))) }, parentConj] : Array<Dynamic>));
+            _Runtime.callValue(conjugateQuaternion, cast ([parentConj, { w: flighthq._internal._StaticIndex.readArray(jointOrientations, (pqi + 3.0)), x: flighthq._internal._StaticIndex.readArray(jointOrientations, pqi), y: flighthq._internal._StaticIndex.readArray(jointOrientations, (pqi + 1.0)), z: flighthq._internal._StaticIndex.readArray(jointOrientations, (pqi + 2.0)) }] : Array<Dynamic>));
+            _Runtime.callValue(rotateVector3ByQuaternion, cast ([relPos, { x: (localPx - flighthq._internal._StaticIndex.readArray(jointPositions, ppi)), y: (localPy - flighthq._internal._StaticIndex.readArray(jointPositions, (ppi + 1.0))), z: (localPz - flighthq._internal._StaticIndex.readArray(jointPositions, (ppi + 2.0))) }, parentConj] : Array<Dynamic>));
             _Runtime.callValue(multiplyQuaternion, cast ([relQuat, parentConj, { w: localQw, x: localQx, y: localQy, z: localQz }] : Array<Dynamic>));
             (localPx = cast (_Runtime.field(relPos, 'x') : Dynamic));
             (localPy = cast (_Runtime.field(relPos, 'y') : Dynamic));
@@ -132,11 +132,11 @@ class Md5Parse {
       {
         var j:Dynamic = 0.0;
         while ((cast ((cast j : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) {
-          var parentIndex:Dynamic = _Runtime.field(_Runtime.getIndex(joints, j), 'parentIndex');
+          var parentIndex:Dynamic = _Runtime.field(flighthq._internal._StaticIndex.readArray(joints, j), 'parentIndex');
           if ((cast ((cast ((cast parentIndex : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast parentIndex : Float) < (cast _Runtime.field(jointNodes, 'length') : Float)) : Bool)) : Bool)) {
-            _Runtime.callValue(addNodeChild, cast ([_Runtime.getIndex(jointNodes, parentIndex), _Runtime.getIndex(jointNodes, j)] : Array<Dynamic>));
+            _Runtime.callValue(addNodeChild, cast ([flighthq._internal._StaticIndex.readArray(jointNodes, parentIndex), flighthq._internal._StaticIndex.readArray(jointNodes, j)] : Array<Dynamic>));
           } else {
-            _Runtime.callValue(addNodeChild, cast ([skeletonRoot, _Runtime.getIndex(jointNodes, j)] : Array<Dynamic>));
+            _Runtime.callValue(addNodeChild, cast ([skeletonRoot, flighthq._internal._StaticIndex.readArray(jointNodes, j)] : Array<Dynamic>));
           }
           j++;
         }
@@ -148,7 +148,7 @@ class Md5Parse {
     {
       var m:Dynamic = 0.0;
       while ((cast ((cast m : Float) < (cast _Runtime.field(meshes, 'length') : Float)) : Bool)) {
-        var md5Mesh:Dynamic = _Runtime.getIndex(meshes, m);
+        var md5Mesh:Dynamic = flighthq._internal._StaticIndex.readArray(meshes, m);
         var vertices:Array<Float> = cast ([] : Array<Dynamic>);
         var indices:Array<Float> = cast ([] : Array<Dynamic>);
         var jointScratch:Dynamic = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
@@ -156,7 +156,7 @@ class Md5Parse {
         {
           var v:Dynamic = 0.0;
           while ((cast ((cast v : Float) < (cast _Runtime.field(_Runtime.field(md5Mesh, 'vertices'), 'length') : Float)) : Bool)) {
-            var vert:Dynamic = _Runtime.getIndex(_Runtime.field(md5Mesh, 'vertices'), v);
+            var vert:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(md5Mesh, 'vertices'), v);
             var px:Dynamic = 0.0;
             var py:Dynamic = 0.0;
             var pz:Dynamic = 0.0;
@@ -169,13 +169,13 @@ class Md5Parse {
                   _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: vertex ' + Std.string(v) + ' references weight index ' + Std.string(weightIndex) + ' out of range'] : Array<Dynamic>));
                   break;
                 }
-                var weight:Dynamic = _Runtime.getIndex(_Runtime.field(md5Mesh, 'weights'), weightIndex);
+                var weight:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(md5Mesh, 'weights'), weightIndex);
                 if ((cast ((cast ((cast _Runtime.field(weight, 'jointIndex') : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(weight, 'jointIndex') : Float) >= (cast _Runtime.field(joints, 'length') : Float)) : Bool)) : Bool)) {
                   _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: weight ' + Std.string(weightIndex) + ' references joint index ' + Std.string(_Runtime.field(weight, 'jointIndex')) + ' out of range'] : Array<Dynamic>));
                   w++;
                   continue;
                 }
-                var joint:Dynamic = _Runtime.getIndex(joints, _Runtime.field(weight, 'jointIndex'));
+                var joint:Dynamic = flighthq._internal._StaticIndex.readArray(joints, _Runtime.field(weight, 'jointIndex'));
                 var rx:Dynamic = _Runtime.callValue(Md5Parse.quatRotateVec3X__md5Parse, cast ([_Runtime.field(joint, 'orientationX'), _Runtime.field(joint, 'orientationY'), _Runtime.field(joint, 'orientationZ'), _Runtime.field(joint, 'orientationW'), _Runtime.field(weight, 'positionX'), _Runtime.field(weight, 'positionY'), _Runtime.field(weight, 'positionZ')] : Array<Dynamic>));
                 var ry:Dynamic = _Runtime.callValue(Md5Parse.quatRotateVec3Y__md5Parse, cast ([_Runtime.field(joint, 'orientationX'), _Runtime.field(joint, 'orientationY'), _Runtime.field(joint, 'orientationZ'), _Runtime.field(joint, 'orientationW'), _Runtime.field(weight, 'positionX'), _Runtime.field(weight, 'positionY'), _Runtime.field(weight, 'positionZ')] : Array<Dynamic>));
                 var rz:Dynamic = _Runtime.callValue(Md5Parse.quatRotateVec3Z__md5Parse, cast ([_Runtime.field(joint, 'orientationX'), _Runtime.field(joint, 'orientationY'), _Runtime.field(joint, 'orientationZ'), _Runtime.field(joint, 'orientationW'), _Runtime.field(weight, 'positionX'), _Runtime.field(weight, 'positionY'), _Runtime.field(weight, 'positionZ')] : Array<Dynamic>));
@@ -191,8 +191,8 @@ class Md5Parse {
             _Runtime.pushMany(vertices, cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
             _Runtime.pushMany(vertices, cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
             _Runtime.pushMany(vertices, cast ([_Runtime.field(vert, 'u'), _Runtime.field(vert, 'v')] : Array<Dynamic>));
-            _Runtime.pushMany(vertices, cast ([_Runtime.getIndex(jointScratch, 0.0), _Runtime.getIndex(jointScratch, 1.0), _Runtime.getIndex(jointScratch, 2.0), _Runtime.getIndex(jointScratch, 3.0)] : Array<Dynamic>));
-            _Runtime.pushMany(vertices, cast ([_Runtime.getIndex(weightScratch, 0.0), _Runtime.getIndex(weightScratch, 1.0), _Runtime.getIndex(weightScratch, 2.0), _Runtime.getIndex(weightScratch, 3.0)] : Array<Dynamic>));
+            _Runtime.pushMany(vertices, cast ([flighthq._internal._StaticIndex.readArray(jointScratch, 0.0), flighthq._internal._StaticIndex.readArray(jointScratch, 1.0), flighthq._internal._StaticIndex.readArray(jointScratch, 2.0), flighthq._internal._StaticIndex.readArray(jointScratch, 3.0)] : Array<Dynamic>));
+            _Runtime.pushMany(vertices, cast ([flighthq._internal._StaticIndex.readArray(weightScratch, 0.0), flighthq._internal._StaticIndex.readArray(weightScratch, 1.0), flighthq._internal._StaticIndex.readArray(weightScratch, 2.0), flighthq._internal._StaticIndex.readArray(weightScratch, 3.0)] : Array<Dynamic>));
             v++;
           }
         }
@@ -200,7 +200,7 @@ class Md5Parse {
         {
           var t:Dynamic = 0.0;
           while ((cast ((cast t : Float) < (cast _Runtime.field(_Runtime.field(md5Mesh, 'indices'), 'length') : Float)) : Bool)) {
-            _Runtime.callProperty(indices, 'push', cast ([_Runtime.getIndex(_Runtime.field(md5Mesh, 'indices'), t)] : Array<Dynamic>));
+            _Runtime.callProperty(indices, 'push', cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(md5Mesh, 'indices'), t)] : Array<Dynamic>));
             t++;
           }
         }
@@ -229,7 +229,7 @@ class Md5Parse {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     i = startLine;
     while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
-      var line:Dynamic = StringTools.trim(Std.string(_Runtime.getIndex(lines, i)));
+      var line:Dynamic = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
       i++;
       if ((cast _Runtime.strictEquals(line, '}') : Bool)) { return cast i; }
       if ((cast ((cast _Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0) : Bool) || (cast StringTools.startsWith(line, '//') : Bool)) : Bool)) { continue; }
@@ -269,13 +269,13 @@ class Md5Parse {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: malformed joint on line ' + Std.string((lineIndex + 1.0)) + ': not enough components'] : Array<Dynamic>));
       return cast null;
     }
-    parentIndex = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(tokens, 0.0), 10.0] : Array<Dynamic>));
-    positionX = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 1.0)] : Array<Dynamic>));
-    positionY = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 2.0)] : Array<Dynamic>));
-    positionZ = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 3.0)] : Array<Dynamic>));
-    orientationX = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 4.0)] : Array<Dynamic>));
-    orientationY = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 5.0)] : Array<Dynamic>));
-    orientationZ = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 6.0)] : Array<Dynamic>));
+    parentIndex = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 0.0), 10.0] : Array<Dynamic>));
+    positionX = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 1.0)] : Array<Dynamic>));
+    positionY = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 2.0)] : Array<Dynamic>));
+    positionZ = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 3.0)] : Array<Dynamic>));
+    orientationX = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 4.0)] : Array<Dynamic>));
+    orientationY = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 5.0)] : Array<Dynamic>));
+    orientationZ = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 6.0)] : Array<Dynamic>));
     if ((cast ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parentIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionZ] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([orientationX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([orientationY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([orientationZ] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: malformed joint on line ' + Std.string((lineIndex + 1.0)) + ': non-numeric values'] : Array<Dynamic>));
       return cast null;
@@ -298,7 +298,7 @@ class Md5Parse {
     indices = cast ([] : Array<Dynamic>);
     i = startLine;
     while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
-      var line:Dynamic = StringTools.trim(Std.string(_Runtime.getIndex(lines, i)));
+      var line:Dynamic = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
       i++;
       if ((cast _Runtime.strictEquals(line, '}') : Bool)) { return cast { nextLine: i, result: { indices: indices, shader: shader, vertices: vertices, weights: weights } }; }
       if ((cast ((cast _Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0) : Bool) || (cast StringTools.startsWith(line, '//') : Bool)) : Bool)) { continue; }
@@ -321,7 +321,7 @@ class Md5Parse {
       if ((cast StringTools.startsWith(line, 'tri ') : Bool)) {
         var tri:Dynamic = _Runtime.callValue(Md5Parse.parseTriLine__md5Parse, cast ([line, warnings, (i - 1.0)] : Array<Dynamic>));
         if ((cast !_Runtime.strictEquals(tri, null) : Bool)) {
-          _Runtime.pushMany(indices, cast ([_Runtime.getIndex(tri, 0.0), _Runtime.getIndex(tri, 1.0), _Runtime.getIndex(tri, 2.0)] : Array<Dynamic>));
+          _Runtime.pushMany(indices, cast ([flighthq._internal._StaticIndex.readArray(tri, 0.0), flighthq._internal._StaticIndex.readArray(tri, 1.0), flighthq._internal._StaticIndex.readArray(tri, 2.0)] : Array<Dynamic>));
         }
         continue;
       }
@@ -347,10 +347,10 @@ class Md5Parse {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: malformed vert on line ' + Std.string((lineIndex + 1.0)) + ''] : Array<Dynamic>));
       return cast null;
     }
-    u = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 2.0)] : Array<Dynamic>));
-    v = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 3.0)] : Array<Dynamic>));
-    startWeight = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(tokens, 4.0), 10.0] : Array<Dynamic>));
-    countWeights = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(tokens, 5.0), 10.0] : Array<Dynamic>));
+    u = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 2.0)] : Array<Dynamic>));
+    v = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 3.0)] : Array<Dynamic>));
+    startWeight = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 4.0), 10.0] : Array<Dynamic>));
+    countWeights = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 5.0), 10.0] : Array<Dynamic>));
     if ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([u] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([startWeight] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([countWeights] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: malformed vert on line ' + Std.string((lineIndex + 1.0)) + ': non-numeric values'] : Array<Dynamic>));
       return cast null;
@@ -369,9 +369,9 @@ class Md5Parse {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: malformed tri on line ' + Std.string((lineIndex + 1.0)) + ''] : Array<Dynamic>));
       return cast null;
     }
-    v0 = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(tokens, 2.0), 10.0] : Array<Dynamic>));
-    v1 = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(tokens, 3.0), 10.0] : Array<Dynamic>));
-    v2 = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(tokens, 4.0), 10.0] : Array<Dynamic>));
+    v0 = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 2.0), 10.0] : Array<Dynamic>));
+    v1 = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 3.0), 10.0] : Array<Dynamic>));
+    v2 = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 4.0), 10.0] : Array<Dynamic>));
     if ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v0] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v1] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v2] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: malformed tri on line ' + Std.string((lineIndex + 1.0)) + ': non-numeric indices'] : Array<Dynamic>));
       return cast null;
@@ -392,11 +392,11 @@ class Md5Parse {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: malformed weight on line ' + Std.string((lineIndex + 1.0)) + ''] : Array<Dynamic>));
       return cast null;
     }
-    jointIndex = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(tokens, 2.0), 10.0] : Array<Dynamic>));
-    bias = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 3.0)] : Array<Dynamic>));
-    positionX = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 4.0)] : Array<Dynamic>));
-    positionY = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 5.0)] : Array<Dynamic>));
-    positionZ = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 6.0)] : Array<Dynamic>));
+    jointIndex = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 2.0), 10.0] : Array<Dynamic>));
+    bias = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 3.0)] : Array<Dynamic>));
+    positionX = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 4.0)] : Array<Dynamic>));
+    positionY = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 5.0)] : Array<Dynamic>));
+    positionZ = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 6.0)] : Array<Dynamic>));
     if ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([jointIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([bias] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionZ] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: malformed weight on line ' + Std.string((lineIndex + 1.0)) + ': non-numeric values'] : Array<Dynamic>));
       return cast null;

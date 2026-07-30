@@ -19,7 +19,7 @@ class SurfaceFingerprint {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(a, 'cells'), 'length') : Float)) : Bool)) {
-        (sum = cast ((sum + HxMath.abs((_Runtime.getIndex(_Runtime.field(a, 'cells'), i) - _Runtime.getIndex(_Runtime.field(b, 'cells'), i)))) : Dynamic));
+        (sum = cast ((sum + HxMath.abs((flighthq._internal._StaticIndex.readUint8Array(_Runtime.field(a, 'cells'), i) - flighthq._internal._StaticIndex.readUint8Array(_Runtime.field(b, 'cells'), i)))) : Dynamic));
         i++;
       }
     }
@@ -61,9 +61,9 @@ class SurfaceFingerprint {
                 {
                   var x:Dynamic = x0;
                   while ((cast ((cast ((cast x : Float) < (cast x1 : Float)) : Bool) && (cast ((cast x : Float) < (cast width : Float)) : Bool)) : Bool)) {
-                    (sumR = cast ((sumR + _Runtime.getIndex(data, i)) : Dynamic));
-                    (sumG = cast ((sumG + _Runtime.getIndex(data, (i + 1.0))) : Dynamic));
-                    (sumB = cast ((sumB + _Runtime.getIndex(data, (i + 2.0))) : Dynamic));
+                    (sumR = cast ((sumR + flighthq._internal._StaticIndex.readUint8ClampedArray(data, i)) : Dynamic));
+                    (sumG = cast ((sumG + flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0))) : Dynamic));
+                    (sumB = cast ((sumB + flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0))) : Dynamic));
                     count++;
                     (i = cast ((i + 4.0) : Dynamic));
                     x++;
@@ -73,9 +73,9 @@ class SurfaceFingerprint {
               }
             }
             var c:Dynamic = (((cy * gridSize) + cx) * 3.0);
-            _Runtime.setIndex(cells, c, ((cast _Runtime.strictEquals(count, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast HxMath.round((sumR / count)) : Dynamic)));
-            _Runtime.setIndex(cells, (c + 1.0), ((cast _Runtime.strictEquals(count, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast HxMath.round((sumG / count)) : Dynamic)));
-            _Runtime.setIndex(cells, (c + 2.0), ((cast _Runtime.strictEquals(count, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast HxMath.round((sumB / count)) : Dynamic)));
+            flighthq._internal._StaticIndex.writeUint8Array(cells, c, ((cast _Runtime.strictEquals(count, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast HxMath.round((sumR / count)) : Dynamic)));
+            flighthq._internal._StaticIndex.writeUint8Array(cells, (c + 1.0), ((cast _Runtime.strictEquals(count, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast HxMath.round((sumG / count)) : Dynamic)));
+            flighthq._internal._StaticIndex.writeUint8Array(cells, (c + 2.0), ((cast _Runtime.strictEquals(count, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast HxMath.round((sumB / count)) : Dynamic)));
             cx++;
           }
         }
@@ -94,7 +94,7 @@ class SurfaceFingerprint {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(cells, 'length') : Float)) : Bool)) {
-        (hex = cast ((hex + (_Runtime.getIndex(SurfaceFingerprint.HEX__surfaceFingerprint, (_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(cells, i)) >> 4)) & 15)) + _Runtime.getIndex(SurfaceFingerprint.HEX__surfaceFingerprint, (_Runtime.toInt32(_Runtime.getIndex(cells, i)) & 15)))) : Dynamic));
+        (hex = cast ((hex + (_Runtime.getIndex(SurfaceFingerprint.HEX__surfaceFingerprint, (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(cells, i)) >> 4)) & 15)) + _Runtime.getIndex(SurfaceFingerprint.HEX__surfaceFingerprint, (_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(cells, i)) & 15)))) : Dynamic));
         i++;
       }
     }
@@ -120,7 +120,7 @@ class SurfaceFingerprint {
         var hi:Dynamic = _Runtime.callProperty(SurfaceFingerprint.HEX__surfaceFingerprint, 'indexOf', cast ([_Runtime.getIndex(hex, (i * 2.0))] : Array<Dynamic>));
         var lo:Dynamic = _Runtime.callProperty(SurfaceFingerprint.HEX__surfaceFingerprint, 'indexOf', cast ([_Runtime.getIndex(hex, ((i * 2.0) + 1.0))] : Array<Dynamic>));
         if ((cast ((cast ((cast hi : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast lo : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
-        _Runtime.setIndex(cells, i, (_Runtime.toInt32((_Runtime.toInt32(hi) << 4)) | _Runtime.toInt32(lo)));
+        flighthq._internal._StaticIndex.writeUint8Array(cells, i, (_Runtime.toInt32((_Runtime.toInt32(hi) << 4)) | _Runtime.toInt32(lo)));
         i++;
       }
     }

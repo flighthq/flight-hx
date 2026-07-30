@@ -30,8 +30,8 @@ class ShapeFill {
     startY = 0.0;
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-      var name:Dynamic = (cast _Runtime.getIndex(commands, i) : String);
-      var argCount:Dynamic = (cast _Runtime.getIndex(commands, (i + 1.0)) : Float);
+      var name:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
+      var argCount:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float);
       var a:Dynamic = (i + 2.0);
       (i = cast ((a + argCount) : Dynamic));
       {
@@ -39,8 +39,8 @@ class ShapeFill {
         if (__switchValue == 'beginFill') {
           {
             if ((cast ((cast !_Runtime.strictEquals(path, null) : Bool) && (cast ((cast _Runtime.field(_Runtime.field(path, 'commands'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.callProperty(regions, 'push', cast ([{ path: path, color: color, alpha: alpha }] : Array<Dynamic>)); }
-            (color = cast ((cast _Runtime.getIndex(commands, a) : Float) : Dynamic));
-            (alpha = cast ((cast _Runtime.getIndex(commands, (a + 1.0)) : Float) : Dynamic));
+            (color = cast ((cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Dynamic));
+            (alpha = cast ((cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Dynamic));
             (winding = cast ('nonZero' : Dynamic));
             (path = cast ({ commands: cast ([] : Array<Dynamic>), data: cast ([] : Array<Dynamic>), winding: winding } : Dynamic));
           }
@@ -54,60 +54,60 @@ class ShapeFill {
         else if (__switchValue == 'moveTo') {
           {
             if ((cast _Runtime.strictEquals(path, null) : Bool)) { break; }
-            (startX = cast ((cast _Runtime.getIndex(commands, a) : Float) : Dynamic));
-            (startY = cast ((cast _Runtime.getIndex(commands, (a + 1.0)) : Float) : Dynamic));
+            (startX = cast ((cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Dynamic));
+            (startY = cast ((cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Dynamic));
             _Runtime.callValue(ShapeFill.pushVerb__shapeFill, cast ([path, PathCommandValue.MOVE_TO, startX, startY] : Array<Dynamic>));
           }
         }
         else if (__switchValue == 'lineTo') {
           {
             if ((cast _Runtime.strictEquals(path, null) : Bool)) { break; }
-            _Runtime.callValue(ShapeFill.pushVerb__shapeFill, cast ([path, PathCommandValue.LINE_TO, (cast _Runtime.getIndex(commands, a) : Float), (cast _Runtime.getIndex(commands, (a + 1.0)) : Float)] : Array<Dynamic>));
+            _Runtime.callValue(ShapeFill.pushVerb__shapeFill, cast ([path, PathCommandValue.LINE_TO, (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float)] : Array<Dynamic>));
           }
         }
         else if (__switchValue == 'curveTo') {
           {
             if ((cast _Runtime.strictEquals(path, null) : Bool)) { break; }
-            _Runtime.callValue(ShapeFill.pushQuadratic__shapeFill, cast ([path, (cast _Runtime.getIndex(commands, a) : Float), (cast _Runtime.getIndex(commands, (a + 1.0)) : Float), (cast _Runtime.getIndex(commands, (a + 2.0)) : Float), (cast _Runtime.getIndex(commands, (a + 3.0)) : Float)] : Array<Dynamic>));
+            _Runtime.callValue(ShapeFill.pushQuadratic__shapeFill, cast ([path, (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float)] : Array<Dynamic>));
           }
         }
         else if (__switchValue == 'cubicCurveTo') {
           {
             if ((cast _Runtime.strictEquals(path, null) : Bool)) { break; }
-            _Runtime.callValue(ShapeFill.pushCubic__shapeFill, cast ([path, (cast _Runtime.getIndex(commands, a) : Float), (cast _Runtime.getIndex(commands, (a + 1.0)) : Float), (cast _Runtime.getIndex(commands, (a + 2.0)) : Float), (cast _Runtime.getIndex(commands, (a + 3.0)) : Float), (cast _Runtime.getIndex(commands, (a + 4.0)) : Float), (cast _Runtime.getIndex(commands, (a + 5.0)) : Float)] : Array<Dynamic>));
+            _Runtime.callValue(ShapeFill.pushCubic__shapeFill, cast ([path, (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 4.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 5.0)) : Float)] : Array<Dynamic>));
           }
         }
         else if (__switchValue == 'drawCircle') {
           {
             if ((cast _Runtime.strictEquals(path, null) : Bool)) { break; }
-            _Runtime.callValue(ShapeFill.appendEllipseToPath__shapeFill, cast ([path, (cast _Runtime.getIndex(commands, a) : Float), (cast _Runtime.getIndex(commands, (a + 1.0)) : Float), (cast _Runtime.getIndex(commands, (a + 2.0)) : Float), (cast _Runtime.getIndex(commands, (a + 2.0)) : Float)] : Array<Dynamic>));
+            _Runtime.callValue(ShapeFill.appendEllipseToPath__shapeFill, cast ([path, (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float)] : Array<Dynamic>));
           }
         }
         else if (__switchValue == 'drawEllipse') {
           {
             if ((cast _Runtime.strictEquals(path, null) : Bool)) { break; }
-            var w:Dynamic = (cast _Runtime.getIndex(commands, (a + 2.0)) : Float);
-            var h:Dynamic = (cast _Runtime.getIndex(commands, (a + 3.0)) : Float);
-            _Runtime.callValue(ShapeFill.appendEllipseToPath__shapeFill, cast ([path, ((cast _Runtime.getIndex(commands, a) : Float) + (w / 2.0)), ((cast _Runtime.getIndex(commands, (a + 1.0)) : Float) + (h / 2.0)), (w / 2.0), (h / 2.0)] : Array<Dynamic>));
+            var w:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float);
+            var h:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float);
+            _Runtime.callValue(ShapeFill.appendEllipseToPath__shapeFill, cast ([path, ((cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) + (w / 2.0)), ((cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) + (h / 2.0)), (w / 2.0), (h / 2.0)] : Array<Dynamic>));
           }
         }
         else if (__switchValue == 'drawRectangle') {
           {
             if ((cast _Runtime.strictEquals(path, null) : Bool)) { break; }
-            _Runtime.callValue(ShapeFill.appendRectangleToPath__shapeFill, cast ([path, (cast _Runtime.getIndex(commands, a) : Float), (cast _Runtime.getIndex(commands, (a + 1.0)) : Float), (cast _Runtime.getIndex(commands, (a + 2.0)) : Float), (cast _Runtime.getIndex(commands, (a + 3.0)) : Float)] : Array<Dynamic>));
+            _Runtime.callValue(ShapeFill.appendRectangleToPath__shapeFill, cast ([path, (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float)] : Array<Dynamic>));
           }
         }
         else if (__switchValue == 'drawRoundRectangle') {
           {
             if ((cast _Runtime.strictEquals(path, null) : Bool)) { break; }
-            _Runtime.callValue(ShapeFill.appendRoundRectangleToPath__shapeFill, cast ([path, (cast _Runtime.getIndex(commands, a) : Float), (cast _Runtime.getIndex(commands, (a + 1.0)) : Float), (cast _Runtime.getIndex(commands, (a + 2.0)) : Float), (cast _Runtime.getIndex(commands, (a + 3.0)) : Float), ((cast _Runtime.getIndex(commands, (a + 4.0)) : Float) / 2.0), ((cast _Runtime.getIndex(commands, (a + 5.0)) : Float) / 2.0)] : Array<Dynamic>));
+            _Runtime.callValue(ShapeFill.appendRoundRectangleToPath__shapeFill, cast ([path, (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float), ((cast flighthq._internal._StaticIndex.readArray(commands, (a + 4.0)) : Float) / 2.0), ((cast flighthq._internal._StaticIndex.readArray(commands, (a + 5.0)) : Float) / 2.0)] : Array<Dynamic>));
           }
         }
         else if (__switchValue == 'drawPath') {
           {
             if ((cast _Runtime.strictEquals(path, null) : Bool)) { break; }
-            _Runtime.setField(path, 'winding', (cast _Runtime.getIndex(commands, (a + 2.0)) : PathWinding));
-            _Runtime.callValue(ShapeFill.appendRawPath__shapeFill, cast ([path, (cast _Runtime.getIndex(commands, a) : Array<Float>), (cast _Runtime.getIndex(commands, (a + 1.0)) : Array<Float>)] : Array<Dynamic>));
+            _Runtime.setField(path, 'winding', (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : PathWinding));
+            _Runtime.callValue(ShapeFill.appendRawPath__shapeFill, cast ([path, (cast flighthq._internal._StaticIndex.readArray(commands, a) : Array<Float>), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Array<Float>)] : Array<Dynamic>));
           }
         }
         else  {
@@ -123,12 +123,12 @@ class ShapeFill {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-      var name:Dynamic = (cast _Runtime.getIndex(commands, i) : String);
-      var argCount:Dynamic = (cast _Runtime.getIndex(commands, (i + 1.0)) : Float);
+      var name:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
+      var argCount:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float);
       if ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(name, 'beginGradientFill') : Bool) || (cast _Runtime.strictEquals(name, 'beginBitmapFill') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'lineStyle') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'lineGradientStyle') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'lineBitmapStyle') : Bool)) : Bool)) {
         return cast true;
       }
-      if ((cast ((cast _Runtime.strictEquals(name, 'drawTriangles') : Bool) && (cast !_Runtime.strictEquals(_Runtime.getIndex(commands, ((i + 2.0) + 2.0)), null) : Bool)) : Bool)) {
+      if ((cast ((cast _Runtime.strictEquals(name, 'drawTriangles') : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(commands, ((i + 2.0) + 2.0)), null) : Bool)) : Bool)) {
         return cast true;
       }
       (i = cast ((i + (2.0 + argCount)) : Dynamic));
@@ -157,13 +157,13 @@ class ShapeFill {
     {
       var v:Dynamic = 0.0;
       while ((cast ((cast v : Float) < (cast _Runtime.field(verbs, 'length') : Float)) : Bool)) {
-        var verb:Dynamic = _Runtime.getIndex(verbs, v);
+        var verb:Dynamic = flighthq._internal._StaticIndex.readArray(verbs, v);
         var args:Dynamic = ((cast _Runtime.strictEquals(verb, PathCommandValue.CUBIC_CURVE_TO) : Bool) ? (cast 6.0 : Dynamic) : (cast ((cast _Runtime.strictEquals(verb, PathCommandValue.CURVE_TO) : Bool) ? (cast 4.0 : Dynamic) : (cast 2.0 : Dynamic)) : Dynamic));
         _Runtime.callProperty(_Runtime.field(path, 'commands'), 'push', cast ([verb] : Array<Dynamic>));
         {
           var k:Dynamic = 0.0;
           while ((cast ((cast k : Float) < (cast args : Float)) : Bool)) {
-            _Runtime.callProperty(_Runtime.field(path, 'data'), 'push', cast ([_Runtime.getIndex(data, (d + k))] : Array<Dynamic>));
+            _Runtime.callProperty(_Runtime.field(path, 'data'), 'push', cast ([flighthq._internal._StaticIndex.readArray(data, (d + k))] : Array<Dynamic>));
             k++;
           }
         }

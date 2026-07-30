@@ -54,15 +54,15 @@ class TransmissionVolumePbrWgpuMeshMaterialRenderer {
     _Runtime.fill(out, 0.0, 16.0, null, 2);
     if ((cast !_Runtime.strictEquals(transmission, null) : Bool)) {
       _Runtime.callValue(unpackColorToLinear, cast ([TransmissionVolumePbrWgpuMeshMaterialRenderer._colorScratch__transmissionVolumePbrWgpuMeshMaterialRenderer, _Runtime.field(transmission, 'attenuationColor')] : Array<Dynamic>));
-      _Runtime.setIndex(out, 44.0, _Runtime.field(transmission, 'transmission'));
-      _Runtime.setIndex(out, 45.0, _Runtime.getIndex(TransmissionVolumePbrWgpuMeshMaterialRenderer._colorScratch__transmissionVolumePbrWgpuMeshMaterialRenderer, 0.0));
-      _Runtime.setIndex(out, 46.0, _Runtime.getIndex(TransmissionVolumePbrWgpuMeshMaterialRenderer._colorScratch__transmissionVolumePbrWgpuMeshMaterialRenderer, 1.0));
-      _Runtime.setIndex(out, 47.0, _Runtime.getIndex(TransmissionVolumePbrWgpuMeshMaterialRenderer._colorScratch__transmissionVolumePbrWgpuMeshMaterialRenderer, 2.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 44.0, _Runtime.field(transmission, 'transmission'));
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 45.0, flighthq._internal._StaticIndex.readArray(TransmissionVolumePbrWgpuMeshMaterialRenderer._colorScratch__transmissionVolumePbrWgpuMeshMaterialRenderer, 0.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 46.0, flighthq._internal._StaticIndex.readArray(TransmissionVolumePbrWgpuMeshMaterialRenderer._colorScratch__transmissionVolumePbrWgpuMeshMaterialRenderer, 1.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 47.0, flighthq._internal._StaticIndex.readArray(TransmissionVolumePbrWgpuMeshMaterialRenderer._colorScratch__transmissionVolumePbrWgpuMeshMaterialRenderer, 2.0));
     } else {
-      _Runtime.setIndex(out, 44.0, 0.0);
-      _Runtime.setIndex(out, 45.0, 1.0);
-      _Runtime.setIndex(out, 46.0, 1.0);
-      _Runtime.setIndex(out, 47.0, 1.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 44.0, 0.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 45.0, 1.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 46.0, 1.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 47.0, 1.0);
     }
     _Runtime.callValue(writeWgpuPbrMaterialUniform, cast ([state, binding] : Array<Dynamic>));
     _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));

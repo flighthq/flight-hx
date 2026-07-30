@@ -55,24 +55,24 @@ class WgpuEffectBoxBlur {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     pipeline = _Runtime.callValue(WgpuEffectBoxBlur.getBoxBlurPipeline__wgpuEffectBoxBlur, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, source, dest, pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, (1.0 / _Runtime.field(source, 'width')));
-      _Runtime.setIndex(f32, 1.0, (1.0 / _Runtime.field(source, 'height')));
-      _Runtime.setIndex(f32, 2.0, dirX);
-      _Runtime.setIndex(f32, 3.0, dirY);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, (1.0 / _Runtime.field(source, 'width')));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, (1.0 / _Runtime.field(source, 'height')));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, dirX);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, dirY);
       if ((cast _Runtime.strictEquals(edgeColor, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        _Runtime.setIndex(f32, 4.0, 0.0);
-        _Runtime.setIndex(f32, 5.0, 0.0);
-        _Runtime.setIndex(f32, 6.0, 0.0);
-        _Runtime.setIndex(f32, 7.0, 0.0);
-        _Runtime.setIndex(f32, 9.0, 0.0);
+        flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, 0.0);
+        flighthq._internal._StaticIndex.writeFloat32Array(f32, 5.0, 0.0);
+        flighthq._internal._StaticIndex.writeFloat32Array(f32, 6.0, 0.0);
+        flighthq._internal._StaticIndex.writeFloat32Array(f32, 7.0, 0.0);
+        flighthq._internal._StaticIndex.writeFloat32Array(f32, 9.0, 0.0);
       } else {
-        _Runtime.setIndex(f32, 4.0, _Runtime.getIndex(edgeColor, 0.0));
-        _Runtime.setIndex(f32, 5.0, _Runtime.getIndex(edgeColor, 1.0));
-        _Runtime.setIndex(f32, 6.0, _Runtime.getIndex(edgeColor, 2.0));
-        _Runtime.setIndex(f32, 7.0, _Runtime.getIndex(edgeColor, 3.0));
-        _Runtime.setIndex(f32, 9.0, 1.0);
+        flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, flighthq._internal._StaticIndex.readArray(edgeColor, 0.0));
+        flighthq._internal._StaticIndex.writeFloat32Array(f32, 5.0, flighthq._internal._StaticIndex.readArray(edgeColor, 1.0));
+        flighthq._internal._StaticIndex.writeFloat32Array(f32, 6.0, flighthq._internal._StaticIndex.readArray(edgeColor, 2.0));
+        flighthq._internal._StaticIndex.writeFloat32Array(f32, 7.0, flighthq._internal._StaticIndex.readArray(edgeColor, 3.0));
+        flighthq._internal._StaticIndex.writeFloat32Array(f32, 9.0, 1.0);
       }
-      _Runtime.setIndex(f32, 8.0, radius);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 8.0, radius);
     }] : Array<Dynamic>));
   }
 

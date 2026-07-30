@@ -42,10 +42,10 @@ class SurfaceHistogram {
             var x:Dynamic = (_Runtime.field(source, 'x') + px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast surfaceWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var i:Dynamic = (((y * surfaceWidth) + x) * 4.0);
-            _Runtime.incrementIndex(red, _Runtime.getIndex(data, i), 1, true);
-            _Runtime.incrementIndex(green, _Runtime.getIndex(data, (i + 1.0)), 1, true);
-            _Runtime.incrementIndex(blue, _Runtime.getIndex(data, (i + 2.0)), 1, true);
-            _Runtime.incrementIndex(alpha, _Runtime.getIndex(data, (i + 3.0)), 1, true);
+            _Runtime.incrementIndex(red, flighthq._internal._StaticIndex.readUint8ClampedArray(data, i), 1, true);
+            _Runtime.incrementIndex(green, flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)), 1, true);
+            _Runtime.incrementIndex(blue, flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)), 1, true);
+            _Runtime.incrementIndex(alpha, flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0)), 1, true);
             px++;
           }
         }
@@ -66,9 +66,9 @@ class SurfaceHistogram {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast 256.0 : Float)) : Bool)) {
-        (cdf = cast ((cdf + _Runtime.getIndex(bins, i)) : Dynamic));
-        if ((cast ((cast ((cast _Runtime.getIndex(bins, i) : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals(cdfMin, -1.0) : Bool)) : Bool)) { (cdfMin = cast (cdf : Dynamic)); }
-        _Runtime.setIndex(map, i, ((cast _Runtime.strictEquals(total, cdfMin) : Bool) ? (cast i : Dynamic) : (cast HxMath.round((((cdf - cdfMin) / (total - cdfMin)) * 255.0)) : Dynamic)));
+        (cdf = cast ((cdf + flighthq._internal._StaticIndex.readArray(bins, i)) : Dynamic));
+        if ((cast ((cast ((cast flighthq._internal._StaticIndex.readArray(bins, i) : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals(cdfMin, -1.0) : Bool)) : Bool)) { (cdfMin = cast (cdf : Dynamic)); }
+        flighthq._internal._StaticIndex.writeArray(map, i, ((cast _Runtime.strictEquals(total, cdfMin) : Bool) ? (cast i : Dynamic) : (cast HxMath.round((((cdf - cdfMin) / (total - cdfMin)) * 255.0)) : Dynamic)));
         i++;
       }
     }

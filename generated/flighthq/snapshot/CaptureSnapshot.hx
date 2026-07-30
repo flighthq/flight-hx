@@ -23,7 +23,7 @@ class CaptureSnapshot {
       {
         var index:Dynamic = 0.0;
         while ((cast ((cast index : Float) < (cast _Runtime.field(value, 'length') : Float)) : Bool)) {
-          _Runtime.callValue(CaptureSnapshot.freezeSnapshotDeep__captureSnapshot, cast ([_Runtime.getIndex(value, index)] : Array<Dynamic>));
+          _Runtime.callValue(CaptureSnapshot.freezeSnapshotDeep__captureSnapshot, cast ([flighthq._internal._StaticIndex.readArray(value, index)] : Array<Dynamic>));
           (index = cast ((index + 1.0) : Dynamic));
         }
       }

@@ -196,8 +196,8 @@ class Screen {
         {
           var i:Dynamic = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(screens, 'length') : Float)) : Bool)) {
-            if ((cast _Runtime.strictEquals(_Runtime.getIndex(out, i), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(out, i, _Runtime.callValue(createScreenInfo, cast ([] : Array<Dynamic>))); }
-            _Runtime.callValue(buildScreenInfoFromDetailed, cast ([_Runtime.getIndex(screens, i), i, primaryIndex, _Runtime.getIndex(out, i)] : Array<Dynamic>));
+            if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(out, i), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeArray(out, i, _Runtime.callValue(createScreenInfo, cast ([] : Array<Dynamic>))); }
+            _Runtime.callValue(buildScreenInfoFromDetailed, cast ([flighthq._internal._StaticIndex.readArray(screens, i), i, primaryIndex, flighthq._internal._StaticIndex.readArray(out, i)] : Array<Dynamic>));
             i++;
           }
         }
@@ -205,9 +205,9 @@ class Screen {
         return cast out;
       }
       _Runtime.setLength(out, 1.0);
-      if ((cast _Runtime.strictEquals(_Runtime.getIndex(out, 0.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(out, 0.0, _Runtime.callValue(createScreenInfo, cast ([] : Array<Dynamic>))); }
-      _Runtime.callValue(buildCurrentScreenInfo, cast ([_Runtime.getIndex(out, 0.0)] : Array<Dynamic>));
-      (_cachedScreens = cast (cast ([_Runtime.mergeObjects([_Runtime.getIndex(out, 0.0)])] : Array<Dynamic>) : Dynamic));
+      if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(out, 0.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeArray(out, 0.0, _Runtime.callValue(createScreenInfo, cast ([] : Array<Dynamic>))); }
+      _Runtime.callValue(buildCurrentScreenInfo, cast ([flighthq._internal._StaticIndex.readArray(out, 0.0)] : Array<Dynamic>));
+      (_cachedScreens = cast (cast ([_Runtime.mergeObjects([flighthq._internal._StaticIndex.readArray(out, 0.0)])] : Array<Dynamic>) : Dynamic));
       return cast out;
     }, getPrimaryScreen: function(out:Dynamic) {
       if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(_Runtime.globalValue('window'), 'screen')), 'undefined') : Bool)) : Bool)) {
@@ -219,7 +219,7 @@ class Screen {
         var primaryIndex:Dynamic = _Runtime.findIndex(screens, function(s:Dynamic) return _Runtime.coalesce(_Runtime.field(s, 'isPrimary'), function():Dynamic return cast false));
         var idx:Dynamic = ((cast ((cast primaryIndex : Float) >= (cast 0.0 : Float)) : Bool) ? (cast primaryIndex : Dynamic) : (cast 0.0 : Dynamic));
         if ((cast ((cast _Runtime.field(screens, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-          _Runtime.callValue(buildScreenInfoFromDetailed, cast ([_Runtime.getIndex(screens, idx), idx, idx, out] : Array<Dynamic>));
+          _Runtime.callValue(buildScreenInfoFromDetailed, cast ([flighthq._internal._StaticIndex.readArray(screens, idx), idx, idx, out] : Array<Dynamic>));
           return cast out;
         }
       }
@@ -303,12 +303,12 @@ class Screen {
       return cast out;
     }, getModes: function(screen:Dynamic, out:Dynamic) {
       _Runtime.setLength(out, 1.0);
-      if ((cast _Runtime.strictEquals(_Runtime.getIndex(out, 0.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(out, 0.0, _Runtime.callValue(createScreenMode, cast ([] : Array<Dynamic>))); }
-      _Runtime.setField(_Runtime.getIndex(out, 0.0), 'width', _Runtime.field(screen, 'width'));
-      _Runtime.setField(_Runtime.getIndex(out, 0.0), 'height', _Runtime.field(screen, 'height'));
-      _Runtime.setField(_Runtime.getIndex(out, 0.0), 'refreshRate', _Runtime.field(screen, 'refreshRate'));
-      _Runtime.setField(_Runtime.getIndex(out, 0.0), 'colorDepth', _Runtime.field(screen, 'colorDepth'));
-      _Runtime.setField(_Runtime.getIndex(out, 0.0), 'pixelFormat', '');
+      if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(out, 0.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeArray(out, 0.0, _Runtime.callValue(createScreenMode, cast ([] : Array<Dynamic>))); }
+      _Runtime.setField(flighthq._internal._StaticIndex.readArray(out, 0.0), 'width', _Runtime.field(screen, 'width'));
+      _Runtime.setField(flighthq._internal._StaticIndex.readArray(out, 0.0), 'height', _Runtime.field(screen, 'height'));
+      _Runtime.setField(flighthq._internal._StaticIndex.readArray(out, 0.0), 'refreshRate', _Runtime.field(screen, 'refreshRate'));
+      _Runtime.setField(flighthq._internal._StaticIndex.readArray(out, 0.0), 'colorDepth', _Runtime.field(screen, 'colorDepth'));
+      _Runtime.setField(flighthq._internal._StaticIndex.readArray(out, 0.0), 'pixelFormat', '');
       return cast out;
     } };
     return cast backend;
@@ -449,7 +449,7 @@ class Screen {
       _Runtime.callValue(Screen.fillDefaultScreenInfo__screen, cast ([out] : Array<Dynamic>));
       return cast out;
     }
-    bestScreen = _Runtime.getIndex(screens, 0.0);
+    bestScreen = flighthq._internal._StaticIndex.readArray(screens, 0.0);
     bestOverlap = -1.0;
     for (screen in _Runtime.iterable(screens)) {
       var ox:Dynamic = HxMath.max(0.0, (HxMath.min((_Runtime.field(rect, 'x') + _Runtime.field(rect, 'width')), (_Runtime.field(screen, 'x') + _Runtime.field(screen, 'width'))) - HxMath.max(_Runtime.field(rect, 'x'), _Runtime.field(screen, 'x'))));
@@ -542,8 +542,8 @@ class Screen {
       return cast _Runtime.callProperty(backend, 'getModes', cast ([screen, out] : Array<Dynamic>));
     }
     _Runtime.setLength(out, 1.0);
-    if ((cast _Runtime.strictEquals(_Runtime.getIndex(out, 0.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(out, 0.0, _Runtime.callValue(createScreenMode, cast ([] : Array<Dynamic>))); }
-    _Runtime.callValue(getScreenCurrentMode, cast ([screen, _Runtime.getIndex(out, 0.0)] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(out, 0.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeArray(out, 0.0, _Runtime.callValue(createScreenMode, cast ([] : Array<Dynamic>))); }
+    _Runtime.callValue(getScreenCurrentMode, cast ([screen, flighthq._internal._StaticIndex.readArray(out, 0.0)] : Array<Dynamic>));
     return cast out;
     return cast null;
   }
@@ -564,7 +564,7 @@ class Screen {
         return cast out;
       }
     }
-    bestScreen = _Runtime.getIndex(screens, 0.0);
+    bestScreen = flighthq._internal._StaticIndex.readArray(screens, 0.0);
     bestDist = HxMath.POSITIVE_INFINITY;
     for (screen in _Runtime.iterable(screens)) {
       var cx:Dynamic = (_Runtime.field(screen, 'x') + (_Runtime.field(screen, 'width') / 2.0));
@@ -602,7 +602,7 @@ class Screen {
     }
     cx = (_Runtime.field(rect, 'x') + (_Runtime.field(rect, 'width') / 2.0));
     cy = (_Runtime.field(rect, 'y') + (_Runtime.field(rect, 'height') / 2.0));
-    bestScreen = _Runtime.getIndex(screens, 0.0);
+    bestScreen = flighthq._internal._StaticIndex.readArray(screens, 0.0);
     bestDist = HxMath.POSITIVE_INFINITY;
     for (screen in _Runtime.iterable(screens)) {
       var scx:Dynamic = (_Runtime.field(screen, 'x') + (_Runtime.field(screen, 'width') / 2.0));

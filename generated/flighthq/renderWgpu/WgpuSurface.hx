@@ -72,10 +72,10 @@ class WgpuSurface {
                   while ((cast ((cast x : Float) < (cast width : Float)) : Bool)) {
                     var s:Dynamic = (srcRow + (x * 4.0));
                     var d:Dynamic = (dstRow + (x * 4.0));
-                    _Runtime.setIndex(out, d, ((cast swizzleBGRA : Bool) ? (cast _Runtime.getIndex(mapped, (s + 2.0)) : Dynamic) : (cast _Runtime.getIndex(mapped, s) : Dynamic)));
-                    _Runtime.setIndex(out, (d + 1.0), _Runtime.getIndex(mapped, (s + 1.0)));
-                    _Runtime.setIndex(out, (d + 2.0), ((cast swizzleBGRA : Bool) ? (cast _Runtime.getIndex(mapped, s) : Dynamic) : (cast _Runtime.getIndex(mapped, (s + 2.0)) : Dynamic)));
-                    _Runtime.setIndex(out, (d + 3.0), _Runtime.getIndex(mapped, (s + 3.0)));
+                    flighthq._internal._StaticIndex.writeUint8ClampedArray(out, d, ((cast swizzleBGRA : Bool) ? (cast flighthq._internal._StaticIndex.readUint8Array(mapped, (s + 2.0)) : Dynamic) : (cast flighthq._internal._StaticIndex.readUint8Array(mapped, s) : Dynamic)));
+                    flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (d + 1.0), flighthq._internal._StaticIndex.readUint8Array(mapped, (s + 1.0)));
+                    flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (d + 2.0), ((cast swizzleBGRA : Bool) ? (cast flighthq._internal._StaticIndex.readUint8Array(mapped, s) : Dynamic) : (cast flighthq._internal._StaticIndex.readUint8Array(mapped, (s + 2.0)) : Dynamic)));
+                    flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (d + 3.0), flighthq._internal._StaticIndex.readUint8Array(mapped, (s + 3.0)));
                     x++;
                   }
                 }

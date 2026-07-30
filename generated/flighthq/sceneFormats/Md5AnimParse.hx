@@ -39,11 +39,11 @@ class Md5AnimParse {
     baseframe = cast ([] : Array<Dynamic>);
     frames = cast ([] : Array<Dynamic>);
     while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
-      var line:Dynamic = StringTools.trim(Std.string(_Runtime.getIndex(lines, i)));
+      var line:Dynamic = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
       i++;
       if ((cast ((cast _Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0) : Bool) || (cast StringTools.startsWith(line, '//') : Bool)) : Bool)) { continue; }
       if ((cast StringTools.startsWith(line, 'MD5Version') : Bool)) {
-        var version:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>));
+        var version:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>));
         if ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([version] : Array<Dynamic>)) : Bool) && (cast !_Runtime.strictEquals(version, 10.0) : Bool)) : Bool)) {
           _Runtime.callOptionalProperty(warnings, 'push', cast (['parseMd5Anim: unsupported MD5Version ' + Std.string(version) + ' (expected 10)'] : Array<Dynamic>));
         }
@@ -51,7 +51,7 @@ class Md5AnimParse {
       }
       if ((cast StringTools.startsWith(line, 'commandline') : Bool)) { continue; }
       if ((cast StringTools.startsWith(line, 'numFrames') : Bool)) {
-        (numFrames = cast (_Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>)) : Dynamic));
+        (numFrames = cast (_Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>)) : Dynamic));
         if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([numFrames] : Array<Dynamic>)) : Bool) : Bool)) {
           _Runtime.callOptionalProperty(warnings, 'push', cast (['parseMd5Anim: non-numeric numFrames'] : Array<Dynamic>));
           (numFrames = cast (0.0 : Dynamic));
@@ -59,7 +59,7 @@ class Md5AnimParse {
         continue;
       }
       if ((cast StringTools.startsWith(line, 'numJoints') : Bool)) {
-        (numJoints = cast (_Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>)) : Dynamic));
+        (numJoints = cast (_Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>)) : Dynamic));
         if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([numJoints] : Array<Dynamic>)) : Bool) : Bool)) {
           _Runtime.callOptionalProperty(warnings, 'push', cast (['parseMd5Anim: non-numeric numJoints'] : Array<Dynamic>));
           (numJoints = cast (0.0 : Dynamic));
@@ -67,7 +67,7 @@ class Md5AnimParse {
         continue;
       }
       if ((cast StringTools.startsWith(line, 'frameRate') : Bool)) {
-        (frameRate = cast (_Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>)) : Dynamic));
+        (frameRate = cast (_Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>)) : Dynamic));
         if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([frameRate] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast frameRate : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
           _Runtime.callOptionalProperty(warnings, 'push', cast (['parseMd5Anim: invalid frameRate, defaulting to 24'] : Array<Dynamic>));
           (frameRate = cast (24.0 : Dynamic));
@@ -136,15 +136,15 @@ class Md5AnimParse {
     {
       var j:Dynamic = 0.0;
       while ((cast ((cast j : Float) < (cast jointCount : Float)) : Bool)) {
-        var entry:Dynamic = _Runtime.getIndex(hierarchy, j);
-        var base:Dynamic = ((cast ((cast j : Float) < (cast _Runtime.field(baseframe, 'length') : Float)) : Bool) ? (cast _Runtime.getIndex(baseframe, j) : Dynamic) : (cast Md5AnimParse.DEFAULT_BASEFRAME__md5AnimParse : Dynamic));
+        var entry:Dynamic = flighthq._internal._StaticIndex.readArray(hierarchy, j);
+        var base:Dynamic = ((cast ((cast j : Float) < (cast _Runtime.field(baseframe, 'length') : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(baseframe, j) : Dynamic) : (cast Md5AnimParse.DEFAULT_BASEFRAME__md5AnimParse : Dynamic));
         var flags:Dynamic = _Runtime.field(entry, 'flags');
         var translationValues:Array<Float> = cast ([] : Array<Dynamic>);
         var rotationValues:Array<Float> = cast ([] : Array<Dynamic>);
         {
           var f:Dynamic = 0.0;
           while ((cast ((cast f : Float) < (cast frameCount : Float)) : Bool)) {
-            var frameData:Dynamic = _Runtime.getIndex(frames, f);
+            var frameData:Dynamic = flighthq._internal._StaticIndex.readArray(frames, f);
             var tx:Dynamic = _Runtime.field(base, 'positionX');
             var ty:Dynamic = _Runtime.field(base, 'positionY');
             var tz:Dynamic = _Runtime.field(base, 'positionZ');
@@ -153,22 +153,22 @@ class Md5AnimParse {
             var qz:Dynamic = _Runtime.field(base, 'orientationZ');
             var componentOffset:Dynamic = _Runtime.field(entry, 'startIndex');
             if (_Runtime.truthy((_Runtime.toInt32(flags) & _Runtime.toInt32(Md5AnimParse.FLAG_TX__md5AnimParse)))) {
-              (tx = cast (_Runtime.coalesce(_Runtime.getIndex(frameData, componentOffset++), function():Dynamic return cast tx) : Dynamic));
+              (tx = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(frameData, componentOffset++), function():Dynamic return cast tx) : Dynamic));
             }
             if (_Runtime.truthy((_Runtime.toInt32(flags) & _Runtime.toInt32(Md5AnimParse.FLAG_TY__md5AnimParse)))) {
-              (ty = cast (_Runtime.coalesce(_Runtime.getIndex(frameData, componentOffset++), function():Dynamic return cast ty) : Dynamic));
+              (ty = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(frameData, componentOffset++), function():Dynamic return cast ty) : Dynamic));
             }
             if (_Runtime.truthy((_Runtime.toInt32(flags) & _Runtime.toInt32(Md5AnimParse.FLAG_TZ__md5AnimParse)))) {
-              (tz = cast (_Runtime.coalesce(_Runtime.getIndex(frameData, componentOffset++), function():Dynamic return cast tz) : Dynamic));
+              (tz = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(frameData, componentOffset++), function():Dynamic return cast tz) : Dynamic));
             }
             if (_Runtime.truthy((_Runtime.toInt32(flags) & _Runtime.toInt32(Md5AnimParse.FLAG_QX__md5AnimParse)))) {
-              (qx = cast (_Runtime.coalesce(_Runtime.getIndex(frameData, componentOffset++), function():Dynamic return cast qx) : Dynamic));
+              (qx = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(frameData, componentOffset++), function():Dynamic return cast qx) : Dynamic));
             }
             if (_Runtime.truthy((_Runtime.toInt32(flags) & _Runtime.toInt32(Md5AnimParse.FLAG_QY__md5AnimParse)))) {
-              (qy = cast (_Runtime.coalesce(_Runtime.getIndex(frameData, componentOffset++), function():Dynamic return cast qy) : Dynamic));
+              (qy = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(frameData, componentOffset++), function():Dynamic return cast qy) : Dynamic));
             }
             if (_Runtime.truthy((_Runtime.toInt32(flags) & _Runtime.toInt32(Md5AnimParse.FLAG_QZ__md5AnimParse)))) {
-              (qz = cast (_Runtime.coalesce(_Runtime.getIndex(frameData, componentOffset++), function():Dynamic return cast qz) : Dynamic));
+              (qz = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(frameData, componentOffset++), function():Dynamic return cast qz) : Dynamic));
             }
             var sumSq:Dynamic = (((qx * qx) + (qy * qy)) + (qz * qz));
             var qw:Dynamic = ((cast ((cast sumSq : Float) < (cast 1.0 : Float)) : Bool) ? (cast -HxMath.sqrt((1.0 - sumSq)) : Dynamic) : (cast 0.0 : Dynamic));
@@ -179,7 +179,7 @@ class Md5AnimParse {
         }
         _Runtime.callValue(convertPositionsZUpToYUp, cast ([translationValues] : Array<Dynamic>));
         _Runtime.callValue(convertQuaternionsZUpToYUp, cast ([rotationValues] : Array<Dynamic>));
-        var node:Dynamic = _Runtime.coalesce(((cast nodeByName : flighthq._internal._Map).get(_Runtime.field(entry, 'name'))), function():Dynamic return cast _Runtime.getIndex(joints, j));
+        var node:Dynamic = _Runtime.coalesce(((cast nodeByName : flighthq._internal._Map).get(_Runtime.field(entry, 'name'))), function():Dynamic return cast flighthq._internal._StaticIndex.readArray(joints, j));
         var translationTrack:Dynamic = _Runtime.callValue(createAnimationTrack, cast ([{ components: 3.0, times: times, values: translationValues }] : Array<Dynamic>));
         _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([translationTrack, { node: node, path: SceneAnimationPathTranslation }] : Array<Dynamic>))] : Array<Dynamic>));
         var rotationTrack:Dynamic = _Runtime.callValue(createAnimationTrack, cast ([{ components: 4.0, quaternion: true, times: times, values: rotationValues }] : Array<Dynamic>));
@@ -195,7 +195,7 @@ class Md5AnimParse {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     i = startLine;
     while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
-      var line:Dynamic = StringTools.trim(Std.string(_Runtime.getIndex(lines, i)));
+      var line:Dynamic = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
       i++;
       if ((cast _Runtime.strictEquals(line, '}') : Bool)) { return cast i; }
       if ((cast ((cast _Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0) : Bool) || (cast StringTools.startsWith(line, '//') : Bool)) : Bool)) { continue; }
@@ -229,9 +229,9 @@ class Md5AnimParse {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['parseMd5Anim: malformed hierarchy entry on line ' + Std.string((lineIndex + 1.0)) + ': not enough components'] : Array<Dynamic>));
       return cast null;
     }
-    parentIndex = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(tokens, 0.0), 10.0] : Array<Dynamic>));
-    flags = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(tokens, 1.0), 10.0] : Array<Dynamic>));
-    startIndex = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(tokens, 2.0), 10.0] : Array<Dynamic>));
+    parentIndex = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 0.0), 10.0] : Array<Dynamic>));
+    flags = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 1.0), 10.0] : Array<Dynamic>));
+    startIndex = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 2.0), 10.0] : Array<Dynamic>));
     if ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parentIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([flags] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([startIndex] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['parseMd5Anim: malformed hierarchy entry on line ' + Std.string((lineIndex + 1.0)) + ': non-numeric values'] : Array<Dynamic>));
       return cast null;
@@ -244,7 +244,7 @@ class Md5AnimParse {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     i = startLine;
     while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
-      var line:Dynamic = StringTools.trim(Std.string(_Runtime.getIndex(lines, i)));
+      var line:Dynamic = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
       i++;
       if ((cast _Runtime.strictEquals(line, '}') : Bool)) { return cast i; }
       if ((cast ((cast _Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0) : Bool) || (cast StringTools.startsWith(line, '//') : Bool)) : Bool)) { continue; }
@@ -269,12 +269,12 @@ class Md5AnimParse {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['parseMd5Anim: malformed baseframe entry on line ' + Std.string((lineIndex + 1.0)) + ': not enough components'] : Array<Dynamic>));
       return cast null;
     }
-    positionX = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 0.0)] : Array<Dynamic>));
-    positionY = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 1.0)] : Array<Dynamic>));
-    positionZ = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 2.0)] : Array<Dynamic>));
-    orientationX = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 3.0)] : Array<Dynamic>));
-    orientationY = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 4.0)] : Array<Dynamic>));
-    orientationZ = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 5.0)] : Array<Dynamic>));
+    positionX = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 0.0)] : Array<Dynamic>));
+    positionY = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 1.0)] : Array<Dynamic>));
+    positionZ = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 2.0)] : Array<Dynamic>));
+    orientationX = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 3.0)] : Array<Dynamic>));
+    orientationY = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 4.0)] : Array<Dynamic>));
+    orientationZ = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 5.0)] : Array<Dynamic>));
     if ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionZ] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([orientationX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([orientationY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([orientationZ] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['parseMd5Anim: malformed baseframe entry on line ' + Std.string((lineIndex + 1.0)) + ': non-numeric values'] : Array<Dynamic>));
       return cast null;
@@ -287,7 +287,7 @@ class Md5AnimParse {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     i = startLine;
     while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
-      var line:Dynamic = StringTools.trim(Std.string(_Runtime.getIndex(lines, i)));
+      var line:Dynamic = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
       i++;
       if ((cast _Runtime.strictEquals(line, '}') : Bool)) { return cast i; }
       if ((cast ((cast _Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0) : Bool) || (cast StringTools.startsWith(line, '//') : Bool)) : Bool)) { continue; }
@@ -310,7 +310,7 @@ class Md5AnimParse {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     i = startLine;
     while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
-      if ((cast _Runtime.strictEquals(StringTools.trim(Std.string(_Runtime.getIndex(lines, i))), '}') : Bool)) { return cast (i + 1.0); }
+      if ((cast _Runtime.strictEquals(StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i))), '}') : Bool)) { return cast (i + 1.0); }
       i++;
     }
     return cast i;

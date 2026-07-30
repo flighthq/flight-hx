@@ -83,15 +83,15 @@ class WgpuClipContours {
     iw = (2.0 / _Runtime.field(viewport, 'width'));
     ih = (2.0 / _Runtime.field(viewport, 'height'));
     m = new flighthq._internal._Float32Array(12.0);
-    _Runtime.setIndex(m, 0.0, (_Runtime.field(t, 'a') * iw));
-    _Runtime.setIndex(m, 1.0, (-_Runtime.field(t, 'b') * ih));
-    _Runtime.setIndex(m, 2.0, 0.0);
-    _Runtime.setIndex(m, 4.0, (_Runtime.field(t, 'c') * iw));
-    _Runtime.setIndex(m, 5.0, (-_Runtime.field(t, 'd') * ih));
-    _Runtime.setIndex(m, 6.0, 0.0);
-    _Runtime.setIndex(m, 8.0, ((_Runtime.field(t, 'tx') * iw) - 1.0));
-    _Runtime.setIndex(m, 9.0, ((-_Runtime.field(t, 'ty') * ih) + 1.0));
-    _Runtime.setIndex(m, 10.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, (_Runtime.field(t, 'a') * iw));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, (-_Runtime.field(t, 'b') * ih));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 2.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 4.0, (_Runtime.field(t, 'c') * iw));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 5.0, (-_Runtime.field(t, 'd') * ih));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 6.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 8.0, ((_Runtime.field(t, 'tx') * iw) - 1.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 9.0, ((-_Runtime.field(t, 'ty') * ih) + 1.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 10.0, 1.0);
     buffer = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: WgpuClipContours.CLIP_UNIFORM_BYTES__wgpuClipContours, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([buffer, 0.0, m] : Array<Dynamic>));
     return cast buffer;
@@ -107,13 +107,13 @@ class WgpuClipContours {
     {
       var c:Dynamic = 0.0;
       while ((cast ((cast c : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
-        var contour:Dynamic = _Runtime.getIndex(contours, c);
+        var contour:Dynamic = flighthq._internal._StaticIndex.readArray(contours, c);
         var pointCount:Dynamic = (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> 1);
         if ((cast ((cast pointCount : Float) < (cast 3.0 : Float)) : Bool)) { c++; continue; }
         {
           var i:Dynamic = 1.0;
           while ((cast ((cast i : Float) < (cast (pointCount - 1.0) : Float)) : Bool)) {
-            _Runtime.pushMany(tris, cast ([_Runtime.getIndex(contour, 0.0), _Runtime.getIndex(contour, 1.0), _Runtime.getIndex(contour, (i * 2.0)), _Runtime.getIndex(contour, ((i * 2.0) + 1.0)), _Runtime.getIndex(contour, ((i + 1.0) * 2.0)), _Runtime.getIndex(contour, (((i + 1.0) * 2.0) + 1.0))] : Array<Dynamic>));
+            _Runtime.pushMany(tris, cast ([flighthq._internal._StaticIndex.readArray(contour, 0.0), flighthq._internal._StaticIndex.readArray(contour, 1.0), flighthq._internal._StaticIndex.readArray(contour, (i * 2.0)), flighthq._internal._StaticIndex.readArray(contour, ((i * 2.0) + 1.0)), flighthq._internal._StaticIndex.readArray(contour, ((i + 1.0) * 2.0)), flighthq._internal._StaticIndex.readArray(contour, (((i + 1.0) * 2.0) + 1.0))] : Array<Dynamic>));
             i++;
           }
         }

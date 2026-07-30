@@ -19,8 +19,8 @@ class WgpuWhiteBalanceEffect {
     tint = _Runtime.coalesce(_Runtime.field(effect, 'tint'), function():Dynamic return cast 0.0);
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'colorGrade.whiteBalance', WgpuWhiteBalanceEffect.WHITE_BALANCE_FRAGMENT_WGSL__wgpuWhiteBalanceEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, temperature);
-      _Runtime.setIndex(f32, 1.0, tint);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, temperature);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, tint);
     }] : Array<Dynamic>));
   }
 

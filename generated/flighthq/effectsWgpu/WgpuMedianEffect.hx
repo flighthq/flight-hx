@@ -21,9 +21,9 @@ class WgpuMedianEffect {
     radius = HxMath.min(MAX_MEDIAN_EFFECT_WGPU_RADIUS, HxMath.max(0.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 1.0))));
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'stylization.median', WgpuMedianEffect.MEDIAN_WGSL__wgpuMedianEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic, i32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, (1.0 / _Runtime.field(source, 'width')));
-      _Runtime.setIndex(f32, 1.0, (1.0 / _Runtime.field(source, 'height')));
-      _Runtime.setIndex(i32, 2.0, radius);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, (1.0 / _Runtime.field(source, 'width')));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, (1.0 / _Runtime.field(source, 'height')));
+      flighthq._internal._StaticIndex.writeInt32Array(i32, 2.0, radius);
     }] : Array<Dynamic>));
   }
 

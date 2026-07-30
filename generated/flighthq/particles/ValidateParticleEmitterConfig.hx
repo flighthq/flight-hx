@@ -70,7 +70,7 @@ class ValidateParticleEmitterConfig {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(curve, 'length') : Float)) : Bool)) {
-        if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.getIndex(curve, i)] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
+        if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([flighthq._internal._StaticIndex.readArray(curve, i)] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
         i++;
       }
     }
@@ -90,7 +90,7 @@ class ValidateParticleEmitterConfig {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(curve, 'length') : Float)) : Bool)) {
-        if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.getIndex(curve, i)] : Array<Dynamic>)) : Bool) : Bool)) {
+        if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([flighthq._internal._StaticIndex.readArray(curve, i)] : Array<Dynamic>)) : Bool) : Bool)) {
           _Runtime.callProperty(issues, 'push', cast ([{ field: field, message: '' + Std.string(field) + ' contains a non-finite sample at index ' + Std.string(i) + '', severity: 'error' }] : Array<Dynamic>));
           break;
         }

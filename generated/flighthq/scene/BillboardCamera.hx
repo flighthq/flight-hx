@@ -62,7 +62,7 @@ class BillboardCamera {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-          _Runtime.callValue(BillboardCamera.orientBillboardSubtree__billboardCamera, cast ([(cast _Runtime.getIndex(children, i) : SceneNode)] : Array<Dynamic>));
+          _Runtime.callValue(BillboardCamera.orientBillboardSubtree__billboardCamera, cast ([(cast flighthq._internal._StaticIndex.readArray(children, i) : SceneNode)] : Array<Dynamic>));
           i++;
         }
       }
@@ -76,18 +76,18 @@ class BillboardCamera {
     var bl:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(inverseMatrix4, cast ([BillboardCamera._cameraWorld__billboardCamera, camera.view] : Array<Dynamic>));
     m = BillboardCamera._cameraWorld__billboardCamera.m;
-    (BillboardCamera._cameraEyeX__billboardCamera = cast (_Runtime.getIndex(m, 12.0) : Dynamic));
-    (BillboardCamera._cameraEyeY__billboardCamera = cast (_Runtime.getIndex(m, 13.0) : Dynamic));
-    (BillboardCamera._cameraEyeZ__billboardCamera = cast (_Runtime.getIndex(m, 14.0) : Dynamic));
-    (BillboardCamera._cameraRightX__billboardCamera = cast (_Runtime.getIndex(m, 0.0) : Dynamic));
-    (BillboardCamera._cameraRightY__billboardCamera = cast (_Runtime.getIndex(m, 1.0) : Dynamic));
-    (BillboardCamera._cameraRightZ__billboardCamera = cast (_Runtime.getIndex(m, 2.0) : Dynamic));
-    (BillboardCamera._cameraUpX__billboardCamera = cast (_Runtime.getIndex(m, 4.0) : Dynamic));
-    (BillboardCamera._cameraUpY__billboardCamera = cast (_Runtime.getIndex(m, 5.0) : Dynamic));
-    (BillboardCamera._cameraUpZ__billboardCamera = cast (_Runtime.getIndex(m, 6.0) : Dynamic));
-    (BillboardCamera._cameraBackX__billboardCamera = cast (_Runtime.getIndex(m, 8.0) : Dynamic));
-    (BillboardCamera._cameraBackY__billboardCamera = cast (_Runtime.getIndex(m, 9.0) : Dynamic));
-    (BillboardCamera._cameraBackZ__billboardCamera = cast (_Runtime.getIndex(m, 10.0) : Dynamic));
+    (BillboardCamera._cameraEyeX__billboardCamera = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 12.0) : Dynamic));
+    (BillboardCamera._cameraEyeY__billboardCamera = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 13.0) : Dynamic));
+    (BillboardCamera._cameraEyeZ__billboardCamera = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 14.0) : Dynamic));
+    (BillboardCamera._cameraRightX__billboardCamera = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 0.0) : Dynamic));
+    (BillboardCamera._cameraRightY__billboardCamera = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 1.0) : Dynamic));
+    (BillboardCamera._cameraRightZ__billboardCamera = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 2.0) : Dynamic));
+    (BillboardCamera._cameraUpX__billboardCamera = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 4.0) : Dynamic));
+    (BillboardCamera._cameraUpY__billboardCamera = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 5.0) : Dynamic));
+    (BillboardCamera._cameraUpZ__billboardCamera = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 6.0) : Dynamic));
+    (BillboardCamera._cameraBackX__billboardCamera = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 8.0) : Dynamic));
+    (BillboardCamera._cameraBackY__billboardCamera = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 9.0) : Dynamic));
+    (BillboardCamera._cameraBackZ__billboardCamera = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 10.0) : Dynamic));
     rl = _Runtime.orValue(_Runtime.hypot(BillboardCamera._cameraRightX__billboardCamera, BillboardCamera._cameraRightY__billboardCamera, BillboardCamera._cameraRightZ__billboardCamera), function():Dynamic return cast 1.0);
     (BillboardCamera._cameraRightX__billboardCamera = cast ((BillboardCamera._cameraRightX__billboardCamera / rl) : Dynamic));
     (BillboardCamera._cameraRightY__billboardCamera = cast ((BillboardCamera._cameraRightY__billboardCamera / rl) : Dynamic));
@@ -197,22 +197,22 @@ class BillboardCamera {
       (uz = cast (((nx * ry) - (ny * rx)) : Dynamic));
     } }
     m = out.m;
-    _Runtime.setIndex(m, 0.0, (rx * sx));
-    _Runtime.setIndex(m, 1.0, (ry * sx));
-    _Runtime.setIndex(m, 2.0, (rz * sx));
-    _Runtime.setIndex(m, 3.0, 0.0);
-    _Runtime.setIndex(m, 4.0, (ux * sy));
-    _Runtime.setIndex(m, 5.0, (uy * sy));
-    _Runtime.setIndex(m, 6.0, (uz * sy));
-    _Runtime.setIndex(m, 7.0, 0.0);
-    _Runtime.setIndex(m, 8.0, (nx * sz));
-    _Runtime.setIndex(m, 9.0, (ny * sz));
-    _Runtime.setIndex(m, 10.0, (nz * sz));
-    _Runtime.setIndex(m, 11.0, 0.0);
-    _Runtime.setIndex(m, 12.0, px);
-    _Runtime.setIndex(m, 13.0, py);
-    _Runtime.setIndex(m, 14.0, pz);
-    _Runtime.setIndex(m, 15.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, (rx * sx));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, (ry * sx));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 2.0, (rz * sx));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 3.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 4.0, (ux * sy));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 5.0, (uy * sy));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 6.0, (uz * sy));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 7.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 8.0, (nx * sz));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 9.0, (ny * sz));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 10.0, (nz * sz));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 11.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 12.0, px);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 13.0, py);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 14.0, pz);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 15.0, 1.0);
   }
 
   public static final FACING_EPSILON__billboardCamera:Dynamic = 0.000001;

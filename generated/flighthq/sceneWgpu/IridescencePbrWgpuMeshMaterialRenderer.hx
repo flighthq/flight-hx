@@ -51,13 +51,13 @@ class IridescencePbrWgpuMeshMaterialRenderer {
     _Runtime.callValue(writeWgpuPbrStandardBlock, cast ([out, standard, ((cast !_Runtime.strictEquals(iridescence, null) : Bool) ? (cast _Runtime.field(iridescence, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic))] : Array<Dynamic>));
     _Runtime.fill(out, 0.0, 16.0, null, 2);
     if ((cast !_Runtime.strictEquals(iridescence, null) : Bool)) {
-      _Runtime.setIndex(out, 28.0, _Runtime.field(iridescence, 'iridescence'));
-      _Runtime.setIndex(out, 29.0, _Runtime.field(iridescence, 'iridescenceIor'));
-      _Runtime.setIndex(out, 30.0, ((_Runtime.field(iridescence, 'iridescenceThicknessMin') + _Runtime.field(iridescence, 'iridescenceThicknessMax')) * 0.5));
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 28.0, _Runtime.field(iridescence, 'iridescence'));
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 29.0, _Runtime.field(iridescence, 'iridescenceIor'));
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 30.0, ((_Runtime.field(iridescence, 'iridescenceThicknessMin') + _Runtime.field(iridescence, 'iridescenceThicknessMax')) * 0.5));
     } else {
-      _Runtime.setIndex(out, 28.0, 0.0);
-      _Runtime.setIndex(out, 29.0, 1.3);
-      _Runtime.setIndex(out, 30.0, 250.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 28.0, 0.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 29.0, 1.3);
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 30.0, 250.0);
     }
     _Runtime.callValue(writeWgpuPbrMaterialUniform, cast ([state, binding] : Array<Dynamic>));
     _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));

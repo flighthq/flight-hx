@@ -33,7 +33,7 @@ class CanvasSprite {
     if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(atlas, 'image'), null) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(atlas, 'image'), 'source'), null) : Bool)) : Bool)) { return; }
     regions = _Runtime.field(atlas, 'regions');
     if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast _Runtime.field(regions, 'length') : Float)) : Bool)) : Bool)) { return; }
-    region = _Runtime.getIndex(regions, id);
+    region = flighthq._internal._StaticIndex.readArray(regions, id);
     if ((cast ((cast ((cast _Runtime.field(region, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(region, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(spriteNode, 'blendMode')] : Array<Dynamic>));
     context = _Runtime.field(state, 'context');
@@ -58,9 +58,9 @@ class CanvasSprite {
     var stackLength:Dynamic = cast _Runtime.UNDEFINED;
     tempStack = _Runtime.field(_Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'tempStack');
     stackLength = 1.0;
-    _Runtime.setIndex(tempStack, 0.0, source);
+    flighthq._internal._StaticIndex.writeArray(tempStack, 0.0, source);
     while ((cast ((cast stackLength : Float) > (cast 0.0 : Float)) : Bool)) {
-      var current:Dynamic = (cast _Runtime.getIndex(tempStack, --stackLength) : DisplayObject);
+      var current:Dynamic = (cast flighthq._internal._StaticIndex.readArray(tempStack, --stackLength) : DisplayObject);
       if ((cast !(cast _Runtime.field(current, 'enabled') : Bool) : Bool)) { continue; }
       var data:Dynamic = _Runtime.callValue(getRenderProxy2D, cast ([state, current] : Array<Dynamic>));
       if ((cast ((cast _Runtime.strictEquals(data, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast _Runtime.callValue(isRenderProxyVisible, cast ([data] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { continue; }
@@ -71,7 +71,7 @@ class CanvasSprite {
           {
             var i:Dynamic = (_Runtime.field(children, 'length') - 1.0);
             while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-              _Runtime.setIndex(tempStack, stackLength++, (cast _Runtime.getIndex(children, i) : DisplayObject));
+              flighthq._internal._StaticIndex.writeArray(tempStack, stackLength++, (cast flighthq._internal._StaticIndex.readArray(children, i) : DisplayObject));
               i--;
             }
           }

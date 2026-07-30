@@ -13,26 +13,26 @@ class WgpuColorMatrixPass {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'adjustment.colorMatrix', WgpuColorMatrixPass.COLOR_MATRIX_FRAGMENT_WGSL__wgpuColorMatrixPass, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, _Runtime.coalesce(_Runtime.getIndex(matrix, 0.0), function():Dynamic return cast 0.0));
-      _Runtime.setIndex(f32, 1.0, _Runtime.coalesce(_Runtime.getIndex(matrix, 1.0), function():Dynamic return cast 0.0));
-      _Runtime.setIndex(f32, 2.0, _Runtime.coalesce(_Runtime.getIndex(matrix, 2.0), function():Dynamic return cast 0.0));
-      _Runtime.setIndex(f32, 3.0, _Runtime.coalesce(_Runtime.getIndex(matrix, 3.0), function():Dynamic return cast 0.0));
-      _Runtime.setIndex(f32, 4.0, _Runtime.coalesce(_Runtime.getIndex(matrix, 5.0), function():Dynamic return cast 0.0));
-      _Runtime.setIndex(f32, 5.0, _Runtime.coalesce(_Runtime.getIndex(matrix, 6.0), function():Dynamic return cast 0.0));
-      _Runtime.setIndex(f32, 6.0, _Runtime.coalesce(_Runtime.getIndex(matrix, 7.0), function():Dynamic return cast 0.0));
-      _Runtime.setIndex(f32, 7.0, _Runtime.coalesce(_Runtime.getIndex(matrix, 8.0), function():Dynamic return cast 0.0));
-      _Runtime.setIndex(f32, 8.0, _Runtime.coalesce(_Runtime.getIndex(matrix, 10.0), function():Dynamic return cast 0.0));
-      _Runtime.setIndex(f32, 9.0, _Runtime.coalesce(_Runtime.getIndex(matrix, 11.0), function():Dynamic return cast 0.0));
-      _Runtime.setIndex(f32, 10.0, _Runtime.coalesce(_Runtime.getIndex(matrix, 12.0), function():Dynamic return cast 0.0));
-      _Runtime.setIndex(f32, 11.0, _Runtime.coalesce(_Runtime.getIndex(matrix, 13.0), function():Dynamic return cast 0.0));
-      _Runtime.setIndex(f32, 12.0, _Runtime.coalesce(_Runtime.getIndex(matrix, 15.0), function():Dynamic return cast 0.0));
-      _Runtime.setIndex(f32, 13.0, _Runtime.coalesce(_Runtime.getIndex(matrix, 16.0), function():Dynamic return cast 0.0));
-      _Runtime.setIndex(f32, 14.0, _Runtime.coalesce(_Runtime.getIndex(matrix, 17.0), function():Dynamic return cast 0.0));
-      _Runtime.setIndex(f32, 15.0, _Runtime.coalesce(_Runtime.getIndex(matrix, 18.0), function():Dynamic return cast 0.0));
-      _Runtime.setIndex(f32, 16.0, _Runtime.coalesce(_Runtime.getIndex(matrix, 4.0), function():Dynamic return cast 0.0));
-      _Runtime.setIndex(f32, 17.0, _Runtime.coalesce(_Runtime.getIndex(matrix, 9.0), function():Dynamic return cast 0.0));
-      _Runtime.setIndex(f32, 18.0, _Runtime.coalesce(_Runtime.getIndex(matrix, 14.0), function():Dynamic return cast 0.0));
-      _Runtime.setIndex(f32, 19.0, _Runtime.coalesce(_Runtime.getIndex(matrix, 19.0), function():Dynamic return cast 0.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 0.0), function():Dynamic return cast 0.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 1.0), function():Dynamic return cast 0.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 2.0), function():Dynamic return cast 0.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 3.0), function():Dynamic return cast 0.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 5.0), function():Dynamic return cast 0.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 5.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 6.0), function():Dynamic return cast 0.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 6.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 7.0), function():Dynamic return cast 0.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 7.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 8.0), function():Dynamic return cast 0.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 8.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 10.0), function():Dynamic return cast 0.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 9.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 11.0), function():Dynamic return cast 0.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 10.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 12.0), function():Dynamic return cast 0.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 11.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 13.0), function():Dynamic return cast 0.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 12.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 15.0), function():Dynamic return cast 0.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 13.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 16.0), function():Dynamic return cast 0.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 14.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 17.0), function():Dynamic return cast 0.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 15.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 18.0), function():Dynamic return cast 0.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 16.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 4.0), function():Dynamic return cast 0.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 17.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 9.0), function():Dynamic return cast 0.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 18.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 14.0), function():Dynamic return cast 0.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 19.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 19.0), function():Dynamic return cast 0.0));
     }] : Array<Dynamic>));
   }
 

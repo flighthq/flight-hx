@@ -19,8 +19,8 @@ class WgpuChromaticAberrationEffect {
     radial = _Runtime.coalesce(_Runtime.field(effect, 'radial'), function():Dynamic return cast true);
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'lens.chromaticAberration', WgpuChromaticAberrationEffect.CHROMATIC_ABERRATION_FRAGMENT_WGSL__wgpuChromaticAberrationEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, intensity);
-      _Runtime.setIndex(f32, 1.0, ((cast radial : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, ((cast radial : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
     }] : Array<Dynamic>));
   }
 

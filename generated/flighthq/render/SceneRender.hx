@@ -91,7 +91,7 @@ class SceneRender {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast pointCount : Float)) : Bool)) {
-          _Runtime.callValue(SceneRender.packPointLight__sceneRender, cast ([SceneRender.scratchLightData__sceneRender, (SCENE_LIGHT_POINT_OFFSET + (i * SCENE_LIGHT_POINT_STRIDE)), _Runtime.getIndex(point, i)] : Array<Dynamic>));
+          _Runtime.callValue(SceneRender.packPointLight__sceneRender, cast ([SceneRender.scratchLightData__sceneRender, (SCENE_LIGHT_POINT_OFFSET + (i * SCENE_LIGHT_POINT_STRIDE)), flighthq._internal._StaticIndex.readArray(point, i)] : Array<Dynamic>));
           i++;
         }
       }
@@ -103,7 +103,7 @@ class SceneRender {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast spotCount : Float)) : Bool)) {
-          _Runtime.callValue(SceneRender.packSpotLight__sceneRender, cast ([SceneRender.scratchLightData__sceneRender, (SCENE_LIGHT_SPOT_OFFSET + (i * SCENE_LIGHT_SPOT_STRIDE)), _Runtime.getIndex(spot, i)] : Array<Dynamic>));
+          _Runtime.callValue(SceneRender.packSpotLight__sceneRender, cast ([SceneRender.scratchLightData__sceneRender, (SCENE_LIGHT_SPOT_OFFSET + (i * SCENE_LIGHT_SPOT_STRIDE)), flighthq._internal._StaticIndex.readArray(spot, i)] : Array<Dynamic>));
           i++;
         }
       }
@@ -115,7 +115,7 @@ class SceneRender {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast hemisphereCount : Float)) : Bool)) {
-          _Runtime.callValue(SceneRender.packHemisphereLight__sceneRender, cast ([SceneRender.scratchLightData__sceneRender, (SCENE_LIGHT_HEMISPHERE_OFFSET + (i * SCENE_LIGHT_HEMISPHERE_STRIDE)), _Runtime.getIndex(hemisphere, i)] : Array<Dynamic>));
+          _Runtime.callValue(SceneRender.packHemisphereLight__sceneRender, cast ([SceneRender.scratchLightData__sceneRender, (SCENE_LIGHT_HEMISPHERE_OFFSET + (i * SCENE_LIGHT_HEMISPHERE_STRIDE)), flighthq._internal._StaticIndex.readArray(hemisphere, i)] : Array<Dynamic>));
           i++;
         }
       }
@@ -146,7 +146,7 @@ class SceneRender {
     {
       var m:Dynamic = 0.0;
       while ((cast ((cast m : Float) < (cast _Runtime.field(_Runtime.field(prepared, 'meshes'), 'length') : Float)) : Bool)) {
-        var skin:Dynamic = _Runtime.field(_Runtime.getIndex(_Runtime.field(prepared, 'meshes'), m), 'skin');
+        var skin:Dynamic = _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(prepared, 'meshes'), m), 'skin');
         if ((cast !_Runtime.looseEquals(skin, null) : Bool)) { _Runtime.callValue(computeSkeleton3DJointMatrices, cast ([_Runtime.field(skin, 'skeleton')] : Array<Dynamic>)); }
         m++;
       }
@@ -170,7 +170,7 @@ class SceneRender {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-          _Runtime.callValue(SceneRender.collectVisibleMeshes__sceneRender, cast ([_Runtime.getIndex(children, i), frustum, worldBounds, out] : Array<Dynamic>));
+          _Runtime.callValue(SceneRender.collectVisibleMeshes__sceneRender, cast ([flighthq._internal._StaticIndex.readArray(children, i), frustum, worldBounds, out] : Array<Dynamic>));
           i++;
         }
       }
@@ -196,7 +196,7 @@ class SceneRender {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(a, 'length') : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, i), _Runtime.getIndex(b, i)) : Bool)) { return cast false; }
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloat32Array(a, i), flighthq._internal._StaticIndex.readFloat32Array(b, i)) : Bool)) { return cast false; }
         i++;
       }
     }
@@ -219,74 +219,74 @@ class SceneRender {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(unpackColorToLinear, cast ([SceneRender.scratchColor__sceneRender, _Runtime.field(ambient, 'color')] : Array<Dynamic>));
     intensity = _Runtime.field(ambient, 'intensity');
-    _Runtime.setIndex(data, (SCENE_LIGHT_AMBIENT_RADIANCE_OFFSET + 0.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 0.0) * intensity));
-    _Runtime.setIndex(data, (SCENE_LIGHT_AMBIENT_RADIANCE_OFFSET + 1.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 1.0) * intensity));
-    _Runtime.setIndex(data, (SCENE_LIGHT_AMBIENT_RADIANCE_OFFSET + 2.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 2.0) * intensity));
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (SCENE_LIGHT_AMBIENT_RADIANCE_OFFSET + 0.0), (flighthq._internal._StaticIndex.readArray(SceneRender.scratchColor__sceneRender, 0.0) * intensity));
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (SCENE_LIGHT_AMBIENT_RADIANCE_OFFSET + 1.0), (flighthq._internal._StaticIndex.readArray(SceneRender.scratchColor__sceneRender, 1.0) * intensity));
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (SCENE_LIGHT_AMBIENT_RADIANCE_OFFSET + 2.0), (flighthq._internal._StaticIndex.readArray(SceneRender.scratchColor__sceneRender, 2.0) * intensity));
   }
 
   public static function packDirectionalLight__sceneRender(data:flighthq._internal._Float32Array, directional:DirectionalLight):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.setIndex(data, (SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET + 0.0), _Runtime.field(directional, 'direction').x);
-    _Runtime.setIndex(data, (SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET + 1.0), _Runtime.field(directional, 'direction').y);
-    _Runtime.setIndex(data, (SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET + 2.0), _Runtime.field(directional, 'direction').z);
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET + 0.0), _Runtime.field(directional, 'direction').x);
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET + 1.0), _Runtime.field(directional, 'direction').y);
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET + 2.0), _Runtime.field(directional, 'direction').z);
     _Runtime.callValue(unpackColorToLinear, cast ([SceneRender.scratchColor__sceneRender, _Runtime.field(directional, 'color')] : Array<Dynamic>));
     intensity = _Runtime.field(directional, 'intensity');
-    _Runtime.setIndex(data, (SCENE_LIGHT_DIRECTIONAL_RADIANCE_OFFSET + 0.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 0.0) * intensity));
-    _Runtime.setIndex(data, (SCENE_LIGHT_DIRECTIONAL_RADIANCE_OFFSET + 1.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 1.0) * intensity));
-    _Runtime.setIndex(data, (SCENE_LIGHT_DIRECTIONAL_RADIANCE_OFFSET + 2.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 2.0) * intensity));
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (SCENE_LIGHT_DIRECTIONAL_RADIANCE_OFFSET + 0.0), (flighthq._internal._StaticIndex.readArray(SceneRender.scratchColor__sceneRender, 0.0) * intensity));
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (SCENE_LIGHT_DIRECTIONAL_RADIANCE_OFFSET + 1.0), (flighthq._internal._StaticIndex.readArray(SceneRender.scratchColor__sceneRender, 1.0) * intensity));
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (SCENE_LIGHT_DIRECTIONAL_RADIANCE_OFFSET + 2.0), (flighthq._internal._StaticIndex.readArray(SceneRender.scratchColor__sceneRender, 2.0) * intensity));
   }
 
   public static function packHemisphereLight__sceneRender(data:flighthq._internal._Float32Array, offset:Float, hemisphere:HemisphereLight):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     intensity = _Runtime.field(hemisphere, 'intensity');
     _Runtime.callValue(unpackColorToLinear, cast ([SceneRender.scratchColor__sceneRender, _Runtime.field(hemisphere, 'skyColor')] : Array<Dynamic>));
-    _Runtime.setIndex(data, (offset + 0.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 0.0) * intensity));
-    _Runtime.setIndex(data, (offset + 1.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 1.0) * intensity));
-    _Runtime.setIndex(data, (offset + 2.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 2.0) * intensity));
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 0.0), (flighthq._internal._StaticIndex.readArray(SceneRender.scratchColor__sceneRender, 0.0) * intensity));
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 1.0), (flighthq._internal._StaticIndex.readArray(SceneRender.scratchColor__sceneRender, 1.0) * intensity));
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 2.0), (flighthq._internal._StaticIndex.readArray(SceneRender.scratchColor__sceneRender, 2.0) * intensity));
     _Runtime.callValue(unpackColorToLinear, cast ([SceneRender.scratchColor__sceneRender, _Runtime.field(hemisphere, 'groundColor')] : Array<Dynamic>));
-    _Runtime.setIndex(data, (offset + 4.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 0.0) * intensity));
-    _Runtime.setIndex(data, (offset + 5.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 1.0) * intensity));
-    _Runtime.setIndex(data, (offset + 6.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 2.0) * intensity));
-    _Runtime.setIndex(data, (offset + 8.0), 0.0);
-    _Runtime.setIndex(data, (offset + 9.0), 1.0);
-    _Runtime.setIndex(data, (offset + 10.0), 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 4.0), (flighthq._internal._StaticIndex.readArray(SceneRender.scratchColor__sceneRender, 0.0) * intensity));
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 5.0), (flighthq._internal._StaticIndex.readArray(SceneRender.scratchColor__sceneRender, 1.0) * intensity));
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 6.0), (flighthq._internal._StaticIndex.readArray(SceneRender.scratchColor__sceneRender, 2.0) * intensity));
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 8.0), 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 9.0), 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 10.0), 0.0);
   }
 
   public static function packPointLight__sceneRender(data:flighthq._internal._Float32Array, offset:Float, point:PointLight):Void {
     var range:Dynamic = cast _Runtime.UNDEFINED;
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     range = _Runtime.field(point, 'range');
-    _Runtime.setIndex(data, (offset + 0.0), _Runtime.field(point, 'position').x);
-    _Runtime.setIndex(data, (offset + 1.0), _Runtime.field(point, 'position').y);
-    _Runtime.setIndex(data, (offset + 2.0), _Runtime.field(point, 'position').z);
-    _Runtime.setIndex(data, (offset + 3.0), range);
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 0.0), _Runtime.field(point, 'position').x);
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 1.0), _Runtime.field(point, 'position').y);
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 2.0), _Runtime.field(point, 'position').z);
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 3.0), range);
     _Runtime.callValue(unpackColorToLinear, cast ([SceneRender.scratchColor__sceneRender, _Runtime.field(point, 'color')] : Array<Dynamic>));
     intensity = _Runtime.field(point, 'intensity');
-    _Runtime.setIndex(data, (offset + 4.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 0.0) * intensity));
-    _Runtime.setIndex(data, (offset + 5.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 1.0) * intensity));
-    _Runtime.setIndex(data, (offset + 6.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 2.0) * intensity));
-    _Runtime.setIndex(data, (offset + 7.0), ((cast ((cast range : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / (range * range)) : Dynamic) : (cast 0.0 : Dynamic)));
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 4.0), (flighthq._internal._StaticIndex.readArray(SceneRender.scratchColor__sceneRender, 0.0) * intensity));
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 5.0), (flighthq._internal._StaticIndex.readArray(SceneRender.scratchColor__sceneRender, 1.0) * intensity));
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 6.0), (flighthq._internal._StaticIndex.readArray(SceneRender.scratchColor__sceneRender, 2.0) * intensity));
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 7.0), ((cast ((cast range : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / (range * range)) : Dynamic) : (cast 0.0 : Dynamic)));
   }
 
   public static function packSpotLight__sceneRender(data:flighthq._internal._Float32Array, offset:Float, spot:SpotLight):Void {
     var range:Dynamic = cast _Runtime.UNDEFINED;
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     range = _Runtime.field(spot, 'range');
-    _Runtime.setIndex(data, (offset + 0.0), _Runtime.field(spot, 'position').x);
-    _Runtime.setIndex(data, (offset + 1.0), _Runtime.field(spot, 'position').y);
-    _Runtime.setIndex(data, (offset + 2.0), _Runtime.field(spot, 'position').z);
-    _Runtime.setIndex(data, (offset + 3.0), range);
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 0.0), _Runtime.field(spot, 'position').x);
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 1.0), _Runtime.field(spot, 'position').y);
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 2.0), _Runtime.field(spot, 'position').z);
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 3.0), range);
     _Runtime.callValue(unpackColorToLinear, cast ([SceneRender.scratchColor__sceneRender, _Runtime.field(spot, 'color')] : Array<Dynamic>));
     intensity = _Runtime.field(spot, 'intensity');
-    _Runtime.setIndex(data, (offset + 4.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 0.0) * intensity));
-    _Runtime.setIndex(data, (offset + 5.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 1.0) * intensity));
-    _Runtime.setIndex(data, (offset + 6.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 2.0) * intensity));
-    _Runtime.setIndex(data, (offset + 7.0), ((cast ((cast range : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / (range * range)) : Dynamic) : (cast 0.0 : Dynamic)));
-    _Runtime.setIndex(data, (offset + 8.0), _Runtime.field(spot, 'direction').x);
-    _Runtime.setIndex(data, (offset + 9.0), _Runtime.field(spot, 'direction').y);
-    _Runtime.setIndex(data, (offset + 10.0), _Runtime.field(spot, 'direction').z);
-    _Runtime.setIndex(data, (offset + 12.0), _Runtime.field(spot, 'innerConeCos'));
-    _Runtime.setIndex(data, (offset + 13.0), _Runtime.field(spot, 'outerConeCos'));
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 4.0), (flighthq._internal._StaticIndex.readArray(SceneRender.scratchColor__sceneRender, 0.0) * intensity));
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 5.0), (flighthq._internal._StaticIndex.readArray(SceneRender.scratchColor__sceneRender, 1.0) * intensity));
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 6.0), (flighthq._internal._StaticIndex.readArray(SceneRender.scratchColor__sceneRender, 2.0) * intensity));
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 7.0), ((cast ((cast range : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / (range * range)) : Dynamic) : (cast 0.0 : Dynamic)));
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 8.0), _Runtime.field(spot, 'direction').x);
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 9.0), _Runtime.field(spot, 'direction').y);
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 10.0), _Runtime.field(spot, 'direction').z);
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 12.0), _Runtime.field(spot, 'innerConeCos'));
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 13.0), _Runtime.field(spot, 'outerConeCos'));
   }
 
   public static function setSceneViewProjectionMatrix4__sceneRender(out:Matrix4, camera:Camera, aspect:Float):Void {

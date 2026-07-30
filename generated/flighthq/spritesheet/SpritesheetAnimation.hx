@@ -26,8 +26,8 @@ class SpritesheetAnimation {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(frames, 'length') : Float)) : Bool)) {
-        var regionId:Dynamic = _Runtime.field(_Runtime.getIndex(frames, i), 'id');
-        var region:Dynamic = _Runtime.getIndex(_Runtime.field(atlas, 'regions'), regionId);
+        var regionId:Dynamic = _Runtime.field(flighthq._internal._StaticIndex.readArray(frames, i), 'id');
+        var region:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(atlas, 'regions'), regionId);
         if ((cast _Runtime.strictEquals(region, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
         var name:Dynamic = _Runtime.field(region, 'name');
         if ((cast _Runtime.strictEquals(name, null) : Bool)) { i++; continue; }

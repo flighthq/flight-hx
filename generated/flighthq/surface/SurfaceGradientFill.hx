@@ -41,10 +41,10 @@ class SurfaceGradientFill {
             var idx:Dynamic = _Runtime.callValue(SurfaceGradientFill.spreadIndex__surfaceGradientFill, cast ([t, spread] : Array<Dynamic>));
             var ri:Dynamic = (idx * 4.0);
             var i:Dynamic = (((y * surfaceWidth) + x) * 4.0);
-            _Runtime.setIndex(data, i, _Runtime.getIndex(ramp, ri));
-            _Runtime.setIndex(data, (i + 1.0), _Runtime.getIndex(ramp, (ri + 1.0)));
-            _Runtime.setIndex(data, (i + 2.0), _Runtime.getIndex(ramp, (ri + 2.0)));
-            _Runtime.setIndex(data, (i + 3.0), _Runtime.getIndex(ramp, (ri + 3.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(data, i, flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, ri));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, (ri + 1.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, (ri + 2.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 3.0), flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, (ri + 3.0)));
             px++;
           }
         }
@@ -89,10 +89,10 @@ class SurfaceGradientFill {
             var idx:Dynamic = _Runtime.callValue(SurfaceGradientFill.spreadIndex__surfaceGradientFill, cast ([t, spread] : Array<Dynamic>));
             var ri:Dynamic = (idx * 4.0);
             var i:Dynamic = (((y * surfaceWidth) + x) * 4.0);
-            _Runtime.setIndex(data, i, _Runtime.getIndex(ramp, ri));
-            _Runtime.setIndex(data, (i + 1.0), _Runtime.getIndex(ramp, (ri + 1.0)));
-            _Runtime.setIndex(data, (i + 2.0), _Runtime.getIndex(ramp, (ri + 2.0)));
-            _Runtime.setIndex(data, (i + 3.0), _Runtime.getIndex(ramp, (ri + 3.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(data, i, flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, ri));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, (ri + 1.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, (ri + 2.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 3.0), flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, (ri + 3.0)));
             px++;
           }
         }

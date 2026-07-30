@@ -15,7 +15,7 @@ class DisposeClock {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-        _Runtime.setField(_Runtime.getIndex(children, i), 'parent', null);
+        _Runtime.setField(flighthq._internal._StaticIndex.readArray(children, i), 'parent', null);
         i++;
       }
     }

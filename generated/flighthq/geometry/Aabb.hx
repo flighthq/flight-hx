@@ -174,7 +174,7 @@ class Aabb {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) {
-        var p:Dynamic = _Runtime.getIndex(points, i);
+        var p:Dynamic = flighthq._internal._StaticIndex.readArray(points, i);
         if ((cast ((cast p.x : Float) < (cast minX : Float)) : Bool)) { (minX = cast (p.x : Dynamic)); }
         if ((cast ((cast p.y : Float) < (cast minY : Float)) : Bool)) { (minY = cast (p.y : Dynamic)); }
         if ((cast ((cast p.z : Float) < (cast minZ : Float)) : Bool)) { (minZ = cast (p.z : Dynamic)); }
@@ -225,12 +225,12 @@ class Aabb {
     ey = ((maxY - minY) * 0.5);
     ez = ((maxZ - minZ) * 0.5);
     _m = m.m;
-    tcx = ((((_Runtime.getIndex(_m, 0.0) * cx) + (_Runtime.getIndex(_m, 4.0) * cy)) + (_Runtime.getIndex(_m, 8.0) * cz)) + _Runtime.getIndex(_m, 12.0));
-    tcy = ((((_Runtime.getIndex(_m, 1.0) * cx) + (_Runtime.getIndex(_m, 5.0) * cy)) + (_Runtime.getIndex(_m, 9.0) * cz)) + _Runtime.getIndex(_m, 13.0));
-    tcz = ((((_Runtime.getIndex(_m, 2.0) * cx) + (_Runtime.getIndex(_m, 6.0) * cy)) + (_Runtime.getIndex(_m, 10.0) * cz)) + _Runtime.getIndex(_m, 14.0));
-    tex = (((HxMath.abs(_Runtime.getIndex(_m, 0.0)) * ex) + (HxMath.abs(_Runtime.getIndex(_m, 4.0)) * ey)) + (HxMath.abs(_Runtime.getIndex(_m, 8.0)) * ez));
-    tey = (((HxMath.abs(_Runtime.getIndex(_m, 1.0)) * ex) + (HxMath.abs(_Runtime.getIndex(_m, 5.0)) * ey)) + (HxMath.abs(_Runtime.getIndex(_m, 9.0)) * ez));
-    tez = (((HxMath.abs(_Runtime.getIndex(_m, 2.0)) * ex) + (HxMath.abs(_Runtime.getIndex(_m, 6.0)) * ey)) + (HxMath.abs(_Runtime.getIndex(_m, 10.0)) * ez));
+    tcx = ((((flighthq._internal._StaticIndex.readFloat32Array(_m, 0.0) * cx) + (flighthq._internal._StaticIndex.readFloat32Array(_m, 4.0) * cy)) + (flighthq._internal._StaticIndex.readFloat32Array(_m, 8.0) * cz)) + flighthq._internal._StaticIndex.readFloat32Array(_m, 12.0));
+    tcy = ((((flighthq._internal._StaticIndex.readFloat32Array(_m, 1.0) * cx) + (flighthq._internal._StaticIndex.readFloat32Array(_m, 5.0) * cy)) + (flighthq._internal._StaticIndex.readFloat32Array(_m, 9.0) * cz)) + flighthq._internal._StaticIndex.readFloat32Array(_m, 13.0));
+    tcz = ((((flighthq._internal._StaticIndex.readFloat32Array(_m, 2.0) * cx) + (flighthq._internal._StaticIndex.readFloat32Array(_m, 6.0) * cy)) + (flighthq._internal._StaticIndex.readFloat32Array(_m, 10.0) * cz)) + flighthq._internal._StaticIndex.readFloat32Array(_m, 14.0));
+    tex = (((HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(_m, 0.0)) * ex) + (HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(_m, 4.0)) * ey)) + (HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(_m, 8.0)) * ez));
+    tey = (((HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(_m, 1.0)) * ex) + (HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(_m, 5.0)) * ey)) + (HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(_m, 9.0)) * ez));
+    tez = (((HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(_m, 2.0)) * ex) + (HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(_m, 6.0)) * ey)) + (HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(_m, 10.0)) * ez));
     (out.min.x = cast ((tcx - tex) : Dynamic));
     (out.min.y = cast ((tcy - tey) : Dynamic));
     (out.min.z = cast ((tcz - tez) : Dynamic));

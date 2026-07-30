@@ -95,7 +95,7 @@ class ParseKtx2 {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast 12.0 : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(_Runtime.getIndex(bytes, i), _Runtime.getIndex(ParseKtx2.ktx2Identifier__parseKtx2, i)) : Bool)) { return cast false; }
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, i), flighthq._internal._StaticIndex.readArray(ParseKtx2.ktx2Identifier__parseKtx2, i)) : Bool)) { return cast false; }
         (i = cast ((i + 1.0) : Dynamic));
       }
     }

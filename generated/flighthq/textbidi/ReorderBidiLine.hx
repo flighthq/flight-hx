@@ -17,8 +17,8 @@ class ReorderBidiLine {
     {
       var i:Dynamic = start;
       while ((cast ((cast i : Float) < (cast end : Float)) : Bool)) {
-        var level:Dynamic = _Runtime.getIndex(levels, i);
-        _Runtime.setIndex(out, (i - start), i);
+        var level:Dynamic = flighthq._internal._StaticIndex.readUint8Array(levels, i);
+        flighthq._internal._StaticIndex.writeArray(out, (i - start), i);
         if ((cast ((cast level : Float) > (cast highest : Float)) : Bool)) { (highest = cast (level : Dynamic)); }
         if ((cast ((cast _Runtime.strictEquals(_Runtime.fmod(level, 2.0), 1.0) : Bool) && (cast ((cast level : Float) < (cast lowestOdd : Float)) : Bool)) : Bool)) { (lowestOdd = cast (level : Dynamic)); }
         i++;
@@ -30,16 +30,16 @@ class ReorderBidiLine {
         {
           var k:Dynamic = 0.0;
           while ((cast ((cast k : Float) < (cast count : Float)) : Bool)) {
-            if ((cast ((cast _Runtime.getIndex(levels, _Runtime.getIndex(out, k)) : Float) >= (cast level : Float)) : Bool)) {
+            if ((cast ((cast flighthq._internal._StaticIndex.readUint8Array(levels, flighthq._internal._StaticIndex.readArray(out, k)) : Float) >= (cast level : Float)) : Bool)) {
               var j:Dynamic = k;
-              while ((cast ((cast ((cast j : Float) < (cast count : Float)) : Bool) && (cast ((cast _Runtime.getIndex(levels, _Runtime.getIndex(out, j)) : Float) >= (cast level : Float)) : Bool)) : Bool)) { j++; }
+              while ((cast ((cast ((cast j : Float) < (cast count : Float)) : Bool) && (cast ((cast flighthq._internal._StaticIndex.readUint8Array(levels, flighthq._internal._StaticIndex.readArray(out, j)) : Float) >= (cast level : Float)) : Bool)) : Bool)) { j++; }
               {
                 var lo:Dynamic = k;
                 var hi:Dynamic = (j - 1.0);
                 while ((cast ((cast lo : Float) < (cast hi : Float)) : Bool)) {
-                  var tmp:Dynamic = _Runtime.getIndex(out, lo);
-                  _Runtime.setIndex(out, lo, _Runtime.getIndex(out, hi));
-                  _Runtime.setIndex(out, hi, tmp);
+                  var tmp:Dynamic = flighthq._internal._StaticIndex.readArray(out, lo);
+                  flighthq._internal._StaticIndex.writeArray(out, lo, flighthq._internal._StaticIndex.readArray(out, hi));
+                  flighthq._internal._StaticIndex.writeArray(out, hi, tmp);
                   ({ lo++; hi--; });
                 }
               }

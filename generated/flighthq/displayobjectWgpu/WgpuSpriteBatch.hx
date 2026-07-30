@@ -239,10 +239,10 @@ class WgpuSpriteBatch {
     var slot:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     pool = _Runtime.field(runtime, 'spriteBatchBufferPool');
-    slot = _Runtime.getIndex(pool, _Runtime.field(runtime, 'spriteBatchBufferCursor'));
+    slot = flighthq._internal._StaticIndex.readArray(pool, _Runtime.field(runtime, 'spriteBatchBufferCursor'));
     if ((cast _Runtime.strictEquals(slot, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (slot = cast ({ instanceBuffer: null, instanceCapacity: 0.0, materialBuffer: null, materialCapacity: 0.0 } : Dynamic));
-      _Runtime.setIndex(pool, _Runtime.field(runtime, 'spriteBatchBufferCursor'), slot);
+      flighthq._internal._StaticIndex.writeArray(pool, _Runtime.field(runtime, 'spriteBatchBufferCursor'), slot);
     }
     _Runtime.incrementField(runtime, 'spriteBatchBufferCursor', 1, true);
     return cast slot;
@@ -282,18 +282,18 @@ class WgpuSpriteBatch {
     viewport = _Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));
     iw = (2.0 / _Runtime.field(viewport, 'width'));
     ih = (2.0 / _Runtime.field(viewport, 'height'));
-    _Runtime.setIndex(uniformData, (floatBase + 0.0), iw);
-    _Runtime.setIndex(uniformData, (floatBase + 1.0), 0.0);
-    _Runtime.setIndex(uniformData, (floatBase + 2.0), 0.0);
-    _Runtime.setIndex(uniformData, (floatBase + 3.0), 0.0);
-    _Runtime.setIndex(uniformData, (floatBase + 4.0), 0.0);
-    _Runtime.setIndex(uniformData, (floatBase + 5.0), -ih);
-    _Runtime.setIndex(uniformData, (floatBase + 6.0), 0.0);
-    _Runtime.setIndex(uniformData, (floatBase + 7.0), 0.0);
-    _Runtime.setIndex(uniformData, (floatBase + 8.0), -1.0);
-    _Runtime.setIndex(uniformData, (floatBase + 9.0), 1.0);
-    _Runtime.setIndex(uniformData, (floatBase + 10.0), 1.0);
-    _Runtime.setIndex(uniformData, (floatBase + 11.0), 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 0.0), iw);
+    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 1.0), 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 2.0), 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 3.0), 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 4.0), 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 5.0), -ih);
+    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 6.0), 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 7.0), 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 8.0), -1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 9.0), 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 10.0), 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 11.0), 0.0);
     _Runtime.setField(runtime, 'uniformOffset', (_Runtime.field(runtime, 'uniformOffset') + _Runtime.field(runtime, 'uniformStride')));
     return cast uniformOffset;
     return cast null;

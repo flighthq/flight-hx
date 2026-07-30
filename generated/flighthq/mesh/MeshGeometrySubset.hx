@@ -13,7 +13,7 @@ class MeshGeometrySubset {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(geometry, 'subsets'), 'length') : Float)) : Bool)) {
-        _Runtime.callProperty(next, 'push', cast ([{ indexCount: _Runtime.field(_Runtime.getIndex(_Runtime.field(geometry, 'subsets'), i), 'indexCount'), indexOffset: _Runtime.field(_Runtime.getIndex(_Runtime.field(geometry, 'subsets'), i), 'indexOffset') }] : Array<Dynamic>));
+        _Runtime.callProperty(next, 'push', cast ([{ indexCount: _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(geometry, 'subsets'), i), 'indexCount'), indexOffset: _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(geometry, 'subsets'), i), 'indexOffset') }] : Array<Dynamic>));
         i++;
       }
     }
@@ -24,7 +24,7 @@ class MeshGeometrySubset {
   public static function getMeshGeometrySubsetTriangleCount(geometry:MeshGeometry, subsetIndex:Float):Float {
     var indexCount:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast subsetIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast subsetIndex : Float) >= (cast _Runtime.field(_Runtime.field(geometry, 'subsets'), 'length') : Float)) : Bool)) : Bool)) { return cast 0.0; }
-    indexCount = _Runtime.field(_Runtime.getIndex(_Runtime.field(geometry, 'subsets'), subsetIndex), 'indexCount');
+    indexCount = _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(geometry, 'subsets'), subsetIndex), 'indexCount');
     if ((cast _Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-list') : Bool)) { return cast HxMath.floor((indexCount / 3.0)); }
     if ((cast _Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-strip') : Bool)) { return cast ((cast ((cast indexCount : Float) >= (cast 2.0 : Float)) : Bool) ? (cast (indexCount - 2.0) : Dynamic) : (cast 0.0 : Dynamic)); }
     return cast 0.0;
@@ -37,7 +37,7 @@ class MeshGeometrySubset {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(subsets, 'length') : Float)) : Bool)) {
-        _Runtime.callProperty(next, 'push', cast ([{ indexCount: _Runtime.field(_Runtime.getIndex(subsets, i), 'indexCount'), indexOffset: _Runtime.field(_Runtime.getIndex(subsets, i), 'indexOffset') }] : Array<Dynamic>));
+        _Runtime.callProperty(next, 'push', cast ([{ indexCount: _Runtime.field(flighthq._internal._StaticIndex.readArray(subsets, i), 'indexCount'), indexOffset: _Runtime.field(flighthq._internal._StaticIndex.readArray(subsets, i), 'indexOffset') }] : Array<Dynamic>));
         i++;
       }
     }

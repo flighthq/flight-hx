@@ -30,14 +30,14 @@ class SurfacePaletteMap {
             if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'width') : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Dynamic = (((sy * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sx) * 4.0);
             var di:Dynamic = (((dy * _Runtime.field(_Runtime.field(dest, 'surface'), 'width')) + dx) * 4.0);
-            var r:Dynamic = _Runtime.getIndex(sd, si);
-            var g:Dynamic = _Runtime.getIndex(sd, (si + 1.0));
-            var b:Dynamic = _Runtime.getIndex(sd, (si + 2.0));
-            var a:Dynamic = _Runtime.getIndex(sd, (si + 3.0));
-            _Runtime.setIndex(dd, di, _Runtime.select(redMap, function():Dynamic return cast _Runtime.getIndex(redMap, r), function():Dynamic return cast r));
-            _Runtime.setIndex(dd, (di + 1.0), _Runtime.select(greenMap, function():Dynamic return cast _Runtime.getIndex(greenMap, g), function():Dynamic return cast g));
-            _Runtime.setIndex(dd, (di + 2.0), _Runtime.select(blueMap, function():Dynamic return cast _Runtime.getIndex(blueMap, b), function():Dynamic return cast b));
-            _Runtime.setIndex(dd, (di + 3.0), _Runtime.select(alphaMap, function():Dynamic return cast _Runtime.getIndex(alphaMap, a), function():Dynamic return cast a));
+            var r:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, si);
+            var g:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 1.0));
+            var b:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 2.0));
+            var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 3.0));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, di, _Runtime.select(redMap, function():Dynamic return cast flighthq._internal._StaticIndex.readArray(redMap, r), function():Dynamic return cast r));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 1.0), _Runtime.select(greenMap, function():Dynamic return cast flighthq._internal._StaticIndex.readArray(greenMap, g), function():Dynamic return cast g));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 2.0), _Runtime.select(blueMap, function():Dynamic return cast flighthq._internal._StaticIndex.readArray(blueMap, b), function():Dynamic return cast b));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 3.0), _Runtime.select(alphaMap, function():Dynamic return cast flighthq._internal._StaticIndex.readArray(alphaMap, a), function():Dynamic return cast a));
             px++;
           }
         }

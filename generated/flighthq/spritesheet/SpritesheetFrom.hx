@@ -36,7 +36,7 @@ class SpritesheetFrom {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(data, 'frames'), 'length') : Float)) : Bool)) {
-        var name:Dynamic = _Runtime.field(_Runtime.getIndex(_Runtime.field(data, 'frames'), i), 'name');
+        var name:Dynamic = _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(data, 'frames'), i), 'name');
         if ((cast !_Runtime.strictEquals(name, '') : Bool)) {
           ((cast frameNameToIndex : flighthq._internal._Map).set(name, i));
         }

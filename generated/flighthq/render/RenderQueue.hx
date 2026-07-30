@@ -25,10 +25,10 @@ class RenderQueue {
     renderProxyMap = _Runtime.field(runtime, 'renderProxyMap');
     stack = RenderQueue._buildStack__renderQueue;
     stackLength = 1.0;
-    _Runtime.setIndex(stack, 0.0, source);
+    flighthq._internal._StaticIndex.writeArray(stack, 0.0, source);
     sceneOrder = 0.0;
     while ((cast ((cast stackLength : Float) > (cast 0.0 : Float)) : Bool)) {
-      var current:Dynamic = _Runtime.getIndex(stack, --stackLength);
+      var current:Dynamic = flighthq._internal._StaticIndex.readArray(stack, --stackLength);
       var proxy:Dynamic = ((cast renderProxyMap : flighthq._internal._WeakMap).get(current));
       if ((cast _Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
       if ((cast !(cast _Runtime.field(proxy, 'visible') : Bool) : Bool)) { continue; }
@@ -41,7 +41,7 @@ class RenderQueue {
         {
           var i:Dynamic = (_Runtime.field(children, 'length') - 1.0);
           while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-            _Runtime.setIndex(stack, stackLength++, _Runtime.getIndex(children, i));
+            flighthq._internal._StaticIndex.writeArray(stack, stackLength++, flighthq._internal._StaticIndex.readArray(children, i));
             i--;
           }
         }
@@ -78,7 +78,7 @@ class RenderQueue {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     entry = { proxy: proxy, sortKey: sortKey };
     if ((cast ((cast _Runtime.field(queue, 'entryCount') : Float) < (cast _Runtime.field(_Runtime.field(queue, 'entries'), 'length') : Float)) : Bool)) {
-      _Runtime.setIndex(_Runtime.field(queue, 'entries'), _Runtime.field(queue, 'entryCount'), entry);
+      flighthq._internal._StaticIndex.writeArray(_Runtime.field(queue, 'entries'), _Runtime.field(queue, 'entryCount'), entry);
     } else {
       _Runtime.callProperty(_Runtime.field(queue, 'entries'), 'push', cast ([entry] : Array<Dynamic>));
     }
@@ -92,7 +92,7 @@ class RenderQueue {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(slice, 'length') : Float)) : Bool)) {
-        _Runtime.setIndex(_Runtime.field(queue, 'entries'), i, _Runtime.getIndex(slice, i));
+        flighthq._internal._StaticIndex.writeArray(_Runtime.field(queue, 'entries'), i, flighthq._internal._StaticIndex.readArray(slice, i));
         i++;
       }
     }

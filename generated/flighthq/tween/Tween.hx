@@ -175,7 +175,7 @@ class Tween {
       {
         var i:Dynamic = (_Runtime.field(list, 'length') - 1.0);
         while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-          var existing:Dynamic = _Runtime.getIndex(list, i);
+          var existing:Dynamic = flighthq._internal._StaticIndex.readArray(list, i);
           var existingMap:Dynamic = (cast _Runtime.field(existing, 'propertyMap') : Dynamic);
           var overlaps:Dynamic = false;
           for (detail in _Runtime.iterable(_Runtime.field(tween, 'properties'))) {

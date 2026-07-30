@@ -47,7 +47,7 @@ class SheenPbrGlMeshMaterialRenderer {
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), ((cast !_Runtime.strictEquals(sheen, null) : Bool) ? (cast _Runtime.field(sheen, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic)));
     if ((cast !_Runtime.strictEquals(sheen, null) : Bool)) {
       _Runtime.callValue(unpackColorToLinear, cast ([SheenPbrGlMeshMaterialRenderer.scratchRgba__sheenPbrGlMeshMaterialRenderer, _Runtime.field(sheen, 'sheenColor')] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(program, 'locSheenColor'), _Runtime.getIndex(SheenPbrGlMeshMaterialRenderer.scratchRgba__sheenPbrGlMeshMaterialRenderer, 0.0), _Runtime.getIndex(SheenPbrGlMeshMaterialRenderer.scratchRgba__sheenPbrGlMeshMaterialRenderer, 1.0), _Runtime.getIndex(SheenPbrGlMeshMaterialRenderer.scratchRgba__sheenPbrGlMeshMaterialRenderer, 2.0));
+      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(program, 'locSheenColor'), flighthq._internal._StaticIndex.readArray(SheenPbrGlMeshMaterialRenderer.scratchRgba__sheenPbrGlMeshMaterialRenderer, 0.0), flighthq._internal._StaticIndex.readArray(SheenPbrGlMeshMaterialRenderer.scratchRgba__sheenPbrGlMeshMaterialRenderer, 1.0), flighthq._internal._StaticIndex.readArray(SheenPbrGlMeshMaterialRenderer.scratchRgba__sheenPbrGlMeshMaterialRenderer, 2.0));
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locSheenRoughness'), _Runtime.field(sheen, 'sheenRoughness'));
     } else {
       flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(program, 'locSheenColor'), 0.0, 0.0, 0.0);

@@ -19,8 +19,8 @@ class WgpuCameraMotionBlurEffect {
     samples = _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0);
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'motion.cameraMotionBlur', WgpuCameraMotionBlurEffect.CAMERA_MOTION_BLUR_FRAGMENT_WGSL__wgpuCameraMotionBlurEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, intensity);
-      _Runtime.setIndex(f32, 1.0, samples);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, samples);
     }] : Array<Dynamic>));
   }
 

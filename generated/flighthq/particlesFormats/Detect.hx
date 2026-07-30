@@ -25,7 +25,7 @@ class Detect {
     var obj:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(text), 'string') : Bool)) { return cast null; }
     trimmed = _Runtime.callProperty(text, 'trimStart', cast ([] : Array<Dynamic>));
-    firstLine = _Runtime.callOptionalProperty(_Runtime.getIndex(_Runtime.callProperty(trimmed, 'split', cast (['\n'] : Array<Dynamic>)), 0.0), 'trim', cast ([] : Array<Dynamic>));
+    firstLine = _Runtime.callOptionalProperty(flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(trimmed, 'split', cast (['\n'] : Array<Dynamic>)), 0.0), 'trim', cast ([] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(firstLine, 'Particle Effect') : Bool)) { return cast LibgdxParticleFormatKind; }
     if ((cast ((cast StringTools.startsWith(trimmed, '<') : Bool) || (cast StringTools.startsWith(trimmed, '<?xml') : Bool)) : Bool)) {
       if ((cast _Runtime.includes(trimmed, '<particleEmitterConfig') : Bool)) { return cast StarlingPexFormatKind; }

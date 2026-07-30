@@ -25,10 +25,10 @@ class WgpuScreenSpaceFogEffect {
     density = _Runtime.coalesce(_Runtime.field(effect, 'density'), function():Dynamic return cast 1.0);
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'atmospheric.screenSpaceFog', WgpuScreenSpaceFogEffect.SCREEN_SPACE_FOG_FRAGMENT_WGSL__wgpuScreenSpaceFogEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, density);
-      _Runtime.setIndex(f32, 4.0, r);
-      _Runtime.setIndex(f32, 5.0, g);
-      _Runtime.setIndex(f32, 6.0, b);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, density);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, r);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 5.0, g);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 6.0, b);
     }] : Array<Dynamic>));
   }
 

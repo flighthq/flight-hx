@@ -21,8 +21,8 @@ class WgpuToneMapEffect {
     white = _Runtime.coalesce(_Runtime.field(effect, 'white'), function():Dynamic return cast 1.0);
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'toneMap.' + Std.string(operator_) + '', _Runtime.callValue(WgpuToneMapEffect.buildToneMapFragment__wgpuToneMapEffect, cast ([operator_] : Array<Dynamic>)), 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, exposure);
-      _Runtime.setIndex(f32, 1.0, white);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, exposure);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, white);
     }] : Array<Dynamic>));
   }
 

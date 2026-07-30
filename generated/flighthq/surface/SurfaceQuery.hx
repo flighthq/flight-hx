@@ -33,7 +33,7 @@ class SurfaceQuery {
             var x:Dynamic = (_Runtime.field(source, 'x') + px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast surfaceWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var i:Dynamic = (((y * surfaceWidth) + x) * 4.0);
-            var pixel:Dynamic = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(data, i)) << 24)) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(data, (i + 1.0))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(data, (i + 2.0))) << 8)))) | _Runtime.toInt32(_Runtime.getIndex(data, (i + 3.0))))), 0)) & _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(mask), 0)));
+            var pixel:Dynamic = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(data, i)) << 24)) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0))) << 8)))) | _Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0))))), 0)) & _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(mask), 0)));
             var matches:Dynamic = _Runtime.strictEquals(pixel, maskedColor);
             if ((cast _Runtime.strictEquals(matches, findColor) : Bool)) {
               if ((cast ((cast x : Float) < (cast minX : Float)) : Bool)) { (minX = cast (x : Dynamic)); }

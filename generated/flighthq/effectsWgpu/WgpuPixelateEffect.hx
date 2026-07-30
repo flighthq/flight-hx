@@ -17,9 +17,9 @@ class WgpuPixelateEffect {
     size = _Runtime.coalesce(_Runtime.field(effect, 'size'), function():Dynamic return cast 8.0);
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'stylization.pixelate', WgpuPixelateEffect.PIXELATE_FRAGMENT_WGSL__wgpuPixelateEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, HxMath.max(1.0, size));
-      _Runtime.setIndex(f32, 2.0, _Runtime.field(source, 'width'));
-      _Runtime.setIndex(f32, 3.0, _Runtime.field(source, 'height'));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, HxMath.max(1.0, size));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, _Runtime.field(source, 'width'));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, _Runtime.field(source, 'height'));
     }] : Array<Dynamic>));
   }
 

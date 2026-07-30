@@ -44,13 +44,13 @@ class DashPath {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(dash, 'length') : Float)) : Bool)) {
-          if ((cast ((cast (acc + _Runtime.getIndex(dash, i)) : Float) > (cast offset : Float)) : Bool)) {
+          if ((cast ((cast (acc + flighthq._internal._StaticIndex.readArray(dash, i)) : Float) > (cast offset : Float)) : Bool)) {
             (dashIndex = cast (i : Dynamic));
-            (remaining = cast ((_Runtime.getIndex(dash, i) - (offset - acc)) : Dynamic));
+            (remaining = cast ((flighthq._internal._StaticIndex.readArray(dash, i) - (offset - acc)) : Dynamic));
             (isOn = cast (_Runtime.strictEquals(_Runtime.fmod(i, 2.0), 0.0) : Dynamic));
             break;
           }
-          (acc = cast ((acc + _Runtime.getIndex(dash, i)) : Dynamic));
+          (acc = cast ((acc + flighthq._internal._StaticIndex.readArray(dash, i)) : Dynamic));
           i++;
         }
       }
@@ -59,10 +59,10 @@ class DashPath {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast (n - 1.0) : Float)) : Bool)) {
-        var x0:Dynamic = _Runtime.getIndex(pts, (i * 2.0));
-        var y0:Dynamic = _Runtime.getIndex(pts, ((i * 2.0) + 1.0));
-        var x1:Dynamic = _Runtime.getIndex(pts, ((i + 1.0) * 2.0));
-        var y1:Dynamic = _Runtime.getIndex(pts, (((i + 1.0) * 2.0) + 1.0));
+        var x0:Dynamic = flighthq._internal._StaticIndex.readArray(pts, (i * 2.0));
+        var y0:Dynamic = flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0));
+        var x1:Dynamic = flighthq._internal._StaticIndex.readArray(pts, ((i + 1.0) * 2.0));
+        var y1:Dynamic = flighthq._internal._StaticIndex.readArray(pts, (((i + 1.0) * 2.0) + 1.0));
         var dx:Dynamic = (x1 - x0);
         var dy:Dynamic = (y1 - y0);
         var segLen:Dynamic = HxMath.sqrt(((dx * dx) + (dy * dy)));
@@ -91,7 +91,7 @@ class DashPath {
           (remaining = cast ((remaining - step) : Dynamic));
           if ((cast ((cast remaining : Float) <= (cast 1e-10 : Float)) : Bool)) {
             (dashIndex = cast (_Runtime.fmod((dashIndex + 1.0), _Runtime.field(dash, 'length')) : Dynamic));
-            (remaining = cast (_Runtime.getIndex(dash, dashIndex) : Dynamic));
+            (remaining = cast (flighthq._internal._StaticIndex.readArray(dash, dashIndex) : Dynamic));
             var wasOn:Dynamic = isOn;
             (isOn = cast (_Runtime.strictEquals(_Runtime.fmod(dashIndex, 2.0), 0.0) : Dynamic));
             if ((cast ((cast wasOn : Bool) && (cast !(cast isOn : Bool) : Bool)) : Bool)) {
@@ -113,14 +113,14 @@ class DashPath {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(source, 'commands'), 'length') : Float)) : Bool)) {
-        _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([_Runtime.getIndex(_Runtime.field(source, 'commands'), i)] : Array<Dynamic>));
+        _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(source, 'commands'), i)] : Array<Dynamic>));
         i++;
       }
     }
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(source, 'data'), 'length') : Float)) : Bool)) {
-        _Runtime.callProperty(_Runtime.field(out, 'data'), 'push', cast ([_Runtime.getIndex(_Runtime.field(source, 'data'), i)] : Array<Dynamic>));
+        _Runtime.callProperty(_Runtime.field(out, 'data'), 'push', cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(source, 'data'), i)] : Array<Dynamic>));
         i++;
       }
     }
@@ -132,7 +132,7 @@ class DashPath {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(dash, 'length') : Float)) : Bool)) {
-        (total = cast ((total + _Runtime.getIndex(dash, i)) : Dynamic));
+        (total = cast ((total + flighthq._internal._StaticIndex.readArray(dash, i)) : Dynamic));
         i++;
       }
     }

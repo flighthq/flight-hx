@@ -10,7 +10,7 @@ import flighthq.types.Vector3.Vector3Like;
 class RandomDistributions {
   public static function pick<T>(random:RandomSource, items:Array<Dynamic>):Null<Dynamic> {
     if ((cast _Runtime.strictEquals(_Runtime.field(items, 'length'), 0.0) : Bool)) { return cast _Runtime.field(_Runtime, 'UNDEFINED'); }
-    return cast _Runtime.getIndex(items, HxMath.floor((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * _Runtime.field(items, 'length'))));
+    return cast flighthq._internal._StaticIndex.readArray(items, HxMath.floor((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * _Runtime.field(items, 'length'))));
     return cast null;
   }
 
@@ -131,7 +131,7 @@ class RandomDistributions {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(weights, 'length') : Float)) : Bool)) {
-        (total = cast ((total + _Runtime.getIndex(weights, i)) : Dynamic));
+        (total = cast ((total + flighthq._internal._StaticIndex.readArray(weights, i)) : Dynamic));
         i++;
       }
     }
@@ -140,7 +140,7 @@ class RandomDistributions {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(weights, 'length') : Float)) : Bool)) {
-        (r = cast ((r - _Runtime.getIndex(weights, i)) : Dynamic));
+        (r = cast ((r - flighthq._internal._StaticIndex.readArray(weights, i)) : Dynamic));
         if ((cast ((cast r : Float) <= (cast 0.0 : Float)) : Bool)) { return cast i; }
         i++;
       }
@@ -162,9 +162,9 @@ class RandomDistributions {
       var i:Dynamic = (_Runtime.field(items, 'length') - 1.0);
       while ((cast ((cast i : Float) > (cast 0.0 : Float)) : Bool)) {
         var j:Dynamic = HxMath.floor((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * (i + 1.0)));
-        var tmp:Dynamic = _Runtime.getIndex(items, i);
-        _Runtime.setIndex(items, i, _Runtime.getIndex(items, j));
-        _Runtime.setIndex(items, j, tmp);
+        var tmp:Dynamic = flighthq._internal._StaticIndex.readArray(items, i);
+        flighthq._internal._StaticIndex.writeArray(items, i, flighthq._internal._StaticIndex.readArray(items, j));
+        flighthq._internal._StaticIndex.writeArray(items, j, tmp);
         i--;
       }
     }

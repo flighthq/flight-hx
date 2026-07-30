@@ -58,10 +58,10 @@ class SurfaceDisplacement {
                 var rx:Dynamic = _Runtime.callValue(SurfaceDisplacement.resolveDisplacementEdge__surfaceDisplacement, cast ([rawSampleX, w, edgeMode] : Array<Dynamic>));
                 var ry:Dynamic = _Runtime.callValue(SurfaceDisplacement.resolveDisplacementEdge__surfaceDisplacement, cast ([rawSampleY, h, edgeMode] : Array<Dynamic>));
                 if ((cast ((cast _Runtime.strictEquals(rx, null) : Bool) || (cast _Runtime.strictEquals(ry, null) : Bool)) : Bool)) {
-                  _Runtime.setIndex(out, di, 0.0);
-                  _Runtime.setIndex(out, (di + 1.0), 0.0);
-                  _Runtime.setIndex(out, (di + 2.0), 0.0);
-                  _Runtime.setIndex(out, (di + 3.0), 0.0);
+                  flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, 0.0);
+                  flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), 0.0);
+                  flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), 0.0);
+                  flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), 0.0);
                   px++;
                   continue;
                 }
@@ -77,10 +77,10 @@ class SurfaceDisplacement {
                 (sampleX = cast (px : Dynamic));
                 (sampleY = cast (py : Dynamic));
               } else {
-                _Runtime.setIndex(out, di, fillR);
-                _Runtime.setIndex(out, (di + 1.0), fillG);
-                _Runtime.setIndex(out, (di + 2.0), fillB);
-                _Runtime.setIndex(out, (di + 3.0), fillA);
+                flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, fillR);
+                flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), fillG);
+                flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), fillB);
+                flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), fillA);
                 px++;
                 continue;
               } } } }
@@ -96,10 +96,10 @@ class SurfaceDisplacement {
             var y0c:Dynamic = (_Runtime.field(source, 'y') + HxMath.max(0.0, HxMath.min((h - 1.0), y0)));
             var y1c:Dynamic = (_Runtime.field(source, 'y') + HxMath.max(0.0, HxMath.min((h - 1.0), (y0 + 1.0))));
             if ((cast ((cast ((cast ((cast x0c : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x0c : Float) >= (cast (_Runtime.field(sData, 'length') / 4.0) : Float)) : Bool)) : Bool) || (cast ((cast y0c : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
-              _Runtime.setIndex(out, di, 0.0);
-              _Runtime.setIndex(out, (di + 1.0), 0.0);
-              _Runtime.setIndex(out, (di + 2.0), 0.0);
-              _Runtime.setIndex(out, (di + 3.0), 0.0);
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, 0.0);
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), 0.0);
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), 0.0);
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), 0.0);
               px++;
               continue;
             }
@@ -110,9 +110,9 @@ class SurfaceDisplacement {
             {
               var c:Dynamic = 0.0;
               while ((cast ((cast c : Float) < (cast 4.0 : Float)) : Bool)) {
-                var top:Dynamic = ((_Runtime.getIndex(sData, (i00 + c)) * (1.0 - tx)) + (_Runtime.getIndex(sData, (i10 + c)) * tx));
-                var bottom:Dynamic = ((_Runtime.getIndex(sData, (i01 + c)) * (1.0 - tx)) + (_Runtime.getIndex(sData, (i11 + c)) * tx));
-                _Runtime.setIndex(out, (di + c), HxMath.round(((top * (1.0 - ty)) + (bottom * ty))));
+                var top:Dynamic = ((flighthq._internal._StaticIndex.readUint8ClampedArray(sData, (i00 + c)) * (1.0 - tx)) + (flighthq._internal._StaticIndex.readUint8ClampedArray(sData, (i10 + c)) * tx));
+                var bottom:Dynamic = ((flighthq._internal._StaticIndex.readUint8ClampedArray(sData, (i01 + c)) * (1.0 - tx)) + (flighthq._internal._StaticIndex.readUint8ClampedArray(sData, (i11 + c)) * tx));
+                flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + c), HxMath.round(((top * (1.0 - ty)) + (bottom * ty))));
                 c++;
               }
             }
@@ -154,7 +154,7 @@ class SurfaceDisplacement {
     mx = (_Runtime.field(map, 'x') + px);
     my = (_Runtime.field(map, 'y') + py);
     if ((cast ((cast ((cast ((cast ((cast mx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast mx : Float) >= (cast _Runtime.field(_Runtime.field(map, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast my : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast my : Float) >= (cast _Runtime.field(_Runtime.field(map, 'surface'), 'height') : Float)) : Bool)) : Bool)) { return cast 128.0; }
-    return cast _Runtime.getIndex(_Runtime.field(_Runtime.field(map, 'surface'), 'data'), ((((my * _Runtime.field(_Runtime.field(map, 'surface'), 'width')) + mx) * 4.0) + component));
+    return cast flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(_Runtime.field(map, 'surface'), 'data'), ((((my * _Runtime.field(_Runtime.field(map, 'surface'), 'width')) + mx) * 4.0) + component));
     return cast null;
   }
 }

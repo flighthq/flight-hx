@@ -54,11 +54,11 @@ class RegisterWebImageDecoders {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
-        var alpha:Dynamic = _Runtime.getIndex(data, (i + 3.0));
+        var alpha:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0));
         if ((cast _Runtime.strictEquals(alpha, 255.0) : Bool)) { (i = cast ((i + 4.0) : Dynamic)); continue; }
-        _Runtime.setIndex(data, i, ((_Runtime.getIndex(data, i) * alpha) / 255.0));
-        _Runtime.setIndex(data, (i + 1.0), ((_Runtime.getIndex(data, (i + 1.0)) * alpha) / 255.0));
-        _Runtime.setIndex(data, (i + 2.0), ((_Runtime.getIndex(data, (i + 2.0)) * alpha) / 255.0));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(data, i, ((flighthq._internal._StaticIndex.readUint8ClampedArray(data, i) * alpha) / 255.0));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 1.0), ((flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)) * alpha) / 255.0));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 2.0), ((flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)) * alpha) / 255.0));
         (i = cast ((i + 4.0) : Dynamic));
       }
     }

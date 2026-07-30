@@ -122,7 +122,7 @@ class MeshGeometryBuilders {
         {
           var i:Dynamic = 0.0;
           while ((cast ((cast i : Float) <= (cast rSeg : Float)) : Bool)) {
-            _Runtime.setIndex(uvs, ((((j * ringVertexCount) + i) * 2.0) + 1.0), v);
+            flighthq._internal._StaticIndex.writeArray(uvs, ((((j * ringVertexCount) + i) * 2.0) + 1.0), v);
             i++;
           }
         }
@@ -290,11 +290,11 @@ class MeshGeometryBuilders {
       key = ((cast ((cast a : Float) < (cast b : Float)) : Bool) ? (cast '' + Std.string(a) + '_' + Std.string(b) + '' : Dynamic) : (cast '' + Std.string(b) + '_' + Std.string(a) + '' : Dynamic));
       cached = ((cast midpointCache : flighthq._internal._Map).get(key));
       if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
-      va = _Runtime.getIndex(verts, a);
-      vb = _Runtime.getIndex(verts, b);
-      mx = ((_Runtime.getIndex(va, 0.0) + _Runtime.getIndex(vb, 0.0)) * 0.5);
-      my = ((_Runtime.getIndex(va, 1.0) + _Runtime.getIndex(vb, 1.0)) * 0.5);
-      mz = ((_Runtime.getIndex(va, 2.0) + _Runtime.getIndex(vb, 2.0)) * 0.5);
+      va = flighthq._internal._StaticIndex.readArray(verts, a);
+      vb = flighthq._internal._StaticIndex.readArray(verts, b);
+      mx = ((flighthq._internal._StaticIndex.readArray(va, 0.0) + flighthq._internal._StaticIndex.readArray(vb, 0.0)) * 0.5);
+      my = ((flighthq._internal._StaticIndex.readArray(va, 1.0) + flighthq._internal._StaticIndex.readArray(vb, 1.0)) * 0.5);
+      mz = ((flighthq._internal._StaticIndex.readArray(va, 2.0) + flighthq._internal._StaticIndex.readArray(vb, 2.0)) * 0.5);
       len = HxMath.sqrt((((mx * mx) + (my * my)) + (mz * mz)));
       (mx = cast ((mx / len) : Dynamic));
       (my = cast ((my / len) : Dynamic));
@@ -331,10 +331,10 @@ class MeshGeometryBuilders {
       var b:Dynamic = _Runtime.getIndex(__iteration2, 1.0);
       var c:Dynamic = _Runtime.getIndex(__iteration2, 2.0);
       for (vi in _Runtime.iterable(cast ([a, b, c] : Array<Dynamic>))) {
-        var v:Dynamic = _Runtime.getIndex(verts, vi);
-        var nx:Dynamic = _Runtime.getIndex(v, 0.0);
-        var ny:Dynamic = _Runtime.getIndex(v, 1.0);
-        var nz:Dynamic = _Runtime.getIndex(v, 2.0);
+        var v:Dynamic = flighthq._internal._StaticIndex.readArray(verts, vi);
+        var nx:Dynamic = flighthq._internal._StaticIndex.readArray(v, 0.0);
+        var ny:Dynamic = flighthq._internal._StaticIndex.readArray(v, 1.0);
+        var nz:Dynamic = flighthq._internal._StaticIndex.readArray(v, 2.0);
         _Runtime.pushMany(positions, cast ([(radius * nx), (radius * ny), (radius * nz)] : Array<Dynamic>));
         _Runtime.pushMany(normals, cast ([nx, ny, nz] : Array<Dynamic>));
         var u:Dynamic = (0.5 + (HxMath.atan2(nz, nx) / (HxMath.PI * 2.0)));
@@ -437,7 +437,7 @@ class MeshGeometryBuilders {
       len = HxMath.sqrt((((x * x) + (y * y)) + (z * z)));
       return cast cast ([(x / len), (y / len), (z / len)] : Array<Dynamic>);
     }] : Array<Dynamic>));
-    faces = _Runtime.callProperty(faceIndices, 'map', cast ([function(f:Dynamic) return cast ([_Runtime.getIndex(f, 0.0), _Runtime.getIndex(f, 1.0), _Runtime.getIndex(f, 2.0)] : Array<Dynamic>)] : Array<Dynamic>));
+    faces = _Runtime.callProperty(faceIndices, 'map', cast ([function(f:Dynamic) return cast ([flighthq._internal._StaticIndex.readArray(f, 0.0), flighthq._internal._StaticIndex.readArray(f, 1.0), flighthq._internal._StaticIndex.readArray(f, 2.0)] : Array<Dynamic>)] : Array<Dynamic>));
     if ((cast ((cast subs : Float) > (cast 0.0 : Float)) : Bool)) {
       var midCache:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
       var getMid:Dynamic = function(a:Float, b:Float) {
@@ -453,11 +453,11 @@ class MeshGeometryBuilders {
         key = ((cast ((cast a : Float) < (cast b : Float)) : Bool) ? (cast '' + Std.string(a) + '_' + Std.string(b) + '' : Dynamic) : (cast '' + Std.string(b) + '_' + Std.string(a) + '' : Dynamic));
         hit = ((cast midCache : flighthq._internal._Map).get(key));
         if ((cast !_Runtime.strictEquals(hit, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast hit; }
-        va = _Runtime.getIndex(verts, a);
-        vb = _Runtime.getIndex(verts, b);
-        mx = ((_Runtime.getIndex(va, 0.0) + _Runtime.getIndex(vb, 0.0)) * 0.5);
-        my = ((_Runtime.getIndex(va, 1.0) + _Runtime.getIndex(vb, 1.0)) * 0.5);
-        mz = ((_Runtime.getIndex(va, 2.0) + _Runtime.getIndex(vb, 2.0)) * 0.5);
+        va = flighthq._internal._StaticIndex.readArray(verts, a);
+        vb = flighthq._internal._StaticIndex.readArray(verts, b);
+        mx = ((flighthq._internal._StaticIndex.readArray(va, 0.0) + flighthq._internal._StaticIndex.readArray(vb, 0.0)) * 0.5);
+        my = ((flighthq._internal._StaticIndex.readArray(va, 1.0) + flighthq._internal._StaticIndex.readArray(vb, 1.0)) * 0.5);
+        mz = ((flighthq._internal._StaticIndex.readArray(va, 2.0) + flighthq._internal._StaticIndex.readArray(vb, 2.0)) * 0.5);
         mlen = HxMath.sqrt((((mx * mx) + (my * my)) + (mz * mz)));
         (mx = cast ((mx / mlen) : Dynamic));
         (my = cast ((my / mlen) : Dynamic));
@@ -495,10 +495,10 @@ class MeshGeometryBuilders {
       var b:Dynamic = _Runtime.getIndex(__iteration5, 1.0);
       var c:Dynamic = _Runtime.getIndex(__iteration5, 2.0);
       for (vi in _Runtime.iterable(cast ([a, b, c] : Array<Dynamic>))) {
-        var v:Dynamic = _Runtime.getIndex(verts, vi);
-        var nx:Dynamic = _Runtime.getIndex(v, 0.0);
-        var ny:Dynamic = _Runtime.getIndex(v, 1.0);
-        var nz:Dynamic = _Runtime.getIndex(v, 2.0);
+        var v:Dynamic = flighthq._internal._StaticIndex.readArray(verts, vi);
+        var nx:Dynamic = flighthq._internal._StaticIndex.readArray(v, 0.0);
+        var ny:Dynamic = flighthq._internal._StaticIndex.readArray(v, 1.0);
+        var nz:Dynamic = flighthq._internal._StaticIndex.readArray(v, 2.0);
         _Runtime.pushMany(positions, cast ([(radius * nx), (radius * ny), (radius * nz)] : Array<Dynamic>));
         _Runtime.pushMany(normals, cast ([nx, ny, nz] : Array<Dynamic>));
         var u:Dynamic = (0.5 + (HxMath.atan2(nz, nx) / (HxMath.PI * 2.0)));
@@ -865,14 +865,14 @@ class MeshGeometryBuilders {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
         var base:Dynamic = (i * MeshGeometryBuilders.CANONICAL_FLOATS_PER_VERTEX__meshGeometryBuilders);
-        _Runtime.setIndex(vertices, base, _Runtime.getIndex(positions, (i * 3.0)));
-        _Runtime.setIndex(vertices, (base + 1.0), _Runtime.getIndex(positions, ((i * 3.0) + 1.0)));
-        _Runtime.setIndex(vertices, (base + 2.0), _Runtime.getIndex(positions, ((i * 3.0) + 2.0)));
-        _Runtime.setIndex(vertices, (base + 3.0), _Runtime.getIndex(normals, (i * 3.0)));
-        _Runtime.setIndex(vertices, (base + 4.0), _Runtime.getIndex(normals, ((i * 3.0) + 1.0)));
-        _Runtime.setIndex(vertices, (base + 5.0), _Runtime.getIndex(normals, ((i * 3.0) + 2.0)));
-        _Runtime.setIndex(vertices, (base + 10.0), _Runtime.getIndex(uvs, (i * 2.0)));
-        _Runtime.setIndex(vertices, (base + 11.0), _Runtime.getIndex(uvs, ((i * 2.0) + 1.0)));
+        flighthq._internal._StaticIndex.writeFloat32Array(vertices, base, flighthq._internal._StaticIndex.readArray(positions, (i * 3.0)));
+        flighthq._internal._StaticIndex.writeFloat32Array(vertices, (base + 1.0), flighthq._internal._StaticIndex.readArray(positions, ((i * 3.0) + 1.0)));
+        flighthq._internal._StaticIndex.writeFloat32Array(vertices, (base + 2.0), flighthq._internal._StaticIndex.readArray(positions, ((i * 3.0) + 2.0)));
+        flighthq._internal._StaticIndex.writeFloat32Array(vertices, (base + 3.0), flighthq._internal._StaticIndex.readArray(normals, (i * 3.0)));
+        flighthq._internal._StaticIndex.writeFloat32Array(vertices, (base + 4.0), flighthq._internal._StaticIndex.readArray(normals, ((i * 3.0) + 1.0)));
+        flighthq._internal._StaticIndex.writeFloat32Array(vertices, (base + 5.0), flighthq._internal._StaticIndex.readArray(normals, ((i * 3.0) + 2.0)));
+        flighthq._internal._StaticIndex.writeFloat32Array(vertices, (base + 10.0), flighthq._internal._StaticIndex.readArray(uvs, (i * 2.0)));
+        flighthq._internal._StaticIndex.writeFloat32Array(vertices, (base + 11.0), flighthq._internal._StaticIndex.readArray(uvs, ((i * 2.0) + 1.0)));
         i++;
       }
     }

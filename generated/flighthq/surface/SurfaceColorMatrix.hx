@@ -64,14 +64,14 @@ class SurfaceColorMatrix {
             if ((cast ((cast ((cast sourceX : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceX : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'width') : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Dynamic = (((sourceY * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sourceX) * 4.0);
             var di:Dynamic = (((py * _Runtime.field(source, 'width')) + px) * 4.0);
-            var r:Dynamic = _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), si);
-            var g:Dynamic = _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 1.0));
-            var b:Dynamic = _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 2.0));
-            var a:Dynamic = _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 3.0));
-            _Runtime.setIndex(out, di, _Runtime.callValue(SurfaceColorMatrix.clampByte__surfaceColorMatrix, cast ([(((((r * _Runtime.getIndex(matrix, 0.0)) + (g * _Runtime.getIndex(matrix, 1.0))) + (b * _Runtime.getIndex(matrix, 2.0))) + (a * _Runtime.getIndex(matrix, 3.0))) + _Runtime.getIndex(matrix, 4.0))] : Array<Dynamic>)));
-            _Runtime.setIndex(out, (di + 1.0), _Runtime.callValue(SurfaceColorMatrix.clampByte__surfaceColorMatrix, cast ([(((((r * _Runtime.getIndex(matrix, 5.0)) + (g * _Runtime.getIndex(matrix, 6.0))) + (b * _Runtime.getIndex(matrix, 7.0))) + (a * _Runtime.getIndex(matrix, 8.0))) + _Runtime.getIndex(matrix, 9.0))] : Array<Dynamic>)));
-            _Runtime.setIndex(out, (di + 2.0), _Runtime.callValue(SurfaceColorMatrix.clampByte__surfaceColorMatrix, cast ([(((((r * _Runtime.getIndex(matrix, 10.0)) + (g * _Runtime.getIndex(matrix, 11.0))) + (b * _Runtime.getIndex(matrix, 12.0))) + (a * _Runtime.getIndex(matrix, 13.0))) + _Runtime.getIndex(matrix, 14.0))] : Array<Dynamic>)));
-            _Runtime.setIndex(out, (di + 3.0), _Runtime.callValue(SurfaceColorMatrix.clampByte__surfaceColorMatrix, cast ([(((((r * _Runtime.getIndex(matrix, 15.0)) + (g * _Runtime.getIndex(matrix, 16.0))) + (b * _Runtime.getIndex(matrix, 17.0))) + (a * _Runtime.getIndex(matrix, 18.0))) + _Runtime.getIndex(matrix, 19.0))] : Array<Dynamic>)));
+            var r:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), si);
+            var g:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 1.0));
+            var b:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 2.0));
+            var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 3.0));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, _Runtime.callValue(SurfaceColorMatrix.clampByte__surfaceColorMatrix, cast ([(((((r * flighthq._internal._StaticIndex.readArray(matrix, 0.0)) + (g * flighthq._internal._StaticIndex.readArray(matrix, 1.0))) + (b * flighthq._internal._StaticIndex.readArray(matrix, 2.0))) + (a * flighthq._internal._StaticIndex.readArray(matrix, 3.0))) + flighthq._internal._StaticIndex.readArray(matrix, 4.0))] : Array<Dynamic>)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), _Runtime.callValue(SurfaceColorMatrix.clampByte__surfaceColorMatrix, cast ([(((((r * flighthq._internal._StaticIndex.readArray(matrix, 5.0)) + (g * flighthq._internal._StaticIndex.readArray(matrix, 6.0))) + (b * flighthq._internal._StaticIndex.readArray(matrix, 7.0))) + (a * flighthq._internal._StaticIndex.readArray(matrix, 8.0))) + flighthq._internal._StaticIndex.readArray(matrix, 9.0))] : Array<Dynamic>)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), _Runtime.callValue(SurfaceColorMatrix.clampByte__surfaceColorMatrix, cast ([(((((r * flighthq._internal._StaticIndex.readArray(matrix, 10.0)) + (g * flighthq._internal._StaticIndex.readArray(matrix, 11.0))) + (b * flighthq._internal._StaticIndex.readArray(matrix, 12.0))) + (a * flighthq._internal._StaticIndex.readArray(matrix, 13.0))) + flighthq._internal._StaticIndex.readArray(matrix, 14.0))] : Array<Dynamic>)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), _Runtime.callValue(SurfaceColorMatrix.clampByte__surfaceColorMatrix, cast ([(((((r * flighthq._internal._StaticIndex.readArray(matrix, 15.0)) + (g * flighthq._internal._StaticIndex.readArray(matrix, 16.0))) + (b * flighthq._internal._StaticIndex.readArray(matrix, 17.0))) + (a * flighthq._internal._StaticIndex.readArray(matrix, 18.0))) + flighthq._internal._StaticIndex.readArray(matrix, 19.0))] : Array<Dynamic>)));
             px++;
           }
         }
@@ -87,15 +87,15 @@ class SurfaceColorMatrix {
         {
           var col:Dynamic = 0.0;
           while ((cast ((cast col : Float) < (cast 5.0 : Float)) : Bool)) {
-            var sum:Dynamic = ((cast _Runtime.strictEquals(col, 4.0) : Bool) ? (cast _Runtime.getIndex(second, ((row * 5.0) + 4.0)) : Dynamic) : (cast 0.0 : Dynamic));
+            var sum:Dynamic = ((cast _Runtime.strictEquals(col, 4.0) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(second, ((row * 5.0) + 4.0)) : Dynamic) : (cast 0.0 : Dynamic));
             {
               var k:Dynamic = 0.0;
               while ((cast ((cast k : Float) < (cast 4.0 : Float)) : Bool)) {
-                (sum = cast ((sum + (_Runtime.getIndex(second, ((row * 5.0) + k)) * ((cast _Runtime.strictEquals(col, 4.0) : Bool) ? (cast _Runtime.getIndex(first, ((k * 5.0) + 4.0)) : Dynamic) : (cast _Runtime.getIndex(first, ((k * 5.0) + col)) : Dynamic)))) : Dynamic));
+                (sum = cast ((sum + (flighthq._internal._StaticIndex.readArray(second, ((row * 5.0) + k)) * ((cast _Runtime.strictEquals(col, 4.0) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(first, ((k * 5.0) + 4.0)) : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(first, ((k * 5.0) + col)) : Dynamic)))) : Dynamic));
                 k++;
               }
             }
-            _Runtime.setIndex(out, ((row * 5.0) + col), sum);
+            flighthq._internal._StaticIndex.writeArray(out, ((row * 5.0) + col), sum);
             col++;
           }
         }
@@ -123,7 +123,7 @@ class SurfaceColorMatrix {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast 20.0 : Float)) : Bool)) {
-        _Runtime.setIndex(out, i, _Runtime.getIndex(values, i));
+        flighthq._internal._StaticIndex.writeArray(out, i, flighthq._internal._StaticIndex.readArray(values, i));
         i++;
       }
     }

@@ -15,13 +15,13 @@ class AudioResourceFrom {
     var length:Dynamic = cast _Runtime.UNDEFINED;
     var buffer:Dynamic = cast _Runtime.UNDEFINED;
     numberOfChannels = _Runtime.field(channels, 'length');
-    length = ((cast ((cast numberOfChannels : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(_Runtime.getIndex(channels, 0.0), 'length') : Dynamic) : (cast 0.0 : Dynamic));
+    length = ((cast ((cast numberOfChannels : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(channels, 0.0), 'length') : Dynamic) : (cast 0.0 : Dynamic));
     if ((cast ((cast _Runtime.strictEquals(numberOfChannels, 0.0) : Bool) || (cast _Runtime.strictEquals(length, 0.0) : Bool)) : Bool)) { return cast _Runtime.callValue(createAudioResource, cast ([] : Array<Dynamic>)); }
     buffer = _Runtime.construct(_Runtime.globalValue('AudioBuffer'), [{ length: length, numberOfChannels: numberOfChannels, sampleRate: sampleRate }]);
     {
       var channel:Dynamic = 0.0;
       while ((cast ((cast channel : Float) < (cast numberOfChannels : Float)) : Bool)) {
-        _Runtime.callProperty(buffer, 'copyToChannel', cast ([(cast _Runtime.getIndex(channels, channel) : flighthq._internal._Float32Array), channel] : Array<Dynamic>));
+        _Runtime.callProperty(buffer, 'copyToChannel', cast ([(cast flighthq._internal._StaticIndex.readArray(channels, channel) : flighthq._internal._Float32Array), channel] : Array<Dynamic>));
         channel++;
       }
     }
@@ -38,7 +38,7 @@ class AudioResourceFrom {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(binary, 'length') : Float)) : Bool)) {
-          _Runtime.setIndex(bytes, i, _Runtime.charCodeAt(binary, i));
+          flighthq._internal._StaticIndex.writeUint8Array(bytes, i, _Runtime.charCodeAt(binary, i));
           i++;
         }
       }

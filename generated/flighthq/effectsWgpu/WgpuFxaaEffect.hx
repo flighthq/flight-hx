@@ -21,9 +21,9 @@ class WgpuFxaaEffect {
     height = _Runtime.field(source, 'height');
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'antialiasing.fxaa', WgpuFxaaEffect.FXAA_FRAGMENT_WGSL__wgpuFxaaEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, width);
-      _Runtime.setIndex(f32, 1.0, height);
-      _Runtime.setIndex(f32, 2.0, edgeThreshold);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, width);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, height);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, edgeThreshold);
     }] : Array<Dynamic>));
   }
 

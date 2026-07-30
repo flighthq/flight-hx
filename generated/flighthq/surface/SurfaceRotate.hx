@@ -155,10 +155,10 @@ class SurfaceRotate {
   }
 
   public static function copyPixel__surfaceRotate(dest:flighthq._internal._UInt8ClampedArray, di:Float, source:flighthq._internal._UInt8ClampedArray, si:Float):Void {
-    _Runtime.setIndex(dest, di, _Runtime.getIndex(source, si));
-    _Runtime.setIndex(dest, (di + 1.0), _Runtime.getIndex(source, (si + 1.0)));
-    _Runtime.setIndex(dest, (di + 2.0), _Runtime.getIndex(source, (si + 2.0)));
-    _Runtime.setIndex(dest, (di + 3.0), _Runtime.getIndex(source, (si + 3.0)));
+    flighthq._internal._StaticIndex.writeUint8ClampedArray(dest, di, flighthq._internal._StaticIndex.readUint8ClampedArray(source, si));
+    flighthq._internal._StaticIndex.writeUint8ClampedArray(dest, (di + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(source, (si + 1.0)));
+    flighthq._internal._StaticIndex.writeUint8ClampedArray(dest, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(source, (si + 2.0)));
+    flighthq._internal._StaticIndex.writeUint8ClampedArray(dest, (di + 3.0), flighthq._internal._StaticIndex.readUint8ClampedArray(source, (si + 3.0)));
   }
 
   public static function inBounds__surfaceRotate(x:Float, y:Float, width:Float, height:Float):Bool {
@@ -175,9 +175,9 @@ class SurfaceRotate {
     {
       var c:Dynamic = 0.0;
       while ((cast ((cast c : Float) < (cast 4.0 : Float)) : Bool)) {
-        var t:Dynamic = _Runtime.getIndex(data, (a + c));
-        _Runtime.setIndex(data, (a + c), _Runtime.getIndex(data, (b + c)));
-        _Runtime.setIndex(data, (b + c), t);
+        var t:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (a + c));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (a + c), flighthq._internal._StaticIndex.readUint8ClampedArray(data, (b + c)));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (b + c), t);
         c++;
       }
     }

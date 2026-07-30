@@ -154,8 +154,8 @@ class BlendModeMath {
     {
       var i:Dynamic = 1.0;
       while ((cast ((cast i : Float) < (cast 3.0 : Float)) : Bool)) {
-        if ((cast ((cast _Runtime.getIndex(out, i) : Float) < (cast _Runtime.getIndex(out, iMin) : Float)) : Bool)) { (iMin = cast (i : Dynamic)); }
-        if ((cast ((cast _Runtime.getIndex(out, i) : Float) > (cast _Runtime.getIndex(out, iMax) : Float)) : Bool)) { (iMax = cast (i : Dynamic)); }
+        if ((cast ((cast flighthq._internal._StaticIndex.readArray(out, i) : Float) < (cast flighthq._internal._StaticIndex.readArray(out, iMin) : Float)) : Bool)) { (iMin = cast (i : Dynamic)); }
+        if ((cast ((cast flighthq._internal._StaticIndex.readArray(out, i) : Float) > (cast flighthq._internal._StaticIndex.readArray(out, iMax) : Float)) : Bool)) { (iMax = cast (i : Dynamic)); }
         i++;
       }
     }
@@ -163,14 +163,14 @@ class BlendModeMath {
       (iMax = cast (_Runtime.fmod((iMin + 1.0), 3.0) : Dynamic));
     }
     iMid = ((3.0 - iMin) - iMax);
-    if ((cast ((cast _Runtime.getIndex(out, iMax) : Float) > (cast _Runtime.getIndex(out, iMin) : Float)) : Bool)) {
-      _Runtime.setIndex(out, iMid, (((_Runtime.getIndex(out, iMid) - _Runtime.getIndex(out, iMin)) * target) / (_Runtime.getIndex(out, iMax) - _Runtime.getIndex(out, iMin))));
-      _Runtime.setIndex(out, iMax, target);
+    if ((cast ((cast flighthq._internal._StaticIndex.readArray(out, iMax) : Float) > (cast flighthq._internal._StaticIndex.readArray(out, iMin) : Float)) : Bool)) {
+      flighthq._internal._StaticIndex.writeArray(out, iMid, (((flighthq._internal._StaticIndex.readArray(out, iMid) - flighthq._internal._StaticIndex.readArray(out, iMin)) * target) / (flighthq._internal._StaticIndex.readArray(out, iMax) - flighthq._internal._StaticIndex.readArray(out, iMin))));
+      flighthq._internal._StaticIndex.writeArray(out, iMax, target);
     } else {
-      _Runtime.setIndex(out, iMid, 0.0);
-      _Runtime.setIndex(out, iMax, 0.0);
+      flighthq._internal._StaticIndex.writeArray(out, iMid, 0.0);
+      flighthq._internal._StaticIndex.writeArray(out, iMax, 0.0);
     }
-    _Runtime.setIndex(out, iMin, 0.0);
+    flighthq._internal._StaticIndex.writeArray(out, iMin, 0.0);
     return cast out;
     return cast null;
   }

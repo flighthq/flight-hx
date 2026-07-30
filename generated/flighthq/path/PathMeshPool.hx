@@ -20,7 +20,7 @@ class PathMeshPool {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(fresh, 'vertices'), 'length') : Float)) : Bool)) {
-        _Runtime.setIndex(_Runtime.field(mesh, 'vertices'), i, _Runtime.getIndex(_Runtime.field(fresh, 'vertices'), i));
+        flighthq._internal._StaticIndex.writeArray(_Runtime.field(mesh, 'vertices'), i, flighthq._internal._StaticIndex.readArray(_Runtime.field(fresh, 'vertices'), i));
         i++;
       }
     }
@@ -28,7 +28,7 @@ class PathMeshPool {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(fresh, 'indices'), 'length') : Float)) : Bool)) {
-        _Runtime.setIndex(_Runtime.field(mesh, 'indices'), i, _Runtime.getIndex(_Runtime.field(fresh, 'indices'), i));
+        flighthq._internal._StaticIndex.writeArray(_Runtime.field(mesh, 'indices'), i, flighthq._internal._StaticIndex.readArray(_Runtime.field(fresh, 'indices'), i));
         i++;
       }
     }

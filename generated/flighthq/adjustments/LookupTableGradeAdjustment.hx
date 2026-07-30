@@ -17,15 +17,15 @@ class LookupTableGradeAdjustment {
     strength = _Runtime.coalesce(_Runtime.field(options, 'strength'), function():Dynamic return cast 1.0);
     transform = function(out:Dynamic, r:Dynamic, g:Dynamic, b:Dynamic) {
       if ((cast ((cast _Runtime.strictEquals(lut, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast strength : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
-        _Runtime.setIndex(out, 0.0, r);
-        _Runtime.setIndex(out, 1.0, g);
-        _Runtime.setIndex(out, 2.0, b);
+        flighthq._internal._StaticIndex.writeArray(out, 0.0, r);
+        flighthq._internal._StaticIndex.writeArray(out, 1.0, g);
+        flighthq._internal._StaticIndex.writeArray(out, 2.0, b);
         return;
       }
       _Runtime.callValue(sampleColorLut, cast ([lut, out, r, g, b] : Array<Dynamic>));
-      _Runtime.setIndex(out, 0.0, (r + ((_Runtime.getIndex(out, 0.0) - r) * strength)));
-      _Runtime.setIndex(out, 1.0, (g + ((_Runtime.getIndex(out, 1.0) - g) * strength)));
-      _Runtime.setIndex(out, 2.0, (b + ((_Runtime.getIndex(out, 2.0) - b) * strength)));
+      flighthq._internal._StaticIndex.writeArray(out, 0.0, (r + ((flighthq._internal._StaticIndex.readArray(out, 0.0) - r) * strength)));
+      flighthq._internal._StaticIndex.writeArray(out, 1.0, (g + ((flighthq._internal._StaticIndex.readArray(out, 1.0) - g) * strength)));
+      flighthq._internal._StaticIndex.writeArray(out, 2.0, (b + ((flighthq._internal._StaticIndex.readArray(out, 2.0) - b) * strength)));
     };
     return cast _Runtime.mergeObjects([{ kind: 'LookupTableGradeAdjustment' }, options, { transform: transform }]);
     return cast null;

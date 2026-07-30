@@ -19,8 +19,8 @@ class WgpuScanlinesEffect {
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.3);
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'stylization.scanlines', WgpuScanlinesEffect.SCANLINES_FRAGMENT_WGSL__wgpuScanlinesEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, count);
-      _Runtime.setIndex(f32, 1.0, intensity);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, count);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, intensity);
     }] : Array<Dynamic>));
   }
 

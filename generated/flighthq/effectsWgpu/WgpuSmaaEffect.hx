@@ -21,9 +21,9 @@ class WgpuSmaaEffect {
     height = _Runtime.field(source, 'height');
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'antialiasing.smaa', WgpuSmaaEffect.SMAA_FRAGMENT_WGSL__wgpuSmaaEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, width);
-      _Runtime.setIndex(f32, 1.0, height);
-      _Runtime.setIndex(f32, 2.0, threshold);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, width);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, height);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, threshold);
     }] : Array<Dynamic>));
   }
 

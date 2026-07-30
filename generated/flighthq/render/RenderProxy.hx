@@ -153,12 +153,12 @@ class RenderProxy {
     _Runtime.incrementField(runtime, 'currentFrameId', 1, false);
     tempStack = _Runtime.field(runtime, 'tempStack');
     stackLength = 1.0;
-    _Runtime.setIndex(tempStack, 0.0, root);
+    flighthq._internal._StaticIndex.writeArray(tempStack, 0.0, root);
     parentData = _Runtime.field(_Runtime, 'UNDEFINED');
     lastParent = null;
     treeDirty = false;
     while ((cast ((cast stackLength : Float) > (cast 0.0 : Float)) : Bool)) {
-      var current:Dynamic = (cast _Runtime.getIndex(tempStack, --stackLength) : Renderable);
+      var current:Dynamic = (cast flighthq._internal._StaticIndex.readArray(tempStack, --stackLength) : Renderable);
       if ((cast !(cast _Runtime.field((cast current : Node<Dynamic>), 'enabled') : Bool) : Bool)) { continue; }
       if ((cast !_Runtime.strictEquals(current, root) : Bool)) {
         var parent:Dynamic = _Runtime.callValue(getNodeParent, cast ([(cast current : Node<Dynamic>)] : Array<Dynamic>));
@@ -182,7 +182,7 @@ class RenderProxy {
           {
             var i:Dynamic = (_Runtime.field(children, 'length') - 1.0);
             while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-              _Runtime.setIndex(tempStack, stackLength++, (cast (cast _Runtime.getIndex(children, i) : Dynamic) : Renderable));
+              flighthq._internal._StaticIndex.writeArray(tempStack, stackLength++, (cast (cast flighthq._internal._StaticIndex.readArray(children, i) : Dynamic) : Renderable));
               i--;
             }
           }
@@ -198,16 +198,16 @@ class RenderProxy {
     var stackLength:Dynamic = cast _Runtime.UNDEFINED;
     tempStack = _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'tempStack');
     stackLength = 1.0;
-    _Runtime.setIndex(tempStack, 0.0, root);
+    flighthq._internal._StaticIndex.writeArray(tempStack, 0.0, root);
     while ((cast ((cast stackLength : Float) > (cast 0.0 : Float)) : Bool)) {
-      var current:Dynamic = (cast _Runtime.getIndex(tempStack, --stackLength) : Renderable);
+      var current:Dynamic = (cast flighthq._internal._StaticIndex.readArray(tempStack, --stackLength) : Renderable);
       _Runtime.callValue(visit, cast ([state, current] : Array<Dynamic>));
       var children:Dynamic = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([(cast current : Node<Dynamic>)] : Array<Dynamic>)), 'children');
       if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
         {
           var i:Dynamic = (_Runtime.field(children, 'length') - 1.0);
           while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-            _Runtime.setIndex(tempStack, stackLength++, (cast (cast _Runtime.getIndex(children, i) : Dynamic) : Renderable));
+            flighthq._internal._StaticIndex.writeArray(tempStack, stackLength++, (cast (cast flighthq._internal._StaticIndex.readArray(children, i) : Dynamic) : Renderable));
             i--;
           }
         }

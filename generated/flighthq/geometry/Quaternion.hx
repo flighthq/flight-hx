@@ -363,15 +363,15 @@ class Quaternion {
     var m22:Dynamic = cast _Runtime.UNDEFINED;
     var trace:Dynamic = cast _Runtime.UNDEFINED;
     m = source.m;
-    m00 = _Runtime.getIndex(m, 0.0);
-    m10 = _Runtime.getIndex(m, 4.0);
-    m20 = _Runtime.getIndex(m, 8.0);
-    m01 = _Runtime.getIndex(m, 1.0);
-    m11 = _Runtime.getIndex(m, 5.0);
-    m21 = _Runtime.getIndex(m, 9.0);
-    m02 = _Runtime.getIndex(m, 2.0);
-    m12 = _Runtime.getIndex(m, 6.0);
-    m22 = _Runtime.getIndex(m, 10.0);
+    m00 = flighthq._internal._StaticIndex.readFloat32Array(m, 0.0);
+    m10 = flighthq._internal._StaticIndex.readFloat32Array(m, 4.0);
+    m20 = flighthq._internal._StaticIndex.readFloat32Array(m, 8.0);
+    m01 = flighthq._internal._StaticIndex.readFloat32Array(m, 1.0);
+    m11 = flighthq._internal._StaticIndex.readFloat32Array(m, 5.0);
+    m21 = flighthq._internal._StaticIndex.readFloat32Array(m, 9.0);
+    m02 = flighthq._internal._StaticIndex.readFloat32Array(m, 2.0);
+    m12 = flighthq._internal._StaticIndex.readFloat32Array(m, 6.0);
+    m22 = flighthq._internal._StaticIndex.readFloat32Array(m, 10.0);
     trace = ((m00 + m11) + m22);
     if ((cast ((cast trace : Float) > (cast 0.0 : Float)) : Bool)) {
       var s:Dynamic = (0.5 / HxMath.sqrt((trace + 1.0)));

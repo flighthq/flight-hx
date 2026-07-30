@@ -18,9 +18,9 @@ class Oklab {
     lc = _Runtime.cbrt(HxMath.max(0.0, l));
     mc = _Runtime.cbrt(HxMath.max(0.0, m));
     sc = _Runtime.cbrt(HxMath.max(0.0, s));
-    _Runtime.setIndex(out, 0.0, (((0.2104542553 * lc) + (0.793617785 * mc)) - (0.0040720468 * sc)));
-    _Runtime.setIndex(out, 1.0, (((1.9779984951 * lc) - (2.428592205 * mc)) + (0.4505937099 * sc)));
-    _Runtime.setIndex(out, 2.0, (((0.0259040371 * lc) + (0.7827717662 * mc)) - (0.808675766 * sc)));
+    flighthq._internal._StaticIndex.writeArray(out, 0.0, (((0.2104542553 * lc) + (0.793617785 * mc)) - (0.0040720468 * sc)));
+    flighthq._internal._StaticIndex.writeArray(out, 1.0, (((1.9779984951 * lc) - (2.428592205 * mc)) + (0.4505937099 * sc)));
+    flighthq._internal._StaticIndex.writeArray(out, 2.0, (((0.0259040371 * lc) + (0.7827717662 * mc)) - (0.808675766 * sc)));
   }
 
   public static function oklabToLinearRgb(out:Array<Float>, L:Float, a:Float, b:Float):Void {
@@ -36,8 +36,8 @@ class Oklab {
     l = ((lc * lc) * lc);
     m = ((mc * mc) * mc);
     s = ((sc * sc) * sc);
-    _Runtime.setIndex(out, 0.0, HxMath.max(0.0, (((4.0767416621 * l) - (3.3077115913 * m)) + (0.2309699292 * s))));
-    _Runtime.setIndex(out, 1.0, HxMath.max(0.0, (((-1.2684380046 * l) + (2.6097574011 * m)) - (0.3413193965 * s))));
-    _Runtime.setIndex(out, 2.0, HxMath.max(0.0, (((-0.0041960863 * l) - (0.7034186147 * m)) + (1.707614701 * s))));
+    flighthq._internal._StaticIndex.writeArray(out, 0.0, HxMath.max(0.0, (((4.0767416621 * l) - (3.3077115913 * m)) + (0.2309699292 * s))));
+    flighthq._internal._StaticIndex.writeArray(out, 1.0, HxMath.max(0.0, (((-1.2684380046 * l) + (2.6097574011 * m)) - (0.3413193965 * s))));
+    flighthq._internal._StaticIndex.writeArray(out, 2.0, HxMath.max(0.0, (((-0.0041960863 * l) - (0.7034186147 * m)) + (1.707614701 * s))));
   }
 }

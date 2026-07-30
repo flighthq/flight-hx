@@ -111,27 +111,27 @@ class ToneMapMath {
   }
 
   public static function getAcesInputMatrix(out:flighthq._internal._Float32Array):Void {
-    _Runtime.setIndex(out, 0.0, 0.59719);
-    _Runtime.setIndex(out, 1.0, 0.076);
-    _Runtime.setIndex(out, 2.0, 0.0284);
-    _Runtime.setIndex(out, 3.0, 0.35458);
-    _Runtime.setIndex(out, 4.0, 0.90834);
-    _Runtime.setIndex(out, 5.0, 0.13383);
-    _Runtime.setIndex(out, 6.0, 0.04823);
-    _Runtime.setIndex(out, 7.0, 0.01566);
-    _Runtime.setIndex(out, 8.0, 0.83777);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 0.0, 0.59719);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 1.0, 0.076);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 2.0, 0.0284);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 3.0, 0.35458);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 4.0, 0.90834);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 5.0, 0.13383);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 6.0, 0.04823);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 7.0, 0.01566);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 8.0, 0.83777);
   }
 
   public static function getAcesOutputMatrix(out:flighthq._internal._Float32Array):Void {
-    _Runtime.setIndex(out, 0.0, 1.60475);
-    _Runtime.setIndex(out, 1.0, -0.10208);
-    _Runtime.setIndex(out, 2.0, -0.00327);
-    _Runtime.setIndex(out, 3.0, -0.53108);
-    _Runtime.setIndex(out, 4.0, 1.10813);
-    _Runtime.setIndex(out, 5.0, -0.07276);
-    _Runtime.setIndex(out, 6.0, -0.07367);
-    _Runtime.setIndex(out, 7.0, -0.00605);
-    _Runtime.setIndex(out, 8.0, 1.07602);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 0.0, 1.60475);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 1.0, -0.10208);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 2.0, -0.00327);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 3.0, -0.53108);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 4.0, 1.10813);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 5.0, -0.07276);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 6.0, -0.07367);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 7.0, -0.00605);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 8.0, 1.07602);
   }
 
   public static function agxDefaultContrastApprox__toneMapMath(x:Float):Float {

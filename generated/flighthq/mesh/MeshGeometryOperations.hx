@@ -37,17 +37,17 @@ class MeshGeometryOperations {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
         var base:Dynamic = (i * MeshGeometryOperations.CANONICAL_FLOATS_PER_VERTEX__meshGeometryOperations);
-        _Runtime.setIndex(vertices, base, _Runtime.getIndex(positions, (i * 3.0)));
-        _Runtime.setIndex(vertices, (base + 1.0), _Runtime.getIndex(positions, ((i * 3.0) + 1.0)));
-        _Runtime.setIndex(vertices, (base + 2.0), _Runtime.getIndex(positions, ((i * 3.0) + 2.0)));
+        flighthq._internal._StaticIndex.writeFloat32Array(vertices, base, flighthq._internal._StaticIndex.readArray(positions, (i * 3.0)));
+        flighthq._internal._StaticIndex.writeFloat32Array(vertices, (base + 1.0), flighthq._internal._StaticIndex.readArray(positions, ((i * 3.0) + 1.0)));
+        flighthq._internal._StaticIndex.writeFloat32Array(vertices, (base + 2.0), flighthq._internal._StaticIndex.readArray(positions, ((i * 3.0) + 2.0)));
         if (_Runtime.truthy(normals)) {
-          _Runtime.setIndex(vertices, (base + 3.0), _Runtime.getIndex(normals, (i * 3.0)));
-          _Runtime.setIndex(vertices, (base + 4.0), _Runtime.getIndex(normals, ((i * 3.0) + 1.0)));
-          _Runtime.setIndex(vertices, (base + 5.0), _Runtime.getIndex(normals, ((i * 3.0) + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (base + 3.0), flighthq._internal._StaticIndex.readArray(normals, (i * 3.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (base + 4.0), flighthq._internal._StaticIndex.readArray(normals, ((i * 3.0) + 1.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (base + 5.0), flighthq._internal._StaticIndex.readArray(normals, ((i * 3.0) + 2.0)));
         }
         if (_Runtime.truthy(uvs)) {
-          _Runtime.setIndex(vertices, (base + 10.0), _Runtime.getIndex(uvs, (i * 2.0)));
-          _Runtime.setIndex(vertices, (base + 11.0), _Runtime.getIndex(uvs, ((i * 2.0) + 1.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (base + 10.0), flighthq._internal._StaticIndex.readArray(uvs, (i * 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (base + 11.0), flighthq._internal._StaticIndex.readArray(uvs, ((i * 2.0) + 1.0)));
         }
         i++;
       }
@@ -60,7 +60,7 @@ class MeshGeometryOperations {
         {
           var i:Dynamic = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(src, 'length') : Float)) : Bool)) {
-            _Runtime.setIndex(a, i, _Runtime.getIndex(src, i));
+            flighthq._internal._StaticIndex.writeUint32Array(a, i, _Runtime.getIndex(src, i));
             i++;
           }
         }
@@ -70,7 +70,7 @@ class MeshGeometryOperations {
         {
           var i:Dynamic = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(src, 'length') : Float)) : Bool)) {
-            _Runtime.setIndex(a, i, _Runtime.getIndex(src, i));
+            flighthq._internal._StaticIndex.writeUint16Array(a, i, _Runtime.getIndex(src, i));
             i++;
           }
         }
@@ -119,12 +119,12 @@ class MeshGeometryOperations {
     var merged:Dynamic = cast _Runtime.UNDEFINED;
     var bounds:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(geometries, 'length'), 0.0) : Bool)) { return cast null; }
-    reference = _Runtime.getIndex(geometries, 0.0);
+    reference = flighthq._internal._StaticIndex.readArray(geometries, 0.0);
     layout = _Runtime.field(reference, 'layout');
     {
       var i:Dynamic = 1.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(geometries, 'length') : Float)) : Bool)) {
-        if ((cast !(cast _Runtime.callValue(MeshGeometryOperations.layoutsMatch__meshGeometryOperations, cast ([layout, _Runtime.field(_Runtime.getIndex(geometries, i), 'layout')] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
+        if ((cast !(cast _Runtime.callValue(MeshGeometryOperations.layoutsMatch__meshGeometryOperations, cast ([layout, _Runtime.field(flighthq._internal._StaticIndex.readArray(geometries, i), 'layout')] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
         i++;
       }
     }
@@ -202,7 +202,7 @@ class MeshGeometryOperations {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(_Runtime.field(geometry, 'layout'), 'attributes'), 'length') : Float)) : Bool)) {
-        var attr:Dynamic = _Runtime.getIndex(_Runtime.field(_Runtime.field(geometry, 'layout'), 'attributes'), i);
+        var attr:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(_Runtime.field(geometry, 'layout'), 'attributes'), i);
         if ((cast ((cast _Runtime.strictEquals(_Runtime.field(attr, 'semantic'), 'position') : Bool) && (cast StringTools.startsWith(_Runtime.field(attr, 'format'), 'float32') : Bool)) : Bool)) {
           (posOffset = cast ((_Runtime.field(attr, 'byteOffset') / 4.0) : Dynamic));
           break;
@@ -216,9 +216,9 @@ class MeshGeometryOperations {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
           var base:Dynamic = ((i * floatsPerVertex) + posOffset);
-          var x:Dynamic = _Runtime.getIndex(verts, base);
-          var y:Dynamic = _Runtime.getIndex(verts, (base + 1.0));
-          var z:Dynamic = _Runtime.getIndex(verts, (base + 2.0));
+          var x:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(verts, base);
+          var y:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(verts, (base + 1.0));
+          var z:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(verts, (base + 2.0));
           if ((cast ((cast ((cast !(cast _Runtime.isFinite(x) : Bool) : Bool) || (cast !(cast _Runtime.isFinite(y) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.isFinite(z) : Bool) : Bool)) : Bool)) { return cast false; }
           i++;
         }
@@ -234,8 +234,8 @@ class MeshGeometryOperations {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(a, 'attributes'), 'length') : Float)) : Bool)) {
-        var aa:Dynamic = _Runtime.getIndex(_Runtime.field(a, 'attributes'), i);
-        var ba:Dynamic = _Runtime.getIndex(_Runtime.field(b, 'attributes'), i);
+        var aa:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(a, 'attributes'), i);
+        var ba:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(b, 'attributes'), i);
         if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(aa, 'semantic'), _Runtime.field(ba, 'semantic')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(aa, 'format'), _Runtime.field(ba, 'format')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(aa, 'byteOffset'), _Runtime.field(ba, 'byteOffset')) : Bool)) : Bool)) { return cast false; }
         i++;
       }

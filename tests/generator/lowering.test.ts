@@ -1343,7 +1343,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('_Runtime.looseEquals(a, b)');
   });
 
-  it('emits only checker-proven primitive truthiness and numeric relations directly', () => {
+  it('emits only checker-proven primitive and indexed operations directly', () => {
     const { checker, source } = typedSource(
       '/workspace/upstream/packages/example/src/sample.ts',
       `
@@ -1413,6 +1413,22 @@ describe('TypeScript lowering and Haxe emission', () => {
       booleanConditionalExpressions: 1,
       booleanOrExpressions: 0,
       booleanTruthinessUses: 2,
+      indexedAccesses: {
+        reads: 2,
+        writes: 2,
+      },
+      indexedReceivers: {
+        Array: { reads: 0, writes: 1 },
+        Float32Array: { reads: 2, writes: 1 },
+        Float64Array: { reads: 0, writes: 0 },
+        Int16Array: { reads: 0, writes: 0 },
+        Int32Array: { reads: 0, writes: 0 },
+        Int8Array: { reads: 0, writes: 0 },
+        Uint16Array: { reads: 0, writes: 0 },
+        Uint32Array: { reads: 0, writes: 0 },
+        Uint8Array: { reads: 0, writes: 0 },
+        Uint8ClampedArray: { reads: 0, writes: 0 },
+      },
       numericRelations: 1,
     });
     expect(lowered.staticFacts.indexedReceivers.Array).toEqual({ expressions: 1, reads: 0, writes: 1 });
@@ -1430,13 +1446,127 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('((cast a : Float) < (cast b : Float))');
     expect(output).not.toContain("_Runtime.compare(a, b, '<')");
     expect(output).toContain("_Runtime.compare(text, 'z', '<')");
+    expect(output).toContain('flighthq._internal._StaticIndex.readFloat32Array(floats, 0.0)');
+    expect(output).toContain('flighthq._internal._StaticIndex.writeArray(values, 1.0, a)');
+    expect(output).toMatch(
+      /\(\{ var __indexedObject\d+:Dynamic = floats; var __indexedKey\d+:Dynamic = 2\.0; flighthq\._internal\._StaticIndex\.writeFloat32Array\(__indexedObject\d+, __indexedKey\d+, \(flighthq\._internal\._StaticIndex\.readFloat32Array\(__indexedObject\d+, __indexedKey\d+\) \+ b\)\); \}\)/u,
+    );
     expect(output).toContain('_Runtime.getIndex(mixed, 3.0)');
     expect(output).toContain('_Runtime.getIndex(shadowed, 4.0)');
+    expect(output).not.toContain('_Runtime.getIndex(floats,');
+    expect(output).not.toContain('_Runtime.setIndex(values,');
     expect(output).toContain('((cast flag : Bool) && (cast true : Bool))');
     expect(output).toContain('_Runtime.andValue(flag, function():Dynamic return cast text)');
     expect(output.match(/_Runtime\.andValue\(flag/gu)).toHaveLength(1);
     expect(output).not.toContain('_Runtime.select(flag');
     expect(output).toContain('_Runtime.select(maybe');
+  });
+
+  it('emits all proven indexed families while retaining ambiguous receivers', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/indexed.ts',
+      `
+        export function families(
+          array: number[],
+          float32: Float32Array,
+          float64: Float64Array,
+          int16: Int16Array,
+          int32: Int32Array,
+          int8: Int8Array,
+          uint16: Uint16Array,
+          uint32: Uint32Array,
+          uint8: Uint8Array,
+          clamped: Uint8ClampedArray,
+          key: number,
+          value: number,
+        ) {
+          const reads = [
+            array[key],
+            float32[key],
+            float64[key],
+            int16[key],
+            int32[key],
+            int8[key],
+            uint16[key],
+            uint32[key],
+            uint8[key],
+            clamped[key],
+          ];
+          array[key] = value;
+          float32[key] = value;
+          float64[key] = value;
+          int16[key] = value;
+          int32[key] = value;
+          int8[key] = value;
+          uint16[key] = value;
+          uint32[key] = value;
+          uint8[key] = value;
+          clamped[key] = value;
+          return reads;
+        }
+
+        export function proofBoundaries<T extends Float32Array, U extends { readonly [key: number]: number }>(
+          typed: T,
+          structural: U,
+          readonly: Readonly<Float32Array>,
+          same: Float32Array | Readonly<Float32Array>,
+          mixed: Float32Array | Uint8Array,
+          key: number,
+        ) {
+          return [typed[key], structural[key], readonly[key], same[key], mixed[key]];
+        }
+
+        export function unconstrained<T>(value: T, key: number) {
+          return (value as any)[key];
+        }
+
+        export function compound(receiver: () => number[], key: () => number, value: () => number) {
+          return receiver()[key()] += value();
+        }
+
+        export function fractional(values: number[]) {
+          return values[1.5];
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    resetStaticLoweringEmissionCounts();
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'IndexedFixture',
+      packageName: '@flighthq/example',
+    });
+    const emission = staticLoweringEmissionCounts();
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(emission.indexedAccesses).toEqual({ reads: 15, writes: 11 });
+    expect(emission.indexedReceivers.Array).toEqual({ reads: 3, writes: 2 });
+    expect(emission.indexedReceivers.Float32Array).toEqual({ reads: 4, writes: 1 });
+    for (const receiver of [
+      'Float64Array',
+      'Int16Array',
+      'Int32Array',
+      'Int8Array',
+      'Uint16Array',
+      'Uint32Array',
+      'Uint8Array',
+      'Uint8ClampedArray',
+    ] as const) {
+      expect(emission.indexedReceivers[receiver]).toEqual({ reads: 1, writes: 1 });
+      expect(output).toContain(`_StaticIndex.read${receiver}(`);
+      expect(output).toContain(`_StaticIndex.write${receiver}(`);
+    }
+    expect(output).toContain('_StaticIndex.readArray(values, 1.5)');
+    expect(output).toContain('_StaticIndex.readFloat32Array(typed, key)');
+    expect(output).toContain('_StaticIndex.readFloat32Array(readonly, key)');
+    expect(output).toContain('_StaticIndex.readFloat32Array(same, key)');
+    expect(output).toContain('_Runtime.getIndex(structural, key)');
+    expect(output).toContain('_Runtime.getIndex(mixed, key)');
+    expect(output).toContain('_Runtime.getIndex((cast value : Dynamic), key)');
+    expect(output).toMatch(
+      /\(\{ var (__indexedObject\d+):Dynamic = .*receiver.*; var (__indexedKey\d+):Dynamic = .*key.*; flighthq\._internal\._StaticIndex\.writeArray\(\1, \2, \(flighthq\._internal\._StaticIndex\.readArray\(\1, \2\) \+ .*value.*\)\); \}\)/u,
+    );
   });
 
   it('preserves Haxe keyword property names in JavaScript objects', () => {

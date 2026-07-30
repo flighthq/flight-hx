@@ -29,7 +29,7 @@ class ColorGradeAdjustment {
     lift = _Runtime.callValue(ColorGradeAdjustment.unpackRgb__colorGradeAdjustment, cast ([_Runtime.coalesce(_Runtime.field(options, 'lift'), function():Dynamic return cast 255.0)] : Array<Dynamic>));
     gammaRaw = _Runtime.callValue(ColorGradeAdjustment.unpackRgb__colorGradeAdjustment, cast ([_Runtime.coalesce(_Runtime.field(options, 'gamma'), function():Dynamic return cast 2155905279.0)] : Array<Dynamic>));
     gain = _Runtime.callValue(ColorGradeAdjustment.unpackRgb__colorGradeAdjustment, cast ([_Runtime.coalesce(_Runtime.field(options, 'gain'), function():Dynamic return cast 4294967295.0)] : Array<Dynamic>));
-    gammaExp = cast ([(1.0 / HxMath.max((_Runtime.getIndex(gammaRaw, 0.0) * 2.0), 0.001)), (1.0 / HxMath.max((_Runtime.getIndex(gammaRaw, 1.0) * 2.0), 0.001)), (1.0 / HxMath.max((_Runtime.getIndex(gammaRaw, 2.0) * 2.0), 0.001))] : Array<Dynamic>);
+    gammaExp = cast ([(1.0 / HxMath.max((flighthq._internal._StaticIndex.readArray(gammaRaw, 0.0) * 2.0), 0.001)), (1.0 / HxMath.max((flighthq._internal._StaticIndex.readArray(gammaRaw, 1.0) * 2.0), 0.001)), (1.0 / HxMath.max((flighthq._internal._StaticIndex.readArray(gammaRaw, 2.0) * 2.0), 0.001))] : Array<Dynamic>);
     transform = function(out:Dynamic, r:Dynamic, g:Dynamic, b:Dynamic) {
       var cr:Dynamic = cast _Runtime.UNDEFINED;
       var cg:Dynamic = cast _Runtime.UNDEFINED;
@@ -45,12 +45,12 @@ class ColorGradeAdjustment {
       (cr = cast ((((cr - 0.5) * contrast) + 0.5) : Dynamic));
       (cg = cast ((((cg - 0.5) * contrast) + 0.5) : Dynamic));
       (cb = cast ((((cb - 0.5) * contrast) + 0.5) : Dynamic));
-      (cr = cast (HxMath.pow(HxMath.max(((cr * _Runtime.getIndex(gain, 0.0)) + (_Runtime.getIndex(lift, 0.0) * (1.0 - cr))), 0.0), _Runtime.getIndex(gammaExp, 0.0)) : Dynamic));
-      (cg = cast (HxMath.pow(HxMath.max(((cg * _Runtime.getIndex(gain, 1.0)) + (_Runtime.getIndex(lift, 1.0) * (1.0 - cg))), 0.0), _Runtime.getIndex(gammaExp, 1.0)) : Dynamic));
-      (cb = cast (HxMath.pow(HxMath.max(((cb * _Runtime.getIndex(gain, 2.0)) + (_Runtime.getIndex(lift, 2.0) * (1.0 - cb))), 0.0), _Runtime.getIndex(gammaExp, 2.0)) : Dynamic));
-      _Runtime.setIndex(out, 0.0, _Runtime.callValue(ColorGradeAdjustment.clamp01__colorGradeAdjustment, cast ([cr] : Array<Dynamic>)));
-      _Runtime.setIndex(out, 1.0, _Runtime.callValue(ColorGradeAdjustment.clamp01__colorGradeAdjustment, cast ([cg] : Array<Dynamic>)));
-      _Runtime.setIndex(out, 2.0, _Runtime.callValue(ColorGradeAdjustment.clamp01__colorGradeAdjustment, cast ([cb] : Array<Dynamic>)));
+      (cr = cast (HxMath.pow(HxMath.max(((cr * flighthq._internal._StaticIndex.readArray(gain, 0.0)) + (flighthq._internal._StaticIndex.readArray(lift, 0.0) * (1.0 - cr))), 0.0), flighthq._internal._StaticIndex.readArray(gammaExp, 0.0)) : Dynamic));
+      (cg = cast (HxMath.pow(HxMath.max(((cg * flighthq._internal._StaticIndex.readArray(gain, 1.0)) + (flighthq._internal._StaticIndex.readArray(lift, 1.0) * (1.0 - cg))), 0.0), flighthq._internal._StaticIndex.readArray(gammaExp, 1.0)) : Dynamic));
+      (cb = cast (HxMath.pow(HxMath.max(((cb * flighthq._internal._StaticIndex.readArray(gain, 2.0)) + (flighthq._internal._StaticIndex.readArray(lift, 2.0) * (1.0 - cb))), 0.0), flighthq._internal._StaticIndex.readArray(gammaExp, 2.0)) : Dynamic));
+      flighthq._internal._StaticIndex.writeArray(out, 0.0, _Runtime.callValue(ColorGradeAdjustment.clamp01__colorGradeAdjustment, cast ([cr] : Array<Dynamic>)));
+      flighthq._internal._StaticIndex.writeArray(out, 1.0, _Runtime.callValue(ColorGradeAdjustment.clamp01__colorGradeAdjustment, cast ([cg] : Array<Dynamic>)));
+      flighthq._internal._StaticIndex.writeArray(out, 2.0, _Runtime.callValue(ColorGradeAdjustment.clamp01__colorGradeAdjustment, cast ([cb] : Array<Dynamic>)));
     };
     return cast _Runtime.mergeObjects([{ kind: 'ColorGradeAdjustment' }, options, { transform: transform }]);
     return cast null;
