@@ -5,6 +5,7 @@ import ts from 'typescript';
 import { upstreamTypeScriptProgram } from './program.ts';
 
 export interface TypedStructCandidate {
+  emission: 'audit-only' | 'direct';
   name: string;
   packageName: string;
   purpose: string;
@@ -58,6 +59,8 @@ export interface TypedStructSchemaAudit {
   eligible: boolean;
   emission: {
     directAccesses: number;
+    mode: 'audit-only' | 'direct';
+    pendingAccesses: number;
     reflectiveSurvivors: Array<{
       accesses: number;
       reason: string;
@@ -84,15 +87,18 @@ export interface TypedStructSchemaAudit {
 
 export interface TypedStructAudit {
   candidates: TypedStructSchemaAudit[];
-  schemaVersion: 2;
+  schemaVersion: 3;
   summary: {
+    auditOnlySchemas: number;
     bindableAccesses: number;
     candidates: number;
     directAccesses: number;
+    directSchemas: number;
     eligible: number;
     escapes: number;
     fields: number;
     ineligible: number;
+    pendingAccesses: number;
     reflectiveSurvivors: number;
   };
   upstreamCommit: string;
@@ -109,49 +115,260 @@ export interface TypedStructRegistry {
   resolveField(type: ts.Type, member: string): TypedStructFieldBinding | undefined;
 }
 
-export const initialTypedStructCandidates: readonly TypedStructCandidate[] = [
+const directTypedStructCandidates: readonly TypedStructCandidate[] = [
   {
+    emission: 'direct',
     name: 'Vector2',
     packageName: '@flighthq/types',
     purpose: 'two-component numeric geometry leaf',
     source: 'upstream/packages/types/src/Vector2.ts',
   },
   {
+    emission: 'direct',
     name: 'Vector3',
     packageName: '@flighthq/types',
     purpose: 'three-component numeric geometry leaf',
     source: 'upstream/packages/types/src/Vector3.ts',
   },
   {
+    emission: 'direct',
     name: 'Quaternion',
     packageName: '@flighthq/types',
     purpose: 'four-component rotation leaf',
     source: 'upstream/packages/types/src/Quaternion.ts',
   },
   {
+    emission: 'direct',
     name: 'Matrix3',
     packageName: '@flighthq/types',
     purpose: '3x3 matrix holder',
     source: 'upstream/packages/types/src/Matrix3.ts',
   },
   {
+    emission: 'direct',
     name: 'Matrix4',
     packageName: '@flighthq/types',
     purpose: '4x4 matrix holder',
     source: 'upstream/packages/types/src/Matrix4.ts',
   },
   {
+    emission: 'direct',
     name: 'Rectangle',
     packageName: '@flighthq/types',
     purpose: 'four-component rectangle leaf',
     source: 'upstream/packages/types/src/Rectangle.ts',
   },
   {
+    emission: 'direct',
     name: 'ColorTransform',
     packageName: '@flighthq/types',
     purpose: 'render-hot RGBA multiplier and offset record',
     source: 'upstream/packages/types/src/ColorTransform.ts',
   },
+];
+
+export const tranche4TypedStructCandidates: readonly TypedStructCandidate[] = [
+  {
+    emission: 'audit-only',
+    name: 'ApplicationLoopOptions',
+    packageName: '@flighthq/types',
+    purpose: 'application-loop option record',
+    source: 'upstream/packages/types/src/ApplicationLoopOptions.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'AudioBusOptions',
+    packageName: '@flighthq/types',
+    purpose: 'audio-bus option record',
+    source: 'upstream/packages/types/src/AudioBus.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'AudioPlayOptions',
+    packageName: '@flighthq/types',
+    purpose: 'audio-playback option record',
+    source: 'upstream/packages/types/src/AudioResource.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'BinPackOptions',
+    packageName: '@flighthq/types',
+    purpose: 'bin-packing option record',
+    source: 'upstream/packages/types/src/BinPack.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'BitmapTextOptions',
+    packageName: '@flighthq/types',
+    purpose: 'bitmap-text option record',
+    source: 'upstream/packages/types/src/BitmapText.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'DeviceCapabilities',
+    packageName: '@flighthq/types',
+    purpose: 'device capability result record',
+    source: 'upstream/packages/types/src/DeviceCapabilities.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'DeviceDisplayMetrics',
+    packageName: '@flighthq/types',
+    purpose: 'device display-metrics result record',
+    source: 'upstream/packages/types/src/DeviceDisplayMetrics.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'FileDialogHandle',
+    packageName: '@flighthq/types',
+    purpose: 'file-dialog result handle',
+    source: 'upstream/packages/types/src/Dialog.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'FilmicToneMapOptions',
+    packageName: '@flighthq/types',
+    purpose: 'filmic tone-map option record',
+    source: 'upstream/packages/types/src/FilmicToneMapOptions.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'FontMetrics',
+    packageName: '@flighthq/types',
+    purpose: 'font-metrics result record',
+    source: 'upstream/packages/types/src/FontMetrics.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'GlyphAtlasOptions',
+    packageName: '@flighthq/types',
+    purpose: 'glyph-atlas option record',
+    source: 'upstream/packages/types/src/GlyphSource.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'GlyphMetrics',
+    packageName: '@flighthq/types',
+    purpose: 'glyph-metrics result record',
+    source: 'upstream/packages/types/src/GlyphSource.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'GlyphRasterizeOptions',
+    packageName: '@flighthq/types',
+    purpose: 'glyph-rasterization option record',
+    source: 'upstream/packages/types/src/GlyphSource.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'HapticsCapabilities',
+    packageName: '@flighthq/types',
+    purpose: 'haptics capability result record',
+    source: 'upstream/packages/types/src/Haptics.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'InputGamepadAxisData',
+    packageName: '@flighthq/types',
+    purpose: 'gamepad-axis input result record',
+    source: 'upstream/packages/types/src/InputGamepadData.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'InputGamepadButtonData',
+    packageName: '@flighthq/types',
+    purpose: 'gamepad-button input result record',
+    source: 'upstream/packages/types/src/InputGamepadData.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'InputGamepadConnectData',
+    packageName: '@flighthq/types',
+    purpose: 'gamepad-connection input result record',
+    source: 'upstream/packages/types/src/InputGamepadData.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'InputTextData',
+    packageName: '@flighthq/types',
+    purpose: 'text-input result record',
+    source: 'upstream/packages/types/src/InputTextData.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'InteractionPointerOptions',
+    packageName: '@flighthq/types',
+    purpose: 'interaction-pointer option record',
+    source: 'upstream/packages/types/src/InteractionManager.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'PathBooleanOptions',
+    packageName: '@flighthq/types',
+    purpose: 'path-boolean option record',
+    source: 'upstream/packages/types/src/PathBooleanOptions.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'PathOffsetOptions',
+    packageName: '@flighthq/types',
+    purpose: 'path-offset option record',
+    source: 'upstream/packages/types/src/PathOffsetOptions.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'RenderCacheRefreshOptions',
+    packageName: '@flighthq/types',
+    purpose: 'render-cache refresh option record',
+    source: 'upstream/packages/types/src/RenderCacheRefreshOptions.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'StatusBarInfo',
+    packageName: '@flighthq/types',
+    purpose: 'status-bar result record',
+    source: 'upstream/packages/types/src/StatusBar.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'TextMetrics',
+    packageName: '@flighthq/types',
+    purpose: 'text-metrics result record',
+    source: 'upstream/packages/types/src/TextMetrics.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'TrayBalloonOptions',
+    packageName: '@flighthq/types',
+    purpose: 'tray-balloon option record',
+    source: 'upstream/packages/types/src/Tray.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'VideoPlayOptions',
+    packageName: '@flighthq/types',
+    purpose: 'video-playback option record',
+    source: 'upstream/packages/types/src/VideoResource.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'VideoResourceLoadOptions',
+    packageName: '@flighthq/types',
+    purpose: 'video-resource load option record',
+    source: 'upstream/packages/types/src/VideoResource.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'SignalThrottleOptions',
+    packageName: '@flighthq/signals',
+    purpose: 'signal-throttle option record',
+    source: 'upstream/packages/signals/src/throttle.ts',
+  },
+];
+
+export const initialTypedStructCandidates: readonly TypedStructCandidate[] = [
+  ...directTypedStructCandidates,
+  ...tranche4TypedStructCandidates,
 ];
 
 interface InternalSchema {
@@ -175,7 +392,7 @@ export function typedStructRegistry(
   programAndChecker = upstreamTypeScriptProgram(workspaceDirectory),
 ): TypedStructRegistry {
   const cacheKey = `${upstreamCommit}|${candidates
-    .map((candidate) => `${candidate.packageName}:${candidate.source}#${candidate.name}`)
+    .map((candidate) => `${candidate.packageName}:${candidate.source}#${candidate.name}:${candidate.emission}`)
     .join('|')}`;
   const cached = registryCache.get(programAndChecker.program)?.get(cacheKey);
   if (cached) return cached;
@@ -214,9 +431,11 @@ export function createTypedStructRegistry(
       addReason(schema.audit, 'instanceof-use');
     }
     schema.audit.eligible = schema.audit.reasons.length === 0;
-    schema.audit.emission.directAccesses = schema.audit.eligible
-      ? sum(Object.values(schema.audit.accesses), (count) => count)
-      : 0;
+    const accesses = sum(Object.values(schema.audit.accesses), (count) => count);
+    schema.audit.emission.directAccesses =
+      schema.audit.eligible && schema.audit.emission.mode === 'direct' ? accesses : 0;
+    schema.audit.emission.pendingAccesses =
+      schema.audit.eligible && schema.audit.emission.mode === 'audit-only' ? accesses : 0;
     schema.audit.escapes.sort(compareEscapes);
     schema.audit.memberEscapes.sort(
       (left, right) =>
@@ -228,17 +447,21 @@ export function createTypedStructRegistry(
 
   const report: TypedStructAudit = {
     candidates: schemas.map((schema) => schema.audit),
-    schemaVersion: 2,
+    schemaVersion: 3,
     summary: {
+      auditOnlySchemas: schemas.filter((schema) => schema.audit.emission.mode === 'audit-only').length,
       bindableAccesses: sum(schemas, (schema) =>
         schema.audit.eligible ? sum(Object.values(schema.audit.accesses), (count) => count) : 0,
       ),
       candidates: schemas.length,
       directAccesses: sum(schemas, (schema) => schema.audit.emission.directAccesses),
+      directSchemas: schemas.filter((schema) => schema.audit.eligible && schema.audit.emission.mode === 'direct')
+        .length,
       eligible: schemas.filter((schema) => schema.audit.eligible).length,
       escapes: sum(schemas, (schema) => schema.audit.escapes.length),
       fields: sum(schemas, (schema) => schema.audit.fields.length),
       ineligible: schemas.filter((schema) => !schema.audit.eligible).length,
+      pendingAccesses: sum(schemas, (schema) => schema.audit.emission.pendingAccesses),
       reflectiveSurvivors: sum(schemas, (schema) =>
         sum(schema.audit.emission.reflectiveSurvivors, (survivor) => survivor.accesses),
       ),
@@ -254,7 +477,9 @@ export function createTypedStructRegistry(
       if (resolution.kind !== 'matched') return undefined;
       const schema = schemas.find((candidate) => candidate.audit.id === resolution.schemas[0]?.id);
       const field = schema?.fields.get(member);
-      if (!schema?.audit.eligible || !field || field.receiverSensitive) return undefined;
+      if (!schema?.audit.eligible || schema.audit.emission.mode !== 'direct' || !field || field.receiverSensitive) {
+        return undefined;
+      }
       return { field, schemaId: schema.audit.id, schemaName: schema.audit.name };
     },
   };
@@ -344,7 +569,12 @@ function analyzeCandidate(
     declarationFingerprint: fingerprint(declaration, source),
     declarationKind: ts.isInterfaceDeclaration(declaration) ? 'interface' : 'type',
     eligible: false,
-    emission: { directAccesses: 0, reflectiveSurvivors: [] },
+    emission: {
+      directAccesses: 0,
+      mode: candidate.emission,
+      pendingAccesses: 0,
+      reflectiveSurvivors: [],
+    },
     escapes: [],
     fields,
     id: `${candidate.packageName}:${candidate.source}#${candidate.name}`,

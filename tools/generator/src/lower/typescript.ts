@@ -1454,7 +1454,7 @@ function typedStructPropertyBinding(
     return undefined;
   }
   const schema = resolution.schemas[0]!;
-  if (!schema.eligible) return undefined;
+  if (!schema.eligible || schema.emission.mode !== 'direct') return undefined;
   const field = schema.fields.find((candidate) => candidate.name === node.name.text);
   if (!field) {
     return unsupported(node, context, `unknown typed-struct field ${schema.name}.${node.name.text}`);

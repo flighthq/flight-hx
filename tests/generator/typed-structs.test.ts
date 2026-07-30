@@ -12,6 +12,7 @@ import { lowerTypeScriptSource } from '../../tools/generator/src/lower/typescrip
 import type { IrExpression, IrTypedStructBinding } from '../../tools/generator/src/model/ir.ts';
 
 const fixtureCandidate: TypedStructCandidate = {
+  emission: 'direct',
   name: 'Vector2',
   packageName: '@flighthq/types',
   purpose: 'fixture numeric leaf',
@@ -26,8 +27,17 @@ describe('typed struct analysis', () => {
     const rectangle = report.candidates.find((candidate) => candidate.name === 'Rectangle');
     const color = report.candidates.find((candidate) => candidate.name === 'ColorTransform');
 
-    expect(report.summary.candidates).toBe(7);
-    expect(report.summary.bindableAccesses).toBe(2_057);
+    expect(report.summary).toMatchObject({
+      auditOnlySchemas: 28,
+      bindableAccesses: 2_284,
+      candidates: 35,
+      directAccesses: 2_057,
+      directSchemas: 6,
+      eligible: 34,
+      fields: 151,
+      ineligible: 1,
+      pendingAccesses: 227,
+    });
     expect(rectangle?.eligible).toBe(false);
     expect(rectangle?.reasons).toContain('presence-sensitive-use');
     expect(rectangle?.escapes).toEqual(
@@ -42,7 +52,40 @@ describe('typed struct analysis', () => {
     expect(color?.purpose).toContain('RGBA');
     expect(report.summary.directAccesses).toBe(2_057);
     expect(report.summary.reflectiveSurvivors).toBe(0);
-    expect(rectangle?.emission).toEqual({ directAccesses: 0, reflectiveSurvivors: [] });
+    expect(rectangle?.emission).toEqual({
+      directAccesses: 0,
+      mode: 'direct',
+      pendingAccesses: 0,
+      reflectiveSurvivors: [],
+    });
+  });
+
+  it('keeps eligible audit-only schemas reflective until review enables them', () => {
+    const result = lowerFixture(
+      `
+        export interface Vector2 { x: number; y: number; }
+        export function read(value: Vector2): number { return value.x; }
+      `,
+      { ...fixtureCandidate, emission: 'audit-only' },
+    );
+    const output = emitHaxeModule({
+      declarations: result.lowered.declarations,
+      imports: [],
+      name: 'Vector2',
+      packageName: '@flighthq/types',
+    });
+    const candidate = result.registry.report.candidates[0]!;
+
+    expect(result.lowered.diagnostics).toEqual([]);
+    expect(candidate.eligible).toBe(true);
+    expect(candidate.emission).toEqual({
+      directAccesses: 0,
+      mode: 'audit-only',
+      pendingAccesses: 1,
+      reflectiveSurvivors: [],
+    });
+    expect(collectTypedStructBindings(result.lowered.declarations)).toEqual([]);
+    expect(output).toContain("_Runtime.field(value, 'x')");
   });
 
   it('emits bound fields directly while preserving optional and receiver-sensitive semantics', () => {
@@ -174,9 +217,9 @@ describe('typed struct analysis', () => {
   });
 });
 
-function lowerFixture(text: string) {
+function lowerFixture(text: string, candidate: TypedStructCandidate = fixtureCandidate) {
   const workspace = '/workspace';
-  const fileName = `${workspace}/${fixtureCandidate.source}`;
+  const fileName = `${workspace}/${candidate.source}`;
   const options: ts.CompilerOptions = {
     lib: ['lib.es2022.d.ts'],
     skipLibCheck: true,
@@ -192,7 +235,7 @@ function lowerFixture(text: string) {
   const source = program.getSourceFile(fileName);
   if (!source) throw new Error(`Fixture program is missing ${fileName}`);
   const checker = program.getTypeChecker();
-  const registry = createTypedStructRegistry(workspace, 'fixture', [fixtureCandidate], program, checker);
+  const registry = createTypedStructRegistry(workspace, 'fixture', [candidate], program, checker);
   return {
     lowered: lowerTypeScriptSource(source, '@flighthq/types', workspace, checker, registry),
     registry,
