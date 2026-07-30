@@ -366,9 +366,153 @@ export const tranche4TypedStructCandidates: readonly TypedStructCandidate[] = [
   },
 ];
 
+export const tranche5TypedStructCandidates: readonly TypedStructCandidate[] = [
+  {
+    emission: 'audit-only',
+    name: 'Aabb',
+    packageName: '@flighthq/types',
+    purpose: '3D axis-aligned bounds entity',
+    source: 'upstream/packages/types/src/Aabb.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'AabbLike',
+    packageName: '@flighthq/types',
+    purpose: 'structural 3D axis-aligned bounds carrier',
+    source: 'upstream/packages/types/src/Aabb.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'HasTransform3D',
+    packageName: '@flighthq/types',
+    purpose: 'authored node 3D transform aggregate',
+    source: 'upstream/packages/types/src/HasTransform3D.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'HasTransform3DRuntime',
+    packageName: '@flighthq/types',
+    purpose: 'cached node 3D transform aggregate',
+    source: 'upstream/packages/types/src/HasTransform3D.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'HasTransform2D',
+    packageName: '@flighthq/types',
+    purpose: 'authored node 2D transform aggregate',
+    source: 'upstream/packages/types/src/HasTransform2D.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'HasTransform2DRuntime',
+    packageName: '@flighthq/types',
+    purpose: 'cached node 2D transform aggregate',
+    source: 'upstream/packages/types/src/HasTransform2D.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'HasBoundsRectangleRuntime',
+    packageName: '@flighthq/types',
+    purpose: 'cached node rectangle-bounds aggregate',
+    source: 'upstream/packages/types/src/HasBoundsRectangle.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'BoundingSphere',
+    packageName: '@flighthq/types',
+    purpose: '3D bounding-sphere aggregate',
+    source: 'upstream/packages/types/src/BoundingSphere.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'Camera',
+    packageName: '@flighthq/types',
+    purpose: '3D camera aggregate',
+    source: 'upstream/packages/types/src/Camera.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'PerspectiveProjection',
+    packageName: '@flighthq/types',
+    purpose: 'perspective-camera projection aggregate',
+    source: 'upstream/packages/types/src/Camera.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'OrthographicProjection',
+    packageName: '@flighthq/types',
+    purpose: 'orthographic-camera projection aggregate',
+    source: 'upstream/packages/types/src/Camera.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'Camera2D',
+    packageName: '@flighthq/types',
+    purpose: '2D camera hot-state aggregate',
+    source: 'upstream/packages/types/src/Camera2D.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'Camera2DFollowOptions',
+    packageName: '@flighthq/types',
+    purpose: '2D camera follow aggregate',
+    source: 'upstream/packages/types/src/Camera2D.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'Camera2DOptions',
+    packageName: '@flighthq/types',
+    purpose: '2D camera construction aggregate',
+    source: 'upstream/packages/types/src/Camera2D.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'Capsule',
+    packageName: '@flighthq/types',
+    purpose: '3D capsule-bounds aggregate',
+    source: 'upstream/packages/types/src/Capsule.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'Plane',
+    packageName: '@flighthq/types',
+    purpose: '3D plane aggregate',
+    source: 'upstream/packages/types/src/Plane.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'Frustum',
+    packageName: '@flighthq/types',
+    purpose: '3D frustum aggregate',
+    source: 'upstream/packages/types/src/Frustum.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'SpatialAabb',
+    packageName: '@flighthq/types',
+    purpose: '2D spatial-index bounds aggregate',
+    source: 'upstream/packages/types/src/Spatial.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'Obb',
+    packageName: '@flighthq/types',
+    purpose: '3D oriented-bounds aggregate',
+    source: 'upstream/packages/types/src/Obb.ts',
+  },
+  {
+    emission: 'audit-only',
+    name: 'Ray3D',
+    packageName: '@flighthq/types',
+    purpose: '3D ray aggregate',
+    source: 'upstream/packages/types/src/Ray3D.ts',
+  },
+];
+
 export const initialTypedStructCandidates: readonly TypedStructCandidate[] = [
   ...directTypedStructCandidates,
   ...tranche4TypedStructCandidates,
+  ...tranche5TypedStructCandidates,
 ];
 
 interface InternalSchema {

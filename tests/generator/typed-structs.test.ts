@@ -20,23 +20,27 @@ const fixtureCandidate: TypedStructCandidate = {
 };
 
 describe('typed struct analysis', () => {
-  it('audits the initial canonical allowlist without enabling Rectangle prematurely', () => {
+  it('audits the canonical allowlist without enabling Rectangle or tranche five prematurely', () => {
     const workspace = path.resolve('.');
     const programAndChecker = upstreamTypeScriptProgram(workspace);
     const report = typedStructRegistry(workspace, 'fixture', undefined, programAndChecker).report;
     const rectangle = report.candidates.find((candidate) => candidate.name === 'Rectangle');
     const color = report.candidates.find((candidate) => candidate.name === 'ColorTransform');
+    const camera2D = report.candidates.find((candidate) => candidate.name === 'Camera2D');
+    const transform2DRuntime = report.candidates.find((candidate) => candidate.name === 'HasTransform2DRuntime');
+    const perspective = report.candidates.find((candidate) => candidate.name === 'PerspectiveProjection');
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 0,
-      bindableAccesses: 2_284,
-      candidates: 35,
+      auditOnlySchemas: 20,
+      bindableAccesses: 3_271,
+      candidates: 55,
       directAccesses: 2_284,
       directSchemas: 34,
-      eligible: 34,
-      fields: 151,
+      eligible: 54,
+      escapes: 154,
+      fields: 243,
       ineligible: 1,
-      pendingAccesses: 0,
+      pendingAccesses: 987,
     });
     expect(rectangle?.eligible).toBe(false);
     expect(rectangle?.reasons).toContain('presence-sensitive-use');
@@ -58,6 +62,17 @@ describe('typed struct analysis', () => {
       pendingAccesses: 0,
       reflectiveSurvivors: [],
     });
+    expect(camera2D?.emission).toEqual({
+      directAccesses: 0,
+      mode: 'audit-only',
+      pendingAccesses: 17,
+      reflectiveSurvivors: [],
+    });
+    expect(transform2DRuntime?.emission.pendingAccesses).toBe(27);
+    expect(transform2DRuntime?.escapes).toHaveLength(50);
+    expect(perspective?.emission.pendingAccesses).toBe(7);
+    expect(perspective?.escapes).toHaveLength(7);
+    expect(perspective?.escapes.every((escape) => escape.reason === 'incompatible-union')).toBe(true);
   });
 
   it('keeps eligible audit-only schemas reflective until review enables them', () => {

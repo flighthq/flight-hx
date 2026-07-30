@@ -6,17 +6,17 @@ Eligibility is audited independently from emission. Audit-only schemas remain re
 
 | Metric | Count |
 | --- | ---: |
-| Candidates | 35 |
-| Eligible | 34 |
+| Candidates | 55 |
+| Eligible | 54 |
 | Ineligible | 1 |
-| Audit-only schemas | 0 |
+| Audit-only schemas | 20 |
 | Direct schemas | 34 |
-| Declared fields | 151 |
-| Bindable accesses | 2284 |
-| Pending accesses | 0 |
+| Declared fields | 243 |
+| Bindable accesses | 3271 |
+| Pending accesses | 987 |
 | Directly emitted accesses | 2284 |
 | Reflective survivors | 0 |
-| Dynamic escapes | 2 |
+| Dynamic escapes | 154 |
 
 | Candidate | Mode | Purpose | Fields | Reads | Writes | Calls | Pending | Direct | Reflective survivors | Escapes | Eligible | Reasons |
 | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | :---: | --- |
@@ -55,3 +55,23 @@ Eligibility is audited independently from emission. Audit-only schemas remain re
 | `VideoPlayOptions` | `direct` | video-playback option record | 4 | 4 | 0 | 0 | 0 | 4 | 0 | 0 | yes | — |
 | `VideoResourceLoadOptions` | `direct` | video-resource load option record | 5 | 8 | 0 | 0 | 0 | 8 | 0 | 0 | yes | — |
 | `SignalThrottleOptions` | `direct` | signal-throttle option record | 2 | 4 | 0 | 0 | 0 | 4 | 0 | 0 | yes | — |
+| `Aabb` | `audit-only` | 3D axis-aligned bounds entity | 2 | 22 | 0 | 0 | 22 | 0 | 0 | 0 | yes | — |
+| `AabbLike` | `audit-only` | structural 3D axis-aligned bounds carrier | 2 | 230 | 0 | 0 | 230 | 0 | 0 | 0 | yes | — |
+| `HasTransform3D` | `audit-only` | authored node 3D transform aggregate | 3 | 12 | 3 | 0 | 15 | 0 | 0 | 0 | yes | — |
+| `HasTransform3DRuntime` | `audit-only` | cached node 3D transform aggregate | 4 | 15 | 9 | 0 | 24 | 0 | 0 | 28 | yes | — |
+| `HasTransform2D` | `audit-only` | authored node 2D transform aggregate | 9 | 43 | 38 | 0 | 81 | 0 | 0 | 7 | yes | — |
+| `HasTransform2DRuntime` | `audit-only` | cached node 2D transform aggregate | 6 | 17 | 10 | 0 | 27 | 0 | 0 | 50 | yes | — |
+| `HasBoundsRectangleRuntime` | `audit-only` | cached node rectangle-bounds aggregate | 5 | 7 | 6 | 1 | 14 | 0 | 0 | 53 | yes | — |
+| `BoundingSphere` | `audit-only` | 3D bounding-sphere aggregate | 2 | 134 | 16 | 0 | 150 | 0 | 0 | 0 | yes | — |
+| `Camera` | `audit-only` | 3D camera aggregate | 6 | 34 | 3 | 0 | 37 | 0 | 0 | 0 | yes | — |
+| `PerspectiveProjection` | `audit-only` | perspective-camera projection aggregate | 3 | 7 | 0 | 0 | 7 | 0 | 0 | 7 | yes | — |
+| `OrthographicProjection` | `audit-only` | orthographic-camera projection aggregate | 3 | 6 | 0 | 0 | 6 | 0 | 0 | 7 | yes | — |
+| `Camera2D` | `audit-only` | 2D camera hot-state aggregate | 6 | 12 | 5 | 0 | 17 | 0 | 0 | 0 | yes | — |
+| `Camera2DFollowOptions` | `audit-only` | 2D camera follow aggregate | 4 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
+| `Camera2DOptions` | `audit-only` | 2D camera construction aggregate | 4 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
+| `Capsule` | `audit-only` | 3D capsule-bounds aggregate | 7 | 38 | 7 | 0 | 45 | 0 | 0 | 0 | yes | — |
+| `Plane` | `audit-only` | 3D plane aggregate | 4 | 61 | 36 | 0 | 97 | 0 | 0 | 0 | yes | — |
+| `Frustum` | `audit-only` | 3D frustum aggregate | 6 | 24 | 0 | 0 | 24 | 0 | 0 | 0 | yes | — |
+| `SpatialAabb` | `audit-only` | 2D spatial-index bounds aggregate | 4 | 30 | 4 | 0 | 34 | 0 | 0 | 0 | yes | — |
+| `Obb` | `audit-only` | 3D oriented-bounds aggregate | 10 | 44 | 20 | 0 | 64 | 0 | 0 | 0 | yes | — |
+| `Ray3D` | `audit-only` | 3D ray aggregate | 2 | 85 | 0 | 0 | 85 | 0 | 0 | 0 | yes | — |

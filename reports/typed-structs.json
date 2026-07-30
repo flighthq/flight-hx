@@ -2174,20 +2174,2400 @@
       "purpose": "signal-throttle option record",
       "reasons": [],
       "source": "upstream/packages/signals/src/throttle.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 22,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:fddcf6f4384ac64540b2d5e5773987e8bd13b153e3415c0fc5624922679fdd33",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 22,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "max",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Vector3"
+        },
+        {
+          "name": "min",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Vector3"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/Aabb.ts#Aabb",
+      "memberEscapes": [
+        {
+          "member": "[EntityRuntimeKey]",
+          "reason": "computed-symbol-member",
+          "source": "upstream/packages/types/src/Entity.ts:3"
+        }
+      ],
+      "name": "Aabb",
+      "packageName": "@flighthq/types",
+      "purpose": "3D axis-aligned bounds entity",
+      "reasons": [],
+      "source": "upstream/packages/types/src/Aabb.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 230,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:b297ec83d7e3724ec14478784fcfb1cfdd769c0f27970ff606ef16e542de48c2",
+      "declarationKind": "type",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 230,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "max",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Vector3Like"
+        },
+        {
+          "name": "min",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Vector3Like"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/Aabb.ts#AabbLike",
+      "memberEscapes": [],
+      "name": "AabbLike",
+      "packageName": "@flighthq/types",
+      "purpose": "structural 3D axis-aligned bounds carrier",
+      "reasons": [],
+      "source": "upstream/packages/types/src/Aabb.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 12,
+        "writes": 3
+      },
+      "declarationFingerprint": "sha256:ac6499b869984707d016242a71546b88681eeb1961c741ac5cae8a0e70f63a28",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 15,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "position",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Vector3"
+        },
+        {
+          "name": "rotation",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Quaternion"
+        },
+        {
+          "name": "scale",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Vector3"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/HasTransform3D.ts#HasTransform3D",
+      "memberEscapes": [],
+      "name": "HasTransform3D",
+      "packageName": "@flighthq/types",
+      "purpose": "authored node 3D transform aggregate",
+      "reasons": [],
+      "source": "upstream/packages/types/src/HasTransform3D.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 15,
+        "writes": 9
+      },
+      "declarationFingerprint": "sha256:1d64b827bad156d3d07cd1ca90f99aecb21a157026d06c1920d015992b2d3e2e",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 24,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [
+        {
+          "column": 40,
+          "member": "localTransformUsingLocalTransformId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/transform3d.ts",
+          "line": 51
+        },
+        {
+          "column": 88,
+          "member": "localTransformId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/transform3d.ts",
+          "line": 51
+        },
+        {
+          "column": 18,
+          "member": "parent",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/transform3d.ts",
+          "line": 58
+        },
+        {
+          "column": 30,
+          "member": "worldTransformId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/transform3d.ts",
+          "line": 66
+        },
+        {
+          "column": 5,
+          "member": "worldTransformUsingLocalTransformId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/transform3d.ts",
+          "line": 70
+        },
+        {
+          "column": 53,
+          "member": "localTransformId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/transform3d.ts",
+          "line": 70
+        },
+        {
+          "column": 5,
+          "member": "worldTransformUsingParentTransformId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/transform3d.ts",
+          "line": 71
+        },
+        {
+          "column": 3,
+          "member": "localTransformUsingLocalTransformId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/transform3d.ts",
+          "line": 116
+        },
+        {
+          "column": 49,
+          "member": "localTransformId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/transform3d.ts",
+          "line": 116
+        },
+        {
+          "column": 3,
+          "member": "localTransformUsingLocalTransformId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/transform3d.ts",
+          "line": 149
+        },
+        {
+          "column": 49,
+          "member": "localTransformId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/transform3d.ts",
+          "line": 149
+        },
+        {
+          "column": 20,
+          "member": "children",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene/src/billboardCamera.ts",
+          "line": 70
+        },
+        {
+          "column": 3,
+          "member": "traits",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene/src/sceneNode.ts",
+          "line": 29
+        },
+        {
+          "column": 3,
+          "member": "worldAlpha",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene/src/sceneNode.ts",
+          "line": 30
+        },
+        {
+          "column": 3,
+          "member": "worldAlphaUsingAppearanceId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene/src/sceneNode.ts",
+          "line": 31
+        },
+        {
+          "column": 3,
+          "member": "worldAlphaUsingParentAppearanceId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene/src/sceneNode.ts",
+          "line": 32
+        },
+        {
+          "column": 3,
+          "member": "worldAppearanceId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene/src/sceneNode.ts",
+          "line": 33
+        },
+        {
+          "column": 18,
+          "member": "parent",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene/src/sceneNodeAppearance.ts",
+          "line": 12
+        },
+        {
+          "column": 24,
+          "member": "worldAlpha",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene/src/sceneNodeAppearance.ts",
+          "line": 19
+        },
+        {
+          "column": 31,
+          "member": "worldAppearanceId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene/src/sceneNodeAppearance.ts",
+          "line": 20
+        },
+        {
+          "column": 5,
+          "member": "worldAlpha",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene/src/sceneNodeAppearance.ts",
+          "line": 25
+        },
+        {
+          "column": 5,
+          "member": "worldAlphaUsingAppearanceId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene/src/sceneNodeAppearance.ts",
+          "line": 26
+        },
+        {
+          "column": 5,
+          "member": "worldAlphaUsingParentAppearanceId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene/src/sceneNodeAppearance.ts",
+          "line": 27
+        },
+        {
+          "column": 5,
+          "member": "worldAlpha",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene/src/sceneNodeAppearance.ts",
+          "line": 29
+        },
+        {
+          "column": 5,
+          "member": "worldAlphaUsingAppearanceId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene/src/sceneNodeAppearance.ts",
+          "line": 30
+        },
+        {
+          "column": 5,
+          "member": "worldAlphaUsingParentAppearanceId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene/src/sceneNodeAppearance.ts",
+          "line": 31
+        },
+        {
+          "column": 5,
+          "member": "worldAppearanceId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene/src/sceneNodeAppearance.ts",
+          "line": 37
+        },
+        {
+          "column": 10,
+          "member": "worldAlpha",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene/src/sceneNodeAppearance.ts",
+          "line": 45
+        }
+      ],
+      "fields": [
+        {
+          "name": "binding",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "object | null"
+        },
+        {
+          "name": "localMatrix4",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Matrix4 | null"
+        },
+        {
+          "name": "localMatrix4Detached",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean"
+        },
+        {
+          "name": "worldMatrix4",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Matrix4 | null"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/HasTransform3D.ts#HasTransform3DRuntime",
+      "memberEscapes": [],
+      "name": "HasTransform3DRuntime",
+      "packageName": "@flighthq/types",
+      "purpose": "cached node 3D transform aggregate",
+      "reasons": [],
+      "source": "upstream/packages/types/src/HasTransform3D.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 43,
+        "writes": 38
+      },
+      "declarationFingerprint": "sha256:c9b731b05f4576401a528e7854ebe8e3994a7f1b690b6ff43de196725926a3de",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 81,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [
+        {
+          "column": 49,
+          "member": "kind",
+          "reason": "unknown-member",
+          "source": "upstream/packages/displayobject-gl/src/glVelocity.ts",
+          "line": 336
+        },
+        {
+          "column": 51,
+          "member": "kind",
+          "reason": "unknown-member",
+          "source": "upstream/packages/displayobject-wgpu/src/wgpuVelocity.ts",
+          "line": 369
+        },
+        {
+          "column": 9,
+          "member": "visible",
+          "reason": "unknown-member",
+          "source": "upstream/packages/particles/src/updateParticleObjects.ts",
+          "line": 26
+        },
+        {
+          "column": 7,
+          "member": "visible",
+          "reason": "unknown-member",
+          "source": "upstream/packages/particles/src/updateParticleObjects.ts",
+          "line": 76
+        },
+        {
+          "column": 5,
+          "member": "alpha",
+          "reason": "unknown-member",
+          "source": "upstream/packages/particles/src/updateParticleObjects.ts",
+          "line": 86
+        },
+        {
+          "column": 7,
+          "member": "alpha",
+          "reason": "unknown-member",
+          "source": "upstream/packages/particles/src/updateParticleObjects.ts",
+          "line": 165
+        },
+        {
+          "column": 7,
+          "member": "visible",
+          "reason": "unknown-member",
+          "source": "upstream/packages/particles/src/updateParticleObjects.ts",
+          "line": 166
+        }
+      ],
+      "fields": [
+        {
+          "name": "pivotX",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "pivotY",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "rotation",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "scaleX",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "scaleY",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "skewX",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "skewY",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "x",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "y",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/HasTransform2D.ts#HasTransform2D",
+      "memberEscapes": [
+        {
+          "member": "[EntityRuntimeKey]",
+          "reason": "computed-symbol-member",
+          "source": "upstream/packages/types/src/Entity.ts:3"
+        }
+      ],
+      "name": "HasTransform2D",
+      "packageName": "@flighthq/types",
+      "purpose": "authored node 2D transform aggregate",
+      "reasons": [],
+      "source": "upstream/packages/types/src/HasTransform2D.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 17,
+        "writes": 10
+      },
+      "declarationFingerprint": "sha256:96c70f861965d4d1f68717a0a39a14317f7304603f79b6048c18a9291671a96a",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 27,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [
+        {
+          "column": 24,
+          "member": "children",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject-canvas/src/canvasDisplayObject.ts",
+          "line": 42
+        },
+        {
+          "column": 24,
+          "member": "children",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject-canvas/src/canvasSprite.ts",
+          "line": 71
+        },
+        {
+          "column": 24,
+          "member": "children",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject-dom/src/domDisplayObject.ts",
+          "line": 54
+        },
+        {
+          "column": 24,
+          "member": "children",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject-gl/src/glDisplayObject.ts",
+          "line": 34
+        },
+        {
+          "column": 24,
+          "member": "children",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject-gl/src/glSprite.ts",
+          "line": 22
+        },
+        {
+          "column": 24,
+          "member": "children",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject-wgpu/src/wgpuDisplayObject.ts",
+          "line": 34
+        },
+        {
+          "column": 24,
+          "member": "children",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject-wgpu/src/wgpuSprite.ts",
+          "line": 22
+        },
+        {
+          "column": 19,
+          "member": "colorAdjustments",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/displayObject.ts",
+          "line": 43
+        },
+        {
+          "column": 3,
+          "member": "colorAdjustments",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/displayObject.ts",
+          "line": 44
+        },
+        {
+          "column": 3,
+          "member": "traits",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/displayObject.ts",
+          "line": 78
+        },
+        {
+          "column": 3,
+          "member": "stage",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/displayObject.ts",
+          "line": 79
+        },
+        {
+          "column": 3,
+          "member": "colorAdjustments",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/displayObject.ts",
+          "line": 110
+        },
+        {
+          "column": 23,
+          "member": "colorAdjustments",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/displayObject.ts",
+          "line": 134
+        },
+        {
+          "column": 5,
+          "member": "resolvedColorTransform",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/displayObject.ts",
+          "line": 136
+        },
+        {
+          "column": 5,
+          "member": "colorAdjustmentsChannelMixing",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/displayObject.ts",
+          "line": 137
+        },
+        {
+          "column": 15,
+          "member": "resolvedColorTransform",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/displayObject.ts",
+          "line": 140
+        },
+        {
+          "column": 5,
+          "member": "resolvedColorTransform",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/displayObject.ts",
+          "line": 143
+        },
+        {
+          "column": 5,
+          "member": "colorAdjustmentsChannelMixing",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/displayObject.ts",
+          "line": 144
+        },
+        {
+          "column": 3,
+          "member": "resolvedColorTransform",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/displayObject.ts",
+          "line": 147
+        },
+        {
+          "column": 3,
+          "member": "colorAdjustmentsChannelMixing",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/displayObject.ts",
+          "line": 148
+        },
+        {
+          "column": 3,
+          "member": "stage",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/stage.ts",
+          "line": 28
+        },
+        {
+          "column": 10,
+          "member": "stage",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/stage.ts",
+          "line": 56
+        },
+        {
+          "column": 30,
+          "member": "worldBoundsUsingLocalBoundsId",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 81
+        },
+        {
+          "column": 72,
+          "member": "localBoundsId",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 81
+        },
+        {
+          "column": 47,
+          "member": "worldBoundsUsingWorldTransformId",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 89
+        },
+        {
+          "column": 92,
+          "member": "worldTransformId",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 89
+        },
+        {
+          "column": 7,
+          "member": "worldBoundsRectangle",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 173
+        },
+        {
+          "column": 46,
+          "member": "worldBoundsRectangle",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 173
+        },
+        {
+          "column": 5,
+          "member": "worldBoundsRectangle",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 175
+        },
+        {
+          "column": 24,
+          "member": "worldBoundsRectangle",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 185
+        },
+        {
+          "column": 54,
+          "member": "worldBoundsRectangle",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 185
+        },
+        {
+          "column": 3,
+          "member": "worldBoundsUsingWorldTransformId",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 189
+        },
+        {
+          "column": 46,
+          "member": "worldTransformId",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 189
+        },
+        {
+          "column": 3,
+          "member": "worldBoundsUsingLocalBoundsId",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 190
+        },
+        {
+          "column": 43,
+          "member": "localBoundsId",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 190
+        },
+        {
+          "column": 7,
+          "member": "worldBoundsRectangle",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 197
+        },
+        {
+          "column": 48,
+          "member": "worldMatrix",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 197
+        },
+        {
+          "column": 62,
+          "member": "worldMatrix",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 198
+        },
+        {
+          "column": 36,
+          "member": "worldMatrix",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 200
+        },
+        {
+          "column": 9,
+          "member": "worldBoundsRectangle",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 205
+        },
+        {
+          "column": 9,
+          "member": "worldBoundsRectangle",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 206
+        },
+        {
+          "column": 7,
+          "member": "localTransformUsingLocalTransformId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/transform2d.ts",
+          "line": 49
+        },
+        {
+          "column": 55,
+          "member": "localTransformId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/transform2d.ts",
+          "line": 49
+        },
+        {
+          "column": 18,
+          "member": "parent",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/transform2d.ts",
+          "line": 56
+        },
+        {
+          "column": 30,
+          "member": "worldTransformId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/transform2d.ts",
+          "line": 64
+        },
+        {
+          "column": 5,
+          "member": "worldTransformUsingLocalTransformId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/transform2d.ts",
+          "line": 68
+        },
+        {
+          "column": 53,
+          "member": "localTransformId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/transform2d.ts",
+          "line": 68
+        },
+        {
+          "column": 5,
+          "member": "worldTransformUsingParentTransformId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/transform2d.ts",
+          "line": 69
+        },
+        {
+          "column": 3,
+          "member": "localTransformUsingLocalTransformId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/transform2d.ts",
+          "line": 163
+        },
+        {
+          "column": 49,
+          "member": "localTransformId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/transform2d.ts",
+          "line": 163
+        }
+      ],
+      "fields": [
+        {
+          "name": "binding",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "object | null"
+        },
+        {
+          "name": "localMatrix",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Matrix | null"
+        },
+        {
+          "name": "rotationAngle",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "rotationCosine",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "rotationSine",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "worldMatrix",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Matrix | null"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/HasTransform2D.ts#HasTransform2DRuntime",
+      "memberEscapes": [],
+      "name": "HasTransform2DRuntime",
+      "packageName": "@flighthq/types",
+      "purpose": "cached node 2D transform aggregate",
+      "reasons": [],
+      "source": "upstream/packages/types/src/HasTransform2D.ts"
+    },
+    {
+      "accesses": {
+        "calls": 1,
+        "reads": 7,
+        "writes": 6
+      },
+      "declarationFingerprint": "sha256:a19ae57a4710bd355d13a39e58afc3849abd973976923d88c704c6d487ab6e26",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 14,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [
+        {
+          "column": 24,
+          "member": "children",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject-canvas/src/canvasDisplayObject.ts",
+          "line": 42
+        },
+        {
+          "column": 24,
+          "member": "children",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject-canvas/src/canvasSprite.ts",
+          "line": 71
+        },
+        {
+          "column": 24,
+          "member": "children",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject-dom/src/domDisplayObject.ts",
+          "line": 54
+        },
+        {
+          "column": 24,
+          "member": "children",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject-gl/src/glDisplayObject.ts",
+          "line": 34
+        },
+        {
+          "column": 24,
+          "member": "children",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject-gl/src/glSprite.ts",
+          "line": 22
+        },
+        {
+          "column": 24,
+          "member": "children",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject-wgpu/src/wgpuDisplayObject.ts",
+          "line": 34
+        },
+        {
+          "column": 24,
+          "member": "children",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject-wgpu/src/wgpuSprite.ts",
+          "line": 22
+        },
+        {
+          "column": 19,
+          "member": "colorAdjustments",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/displayObject.ts",
+          "line": 43
+        },
+        {
+          "column": 3,
+          "member": "colorAdjustments",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/displayObject.ts",
+          "line": 44
+        },
+        {
+          "column": 3,
+          "member": "traits",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/displayObject.ts",
+          "line": 78
+        },
+        {
+          "column": 3,
+          "member": "stage",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/displayObject.ts",
+          "line": 79
+        },
+        {
+          "column": 3,
+          "member": "colorAdjustments",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/displayObject.ts",
+          "line": 110
+        },
+        {
+          "column": 23,
+          "member": "colorAdjustments",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/displayObject.ts",
+          "line": 134
+        },
+        {
+          "column": 5,
+          "member": "resolvedColorTransform",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/displayObject.ts",
+          "line": 136
+        },
+        {
+          "column": 5,
+          "member": "colorAdjustmentsChannelMixing",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/displayObject.ts",
+          "line": 137
+        },
+        {
+          "column": 15,
+          "member": "resolvedColorTransform",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/displayObject.ts",
+          "line": 140
+        },
+        {
+          "column": 5,
+          "member": "resolvedColorTransform",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/displayObject.ts",
+          "line": 143
+        },
+        {
+          "column": 5,
+          "member": "colorAdjustmentsChannelMixing",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/displayObject.ts",
+          "line": 144
+        },
+        {
+          "column": 3,
+          "member": "resolvedColorTransform",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/displayObject.ts",
+          "line": 147
+        },
+        {
+          "column": 3,
+          "member": "colorAdjustmentsChannelMixing",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/displayObject.ts",
+          "line": 148
+        },
+        {
+          "column": 3,
+          "member": "stage",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/stage.ts",
+          "line": 28
+        },
+        {
+          "column": 10,
+          "member": "stage",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/displayobject/src/stage.ts",
+          "line": 56
+        },
+        {
+          "column": 7,
+          "member": "localBoundsUsingLocalBoundsId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 64
+        },
+        {
+          "column": 49,
+          "member": "localBoundsId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 64
+        },
+        {
+          "column": 5,
+          "member": "boundsUsingLocalBoundsId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 72
+        },
+        {
+          "column": 42,
+          "member": "localBoundsId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 72
+        },
+        {
+          "column": 5,
+          "member": "boundsUsingLocalTransformId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 73
+        },
+        {
+          "column": 45,
+          "member": "localTransformId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 73
+        },
+        {
+          "column": 30,
+          "member": "worldBoundsUsingLocalBoundsId",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 81
+        },
+        {
+          "column": 72,
+          "member": "localBoundsId",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 81
+        },
+        {
+          "column": 47,
+          "member": "worldBoundsUsingWorldTransformId",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 89
+        },
+        {
+          "column": 92,
+          "member": "worldTransformId",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 89
+        },
+        {
+          "column": 3,
+          "member": "boundsUsingLocalBoundsId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 156
+        },
+        {
+          "column": 38,
+          "member": "localBoundsId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 156
+        },
+        {
+          "column": 3,
+          "member": "boundsUsingLocalTransformId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 157
+        },
+        {
+          "column": 41,
+          "member": "localTransformId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 157
+        },
+        {
+          "column": 3,
+          "member": "localBoundsUsingLocalBoundsId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 166
+        },
+        {
+          "column": 43,
+          "member": "localBoundsId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 166
+        },
+        {
+          "column": 7,
+          "member": "worldBoundsRectangle",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 173
+        },
+        {
+          "column": 46,
+          "member": "worldBoundsRectangle",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 173
+        },
+        {
+          "column": 5,
+          "member": "worldBoundsRectangle",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 175
+        },
+        {
+          "column": 24,
+          "member": "worldBoundsRectangle",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 185
+        },
+        {
+          "column": 54,
+          "member": "worldBoundsRectangle",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 185
+        },
+        {
+          "column": 3,
+          "member": "worldBoundsUsingWorldTransformId",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 189
+        },
+        {
+          "column": 46,
+          "member": "worldTransformId",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 189
+        },
+        {
+          "column": 3,
+          "member": "worldBoundsUsingLocalBoundsId",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 190
+        },
+        {
+          "column": 43,
+          "member": "localBoundsId",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 190
+        },
+        {
+          "column": 7,
+          "member": "worldBoundsRectangle",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 197
+        },
+        {
+          "column": 48,
+          "member": "worldMatrix",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 197
+        },
+        {
+          "column": 62,
+          "member": "worldMatrix",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 198
+        },
+        {
+          "column": 36,
+          "member": "worldMatrix",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 200
+        },
+        {
+          "column": 9,
+          "member": "worldBoundsRectangle",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 205
+        },
+        {
+          "column": 9,
+          "member": "worldBoundsRectangle",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 206
+        }
+      ],
+      "fields": [
+        {
+          "name": "binding",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "object | null"
+        },
+        {
+          "name": "boundsRectangle",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Rectangle | null"
+        },
+        {
+          "name": "computeLocalBoundsRectangle",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "(out: Rectangle, source: Readonly<BoundsNodeAny>) => void"
+        },
+        {
+          "name": "localBoundsRectangle",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Rectangle | null"
+        },
+        {
+          "name": "worldBoundsRectangle",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Rectangle | null"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/HasBoundsRectangle.ts#HasBoundsRectangleRuntime",
+      "memberEscapes": [],
+      "name": "HasBoundsRectangleRuntime",
+      "packageName": "@flighthq/types",
+      "purpose": "cached node rectangle-bounds aggregate",
+      "reasons": [],
+      "source": "upstream/packages/types/src/HasBoundsRectangle.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 134,
+        "writes": 16
+      },
+      "declarationFingerprint": "sha256:92c524ce02c86cb0a9e5328f47a35f2de5f28ff17c6a6e73d56cc9fb56bfef78",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 150,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "center",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Vector3"
+        },
+        {
+          "name": "radius",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/BoundingSphere.ts#BoundingSphere",
+      "memberEscapes": [
+        {
+          "member": "[EntityRuntimeKey]",
+          "reason": "computed-symbol-member",
+          "source": "upstream/packages/types/src/Entity.ts:3"
+        }
+      ],
+      "name": "BoundingSphere",
+      "packageName": "@flighthq/types",
+      "purpose": "3D bounding-sphere aggregate",
+      "reasons": [],
+      "source": "upstream/packages/types/src/BoundingSphere.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 34,
+        "writes": 3
+      },
+      "declarationFingerprint": "sha256:5b25d9f44809b168101850d099cc8f5e2ff9f30356638216b00fbd21e08fce43",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 37,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "far",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "inverseViewProjection",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Matrix4"
+        },
+        {
+          "name": "jitter",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Vector2"
+        },
+        {
+          "name": "near",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "projection",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Projection"
+        },
+        {
+          "name": "view",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Matrix4"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/Camera.ts#Camera",
+      "memberEscapes": [
+        {
+          "member": "[EntityRuntimeKey]",
+          "reason": "computed-symbol-member",
+          "source": "upstream/packages/types/src/Entity.ts:3"
+        }
+      ],
+      "name": "Camera",
+      "packageName": "@flighthq/types",
+      "purpose": "3D camera aggregate",
+      "reasons": [],
+      "source": "upstream/packages/types/src/Camera.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 7,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:e3adb55f5918c927447f09149b2a6a9d9abee406e4abe3295085b6e634017e2a",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 7,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [
+        {
+          "column": 10,
+          "member": "kind",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/camera/src/projection.ts",
+          "line": 28
+        },
+        {
+          "column": 10,
+          "member": "kind",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/camera/src/projection.ts",
+          "line": 33
+        },
+        {
+          "column": 7,
+          "member": "kind",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/camera/src/projection.ts",
+          "line": 51
+        },
+        {
+          "column": 18,
+          "member": "kind",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/picking/src/pickScene.ts",
+          "line": 143
+        },
+        {
+          "column": 7,
+          "member": "kind",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/render/src/sceneRender.ts",
+          "line": 337
+        },
+        {
+          "column": 18,
+          "member": "kind",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/scene-gl/src/glMeshProgram.ts",
+          "line": 200
+        },
+        {
+          "column": 18,
+          "member": "kind",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/scene-wgpu/src/wgpuMeshPipeline.ts",
+          "line": 696
+        }
+      ],
+      "fields": [
+        {
+          "name": "aspect",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "fovY",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "kind",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "\"perspective\""
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/Camera.ts#PerspectiveProjection",
+      "memberEscapes": [],
+      "name": "PerspectiveProjection",
+      "packageName": "@flighthq/types",
+      "purpose": "perspective-camera projection aggregate",
+      "reasons": [],
+      "source": "upstream/packages/types/src/Camera.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 6,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:e14f2b29ed5efd13226a5e9ca3bfc45e4904ee84f8ff0c7839a3de1b4e006497",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 6,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [
+        {
+          "column": 10,
+          "member": "kind",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/camera/src/projection.ts",
+          "line": 28
+        },
+        {
+          "column": 10,
+          "member": "kind",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/camera/src/projection.ts",
+          "line": 33
+        },
+        {
+          "column": 7,
+          "member": "kind",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/camera/src/projection.ts",
+          "line": 51
+        },
+        {
+          "column": 18,
+          "member": "kind",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/picking/src/pickScene.ts",
+          "line": 143
+        },
+        {
+          "column": 7,
+          "member": "kind",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/render/src/sceneRender.ts",
+          "line": 337
+        },
+        {
+          "column": 18,
+          "member": "kind",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/scene-gl/src/glMeshProgram.ts",
+          "line": 200
+        },
+        {
+          "column": 18,
+          "member": "kind",
+          "reason": "incompatible-union",
+          "source": "upstream/packages/scene-wgpu/src/wgpuMeshPipeline.ts",
+          "line": 696
+        }
+      ],
+      "fields": [
+        {
+          "name": "halfHeight",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "halfWidth",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "kind",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "\"orthographic\""
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/Camera.ts#OrthographicProjection",
+      "memberEscapes": [],
+      "name": "OrthographicProjection",
+      "packageName": "@flighthq/types",
+      "purpose": "orthographic-camera projection aggregate",
+      "reasons": [],
+      "source": "upstream/packages/types/src/Camera.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 12,
+        "writes": 5
+      },
+      "declarationFingerprint": "sha256:c8d86eb25d0a7636de1d27eead37d006d22b9ac4a8a6e55a07e4b1227f3a7a9e",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 17,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "rotation",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "viewportHeight",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "viewportWidth",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "x",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "y",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "zoom",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/Camera2D.ts#Camera2D",
+      "memberEscapes": [],
+      "name": "Camera2D",
+      "packageName": "@flighthq/types",
+      "purpose": "2D camera hot-state aggregate",
+      "reasons": [],
+      "source": "upstream/packages/types/src/Camera2D.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 4,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:1a6e6412cf22c4268643adadbc08fab5e10f9911ce8eac4b47b5883e9c739143",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 4,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "deadzoneHalfHeight",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "deadzoneHalfWidth",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "smoothTime",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "worldBounds",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Readonly<Rectangle> | undefined"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/Camera2D.ts#Camera2DFollowOptions",
+      "memberEscapes": [],
+      "name": "Camera2DFollowOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "2D camera follow aggregate",
+      "reasons": [],
+      "source": "upstream/packages/types/src/Camera2D.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 4,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:a2dd28e6be1aa508210a4e0081af1eda684944dbeee1bc32166e096a2bc2dced",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 4,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "rotation",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "x",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "y",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "zoom",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/Camera2D.ts#Camera2DOptions",
+      "memberEscapes": [],
+      "name": "Camera2DOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "2D camera construction aggregate",
+      "reasons": [],
+      "source": "upstream/packages/types/src/Camera2D.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 38,
+        "writes": 7
+      },
+      "declarationFingerprint": "sha256:fbaf014ea5264f7e12234a5516e989174163eb8de214050b034b3820750e1394",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 45,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "endX",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "endY",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "endZ",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "radius",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "startX",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "startY",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "startZ",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/Capsule.ts#Capsule",
+      "memberEscapes": [
+        {
+          "member": "[EntityRuntimeKey]",
+          "reason": "computed-symbol-member",
+          "source": "upstream/packages/types/src/Entity.ts:3"
+        }
+      ],
+      "name": "Capsule",
+      "packageName": "@flighthq/types",
+      "purpose": "3D capsule-bounds aggregate",
+      "reasons": [],
+      "source": "upstream/packages/types/src/Capsule.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 61,
+        "writes": 36
+      },
+      "declarationFingerprint": "sha256:73509be81808ed51445dcbf3fa04b6114e34d5f25f6bbcda267be4299ad107eb",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 97,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "a",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "b",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "c",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "d",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/Plane.ts#Plane",
+      "memberEscapes": [
+        {
+          "member": "[EntityRuntimeKey]",
+          "reason": "computed-symbol-member",
+          "source": "upstream/packages/types/src/Entity.ts:3"
+        }
+      ],
+      "name": "Plane",
+      "packageName": "@flighthq/types",
+      "purpose": "3D plane aggregate",
+      "reasons": [],
+      "source": "upstream/packages/types/src/Plane.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 24,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:fa6d32fec091d67a461443a09bc7c418115ac3c6a4b4c8bdb1abd75272621e41",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 24,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "bottom",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Plane"
+        },
+        {
+          "name": "far",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Plane"
+        },
+        {
+          "name": "left",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Plane"
+        },
+        {
+          "name": "near",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Plane"
+        },
+        {
+          "name": "right",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Plane"
+        },
+        {
+          "name": "top",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Plane"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/Frustum.ts#Frustum",
+      "memberEscapes": [
+        {
+          "member": "[EntityRuntimeKey]",
+          "reason": "computed-symbol-member",
+          "source": "upstream/packages/types/src/Entity.ts:3"
+        }
+      ],
+      "name": "Frustum",
+      "packageName": "@flighthq/types",
+      "purpose": "3D frustum aggregate",
+      "reasons": [],
+      "source": "upstream/packages/types/src/Frustum.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 30,
+        "writes": 4
+      },
+      "declarationFingerprint": "sha256:b6d4e18dccb6b633e55a76a547626386e1a252b89d1832b0ec714542a680deab",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 34,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "maxX",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "maxY",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "minX",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "minY",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/Spatial.ts#SpatialAabb",
+      "memberEscapes": [],
+      "name": "SpatialAabb",
+      "packageName": "@flighthq/types",
+      "purpose": "2D spatial-index bounds aggregate",
+      "reasons": [],
+      "source": "upstream/packages/types/src/Spatial.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 44,
+        "writes": 20
+      },
+      "declarationFingerprint": "sha256:11179d71566a75a56eb4e9778d3032adf6a87a52cdd4ab1f888e67e145a6cd86",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 64,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "centerX",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "centerY",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "centerZ",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "halfExtentX",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "halfExtentY",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "halfExtentZ",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "orientationW",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "orientationX",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "orientationY",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "orientationZ",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/Obb.ts#Obb",
+      "memberEscapes": [
+        {
+          "member": "[EntityRuntimeKey]",
+          "reason": "computed-symbol-member",
+          "source": "upstream/packages/types/src/Entity.ts:3"
+        }
+      ],
+      "name": "Obb",
+      "packageName": "@flighthq/types",
+      "purpose": "3D oriented-bounds aggregate",
+      "reasons": [],
+      "source": "upstream/packages/types/src/Obb.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 85,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:2f17c1e22289ae4dfddeb7a4e65e66444a584a087a9bf46bf1fc9f71608132bf",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 85,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "direction",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Vector3"
+        },
+        {
+          "name": "origin",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "Vector3"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/Ray3D.ts#Ray3D",
+      "memberEscapes": [
+        {
+          "member": "[EntityRuntimeKey]",
+          "reason": "computed-symbol-member",
+          "source": "upstream/packages/types/src/Entity.ts:3"
+        }
+      ],
+      "name": "Ray3D",
+      "packageName": "@flighthq/types",
+      "purpose": "3D ray aggregate",
+      "reasons": [],
+      "source": "upstream/packages/types/src/Ray3D.ts"
     }
   ],
   "schemaVersion": 3,
   "summary": {
-    "auditOnlySchemas": 0,
-    "bindableAccesses": 2284,
-    "candidates": 35,
+    "auditOnlySchemas": 20,
+    "bindableAccesses": 3271,
+    "candidates": 55,
     "directAccesses": 2284,
     "directSchemas": 34,
-    "eligible": 34,
-    "escapes": 2,
-    "fields": 151,
+    "eligible": 54,
+    "escapes": 154,
+    "fields": 243,
     "ineligible": 1,
-    "pendingAccesses": 0,
+    "pendingAccesses": 987,
     "reflectiveSurvivors": 0
   },
   "upstreamCommit": "5d24729f7360475e28a105ae0caeeaa2e1328260"
