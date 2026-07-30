@@ -38,7 +38,7 @@ class AsepriteParse {
     var uniform:Dynamic = cast _Runtime.UNDEFINED;
     tagFrameNames = _Runtime.slice(frameNames, _Runtime.field(tag, 'from'), (_Runtime.field(tag, 'to') + 1.0));
     durations = _Runtime.callProperty(tagFrameNames, 'map', cast ([function(n:Dynamic) return _Runtime.coalesce(((cast durationMap : flighthq._internal._Map).get(n)), function():Dynamic return cast 100.0)] : Array<Dynamic>));
-    firstDuration = _Runtime.coalesce(_Runtime.getIndex(durations, 0.0), function():Dynamic return cast 100.0);
+    firstDuration = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(durations, 0.0), function():Dynamic return cast 100.0);
     uniform = _Runtime.callProperty(durations, 'every', cast ([function(d:Dynamic) return _Runtime.strictEquals(d, firstDuration)] : Array<Dynamic>));
     return cast _Runtime.callValue(createSpritesheetAnimationData, cast ([{ direction: _Runtime.coalesce(_Runtime.field(tag, 'direction'), function():Dynamic return cast 'forward'), frameDuration: firstDuration, frameDurations: ((cast uniform : Bool) ? (cast null : Dynamic) : (cast durations : Dynamic)), frameNames: tagFrameNames, loop: true, name: _Runtime.field(tag, 'name') }] : Array<Dynamic>));
     return cast null;

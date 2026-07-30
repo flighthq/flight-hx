@@ -294,7 +294,7 @@ class Storage {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(keys, 'length') : Float)) : Bool)) {
-        _Runtime.setIndex(out, i, _Runtime.callProperty(backend, 'getItem', cast ([_Runtime.getIndex(keys, i)] : Array<Dynamic>)));
+        flighthq._internal._StaticIndex.writeArray(out, i, _Runtime.callProperty(backend, 'getItem', cast ([flighthq._internal._StaticIndex.readArray(keys, i)] : Array<Dynamic>)));
         (i = cast ((i + 1.0) : Dynamic));
       }
     }

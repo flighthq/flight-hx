@@ -12,7 +12,7 @@ class ClearFlowStack {
     {
       var i:Dynamic = (_Runtime.field(states, 'length') - 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-        _Runtime.callOptionalProperty(_Runtime.getIndex(states, i), 'onExit', cast ([] : Array<Dynamic>));
+        _Runtime.callOptionalProperty(flighthq._internal._StaticIndex.readArray(states, i), 'onExit', cast ([] : Array<Dynamic>));
         i--;
       }
     }

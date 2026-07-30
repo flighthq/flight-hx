@@ -37,7 +37,7 @@ class MeshGeometry {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(source, 'subsets'), 'length') : Float)) : Bool)) {
-        _Runtime.callProperty(subsets, 'push', cast ([{ indexCount: _Runtime.field(_Runtime.getIndex(_Runtime.field(source, 'subsets'), i), 'indexCount'), indexOffset: _Runtime.field(_Runtime.getIndex(_Runtime.field(source, 'subsets'), i), 'indexOffset') }] : Array<Dynamic>));
+        _Runtime.callProperty(subsets, 'push', cast ([{ indexCount: _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(source, 'subsets'), i), 'indexCount'), indexOffset: _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(source, 'subsets'), i), 'indexOffset') }] : Array<Dynamic>));
         i++;
       }
     }
@@ -112,7 +112,7 @@ class MeshGeometry {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(attributes, 'length') : Float)) : Bool)) {
-        if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.getIndex(attributes, i), 'semantic'), 'joints0') : Bool)) { return cast true; }
+        if ((cast _Runtime.strictEquals(_Runtime.field(flighthq._internal._StaticIndex.readArray(attributes, i), 'semantic'), 'joints0') : Bool)) { return cast true; }
         i++;
       }
     }

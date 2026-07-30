@@ -104,7 +104,7 @@ class CustomShaderGlMeshMaterialRenderer {
       {
         var __switchValue = _Runtime.field(value, 'length');
         if (__switchValue == 1.0) {
-          flighthq._internal.backend.WebGl2Backend.uniform1f(gl, location, _Runtime.getIndex(value, 0.0));
+          flighthq._internal.backend.WebGl2Backend.uniform1f(gl, location, flighthq._internal._StaticIndex.readArray(value, 0.0));
         }
         else if (__switchValue == 2.0) {
           flighthq._internal.backend.WebGl2Backend.uniform2fv(gl, location, value);

@@ -57,8 +57,8 @@ class WgpuFullscreenPass {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(inputs, 'length') : Float)) : Bool)) {
-        var input:Dynamic = _Runtime.getIndex(inputs, i);
-        var layout:Dynamic = _Runtime.getIndex(_Runtime.field(wgpuPipeline, 'textureBindGroupLayouts'), i);
+        var input:Dynamic = flighthq._internal._StaticIndex.readArray(inputs, i);
+        var layout:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(wgpuPipeline, 'textureBindGroupLayouts'), i);
         if ((cast _Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
         var sampler:Dynamic = ((cast _Runtime.field(state, 'allowSmoothing') : Bool) ? (cast _Runtime.field(runtime2, 'linearSampler') : Dynamic) : (cast _Runtime.field(runtime2, 'nearestSampler') : Dynamic));
         var bindGroup:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: layout, entries: cast ([{ binding: 0.0, resource: _Runtime.field(input, 'view') }, { binding: 1.0, resource: sampler }] : Array<Dynamic>) }] : Array<Dynamic>));

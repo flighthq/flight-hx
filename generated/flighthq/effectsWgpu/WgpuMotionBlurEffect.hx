@@ -22,21 +22,21 @@ class WgpuMotionBlurEffect {
     pipeline = _Runtime.callValue(WgpuMotionBlurEffect.getMotionBlurPipeline__wgpuMotionBlurEffect, cast ([state] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(velocityTexture, null) : Bool)) {
       _Runtime.callValue(drawWgpuDualSourceEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
-        _Runtime.setIndex(f32, 0.0, intensity);
-        _Runtime.setIndex(f32, 1.0, samples);
-        _Runtime.setIndex(f32, 2.0, _Runtime.field(source, 'width'));
-        _Runtime.setIndex(f32, 3.0, _Runtime.field(source, 'height'));
-        _Runtime.setIndex(f32, 4.0, 0.0);
+        flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
+        flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, samples);
+        flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, _Runtime.field(source, 'width'));
+        flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, _Runtime.field(source, 'height'));
+        flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, 0.0);
       }] : Array<Dynamic>));
       return;
     }
     velocitySource = (cast { view: _Runtime.callProperty(velocityTexture, 'createView', cast ([] : Array<Dynamic>)) } : WgpuRenderTarget);
     _Runtime.callValue(drawWgpuDualSourceEffectPass, cast ([state, (cast source : WgpuRenderTarget), velocitySource, (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, intensity);
-      _Runtime.setIndex(f32, 1.0, samples);
-      _Runtime.setIndex(f32, 2.0, _Runtime.field(source, 'width'));
-      _Runtime.setIndex(f32, 3.0, _Runtime.field(source, 'height'));
-      _Runtime.setIndex(f32, 4.0, 1.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, samples);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, _Runtime.field(source, 'width'));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, _Runtime.field(source, 'height'));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, 1.0);
     }] : Array<Dynamic>));
   }
 

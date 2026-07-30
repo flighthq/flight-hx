@@ -14,9 +14,9 @@ class ShapeHitTestBuiltins {
       var r:Dynamic = cast _Runtime.UNDEFINED;
       var dx:Dynamic = cast _Runtime.UNDEFINED;
       var dy:Dynamic = cast _Runtime.UNDEFINED;
-      cx = (cast _Runtime.getIndex(buf, i) : Float);
-      cy = (cast _Runtime.getIndex(buf, (i + 1.0)) : Float);
-      r = (cast _Runtime.getIndex(buf, (i + 2.0)) : Float);
+      cx = (cast flighthq._internal._StaticIndex.readArray(buf, i) : Float);
+      cy = (cast flighthq._internal._StaticIndex.readArray(buf, (i + 1.0)) : Float);
+      r = (cast flighthq._internal._StaticIndex.readArray(buf, (i + 2.0)) : Float);
       dx = (x - cx);
       dy = (y - cy);
       return cast ((cast ((dx * dx) + (dy * dy)) : Float) <= (cast (r * r) : Float));
@@ -32,10 +32,10 @@ class ShapeHitTestBuiltins {
       var cy:Dynamic = cast _Runtime.UNDEFINED;
       var nx:Dynamic = cast _Runtime.UNDEFINED;
       var ny:Dynamic = cast _Runtime.UNDEFINED;
-      ex = (cast _Runtime.getIndex(buf, i) : Float);
-      ey = (cast _Runtime.getIndex(buf, (i + 1.0)) : Float);
-      ew = (cast _Runtime.getIndex(buf, (i + 2.0)) : Float);
-      eh = (cast _Runtime.getIndex(buf, (i + 3.0)) : Float);
+      ex = (cast flighthq._internal._StaticIndex.readArray(buf, i) : Float);
+      ey = (cast flighthq._internal._StaticIndex.readArray(buf, (i + 1.0)) : Float);
+      ew = (cast flighthq._internal._StaticIndex.readArray(buf, (i + 2.0)) : Float);
+      eh = (cast flighthq._internal._StaticIndex.readArray(buf, (i + 3.0)) : Float);
       rx = (ew / 2.0);
       ry = (eh / 2.0);
       cx = (ex + rx);
@@ -49,10 +49,10 @@ class ShapeHitTestBuiltins {
       var ry:Dynamic = cast _Runtime.UNDEFINED;
       var rw:Dynamic = cast _Runtime.UNDEFINED;
       var rh:Dynamic = cast _Runtime.UNDEFINED;
-      rx = (cast _Runtime.getIndex(buf, i) : Float);
-      ry = (cast _Runtime.getIndex(buf, (i + 1.0)) : Float);
-      rw = (cast _Runtime.getIndex(buf, (i + 2.0)) : Float);
-      rh = (cast _Runtime.getIndex(buf, (i + 3.0)) : Float);
+      rx = (cast flighthq._internal._StaticIndex.readArray(buf, i) : Float);
+      ry = (cast flighthq._internal._StaticIndex.readArray(buf, (i + 1.0)) : Float);
+      rw = (cast flighthq._internal._StaticIndex.readArray(buf, (i + 2.0)) : Float);
+      rh = (cast flighthq._internal._StaticIndex.readArray(buf, (i + 3.0)) : Float);
       return cast ((cast ((cast ((cast ((cast x : Float) >= (cast rx : Float)) : Bool) && (cast ((cast x : Float) <= (cast (rx + rw) : Float)) : Bool)) : Bool) && (cast ((cast y : Float) >= (cast ry : Float)) : Bool)) : Bool) && (cast ((cast y : Float) <= (cast (ry + rh) : Float)) : Bool));
     } }] : Array<Dynamic>));
     _Runtime.callValue(registerShapeHitTestCommand, cast ([{ key: 'drawRoundRectangle', hitTest: function(x:Float, y:Float, buf:Array<ShapeCommandToken>, i:Float) {
@@ -68,12 +68,12 @@ class ShapeHitTestBuiltins {
       var inRight:Dynamic = cast _Runtime.UNDEFINED;
       var inTop:Dynamic = cast _Runtime.UNDEFINED;
       var inBottom:Dynamic = cast _Runtime.UNDEFINED;
-      rx = (cast _Runtime.getIndex(buf, i) : Float);
-      ry = (cast _Runtime.getIndex(buf, (i + 1.0)) : Float);
-      rw = (cast _Runtime.getIndex(buf, (i + 2.0)) : Float);
-      rh = (cast _Runtime.getIndex(buf, (i + 3.0)) : Float);
-      arx = _Runtime.orValue((_Runtime.toInt32(((cast _Runtime.getIndex(buf, (i + 4.0)) : Float) / 2.0)) | 0), function():Dynamic return cast ((cast _Runtime.getIndex(buf, (i + 4.0)) : Float) / 2.0));
-      ary = _Runtime.orValue((_Runtime.toInt32(((cast _Runtime.getIndex(buf, (i + 5.0)) : Float) / 2.0)) | 0), function():Dynamic return cast ((cast _Runtime.getIndex(buf, (i + 5.0)) : Float) / 2.0));
+      rx = (cast flighthq._internal._StaticIndex.readArray(buf, i) : Float);
+      ry = (cast flighthq._internal._StaticIndex.readArray(buf, (i + 1.0)) : Float);
+      rw = (cast flighthq._internal._StaticIndex.readArray(buf, (i + 2.0)) : Float);
+      rh = (cast flighthq._internal._StaticIndex.readArray(buf, (i + 3.0)) : Float);
+      arx = _Runtime.orValue((_Runtime.toInt32(((cast flighthq._internal._StaticIndex.readArray(buf, (i + 4.0)) : Float) / 2.0)) | 0), function():Dynamic return cast ((cast flighthq._internal._StaticIndex.readArray(buf, (i + 4.0)) : Float) / 2.0));
+      ary = _Runtime.orValue((_Runtime.toInt32(((cast flighthq._internal._StaticIndex.readArray(buf, (i + 5.0)) : Float) / 2.0)) | 0), function():Dynamic return cast ((cast flighthq._internal._StaticIndex.readArray(buf, (i + 5.0)) : Float) / 2.0));
       cx = HxMath.min(arx, (rw / 2.0));
       cy = HxMath.min(ary, (rh / 2.0));
       if ((cast ((cast ((cast ((cast ((cast x : Float) < (cast rx : Float)) : Bool) || (cast ((cast x : Float) > (cast (rx + rw) : Float)) : Bool)) : Bool) || (cast ((cast y : Float) < (cast ry : Float)) : Bool)) : Bool) || (cast ((cast y : Float) > (cast (ry + rh) : Float)) : Bool)) : Bool)) { return cast false; }

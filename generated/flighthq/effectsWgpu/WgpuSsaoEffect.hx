@@ -19,10 +19,10 @@ class WgpuSsaoEffect {
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'atmospheric.ssao', WgpuSsaoEffect.SSAO_FRAGMENT_WGSL__wgpuSsaoEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, radius);
-      _Runtime.setIndex(f32, 1.0, intensity);
-      _Runtime.setIndex(f32, 2.0, _Runtime.field(source, 'width'));
-      _Runtime.setIndex(f32, 3.0, _Runtime.field(source, 'height'));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, radius);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, intensity);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, _Runtime.field(source, 'width'));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, _Runtime.field(source, 'height'));
     }] : Array<Dynamic>));
   }
 

@@ -18,7 +18,7 @@ class AdvanceClock {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-        _Runtime.callValue(advanceClock, cast ([_Runtime.getIndex(children, i), scaledDelta] : Array<Dynamic>));
+        _Runtime.callValue(advanceClock, cast ([flighthq._internal._StaticIndex.readArray(children, i), scaledDelta] : Array<Dynamic>));
         i++;
       }
     }

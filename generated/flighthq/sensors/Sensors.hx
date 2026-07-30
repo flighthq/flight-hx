@@ -231,15 +231,15 @@ class Sensors {
     wx = (w * x2);
     wy = (w * y2);
     wz = (w * z2);
-    _Runtime.setIndex(out, 0.0, (1.0 - (yy + zz)));
-    _Runtime.setIndex(out, 1.0, (xy + wz));
-    _Runtime.setIndex(out, 2.0, (xz - wy));
-    _Runtime.setIndex(out, 3.0, (xy - wz));
-    _Runtime.setIndex(out, 4.0, (1.0 - (xx + zz)));
-    _Runtime.setIndex(out, 5.0, (yz + wx));
-    _Runtime.setIndex(out, 6.0, (xz + wy));
-    _Runtime.setIndex(out, 7.0, (yz - wx));
-    _Runtime.setIndex(out, 8.0, (1.0 - (xx + yy)));
+    flighthq._internal._StaticIndex.writeArray(out, 0.0, (1.0 - (yy + zz)));
+    flighthq._internal._StaticIndex.writeArray(out, 1.0, (xy + wz));
+    flighthq._internal._StaticIndex.writeArray(out, 2.0, (xz - wy));
+    flighthq._internal._StaticIndex.writeArray(out, 3.0, (xy - wz));
+    flighthq._internal._StaticIndex.writeArray(out, 4.0, (1.0 - (xx + zz)));
+    flighthq._internal._StaticIndex.writeArray(out, 5.0, (yz + wx));
+    flighthq._internal._StaticIndex.writeArray(out, 6.0, (xz + wy));
+    flighthq._internal._StaticIndex.writeArray(out, 7.0, (yz - wx));
+    flighthq._internal._StaticIndex.writeArray(out, 8.0, (1.0 - (xx + yy)));
   }
 
   public static function computeScreenRelativeOrientation(out:OrientationReading, orientation:OrientationReading, screenAngle:Float):Void {
@@ -416,10 +416,10 @@ class Sensors {
             var q:Dynamic = cast _Runtime.UNDEFINED;
             q = _Runtime.field(sensor, 'quaternion');
             if (_Runtime.truthy(q)) {
-              _Runtime.setField(Sensors._quaternionReading__sensors, 'x', _Runtime.coalesce(_Runtime.getIndex(q, 0.0), function():Dynamic return cast 0.0));
-              _Runtime.setField(Sensors._quaternionReading__sensors, 'y', _Runtime.coalesce(_Runtime.getIndex(q, 1.0), function():Dynamic return cast 0.0));
-              _Runtime.setField(Sensors._quaternionReading__sensors, 'z', _Runtime.coalesce(_Runtime.getIndex(q, 2.0), function():Dynamic return cast 0.0));
-              _Runtime.setField(Sensors._quaternionReading__sensors, 'w', _Runtime.coalesce(_Runtime.getIndex(q, 3.0), function():Dynamic return cast 1.0));
+              _Runtime.setField(Sensors._quaternionReading__sensors, 'x', _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(q, 0.0), function():Dynamic return cast 0.0));
+              _Runtime.setField(Sensors._quaternionReading__sensors, 'y', _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(q, 1.0), function():Dynamic return cast 0.0));
+              _Runtime.setField(Sensors._quaternionReading__sensors, 'z', _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(q, 2.0), function():Dynamic return cast 0.0));
+              _Runtime.setField(Sensors._quaternionReading__sensors, 'w', _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(q, 3.0), function():Dynamic return cast 1.0));
               _Runtime.callValue(computeEulerFromQuaternion, cast ([Sensors._absoluteOrientation__sensors, Sensors._quaternionReading__sensors] : Array<Dynamic>));
             }
             _Runtime.setField(Sensors._absoluteOrientation__sensors, 'absolute', true);

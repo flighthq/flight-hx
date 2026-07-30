@@ -14,7 +14,7 @@ class ColorBlindSimulationAdjustment {
     var colorMatrix:Dynamic = cast _Runtime.UNDEFINED;
     type = _Runtime.coalesce(_Runtime.field(options, 'type'), function():Dynamic return cast 'deuteranopia');
     m = _Runtime.getIndex(ColorBlindSimulationAdjustment.COLOR_BLIND_MATRICES__colorBlindSimulationAdjustment, type);
-    colorMatrix = cast ([_Runtime.getIndex(m, 0.0), _Runtime.getIndex(m, 1.0), _Runtime.getIndex(m, 2.0), 0.0, 0.0, _Runtime.getIndex(m, 3.0), _Runtime.getIndex(m, 4.0), _Runtime.getIndex(m, 5.0), 0.0, 0.0, _Runtime.getIndex(m, 6.0), _Runtime.getIndex(m, 7.0), _Runtime.getIndex(m, 8.0), 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
+    colorMatrix = cast ([flighthq._internal._StaticIndex.readArray(m, 0.0), flighthq._internal._StaticIndex.readArray(m, 1.0), flighthq._internal._StaticIndex.readArray(m, 2.0), 0.0, 0.0, flighthq._internal._StaticIndex.readArray(m, 3.0), flighthq._internal._StaticIndex.readArray(m, 4.0), flighthq._internal._StaticIndex.readArray(m, 5.0), 0.0, 0.0, flighthq._internal._StaticIndex.readArray(m, 6.0), flighthq._internal._StaticIndex.readArray(m, 7.0), flighthq._internal._StaticIndex.readArray(m, 8.0), 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast _Runtime.mergeObjects([{ kind: 'ColorBlindSimulationAdjustment' }, options, { colorMatrix: colorMatrix }]);
     return cast null;
   }

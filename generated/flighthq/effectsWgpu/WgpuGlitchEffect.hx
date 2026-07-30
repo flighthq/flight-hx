@@ -23,12 +23,12 @@ class WgpuGlitchEffect {
     seed = _Runtime.coalesce(_Runtime.field(effect, 'seed'), function():Dynamic return cast 0.0);
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'stylization.glitch', WgpuGlitchEffect.GLITCH_FRAGMENT_WGSL__wgpuGlitchEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, intensity);
-      _Runtime.setIndex(f32, 1.0, blockSize);
-      _Runtime.setIndex(f32, 2.0, colorShift);
-      _Runtime.setIndex(f32, 3.0, seed);
-      _Runtime.setIndex(f32, 4.0, _Runtime.field(source, 'width'));
-      _Runtime.setIndex(f32, 5.0, _Runtime.field(source, 'height'));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, blockSize);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, colorShift);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, seed);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, _Runtime.field(source, 'width'));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 5.0, _Runtime.field(source, 'height'));
     }] : Array<Dynamic>));
   }
 

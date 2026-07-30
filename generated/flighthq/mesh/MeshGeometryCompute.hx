@@ -42,9 +42,9 @@ class MeshGeometryCompute {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
         var base:Dynamic = ((i * floatsPerVertex) + MeshGeometryCompute.POSITION_OFFSET__meshGeometryCompute);
-        var px:Dynamic = _Runtime.getIndex(vertices, base);
-        var py:Dynamic = _Runtime.getIndex(vertices, (base + 1.0));
-        var pz:Dynamic = _Runtime.getIndex(vertices, (base + 2.0));
+        var px:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(vertices, base);
+        var py:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(vertices, (base + 1.0));
+        var pz:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(vertices, (base + 2.0));
         if ((cast ((cast px : Float) < (cast minX : Float)) : Bool)) { (minX = cast (px : Dynamic)); }
         if ((cast ((cast py : Float) < (cast minY : Float)) : Bool)) { (minY = cast (py : Dynamic)); }
         if ((cast ((cast pz : Float) < (cast minZ : Float)) : Bool)) { (minZ = cast (pz : Dynamic)); }
@@ -62,9 +62,9 @@ class MeshGeometryCompute {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
         var base:Dynamic = ((i * floatsPerVertex) + MeshGeometryCompute.POSITION_OFFSET__meshGeometryCompute);
-        var dx:Dynamic = (_Runtime.getIndex(vertices, base) - cx);
-        var dy:Dynamic = (_Runtime.getIndex(vertices, (base + 1.0)) - cy);
-        var dz:Dynamic = (_Runtime.getIndex(vertices, (base + 2.0)) - cz);
+        var dx:Dynamic = (flighthq._internal._StaticIndex.readFloat32Array(vertices, base) - cx);
+        var dy:Dynamic = (flighthq._internal._StaticIndex.readFloat32Array(vertices, (base + 1.0)) - cy);
+        var dz:Dynamic = (flighthq._internal._StaticIndex.readFloat32Array(vertices, (base + 2.0)) - cz);
         var dSq:Dynamic = (((dx * dx) + (dy * dy)) + (dz * dz));
         if ((cast ((cast dSq : Float) > (cast radiusSq : Float)) : Bool)) { (radiusSq = cast (dSq : Dynamic)); }
         i++;
@@ -99,9 +99,9 @@ class MeshGeometryCompute {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
         var base:Dynamic = ((i * floatsPerVertex) + MeshGeometryCompute.POSITION_OFFSET__meshGeometryCompute);
-        var px:Dynamic = _Runtime.getIndex(vertices, base);
-        var py:Dynamic = _Runtime.getIndex(vertices, (base + 1.0));
-        var pz:Dynamic = _Runtime.getIndex(vertices, (base + 2.0));
+        var px:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(vertices, base);
+        var py:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(vertices, (base + 1.0));
+        var pz:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(vertices, (base + 2.0));
         if ((cast ((cast px : Float) < (cast minX : Float)) : Bool)) { (minX = cast (px : Dynamic)); }
         if ((cast ((cast py : Float) < (cast minY : Float)) : Bool)) { (minY = cast (py : Dynamic)); }
         if ((cast ((cast pz : Float) < (cast minZ : Float)) : Bool)) { (minZ = cast (pz : Dynamic)); }
@@ -139,15 +139,15 @@ class MeshGeometryCompute {
         var p0:Dynamic = ((i0 * floatsPerVertex) + MeshGeometryCompute.POSITION_OFFSET__meshGeometryCompute);
         var p1:Dynamic = ((i1 * floatsPerVertex) + MeshGeometryCompute.POSITION_OFFSET__meshGeometryCompute);
         var p2:Dynamic = ((i2 * floatsPerVertex) + MeshGeometryCompute.POSITION_OFFSET__meshGeometryCompute);
-        var x0:Dynamic = _Runtime.getIndex(srcVerts, p0);
-        var y0:Dynamic = _Runtime.getIndex(srcVerts, (p0 + 1.0));
-        var z0:Dynamic = _Runtime.getIndex(srcVerts, (p0 + 2.0));
-        var x1:Dynamic = _Runtime.getIndex(srcVerts, p1);
-        var y1:Dynamic = _Runtime.getIndex(srcVerts, (p1 + 1.0));
-        var z1:Dynamic = _Runtime.getIndex(srcVerts, (p1 + 2.0));
-        var x2:Dynamic = _Runtime.getIndex(srcVerts, p2);
-        var y2:Dynamic = _Runtime.getIndex(srcVerts, (p2 + 1.0));
-        var z2:Dynamic = _Runtime.getIndex(srcVerts, (p2 + 2.0));
+        var x0:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(srcVerts, p0);
+        var y0:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(srcVerts, (p0 + 1.0));
+        var z0:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(srcVerts, (p0 + 2.0));
+        var x1:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(srcVerts, p1);
+        var y1:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(srcVerts, (p1 + 1.0));
+        var z1:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(srcVerts, (p1 + 2.0));
+        var x2:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(srcVerts, p2);
+        var y2:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(srcVerts, (p2 + 1.0));
+        var z2:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(srcVerts, (p2 + 2.0));
         var ex1:Dynamic = (x1 - x0);
         var ey1:Dynamic = (y1 - y0);
         var ez1:Dynamic = (z1 - z0);
@@ -166,15 +166,15 @@ class MeshGeometryCompute {
         var n0:Dynamic = ((i0 * floatsPerVertex) + MeshGeometryCompute.NORMAL_OFFSET__meshGeometryCompute);
         var n1:Dynamic = ((i1 * floatsPerVertex) + MeshGeometryCompute.NORMAL_OFFSET__meshGeometryCompute);
         var n2:Dynamic = ((i2 * floatsPerVertex) + MeshGeometryCompute.NORMAL_OFFSET__meshGeometryCompute);
-        _Runtime.setIndex(dstVerts, n0, nx);
-        _Runtime.setIndex(dstVerts, (n0 + 1.0), ny);
-        _Runtime.setIndex(dstVerts, (n0 + 2.0), nz);
-        _Runtime.setIndex(dstVerts, n1, nx);
-        _Runtime.setIndex(dstVerts, (n1 + 1.0), ny);
-        _Runtime.setIndex(dstVerts, (n1 + 2.0), nz);
-        _Runtime.setIndex(dstVerts, n2, nx);
-        _Runtime.setIndex(dstVerts, (n2 + 1.0), ny);
-        _Runtime.setIndex(dstVerts, (n2 + 2.0), nz);
+        flighthq._internal._StaticIndex.writeFloat32Array(dstVerts, n0, nx);
+        flighthq._internal._StaticIndex.writeFloat32Array(dstVerts, (n0 + 1.0), ny);
+        flighthq._internal._StaticIndex.writeFloat32Array(dstVerts, (n0 + 2.0), nz);
+        flighthq._internal._StaticIndex.writeFloat32Array(dstVerts, n1, nx);
+        flighthq._internal._StaticIndex.writeFloat32Array(dstVerts, (n1 + 1.0), ny);
+        flighthq._internal._StaticIndex.writeFloat32Array(dstVerts, (n1 + 2.0), nz);
+        flighthq._internal._StaticIndex.writeFloat32Array(dstVerts, n2, nx);
+        flighthq._internal._StaticIndex.writeFloat32Array(dstVerts, (n2 + 1.0), ny);
+        flighthq._internal._StaticIndex.writeFloat32Array(dstVerts, (n2 + 2.0), nz);
         (t = cast ((t + 3.0) : Dynamic));
       }
     }
@@ -204,24 +204,24 @@ class MeshGeometryCompute {
         var b0:Dynamic = ((i0 * floatsPerVertex) + MeshGeometryCompute.POSITION_OFFSET__meshGeometryCompute);
         var b1:Dynamic = ((i1 * floatsPerVertex) + MeshGeometryCompute.POSITION_OFFSET__meshGeometryCompute);
         var b2:Dynamic = ((i2 * floatsPerVertex) + MeshGeometryCompute.POSITION_OFFSET__meshGeometryCompute);
-        var e1x:Dynamic = (_Runtime.getIndex(vertices, b1) - _Runtime.getIndex(vertices, b0));
-        var e1y:Dynamic = (_Runtime.getIndex(vertices, (b1 + 1.0)) - _Runtime.getIndex(vertices, (b0 + 1.0)));
-        var e1z:Dynamic = (_Runtime.getIndex(vertices, (b1 + 2.0)) - _Runtime.getIndex(vertices, (b0 + 2.0)));
-        var e2x:Dynamic = (_Runtime.getIndex(vertices, b2) - _Runtime.getIndex(vertices, b0));
-        var e2y:Dynamic = (_Runtime.getIndex(vertices, (b2 + 1.0)) - _Runtime.getIndex(vertices, (b0 + 1.0)));
-        var e2z:Dynamic = (_Runtime.getIndex(vertices, (b2 + 2.0)) - _Runtime.getIndex(vertices, (b0 + 2.0)));
+        var e1x:Dynamic = (flighthq._internal._StaticIndex.readFloat32Array(vertices, b1) - flighthq._internal._StaticIndex.readFloat32Array(vertices, b0));
+        var e1y:Dynamic = (flighthq._internal._StaticIndex.readFloat32Array(vertices, (b1 + 1.0)) - flighthq._internal._StaticIndex.readFloat32Array(vertices, (b0 + 1.0)));
+        var e1z:Dynamic = (flighthq._internal._StaticIndex.readFloat32Array(vertices, (b1 + 2.0)) - flighthq._internal._StaticIndex.readFloat32Array(vertices, (b0 + 2.0)));
+        var e2x:Dynamic = (flighthq._internal._StaticIndex.readFloat32Array(vertices, b2) - flighthq._internal._StaticIndex.readFloat32Array(vertices, b0));
+        var e2y:Dynamic = (flighthq._internal._StaticIndex.readFloat32Array(vertices, (b2 + 1.0)) - flighthq._internal._StaticIndex.readFloat32Array(vertices, (b0 + 1.0)));
+        var e2z:Dynamic = (flighthq._internal._StaticIndex.readFloat32Array(vertices, (b2 + 2.0)) - flighthq._internal._StaticIndex.readFloat32Array(vertices, (b0 + 2.0)));
         var nx:Dynamic = ((e1y * e2z) - (e1z * e2y));
         var ny:Dynamic = ((e1z * e2x) - (e1x * e2z));
         var nz:Dynamic = ((e1x * e2y) - (e1y * e2x));
-        _Runtime.setIndex(accum, (i0 * 3.0), (_Runtime.getIndex(accum, (i0 * 3.0)) + nx));
-        _Runtime.setIndex(accum, ((i0 * 3.0) + 1.0), (_Runtime.getIndex(accum, ((i0 * 3.0) + 1.0)) + ny));
-        _Runtime.setIndex(accum, ((i0 * 3.0) + 2.0), (_Runtime.getIndex(accum, ((i0 * 3.0) + 2.0)) + nz));
-        _Runtime.setIndex(accum, (i1 * 3.0), (_Runtime.getIndex(accum, (i1 * 3.0)) + nx));
-        _Runtime.setIndex(accum, ((i1 * 3.0) + 1.0), (_Runtime.getIndex(accum, ((i1 * 3.0) + 1.0)) + ny));
-        _Runtime.setIndex(accum, ((i1 * 3.0) + 2.0), (_Runtime.getIndex(accum, ((i1 * 3.0) + 2.0)) + nz));
-        _Runtime.setIndex(accum, (i2 * 3.0), (_Runtime.getIndex(accum, (i2 * 3.0)) + nx));
-        _Runtime.setIndex(accum, ((i2 * 3.0) + 1.0), (_Runtime.getIndex(accum, ((i2 * 3.0) + 1.0)) + ny));
-        _Runtime.setIndex(accum, ((i2 * 3.0) + 2.0), (_Runtime.getIndex(accum, ((i2 * 3.0) + 2.0)) + nz));
+        ({ var __indexedObject0:Dynamic = accum; var __indexedKey1:Dynamic = (i0 * 3.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject0, __indexedKey1, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject0, __indexedKey1) + nx)); });
+        ({ var __indexedObject2:Dynamic = accum; var __indexedKey3:Dynamic = ((i0 * 3.0) + 1.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject2, __indexedKey3, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject2, __indexedKey3) + ny)); });
+        ({ var __indexedObject4:Dynamic = accum; var __indexedKey5:Dynamic = ((i0 * 3.0) + 2.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject4, __indexedKey5, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject4, __indexedKey5) + nz)); });
+        ({ var __indexedObject6:Dynamic = accum; var __indexedKey7:Dynamic = (i1 * 3.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject6, __indexedKey7, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject6, __indexedKey7) + nx)); });
+        ({ var __indexedObject8:Dynamic = accum; var __indexedKey9:Dynamic = ((i1 * 3.0) + 1.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject8, __indexedKey9, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject8, __indexedKey9) + ny)); });
+        ({ var __indexedObject10:Dynamic = accum; var __indexedKey11:Dynamic = ((i1 * 3.0) + 2.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject10, __indexedKey11, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject10, __indexedKey11) + nz)); });
+        ({ var __indexedObject12:Dynamic = accum; var __indexedKey13:Dynamic = (i2 * 3.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject12, __indexedKey13, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject12, __indexedKey13) + nx)); });
+        ({ var __indexedObject14:Dynamic = accum; var __indexedKey15:Dynamic = ((i2 * 3.0) + 1.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject14, __indexedKey15, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject14, __indexedKey15) + ny)); });
+        ({ var __indexedObject16:Dynamic = accum; var __indexedKey17:Dynamic = ((i2 * 3.0) + 2.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject16, __indexedKey17, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject16, __indexedKey17) + nz)); });
         (t = cast ((t + 3.0) : Dynamic));
       }
     }
@@ -229,9 +229,9 @@ class MeshGeometryCompute {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
-        var nx:Dynamic = _Runtime.getIndex(accum, (i * 3.0));
-        var ny:Dynamic = _Runtime.getIndex(accum, ((i * 3.0) + 1.0));
-        var nz:Dynamic = _Runtime.getIndex(accum, ((i * 3.0) + 2.0));
+        var nx:Dynamic = flighthq._internal._StaticIndex.readFloat64Array(accum, (i * 3.0));
+        var ny:Dynamic = flighthq._internal._StaticIndex.readFloat64Array(accum, ((i * 3.0) + 1.0));
+        var nz:Dynamic = flighthq._internal._StaticIndex.readFloat64Array(accum, ((i * 3.0) + 2.0));
         var len:Dynamic = HxMath.sqrt((((nx * nx) + (ny * ny)) + (nz * nz)));
         if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
           (nx = cast ((nx / len) : Dynamic));
@@ -239,9 +239,9 @@ class MeshGeometryCompute {
           (nz = cast ((nz / len) : Dynamic));
         }
         var base:Dynamic = ((i * floatsPerVertex) + MeshGeometryCompute.NORMAL_OFFSET__meshGeometryCompute);
-        _Runtime.setIndex(target, base, nx);
-        _Runtime.setIndex(target, (base + 1.0), ny);
-        _Runtime.setIndex(target, (base + 2.0), nz);
+        flighthq._internal._StaticIndex.writeFloat32Array(target, base, nx);
+        flighthq._internal._StaticIndex.writeFloat32Array(target, (base + 1.0), ny);
+        flighthq._internal._StaticIndex.writeFloat32Array(target, (base + 2.0), nz);
         i++;
       }
     }
@@ -272,19 +272,19 @@ class MeshGeometryCompute {
         var p0:Dynamic = ((i0 * floatsPerVertex) + MeshGeometryCompute.POSITION_OFFSET__meshGeometryCompute);
         var p1:Dynamic = ((i1 * floatsPerVertex) + MeshGeometryCompute.POSITION_OFFSET__meshGeometryCompute);
         var p2:Dynamic = ((i2 * floatsPerVertex) + MeshGeometryCompute.POSITION_OFFSET__meshGeometryCompute);
-        var e1x:Dynamic = (_Runtime.getIndex(vertices, p1) - _Runtime.getIndex(vertices, p0));
-        var e1y:Dynamic = (_Runtime.getIndex(vertices, (p1 + 1.0)) - _Runtime.getIndex(vertices, (p0 + 1.0)));
-        var e1z:Dynamic = (_Runtime.getIndex(vertices, (p1 + 2.0)) - _Runtime.getIndex(vertices, (p0 + 2.0)));
-        var e2x:Dynamic = (_Runtime.getIndex(vertices, p2) - _Runtime.getIndex(vertices, p0));
-        var e2y:Dynamic = (_Runtime.getIndex(vertices, (p2 + 1.0)) - _Runtime.getIndex(vertices, (p0 + 1.0)));
-        var e2z:Dynamic = (_Runtime.getIndex(vertices, (p2 + 2.0)) - _Runtime.getIndex(vertices, (p0 + 2.0)));
+        var e1x:Dynamic = (flighthq._internal._StaticIndex.readFloat32Array(vertices, p1) - flighthq._internal._StaticIndex.readFloat32Array(vertices, p0));
+        var e1y:Dynamic = (flighthq._internal._StaticIndex.readFloat32Array(vertices, (p1 + 1.0)) - flighthq._internal._StaticIndex.readFloat32Array(vertices, (p0 + 1.0)));
+        var e1z:Dynamic = (flighthq._internal._StaticIndex.readFloat32Array(vertices, (p1 + 2.0)) - flighthq._internal._StaticIndex.readFloat32Array(vertices, (p0 + 2.0)));
+        var e2x:Dynamic = (flighthq._internal._StaticIndex.readFloat32Array(vertices, p2) - flighthq._internal._StaticIndex.readFloat32Array(vertices, p0));
+        var e2y:Dynamic = (flighthq._internal._StaticIndex.readFloat32Array(vertices, (p2 + 1.0)) - flighthq._internal._StaticIndex.readFloat32Array(vertices, (p0 + 1.0)));
+        var e2z:Dynamic = (flighthq._internal._StaticIndex.readFloat32Array(vertices, (p2 + 2.0)) - flighthq._internal._StaticIndex.readFloat32Array(vertices, (p0 + 2.0)));
         var u0:Dynamic = ((i0 * floatsPerVertex) + MeshGeometryCompute.UV0_OFFSET__meshGeometryCompute);
         var u1:Dynamic = ((i1 * floatsPerVertex) + MeshGeometryCompute.UV0_OFFSET__meshGeometryCompute);
         var u2:Dynamic = ((i2 * floatsPerVertex) + MeshGeometryCompute.UV0_OFFSET__meshGeometryCompute);
-        var du1:Dynamic = (_Runtime.getIndex(vertices, u1) - _Runtime.getIndex(vertices, u0));
-        var dv1:Dynamic = (_Runtime.getIndex(vertices, (u1 + 1.0)) - _Runtime.getIndex(vertices, (u0 + 1.0)));
-        var du2:Dynamic = (_Runtime.getIndex(vertices, u2) - _Runtime.getIndex(vertices, u0));
-        var dv2:Dynamic = (_Runtime.getIndex(vertices, (u2 + 1.0)) - _Runtime.getIndex(vertices, (u0 + 1.0)));
+        var du1:Dynamic = (flighthq._internal._StaticIndex.readFloat32Array(vertices, u1) - flighthq._internal._StaticIndex.readFloat32Array(vertices, u0));
+        var dv1:Dynamic = (flighthq._internal._StaticIndex.readFloat32Array(vertices, (u1 + 1.0)) - flighthq._internal._StaticIndex.readFloat32Array(vertices, (u0 + 1.0)));
+        var du2:Dynamic = (flighthq._internal._StaticIndex.readFloat32Array(vertices, u2) - flighthq._internal._StaticIndex.readFloat32Array(vertices, u0));
+        var dv2:Dynamic = (flighthq._internal._StaticIndex.readFloat32Array(vertices, (u2 + 1.0)) - flighthq._internal._StaticIndex.readFloat32Array(vertices, (u0 + 1.0)));
         var det:Dynamic = ((du1 * dv2) - (du2 * dv1));
         var r:Dynamic = ((cast !_Runtime.strictEquals(det, 0.0) : Bool) ? (cast (1.0 / det) : Dynamic) : (cast 0.0 : Dynamic));
         var tx:Dynamic = (((dv2 * e1x) - (dv1 * e2x)) * r);
@@ -293,24 +293,24 @@ class MeshGeometryCompute {
         var bx:Dynamic = (((du1 * e2x) - (du2 * e1x)) * r);
         var by:Dynamic = (((du1 * e2y) - (du2 * e1y)) * r);
         var bz:Dynamic = (((du1 * e2z) - (du2 * e1z)) * r);
-        _Runtime.setIndex(tan, (i0 * 3.0), (_Runtime.getIndex(tan, (i0 * 3.0)) + tx));
-        _Runtime.setIndex(tan, ((i0 * 3.0) + 1.0), (_Runtime.getIndex(tan, ((i0 * 3.0) + 1.0)) + ty));
-        _Runtime.setIndex(tan, ((i0 * 3.0) + 2.0), (_Runtime.getIndex(tan, ((i0 * 3.0) + 2.0)) + tz));
-        _Runtime.setIndex(tan, (i1 * 3.0), (_Runtime.getIndex(tan, (i1 * 3.0)) + tx));
-        _Runtime.setIndex(tan, ((i1 * 3.0) + 1.0), (_Runtime.getIndex(tan, ((i1 * 3.0) + 1.0)) + ty));
-        _Runtime.setIndex(tan, ((i1 * 3.0) + 2.0), (_Runtime.getIndex(tan, ((i1 * 3.0) + 2.0)) + tz));
-        _Runtime.setIndex(tan, (i2 * 3.0), (_Runtime.getIndex(tan, (i2 * 3.0)) + tx));
-        _Runtime.setIndex(tan, ((i2 * 3.0) + 1.0), (_Runtime.getIndex(tan, ((i2 * 3.0) + 1.0)) + ty));
-        _Runtime.setIndex(tan, ((i2 * 3.0) + 2.0), (_Runtime.getIndex(tan, ((i2 * 3.0) + 2.0)) + tz));
-        _Runtime.setIndex(bitan, (i0 * 3.0), (_Runtime.getIndex(bitan, (i0 * 3.0)) + bx));
-        _Runtime.setIndex(bitan, ((i0 * 3.0) + 1.0), (_Runtime.getIndex(bitan, ((i0 * 3.0) + 1.0)) + by));
-        _Runtime.setIndex(bitan, ((i0 * 3.0) + 2.0), (_Runtime.getIndex(bitan, ((i0 * 3.0) + 2.0)) + bz));
-        _Runtime.setIndex(bitan, (i1 * 3.0), (_Runtime.getIndex(bitan, (i1 * 3.0)) + bx));
-        _Runtime.setIndex(bitan, ((i1 * 3.0) + 1.0), (_Runtime.getIndex(bitan, ((i1 * 3.0) + 1.0)) + by));
-        _Runtime.setIndex(bitan, ((i1 * 3.0) + 2.0), (_Runtime.getIndex(bitan, ((i1 * 3.0) + 2.0)) + bz));
-        _Runtime.setIndex(bitan, (i2 * 3.0), (_Runtime.getIndex(bitan, (i2 * 3.0)) + bx));
-        _Runtime.setIndex(bitan, ((i2 * 3.0) + 1.0), (_Runtime.getIndex(bitan, ((i2 * 3.0) + 1.0)) + by));
-        _Runtime.setIndex(bitan, ((i2 * 3.0) + 2.0), (_Runtime.getIndex(bitan, ((i2 * 3.0) + 2.0)) + bz));
+        ({ var __indexedObject18:Dynamic = tan; var __indexedKey19:Dynamic = (i0 * 3.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject18, __indexedKey19, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject18, __indexedKey19) + tx)); });
+        ({ var __indexedObject20:Dynamic = tan; var __indexedKey21:Dynamic = ((i0 * 3.0) + 1.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject20, __indexedKey21, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject20, __indexedKey21) + ty)); });
+        ({ var __indexedObject22:Dynamic = tan; var __indexedKey23:Dynamic = ((i0 * 3.0) + 2.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject22, __indexedKey23, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject22, __indexedKey23) + tz)); });
+        ({ var __indexedObject24:Dynamic = tan; var __indexedKey25:Dynamic = (i1 * 3.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject24, __indexedKey25, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject24, __indexedKey25) + tx)); });
+        ({ var __indexedObject26:Dynamic = tan; var __indexedKey27:Dynamic = ((i1 * 3.0) + 1.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject26, __indexedKey27, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject26, __indexedKey27) + ty)); });
+        ({ var __indexedObject28:Dynamic = tan; var __indexedKey29:Dynamic = ((i1 * 3.0) + 2.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject28, __indexedKey29, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject28, __indexedKey29) + tz)); });
+        ({ var __indexedObject30:Dynamic = tan; var __indexedKey31:Dynamic = (i2 * 3.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject30, __indexedKey31, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject30, __indexedKey31) + tx)); });
+        ({ var __indexedObject32:Dynamic = tan; var __indexedKey33:Dynamic = ((i2 * 3.0) + 1.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject32, __indexedKey33, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject32, __indexedKey33) + ty)); });
+        ({ var __indexedObject34:Dynamic = tan; var __indexedKey35:Dynamic = ((i2 * 3.0) + 2.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject34, __indexedKey35, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject34, __indexedKey35) + tz)); });
+        ({ var __indexedObject36:Dynamic = bitan; var __indexedKey37:Dynamic = (i0 * 3.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject36, __indexedKey37, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject36, __indexedKey37) + bx)); });
+        ({ var __indexedObject38:Dynamic = bitan; var __indexedKey39:Dynamic = ((i0 * 3.0) + 1.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject38, __indexedKey39, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject38, __indexedKey39) + by)); });
+        ({ var __indexedObject40:Dynamic = bitan; var __indexedKey41:Dynamic = ((i0 * 3.0) + 2.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject40, __indexedKey41, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject40, __indexedKey41) + bz)); });
+        ({ var __indexedObject42:Dynamic = bitan; var __indexedKey43:Dynamic = (i1 * 3.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject42, __indexedKey43, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject42, __indexedKey43) + bx)); });
+        ({ var __indexedObject44:Dynamic = bitan; var __indexedKey45:Dynamic = ((i1 * 3.0) + 1.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject44, __indexedKey45, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject44, __indexedKey45) + by)); });
+        ({ var __indexedObject46:Dynamic = bitan; var __indexedKey47:Dynamic = ((i1 * 3.0) + 2.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject46, __indexedKey47, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject46, __indexedKey47) + bz)); });
+        ({ var __indexedObject48:Dynamic = bitan; var __indexedKey49:Dynamic = (i2 * 3.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject48, __indexedKey49, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject48, __indexedKey49) + bx)); });
+        ({ var __indexedObject50:Dynamic = bitan; var __indexedKey51:Dynamic = ((i2 * 3.0) + 1.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject50, __indexedKey51, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject50, __indexedKey51) + by)); });
+        ({ var __indexedObject52:Dynamic = bitan; var __indexedKey53:Dynamic = ((i2 * 3.0) + 2.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject52, __indexedKey53, (flighthq._internal._StaticIndex.readFloat64Array(__indexedObject52, __indexedKey53) + bz)); });
         (t = cast ((t + 3.0) : Dynamic));
       }
     }
@@ -319,12 +319,12 @@ class MeshGeometryCompute {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
         var nBase:Dynamic = ((i * floatsPerVertex) + MeshGeometryCompute.NORMAL_OFFSET__meshGeometryCompute);
-        var nx:Dynamic = _Runtime.getIndex(vertices, nBase);
-        var ny:Dynamic = _Runtime.getIndex(vertices, (nBase + 1.0));
-        var nz:Dynamic = _Runtime.getIndex(vertices, (nBase + 2.0));
-        var tx:Dynamic = _Runtime.getIndex(tan, (i * 3.0));
-        var ty:Dynamic = _Runtime.getIndex(tan, ((i * 3.0) + 1.0));
-        var tz:Dynamic = _Runtime.getIndex(tan, ((i * 3.0) + 2.0));
+        var nx:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(vertices, nBase);
+        var ny:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(vertices, (nBase + 1.0));
+        var nz:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(vertices, (nBase + 2.0));
+        var tx:Dynamic = flighthq._internal._StaticIndex.readFloat64Array(tan, (i * 3.0));
+        var ty:Dynamic = flighthq._internal._StaticIndex.readFloat64Array(tan, ((i * 3.0) + 1.0));
+        var tz:Dynamic = flighthq._internal._StaticIndex.readFloat64Array(tan, ((i * 3.0) + 2.0));
         var ndt:Dynamic = (((nx * tx) + (ny * ty)) + (nz * tz));
         (tx = cast ((tx - (nx * ndt)) : Dynamic));
         (ty = cast ((ty - (ny * ndt)) : Dynamic));
@@ -342,12 +342,12 @@ class MeshGeometryCompute {
         var cx:Dynamic = ((ny * tz) - (nz * ty));
         var cy:Dynamic = ((nz * tx) - (nx * tz));
         var cz:Dynamic = ((nx * ty) - (ny * tx));
-        var w:Dynamic = ((cast ((cast (((cx * _Runtime.getIndex(bitan, (i * 3.0))) + (cy * _Runtime.getIndex(bitan, ((i * 3.0) + 1.0)))) + (cz * _Runtime.getIndex(bitan, ((i * 3.0) + 2.0)))) : Float) < (cast 0.0 : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic));
+        var w:Dynamic = ((cast ((cast (((cx * flighthq._internal._StaticIndex.readFloat64Array(bitan, (i * 3.0))) + (cy * flighthq._internal._StaticIndex.readFloat64Array(bitan, ((i * 3.0) + 1.0)))) + (cz * flighthq._internal._StaticIndex.readFloat64Array(bitan, ((i * 3.0) + 2.0)))) : Float) < (cast 0.0 : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic));
         var base:Dynamic = ((i * floatsPerVertex) + MeshGeometryCompute.TANGENT_OFFSET__meshGeometryCompute);
-        _Runtime.setIndex(target, base, tx);
-        _Runtime.setIndex(target, (base + 1.0), ty);
-        _Runtime.setIndex(target, (base + 2.0), tz);
-        _Runtime.setIndex(target, (base + 3.0), w);
+        flighthq._internal._StaticIndex.writeFloat32Array(target, base, tx);
+        flighthq._internal._StaticIndex.writeFloat32Array(target, (base + 1.0), ty);
+        flighthq._internal._StaticIndex.writeFloat32Array(target, (base + 2.0), tz);
+        flighthq._internal._StaticIndex.writeFloat32Array(target, (base + 3.0), w);
         i++;
       }
     }

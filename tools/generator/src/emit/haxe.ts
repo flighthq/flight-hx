@@ -1,6 +1,7 @@
 import type {
   IrDeclaration,
   IrExpression,
+  IrIndexedReceiver,
   IrModule,
   IrParameter,
   IrStatement,
@@ -9,6 +10,11 @@ import type {
   StaticLoweringEmissionCounts,
 } from '../model/ir.ts';
 import { type WebGl2ComputedConstantDomain, webGl2ComputedConstantDomains } from './webgl2-endpoints.ts';
+
+type ScalarStaticLoweringEmissionName = Exclude<
+  keyof StaticLoweringEmissionCounts,
+  'indexedAccesses' | 'indexedReceivers'
+>;
 
 const binaryOperatorMap: Readonly<Record<string, string>> = {
   '===': '==',
@@ -22,7 +28,20 @@ const staticLoweringMarkers = {
   booleanOrExpressions: '/*__flight_direct_boolean_or__*/',
   booleanTruthinessUses: '/*__flight_direct_boolean_truthiness__*/',
   numericRelations: '/*__flight_direct_numeric_relation__*/',
-} as const satisfies Record<keyof StaticLoweringEmissionCounts, string>;
+} as const satisfies Record<ScalarStaticLoweringEmissionName, string>;
+
+const indexedReceiverNames = [
+  'Array',
+  'Float32Array',
+  'Float64Array',
+  'Int16Array',
+  'Int32Array',
+  'Int8Array',
+  'Uint16Array',
+  'Uint32Array',
+  'Uint8Array',
+  'Uint8ClampedArray',
+] as const satisfies readonly IrIndexedReceiver[];
 
 const canvas2dMethodEndpoints = new Set([
   'arc',
@@ -320,7 +339,13 @@ export function resetStaticLoweringEmissionCounts(): void {
 }
 
 export function staticLoweringEmissionCounts(): StaticLoweringEmissionCounts {
-  return { ...staticLoweringEmission };
+  return {
+    ...staticLoweringEmission,
+    indexedAccesses: { ...staticLoweringEmission.indexedAccesses },
+    indexedReceivers: Object.fromEntries(
+      indexedReceiverNames.map((receiver) => [receiver, { ...staticLoweringEmission.indexedReceivers[receiver] }]),
+    ) as StaticLoweringEmissionCounts['indexedReceivers'],
+  };
 }
 
 export function emitHaxeModule(module: IrModule): string {
@@ -1738,6 +1763,13 @@ function emptyStaticLoweringEmissionCounts(): StaticLoweringEmissionCounts {
     booleanConditionalExpressions: 0,
     booleanOrExpressions: 0,
     booleanTruthinessUses: 0,
+    indexedAccesses: {
+      reads: 0,
+      writes: 0,
+    },
+    indexedReceivers: Object.fromEntries(
+      indexedReceiverNames.map((receiver) => [receiver, { reads: 0, writes: 0 }]),
+    ) as StaticLoweringEmissionCounts['indexedReceivers'],
     numericRelations: 0,
   };
 }
@@ -1745,16 +1777,62 @@ function emptyStaticLoweringEmissionCounts(): StaticLoweringEmissionCounts {
 function finalizeStaticLoweringEmission(output: string): string {
   let finalized = output;
   for (const [name, marker] of Object.entries(staticLoweringMarkers) as Array<
-    [keyof StaticLoweringEmissionCounts, string]
+    [ScalarStaticLoweringEmissionName, string]
   >) {
     staticLoweringEmission[name] += finalized.split(marker).length - 1;
     finalized = finalized.replaceAll(marker, '');
   }
+  for (const receiver of indexedReceiverNames) {
+    for (const operation of ['reads', 'writes'] as const) {
+      const marker = staticIndexedLoweringMarker(receiver, operation);
+      const count = finalized.split(marker).length - 1;
+      staticLoweringEmission.indexedAccesses[operation] += count;
+      staticLoweringEmission.indexedReceivers[receiver][operation] += count;
+      finalized = finalized.replaceAll(marker, '');
+    }
+  }
   return finalized;
 }
 
-function markStaticLowering(name: keyof StaticLoweringEmissionCounts, value: string): string {
+function markStaticLowering(name: ScalarStaticLoweringEmissionName, value: string): string {
   return `${staticLoweringMarkers[name]}${value}`;
+}
+
+function staticIndexedLoweringMarker(receiver: IrIndexedReceiver, operation: 'reads' | 'writes'): string {
+  return `/*__flight_direct_index_${operation}_${receiver}__*/`;
+}
+
+function markStaticIndexedLowering(receiver: IrIndexedReceiver, operation: 'reads' | 'writes', value: string): string {
+  return `${staticIndexedLoweringMarker(receiver, operation)}${value}`;
+}
+
+function emitStaticIndexedRead(
+  expression: Extract<IrExpression, { kind: 'element' }>,
+  object = emitExpression(expression.object),
+  index = emitExpression(expression.index),
+): string | undefined {
+  const indexedAccess = expression.staticFacts?.indexedAccess;
+  if (!indexedAccess || indexedAccess.reads !== 1 || expression.optional) return undefined;
+  return markStaticIndexedLowering(
+    indexedAccess.receiver,
+    'reads',
+    `flighthq._internal._StaticIndex.read${indexedAccess.receiver}(${object}, ${index})`,
+  );
+}
+
+function emitStaticIndexedWrite(
+  expression: Extract<IrExpression, { kind: 'element' }>,
+  value: string,
+  object = emitExpression(expression.object),
+  index = emitExpression(expression.index),
+): string | undefined {
+  const indexedAccess = expression.staticFacts?.indexedAccess;
+  if (!indexedAccess || indexedAccess.writes !== 1 || expression.optional) return undefined;
+  return markStaticIndexedLowering(
+    indexedAccess.receiver,
+    'writes',
+    `flighthq._internal._StaticIndex.write${indexedAccess.receiver}(${object}, ${index}, ${value})`,
+  );
 }
 
 function emitExpression(expression: IrExpression): string {
@@ -1808,17 +1886,31 @@ function emitExpression(expression: IrExpression): string {
         const object = emitExpression(expression.left.object);
         const index = emitExpression(expression.left.index);
         if (expression.operator === '=') {
-          return `_Runtime.setIndex(${object}, ${index}, ${emitExpression(expression.right)})`;
+          const value = emitExpression(expression.right);
+          return (
+            emitStaticIndexedWrite(expression.left, value, object, index) ??
+            `_Runtime.setIndex(${object}, ${index}, ${value})`
+          );
         }
         const operator = expression.operator.slice(0, -1);
-        const current = `_Runtime.getIndex(${object}, ${index})`;
+        const indexedAccess = expression.left.staticFacts?.indexedAccess;
+        const directCompound = indexedAccess?.reads === 1 && indexedAccess.writes === 1 && !expression.left.optional;
+        const indexedObject = directCompound ? `__indexedObject${String(temporaryIndex++)}` : object;
+        const indexedKey = directCompound ? `__indexedKey${String(temporaryIndex++)}` : index;
+        const current =
+          emitStaticIndexedRead(expression.left, indexedObject, indexedKey) ?? `_Runtime.getIndex(${object}, ${index})`;
         const value =
           operator === '>>>'
             ? `_Runtime.unsignedShiftRight(_Runtime.toInt32(${current}), ${emitInt32Operand(expression.right)})`
             : ['&', '|', '^', '<<', '>>'].includes(operator)
               ? `(_Runtime.toInt32(${current}) ${operator} ${emitInt32Operand(expression.right)})`
               : emitArithmeticOperation(current, operator, emitExpression(expression.right));
-        return `_Runtime.setIndex(${object}, ${index}, ${value})`;
+        const directWrite = directCompound
+          ? emitStaticIndexedWrite(expression.left, value, indexedObject, indexedKey)
+          : undefined;
+        return directWrite
+          ? `({ var ${indexedObject}:Dynamic = ${object}; var ${indexedKey}:Dynamic = ${index}; ${directWrite}; })`
+          : `_Runtime.setIndex(${object}, ${index}, ${value})`;
       }
       if (expression.kind === 'assignment' && expression.left.kind === 'property') {
         if (expression.left.binding === 'WebGl2Backend') {
@@ -2007,7 +2099,10 @@ function emitExpression(expression: IrExpression): string {
         }
         return emitWebGl2ComputedConstant(expression.index, expression.webGlComputedDomain);
       }
-      return `_Runtime.${expression.optional ? 'optionalIndex' : 'getIndex'}(${emitExpression(expression.object)}, ${emitExpression(expression.index)})`;
+      return (
+        emitStaticIndexedRead(expression) ??
+        `_Runtime.${expression.optional ? 'optionalIndex' : 'getIndex'}(${emitExpression(expression.object)}, ${emitExpression(expression.index)})`
+      );
     case 'function': {
       const name = expression.name && !expression.async ? ` ${safeName(expression.name)}` : '';
       const parameters = emitParameters(expression.parameters, true);

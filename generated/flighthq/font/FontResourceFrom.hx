@@ -31,7 +31,7 @@ class FontResourceFrom {
           var __flowBranch2:Dynamic;
           if ((cast ((cast _Runtime.field(faces, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
             __flowBranch2 = flighthq._internal._Async.protect(function():Dynamic {
-              _Runtime.setField(out, 'face', _Runtime.getIndex(faces, 0.0));
+              _Runtime.setField(out, 'face', flighthq._internal._StaticIndex.readArray(faces, 0.0));
               return flighthq._internal._Async.flowNormal();
             });
           } else {

@@ -31,14 +31,14 @@ class SurfaceTone {
             if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast ox : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast ox : Float) >= (cast _Runtime.field(_Runtime.field(out, 'surface'), 'width') : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Dynamic = (((sy * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sx) * 4.0);
             var oi:Dynamic = (((oy * _Runtime.field(_Runtime.field(out, 'surface'), 'width')) + ox) * 4.0);
-            var r:Dynamic = _Runtime.getIndex(sd, si);
-            var g:Dynamic = _Runtime.getIndex(sd, (si + 1.0));
-            var b:Dynamic = _Runtime.getIndex(sd, (si + 2.0));
-            var a:Dynamic = _Runtime.getIndex(sd, (si + 3.0));
-            _Runtime.setIndex(od, oi, ((cast !_Runtime.strictEquals(redLut, null) : Bool) ? (cast _Runtime.getIndex(redLut, r) : Dynamic) : (cast r : Dynamic)));
-            _Runtime.setIndex(od, (oi + 1.0), ((cast !_Runtime.strictEquals(greenLut, null) : Bool) ? (cast _Runtime.getIndex(greenLut, g) : Dynamic) : (cast g : Dynamic)));
-            _Runtime.setIndex(od, (oi + 2.0), ((cast !_Runtime.strictEquals(blueLut, null) : Bool) ? (cast _Runtime.getIndex(blueLut, b) : Dynamic) : (cast b : Dynamic)));
-            _Runtime.setIndex(od, (oi + 3.0), ((cast !_Runtime.strictEquals(alphaLut, null) : Bool) ? (cast _Runtime.getIndex(alphaLut, a) : Dynamic) : (cast a : Dynamic)));
+            var r:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, si);
+            var g:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 1.0));
+            var b:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 2.0));
+            var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 3.0));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, oi, ((cast !_Runtime.strictEquals(redLut, null) : Bool) ? (cast _Runtime.getIndex(redLut, r) : Dynamic) : (cast r : Dynamic)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, (oi + 1.0), ((cast !_Runtime.strictEquals(greenLut, null) : Bool) ? (cast _Runtime.getIndex(greenLut, g) : Dynamic) : (cast g : Dynamic)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, (oi + 2.0), ((cast !_Runtime.strictEquals(blueLut, null) : Bool) ? (cast _Runtime.getIndex(blueLut, b) : Dynamic) : (cast b : Dynamic)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, (oi + 3.0), ((cast !_Runtime.strictEquals(alphaLut, null) : Bool) ? (cast _Runtime.getIndex(alphaLut, a) : Dynamic) : (cast a : Dynamic)));
             px++;
           }
         }
@@ -63,7 +63,7 @@ class SurfaceTone {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast 256.0 : Float)) : Bool)) {
         var normalized:Dynamic = HxMath.max(0.0, HxMath.min(1.0, ((i - bp) / span)));
-        _Runtime.setIndex(lut, i, HxMath.round((HxMath.pow(normalized, invGamma) * 255.0)));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(lut, i, HxMath.round((HxMath.pow(normalized, invGamma) * 255.0)));
         i++;
       }
     }

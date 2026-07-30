@@ -164,7 +164,7 @@ class AnimationTrack {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(src, 'length') : Float)) : Bool)) {
-        _Runtime.setIndex(out, i, _Runtime.getIndex(src, i));
+        flighthq._internal._StaticIndex.writeArray(out, i, _Runtime.getIndex(src, i));
         i++;
       }
     }

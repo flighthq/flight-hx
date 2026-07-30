@@ -81,7 +81,7 @@ class UpdateBitmapText {
     {
       var li:Dynamic = 0.0;
       while ((cast ((cast li : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
-        var line:Dynamic = _Runtime.getIndex(lines, li);
+        var line:Dynamic = flighthq._internal._StaticIndex.readArray(lines, li);
         var baselineY:Dynamic = (metrics.ascent + (li * lineAdvance));
         var startX:Dynamic = 0.0;
         var gapExtra:Dynamic = 0.0;
@@ -92,8 +92,8 @@ class UpdateBitmapText {
         {
           var wi:Dynamic = 0.0;
           while ((cast ((cast wi : Float) < (cast _Runtime.field(_Runtime.field(line, 'words'), 'length') : Float)) : Bool)) {
-            if ((cast ((cast wi : Float) > (cast 0.0 : Float)) : Bool)) { (penX = cast ((penX + (_Runtime.getIndex(_Runtime.field(line, 'gaps'), (wi - 1.0)) + gapExtra)) : Dynamic)); }
-            var word:Dynamic = _Runtime.getIndex(_Runtime.field(line, 'words'), wi);
+            if ((cast ((cast wi : Float) > (cast 0.0 : Float)) : Bool)) { (penX = cast ((penX + (flighthq._internal._StaticIndex.readArray(_Runtime.field(line, 'gaps'), (wi - 1.0)) + gapExtra)) : Dynamic)); }
+            var word:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(line, 'words'), wi);
             for (glyph in _Runtime.iterable(_Runtime.field(word, 'glyphs'))) {
               var entry:Dynamic = _Runtime.field(glyph, 'entry');
               var page:Dynamic = _Runtime.callValue(UpdateBitmapText.ensureBitmapTextPageBatch__updateBitmapText, cast ([bitmapText, runtime, glyphSource, _Runtime.field(data, 'color'), pages, _Runtime.field(entry, 'page')] : Array<Dynamic>));
@@ -201,7 +201,7 @@ class UpdateBitmapText {
       _Runtime.callProperty(_Runtime.field(runtime, 'quadBatches'), 'push', cast ([created] : Array<Dynamic>));
       _Runtime.callValue(addNodeChild, cast ([bitmapText, created] : Array<Dynamic>));
     }
-    quadBatch = _Runtime.getIndex(_Runtime.field(runtime, 'quadBatches'), page);
+    quadBatch = flighthq._internal._StaticIndex.readArray(_Runtime.field(runtime, 'quadBatches'), page);
     atlas = _Runtime.field(_Runtime.field(quadBatch, 'data'), 'atlas');
     _Runtime.setField(atlas, 'image', image);
     pageBatch = { atlas: atlas, quadBatch: quadBatch, regionByCodepoint: _Runtime.construct(_Runtime.globalValue('Map'), []) };
@@ -224,7 +224,7 @@ class UpdateBitmapText {
     {
       var pi:Dynamic = 0.0;
       while ((cast ((cast pi : Float) < (cast _Runtime.field(paragraphs, 'length') : Float)) : Bool)) {
-        var tokens:Dynamic = _Runtime.callValue(UpdateBitmapText.buildBitmapTextWords__updateBitmapText, cast ([glyphSource, _Runtime.getIndex(paragraphs, pi), _Runtime.field(data, 'letterSpacing')] : Array<Dynamic>));
+        var tokens:Dynamic = _Runtime.callValue(UpdateBitmapText.buildBitmapTextWords__updateBitmapText, cast ([glyphSource, flighthq._internal._StaticIndex.readArray(paragraphs, pi), _Runtime.field(data, 'letterSpacing')] : Array<Dynamic>));
         var current:BitmapTextLine__updateBitmapText = { words: cast ([] : Array<Dynamic>), gaps: cast ([] : Array<Dynamic>), width: 0.0, paragraphEnd: false };
         for (token in _Runtime.iterable(tokens)) {
           var wraps:Dynamic = ((cast ((cast !_Runtime.strictEquals(_Runtime.field(data, 'wrapWidth'), null) : Bool) && (cast ((cast _Runtime.field(_Runtime.field(current, 'words'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast ((_Runtime.field(current, 'width') + _Runtime.field(token, 'gap')) + _Runtime.field(_Runtime.field(token, 'word'), 'width')) : Float) > (cast _Runtime.field(data, 'wrapWidth') : Float)) : Bool));

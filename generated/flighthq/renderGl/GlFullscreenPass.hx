@@ -45,7 +45,7 @@ class GlFullscreenPass {
     }
     single = flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_texture');
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(textures, 'length'), 0.0), function():Dynamic return cast single))) { _Runtime.callProperty(textures, 'push', cast ([single] : Array<Dynamic>)); }
-    return cast { program: program, locPosition: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_position'), locTexCoord: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_texCoord'), texture: _Runtime.coalesce(_Runtime.getIndex(textures, 0.0), function():Dynamic return cast single), textures: textures };
+    return cast { program: program, locPosition: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_position'), locTexCoord: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_texCoord'), texture: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(textures, 0.0), function():Dynamic return cast single), textures: textures };
     return cast null;
   }
 
@@ -74,8 +74,8 @@ class GlFullscreenPass {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(inputs, 'length') : Float)) : Bool)) {
         flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + i));
-        flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, _Runtime.getIndex(inputs, i));
-        if (_Runtime.truthy(_Runtime.getIndex(_Runtime.field(program, 'textures'), i))) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.getIndex(_Runtime.field(program, 'textures'), i), i); }
+        flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, flighthq._internal._StaticIndex.readArray(inputs, i));
+        if (_Runtime.truthy(flighthq._internal._StaticIndex.readArray(_Runtime.field(program, 'textures'), i))) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, flighthq._internal._StaticIndex.readArray(_Runtime.field(program, 'textures'), i), i); }
         i++;
       }
     }
@@ -114,22 +114,22 @@ class GlFullscreenPass {
     }
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, quadVao);
     v = _Runtime.field(runtime, 'quadVertexData');
-    _Runtime.setIndex(v, 0.0, -1.0);
-    _Runtime.setIndex(v, 1.0, -1.0);
-    _Runtime.setIndex(v, 2.0, 0.0);
-    _Runtime.setIndex(v, 3.0, 0.0);
-    _Runtime.setIndex(v, 4.0, 1.0);
-    _Runtime.setIndex(v, 5.0, -1.0);
-    _Runtime.setIndex(v, 6.0, 1.0);
-    _Runtime.setIndex(v, 7.0, 0.0);
-    _Runtime.setIndex(v, 8.0, 1.0);
-    _Runtime.setIndex(v, 9.0, 1.0);
-    _Runtime.setIndex(v, 10.0, 1.0);
-    _Runtime.setIndex(v, 11.0, 1.0);
-    _Runtime.setIndex(v, 12.0, -1.0);
-    _Runtime.setIndex(v, 13.0, 1.0);
-    _Runtime.setIndex(v, 14.0, 0.0);
-    _Runtime.setIndex(v, 15.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 0.0, -1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 1.0, -1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 2.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 3.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 4.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 5.0, -1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 6.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 7.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 8.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 9.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 10.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 11.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 12.0, -1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 13.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 14.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(v, 15.0, 1.0);
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(runtime, 'quadVertexBuffer'));
     flighthq._internal.backend.WebGl2Backend.bufferSubData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, 0.0, v);
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER, _Runtime.field(runtime, 'quadIndexBuffer'));

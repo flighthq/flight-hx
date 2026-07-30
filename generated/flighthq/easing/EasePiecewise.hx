@@ -31,7 +31,7 @@ class EasePiecewise {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(breakpoints, 'length') : Float)) : Bool)) {
-          var bp:Dynamic = _Runtime.getIndex(breakpoints, i);
+          var bp:Dynamic = flighthq._internal._StaticIndex.readArray(breakpoints, i);
           if ((cast ((cast ((cast t : Float) <= (cast _Runtime.field(bp, 'end') : Float)) : Bool) || (cast _Runtime.strictEquals(i, (_Runtime.field(breakpoints, 'length') - 1.0)) : Bool)) : Bool)) {
             var span:Dynamic = (_Runtime.field(bp, 'end') - _Runtime.field(bp, 'start'));
             var localT:Dynamic = ((cast ((cast span : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((t - _Runtime.field(bp, 'start')) / span) : Dynamic) : (cast 1.0 : Dynamic));
@@ -41,7 +41,7 @@ class EasePiecewise {
           i++;
         }
       }
-      return cast _Runtime.callProperty(_Runtime.getIndex(segments, (_Runtime.field(segments, 'length') - 1.0)), 'ease', cast ([1.0] : Array<Dynamic>));
+      return cast _Runtime.callProperty(flighthq._internal._StaticIndex.readArray(segments, (_Runtime.field(segments, 'length') - 1.0)), 'ease', cast ([1.0] : Array<Dynamic>));
     };
     return cast null;
   }

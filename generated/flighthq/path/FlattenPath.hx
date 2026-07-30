@@ -32,18 +32,18 @@ class FlattenPath {
     {
       var ci:Dynamic = 0.0;
       while ((cast ((cast ci : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-        var command:Dynamic = _Runtime.getIndex(commands, ci);
+        var command:Dynamic = flighthq._internal._StaticIndex.readArray(commands, ci);
         if ((cast _Runtime.strictEquals(command, PathCommandValue.MOVE_TO) : Bool)) {
-          (x = cast (_Runtime.getIndex(data, di) : Dynamic));
-          (y = cast (_Runtime.getIndex(data, (di + 1.0)) : Dynamic));
+          (x = cast (flighthq._internal._StaticIndex.readArray(data, di) : Dynamic));
+          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Dynamic));
           (di = cast ((di + 2.0) : Dynamic));
           (contourStartX = cast (x : Dynamic));
           (contourStartY = cast (y : Dynamic));
           (contour = cast (cast ([x, y] : Array<Dynamic>) : Dynamic));
           _Runtime.callProperty(contours, 'push', cast ([contour] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO) : Bool)) {
-          (x = cast (_Runtime.getIndex(data, (di + 2.0)) : Dynamic));
-          (y = cast (_Runtime.getIndex(data, (di + 3.0)) : Dynamic));
+          (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Dynamic));
+          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
           (contourStartX = cast (x : Dynamic));
           (contourStartY = cast (y : Dynamic));
@@ -51,27 +51,27 @@ class FlattenPath {
           _Runtime.callProperty(contours, 'push', cast ([contour] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.LINE_TO) : Bool)) {
           (contour = cast (_Runtime.callValue(FlattenPath.ensureContour__flattenPath, cast ([contours, contour] : Array<Dynamic>)) : Dynamic));
-          (x = cast (_Runtime.getIndex(data, di) : Dynamic));
-          (y = cast (_Runtime.getIndex(data, (di + 1.0)) : Dynamic));
+          (x = cast (flighthq._internal._StaticIndex.readArray(data, di) : Dynamic));
+          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Dynamic));
           (di = cast ((di + 2.0) : Dynamic));
           _Runtime.pushMany(contour, cast ([x, y] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO) : Bool)) {
           (contour = cast (_Runtime.callValue(FlattenPath.ensureContour__flattenPath, cast ([contours, contour] : Array<Dynamic>)) : Dynamic));
-          (x = cast (_Runtime.getIndex(data, (di + 2.0)) : Dynamic));
-          (y = cast (_Runtime.getIndex(data, (di + 3.0)) : Dynamic));
+          (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Dynamic));
+          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
           _Runtime.pushMany(contour, cast ([x, y] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CURVE_TO) : Bool)) {
           (contour = cast (_Runtime.callValue(FlattenPath.ensureContour__flattenPath, cast ([contours, contour] : Array<Dynamic>)) : Dynamic));
-          _Runtime.callValue(FlattenPath.flattenQuadratic__flattenPath, cast ([contour, x, y, _Runtime.getIndex(data, di), _Runtime.getIndex(data, (di + 1.0)), _Runtime.getIndex(data, (di + 2.0)), _Runtime.getIndex(data, (di + 3.0)), toleranceSq, 0.0] : Array<Dynamic>));
-          (x = cast (_Runtime.getIndex(data, (di + 2.0)) : Dynamic));
-          (y = cast (_Runtime.getIndex(data, (di + 3.0)) : Dynamic));
+          _Runtime.callValue(FlattenPath.flattenQuadratic__flattenPath, cast ([contour, x, y, flighthq._internal._StaticIndex.readArray(data, di), flighthq._internal._StaticIndex.readArray(data, (di + 1.0)), flighthq._internal._StaticIndex.readArray(data, (di + 2.0)), flighthq._internal._StaticIndex.readArray(data, (di + 3.0)), toleranceSq, 0.0] : Array<Dynamic>));
+          (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Dynamic));
+          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO) : Bool)) {
           (contour = cast (_Runtime.callValue(FlattenPath.ensureContour__flattenPath, cast ([contours, contour] : Array<Dynamic>)) : Dynamic));
-          _Runtime.callValue(FlattenPath.flattenCubic__flattenPath, cast ([contour, x, y, _Runtime.getIndex(data, di), _Runtime.getIndex(data, (di + 1.0)), _Runtime.getIndex(data, (di + 2.0)), _Runtime.getIndex(data, (di + 3.0)), _Runtime.getIndex(data, (di + 4.0)), _Runtime.getIndex(data, (di + 5.0)), toleranceSq, 0.0] : Array<Dynamic>));
-          (x = cast (_Runtime.getIndex(data, (di + 4.0)) : Dynamic));
-          (y = cast (_Runtime.getIndex(data, (di + 5.0)) : Dynamic));
+          _Runtime.callValue(FlattenPath.flattenCubic__flattenPath, cast ([contour, x, y, flighthq._internal._StaticIndex.readArray(data, di), flighthq._internal._StaticIndex.readArray(data, (di + 1.0)), flighthq._internal._StaticIndex.readArray(data, (di + 2.0)), flighthq._internal._StaticIndex.readArray(data, (di + 3.0)), flighthq._internal._StaticIndex.readArray(data, (di + 4.0)), flighthq._internal._StaticIndex.readArray(data, (di + 5.0)), toleranceSq, 0.0] : Array<Dynamic>));
+          (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 4.0)) : Dynamic));
+          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 5.0)) : Dynamic));
           (di = cast ((di + 6.0) : Dynamic));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CLOSE) : Bool)) {
           if ((cast ((cast !_Runtime.strictEquals(contour, null) : Bool) && (cast _Runtime.orValue(!_Runtime.strictEquals(x, contourStartX), function():Dynamic return cast !_Runtime.strictEquals(y, contourStartY)) : Bool)) : Bool)) {

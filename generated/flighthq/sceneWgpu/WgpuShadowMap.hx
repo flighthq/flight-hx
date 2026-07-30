@@ -87,7 +87,7 @@ class WgpuShadowMap {
       world = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>)) : Matrix4);
       _Runtime.callValue(multiplyMatrix4, cast ([_Runtime.field(WgpuShadowMap._shadowProxy__wgpuShadowMap, 'worldMatrix'), lightMatrix, world] : Array<Dynamic>));
       drawBindGroup = _Runtime.callValue(writeWgpuDrawUniform, cast ([state, WgpuShadowMap._shadowProxy__wgpuShadowMap] : Array<Dynamic>));
-      _Runtime.setIndex(WgpuShadowMap._dynamicOffsets__wgpuShadowMap, 0.0, _Runtime.field(sceneRuntime, 'pendingDrawOffset'));
+      flighthq._internal._StaticIndex.writeUint32Array(WgpuShadowMap._dynamicOffsets__wgpuShadowMap, 0.0, _Runtime.field(sceneRuntime, 'pendingDrawOffset'));
       _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, drawBindGroup, WgpuShadowMap._dynamicOffsets__wgpuShadowMap] : Array<Dynamic>));
       _Runtime.callProperty(pass, 'setVertexBuffer', cast ([0.0, _Runtime.field(upload, 'vertexBuffer')] : Array<Dynamic>));
       _Runtime.callProperty(pass, 'setIndexBuffer', cast ([_Runtime.field(upload, 'indexBuffer'), _Runtime.field(upload, 'indexFormat')] : Array<Dynamic>));

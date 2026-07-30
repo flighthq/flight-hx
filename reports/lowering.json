@@ -2490,7 +2490,7 @@
       }
     }
   ],
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "summary": {
     "declarations": 9122,
     "diagnostics": 0,
@@ -2502,6 +2502,52 @@
       "booleanConditionalExpressions": 1689,
       "booleanOrExpressions": 1364,
       "booleanTruthinessUses": 7882,
+      "indexedAccesses": {
+        "reads": 4521,
+        "writes": 2915
+      },
+      "indexedReceivers": {
+        "Array": {
+          "reads": 2509,
+          "writes": 453
+        },
+        "Float32Array": {
+          "reads": 1392,
+          "writes": 1979
+        },
+        "Float64Array": {
+          "reads": 59,
+          "writes": 51
+        },
+        "Int16Array": {
+          "reads": 5,
+          "writes": 4
+        },
+        "Int32Array": {
+          "reads": 13,
+          "writes": 7
+        },
+        "Int8Array": {
+          "reads": 0,
+          "writes": 0
+        },
+        "Uint16Array": {
+          "reads": 37,
+          "writes": 26
+        },
+        "Uint32Array": {
+          "reads": 2,
+          "writes": 8
+        },
+        "Uint8Array": {
+          "reads": 164,
+          "writes": 28
+        },
+        "Uint8ClampedArray": {
+          "reads": 340,
+          "writes": 359
+        }
+      },
       "numericRelations": 4021
     },
     "staticFacts": {

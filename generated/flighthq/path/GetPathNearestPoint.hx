@@ -20,14 +20,14 @@ class GetPathNearestPoint {
     {
       var ci:Dynamic = 0.0;
       while ((cast ((cast ci : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
-        var contour:Dynamic = _Runtime.getIndex(contours, ci);
+        var contour:Dynamic = flighthq._internal._StaticIndex.readArray(contours, ci);
         {
           var i:Dynamic = 2.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
-            var ax:Dynamic = _Runtime.getIndex(contour, (i - 2.0));
-            var ay:Dynamic = _Runtime.getIndex(contour, (i - 1.0));
-            var bx:Dynamic = _Runtime.getIndex(contour, i);
-            var by:Dynamic = _Runtime.getIndex(contour, (i + 1.0));
+            var ax:Dynamic = flighthq._internal._StaticIndex.readArray(contour, (i - 2.0));
+            var ay:Dynamic = flighthq._internal._StaticIndex.readArray(contour, (i - 1.0));
+            var bx:Dynamic = flighthq._internal._StaticIndex.readArray(contour, i);
+            var by:Dynamic = flighthq._internal._StaticIndex.readArray(contour, (i + 1.0));
             var dx:Dynamic = (bx - ax);
             var dy:Dynamic = (by - ay);
             var lenSq:Dynamic = ((dx * dx) + (dy * dy));

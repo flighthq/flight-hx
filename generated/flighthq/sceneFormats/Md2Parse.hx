@@ -126,13 +126,13 @@ class Md2Parse {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast numTexCoords : Float)) : Bool)) {
         var base:Dynamic = (offTexCoords + (i * MD2_TEXCOORD_SIZE));
-        _Runtime.setIndex(texS, i, (_Runtime.callProperty(view, 'getInt16', cast ([base, true] : Array<Dynamic>)) * uvScaleS));
-        _Runtime.setIndex(texT, i, (_Runtime.callProperty(view, 'getInt16', cast ([(base + 2.0), true] : Array<Dynamic>)) * uvScaleT));
+        flighthq._internal._StaticIndex.writeFloat32Array(texS, i, (_Runtime.callProperty(view, 'getInt16', cast ([base, true] : Array<Dynamic>)) * uvScaleS));
+        flighthq._internal._StaticIndex.writeFloat32Array(texT, i, (_Runtime.callProperty(view, 'getInt16', cast ([(base + 2.0), true] : Array<Dynamic>)) * uvScaleT));
         i++;
       }
     }
     frames = _Runtime.callValue(Md2Parse.readMd2Frames__md2Parse, cast ([bytes, view, offFrames, numFrames, numVertices, frameStride] : Array<Dynamic>));
-    base = _Runtime.getIndex(frames, 0.0);
+    base = flighthq._internal._StaticIndex.readArray(frames, 0.0);
     dedup = _Runtime.construct(_Runtime.globalValue('Map'), []);
     interleavedVertices = cast ([] : Array<Dynamic>);
     sourceVertexIndices = cast ([] : Array<Dynamic>);
@@ -161,10 +161,10 @@ class Md2Parse {
             if ((cast _Runtime.strictEquals(idx, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
               (idx = cast ((_Runtime.field(interleavedVertices, 'length') / CANONICAL_FLOATS_PER_VERTEX) : Dynamic));
               var p:Dynamic = (vertIdx * 3.0);
-              _Runtime.pushMany(interleavedVertices, cast ([_Runtime.getIndex(_Runtime.field(base, 'positions'), p), _Runtime.getIndex(_Runtime.field(base, 'positions'), (p + 1.0)), _Runtime.getIndex(_Runtime.field(base, 'positions'), (p + 2.0))] : Array<Dynamic>));
-              _Runtime.pushMany(interleavedVertices, cast ([_Runtime.getIndex(_Runtime.field(base, 'normals'), p), _Runtime.getIndex(_Runtime.field(base, 'normals'), (p + 1.0)), _Runtime.getIndex(_Runtime.field(base, 'normals'), (p + 2.0))] : Array<Dynamic>));
+              _Runtime.pushMany(interleavedVertices, cast ([flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'positions'), p), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'positions'), (p + 1.0)), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'positions'), (p + 2.0))] : Array<Dynamic>));
+              _Runtime.pushMany(interleavedVertices, cast ([flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'normals'), p), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'normals'), (p + 1.0)), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'normals'), (p + 2.0))] : Array<Dynamic>));
               _Runtime.pushMany(interleavedVertices, cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
-              _Runtime.pushMany(interleavedVertices, cast ([_Runtime.getIndex(texS, texIdx), _Runtime.getIndex(texT, texIdx)] : Array<Dynamic>));
+              _Runtime.pushMany(interleavedVertices, cast ([flighthq._internal._StaticIndex.readFloat32Array(texS, texIdx), flighthq._internal._StaticIndex.readFloat32Array(texT, texIdx)] : Array<Dynamic>));
               _Runtime.callProperty(sourceVertexIndices, 'push', cast ([vertIdx] : Array<Dynamic>));
               ((cast dedup : flighthq._internal._Map).set(key, idx));
             }
@@ -222,19 +222,19 @@ class Md2Parse {
           var i:Dynamic = 0.0;
           while ((cast ((cast i : Float) < (cast numVertices : Float)) : Bool)) {
             var b:Dynamic = (verticesBase + (i * MD2_COMPRESSED_VERTEX_SIZE));
-            var px:Dynamic = ((_Runtime.getIndex(bytes, b) * scaleX) + translateX);
-            var py:Dynamic = ((_Runtime.getIndex(bytes, (b + 1.0)) * scaleY) + translateY);
-            var pz:Dynamic = ((_Runtime.getIndex(bytes, (b + 2.0)) * scaleZ) + translateZ);
+            var px:Dynamic = ((flighthq._internal._StaticIndex.readUint8Array(bytes, b) * scaleX) + translateX);
+            var py:Dynamic = ((flighthq._internal._StaticIndex.readUint8Array(bytes, (b + 1.0)) * scaleY) + translateY);
+            var pz:Dynamic = ((flighthq._internal._StaticIndex.readUint8Array(bytes, (b + 2.0)) * scaleZ) + translateZ);
             var p:Dynamic = (i * 3.0);
-            _Runtime.setIndex(positions, p, px);
-            _Runtime.setIndex(positions, (p + 1.0), pz);
-            _Runtime.setIndex(positions, (p + 2.0), -py);
-            var ni:Dynamic = _Runtime.getIndex(bytes, (b + 3.0));
+            flighthq._internal._StaticIndex.writeFloat32Array(positions, p, px);
+            flighthq._internal._StaticIndex.writeFloat32Array(positions, (p + 1.0), pz);
+            flighthq._internal._StaticIndex.writeFloat32Array(positions, (p + 2.0), -py);
+            var ni:Dynamic = flighthq._internal._StaticIndex.readUint8Array(bytes, (b + 3.0));
             if ((cast ((cast ni : Float) < (cast MD2_ANORMS.length : Float)) : Bool)) {
-              var n:Dynamic = _Runtime.getIndex(MD2_ANORMS, ni);
-              _Runtime.setIndex(normals, p, _Runtime.getIndex(n, 0.0));
-              _Runtime.setIndex(normals, (p + 1.0), _Runtime.getIndex(n, 2.0));
-              _Runtime.setIndex(normals, (p + 2.0), -_Runtime.getIndex(n, 1.0));
+              var n:Dynamic = flighthq._internal._StaticIndex.readArray(MD2_ANORMS, ni);
+              flighthq._internal._StaticIndex.writeFloat32Array(normals, p, flighthq._internal._StaticIndex.readArray(n, 0.0));
+              flighthq._internal._StaticIndex.writeFloat32Array(normals, (p + 1.0), flighthq._internal._StaticIndex.readArray(n, 2.0));
+              flighthq._internal._StaticIndex.writeFloat32Array(normals, (p + 2.0), -flighthq._internal._StaticIndex.readArray(n, 1.0));
             }
             i++;
           }
@@ -252,26 +252,26 @@ class Md2Parse {
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
     var targets:Array<MorphTarget> = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.field(frames, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { return cast null; }
-    base = _Runtime.getIndex(frames, 0.0);
+    base = flighthq._internal._StaticIndex.readArray(frames, 0.0);
     vertexCount = _Runtime.field(sourceVertexIndices, 'length');
     targets = cast ([] : Array<Dynamic>);
     {
       var f:Dynamic = 1.0;
       while ((cast ((cast f : Float) < (cast _Runtime.field(frames, 'length') : Float)) : Bool)) {
-        var frame:Dynamic = _Runtime.getIndex(frames, f);
+        var frame:Dynamic = flighthq._internal._StaticIndex.readArray(frames, f);
         var positionDeltas:Dynamic = new flighthq._internal._Float32Array((vertexCount * 3.0));
         var normalDeltas:Dynamic = new flighthq._internal._Float32Array((vertexCount * 3.0));
         {
           var v:Dynamic = 0.0;
           while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
-            var src:Dynamic = (_Runtime.getIndex(sourceVertexIndices, v) * 3.0);
+            var src:Dynamic = (flighthq._internal._StaticIndex.readArray(sourceVertexIndices, v) * 3.0);
             var dst:Dynamic = (v * 3.0);
-            _Runtime.setIndex(positionDeltas, dst, (_Runtime.getIndex(_Runtime.field(frame, 'positions'), src) - _Runtime.getIndex(_Runtime.field(base, 'positions'), src)));
-            _Runtime.setIndex(positionDeltas, (dst + 1.0), (_Runtime.getIndex(_Runtime.field(frame, 'positions'), (src + 1.0)) - _Runtime.getIndex(_Runtime.field(base, 'positions'), (src + 1.0))));
-            _Runtime.setIndex(positionDeltas, (dst + 2.0), (_Runtime.getIndex(_Runtime.field(frame, 'positions'), (src + 2.0)) - _Runtime.getIndex(_Runtime.field(base, 'positions'), (src + 2.0))));
-            _Runtime.setIndex(normalDeltas, dst, (_Runtime.getIndex(_Runtime.field(frame, 'normals'), src) - _Runtime.getIndex(_Runtime.field(base, 'normals'), src)));
-            _Runtime.setIndex(normalDeltas, (dst + 1.0), (_Runtime.getIndex(_Runtime.field(frame, 'normals'), (src + 1.0)) - _Runtime.getIndex(_Runtime.field(base, 'normals'), (src + 1.0))));
-            _Runtime.setIndex(normalDeltas, (dst + 2.0), (_Runtime.getIndex(_Runtime.field(frame, 'normals'), (src + 2.0)) - _Runtime.getIndex(_Runtime.field(base, 'normals'), (src + 2.0))));
+            flighthq._internal._StaticIndex.writeFloat32Array(positionDeltas, dst, (flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(frame, 'positions'), src) - flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'positions'), src)));
+            flighthq._internal._StaticIndex.writeFloat32Array(positionDeltas, (dst + 1.0), (flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(frame, 'positions'), (src + 1.0)) - flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'positions'), (src + 1.0))));
+            flighthq._internal._StaticIndex.writeFloat32Array(positionDeltas, (dst + 2.0), (flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(frame, 'positions'), (src + 2.0)) - flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'positions'), (src + 2.0))));
+            flighthq._internal._StaticIndex.writeFloat32Array(normalDeltas, dst, (flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(frame, 'normals'), src) - flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'normals'), src)));
+            flighthq._internal._StaticIndex.writeFloat32Array(normalDeltas, (dst + 1.0), (flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(frame, 'normals'), (src + 1.0)) - flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'normals'), (src + 1.0))));
+            flighthq._internal._StaticIndex.writeFloat32Array(normalDeltas, (dst + 2.0), (flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(frame, 'normals'), (src + 2.0)) - flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'normals'), (src + 2.0))));
             v++;
           }
         }
@@ -301,8 +301,8 @@ class Md2Parse {
     {
       var k:Dynamic = 0.0;
       while ((cast ((cast k : Float) < (cast frameCount : Float)) : Bool)) {
-        _Runtime.setIndex(times, k, (k / MD2_FRAME_FPS));
-        if ((cast ((cast k : Float) >= (cast 1.0 : Float)) : Bool)) { _Runtime.setIndex(values, ((k * targetCount) + (k - 1.0)), 1.0); }
+        flighthq._internal._StaticIndex.writeFloat32Array(times, k, (k / MD2_FRAME_FPS));
+        if ((cast ((cast k : Float) >= (cast 1.0 : Float)) : Bool)) { flighthq._internal._StaticIndex.writeFloat32Array(values, ((k * targetCount) + (k - 1.0)), 1.0); }
         k++;
       }
     }
@@ -318,7 +318,7 @@ class Md2Parse {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-        var child:Dynamic = (cast (cast _Runtime.getIndex(children, i) : Dynamic) : SceneNode);
+        var child:Dynamic = (cast (cast flighthq._internal._StaticIndex.readArray(children, i) : Dynamic) : SceneNode);
         if ((cast _Runtime.callValue(isMesh, cast ([child] : Array<Dynamic>)) : Bool)) { return cast (cast (cast child : Dynamic) : Mesh); }
         i++;
       }
@@ -333,12 +333,12 @@ class Md2Parse {
     var name:Dynamic = cast _Runtime.UNDEFINED;
     limit = (offset + MD2_SKIN_SIZE);
     end = offset;
-    while ((cast ((cast ((cast end : Float) < (cast limit : Float)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.getIndex(bytes, end), 0.0) : Bool)) : Bool)) { end++; }
+    while ((cast ((cast ((cast end : Float) < (cast limit : Float)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, end), 0.0) : Bool)) : Bool)) { end++; }
     name = '';
     {
       var i:Dynamic = offset;
       while ((cast ((cast i : Float) < (cast end : Float)) : Bool)) {
-        (name = cast ((name + _Runtime.callProperty(String, 'fromCharCode', cast ([_Runtime.getIndex(bytes, i)] : Array<Dynamic>))) : Dynamic));
+        (name = cast ((name + _Runtime.callProperty(String, 'fromCharCode', cast ([flighthq._internal._StaticIndex.readUint8Array(bytes, i)] : Array<Dynamic>))) : Dynamic));
         i++;
       }
     }

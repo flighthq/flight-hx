@@ -206,8 +206,8 @@ class Vector2 {
   }
 
   public static function setVector2FromFloat32Array(out:Vector2Like, offset:Float, source:flighthq._internal._Float32Array):Void {
-    (out.x = cast (_Runtime.getIndex(source, offset) : Dynamic));
-    (out.y = cast (_Runtime.getIndex(source, (offset + 1.0)) : Dynamic));
+    (out.x = cast (flighthq._internal._StaticIndex.readFloat32Array(source, offset) : Dynamic));
+    (out.y = cast (flighthq._internal._StaticIndex.readFloat32Array(source, (offset + 1.0)) : Dynamic));
   }
 
   public static function setVector2FromPolar(out:Vector2Like, length:Float, angle:Float):Void {
@@ -226,8 +226,8 @@ class Vector2 {
   }
 
   public static function writeVector2ToFloat32Array(out:flighthq._internal._Float32Array, offset:Float, source:Vector2Like):Void {
-    _Runtime.setIndex(out, offset, source.x);
-    _Runtime.setIndex(out, (offset + 1.0), source.y);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, offset, source.x);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 1.0), source.y);
   }
 
   public static final VECTOR2_X_AXIS:flighthq.types.Vector2 = _Runtime.callValue(createVector2, cast ([1.0, 0.0] : Array<Dynamic>));

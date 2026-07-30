@@ -38,47 +38,47 @@ class GetPathBounds {
     {
       var ci:Dynamic = 0.0;
       while ((cast ((cast ci : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-        var command:Dynamic = _Runtime.getIndex(commands, ci);
+        var command:Dynamic = flighthq._internal._StaticIndex.readArray(commands, ci);
         if ((cast _Runtime.strictEquals(command, PathCommandValue.MOVE_TO) : Bool)) {
-          (x = cast (_Runtime.getIndex(data, di) : Dynamic));
-          (y = cast (_Runtime.getIndex(data, (di + 1.0)) : Dynamic));
+          (x = cast (flighthq._internal._StaticIndex.readArray(data, di) : Dynamic));
+          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Dynamic));
           (di = cast ((di + 2.0) : Dynamic));
           _Runtime.callValue(expand, cast ([x, y] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO) : Bool)) {
-          (x = cast (_Runtime.getIndex(data, (di + 2.0)) : Dynamic));
-          (y = cast (_Runtime.getIndex(data, (di + 3.0)) : Dynamic));
+          (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Dynamic));
+          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
           _Runtime.callValue(expand, cast ([x, y] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.LINE_TO) : Bool)) {
-          var nx:Dynamic = _Runtime.getIndex(data, di);
-          var ny:Dynamic = _Runtime.getIndex(data, (di + 1.0));
+          var nx:Dynamic = flighthq._internal._StaticIndex.readArray(data, di);
+          var ny:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
           (di = cast ((di + 2.0) : Dynamic));
           _Runtime.callValue(expand, cast ([nx, ny] : Array<Dynamic>));
           (x = cast (nx : Dynamic));
           (y = cast (ny : Dynamic));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO) : Bool)) {
-          var nx:Dynamic = _Runtime.getIndex(data, (di + 2.0));
-          var ny:Dynamic = _Runtime.getIndex(data, (di + 3.0));
+          var nx:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
+          var ny:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
           (di = cast ((di + 4.0) : Dynamic));
           _Runtime.callValue(expand, cast ([nx, ny] : Array<Dynamic>));
           (x = cast (nx : Dynamic));
           (y = cast (ny : Dynamic));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CURVE_TO) : Bool)) {
-          var cx:Dynamic = _Runtime.getIndex(data, di);
-          var cy:Dynamic = _Runtime.getIndex(data, (di + 1.0));
-          var ax:Dynamic = _Runtime.getIndex(data, (di + 2.0));
-          var ay:Dynamic = _Runtime.getIndex(data, (di + 3.0));
+          var cx:Dynamic = flighthq._internal._StaticIndex.readArray(data, di);
+          var cy:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
+          var ax:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
+          var ay:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
           (di = cast ((di + 4.0) : Dynamic));
           _Runtime.callValue(GetPathBounds.expandQuadraticBounds__getPathBounds, cast ([x, y, cx, cy, ax, ay, expand] : Array<Dynamic>));
           (x = cast (ax : Dynamic));
           (y = cast (ay : Dynamic));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO) : Bool)) {
-          var c1x:Dynamic = _Runtime.getIndex(data, di);
-          var c1y:Dynamic = _Runtime.getIndex(data, (di + 1.0));
-          var c2x:Dynamic = _Runtime.getIndex(data, (di + 2.0));
-          var c2y:Dynamic = _Runtime.getIndex(data, (di + 3.0));
-          var ax:Dynamic = _Runtime.getIndex(data, (di + 4.0));
-          var ay:Dynamic = _Runtime.getIndex(data, (di + 5.0));
+          var c1x:Dynamic = flighthq._internal._StaticIndex.readArray(data, di);
+          var c1y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
+          var c2x:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
+          var c2y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
+          var ax:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 4.0));
+          var ay:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 5.0));
           (di = cast ((di + 6.0) : Dynamic));
           _Runtime.callValue(GetPathBounds.expandCubicBounds__getPathBounds, cast ([x, y, c1x, c1y, c2x, c2y, ax, ay, expand] : Array<Dynamic>));
           (x = cast (ax : Dynamic));

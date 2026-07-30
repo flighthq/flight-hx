@@ -17,8 +17,8 @@ class GlBackground {
     viewport = _Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));
     flighthq._internal.backend.WebGl2Backend.viewport(gl, 0.0, 0.0, _Runtime.field(viewport, 'width'), _Runtime.field(viewport, 'height'));
     rgba = _Runtime.field(state, 'backgroundColorRgba');
-    if ((cast ((cast ((cast _Runtime.field(rgba, 'length') : Float) >= (cast 4.0 : Float)) : Bool) && (cast ((cast _Runtime.getIndex(rgba, 3.0) : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.clearColor(gl, _Runtime.getIndex(rgba, 0.0), _Runtime.getIndex(rgba, 1.0), _Runtime.getIndex(rgba, 2.0), _Runtime.getIndex(rgba, 3.0));
+    if ((cast ((cast ((cast _Runtime.field(rgba, 'length') : Float) >= (cast 4.0 : Float)) : Bool) && (cast ((cast flighthq._internal._StaticIndex.readArray(rgba, 3.0) : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+      flighthq._internal.backend.WebGl2Backend.clearColor(gl, flighthq._internal._StaticIndex.readArray(rgba, 0.0), flighthq._internal._StaticIndex.readArray(rgba, 1.0), flighthq._internal._StaticIndex.readArray(rgba, 2.0), flighthq._internal._StaticIndex.readArray(rgba, 3.0));
     } else {
       flighthq._internal.backend.WebGl2Backend.clearColor(gl, 0.0, 0.0, 0.0, 0.0);
     }

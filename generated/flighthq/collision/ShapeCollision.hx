@@ -510,14 +510,14 @@ class ShapeCollision {
     minY = _Runtime.field(aabb, 'minY');
     maxX = _Runtime.field(aabb, 'maxX');
     maxY = _Runtime.field(aabb, 'maxY');
-    _Runtime.setIndex(out, 0.0, minX);
-    _Runtime.setIndex(out, 1.0, minY);
-    _Runtime.setIndex(out, 2.0, maxX);
-    _Runtime.setIndex(out, 3.0, minY);
-    _Runtime.setIndex(out, 4.0, maxX);
-    _Runtime.setIndex(out, 5.0, maxY);
-    _Runtime.setIndex(out, 6.0, minX);
-    _Runtime.setIndex(out, 7.0, maxY);
+    flighthq._internal._StaticIndex.writeFloat64Array(out, 0.0, minX);
+    flighthq._internal._StaticIndex.writeFloat64Array(out, 1.0, minY);
+    flighthq._internal._StaticIndex.writeFloat64Array(out, 2.0, maxX);
+    flighthq._internal._StaticIndex.writeFloat64Array(out, 3.0, minY);
+    flighthq._internal._StaticIndex.writeFloat64Array(out, 4.0, maxX);
+    flighthq._internal._StaticIndex.writeFloat64Array(out, 5.0, maxY);
+    flighthq._internal._StaticIndex.writeFloat64Array(out, 6.0, minX);
+    flighthq._internal._StaticIndex.writeFloat64Array(out, 7.0, maxY);
   }
 
   public static function writeObbVertices__shapeCollision(obb:CollisionObb, out:flighthq._internal._Float64Array):Void {
@@ -541,14 +541,14 @@ class ShapeCollision {
     wy = (sin * halfW);
     hx = (-sin * halfH);
     hy = (cos * halfH);
-    _Runtime.setIndex(out, 0.0, ((cx - wx) - hx));
-    _Runtime.setIndex(out, 1.0, ((cy - wy) - hy));
-    _Runtime.setIndex(out, 2.0, ((cx + wx) - hx));
-    _Runtime.setIndex(out, 3.0, ((cy + wy) - hy));
-    _Runtime.setIndex(out, 4.0, ((cx + wx) + hx));
-    _Runtime.setIndex(out, 5.0, ((cy + wy) + hy));
-    _Runtime.setIndex(out, 6.0, ((cx - wx) + hx));
-    _Runtime.setIndex(out, 7.0, ((cy - wy) + hy));
+    flighthq._internal._StaticIndex.writeFloat64Array(out, 0.0, ((cx - wx) - hx));
+    flighthq._internal._StaticIndex.writeFloat64Array(out, 1.0, ((cy - wy) - hy));
+    flighthq._internal._StaticIndex.writeFloat64Array(out, 2.0, ((cx + wx) - hx));
+    flighthq._internal._StaticIndex.writeFloat64Array(out, 3.0, ((cy + wy) - hy));
+    flighthq._internal._StaticIndex.writeFloat64Array(out, 4.0, ((cx + wx) + hx));
+    flighthq._internal._StaticIndex.writeFloat64Array(out, 5.0, ((cy + wy) + hy));
+    flighthq._internal._StaticIndex.writeFloat64Array(out, 6.0, ((cx - wx) + hx));
+    flighthq._internal._StaticIndex.writeFloat64Array(out, 7.0, ((cy - wy) + hy));
   }
 
   public static final scratchA__shapeCollision:Dynamic = new flighthq._internal._Float64Array(8.0);

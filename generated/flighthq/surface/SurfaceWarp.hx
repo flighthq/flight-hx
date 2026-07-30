@@ -60,10 +60,10 @@ class SurfaceWarp {
             var w:Dynamic = (((m6 * dx) + (m7 * dy)) + m8);
             var di:Dynamic = (((oy * dStride) + ox) * 4.0);
             if ((cast ((cast HxMath.abs(w) : Float) < (cast 1e-10 : Float)) : Bool)) {
-              _Runtime.setIndex(dd, di, 0.0);
-              _Runtime.setIndex(dd, (di + 1.0), 0.0);
-              _Runtime.setIndex(dd, (di + 2.0), 0.0);
-              _Runtime.setIndex(dd, (di + 3.0), 0.0);
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, di, 0.0);
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 1.0), 0.0);
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 2.0), 0.0);
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 3.0), 0.0);
               dx++;
               continue;
             }
@@ -104,17 +104,17 @@ class SurfaceWarp {
       var cx:Dynamic = _Runtime.callValue(SurfaceWarp.warpResolveEdge__surfaceWarp, cast ([ix, sw, edgeMode] : Array<Dynamic>));
       var cy:Dynamic = _Runtime.callValue(SurfaceWarp.warpResolveEdge__surfaceWarp, cast ([iy, sh, edgeMode] : Array<Dynamic>));
       if ((cast ((cast _Runtime.strictEquals(cx, null) : Bool) || (cast _Runtime.strictEquals(cy, null) : Bool)) : Bool)) {
-        _Runtime.setIndex(dd, di, 0.0);
-        _Runtime.setIndex(dd, (di + 1.0), 0.0);
-        _Runtime.setIndex(dd, (di + 2.0), 0.0);
-        _Runtime.setIndex(dd, (di + 3.0), 0.0);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, di, 0.0);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 1.0), 0.0);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 2.0), 0.0);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 3.0), 0.0);
         return;
       }
       var si:Dynamic = ((((originY + cy) * sStride) + (originX + cx)) * 4.0);
-      _Runtime.setIndex(dd, di, _Runtime.getIndex(sd, si));
-      _Runtime.setIndex(dd, (di + 1.0), _Runtime.getIndex(sd, (si + 1.0)));
-      _Runtime.setIndex(dd, (di + 2.0), _Runtime.getIndex(sd, (si + 2.0)));
-      _Runtime.setIndex(dd, (di + 3.0), _Runtime.getIndex(sd, (si + 3.0)));
+      flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, di, flighthq._internal._StaticIndex.readUint8ClampedArray(sd, si));
+      flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 1.0)));
+      flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 2.0)));
+      flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 3.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 3.0)));
       return;
     }
     if ((cast _Runtime.strictEquals(sampleMode, 'bicubic') : Bool)) {
@@ -144,13 +144,13 @@ class SurfaceWarp {
     {
       var c:Dynamic = 0.0;
       while ((cast ((cast c : Float) < (cast 4.0 : Float)) : Bool)) {
-        var v00:Dynamic = ((cast ((cast !_Runtime.strictEquals(cx00, null) : Bool) && (cast !_Runtime.strictEquals(cy00, null) : Bool)) : Bool) ? (cast _Runtime.getIndex(sd, ((((((originY + cy00) * sStride) + originX) + cx00) * 4.0) + c)) : Dynamic) : (cast 0.0 : Dynamic));
-        var v10:Dynamic = ((cast ((cast !_Runtime.strictEquals(cx10, null) : Bool) && (cast !_Runtime.strictEquals(cy00, null) : Bool)) : Bool) ? (cast _Runtime.getIndex(sd, ((((((originY + cy00) * sStride) + originX) + cx10) * 4.0) + c)) : Dynamic) : (cast 0.0 : Dynamic));
-        var v01:Dynamic = ((cast ((cast !_Runtime.strictEquals(cx00, null) : Bool) && (cast !_Runtime.strictEquals(cy10, null) : Bool)) : Bool) ? (cast _Runtime.getIndex(sd, ((((((originY + cy10) * sStride) + originX) + cx00) * 4.0) + c)) : Dynamic) : (cast 0.0 : Dynamic));
-        var v11:Dynamic = ((cast ((cast !_Runtime.strictEquals(cx10, null) : Bool) && (cast !_Runtime.strictEquals(cy10, null) : Bool)) : Bool) ? (cast _Runtime.getIndex(sd, ((((((originY + cy10) * sStride) + originX) + cx10) * 4.0) + c)) : Dynamic) : (cast 0.0 : Dynamic));
+        var v00:Dynamic = ((cast ((cast !_Runtime.strictEquals(cx00, null) : Bool) && (cast !_Runtime.strictEquals(cy00, null) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sd, ((((((originY + cy00) * sStride) + originX) + cx00) * 4.0) + c)) : Dynamic) : (cast 0.0 : Dynamic));
+        var v10:Dynamic = ((cast ((cast !_Runtime.strictEquals(cx10, null) : Bool) && (cast !_Runtime.strictEquals(cy00, null) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sd, ((((((originY + cy00) * sStride) + originX) + cx10) * 4.0) + c)) : Dynamic) : (cast 0.0 : Dynamic));
+        var v01:Dynamic = ((cast ((cast !_Runtime.strictEquals(cx00, null) : Bool) && (cast !_Runtime.strictEquals(cy10, null) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sd, ((((((originY + cy10) * sStride) + originX) + cx00) * 4.0) + c)) : Dynamic) : (cast 0.0 : Dynamic));
+        var v11:Dynamic = ((cast ((cast !_Runtime.strictEquals(cx10, null) : Bool) && (cast !_Runtime.strictEquals(cy10, null) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sd, ((((((originY + cy10) * sStride) + originX) + cx10) * 4.0) + c)) : Dynamic) : (cast 0.0 : Dynamic));
         var top:Dynamic = ((v00 * (1.0 - tx)) + (v10 * tx));
         var bottom:Dynamic = ((v01 * (1.0 - tx)) + (v11 * tx));
-        _Runtime.setIndex(dd, (di + c), HxMath.round(((top * (1.0 - ty)) + (bottom * ty))));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + c), HxMath.round(((top * (1.0 - ty)) + (bottom * ty))));
         c++;
       }
     }
@@ -179,7 +179,7 @@ class SurfaceWarp {
               while ((cast ((cast n : Float) <= (cast 2.0 : Float)) : Bool)) {
                 var wx:Dynamic = _Runtime.callValue(SurfaceWarp.catmullRomWeight__surfaceWarp, cast ([(tx - n)] : Array<Dynamic>));
                 var rx:Dynamic = _Runtime.callValue(SurfaceWarp.warpResolveEdge__surfaceWarp, cast ([(x1 + n), sw, edgeMode] : Array<Dynamic>));
-                var v:Dynamic = ((cast ((cast !_Runtime.strictEquals(rx, null) : Bool) && (cast !_Runtime.strictEquals(ry, null) : Bool)) : Bool) ? (cast _Runtime.getIndex(sd, ((((((originY + ry) * sStride) + originX) + rx) * 4.0) + c)) : Dynamic) : (cast 0.0 : Dynamic));
+                var v:Dynamic = ((cast ((cast !_Runtime.strictEquals(rx, null) : Bool) && (cast !_Runtime.strictEquals(ry, null) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sd, ((((((originY + ry) * sStride) + originX) + rx) * 4.0) + c)) : Dynamic) : (cast 0.0 : Dynamic));
                 (sum = cast ((sum + ((v * wy) * wx)) : Dynamic));
                 n++;
               }
@@ -187,7 +187,7 @@ class SurfaceWarp {
             m++;
           }
         }
-        _Runtime.setIndex(dd, (di + c), HxMath.max(0.0, HxMath.min(255.0, HxMath.round(sum))));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + c), HxMath.max(0.0, HxMath.min(255.0, HxMath.round(sum))));
         c++;
       }
     }
@@ -235,10 +235,10 @@ class SurfaceWarp {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast 4.0 : Float)) : Bool)) {
-        var sx:Dynamic = _Runtime.getIndex(src, (i * 2.0));
-        var sy:Dynamic = _Runtime.getIndex(src, ((i * 2.0) + 1.0));
-        var dx:Dynamic = _Runtime.getIndex(dst, (i * 2.0));
-        var dy:Dynamic = _Runtime.getIndex(dst, ((i * 2.0) + 1.0));
+        var sx:Dynamic = flighthq._internal._StaticIndex.readArray(src, (i * 2.0));
+        var sy:Dynamic = flighthq._internal._StaticIndex.readArray(src, ((i * 2.0) + 1.0));
+        var dx:Dynamic = flighthq._internal._StaticIndex.readArray(dst, (i * 2.0));
+        var dy:Dynamic = flighthq._internal._StaticIndex.readArray(dst, ((i * 2.0) + 1.0));
         _Runtime.callProperty(A, 'push', cast ([cast ([sx, sy, 1.0, 0.0, 0.0, 0.0, (-dx * sx), (-dx * sy), -dx] : Array<Dynamic>)] : Array<Dynamic>));
         _Runtime.callProperty(A, 'push', cast ([cast ([0.0, 0.0, 0.0, sx, sy, 1.0, (-dy * sx), (-dy * sy), -dy] : Array<Dynamic>)] : Array<Dynamic>));
         i++;
@@ -249,15 +249,15 @@ class SurfaceWarp {
     {
       var r:Dynamic = 0.0;
       while ((cast ((cast r : Float) < (cast 8.0 : Float)) : Bool)) {
-        var row:Dynamic = _Runtime.getIndex(A, r);
+        var row:Dynamic = flighthq._internal._StaticIndex.readArray(A, r);
         _Runtime.callProperty(M, 'push', cast ([_Runtime.slice(row, 0.0, 8.0)] : Array<Dynamic>));
-        _Runtime.callProperty(b, 'push', cast ([_Runtime.getIndex(row, 8.0)] : Array<Dynamic>));
+        _Runtime.callProperty(b, 'push', cast ([flighthq._internal._StaticIndex.readArray(row, 8.0)] : Array<Dynamic>));
         r++;
       }
     }
     h = _Runtime.callValue(SurfaceWarp.solveLinear8__surfaceWarp, cast ([M, b] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(h, null) : Bool)) { return cast null; }
-    return cast cast ([_Runtime.getIndex(h, 0.0), _Runtime.getIndex(h, 1.0), _Runtime.getIndex(h, 2.0), _Runtime.getIndex(h, 3.0), _Runtime.getIndex(h, 4.0), _Runtime.getIndex(h, 5.0), _Runtime.getIndex(h, 6.0), _Runtime.getIndex(h, 7.0), 1.0] : Array<Dynamic>);
+    return cast cast ([flighthq._internal._StaticIndex.readArray(h, 0.0), flighthq._internal._StaticIndex.readArray(h, 1.0), flighthq._internal._StaticIndex.readArray(h, 2.0), flighthq._internal._StaticIndex.readArray(h, 3.0), flighthq._internal._StaticIndex.readArray(h, 4.0), flighthq._internal._StaticIndex.readArray(h, 5.0), flighthq._internal._StaticIndex.readArray(h, 6.0), flighthq._internal._StaticIndex.readArray(h, 7.0), 1.0] : Array<Dynamic>);
     return cast null;
   }
 
@@ -266,16 +266,16 @@ class SurfaceWarp {
     var aug:Dynamic = cast _Runtime.UNDEFINED;
     var x:Dynamic = cast _Runtime.UNDEFINED;
     n = 8.0;
-    aug = _Runtime.callProperty(M, 'map', cast ([function(row:Dynamic, i:Dynamic) return _Runtime.concatArrays([_Runtime.toArray(row), [-_Runtime.getIndex(b, i)]])] : Array<Dynamic>));
+    aug = _Runtime.callProperty(M, 'map', cast ([function(row:Dynamic, i:Dynamic) return _Runtime.concatArrays([_Runtime.toArray(row), [-flighthq._internal._StaticIndex.readArray(b, i)]])] : Array<Dynamic>));
     {
       var col:Dynamic = 0.0;
       while ((cast ((cast col : Float) < (cast n : Float)) : Bool)) {
         var maxRow:Dynamic = col;
-        var maxVal:Dynamic = HxMath.abs(_Runtime.getIndex(_Runtime.getIndex(aug, col), col));
+        var maxVal:Dynamic = HxMath.abs(flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(aug, col), col));
         {
           var row:Dynamic = (col + 1.0);
           while ((cast ((cast row : Float) < (cast n : Float)) : Bool)) {
-            var v:Dynamic = HxMath.abs(_Runtime.getIndex(_Runtime.getIndex(aug, row), col));
+            var v:Dynamic = HxMath.abs(flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(aug, row), col));
             if ((cast ((cast v : Float) > (cast maxVal : Float)) : Bool)) {
               (maxVal = cast (v : Dynamic));
               (maxRow = cast (row : Dynamic));
@@ -284,16 +284,16 @@ class SurfaceWarp {
           }
         }
         if ((cast ((cast maxVal : Float) < (cast 1e-12 : Float)) : Bool)) { return cast null; }
-        ({ var __destructure0:Dynamic = cast ([_Runtime.getIndex(aug, maxRow), _Runtime.getIndex(aug, col)] : Array<Dynamic>); _Runtime.setIndex(aug, col, _Runtime.getIndex(__destructure0, 0)); _Runtime.setIndex(aug, maxRow, _Runtime.getIndex(__destructure0, 1)); __destructure0; });
-        var pivot:Dynamic = _Runtime.getIndex(_Runtime.getIndex(aug, col), col);
+        ({ var __destructure0:Dynamic = cast ([flighthq._internal._StaticIndex.readArray(aug, maxRow), flighthq._internal._StaticIndex.readArray(aug, col)] : Array<Dynamic>); _Runtime.setIndex(aug, col, _Runtime.getIndex(__destructure0, 0)); _Runtime.setIndex(aug, maxRow, _Runtime.getIndex(__destructure0, 1)); __destructure0; });
+        var pivot:Dynamic = flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(aug, col), col);
         {
           var row:Dynamic = (col + 1.0);
           while ((cast ((cast row : Float) < (cast n : Float)) : Bool)) {
-            var factor:Dynamic = (_Runtime.getIndex(_Runtime.getIndex(aug, row), col) / pivot);
+            var factor:Dynamic = (flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(aug, row), col) / pivot);
             {
               var k:Dynamic = col;
               while ((cast ((cast k : Float) <= (cast n : Float)) : Bool)) {
-                _Runtime.setIndex(_Runtime.getIndex(aug, row), k, (_Runtime.getIndex(_Runtime.getIndex(aug, row), k) - (factor * _Runtime.getIndex(_Runtime.getIndex(aug, col), k))));
+                ({ var __indexedObject1:Dynamic = flighthq._internal._StaticIndex.readArray(aug, row); var __indexedKey2:Dynamic = k; flighthq._internal._StaticIndex.writeArray(__indexedObject1, __indexedKey2, (flighthq._internal._StaticIndex.readArray(__indexedObject1, __indexedKey2) - (factor * flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(aug, col), k)))); });
                 k++;
               }
             }
@@ -307,15 +307,15 @@ class SurfaceWarp {
     {
       var row:Dynamic = (n - 1.0);
       while ((cast ((cast row : Float) >= (cast 0.0 : Float)) : Bool)) {
-        var sum:Dynamic = _Runtime.getIndex(_Runtime.getIndex(aug, row), n);
+        var sum:Dynamic = flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(aug, row), n);
         {
           var col:Dynamic = (row + 1.0);
           while ((cast ((cast col : Float) < (cast n : Float)) : Bool)) {
-            (sum = cast ((sum - (_Runtime.getIndex(_Runtime.getIndex(aug, row), col) * _Runtime.getIndex(x, col))) : Dynamic));
+            (sum = cast ((sum - (flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(aug, row), col) * flighthq._internal._StaticIndex.readArray(x, col))) : Dynamic));
             col++;
           }
         }
-        _Runtime.setIndex(x, row, (sum / _Runtime.getIndex(_Runtime.getIndex(aug, row), row)));
+        flighthq._internal._StaticIndex.writeArray(x, row, (sum / flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(aug, row), row)));
         row--;
       }
     }

@@ -34,7 +34,7 @@ class GaussianMath {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) <= (cast r : Float)) : Bool)) {
         var w:Dynamic = HxMath.exp((-(i * i) / twoSigmaSq));
-        _Runtime.setIndex(out, i, w);
+        flighthq._internal._StaticIndex.writeFloat32Array(out, i, w);
         (sum = cast ((sum + ((cast _Runtime.strictEquals(i, 0.0) : Bool) ? (cast w : Dynamic) : (cast (2.0 * w) : Dynamic))) : Dynamic));
         i++;
       }
@@ -43,7 +43,7 @@ class GaussianMath {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) <= (cast r : Float)) : Bool)) {
-        _Runtime.setIndex(out, i, (_Runtime.getIndex(out, i) * invSum));
+        ({ var __indexedObject0:Dynamic = out; var __indexedKey1:Dynamic = i; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject0, __indexedKey1, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject0, __indexedKey1) * invSum)); });
         i++;
       }
     }

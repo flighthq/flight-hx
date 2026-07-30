@@ -62,7 +62,7 @@ class WgpuBackground {
     _Runtime.setField(runtime, 'currentColorFormat', _Runtime.field(state, 'format'));
     _Runtime.setField(runtime, 'renderTargetViewport', null);
     rgba = _Runtime.field(state, 'backgroundColorRgba');
-    clearValue = ((cast ((cast ((cast _Runtime.field(rgba, 'length') : Float) >= (cast 4.0 : Float)) : Bool) && (cast ((cast _Runtime.getIndex(rgba, 3.0) : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast { r: _Runtime.getIndex(rgba, 0.0), g: _Runtime.getIndex(rgba, 1.0), b: _Runtime.getIndex(rgba, 2.0), a: _Runtime.getIndex(rgba, 3.0) } : Dynamic) : (cast { r: 0.0, g: 0.0, b: 0.0, a: 0.0 } : Dynamic));
+    clearValue = ((cast ((cast ((cast _Runtime.field(rgba, 'length') : Float) >= (cast 4.0 : Float)) : Bool) && (cast ((cast flighthq._internal._StaticIndex.readArray(rgba, 3.0) : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast { r: flighthq._internal._StaticIndex.readArray(rgba, 0.0), g: flighthq._internal._StaticIndex.readArray(rgba, 1.0), b: flighthq._internal._StaticIndex.readArray(rgba, 2.0), a: flighthq._internal._StaticIndex.readArray(rgba, 3.0) } : Dynamic) : (cast { r: 0.0, g: 0.0, b: 0.0, a: 0.0 } : Dynamic));
     commandEncoder = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createCommandEncoder', cast ([] : Array<Dynamic>));
     _Runtime.setField(runtime, 'commandEncoder', commandEncoder);
     renderPass = _Runtime.callProperty(commandEncoder, 'beginRenderPass', cast ([{ colorAttachments: cast ([{ view: canvasView, clearValue: clearValue, loadOp: 'clear', storeOp: 'store' }] : Array<Dynamic>), depthStencilAttachment: { view: _Runtime.field(runtime, 'depthStencilView'), depthClearValue: 1.0, depthLoadOp: 'clear', depthStoreOp: 'discard', stencilClearValue: 0.0, stencilLoadOp: 'clear', stencilStoreOp: 'discard' } }] : Array<Dynamic>));
@@ -103,7 +103,7 @@ class WgpuBackground {
         {
           var i:Dynamic = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(retired, 'length') : Float)) : Bool)) {
-            _Runtime.callProperty(_Runtime.getIndex(retired, i), 'destroy', cast ([] : Array<Dynamic>));
+            _Runtime.callProperty(flighthq._internal._StaticIndex.readArray(retired, i), 'destroy', cast ([] : Array<Dynamic>));
             i++;
           }
         }

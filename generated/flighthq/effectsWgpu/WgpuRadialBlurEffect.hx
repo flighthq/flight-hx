@@ -23,10 +23,10 @@ class WgpuRadialBlurEffect {
     samples = _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0);
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'motion.radialBlur', WgpuRadialBlurEffect.RADIAL_BLUR_FRAGMENT_WGSL__wgpuRadialBlurEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, centerX);
-      _Runtime.setIndex(f32, 1.0, centerY);
-      _Runtime.setIndex(f32, 2.0, strength);
-      _Runtime.setIndex(f32, 3.0, samples);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, centerX);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, centerY);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, strength);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, samples);
     }] : Array<Dynamic>));
   }
 

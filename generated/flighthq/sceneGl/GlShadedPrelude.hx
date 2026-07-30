@@ -77,7 +77,7 @@ class GlShadedPrelude {
     {
       var index:Dynamic = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(orderedModifiers, 'length') : Float)) : Bool)) {
-        var modifier:Dynamic = _Runtime.getIndex(orderedModifiers, index);
+        var modifier:Dynamic = flighthq._internal._StaticIndex.readArray(orderedModifiers, index);
         var snippet:Dynamic = (cast _Runtime.callValue(resolveModifier, cast ([registry, _Runtime.field(modifier, 'kind')] : Array<Dynamic>)) : Null<GlModifierSnippet>);
         if ((cast ((cast _Runtime.strictEquals(snippet, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlotValue.Vertex) : Bool)) : Bool)) { index++; continue; }
         if ((cast !_Runtime.strictEquals(_Runtime.field(snippet, 'declarations'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (declarations = cast ((declarations + '' + Std.string(_Runtime.callProperty(snippet, 'declarations', cast ([modifier, index] : Array<Dynamic>))) + '\n') : Dynamic)); }
@@ -98,7 +98,7 @@ class GlShadedPrelude {
     {
       var index:Dynamic = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(orderedModifiers, 'length') : Float)) : Bool)) {
-        var modifier:Dynamic = _Runtime.getIndex(orderedModifiers, index);
+        var modifier:Dynamic = flighthq._internal._StaticIndex.readArray(orderedModifiers, index);
         var snippet:Dynamic = (cast _Runtime.callValue(resolveModifier, cast ([registry, _Runtime.field(modifier, 'kind')] : Array<Dynamic>)) : Null<GlModifierSnippet>);
         if ((cast ((cast _Runtime.strictEquals(snippet, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlotValue.Vertex) : Bool)) : Bool)) { index++; continue; }
         if ((cast !_Runtime.strictEquals(_Runtime.field(snippet, 'declarations'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (declarations = cast ((declarations + '' + Std.string(_Runtime.callProperty(snippet, 'declarations', cast ([modifier, index] : Array<Dynamic>))) + '\n') : Dynamic)); }

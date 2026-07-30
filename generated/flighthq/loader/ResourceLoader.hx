@@ -335,7 +335,7 @@ class ResourceLoader {
           return flighthq._internal._Async.protect(function():Dynamic {
             var entry:Dynamic = cast _Runtime.UNDEFINED;
             _Runtime.callValue(ResourceLoader.sortPendingByPriority__resourceLoader, cast ([_Runtime.field(internal, 'pending')] : Array<Dynamic>));
-            entry = _Runtime.getIndex(_Runtime.field(internal, 'pending'), 0.0);
+            entry = flighthq._internal._StaticIndex.readArray(_Runtime.field(internal, 'pending'), 0.0);
             var __flowBranch12:Dynamic;
             if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
               __flowBranch12 = flighthq._internal._Async.protect(function():Dynamic {

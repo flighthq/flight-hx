@@ -34,14 +34,14 @@ class SurfaceFormat {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
-        var r:Dynamic = _Runtime.getIndex(source, (i + srcR));
-        var g:Dynamic = _Runtime.getIndex(source, (i + srcG));
-        var b:Dynamic = _Runtime.getIndex(source, (i + srcB));
-        var a:Dynamic = _Runtime.getIndex(source, (i + srcA));
-        _Runtime.setIndex(out, (i + dstR), r);
-        _Runtime.setIndex(out, (i + dstG), g);
-        _Runtime.setIndex(out, (i + dstB), b);
-        _Runtime.setIndex(out, (i + dstA), a);
+        var r:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + srcR));
+        var g:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + srcG));
+        var b:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + srcB));
+        var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + srcA));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + dstR), r);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + dstG), g);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + dstB), b);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + dstA), a);
         (i = cast ((i + 4.0) : Dynamic));
       }
     }
@@ -51,11 +51,11 @@ class SurfaceFormat {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
-        var a:Dynamic = (_Runtime.getIndex(source, (i + 3.0)) / 255.0);
-        _Runtime.setIndex(out, i, HxMath.round((_Runtime.getIndex(source, i) * a)));
-        _Runtime.setIndex(out, (i + 1.0), HxMath.round((_Runtime.getIndex(source, (i + 1.0)) * a)));
-        _Runtime.setIndex(out, (i + 2.0), HxMath.round((_Runtime.getIndex(source, (i + 2.0)) * a)));
-        _Runtime.setIndex(out, (i + 3.0), _Runtime.getIndex(source, (i + 3.0)));
+        var a:Dynamic = (flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 3.0)) / 255.0);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, i, HxMath.round((flighthq._internal._StaticIndex.readUint8ClampedArray(source, i) * a)));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 1.0), HxMath.round((flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 1.0)) * a)));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 2.0), HxMath.round((flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 2.0)) * a)));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 3.0), flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 3.0)));
         (i = cast ((i + 4.0) : Dynamic));
       }
     }
@@ -65,18 +65,18 @@ class SurfaceFormat {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
-        var a:Dynamic = _Runtime.getIndex(source, (i + 3.0));
+        var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 3.0));
         if ((cast _Runtime.strictEquals(a, 0.0) : Bool)) {
-          _Runtime.setIndex(out, i, 0.0);
-          _Runtime.setIndex(out, (i + 1.0), 0.0);
-          _Runtime.setIndex(out, (i + 2.0), 0.0);
-          _Runtime.setIndex(out, (i + 3.0), 0.0);
+          flighthq._internal._StaticIndex.writeUint8ClampedArray(out, i, 0.0);
+          flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 1.0), 0.0);
+          flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 2.0), 0.0);
+          flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 3.0), 0.0);
         } else {
           var inv:Dynamic = (255.0 / a);
-          _Runtime.setIndex(out, i, HxMath.min(255.0, HxMath.round((_Runtime.getIndex(source, i) * inv))));
-          _Runtime.setIndex(out, (i + 1.0), HxMath.min(255.0, HxMath.round((_Runtime.getIndex(source, (i + 1.0)) * inv))));
-          _Runtime.setIndex(out, (i + 2.0), HxMath.min(255.0, HxMath.round((_Runtime.getIndex(source, (i + 2.0)) * inv))));
-          _Runtime.setIndex(out, (i + 3.0), a);
+          flighthq._internal._StaticIndex.writeUint8ClampedArray(out, i, HxMath.min(255.0, HxMath.round((flighthq._internal._StaticIndex.readUint8ClampedArray(source, i) * inv))));
+          flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 1.0), HxMath.min(255.0, HxMath.round((flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 1.0)) * inv))));
+          flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 2.0), HxMath.min(255.0, HxMath.round((flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 2.0)) * inv))));
+          flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 3.0), a);
         }
         (i = cast ((i + 4.0) : Dynamic));
       }

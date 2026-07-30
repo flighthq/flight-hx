@@ -70,15 +70,15 @@ class GlShader {
     var ih:Dynamic = cast _Runtime.UNDEFINED;
     iw = (2.0 / _Runtime.field(viewport, 'width'));
     ih = (2.0 / _Runtime.field(viewport, 'height'));
-    _Runtime.setIndex(m, 0.0, (_Runtime.field(t, 'a') * iw));
-    _Runtime.setIndex(m, 1.0, (-_Runtime.field(t, 'b') * ih));
-    _Runtime.setIndex(m, 2.0, 0.0);
-    _Runtime.setIndex(m, 3.0, (_Runtime.field(t, 'c') * iw));
-    _Runtime.setIndex(m, 4.0, (-_Runtime.field(t, 'd') * ih));
-    _Runtime.setIndex(m, 5.0, 0.0);
-    _Runtime.setIndex(m, 6.0, ((_Runtime.field(t, 'tx') * iw) - 1.0));
-    _Runtime.setIndex(m, 7.0, ((-_Runtime.field(t, 'ty') * ih) + 1.0));
-    _Runtime.setIndex(m, 8.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, (_Runtime.field(t, 'a') * iw));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, (-_Runtime.field(t, 'b') * ih));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 2.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 3.0, (_Runtime.field(t, 'c') * iw));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 4.0, (-_Runtime.field(t, 'd') * ih));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 5.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 6.0, ((_Runtime.field(t, 'tx') * iw) - 1.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 7.0, ((-_Runtime.field(t, 'ty') * ih) + 1.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 8.0, 1.0);
     flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, _Runtime.field(loc, 'locMatrix'), false, m);
   }
 
@@ -87,15 +87,15 @@ class GlShader {
     var ih:Dynamic = cast _Runtime.UNDEFINED;
     iw = (2.0 / _Runtime.field(viewport, 'width'));
     ih = (2.0 / _Runtime.field(viewport, 'height'));
-    _Runtime.setIndex(m, 0.0, (a * iw));
-    _Runtime.setIndex(m, 1.0, (-b * ih));
-    _Runtime.setIndex(m, 2.0, 0.0);
-    _Runtime.setIndex(m, 3.0, (c * iw));
-    _Runtime.setIndex(m, 4.0, (-d * ih));
-    _Runtime.setIndex(m, 5.0, 0.0);
-    _Runtime.setIndex(m, 6.0, ((tx * iw) - 1.0));
-    _Runtime.setIndex(m, 7.0, ((-ty * ih) + 1.0));
-    _Runtime.setIndex(m, 8.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, (a * iw));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, (-b * ih));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 2.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 3.0, (c * iw));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 4.0, (-d * ih));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 5.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 6.0, ((tx * iw) - 1.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 7.0, ((-ty * ih) + 1.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 8.0, 1.0);
     flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, _Runtime.field(loc, 'locMatrix'), false, m);
   }
 }

@@ -93,20 +93,20 @@ class GlVelocity {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast particleCount : Float)) : Bool)) {
-        var velocityX:Dynamic = _Runtime.getIndex(velocities, (i * 2.0));
-        var velocityY:Dynamic = _Runtime.getIndex(velocities, ((i * 2.0) + 1.0));
+        var velocityX:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(velocities, (i * 2.0));
+        var velocityY:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(velocities, ((i * 2.0) + 1.0));
         if ((cast ((cast _Runtime.strictEquals(velocityX, 0.0) : Bool) && (cast _Runtime.strictEquals(velocityY, 0.0) : Bool)) : Bool)) { i++; continue; }
-        var id:Dynamic = _Runtime.getIndex(ids, i);
+        var id:Dynamic = flighthq._internal._StaticIndex.readUint16Array(ids, i);
         if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
-        var region:Dynamic = _Runtime.getIndex(regions, id);
+        var region:Dynamic = flighthq._internal._StaticIndex.readArray(regions, id);
         var rw:Dynamic = _Runtime.field(region, 'width');
         var rh:Dynamic = _Runtime.field(region, 'height');
         if ((cast ((cast ((cast rw : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast rh : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
         var tt:Dynamic = (i * 4.0);
-        var px:Dynamic = _Runtime.getIndex(transforms, tt);
-        var py:Dynamic = _Runtime.getIndex(transforms, (tt + 1.0));
-        var rotation:Dynamic = _Runtime.getIndex(transforms, (tt + 2.0));
-        var scale:Dynamic = _Runtime.getIndex(transforms, (tt + 3.0));
+        var px:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, tt);
+        var py:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 1.0));
+        var rotation:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 2.0));
+        var scale:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 3.0));
         var cosScale:Dynamic = (HxMath.cos(rotation) * scale);
         var sinScale:Dynamic = (HxMath.sin(rotation) * scale);
         var minX:Dynamic = HxMath.POSITIVE_INFINITY;
@@ -173,12 +173,12 @@ class GlVelocity {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
-          var velocityX:Dynamic = _Runtime.getIndex(instanceVelocities, (i * 2.0));
-          var velocityY:Dynamic = _Runtime.getIndex(instanceVelocities, ((i * 2.0) + 1.0));
+          var velocityX:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(instanceVelocities, (i * 2.0));
+          var velocityY:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(instanceVelocities, ((i * 2.0) + 1.0));
           if ((cast ((cast _Runtime.strictEquals(velocityX, 0.0) : Bool) && (cast _Runtime.strictEquals(velocityY, 0.0) : Bool)) : Bool)) { i++; continue; }
-          var id:Dynamic = _Runtime.getIndex(ids, i);
+          var id:Dynamic = flighthq._internal._StaticIndex.readUint16Array(ids, i);
           if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
-          var region:Dynamic = _Runtime.getIndex(regions, id);
+          var region:Dynamic = flighthq._internal._StaticIndex.readArray(regions, id);
           var w:Dynamic = _Runtime.field(region, 'width');
           var h:Dynamic = _Runtime.field(region, 'height');
           if ((cast ((cast ((cast w : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast h : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
@@ -189,8 +189,8 @@ class GlVelocity {
           var wtx:Float = cast _Runtime.UNDEFINED;
           var wty:Float = cast _Runtime.UNDEFINED;
           if ((cast isVector2 : Bool)) {
-            var dx:Dynamic = _Runtime.getIndex(transforms, (i * 2.0));
-            var dy:Dynamic = _Runtime.getIndex(transforms, ((i * 2.0) + 1.0));
+            var dx:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (i * 2.0));
+            var dy:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, ((i * 2.0) + 1.0));
             (wa = cast (pa : Dynamic));
             (wb = cast (pb : Dynamic));
             (wc = cast (pc : Dynamic));
@@ -199,12 +199,12 @@ class GlVelocity {
             (wty = cast ((((pb * dx) + (pd * dy)) + pty) : Dynamic));
           } else {
             var o:Dynamic = (i * 6.0);
-            var la:Dynamic = _Runtime.getIndex(transforms, o);
-            var lb:Dynamic = _Runtime.getIndex(transforms, (o + 1.0));
-            var lc:Dynamic = _Runtime.getIndex(transforms, (o + 2.0));
-            var ld:Dynamic = _Runtime.getIndex(transforms, (o + 3.0));
-            var ltx:Dynamic = _Runtime.getIndex(transforms, (o + 4.0));
-            var lty:Dynamic = _Runtime.getIndex(transforms, (o + 5.0));
+            var la:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, o);
+            var lb:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (o + 1.0));
+            var lc:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (o + 2.0));
+            var ld:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (o + 3.0));
+            var ltx:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (o + 4.0));
+            var lty:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (o + 5.0));
             (wa = cast (((pa * la) + (pc * lb)) : Dynamic));
             (wb = cast (((pb * la) + (pd * lb)) : Dynamic));
             (wc = cast (((pa * lc) + (pc * ld)) : Dynamic));

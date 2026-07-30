@@ -80,7 +80,7 @@ class MeshGeometryIndex {
         {
           var f:Dynamic = 0.0;
           while ((cast ((cast f : Float) < (cast floatsPerVertex : Float)) : Bool)) {
-            _Runtime.setIndex(vertices, (dst + f), _Runtime.getIndex(sourceVertices, (src + f)));
+            flighthq._internal._StaticIndex.writeFloat32Array(vertices, (dst + f), flighthq._internal._StaticIndex.readFloat32Array(sourceVertices, (src + f)));
             f++;
           }
         }

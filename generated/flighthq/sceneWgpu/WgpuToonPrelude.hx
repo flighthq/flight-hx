@@ -32,14 +32,14 @@ class WgpuToonPrelude {
       (binding = cast ({ bindGroup: bindGroup, buffer: buffer } : Dynamic));
       ((cast _Runtime.field(scene, 'materialBindGroups') : flighthq._internal._WeakMap).set(materialKey, binding));
     }
-    _Runtime.setIndex(WgpuToonPrelude._scratch__wgpuToonPrelude, 0.0, _Runtime.getIndex(baseColor, 0.0));
-    _Runtime.setIndex(WgpuToonPrelude._scratch__wgpuToonPrelude, 1.0, _Runtime.getIndex(baseColor, 1.0));
-    _Runtime.setIndex(WgpuToonPrelude._scratch__wgpuToonPrelude, 2.0, _Runtime.getIndex(baseColor, 2.0));
-    _Runtime.setIndex(WgpuToonPrelude._scratch__wgpuToonPrelude, 3.0, _Runtime.getIndex(baseColor, 3.0));
-    _Runtime.setIndex(WgpuToonPrelude._scratch__wgpuToonPrelude, 4.0, steps);
-    _Runtime.setIndex(WgpuToonPrelude._scratch__wgpuToonPrelude, 5.0, alphaCutoff);
-    _Runtime.setIndex(WgpuToonPrelude._scratch__wgpuToonPrelude, 6.0, 0.0);
-    _Runtime.setIndex(WgpuToonPrelude._scratch__wgpuToonPrelude, 7.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuToonPrelude._scratch__wgpuToonPrelude, 0.0, flighthq._internal._StaticIndex.readArray(baseColor, 0.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuToonPrelude._scratch__wgpuToonPrelude, 1.0, flighthq._internal._StaticIndex.readArray(baseColor, 1.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuToonPrelude._scratch__wgpuToonPrelude, 2.0, flighthq._internal._StaticIndex.readArray(baseColor, 2.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuToonPrelude._scratch__wgpuToonPrelude, 3.0, flighthq._internal._StaticIndex.readArray(baseColor, 3.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuToonPrelude._scratch__wgpuToonPrelude, 4.0, steps);
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuToonPrelude._scratch__wgpuToonPrelude, 5.0, alphaCutoff);
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuToonPrelude._scratch__wgpuToonPrelude, 6.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuToonPrelude._scratch__wgpuToonPrelude, 7.0, 0.0);
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(binding, 'buffer'), 0.0, _Runtime.field(WgpuToonPrelude._scratch__wgpuToonPrelude, 'buffer'), 0.0, WgpuToonPrelude.TOON_UNIFORM_BYTES__wgpuToonPrelude] : Array<Dynamic>));
     _Runtime.callValue(stashWgpuUvTransform, cast ([state, null] : Array<Dynamic>));
     return cast _Runtime.field(binding, 'bindGroup');

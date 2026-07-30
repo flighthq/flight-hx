@@ -38,8 +38,8 @@ class CanvasShape {
     flighthq._internal.backend.Canvas2dBackend.call(context, 'beginPath', cast ([] : Array<Dynamic>));
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-      var key:Dynamic = (cast _Runtime.getIndex(commands, i) : String);
-      var argCount:Dynamic = (cast _Runtime.getIndex(commands, (i + 1.0)) : Float);
+      var key:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
+      var argCount:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float);
       var def:Dynamic = _Runtime.callValue(getCanvasShapeCommand, cast ([key] : Array<Dynamic>));
       if ((cast !_Runtime.strictEquals(def, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(def, 'draw', cast ([context, drawState, commands, (i + 2.0)] : Array<Dynamic>)); }
       (i = cast ((i + (argCount + 2.0)) : Dynamic));

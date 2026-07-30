@@ -75,64 +75,64 @@ class CanvasScale9Mapper {
     };
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-      var key:Dynamic = (cast _Runtime.getIndex(commands, i) : String);
-      var argCount:Dynamic = (cast _Runtime.getIndex(commands, (i + 1.0)) : Float);
+      var key:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
+      var argCount:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float);
       {
         var __switchValue = key;
         if (__switchValue == 'moveTo' || __switchValue == 'lineTo') {
-          _Runtime.callValue(expand, cast ([(cast _Runtime.getIndex(commands, (i + 2.0)) : Float), (cast _Runtime.getIndex(commands, (i + 3.0)) : Float)] : Array<Dynamic>));
+          _Runtime.callValue(expand, cast ([(cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Float)] : Array<Dynamic>));
         }
         else if (__switchValue == 'curveTo') {
-          _Runtime.callValue(expand, cast ([(cast _Runtime.getIndex(commands, (i + 2.0)) : Float), (cast _Runtime.getIndex(commands, (i + 3.0)) : Float)] : Array<Dynamic>));
-          _Runtime.callValue(expand, cast ([(cast _Runtime.getIndex(commands, (i + 4.0)) : Float), (cast _Runtime.getIndex(commands, (i + 5.0)) : Float)] : Array<Dynamic>));
+          _Runtime.callValue(expand, cast ([(cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Float)] : Array<Dynamic>));
+          _Runtime.callValue(expand, cast ([(cast flighthq._internal._StaticIndex.readArray(commands, (i + 4.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (i + 5.0)) : Float)] : Array<Dynamic>));
         }
         else if (__switchValue == 'cubicCurveTo') {
-          _Runtime.callValue(expand, cast ([(cast _Runtime.getIndex(commands, (i + 2.0)) : Float), (cast _Runtime.getIndex(commands, (i + 3.0)) : Float)] : Array<Dynamic>));
-          _Runtime.callValue(expand, cast ([(cast _Runtime.getIndex(commands, (i + 4.0)) : Float), (cast _Runtime.getIndex(commands, (i + 5.0)) : Float)] : Array<Dynamic>));
-          _Runtime.callValue(expand, cast ([(cast _Runtime.getIndex(commands, (i + 6.0)) : Float), (cast _Runtime.getIndex(commands, (i + 7.0)) : Float)] : Array<Dynamic>));
+          _Runtime.callValue(expand, cast ([(cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Float)] : Array<Dynamic>));
+          _Runtime.callValue(expand, cast ([(cast flighthq._internal._StaticIndex.readArray(commands, (i + 4.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (i + 5.0)) : Float)] : Array<Dynamic>));
+          _Runtime.callValue(expand, cast ([(cast flighthq._internal._StaticIndex.readArray(commands, (i + 6.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (i + 7.0)) : Float)] : Array<Dynamic>));
         }
         else if (__switchValue == 'drawCircle') {
           {
-            var cx:Dynamic = (cast _Runtime.getIndex(commands, (i + 2.0)) : Float);
-            var cy:Dynamic = (cast _Runtime.getIndex(commands, (i + 3.0)) : Float);
-            var r:Dynamic = (cast _Runtime.getIndex(commands, (i + 4.0)) : Float);
+            var cx:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Float);
+            var cy:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Float);
+            var r:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 4.0)) : Float);
             _Runtime.callValue(expand, cast ([(cx - r), (cy - r)] : Array<Dynamic>));
             _Runtime.callValue(expand, cast ([(cx + r), (cy + r)] : Array<Dynamic>));
           }
         }
         else if (__switchValue == 'drawEllipse' || __switchValue == 'drawRectangle') {
-          _Runtime.callValue(expand, cast ([(cast _Runtime.getIndex(commands, (i + 2.0)) : Float), (cast _Runtime.getIndex(commands, (i + 3.0)) : Float)] : Array<Dynamic>));
-          _Runtime.callValue(expand, cast ([((cast _Runtime.getIndex(commands, (i + 2.0)) : Float) + (cast _Runtime.getIndex(commands, (i + 4.0)) : Float)), ((cast _Runtime.getIndex(commands, (i + 3.0)) : Float) + (cast _Runtime.getIndex(commands, (i + 5.0)) : Float))] : Array<Dynamic>));
+          _Runtime.callValue(expand, cast ([(cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Float)] : Array<Dynamic>));
+          _Runtime.callValue(expand, cast ([((cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Float) + (cast flighthq._internal._StaticIndex.readArray(commands, (i + 4.0)) : Float)), ((cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Float) + (cast flighthq._internal._StaticIndex.readArray(commands, (i + 5.0)) : Float))] : Array<Dynamic>));
         }
         else if (__switchValue == 'drawRoundRectangle') {
-          _Runtime.callValue(expand, cast ([(cast _Runtime.getIndex(commands, (i + 2.0)) : Float), (cast _Runtime.getIndex(commands, (i + 3.0)) : Float)] : Array<Dynamic>));
-          _Runtime.callValue(expand, cast ([((cast _Runtime.getIndex(commands, (i + 2.0)) : Float) + (cast _Runtime.getIndex(commands, (i + 4.0)) : Float)), ((cast _Runtime.getIndex(commands, (i + 3.0)) : Float) + (cast _Runtime.getIndex(commands, (i + 5.0)) : Float))] : Array<Dynamic>));
+          _Runtime.callValue(expand, cast ([(cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Float)] : Array<Dynamic>));
+          _Runtime.callValue(expand, cast ([((cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Float) + (cast flighthq._internal._StaticIndex.readArray(commands, (i + 4.0)) : Float)), ((cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Float) + (cast flighthq._internal._StaticIndex.readArray(commands, (i + 5.0)) : Float))] : Array<Dynamic>));
         }
         else if (__switchValue == 'drawPath') {
           {
-            var pathCmds:Dynamic = (cast _Runtime.getIndex(commands, (i + 2.0)) : Array<Float>);
-            var data:Dynamic = (cast _Runtime.getIndex(commands, (i + 3.0)) : Array<Float>);
+            var pathCmds:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Array<Float>);
+            var data:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Array<Float>);
             var di:Dynamic = 0.0;
             for (pc in _Runtime.iterable(pathCmds)) {
               {
                 var __switchValue = pc;
                 if (__switchValue == 1.0 || __switchValue == 2.0) {
-                  _Runtime.callValue(expand, cast ([_Runtime.getIndex(data, di), _Runtime.getIndex(data, (di + 1.0))] : Array<Dynamic>));
+                  _Runtime.callValue(expand, cast ([flighthq._internal._StaticIndex.readArray(data, di), flighthq._internal._StaticIndex.readArray(data, (di + 1.0))] : Array<Dynamic>));
                   (di = cast ((di + 2.0) : Dynamic));
                 }
                 else if (__switchValue == 3.0) {
-                  _Runtime.callValue(expand, cast ([_Runtime.getIndex(data, di), _Runtime.getIndex(data, (di + 1.0))] : Array<Dynamic>));
-                  _Runtime.callValue(expand, cast ([_Runtime.getIndex(data, (di + 2.0)), _Runtime.getIndex(data, (di + 3.0))] : Array<Dynamic>));
+                  _Runtime.callValue(expand, cast ([flighthq._internal._StaticIndex.readArray(data, di), flighthq._internal._StaticIndex.readArray(data, (di + 1.0))] : Array<Dynamic>));
+                  _Runtime.callValue(expand, cast ([flighthq._internal._StaticIndex.readArray(data, (di + 2.0)), flighthq._internal._StaticIndex.readArray(data, (di + 3.0))] : Array<Dynamic>));
                   (di = cast ((di + 4.0) : Dynamic));
                 }
                 else if (__switchValue == 4.0 || __switchValue == 5.0) {
-                  _Runtime.callValue(expand, cast ([_Runtime.getIndex(data, (di + 2.0)), _Runtime.getIndex(data, (di + 3.0))] : Array<Dynamic>));
+                  _Runtime.callValue(expand, cast ([flighthq._internal._StaticIndex.readArray(data, (di + 2.0)), flighthq._internal._StaticIndex.readArray(data, (di + 3.0))] : Array<Dynamic>));
                   (di = cast ((di + 4.0) : Dynamic));
                 }
                 else if (__switchValue == 6.0) {
-                  _Runtime.callValue(expand, cast ([_Runtime.getIndex(data, di), _Runtime.getIndex(data, (di + 1.0))] : Array<Dynamic>));
-                  _Runtime.callValue(expand, cast ([_Runtime.getIndex(data, (di + 2.0)), _Runtime.getIndex(data, (di + 3.0))] : Array<Dynamic>));
-                  _Runtime.callValue(expand, cast ([_Runtime.getIndex(data, (di + 4.0)), _Runtime.getIndex(data, (di + 5.0))] : Array<Dynamic>));
+                  _Runtime.callValue(expand, cast ([flighthq._internal._StaticIndex.readArray(data, di), flighthq._internal._StaticIndex.readArray(data, (di + 1.0))] : Array<Dynamic>));
+                  _Runtime.callValue(expand, cast ([flighthq._internal._StaticIndex.readArray(data, (di + 2.0)), flighthq._internal._StaticIndex.readArray(data, (di + 3.0))] : Array<Dynamic>));
+                  _Runtime.callValue(expand, cast ([flighthq._internal._StaticIndex.readArray(data, (di + 4.0)), flighthq._internal._StaticIndex.readArray(data, (di + 5.0))] : Array<Dynamic>));
                   (di = cast ((di + 6.0) : Dynamic));
                 }
                 else  {

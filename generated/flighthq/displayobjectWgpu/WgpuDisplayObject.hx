@@ -25,9 +25,9 @@ class WgpuDisplayObject {
     tempStack = _Runtime.field(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'tempStack');
     clipHooks = _Runtime.field(state, 'displayObjectClipHooks');
     stackLength = 1.0;
-    _Runtime.setIndex(tempStack, 0.0, source);
+    flighthq._internal._StaticIndex.writeArray(tempStack, 0.0, source);
     while ((cast ((cast stackLength : Float) > (cast 0.0 : Float)) : Bool)) {
-      var current:Dynamic = (cast _Runtime.getIndex(tempStack, --stackLength) : DisplayObject);
+      var current:Dynamic = (cast flighthq._internal._StaticIndex.readArray(tempStack, --stackLength) : DisplayObject);
       if ((cast !(cast _Runtime.field(current, 'enabled') : Bool) : Bool)) { continue; }
       var data:Dynamic = _Runtime.callValue(getRenderProxy2D, cast ([state, current] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(data, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
@@ -41,7 +41,7 @@ class WgpuDisplayObject {
           {
             var i:Dynamic = (_Runtime.field(children, 'length') - 1.0);
             while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-              _Runtime.setIndex(tempStack, stackLength++, (cast _Runtime.getIndex(children, i) : DisplayObject));
+              flighthq._internal._StaticIndex.writeArray(tempStack, stackLength++, (cast flighthq._internal._StaticIndex.readArray(children, i) : DisplayObject));
               i--;
             }
           }

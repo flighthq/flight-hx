@@ -163,8 +163,8 @@ class Path {
     {
       var last:Dynamic = _Runtime.callValue(getPathLastPoint, cast ([path] : Array<Dynamic>));
       if ((cast !_Runtime.strictEquals(last, null) : Bool)) {
-        (x1 = cast (_Runtime.getIndex(last, 0.0) : Dynamic));
-        (y1 = cast (_Runtime.getIndex(last, 1.0) : Dynamic));
+        (x1 = cast (flighthq._internal._StaticIndex.readArray(last, 0.0) : Dynamic));
+        (y1 = cast (flighthq._internal._StaticIndex.readArray(last, 1.0) : Dynamic));
       }
     }
     x2 = endX;
@@ -252,11 +252,11 @@ class Path {
 
   public static function appendPathPolygon(path:flighthq.types.Path, points:Array<Float>):Void {
     if ((cast ((cast _Runtime.field(points, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { return; }
-    _Runtime.callValue(appendPathMoveTo, cast ([path, _Runtime.getIndex(points, 0.0), _Runtime.getIndex(points, 1.0)] : Array<Dynamic>));
+    _Runtime.callValue(appendPathMoveTo, cast ([path, flighthq._internal._StaticIndex.readArray(points, 0.0), flighthq._internal._StaticIndex.readArray(points, 1.0)] : Array<Dynamic>));
     {
       var i:Dynamic = 2.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) {
-        _Runtime.callValue(appendPathLineTo, cast ([path, _Runtime.getIndex(points, i), _Runtime.getIndex(points, (i + 1.0))] : Array<Dynamic>));
+        _Runtime.callValue(appendPathLineTo, cast ([path, flighthq._internal._StaticIndex.readArray(points, i), flighthq._internal._StaticIndex.readArray(points, (i + 1.0))] : Array<Dynamic>));
         (i = cast ((i + 2.0) : Dynamic));
       }
     }
@@ -265,11 +265,11 @@ class Path {
 
   public static function appendPathPolyline(path:flighthq.types.Path, points:Array<Float>):Void {
     if ((cast ((cast _Runtime.field(points, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { return; }
-    _Runtime.callValue(appendPathMoveTo, cast ([path, _Runtime.getIndex(points, 0.0), _Runtime.getIndex(points, 1.0)] : Array<Dynamic>));
+    _Runtime.callValue(appendPathMoveTo, cast ([path, flighthq._internal._StaticIndex.readArray(points, 0.0), flighthq._internal._StaticIndex.readArray(points, 1.0)] : Array<Dynamic>));
     {
       var i:Dynamic = 2.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) {
-        _Runtime.callValue(appendPathLineTo, cast ([path, _Runtime.getIndex(points, i), _Runtime.getIndex(points, (i + 1.0))] : Array<Dynamic>));
+        _Runtime.callValue(appendPathLineTo, cast ([path, flighthq._internal._StaticIndex.readArray(points, i), flighthq._internal._StaticIndex.readArray(points, (i + 1.0))] : Array<Dynamic>));
         (i = cast ((i + 2.0) : Dynamic));
       }
     }
@@ -380,7 +380,7 @@ class Path {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(path, 'data');
     if ((cast ((cast _Runtime.field(data, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { return cast null; }
-    return cast cast ([_Runtime.getIndex(data, (_Runtime.field(data, 'length') - 2.0)), _Runtime.getIndex(data, (_Runtime.field(data, 'length') - 1.0))] : Array<Dynamic>);
+    return cast cast ([flighthq._internal._StaticIndex.readArray(data, (_Runtime.field(data, 'length') - 2.0)), flighthq._internal._StaticIndex.readArray(data, (_Runtime.field(data, 'length') - 1.0))] : Array<Dynamic>);
     return cast null;
   }
 

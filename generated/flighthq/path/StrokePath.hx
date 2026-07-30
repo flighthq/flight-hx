@@ -182,13 +182,13 @@ class StrokePath {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(dash, 'length') : Float)) : Bool)) {
-          if ((cast ((cast (acc + _Runtime.getIndex(dash, i)) : Float) > (cast offset : Float)) : Bool)) {
+          if ((cast ((cast (acc + flighthq._internal._StaticIndex.readArray(dash, i)) : Float) > (cast offset : Float)) : Bool)) {
             (dashIndex = cast (i : Dynamic));
-            (remaining = cast ((_Runtime.getIndex(dash, i) - (offset - acc)) : Dynamic));
+            (remaining = cast ((flighthq._internal._StaticIndex.readArray(dash, i) - (offset - acc)) : Dynamic));
             (isOn = cast (_Runtime.strictEquals(_Runtime.fmod(i, 2.0), 0.0) : Dynamic));
             break;
           }
-          (acc = cast ((acc + _Runtime.getIndex(dash, i)) : Dynamic));
+          (acc = cast ((acc + flighthq._internal._StaticIndex.readArray(dash, i)) : Dynamic));
           i++;
         }
       }
@@ -198,10 +198,10 @@ class StrokePath {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast (n - 1.0) : Float)) : Bool)) {
-        var x0:Dynamic = _Runtime.getIndex(pts, (i * 2.0));
-        var y0:Dynamic = _Runtime.getIndex(pts, ((i * 2.0) + 1.0));
-        var x1:Dynamic = _Runtime.getIndex(pts, ((i + 1.0) * 2.0));
-        var y1:Dynamic = _Runtime.getIndex(pts, (((i + 1.0) * 2.0) + 1.0));
+        var x0:Dynamic = flighthq._internal._StaticIndex.readArray(pts, (i * 2.0));
+        var y0:Dynamic = flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0));
+        var x1:Dynamic = flighthq._internal._StaticIndex.readArray(pts, ((i + 1.0) * 2.0));
+        var y1:Dynamic = flighthq._internal._StaticIndex.readArray(pts, (((i + 1.0) * 2.0) + 1.0));
         var dx:Dynamic = (x1 - x0);
         var dy:Dynamic = (y1 - y0);
         var segLen:Dynamic = HxMath.sqrt(((dx * dx) + (dy * dy)));
@@ -230,7 +230,7 @@ class StrokePath {
           (remaining = cast ((remaining - step) : Dynamic));
           if ((cast ((cast remaining : Float) <= (cast 1e-10 : Float)) : Bool)) {
             (dashIndex = cast (_Runtime.fmod((dashIndex + 1.0), _Runtime.field(dash, 'length')) : Dynamic));
-            (remaining = cast (_Runtime.getIndex(dash, dashIndex) : Dynamic));
+            (remaining = cast (flighthq._internal._StaticIndex.readArray(dash, dashIndex) : Dynamic));
             (isOn = cast (_Runtime.strictEquals(_Runtime.fmod(dashIndex, 2.0), 0.0) : Dynamic));
             if ((cast ((cast isOn : Bool) && (cast _Runtime.strictEquals(current, null) : Bool)) : Bool)) {
               (current = cast (cast ([ix, iy] : Array<Dynamic>) : Dynamic));
@@ -284,18 +284,18 @@ class StrokePath {
     {
       var ci:Dynamic = 0.0;
       while ((cast ((cast ci : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-        var command:Dynamic = _Runtime.getIndex(commands, ci);
+        var command:Dynamic = flighthq._internal._StaticIndex.readArray(commands, ci);
         if ((cast _Runtime.strictEquals(command, PathCommandValue.MOVE_TO) : Bool)) {
-          (x = cast (_Runtime.getIndex(data, di) : Dynamic));
-          (y = cast (_Runtime.getIndex(data, (di + 1.0)) : Dynamic));
+          (x = cast (flighthq._internal._StaticIndex.readArray(data, di) : Dynamic));
+          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Dynamic));
           (di = cast ((di + 2.0) : Dynamic));
           (contourStartX = cast (x : Dynamic));
           (contourStartY = cast (y : Dynamic));
           (current = cast ({ points: cast ([x, y] : Array<Dynamic>), closed: false } : Dynamic));
           _Runtime.callProperty(subpaths, 'push', cast ([current] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO) : Bool)) {
-          (x = cast (_Runtime.getIndex(data, (di + 2.0)) : Dynamic));
-          (y = cast (_Runtime.getIndex(data, (di + 3.0)) : Dynamic));
+          (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Dynamic));
+          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
           (contourStartX = cast (x : Dynamic));
           (contourStartY = cast (y : Dynamic));
@@ -303,27 +303,27 @@ class StrokePath {
           _Runtime.callProperty(subpaths, 'push', cast ([current] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.LINE_TO) : Bool)) {
           var sp:Dynamic = _Runtime.callValue(ensureCurrent, cast ([] : Array<Dynamic>));
-          (x = cast (_Runtime.getIndex(data, di) : Dynamic));
-          (y = cast (_Runtime.getIndex(data, (di + 1.0)) : Dynamic));
+          (x = cast (flighthq._internal._StaticIndex.readArray(data, di) : Dynamic));
+          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Dynamic));
           (di = cast ((di + 2.0) : Dynamic));
           _Runtime.pushMany(_Runtime.field(sp, 'points'), cast ([x, y] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO) : Bool)) {
           var sp:Dynamic = _Runtime.callValue(ensureCurrent, cast ([] : Array<Dynamic>));
-          (x = cast (_Runtime.getIndex(data, (di + 2.0)) : Dynamic));
-          (y = cast (_Runtime.getIndex(data, (di + 3.0)) : Dynamic));
+          (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Dynamic));
+          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
           _Runtime.pushMany(_Runtime.field(sp, 'points'), cast ([x, y] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CURVE_TO) : Bool)) {
           var sp:Dynamic = _Runtime.callValue(ensureCurrent, cast ([] : Array<Dynamic>));
-          _Runtime.callValue(StrokePath.flattenQuadratic__strokePath, cast ([_Runtime.field(sp, 'points'), x, y, _Runtime.getIndex(data, di), _Runtime.getIndex(data, (di + 1.0)), _Runtime.getIndex(data, (di + 2.0)), _Runtime.getIndex(data, (di + 3.0)), toleranceSq, 0.0] : Array<Dynamic>));
-          (x = cast (_Runtime.getIndex(data, (di + 2.0)) : Dynamic));
-          (y = cast (_Runtime.getIndex(data, (di + 3.0)) : Dynamic));
+          _Runtime.callValue(StrokePath.flattenQuadratic__strokePath, cast ([_Runtime.field(sp, 'points'), x, y, flighthq._internal._StaticIndex.readArray(data, di), flighthq._internal._StaticIndex.readArray(data, (di + 1.0)), flighthq._internal._StaticIndex.readArray(data, (di + 2.0)), flighthq._internal._StaticIndex.readArray(data, (di + 3.0)), toleranceSq, 0.0] : Array<Dynamic>));
+          (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Dynamic));
+          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO) : Bool)) {
           var sp:Dynamic = _Runtime.callValue(ensureCurrent, cast ([] : Array<Dynamic>));
-          _Runtime.callValue(StrokePath.flattenCubic__strokePath, cast ([_Runtime.field(sp, 'points'), x, y, _Runtime.getIndex(data, di), _Runtime.getIndex(data, (di + 1.0)), _Runtime.getIndex(data, (di + 2.0)), _Runtime.getIndex(data, (di + 3.0)), _Runtime.getIndex(data, (di + 4.0)), _Runtime.getIndex(data, (di + 5.0)), toleranceSq, 0.0] : Array<Dynamic>));
-          (x = cast (_Runtime.getIndex(data, (di + 4.0)) : Dynamic));
-          (y = cast (_Runtime.getIndex(data, (di + 5.0)) : Dynamic));
+          _Runtime.callValue(StrokePath.flattenCubic__strokePath, cast ([_Runtime.field(sp, 'points'), x, y, flighthq._internal._StaticIndex.readArray(data, di), flighthq._internal._StaticIndex.readArray(data, (di + 1.0)), flighthq._internal._StaticIndex.readArray(data, (di + 2.0)), flighthq._internal._StaticIndex.readArray(data, (di + 3.0)), flighthq._internal._StaticIndex.readArray(data, (di + 4.0)), flighthq._internal._StaticIndex.readArray(data, (di + 5.0)), toleranceSq, 0.0] : Array<Dynamic>));
+          (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 4.0)) : Dynamic));
+          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 5.0)) : Dynamic));
           (di = cast ((di + 6.0) : Dynamic));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CLOSE) : Bool)) {
           if ((cast !_Runtime.strictEquals(current, null) : Bool)) {
@@ -444,15 +444,15 @@ class StrokePath {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast (n - 1.0) : Float)) : Bool)) {
-        var dx:Dynamic = (_Runtime.getIndex(pts, ((i + 1.0) * 2.0)) - _Runtime.getIndex(pts, (i * 2.0)));
-        var dy:Dynamic = (_Runtime.getIndex(pts, (((i + 1.0) * 2.0) + 1.0)) - _Runtime.getIndex(pts, ((i * 2.0) + 1.0)));
+        var dx:Dynamic = (flighthq._internal._StaticIndex.readArray(pts, ((i + 1.0) * 2.0)) - flighthq._internal._StaticIndex.readArray(pts, (i * 2.0)));
+        var dy:Dynamic = (flighthq._internal._StaticIndex.readArray(pts, (((i + 1.0) * 2.0) + 1.0)) - flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0)));
         var len:Dynamic = HxMath.sqrt(((dx * dx) + (dy * dy)));
         if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
-          _Runtime.setIndex(normals, (i * 2.0), (-dy / len));
-          _Runtime.setIndex(normals, ((i * 2.0) + 1.0), (dx / len));
+          flighthq._internal._StaticIndex.writeArray(normals, (i * 2.0), (-dy / len));
+          flighthq._internal._StaticIndex.writeArray(normals, ((i * 2.0) + 1.0), (dx / len));
         } else {
-          _Runtime.setIndex(normals, (i * 2.0), ((cast ((cast i : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.getIndex(normals, ((i - 1.0) * 2.0)) : Dynamic) : (cast 0.0 : Dynamic)));
-          _Runtime.setIndex(normals, ((i * 2.0) + 1.0), ((cast ((cast i : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.getIndex(normals, (((i - 1.0) * 2.0) + 1.0)) : Dynamic) : (cast 1.0 : Dynamic)));
+          flighthq._internal._StaticIndex.writeArray(normals, (i * 2.0), ((cast ((cast i : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(normals, ((i - 1.0) * 2.0)) : Dynamic) : (cast 0.0 : Dynamic)));
+          flighthq._internal._StaticIndex.writeArray(normals, ((i * 2.0) + 1.0), ((cast ((cast i : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(normals, (((i - 1.0) * 2.0) + 1.0)) : Dynamic) : (cast 1.0 : Dynamic)));
         }
         i++;
       }
@@ -463,41 +463,41 @@ class StrokePath {
         while ((cast ((cast i : Float) < (cast (n - 1.0) : Float)) : Bool)) {
           var prev:Dynamic = _Runtime.fmod(((i + n) - 2.0), (n - 1.0));
           var curr:Dynamic = i;
-          var nx0:Dynamic = _Runtime.getIndex(normals, (prev * 2.0));
-          var ny0:Dynamic = _Runtime.getIndex(normals, ((prev * 2.0) + 1.0));
-          var nx1:Dynamic = _Runtime.getIndex(normals, (curr * 2.0));
-          var ny1:Dynamic = _Runtime.getIndex(normals, ((curr * 2.0) + 1.0));
-          _Runtime.callValue(StrokePath.addJoin__strokePath, cast ([_Runtime.getIndex(pts, (i * 2.0)), _Runtime.getIndex(pts, ((i * 2.0) + 1.0)), nx0, ny0, nx1, ny1, halfWidth, join, miterLimit, left, right, tolerance] : Array<Dynamic>));
+          var nx0:Dynamic = flighthq._internal._StaticIndex.readArray(normals, (prev * 2.0));
+          var ny0:Dynamic = flighthq._internal._StaticIndex.readArray(normals, ((prev * 2.0) + 1.0));
+          var nx1:Dynamic = flighthq._internal._StaticIndex.readArray(normals, (curr * 2.0));
+          var ny1:Dynamic = flighthq._internal._StaticIndex.readArray(normals, ((curr * 2.0) + 1.0));
+          _Runtime.callValue(StrokePath.addJoin__strokePath, cast ([flighthq._internal._StaticIndex.readArray(pts, (i * 2.0)), flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0)), nx0, ny0, nx1, ny1, halfWidth, join, miterLimit, left, right, tolerance] : Array<Dynamic>));
           i++;
         }
       }
     } else {
-      var sn0x:Dynamic = _Runtime.getIndex(normals, 0.0);
-      var sn0y:Dynamic = _Runtime.getIndex(normals, 1.0);
-      _Runtime.callValue(StrokePath.addCap__strokePath, cast ([_Runtime.getIndex(pts, 0.0), _Runtime.getIndex(pts, 1.0), sn0x, sn0y, -sn0y, sn0x, halfWidth, cap, left, right, tolerance, true] : Array<Dynamic>));
+      var sn0x:Dynamic = flighthq._internal._StaticIndex.readArray(normals, 0.0);
+      var sn0y:Dynamic = flighthq._internal._StaticIndex.readArray(normals, 1.0);
+      _Runtime.callValue(StrokePath.addCap__strokePath, cast ([flighthq._internal._StaticIndex.readArray(pts, 0.0), flighthq._internal._StaticIndex.readArray(pts, 1.0), sn0x, sn0y, -sn0y, sn0x, halfWidth, cap, left, right, tolerance, true] : Array<Dynamic>));
       {
         var i:Dynamic = 1.0;
         while ((cast ((cast i : Float) < (cast (n - 1.0) : Float)) : Bool)) {
-          var nx0:Dynamic = _Runtime.getIndex(normals, ((i - 1.0) * 2.0));
-          var ny0:Dynamic = _Runtime.getIndex(normals, (((i - 1.0) * 2.0) + 1.0));
-          var nx1:Dynamic = _Runtime.getIndex(normals, (i * 2.0));
-          var ny1:Dynamic = _Runtime.getIndex(normals, ((i * 2.0) + 1.0));
-          _Runtime.callValue(StrokePath.addJoin__strokePath, cast ([_Runtime.getIndex(pts, (i * 2.0)), _Runtime.getIndex(pts, ((i * 2.0) + 1.0)), nx0, ny0, nx1, ny1, halfWidth, join, miterLimit, left, right, tolerance] : Array<Dynamic>));
+          var nx0:Dynamic = flighthq._internal._StaticIndex.readArray(normals, ((i - 1.0) * 2.0));
+          var ny0:Dynamic = flighthq._internal._StaticIndex.readArray(normals, (((i - 1.0) * 2.0) + 1.0));
+          var nx1:Dynamic = flighthq._internal._StaticIndex.readArray(normals, (i * 2.0));
+          var ny1:Dynamic = flighthq._internal._StaticIndex.readArray(normals, ((i * 2.0) + 1.0));
+          _Runtime.callValue(StrokePath.addJoin__strokePath, cast ([flighthq._internal._StaticIndex.readArray(pts, (i * 2.0)), flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0)), nx0, ny0, nx1, ny1, halfWidth, join, miterLimit, left, right, tolerance] : Array<Dynamic>));
           i++;
         }
       }
-      var snLx:Dynamic = _Runtime.getIndex(normals, ((n - 2.0) * 2.0));
-      var snLy:Dynamic = _Runtime.getIndex(normals, (((n - 2.0) * 2.0) + 1.0));
-      _Runtime.callValue(StrokePath.addCap__strokePath, cast ([_Runtime.getIndex(pts, ((n - 1.0) * 2.0)), _Runtime.getIndex(pts, (((n - 1.0) * 2.0) + 1.0)), snLx, snLy, snLy, -snLx, halfWidth, cap, left, right, tolerance, false] : Array<Dynamic>));
+      var snLx:Dynamic = flighthq._internal._StaticIndex.readArray(normals, ((n - 2.0) * 2.0));
+      var snLy:Dynamic = flighthq._internal._StaticIndex.readArray(normals, (((n - 2.0) * 2.0) + 1.0));
+      _Runtime.callValue(StrokePath.addCap__strokePath, cast ([flighthq._internal._StaticIndex.readArray(pts, ((n - 1.0) * 2.0)), flighthq._internal._StaticIndex.readArray(pts, (((n - 1.0) * 2.0) + 1.0)), snLx, snLy, snLy, -snLx, halfWidth, cap, left, right, tolerance, false] : Array<Dynamic>));
     }
     if ((cast ((cast _Runtime.field(left, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { return; }
     _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
-    _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.getIndex(left, 0.0), _Runtime.getIndex(left, 1.0)] : Array<Dynamic>));
+    _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([flighthq._internal._StaticIndex.readArray(left, 0.0), flighthq._internal._StaticIndex.readArray(left, 1.0)] : Array<Dynamic>));
     {
       var i:Dynamic = 2.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(left, 'length') : Float)) : Bool)) {
         _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.LINE_TO] : Array<Dynamic>));
-        _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.getIndex(left, i), _Runtime.getIndex(left, (i + 1.0))] : Array<Dynamic>));
+        _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([flighthq._internal._StaticIndex.readArray(left, i), flighthq._internal._StaticIndex.readArray(left, (i + 1.0))] : Array<Dynamic>));
         (i = cast ((i + 2.0) : Dynamic));
       }
     }
@@ -505,7 +505,7 @@ class StrokePath {
       var i:Dynamic = (_Runtime.field(right, 'length') - 2.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
         _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.LINE_TO] : Array<Dynamic>));
-        _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.getIndex(right, i), _Runtime.getIndex(right, (i + 1.0))] : Array<Dynamic>));
+        _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([flighthq._internal._StaticIndex.readArray(right, i), flighthq._internal._StaticIndex.readArray(right, (i + 1.0))] : Array<Dynamic>));
         (i = cast ((i - 2.0) : Dynamic));
       }
     }

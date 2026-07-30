@@ -21,9 +21,9 @@ class WgpuLensDirtEffect {
     seed = _Runtime.coalesce(_Runtime.field(effect, 'seed'), function():Dynamic return cast 0.0);
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'lens.lensDirt', WgpuLensDirtEffect.LENS_DIRT_FRAGMENT_WGSL__wgpuLensDirtEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, intensity);
-      _Runtime.setIndex(f32, 1.0, threshold);
-      _Runtime.setIndex(f32, 2.0, seed);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, threshold);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, seed);
     }] : Array<Dynamic>));
   }
 

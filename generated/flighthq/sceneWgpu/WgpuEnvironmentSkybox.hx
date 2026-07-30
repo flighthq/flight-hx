@@ -39,14 +39,14 @@ class WgpuEnvironmentSkybox {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast 16.0 : Float)) : Bool)) {
-        _Runtime.setIndex(u, i, _Runtime.getIndex(m, i));
+        flighthq._internal._StaticIndex.writeFloat32Array(u, i, flighthq._internal._StaticIndex.readFloat32Array(m, i));
         i++;
       }
     }
-    _Runtime.setIndex(u, 16.0, _Runtime.field(environment, 'intensity'));
-    _Runtime.setIndex(u, 17.0, 0.0);
-    _Runtime.setIndex(u, 18.0, 0.0);
-    _Runtime.setIndex(u, 19.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(u, 16.0, _Runtime.field(environment, 'intensity'));
+    flighthq._internal._StaticIndex.writeFloat32Array(u, 17.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(u, 18.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(u, 19.0, 0.0);
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(sky, 'uniformBuffer'), 0.0, _Runtime.field(u, 'buffer'), 0.0, WgpuEnvironmentSkybox.SKYBOX_UNIFORM_BYTES__wgpuEnvironmentSkybox] : Array<Dynamic>));
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(sky, 'cubeBindGroup'), null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(sky, 'cubeView'), cubeView) : Bool)) : Bool)) {
       _Runtime.setField(sky, 'cubeBindGroup', flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(sky, 'cubeBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: cubeView }, { binding: 1.0, resource: _Runtime.callValue(WgpuEnvironmentSkybox.getWgpuSkyboxSampler__wgpuEnvironmentSkybox, cast ([state] : Array<Dynamic>)) }] : Array<Dynamic>) }] : Array<Dynamic>)));

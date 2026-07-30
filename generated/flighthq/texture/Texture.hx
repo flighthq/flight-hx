@@ -174,15 +174,15 @@ class Texture {
     cosR = HxMath.cos(r);
     sinR = HxMath.sin(r);
     m = out.m;
-    _Runtime.setIndex(m, 0.0, (sx * cosR));
-    _Runtime.setIndex(m, 1.0, (sx * sinR));
-    _Runtime.setIndex(m, 2.0, 0.0);
-    _Runtime.setIndex(m, 3.0, (-sy * sinR));
-    _Runtime.setIndex(m, 4.0, (sy * cosR));
-    _Runtime.setIndex(m, 5.0, 0.0);
-    _Runtime.setIndex(m, 6.0, tx);
-    _Runtime.setIndex(m, 7.0, ty);
-    _Runtime.setIndex(m, 8.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, (sx * cosR));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, (sx * sinR));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 2.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 3.0, (-sy * sinR));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 4.0, (sy * cosR));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 5.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 6.0, tx);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 7.0, ty);
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 8.0, 1.0);
   }
 
   public static function getTextureWidth(texture:TextureLike):Float {

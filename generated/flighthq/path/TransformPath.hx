@@ -35,21 +35,21 @@ class TransformPath {
     {
       var ci:Dynamic = 0.0;
       while ((cast ((cast ci : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-        var command:Dynamic = _Runtime.getIndex(commands, ci);
+        var command:Dynamic = flighthq._internal._StaticIndex.readArray(commands, ci);
         if ((cast ((cast _Runtime.strictEquals(command, PathCommandValue.MOVE_TO) : Bool) || (cast _Runtime.strictEquals(command, PathCommandValue.LINE_TO) : Bool)) : Bool)) {
-          var x:Dynamic = _Runtime.getIndex(data, di);
-          var y:Dynamic = _Runtime.getIndex(data, (di + 1.0));
-          _Runtime.setIndex(data, di, (((a * x) + (c * y)) + tx));
-          _Runtime.setIndex(data, (di + 1.0), (((b * x) + (d * y)) + ty));
+          var x:Dynamic = flighthq._internal._StaticIndex.readArray(data, di);
+          var y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
+          flighthq._internal._StaticIndex.writeArray(data, di, (((a * x) + (c * y)) + tx));
+          flighthq._internal._StaticIndex.writeArray(data, (di + 1.0), (((b * x) + (d * y)) + ty));
           (di = cast ((di + 2.0) : Dynamic));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CURVE_TO) : Bool)) {
           {
             var k:Dynamic = 0.0;
             while ((cast ((cast k : Float) < (cast 4.0 : Float)) : Bool)) {
-              var x:Dynamic = _Runtime.getIndex(data, (di + k));
-              var y:Dynamic = _Runtime.getIndex(data, ((di + k) + 1.0));
-              _Runtime.setIndex(data, (di + k), (((a * x) + (c * y)) + tx));
-              _Runtime.setIndex(data, ((di + k) + 1.0), (((b * x) + (d * y)) + ty));
+              var x:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + k));
+              var y:Dynamic = flighthq._internal._StaticIndex.readArray(data, ((di + k) + 1.0));
+              flighthq._internal._StaticIndex.writeArray(data, (di + k), (((a * x) + (c * y)) + tx));
+              flighthq._internal._StaticIndex.writeArray(data, ((di + k) + 1.0), (((b * x) + (d * y)) + ty));
               (k = cast ((k + 2.0) : Dynamic));
             }
           }
@@ -58,19 +58,19 @@ class TransformPath {
           {
             var k:Dynamic = 0.0;
             while ((cast ((cast k : Float) < (cast 6.0 : Float)) : Bool)) {
-              var x:Dynamic = _Runtime.getIndex(data, (di + k));
-              var y:Dynamic = _Runtime.getIndex(data, ((di + k) + 1.0));
-              _Runtime.setIndex(data, (di + k), (((a * x) + (c * y)) + tx));
-              _Runtime.setIndex(data, ((di + k) + 1.0), (((b * x) + (d * y)) + ty));
+              var x:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + k));
+              var y:Dynamic = flighthq._internal._StaticIndex.readArray(data, ((di + k) + 1.0));
+              flighthq._internal._StaticIndex.writeArray(data, (di + k), (((a * x) + (c * y)) + tx));
+              flighthq._internal._StaticIndex.writeArray(data, ((di + k) + 1.0), (((b * x) + (d * y)) + ty));
               (k = cast ((k + 2.0) : Dynamic));
             }
           }
           (di = cast ((di + 6.0) : Dynamic));
         } else { if ((cast ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO) : Bool) || (cast _Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO) : Bool)) : Bool)) {
-          var x:Dynamic = _Runtime.getIndex(data, (di + 2.0));
-          var y:Dynamic = _Runtime.getIndex(data, (di + 3.0));
-          _Runtime.setIndex(data, (di + 2.0), (((a * x) + (c * y)) + tx));
-          _Runtime.setIndex(data, (di + 3.0), (((b * x) + (d * y)) + ty));
+          var x:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
+          var y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
+          flighthq._internal._StaticIndex.writeArray(data, (di + 2.0), (((a * x) + (c * y)) + tx));
+          flighthq._internal._StaticIndex.writeArray(data, (di + 3.0), (((b * x) + (d * y)) + ty));
           (di = cast ((di + 4.0) : Dynamic));
         } } } }
         ci++;

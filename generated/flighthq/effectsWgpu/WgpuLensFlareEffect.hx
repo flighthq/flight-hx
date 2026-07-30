@@ -23,10 +23,10 @@ class WgpuLensFlareEffect {
     halo = _Runtime.coalesce(_Runtime.field(effect, 'halo'), function():Dynamic return cast 0.5);
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'lens.lensFlare', WgpuLensFlareEffect.LENS_FLARE_FRAGMENT_WGSL__wgpuLensFlareEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, threshold);
-      _Runtime.setIndex(f32, 1.0, intensity);
-      _Runtime.setIndex(f32, 2.0, ghosts);
-      _Runtime.setIndex(f32, 3.0, halo);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, threshold);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, intensity);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, ghosts);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, halo);
     }] : Array<Dynamic>));
   }
 

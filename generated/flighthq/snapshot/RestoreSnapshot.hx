@@ -23,7 +23,7 @@ class RestoreSnapshot {
       {
         var index:Dynamic = 0.0;
         while ((cast ((cast index : Float) < (cast _Runtime.field(sourceArray, 'length') : Float)) : Bool)) {
-          _Runtime.setIndex(targetArray, index, _Runtime.callValue(RestoreSnapshot.restoreSnapshotValue__restoreSnapshot, cast ([_Runtime.getIndex(targetArray, index), _Runtime.getIndex(sourceArray, index)] : Array<Dynamic>)));
+          flighthq._internal._StaticIndex.writeArray(targetArray, index, _Runtime.callValue(RestoreSnapshot.restoreSnapshotValue__restoreSnapshot, cast ([flighthq._internal._StaticIndex.readArray(targetArray, index), flighthq._internal._StaticIndex.readArray(sourceArray, index)] : Array<Dynamic>)));
           (index = cast ((index + 1.0) : Dynamic));
         }
       }

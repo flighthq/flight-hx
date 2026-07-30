@@ -31,14 +31,14 @@ class SurfaceTransform {
             if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'width') : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Dynamic = (((sy * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sx) * 4.0);
             var di:Dynamic = (((dy * _Runtime.field(_Runtime.field(dest, 'surface'), 'width')) + dx) * 4.0);
-            var r:Dynamic = _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), si);
-            var g:Dynamic = _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 1.0));
-            var b:Dynamic = _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 2.0));
-            var a:Dynamic = _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 3.0));
-            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), di, HxMath.max(0.0, HxMath.min(255.0, HxMath.round(((r * ct.redMultiplier) + ct.redOffset)))));
-            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (di + 1.0), HxMath.max(0.0, HxMath.min(255.0, HxMath.round(((g * ct.greenMultiplier) + ct.greenOffset)))));
-            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (di + 2.0), HxMath.max(0.0, HxMath.min(255.0, HxMath.round(((b * ct.blueMultiplier) + ct.blueOffset)))));
-            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (di + 3.0), HxMath.max(0.0, HxMath.min(255.0, HxMath.round(((a * ct.alphaMultiplier) + ct.alphaOffset)))));
+            var r:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), si);
+            var g:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 1.0));
+            var b:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 2.0));
+            var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 3.0));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), di, HxMath.max(0.0, HxMath.min(255.0, HxMath.round(((r * ct.redMultiplier) + ct.redOffset)))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (di + 1.0), HxMath.max(0.0, HxMath.min(255.0, HxMath.round(((g * ct.greenMultiplier) + ct.greenOffset)))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (di + 2.0), HxMath.max(0.0, HxMath.min(255.0, HxMath.round(((b * ct.blueMultiplier) + ct.blueOffset)))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (di + 3.0), HxMath.max(0.0, HxMath.min(255.0, HxMath.round(((a * ct.alphaMultiplier) + ct.alphaOffset)))));
             px++;
           }
         }
@@ -73,19 +73,19 @@ class SurfaceTransform {
             if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'width') : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Dynamic = (((sy * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sx) * 4.0);
             var di:Dynamic = (((dy * _Runtime.field(_Runtime.field(dest, 'surface'), 'width')) + dx) * 4.0);
-            var pixel:Dynamic = _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(sd, si)) << 24)) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(sd, (si + 1.0))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(sd, (si + 2.0))) << 8)))) | _Runtime.toInt32(_Runtime.getIndex(sd, (si + 3.0))))) & _Runtime.toInt32(mask))), 0);
+            var pixel:Dynamic = _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(sd, si)) << 24)) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 1.0))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 2.0))) << 8)))) | _Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 3.0))))) & _Runtime.toInt32(mask))), 0);
             var passes:Dynamic = _Runtime.callValue(SurfaceTransform.compare__surfaceTransform, cast ([pixel, operation, _Runtime.unsignedShiftRight(_Runtime.toInt32(thresholdValue), 0)] : Array<Dynamic>));
             if ((cast passes : Bool)) {
-              _Runtime.setIndex(dd, di, (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255));
-              _Runtime.setIndex(dd, (di + 1.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255));
-              _Runtime.setIndex(dd, (di + 2.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255));
-              _Runtime.setIndex(dd, (di + 3.0), (_Runtime.toInt32(color) & 255));
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, di, (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255));
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 1.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255));
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 2.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255));
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 3.0), (_Runtime.toInt32(color) & 255));
               changed++;
             } else { if ((cast copySource : Bool)) {
-              _Runtime.setIndex(dd, di, _Runtime.getIndex(sd, si));
-              _Runtime.setIndex(dd, (di + 1.0), _Runtime.getIndex(sd, (si + 1.0)));
-              _Runtime.setIndex(dd, (di + 2.0), _Runtime.getIndex(sd, (si + 2.0)));
-              _Runtime.setIndex(dd, (di + 3.0), _Runtime.getIndex(sd, (si + 3.0)));
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, di, flighthq._internal._StaticIndex.readUint8ClampedArray(sd, si));
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 1.0)));
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 2.0)));
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 3.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 3.0)));
             } }
             px++;
           }
@@ -121,10 +121,10 @@ class SurfaceTransform {
             if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'width') : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Dynamic = (((sy * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sx) * 4.0);
             var di:Dynamic = (((dy * _Runtime.field(_Runtime.field(dest, 'surface'), 'width')) + dx) * 4.0);
-            _Runtime.setIndex(dd, di, HxMath.round(((_Runtime.getIndex(sd, si) * redMultiplier) + (_Runtime.getIndex(dd, di) * (1.0 - redMultiplier)))));
-            _Runtime.setIndex(dd, (di + 1.0), HxMath.round(((_Runtime.getIndex(sd, (si + 1.0)) * greenMultiplier) + (_Runtime.getIndex(dd, (di + 1.0)) * (1.0 - greenMultiplier)))));
-            _Runtime.setIndex(dd, (di + 2.0), HxMath.round(((_Runtime.getIndex(sd, (si + 2.0)) * blueMultiplier) + (_Runtime.getIndex(dd, (di + 2.0)) * (1.0 - blueMultiplier)))));
-            _Runtime.setIndex(dd, (di + 3.0), HxMath.round(((_Runtime.getIndex(sd, (si + 3.0)) * alphaMultiplier) + (_Runtime.getIndex(dd, (di + 3.0)) * (1.0 - alphaMultiplier)))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, di, HxMath.round(((flighthq._internal._StaticIndex.readUint8ClampedArray(sd, si) * redMultiplier) + (flighthq._internal._StaticIndex.readUint8ClampedArray(dd, di) * (1.0 - redMultiplier)))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 1.0), HxMath.round(((flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 1.0)) * greenMultiplier) + (flighthq._internal._StaticIndex.readUint8ClampedArray(dd, (di + 1.0)) * (1.0 - greenMultiplier)))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 2.0), HxMath.round(((flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 2.0)) * blueMultiplier) + (flighthq._internal._StaticIndex.readUint8ClampedArray(dd, (di + 2.0)) * (1.0 - blueMultiplier)))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 3.0), HxMath.round(((flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 3.0)) * alphaMultiplier) + (flighthq._internal._StaticIndex.readUint8ClampedArray(dd, (di + 3.0)) * (1.0 - alphaMultiplier)))));
             px++;
           }
         }
@@ -151,10 +151,10 @@ class SurfaceTransform {
             var srcX:Dynamic = _Runtime.fmod((_Runtime.fmod((px - dx), _Runtime.field(out, 'width')) + _Runtime.field(out, 'width')), _Runtime.field(out, 'width'));
             var si:Dynamic = (((srcY * _Runtime.field(out, 'width')) + srcX) * 4.0);
             var di:Dynamic = (((py * _Runtime.field(out, 'width')) + px) * 4.0);
-            _Runtime.setIndex(_Runtime.field(out, 'data'), di, _Runtime.getIndex(SurfaceTransform._scrollScratch__surfaceTransform, si));
-            _Runtime.setIndex(_Runtime.field(out, 'data'), (di + 1.0), _Runtime.getIndex(SurfaceTransform._scrollScratch__surfaceTransform, (si + 1.0)));
-            _Runtime.setIndex(_Runtime.field(out, 'data'), (di + 2.0), _Runtime.getIndex(SurfaceTransform._scrollScratch__surfaceTransform, (si + 2.0)));
-            _Runtime.setIndex(_Runtime.field(out, 'data'), (di + 3.0), _Runtime.getIndex(SurfaceTransform._scrollScratch__surfaceTransform, (si + 3.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(out, 'data'), di, flighthq._internal._StaticIndex.readUint8ClampedArray(SurfaceTransform._scrollScratch__surfaceTransform, si));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(out, 'data'), (di + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(SurfaceTransform._scrollScratch__surfaceTransform, (si + 1.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(out, 'data'), (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(SurfaceTransform._scrollScratch__surfaceTransform, (si + 2.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(out, 'data'), (di + 3.0), flighthq._internal._StaticIndex.readUint8ClampedArray(SurfaceTransform._scrollScratch__surfaceTransform, (si + 3.0)));
             px++;
           }
         }

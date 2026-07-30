@@ -46,7 +46,7 @@ class BitmapFont {
   }
 
   public static function getBitmapFontPage(font:flighthq.types.BitmapFont, page:Dynamic = 0.0):Null<TextureAtlas> {
-    return cast _Runtime.coalesce(_Runtime.getIndex(_Runtime.field(font, 'pages'), page), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(font, 'pages'), page), function():Dynamic return cast null);
     return cast null;
   }
 

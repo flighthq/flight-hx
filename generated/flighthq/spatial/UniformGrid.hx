@@ -205,8 +205,8 @@ class UniformGrid {
           {
             var j:Dynamic = (i + 1.0);
             while ((cast ((cast j : Float) < (cast _Runtime.field(list, 'length') : Float)) : Bool)) {
-              var a:Dynamic = _Runtime.getIndex(list, i);
-              var b:Dynamic = _Runtime.getIndex(list, j);
+              var a:Dynamic = flighthq._internal._StaticIndex.readArray(list, i);
+              var b:Dynamic = flighthq._internal._StaticIndex.readArray(list, j);
               if ((cast ((cast a : Float) > (cast b : Float)) : Bool)) {
                 var t:Dynamic = a;
                 (a = cast (b : Dynamic));

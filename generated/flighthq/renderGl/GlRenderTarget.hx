@@ -197,7 +197,7 @@ class GlRenderTarget {
         i++;
       }
     }
-    _Runtime.setField(target, 'texture', _Runtime.getIndex(_Runtime.field(target, 'textures'), 0.0));
+    _Runtime.setField(target, 'texture', flighthq._internal._StaticIndex.readArray(_Runtime.field(target, 'textures'), 0.0));
     if ((cast ((cast attachments : Float) > (cast 1.0 : Float)) : Bool)) { flighthq._internal.backend.WebGl2Backend.drawBuffers(gl, _Runtime.callValue(GlRenderTarget.buildDrawBuffers__glRenderTarget, cast ([gl, attachments] : Array<Dynamic>))); }
     if ((cast multisampled : Bool)) {
       flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER, _Runtime.field(target, 'framebuffer'));

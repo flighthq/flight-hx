@@ -47,9 +47,9 @@ class MorphMeshGeometry {
     {
       var t:Dynamic = 0.0;
       while ((cast ((cast t : Float) < (cast targetCount : Float)) : Bool)) {
-        var weight:Dynamic = _Runtime.getIndex(weights, t);
+        var weight:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(weights, t);
         if ((cast _Runtime.strictEquals(weight, 0.0) : Bool)) { t++; continue; }
-        var target:Dynamic = _Runtime.getIndex(targets, t);
+        var target:Dynamic = flighthq._internal._StaticIndex.readArray(targets, t);
         _Runtime.callValue(MorphMeshGeometry.accumulateDeltas__morphMeshGeometry, cast ([blendedPositions, _Runtime.field(target, 'positionDeltas'), weight, floats] : Array<Dynamic>));
         if ((cast ((cast !_Runtime.strictEquals(blendedNormals, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(target, 'normalDeltas'), null) : Bool)) : Bool)) {
           _Runtime.callValue(MorphMeshGeometry.accumulateDeltas__morphMeshGeometry, cast ([blendedNormals, _Runtime.field(target, 'normalDeltas'), weight, floats] : Array<Dynamic>));
@@ -73,19 +73,19 @@ class MorphMeshGeometry {
         var dst:Dynamic = (v * floatsPerVertex);
         var s:Dynamic = (v * 3.0);
         if ((cast ((cast positionOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
-          _Runtime.setIndex(vertices, (dst + positionOffset), _Runtime.getIndex(blendedPositions, s));
-          _Runtime.setIndex(vertices, ((dst + positionOffset) + 1.0), _Runtime.getIndex(blendedPositions, (s + 1.0)));
-          _Runtime.setIndex(vertices, ((dst + positionOffset) + 2.0), _Runtime.getIndex(blendedPositions, (s + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (dst + positionOffset), flighthq._internal._StaticIndex.readFloat32Array(blendedPositions, s));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, ((dst + positionOffset) + 1.0), flighthq._internal._StaticIndex.readFloat32Array(blendedPositions, (s + 1.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, ((dst + positionOffset) + 2.0), flighthq._internal._StaticIndex.readFloat32Array(blendedPositions, (s + 2.0)));
         }
         if ((cast ((cast !_Runtime.strictEquals(blendedNormals, null) : Bool) && (cast ((cast normalOffset : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) {
-          _Runtime.setIndex(vertices, (dst + normalOffset), _Runtime.getIndex(blendedNormals, s));
-          _Runtime.setIndex(vertices, ((dst + normalOffset) + 1.0), _Runtime.getIndex(blendedNormals, (s + 1.0)));
-          _Runtime.setIndex(vertices, ((dst + normalOffset) + 2.0), _Runtime.getIndex(blendedNormals, (s + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (dst + normalOffset), flighthq._internal._StaticIndex.readFloat32Array(blendedNormals, s));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, ((dst + normalOffset) + 1.0), flighthq._internal._StaticIndex.readFloat32Array(blendedNormals, (s + 1.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, ((dst + normalOffset) + 2.0), flighthq._internal._StaticIndex.readFloat32Array(blendedNormals, (s + 2.0)));
         }
         if ((cast ((cast !_Runtime.strictEquals(blendedTangents, null) : Bool) && (cast ((cast tangentOffset : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) {
-          _Runtime.setIndex(vertices, (dst + tangentOffset), _Runtime.getIndex(blendedTangents, s));
-          _Runtime.setIndex(vertices, ((dst + tangentOffset) + 1.0), _Runtime.getIndex(blendedTangents, (s + 1.0)));
-          _Runtime.setIndex(vertices, ((dst + tangentOffset) + 2.0), _Runtime.getIndex(blendedTangents, (s + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (dst + tangentOffset), flighthq._internal._StaticIndex.readFloat32Array(blendedTangents, s));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, ((dst + tangentOffset) + 1.0), flighthq._internal._StaticIndex.readFloat32Array(blendedTangents, (s + 1.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, ((dst + tangentOffset) + 2.0), flighthq._internal._StaticIndex.readFloat32Array(blendedTangents, (s + 2.0)));
         }
         v++;
       }
@@ -122,19 +122,19 @@ class MorphMeshGeometry {
         var base:Dynamic = (v * floatsPerVertex);
         var p:Dynamic = (v * 3.0);
         if ((cast ((cast positionOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
-          _Runtime.setIndex(positions, p, _Runtime.getIndex(vertices, (base + positionOffset)));
-          _Runtime.setIndex(positions, (p + 1.0), _Runtime.getIndex(vertices, ((base + positionOffset) + 1.0)));
-          _Runtime.setIndex(positions, (p + 2.0), _Runtime.getIndex(vertices, ((base + positionOffset) + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(positions, p, flighthq._internal._StaticIndex.readFloat32Array(vertices, (base + positionOffset)));
+          flighthq._internal._StaticIndex.writeFloat32Array(positions, (p + 1.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + positionOffset) + 1.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(positions, (p + 2.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + positionOffset) + 2.0)));
         }
         if ((cast !_Runtime.strictEquals(normals, null) : Bool)) {
-          _Runtime.setIndex(normals, p, _Runtime.getIndex(vertices, (base + normalOffset)));
-          _Runtime.setIndex(normals, (p + 1.0), _Runtime.getIndex(vertices, ((base + normalOffset) + 1.0)));
-          _Runtime.setIndex(normals, (p + 2.0), _Runtime.getIndex(vertices, ((base + normalOffset) + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(normals, p, flighthq._internal._StaticIndex.readFloat32Array(vertices, (base + normalOffset)));
+          flighthq._internal._StaticIndex.writeFloat32Array(normals, (p + 1.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + normalOffset) + 1.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(normals, (p + 2.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + normalOffset) + 2.0)));
         }
         if ((cast !_Runtime.strictEquals(tangents, null) : Bool)) {
-          _Runtime.setIndex(tangents, p, _Runtime.getIndex(vertices, (base + tangentOffset)));
-          _Runtime.setIndex(tangents, (p + 1.0), _Runtime.getIndex(vertices, ((base + tangentOffset) + 1.0)));
-          _Runtime.setIndex(tangents, (p + 2.0), _Runtime.getIndex(vertices, ((base + tangentOffset) + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(tangents, p, flighthq._internal._StaticIndex.readFloat32Array(vertices, (base + tangentOffset)));
+          flighthq._internal._StaticIndex.writeFloat32Array(tangents, (p + 1.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + tangentOffset) + 1.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(tangents, (p + 2.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + tangentOffset) + 2.0)));
         }
         v++;
       }
@@ -149,7 +149,7 @@ class MorphMeshGeometry {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
-        _Runtime.setIndex(accumulator, i, (_Runtime.getIndex(accumulator, i) + (weight * _Runtime.getIndex(deltas, i))));
+        ({ var __indexedObject0:Dynamic = accumulator; var __indexedKey1:Dynamic = i; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject0, __indexedKey1, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject0, __indexedKey1) + (weight * flighthq._internal._StaticIndex.readFloat32Array(deltas, i)))); });
         i++;
       }
     }

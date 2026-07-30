@@ -18,13 +18,13 @@ class GetFlowStackVisibleStates {
       return;
     }
     lowest = top;
-    while (_Runtime.truthy(_Runtime.andValue(((cast lowest : Float) > (cast 0.0 : Float)), function():Dynamic return cast _Runtime.field(_Runtime.getIndex(states, lowest), 'renderBelow')))) {
+    while (_Runtime.truthy(_Runtime.andValue(((cast lowest : Float) > (cast 0.0 : Float)), function():Dynamic return cast _Runtime.field(flighthq._internal._StaticIndex.readArray(states, lowest), 'renderBelow')))) {
       lowest--;
     }
     {
       var i:Dynamic = lowest;
       while ((cast ((cast i : Float) <= (cast top : Float)) : Bool)) {
-        _Runtime.callProperty(out, 'push', cast ([_Runtime.getIndex(states, i)] : Array<Dynamic>));
+        _Runtime.callProperty(out, 'push', cast ([flighthq._internal._StaticIndex.readArray(states, i)] : Array<Dynamic>));
         i++;
       }
     }

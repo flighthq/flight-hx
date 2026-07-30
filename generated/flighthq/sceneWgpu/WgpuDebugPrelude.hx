@@ -30,10 +30,10 @@ class WgpuDebugPrelude {
       (binding = cast ({ bindGroup: bindGroup, buffer: buffer } : Dynamic));
       ((cast _Runtime.field(scene, 'materialBindGroups') : flighthq._internal._WeakMap).set(materialKey, binding));
     }
-    _Runtime.setIndex(WgpuDebugPrelude._scratch__wgpuDebugPrelude, 0.0, near);
-    _Runtime.setIndex(WgpuDebugPrelude._scratch__wgpuDebugPrelude, 1.0, far);
-    _Runtime.setIndex(WgpuDebugPrelude._scratch__wgpuDebugPrelude, 2.0, normalScale);
-    _Runtime.setIndex(WgpuDebugPrelude._scratch__wgpuDebugPrelude, 3.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuDebugPrelude._scratch__wgpuDebugPrelude, 0.0, near);
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuDebugPrelude._scratch__wgpuDebugPrelude, 1.0, far);
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuDebugPrelude._scratch__wgpuDebugPrelude, 2.0, normalScale);
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuDebugPrelude._scratch__wgpuDebugPrelude, 3.0, 0.0);
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(binding, 'buffer'), 0.0, _Runtime.field(WgpuDebugPrelude._scratch__wgpuDebugPrelude, 'buffer'), 0.0, WgpuDebugPrelude.DEBUG_UNIFORM_BYTES__wgpuDebugPrelude] : Array<Dynamic>));
     _Runtime.callValue(stashWgpuUvTransform, cast ([state, null] : Array<Dynamic>));
     return cast _Runtime.field(binding, 'bindGroup');

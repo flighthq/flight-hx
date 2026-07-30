@@ -19,9 +19,9 @@ class _HsvColorValues {
     var q:Dynamic = cast _Runtime.UNDEFINED;
     var t:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(s, 0.0) : Bool)) {
-      _Runtime.setIndex(out, 0.0, v);
-      _Runtime.setIndex(out, 1.0, v);
-      _Runtime.setIndex(out, 2.0, v);
+      flighthq._internal._StaticIndex.writeArray(out, 0.0, v);
+      flighthq._internal._StaticIndex.writeArray(out, 1.0, v);
+      flighthq._internal._StaticIndex.writeArray(out, 2.0, v);
       return;
     }
     hn = _Runtime.fmod((_Runtime.fmod(h, 360.0) + 360.0), 360.0);
@@ -33,34 +33,34 @@ class _HsvColorValues {
     {
       var __switchValue = i;
       if (__switchValue == 0.0) {
-        _Runtime.setIndex(out, 0.0, v);
-        _Runtime.setIndex(out, 1.0, t);
-        _Runtime.setIndex(out, 2.0, p);
+        flighthq._internal._StaticIndex.writeArray(out, 0.0, v);
+        flighthq._internal._StaticIndex.writeArray(out, 1.0, t);
+        flighthq._internal._StaticIndex.writeArray(out, 2.0, p);
       }
       else if (__switchValue == 1.0) {
-        _Runtime.setIndex(out, 0.0, q);
-        _Runtime.setIndex(out, 1.0, v);
-        _Runtime.setIndex(out, 2.0, p);
+        flighthq._internal._StaticIndex.writeArray(out, 0.0, q);
+        flighthq._internal._StaticIndex.writeArray(out, 1.0, v);
+        flighthq._internal._StaticIndex.writeArray(out, 2.0, p);
       }
       else if (__switchValue == 2.0) {
-        _Runtime.setIndex(out, 0.0, p);
-        _Runtime.setIndex(out, 1.0, v);
-        _Runtime.setIndex(out, 2.0, t);
+        flighthq._internal._StaticIndex.writeArray(out, 0.0, p);
+        flighthq._internal._StaticIndex.writeArray(out, 1.0, v);
+        flighthq._internal._StaticIndex.writeArray(out, 2.0, t);
       }
       else if (__switchValue == 3.0) {
-        _Runtime.setIndex(out, 0.0, p);
-        _Runtime.setIndex(out, 1.0, q);
-        _Runtime.setIndex(out, 2.0, v);
+        flighthq._internal._StaticIndex.writeArray(out, 0.0, p);
+        flighthq._internal._StaticIndex.writeArray(out, 1.0, q);
+        flighthq._internal._StaticIndex.writeArray(out, 2.0, v);
       }
       else if (__switchValue == 4.0) {
-        _Runtime.setIndex(out, 0.0, t);
-        _Runtime.setIndex(out, 1.0, p);
-        _Runtime.setIndex(out, 2.0, v);
+        flighthq._internal._StaticIndex.writeArray(out, 0.0, t);
+        flighthq._internal._StaticIndex.writeArray(out, 1.0, p);
+        flighthq._internal._StaticIndex.writeArray(out, 2.0, v);
       }
       else  {
-        _Runtime.setIndex(out, 0.0, v);
-        _Runtime.setIndex(out, 1.0, p);
-        _Runtime.setIndex(out, 2.0, q);
+        flighthq._internal._StaticIndex.writeArray(out, 0.0, v);
+        flighthq._internal._StaticIndex.writeArray(out, 1.0, p);
+        flighthq._internal._StaticIndex.writeArray(out, 2.0, q);
       }
     }
   }
@@ -92,9 +92,9 @@ class _HsvColorValues {
     } else {
       (h = cast (((((r - g) / d) + 4.0) / 6.0) : Dynamic));
     } } }
-    _Runtime.setIndex(out, 0.0, (h * 360.0));
-    _Runtime.setIndex(out, 1.0, s);
-    _Runtime.setIndex(out, 2.0, v);
+    flighthq._internal._StaticIndex.writeArray(out, 0.0, (h * 360.0));
+    flighthq._internal._StaticIndex.writeArray(out, 1.0, s);
+    flighthq._internal._StaticIndex.writeArray(out, 2.0, v);
     return cast out;
     return cast null;
   }

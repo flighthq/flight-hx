@@ -44,26 +44,26 @@ class SkinMeshGeometry {
         var p:Dynamic = (v * 3.0);
         var w:Dynamic = (v * 4.0);
         if ((cast ((cast positionOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
-          _Runtime.setIndex(positions, p, _Runtime.getIndex(vertices, (base + positionOffset)));
-          _Runtime.setIndex(positions, (p + 1.0), _Runtime.getIndex(vertices, ((base + positionOffset) + 1.0)));
-          _Runtime.setIndex(positions, (p + 2.0), _Runtime.getIndex(vertices, ((base + positionOffset) + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(positions, p, flighthq._internal._StaticIndex.readFloat32Array(vertices, (base + positionOffset)));
+          flighthq._internal._StaticIndex.writeFloat32Array(positions, (p + 1.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + positionOffset) + 1.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(positions, (p + 2.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + positionOffset) + 2.0)));
         }
         if ((cast ((cast normalOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
-          _Runtime.setIndex(normals, p, _Runtime.getIndex(vertices, (base + normalOffset)));
-          _Runtime.setIndex(normals, (p + 1.0), _Runtime.getIndex(vertices, ((base + normalOffset) + 1.0)));
-          _Runtime.setIndex(normals, (p + 2.0), _Runtime.getIndex(vertices, ((base + normalOffset) + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(normals, p, flighthq._internal._StaticIndex.readFloat32Array(vertices, (base + normalOffset)));
+          flighthq._internal._StaticIndex.writeFloat32Array(normals, (p + 1.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + normalOffset) + 1.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(normals, (p + 2.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + normalOffset) + 2.0)));
         }
         if ((cast ((cast jointsOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
-          _Runtime.setIndex(joints, w, _Runtime.getIndex(vertices, (base + jointsOffset)));
-          _Runtime.setIndex(joints, (w + 1.0), _Runtime.getIndex(vertices, ((base + jointsOffset) + 1.0)));
-          _Runtime.setIndex(joints, (w + 2.0), _Runtime.getIndex(vertices, ((base + jointsOffset) + 2.0)));
-          _Runtime.setIndex(joints, (w + 3.0), _Runtime.getIndex(vertices, ((base + jointsOffset) + 3.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(joints, w, flighthq._internal._StaticIndex.readFloat32Array(vertices, (base + jointsOffset)));
+          flighthq._internal._StaticIndex.writeFloat32Array(joints, (w + 1.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + jointsOffset) + 1.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(joints, (w + 2.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + jointsOffset) + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(joints, (w + 3.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + jointsOffset) + 3.0)));
         }
         if ((cast ((cast weightsOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
-          _Runtime.setIndex(weights, w, _Runtime.getIndex(vertices, (base + weightsOffset)));
-          _Runtime.setIndex(weights, (w + 1.0), _Runtime.getIndex(vertices, ((base + weightsOffset) + 1.0)));
-          _Runtime.setIndex(weights, (w + 2.0), _Runtime.getIndex(vertices, ((base + weightsOffset) + 2.0)));
-          _Runtime.setIndex(weights, (w + 3.0), _Runtime.getIndex(vertices, ((base + weightsOffset) + 3.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(weights, w, flighthq._internal._StaticIndex.readFloat32Array(vertices, (base + weightsOffset)));
+          flighthq._internal._StaticIndex.writeFloat32Array(weights, (w + 1.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + weightsOffset) + 1.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(weights, (w + 2.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + weightsOffset) + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(weights, (w + 3.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + weightsOffset) + 3.0)));
         }
         v++;
       }
@@ -100,14 +100,14 @@ class SkinMeshGeometry {
         var base:Dynamic = (v * floatsPerVertex);
         var s:Dynamic = (v * 3.0);
         if ((cast ((cast positionOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
-          _Runtime.setIndex(vertices, (base + positionOffset), _Runtime.getIndex(skinnedPositions, s));
-          _Runtime.setIndex(vertices, ((base + positionOffset) + 1.0), _Runtime.getIndex(skinnedPositions, (s + 1.0)));
-          _Runtime.setIndex(vertices, ((base + positionOffset) + 2.0), _Runtime.getIndex(skinnedPositions, (s + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (base + positionOffset), flighthq._internal._StaticIndex.readFloat32Array(skinnedPositions, s));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, ((base + positionOffset) + 1.0), flighthq._internal._StaticIndex.readFloat32Array(skinnedPositions, (s + 1.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, ((base + positionOffset) + 2.0), flighthq._internal._StaticIndex.readFloat32Array(skinnedPositions, (s + 2.0)));
         }
         if ((cast ((cast normalOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
-          _Runtime.setIndex(vertices, (base + normalOffset), _Runtime.getIndex(skinnedNormals, s));
-          _Runtime.setIndex(vertices, ((base + normalOffset) + 1.0), _Runtime.getIndex(skinnedNormals, (s + 1.0)));
-          _Runtime.setIndex(vertices, ((base + normalOffset) + 2.0), _Runtime.getIndex(skinnedNormals, (s + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (base + normalOffset), flighthq._internal._StaticIndex.readFloat32Array(skinnedNormals, s));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, ((base + normalOffset) + 1.0), flighthq._internal._StaticIndex.readFloat32Array(skinnedNormals, (s + 1.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, ((base + normalOffset) + 2.0), flighthq._internal._StaticIndex.readFloat32Array(skinnedNormals, (s + 2.0)));
         }
         v++;
       }
@@ -121,7 +121,7 @@ class SkinMeshGeometry {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(attributes, 'length') : Float)) : Bool)) {
-        if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.getIndex(attributes, i), 'semantic'), semantic) : Bool)) { return cast (_Runtime.field(_Runtime.getIndex(attributes, i), 'byteOffset') / 4.0); }
+        if ((cast _Runtime.strictEquals(_Runtime.field(flighthq._internal._StaticIndex.readArray(attributes, i), 'semantic'), semantic) : Bool)) { return cast (_Runtime.field(flighthq._internal._StaticIndex.readArray(attributes, i), 'byteOffset') / 4.0); }
         i++;
       }
     }

@@ -50,8 +50,8 @@ class ClearcoatPbrWgpuMeshMaterialRenderer {
     out = _Runtime.callValue(getWgpuPbrMaterialScratch, cast ([] : Array<Dynamic>));
     _Runtime.callValue(writeWgpuPbrStandardBlock, cast ([out, standard, ((cast !_Runtime.strictEquals(clearcoat, null) : Bool) ? (cast _Runtime.field(clearcoat, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic))] : Array<Dynamic>));
     _Runtime.fill(out, 0.0, 16.0, null, 2);
-    _Runtime.setIndex(out, 16.0, ((cast !_Runtime.strictEquals(clearcoat, null) : Bool) ? (cast _Runtime.field(clearcoat, 'clearcoat') : Dynamic) : (cast 0.0 : Dynamic)));
-    _Runtime.setIndex(out, 17.0, ((cast !_Runtime.strictEquals(clearcoat, null) : Bool) ? (cast _Runtime.field(clearcoat, 'clearcoatRoughness') : Dynamic) : (cast 0.0 : Dynamic)));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 16.0, ((cast !_Runtime.strictEquals(clearcoat, null) : Bool) ? (cast _Runtime.field(clearcoat, 'clearcoat') : Dynamic) : (cast 0.0 : Dynamic)));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 17.0, ((cast !_Runtime.strictEquals(clearcoat, null) : Bool) ? (cast _Runtime.field(clearcoat, 'clearcoatRoughness') : Dynamic) : (cast 0.0 : Dynamic)));
     _Runtime.callValue(writeWgpuPbrMaterialUniform, cast ([state, binding] : Array<Dynamic>));
     _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, _Runtime.field(binding, 'bindGroup')] : Array<Dynamic>));

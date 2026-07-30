@@ -76,22 +76,22 @@ class ShapeCommands {
     penY = 0.0;
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(cmds, 'length') : Float)) : Bool)) {
-      var key:Dynamic = (cast _Runtime.getIndex(cmds, i) : String);
-      var argCount:Dynamic = (cast _Runtime.getIndex(cmds, (i + 1.0)) : Float);
+      var key:Dynamic = (cast flighthq._internal._StaticIndex.readArray(cmds, i) : String);
+      var argCount:Dynamic = (cast flighthq._internal._StaticIndex.readArray(cmds, (i + 1.0)) : Float);
       var b:Dynamic = (i + 2.0);
       {
         var __switchValue = key;
         if (__switchValue == 'moveTo' || __switchValue == 'lineTo') {
-          (penX = cast ((cast _Runtime.getIndex(cmds, b) : Float) : Dynamic));
-          (penY = cast ((cast _Runtime.getIndex(cmds, (b + 1.0)) : Float) : Dynamic));
+          (penX = cast ((cast flighthq._internal._StaticIndex.readArray(cmds, b) : Float) : Dynamic));
+          (penY = cast ((cast flighthq._internal._StaticIndex.readArray(cmds, (b + 1.0)) : Float) : Dynamic));
         }
         else if (__switchValue == 'curveTo') {
-          (penX = cast ((cast _Runtime.getIndex(cmds, (b + 2.0)) : Float) : Dynamic));
-          (penY = cast ((cast _Runtime.getIndex(cmds, (b + 3.0)) : Float) : Dynamic));
+          (penX = cast ((cast flighthq._internal._StaticIndex.readArray(cmds, (b + 2.0)) : Float) : Dynamic));
+          (penY = cast ((cast flighthq._internal._StaticIndex.readArray(cmds, (b + 3.0)) : Float) : Dynamic));
         }
         else if (__switchValue == 'cubicCurveTo') {
-          (penX = cast ((cast _Runtime.getIndex(cmds, (b + 4.0)) : Float) : Dynamic));
-          (penY = cast ((cast _Runtime.getIndex(cmds, (b + 5.0)) : Float) : Dynamic));
+          (penX = cast ((cast flighthq._internal._StaticIndex.readArray(cmds, (b + 4.0)) : Float) : Dynamic));
+          (penY = cast ((cast flighthq._internal._StaticIndex.readArray(cmds, (b + 5.0)) : Float) : Dynamic));
         }
       }
       (i = cast ((i + (argCount + 2.0)) : Dynamic));
@@ -228,15 +228,15 @@ class ShapeCommands {
     var cmds:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.field(points, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { return; }
     cmds = _Runtime.field(_Runtime.field(shape, 'data'), 'commands');
-    _Runtime.pushMany(cmds, cast (['moveTo', 2.0, _Runtime.getIndex(points, 0.0), _Runtime.getIndex(points, 1.0)] : Array<Dynamic>));
+    _Runtime.pushMany(cmds, cast (['moveTo', 2.0, flighthq._internal._StaticIndex.readArray(points, 0.0), flighthq._internal._StaticIndex.readArray(points, 1.0)] : Array<Dynamic>));
     {
       var k:Dynamic = 2.0;
       while ((cast ((cast k : Float) < (cast (_Runtime.field(points, 'length') - 1.0) : Float)) : Bool)) {
-        _Runtime.pushMany(cmds, cast (['lineTo', 2.0, _Runtime.getIndex(points, k), _Runtime.getIndex(points, (k + 1.0))] : Array<Dynamic>));
+        _Runtime.pushMany(cmds, cast (['lineTo', 2.0, flighthq._internal._StaticIndex.readArray(points, k), flighthq._internal._StaticIndex.readArray(points, (k + 1.0))] : Array<Dynamic>));
         (k = cast ((k + 2.0) : Dynamic));
       }
     }
-    _Runtime.pushMany(cmds, cast (['lineTo', 2.0, _Runtime.getIndex(points, 0.0), _Runtime.getIndex(points, 1.0)] : Array<Dynamic>));
+    _Runtime.pushMany(cmds, cast (['lineTo', 2.0, flighthq._internal._StaticIndex.readArray(points, 0.0), flighthq._internal._StaticIndex.readArray(points, 1.0)] : Array<Dynamic>));
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
@@ -244,11 +244,11 @@ class ShapeCommands {
     var cmds:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.field(points, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { return; }
     cmds = _Runtime.field(_Runtime.field(shape, 'data'), 'commands');
-    _Runtime.pushMany(cmds, cast (['moveTo', 2.0, _Runtime.getIndex(points, 0.0), _Runtime.getIndex(points, 1.0)] : Array<Dynamic>));
+    _Runtime.pushMany(cmds, cast (['moveTo', 2.0, flighthq._internal._StaticIndex.readArray(points, 0.0), flighthq._internal._StaticIndex.readArray(points, 1.0)] : Array<Dynamic>));
     {
       var k:Dynamic = 2.0;
       while ((cast ((cast k : Float) < (cast (_Runtime.field(points, 'length') - 1.0) : Float)) : Bool)) {
-        _Runtime.pushMany(cmds, cast (['lineTo', 2.0, _Runtime.getIndex(points, k), _Runtime.getIndex(points, (k + 1.0))] : Array<Dynamic>));
+        _Runtime.pushMany(cmds, cast (['lineTo', 2.0, flighthq._internal._StaticIndex.readArray(points, k), flighthq._internal._StaticIndex.readArray(points, (k + 1.0))] : Array<Dynamic>));
         (k = cast ((k + 2.0) : Dynamic));
       }
     }

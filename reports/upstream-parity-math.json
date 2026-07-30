@@ -1,0 +1,19 @@
+{
+  "completedAt": "2026-07-30T23:49:08.606Z",
+  "failedPackages": 0,
+  "jobs": 12,
+  "packages": [
+    {
+      "durationMs": 12602,
+      "exitCode": 0,
+      "package": "math",
+      "signal": null,
+      "status": "passed",
+      "summary": "278 passed (278)",
+      "testFiles": 15
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "math",
+  "startedAt": "2026-07-30T23:48:56.002Z"
+}

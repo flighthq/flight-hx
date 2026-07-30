@@ -44,7 +44,7 @@ class Tileset {
           var column:Dynamic = 0.0;
           while ((cast ((cast column : Float) < (cast columns : Float)) : Bool)) {
             if ((cast ((cast i : Float) >= (cast _Runtime.field(regions, 'length') : Float)) : Bool)) { _Runtime.callProperty(regions, 'push', cast ([_Runtime.callValue(createTextureAtlasRegion, cast ([] : Array<Dynamic>))] : Array<Dynamic>)); }
-            var region:Dynamic = _Runtime.getIndex(regions, i);
+            var region:Dynamic = flighthq._internal._StaticIndex.readArray(regions, i);
             var x:Dynamic = (margin + (column * (tileWidth + spacing)));
             var y:Dynamic = (margin + (row * (tileHeight + spacing)));
             _Runtime.callValue(setTextureAtlasRegion, cast ([region, x, y, tileWidth, tileHeight] : Array<Dynamic>));

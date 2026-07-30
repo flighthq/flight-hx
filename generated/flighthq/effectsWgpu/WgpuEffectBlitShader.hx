@@ -20,8 +20,8 @@ class WgpuEffectBlitShader {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     pipeline = _Runtime.callValue(WgpuEffectBlitShader.getWgpuBlitOffsetShader__wgpuEffectBlitShader, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, source, dest, pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, (-dx / _Runtime.field(source, 'width')));
-      _Runtime.setIndex(f32, 1.0, (dy / _Runtime.field(source, 'height')));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, (-dx / _Runtime.field(source, 'width')));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, (dy / _Runtime.field(source, 'height')));
     }] : Array<Dynamic>));
   }
 

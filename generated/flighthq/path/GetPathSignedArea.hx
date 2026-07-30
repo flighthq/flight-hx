@@ -12,7 +12,7 @@ class GetPathSignedArea {
     var area:Dynamic = cast _Runtime.UNDEFINED;
     contours = _Runtime.callValue(flattenPath, cast ([path, tolerance] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(_Runtime.field(contours, 'length'), 0.0) : Bool)) { return cast 'degenerate'; }
-    area = _Runtime.callValue(GetPathSignedArea.shoelaceArea__getPathSignedArea, cast ([_Runtime.getIndex(contours, 0.0)] : Array<Dynamic>));
+    area = _Runtime.callValue(GetPathSignedArea.shoelaceArea__getPathSignedArea, cast ([flighthq._internal._StaticIndex.readArray(contours, 0.0)] : Array<Dynamic>));
     if ((cast ((cast area : Float) > (cast 0.0 : Float)) : Bool)) { return cast 'ccw'; }
     if ((cast ((cast area : Float) < (cast 0.0 : Float)) : Bool)) { return cast 'cw'; }
     return cast 'degenerate';
@@ -27,7 +27,7 @@ class GetPathSignedArea {
     {
       var ci:Dynamic = 0.0;
       while ((cast ((cast ci : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
-        (total = cast ((total + _Runtime.callValue(GetPathSignedArea.shoelaceArea__getPathSignedArea, cast ([_Runtime.getIndex(contours, ci)] : Array<Dynamic>))) : Dynamic));
+        (total = cast ((total + _Runtime.callValue(GetPathSignedArea.shoelaceArea__getPathSignedArea, cast ([flighthq._internal._StaticIndex.readArray(contours, ci)] : Array<Dynamic>))) : Dynamic));
         ci++;
       }
     }
@@ -45,8 +45,8 @@ class GetPathSignedArea {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
         var j:Dynamic = _Runtime.fmod((i + 1.0), n);
-        (area = cast ((area + (_Runtime.getIndex(contour, (i * 2.0)) * _Runtime.getIndex(contour, ((j * 2.0) + 1.0)))) : Dynamic));
-        (area = cast ((area - (_Runtime.getIndex(contour, (j * 2.0)) * _Runtime.getIndex(contour, ((i * 2.0) + 1.0)))) : Dynamic));
+        (area = cast ((area + (flighthq._internal._StaticIndex.readArray(contour, (i * 2.0)) * flighthq._internal._StaticIndex.readArray(contour, ((j * 2.0) + 1.0)))) : Dynamic));
+        (area = cast ((area - (flighthq._internal._StaticIndex.readArray(contour, (j * 2.0)) * flighthq._internal._StaticIndex.readArray(contour, ((i * 2.0) + 1.0)))) : Dynamic));
         i++;
       }
     }

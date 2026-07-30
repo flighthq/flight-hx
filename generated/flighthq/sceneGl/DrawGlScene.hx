@@ -62,7 +62,7 @@ class DrawGlScene {
     {
       var m:Dynamic = 0.0;
       while ((cast ((cast m : Float) < (cast _Runtime.field(list, 'meshCount') : Float)) : Bool)) {
-        var mesh:Dynamic = _Runtime.getIndex(_Runtime.field(list, 'visibleMeshes'), m);
+        var mesh:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(list, 'visibleMeshes'), m);
         if ((cast !_Runtime.looseEquals(_Runtime.field(mesh, 'morph'), null) : Bool)) { _Runtime.callValue(updateMeshMorph, cast ([mesh] : Array<Dynamic>)); }
         m++;
       }
@@ -70,14 +70,14 @@ class DrawGlScene {
     {
       var m:Dynamic = 0.0;
       while ((cast ((cast m : Float) < (cast _Runtime.field(list, 'meshCount') : Float)) : Bool)) {
-        var mesh:Dynamic = _Runtime.getIndex(_Runtime.field(list, 'visibleMeshes'), m);
+        var mesh:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(list, 'visibleMeshes'), m);
         var subsets:Dynamic = _Runtime.field(_Runtime.field(mesh, 'geometry'), 'subsets');
         var worldMatrix:Dynamic = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>)) : Matrix4);
-        var wx:Dynamic = _Runtime.getIndex(worldMatrix.m, 12.0);
-        var wy:Dynamic = _Runtime.getIndex(worldMatrix.m, 13.0);
-        var wz:Dynamic = _Runtime.getIndex(worldMatrix.m, 14.0);
+        var wx:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(worldMatrix.m, 12.0);
+        var wy:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(worldMatrix.m, 13.0);
+        var wz:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(worldMatrix.m, 14.0);
         var vp:Dynamic = viewProjection.m;
-        var clipW:Dynamic = ((((_Runtime.getIndex(vp, 3.0) * wx) + (_Runtime.getIndex(vp, 7.0) * wy)) + (_Runtime.getIndex(vp, 11.0) * wz)) + _Runtime.getIndex(vp, 15.0));
+        var clipW:Dynamic = ((((flighthq._internal._StaticIndex.readFloat32Array(vp, 3.0) * wx) + (flighthq._internal._StaticIndex.readFloat32Array(vp, 7.0) * wy)) + (flighthq._internal._StaticIndex.readFloat32Array(vp, 11.0) * wz)) + flighthq._internal._StaticIndex.readFloat32Array(vp, 15.0));
         var objectAlpha:Dynamic = _Runtime.callValue(getSceneNodeWorldAlpha, cast ([mesh] : Array<Dynamic>));
         {
           var s:Dynamic = 0.0;
@@ -94,7 +94,7 @@ class DrawGlScene {
             _Runtime.setField(entry, 'material', resolvedMaterial);
             _Runtime.setField(entry, 'normalMatrix', worldMatrix);
             _Runtime.setField(entry, 'renderer', renderer);
-            _Runtime.setField(entry, 'subset', _Runtime.getIndex(subsets, s));
+            _Runtime.setField(entry, 'subset', flighthq._internal._StaticIndex.readArray(subsets, s));
             _Runtime.setField(entry, 'worldMatrix', worldMatrix);
             if ((cast isBlended : Bool)) {
               _Runtime.callProperty(blendedDrawList, 'push', cast ([entry] : Array<Dynamic>));
@@ -113,7 +113,7 @@ class DrawGlScene {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(opaqueDrawList, 'length') : Float)) : Bool)) {
-        var entry:Dynamic = (cast _Runtime.getIndex(opaqueDrawList, i) : DrawEntry__drawGlScene);
+        var entry:Dynamic = (cast flighthq._internal._StaticIndex.readArray(opaqueDrawList, i) : DrawEntry__drawGlScene);
         var worldMatrix:Dynamic = (cast _Runtime.field(entry, 'worldMatrix') : Matrix4);
         _Runtime.callValue(setMatrix3NormalFromMatrix4, cast ([DrawGlScene.scratchNormalMatrix__drawGlScene, worldMatrix] : Array<Dynamic>));
         var skinned:Dynamic = _Runtime.callValue(DrawGlScene.isGpuSkinnedDraw__drawGlScene, cast ([_Runtime.field(entry, 'mesh')] : Array<Dynamic>));
@@ -145,7 +145,7 @@ class DrawGlScene {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(blendedDrawList, 'length') : Float)) : Bool)) {
-          var entry:Dynamic = (cast _Runtime.getIndex(blendedDrawList, i) : DrawEntry__drawGlScene);
+          var entry:Dynamic = (cast flighthq._internal._StaticIndex.readArray(blendedDrawList, i) : DrawEntry__drawGlScene);
           var worldMatrix:Dynamic = (cast _Runtime.field(entry, 'worldMatrix') : Matrix4);
           _Runtime.callValue(setMatrix3NormalFromMatrix4, cast ([DrawGlScene.scratchNormalMatrix__drawGlScene, worldMatrix] : Array<Dynamic>));
           var skinned:Dynamic = _Runtime.callValue(DrawGlScene.isGpuSkinnedDraw__drawGlScene, cast ([_Runtime.field(entry, 'mesh')] : Array<Dynamic>));
@@ -180,7 +180,7 @@ class DrawGlScene {
   public static function resolveSubsetMaterial__drawGlScene(mesh:Mesh, subsetIndex:Float):Null<Material> {
     var materials:Dynamic = cast _Runtime.UNDEFINED;
     materials = _Runtime.field(mesh, 'materials');
-    return cast ((cast ((cast subsetIndex : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool) ? (cast _Runtime.getIndex(materials, subsetIndex) : Dynamic) : (cast null : Dynamic));
+    return cast ((cast ((cast subsetIndex : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(materials, subsetIndex) : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 

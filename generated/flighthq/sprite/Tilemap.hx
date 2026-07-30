@@ -150,7 +150,7 @@ class Tilemap {
     rows = _Runtime.field(__destructure3, 'rows');
     tiles = _Runtime.field(__destructure3, 'tiles');
     if ((cast ((cast ((cast ((cast ((cast column : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast column : Float) >= (cast columns : Float)) : Bool)) : Bool) || (cast ((cast row : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast row : Float) >= (cast rows : Float)) : Bool)) : Bool)) { return cast -1.0; }
-    return cast _Runtime.getIndex(tiles, ((row * columns) + column));
+    return cast flighthq._internal._StaticIndex.readInt16Array(tiles, ((row * columns) + column));
     return cast null;
   }
 
@@ -202,7 +202,7 @@ class Tilemap {
         {
           var c:Dynamic = 0.0;
           while ((cast ((cast c : Float) < (cast copyColumns : Float)) : Bool)) {
-            _Runtime.setIndex(newTiles, ((r * columns) + c), _Runtime.getIndex(_Runtime.field(data, 'tiles'), ((r * _Runtime.field(data, 'columns')) + c)));
+            flighthq._internal._StaticIndex.writeInt16Array(newTiles, ((r * columns) + c), flighthq._internal._StaticIndex.readInt16Array(_Runtime.field(data, 'tiles'), ((r * _Runtime.field(data, 'columns')) + c)));
             c++;
           }
         }
@@ -225,7 +225,7 @@ class Tilemap {
     rows = _Runtime.field(__destructure5, 'rows');
     tiles = _Runtime.field(__destructure5, 'tiles');
     if ((cast ((cast ((cast ((cast ((cast column : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast column : Float) >= (cast columns : Float)) : Bool)) : Bool) || (cast ((cast row : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast row : Float) >= (cast rows : Float)) : Bool)) : Bool)) { return; }
-    _Runtime.setIndex(tiles, ((row * columns) + column), id);
+    flighthq._internal._StaticIndex.writeInt16Array(tiles, ((row * columns) + column), id);
     signals = _Runtime.callValue(getTilemapSignals, cast ([tilemap] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callProperty(_Runtime.field(signals, 'onTileChanged'), 'emit', cast ([column, row, id] : Array<Dynamic>)); }
   }
@@ -250,7 +250,7 @@ class Tilemap {
           while ((cast ((cast c : Float) < (cast width : Float)) : Bool)) {
             var targetCol:Dynamic = (offsetColumn + c);
             if ((cast ((cast ((cast targetCol : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast targetCol : Float) >= (cast columns : Float)) : Bool)) : Bool)) { c++; continue; }
-            _Runtime.setIndex(tiles, ((targetRow * columns) + targetCol), _Runtime.getIndex(ids, ((r * width) + c)));
+            flighthq._internal._StaticIndex.writeInt16Array(tiles, ((targetRow * columns) + targetCol), _Runtime.getIndex(ids, ((r * width) + c)));
             c++;
           }
         }

@@ -42,7 +42,7 @@ class WgpuSpriteRenderer {
     if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(atlas, 'image'), null) : Bool)) : Bool) || (cast !(cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(atlas, 'image')] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return; }
     regions = _Runtime.field(atlas, 'regions');
     if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast _Runtime.field(regions, 'length') : Float)) : Bool)) : Bool)) { return; }
-    region = _Runtime.getIndex(regions, id);
+    region = flighthq._internal._StaticIndex.readArray(regions, id);
     if ((cast ((cast ((cast _Runtime.field(region, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(region, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
     iw = (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'width'), function():Dynamic return cast 1.0));
     ih = (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'height'), function():Dynamic return cast 1.0));
@@ -53,19 +53,19 @@ class WgpuSpriteRenderer {
     base = _Runtime.callValue(prepareWgpuSpriteBatchWrite, cast ([state, _Runtime.field(atlas, 'image'), _Runtime.field(spriteNode, 'blendMode'), material, materialRenderer, 1.0] : Array<Dynamic>));
     instanceIndex = _Runtime.field(runtime, 'spriteBatchCount');
     d = _Runtime.field(runtime, 'spriteBatchInstanceData');
-    _Runtime.setIndex(d, base, _Runtime.field(t, 'a'));
-    _Runtime.setIndex(d, (base + 1.0), _Runtime.field(t, 'b'));
-    _Runtime.setIndex(d, (base + 2.0), _Runtime.field(t, 'c'));
-    _Runtime.setIndex(d, (base + 3.0), _Runtime.field(t, 'd'));
-    _Runtime.setIndex(d, (base + 4.0), _Runtime.field(t, 'tx'));
-    _Runtime.setIndex(d, (base + 5.0), _Runtime.field(t, 'ty'));
-    _Runtime.setIndex(d, (base + 6.0), _Runtime.field(region, 'width'));
-    _Runtime.setIndex(d, (base + 7.0), _Runtime.field(region, 'height'));
-    _Runtime.setIndex(d, (base + 8.0), (_Runtime.field(region, 'x') * iw));
-    _Runtime.setIndex(d, (base + 9.0), (_Runtime.field(region, 'y') * ih));
-    _Runtime.setIndex(d, (base + 10.0), ((_Runtime.field(region, 'x') + _Runtime.field(region, 'width')) * iw));
-    _Runtime.setIndex(d, (base + 11.0), ((_Runtime.field(region, 'y') + _Runtime.field(region, 'height')) * ih));
-    _Runtime.setIndex(d, (base + 12.0), _Runtime.field(spriteNode, 'alpha'));
+    flighthq._internal._StaticIndex.writeFloat32Array(d, base, _Runtime.field(t, 'a'));
+    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 1.0), _Runtime.field(t, 'b'));
+    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 2.0), _Runtime.field(t, 'c'));
+    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 3.0), _Runtime.field(t, 'd'));
+    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 4.0), _Runtime.field(t, 'tx'));
+    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 5.0), _Runtime.field(t, 'ty'));
+    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 6.0), _Runtime.field(region, 'width'));
+    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 7.0), _Runtime.field(region, 'height'));
+    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 8.0), (_Runtime.field(region, 'x') * iw));
+    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 9.0), (_Runtime.field(region, 'y') * ih));
+    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 10.0), ((_Runtime.field(region, 'x') + _Runtime.field(region, 'width')) * iw));
+    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 11.0), ((_Runtime.field(region, 'y') + _Runtime.field(region, 'height')) * ih));
+    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 12.0), _Runtime.field(spriteNode, 'alpha'));
     _Runtime.callValue(packWgpuSpriteBatchMaterialInstance, cast ([state, _Runtime.field(spriteNode, 'materialData'), instanceIndex] : Array<Dynamic>));
     _Runtime.callValue(recordWgpuSpriteBatchColorTransform, cast ([state, _Runtime.field(spriteNode, 'colorTransform'), instanceIndex] : Array<Dynamic>));
     _Runtime.incrementField(runtime, 'spriteBatchCount', 1, true);

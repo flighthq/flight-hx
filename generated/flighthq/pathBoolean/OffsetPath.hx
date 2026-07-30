@@ -67,14 +67,14 @@ class OffsetPath {
       var k:Dynamic = 0.0;
       while ((cast ((cast k : Float) < (cast count : Float)) : Bool)) {
         var kn:Dynamic = _Runtime.fmod((k + 1.0), count);
-        var dx:Dynamic = (_Runtime.getIndex(vertices, (2.0 * kn)) - _Runtime.getIndex(vertices, (2.0 * k)));
-        var dy:Dynamic = (_Runtime.getIndex(vertices, ((2.0 * kn) + 1.0)) - _Runtime.getIndex(vertices, ((2.0 * k) + 1.0)));
+        var dx:Dynamic = (flighthq._internal._StaticIndex.readArray(vertices, (2.0 * kn)) - flighthq._internal._StaticIndex.readArray(vertices, (2.0 * k)));
+        var dy:Dynamic = (flighthq._internal._StaticIndex.readArray(vertices, ((2.0 * kn) + 1.0)) - flighthq._internal._StaticIndex.readArray(vertices, ((2.0 * k) + 1.0)));
         var length:Dynamic = _Runtime.hypot(dx, dy);
         var inverse:Dynamic = ((cast ((cast length : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / length) : Dynamic) : (cast 0.0 : Dynamic));
-        _Runtime.setIndex(dirX, k, (dx * inverse));
-        _Runtime.setIndex(dirY, k, (dy * inverse));
-        _Runtime.setIndex(normalX, k, _Runtime.getIndex(dirY, k));
-        _Runtime.setIndex(normalY, k, -_Runtime.getIndex(dirX, k));
+        flighthq._internal._StaticIndex.writeArray(dirX, k, (dx * inverse));
+        flighthq._internal._StaticIndex.writeArray(dirY, k, (dy * inverse));
+        flighthq._internal._StaticIndex.writeArray(normalX, k, flighthq._internal._StaticIndex.readArray(dirY, k));
+        flighthq._internal._StaticIndex.writeArray(normalY, k, -flighthq._internal._StaticIndex.readArray(dirX, k));
         k++;
       }
     }
@@ -83,16 +83,16 @@ class OffsetPath {
       var k:Dynamic = 0.0;
       while ((cast ((cast k : Float) < (cast count : Float)) : Bool)) {
         var previous:Dynamic = _Runtime.fmod(((k - 1.0) + count), count);
-        var vx:Dynamic = _Runtime.getIndex(vertices, (2.0 * k));
-        var vy:Dynamic = _Runtime.getIndex(vertices, ((2.0 * k) + 1.0));
-        var previousEndX:Dynamic = (vx + (signedDelta * _Runtime.getIndex(normalX, previous)));
-        var previousEndY:Dynamic = (vy + (signedDelta * _Runtime.getIndex(normalY, previous)));
-        var thisStartX:Dynamic = (vx + (signedDelta * _Runtime.getIndex(normalX, k)));
-        var thisStartY:Dynamic = (vy + (signedDelta * _Runtime.getIndex(normalY, k)));
+        var vx:Dynamic = flighthq._internal._StaticIndex.readArray(vertices, (2.0 * k));
+        var vy:Dynamic = flighthq._internal._StaticIndex.readArray(vertices, ((2.0 * k) + 1.0));
+        var previousEndX:Dynamic = (vx + (signedDelta * flighthq._internal._StaticIndex.readArray(normalX, previous)));
+        var previousEndY:Dynamic = (vy + (signedDelta * flighthq._internal._StaticIndex.readArray(normalY, previous)));
+        var thisStartX:Dynamic = (vx + (signedDelta * flighthq._internal._StaticIndex.readArray(normalX, k)));
+        var thisStartY:Dynamic = (vy + (signedDelta * flighthq._internal._StaticIndex.readArray(normalY, k)));
         if ((cast ((cast capIndices : flighthq._internal._Set).has(k)) : Bool)) {
-          _Runtime.callValue(OffsetPath.emitOffsetEndCap__offsetPath, cast ([ring, vx, vy, previousEndX, previousEndY, thisStartX, thisStartY, _Runtime.getIndex(dirX, previous), _Runtime.getIndex(dirY, previous), _Runtime.getIndex(dirX, k), _Runtime.getIndex(dirY, k), HxMath.abs(signedDelta), end, arcTolerance] : Array<Dynamic>));
+          _Runtime.callValue(OffsetPath.emitOffsetEndCap__offsetPath, cast ([ring, vx, vy, previousEndX, previousEndY, thisStartX, thisStartY, flighthq._internal._StaticIndex.readArray(dirX, previous), flighthq._internal._StaticIndex.readArray(dirY, previous), flighthq._internal._StaticIndex.readArray(dirX, k), flighthq._internal._StaticIndex.readArray(dirY, k), HxMath.abs(signedDelta), end, arcTolerance] : Array<Dynamic>));
         } else {
-          _Runtime.callValue(OffsetPath.emitOffsetJoin__offsetPath, cast ([ring, vx, vy, previousEndX, previousEndY, thisStartX, thisStartY, _Runtime.getIndex(dirX, previous), _Runtime.getIndex(dirY, previous), _Runtime.getIndex(dirX, k), _Runtime.getIndex(dirY, k), signedDelta, join, miterLimit, arcTolerance] : Array<Dynamic>));
+          _Runtime.callValue(OffsetPath.emitOffsetJoin__offsetPath, cast ([ring, vx, vy, previousEndX, previousEndY, thisStartX, thisStartY, flighthq._internal._StaticIndex.readArray(dirX, previous), flighthq._internal._StaticIndex.readArray(dirY, previous), flighthq._internal._StaticIndex.readArray(dirX, k), flighthq._internal._StaticIndex.readArray(dirY, k), signedDelta, join, miterLimit, arcTolerance] : Array<Dynamic>));
         }
         k++;
       }
@@ -156,11 +156,11 @@ class OffsetPath {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
-        var x:Dynamic = _Runtime.getIndex(contour, i);
-        var y:Dynamic = _Runtime.getIndex(contour, (i + 1.0));
+        var x:Dynamic = flighthq._internal._StaticIndex.readArray(contour, i);
+        var y:Dynamic = flighthq._internal._StaticIndex.readArray(contour, (i + 1.0));
         if ((cast ((cast _Runtime.field(out, 'length') : Float) >= (cast 2.0 : Float)) : Bool)) {
-          var dx:Dynamic = (x - _Runtime.getIndex(out, (_Runtime.field(out, 'length') - 2.0)));
-          var dy:Dynamic = (y - _Runtime.getIndex(out, (_Runtime.field(out, 'length') - 1.0)));
+          var dx:Dynamic = (x - flighthq._internal._StaticIndex.readArray(out, (_Runtime.field(out, 'length') - 2.0)));
+          var dy:Dynamic = (y - flighthq._internal._StaticIndex.readArray(out, (_Runtime.field(out, 'length') - 1.0)));
           if ((cast ((cast ((dx * dx) + (dy * dy)) : Float) <= (cast pointEpsSq : Float)) : Bool)) { (i = cast ((i + 2.0) : Dynamic)); continue; }
         }
         _Runtime.pushMany(out, cast ([x, y] : Array<Dynamic>));
@@ -168,8 +168,8 @@ class OffsetPath {
       }
     }
     if ((cast ((cast closed : Bool) && (cast ((cast _Runtime.field(out, 'length') : Float) >= (cast 4.0 : Float)) : Bool)) : Bool)) {
-      var dx:Dynamic = (_Runtime.getIndex(out, 0.0) - _Runtime.getIndex(out, (_Runtime.field(out, 'length') - 2.0)));
-      var dy:Dynamic = (_Runtime.getIndex(out, 1.0) - _Runtime.getIndex(out, (_Runtime.field(out, 'length') - 1.0)));
+      var dx:Dynamic = (flighthq._internal._StaticIndex.readArray(out, 0.0) - flighthq._internal._StaticIndex.readArray(out, (_Runtime.field(out, 'length') - 2.0)));
+      var dy:Dynamic = (flighthq._internal._StaticIndex.readArray(out, 1.0) - flighthq._internal._StaticIndex.readArray(out, (_Runtime.field(out, 'length') - 1.0)));
       if ((cast ((cast ((dx * dx) + (dy * dy)) : Float) <= (cast pointEpsSq : Float)) : Bool)) { _Runtime.setLength(out, (out.length - 2.0)); }
     }
     return cast out;
@@ -190,8 +190,8 @@ class OffsetPath {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
-          var x:Dynamic = _Runtime.getIndex(contour, i);
-          var y:Dynamic = _Runtime.getIndex(contour, (i + 1.0));
+          var x:Dynamic = flighthq._internal._StaticIndex.readArray(contour, i);
+          var y:Dynamic = flighthq._internal._StaticIndex.readArray(contour, (i + 1.0));
           if ((cast ((cast x : Float) < (cast minX : Float)) : Bool)) { (minX = cast (x : Dynamic)); }
           if ((cast ((cast x : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (x : Dynamic)); }
           if ((cast ((cast y : Float) < (cast minY : Float)) : Bool)) { (minY = cast (y : Dynamic)); }
@@ -213,7 +213,7 @@ class OffsetPath {
     {
       var k:Dynamic = (count - 2.0);
       while ((cast ((cast k : Float) >= (cast 1.0 : Float)) : Bool)) {
-        _Runtime.pushMany(loop, cast ([_Runtime.getIndex(vertices, (2.0 * k)), _Runtime.getIndex(vertices, ((2.0 * k) + 1.0))] : Array<Dynamic>));
+        _Runtime.pushMany(loop, cast ([flighthq._internal._StaticIndex.readArray(vertices, (2.0 * k)), flighthq._internal._StaticIndex.readArray(vertices, ((2.0 * k) + 1.0))] : Array<Dynamic>));
         k--;
       }
     }
@@ -237,7 +237,7 @@ class OffsetPath {
       var k:Dynamic = 0.0;
       while ((cast ((cast k : Float) < (cast count : Float)) : Bool)) {
         var kn:Dynamic = _Runtime.fmod((k + 1.0), count);
-        (area = cast ((area + ((_Runtime.getIndex(vertices, (2.0 * k)) * _Runtime.getIndex(vertices, ((2.0 * kn) + 1.0))) - (_Runtime.getIndex(vertices, (2.0 * kn)) * _Runtime.getIndex(vertices, ((2.0 * k) + 1.0))))) : Dynamic));
+        (area = cast ((area + ((flighthq._internal._StaticIndex.readArray(vertices, (2.0 * k)) * flighthq._internal._StaticIndex.readArray(vertices, ((2.0 * kn) + 1.0))) - (flighthq._internal._StaticIndex.readArray(vertices, (2.0 * kn)) * flighthq._internal._StaticIndex.readArray(vertices, ((2.0 * k) + 1.0))))) : Dynamic));
         k++;
       }
     }
@@ -260,8 +260,8 @@ class OffsetPath {
     var dy:Dynamic = cast _Runtime.UNDEFINED;
     n = _Runtime.field(contour, 'length');
     if ((cast ((cast n : Float) < (cast 6.0 : Float)) : Bool)) { return cast false; }
-    dx = (_Runtime.getIndex(contour, 0.0) - _Runtime.getIndex(contour, (n - 2.0)));
-    dy = (_Runtime.getIndex(contour, 1.0) - _Runtime.getIndex(contour, (n - 1.0)));
+    dx = (flighthq._internal._StaticIndex.readArray(contour, 0.0) - flighthq._internal._StaticIndex.readArray(contour, (n - 2.0)));
+    dy = (flighthq._internal._StaticIndex.readArray(contour, 1.0) - flighthq._internal._StaticIndex.readArray(contour, (n - 1.0)));
     return cast ((cast ((dx * dx) + (dy * dy)) : Float) <= (cast pointEpsSq : Float));
     return cast null;
   }
@@ -286,14 +286,14 @@ class OffsetPath {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     count = (_Runtime.field(vertices, 'length') / 2.0);
     out = _Runtime.createArray(_Runtime.field(vertices, 'length'));
-    _Runtime.setIndex(out, 0.0, _Runtime.getIndex(vertices, 0.0));
-    _Runtime.setIndex(out, 1.0, _Runtime.getIndex(vertices, 1.0));
+    flighthq._internal._StaticIndex.writeArray(out, 0.0, flighthq._internal._StaticIndex.readArray(vertices, 0.0));
+    flighthq._internal._StaticIndex.writeArray(out, 1.0, flighthq._internal._StaticIndex.readArray(vertices, 1.0));
     {
       var k:Dynamic = 1.0;
       while ((cast ((cast k : Float) < (cast count : Float)) : Bool)) {
         var source:Dynamic = (count - k);
-        _Runtime.setIndex(out, (2.0 * k), _Runtime.getIndex(vertices, (2.0 * source)));
-        _Runtime.setIndex(out, ((2.0 * k) + 1.0), _Runtime.getIndex(vertices, ((2.0 * source) + 1.0)));
+        flighthq._internal._StaticIndex.writeArray(out, (2.0 * k), flighthq._internal._StaticIndex.readArray(vertices, (2.0 * source)));
+        flighthq._internal._StaticIndex.writeArray(out, ((2.0 * k) + 1.0), flighthq._internal._StaticIndex.readArray(vertices, ((2.0 * source) + 1.0)));
         k++;
       }
     }

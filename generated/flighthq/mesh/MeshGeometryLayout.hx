@@ -46,7 +46,7 @@ class MeshGeometryLayout {
           {
             var c:Dynamic = 0.0;
             while ((cast ((cast c : Float) < (cast componentCount : Float)) : Bool)) {
-              _Runtime.setIndex(dstVertices, ((dstBase + dstFloatOffset) + c), _Runtime.getIndex(srcVerts, ((srcBase + srcFloatOffset) + c)));
+              flighthq._internal._StaticIndex.writeFloat32Array(dstVertices, ((dstBase + dstFloatOffset) + c), flighthq._internal._StaticIndex.readFloat32Array(srcVerts, ((srcBase + srcFloatOffset) + c)));
               c++;
             }
           }

@@ -86,12 +86,12 @@ class TextShaperRun {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(glyphIds, 'length') : Float)) : Bool)) {
-        var extents:Dynamic = _Runtime.callProperty(backend, 'getGlyphExtents', cast ([_Runtime.getIndex(glyphIds, i)] : Array<Dynamic>));
+        var extents:Dynamic = _Runtime.callProperty(backend, 'getGlyphExtents', cast ([flighthq._internal._StaticIndex.readArray(glyphIds, i)] : Array<Dynamic>));
         if ((cast !_Runtime.strictEquals(extents, null) : Bool)) {
-          _Runtime.setIndex(out, i, extents);
+          flighthq._internal._StaticIndex.writeArray(out, i, extents);
           resolved++;
         } else {
-          _Runtime.setIndex(out, i, { height: 0.0, width: 0.0, xBearing: 0.0, yBearing: 0.0 });
+          flighthq._internal._StaticIndex.writeArray(out, i, { height: 0.0, width: 0.0, xBearing: 0.0, yBearing: 0.0 });
         }
         i++;
       }
@@ -153,7 +153,7 @@ class TextShaperRun {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(result, 'glyphs'), 'length') : Float)) : Bool)) {
-        _Runtime.callProperty(glyphs, 'push', cast ([_Runtime.getIndex(_Runtime.field(result, 'glyphs'), i)] : Array<Dynamic>));
+        _Runtime.callProperty(glyphs, 'push', cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(result, 'glyphs'), i)] : Array<Dynamic>));
         i++;
       }
     }

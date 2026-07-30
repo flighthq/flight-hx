@@ -31,14 +31,14 @@ class WgpuUnlitPrelude {
       (binding = cast ({ bindGroup: bindGroup, buffer: buffer } : Dynamic));
       ((cast _Runtime.field(scene, 'materialBindGroups') : flighthq._internal._WeakMap).set(materialKey, binding));
     }
-    _Runtime.setIndex(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 0.0, _Runtime.getIndex(color, 0.0));
-    _Runtime.setIndex(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 1.0, _Runtime.getIndex(color, 1.0));
-    _Runtime.setIndex(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 2.0, _Runtime.getIndex(color, 2.0));
-    _Runtime.setIndex(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 3.0, _Runtime.getIndex(color, 3.0));
-    _Runtime.setIndex(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 4.0, intensity);
-    _Runtime.setIndex(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 5.0, alphaCutoff);
-    _Runtime.setIndex(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 6.0, 0.0);
-    _Runtime.setIndex(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 7.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 0.0, flighthq._internal._StaticIndex.readArray(color, 0.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 1.0, flighthq._internal._StaticIndex.readArray(color, 1.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 2.0, flighthq._internal._StaticIndex.readArray(color, 2.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 3.0, flighthq._internal._StaticIndex.readArray(color, 3.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 4.0, intensity);
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 5.0, alphaCutoff);
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 6.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 7.0, 0.0);
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(binding, 'buffer'), 0.0, _Runtime.field(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 'buffer'), 0.0, WgpuUnlitPrelude.UNLIT_UNIFORM_BYTES__wgpuUnlitPrelude] : Array<Dynamic>));
     _Runtime.callValue(stashWgpuUvTransform, cast ([state, colorMap] : Array<Dynamic>));
     return cast _Runtime.field(binding, 'bindGroup');

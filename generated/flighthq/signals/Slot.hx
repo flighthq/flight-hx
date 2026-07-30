@@ -25,7 +25,7 @@ class Slot {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(data, 'priorities'), 'length') : Float)) : Bool)) {
-        if ((cast ((cast priority : Float) > (cast _Runtime.getIndex(_Runtime.field(data, 'priorities'), i) : Float)) : Bool)) {
+        if ((cast ((cast priority : Float) > (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(data, 'priorities'), i) : Float)) : Bool)) {
           _Runtime.splice(_Runtime.field(data, 'slots'), Std.int(i), Std.int(0.0), [slot]);
           _Runtime.splice(_Runtime.field(data, 'priorities'), Std.int(i), Std.int(0.0), [priority]);
           _Runtime.splice(_Runtime.field(data, 'repeat'), Std.int(i), Std.int(0.0), [repeat]);
@@ -46,7 +46,7 @@ class Slot {
     if ((cast _Runtime.strictEquals(data, null) : Bool)) { return; }
     i = _Runtime.field(_Runtime.field(data, 'slots'), 'length');
     while ((cast ((cast --i : Float) >= (cast 0.0 : Float)) : Bool)) {
-      if ((cast _Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(data, 'slots'), i), slot) : Bool)) {
+      if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(_Runtime.field(data, 'slots'), i), slot) : Bool)) {
         _Runtime.splice(_Runtime.field(data, 'slots'), Std.int(i), Std.int(1.0), []);
         _Runtime.splice(_Runtime.field(data, 'priorities'), Std.int(i), Std.int(1.0), []);
         _Runtime.splice(_Runtime.field(data, 'repeat'), Std.int(i), Std.int(1.0), []);
@@ -82,9 +82,9 @@ class Slot {
       _Runtime.setField(data, 'cancelled', false);
       i = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(data, 'slots'), 'length') : Float)) : Bool)) {
-        _Runtime.apply(_Runtime.getIndex(_Runtime.field(data, 'slots'), i), _Runtime.concatArrays([_Runtime.toArray(args)]));
+        _Runtime.apply(flighthq._internal._StaticIndex.readArray(_Runtime.field(data, 'slots'), i), _Runtime.concatArrays([_Runtime.toArray(args)]));
         if ((cast _Runtime.field(data, 'cancelled') : Bool)) { break; }
-        if ((cast !(cast _Runtime.getIndex(_Runtime.field(data, 'repeat'), i) : Bool) : Bool)) {
+        if ((cast !(cast flighthq._internal._StaticIndex.readArray(_Runtime.field(data, 'repeat'), i) : Bool) : Bool)) {
           _Runtime.splice(_Runtime.field(data, 'slots'), Std.int(i), Std.int(1.0), []);
           _Runtime.splice(_Runtime.field(data, 'priorities'), Std.int(i), Std.int(1.0), []);
           _Runtime.splice(_Runtime.field(data, 'repeat'), Std.int(i), Std.int(1.0), []);

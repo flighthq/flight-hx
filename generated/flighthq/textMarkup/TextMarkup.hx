@@ -79,7 +79,7 @@ class TextMarkup {
         {
           var i:Dynamic = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(aValue, 'length') : Float)) : Bool)) {
-            if ((cast !_Runtime.strictEquals(_Runtime.getIndex(aValue, i), _Runtime.getIndex(bValue, i)) : Bool)) { return cast false; }
+            if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(aValue, i), flighthq._internal._StaticIndex.readArray(bValue, i)) : Bool)) { return cast false; }
             i++;
           }
         }
@@ -231,9 +231,9 @@ class TextMarkup {
     output = '';
     runStart = 0.0;
     while ((cast ((cast runStart : Float) < (cast _Runtime.field(text, 'length') : Float)) : Bool)) {
-      var format:Dynamic = _Runtime.getIndex(formats, runStart);
+      var format:Dynamic = flighthq._internal._StaticIndex.readArray(formats, runStart);
       var runEnd:Dynamic = (runStart + 1.0);
-      while ((cast ((cast ((cast runEnd : Float) < (cast _Runtime.field(text, 'length') : Float)) : Bool) && (cast _Runtime.callValue(TextMarkup.equalsMarkupFormat__textMarkup, cast ([_Runtime.getIndex(formats, runEnd), format] : Array<Dynamic>)) : Bool)) : Bool)) { runEnd++; }
+      while ((cast ((cast ((cast runEnd : Float) < (cast _Runtime.field(text, 'length') : Float)) : Bool) && (cast _Runtime.callValue(TextMarkup.equalsMarkupFormat__textMarkup, cast ([flighthq._internal._StaticIndex.readArray(formats, runEnd), format] : Array<Dynamic>)) : Bool)) : Bool)) { runEnd++; }
       (output = cast ((output + _Runtime.callValue(TextMarkup.formatMarkupRun__textMarkup, cast ([format, _Runtime.slice(text, runStart, runEnd)] : Array<Dynamic>))) : Dynamic));
       (runStart = cast (runEnd : Dynamic));
     }
@@ -276,7 +276,7 @@ class TextMarkup {
       if ((cast ((cast _Runtime.field(stack, 'length') : Float) > (cast 1.0 : Float)) : Bool)) { _Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>)); }
       return;
     }
-    top = _Runtime.getIndex(stack, (_Runtime.field(stack, 'length') - 1.0));
+    top = flighthq._internal._StaticIndex.readArray(stack, (_Runtime.field(stack, 'length') - 1.0));
     handler = ((cast handlers : flighthq._internal._Map).get(name));
     if ((cast _Runtime.strictEquals(handler, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       if ((cast !(cast selfClosing : Bool) : Bool)) { _Runtime.callProperty(stack, 'push', cast ([_Runtime.mergeObjects([top])] : Array<Dynamic>)); }
@@ -333,11 +333,11 @@ class TextMarkup {
     tagPattern = _Runtime.regexp('<[^>]*>', 'g');
     index = 0.0;
     while ((cast !_Runtime.strictEquals((match = cast (_Runtime.callProperty(tagPattern, 'exec', cast ([html] : Array<Dynamic>)) : Dynamic)), null) : Bool)) {
-      _Runtime.callValue(TextMarkup.appendMarkupText__textMarkup, cast ([content, _Runtime.slice(html, index, _Runtime.field(match, 'index')), _Runtime.getIndex(stack, (_Runtime.field(stack, 'length') - 1.0))] : Array<Dynamic>));
+      _Runtime.callValue(TextMarkup.appendMarkupText__textMarkup, cast ([content, _Runtime.slice(html, index, _Runtime.field(match, 'index')), flighthq._internal._StaticIndex.readArray(stack, (_Runtime.field(stack, 'length') - 1.0))] : Array<Dynamic>));
       _Runtime.callValue(TextMarkup.handleMarkupToken__textMarkup, cast ([content, handlers, _Runtime.getIndex(match, 0.0), stack] : Array<Dynamic>));
       (index = cast ((_Runtime.field(match, 'index') + _Runtime.field(_Runtime.getIndex(match, 0.0), 'length')) : Dynamic));
     }
-    _Runtime.callValue(TextMarkup.appendMarkupText__textMarkup, cast ([content, _Runtime.slice(html, index, null), _Runtime.getIndex(stack, (_Runtime.field(stack, 'length') - 1.0))] : Array<Dynamic>));
+    _Runtime.callValue(TextMarkup.appendMarkupText__textMarkup, cast ([content, _Runtime.slice(html, index, null), flighthq._internal._StaticIndex.readArray(stack, (_Runtime.field(stack, 'length') - 1.0))] : Array<Dynamic>));
     return cast content;
     return cast null;
   }
@@ -346,7 +346,7 @@ class TextMarkup {
     var previous:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(start, end) : Bool)) { return; }
     if ((cast _Runtime.strictEquals(_Runtime.field(flighthq._internal.DynamicObject.keys(format), 'length'), 0.0) : Bool)) { return; }
-    previous = _Runtime.getIndex(ranges, (_Runtime.field(ranges, 'length') - 1.0));
+    previous = flighthq._internal._StaticIndex.readArray(ranges, (_Runtime.field(ranges, 'length') - 1.0));
     if ((cast ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(previous, 'end'), start) : Bool)) : Bool) && (cast _Runtime.callValue(TextMarkup.equalsMarkupFormat__textMarkup, cast ([_Runtime.field(previous, 'format'), format] : Array<Dynamic>)) : Bool)) : Bool)) {
       _Runtime.setField(previous, 'end', end);
       return;
@@ -378,7 +378,7 @@ class TextMarkup {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
-        _Runtime.setIndex(formats, i, {  });
+        flighthq._internal._StaticIndex.writeArray(formats, i, {  });
         i++;
       }
     }
@@ -388,7 +388,7 @@ class TextMarkup {
       {
         var i:Dynamic = start;
         while ((cast ((cast i : Float) < (cast end : Float)) : Bool)) {
-          _Runtime.setIndex(formats, i, _Runtime.mergeObjects([_Runtime.getIndex(formats, i), _Runtime.field(range, 'format')]));
+          flighthq._internal._StaticIndex.writeArray(formats, i, _Runtime.mergeObjects([flighthq._internal._StaticIndex.readArray(formats, i), _Runtime.field(range, 'format')]));
           i++;
         }
       }

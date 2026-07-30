@@ -41,16 +41,16 @@ class HueSaturationAdjustment {
       (s = cast (_Runtime.callValue(HueSaturationAdjustment.clamp01__hueSaturationAdjustment, cast ([(s * saturation)] : Array<Dynamic>)) : Dynamic));
       ln = _Runtime.callValue(HueSaturationAdjustment.clamp01__hueSaturationAdjustment, cast ([(l + lightness)] : Array<Dynamic>));
       if ((cast ((cast s : Float) <= (cast 0.0 : Float)) : Bool)) {
-        _Runtime.setIndex(out, 0.0, ln);
-        _Runtime.setIndex(out, 1.0, ln);
-        _Runtime.setIndex(out, 2.0, ln);
+        flighthq._internal._StaticIndex.writeArray(out, 0.0, ln);
+        flighthq._internal._StaticIndex.writeArray(out, 1.0, ln);
+        flighthq._internal._StaticIndex.writeArray(out, 2.0, ln);
         return;
       }
       q = ((cast ((cast ln : Float) < (cast 0.5 : Float)) : Bool) ? (cast (ln * (1.0 + s)) : Dynamic) : (cast ((ln + s) - (ln * s)) : Dynamic));
       p = ((2.0 * ln) - q);
-      _Runtime.setIndex(out, 0.0, _Runtime.callValue(HueSaturationAdjustment.hue2rgb__hueSaturationAdjustment, cast ([p, q, (h + (1.0 / 3.0))] : Array<Dynamic>)));
-      _Runtime.setIndex(out, 1.0, _Runtime.callValue(HueSaturationAdjustment.hue2rgb__hueSaturationAdjustment, cast ([p, q, h] : Array<Dynamic>)));
-      _Runtime.setIndex(out, 2.0, _Runtime.callValue(HueSaturationAdjustment.hue2rgb__hueSaturationAdjustment, cast ([p, q, (h - (1.0 / 3.0))] : Array<Dynamic>)));
+      flighthq._internal._StaticIndex.writeArray(out, 0.0, _Runtime.callValue(HueSaturationAdjustment.hue2rgb__hueSaturationAdjustment, cast ([p, q, (h + (1.0 / 3.0))] : Array<Dynamic>)));
+      flighthq._internal._StaticIndex.writeArray(out, 1.0, _Runtime.callValue(HueSaturationAdjustment.hue2rgb__hueSaturationAdjustment, cast ([p, q, h] : Array<Dynamic>)));
+      flighthq._internal._StaticIndex.writeArray(out, 2.0, _Runtime.callValue(HueSaturationAdjustment.hue2rgb__hueSaturationAdjustment, cast ([p, q, (h - (1.0 / 3.0))] : Array<Dynamic>)));
     };
     return cast _Runtime.mergeObjects([{ kind: 'HueSaturationAdjustment' }, options, { transform: transform }]);
     return cast null;

@@ -42,13 +42,13 @@ class GlPbrStandardBlock {
       return;
     }
     _Runtime.callValue(unpackColorToLinear, cast ([GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, _Runtime.field(standard, 'baseColor')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locBaseColor'), _Runtime.getIndex(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 0.0), _Runtime.getIndex(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 1.0), _Runtime.getIndex(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 2.0), _Runtime.getIndex(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 3.0));
+    flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locBaseColor'), flighthq._internal._StaticIndex.readArray(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 0.0), flighthq._internal._StaticIndex.readArray(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 1.0), flighthq._internal._StaticIndex.readArray(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 2.0), flighthq._internal._StaticIndex.readArray(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 3.0));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locMetallic'), _Runtime.field(standard, 'metallic'));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locRoughness'), _Runtime.field(standard, 'roughness'));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locNormalScale'), _Runtime.field(standard, 'normalScale'));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locOcclusionStrength'), _Runtime.field(standard, 'occlusionStrength'));
     _Runtime.callValue(unpackColorToLinear, cast ([GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, _Runtime.field(standard, 'emissive')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(program, 'locEmissive'), _Runtime.getIndex(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 0.0), _Runtime.getIndex(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 1.0), _Runtime.getIndex(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 2.0));
+    flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(program, 'locEmissive'), flighthq._internal._StaticIndex.readArray(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 0.0), flighthq._internal._StaticIndex.readArray(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 1.0), flighthq._internal._StaticIndex.readArray(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 2.0));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locEmissiveStrength'), _Runtime.field(standard, 'emissiveStrength'));
     _Runtime.callValue(bindGlPbrStandardTexture, cast ([state, _Runtime.field(standard, 'baseColorMap'), _Runtime.field(program, 'locBaseColorMap'), GL_PBR_BASE_COLOR_TEXTURE_UNIT] : Array<Dynamic>));
     _Runtime.callValue(bindGlPbrStandardTexture, cast ([state, _Runtime.field(standard, 'normalMap'), _Runtime.field(program, 'locNormalMap'), GL_PBR_NORMAL_TEXTURE_UNIT] : Array<Dynamic>));

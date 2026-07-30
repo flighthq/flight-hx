@@ -16,7 +16,7 @@ class ColorAdjustmentResolution {
   public static final COLOR_ADJUSTMENT_CHANNEL_MIXING:Dynamic = 2.0;
 
   public static function isAffineColorMatrix(matrix:Array<Float>):Bool {
-    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 1.0), 0.0) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 2.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 3.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 5.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 7.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 8.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 10.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 11.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 13.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 15.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 16.0), 0.0) : Bool)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 17.0), 0.0));
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(matrix, 1.0), 0.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(matrix, 2.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(matrix, 3.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(matrix, 5.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(matrix, 7.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(matrix, 8.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(matrix, 10.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(matrix, 11.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(matrix, 13.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(matrix, 15.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(matrix, 16.0), 0.0) : Bool)), function():Dynamic return cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(matrix, 17.0), 0.0));
     return cast null;
   }
 
@@ -30,20 +30,20 @@ class ColorAdjustmentResolution {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(adjustments, 'length') : Float)) : Bool)) {
-        var matrix:Dynamic = _Runtime.callValue(getAdjustmentColorMatrix, cast ([_Runtime.getIndex(adjustments, i)] : Array<Dynamic>));
+        var matrix:Dynamic = _Runtime.callValue(getAdjustmentColorMatrix, cast ([flighthq._internal._StaticIndex.readArray(adjustments, i)] : Array<Dynamic>));
         if ((cast _Runtime.strictEquals(matrix, null) : Bool)) { (inlineable = cast (false : Dynamic)); } else { _Runtime.callProperty(matrices, 'push', cast ([matrix] : Array<Dynamic>)); }
         i++;
       }
     }
     fused = _Runtime.callValue(fuseColorMatrices, cast ([matrices] : Array<Dynamic>));
-    (out.redMultiplier = cast (_Runtime.getIndex(fused, 0.0) : Dynamic));
-    (out.greenMultiplier = cast (_Runtime.getIndex(fused, 6.0) : Dynamic));
-    (out.blueMultiplier = cast (_Runtime.getIndex(fused, 12.0) : Dynamic));
-    (out.alphaMultiplier = cast (_Runtime.getIndex(fused, 18.0) : Dynamic));
-    (out.redOffset = cast (_Runtime.getIndex(fused, 4.0) : Dynamic));
-    (out.greenOffset = cast (_Runtime.getIndex(fused, 9.0) : Dynamic));
-    (out.blueOffset = cast (_Runtime.getIndex(fused, 14.0) : Dynamic));
-    (out.alphaOffset = cast (_Runtime.getIndex(fused, 19.0) : Dynamic));
+    (out.redMultiplier = cast (flighthq._internal._StaticIndex.readArray(fused, 0.0) : Dynamic));
+    (out.greenMultiplier = cast (flighthq._internal._StaticIndex.readArray(fused, 6.0) : Dynamic));
+    (out.blueMultiplier = cast (flighthq._internal._StaticIndex.readArray(fused, 12.0) : Dynamic));
+    (out.alphaMultiplier = cast (flighthq._internal._StaticIndex.readArray(fused, 18.0) : Dynamic));
+    (out.redOffset = cast (flighthq._internal._StaticIndex.readArray(fused, 4.0) : Dynamic));
+    (out.greenOffset = cast (flighthq._internal._StaticIndex.readArray(fused, 9.0) : Dynamic));
+    (out.blueOffset = cast (flighthq._internal._StaticIndex.readArray(fused, 14.0) : Dynamic));
+    (out.alphaOffset = cast (flighthq._internal._StaticIndex.readArray(fused, 19.0) : Dynamic));
     return cast ((cast ((cast inlineable : Bool) && (cast _Runtime.callValue(isAffineColorMatrix, cast ([fused] : Array<Dynamic>)) : Bool)) : Bool) ? (cast COLOR_ADJUSTMENT_AFFINE : Dynamic) : (cast COLOR_ADJUSTMENT_CHANNEL_MIXING : Dynamic));
     return cast null;
   }

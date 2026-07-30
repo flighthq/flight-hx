@@ -247,7 +247,7 @@ class FocusManager {
         (index = cast (_Runtime.fmod((index + _Runtime.field(order, 'length')), _Runtime.field(order, 'length')) : Dynamic));
       }
     }
-    next = _Runtime.getIndex(order, index);
+    next = flighthq._internal._StaticIndex.readArray(order, index);
     _Runtime.callValue(setFocusedNode, cast ([manager, next] : Array<Dynamic>));
     return cast next;
     return cast null;

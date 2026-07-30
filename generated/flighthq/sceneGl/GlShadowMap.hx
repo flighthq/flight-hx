@@ -88,7 +88,7 @@ class GlShadowMap {
     }] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);
     flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER, prevFramebuffer);
-    flighthq._internal.backend.WebGl2Backend.viewport(gl, _Runtime.getIndex(prevViewport, 0.0), _Runtime.getIndex(prevViewport, 1.0), _Runtime.getIndex(prevViewport, 2.0), _Runtime.getIndex(prevViewport, 3.0));
+    flighthq._internal.backend.WebGl2Backend.viewport(gl, flighthq._internal._StaticIndex.readInt32Array(prevViewport, 0.0), flighthq._internal._StaticIndex.readInt32Array(prevViewport, 1.0), flighthq._internal._StaticIndex.readInt32Array(prevViewport, 2.0), flighthq._internal._StaticIndex.readInt32Array(prevViewport, 3.0));
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.CULL_FACE);
     flighthq._internal.backend.WebGl2Backend.cullFace(gl, flighthq._internal.backend.WebGl2Backend.BACK);
     _Runtime.setField(runtime, 'shadow', { matrix: matrix, texture: _Runtime.field(target, 'depthTexture') });

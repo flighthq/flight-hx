@@ -22,12 +22,12 @@ class EdgeDetectMath {
     g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255) / 255.0);
     b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255) / 255.0);
     a = ((_Runtime.toInt32(color) & 255) / 255.0);
-    _Runtime.setIndex(out, 0.0, threshold);
-    _Runtime.setIndex(out, 1.0, feather);
-    _Runtime.setIndex(out, 2.0, r);
-    _Runtime.setIndex(out, 3.0, g);
-    _Runtime.setIndex(out, 4.0, b);
-    _Runtime.setIndex(out, 5.0, a);
+    flighthq._internal._StaticIndex.writeArray(out, 0.0, threshold);
+    flighthq._internal._StaticIndex.writeArray(out, 1.0, feather);
+    flighthq._internal._StaticIndex.writeArray(out, 2.0, r);
+    flighthq._internal._StaticIndex.writeArray(out, 3.0, g);
+    flighthq._internal._StaticIndex.writeArray(out, 4.0, b);
+    flighthq._internal._StaticIndex.writeArray(out, 5.0, a);
   }
 
   public static function computeOutlineThicknessPx(effect:OutlineEffect):Float {
@@ -40,28 +40,28 @@ class EdgeDetectMath {
     var threshold:Dynamic = cast _Runtime.UNDEFINED;
     strength = HxMath.max(0.0, HxMath.min(1.0, _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0)));
     threshold = HxMath.max(0.01, HxMath.min(1.0, (1.0 - (strength * 0.95))));
-    _Runtime.setIndex(out, 0.0, threshold);
-    _Runtime.setIndex(out, 1.0, strength);
+    flighthq._internal._StaticIndex.writeArray(out, 0.0, threshold);
+    flighthq._internal._StaticIndex.writeArray(out, 1.0, strength);
   }
 
   public static function getSobelKernelCoefficients(out:flighthq._internal._Float32Array):Void {
-    _Runtime.setIndex(out, 0.0, -1.0);
-    _Runtime.setIndex(out, 1.0, 0.0);
-    _Runtime.setIndex(out, 2.0, 1.0);
-    _Runtime.setIndex(out, 3.0, -2.0);
-    _Runtime.setIndex(out, 4.0, 0.0);
-    _Runtime.setIndex(out, 5.0, 2.0);
-    _Runtime.setIndex(out, 6.0, -1.0);
-    _Runtime.setIndex(out, 7.0, 0.0);
-    _Runtime.setIndex(out, 8.0, 1.0);
-    _Runtime.setIndex(out, 9.0, -1.0);
-    _Runtime.setIndex(out, 10.0, -2.0);
-    _Runtime.setIndex(out, 11.0, -1.0);
-    _Runtime.setIndex(out, 12.0, 0.0);
-    _Runtime.setIndex(out, 13.0, 0.0);
-    _Runtime.setIndex(out, 14.0, 0.0);
-    _Runtime.setIndex(out, 15.0, 1.0);
-    _Runtime.setIndex(out, 16.0, 2.0);
-    _Runtime.setIndex(out, 17.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 0.0, -1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 1.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 2.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 3.0, -2.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 4.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 5.0, 2.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 6.0, -1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 7.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 8.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 9.0, -1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 10.0, -2.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 11.0, -1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 12.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 13.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 14.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 15.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 16.0, 2.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 17.0, 1.0);
   }
 }

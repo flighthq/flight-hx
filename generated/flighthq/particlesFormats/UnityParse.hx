@@ -137,7 +137,7 @@ class UnityParse {
     emRaw = (cast _Runtime.field(raw, 'emission') : Null<Dynamic>);
     spawnRate = ((_Runtime.callValue(UnityParse.mmLow__unityParse, cast ([_Runtime.optionalField(emRaw, 'rateOverTime'), 10.0] : Array<Dynamic>)) + _Runtime.callValue(UnityParse.mmHigh__unityParse, cast ([_Runtime.optionalField(emRaw, 'rateOverTime'), 10.0] : Array<Dynamic>))) * 0.5);
     burstsRaw = ((cast _Runtime.isArray(_Runtime.optionalField(emRaw, 'bursts')) : Bool) ? (cast (cast _Runtime.field(emRaw, 'bursts') : Array<Dynamic>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
-    burst0 = _Runtime.getIndex(burstsRaw, 0.0);
+    burst0 = flighthq._internal._StaticIndex.readArray(burstsRaw, 0.0);
     burstCount = _Runtime.select(burst0, function():Dynamic return cast _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(burst0, 'count'), 0.0] : Array<Dynamic>)), function():Dynamic return cast 0.0);
     burstInterval = ((cast _Runtime.andValue(burst0, function():Dynamic return cast !_Runtime.strictEquals(_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(burst0, 'cycleCount'), 1.0] : Array<Dynamic>)), 1.0)) : Bool) ? (cast _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(burst0, 'repeatInterval'), 0.0] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
     shapeRaw = (cast _Runtime.field(raw, 'shape') : Null<Dynamic>);
@@ -221,7 +221,7 @@ class UnityParse {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(arr, 'length') : Float)) : Bool)) {
-        var k:Dynamic = (cast _Runtime.getIndex(arr, i) : Dynamic);
+        var k:Dynamic = (cast flighthq._internal._StaticIndex.readArray(arr, i) : Dynamic);
         var c:Dynamic = (cast _Runtime.coalesce(_Runtime.field(k, 'color'), function():Dynamic return cast k) : Dynamic);
         _Runtime.callProperty(keys, 'push', cast ([{ time: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(k, 'time'), (i / (_Runtime.field(arr, 'length') - 1.0))] : Array<Dynamic>)), r: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(c, 'r'), 1.0] : Array<Dynamic>)), g: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(c, 'g'), 1.0] : Array<Dynamic>)), b: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(c, 'b'), 1.0] : Array<Dynamic>)) }] : Array<Dynamic>));
         i++;
@@ -238,7 +238,7 @@ class UnityParse {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(arr, 'length') : Float)) : Bool)) {
-        var k:Dynamic = (cast _Runtime.getIndex(arr, i) : Dynamic);
+        var k:Dynamic = (cast flighthq._internal._StaticIndex.readArray(arr, i) : Dynamic);
         _Runtime.callProperty(keys, 'push', cast ([{ time: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(k, 'time'), (i / (_Runtime.field(arr, 'length') - 1.0))] : Array<Dynamic>)), value: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(k, 'alpha'), 1.0] : Array<Dynamic>)) }] : Array<Dynamic>));
         i++;
       }
@@ -257,7 +257,7 @@ class UnityParse {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(arr, 'length') : Float)) : Bool)) {
-        var k:Dynamic = (cast _Runtime.getIndex(arr, i) : Dynamic);
+        var k:Dynamic = (cast flighthq._internal._StaticIndex.readArray(arr, i) : Dynamic);
         _Runtime.callProperty(keys, 'push', cast ([{ time: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(k, 'time'), (i / (_Runtime.field(arr, 'length') - 1.0))] : Array<Dynamic>)), value: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(k, 'value'), 1.0] : Array<Dynamic>)) }] : Array<Dynamic>));
         i++;
       }

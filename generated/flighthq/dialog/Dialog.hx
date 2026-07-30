@@ -61,7 +61,7 @@ class Dialog {
       var accept:Dynamic = {  };
       var extensions:Dynamic = _Runtime.callProperty(_Runtime.callProperty(_Runtime.field(filter, 'extensions'), 'filter', cast ([function(e:Dynamic) return !_Runtime.strictEquals(e, '*')] : Array<Dynamic>)), 'map', cast ([function(e:Dynamic) return ((cast StringTools.startsWith(e, '.') : Bool) ? (cast e : Dynamic) : (cast '.' + Std.string(e) + '' : Dynamic))] : Array<Dynamic>));
       if ((cast ((cast _Runtime.field(extensions, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-        var mime:Dynamic = _Runtime.select(_Runtime.andValue(_Runtime.field(filter, 'mimeTypes'), function():Dynamic return cast ((cast _Runtime.field(_Runtime.field(filter, 'mimeTypes'), 'length') : Float) > (cast 0.0 : Float))), function():Dynamic return cast _Runtime.getIndex(_Runtime.field(filter, 'mimeTypes'), 0.0), function():Dynamic return cast 'application/octet-stream');
+        var mime:Dynamic = _Runtime.select(_Runtime.andValue(_Runtime.field(filter, 'mimeTypes'), function():Dynamic return cast ((cast _Runtime.field(_Runtime.field(filter, 'mimeTypes'), 'length') : Float) > (cast 0.0 : Float))), function():Dynamic return cast flighthq._internal._StaticIndex.readArray(_Runtime.field(filter, 'mimeTypes'), 0.0), function():Dynamic return cast 'application/octet-stream');
         _Runtime.setIndex(accept, mime, extensions);
       }
       if (_Runtime.truthy(_Runtime.field(filter, 'mimeTypes'))) {
@@ -309,7 +309,7 @@ class Dialog {
             var i:Dynamic = 0.0;
             while ((cast ((cast i : Float) < (cast _Runtime.field(files, 'length') : Float)) : Bool)) {
               var rel:Dynamic = _Runtime.coalesce(_Runtime.field((cast _Runtime.getIndex(files, i) : { @:optional var webkitRelativePath:String; }), 'webkitRelativePath'), function():Dynamic return cast '');
-              var dirName:Dynamic = _Runtime.orValue(_Runtime.getIndex(_Runtime.callProperty(rel, 'split', cast (['/'] : Array<Dynamic>)), 0.0), function():Dynamic return cast _Runtime.field(_Runtime.getIndex(files, i), 'name'));
+              var dirName:Dynamic = _Runtime.orValue(flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(rel, 'split', cast (['/'] : Array<Dynamic>)), 0.0), function():Dynamic return cast _Runtime.field(_Runtime.getIndex(files, i), 'name'));
               if ((cast !(cast ((cast seenDirs : flighthq._internal._Set).has(dirName)) : Bool) : Bool)) {
                 ((cast seenDirs : flighthq._internal._Set).add(dirName));
                 _Runtime.callProperty(handles, 'push', cast ([{ kind: 'Directory', name: dirName, path: null }] : Array<Dynamic>));
@@ -405,7 +405,7 @@ class Dialog {
                   __flowBranch25 = flighthq._internal._Async.protect(function():Dynamic {
                     var parts:Dynamic = cast _Runtime.UNDEFINED;
                     parts = _Runtime.callProperty(_Runtime.replace(_Runtime.field(options, 'defaultPath'), _Runtime.regexp('\\\\', 'g'), '/', false), 'split', cast (['/'] : Array<Dynamic>));
-                    _Runtime.setField(pickerOptions, 'suggestedName', _Runtime.getIndex(parts, (_Runtime.field(parts, 'length') - 1.0)));
+                    _Runtime.setField(pickerOptions, 'suggestedName', flighthq._internal._StaticIndex.readArray(parts, (_Runtime.field(parts, 'length') - 1.0)));
                     return flighthq._internal._Async.flowNormal();
                   });
                 } else {

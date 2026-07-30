@@ -60,14 +60,14 @@ class ReversePath {
     var last:Dynamic = cast _Runtime.UNDEFINED;
     pts = _Runtime.field(subpath, 'points');
     if ((cast _Runtime.strictEquals(_Runtime.field(pts, 'length'), 0.0) : Bool)) { return; }
-    last = _Runtime.getIndex(pts, (_Runtime.field(pts, 'length') - 1.0));
+    last = flighthq._internal._StaticIndex.readArray(pts, (_Runtime.field(pts, 'length') - 1.0));
     _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
     _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.field(last, 'x'), _Runtime.field(last, 'y')] : Array<Dynamic>));
     {
       var i:Dynamic = (_Runtime.field(pts, 'length') - 1.0);
       while ((cast ((cast i : Float) >= (cast 1.0 : Float)) : Bool)) {
-        var from:Dynamic = _Runtime.getIndex(pts, i);
-        var to:Dynamic = _Runtime.getIndex(pts, (i - 1.0));
+        var from:Dynamic = flighthq._internal._StaticIndex.readArray(pts, i);
+        var to:Dynamic = flighthq._internal._StaticIndex.readArray(pts, (i - 1.0));
         if ((cast ((cast _Runtime.strictEquals(_Runtime.field(from, 'kind'), 'line') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(from, 'kind'), 'move') : Bool)) : Bool)) {
           _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.LINE_TO] : Array<Dynamic>));
           _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.field(to, 'x'), _Runtime.field(to, 'y')] : Array<Dynamic>));

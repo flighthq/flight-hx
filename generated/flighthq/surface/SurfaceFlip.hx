@@ -100,10 +100,10 @@ class SurfaceFlip {
             if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast sStride : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) >= (cast dStride : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Dynamic = (((sy * sStride) + sx) * 4.0);
             var di:Dynamic = (((dy * dStride) + dx) * 4.0);
-            _Runtime.setIndex(dd, di, _Runtime.getIndex(sd, si));
-            _Runtime.setIndex(dd, (di + 1.0), _Runtime.getIndex(sd, (si + 1.0)));
-            _Runtime.setIndex(dd, (di + 2.0), _Runtime.getIndex(sd, (si + 2.0)));
-            _Runtime.setIndex(dd, (di + 3.0), _Runtime.getIndex(sd, (si + 3.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, di, flighthq._internal._StaticIndex.readUint8ClampedArray(sd, si));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 1.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 2.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 3.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 3.0)));
             px++;
           }
         }
@@ -121,9 +121,9 @@ class SurfaceFlip {
     {
       var c:Dynamic = 0.0;
       while ((cast ((cast c : Float) < (cast 4.0 : Float)) : Bool)) {
-        var t:Dynamic = _Runtime.getIndex(data, (a + c));
-        _Runtime.setIndex(data, (a + c), _Runtime.getIndex(data, (b + c)));
-        _Runtime.setIndex(data, (b + c), t);
+        var t:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (a + c));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (a + c), flighthq._internal._StaticIndex.readUint8ClampedArray(data, (b + c)));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (b + c), t);
         c++;
       }
     }

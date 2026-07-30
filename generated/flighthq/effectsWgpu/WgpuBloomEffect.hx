@@ -40,12 +40,12 @@ class WgpuBloomEffect {
     temp = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
     brightPipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'bloom.bright', WgpuBloomEffect.BLOOM_BRIGHT_FRAGMENT_WGSL__wgpuBloomEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), bright, brightPipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, threshold);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, threshold);
     }] : Array<Dynamic>));
     _Runtime.callValue(applyGaussianBlurToWgpu, cast ([state, bright, blurred, temp, { blurX: radius, blurY: radius }] : Array<Dynamic>));
     compositePipeline = _Runtime.callValue(WgpuBloomEffect.getBloomCompositePipeline__wgpuBloomEffect, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuDualSourceEffectPass, cast ([state, (cast source : WgpuRenderTarget), blurred, (cast dest : WgpuRenderTarget), compositePipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, intensity);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
     }] : Array<Dynamic>));
     _Runtime.callValue(releaseWgpuRenderTarget, cast ([pool, bright] : Array<Dynamic>));
     _Runtime.callValue(releaseWgpuRenderTarget, cast ([pool, blurred] : Array<Dynamic>));

@@ -92,7 +92,7 @@ class GlParticleEmitter3D {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-          _Runtime.callValue(GlParticleEmitter3D.collectParticleEmitter3DNodes__glParticleEmitter3D, cast ([_Runtime.getIndex(children, i), out] : Array<Dynamic>));
+          _Runtime.callValue(GlParticleEmitter3D.collectParticleEmitter3DNodes__glParticleEmitter3D, cast ([flighthq._internal._StaticIndex.readArray(children, i), out] : Array<Dynamic>));
           i++;
         }
       }
@@ -166,21 +166,21 @@ class GlParticleEmitter3D {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast particleCount : Float)) : Bool)) {
         var tt:Dynamic = (i * GlParticleEmitter3D.PARTICLE_TRANSFORM_STRIDE__glParticleEmitter3D);
-        var lx:Dynamic = _Runtime.getIndex(transforms, tt);
-        var ly:Dynamic = _Runtime.getIndex(transforms, (tt + 1.0));
-        var rotation:Dynamic = _Runtime.getIndex(transforms, (tt + 2.0));
-        var scale:Dynamic = _Runtime.getIndex(transforms, (tt + 3.0));
-        var lz:Dynamic = _Runtime.getIndex(positionsZ, i);
-        var wx:Dynamic = ((cast worldSpace : Bool) ? (cast lx : Dynamic) : (cast ((((_Runtime.getIndex(wm, 0.0) * lx) + (_Runtime.getIndex(wm, 4.0) * ly)) + (_Runtime.getIndex(wm, 8.0) * lz)) + _Runtime.getIndex(wm, 12.0)) : Dynamic));
-        var wy:Dynamic = ((cast worldSpace : Bool) ? (cast ly : Dynamic) : (cast ((((_Runtime.getIndex(wm, 1.0) * lx) + (_Runtime.getIndex(wm, 5.0) * ly)) + (_Runtime.getIndex(wm, 9.0) * lz)) + _Runtime.getIndex(wm, 13.0)) : Dynamic));
-        var wz:Dynamic = ((cast worldSpace : Bool) ? (cast lz : Dynamic) : (cast ((((_Runtime.getIndex(wm, 2.0) * lx) + (_Runtime.getIndex(wm, 6.0) * ly)) + (_Runtime.getIndex(wm, 10.0) * lz)) + _Runtime.getIndex(wm, 14.0)) : Dynamic));
+        var lx:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, tt);
+        var ly:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 1.0));
+        var rotation:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 2.0));
+        var scale:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 3.0));
+        var lz:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(positionsZ, i);
+        var wx:Dynamic = ((cast worldSpace : Bool) ? (cast lx : Dynamic) : (cast ((((flighthq._internal._StaticIndex.readFloat32Array(wm, 0.0) * lx) + (flighthq._internal._StaticIndex.readFloat32Array(wm, 4.0) * ly)) + (flighthq._internal._StaticIndex.readFloat32Array(wm, 8.0) * lz)) + flighthq._internal._StaticIndex.readFloat32Array(wm, 12.0)) : Dynamic));
+        var wy:Dynamic = ((cast worldSpace : Bool) ? (cast ly : Dynamic) : (cast ((((flighthq._internal._StaticIndex.readFloat32Array(wm, 1.0) * lx) + (flighthq._internal._StaticIndex.readFloat32Array(wm, 5.0) * ly)) + (flighthq._internal._StaticIndex.readFloat32Array(wm, 9.0) * lz)) + flighthq._internal._StaticIndex.readFloat32Array(wm, 13.0)) : Dynamic));
+        var wz:Dynamic = ((cast worldSpace : Bool) ? (cast lz : Dynamic) : (cast ((((flighthq._internal._StaticIndex.readFloat32Array(wm, 2.0) * lx) + (flighthq._internal._StaticIndex.readFloat32Array(wm, 6.0) * ly)) + (flighthq._internal._StaticIndex.readFloat32Array(wm, 10.0) * lz)) + flighthq._internal._StaticIndex.readFloat32Array(wm, 14.0)) : Dynamic));
         var cosR:Dynamic = (HxMath.cos(rotation) * scale);
         var sinR:Dynamic = (HxMath.sin(rotation) * scale);
         var ct:Dynamic = (i * 3.0);
         var hasColors:Dynamic = ((cast !_Runtime.looseEquals(colors, null) : Bool) && (cast ((cast _Runtime.field(colors, 'length') : Float) > (cast (ct + 2.0) : Float)) : Bool));
-        var r:Dynamic = ((cast hasColors : Bool) ? (cast _Runtime.getIndex(colors, ct) : Dynamic) : (cast 1.0 : Dynamic));
-        var g:Dynamic = ((cast hasColors : Bool) ? (cast _Runtime.getIndex(colors, (ct + 1.0)) : Dynamic) : (cast 1.0 : Dynamic));
-        var b:Dynamic = ((cast hasColors : Bool) ? (cast _Runtime.getIndex(colors, (ct + 2.0)) : Dynamic) : (cast 1.0 : Dynamic));
+        var r:Dynamic = ((cast hasColors : Bool) ? (cast flighthq._internal._StaticIndex.readFloat32Array(colors, ct) : Dynamic) : (cast 1.0 : Dynamic));
+        var g:Dynamic = ((cast hasColors : Bool) ? (cast flighthq._internal._StaticIndex.readFloat32Array(colors, (ct + 1.0)) : Dynamic) : (cast 1.0 : Dynamic));
+        var b:Dynamic = ((cast hasColors : Bool) ? (cast flighthq._internal._StaticIndex.readFloat32Array(colors, (ct + 2.0)) : Dynamic) : (cast 1.0 : Dynamic));
         var u0:Dynamic = 0.0;
         var v0:Dynamic = 0.0;
         var u1:Dynamic = 1.0;
@@ -188,9 +188,9 @@ class GlParticleEmitter3D {
         var regionW:Dynamic = 1.0;
         var regionH:Dynamic = 1.0;
         if ((cast !_Runtime.strictEquals(regions, null) : Bool)) {
-          var id:Dynamic = _Runtime.getIndex(ids, i);
+          var id:Dynamic = flighthq._internal._StaticIndex.readUint16Array(ids, i);
           if ((cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) { i++; continue; }
-          var region:Dynamic = _Runtime.getIndex(regions, id);
+          var region:Dynamic = flighthq._internal._StaticIndex.readArray(regions, id);
           if ((cast ((cast ((cast _Runtime.field(region, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(region, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
           (u0 = cast ((_Runtime.field(region, 'x') * iw) : Dynamic));
           (v0 = cast ((_Runtime.field(region, 'y') * ih) : Dynamic));
@@ -199,23 +199,23 @@ class GlParticleEmitter3D {
           (regionW = cast (_Runtime.field(region, 'width') : Dynamic));
           (regionH = cast (_Runtime.field(region, 'height') : Dynamic));
         }
-        _Runtime.setIndex(instanceData, base, wx);
-        _Runtime.setIndex(instanceData, (base + 1.0), wy);
-        _Runtime.setIndex(instanceData, (base + 2.0), wz);
-        _Runtime.setIndex(instanceData, (base + 3.0), cosR);
-        _Runtime.setIndex(instanceData, (base + 4.0), sinR);
-        _Runtime.setIndex(instanceData, (base + 5.0), r);
-        _Runtime.setIndex(instanceData, (base + 6.0), g);
-        _Runtime.setIndex(instanceData, (base + 7.0), b);
-        _Runtime.setIndex(instanceData, (base + 8.0), _Runtime.getIndex(alphas, i));
-        _Runtime.setIndex(instanceData, (base + 9.0), u0);
-        _Runtime.setIndex(instanceData, (base + 10.0), v0);
-        _Runtime.setIndex(instanceData, (base + 11.0), u1);
-        _Runtime.setIndex(instanceData, (base + 12.0), v1);
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, base, wx);
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 1.0), wy);
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 2.0), wz);
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 3.0), cosR);
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 4.0), sinR);
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 5.0), r);
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 6.0), g);
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 7.0), b);
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 8.0), flighthq._internal._StaticIndex.readFloat32Array(alphas, i));
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 9.0), u0);
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 10.0), v0);
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 11.0), u1);
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 12.0), v1);
         var maxDim:Dynamic = ((cast ((cast regionW : Float) >= (cast regionH : Float)) : Bool) ? (cast regionW : Dynamic) : (cast regionH : Dynamic));
-        _Runtime.setIndex(instanceData, (base + 13.0), (regionW / maxDim));
-        _Runtime.setIndex(instanceData, (base + 14.0), (regionH / maxDim));
-        _Runtime.setIndex(instanceData, (base + 15.0), 0.0);
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 13.0), (regionW / maxDim));
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 14.0), (regionH / maxDim));
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 15.0), 0.0);
         (base = cast ((base + GlParticleEmitter3D.INSTANCE_FLOATS__glParticleEmitter3D) : Dynamic));
         drawCount++;
         i++;
@@ -286,15 +286,15 @@ class GlParticleEmitter3D {
     flighthq._internal.backend.WebGl2Backend.useProgram(gl, _Runtime.field(shader, 'program'));
     flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(shader, 'locViewProjection'), false, _Runtime.field(list, 'viewProjection').m);
     vm = camera.view.m;
-    flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(shader, 'locCameraRight'), _Runtime.getIndex(vm, 0.0), _Runtime.getIndex(vm, 4.0), _Runtime.getIndex(vm, 8.0));
-    flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(shader, 'locCameraUp'), _Runtime.getIndex(vm, 1.0), _Runtime.getIndex(vm, 5.0), _Runtime.getIndex(vm, 9.0));
+    flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(shader, 'locCameraRight'), flighthq._internal._StaticIndex.readFloat32Array(vm, 0.0), flighthq._internal._StaticIndex.readFloat32Array(vm, 4.0), flighthq._internal._StaticIndex.readFloat32Array(vm, 8.0));
+    flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(shader, 'locCameraUp'), flighthq._internal._StaticIndex.readFloat32Array(vm, 1.0), flighthq._internal._StaticIndex.readFloat32Array(vm, 5.0), flighthq._internal._StaticIndex.readFloat32Array(vm, 9.0));
     flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.DEPTH_TEST);
     flighthq._internal.backend.WebGl2Backend.depthMask(gl, false);
     flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.BLEND);
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(GlParticleEmitter3D.emitterScratch__glParticleEmitter3D, 'length') : Float)) : Bool)) {
-        var emitter:Dynamic = _Runtime.getIndex(GlParticleEmitter3D.emitterScratch__glParticleEmitter3D, i);
+        var emitter:Dynamic = flighthq._internal._StaticIndex.readArray(GlParticleEmitter3D.emitterScratch__glParticleEmitter3D, i);
         _Runtime.callValue(GlParticleEmitter3D.applyGlParticleBlendMode__glParticleEmitter3D, cast ([gl, _Runtime.field(emitter, 'blendMode')] : Array<Dynamic>));
         _Runtime.callValue(GlParticleEmitter3D.drawParticleEmitter3DNode__glParticleEmitter3D, cast ([state, shader, emitter] : Array<Dynamic>));
         i++;

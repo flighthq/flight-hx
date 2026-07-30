@@ -23,14 +23,14 @@ class LinearSampledGaussian {
         var i:Dynamic = (tap * 2.0);
         var posA:Dynamic = (i - radius);
         if ((cast ((cast (i + 1.0) : Float) < (cast size : Float)) : Bool)) {
-          var weightA:Dynamic = _Runtime.getIndex(LinearSampledGaussian.scratchWeights__linearSampledGaussian, i);
-          var weightB:Dynamic = _Runtime.getIndex(LinearSampledGaussian.scratchWeights__linearSampledGaussian, (i + 1.0));
+          var weightA:Dynamic = flighthq._internal._StaticIndex.readArray(LinearSampledGaussian.scratchWeights__linearSampledGaussian, i);
+          var weightB:Dynamic = flighthq._internal._StaticIndex.readArray(LinearSampledGaussian.scratchWeights__linearSampledGaussian, (i + 1.0));
           var combined:Dynamic = (weightA + weightB);
-          _Runtime.setIndex(outWeights, tap, combined);
-          _Runtime.setIndex(outOffsets, tap, ((cast _Runtime.strictEquals(combined, 0.0) : Bool) ? (cast (posA + 0.5) : Dynamic) : (cast (((posA * weightA) + ((posA + 1.0) * weightB)) / combined) : Dynamic)));
+          flighthq._internal._StaticIndex.writeArray(outWeights, tap, combined);
+          flighthq._internal._StaticIndex.writeArray(outOffsets, tap, ((cast _Runtime.strictEquals(combined, 0.0) : Bool) ? (cast (posA + 0.5) : Dynamic) : (cast (((posA * weightA) + ((posA + 1.0) * weightB)) / combined) : Dynamic)));
         } else {
-          _Runtime.setIndex(outWeights, tap, _Runtime.getIndex(LinearSampledGaussian.scratchWeights__linearSampledGaussian, i));
-          _Runtime.setIndex(outOffsets, tap, posA);
+          flighthq._internal._StaticIndex.writeArray(outWeights, tap, flighthq._internal._StaticIndex.readArray(LinearSampledGaussian.scratchWeights__linearSampledGaussian, i));
+          flighthq._internal._StaticIndex.writeArray(outOffsets, tap, posA);
         }
         tap++;
       }

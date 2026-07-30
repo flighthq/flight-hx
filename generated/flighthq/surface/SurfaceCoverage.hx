@@ -25,7 +25,7 @@ class SurfaceCoverage {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
-        if ((cast ((cast ((cast ((cast ((cast HxMath.abs((_Runtime.getIndex(data, i) - br)) : Float) > (cast channelTolerance : Float)) : Bool) || (cast ((cast HxMath.abs((_Runtime.getIndex(data, (i + 1.0)) - bg)) : Float) > (cast channelTolerance : Float)) : Bool)) : Bool) || (cast ((cast HxMath.abs((_Runtime.getIndex(data, (i + 2.0)) - bb)) : Float) > (cast channelTolerance : Float)) : Bool)) : Bool) || (cast ((cast HxMath.abs((_Runtime.getIndex(data, (i + 3.0)) - ba)) : Float) > (cast channelTolerance : Float)) : Bool)) : Bool)) {
+        if ((cast ((cast ((cast ((cast ((cast HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArray(data, i) - br)) : Float) > (cast channelTolerance : Float)) : Bool) || (cast ((cast HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)) - bg)) : Float) > (cast channelTolerance : Float)) : Bool)) : Bool) || (cast ((cast HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)) - bb)) : Float) > (cast channelTolerance : Float)) : Bool)) : Bool) || (cast ((cast HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0)) - ba)) : Float) > (cast channelTolerance : Float)) : Bool)) : Bool)) {
           covered++;
         }
         (i = cast ((i + 4.0) : Dynamic));

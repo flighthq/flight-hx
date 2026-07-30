@@ -18,7 +18,7 @@ class Traversal {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-        var child:Dynamic = (cast _Runtime.getIndex(children, i) : Node<Traits>);
+        var child:Dynamic = (cast flighthq._internal._StaticIndex.readArray(children, i) : Node<Traits>);
         if ((cast _Runtime.callValue(predicate, cast ([child] : Array<Dynamic>)) : Bool)) { return cast (cast child : NodeOf<Traits>); }
         var found:Dynamic = _Runtime.callValue(findNode, cast ([child, predicate] : Array<Dynamic>));
         if ((cast !_Runtime.strictEquals(found, null) : Bool)) { return cast found; }
@@ -50,8 +50,8 @@ class Traversal {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-        _Runtime.callValue(callback, cast ([(cast _Runtime.getIndex(children, i) : Node<Traits>)] : Array<Dynamic>));
-        _Runtime.callValue(forEachNodeDescendant, cast ([(cast _Runtime.getIndex(children, i) : Node<Traits>), callback] : Array<Dynamic>));
+        _Runtime.callValue(callback, cast ([(cast flighthq._internal._StaticIndex.readArray(children, i) : Node<Traits>)] : Array<Dynamic>));
+        _Runtime.callValue(forEachNodeDescendant, cast ([(cast flighthq._internal._StaticIndex.readArray(children, i) : Node<Traits>), callback] : Array<Dynamic>));
         i++;
       }
     }
@@ -88,7 +88,7 @@ class Traversal {
     if ((cast _Runtime.strictEquals(siblings, null) : Bool)) { return cast null; }
     idx = _Runtime.callProperty(siblings, 'indexOf', cast ([(cast source : Node<Traits>)] : Array<Dynamic>));
     if ((cast ((cast _Runtime.strictEquals(idx, -1.0) : Bool) || (cast _Runtime.strictEquals(idx, (_Runtime.field(siblings, 'length') - 1.0)) : Bool)) : Bool)) { return cast null; }
-    return cast (cast _Runtime.getIndex(siblings, (idx + 1.0)) : NodeOf<Traits>);
+    return cast (cast flighthq._internal._StaticIndex.readArray(siblings, (idx + 1.0)) : NodeOf<Traits>);
     return cast null;
   }
 
@@ -102,7 +102,7 @@ class Traversal {
     if ((cast _Runtime.strictEquals(siblings, null) : Bool)) { return cast null; }
     idx = _Runtime.callProperty(siblings, 'indexOf', cast ([(cast source : Node<Traits>)] : Array<Dynamic>));
     if ((cast ((cast idx : Float) <= (cast 0.0 : Float)) : Bool)) { return cast null; }
-    return cast (cast _Runtime.getIndex(siblings, (idx - 1.0)) : NodeOf<Traits>);
+    return cast (cast flighthq._internal._StaticIndex.readArray(siblings, (idx - 1.0)) : NodeOf<Traits>);
     return cast null;
   }
 
@@ -113,7 +113,7 @@ class Traversal {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-        var child:Dynamic = (cast _Runtime.getIndex(children, i) : Node<Traits>);
+        var child:Dynamic = (cast flighthq._internal._StaticIndex.readArray(children, i) : Node<Traits>);
         if ((cast !(cast _Runtime.callValue(visit, cast ([child] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
         if ((cast !(cast _Runtime.callValue(walkNodeDescendants, cast ([child, visit] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
         i++;

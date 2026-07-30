@@ -41,7 +41,7 @@ class AnimationClip {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(channels, 'length') : Float)) : Bool)) {
-        var channel:Dynamic = _Runtime.getIndex(channels, i);
+        var channel:Dynamic = flighthq._internal._StaticIndex.readArray(channels, i);
         _Runtime.callValue(sampleAnimationTrack, cast ([out, _Runtime.field(channel, 'track'), time] : Array<Dynamic>));
         _Runtime.callValue(visit, cast ([out, channel, i] : Array<Dynamic>));
         i++;

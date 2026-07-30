@@ -17,9 +17,9 @@ class WgpuKuwaharaEffect {
     radius = _Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 3.0);
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'stylization.kuwahara', WgpuKuwaharaEffect.KUWAHARA_FRAGMENT_WGSL__wgpuKuwaharaEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, HxMath.max(1.0, radius));
-      _Runtime.setIndex(f32, 2.0, _Runtime.field(source, 'width'));
-      _Runtime.setIndex(f32, 3.0, _Runtime.field(source, 'height'));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, HxMath.max(1.0, radius));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, _Runtime.field(source, 'width'));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, _Runtime.field(source, 'height'));
     }] : Array<Dynamic>));
   }
 

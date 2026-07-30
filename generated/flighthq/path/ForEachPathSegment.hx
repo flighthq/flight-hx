@@ -19,41 +19,41 @@ class ForEachPathSegment {
     {
       var ci:Dynamic = 0.0;
       while ((cast ((cast ci : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-        var command:Dynamic = _Runtime.getIndex(commands, ci);
+        var command:Dynamic = flighthq._internal._StaticIndex.readArray(commands, ci);
         if ((cast _Runtime.strictEquals(command, PathCommandValue.MOVE_TO) : Bool)) {
-          var x:Dynamic = _Runtime.getIndex(data, di);
-          var y:Dynamic = _Runtime.getIndex(data, (di + 1.0));
+          var x:Dynamic = flighthq._internal._StaticIndex.readArray(data, di);
+          var y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
           (di = cast ((di + 2.0) : Dynamic));
           _Runtime.callValue(visitor, cast ([{ kind: 'moveTo', x: x, y: y }] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO) : Bool)) {
-          var x:Dynamic = _Runtime.getIndex(data, (di + 2.0));
-          var y:Dynamic = _Runtime.getIndex(data, (di + 3.0));
+          var x:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
+          var y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
           (di = cast ((di + 4.0) : Dynamic));
           _Runtime.callValue(visitor, cast ([{ kind: 'moveTo', x: x, y: y }] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.LINE_TO) : Bool)) {
-          var x:Dynamic = _Runtime.getIndex(data, di);
-          var y:Dynamic = _Runtime.getIndex(data, (di + 1.0));
+          var x:Dynamic = flighthq._internal._StaticIndex.readArray(data, di);
+          var y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
           (di = cast ((di + 2.0) : Dynamic));
           _Runtime.callValue(visitor, cast ([{ kind: 'lineTo', x: x, y: y }] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO) : Bool)) {
-          var x:Dynamic = _Runtime.getIndex(data, (di + 2.0));
-          var y:Dynamic = _Runtime.getIndex(data, (di + 3.0));
+          var x:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
+          var y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
           (di = cast ((di + 4.0) : Dynamic));
           _Runtime.callValue(visitor, cast ([{ kind: 'lineTo', x: x, y: y }] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CURVE_TO) : Bool)) {
-          var controlX:Dynamic = _Runtime.getIndex(data, di);
-          var controlY:Dynamic = _Runtime.getIndex(data, (di + 1.0));
-          var x:Dynamic = _Runtime.getIndex(data, (di + 2.0));
-          var y:Dynamic = _Runtime.getIndex(data, (di + 3.0));
+          var controlX:Dynamic = flighthq._internal._StaticIndex.readArray(data, di);
+          var controlY:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
+          var x:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
+          var y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
           (di = cast ((di + 4.0) : Dynamic));
           _Runtime.callValue(visitor, cast ([{ kind: 'curveTo', controlX: controlX, controlY: controlY, x: x, y: y }] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO) : Bool)) {
-          var control1X:Dynamic = _Runtime.getIndex(data, di);
-          var control1Y:Dynamic = _Runtime.getIndex(data, (di + 1.0));
-          var control2X:Dynamic = _Runtime.getIndex(data, (di + 2.0));
-          var control2Y:Dynamic = _Runtime.getIndex(data, (di + 3.0));
-          var x:Dynamic = _Runtime.getIndex(data, (di + 4.0));
-          var y:Dynamic = _Runtime.getIndex(data, (di + 5.0));
+          var control1X:Dynamic = flighthq._internal._StaticIndex.readArray(data, di);
+          var control1Y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
+          var control2X:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
+          var control2Y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
+          var x:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 4.0));
+          var y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 5.0));
           (di = cast ((di + 6.0) : Dynamic));
           _Runtime.callValue(visitor, cast ([{ kind: 'cubicCurveTo', control1X: control1X, control1Y: control1Y, control2X: control2X, control2Y: control2Y, x: x, y: y }] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CLOSE) : Bool)) {

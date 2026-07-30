@@ -143,7 +143,7 @@ class Log {
     var key:Dynamic = cast _Runtime.UNDEFINED;
     var next:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast idx : Float) >= (cast _Runtime.field(parts, 'length') : Float)) : Bool)) { return; }
-    key = _Runtime.getIndex(parts, idx);
+    key = flighthq._internal._StaticIndex.readArray(parts, idx);
     if ((cast !(cast _Runtime.hasField(obj, key) : Bool) : Bool)) { return; }
     if ((cast _Runtime.strictEquals(idx, (_Runtime.field(parts, 'length') - 1.0)) : Bool)) {
       _Runtime.setIndex(obj, key, '[REDACTED]');
@@ -357,7 +357,7 @@ class Log {
       if ((cast ((cast _Runtime.field(_Runtime.field(state, 'buf'), 'length') : Float) < (cast capacity : Float)) : Bool)) {
         _Runtime.callProperty(_Runtime.field(state, 'buf'), 'push', cast ([stored] : Array<Dynamic>));
       } else {
-        _Runtime.setIndex(_Runtime.field(state, 'buf'), _Runtime.field(state, 'head'), stored);
+        flighthq._internal._StaticIndex.writeArray(_Runtime.field(state, 'buf'), _Runtime.field(state, 'head'), stored);
         _Runtime.setField(state, 'head', _Runtime.fmod((_Runtime.field(state, 'head') + 1.0), capacity));
       }
     };

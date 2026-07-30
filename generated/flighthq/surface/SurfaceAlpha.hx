@@ -30,8 +30,8 @@ class SurfaceAlpha {
             if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'width') : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Dynamic = (((sy * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sx) * 4.0);
             var di:Dynamic = (((dy * _Runtime.field(_Runtime.field(dest, 'surface'), 'width')) + dx) * 4.0);
-            var alpha:Dynamic = _Runtime.getIndex(sd, (si + 3.0));
-            _Runtime.setIndex(dd, (di + 3.0), alpha);
+            var alpha:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 3.0));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 3.0), alpha);
             px++;
           }
         }
@@ -59,7 +59,7 @@ class SurfaceAlpha {
             var x:Dynamic = (_Runtime.field(out, 'x') + px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast surfaceWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var i:Dynamic = ((((y * surfaceWidth) + x) * 4.0) + 3.0);
-            _Runtime.setIndex(data, i, HxMath.round((_Runtime.getIndex(data, i) * f)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(data, i, HxMath.round((flighthq._internal._StaticIndex.readUint8ClampedArray(data, i) * f)));
             px++;
           }
         }
@@ -86,7 +86,7 @@ class SurfaceAlpha {
           while ((cast ((cast px : Float) < (cast _Runtime.field(out, 'width') : Float)) : Bool)) {
             var x:Dynamic = (_Runtime.field(out, 'x') + px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast surfaceWidth : Float)) : Bool)) : Bool)) { px++; continue; }
-            _Runtime.setIndex(data, ((((y * surfaceWidth) + x) * 4.0) + 3.0), a);
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(data, ((((y * surfaceWidth) + x) * 4.0) + 3.0), a);
             px++;
           }
         }

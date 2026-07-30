@@ -41,10 +41,10 @@ class SurfaceBevel {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
             var di:Dynamic = (((py * w) + px) * 4.0);
-            _Runtime.setIndex(scratch, di, 0.0);
-            _Runtime.setIndex(scratch, (di + 1.0), 0.0);
-            _Runtime.setIndex(scratch, (di + 2.0), 0.0);
-            _Runtime.setIndex(scratch, (di + 3.0), _Runtime.callValue(SurfaceBevel.readSourceAlpha__surfaceBevel, cast ([source, px, py] : Array<Dynamic>)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(scratch, di, 0.0);
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(scratch, (di + 1.0), 0.0);
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(scratch, (di + 2.0), 0.0);
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(scratch, (di + 3.0), _Runtime.callValue(SurfaceBevel.readSourceAlpha__surfaceBevel, cast ([source, px, py] : Array<Dynamic>)));
             px++;
           }
         }
@@ -66,10 +66,10 @@ class SurfaceBevel {
             var colorAlpha:Dynamic = ((_Runtime.toInt32(color) & 255) / 255.0);
             var clip:Dynamic = ((cast _Runtime.strictEquals(type, 'inner') : Bool) ? (cast (_Runtime.callValue(SurfaceBevel.readSourceAlpha__surfaceBevel, cast ([source, px, py] : Array<Dynamic>)) / 255.0) : Dynamic) : (cast ((cast _Runtime.strictEquals(type, 'outer') : Bool) ? (cast (1.0 - (_Runtime.callValue(SurfaceBevel.readSourceAlpha__surfaceBevel, cast ([source, px, py] : Array<Dynamic>)) / 255.0)) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
             var edgeIntensity:Dynamic = HxMath.min(1.0, (HxMath.abs(gradient) * intensity));
-            _Runtime.setIndex(out, di, (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255));
-            _Runtime.setIndex(out, (di + 1.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255));
-            _Runtime.setIndex(out, (di + 2.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255));
-            _Runtime.setIndex(out, (di + 3.0), HxMath.round((((edgeIntensity * colorAlpha) * clip) * 255.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), HxMath.round((((edgeIntensity * colorAlpha) * clip) * 255.0)));
             px++;
           }
         }
@@ -116,13 +116,13 @@ class SurfaceBevel {
     sx = (_Runtime.field(source, 'x') + px);
     sy = (_Runtime.field(source, 'y') + py);
     if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'height') : Float)) : Bool)) : Bool)) { return cast 0.0; }
-    return cast _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), ((((sy * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sx) * 4.0) + 3.0));
+    return cast flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), ((((sy * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sx) * 4.0) + 3.0));
     return cast null;
   }
 
   public static function sampleField__surfaceBevel(field:flighthq._internal._UInt8ClampedArray, w:Float, h:Float, x:Float, y:Float):Float {
     if ((cast ((cast ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast w : Float)) : Bool)) : Bool) || (cast ((cast y : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast y : Float) >= (cast h : Float)) : Bool)) : Bool)) { return cast 0.0; }
-    return cast (_Runtime.getIndex(field, ((((y * w) + x) * 4.0) + 3.0)) / 255.0);
+    return cast (flighthq._internal._StaticIndex.readUint8ClampedArray(field, ((((y * w) + x) * 4.0) + 3.0)) / 255.0);
     return cast null;
   }
 }

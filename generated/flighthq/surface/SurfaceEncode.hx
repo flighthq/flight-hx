@@ -29,7 +29,7 @@ class SurfaceEncode {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(binary, 'length') : Float)) : Bool)) {
-        _Runtime.setIndex(bytes, i, _Runtime.charCodeAt(binary, i));
+        flighthq._internal._StaticIndex.writeUint8Array(bytes, i, _Runtime.charCodeAt(binary, i));
         i++;
       }
     }

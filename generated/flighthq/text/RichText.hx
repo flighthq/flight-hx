@@ -222,7 +222,7 @@ class RichText {
 
   public static function getRichTextFormatRangeByIndex(out:TextFormatRange, source:flighthq.types.RichText, i:Float):Bool {
     var range:Dynamic = cast _Runtime.UNDEFINED;
-    range = _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'data'), 'textFormatRanges'), i);
+    range = flighthq._internal._StaticIndex.readArray(_Runtime.field(_Runtime.field(source, 'data'), 'textFormatRanges'), i);
     if ((cast _Runtime.strictEquals(range, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
     _Runtime.setField(out, 'start', _Runtime.field(range, 'start'));
     _Runtime.setField(out, 'end', _Runtime.field(range, 'end'));
@@ -355,7 +355,7 @@ class RichText {
     {
       var i:Dynamic = (_Runtime.field(ranges, 'length') - 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-        var r:Dynamic = _Runtime.getIndex(ranges, i);
+        var r:Dynamic = flighthq._internal._StaticIndex.readArray(ranges, i);
         if ((cast ((cast ((cast _Runtime.field(r, 'start') : Float) < (cast end : Float)) : Bool) && (cast ((cast _Runtime.field(r, 'end') : Float) > (cast begin : Float)) : Bool)) : Bool)) {
           _Runtime.splice(ranges, Std.int(i), Std.int(1.0), []);
           (changed = cast (true : Dynamic));
@@ -385,7 +385,7 @@ class RichText {
     {
       var i:Dynamic = (_Runtime.field(ranges, 'length') - 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-        var r:Dynamic = _Runtime.getIndex(ranges, i);
+        var r:Dynamic = flighthq._internal._StaticIndex.readArray(ranges, i);
         if ((cast ((cast _Runtime.field(r, 'start') : Float) >= (cast end : Float)) : Bool)) {
           _Runtime.setField(r, 'start', (_Runtime.field(r, 'start') + delta));
           _Runtime.setField(r, 'end', (_Runtime.field(r, 'end') + delta));

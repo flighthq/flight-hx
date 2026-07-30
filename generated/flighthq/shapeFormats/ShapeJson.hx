@@ -46,14 +46,14 @@ class ShapeJson {
     bitmapOrdinal = 0.0;
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-      var key:Dynamic = (cast _Runtime.getIndex(commands, i) : String);
-      var argCount:Dynamic = (cast _Runtime.getIndex(commands, (i + 1.0)) : Float);
+      var key:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
+      var argCount:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float);
       var base:Dynamic = (i + 2.0);
       var args:Array<Dynamic> = cast ([] : Array<Dynamic>);
       {
         var a:Dynamic = 0.0;
         while ((cast ((cast a : Float) < (cast argCount : Float)) : Bool)) {
-          var value:Dynamic = _Runtime.getIndex(commands, (base + a));
+          var value:Dynamic = flighthq._internal._StaticIndex.readArray(commands, (base + a));
           if ((cast _Runtime.strictEquals(value, null) : Bool)) {
             _Runtime.callProperty(args, 'push', cast ([null] : Array<Dynamic>));
           } else { if ((cast _Runtime.callValue(ShapeJson.isMatrixValue__shapeJson, cast ([value] : Array<Dynamic>)) : Bool)) {

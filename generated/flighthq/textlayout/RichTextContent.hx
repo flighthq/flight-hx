@@ -91,7 +91,7 @@ class RichTextContent {
     {
       var i:Dynamic = (_Runtime.field(ranges, 'length') - 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-        var range:Dynamic = _Runtime.getIndex(ranges, i);
+        var range:Dynamic = flighthq._internal._StaticIndex.readArray(ranges, i);
         if ((cast ((cast _Runtime.field(range, 'start') : Float) >= (cast length : Float)) : Bool)) {
           _Runtime.splice(ranges, Std.int(i), Std.int(1.0), []);
         } else { if ((cast ((cast _Runtime.field(range, 'end') : Float) > (cast length : Float)) : Bool)) {
@@ -132,7 +132,7 @@ class RichTextContent {
   public static function writeFormatRange__richTextContent(ranges:Array<TextFormatRange>, format:TextFormat, start:Float, end:Float):Void {
     var previous:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(start, end) : Bool)) { return; }
-    previous = _Runtime.getIndex(ranges, (_Runtime.field(ranges, 'length') - 1.0));
+    previous = flighthq._internal._StaticIndex.readArray(ranges, (_Runtime.field(ranges, 'length') - 1.0));
     if ((cast ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(previous, 'end'), start) : Bool)) : Bool) && (cast _Runtime.callValue(RichTextContent.textFormatEquals__richTextContent, cast ([_Runtime.field(previous, 'format'), format] : Array<Dynamic>)) : Bool)) : Bool)) {
       _Runtime.setField(previous, 'end', end);
     } else {
@@ -154,7 +154,7 @@ class RichTextContent {
         {
           var i:Dynamic = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(aValue, 'length') : Float)) : Bool)) {
-            if ((cast !_Runtime.strictEquals(_Runtime.getIndex(aValue, i), _Runtime.getIndex(bValue, i)) : Bool)) { return cast false; }
+            if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(aValue, i), flighthq._internal._StaticIndex.readArray(bValue, i)) : Bool)) { return cast false; }
             i++;
           }
         }

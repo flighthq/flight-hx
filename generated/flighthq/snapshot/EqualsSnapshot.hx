@@ -35,7 +35,7 @@ class EqualsSnapshot {
       {
         var index:Dynamic = 0.0;
         while ((cast ((cast index : Float) < (cast _Runtime.field(aArray, 'length') : Float)) : Bool)) {
-          if ((cast !(cast _Runtime.callValue(EqualsSnapshot.snapshotValuesEqual__equalsSnapshot, cast ([_Runtime.getIndex(aArray, index), _Runtime.getIndex(bArray, index)] : Array<Dynamic>)) : Bool) : Bool)) {
+          if ((cast !(cast _Runtime.callValue(EqualsSnapshot.snapshotValuesEqual__equalsSnapshot, cast ([flighthq._internal._StaticIndex.readArray(aArray, index), flighthq._internal._StaticIndex.readArray(bArray, index)] : Array<Dynamic>)) : Bool) : Bool)) {
             return cast false;
           }
           (index = cast ((index + 1.0) : Dynamic));

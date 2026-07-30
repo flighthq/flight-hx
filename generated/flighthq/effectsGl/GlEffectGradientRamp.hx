@@ -33,42 +33,42 @@ class GlEffectGradientRamp {
         var g:Dynamic = 0.0;
         var b:Dynamic = 0.0;
         var a:Dynamic = 0.0;
-        if ((cast ((cast t : Float) <= (cast _Runtime.getIndex(ratios, 0.0) : Float)) : Bool)) {
-          var c:Dynamic = _Runtime.getIndex(colors, 0.0);
+        if ((cast ((cast t : Float) <= (cast flighthq._internal._StaticIndex.readArray(ratios, 0.0) : Float)) : Bool)) {
+          var c:Dynamic = flighthq._internal._StaticIndex.readArray(colors, 0.0);
           (r = cast ((_Runtime.toInt32((_Runtime.toInt32(c) >> 16)) & 255) : Dynamic));
           (g = cast ((_Runtime.toInt32((_Runtime.toInt32(c) >> 8)) & 255) : Dynamic));
           (b = cast ((_Runtime.toInt32(c) & 255) : Dynamic));
-          (a = cast (HxMath.round((_Runtime.getIndex(alphas, 0.0) * 255.0)) : Dynamic));
-        } else { if ((cast ((cast t : Float) >= (cast _Runtime.getIndex(ratios, (_Runtime.field(ratios, 'length') - 1.0)) : Float)) : Bool)) {
-          var c:Dynamic = _Runtime.getIndex(colors, (_Runtime.field(colors, 'length') - 1.0));
+          (a = cast (HxMath.round((flighthq._internal._StaticIndex.readArray(alphas, 0.0) * 255.0)) : Dynamic));
+        } else { if ((cast ((cast t : Float) >= (cast flighthq._internal._StaticIndex.readArray(ratios, (_Runtime.field(ratios, 'length') - 1.0)) : Float)) : Bool)) {
+          var c:Dynamic = flighthq._internal._StaticIndex.readArray(colors, (_Runtime.field(colors, 'length') - 1.0));
           (r = cast ((_Runtime.toInt32((_Runtime.toInt32(c) >> 16)) & 255) : Dynamic));
           (g = cast ((_Runtime.toInt32((_Runtime.toInt32(c) >> 8)) & 255) : Dynamic));
           (b = cast ((_Runtime.toInt32(c) & 255) : Dynamic));
-          (a = cast (HxMath.round((_Runtime.getIndex(alphas, (_Runtime.field(alphas, 'length') - 1.0)) * 255.0)) : Dynamic));
+          (a = cast (HxMath.round((flighthq._internal._StaticIndex.readArray(alphas, (_Runtime.field(alphas, 'length') - 1.0)) * 255.0)) : Dynamic));
         } else {
           {
             var j:Dynamic = 0.0;
             while ((cast ((cast j : Float) < (cast (_Runtime.field(ratios, 'length') - 1.0) : Float)) : Bool)) {
-              var r0:Dynamic = _Runtime.getIndex(ratios, j);
-              var r1:Dynamic = _Runtime.getIndex(ratios, (j + 1.0));
+              var r0:Dynamic = flighthq._internal._StaticIndex.readArray(ratios, j);
+              var r1:Dynamic = flighthq._internal._StaticIndex.readArray(ratios, (j + 1.0));
               if ((cast ((cast ((cast t : Float) >= (cast r0 : Float)) : Bool) && (cast ((cast t : Float) <= (cast r1 : Float)) : Bool)) : Bool)) {
                 var blend:Dynamic = ((cast ((cast r1 : Float) > (cast r0 : Float)) : Bool) ? (cast ((t - r0) / (r1 - r0)) : Dynamic) : (cast 0.0 : Dynamic));
-                var c0:Dynamic = _Runtime.getIndex(colors, j);
-                var c1:Dynamic = _Runtime.getIndex(colors, (j + 1.0));
+                var c0:Dynamic = flighthq._internal._StaticIndex.readArray(colors, j);
+                var c1:Dynamic = flighthq._internal._StaticIndex.readArray(colors, (j + 1.0));
                 (r = cast (HxMath.round((((_Runtime.toInt32((_Runtime.toInt32(c0) >> 16)) & 255) * (1.0 - blend)) + ((_Runtime.toInt32((_Runtime.toInt32(c1) >> 16)) & 255) * blend))) : Dynamic));
                 (g = cast (HxMath.round((((_Runtime.toInt32((_Runtime.toInt32(c0) >> 8)) & 255) * (1.0 - blend)) + ((_Runtime.toInt32((_Runtime.toInt32(c1) >> 8)) & 255) * blend))) : Dynamic));
                 (b = cast (HxMath.round((((_Runtime.toInt32(c0) & 255) * (1.0 - blend)) + ((_Runtime.toInt32(c1) & 255) * blend))) : Dynamic));
-                (a = cast (HxMath.round((((_Runtime.getIndex(alphas, j) * 255.0) * (1.0 - blend)) + ((_Runtime.getIndex(alphas, (j + 1.0)) * 255.0) * blend))) : Dynamic));
+                (a = cast (HxMath.round((((flighthq._internal._StaticIndex.readArray(alphas, j) * 255.0) * (1.0 - blend)) + ((flighthq._internal._StaticIndex.readArray(alphas, (j + 1.0)) * 255.0) * blend))) : Dynamic));
                 break;
               }
               j++;
             }
           }
         } }
-        _Runtime.setIndex(out, (i * 4.0), r);
-        _Runtime.setIndex(out, ((i * 4.0) + 1.0), g);
-        _Runtime.setIndex(out, ((i * 4.0) + 2.0), b);
-        _Runtime.setIndex(out, ((i * 4.0) + 3.0), a);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i * 4.0), r);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, ((i * 4.0) + 1.0), g);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, ((i * 4.0) + 2.0), b);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, ((i * 4.0) + 3.0), a);
         i++;
       }
     }

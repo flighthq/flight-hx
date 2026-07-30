@@ -17,9 +17,9 @@ class WgpuSharpenEffect {
     amount = _Runtime.coalesce(_Runtime.field(effect, 'amount'), function():Dynamic return cast 0.5);
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'stylization.sharpen', WgpuSharpenEffect.SHARPEN_FRAGMENT_WGSL__wgpuSharpenEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, amount);
-      _Runtime.setIndex(f32, 2.0, _Runtime.field(source, 'width'));
-      _Runtime.setIndex(f32, 3.0, _Runtime.field(source, 'height'));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, amount);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, _Runtime.field(source, 'width'));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, _Runtime.field(source, 'height'));
     }] : Array<Dynamic>));
   }
 

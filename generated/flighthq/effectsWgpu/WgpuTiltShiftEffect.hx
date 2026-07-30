@@ -21,11 +21,11 @@ class WgpuTiltShiftEffect {
     blur = _Runtime.coalesce(_Runtime.field(effect, 'blur'), function():Dynamic return cast 4.0);
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'lens.tiltShift', WgpuTiltShiftEffect.TILT_SHIFT_FRAGMENT_WGSL__wgpuTiltShiftEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, center);
-      _Runtime.setIndex(f32, 1.0, width);
-      _Runtime.setIndex(f32, 2.0, blur);
-      _Runtime.setIndex(f32, 4.0, _Runtime.field(source, 'width'));
-      _Runtime.setIndex(f32, 5.0, _Runtime.field(source, 'height'));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, center);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, width);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, blur);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, _Runtime.field(source, 'width'));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 5.0, _Runtime.field(source, 'height'));
     }] : Array<Dynamic>));
   }
 

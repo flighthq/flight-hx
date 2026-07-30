@@ -219,7 +219,7 @@ class GlCompressedTexture {
       {
         var index:Dynamic = 0.0;
         while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(container, 'levels'), 'length') : Float)) : Bool)) {
-          var entry:Dynamic = _Runtime.getIndex(_Runtime.field(container, 'levels'), index);
+          var entry:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(container, 'levels'), index);
           var view:Dynamic = new flighthq._internal._UInt8Array(_Runtime.field(payload, 'buffer'), (_Runtime.field(payload, 'byteOffset') + _Runtime.field(entry, 'byteOffset')), _Runtime.field(entry, 'byteLength'));
           var mip:Dynamic = _Runtime.fmod(index, mipLevels);
           var faceLayer:Dynamic = ((index - mip) / mipLevels);
@@ -240,7 +240,7 @@ class GlCompressedTexture {
     {
       var mip:Dynamic = 0.0;
       while ((cast ((cast mip : Float) < (cast _Runtime.field(_Runtime.field(container, 'levels'), 'length') : Float)) : Bool)) {
-        var entry:Dynamic = _Runtime.getIndex(_Runtime.field(container, 'levels'), mip);
+        var entry:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(container, 'levels'), mip);
         var view:Dynamic = new flighthq._internal._UInt8Array(_Runtime.field(payload, 'buffer'), (_Runtime.field(payload, 'byteOffset') + _Runtime.field(entry, 'byteOffset')), _Runtime.field(entry, 'byteLength'));
         var rgba:Dynamic = _Runtime.callValue(decode, cast ([_Runtime.field(container, 'format'), _Runtime.field(entry, 'width'), _Runtime.field(entry, 'height'), view] : Array<Dynamic>));
         if ((cast _Runtime.strictEquals(rgba, null) : Bool)) { return cast false; }

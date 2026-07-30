@@ -21,9 +21,9 @@ class WgpuFilmGrainEffect {
     seed = _Runtime.coalesce(_Runtime.field(effect, 'seed'), function():Dynamic return cast 0.0);
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'stylization.filmGrain', WgpuFilmGrainEffect.FILM_GRAIN_FRAGMENT_WGSL__wgpuFilmGrainEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, intensity);
-      _Runtime.setIndex(f32, 1.0, HxMath.max(0.0001, size));
-      _Runtime.setIndex(f32, 2.0, seed);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, HxMath.max(0.0001, size));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, seed);
     }] : Array<Dynamic>));
   }
 

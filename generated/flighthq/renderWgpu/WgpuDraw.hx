@@ -205,11 +205,11 @@ class WgpuDraw {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
-        var a:Dynamic = _Runtime.getIndex(data, (i + 3.0));
-        _Runtime.setIndex(out, i, ((_Runtime.getIndex(data, i) * a) / 255.0));
-        _Runtime.setIndex(out, (i + 1.0), ((_Runtime.getIndex(data, (i + 1.0)) * a) / 255.0));
-        _Runtime.setIndex(out, (i + 2.0), ((_Runtime.getIndex(data, (i + 2.0)) * a) / 255.0));
-        _Runtime.setIndex(out, (i + 3.0), a);
+        var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, i, ((flighthq._internal._StaticIndex.readUint8ClampedArray(data, i) * a) / 255.0));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 1.0), ((flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)) * a) / 255.0));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 2.0), ((flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)) * a) / 255.0));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 3.0), a);
         (i = cast ((i + 4.0) : Dynamic));
       }
     }

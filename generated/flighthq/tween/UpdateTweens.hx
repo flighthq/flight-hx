@@ -70,10 +70,10 @@ class UpdateTweens {
       var list:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
       var i:Dynamic = (_Runtime.field(list, 'length') - 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-        if ((cast _Runtime.field(_Runtime.getIndex(list, i), 'complete') : Bool)) {
+        if ((cast _Runtime.field(flighthq._internal._StaticIndex.readArray(list, i), 'complete') : Bool)) {
           _Runtime.splice(list, Std.int(i), Std.int(1.0), []);
         } else {
-          _Runtime.callValue(UpdateTweens.updateTween__updateTweens, cast ([_Runtime.getIndex(list, i), deltaTime] : Array<Dynamic>));
+          _Runtime.callValue(UpdateTweens.updateTween__updateTweens, cast ([flighthq._internal._StaticIndex.readArray(list, i), deltaTime] : Array<Dynamic>));
         }
         i--;
       }

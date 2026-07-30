@@ -21,13 +21,13 @@ class CanvasClipRectangle {
     {
       var c:Dynamic = 0.0;
       while ((cast ((cast c : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
-        var contour:Dynamic = _Runtime.getIndex(contours, c);
+        var contour:Dynamic = flighthq._internal._StaticIndex.readArray(contours, c);
         if ((cast ((cast _Runtime.field(contour, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { c++; continue; }
-        flighthq._internal.backend.Canvas2dBackend.call(_Runtime.field(state, 'context'), 'moveTo', cast ([_Runtime.getIndex(contour, 0.0), _Runtime.getIndex(contour, 1.0)] : Array<Dynamic>));
+        flighthq._internal.backend.Canvas2dBackend.call(_Runtime.field(state, 'context'), 'moveTo', cast ([flighthq._internal._StaticIndex.readArray(contour, 0.0), flighthq._internal._StaticIndex.readArray(contour, 1.0)] : Array<Dynamic>));
         {
           var i:Dynamic = 2.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
-            flighthq._internal.backend.Canvas2dBackend.call(_Runtime.field(state, 'context'), 'lineTo', cast ([_Runtime.getIndex(contour, i), _Runtime.getIndex(contour, (i + 1.0))] : Array<Dynamic>));
+            flighthq._internal.backend.Canvas2dBackend.call(_Runtime.field(state, 'context'), 'lineTo', cast ([flighthq._internal._StaticIndex.readArray(contour, i), flighthq._internal._StaticIndex.readArray(contour, (i + 1.0))] : Array<Dynamic>));
             (i = cast ((i + 2.0) : Dynamic));
           }
         }

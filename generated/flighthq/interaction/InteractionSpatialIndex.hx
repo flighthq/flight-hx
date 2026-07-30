@@ -32,9 +32,9 @@ class InteractionSpatialIndex {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(InteractionSpatialIndex.spatialQueryOut__interactionSpatialIndex, 'length') : Float)) : Bool)) {
-        var rank:Dynamic = _Runtime.getIndex(InteractionSpatialIndex.spatialQueryOut__interactionSpatialIndex, i);
+        var rank:Dynamic = flighthq._internal._StaticIndex.readArray(InteractionSpatialIndex.spatialQueryOut__interactionSpatialIndex, i);
         if ((cast ((cast rank : Float) >= (cast bestRank : Float)) : Bool)) { i++; continue; }
-        var node:Dynamic = (cast _Runtime.getIndex(nodes, rank) : Null<Dynamic>);
+        var node:Dynamic = (cast flighthq._internal._StaticIndex.readArray(nodes, rank) : Null<Dynamic>);
         if ((cast ((cast !_Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.callValue(hitTestNodeRegion, cast ([node, x, y, precise] : Array<Dynamic>)) : Bool)) : Bool)) {
           (best = cast (node : Dynamic));
           (bestRank = cast (rank : Dynamic));
@@ -58,7 +58,7 @@ class InteractionSpatialIndex {
     {
       var rank:Dynamic = 0.0;
       while ((cast ((cast rank : Float) < (cast _Runtime.field(nodes, 'length') : Float)) : Bool)) {
-        var bounds:Dynamic = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([(cast _Runtime.getIndex(nodes, rank) : DisplayObject)] : Array<Dynamic>));
+        var bounds:Dynamic = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([(cast flighthq._internal._StaticIndex.readArray(nodes, rank) : DisplayObject)] : Array<Dynamic>));
         (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.minX = cast (_Runtime.field(bounds, 'x') : Dynamic));
         (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.minY = cast (_Runtime.field(bounds, 'y') : Dynamic));
         (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.maxX = cast ((_Runtime.field(bounds, 'x') + _Runtime.field(bounds, 'width')) : Dynamic));
@@ -85,7 +85,7 @@ class InteractionSpatialIndex {
       {
         var i:Dynamic = (_Runtime.field(children, 'length') - 1.0);
         while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-          _Runtime.callValue(InteractionSpatialIndex.collectSpatialCandidates__interactionSpatialIndex, cast ([_Runtime.getIndex(children, i), out] : Array<Dynamic>));
+          _Runtime.callValue(InteractionSpatialIndex.collectSpatialCandidates__interactionSpatialIndex, cast ([flighthq._internal._StaticIndex.readArray(children, i), out] : Array<Dynamic>));
           i--;
         }
       }

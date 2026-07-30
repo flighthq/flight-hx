@@ -70,12 +70,17 @@ export function loweringSummary(audit: LoweringAudit): string {
     `| Proven indexed expressions | ${facts.indexedAccesses.expressions} |`,
     `| Proven indexed reads | ${facts.indexedAccesses.reads} |`,
     `| Proven indexed writes | ${facts.indexedAccesses.writes} |`,
+    `| Direct indexed reads | ${emission.indexedAccesses.reads} |`,
+    `| Direct indexed writes | ${emission.indexedAccesses.writes} |`,
     '',
-    '| Indexed receiver | Expressions | Reads | Writes |',
-    '| --- | ---: | ---: | ---: |',
+    '| Indexed receiver | Proven expressions | Proven reads | Proven writes | Direct reads | Direct writes |',
+    '| --- | ---: | ---: | ---: | ---: | ---: |',
   ];
   for (const [receiver, counts] of Object.entries(facts.indexedReceivers)) {
-    lines.push(`| \`${receiver}\` | ${counts.expressions} | ${counts.reads} | ${counts.writes} |`);
+    const direct = emission.indexedReceivers[receiver as keyof typeof emission.indexedReceivers];
+    lines.push(
+      `| \`${receiver}\` | ${counts.expressions} | ${counts.reads} | ${counts.writes} | ${direct.reads} | ${direct.writes} |`,
+    );
   }
   lines.push(
     '',

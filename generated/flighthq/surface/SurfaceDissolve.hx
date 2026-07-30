@@ -61,20 +61,20 @@ class SurfaceDissolve {
       if ((cast ((cast ((cast ((cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast dx : Float) >= (cast destStride : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast destSurfaceHeight : Float)) : Bool)) : Bool)) { continue; }
       var di:Dynamic = (((dy * destStride) + dx) * 4.0);
       if ((cast toFill : Bool)) {
-        _Runtime.setIndex(destData, di, fillR);
-        _Runtime.setIndex(destData, (di + 1.0), fillG);
-        _Runtime.setIndex(destData, (di + 2.0), fillB);
-        _Runtime.setIndex(destData, (di + 3.0), fillA);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(destData, di, fillR);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(destData, (di + 1.0), fillG);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(destData, (di + 2.0), fillB);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(destData, (di + 3.0), fillA);
         continue;
       }
       var sx:Dynamic = (_Runtime.field(source, 'x') + px);
       var sy:Dynamic = (_Runtime.field(source, 'y') + py);
       if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast sourceStride : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) >= (cast sourceSurfaceHeight : Float)) : Bool)) : Bool)) { continue; }
       var si:Dynamic = (((sy * sourceStride) + sx) * 4.0);
-      _Runtime.setIndex(destData, di, _Runtime.getIndex(sourceData, si));
-      _Runtime.setIndex(destData, (di + 1.0), _Runtime.getIndex(sourceData, (si + 1.0)));
-      _Runtime.setIndex(destData, (di + 2.0), _Runtime.getIndex(sourceData, (si + 2.0)));
-      _Runtime.setIndex(destData, (di + 3.0), _Runtime.getIndex(sourceData, (si + 3.0)));
+      flighthq._internal._StaticIndex.writeUint8ClampedArray(destData, di, flighthq._internal._StaticIndex.readUint8ClampedArray(sourceData, si));
+      flighthq._internal._StaticIndex.writeUint8ClampedArray(destData, (di + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sourceData, (si + 1.0)));
+      flighthq._internal._StaticIndex.writeUint8ClampedArray(destData, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sourceData, (si + 2.0)));
+      flighthq._internal._StaticIndex.writeUint8ClampedArray(destData, (di + 3.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sourceData, (si + 3.0)));
     }
     _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(dest, 'surface')] : Array<Dynamic>));
     return cast cursor;

@@ -70,8 +70,8 @@ class WgpuGradientBevelEffect {
     encodePipeline = _Runtime.callValue(WgpuGradientBevelEffect.getEncodePipeline__wgpuGradientBevelEffect, cast ([state] : Array<Dynamic>));
     encodeSlot = _Runtime.callProperty(fs, 'acquireSlot', cast ([] : Array<Dynamic>));
     _Runtime.callProperty(fs, 'writeSlot', cast ([encodeSlot, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, dx);
-      _Runtime.setIndex(f32, 1.0, dy);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, dx);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, dy);
     }] : Array<Dynamic>));
     blurredBG = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: _Runtime.field(fs, 'textureBGLayout'), entries: cast ([{ binding: 0.0, resource: _Runtime.field(s1, 'view') }, { binding: 1.0, resource: _Runtime.field(fs, 'sampler') }] : Array<Dynamic>) }] : Array<Dynamic>));
     encodePass = _Runtime.callProperty(fs, 'beginPass', cast ([s0, 'load'] : Array<Dynamic>));

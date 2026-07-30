@@ -92,26 +92,26 @@ class GlRenderPass {
 
   public static function isGlColorAttachmentPreserved__glRenderPass(preserve:Dynamic, index:Float):Bool {
     if ((cast _Runtime.strictEquals(_Runtime.typeofValue(preserve), 'boolean') : Bool)) { return cast preserve; }
-    return cast _Runtime.strictEquals(_Runtime.getIndex(preserve, index), true);
+    return cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(preserve, index), true);
     return cast null;
   }
 
   public static function resolveGlClearColor__glRenderPass(state:GlRenderState, target:GlRenderTarget, index:Float, out:flighthq._internal._Float32Array):Void {
     var packed:Dynamic = cast _Runtime.UNDEFINED;
     var bg:Dynamic = cast _Runtime.UNDEFINED;
-    packed = _Runtime.getIndex(_Runtime.field(target, 'clearColors'), index);
+    packed = flighthq._internal._StaticIndex.readArray(_Runtime.field(target, 'clearColors'), index);
     if ((cast !_Runtime.strictEquals(packed, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.setIndex(out, 0.0, ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 24)) & 255) / 255.0));
-      _Runtime.setIndex(out, 1.0, ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 16)) & 255) / 255.0));
-      _Runtime.setIndex(out, 2.0, ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 8)) & 255) / 255.0));
-      _Runtime.setIndex(out, 3.0, ((_Runtime.toInt32(packed) & 255) / 255.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 0.0, ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 24)) & 255) / 255.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 1.0, ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 16)) & 255) / 255.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 2.0, ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 8)) & 255) / 255.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(out, 3.0, ((_Runtime.toInt32(packed) & 255) / 255.0));
       return;
     }
     bg = _Runtime.field(state, 'backgroundColorRgba');
-    _Runtime.setIndex(out, 0.0, _Runtime.coalesce(_Runtime.getIndex(bg, 0.0), function():Dynamic return cast 0.0));
-    _Runtime.setIndex(out, 1.0, _Runtime.coalesce(_Runtime.getIndex(bg, 1.0), function():Dynamic return cast 0.0));
-    _Runtime.setIndex(out, 2.0, _Runtime.coalesce(_Runtime.getIndex(bg, 2.0), function():Dynamic return cast 0.0));
-    _Runtime.setIndex(out, 3.0, ((cast ((cast _Runtime.field(bg, 'length') : Float) >= (cast 4.0 : Float)) : Bool) ? (cast _Runtime.getIndex(bg, 3.0) : Dynamic) : (cast 0.0 : Dynamic)));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 0.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(bg, 0.0), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 1.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(bg, 1.0), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 2.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(bg, 2.0), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 3.0, ((cast ((cast _Runtime.field(bg, 'length') : Float) >= (cast 4.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(bg, 3.0) : Dynamic) : (cast 0.0 : Dynamic)));
   }
 
   public static final _passStack__glRenderPass:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);

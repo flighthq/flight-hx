@@ -64,7 +64,7 @@ class WireframeWgpuMeshMaterialRenderer {
     upload = _Runtime.callValue(ensureWgpuWireframeUpload, cast ([state, geometry] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(upload, null) : Bool)) { return; }
     drawBindGroup = _Runtime.callValue(writeWgpuDrawUniform, cast ([state, proxy] : Array<Dynamic>));
-    _Runtime.setIndex(WireframeWgpuMeshMaterialRenderer._dynamicOffsets__wireframeWgpuMeshMaterialRenderer, 0.0, _Runtime.field(scene, 'pendingDrawOffset'));
+    flighthq._internal._StaticIndex.writeUint32Array(WireframeWgpuMeshMaterialRenderer._dynamicOffsets__wireframeWgpuMeshMaterialRenderer, 0.0, _Runtime.field(scene, 'pendingDrawOffset'));
     _Runtime.callProperty(pass, 'setBindGroup', cast ([1.0, drawBindGroup, WireframeWgpuMeshMaterialRenderer._dynamicOffsets__wireframeWgpuMeshMaterialRenderer] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setVertexBuffer', cast ([0.0, _Runtime.field(upload, 'vertexBuffer')] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setIndexBuffer', cast ([_Runtime.field(upload, 'lineIndexBuffer'), _Runtime.field(upload, 'indexFormat')] : Array<Dynamic>));

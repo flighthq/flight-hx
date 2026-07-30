@@ -31,14 +31,14 @@ class Luminance {
   }
 
   public static function getRec2020LuminanceWeights(out:Array<Float>):Void {
-    _Runtime.setIndex(out, 0.0, 0.2627);
-    _Runtime.setIndex(out, 1.0, 0.678);
-    _Runtime.setIndex(out, 2.0, 0.0593);
+    flighthq._internal._StaticIndex.writeArray(out, 0.0, 0.2627);
+    flighthq._internal._StaticIndex.writeArray(out, 1.0, 0.678);
+    flighthq._internal._StaticIndex.writeArray(out, 2.0, 0.0593);
   }
 
   public static function getRec709LuminanceWeights(out:Array<Float>):Void {
-    _Runtime.setIndex(out, 0.0, 0.2126);
-    _Runtime.setIndex(out, 1.0, 0.7152);
-    _Runtime.setIndex(out, 2.0, 0.0722);
+    flighthq._internal._StaticIndex.writeArray(out, 0.0, 0.2126);
+    flighthq._internal._StaticIndex.writeArray(out, 1.0, 0.7152);
+    flighthq._internal._StaticIndex.writeArray(out, 2.0, 0.0722);
   }
 }

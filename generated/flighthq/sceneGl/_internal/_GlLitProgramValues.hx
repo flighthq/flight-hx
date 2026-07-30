@@ -45,9 +45,9 @@ class _GlLitProgramValues {
     gl = _Runtime.field(state, 'gl');
     if ((cast !_Runtime.strictEquals(((cast _GlLitProgramValues._uploadedLightVersion__glLitProgram : flighthq._internal._WeakMap).get(program)), _Runtime.field(lights, 'version')) : Bool)) {
       var data:Dynamic = _Runtime.field(lights, 'data');
-      flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locDirectional'), _Runtime.getIndex(data, 0.0), _Runtime.getIndex(data, 1.0), _Runtime.getIndex(data, 2.0), 0.0);
-      flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locDirectionalRadiance'), _Runtime.getIndex(data, 4.0), _Runtime.getIndex(data, 5.0), _Runtime.getIndex(data, 6.0), 0.0);
-      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(program, 'locAmbientRadiance'), _Runtime.getIndex(data, 8.0), _Runtime.getIndex(data, 9.0), _Runtime.getIndex(data, 10.0));
+      flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locDirectional'), flighthq._internal._StaticIndex.readFloat32Array(data, 0.0), flighthq._internal._StaticIndex.readFloat32Array(data, 1.0), flighthq._internal._StaticIndex.readFloat32Array(data, 2.0), 0.0);
+      flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locDirectionalRadiance'), flighthq._internal._StaticIndex.readFloat32Array(data, 4.0), flighthq._internal._StaticIndex.readFloat32Array(data, 5.0), flighthq._internal._StaticIndex.readFloat32Array(data, 6.0), 0.0);
+      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(program, 'locAmbientRadiance'), flighthq._internal._StaticIndex.readFloat32Array(data, 8.0), flighthq._internal._StaticIndex.readFloat32Array(data, 9.0), flighthq._internal._StaticIndex.readFloat32Array(data, 10.0));
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locDirectionalCount'), _Runtime.field(lights, 'directionalCount'));
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAmbientCount'), _Runtime.field(lights, 'ambientCount'));
       flighthq._internal.backend.WebGl2Backend.uniform4fv(gl, _Runtime.field(program, 'locPointLights'), (cast data : flighthq._internal._Float32Array).subarray(Std.int(SCENE_LIGHT_POINT_OFFSET), Std.int((SCENE_LIGHT_POINT_OFFSET + (SCENE_LIGHT_POINT_STRIDE * MAX_FORWARD_LIGHTS)))));

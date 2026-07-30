@@ -68,11 +68,11 @@ class ContainsPathPoint {
     {
       var ci:Dynamic = 0.0;
       while ((cast ((cast ci : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-        var command:Dynamic = _Runtime.getIndex(commands, ci);
+        var command:Dynamic = flighthq._internal._StaticIndex.readArray(commands, ci);
         if ((cast _Runtime.strictEquals(command, PathCommandValue.MOVE_TO) : Bool)) {
           _Runtime.callValue(flushContour, cast ([] : Array<Dynamic>));
-          (x = cast (_Runtime.getIndex(data, di) : Dynamic));
-          (y = cast (_Runtime.getIndex(data, (di + 1.0)) : Dynamic));
+          (x = cast (flighthq._internal._StaticIndex.readArray(data, di) : Dynamic));
+          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Dynamic));
           (di = cast ((di + 2.0) : Dynamic));
           (contourStartX = cast (x : Dynamic));
           (contourStartY = cast (y : Dynamic));
@@ -81,8 +81,8 @@ class ContainsPathPoint {
           (hasContour = cast (true : Dynamic));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO) : Bool)) {
           _Runtime.callValue(flushContour, cast ([] : Array<Dynamic>));
-          (x = cast (_Runtime.getIndex(data, (di + 2.0)) : Dynamic));
-          (y = cast (_Runtime.getIndex(data, (di + 3.0)) : Dynamic));
+          (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Dynamic));
+          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
           (contourStartX = cast (x : Dynamic));
           (contourStartY = cast (y : Dynamic));
@@ -90,8 +90,8 @@ class ContainsPathPoint {
           (lastY = cast (y : Dynamic));
           (hasContour = cast (true : Dynamic));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.LINE_TO) : Bool)) {
-          var nx:Dynamic = _Runtime.getIndex(data, di);
-          var ny:Dynamic = _Runtime.getIndex(data, (di + 1.0));
+          var nx:Dynamic = flighthq._internal._StaticIndex.readArray(data, di);
+          var ny:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
           (di = cast ((di + 2.0) : Dynamic));
           if ((cast hasContour : Bool)) {
             (windingNumber = cast ((windingNumber + _Runtime.callValue(ContainsPathPoint.countSegmentCrossings__containsPathPoint, cast ([px, py, lastX, lastY, nx, ny] : Array<Dynamic>))) : Dynamic));
@@ -101,8 +101,8 @@ class ContainsPathPoint {
           (x = cast (nx : Dynamic));
           (y = cast (ny : Dynamic));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO) : Bool)) {
-          var nx:Dynamic = _Runtime.getIndex(data, (di + 2.0));
-          var ny:Dynamic = _Runtime.getIndex(data, (di + 3.0));
+          var nx:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
+          var ny:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
           (di = cast ((di + 4.0) : Dynamic));
           if ((cast hasContour : Bool)) {
             (windingNumber = cast ((windingNumber + _Runtime.callValue(ContainsPathPoint.countSegmentCrossings__containsPathPoint, cast ([px, py, lastX, lastY, nx, ny] : Array<Dynamic>))) : Dynamic));
@@ -112,10 +112,10 @@ class ContainsPathPoint {
           (x = cast (nx : Dynamic));
           (y = cast (ny : Dynamic));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CURVE_TO) : Bool)) {
-          var cx:Dynamic = _Runtime.getIndex(data, di);
-          var cy:Dynamic = _Runtime.getIndex(data, (di + 1.0));
-          var ax:Dynamic = _Runtime.getIndex(data, (di + 2.0));
-          var ay:Dynamic = _Runtime.getIndex(data, (di + 3.0));
+          var cx:Dynamic = flighthq._internal._StaticIndex.readArray(data, di);
+          var cy:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
+          var ax:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
+          var ay:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
           (di = cast ((di + 4.0) : Dynamic));
           if ((cast hasContour : Bool)) {
             (windingNumber = cast ((windingNumber + _Runtime.callValue(ContainsPathPoint.flattenQuadraticWindingNumber__containsPathPoint, cast ([px, py, lastX, lastY, cx, cy, ax, ay, toleranceSq, 0.0] : Array<Dynamic>))) : Dynamic));
@@ -125,12 +125,12 @@ class ContainsPathPoint {
           (x = cast (ax : Dynamic));
           (y = cast (ay : Dynamic));
         } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO) : Bool)) {
-          var c1x:Dynamic = _Runtime.getIndex(data, di);
-          var c1y:Dynamic = _Runtime.getIndex(data, (di + 1.0));
-          var c2x:Dynamic = _Runtime.getIndex(data, (di + 2.0));
-          var c2y:Dynamic = _Runtime.getIndex(data, (di + 3.0));
-          var ax:Dynamic = _Runtime.getIndex(data, (di + 4.0));
-          var ay:Dynamic = _Runtime.getIndex(data, (di + 5.0));
+          var c1x:Dynamic = flighthq._internal._StaticIndex.readArray(data, di);
+          var c1y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
+          var c2x:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
+          var c2y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
+          var ax:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 4.0));
+          var ay:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 5.0));
           (di = cast ((di + 6.0) : Dynamic));
           if ((cast hasContour : Bool)) {
             (windingNumber = cast ((windingNumber + _Runtime.callValue(ContainsPathPoint.flattenCubicWindingNumber__containsPathPoint, cast ([px, py, lastX, lastY, c1x, c1y, c2x, c2y, ax, ay, toleranceSq, 0.0] : Array<Dynamic>))) : Dynamic));

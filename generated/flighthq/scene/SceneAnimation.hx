@@ -18,7 +18,7 @@ class SceneAnimation {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(channels, 'length') : Float)) : Bool)) {
-        var channel:Dynamic = _Runtime.getIndex(channels, i);
+        var channel:Dynamic = flighthq._internal._StaticIndex.readArray(channels, i);
         var target:Dynamic = (cast _Runtime.field(channel, 'targetRef') : Null<SceneAnimationTarget>);
         if ((cast ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(target, 'node'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { i++; continue; }
         if ((cast _Runtime.strictEquals(_Runtime.field(target, 'path'), 'Weights') : Bool)) {
@@ -31,11 +31,11 @@ class SceneAnimation {
         _Runtime.callValue(sampleAnimationTrack, cast ([SceneAnimation._scratch__sceneAnimation, _Runtime.field(channel, 'track'), time] : Array<Dynamic>));
         var node:Dynamic = _Runtime.field(target, 'node');
         if ((cast _Runtime.strictEquals(_Runtime.field(target, 'path'), 'Translation') : Bool)) {
-          _Runtime.callValue(setVector3, cast ([_Runtime.field(node, 'position'), _Runtime.getIndex(SceneAnimation._scratch__sceneAnimation, 0.0), _Runtime.getIndex(SceneAnimation._scratch__sceneAnimation, 1.0), _Runtime.getIndex(SceneAnimation._scratch__sceneAnimation, 2.0)] : Array<Dynamic>));
+          _Runtime.callValue(setVector3, cast ([_Runtime.field(node, 'position'), flighthq._internal._StaticIndex.readArray(SceneAnimation._scratch__sceneAnimation, 0.0), flighthq._internal._StaticIndex.readArray(SceneAnimation._scratch__sceneAnimation, 1.0), flighthq._internal._StaticIndex.readArray(SceneAnimation._scratch__sceneAnimation, 2.0)] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(_Runtime.field(target, 'path'), 'Scale') : Bool)) {
-          _Runtime.callValue(setVector3, cast ([_Runtime.field(node, 'scale'), _Runtime.getIndex(SceneAnimation._scratch__sceneAnimation, 0.0), _Runtime.getIndex(SceneAnimation._scratch__sceneAnimation, 1.0), _Runtime.getIndex(SceneAnimation._scratch__sceneAnimation, 2.0)] : Array<Dynamic>));
+          _Runtime.callValue(setVector3, cast ([_Runtime.field(node, 'scale'), flighthq._internal._StaticIndex.readArray(SceneAnimation._scratch__sceneAnimation, 0.0), flighthq._internal._StaticIndex.readArray(SceneAnimation._scratch__sceneAnimation, 1.0), flighthq._internal._StaticIndex.readArray(SceneAnimation._scratch__sceneAnimation, 2.0)] : Array<Dynamic>));
         } else {
-          _Runtime.callValue(setQuaternion, cast ([_Runtime.field(node, 'rotation'), _Runtime.getIndex(SceneAnimation._scratch__sceneAnimation, 0.0), _Runtime.getIndex(SceneAnimation._scratch__sceneAnimation, 1.0), _Runtime.getIndex(SceneAnimation._scratch__sceneAnimation, 2.0), _Runtime.getIndex(SceneAnimation._scratch__sceneAnimation, 3.0)] : Array<Dynamic>));
+          _Runtime.callValue(setQuaternion, cast ([_Runtime.field(node, 'rotation'), flighthq._internal._StaticIndex.readArray(SceneAnimation._scratch__sceneAnimation, 0.0), flighthq._internal._StaticIndex.readArray(SceneAnimation._scratch__sceneAnimation, 1.0), flighthq._internal._StaticIndex.readArray(SceneAnimation._scratch__sceneAnimation, 2.0), flighthq._internal._StaticIndex.readArray(SceneAnimation._scratch__sceneAnimation, 3.0)] : Array<Dynamic>));
         } }
         _Runtime.callValue(invalidateNodeLocalTransform, cast ([node] : Array<Dynamic>));
         i++;

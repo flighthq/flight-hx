@@ -336,5 +336,16 @@ export interface StaticLoweringEmissionCounts {
   booleanConditionalExpressions: number;
   booleanOrExpressions: number;
   booleanTruthinessUses: number;
+  indexedAccesses: {
+    reads: number;
+    writes: number;
+  };
+  indexedReceivers: Record<
+    IrIndexedReceiver,
+    {
+      reads: number;
+      writes: number;
+    }
+  >;
   numericRelations: number;
 }

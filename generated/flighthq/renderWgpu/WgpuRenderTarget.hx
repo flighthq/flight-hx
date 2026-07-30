@@ -162,13 +162,13 @@ class WgpuRenderTarget {
 
   public static function isWgpuColorPreserved__wgpuRenderTarget(preserve:Dynamic, index:Float):Bool {
     if ((cast _Runtime.strictEquals(_Runtime.typeofValue(preserve), 'boolean') : Bool)) { return cast preserve; }
-    return cast _Runtime.strictEquals(_Runtime.getIndex(preserve, index), true);
+    return cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(preserve, index), true);
     return cast null;
   }
 
   public static function resolveWgpuClearColor__wgpuRenderTarget(target:flighthq.types.WgpuRenderTarget):Dynamic {
     var packed:Dynamic = cast _Runtime.UNDEFINED;
-    packed = _Runtime.getIndex(_Runtime.field(target, 'clearColors'), 0.0);
+    packed = flighthq._internal._StaticIndex.readArray(_Runtime.field(target, 'clearColors'), 0.0);
     if ((cast _Runtime.strictEquals(packed, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { r: 0.0, g: 0.0, b: 0.0, a: 0.0 }; }
     return cast { r: ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 24)) & 255) / 255.0), g: ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 16)) & 255) / 255.0), b: ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 8)) & 255) / 255.0), a: ((_Runtime.toInt32(packed) & 255) / 255.0) };
     return cast null;

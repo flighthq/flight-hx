@@ -8,6 +8,7 @@ class CoreSmoke {
   static function main():Void {
     if (clamp(12, 0, 10) != 10) throw 'clamp failed';
     StaticLoweringSmoke.run();
+    StaticIndexSmoke.run();
     if (quarterForSmoke(8) != 2) throw 'loop lowering failed';
 
     final point:Vector2Like = {x: 0.0, y: 0.0};

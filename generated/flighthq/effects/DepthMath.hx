@@ -35,9 +35,9 @@ class DepthMath {
         var phi:Dynamic = HxMath.acos((1.0 - h3));
         var scale:Dynamic = (i / n);
         var dist:Dynamic = (0.1 + ((0.9 * scale) * scale));
-        _Runtime.setIndex(out, ((i * 3.0) + 0.0), ((HxMath.sin(phi) * HxMath.cos(theta)) * dist));
-        _Runtime.setIndex(out, ((i * 3.0) + 1.0), ((HxMath.sin(phi) * HxMath.sin(theta)) * dist));
-        _Runtime.setIndex(out, ((i * 3.0) + 2.0), (HxMath.cos(phi) * dist));
+        flighthq._internal._StaticIndex.writeFloat32Array(out, ((i * 3.0) + 0.0), ((HxMath.sin(phi) * HxMath.cos(theta)) * dist));
+        flighthq._internal._StaticIndex.writeFloat32Array(out, ((i * 3.0) + 1.0), ((HxMath.sin(phi) * HxMath.sin(theta)) * dist));
+        flighthq._internal._StaticIndex.writeFloat32Array(out, ((i * 3.0) + 2.0), (HxMath.cos(phi) * dist));
         i++;
       }
     }

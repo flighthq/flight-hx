@@ -75,10 +75,10 @@ class PointContainment {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast pn : Float)) : Bool)) {
         var j:Dynamic = _Runtime.fmod((i + 1.0), pn);
-        var x0:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(i) << 1));
-        var y0:Dynamic = _Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0));
-        var x1:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(j) << 1));
-        var y1:Dynamic = _Runtime.getIndex(px, ((_Runtime.toInt32(j) << 1) + 1.0));
+        var x0:Dynamic = flighthq._internal._StaticIndex.readArray(px, (_Runtime.toInt32(i) << 1));
+        var y0:Dynamic = flighthq._internal._StaticIndex.readArray(px, ((_Runtime.toInt32(i) << 1) + 1.0));
+        var x1:Dynamic = flighthq._internal._StaticIndex.readArray(px, (_Runtime.toInt32(j) << 1));
+        var y1:Dynamic = flighthq._internal._StaticIndex.readArray(px, ((_Runtime.toInt32(j) << 1) + 1.0));
         var cross:Dynamic = (((x1 - x0) * (y - y0)) - ((y1 - y0) * (x - x0)));
         if ((cast ((cast cross : Float) > (cast PointContainment.EPS__pointContainment : Float)) : Bool)) { (positive = cast (true : Dynamic)); } else { if ((cast ((cast cross : Float) < (cast -PointContainment.EPS__pointContainment : Float)) : Bool)) { (negative = cast (true : Dynamic)); } }
         if ((cast ((cast positive : Bool) && (cast negative : Bool)) : Bool)) { return cast false; }

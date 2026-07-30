@@ -270,8 +270,8 @@ class Application {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast len : Float)) : Bool)) {
-        if ((cast ((cast _Runtime.getIndex(buf, i) : Float) > (cast 0.0 : Float)) : Bool)) {
-          (total = cast ((total + _Runtime.getIndex(buf, i)) : Dynamic));
+        if ((cast ((cast flighthq._internal._StaticIndex.readArray(buf, i) : Float) > (cast 0.0 : Float)) : Bool)) {
+          (total = cast ((total + flighthq._internal._StaticIndex.readArray(buf, i)) : Dynamic));
           count++;
         }
         i++;
@@ -284,7 +284,7 @@ class Application {
   }
 
   public static function getApplicationMainWindow(app:flighthq.types.Application):Null<ApplicationWindow> {
-    return cast _Runtime.coalesce(_Runtime.coalesce(((cast Application._mainWindows__application : flighthq._internal._WeakMap).get((cast app : flighthq.types.Application))), function():Dynamic return cast _Runtime.getIndex(_Runtime.field(app, 'windows'), 0.0)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(_Runtime.coalesce(((cast Application._mainWindows__application : flighthq._internal._WeakMap).get((cast app : flighthq.types.Application))), function():Dynamic return cast flighthq._internal._StaticIndex.readArray(_Runtime.field(app, 'windows'), 0.0)), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -376,7 +376,7 @@ class Application {
     if ((cast ((cast _Runtime.field(_Runtime.field(state, 'fpsBuffer'), 'length') : Float) < (cast Application.ROLLING_FPS_WINDOW__application : Float)) : Bool)) {
       _Runtime.callProperty(_Runtime.field(state, 'fpsBuffer'), 'push', cast ([delta] : Array<Dynamic>));
     } else {
-      _Runtime.setIndex(_Runtime.field(state, 'fpsBuffer'), _Runtime.field(state, 'fpsHead'), delta);
+      flighthq._internal._StaticIndex.writeArray(_Runtime.field(state, 'fpsBuffer'), _Runtime.field(state, 'fpsHead'), delta);
       _Runtime.setField(state, 'fpsHead', _Runtime.fmod((_Runtime.field(state, 'fpsHead') + 1.0), Application.ROLLING_FPS_WINDOW__application));
     }
   }

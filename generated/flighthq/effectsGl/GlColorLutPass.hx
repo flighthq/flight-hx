@@ -43,10 +43,10 @@ class GlColorLutPass {
       var j:Dynamic = 0.0;
       var o:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast ((n * n) * n) : Float)) : Bool)) {
-        _Runtime.setIndex(data, o++, HxMath.round((_Runtime.callValue(GlColorLutPass.clamp01__glColorLutPass, cast ([_Runtime.getIndex(samples, j++)] : Array<Dynamic>)) * 255.0)));
-        _Runtime.setIndex(data, o++, HxMath.round((_Runtime.callValue(GlColorLutPass.clamp01__glColorLutPass, cast ([_Runtime.getIndex(samples, j++)] : Array<Dynamic>)) * 255.0)));
-        _Runtime.setIndex(data, o++, HxMath.round((_Runtime.callValue(GlColorLutPass.clamp01__glColorLutPass, cast ([_Runtime.getIndex(samples, j++)] : Array<Dynamic>)) * 255.0)));
-        _Runtime.setIndex(data, o++, 255.0);
+        flighthq._internal._StaticIndex.writeUint8Array(data, o++, HxMath.round((_Runtime.callValue(GlColorLutPass.clamp01__glColorLutPass, cast ([flighthq._internal._StaticIndex.readArray(samples, j++)] : Array<Dynamic>)) * 255.0)));
+        flighthq._internal._StaticIndex.writeUint8Array(data, o++, HxMath.round((_Runtime.callValue(GlColorLutPass.clamp01__glColorLutPass, cast ([flighthq._internal._StaticIndex.readArray(samples, j++)] : Array<Dynamic>)) * 255.0)));
+        flighthq._internal._StaticIndex.writeUint8Array(data, o++, HxMath.round((_Runtime.callValue(GlColorLutPass.clamp01__glColorLutPass, cast ([flighthq._internal._StaticIndex.readArray(samples, j++)] : Array<Dynamic>)) * 255.0)));
+        flighthq._internal._StaticIndex.writeUint8Array(data, o++, 255.0);
         i++;
       }
     }

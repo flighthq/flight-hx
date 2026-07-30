@@ -65,7 +65,7 @@ class ElectronUpdater {
         var raw:Dynamic = cast _Runtime.UNDEFINED;
         var message:Dynamic = cast _Runtime.UNDEFINED;
         var error:UpdaterError = cast _Runtime.UNDEFINED;
-        raw = (cast _Runtime.getIndex(args, 0.0) : Null<Dynamic>);
+        raw = (cast flighthq._internal._StaticIndex.readArray(args, 0.0) : Null<Dynamic>);
         message = ((cast _Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool) ? (cast _Runtime.coalesce(_Runtime.optionalField(raw, 'message'), function():Dynamic return cast '') : Dynamic) : (cast Std.string(_Runtime.coalesce(raw, function():Dynamic return cast '')) : Dynamic));
         error = { kind: 'Network', message: message };
         _Runtime.callValue(listener, cast ([error] : Array<Dynamic>));
@@ -93,7 +93,7 @@ class ElectronUpdater {
   }
 
   public static function toUpdateInfo__electronUpdater(args:Array<Dynamic>):UpdateInfo {
-    return cast { version: Std.string(_Runtime.coalesce(_Runtime.getIndex(args, 2.0), function():Dynamic return cast '')), notes: Std.string(_Runtime.coalesce(_Runtime.getIndex(args, 1.0), function():Dynamic return cast '')), releaseDate: Std.string(_Runtime.coalesce(_Runtime.getIndex(args, 3.0), function():Dynamic return cast '')), deltaFromVersion: null, downloadSizeBytes: -1.0, isMandatory: false, minimumOsVersion: null, sha512: '', stagedRolloutPercent: 100.0 };
+    return cast { version: Std.string(_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(args, 2.0), function():Dynamic return cast '')), notes: Std.string(_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(args, 1.0), function():Dynamic return cast '')), releaseDate: Std.string(_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(args, 3.0), function():Dynamic return cast '')), deltaFromVersion: null, downloadSizeBytes: -1.0, isMandatory: false, minimumOsVersion: null, sha512: '', stagedRolloutPercent: 100.0 };
     return cast null;
   }
 }

@@ -45,7 +45,7 @@ class GlMeshUpload {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(_Runtime.field(geometry, 'layout'), 'attributes'), 'length') : Float)) : Bool)) {
-        _Runtime.callValue(GlMeshUpload.bindGlVertexAttribute__glMeshUpload, cast ([gl, _Runtime.getIndex(_Runtime.field(_Runtime.field(geometry, 'layout'), 'attributes'), i), stride] : Array<Dynamic>));
+        _Runtime.callValue(GlMeshUpload.bindGlVertexAttribute__glMeshUpload, cast ([gl, flighthq._internal._StaticIndex.readArray(_Runtime.field(_Runtime.field(geometry, 'layout'), 'attributes'), i), stride] : Array<Dynamic>));
         i++;
       }
     }
@@ -70,7 +70,7 @@ class GlMeshUpload {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(attributes, 'length') : Float)) : Bool)) {
-        if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.getIndex(attributes, i), 'semantic'), 'uv1') : Bool)) { return cast true; }
+        if ((cast _Runtime.strictEquals(_Runtime.field(flighthq._internal._StaticIndex.readArray(attributes, i), 'semantic'), 'uv1') : Bool)) { return cast true; }
         i++;
       }
     }
@@ -101,14 +101,14 @@ class GlMeshUpload {
         var base:Dynamic = (v * floatsPerVertex);
         var s:Dynamic = (v * 3.0);
         if ((cast ((cast positionOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
-          _Runtime.setIndex(out, (base + positionOffset), _Runtime.getIndex(positions, s));
-          _Runtime.setIndex(out, ((base + positionOffset) + 1.0), _Runtime.getIndex(positions, (s + 1.0)));
-          _Runtime.setIndex(out, ((base + positionOffset) + 2.0), _Runtime.getIndex(positions, (s + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(out, (base + positionOffset), flighthq._internal._StaticIndex.readFloat32Array(positions, s));
+          flighthq._internal._StaticIndex.writeFloat32Array(out, ((base + positionOffset) + 1.0), flighthq._internal._StaticIndex.readFloat32Array(positions, (s + 1.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(out, ((base + positionOffset) + 2.0), flighthq._internal._StaticIndex.readFloat32Array(positions, (s + 2.0)));
         }
         if ((cast ((cast normalOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
-          _Runtime.setIndex(out, (base + normalOffset), _Runtime.getIndex(normals, s));
-          _Runtime.setIndex(out, ((base + normalOffset) + 1.0), _Runtime.getIndex(normals, (s + 1.0)));
-          _Runtime.setIndex(out, ((base + normalOffset) + 2.0), _Runtime.getIndex(normals, (s + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(out, (base + normalOffset), flighthq._internal._StaticIndex.readFloat32Array(normals, s));
+          flighthq._internal._StaticIndex.writeFloat32Array(out, ((base + normalOffset) + 1.0), flighthq._internal._StaticIndex.readFloat32Array(normals, (s + 1.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(out, ((base + normalOffset) + 2.0), flighthq._internal._StaticIndex.readFloat32Array(normals, (s + 2.0)));
         }
         v++;
       }
@@ -123,7 +123,7 @@ class GlMeshUpload {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(attributes, 'length') : Float)) : Bool)) {
-        if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.getIndex(attributes, i), 'semantic'), semantic) : Bool)) { return cast (_Runtime.field(_Runtime.getIndex(attributes, i), 'byteOffset') / 4.0); }
+        if ((cast _Runtime.strictEquals(_Runtime.field(flighthq._internal._StaticIndex.readArray(attributes, i), 'semantic'), semantic) : Bool)) { return cast (_Runtime.field(flighthq._internal._StaticIndex.readArray(attributes, i), 'byteOffset') / 4.0); }
         i++;
       }
     }

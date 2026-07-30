@@ -25,8 +25,8 @@ class KuwaharaMath {
           var x:Dynamic = 0.0;
           while ((cast ((cast x : Float) < (cast size : Float)) : Bool)) {
             var d:Dynamic = ((x * x) + (y * y));
-            _Runtime.setIndex(out, ((y * size) + x), HxMath.exp((-d / twoSigmaSq)));
-            (sum = cast ((sum + _Runtime.getIndex(out, ((y * size) + x))) : Dynamic));
+            flighthq._internal._StaticIndex.writeFloat32Array(out, ((y * size) + x), HxMath.exp((-d / twoSigmaSq)));
+            (sum = cast ((sum + flighthq._internal._StaticIndex.readFloat32Array(out, ((y * size) + x))) : Dynamic));
             x++;
           }
         }
@@ -37,7 +37,7 @@ class KuwaharaMath {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast (size * size) : Float)) : Bool)) {
-        _Runtime.setIndex(out, i, (_Runtime.getIndex(out, i) * invSum));
+        ({ var __indexedObject0:Dynamic = out; var __indexedKey1:Dynamic = i; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject0, __indexedKey1, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject0, __indexedKey1) * invSum)); });
         i++;
       }
     }
@@ -66,14 +66,14 @@ class KuwaharaMath {
     v5 = 0.0;
     v6 = 0.0;
     v7 = 0.0;
-    _Runtime.setIndex(out, 0.0, v0);
-    _Runtime.setIndex(out, 1.0, v1);
-    _Runtime.setIndex(out, 2.0, v2);
-    _Runtime.setIndex(out, 3.0, v3);
-    _Runtime.setIndex(out, 4.0, v4);
-    _Runtime.setIndex(out, 5.0, v5);
-    _Runtime.setIndex(out, 6.0, v6);
-    _Runtime.setIndex(out, 7.0, v7);
+    flighthq._internal._StaticIndex.writeArray(out, 0.0, v0);
+    flighthq._internal._StaticIndex.writeArray(out, 1.0, v1);
+    flighthq._internal._StaticIndex.writeArray(out, 2.0, v2);
+    flighthq._internal._StaticIndex.writeArray(out, 3.0, v3);
+    flighthq._internal._StaticIndex.writeArray(out, 4.0, v4);
+    flighthq._internal._StaticIndex.writeArray(out, 5.0, v5);
+    flighthq._internal._StaticIndex.writeArray(out, 6.0, v6);
+    flighthq._internal._StaticIndex.writeArray(out, 7.0, v7);
   }
 
   public static function computeKuwaharaSectorPixelCount(effect:KuwaharaEffect):Float {

@@ -158,7 +158,7 @@ class TextInputEditing {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(layout, 'lineHeights'), 'length') : Float)) : Bool)) {
         var lineTop:Dynamic = _Runtime.callValue(TextInputEditing.getLineOffsetY__textInputEditing, cast ([layout, i] : Array<Dynamic>));
-        var lineBottom:Dynamic = (lineTop + _Runtime.getIndex(_Runtime.field(layout, 'lineHeights'), i));
+        var lineBottom:Dynamic = (lineTop + flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i));
         var distance:Dynamic = ((cast ((cast y : Float) < (cast lineTop : Float)) : Bool) ? (cast (lineTop - y) : Dynamic) : (cast ((cast ((cast y : Float) > (cast lineBottom : Float)) : Bool) ? (cast (y - lineBottom) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
         if ((cast ((cast distance : Float) < (cast closestLineDistance : Float)) : Bool)) {
           (closestLineDistance = cast (distance : Dynamic));
@@ -358,7 +358,7 @@ class TextInputEditing {
       _Runtime.callValue(moveTextInputCaret, cast ([source, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length'), extendSelection] : Array<Dynamic>));
       return;
     }
-    targetY = (_Runtime.callValue(TextInputEditing.getLineOffsetY__textInputEditing, cast ([layout, targetLineIndex] : Array<Dynamic>)) + (_Runtime.getIndex(_Runtime.field(layout, 'lineHeights'), targetLineIndex) / 2.0));
+    targetY = (_Runtime.callValue(TextInputEditing.getLineOffsetY__textInputEditing, cast ([layout, targetLineIndex] : Array<Dynamic>)) + (flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), targetLineIndex) / 2.0));
     targetIndex = _Runtime.callValue(getTextInputCharacterIndexAtPoint, cast ([source, layout, _Runtime.field(state, 'desiredCaretX'), targetY] : Array<Dynamic>));
     newCaret = _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([targetIndex, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>));
     _Runtime.setField(state, 'caretIndex', newCaret);
@@ -410,7 +410,7 @@ class TextInputEditing {
       _Runtime.callValue(moveTextInputCaret, cast ([source, 0.0, extendSelection] : Array<Dynamic>));
       return;
     }
-    targetY = (_Runtime.callValue(TextInputEditing.getLineOffsetY__textInputEditing, cast ([layout, targetLineIndex] : Array<Dynamic>)) + (_Runtime.getIndex(_Runtime.field(layout, 'lineHeights'), targetLineIndex) / 2.0));
+    targetY = (_Runtime.callValue(TextInputEditing.getLineOffsetY__textInputEditing, cast ([layout, targetLineIndex] : Array<Dynamic>)) + (flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), targetLineIndex) / 2.0));
     targetIndex = _Runtime.callValue(getTextInputCharacterIndexAtPoint, cast ([source, layout, _Runtime.field(state, 'desiredCaretX'), targetY] : Array<Dynamic>));
     newCaret = _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([targetIndex, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>));
     _Runtime.setField(state, 'caretIndex', newCaret);
@@ -424,7 +424,7 @@ class TextInputEditing {
     state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
     if ((cast !(cast _Runtime.callValue(canRedoTextInput, cast ([source] : Array<Dynamic>)) : Bool) : Bool)) { return; }
     _Runtime.incrementField(state, 'historyIndex', 1, true);
-    record = _Runtime.getIndex(_Runtime.field(state, 'history'), _Runtime.field(state, 'historyIndex'));
+    record = flighthq._internal._StaticIndex.readArray(_Runtime.field(state, 'history'), _Runtime.field(state, 'historyIndex'));
     _Runtime.callValue(TextInputEditing.applyHistoryRecord__textInputEditing, cast ([source, state, _Runtime.field(record, 'textAfter'), _Runtime.field(record, 'caretIndexAfter'), _Runtime.field(record, 'selectionIndexAfter')] : Array<Dynamic>));
   }
 
@@ -485,7 +485,7 @@ class TextInputEditing {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast scrollVLine : Float)) : Bool)) {
-        (viewTop = cast ((viewTop + _Runtime.coalesce(_Runtime.getIndex(_Runtime.field(layout, 'lineHeights'), i), function():Dynamic return cast 0.0)) : Dynamic));
+        (viewTop = cast ((viewTop + _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i), function():Dynamic return cast 0.0)) : Dynamic));
         i++;
       }
     }
@@ -498,11 +498,11 @@ class TextInputEditing {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(layout, 'numLines') : Float)) : Bool)) {
-          if ((cast ((cast (pixelOffset + _Runtime.getIndex(_Runtime.field(layout, 'lineHeights'), i)) : Float) > (cast (caretBottom - viewportHeight) : Float)) : Bool)) {
+          if ((cast ((cast (pixelOffset + flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i)) : Float) > (cast (caretBottom - viewportHeight) : Float)) : Bool)) {
             (firstVisibleLine = cast (i : Dynamic));
             break;
           }
-          (pixelOffset = cast ((pixelOffset + _Runtime.getIndex(_Runtime.field(layout, 'lineHeights'), i)) : Dynamic));
+          (pixelOffset = cast ((pixelOffset + flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i)) : Dynamic));
           i++;
         }
       }
@@ -568,7 +568,7 @@ class TextInputEditing {
     var record:Dynamic = cast _Runtime.UNDEFINED;
     state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
     if ((cast !(cast _Runtime.callValue(canUndoTextInput, cast ([source] : Array<Dynamic>)) : Bool) : Bool)) { return; }
-    record = _Runtime.getIndex(_Runtime.field(state, 'history'), _Runtime.field(state, 'historyIndex'));
+    record = flighthq._internal._StaticIndex.readArray(_Runtime.field(state, 'history'), _Runtime.field(state, 'historyIndex'));
     _Runtime.incrementField(state, 'historyIndex', -1, true);
     _Runtime.callValue(TextInputEditing.applyHistoryRecord__textInputEditing, cast ([source, state, _Runtime.field(record, 'textBefore'), _Runtime.field(record, 'caretIndexBefore'), _Runtime.field(record, 'selectionIndexBefore')] : Array<Dynamic>));
   }
@@ -581,7 +581,7 @@ class TextInputEditing {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(ranges, 'length') : Float)) : Bool)) {
-        var range:Dynamic = _Runtime.getIndex(ranges, i);
+        var range:Dynamic = flighthq._internal._StaticIndex.readArray(ranges, i);
         if ((cast _Runtime.strictEquals(beginIndex, endIndex) : Bool)) {
           if ((cast ((cast _Runtime.field(range, 'end') : Float) < (cast beginIndex : Float)) : Bool)) {
             i++;
@@ -614,7 +614,7 @@ class TextInputEditing {
     {
       var i:Dynamic = (_Runtime.field(ranges, 'length') - 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-        if ((cast ((cast _Runtime.field(_Runtime.getIndex(ranges, i), 'start') : Float) >= (cast _Runtime.field(_Runtime.getIndex(ranges, i), 'end') : Float)) : Bool)) { _Runtime.splice(ranges, Std.int(i), Std.int(1.0), []); }
+        if ((cast ((cast _Runtime.field(flighthq._internal._StaticIndex.readArray(ranges, i), 'start') : Float) >= (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(ranges, i), 'end') : Float)) : Bool)) { _Runtime.splice(ranges, Std.int(i), Std.int(1.0), []); }
         i--;
       }
     }
@@ -646,7 +646,7 @@ class TextInputEditing {
   }
 
   public static function getFallbackLineHeight__textInputEditing(layout:TextLayoutResult):Float {
-    return cast _Runtime.coalesce(_Runtime.getIndex(_Runtime.field(layout, 'lineHeights'), 0.0), function():Dynamic return cast 12.0);
+    return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), 0.0), function():Dynamic return cast 12.0);
     return cast null;
   }
 
@@ -711,7 +711,7 @@ class TextInputEditing {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast lineIndex : Float)) : Bool)) {
-        (y = cast ((y + _Runtime.coalesce(_Runtime.getIndex(_Runtime.field(layout, 'lineHeights'), i), function():Dynamic return cast 0.0)) : Dynamic));
+        (y = cast ((y + _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i), function():Dynamic return cast 0.0)) : Dynamic));
         i++;
       }
     }
@@ -733,7 +733,7 @@ class TextInputEditing {
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
       if ((cast ((cast ((cast index : Float) >= (cast _Runtime.field(group, 'startIndex') : Float)) : Bool) && (cast ((cast index : Float) <= (cast _Runtime.field(group, 'endIndex') : Float)) : Bool)) : Bool)) { return cast group; }
     }
-    return cast _Runtime.coalesce(_Runtime.getIndex(_Runtime.field(layout, 'groups'), (_Runtime.field(_Runtime.field(layout, 'groups'), 'length') - 1.0)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'groups'), (_Runtime.field(_Runtime.field(layout, 'groups'), 'length') - 1.0)), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -745,7 +745,7 @@ class TextInputEditing {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast limit : Float)) : Bool)) {
-        (x = cast ((x + _Runtime.coalesce(_Runtime.getIndex(_Runtime.field(group, 'positions'), i), function():Dynamic return cast 0.0)) : Dynamic));
+        (x = cast ((x + _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(group, 'positions'), i), function():Dynamic return cast 0.0)) : Dynamic));
         i++;
       }
     }
@@ -759,7 +759,7 @@ class TextInputEditing {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(group, 'positions'), 'length') : Float)) : Bool)) {
-        var advance:Dynamic = _Runtime.coalesce(_Runtime.getIndex(_Runtime.field(group, 'positions'), i), function():Dynamic return cast 0.0);
+        var advance:Dynamic = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(group, 'positions'), i), function():Dynamic return cast 0.0);
         if ((cast ((cast x : Float) < (cast (currentX + (advance / 2.0)) : Float)) : Bool)) { return cast (_Runtime.field(group, 'startIndex') + i); }
         (currentX = cast ((currentX + advance) : Dynamic));
         i++;
@@ -774,7 +774,7 @@ class TextInputEditing {
     if ((cast ((cast _Runtime.field(state, 'historyIndex') : Float) < (cast (_Runtime.field(_Runtime.field(state, 'history'), 'length') - 1.0) : Float)) : Bool)) {
       _Runtime.setLength(_Runtime.field(state, 'history'), (_Runtime.field(state, 'historyIndex') + 1.0));
     }
-    previous = ((cast ((cast _Runtime.field(state, 'historyIndex') : Float) >= (cast 0.0 : Float)) : Bool) ? (cast _Runtime.getIndex(_Runtime.field(state, 'history'), _Runtime.field(state, 'historyIndex')) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+    previous = ((cast ((cast _Runtime.field(state, 'historyIndex') : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(state, 'history'), _Runtime.field(state, 'historyIndex')) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
     if ((cast ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(mergeKind, null) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(previous, 'mergeKind'), mergeKind) : Bool)) : Bool)) {
       _Runtime.setField(previous, 'textAfter', textAfter);
       _Runtime.setField(previous, 'caretIndexAfter', _Runtime.field(state, 'caretIndex'));

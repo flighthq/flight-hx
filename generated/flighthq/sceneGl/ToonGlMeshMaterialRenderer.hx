@@ -71,7 +71,7 @@ class ToonGlMeshMaterialRenderer {
       return;
     }
     _Runtime.callValue(unpackColorToLinear, cast ([ToonGlMeshMaterialRenderer.scratchRgba__toonGlMeshMaterialRenderer, _Runtime.field(material, 'baseColor')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locBaseColor'), _Runtime.getIndex(ToonGlMeshMaterialRenderer.scratchRgba__toonGlMeshMaterialRenderer, 0.0), _Runtime.getIndex(ToonGlMeshMaterialRenderer.scratchRgba__toonGlMeshMaterialRenderer, 1.0), _Runtime.getIndex(ToonGlMeshMaterialRenderer.scratchRgba__toonGlMeshMaterialRenderer, 2.0), _Runtime.getIndex(ToonGlMeshMaterialRenderer.scratchRgba__toonGlMeshMaterialRenderer, 3.0));
+    flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locBaseColor'), flighthq._internal._StaticIndex.readArray(ToonGlMeshMaterialRenderer.scratchRgba__toonGlMeshMaterialRenderer, 0.0), flighthq._internal._StaticIndex.readArray(ToonGlMeshMaterialRenderer.scratchRgba__toonGlMeshMaterialRenderer, 1.0), flighthq._internal._StaticIndex.readArray(ToonGlMeshMaterialRenderer.scratchRgba__toonGlMeshMaterialRenderer, 2.0), flighthq._internal._StaticIndex.readArray(ToonGlMeshMaterialRenderer.scratchRgba__toonGlMeshMaterialRenderer, 3.0));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locSteps'), _Runtime.field(material, 'steps'));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), _Runtime.field(material, 'alphaCutoff'));
     baseColorMap = _Runtime.field(material, 'baseColorMap');

@@ -22,13 +22,13 @@ class CleanPath {
     for (contour in _Runtime.iterable(contours)) {
       var n:Dynamic = (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> 1);
       if ((cast ((cast n : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
-      var closed:Dynamic = ((cast ((cast n : Float) >= (cast 3.0 : Float)) : Bool) && (cast _Runtime.callValue(CleanPath.withinTolerance__cleanPath, cast ([_Runtime.getIndex(contour, 0.0), _Runtime.getIndex(contour, 1.0), _Runtime.getIndex(contour, ((n * 2.0) - 2.0)), _Runtime.getIndex(contour, ((n * 2.0) - 1.0)), toleranceSq] : Array<Dynamic>)) : Bool));
+      var closed:Dynamic = ((cast ((cast n : Float) >= (cast 3.0 : Float)) : Bool) && (cast _Runtime.callValue(CleanPath.withinTolerance__cleanPath, cast ([flighthq._internal._StaticIndex.readArray(contour, 0.0), flighthq._internal._StaticIndex.readArray(contour, 1.0), flighthq._internal._StaticIndex.readArray(contour, ((n * 2.0) - 2.0)), flighthq._internal._StaticIndex.readArray(contour, ((n * 2.0) - 1.0)), toleranceSq] : Array<Dynamic>)) : Bool));
       var count:Dynamic = ((cast closed : Bool) ? (cast (n - 1.0) : Dynamic) : (cast n : Dynamic));
       var kept:Array<Float> = cast ([] : Array<Dynamic>);
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-          _Runtime.callValue(CleanPath.pushCleanVertex__cleanPath, cast ([kept, _Runtime.getIndex(contour, (i * 2.0)), _Runtime.getIndex(contour, ((i * 2.0) + 1.0)), toleranceSq] : Array<Dynamic>));
+          _Runtime.callValue(CleanPath.pushCleanVertex__cleanPath, cast ([kept, flighthq._internal._StaticIndex.readArray(contour, (i * 2.0)), flighthq._internal._StaticIndex.readArray(contour, ((i * 2.0) + 1.0)), toleranceSq] : Array<Dynamic>));
           i++;
         }
       }
@@ -36,12 +36,12 @@ class CleanPath {
       var keptCount:Dynamic = (_Runtime.toInt32(_Runtime.field(kept, 'length')) >> 1);
       if ((cast ((cast closed : Bool) ? (cast ((cast keptCount : Float) < (cast 3.0 : Float)) : Dynamic) : (cast ((cast keptCount : Float) < (cast 2.0 : Float)) : Dynamic)) : Bool)) { continue; }
       _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
-      _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.getIndex(kept, 0.0), _Runtime.getIndex(kept, 1.0)] : Array<Dynamic>));
+      _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([flighthq._internal._StaticIndex.readArray(kept, 0.0), flighthq._internal._StaticIndex.readArray(kept, 1.0)] : Array<Dynamic>));
       {
         var i:Dynamic = 1.0;
         while ((cast ((cast i : Float) < (cast keptCount : Float)) : Bool)) {
           _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.LINE_TO] : Array<Dynamic>));
-          _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.getIndex(kept, (i * 2.0)), _Runtime.getIndex(kept, ((i * 2.0) + 1.0))] : Array<Dynamic>));
+          _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([flighthq._internal._StaticIndex.readArray(kept, (i * 2.0)), flighthq._internal._StaticIndex.readArray(kept, ((i * 2.0) + 1.0))] : Array<Dynamic>));
           i++;
         }
       }
@@ -75,12 +75,12 @@ class CleanPath {
     var my:Dynamic = cast _Runtime.UNDEFINED;
     var sx:Dynamic = cast _Runtime.UNDEFINED;
     var sy:Dynamic = cast _Runtime.UNDEFINED;
-    px = _Runtime.getIndex(kept, (prev * 2.0));
-    py = _Runtime.getIndex(kept, ((prev * 2.0) + 1.0));
-    mx = _Runtime.getIndex(kept, (mid * 2.0));
-    my = _Runtime.getIndex(kept, ((mid * 2.0) + 1.0));
-    sx = _Runtime.getIndex(kept, (next * 2.0));
-    sy = _Runtime.getIndex(kept, ((next * 2.0) + 1.0));
+    px = flighthq._internal._StaticIndex.readArray(kept, (prev * 2.0));
+    py = flighthq._internal._StaticIndex.readArray(kept, ((prev * 2.0) + 1.0));
+    mx = flighthq._internal._StaticIndex.readArray(kept, (mid * 2.0));
+    my = flighthq._internal._StaticIndex.readArray(kept, ((mid * 2.0) + 1.0));
+    sx = flighthq._internal._StaticIndex.readArray(kept, (next * 2.0));
+    sy = flighthq._internal._StaticIndex.readArray(kept, ((next * 2.0) + 1.0));
     return cast _Runtime.callValue(CleanPath.isRedundantMiddle__cleanPath, cast ([px, py, mx, my, sx, sy, toleranceSq] : Array<Dynamic>));
     return cast null;
   }
@@ -102,10 +102,10 @@ class CleanPath {
   public static function pushCleanVertex__cleanPath(kept:Array<Float>, x:Float, y:Float, toleranceSq:Float):Void {
     var k:Dynamic = cast _Runtime.UNDEFINED;
     k = _Runtime.field(kept, 'length');
-    if ((cast ((cast ((cast k : Float) >= (cast 2.0 : Float)) : Bool) && (cast _Runtime.callValue(CleanPath.withinTolerance__cleanPath, cast ([_Runtime.getIndex(kept, (k - 2.0)), _Runtime.getIndex(kept, (k - 1.0)), x, y, toleranceSq] : Array<Dynamic>)) : Bool)) : Bool)) { return; }
+    if ((cast ((cast ((cast k : Float) >= (cast 2.0 : Float)) : Bool) && (cast _Runtime.callValue(CleanPath.withinTolerance__cleanPath, cast ([flighthq._internal._StaticIndex.readArray(kept, (k - 2.0)), flighthq._internal._StaticIndex.readArray(kept, (k - 1.0)), x, y, toleranceSq] : Array<Dynamic>)) : Bool)) : Bool)) { return; }
     while ((cast ((cast _Runtime.field(kept, 'length') : Float) >= (cast 4.0 : Float)) : Bool)) {
       var m:Dynamic = _Runtime.field(kept, 'length');
-      if ((cast !(cast _Runtime.callValue(CleanPath.isRedundantMiddle__cleanPath, cast ([_Runtime.getIndex(kept, (m - 4.0)), _Runtime.getIndex(kept, (m - 3.0)), _Runtime.getIndex(kept, (m - 2.0)), _Runtime.getIndex(kept, (m - 1.0)), x, y, toleranceSq] : Array<Dynamic>)) : Bool) : Bool)) { break; }
+      if ((cast !(cast _Runtime.callValue(CleanPath.isRedundantMiddle__cleanPath, cast ([flighthq._internal._StaticIndex.readArray(kept, (m - 4.0)), flighthq._internal._StaticIndex.readArray(kept, (m - 3.0)), flighthq._internal._StaticIndex.readArray(kept, (m - 2.0)), flighthq._internal._StaticIndex.readArray(kept, (m - 1.0)), x, y, toleranceSq] : Array<Dynamic>)) : Bool) : Bool)) { break; }
       _Runtime.setLength(kept, (kept.length - 2.0));
     }
     _Runtime.pushMany(kept, cast ([x, y] : Array<Dynamic>));

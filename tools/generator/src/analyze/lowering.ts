@@ -3,7 +3,7 @@ import path from 'node:path';
 import ts from 'typescript';
 
 import { upstreamTypeScriptProgram } from './program.ts';
-import { staticFactCounts, sumStaticFactAudits } from './static-facts.ts';
+import { indexedReceiverNames, staticFactCounts, sumStaticFactAudits } from './static-facts.ts';
 import { typedStructRegistry, type TypedStructRegistry } from './typed-structs.ts';
 import { lowerTypeScriptSource } from '../lower/typescript.ts';
 import type {
@@ -24,7 +24,7 @@ export interface PackageLoweringAudit {
 
 export interface LoweringAudit {
   packages: PackageLoweringAudit[];
-  schemaVersion: 3;
+  schemaVersion: 4;
   summary: {
     declarations: number;
     diagnostics: number;
@@ -53,7 +53,7 @@ export function auditLowering(workspaceDirectory: string, typedStructs?: TypedSt
 
   return {
     packages,
-    schemaVersion: 3,
+    schemaVersion: 4,
     summary: {
       declarations: sum(packages, (item) => item.declarations),
       diagnostics: sum(packages, (item) => item.diagnostics.length),
@@ -65,6 +65,13 @@ export function auditLowering(workspaceDirectory: string, typedStructs?: TypedSt
         booleanConditionalExpressions: 0,
         booleanOrExpressions: 0,
         booleanTruthinessUses: 0,
+        indexedAccesses: {
+          reads: 0,
+          writes: 0,
+        },
+        indexedReceivers: Object.fromEntries(
+          indexedReceiverNames.map((receiver) => [receiver, { reads: 0, writes: 0 }]),
+        ) as StaticLoweringEmissionCounts['indexedReceivers'],
         numericRelations: 0,
       },
       staticFacts: sumStaticFactAudits(results.map((result) => result.staticFacts)),

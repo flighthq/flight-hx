@@ -19,8 +19,8 @@ class WgpuLensDistortionEffect {
     scale = _Runtime.coalesce(_Runtime.field(effect, 'scale'), function():Dynamic return cast 1.0);
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'lens.lensDistortion', WgpuLensDistortionEffect.LENS_DISTORTION_FRAGMENT_WGSL__wgpuLensDistortionEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, amount);
-      _Runtime.setIndex(f32, 1.0, scale);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, amount);
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, scale);
     }] : Array<Dynamic>));
   }
 

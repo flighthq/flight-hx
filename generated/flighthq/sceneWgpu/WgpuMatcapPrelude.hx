@@ -31,14 +31,14 @@ class WgpuMatcapPrelude {
       (binding = cast ({ bindGroup: bindGroup, buffer: buffer } : Dynamic));
       ((cast _Runtime.field(scene, 'materialBindGroups') : flighthq._internal._WeakMap).set(materialKey, binding));
     }
-    _Runtime.setIndex(WgpuMatcapPrelude._scratch__wgpuMatcapPrelude, 0.0, _Runtime.getIndex(tint, 0.0));
-    _Runtime.setIndex(WgpuMatcapPrelude._scratch__wgpuMatcapPrelude, 1.0, _Runtime.getIndex(tint, 1.0));
-    _Runtime.setIndex(WgpuMatcapPrelude._scratch__wgpuMatcapPrelude, 2.0, _Runtime.getIndex(tint, 2.0));
-    _Runtime.setIndex(WgpuMatcapPrelude._scratch__wgpuMatcapPrelude, 3.0, _Runtime.getIndex(tint, 3.0));
-    _Runtime.setIndex(WgpuMatcapPrelude._scratch__wgpuMatcapPrelude, 4.0, alphaCutoff);
-    _Runtime.setIndex(WgpuMatcapPrelude._scratch__wgpuMatcapPrelude, 5.0, 0.0);
-    _Runtime.setIndex(WgpuMatcapPrelude._scratch__wgpuMatcapPrelude, 6.0, 0.0);
-    _Runtime.setIndex(WgpuMatcapPrelude._scratch__wgpuMatcapPrelude, 7.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuMatcapPrelude._scratch__wgpuMatcapPrelude, 0.0, flighthq._internal._StaticIndex.readArray(tint, 0.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuMatcapPrelude._scratch__wgpuMatcapPrelude, 1.0, flighthq._internal._StaticIndex.readArray(tint, 1.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuMatcapPrelude._scratch__wgpuMatcapPrelude, 2.0, flighthq._internal._StaticIndex.readArray(tint, 2.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuMatcapPrelude._scratch__wgpuMatcapPrelude, 3.0, flighthq._internal._StaticIndex.readArray(tint, 3.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuMatcapPrelude._scratch__wgpuMatcapPrelude, 4.0, alphaCutoff);
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuMatcapPrelude._scratch__wgpuMatcapPrelude, 5.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuMatcapPrelude._scratch__wgpuMatcapPrelude, 6.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuMatcapPrelude._scratch__wgpuMatcapPrelude, 7.0, 0.0);
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(binding, 'buffer'), 0.0, _Runtime.field(WgpuMatcapPrelude._scratch__wgpuMatcapPrelude, 'buffer'), 0.0, WgpuMatcapPrelude.MATCAP_UNIFORM_BYTES__wgpuMatcapPrelude] : Array<Dynamic>));
     _Runtime.callValue(stashWgpuUvTransform, cast ([state, null] : Array<Dynamic>));
     return cast _Runtime.field(binding, 'bindGroup');

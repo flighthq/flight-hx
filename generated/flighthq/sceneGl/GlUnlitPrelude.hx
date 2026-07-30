@@ -24,7 +24,7 @@ class GlUnlitPrelude {
   public static function bindGlUnlitSurface(state:GlRenderState, program:GlUnlitProgram, color:LinearColor, intensity:Float, colorMap:Null<Texture>, alphaCutoff:Float):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
-    flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locColor'), _Runtime.getIndex(color, 0.0), _Runtime.getIndex(color, 1.0), _Runtime.getIndex(color, 2.0), _Runtime.getIndex(color, 3.0));
+    flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locColor'), flighthq._internal._StaticIndex.readArray(color, 0.0), flighthq._internal._StaticIndex.readArray(color, 1.0), flighthq._internal._StaticIndex.readArray(color, 2.0), flighthq._internal._StaticIndex.readArray(color, 3.0));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locIntensity'), intensity);
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), alphaCutoff);
     if ((cast ((cast ((cast !_Runtime.strictEquals(colorMap, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(colorMap, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(colorMap, 'image')] : Array<Dynamic>)) : Bool)) : Bool)) {
@@ -37,7 +37,7 @@ class GlUnlitPrelude {
   public static function bindGlUnlitVideoSurface(state:GlRenderState, program:GlUnlitProgram, color:LinearColor, intensity:Float, videoMap:VideoTexture, alphaCutoff:Float):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
-    flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locColor'), _Runtime.getIndex(color, 0.0), _Runtime.getIndex(color, 1.0), _Runtime.getIndex(color, 2.0), _Runtime.getIndex(color, 3.0));
+    flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locColor'), flighthq._internal._StaticIndex.readArray(color, 0.0), flighthq._internal._StaticIndex.readArray(color, 1.0), flighthq._internal._StaticIndex.readArray(color, 2.0), flighthq._internal._StaticIndex.readArray(color, 3.0));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locIntensity'), intensity);
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), alphaCutoff);
     flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);

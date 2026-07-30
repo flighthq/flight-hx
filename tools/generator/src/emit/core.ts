@@ -43,7 +43,7 @@ export interface CoreGenerationReport {
     diagnostics: LoweringDiagnostic[];
     module: string;
   }>;
-  schemaVersion: 2;
+  schemaVersion: 3;
   staticLowering: StaticLoweringEmissionCounts;
 }
 
@@ -264,7 +264,7 @@ export function generateCoreModules(
         module: modulePath(module),
       }))
       .sort((left, right) => left.module.localeCompare(right.module)),
-    schemaVersion: 2,
+    schemaVersion: 3,
     staticLowering: staticLoweringEmissionCounts(),
   };
   writeOrCheck(path.join(workspaceDirectory, 'reports', 'core.json'), stableJson(report), check);

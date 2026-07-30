@@ -43,10 +43,10 @@ class SurfaceChannel {
             var ax:Dynamic = (_Runtime.field(a, 'x') + px);
             if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ox : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast ox : Float) >= (cast _Runtime.field(_Runtime.field(out, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast rx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast rx : Float) >= (cast _Runtime.field(_Runtime.field(r, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast gx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast gx : Float) >= (cast _Runtime.field(_Runtime.field(g, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast bx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast bx : Float) >= (cast _Runtime.field(_Runtime.field(b, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast ax : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast ax : Float) >= (cast _Runtime.field(_Runtime.field(a, 'surface'), 'width') : Float)) : Bool)) : Bool)) { px++; continue; }
             var di:Dynamic = (((oy * _Runtime.field(_Runtime.field(out, 'surface'), 'width')) + ox) * 4.0);
-            _Runtime.setIndex(od, di, _Runtime.getIndex(rd, (((ry * _Runtime.field(_Runtime.field(r, 'surface'), 'width')) + rx) * 4.0)));
-            _Runtime.setIndex(od, (di + 1.0), _Runtime.getIndex(gd, ((((gy * _Runtime.field(_Runtime.field(g, 'surface'), 'width')) + gx) * 4.0) + 1.0)));
-            _Runtime.setIndex(od, (di + 2.0), _Runtime.getIndex(bd, ((((by * _Runtime.field(_Runtime.field(b, 'surface'), 'width')) + bx) * 4.0) + 2.0)));
-            _Runtime.setIndex(od, (di + 3.0), _Runtime.getIndex(ad, ((((ay * _Runtime.field(_Runtime.field(a, 'surface'), 'width')) + ax) * 4.0) + 3.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, di, flighthq._internal._StaticIndex.readUint8ClampedArray(rd, (((ry * _Runtime.field(_Runtime.field(r, 'surface'), 'width')) + rx) * 4.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, (di + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(gd, ((((gy * _Runtime.field(_Runtime.field(g, 'surface'), 'width')) + gx) * 4.0) + 1.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(bd, ((((by * _Runtime.field(_Runtime.field(b, 'surface'), 'width')) + bx) * 4.0) + 2.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, (di + 3.0), flighthq._internal._StaticIndex.readUint8ClampedArray(ad, ((((ay * _Runtime.field(_Runtime.field(a, 'surface'), 'width')) + ax) * 4.0) + 3.0)));
             px++;
           }
         }
@@ -75,26 +75,26 @@ class SurfaceChannel {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast (w * h) : Float)) : Bool)) {
         var si:Dynamic = (i * 4.0);
-        var r:Dynamic = _Runtime.getIndex(sd, si);
-        var g:Dynamic = _Runtime.getIndex(sd, (si + 1.0));
-        var b:Dynamic = _Runtime.getIndex(sd, (si + 2.0));
-        var a:Dynamic = _Runtime.getIndex(sd, (si + 3.0));
-        _Runtime.setIndex(rData, si, r);
-        _Runtime.setIndex(rData, (si + 1.0), r);
-        _Runtime.setIndex(rData, (si + 2.0), r);
-        _Runtime.setIndex(rData, (si + 3.0), 255.0);
-        _Runtime.setIndex(gData, si, g);
-        _Runtime.setIndex(gData, (si + 1.0), g);
-        _Runtime.setIndex(gData, (si + 2.0), g);
-        _Runtime.setIndex(gData, (si + 3.0), 255.0);
-        _Runtime.setIndex(bData, si, b);
-        _Runtime.setIndex(bData, (si + 1.0), b);
-        _Runtime.setIndex(bData, (si + 2.0), b);
-        _Runtime.setIndex(bData, (si + 3.0), 255.0);
-        _Runtime.setIndex(aData, si, a);
-        _Runtime.setIndex(aData, (si + 1.0), a);
-        _Runtime.setIndex(aData, (si + 2.0), a);
-        _Runtime.setIndex(aData, (si + 3.0), a);
+        var r:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, si);
+        var g:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 1.0));
+        var b:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 2.0));
+        var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 3.0));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(rData, si, r);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(rData, (si + 1.0), r);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(rData, (si + 2.0), r);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(rData, (si + 3.0), 255.0);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(gData, si, g);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(gData, (si + 1.0), g);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(gData, (si + 2.0), g);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(gData, (si + 3.0), 255.0);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(bData, si, b);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(bData, (si + 1.0), b);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(bData, (si + 2.0), b);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(bData, (si + 3.0), 255.0);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(aData, si, a);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(aData, (si + 1.0), a);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(aData, (si + 2.0), a);
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(aData, (si + 3.0), a);
         i++;
       }
     }

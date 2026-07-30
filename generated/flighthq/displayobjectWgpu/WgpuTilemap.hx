@@ -99,25 +99,25 @@ class WgpuTilemap {
         {
           var col:Dynamic = 0.0;
           while ((cast ((cast col : Float) < (cast columns : Float)) : Bool)) {
-            var id:Dynamic = _Runtime.getIndex(tiles, ((row * columns) + col));
+            var id:Dynamic = flighthq._internal._StaticIndex.readInt16Array(tiles, ((row * columns) + col));
             if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { col++; continue; }
-            var region:Dynamic = _Runtime.getIndex(regions, id);
+            var region:Dynamic = flighthq._internal._StaticIndex.readArray(regions, id);
             if ((cast ((cast ((cast _Runtime.field(region, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(region, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { col++; continue; }
             var dx:Dynamic = (col * tileWidth);
             var dy:Dynamic = (row * tileHeight);
-            _Runtime.setIndex(instanceData, writeBase, pa);
-            _Runtime.setIndex(instanceData, (writeBase + 1.0), pb);
-            _Runtime.setIndex(instanceData, (writeBase + 2.0), pc);
-            _Runtime.setIndex(instanceData, (writeBase + 3.0), pd);
-            _Runtime.setIndex(instanceData, (writeBase + 4.0), (((pa * dx) + (pc * dy)) + ptx));
-            _Runtime.setIndex(instanceData, (writeBase + 5.0), (((pb * dx) + (pd * dy)) + pty));
-            _Runtime.setIndex(instanceData, (writeBase + 6.0), tileWidth);
-            _Runtime.setIndex(instanceData, (writeBase + 7.0), tileHeight);
-            _Runtime.setIndex(instanceData, (writeBase + 8.0), (_Runtime.field(region, 'x') * iw));
-            _Runtime.setIndex(instanceData, (writeBase + 9.0), (_Runtime.field(region, 'y') * ih));
-            _Runtime.setIndex(instanceData, (writeBase + 10.0), ((_Runtime.field(region, 'x') + _Runtime.field(region, 'width')) * iw));
-            _Runtime.setIndex(instanceData, (writeBase + 11.0), ((_Runtime.field(region, 'y') + _Runtime.field(region, 'height')) * ih));
-            _Runtime.setIndex(instanceData, (writeBase + 12.0), alpha);
+            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, writeBase, pa);
+            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 1.0), pb);
+            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 2.0), pc);
+            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 3.0), pd);
+            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 4.0), (((pa * dx) + (pc * dy)) + ptx));
+            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 5.0), (((pb * dx) + (pd * dy)) + pty));
+            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 6.0), tileWidth);
+            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 7.0), tileHeight);
+            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 8.0), (_Runtime.field(region, 'x') * iw));
+            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 9.0), (_Runtime.field(region, 'y') * ih));
+            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 10.0), ((_Runtime.field(region, 'x') + _Runtime.field(region, 'width')) * iw));
+            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 11.0), ((_Runtime.field(region, 'y') + _Runtime.field(region, 'height')) * ih));
+            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 12.0), alpha);
             _Runtime.callValue(packWgpuSpriteBatchMaterialInstance, cast ([state, nodeMaterialData, (startCount + drawCount)] : Array<Dynamic>));
             var colorTransform:Dynamic = _Runtime.coalesce((cast _Runtime.optionalIndex(perTileColorTransform, ((row * columns) + col)) : Null<ColorTransform>), function():Dynamic return cast nodeColorTransform);
             _Runtime.callValue(recordWgpuSpriteBatchColorTransform, cast ([state, colorTransform, (startCount + drawCount)] : Array<Dynamic>));

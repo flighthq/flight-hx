@@ -23,7 +23,7 @@ class LibgdxAtlasParse {
   public static function parseIntPair__libgdxAtlasParse(value:String):Array<Float> {
     var parts:Dynamic = cast _Runtime.UNDEFINED;
     parts = _Runtime.callProperty(value, 'split', cast ([','] : Array<Dynamic>));
-    return cast cast ([_Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.coalesce(_Runtime.getIndex(parts, 0.0), function():Dynamic return cast '0'), 10.0] : Array<Dynamic>)), _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.coalesce(_Runtime.getIndex(parts, 1.0), function():Dynamic return cast '0'), 10.0] : Array<Dynamic>))] : Array<Dynamic>);
+    return cast cast ([_Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 0.0), function():Dynamic return cast '0'), 10.0] : Array<Dynamic>)), _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 1.0), function():Dynamic return cast '0'), 10.0] : Array<Dynamic>))] : Array<Dynamic>);
     return cast null;
   }
 
@@ -192,7 +192,7 @@ class LibgdxAtlasParse {
     frameDuration = _Runtime.coalesce(_Runtime.optionalField(options, 'frameDuration'), function():Dynamic return cast 100.0);
     __destructure7 = _Runtime.callValue(LibgdxAtlasParse.parseLibgdxAtlas__libgdxAtlasParse, cast ([text] : Array<Dynamic>));
     pages = _Runtime.field(__destructure7, 'pages');
-    firstPage = _Runtime.getIndex(pages, 0.0);
+    firstPage = flighthq._internal._StaticIndex.readArray(pages, 0.0);
     imageFile = _Runtime.coalesce(_Runtime.optionalField(firstPage, 'filename'), function():Dynamic return cast '');
     imageWidth = _Runtime.coalesce(_Runtime.optionalField(firstPage, 'width'), function():Dynamic return cast 0.0);
     imageHeight = _Runtime.coalesce(_Runtime.optionalField(firstPage, 'height'), function():Dynamic return cast 0.0);

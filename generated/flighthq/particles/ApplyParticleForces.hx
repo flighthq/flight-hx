@@ -36,14 +36,14 @@ class ApplyParticleForces {
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         var tt:Dynamic = (i * 4.0);
         var vt:Dynamic = (i * PARTICLE_VELOCITY_STRIDE);
-        _Runtime.setIndex(ApplyParticleForces.accel__applyParticleForces, 0.0, 0.0);
-        _Runtime.setIndex(ApplyParticleForces.accel__applyParticleForces, 1.0, 0.0);
-        _Runtime.setIndex(ApplyParticleForces.accel__applyParticleForces, 2.0, 0.0);
-        var pz:Dynamic = ((cast ((cast _Runtime.field(positionsZ, 'length') : Float) > (cast i : Float)) : Bool) ? (cast _Runtime.getIndex(positionsZ, i) : Dynamic) : (cast 0.0 : Dynamic));
-        _Runtime.callValue(ApplyParticleForces.accumulateForces__applyParticleForces, cast ([forces, _Runtime.getIndex(transforms, tt), _Runtime.getIndex(transforms, (tt + 1.0)), pz, _Runtime.getIndex(velocities, vt), _Runtime.getIndex(velocities, (vt + 1.0)), _Runtime.getIndex(velocities, (vt + 2.0)), ApplyParticleForces.accel__applyParticleForces] : Array<Dynamic>));
-        _Runtime.setIndex(velocities, vt, (_Runtime.getIndex(velocities, vt) + (_Runtime.getIndex(ApplyParticleForces.accel__applyParticleForces, 0.0) * deltaTime)));
-        _Runtime.setIndex(velocities, (vt + 1.0), (_Runtime.getIndex(velocities, (vt + 1.0)) + (_Runtime.getIndex(ApplyParticleForces.accel__applyParticleForces, 1.0) * deltaTime)));
-        _Runtime.setIndex(velocities, (vt + 2.0), (_Runtime.getIndex(velocities, (vt + 2.0)) + (_Runtime.getIndex(ApplyParticleForces.accel__applyParticleForces, 2.0) * deltaTime)));
+        flighthq._internal._StaticIndex.writeArray(ApplyParticleForces.accel__applyParticleForces, 0.0, 0.0);
+        flighthq._internal._StaticIndex.writeArray(ApplyParticleForces.accel__applyParticleForces, 1.0, 0.0);
+        flighthq._internal._StaticIndex.writeArray(ApplyParticleForces.accel__applyParticleForces, 2.0, 0.0);
+        var pz:Dynamic = ((cast ((cast _Runtime.field(positionsZ, 'length') : Float) > (cast i : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readFloat32Array(positionsZ, i) : Dynamic) : (cast 0.0 : Dynamic));
+        _Runtime.callValue(ApplyParticleForces.accumulateForces__applyParticleForces, cast ([forces, flighthq._internal._StaticIndex.readFloat32Array(transforms, tt), flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 1.0)), pz, flighthq._internal._StaticIndex.readFloat32Array(velocities, vt), flighthq._internal._StaticIndex.readFloat32Array(velocities, (vt + 1.0)), flighthq._internal._StaticIndex.readFloat32Array(velocities, (vt + 2.0)), ApplyParticleForces.accel__applyParticleForces] : Array<Dynamic>));
+        ({ var __indexedObject0:Dynamic = velocities; var __indexedKey1:Dynamic = vt; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject0, __indexedKey1, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject0, __indexedKey1) + (flighthq._internal._StaticIndex.readArray(ApplyParticleForces.accel__applyParticleForces, 0.0) * deltaTime))); });
+        ({ var __indexedObject2:Dynamic = velocities; var __indexedKey3:Dynamic = (vt + 1.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject2, __indexedKey3, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject2, __indexedKey3) + (flighthq._internal._StaticIndex.readArray(ApplyParticleForces.accel__applyParticleForces, 1.0) * deltaTime))); });
+        ({ var __indexedObject4:Dynamic = velocities; var __indexedKey5:Dynamic = (vt + 2.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject4, __indexedKey5, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject4, __indexedKey5) + (flighthq._internal._StaticIndex.readArray(ApplyParticleForces.accel__applyParticleForces, 2.0) * deltaTime))); });
         i++;
       }
     }
@@ -58,14 +58,14 @@ class ApplyParticleForces {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(objects, 'length') : Float)) : Bool)) {
-        if ((cast ((cast _Runtime.getIndex(lifetimes, ((i * 2.0) + 1.0)) : Float) <= (cast 0.0 : Float)) : Bool)) { i++; continue; }
+        if ((cast ((cast flighthq._internal._StaticIndex.readFloat32Array(lifetimes, ((i * 2.0) + 1.0)) : Float) <= (cast 0.0 : Float)) : Bool)) { i++; continue; }
         var vt:Dynamic = (i * 2.0);
-        _Runtime.setIndex(ApplyParticleForces.accel__applyParticleForces, 0.0, 0.0);
-        _Runtime.setIndex(ApplyParticleForces.accel__applyParticleForces, 1.0, 0.0);
-        _Runtime.setIndex(ApplyParticleForces.accel__applyParticleForces, 2.0, 0.0);
-        _Runtime.callValue(ApplyParticleForces.accumulateForces__applyParticleForces, cast ([forces, _Runtime.getIndex(objects, i).x, _Runtime.getIndex(objects, i).y, 0.0, _Runtime.getIndex(velocities, vt), _Runtime.getIndex(velocities, (vt + 1.0)), 0.0, ApplyParticleForces.accel__applyParticleForces] : Array<Dynamic>));
-        _Runtime.setIndex(velocities, vt, (_Runtime.getIndex(velocities, vt) + (_Runtime.getIndex(ApplyParticleForces.accel__applyParticleForces, 0.0) * deltaTime)));
-        _Runtime.setIndex(velocities, (vt + 1.0), (_Runtime.getIndex(velocities, (vt + 1.0)) + (_Runtime.getIndex(ApplyParticleForces.accel__applyParticleForces, 1.0) * deltaTime)));
+        flighthq._internal._StaticIndex.writeArray(ApplyParticleForces.accel__applyParticleForces, 0.0, 0.0);
+        flighthq._internal._StaticIndex.writeArray(ApplyParticleForces.accel__applyParticleForces, 1.0, 0.0);
+        flighthq._internal._StaticIndex.writeArray(ApplyParticleForces.accel__applyParticleForces, 2.0, 0.0);
+        _Runtime.callValue(ApplyParticleForces.accumulateForces__applyParticleForces, cast ([forces, flighthq._internal._StaticIndex.readArray(objects, i).x, flighthq._internal._StaticIndex.readArray(objects, i).y, 0.0, flighthq._internal._StaticIndex.readFloat32Array(velocities, vt), flighthq._internal._StaticIndex.readFloat32Array(velocities, (vt + 1.0)), 0.0, ApplyParticleForces.accel__applyParticleForces] : Array<Dynamic>));
+        ({ var __indexedObject6:Dynamic = velocities; var __indexedKey7:Dynamic = vt; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject6, __indexedKey7, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject6, __indexedKey7) + (flighthq._internal._StaticIndex.readArray(ApplyParticleForces.accel__applyParticleForces, 0.0) * deltaTime))); });
+        ({ var __indexedObject8:Dynamic = velocities; var __indexedKey9:Dynamic = (vt + 1.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject8, __indexedKey9, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject8, __indexedKey9) + (flighthq._internal._StaticIndex.readArray(ApplyParticleForces.accel__applyParticleForces, 1.0) * deltaTime))); });
         i++;
       }
     }
@@ -75,18 +75,18 @@ class ApplyParticleForces {
     {
       var f:Dynamic = 0.0;
       while ((cast ((cast f : Float) < (cast _Runtime.field(forces, 'length') : Float)) : Bool)) {
-        var force:Dynamic = _Runtime.getIndex(forces, f);
+        var force:Dynamic = flighthq._internal._StaticIndex.readArray(forces, f);
         {
           var __switchValue = _Runtime.field(force, 'kind');
           if (__switchValue == 'WindForce') {
-            _Runtime.setIndex(out, 0.0, (_Runtime.getIndex(out, 0.0) + _Runtime.field(force, 'x')));
-            _Runtime.setIndex(out, 1.0, (_Runtime.getIndex(out, 1.0) + _Runtime.field(force, 'y')));
-            _Runtime.setIndex(out, 2.0, (_Runtime.getIndex(out, 2.0) + _Runtime.coalesce(_Runtime.field(force, 'z'), function():Dynamic return cast 0.0)));
+            ({ var __indexedObject10:Dynamic = out; var __indexedKey11:Dynamic = 0.0; flighthq._internal._StaticIndex.writeArray(__indexedObject10, __indexedKey11, (flighthq._internal._StaticIndex.readArray(__indexedObject10, __indexedKey11) + _Runtime.field(force, 'x'))); });
+            ({ var __indexedObject12:Dynamic = out; var __indexedKey13:Dynamic = 1.0; flighthq._internal._StaticIndex.writeArray(__indexedObject12, __indexedKey13, (flighthq._internal._StaticIndex.readArray(__indexedObject12, __indexedKey13) + _Runtime.field(force, 'y'))); });
+            ({ var __indexedObject14:Dynamic = out; var __indexedKey15:Dynamic = 2.0; flighthq._internal._StaticIndex.writeArray(__indexedObject14, __indexedKey15, (flighthq._internal._StaticIndex.readArray(__indexedObject14, __indexedKey15) + _Runtime.coalesce(_Runtime.field(force, 'z'), function():Dynamic return cast 0.0))); });
           }
           else if (__switchValue == 'DragForce') {
-            _Runtime.setIndex(out, 0.0, (_Runtime.getIndex(out, 0.0) - (_Runtime.field(force, 'strength') * vx)));
-            _Runtime.setIndex(out, 1.0, (_Runtime.getIndex(out, 1.0) - (_Runtime.field(force, 'strength') * vy)));
-            _Runtime.setIndex(out, 2.0, (_Runtime.getIndex(out, 2.0) - (_Runtime.field(force, 'strength') * vz)));
+            ({ var __indexedObject16:Dynamic = out; var __indexedKey17:Dynamic = 0.0; flighthq._internal._StaticIndex.writeArray(__indexedObject16, __indexedKey17, (flighthq._internal._StaticIndex.readArray(__indexedObject16, __indexedKey17) - (_Runtime.field(force, 'strength') * vx))); });
+            ({ var __indexedObject18:Dynamic = out; var __indexedKey19:Dynamic = 1.0; flighthq._internal._StaticIndex.writeArray(__indexedObject18, __indexedKey19, (flighthq._internal._StaticIndex.readArray(__indexedObject18, __indexedKey19) - (_Runtime.field(force, 'strength') * vy))); });
+            ({ var __indexedObject20:Dynamic = out; var __indexedKey21:Dynamic = 2.0; flighthq._internal._StaticIndex.writeArray(__indexedObject20, __indexedKey21, (flighthq._internal._StaticIndex.readArray(__indexedObject20, __indexedKey21) - (_Runtime.field(force, 'strength') * vz))); });
           }
           else if (__switchValue == 'AttractorForce') {
             {
@@ -98,9 +98,9 @@ class ApplyParticleForces {
               if ((cast ((cast dist : Float) <= (cast 0.000001 : Float)) : Bool)) { break; }
               var mag:Dynamic = (_Runtime.field(force, 'strength') * _Runtime.callValue(ApplyParticleForces.falloffFactor__applyParticleForces, cast ([_Runtime.field(force, 'falloff'), dist, _Runtime.field(force, 'radius')] : Array<Dynamic>)));
               if ((cast _Runtime.strictEquals(mag, 0.0) : Bool)) { break; }
-              _Runtime.setIndex(out, 0.0, (_Runtime.getIndex(out, 0.0) + ((dx / dist) * mag)));
-              _Runtime.setIndex(out, 1.0, (_Runtime.getIndex(out, 1.0) + ((dy / dist) * mag)));
-              _Runtime.setIndex(out, 2.0, (_Runtime.getIndex(out, 2.0) + ((dz / dist) * mag)));
+              ({ var __indexedObject22:Dynamic = out; var __indexedKey23:Dynamic = 0.0; flighthq._internal._StaticIndex.writeArray(__indexedObject22, __indexedKey23, (flighthq._internal._StaticIndex.readArray(__indexedObject22, __indexedKey23) + ((dx / dist) * mag))); });
+              ({ var __indexedObject24:Dynamic = out; var __indexedKey25:Dynamic = 1.0; flighthq._internal._StaticIndex.writeArray(__indexedObject24, __indexedKey25, (flighthq._internal._StaticIndex.readArray(__indexedObject24, __indexedKey25) + ((dy / dist) * mag))); });
+              ({ var __indexedObject26:Dynamic = out; var __indexedKey27:Dynamic = 2.0; flighthq._internal._StaticIndex.writeArray(__indexedObject26, __indexedKey27, (flighthq._internal._StaticIndex.readArray(__indexedObject26, __indexedKey27) + ((dz / dist) * mag))); });
             }
           }
           else if (__switchValue == 'VortexForce') {
@@ -120,17 +120,17 @@ class ApplyParticleForces {
               var rx:Dynamic = (dx * invDist);
               var ry:Dynamic = (dy * invDist);
               var rz:Dynamic = (dz * invDist);
-              _Runtime.setIndex(out, 0.0, (_Runtime.getIndex(out, 0.0) + (((ay * rz) - (az * ry)) * mag)));
-              _Runtime.setIndex(out, 1.0, (_Runtime.getIndex(out, 1.0) + (((az * rx) - (ax * rz)) * mag)));
-              _Runtime.setIndex(out, 2.0, (_Runtime.getIndex(out, 2.0) + (((ax * ry) - (ay * rx)) * mag)));
+              ({ var __indexedObject28:Dynamic = out; var __indexedKey29:Dynamic = 0.0; flighthq._internal._StaticIndex.writeArray(__indexedObject28, __indexedKey29, (flighthq._internal._StaticIndex.readArray(__indexedObject28, __indexedKey29) + (((ay * rz) - (az * ry)) * mag))); });
+              ({ var __indexedObject30:Dynamic = out; var __indexedKey31:Dynamic = 1.0; flighthq._internal._StaticIndex.writeArray(__indexedObject30, __indexedKey31, (flighthq._internal._StaticIndex.readArray(__indexedObject30, __indexedKey31) + (((az * rx) - (ax * rz)) * mag))); });
+              ({ var __indexedObject32:Dynamic = out; var __indexedKey33:Dynamic = 2.0; flighthq._internal._StaticIndex.writeArray(__indexedObject32, __indexedKey33, (flighthq._internal._StaticIndex.readArray(__indexedObject32, __indexedKey33) + (((ax * ry) - (ay * rx)) * mag))); });
             }
           }
           else if (__switchValue == 'TurbulenceForce') {
             {
               var s:Dynamic = _Runtime.field(force, 'scale');
-              _Runtime.setIndex(out, 0.0, (_Runtime.getIndex(out, 0.0) + (((_Runtime.callValue(ApplyParticleForces.valueNoise__applyParticleForces, cast ([(px * s), (py * s), 0.0] : Array<Dynamic>)) * 2.0) - 1.0) * _Runtime.field(force, 'strength'))));
-              _Runtime.setIndex(out, 1.0, (_Runtime.getIndex(out, 1.0) + (((_Runtime.callValue(ApplyParticleForces.valueNoise__applyParticleForces, cast ([(px * s), (py * s), 1.0] : Array<Dynamic>)) * 2.0) - 1.0) * _Runtime.field(force, 'strength'))));
-              _Runtime.setIndex(out, 2.0, (_Runtime.getIndex(out, 2.0) + (((_Runtime.callValue(ApplyParticleForces.valueNoise__applyParticleForces, cast ([(px * s), (pz * s), 2.0] : Array<Dynamic>)) * 2.0) - 1.0) * _Runtime.field(force, 'strength'))));
+              ({ var __indexedObject34:Dynamic = out; var __indexedKey35:Dynamic = 0.0; flighthq._internal._StaticIndex.writeArray(__indexedObject34, __indexedKey35, (flighthq._internal._StaticIndex.readArray(__indexedObject34, __indexedKey35) + (((_Runtime.callValue(ApplyParticleForces.valueNoise__applyParticleForces, cast ([(px * s), (py * s), 0.0] : Array<Dynamic>)) * 2.0) - 1.0) * _Runtime.field(force, 'strength')))); });
+              ({ var __indexedObject36:Dynamic = out; var __indexedKey37:Dynamic = 1.0; flighthq._internal._StaticIndex.writeArray(__indexedObject36, __indexedKey37, (flighthq._internal._StaticIndex.readArray(__indexedObject36, __indexedKey37) + (((_Runtime.callValue(ApplyParticleForces.valueNoise__applyParticleForces, cast ([(px * s), (py * s), 1.0] : Array<Dynamic>)) * 2.0) - 1.0) * _Runtime.field(force, 'strength')))); });
+              ({ var __indexedObject38:Dynamic = out; var __indexedKey39:Dynamic = 2.0; flighthq._internal._StaticIndex.writeArray(__indexedObject38, __indexedKey39, (flighthq._internal._StaticIndex.readArray(__indexedObject38, __indexedKey39) + (((_Runtime.callValue(ApplyParticleForces.valueNoise__applyParticleForces, cast ([(px * s), (pz * s), 2.0] : Array<Dynamic>)) * 2.0) - 1.0) * _Runtime.field(force, 'strength')))); });
             }
           }
         }

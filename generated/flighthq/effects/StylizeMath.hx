@@ -10,23 +10,23 @@ class StylizeMath {
     var curv:Dynamic = cast _Runtime.UNDEFINED;
     maskScale = (HxMath.max(1.0, resolution) / 360.0);
     curv = HxMath.max(0.0, HxMath.min(1.0, curvature));
-    _Runtime.setIndex(out, 0.0, maskScale);
-    _Runtime.setIndex(out, 1.0, (curv * 0.1));
+    flighthq._internal._StaticIndex.writeArray(out, 0.0, maskScale);
+    flighthq._internal._StaticIndex.writeArray(out, 1.0, (curv * 0.1));
   }
 
   public static function computeHalftoneCellParams(frequency:Float, angle:Float, out:Array<Float>):Void {
     var cellSize:Dynamic = cast _Runtime.UNDEFINED;
     cellSize = ((cast ((cast frequency : Float) > (cast 1e-10 : Float)) : Bool) ? (cast (1.0 / frequency) : Dynamic) : (cast 1.0 : Dynamic));
-    _Runtime.setIndex(out, 0.0, cellSize);
-    _Runtime.setIndex(out, 1.0, HxMath.cos(angle));
-    _Runtime.setIndex(out, 2.0, HxMath.sin(angle));
+    flighthq._internal._StaticIndex.writeArray(out, 0.0, cellSize);
+    flighthq._internal._StaticIndex.writeArray(out, 1.0, HxMath.cos(angle));
+    flighthq._internal._StaticIndex.writeArray(out, 2.0, HxMath.sin(angle));
   }
 
   public static function computeScanlineParams(resolution:Float, intensity:Float, out:Array<Float>):Void {
     var scale:Dynamic = cast _Runtime.UNDEFINED;
     scale = (HxMath.max(1.0, resolution) / 480.0);
-    _Runtime.setIndex(out, 0.0, scale);
-    _Runtime.setIndex(out, 1.0, HxMath.max(0.0, HxMath.min(1.0, intensity)));
+    flighthq._internal._StaticIndex.writeArray(out, 0.0, scale);
+    flighthq._internal._StaticIndex.writeArray(out, 1.0, HxMath.max(0.0, HxMath.min(1.0, intensity)));
   }
 
   public static function createBayerMatrix(order:Float, out:flighthq._internal._Float32Array):Float {
@@ -38,10 +38,10 @@ class StylizeMath {
     size = HxMath.pow(2.0, HxMath.max(1.0, HxMath.round(order)));
     sizeSq = (size * size);
     raw = new flighthq._internal._Float32Array(sizeSq);
-    _Runtime.setIndex(raw, 0.0, 0.0);
-    _Runtime.setIndex(raw, 1.0, 2.0);
-    _Runtime.setIndex(raw, 2.0, 3.0);
-    _Runtime.setIndex(raw, 3.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(raw, 0.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(raw, 1.0, 2.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(raw, 2.0, 3.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(raw, 3.0, 1.0);
     currentSize = 2.0;
     while ((cast ((cast currentSize : Float) < (cast size : Float)) : Bool)) {
       var next:Dynamic = (currentSize * 2.0);
@@ -53,11 +53,11 @@ class StylizeMath {
           {
             var x:Dynamic = 0.0;
             while ((cast ((cast x : Float) < (cast currentSize : Float)) : Bool)) {
-              var base:Dynamic = (_Runtime.getIndex(raw, ((y * currentSize) + x)) * 4.0);
-              _Runtime.setIndex(tmp, ((y * next) + x), base);
-              _Runtime.setIndex(tmp, ((y * next) + (x + currentSize)), (base + 2.0));
-              _Runtime.setIndex(tmp, (((y + currentSize) * next) + x), (base + 3.0));
-              _Runtime.setIndex(tmp, (((y + currentSize) * next) + (x + currentSize)), (base + 1.0));
+              var base:Dynamic = (flighthq._internal._StaticIndex.readFloat32Array(raw, ((y * currentSize) + x)) * 4.0);
+              flighthq._internal._StaticIndex.writeFloat32Array(tmp, ((y * next) + x), base);
+              flighthq._internal._StaticIndex.writeFloat32Array(tmp, ((y * next) + (x + currentSize)), (base + 2.0));
+              flighthq._internal._StaticIndex.writeFloat32Array(tmp, (((y + currentSize) * next) + x), (base + 3.0));
+              flighthq._internal._StaticIndex.writeFloat32Array(tmp, (((y + currentSize) * next) + (x + currentSize)), (base + 1.0));
               x++;
             }
           }
@@ -71,7 +71,7 @@ class StylizeMath {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast sizeSq : Float)) : Bool)) {
-        _Runtime.setIndex(out, i, (_Runtime.getIndex(raw, i) * invSizeSq));
+        flighthq._internal._StaticIndex.writeFloat32Array(out, i, (flighthq._internal._StaticIndex.readFloat32Array(raw, i) * invSizeSq));
         i++;
       }
     }
