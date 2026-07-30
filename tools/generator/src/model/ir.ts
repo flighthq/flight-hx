@@ -50,6 +50,7 @@ export type IrExpression =
       kind: 'call';
       arguments: IrExpression[];
       callee: IrExpression;
+      direct?: boolean;
       haxeRestIndex?: number;
       optional?: boolean;
       packedVariadicRestIndex?: number;

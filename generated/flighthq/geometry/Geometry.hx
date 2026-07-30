@@ -67,1582 +67,1582 @@ import flighthq.types.Vector4.Vector4Like;
 
 class Geometry {
   public static function acquireEmptyRectangle():Rectangle {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_RectanglePool.acquireEmptyRectangle, cast ([] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_RectanglePool.acquireEmptyRectangle();
     return cast null;
   }
 
   public static function acquireEmptyVector2():Vector2 {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2Pool.acquireEmptyVector2, cast ([] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector2Pool.acquireEmptyVector2();
     return cast null;
   }
 
   public static function acquireEmptyVector3():Vector3 {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3Pool.acquireEmptyVector3, cast ([] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector3Pool.acquireEmptyVector3();
     return cast null;
   }
 
   public static function acquireEmptyVector4():Vector4 {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4Pool.acquireEmptyVector4, cast ([] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector4Pool.acquireEmptyVector4();
     return cast null;
   }
 
   public static function acquireIdentityMatrix():Matrix {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_MatrixPool.acquireIdentityMatrix, cast ([] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_MatrixPool.acquireIdentityMatrix();
     return cast null;
   }
 
   public static function acquireIdentityMatrix3():Matrix3 {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3Pool.acquireIdentityMatrix3, cast ([] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix3Pool.acquireIdentityMatrix3();
     return cast null;
   }
 
   public static function acquireIdentityMatrix4():Matrix4 {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4Pool.acquireIdentityMatrix4, cast ([] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix4Pool.acquireIdentityMatrix4();
     return cast null;
   }
 
   public static function acquireIdentityQuaternion():Quaternion {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_QuaternionPool.acquireIdentityQuaternion, cast ([] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_QuaternionPool.acquireIdentityQuaternion();
     return cast null;
   }
 
   public static function acquireMatrix():Matrix {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_MatrixPool.acquireMatrix, cast ([] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_MatrixPool.acquireMatrix();
     return cast null;
   }
 
   public static function acquireMatrix3():Matrix3 {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3Pool.acquireMatrix3, cast ([] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix3Pool.acquireMatrix3();
     return cast null;
   }
 
   public static function acquireMatrix4():Matrix4 {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4Pool.acquireMatrix4, cast ([] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix4Pool.acquireMatrix4();
     return cast null;
   }
 
   public static function acquireQuaternion():Quaternion {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_QuaternionPool.acquireQuaternion, cast ([] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_QuaternionPool.acquireQuaternion();
     return cast null;
   }
 
   public static function acquireRectangle():Rectangle {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_RectanglePool.acquireRectangle, cast ([] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_RectanglePool.acquireRectangle();
     return cast null;
   }
 
   public static function acquireVector2():Vector2 {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2Pool.acquireVector2, cast ([] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector2Pool.acquireVector2();
     return cast null;
   }
 
   public static function acquireVector3():Vector3 {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3Pool.acquireVector3, cast ([] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector3Pool.acquireVector3();
     return cast null;
   }
 
   public static function acquireVector4():Vector4 {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4Pool.acquireVector4, cast ([] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector4Pool.acquireVector4();
     return cast null;
   }
 
   public static function addVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.addVector2, cast ([out, a, b] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector2.addVector2(out, a, b);
   }
 
   public static function addVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.addVector3, cast ([out, a, b] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector3.addVector3(out, a, b);
   }
 
   public static function addVector4(out:Vector4Like, a:Vector4Like, b:Vector4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.addVector4, cast ([out, a, b] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector4.addVector4(out, a, b);
   }
 
   public static function appendMatrix4(out:Matrix4Like, source:Matrix4Like, other:Matrix4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.appendMatrix4, cast ([out, source, other] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.appendMatrix4(out, source, other);
   }
 
   public static function appendRotationMatrix4(out:Matrix4Like, source:Matrix4Like, radians:Float, axis:Vector4Like, ?pivotPoint:Vector4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.appendRotationMatrix4, cast ([out, source, radians, axis, pivotPoint] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.appendRotationMatrix4(out, source, radians, axis, pivotPoint);
   }
 
   public static function appendScaleMatrix4(out:Matrix4Like, source:Matrix4Like, xScale:Float, yScale:Float, zScale:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.appendScaleMatrix4, cast ([out, source, xScale, yScale, zScale] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.appendScaleMatrix4(out, source, xScale, yScale, zScale);
   }
 
   public static function appendTranslationMatrix4(out:Matrix4Like, source:Matrix4Like, x:Float, y:Float, z:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.appendTranslationMatrix4, cast ([out, source, x, y, z] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.appendTranslationMatrix4(out, source, x, y, z);
   }
 
   public static function clampVector2(out:Vector2Like, value:Vector2Like, min:Vector2Like, max:Vector2Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.clampVector2, cast ([out, value, min, max] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector2.clampVector2(out, value, min, max);
   }
 
   public static function clampVector3(out:Vector3Like, value:Vector3Like, min:Vector3Like, max:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.clampVector3, cast ([out, value, min, max] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector3.clampVector3(out, value, min, max);
   }
 
   public static function clampVector4(out:Vector4Like, value:Vector4Like, min:Vector4Like, max:Vector4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.clampVector4, cast ([out, value, min, max] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector4.clampVector4(out, value, min, max);
   }
 
   public static function clearMatrix3Pool():Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3Pool.clearMatrix3Pool, cast ([] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix3Pool.clearMatrix3Pool();
   }
 
   public static function clearMatrix4Pool():Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4Pool.clearMatrix4Pool, cast ([] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4Pool.clearMatrix4Pool();
   }
 
   public static function clearMatrixPool():Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_MatrixPool.clearMatrixPool, cast ([] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_MatrixPool.clearMatrixPool();
   }
 
   public static function clearQuaternionPool():Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_QuaternionPool.clearQuaternionPool, cast ([] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_QuaternionPool.clearQuaternionPool();
   }
 
   public static function clearRectanglePool():Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_RectanglePool.clearRectanglePool, cast ([] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_RectanglePool.clearRectanglePool();
   }
 
   public static function clearVector2Pool():Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2Pool.clearVector2Pool, cast ([] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector2Pool.clearVector2Pool();
   }
 
   public static function clearVector3Pool():Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3Pool.clearVector3Pool, cast ([] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector3Pool.clearVector3Pool();
   }
 
   public static function clearVector4Pool():Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4Pool.clearVector4Pool, cast ([] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector4Pool.clearVector4Pool();
   }
 
   public static function cloneAabb(source:AabbLike):Aabb {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Aabb.cloneAabb, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Aabb.cloneAabb(source);
     return cast null;
   }
 
   public static function cloneBoundingSphere(source:BoundingSphereLike):BoundingSphere {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_BoundingSphere.cloneBoundingSphere, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_BoundingSphere.cloneBoundingSphere(source);
     return cast null;
   }
 
   public static function cloneMatrix(source:MatrixLike):Matrix {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.cloneMatrix, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix.cloneMatrix(source);
     return cast null;
   }
 
   public static function cloneMatrix3(source:Matrix3Like):Matrix3 {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3.cloneMatrix3, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix3.cloneMatrix3(source);
     return cast null;
   }
 
   public static function cloneMatrix4(source:Matrix4Like):Matrix4 {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.cloneMatrix4, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix4.cloneMatrix4(source);
     return cast null;
   }
 
   public static function clonePlane(source:PlaneLike):Plane {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Plane.clonePlane, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Plane.clonePlane(source);
     return cast null;
   }
 
   public static function cloneQuaternion(source:QuaternionLike):Quaternion {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Quaternion.cloneQuaternion, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Quaternion.cloneQuaternion(source);
     return cast null;
   }
 
   public static function cloneRectangle(source:RectangleLike):Rectangle {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.cloneRectangle, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Rectangle.cloneRectangle(source);
     return cast null;
   }
 
   public static function cloneVector2(source:Vector2Like):Vector2 {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.cloneVector2, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector2.cloneVector2(source);
     return cast null;
   }
 
   public static function cloneVector3(source:Vector3Like):Vector3 {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.cloneVector3, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector3.cloneVector3(source);
     return cast null;
   }
 
   public static function cloneVector4(source:Vector4Like):Vector4 {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.cloneVector4, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector4.cloneVector4(source);
     return cast null;
   }
 
   public static function composeMatrix4(out:Matrix4Like, position:Vector3Like, rotation:QuaternionLike, scale:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.composeMatrix4, cast ([out, position, rotation, scale] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.composeMatrix4(out, position, rotation, scale);
   }
 
   public static function composeMatrix4FromTransform3D(out:Matrix4Like, source:Transform3DLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Transform3d.composeMatrix4FromTransform3D, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Transform3d.composeMatrix4FromTransform3D(out, source);
   }
 
   public static function computeRectangleIntersection(out:RectangleLike, a:RectangleLike, b:RectangleLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.computeRectangleIntersection, cast ([out, a, b] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Rectangle.computeRectangleIntersection(out, a, b);
   }
 
   public static function conjugateQuaternion(out:QuaternionLike, source:QuaternionLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Quaternion.conjugateQuaternion, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Quaternion.conjugateQuaternion(out, source);
   }
 
   public static function containsAabbPoint(aabb:AabbLike, point:Vector3Like):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Aabb.containsAabbPoint, cast ([aabb, point] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Aabb.containsAabbPoint(aabb, point);
     return cast null;
   }
 
   public static function containsBoundingSpherePoint(sphere:BoundingSphereLike, point:Vector3Like):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_BoundingSphere.containsBoundingSpherePoint, cast ([sphere, point] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_BoundingSphere.containsBoundingSpherePoint(sphere, point);
     return cast null;
   }
 
   public static function containsRectanglePoint(source:RectangleLike, vector:Vector2Like):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.containsRectanglePoint, cast ([source, vector] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Rectangle.containsRectanglePoint(source, vector);
     return cast null;
   }
 
   public static function containsRectanglePointXY(source:RectangleLike, x:Float, y:Float):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.containsRectanglePointXY, cast ([source, x, y] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Rectangle.containsRectanglePointXY(source, x, y);
     return cast null;
   }
 
   public static function copyAabb(out:AabbLike, source:AabbLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Aabb.copyAabb, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Aabb.copyAabb(out, source);
   }
 
   public static function copyBoundingSphere(out:BoundingSphereLike, source:BoundingSphereLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_BoundingSphere.copyBoundingSphere, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_BoundingSphere.copyBoundingSphere(out, source);
   }
 
   public static function copyMatrix(out:MatrixLike, source:MatrixLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.copyMatrix, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.copyMatrix(out, source);
   }
 
   public static function copyMatrix3(out:Matrix3Like, source:Matrix3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3.copyMatrix3, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix3.copyMatrix3(out, source);
   }
 
   public static function copyMatrix3ColumnFromVector3(out:Matrix3Like, column:Float, source:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3.copyMatrix3ColumnFromVector3, cast ([out, column, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix3.copyMatrix3ColumnFromVector3(out, column, source);
   }
 
   public static function copyMatrix3ColumnToVector3(out:Vector3Like, column:Float, source:Matrix3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3.copyMatrix3ColumnToVector3, cast ([out, column, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix3.copyMatrix3ColumnToVector3(out, column, source);
   }
 
   public static function copyMatrix3RowFromVector3(out:Matrix3Like, row:Float, source:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3.copyMatrix3RowFromVector3, cast ([out, row, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix3.copyMatrix3RowFromVector3(out, row, source);
   }
 
   public static function copyMatrix3RowToVector3(out:Vector3Like, row:Float, source:Matrix3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3.copyMatrix3RowToVector3, cast ([out, row, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix3.copyMatrix3RowToVector3(out, row, source);
   }
 
   public static function copyMatrix4(out:Matrix4Like, source:Matrix4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.copyMatrix4, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.copyMatrix4(out, source);
   }
 
   public static function copyMatrix4ColumnFromVector4(out:Matrix4Like, column:Float, source:Vector4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.copyMatrix4ColumnFromVector4, cast ([out, column, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.copyMatrix4ColumnFromVector4(out, column, source);
   }
 
   public static function copyMatrix4ColumnToVector4(out:Vector4Like, column:Float, source:Matrix4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.copyMatrix4ColumnToVector4, cast ([out, column, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.copyMatrix4ColumnToVector4(out, column, source);
   }
 
   public static function copyMatrix4RowFromVector4(out:Matrix4Like, row:Float, source:Vector4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.copyMatrix4RowFromVector4, cast ([out, row, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.copyMatrix4RowFromVector4(out, row, source);
   }
 
   public static function copyMatrix4RowToVector4(out:Vector4Like, row:Float, source:Matrix4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.copyMatrix4RowToVector4, cast ([out, row, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.copyMatrix4RowToVector4(out, row, source);
   }
 
   public static function copyMatrixColumnFromVector3(out:MatrixLike, column:Float, source:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.copyMatrixColumnFromVector3, cast ([out, column, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.copyMatrixColumnFromVector3(out, column, source);
   }
 
   public static function copyMatrixColumnToVector3(out:Vector3Like, column:Float, source:MatrixLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.copyMatrixColumnToVector3, cast ([out, column, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.copyMatrixColumnToVector3(out, column, source);
   }
 
   public static function copyMatrixRowFromVector3(out:MatrixLike, row:Float, source:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.copyMatrixRowFromVector3, cast ([out, row, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.copyMatrixRowFromVector3(out, row, source);
   }
 
   public static function copyMatrixRowToVector3(out:Vector3Like, row:Float, source:MatrixLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.copyMatrixRowToVector3, cast ([out, row, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.copyMatrixRowToVector3(out, row, source);
   }
 
   public static function copyPlane(out:PlaneLike, source:PlaneLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Plane.copyPlane, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Plane.copyPlane(out, source);
   }
 
   public static function copyQuaternion(out:QuaternionLike, source:QuaternionLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Quaternion.copyQuaternion, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Quaternion.copyQuaternion(out, source);
   }
 
   public static function copyRectangle(out:RectangleLike, source:RectangleLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.copyRectangle, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Rectangle.copyRectangle(out, source);
   }
 
   public static function copyVector2(out:Vector2Like, source:Vector2Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.copyVector2, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector2.copyVector2(out, source);
   }
 
   public static function copyVector3(out:Vector3Like, source:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.copyVector3, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector3.copyVector3(out, source);
   }
 
   public static function copyVector4(out:Vector4Like, source:Vector4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.copyVector4, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector4.copyVector4(out, source);
   }
 
   public static function createAabb(?minX:Float, ?minY:Float, ?minZ:Float, ?maxX:Float, ?maxY:Float, ?maxZ:Float):Aabb {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Aabb.createAabb, cast ([minX, minY, minZ, maxX, maxY, maxZ] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Aabb.createAabb(minX, minY, minZ, maxX, maxY, maxZ);
     return cast null;
   }
 
   public static function createBoundingSphere(?centerX:Float, ?centerY:Float, ?centerZ:Float, ?radius:Float):BoundingSphere {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_BoundingSphere.createBoundingSphere, cast ([centerX, centerY, centerZ, radius] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_BoundingSphere.createBoundingSphere(centerX, centerY, centerZ, radius);
     return cast null;
   }
 
   public static function createCapsule(startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):Capsule {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Capsule.createCapsule, cast ([startX, startY, startZ, endX, endY, endZ, radius] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Capsule.createCapsule(startX, startY, startZ, endX, endY, endZ, radius);
     return cast null;
   }
 
   public static function createFrustum():Frustum {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Frustum.createFrustum, cast ([] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Frustum.createFrustum();
     return cast null;
   }
 
   public static function createGradientTransformMatrix(width:Float, height:Float, ?rotation:Float, ?tx:Float, ?ty:Float):Matrix {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.createGradientTransformMatrix, cast ([width, height, rotation, tx, ty] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix.createGradientTransformMatrix(width, height, rotation, tx, ty);
     return cast null;
   }
 
   public static function createMatrix(?a:Float, ?b:Float, ?c:Float, ?d:Float, ?tx:Float, ?ty:Float):Matrix {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.createMatrix, cast ([a, b, c, d, tx, ty] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix.createMatrix(a, b, c, d, tx, ty);
     return cast null;
   }
 
   public static function createMatrix3(?m00:Float, ?m01:Float, ?m02:Float, ?m10:Float, ?m11:Float, ?m12:Float, ?m20:Float, ?m21:Float, ?m22:Float):Matrix3 {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3.createMatrix3, cast ([m00, m01, m02, m10, m11, m12, m20, m21, m22] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix3.createMatrix3(m00, m01, m02, m10, m11, m12, m20, m21, m22);
     return cast null;
   }
 
   public static function createMatrix4(?m00:Float, ?m01:Float, ?m02:Float, ?m03:Float, ?m10:Float, ?m11:Float, ?m12:Float, ?m13:Float, ?m20:Float, ?m21:Float, ?m22:Float, ?m23:Float, ?m30:Float, ?m31:Float, ?m32:Float, ?m33:Float):Matrix4 {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.createMatrix4, cast ([m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix4.createMatrix4(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
     return cast null;
   }
 
   public static function createMatrix4From2D(a:Float, b:Float, c:Float, d:Float, ?tx:Float, ?ty:Float):Matrix4 {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.createMatrix4From2D, cast ([a, b, c, d, tx, ty] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix4.createMatrix4From2D(a, b, c, d, tx, ty);
     return cast null;
   }
 
   public static function createObb(centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Obb {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Obb.createObb, cast ([centerX, centerY, centerZ, halfExtentX, halfExtentY, halfExtentZ, orientationX, orientationY, orientationZ, orientationW] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Obb.createObb(centerX, centerY, centerZ, halfExtentX, halfExtentY, halfExtentZ, orientationX, orientationY, orientationZ, orientationW);
     return cast null;
   }
 
   public static function createOrthographicMatrix4(left:Float, right:Float, bottom:Float, top:Float, zNear:Float, zFar:Float):Matrix4 {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.createOrthographicMatrix4, cast ([left, right, bottom, top, zNear, zFar] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix4.createOrthographicMatrix4(left, right, bottom, top, zNear, zFar);
     return cast null;
   }
 
   public static function createPerspectiveMatrix4(fov:Float, aspect:Float, zNear:Float, zFar:Float):Matrix4 {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.createPerspectiveMatrix4, cast ([fov, aspect, zNear, zFar] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix4.createPerspectiveMatrix4(fov, aspect, zNear, zFar);
     return cast null;
   }
 
   public static function createPlane(?a:Float, ?b:Float, ?c:Float, ?d:Float):Plane {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Plane.createPlane, cast ([a, b, c, d] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Plane.createPlane(a, b, c, d);
     return cast null;
   }
 
   public static function createQuaternion(?x:Float, ?y:Float, ?z:Float, ?w:Float):Quaternion {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Quaternion.createQuaternion, cast ([x, y, z, w] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Quaternion.createQuaternion(x, y, z, w);
     return cast null;
   }
 
   public static function createRay3D(?originX:Float, ?originY:Float, ?originZ:Float, ?directionX:Float, ?directionY:Float, ?directionZ:Float):Ray3D {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Ray3d.createRay3D, cast ([originX, originY, originZ, directionX, directionY, directionZ] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Ray3d.createRay3D(originX, originY, originZ, directionX, directionY, directionZ);
     return cast null;
   }
 
   public static function createRectangle(?x:Float, ?y:Float, ?width:Float, ?height:Float):Rectangle {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.createRectangle, cast ([x, y, width, height] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Rectangle.createRectangle(x, y, width, height);
     return cast null;
   }
 
   public static function createTransform2D(?x:Float, ?y:Float, ?rotation:Float, ?scaleX:Float, ?scaleY:Float, ?skewX:Float, ?skewY:Float, ?pivotX:Float, ?pivotY:Float):Transform2D {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Transform2d.createTransform2D, cast ([x, y, rotation, scaleX, scaleY, skewX, skewY, pivotX, pivotY] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Transform2d.createTransform2D(x, y, rotation, scaleX, scaleY, skewX, skewY, pivotX, pivotY);
     return cast null;
   }
 
   public static function createTransform3D():Transform3D {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Transform3d.createTransform3D, cast ([] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Transform3d.createTransform3D();
     return cast null;
   }
 
   public static function createTransformMatrix(scaleX:Float, scaleY:Float, ?rotation:Float, ?tx:Float, ?ty:Float):Matrix {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.createTransformMatrix, cast ([scaleX, scaleY, rotation, tx, ty] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix.createTransformMatrix(scaleX, scaleY, rotation, tx, ty);
     return cast null;
   }
 
   public static function createVector2(?x:Float, ?y:Float):Vector2 {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.createVector2, cast ([x, y] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector2.createVector2(x, y);
     return cast null;
   }
 
   public static function createVector2FromPolar(length:Float, angle:Float):Vector2 {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.createVector2FromPolar, cast ([length, angle] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector2.createVector2FromPolar(length, angle);
     return cast null;
   }
 
   public static function createVector3(?x:Float, ?y:Float, ?z:Float):Vector3 {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.createVector3, cast ([x, y, z] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector3.createVector3(x, y, z);
     return cast null;
   }
 
   public static function createVector3FromSpherical(radius:Float, theta:Float, phi:Float):Vector3 {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.createVector3FromSpherical, cast ([radius, theta, phi] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector3.createVector3FromSpherical(radius, theta, phi);
     return cast null;
   }
 
   public static function createVector4(?x:Float, ?y:Float, ?z:Float, ?w:Float):Vector4 {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.createVector4, cast ([x, y, z, w] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector4.createVector4(x, y, z, w);
     return cast null;
   }
 
   public static function crossVector3(out:Vector3Like, source:Vector3Like, other:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.crossVector3, cast ([out, source, other] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector3.crossVector3(out, source, other);
   }
 
   public static function decomposeMatrix4(outPosition:Vector3Like, outRotation:QuaternionLike, outScale:Vector3Like, m:Matrix4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.decomposeMatrix4, cast ([outPosition, outRotation, outScale, m] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.decomposeMatrix4(outPosition, outRotation, outScale, m);
   }
 
   public static function decomposeMatrix4ToTransform3D(out:Transform3DLike, m:Matrix4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Transform3d.decomposeMatrix4ToTransform3D, cast ([out, m] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Transform3d.decomposeMatrix4ToTransform3D(out, m);
   }
 
   public static function decomposeMatrixToTransform2D(out:Transform2DLike, source:MatrixLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Transform2d.decomposeMatrixToTransform2D, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Transform2d.decomposeMatrixToTransform2D(out, source);
   }
 
   public static function divideVector2(out:Vector2Like, source:Vector2Like, divisor:Vector2Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.divideVector2, cast ([out, source, divisor] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector2.divideVector2(out, source, divisor);
   }
 
   public static function divideVector3(out:Vector3Like, source:Vector3Like, divisor:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.divideVector3, cast ([out, source, divisor] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector3.divideVector3(out, source, divisor);
   }
 
   public static function divideVector4(out:Vector4Like, source:Vector4Like, divisor:Vector4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.divideVector4, cast ([out, source, divisor] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector4.divideVector4(out, source, divisor);
   }
 
   public static function enclosesRectangle(source:RectangleLike, other:RectangleLike):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.enclosesRectangle, cast ([source, other] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Rectangle.enclosesRectangle(source, other);
     return cast null;
   }
 
   public static function equalsMatrix(a:Null<MatrixLike>, b:Null<MatrixLike>, ?compareTranslation:Bool):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.equalsMatrix, cast ([a, b, compareTranslation] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix.equalsMatrix(a, b, compareTranslation);
     return cast null;
   }
 
   public static function equalsMatrix3(a:Null<Matrix3Like>, b:Null<Matrix3Like>):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3.equalsMatrix3, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix3.equalsMatrix3(a, b);
     return cast null;
   }
 
   public static function equalsMatrix4(a:Null<Matrix4Like>, b:Null<Matrix4Like>):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.equalsMatrix4, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix4.equalsMatrix4(a, b);
     return cast null;
   }
 
   public static function equalsQuaternion(a:Null<QuaternionLike>, b:Null<QuaternionLike>):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Quaternion.equalsQuaternion, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Quaternion.equalsQuaternion(a, b);
     return cast null;
   }
 
   public static function equalsRectangle(a:Null<RectangleLike>, b:Null<RectangleLike>):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.equalsRectangle, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Rectangle.equalsRectangle(a, b);
     return cast null;
   }
 
   public static function equalsVector2(a:Null<Vector2Like>, b:Null<Vector2Like>):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.equalsVector2, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector2.equalsVector2(a, b);
     return cast null;
   }
 
   public static function equalsVector3(a:Null<Vector3Like>, b:Null<Vector3Like>):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.equalsVector3, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector3.equalsVector3(a, b);
     return cast null;
   }
 
   public static function equalsVector4(a:Null<Vector4Like>, b:Null<Vector4Like>):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.equalsVector4, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector4.equalsVector4(a, b);
     return cast null;
   }
 
   public static function expandAabbByPoint(out:AabbLike, aabb:AabbLike, point:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Aabb.expandAabbByPoint, cast ([out, aabb, point] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Aabb.expandAabbByPoint(out, aabb, point);
   }
 
   public static function expandAabbBySphere(out:AabbLike, aabb:AabbLike, sphere:BoundingSphereLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Aabb.expandAabbBySphere, cast ([out, aabb, sphere] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Aabb.expandAabbBySphere(out, aabb, sphere);
   }
 
   public static function expandRectangleToPoint(out:RectangleLike, sourceRect:RectangleLike, sourceVec2:Vector2Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.expandRectangleToPoint, cast ([out, sourceRect, sourceVec2] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Rectangle.expandRectangleToPoint(out, sourceRect, sourceVec2);
   }
 
   public static function getAabbCenter(out:Vector3Like, aabb:AabbLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Aabb.getAabbCenter, cast ([out, aabb] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Aabb.getAabbCenter(out, aabb);
   }
 
   public static function getAabbExtents(out:Vector3Like, aabb:AabbLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Aabb.getAabbExtents, cast ([out, aabb] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Aabb.getAabbExtents(out, aabb);
   }
 
   public static function getAabbSize(out:Vector3Like, aabb:AabbLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Aabb.getAabbSize, cast ([out, aabb] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Aabb.getAabbSize(out, aabb);
   }
 
   public static function getClosestPointBetweenRay3Ds(outA:Vector3Like, outB:Vector3Like, a:Ray3DLike, b:Ray3DLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Ray3d.getClosestPointBetweenRay3Ds, cast ([outA, outB, a, b] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Ray3d.getClosestPointBetweenRay3Ds(outA, outB, a, b);
   }
 
   public static function getClosestPointOnAabb(out:Vector3Like, aabb:AabbLike, point:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Aabb.getClosestPointOnAabb, cast ([out, aabb, point] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Aabb.getClosestPointOnAabb(out, aabb, point);
   }
 
   public static function getClosestPointOnBoundingSphere(out:Vector3Like, sphere:BoundingSphereLike, point:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_BoundingSphere.getClosestPointOnBoundingSphere, cast ([out, sphere, point] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_BoundingSphere.getClosestPointOnBoundingSphere(out, sphere, point);
   }
 
   public static function getClosestPointOnCapsule(out:Vector3Like, capsule:CapsuleLike, point:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Capsule.getClosestPointOnCapsule, cast ([out, capsule, point] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Capsule.getClosestPointOnCapsule(out, capsule, point);
   }
 
   public static function getClosestPointOnObb(out:Vector3Like, obb:ObbLike, point:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Obb.getClosestPointOnObb, cast ([out, obb, point] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Obb.getClosestPointOnObb(out, obb, point);
   }
 
   public static function getClosestPointOnPlane(out:Vector3Like, plane:PlaneLike, point:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Plane.getClosestPointOnPlane, cast ([out, plane, point] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Plane.getClosestPointOnPlane(out, plane, point);
   }
 
   public static function getClosestPointOnRay3D(out:Vector3Like, ray:Ray3DLike, point:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Ray3d.getClosestPointOnRay3D, cast ([out, ray, point] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Ray3d.getClosestPointOnRay3D(out, ray, point);
   }
 
   public static function getFrustumCorners(out:Array<Vector3Like>, inverseViewProjection:Matrix4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Frustum.getFrustumCorners, cast ([out, inverseViewProjection] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Frustum.getFrustumCorners(out, inverseViewProjection);
   }
 
   public static function getMatrix3Determinant(source:Matrix3Like):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3.getMatrix3Determinant, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix3.getMatrix3Determinant(source);
     return cast null;
   }
 
   public static function getMatrix3Element(source:Matrix3Like, row:Float, column:Float):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3.getMatrix3Element, cast ([source, row, column] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix3.getMatrix3Element(source, row, column);
     return cast null;
   }
 
   public static function getMatrix4Determinant(source:Matrix4Like):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.getMatrix4Determinant, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix4.getMatrix4Determinant(source);
     return cast null;
   }
 
   public static function getMatrix4Element(source:Matrix4Like, row:Float, column:Float):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.getMatrix4Element, cast ([source, row, column] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix4.getMatrix4Element(source, row, column);
     return cast null;
   }
 
   public static function getMatrix4Position(out:Vector3Like, source:Matrix4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.getMatrix4Position, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.getMatrix4Position(out, source);
   }
 
   public static function getPlaneCoplanarPoint(out:Vector3Like, plane:PlaneLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Plane.getPlaneCoplanarPoint, cast ([out, plane] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Plane.getPlaneCoplanarPoint(out, plane);
   }
 
   public static function getPlaneSignedDistanceToPoint(plane:PlaneLike, point:Vector3Like):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Plane.getPlaneSignedDistanceToPoint, cast ([plane, point] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Plane.getPlaneSignedDistanceToPoint(plane, point);
     return cast null;
   }
 
   public static function getQuaternionAngleBetween(a:QuaternionLike, b:QuaternionLike):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Quaternion.getQuaternionAngleBetween, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Quaternion.getQuaternionAngleBetween(a, b);
     return cast null;
   }
 
   public static function getQuaternionDot(a:QuaternionLike, b:QuaternionLike):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Quaternion.getQuaternionDot, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Quaternion.getQuaternionDot(a, b);
     return cast null;
   }
 
   public static function getQuaternionEuler(out:Vector3Like, source:QuaternionLike, ?order:EulerOrder):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Quaternion.getQuaternionEuler, cast ([out, source, order] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Quaternion.getQuaternionEuler(out, source, order);
   }
 
   public static function getRay3DPointAt(out:Vector3Like, ray:Ray3DLike, t:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Ray3d.getRay3DPointAt, cast ([out, ray, t] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Ray3d.getRay3DPointAt(out, ray, t);
   }
 
   public static function getRectangleBottom(source:RectangleLike):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.getRectangleBottom, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Rectangle.getRectangleBottom(source);
     return cast null;
   }
 
   public static function getRectangleBottomRight(out:Vector2Like, source:RectangleLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.getRectangleBottomRight, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Rectangle.getRectangleBottomRight(out, source);
   }
 
   public static function getRectangleLeft(source:RectangleLike):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.getRectangleLeft, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Rectangle.getRectangleLeft(source);
     return cast null;
   }
 
   public static function getRectangleMaxX(source:RectangleLike):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.getRectangleMaxX, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Rectangle.getRectangleMaxX(source);
     return cast null;
   }
 
   public static function getRectangleMaxY(source:RectangleLike):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.getRectangleMaxY, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Rectangle.getRectangleMaxY(source);
     return cast null;
   }
 
   public static function getRectangleMinX(source:RectangleLike):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.getRectangleMinX, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Rectangle.getRectangleMinX(source);
     return cast null;
   }
 
   public static function getRectangleMinY(source:RectangleLike):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.getRectangleMinY, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Rectangle.getRectangleMinY(source);
     return cast null;
   }
 
   public static function getRectangleNormalizedBottomRight(out:Vector2Like, source:RectangleLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.getRectangleNormalizedBottomRight, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Rectangle.getRectangleNormalizedBottomRight(out, source);
   }
 
   public static function getRectangleNormalizedTopLeft(out:Vector2Like, source:RectangleLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.getRectangleNormalizedTopLeft, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Rectangle.getRectangleNormalizedTopLeft(out, source);
   }
 
   public static function getRectangleRight(source:RectangleLike):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.getRectangleRight, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Rectangle.getRectangleRight(source);
     return cast null;
   }
 
   public static function getRectangleSize(out:Vector2Like, source:RectangleLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.getRectangleSize, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Rectangle.getRectangleSize(out, source);
   }
 
   public static function getRectangleTop(source:RectangleLike):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.getRectangleTop, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Rectangle.getRectangleTop(source);
     return cast null;
   }
 
   public static function getRectangleTopLeft(out:Vector2Like, source:RectangleLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.getRectangleTopLeft, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Rectangle.getRectangleTopLeft(out, source);
   }
 
   public static function getVector2AngleBetween(a:Vector2Like, b:Vector2Like):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.getVector2AngleBetween, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector2.getVector2AngleBetween(a, b);
     return cast null;
   }
 
   public static function getVector2Distance(a:Vector2Like, b:Vector2Like):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.getVector2Distance, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector2.getVector2Distance(a, b);
     return cast null;
   }
 
   public static function getVector2DistanceSquared(a:Vector2Like, b:Vector2Like):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.getVector2DistanceSquared, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector2.getVector2DistanceSquared(a, b);
     return cast null;
   }
 
   public static function getVector2Dot(a:Vector2Like, b:Vector2Like):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.getVector2Dot, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector2.getVector2Dot(a, b);
     return cast null;
   }
 
   public static function getVector2Length(source:Vector2Like):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.getVector2Length, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector2.getVector2Length(source);
     return cast null;
   }
 
   public static function getVector2LengthSquared(source:Vector2Like):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.getVector2LengthSquared, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector2.getVector2LengthSquared(source);
     return cast null;
   }
 
   public static function getVector3AngleBetween(a:Vector3Like, b:Vector3Like):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.getVector3AngleBetween, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector3.getVector3AngleBetween(a, b);
     return cast null;
   }
 
   public static function getVector3Distance(a:Vector3Like, b:Vector3Like):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.getVector3Distance, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector3.getVector3Distance(a, b);
     return cast null;
   }
 
   public static function getVector3DistanceSquared(a:Vector3Like, b:Vector3Like):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.getVector3DistanceSquared, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector3.getVector3DistanceSquared(a, b);
     return cast null;
   }
 
   public static function getVector3Dot(a:Vector3Like, b:Vector3Like):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.getVector3Dot, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector3.getVector3Dot(a, b);
     return cast null;
   }
 
   public static function getVector3Length(source:Vector3Like):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.getVector3Length, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector3.getVector3Length(source);
     return cast null;
   }
 
   public static function getVector3LengthSquared(source:Vector3Like):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.getVector3LengthSquared, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector3.getVector3LengthSquared(source);
     return cast null;
   }
 
   public static function getVector3Spherical(out:Vector3Like, source:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.getVector3Spherical, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector3.getVector3Spherical(out, source);
   }
 
   public static function getVector4AngleBetween(a:Vector4Like, b:Vector4Like):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.getVector4AngleBetween, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector4.getVector4AngleBetween(a, b);
     return cast null;
   }
 
   public static function getVector4Distance(a:Vector4Like, b:Vector4Like):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.getVector4Distance, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector4.getVector4Distance(a, b);
     return cast null;
   }
 
   public static function getVector4DistanceSquared(a:Vector4Like, b:Vector4Like):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.getVector4DistanceSquared, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector4.getVector4DistanceSquared(a, b);
     return cast null;
   }
 
   public static function getVector4Dot(a:Vector4Like, b:Vector4Like):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.getVector4Dot, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector4.getVector4Dot(a, b);
     return cast null;
   }
 
   public static function getVector4Length(source:Vector4Like):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.getVector4Length, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector4.getVector4Length(source);
     return cast null;
   }
 
   public static function getVector4LengthSquared(source:Vector4Like):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.getVector4LengthSquared, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector4.getVector4LengthSquared(source);
     return cast null;
   }
 
   public static function inflateRectangle(out:RectangleLike, source:RectangleLike, dx:Float, dy:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.inflateRectangle, cast ([out, source, dx, dy] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Rectangle.inflateRectangle(out, source, dx, dy);
   }
 
   public static function interpolateMatrix4(out:Matrix4Like, a:Matrix4Like, b:Matrix4Like, t:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.interpolateMatrix4, cast ([out, a, b, t] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.interpolateMatrix4(out, a, b, t);
   }
 
   public static function interpolateVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like, t:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.interpolateVector2, cast ([out, a, b, t] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector2.interpolateVector2(out, a, b, t);
   }
 
   public static function interpolateVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like, t:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.interpolateVector3, cast ([out, a, b, t] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector3.interpolateVector3(out, a, b, t);
   }
 
   public static function interpolateVector4(out:Vector4Like, a:Vector4Like, b:Vector4Like, t:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.interpolateVector4, cast ([out, a, b, t] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector4.interpolateVector4(out, a, b, t);
   }
 
   public static function intersectAabb(out:AabbLike, a:AabbLike, b:AabbLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Aabb.intersectAabb, cast ([out, a, b] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Aabb.intersectAabb(out, a, b);
   }
 
   public static function intersectRay3DAabb(ray:Ray3DLike, aabb:AabbLike):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Ray3d.intersectRay3DAabb, cast ([ray, aabb] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Ray3d.intersectRay3DAabb(ray, aabb);
     return cast null;
   }
 
   public static function intersectRay3DCapsule(ray:Ray3DLike, capsule:CapsuleLike):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Capsule.intersectRay3DCapsule, cast ([ray, capsule] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Capsule.intersectRay3DCapsule(ray, capsule);
     return cast null;
   }
 
   public static function intersectRay3DObb(ray:Ray3DLike, obb:ObbLike):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Obb.intersectRay3DObb, cast ([ray, obb] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Obb.intersectRay3DObb(ray, obb);
     return cast null;
   }
 
   public static function intersectRay3DPlane(ray:Ray3DLike, plane:PlaneLike):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Ray3d.intersectRay3DPlane, cast ([ray, plane] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Ray3d.intersectRay3DPlane(ray, plane);
     return cast null;
   }
 
   public static function intersectRay3DSphere(ray:Ray3DLike, sphere:BoundingSphereLike):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Ray3d.intersectRay3DSphere, cast ([ray, sphere] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Ray3d.intersectRay3DSphere(ray, sphere);
     return cast null;
   }
 
   public static function intersectRay3DTriangle(ray:Ray3DLike, a:Vector3Like, b:Vector3Like, c:Vector3Like):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Ray3d.intersectRay3DTriangle, cast ([ray, a, b, c] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Ray3d.intersectRay3DTriangle(ray, a, b, c);
     return cast null;
   }
 
   public static function intersectsRectangle(a:RectangleLike, b:RectangleLike):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.intersectsRectangle, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Rectangle.intersectsRectangle(a, b);
     return cast null;
   }
 
   public static function inverseMatrix(out:MatrixLike, source:MatrixLike):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.inverseMatrix, cast ([out, source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix.inverseMatrix(out, source);
     return cast null;
   }
 
   public static function inverseMatrix3(out:Matrix3Like, source:Matrix3Like):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3.inverseMatrix3, cast ([out, source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix3.inverseMatrix3(out, source);
     return cast null;
   }
 
   public static function inverseMatrix4(out:Matrix4Like, source:Matrix4Like):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.inverseMatrix4, cast ([out, source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix4.inverseMatrix4(out, source);
     return cast null;
   }
 
   public static function inverseMatrixTransformPoint(out:Vector2Like, matrix:MatrixLike, point:Vector2Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.inverseMatrixTransformPoint, cast ([out, matrix, point] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.inverseMatrixTransformPoint(out, matrix, point);
   }
 
   public static function inverseMatrixTransformPointXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.inverseMatrixTransformPointXY, cast ([out, source, x, y] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.inverseMatrixTransformPointXY(out, source, x, y);
   }
 
   public static function inverseMatrixTransformVector(out:Vector2Like, matrix:MatrixLike, vector:Vector2Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.inverseMatrixTransformVector, cast ([out, matrix, vector] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.inverseMatrixTransformVector(out, matrix, vector);
   }
 
   public static function inverseMatrixTransformVectorXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.inverseMatrixTransformVectorXY, cast ([out, source, x, y] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.inverseMatrixTransformVectorXY(out, source, x, y);
   }
 
   public static function inverseQuaternion(out:QuaternionLike, source:QuaternionLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Quaternion.inverseQuaternion, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Quaternion.inverseQuaternion(out, source);
   }
 
   public static function isAabbIntersectingAabb(a:AabbLike, b:AabbLike):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Aabb.isAabbIntersectingAabb, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Aabb.isAabbIntersectingAabb(a, b);
     return cast null;
   }
 
   public static function isAffineMatrix3(source:Matrix3Like):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3.isAffineMatrix3, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix3.isAffineMatrix3(source);
     return cast null;
   }
 
   public static function isAffineMatrix4(source:Matrix4Like):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.isAffineMatrix4, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Matrix4.isAffineMatrix4(source);
     return cast null;
   }
 
   public static function isBoundingSphereIntersectingBoundingSphere(a:BoundingSphereLike, b:BoundingSphereLike):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_BoundingSphere.isBoundingSphereIntersectingBoundingSphere, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_BoundingSphere.isBoundingSphereIntersectingBoundingSphere(a, b);
     return cast null;
   }
 
   public static function isCapsuleIntersectingCapsule(a:CapsuleLike, b:CapsuleLike):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Capsule.isCapsuleIntersectingCapsule, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Capsule.isCapsuleIntersectingCapsule(a, b);
     return cast null;
   }
 
   public static function isCapsuleIntersectingSphere(capsule:CapsuleLike, sphere:BoundingSphereLike):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Capsule.isCapsuleIntersectingSphere, cast ([capsule, sphere] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Capsule.isCapsuleIntersectingSphere(capsule, sphere);
     return cast null;
   }
 
   public static function isEmptyRectangle(source:RectangleLike):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.isEmptyRectangle, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Rectangle.isEmptyRectangle(source);
     return cast null;
   }
 
   public static function isFlippedXRectangle(source:RectangleLike):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.isFlippedXRectangle, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Rectangle.isFlippedXRectangle(source);
     return cast null;
   }
 
   public static function isFlippedYRectangle(source:RectangleLike):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.isFlippedYRectangle, cast ([source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Rectangle.isFlippedYRectangle(source);
     return cast null;
   }
 
   public static function isFrustumContainingPoint(frustum:FrustumLike, point:Vector3Like):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Frustum.isFrustumContainingPoint, cast ([frustum, point] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Frustum.isFrustumContainingPoint(frustum, point);
     return cast null;
   }
 
   public static function isFrustumIntersectingAabb(frustum:FrustumLike, aabb:AabbLike):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Frustum.isFrustumIntersectingAabb, cast ([frustum, aabb] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Frustum.isFrustumIntersectingAabb(frustum, aabb);
     return cast null;
   }
 
   public static function isFrustumIntersectingSphere(frustum:FrustumLike, sphere:BoundingSphereLike):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Frustum.isFrustumIntersectingSphere, cast ([frustum, sphere] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Frustum.isFrustumIntersectingSphere(frustum, sphere);
     return cast null;
   }
 
   public static function isObbIntersectingAabb(obb:ObbLike, aabb:AabbLike):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Obb.isObbIntersectingAabb, cast ([obb, aabb] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Obb.isObbIntersectingAabb(obb, aabb);
     return cast null;
   }
 
   public static function isObbIntersectingObb(a:ObbLike, b:ObbLike):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Obb.isObbIntersectingObb, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Obb.isObbIntersectingObb(a, b);
     return cast null;
   }
 
   public static function matrix4TransformPoint(out:Vector3Like, source:Matrix4Like, point:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.matrix4TransformPoint, cast ([out, source, point] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.matrix4TransformPoint(out, source, point);
   }
 
   public static function matrix4TransformVector(out:Vector4Like, source:Matrix4Like, vector:Vector4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.matrix4TransformVector, cast ([out, source, vector] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.matrix4TransformVector(out, source, vector);
   }
 
   public static function matrix4TransformVectors(out:flighthq._internal._Float32Array, source:Matrix4Like, vectors:flighthq._internal._Float32Array):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.matrix4TransformVectors, cast ([out, source, vectors] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.matrix4TransformVectors(out, source, vectors);
   }
 
   public static function matrixTransformBounds(out:RectangleLike, source:MatrixLike, ax:Float, ay:Float, bx:Float, by:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.matrixTransformBounds, cast ([out, source, ax, ay, bx, by] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.matrixTransformBounds(out, source, ax, ay, bx, by);
   }
 
   public static function matrixTransformBoundsVector2(out:RectangleLike, matrix:MatrixLike, a:Vector2Like, b:Vector2Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.matrixTransformBoundsVector2, cast ([out, matrix, a, b] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.matrixTransformBoundsVector2(out, matrix, a, b);
   }
 
   public static function matrixTransformPoint(out:Vector2Like, matrix:MatrixLike, point:Vector2Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.matrixTransformPoint, cast ([out, matrix, point] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.matrixTransformPoint(out, matrix, point);
   }
 
   public static function matrixTransformPointXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.matrixTransformPointXY, cast ([out, source, x, y] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.matrixTransformPointXY(out, source, x, y);
   }
 
   public static function matrixTransformRectangle(out:RectangleLike, matrix:MatrixLike, source:RectangleLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.matrixTransformRectangle, cast ([out, matrix, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.matrixTransformRectangle(out, matrix, source);
   }
 
   public static function matrixTransformVector(out:Vector2Like, matrix:MatrixLike, vector:Vector2Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.matrixTransformVector, cast ([out, matrix, vector] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.matrixTransformVector(out, matrix, vector);
   }
 
   public static function matrixTransformVectorXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.matrixTransformVectorXY, cast ([out, source, x, y] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.matrixTransformVectorXY(out, source, x, y);
   }
 
   public static function maxVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.maxVector2, cast ([out, a, b] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector2.maxVector2(out, a, b);
   }
 
   public static function maxVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.maxVector3, cast ([out, a, b] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector3.maxVector3(out, a, b);
   }
 
   public static function maxVector4(out:Vector4Like, a:Vector4Like, b:Vector4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.maxVector4, cast ([out, a, b] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector4.maxVector4(out, a, b);
   }
 
   public static function mergeBoundingSphere(out:BoundingSphereLike, a:BoundingSphereLike, b:BoundingSphereLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_BoundingSphere.mergeBoundingSphere, cast ([out, a, b] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_BoundingSphere.mergeBoundingSphere(out, a, b);
   }
 
   public static function mergeRectangle(out:RectangleLike, source:RectangleLike, other:RectangleLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.mergeRectangle, cast ([out, source, other] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Rectangle.mergeRectangle(out, source, other);
   }
 
   public static function minVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.minVector2, cast ([out, a, b] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector2.minVector2(out, a, b);
   }
 
   public static function minVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.minVector3, cast ([out, a, b] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector3.minVector3(out, a, b);
   }
 
   public static function minVector4(out:Vector4Like, a:Vector4Like, b:Vector4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.minVector4, cast ([out, a, b] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector4.minVector4(out, a, b);
   }
 
   public static function multiplyMatrix(out:MatrixLike, a:MatrixLike, b:MatrixLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.multiplyMatrix, cast ([out, a, b] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.multiplyMatrix(out, a, b);
   }
 
   public static function multiplyMatrix3(out:Matrix3Like, a:Matrix3Like, b:Matrix3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3.multiplyMatrix3, cast ([out, a, b] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix3.multiplyMatrix3(out, a, b);
   }
 
   public static function multiplyMatrix4(out:Matrix4Like, a:Matrix4Like, b:Matrix4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.multiplyMatrix4, cast ([out, a, b] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.multiplyMatrix4(out, a, b);
   }
 
   public static function multiplyQuaternion(out:QuaternionLike, a:QuaternionLike, b:QuaternionLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Quaternion.multiplyQuaternion, cast ([out, a, b] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Quaternion.multiplyQuaternion(out, a, b);
   }
 
   public static function multiplyVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.multiplyVector2, cast ([out, a, b] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector2.multiplyVector2(out, a, b);
   }
 
   public static function multiplyVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.multiplyVector3, cast ([out, a, b] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector3.multiplyVector3(out, a, b);
   }
 
   public static function multiplyVector4(out:Vector4Like, a:Vector4Like, b:Vector4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.multiplyVector4, cast ([out, a, b] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector4.multiplyVector4(out, a, b);
   }
 
   public static function nearEqualsVector2(a:Vector2Like, b:Vector2Like, ?tolerance:Float):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.nearEqualsVector2, cast ([a, b, tolerance] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector2.nearEqualsVector2(a, b, tolerance);
     return cast null;
   }
 
   public static function nearEqualsVector3(a:Vector3Like, b:Vector3Like, ?tolerance:Float):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.nearEqualsVector3, cast ([a, b, tolerance] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector3.nearEqualsVector3(a, b, tolerance);
     return cast null;
   }
 
   public static function nearEqualsVector4(a:Vector4Like, b:Vector4Like, ?tolerance:Float):Bool {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.nearEqualsVector4, cast ([a, b, tolerance] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector4.nearEqualsVector4(a, b, tolerance);
     return cast null;
   }
 
   public static function negateVector2(out:Vector2Like, source:Vector2Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.negateVector2, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector2.negateVector2(out, source);
   }
 
   public static function negateVector3(out:Vector3Like, source:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.negateVector3, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector3.negateVector3(out, source);
   }
 
   public static function negateVector4(out:Vector4Like, source:Vector4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.negateVector4, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector4.negateVector4(out, source);
   }
 
   public static function normalizePlane(out:PlaneLike, source:PlaneLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Plane.normalizePlane, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Plane.normalizePlane(out, source);
   }
 
   public static function normalizeQuaternion(out:QuaternionLike, source:QuaternionLike):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Quaternion.normalizeQuaternion, cast ([out, source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Quaternion.normalizeQuaternion(out, source);
     return cast null;
   }
 
   public static function normalizeRectangle(out:RectangleLike, source:RectangleLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.normalizeRectangle, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Rectangle.normalizeRectangle(out, source);
   }
 
   public static function normalizeVector2(out:Vector2Like, source:Vector2Like):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.normalizeVector2, cast ([out, source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector2.normalizeVector2(out, source);
     return cast null;
   }
 
   public static function normalizeVector3(out:Vector3Like, source:Vector3Like):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.normalizeVector3, cast ([out, source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector3.normalizeVector3(out, source);
     return cast null;
   }
 
   public static function normalizeVector4(out:Vector4Like, source:Vector4Like):Float {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.normalizeVector4, cast ([out, source] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Vector4.normalizeVector4(out, source);
     return cast null;
   }
 
   public static function offsetRectangle(out:RectangleLike, source:RectangleLike, dx:Float, dy:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.offsetRectangle, cast ([out, source, dx, dy] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Rectangle.offsetRectangle(out, source, dx, dy);
   }
 
   public static function offsetRectangleByPoint(out:RectangleLike, source:RectangleLike, point:Vector2Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.offsetRectangleByPoint, cast ([out, source, point] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Rectangle.offsetRectangleByPoint(out, source, point);
   }
 
   public static function offsetVector2(out:Vector2Like, source:Vector2Like, dx:Float, dy:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.offsetVector2, cast ([out, source, dx, dy] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector2.offsetVector2(out, source, dx, dy);
   }
 
   public static function offsetVector3(out:Vector3Like, source:Vector3Like, dx:Float, dy:Float, dz:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.offsetVector3, cast ([out, source, dx, dy, dz] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector3.offsetVector3(out, source, dx, dy, dz);
   }
 
   public static function offsetVector4(out:Vector4Like, source:Vector4Like, dx:Float, dy:Float, dz:Float, dw:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.offsetVector4, cast ([out, source, dx, dy, dz, dw] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector4.offsetVector4(out, source, dx, dy, dz, dw);
   }
 
   public static function prependMatrix4(out:Matrix4Like, source:Matrix4Like, other:Matrix4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.prependMatrix4, cast ([out, source, other] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.prependMatrix4(out, source, other);
   }
 
   public static function prependRotationMatrix4(out:Matrix4Like, source:Matrix4Like, radians:Float, axis:Vector4Like, ?pivotPoint:Vector4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.prependRotationMatrix4, cast ([out, source, radians, axis, pivotPoint] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.prependRotationMatrix4(out, source, radians, axis, pivotPoint);
   }
 
   public static function prependScaleMatrix4(out:Matrix4Like, source:Matrix4Like, xScale:Float, yScale:Float, zScale:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.prependScaleMatrix4, cast ([out, source, xScale, yScale, zScale] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.prependScaleMatrix4(out, source, xScale, yScale, zScale);
   }
 
   public static function prependTranslationMatrix4(out:Matrix4Like, source:Matrix4Like, x:Float, y:Float, z:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.prependTranslationMatrix4, cast ([out, source, x, y, z] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.prependTranslationMatrix4(out, source, x, y, z);
   }
 
   public static function projectVector3(out:Vector2Like, source:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.projectVector3, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector3.projectVector3(out, source);
   }
 
   public static function projectVector3OntoPlane(out:Vector3Like, point:Vector3Like, plane:PlaneLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Plane.projectVector3OntoPlane, cast ([out, point, plane] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Plane.projectVector3OntoPlane(out, point, plane);
   }
 
   public static function projectVector4(out:Vector3Like, source:Vector4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.projectVector4, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector4.projectVector4(out, source);
   }
 
   public static function reflectVector2(out:Vector2Like, incident:Vector2Like, normal:Vector2Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.reflectVector2, cast ([out, incident, normal] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector2.reflectVector2(out, incident, normal);
   }
 
   public static function reflectVector3(out:Vector3Like, incident:Vector3Like, normal:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.reflectVector3, cast ([out, incident, normal] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector3.reflectVector3(out, incident, normal);
   }
 
   public static function reflectVector4(out:Vector4Like, incident:Vector4Like, normal:Vector4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.reflectVector4, cast ([out, incident, normal] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector4.reflectVector4(out, incident, normal);
   }
 
   public static function releaseMatrix(m:Matrix):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_MatrixPool.releaseMatrix, cast ([m] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_MatrixPool.releaseMatrix(m);
   }
 
   public static function releaseMatrix3(m:Matrix3):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3Pool.releaseMatrix3, cast ([m] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix3Pool.releaseMatrix3(m);
   }
 
   public static function releaseMatrix4(m:Matrix4):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4Pool.releaseMatrix4, cast ([m] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4Pool.releaseMatrix4(m);
   }
 
   public static function releaseQuaternion(q:Quaternion):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_QuaternionPool.releaseQuaternion, cast ([q] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_QuaternionPool.releaseQuaternion(q);
   }
 
   public static function releaseRectangle(r:Rectangle):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_RectanglePool.releaseRectangle, cast ([r] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_RectanglePool.releaseRectangle(r);
   }
 
   public static function releaseVector2(v:Vector2):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2Pool.releaseVector2, cast ([v] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector2Pool.releaseVector2(v);
   }
 
   public static function releaseVector3(v:Vector3):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3Pool.releaseVector3, cast ([v] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector3Pool.releaseVector3(v);
   }
 
   public static function releaseVector4(v:Vector4):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4Pool.releaseVector4, cast ([v] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector4Pool.releaseVector4(v);
   }
 
   public static function reserveFloat32Array(array:flighthq._internal._Float32Array, capacity:Float):flighthq._internal._Float32Array {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Typedarray.reserveFloat32Array, cast ([array, capacity] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Typedarray.reserveFloat32Array(array, capacity);
     return cast null;
   }
 
   public static function reserveInt16Array(array:flighthq._internal._Int16Array, capacity:Float):flighthq._internal._Int16Array {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Typedarray.reserveInt16Array, cast ([array, capacity] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Typedarray.reserveInt16Array(array, capacity);
     return cast null;
   }
 
   public static function reserveUint16Array(array:flighthq._internal._UInt16Array, capacity:Float):flighthq._internal._UInt16Array {
-    return cast _Runtime.callValue(Facade_Geometry_flighthq_geometry_Typedarray.reserveUint16Array, cast ([array, capacity] : Array<Dynamic>));
+    return cast Facade_Geometry_flighthq_geometry_Typedarray.reserveUint16Array(array, capacity);
     return cast null;
   }
 
   public static function rotateMatrix(out:MatrixLike, source:MatrixLike, theta:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.rotateMatrix, cast ([out, source, theta] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.rotateMatrix(out, source, theta);
   }
 
   public static function rotateMatrix3(out:Matrix3Like, source:Matrix3Like, theta:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3.rotateMatrix3, cast ([out, source, theta] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix3.rotateMatrix3(out, source, theta);
   }
 
   public static function rotateMatrix4(out:Matrix4Like, source:Matrix4Like, axis:Vector3Like, radians:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.rotateMatrix4, cast ([out, source, axis, radians] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.rotateMatrix4(out, source, axis, radians);
   }
 
   public static function rotateVector3ByQuaternion(out:Vector3Like, vector:Vector3Like, q:QuaternionLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Quaternion.rotateVector3ByQuaternion, cast ([out, vector, q] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Quaternion.rotateVector3ByQuaternion(out, vector, q);
   }
 
   public static function scaleMatrix(out:MatrixLike, source:MatrixLike, sx:Float, sy:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.scaleMatrix, cast ([out, source, sx, sy] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.scaleMatrix(out, source, sx, sy);
   }
 
   public static function scaleMatrix3(out:Matrix3Like, source:Matrix3Like, sx:Float, sy:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3.scaleMatrix3, cast ([out, source, sx, sy] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix3.scaleMatrix3(out, source, sx, sy);
   }
 
   public static function scaleMatrix4(out:Matrix4Like, source:Matrix4Like, sx:Float, sy:Float, sz:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.scaleMatrix4, cast ([out, source, sx, sy, sz] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.scaleMatrix4(out, source, sx, sy, sz);
   }
 
   public static function scaleVector2(out:Vector2Like, source:Vector2Like, scalar:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.scaleVector2, cast ([out, source, scalar] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector2.scaleVector2(out, source, scalar);
   }
 
   public static function scaleVector2ToLength(out:Vector2Like, source:Vector2Like, length:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.scaleVector2ToLength, cast ([out, source, length] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector2.scaleVector2ToLength(out, source, length);
   }
 
   public static function scaleVector3(out:Vector3Like, source:Vector3Like, scalar:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.scaleVector3, cast ([out, source, scalar] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector3.scaleVector3(out, source, scalar);
   }
 
   public static function scaleVector4(out:Vector4Like, source:Vector4Like, scalar:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.scaleVector4, cast ([out, source, scalar] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector4.scaleVector4(out, source, scalar);
   }
 
   public static function setAabb(out:AabbLike, minX:Float, minY:Float, minZ:Float, maxX:Float, maxY:Float, maxZ:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Aabb.setAabb, cast ([out, minX, minY, minZ, maxX, maxY, maxZ] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Aabb.setAabb(out, minX, minY, minZ, maxX, maxY, maxZ);
   }
 
   public static function setAabbFromPoints(out:AabbLike, points:Array<Vector3Like>):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Aabb.setAabbFromPoints, cast ([out, points] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Aabb.setAabbFromPoints(out, points);
   }
 
   public static function setBoundingSphere(out:BoundingSphereLike, centerX:Float, centerY:Float, centerZ:Float, radius:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_BoundingSphere.setBoundingSphere, cast ([out, centerX, centerY, centerZ, radius] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_BoundingSphere.setBoundingSphere(out, centerX, centerY, centerZ, radius);
   }
 
   public static function setBoundingSphereFromAabb(out:BoundingSphereLike, aabb:AabbLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_BoundingSphere.setBoundingSphereFromAabb, cast ([out, aabb] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_BoundingSphere.setBoundingSphereFromAabb(out, aabb);
   }
 
   public static function setCapsule(out:CapsuleLike, startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Capsule.setCapsule, cast ([out, startX, startY, startZ, endX, endY, endZ, radius] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Capsule.setCapsule(out, startX, startY, startZ, endX, endY, endZ, radius);
   }
 
   public static function setEmptyRectangle(out:RectangleLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.setEmptyRectangle, cast ([out] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Rectangle.setEmptyRectangle(out);
   }
 
   public static function setFrustumFromMatrix4(out:FrustumLike, viewProjection:Matrix4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Frustum.setFrustumFromMatrix4, cast ([out, viewProjection] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Frustum.setFrustumFromMatrix4(out, viewProjection);
   }
 
   public static function setGradientTransformMatrix(out:MatrixLike, width:Float, height:Float, ?rotation:Float, ?tx:Float, ?ty:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.setGradientTransformMatrix, cast ([out, width, height, rotation, tx, ty] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.setGradientTransformMatrix(out, width, height, rotation, tx, ty);
   }
 
   public static function setMatrix(out:MatrixLike, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.setMatrix, cast ([out, a, b, c, d, tx, ty] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.setMatrix(out, a, b, c, d, tx, ty);
   }
 
   public static function setMatrix3(out:Matrix3Like, m00:Float, m01:Float, m02:Float, m10:Float, m11:Float, m12:Float, m20:Float, m21:Float, m22:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3.setMatrix3, cast ([out, m00, m01, m02, m10, m11, m12, m20, m21, m22] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix3.setMatrix3(out, m00, m01, m02, m10, m11, m12, m20, m21, m22);
   }
 
   public static function setMatrix3Element(out:Matrix3Like, row:Float, column:Float, value:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3.setMatrix3Element, cast ([out, row, column, value] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix3.setMatrix3Element(out, row, column, value);
   }
 
   public static function setMatrix3FromFloat32Array(out:Matrix3Like, offset:Float, source:flighthq._internal._Float32Array):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3.setMatrix3FromFloat32Array, cast ([out, offset, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix3.setMatrix3FromFloat32Array(out, offset, source);
   }
 
   public static function setMatrix3FromMatrix(out:Matrix3Like, source:MatrixLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3.setMatrix3FromMatrix, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix3.setMatrix3FromMatrix(out, source);
   }
 
   public static function setMatrix3FromMatrix4(out:Matrix3Like, source:Matrix4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3.setMatrix3FromMatrix4, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix3.setMatrix3FromMatrix4(out, source);
   }
 
   public static function setMatrix3Identity(out:Matrix3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3.setMatrix3Identity, cast ([out] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix3.setMatrix3Identity(out);
   }
 
   public static function setMatrix3NormalFromMatrix4(out:Matrix3Like, source:Matrix4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3.setMatrix3NormalFromMatrix4, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix3.setMatrix3NormalFromMatrix4(out, source);
   }
 
   public static function setMatrix4(out:Matrix4Like, m00:Float, m01:Float, m02:Float, m03:Float, m10:Float, m11:Float, m12:Float, m13:Float, m20:Float, m21:Float, m22:Float, m23:Float, m30:Float, m31:Float, m32:Float, m33:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.setMatrix4, cast ([out, m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.setMatrix4(out, m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
   }
 
   public static function setMatrix4Element(out:Matrix4Like, row:Float, column:Float, value:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.setMatrix4Element, cast ([out, row, column, value] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.setMatrix4Element(out, row, column, value);
   }
 
   public static function setMatrix4From2D(out:Matrix4Like, a:Float, b:Float, c:Float, d:Float, ?tx:Float, ?ty:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.setMatrix4From2D, cast ([out, a, b, c, d, tx, ty] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.setMatrix4From2D(out, a, b, c, d, tx, ty);
   }
 
   public static function setMatrix4FromFloat32Array(out:Matrix4Like, offset:Float, source:flighthq._internal._Float32Array):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.setMatrix4FromFloat32Array, cast ([out, offset, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.setMatrix4FromFloat32Array(out, offset, source);
   }
 
   public static function setMatrix4FromMatrix(out:Matrix4Like, source:MatrixLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.setMatrix4FromMatrix, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.setMatrix4FromMatrix(out, source);
   }
 
   public static function setMatrix4FromMatrix3(out:Matrix4Like, source:Matrix3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.setMatrix4FromMatrix3, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.setMatrix4FromMatrix3(out, source);
   }
 
   public static function setMatrix4FromQuaternion(out:Matrix4Like, source:QuaternionLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.setMatrix4FromQuaternion, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.setMatrix4FromQuaternion(out, source);
   }
 
   public static function setMatrix4Identity(out:Matrix4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.setMatrix4Identity, cast ([out] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.setMatrix4Identity(out);
   }
 
   public static function setMatrix4LookAt(out:Matrix4Like, eye:Vector3Like, target:Vector3Like, up:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.setMatrix4LookAt, cast ([out, eye, target, up] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.setMatrix4LookAt(out, eye, target, up);
   }
 
   public static function setMatrix4Position(out:Matrix4Like, source:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.setMatrix4Position, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.setMatrix4Position(out, source);
   }
 
   public static function setMatrixFromFloat32Array(out:MatrixLike, offset:Float, source:flighthq._internal._Float32Array):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.setMatrixFromFloat32Array, cast ([out, offset, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.setMatrixFromFloat32Array(out, offset, source);
   }
 
   public static function setMatrixFromMatrix3(out:MatrixLike, source:Matrix3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.setMatrixFromMatrix3, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.setMatrixFromMatrix3(out, source);
   }
 
   public static function setMatrixFromMatrix4(out:MatrixLike, source:Matrix4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.setMatrixFromMatrix4, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.setMatrixFromMatrix4(out, source);
   }
 
   public static function setMatrixIdentity(out:MatrixLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.setMatrixIdentity, cast ([out] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.setMatrixIdentity(out);
   }
 
   public static function setObb(out:ObbLike, centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Obb.setObb, cast ([out, centerX, centerY, centerZ, halfExtentX, halfExtentY, halfExtentZ, orientationX, orientationY, orientationZ, orientationW] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Obb.setObb(out, centerX, centerY, centerZ, halfExtentX, halfExtentY, halfExtentZ, orientationX, orientationY, orientationZ, orientationW);
   }
 
   public static function setOrthographicMatrix4(out:Matrix4Like, left:Float, right:Float, bottom:Float, top:Float, zNear:Float, zFar:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.setOrthographicMatrix4, cast ([out, left, right, bottom, top, zNear, zFar] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.setOrthographicMatrix4(out, left, right, bottom, top, zNear, zFar);
   }
 
   public static function setPerspectiveMatrix4(out:Matrix4Like, fov:Float, aspect:Float, zNear:Float, zFar:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.setPerspectiveMatrix4, cast ([out, fov, aspect, zNear, zFar] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.setPerspectiveMatrix4(out, fov, aspect, zNear, zFar);
   }
 
   public static function setPlane(out:PlaneLike, a:Float, b:Float, c:Float, d:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Plane.setPlane, cast ([out, a, b, c, d] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Plane.setPlane(out, a, b, c, d);
   }
 
   public static function setPlaneFromNormalAndPoint(out:PlaneLike, normal:Vector3Like, point:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Plane.setPlaneFromNormalAndPoint, cast ([out, normal, point] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Plane.setPlaneFromNormalAndPoint(out, normal, point);
   }
 
   public static function setPlaneFromPoints(out:PlaneLike, a:Vector3Like, b:Vector3Like, c:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Plane.setPlaneFromPoints, cast ([out, a, b, c] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Plane.setPlaneFromPoints(out, a, b, c);
   }
 
   public static function setQuaternion(out:QuaternionLike, x:Float, y:Float, z:Float, w:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Quaternion.setQuaternion, cast ([out, x, y, z, w] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Quaternion.setQuaternion(out, x, y, z, w);
   }
 
   public static function setQuaternionFromAxisAngle(out:QuaternionLike, axis:Vector3Like, angle:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Quaternion.setQuaternionFromAxisAngle, cast ([out, axis, angle] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Quaternion.setQuaternionFromAxisAngle(out, axis, angle);
   }
 
   public static function setQuaternionFromEuler(out:QuaternionLike, x:Float, y:Float, z:Float, ?order:EulerOrder):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Quaternion.setQuaternionFromEuler, cast ([out, x, y, z, order] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Quaternion.setQuaternionFromEuler(out, x, y, z, order);
   }
 
   public static function setQuaternionFromMatrix4(out:QuaternionLike, source:Matrix4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Quaternion.setQuaternionFromMatrix4, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Quaternion.setQuaternionFromMatrix4(out, source);
   }
 
   public static function setQuaternionFromUnitVectors(out:QuaternionLike, from:Vector3Like, to:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Quaternion.setQuaternionFromUnitVectors, cast ([out, from, to] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Quaternion.setQuaternionFromUnitVectors(out, from, to);
   }
 
   public static function setQuaternionIdentity(out:QuaternionLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Quaternion.setQuaternionIdentity, cast ([out] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Quaternion.setQuaternionIdentity(out);
   }
 
   public static function setQuaternionLookRotation(out:QuaternionLike, forward:Vector3Like, up:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Quaternion.setQuaternionLookRotation, cast ([out, forward, up] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Quaternion.setQuaternionLookRotation(out, forward, up);
   }
 
   public static function setRay3D(out:Ray3DLike, origin:Vector3Like, direction:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Ray3d.setRay3D, cast ([out, origin, direction] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Ray3d.setRay3D(out, origin, direction);
   }
 
   public static function setRectangle(out:RectangleLike, x:Float, y:Float, width:Float, height:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.setRectangle, cast ([out, x, y, width, height] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Rectangle.setRectangle(out, x, y, width, height);
   }
 
   public static function setRectangleBottom(target:RectangleLike, value:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.setRectangleBottom, cast ([target, value] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Rectangle.setRectangleBottom(target, value);
   }
 
   public static function setRectangleBottomRight(target:RectangleLike, point:Vector2Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.setRectangleBottomRight, cast ([target, point] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Rectangle.setRectangleBottomRight(target, point);
   }
 
   public static function setRectangleLeft(target:RectangleLike, value:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.setRectangleLeft, cast ([target, value] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Rectangle.setRectangleLeft(target, value);
   }
 
   public static function setRectangleRight(target:RectangleLike, value:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.setRectangleRight, cast ([target, value] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Rectangle.setRectangleRight(target, value);
   }
 
   public static function setRectangleSize(out:RectangleLike, size:Vector2Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.setRectangleSize, cast ([out, size] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Rectangle.setRectangleSize(out, size);
   }
 
   public static function setRectangleTop(target:RectangleLike, value:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.setRectangleTop, cast ([target, value] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Rectangle.setRectangleTop(target, value);
   }
 
   public static function setRectangleTopLeft(out:RectangleLike, point:Vector2Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Rectangle.setRectangleTopLeft, cast ([out, point] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Rectangle.setRectangleTopLeft(out, point);
   }
 
   public static function setTransformMatrix(out:MatrixLike, scaleX:Float, scaleY:Float, ?rotation:Float, ?tx:Float, ?ty:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.setTransformMatrix, cast ([out, scaleX, scaleY, rotation, tx, ty] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.setTransformMatrix(out, scaleX, scaleY, rotation, tx, ty);
   }
 
   public static function setVector2(out:Vector2Like, x:Float, y:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.setVector2, cast ([out, x, y] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector2.setVector2(out, x, y);
   }
 
   public static function setVector2FromFloat32Array(out:Vector2Like, offset:Float, source:flighthq._internal._Float32Array):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.setVector2FromFloat32Array, cast ([out, offset, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector2.setVector2FromFloat32Array(out, offset, source);
   }
 
   public static function setVector2FromPolar(out:Vector2Like, length:Float, angle:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.setVector2FromPolar, cast ([out, length, angle] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector2.setVector2FromPolar(out, length, angle);
   }
 
   public static function setVector2FromVector3(out:Vector2Like, source:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.setVector2FromVector3, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector2.setVector2FromVector3(out, source);
   }
 
   public static function setVector3(out:Vector3Like, x:Float, y:Float, z:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.setVector3, cast ([out, x, y, z] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector3.setVector3(out, x, y, z);
   }
 
   public static function setVector3FromFloat32Array(out:Vector3Like, offset:Float, source:flighthq._internal._Float32Array):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.setVector3FromFloat32Array, cast ([out, offset, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector3.setVector3FromFloat32Array(out, offset, source);
   }
 
   public static function setVector3FromSpherical(out:Vector3Like, radius:Float, theta:Float, phi:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.setVector3FromSpherical, cast ([out, radius, theta, phi] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector3.setVector3FromSpherical(out, radius, theta, phi);
   }
 
   public static function setVector3FromVector4(out:Vector3Like, source:Vector4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.setVector3FromVector4, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector3.setVector3FromVector4(out, source);
   }
 
   public static function setVector4(out:Vector4Like, x:Float, y:Float, z:Float, w:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.setVector4, cast ([out, x, y, z, w] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector4.setVector4(out, x, y, z, w);
   }
 
   public static function setVector4FromFloat32Array(out:Vector4Like, offset:Float, source:flighthq._internal._Float32Array):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.setVector4FromFloat32Array, cast ([out, offset, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector4.setVector4FromFloat32Array(out, offset, source);
   }
 
   public static function setVector4FromVector3(out:Vector4Like, source:Vector3Like, ?w:Dynamic):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.setVector4FromVector3, cast ([out, source, w] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector4.setVector4FromVector3(out, source, w);
   }
 
   public static function slerpQuaternion(out:QuaternionLike, a:QuaternionLike, b:QuaternionLike, t:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Quaternion.slerpQuaternion, cast ([out, a, b, t] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Quaternion.slerpQuaternion(out, a, b, t);
   }
 
   public static function subtractVector2(out:Vector2Like, source:Vector2Like, other:Vector2Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.subtractVector2, cast ([out, source, other] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector2.subtractVector2(out, source, other);
   }
 
   public static function subtractVector3(out:Vector3Like, source:Vector3Like, other:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.subtractVector3, cast ([out, source, other] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector3.subtractVector3(out, source, other);
   }
 
   public static function subtractVector4(out:Vector4Like, source:Vector4Like, other:Vector4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.subtractVector4, cast ([out, source, other] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector4.subtractVector4(out, source, other);
   }
 
   public static function transformAabbByMatrix4(out:AabbLike, aabb:AabbLike, m:Matrix4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Aabb.transformAabbByMatrix4, cast ([out, aabb, m] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Aabb.transformAabbByMatrix4(out, aabb, m);
   }
 
   public static function transformBoundingSphereByMatrix4(out:BoundingSphereLike, sphere:BoundingSphereLike, m:Matrix4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_BoundingSphere.transformBoundingSphereByMatrix4, cast ([out, sphere, m] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_BoundingSphere.transformBoundingSphereByMatrix4(out, sphere, m);
   }
 
   public static function transformObbByMatrix4(out:ObbLike, obb:ObbLike, m:Matrix4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Obb.transformObbByMatrix4, cast ([out, obb, m] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Obb.transformObbByMatrix4(out, obb, m);
   }
 
   public static function transformVector3ByMatrix3(out:Vector3Like, source:Vector3Like, matrix:{ var m:flighthq._internal._Float32Array; }):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.transformVector3ByMatrix3, cast ([out, source, matrix] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector3.transformVector3ByMatrix3(out, source, matrix);
   }
 
   public static function translateMatrix(out:MatrixLike, source:MatrixLike, dx:Float, dy:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.translateMatrix, cast ([out, source, dx, dy] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.translateMatrix(out, source, dx, dy);
   }
 
   public static function translateMatrix3(out:Matrix3Like, source:Matrix3Like, tx:Float, ty:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3.translateMatrix3, cast ([out, source, tx, ty] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix3.translateMatrix3(out, source, tx, ty);
   }
 
   public static function translateMatrix4(out:Matrix4Like, source:Matrix4Like, tx:Float, ty:Float, tz:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.translateMatrix4, cast ([out, source, tx, ty, tz] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.translateMatrix4(out, source, tx, ty, tz);
   }
 
   public static function translateMatrixByVector(out:MatrixLike, matrix:MatrixLike, vector:Vector2Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.translateMatrixByVector, cast ([out, matrix, vector] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.translateMatrixByVector(out, matrix, vector);
   }
 
   public static function translateMatrixByVectorXY(out:MatrixLike, source:MatrixLike, x:Float, y:Float):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.translateMatrixByVectorXY, cast ([out, source, x, y] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.translateMatrixByVectorXY(out, source, x, y);
   }
 
   public static function transposeMatrix3(out:Matrix3Like, source:Matrix3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3.transposeMatrix3, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix3.transposeMatrix3(out, source);
   }
 
   public static function transposeMatrix4(out:Matrix4Like, source:Matrix4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.transposeMatrix4, cast ([out, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.transposeMatrix4(out, source);
   }
 
   public static function unionAabb(out:AabbLike, a:AabbLike, b:AabbLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Aabb.unionAabb, cast ([out, a, b] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Aabb.unionAabb(out, a, b);
   }
 
   public static final VECTOR2_X_AXIS:Vector2 = Facade_Geometry_flighthq_geometry_Vector2.VECTOR2_X_AXIS;
@@ -1664,26 +1664,26 @@ class Geometry {
   public static final VECTOR4_Z_AXIS:Vector4 = Facade_Geometry_flighthq_geometry_Vector4.VECTOR4_Z_AXIS;
 
   public static function writeMatrix3ToFloat32Array(out:flighthq._internal._Float32Array, offset:Float, source:Matrix3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix3.writeMatrix3ToFloat32Array, cast ([out, offset, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix3.writeMatrix3ToFloat32Array(out, offset, source);
   }
 
   public static function writeMatrix4ToFloat32Array(out:flighthq._internal._Float32Array, offset:Float, source:Matrix4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix4.writeMatrix4ToFloat32Array, cast ([out, offset, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix4.writeMatrix4ToFloat32Array(out, offset, source);
   }
 
   public static function writeMatrixToFloat32Array(out:flighthq._internal._Float32Array, offset:Float, source:MatrixLike):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Matrix.writeMatrixToFloat32Array, cast ([out, offset, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Matrix.writeMatrixToFloat32Array(out, offset, source);
   }
 
   public static function writeVector2ToFloat32Array(out:flighthq._internal._Float32Array, offset:Float, source:Vector2Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector2.writeVector2ToFloat32Array, cast ([out, offset, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector2.writeVector2ToFloat32Array(out, offset, source);
   }
 
   public static function writeVector3ToFloat32Array(out:flighthq._internal._Float32Array, offset:Float, source:Vector3Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector3.writeVector3ToFloat32Array, cast ([out, offset, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector3.writeVector3ToFloat32Array(out, offset, source);
   }
 
   public static function writeVector4ToFloat32Array(out:flighthq._internal._Float32Array, offset:Float, source:Vector4Like):Void {
-    _Runtime.callValue(Facade_Geometry_flighthq_geometry_Vector4.writeVector4ToFloat32Array, cast ([out, offset, source] : Array<Dynamic>));
+    Facade_Geometry_flighthq_geometry_Vector4.writeVector4ToFloat32Array(out, offset, source);
   }
 }

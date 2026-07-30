@@ -21,72 +21,72 @@ class Font {
   }
 
   public static function createFontResource(family:String):FontResource {
-    return cast _Runtime.callValue(Facade_Font_flighthq_font_FontResource.createFontResource, cast ([family] : Array<Dynamic>));
+    return cast Facade_Font_flighthq_font_FontResource.createFontResource(family);
     return cast null;
   }
 
   public static function detectFontFormat(bytes:Dynamic):Null<String> {
-    return cast _Runtime.callValue(Facade_Font_flighthq_font_FontFormat.detectFontFormat, cast ([bytes] : Array<Dynamic>));
+    return cast Facade_Font_flighthq_font_FontFormat.detectFontFormat(bytes);
     return cast null;
   }
 
   public static function getFontShorthand(family:String, ?style:String):String {
-    return cast _Runtime.callValue(Facade_Font_flighthq_font_FontShorthand.getFontShorthand, cast ([family, style] : Array<Dynamic>));
+    return cast Facade_Font_flighthq_font_FontShorthand.getFontShorthand(family, style);
     return cast null;
   }
 
   public static function inferFontFormatFromUrl(url:String):Null<String> {
-    return cast _Runtime.callValue(Facade_Font_flighthq_font_FontFormat.inferFontFormatFromUrl, cast ([url] : Array<Dynamic>));
+    return cast Facade_Font_flighthq_font_FontFormat.inferFontFormatFromUrl(url);
     return cast null;
   }
 
   public static function isFontLoaded(family:String, ?style:String):Bool {
-    return cast _Runtime.callValue(Facade_Font_flighthq_font_FontStatus.isFontLoaded, cast ([family, style] : Array<Dynamic>));
+    return cast Facade_Font_flighthq_font_FontStatus.isFontLoaded(family, style);
     return cast null;
   }
 
   public static function loadFontFromBytes(bytes:flighthq._internal._UInt8Array, family:String):flighthq._internal._Promise<flighthq.types.Font> {
-    return cast _Runtime.callValue(Facade_Font_flighthq_font_FontFrom.loadFontFromBytes, cast ([bytes, family] : Array<Dynamic>));
+    return cast Facade_Font_flighthq_font_FontFrom.loadFontFromBytes(bytes, family);
     return cast null;
   }
 
   public static function loadFontFromName(name:String):flighthq._internal._Promise<flighthq.types.Font> {
-    return cast _Runtime.callValue(Facade_Font_flighthq_font_FontFrom.loadFontFromName, cast ([name] : Array<Dynamic>));
+    return cast Facade_Font_flighthq_font_FontFrom.loadFontFromName(name);
     return cast null;
   }
 
   public static function loadFontFromUrl(url:String, family:String):flighthq._internal._Promise<flighthq.types.Font> {
-    return cast _Runtime.callValue(Facade_Font_flighthq_font_FontFrom.loadFontFromUrl, cast ([url, family] : Array<Dynamic>));
+    return cast Facade_Font_flighthq_font_FontFrom.loadFontFromUrl(url, family);
     return cast null;
   }
 
   public static function loadFontFromUrls(sources:Array<FontUrl>, family:String):flighthq._internal._Promise<flighthq.types.Font> {
-    return cast _Runtime.callValue(Facade_Font_flighthq_font_FontFrom.loadFontFromUrls, cast ([sources, family] : Array<Dynamic>));
+    return cast Facade_Font_flighthq_font_FontFrom.loadFontFromUrls(sources, family);
     return cast null;
   }
 
   public static function loadFontResourceFromBytes(out:FontResource, bytes:flighthq._internal._UInt8Array):flighthq._internal._Promise<FontResource> {
-    return cast _Runtime.callValue(Facade_Font_flighthq_font_FontResourceFrom.loadFontResourceFromBytes, cast ([out, bytes] : Array<Dynamic>));
+    return cast Facade_Font_flighthq_font_FontResourceFrom.loadFontResourceFromBytes(out, bytes);
     return cast null;
   }
 
   public static function loadFontResourceFromName(out:FontResource):flighthq._internal._Promise<FontResource> {
-    return cast _Runtime.callValue(Facade_Font_flighthq_font_FontResourceFrom.loadFontResourceFromName, cast ([out] : Array<Dynamic>));
+    return cast Facade_Font_flighthq_font_FontResourceFrom.loadFontResourceFromName(out);
     return cast null;
   }
 
   public static function loadFontResourceFromUrl(out:FontResource, url:String):flighthq._internal._Promise<FontResource> {
-    return cast _Runtime.callValue(Facade_Font_flighthq_font_FontResourceFrom.loadFontResourceFromUrl, cast ([out, url] : Array<Dynamic>));
+    return cast Facade_Font_flighthq_font_FontResourceFrom.loadFontResourceFromUrl(out, url);
     return cast null;
   }
 
   public static function loadFontResourceFromUrls(out:FontResource, sources:Array<FontUrl>):flighthq._internal._Promise<FontResource> {
-    return cast _Runtime.callValue(Facade_Font_flighthq_font_FontResourceFrom.loadFontResourceFromUrls, cast ([out, sources] : Array<Dynamic>));
+    return cast Facade_Font_flighthq_font_FontResourceFrom.loadFontResourceFromUrls(out, sources);
     return cast null;
   }
 
   public static function whenFontsReady():flighthq._internal._Promise<flighthq._internal._Nothing> {
-    return cast _Runtime.callValue(Facade_Font_flighthq_font_FontStatus.whenFontsReady, cast ([] : Array<Dynamic>));
+    return cast Facade_Font_flighthq_font_FontStatus.whenFontsReady();
     return cast null;
   }
 }

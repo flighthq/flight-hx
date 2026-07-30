@@ -15,41 +15,41 @@ class Capture {
   public static final CAPTURE_REGRESSION_TOLERANCE:Dynamic = Facade_Capture_flighthq_capture_CaptureComparison.CAPTURE_REGRESSION_TOLERANCE;
 
   public static function compareCaptureFingerprints(a:String, b:String):Float {
-    return cast _Runtime.callValue(Facade_Capture_flighthq_capture_CaptureComparison.compareCaptureFingerprints, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Capture_flighthq_capture_CaptureComparison.compareCaptureFingerprints(a, b);
     return cast null;
   }
 
   public static function createCaptureBaseline():CaptureBaseline {
-    return cast _Runtime.callValue(Facade_Capture_flighthq_capture_CaptureBaseline.createCaptureBaseline, cast ([] : Array<Dynamic>));
+    return cast Facade_Capture_flighthq_capture_CaptureBaseline.createCaptureBaseline();
     return cast null;
   }
 
   public static function evaluateCaptureParity(a:String, b:String, ?tolerance:Dynamic):CaptureCheckResult {
-    return cast _Runtime.callValue(Facade_Capture_flighthq_capture_CaptureComparison.evaluateCaptureParity, cast ([a, b, tolerance] : Array<Dynamic>));
+    return cast Facade_Capture_flighthq_capture_CaptureComparison.evaluateCaptureParity(a, b, tolerance);
     return cast null;
   }
 
   public static function evaluateCaptureRegression(fingerprint:String, baselineFingerprint:String, ?tolerance:Dynamic):CaptureCheckResult {
-    return cast _Runtime.callValue(Facade_Capture_flighthq_capture_CaptureComparison.evaluateCaptureRegression, cast ([fingerprint, baselineFingerprint, tolerance] : Array<Dynamic>));
+    return cast Facade_Capture_flighthq_capture_CaptureComparison.evaluateCaptureRegression(fingerprint, baselineFingerprint, tolerance);
     return cast null;
   }
 
   public static function formatCaptureBaseline(baseline:CaptureBaseline):String {
-    return cast _Runtime.callValue(Facade_Capture_flighthq_capture_CaptureBaseline.formatCaptureBaseline, cast ([baseline] : Array<Dynamic>));
+    return cast Facade_Capture_flighthq_capture_CaptureBaseline.formatCaptureBaseline(baseline);
     return cast null;
   }
 
   public static function getCaptureBaselineField(baseline:CaptureBaseline, column:String, field:CaptureColumnBaseline):Null<String> {
-    return cast _Runtime.callValue(Facade_Capture_flighthq_capture_CaptureBaseline.getCaptureBaselineField, cast ([baseline, column, field] : Array<Dynamic>));
+    return cast Facade_Capture_flighthq_capture_CaptureBaseline.getCaptureBaselineField(baseline, column, field);
     return cast null;
   }
 
   public static function parseCaptureBaseline(text:String):Null<CaptureBaseline> {
-    return cast _Runtime.callValue(Facade_Capture_flighthq_capture_CaptureBaseline.parseCaptureBaseline, cast ([text] : Array<Dynamic>));
+    return cast Facade_Capture_flighthq_capture_CaptureBaseline.parseCaptureBaseline(text);
     return cast null;
   }
 
   public static function setCaptureBaselineField(baseline:CaptureBaseline, column:String, field:CaptureColumnBaseline, value:String):Void {
-    _Runtime.callValue(Facade_Capture_flighthq_capture_CaptureBaseline.setCaptureBaselineField, cast ([baseline, column, field, value] : Array<Dynamic>));
+    Facade_Capture_flighthq_capture_CaptureBaseline.setCaptureBaselineField(baseline, column, field, value);
   }
 }

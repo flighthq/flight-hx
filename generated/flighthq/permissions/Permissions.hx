@@ -10,26 +10,26 @@ import flighthq.types.Permission.PermissionState;
 
 class Permissions {
   public static function createWebPermissionBackend():PermissionBackend {
-    return cast _Runtime.callValue(Facade_Permissions_flighthq_permissions_Permission.createWebPermissionBackend, cast ([] : Array<Dynamic>));
+    return cast Facade_Permissions_flighthq_permissions_Permission.createWebPermissionBackend();
     return cast null;
   }
 
   public static function getPermissionBackend():PermissionBackend {
-    return cast _Runtime.callValue(Facade_Permissions_flighthq_permissions_Permission.getPermissionBackend, cast ([] : Array<Dynamic>));
+    return cast Facade_Permissions_flighthq_permissions_Permission.getPermissionBackend();
     return cast null;
   }
 
   public static function getPermissionState(name:PermissionName):flighthq._internal._Promise<PermissionState> {
-    return cast _Runtime.callValue(Facade_Permissions_flighthq_permissions_Permission.getPermissionState, cast ([name] : Array<Dynamic>));
+    return cast Facade_Permissions_flighthq_permissions_Permission.getPermissionState(name);
     return cast null;
   }
 
   public static function requestPermission(name:PermissionName):flighthq._internal._Promise<PermissionState> {
-    return cast _Runtime.callValue(Facade_Permissions_flighthq_permissions_Permission.requestPermission, cast ([name] : Array<Dynamic>));
+    return cast Facade_Permissions_flighthq_permissions_Permission.requestPermission(name);
     return cast null;
   }
 
   public static function setPermissionBackend(backend:Null<PermissionBackend>):Void {
-    _Runtime.callValue(Facade_Permissions_flighthq_permissions_Permission.setPermissionBackend, cast ([backend] : Array<Dynamic>));
+    Facade_Permissions_flighthq_permissions_Permission.setPermissionBackend(backend);
   }
 }

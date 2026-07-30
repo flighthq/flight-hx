@@ -45,332 +45,332 @@ import flighthq.types.WireframeMaterial;
 
 class Materials {
   public static function clampStandardPbrMaterialProperties(out:StandardPbrMaterialProperties):StandardPbrMaterialProperties {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_MaterialValidation.clampStandardPbrMaterialProperties, cast ([out] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_MaterialValidation.clampStandardPbrMaterialProperties(out);
     return cast null;
   }
 
   public static function cloneColorTransform(source:ColorTransformLike):ColorTransform {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_ColorTransform.cloneColorTransform, cast ([source] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_ColorTransform.cloneColorTransform(source);
     return cast null;
   }
 
   public static function cloneMaterial(source:Material):Material {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_Material.cloneMaterial, cast ([source] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_Material.cloneMaterial(source);
     return cast null;
   }
 
   public static function concatColorTransform(out:ColorTransformLike, source:ColorTransformLike, other:ColorTransformLike):Void {
-    _Runtime.callValue(Facade_Materials_flighthq_materials_ColorTransform.concatColorTransform, cast ([out, source, other] : Array<Dynamic>));
+    Facade_Materials_flighthq_materials_ColorTransform.concatColorTransform(out, source, other);
   }
 
   public static function convertPhongToStandardPbrMaterial(phong:PhongMaterial, ?opts:Dynamic):StandardPbrMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_PhongToPbr.convertPhongToStandardPbrMaterial, cast ([phong, opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_PhongToPbr.convertPhongToStandardPbrMaterial(phong, opts);
     return cast null;
   }
 
   public static function convertSpecularGlossinessToStandardPbr(out:StandardPbrMaterialProperties, source:SpecularGlossinessPbrMaterial):Void {
-    _Runtime.callValue(Facade_Materials_flighthq_materials_PbrMaterials.convertSpecularGlossinessToStandardPbr, cast ([out, source] : Array<Dynamic>));
+    Facade_Materials_flighthq_materials_PbrMaterials.convertSpecularGlossinessToStandardPbr(out, source);
   }
 
   public static function copyColorTransform(out:ColorTransformLike, source:ColorTransformLike):Void {
-    _Runtime.callValue(Facade_Materials_flighthq_materials_ColorTransform.copyColorTransform, cast ([out, source] : Array<Dynamic>));
+    Facade_Materials_flighthq_materials_ColorTransform.copyColorTransform(out, source);
   }
 
   public static function copyColorTransformToArrays(outColorMultipliers:Array<Float>, outColorOffsets:Array<Float>, source:ColorTransformLike):Void {
-    _Runtime.callValue(Facade_Materials_flighthq_materials_ColorTransform.copyColorTransformToArrays, cast ([outColorMultipliers, outColorOffsets, source] : Array<Dynamic>));
+    Facade_Materials_flighthq_materials_ColorTransform.copyColorTransformToArrays(outColorMultipliers, outColorOffsets, source);
   }
 
   public static function copyMaterial(out:Material, source:Material):Void {
-    _Runtime.callValue(Facade_Materials_flighthq_materials_Material.copyMaterial, cast ([out, source] : Array<Dynamic>));
+    Facade_Materials_flighthq_materials_Material.copyMaterial(out, source);
   }
 
   public static function createAluminumStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_MaterialPresets.createAluminumStandardPbrMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_MaterialPresets.createAluminumStandardPbrMaterial(opts);
     return cast null;
   }
 
   public static function createAnisotropyPbrMaterial(?opts:Dynamic):AnisotropyPbrMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_PbrExtensionMaterials.createAnisotropyPbrMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_PbrExtensionMaterials.createAnisotropyPbrMaterial(opts);
     return cast null;
   }
 
   public static function createBlinnPhongMaterial(?opts:Dynamic):BlinnPhongMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_ClassicMaterials.createBlinnPhongMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_ClassicMaterials.createBlinnPhongMaterial(opts);
     return cast null;
   }
 
   public static function createCarbonStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_MaterialPresets.createCarbonStandardPbrMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_MaterialPresets.createCarbonStandardPbrMaterial(opts);
     return cast null;
   }
 
   public static function createClearcoatPbrMaterial(?opts:Dynamic):ClearcoatPbrMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_PbrExtensionMaterials.createClearcoatPbrMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_PbrExtensionMaterials.createClearcoatPbrMaterial(opts);
     return cast null;
   }
 
   public static function createColorTransform(?opts:Dynamic):ColorTransform {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_ColorTransform.createColorTransform, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_ColorTransform.createColorTransform(opts);
     return cast null;
   }
 
   public static function createCustomShaderMaterial(?opts:Dynamic):CustomShaderMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_CustomShaderMaterial.createCustomShaderMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_CustomShaderMaterial.createCustomShaderMaterial(opts);
     return cast null;
   }
 
   public static function createDepthMaterial(?opts:Dynamic):DepthMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_UnlitMaterials.createDepthMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_UnlitMaterials.createDepthMaterial(opts);
     return cast null;
   }
 
   public static function createEmissiveMaterial(?opts:Dynamic):EmissiveMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_UnlitMaterials.createEmissiveMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_UnlitMaterials.createEmissiveMaterial(opts);
     return cast null;
   }
 
   public static function createGlassTransmissionVolumePbrMaterial(?opts:Dynamic):TransmissionVolumePbrMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_MaterialPresets.createGlassTransmissionVolumePbrMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_MaterialPresets.createGlassTransmissionVolumePbrMaterial(opts);
     return cast null;
   }
 
   public static function createGoldStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_MaterialPresets.createGoldStandardPbrMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_MaterialPresets.createGoldStandardPbrMaterial(opts);
     return cast null;
   }
 
   public static function createIridescencePbrMaterial(?opts:Dynamic):IridescencePbrMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_PbrExtensionMaterials.createIridescencePbrMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_PbrExtensionMaterials.createIridescencePbrMaterial(opts);
     return cast null;
   }
 
   public static function createIronStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_MaterialPresets.createIronStandardPbrMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_MaterialPresets.createIronStandardPbrMaterial(opts);
     return cast null;
   }
 
   public static function createLambertMaterial(?opts:Dynamic):LambertMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_ClassicMaterials.createLambertMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_ClassicMaterials.createLambertMaterial(opts);
     return cast null;
   }
 
   public static function createMarbleStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_MaterialPresets.createMarbleStandardPbrMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_MaterialPresets.createMarbleStandardPbrMaterial(opts);
     return cast null;
   }
 
   public static function createMatcapMaterial(?opts:Dynamic):MatcapMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_UnlitMaterials.createMatcapMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_UnlitMaterials.createMatcapMaterial(opts);
     return cast null;
   }
 
   public static function createMaterial(kind:Kind):Material {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_Material.createMaterial, cast ([kind] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_Material.createMaterial(kind);
     return cast null;
   }
 
   public static function createNormalMaterial(?opts:Dynamic):NormalMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_UnlitMaterials.createNormalMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_UnlitMaterials.createNormalMaterial(opts);
     return cast null;
   }
 
   public static function createPhongMaterial(?opts:Dynamic):PhongMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_ClassicMaterials.createPhongMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_ClassicMaterials.createPhongMaterial(opts);
     return cast null;
   }
 
   public static function createPlasticStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_MaterialPresets.createPlasticStandardPbrMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_MaterialPresets.createPlasticStandardPbrMaterial(opts);
     return cast null;
   }
 
   public static function createRubberStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_MaterialPresets.createRubberStandardPbrMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_MaterialPresets.createRubberStandardPbrMaterial(opts);
     return cast null;
   }
 
   public static function createSheenPbrMaterial(?opts:Dynamic):SheenPbrMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_PbrExtensionMaterials.createSheenPbrMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_PbrExtensionMaterials.createSheenPbrMaterial(opts);
     return cast null;
   }
 
   public static function createSilverStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_MaterialPresets.createSilverStandardPbrMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_MaterialPresets.createSilverStandardPbrMaterial(opts);
     return cast null;
   }
 
   public static function createSkinStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_MaterialPresets.createSkinStandardPbrMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_MaterialPresets.createSkinStandardPbrMaterial(opts);
     return cast null;
   }
 
   public static function createSpecularGlossinessPbrMaterial(?opts:Dynamic):SpecularGlossinessPbrMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_PbrMaterials.createSpecularGlossinessPbrMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_PbrMaterials.createSpecularGlossinessPbrMaterial(opts);
     return cast null;
   }
 
   public static function createSpecularPbrMaterial(?opts:Dynamic):SpecularPbrMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_PbrExtensionMaterials.createSpecularPbrMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_PbrExtensionMaterials.createSpecularPbrMaterial(opts);
     return cast null;
   }
 
   public static function createStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_PbrMaterials.createStandardPbrMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_PbrMaterials.createStandardPbrMaterial(opts);
     return cast null;
   }
 
   public static function createStandardPbrMaterialProperties(?opts:Dynamic):StandardPbrMaterialProperties {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_PbrMaterials.createStandardPbrMaterialProperties, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_PbrMaterials.createStandardPbrMaterialProperties(opts);
     return cast null;
   }
 
   public static function createSubsurfacePbrMaterial(?opts:Dynamic):SubsurfacePbrMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_PbrExtensionMaterials.createSubsurfacePbrMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_PbrExtensionMaterials.createSubsurfacePbrMaterial(opts);
     return cast null;
   }
 
   public static function createSurfaceMaterial(kind:Kind):SurfaceMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_SurfaceMaterial.createSurfaceMaterial, cast ([kind] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_SurfaceMaterial.createSurfaceMaterial(kind);
     return cast null;
   }
 
   public static function createToonMaterial(?opts:Dynamic):ToonMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_UnlitMaterials.createToonMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_UnlitMaterials.createToonMaterial(opts);
     return cast null;
   }
 
   public static function createTransmissionVolumePbrMaterial(?opts:Dynamic):TransmissionVolumePbrMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_PbrExtensionMaterials.createTransmissionVolumePbrMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_PbrExtensionMaterials.createTransmissionVolumePbrMaterial(opts);
     return cast null;
   }
 
   public static function createUnlitMaterial(?opts:Dynamic):UnlitMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_UnlitMaterials.createUnlitMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_UnlitMaterials.createUnlitMaterial(opts);
     return cast null;
   }
 
   public static function createVertexColorMaterial(?opts:Dynamic):VertexColorMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_UnlitMaterials.createVertexColorMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_UnlitMaterials.createVertexColorMaterial(opts);
     return cast null;
   }
 
   public static function createWireframeMaterial(?opts:Dynamic):WireframeMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_UnlitMaterials.createWireframeMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_UnlitMaterials.createWireframeMaterial(opts);
     return cast null;
   }
 
   public static function createWoodStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_MaterialPresets.createWoodStandardPbrMaterial, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_MaterialPresets.createWoodStandardPbrMaterial(opts);
     return cast null;
   }
 
   public static function equalsColorTransform(a:ColorTransformLike, b:ColorTransformLike):Bool {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_ColorTransform.equalsColorTransform, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_ColorTransform.equalsColorTransform(a, b);
     return cast null;
   }
 
   public static function equalsColorTransformMultipliers(a:ColorTransformLike, b:ColorTransformLike, ?compareAlpha:Bool):Bool {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_ColorTransform.equalsColorTransformMultipliers, cast ([a, b, compareAlpha] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_ColorTransform.equalsColorTransformMultipliers(a, b, compareAlpha);
     return cast null;
   }
 
   public static function equalsColorTransformOffsets(a:ColorTransformLike, b:ColorTransformLike, ?compareAlpha:Bool):Bool {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_ColorTransform.equalsColorTransformOffsets, cast ([a, b, compareAlpha] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_ColorTransform.equalsColorTransformOffsets(a, b, compareAlpha);
     return cast null;
   }
 
   public static function equalsMaterial(a:Material, b:Material):Bool {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_Material.equalsMaterial, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_Material.equalsMaterial(a, b);
     return cast null;
   }
 
   public static function getColorTransformOffsetRgb(source:ColorTransformLike):Float {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_ColorTransform.getColorTransformOffsetRgb, cast ([source] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_ColorTransform.getColorTransformOffsetRgb(source);
     return cast null;
   }
 
   public static function getColorTransformOffsetRgba(source:ColorTransformLike):Float {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_ColorTransform.getColorTransformOffsetRgba, cast ([source] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_ColorTransform.getColorTransformOffsetRgba(source);
     return cast null;
   }
 
   public static function getMaterialAlphaMode(source:SurfaceMaterial):MaterialAlphaMode {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_SurfaceMaterial.getMaterialAlphaMode, cast ([source] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_SurfaceMaterial.getMaterialAlphaMode(source);
     return cast null;
   }
 
   public static function getPbrMetallicFromPhongSpecular(specular:Float, diffuse:Float):Float {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_PhongToPbr.getPbrMetallicFromPhongSpecular, cast ([specular, diffuse] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_PhongToPbr.getPbrMetallicFromPhongSpecular(specular, diffuse);
     return cast null;
   }
 
   public static function getPbrRoughnessFromPhongShininess(shininess:Float):Float {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_PhongToPbr.getPbrRoughnessFromPhongShininess, cast ([shininess] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_PhongToPbr.getPbrRoughnessFromPhongShininess(shininess);
     return cast null;
   }
 
   public static function getPhongToPbrLightExposure():Float {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_PhongToPbr.getPhongToPbrLightExposure, cast ([] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_PhongToPbr.getPhongToPbrLightExposure();
     return cast null;
   }
 
   public static function invertColorTransform(out:ColorTransformLike, source:ColorTransformLike):Void {
-    _Runtime.callValue(Facade_Materials_flighthq_materials_ColorTransform.invertColorTransform, cast ([out, source] : Array<Dynamic>));
+    Facade_Materials_flighthq_materials_ColorTransform.invertColorTransform(out, source);
   }
 
   public static function isIdentityColorTransform(source:ColorTransformLike, ?compareAlphaMultiplier:Bool):Bool {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_ColorTransform.isIdentityColorTransform, cast ([source, compareAlphaMultiplier] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_ColorTransform.isIdentityColorTransform(source, compareAlphaMultiplier);
     return cast null;
   }
 
   public static function isMaterialBlended(source:SurfaceMaterial):Bool {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_SurfaceMaterial.isMaterialBlended, cast ([source] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_SurfaceMaterial.isMaterialBlended(source);
     return cast null;
   }
 
   public static function isMaterialMasked(source:SurfaceMaterial):Bool {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_SurfaceMaterial.isMaterialMasked, cast ([source] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_SurfaceMaterial.isMaterialMasked(source);
     return cast null;
   }
 
   public static function isMaterialOpaque(source:SurfaceMaterial):Bool {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_SurfaceMaterial.isMaterialOpaque, cast ([source] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_SurfaceMaterial.isMaterialOpaque(source);
     return cast null;
   }
 
   public static function isValidMaterialClearcoat(value:Float):Bool {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_MaterialValidation.isValidMaterialClearcoat, cast ([value] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_MaterialValidation.isValidMaterialClearcoat(value);
     return cast null;
   }
 
   public static function isValidMaterialIor(value:Float):Bool {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_MaterialValidation.isValidMaterialIor, cast ([value] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_MaterialValidation.isValidMaterialIor(value);
     return cast null;
   }
 
   public static function isValidMaterialIridescenceThickness(value:Float):Bool {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_MaterialValidation.isValidMaterialIridescenceThickness, cast ([value] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_MaterialValidation.isValidMaterialIridescenceThickness(value);
     return cast null;
   }
 
   public static function isValidMaterialWeight(value:Float):Bool {
-    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_MaterialValidation.isValidMaterialWeight, cast ([value] : Array<Dynamic>));
+    return cast Facade_Materials_flighthq_materials_MaterialValidation.isValidMaterialWeight(value);
     return cast null;
   }
 
   public static function setColorTransform(out:ColorTransformLike, redMultiplier:Float, greenMultiplier:Float, blueMultiplier:Float, alphaMultiplier:Float, redOffset:Float, greenOffset:Float, blueOffset:Float, alphaOffset:Float):Void {
-    _Runtime.callValue(Facade_Materials_flighthq_materials_ColorTransform.setColorTransform, cast ([out, redMultiplier, greenMultiplier, blueMultiplier, alphaMultiplier, redOffset, greenOffset, blueOffset, alphaOffset] : Array<Dynamic>));
+    Facade_Materials_flighthq_materials_ColorTransform.setColorTransform(out, redMultiplier, greenMultiplier, blueMultiplier, alphaMultiplier, redOffset, greenOffset, blueOffset, alphaOffset);
   }
 
   public static function setColorTransformIdentity(out:ColorTransform):Void {
-    _Runtime.callValue(Facade_Materials_flighthq_materials_ColorTransform.setColorTransformIdentity, cast ([out] : Array<Dynamic>));
+    Facade_Materials_flighthq_materials_ColorTransform.setColorTransformIdentity(out);
   }
 
   public static function setColorTransformOffsetRgb(out:ColorTransformLike, value:Float):Void {
-    _Runtime.callValue(Facade_Materials_flighthq_materials_ColorTransform.setColorTransformOffsetRgb, cast ([out, value] : Array<Dynamic>));
+    Facade_Materials_flighthq_materials_ColorTransform.setColorTransformOffsetRgb(out, value);
   }
 
   public static function setColorTransformOffsetRgba(out:ColorTransformLike, value:Float):Void {
-    _Runtime.callValue(Facade_Materials_flighthq_materials_ColorTransform.setColorTransformOffsetRgba, cast ([out, value] : Array<Dynamic>));
+    Facade_Materials_flighthq_materials_ColorTransform.setColorTransformOffsetRgba(out, value);
   }
 }

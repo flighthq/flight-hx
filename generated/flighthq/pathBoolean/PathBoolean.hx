@@ -17,61 +17,61 @@ import flighthq.types.PathOffsetOptions;
 
 class PathBoolean {
   public static function booleanPaths(subject:Path, clip:Path, operation:PathBooleanOperation, ?out:Path, ?options:PathBooleanOptions):Path {
-    return cast _Runtime.callValue(Facade_PathBoolean_flighthq_pathBoolean_BooleanPaths.booleanPaths, cast ([subject, clip, operation, out, options] : Array<Dynamic>));
+    return cast Facade_PathBoolean_flighthq_pathBoolean_BooleanPaths.booleanPaths(subject, clip, operation, out, options);
     return cast null;
   }
 
   public static function createDefaultPathBooleanBackend():PathBooleanBackend {
-    return cast _Runtime.callValue(Facade_PathBoolean_flighthq_pathBoolean_PathBooleanBackend.createDefaultPathBooleanBackend, cast ([] : Array<Dynamic>));
+    return cast Facade_PathBoolean_flighthq_pathBoolean_PathBooleanBackend.createDefaultPathBooleanBackend();
     return cast null;
   }
 
   public static function createMartinezPathBooleanBackend():PathBooleanBackend {
-    return cast _Runtime.callValue(Facade_PathBoolean_flighthq_pathBoolean_MartinezKernel.createMartinezPathBooleanBackend, cast ([] : Array<Dynamic>));
+    return cast Facade_PathBoolean_flighthq_pathBoolean_MartinezKernel.createMartinezPathBooleanBackend();
     return cast null;
   }
 
   public static function differencePaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
-    return cast _Runtime.callValue(Facade_PathBoolean_flighthq_pathBoolean_BooleanPaths.differencePaths, cast ([a, b, out, options] : Array<Dynamic>));
+    return cast Facade_PathBoolean_flighthq_pathBoolean_BooleanPaths.differencePaths(a, b, out, options);
     return cast null;
   }
 
   public static function getPathBooleanBackend():PathBooleanBackend {
-    return cast _Runtime.callValue(Facade_PathBoolean_flighthq_pathBoolean_PathBooleanBackend.getPathBooleanBackend, cast ([] : Array<Dynamic>));
+    return cast Facade_PathBoolean_flighthq_pathBoolean_PathBooleanBackend.getPathBooleanBackend();
     return cast null;
   }
 
   public static function intersectPaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
-    return cast _Runtime.callValue(Facade_PathBoolean_flighthq_pathBoolean_BooleanPaths.intersectPaths, cast ([a, b, out, options] : Array<Dynamic>));
+    return cast Facade_PathBoolean_flighthq_pathBoolean_BooleanPaths.intersectPaths(a, b, out, options);
     return cast null;
   }
 
   public static function offsetPath(path:Path, delta:Float, ?options:PathOffsetOptions):Path {
-    return cast _Runtime.callValue(Facade_PathBoolean_flighthq_pathBoolean_OffsetPath.offsetPath, cast ([path, delta, options] : Array<Dynamic>));
+    return cast Facade_PathBoolean_flighthq_pathBoolean_OffsetPath.offsetPath(path, delta, options);
     return cast null;
   }
 
   public static function setPathBooleanBackend(backend:Null<PathBooleanBackend>):Void {
-    _Runtime.callValue(Facade_PathBoolean_flighthq_pathBoolean_PathBooleanBackend.setPathBooleanBackend, cast ([backend] : Array<Dynamic>));
+    Facade_PathBoolean_flighthq_pathBoolean_PathBooleanBackend.setPathBooleanBackend(backend);
   }
 
   public static function simplifyPath(path:Path, ?options:PathBooleanOptions):Path {
-    return cast _Runtime.callValue(Facade_PathBoolean_flighthq_pathBoolean_SimplifyPath.simplifyPath, cast ([path, options] : Array<Dynamic>));
+    return cast Facade_PathBoolean_flighthq_pathBoolean_SimplifyPath.simplifyPath(path, options);
     return cast null;
   }
 
   public static function unionAllPaths(paths:Array<Path>, ?out:Path, ?options:PathBooleanOptions):Path {
-    return cast _Runtime.callValue(Facade_PathBoolean_flighthq_pathBoolean_UnionAllPaths.unionAllPaths, cast ([paths, out, options] : Array<Dynamic>));
+    return cast Facade_PathBoolean_flighthq_pathBoolean_UnionAllPaths.unionAllPaths(paths, out, options);
     return cast null;
   }
 
   public static function unionPaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
-    return cast _Runtime.callValue(Facade_PathBoolean_flighthq_pathBoolean_BooleanPaths.unionPaths, cast ([a, b, out, options] : Array<Dynamic>));
+    return cast Facade_PathBoolean_flighthq_pathBoolean_BooleanPaths.unionPaths(a, b, out, options);
     return cast null;
   }
 
   public static function xorPaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
-    return cast _Runtime.callValue(Facade_PathBoolean_flighthq_pathBoolean_BooleanPaths.xorPaths, cast ([a, b, out, options] : Array<Dynamic>));
+    return cast Facade_PathBoolean_flighthq_pathBoolean_BooleanPaths.xorPaths(a, b, out, options);
     return cast null;
   }
 }

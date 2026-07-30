@@ -43,101 +43,101 @@ import flighthq.types.Updater.UpdaterBackend;
 
 class HostElectron {
   public static function createElectronAppBackend(electron:ElectronApi):AppBackend {
-    return cast _Runtime.callValue(Facade_HostElectron_flighthq_hostElectron_ElectronApp.createElectronAppBackend, cast ([electron] : Array<Dynamic>));
+    return cast Facade_HostElectron_flighthq_hostElectron_ElectronApp.createElectronAppBackend(electron);
     return cast null;
   }
 
   public static function createElectronClipboardBackend(electron:ElectronApi):ClipboardBackend {
-    return cast _Runtime.callValue(Facade_HostElectron_flighthq_hostElectron_ElectronClipboard.createElectronClipboardBackend, cast ([electron] : Array<Dynamic>));
+    return cast Facade_HostElectron_flighthq_hostElectron_ElectronClipboard.createElectronClipboardBackend(electron);
     return cast null;
   }
 
   public static function createElectronDialogBackend(electron:ElectronApi):DialogBackend {
-    return cast _Runtime.callValue(Facade_HostElectron_flighthq_hostElectron_ElectronDialog.createElectronDialogBackend, cast ([electron] : Array<Dynamic>));
+    return cast Facade_HostElectron_flighthq_hostElectron_ElectronDialog.createElectronDialogBackend(electron);
     return cast null;
   }
 
   public static function createElectronIpcBackend(electron:ElectronApi):IpcBackend {
-    return cast _Runtime.callValue(Facade_HostElectron_flighthq_hostElectron_ElectronIpc.createElectronIpcBackend, cast ([electron] : Array<Dynamic>));
+    return cast Facade_HostElectron_flighthq_hostElectron_ElectronIpc.createElectronIpcBackend(electron);
     return cast null;
   }
 
   public static function createElectronMenuBackend(electron:ElectronApi):MenuBackend {
-    return cast _Runtime.callValue(Facade_HostElectron_flighthq_hostElectron_ElectronMenu.createElectronMenuBackend, cast ([electron] : Array<Dynamic>));
+    return cast Facade_HostElectron_flighthq_hostElectron_ElectronMenu.createElectronMenuBackend(electron);
     return cast null;
   }
 
   public static function createElectronNotificationBackend(electron:ElectronApi):NotificationBackend {
-    return cast _Runtime.callValue(Facade_HostElectron_flighthq_hostElectron_ElectronNotification.createElectronNotificationBackend, cast ([electron] : Array<Dynamic>));
+    return cast Facade_HostElectron_flighthq_hostElectron_ElectronNotification.createElectronNotificationBackend(electron);
     return cast null;
   }
 
   public static function createElectronPlatformBackend(electron:ElectronApi):PlatformBackend {
-    return cast _Runtime.callValue(Facade_HostElectron_flighthq_hostElectron_ElectronPlatform.createElectronPlatformBackend, cast ([electron] : Array<Dynamic>));
+    return cast Facade_HostElectron_flighthq_hostElectron_ElectronPlatform.createElectronPlatformBackend(electron);
     return cast null;
   }
 
   public static function createElectronPowerBackend(electron:ElectronApi):PowerBackend {
-    return cast _Runtime.callValue(Facade_HostElectron_flighthq_hostElectron_ElectronPower.createElectronPowerBackend, cast ([electron] : Array<Dynamic>));
+    return cast Facade_HostElectron_flighthq_hostElectron_ElectronPower.createElectronPowerBackend(electron);
     return cast null;
   }
 
   public static function createElectronProtocolBackend(electron:ElectronApi):ProtocolBackend {
-    return cast _Runtime.callValue(Facade_HostElectron_flighthq_hostElectron_ElectronProtocol.createElectronProtocolBackend, cast ([electron] : Array<Dynamic>));
+    return cast Facade_HostElectron_flighthq_hostElectron_ElectronProtocol.createElectronProtocolBackend(electron);
     return cast null;
   }
 
   public static function createElectronScreenBackend(electron:ElectronApi):ScreenBackend {
-    return cast _Runtime.callValue(Facade_HostElectron_flighthq_hostElectron_ElectronScreen.createElectronScreenBackend, cast ([electron] : Array<Dynamic>));
+    return cast Facade_HostElectron_flighthq_hostElectron_ElectronScreen.createElectronScreenBackend(electron);
     return cast null;
   }
 
   public static function createElectronShellBackend(electron:ElectronApi):ShellBackend {
-    return cast _Runtime.callValue(Facade_HostElectron_flighthq_hostElectron_ElectronShell.createElectronShellBackend, cast ([electron] : Array<Dynamic>));
+    return cast Facade_HostElectron_flighthq_hostElectron_ElectronShell.createElectronShellBackend(electron);
     return cast null;
   }
 
   public static function createElectronShortcutBackend(electron:ElectronApi):ShortcutBackend {
-    return cast _Runtime.callValue(Facade_HostElectron_flighthq_hostElectron_ElectronShortcut.createElectronShortcutBackend, cast ([electron] : Array<Dynamic>));
+    return cast Facade_HostElectron_flighthq_hostElectron_ElectronShortcut.createElectronShortcutBackend(electron);
     return cast null;
   }
 
   public static function createElectronStorageBackend(electron:ElectronApi, ?fileName:Dynamic):StorageBackend {
-    return cast _Runtime.callValue(Facade_HostElectron_flighthq_hostElectron_ElectronStorage.createElectronStorageBackend, cast ([electron, fileName] : Array<Dynamic>));
+    return cast Facade_HostElectron_flighthq_hostElectron_ElectronStorage.createElectronStorageBackend(electron, fileName);
     return cast null;
   }
 
   public static function createElectronTrayBackend(electron:ElectronApi):TrayBackend {
-    return cast _Runtime.callValue(Facade_HostElectron_flighthq_hostElectron_ElectronTray.createElectronTrayBackend, cast ([electron] : Array<Dynamic>));
+    return cast Facade_HostElectron_flighthq_hostElectron_ElectronTray.createElectronTrayBackend(electron);
     return cast null;
   }
 
   public static function createElectronUpdaterBackend(electron:ElectronApi):UpdaterBackend {
-    return cast _Runtime.callValue(Facade_HostElectron_flighthq_hostElectron_ElectronUpdater.createElectronUpdaterBackend, cast ([electron] : Array<Dynamic>));
+    return cast Facade_HostElectron_flighthq_hostElectron_ElectronUpdater.createElectronUpdaterBackend(electron);
     return cast null;
   }
 
   public static function createElectronWindowBackend(electron:ElectronApi):WindowBackend {
-    return cast _Runtime.callValue(Facade_HostElectron_flighthq_hostElectron_ElectronWindow.createElectronWindowBackend, cast ([electron] : Array<Dynamic>));
+    return cast Facade_HostElectron_flighthq_hostElectron_ElectronWindow.createElectronWindowBackend(electron);
     return cast null;
   }
 
   public static function getApplicationWindowForElectronId(id:Float):Null<ApplicationWindow> {
-    return cast _Runtime.callValue(Facade_HostElectron_flighthq_hostElectron_ElectronWindow.getApplicationWindowForElectronId, cast ([id] : Array<Dynamic>));
+    return cast Facade_HostElectron_flighthq_hostElectron_ElectronWindow.getApplicationWindowForElectronId(id);
     return cast null;
   }
 
   public static function getElectronBrowserWindow(win:ApplicationWindow):Null<ElectronBrowserWindow> {
-    return cast _Runtime.callValue(Facade_HostElectron_flighthq_hostElectron_ElectronWindow.getElectronBrowserWindow, cast ([win] : Array<Dynamic>));
+    return cast Facade_HostElectron_flighthq_hostElectron_ElectronWindow.getElectronBrowserWindow(win);
     return cast null;
   }
 
   public static function getElectronWindowId(win:ApplicationWindow):Float {
-    return cast _Runtime.callValue(Facade_HostElectron_flighthq_hostElectron_ElectronWindow.getElectronWindowId, cast ([win] : Array<Dynamic>));
+    return cast Facade_HostElectron_flighthq_hostElectron_ElectronWindow.getElectronWindowId(win);
     return cast null;
   }
 
   public static function registerElectronBackends(electron:ElectronApi, ?options:ElectronBackendOptions):Void {
-    _Runtime.callValue(Facade_HostElectron_flighthq_hostElectron_ElectronRegister.registerElectronBackends, cast ([electron, options] : Array<Dynamic>));
+    Facade_HostElectron_flighthq_hostElectron_ElectronRegister.registerElectronBackends(electron, options);
   }
 }

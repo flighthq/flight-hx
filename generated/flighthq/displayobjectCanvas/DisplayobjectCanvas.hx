@@ -56,62 +56,62 @@ import flighthq.types.TextLayout.TextMeasureFunction;
 
 class DisplayobjectCanvas {
   public static function applyCanvasBlendMode(state:Dynamic, value:Null<BlendMode>):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasMaterials.applyCanvasBlendMode, cast ([state, value] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasMaterials.applyCanvasBlendMode(state, value);
   }
 
   public static function applyCanvasMaterial(state:Dynamic, material:Null<Material>):Bool {
-    return cast _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasMaterialRegistry.applyCanvasMaterial, cast ([state, material] : Array<Dynamic>));
+    return cast Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasMaterialRegistry.applyCanvasMaterial(state, material);
     return cast null;
   }
 
   public static function beginCanvasRenderPass(state:Dynamic, target:Dynamic, ?preserve:RenderPassPreserve):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRenderTarget.beginCanvasRenderPass, cast ([state, target, preserve] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRenderTarget.beginCanvasRenderPass(state, target, preserve);
   }
 
   public static function buildScale9Mapper(commands:Array<Dynamic>, scale9Grid:RectangleLike, scaleX:Float, scaleY:Float):Null<Scale9Mapper> {
-    return cast _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasScale9Mapper.buildScale9Mapper, cast ([commands, scale9Grid, scaleX, scaleY] : Array<Dynamic>));
+    return cast Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasScale9Mapper.buildScale9Mapper(commands, scale9Grid, scaleX, scaleY);
     return cast null;
   }
 
   public static final canvasDisplayObjectRendererEntries:Array<Array<Dynamic>> = Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRegistration.canvasDisplayObjectRendererEntries;
 
   public static function createBitmapPattern(context:Dynamic, bitmap:ImageResource, repeat:Bool, ?smooth:Dynamic):Null<Dynamic> {
-    return cast _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasFillPattern.createBitmapPattern, cast ([context, bitmap, repeat, smooth] : Array<Dynamic>));
+    return cast Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasFillPattern.createBitmapPattern(context, bitmap, repeat, smooth);
     return cast null;
   }
 
   public static function createCanvasCacheState(screenState:Dynamic):Dynamic {
-    return cast _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasCache.createCanvasCacheState, cast ([screenState] : Array<Dynamic>));
+    return cast Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasCache.createCanvasCacheState(screenState);
     return cast null;
   }
 
   public static function createCanvasElement(width:Float, height:Float, ?pixelRatio:Float):Dynamic {
-    return cast _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasElement.createCanvasElement, cast ([width, height, pixelRatio] : Array<Dynamic>));
+    return cast Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasElement.createCanvasElement(width, height, pixelRatio);
     return cast null;
   }
 
   public static function createCanvasRenderState(canvas:Dynamic, ?options:Dynamic):Dynamic {
-    return cast _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRenderState.createCanvasRenderState, cast ([canvas, options] : Array<Dynamic>));
+    return cast Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRenderState.createCanvasRenderState(canvas, options);
     return cast null;
   }
 
   public static function createCanvasRenderStateRuntime():Dynamic {
-    return cast _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRenderState.createCanvasRenderStateRuntime, cast ([] : Array<Dynamic>));
+    return cast Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRenderState.createCanvasRenderStateRuntime();
     return cast null;
   }
 
   public static function createCanvasRenderTarget(width:Float, height:Float):Dynamic {
-    return cast _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRenderTarget.createCanvasRenderTarget, cast ([width, height] : Array<Dynamic>));
+    return cast Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRenderTarget.createCanvasRenderTarget(width, height);
     return cast null;
   }
 
   public static function createCanvasTextMeasure():TextMeasureFunction {
-    return cast _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasTextMeasure.createCanvasTextMeasure, cast ([] : Array<Dynamic>));
+    return cast Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasTextMeasure.createCanvasTextMeasure();
     return cast null;
   }
 
   public static function createGradientPattern(context:Dynamic, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, m:Null<Matrix>, spreadMethod:SpreadMethod, _interpolationMethod:InterpolationMethod, focalPointRatio:Float):Null<Dynamic> {
-    return cast _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasFillPattern.createGradientPattern, cast ([context, gradientType, colors, alphas, ratios, m, spreadMethod, _interpolationMethod, focalPointRatio] : Array<Dynamic>));
+    return cast Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasFillPattern.createGradientPattern(context, gradientType, colors, alphas, ratios, m, spreadMethod, _interpolationMethod, focalPointRatio);
     return cast null;
   }
 
@@ -174,213 +174,213 @@ class DisplayobjectCanvas {
   public static final defaultCanvasVideoRenderer:DisplayObjectRenderer = Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasVideo.defaultCanvasVideoRenderer;
 
   public static function destroyCanvasRenderCacheTarget(state:Dynamic, cache:RenderCache):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasCache.destroyCanvasRenderCacheTarget, cast ([state, cache] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasCache.destroyCanvasRenderCacheTarget(state, cache);
   }
 
   public static function destroyCanvasRenderTarget(target:Dynamic):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRenderTarget.destroyCanvasRenderTarget, cast ([target] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRenderTarget.destroyCanvasRenderTarget(target);
   }
 
   public static function drawCanvasBitmap(state:Dynamic, bitmap:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasBitmap.drawCanvasBitmap, cast ([state, bitmap] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasBitmap.drawCanvasBitmap(state, bitmap);
   }
 
   public static function drawCanvasDisplayObject(_state:Dynamic, _renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasDisplayObject.drawCanvasDisplayObject, cast ([_state, _renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasDisplayObject.drawCanvasDisplayObject(_state, _renderProxy);
   }
 
   public static function drawCanvasParticleEmitter(state:Dynamic, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasParticleEmitter.drawCanvasParticleEmitter, cast ([state, renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasParticleEmitter.drawCanvasParticleEmitter(state, renderProxy);
   }
 
   public static function drawCanvasQuadBatch(state:Dynamic, quadBatch:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasQuadBatch.drawCanvasQuadBatch, cast ([state, quadBatch] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasQuadBatch.drawCanvasQuadBatch(state, quadBatch);
   }
 
   public static function drawCanvasRichText(state:Dynamic, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRichText.drawCanvasRichText, cast ([state, renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRichText.drawCanvasRichText(state, renderProxy);
   }
 
   public static function drawCanvasRichTextMask(state:Dynamic, data:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRichText.drawCanvasRichTextMask, cast ([state, data] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRichText.drawCanvasRichTextMask(state, data);
   }
 
   public static function drawCanvasScale9Shape(state:Dynamic, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasScale9Shape.drawCanvasScale9Shape, cast ([state, renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasScale9Shape.drawCanvasScale9Shape(state, renderProxy);
   }
 
   public static function drawCanvasShape(state:Dynamic, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasShape.drawCanvasShape, cast ([state, renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasShape.drawCanvasShape(state, renderProxy);
   }
 
   public static function drawCanvasSprite(state:Dynamic, spriteNode:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasSprite.drawCanvasSprite, cast ([state, spriteNode] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasSprite.drawCanvasSprite(state, spriteNode);
   }
 
   public static function drawCanvasTextInputOverlay(state:Dynamic, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasTextInput.drawCanvasTextInputOverlay, cast ([state, renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasTextInput.drawCanvasTextInputOverlay(state, renderProxy);
   }
 
   public static function drawCanvasTextLabel(state:Dynamic, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasTextLabel.drawCanvasTextLabel, cast ([state, renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasTextLabel.drawCanvasTextLabel(state, renderProxy);
   }
 
   public static function drawCanvasTilemap(state:Dynamic, tilemapNode:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasTilemap.drawCanvasTilemap, cast ([state, tilemapNode] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasTilemap.drawCanvasTilemap(state, tilemapNode);
   }
 
   public static function drawCanvasVideo(state:Dynamic, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasVideo.drawCanvasVideo, cast ([state, renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasVideo.drawCanvasVideo(state, renderProxy);
   }
 
   public static function enableCanvasBlendMode(state:Dynamic):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasMaterials.enableCanvasBlendMode, cast ([state] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasMaterials.enableCanvasBlendMode(state);
   }
 
   public static function enableCanvasClip(state:Dynamic):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasClip.enableCanvasClip, cast ([state] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasClip.enableCanvasClip(state);
   }
 
   public static function enableCanvasCssFilter(state:Dynamic):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasCSSFilterBinding.enableCanvasCssFilter, cast ([state] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasCSSFilterBinding.enableCanvasCssFilter(state);
   }
 
   public static function enableCanvasRenderCache(state:RenderState):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasCache.enableCanvasRenderCache, cast ([state] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasCache.enableCanvasRenderCache(state);
   }
 
   public static function enableCanvasTextInput():Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasTextInput.enableCanvasTextInput, cast ([] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasTextInput.enableCanvasTextInput();
   }
 
   public static function endCanvasRenderPass(state:Dynamic):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRenderTarget.endCanvasRenderPass, cast ([state] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRenderTarget.endCanvasRenderPass(state);
   }
 
   public static function ensureCanvasRenderCacheTarget(state:Dynamic, cache:RenderCache, width:Float, height:Float):Dynamic {
-    return cast _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasCache.ensureCanvasRenderCacheTarget, cast ([state, cache, width, height] : Array<Dynamic>));
+    return cast Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasCache.ensureCanvasRenderCacheTarget(state, cache, width, height);
     return cast null;
   }
 
   public static function explainCanvasImageSource(image:ImageResource):Dynamic {
-    return cast _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasImageSource.explainCanvasImageSource, cast ([image] : Array<Dynamic>));
+    return cast Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasImageSource.explainCanvasImageSource(image);
     return cast null;
   }
 
   public static function getCanvasCssFilter(renderProxy:RenderProxy2D):Null<String> {
-    return cast _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasCSSFilterBinding.getCanvasCssFilter, cast ([renderProxy] : Array<Dynamic>));
+    return cast Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasCSSFilterBinding.getCanvasCssFilter(renderProxy);
     return cast null;
   }
 
   public static function getCanvasMaterialRenderer(state:Dynamic, kind:Kind):Null<Dynamic> {
-    return cast _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasMaterialRegistry.getCanvasMaterialRenderer, cast ([state, kind] : Array<Dynamic>));
+    return cast Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasMaterialRegistry.getCanvasMaterialRenderer(state, kind);
     return cast null;
   }
 
   public static function getCanvasRenderCacheTarget(state:Dynamic, cache:RenderCache):Null<Dynamic> {
-    return cast _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasCache.getCanvasRenderCacheTarget, cast ([state, cache] : Array<Dynamic>));
+    return cast Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasCache.getCanvasRenderCacheTarget(state, cache);
     return cast null;
   }
 
   public static function getCanvasRenderStateRuntime(state:Dynamic):Dynamic {
-    return cast _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRenderState.getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>));
+    return cast Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRenderState.getCanvasRenderStateRuntime(state);
     return cast null;
   }
 
   public static function getCanvasShapeCommand(key:String):Null<Dynamic> {
-    return cast _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasShapeRegistry.getCanvasShapeCommand, cast ([key] : Array<Dynamic>));
+    return cast Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasShapeRegistry.getCanvasShapeCommand(key);
     return cast null;
   }
 
   public static function mapCanvasScale9ShapeCommands(out:Array<Dynamic>, source:Array<Dynamic>, mapper:Scale9Mapper):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasScale9Shape.mapCanvasScale9ShapeCommands, cast ([out, source, mapper] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasScale9Shape.mapCanvasScale9ShapeCommands(out, source, mapper);
   }
 
   public static function popCanvasClipRectangle(state:Dynamic):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasClipRectangle.popCanvasClipRectangle, cast ([state] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasClipRectangle.popCanvasClipRectangle(state);
   }
 
   public static function pushCanvasClipContours(state:Dynamic, contours:Array<Array<Float>>, winding:PathWinding, transform:Matrix):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasClipRectangle.pushCanvasClipContours, cast ([state, contours, winding, transform] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasClipRectangle.pushCanvasClipContours(state, contours, winding, transform);
   }
 
   public static function pushCanvasClipRectangle(state:Dynamic, rect:RectangleLike, transform:Matrix):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasClipRectangle.pushCanvasClipRectangle, cast ([state, rect, transform] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasClipRectangle.pushCanvasClipRectangle(state, rect, transform);
   }
 
   public static function refreshCanvasRenderCache(cacheState:Dynamic, cache:RenderCache, source:DisplayObject, ?options:RenderCacheRefreshOptions):Bool {
-    return cast _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasCache.refreshCanvasRenderCache, cast ([cacheState, cache, source, options] : Array<Dynamic>));
+    return cast Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasCache.refreshCanvasRenderCache(cacheState, cache, source, options);
     return cast null;
   }
 
   public static function registerCanvasDisplayObjectRenderers(state:Dynamic):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRegistration.registerCanvasDisplayObjectRenderers, cast ([state] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRegistration.registerCanvasDisplayObjectRenderers(state);
   }
 
   public static function registerCanvasMaterialRenderer(state:Dynamic, kind:Kind, renderer:Dynamic):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasMaterialRegistry.registerCanvasMaterialRenderer, cast ([state, kind, renderer] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasMaterialRegistry.registerCanvasMaterialRenderer(state, kind, renderer);
   }
 
   public static function registerCanvasShapeCommand<K>(command:Dynamic):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasShapeRegistry.registerCanvasShapeCommand, cast ([command] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasShapeRegistry.registerCanvasShapeCommand(command);
   }
 
   public static function registerCanvasShapeCommands(commands:Array<Dynamic>):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasShapeRegistry.registerCanvasShapeCommands, cast ([commands] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasShapeRegistry.registerCanvasShapeCommands(commands);
   }
 
   public static function registerCanvasTextInputOverlay(overlay:Dynamic):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRichText.registerCanvasTextInputOverlay, cast ([overlay] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRichText.registerCanvasTextInputOverlay(overlay);
   }
 
   public static function releaseCanvasRenderCache(state:Dynamic, cache:RenderCache):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasCache.releaseCanvasRenderCache, cast ([state, cache] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasCache.releaseCanvasRenderCache(state, cache);
   }
 
   public static function renderCanvasBackground(state:Dynamic):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasBackground.renderCanvasBackground, cast ([state] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasBackground.renderCanvasBackground(state);
   }
 
   public static function renderCanvasDisplayObject(state:Dynamic, source:DisplayObject):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasDisplayObject.renderCanvasDisplayObject, cast ([state, source] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasDisplayObject.renderCanvasDisplayObject(state, source);
   }
 
   public static function renderCanvasShapeCommands(context:Dynamic, commands:Array<Dynamic>):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasShape.renderCanvasShapeCommands, cast ([context, commands] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasShape.renderCanvasShapeCommands(context, commands);
   }
 
   public static function renderCanvasSprite(state:Dynamic, source:DisplayObject):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasSprite.renderCanvasSprite, cast ([state, source] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasSprite.renderCanvasSprite(state, source);
   }
 
   public static function resizeCanvasRenderTarget(target:Dynamic, width:Float, height:Float):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRenderTarget.resizeCanvasRenderTarget, cast ([target, width, height] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRenderTarget.resizeCanvasRenderTarget(target, width, height);
   }
 
   public static function resolveCanvasCssFilter(_state:Dynamic, renderProxy:RenderProxy2D):Null<String> {
-    return cast _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasCSSFilterBinding.resolveCanvasCssFilter, cast ([_state, renderProxy] : Array<Dynamic>));
+    return cast Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasCSSFilterBinding.resolveCanvasCssFilter(_state, renderProxy);
     return cast null;
   }
 
   public static function resolveCanvasImageSource(state:Dynamic, image:ImageResource):Null<Dynamic> {
-    return cast _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasImageSource.resolveCanvasImageSource, cast ([state, image] : Array<Dynamic>));
+    return cast Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasImageSource.resolveCanvasImageSource(state, image);
     return cast null;
   }
 
   public static function resolveCanvasMaterialRenderer(state:Dynamic, material:Null<Material>):Null<Dynamic> {
-    return cast _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasMaterialRegistry.resolveCanvasMaterialRenderer, cast ([state, material] : Array<Dynamic>));
+    return cast Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasMaterialRegistry.resolveCanvasMaterialRenderer(state, material);
     return cast null;
   }
 
   public static function setCanvasCssFilter(state:Dynamic, node:DisplayObject, filter:Null<String>):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasCSSFilterBinding.setCanvasCssFilter, cast ([state, node, filter] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasCSSFilterBinding.setCanvasCssFilter(state, node, filter);
   }
 
   public static function setCanvasRenderTransform2D(state:Dynamic, transform:Matrix):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRenderTarget.setCanvasRenderTransform2D, cast ([state, transform] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRenderTarget.setCanvasRenderTransform2D(state, transform);
   }
 
   public static function setCanvasTransform(state:Dynamic, context:Dynamic, transform:Matrix):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasTransform.setCanvasTransform, cast ([state, context, transform] : Array<Dynamic>));
+    Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasTransform.setCanvasTransform(state, context, transform);
   }
 }

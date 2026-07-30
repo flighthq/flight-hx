@@ -34,219 +34,219 @@ import flighthq.types.TextSelectionRectangle;
 
 class Textlayout {
   public static function clearRichTextContent(runtime:RichTextRuntime):Void {
-    _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextContent.clearRichTextContent, cast ([runtime] : Array<Dynamic>));
+    Facade_Textlayout_flighthq_textlayout_RichTextContent.clearRichTextContent(runtime);
   }
 
   public static function clearTextLayoutResult(runtime:TextLabelRuntime):Void {
-    _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextLayoutRuntime.clearTextLayoutResult, cast ([runtime] : Array<Dynamic>));
+    Facade_Textlayout_flighthq_textlayout_TextLayoutRuntime.clearTextLayoutResult(runtime);
   }
 
   public static function computeRichTextBottomScrollV(data:RichTextData, layout:TextLayoutResult):Float {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextMetrics.computeRichTextBottomScrollV, cast ([data, layout] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_RichTextMetrics.computeRichTextBottomScrollV(data, layout);
     return cast null;
   }
 
   public static function computeRichTextCharIndexAtPoint(layout:TextLayoutResult, x:Float, y:Float):Float {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextQuery.computeRichTextCharIndexAtPoint, cast ([layout, x, y] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_RichTextQuery.computeRichTextCharIndexAtPoint(layout, x, y);
     return cast null;
   }
 
   public static function computeRichTextContent(out:RichTextContent, data:RichTextData, ?passwordCharacter:Null<String>):Void {
-    _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextContent.computeRichTextContent, cast ([out, data, passwordCharacter] : Array<Dynamic>));
+    Facade_Textlayout_flighthq_textlayout_RichTextContent.computeRichTextContent(out, data, passwordCharacter);
   }
 
   public static function computeRichTextLineCount(layout:TextLayoutResult):Float {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextMetrics.computeRichTextLineCount, cast ([layout] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_RichTextMetrics.computeRichTextLineCount(layout);
     return cast null;
   }
 
   public static function computeRichTextLineMetrics(layout:TextLayoutResult, lineIndex:Float):Null<TextLineMetrics> {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextQuery.computeRichTextLineMetrics, cast ([layout, lineIndex] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_RichTextQuery.computeRichTextLineMetrics(layout, lineIndex);
     return cast null;
   }
 
   public static function computeRichTextMaxScrollH(data:RichTextData, layout:TextLayoutResult):Float {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextMetrics.computeRichTextMaxScrollH, cast ([data, layout] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_RichTextMetrics.computeRichTextMaxScrollH(data, layout);
     return cast null;
   }
 
   public static function computeRichTextMaxScrollV(data:RichTextData, layout:TextLayoutResult):Float {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextMetrics.computeRichTextMaxScrollV, cast ([data, layout] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_RichTextMetrics.computeRichTextMaxScrollV(data, layout);
     return cast null;
   }
 
   public static function computeRichTextTextHeight(layout:TextLayoutResult):Float {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextMetrics.computeRichTextTextHeight, cast ([layout] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_RichTextMetrics.computeRichTextTextHeight(layout);
     return cast null;
   }
 
   public static function computeRichTextTextWidth(layout:TextLayoutResult):Float {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextMetrics.computeRichTextTextWidth, cast ([layout] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_RichTextMetrics.computeRichTextTextWidth(layout);
     return cast null;
   }
 
   public static function computeTextBoundsHeight(spec:TextBoundsSpec, layout:TextLayoutResult):Float {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextBounds.computeTextBoundsHeight, cast ([spec, layout] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_TextBounds.computeTextBoundsHeight(spec, layout);
     return cast null;
   }
 
   public static function computeTextBoundsOffsetX(spec:TextBoundsSpec, layout:TextLayoutResult):Float {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextBounds.computeTextBoundsOffsetX, cast ([spec, layout] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_TextBounds.computeTextBoundsOffsetX(spec, layout);
     return cast null;
   }
 
   public static function computeTextBoundsRectangle(out:RectangleLike, spec:TextBoundsSpec, layout:TextLayoutResult):Void {
-    _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextBounds.computeTextBoundsRectangle, cast ([out, spec, layout] : Array<Dynamic>));
+    Facade_Textlayout_flighthq_textlayout_TextBounds.computeTextBoundsRectangle(out, spec, layout);
   }
 
   public static function computeTextBoundsWidth(spec:TextBoundsSpec, layout:TextLayoutResult):Float {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextBounds.computeTextBoundsWidth, cast ([spec, layout] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_TextBounds.computeTextBoundsWidth(spec, layout);
     return cast null;
   }
 
   public static function computeTextLayout(out:TextLayoutResult, params:TextLayoutParams):Void {
-    _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextLayout.computeTextLayout, cast ([out, params] : Array<Dynamic>));
+    Facade_Textlayout_flighthq_textlayout_TextLayout.computeTextLayout(out, params);
   }
 
   public static function createRichTextContent():RichTextContent {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextContent.createRichTextContent, cast ([] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_RichTextContent.createRichTextContent();
     return cast null;
   }
 
   public static function createTextFormatRange(format:TextFormat, start:Float, end:Float):TextFormatRange {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextFormatRange.createTextFormatRange, cast ([format, start, end] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_TextFormatRange.createTextFormatRange(format, start, end);
     return cast null;
   }
 
   public static function createTextLayoutGroup(format:TextFormat, startIndex:Float, endIndex:Float):TextLayoutGroup {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextLayoutGroup.createTextLayoutGroup, cast ([format, startIndex, endIndex] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_TextLayoutGroup.createTextLayoutGroup(format, startIndex, endIndex);
     return cast null;
   }
 
   public static function createTextLayoutResult():TextLayoutResult {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextLayout.createTextLayoutResult, cast ([] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_TextLayout.createTextLayoutResult();
     return cast null;
   }
 
   public static function createTextMetrics():TextMetrics {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextMetrics.createTextMetrics, cast ([] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_TextMetrics.createTextMetrics();
     return cast null;
   }
 
   public static function getRichTextCharBoundaries(out:Rectangle, layout:TextLayoutResult, charIndex:Float):Bool {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextQuery.getRichTextCharBoundaries, cast ([out, layout, charIndex] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_RichTextQuery.getRichTextCharBoundaries(out, layout, charIndex);
     return cast null;
   }
 
   public static function getRichTextContent(runtime:RichTextRuntime):RichTextContent {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextContent.getRichTextContent, cast ([runtime] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_RichTextContent.getRichTextContent(runtime);
     return cast null;
   }
 
   public static function getRichTextFirstCharInParagraph(text:String, charIndex:Float):Float {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextQuery.getRichTextFirstCharInParagraph, cast ([text, charIndex] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_RichTextQuery.getRichTextFirstCharInParagraph(text, charIndex);
     return cast null;
   }
 
   public static function getRichTextLineIndexAtPoint(layout:TextLayoutResult, y:Float):Float {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextQuery.getRichTextLineIndexAtPoint, cast ([layout, y] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_RichTextQuery.getRichTextLineIndexAtPoint(layout, y);
     return cast null;
   }
 
   public static function getRichTextLineIndexOfChar(layout:TextLayoutResult, charIndex:Float):Float {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextQuery.getRichTextLineIndexOfChar, cast ([layout, charIndex] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_RichTextQuery.getRichTextLineIndexOfChar(layout, charIndex);
     return cast null;
   }
 
   public static function getRichTextLineLength(layout:TextLayoutResult, lineIndex:Float):Float {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextQuery.getRichTextLineLength, cast ([layout, lineIndex] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_RichTextQuery.getRichTextLineLength(layout, lineIndex);
     return cast null;
   }
 
   public static function getRichTextLineOffset(layout:TextLayoutResult, lineIndex:Float):Float {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextQuery.getRichTextLineOffset, cast ([layout, lineIndex] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_RichTextQuery.getRichTextLineOffset(layout, lineIndex);
     return cast null;
   }
 
   public static function getRichTextLineText(text:String, layout:TextLayoutResult, lineIndex:Float):String {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextQuery.getRichTextLineText, cast ([text, layout, lineIndex] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_RichTextQuery.getRichTextLineText(text, layout, lineIndex);
     return cast null;
   }
 
   public static function getRichTextLinkAtPoint(layout:TextLayoutResult, x:Float, y:Float):Null<String> {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextQuery.getRichTextLinkAtPoint, cast ([layout, x, y] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_RichTextQuery.getRichTextLinkAtPoint(layout, x, y);
     return cast null;
   }
 
   public static function getRichTextParagraphLength(text:String, charIndex:Float):Float {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextQuery.getRichTextParagraphLength, cast ([text, charIndex] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_RichTextQuery.getRichTextParagraphLength(text, charIndex);
     return cast null;
   }
 
   public static function getRichTextScrollYOffset(lineHeights:Array<Float>, firstVisibleLine:Float):Float {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextMetrics.getRichTextScrollYOffset, cast ([lineHeights, firstVisibleLine] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_RichTextMetrics.getRichTextScrollYOffset(lineHeights, firstVisibleLine);
     return cast null;
   }
 
   public static function getRichTextSelectionRectangles(out:Array<TextSelectionRectangle>, beginIndex:Float, endIndex:Float, layout:TextLayoutResult):Void {
-    _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextQuery.getRichTextSelectionRectangles, cast ([out, beginIndex, endIndex, layout] : Array<Dynamic>));
+    Facade_Textlayout_flighthq_textlayout_RichTextQuery.getRichTextSelectionRectangles(out, beginIndex, endIndex, layout);
   }
 
   public static function getTextFormatAscent(format:TextFormat):Float {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextFormat.getTextFormatAscent, cast ([format] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_TextFormat.getTextFormatAscent(format);
     return cast null;
   }
 
   public static function getTextFormatDescent(format:TextFormat):Float {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextFormat.getTextFormatDescent, cast ([format] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_TextFormat.getTextFormatDescent(format);
     return cast null;
   }
 
   public static function getTextFormatHeight(format:TextFormat):Float {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextFormat.getTextFormatHeight, cast ([format] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_TextFormat.getTextFormatHeight(format);
     return cast null;
   }
 
   public static function getTextFormatLeading(format:TextFormat):Float {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextFormat.getTextFormatLeading, cast ([format] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_TextFormat.getTextFormatLeading(format);
     return cast null;
   }
 
   public static function getTextLayoutMeasureProvider():Null<TextMeasureFunction> {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextLayoutMeasure.getTextLayoutMeasureProvider, cast ([] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_TextLayoutMeasure.getTextLayoutMeasureProvider();
     return cast null;
   }
 
   public static function getTextLayoutResult(runtime:TextLabelRuntime):TextLayoutResult {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextLayoutRuntime.getTextLayoutResult, cast ([runtime] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_TextLayoutRuntime.getTextLayoutResult(runtime);
     return cast null;
   }
 
   public static function getTextLineBreakIndex(lineBreaks:Array<Float>, ?startIndex:Dynamic):Float {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextLineBreaks.getTextLineBreakIndex, cast ([lineBreaks, startIndex] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_TextLineBreaks.getTextLineBreakIndex(lineBreaks, startIndex);
     return cast null;
   }
 
   public static function getTextLineBreaks(out:Array<Float>, text:String):Void {
-    _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextLineBreaks.getTextLineBreaks, cast ([out, text] : Array<Dynamic>));
+    Facade_Textlayout_flighthq_textlayout_TextLineBreaks.getTextLineBreaks(out, text);
   }
 
   public static function getTextMetrics(out:TextMetrics, layout:TextLayoutResult):Void {
-    _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextMetrics.getTextMetrics, cast ([out, layout] : Array<Dynamic>));
+    Facade_Textlayout_flighthq_textlayout_TextMetrics.getTextMetrics(out, layout);
   }
 
   public static function isTextLayoutTruncated(layout:TextLayoutResult, params:TextLayoutParams):Bool {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextLayout.isTextLayoutTruncated, cast ([layout, params] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_TextLayout.isTextLayoutTruncated(layout, params);
     return cast null;
   }
 
   public static function mergeTextFormat(base:TextFormat, override_:TextFormat):TextFormat {
-    return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextFormat.mergeTextFormat, cast ([base, override_] : Array<Dynamic>));
+    return cast Facade_Textlayout_flighthq_textlayout_TextFormat.mergeTextFormat(base, override_);
     return cast null;
   }
 
   public static function setTextLayoutMeasureProvider(measure:Null<TextMeasureFunction>):Void {
-    _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextLayoutMeasure.setTextLayoutMeasureProvider, cast ([measure] : Array<Dynamic>));
+    Facade_Textlayout_flighthq_textlayout_TextLayoutMeasure.setTextLayoutMeasureProvider(measure);
   }
 
   public static final TEXT_BOUNDS_GUTTER:Dynamic = Facade_Textlayout_flighthq_textlayout_TextBounds.TEXT_BOUNDS_GUTTER;

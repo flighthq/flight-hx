@@ -14,37 +14,37 @@ import flighthq.types.TextureAtlas;
 
 class Bitmapfont {
   public static function createBitmapFont(data:BitmapFontData):BitmapFont {
-    return cast _Runtime.callValue(Facade_Bitmapfont_flighthq_bitmapfont_BitmapFont.createBitmapFont, cast ([data] : Array<Dynamic>));
+    return cast Facade_Bitmapfont_flighthq_bitmapfont_BitmapFont.createBitmapFont(data);
     return cast null;
   }
 
   public static function createGlyphSourceFromBitmapFont(font:BitmapFont):GlyphSource {
-    return cast _Runtime.callValue(Facade_Bitmapfont_flighthq_bitmapfont_GlyphSource.createGlyphSourceFromBitmapFont, cast ([font] : Array<Dynamic>));
+    return cast Facade_Bitmapfont_flighthq_bitmapfont_GlyphSource.createGlyphSourceFromBitmapFont(font);
     return cast null;
   }
 
   public static function getBitmapFontGlyph(font:BitmapFont, codepoint:Float):Null<GlyphEntry> {
-    return cast _Runtime.callValue(Facade_Bitmapfont_flighthq_bitmapfont_BitmapFont.getBitmapFontGlyph, cast ([font, codepoint] : Array<Dynamic>));
+    return cast Facade_Bitmapfont_flighthq_bitmapfont_BitmapFont.getBitmapFontGlyph(font, codepoint);
     return cast null;
   }
 
   public static function getBitmapFontKerning(font:BitmapFont, left:Float, right:Float):Float {
-    return cast _Runtime.callValue(Facade_Bitmapfont_flighthq_bitmapfont_BitmapFont.getBitmapFontKerning, cast ([font, left, right] : Array<Dynamic>));
+    return cast Facade_Bitmapfont_flighthq_bitmapfont_BitmapFont.getBitmapFontKerning(font, left, right);
     return cast null;
   }
 
   public static function getBitmapFontMetrics(font:BitmapFont):GlyphMetrics {
-    return cast _Runtime.callValue(Facade_Bitmapfont_flighthq_bitmapfont_BitmapFont.getBitmapFontMetrics, cast ([font] : Array<Dynamic>));
+    return cast Facade_Bitmapfont_flighthq_bitmapfont_BitmapFont.getBitmapFontMetrics(font);
     return cast null;
   }
 
   public static function getBitmapFontPage(font:BitmapFont, ?page:Dynamic):Null<TextureAtlas> {
-    return cast _Runtime.callValue(Facade_Bitmapfont_flighthq_bitmapfont_BitmapFont.getBitmapFontPage, cast ([font, page] : Array<Dynamic>));
+    return cast Facade_Bitmapfont_flighthq_bitmapfont_BitmapFont.getBitmapFontPage(font, page);
     return cast null;
   }
 
   public static function getBitmapFontPages(font:BitmapFont):Array<TextureAtlas> {
-    return cast _Runtime.callValue(Facade_Bitmapfont_flighthq_bitmapfont_BitmapFont.getBitmapFontPages, cast ([font] : Array<Dynamic>));
+    return cast Facade_Bitmapfont_flighthq_bitmapfont_BitmapFont.getBitmapFontPages(font);
     return cast null;
   }
 }

@@ -44,27 +44,27 @@ import flighthq.types._internal._SceneNodeValues.SceneNodeKind;
 
 class Scene {
   public static function applyAnimationClipToScene(clip:AnimationClip, time:Float):Void {
-    _Runtime.callValue(Facade_Scene_flighthq_scene_SceneAnimation.applyAnimationClipToScene, cast ([clip, time] : Array<Dynamic>));
+    Facade_Scene_flighthq_scene_SceneAnimation.applyAnimationClipToScene(clip, time);
   }
 
   public static final BillboardKind:Dynamic = Facade_Scene_flighthq_types__internal__BillboardValues.BillboardKind;
 
   public static function buildSceneFrustum(out:FrustumLike, viewProjection:Matrix4Like):Void {
-    _Runtime.callValue(Facade_Scene_flighthq_scene_SceneNodeCulling.buildSceneFrustum, cast ([out, viewProjection] : Array<Dynamic>));
+    Facade_Scene_flighthq_scene_SceneNodeCulling.buildSceneFrustum(out, viewProjection);
   }
 
   public static function cloneMesh(source:Mesh):Mesh {
-    return cast _Runtime.callValue(Facade_Scene_flighthq_scene_Mesh.cloneMesh, cast ([source] : Array<Dynamic>));
+    return cast Facade_Scene_flighthq_scene_Mesh.cloneMesh(source);
     return cast null;
   }
 
   public static function createBillboard(geometry:MeshGeometry, materials:Array<Null<Material>>, ?mode:BillboardMode, ?kind:Kind, ?obj:Dynamic):Billboard {
-    return cast _Runtime.callValue(Facade_Scene_flighthq_scene_Billboard.createBillboard, cast ([geometry, materials, mode, kind, obj] : Array<Dynamic>));
+    return cast Facade_Scene_flighthq_scene_Billboard.createBillboard(geometry, materials, mode, kind, obj);
     return cast null;
   }
 
   public static function createMesh(geometry:MeshGeometry, materials:Array<Null<Material>>, ?kind:Kind, ?obj:Dynamic):Mesh {
-    return cast _Runtime.callValue(Facade_Scene_flighthq_scene_Mesh.createMesh, cast ([geometry, materials, kind, obj] : Array<Dynamic>));
+    return cast Facade_Scene_flighthq_scene_Mesh.createMesh(geometry, materials, kind, obj);
     return cast null;
   }
 
@@ -76,123 +76,123 @@ class Scene {
   }
 
   public static function createSceneNode(?kind:Kind, ?obj:Dynamic):SceneNode {
-    return cast _Runtime.callValue(Facade_Scene_flighthq_scene_SceneNode.createSceneNode, cast ([kind, obj] : Array<Dynamic>));
+    return cast Facade_Scene_flighthq_scene_SceneNode.createSceneNode(kind, obj);
     return cast null;
   }
 
   public static function createSceneNodeRuntime():SceneNodeRuntime {
-    return cast _Runtime.callValue(Facade_Scene_flighthq_scene_SceneNode.createSceneNodeRuntime, cast ([] : Array<Dynamic>));
+    return cast Facade_Scene_flighthq_scene_SceneNode.createSceneNodeRuntime();
     return cast null;
   }
 
   public static function cullSceneNodeByFrustum(out:Array<SceneNode>, root:SceneNode, frustum:FrustumLike):Array<SceneNode> {
-    return cast _Runtime.callValue(Facade_Scene_flighthq_scene_SceneNodeCulling.cullSceneNodeByFrustum, cast ([out, root, frustum] : Array<Dynamic>));
+    return cast Facade_Scene_flighthq_scene_SceneNodeCulling.cullSceneNodeByFrustum(out, root, frustum);
     return cast null;
   }
 
   public static function disposeSceneNode(node:SceneNode):Void {
-    _Runtime.callValue(Facade_Scene_flighthq_scene_SceneNodeDispose.disposeSceneNode, cast ([node] : Array<Dynamic>));
+    Facade_Scene_flighthq_scene_SceneNodeDispose.disposeSceneNode(node);
   }
 
   public static function enableBillboardSignals(source:Billboard):NodeSignals {
-    return cast _Runtime.callValue(Facade_Scene_flighthq_scene_Billboard.enableBillboardSignals, cast ([source] : Array<Dynamic>));
+    return cast Facade_Scene_flighthq_scene_Billboard.enableBillboardSignals(source);
     return cast null;
   }
 
   public static function enableMeshSignals(source:Mesh):NodeSignals {
-    return cast _Runtime.callValue(Facade_Scene_flighthq_scene_Mesh.enableMeshSignals, cast ([source] : Array<Dynamic>));
+    return cast Facade_Scene_flighthq_scene_Mesh.enableMeshSignals(source);
     return cast null;
   }
 
   public static function enableSceneNodeSignals(source:SceneNode):NodeSignals {
-    return cast _Runtime.callValue(Facade_Scene_flighthq_scene_SceneNode.enableSceneNodeSignals, cast ([source] : Array<Dynamic>));
+    return cast Facade_Scene_flighthq_scene_SceneNode.enableSceneNodeSignals(source);
     return cast null;
   }
 
   public static function ensureSceneNodeWorldAlpha(source:SceneNode):Void {
-    _Runtime.callValue(Facade_Scene_flighthq_scene_SceneNodeAppearance.ensureSceneNodeWorldAlpha, cast ([source] : Array<Dynamic>));
+    Facade_Scene_flighthq_scene_SceneNodeAppearance.ensureSceneNodeWorldAlpha(source);
   }
 
   public static function findSceneMaterialByName(root:SceneNode, name:String):Null<Material> {
-    return cast _Runtime.callValue(Facade_Scene_flighthq_scene_SceneMaterial.findSceneMaterialByName, cast ([root, name] : Array<Dynamic>));
+    return cast Facade_Scene_flighthq_scene_SceneMaterial.findSceneMaterialByName(root, name);
     return cast null;
   }
 
   public static function getBillboardRuntime(source:Billboard):BillboardRuntime {
-    return cast _Runtime.callValue(Facade_Scene_flighthq_scene_Billboard.getBillboardRuntime, cast ([source] : Array<Dynamic>));
+    return cast Facade_Scene_flighthq_scene_Billboard.getBillboardRuntime(source);
     return cast null;
   }
 
   public static function getBillboardSignals(source:Billboard):Null<NodeSignals> {
-    return cast _Runtime.callValue(Facade_Scene_flighthq_scene_Billboard.getBillboardSignals, cast ([source] : Array<Dynamic>));
+    return cast Facade_Scene_flighthq_scene_Billboard.getBillboardSignals(source);
     return cast null;
   }
 
   public static function getMeshDeformer(source:Mesh):MeshDeformer {
-    return cast _Runtime.callValue(Facade_Scene_flighthq_scene_Mesh.getMeshDeformer, cast ([source] : Array<Dynamic>));
+    return cast Facade_Scene_flighthq_scene_Mesh.getMeshDeformer(source);
     return cast null;
   }
 
   public static function getMeshRuntime(source:Mesh):MeshRuntime {
-    return cast _Runtime.callValue(Facade_Scene_flighthq_scene_Mesh.getMeshRuntime, cast ([source] : Array<Dynamic>));
+    return cast Facade_Scene_flighthq_scene_Mesh.getMeshRuntime(source);
     return cast null;
   }
 
   public static function getMeshSignals(source:Mesh):Null<NodeSignals> {
-    return cast _Runtime.callValue(Facade_Scene_flighthq_scene_Mesh.getMeshSignals, cast ([source] : Array<Dynamic>));
+    return cast Facade_Scene_flighthq_scene_Mesh.getMeshSignals(source);
     return cast null;
   }
 
   public static function getSceneNodeRuntime(source:SceneNode):SceneNodeRuntime {
-    return cast _Runtime.callValue(Facade_Scene_flighthq_scene_SceneNode.getSceneNodeRuntime, cast ([source] : Array<Dynamic>));
+    return cast Facade_Scene_flighthq_scene_SceneNode.getSceneNodeRuntime(source);
     return cast null;
   }
 
   public static function getSceneNodeSignals(source:SceneNode):Null<NodeSignals> {
-    return cast _Runtime.callValue(Facade_Scene_flighthq_scene_SceneNode.getSceneNodeSignals, cast ([source] : Array<Dynamic>));
+    return cast Facade_Scene_flighthq_scene_SceneNode.getSceneNodeSignals(source);
     return cast null;
   }
 
   public static function getSceneNodeWorldAlpha(source:SceneNode):Float {
-    return cast _Runtime.callValue(Facade_Scene_flighthq_scene_SceneNodeAppearance.getSceneNodeWorldAlpha, cast ([source] : Array<Dynamic>));
+    return cast Facade_Scene_flighthq_scene_SceneNodeAppearance.getSceneNodeWorldAlpha(source);
     return cast null;
   }
 
   public static function getSceneNodeWorldBounds(out:AabbLike, node:SceneNode):Void {
-    _Runtime.callValue(Facade_Scene_flighthq_scene_SceneNodeBounds.getSceneNodeWorldBounds, cast ([out, node] : Array<Dynamic>));
+    Facade_Scene_flighthq_scene_SceneNodeBounds.getSceneNodeWorldBounds(out, node);
   }
 
   public static function isBillboard(source:SceneNode):Bool {
-    return cast _Runtime.callValue(Facade_Scene_flighthq_scene_Billboard.isBillboard, cast ([source] : Array<Dynamic>));
+    return cast Facade_Scene_flighthq_scene_Billboard.isBillboard(source);
     return cast null;
   }
 
   public static function isMesh(source:Dynamic):Bool {
-    return cast _Runtime.callValue(Facade_Scene_flighthq_scene_Mesh.isMesh, cast ([source] : Array<Dynamic>));
+    return cast Facade_Scene_flighthq_scene_Mesh.isMesh(source);
     return cast null;
   }
 
   public static final MeshKind:Dynamic = Facade_Scene_flighthq_types__internal__MeshValues.MeshKind;
 
   public static function orientBillboardToCamera(billboard:Billboard, camera:Camera):Void {
-    _Runtime.callValue(Facade_Scene_flighthq_scene_BillboardCamera.orientBillboardToCamera, cast ([billboard, camera] : Array<Dynamic>));
+    Facade_Scene_flighthq_scene_BillboardCamera.orientBillboardToCamera(billboard, camera);
   }
 
   public static function orientSceneBillboardsToCamera(scene:SceneNode, camera:Camera):Void {
-    _Runtime.callValue(Facade_Scene_flighthq_scene_BillboardCamera.orientSceneBillboardsToCamera, cast ([scene, camera] : Array<Dynamic>));
+    Facade_Scene_flighthq_scene_BillboardCamera.orientSceneBillboardsToCamera(scene, camera);
   }
 
   public static final SceneNodeKind:Dynamic = Facade_Scene_flighthq_types__internal__SceneNodeValues.SceneNodeKind;
 
   public static function setSceneNodeAlpha(source:SceneNode, alpha:Float):Void {
-    _Runtime.callValue(Facade_Scene_flighthq_scene_SceneNodeAppearance.setSceneNodeAlpha, cast ([source, alpha] : Array<Dynamic>));
+    Facade_Scene_flighthq_scene_SceneNodeAppearance.setSceneNodeAlpha(source, alpha);
   }
 
   public static function setSceneNodeLookAt(node:SceneNode, eye:Vector3Like, target:Vector3Like, up:Vector3Like):Void {
-    _Runtime.callValue(Facade_Scene_flighthq_scene_SceneNodeTransform.setSceneNodeLookAt, cast ([node, eye, target, up] : Array<Dynamic>));
+    Facade_Scene_flighthq_scene_SceneNodeTransform.setSceneNodeLookAt(node, eye, target, up);
   }
 
   public static function updateMeshMorph(mesh:Mesh):Void {
-    _Runtime.callValue(Facade_Scene_flighthq_scene_UpdateMeshMorph.updateMeshMorph, cast ([mesh] : Array<Dynamic>));
+    Facade_Scene_flighthq_scene_UpdateMeshMorph.updateMeshMorph(mesh);
   }
 }

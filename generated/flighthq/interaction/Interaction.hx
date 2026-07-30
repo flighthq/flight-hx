@@ -47,378 +47,378 @@ import flighthq.types.SignalConnectOptions;
 
 class Interaction {
   public static function captureInteractionPointer<N>(manager:InteractionManager<Dynamic>, pointerId:Float, target:Dynamic):Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_InteractionManager.captureInteractionPointer, cast ([manager, pointerId, target] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_InteractionManager.captureInteractionPointer(manager, pointerId, target);
   }
 
   public static function clearFocus<N>(manager:FocusManager<Dynamic>):Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_FocusManager.clearFocus, cast ([manager] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_FocusManager.clearFocus(manager);
   }
 
   public static function connectFocusNavigation<N>(input:FocusNavigationInput, manager:FocusManager<Dynamic>, ?options:FocusNavigationOptions):Dynamic {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_FocusManager.connectFocusNavigation, cast ([input, manager, options] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_FocusManager.connectFocusNavigation(input, manager, options);
     return cast null;
   }
 
   public static function connectInputToInteraction<N>(input:InteractionInputSource, manager:InteractionManager<Dynamic>, ?coordScale:Float):Dynamic {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_InteractionManager.connectInputToInteraction, cast ([input, manager, coordScale] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_InteractionManager.connectInputToInteraction(input, manager, coordScale);
     return cast null;
   }
 
   public static function connectInteractionSignal<N, Name>(manager:InteractionManager<Dynamic>, target:Dynamic, name:Name, slot:InteractionSignalSlot__interactionManager<Name>, ?options:SignalConnectOptions):Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_InteractionManager.connectInteractionSignal, cast ([manager, target, name, slot, options] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_InteractionManager.connectInteractionSignal(manager, target, name, slot, options);
   }
 
   public static function containsDisplayObject(outer:DisplayObject, inner:DisplayObject):Bool {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_DisplayObjectOverlap.containsDisplayObject, cast ([outer, inner] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_DisplayObjectOverlap.containsDisplayObject(outer, inner);
     return cast null;
   }
 
   public static function createFocusManager<N>(root:Dynamic, ?options:FocusManagerOptions):FocusManager<Dynamic> {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_FocusManager.createFocusManager, cast ([root, options] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_FocusManager.createFocusManager(root, options);
     return cast null;
   }
 
   public static function createInteractionManager<N>(root:Dynamic, ?options:InteractionManagerOptions):InteractionManager<Dynamic> {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_InteractionManager.createInteractionManager, cast ([root, options] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_InteractionManager.createInteractionManager(root, options);
     return cast null;
   }
 
   public static function createInteractionSignals():InteractionSignals {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_InteractionManager.createInteractionSignals, cast ([] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_InteractionManager.createInteractionSignals();
     return cast null;
   }
 
   public static function createNodeInteractionState():NodeInteractionState {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_NodeInteractionState.createNodeInteractionState, cast ([] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_NodeInteractionState.createNodeInteractionState();
     return cast null;
   }
 
   public static function createWebCursorBackend(element:Dynamic):CursorBackend {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_CursorBackend.createWebCursorBackend, cast ([element] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_CursorBackend.createWebCursorBackend(element);
     return cast null;
   }
 
   public static function defaultBitmapHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultBitmapHitTestHandler, cast ([source, x, y] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultBitmapHitTestHandler(source, x, y);
     return cast null;
   }
 
   public static function defaultDisplayObjectHitTestHandler(_source:NodeAny, _x:Float, _y:Float):Bool {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultDisplayObjectHitTestHandler, cast ([_source, _x, _y] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultDisplayObjectHitTestHandler(_source, _x, _y);
     return cast null;
   }
 
   public static function defaultHtmlViewHitTestHandler(_source:NodeAny, _x:Float, _y:Float):Bool {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultHtmlViewHitTestHandler, cast ([_source, _x, _y] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultHtmlViewHitTestHandler(_source, _x, _y);
     return cast null;
   }
 
   public static function defaultMovieClipHitTestHandler(_source:NodeAny, _x:Float, _y:Float):Bool {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultMovieClipHitTestHandler, cast ([_source, _x, _y] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultMovieClipHitTestHandler(_source, _x, _y);
     return cast null;
   }
 
   public static function defaultQuadBatchHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_SpriteHitTests.defaultQuadBatchHitTestHandler, cast ([source, x, y] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_SpriteHitTests.defaultQuadBatchHitTestHandler(source, x, y);
     return cast null;
   }
 
   public static function defaultRenderViewHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultRenderViewHitTestHandler, cast ([source, x, y] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultRenderViewHitTestHandler(source, x, y);
     return cast null;
   }
 
   public static function defaultRichTextHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultRichTextHitTestHandler, cast ([source, x, y] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultRichTextHitTestHandler(source, x, y);
     return cast null;
   }
 
   public static function defaultShapeHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultShapeHitTestHandler, cast ([source, x, y] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultShapeHitTestHandler(source, x, y);
     return cast null;
   }
 
   public static function defaultSpriteHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_SpriteHitTests.defaultSpriteHitTestHandler, cast ([source, x, y] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_SpriteHitTests.defaultSpriteHitTestHandler(source, x, y);
     return cast null;
   }
 
   public static function defaultTextHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultTextHitTestHandler, cast ([source, x, y] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultTextHitTestHandler(source, x, y);
     return cast null;
   }
 
   public static function defaultTextInputHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultTextInputHitTestHandler, cast ([source, x, y] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultTextInputHitTestHandler(source, x, y);
     return cast null;
   }
 
   public static function defaultTilemapHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_SpriteHitTests.defaultTilemapHitTestHandler, cast ([source, x, y] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_SpriteHitTests.defaultTilemapHitTestHandler(source, x, y);
     return cast null;
   }
 
   public static function defaultVideoHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultVideoHitTestHandler, cast ([source, x, y] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultVideoHitTestHandler(source, x, y);
     return cast null;
   }
 
   public static function describeGraphHit(node:NodeAny, x:Float, y:Float, out:HitTestResult):Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_HitTests.describeGraphHit, cast ([node, x, y, out] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_HitTests.describeGraphHit(node, x, y, out);
   }
 
   public static function disableInteractionGuards():Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_EnableInteractionGuards.disableInteractionGuards, cast ([] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_EnableInteractionGuards.disableInteractionGuards();
   }
 
   public static function disconnectInteractionSignal<N, Name>(manager:InteractionManager<Dynamic>, target:Dynamic, name:Name, slot:InteractionSignalSlot__interactionManager<Name>):Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_InteractionManager.disconnectInteractionSignal, cast ([manager, target, name, slot] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_InteractionManager.disconnectInteractionSignal(manager, target, name, slot);
   }
 
   public static function dispatchInteractionContextMenu<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, ?button:Float, ?options:InteractionPointerOptions):Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionContextMenu, cast ([manager, x, y, button, options] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionContextMenu(manager, x, y, button, options);
   }
 
   public static function dispatchInteractionKeyDown<N>(manager:InteractionManager<Dynamic>, key:String, ?keyCode:Float, ?modifiers:Dynamic):Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionKeyDown, cast ([manager, key, keyCode, modifiers] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionKeyDown(manager, key, keyCode, modifiers);
   }
 
   public static function dispatchInteractionKeyUp<N>(manager:InteractionManager<Dynamic>, key:String, ?keyCode:Float, ?modifiers:Dynamic):Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionKeyUp, cast ([manager, key, keyCode, modifiers] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionKeyUp(manager, key, keyCode, modifiers);
   }
 
   public static function dispatchInteractionPointerCancel<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, ?options:InteractionPointerOptions):Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionPointerCancel, cast ([manager, x, y, options] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionPointerCancel(manager, x, y, options);
   }
 
   public static function dispatchInteractionPointerDown<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, ?button:Float, ?options:InteractionPointerOptions):Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionPointerDown, cast ([manager, x, y, button, options] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionPointerDown(manager, x, y, button, options);
   }
 
   public static function dispatchInteractionPointerMove<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, ?button:Float, ?options:InteractionPointerOptions):Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionPointerMove, cast ([manager, x, y, button, options] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionPointerMove(manager, x, y, button, options);
   }
 
   public static function dispatchInteractionPointerUp<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, ?button:Float, ?time:Float, ?options:InteractionPointerOptions):Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionPointerUp, cast ([manager, x, y, button, time, options] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionPointerUp(manager, x, y, button, time, options);
   }
 
   public static function dispatchInteractionWheel<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, ?deltaX:Float, ?deltaY:Float, ?options:InteractionPointerOptions):Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionWheel, cast ([manager, x, y, deltaX, deltaY, options] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionWheel(manager, x, y, deltaX, deltaY, options);
   }
 
   public static function enableInteractionGuards():Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_EnableInteractionGuards.enableInteractionGuards, cast ([] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_EnableInteractionGuards.enableInteractionGuards();
   }
 
   public static function enableInteractionSignals<N>(source:Dynamic):InteractionSignals {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_InteractionManager.enableInteractionSignals, cast ([source] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_InteractionManager.enableInteractionSignals(source);
     return cast null;
   }
 
   public static function enableNodeInteractionState(source:NodeAny):NodeInteractionState {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_NodeInteractionState.enableNodeInteractionState, cast ([source] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_NodeInteractionState.enableNodeInteractionState(source);
     return cast null;
   }
 
   public static function explainInteractionHitEligibility(node:NodeAny):InteractionHitEligibility {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_EnableInteractionGuards.explainInteractionHitEligibility, cast ([node] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_EnableInteractionGuards.explainInteractionHitEligibility(node);
     return cast null;
   }
 
   public static function findGraphHitTarget<Traits>(source:Node<Traits>, x:Float, y:Float):Null<Node<Traits>> {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_HitTests.findGraphHitTarget, cast ([source, x, y] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_HitTests.findGraphHitTarget(source, x, y);
     return cast null;
   }
 
   public static function findGraphHitTargetPrecise<Traits>(source:Node<Traits>, x:Float, y:Float):Null<Node<Traits>> {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_HitTests.findGraphHitTargetPrecise, cast ([source, x, y] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_HitTests.findGraphHitTargetPrecise(source, x, y);
     return cast null;
   }
 
   public static function findGraphHitTargets<Traits>(source:Node<Traits>, x:Float, y:Float, ?out:Array<Node<Traits>>):Array<Node<Traits>> {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_HitTests.findGraphHitTargets, cast ([source, x, y, out] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_HitTests.findGraphHitTargets(source, x, y, out);
     return cast null;
   }
 
   public static function findGraphHitTargetsPrecise<Traits>(source:Node<Traits>, x:Float, y:Float, ?out:Array<Node<Traits>>):Array<Node<Traits>> {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_HitTests.findGraphHitTargetsPrecise, cast ([source, x, y, out] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_HitTests.findGraphHitTargetsPrecise(source, x, y, out);
     return cast null;
   }
 
   public static function findSpatialInteractionTarget<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, ?precise:Bool):Null<Dynamic> {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_InteractionSpatialIndex.findSpatialInteractionTarget, cast ([manager, x, y, precise] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_InteractionSpatialIndex.findSpatialInteractionTarget(manager, x, y, precise);
     return cast null;
   }
 
   public static function focusNextNode<N>(manager:FocusManager<Dynamic>):Null<Dynamic> {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_FocusManager.focusNextNode, cast ([manager] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_FocusManager.focusNextNode(manager);
     return cast null;
   }
 
   public static function focusNodeInDirection<N>(manager:FocusManager<Dynamic>, direction:FocusDirection):Null<Dynamic> {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_FocusManager.focusNodeInDirection, cast ([manager, direction] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_FocusManager.focusNodeInDirection(manager, direction);
     return cast null;
   }
 
   public static function focusPreviousNode<N>(manager:FocusManager<Dynamic>):Null<Dynamic> {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_FocusManager.focusPreviousNode, cast ([manager] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_FocusManager.focusPreviousNode(manager);
     return cast null;
   }
 
   public static function getDisplayObjectOverlapRectangle(source:DisplayObject, other:DisplayObject, out:Rectangle):Rectangle {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_DisplayObjectOverlap.getDisplayObjectOverlapRectangle, cast ([source, other, out] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_DisplayObjectOverlap.getDisplayObjectOverlapRectangle(source, other, out);
     return cast null;
   }
 
   public static function getFocusedNode<N>(manager:FocusManager<Dynamic>):Null<Dynamic> {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_FocusManager.getFocusedNode, cast ([manager] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_FocusManager.getFocusedNode(manager);
     return cast null;
   }
 
   public static function getFocusOrder<N>(manager:FocusManager<Dynamic>, ?out:Array<Dynamic>):Array<Dynamic> {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_FocusManager.getFocusOrder, cast ([manager, out] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_FocusManager.getFocusOrder(manager, out);
     return cast null;
   }
 
   public static function getInteractionSignals<N>(source:Dynamic):Null<InteractionSignals> {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_InteractionManager.getInteractionSignals, cast ([source] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_InteractionManager.getInteractionSignals(source);
     return cast null;
   }
 
   public static function getNodeCursor(source:NodeAny):Null<Cursor> {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_NodeInteractionState.getNodeCursor, cast ([source] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_NodeInteractionState.getNodeCursor(source);
     return cast null;
   }
 
   public static function getNodeHitArea(source:NodeAny):Null<HitArea> {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_NodeInteractionState.getNodeHitArea, cast ([source] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_NodeInteractionState.getNodeHitArea(source);
     return cast null;
   }
 
   public static function getNodeInteractionState(source:NodeAny):Null<NodeInteractionState> {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_NodeInteractionState.getNodeInteractionState, cast ([source] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_NodeInteractionState.getNodeInteractionState(source);
     return cast null;
   }
 
   public static function getNodeTabIndex(source:NodeAny):Float {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_NodeInteractionState.getNodeTabIndex, cast ([source] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_NodeInteractionState.getNodeTabIndex(source);
     return cast null;
   }
 
   public static function hitTestAreaQuery(root:DisplayObject, rect:Rectangle, ?out:Array<DisplayObject>):Array<DisplayObject> {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_SpatialQuery.hitTestAreaQuery, cast ([root, rect, out] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_SpatialQuery.hitTestAreaQuery(root, rect, out);
     return cast null;
   }
 
   public static function hitTestAreaQueryCircle(root:DisplayObject, cx:Float, cy:Float, radius:Float, ?out:Array<DisplayObject>):Array<DisplayObject> {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_SpatialQuery.hitTestAreaQueryCircle, cast ([root, cx, cy, radius, out] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_SpatialQuery.hitTestAreaQueryCircle(root, cx, cy, radius, out);
     return cast null;
   }
 
   public static function hitTestDisplayObjects(source:DisplayObject, other:DisplayObject):Bool {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_HitTests.hitTestDisplayObjects, cast ([source, other] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_HitTests.hitTestDisplayObjects(source, other);
     return cast null;
   }
 
   public static function hitTestDisplayObjectsShape(source:DisplayObject, other:DisplayObject):Bool {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_DisplayObjectOverlap.hitTestDisplayObjectsShape, cast ([source, other] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_DisplayObjectOverlap.hitTestDisplayObjectsShape(source, other);
     return cast null;
   }
 
   public static function hitTestGraphLocalBounds<Traits>(source:Node<Traits>, x:Float, y:Float):Bool {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_HitTests.hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_HitTests.hitTestGraphLocalBounds(source, x, y);
     return cast null;
   }
 
   public static function hitTestGraphPoint<Traits>(source:Node<Traits>, x:Float, y:Float):Bool {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_HitTests.hitTestGraphPoint, cast ([source, x, y] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_HitTests.hitTestGraphPoint(source, x, y);
     return cast null;
   }
 
   public static function hitTestGraphPointPrecise<Traits>(source:Node<Traits>, x:Float, y:Float):Bool {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_HitTests.hitTestGraphPointPrecise, cast ([source, x, y] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_HitTests.hitTestGraphPointPrecise(source, x, y);
     return cast null;
   }
 
   public static function hitTestNodeRegion(source:NodeAny, x:Float, y:Float, ?precise:Bool):Bool {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_HitTests.hitTestNodeRegion, cast ([source, x, y, precise] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_HitTests.hitTestNodeRegion(source, x, y, precise);
     return cast null;
   }
 
   public static function isNodeFocusable(source:NodeAny):Bool {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_NodeInteractionState.isNodeFocusable, cast ([source] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_NodeInteractionState.isNodeFocusable(source);
     return cast null;
   }
 
   public static function isNodeFocused<N>(manager:FocusManager<Dynamic>, node:Dynamic):Bool {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_FocusManager.isNodeFocused, cast ([manager, node] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_FocusManager.isNodeFocused(manager, node);
     return cast null;
   }
 
   public static function isNodeHitTestEnabled(source:NodeAny):Bool {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_NodeInteractionState.isNodeHitTestEnabled, cast ([source] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_NodeInteractionState.isNodeHitTestEnabled(source);
     return cast null;
   }
 
   public static function refreshInteractionSpatialIndex<N>(manager:InteractionManager<Dynamic>):Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_InteractionSpatialIndex.refreshInteractionSpatialIndex, cast ([manager] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_InteractionSpatialIndex.refreshInteractionSpatialIndex(manager);
   }
 
   public static function registerBitmapHitTest(?alphaThreshold:Float):Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_RegisterBitmapHitTest.registerBitmapHitTest, cast ([alphaThreshold] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_RegisterBitmapHitTest.registerBitmapHitTest(alphaThreshold);
   }
 
   public static function registerDefaultHitTests():Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_RegisterDefaultHitTests.registerDefaultHitTests, cast ([] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_RegisterDefaultHitTests.registerDefaultHitTests();
   }
 
   public static function registerHitTest(kind:Kind, fn:HitTestFunction):Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_HitTests.registerHitTest, cast ([kind, fn] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_HitTests.registerHitTest(kind, fn);
   }
 
   public static function registerHitTestPrecise(kind:Kind, fn:HitTestPreciseFunction):Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_HitTests.registerHitTestPrecise, cast ([kind, fn] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_HitTests.registerHitTestPrecise(kind, fn);
   }
 
   public static function registerShapeHitTest():Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_RegisterShapeHitTest.registerShapeHitTest, cast ([] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_RegisterShapeHitTest.registerShapeHitTest();
   }
 
   public static function registerTextHitTest():Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_RegisterTextHitTest.registerTextHitTest, cast ([] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_RegisterTextHitTest.registerTextHitTest();
   }
 
   public static function releaseInteractionPointer<N>(manager:InteractionManager<Dynamic>, pointerId:Float):Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_InteractionManager.releaseInteractionPointer, cast ([manager, pointerId] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_InteractionManager.releaseInteractionPointer(manager, pointerId);
   }
 
   public static function setFocusedNode<N>(manager:FocusManager<Dynamic>, node:Null<Dynamic>):Bool {
-    return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_FocusManager.setFocusedNode, cast ([manager, node] : Array<Dynamic>));
+    return cast Facade_Interaction_flighthq_interaction_FocusManager.setFocusedNode(manager, node);
     return cast null;
   }
 
   public static function setInteractionConnectGuard(guard:Null<InteractionConnectGuard>):Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_InteractionManager.setInteractionConnectGuard, cast ([guard] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_InteractionManager.setInteractionConnectGuard(guard);
   }
 
   public static function setNodeCursor(source:NodeAny, cursor:Null<Cursor>):Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_NodeInteractionState.setNodeCursor, cast ([source, cursor] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_NodeInteractionState.setNodeCursor(source, cursor);
   }
 
   public static function setNodeFocusable(source:NodeAny, focusable:Bool):Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_NodeInteractionState.setNodeFocusable, cast ([source, focusable] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_NodeInteractionState.setNodeFocusable(source, focusable);
   }
 
   public static function setNodeHitArea(source:NodeAny, hitArea:Null<HitArea>):Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_NodeInteractionState.setNodeHitArea, cast ([source, hitArea] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_NodeInteractionState.setNodeHitArea(source, hitArea);
   }
 
   public static function setNodeHitTestEnabled(source:NodeAny, enabled:Bool):Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_NodeInteractionState.setNodeHitTestEnabled, cast ([source, enabled] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_NodeInteractionState.setNodeHitTestEnabled(source, enabled);
   }
 
   public static function setNodeTabIndex(source:NodeAny, tabIndex:Float):Void {
-    _Runtime.callValue(Facade_Interaction_flighthq_interaction_NodeInteractionState.setNodeTabIndex, cast ([source, tabIndex] : Array<Dynamic>));
+    Facade_Interaction_flighthq_interaction_NodeInteractionState.setNodeTabIndex(source, tabIndex);
   }
 }

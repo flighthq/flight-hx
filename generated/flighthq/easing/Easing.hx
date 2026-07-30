@@ -29,22 +29,22 @@ import flighthq.types.StepPosition;
 
 class Easing {
   public static function createEasingSamples(ease:EasingFunction, count:Float, ?out:flighthq._internal._Float32Array):flighthq._internal._Float32Array {
-    return cast _Runtime.callValue(Facade_Easing_flighthq_easing_CreateEasingSamples.createEasingSamples, cast ([ease, count, out] : Array<Dynamic>));
+    return cast Facade_Easing_flighthq_easing_CreateEasingSamples.createEasingSamples(ease, count, out);
     return cast null;
   }
 
   public static function easeClamp(ease:EasingFunction):EasingFunction {
-    return cast _Runtime.callValue(Facade_Easing_flighthq_easing_EaseCombinators.easeClamp, cast ([ease] : Array<Dynamic>));
+    return cast Facade_Easing_flighthq_easing_EaseCombinators.easeClamp(ease);
     return cast null;
   }
 
   public static function easeClampOutput(ease:EasingFunction, min:Float, max:Float):EasingFunction {
-    return cast _Runtime.callValue(Facade_Easing_flighthq_easing_EaseCombinators.easeClampOutput, cast ([ease, min, max] : Array<Dynamic>));
+    return cast Facade_Easing_flighthq_easing_EaseCombinators.easeClampOutput(ease, min, max);
     return cast null;
   }
 
   public static function easeCubicBezier(x1:Float, y1:Float, x2:Float, y2:Float):EasingFunction {
-    return cast _Runtime.callValue(Facade_Easing_flighthq_easing_EaseCubicBezier.easeCubicBezier, cast ([x1, y1, x2, y2] : Array<Dynamic>));
+    return cast Facade_Easing_flighthq_easing_EaseCubicBezier.easeCubicBezier(x1, y1, x2, y2);
     return cast null;
   }
 
@@ -73,7 +73,7 @@ class Easing {
   public static final easeInOutExponential:EasingFunction = Facade_Easing_flighthq_easing_EaseExponential.easeInOutExponential;
 
   public static function easeInOutPower(exponent:Float):EasingFunction {
-    return cast _Runtime.callValue(Facade_Easing_flighthq_easing_EasePower.easeInOutPower, cast ([exponent] : Array<Dynamic>));
+    return cast Facade_Easing_flighthq_easing_EasePower.easeInOutPower(exponent);
     return cast null;
   }
 
@@ -86,7 +86,7 @@ class Easing {
   public static final easeInOutSine:EasingFunction = Facade_Easing_flighthq_easing_EaseSine.easeInOutSine;
 
   public static function easeInPower(exponent:Float):EasingFunction {
-    return cast _Runtime.callValue(Facade_Easing_flighthq_easing_EasePower.easeInPower, cast ([exponent] : Array<Dynamic>));
+    return cast Facade_Easing_flighthq_easing_EasePower.easeInPower(exponent);
     return cast null;
   }
 
@@ -99,14 +99,14 @@ class Easing {
   public static final easeInSine:EasingFunction = Facade_Easing_flighthq_easing_EaseSine.easeInSine;
 
   public static function easeInvert(ease:EasingFunction):EasingFunction {
-    return cast _Runtime.callValue(Facade_Easing_flighthq_easing_EaseCombinators.easeInvert, cast ([ease] : Array<Dynamic>));
+    return cast Facade_Easing_flighthq_easing_EaseCombinators.easeInvert(ease);
     return cast null;
   }
 
   public static final easeLinear:EasingFunction = Facade_Easing_flighthq_easing_EaseLinear.easeLinear;
 
   public static function easeMirror(easeIn:EasingFunction):EasingFunction {
-    return cast _Runtime.callValue(Facade_Easing_flighthq_easing_EaseCombinators.easeMirror, cast ([easeIn] : Array<Dynamic>));
+    return cast Facade_Easing_flighthq_easing_EaseCombinators.easeMirror(easeIn);
     return cast null;
   }
 
@@ -123,7 +123,7 @@ class Easing {
   public static final easeOutExponential:EasingFunction = Facade_Easing_flighthq_easing_EaseExponential.easeOutExponential;
 
   public static function easeOutPower(exponent:Float):EasingFunction {
-    return cast _Runtime.callValue(Facade_Easing_flighthq_easing_EasePower.easeOutPower, cast ([exponent] : Array<Dynamic>));
+    return cast Facade_Easing_flighthq_easing_EasePower.easeOutPower(exponent);
     return cast null;
   }
 
@@ -136,17 +136,17 @@ class Easing {
   public static final easeOutSine:EasingFunction = Facade_Easing_flighthq_easing_EaseSine.easeOutSine;
 
   public static function easePiecewise(segments:Array<EasingSegment>):EasingFunction {
-    return cast _Runtime.callValue(Facade_Easing_flighthq_easing_EasePiecewise.easePiecewise, cast ([segments] : Array<Dynamic>));
+    return cast Facade_Easing_flighthq_easing_EasePiecewise.easePiecewise(segments);
     return cast null;
   }
 
   public static function easeReverse(easeIn:EasingFunction):EasingFunction {
-    return cast _Runtime.callValue(Facade_Easing_flighthq_easing_EaseCombinators.easeReverse, cast ([easeIn] : Array<Dynamic>));
+    return cast Facade_Easing_flighthq_easing_EaseCombinators.easeReverse(easeIn);
     return cast null;
   }
 
   public static function easeScaleOutput(ease:EasingFunction, fromValue:Float, toValue:Float):EasingFunction {
-    return cast _Runtime.callValue(Facade_Easing_flighthq_easing_EaseCombinators.easeScaleOutput, cast ([ease, fromValue, toValue] : Array<Dynamic>));
+    return cast Facade_Easing_flighthq_easing_EaseCombinators.easeScaleOutput(ease, fromValue, toValue);
     return cast null;
   }
 
@@ -155,17 +155,17 @@ class Easing {
   public static final easeSmoothstep:EasingFunction = Facade_Easing_flighthq_easing_EaseSmoothstep.easeSmoothstep;
 
   public static function easeSmoothstepRange(edge0:Float, edge1:Float):ScalarRemap {
-    return cast _Runtime.callValue(Facade_Easing_flighthq_easing_EaseSmoothstep.easeSmoothstepRange, cast ([edge0, edge1] : Array<Dynamic>));
+    return cast Facade_Easing_flighthq_easing_EaseSmoothstep.easeSmoothstepRange(edge0, edge1);
     return cast null;
   }
 
   public static function easeSteps(count:Float, ?position:StepPosition):EasingFunction {
-    return cast _Runtime.callValue(Facade_Easing_flighthq_easing_EaseSteps.easeSteps, cast ([count, position] : Array<Dynamic>));
+    return cast Facade_Easing_flighthq_easing_EaseSteps.easeSteps(count, position);
     return cast null;
   }
 
   public static function getEasingDerivative(ease:EasingFunction, t:Float, ?epsilon:Float):Float {
-    return cast _Runtime.callValue(Facade_Easing_flighthq_easing_GetEasingDerivative.getEasingDerivative, cast ([ease, t, epsilon] : Array<Dynamic>));
+    return cast Facade_Easing_flighthq_easing_GetEasingDerivative.getEasingDerivative(ease, t, epsilon);
     return cast null;
   }
 }

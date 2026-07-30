@@ -17,74 +17,74 @@ import flighthq.types.ImageEncoder;
 
 class ImageCodec {
   public static function clearImageDecoders():Void {
-    _Runtime.callValue(Facade_ImageCodec_flighthq_imageCodec_ImageDecoderRegistry.clearImageDecoders, cast ([] : Array<Dynamic>));
+    Facade_ImageCodec_flighthq_imageCodec_ImageDecoderRegistry.clearImageDecoders();
   }
 
   public static function clearImageEncoders():Void {
-    _Runtime.callValue(Facade_ImageCodec_flighthq_imageCodec_ImageEncoderRegistry.clearImageEncoders, cast ([] : Array<Dynamic>));
+    Facade_ImageCodec_flighthq_imageCodec_ImageEncoderRegistry.clearImageEncoders();
   }
 
   public static function decodeImage(bytes:flighthq._internal._UInt8Array, ?mimeType:String):flighthq._internal._Promise<Null<DecodedImage>> {
-    return cast _Runtime.callValue(Facade_ImageCodec_flighthq_imageCodec_DecodeImage.decodeImage, cast ([bytes, mimeType] : Array<Dynamic>));
+    return cast Facade_ImageCodec_flighthq_imageCodec_DecodeImage.decodeImage(bytes, mimeType);
     return cast null;
   }
 
   public static function decodeImagePremultiplied(bytes:flighthq._internal._UInt8Array, ?mimeType:String):flighthq._internal._Promise<Null<DecodedImage>> {
-    return cast _Runtime.callValue(Facade_ImageCodec_flighthq_imageCodec_DecodeImage.decodeImagePremultiplied, cast ([bytes, mimeType] : Array<Dynamic>));
+    return cast Facade_ImageCodec_flighthq_imageCodec_DecodeImage.decodeImagePremultiplied(bytes, mimeType);
     return cast null;
   }
 
   public static function detectImageMimeType(data:Dynamic):Null<String> {
-    return cast _Runtime.callValue(Facade_ImageCodec_flighthq_imageCodec_DetectImageMimeType.detectImageMimeType, cast ([data] : Array<Dynamic>));
+    return cast Facade_ImageCodec_flighthq_imageCodec_DetectImageMimeType.detectImageMimeType(data);
     return cast null;
   }
 
   public static function encodeImage(image:DecodedImage, mimeType:String, ?options:ImageEncodeOptions):flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>> {
-    return cast _Runtime.callValue(Facade_ImageCodec_flighthq_imageCodec_EncodeImage.encodeImage, cast ([image, mimeType, options] : Array<Dynamic>));
+    return cast Facade_ImageCodec_flighthq_imageCodec_EncodeImage.encodeImage(image, mimeType, options);
     return cast null;
   }
 
   public static function getImageDecoder(mimeType:String):Null<ImageDecoder> {
-    return cast _Runtime.callValue(Facade_ImageCodec_flighthq_imageCodec_ImageDecoderRegistry.getImageDecoder, cast ([mimeType] : Array<Dynamic>));
+    return cast Facade_ImageCodec_flighthq_imageCodec_ImageDecoderRegistry.getImageDecoder(mimeType);
     return cast null;
   }
 
   public static function getImageEncoder(mimeType:String):Null<ImageEncoder> {
-    return cast _Runtime.callValue(Facade_ImageCodec_flighthq_imageCodec_ImageEncoderRegistry.getImageEncoder, cast ([mimeType] : Array<Dynamic>));
+    return cast Facade_ImageCodec_flighthq_imageCodec_ImageEncoderRegistry.getImageEncoder(mimeType);
     return cast null;
   }
 
   public static function hasImageDecoder(mimeType:String):Bool {
-    return cast _Runtime.callValue(Facade_ImageCodec_flighthq_imageCodec_ImageDecoderRegistry.hasImageDecoder, cast ([mimeType] : Array<Dynamic>));
+    return cast Facade_ImageCodec_flighthq_imageCodec_ImageDecoderRegistry.hasImageDecoder(mimeType);
     return cast null;
   }
 
   public static function hasImageEncoder(mimeType:String):Bool {
-    return cast _Runtime.callValue(Facade_ImageCodec_flighthq_imageCodec_ImageEncoderRegistry.hasImageEncoder, cast ([mimeType] : Array<Dynamic>));
+    return cast Facade_ImageCodec_flighthq_imageCodec_ImageEncoderRegistry.hasImageEncoder(mimeType);
     return cast null;
   }
 
   public static function registerImageDecoder(mimeType:String, decoder:ImageDecoder):Void {
-    _Runtime.callValue(Facade_ImageCodec_flighthq_imageCodec_ImageDecoderRegistry.registerImageDecoder, cast ([mimeType, decoder] : Array<Dynamic>));
+    Facade_ImageCodec_flighthq_imageCodec_ImageDecoderRegistry.registerImageDecoder(mimeType, decoder);
   }
 
   public static function registerImageEncoder(mimeType:String, encoder:ImageEncoder):Void {
-    _Runtime.callValue(Facade_ImageCodec_flighthq_imageCodec_ImageEncoderRegistry.registerImageEncoder, cast ([mimeType, encoder] : Array<Dynamic>));
+    Facade_ImageCodec_flighthq_imageCodec_ImageEncoderRegistry.registerImageEncoder(mimeType, encoder);
   }
 
   public static function registerWebImageDecoders():Void {
-    _Runtime.callValue(Facade_ImageCodec_flighthq_imageCodec_RegisterWebImageDecoders.registerWebImageDecoders, cast ([] : Array<Dynamic>));
+    Facade_ImageCodec_flighthq_imageCodec_RegisterWebImageDecoders.registerWebImageDecoders();
   }
 
   public static function registerWebImageEncoders():Void {
-    _Runtime.callValue(Facade_ImageCodec_flighthq_imageCodec_RegisterWebImageEncoders.registerWebImageEncoders, cast ([] : Array<Dynamic>));
+    Facade_ImageCodec_flighthq_imageCodec_RegisterWebImageEncoders.registerWebImageEncoders();
   }
 
   public static function unregisterImageDecoder(mimeType:String):Void {
-    _Runtime.callValue(Facade_ImageCodec_flighthq_imageCodec_ImageDecoderRegistry.unregisterImageDecoder, cast ([mimeType] : Array<Dynamic>));
+    Facade_ImageCodec_flighthq_imageCodec_ImageDecoderRegistry.unregisterImageDecoder(mimeType);
   }
 
   public static function unregisterImageEncoder(mimeType:String):Void {
-    _Runtime.callValue(Facade_ImageCodec_flighthq_imageCodec_ImageEncoderRegistry.unregisterImageEncoder, cast ([mimeType] : Array<Dynamic>));
+    Facade_ImageCodec_flighthq_imageCodec_ImageEncoderRegistry.unregisterImageEncoder(mimeType);
   }
 }

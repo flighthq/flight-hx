@@ -28,56 +28,56 @@ import flighthq.types.Tray.TrayBackend;
 
 class HostTauri {
   public static function createTauriAppBackend(tauri:TauriApi):AppBackend {
-    return cast _Runtime.callValue(Facade_HostTauri_flighthq_hostTauri_TauriApp.createTauriAppBackend, cast ([tauri] : Array<Dynamic>));
+    return cast Facade_HostTauri_flighthq_hostTauri_TauriApp.createTauriAppBackend(tauri);
     return cast null;
   }
 
   public static function createTauriClipboardBackend(tauri:TauriApi):ClipboardBackend {
-    return cast _Runtime.callValue(Facade_HostTauri_flighthq_hostTauri_TauriClipboard.createTauriClipboardBackend, cast ([tauri] : Array<Dynamic>));
+    return cast Facade_HostTauri_flighthq_hostTauri_TauriClipboard.createTauriClipboardBackend(tauri);
     return cast null;
   }
 
   public static function createTauriDialogBackend(tauri:TauriApi):DialogBackend {
-    return cast _Runtime.callValue(Facade_HostTauri_flighthq_hostTauri_TauriDialog.createTauriDialogBackend, cast ([tauri] : Array<Dynamic>));
+    return cast Facade_HostTauri_flighthq_hostTauri_TauriDialog.createTauriDialogBackend(tauri);
     return cast null;
   }
 
   public static function createTauriMenuBackend(tauri:TauriApi):MenuBackend {
-    return cast _Runtime.callValue(Facade_HostTauri_flighthq_hostTauri_TauriMenu.createTauriMenuBackend, cast ([tauri] : Array<Dynamic>));
+    return cast Facade_HostTauri_flighthq_hostTauri_TauriMenu.createTauriMenuBackend(tauri);
     return cast null;
   }
 
   public static function createTauriNotificationBackend(tauri:TauriApi):NotificationBackend {
-    return cast _Runtime.callValue(Facade_HostTauri_flighthq_hostTauri_TauriNotification.createTauriNotificationBackend, cast ([tauri] : Array<Dynamic>));
+    return cast Facade_HostTauri_flighthq_hostTauri_TauriNotification.createTauriNotificationBackend(tauri);
     return cast null;
   }
 
   public static function createTauriPlatformBackend(tauri:TauriApi):PlatformBackend {
-    return cast _Runtime.callValue(Facade_HostTauri_flighthq_hostTauri_TauriPlatform.createTauriPlatformBackend, cast ([tauri] : Array<Dynamic>));
+    return cast Facade_HostTauri_flighthq_hostTauri_TauriPlatform.createTauriPlatformBackend(tauri);
     return cast null;
   }
 
   public static function createTauriShellBackend(tauri:TauriApi):ShellBackend {
-    return cast _Runtime.callValue(Facade_HostTauri_flighthq_hostTauri_TauriShell.createTauriShellBackend, cast ([tauri] : Array<Dynamic>));
+    return cast Facade_HostTauri_flighthq_hostTauri_TauriShell.createTauriShellBackend(tauri);
     return cast null;
   }
 
   public static function createTauriShortcutBackend(tauri:TauriApi):ShortcutBackend {
-    return cast _Runtime.callValue(Facade_HostTauri_flighthq_hostTauri_TauriShortcut.createTauriShortcutBackend, cast ([tauri] : Array<Dynamic>));
+    return cast Facade_HostTauri_flighthq_hostTauri_TauriShortcut.createTauriShortcutBackend(tauri);
     return cast null;
   }
 
   public static function createTauriTrayBackend(tauri:TauriApi):TrayBackend {
-    return cast _Runtime.callValue(Facade_HostTauri_flighthq_hostTauri_TauriTray.createTauriTrayBackend, cast ([tauri] : Array<Dynamic>));
+    return cast Facade_HostTauri_flighthq_hostTauri_TauriTray.createTauriTrayBackend(tauri);
     return cast null;
   }
 
   public static function createTauriWindowBackend(tauri:TauriApi):WindowBackend {
-    return cast _Runtime.callValue(Facade_HostTauri_flighthq_hostTauri_TauriWindow.createTauriWindowBackend, cast ([tauri] : Array<Dynamic>));
+    return cast Facade_HostTauri_flighthq_hostTauri_TauriWindow.createTauriWindowBackend(tauri);
     return cast null;
   }
 
   public static function registerTauriBackends(tauri:TauriApi):Void {
-    _Runtime.callValue(Facade_HostTauri_flighthq_hostTauri_TauriRegister.registerTauriBackends, cast ([tauri] : Array<Dynamic>));
+    Facade_HostTauri_flighthq_hostTauri_TauriRegister.registerTauriBackends(tauri);
   }
 }

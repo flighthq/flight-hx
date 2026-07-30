@@ -17,37 +17,37 @@ import flighthq.types.TextureAtlasFormatKind;
 
 class TextureatlasFormats {
   public static function detectTextureAtlasFormat(content:String):Null<TextureAtlasFormatKind> {
-    return cast _Runtime.callValue(Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasDetect.detectTextureAtlasFormat, cast ([content] : Array<Dynamic>));
+    return cast Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasDetect.detectTextureAtlasFormat(content);
     return cast null;
   }
 
   public static function parseTextureAtlasAsepriteDocument(doc:TextureAtlasAsepriteDocument, atlas:TextureAtlas):TextureAtlas {
-    return cast _Runtime.callValue(Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasAsepriteParse.parseTextureAtlasAsepriteDocument, cast ([doc, atlas] : Array<Dynamic>));
+    return cast Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasAsepriteParse.parseTextureAtlasAsepriteDocument(doc, atlas);
     return cast null;
   }
 
   public static function parseTextureAtlasAsepriteJson(json:String, atlas:TextureAtlas):TextureAtlas {
-    return cast _Runtime.callValue(Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasAsepriteParse.parseTextureAtlasAsepriteJson, cast ([json, atlas] : Array<Dynamic>));
+    return cast Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasAsepriteParse.parseTextureAtlasAsepriteJson(json, atlas);
     return cast null;
   }
 
   public static function parseTextureAtlasLibgdxAtlas(text:String, atlas:TextureAtlas):TextureAtlas {
-    return cast _Runtime.callValue(Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasLibgdxParse.parseTextureAtlasLibgdxAtlas, cast ([text, atlas] : Array<Dynamic>));
+    return cast Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasLibgdxParse.parseTextureAtlasLibgdxAtlas(text, atlas);
     return cast null;
   }
 
   public static function parseTextureAtlasPackerDocument(doc:TextureAtlasPackerDocument, atlas:TextureAtlas, ?options:TextureAtlasPackerParseOptions):TextureAtlas {
-    return cast _Runtime.callValue(Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasPackerParse.parseTextureAtlasPackerDocument, cast ([doc, atlas, options] : Array<Dynamic>));
+    return cast Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasPackerParse.parseTextureAtlasPackerDocument(doc, atlas, options);
     return cast null;
   }
 
   public static function parseTextureAtlasPackerJson(json:String, atlas:TextureAtlas, ?options:TextureAtlasPackerParseOptions):TextureAtlas {
-    return cast _Runtime.callValue(Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasPackerParse.parseTextureAtlasPackerJson, cast ([json, atlas, options] : Array<Dynamic>));
+    return cast Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasPackerParse.parseTextureAtlasPackerJson(json, atlas, options);
     return cast null;
   }
 
   public static function parseTextureAtlasStarlingXml(xml:String, atlas:TextureAtlas, ?_options:TextureAtlasStarlingParseOptions):TextureAtlas {
-    return cast _Runtime.callValue(Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasStarlingParse.parseTextureAtlasStarlingXml, cast ([xml, atlas, _options] : Array<Dynamic>));
+    return cast Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasStarlingParse.parseTextureAtlasStarlingXml(xml, atlas, _options);
     return cast null;
   }
 }

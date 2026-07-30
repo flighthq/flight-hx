@@ -139,32 +139,32 @@ class Menu {
   }
 
   public static function createDefaultAppMenuTemplate(appName:String):MenuItemTemplate {
-    return cast _Runtime.callValue(Facade_Menu_flighthq_menu_MenuTemplates.createDefaultAppMenuTemplate, cast ([appName] : Array<Dynamic>));
+    return cast Facade_Menu_flighthq_menu_MenuTemplates.createDefaultAppMenuTemplate(appName);
     return cast null;
   }
 
   public static function createDefaultEditMenuTemplate():MenuItemTemplate {
-    return cast _Runtime.callValue(Facade_Menu_flighthq_menu_MenuTemplates.createDefaultEditMenuTemplate, cast ([] : Array<Dynamic>));
+    return cast Facade_Menu_flighthq_menu_MenuTemplates.createDefaultEditMenuTemplate();
     return cast null;
   }
 
   public static function createDefaultFileMenuTemplate():MenuItemTemplate {
-    return cast _Runtime.callValue(Facade_Menu_flighthq_menu_MenuTemplates.createDefaultFileMenuTemplate, cast ([] : Array<Dynamic>));
+    return cast Facade_Menu_flighthq_menu_MenuTemplates.createDefaultFileMenuTemplate();
     return cast null;
   }
 
   public static function createDefaultHelpMenuTemplate():MenuItemTemplate {
-    return cast _Runtime.callValue(Facade_Menu_flighthq_menu_MenuTemplates.createDefaultHelpMenuTemplate, cast ([] : Array<Dynamic>));
+    return cast Facade_Menu_flighthq_menu_MenuTemplates.createDefaultHelpMenuTemplate();
     return cast null;
   }
 
   public static function createDefaultViewMenuTemplate():MenuItemTemplate {
-    return cast _Runtime.callValue(Facade_Menu_flighthq_menu_MenuTemplates.createDefaultViewMenuTemplate, cast ([] : Array<Dynamic>));
+    return cast Facade_Menu_flighthq_menu_MenuTemplates.createDefaultViewMenuTemplate();
     return cast null;
   }
 
   public static function createDefaultWindowMenuTemplate():MenuItemTemplate {
-    return cast _Runtime.callValue(Facade_Menu_flighthq_menu_MenuTemplates.createDefaultWindowMenuTemplate, cast ([] : Array<Dynamic>));
+    return cast Facade_Menu_flighthq_menu_MenuTemplates.createDefaultWindowMenuTemplate();
     return cast null;
   }
 

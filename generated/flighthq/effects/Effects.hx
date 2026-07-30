@@ -136,543 +136,543 @@ import flighthq.types.WhiteBalanceEffect;
 
 class Effects {
   public static function blendNonSeparableRgb(mode:AdvancedBlendMode, cbR:Float, cbG:Float, cbB:Float, csR:Float, csG:Float, csB:Float, out:Dynamic):Void {
-    _Runtime.callValue(Facade_Effects_flighthq_effects_BlendModeMath.blendNonSeparableRgb, cast ([mode, cbR, cbG, cbB, csR, csG, csB, out] : Array<Dynamic>));
+    Facade_Effects_flighthq_effects_BlendModeMath.blendNonSeparableRgb(mode, cbR, cbG, cbB, csR, csG, csB, out);
   }
 
   public static function canLerpRenderEffects(a:RenderEffect, b:RenderEffect):Bool {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_RenderEffectInterpolation.canLerpRenderEffects, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_RenderEffectInterpolation.canLerpRenderEffects(a, b);
     return cast null;
   }
 
   public static function computeAcesToneMap(x:Float):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_ToneMapMath.computeAcesToneMap, cast ([x] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_ToneMapMath.computeAcesToneMap(x);
     return cast null;
   }
 
   public static function computeAgxToneMap(x:Float, ?options:AgxToneMapOptions):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_ToneMapMath.computeAgxToneMap, cast ([x, options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_ToneMapMath.computeAgxToneMap(x, options);
     return cast null;
   }
 
   public static function computeBloomBlurRadius(effect:BloomEffect):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_BloomEffect.computeBloomBlurRadius, cast ([effect] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_BloomEffect.computeBloomBlurRadius(effect);
     return cast null;
   }
 
   public static function computeBloomIntensity(effect:BloomEffect):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_BloomEffect.computeBloomIntensity, cast ([effect] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_BloomEffect.computeBloomIntensity(effect);
     return cast null;
   }
 
   public static function computeBloomThreshold(effect:BloomEffect):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_BloomEffect.computeBloomThreshold, cast ([effect] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_BloomEffect.computeBloomThreshold(effect);
     return cast null;
   }
 
   public static function computeBoxBlurPassRadius(sigma:Float, passes:Float, pass:Float):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_BoxBlurMath.computeBoxBlurPassRadius, cast ([sigma, passes, pass] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_BoxBlurMath.computeBoxBlurPassRadius(sigma, passes, pass);
     return cast null;
   }
 
   public static function computeBoxBlurRadius(sigma:Float, passes:Float):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_BoxBlurMath.computeBoxBlurRadius, cast ([sigma, passes] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_BoxBlurMath.computeBoxBlurRadius(sigma, passes);
     return cast null;
   }
 
   public static function computeColorTemperatureRgb(kelvin:Float, out:Array<Float>):Void {
-    _Runtime.callValue(Facade_Effects_flighthq_effects_ColorTemperatureMath.computeColorTemperatureRgb, cast ([kelvin, out] : Array<Dynamic>));
+    Facade_Effects_flighthq_effects_ColorTemperatureMath.computeColorTemperatureRgb(kelvin, out);
   }
 
   public static function computeCrtMaskParams(resolution:Float, curvature:Float, out:Array<Float>):Void {
-    _Runtime.callValue(Facade_Effects_flighthq_effects_StylizeMath.computeCrtMaskParams, cast ([resolution, curvature, out] : Array<Dynamic>));
+    Facade_Effects_flighthq_effects_StylizeMath.computeCrtMaskParams(resolution, curvature, out);
   }
 
   public static function computeDepthOfFieldCoc(depth:Float, focusDistance:Float, aperture:Float, focalLength:Float):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_DepthMath.computeDepthOfFieldCoc, cast ([depth, focusDistance, aperture, focalLength] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_DepthMath.computeDepthOfFieldCoc(depth, focusDistance, aperture, focalLength);
     return cast null;
   }
 
   public static function computeExposureScale(exposure:Float):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_ToneMapMath.computeExposureScale, cast ([exposure] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_ToneMapMath.computeExposureScale(exposure);
     return cast null;
   }
 
   public static function computeFilmicToneMap(x:Float, ?options:FilmicToneMapOptions):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_ToneMapMath.computeFilmicToneMap, cast ([x, options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_ToneMapMath.computeFilmicToneMap(x, options);
     return cast null;
   }
 
   public static function computeGaussianKernelWeights(sigma:Float, out:Array<Float>):Array<Float> {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_GaussianKernel.computeGaussianKernelWeights, cast ([sigma, out] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_GaussianKernel.computeGaussianKernelWeights(sigma, out);
     return cast null;
   }
 
   public static function computeGaussianRadiusFromSigma(sigma:Float):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_GaussianMath.computeGaussianRadiusFromSigma, cast ([sigma] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_GaussianMath.computeGaussianRadiusFromSigma(sigma);
     return cast null;
   }
 
   public static function computeGaussianSigmaForBlurRadius(radius:Float, passes:Float):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_BoxBlurMath.computeGaussianSigmaForBlurRadius, cast ([radius, passes] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_BoxBlurMath.computeGaussianSigmaForBlurRadius(radius, passes);
     return cast null;
   }
 
   public static function computeGaussianSigmaFromRadius(radius:Float):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_GaussianMath.computeGaussianSigmaFromRadius, cast ([radius] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_GaussianMath.computeGaussianSigmaFromRadius(radius);
     return cast null;
   }
 
   public static function computeGodRaysAccumulationScale(effect:GodRaysEffect):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_GodRaysMath.computeGodRaysAccumulationScale, cast ([effect] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_GodRaysMath.computeGodRaysAccumulationScale(effect);
     return cast null;
   }
 
   public static function computeGodRaysLightCenter(effect:GodRaysEffect, out:Array<Float>):Void {
-    _Runtime.callValue(Facade_Effects_flighthq_effects_GodRaysMath.computeGodRaysLightCenter, cast ([effect, out] : Array<Dynamic>));
+    Facade_Effects_flighthq_effects_GodRaysMath.computeGodRaysLightCenter(effect, out);
   }
 
   public static function computeGodRaysSampleWeight(effect:GodRaysEffect, sampleIndex:Float):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_GodRaysMath.computeGodRaysSampleWeight, cast ([effect, sampleIndex] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_GodRaysMath.computeGodRaysSampleWeight(effect, sampleIndex);
     return cast null;
   }
 
   public static function computeGodRaysStepSize(effect:GodRaysEffect, px:Float, py:Float, out:Array<Float>):Void {
-    _Runtime.callValue(Facade_Effects_flighthq_effects_GodRaysMath.computeGodRaysStepSize, cast ([effect, px, py, out] : Array<Dynamic>));
+    Facade_Effects_flighthq_effects_GodRaysMath.computeGodRaysStepSize(effect, px, py, out);
   }
 
   public static function computeHalftoneCellParams(frequency:Float, angle:Float, out:Array<Float>):Void {
-    _Runtime.callValue(Facade_Effects_flighthq_effects_StylizeMath.computeHalftoneCellParams, cast ([frequency, angle, out] : Array<Dynamic>));
+    Facade_Effects_flighthq_effects_StylizeMath.computeHalftoneCellParams(frequency, angle, out);
   }
 
   public static function computeKuwaharaGaussianWeights(radius:Float, out:flighthq._internal._Float32Array):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_KuwaharaMath.computeKuwaharaGaussianWeights, cast ([radius, out] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_KuwaharaMath.computeKuwaharaGaussianWeights(radius, out);
     return cast null;
   }
 
   public static function computeKuwaharaSectorOffsets(radius:Float, out:Array<Float>):Void {
-    _Runtime.callValue(Facade_Effects_flighthq_effects_KuwaharaMath.computeKuwaharaSectorOffsets, cast ([radius, out] : Array<Dynamic>));
+    Facade_Effects_flighthq_effects_KuwaharaMath.computeKuwaharaSectorOffsets(radius, out);
   }
 
   public static function computeKuwaharaSectorPixelCount(effect:KuwaharaEffect):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_KuwaharaMath.computeKuwaharaSectorPixelCount, cast ([effect] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_KuwaharaMath.computeKuwaharaSectorPixelCount(effect);
     return cast null;
   }
 
   public static function computeKuwaharaSectorSize(effect:KuwaharaEffect):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_KuwaharaMath.computeKuwaharaSectorSize, cast ([effect] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_KuwaharaMath.computeKuwaharaSectorSize(effect);
     return cast null;
   }
 
   public static function computeLinearDepthFromNonlinear(depth:Float, near:Float, far:Float):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_DepthMath.computeLinearDepthFromNonlinear, cast ([depth, near, far] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_DepthMath.computeLinearDepthFromNonlinear(depth, near, far);
     return cast null;
   }
 
   public static function computeLinearSampledGaussian(sigma:Float, outWeights:Array<Float>, outOffsets:Array<Float>):Array<Float> {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_LinearSampledGaussian.computeLinearSampledGaussian, cast ([sigma, outWeights, outOffsets] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_LinearSampledGaussian.computeLinearSampledGaussian(sigma, outWeights, outOffsets);
     return cast null;
   }
 
   public static function computeOutlineEdgeParams(effect:OutlineEffect, out:Array<Float>):Void {
-    _Runtime.callValue(Facade_Effects_flighthq_effects_EdgeDetectMath.computeOutlineEdgeParams, cast ([effect, out] : Array<Dynamic>));
+    Facade_Effects_flighthq_effects_EdgeDetectMath.computeOutlineEdgeParams(effect, out);
   }
 
   public static function computeOutlineThicknessPx(effect:OutlineEffect):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_EdgeDetectMath.computeOutlineThicknessPx, cast ([effect] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_EdgeDetectMath.computeOutlineThicknessPx(effect);
     return cast null;
   }
 
   public static function computeReinhardExtendedToneMap(x:Float, white:Float):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_ToneMapMath.computeReinhardExtendedToneMap, cast ([x, white] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_ToneMapMath.computeReinhardExtendedToneMap(x, white);
     return cast null;
   }
 
   public static function computeReinhardToneMap(x:Float):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_ToneMapMath.computeReinhardToneMap, cast ([x] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_ToneMapMath.computeReinhardToneMap(x);
     return cast null;
   }
 
   public static function computeScanlineParams(resolution:Float, intensity:Float, out:Array<Float>):Void {
-    _Runtime.callValue(Facade_Effects_flighthq_effects_StylizeMath.computeScanlineParams, cast ([resolution, intensity, out] : Array<Dynamic>));
+    Facade_Effects_flighthq_effects_StylizeMath.computeScanlineParams(resolution, intensity, out);
   }
 
   public static function computeSeparableBlurPassCount(samples:Null<Float>):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_GaussianMath.computeSeparableBlurPassCount, cast ([samples] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_GaussianMath.computeSeparableBlurPassCount(samples);
     return cast null;
   }
 
   public static function computeSketchEdgeParams(effect:SketchEffect, out:Array<Float>):Void {
-    _Runtime.callValue(Facade_Effects_flighthq_effects_EdgeDetectMath.computeSketchEdgeParams, cast ([effect, out] : Array<Dynamic>));
+    Facade_Effects_flighthq_effects_EdgeDetectMath.computeSketchEdgeParams(effect, out);
   }
 
   public static function computeSsaoSampleKernel(samples:Float, out:flighthq._internal._Float32Array):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_DepthMath.computeSsaoSampleKernel, cast ([samples, out] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_DepthMath.computeSsaoSampleKernel(samples, out);
     return cast null;
   }
 
   public static function computeUncharted2ToneMap(x:Float):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_ToneMapMath.computeUncharted2ToneMap, cast ([x] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_ToneMapMath.computeUncharted2ToneMap(x);
     return cast null;
   }
 
   public static function computeWhiteBalanceMultipliers(temperature:Float, tint:Float, out:Array<Float>):Void {
-    _Runtime.callValue(Facade_Effects_flighthq_effects_ColorTemperatureMath.computeWhiteBalanceMultipliers, cast ([temperature, tint, out] : Array<Dynamic>));
+    Facade_Effects_flighthq_effects_ColorTemperatureMath.computeWhiteBalanceMultipliers(temperature, tint, out);
   }
 
   public static function createAutoExposureEffect(?options:Dynamic):AutoExposureEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_AutoExposureEffect.createAutoExposureEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_AutoExposureEffect.createAutoExposureEffect(options);
     return cast null;
   }
 
   public static function createBarrelDistortionEffect(?options:Dynamic):BarrelDistortionEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_BarrelDistortionEffect.createBarrelDistortionEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_BarrelDistortionEffect.createBarrelDistortionEffect(options);
     return cast null;
   }
 
   public static function createBayerMatrix(order:Float, out:flighthq._internal._Float32Array):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_StylizeMath.createBayerMatrix, cast ([order, out] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_StylizeMath.createBayerMatrix(order, out);
     return cast null;
   }
 
   public static function createBevelEffect(?options:Dynamic):BevelEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_BevelEffect.createBevelEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_BevelEffect.createBevelEffect(options);
     return cast null;
   }
 
   public static function createBlendEffect(mode:AdvancedBlendMode, ?options:Dynamic):BlendEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_BlendEffect.createBlendEffect, cast ([mode, options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_BlendEffect.createBlendEffect(mode, options);
     return cast null;
   }
 
   public static function createBloomEffect(?options:Dynamic):BloomEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_BloomEffect.createBloomEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_BloomEffect.createBloomEffect(options);
     return cast null;
   }
 
   public static function createBlurEffect(?options:Dynamic):BlurEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_BlurEffect.createBlurEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_BlurEffect.createBlurEffect(options);
     return cast null;
   }
 
   public static function createBokehDepthOfFieldEffect(?options:Dynamic):BokehDepthOfFieldEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_BokehDepthOfFieldEffect.createBokehDepthOfFieldEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_BokehDepthOfFieldEffect.createBokehDepthOfFieldEffect(options);
     return cast null;
   }
 
   public static function createCameraMotionBlurEffect(?options:Dynamic):CameraMotionBlurEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_CameraMotionBlurEffect.createCameraMotionBlurEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_CameraMotionBlurEffect.createCameraMotionBlurEffect(options);
     return cast null;
   }
 
   public static function createChromaticAberrationEffect(?options:Dynamic):ChromaticAberrationEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_ChromaticAberrationEffect.createChromaticAberrationEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_ChromaticAberrationEffect.createChromaticAberrationEffect(options);
     return cast null;
   }
 
   public static function createCompositeEffect(operator_:CompositeOperator, ?options:Dynamic):CompositeEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_CompositeEffect.createCompositeEffect, cast ([operator_, options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_CompositeEffect.createCompositeEffect(operator_, options);
     return cast null;
   }
 
   public static function createContactShadowsEffect(?options:Dynamic):ContactShadowsEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_ContactShadowsEffect.createContactShadowsEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_ContactShadowsEffect.createContactShadowsEffect(options);
     return cast null;
   }
 
   public static function createConvolutionEffect(options:Dynamic):ConvolutionEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_ConvolutionEffect.createConvolutionEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_ConvolutionEffect.createConvolutionEffect(options);
     return cast null;
   }
 
   public static function createCrtEffect(?options:Dynamic):CrtEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_CrtEffect.createCrtEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_CrtEffect.createCrtEffect(options);
     return cast null;
   }
 
   public static function createCustomShaderEffect(options:Dynamic):CustomShaderEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_CustomShaderEffect.createCustomShaderEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_CustomShaderEffect.createCustomShaderEffect(options);
     return cast null;
   }
 
   public static function createDirectionalBlurEffect(?options:Dynamic):DirectionalBlurEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_DirectionalBlurEffect.createDirectionalBlurEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_DirectionalBlurEffect.createDirectionalBlurEffect(options);
     return cast null;
   }
 
   public static function createDisplacementEffect(?options:Dynamic):DisplacementEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_DisplacementEffect.createDisplacementEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_DisplacementEffect.createDisplacementEffect(options);
     return cast null;
   }
 
   public static function createDitherEffect(?options:Dynamic):DitherEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_DitherEffect.createDitherEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_DitherEffect.createDitherEffect(options);
     return cast null;
   }
 
   public static function createDropShadowEffect(?options:Dynamic):DropShadowEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_DropShadowEffect.createDropShadowEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_DropShadowEffect.createDropShadowEffect(options);
     return cast null;
   }
 
   public static function createFilmEmulationEffect(?options:Dynamic):FilmEmulationEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_FilmEmulationEffect.createFilmEmulationEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_FilmEmulationEffect.createFilmEmulationEffect(options);
     return cast null;
   }
 
   public static function createFilmGrainEffect(?options:Dynamic):FilmGrainEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_FilmGrainEffect.createFilmGrainEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_FilmGrainEffect.createFilmGrainEffect(options);
     return cast null;
   }
 
   public static function createFxaaEffect(?options:Dynamic):FxaaEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_FxaaEffect.createFxaaEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_FxaaEffect.createFxaaEffect(options);
     return cast null;
   }
 
   public static function createGaussianKernelWeights(radius:Float, sigma:Float, out:flighthq._internal._Float32Array):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_GaussianMath.createGaussianKernelWeights, cast ([radius, sigma, out] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_GaussianMath.createGaussianKernelWeights(radius, sigma, out);
     return cast null;
   }
 
   public static function createGlitchEffect(?options:Dynamic):GlitchEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_GlitchEffect.createGlitchEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_GlitchEffect.createGlitchEffect(options);
     return cast null;
   }
 
   public static function createGodRaysEffect(?options:Dynamic):GodRaysEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_GodRaysEffect.createGodRaysEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_GodRaysEffect.createGodRaysEffect(options);
     return cast null;
   }
 
   public static function createGradientBevelEffect(options:Dynamic):GradientBevelEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_GradientBevelEffect.createGradientBevelEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_GradientBevelEffect.createGradientBevelEffect(options);
     return cast null;
   }
 
   public static function createGradientGlowEffect(options:Dynamic):GradientGlowEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_GradientGlowEffect.createGradientGlowEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_GradientGlowEffect.createGradientGlowEffect(options);
     return cast null;
   }
 
   public static function createHalftoneEffect(?options:Dynamic):HalftoneEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_HalftoneEffect.createHalftoneEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_HalftoneEffect.createHalftoneEffect(options);
     return cast null;
   }
 
   public static function createInnerGlowEffect(?options:Dynamic):InnerGlowEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_InnerGlowEffect.createInnerGlowEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_InnerGlowEffect.createInnerGlowEffect(options);
     return cast null;
   }
 
   public static function createInnerShadowEffect(?options:Dynamic):InnerShadowEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_InnerShadowEffect.createInnerShadowEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_InnerShadowEffect.createInnerShadowEffect(options);
     return cast null;
   }
 
   public static function createKuwaharaEffect(?options:Dynamic):KuwaharaEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_KuwaharaEffect.createKuwaharaEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_KuwaharaEffect.createKuwaharaEffect(options);
     return cast null;
   }
 
   public static function createLensDirtEffect(?options:Dynamic):LensDirtEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_LensDirtEffect.createLensDirtEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_LensDirtEffect.createLensDirtEffect(options);
     return cast null;
   }
 
   public static function createLensDistortionEffect(?options:Dynamic):LensDistortionEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_LensDistortionEffect.createLensDistortionEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_LensDistortionEffect.createLensDistortionEffect(options);
     return cast null;
   }
 
   public static function createLensFlareEffect(?options:Dynamic):LensFlareEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_LensFlareEffect.createLensFlareEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_LensFlareEffect.createLensFlareEffect(options);
     return cast null;
   }
 
   public static function createMedianEffect(?options:Dynamic):MedianEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_MedianEffect.createMedianEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_MedianEffect.createMedianEffect(options);
     return cast null;
   }
 
   public static function createMotionBlurEffect(?options:Dynamic):MotionBlurEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_MotionBlurEffect.createMotionBlurEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_MotionBlurEffect.createMotionBlurEffect(options);
     return cast null;
   }
 
   public static function createOuterGlowEffect(?options:Dynamic):OuterGlowEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_OuterGlowEffect.createOuterGlowEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_OuterGlowEffect.createOuterGlowEffect(options);
     return cast null;
   }
 
   public static function createOutlineEffect(?options:Dynamic):OutlineEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_OutlineEffect.createOutlineEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_OutlineEffect.createOutlineEffect(options);
     return cast null;
   }
 
   public static function createPanniniProjectionEffect(?options:Dynamic):PanniniProjectionEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_PanniniProjectionEffect.createPanniniProjectionEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_PanniniProjectionEffect.createPanniniProjectionEffect(options);
     return cast null;
   }
 
   public static function createPixelateEffect(?options:Dynamic):PixelateEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_PixelateEffect.createPixelateEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_PixelateEffect.createPixelateEffect(options);
     return cast null;
   }
 
   public static function createPosterizeEffect(?options:Dynamic):PosterizeEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_PosterizeEffect.createPosterizeEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_PosterizeEffect.createPosterizeEffect(options);
     return cast null;
   }
 
   public static function createRadialBlurEffect(?options:Dynamic):RadialBlurEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_RadialBlurEffect.createRadialBlurEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_RadialBlurEffect.createRadialBlurEffect(options);
     return cast null;
   }
 
   public static function createScanlinesEffect(?options:Dynamic):ScanlinesEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_ScanlinesEffect.createScanlinesEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_ScanlinesEffect.createScanlinesEffect(options);
     return cast null;
   }
 
   public static function createScreenSpaceFogEffect(?options:Dynamic):ScreenSpaceFogEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_ScreenSpaceFogEffect.createScreenSpaceFogEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_ScreenSpaceFogEffect.createScreenSpaceFogEffect(options);
     return cast null;
   }
 
   public static function createSharpenEffect(?options:Dynamic):SharpenEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_SharpenEffect.createSharpenEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_SharpenEffect.createSharpenEffect(options);
     return cast null;
   }
 
   public static function createSketchEffect(?options:Dynamic):SketchEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_SketchEffect.createSketchEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_SketchEffect.createSketchEffect(options);
     return cast null;
   }
 
   public static function createSmaaEffect(?options:Dynamic):SmaaEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_SmaaEffect.createSmaaEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_SmaaEffect.createSmaaEffect(options);
     return cast null;
   }
 
   public static function createSsaoEffect(?options:Dynamic):SsaoEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_SsaoEffect.createSsaoEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_SsaoEffect.createSsaoEffect(options);
     return cast null;
   }
 
   public static function createSsrEffect(?options:Dynamic):SsrEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_SsrEffect.createSsrEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_SsrEffect.createSsrEffect(options);
     return cast null;
   }
 
   public static function createTaaEffect(?options:Dynamic):TaaEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_TaaEffect.createTaaEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_TaaEffect.createTaaEffect(options);
     return cast null;
   }
 
   public static function createTiltShiftEffect(?options:Dynamic):TiltShiftEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_TiltShiftEffect.createTiltShiftEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_TiltShiftEffect.createTiltShiftEffect(options);
     return cast null;
   }
 
   public static function createToneMapEffect(?options:Dynamic):ToneMapEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_ToneMapEffect.createToneMapEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_ToneMapEffect.createToneMapEffect(options);
     return cast null;
   }
 
   public static function createVignetteEffect(?options:Dynamic):VignetteEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_VignetteEffect.createVignetteEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_VignetteEffect.createVignetteEffect(options);
     return cast null;
   }
 
   public static function createVolumetricLightEffect(?options:Dynamic):VolumetricLightEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_VolumetricLightEffect.createVolumetricLightEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_VolumetricLightEffect.createVolumetricLightEffect(options);
     return cast null;
   }
 
   public static function createWhiteBalanceEffect(?options:Dynamic):WhiteBalanceEffect {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_WhiteBalanceEffect.createWhiteBalanceEffect, cast ([options] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_WhiteBalanceEffect.createWhiteBalanceEffect(options);
     return cast null;
   }
 
   public static function getAcesInputMatrix(out:flighthq._internal._Float32Array):Void {
-    _Runtime.callValue(Facade_Effects_flighthq_effects_ToneMapMath.getAcesInputMatrix, cast ([out] : Array<Dynamic>));
+    Facade_Effects_flighthq_effects_ToneMapMath.getAcesInputMatrix(out);
   }
 
   public static function getAcesOutputMatrix(out:flighthq._internal._Float32Array):Void {
-    _Runtime.callValue(Facade_Effects_flighthq_effects_ToneMapMath.getAcesOutputMatrix, cast ([out] : Array<Dynamic>));
+    Facade_Effects_flighthq_effects_ToneMapMath.getAcesOutputMatrix(out);
   }
 
   public static function getAdvancedBlendRgb(mode:AdvancedBlendMode, cbR:Float, cbG:Float, cbB:Float, csR:Float, csG:Float, csB:Float, out:Dynamic):Void {
-    _Runtime.callValue(Facade_Effects_flighthq_effects_BlendModeMath.getAdvancedBlendRgb, cast ([mode, cbR, cbG, cbB, csR, csG, csB, out] : Array<Dynamic>));
+    Facade_Effects_flighthq_effects_BlendModeMath.getAdvancedBlendRgb(mode, cbR, cbG, cbB, csR, csG, csB, out);
   }
 
   public static function getBlurDownsampleLevel(sigma:Float):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_BlurDownsample.getBlurDownsampleLevel, cast ([sigma] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_BlurDownsample.getBlurDownsampleLevel(sigma);
     return cast null;
   }
 
   public static function getBlurResidualSigma(sigma:Float, level:Float):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_BlurDownsample.getBlurResidualSigma, cast ([sigma, level] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_BlurDownsample.getBlurResidualSigma(sigma, level);
     return cast null;
   }
 
   public static function getCompositeOperatorFactors(operator_:CompositeOperator, sourceAlpha:Float, backdropAlpha:Float, out:Dynamic):Void {
-    _Runtime.callValue(Facade_Effects_flighthq_effects_CompositeOperatorMath.getCompositeOperatorFactors, cast ([operator_, sourceAlpha, backdropAlpha, out] : Array<Dynamic>));
+    Facade_Effects_flighthq_effects_CompositeOperatorMath.getCompositeOperatorFactors(operator_, sourceAlpha, backdropAlpha, out);
   }
 
   public static function getGaussianKernelSize(sigma:Float):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_GaussianKernel.getGaussianKernelSize, cast ([sigma] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_GaussianKernel.getGaussianKernelSize(sigma);
     return cast null;
   }
 
   public static function getLinearSampledGaussianTapCount(sigma:Float):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_LinearSampledGaussian.getLinearSampledGaussianTapCount, cast ([sigma] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_LinearSampledGaussian.getLinearSampledGaussianTapCount(sigma);
     return cast null;
   }
 
   public static function getRenderEffectDefaults(kind:String):Dynamic {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_RenderEffectDefaults.getRenderEffectDefaults, cast ([kind] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_RenderEffectDefaults.getRenderEffectDefaults(kind);
     return cast null;
   }
 
   public static function getRenderEffectInputs(effect:RenderEffect):Array<RenderEffectInput> {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_RenderEffectInputs.getRenderEffectInputs, cast ([effect] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_RenderEffectInputs.getRenderEffectInputs(effect);
     return cast null;
   }
 
   public static function getRenderEffectKinds():Array<String> {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_RenderEffectInputs.getRenderEffectKinds, cast ([] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_RenderEffectInputs.getRenderEffectKinds();
     return cast null;
   }
 
   public static function getSeparableBlendChannel(mode:AdvancedBlendMode, cb:Float, cs:Float):Float {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_BlendModeMath.getSeparableBlendChannel, cast ([mode, cb, cs] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_BlendModeMath.getSeparableBlendChannel(mode, cb, cs);
     return cast null;
   }
 
   public static function getSobelKernelCoefficients(out:flighthq._internal._Float32Array):Void {
-    _Runtime.callValue(Facade_Effects_flighthq_effects_EdgeDetectMath.getSobelKernelCoefficients, cast ([out] : Array<Dynamic>));
+    Facade_Effects_flighthq_effects_EdgeDetectMath.getSobelKernelCoefficients(out);
   }
 
   public static function isNonSeparableBlendMode(mode:AdvancedBlendMode):Bool {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_BlendModeMath.isNonSeparableBlendMode, cast ([mode] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_BlendModeMath.isNonSeparableBlendMode(mode);
     return cast null;
   }
 
   public static function lerpRenderEffect(a:RenderEffect, b:RenderEffect, t:Float, out:RenderEffect):Bool {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_RenderEffectInterpolation.lerpRenderEffect, cast ([a, b, t, out] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_RenderEffectInterpolation.lerpRenderEffect(a, b, t, out);
     return cast null;
   }
 
   public static function normalizeRenderEffect(effect:RenderEffect, out:RenderEffect):Bool {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_RenderEffectDefaults.normalizeRenderEffect, cast ([effect, out] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_RenderEffectDefaults.normalizeRenderEffect(effect, out);
     return cast null;
   }
 
   public static final RENDER_EFFECT_KINDS:Array<String> = Facade_Effects_flighthq_effects_RenderEffectInputs.RENDER_EFFECT_KINDS;
 
   public static function validateRenderEffectList(effects:Array<RenderEffect>, available:Array<RenderEffectInput>):Null<RenderEffectInput> {
-    return cast _Runtime.callValue(Facade_Effects_flighthq_effects_RenderEffectValidation.validateRenderEffectList, cast ([effects, available] : Array<Dynamic>));
+    return cast Facade_Effects_flighthq_effects_RenderEffectValidation.validateRenderEffectList(effects, available);
     return cast null;
   }
 }

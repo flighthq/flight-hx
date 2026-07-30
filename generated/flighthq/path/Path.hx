@@ -37,12 +37,12 @@ import flighthq.types._internal._PathValues.PathCommandValue;
 
 class Path {
   public static function acquirePathMesh(path:flighthq.types.Path, ?tolerance:Dynamic):PathMesh {
-    return cast _Runtime.callValue(Facade_Path_flighthq_path_PathMeshPool.acquirePathMesh, cast ([path, tolerance] : Array<Dynamic>));
+    return cast Facade_Path_flighthq_path_PathMeshPool.acquirePathMesh(path, tolerance);
     return cast null;
   }
 
   public static function acquirePathMeshTyped(path:flighthq.types.Path, ?tolerance:Dynamic):PathMeshTyped {
-    return cast _Runtime.callValue(Facade_Path_flighthq_path_PathMeshPool.acquirePathMeshTyped, cast ([path, tolerance] : Array<Dynamic>));
+    return cast Facade_Path_flighthq_path_PathMeshPool.acquirePathMeshTyped(path, tolerance);
     return cast null;
   }
 
@@ -307,21 +307,21 @@ class Path {
   }
 
   public static function cleanPath(source:flighthq.types.Path, tolerance:Float, out:flighthq.types.Path, ?flattenTolerance:Dynamic):Void {
-    _Runtime.callValue(Facade_Path_flighthq_path_CleanPath.cleanPath, cast ([source, tolerance, out, flattenTolerance] : Array<Dynamic>));
+    Facade_Path_flighthq_path_CleanPath.cleanPath(source, tolerance, out, flattenTolerance);
   }
 
   public static function clonePath(source:flighthq.types.Path):flighthq.types.Path {
-    return cast _Runtime.callValue(Facade_Path_flighthq_path_CopyPath.clonePath, cast ([source] : Array<Dynamic>));
+    return cast Facade_Path_flighthq_path_CopyPath.clonePath(source);
     return cast null;
   }
 
   public static function containsPathPoint(path:flighthq.types.Path, px:Float, py:Float, ?tolerance:Dynamic):Bool {
-    return cast _Runtime.callValue(Facade_Path_flighthq_path_ContainsPathPoint.containsPathPoint, cast ([path, px, py, tolerance] : Array<Dynamic>));
+    return cast Facade_Path_flighthq_path_ContainsPathPoint.containsPathPoint(path, px, py, tolerance);
     return cast null;
   }
 
   public static function copyPath(source:flighthq.types.Path, ?out:flighthq.types.Path):flighthq.types.Path {
-    return cast _Runtime.callValue(Facade_Path_flighthq_path_CopyPath.copyPath, cast ([source, out] : Array<Dynamic>));
+    return cast Facade_Path_flighthq_path_CopyPath.copyPath(source, out);
     return cast null;
   }
 
@@ -331,48 +331,48 @@ class Path {
   }
 
   public static function dashPath(source:flighthq.types.Path, dash:Array<Float>, dashOffset:Float, out:flighthq.types.Path, ?tolerance:Dynamic):Void {
-    _Runtime.callValue(Facade_Path_flighthq_path_DashPath.dashPath, cast ([source, dash, dashOffset, out, tolerance] : Array<Dynamic>));
+    Facade_Path_flighthq_path_DashPath.dashPath(source, dash, dashOffset, out, tolerance);
   }
 
   public static function decimatePath(source:flighthq.types.Path, tolerance:Float, out:flighthq.types.Path, ?flattenTolerance:Dynamic):Void {
-    _Runtime.callValue(Facade_Path_flighthq_path_DecimatePath.decimatePath, cast ([source, tolerance, out, flattenTolerance] : Array<Dynamic>));
+    Facade_Path_flighthq_path_DecimatePath.decimatePath(source, tolerance, out, flattenTolerance);
   }
 
   public static function fitPathCurves(source:flighthq.types.Path, tolerance:Float, out:flighthq.types.Path, ?flattenTolerance:Dynamic):Void {
-    _Runtime.callValue(Facade_Path_flighthq_path_FitPathCurves.fitPathCurves, cast ([source, tolerance, out, flattenTolerance] : Array<Dynamic>));
+    Facade_Path_flighthq_path_FitPathCurves.fitPathCurves(source, tolerance, out, flattenTolerance);
   }
 
   public static function flattenPath(path:flighthq.types.Path, ?tolerance:Dynamic):Array<Array<Float>> {
-    return cast _Runtime.callValue(Facade_Path_flighthq_path_FlattenPath.flattenPath, cast ([path, tolerance] : Array<Dynamic>));
+    return cast Facade_Path_flighthq_path_FlattenPath.flattenPath(path, tolerance);
     return cast null;
   }
 
   public static function forEachPathSegment(path:flighthq.types.Path, visitor:Dynamic):Void {
-    _Runtime.callValue(Facade_Path_flighthq_path_ForEachPathSegment.forEachPathSegment, cast ([path, visitor] : Array<Dynamic>));
+    Facade_Path_flighthq_path_ForEachPathSegment.forEachPathSegment(path, visitor);
   }
 
   public static function getCubicBezierPoint(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float, out:Vector2Like):Vector2Like {
-    return cast _Runtime.callValue(Facade_Path_flighthq_path_GetPathSegmentAtParameter.getCubicBezierPoint, cast ([x0, y0, c1x, c1y, c2x, c2y, x1, y1, t, out] : Array<Dynamic>));
+    return cast Facade_Path_flighthq_path_GetPathSegmentAtParameter.getCubicBezierPoint(x0, y0, c1x, c1y, c2x, c2y, x1, y1, t, out);
     return cast null;
   }
 
   public static function getCubicBezierTangent(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float, out:Vector2Like):Vector2Like {
-    return cast _Runtime.callValue(Facade_Path_flighthq_path_GetPathSegmentAtParameter.getCubicBezierTangent, cast ([x0, y0, c1x, c1y, c2x, c2y, x1, y1, t, out] : Array<Dynamic>));
+    return cast Facade_Path_flighthq_path_GetPathSegmentAtParameter.getCubicBezierTangent(x0, y0, c1x, c1y, c2x, c2y, x1, y1, t, out);
     return cast null;
   }
 
   public static function getPathBounds(path:flighthq.types.Path, out:RectangleLike):Bool {
-    return cast _Runtime.callValue(Facade_Path_flighthq_path_GetPathBounds.getPathBounds, cast ([path, out] : Array<Dynamic>));
+    return cast Facade_Path_flighthq_path_GetPathBounds.getPathBounds(path, out);
     return cast null;
   }
 
   public static function getPathContourLengths(path:flighthq.types.Path, ?tolerance:Dynamic):Array<Float> {
-    return cast _Runtime.callValue(Facade_Path_flighthq_path_GetPathContourLengths.getPathContourLengths, cast ([path, tolerance] : Array<Dynamic>));
+    return cast Facade_Path_flighthq_path_GetPathContourLengths.getPathContourLengths(path, tolerance);
     return cast null;
   }
 
   public static function getPathContourOrientation(path:flighthq.types.Path, ?tolerance:Dynamic):String {
-    return cast _Runtime.callValue(Facade_Path_flighthq_path_GetPathSignedArea.getPathContourOrientation, cast ([path, tolerance] : Array<Dynamic>));
+    return cast Facade_Path_flighthq_path_GetPathSignedArea.getPathContourOrientation(path, tolerance);
     return cast null;
   }
 
@@ -385,52 +385,52 @@ class Path {
   }
 
   public static function getPathLength(path:flighthq.types.Path, ?tolerance:Dynamic):Float {
-    return cast _Runtime.callValue(Facade_Path_flighthq_path_GetPathLength.getPathLength, cast ([path, tolerance] : Array<Dynamic>));
+    return cast Facade_Path_flighthq_path_GetPathLength.getPathLength(path, tolerance);
     return cast null;
   }
 
   public static function getPathNearestPoint(path:flighthq.types.Path, px:Float, py:Float, out:Vector2Like, ?tolerance:Dynamic):Float {
-    return cast _Runtime.callValue(Facade_Path_flighthq_path_GetPathNearestPoint.getPathNearestPoint, cast ([path, px, py, out, tolerance] : Array<Dynamic>));
+    return cast Facade_Path_flighthq_path_GetPathNearestPoint.getPathNearestPoint(path, px, py, out, tolerance);
     return cast null;
   }
 
   public static function getPathPointAtDistance(path:flighthq.types.Path, distance:Float, out:Vector2Like, ?tolerance:Dynamic):Bool {
-    return cast _Runtime.callValue(Facade_Path_flighthq_path_GetPathPointAtDistance.getPathPointAtDistance, cast ([path, distance, out, tolerance] : Array<Dynamic>));
+    return cast Facade_Path_flighthq_path_GetPathPointAtDistance.getPathPointAtDistance(path, distance, out, tolerance);
     return cast null;
   }
 
   public static function getPathPositionAtDistance(path:flighthq.types.Path, distance:Float, pointOut:Vector2Like, tangentOut:Vector2Like, ?tolerance:Dynamic):Bool {
-    return cast _Runtime.callValue(Facade_Path_flighthq_path_GetPathPointAtDistance.getPathPositionAtDistance, cast ([path, distance, pointOut, tangentOut, tolerance] : Array<Dynamic>));
+    return cast Facade_Path_flighthq_path_GetPathPointAtDistance.getPathPositionAtDistance(path, distance, pointOut, tangentOut, tolerance);
     return cast null;
   }
 
   public static function getPathSegmentPointAtParameter(path:flighthq.types.Path, segmentIndex:Float, t:Float, out:Vector2Like):Bool {
-    return cast _Runtime.callValue(Facade_Path_flighthq_path_GetPathSegmentAtParameter.getPathSegmentPointAtParameter, cast ([path, segmentIndex, t, out] : Array<Dynamic>));
+    return cast Facade_Path_flighthq_path_GetPathSegmentAtParameter.getPathSegmentPointAtParameter(path, segmentIndex, t, out);
     return cast null;
   }
 
   public static function getPathSegmentTangentAtParameter(path:flighthq.types.Path, segmentIndex:Float, t:Float, out:Vector2Like):Bool {
-    return cast _Runtime.callValue(Facade_Path_flighthq_path_GetPathSegmentAtParameter.getPathSegmentTangentAtParameter, cast ([path, segmentIndex, t, out] : Array<Dynamic>));
+    return cast Facade_Path_flighthq_path_GetPathSegmentAtParameter.getPathSegmentTangentAtParameter(path, segmentIndex, t, out);
     return cast null;
   }
 
   public static function getPathSignedArea(path:flighthq.types.Path, ?tolerance:Dynamic):Float {
-    return cast _Runtime.callValue(Facade_Path_flighthq_path_GetPathSignedArea.getPathSignedArea, cast ([path, tolerance] : Array<Dynamic>));
+    return cast Facade_Path_flighthq_path_GetPathSignedArea.getPathSignedArea(path, tolerance);
     return cast null;
   }
 
   public static function getPathTangentAtDistance(path:flighthq.types.Path, distance:Float, out:Vector2Like, ?tolerance:Dynamic):Bool {
-    return cast _Runtime.callValue(Facade_Path_flighthq_path_GetPathPointAtDistance.getPathTangentAtDistance, cast ([path, distance, out, tolerance] : Array<Dynamic>));
+    return cast Facade_Path_flighthq_path_GetPathPointAtDistance.getPathTangentAtDistance(path, distance, out, tolerance);
     return cast null;
   }
 
   public static function getQuadraticBezierPoint(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float, out:Vector2Like):Vector2Like {
-    return cast _Runtime.callValue(Facade_Path_flighthq_path_GetPathSegmentAtParameter.getQuadraticBezierPoint, cast ([x0, y0, cx, cy, x1, y1, t, out] : Array<Dynamic>));
+    return cast Facade_Path_flighthq_path_GetPathSegmentAtParameter.getQuadraticBezierPoint(x0, y0, cx, cy, x1, y1, t, out);
     return cast null;
   }
 
   public static function getQuadraticBezierTangent(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float, out:Vector2Like):Vector2Like {
-    return cast _Runtime.callValue(Facade_Path_flighthq_path_GetPathSegmentAtParameter.getQuadraticBezierTangent, cast ([x0, y0, cx, cy, x1, y1, t, out] : Array<Dynamic>));
+    return cast Facade_Path_flighthq_path_GetPathSegmentAtParameter.getQuadraticBezierTangent(x0, y0, cx, cy, x1, y1, t, out);
     return cast null;
   }
 
@@ -464,38 +464,38 @@ class Path {
   }
 
   public static function releasePathMesh(mesh:PathMesh):Void {
-    _Runtime.callValue(Facade_Path_flighthq_path_PathMeshPool.releasePathMesh, cast ([mesh] : Array<Dynamic>));
+    Facade_Path_flighthq_path_PathMeshPool.releasePathMesh(mesh);
   }
 
   public static function releasePathMeshTyped(mesh:PathMeshTyped):Void {
-    _Runtime.callValue(Facade_Path_flighthq_path_PathMeshPool.releasePathMeshTyped, cast ([mesh] : Array<Dynamic>));
+    Facade_Path_flighthq_path_PathMeshPool.releasePathMeshTyped(mesh);
   }
 
   public static function reversePath(source:flighthq.types.Path, out:flighthq.types.Path):Void {
-    _Runtime.callValue(Facade_Path_flighthq_path_ReversePath.reversePath, cast ([source, out] : Array<Dynamic>));
+    Facade_Path_flighthq_path_ReversePath.reversePath(source, out);
   }
 
   public static function strokePath(path:flighthq.types.Path, style:StrokeStyle, ?tolerance:Dynamic):flighthq.types.Path {
-    return cast _Runtime.callValue(Facade_Path_flighthq_path_StrokePath.strokePath, cast ([path, style, tolerance] : Array<Dynamic>));
+    return cast Facade_Path_flighthq_path_StrokePath.strokePath(path, style, tolerance);
     return cast null;
   }
 
   public static function tessellatePath(path:flighthq.types.Path, ?tolerance:Dynamic):PathMesh {
-    return cast _Runtime.callValue(Facade_Path_flighthq_path_TessellatePath.tessellatePath, cast ([path, tolerance] : Array<Dynamic>));
+    return cast Facade_Path_flighthq_path_TessellatePath.tessellatePath(path, tolerance);
     return cast null;
   }
 
   public static function tessellatePathTyped(path:flighthq.types.Path, ?tolerance:Dynamic):PathMeshTyped {
-    return cast _Runtime.callValue(Facade_Path_flighthq_path_TessellatePathTyped.tessellatePathTyped, cast ([path, tolerance] : Array<Dynamic>));
+    return cast Facade_Path_flighthq_path_TessellatePathTyped.tessellatePathTyped(path, tolerance);
     return cast null;
   }
 
   public static function transformPath(source:flighthq.types.Path, matrix:MatrixLike, out:flighthq.types.Path):Void {
-    _Runtime.callValue(Facade_Path_flighthq_path_TransformPath.transformPath, cast ([source, matrix, out] : Array<Dynamic>));
+    Facade_Path_flighthq_path_TransformPath.transformPath(source, matrix, out);
   }
 
   public static function translatePath(source:flighthq.types.Path, dx:Float, dy:Float, out:flighthq.types.Path):Void {
-    _Runtime.callValue(Facade_Path_flighthq_path_TransformPath.translatePath, cast ([source, dx, dy, out] : Array<Dynamic>));
+    Facade_Path_flighthq_path_TransformPath.translatePath(source, dx, dy, out);
   }
 
   public static function vectorAngle__path(ux:Float, uy:Float, vx:Float, vy:Float):Float {

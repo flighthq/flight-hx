@@ -17,7 +17,7 @@ class Webcam {
   public static var _backend__webcam:Null<WebcamBackend> = _Runtime.explicitNull();
 
   public static function createWebcamStreamEntity(data:{ var active:Bool; var deviceId:String; var facingMode:Null<WebcamFacingMode>; var frameRate:Float; var height:Float; var id:String; var width:Float; }):WebcamStream {
-    return cast _Runtime.callValue(Facade_Webcam_flighthq_webcam_WebcamStream.createWebcamStreamEntity, cast ([data] : Array<Dynamic>));
+    return cast Facade_Webcam_flighthq_webcam_WebcamStream.createWebcamStreamEntity(data);
     return cast null;
   }
 
@@ -136,7 +136,7 @@ class Webcam {
   }
 
   public static function getWebcamStreamRuntime(stream:WebcamStream):Null<WebcamStreamRuntime> {
-    return cast _Runtime.callValue(Facade_Webcam_flighthq_webcam_WebcamStream.getWebcamStreamRuntime, cast ([stream] : Array<Dynamic>));
+    return cast Facade_Webcam_flighthq_webcam_WebcamStream.getWebcamStreamRuntime(stream);
     return cast null;
   }
 

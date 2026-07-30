@@ -18,96 +18,96 @@ import flighthq.types.Collision.CollisionShape;
 
 class Collision {
   public static function clearCollisionManifold(out:CollisionManifold):Void {
-    _Runtime.callValue(Facade_Collision_flighthq_collision_Manifold.clearCollisionManifold, cast ([out] : Array<Dynamic>));
+    Facade_Collision_flighthq_collision_Manifold.clearCollisionManifold(out);
   }
 
   public static function createCollisionManifold():CollisionManifold {
-    return cast _Runtime.callValue(Facade_Collision_flighthq_collision_Manifold.createCollisionManifold, cast ([] : Array<Dynamic>));
+    return cast Facade_Collision_flighthq_collision_Manifold.createCollisionManifold();
     return cast null;
   }
 
   public static function getCollisionShapeContainsPoint(shape:CollisionShape, x:Float, y:Float):Bool {
-    return cast _Runtime.callValue(Facade_Collision_flighthq_collision_PointContainment.getCollisionShapeContainsPoint, cast ([shape, x, y] : Array<Dynamic>));
+    return cast Facade_Collision_flighthq_collision_PointContainment.getCollisionShapeContainsPoint(shape, x, y);
     return cast null;
   }
 
   public static function testAabbAabbCollision(a:CollisionAabb, b:CollisionAabb, out:CollisionManifold):Bool {
-    return cast _Runtime.callValue(Facade_Collision_flighthq_collision_ShapeCollision.testAabbAabbCollision, cast ([a, b, out] : Array<Dynamic>));
+    return cast Facade_Collision_flighthq_collision_ShapeCollision.testAabbAabbCollision(a, b, out);
     return cast null;
   }
 
   public static function testAabbObbCollision(a:CollisionAabb, b:CollisionObb, out:CollisionManifold):Bool {
-    return cast _Runtime.callValue(Facade_Collision_flighthq_collision_ShapeCollision.testAabbObbCollision, cast ([a, b, out] : Array<Dynamic>));
+    return cast Facade_Collision_flighthq_collision_ShapeCollision.testAabbObbCollision(a, b, out);
     return cast null;
   }
 
   public static function testAabbPolygonCollision(a:CollisionAabb, b:CollisionPolygon, out:CollisionManifold):Bool {
-    return cast _Runtime.callValue(Facade_Collision_flighthq_collision_ShapeCollision.testAabbPolygonCollision, cast ([a, b, out] : Array<Dynamic>));
+    return cast Facade_Collision_flighthq_collision_ShapeCollision.testAabbPolygonCollision(a, b, out);
     return cast null;
   }
 
   public static function testCircleAabbCollision(a:CollisionCircle, b:CollisionAabb, out:CollisionManifold):Bool {
-    return cast _Runtime.callValue(Facade_Collision_flighthq_collision_ShapeCollision.testCircleAabbCollision, cast ([a, b, out] : Array<Dynamic>));
+    return cast Facade_Collision_flighthq_collision_ShapeCollision.testCircleAabbCollision(a, b, out);
     return cast null;
   }
 
   public static function testCircleCircleCollision(a:CollisionCircle, b:CollisionCircle, out:CollisionManifold):Bool {
-    return cast _Runtime.callValue(Facade_Collision_flighthq_collision_ShapeCollision.testCircleCircleCollision, cast ([a, b, out] : Array<Dynamic>));
+    return cast Facade_Collision_flighthq_collision_ShapeCollision.testCircleCircleCollision(a, b, out);
     return cast null;
   }
 
   public static function testCircleObbCollision(a:CollisionCircle, b:CollisionObb, out:CollisionManifold):Bool {
-    return cast _Runtime.callValue(Facade_Collision_flighthq_collision_ShapeCollision.testCircleObbCollision, cast ([a, b, out] : Array<Dynamic>));
+    return cast Facade_Collision_flighthq_collision_ShapeCollision.testCircleObbCollision(a, b, out);
     return cast null;
   }
 
   public static function testCirclePolygonCollision(a:CollisionCircle, b:CollisionPolygon, out:CollisionManifold):Bool {
-    return cast _Runtime.callValue(Facade_Collision_flighthq_collision_ShapeCollision.testCirclePolygonCollision, cast ([a, b, out] : Array<Dynamic>));
+    return cast Facade_Collision_flighthq_collision_ShapeCollision.testCirclePolygonCollision(a, b, out);
     return cast null;
   }
 
   public static function testCollision(a:CollisionShape, b:CollisionShape, out:CollisionManifold):Bool {
-    return cast _Runtime.callValue(Facade_Collision_flighthq_collision_TestCollision.testCollision, cast ([a, b, out] : Array<Dynamic>));
+    return cast Facade_Collision_flighthq_collision_TestCollision.testCollision(a, b, out);
     return cast null;
   }
 
   public static function testObbObbCollision(a:CollisionObb, b:CollisionObb, out:CollisionManifold):Bool {
-    return cast _Runtime.callValue(Facade_Collision_flighthq_collision_ShapeCollision.testObbObbCollision, cast ([a, b, out] : Array<Dynamic>));
+    return cast Facade_Collision_flighthq_collision_ShapeCollision.testObbObbCollision(a, b, out);
     return cast null;
   }
 
   public static function testObbPolygonCollision(a:CollisionObb, b:CollisionPolygon, out:CollisionManifold):Bool {
-    return cast _Runtime.callValue(Facade_Collision_flighthq_collision_ShapeCollision.testObbPolygonCollision, cast ([a, b, out] : Array<Dynamic>));
+    return cast Facade_Collision_flighthq_collision_ShapeCollision.testObbPolygonCollision(a, b, out);
     return cast null;
   }
 
   public static function testPolygonPolygonCollision(a:CollisionPolygon, b:CollisionPolygon, out:CollisionManifold):Bool {
-    return cast _Runtime.callValue(Facade_Collision_flighthq_collision_ShapeCollision.testPolygonPolygonCollision, cast ([a, b, out] : Array<Dynamic>));
+    return cast Facade_Collision_flighthq_collision_ShapeCollision.testPolygonPolygonCollision(a, b, out);
     return cast null;
   }
 
   public static function testSegmentAabbCollision(a:CollisionSegment, b:CollisionAabb):Bool {
-    return cast _Runtime.callValue(Facade_Collision_flighthq_collision_SegmentCollision.testSegmentAabbCollision, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Collision_flighthq_collision_SegmentCollision.testSegmentAabbCollision(a, b);
     return cast null;
   }
 
   public static function testSegmentCircleCollision(a:CollisionSegment, b:CollisionCircle):Bool {
-    return cast _Runtime.callValue(Facade_Collision_flighthq_collision_SegmentCollision.testSegmentCircleCollision, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Collision_flighthq_collision_SegmentCollision.testSegmentCircleCollision(a, b);
     return cast null;
   }
 
   public static function testSegmentObbCollision(a:CollisionSegment, b:CollisionObb):Bool {
-    return cast _Runtime.callValue(Facade_Collision_flighthq_collision_SegmentCollision.testSegmentObbCollision, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Collision_flighthq_collision_SegmentCollision.testSegmentObbCollision(a, b);
     return cast null;
   }
 
   public static function testSegmentPolygonCollision(a:CollisionSegment, b:CollisionPolygon):Bool {
-    return cast _Runtime.callValue(Facade_Collision_flighthq_collision_SegmentCollision.testSegmentPolygonCollision, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Collision_flighthq_collision_SegmentCollision.testSegmentPolygonCollision(a, b);
     return cast null;
   }
 
   public static function testSegmentSegmentCollision(a:CollisionSegment, b:CollisionSegment):Bool {
-    return cast _Runtime.callValue(Facade_Collision_flighthq_collision_SegmentCollision.testSegmentSegmentCollision, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Collision_flighthq_collision_SegmentCollision.testSegmentSegmentCollision(a, b);
     return cast null;
   }
 }

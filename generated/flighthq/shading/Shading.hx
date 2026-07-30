@@ -45,52 +45,52 @@ class Shading {
   public static final animatedNormalModifierDefinition:ModifierDefinition = Facade_Shading_flighthq_shading_RegisterBuiltInModifiers.animatedNormalModifierDefinition;
 
   public static function createAnimatedNormalModifier(options:AnimatedNormalModifierOptions):AnimatedNormalModifier {
-    return cast _Runtime.callValue(Facade_Shading_flighthq_shading_CreateAnimatedNormalModifier.createAnimatedNormalModifier, cast ([options] : Array<Dynamic>));
+    return cast Facade_Shading_flighthq_shading_CreateAnimatedNormalModifier.createAnimatedNormalModifier(options);
     return cast null;
   }
 
   public static function createDissolveModifier(options:DissolveModifierOptions):DissolveModifier {
-    return cast _Runtime.callValue(Facade_Shading_flighthq_shading_CreateDissolveModifier.createDissolveModifier, cast ([options] : Array<Dynamic>));
+    return cast Facade_Shading_flighthq_shading_CreateDissolveModifier.createDissolveModifier(options);
     return cast null;
   }
 
   public static function createEmissiveModifier(options:EmissiveModifierOptions):EmissiveModifier {
-    return cast _Runtime.callValue(Facade_Shading_flighthq_shading_CreateEmissiveModifier.createEmissiveModifier, cast ([options] : Array<Dynamic>));
+    return cast Facade_Shading_flighthq_shading_CreateEmissiveModifier.createEmissiveModifier(options);
     return cast null;
   }
 
   public static function createEnvReflectModifier(?options:EnvReflectModifierOptions):EnvReflectModifier {
-    return cast _Runtime.callValue(Facade_Shading_flighthq_shading_CreateEnvReflectModifier.createEnvReflectModifier, cast ([options] : Array<Dynamic>));
+    return cast Facade_Shading_flighthq_shading_CreateEnvReflectModifier.createEnvReflectModifier(options);
     return cast null;
   }
 
   public static function createFogModifier(options:FogModifierOptions):FogModifier {
-    return cast _Runtime.callValue(Facade_Shading_flighthq_shading_CreateFogModifier.createFogModifier, cast ([options] : Array<Dynamic>));
+    return cast Facade_Shading_flighthq_shading_CreateFogModifier.createFogModifier(options);
     return cast null;
   }
 
   public static function createModifierRegistry():ModifierRegistry {
-    return cast _Runtime.callValue(Facade_Shading_flighthq_shading__internal__ModifierRegistryValues.createModifierRegistry, cast ([] : Array<Dynamic>));
+    return cast Facade_Shading_flighthq_shading__internal__ModifierRegistryValues.createModifierRegistry();
     return cast null;
   }
 
   public static function createRimModifier(options:RimModifierOptions):RimModifier {
-    return cast _Runtime.callValue(Facade_Shading_flighthq_shading_CreateRimModifier.createRimModifier, cast ([options] : Array<Dynamic>));
+    return cast Facade_Shading_flighthq_shading_CreateRimModifier.createRimModifier(options);
     return cast null;
   }
 
   public static function createShadedMaterial(?options:ShadedMaterialOptions):ShadedMaterial {
-    return cast _Runtime.callValue(Facade_Shading_flighthq_shading_CreateShadedMaterial.createShadedMaterial, cast ([options] : Array<Dynamic>));
+    return cast Facade_Shading_flighthq_shading_CreateShadedMaterial.createShadedMaterial(options);
     return cast null;
   }
 
   public static function createToonModifier(options:ToonModifierOptions):ToonModifier {
-    return cast _Runtime.callValue(Facade_Shading_flighthq_shading_CreateToonModifier.createToonModifier, cast ([options] : Array<Dynamic>));
+    return cast Facade_Shading_flighthq_shading_CreateToonModifier.createToonModifier(options);
     return cast null;
   }
 
   public static function createVertexDisplaceModifier(options:VertexDisplaceModifierOptions):VertexDisplaceModifier {
-    return cast _Runtime.callValue(Facade_Shading_flighthq_shading_CreateVertexDisplaceModifier.createVertexDisplaceModifier, cast ([options] : Array<Dynamic>));
+    return cast Facade_Shading_flighthq_shading_CreateVertexDisplaceModifier.createVertexDisplaceModifier(options);
     return cast null;
   }
 
@@ -103,40 +103,40 @@ class Shading {
   public static final fogModifierDefinition:ModifierDefinition = Facade_Shading_flighthq_shading_RegisterBuiltInModifiers.fogModifierDefinition;
 
   public static function getModifierDefineKey(stack:Array<Modifier>, ?registry:ModifierRegistry):String {
-    return cast _Runtime.callValue(Facade_Shading_flighthq_shading_GetModifierDefineKey.getModifierDefineKey, cast ([stack, registry] : Array<Dynamic>));
+    return cast Facade_Shading_flighthq_shading_GetModifierDefineKey.getModifierDefineKey(stack, registry);
     return cast null;
   }
 
   public static function getUnregisteredModifierKinds(registry:ModifierRegistry, stack:Array<Modifier>):Array<ModifierKind> {
-    return cast _Runtime.callValue(Facade_Shading_flighthq_shading_GetUnregisteredModifierKinds.getUnregisteredModifierKinds, cast ([registry, stack] : Array<Dynamic>));
+    return cast Facade_Shading_flighthq_shading_GetUnregisteredModifierKinds.getUnregisteredModifierKinds(registry, stack);
     return cast null;
   }
 
   public static function isBuiltInModifierSlot(value:String):Bool {
-    return cast _Runtime.callValue(Facade_Shading_flighthq_shading_IsBuiltInModifierSlot.isBuiltInModifierSlot, cast ([value] : Array<Dynamic>));
+    return cast Facade_Shading_flighthq_shading_IsBuiltInModifierSlot.isBuiltInModifierSlot(value);
     return cast null;
   }
 
   public static function isModifierStackValid(registry:ModifierRegistry, stack:Array<Modifier>):Bool {
-    return cast _Runtime.callValue(Facade_Shading_flighthq_shading_IsModifierStackValid.isModifierStackValid, cast ([registry, stack] : Array<Dynamic>));
+    return cast Facade_Shading_flighthq_shading_IsModifierStackValid.isModifierStackValid(registry, stack);
     return cast null;
   }
 
   public static function orderModifierStack(stack:Array<Modifier>):Array<Modifier> {
-    return cast _Runtime.callValue(Facade_Shading_flighthq_shading_OrderModifierStack.orderModifierStack, cast ([stack] : Array<Dynamic>));
+    return cast Facade_Shading_flighthq_shading_OrderModifierStack.orderModifierStack(stack);
     return cast null;
   }
 
   public static function registerBuiltInModifiers(registry:ModifierRegistry):Void {
-    _Runtime.callValue(Facade_Shading_flighthq_shading_RegisterBuiltInModifiers.registerBuiltInModifiers, cast ([registry] : Array<Dynamic>));
+    Facade_Shading_flighthq_shading_RegisterBuiltInModifiers.registerBuiltInModifiers(registry);
   }
 
   public static function registerModifier(registry:ModifierRegistry, definition:ModifierDefinition):Void {
-    _Runtime.callValue(Facade_Shading_flighthq_shading__internal__ModifierRegistryValues.registerModifier, cast ([registry, definition] : Array<Dynamic>));
+    Facade_Shading_flighthq_shading__internal__ModifierRegistryValues.registerModifier(registry, definition);
   }
 
   public static function resolveModifier(registry:ModifierRegistry, kind:ModifierKind):Null<ModifierDefinition> {
-    return cast _Runtime.callValue(Facade_Shading_flighthq_shading__internal__ModifierRegistryValues.resolveModifier, cast ([registry, kind] : Array<Dynamic>));
+    return cast Facade_Shading_flighthq_shading__internal__ModifierRegistryValues.resolveModifier(registry, kind);
     return cast null;
   }
 

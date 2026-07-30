@@ -121,240 +121,240 @@ import flighthq.types.WhiteBalanceEffect;
 
 class EffectsGl {
   public static function applyBevelEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:BevelEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlBevelEffect.applyBevelEffectToGl, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlBevelEffect.applyBevelEffectToGl(state, source, dest, pool, effect);
   }
 
   public static function applyBlendEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:BlendEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlBlendEffect.applyBlendEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlBlendEffect.applyBlendEffectToGl(state, source, dest, effect);
   }
 
   public static function applyBloomEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:BloomEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlBloomEffect.applyBloomEffectToGl, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlBloomEffect.applyBloomEffectToGl(state, source, dest, pool, effect);
   }
 
   public static function applyBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, effect:BlurEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlBlurEffect.applyBlurEffectToGl, cast ([state, source, dest, temp, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlBlurEffect.applyBlurEffectToGl(state, source, dest, temp, effect);
   }
 
   public static function applyBokehDepthOfFieldEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, depthTexture:Null<Dynamic>, effect:BokehDepthOfFieldEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlBokehDepthOfFieldEffect.applyBokehDepthOfFieldEffectToGl, cast ([state, source, dest, depthTexture, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlBokehDepthOfFieldEffect.applyBokehDepthOfFieldEffectToGl(state, source, dest, depthTexture, effect);
   }
 
   public static function applyCameraMotionBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CameraMotionBlurEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlCameraMotionBlurEffect.applyCameraMotionBlurEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlCameraMotionBlurEffect.applyCameraMotionBlurEffectToGl(state, source, dest, effect);
   }
 
   public static function applyChromaticAberrationEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ChromaticAberrationEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlChromaticAberrationEffect.applyChromaticAberrationEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlChromaticAberrationEffect.applyChromaticAberrationEffectToGl(state, source, dest, effect);
   }
 
   public static function applyColorLutPassToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, lut:ColorLut, cache:GlColorLutTextureCache):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlColorLutPass.applyColorLutPassToGl, cast ([state, source, dest, lut, cache] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlColorLutPass.applyColorLutPassToGl(state, source, dest, lut, cache);
   }
 
   public static function applyColorMatrixPassToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, matrix:Array<Float>):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlColorMatrixPass.applyColorMatrixPassToGl, cast ([state, source, dest, matrix] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlColorMatrixPass.applyColorMatrixPassToGl(state, source, dest, matrix);
   }
 
   public static function applyCompositeEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CompositeEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlCompositeEffect.applyCompositeEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlCompositeEffect.applyCompositeEffectToGl(state, source, dest, effect);
   }
 
   public static function applyConvolutionEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ConvolutionEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlConvolutionEffect.applyConvolutionEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlConvolutionEffect.applyConvolutionEffectToGl(state, source, dest, effect);
   }
 
   public static function applyCrtEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CrtEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlCrtEffect.applyCrtEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlCrtEffect.applyCrtEffectToGl(state, source, dest, effect);
   }
 
   public static function applyCustomShaderEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CustomShaderEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlCustomShaderEffect.applyCustomShaderEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlCustomShaderEffect.applyCustomShaderEffectToGl(state, source, dest, effect);
   }
 
   public static function applyDirectionalBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:DirectionalBlurEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlDirectionalBlurEffect.applyDirectionalBlurEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlDirectionalBlurEffect.applyDirectionalBlurEffectToGl(state, source, dest, effect);
   }
 
   public static function applyDisplacementEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:DisplacementEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlDisplacementEffect.applyDisplacementEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlDisplacementEffect.applyDisplacementEffectToGl(state, source, dest, effect);
   }
 
   public static function applyDitherEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:DitherEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlDitherEffect.applyDitherEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlDitherEffect.applyDitherEffectToGl(state, source, dest, effect);
   }
 
   public static function applyDropShadowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:DropShadowEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlDropShadowEffect.applyDropShadowEffectToGl, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlDropShadowEffect.applyDropShadowEffectToGl(state, source, dest, pool, effect);
   }
 
   public static function applyFilmGrainEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:FilmGrainEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlFilmGrainEffect.applyFilmGrainEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlFilmGrainEffect.applyFilmGrainEffectToGl(state, source, dest, effect);
   }
 
   public static function applyFxaaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:FxaaEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlFxaaEffect.applyFxaaEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlFxaaEffect.applyFxaaEffectToGl(state, source, dest, effect);
   }
 
   public static function applyGaussianBlurToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlBlurEffect.applyGaussianBlurToGl, cast ([state, source, dest, temp, options] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlBlurEffect.applyGaussianBlurToGl(state, source, dest, temp, options);
   }
 
   public static function applyGlEffectBlitOffsetPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, dx:Float, dy:Float):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlEffectBlitShader.applyGlEffectBlitOffsetPass, cast ([state, source, dest, dx, dy] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlEffectBlitShader.applyGlEffectBlitOffsetPass(state, source, dest, dx, dy);
   }
 
   public static function applyGlEffectBlitPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlEffectBlitShader.applyGlEffectBlitPass, cast ([state, source, dest] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlEffectBlitShader.applyGlEffectBlitPass(state, source, dest);
   }
 
   public static function applyGlEffectBoxBlur(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; @:optional var passes:Float; @:optional var edgeColor:Array<Float>; }):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlEffectBoxBlur.applyGlEffectBoxBlur, cast ([state, source, dest, temp, options] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlEffectBoxBlur.applyGlEffectBoxBlur(state, source, dest, temp, options);
   }
 
   public static function applyGlEffectErasePass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlEffectBlitShader.applyGlEffectErasePass, cast ([state, source, dest] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlEffectBlitShader.applyGlEffectErasePass(state, source, dest);
   }
 
   public static function applyGlEffectInvertTintPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, color:Float, alpha:Float, strength:Float):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlEffectTintShader.applyGlEffectInvertTintPass, cast ([state, source, dest, color, alpha, strength] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlEffectTintShader.applyGlEffectInvertTintPass(state, source, dest, color, alpha, strength);
   }
 
   public static function applyGlEffectTintPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, color:Float, alpha:Float, strength:Float):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlEffectTintShader.applyGlEffectTintPass, cast ([state, source, dest, color, alpha, strength] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlEffectTintShader.applyGlEffectTintPass(state, source, dest, color, alpha, strength);
   }
 
   public static function applyGlitchEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:GlitchEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlGlitchEffect.applyGlitchEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlGlitchEffect.applyGlitchEffectToGl(state, source, dest, effect);
   }
 
   public static function applyGodRaysEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:GodRaysEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlGodRaysEffect.applyGodRaysEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlGodRaysEffect.applyGodRaysEffectToGl(state, source, dest, effect);
   }
 
   public static function applyGradientBevelEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:GradientBevelEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlGradientBevelEffect.applyGradientBevelEffectToGl, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlGradientBevelEffect.applyGradientBevelEffectToGl(state, source, dest, pool, effect);
   }
 
   public static function applyGradientGlowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:GradientGlowEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlGradientGlowEffect.applyGradientGlowEffectToGl, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlGradientGlowEffect.applyGradientGlowEffectToGl(state, source, dest, pool, effect);
   }
 
   public static function applyHalftoneEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:HalftoneEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlHalftoneEffect.applyHalftoneEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlHalftoneEffect.applyHalftoneEffectToGl(state, source, dest, effect);
   }
 
   public static function applyInnerGlowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:InnerGlowEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlInnerGlowEffect.applyInnerGlowEffectToGl, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlInnerGlowEffect.applyInnerGlowEffectToGl(state, source, dest, pool, effect);
   }
 
   public static function applyInnerShadowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:InnerShadowEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlInnerShadowEffect.applyInnerShadowEffectToGl, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlInnerShadowEffect.applyInnerShadowEffectToGl(state, source, dest, pool, effect);
   }
 
   public static function applyKuwaharaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:KuwaharaEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlKuwaharaEffect.applyKuwaharaEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlKuwaharaEffect.applyKuwaharaEffectToGl(state, source, dest, effect);
   }
 
   public static function applyLensDirtEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:LensDirtEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlLensDirtEffect.applyLensDirtEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlLensDirtEffect.applyLensDirtEffectToGl(state, source, dest, effect);
   }
 
   public static function applyLensDistortionEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:LensDistortionEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlLensDistortionEffect.applyLensDistortionEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlLensDistortionEffect.applyLensDistortionEffectToGl(state, source, dest, effect);
   }
 
   public static function applyLensFlareEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:LensFlareEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlLensFlareEffect.applyLensFlareEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlLensFlareEffect.applyLensFlareEffectToGl(state, source, dest, effect);
   }
 
   public static function applyMedianEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:MedianEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlMedianEffect.applyMedianEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlMedianEffect.applyMedianEffectToGl(state, source, dest, effect);
   }
 
   public static function applyMotionBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, velocityTexture:Null<Dynamic>, effect:MotionBlurEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlMotionBlurEffect.applyMotionBlurEffectToGl, cast ([state, source, dest, velocityTexture, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlMotionBlurEffect.applyMotionBlurEffectToGl(state, source, dest, velocityTexture, effect);
   }
 
   public static function applyOuterGlowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:OuterGlowEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlOuterGlowEffect.applyOuterGlowEffectToGl, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlOuterGlowEffect.applyOuterGlowEffectToGl(state, source, dest, pool, effect);
   }
 
   public static function applyOutlineEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:OutlineEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlOutlineEffect.applyOutlineEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlOutlineEffect.applyOutlineEffectToGl(state, source, dest, effect);
   }
 
   public static function applyPixelateEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:PixelateEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlPixelateEffect.applyPixelateEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlPixelateEffect.applyPixelateEffectToGl(state, source, dest, effect);
   }
 
   public static function applyPosterizeEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:PosterizeEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlPosterizeEffect.applyPosterizeEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlPosterizeEffect.applyPosterizeEffectToGl(state, source, dest, effect);
   }
 
   public static function applyRadialBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:RadialBlurEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlRadialBlurEffect.applyRadialBlurEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlRadialBlurEffect.applyRadialBlurEffectToGl(state, source, dest, effect);
   }
 
   public static function applyScanlinesEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ScanlinesEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlScanlinesEffect.applyScanlinesEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlScanlinesEffect.applyScanlinesEffectToGl(state, source, dest, effect);
   }
 
   public static function applyScreenSpaceFogEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, depthTexture:Null<Dynamic>, effect:ScreenSpaceFogEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlScreenSpaceFogEffect.applyScreenSpaceFogEffectToGl, cast ([state, source, dest, depthTexture, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlScreenSpaceFogEffect.applyScreenSpaceFogEffectToGl(state, source, dest, depthTexture, effect);
   }
 
   public static function applySharpenEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SharpenEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlSharpenEffect.applySharpenEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlSharpenEffect.applySharpenEffectToGl(state, source, dest, effect);
   }
 
   public static function applySketchEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SketchEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlSketchEffect.applySketchEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlSketchEffect.applySketchEffectToGl(state, source, dest, effect);
   }
 
   public static function applySmaaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SmaaEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlSmaaEffect.applySmaaEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlSmaaEffect.applySmaaEffectToGl(state, source, dest, effect);
   }
 
   public static function applySsaoEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SsaoEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlSsaoEffect.applySsaoEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlSsaoEffect.applySsaoEffectToGl(state, source, dest, effect);
   }
 
   public static function applySsrEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SsrEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlSsrEffect.applySsrEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlSsrEffect.applySsrEffectToGl(state, source, dest, effect);
   }
 
   public static function applyTaaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, _effect:TaaEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlTaaEffect.applyTaaEffectToGl, cast ([state, source, dest, _effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlTaaEffect.applyTaaEffectToGl(state, source, dest, _effect);
   }
 
   public static function applyTiltShiftEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:TiltShiftEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlTiltShiftEffect.applyTiltShiftEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlTiltShiftEffect.applyTiltShiftEffectToGl(state, source, dest, effect);
   }
 
   public static function applyToneMapEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ToneMapEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlToneMapEffect.applyToneMapEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlToneMapEffect.applyToneMapEffectToGl(state, source, dest, effect);
   }
 
   public static function applyVignetteEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:VignetteEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlVignetteEffect.applyVignetteEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlVignetteEffect.applyVignetteEffectToGl(state, source, dest, effect);
   }
 
   public static function applyWhiteBalanceEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:WhiteBalanceEffect):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlWhiteBalanceEffect.applyWhiteBalanceEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlWhiteBalanceEffect.applyWhiteBalanceEffectToGl(state, source, dest, effect);
   }
 
   public static function beginGlRenderEffectPipeline(state:GlRenderState, pipeline:GlRenderEffectPipeline):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectPipeline.beginGlRenderEffectPipeline, cast ([state, pipeline] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectPipeline.beginGlRenderEffectPipeline(state, pipeline);
   }
 
   public static function createGlEffectGradientRampTexture(gl:Dynamic, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
-    return cast _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlEffectGradientRamp.createGlEffectGradientRampTexture, cast ([gl, colors, alphas, ratios] : Array<Dynamic>));
+    return cast Facade_EffectsGl_flighthq_effectsGl_GlEffectGradientRamp.createGlEffectGradientRampTexture(gl, colors, alphas, ratios);
     return cast null;
   }
 
   public static function createGlRenderEffectPipeline(_state:GlRenderState, ?options:RenderEffectPipelineOptions):GlRenderEffectPipeline {
-    return cast _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectPipeline.createGlRenderEffectPipeline, cast ([_state, options] : Array<Dynamic>));
+    return cast Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectPipeline.createGlRenderEffectPipeline(_state, options);
     return cast null;
   }
 
@@ -453,55 +453,55 @@ class EffectsGl {
   public static final defaultGlWhiteBalanceEffectRunner:GlRenderEffectRunner = Facade_EffectsGl_flighthq_effectsGl_GlWhiteBalanceEffect.defaultGlWhiteBalanceEffectRunner;
 
   public static function destroyGlRenderEffectPipeline(state:GlRenderState, pipeline:GlRenderEffectPipeline):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectPipeline.destroyGlRenderEffectPipeline, cast ([state, pipeline] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectPipeline.destroyGlRenderEffectPipeline(state, pipeline);
   }
 
   public static function endGlRenderEffectPipeline(state:GlRenderState, pipeline:GlRenderEffectPipeline, operations:Array<Dynamic>):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectPipeline.endGlRenderEffectPipeline, cast ([state, pipeline, operations] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectPipeline.endGlRenderEffectPipeline(state, pipeline, operations);
   }
 
   public static function getBlendEffectModeIndex(mode:AdvancedBlendMode):Float {
-    return cast _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlBlendEffect.getBlendEffectModeIndex, cast ([mode] : Array<Dynamic>));
+    return cast Facade_EffectsGl_flighthq_effectsGl_GlBlendEffect.getBlendEffectModeIndex(mode);
     return cast null;
   }
 
   public static function getCompositeEffectOperatorIndex(operator_:CompositeOperator):Float {
-    return cast _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlCompositeEffect.getCompositeEffectOperatorIndex, cast ([operator_] : Array<Dynamic>));
+    return cast Facade_EffectsGl_flighthq_effectsGl_GlCompositeEffect.getCompositeEffectOperatorIndex(operator_);
     return cast null;
   }
 
   public static function getGlBlendEffectBackdrop(state:GlRenderState, backdropKey:Null<String>):Null<Dynamic> {
-    return cast _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlBlendEffect.getGlBlendEffectBackdrop, cast ([state, backdropKey] : Array<Dynamic>));
+    return cast Facade_EffectsGl_flighthq_effectsGl_GlBlendEffect.getGlBlendEffectBackdrop(state, backdropKey);
     return cast null;
   }
 
   public static function getGlCustomShaderSource(state:GlRenderState, shaderKey:String):Null<String> {
-    return cast _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlCustomShaderEffect.getGlCustomShaderSource, cast ([state, shaderKey] : Array<Dynamic>));
+    return cast Facade_EffectsGl_flighthq_effectsGl_GlCustomShaderEffect.getGlCustomShaderSource(state, shaderKey);
     return cast null;
   }
 
   public static function getGlEffectProgram(state:GlRenderState, key:String, fragmentSource:String):GlFullscreenProgram {
-    return cast _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlEffectProgramCache.getGlEffectProgram, cast ([state, key, fragmentSource] : Array<Dynamic>));
+    return cast Facade_EffectsGl_flighthq_effectsGl_GlEffectProgramCache.getGlEffectProgram(state, key, fragmentSource);
     return cast null;
   }
 
   public static function getGlEffectUniformLocation(state:GlRenderState, program:GlFullscreenProgram, name:String):Null<Dynamic> {
-    return cast _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlEffectProgramCache.getGlEffectUniformLocation, cast ([state, program, name] : Array<Dynamic>));
+    return cast Facade_EffectsGl_flighthq_effectsGl_GlEffectProgramCache.getGlEffectUniformLocation(state, program, name);
     return cast null;
   }
 
   public static function getGlRenderEffectKinds():Array<String> {
-    return cast _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.getGlRenderEffectKinds, cast ([] : Array<Dynamic>));
+    return cast Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.getGlRenderEffectKinds();
     return cast null;
   }
 
   public static function getGlRenderEffectRunner(state:GlRenderState, kind:String):Null<GlRenderEffectRunner> {
-    return cast _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistry.getGlRenderEffectRunner, cast ([state, kind] : Array<Dynamic>));
+    return cast Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistry.getGlRenderEffectRunner(state, kind);
     return cast null;
   }
 
   public static function hasGlRenderEffectRunner(state:GlRenderState, kind:String):Bool {
-    return cast _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistry.hasGlRenderEffectRunner, cast ([state, kind] : Array<Dynamic>));
+    return cast Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistry.hasGlRenderEffectRunner(state, kind);
     return cast null;
   }
 
@@ -510,67 +510,67 @@ class EffectsGl {
   public static final MAX_MEDIAN_EFFECT_GL_RADIUS:Dynamic = Facade_EffectsGl_flighthq_effectsGl_GlMedianEffect.MAX_MEDIAN_EFFECT_GL_RADIUS;
 
   public static function registerAntialiasingGlRenderEffects(state:GlRenderState):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerAntialiasingGlRenderEffects, cast ([state] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerAntialiasingGlRenderEffects(state);
   }
 
   public static function registerBloomGlRenderEffects(state:GlRenderState):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerBloomGlRenderEffects, cast ([state] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerBloomGlRenderEffects(state);
   }
 
   public static function registerBlurGlRenderEffects(state:GlRenderState):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerBlurGlRenderEffects, cast ([state] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerBlurGlRenderEffects(state);
   }
 
   public static function registerColorGlRenderEffects(state:GlRenderState):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerColorGlRenderEffects, cast ([state] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerColorGlRenderEffects(state);
   }
 
   public static function registerColorGradeGlRenderEffects(state:GlRenderState):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerColorGradeGlRenderEffects, cast ([state] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerColorGradeGlRenderEffects(state);
   }
 
   public static function registerCompositeGlRenderEffects(state:GlRenderState):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerCompositeGlRenderEffects, cast ([state] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerCompositeGlRenderEffects(state);
   }
 
   public static function registerCustomShaderGlRenderEffect(state:GlRenderState):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerCustomShaderGlRenderEffect, cast ([state] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerCustomShaderGlRenderEffect(state);
   }
 
   public static function registerDefaultGlRenderEffects(state:GlRenderState):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerDefaultGlRenderEffects, cast ([state] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerDefaultGlRenderEffects(state);
   }
 
   public static function registerGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String, texture:Dynamic):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlBlendEffect.registerGlBlendEffectBackdrop, cast ([state, backdropKey, texture] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlBlendEffect.registerGlBlendEffectBackdrop(state, backdropKey, texture);
   }
 
   public static function registerGlCustomShaderSource(state:GlRenderState, shaderKey:String, fragmentSource:String):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlCustomShaderEffect.registerGlCustomShaderSource, cast ([state, shaderKey, fragmentSource] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlCustomShaderEffect.registerGlCustomShaderSource(state, shaderKey, fragmentSource);
   }
 
   public static function registerGlRenderEffect(state:GlRenderState, kind:String, runner:GlRenderEffectRunner):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistry.registerGlRenderEffect, cast ([state, kind, runner] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistry.registerGlRenderEffect(state, kind, runner);
   }
 
   public static function registerScreenSpaceGlRenderEffects(state:GlRenderState):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerScreenSpaceGlRenderEffects, cast ([state] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerScreenSpaceGlRenderEffects(state);
   }
 
   public static function registerStandardGlRenderEffects(state:GlRenderState):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerStandardGlRenderEffects, cast ([state] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerStandardGlRenderEffects(state);
   }
 
   public static function registerStylizeGlRenderEffects(state:GlRenderState):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerStylizeGlRenderEffects, cast ([state] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerStylizeGlRenderEffects(state);
   }
 
   public static function setGlRenderEffectVelocityTexture(pipeline:GlRenderEffectPipeline, texture:Null<Dynamic>):Void {
-    _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectPipeline.setGlRenderEffectVelocityTexture, cast ([pipeline, texture] : Array<Dynamic>));
+    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectPipeline.setGlRenderEffectVelocityTexture(pipeline, texture);
   }
 
   public static function unregisterGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String):Bool {
-    return cast _Runtime.callValue(Facade_EffectsGl_flighthq_effectsGl_GlBlendEffect.unregisterGlBlendEffectBackdrop, cast ([state, backdropKey] : Array<Dynamic>));
+    return cast Facade_EffectsGl_flighthq_effectsGl_GlBlendEffect.unregisterGlBlendEffectBackdrop(state, backdropKey);
     return cast null;
   }
 }

@@ -19,62 +19,62 @@ import flighthq.types.SceneNode;
 
 class SceneFormats {
   public static function createSceneFrom3ds(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>):Scene {
-    return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_ThreeDsParse.createSceneFrom3ds, cast ([bytes, warnings] : Array<Dynamic>));
+    return cast Facade_SceneFormats_flighthq_sceneFormats_ThreeDsParse.createSceneFrom3ds(bytes, warnings);
     return cast null;
   }
 
   public static function createSceneFromAwd(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>):Scene {
-    return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_AwdParse.createSceneFromAwd, cast ([bytes, warnings] : Array<Dynamic>));
+    return cast Facade_SceneFormats_flighthq_sceneFormats_AwdParse.createSceneFromAwd(bytes, warnings);
     return cast null;
   }
 
   public static function createSceneFromGlb(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>, ?options:GltfImportOptions):Scene {
-    return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_GltfParse.createSceneFromGlb, cast ([bytes, warnings, options] : Array<Dynamic>));
+    return cast Facade_SceneFormats_flighthq_sceneFormats_GltfParse.createSceneFromGlb(bytes, warnings, options);
     return cast null;
   }
 
   public static function createSceneFromGltf(source:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Scene {
-    return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_GltfParse.createSceneFromGltf, cast ([source, warnings, options] : Array<Dynamic>));
+    return cast Facade_SceneFormats_flighthq_sceneFormats_GltfParse.createSceneFromGltf(source, warnings, options);
     return cast null;
   }
 
   public static function createSceneFromMd2(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>):Scene {
-    return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_Md2Parse.createSceneFromMd2, cast ([bytes, warnings] : Array<Dynamic>));
+    return cast Facade_SceneFormats_flighthq_sceneFormats_Md2Parse.createSceneFromMd2(bytes, warnings);
     return cast null;
   }
 
   public static function createSceneFromMd5Mesh(source:String, ?warnings:Array<String>):Scene {
-    return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_Md5Parse.createSceneFromMd5Mesh, cast ([source, warnings] : Array<Dynamic>));
+    return cast Facade_SceneFormats_flighthq_sceneFormats_Md5Parse.createSceneFromMd5Mesh(source, warnings);
     return cast null;
   }
 
   public static function createSceneFromObj(source:String, ?materials:ObjMaterialLibrary, ?warnings:Array<String>):Scene {
-    return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_ObjParse.createSceneFromObj, cast ([source, materials, warnings] : Array<Dynamic>));
+    return cast Facade_SceneFormats_flighthq_sceneFormats_ObjParse.createSceneFromObj(source, materials, warnings);
     return cast null;
   }
 
   public static function createScenesFromGlb(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>, ?options:GltfImportOptions):Array<Scene> {
-    return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_GltfParse.createScenesFromGlb, cast ([bytes, warnings, options] : Array<Dynamic>));
+    return cast Facade_SceneFormats_flighthq_sceneFormats_GltfParse.createScenesFromGlb(bytes, warnings, options);
     return cast null;
   }
 
   public static function createScenesFromGltf(source:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Array<Scene> {
-    return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_GltfParse.createScenesFromGltf, cast ([source, warnings, options] : Array<Dynamic>));
+    return cast Facade_SceneFormats_flighthq_sceneFormats_GltfParse.createScenesFromGltf(source, warnings, options);
     return cast null;
   }
 
   public static function parseAwdSkeletonAnimations(bytes:flighthq._internal._UInt8Array, joints:Array<SceneNode>, ?warnings:Array<String>):Dynamic {
-    return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_AwdParse.parseAwdSkeletonAnimations, cast ([bytes, joints, warnings] : Array<Dynamic>));
+    return cast Facade_SceneFormats_flighthq_sceneFormats_AwdParse.parseAwdSkeletonAnimations(bytes, joints, warnings);
     return cast null;
   }
 
   public static function parseMd5Anim(source:String, joints:Array<SceneNode>, ?warnings:Array<String>):Null<AnimationClip> {
-    return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_Md5AnimParse.parseMd5Anim, cast ([source, joints, warnings] : Array<Dynamic>));
+    return cast Facade_SceneFormats_flighthq_sceneFormats_Md5AnimParse.parseMd5Anim(source, joints, warnings);
     return cast null;
   }
 
   public static function parseObjMaterialLibrary(source:String, ?warnings:Array<String>):ObjMaterialLibrary {
-    return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_MtlParse.parseObjMaterialLibrary, cast ([source, warnings] : Array<Dynamic>));
+    return cast Facade_SceneFormats_flighthq_sceneFormats_MtlParse.parseObjMaterialLibrary(source, warnings);
     return cast null;
   }
 }

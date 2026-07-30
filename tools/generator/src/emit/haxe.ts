@@ -2243,6 +2243,18 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
   if (expression.callee.kind === 'identifier' && currentDirectFunctions.has(expression.callee.name)) {
     return `${currentModuleName}.${safeName(expression.callee.name)}(cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
   }
+  if (expression.direct) {
+    if (
+      expression.callee.kind !== 'identifier' ||
+      expression.optional ||
+      expression.haxeRestIndex !== undefined ||
+      expression.packedVariadicRestIndex !== undefined ||
+      expression.arguments.some((argument) => argument.kind === 'spread')
+    ) {
+      throw new Error(`Invalid direct call: ${currentSourceIdentity}`);
+    }
+    return `${emitExpression(expression.callee)}(${expression.arguments.map(emitExpression).join(', ')})`;
+  }
   if (expression.callee.kind === 'element' && expression.callee.binding === 'WebGl2Backend') {
     throw new Error('WebGL2 computed method calls have no typed backend endpoint');
   }

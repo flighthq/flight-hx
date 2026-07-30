@@ -30,128 +30,128 @@ import flighthq.types.RandomSource;
 
 class Particles {
   public static function applyParticleCollisions(emitter:ParticleEmitter, state:ParticleEmitterState, colliders:Array<ParticleCollider>):Void {
-    _Runtime.callValue(Facade_Particles_flighthq_particles_ApplyParticleCollisions.applyParticleCollisions, cast ([emitter, state, colliders] : Array<Dynamic>));
+    Facade_Particles_flighthq_particles_ApplyParticleCollisions.applyParticleCollisions(emitter, state, colliders);
   }
 
   public static function applyParticleForces(emitter:ParticleEmitter, state:ParticleEmitterState, forces:Array<ParticleForce>, deltaTime:Float):Void {
-    _Runtime.callValue(Facade_Particles_flighthq_particles_ApplyParticleForces.applyParticleForces, cast ([emitter, state, forces, deltaTime] : Array<Dynamic>));
+    Facade_Particles_flighthq_particles_ApplyParticleForces.applyParticleForces(emitter, state, forces, deltaTime);
   }
 
   public static function applyParticleObjectCollisions(objects:Array<ParticleObject>, state:ParticleObjectsState, colliders:Array<ParticleCollider>):Void {
-    _Runtime.callValue(Facade_Particles_flighthq_particles_ApplyParticleCollisions.applyParticleObjectCollisions, cast ([objects, state, colliders] : Array<Dynamic>));
+    Facade_Particles_flighthq_particles_ApplyParticleCollisions.applyParticleObjectCollisions(objects, state, colliders);
   }
 
   public static function applyParticleObjectForces(objects:Array<ParticleObject>, state:ParticleObjectsState, forces:Array<ParticleForce>, deltaTime:Float):Void {
-    _Runtime.callValue(Facade_Particles_flighthq_particles_ApplyParticleForces.applyParticleObjectForces, cast ([objects, state, forces, deltaTime] : Array<Dynamic>));
+    Facade_Particles_flighthq_particles_ApplyParticleForces.applyParticleObjectForces(objects, state, forces, deltaTime);
   }
 
   public static function buildParticleColorCurve(f:Dynamic, ?samples:Dynamic):Array<Float> {
-    return cast _Runtime.callValue(Facade_Particles_flighthq_particles_Curve.buildParticleColorCurve, cast ([f, samples] : Array<Dynamic>));
+    return cast Facade_Particles_flighthq_particles_Curve.buildParticleColorCurve(f, samples);
     return cast null;
   }
 
   public static function buildParticleCurve(f:Dynamic, ?samples:Dynamic):Array<Float> {
-    return cast _Runtime.callValue(Facade_Particles_flighthq_particles_Curve.buildParticleCurve, cast ([f, samples] : Array<Dynamic>));
+    return cast Facade_Particles_flighthq_particles_Curve.buildParticleCurve(f, samples);
     return cast null;
   }
 
   public static function createParticleEmitterConfig(?config:Dynamic):ParticleEmitterConfig {
-    return cast _Runtime.callValue(Facade_Particles_flighthq_particles_ParticleEmitterConfig.createParticleEmitterConfig, cast ([config] : Array<Dynamic>));
+    return cast Facade_Particles_flighthq_particles_ParticleEmitterConfig.createParticleEmitterConfig(config);
     return cast null;
   }
 
   public static function createParticleEmitterSignals():ParticleEmitterSignals {
-    return cast _Runtime.callValue(Facade_Particles_flighthq_particles_ParticleEmitterSignals.createParticleEmitterSignals, cast ([] : Array<Dynamic>));
+    return cast Facade_Particles_flighthq_particles_ParticleEmitterSignals.createParticleEmitterSignals();
     return cast null;
   }
 
   public static function createParticleEmitterState(?random:RandomSource):ParticleEmitterState {
-    return cast _Runtime.callValue(Facade_Particles_flighthq_particles_ParticleEmitterState.createParticleEmitterState, cast ([random] : Array<Dynamic>));
+    return cast Facade_Particles_flighthq_particles_ParticleEmitterState.createParticleEmitterState(random);
     return cast null;
   }
 
   public static function createParticleObjectsState(capacity:Float, ?random:RandomSource):ParticleObjectsState {
-    return cast _Runtime.callValue(Facade_Particles_flighthq_particles_ParticleObjectsState.createParticleObjectsState, cast ([capacity, random] : Array<Dynamic>));
+    return cast Facade_Particles_flighthq_particles_ParticleObjectsState.createParticleObjectsState(capacity, random);
     return cast null;
   }
 
   public static function enableParticleEmitterSignals(state:Dynamic):ParticleEmitterSignals {
-    return cast _Runtime.callValue(Facade_Particles_flighthq_particles_ParticleEmitterSignals.enableParticleEmitterSignals, cast ([state] : Array<Dynamic>));
+    return cast Facade_Particles_flighthq_particles_ParticleEmitterSignals.enableParticleEmitterSignals(state);
     return cast null;
   }
 
   public static function ensureParticleEmitterStateCapacity(state:ParticleEmitterState, capacity:Float, hasColorVariance:Bool):Void {
-    _Runtime.callValue(Facade_Particles_flighthq_particles_ParticleEmitterState.ensureParticleEmitterStateCapacity, cast ([state, capacity, hasColorVariance] : Array<Dynamic>));
+    Facade_Particles_flighthq_particles_ParticleEmitterState.ensureParticleEmitterStateCapacity(state, capacity, hasColorVariance);
   }
 
   public static function ensureParticleObjectsStateCapacity(state:ParticleObjectsState, capacity:Float):Void {
-    _Runtime.callValue(Facade_Particles_flighthq_particles_ParticleObjectsState.ensureParticleObjectsStateCapacity, cast ([state, capacity] : Array<Dynamic>));
+    Facade_Particles_flighthq_particles_ParticleObjectsState.ensureParticleObjectsStateCapacity(state, capacity);
   }
 
   public static function getParticleEmitterSignals(state:Dynamic):Null<ParticleEmitterSignals> {
-    return cast _Runtime.callValue(Facade_Particles_flighthq_particles_ParticleEmitterSignals.getParticleEmitterSignals, cast ([state] : Array<Dynamic>));
+    return cast Facade_Particles_flighthq_particles_ParticleEmitterSignals.getParticleEmitterSignals(state);
     return cast null;
   }
 
   public static function isParticleObjectsComplete(objects:Array<ParticleObject>, state:ParticleObjectsState, config:ParticleEmitterConfig):Bool {
-    return cast _Runtime.callValue(Facade_Particles_flighthq_particles_UpdateParticleObjects.isParticleObjectsComplete, cast ([objects, state, config] : Array<Dynamic>));
+    return cast Facade_Particles_flighthq_particles_UpdateParticleObjects.isParticleObjectsComplete(objects, state, config);
     return cast null;
   }
 
   public static function lerpHsvDirect(out:Dynamic, offset:Float, r0:Float, g0:Float, b0:Float, r1:Float, g1:Float, b1:Float, t:Float):Void {
-    _Runtime.callValue(Facade_Particles_flighthq_particles_Curve.lerpHsvDirect, cast ([out, offset, r0, g0, b0, r1, g1, b1, t] : Array<Dynamic>));
+    Facade_Particles_flighthq_particles_Curve.lerpHsvDirect(out, offset, r0, g0, b0, r1, g1, b1, t);
   }
 
   public static function lerpHsvInPlace(colorsOut:Dynamic, offset:Float, birth:flighthq._internal._Float32Array, death:flighthq._internal._Float32Array, t:Float):Void {
-    _Runtime.callValue(Facade_Particles_flighthq_particles_Curve.lerpHsvInPlace, cast ([colorsOut, offset, birth, death, t] : Array<Dynamic>));
+    Facade_Particles_flighthq_particles_Curve.lerpHsvInPlace(colorsOut, offset, birth, death, t);
   }
 
   public static function normalizeParticleEmitterConfig(?config:Dynamic):ParticleEmitterConfig {
-    return cast _Runtime.callValue(Facade_Particles_flighthq_particles_ValidateParticleEmitterConfig.normalizeParticleEmitterConfig, cast ([config] : Array<Dynamic>));
+    return cast Facade_Particles_flighthq_particles_ValidateParticleEmitterConfig.normalizeParticleEmitterConfig(config);
     return cast null;
   }
 
   public static final PARTICLE_VELOCITY_STRIDE:Dynamic = Facade_Particles_flighthq_particles_ParticleEmitterState.PARTICLE_VELOCITY_STRIDE;
 
   public static function particleColorCurveFromKeyframes(keys:Array<ColorKeyframe>, ?samples:Dynamic):Array<Float> {
-    return cast _Runtime.callValue(Facade_Particles_flighthq_particles_Curve.particleColorCurveFromKeyframes, cast ([keys, samples] : Array<Dynamic>));
+    return cast Facade_Particles_flighthq_particles_Curve.particleColorCurveFromKeyframes(keys, samples);
     return cast null;
   }
 
   public static function particleColorCurveToKeyframes(lut:ParticleCurve):Array<ColorKeyframe> {
-    return cast _Runtime.callValue(Facade_Particles_flighthq_particles_Curve.particleColorCurveToKeyframes, cast ([lut] : Array<Dynamic>));
+    return cast Facade_Particles_flighthq_particles_Curve.particleColorCurveToKeyframes(lut);
     return cast null;
   }
 
   public static function particleCurveFromKeyframes(keys:Array<CurveKeyframe>, ?samples:Dynamic):Array<Float> {
-    return cast _Runtime.callValue(Facade_Particles_flighthq_particles_Curve.particleCurveFromKeyframes, cast ([keys, samples] : Array<Dynamic>));
+    return cast Facade_Particles_flighthq_particles_Curve.particleCurveFromKeyframes(keys, samples);
     return cast null;
   }
 
   public static function particleCurveToKeyframes(lut:ParticleCurve):Array<CurveKeyframe> {
-    return cast _Runtime.callValue(Facade_Particles_flighthq_particles_Curve.particleCurveToKeyframes, cast ([lut] : Array<Dynamic>));
+    return cast Facade_Particles_flighthq_particles_Curve.particleCurveToKeyframes(lut);
     return cast null;
   }
 
   public static function sampleParticleColorCurve(out:{  }, offset:Float, lut:ParticleCurve, t:Float):Void {
-    _Runtime.callValue(Facade_Particles_flighthq_particles_Curve.sampleParticleColorCurve, cast ([out, offset, lut, t] : Array<Dynamic>));
+    Facade_Particles_flighthq_particles_Curve.sampleParticleColorCurve(out, offset, lut, t);
   }
 
   public static function sampleParticleCurve(lut:ParticleCurve, t:Float):Float {
-    return cast _Runtime.callValue(Facade_Particles_flighthq_particles_Curve.sampleParticleCurve, cast ([lut, t] : Array<Dynamic>));
+    return cast Facade_Particles_flighthq_particles_Curve.sampleParticleCurve(lut, t);
     return cast null;
   }
 
   public static function stepParticleObjects(objects:Array<ParticleObject>, state:ParticleObjectsState, config:ParticleEmitterConfig, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?updateOptions:ParticleObjectsUpdateOptions):Void {
-    _Runtime.callValue(Facade_Particles_flighthq_particles_StepParticleObjects.stepParticleObjects, cast ([objects, state, config, deltaTime, forces, colliders, updateOptions] : Array<Dynamic>));
+    Facade_Particles_flighthq_particles_StepParticleObjects.stepParticleObjects(objects, state, config, deltaTime, forces, colliders, updateOptions);
   }
 
   public static function updateParticleObjects(objects:Array<ParticleObject>, state:ParticleObjectsState, config:ParticleEmitterConfig, deltaTime:Float, ?options:ParticleObjectsUpdateOptions):Void {
-    _Runtime.callValue(Facade_Particles_flighthq_particles_UpdateParticleObjects.updateParticleObjects, cast ([objects, state, config, deltaTime, options] : Array<Dynamic>));
+    Facade_Particles_flighthq_particles_UpdateParticleObjects.updateParticleObjects(objects, state, config, deltaTime, options);
   }
 
   public static function validateParticleEmitterConfig(config:ParticleEmitterConfig):Array<ParticleConfigIssue> {
-    return cast _Runtime.callValue(Facade_Particles_flighthq_particles_ValidateParticleEmitterConfig.validateParticleEmitterConfig, cast ([config] : Array<Dynamic>));
+    return cast Facade_Particles_flighthq_particles_ValidateParticleEmitterConfig.validateParticleEmitterConfig(config);
     return cast null;
   }
 }
