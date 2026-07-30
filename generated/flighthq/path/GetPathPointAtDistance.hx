@@ -35,26 +35,26 @@ class GetPathPointAtDistance {
   public static function samplePathPoint__getPathPointAtDistance(contours:Array<Array<Float>>, distance:Float, out:Vector2Like):Bool {
     var remaining:Dynamic = cast _Runtime.UNDEFINED;
     var last:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(contours, 'length'), 0.0))) { return cast false; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(contours, 'length'), 0.0) : Bool)) { return cast false; }
     remaining = distance;
     {
       var ci:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(ci, _Runtime.field(contours, 'length'), '<'))) {
+      while ((cast ((cast ci : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
         var contour:Dynamic = _Runtime.getIndex(contours, ci);
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.field(contour, 'length'), 2.0, '<'))) { ci++; continue; }
-        if (_Runtime.truthy(_Runtime.compare(remaining, 0.0, '<='))) {
+        if ((cast ((cast _Runtime.field(contour, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { ci++; continue; }
+        if ((cast ((cast remaining : Float) <= (cast 0.0 : Float)) : Bool)) {
           (out.x = cast (_Runtime.getIndex(contour, 0.0) : Dynamic));
           (out.y = cast (_Runtime.getIndex(contour, 1.0) : Dynamic));
           return cast true;
         }
         {
           var i:Dynamic = 2.0;
-          while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(contour, 'length'), '<'))) {
+          while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
             var dx:Dynamic = (_Runtime.getIndex(contour, i) - _Runtime.getIndex(contour, (i - 2.0)));
             var dy:Dynamic = (_Runtime.getIndex(contour, (i + 1.0)) - _Runtime.getIndex(contour, (i - 1.0)));
             var segLen:Dynamic = HxMath.sqrt(((dx * dx) + (dy * dy)));
-            if (_Runtime.truthy(_Runtime.compare(remaining, segLen, '<='))) {
-              var t:Dynamic = _Runtime.select(_Runtime.compare(segLen, 0.0, '>'), function():Dynamic return cast (remaining / segLen), function():Dynamic return cast 0.0);
+            if ((cast ((cast remaining : Float) <= (cast segLen : Float)) : Bool)) {
+              var t:Dynamic = ((cast ((cast segLen : Float) > (cast 0.0 : Float)) : Bool) ? (cast (remaining / segLen) : Dynamic) : (cast 0.0 : Dynamic));
               (out.x = cast ((_Runtime.getIndex(contour, (i - 2.0)) + (t * dx)) : Dynamic));
               (out.y = cast ((_Runtime.getIndex(contour, (i - 1.0)) + (t * dy)) : Dynamic));
               return cast true;
@@ -77,7 +77,7 @@ class GetPathPointAtDistance {
     var remaining:Dynamic = cast _Runtime.UNDEFINED;
     var lastTx:Dynamic = cast _Runtime.UNDEFINED;
     var lastTy:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(contours, 'length'), 0.0))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(contours, 'length'), 0.0) : Bool)) {
       (out.x = cast (1.0 : Dynamic));
       (out.y = cast (0.0 : Dynamic));
       return cast false;
@@ -87,21 +87,21 @@ class GetPathPointAtDistance {
     lastTy = 0.0;
     {
       var ci:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(ci, _Runtime.field(contours, 'length'), '<'))) {
+      while ((cast ((cast ci : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
         var contour:Dynamic = _Runtime.getIndex(contours, ci);
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.field(contour, 'length'), 4.0, '<'))) { ci++; continue; }
+        if ((cast ((cast _Runtime.field(contour, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { ci++; continue; }
         {
           var i:Dynamic = 2.0;
-          while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(contour, 'length'), '<'))) {
+          while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
             var dx:Dynamic = (_Runtime.getIndex(contour, i) - _Runtime.getIndex(contour, (i - 2.0)));
             var dy:Dynamic = (_Runtime.getIndex(contour, (i + 1.0)) - _Runtime.getIndex(contour, (i - 1.0)));
             var segLen:Dynamic = HxMath.sqrt(((dx * dx) + (dy * dy)));
-            if (_Runtime.truthy(_Runtime.compare(segLen, 0.0, '>'))) {
+            if ((cast ((cast segLen : Float) > (cast 0.0 : Float)) : Bool)) {
               var invLen:Dynamic = (1.0 / segLen);
               (lastTx = cast ((dx * invLen) : Dynamic));
               (lastTy = cast ((dy * invLen) : Dynamic));
             }
-            if (_Runtime.truthy(_Runtime.compare(remaining, segLen, '<='))) {
+            if ((cast ((cast remaining : Float) <= (cast segLen : Float)) : Bool)) {
               (out.x = cast (lastTx : Dynamic));
               (out.y = cast (lastTy : Dynamic));
               return cast true;

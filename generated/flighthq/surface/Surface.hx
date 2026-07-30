@@ -189,13 +189,13 @@ class Surface {
   public static function convertSurfaceAlphaType(out:flighthq.types.Surface, target:AlphaType):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var len:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(out, 'alphaType'), target))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(out, 'alphaType'), target) : Bool)) { return; }
     data = _Runtime.field(out, 'data');
     len = ((_Runtime.field(out, 'width') * _Runtime.field(out, 'height')) * 4.0);
-    if (_Runtime.truthy(_Runtime.strictEquals(target, 'premultiplied'))) {
+    if ((cast _Runtime.strictEquals(target, 'premultiplied') : Bool)) {
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, len, '<'))) {
+        while ((cast ((cast i : Float) < (cast len : Float)) : Bool)) {
           var a:Dynamic = (_Runtime.getIndex(data, (i + 3.0)) / 255.0);
           _Runtime.setIndex(data, i, HxMath.round((_Runtime.getIndex(data, i) * a)));
           _Runtime.setIndex(data, (i + 1.0), HxMath.round((_Runtime.getIndex(data, (i + 1.0)) * a)));
@@ -206,9 +206,9 @@ class Surface {
     } else {
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, len, '<'))) {
+        while ((cast ((cast i : Float) < (cast len : Float)) : Bool)) {
           var a:Dynamic = _Runtime.getIndex(data, (i + 3.0));
-          if (_Runtime.truthy(_Runtime.strictEquals(a, 0.0))) {
+          if ((cast _Runtime.strictEquals(a, 0.0) : Bool)) {
             _Runtime.setIndex(data, i, 0.0);
             _Runtime.setIndex(data, (i + 1.0), 0.0);
             _Runtime.setIndex(data, (i + 2.0), 0.0);
@@ -254,14 +254,14 @@ class Surface {
   public static function createSurface(width:Float, height:Float, color:Float = 0.0):flighthq.types.Surface {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     data = new flighthq._internal._UInt8ClampedArray(((width * height) * 4.0));
-    if (_Runtime.truthy(!_Runtime.strictEquals(color, 0.0))) {
+    if ((cast !_Runtime.strictEquals(color, 0.0) : Bool)) {
       var r:Dynamic = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255);
       var g:Dynamic = (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255);
       var b:Dynamic = (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255);
       var a:Dynamic = (_Runtime.toInt32(color) & 255);
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(data, 'length'), '<'))) {
+        while ((cast ((cast i : Float) < (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
           _Runtime.setIndex(data, i, r);
           _Runtime.setIndex(data, (i + 1.0), g);
           _Runtime.setIndex(data, (i + 2.0), b);

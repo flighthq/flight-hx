@@ -17,7 +17,7 @@ class CaptureComparison {
     var fb:Dynamic = cast _Runtime.UNDEFINED;
     fa = _Runtime.callValue(parseSurfaceFingerprint, cast ([a] : Array<Dynamic>));
     fb = _Runtime.callValue(parseSurfaceFingerprint, cast ([b] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(fa, null), function():Dynamic return cast _Runtime.strictEquals(fb, null)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(fa, 'gridSize'), _Runtime.field(fb, 'gridSize'))))) { return cast HxMath.POSITIVE_INFINITY; }
+    if ((cast ((cast ((cast _Runtime.strictEquals(fa, null) : Bool) || (cast _Runtime.strictEquals(fb, null) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(fa, 'gridSize'), _Runtime.field(fb, 'gridSize')) : Bool)) : Bool)) { return cast HxMath.POSITIVE_INFINITY; }
     return cast _Runtime.callValue(compareSurfaceFingerprints, cast ([fa, fb] : Array<Dynamic>));
     return cast null;
   }
@@ -25,14 +25,14 @@ class CaptureComparison {
   public static function evaluateCaptureParity(a:String, b:String, tolerance:Dynamic = 15.0):CaptureCheckResult {
     var difference:Dynamic = cast _Runtime.UNDEFINED;
     difference = _Runtime.callValue(compareCaptureFingerprints, cast ([a, b] : Array<Dynamic>));
-    return cast { pass: _Runtime.compare(difference, tolerance, '<='), difference: difference, tolerance: tolerance };
+    return cast { pass: ((cast difference : Float) <= (cast tolerance : Float)), difference: difference, tolerance: tolerance };
     return cast null;
   }
 
   public static function evaluateCaptureRegression(fingerprint:String, baselineFingerprint:String, tolerance:Dynamic = 5.0):CaptureCheckResult {
     var difference:Dynamic = cast _Runtime.UNDEFINED;
     difference = _Runtime.callValue(compareCaptureFingerprints, cast ([fingerprint, baselineFingerprint] : Array<Dynamic>));
-    return cast { pass: _Runtime.compare(difference, tolerance, '<='), difference: difference, tolerance: tolerance };
+    return cast { pass: ((cast difference : Float) <= (cast tolerance : Float)), difference: difference, tolerance: tolerance };
     return cast null;
   }
 }

@@ -31,13 +31,13 @@ class StrokePath {
     halfWidth = (width / 2.0);
     result = { commands: cast ([] : Array<Dynamic>), data: cast ([] : Array<Dynamic>), winding: 'nonZero' };
     subpaths = _Runtime.callValue(StrokePath.decodeSubpaths__strokePath, cast ([path, tolerance] : Array<Dynamic>));
-    dash = _Runtime.select(_Runtime.andValue(_Runtime.field(style, 'dash'), function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.field(style, 'dash'), 'length'), 0.0, '>')), function():Dynamic return cast _Runtime.field(style, 'dash'), function():Dynamic return cast null);
+    dash = _Runtime.select(_Runtime.andValue(_Runtime.field(style, 'dash'), function():Dynamic return cast ((cast _Runtime.field(_Runtime.field(style, 'dash'), 'length') : Float) > (cast 0.0 : Float))), function():Dynamic return cast _Runtime.field(style, 'dash'), function():Dynamic return cast null);
     dashOffset = _Runtime.coalesce(_Runtime.field(style, 'dashOffset'), function():Dynamic return cast 0.0);
     for (subpath in _Runtime.iterable(subpaths)) {
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(subpath, 'points'), 'length'), 2.0, '<'))) { continue; }
+      if ((cast ((cast _Runtime.field(_Runtime.field(subpath, 'points'), 'length') : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
       var segments:Dynamic = _Runtime.select(dash, function():Dynamic return cast _Runtime.callValue(StrokePath.applyDash__strokePath, cast ([_Runtime.field(subpath, 'points'), _Runtime.field(subpath, 'closed'), dash, dashOffset] : Array<Dynamic>)), function():Dynamic return cast cast ([{ points: _Runtime.field(subpath, 'points'), closed: _Runtime.field(subpath, 'closed') }] : Array<Dynamic>));
       for (seg in _Runtime.iterable(segments)) {
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(seg, 'points'), 'length'), 2.0, '<'))) { continue; }
+        if ((cast ((cast _Runtime.field(_Runtime.field(seg, 'points'), 'length') : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
         _Runtime.callValue(StrokePath.strokeSubpath__strokePath, cast ([_Runtime.field(seg, 'points'), _Runtime.field(seg, 'closed'), halfWidth, join, cap, miterLimit, result, tolerance] : Array<Dynamic>));
       }
     }
@@ -54,17 +54,17 @@ class StrokePath {
     ratio = HxMath.max(0.0, HxMath.min(1.0, (tolerance / r)));
     n = HxMath.max(4.0, HxMath.ceil((HxMath.PI / HxMath.acos((1.0 - ratio)))));
     delta = (endAngle - startAngle);
-    if (_Runtime.truthy(ccw)) {
-      if (_Runtime.truthy(_Runtime.compare(delta, 0.0, '>'))) { (delta = cast ((delta - (HxMath.PI * 2.0)) : Dynamic)); }
+    if ((cast ccw : Bool)) {
+      if ((cast ((cast delta : Float) > (cast 0.0 : Float)) : Bool)) { (delta = cast ((delta - (HxMath.PI * 2.0)) : Dynamic)); }
     } else {
-      if (_Runtime.truthy(_Runtime.compare(delta, 0.0, '<'))) { (delta = cast ((delta + (HxMath.PI * 2.0)) : Dynamic)); }
+      if ((cast ((cast delta : Float) < (cast 0.0 : Float)) : Bool)) { (delta = cast ((delta + (HxMath.PI * 2.0)) : Dynamic)); }
     }
     steps = HxMath.ceil((HxMath.abs(delta) / ((HxMath.PI * 2.0) / n)));
-    if (_Runtime.truthy(_Runtime.compare(steps, 1.0, '<='))) { return; }
+    if ((cast ((cast steps : Float) <= (cast 1.0 : Float)) : Bool)) { return; }
     stepAngle = (delta / steps);
     {
       var i:Dynamic = 1.0;
-      while (_Runtime.truthy(_Runtime.compare(i, steps, '<'))) {
+      while ((cast ((cast i : Float) < (cast steps : Float)) : Bool)) {
         var angle:Dynamic = (startAngle + (i * stepAngle));
         _Runtime.pushMany(out, cast ([(cx + (HxMath.cos(angle) * r)), (cy + (HxMath.sin(angle) * r))] : Array<Dynamic>));
         i++;
@@ -81,14 +81,14 @@ class StrokePath {
     ly = (py + (ny * halfWidth));
     rx = (px - (nx * halfWidth));
     ry = (py - (ny * halfWidth));
-    if (_Runtime.truthy(_Runtime.strictEquals(cap, 'butt'))) {
+    if ((cast _Runtime.strictEquals(cap, 'butt') : Bool)) {
       _Runtime.pushMany(left, cast ([lx, ly] : Array<Dynamic>));
       _Runtime.pushMany(right, cast ([rx, ry] : Array<Dynamic>));
-    } else { if (_Runtime.truthy(_Runtime.strictEquals(cap, 'square'))) {
+    } else { if ((cast _Runtime.strictEquals(cap, 'square') : Bool)) {
       _Runtime.pushMany(left, cast ([(lx + (edx * halfWidth)), (ly + (edy * halfWidth))] : Array<Dynamic>));
       _Runtime.pushMany(right, cast ([(rx + (edx * halfWidth)), (ry + (edy * halfWidth))] : Array<Dynamic>));
     } else {
-      if (_Runtime.truthy(isStart)) {
+      if ((cast isStart : Bool)) {
         _Runtime.pushMany(left, cast ([lx, ly] : Array<Dynamic>));
         _Runtime.pushMany(right, cast ([rx, ry] : Array<Dynamic>));
         var startAngle:Dynamic = HxMath.atan2(-ny, -nx);
@@ -119,9 +119,9 @@ class StrokePath {
     ly1 = (py + (ny1 * halfWidth));
     rx1 = (px - (nx1 * halfWidth));
     ry1 = (py - (ny1 * halfWidth));
-    if (_Runtime.truthy(_Runtime.strictEquals(join, 'miter'))) {
+    if ((cast _Runtime.strictEquals(join, 'miter') : Bool)) {
       var cross:Dynamic = ((nx0 * ny1) - (ny0 * nx1));
-      if (_Runtime.truthy(_Runtime.compare(HxMath.abs(cross), 1e-8, '<'))) {
+      if ((cast ((cast HxMath.abs(cross) : Float) < (cast 1e-8 : Float)) : Bool)) {
         _Runtime.pushMany(left, cast ([lx0, ly0] : Array<Dynamic>));
         _Runtime.pushMany(right, cast ([rx0, ry0] : Array<Dynamic>));
       } else {
@@ -131,7 +131,7 @@ class StrokePath {
         var mx:Dynamic = (lx0 + (t * nx0));
         var my:Dynamic = (ly0 + (t * ny0));
         var miterLen:Dynamic = HxMath.sqrt((((mx - px) * (mx - px)) + ((my - py) * (my - py))));
-        if (_Runtime.truthy(_Runtime.compare(miterLen, (halfWidth * miterLimit), '<='))) {
+        if ((cast ((cast miterLen : Float) <= (cast (halfWidth * miterLimit) : Float)) : Bool)) {
           _Runtime.pushMany(left, cast ([mx, my] : Array<Dynamic>));
           var rmx:Dynamic = ((px * 2.0) - mx);
           var rmy:Dynamic = ((py * 2.0) - my);
@@ -141,7 +141,7 @@ class StrokePath {
           _Runtime.pushMany(right, cast ([rx0, ry0, rx1, ry1] : Array<Dynamic>));
         }
       }
-    } else { if (_Runtime.truthy(_Runtime.strictEquals(join, 'round'))) {
+    } else { if ((cast _Runtime.strictEquals(join, 'round') : Bool)) {
       _Runtime.pushMany(left, cast ([lx0, ly0] : Array<Dynamic>));
       _Runtime.callValue(StrokePath.addArcPoints__strokePath, cast ([px, py, halfWidth, HxMath.atan2(ny0, nx0), HxMath.atan2(ny1, nx1), true, tolerance, left] : Array<Dynamic>));
       _Runtime.pushMany(left, cast ([lx1, ly1] : Array<Dynamic>));
@@ -164,12 +164,12 @@ class StrokePath {
     var current:Null<Array<Float>> = cast _Runtime.UNDEFINED;
     var n:Dynamic = cast _Runtime.UNDEFINED;
     result = cast ([] : Array<Dynamic>);
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(dash, 'length'), 0.0))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(dash, 'length'), 0.0) : Bool)) {
       _Runtime.callProperty(result, 'push', cast ([{ points: (cast pts : Array<Float>), closed: closed }] : Array<Dynamic>));
       return cast result;
     }
     totalDashLength = _Runtime.reduce(dash, function(s:Dynamic, d:Dynamic) return (s + d), 0.0);
-    if (_Runtime.truthy(_Runtime.compare(totalDashLength, 0.0, '<='))) {
+    if ((cast ((cast totalDashLength : Float) <= (cast 0.0 : Float)) : Bool)) {
       _Runtime.callProperty(result, 'push', cast ([{ points: (cast pts : Array<Float>), closed: closed }] : Array<Dynamic>));
       return cast result;
     }
@@ -181,8 +181,8 @@ class StrokePath {
       var acc:Dynamic = 0.0;
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(dash, 'length'), '<'))) {
-          if (_Runtime.truthy(_Runtime.compare((acc + _Runtime.getIndex(dash, i)), offset, '>'))) {
+        while ((cast ((cast i : Float) < (cast _Runtime.field(dash, 'length') : Float)) : Bool)) {
+          if ((cast ((cast (acc + _Runtime.getIndex(dash, i)) : Float) > (cast offset : Float)) : Bool)) {
             (dashIndex = cast (i : Dynamic));
             (remaining = cast ((_Runtime.getIndex(dash, i) - (offset - acc)) : Dynamic));
             (isOn = cast (_Runtime.strictEquals(_Runtime.fmod(i, 2.0), 0.0) : Dynamic));
@@ -197,7 +197,7 @@ class StrokePath {
     n = (_Runtime.toInt32(_Runtime.field(pts, 'length')) >> 1);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, (n - 1.0), '<'))) {
+      while ((cast ((cast i : Float) < (cast (n - 1.0) : Float)) : Bool)) {
         var x0:Dynamic = _Runtime.getIndex(pts, (i * 2.0));
         var y0:Dynamic = _Runtime.getIndex(pts, ((i * 2.0) + 1.0));
         var x1:Dynamic = _Runtime.getIndex(pts, ((i + 1.0) * 2.0));
@@ -205,37 +205,37 @@ class StrokePath {
         var dx:Dynamic = (x1 - x0);
         var dy:Dynamic = (y1 - y0);
         var segLen:Dynamic = HxMath.sqrt(((dx * dx) + (dy * dy)));
-        if (_Runtime.truthy(_Runtime.andValue(isOn, function():Dynamic return cast _Runtime.strictEquals(current, null)))) {
+        if ((cast ((cast isOn : Bool) && (cast _Runtime.strictEquals(current, null) : Bool)) : Bool)) {
           (current = cast (cast ([x0, y0] : Array<Dynamic>) : Dynamic));
         }
         var consumed:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(consumed, segLen, '<'))) {
+        while ((cast ((cast consumed : Float) < (cast segLen : Float)) : Bool)) {
           var step:Dynamic = HxMath.min(remaining, (segLen - consumed));
           var t:Dynamic = ((consumed + step) / segLen);
           var ix:Dynamic = (x0 + (t * dx));
           var iy:Dynamic = (y0 + (t * dy));
-          if (_Runtime.truthy(isOn)) {
-            if (_Runtime.truthy(_Runtime.strictEquals(current, null))) { (current = cast (cast ([(x0 + ((consumed / segLen) * dx)), (y0 + ((consumed / segLen) * dy))] : Array<Dynamic>) : Dynamic)); }
+          if ((cast isOn : Bool)) {
+            if ((cast _Runtime.strictEquals(current, null) : Bool)) { (current = cast (cast ([(x0 + ((consumed / segLen) * dx)), (y0 + ((consumed / segLen) * dy))] : Array<Dynamic>) : Dynamic)); }
             _Runtime.pushMany(current, cast ([ix, iy] : Array<Dynamic>));
           } else {
-            if (_Runtime.truthy(!_Runtime.strictEquals(current, null))) {
-              if (_Runtime.truthy(_Runtime.compare(_Runtime.field(current, 'length'), 4.0, '>='))) { _Runtime.callProperty(result, 'push', cast ([{ points: current, closed: false }] : Array<Dynamic>)); }
+            if ((cast !_Runtime.strictEquals(current, null) : Bool)) {
+              if ((cast ((cast _Runtime.field(current, 'length') : Float) >= (cast 4.0 : Float)) : Bool)) { _Runtime.callProperty(result, 'push', cast ([{ points: current, closed: false }] : Array<Dynamic>)); }
               (current = cast (null : Dynamic));
             }
-            if (_Runtime.truthy(_Runtime.compare(step, remaining, '>='))) {
+            if ((cast ((cast step : Float) >= (cast remaining : Float)) : Bool)) {
               (current = cast (cast ([ix, iy] : Array<Dynamic>) : Dynamic));
             }
           }
           (consumed = cast ((consumed + step) : Dynamic));
           (remaining = cast ((remaining - step) : Dynamic));
-          if (_Runtime.truthy(_Runtime.compare(remaining, 1e-10, '<='))) {
+          if ((cast ((cast remaining : Float) <= (cast 1e-10 : Float)) : Bool)) {
             (dashIndex = cast (_Runtime.fmod((dashIndex + 1.0), _Runtime.field(dash, 'length')) : Dynamic));
             (remaining = cast (_Runtime.getIndex(dash, dashIndex) : Dynamic));
             (isOn = cast (_Runtime.strictEquals(_Runtime.fmod(dashIndex, 2.0), 0.0) : Dynamic));
-            if (_Runtime.truthy(_Runtime.andValue(isOn, function():Dynamic return cast _Runtime.strictEquals(current, null)))) {
+            if ((cast ((cast isOn : Bool) && (cast _Runtime.strictEquals(current, null) : Bool)) : Bool)) {
               (current = cast (cast ([ix, iy] : Array<Dynamic>) : Dynamic));
-            } else { if (_Runtime.truthy(_Runtime.andValue(!_Runtime.truthy(isOn), function():Dynamic return cast !_Runtime.strictEquals(current, null)))) {
-              if (_Runtime.truthy(_Runtime.compare(_Runtime.field(current, 'length'), 4.0, '>='))) { _Runtime.callProperty(result, 'push', cast ([{ points: current, closed: false }] : Array<Dynamic>)); }
+            } else { if ((cast ((cast !(cast isOn : Bool) : Bool) && (cast !_Runtime.strictEquals(current, null) : Bool)) : Bool)) {
+              if ((cast ((cast _Runtime.field(current, 'length') : Float) >= (cast 4.0 : Float)) : Bool)) { _Runtime.callProperty(result, 'push', cast ([{ points: current, closed: false }] : Array<Dynamic>)); }
               (current = cast (null : Dynamic));
             } }
           }
@@ -243,7 +243,7 @@ class StrokePath {
         i++;
       }
     }
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(current, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(current, 'length'), 4.0, '>=')))) {
+    if ((cast ((cast !_Runtime.strictEquals(current, null) : Bool) && (cast ((cast _Runtime.field(current, 'length') : Float) >= (cast 4.0 : Float)) : Bool)) : Bool)) {
       _Runtime.callProperty(result, 'push', cast ([{ points: current, closed: false }] : Array<Dynamic>));
     }
     return cast result;
@@ -273,7 +273,7 @@ class StrokePath {
     contourStartY = 0.0;
     di = 0.0;
     ensureCurrent = function() {
-      if (_Runtime.truthy(_Runtime.strictEquals(current, null))) {
+      if ((cast _Runtime.strictEquals(current, null) : Bool)) {
         (current = cast ({ points: cast ([0.0, 0.0] : Array<Dynamic>), closed: false } : Dynamic));
         _Runtime.callProperty(subpaths, 'push', cast ([current] : Array<Dynamic>));
         (x = cast (0.0 : Dynamic));
@@ -283,9 +283,9 @@ class StrokePath {
     };
     {
       var ci:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(ci, _Runtime.field(commands, 'length'), '<'))) {
+      while ((cast ((cast ci : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
         var command:Dynamic = _Runtime.getIndex(commands, ci);
-        if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.MOVE_TO))) {
+        if ((cast _Runtime.strictEquals(command, PathCommandValue.MOVE_TO) : Bool)) {
           (x = cast (_Runtime.getIndex(data, di) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 1.0)) : Dynamic));
           (di = cast ((di + 2.0) : Dynamic));
@@ -293,7 +293,7 @@ class StrokePath {
           (contourStartY = cast (y : Dynamic));
           (current = cast ({ points: cast ([x, y] : Array<Dynamic>), closed: false } : Dynamic));
           _Runtime.callProperty(subpaths, 'push', cast ([current] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO) : Bool)) {
           (x = cast (_Runtime.getIndex(data, (di + 2.0)) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 3.0)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
@@ -301,32 +301,32 @@ class StrokePath {
           (contourStartY = cast (y : Dynamic));
           (current = cast ({ points: cast ([x, y] : Array<Dynamic>), closed: false } : Dynamic));
           _Runtime.callProperty(subpaths, 'push', cast ([current] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.LINE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.LINE_TO) : Bool)) {
           var sp:Dynamic = _Runtime.callValue(ensureCurrent, cast ([] : Array<Dynamic>));
           (x = cast (_Runtime.getIndex(data, di) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 1.0)) : Dynamic));
           (di = cast ((di + 2.0) : Dynamic));
           _Runtime.pushMany(_Runtime.field(sp, 'points'), cast ([x, y] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO) : Bool)) {
           var sp:Dynamic = _Runtime.callValue(ensureCurrent, cast ([] : Array<Dynamic>));
           (x = cast (_Runtime.getIndex(data, (di + 2.0)) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 3.0)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
           _Runtime.pushMany(_Runtime.field(sp, 'points'), cast ([x, y] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CURVE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CURVE_TO) : Bool)) {
           var sp:Dynamic = _Runtime.callValue(ensureCurrent, cast ([] : Array<Dynamic>));
           _Runtime.callValue(StrokePath.flattenQuadratic__strokePath, cast ([_Runtime.field(sp, 'points'), x, y, _Runtime.getIndex(data, di), _Runtime.getIndex(data, (di + 1.0)), _Runtime.getIndex(data, (di + 2.0)), _Runtime.getIndex(data, (di + 3.0)), toleranceSq, 0.0] : Array<Dynamic>));
           (x = cast (_Runtime.getIndex(data, (di + 2.0)) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 3.0)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO) : Bool)) {
           var sp:Dynamic = _Runtime.callValue(ensureCurrent, cast ([] : Array<Dynamic>));
           _Runtime.callValue(StrokePath.flattenCubic__strokePath, cast ([_Runtime.field(sp, 'points'), x, y, _Runtime.getIndex(data, di), _Runtime.getIndex(data, (di + 1.0)), _Runtime.getIndex(data, (di + 2.0)), _Runtime.getIndex(data, (di + 3.0)), _Runtime.getIndex(data, (di + 4.0)), _Runtime.getIndex(data, (di + 5.0)), toleranceSq, 0.0] : Array<Dynamic>));
           (x = cast (_Runtime.getIndex(data, (di + 4.0)) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 5.0)) : Dynamic));
           (di = cast ((di + 6.0) : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CLOSE))) {
-          if (_Runtime.truthy(!_Runtime.strictEquals(current, null))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CLOSE) : Bool)) {
+          if ((cast !_Runtime.strictEquals(current, null) : Bool)) {
             _Runtime.setField(current, 'closed', true);
             (x = cast (contourStartX : Dynamic));
             (y = cast (contourStartY : Dynamic));
@@ -348,7 +348,7 @@ class StrokePath {
     dx = (x1 - x0);
     dy = (y1 - y0);
     lenSq = ((dx * dx) + (dy * dy));
-    if (_Runtime.truthy(_Runtime.strictEquals(lenSq, 0.0))) {
+    if ((cast _Runtime.strictEquals(lenSq, 0.0) : Bool)) {
       var ax:Dynamic = (px - x0);
       var ay:Dynamic = (py - y0);
       return cast ((ax * ax) + (ay * ay));
@@ -375,7 +375,7 @@ class StrokePath {
     var ym:Dynamic = cast _Runtime.UNDEFINED;
     dxc1 = _Runtime.callValue(StrokePath.distChordSq__strokePath, cast ([c1x, c1y, x0, y0, x1, y1] : Array<Dynamic>));
     dxc2 = _Runtime.callValue(StrokePath.distChordSq__strokePath, cast ([c2x, c2y, x0, y0, x1, y1] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(depth, StrokePath.MAX_SUBDIVISION_DEPTH__strokePath, '>='), function():Dynamic return cast _Runtime.andValue(_Runtime.compare(dxc1, toleranceSq, '<='), function():Dynamic return cast _Runtime.compare(dxc2, toleranceSq, '<='))))) {
+    if ((cast ((cast ((cast depth : Float) >= (cast StrokePath.MAX_SUBDIVISION_DEPTH__strokePath : Float)) : Bool) || (cast _Runtime.andValue(((cast dxc1 : Float) <= (cast toleranceSq : Float)), function():Dynamic return cast ((cast dxc2 : Float) <= (cast toleranceSq : Float))) : Bool)) : Bool)) {
       _Runtime.pushMany(out, cast ([x1, y1] : Array<Dynamic>));
       return;
     }
@@ -409,7 +409,7 @@ class StrokePath {
     dx = (x1 - x0);
     dy = (y1 - y0);
     lengthSq = ((dx * dx) + (dy * dy));
-    if (_Runtime.truthy(_Runtime.strictEquals(lengthSq, 0.0))) {
+    if ((cast _Runtime.strictEquals(lengthSq, 0.0) : Bool)) {
       var ax:Dynamic = (cx - x0);
       var ay:Dynamic = (cy - y0);
       (distSq = cast (((ax * ax) + (ay * ay)) : Dynamic));
@@ -417,7 +417,7 @@ class StrokePath {
       var cross:Dynamic = ((dx * (y0 - cy)) - (dy * (x0 - cx)));
       (distSq = cast (((cross * cross) / lengthSq) : Dynamic));
     }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(depth, StrokePath.MAX_SUBDIVISION_DEPTH__strokePath, '>='), function():Dynamic return cast _Runtime.compare(distSq, toleranceSq, '<=')))) {
+    if ((cast ((cast ((cast depth : Float) >= (cast StrokePath.MAX_SUBDIVISION_DEPTH__strokePath : Float)) : Bool) || (cast ((cast distSq : Float) <= (cast toleranceSq : Float)) : Bool)) : Bool)) {
       _Runtime.pushMany(out, cast ([x1, y1] : Array<Dynamic>));
       return;
     }
@@ -437,30 +437,30 @@ class StrokePath {
     var right:Array<Float> = cast _Runtime.UNDEFINED;
     var normals:Dynamic = cast _Runtime.UNDEFINED;
     n = (_Runtime.toInt32(_Runtime.field(pts, 'length')) >> 1);
-    if (_Runtime.truthy(_Runtime.compare(n, 2.0, '<'))) { return; }
+    if ((cast ((cast n : Float) < (cast 2.0 : Float)) : Bool)) { return; }
     left = cast ([] : Array<Dynamic>);
     right = cast ([] : Array<Dynamic>);
     normals = _Runtime.createArray(((n - 1.0) * 2.0));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, (n - 1.0), '<'))) {
+      while ((cast ((cast i : Float) < (cast (n - 1.0) : Float)) : Bool)) {
         var dx:Dynamic = (_Runtime.getIndex(pts, ((i + 1.0) * 2.0)) - _Runtime.getIndex(pts, (i * 2.0)));
         var dy:Dynamic = (_Runtime.getIndex(pts, (((i + 1.0) * 2.0) + 1.0)) - _Runtime.getIndex(pts, ((i * 2.0) + 1.0)));
         var len:Dynamic = HxMath.sqrt(((dx * dx) + (dy * dy)));
-        if (_Runtime.truthy(_Runtime.compare(len, 0.0, '>'))) {
+        if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
           _Runtime.setIndex(normals, (i * 2.0), (-dy / len));
           _Runtime.setIndex(normals, ((i * 2.0) + 1.0), (dx / len));
         } else {
-          _Runtime.setIndex(normals, (i * 2.0), _Runtime.select(_Runtime.compare(i, 0.0, '>'), function():Dynamic return cast _Runtime.getIndex(normals, ((i - 1.0) * 2.0)), function():Dynamic return cast 0.0));
-          _Runtime.setIndex(normals, ((i * 2.0) + 1.0), _Runtime.select(_Runtime.compare(i, 0.0, '>'), function():Dynamic return cast _Runtime.getIndex(normals, (((i - 1.0) * 2.0) + 1.0)), function():Dynamic return cast 1.0));
+          _Runtime.setIndex(normals, (i * 2.0), ((cast ((cast i : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.getIndex(normals, ((i - 1.0) * 2.0)) : Dynamic) : (cast 0.0 : Dynamic)));
+          _Runtime.setIndex(normals, ((i * 2.0) + 1.0), ((cast ((cast i : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.getIndex(normals, (((i - 1.0) * 2.0) + 1.0)) : Dynamic) : (cast 1.0 : Dynamic)));
         }
         i++;
       }
     }
-    if (_Runtime.truthy(closed)) {
+    if ((cast closed : Bool)) {
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, (n - 1.0), '<'))) {
+        while ((cast ((cast i : Float) < (cast (n - 1.0) : Float)) : Bool)) {
           var prev:Dynamic = _Runtime.fmod(((i + n) - 2.0), (n - 1.0));
           var curr:Dynamic = i;
           var nx0:Dynamic = _Runtime.getIndex(normals, (prev * 2.0));
@@ -477,7 +477,7 @@ class StrokePath {
       _Runtime.callValue(StrokePath.addCap__strokePath, cast ([_Runtime.getIndex(pts, 0.0), _Runtime.getIndex(pts, 1.0), sn0x, sn0y, -sn0y, sn0x, halfWidth, cap, left, right, tolerance, true] : Array<Dynamic>));
       {
         var i:Dynamic = 1.0;
-        while (_Runtime.truthy(_Runtime.compare(i, (n - 1.0), '<'))) {
+        while ((cast ((cast i : Float) < (cast (n - 1.0) : Float)) : Bool)) {
           var nx0:Dynamic = _Runtime.getIndex(normals, ((i - 1.0) * 2.0));
           var ny0:Dynamic = _Runtime.getIndex(normals, (((i - 1.0) * 2.0) + 1.0));
           var nx1:Dynamic = _Runtime.getIndex(normals, (i * 2.0));
@@ -490,12 +490,12 @@ class StrokePath {
       var snLy:Dynamic = _Runtime.getIndex(normals, (((n - 2.0) * 2.0) + 1.0));
       _Runtime.callValue(StrokePath.addCap__strokePath, cast ([_Runtime.getIndex(pts, ((n - 1.0) * 2.0)), _Runtime.getIndex(pts, (((n - 1.0) * 2.0) + 1.0)), snLx, snLy, snLy, -snLx, halfWidth, cap, left, right, tolerance, false] : Array<Dynamic>));
     }
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(left, 'length'), 4.0, '<'))) { return; }
+    if ((cast ((cast _Runtime.field(left, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { return; }
     _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
     _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.getIndex(left, 0.0), _Runtime.getIndex(left, 1.0)] : Array<Dynamic>));
     {
       var i:Dynamic = 2.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(left, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(left, 'length') : Float)) : Bool)) {
         _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.LINE_TO] : Array<Dynamic>));
         _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.getIndex(left, i), _Runtime.getIndex(left, (i + 1.0))] : Array<Dynamic>));
         (i = cast ((i + 2.0) : Dynamic));
@@ -503,7 +503,7 @@ class StrokePath {
     }
     {
       var i:Dynamic = (_Runtime.field(right, 'length') - 2.0);
-      while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>='))) {
+      while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
         _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.LINE_TO] : Array<Dynamic>));
         _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.getIndex(right, i), _Runtime.getIndex(right, (i + 1.0))] : Array<Dynamic>));
         (i = cast ((i - 2.0) : Dynamic));

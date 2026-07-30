@@ -7,18 +7,18 @@ import flighthq.types.EasingFunction;
 
 class EaseElastic {
   public static final easeInElastic:EasingFunction = function(t:Dynamic) {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(t, 0.0), function():Dynamic return cast _Runtime.strictEquals(t, 1.0)))) { return cast t; }
+    if ((cast ((cast _Runtime.strictEquals(t, 0.0) : Bool) || (cast _Runtime.strictEquals(t, 1.0) : Bool)) : Bool)) { return cast t; }
     return cast -(HxMath.pow(2.0, (10.0 * (t = cast ((t - 1.0) : Dynamic)))) * HxMath.sin((((t - EaseElastic.s__easeElastic) * (2.0 * HxMath.PI)) / EaseElastic.p__easeElastic)));
   };
 
   public static final easeInOutElastic:EasingFunction = function(t:Dynamic) {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(t, 0.0), function():Dynamic return cast _Runtime.strictEquals(t, 1.0)))) { return cast t; }
-    if (_Runtime.truthy(_Runtime.compare((t = cast ((t * 2.0) : Dynamic)), 1.0, '<'))) { return cast (-0.5 * (HxMath.pow(2.0, (10.0 * (t = cast ((t - 1.0) : Dynamic)))) * HxMath.sin((((t - EaseElastic.s2__easeElastic) * (2.0 * HxMath.PI)) / EaseElastic.p2__easeElastic)))); }
+    if ((cast ((cast _Runtime.strictEquals(t, 0.0) : Bool) || (cast _Runtime.strictEquals(t, 1.0) : Bool)) : Bool)) { return cast t; }
+    if ((cast ((cast (t = cast ((t * 2.0) : Dynamic)) : Float) < (cast 1.0 : Float)) : Bool)) { return cast (-0.5 * (HxMath.pow(2.0, (10.0 * (t = cast ((t - 1.0) : Dynamic)))) * HxMath.sin((((t - EaseElastic.s2__easeElastic) * (2.0 * HxMath.PI)) / EaseElastic.p2__easeElastic)))); }
     return cast (((0.5 * HxMath.pow(2.0, (-10.0 * (t = cast ((t - 1.0) : Dynamic))))) * HxMath.sin((((t - EaseElastic.s2__easeElastic) * (2.0 * HxMath.PI)) / EaseElastic.p2__easeElastic))) + 1.0);
   };
 
   public static final easeOutElastic:EasingFunction = function(t:Dynamic) {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(t, 0.0), function():Dynamic return cast _Runtime.strictEquals(t, 1.0)))) { return cast t; }
+    if ((cast ((cast _Runtime.strictEquals(t, 0.0) : Bool) || (cast _Runtime.strictEquals(t, 1.0) : Bool)) : Bool)) { return cast t; }
     return cast ((HxMath.pow(2.0, (-10.0 * t)) * HxMath.sin((((t - EaseElastic.s__easeElastic) * (2.0 * HxMath.PI)) / EaseElastic.p__easeElastic))) + 1.0);
   };
 

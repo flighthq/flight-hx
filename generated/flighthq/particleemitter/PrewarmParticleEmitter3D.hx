@@ -14,9 +14,9 @@ class PrewarmParticleEmitter3D {
     if (stepDeltaTime == null) stepDeltaTime = cast ((1.0 / 60.0) : Dynamic);
     var step:Dynamic = cast _Runtime.UNDEFINED;
     var elapsed:Dynamic = cast _Runtime.UNDEFINED;
-    step = _Runtime.select(_Runtime.compare(stepDeltaTime, 0.0, '>'), function():Dynamic return cast stepDeltaTime, function():Dynamic return cast duration);
+    step = ((cast ((cast stepDeltaTime : Float) > (cast 0.0 : Float)) : Bool) ? (cast stepDeltaTime : Dynamic) : (cast duration : Dynamic));
     elapsed = 0.0;
-    while (_Runtime.truthy(_Runtime.compare(elapsed, duration, '<'))) {
+    while ((cast ((cast elapsed : Float) < (cast duration : Float)) : Bool)) {
       var deltaTime:Dynamic = HxMath.min(step, (duration - elapsed));
       _Runtime.callValue(updateParticleEmitter3D, cast ([emitter, state, config, deltaTime, callbacks] : Array<Dynamic>));
       (elapsed = cast ((elapsed + deltaTime) : Dynamic));

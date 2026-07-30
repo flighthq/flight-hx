@@ -40,10 +40,10 @@ class Keyboard {
       prevVisible = wasVisible;
       info = _Runtime.callProperty(backend, 'getInfo', cast ([Keyboard._scratch__keyboard] : Array<Dynamic>));
       nowVisible = _Runtime.field(info, 'visible');
-      if (_Runtime.truthy(_Runtime.strictEquals(phase, 'will'))) {
-        if (_Runtime.truthy(_Runtime.andValue(nowVisible, function():Dynamic return cast !_Runtime.truthy(prevVisible)))) {
+      if ((cast _Runtime.strictEquals(phase, 'will') : Bool)) {
+        if ((cast ((cast nowVisible : Bool) && (cast !(cast prevVisible : Bool) : Bool)) : Bool)) {
           _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(keyboard, 'onWillShow')], [transition]]), 1);
-        } else { if (_Runtime.truthy(_Runtime.andValue(!_Runtime.truthy(nowVisible), function():Dynamic return cast prevVisible))) {
+        } else { if ((cast ((cast !(cast nowVisible : Bool) : Bool) && (cast prevVisible : Bool)) : Bool)) {
           _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(keyboard, 'onWillHide')], [transition]]), 1);
         } else {
           _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(keyboard, 'onWillResize')], [transition]]), 1);
@@ -51,9 +51,9 @@ class Keyboard {
       } else {
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(keyboard, 'onDidResize')], [_Runtime.field(info, 'height')]]), 1);
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(keyboard, 'onResize')], [_Runtime.field(info, 'height')]]), 1);
-        if (_Runtime.truthy(!_Runtime.strictEquals(nowVisible, prevVisible))) {
+        if ((cast !_Runtime.strictEquals(nowVisible, prevVisible) : Bool)) {
           (wasVisible = cast (nowVisible : Dynamic));
-          if (_Runtime.truthy(nowVisible)) {
+          if ((cast nowVisible : Bool)) {
             _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(keyboard, 'onDidShow')], [_Runtime.field(info, 'height')]]), 1);
             _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(keyboard, 'onShow')], [_Runtime.field(info, 'height')]]), 1);
           } else {
@@ -86,7 +86,7 @@ class Keyboard {
       var geo:Dynamic = cast _Runtime.UNDEFINED;
       geo = _Runtime.callValue(Keyboard.getWebKeyboardGeometry__keyboard, cast ([] : Array<Dynamic>));
       _Runtime.setField(out, 'height', _Runtime.field(geo, 'height'));
-      _Runtime.setField(out, 'visible', _Runtime.compare(_Runtime.field(geo, 'height'), 0.0, '>'));
+      _Runtime.setField(out, 'visible', ((cast _Runtime.field(geo, 'height') : Float) > (cast 0.0 : Float)));
       _Runtime.setField(out, 'x', _Runtime.field(geo, 'x'));
       _Runtime.setField(out, 'y', _Runtime.field(geo, 'y'));
       _Runtime.setField(out, 'width', _Runtime.field(geo, 'width'));
@@ -96,18 +96,18 @@ class Keyboard {
       var fire:Dynamic = cast _Runtime.UNDEFINED;
       var virtualKeyboard:Dynamic = cast _Runtime.UNDEFINED;
       var viewport:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast function() {
+      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast function() {
       
       }; }
       transition = { durationSeconds: 0.0, height: 0.0 };
       fire = function() return _Runtime.callValue(listener, cast (['did', transition] : Array<Dynamic>));
       virtualKeyboard = _Runtime.callValue(Keyboard.getVirtualKeyboard__keyboard, cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(virtualKeyboard, null))) {
+      if ((cast !_Runtime.strictEquals(virtualKeyboard, null) : Bool)) {
         _Runtime.callProperty(virtualKeyboard, 'addEventListener', cast (['geometrychange', fire] : Array<Dynamic>));
         return cast function() return _Runtime.callProperty(virtualKeyboard, 'removeEventListener', cast (['geometrychange', fire] : Array<Dynamic>));
       }
       viewport = flighthq._internal.backend.DomWindowBackend.field(_Runtime.globalValue('window'), 'visualViewport');
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(viewport, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(viewport, null)))) { return cast function() {
+      if ((cast ((cast _Runtime.strictEquals(viewport, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(viewport, null) : Bool)) : Bool)) { return cast function() {
       
       }; }
       _Runtime.callProperty(viewport, 'addEventListener', cast (['resize', fire] : Array<Dynamic>));
@@ -119,13 +119,13 @@ class Keyboard {
     }, show: function() {
       var vk:Dynamic = cast _Runtime.UNDEFINED;
       vk = _Runtime.callValue(Keyboard.getVirtualKeyboard__keyboard, cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(vk, null))) {
+      if ((cast !_Runtime.strictEquals(vk, null) : Bool)) {
         _Runtime.callProperty(vk, 'show', cast ([] : Array<Dynamic>));
       }
     }, hide: function() {
       var vk:Dynamic = cast _Runtime.UNDEFINED;
       vk = _Runtime.callValue(Keyboard.getVirtualKeyboard__keyboard, cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(vk, null))) {
+      if ((cast !_Runtime.strictEquals(vk, null) : Bool)) {
         _Runtime.callProperty(vk, 'hide', cast ([] : Array<Dynamic>));
       }
     } };
@@ -135,7 +135,7 @@ class Keyboard {
   public static function detachSoftKeyboard(keyboard:SoftKeyboard):Void {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
     unsubscribe = ((cast Keyboard._subscriptions__keyboard : flighthq._internal._WeakMap).get(keyboard));
-    if (_Runtime.truthy(!_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callValue(unsubscribe, cast ([] : Array<Dynamic>));
       ((cast Keyboard._subscriptions__keyboard : flighthq._internal._WeakMap).delete_(keyboard));
     }
@@ -146,7 +146,7 @@ class Keyboard {
   }
 
   public static function getSoftKeyboardBackend():SoftKeyboardBackend {
-    if (_Runtime.truthy(_Runtime.strictEquals(Keyboard._backend__keyboard, null))) { (Keyboard._backend__keyboard = cast (_Runtime.callValue(createWebSoftKeyboardBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Keyboard._backend__keyboard, null) : Bool)) { (Keyboard._backend__keyboard = cast (_Runtime.callValue(createWebSoftKeyboardBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Keyboard._backend__keyboard;
     return cast null;
   }
@@ -170,7 +170,7 @@ class Keyboard {
 
   public static function getVirtualKeyboard__keyboard():Null<VirtualKeyboard__keyboard> {
     var nav:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
+    if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool)) { return cast null; }
     nav = (cast _Runtime.globalValue('navigator') : { @:optional var virtualKeyboard:VirtualKeyboard__keyboard; });
     return cast _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(nav, 'virtualKeyboard'), function():Dynamic return cast null);
     return cast null;
@@ -183,18 +183,18 @@ class Keyboard {
     var height:Dynamic = cast _Runtime.UNDEFINED;
     var width:Dynamic = cast _Runtime.UNDEFINED;
     var y:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast { height: 0.0, width: 0.0, x: 0.0, y: 0.0 }; }
+    if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast { height: 0.0, width: 0.0, x: 0.0, y: 0.0 }; }
     vk = _Runtime.callValue(Keyboard.getVirtualKeyboard__keyboard, cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(vk, null))) {
+    if ((cast !_Runtime.strictEquals(vk, null) : Bool)) {
       var rect:Dynamic = _Runtime.field(vk, 'boundingRect');
       return cast { height: _Runtime.field(rect, 'height'), width: _Runtime.field(rect, 'width'), x: _Runtime.field(rect, 'x'), y: _Runtime.field(rect, 'y') };
     }
     viewport = flighthq._internal.backend.DomWindowBackend.field(_Runtime.globalValue('window'), 'visualViewport');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(viewport, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(viewport, null)))) { return cast { height: 0.0, width: 0.0, x: 0.0, y: 0.0 }; }
+    if ((cast ((cast _Runtime.strictEquals(viewport, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(viewport, null) : Bool)) : Bool)) { return cast { height: 0.0, width: 0.0, x: 0.0, y: 0.0 }; }
     shrink = (flighthq._internal.backend.DomWindowBackend.field(_Runtime.globalValue('window'), 'innerHeight') - _Runtime.field(viewport, 'height'));
-    height = _Runtime.select(_Runtime.compare(shrink, 0.0, '>'), function():Dynamic return cast shrink, function():Dynamic return cast 0.0);
-    width = _Runtime.select(_Runtime.compare(height, 0.0, '>'), function():Dynamic return cast flighthq._internal.backend.DomWindowBackend.field(_Runtime.globalValue('window'), 'innerWidth'), function():Dynamic return cast 0.0);
-    y = _Runtime.select(_Runtime.compare(height, 0.0, '>'), function():Dynamic return cast _Runtime.field(viewport, 'height'), function():Dynamic return cast 0.0);
+    height = ((cast ((cast shrink : Float) > (cast 0.0 : Float)) : Bool) ? (cast shrink : Dynamic) : (cast 0.0 : Dynamic));
+    width = ((cast ((cast height : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal.backend.DomWindowBackend.field(_Runtime.globalValue('window'), 'innerWidth') : Dynamic) : (cast 0.0 : Dynamic));
+    y = ((cast ((cast height : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(viewport, 'height') : Dynamic) : (cast 0.0 : Dynamic));
     return cast { height: height, width: width, x: 0.0, y: y };
     return cast null;
   }

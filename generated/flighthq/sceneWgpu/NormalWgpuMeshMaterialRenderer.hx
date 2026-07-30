@@ -31,12 +31,12 @@ class NormalWgpuMeshMaterialRenderer {
     var group:Dynamic = cast _Runtime.UNDEFINED;
     stateRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     pass = _Runtime.field(stateRuntime, 'renderPass');
-    if (_Runtime.truthy(_Runtime.strictEquals(pass, null))) { return; }
+    if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     normal = (cast material : Null<NormalMaterial>);
     format = _Runtime.coalesce(_Runtime.field(stateRuntime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
     pipeline = _Runtime.callValue(ensureWgpuDebugPipeline, cast ([state, { hasNormalMap: false, mode: 'normal' }, format] : Array<Dynamic>));
     _Runtime.callValue(writeWgpuFrameUniform, cast ([state, camera, _lights] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(normal, null))) {
+    if ((cast _Runtime.strictEquals(normal, null) : Bool)) {
       (group = cast (_Runtime.callValue(bindWgpuDebugSurface, cast ([state, pipeline, NormalWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__normalWgpuMeshMaterialRenderer, 0.0, 1.0, 1.0] : Array<Dynamic>)) : Dynamic));
     } else {
       (group = cast (_Runtime.callValue(bindWgpuDebugSurface, cast ([state, pipeline, normal, 0.0, 1.0, _Runtime.field(normal, 'normalScale')] : Array<Dynamic>)) : Dynamic));

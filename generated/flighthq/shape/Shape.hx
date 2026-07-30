@@ -166,10 +166,10 @@ class Shape {
       hi_x = (x + strokeHalf);
       lo_y = (y - strokeHalf);
       hi_y = (y + strokeHalf);
-      if (_Runtime.truthy(_Runtime.compare(lo_x, minX, '<'))) { (minX = cast (lo_x : Dynamic)); }
-      if (_Runtime.truthy(_Runtime.compare(lo_y, minY, '<'))) { (minY = cast (lo_y : Dynamic)); }
-      if (_Runtime.truthy(_Runtime.compare(hi_x, maxX, '>'))) { (maxX = cast (hi_x : Dynamic)); }
-      if (_Runtime.truthy(_Runtime.compare(hi_y, maxY, '>'))) { (maxY = cast (hi_y : Dynamic)); }
+      if ((cast ((cast lo_x : Float) < (cast minX : Float)) : Bool)) { (minX = cast (lo_x : Dynamic)); }
+      if ((cast ((cast lo_y : Float) < (cast minY : Float)) : Bool)) { (minY = cast (lo_y : Dynamic)); }
+      if ((cast ((cast hi_x : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (hi_x : Dynamic)); }
+      if ((cast ((cast hi_y : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast (hi_y : Dynamic)); }
     };
     quadPoint = function quadPoint(t:Float, p0:Float, p1:Float, p2:Float):Float {
       var u:Dynamic = cast _Runtime.UNDEFINED;
@@ -196,23 +196,23 @@ class Shape {
       a = (((-p0 + (3.0 * p1)) - (3.0 * p2)) + p3);
       b = (2.0 * ((p0 - (2.0 * p1)) + p2));
       c = (-p0 + p1);
-      if (_Runtime.truthy(_Runtime.compare(HxMath.abs(a), 1e-12, '<'))) {
-        if (_Runtime.truthy(_Runtime.compare(HxMath.abs(b), 1e-12, '>'))) {
+      if ((cast ((cast HxMath.abs(a) : Float) < (cast 1e-12 : Float)) : Bool)) {
+        if ((cast ((cast HxMath.abs(b) : Float) > (cast 1e-12 : Float)) : Bool)) {
           var t:Dynamic = (-c / b);
-          if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(t, 0.0, '>'), function():Dynamic return cast _Runtime.compare(t, 1.0, '<')))) { _Runtime.callValue(expand, cast ([_Runtime.callValue(cubicPoint, cast ([t, p0, p1, p2, p3] : Array<Dynamic>)), _Runtime.callValue(cubicPoint, cast ([t, q0, q1, q2, q3] : Array<Dynamic>))] : Array<Dynamic>)); }
+          if ((cast ((cast ((cast t : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast t : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { _Runtime.callValue(expand, cast ([_Runtime.callValue(cubicPoint, cast ([t, p0, p1, p2, p3] : Array<Dynamic>)), _Runtime.callValue(cubicPoint, cast ([t, q0, q1, q2, q3] : Array<Dynamic>))] : Array<Dynamic>)); }
         }
         return;
       }
       disc = ((b * b) - ((4.0 * a) * c));
-      if (_Runtime.truthy(_Runtime.compare(disc, 0.0, '<'))) { return; }
+      if ((cast ((cast disc : Float) < (cast 0.0 : Float)) : Bool)) { return; }
       sqrtDisc = HxMath.sqrt(disc);
       t1 = ((-b + sqrtDisc) / (2.0 * a));
       t2 = ((-b - sqrtDisc) / (2.0 * a));
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(t1, 0.0, '>'), function():Dynamic return cast _Runtime.compare(t1, 1.0, '<')))) { _Runtime.callValue(expand, cast ([_Runtime.callValue(cubicPoint, cast ([t1, p0, p1, p2, p3] : Array<Dynamic>)), _Runtime.callValue(cubicPoint, cast ([t1, q0, q1, q2, q3] : Array<Dynamic>))] : Array<Dynamic>)); }
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(t2, 0.0, '>'), function():Dynamic return cast _Runtime.compare(t2, 1.0, '<')))) { _Runtime.callValue(expand, cast ([_Runtime.callValue(cubicPoint, cast ([t2, p0, p1, p2, p3] : Array<Dynamic>)), _Runtime.callValue(cubicPoint, cast ([t2, q0, q1, q2, q3] : Array<Dynamic>))] : Array<Dynamic>)); }
+      if ((cast ((cast ((cast t1 : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast t1 : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { _Runtime.callValue(expand, cast ([_Runtime.callValue(cubicPoint, cast ([t1, p0, p1, p2, p3] : Array<Dynamic>)), _Runtime.callValue(cubicPoint, cast ([t1, q0, q1, q2, q3] : Array<Dynamic>))] : Array<Dynamic>)); }
+      if ((cast ((cast ((cast t2 : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast t2 : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { _Runtime.callValue(expand, cast ([_Runtime.callValue(cubicPoint, cast ([t2, p0, p1, p2, p3] : Array<Dynamic>)), _Runtime.callValue(cubicPoint, cast ([t2, q0, q1, q2, q3] : Array<Dynamic>))] : Array<Dynamic>)); }
     };
     i = 0.0;
-    while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(commands, 'length'), '<'))) {
+    while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
       var key:Dynamic = (cast _Runtime.getIndex(commands, i) : String);
       var argCount:Dynamic = (cast _Runtime.getIndex(commands, (i + 1.0)) : Float);
       var b:Dynamic = (i + 2.0);
@@ -271,14 +271,14 @@ class Shape {
             var anchorY:Dynamic = (cast _Runtime.getIndex(commands, (b + 3.0)) : Float);
             _Runtime.callValue(expand, cast ([penX, penY] : Array<Dynamic>));
             var denomX:Dynamic = ((penX - (2.0 * controlX)) + anchorX);
-            if (_Runtime.truthy(!_Runtime.strictEquals(denomX, 0.0))) {
+            if ((cast !_Runtime.strictEquals(denomX, 0.0) : Bool)) {
               var tx:Dynamic = ((penX - controlX) / denomX);
-              if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(tx, 0.0, '>'), function():Dynamic return cast _Runtime.compare(tx, 1.0, '<')))) { _Runtime.callValue(expand, cast ([_Runtime.callValue(quadPoint, cast ([tx, penX, controlX, anchorX] : Array<Dynamic>)), _Runtime.callValue(quadPoint, cast ([tx, penY, controlY, anchorY] : Array<Dynamic>))] : Array<Dynamic>)); }
+              if ((cast ((cast ((cast tx : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast tx : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { _Runtime.callValue(expand, cast ([_Runtime.callValue(quadPoint, cast ([tx, penX, controlX, anchorX] : Array<Dynamic>)), _Runtime.callValue(quadPoint, cast ([tx, penY, controlY, anchorY] : Array<Dynamic>))] : Array<Dynamic>)); }
             }
             var denomY:Dynamic = ((penY - (2.0 * controlY)) + anchorY);
-            if (_Runtime.truthy(!_Runtime.strictEquals(denomY, 0.0))) {
+            if ((cast !_Runtime.strictEquals(denomY, 0.0) : Bool)) {
               var ty:Dynamic = ((penY - controlY) / denomY);
-              if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(ty, 0.0, '>'), function():Dynamic return cast _Runtime.compare(ty, 1.0, '<')))) { _Runtime.callValue(expand, cast ([_Runtime.callValue(quadPoint, cast ([ty, penX, controlX, anchorX] : Array<Dynamic>)), _Runtime.callValue(quadPoint, cast ([ty, penY, controlY, anchorY] : Array<Dynamic>))] : Array<Dynamic>)); }
+              if ((cast ((cast ((cast ty : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast ty : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { _Runtime.callValue(expand, cast ([_Runtime.callValue(quadPoint, cast ([ty, penX, controlX, anchorX] : Array<Dynamic>)), _Runtime.callValue(quadPoint, cast ([ty, penY, controlY, anchorY] : Array<Dynamic>))] : Array<Dynamic>)); }
             }
             _Runtime.callValue(expand, cast ([anchorX, anchorY] : Array<Dynamic>));
             (penX = cast (anchorX : Dynamic));
@@ -333,14 +333,14 @@ class Shape {
                     var qay:Dynamic = _Runtime.getIndex(data, (di + 3.0));
                     _Runtime.callValue(expand, cast ([penX, penY] : Array<Dynamic>));
                     var qdx:Dynamic = ((penX - (2.0 * qcx)) + qax);
-                    if (_Runtime.truthy(!_Runtime.strictEquals(qdx, 0.0))) {
+                    if ((cast !_Runtime.strictEquals(qdx, 0.0) : Bool)) {
                       var qt:Dynamic = ((penX - qcx) / qdx);
-                      if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(qt, 0.0, '>'), function():Dynamic return cast _Runtime.compare(qt, 1.0, '<')))) { _Runtime.callValue(expand, cast ([_Runtime.callValue(quadPoint, cast ([qt, penX, qcx, qax] : Array<Dynamic>)), _Runtime.callValue(quadPoint, cast ([qt, penY, qcy, qay] : Array<Dynamic>))] : Array<Dynamic>)); }
+                      if ((cast ((cast ((cast qt : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast qt : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { _Runtime.callValue(expand, cast ([_Runtime.callValue(quadPoint, cast ([qt, penX, qcx, qax] : Array<Dynamic>)), _Runtime.callValue(quadPoint, cast ([qt, penY, qcy, qay] : Array<Dynamic>))] : Array<Dynamic>)); }
                     }
                     var qdy:Dynamic = ((penY - (2.0 * qcy)) + qay);
-                    if (_Runtime.truthy(!_Runtime.strictEquals(qdy, 0.0))) {
+                    if ((cast !_Runtime.strictEquals(qdy, 0.0) : Bool)) {
                       var qt:Dynamic = ((penY - qcy) / qdy);
-                      if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(qt, 0.0, '>'), function():Dynamic return cast _Runtime.compare(qt, 1.0, '<')))) { _Runtime.callValue(expand, cast ([_Runtime.callValue(quadPoint, cast ([qt, penX, qcx, qax] : Array<Dynamic>)), _Runtime.callValue(quadPoint, cast ([qt, penY, qcy, qay] : Array<Dynamic>))] : Array<Dynamic>)); }
+                      if ((cast ((cast ((cast qt : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast qt : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { _Runtime.callValue(expand, cast ([_Runtime.callValue(quadPoint, cast ([qt, penX, qcx, qax] : Array<Dynamic>)), _Runtime.callValue(quadPoint, cast ([qt, penY, qcy, qay] : Array<Dynamic>))] : Array<Dynamic>)); }
                     }
                     _Runtime.callValue(expand, cast ([qax, qay] : Array<Dynamic>));
                     (penX = cast (qax : Dynamic));
@@ -381,7 +381,7 @@ class Shape {
             var vertices:Dynamic = (cast _Runtime.getIndex(commands, b) : Array<Float>);
             {
               var vi:Dynamic = 0.0;
-              while (_Runtime.truthy(_Runtime.compare(vi, _Runtime.field(vertices, 'length'), '<'))) {
+              while ((cast ((cast vi : Float) < (cast _Runtime.field(vertices, 'length') : Float)) : Bool)) {
                 _Runtime.callValue(expand, cast ([_Runtime.getIndex(vertices, vi), _Runtime.getIndex(vertices, (vi + 1.0))] : Array<Dynamic>));
                 (vi = cast ((vi + 2.0) : Dynamic));
               }
@@ -391,7 +391,7 @@ class Shape {
       }
       (i = cast ((i + (argCount + 2.0)) : Dynamic));
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(minX, HxMath.POSITIVE_INFINITY))) {
+    if ((cast _Runtime.strictEquals(minX, HxMath.POSITIVE_INFINITY) : Bool)) {
       _Runtime.setField(out, 'x', 0.0);
       _Runtime.setField(out, 'y', 0.0);
       _Runtime.setField(out, 'width', 0.0);
@@ -460,7 +460,7 @@ class Shape {
     commands = _Runtime.field(_Runtime.field(source, 'data'), 'commands');
     count = 0.0;
     i = 0.0;
-    while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(commands, 'length'), '<'))) {
+    while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
       var argCount:Dynamic = (cast _Runtime.getIndex(commands, (i + 1.0)) : Float);
       count++;
       (i = cast ((i + (argCount + 2.0)) : Dynamic));

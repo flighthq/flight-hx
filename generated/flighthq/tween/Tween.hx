@@ -33,7 +33,7 @@ class Tween {
     p = (cast propertyMap : Dynamic);
     for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(p))) {
       var val:Dynamic = _Runtime.getIndex(p, key);
-      if (_Runtime.truthy(!_Runtime.strictEquals(val, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(t, key, val); }
+      if ((cast !_Runtime.strictEquals(val, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(t, key, val); }
     }
   }
 
@@ -53,7 +53,7 @@ class Tween {
     var propertyMap:NumericProps<Dynamic> = cast _Runtime.UNDEFINED;
     var options:Null<TweenOptions> = cast _Runtime.UNDEFINED;
     var tween:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.callValue(Tween.isTweenManager__tween, cast ([managerOrTarget] : Array<Dynamic>)))) {
+    if ((cast _Runtime.callValue(Tween.isTweenManager__tween, cast ([managerOrTarget] : Array<Dynamic>)) : Bool)) {
       (manager = cast (managerOrTarget : Dynamic));
       (target = cast ((cast targetOrDuration : Dynamic) : Dynamic));
       (duration = cast ((cast durationOrProps : Float) : Dynamic));
@@ -112,7 +112,7 @@ class Tween {
   public static function hasTweensOf(manager:TweenManager, target:Dynamic):Bool {
     var list:Dynamic = cast _Runtime.UNDEFINED;
     list = ((cast _Runtime.field(manager, 'tweens') : flighthq._internal._Map).get(target));
-    return cast _Runtime.andValue(!_Runtime.strictEquals(list, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.compare(_Runtime.field(list, 'length'), 0.0, '>'));
+    return cast ((cast !_Runtime.strictEquals(list, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(list, 'length') : Float) > (cast 0.0 : Float)) : Bool));
     return cast null;
   }
 
@@ -121,7 +121,7 @@ class Tween {
   }
 
   public static function isTweenManager__tween(value:Dynamic):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(value), 'object'), function():Dynamic return cast !_Runtime.strictEquals(value, null)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field((cast value : Dynamic), '__brand'), 'TweenManager'));
+    return cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'object') : Bool) && (cast !_Runtime.strictEquals(value, null) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field((cast value : Dynamic), '__brand'), 'TweenManager') : Bool));
     return cast null;
   }
 
@@ -129,7 +129,7 @@ class Tween {
     for (list in _Runtime.iterable(((cast _Runtime.field(manager, 'tweens') : flighthq._internal._Map).values()))) {
       for (tween in _Runtime.iterable(list)) {
         var p:Dynamic = (cast _Runtime.field(tween, 'propertyMap') : Dynamic);
-        if (_Runtime.truthy(_Runtime.hasField(p, key))) { _Runtime.setField(tween, 'complete', true); }
+        if ((cast _Runtime.hasField(p, key) : Bool)) { _Runtime.setField(tween, 'complete', true); }
       }
     }
   }
@@ -158,7 +158,7 @@ class Tween {
   public static function pauseTweens(manager:TweenManager, target:Dynamic):Void {
     var list:Dynamic = cast _Runtime.UNDEFINED;
     list = ((cast _Runtime.field(manager, 'tweens') : flighthq._internal._Map).get(target));
-    if (_Runtime.truthy(_Runtime.strictEquals(list, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
+    if ((cast _Runtime.strictEquals(list, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     for (tween in _Runtime.iterable(list)) {
       _Runtime.setField(tween, 'paused', true);
     }
@@ -167,24 +167,24 @@ class Tween {
   public static function registerTween__tween<T>(manager:TweenManager, tween:flighthq.types.Tween<Dynamic>, overwrite:Bool):Void {
     var list:Dynamic = cast _Runtime.UNDEFINED;
     list = ((cast _Runtime.field(manager, 'tweens') : flighthq._internal._Map).get(_Runtime.field(tween, 'target')));
-    if (_Runtime.truthy(_Runtime.strictEquals(list, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(list, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (list = cast (cast ([] : Array<Dynamic>) : Dynamic));
       ((cast _Runtime.field(manager, 'tweens') : flighthq._internal._Map).set(_Runtime.field(tween, 'target'), list));
     }
-    if (_Runtime.truthy(overwrite)) {
+    if ((cast overwrite : Bool)) {
       {
         var i:Dynamic = (_Runtime.field(list, 'length') - 1.0);
-        while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>='))) {
+        while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
           var existing:Dynamic = _Runtime.getIndex(list, i);
           var existingMap:Dynamic = (cast _Runtime.field(existing, 'propertyMap') : Dynamic);
           var overlaps:Dynamic = false;
           for (detail in _Runtime.iterable(_Runtime.field(tween, 'properties'))) {
-            if (_Runtime.truthy(_Runtime.hasField(existingMap, _Runtime.field(detail, 'key')))) {
+            if ((cast _Runtime.hasField(existingMap, _Runtime.field(detail, 'key')) : Bool)) {
               (overlaps = cast (true : Dynamic));
               break;
             }
           }
-          if (_Runtime.truthy(overlaps)) { _Runtime.setField(existing, 'complete', true); }
+          if ((cast overlaps : Bool)) { _Runtime.setField(existing, 'complete', true); }
           i--;
         }
       }
@@ -215,7 +215,7 @@ class Tween {
   public static function resumeTweens(manager:TweenManager, target:Dynamic):Void {
     var list:Dynamic = cast _Runtime.UNDEFINED;
     list = ((cast _Runtime.field(manager, 'tweens') : flighthq._internal._Map).get(target));
-    if (_Runtime.truthy(_Runtime.strictEquals(list, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
+    if ((cast _Runtime.strictEquals(list, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     for (tween in _Runtime.iterable(list)) {
       _Runtime.setField(tween, 'paused', false);
     }
@@ -242,17 +242,17 @@ class Tween {
     var doSendEvent:Dynamic = cast _Runtime.UNDEFINED;
     doComplete = _Runtime.coalesce(_Runtime.optionalField(options, 'complete'), function():Dynamic return cast false);
     doSendEvent = _Runtime.coalesce(_Runtime.optionalField(options, 'sendEvent'), function():Dynamic return cast true);
-    if (_Runtime.truthy(doComplete)) {
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(tween, 'initialized')))) { _Runtime.callValue(initializeTween, cast ([tween] : Array<Dynamic>)); }
-      var effectiveT:Dynamic = _Runtime.select(_Runtime.field(tween, 'reverse'), function():Dynamic return cast 0.0, function():Dynamic return cast 1.0);
+    if ((cast doComplete : Bool)) {
+      if ((cast !(cast _Runtime.field(tween, 'initialized') : Bool) : Bool)) { _Runtime.callValue(initializeTween, cast ([tween] : Array<Dynamic>)); }
+      var effectiveT:Dynamic = ((cast _Runtime.field(tween, 'reverse') : Bool) ? (cast 0.0 : Dynamic) : (cast 1.0 : Dynamic));
       var easedT:Dynamic = _Runtime.callProperty(tween, 'ease', cast ([effectiveT] : Array<Dynamic>));
       var t:Dynamic = (cast _Runtime.field(tween, 'target') : Dynamic);
       for (detail in _Runtime.iterable(_Runtime.field(tween, 'properties'))) {
         var value:Dynamic = (_Runtime.field(detail, 'start') + (_Runtime.field(detail, 'change') * easedT));
-        if (_Runtime.truthy(_Runtime.field(tween, 'snapping'))) { (value = cast (HxMath.round(value) : Dynamic)); }
+        if ((cast _Runtime.field(tween, 'snapping') : Bool)) { (value = cast (HxMath.round(value) : Dynamic)); }
         _Runtime.setIndex(t, _Runtime.field(detail, 'key'), value);
       }
-      if (_Runtime.truthy(doSendEvent)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(tween, 'onComplete')]]), 1); }
+      if ((cast doSendEvent : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(tween, 'onComplete')]]), 1); }
     }
     _Runtime.setField(tween, 'complete', true);
   }
@@ -260,19 +260,19 @@ class Tween {
   public static function stopTweens(manager:TweenManager, target:Dynamic, ?propertyMap:NumericProps<Dynamic>, ?options:StopTweenOptions):Void {
     var list:Dynamic = cast _Runtime.UNDEFINED;
     list = ((cast _Runtime.field(manager, 'tweens') : flighthq._internal._Map).get(target));
-    if (_Runtime.truthy(_Runtime.strictEquals(list, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
+    if ((cast _Runtime.strictEquals(list, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     for (tween in _Runtime.iterable(list)) {
-      if (_Runtime.truthy(!_Runtime.strictEquals(propertyMap, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+      if ((cast !_Runtime.strictEquals(propertyMap, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         var p:Dynamic = (cast propertyMap : Dynamic);
         var tweenMap:Dynamic = (cast _Runtime.field(tween, 'propertyMap') : Dynamic);
         var overlaps:Dynamic = false;
         for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(p))) {
-          if (_Runtime.truthy(_Runtime.hasField(tweenMap, key))) {
+          if ((cast _Runtime.hasField(tweenMap, key) : Bool)) {
             (overlaps = cast (true : Dynamic));
             break;
           }
         }
-        if (_Runtime.truthy(!_Runtime.truthy(overlaps))) { continue; }
+        if ((cast !(cast overlaps : Bool) : Bool)) { continue; }
       }
       _Runtime.callValue(stopTween, cast ([tween, options] : Array<Dynamic>));
     }

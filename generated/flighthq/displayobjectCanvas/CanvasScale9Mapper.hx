@@ -16,9 +16,9 @@ class CanvasScale9Mapper {
     var gy:Dynamic = cast _Runtime.UNDEFINED;
     var gw:Dynamic = cast _Runtime.UNDEFINED;
     var gh:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(scaleX, 0.0, '<='), function():Dynamic return cast _Runtime.compare(scaleY, 0.0, '<=')))) { return cast null; }
+    if ((cast ((cast ((cast scaleX : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast scaleY : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
     bounds = _Runtime.callValue(CanvasScale9Mapper.computeCommandsBounds__canvasScale9Mapper, cast ([commands] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(bounds, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(bounds, 'width'), 0.0, '<=')), function():Dynamic return cast _Runtime.compare(_Runtime.field(bounds, 'height'), 0.0, '<=')))) { return cast null; }
+    if ((cast ((cast ((cast _Runtime.strictEquals(bounds, null) : Bool) || (cast ((cast _Runtime.field(bounds, 'width') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(bounds, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
     __destructure0 = bounds;
     bw = _Runtime.field(__destructure0, 'width');
     bh = _Runtime.field(__destructure0, 'height');
@@ -37,19 +37,19 @@ class CanvasScale9Mapper {
     scale9End = ((unscaledSize - scale9Center) - scale9Start);
     size = (unscaledSize * scale);
     center = ((size - scale9Start) - scale9End);
-    if (_Runtime.truthy(_Runtime.compare(pos, scale9Start, '<='))) {
-      if (_Runtime.truthy(_Runtime.compare(center, 0.0, '<'))) {
+    if ((cast ((cast pos : Float) <= (cast scale9Start : Float)) : Bool)) {
+      if ((cast ((cast center : Float) < (cast 0.0 : Float)) : Bool)) {
         return cast ((pos * ((scale9Start + scale9End) + center)) / (scale9Start + scale9End));
       }
       return cast pos;
     }
-    if (_Runtime.truthy(_Runtime.compare(pos, (scale9Start + scale9Center), '>='))) {
-      if (_Runtime.truthy(_Runtime.compare(center, 0.0, '<'))) {
+    if ((cast ((cast pos : Float) >= (cast (scale9Start + scale9Center) : Float)) : Bool)) {
+      if ((cast ((cast center : Float) < (cast 0.0 : Float)) : Bool)) {
         return cast (((scale9Start + ((pos - scale9Start) - scale9Center)) * ((scale9Start + scale9End) + center)) / (scale9Start + scale9End));
       }
       return cast ((scale9Start + center) + ((pos - scale9Start) - scale9Center));
     }
-    if (_Runtime.truthy(_Runtime.compare(center, 0.0, '<'))) {
+    if ((cast ((cast center : Float) < (cast 0.0 : Float)) : Bool)) {
       return cast ((scale9Start * ((scale9Start + scale9End) + center)) / (scale9Start + scale9End));
     }
     return cast (scale9Start + ((center * (pos - scale9Start)) / scale9Center));
@@ -68,13 +68,13 @@ class CanvasScale9Mapper {
     maxX = -HxMath.POSITIVE_INFINITY;
     maxY = -HxMath.POSITIVE_INFINITY;
     expand = function expand(x:Float, y:Float):Void {
-      if (_Runtime.truthy(_Runtime.compare(x, minX, '<'))) { (minX = cast (x : Dynamic)); }
-      if (_Runtime.truthy(_Runtime.compare(x, maxX, '>'))) { (maxX = cast (x : Dynamic)); }
-      if (_Runtime.truthy(_Runtime.compare(y, minY, '<'))) { (minY = cast (y : Dynamic)); }
-      if (_Runtime.truthy(_Runtime.compare(y, maxY, '>'))) { (maxY = cast (y : Dynamic)); }
+      if ((cast ((cast x : Float) < (cast minX : Float)) : Bool)) { (minX = cast (x : Dynamic)); }
+      if ((cast ((cast x : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (x : Dynamic)); }
+      if ((cast ((cast y : Float) < (cast minY : Float)) : Bool)) { (minY = cast (y : Dynamic)); }
+      if ((cast ((cast y : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast (y : Dynamic)); }
     };
     i = 0.0;
-    while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(commands, 'length'), '<'))) {
+    while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
       var key:Dynamic = (cast _Runtime.getIndex(commands, i) : String);
       var argCount:Dynamic = (cast _Runtime.getIndex(commands, (i + 1.0)) : Float);
       {
@@ -144,7 +144,7 @@ class CanvasScale9Mapper {
       }
       (i = cast ((i + (argCount + 2.0)) : Dynamic));
     }
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.isFinite(minX)))) { return cast null; }
+    if ((cast !(cast _Runtime.isFinite(minX) : Bool) : Bool)) { return cast null; }
     return cast { width: (maxX - minX), height: (maxY - minY) };
     return cast null;
   }

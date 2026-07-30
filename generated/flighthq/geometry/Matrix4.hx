@@ -24,7 +24,7 @@ class Matrix4 {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     m = _Runtime.callValue(acquireIdentityMatrix4, cast ([] : Array<Dynamic>));
     _Runtime.callValue(Matrix4.__getAxisRotation__matrix4, cast ([m, _Runtime.field(axis, 'x'), _Runtime.field(axis, 'y'), _Runtime.field(axis, 'z'), radians] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(pivotPoint, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(pivotPoint, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var p:Dynamic = pivotPoint;
       var t1:Dynamic = _Runtime.callValue(acquireIdentityMatrix4, cast ([] : Array<Dynamic>));
       var t2:Dynamic = _Runtime.callValue(acquireIdentityMatrix4, cast ([] : Array<Dynamic>));
@@ -52,7 +52,7 @@ class Matrix4 {
     var _source:Dynamic = cast _Runtime.UNDEFINED;
     _out = out.m;
     _source = source.m;
-    if (_Runtime.truthy(!_Runtime.strictEquals(out, source))) { _Runtime.callProperty(out.m, 'set', cast ([source.m] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(out, source) : Bool)) { _Runtime.callProperty(out.m, 'set', cast ([source.m] : Array<Dynamic>)); }
     _Runtime.setIndex(_out, 12.0, (_Runtime.getIndex(_source, 12.0) + x));
     _Runtime.setIndex(_out, 13.0, (_Runtime.getIndex(_source, 13.0) + y));
     _Runtime.setIndex(_out, 14.0, (_Runtime.getIndex(_source, 14.0) + z));
@@ -274,22 +274,22 @@ class Matrix4 {
     var out:flighthq.types.Matrix4 = cast _Runtime.UNDEFINED;
     m = new flighthq._internal._Float32Array(Matrix4.__identity__matrix4);
     out = _Runtime.callValue(createEntity, cast ([{ m: m }] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(m00, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 0.0, m00); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(m01, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 1.0, m01); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(m02, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 2.0, m02); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(m03, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 3.0, m03); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(m10, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 4.0, m10); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(m11, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 5.0, m11); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(m12, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 6.0, m12); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(m13, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 7.0, m13); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(m20, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 8.0, m20); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(m21, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 9.0, m21); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(m22, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 10.0, m22); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(m23, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 11.0, m23); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(m30, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 12.0, m30); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(m31, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 13.0, m31); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(m32, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 14.0, m32); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(m33, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 15.0, m33); }
+    if ((cast !_Runtime.strictEquals(m00, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(m, 0.0, m00); }
+    if ((cast !_Runtime.strictEquals(m01, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(m, 1.0, m01); }
+    if ((cast !_Runtime.strictEquals(m02, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(m, 2.0, m02); }
+    if ((cast !_Runtime.strictEquals(m03, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(m, 3.0, m03); }
+    if ((cast !_Runtime.strictEquals(m10, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(m, 4.0, m10); }
+    if ((cast !_Runtime.strictEquals(m11, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(m, 5.0, m11); }
+    if ((cast !_Runtime.strictEquals(m12, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(m, 6.0, m12); }
+    if ((cast !_Runtime.strictEquals(m13, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(m, 7.0, m13); }
+    if ((cast !_Runtime.strictEquals(m20, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(m, 8.0, m20); }
+    if ((cast !_Runtime.strictEquals(m21, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(m, 9.0, m21); }
+    if ((cast !_Runtime.strictEquals(m22, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(m, 10.0, m22); }
+    if ((cast !_Runtime.strictEquals(m23, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(m, 11.0, m23); }
+    if ((cast !_Runtime.strictEquals(m30, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(m, 12.0, m30); }
+    if ((cast !_Runtime.strictEquals(m31, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(m, 13.0, m31); }
+    if ((cast !_Runtime.strictEquals(m32, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(m, 14.0, m32); }
+    if ((cast !_Runtime.strictEquals(m33, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(m, 15.0, m33); }
     return cast out;
     return cast null;
   }
@@ -366,16 +366,16 @@ class Matrix4 {
     sy = HxMath.sqrt((((m10 * m10) + (m11 * m11)) + (m12 * m12)));
     sz = HxMath.sqrt((((m20 * m20) + (m21 * m21)) + (m22 * m22)));
     det = (((m00 * ((m11 * m22) - (m12 * m21))) - (m10 * ((m01 * m22) - (m02 * m21)))) + (m20 * ((m01 * m12) - (m02 * m11))));
-    if (_Runtime.truthy(_Runtime.compare(det, 0.0, '<'))) { (sx = cast (-sx : Dynamic)); }
+    if ((cast ((cast det : Float) < (cast 0.0 : Float)) : Bool)) { (sx = cast (-sx : Dynamic)); }
     (outPosition.x = cast (tx : Dynamic));
     (outPosition.y = cast (ty : Dynamic));
     (outPosition.z = cast (tz : Dynamic));
     (outScale.x = cast (sx : Dynamic));
     (outScale.y = cast (sy : Dynamic));
     (outScale.z = cast (sz : Dynamic));
-    invSx = _Runtime.select(!_Runtime.strictEquals(sx, 0.0), function():Dynamic return cast (1.0 / sx), function():Dynamic return cast 0.0);
-    invSy = _Runtime.select(!_Runtime.strictEquals(sy, 0.0), function():Dynamic return cast (1.0 / sy), function():Dynamic return cast 0.0);
-    invSz = _Runtime.select(!_Runtime.strictEquals(sz, 0.0), function():Dynamic return cast (1.0 / sz), function():Dynamic return cast 0.0);
+    invSx = ((cast !_Runtime.strictEquals(sx, 0.0) : Bool) ? (cast (1.0 / sx) : Dynamic) : (cast 0.0 : Dynamic));
+    invSy = ((cast !_Runtime.strictEquals(sy, 0.0) : Bool) ? (cast (1.0 / sy) : Dynamic) : (cast 0.0 : Dynamic));
+    invSz = ((cast !_Runtime.strictEquals(sz, 0.0) : Bool) ? (cast (1.0 / sz) : Dynamic) : (cast 0.0 : Dynamic));
     r00 = (m00 * invSx);
     r01 = (m01 * invSx);
     r02 = (m02 * invSx);
@@ -386,19 +386,19 @@ class Matrix4 {
     r21 = (m21 * invSz);
     r22 = (m22 * invSz);
     trace = ((r00 + r11) + r22);
-    if (_Runtime.truthy(_Runtime.compare(trace, 0.0, '>'))) {
+    if ((cast ((cast trace : Float) > (cast 0.0 : Float)) : Bool)) {
       var s:Dynamic = (0.5 / HxMath.sqrt((trace + 1.0)));
       (outRotation.w = cast ((0.25 / s) : Dynamic));
       (outRotation.x = cast (((r12 - r21) * s) : Dynamic));
       (outRotation.y = cast (((r20 - r02) * s) : Dynamic));
       (outRotation.z = cast (((r01 - r10) * s) : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(r00, r11, '>'), function():Dynamic return cast _Runtime.compare(r00, r22, '>')))) {
+    } else { if ((cast ((cast ((cast r00 : Float) > (cast r11 : Float)) : Bool) && (cast ((cast r00 : Float) > (cast r22 : Float)) : Bool)) : Bool)) {
       var s:Dynamic = (2.0 * HxMath.sqrt((((1.0 + r00) - r11) - r22)));
       (outRotation.w = cast (((r12 - r21) / s) : Dynamic));
       (outRotation.x = cast ((0.25 * s) : Dynamic));
       (outRotation.y = cast (((r10 + r01) / s) : Dynamic));
       (outRotation.z = cast (((r20 + r02) / s) : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.compare(r11, r22, '>'))) {
+    } else { if ((cast ((cast r11 : Float) > (cast r22 : Float)) : Bool)) {
       var s:Dynamic = (2.0 * HxMath.sqrt((((1.0 + r11) - r00) - r22)));
       (outRotation.w = cast (((r20 - r02) / s) : Dynamic));
       (outRotation.x = cast (((r10 + r01) / s) : Dynamic));
@@ -414,12 +414,12 @@ class Matrix4 {
   }
 
   public static function equalsMatrix4(a:Null<Matrix4Like>, b:Null<Matrix4Like>):Bool {
-    if (_Runtime.truthy(_Runtime.strictEquals(a, b))) { return cast true; }
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(a), function():Dynamic return cast !_Runtime.truthy(b)))) { return cast false; }
+    if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast true; }
+    if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, 16.0, '<'))) {
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(a.m, i), _Runtime.getIndex(b.m, i)))) { return cast false; }
+      while ((cast ((cast i : Float) < (cast 16.0 : Float)) : Bool)) {
+        if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a.m, i), _Runtime.getIndex(b.m, i)) : Bool)) { return cast false; }
         i++;
       }
     }
@@ -456,7 +456,7 @@ class Matrix4 {
     _b = b.m;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, 16.0, '<'))) {
+      while ((cast ((cast i : Float) < (cast 16.0 : Float)) : Bool)) {
         _Runtime.setIndex(_out, i, (_Runtime.getIndex(_a, i) + ((_Runtime.getIndex(_b, i) - _Runtime.getIndex(_a, i)) * t)));
         i++;
       }
@@ -489,8 +489,8 @@ class Matrix4 {
     _source = source.m;
     d = _Runtime.callValue(getMatrix4Determinant, cast ([source] : Array<Dynamic>));
     EPS = 0.000001;
-    invertable = _Runtime.compare(HxMath.abs(d), EPS, '>');
-    if (_Runtime.truthy(!_Runtime.truthy(invertable))) {
+    invertable = ((cast HxMath.abs(d) : Float) > (cast EPS : Float));
+    if ((cast !(cast invertable : Bool) : Bool)) {
       _Runtime.fill(_out, HxMath.NaN, 0, null, 1);
       return cast false;
     }
@@ -534,7 +534,7 @@ class Matrix4 {
   public static function isAffineMatrix4(source:Matrix4Like):Bool {
     var _source:Dynamic = cast _Runtime.UNDEFINED;
     _source = source.m;
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.getIndex(_source, 3.0), 0.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(_source, 7.0), 0.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(_source, 11.0), 0.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(_source, 15.0), 1.0));
+    return cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.getIndex(_source, 3.0), 0.0) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(_source, 7.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(_source, 11.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(_source, 15.0), 1.0) : Bool));
     return cast null;
   }
 
@@ -577,7 +577,7 @@ class Matrix4 {
     var z:Float = cast _Runtime.UNDEFINED;
     _source = source.m;
     i = 0.0;
-    while (_Runtime.truthy(_Runtime.compare((i + 3.0), _Runtime.field(vectors, 'length'), '<='))) {
+    while ((cast ((cast (i + 3.0) : Float) <= (cast _Runtime.field(vectors, 'length') : Float)) : Bool)) {
       (x = cast (_Runtime.getIndex(vectors, i) : Dynamic));
       (y = cast (_Runtime.getIndex(vectors, (i + 1.0)) : Dynamic));
       (z = cast (_Runtime.getIndex(vectors, (i + 2.0)) : Dynamic));
@@ -685,7 +685,7 @@ class Matrix4 {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     m = _Runtime.callValue(acquireIdentityMatrix4, cast ([] : Array<Dynamic>));
     _Runtime.callValue(Matrix4.__getAxisRotation__matrix4, cast ([m, _Runtime.field(axis, 'x'), _Runtime.field(axis, 'y'), _Runtime.field(axis, 'z'), radians] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(pivotPoint, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(pivotPoint, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var p:Dynamic = pivotPoint;
       var t1:Dynamic = _Runtime.callValue(acquireIdentityMatrix4, cast ([] : Array<Dynamic>));
       var t2:Dynamic = _Runtime.callValue(acquireIdentityMatrix4, cast ([] : Array<Dynamic>));
@@ -729,18 +729,18 @@ class Matrix4 {
     var o:Dynamic = cast _Runtime.UNDEFINED;
     a = source.m;
     o = out.m;
-    if (_Runtime.truthy(!_Runtime.strictEquals(out, source))) { _Runtime.callProperty(out.m, 'set', cast ([source.m] : Array<Dynamic>)); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(sx, 1.0))) {
+    if ((cast !_Runtime.strictEquals(out, source) : Bool)) { _Runtime.callProperty(out.m, 'set', cast ([source.m] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(sx, 1.0) : Bool)) {
       _Runtime.setIndex(o, 0.0, (_Runtime.getIndex(a, 0.0) * sx));
       _Runtime.setIndex(o, 4.0, (_Runtime.getIndex(a, 4.0) * sx));
       _Runtime.setIndex(o, 8.0, (_Runtime.getIndex(a, 8.0) * sx));
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(sy, 1.0))) {
+    if ((cast !_Runtime.strictEquals(sy, 1.0) : Bool)) {
       _Runtime.setIndex(o, 1.0, (_Runtime.getIndex(a, 1.0) * sy));
       _Runtime.setIndex(o, 5.0, (_Runtime.getIndex(a, 5.0) * sy));
       _Runtime.setIndex(o, 9.0, (_Runtime.getIndex(a, 9.0) * sy));
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(sz, 1.0))) {
+    if ((cast !_Runtime.strictEquals(sz, 1.0) : Bool)) {
       _Runtime.setIndex(o, 2.0, (_Runtime.getIndex(a, 2.0) * sz));
       _Runtime.setIndex(o, 6.0, (_Runtime.getIndex(a, 6.0) * sz));
       _Runtime.setIndex(o, 10.0, (_Runtime.getIndex(a, 10.0) * sz));
@@ -894,7 +894,7 @@ class Matrix4 {
     zy = (eyeY - target.y);
     zz = (eyeZ - target.z);
     zl = HxMath.sqrt((((zx * zx) + (zy * zy)) + (zz * zz)));
-    if (_Runtime.truthy(_Runtime.strictEquals(zl, 0.0))) {
+    if ((cast _Runtime.strictEquals(zl, 0.0) : Bool)) {
       (zz = cast (1.0 : Dynamic));
       (zl = cast (1.0 : Dynamic));
     }
@@ -905,7 +905,7 @@ class Matrix4 {
     xy = ((up.z * zx) - (up.x * zz));
     xz = ((up.x * zy) - (up.y * zx));
     xl = HxMath.sqrt((((xx * xx) + (xy * xy)) + (xz * xz)));
-    if (_Runtime.truthy(_Runtime.strictEquals(xl, 0.0))) {
+    if ((cast _Runtime.strictEquals(xl, 0.0) : Bool)) {
       (xx = cast (0.0 : Dynamic));
       (xy = cast (0.0 : Dynamic));
       (xz = cast (0.0 : Dynamic));
@@ -977,7 +977,7 @@ class Matrix4 {
     var bottom:Dynamic = cast _Runtime.UNDEFINED;
     var right:Dynamic = cast _Runtime.UNDEFINED;
     var left:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(aspect, -1e-7, '>'), function():Dynamic return cast _Runtime.compare(aspect, 1e-7, '<')))) {
+    if ((cast ((cast ((cast aspect : Float) > (cast -1e-7 : Float)) : Bool) && (cast ((cast aspect : Float) < (cast 1e-7 : Float)) : Bool)) : Bool)) {
       throw _Runtime.error('Aspect ratio may not be 0');
     }
     _out = out.m;
@@ -1008,14 +1008,14 @@ class Matrix4 {
     var o:Dynamic = cast _Runtime.UNDEFINED;
     a = source.m;
     o = out.m;
-    if (_Runtime.truthy(!_Runtime.strictEquals(out, source))) { _Runtime.callProperty(out.m, 'set', cast ([source.m] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(out, source) : Bool)) { _Runtime.callProperty(out.m, 'set', cast ([source.m] : Array<Dynamic>)); }
     _Runtime.setIndex(o, 12.0, ((((_Runtime.getIndex(a, 0.0) * tx) + (_Runtime.getIndex(a, 4.0) * ty)) + (_Runtime.getIndex(a, 8.0) * tz)) + _Runtime.getIndex(a, 12.0)));
     _Runtime.setIndex(o, 13.0, ((((_Runtime.getIndex(a, 1.0) * tx) + (_Runtime.getIndex(a, 5.0) * ty)) + (_Runtime.getIndex(a, 9.0) * tz)) + _Runtime.getIndex(a, 13.0)));
     _Runtime.setIndex(o, 14.0, ((((_Runtime.getIndex(a, 2.0) * tx) + (_Runtime.getIndex(a, 6.0) * ty)) + (_Runtime.getIndex(a, 10.0) * tz)) + _Runtime.getIndex(a, 14.0)));
   }
 
   public static function transposeMatrix4(out:Matrix4Like, source:Matrix4Like):Void {
-    if (_Runtime.truthy(!_Runtime.strictEquals(out, source))) { _Runtime.callProperty(out.m, 'set', cast ([source.m] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(out, source) : Bool)) { _Runtime.callProperty(out.m, 'set', cast ([source.m] : Array<Dynamic>)); }
     _Runtime.callValue(Matrix4.__swap__matrix4, cast ([out, source, 1.0, 4.0] : Array<Dynamic>));
     _Runtime.callValue(Matrix4.__swap__matrix4, cast ([out, source, 2.0, 8.0] : Array<Dynamic>));
     _Runtime.callValue(Matrix4.__swap__matrix4, cast ([out, source, 3.0, 12.0] : Array<Dynamic>));

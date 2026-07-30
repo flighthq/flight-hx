@@ -35,13 +35,13 @@ class PickScene {
   }
 
   public static function pickScene(scene:SceneNode, camera:Camera, screenX:Float, screenY:Float, out:SceneHit, ?options:ScenePickOptions):Null<SceneHit> {
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(PickScene.buildCameraPickRay__pickScene, cast ([PickScene._cameraRay__pickScene, camera, screenX, screenY] : Array<Dynamic>))))) { return cast null; }
+    if ((cast !(cast _Runtime.callValue(PickScene.buildCameraPickRay__pickScene, cast ([PickScene._cameraRay__pickScene, camera, screenX, screenY] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
     return cast _Runtime.callValue(pickSceneWithRay3D, cast ([scene, PickScene._cameraRay__pickScene, out, options] : Array<Dynamic>));
     return cast null;
   }
 
   public static function pickSceneAll(scene:SceneNode, camera:Camera, screenX:Float, screenY:Float, outArray:Array<SceneHit>, ?options:ScenePickOptions):Array<SceneHit> {
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(PickScene.buildCameraPickRay__pickScene, cast ([PickScene._cameraRay__pickScene, camera, screenX, screenY] : Array<Dynamic>))))) {
+    if ((cast !(cast _Runtime.callValue(PickScene.buildCameraPickRay__pickScene, cast ([PickScene._cameraRay__pickScene, camera, screenX, screenY] : Array<Dynamic>)) : Bool) : Bool)) {
       _Runtime.setLength(outArray, 0.0);
       return cast outArray;
     }
@@ -55,7 +55,7 @@ class PickScene {
     _Runtime.callValue(PickScene.forEachSceneRayHit__pickScene, cast ([scene, ray, options, function(hit:Dynamic) {
       var slot:Dynamic = cast _Runtime.UNDEFINED;
       slot = _Runtime.getIndex(outArray, count);
-      if (_Runtime.truthy(_Runtime.strictEquals(slot, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+      if ((cast _Runtime.strictEquals(slot, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         (slot = cast (_Runtime.callValue(createSceneHit, cast ([] : Array<Dynamic>)) : Dynamic));
         _Runtime.setIndex(outArray, count, slot);
       }
@@ -74,18 +74,18 @@ class PickScene {
     found = false;
     bestT = HxMath.POSITIVE_INFINITY;
     _Runtime.callValue(PickScene.forEachSceneRayHit__pickScene, cast ([scene, ray, options, function(hit:Dynamic) {
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(hit, 'distance'), bestT, '>='))) { return; }
+      if ((cast ((cast _Runtime.field(hit, 'distance') : Float) >= (cast bestT : Float)) : Bool)) { return; }
       (bestT = cast (_Runtime.field(hit, 'distance') : Dynamic));
       (found = cast (true : Dynamic));
       _Runtime.callValue(PickScene.copySceneHit__pickScene, cast ([out, hit] : Array<Dynamic>));
     }] : Array<Dynamic>));
-    return cast _Runtime.select(found, function():Dynamic return cast out, function():Dynamic return cast null);
+    return cast ((cast found : Bool) ? (cast out : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function buildCameraPickRay__pickScene(out:Ray3D, camera:Camera, screenX:Float, screenY:Float):Bool {
     var aspect:Dynamic = cast _Runtime.UNDEFINED;
-    aspect = _Runtime.select(_Runtime.strictEquals(_Runtime.field(camera.projection, 'kind'), 'perspective'), function():Dynamic return cast camera.projection.aspect, function():Dynamic return cast 1.0);
+    aspect = ((cast _Runtime.strictEquals(_Runtime.field(camera.projection, 'kind'), 'perspective') : Bool) ? (cast camera.projection.aspect : Dynamic) : (cast 1.0 : Dynamic));
     return cast _Runtime.callValue(getCameraScreenToWorldRay, cast ([out, camera, screenX, screenY, aspect] : Array<Dynamic>));
     return cast null;
   }
@@ -122,15 +122,15 @@ class PickScene {
 
   public static function pickNode__pickScene(node:SceneNode, ray:Ray3D, predicate:Null<Dynamic>, maxDistance:Float, cullBackfaces:Bool, onHit:Dynamic):Void {
     var children:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(node, 'enabled')))) { return; }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)), function():Dynamic return cast _Runtime.orValue(_Runtime.strictEquals(predicate, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callValue(predicate, cast ([node] : Array<Dynamic>)))))) {
+    if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return; }
+    if ((cast ((cast _Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals(predicate, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callValue(predicate, cast ([node] : Array<Dynamic>))) : Bool)) : Bool)) {
       _Runtime.callValue(PickScene.intersectMeshTriangles__pickScene, cast ([node, ray, maxDistance, cullBackfaces, onHit] : Array<Dynamic>));
     }
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)), 'children');
-    if (_Runtime.truthy(!_Runtime.strictEquals(children, null))) {
+    if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(children, 'length'), '<'))) {
+        while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
           _Runtime.callValue(PickScene.pickNode__pickScene, cast ([(cast _Runtime.getIndex(children, i) : SceneNode), ray, predicate, maxDistance, cullBackfaces, onHit] : Array<Dynamic>));
           i++;
         }
@@ -144,10 +144,10 @@ class PickScene {
     var indices:Dynamic = cast _Runtime.UNDEFINED;
     var triangleCount:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(getSceneNodeWorldBounds, cast ([PickScene._worldBounds__pickScene, mesh] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.callValue(intersectRay3DAabb, cast ([ray, PickScene._worldBounds__pickScene] : Array<Dynamic>)), 0.0, '<'))) { return; }
+    if ((cast ((cast _Runtime.callValue(intersectRay3DAabb, cast ([ray, PickScene._worldBounds__pickScene] : Array<Dynamic>)) : Float) < (cast 0.0 : Float)) : Bool)) { return; }
     _Runtime.callValue(ensureNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>));
     worldMatrix = _Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(inverseMatrix4, cast ([PickScene._inverseWorld__pickScene, worldMatrix] : Array<Dynamic>))))) { return; }
+    if ((cast !(cast _Runtime.callValue(inverseMatrix4, cast ([PickScene._inverseWorld__pickScene, worldMatrix] : Array<Dynamic>)) : Bool) : Bool)) { return; }
     _Runtime.callValue(PickScene.transformPointByMatrix4__pickScene, cast ([PickScene._localRay__pickScene.origin, ray.origin, PickScene._inverseWorld__pickScene.m] : Array<Dynamic>));
     _Runtime.callValue(PickScene.transformDirectionByMatrix4__pickScene, cast ([PickScene._localRay__pickScene.direction, ray.direction, PickScene._inverseWorld__pickScene.m] : Array<Dynamic>));
     geometry = _Runtime.field(mesh, 'geometry');
@@ -155,7 +155,7 @@ class PickScene {
     triangleCount = _Runtime.callValue(getMeshGeometryTriangleCount, cast ([geometry] : Array<Dynamic>));
     {
       var triangle:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(triangle, triangleCount, '<'))) {
+      while ((cast ((cast triangle : Float) < (cast triangleCount : Float)) : Bool)) {
         var base:Dynamic = (triangle * 3.0);
         var i0:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, base), function():Dynamic return cast base);
         var i1:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, (base + 1.0)), function():Dynamic return cast (base + 1.0));
@@ -164,12 +164,12 @@ class PickScene {
         _Runtime.callValue(getMeshGeometryVertexPosition, cast ([PickScene._b__pickScene, geometry, i1] : Array<Dynamic>));
         _Runtime.callValue(getMeshGeometryVertexPosition, cast ([PickScene._c__pickScene, geometry, i2] : Array<Dynamic>));
         var t:Dynamic = _Runtime.callValue(intersectRay3DTriangle, cast ([PickScene._localRay__pickScene, PickScene._a__pickScene, PickScene._b__pickScene, PickScene._c__pickScene] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(t, 0.0, '<'), function():Dynamic return cast _Runtime.compare(t, maxDistance, '>')))) { triangle++; continue; }
+        if ((cast ((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast t : Float) > (cast maxDistance : Float)) : Bool)) : Bool)) { triangle++; continue; }
         _Runtime.callValue(PickScene.transformPointByMatrix4__pickScene, cast ([PickScene._wa__pickScene, PickScene._a__pickScene, worldMatrix.m] : Array<Dynamic>));
         _Runtime.callValue(PickScene.transformPointByMatrix4__pickScene, cast ([PickScene._wb__pickScene, PickScene._b__pickScene, worldMatrix.m] : Array<Dynamic>));
         _Runtime.callValue(PickScene.transformPointByMatrix4__pickScene, cast ([PickScene._wc__pickScene, PickScene._c__pickScene, worldMatrix.m] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(PickScene.writeFaceNormal__pickScene, cast ([PickScene._worldNormal__pickScene, PickScene._wa__pickScene, PickScene._wb__pickScene, PickScene._wc__pickScene] : Array<Dynamic>))))) { triangle++; continue; }
-        if (_Runtime.truthy(_Runtime.andValue(cullBackfaces, function():Dynamic return cast _Runtime.compare((((ray.direction.x * PickScene._worldNormal__pickScene.x) + (ray.direction.y * PickScene._worldNormal__pickScene.y)) + (ray.direction.z * PickScene._worldNormal__pickScene.z)), 0.0, '>')))) {
+        if ((cast !(cast _Runtime.callValue(PickScene.writeFaceNormal__pickScene, cast ([PickScene._worldNormal__pickScene, PickScene._wa__pickScene, PickScene._wb__pickScene, PickScene._wc__pickScene] : Array<Dynamic>)) : Bool) : Bool)) { triangle++; continue; }
+        if ((cast ((cast cullBackfaces : Bool) && (cast ((cast (((ray.direction.x * PickScene._worldNormal__pickScene.x) + (ray.direction.y * PickScene._worldNormal__pickScene.y)) + (ray.direction.z * PickScene._worldNormal__pickScene.z)) : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
           triangle++;
           continue;
         }
@@ -213,7 +213,7 @@ class PickScene {
     ny = ((e1z * e2x) - (e1x * e2z));
     nz = ((e1x * e2y) - (e1y * e2x));
     lengthSquared = (((nx * nx) + (ny * ny)) + (nz * nz));
-    if (_Runtime.truthy(_Runtime.strictEquals(lengthSquared, 0.0))) { return cast false; }
+    if ((cast _Runtime.strictEquals(lengthSquared, 0.0) : Bool)) { return cast false; }
     inv = (1.0 / HxMath.sqrt(lengthSquared));
     (out.x = cast ((nx * inv) : Dynamic));
     (out.y = cast ((ny * inv) : Dynamic));
@@ -256,7 +256,7 @@ class PickScene {
     d20 = (((v2x * v0x) + (v2y * v0y)) + (v2z * v0z));
     d21 = (((v2x * v1x) + (v2y * v1y)) + (v2z * v1z));
     denom = ((d00 * d11) - (d01 * d01));
-    if (_Runtime.truthy(_Runtime.strictEquals(denom, 0.0))) {
+    if ((cast _Runtime.strictEquals(denom, 0.0) : Bool)) {
       _Runtime.setField(out, 'u', 1.0);
       _Runtime.setField(out, 'v', 0.0);
       _Runtime.setField(out, 'w', 0.0);

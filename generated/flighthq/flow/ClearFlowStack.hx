@@ -11,7 +11,7 @@ class ClearFlowStack {
     states = _Runtime.field(stack, 'states');
     {
       var i:Dynamic = (_Runtime.field(states, 'length') - 1.0);
-      while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>='))) {
+      while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
         _Runtime.callOptionalProperty(_Runtime.getIndex(states, i), 'onExit', cast ([] : Array<Dynamic>));
         i--;
       }

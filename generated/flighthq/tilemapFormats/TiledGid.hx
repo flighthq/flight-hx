@@ -17,10 +17,10 @@ class TiledGid {
 
   public static function getTiledTilesetRefForGid(map:TiledMap, tileId:Float):Null<TiledTilesetRef> {
     var best:Null<TiledTilesetRef> = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(tileId, 0.0, '<='))) { return cast null; }
+    if ((cast ((cast tileId : Float) <= (cast 0.0 : Float)) : Bool)) { return cast null; }
     best = null;
     for (ref in _Runtime.iterable(_Runtime.field(map, 'tilesets'))) {
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(_Runtime.field(ref, 'firstGid'), tileId, '<='), function():Dynamic return cast _Runtime.orValue(_Runtime.strictEquals(best, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(ref, 'firstGid'), _Runtime.field(best, 'firstGid'), '>'))))) { (best = cast (ref : Dynamic)); }
+      if ((cast ((cast ((cast _Runtime.field(ref, 'firstGid') : Float) <= (cast tileId : Float)) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals(best, null), function():Dynamic return cast ((cast _Runtime.field(ref, 'firstGid') : Float) > (cast _Runtime.field(best, 'firstGid') : Float))) : Bool)) : Bool)) { (best = cast (ref : Dynamic)); }
     }
     return cast best;
     return cast null;

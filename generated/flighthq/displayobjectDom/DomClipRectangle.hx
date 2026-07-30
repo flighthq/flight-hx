@@ -22,20 +22,20 @@ class DomClipRectangle {
     var local:Dynamic = cast _Runtime.UNDEFINED;
     var clipPath:Dynamic = cast _Runtime.UNDEFINED;
     element = ((cast _Runtime.field(_Runtime.callValue(getDomRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'domElementMap') : flighthq._internal._WeakMap).get(data));
-    if (_Runtime.truthy(_Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
+    if ((cast _Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     contour = null;
     {
       var i:Dynamic = (_Runtime.field(entries, 'length') - 1.0);
-      while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>='))) {
+      while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
         var entry:Dynamic = _Runtime.getIndex(entries, i);
-        if (_Runtime.truthy(_Runtime.hasField(entry, 'kind'))) {
+        if ((cast _Runtime.hasField(entry, 'kind') : Bool)) {
           (contour = cast (entry : Dynamic));
           break;
         }
         i--;
       }
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(contour, null))) {
+    if ((cast !_Runtime.strictEquals(contour, null) : Bool)) {
       var mapPoint:Dynamic = _Runtime.callValue(DomClipRectangle.createStageToElementPointMapper__domClipRectangle, cast ([element] : Array<Dynamic>));
       var clipPath:Dynamic = _Runtime.callValue(buildDomContourClipPath, cast ([contour, mapPoint] : Array<Dynamic>));
       _Runtime.setField(_Runtime.field(element, 'style'), 'clipPath', clipPath);
@@ -43,12 +43,12 @@ class DomClipRectangle {
       return;
     }
     rect = _Runtime.callValue(DomClipRectangle.intersectDomStageRectangles__domClipRectangle, cast ([(cast entries : Array<DomStageRectangle>)] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(rect, null))) {
+    if ((cast _Runtime.strictEquals(rect, null) : Bool)) {
       _Runtime.setField(_Runtime.field(element, 'style'), 'clipPath', '');
       _Runtime.setField((cast _Runtime.field(element, 'style') : { var webkitClipPath:String; }), 'webkitClipPath', '');
       return;
     }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(rect, 'right'), _Runtime.field(rect, 'left'), '<='), function():Dynamic return cast _Runtime.compare(_Runtime.field(rect, 'bottom'), _Runtime.field(rect, 'top'), '<=')))) {
+    if ((cast ((cast ((cast _Runtime.field(rect, 'right') : Float) <= (cast _Runtime.field(rect, 'left') : Float)) : Bool) || (cast ((cast _Runtime.field(rect, 'bottom') : Float) <= (cast _Runtime.field(rect, 'top') : Float)) : Bool)) : Bool)) {
       _Runtime.setField(_Runtime.field(element, 'style'), 'clipPath', DomClipRectangle.EMPTY_CLIP_PATH__domClipRectangle);
       _Runtime.setField((cast _Runtime.field(element, 'style') : { var webkitClipPath:String; }), 'webkitClipPath', DomClipRectangle.EMPTY_CLIP_PATH__domClipRectangle);
       return;
@@ -87,7 +87,7 @@ class DomClipRectangle {
   public static function setDomClipHooks(state:DomRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getDomRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'domClipHooks'), null))) { _Runtime.setField(runtime, 'domClipHooks', DomClipRectangle.domClipHooksImpl__domClipRectangle); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'domClipHooks'), null) : Bool)) { _Runtime.setField(runtime, 'domClipHooks', DomClipRectangle.domClipHooksImpl__domClipRectangle); }
   }
 
   public static function createStageToElementPointMapper__domClipRectangle(element:Dynamic):Dynamic {
@@ -101,7 +101,7 @@ class DomClipRectangle {
     var invTy:Dynamic = cast _Runtime.UNDEFINED;
     matrix = _Runtime.callValue(DomClipRectangle.getElementMatrix__domClipRectangle, cast ([element] : Array<Dynamic>));
     det = ((_Runtime.field(matrix, 'a') * _Runtime.field(matrix, 'd')) - (_Runtime.field(matrix, 'b') * _Runtime.field(matrix, 'c')));
-    if (_Runtime.truthy(_Runtime.strictEquals(det, 0.0))) { return cast function() return cast ([0.0, 0.0] : Array<Dynamic>); }
+    if ((cast _Runtime.strictEquals(det, 0.0) : Bool)) { return cast function() return cast ([0.0, 0.0] : Array<Dynamic>); }
     invA = (_Runtime.field(matrix, 'd') / det);
     invB = (-_Runtime.field(matrix, 'b') / det);
     invC = (-_Runtime.field(matrix, 'c') / det);
@@ -118,7 +118,7 @@ class DomClipRectangle {
     var parts:Dynamic = cast _Runtime.UNDEFINED;
     transform = _Runtime.field(_Runtime.field(element, 'style'), 'transform');
     match = _Runtime.callProperty(_Runtime.regexp('^matrix\\(([^)]+)\\)$$', ''), 'exec', cast ([transform] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(match, null))) {
+    if ((cast _Runtime.strictEquals(match, null) : Bool)) {
       return cast { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 0.0 };
     }
     parts = _Runtime.callProperty(_Runtime.callProperty(_Runtime.getIndex(match, 1.0), 'split', cast ([','] : Array<Dynamic>)), 'map', cast ([function(value:Dynamic) return _Runtime.callValue(_Runtime.globalValue('Number'), cast ([StringTools.trim(Std.string(value))] : Array<Dynamic>))] : Array<Dynamic>));
@@ -131,16 +131,16 @@ class DomClipRectangle {
     var top:Dynamic = cast _Runtime.UNDEFINED;
     var right:Dynamic = cast _Runtime.UNDEFINED;
     var bottom:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(rectangles, 'length'), 0.0))) { return cast null; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(rectangles, 'length'), 0.0) : Bool)) { return cast null; }
     left = -HxMath.POSITIVE_INFINITY;
     top = -HxMath.POSITIVE_INFINITY;
     right = HxMath.POSITIVE_INFINITY;
     bottom = HxMath.POSITIVE_INFINITY;
     for (rect in _Runtime.iterable(rectangles)) {
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(rect, 'left'), left, '>'))) { (left = cast (_Runtime.field(rect, 'left') : Dynamic)); }
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(rect, 'top'), top, '>'))) { (top = cast (_Runtime.field(rect, 'top') : Dynamic)); }
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(rect, 'right'), right, '<'))) { (right = cast (_Runtime.field(rect, 'right') : Dynamic)); }
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(rect, 'bottom'), bottom, '<'))) { (bottom = cast (_Runtime.field(rect, 'bottom') : Dynamic)); }
+      if ((cast ((cast _Runtime.field(rect, 'left') : Float) > (cast left : Float)) : Bool)) { (left = cast (_Runtime.field(rect, 'left') : Dynamic)); }
+      if ((cast ((cast _Runtime.field(rect, 'top') : Float) > (cast top : Float)) : Bool)) { (top = cast (_Runtime.field(rect, 'top') : Dynamic)); }
+      if ((cast ((cast _Runtime.field(rect, 'right') : Float) < (cast right : Float)) : Bool)) { (right = cast (_Runtime.field(rect, 'right') : Dynamic)); }
+      if ((cast ((cast _Runtime.field(rect, 'bottom') : Float) < (cast bottom : Float)) : Bool)) { (bottom = cast (_Runtime.field(rect, 'bottom') : Dynamic)); }
     }
     return cast { bottom: bottom, left: left, right: right, top: top };
     return cast null;
@@ -165,7 +165,7 @@ class DomClipRectangle {
     var y3:Dynamic = cast _Runtime.UNDEFINED;
     matrix = _Runtime.callValue(DomClipRectangle.getElementMatrix__domClipRectangle, cast ([element] : Array<Dynamic>));
     det = ((_Runtime.field(matrix, 'a') * _Runtime.field(matrix, 'd')) - (_Runtime.field(matrix, 'b') * _Runtime.field(matrix, 'c')));
-    if (_Runtime.truthy(_Runtime.strictEquals(det, 0.0))) { return cast { bottom: 0.0, left: 0.0, right: 0.0, top: 0.0 }; }
+    if ((cast _Runtime.strictEquals(det, 0.0) : Bool)) { return cast { bottom: 0.0, left: 0.0, right: 0.0, top: 0.0 }; }
     invA = (_Runtime.field(matrix, 'd') / det);
     invB = (-_Runtime.field(matrix, 'b') / det);
     invC = (-_Runtime.field(matrix, 'c') / det);

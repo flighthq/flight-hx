@@ -14,7 +14,7 @@ class TextureAtlas {
   }
 
   public static function getTextureAtlasByteSize(atlas:flighthq.types.TextureAtlas):Float {
-    return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.field(atlas, 'image'), null), function():Dynamic return cast _Runtime.callValue(getImageResourceByteSize, cast ([_Runtime.field(atlas, 'image')] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+    return cast ((cast !_Runtime.strictEquals(_Runtime.field(atlas, 'image'), null) : Bool) ? (cast _Runtime.callValue(getImageResourceByteSize, cast ([_Runtime.field(atlas, 'image')] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 }

@@ -13,7 +13,7 @@ class WgpuBackground {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(runtime, 'depthStencilTexture'), null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(runtime, 'depthStencilWidth'), width)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(runtime, 'depthStencilHeight'), height)))) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'depthStencilTexture'), null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(runtime, 'depthStencilWidth'), width) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(runtime, 'depthStencilHeight'), height) : Bool)) : Bool)) {
       return;
     }
     _Runtime.callOptionalProperty(_Runtime.field(runtime, 'depthStencilTexture'), 'destroy', cast ([] : Array<Dynamic>));
@@ -38,7 +38,7 @@ class WgpuBackground {
     var commandEncoder:Dynamic = cast _Runtime.UNDEFINED;
     var renderPass:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null) : Bool)) {
       _Runtime.callProperty(_Runtime.field(runtime, 'renderPass'), 'end', cast ([] : Array<Dynamic>));
       _Runtime.setField(runtime, 'renderPass', null);
     }
@@ -62,7 +62,7 @@ class WgpuBackground {
     _Runtime.setField(runtime, 'currentColorFormat', _Runtime.field(state, 'format'));
     _Runtime.setField(runtime, 'renderTargetViewport', null);
     rgba = _Runtime.field(state, 'backgroundColorRgba');
-    clearValue = _Runtime.select(_Runtime.andValue(_Runtime.compare(_Runtime.field(rgba, 'length'), 4.0, '>='), function():Dynamic return cast _Runtime.compare(_Runtime.getIndex(rgba, 3.0), 0.0, '>')), function():Dynamic return cast { r: _Runtime.getIndex(rgba, 0.0), g: _Runtime.getIndex(rgba, 1.0), b: _Runtime.getIndex(rgba, 2.0), a: _Runtime.getIndex(rgba, 3.0) }, function():Dynamic return cast { r: 0.0, g: 0.0, b: 0.0, a: 0.0 });
+    clearValue = ((cast ((cast ((cast _Runtime.field(rgba, 'length') : Float) >= (cast 4.0 : Float)) : Bool) && (cast ((cast _Runtime.getIndex(rgba, 3.0) : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast { r: _Runtime.getIndex(rgba, 0.0), g: _Runtime.getIndex(rgba, 1.0), b: _Runtime.getIndex(rgba, 2.0), a: _Runtime.getIndex(rgba, 3.0) } : Dynamic) : (cast { r: 0.0, g: 0.0, b: 0.0, a: 0.0 } : Dynamic));
     commandEncoder = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createCommandEncoder', cast ([] : Array<Dynamic>));
     _Runtime.setField(runtime, 'commandEncoder', commandEncoder);
     renderPass = _Runtime.callProperty(commandEncoder, 'beginRenderPass', cast ([{ colorAttachments: cast ([{ view: canvasView, clearValue: clearValue, loadOp: 'clear', storeOp: 'store' }] : Array<Dynamic>), depthStencilAttachment: { view: _Runtime.field(runtime, 'depthStencilView'), depthClearValue: 1.0, depthLoadOp: 'clear', depthStoreOp: 'discard', stencilClearValue: 0.0, stencilLoadOp: 'clear', stencilStoreOp: 'discard' } }] : Array<Dynamic>));
@@ -87,22 +87,22 @@ class WgpuBackground {
     uniformData = _Runtime.field(__destructure0, 'uniformData');
     uniformOffset = _Runtime.field(__destructure0, 'uniformOffset');
     device = _Runtime.field(state, 'device');
-    if (_Runtime.truthy(!_Runtime.strictEquals(renderPass, null))) {
+    if ((cast !_Runtime.strictEquals(renderPass, null) : Bool)) {
       _Runtime.callProperty(renderPass, 'end', cast ([] : Array<Dynamic>));
       _Runtime.setField(runtime, 'renderPass', null);
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(commandEncoder, null))) {
-      if (_Runtime.truthy(_Runtime.compare(uniformOffset, 0.0, '>'))) {
+    if ((cast !_Runtime.strictEquals(commandEncoder, null) : Bool)) {
+      if ((cast ((cast uniformOffset : Float) > (cast 0.0 : Float)) : Bool)) {
         flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([uniformBuffer, 0.0, _Runtime.field(uniformData, 'buffer'), 0.0, uniformOffset] : Array<Dynamic>));
       }
       _Runtime.callValue(encodeWgpuFrameCapture, cast ([state, commandEncoder] : Array<Dynamic>));
       flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'submit', cast ([cast ([_Runtime.callProperty(commandEncoder, 'finish', cast ([] : Array<Dynamic>))] : Array<Dynamic>)] : Array<Dynamic>));
       _Runtime.setField(runtime, 'commandEncoder', null);
       var retired:Dynamic = _Runtime.field(runtime, 'retiredBuffers');
-      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(retired, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.compare(_Runtime.field(retired, 'length'), 0.0, '>')))) {
+      if ((cast ((cast !_Runtime.strictEquals(retired, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(retired, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
         {
           var i:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(retired, 'length'), '<'))) {
+          while ((cast ((cast i : Float) < (cast _Runtime.field(retired, 'length') : Float)) : Bool)) {
             _Runtime.callProperty(_Runtime.getIndex(retired, i), 'destroy', cast ([] : Array<Dynamic>));
             i++;
           }

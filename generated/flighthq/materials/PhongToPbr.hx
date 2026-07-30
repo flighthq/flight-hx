@@ -16,7 +16,7 @@ class PhongToPbr {
   }
 
   public static function getPbrMetallicFromPhongSpecular(specular:Float, diffuse:Float):Float {
-    return cast _Runtime.select(_Runtime.andValue(_Runtime.compare(_Runtime.callValue(getColorLuminance, cast ([specular] : Array<Dynamic>)), 0.5, '>'), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(getColorLuminance, cast ([diffuse] : Array<Dynamic>)), 0.04, '<')), function():Dynamic return cast 1.0, function():Dynamic return cast 0.0);
+    return cast ((cast ((cast ((cast _Runtime.callValue(getColorLuminance, cast ([specular] : Array<Dynamic>)) : Float) > (cast 0.5 : Float)) : Bool) && (cast ((cast _Runtime.callValue(getColorLuminance, cast ([diffuse] : Array<Dynamic>)) : Float) < (cast 0.04 : Float)) : Bool)) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 

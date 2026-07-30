@@ -28,7 +28,7 @@ class DomCache {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     targets = _Runtime.callValue(DomCache.getTargets__domCache, cast ([state] : Array<Dynamic>));
     target = ((cast targets : flighthq._internal._WeakMap).get(cache));
-    if (_Runtime.truthy(_Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (target = cast (_Runtime.callValue(createCanvasRenderTarget, cast ([width, height] : Array<Dynamic>)) : Dynamic));
       _Runtime.callValue(prepareDomElement, cast ([_Runtime.field(target, 'canvas')] : Array<Dynamic>));
       ((cast targets : flighthq._internal._WeakMap).set(cache, target));
@@ -54,14 +54,14 @@ class DomCache {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     cache = _Runtime.callValue(getRenderProxyCache, cast ([state, _Runtime.field(data, 'source')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(cache, null))) { return; }
+    if ((cast _Runtime.strictEquals(cache, null) : Bool)) { return; }
     domState = (cast state : DomRenderState);
     target = ((cast _Runtime.callValue(DomCache.getTargets__domCache, cast ([domState] : Array<Dynamic>)) : flighthq._internal._WeakMap).get(cache));
-    if (_Runtime.truthy(_Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
+    if ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     canvas = _Runtime.field(target, 'canvas');
     _Runtime.callValue(setDomTransformWithOffset, cast ([canvas, _Runtime.field(data, 'transform2D'), 0.0, 0.0, _Runtime.field(domState, 'roundPixels')] : Array<Dynamic>));
-    _Runtime.setField(_Runtime.field(canvas, 'style'), 'opacity', _Runtime.select(_Runtime.compare(_Runtime.field(data, 'alpha'), 1.0, '<'), function():Dynamic return cast Std.string(_Runtime.field(data, 'alpha')), function():Dynamic return cast ''));
-    _Runtime.setField(_Runtime.field(canvas, 'style'), 'imageRendering', _Runtime.select(_Runtime.field(state, 'allowSmoothing'), function():Dynamic return cast '', function():Dynamic return cast 'pixelated'));
+    _Runtime.setField(_Runtime.field(canvas, 'style'), 'opacity', ((cast ((cast _Runtime.field(data, 'alpha') : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string(_Runtime.field(data, 'alpha')) : Dynamic) : (cast '' : Dynamic)));
+    _Runtime.setField(_Runtime.field(canvas, 'style'), 'imageRendering', ((cast _Runtime.field(state, 'allowSmoothing') : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic)));
     _Runtime.callOptionalProperty(domState, 'applyBlendMode', cast ([canvas, _Runtime.field(data, 'blendMode')] : Array<Dynamic>));
     _Runtime.callValue(setDomRendererElement, cast ([domState, canvas] : Array<Dynamic>));
   }
@@ -69,7 +69,7 @@ class DomCache {
   public static function getTargets__domCache(state:DomRenderState):Dynamic {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     targets = ((cast DomCache._renderCacheTargets__domCache : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(targets, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(targets, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (targets = cast (_Runtime.construct(_Runtime.globalValue('WeakMap'), []) : Dynamic));
       ((cast DomCache._renderCacheTargets__domCache : flighthq._internal._WeakMap).set(state, targets));
     }

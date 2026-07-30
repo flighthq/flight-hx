@@ -18,16 +18,16 @@ class SurfaceAlpha {
     dd = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, h, '<'))) {
+      while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
         var sy:Dynamic = (_Runtime.field(source, 'y') + py);
         var dy:Dynamic = (_Runtime.field(dest, 'y') + py);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(sy, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sy, _Runtime.field(_Runtime.field(source, 'surface'), 'height'), '>=')), function():Dynamic return cast _Runtime.compare(dy, 0.0, '<')), function():Dynamic return cast _Runtime.compare(dy, _Runtime.field(_Runtime.field(dest, 'surface'), 'height'), '>=')))) { py++; continue; }
+        if ((cast ((cast ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'height') : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, w, '<'))) {
+          while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
             var sx:Dynamic = (_Runtime.field(source, 'x') + px);
             var dx:Dynamic = (_Runtime.field(dest, 'x') + px);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(sx, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sx, _Runtime.field(_Runtime.field(source, 'surface'), 'width'), '>=')), function():Dynamic return cast _Runtime.compare(dx, 0.0, '<')), function():Dynamic return cast _Runtime.compare(dx, _Runtime.field(_Runtime.field(dest, 'surface'), 'width'), '>=')))) { px++; continue; }
+            if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'width') : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Dynamic = (((sy * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sx) * 4.0);
             var di:Dynamic = (((dy * _Runtime.field(_Runtime.field(dest, 'surface'), 'width')) + dx) * 4.0);
             var alpha:Dynamic = _Runtime.getIndex(sd, (si + 3.0));
@@ -50,14 +50,14 @@ class SurfaceAlpha {
     surfaceWidth = _Runtime.field(_Runtime.field(out, 'surface'), 'width');
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(out, 'height'), '<'))) {
+      while ((cast ((cast py : Float) < (cast _Runtime.field(out, 'height') : Float)) : Bool)) {
         var y:Dynamic = (_Runtime.field(out, 'y') + py);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(y, 0.0, '<'), function():Dynamic return cast _Runtime.compare(y, _Runtime.field(_Runtime.field(out, 'surface'), 'height'), '>=')))) { py++; continue; }
+        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(_Runtime.field(out, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, _Runtime.field(out, 'width'), '<'))) {
+          while ((cast ((cast px : Float) < (cast _Runtime.field(out, 'width') : Float)) : Bool)) {
             var x:Dynamic = (_Runtime.field(out, 'x') + px);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(x, 0.0, '<'), function():Dynamic return cast _Runtime.compare(x, surfaceWidth, '>=')))) { px++; continue; }
+            if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast surfaceWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var i:Dynamic = ((((y * surfaceWidth) + x) * 4.0) + 3.0);
             _Runtime.setIndex(data, i, HxMath.round((_Runtime.getIndex(data, i) * f)));
             px++;
@@ -78,14 +78,14 @@ class SurfaceAlpha {
     surfaceWidth = _Runtime.field(_Runtime.field(out, 'surface'), 'width');
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(out, 'height'), '<'))) {
+      while ((cast ((cast py : Float) < (cast _Runtime.field(out, 'height') : Float)) : Bool)) {
         var y:Dynamic = (_Runtime.field(out, 'y') + py);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(y, 0.0, '<'), function():Dynamic return cast _Runtime.compare(y, _Runtime.field(_Runtime.field(out, 'surface'), 'height'), '>=')))) { py++; continue; }
+        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(_Runtime.field(out, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, _Runtime.field(out, 'width'), '<'))) {
+          while ((cast ((cast px : Float) < (cast _Runtime.field(out, 'width') : Float)) : Bool)) {
             var x:Dynamic = (_Runtime.field(out, 'x') + px);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(x, 0.0, '<'), function():Dynamic return cast _Runtime.compare(x, surfaceWidth, '>=')))) { px++; continue; }
+            if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast surfaceWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             _Runtime.setIndex(data, ((((y * surfaceWidth) + x) * 4.0) + 3.0), a);
             px++;
           }

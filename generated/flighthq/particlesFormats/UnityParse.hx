@@ -38,36 +38,36 @@ class UnityParse {
     } catch (e:Dynamic) {
       throw _Runtime.error('Invalid Unity particle JSON: ' + Std.string(_Runtime.field((cast e : haxe.Exception), 'message')) + '');
     }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(raw, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(raw), 'object')), function():Dynamic return cast _Runtime.isArray(raw)))) {
-      throw _Runtime.error('Invalid Unity particle document: expected a JSON object, got ' + Std.string(_Runtime.select(_Runtime.strictEquals(raw, null), function():Dynamic return cast 'null', function():Dynamic return cast _Runtime.select(_Runtime.isArray(raw), function():Dynamic return cast 'array', function():Dynamic return cast _Runtime.typeofValue(raw)))) + '');
+    if ((cast ((cast ((cast _Runtime.strictEquals(raw, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool)) : Bool) || (cast _Runtime.isArray(raw) : Bool)) : Bool)) {
+      throw _Runtime.error('Invalid Unity particle document: expected a JSON object, got ' + Std.string(((cast _Runtime.strictEquals(raw, null) : Bool) ? (cast 'null' : Dynamic) : (cast ((cast _Runtime.isArray(raw) : Bool) ? (cast 'array' : Dynamic) : (cast _Runtime.typeofValue(raw) : Dynamic)) : Dynamic))) + '');
     }
     return cast (cast raw : Dynamic);
     return cast null;
   }
 
   public static function rn__unityParse(obj:Dynamic, def:Dynamic = 0.0):Float {
-    return cast _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(obj), 'number'), function():Dynamic return cast obj, function():Dynamic return cast def);
+    return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'number') : Bool) ? (cast obj : Dynamic) : (cast def : Dynamic));
     return cast null;
   }
 
   public static function rb__unityParse(obj:Dynamic, def:Bool):Bool {
-    return cast _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(obj), 'boolean'), function():Dynamic return cast obj, function():Dynamic return cast def);
+    return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'boolean') : Bool) ? (cast obj : Dynamic) : (cast def : Dynamic));
     return cast null;
   }
 
   public static function rs__unityParse(obj:Dynamic, def:String):String {
-    return cast _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(obj), 'string'), function():Dynamic return cast obj, function():Dynamic return cast def);
+    return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'string') : Bool) ? (cast obj : Dynamic) : (cast def : Dynamic));
     return cast null;
   }
 
   public static function mmLow__unityParse(obj:Dynamic, def:Dynamic = 0.0):Float {
     var o:Dynamic = cast _Runtime.UNDEFINED;
     var mode:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.looseEquals(obj, null))) { return cast def; }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(obj), 'number'))) { return cast obj; }
+    if ((cast _Runtime.looseEquals(obj, null) : Bool)) { return cast def; }
+    if ((cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'number') : Bool)) { return cast obj; }
     o = (cast obj : Dynamic);
     mode = _Runtime.callValue(UnityParse.rs__unityParse, cast ([_Runtime.field(o, 'mode'), 'constant'] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(mode, 'twoConstants'), function():Dynamic return cast _Runtime.strictEquals(mode, 'twoCurves')))) { return cast _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'constantMin'), _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'constant'), def] : Array<Dynamic>))] : Array<Dynamic>)); }
+    if ((cast ((cast _Runtime.strictEquals(mode, 'twoConstants') : Bool) || (cast _Runtime.strictEquals(mode, 'twoCurves') : Bool)) : Bool)) { return cast _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'constantMin'), _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'constant'), def] : Array<Dynamic>))] : Array<Dynamic>)); }
     return cast _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'constant'), def] : Array<Dynamic>));
     return cast null;
   }
@@ -75,17 +75,17 @@ class UnityParse {
   public static function mmHigh__unityParse(obj:Dynamic, def:Dynamic = 0.0):Float {
     var o:Dynamic = cast _Runtime.UNDEFINED;
     var mode:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.looseEquals(obj, null))) { return cast def; }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(obj), 'number'))) { return cast obj; }
+    if ((cast _Runtime.looseEquals(obj, null) : Bool)) { return cast def; }
+    if ((cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'number') : Bool)) { return cast obj; }
     o = (cast obj : Dynamic);
     mode = _Runtime.callValue(UnityParse.rs__unityParse, cast ([_Runtime.field(o, 'mode'), 'constant'] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(mode, 'twoConstants'), function():Dynamic return cast _Runtime.strictEquals(mode, 'twoCurves')))) { return cast _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'constantMax'), _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'constant'), def] : Array<Dynamic>))] : Array<Dynamic>)); }
+    if ((cast ((cast _Runtime.strictEquals(mode, 'twoConstants') : Bool) || (cast _Runtime.strictEquals(mode, 'twoCurves') : Bool)) : Bool)) { return cast _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'constantMax'), _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'constant'), def] : Array<Dynamic>))] : Array<Dynamic>)); }
     return cast _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'constant'), def] : Array<Dynamic>));
     return cast null;
   }
 
   public static function colorAt__unityParse(obj:Dynamic, def:UnityColor):UnityColor {
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.looseEquals(obj, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'object')))) {
+    if ((cast ((cast !_Runtime.looseEquals(obj, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'object') : Bool)) : Bool)) {
       var o:Dynamic = (cast obj : Dynamic);
       return cast { r: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'r'), _Runtime.field(def, 'r')] : Array<Dynamic>)), g: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'g'), _Runtime.field(def, 'g')] : Array<Dynamic>)), b: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'b'), _Runtime.field(def, 'b')] : Array<Dynamic>)), a: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'a'), _Runtime.field(def, 'a')] : Array<Dynamic>)) };
     }
@@ -136,10 +136,10 @@ class UnityParse {
     gravPixels = ((_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(raw, 'gravityModifier'), 0.0] : Array<Dynamic>)) * physicsGravity) * ppu);
     emRaw = (cast _Runtime.field(raw, 'emission') : Null<Dynamic>);
     spawnRate = ((_Runtime.callValue(UnityParse.mmLow__unityParse, cast ([_Runtime.optionalField(emRaw, 'rateOverTime'), 10.0] : Array<Dynamic>)) + _Runtime.callValue(UnityParse.mmHigh__unityParse, cast ([_Runtime.optionalField(emRaw, 'rateOverTime'), 10.0] : Array<Dynamic>))) * 0.5);
-    burstsRaw = _Runtime.select(_Runtime.isArray(_Runtime.optionalField(emRaw, 'bursts')), function():Dynamic return cast (cast _Runtime.field(emRaw, 'bursts') : Array<Dynamic>), function():Dynamic return cast cast ([] : Array<Dynamic>));
+    burstsRaw = ((cast _Runtime.isArray(_Runtime.optionalField(emRaw, 'bursts')) : Bool) ? (cast (cast _Runtime.field(emRaw, 'bursts') : Array<Dynamic>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
     burst0 = _Runtime.getIndex(burstsRaw, 0.0);
     burstCount = _Runtime.select(burst0, function():Dynamic return cast _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(burst0, 'count'), 0.0] : Array<Dynamic>)), function():Dynamic return cast 0.0);
-    burstInterval = _Runtime.select(_Runtime.andValue(burst0, function():Dynamic return cast !_Runtime.strictEquals(_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(burst0, 'cycleCount'), 1.0] : Array<Dynamic>)), 1.0)), function():Dynamic return cast _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(burst0, 'repeatInterval'), 0.0] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+    burstInterval = ((cast _Runtime.andValue(burst0, function():Dynamic return cast !_Runtime.strictEquals(_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(burst0, 'cycleCount'), 1.0] : Array<Dynamic>)), 1.0)) : Bool) ? (cast _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(burst0, 'repeatInterval'), 0.0] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
     shapeRaw = (cast _Runtime.field(raw, 'shape') : Null<Dynamic>);
     shapeEnabled = _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.optionalField(shapeRaw, 'enabled'), false] : Array<Dynamic>));
     shapeType = _Runtime.callValue(UnityParse.rs__unityParse, cast ([_Runtime.optionalField(shapeRaw, 'shapeType'), 'Cone'] : Array<Dynamic>));
@@ -150,21 +150,21 @@ class UnityParse {
     directionX = 0.0;
     directionY = -1.0;
     spread = HxMath.PI;
-    if (_Runtime.truthy(shapeEnabled)) {
+    if ((cast shapeEnabled : Bool)) {
       var shapeRadius:Dynamic = (_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.optionalField(shapeRaw, 'radius'), 0.0] : Array<Dynamic>)) * ppu);
       var scaleRaw:Dynamic = (cast _Runtime.optionalField(shapeRaw, 'scale') : Null<Dynamic>);
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(shapeType, 'Sphere'), function():Dynamic return cast _Runtime.strictEquals(shapeType, 'Hemisphere')), function():Dynamic return cast _Runtime.strictEquals(shapeType, 'Circle')))) {
+      if ((cast ((cast ((cast _Runtime.strictEquals(shapeType, 'Sphere') : Bool) || (cast _Runtime.strictEquals(shapeType, 'Hemisphere') : Bool)) : Bool) || (cast _Runtime.strictEquals(shapeType, 'Circle') : Bool)) : Bool)) {
         (emitterShape = cast ('circle' : Dynamic));
         (emitterRadius = cast (shapeRadius : Dynamic));
         (spread = cast ((HxMath.PI * 2.0) : Dynamic));
-      } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(shapeType, 'Box'), function():Dynamic return cast _Runtime.strictEquals(shapeType, 'Rectangle')))) {
+      } else { if ((cast ((cast _Runtime.strictEquals(shapeType, 'Box') : Bool) || (cast _Runtime.strictEquals(shapeType, 'Rectangle') : Bool)) : Bool)) {
         (emitterShape = cast ('rect' : Dynamic));
         (emitterWidth = cast ((_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.optionalField(scaleRaw, 'x'), 1.0] : Array<Dynamic>)) * ppu) : Dynamic));
         (emitterHeight = cast ((_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.optionalField(scaleRaw, 'y'), 1.0] : Array<Dynamic>)) * ppu) : Dynamic));
         (spread = cast ((HxMath.PI * 2.0) : Dynamic));
-      } else { if (_Runtime.truthy(_Runtime.strictEquals(shapeType, 'Cone'))) {
+      } else { if ((cast _Runtime.strictEquals(shapeType, 'Cone') : Bool)) {
         (spread = cast ((_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.optionalField(shapeRaw, 'angle'), 25.0] : Array<Dynamic>)) * UnityParse.DEG2RAD__unityParse) : Dynamic));
-        (emitterShape = cast (_Runtime.select(_Runtime.compare(shapeRadius, 0.0, '>'), function():Dynamic return cast 'circle', function():Dynamic return cast 'point') : Dynamic));
+        (emitterShape = cast (((cast ((cast shapeRadius : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'circle' : Dynamic) : (cast 'point' : Dynamic)) : Dynamic));
         (emitterRadius = cast (shapeRadius : Dynamic));
       } } }
     }
@@ -172,23 +172,23 @@ class UnityParse {
     scaleHigh = _Runtime.callValue(UnityParse.mmHigh__unityParse, cast ([_Runtime.field(raw, 'startSize'), 1.0] : Array<Dynamic>));
     solRaw = (cast _Runtime.field(raw, 'sizeOverLifetime') : Null<Dynamic>);
     solEnabled = _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.optionalField(solRaw, 'enabled'), false] : Array<Dynamic>));
-    scaleEnd = _Runtime.select(solEnabled, function():Dynamic return cast (_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.optionalField(solRaw, 'sizeEnd'), 1.0] : Array<Dynamic>)) / HxMath.max(0.001, ((scaleLow + scaleHigh) * 0.5))), function():Dynamic return cast 1.0);
+    scaleEnd = ((cast solEnabled : Bool) ? (cast (_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.optionalField(solRaw, 'sizeEnd'), 1.0] : Array<Dynamic>)) / HxMath.max(0.001, ((scaleLow + scaleHigh) * 0.5))) : Dynamic) : (cast 1.0 : Dynamic));
     colRaw = (cast _Runtime.field(raw, 'colorOverLifetime') : Null<Dynamic>);
     colEnabled = _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.optionalField(colRaw, 'enabled'), false] : Array<Dynamic>));
     WHITE = { r: 1.0, g: 1.0, b: 1.0, a: 1.0 };
     FADE = { r: 1.0, g: 1.0, b: 1.0, a: 0.0 };
-    startColor = _Runtime.select(colEnabled, function():Dynamic return cast _Runtime.callValue(UnityParse.colorAt__unityParse, cast ([_Runtime.optionalField(colRaw, 'colorStart'), WHITE] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(UnityParse.colorAt__unityParse, cast ([_Runtime.field(raw, 'startColor'), WHITE] : Array<Dynamic>)));
-    endColor = _Runtime.select(colEnabled, function():Dynamic return cast _Runtime.callValue(UnityParse.colorAt__unityParse, cast ([_Runtime.optionalField(colRaw, 'colorEnd'), FADE] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(UnityParse.colorAt__unityParse, cast ([_Runtime.field(raw, 'startColor'), WHITE] : Array<Dynamic>)));
-    gradient = _Runtime.select(colEnabled, function():Dynamic return cast (cast _Runtime.optionalField(colRaw, 'gradient') : Null<Dynamic>), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
+    startColor = ((cast colEnabled : Bool) ? (cast _Runtime.callValue(UnityParse.colorAt__unityParse, cast ([_Runtime.optionalField(colRaw, 'colorStart'), WHITE] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(UnityParse.colorAt__unityParse, cast ([_Runtime.field(raw, 'startColor'), WHITE] : Array<Dynamic>)) : Dynamic));
+    endColor = ((cast colEnabled : Bool) ? (cast _Runtime.callValue(UnityParse.colorAt__unityParse, cast ([_Runtime.optionalField(colRaw, 'colorEnd'), FADE] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(UnityParse.colorAt__unityParse, cast ([_Runtime.field(raw, 'startColor'), WHITE] : Array<Dynamic>)) : Dynamic));
+    gradient = ((cast colEnabled : Bool) ? (cast (cast _Runtime.optionalField(colRaw, 'gradient') : Null<Dynamic>) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
     colorCurve = _Runtime.callValue(UnityParse.colorKeysToCurve__unityParse, cast ([_Runtime.optionalField(gradient, 'colorKeys')] : Array<Dynamic>));
     alphaCurve = _Runtime.callValue(UnityParse.alphaKeysToCurve__unityParse, cast ([_Runtime.optionalField(gradient, 'alphaKeys')] : Array<Dynamic>));
-    scaleCurve = _Runtime.select(solEnabled, function():Dynamic return cast _Runtime.callValue(UnityParse.sizeKeysToCurve__unityParse, cast ([_Runtime.optionalField(solRaw, 'curve')] : Array<Dynamic>)), function():Dynamic return cast null);
+    scaleCurve = ((cast solEnabled : Bool) ? (cast _Runtime.callValue(UnityParse.sizeKeysToCurve__unityParse, cast ([_Runtime.optionalField(solRaw, 'curve')] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
     rolRaw = (cast _Runtime.field(raw, 'rotationOverLifetime') : Null<Dynamic>);
     rolEnabled = _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.optionalField(rolRaw, 'enabled'), false] : Array<Dynamic>));
-    rotLow = _Runtime.select(rolEnabled, function():Dynamic return cast (_Runtime.callValue(UnityParse.mmLow__unityParse, cast ([_Runtime.optionalField(rolRaw, 'angularVelocity'), 0.0] : Array<Dynamic>)) * UnityParse.DEG2RAD__unityParse), function():Dynamic return cast 0.0);
-    rotHigh = _Runtime.select(rolEnabled, function():Dynamic return cast (_Runtime.callValue(UnityParse.mmHigh__unityParse, cast ([_Runtime.optionalField(rolRaw, 'angularVelocity'), 0.0] : Array<Dynamic>)) * UnityParse.DEG2RAD__unityParse), function():Dynamic return cast 0.0);
+    rotLow = ((cast rolEnabled : Bool) ? (cast (_Runtime.callValue(UnityParse.mmLow__unityParse, cast ([_Runtime.optionalField(rolRaw, 'angularVelocity'), 0.0] : Array<Dynamic>)) * UnityParse.DEG2RAD__unityParse) : Dynamic) : (cast 0.0 : Dynamic));
+    rotHigh = ((cast rolEnabled : Bool) ? (cast (_Runtime.callValue(UnityParse.mmHigh__unityParse, cast ([_Runtime.optionalField(rolRaw, 'angularVelocity'), 0.0] : Array<Dynamic>)) * UnityParse.DEG2RAD__unityParse) : Dynamic) : (cast 0.0 : Dynamic));
     looping = _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.field(raw, 'looping'), true] : Array<Dynamic>));
-    return cast _Runtime.callValue(createParticleEmitterConfig, cast ([{ maxParticles: (_Runtime.toInt32(_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(raw, 'maxParticles'), 1000.0] : Array<Dynamic>))) | 0), spawnRate: spawnRate, loop: looping, duration: _Runtime.select(looping, function():Dynamic return cast 0.0, function():Dynamic return cast HxMath.max(0.0, _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(raw, 'duration'), 5.0] : Array<Dynamic>)))), lifetimeMin: _Runtime.callValue(UnityParse.mmLow__unityParse, cast ([_Runtime.field(raw, 'startLifetime'), 1.0] : Array<Dynamic>)), lifetimeMax: _Runtime.callValue(UnityParse.mmHigh__unityParse, cast ([_Runtime.field(raw, 'startLifetime'), 1.0] : Array<Dynamic>)), speedMin: (_Runtime.callValue(UnityParse.mmLow__unityParse, cast ([_Runtime.field(raw, 'startSpeed'), 5.0] : Array<Dynamic>)) * ppu), speedMax: (_Runtime.callValue(UnityParse.mmHigh__unityParse, cast ([_Runtime.field(raw, 'startSpeed'), 5.0] : Array<Dynamic>)) * ppu), directionX: directionX, directionY: directionY, spread: spread, gravityX: 0.0, gravityY: gravPixels, emitterShape: emitterShape, emitterRadius: emitterRadius, emitterWidth: emitterWidth, emitterHeight: emitterHeight, scaleMin: scaleLow, scaleMax: scaleHigh, scaleEnd: scaleEnd, colorStartR: _Runtime.field(startColor, 'r'), colorStartG: _Runtime.field(startColor, 'g'), colorStartB: _Runtime.field(startColor, 'b'), colorEndR: _Runtime.field(endColor, 'r'), colorEndG: _Runtime.field(endColor, 'g'), colorEndB: _Runtime.field(endColor, 'b'), alphaStart: _Runtime.field(startColor, 'a'), alphaEnd: _Runtime.field(endColor, 'a'), colorCurve: colorCurve, alphaCurve: alphaCurve, scaleCurve: scaleCurve, rotationSpeedMin: rotLow, rotationSpeedMax: rotHigh, burstCount: burstCount, burstInterval: burstInterval, blendMode: _Runtime.callValue(UnityParse.unityBlendMode__unityParse, cast ([raw] : Array<Dynamic>)) }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createParticleEmitterConfig, cast ([{ maxParticles: (_Runtime.toInt32(_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(raw, 'maxParticles'), 1000.0] : Array<Dynamic>))) | 0), spawnRate: spawnRate, loop: looping, duration: ((cast looping : Bool) ? (cast 0.0 : Dynamic) : (cast HxMath.max(0.0, _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(raw, 'duration'), 5.0] : Array<Dynamic>))) : Dynamic)), lifetimeMin: _Runtime.callValue(UnityParse.mmLow__unityParse, cast ([_Runtime.field(raw, 'startLifetime'), 1.0] : Array<Dynamic>)), lifetimeMax: _Runtime.callValue(UnityParse.mmHigh__unityParse, cast ([_Runtime.field(raw, 'startLifetime'), 1.0] : Array<Dynamic>)), speedMin: (_Runtime.callValue(UnityParse.mmLow__unityParse, cast ([_Runtime.field(raw, 'startSpeed'), 5.0] : Array<Dynamic>)) * ppu), speedMax: (_Runtime.callValue(UnityParse.mmHigh__unityParse, cast ([_Runtime.field(raw, 'startSpeed'), 5.0] : Array<Dynamic>)) * ppu), directionX: directionX, directionY: directionY, spread: spread, gravityX: 0.0, gravityY: gravPixels, emitterShape: emitterShape, emitterRadius: emitterRadius, emitterWidth: emitterWidth, emitterHeight: emitterHeight, scaleMin: scaleLow, scaleMax: scaleHigh, scaleEnd: scaleEnd, colorStartR: _Runtime.field(startColor, 'r'), colorStartG: _Runtime.field(startColor, 'g'), colorStartB: _Runtime.field(startColor, 'b'), colorEndR: _Runtime.field(endColor, 'r'), colorEndG: _Runtime.field(endColor, 'g'), colorEndB: _Runtime.field(endColor, 'b'), alphaStart: _Runtime.field(startColor, 'a'), alphaEnd: _Runtime.field(endColor, 'a'), colorCurve: colorCurve, alphaCurve: alphaCurve, scaleCurve: scaleCurve, rotationSpeedMin: rotLow, rotationSpeedMax: rotHigh, burstCount: burstCount, burstInterval: burstInterval, blendMode: _Runtime.callValue(UnityParse.unityBlendMode__unityParse, cast ([raw] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -203,24 +203,24 @@ class UnityParse {
       var key:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
       var label:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
       var mod:Dynamic = _Runtime.getIndex(raw, key);
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.looseEquals(mod, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(mod), 'object')), function():Dynamic return cast _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.field((cast mod : Dynamic), 'enabled'), false] : Array<Dynamic>))))) {
+      if ((cast ((cast ((cast !_Runtime.looseEquals(mod, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(mod), 'object') : Bool)) : Bool) && (cast _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.field((cast mod : Dynamic), 'enabled'), false] : Array<Dynamic>)) : Bool)) : Bool)) {
         _Runtime.callProperty(warnings, 'push', cast (['Unity ' + Std.string(label) + ' module is not supported and was ignored'] : Array<Dynamic>));
       }
     }
     em = (cast _Runtime.field(raw, 'emission') : Null<Dynamic>);
-    bursts = _Runtime.select(_Runtime.isArray(_Runtime.optionalField(em, 'bursts')), function():Dynamic return cast _Runtime.field(em, 'bursts'), function():Dynamic return cast cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(bursts, 'length'), 1.0, '>'))) { _Runtime.callProperty(warnings, 'push', cast (['Only the first of ' + Std.string(_Runtime.field(bursts, 'length')) + ' emission bursts was imported'] : Array<Dynamic>)); }
+    bursts = ((cast _Runtime.isArray(_Runtime.optionalField(em, 'bursts')) : Bool) ? (cast _Runtime.field(em, 'bursts') : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
+    if ((cast ((cast _Runtime.field(bursts, 'length') : Float) > (cast 1.0 : Float)) : Bool)) { _Runtime.callProperty(warnings, 'push', cast (['Only the first of ' + Std.string(_Runtime.field(bursts, 'length')) + ' emission bursts was imported'] : Array<Dynamic>)); }
     return cast warnings;
     return cast null;
   }
 
   public static function colorKeysToCurve__unityParse(arr:Dynamic):Null<ParticleCurve> {
     var keys:Array<ColorKeyframe> = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.isArray(arr)), function():Dynamic return cast _Runtime.compare(_Runtime.field(arr, 'length'), 2.0, '<=')))) { return cast null; }
+    if ((cast ((cast !(cast _Runtime.isArray(arr) : Bool) : Bool) || (cast ((cast _Runtime.field(arr, 'length') : Float) <= (cast 2.0 : Float)) : Bool)) : Bool)) { return cast null; }
     keys = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(arr, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(arr, 'length') : Float)) : Bool)) {
         var k:Dynamic = (cast _Runtime.getIndex(arr, i) : Dynamic);
         var c:Dynamic = (cast _Runtime.coalesce(_Runtime.field(k, 'color'), function():Dynamic return cast k) : Dynamic);
         _Runtime.callProperty(keys, 'push', cast ([{ time: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(k, 'time'), (i / (_Runtime.field(arr, 'length') - 1.0))] : Array<Dynamic>)), r: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(c, 'r'), 1.0] : Array<Dynamic>)), g: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(c, 'g'), 1.0] : Array<Dynamic>)), b: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(c, 'b'), 1.0] : Array<Dynamic>)) }] : Array<Dynamic>));
@@ -233,11 +233,11 @@ class UnityParse {
 
   public static function alphaKeysToCurve__unityParse(arr:Dynamic):Null<ParticleCurve> {
     var keys:Array<CurveKeyframe> = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.isArray(arr)), function():Dynamic return cast _Runtime.compare(_Runtime.field(arr, 'length'), 2.0, '<=')))) { return cast null; }
+    if ((cast ((cast !(cast _Runtime.isArray(arr) : Bool) : Bool) || (cast ((cast _Runtime.field(arr, 'length') : Float) <= (cast 2.0 : Float)) : Bool)) : Bool)) { return cast null; }
     keys = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(arr, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(arr, 'length') : Float)) : Bool)) {
         var k:Dynamic = (cast _Runtime.getIndex(arr, i) : Dynamic);
         _Runtime.callProperty(keys, 'push', cast ([{ time: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(k, 'time'), (i / (_Runtime.field(arr, 'length') - 1.0))] : Array<Dynamic>)), value: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(k, 'alpha'), 1.0] : Array<Dynamic>)) }] : Array<Dynamic>));
         i++;
@@ -250,13 +250,13 @@ class UnityParse {
   public static function sizeKeysToCurve__unityParse(curve:Dynamic):Null<ParticleCurve> {
     var arr:Dynamic = cast _Runtime.UNDEFINED;
     var keys:Array<CurveKeyframe> = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.looseEquals(curve, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(curve), 'object')))) { return cast null; }
+    if ((cast ((cast _Runtime.looseEquals(curve, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(curve), 'object') : Bool)) : Bool)) { return cast null; }
     arr = _Runtime.field((cast curve : Dynamic), 'keys');
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.isArray(arr)), function():Dynamic return cast _Runtime.compare(_Runtime.field(arr, 'length'), 2.0, '<=')))) { return cast null; }
+    if ((cast ((cast !(cast _Runtime.isArray(arr) : Bool) : Bool) || (cast ((cast _Runtime.field(arr, 'length') : Float) <= (cast 2.0 : Float)) : Bool)) : Bool)) { return cast null; }
     keys = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(arr, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(arr, 'length') : Float)) : Bool)) {
         var k:Dynamic = (cast _Runtime.getIndex(arr, i) : Dynamic);
         _Runtime.callProperty(keys, 'push', cast ([{ time: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(k, 'time'), (i / (_Runtime.field(arr, 'length') - 1.0))] : Array<Dynamic>)), value: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(k, 'value'), 1.0] : Array<Dynamic>)) }] : Array<Dynamic>));
         i++;
@@ -268,19 +268,19 @@ class UnityParse {
 
   public static function unityBlendMode__unityParse(raw:Dynamic):Null<ParticleBlendMode> {
     var mode:Dynamic = cast _Runtime.UNDEFINED;
-    mode = _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(raw, 'blendMode')), 'string'), function():Dynamic return cast _Runtime.callProperty(_Runtime.field(raw, 'blendMode'), 'toLowerCase', cast ([] : Array<Dynamic>)), function():Dynamic return cast null);
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(mode, 'additive'), function():Dynamic return cast _Runtime.strictEquals(mode, 'add')))) { return cast 'add'; }
-    if (_Runtime.truthy(_Runtime.strictEquals(mode, 'multiply'))) { return cast 'multiply'; }
-    if (_Runtime.truthy(_Runtime.strictEquals(mode, 'screen'))) { return cast 'screen'; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(mode, 'normal'), function():Dynamic return cast _Runtime.strictEquals(mode, 'alpha')))) { return cast 'normal'; }
+    mode = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(raw, 'blendMode')), 'string') : Bool) ? (cast _Runtime.callProperty(_Runtime.field(raw, 'blendMode'), 'toLowerCase', cast ([] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
+    if ((cast ((cast _Runtime.strictEquals(mode, 'additive') : Bool) || (cast _Runtime.strictEquals(mode, 'add') : Bool)) : Bool)) { return cast 'add'; }
+    if ((cast _Runtime.strictEquals(mode, 'multiply') : Bool)) { return cast 'multiply'; }
+    if ((cast _Runtime.strictEquals(mode, 'screen') : Bool)) { return cast 'screen'; }
+    if ((cast ((cast _Runtime.strictEquals(mode, 'normal') : Bool) || (cast _Runtime.strictEquals(mode, 'alpha') : Bool)) : Bool)) { return cast 'normal'; }
     return cast null;
     return cast null;
   }
 
   public static function readMinMax__unityParse(obj:Dynamic, defConst:Dynamic = 1.0):UnityMinMaxValue {
     var o:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.looseEquals(obj, null))) { return cast { mode: 'constant', constant: defConst }; }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(obj), 'number'))) { return cast { mode: 'constant', constant: obj }; }
+    if ((cast _Runtime.looseEquals(obj, null) : Bool)) { return cast { mode: 'constant', constant: defConst }; }
+    if ((cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'number') : Bool)) { return cast { mode: 'constant', constant: obj }; }
     o = (cast obj : Dynamic);
     return cast { mode: (cast _Runtime.callValue(UnityParse.rs__unityParse, cast ([_Runtime.field(o, 'mode'), 'constant'] : Array<Dynamic>)) : Dynamic), constant: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'constant'), defConst] : Array<Dynamic>)), constantMin: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'constantMin'), defConst] : Array<Dynamic>)), constantMax: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'constantMax'), defConst] : Array<Dynamic>)) };
     return cast null;
@@ -289,9 +289,9 @@ class UnityParse {
   public static function readEmission__unityParse(obj:Dynamic):UnityEmission {
     var o:Dynamic = cast _Runtime.UNDEFINED;
     var bursts:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.looseEquals(obj, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(obj), 'object')))) { return cast { rateOverTime: { mode: 'constant', constant: 10.0 }, bursts: cast ([] : Array<Dynamic>) }; }
+    if ((cast ((cast _Runtime.looseEquals(obj, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(obj), 'object') : Bool)) : Bool)) { return cast { rateOverTime: { mode: 'constant', constant: 10.0 }, bursts: cast ([] : Array<Dynamic>) }; }
     o = (cast obj : Dynamic);
-    bursts = _Runtime.select(_Runtime.isArray(_Runtime.field(o, 'bursts')), function():Dynamic return cast _Runtime.callProperty((cast _Runtime.field(o, 'bursts') : Array<Dynamic>), 'map', cast ([function(b:Dynamic) return { time: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(b, 'time'), 0.0] : Array<Dynamic>)), count: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(b, 'count'), 0.0] : Array<Dynamic>)), cycleCount: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(b, 'cycleCount'), 1.0] : Array<Dynamic>)), repeatInterval: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(b, 'repeatInterval'), 0.0] : Array<Dynamic>)) }] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>));
+    bursts = ((cast _Runtime.isArray(_Runtime.field(o, 'bursts')) : Bool) ? (cast _Runtime.callProperty((cast _Runtime.field(o, 'bursts') : Array<Dynamic>), 'map', cast ([function(b:Dynamic) return { time: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(b, 'time'), 0.0] : Array<Dynamic>)), count: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(b, 'count'), 0.0] : Array<Dynamic>)), cycleCount: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(b, 'cycleCount'), 1.0] : Array<Dynamic>)), repeatInterval: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(b, 'repeatInterval'), 0.0] : Array<Dynamic>)) }] : Array<Dynamic>)) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
     return cast { rateOverTime: _Runtime.callValue(UnityParse.readMinMax__unityParse, cast ([_Runtime.field(o, 'rateOverTime'), 10.0] : Array<Dynamic>)), bursts: bursts };
     return cast null;
   }
@@ -301,7 +301,7 @@ class UnityParse {
     var o:Dynamic = cast _Runtime.UNDEFINED;
     var sc:Dynamic = cast _Runtime.UNDEFINED;
     def = { enabled: true, shapeType: 'Cone', radius: 1.0, angle: 25.0, scale: { x: 1.0, y: 1.0, z: 1.0 } };
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.looseEquals(obj, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(obj), 'object')))) { return cast def; }
+    if ((cast ((cast _Runtime.looseEquals(obj, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(obj), 'object') : Bool)) : Bool)) { return cast def; }
     o = (cast obj : Dynamic);
     sc = _Runtime.select(_Runtime.andValue(_Runtime.field(o, 'scale'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'scale')), 'object')), function():Dynamic return cast (cast _Runtime.field(o, 'scale') : Dynamic), function():Dynamic return cast {  });
     return cast { enabled: _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.field(o, 'enabled'), true] : Array<Dynamic>)), shapeType: (cast _Runtime.callValue(UnityParse.rs__unityParse, cast ([_Runtime.field(o, 'shapeType'), 'Cone'] : Array<Dynamic>)) : Dynamic), radius: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'radius'), 1.0] : Array<Dynamic>)), angle: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'angle'), 25.0] : Array<Dynamic>)), scale: { x: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(sc, 'x'), 1.0] : Array<Dynamic>)), y: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(sc, 'y'), 1.0] : Array<Dynamic>)), z: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(sc, 'z'), 1.0] : Array<Dynamic>)) } };
@@ -312,7 +312,7 @@ class UnityParse {
     var def:UnityColorOverLifetime = cast _Runtime.UNDEFINED;
     var o:Dynamic = cast _Runtime.UNDEFINED;
     def = { enabled: false, colorStart: { r: 1.0, g: 1.0, b: 1.0, a: 1.0 }, colorEnd: { r: 1.0, g: 1.0, b: 1.0, a: 0.0 } };
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.looseEquals(obj, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(obj), 'object')))) { return cast def; }
+    if ((cast ((cast _Runtime.looseEquals(obj, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(obj), 'object') : Bool)) : Bool)) { return cast def; }
     o = (cast obj : Dynamic);
     return cast { enabled: _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.field(o, 'enabled'), false] : Array<Dynamic>)), colorStart: _Runtime.callValue(UnityParse.colorAt__unityParse, cast ([_Runtime.field(o, 'colorStart'), _Runtime.field(def, 'colorStart')] : Array<Dynamic>)), colorEnd: _Runtime.callValue(UnityParse.colorAt__unityParse, cast ([_Runtime.field(o, 'colorEnd'), _Runtime.field(def, 'colorEnd')] : Array<Dynamic>)) };
     return cast null;
@@ -320,7 +320,7 @@ class UnityParse {
 
   public static function readSizeLifetime__unityParse(obj:Dynamic):UnitySizeOverLifetime {
     var o:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.looseEquals(obj, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(obj), 'object')))) { return cast { enabled: false, sizeStart: 1.0, sizeEnd: 1.0 }; }
+    if ((cast ((cast _Runtime.looseEquals(obj, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(obj), 'object') : Bool)) : Bool)) { return cast { enabled: false, sizeStart: 1.0, sizeEnd: 1.0 }; }
     o = (cast obj : Dynamic);
     return cast { enabled: _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.field(o, 'enabled'), false] : Array<Dynamic>)), sizeStart: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'sizeStart'), 1.0] : Array<Dynamic>)), sizeEnd: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'sizeEnd'), 1.0] : Array<Dynamic>)) };
     return cast null;
@@ -328,7 +328,7 @@ class UnityParse {
 
   public static function readRotationLifetime__unityParse(obj:Dynamic):UnityRotationOverLifetime {
     var o:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.looseEquals(obj, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(obj), 'object')))) { return cast { enabled: false, angularVelocity: { mode: 'constant', constant: 0.0 } }; }
+    if ((cast ((cast _Runtime.looseEquals(obj, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(obj), 'object') : Bool)) : Bool)) { return cast { enabled: false, angularVelocity: { mode: 'constant', constant: 0.0 } }; }
     o = (cast obj : Dynamic);
     return cast { enabled: _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.field(o, 'enabled'), false] : Array<Dynamic>)), angularVelocity: _Runtime.callValue(UnityParse.readMinMax__unityParse, cast ([_Runtime.field(o, 'angularVelocity'), 0.0] : Array<Dynamic>)) };
     return cast null;

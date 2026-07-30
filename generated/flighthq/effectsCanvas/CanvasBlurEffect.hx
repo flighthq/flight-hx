@@ -16,7 +16,7 @@ class CanvasBlurEffect {
     blurX = _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0);
     blurY = _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0);
     radius = HxMath.max(0.0, ((blurX + blurY) / 2.0));
-    _Runtime.callValue(drawCanvasEffectPass, cast ([dest, source, _Runtime.select(_Runtime.compare(radius, 0.0, '>'), function():Dynamic return cast 'blur(' + Std.string(radius) + 'px)', function():Dynamic return cast 'none')] : Array<Dynamic>));
+    _Runtime.callValue(drawCanvasEffectPass, cast ([dest, source, ((cast ((cast radius : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(radius) + 'px)' : Dynamic) : (cast 'none' : Dynamic))] : Array<Dynamic>));
   }
 
   public static final defaultCanvasBlurEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {

@@ -15,7 +15,7 @@ class RenderAppearance {
   public static function updateRenderProxyAppearance(state:RenderState, data:RenderProxy, ?parentData:RenderProxy):Bool {
     var appearanceId:Dynamic = cast _Runtime.UNDEFINED;
     appearanceId = _Runtime.callValue(getNodeAppearanceRevision, cast ([(cast _Runtime.field(data, 'source') : Node<Dynamic>)] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.andValue(!_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(parentData, 'appearanceFrameId'), _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentFrameId'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(data, 'lastAppearanceId'), appearanceId)))) {
+    if ((cast ((cast _Runtime.andValue(!_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(parentData, 'appearanceFrameId'), _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentFrameId'))) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(data, 'lastAppearanceId'), appearanceId) : Bool)) : Bool)) {
       _Runtime.callValue(RenderAppearance.recalculateAppearance__renderAppearance, cast ([state, data, parentData] : Array<Dynamic>));
       _Runtime.setField(data, 'lastAppearanceId', appearanceId);
       return cast true;
@@ -27,18 +27,18 @@ class RenderAppearance {
   public static function recalculateAppearance__renderAppearance(state:RenderState, data:RenderProxy, ?parentData:RenderProxy):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     source = (cast (cast _Runtime.field(data, 'source') : Dynamic) : Dynamic);
-    if (_Runtime.truthy(!_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      _Runtime.setField(data, 'visible', _Runtime.andValue(_Runtime.field(source, 'visible'), function():Dynamic return cast _Runtime.field(parentData, 'visible')));
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(data, 'visible')))) { return; }
+    if ((cast !_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      _Runtime.setField(data, 'visible', ((cast _Runtime.field(source, 'visible') : Bool) && (cast _Runtime.field(parentData, 'visible') : Bool)));
+      if ((cast !(cast _Runtime.field(data, 'visible') : Bool) : Bool)) { return; }
       _Runtime.setField(data, 'alpha', (_Runtime.field(source, 'alpha') * _Runtime.field(parentData, 'alpha')));
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(data, 'alpha'), 0.0, '<='))) { return; }
+      if ((cast ((cast _Runtime.field(data, 'alpha') : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
       _Runtime.setField(data, 'blendMode', _Runtime.field(source, 'blendMode'));
     } else {
       _Runtime.setField(data, 'visible', _Runtime.field(source, 'visible'));
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(data, 'visible')))) { return; }
+      if ((cast !(cast _Runtime.field(data, 'visible') : Bool) : Bool)) { return; }
       _Runtime.setField(data, 'alpha', (_Runtime.field(source, 'alpha') * _Runtime.field(state, 'renderAlpha')));
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(data, 'alpha'), 0.0, '<='))) { return; }
-      _Runtime.setField(data, 'blendMode', _Runtime.select(!_Runtime.strictEquals(_Runtime.field(state, 'renderBlendMode'), null), function():Dynamic return cast _Runtime.field(state, 'renderBlendMode'), function():Dynamic return cast _Runtime.field(source, 'blendMode')));
+      if ((cast ((cast _Runtime.field(data, 'alpha') : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
+      _Runtime.setField(data, 'blendMode', ((cast !_Runtime.strictEquals(_Runtime.field(state, 'renderBlendMode'), null) : Bool) ? (cast _Runtime.field(state, 'renderBlendMode') : Dynamic) : (cast _Runtime.field(source, 'blendMode') : Dynamic)));
     }
     _Runtime.setField(data, 'appearanceFrameId', _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentFrameId'));
   }

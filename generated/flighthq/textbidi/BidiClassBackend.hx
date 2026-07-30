@@ -13,7 +13,7 @@ class BidiClassBackend {
   }
 
   public static function getBidiClassBackend():flighthq.types.Bidi.BidiClassBackend {
-    if (_Runtime.truthy(_Runtime.strictEquals(BidiClassBackend._backend__bidiClassBackend, null))) { (BidiClassBackend._backend__bidiClassBackend = cast (_Runtime.callValue(createCompactBidiClassBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(BidiClassBackend._backend__bidiClassBackend, null) : Bool)) { (BidiClassBackend._backend__bidiClassBackend = cast (_Runtime.callValue(createCompactBidiClassBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast BidiClassBackend._backend__bidiClassBackend;
     return cast null;
   }
@@ -29,13 +29,13 @@ class BidiClassBackend {
     var hi:Dynamic = cast _Runtime.UNDEFINED;
     lo = 0.0;
     hi = (BidiClassBackend._rangeCount__bidiClassBackend - 1.0);
-    while (_Runtime.truthy(_Runtime.compare(lo, hi, '<='))) {
+    while ((cast ((cast lo : Float) <= (cast hi : Float)) : Bool)) {
       var mid:Dynamic = (_Runtime.toInt32((lo + hi)) >> 1);
       var base:Dynamic = (mid * 3.0);
       var start:Dynamic = _Runtime.getIndex(BidiClassBackend._ranges__bidiClassBackend, base);
-      if (_Runtime.truthy(_Runtime.compare(codepoint, start, '<'))) {
+      if ((cast ((cast codepoint : Float) < (cast start : Float)) : Bool)) {
         (hi = cast ((mid - 1.0) : Dynamic));
-      } else { if (_Runtime.truthy(_Runtime.compare(codepoint, _Runtime.getIndex(BidiClassBackend._ranges__bidiClassBackend, (base + 1.0)), '>'))) {
+      } else { if ((cast ((cast codepoint : Float) > (cast _Runtime.getIndex(BidiClassBackend._ranges__bidiClassBackend, (base + 1.0)) : Float)) : Bool)) {
         (lo = cast ((mid + 1.0) : Dynamic));
       } else {
         return cast _Runtime.getIndex(BidiClassBackend._classOrder__bidiClassBackend, _Runtime.getIndex(BidiClassBackend._ranges__bidiClassBackend, (base + 2.0)));

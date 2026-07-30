@@ -43,9 +43,9 @@ class CapacitorConnectivity {
   }
 
   public static function toConnectionType__capacitorConnectivity(connectionType:String):ConnectivityConnectionType {
-    if (_Runtime.truthy(_Runtime.strictEquals(connectionType, 'wifi'))) { return cast 'wifi'; }
-    if (_Runtime.truthy(_Runtime.strictEquals(connectionType, 'cellular'))) { return cast 'cellular'; }
-    if (_Runtime.truthy(_Runtime.strictEquals(connectionType, 'none'))) { return cast 'none'; }
+    if ((cast _Runtime.strictEquals(connectionType, 'wifi') : Bool)) { return cast 'wifi'; }
+    if ((cast _Runtime.strictEquals(connectionType, 'cellular') : Bool)) { return cast 'cellular'; }
+    if ((cast _Runtime.strictEquals(connectionType, 'none') : Bool)) { return cast 'none'; }
     return cast 'unknown';
     return cast null;
   }
@@ -57,7 +57,7 @@ class CapacitorConnectivity {
     handle = null;
     flighthq._internal._Async.recover(_Runtime.callProperty(handlePromise, 'then', cast ([function(resolved:Dynamic) {
       (handle = cast (resolved : Dynamic));
-      if (_Runtime.truthy(removed)) { flighthq._internal._Async.recover(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), function() {
+      if ((cast removed : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), function() {
       
       }); }
     }] : Array<Dynamic>)), function() {
@@ -65,7 +65,7 @@ class CapacitorConnectivity {
     });
     return cast function() {
       (removed = cast (true : Dynamic));
-      if (_Runtime.truthy(!_Runtime.strictEquals(handle, null))) { flighthq._internal._Async.recover(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), function() {
+      if ((cast !_Runtime.strictEquals(handle, null) : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), function() {
       
       }); }
     };

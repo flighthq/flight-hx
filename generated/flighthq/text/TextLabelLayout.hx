@@ -23,9 +23,9 @@ class TextLabelLayout {
     var result:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : TextLabelRuntime);
     contentId = _Runtime.callValue(getNodeLocalContentRevision, cast ([source] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(runtime, 'textLayout'), null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(runtime, 'textLayoutUsingContentId'), contentId)))) { return; }
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'textLayout'), null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(runtime, 'textLayoutUsingContentId'), contentId) : Bool)) : Bool)) { return; }
     measure = _Runtime.callValue(getTextLayoutMeasureProvider, cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(measure, null))) { return; }
+    if ((cast _Runtime.strictEquals(measure, null) : Bool)) { return; }
     params = _Runtime.callProperty(runtime, 'buildTextLayoutParams', cast ([source, measure] : Array<Dynamic>));
     result = _Runtime.callValue(getTextLayoutResult, cast ([runtime] : Array<Dynamic>));
     _Runtime.callValue(computeTextLayout, cast ([result, params] : Array<Dynamic>));
@@ -41,7 +41,7 @@ class TextLabelLayout {
   public static function getTextLayoutMetrics(out:TextMetrics, source:TextLabel):Void {
     var layout:Dynamic = cast _Runtime.UNDEFINED;
     layout = _Runtime.callValue(getTextLayout, cast ([source] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(layout, null))) {
+    if ((cast _Runtime.strictEquals(layout, null) : Bool)) {
       (out.height = cast (0.0 : Dynamic));
       (out.numLines = cast (0.0 : Dynamic));
       (out.width = cast (0.0 : Dynamic));

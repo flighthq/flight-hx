@@ -50,25 +50,25 @@ class Md5Parse {
     meshes = cast ([] : Array<Dynamic>);
     lines = _Runtime.callProperty(source, 'split', cast (['\n'] : Array<Dynamic>));
     i = 0.0;
-    while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(lines, 'length'), '<'))) {
+    while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
       var line:Dynamic = StringTools.trim(Std.string(_Runtime.getIndex(lines, i)));
       i++;
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0), function():Dynamic return cast StringTools.startsWith(line, '//')))) { continue; }
-      if (_Runtime.truthy(StringTools.startsWith(line, 'MD5Version'))) {
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0) : Bool) || (cast StringTools.startsWith(line, '//') : Bool)) : Bool)) { continue; }
+      if ((cast StringTools.startsWith(line, 'MD5Version') : Bool)) {
         var version:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([version] : Array<Dynamic>)), function():Dynamic return cast !_Runtime.strictEquals(version, 10.0)))) {
+        if ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([version] : Array<Dynamic>)) : Bool) && (cast !_Runtime.strictEquals(version, 10.0) : Bool)) : Bool)) {
           _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: unsupported MD5Version ' + Std.string(version) + ' (expected 10)'] : Array<Dynamic>));
         }
         continue;
       }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(StringTools.startsWith(line, 'commandline'), function():Dynamic return cast StringTools.startsWith(line, 'numJoints')), function():Dynamic return cast StringTools.startsWith(line, 'numMeshes')))) {
+      if ((cast ((cast ((cast StringTools.startsWith(line, 'commandline') : Bool) || (cast StringTools.startsWith(line, 'numJoints') : Bool)) : Bool) || (cast StringTools.startsWith(line, 'numMeshes') : Bool)) : Bool)) {
         continue;
       }
-      if (_Runtime.truthy(_Runtime.strictEquals(line, 'joints {'))) {
+      if ((cast _Runtime.strictEquals(line, 'joints {') : Bool)) {
         (i = cast (_Runtime.callValue(Md5Parse.parseJointsBlock__md5Parse, cast ([lines, i, joints, warnings] : Array<Dynamic>)) : Dynamic));
         continue;
       }
-      if (_Runtime.truthy(_Runtime.strictEquals(line, 'mesh {'))) {
+      if ((cast _Runtime.strictEquals(line, 'mesh {') : Bool)) {
         var mesh:Dynamic = _Runtime.callValue(Md5Parse.parseMeshBlock__md5Parse, cast ([lines, i, warnings] : Array<Dynamic>));
         (i = cast (_Runtime.field(mesh, 'nextLine') : Dynamic));
         _Runtime.callProperty(meshes, 'push', cast ([_Runtime.field(mesh, 'result')] : Array<Dynamic>));
@@ -77,7 +77,7 @@ class Md5Parse {
     }
     skeleton = null;
     skeletonRoot = null;
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(joints, 'length'), 0.0, '>'))) {
+    if ((cast ((cast _Runtime.field(joints, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       (skeletonRoot = cast (_Runtime.callValue(createSceneNode, cast ([_Runtime.field(_Runtime, 'UNDEFINED'), { name: 'skeleton' }] : Array<Dynamic>)) : Dynamic));
       var jointNodes:Array<SceneNode> = cast ([] : Array<Dynamic>);
       var jointPositions:Array<Float> = cast ([] : Array<Dynamic>);
@@ -93,7 +93,7 @@ class Md5Parse {
       var relQuat:Dynamic = _Runtime.callValue(createQuaternion, cast ([] : Array<Dynamic>));
       {
         var j:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(j, _Runtime.field(joints, 'length'), '<'))) {
+        while ((cast ((cast j : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) {
           var joint:Dynamic = _Runtime.getIndex(joints, j);
           var node:Dynamic = _Runtime.callValue(createSceneNode, cast ([_Runtime.field(_Runtime, 'UNDEFINED'), { name: _Runtime.field(joint, 'name') }] : Array<Dynamic>));
           var pi:Dynamic = (j * 3.0);
@@ -106,7 +106,7 @@ class Md5Parse {
           var localQy:Dynamic = _Runtime.getIndex(jointOrientations, (qi + 1.0));
           var localQz:Dynamic = _Runtime.getIndex(jointOrientations, (qi + 2.0));
           var localQw:Dynamic = _Runtime.getIndex(jointOrientations, (qi + 3.0));
-          if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(parentIndex, 0.0, '>='), function():Dynamic return cast _Runtime.compare(parentIndex, _Runtime.field(joints, 'length'), '<')))) {
+          if ((cast ((cast ((cast parentIndex : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast parentIndex : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) : Bool)) {
             var ppi:Dynamic = (parentIndex * 3.0);
             var pqi:Dynamic = (parentIndex * 4.0);
             _Runtime.callValue(conjugateQuaternion, cast ([parentConj, { w: _Runtime.getIndex(jointOrientations, (pqi + 3.0)), x: _Runtime.getIndex(jointOrientations, pqi), y: _Runtime.getIndex(jointOrientations, (pqi + 1.0)), z: _Runtime.getIndex(jointOrientations, (pqi + 2.0)) }] : Array<Dynamic>));
@@ -119,7 +119,7 @@ class Md5Parse {
             (localQy = cast (relQuat.y : Dynamic));
             (localQz = cast (relQuat.z : Dynamic));
             (localQw = cast (relQuat.w : Dynamic));
-          } else { if (_Runtime.truthy(_Runtime.compare(parentIndex, _Runtime.field(joints, 'length'), '>='))) {
+          } else { if ((cast ((cast parentIndex : Float) >= (cast _Runtime.field(joints, 'length') : Float)) : Bool)) {
             _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: joint ' + Std.string(j) + ' has out-of-range parent index ' + Std.string(parentIndex) + ''] : Array<Dynamic>));
           } }
           _Runtime.callValue(setVector3, cast ([_Runtime.field(node, 'position'), localPx, localPy, localPz] : Array<Dynamic>));
@@ -131,9 +131,9 @@ class Md5Parse {
       }
       {
         var j:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(j, _Runtime.field(joints, 'length'), '<'))) {
+        while ((cast ((cast j : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) {
           var parentIndex:Dynamic = _Runtime.field(_Runtime.getIndex(joints, j), 'parentIndex');
-          if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(parentIndex, 0.0, '>='), function():Dynamic return cast _Runtime.compare(parentIndex, _Runtime.field(jointNodes, 'length'), '<')))) {
+          if ((cast ((cast ((cast parentIndex : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast parentIndex : Float) < (cast _Runtime.field(jointNodes, 'length') : Float)) : Bool)) : Bool)) {
             _Runtime.callValue(addNodeChild, cast ([_Runtime.getIndex(jointNodes, parentIndex), _Runtime.getIndex(jointNodes, j)] : Array<Dynamic>));
           } else {
             _Runtime.callValue(addNodeChild, cast ([skeletonRoot, _Runtime.getIndex(jointNodes, j)] : Array<Dynamic>));
@@ -147,7 +147,7 @@ class Md5Parse {
     }
     {
       var m:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(m, _Runtime.field(meshes, 'length'), '<'))) {
+      while ((cast ((cast m : Float) < (cast _Runtime.field(meshes, 'length') : Float)) : Bool)) {
         var md5Mesh:Dynamic = _Runtime.getIndex(meshes, m);
         var vertices:Array<Float> = cast ([] : Array<Dynamic>);
         var indices:Array<Float> = cast ([] : Array<Dynamic>);
@@ -155,7 +155,7 @@ class Md5Parse {
         var weightScratch:Dynamic = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
         {
           var v:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(v, _Runtime.field(_Runtime.field(md5Mesh, 'vertices'), 'length'), '<'))) {
+          while ((cast ((cast v : Float) < (cast _Runtime.field(_Runtime.field(md5Mesh, 'vertices'), 'length') : Float)) : Bool)) {
             var vert:Dynamic = _Runtime.getIndex(_Runtime.field(md5Mesh, 'vertices'), v);
             var px:Dynamic = 0.0;
             var py:Dynamic = 0.0;
@@ -163,14 +163,14 @@ class Md5Parse {
             var influences:Array<SkinInfluence> = cast ([] : Array<Dynamic>);
             {
               var w:Dynamic = 0.0;
-              while (_Runtime.truthy(_Runtime.compare(w, _Runtime.field(vert, 'countWeights'), '<'))) {
+              while ((cast ((cast w : Float) < (cast _Runtime.field(vert, 'countWeights') : Float)) : Bool)) {
                 var weightIndex:Dynamic = (_Runtime.field(vert, 'startWeight') + w);
-                if (_Runtime.truthy(_Runtime.compare(weightIndex, _Runtime.field(_Runtime.field(md5Mesh, 'weights'), 'length'), '>='))) {
+                if ((cast ((cast weightIndex : Float) >= (cast _Runtime.field(_Runtime.field(md5Mesh, 'weights'), 'length') : Float)) : Bool)) {
                   _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: vertex ' + Std.string(v) + ' references weight index ' + Std.string(weightIndex) + ' out of range'] : Array<Dynamic>));
                   break;
                 }
                 var weight:Dynamic = _Runtime.getIndex(_Runtime.field(md5Mesh, 'weights'), weightIndex);
-                if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(weight, 'jointIndex'), 0.0, '<'), function():Dynamic return cast _Runtime.compare(_Runtime.field(weight, 'jointIndex'), _Runtime.field(joints, 'length'), '>=')))) {
+                if ((cast ((cast ((cast _Runtime.field(weight, 'jointIndex') : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(weight, 'jointIndex') : Float) >= (cast _Runtime.field(joints, 'length') : Float)) : Bool)) : Bool)) {
                   _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: weight ' + Std.string(weightIndex) + ' references joint index ' + Std.string(_Runtime.field(weight, 'jointIndex')) + ' out of range'] : Array<Dynamic>));
                   w++;
                   continue;
@@ -199,23 +199,23 @@ class Md5Parse {
         _Runtime.callValue(convertPositionsZUpToYUp, cast ([vertices, SKINNED_FLOATS_PER_VERTEX, 0.0] : Array<Dynamic>));
         {
           var t:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(t, _Runtime.field(_Runtime.field(md5Mesh, 'indices'), 'length'), '<'))) {
+          while ((cast ((cast t : Float) < (cast _Runtime.field(_Runtime.field(md5Mesh, 'indices'), 'length') : Float)) : Bool)) {
             _Runtime.callProperty(indices, 'push', cast ([_Runtime.getIndex(_Runtime.field(md5Mesh, 'indices'), t)] : Array<Dynamic>));
             t++;
           }
         }
         _Runtime.callValue(reverseTriangleWinding, cast ([indices] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.field(indices, 'length'), 0.0, '>'))) {
+        if ((cast ((cast _Runtime.field(indices, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
           var geometry:Dynamic = _Runtime.callValue(createMeshGeometry, cast ([{ indices: _Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([indices] : Array<Dynamic>)), layout: CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT, vertices: new flighthq._internal._Float32Array(vertices) }] : Array<Dynamic>));
           _Runtime.callValue(computeMeshGeometryNormals, cast ([geometry, geometry] : Array<Dynamic>));
           var materials:Array<Material> = cast ([] : Array<Dynamic>);
-          if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(md5Mesh, 'shader'), 'length'), 0.0, '>'))) {
+          if ((cast ((cast _Runtime.field(_Runtime.field(md5Mesh, 'shader'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
             var material:Dynamic = (cast (cast _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuseMap: _Runtime.callValue(createExternalTextureRef, cast ([_Runtime.field(md5Mesh, 'shader')] : Array<Dynamic>)) }] : Array<Dynamic>)) : Dynamic) : Material);
             _Runtime.setField(material, 'name', _Runtime.field(md5Mesh, 'shader'));
             _Runtime.callProperty(materials, 'push', cast ([material] : Array<Dynamic>));
           }
           var meshNode:Mesh = _Runtime.callValue(createMesh, cast ([geometry, materials] : Array<Dynamic>));
-          if (_Runtime.truthy(!_Runtime.strictEquals(skeleton, null))) { _Runtime.setField(meshNode, 'skin', { skeleton: skeleton, skeletonRoot: skeletonRoot }); }
+          if ((cast !_Runtime.strictEquals(skeleton, null) : Bool)) { _Runtime.setField(meshNode, 'skin', { skeleton: skeleton, skeletonRoot: skeletonRoot }); }
           _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), (cast (cast meshNode : Dynamic) : SceneNode)] : Array<Dynamic>));
         }
         m++;
@@ -228,13 +228,13 @@ class Md5Parse {
   public static function parseJointsBlock__md5Parse(lines:Array<String>, startLine:Float, joints:Array<Md5Joint>, warnings:Null<Array<String>>):Float {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     i = startLine;
-    while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(lines, 'length'), '<'))) {
+    while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
       var line:Dynamic = StringTools.trim(Std.string(_Runtime.getIndex(lines, i)));
       i++;
-      if (_Runtime.truthy(_Runtime.strictEquals(line, '}'))) { return cast i; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0), function():Dynamic return cast StringTools.startsWith(line, '//')))) { continue; }
+      if ((cast _Runtime.strictEquals(line, '}') : Bool)) { return cast i; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0) : Bool) || (cast StringTools.startsWith(line, '//') : Bool)) : Bool)) { continue; }
       var joint:Dynamic = _Runtime.callValue(Md5Parse.parseJointLine__md5Parse, cast ([line, warnings, (i - 1.0)] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(joint, null))) { _Runtime.callProperty(joints, 'push', cast ([joint] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(joint, null) : Bool)) { _Runtime.callProperty(joints, 'push', cast ([joint] : Array<Dynamic>)); }
     }
     _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: joints block was not closed'] : Array<Dynamic>));
     return cast i;
@@ -258,14 +258,14 @@ class Md5Parse {
     var orientationW:Dynamic = cast _Runtime.UNDEFINED;
     nameStart = _Runtime.callProperty(line, 'indexOf', cast (['"'] : Array<Dynamic>));
     nameEnd = _Runtime.callProperty(line, 'indexOf', cast (['"', (nameStart + 1.0)] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(nameStart, 0.0, '<'), function():Dynamic return cast _Runtime.compare(nameEnd, 0.0, '<')))) {
+    if ((cast ((cast ((cast nameStart : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast nameEnd : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: malformed joint on line ' + Std.string((lineIndex + 1.0)) + ': missing name quotes'] : Array<Dynamic>));
       return cast null;
     }
     name = _Runtime.slice(line, (nameStart + 1.0), nameEnd);
     rest = StringTools.trim(Std.string(_Runtime.slice(line, (nameEnd + 1.0), null)));
-    tokens = _Runtime.callProperty(_Runtime.callProperty(_Runtime.replace(rest, _Runtime.regexp('[()]', 'g'), '', false), 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:Dynamic) return _Runtime.compare(_Runtime.field(t, 'length'), 0.0, '>')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(tokens, 'length'), 7.0, '<'))) {
+    tokens = _Runtime.callProperty(_Runtime.callProperty(_Runtime.replace(rest, _Runtime.regexp('[()]', 'g'), '', false), 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:Dynamic) return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>));
+    if ((cast ((cast _Runtime.field(tokens, 'length') : Float) < (cast 7.0 : Float)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: malformed joint on line ' + Std.string((lineIndex + 1.0)) + ': not enough components'] : Array<Dynamic>));
       return cast null;
     }
@@ -276,12 +276,12 @@ class Md5Parse {
     orientationX = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 4.0)] : Array<Dynamic>));
     orientationY = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 5.0)] : Array<Dynamic>));
     orientationZ = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 6.0)] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parentIndex] : Array<Dynamic>))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionX] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionY] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionZ] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([orientationX] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([orientationY] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([orientationZ] : Array<Dynamic>)))))) {
+    if ((cast ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parentIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionZ] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([orientationX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([orientationY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([orientationZ] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: malformed joint on line ' + Std.string((lineIndex + 1.0)) + ': non-numeric values'] : Array<Dynamic>));
       return cast null;
     }
     sumSq = (((orientationX * orientationX) + (orientationY * orientationY)) + (orientationZ * orientationZ));
-    orientationW = _Runtime.select(_Runtime.compare(sumSq, 1.0, '<'), function():Dynamic return cast -HxMath.sqrt((1.0 - sumSq)), function():Dynamic return cast 0.0);
+    orientationW = ((cast ((cast sumSq : Float) < (cast 1.0 : Float)) : Bool) ? (cast -HxMath.sqrt((1.0 - sumSq)) : Dynamic) : (cast 0.0 : Dynamic));
     return cast { name: name, orientationW: orientationW, orientationX: orientationX, orientationY: orientationY, orientationZ: orientationZ, parentIndex: parentIndex, positionX: positionX, positionY: positionY, positionZ: positionZ };
     return cast null;
   }
@@ -297,37 +297,37 @@ class Md5Parse {
     weights = cast ([] : Array<Dynamic>);
     indices = cast ([] : Array<Dynamic>);
     i = startLine;
-    while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(lines, 'length'), '<'))) {
+    while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
       var line:Dynamic = StringTools.trim(Std.string(_Runtime.getIndex(lines, i)));
       i++;
-      if (_Runtime.truthy(_Runtime.strictEquals(line, '}'))) { return cast { nextLine: i, result: { indices: indices, shader: shader, vertices: vertices, weights: weights } }; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0), function():Dynamic return cast StringTools.startsWith(line, '//')))) { continue; }
-      if (_Runtime.truthy(StringTools.startsWith(line, 'shader'))) {
+      if ((cast _Runtime.strictEquals(line, '}') : Bool)) { return cast { nextLine: i, result: { indices: indices, shader: shader, vertices: vertices, weights: weights } }; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0) : Bool) || (cast StringTools.startsWith(line, '//') : Bool)) : Bool)) { continue; }
+      if ((cast StringTools.startsWith(line, 'shader') : Bool)) {
         var nameStart:Dynamic = _Runtime.callProperty(line, 'indexOf', cast (['"'] : Array<Dynamic>));
         var nameEnd:Dynamic = _Runtime.callProperty(line, 'indexOf', cast (['"', (nameStart + 1.0)] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(nameStart, 0.0, '>='), function():Dynamic return cast _Runtime.compare(nameEnd, nameStart, '>')))) {
+        if ((cast ((cast ((cast nameStart : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast nameEnd : Float) > (cast nameStart : Float)) : Bool)) : Bool)) {
           (shader = cast (_Runtime.slice(line, (nameStart + 1.0), nameEnd) : Dynamic));
         }
         continue;
       }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(StringTools.startsWith(line, 'numverts'), function():Dynamic return cast StringTools.startsWith(line, 'numtris')), function():Dynamic return cast StringTools.startsWith(line, 'numweights')))) {
+      if ((cast ((cast ((cast StringTools.startsWith(line, 'numverts') : Bool) || (cast StringTools.startsWith(line, 'numtris') : Bool)) : Bool) || (cast StringTools.startsWith(line, 'numweights') : Bool)) : Bool)) {
         continue;
       }
-      if (_Runtime.truthy(StringTools.startsWith(line, 'vert '))) {
+      if ((cast StringTools.startsWith(line, 'vert ') : Bool)) {
         var vert:Dynamic = _Runtime.callValue(Md5Parse.parseVertLine__md5Parse, cast ([line, warnings, (i - 1.0)] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(vert, null))) { _Runtime.callProperty(vertices, 'push', cast ([vert] : Array<Dynamic>)); }
+        if ((cast !_Runtime.strictEquals(vert, null) : Bool)) { _Runtime.callProperty(vertices, 'push', cast ([vert] : Array<Dynamic>)); }
         continue;
       }
-      if (_Runtime.truthy(StringTools.startsWith(line, 'tri '))) {
+      if ((cast StringTools.startsWith(line, 'tri ') : Bool)) {
         var tri:Dynamic = _Runtime.callValue(Md5Parse.parseTriLine__md5Parse, cast ([line, warnings, (i - 1.0)] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(tri, null))) {
+        if ((cast !_Runtime.strictEquals(tri, null) : Bool)) {
           _Runtime.pushMany(indices, cast ([_Runtime.getIndex(tri, 0.0), _Runtime.getIndex(tri, 1.0), _Runtime.getIndex(tri, 2.0)] : Array<Dynamic>));
         }
         continue;
       }
-      if (_Runtime.truthy(StringTools.startsWith(line, 'weight '))) {
+      if ((cast StringTools.startsWith(line, 'weight ') : Bool)) {
         var weight:Dynamic = _Runtime.callValue(Md5Parse.parseWeightLine__md5Parse, cast ([line, warnings, (i - 1.0)] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(weight, null))) { _Runtime.callProperty(weights, 'push', cast ([weight] : Array<Dynamic>)); }
+        if ((cast !_Runtime.strictEquals(weight, null) : Bool)) { _Runtime.callProperty(weights, 'push', cast ([weight] : Array<Dynamic>)); }
         continue;
       }
     }
@@ -342,8 +342,8 @@ class Md5Parse {
     var v:Dynamic = cast _Runtime.UNDEFINED;
     var startWeight:Dynamic = cast _Runtime.UNDEFINED;
     var countWeights:Dynamic = cast _Runtime.UNDEFINED;
-    tokens = _Runtime.callProperty(_Runtime.callProperty(_Runtime.replace(line, _Runtime.regexp('[()]', 'g'), '', false), 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:Dynamic) return _Runtime.compare(_Runtime.field(t, 'length'), 0.0, '>')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(tokens, 'length'), 6.0, '<'))) {
+    tokens = _Runtime.callProperty(_Runtime.callProperty(_Runtime.replace(line, _Runtime.regexp('[()]', 'g'), '', false), 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:Dynamic) return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>));
+    if ((cast ((cast _Runtime.field(tokens, 'length') : Float) < (cast 6.0 : Float)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: malformed vert on line ' + Std.string((lineIndex + 1.0)) + ''] : Array<Dynamic>));
       return cast null;
     }
@@ -351,7 +351,7 @@ class Md5Parse {
     v = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 3.0)] : Array<Dynamic>));
     startWeight = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(tokens, 4.0), 10.0] : Array<Dynamic>));
     countWeights = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(tokens, 5.0), 10.0] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([u] : Array<Dynamic>))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([startWeight] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([countWeights] : Array<Dynamic>)))))) {
+    if ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([u] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([startWeight] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([countWeights] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: malformed vert on line ' + Std.string((lineIndex + 1.0)) + ': non-numeric values'] : Array<Dynamic>));
       return cast null;
     }
@@ -364,15 +364,15 @@ class Md5Parse {
     var v0:Dynamic = cast _Runtime.UNDEFINED;
     var v1:Dynamic = cast _Runtime.UNDEFINED;
     var v2:Dynamic = cast _Runtime.UNDEFINED;
-    tokens = _Runtime.callProperty(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:Dynamic) return _Runtime.compare(_Runtime.field(t, 'length'), 0.0, '>')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(tokens, 'length'), 5.0, '<'))) {
+    tokens = _Runtime.callProperty(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:Dynamic) return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>));
+    if ((cast ((cast _Runtime.field(tokens, 'length') : Float) < (cast 5.0 : Float)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: malformed tri on line ' + Std.string((lineIndex + 1.0)) + ''] : Array<Dynamic>));
       return cast null;
     }
     v0 = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(tokens, 2.0), 10.0] : Array<Dynamic>));
     v1 = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(tokens, 3.0), 10.0] : Array<Dynamic>));
     v2 = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(tokens, 4.0), 10.0] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v0] : Array<Dynamic>))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v1] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v2] : Array<Dynamic>)))))) {
+    if ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v0] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v1] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v2] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: malformed tri on line ' + Std.string((lineIndex + 1.0)) + ': non-numeric indices'] : Array<Dynamic>));
       return cast null;
     }
@@ -387,8 +387,8 @@ class Md5Parse {
     var positionX:Dynamic = cast _Runtime.UNDEFINED;
     var positionY:Dynamic = cast _Runtime.UNDEFINED;
     var positionZ:Dynamic = cast _Runtime.UNDEFINED;
-    tokens = _Runtime.callProperty(_Runtime.callProperty(_Runtime.replace(line, _Runtime.regexp('[()]', 'g'), '', false), 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:Dynamic) return _Runtime.compare(_Runtime.field(t, 'length'), 0.0, '>')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(tokens, 'length'), 7.0, '<'))) {
+    tokens = _Runtime.callProperty(_Runtime.callProperty(_Runtime.replace(line, _Runtime.regexp('[()]', 'g'), '', false), 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:Dynamic) return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>));
+    if ((cast ((cast _Runtime.field(tokens, 'length') : Float) < (cast 7.0 : Float)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: malformed weight on line ' + Std.string((lineIndex + 1.0)) + ''] : Array<Dynamic>));
       return cast null;
     }
@@ -397,7 +397,7 @@ class Md5Parse {
     positionX = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 4.0)] : Array<Dynamic>));
     positionY = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 5.0)] : Array<Dynamic>));
     positionZ = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 6.0)] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([jointIndex] : Array<Dynamic>))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([bias] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionX] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionY] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionZ] : Array<Dynamic>)))))) {
+    if ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([jointIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([bias] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionZ] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: malformed weight on line ' + Std.string((lineIndex + 1.0)) + ': non-numeric values'] : Array<Dynamic>));
       return cast null;
     }

@@ -36,14 +36,14 @@ class GlShaderBinding {
     var material:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     resolver = _Runtime.field(runtime, 'webglShaderBindingResolver');
-    if (_Runtime.truthy(!_Runtime.strictEquals(resolver, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(resolver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var shader:Dynamic = _Runtime.callValue(resolver, cast ([renderProxy] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(shader, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast shader; }
+      if ((cast !_Runtime.strictEquals(shader, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast shader; }
     }
     material = _Runtime.field(renderProxy, 'material');
-    if (_Runtime.truthy(!_Runtime.strictEquals(material, null))) {
+    if ((cast !_Runtime.strictEquals(material, null) : Bool)) {
       var shader:Dynamic = ({ final __collection1:Dynamic = _Runtime.field(runtime, 'materialBitmapShaderMap'); __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map).get(_Runtime.field(material, 'kind'))); });
-      if (_Runtime.truthy(!_Runtime.strictEquals(shader, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast shader; }
+      if ((cast !_Runtime.strictEquals(shader, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast shader; }
     }
     return cast _Runtime.field(runtime, 'defaultBitmapShader');
     return cast null;
@@ -52,7 +52,7 @@ class GlShaderBinding {
   public static function setGlShader(state:GlRenderState, node:DisplayObject, shader:Null<GlBitmapShader>):Void {
     var renderProxy:Dynamic = cast _Runtime.UNDEFINED;
     renderProxy = _Runtime.callValue(getOrCreateRenderProxy2D, cast ([state, node] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(shader, null))) {
+    if ((cast _Runtime.strictEquals(shader, null) : Bool)) {
       ((cast GlShaderBinding._shaderBindings__glShaderBinding : flighthq._internal._WeakMap).delete_(renderProxy));
       return;
     }

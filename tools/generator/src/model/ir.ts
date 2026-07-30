@@ -330,3 +330,11 @@ export interface StaticFactAudit extends StaticFactCounts {
     }
   >;
 }
+
+export interface StaticLoweringEmissionCounts {
+  booleanAndExpressions: number;
+  booleanConditionalExpressions: number;
+  booleanOrExpressions: number;
+  booleanTruthinessUses: number;
+  numericRelations: number;
+}

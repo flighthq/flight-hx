@@ -16,11 +16,11 @@ class UpdateMeshSkin {
     var geometry:Dynamic = cast _Runtime.UNDEFINED;
     var bindPose:Dynamic = cast _Runtime.UNDEFINED;
     skin = _Runtime.field(mesh, 'skin');
-    if (_Runtime.truthy(_Runtime.looseEquals(skin, null))) { return; }
+    if ((cast _Runtime.looseEquals(skin, null) : Bool)) { return; }
     _Runtime.callValue(computeSkeleton3DJointMatrices, cast ([_Runtime.field(skin, 'skeleton')] : Array<Dynamic>));
     geometry = _Runtime.field(mesh, 'geometry');
     bindPose = _Runtime.callValue(getMeshGeometrySkinBindPose, cast ([geometry] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(bindPose, null))) {
+    if ((cast _Runtime.strictEquals(bindPose, null) : Bool)) {
       (bindPose = cast (_Runtime.callValue(captureMeshSkinBindPose, cast ([geometry] : Array<Dynamic>)) : Dynamic));
       _Runtime.callValue(setMeshGeometrySkinBindPose, cast ([geometry, bindPose] : Array<Dynamic>));
     }

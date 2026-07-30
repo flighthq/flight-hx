@@ -25,11 +25,11 @@ class TauriPlatform {
   }
 
   public static function toPlatformName__tauriPlatform(platform:String):PlatformName {
-    if (_Runtime.truthy(_Runtime.strictEquals(platform, 'windows'))) { return cast 'windows'; }
-    if (_Runtime.truthy(_Runtime.strictEquals(platform, 'macos'))) { return cast 'macos'; }
-    if (_Runtime.truthy(_Runtime.strictEquals(platform, 'linux'))) { return cast 'linux'; }
-    if (_Runtime.truthy(_Runtime.strictEquals(platform, 'ios'))) { return cast 'ios'; }
-    if (_Runtime.truthy(_Runtime.strictEquals(platform, 'android'))) { return cast 'android'; }
+    if ((cast _Runtime.strictEquals(platform, 'windows') : Bool)) { return cast 'windows'; }
+    if ((cast _Runtime.strictEquals(platform, 'macos') : Bool)) { return cast 'macos'; }
+    if ((cast _Runtime.strictEquals(platform, 'linux') : Bool)) { return cast 'linux'; }
+    if ((cast _Runtime.strictEquals(platform, 'ios') : Bool)) { return cast 'ios'; }
+    if ((cast _Runtime.strictEquals(platform, 'android') : Bool)) { return cast 'android'; }
     return cast 'unknown';
     return cast null;
   }

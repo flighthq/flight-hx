@@ -38,10 +38,10 @@ class WgpuShader {
   }
 
   public static function buildStencilFaceState__wgpuShader(stencilMode:StencilMode__wgpuShader):Dynamic {
-    if (_Runtime.truthy(_Runtime.strictEquals(stencilMode, 'maskwrite'))) {
+    if ((cast _Runtime.strictEquals(stencilMode, 'maskwrite') : Bool)) {
       return cast { compare: 'always', passOp: 'replace', failOp: 'keep', depthFailOp: 'keep' };
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(stencilMode, 'masked'))) {
+    if ((cast _Runtime.strictEquals(stencilMode, 'masked') : Bool)) {
       return cast { compare: 'equal', passOp: 'keep', failOp: 'keep', depthFailOp: 'keep' };
     }
     return cast { compare: 'always', passOp: 'keep', failOp: 'keep', depthFailOp: 'keep' };
@@ -52,7 +52,7 @@ class WgpuShader {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var stencilMode:StencilMode__wgpuShader = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    stencilMode = _Runtime.select(_Runtime.field(runtime, 'maskWriteMode'), function():Dynamic return cast 'maskwrite', function():Dynamic return cast _Runtime.select(_Runtime.compare(_Runtime.field(runtime, 'currentMaskDepth'), 0.0, '>'), function():Dynamic return cast 'masked', function():Dynamic return cast 'normal'));
+    stencilMode = ((cast _Runtime.field(runtime, 'maskWriteMode') : Bool) ? (cast 'maskwrite' : Dynamic) : (cast ((cast ((cast _Runtime.field(runtime, 'currentMaskDepth') : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'masked' : Dynamic) : (cast 'normal' : Dynamic)) : Dynamic));
     return cast _Runtime.callValue(getWgpuPipeline, cast ([state, _Runtime.field(runtime, 'currentBlendMode'), stencilMode] : Array<Dynamic>));
     return cast null;
   }
@@ -75,16 +75,16 @@ class WgpuShader {
     format = _Runtime.coalesce(_Runtime.field(runtime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
     key = '' + Std.string(_Runtime.coalesce(blendMode, function():Dynamic return cast 'null')) + '-' + Std.string(stencilMode) + '-' + Std.string(format) + '';
     cached = ((cast _Runtime.field(runtime, 'pipelineCache') : flighthq._internal._Map).get(key));
-    if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast cached; }
-    blend = _Runtime.coalesce(_Runtime.select(!_Runtime.strictEquals(blendMode, null), function():Dynamic return cast _Runtime.getIndex(WgpuShader.BLEND_MODES__wgpuShader, blendMode), function():Dynamic return cast null), function():Dynamic return cast WgpuShader.NORMAL_BLEND__wgpuShader);
+    if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
+    blend = _Runtime.coalesce(((cast !_Runtime.strictEquals(blendMode, null) : Bool) ? (cast _Runtime.getIndex(WgpuShader.BLEND_MODES__wgpuShader, blendMode) : Dynamic) : (cast null : Dynamic)), function():Dynamic return cast WgpuShader.NORMAL_BLEND__wgpuShader);
     isMaskWrite = _Runtime.strictEquals(stencilMode, 'maskwrite');
     stencilFace = _Runtime.callValue(WgpuShader.buildStencilFaceState__wgpuShader, cast ([stencilMode] : Array<Dynamic>));
     __destructure0 = state;
     device = _Runtime.field(__destructure0, 'device');
-    shaderSrc = _Runtime.select(isMaskWrite, function():Dynamic return cast WgpuShader.MASK_FRAGMENT_SRC__wgpuShader, function():Dynamic return cast WgpuShader.BITMAP_SHADER_SRC__wgpuShader);
+    shaderSrc = ((cast isMaskWrite : Bool) ? (cast WgpuShader.MASK_FRAGMENT_SRC__wgpuShader : Dynamic) : (cast WgpuShader.BITMAP_SHADER_SRC__wgpuShader : Dynamic));
     module = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: shaderSrc }] : Array<Dynamic>));
     layout = _Runtime.callValue(createWgpuPipelineLayout, cast ([device, _Runtime.field(runtime, 'uniformBindGroupLayout'), _Runtime.field(runtime, 'textureBindGroupLayout')] : Array<Dynamic>));
-    pipeline = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: layout, vertex: { module: module, entryPoint: 'vs_main' }, fragment: { module: module, entryPoint: 'fs_main', targets: cast ([{ format: format, blend: _Runtime.select(isMaskWrite, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'), function():Dynamic return cast blend), writeMask: _Runtime.select(isMaskWrite, function():Dynamic return cast 0.0, function():Dynamic return cast flighthq._internal.backend.WebGpuConstantsBackend.value('GPUColorWrite', 'ALL')) }] : Array<Dynamic>) }, depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: false, depthCompare: 'always', stencilFront: stencilFace, stencilBack: stencilFace, stencilReadMask: 255.0, stencilWriteMask: _Runtime.select(isMaskWrite, function():Dynamic return cast 255.0, function():Dynamic return cast 0.0) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
+    pipeline = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: layout, vertex: { module: module, entryPoint: 'vs_main' }, fragment: { module: module, entryPoint: 'fs_main', targets: cast ([{ format: format, blend: ((cast isMaskWrite : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast blend : Dynamic)), writeMask: ((cast isMaskWrite : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal.backend.WebGpuConstantsBackend.value('GPUColorWrite', 'ALL') : Dynamic)) }] : Array<Dynamic>) }, depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: false, depthCompare: 'always', stencilFront: stencilFace, stencilBack: stencilFace, stencilReadMask: 255.0, stencilWriteMask: ((cast isMaskWrite : Bool) ? (cast 255.0 : Dynamic) : (cast 0.0 : Dynamic)) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
     ((cast _Runtime.field(runtime, 'pipelineCache') : flighthq._internal._Map).set(key, pipeline));
     return cast pipeline;
     return cast null;
@@ -142,7 +142,7 @@ class WgpuShader {
     _Runtime.setIndex(uniformData, (floatBase + 10.0), _Runtime.getIndex(matrixArray, 8.0));
     _Runtime.setIndex(uniformData, (floatBase + 11.0), 0.0);
     _Runtime.setIndex(uniformData, (floatBase + 12.0), _Runtime.field(renderProxy, 'alpha'));
-    _Runtime.setIndex(uniformDataU32, (floatBase + 13.0), _Runtime.select(!_Runtime.strictEquals(colorTransform, null), function():Dynamic return cast 1.0, function():Dynamic return cast 0.0));
+    _Runtime.setIndex(uniformDataU32, (floatBase + 13.0), ((cast !_Runtime.strictEquals(colorTransform, null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
     _Runtime.setIndex(uniformData, (floatBase + 14.0), 0.0);
     _Runtime.setIndex(uniformData, (floatBase + 15.0), 0.0);
     _Runtime.setIndex(uniformData, (floatBase + 16.0), _Runtime.coalesce(({ final __typedStruct0 = colorTransform; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.redMultiplier; }), function():Dynamic return cast 1.0));

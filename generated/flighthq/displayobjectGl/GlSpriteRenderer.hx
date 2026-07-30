@@ -39,18 +39,18 @@ class GlSpriteRenderer {
     __destructure0 = _Runtime.field(source, 'data');
     atlas = _Runtime.field(__destructure0, 'atlas');
     id = _Runtime.field(__destructure0, 'id');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(atlas, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(atlas, 'image'), null)), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(atlas, 'image')] : Array<Dynamic>)))))) { return; }
+    if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(atlas, 'image'), null) : Bool)) : Bool) || (cast !(cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(atlas, 'image')] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return; }
     regions = _Runtime.field(atlas, 'regions');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(id, 0.0, '<'), function():Dynamic return cast _Runtime.compare(id, _Runtime.field(regions, 'length'), '>=')))) { return; }
+    if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast _Runtime.field(regions, 'length') : Float)) : Bool)) : Bool)) { return; }
     region = _Runtime.getIndex(regions, id);
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(region, 'width'), 0.0, '<='), function():Dynamic return cast _Runtime.compare(_Runtime.field(region, 'height'), 0.0, '<=')))) { return; }
+    if ((cast ((cast ((cast _Runtime.field(region, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(region, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
     _Runtime.callValue(ensureGlQuadBatchShader, cast ([state] : Array<Dynamic>));
     iw = (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'width'), function():Dynamic return cast 1.0));
     ih = (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'height'), function():Dynamic return cast 1.0));
     t = _Runtime.field(spriteNode, 'transform2D');
     material = _Runtime.field(spriteNode, 'material');
     materialRenderer = _Runtime.callValue(resolveGlMaterialRenderer, cast ([state, material] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(materialRenderer, null))) { return; }
+    if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
     base = _Runtime.callValue(prepareGlSpriteBatchWrite, cast ([state, _Runtime.field(atlas, 'image'), _Runtime.field(spriteNode, 'blendMode'), material, materialRenderer, 1.0] : Array<Dynamic>));
     instanceIndex = _Runtime.field(runtime, 'spriteBatchCount');
     d = _Runtime.field(runtime, 'spriteBatchInstanceData');

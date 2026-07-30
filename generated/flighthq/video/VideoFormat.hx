@@ -15,11 +15,11 @@ class VideoFormat {
 
   public static function detectVideoMimeType(data:Dynamic):Null<String> {
     var b:Dynamic = cast _Runtime.UNDEFINED;
-    b = _Runtime.select(_Runtime.isInstanceOf(data, _Runtime.globalValue('Uint8Array')), function():Dynamic return cast data, function():Dynamic return cast new flighthq._internal._UInt8Array(data));
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(b, 'byteLength'), 4.0, '<'))) { return cast null; }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(_Runtime.field(b, 'byteLength'), 8.0, '>='), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 4.0), 102.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 5.0), 116.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 6.0), 121.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 7.0), 112.0)))) { return cast 'video/mp4'; }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.getIndex(b, 0.0), 26.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 1.0), 69.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 2.0), 223.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 3.0), 163.0)))) { return cast 'video/webm'; }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.getIndex(b, 0.0), 79.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 1.0), 103.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 2.0), 103.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 3.0), 83.0)))) { return cast 'video/ogg'; }
+    b = ((cast _Runtime.isInstanceOf(data, _Runtime.globalValue('Uint8Array')) : Bool) ? (cast data : Dynamic) : (cast new flighthq._internal._UInt8Array(data) : Dynamic));
+    if ((cast ((cast _Runtime.field(b, 'byteLength') : Float) < (cast 4.0 : Float)) : Bool)) { return cast null; }
+    if ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.field(b, 'byteLength') : Float) >= (cast 8.0 : Float)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(b, 4.0), 102.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(b, 5.0), 116.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(b, 6.0), 121.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(b, 7.0), 112.0) : Bool)) : Bool)) { return cast 'video/mp4'; }
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.getIndex(b, 0.0), 26.0) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(b, 1.0), 69.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(b, 2.0), 223.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(b, 3.0), 163.0) : Bool)) : Bool)) { return cast 'video/webm'; }
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.getIndex(b, 0.0), 79.0) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(b, 1.0), 103.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(b, 2.0), 103.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(b, 3.0), 83.0) : Bool)) : Bool)) { return cast 'video/ogg'; }
     return cast null;
     return cast null;
   }
@@ -62,7 +62,7 @@ class VideoFormat {
 
   public static function selectVideoResourceUrl(sources:Array<VideoResourceUrl>):Null<VideoResourceUrl> {
     for (source in _Runtime.iterable(sources)) {
-      if (_Runtime.truthy(_Runtime.callValue(canPlayVideoType, cast ([_Runtime.coalesce(_Runtime.coalesce(_Runtime.field(source, 'type'), function():Dynamic return cast _Runtime.callValue(inferVideoMimeType, cast ([_Runtime.field(source, 'url')] : Array<Dynamic>))), function():Dynamic return cast '')] : Array<Dynamic>)))) { return cast source; }
+      if ((cast _Runtime.callValue(canPlayVideoType, cast ([_Runtime.coalesce(_Runtime.coalesce(_Runtime.field(source, 'type'), function():Dynamic return cast _Runtime.callValue(inferVideoMimeType, cast ([_Runtime.field(source, 'url')] : Array<Dynamic>))), function():Dynamic return cast '')] : Array<Dynamic>)) : Bool)) { return cast source; }
     }
     return cast null;
     return cast null;

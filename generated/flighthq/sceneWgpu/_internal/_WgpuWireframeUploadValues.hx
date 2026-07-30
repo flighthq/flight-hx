@@ -17,22 +17,22 @@ class _WgpuWireframeUploadValues {
     var lines:Dynamic = cast _Runtime.UNDEFINED;
     var lineIndexBuffer:Dynamic = cast _Runtime.UNDEFINED;
     meshUpload = _Runtime.callValue(ensureWgpuMeshUpload, cast ([state, geometry] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(meshUpload, null))) { return cast null; }
+    if ((cast _Runtime.strictEquals(meshUpload, null) : Bool)) { return cast null; }
     perState = ((cast _WgpuWireframeUploadValues.wireframeUploads__wgpuWireframeUpload : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(perState, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(perState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (perState = cast (_Runtime.construct(_Runtime.globalValue('WeakMap'), []) : Dynamic));
       ((cast _WgpuWireframeUploadValues.wireframeUploads__wgpuWireframeUpload : flighthq._internal._WeakMap).set(state, perState));
     }
     upload = ((cast perState : flighthq._internal._WeakMap).get((cast geometry : MeshGeometry)));
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(upload, 'version'), _Runtime.field(geometry, 'version'))))) {
+    if ((cast ((cast !_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(upload, 'version'), _Runtime.field(geometry, 'version')) : Bool)) : Bool)) {
       return cast upload;
     }
     device = _Runtime.field(state, 'device');
-    if (_Runtime.truthy(!_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(_Runtime.field(upload, 'lineIndexBuffer'), 'destroy', cast ([] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(_Runtime.field(upload, 'lineIndexBuffer'), 'destroy', cast ([] : Array<Dynamic>)); }
     lines = _Runtime.callValue(_WgpuWireframeUploadValues.buildLineIndices__wgpuWireframeUpload, cast ([geometry] : Array<Dynamic>));
     lineIndexBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: HxMath.max(4.0, _Runtime.callValue(_WgpuWireframeUploadValues.alignTo4__wgpuWireframeUpload, cast ([_Runtime.field(lines, 'byteLength')] : Array<Dynamic>))), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'INDEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([lineIndexBuffer, 0.0, _Runtime.field(lines, 'buffer'), _Runtime.field(lines, 'byteOffset'), _Runtime.field(lines, 'byteLength')] : Array<Dynamic>));
-    (upload = cast ({ indexFormat: _Runtime.select(_Runtime.isInstanceOf(lines, _Runtime.globalValue('Uint32Array')), function():Dynamic return cast 'uint32', function():Dynamic return cast 'uint16'), lineIndexBuffer: lineIndexBuffer, version: _Runtime.field(geometry, 'version'), vertexBuffer: _Runtime.field(meshUpload, 'vertexBuffer') } : Dynamic));
+    (upload = cast ({ indexFormat: ((cast _Runtime.isInstanceOf(lines, _Runtime.globalValue('Uint32Array')) : Bool) ? (cast 'uint32' : Dynamic) : (cast 'uint16' : Dynamic)), lineIndexBuffer: lineIndexBuffer, version: _Runtime.field(geometry, 'version'), vertexBuffer: _Runtime.field(meshUpload, 'vertexBuffer') } : Dynamic));
     ((cast perState : flighthq._internal._WeakMap).set((cast geometry : MeshGeometry), upload));
     return cast upload;
     return cast null;
@@ -47,11 +47,11 @@ class _WgpuWireframeUploadValues {
     triangleIndices = _Runtime.field(geometry, 'indices');
     triangleCount = HxMath.floor((_Runtime.field(triangleIndices, 'length') / 3.0));
     lineCount = (triangleCount * 6.0);
-    useUint32 = _Runtime.orValue(_Runtime.isInstanceOf(triangleIndices, _Runtime.globalValue('Uint32Array')), function():Dynamic return cast _Runtime.compare(lineCount, 65535.0, '>'));
-    lines = _Runtime.select(useUint32, function():Dynamic return cast new flighthq._internal._UInt32Array(lineCount), function():Dynamic return cast new flighthq._internal._UInt16Array(lineCount));
+    useUint32 = ((cast _Runtime.isInstanceOf(triangleIndices, _Runtime.globalValue('Uint32Array')) : Bool) || (cast ((cast lineCount : Float) > (cast 65535.0 : Float)) : Bool));
+    lines = ((cast useUint32 : Bool) ? (cast new flighthq._internal._UInt32Array(lineCount) : Dynamic) : (cast new flighthq._internal._UInt16Array(lineCount) : Dynamic));
     {
       var t:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(t, triangleCount, '<'))) {
+      while ((cast ((cast t : Float) < (cast triangleCount : Float)) : Bool)) {
         var base:Dynamic = (t * 3.0);
         var i0:Dynamic = _Runtime.getIndex(triangleIndices, base);
         var i1:Dynamic = _Runtime.getIndex(triangleIndices, (base + 1.0));

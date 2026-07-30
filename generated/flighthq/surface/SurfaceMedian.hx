@@ -25,7 +25,7 @@ class SurfaceMedian {
     surfaceHeight = _Runtime.field(_Runtime.field(source, 'surface'), 'height');
     data = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
     area = (((2.0 * r) + 1.0) * ((2.0 * r) + 1.0));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(SurfaceMedian._windowRed__surfaceMedian, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(SurfaceMedian._windowRed__surfaceMedian, 'length'), area, '<')))) {
+    if ((cast ((cast _Runtime.strictEquals(SurfaceMedian._windowRed__surfaceMedian, null) : Bool) || (cast ((cast _Runtime.field(SurfaceMedian._windowRed__surfaceMedian, 'length') : Float) < (cast area : Float)) : Bool)) : Bool)) {
       (SurfaceMedian._windowRed__surfaceMedian = cast (new flighthq._internal._UInt8Array(area) : Dynamic));
       (SurfaceMedian._windowGreen__surfaceMedian = cast (new flighthq._internal._UInt8Array(area) : Dynamic));
       (SurfaceMedian._windowBlue__surfaceMedian = cast (new flighthq._internal._UInt8Array(area) : Dynamic));
@@ -37,18 +37,18 @@ class SurfaceMedian {
     as = (cast SurfaceMedian._windowAlpha__surfaceMedian : flighthq._internal._UInt8Array);
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, h, '<'))) {
+      while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, w, '<'))) {
+          while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
             var n:Dynamic = 0.0;
             {
               var ky:Dynamic = -r;
-              while (_Runtime.truthy(_Runtime.compare(ky, r, '<='))) {
+              while ((cast ((cast ky : Float) <= (cast r : Float)) : Bool)) {
                 var sy:Dynamic = HxMath.max(0.0, HxMath.min((surfaceHeight - 1.0), ((_Runtime.field(source, 'y') + py) + ky)));
                 {
                   var kx:Dynamic = -r;
-                  while (_Runtime.truthy(_Runtime.compare(kx, r, '<='))) {
+                  while ((cast ((cast kx : Float) <= (cast r : Float)) : Bool)) {
                     var sx:Dynamic = HxMath.max(0.0, HxMath.min((surfaceWidth - 1.0), ((_Runtime.field(source, 'x') + px) + kx)));
                     var si:Dynamic = (((sy * surfaceWidth) + sx) * 4.0);
                     _Runtime.setIndex(rs, n, _Runtime.getIndex(data, si));
@@ -79,10 +79,10 @@ class SurfaceMedian {
   public static function medianOf__surfaceMedian(values:flighthq._internal._UInt8Array, n:Float, mid:Float):Float {
     {
       var i:Dynamic = 1.0;
-      while (_Runtime.truthy(_Runtime.compare(i, n, '<'))) {
+      while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
         var v:Dynamic = _Runtime.getIndex(values, i);
         var j:Dynamic = (i - 1.0);
-        while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(j, 0.0, '>='), function():Dynamic return cast _Runtime.compare(_Runtime.getIndex(values, j), v, '>')))) {
+        while ((cast ((cast ((cast j : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast _Runtime.getIndex(values, j) : Float) > (cast v : Float)) : Bool)) : Bool)) {
           _Runtime.setIndex(values, (j + 1.0), _Runtime.getIndex(values, j));
           j--;
         }

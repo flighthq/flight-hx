@@ -20,7 +20,7 @@ class ShapeFill {
     var startX:Dynamic = cast _Runtime.UNDEFINED;
     var startY:Dynamic = cast _Runtime.UNDEFINED;
     var i:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.callValue(hasNonSolidShapeFill, cast ([commands] : Array<Dynamic>)))) { return cast null; }
+    if ((cast _Runtime.callValue(hasNonSolidShapeFill, cast ([commands] : Array<Dynamic>)) : Bool)) { return cast null; }
     regions = cast ([] : Array<Dynamic>);
     path = null;
     color = 0.0;
@@ -29,7 +29,7 @@ class ShapeFill {
     startX = 0.0;
     startY = 0.0;
     i = 0.0;
-    while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(commands, 'length'), '<'))) {
+    while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
       var name:Dynamic = (cast _Runtime.getIndex(commands, i) : String);
       var argCount:Dynamic = (cast _Runtime.getIndex(commands, (i + 1.0)) : Float);
       var a:Dynamic = (i + 2.0);
@@ -38,7 +38,7 @@ class ShapeFill {
         var __switchValue = name;
         if (__switchValue == 'beginFill') {
           {
-            if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(path, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.field(path, 'commands'), 'length'), 0.0, '>')))) { _Runtime.callProperty(regions, 'push', cast ([{ path: path, color: color, alpha: alpha }] : Array<Dynamic>)); }
+            if ((cast ((cast !_Runtime.strictEquals(path, null) : Bool) && (cast ((cast _Runtime.field(_Runtime.field(path, 'commands'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.callProperty(regions, 'push', cast ([{ path: path, color: color, alpha: alpha }] : Array<Dynamic>)); }
             (color = cast ((cast _Runtime.getIndex(commands, a) : Float) : Dynamic));
             (alpha = cast ((cast _Runtime.getIndex(commands, (a + 1.0)) : Float) : Dynamic));
             (winding = cast ('nonZero' : Dynamic));
@@ -47,13 +47,13 @@ class ShapeFill {
         }
         else if (__switchValue == 'endFill') {
           {
-            if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(path, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.field(path, 'commands'), 'length'), 0.0, '>')))) { _Runtime.callProperty(regions, 'push', cast ([{ path: path, color: color, alpha: alpha }] : Array<Dynamic>)); }
+            if ((cast ((cast !_Runtime.strictEquals(path, null) : Bool) && (cast ((cast _Runtime.field(_Runtime.field(path, 'commands'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.callProperty(regions, 'push', cast ([{ path: path, color: color, alpha: alpha }] : Array<Dynamic>)); }
             (path = cast (null : Dynamic));
           }
         }
         else if (__switchValue == 'moveTo') {
           {
-            if (_Runtime.truthy(_Runtime.strictEquals(path, null))) { break; }
+            if ((cast _Runtime.strictEquals(path, null) : Bool)) { break; }
             (startX = cast ((cast _Runtime.getIndex(commands, a) : Float) : Dynamic));
             (startY = cast ((cast _Runtime.getIndex(commands, (a + 1.0)) : Float) : Dynamic));
             _Runtime.callValue(ShapeFill.pushVerb__shapeFill, cast ([path, PathCommandValue.MOVE_TO, startX, startY] : Array<Dynamic>));
@@ -61,31 +61,31 @@ class ShapeFill {
         }
         else if (__switchValue == 'lineTo') {
           {
-            if (_Runtime.truthy(_Runtime.strictEquals(path, null))) { break; }
+            if ((cast _Runtime.strictEquals(path, null) : Bool)) { break; }
             _Runtime.callValue(ShapeFill.pushVerb__shapeFill, cast ([path, PathCommandValue.LINE_TO, (cast _Runtime.getIndex(commands, a) : Float), (cast _Runtime.getIndex(commands, (a + 1.0)) : Float)] : Array<Dynamic>));
           }
         }
         else if (__switchValue == 'curveTo') {
           {
-            if (_Runtime.truthy(_Runtime.strictEquals(path, null))) { break; }
+            if ((cast _Runtime.strictEquals(path, null) : Bool)) { break; }
             _Runtime.callValue(ShapeFill.pushQuadratic__shapeFill, cast ([path, (cast _Runtime.getIndex(commands, a) : Float), (cast _Runtime.getIndex(commands, (a + 1.0)) : Float), (cast _Runtime.getIndex(commands, (a + 2.0)) : Float), (cast _Runtime.getIndex(commands, (a + 3.0)) : Float)] : Array<Dynamic>));
           }
         }
         else if (__switchValue == 'cubicCurveTo') {
           {
-            if (_Runtime.truthy(_Runtime.strictEquals(path, null))) { break; }
+            if ((cast _Runtime.strictEquals(path, null) : Bool)) { break; }
             _Runtime.callValue(ShapeFill.pushCubic__shapeFill, cast ([path, (cast _Runtime.getIndex(commands, a) : Float), (cast _Runtime.getIndex(commands, (a + 1.0)) : Float), (cast _Runtime.getIndex(commands, (a + 2.0)) : Float), (cast _Runtime.getIndex(commands, (a + 3.0)) : Float), (cast _Runtime.getIndex(commands, (a + 4.0)) : Float), (cast _Runtime.getIndex(commands, (a + 5.0)) : Float)] : Array<Dynamic>));
           }
         }
         else if (__switchValue == 'drawCircle') {
           {
-            if (_Runtime.truthy(_Runtime.strictEquals(path, null))) { break; }
+            if ((cast _Runtime.strictEquals(path, null) : Bool)) { break; }
             _Runtime.callValue(ShapeFill.appendEllipseToPath__shapeFill, cast ([path, (cast _Runtime.getIndex(commands, a) : Float), (cast _Runtime.getIndex(commands, (a + 1.0)) : Float), (cast _Runtime.getIndex(commands, (a + 2.0)) : Float), (cast _Runtime.getIndex(commands, (a + 2.0)) : Float)] : Array<Dynamic>));
           }
         }
         else if (__switchValue == 'drawEllipse') {
           {
-            if (_Runtime.truthy(_Runtime.strictEquals(path, null))) { break; }
+            if ((cast _Runtime.strictEquals(path, null) : Bool)) { break; }
             var w:Dynamic = (cast _Runtime.getIndex(commands, (a + 2.0)) : Float);
             var h:Dynamic = (cast _Runtime.getIndex(commands, (a + 3.0)) : Float);
             _Runtime.callValue(ShapeFill.appendEllipseToPath__shapeFill, cast ([path, ((cast _Runtime.getIndex(commands, a) : Float) + (w / 2.0)), ((cast _Runtime.getIndex(commands, (a + 1.0)) : Float) + (h / 2.0)), (w / 2.0), (h / 2.0)] : Array<Dynamic>));
@@ -93,19 +93,19 @@ class ShapeFill {
         }
         else if (__switchValue == 'drawRectangle') {
           {
-            if (_Runtime.truthy(_Runtime.strictEquals(path, null))) { break; }
+            if ((cast _Runtime.strictEquals(path, null) : Bool)) { break; }
             _Runtime.callValue(ShapeFill.appendRectangleToPath__shapeFill, cast ([path, (cast _Runtime.getIndex(commands, a) : Float), (cast _Runtime.getIndex(commands, (a + 1.0)) : Float), (cast _Runtime.getIndex(commands, (a + 2.0)) : Float), (cast _Runtime.getIndex(commands, (a + 3.0)) : Float)] : Array<Dynamic>));
           }
         }
         else if (__switchValue == 'drawRoundRectangle') {
           {
-            if (_Runtime.truthy(_Runtime.strictEquals(path, null))) { break; }
+            if ((cast _Runtime.strictEquals(path, null) : Bool)) { break; }
             _Runtime.callValue(ShapeFill.appendRoundRectangleToPath__shapeFill, cast ([path, (cast _Runtime.getIndex(commands, a) : Float), (cast _Runtime.getIndex(commands, (a + 1.0)) : Float), (cast _Runtime.getIndex(commands, (a + 2.0)) : Float), (cast _Runtime.getIndex(commands, (a + 3.0)) : Float), ((cast _Runtime.getIndex(commands, (a + 4.0)) : Float) / 2.0), ((cast _Runtime.getIndex(commands, (a + 5.0)) : Float) / 2.0)] : Array<Dynamic>));
           }
         }
         else if (__switchValue == 'drawPath') {
           {
-            if (_Runtime.truthy(_Runtime.strictEquals(path, null))) { break; }
+            if ((cast _Runtime.strictEquals(path, null) : Bool)) { break; }
             _Runtime.setField(path, 'winding', (cast _Runtime.getIndex(commands, (a + 2.0)) : PathWinding));
             _Runtime.callValue(ShapeFill.appendRawPath__shapeFill, cast ([path, (cast _Runtime.getIndex(commands, a) : Array<Float>), (cast _Runtime.getIndex(commands, (a + 1.0)) : Array<Float>)] : Array<Dynamic>));
           }
@@ -114,7 +114,7 @@ class ShapeFill {
         }
       }
     }
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(path, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.field(path, 'commands'), 'length'), 0.0, '>')))) { _Runtime.callProperty(regions, 'push', cast ([{ path: path, color: color, alpha: alpha }] : Array<Dynamic>)); }
+    if ((cast ((cast !_Runtime.strictEquals(path, null) : Bool) && (cast ((cast _Runtime.field(_Runtime.field(path, 'commands'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.callProperty(regions, 'push', cast ([{ path: path, color: color, alpha: alpha }] : Array<Dynamic>)); }
     return cast regions;
     return cast null;
   }
@@ -122,13 +122,13 @@ class ShapeFill {
   public static function hasNonSolidShapeFill(commands:Array<ShapeCommandToken>):Bool {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     i = 0.0;
-    while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(commands, 'length'), '<'))) {
+    while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
       var name:Dynamic = (cast _Runtime.getIndex(commands, i) : String);
       var argCount:Dynamic = (cast _Runtime.getIndex(commands, (i + 1.0)) : Float);
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(name, 'beginGradientFill'), function():Dynamic return cast _Runtime.strictEquals(name, 'beginBitmapFill')), function():Dynamic return cast _Runtime.strictEquals(name, 'lineStyle')), function():Dynamic return cast _Runtime.strictEquals(name, 'lineGradientStyle')), function():Dynamic return cast _Runtime.strictEquals(name, 'lineBitmapStyle')))) {
+      if ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(name, 'beginGradientFill') : Bool) || (cast _Runtime.strictEquals(name, 'beginBitmapFill') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'lineStyle') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'lineGradientStyle') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'lineBitmapStyle') : Bool)) : Bool)) {
         return cast true;
       }
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(name, 'drawTriangles'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.getIndex(commands, ((i + 2.0) + 2.0)), null)))) {
+      if ((cast ((cast _Runtime.strictEquals(name, 'drawTriangles') : Bool) && (cast !_Runtime.strictEquals(_Runtime.getIndex(commands, ((i + 2.0) + 2.0)), null) : Bool)) : Bool)) {
         return cast true;
       }
       (i = cast ((i + (2.0 + argCount)) : Dynamic));
@@ -156,13 +156,13 @@ class ShapeFill {
     d = 0.0;
     {
       var v:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(v, _Runtime.field(verbs, 'length'), '<'))) {
+      while ((cast ((cast v : Float) < (cast _Runtime.field(verbs, 'length') : Float)) : Bool)) {
         var verb:Dynamic = _Runtime.getIndex(verbs, v);
-        var args:Dynamic = _Runtime.select(_Runtime.strictEquals(verb, PathCommandValue.CUBIC_CURVE_TO), function():Dynamic return cast 6.0, function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(verb, PathCommandValue.CURVE_TO), function():Dynamic return cast 4.0, function():Dynamic return cast 2.0));
+        var args:Dynamic = ((cast _Runtime.strictEquals(verb, PathCommandValue.CUBIC_CURVE_TO) : Bool) ? (cast 6.0 : Dynamic) : (cast ((cast _Runtime.strictEquals(verb, PathCommandValue.CURVE_TO) : Bool) ? (cast 4.0 : Dynamic) : (cast 2.0 : Dynamic)) : Dynamic));
         _Runtime.callProperty(_Runtime.field(path, 'commands'), 'push', cast ([verb] : Array<Dynamic>));
         {
           var k:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(k, args, '<'))) {
+          while ((cast ((cast k : Float) < (cast args : Float)) : Bool)) {
             _Runtime.callProperty(_Runtime.field(path, 'data'), 'push', cast ([_Runtime.getIndex(data, (d + k))] : Array<Dynamic>));
             k++;
           }

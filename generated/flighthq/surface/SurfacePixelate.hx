@@ -21,11 +21,11 @@ class SurfacePixelate {
     data = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
     {
       var by:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(by, h, '<'))) {
+      while ((cast ((cast by : Float) < (cast h : Float)) : Bool)) {
         var yEnd:Dynamic = HxMath.min((by + block), h);
         {
           var bx:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(bx, w, '<'))) {
+          while ((cast ((cast bx : Float) < (cast w : Float)) : Bool)) {
             var xEnd:Dynamic = HxMath.min((bx + block), w);
             var r:Dynamic = 0.0;
             var g:Dynamic = 0.0;
@@ -34,14 +34,14 @@ class SurfacePixelate {
             var count:Dynamic = 0.0;
             {
               var py:Dynamic = by;
-              while (_Runtime.truthy(_Runtime.compare(py, yEnd, '<'))) {
+              while ((cast ((cast py : Float) < (cast yEnd : Float)) : Bool)) {
                 var sy:Dynamic = (_Runtime.field(source, 'y') + py);
-                if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(sy, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sy, surfaceHeight, '>=')))) { py++; continue; }
+                if ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast surfaceHeight : Float)) : Bool)) : Bool)) { py++; continue; }
                 {
                   var px:Dynamic = bx;
-                  while (_Runtime.truthy(_Runtime.compare(px, xEnd, '<'))) {
+                  while ((cast ((cast px : Float) < (cast xEnd : Float)) : Bool)) {
                     var sx:Dynamic = (_Runtime.field(source, 'x') + px);
-                    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(sx, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sx, surfaceWidth, '>=')))) { px++; continue; }
+                    if ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast surfaceWidth : Float)) : Bool)) : Bool)) { px++; continue; }
                     var si:Dynamic = (((sy * surfaceWidth) + sx) * 4.0);
                     (r = cast ((r + _Runtime.getIndex(data, si)) : Dynamic));
                     (g = cast ((g + _Runtime.getIndex(data, (si + 1.0))) : Dynamic));
@@ -54,17 +54,17 @@ class SurfacePixelate {
                 py++;
               }
             }
-            if (_Runtime.truthy(_Runtime.strictEquals(count, 0.0))) { (bx = cast ((bx + block) : Dynamic)); continue; }
+            if ((cast _Runtime.strictEquals(count, 0.0) : Bool)) { (bx = cast ((bx + block) : Dynamic)); continue; }
             var ar:Dynamic = HxMath.round((r / count));
             var ag:Dynamic = HxMath.round((g / count));
             var ab:Dynamic = HxMath.round((b / count));
             var aa:Dynamic = HxMath.round((a / count));
             {
               var py:Dynamic = by;
-              while (_Runtime.truthy(_Runtime.compare(py, yEnd, '<'))) {
+              while ((cast ((cast py : Float) < (cast yEnd : Float)) : Bool)) {
                 {
                   var px:Dynamic = bx;
-                  while (_Runtime.truthy(_Runtime.compare(px, xEnd, '<'))) {
+                  while ((cast ((cast px : Float) < (cast xEnd : Float)) : Bool)) {
                     var di:Dynamic = (((py * w) + px) * 4.0);
                     _Runtime.setIndex(out, di, ar);
                     _Runtime.setIndex(out, (di + 1.0), ag);

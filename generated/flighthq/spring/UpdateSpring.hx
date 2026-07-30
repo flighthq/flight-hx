@@ -19,15 +19,15 @@ class UpdateSpring {
     var posVelCoef:Float = cast _Runtime.UNDEFINED;
     var velPosCoef:Float = cast _Runtime.UNDEFINED;
     var velVelCoef:Float = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(deltaTime, 0.0, '<='))) { return; }
+    if ((cast ((cast deltaTime : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
     frequency = _Runtime.field(config, 'frequency');
-    if (_Runtime.truthy(_Runtime.compare(frequency, 0.0, '<='))) { return; }
+    if ((cast ((cast frequency : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
     value = _Runtime.field(spring, 'value');
     velocity = _Runtime.field(spring, 'velocity');
-    dampingRatio = _Runtime.select(_Runtime.compare(_Runtime.field(config, 'dampingRatio'), 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.field(config, 'dampingRatio'));
+    dampingRatio = ((cast ((cast _Runtime.field(config, 'dampingRatio') : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.field(config, 'dampingRatio') : Dynamic));
     omega = (TAU * frequency);
     c0 = (value - target);
-    if (_Runtime.truthy(_Runtime.compare(dampingRatio, (1.0 + UpdateSpring.CRITICAL_BAND__updateSpring), '>'))) {
+    if ((cast ((cast dampingRatio : Float) > (cast (1.0 + UpdateSpring.CRITICAL_BAND__updateSpring) : Float)) : Bool)) {
       var zb:Dynamic = (omega * HxMath.sqrt(((dampingRatio * dampingRatio) - 1.0)));
       var za:Dynamic = (-omega * dampingRatio);
       var z1:Dynamic = (za - zb);
@@ -39,7 +39,7 @@ class UpdateSpring {
       (posVelCoef = cast (((e2 - e1) * invDenominator) : Dynamic));
       (velPosCoef = cast ((((z1 * z2) * (e1 - e2)) * invDenominator) : Dynamic));
       (velVelCoef = cast ((((z2 * e2) - (z1 * e1)) * invDenominator) : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.compare(dampingRatio, (1.0 - UpdateSpring.CRITICAL_BAND__updateSpring), '<'))) {
+    } else { if ((cast ((cast dampingRatio : Float) < (cast (1.0 - UpdateSpring.CRITICAL_BAND__updateSpring) : Float)) : Bool)) {
       var alpha:Dynamic = (dampingRatio * omega);
       var beta:Dynamic = (omega * HxMath.sqrt((1.0 - (dampingRatio * dampingRatio))));
       var envelope:Dynamic = HxMath.exp((-alpha * deltaTime));

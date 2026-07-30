@@ -14,13 +14,13 @@ class SpatialQuery {
     if (out == null) out = cast (cast ([] : Array<Dynamic>) : Dynamic);
     var worldBounds:Dynamic = cast _Runtime.UNDEFINED;
     var children:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(root, 'enabled')))) { return cast out; }
+    if ((cast !(cast _Runtime.field(root, 'enabled') : Bool) : Bool)) { return cast out; }
     worldBounds = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([root] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.callValue(intersectsRectangle, cast ([worldBounds, rect] : Array<Dynamic>)))) {
+    if ((cast _Runtime.callValue(intersectsRectangle, cast ([worldBounds, rect] : Array<Dynamic>)) : Bool)) {
       _Runtime.callProperty(out, 'push', cast ([root] : Array<Dynamic>));
     }
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([root] : Array<Dynamic>)), 'children');
-    if (_Runtime.truthy(!_Runtime.strictEquals(children, null))) {
+    if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
         _Runtime.callValue(hitTestAreaQuery, cast ([(cast child : DisplayObject), rect, out] : Array<Dynamic>));
       }
@@ -37,17 +37,17 @@ class SpatialQuery {
     var dx:Dynamic = cast _Runtime.UNDEFINED;
     var dy:Dynamic = cast _Runtime.UNDEFINED;
     var children:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(root, 'enabled')))) { return cast out; }
+    if ((cast !(cast _Runtime.field(root, 'enabled') : Bool) : Bool)) { return cast out; }
     b = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([root] : Array<Dynamic>));
     nearX = HxMath.max(_Runtime.field(b, 'x'), HxMath.min(cx, (_Runtime.field(b, 'x') + _Runtime.field(b, 'width'))));
     nearY = HxMath.max(_Runtime.field(b, 'y'), HxMath.min(cy, (_Runtime.field(b, 'y') + _Runtime.field(b, 'height'))));
     dx = (cx - nearX);
     dy = (cy - nearY);
-    if (_Runtime.truthy(_Runtime.compare(((dx * dx) + (dy * dy)), (radius * radius), '<='))) {
+    if ((cast ((cast ((dx * dx) + (dy * dy)) : Float) <= (cast (radius * radius) : Float)) : Bool)) {
       _Runtime.callProperty(out, 'push', cast ([root] : Array<Dynamic>));
     }
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([root] : Array<Dynamic>)), 'children');
-    if (_Runtime.truthy(!_Runtime.strictEquals(children, null))) {
+    if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
         _Runtime.callValue(hitTestAreaQueryCircle, cast ([(cast child : DisplayObject), cx, cy, radius, out] : Array<Dynamic>));
       }

@@ -17,8 +17,8 @@ class CreateAnimatedNormalModifier {
   public static function createAnimatedNormalModifier(options:AnimatedNormalModifierOptions):AnimatedNormalModifier {
     var modifier:AnimatedNormalModifier = cast _Runtime.UNDEFINED;
     modifier = { kind: AnimatedNormalModifierKind, slot: ModifierSlotValue.Normal, map: _Runtime.field(options, 'map'), scroll: _Runtime.field(options, 'scroll'), strength: _Runtime.coalesce(_Runtime.field(options, 'strength'), function():Dynamic return cast 1.0) };
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'secondaryMap'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(modifier, 'secondaryMap', _Runtime.field(options, 'secondaryMap')); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'secondaryScroll'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(modifier, 'secondaryScroll', _Runtime.field(options, 'secondaryScroll')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'secondaryMap'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(modifier, 'secondaryMap', _Runtime.field(options, 'secondaryMap')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'secondaryScroll'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(modifier, 'secondaryScroll', _Runtime.field(options, 'secondaryScroll')); }
     return cast modifier;
     return cast null;
   }

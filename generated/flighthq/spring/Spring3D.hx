@@ -16,7 +16,7 @@ class Spring3D {
   }
 
   public static function isSpring3DSettled(spring3D:flighthq.types.Spring.Spring3D, targetX:Float, targetY:Float, targetZ:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.callValue(isSpringSettled, cast ([_Runtime.field(spring3D, 'x'), targetX, positionEpsilon, velocityEpsilon] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(isSpringSettled, cast ([_Runtime.field(spring3D, 'y'), targetY, positionEpsilon, velocityEpsilon] : Array<Dynamic>))), function():Dynamic return cast _Runtime.callValue(isSpringSettled, cast ([_Runtime.field(spring3D, 'z'), targetZ, positionEpsilon, velocityEpsilon] : Array<Dynamic>)));
+    return cast _Runtime.andValue(((cast _Runtime.callValue(isSpringSettled, cast ([_Runtime.field(spring3D, 'x'), targetX, positionEpsilon, velocityEpsilon] : Array<Dynamic>)) : Bool) && (cast _Runtime.callValue(isSpringSettled, cast ([_Runtime.field(spring3D, 'y'), targetY, positionEpsilon, velocityEpsilon] : Array<Dynamic>)) : Bool)), function():Dynamic return cast _Runtime.callValue(isSpringSettled, cast ([_Runtime.field(spring3D, 'z'), targetZ, positionEpsilon, velocityEpsilon] : Array<Dynamic>)));
     return cast null;
   }
 

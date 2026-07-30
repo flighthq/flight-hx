@@ -32,7 +32,7 @@ class SurfaceWarp {
     dh = _Runtime.field(dest, 'height');
     sw = _Runtime.field(source, 'width');
     sh = _Runtime.field(source, 'height');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(dw, 0.0), function():Dynamic return cast _Runtime.strictEquals(dh, 0.0)), function():Dynamic return cast _Runtime.strictEquals(sw, 0.0)), function():Dynamic return cast _Runtime.strictEquals(sh, 0.0)))) { return; }
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(dw, 0.0) : Bool) || (cast _Runtime.strictEquals(dh, 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(sw, 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(sh, 0.0) : Bool)) : Bool)) { return; }
     __destructure0 = matrix;
     m0 = _Runtime.getIndex(__destructure0, 0.0);
     m1 = _Runtime.getIndex(__destructure0, 1.0);
@@ -49,17 +49,17 @@ class SurfaceWarp {
     dStride = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
     {
       var dy:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(dy, dh, '<'))) {
+      while ((cast ((cast dy : Float) < (cast dh : Float)) : Bool)) {
         var oy:Dynamic = (_Runtime.field(dest, 'y') + dy);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(oy, 0.0, '<'), function():Dynamic return cast _Runtime.compare(oy, _Runtime.field(_Runtime.field(dest, 'surface'), 'height'), '>=')))) { dy++; continue; }
+        if ((cast ((cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast oy : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool)) { dy++; continue; }
         {
           var dx:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(dx, dw, '<'))) {
+          while ((cast ((cast dx : Float) < (cast dw : Float)) : Bool)) {
             var ox:Dynamic = (_Runtime.field(dest, 'x') + dx);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(ox, 0.0, '<'), function():Dynamic return cast _Runtime.compare(ox, dStride, '>=')))) { dx++; continue; }
+            if ((cast ((cast ((cast ox : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast ox : Float) >= (cast dStride : Float)) : Bool)) : Bool)) { dx++; continue; }
             var w:Dynamic = (((m6 * dx) + (m7 * dy)) + m8);
             var di:Dynamic = (((oy * dStride) + ox) * 4.0);
-            if (_Runtime.truthy(_Runtime.compare(HxMath.abs(w), 1e-10, '<'))) {
+            if ((cast ((cast HxMath.abs(w) : Float) < (cast 1e-10 : Float)) : Bool)) {
               _Runtime.setIndex(dd, di, 0.0);
               _Runtime.setIndex(dd, (di + 1.0), 0.0);
               _Runtime.setIndex(dd, (di + 2.0), 0.0);
@@ -88,22 +88,22 @@ class SurfaceWarp {
     var Hinv:Dynamic = cast _Runtime.UNDEFINED;
     sw = _Runtime.field(source, 'width');
     sh = _Runtime.field(source, 'height');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(sw, 0.0), function():Dynamic return cast _Runtime.strictEquals(sh, 0.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(dest, 'width'), 0.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(dest, 'height'), 0.0)))) { return; }
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(sw, 0.0) : Bool) || (cast _Runtime.strictEquals(sh, 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(dest, 'width'), 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(dest, 'height'), 0.0) : Bool)) : Bool)) { return; }
     srcPts = cast ([0.0, 0.0, sw, 0.0, sw, sh, 0.0, sh] : Array<Dynamic>);
     H = _Runtime.callValue(SurfaceWarp.computeHomography__surfaceWarp, cast ([srcPts, dstQuad] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(H, null))) { return; }
+    if ((cast _Runtime.strictEquals(H, null) : Bool)) { return; }
     Hinv = _Runtime.callValue(SurfaceWarp.invertMatrix3x3__surfaceWarp, cast ([H] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(Hinv, null))) { return; }
+    if ((cast _Runtime.strictEquals(Hinv, null) : Bool)) { return; }
     _Runtime.callValue(warpSurface, cast ([dest, source, Hinv, edgeMode, sampleMode] : Array<Dynamic>));
   }
 
   public static function warpSampleSurface__surfaceWarp(dd:flighthq._internal._UInt8ClampedArray, di:Float, sd:flighthq._internal._UInt8ClampedArray, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, sHeight:Float, sx:Float, sy:Float, sampleMode:SurfaceResizeMode, edgeMode:SurfaceEdgeMode):Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(sampleMode, 'nearest'))) {
+    if ((cast _Runtime.strictEquals(sampleMode, 'nearest') : Bool)) {
       var ix:Dynamic = HxMath.round(sx);
       var iy:Dynamic = HxMath.round(sy);
       var cx:Dynamic = _Runtime.callValue(SurfaceWarp.warpResolveEdge__surfaceWarp, cast ([ix, sw, edgeMode] : Array<Dynamic>));
       var cy:Dynamic = _Runtime.callValue(SurfaceWarp.warpResolveEdge__surfaceWarp, cast ([iy, sh, edgeMode] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(cx, null), function():Dynamic return cast _Runtime.strictEquals(cy, null)))) {
+      if ((cast ((cast _Runtime.strictEquals(cx, null) : Bool) || (cast _Runtime.strictEquals(cy, null) : Bool)) : Bool)) {
         _Runtime.setIndex(dd, di, 0.0);
         _Runtime.setIndex(dd, (di + 1.0), 0.0);
         _Runtime.setIndex(dd, (di + 2.0), 0.0);
@@ -117,7 +117,7 @@ class SurfaceWarp {
       _Runtime.setIndex(dd, (di + 3.0), _Runtime.getIndex(sd, (si + 3.0)));
       return;
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(sampleMode, 'bicubic'))) {
+    if ((cast _Runtime.strictEquals(sampleMode, 'bicubic') : Bool)) {
       _Runtime.callValue(SurfaceWarp.warpSampleBicubic__surfaceWarp, cast ([dd, di, sd, sw, sh, originX, originY, sStride, sHeight, sx, sy, edgeMode] : Array<Dynamic>));
       return;
     }
@@ -143,11 +143,11 @@ class SurfaceWarp {
     cy10 = _Runtime.callValue(SurfaceWarp.warpResolveEdge__surfaceWarp, cast ([(y0 + 1.0), sh, edgeMode] : Array<Dynamic>));
     {
       var c:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(c, 4.0, '<'))) {
-        var v00:Dynamic = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(cx00, null), function():Dynamic return cast !_Runtime.strictEquals(cy00, null)), function():Dynamic return cast _Runtime.getIndex(sd, ((((((originY + cy00) * sStride) + originX) + cx00) * 4.0) + c)), function():Dynamic return cast 0.0);
-        var v10:Dynamic = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(cx10, null), function():Dynamic return cast !_Runtime.strictEquals(cy00, null)), function():Dynamic return cast _Runtime.getIndex(sd, ((((((originY + cy00) * sStride) + originX) + cx10) * 4.0) + c)), function():Dynamic return cast 0.0);
-        var v01:Dynamic = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(cx00, null), function():Dynamic return cast !_Runtime.strictEquals(cy10, null)), function():Dynamic return cast _Runtime.getIndex(sd, ((((((originY + cy10) * sStride) + originX) + cx00) * 4.0) + c)), function():Dynamic return cast 0.0);
-        var v11:Dynamic = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(cx10, null), function():Dynamic return cast !_Runtime.strictEquals(cy10, null)), function():Dynamic return cast _Runtime.getIndex(sd, ((((((originY + cy10) * sStride) + originX) + cx10) * 4.0) + c)), function():Dynamic return cast 0.0);
+      while ((cast ((cast c : Float) < (cast 4.0 : Float)) : Bool)) {
+        var v00:Dynamic = ((cast ((cast !_Runtime.strictEquals(cx00, null) : Bool) && (cast !_Runtime.strictEquals(cy00, null) : Bool)) : Bool) ? (cast _Runtime.getIndex(sd, ((((((originY + cy00) * sStride) + originX) + cx00) * 4.0) + c)) : Dynamic) : (cast 0.0 : Dynamic));
+        var v10:Dynamic = ((cast ((cast !_Runtime.strictEquals(cx10, null) : Bool) && (cast !_Runtime.strictEquals(cy00, null) : Bool)) : Bool) ? (cast _Runtime.getIndex(sd, ((((((originY + cy00) * sStride) + originX) + cx10) * 4.0) + c)) : Dynamic) : (cast 0.0 : Dynamic));
+        var v01:Dynamic = ((cast ((cast !_Runtime.strictEquals(cx00, null) : Bool) && (cast !_Runtime.strictEquals(cy10, null) : Bool)) : Bool) ? (cast _Runtime.getIndex(sd, ((((((originY + cy10) * sStride) + originX) + cx00) * 4.0) + c)) : Dynamic) : (cast 0.0 : Dynamic));
+        var v11:Dynamic = ((cast ((cast !_Runtime.strictEquals(cx10, null) : Bool) && (cast !_Runtime.strictEquals(cy10, null) : Bool)) : Bool) ? (cast _Runtime.getIndex(sd, ((((((originY + cy10) * sStride) + originX) + cx10) * 4.0) + c)) : Dynamic) : (cast 0.0 : Dynamic));
         var top:Dynamic = ((v00 * (1.0 - tx)) + (v10 * tx));
         var bottom:Dynamic = ((v01 * (1.0 - tx)) + (v11 * tx));
         _Runtime.setIndex(dd, (di + c), HxMath.round(((top * (1.0 - ty)) + (bottom * ty))));
@@ -167,19 +167,19 @@ class SurfaceWarp {
     ty = (sy - y1);
     {
       var c:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(c, 4.0, '<'))) {
+      while ((cast ((cast c : Float) < (cast 4.0 : Float)) : Bool)) {
         var sum:Dynamic = 0.0;
         {
           var m:Dynamic = -1.0;
-          while (_Runtime.truthy(_Runtime.compare(m, 2.0, '<='))) {
+          while ((cast ((cast m : Float) <= (cast 2.0 : Float)) : Bool)) {
             var wy:Dynamic = _Runtime.callValue(SurfaceWarp.catmullRomWeight__surfaceWarp, cast ([(ty - m)] : Array<Dynamic>));
             var ry:Dynamic = _Runtime.callValue(SurfaceWarp.warpResolveEdge__surfaceWarp, cast ([(y1 + m), sh, edgeMode] : Array<Dynamic>));
             {
               var n:Dynamic = -1.0;
-              while (_Runtime.truthy(_Runtime.compare(n, 2.0, '<='))) {
+              while ((cast ((cast n : Float) <= (cast 2.0 : Float)) : Bool)) {
                 var wx:Dynamic = _Runtime.callValue(SurfaceWarp.catmullRomWeight__surfaceWarp, cast ([(tx - n)] : Array<Dynamic>));
                 var rx:Dynamic = _Runtime.callValue(SurfaceWarp.warpResolveEdge__surfaceWarp, cast ([(x1 + n), sw, edgeMode] : Array<Dynamic>));
-                var v:Dynamic = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(rx, null), function():Dynamic return cast !_Runtime.strictEquals(ry, null)), function():Dynamic return cast _Runtime.getIndex(sd, ((((((originY + ry) * sStride) + originX) + rx) * 4.0) + c)), function():Dynamic return cast 0.0);
+                var v:Dynamic = ((cast ((cast !_Runtime.strictEquals(rx, null) : Bool) && (cast !_Runtime.strictEquals(ry, null) : Bool)) : Bool) ? (cast _Runtime.getIndex(sd, ((((((originY + ry) * sStride) + originX) + rx) * 4.0) + c)) : Dynamic) : (cast 0.0 : Dynamic));
                 (sum = cast ((sum + ((v * wy) * wx)) : Dynamic));
                 n++;
               }
@@ -194,7 +194,7 @@ class SurfaceWarp {
   }
 
   public static function warpResolveEdge__surfaceWarp(v:Float, size:Float, mode:SurfaceEdgeMode):Null<Float> {
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(v, 0.0, '>='), function():Dynamic return cast _Runtime.compare(v, size, '<')))) { return cast v; }
+    if ((cast ((cast ((cast v : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast v : Float) < (cast size : Float)) : Bool)) : Bool)) { return cast v; }
     {
       var __switchValue = mode;
       if (__switchValue == 'clamp') {
@@ -207,7 +207,7 @@ class SurfaceWarp {
         {
           var period:Dynamic = (2.0 * size);
           var wrapped:Dynamic = _Runtime.fmod((_Runtime.fmod(v, period) + period), period);
-          return cast _Runtime.select(_Runtime.compare(wrapped, size, '<'), function():Dynamic return cast wrapped, function():Dynamic return cast ((period - 1.0) - wrapped));
+          return cast ((cast ((cast wrapped : Float) < (cast size : Float)) : Bool) ? (cast wrapped : Dynamic) : (cast ((period - 1.0) - wrapped) : Dynamic));
         }
       }
       else  {
@@ -220,8 +220,8 @@ class SurfaceWarp {
   public static function catmullRomWeight__surfaceWarp(t:Float):Float {
     var a:Dynamic = cast _Runtime.UNDEFINED;
     a = HxMath.abs(t);
-    if (_Runtime.truthy(_Runtime.compare(a, 2.0, '>='))) { return cast 0.0; }
-    if (_Runtime.truthy(_Runtime.compare(a, 1.0, '>='))) { return cast ((((((-0.5 * a) * a) * a) + ((2.5 * a) * a)) - (4.0 * a)) + 2.0); }
+    if ((cast ((cast a : Float) >= (cast 2.0 : Float)) : Bool)) { return cast 0.0; }
+    if ((cast ((cast a : Float) >= (cast 1.0 : Float)) : Bool)) { return cast ((((((-0.5 * a) * a) * a) + ((2.5 * a) * a)) - (4.0 * a)) + 2.0); }
     return cast (((((1.5 * a) * a) * a) - ((2.5 * a) * a)) + 1.0);
     return cast null;
   }
@@ -234,7 +234,7 @@ class SurfaceWarp {
     A = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, 4.0, '<'))) {
+      while ((cast ((cast i : Float) < (cast 4.0 : Float)) : Bool)) {
         var sx:Dynamic = _Runtime.getIndex(src, (i * 2.0));
         var sy:Dynamic = _Runtime.getIndex(src, ((i * 2.0) + 1.0));
         var dx:Dynamic = _Runtime.getIndex(dst, (i * 2.0));
@@ -248,7 +248,7 @@ class SurfaceWarp {
     M = cast ([] : Array<Dynamic>);
     {
       var r:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(r, 8.0, '<'))) {
+      while ((cast ((cast r : Float) < (cast 8.0 : Float)) : Bool)) {
         var row:Dynamic = _Runtime.getIndex(A, r);
         _Runtime.callProperty(M, 'push', cast ([_Runtime.slice(row, 0.0, 8.0)] : Array<Dynamic>));
         _Runtime.callProperty(b, 'push', cast ([_Runtime.getIndex(row, 8.0)] : Array<Dynamic>));
@@ -256,7 +256,7 @@ class SurfaceWarp {
       }
     }
     h = _Runtime.callValue(SurfaceWarp.solveLinear8__surfaceWarp, cast ([M, b] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(h, null))) { return cast null; }
+    if ((cast _Runtime.strictEquals(h, null) : Bool)) { return cast null; }
     return cast cast ([_Runtime.getIndex(h, 0.0), _Runtime.getIndex(h, 1.0), _Runtime.getIndex(h, 2.0), _Runtime.getIndex(h, 3.0), _Runtime.getIndex(h, 4.0), _Runtime.getIndex(h, 5.0), _Runtime.getIndex(h, 6.0), _Runtime.getIndex(h, 7.0), 1.0] : Array<Dynamic>);
     return cast null;
   }
@@ -269,30 +269,30 @@ class SurfaceWarp {
     aug = _Runtime.callProperty(M, 'map', cast ([function(row:Dynamic, i:Dynamic) return _Runtime.concatArrays([_Runtime.toArray(row), [-_Runtime.getIndex(b, i)]])] : Array<Dynamic>));
     {
       var col:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(col, n, '<'))) {
+      while ((cast ((cast col : Float) < (cast n : Float)) : Bool)) {
         var maxRow:Dynamic = col;
         var maxVal:Dynamic = HxMath.abs(_Runtime.getIndex(_Runtime.getIndex(aug, col), col));
         {
           var row:Dynamic = (col + 1.0);
-          while (_Runtime.truthy(_Runtime.compare(row, n, '<'))) {
+          while ((cast ((cast row : Float) < (cast n : Float)) : Bool)) {
             var v:Dynamic = HxMath.abs(_Runtime.getIndex(_Runtime.getIndex(aug, row), col));
-            if (_Runtime.truthy(_Runtime.compare(v, maxVal, '>'))) {
+            if ((cast ((cast v : Float) > (cast maxVal : Float)) : Bool)) {
               (maxVal = cast (v : Dynamic));
               (maxRow = cast (row : Dynamic));
             }
             row++;
           }
         }
-        if (_Runtime.truthy(_Runtime.compare(maxVal, 1e-12, '<'))) { return cast null; }
+        if ((cast ((cast maxVal : Float) < (cast 1e-12 : Float)) : Bool)) { return cast null; }
         ({ var __destructure0:Dynamic = cast ([_Runtime.getIndex(aug, maxRow), _Runtime.getIndex(aug, col)] : Array<Dynamic>); _Runtime.setIndex(aug, col, _Runtime.getIndex(__destructure0, 0)); _Runtime.setIndex(aug, maxRow, _Runtime.getIndex(__destructure0, 1)); __destructure0; });
         var pivot:Dynamic = _Runtime.getIndex(_Runtime.getIndex(aug, col), col);
         {
           var row:Dynamic = (col + 1.0);
-          while (_Runtime.truthy(_Runtime.compare(row, n, '<'))) {
+          while ((cast ((cast row : Float) < (cast n : Float)) : Bool)) {
             var factor:Dynamic = (_Runtime.getIndex(_Runtime.getIndex(aug, row), col) / pivot);
             {
               var k:Dynamic = col;
-              while (_Runtime.truthy(_Runtime.compare(k, n, '<='))) {
+              while ((cast ((cast k : Float) <= (cast n : Float)) : Bool)) {
                 _Runtime.setIndex(_Runtime.getIndex(aug, row), k, (_Runtime.getIndex(_Runtime.getIndex(aug, row), k) - (factor * _Runtime.getIndex(_Runtime.getIndex(aug, col), k))));
                 k++;
               }
@@ -306,11 +306,11 @@ class SurfaceWarp {
     x = _Runtime.fill(_Runtime.createArray(n), 0.0, 0, null, 1);
     {
       var row:Dynamic = (n - 1.0);
-      while (_Runtime.truthy(_Runtime.compare(row, 0.0, '>='))) {
+      while ((cast ((cast row : Float) >= (cast 0.0 : Float)) : Bool)) {
         var sum:Dynamic = _Runtime.getIndex(_Runtime.getIndex(aug, row), n);
         {
           var col:Dynamic = (row + 1.0);
-          while (_Runtime.truthy(_Runtime.compare(col, n, '<'))) {
+          while ((cast ((cast col : Float) < (cast n : Float)) : Bool)) {
             (sum = cast ((sum - (_Runtime.getIndex(_Runtime.getIndex(aug, row), col) * _Runtime.getIndex(x, col))) : Dynamic));
             col++;
           }
@@ -347,7 +347,7 @@ class SurfaceWarp {
     h = _Runtime.getIndex(__destructure1, 7.0);
     k = _Runtime.getIndex(__destructure1, 8.0);
     det = (((a * ((e * k) - (f * h))) - (b * ((d * k) - (f * g)))) + (c * ((d * h) - (e * g))));
-    if (_Runtime.truthy(_Runtime.compare(HxMath.abs(det), 1e-12, '<'))) { return cast null; }
+    if ((cast ((cast HxMath.abs(det) : Float) < (cast 1e-12 : Float)) : Bool)) { return cast null; }
     invDet = (1.0 / det);
     return cast cast ([(((e * k) - (f * h)) * invDet), (((c * h) - (b * k)) * invDet), (((b * f) - (c * e)) * invDet), (((f * g) - (d * k)) * invDet), (((a * k) - (c * g)) * invDet), (((c * d) - (a * f)) * invDet), (((d * h) - (e * g)) * invDet), (((b * g) - (a * h)) * invDet), (((a * e) - (b * d)) * invDet)] : Array<Dynamic>);
     return cast null;

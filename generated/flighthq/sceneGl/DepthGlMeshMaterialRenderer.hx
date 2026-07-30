@@ -29,9 +29,9 @@ class DepthGlMeshMaterialRenderer {
     gl = _Runtime.field(state, 'gl');
     depth = (cast material : Null<DepthMaterial>);
     program = _Runtime.callValue(ensureGlDebugProgram, cast ([state, { hasNormalMap: false, mode: 'depth' }] : Array<Dynamic>));
-    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, _Runtime.andValue(!_Runtime.strictEquals(depth, null), function():Dynamic return cast _Runtime.field(depth, 'doubleSided'))] : Array<Dynamic>));
+    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, ((cast !_Runtime.strictEquals(depth, null) : Bool) && (cast _Runtime.field(depth, 'doubleSided') : Bool))] : Array<Dynamic>));
     _Runtime.callValue(setGlMeshViewProjection, cast ([gl, _Runtime.field(program, 'locViewProjection'), camera] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(depth, null))) {
+    if ((cast _Runtime.strictEquals(depth, null) : Bool)) {
       _Runtime.callValue(bindGlDebugRange, cast ([state, program, 0.0, 1.0] : Array<Dynamic>));
       return;
     }
@@ -39,7 +39,7 @@ class DepthGlMeshMaterialRenderer {
   }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
-    if (_Runtime.truthy(_Runtime.strictEquals(program, null))) { return; }
+    if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
     _Runtime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
   } };
 

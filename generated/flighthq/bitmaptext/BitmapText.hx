@@ -33,7 +33,7 @@ class BitmapText {
     var bounds:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : BitmapTextRuntime);
     bounds = _Runtime.field(runtime, 'localBoundsRectangle');
-    if (_Runtime.truthy(_Runtime.strictEquals(bounds, null))) {
+    if ((cast _Runtime.strictEquals(bounds, null) : Bool)) {
       _Runtime.setField(out, 'x', 0.0);
       _Runtime.setField(out, 'y', 0.0);
       _Runtime.setField(out, 'width', 0.0);
@@ -51,7 +51,7 @@ class BitmapText {
     bitmapText = (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([BitmapTextKind, _Runtime.field(_Runtime, 'UNDEFINED'), createBitmapTextData, createBitmapTextRuntime] : Array<Dynamic>)) : flighthq.types.BitmapText);
     data = _Runtime.field(bitmapText, 'data');
     _Runtime.setField(data, 'glyphSource', glyphSource);
-    if (_Runtime.truthy(!_Runtime.strictEquals(options, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callValue(BitmapText.applyBitmapTextOptions__bitmapText, cast ([data, options] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(options, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callValue(BitmapText.applyBitmapTextOptions__bitmapText, cast ([data, options] : Array<Dynamic>)); }
     quadBatch = _Runtime.callValue(createQuadBatch, cast ([{ data: { atlas: _Runtime.callValue(createTextureAtlas, cast ([] : Array<Dynamic>)) } }] : Array<Dynamic>));
     runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([bitmapText] : Array<Dynamic>)) : BitmapTextRuntime);
     _Runtime.callProperty(_Runtime.field(runtime, 'quadBatches'), 'push', cast ([quadBatch] : Array<Dynamic>));
@@ -124,18 +124,18 @@ class BitmapText {
   }
 
   public static function applyBitmapTextOptions__bitmapText(data:BitmapTextData, options:BitmapTextOptions):Void {
-    if (_Runtime.truthy(!_Runtime.strictEquals(options.align, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(data, 'align', options.align); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(options.color, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(data, 'color', options.color); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(options.letterSpacing, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(data, 'letterSpacing', options.letterSpacing); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(options.lineHeight, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(data, 'lineHeight', options.lineHeight); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(options.text, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(data, 'text', options.text); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(options.wrapWidth, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(data, 'wrapWidth', options.wrapWidth); }
+    if ((cast !_Runtime.strictEquals(options.align, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(data, 'align', options.align); }
+    if ((cast !_Runtime.strictEquals(options.color, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(data, 'color', options.color); }
+    if ((cast !_Runtime.strictEquals(options.letterSpacing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(data, 'letterSpacing', options.letterSpacing); }
+    if ((cast !_Runtime.strictEquals(options.lineHeight, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(data, 'lineHeight', options.lineHeight); }
+    if ((cast !_Runtime.strictEquals(options.text, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(data, 'text', options.text); }
+    if ((cast !_Runtime.strictEquals(options.wrapWidth, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(data, 'wrapWidth', options.wrapWidth); }
   }
 
   public static function copyLocalBoundsRectangle__bitmapText(out:Rectangle, source:Node<Dynamic>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([(cast source : flighthq.types.BitmapText)] : Array<Dynamic>)) : BitmapTextRuntime);
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'localBoundsRectangle'), null))) { _Runtime.callValue(copyRectangle, cast ([out, _Runtime.field(runtime, 'localBoundsRectangle')] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'localBoundsRectangle'), null) : Bool)) { _Runtime.callValue(copyRectangle, cast ([out, _Runtime.field(runtime, 'localBoundsRectangle')] : Array<Dynamic>)); }
   }
 
   public static final defaultMethods__bitmapText:Dynamic = { computeLocalBoundsRectangle: BitmapText.copyLocalBoundsRectangle__bitmapText };

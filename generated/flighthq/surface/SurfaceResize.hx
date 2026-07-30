@@ -26,7 +26,7 @@ class SurfaceResize {
     var dStride:Dynamic = cast _Runtime.UNDEFINED;
     var scaleX:Dynamic = cast _Runtime.UNDEFINED;
     var scaleY:Dynamic = cast _Runtime.UNDEFINED;
-    opts = _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(options), 'string'), function():Dynamic return cast { mode: options }, function():Dynamic return cast options);
+    opts = ((cast _Runtime.strictEquals(_Runtime.typeofValue(options), 'string') : Bool) ? (cast { mode: options } : Dynamic) : (cast options : Dynamic));
     mode = _Runtime.coalesce(_Runtime.field(opts, 'mode'), function():Dynamic return cast 'bilinear');
     edgeMode = _Runtime.coalesce(_Runtime.field(opts, 'edgeMode'), function():Dynamic return cast 'clamp');
     premultiplied = _Runtime.coalesce(_Runtime.field(opts, 'premultiplied'), function():Dynamic return cast false);
@@ -34,26 +34,26 @@ class SurfaceResize {
     sh = _Runtime.field(source, 'height');
     dw = _Runtime.field(dest, 'width');
     dh = _Runtime.field(dest, 'height');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(sw, 0.0), function():Dynamic return cast _Runtime.strictEquals(sh, 0.0)), function():Dynamic return cast _Runtime.strictEquals(dw, 0.0)), function():Dynamic return cast _Runtime.strictEquals(dh, 0.0)))) { return; }
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(sw, 0.0) : Bool) || (cast _Runtime.strictEquals(sh, 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(dw, 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(dh, 0.0) : Bool)) : Bool)) { return; }
     sd = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
     dd = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
     sStride = _Runtime.field(_Runtime.field(source, 'surface'), 'width');
     dStride = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
-    if (_Runtime.truthy(_Runtime.strictEquals(mode, 'nearest'))) {
+    if ((cast _Runtime.strictEquals(mode, 'nearest') : Bool)) {
       {
         var dy:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(dy, dh, '<'))) {
+        while ((cast ((cast dy : Float) < (cast dh : Float)) : Bool)) {
           var oy:Dynamic = (_Runtime.field(dest, 'y') + dy);
-          if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(oy, 0.0, '<'), function():Dynamic return cast _Runtime.compare(oy, _Runtime.field(_Runtime.field(dest, 'surface'), 'height'), '>=')))) { dy++; continue; }
+          if ((cast ((cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast oy : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool)) { dy++; continue; }
           var sy:Dynamic = (_Runtime.field(source, 'y') + HxMath.min((sh - 1.0), HxMath.floor(((dy * sh) / dh))));
-          if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(sy, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sy, _Runtime.field(_Runtime.field(source, 'surface'), 'height'), '>=')))) { dy++; continue; }
+          if ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'height') : Float)) : Bool)) : Bool)) { dy++; continue; }
           {
             var dx:Dynamic = 0.0;
-            while (_Runtime.truthy(_Runtime.compare(dx, dw, '<'))) {
+            while ((cast ((cast dx : Float) < (cast dw : Float)) : Bool)) {
               var ox:Dynamic = (_Runtime.field(dest, 'x') + dx);
-              if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(ox, 0.0, '<'), function():Dynamic return cast _Runtime.compare(ox, dStride, '>=')))) { dx++; continue; }
+              if ((cast ((cast ((cast ox : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast ox : Float) >= (cast dStride : Float)) : Bool)) : Bool)) { dx++; continue; }
               var sx:Dynamic = (_Runtime.field(source, 'x') + HxMath.min((sw - 1.0), HxMath.floor(((dx * sw) / dw))));
-              if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(sx, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sx, sStride, '>=')))) { dx++; continue; }
+              if ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast sStride : Float)) : Bool)) : Bool)) { dx++; continue; }
               var si:Dynamic = (((sy * sStride) + sx) * 4.0);
               var di:Dynamic = (((oy * dStride) + ox) * 4.0);
               _Runtime.setIndex(dd, di, _Runtime.getIndex(sd, si));
@@ -70,43 +70,43 @@ class SurfaceResize {
     }
     scaleX = (sw / dw);
     scaleY = (sh / dh);
-    if (_Runtime.truthy(_Runtime.strictEquals(mode, 'bicubic'))) {
+    if ((cast _Runtime.strictEquals(mode, 'bicubic') : Bool)) {
       {
         var dy:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(dy, dh, '<'))) {
+        while ((cast ((cast dy : Float) < (cast dh : Float)) : Bool)) {
           var oy:Dynamic = (_Runtime.field(dest, 'y') + dy);
-          if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(oy, 0.0, '<'), function():Dynamic return cast _Runtime.compare(oy, _Runtime.field(_Runtime.field(dest, 'surface'), 'height'), '>=')))) { dy++; continue; }
+          if ((cast ((cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast oy : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool)) { dy++; continue; }
           var fy:Dynamic = (((dy + 0.5) * scaleY) - 0.5);
           var y1:Dynamic = HxMath.floor(fy);
           var ty:Dynamic = (fy - y1);
           {
             var dx:Dynamic = 0.0;
-            while (_Runtime.truthy(_Runtime.compare(dx, dw, '<'))) {
+            while ((cast ((cast dx : Float) < (cast dw : Float)) : Bool)) {
               var ox:Dynamic = (_Runtime.field(dest, 'x') + dx);
-              if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(ox, 0.0, '<'), function():Dynamic return cast _Runtime.compare(ox, dStride, '>=')))) { dx++; continue; }
+              if ((cast ((cast ((cast ox : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast ox : Float) >= (cast dStride : Float)) : Bool)) : Bool)) { dx++; continue; }
               var fx:Dynamic = (((dx + 0.5) * scaleX) - 0.5);
               var x1:Dynamic = HxMath.floor(fx);
               var tx:Dynamic = (fx - x1);
               var di:Dynamic = (((oy * dStride) + ox) * 4.0);
               {
                 var c:Dynamic = 0.0;
-                while (_Runtime.truthy(_Runtime.compare(c, 4.0, '<'))) {
+                while ((cast ((cast c : Float) < (cast 4.0 : Float)) : Bool)) {
                   var sum:Dynamic = 0.0;
                   {
                     var m:Dynamic = -1.0;
-                    while (_Runtime.truthy(_Runtime.compare(m, 2.0, '<='))) {
+                    while ((cast ((cast m : Float) <= (cast 2.0 : Float)) : Bool)) {
                       var wy:Dynamic = _Runtime.callValue(SurfaceResize.catmullRomWeight__surfaceResize, cast ([(ty - m)] : Array<Dynamic>));
                       var ry:Dynamic = _Runtime.callValue(SurfaceResize.resolveResizeEdge__surfaceResize, cast ([(y1 + m), sh, edgeMode] : Array<Dynamic>));
                       {
                         var n:Dynamic = -1.0;
-                        while (_Runtime.truthy(_Runtime.compare(n, 2.0, '<='))) {
+                        while ((cast ((cast n : Float) <= (cast 2.0 : Float)) : Bool)) {
                           var wx:Dynamic = _Runtime.callValue(SurfaceResize.catmullRomWeight__surfaceResize, cast ([(tx - n)] : Array<Dynamic>));
                           var rx:Dynamic = _Runtime.callValue(SurfaceResize.resolveResizeEdge__surfaceResize, cast ([(x1 + n), sw, edgeMode] : Array<Dynamic>));
-                          if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(rx, null), function():Dynamic return cast _Runtime.strictEquals(ry, null)))) { n++; continue; }
+                          if ((cast ((cast _Runtime.strictEquals(rx, null) : Bool) || (cast _Runtime.strictEquals(ry, null) : Bool)) : Bool)) { n++; continue; }
                           var sy:Dynamic = (_Runtime.field(source, 'y') + ry);
                           var sx:Dynamic = (_Runtime.field(source, 'x') + rx);
                           var si:Dynamic = (((sy * sStride) + sx) * 4.0);
-                          var v:Dynamic = _Runtime.select(_Runtime.andValue(premultiplied, function():Dynamic return cast _Runtime.compare(c, 3.0, '<')), function():Dynamic return cast ((_Runtime.getIndex(sd, (si + c)) * _Runtime.getIndex(sd, (si + 3.0))) / 255.0), function():Dynamic return cast _Runtime.getIndex(sd, (si + c)));
+                          var v:Dynamic = ((cast ((cast premultiplied : Bool) && (cast ((cast c : Float) < (cast 3.0 : Float)) : Bool)) : Bool) ? (cast ((_Runtime.getIndex(sd, (si + c)) * _Runtime.getIndex(sd, (si + 3.0))) / 255.0) : Dynamic) : (cast _Runtime.getIndex(sd, (si + c)) : Dynamic));
                           (sum = cast ((sum + ((v * wy) * wx)) : Dynamic));
                           n++;
                         }
@@ -118,9 +118,9 @@ class SurfaceResize {
                   c++;
                 }
               }
-              if (_Runtime.truthy(premultiplied)) {
+              if ((cast premultiplied : Bool)) {
                 var a:Dynamic = _Runtime.getIndex(dd, (di + 3.0));
-                if (_Runtime.truthy(_Runtime.compare(a, 0.0, '>'))) {
+                if ((cast ((cast a : Float) > (cast 0.0 : Float)) : Bool)) {
                   _Runtime.setIndex(dd, di, HxMath.min(255.0, HxMath.round(((_Runtime.getIndex(dd, di) * 255.0) / a))));
                   _Runtime.setIndex(dd, (di + 1.0), HxMath.min(255.0, HxMath.round(((_Runtime.getIndex(dd, (di + 1.0)) * 255.0) / a))));
                   _Runtime.setIndex(dd, (di + 2.0), HxMath.min(255.0, HxMath.round(((_Runtime.getIndex(dd, (di + 2.0)) * 255.0) / a))));
@@ -140,9 +140,9 @@ class SurfaceResize {
     }
     {
       var dy:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(dy, dh, '<'))) {
+      while ((cast ((cast dy : Float) < (cast dh : Float)) : Bool)) {
         var oy:Dynamic = (_Runtime.field(dest, 'y') + dy);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(oy, 0.0, '<'), function():Dynamic return cast _Runtime.compare(oy, _Runtime.field(_Runtime.field(dest, 'surface'), 'height'), '>=')))) { dy++; continue; }
+        if ((cast ((cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast oy : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool)) { dy++; continue; }
         var fy:Dynamic = (((dy + 0.5) * scaleY) - 0.5);
         var y0:Dynamic = HxMath.floor(fy);
         var ty:Dynamic = (fy - y0);
@@ -150,31 +150,31 @@ class SurfaceResize {
         var ry1:Dynamic = _Runtime.callValue(SurfaceResize.resolveResizeEdge__surfaceResize, cast ([(y0 + 1.0), sh, edgeMode] : Array<Dynamic>));
         {
           var dx:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(dx, dw, '<'))) {
+          while ((cast ((cast dx : Float) < (cast dw : Float)) : Bool)) {
             var ox:Dynamic = (_Runtime.field(dest, 'x') + dx);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(ox, 0.0, '<'), function():Dynamic return cast _Runtime.compare(ox, dStride, '>=')))) { dx++; continue; }
+            if ((cast ((cast ((cast ox : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast ox : Float) >= (cast dStride : Float)) : Bool)) : Bool)) { dx++; continue; }
             var fx:Dynamic = (((dx + 0.5) * scaleX) - 0.5);
             var x0:Dynamic = HxMath.floor(fx);
             var tx:Dynamic = (fx - x0);
             var rx0:Dynamic = _Runtime.callValue(SurfaceResize.resolveResizeEdge__surfaceResize, cast ([x0, sw, edgeMode] : Array<Dynamic>));
             var rx1:Dynamic = _Runtime.callValue(SurfaceResize.resolveResizeEdge__surfaceResize, cast ([(x0 + 1.0), sw, edgeMode] : Array<Dynamic>));
             var di:Dynamic = (((oy * dStride) + ox) * 4.0);
-            var i00:Dynamic = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(rx0, null), function():Dynamic return cast !_Runtime.strictEquals(ry0, null)), function():Dynamic return cast (((((_Runtime.field(source, 'y') + ry0) * sStride) + _Runtime.field(source, 'x')) + rx0) * 4.0), function():Dynamic return cast -1.0);
-            var i10:Dynamic = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(rx1, null), function():Dynamic return cast !_Runtime.strictEquals(ry0, null)), function():Dynamic return cast (((((_Runtime.field(source, 'y') + ry0) * sStride) + _Runtime.field(source, 'x')) + rx1) * 4.0), function():Dynamic return cast -1.0);
-            var i01:Dynamic = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(rx0, null), function():Dynamic return cast !_Runtime.strictEquals(ry1, null)), function():Dynamic return cast (((((_Runtime.field(source, 'y') + ry1) * sStride) + _Runtime.field(source, 'x')) + rx0) * 4.0), function():Dynamic return cast -1.0);
-            var i11:Dynamic = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(rx1, null), function():Dynamic return cast !_Runtime.strictEquals(ry1, null)), function():Dynamic return cast (((((_Runtime.field(source, 'y') + ry1) * sStride) + _Runtime.field(source, 'x')) + rx1) * 4.0), function():Dynamic return cast -1.0);
+            var i00:Dynamic = ((cast ((cast !_Runtime.strictEquals(rx0, null) : Bool) && (cast !_Runtime.strictEquals(ry0, null) : Bool)) : Bool) ? (cast (((((_Runtime.field(source, 'y') + ry0) * sStride) + _Runtime.field(source, 'x')) + rx0) * 4.0) : Dynamic) : (cast -1.0 : Dynamic));
+            var i10:Dynamic = ((cast ((cast !_Runtime.strictEquals(rx1, null) : Bool) && (cast !_Runtime.strictEquals(ry0, null) : Bool)) : Bool) ? (cast (((((_Runtime.field(source, 'y') + ry0) * sStride) + _Runtime.field(source, 'x')) + rx1) * 4.0) : Dynamic) : (cast -1.0 : Dynamic));
+            var i01:Dynamic = ((cast ((cast !_Runtime.strictEquals(rx0, null) : Bool) && (cast !_Runtime.strictEquals(ry1, null) : Bool)) : Bool) ? (cast (((((_Runtime.field(source, 'y') + ry1) * sStride) + _Runtime.field(source, 'x')) + rx0) * 4.0) : Dynamic) : (cast -1.0 : Dynamic));
+            var i11:Dynamic = ((cast ((cast !_Runtime.strictEquals(rx1, null) : Bool) && (cast !_Runtime.strictEquals(ry1, null) : Bool)) : Bool) ? (cast (((((_Runtime.field(source, 'y') + ry1) * sStride) + _Runtime.field(source, 'x')) + rx1) * 4.0) : Dynamic) : (cast -1.0 : Dynamic));
             {
               var c:Dynamic = 0.0;
-              while (_Runtime.truthy(_Runtime.compare(c, 4.0, '<'))) {
-                var v00:Dynamic = _Runtime.select(_Runtime.compare(i00, 0.0, '>='), function():Dynamic return cast _Runtime.getIndex(sd, (i00 + c)), function():Dynamic return cast 0.0);
-                var v10:Dynamic = _Runtime.select(_Runtime.compare(i10, 0.0, '>='), function():Dynamic return cast _Runtime.getIndex(sd, (i10 + c)), function():Dynamic return cast 0.0);
-                var v01:Dynamic = _Runtime.select(_Runtime.compare(i01, 0.0, '>='), function():Dynamic return cast _Runtime.getIndex(sd, (i01 + c)), function():Dynamic return cast 0.0);
-                var v11:Dynamic = _Runtime.select(_Runtime.compare(i11, 0.0, '>='), function():Dynamic return cast _Runtime.getIndex(sd, (i11 + c)), function():Dynamic return cast 0.0);
-                if (_Runtime.truthy(_Runtime.andValue(premultiplied, function():Dynamic return cast _Runtime.compare(c, 3.0, '<')))) {
-                  (v00 = cast (_Runtime.select(_Runtime.compare(i00, 0.0, '>='), function():Dynamic return cast ((v00 * _Runtime.getIndex(sd, (i00 + 3.0))) / 255.0), function():Dynamic return cast 0.0) : Dynamic));
-                  (v10 = cast (_Runtime.select(_Runtime.compare(i10, 0.0, '>='), function():Dynamic return cast ((v10 * _Runtime.getIndex(sd, (i10 + 3.0))) / 255.0), function():Dynamic return cast 0.0) : Dynamic));
-                  (v01 = cast (_Runtime.select(_Runtime.compare(i01, 0.0, '>='), function():Dynamic return cast ((v01 * _Runtime.getIndex(sd, (i01 + 3.0))) / 255.0), function():Dynamic return cast 0.0) : Dynamic));
-                  (v11 = cast (_Runtime.select(_Runtime.compare(i11, 0.0, '>='), function():Dynamic return cast ((v11 * _Runtime.getIndex(sd, (i11 + 3.0))) / 255.0), function():Dynamic return cast 0.0) : Dynamic));
+              while ((cast ((cast c : Float) < (cast 4.0 : Float)) : Bool)) {
+                var v00:Dynamic = ((cast ((cast i00 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast _Runtime.getIndex(sd, (i00 + c)) : Dynamic) : (cast 0.0 : Dynamic));
+                var v10:Dynamic = ((cast ((cast i10 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast _Runtime.getIndex(sd, (i10 + c)) : Dynamic) : (cast 0.0 : Dynamic));
+                var v01:Dynamic = ((cast ((cast i01 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast _Runtime.getIndex(sd, (i01 + c)) : Dynamic) : (cast 0.0 : Dynamic));
+                var v11:Dynamic = ((cast ((cast i11 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast _Runtime.getIndex(sd, (i11 + c)) : Dynamic) : (cast 0.0 : Dynamic));
+                if ((cast ((cast premultiplied : Bool) && (cast ((cast c : Float) < (cast 3.0 : Float)) : Bool)) : Bool)) {
+                  (v00 = cast (((cast ((cast i00 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast ((v00 * _Runtime.getIndex(sd, (i00 + 3.0))) / 255.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
+                  (v10 = cast (((cast ((cast i10 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast ((v10 * _Runtime.getIndex(sd, (i10 + 3.0))) / 255.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
+                  (v01 = cast (((cast ((cast i01 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast ((v01 * _Runtime.getIndex(sd, (i01 + 3.0))) / 255.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
+                  (v11 = cast (((cast ((cast i11 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast ((v11 * _Runtime.getIndex(sd, (i11 + 3.0))) / 255.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
                 }
                 var top:Dynamic = ((v00 * (1.0 - tx)) + (v10 * tx));
                 var bottom:Dynamic = ((v01 * (1.0 - tx)) + (v11 * tx));
@@ -182,9 +182,9 @@ class SurfaceResize {
                 c++;
               }
             }
-            if (_Runtime.truthy(premultiplied)) {
+            if ((cast premultiplied : Bool)) {
               var a:Dynamic = _Runtime.getIndex(dd, (di + 3.0));
-              if (_Runtime.truthy(_Runtime.compare(a, 0.0, '>'))) {
+              if ((cast ((cast a : Float) > (cast 0.0 : Float)) : Bool)) {
                 _Runtime.setIndex(dd, di, HxMath.min(255.0, HxMath.round(((_Runtime.getIndex(dd, di) * 255.0) / a))));
                 _Runtime.setIndex(dd, (di + 1.0), HxMath.min(255.0, HxMath.round(((_Runtime.getIndex(dd, (di + 1.0)) * 255.0) / a))));
                 _Runtime.setIndex(dd, (di + 2.0), HxMath.min(255.0, HxMath.round(((_Runtime.getIndex(dd, (di + 2.0)) * 255.0) / a))));
@@ -206,14 +206,14 @@ class SurfaceResize {
   public static function catmullRomWeight__surfaceResize(t:Float):Float {
     var a:Dynamic = cast _Runtime.UNDEFINED;
     a = HxMath.abs(t);
-    if (_Runtime.truthy(_Runtime.compare(a, 2.0, '>='))) { return cast 0.0; }
-    if (_Runtime.truthy(_Runtime.compare(a, 1.0, '>='))) { return cast ((((((-0.5 * a) * a) * a) + ((2.5 * a) * a)) - (4.0 * a)) + 2.0); }
+    if ((cast ((cast a : Float) >= (cast 2.0 : Float)) : Bool)) { return cast 0.0; }
+    if ((cast ((cast a : Float) >= (cast 1.0 : Float)) : Bool)) { return cast ((((((-0.5 * a) * a) * a) + ((2.5 * a) * a)) - (4.0 * a)) + 2.0); }
     return cast (((((1.5 * a) * a) * a) - ((2.5 * a) * a)) + 1.0);
     return cast null;
   }
 
   public static function resolveResizeEdge__surfaceResize(v:Float, size:Float, mode:SurfaceEdgeMode):Null<Float> {
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(v, 0.0, '>='), function():Dynamic return cast _Runtime.compare(v, size, '<')))) { return cast v; }
+    if ((cast ((cast ((cast v : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast v : Float) < (cast size : Float)) : Bool)) : Bool)) { return cast v; }
     {
       var __switchValue = mode;
       if (__switchValue == 'clamp') {
@@ -226,7 +226,7 @@ class SurfaceResize {
         {
           var period:Dynamic = (2.0 * size);
           var wrapped:Dynamic = _Runtime.fmod((_Runtime.fmod(v, period) + period), period);
-          return cast _Runtime.select(_Runtime.compare(wrapped, size, '<'), function():Dynamic return cast wrapped, function():Dynamic return cast ((period - 1.0) - wrapped));
+          return cast ((cast ((cast wrapped : Float) < (cast size : Float)) : Bool) ? (cast wrapped : Dynamic) : (cast ((period - 1.0) - wrapped) : Dynamic));
         }
       }
       else  {

@@ -19,11 +19,11 @@ class GlClipRectangle {
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     stack = _Runtime.callValue(GlClipRectangle.getScissorStack__glClipRectangle, cast ([state] : Array<Dynamic>));
     _Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>));
-    previous = _Runtime.select(_Runtime.compare(_Runtime.field(stack, 'length'), 0.0, '>'), function():Dynamic return cast _Runtime.getIndex(stack, (_Runtime.field(stack, 'length') - 1.0)), function():Dynamic return cast null);
+    previous = ((cast ((cast _Runtime.field(stack, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.getIndex(stack, (_Runtime.field(stack, 'length') - 1.0)) : Dynamic) : (cast null : Dynamic));
     _Runtime.setField(runtime, 'currentScissorRect', previous);
     _Runtime.callValue(flushGlSpriteBatch, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    if (_Runtime.truthy(_Runtime.strictEquals(previous, null))) {
+    if ((cast _Runtime.strictEquals(previous, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.SCISSOR_TEST);
     } else {
       flighthq._internal.backend.WebGl2Backend.scissor(gl, _Runtime.field(previous, 'x'), _Runtime.field(previous, 'y'), _Runtime.field(previous, 'width'), _Runtime.field(previous, 'height'));
@@ -88,7 +88,7 @@ class GlClipRectangle {
     var y:Dynamic = cast _Runtime.UNDEFINED;
     var right:Dynamic = cast _Runtime.UNDEFINED;
     var bottom:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(a, null))) { return cast { height: _Runtime.field(b, 'height'), width: _Runtime.field(b, 'width'), x: _Runtime.field(b, 'x'), y: _Runtime.field(b, 'y') }; }
+    if ((cast _Runtime.strictEquals(a, null) : Bool)) { return cast { height: _Runtime.field(b, 'height'), width: _Runtime.field(b, 'width'), x: _Runtime.field(b, 'x'), y: _Runtime.field(b, 'y') }; }
     x = HxMath.max(_Runtime.field(a, 'x'), _Runtime.field(b, 'x'));
     y = HxMath.max(_Runtime.field(a, 'y'), _Runtime.field(b, 'y'));
     right = HxMath.min((_Runtime.field(a, 'x') + _Runtime.field(a, 'width')), (_Runtime.field(b, 'x') + _Runtime.field(b, 'width')));

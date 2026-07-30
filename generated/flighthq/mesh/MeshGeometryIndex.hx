@@ -16,18 +16,18 @@ class MeshGeometryIndex {
     var lines:Array<Float> = cast _Runtime.UNDEFINED;
     var out:Dynamic = cast _Runtime.UNDEFINED;
     useUint32 = _Runtime.select(_Runtime.field(geometry, 'indices'), function():Dynamic return cast _Runtime.isInstanceOf(_Runtime.field(geometry, 'indices'), _Runtime.globalValue('Uint32Array')), function():Dynamic return cast true);
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-list'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-strip')))) {
-      return cast _Runtime.select(useUint32, function():Dynamic return cast new flighthq._internal._UInt32Array(0.0), function():Dynamic return cast new flighthq._internal._UInt16Array(0.0));
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-list') : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-strip') : Bool)) : Bool)) {
+      return cast ((cast useUint32 : Bool) ? (cast new flighthq._internal._UInt32Array(0.0) : Dynamic) : (cast new flighthq._internal._UInt16Array(0.0) : Dynamic));
     }
     indices = _Runtime.field(geometry, 'indices');
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
+    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     indexCount = _Runtime.select(indices, function():Dynamic return cast _Runtime.field(indices, 'length'), function():Dynamic return cast vertexCount);
     lines = cast ([] : Array<Dynamic>);
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-list'))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-list') : Bool)) {
       {
         var t:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare((t + 2.0), indexCount, '<'))) {
+        while ((cast ((cast (t + 2.0) : Float) < (cast indexCount : Float)) : Bool)) {
           var a:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, t), function():Dynamic return cast t);
           var b:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, (t + 1.0)), function():Dynamic return cast (t + 1.0));
           var c:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, (t + 2.0)), function():Dynamic return cast (t + 2.0));
@@ -38,7 +38,7 @@ class MeshGeometryIndex {
     } else {
       {
         var t:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare((t + 2.0), indexCount, '<'))) {
+        while ((cast ((cast (t + 2.0) : Float) < (cast indexCount : Float)) : Bool)) {
           var a:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, t), function():Dynamic return cast t);
           var b:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, (t + 1.0)), function():Dynamic return cast (t + 1.0));
           var c:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, (t + 2.0)), function():Dynamic return cast (t + 2.0));
@@ -47,7 +47,7 @@ class MeshGeometryIndex {
         }
       }
     }
-    if (_Runtime.truthy(useUint32)) {
+    if ((cast useUint32 : Bool)) {
       var out:Dynamic = new flighthq._internal._UInt32Array(_Runtime.field(lines, 'length'));
       _Runtime.callProperty(out, 'set', cast ([lines] : Array<Dynamic>));
       return cast out;
@@ -66,7 +66,7 @@ class MeshGeometryIndex {
     indices = _Runtime.field(geometry, 'indices');
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
     sourceVertices = _Runtime.field(geometry, 'vertices');
-    if (_Runtime.truthy(!_Runtime.truthy(indices))) {
+    if ((cast !_Runtime.truthy(indices) : Bool)) {
       var vertices:Dynamic = new flighthq._internal._Float32Array(_Runtime.field(sourceVertices, 'length'));
       _Runtime.callProperty(vertices, 'set', cast ([sourceVertices] : Array<Dynamic>));
       return cast _Runtime.callValue(createMeshGeometry, cast ([{ indices: null, layout: _Runtime.field(geometry, 'layout'), topology: _Runtime.field(geometry, 'topology'), vertices: vertices }] : Array<Dynamic>));
@@ -74,12 +74,12 @@ class MeshGeometryIndex {
     vertices = new flighthq._internal._Float32Array((_Runtime.field(indices, 'length') * floatsPerVertex));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(indices, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(indices, 'length') : Float)) : Bool)) {
         var src:Dynamic = (_Runtime.getIndex(indices, i) * floatsPerVertex);
         var dst:Dynamic = (i * floatsPerVertex);
         {
           var f:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(f, floatsPerVertex, '<'))) {
+          while ((cast ((cast f : Float) < (cast floatsPerVertex : Float)) : Bool)) {
             _Runtime.setIndex(vertices, (dst + f), _Runtime.getIndex(sourceVertices, (src + f)));
             f++;
           }

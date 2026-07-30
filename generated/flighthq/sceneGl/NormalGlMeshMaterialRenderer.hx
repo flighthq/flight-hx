@@ -29,11 +29,11 @@ class NormalGlMeshMaterialRenderer {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     normal = (cast material : Null<NormalMaterial>);
-    hasNormalMap = _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(normal, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(normal, 'normalMap'), null)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(normal, 'normalMap'), 'image'), null));
+    hasNormalMap = ((cast ((cast !_Runtime.strictEquals(normal, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(normal, 'normalMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(normal, 'normalMap'), 'image'), null) : Bool));
     program = _Runtime.callValue(ensureGlDebugProgram, cast ([state, { hasNormalMap: hasNormalMap, mode: 'normal' }] : Array<Dynamic>));
-    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, _Runtime.andValue(!_Runtime.strictEquals(normal, null), function():Dynamic return cast _Runtime.field(normal, 'doubleSided'))] : Array<Dynamic>));
+    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, ((cast !_Runtime.strictEquals(normal, null) : Bool) && (cast _Runtime.field(normal, 'doubleSided') : Bool))] : Array<Dynamic>));
     _Runtime.callValue(setGlMeshViewProjection, cast ([gl, _Runtime.field(program, 'locViewProjection'), camera] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(normal, null))) {
+    if ((cast _Runtime.strictEquals(normal, null) : Bool)) {
       _Runtime.callValue(bindGlDebugNormalMap, cast ([state, program, null, 1.0] : Array<Dynamic>));
       return;
     }
@@ -41,7 +41,7 @@ class NormalGlMeshMaterialRenderer {
   }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
-    if (_Runtime.truthy(_Runtime.strictEquals(program, null))) { return; }
+    if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
     _Runtime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
   } };
 

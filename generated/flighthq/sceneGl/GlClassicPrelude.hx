@@ -23,8 +23,8 @@ typedef GlClassicProgram = Dynamic;
 class GlClassicPrelude {
   public static function buildGlClassicDefineKey(key:GlClassicDefineKey):String {
     var model:Dynamic = cast _Runtime.UNDEFINED;
-    model = _Runtime.select(_Runtime.strictEquals(_Runtime.field(key, 'lightingModel'), 'phong'), function():Dynamic return cast 'p', function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(_Runtime.field(key, 'lightingModel'), 'blinnphong'), function():Dynamic return cast 'b', function():Dynamic return cast 'l'));
-    return cast '' + Std.string(model) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'alphaMaskEnabled'), function():Dynamic return cast 'm', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasDiffuseMap'), function():Dynamic return cast 'd', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasSpecularMap'), function():Dynamic return cast 's', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasNormalMap'), function():Dynamic return cast 'n', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasUvTransform'), function():Dynamic return cast 'u', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast 'k', function():Dynamic return cast '-')) + '';
+    model = ((cast _Runtime.strictEquals(_Runtime.field(key, 'lightingModel'), 'phong') : Bool) ? (cast 'p' : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.field(key, 'lightingModel'), 'blinnphong') : Bool) ? (cast 'b' : Dynamic) : (cast 'l' : Dynamic)) : Dynamic));
+    return cast '' + Std.string(model) + '' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasDiffuseMap') : Bool) ? (cast 'd' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasSpecularMap') : Bool) ? (cast 's' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasNormalMap') : Bool) ? (cast 'n' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasUvTransform') : Bool) ? (cast 'u' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast 'k', function():Dynamic return cast '-')) + '';
     return cast null;
   }
 
@@ -71,13 +71,13 @@ class GlClassicPrelude {
   public static function buildGlClassicDefineSource__glClassicPrelude(key:GlClassicDefineKey):String {
     var defines:Dynamic = cast _Runtime.UNDEFINED;
     defines = '#version 300 es\n#define MAX_FORWARD_LIGHTS ' + Std.string(MAX_FORWARD_LIGHTS) + '\n';
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(key, 'lightingModel'), 'phong'))) { (defines = cast ((defines + '#define LIGHTING_PHONG\n') : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(key, 'lightingModel'), 'blinnphong'))) { (defines = cast ((defines + '#define LIGHTING_BLINNPHONG\n') : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.field(key, 'alphaMaskEnabled'))) { (defines = cast ((defines + '#define ALPHA_MASK\n') : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.field(key, 'hasDiffuseMap'))) { (defines = cast ((defines + '#define HAS_DIFFUSE_MAP\n') : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.field(key, 'hasSpecularMap'))) { (defines = cast ((defines + '#define HAS_SPECULAR_MAP\n') : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.field(key, 'hasNormalMap'))) { (defines = cast ((defines + '#define HAS_NORMAL_MAP\n') : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.field(key, 'hasUvTransform'))) { (defines = cast ((defines + '#define HAS_UV_TRANSFORM\n') : Dynamic)); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(key, 'lightingModel'), 'phong') : Bool)) { (defines = cast ((defines + '#define LIGHTING_PHONG\n') : Dynamic)); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(key, 'lightingModel'), 'blinnphong') : Bool)) { (defines = cast ((defines + '#define LIGHTING_BLINNPHONG\n') : Dynamic)); }
+    if ((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool)) { (defines = cast ((defines + '#define ALPHA_MASK\n') : Dynamic)); }
+    if ((cast _Runtime.field(key, 'hasDiffuseMap') : Bool)) { (defines = cast ((defines + '#define HAS_DIFFUSE_MAP\n') : Dynamic)); }
+    if ((cast _Runtime.field(key, 'hasSpecularMap') : Bool)) { (defines = cast ((defines + '#define HAS_SPECULAR_MAP\n') : Dynamic)); }
+    if ((cast _Runtime.field(key, 'hasNormalMap') : Bool)) { (defines = cast ((defines + '#define HAS_NORMAL_MAP\n') : Dynamic)); }
+    if ((cast _Runtime.field(key, 'hasUvTransform') : Bool)) { (defines = cast ((defines + '#define HAS_UV_TRANSFORM\n') : Dynamic)); }
     if (_Runtime.truthy(_Runtime.field(key, 'hasSkin'))) { (defines = cast ((defines + '#define HAS_SKIN\n') : Dynamic)); }
     return cast defines;
     return cast null;

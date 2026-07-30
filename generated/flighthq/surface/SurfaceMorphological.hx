@@ -28,36 +28,36 @@ class SurfaceMorphological {
     surfaceWidth = _Runtime.field(_Runtime.field(source, 'surface'), 'width');
     surfaceHeight = _Runtime.field(_Runtime.field(source, 'surface'), 'height');
     data = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
-    identity = _Runtime.select(dilate, function():Dynamic return cast 0.0, function():Dynamic return cast 255.0);
+    identity = ((cast dilate : Bool) ? (cast 0.0 : Dynamic) : (cast 255.0 : Dynamic));
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, h, '<'))) {
+      while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, w, '<'))) {
+          while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
             var vR:Dynamic = identity;
             var vG:Dynamic = identity;
             var vB:Dynamic = identity;
             var vA:Dynamic = identity;
             {
               var ky:Dynamic = -r;
-              while (_Runtime.truthy(_Runtime.compare(ky, r, '<='))) {
+              while ((cast ((cast ky : Float) <= (cast r : Float)) : Bool)) {
                 var sy:Dynamic = HxMath.max(0.0, HxMath.min((surfaceHeight - 1.0), ((_Runtime.field(source, 'y') + py) + ky)));
                 {
                   var kx:Dynamic = -r;
-                  while (_Runtime.truthy(_Runtime.compare(kx, r, '<='))) {
+                  while ((cast ((cast kx : Float) <= (cast r : Float)) : Bool)) {
                     var sx:Dynamic = HxMath.max(0.0, HxMath.min((surfaceWidth - 1.0), ((_Runtime.field(source, 'x') + px) + kx)));
                     var si:Dynamic = (((sy * surfaceWidth) + sx) * 4.0);
-                    if (_Runtime.truthy(dilate)) {
-                      if (_Runtime.truthy(_Runtime.compare(_Runtime.getIndex(data, si), vR, '>'))) { (vR = cast (_Runtime.getIndex(data, si) : Dynamic)); }
-                      if (_Runtime.truthy(_Runtime.compare(_Runtime.getIndex(data, (si + 1.0)), vG, '>'))) { (vG = cast (_Runtime.getIndex(data, (si + 1.0)) : Dynamic)); }
-                      if (_Runtime.truthy(_Runtime.compare(_Runtime.getIndex(data, (si + 2.0)), vB, '>'))) { (vB = cast (_Runtime.getIndex(data, (si + 2.0)) : Dynamic)); }
-                      if (_Runtime.truthy(_Runtime.compare(_Runtime.getIndex(data, (si + 3.0)), vA, '>'))) { (vA = cast (_Runtime.getIndex(data, (si + 3.0)) : Dynamic)); }
+                    if ((cast dilate : Bool)) {
+                      if ((cast ((cast _Runtime.getIndex(data, si) : Float) > (cast vR : Float)) : Bool)) { (vR = cast (_Runtime.getIndex(data, si) : Dynamic)); }
+                      if ((cast ((cast _Runtime.getIndex(data, (si + 1.0)) : Float) > (cast vG : Float)) : Bool)) { (vG = cast (_Runtime.getIndex(data, (si + 1.0)) : Dynamic)); }
+                      if ((cast ((cast _Runtime.getIndex(data, (si + 2.0)) : Float) > (cast vB : Float)) : Bool)) { (vB = cast (_Runtime.getIndex(data, (si + 2.0)) : Dynamic)); }
+                      if ((cast ((cast _Runtime.getIndex(data, (si + 3.0)) : Float) > (cast vA : Float)) : Bool)) { (vA = cast (_Runtime.getIndex(data, (si + 3.0)) : Dynamic)); }
                     } else {
-                      if (_Runtime.truthy(_Runtime.compare(_Runtime.getIndex(data, si), vR, '<'))) { (vR = cast (_Runtime.getIndex(data, si) : Dynamic)); }
-                      if (_Runtime.truthy(_Runtime.compare(_Runtime.getIndex(data, (si + 1.0)), vG, '<'))) { (vG = cast (_Runtime.getIndex(data, (si + 1.0)) : Dynamic)); }
-                      if (_Runtime.truthy(_Runtime.compare(_Runtime.getIndex(data, (si + 2.0)), vB, '<'))) { (vB = cast (_Runtime.getIndex(data, (si + 2.0)) : Dynamic)); }
-                      if (_Runtime.truthy(_Runtime.compare(_Runtime.getIndex(data, (si + 3.0)), vA, '<'))) { (vA = cast (_Runtime.getIndex(data, (si + 3.0)) : Dynamic)); }
+                      if ((cast ((cast _Runtime.getIndex(data, si) : Float) < (cast vR : Float)) : Bool)) { (vR = cast (_Runtime.getIndex(data, si) : Dynamic)); }
+                      if ((cast ((cast _Runtime.getIndex(data, (si + 1.0)) : Float) < (cast vG : Float)) : Bool)) { (vG = cast (_Runtime.getIndex(data, (si + 1.0)) : Dynamic)); }
+                      if ((cast ((cast _Runtime.getIndex(data, (si + 2.0)) : Float) < (cast vB : Float)) : Bool)) { (vB = cast (_Runtime.getIndex(data, (si + 2.0)) : Dynamic)); }
+                      if ((cast ((cast _Runtime.getIndex(data, (si + 3.0)) : Float) < (cast vA : Float)) : Bool)) { (vA = cast (_Runtime.getIndex(data, (si + 3.0)) : Dynamic)); }
                     }
                     kx++;
                   }

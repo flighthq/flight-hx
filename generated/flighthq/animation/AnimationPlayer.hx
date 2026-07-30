@@ -18,19 +18,19 @@ class AnimationPlayer {
     var duration:Dynamic = cast _Runtime.UNDEFINED;
     var time:Dynamic = cast _Runtime.UNDEFINED;
     var looped:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(player, 'playing')))) { return; }
+    if ((cast !(cast _Runtime.field(player, 'playing') : Bool) : Bool)) { return; }
     duration = _Runtime.field(_Runtime.field(player, 'clip'), 'duration');
-    if (_Runtime.truthy(_Runtime.compare(duration, 0.0, '<='))) {
+    if ((cast ((cast duration : Float) <= (cast 0.0 : Float)) : Bool)) {
       _Runtime.setField(player, 'time', 0.0);
       return;
     }
     time = (_Runtime.field(player, 'time') + (dt * _Runtime.field(player, 'speed')));
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(player, 'loop')))) {
-      if (_Runtime.truthy(_Runtime.compare(time, duration, '>='))) {
+    if ((cast !(cast _Runtime.field(player, 'loop') : Bool) : Bool)) {
+      if ((cast ((cast time : Float) >= (cast duration : Float)) : Bool)) {
         _Runtime.setField(player, 'time', duration);
         _Runtime.setField(player, 'playing', false);
         _Runtime.callValue(AnimationPlayer.emitAnimationPlayerFinished__animationPlayer, cast ([player] : Array<Dynamic>));
-      } else { if (_Runtime.truthy(_Runtime.compare(time, 0.0, '<'))) {
+      } else { if ((cast ((cast time : Float) < (cast 0.0 : Float)) : Bool)) {
         _Runtime.setField(player, 'time', 0.0);
         _Runtime.setField(player, 'playing', false);
         _Runtime.callValue(AnimationPlayer.emitAnimationPlayerFinished__animationPlayer, cast ([player] : Array<Dynamic>));
@@ -40,19 +40,19 @@ class AnimationPlayer {
       return;
     }
     looped = false;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(player, 'loopMode'), AnimationLoopModePingPong))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(player, 'loopMode'), AnimationLoopModePingPong) : Bool)) {
       {
         while (true) {
-          if (_Runtime.truthy(_Runtime.compare(time, duration, '>'))) {
-            if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(AnimationPlayer.consumeAnimationPlayerLoop__animationPlayer, cast ([player] : Array<Dynamic>))))) {
+          if ((cast ((cast time : Float) > (cast duration : Float)) : Bool)) {
+            if ((cast !(cast _Runtime.callValue(AnimationPlayer.consumeAnimationPlayerLoop__animationPlayer, cast ([player] : Array<Dynamic>)) : Bool) : Bool)) {
               _Runtime.callValue(AnimationPlayer.finishAnimationPlayerAt__animationPlayer, cast ([player, duration] : Array<Dynamic>));
               return;
             }
             (time = cast (((2.0 * duration) - time) : Dynamic));
             _Runtime.setField(player, 'speed', -_Runtime.field(player, 'speed'));
             (looped = cast (true : Dynamic));
-          } else { if (_Runtime.truthy(_Runtime.compare(time, 0.0, '<'))) {
-            if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(AnimationPlayer.consumeAnimationPlayerLoop__animationPlayer, cast ([player] : Array<Dynamic>))))) {
+          } else { if ((cast ((cast time : Float) < (cast 0.0 : Float)) : Bool)) {
+            if ((cast !(cast _Runtime.callValue(AnimationPlayer.consumeAnimationPlayerLoop__animationPlayer, cast ([player] : Array<Dynamic>)) : Bool) : Bool)) {
               _Runtime.callValue(AnimationPlayer.finishAnimationPlayerAt__animationPlayer, cast ([player, 0.0] : Array<Dynamic>));
               return;
             }
@@ -65,16 +65,16 @@ class AnimationPlayer {
         }
       }
     } else {
-      while (_Runtime.truthy(_Runtime.compare(time, duration, '>='))) {
-        if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(AnimationPlayer.consumeAnimationPlayerLoop__animationPlayer, cast ([player] : Array<Dynamic>))))) {
+      while ((cast ((cast time : Float) >= (cast duration : Float)) : Bool)) {
+        if ((cast !(cast _Runtime.callValue(AnimationPlayer.consumeAnimationPlayerLoop__animationPlayer, cast ([player] : Array<Dynamic>)) : Bool) : Bool)) {
           _Runtime.callValue(AnimationPlayer.finishAnimationPlayerAt__animationPlayer, cast ([player, duration] : Array<Dynamic>));
           return;
         }
         (time = cast ((time - duration) : Dynamic));
         (looped = cast (true : Dynamic));
       }
-      while (_Runtime.truthy(_Runtime.compare(time, 0.0, '<'))) {
-        if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(AnimationPlayer.consumeAnimationPlayerLoop__animationPlayer, cast ([player] : Array<Dynamic>))))) {
+      while ((cast ((cast time : Float) < (cast 0.0 : Float)) : Bool)) {
+        if ((cast !(cast _Runtime.callValue(AnimationPlayer.consumeAnimationPlayerLoop__animationPlayer, cast ([player] : Array<Dynamic>)) : Bool) : Bool)) {
           _Runtime.callValue(AnimationPlayer.finishAnimationPlayerAt__animationPlayer, cast ([player, 0.0] : Array<Dynamic>));
           return;
         }
@@ -83,7 +83,7 @@ class AnimationPlayer {
       }
     }
     _Runtime.setField(player, 'time', time);
-    if (_Runtime.truthy(looped)) { _Runtime.callValue(AnimationPlayer.emitAnimationPlayerLooped__animationPlayer, cast ([player] : Array<Dynamic>)); }
+    if ((cast looped : Bool)) { _Runtime.callValue(AnimationPlayer.emitAnimationPlayerLooped__animationPlayer, cast ([player] : Array<Dynamic>)); }
   }
 
   public static function cloneAnimationPlayer(player:flighthq.types.AnimationPlayer):flighthq.types.AnimationPlayer {
@@ -97,17 +97,17 @@ class AnimationPlayer {
   }
 
   public static function enableAnimationPlayerSignals(player:flighthq.types.AnimationPlayer):Void {
-    if (_Runtime.truthy(_Runtime.looseEquals(_Runtime.field(player, 'onFinished'), null))) { _Runtime.setField(player, 'onFinished', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
-    if (_Runtime.truthy(_Runtime.looseEquals(_Runtime.field(player, 'onLooped'), null))) { _Runtime.setField(player, 'onLooped', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
+    if ((cast _Runtime.looseEquals(_Runtime.field(player, 'onFinished'), null) : Bool)) { _Runtime.setField(player, 'onFinished', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
+    if ((cast _Runtime.looseEquals(_Runtime.field(player, 'onLooped'), null) : Bool)) { _Runtime.setField(player, 'onLooped', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
   }
 
   public static function getAnimationPlayerNormalizedTime(player:flighthq.types.AnimationPlayer):Float {
     var duration:Dynamic = cast _Runtime.UNDEFINED;
     var n:Dynamic = cast _Runtime.UNDEFINED;
     duration = _Runtime.field(_Runtime.field(player, 'clip'), 'duration');
-    if (_Runtime.truthy(_Runtime.compare(duration, 0.0, '<='))) { return cast 0.0; }
+    if ((cast ((cast duration : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
     n = (_Runtime.field(player, 'time') / duration);
-    return cast _Runtime.select(_Runtime.compare(n, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(n, 1.0, '>'), function():Dynamic return cast 1.0, function():Dynamic return cast n));
+    return cast ((cast ((cast n : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast n : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast n : Dynamic)) : Dynamic));
     return cast null;
   }
 
@@ -118,7 +118,7 @@ class AnimationPlayer {
   public static function seekAnimationPlayer(player:flighthq.types.AnimationPlayer, time:Float):Void {
     var duration:Dynamic = cast _Runtime.UNDEFINED;
     duration = _Runtime.field(_Runtime.field(player, 'clip'), 'duration');
-    _Runtime.setField(player, 'time', _Runtime.select(_Runtime.compare(time, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(time, duration, '>'), function():Dynamic return cast duration, function():Dynamic return cast time)));
+    _Runtime.setField(player, 'time', ((cast ((cast time : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast time : Float) > (cast duration : Float)) : Bool) ? (cast duration : Dynamic) : (cast time : Dynamic)) : Dynamic)));
   }
 
   public static function stopAnimationPlayer(player:flighthq.types.AnimationPlayer):Void {
@@ -129,19 +129,19 @@ class AnimationPlayer {
   public static function consumeAnimationPlayerLoop__animationPlayer(player:flighthq.types.AnimationPlayer):Bool {
     var rc:Dynamic = cast _Runtime.UNDEFINED;
     rc = _Runtime.field(player, 'repeatCount');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(rc, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.compare(rc, 0.0, '<')))) { return cast true; }
-    if (_Runtime.truthy(_Runtime.strictEquals(rc, 0.0))) { return cast false; }
+    if ((cast ((cast _Runtime.strictEquals(rc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast rc : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast true; }
+    if ((cast _Runtime.strictEquals(rc, 0.0) : Bool)) { return cast false; }
     _Runtime.setField(player, 'repeatCount', (rc - 1.0));
     return cast true;
     return cast null;
   }
 
   public static function emitAnimationPlayerFinished__animationPlayer(player:flighthq.types.AnimationPlayer):Void {
-    if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(player, 'onFinished'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(player, 'onFinished')]]), 1); }
+    if ((cast !_Runtime.looseEquals(_Runtime.field(player, 'onFinished'), null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(player, 'onFinished')]]), 1); }
   }
 
   public static function emitAnimationPlayerLooped__animationPlayer(player:flighthq.types.AnimationPlayer):Void {
-    if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(player, 'onLooped'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(player, 'onLooped')]]), 1); }
+    if ((cast !_Runtime.looseEquals(_Runtime.field(player, 'onLooped'), null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(player, 'onLooped')]]), 1); }
   }
 
   public static function finishAnimationPlayerAt__animationPlayer(player:flighthq.types.AnimationPlayer, time:Float):Void {

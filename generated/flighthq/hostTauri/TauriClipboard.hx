@@ -58,7 +58,7 @@ class TauriClipboard {
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
             return flighthq._internal._Async.flatMap(_Runtime.callProperty(clipboard, 'readText', cast ([] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
-              return flighthq._internal._Async.flowReturn(_Runtime.compare(_Runtime.field(__awaitValue2, 'length'), 0.0, '>'));
+              return flighthq._internal._Async.flowReturn(((cast _Runtime.field(__awaitValue2, 'length') : Float) > (cast 0.0 : Float)));
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;

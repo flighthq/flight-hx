@@ -46,7 +46,7 @@ class RenderView {
   }
 
   public static function setRenderViewSize(source:flighthq.types.RenderView, width:Float, height:Float):Void {
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'width'), width), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'height'), height)))) { return; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'width'), width) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'height'), height) : Bool)) : Bool)) { return; }
     _Runtime.setField(_Runtime.field(source, 'data'), 'width', width);
     _Runtime.setField(_Runtime.field(source, 'data'), 'height', height);
     _Runtime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));

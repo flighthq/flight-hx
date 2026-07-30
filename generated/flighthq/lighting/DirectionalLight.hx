@@ -36,7 +36,7 @@ class DirectionalLight {
     ly = y;
     lz = z;
     len = HxMath.sqrt((((lx * lx) + (ly * ly)) + (lz * lz)));
-    if (_Runtime.truthy(_Runtime.compare(len, 0.0, '>'))) {
+    if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
       _Runtime.callValue(setVector3, cast ([_Runtime.field(out, 'direction'), (lx / len), (ly / len), (lz / len)] : Array<Dynamic>));
     }
   }
@@ -50,7 +50,7 @@ class DirectionalLight {
     dy = (toY - fromY);
     dz = (toZ - fromZ);
     len = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
-    if (_Runtime.truthy(_Runtime.compare(len, 0.0, '>'))) {
+    if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
       _Runtime.callValue(setVector3, cast ([_Runtime.field(out, 'direction'), (dx / len), (dy / len), (dz / len)] : Array<Dynamic>));
     }
   }

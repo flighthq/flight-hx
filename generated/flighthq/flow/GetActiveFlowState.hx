@@ -10,7 +10,7 @@ class GetActiveFlowState {
   public static function getActiveFlowState(stack:FlowStack):Null<FlowState> {
     var states:Dynamic = cast _Runtime.UNDEFINED;
     states = _Runtime.field(stack, 'states');
-    return cast _Runtime.select(_Runtime.compare(_Runtime.field(states, 'length'), 0.0, '>'), function():Dynamic return cast _Runtime.getIndex(states, (_Runtime.field(states, 'length') - 1.0)), function():Dynamic return cast null);
+    return cast ((cast ((cast _Runtime.field(states, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.getIndex(states, (_Runtime.field(states, 'length') - 1.0)) : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 }

@@ -24,22 +24,22 @@ class SurfaceQuery {
     maxY = -1.0;
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(source, 'height'), '<'))) {
+      while ((cast ((cast py : Float) < (cast _Runtime.field(source, 'height') : Float)) : Bool)) {
         var y:Dynamic = (_Runtime.field(source, 'y') + py);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(y, 0.0, '<'), function():Dynamic return cast _Runtime.compare(y, _Runtime.field(_Runtime.field(source, 'surface'), 'height'), '>=')))) { py++; continue; }
+        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, _Runtime.field(source, 'width'), '<'))) {
+          while ((cast ((cast px : Float) < (cast _Runtime.field(source, 'width') : Float)) : Bool)) {
             var x:Dynamic = (_Runtime.field(source, 'x') + px);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(x, 0.0, '<'), function():Dynamic return cast _Runtime.compare(x, surfaceWidth, '>=')))) { px++; continue; }
+            if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast surfaceWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var i:Dynamic = (((y * surfaceWidth) + x) * 4.0);
             var pixel:Dynamic = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(data, i)) << 24)) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(data, (i + 1.0))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(data, (i + 2.0))) << 8)))) | _Runtime.toInt32(_Runtime.getIndex(data, (i + 3.0))))), 0)) & _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(mask), 0)));
             var matches:Dynamic = _Runtime.strictEquals(pixel, maskedColor);
-            if (_Runtime.truthy(_Runtime.strictEquals(matches, findColor))) {
-              if (_Runtime.truthy(_Runtime.compare(x, minX, '<'))) { (minX = cast (x : Dynamic)); }
-              if (_Runtime.truthy(_Runtime.compare(x, maxX, '>'))) { (maxX = cast (x : Dynamic)); }
-              if (_Runtime.truthy(_Runtime.compare(y, minY, '<'))) { (minY = cast (y : Dynamic)); }
-              if (_Runtime.truthy(_Runtime.compare(y, maxY, '>'))) { (maxY = cast (y : Dynamic)); }
+            if ((cast _Runtime.strictEquals(matches, findColor) : Bool)) {
+              if ((cast ((cast x : Float) < (cast minX : Float)) : Bool)) { (minX = cast (x : Dynamic)); }
+              if ((cast ((cast x : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (x : Dynamic)); }
+              if ((cast ((cast y : Float) < (cast minY : Float)) : Bool)) { (minY = cast (y : Dynamic)); }
+              if ((cast ((cast y : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast (y : Dynamic)); }
             }
             px++;
           }
@@ -47,7 +47,7 @@ class SurfaceQuery {
         py++;
       }
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(maxX, -1.0))) { return cast null; }
+    if ((cast _Runtime.strictEquals(maxX, -1.0) : Bool)) { return cast null; }
     return cast { x: minX, y: minY, width: ((maxX - minX) + 1.0), height: ((maxY - minY) + 1.0) };
     return cast null;
   }

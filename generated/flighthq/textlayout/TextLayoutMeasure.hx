@@ -9,8 +9,8 @@ import flighthq.types.TextLayout.TextMeasureFunction;
 
 class TextLayoutMeasure {
   public static function getTextLayoutMeasureProvider():Null<TextMeasureFunction> {
-    if (_Runtime.truthy(!_Runtime.strictEquals(TextLayoutMeasure._measureProvider__textLayoutMeasure, null))) { return cast TextLayoutMeasure._measureProvider__textLayoutMeasure; }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.callValue(getTextShaperBackend, cast ([] : Array<Dynamic>)), null))) { return cast measureText; }
+    if ((cast !_Runtime.strictEquals(TextLayoutMeasure._measureProvider__textLayoutMeasure, null) : Bool)) { return cast TextLayoutMeasure._measureProvider__textLayoutMeasure; }
+    if ((cast !_Runtime.strictEquals(_Runtime.callValue(getTextShaperBackend, cast ([] : Array<Dynamic>)), null) : Bool)) { return cast measureText; }
     return cast null;
     return cast null;
   }

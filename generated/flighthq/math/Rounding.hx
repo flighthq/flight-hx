@@ -6,19 +6,19 @@ import flighthq._internal._Runtime;
 
 class Rounding {
   public static function ceilTo(value:Float, step:Float):Float {
-    if (_Runtime.truthy(_Runtime.compare(step, 0.0, '<='))) { return cast value; }
+    if ((cast ((cast step : Float) <= (cast 0.0 : Float)) : Bool)) { return cast value; }
     return cast (HxMath.ceil((value / step)) * step);
     return cast null;
   }
 
   public static function euclideanMod(value:Float, divisor:Float):Float {
-    if (_Runtime.truthy(_Runtime.strictEquals(divisor, 0.0))) { throw _Runtime.rangeError('euclideanMod: divisor must not be 0'); }
+    if ((cast _Runtime.strictEquals(divisor, 0.0) : Bool)) { throw _Runtime.rangeError('euclideanMod: divisor must not be 0'); }
     return cast _Runtime.fmod((_Runtime.fmod(value, divisor) + divisor), divisor);
     return cast null;
   }
 
   public static function floorTo(value:Float, step:Float):Float {
-    if (_Runtime.truthy(_Runtime.compare(step, 0.0, '<='))) { return cast value; }
+    if ((cast ((cast step : Float) <= (cast 0.0 : Float)) : Bool)) { return cast value; }
     return cast (HxMath.floor((value / step)) * step);
     return cast null;
   }
@@ -29,7 +29,7 @@ class Rounding {
   }
 
   public static function roundTo(value:Float, step:Float):Float {
-    if (_Runtime.truthy(_Runtime.compare(step, 0.0, '<='))) { return cast value; }
+    if ((cast ((cast step : Float) <= (cast 0.0 : Float)) : Bool)) { return cast value; }
     return cast (HxMath.round((value / step)) * step);
     return cast null;
   }

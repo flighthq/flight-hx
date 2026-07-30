@@ -7,11 +7,11 @@ import flighthq._internal._Runtime;
 class Statistics {
   public static function mean(values:Array<Float>):Float {
     var sum:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0))) { return cast HxMath.NaN; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0) : Bool)) { return cast HxMath.NaN; }
     sum = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(values, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(values, 'length') : Float)) : Bool)) {
         (sum = cast ((sum + _Runtime.getIndex(values, i)) : Dynamic));
         i++;
       }
@@ -23,10 +23,10 @@ class Statistics {
   public static function median(values:Array<Float>):Float {
     var sorted:Dynamic = cast _Runtime.UNDEFINED;
     var mid:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0))) { return cast HxMath.NaN; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0) : Bool)) { return cast HxMath.NaN; }
     sorted = _Runtime.sortAndReturn(_Runtime.slice(values, 0, null), function(a:Dynamic, b:Dynamic) return (a - b));
     mid = HxMath.floor((_Runtime.field(sorted, 'length') / 2.0));
-    return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.fmod(_Runtime.field(sorted, 'length'), 2.0), 0.0), function():Dynamic return cast _Runtime.getIndex(sorted, mid), function():Dynamic return cast ((_Runtime.getIndex(sorted, (mid - 1.0)) + _Runtime.getIndex(sorted, mid)) / 2.0));
+    return cast ((cast !_Runtime.strictEquals(_Runtime.fmod(_Runtime.field(sorted, 'length'), 2.0), 0.0) : Bool) ? (cast _Runtime.getIndex(sorted, mid) : Dynamic) : (cast ((_Runtime.getIndex(sorted, (mid - 1.0)) + _Runtime.getIndex(sorted, mid)) / 2.0) : Dynamic));
     return cast null;
   }
 
@@ -38,12 +38,12 @@ class Statistics {
   public static function variance(values:Array<Float>):Float {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     var sum:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0))) { return cast HxMath.NaN; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0) : Bool)) { return cast HxMath.NaN; }
     m = _Runtime.callValue(mean, cast ([values] : Array<Dynamic>));
     sum = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(values, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(values, 'length') : Float)) : Bool)) {
         var d:Dynamic = (_Runtime.getIndex(values, i) - m);
         (sum = cast ((sum + (d * d)) : Dynamic));
         i++;
@@ -56,21 +56,21 @@ class Statistics {
   public static function weightedAverage(values:Array<Float>, weights:Array<Float>):Float {
     var sumWeights:Dynamic = cast _Runtime.UNDEFINED;
     var sumProduct:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(values, 'length'), _Runtime.field(weights, 'length')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(values, 'length'), _Runtime.field(weights, 'length')) : Bool)) {
       throw _Runtime.rangeError('weightedAverage: values and weights must have the same length');
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0))) { return cast HxMath.NaN; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0) : Bool)) { return cast HxMath.NaN; }
     sumWeights = 0.0;
     sumProduct = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(values, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(values, 'length') : Float)) : Bool)) {
         (sumWeights = cast ((sumWeights + _Runtime.getIndex(weights, i)) : Dynamic));
         (sumProduct = cast ((sumProduct + (_Runtime.getIndex(values, i) * _Runtime.getIndex(weights, i))) : Dynamic));
         i++;
       }
     }
-    return cast _Runtime.select(_Runtime.strictEquals(sumWeights, 0.0), function():Dynamic return cast HxMath.NaN, function():Dynamic return cast (sumProduct / sumWeights));
+    return cast ((cast _Runtime.strictEquals(sumWeights, 0.0) : Bool) ? (cast HxMath.NaN : Dynamic) : (cast (sumProduct / sumWeights) : Dynamic));
     return cast null;
   }
 }

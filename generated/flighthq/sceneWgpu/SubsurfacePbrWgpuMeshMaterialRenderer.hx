@@ -40,9 +40,9 @@ class SubsurfacePbrWgpuMeshMaterialRenderer {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     stateRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     pass = _Runtime.field(stateRuntime, 'renderPass');
-    if (_Runtime.truthy(_Runtime.strictEquals(pass, null))) { return; }
+    if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     subsurface = (cast material : Null<SubsurfacePbrMaterial>);
-    standard = _Runtime.select(!_Runtime.strictEquals(subsurface, null), function():Dynamic return cast _Runtime.field(subsurface, 'standard'), function():Dynamic return cast null);
+    standard = ((cast !_Runtime.strictEquals(subsurface, null) : Bool) ? (cast _Runtime.field(subsurface, 'standard') : Dynamic) : (cast null : Dynamic));
     key = _Runtime.callValue(buildWgpuPbrStandardDefineKey, cast ([standard, subsurface] : Array<Dynamic>));
     _Runtime.setField(key, 'subsurfaceEnabled', true);
     format = _Runtime.coalesce(_Runtime.field(stateRuntime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
@@ -50,9 +50,9 @@ class SubsurfacePbrWgpuMeshMaterialRenderer {
     _Runtime.callValue(writeWgpuFrameUniform, cast ([state, camera, lights] : Array<Dynamic>));
     binding = _Runtime.callValue(ensureWgpuPbrMaterialBindGroup, cast ([state, pipeline, _Runtime.coalesce(subsurface, function():Dynamic return cast SubsurfacePbrWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__subsurfacePbrWgpuMeshMaterialRenderer), standard] : Array<Dynamic>));
     out = _Runtime.callValue(getWgpuPbrMaterialScratch, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(writeWgpuPbrStandardBlock, cast ([out, standard, _Runtime.select(!_Runtime.strictEquals(subsurface, null), function():Dynamic return cast _Runtime.field(subsurface, 'alphaCutoff'), function():Dynamic return cast 0.5)] : Array<Dynamic>));
+    _Runtime.callValue(writeWgpuPbrStandardBlock, cast ([out, standard, ((cast !_Runtime.strictEquals(subsurface, null) : Bool) ? (cast _Runtime.field(subsurface, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic))] : Array<Dynamic>));
     _Runtime.fill(out, 0.0, 16.0, null, 2);
-    if (_Runtime.truthy(!_Runtime.strictEquals(subsurface, null))) {
+    if ((cast !_Runtime.strictEquals(subsurface, null) : Bool)) {
       _Runtime.callValue(unpackColorToLinear, cast ([SubsurfacePbrWgpuMeshMaterialRenderer._colorScratch__subsurfacePbrWgpuMeshMaterialRenderer, _Runtime.field(subsurface, 'subsurfaceColor')] : Array<Dynamic>));
       _Runtime.setIndex(out, 36.0, _Runtime.field(subsurface, 'subsurface'));
       _Runtime.setIndex(out, 37.0, _Runtime.getIndex(SubsurfacePbrWgpuMeshMaterialRenderer._colorScratch__subsurfacePbrWgpuMeshMaterialRenderer, 0.0));

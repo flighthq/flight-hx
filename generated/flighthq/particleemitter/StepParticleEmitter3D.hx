@@ -18,11 +18,11 @@ class StepParticleEmitter3D {
   public static function stepParticleEmitter3D(emitter:ParticleEmitter3D, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?callbacks:ParticleEmitterCallbacks):Void {
     var asEmitter:Dynamic = cast _Runtime.UNDEFINED;
     asEmitter = (cast (cast emitter : Dynamic) : ParticleEmitter);
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.looseEquals(forces, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(forces, 'length'), 0.0, '>')))) {
+    if ((cast ((cast !_Runtime.looseEquals(forces, null) : Bool) && (cast ((cast _Runtime.field(forces, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       _Runtime.callValue(applyParticleForces, cast ([asEmitter, state, forces, deltaTime] : Array<Dynamic>));
     }
     _Runtime.callValue(updateParticleEmitter3D, cast ([emitter, state, config, deltaTime, callbacks] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.looseEquals(colliders, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(colliders, 'length'), 0.0, '>')))) {
+    if ((cast ((cast !_Runtime.looseEquals(colliders, null) : Bool) && (cast ((cast _Runtime.field(colliders, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       _Runtime.callValue(applyParticleCollisions, cast ([asEmitter, state, colliders] : Array<Dynamic>));
     }
   }

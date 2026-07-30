@@ -17,14 +17,14 @@ class ResolvePathRegions {
     var path:Dynamic = cast _Runtime.UNDEFINED;
     var resolved:Dynamic = cast _Runtime.UNDEFINED;
     path = _Runtime.callValue(createPath, cast (['nonZero'] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(rings, 'length'), 0.0))) { return cast path; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(rings, 'length'), 0.0) : Bool)) { return cast path; }
     resolved = _Runtime.callProperty(_Runtime.callValue(getPathBooleanBackend, cast ([] : Array<Dynamic>)), 'computePathBoolean', cast ([rings, ResolvePathRegions.EMPTY_CONTOURS__resolvePathRegions, 'union', fillRule] : Array<Dynamic>));
     for (ring in _Runtime.iterable(resolved)) {
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(ring, 'length'), 6.0, '<'))) { continue; }
+      if ((cast ((cast _Runtime.field(ring, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { continue; }
       _Runtime.callValue(appendPathMoveTo, cast ([path, _Runtime.getIndex(ring, 0.0), _Runtime.getIndex(ring, 1.0)] : Array<Dynamic>));
       {
         var i:Dynamic = 2.0;
-        while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(ring, 'length'), '<'))) {
+        while ((cast ((cast i : Float) < (cast _Runtime.field(ring, 'length') : Float)) : Bool)) {
           _Runtime.callValue(appendPathLineTo, cast ([path, _Runtime.getIndex(ring, i), _Runtime.getIndex(ring, (i + 1.0))] : Array<Dynamic>));
           (i = cast ((i + 2.0) : Dynamic));
         }

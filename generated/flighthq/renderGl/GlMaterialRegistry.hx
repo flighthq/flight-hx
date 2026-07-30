@@ -26,10 +26,10 @@ class GlMaterialRegistry {
   public static function resolveGlMaterialRenderer(state:GlRenderState, material:Null<Material>):Null<GlMaterialRenderer> {
     var map:Dynamic = cast _Runtime.UNDEFINED;
     map = _Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'materialRendererMap');
-    if (_Runtime.truthy(_Runtime.strictEquals(map, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast null; }
-    if (_Runtime.truthy(!_Runtime.strictEquals(material, null))) {
+    if ((cast _Runtime.strictEquals(map, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
+    if ((cast !_Runtime.strictEquals(material, null) : Bool)) {
       var renderer:Dynamic = ((cast map : flighthq._internal._Map).get(_Runtime.field(material, 'kind')));
-      if (_Runtime.truthy(!_Runtime.strictEquals(renderer, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast renderer; }
+      if ((cast !_Runtime.strictEquals(renderer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast renderer; }
     }
     return cast _Runtime.coalesce(((cast map : flighthq._internal._Map).get(DefaultMaterialKind)), function():Dynamic return cast null);
     return cast null;

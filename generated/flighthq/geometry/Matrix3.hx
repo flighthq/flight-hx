@@ -27,7 +27,7 @@ class Matrix3 {
 
   public static function copyMatrix3ColumnFromVector3(out:Matrix3Like, column:Float, source:Vector3Like):Void {
     var base:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(column, 2.0, '>'))) {
+    if ((cast ((cast column : Float) > (cast 2.0 : Float)) : Bool)) {
       throw _Runtime.rangeError((('Column ' + column) + ' out of bounds (2)'));
     }
     base = (column * 3.0);
@@ -38,7 +38,7 @@ class Matrix3 {
 
   public static function copyMatrix3ColumnToVector3(out:Vector3Like, column:Float, source:Matrix3Like):Void {
     var base:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(column, 2.0, '>'))) {
+    if ((cast ((cast column : Float) > (cast 2.0 : Float)) : Bool)) {
       throw _Runtime.rangeError((('Column ' + column) + ' out of bounds (2)'));
     }
     base = (column * 3.0);
@@ -48,7 +48,7 @@ class Matrix3 {
   }
 
   public static function copyMatrix3RowFromVector3(out:Matrix3Like, row:Float, source:Vector3Like):Void {
-    if (_Runtime.truthy(_Runtime.compare(row, 2.0, '>'))) {
+    if ((cast ((cast row : Float) > (cast 2.0 : Float)) : Bool)) {
       throw _Runtime.rangeError((('Row ' + row) + ' out of bounds (2)'));
     }
     _Runtime.setIndex(out.m, row, source.x);
@@ -57,7 +57,7 @@ class Matrix3 {
   }
 
   public static function copyMatrix3RowToVector3(out:Vector3Like, row:Float, source:Matrix3Like):Void {
-    if (_Runtime.truthy(_Runtime.compare(row, 2.0, '>'))) {
+    if ((cast ((cast row : Float) > (cast 2.0 : Float)) : Bool)) {
       throw _Runtime.rangeError((('Row ' + row) + ' out of bounds (2)'));
     }
     (out.x = cast (_Runtime.getIndex(source.m, row) : Dynamic));
@@ -70,26 +70,26 @@ class Matrix3 {
     var out:flighthq.types.Matrix3 = cast _Runtime.UNDEFINED;
     m = new flighthq._internal._Float32Array(Matrix3.__identity__matrix3);
     out = _Runtime.callValue(createEntity, cast ([{ m: m }] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(m00, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 0.0, m00); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(m01, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 3.0, m01); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(m02, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 6.0, m02); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(m10, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 1.0, m10); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(m11, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 4.0, m11); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(m12, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 7.0, m12); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(m20, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 2.0, m20); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(m21, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 5.0, m21); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(m22, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 8.0, m22); }
+    if ((cast !_Runtime.strictEquals(m00, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(m, 0.0, m00); }
+    if ((cast !_Runtime.strictEquals(m01, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(m, 3.0, m01); }
+    if ((cast !_Runtime.strictEquals(m02, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(m, 6.0, m02); }
+    if ((cast !_Runtime.strictEquals(m10, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(m, 1.0, m10); }
+    if ((cast !_Runtime.strictEquals(m11, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(m, 4.0, m11); }
+    if ((cast !_Runtime.strictEquals(m12, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(m, 7.0, m12); }
+    if ((cast !_Runtime.strictEquals(m20, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(m, 2.0, m20); }
+    if ((cast !_Runtime.strictEquals(m21, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(m, 5.0, m21); }
+    if ((cast !_Runtime.strictEquals(m22, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(m, 8.0, m22); }
     return cast out;
     return cast null;
   }
 
   public static function equalsMatrix3(a:Null<Matrix3Like>, b:Null<Matrix3Like>):Bool {
-    if (_Runtime.truthy(_Runtime.strictEquals(a, b))) { return cast true; }
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(a), function():Dynamic return cast !_Runtime.truthy(b)))) { return cast false; }
+    if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast true; }
+    if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, 9.0, '<'))) {
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(a.m, i), _Runtime.getIndex(b.m, i)))) { return cast false; }
+      while ((cast ((cast i : Float) < (cast 9.0 : Float)) : Bool)) {
+        if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a.m, i), _Runtime.getIndex(b.m, i)) : Bool)) { return cast false; }
         i++;
       }
     }
@@ -134,9 +134,9 @@ class Matrix3 {
     a02 = _Runtime.getIndex(_in, 6.0);
     a12 = _Runtime.getIndex(_in, 7.0);
     a22 = _Runtime.getIndex(_in, 8.0);
-    if (_Runtime.truthy(_Runtime.callValue(isAffineMatrix3, cast ([source] : Array<Dynamic>)))) {
+    if ((cast _Runtime.callValue(isAffineMatrix3, cast ([source] : Array<Dynamic>)) : Bool)) {
       var det:Dynamic = ((a00 * a11) - (a01 * a10));
-      if (_Runtime.truthy(_Runtime.strictEquals(det, 0.0))) {
+      if ((cast _Runtime.strictEquals(det, 0.0) : Bool)) {
         _Runtime.fill(_out, HxMath.NaN, 0, null, 1);
         return cast false;
       }
@@ -157,7 +157,7 @@ class Matrix3 {
       return cast true;
     }
     det = (((a00 * ((a11 * a22) - (a12 * a21))) - (a01 * ((a10 * a22) - (a12 * a20)))) + (a02 * ((a10 * a21) - (a11 * a20))));
-    if (_Runtime.truthy(_Runtime.strictEquals(det, 0.0))) {
+    if ((cast _Runtime.strictEquals(det, 0.0) : Bool)) {
       _Runtime.fill(_out, HxMath.NaN, 0, null, 1);
       return cast false;
     }
@@ -176,7 +176,7 @@ class Matrix3 {
   }
 
   public static function isAffineMatrix3(source:Matrix3Like):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.getIndex(source.m, 2.0), 0.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(source.m, 5.0), 0.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(source.m, 8.0), 1.0));
+    return cast ((cast ((cast _Runtime.strictEquals(_Runtime.getIndex(source.m, 2.0), 0.0) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(source.m, 5.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(source.m, 8.0), 1.0) : Bool));
     return cast null;
   }
 
@@ -223,7 +223,7 @@ class Matrix3 {
     b02 = _Runtime.getIndex(_b, 6.0);
     b12 = _Runtime.getIndex(_b, 7.0);
     b22 = _Runtime.getIndex(_b, 8.0);
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.callValue(isAffineMatrix3, cast ([a] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(isAffineMatrix3, cast ([b] : Array<Dynamic>))))) {
+    if ((cast ((cast _Runtime.callValue(isAffineMatrix3, cast ([a] : Array<Dynamic>)) : Bool) && (cast _Runtime.callValue(isAffineMatrix3, cast ([b] : Array<Dynamic>)) : Bool)) : Bool)) {
       _Runtime.setIndex(_out, 0.0, ((a00 * b00) + (a01 * b10)));
       _Runtime.setIndex(_out, 1.0, ((a10 * b00) + (a11 * b10)));
       _Runtime.setIndex(_out, 2.0, 0.0);
@@ -323,7 +323,7 @@ class Matrix3 {
     m = out.m;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, 9.0, '<'))) {
+      while ((cast ((cast i : Float) < (cast 9.0 : Float)) : Bool)) {
         _Runtime.setIndex(m, i, _Runtime.getIndex(source, (offset + i)));
         i++;
       }
@@ -422,7 +422,7 @@ class Matrix3 {
     m = source.m;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, 9.0, '<'))) {
+      while ((cast ((cast i : Float) < (cast 9.0 : Float)) : Bool)) {
         _Runtime.setIndex(out, (offset + i), _Runtime.getIndex(m, i));
         i++;
       }

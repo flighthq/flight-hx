@@ -25,7 +25,7 @@ class WgpuFullscreenPass {
     textureBindGroupLayouts = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, textureInputCount, '<'))) {
+      while ((cast ((cast i : Float) < (cast textureInputCount : Float)) : Bool)) {
         _Runtime.callProperty(textureBindGroupLayouts, 'push', cast ([flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), texture: { sampleType: 'float' } }, { binding: 1.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), sampler: { type: 'filtering' } }] : Array<Dynamic>) }] : Array<Dynamic>))] : Array<Dynamic>));
         i++;
       }
@@ -46,21 +46,21 @@ class WgpuFullscreenPass {
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     var runtime2:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    pass = _Runtime.select(!_Runtime.strictEquals(dest, null), function():Dynamic return cast _Runtime.field(runtime, 'renderPass'), function():Dynamic return cast _Runtime.field(runtime, 'renderPass'));
-    if (_Runtime.truthy(_Runtime.strictEquals(pass, null))) { return; }
+    pass = ((cast !_Runtime.strictEquals(dest, null) : Bool) ? (cast _Runtime.field(runtime, 'renderPass') : Dynamic) : (cast _Runtime.field(runtime, 'renderPass') : Dynamic));
+    if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     _Runtime.callProperty(pass, 'setPipeline', cast ([_Runtime.field(wgpuPipeline, 'pipeline')] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(setUniforms, null))) {
+    if ((cast !_Runtime.strictEquals(setUniforms, null) : Bool)) {
       var uniformBindGroup:Dynamic = _Runtime.callValue(setUniforms, cast ([state, _Runtime.field(wgpuPipeline, 'uniformBindGroupLayout')] : Array<Dynamic>));
       _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, uniformBindGroup] : Array<Dynamic>));
     }
     runtime2 = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(inputs, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(inputs, 'length') : Float)) : Bool)) {
         var input:Dynamic = _Runtime.getIndex(inputs, i);
         var layout:Dynamic = _Runtime.getIndex(_Runtime.field(wgpuPipeline, 'textureBindGroupLayouts'), i);
-        if (_Runtime.truthy(_Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED')))) { i++; continue; }
-        var sampler:Dynamic = _Runtime.select(_Runtime.field(state, 'allowSmoothing'), function():Dynamic return cast _Runtime.field(runtime2, 'linearSampler'), function():Dynamic return cast _Runtime.field(runtime2, 'nearestSampler'));
+        if ((cast _Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
+        var sampler:Dynamic = ((cast _Runtime.field(state, 'allowSmoothing') : Bool) ? (cast _Runtime.field(runtime2, 'linearSampler') : Dynamic) : (cast _Runtime.field(runtime2, 'nearestSampler') : Dynamic));
         var bindGroup:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: layout, entries: cast ([{ binding: 0.0, resource: _Runtime.field(input, 'view') }, { binding: 1.0, resource: sampler }] : Array<Dynamic>) }] : Array<Dynamic>));
         _Runtime.callProperty(pass, 'setBindGroup', cast ([(1.0 + i), bindGroup] : Array<Dynamic>));
         i++;

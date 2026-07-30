@@ -39,7 +39,7 @@ class CanvasQuadBatch {
     instanceCount = _Runtime.field(__destructure0, 'instanceCount');
     ids = _Runtime.field(__destructure0, 'ids');
     transforms = _Runtime.field(__destructure0, 'transforms');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(atlas, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(atlas, 'image'), null)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(atlas, 'image'), 'source'), null)), function():Dynamic return cast _Runtime.strictEquals(instanceCount, 0.0)))) { return; }
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(atlas, 'image'), null) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(atlas, 'image'), 'source'), null) : Bool)) : Bool) || (cast _Runtime.strictEquals(instanceCount, 0.0) : Bool)) : Bool)) { return; }
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(quadBatch, 'blendMode')] : Array<Dynamic>));
     context = _Runtime.field(state, 'context');
     image = _Runtime.field(_Runtime.field(atlas, 'image'), 'source');
@@ -48,32 +48,32 @@ class CanvasQuadBatch {
     transform = _Runtime.field(quadBatch, 'transform2D');
     roundPixels = _Runtime.field(state, 'roundPixels');
     quadTransform = _Runtime.callValue(acquireMatrix, cast ([] : Array<Dynamic>));
-    stride = _Runtime.select(_Runtime.strictEquals(_Runtime.field(data, 'transformType'), 'vector2'), function():Dynamic return cast 2.0, function():Dynamic return cast 6.0);
+    stride = ((cast _Runtime.strictEquals(_Runtime.field(data, 'transformType'), 'vector2') : Bool) ? (cast 2.0 : Dynamic) : (cast 6.0 : Dynamic));
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', _Runtime.field(quadBatch, 'alpha'));
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'allowSmoothing')))) {
+    if ((cast !(cast _Runtime.field(state, 'allowSmoothing') : Bool) : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false);
     }
     restoreMaterial = _Runtime.callValue(applyCanvasMaterial, cast ([state, _Runtime.field(quadBatch, 'material')] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([_Runtime.field(transform, 'a'), _Runtime.field(transform, 'b'), _Runtime.field(transform, 'c'), _Runtime.field(transform, 'd'), _Runtime.field(transform, 'tx'), _Runtime.field(transform, 'ty')] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, instanceCount, '<'))) {
+      while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
         var id:Dynamic = _Runtime.getIndex(ids, i);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(id, 0.0, '<'), function():Dynamic return cast _Runtime.compare(id, numRegions, '>=')))) { i++; continue; }
+        if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
         var region:Dynamic = _Runtime.getIndex(regions, id);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(region, 'width'), 0.0, '<='), function():Dynamic return cast _Runtime.compare(_Runtime.field(region, 'height'), 0.0, '<=')))) {
+        if ((cast ((cast ((cast _Runtime.field(region, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(region, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
           i++;
           continue;
         }
         var offset:Dynamic = (i * stride);
-        if (_Runtime.truthy(_Runtime.strictEquals(stride, 2.0))) {
+        if ((cast _Runtime.strictEquals(stride, 2.0) : Bool)) {
           var dx:Dynamic = _Runtime.getIndex(transforms, offset);
           var dy:Dynamic = _Runtime.getIndex(transforms, (offset + 1.0));
-          flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([image, _Runtime.field(region, 'x'), _Runtime.field(region, 'y'), _Runtime.field(region, 'width'), _Runtime.field(region, 'height'), _Runtime.select(roundPixels, function():Dynamic return cast (_Runtime.toInt32(dx) | 0), function():Dynamic return cast dx), _Runtime.select(roundPixels, function():Dynamic return cast (_Runtime.toInt32(dy) | 0), function():Dynamic return cast dy), _Runtime.field(region, 'width'), _Runtime.field(region, 'height')] : Array<Dynamic>));
+          flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([image, _Runtime.field(region, 'x'), _Runtime.field(region, 'y'), _Runtime.field(region, 'width'), _Runtime.field(region, 'height'), ((cast roundPixels : Bool) ? (cast (_Runtime.toInt32(dx) | 0) : Dynamic) : (cast dx : Dynamic)), ((cast roundPixels : Bool) ? (cast (_Runtime.toInt32(dy) | 0) : Dynamic) : (cast dy : Dynamic)), _Runtime.field(region, 'width'), _Runtime.field(region, 'height')] : Array<Dynamic>));
         } else {
           _Runtime.callValue(setMatrixFromFloat32Array, cast ([quadTransform, offset, transforms] : Array<Dynamic>));
           _Runtime.callValue(multiplyMatrix, cast ([quadTransform, transform, quadTransform] : Array<Dynamic>));
-          if (_Runtime.truthy(roundPixels)) {
+          if ((cast roundPixels : Bool)) {
             _Runtime.setField(quadTransform, 'tx', HxMath.round(_Runtime.field(quadTransform, 'tx')));
             _Runtime.setField(quadTransform, 'ty', HxMath.round(_Runtime.field(quadTransform, 'ty')));
           }
@@ -83,10 +83,10 @@ class CanvasQuadBatch {
         i++;
       }
     }
-    if (_Runtime.truthy(restoreMaterial)) { flighthq._internal.backend.Canvas2dBackend.call(context, 'restore', cast ([] : Array<Dynamic>)); }
+    if ((cast restoreMaterial : Bool)) { flighthq._internal.backend.Canvas2dBackend.call(context, 'restore', cast ([] : Array<Dynamic>)); }
     flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
     _Runtime.callValue(releaseMatrix, cast ([quadTransform] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'allowSmoothing')))) {
+    if ((cast !(cast _Runtime.field(state, 'allowSmoothing') : Bool) : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', true);
     }
   }

@@ -13,13 +13,13 @@ class PathMeshPool {
   public static function acquirePathMesh(path:Path, tolerance:Dynamic = 0.25):PathMesh {
     var mesh:Dynamic = cast _Runtime.UNDEFINED;
     var fresh:Dynamic = cast _Runtime.UNDEFINED;
-    mesh = _Runtime.select(_Runtime.compare(_Runtime.field(PathMeshPool.pathMeshPool__pathMeshPool, 'length'), 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(PathMeshPool.pathMeshPool__pathMeshPool, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast { vertices: cast ([] : Array<Dynamic>), indices: cast ([] : Array<Dynamic>) });
+    mesh = ((cast ((cast _Runtime.field(PathMeshPool.pathMeshPool__pathMeshPool, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callProperty(PathMeshPool.pathMeshPool__pathMeshPool, 'pop', cast ([] : Array<Dynamic>)) : Dynamic) : (cast { vertices: cast ([] : Array<Dynamic>), indices: cast ([] : Array<Dynamic>) } : Dynamic));
     _Runtime.setLength(_Runtime.field(mesh, 'vertices'), 0.0);
     _Runtime.setLength(_Runtime.field(mesh, 'indices'), 0.0);
     fresh = _Runtime.callValue(tessellatePath, cast ([path, tolerance] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(fresh, 'vertices'), 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(fresh, 'vertices'), 'length') : Float)) : Bool)) {
         _Runtime.setIndex(_Runtime.field(mesh, 'vertices'), i, _Runtime.getIndex(_Runtime.field(fresh, 'vertices'), i));
         i++;
       }
@@ -27,7 +27,7 @@ class PathMeshPool {
     _Runtime.setLength(_Runtime.field(mesh, 'vertices'), _Runtime.field(_Runtime.field(fresh, 'vertices'), 'length'));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(fresh, 'indices'), 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(fresh, 'indices'), 'length') : Float)) : Bool)) {
         _Runtime.setIndex(_Runtime.field(mesh, 'indices'), i, _Runtime.getIndex(_Runtime.field(fresh, 'indices'), i));
         i++;
       }
@@ -41,7 +41,7 @@ class PathMeshPool {
     var fresh:Dynamic = cast _Runtime.UNDEFINED;
     var mesh:Dynamic = cast _Runtime.UNDEFINED;
     fresh = _Runtime.callValue(tessellatePathTyped, cast ([path, tolerance] : Array<Dynamic>));
-    mesh = _Runtime.select(_Runtime.compare(_Runtime.field(PathMeshPool.typedPool__pathMeshPool, 'length'), 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(PathMeshPool.typedPool__pathMeshPool, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast { vertices: new flighthq._internal._Float32Array(0.0), indices: new flighthq._internal._UInt32Array(0.0) });
+    mesh = ((cast ((cast _Runtime.field(PathMeshPool.typedPool__pathMeshPool, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callProperty(PathMeshPool.typedPool__pathMeshPool, 'pop', cast ([] : Array<Dynamic>)) : Dynamic) : (cast { vertices: new flighthq._internal._Float32Array(0.0), indices: new flighthq._internal._UInt32Array(0.0) } : Dynamic));
     _Runtime.setField(mesh, 'vertices', _Runtime.field(fresh, 'vertices'));
     _Runtime.setField(mesh, 'indices', _Runtime.field(fresh, 'indices'));
     return cast mesh;
@@ -49,13 +49,13 @@ class PathMeshPool {
   }
 
   public static function releasePathMesh(mesh:PathMesh):Void {
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(PathMeshPool.pathMeshPool__pathMeshPool, 'length'), PathMeshPool.POOL_HIGH_WATER__pathMeshPool, '<'))) {
+    if ((cast ((cast _Runtime.field(PathMeshPool.pathMeshPool__pathMeshPool, 'length') : Float) < (cast PathMeshPool.POOL_HIGH_WATER__pathMeshPool : Float)) : Bool)) {
       _Runtime.callProperty(PathMeshPool.pathMeshPool__pathMeshPool, 'push', cast ([mesh] : Array<Dynamic>));
     }
   }
 
   public static function releasePathMeshTyped(mesh:PathMeshTyped):Void {
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(PathMeshPool.typedPool__pathMeshPool, 'length'), PathMeshPool.POOL_HIGH_WATER__pathMeshPool, '<'))) {
+    if ((cast ((cast _Runtime.field(PathMeshPool.typedPool__pathMeshPool, 'length') : Float) < (cast PathMeshPool.POOL_HIGH_WATER__pathMeshPool : Float)) : Bool)) {
       _Runtime.callProperty(PathMeshPool.typedPool__pathMeshPool, 'push', cast ([mesh] : Array<Dynamic>));
     }
   }

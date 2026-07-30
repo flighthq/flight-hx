@@ -17,7 +17,7 @@ class ElectronShortcut {
     }, register: function(accelerator:Dynamic, listener:Dynamic) {
       var ok:Dynamic = cast _Runtime.UNDEFINED;
       ok = _Runtime.callProperty(globalShortcut, 'register', cast ([accelerator, function() return _Runtime.callValue(listener, cast ([{ accelerator: accelerator }] : Array<Dynamic>))] : Array<Dynamic>));
-      if (_Runtime.truthy(ok)) { ((cast registered : flighthq._internal._Set).add(accelerator)); }
+      if ((cast ok : Bool)) { ((cast registered : flighthq._internal._Set).add(accelerator)); }
       return cast ok;
     }, setAllEnabled: function(_enabled:Dynamic) {
     

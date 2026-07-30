@@ -51,8 +51,8 @@ class CapacitorHaptics {
   }
 
   public static function toCapacitorImpactStyle__capacitorHaptics(style:HapticImpactStyle):String {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(style, 'heavy'), function():Dynamic return cast _Runtime.strictEquals(style, 'rigid')))) { return cast 'HEAVY'; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(style, 'light'), function():Dynamic return cast _Runtime.strictEquals(style, 'soft')))) { return cast 'LIGHT'; }
+    if ((cast ((cast _Runtime.strictEquals(style, 'heavy') : Bool) || (cast _Runtime.strictEquals(style, 'rigid') : Bool)) : Bool)) { return cast 'HEAVY'; }
+    if ((cast ((cast _Runtime.strictEquals(style, 'light') : Bool) || (cast _Runtime.strictEquals(style, 'soft') : Bool)) : Bool)) { return cast 'LIGHT'; }
     return cast 'MEDIUM';
     return cast null;
   }

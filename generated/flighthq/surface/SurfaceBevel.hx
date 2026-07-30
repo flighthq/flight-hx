@@ -36,10 +36,10 @@ class SurfaceBevel {
     shadowColor = _Runtime.coalesce(_Runtime.field(options, 'shadowColor'), function():Dynamic return cast 255.0);
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, h, '<'))) {
+      while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, w, '<'))) {
+          while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
             var di:Dynamic = (((py * w) + px) * 4.0);
             _Runtime.setIndex(scratch, di, 0.0);
             _Runtime.setIndex(scratch, (di + 1.0), 0.0);
@@ -54,17 +54,17 @@ class SurfaceBevel {
     _Runtime.callValue(SurfaceBevel.blurField__surfaceBevel, cast ([scratch, out, w, h, _Runtime.field(options, 'radiusX'), _Runtime.field(options, 'radiusY'), _Runtime.field(options, 'passes')] : Array<Dynamic>));
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, h, '<'))) {
+      while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, w, '<'))) {
+          while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
             var di:Dynamic = (((py * w) + px) * 4.0);
             var lit:Dynamic = _Runtime.callValue(SurfaceBevel.sampleField__surfaceBevel, cast ([scratch, w, h, (px - offsetX), (py - offsetY)] : Array<Dynamic>));
             var shade:Dynamic = _Runtime.callValue(SurfaceBevel.sampleField__surfaceBevel, cast ([scratch, w, h, (px + offsetX), (py + offsetY)] : Array<Dynamic>));
             var gradient:Dynamic = (lit - shade);
-            var color:Dynamic = _Runtime.select(_Runtime.compare(gradient, 0.0, '>='), function():Dynamic return cast highlightColor, function():Dynamic return cast shadowColor);
+            var color:Dynamic = ((cast ((cast gradient : Float) >= (cast 0.0 : Float)) : Bool) ? (cast highlightColor : Dynamic) : (cast shadowColor : Dynamic));
             var colorAlpha:Dynamic = ((_Runtime.toInt32(color) & 255) / 255.0);
-            var clip:Dynamic = _Runtime.select(_Runtime.strictEquals(type, 'inner'), function():Dynamic return cast (_Runtime.callValue(SurfaceBevel.readSourceAlpha__surfaceBevel, cast ([source, px, py] : Array<Dynamic>)) / 255.0), function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(type, 'outer'), function():Dynamic return cast (1.0 - (_Runtime.callValue(SurfaceBevel.readSourceAlpha__surfaceBevel, cast ([source, px, py] : Array<Dynamic>)) / 255.0)), function():Dynamic return cast 1.0));
+            var clip:Dynamic = ((cast _Runtime.strictEquals(type, 'inner') : Bool) ? (cast (_Runtime.callValue(SurfaceBevel.readSourceAlpha__surfaceBevel, cast ([source, px, py] : Array<Dynamic>)) / 255.0) : Dynamic) : (cast ((cast _Runtime.strictEquals(type, 'outer') : Bool) ? (cast (1.0 - (_Runtime.callValue(SurfaceBevel.readSourceAlpha__surfaceBevel, cast ([source, px, py] : Array<Dynamic>)) / 255.0)) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
             var edgeIntensity:Dynamic = HxMath.min(1.0, (HxMath.abs(gradient) * intensity));
             _Runtime.setIndex(out, di, (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255));
             _Runtime.setIndex(out, (di + 1.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255));
@@ -91,14 +91,14 @@ class SurfaceBevel {
     b = scratch;
     {
       var pass:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(pass, p, '<'))) {
-        if (_Runtime.truthy(_Runtime.compare(rx, 0.0, '>'))) {
+      while ((cast ((cast pass : Float) < (cast p : Float)) : Bool)) {
+        if ((cast ((cast rx : Float) > (cast 0.0 : Float)) : Bool)) {
           _Runtime.callValue(blurSurfacePixelsHorizontal, cast ([b, a, w, h, rx] : Array<Dynamic>));
           var t:Dynamic = a;
           (a = cast (b : Dynamic));
           (b = cast (t : Dynamic));
         }
-        if (_Runtime.truthy(_Runtime.compare(ry, 0.0, '>'))) {
+        if ((cast ((cast ry : Float) > (cast 0.0 : Float)) : Bool)) {
           _Runtime.callValue(blurSurfacePixelsVertical, cast ([b, a, w, h, ry] : Array<Dynamic>));
           var t:Dynamic = a;
           (a = cast (b : Dynamic));
@@ -107,7 +107,7 @@ class SurfaceBevel {
         pass++;
       }
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(a, field))) { _Runtime.callProperty(field, 'set', cast ([(cast a : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int(((w * h) * 4.0)))] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(a, field) : Bool)) { _Runtime.callProperty(field, 'set', cast ([(cast a : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int(((w * h) * 4.0)))] : Array<Dynamic>)); }
   }
 
   public static function readSourceAlpha__surfaceBevel(source:SurfaceRegion, px:Float, py:Float):Float {
@@ -115,13 +115,13 @@ class SurfaceBevel {
     var sy:Dynamic = cast _Runtime.UNDEFINED;
     sx = (_Runtime.field(source, 'x') + px);
     sy = (_Runtime.field(source, 'y') + py);
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(sx, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sx, _Runtime.field(_Runtime.field(source, 'surface'), 'width'), '>=')), function():Dynamic return cast _Runtime.compare(sy, 0.0, '<')), function():Dynamic return cast _Runtime.compare(sy, _Runtime.field(_Runtime.field(source, 'surface'), 'height'), '>=')))) { return cast 0.0; }
+    if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'height') : Float)) : Bool)) : Bool)) { return cast 0.0; }
     return cast _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), ((((sy * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sx) * 4.0) + 3.0));
     return cast null;
   }
 
   public static function sampleField__surfaceBevel(field:flighthq._internal._UInt8ClampedArray, w:Float, h:Float, x:Float, y:Float):Float {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(x, 0.0, '<'), function():Dynamic return cast _Runtime.compare(x, w, '>=')), function():Dynamic return cast _Runtime.compare(y, 0.0, '<')), function():Dynamic return cast _Runtime.compare(y, h, '>=')))) { return cast 0.0; }
+    if ((cast ((cast ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast w : Float)) : Bool)) : Bool) || (cast ((cast y : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast y : Float) >= (cast h : Float)) : Bool)) : Bool)) { return cast 0.0; }
     return cast (_Runtime.getIndex(field, ((((y * w) + x) * 4.0) + 3.0)) / 255.0);
     return cast null;
   }

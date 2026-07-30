@@ -71,14 +71,14 @@ class GltfParse {
   public static function createSceneFromGlb(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>, ?options:GltfImportOptions):Scene {
     var container:Dynamic = cast _Runtime.UNDEFINED;
     container = _Runtime.callValue(GltfParse.readGlbContainer__gltfParse, cast ([bytes, warnings] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(container, null))) { return cast _Runtime.callValue(createScene, cast ([] : Array<Dynamic>)); }
+    if ((cast _Runtime.strictEquals(container, null) : Bool)) { return cast _Runtime.callValue(createScene, cast ([] : Array<Dynamic>)); }
     return cast _Runtime.callValue(GltfParse.buildSceneFromGltfDocument__gltfParse, cast ([_Runtime.field(container, 'document'), _Runtime.field(container, 'binary'), options, warnings] : Array<Dynamic>));
     return cast null;
   }
 
   public static function createSceneFromGltf(source:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Scene {
     var doc:GltfDocument = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(source), 'string'))) {
+    if ((cast _Runtime.strictEquals(_Runtime.typeofValue(source), 'string') : Bool)) {
       try {
         (doc = cast ((cast _Runtime.jsonParse(source) : GltfDocument) : Dynamic));
       } catch (__error:Dynamic) {
@@ -95,14 +95,14 @@ class GltfParse {
   public static function createScenesFromGlb(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>, ?options:GltfImportOptions):Array<Scene> {
     var container:Dynamic = cast _Runtime.UNDEFINED;
     container = _Runtime.callValue(GltfParse.readGlbContainer__gltfParse, cast ([bytes, warnings] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(container, null))) { return cast cast ([] : Array<Dynamic>); }
+    if ((cast _Runtime.strictEquals(container, null) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     return cast _Runtime.callValue(GltfParse.buildScenesFromGltfDocument__gltfParse, cast ([_Runtime.field(container, 'document'), _Runtime.field(container, 'binary'), options, warnings] : Array<Dynamic>));
     return cast null;
   }
 
   public static function createScenesFromGltf(source:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Array<Scene> {
     var doc:GltfDocument = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(source), 'string'))) {
+    if ((cast _Runtime.strictEquals(_Runtime.typeofValue(source), 'string') : Bool)) {
       try {
         (doc = cast ((cast _Runtime.jsonParse(source) : GltfDocument) : Dynamic));
       } catch (__error:Dynamic) {
@@ -120,14 +120,14 @@ class GltfParse {
     var t:Dynamic = cast _Runtime.UNDEFINED;
     var r:Dynamic = cast _Runtime.UNDEFINED;
     var s:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(gltfNode, 'matrix'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(gltfNode, 'matrix'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callValue(setNodeLocalMatrix4, cast ([node, { m: new flighthq._internal._Float32Array(_Runtime.field(gltfNode, 'matrix')) }] : Array<Dynamic>));
       return;
     }
     t = _Runtime.field(gltfNode, 'translation');
     r = _Runtime.field(gltfNode, 'rotation');
     s = _Runtime.field(gltfNode, 'scale');
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(t, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(r, _Runtime.field(_Runtime, 'UNDEFINED'))), function():Dynamic return cast _Runtime.strictEquals(s, _Runtime.field(_Runtime, 'UNDEFINED'))))) { return; }
+    if ((cast ((cast ((cast _Runtime.strictEquals(t, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(r, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) && (cast _Runtime.strictEquals(s, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return; }
     _Runtime.callValue(setVector3, cast ([_Runtime.field(node, 'position'), _Runtime.coalesce(_Runtime.optionalIndex(t, 0.0), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.optionalIndex(t, 1.0), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.optionalIndex(t, 2.0), function():Dynamic return cast 0.0)] : Array<Dynamic>));
     _Runtime.callValue(setQuaternion, cast ([_Runtime.field(node, 'rotation'), _Runtime.coalesce(_Runtime.optionalIndex(r, 0.0), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.optionalIndex(r, 1.0), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.optionalIndex(r, 2.0), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.optionalIndex(r, 3.0), function():Dynamic return cast 1.0)] : Array<Dynamic>));
     _Runtime.callValue(setVector3, cast ([_Runtime.field(node, 'scale'), _Runtime.coalesce(_Runtime.optionalIndex(s, 0.0), function():Dynamic return cast 1.0), _Runtime.coalesce(_Runtime.optionalIndex(s, 1.0), function():Dynamic return cast 1.0), _Runtime.coalesce(_Runtime.optionalIndex(s, 2.0), function():Dynamic return cast 1.0)] : Array<Dynamic>));
@@ -138,7 +138,7 @@ class GltfParse {
     var pool:Dynamic = cast _Runtime.UNDEFINED;
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     pool = _Runtime.callValue(GltfParse.buildGltfNodePool__gltfParse, cast ([doc, binary, options, warnings] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(pool, null))) { return cast _Runtime.callValue(createScene, cast ([] : Array<Dynamic>)); }
+    if ((cast _Runtime.strictEquals(pool, null) : Bool)) { return cast _Runtime.callValue(createScene, cast ([] : Array<Dynamic>)); }
     scene = _Runtime.callValue(GltfParse.assembleGltfScene__gltfParse, cast ([doc, _Runtime.field(pool, 'sceneNodes'), _Runtime.coalesce(_Runtime.field(doc, 'scene'), function():Dynamic return cast 0.0)] : Array<Dynamic>));
     _Runtime.callValue(GltfParse.attachGltfAnimations__gltfParse, cast ([scene, doc, _Runtime.field(pool, 'buffers'), _Runtime.field(pool, 'sceneNodes'), warnings] : Array<Dynamic>));
     return cast scene;
@@ -152,19 +152,19 @@ class GltfParse {
     var defaultIndex:Dynamic = cast _Runtime.UNDEFINED;
     var primary:Dynamic = cast _Runtime.UNDEFINED;
     pool = _Runtime.callValue(GltfParse.buildGltfNodePool__gltfParse, cast ([doc, binary, options, warnings] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(pool, null))) { return cast cast ([] : Array<Dynamic>); }
+    if ((cast _Runtime.strictEquals(pool, null) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     sceneCount = _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(doc, 'scenes'), 'length'), function():Dynamic return cast 0.0);
     scenes = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, sceneCount, '<'))) {
+      while ((cast ((cast i : Float) < (cast sceneCount : Float)) : Bool)) {
         _Runtime.callProperty(scenes, 'push', cast ([_Runtime.callValue(GltfParse.assembleGltfScene__gltfParse, cast ([doc, _Runtime.field(pool, 'sceneNodes'), i] : Array<Dynamic>))] : Array<Dynamic>));
         i++;
       }
     }
     defaultIndex = _Runtime.coalesce(_Runtime.field(doc, 'scene'), function():Dynamic return cast 0.0);
     primary = _Runtime.coalesce(_Runtime.getIndex(scenes, defaultIndex), function():Dynamic return cast _Runtime.callValue(GltfParse.assembleGltfScene__gltfParse, cast ([doc, _Runtime.field(pool, 'sceneNodes'), defaultIndex] : Array<Dynamic>)));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scenes, 'length'), 0.0))) { _Runtime.callProperty(scenes, 'push', cast ([primary] : Array<Dynamic>)); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(scenes, 'length'), 0.0) : Bool)) { _Runtime.callProperty(scenes, 'push', cast ([primary] : Array<Dynamic>)); }
     _Runtime.callValue(GltfParse.attachGltfAnimations__gltfParse, cast ([primary, doc, _Runtime.field(pool, 'buffers'), _Runtime.field(pool, 'sceneNodes'), warnings] : Array<Dynamic>));
     return cast scenes;
     return cast null;
@@ -175,9 +175,9 @@ class GltfParse {
     gltfAnimations = _Runtime.coalesce(_Runtime.field(doc, 'animations'), function():Dynamic return cast cast ([] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(gltfAnimations, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(gltfAnimations, 'length') : Float)) : Bool)) {
         var clip:Dynamic = _Runtime.callValue(GltfParse.buildGltfAnimationClip__gltfParse, cast ([doc, buffers, sceneNodes, _Runtime.getIndex(gltfAnimations, i), warnings] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(clip, null))) { _Runtime.setIndex(_Runtime.field(scene, 'animations'), _Runtime.coalesce(_Runtime.field(_Runtime.getIndex(gltfAnimations, i), 'name'), function():Dynamic return cast 'animation' + Std.string(i) + ''), clip); }
+        if ((cast !_Runtime.strictEquals(clip, null) : Bool)) { _Runtime.setIndex(_Runtime.field(scene, 'animations'), _Runtime.coalesce(_Runtime.field(_Runtime.getIndex(gltfAnimations, i), 'name'), function():Dynamic return cast 'animation' + Std.string(i) + ''), clip); }
         i++;
       }
     }
@@ -192,15 +192,15 @@ class GltfParse {
     var meshMaterials:Dynamic = cast _Runtime.UNDEFINED;
     var gltfNodes:Dynamic = cast _Runtime.UNDEFINED;
     var sceneNodes:Array<SceneNode> = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(doc, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(doc), 'object')))) {
+    if ((cast ((cast _Runtime.strictEquals(doc, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(doc), 'object') : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromGltf: document is not an object; returning empty scene'] : Array<Dynamic>));
       return cast null;
     }
     version = _Runtime.optionalField(_Runtime.field(doc, 'asset'), 'version');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(version, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(GltfParse.isSupportedGltfVersion__gltfParse, cast ([version] : Array<Dynamic>)))))) {
+    if ((cast ((cast _Runtime.strictEquals(version, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast _Runtime.callValue(GltfParse.isSupportedGltfVersion__gltfParse, cast ([version] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromGltf: unsupported glTF asset.version \'' + Std.string(_Runtime.coalesce(version, function():Dynamic return cast '(missing)')) + '\' (expected 2.x)'] : Array<Dynamic>));
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(doc, 'extensionsRequired'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(doc, 'extensionsRequired'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       for (extension in _Runtime.iterable(_Runtime.field(doc, 'extensionsRequired'))) {
         _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromGltf: required extension \'' + Std.string(extension) + '\' is not supported and was ignored'] : Array<Dynamic>));
       }
@@ -209,18 +209,18 @@ class GltfParse {
     meshGeometries = _Runtime.callProperty(_Runtime.coalesce(_Runtime.field(doc, 'meshes'), function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(mesh:Dynamic) return _Runtime.callProperty(_Runtime.field(mesh, 'primitives'), 'map', cast ([function(primitive:Dynamic) return _Runtime.callValue(GltfParse.primitiveToGeometry__gltfParse, cast ([doc, buffers, primitive, warnings] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
     meshMorphs = _Runtime.callProperty(_Runtime.coalesce(_Runtime.field(doc, 'meshes'), function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(mesh:Dynamic) return _Runtime.callProperty(_Runtime.field(mesh, 'primitives'), 'map', cast ([function(primitive:Dynamic) return _Runtime.callValue(GltfParse.buildGltfMorph__gltfParse, cast ([doc, buffers, primitive, _Runtime.field(mesh, 'weights'), warnings] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
     resolvedMaterials = _Runtime.callProperty(_Runtime.coalesce(_Runtime.field(doc, 'materials'), function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(material:Dynamic) return _Runtime.callValue(GltfParse.gltfMaterialToPbr__gltfParse, cast ([doc, buffers, material, options] : Array<Dynamic>))] : Array<Dynamic>));
-    meshMaterials = _Runtime.callProperty(_Runtime.coalesce(_Runtime.field(doc, 'meshes'), function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(mesh:Dynamic) return _Runtime.callProperty(_Runtime.field(mesh, 'primitives'), 'map', cast ([function(primitive:Dynamic) return _Runtime.select(!_Runtime.strictEquals(_Runtime.field(primitive, 'material'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.coalesce(_Runtime.getIndex(resolvedMaterials, _Runtime.field(primitive, 'material')), function():Dynamic return cast null), function():Dynamic return cast null)] : Array<Dynamic>))] : Array<Dynamic>));
+    meshMaterials = _Runtime.callProperty(_Runtime.coalesce(_Runtime.field(doc, 'meshes'), function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(mesh:Dynamic) return _Runtime.callProperty(_Runtime.field(mesh, 'primitives'), 'map', cast ([function(primitive:Dynamic) return ((cast !_Runtime.strictEquals(_Runtime.field(primitive, 'material'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.coalesce(_Runtime.getIndex(resolvedMaterials, _Runtime.field(primitive, 'material')), function():Dynamic return cast null) : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>))] : Array<Dynamic>));
     gltfNodes = _Runtime.coalesce(_Runtime.field(doc, 'nodes'), function():Dynamic return cast cast ([] : Array<Dynamic>));
-    sceneNodes = _Runtime.callProperty(gltfNodes, 'map', cast ([function(node:Dynamic) return _Runtime.select(!_Runtime.strictEquals(_Runtime.field(node, 'mesh'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callValue(GltfParse.buildMeshSceneNode__gltfParse, cast ([_Runtime.getIndex(meshGeometries, _Runtime.field(node, 'mesh')), _Runtime.getIndex(meshMaterials, _Runtime.field(node, 'mesh')), _Runtime.getIndex(meshMorphs, _Runtime.field(node, 'mesh'))] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createSceneNode, cast ([] : Array<Dynamic>)))] : Array<Dynamic>));
+    sceneNodes = _Runtime.callProperty(gltfNodes, 'map', cast ([function(node:Dynamic) return ((cast !_Runtime.strictEquals(_Runtime.field(node, 'mesh'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(GltfParse.buildMeshSceneNode__gltfParse, cast ([_Runtime.getIndex(meshGeometries, _Runtime.field(node, 'mesh')), _Runtime.getIndex(meshMaterials, _Runtime.field(node, 'mesh')), _Runtime.getIndex(meshMorphs, _Runtime.field(node, 'mesh'))] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(createSceneNode, cast ([] : Array<Dynamic>)) : Dynamic))] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(gltfNodes, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(gltfNodes, 'length') : Float)) : Bool)) {
         _Runtime.callValue(GltfParse.applyNodeTransform__gltfParse, cast ([_Runtime.getIndex(sceneNodes, i), _Runtime.getIndex(gltfNodes, i)] : Array<Dynamic>));
         var children:Dynamic = _Runtime.field(_Runtime.getIndex(gltfNodes, i), 'children');
-        if (_Runtime.truthy(!_Runtime.strictEquals(children, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+        if ((cast !_Runtime.strictEquals(children, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           {
             var c:Dynamic = 0.0;
-            while (_Runtime.truthy(_Runtime.compare(c, _Runtime.field(children, 'length'), '<'))) {
+            while ((cast ((cast c : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
               _Runtime.callValue(addNodeChild, cast ([_Runtime.getIndex(sceneNodes, i), _Runtime.getIndex(sceneNodes, _Runtime.getIndex(children, c))] : Array<Dynamic>));
               c++;
             }
@@ -231,11 +231,11 @@ class GltfParse {
     }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(gltfNodes, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(gltfNodes, 'length') : Float)) : Bool)) {
         var skinIndex:Dynamic = _Runtime.field(_Runtime.getIndex(gltfNodes, i), 'skin');
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(skinIndex, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.getIndex(gltfNodes, i), 'mesh'), _Runtime.field(_Runtime, 'UNDEFINED'))))) { i++; continue; }
+        if ((cast ((cast _Runtime.strictEquals(skinIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(_Runtime.getIndex(gltfNodes, i), 'mesh'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { i++; continue; }
         var skin:Dynamic = _Runtime.callValue(GltfParse.buildGltfSkin__gltfParse, cast ([doc, buffers, skinIndex, sceneNodes, warnings] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(skin, null))) { _Runtime.callValue(GltfParse.applySkinToMeshNodes__gltfParse, cast ([_Runtime.getIndex(sceneNodes, i), skin] : Array<Dynamic>)); }
+        if ((cast !_Runtime.strictEquals(skin, null) : Bool)) { _Runtime.callValue(GltfParse.applySkinToMeshNodes__gltfParse, cast ([_Runtime.getIndex(sceneNodes, i), skin] : Array<Dynamic>)); }
         i++;
       }
     }
@@ -250,9 +250,9 @@ class GltfParse {
     roots = _Runtime.coalesce(_Runtime.optionalField(_Runtime.optionalIndex(_Runtime.field(doc, 'scenes'), sceneIndex), 'nodes'), function():Dynamic return cast _Runtime.callValue(GltfParse.topLevelNodeIndices__gltfParse, cast ([_Runtime.coalesce(_Runtime.field(doc, 'nodes'), function():Dynamic return cast cast ([] : Array<Dynamic>))] : Array<Dynamic>)));
     {
       var r:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(r, _Runtime.field(roots, 'length'), '<'))) {
+      while ((cast ((cast r : Float) < (cast _Runtime.field(roots, 'length') : Float)) : Bool)) {
         var node:Dynamic = _Runtime.getIndex(sceneNodes, _Runtime.getIndex(roots, r));
-        if (_Runtime.truthy(!_Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), node] : Array<Dynamic>)); }
+        if ((cast !_Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), node] : Array<Dynamic>)); }
         r++;
       }
     }
@@ -265,49 +265,49 @@ class GltfParse {
     channels = cast ([] : Array<Dynamic>);
     for (channel in _Runtime.iterable(_Runtime.field(animation, 'channels'))) {
       var targetNodeIndex:Dynamic = _Runtime.field(_Runtime.field(channel, 'target'), 'node');
-      var node:Dynamic = _Runtime.select(!_Runtime.strictEquals(targetNodeIndex, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.getIndex(sceneNodes, targetNodeIndex), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
-      if (_Runtime.truthy(_Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')))) { continue; }
+      var node:Dynamic = ((cast !_Runtime.strictEquals(targetNodeIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.getIndex(sceneNodes, targetNodeIndex) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+      if ((cast _Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
       var sampler:Dynamic = _Runtime.getIndex(_Runtime.field(animation, 'samplers'), _Runtime.field(channel, 'sampler'));
-      if (_Runtime.truthy(_Runtime.strictEquals(sampler, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+      if ((cast _Runtime.strictEquals(sampler, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         _Runtime.callOptionalProperty(warnings, 'push', cast (['buildGltfAnimationClip: channel references missing sampler ' + Std.string(_Runtime.field(channel, 'sampler')) + ''] : Array<Dynamic>));
         continue;
       }
       var times:Dynamic = _Runtime.field(_Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, _Runtime.field(sampler, 'input'), warnings] : Array<Dynamic>)), 'data');
       var values:Dynamic = _Runtime.field(_Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, _Runtime.field(sampler, 'output'), warnings] : Array<Dynamic>)), 'data');
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(channel, 'target'), 'path'), 'weights'))) {
+      if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(channel, 'target'), 'path'), 'weights') : Bool)) {
         _Runtime.callValue(GltfParse.appendGltfWeightsChannels__gltfParse, cast ([channels, node, times, values, _Runtime.field(sampler, 'interpolation'), warnings] : Array<Dynamic>));
         continue;
       }
       var path:Dynamic = _Runtime.getIndex(GltfParse.GLTF_ANIMATION_PATHS__gltfParse, _Runtime.field(_Runtime.field(channel, 'target'), 'path'));
-      if (_Runtime.truthy(_Runtime.strictEquals(path, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+      if ((cast _Runtime.strictEquals(path, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         _Runtime.callOptionalProperty(warnings, 'push', cast (['buildGltfAnimationClip: unsupported animation target path \'' + Std.string(_Runtime.field(_Runtime.field(channel, 'target'), 'path')) + '\''] : Array<Dynamic>));
         continue;
       }
       var quaternion:Dynamic = _Runtime.strictEquals(path, SceneAnimationPathRotation);
-      var track:Dynamic = _Runtime.callValue(createAnimationTrack, cast ([{ components: _Runtime.select(quaternion, function():Dynamic return cast 4.0, function():Dynamic return cast 3.0), interpolation: _Runtime.getIndex(GltfParse.GLTF_SAMPLER_INTERPOLATIONS__gltfParse, _Runtime.coalesce(_Runtime.field(sampler, 'interpolation'), function():Dynamic return cast 'LINEAR')), quaternion: quaternion, times: times, values: values }] : Array<Dynamic>));
+      var track:Dynamic = _Runtime.callValue(createAnimationTrack, cast ([{ components: ((cast quaternion : Bool) ? (cast 4.0 : Dynamic) : (cast 3.0 : Dynamic)), interpolation: _Runtime.getIndex(GltfParse.GLTF_SAMPLER_INTERPOLATIONS__gltfParse, _Runtime.coalesce(_Runtime.field(sampler, 'interpolation'), function():Dynamic return cast 'LINEAR')), quaternion: quaternion, times: times, values: values }] : Array<Dynamic>));
       _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([track, { node: node, path: path }] : Array<Dynamic>))] : Array<Dynamic>));
     }
-    return cast _Runtime.select(_Runtime.compare(_Runtime.field(channels, 'length'), 0.0, '>'), function():Dynamic return cast _Runtime.callValue(createAnimationClip, cast ([channels] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast ((cast ((cast _Runtime.field(channels, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callValue(createAnimationClip, cast ([channels] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function appendGltfWeightsChannels__gltfParse(channels:Array<AnimationChannel>, node:SceneNode, times:Dynamic, values:Dynamic, interpolation:Null<String>, ?warnings:Array<String>):Void {
     var meshes:Dynamic = cast _Runtime.UNDEFINED;
     var bound:Dynamic = cast _Runtime.UNDEFINED;
-    meshes = _Runtime.select(_Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)), function():Dynamic return cast cast ([(cast (cast node : Dynamic) : Mesh)] : Array<Dynamic>), function():Dynamic return cast _Runtime.callValue(GltfParse.collectMorphableChildMeshes__gltfParse, cast ([node] : Array<Dynamic>)));
+    meshes = ((cast _Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)) : Bool) ? (cast cast ([(cast (cast node : Dynamic) : Mesh)] : Array<Dynamic>) : Dynamic) : (cast _Runtime.callValue(GltfParse.collectMorphableChildMeshes__gltfParse, cast ([node] : Array<Dynamic>)) : Dynamic));
     bound = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(meshes, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(meshes, 'length') : Float)) : Bool)) {
         var morph:Dynamic = _Runtime.field(_Runtime.getIndex(meshes, i), 'morph');
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.looseEquals(morph, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(morph, 'targets'), 'length'), 0.0)))) { i++; continue; }
+        if ((cast ((cast _Runtime.looseEquals(morph, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(morph, 'targets'), 'length'), 0.0) : Bool)) : Bool)) { i++; continue; }
         var track:Dynamic = _Runtime.callValue(createAnimationTrack, cast ([{ components: _Runtime.field(_Runtime.field(morph, 'targets'), 'length'), interpolation: _Runtime.getIndex(GltfParse.GLTF_SAMPLER_INTERPOLATIONS__gltfParse, _Runtime.coalesce(interpolation, function():Dynamic return cast 'LINEAR')), times: times, values: values }] : Array<Dynamic>));
         _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([track, { node: _Runtime.getIndex(meshes, i), path: SceneAnimationPathWeights }] : Array<Dynamic>))] : Array<Dynamic>));
         bound++;
         i++;
       }
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(bound, 0.0))) {
+    if ((cast _Runtime.strictEquals(bound, 0.0) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['buildGltfAnimationClip: weights channel targets a node with no morphable mesh; skipped'] : Array<Dynamic>));
     }
   }
@@ -319,9 +319,9 @@ class GltfParse {
     children = _Runtime.callValue(getNodeChildren, cast ([node] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(children, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
         var child:Dynamic = (cast (cast _Runtime.getIndex(children, i) : Dynamic) : SceneNode);
-        if (_Runtime.truthy(_Runtime.callValue(isMesh, cast ([child] : Array<Dynamic>)))) { _Runtime.callProperty(out, 'push', cast ([(cast (cast child : Dynamic) : Mesh)] : Array<Dynamic>)); }
+        if ((cast _Runtime.callValue(isMesh, cast ([child] : Array<Dynamic>)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([(cast (cast child : Dynamic) : Mesh)] : Array<Dynamic>)); }
         i++;
       }
     }
@@ -331,16 +331,16 @@ class GltfParse {
 
   public static function applySkinToMeshNodes__gltfParse(node:SceneNode, skin:Skin):Void {
     var children:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)))) {
+    if ((cast _Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)) : Bool)) {
       _Runtime.setField((cast node : Mesh), 'skin', skin);
       return;
     }
     children = _Runtime.callValue(getNodeChildren, cast ([node] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(children, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
         var child:Dynamic = (cast (cast _Runtime.getIndex(children, i) : Dynamic) : SceneNode);
-        if (_Runtime.truthy(_Runtime.callValue(isMesh, cast ([child] : Array<Dynamic>)))) { _Runtime.setField((cast (cast child : Dynamic) : Mesh), 'skin', skin); }
+        if ((cast _Runtime.callValue(isMesh, cast ([child] : Array<Dynamic>)) : Bool)) { _Runtime.setField((cast (cast child : Dynamic) : Mesh), 'skin', skin); }
         i++;
       }
     }
@@ -356,7 +356,7 @@ class GltfParse {
     var skeleton:Dynamic = cast _Runtime.UNDEFINED;
     var skeletonRoot:Dynamic = cast _Runtime.UNDEFINED;
     gltfSkin = _Runtime.optionalIndex(_Runtime.field(doc, 'skins'), skinIndex);
-    if (_Runtime.truthy(_Runtime.strictEquals(gltfSkin, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(gltfSkin, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['buildGltfSkin: skin ' + Std.string(skinIndex) + ' not found in document'] : Array<Dynamic>));
       return cast null;
     }
@@ -364,10 +364,10 @@ class GltfParse {
     names = cast ([] : Array<Dynamic>);
     {
       var j:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(j, _Runtime.field(_Runtime.field(gltfSkin, 'joints'), 'length'), '<'))) {
+      while ((cast ((cast j : Float) < (cast _Runtime.field(_Runtime.field(gltfSkin, 'joints'), 'length') : Float)) : Bool)) {
         var jointNodeIndex:Dynamic = _Runtime.getIndex(_Runtime.field(gltfSkin, 'joints'), j);
         var node:Dynamic = _Runtime.getIndex(sceneNodes, jointNodeIndex);
-        if (_Runtime.truthy(_Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+        if ((cast _Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           _Runtime.callOptionalProperty(warnings, 'push', cast (['buildGltfSkin: skin ' + Std.string(skinIndex) + ' joint references missing node ' + Std.string(jointNodeIndex) + ''] : Array<Dynamic>));
           j++;
           continue;
@@ -378,13 +378,13 @@ class GltfParse {
       }
     }
     jointCount = _Runtime.field(joints, 'length');
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(gltfSkin, 'inverseBindMatrices'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(gltfSkin, 'inverseBindMatrices'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (inverseBindMatrices = cast (_Runtime.callProperty(_Runtime.globalValue('Float32Array'), 'from', cast ([_Runtime.field(_Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, _Runtime.field(gltfSkin, 'inverseBindMatrices'), warnings] : Array<Dynamic>)), 'data')] : Array<Dynamic>)) : Dynamic));
     } else {
       (inverseBindMatrices = cast (new flighthq._internal._Float32Array((jointCount * 16.0)) : Dynamic));
       {
         var j:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(j, jointCount, '<'))) {
+        while ((cast ((cast j : Float) < (cast jointCount : Float)) : Bool)) {
           var base:Dynamic = (j * 16.0);
           _Runtime.setIndex(inverseBindMatrices, base, 1.0);
           _Runtime.setIndex(inverseBindMatrices, (base + 5.0), 1.0);
@@ -394,9 +394,9 @@ class GltfParse {
         }
       }
     }
-    hasNames = _Runtime.callProperty(names, 'some', cast ([function(name:Dynamic) return _Runtime.compare(_Runtime.field(name, 'length'), 0.0, '>')] : Array<Dynamic>));
-    skeleton = _Runtime.callValue(createSkeleton3D, cast ([joints, inverseBindMatrices, _Runtime.select(hasNames, function():Dynamic return cast names, function():Dynamic return cast null)] : Array<Dynamic>));
-    skeletonRoot = _Runtime.select(!_Runtime.strictEquals(_Runtime.field(gltfSkin, 'skeleton'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.coalesce(_Runtime.getIndex(sceneNodes, _Runtime.field(gltfSkin, 'skeleton')), function():Dynamic return cast null), function():Dynamic return cast null);
+    hasNames = _Runtime.callProperty(names, 'some', cast ([function(name:Dynamic) return ((cast _Runtime.field(name, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>));
+    skeleton = _Runtime.callValue(createSkeleton3D, cast ([joints, inverseBindMatrices, ((cast hasNames : Bool) ? (cast names : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>));
+    skeletonRoot = ((cast !_Runtime.strictEquals(_Runtime.field(gltfSkin, 'skeleton'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.coalesce(_Runtime.getIndex(sceneNodes, _Runtime.field(gltfSkin, 'skeleton')), function():Dynamic return cast null) : Dynamic) : (cast null : Dynamic));
     return cast { skeleton: skeleton, skeletonRoot: skeletonRoot };
     return cast null;
   }
@@ -405,25 +405,25 @@ class GltfParse {
     var materialsFor:Dynamic = cast _Runtime.UNDEFINED;
     var buildMesh:Dynamic = cast _Runtime.UNDEFINED;
     var group:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(geometries, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(geometries, 'length'), 0.0)))) { return cast _Runtime.callValue(createSceneNode, cast ([] : Array<Dynamic>)); }
+    if ((cast ((cast _Runtime.strictEquals(geometries, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(geometries, 'length'), 0.0) : Bool)) : Bool)) { return cast _Runtime.callValue(createSceneNode, cast ([] : Array<Dynamic>)); }
     materialsFor = function(i:Float) {
       var material:Dynamic = cast _Runtime.UNDEFINED;
       material = _Runtime.coalesce(_Runtime.optionalIndex(materials, i), function():Dynamic return cast null);
-      return cast _Runtime.select(!_Runtime.strictEquals(material, null), function():Dynamic return cast cast ([material] : Array<Dynamic>), function():Dynamic return cast cast ([] : Array<Dynamic>));
+      return cast ((cast !_Runtime.strictEquals(material, null) : Bool) ? (cast cast ([material] : Array<Dynamic>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
     };
     buildMesh = function(i:Float) {
       var mesh:Dynamic = cast _Runtime.UNDEFINED;
       var morph:Dynamic = cast _Runtime.UNDEFINED;
       mesh = _Runtime.callValue(createMesh, cast ([_Runtime.getIndex(geometries, i), _Runtime.callValue(materialsFor, cast ([i] : Array<Dynamic>))] : Array<Dynamic>));
       morph = _Runtime.coalesce(_Runtime.optionalIndex(morphs, i), function():Dynamic return cast null);
-      if (_Runtime.truthy(!_Runtime.strictEquals(morph, null))) { _Runtime.setField(mesh, 'morph', morph); }
+      if ((cast !_Runtime.strictEquals(morph, null) : Bool)) { _Runtime.setField(mesh, 'morph', morph); }
       return cast mesh;
     };
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(geometries, 'length'), 1.0))) { return cast (cast (cast _Runtime.callValue(buildMesh, cast ([0.0] : Array<Dynamic>)) : Dynamic) : SceneNode); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(geometries, 'length'), 1.0) : Bool)) { return cast (cast (cast _Runtime.callValue(buildMesh, cast ([0.0] : Array<Dynamic>)) : Dynamic) : SceneNode); }
     group = _Runtime.callValue(createSceneNode, cast ([] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(geometries, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(geometries, 'length') : Float)) : Bool)) {
         _Runtime.callValue(addNodeChild, cast ([group, (cast (cast _Runtime.callValue(buildMesh, cast ([i] : Array<Dynamic>)) : Dynamic) : SceneNode)] : Array<Dynamic>));
         i++;
       }
@@ -437,7 +437,7 @@ class GltfParse {
     var result:Dynamic = cast _Runtime.UNDEFINED;
     pbr = _Runtime.coalesce(_Runtime.field(material, 'pbrMetallicRoughness'), function():Dynamic return cast {  });
     result = _Runtime.callValue(createStandardPbrMaterial, cast ([{ baseColor: _Runtime.callValue(GltfParse.packGltfLinearColor__gltfParse, cast ([_Runtime.coalesce(_Runtime.field(pbr, 'baseColorFactor'), function():Dynamic return cast cast ([1.0, 1.0, 1.0, 1.0] : Array<Dynamic>)), 4.0] : Array<Dynamic>)), baseColorMap: _Runtime.callValue(GltfParse.resolveGltfTexture__gltfParse, cast ([doc, buffers, _Runtime.field(pbr, 'baseColorTexture'), 'srgb', options] : Array<Dynamic>)), emissive: _Runtime.callValue(GltfParse.packGltfLinearColor__gltfParse, cast ([_Runtime.coalesce(_Runtime.field(material, 'emissiveFactor'), function():Dynamic return cast cast ([0.0, 0.0, 0.0] : Array<Dynamic>)), 3.0] : Array<Dynamic>)), emissiveMap: _Runtime.callValue(GltfParse.resolveGltfTexture__gltfParse, cast ([doc, buffers, _Runtime.field(material, 'emissiveTexture'), 'srgb', options] : Array<Dynamic>)), metallic: _Runtime.coalesce(_Runtime.field(pbr, 'metallicFactor'), function():Dynamic return cast 1.0), metallicRoughnessMap: _Runtime.callValue(GltfParse.resolveGltfTexture__gltfParse, cast ([doc, buffers, _Runtime.field(pbr, 'metallicRoughnessTexture'), 'linear', options] : Array<Dynamic>)), normalMap: _Runtime.callValue(GltfParse.resolveGltfTexture__gltfParse, cast ([doc, buffers, _Runtime.field(material, 'normalTexture'), 'linear', options] : Array<Dynamic>)), normalScale: _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(material, 'normalTexture'), 'scale'), function():Dynamic return cast 1.0), occlusionMap: _Runtime.callValue(GltfParse.resolveGltfTexture__gltfParse, cast ([doc, buffers, _Runtime.field(material, 'occlusionTexture'), 'linear', options] : Array<Dynamic>)), occlusionStrength: _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(material, 'occlusionTexture'), 'strength'), function():Dynamic return cast 1.0), roughness: _Runtime.coalesce(_Runtime.field(pbr, 'roughnessFactor'), function():Dynamic return cast 1.0) }] : Array<Dynamic>));
-    _Runtime.setField(result, 'alphaMode', _Runtime.select(_Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'MASK'), function():Dynamic return cast 'mask', function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'BLEND'), function():Dynamic return cast 'blend', function():Dynamic return cast 'opaque')));
+    _Runtime.setField(result, 'alphaMode', ((cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'MASK') : Bool) ? (cast 'mask' : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'BLEND') : Bool) ? (cast 'blend' : Dynamic) : (cast 'opaque' : Dynamic)) : Dynamic)));
     _Runtime.setField(result, 'alphaCutoff', _Runtime.coalesce(_Runtime.field(material, 'alphaCutoff'), function():Dynamic return cast 0.5));
     _Runtime.setField(result, 'doubleSided', _Runtime.coalesce(_Runtime.field(material, 'doubleSided'), function():Dynamic return cast false));
     _Runtime.setField(result, 'name', _Runtime.coalesce(_Runtime.field(material, 'name'), function():Dynamic return cast null));
@@ -449,33 +449,33 @@ class GltfParse {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     var image:Dynamic = cast _Runtime.UNDEFINED;
     var result:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(info, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast null; }
+    if ((cast _Runtime.strictEquals(info, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
     texture = _Runtime.optionalIndex(_Runtime.field(doc, 'textures'), _Runtime.field(info, 'index'));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.optionalField(texture, 'source'), _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast null; }
+    if ((cast _Runtime.strictEquals(_Runtime.optionalField(texture, 'source'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
     image = _Runtime.optionalIndex(_Runtime.field(doc, 'images'), _Runtime.field(texture, 'source'));
-    if (_Runtime.truthy(_Runtime.strictEquals(image, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast null; }
+    if ((cast _Runtime.strictEquals(image, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
     result = _Runtime.callValue(GltfParse.gltfImageToTexture__gltfParse, cast ([doc, buffers, image, options] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(result, null))) { return cast null; }
+    if ((cast _Runtime.strictEquals(result, null) : Bool)) { return cast null; }
     _Runtime.setField(result, 'colorSpace', colorSpace);
-    _Runtime.callValue(GltfParse.applyGltfSampler__gltfParse, cast ([result, _Runtime.select(!_Runtime.strictEquals(_Runtime.field(texture, 'sampler'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.optionalIndex(_Runtime.field(doc, 'samplers'), _Runtime.field(texture, 'sampler')), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>));
+    _Runtime.callValue(GltfParse.applyGltfSampler__gltfParse, cast ([result, ((cast !_Runtime.strictEquals(_Runtime.field(texture, 'sampler'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.optionalIndex(_Runtime.field(doc, 'samplers'), _Runtime.field(texture, 'sampler')) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic))] : Array<Dynamic>));
     _Runtime.callValue(GltfParse.applyGltfTextureTransform__gltfParse, cast ([result, _Runtime.optionalField(_Runtime.field(info, 'extensions'), 'KHR_texture_transform')] : Array<Dynamic>));
     return cast result;
     return cast null;
   }
 
   public static function applyGltfSampler__gltfParse(texture:Texture, sampler:Null<GltfSampler>):Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(sampler, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(sampler, 'wrapS'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(_Runtime.field(texture, 'sampler'), 'wrapU', _Runtime.getIndex(GltfParse.GLTF_TEXTURE_WRAP__gltfParse, _Runtime.field(sampler, 'wrapS'))); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(sampler, 'wrapT'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(_Runtime.field(texture, 'sampler'), 'wrapV', _Runtime.getIndex(GltfParse.GLTF_TEXTURE_WRAP__gltfParse, _Runtime.field(sampler, 'wrapT'))); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(sampler, 'magFilter'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(_Runtime.field(texture, 'sampler'), 'magFilter', _Runtime.getIndex(GltfParse.GLTF_TEXTURE_FILTER__gltfParse, _Runtime.field(sampler, 'magFilter'))); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(sampler, 'minFilter'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(sampler, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(sampler, 'wrapS'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(_Runtime.field(texture, 'sampler'), 'wrapU', _Runtime.getIndex(GltfParse.GLTF_TEXTURE_WRAP__gltfParse, _Runtime.field(sampler, 'wrapS'))); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(sampler, 'wrapT'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(_Runtime.field(texture, 'sampler'), 'wrapV', _Runtime.getIndex(GltfParse.GLTF_TEXTURE_WRAP__gltfParse, _Runtime.field(sampler, 'wrapT'))); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(sampler, 'magFilter'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(_Runtime.field(texture, 'sampler'), 'magFilter', _Runtime.getIndex(GltfParse.GLTF_TEXTURE_FILTER__gltfParse, _Runtime.field(sampler, 'magFilter'))); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(sampler, 'minFilter'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.setField(_Runtime.field(texture, 'sampler'), 'minFilter', _Runtime.getIndex(GltfParse.GLTF_TEXTURE_FILTER__gltfParse, _Runtime.field(sampler, 'minFilter')));
       _Runtime.setField(_Runtime.field(texture, 'sampler'), 'mipmaps', _Runtime.getIndex(GltfParse.GLTF_MIN_FILTER_MIPMAPS__gltfParse, _Runtime.field(sampler, 'minFilter')));
     }
   }
 
   public static function applyGltfTextureTransform__gltfParse(texture:Texture, transform:Null<Dynamic>):Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(transform, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
+    if ((cast _Runtime.strictEquals(transform, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     (_Runtime.field(texture, 'uvOffset').x = cast (_Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(transform, 'offset'), 0.0), function():Dynamic return cast 0.0) : Dynamic));
     (_Runtime.field(texture, 'uvOffset').y = cast (_Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(transform, 'offset'), 1.0), function():Dynamic return cast 0.0) : Dynamic));
     _Runtime.setField(texture, 'uvRotation', _Runtime.coalesce(_Runtime.field(transform, 'rotation'), function():Dynamic return cast 0.0));
@@ -484,21 +484,21 @@ class GltfParse {
   }
 
   public static function gltfImageToTexture__gltfParse(doc:GltfDocument, buffers:Array<flighthq._internal._UInt8Array>, image:GltfImage, options:Null<GltfImportOptions>):Null<Texture> {
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(image, 'uri'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      if (_Runtime.truthy(StringTools.startsWith(_Runtime.field(image, 'uri'), 'data:'))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(image, 'uri'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      if ((cast StringTools.startsWith(_Runtime.field(image, 'uri'), 'data:') : Bool)) {
         var comma:Dynamic = _Runtime.callProperty(_Runtime.field(image, 'uri'), 'indexOf', cast ([','] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.compare(comma, 0.0, '<'))) { return cast null; }
+        if ((cast ((cast comma : Float) < (cast 0.0 : Float)) : Bool)) { return cast null; }
         var semicolon:Dynamic = _Runtime.callProperty(_Runtime.field(image, 'uri'), 'indexOf', cast ([';'] : Array<Dynamic>));
-        var declared:Dynamic = _Runtime.select(_Runtime.compare(semicolon, 5.0, '>'), function():Dynamic return cast _Runtime.slice(_Runtime.field(image, 'uri'), 5.0, semicolon), function():Dynamic return cast _Runtime.coalesce(_Runtime.field(image, 'mimeType'), function():Dynamic return cast null));
+        var declared:Dynamic = ((cast ((cast semicolon : Float) > (cast 5.0 : Float)) : Bool) ? (cast _Runtime.slice(_Runtime.field(image, 'uri'), 5.0, semicolon) : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(image, 'mimeType'), function():Dynamic return cast null) : Dynamic));
         var bytes:Dynamic = _Runtime.callValue(GltfParse.decodeBase64__gltfParse, cast ([_Runtime.slice(_Runtime.field(image, 'uri'), (comma + 1.0), null)] : Array<Dynamic>));
         return cast _Runtime.callValue(createEmbeddedTextureRef, cast ([bytes, _Runtime.coalesce(declared, function():Dynamic return cast _Runtime.callValue(detectImageMimeType, cast ([bytes] : Array<Dynamic>)))] : Array<Dynamic>));
       }
       return cast _Runtime.callValue(createExternalTextureRef, cast ([_Runtime.field(image, 'uri'), _Runtime.coalesce(_Runtime.optionalField(options, 'basePath'), function():Dynamic return cast null)] : Array<Dynamic>));
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(image, 'bufferView'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(image, 'bufferView'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var bufferView:Dynamic = _Runtime.optionalIndex(_Runtime.field(doc, 'bufferViews'), _Runtime.field(image, 'bufferView'));
-      var buffer:Dynamic = _Runtime.select(!_Runtime.strictEquals(bufferView, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.getIndex(buffers, _Runtime.field(bufferView, 'buffer')), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(bufferView, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(buffer, _Runtime.field(_Runtime, 'UNDEFINED'))))) { return cast null; }
+      var buffer:Dynamic = ((cast !_Runtime.strictEquals(bufferView, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.getIndex(buffers, _Runtime.field(bufferView, 'buffer')) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+      if ((cast ((cast _Runtime.strictEquals(bufferView, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(buffer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return cast null; }
       var start:Dynamic = _Runtime.coalesce(_Runtime.field(bufferView, 'byteOffset'), function():Dynamic return cast 0.0);
       var bytes:Dynamic = _Runtime.slice(buffer, start, (start + _Runtime.field(bufferView, 'byteLength')));
       return cast _Runtime.callValue(createEmbeddedTextureRef, cast ([bytes, _Runtime.coalesce(_Runtime.field(image, 'mimeType'), function():Dynamic return cast _Runtime.callValue(detectImageMimeType, cast ([bytes] : Array<Dynamic>)))] : Array<Dynamic>));
@@ -509,7 +509,7 @@ class GltfParse {
 
   public static function packGltfLinearColor__gltfParse(factor:Array<Float>, channels:Float):Float {
     var a:Dynamic = cast _Runtime.UNDEFINED;
-    a = _Runtime.select(_Runtime.strictEquals(channels, 4.0), function():Dynamic return cast _Runtime.coalesce(_Runtime.getIndex(factor, 3.0), function():Dynamic return cast 0.0), function():Dynamic return cast 1.0);
+    a = ((cast _Runtime.strictEquals(channels, 4.0) : Bool) ? (cast _Runtime.coalesce(_Runtime.getIndex(factor, 3.0), function():Dynamic return cast 0.0) : Dynamic) : (cast 1.0 : Dynamic));
     return cast _Runtime.callValue(packLinearToColor, cast ([cast ([_Runtime.coalesce(_Runtime.getIndex(factor, 0.0), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.getIndex(factor, 1.0), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.getIndex(factor, 2.0), function():Dynamic return cast 0.0), a] : Array<Dynamic>)] : Array<Dynamic>));
     return cast null;
   }
@@ -519,17 +519,17 @@ class GltfParse {
     var comma:Dynamic = cast _Runtime.UNDEFINED;
     var supplied:Dynamic = cast _Runtime.UNDEFINED;
     uri = _Runtime.field(buffer, 'uri');
-    if (_Runtime.truthy(_Runtime.strictEquals(uri, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      if (_Runtime.truthy(!_Runtime.strictEquals(binary, null))) { return cast (cast binary : flighthq._internal._UInt8Array); }
+    if ((cast _Runtime.strictEquals(uri, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      if ((cast !_Runtime.strictEquals(binary, null) : Bool)) { return cast (cast binary : flighthq._internal._UInt8Array); }
       _Runtime.callOptionalProperty(warnings, 'push', cast (['decodeGltfBuffer: buffer has no uri and no GLB binary chunk; returning empty buffer'] : Array<Dynamic>));
       return cast new flighthq._internal._UInt8Array(0.0);
     }
     comma = _Runtime.callProperty(uri, 'indexOf', cast ([','] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.andValue(StringTools.startsWith(uri, 'data:'), function():Dynamic return cast _Runtime.compare(comma, 0.0, '>=')))) {
+    if ((cast ((cast StringTools.startsWith(uri, 'data:') : Bool) && (cast ((cast comma : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) {
       return cast _Runtime.callValue(GltfParse.decodeBase64__gltfParse, cast ([_Runtime.slice(uri, (comma + 1.0), null)] : Array<Dynamic>));
     }
     supplied = _Runtime.optionalIndex(_Runtime.optionalField(options, 'externalBuffers'), uri);
-    if (_Runtime.truthy(!_Runtime.strictEquals(supplied, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast _Runtime.callProperty(_Runtime.globalValue('Uint8Array'), 'from', cast ([supplied] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(supplied, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast _Runtime.callProperty(_Runtime.globalValue('Uint8Array'), 'from', cast ([supplied] : Array<Dynamic>)); }
     _Runtime.callOptionalProperty(warnings, 'push', cast (['decodeGltfBuffer: external buffer \'' + Std.string(uri) + '\' was not supplied via options.externalBuffers; returning empty buffer'] : Array<Dynamic>));
     return cast new flighthq._internal._UInt8Array(0.0);
     return cast null;
@@ -544,15 +544,15 @@ class GltfParse {
     out = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(stripped, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(stripped, 'length') : Float)) : Bool)) {
         var c0:Dynamic = _Runtime.callProperty(table, 'indexOf', cast ([_Runtime.getIndex(stripped, i)] : Array<Dynamic>));
         var c1:Dynamic = _Runtime.callProperty(table, 'indexOf', cast ([_Runtime.getIndex(stripped, (i + 1.0))] : Array<Dynamic>));
-        var c2:Dynamic = _Runtime.select(_Runtime.compare((i + 2.0), _Runtime.field(stripped, 'length'), '<'), function():Dynamic return cast _Runtime.callProperty(table, 'indexOf', cast ([_Runtime.getIndex(stripped, (i + 2.0))] : Array<Dynamic>)), function():Dynamic return cast -1.0);
-        var c3:Dynamic = _Runtime.select(_Runtime.compare((i + 3.0), _Runtime.field(stripped, 'length'), '<'), function():Dynamic return cast _Runtime.callProperty(table, 'indexOf', cast ([_Runtime.getIndex(stripped, (i + 3.0))] : Array<Dynamic>)), function():Dynamic return cast -1.0);
-        var n:Dynamic = (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(c0) << 18)) | _Runtime.toInt32((_Runtime.toInt32(c1) << 12)))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.select(_Runtime.compare(c2, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast c2)) << 6)))) | _Runtime.toInt32(_Runtime.select(_Runtime.compare(c3, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast c3)));
+        var c2:Dynamic = ((cast ((cast (i + 2.0) : Float) < (cast _Runtime.field(stripped, 'length') : Float)) : Bool) ? (cast _Runtime.callProperty(table, 'indexOf', cast ([_Runtime.getIndex(stripped, (i + 2.0))] : Array<Dynamic>)) : Dynamic) : (cast -1.0 : Dynamic));
+        var c3:Dynamic = ((cast ((cast (i + 3.0) : Float) < (cast _Runtime.field(stripped, 'length') : Float)) : Bool) ? (cast _Runtime.callProperty(table, 'indexOf', cast ([_Runtime.getIndex(stripped, (i + 3.0))] : Array<Dynamic>)) : Dynamic) : (cast -1.0 : Dynamic));
+        var n:Dynamic = (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(c0) << 18)) | _Runtime.toInt32((_Runtime.toInt32(c1) << 12)))) | _Runtime.toInt32((_Runtime.toInt32(((cast ((cast c2 : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast c2 : Dynamic))) << 6)))) | _Runtime.toInt32(((cast ((cast c3 : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast c3 : Dynamic))));
         _Runtime.callProperty(out, 'push', cast ([(_Runtime.toInt32((_Runtime.toInt32(n) >> 16)) & 255)] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.compare(c2, 0.0, '>='))) { _Runtime.callProperty(out, 'push', cast ([(_Runtime.toInt32((_Runtime.toInt32(n) >> 8)) & 255)] : Array<Dynamic>)); }
-        if (_Runtime.truthy(_Runtime.compare(c3, 0.0, '>='))) { _Runtime.callProperty(out, 'push', cast ([(_Runtime.toInt32(n) & 255)] : Array<Dynamic>)); }
+        if ((cast ((cast c2 : Float) >= (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([(_Runtime.toInt32((_Runtime.toInt32(n) >> 8)) & 255)] : Array<Dynamic>)); }
+        if ((cast ((cast c3 : Float) >= (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([(_Runtime.toInt32(n) & 255)] : Array<Dynamic>)); }
         (i = cast ((i + 4.0) : Dynamic));
       }
     }
@@ -603,47 +603,47 @@ class GltfParse {
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var vertices:Dynamic = cast _Runtime.UNDEFINED;
     var indices:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(primitive, 'mode'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(primitive, 'mode'), 4.0)))) {
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(primitive, 'mode'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(primitive, 'mode'), 4.0) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['primitiveToGeometry: primitive mode ' + Std.string(_Runtime.field(primitive, 'mode')) + ' is not triangles (4); geometry imported as-is'] : Array<Dynamic>));
     }
     positionIndex = _Runtime.field(_Runtime.field(primitive, 'attributes'), 'POSITION');
-    if (_Runtime.truthy(_Runtime.strictEquals(positionIndex, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(positionIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['primitiveToGeometry: primitive has no POSITION attribute; returning empty geometry'] : Array<Dynamic>));
       return cast _Runtime.callValue(createMeshGeometry, cast ([{ layout: CANONICAL_LAYOUT, vertices: new flighthq._internal._Float32Array(0.0) }] : Array<Dynamic>));
     }
     position = _Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, positionIndex, warnings] : Array<Dynamic>));
     vertexCount = _Runtime.field(position, 'count');
-    normal = _Runtime.select(!_Runtime.strictEquals(_Runtime.field(_Runtime.field(primitive, 'attributes'), 'NORMAL'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, _Runtime.field(_Runtime.field(primitive, 'attributes'), 'NORMAL'), warnings] : Array<Dynamic>)), function():Dynamic return cast null);
-    tangent = _Runtime.select(!_Runtime.strictEquals(_Runtime.field(_Runtime.field(primitive, 'attributes'), 'TANGENT'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, _Runtime.field(_Runtime.field(primitive, 'attributes'), 'TANGENT'), warnings] : Array<Dynamic>)), function():Dynamic return cast null);
-    uv = _Runtime.select(!_Runtime.strictEquals(_Runtime.field(_Runtime.field(primitive, 'attributes'), 'TEXCOORD_0'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, _Runtime.field(_Runtime.field(primitive, 'attributes'), 'TEXCOORD_0'), warnings] : Array<Dynamic>)), function():Dynamic return cast null);
-    joints = _Runtime.select(!_Runtime.strictEquals(_Runtime.field(_Runtime.field(primitive, 'attributes'), 'JOINTS_0'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, _Runtime.field(_Runtime.field(primitive, 'attributes'), 'JOINTS_0'), warnings] : Array<Dynamic>)), function():Dynamic return cast null);
-    weights = _Runtime.select(!_Runtime.strictEquals(_Runtime.field(_Runtime.field(primitive, 'attributes'), 'WEIGHTS_0'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, _Runtime.field(_Runtime.field(primitive, 'attributes'), 'WEIGHTS_0'), warnings] : Array<Dynamic>)), function():Dynamic return cast null);
-    skinned = _Runtime.andValue(!_Runtime.strictEquals(joints, null), function():Dynamic return cast !_Runtime.strictEquals(weights, null));
-    floatsPerVertex = _Runtime.select(skinned, function():Dynamic return cast SKINNED_FLOATS_PER_VERTEX, function():Dynamic return cast CANONICAL_FLOATS_PER_VERTEX);
+    normal = ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(primitive, 'attributes'), 'NORMAL'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, _Runtime.field(_Runtime.field(primitive, 'attributes'), 'NORMAL'), warnings] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
+    tangent = ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(primitive, 'attributes'), 'TANGENT'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, _Runtime.field(_Runtime.field(primitive, 'attributes'), 'TANGENT'), warnings] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
+    uv = ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(primitive, 'attributes'), 'TEXCOORD_0'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, _Runtime.field(_Runtime.field(primitive, 'attributes'), 'TEXCOORD_0'), warnings] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
+    joints = ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(primitive, 'attributes'), 'JOINTS_0'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, _Runtime.field(_Runtime.field(primitive, 'attributes'), 'JOINTS_0'), warnings] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
+    weights = ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(primitive, 'attributes'), 'WEIGHTS_0'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, _Runtime.field(_Runtime.field(primitive, 'attributes'), 'WEIGHTS_0'), warnings] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
+    skinned = ((cast !_Runtime.strictEquals(joints, null) : Bool) && (cast !_Runtime.strictEquals(weights, null) : Bool));
+    floatsPerVertex = ((cast skinned : Bool) ? (cast SKINNED_FLOATS_PER_VERTEX : Dynamic) : (cast CANONICAL_FLOATS_PER_VERTEX : Dynamic));
     vertices = new flighthq._internal._Float32Array((vertexCount * floatsPerVertex));
     {
       var v:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(v, vertexCount, '<'))) {
+      while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
         var o:Dynamic = (v * floatsPerVertex);
         _Runtime.setIndex(vertices, o, _Runtime.getIndex(_Runtime.field(position, 'data'), (v * 3.0)));
         _Runtime.setIndex(vertices, (o + 1.0), _Runtime.getIndex(_Runtime.field(position, 'data'), ((v * 3.0) + 1.0)));
         _Runtime.setIndex(vertices, (o + 2.0), _Runtime.getIndex(_Runtime.field(position, 'data'), ((v * 3.0) + 2.0)));
-        if (_Runtime.truthy(!_Runtime.strictEquals(normal, null))) {
+        if ((cast !_Runtime.strictEquals(normal, null) : Bool)) {
           _Runtime.setIndex(vertices, (o + 3.0), _Runtime.getIndex(_Runtime.field(normal, 'data'), (v * 3.0)));
           _Runtime.setIndex(vertices, (o + 4.0), _Runtime.getIndex(_Runtime.field(normal, 'data'), ((v * 3.0) + 1.0)));
           _Runtime.setIndex(vertices, (o + 5.0), _Runtime.getIndex(_Runtime.field(normal, 'data'), ((v * 3.0) + 2.0)));
         }
-        if (_Runtime.truthy(!_Runtime.strictEquals(tangent, null))) {
+        if ((cast !_Runtime.strictEquals(tangent, null) : Bool)) {
           _Runtime.setIndex(vertices, (o + 6.0), _Runtime.getIndex(_Runtime.field(tangent, 'data'), (v * 4.0)));
           _Runtime.setIndex(vertices, (o + 7.0), _Runtime.getIndex(_Runtime.field(tangent, 'data'), ((v * 4.0) + 1.0)));
           _Runtime.setIndex(vertices, (o + 8.0), _Runtime.getIndex(_Runtime.field(tangent, 'data'), ((v * 4.0) + 2.0)));
           _Runtime.setIndex(vertices, (o + 9.0), _Runtime.getIndex(_Runtime.field(tangent, 'data'), ((v * 4.0) + 3.0)));
         }
-        if (_Runtime.truthy(!_Runtime.strictEquals(uv, null))) {
+        if ((cast !_Runtime.strictEquals(uv, null) : Bool)) {
           _Runtime.setIndex(vertices, (o + 10.0), _Runtime.getIndex(_Runtime.field(uv, 'data'), (v * 2.0)));
           _Runtime.setIndex(vertices, (o + 11.0), _Runtime.getIndex(_Runtime.field(uv, 'data'), ((v * 2.0) + 1.0)));
         }
-        if (_Runtime.truthy(skinned)) {
+        if ((cast skinned : Bool)) {
           _Runtime.setIndex(vertices, (o + 12.0), _Runtime.getIndex(_Runtime.field(joints, 'data'), (v * 4.0)));
           _Runtime.setIndex(vertices, (o + 13.0), _Runtime.getIndex(_Runtime.field(joints, 'data'), ((v * 4.0) + 1.0)));
           _Runtime.setIndex(vertices, (o + 14.0), _Runtime.getIndex(_Runtime.field(joints, 'data'), ((v * 4.0) + 2.0)));
@@ -653,7 +653,7 @@ class GltfParse {
           var w2:Dynamic = _Runtime.getIndex(_Runtime.field(weights, 'data'), ((v * 4.0) + 2.0));
           var w3:Dynamic = _Runtime.getIndex(_Runtime.field(weights, 'data'), ((v * 4.0) + 3.0));
           var sum:Dynamic = (((w0 + w1) + w2) + w3);
-          var inv:Dynamic = _Runtime.select(_Runtime.compare(sum, 0.0, '>'), function():Dynamic return cast (1.0 / sum), function():Dynamic return cast 0.0);
+          var inv:Dynamic = ((cast ((cast sum : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / sum) : Dynamic) : (cast 0.0 : Dynamic));
           _Runtime.setIndex(vertices, (o + 16.0), (w0 * inv));
           _Runtime.setIndex(vertices, (o + 17.0), (w1 * inv));
           _Runtime.setIndex(vertices, (o + 18.0), (w2 * inv));
@@ -662,8 +662,8 @@ class GltfParse {
         v++;
       }
     }
-    indices = _Runtime.select(!_Runtime.strictEquals(_Runtime.field(primitive, 'indices'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([_Runtime.field(_Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, _Runtime.field(primitive, 'indices'), warnings] : Array<Dynamic>)), 'data')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
-    return cast _Runtime.callValue(createMeshGeometry, cast ([{ indices: indices, layout: _Runtime.select(skinned, function():Dynamic return cast CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT, function():Dynamic return cast CANONICAL_LAYOUT), vertices: vertices }] : Array<Dynamic>));
+    indices = ((cast !_Runtime.strictEquals(_Runtime.field(primitive, 'indices'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([_Runtime.field(_Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, _Runtime.field(primitive, 'indices'), warnings] : Array<Dynamic>)), 'data')] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+    return cast _Runtime.callValue(createMeshGeometry, cast ([{ indices: indices, layout: ((cast skinned : Bool) ? (cast CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT : Dynamic) : (cast CANONICAL_LAYOUT : Dynamic)), vertices: vertices }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -672,30 +672,30 @@ class GltfParse {
     var targets:Array<MorphTarget> = cast _Runtime.UNDEFINED;
     var weights:Dynamic = cast _Runtime.UNDEFINED;
     gltfTargets = _Runtime.field(primitive, 'targets');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(gltfTargets, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(gltfTargets, 'length'), 0.0)))) { return cast null; }
+    if ((cast ((cast _Runtime.strictEquals(gltfTargets, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(gltfTargets, 'length'), 0.0) : Bool)) : Bool)) { return cast null; }
     targets = cast ([] : Array<Dynamic>);
     {
       var t:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(t, _Runtime.field(gltfTargets, 'length'), '<'))) {
+      while ((cast ((cast t : Float) < (cast _Runtime.field(gltfTargets, 'length') : Float)) : Bool)) {
         var target:GltfMorphTarget = _Runtime.getIndex(gltfTargets, t);
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(target, 'POSITION'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+        if ((cast _Runtime.strictEquals(_Runtime.field(target, 'POSITION'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           _Runtime.callOptionalProperty(warnings, 'push', cast (['buildGltfMorph: morph target ' + Std.string(t) + ' has no POSITION delta; skipped'] : Array<Dynamic>));
           t++;
           continue;
         }
         var positionDeltas:Dynamic = _Runtime.callProperty(_Runtime.globalValue('Float32Array'), 'from', cast ([_Runtime.field(_Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, _Runtime.field(target, 'POSITION'), warnings] : Array<Dynamic>)), 'data')] : Array<Dynamic>));
-        var normalDeltas:Dynamic = _Runtime.select(!_Runtime.strictEquals(_Runtime.field(target, 'NORMAL'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callProperty(_Runtime.globalValue('Float32Array'), 'from', cast ([_Runtime.field(_Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, _Runtime.field(target, 'NORMAL'), warnings] : Array<Dynamic>)), 'data')] : Array<Dynamic>)), function():Dynamic return cast null);
-        var tangentDeltas:Dynamic = _Runtime.select(!_Runtime.strictEquals(_Runtime.field(target, 'TANGENT'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callProperty(_Runtime.globalValue('Float32Array'), 'from', cast ([_Runtime.field(_Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, _Runtime.field(target, 'TANGENT'), warnings] : Array<Dynamic>)), 'data')] : Array<Dynamic>)), function():Dynamic return cast null);
+        var normalDeltas:Dynamic = ((cast !_Runtime.strictEquals(_Runtime.field(target, 'NORMAL'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callProperty(_Runtime.globalValue('Float32Array'), 'from', cast ([_Runtime.field(_Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, _Runtime.field(target, 'NORMAL'), warnings] : Array<Dynamic>)), 'data')] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
+        var tangentDeltas:Dynamic = ((cast !_Runtime.strictEquals(_Runtime.field(target, 'TANGENT'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callProperty(_Runtime.globalValue('Float32Array'), 'from', cast ([_Runtime.field(_Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, _Runtime.field(target, 'TANGENT'), warnings] : Array<Dynamic>)), 'data')] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
         _Runtime.callProperty(targets, 'push', cast ([{ normalDeltas: normalDeltas, positionDeltas: positionDeltas, tangentDeltas: tangentDeltas }] : Array<Dynamic>));
         t++;
       }
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(targets, 'length'), 0.0))) { return cast null; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(targets, 'length'), 0.0) : Bool)) { return cast null; }
     weights = new flighthq._internal._Float32Array(_Runtime.field(targets, 'length'));
-    if (_Runtime.truthy(!_Runtime.strictEquals(meshWeights, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(meshWeights, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(i, _Runtime.field(weights, 'length'), '<'), function():Dynamic return cast _Runtime.compare(i, _Runtime.field(meshWeights, 'length'), '<')))) {
+        while ((cast ((cast ((cast i : Float) < (cast _Runtime.field(weights, 'length') : Float)) : Bool) && (cast ((cast i : Float) < (cast _Runtime.field(meshWeights, 'length') : Float)) : Bool)) : Bool)) {
           _Runtime.setIndex(weights, i, _Runtime.getIndex(meshWeights, i));
           i++;
         }
@@ -715,52 +715,52 @@ class GltfParse {
     var bufferViewIndex:Dynamic = cast _Runtime.UNDEFINED;
     var view:Dynamic = cast _Runtime.UNDEFINED;
     accessor = _Runtime.optionalIndex(_Runtime.field(doc, 'accessors'), accessorIndex);
-    if (_Runtime.truthy(_Runtime.strictEquals(accessor, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(accessor, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['readAccessor: accessor ' + Std.string(accessorIndex) + ' not found in document'] : Array<Dynamic>));
       return cast { count: 0.0, data: new flighthq._internal._Float32Array(0.0) };
     }
     componentCount = _Runtime.getIndex(GltfParse.TYPE_COMPONENTS__gltfParse, _Runtime.field(accessor, 'type'));
     componentByteSize = _Runtime.getIndex(GltfParse.COMPONENT_BYTE_SIZE__gltfParse, _Runtime.field(accessor, 'componentType'));
-    normalize = _Runtime.andValue(_Runtime.strictEquals(_Runtime.field(accessor, 'normalized'), true), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(accessor, 'componentType'), 5126.0));
+    normalize = ((cast _Runtime.strictEquals(_Runtime.field(accessor, 'normalized'), true) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(accessor, 'componentType'), 5126.0) : Bool));
     total = (_Runtime.field(accessor, 'count') * componentCount);
-    out = _Runtime.select(normalize, function():Dynamic return cast new flighthq._internal._Float32Array(total), function():Dynamic return cast _Runtime.callValue(GltfParse.createComponentArray__gltfParse, cast ([_Runtime.field(accessor, 'componentType'), total] : Array<Dynamic>)));
+    out = ((cast normalize : Bool) ? (cast new flighthq._internal._Float32Array(total) : Dynamic) : (cast _Runtime.callValue(GltfParse.createComponentArray__gltfParse, cast ([_Runtime.field(accessor, 'componentType'), total] : Array<Dynamic>)) : Dynamic));
     bufferViewIndex = _Runtime.coalesce(_Runtime.field(accessor, 'bufferView'), function():Dynamic return cast -1.0);
-    view = _Runtime.select(_Runtime.compare(bufferViewIndex, 0.0, '>='), function():Dynamic return cast _Runtime.optionalIndex(_Runtime.field(doc, 'bufferViews'), bufferViewIndex), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
-    if (_Runtime.truthy(!_Runtime.strictEquals(view, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    view = ((cast ((cast bufferViewIndex : Float) >= (cast 0.0 : Float)) : Bool) ? (cast _Runtime.optionalIndex(_Runtime.field(doc, 'bufferViews'), bufferViewIndex) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+    if ((cast !_Runtime.strictEquals(view, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var bytes:Dynamic = _Runtime.getIndex(buffers, _Runtime.field(view, 'buffer'));
-      if (_Runtime.truthy(_Runtime.strictEquals(bytes, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+      if ((cast _Runtime.strictEquals(bytes, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         _Runtime.callOptionalProperty(warnings, 'push', cast (['readAccessor: buffer ' + Std.string(_Runtime.field(view, 'buffer')) + ' not found for accessor ' + Std.string(accessorIndex) + ''] : Array<Dynamic>));
         return cast { count: 0.0, data: new flighthq._internal._Float32Array(0.0) };
       }
       var elementByteSize:Dynamic = (componentCount * componentByteSize);
-      var stride:Dynamic = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(view, 'byteStride'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.compare(_Runtime.field(view, 'byteStride'), 0.0, '>')), function():Dynamic return cast _Runtime.field(view, 'byteStride'), function():Dynamic return cast elementByteSize);
+      var stride:Dynamic = ((cast ((cast !_Runtime.strictEquals(_Runtime.field(view, 'byteStride'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(view, 'byteStride') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.field(view, 'byteStride') : Dynamic) : (cast elementByteSize : Dynamic));
       var baseOffset:Dynamic = ((_Runtime.field(bytes, 'byteOffset') + _Runtime.coalesce(_Runtime.field(view, 'byteOffset'), function():Dynamic return cast 0.0)) + _Runtime.coalesce(_Runtime.field(accessor, 'byteOffset'), function():Dynamic return cast 0.0));
-      var lastByteEnd:Dynamic = _Runtime.select(_Runtime.compare(_Runtime.field(accessor, 'count'), 0.0, '>'), function():Dynamic return cast ((baseOffset + ((_Runtime.field(accessor, 'count') - 1.0) * stride)) + elementByteSize), function():Dynamic return cast baseOffset);
-      if (_Runtime.truthy(_Runtime.compare(lastByteEnd, (_Runtime.field(bytes, 'byteOffset') + _Runtime.field(bytes, 'byteLength')), '>'))) {
+      var lastByteEnd:Dynamic = ((cast ((cast _Runtime.field(accessor, 'count') : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((baseOffset + ((_Runtime.field(accessor, 'count') - 1.0) * stride)) + elementByteSize) : Dynamic) : (cast baseOffset : Dynamic));
+      if ((cast ((cast lastByteEnd : Float) > (cast (_Runtime.field(bytes, 'byteOffset') + _Runtime.field(bytes, 'byteLength')) : Float)) : Bool)) {
         _Runtime.callOptionalProperty(warnings, 'push', cast (['readAccessor: accessor ' + Std.string(accessorIndex) + ' runs past its buffer; returning empty'] : Array<Dynamic>));
         return cast { count: 0.0, data: new flighthq._internal._Float32Array(0.0) };
       }
       var dataView:Dynamic = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(bytes, 'buffer')]);
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(accessor, 'count'), '<'))) {
+        while ((cast ((cast i : Float) < (cast _Runtime.field(accessor, 'count') : Float)) : Bool)) {
           var elementOffset:Dynamic = (baseOffset + (i * stride));
           {
             var c:Dynamic = 0.0;
-            while (_Runtime.truthy(_Runtime.compare(c, componentCount, '<'))) {
+            while ((cast ((cast c : Float) < (cast componentCount : Float)) : Bool)) {
               var raw:Dynamic = _Runtime.callValue(GltfParse.readComponent__gltfParse, cast ([dataView, _Runtime.field(accessor, 'componentType'), (elementOffset + (c * componentByteSize))] : Array<Dynamic>));
-              _Runtime.setIndex(out, ((i * componentCount) + c), _Runtime.select(normalize, function():Dynamic return cast _Runtime.callValue(GltfParse.normalizeComponent__gltfParse, cast ([_Runtime.field(accessor, 'componentType'), raw] : Array<Dynamic>)), function():Dynamic return cast raw));
+              _Runtime.setIndex(out, ((i * componentCount) + c), ((cast normalize : Bool) ? (cast _Runtime.callValue(GltfParse.normalizeComponent__gltfParse, cast ([_Runtime.field(accessor, 'componentType'), raw] : Array<Dynamic>)) : Dynamic) : (cast raw : Dynamic)));
               c++;
             }
           }
           i++;
         }
       }
-    } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(accessor, 'sparse'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    } else { if ((cast _Runtime.strictEquals(_Runtime.field(accessor, 'sparse'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['readAccessor: bufferView ' + Std.string(bufferViewIndex) + ' not found for accessor ' + Std.string(accessorIndex) + ''] : Array<Dynamic>));
       return cast { count: 0.0, data: new flighthq._internal._Float32Array(0.0) };
     } }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(accessor, 'sparse'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(accessor, 'sparse'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callValue(GltfParse.applyAccessorSparse__gltfParse, cast ([doc, buffers, _Runtime.field(accessor, 'sparse'), _Runtime.field(accessor, 'componentType'), componentCount, normalize, out, warnings] : Array<Dynamic>));
     }
     return cast { count: _Runtime.field(accessor, 'count'), data: out };
@@ -780,13 +780,13 @@ class GltfParse {
     var valueBase:Dynamic = cast _Runtime.UNDEFINED;
     indicesView = _Runtime.optionalIndex(_Runtime.field(doc, 'bufferViews'), _Runtime.field(_Runtime.field(sparse, 'indices'), 'bufferView'));
     valuesView = _Runtime.optionalIndex(_Runtime.field(doc, 'bufferViews'), _Runtime.field(_Runtime.field(sparse, 'values'), 'bufferView'));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(indicesView, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(valuesView, _Runtime.field(_Runtime, 'UNDEFINED'))))) {
+    if ((cast ((cast _Runtime.strictEquals(indicesView, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(valuesView, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['applyAccessorSparse: sparse indices or values bufferView not found; sparse override skipped'] : Array<Dynamic>));
       return;
     }
     indexBytes = _Runtime.getIndex(buffers, _Runtime.field(indicesView, 'buffer'));
     valueBytes = _Runtime.getIndex(buffers, _Runtime.field(valuesView, 'buffer'));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(indexBytes, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(valueBytes, _Runtime.field(_Runtime, 'UNDEFINED'))))) {
+    if ((cast ((cast _Runtime.strictEquals(indexBytes, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(valueBytes, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['applyAccessorSparse: sparse indices or values buffer not found; sparse override skipped'] : Array<Dynamic>));
       return;
     }
@@ -798,13 +798,13 @@ class GltfParse {
     valueBase = ((_Runtime.field(valueBytes, 'byteOffset') + _Runtime.coalesce(_Runtime.field(valuesView, 'byteOffset'), function():Dynamic return cast 0.0)) + _Runtime.coalesce(_Runtime.field(_Runtime.field(sparse, 'values'), 'byteOffset'), function():Dynamic return cast 0.0));
     {
       var s:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(s, _Runtime.field(sparse, 'count'), '<'))) {
+      while ((cast ((cast s : Float) < (cast _Runtime.field(sparse, 'count') : Float)) : Bool)) {
         var targetIndex:Dynamic = _Runtime.callValue(GltfParse.readComponent__gltfParse, cast ([indexView, _Runtime.field(_Runtime.field(sparse, 'indices'), 'componentType'), (indexBase + (s * indexSize))] : Array<Dynamic>));
         {
           var c:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(c, componentCount, '<'))) {
+          while ((cast ((cast c : Float) < (cast componentCount : Float)) : Bool)) {
             var raw:Dynamic = _Runtime.callValue(GltfParse.readComponent__gltfParse, cast ([valueView, valueComponentType, (valueBase + (((s * componentCount) + c) * valueSize))] : Array<Dynamic>));
-            _Runtime.setIndex(out, ((targetIndex * componentCount) + c), _Runtime.select(normalize, function():Dynamic return cast _Runtime.callValue(GltfParse.normalizeComponent__gltfParse, cast ([valueComponentType, raw] : Array<Dynamic>)), function():Dynamic return cast raw));
+            _Runtime.setIndex(out, ((targetIndex * componentCount) + c), ((cast normalize : Bool) ? (cast _Runtime.callValue(GltfParse.normalizeComponent__gltfParse, cast ([valueComponentType, raw] : Array<Dynamic>)) : Dynamic) : (cast raw : Dynamic)));
             c++;
           }
         }
@@ -847,18 +847,18 @@ class GltfParse {
     var document:Null<GltfDocument> = cast _Runtime.UNDEFINED;
     var binary:Null<flighthq._internal._UInt8Array> = cast _Runtime.UNDEFINED;
     var offset:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(bytes, 'byteLength'), GltfParse.GLB_HEADER_BYTES__gltfParse, '<'))) {
+    if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast GltfParse.GLB_HEADER_BYTES__gltfParse : Float)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromGlb: byte length is smaller than the 12-byte GLB header'] : Array<Dynamic>));
       return cast null;
     }
     source = (cast bytes : flighthq._internal._UInt8Array);
     view = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(source, 'buffer'), _Runtime.field(source, 'byteOffset'), _Runtime.field(source, 'byteLength')]);
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.callProperty(view, 'getUint32', cast ([0.0, true] : Array<Dynamic>)), GltfParse.GLB_MAGIC__gltfParse))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.callProperty(view, 'getUint32', cast ([0.0, true] : Array<Dynamic>)), GltfParse.GLB_MAGIC__gltfParse) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromGlb: magic is not \'glTF\'; not a GLB container'] : Array<Dynamic>));
       return cast null;
     }
     version = _Runtime.callProperty(view, 'getUint32', cast ([4.0, true] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(version, 2.0))) {
+    if ((cast !_Runtime.strictEquals(version, 2.0) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromGlb: unsupported GLB container version ' + Std.string(version) + ' (expected 2)'] : Array<Dynamic>));
       return cast null;
     }
@@ -867,16 +867,16 @@ class GltfParse {
     document = null;
     binary = null;
     offset = GltfParse.GLB_HEADER_BYTES__gltfParse;
-    while (_Runtime.truthy(_Runtime.compare((offset + GltfParse.GLB_CHUNK_HEADER_BYTES__gltfParse), end, '<='))) {
+    while ((cast ((cast (offset + GltfParse.GLB_CHUNK_HEADER_BYTES__gltfParse) : Float) <= (cast end : Float)) : Bool)) {
       var chunkLength:Dynamic = _Runtime.callProperty(view, 'getUint32', cast ([offset, true] : Array<Dynamic>));
       var chunkType:Dynamic = _Runtime.callProperty(view, 'getUint32', cast ([(offset + 4.0), true] : Array<Dynamic>));
       var dataStart:Dynamic = (offset + GltfParse.GLB_CHUNK_HEADER_BYTES__gltfParse);
-      if (_Runtime.truthy(_Runtime.compare((dataStart + chunkLength), end, '>'))) {
+      if ((cast ((cast (dataStart + chunkLength) : Float) > (cast end : Float)) : Bool)) {
         _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromGlb: chunk length runs past the end of the container'] : Array<Dynamic>));
         break;
       }
       var chunkData:Dynamic = (cast source : flighthq._internal._UInt8Array).subarray(Std.int(dataStart), Std.int((dataStart + chunkLength)));
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(chunkType, GltfParse.GLB_JSON_CHUNK__gltfParse), function():Dynamic return cast _Runtime.strictEquals(document, null)))) {
+      if ((cast ((cast _Runtime.strictEquals(chunkType, GltfParse.GLB_JSON_CHUNK__gltfParse) : Bool) && (cast _Runtime.strictEquals(document, null) : Bool)) : Bool)) {
         var json:Dynamic = _Runtime.callProperty(_Runtime.construct(_Runtime.globalValue('TextDecoder'), []), 'decode', cast ([chunkData] : Array<Dynamic>));
         try {
           (document = cast ((cast _Runtime.jsonParse(json) : GltfDocument) : Dynamic));
@@ -884,12 +884,12 @@ class GltfParse {
           _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromGlb: JSON chunk is not valid JSON'] : Array<Dynamic>));
           return cast null;
         }
-      } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(chunkType, GltfParse.GLB_BIN_CHUNK__gltfParse), function():Dynamic return cast _Runtime.strictEquals(binary, null)))) {
+      } else { if ((cast ((cast _Runtime.strictEquals(chunkType, GltfParse.GLB_BIN_CHUNK__gltfParse) : Bool) && (cast _Runtime.strictEquals(binary, null) : Bool)) : Bool)) {
         (binary = cast (chunkData : Dynamic));
       } }
       (offset = cast ((dataStart + chunkLength) : Dynamic));
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(document, null))) {
+    if ((cast _Runtime.strictEquals(document, null) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromGlb: no JSON chunk found in the container'] : Array<Dynamic>));
       return cast null;
     }
@@ -902,13 +902,13 @@ class GltfParse {
     var roots:Array<Float> = cast _Runtime.UNDEFINED;
     referenced = _Runtime.construct(_Runtime.globalValue('Set'), []);
     for (node in _Runtime.iterable(nodes)) {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(node, 'children'), _Runtime.field(_Runtime, 'UNDEFINED')))) { for (c in _Runtime.iterable(_Runtime.field(node, 'children'))) {   ((cast referenced : flighthq._internal._Set).add(c)); } }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(node, 'children'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { for (c in _Runtime.iterable(_Runtime.field(node, 'children'))) {   ((cast referenced : flighthq._internal._Set).add(c)); } }
     }
     roots = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(nodes, 'length'), '<'))) {
-        if (_Runtime.truthy(!_Runtime.truthy(((cast referenced : flighthq._internal._Set).has(i))))) { _Runtime.callProperty(roots, 'push', cast ([i] : Array<Dynamic>)); }
+      while ((cast ((cast i : Float) < (cast _Runtime.field(nodes, 'length') : Float)) : Bool)) {
+        if ((cast !(cast ((cast referenced : flighthq._internal._Set).has(i)) : Bool) : Bool)) { _Runtime.callProperty(roots, 'push', cast ([i] : Array<Dynamic>)); }
         i++;
       }
     }

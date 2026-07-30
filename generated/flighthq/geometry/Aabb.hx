@@ -18,7 +18,7 @@ class Aabb {
   }
 
   public static function containsAabbPoint(aabb:AabbLike, point:Vector3Like):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(point.x, aabb.min.x, '>='), function():Dynamic return cast _Runtime.compare(point.x, aabb.max.x, '<=')), function():Dynamic return cast _Runtime.compare(point.y, aabb.min.y, '>=')), function():Dynamic return cast _Runtime.compare(point.y, aabb.max.y, '<=')), function():Dynamic return cast _Runtime.compare(point.z, aabb.min.z, '>=')), function():Dynamic return cast _Runtime.compare(point.z, aabb.max.z, '<='));
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast point.x : Float) >= (cast aabb.min.x : Float)) : Bool) && (cast ((cast point.x : Float) <= (cast aabb.max.x : Float)) : Bool)) : Bool) && (cast ((cast point.y : Float) >= (cast aabb.min.y : Float)) : Bool)) : Bool) && (cast ((cast point.y : Float) <= (cast aabb.max.y : Float)) : Bool)) : Bool) && (cast ((cast point.z : Float) >= (cast aabb.min.z : Float)) : Bool)), function():Dynamic return cast ((cast point.z : Float) <= (cast aabb.max.z : Float)));
     return cast null;
   }
 
@@ -60,7 +60,7 @@ class Aabb {
     var cy:Dynamic = cast _Runtime.UNDEFINED;
     var cz:Dynamic = cast _Runtime.UNDEFINED;
     var r:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(sphere.radius, 0.0, '<'))) {
+    if ((cast ((cast sphere.radius : Float) < (cast 0.0 : Float)) : Bool)) {
       (out.min.x = cast (aabb.min.x : Dynamic));
       (out.min.y = cast (aabb.min.y : Dynamic));
       (out.min.z = cast (aabb.min.z : Dynamic));
@@ -145,7 +145,7 @@ class Aabb {
   }
 
   public static function isAabbIntersectingAabb(a:AabbLike, b:AabbLike):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(a.min.x, b.max.x, '<='), function():Dynamic return cast _Runtime.compare(a.max.x, b.min.x, '>=')), function():Dynamic return cast _Runtime.compare(a.min.y, b.max.y, '<=')), function():Dynamic return cast _Runtime.compare(a.max.y, b.min.y, '>=')), function():Dynamic return cast _Runtime.compare(a.min.z, b.max.z, '<=')), function():Dynamic return cast _Runtime.compare(a.max.z, b.min.z, '>='));
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast a.min.x : Float) <= (cast b.max.x : Float)) : Bool) && (cast ((cast a.max.x : Float) >= (cast b.min.x : Float)) : Bool)) : Bool) && (cast ((cast a.min.y : Float) <= (cast b.max.y : Float)) : Bool)) : Bool) && (cast ((cast a.max.y : Float) >= (cast b.min.y : Float)) : Bool)) : Bool) && (cast ((cast a.min.z : Float) <= (cast b.max.z : Float)) : Bool)), function():Dynamic return cast ((cast a.max.z : Float) >= (cast b.min.z : Float)));
     return cast null;
   }
 
@@ -173,14 +173,14 @@ class Aabb {
     maxZ = HxMath.NEGATIVE_INFINITY;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(points, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) {
         var p:Dynamic = _Runtime.getIndex(points, i);
-        if (_Runtime.truthy(_Runtime.compare(p.x, minX, '<'))) { (minX = cast (p.x : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(p.y, minY, '<'))) { (minY = cast (p.y : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(p.z, minZ, '<'))) { (minZ = cast (p.z : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(p.x, maxX, '>'))) { (maxX = cast (p.x : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(p.y, maxY, '>'))) { (maxY = cast (p.y : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(p.z, maxZ, '>'))) { (maxZ = cast (p.z : Dynamic)); }
+        if ((cast ((cast p.x : Float) < (cast minX : Float)) : Bool)) { (minX = cast (p.x : Dynamic)); }
+        if ((cast ((cast p.y : Float) < (cast minY : Float)) : Bool)) { (minY = cast (p.y : Dynamic)); }
+        if ((cast ((cast p.z : Float) < (cast minZ : Float)) : Bool)) { (minZ = cast (p.z : Dynamic)); }
+        if ((cast ((cast p.x : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (p.x : Dynamic)); }
+        if ((cast ((cast p.y : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast (p.y : Dynamic)); }
+        if ((cast ((cast p.z : Float) > (cast maxZ : Float)) : Bool)) { (maxZ = cast (p.z : Dynamic)); }
         i++;
       }
     }

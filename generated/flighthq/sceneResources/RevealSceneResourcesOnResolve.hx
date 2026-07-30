@@ -28,7 +28,7 @@ class RevealSceneResourcesOnResolve {
     var slot:Dynamic = cast _Runtime.UNDEFINED;
     fadeSeconds = _Runtime.coalesce(_Runtime.optionalField(options, 'fadeSeconds'), function():Dynamic return cast 0.4);
     from = _Runtime.coalesce(_Runtime.optionalField(options, 'from'), function():Dynamic return cast 0.0);
-    tweenOptions = _Runtime.select(!_Runtime.strictEquals(_Runtime.optionalField(options, 'ease'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast { ease: _Runtime.field(options, 'ease') }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
+    tweenOptions = ((cast !_Runtime.strictEquals(_Runtime.optionalField(options, 'ease'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { ease: _Runtime.field(options, 'ease') } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
     owners = _Runtime.construct(_Runtime.globalValue('Map'), []);
     _Runtime.callValue(RevealSceneResourcesOnResolve.collectPendingTextureOwners__revealSceneResourcesOnResolve, cast ([scene, resolver, owners] : Array<Dynamic>));
     for (nodes in _Runtime.iterable(((cast owners : flighthq._internal._Map).values()))) {
@@ -40,7 +40,7 @@ class RevealSceneResourcesOnResolve {
     slot = function(event:{ var texture:Texture; }) {
       var nodes:Dynamic = cast _Runtime.UNDEFINED;
       nodes = ((cast owners : flighthq._internal._Map).get(_Runtime.field(event, 'texture')));
-      if (_Runtime.truthy(_Runtime.strictEquals(nodes, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
+      if ((cast _Runtime.strictEquals(nodes, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       for (node in _Runtime.iterable(nodes)) {
         _Runtime.callValue(createTween, cast ([tweenManager, node, fadeSeconds, { alpha: 1.0 }, tweenOptions] : Array<Dynamic>));
       }
@@ -57,27 +57,27 @@ class RevealSceneResourcesOnResolve {
     visit = function(node:SceneNode) {
       var owner:Dynamic = cast _Runtime.UNDEFINED;
       var materials:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>))))) { return; }
+      if ((cast !(cast _Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)) : Bool) : Bool)) { return; }
       owner = (cast node : SceneNode);
       materials = _Runtime.field(node, 'materials');
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(materials, 'length'), '<'))) {
+        while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
           var material:Dynamic = (cast _Runtime.getIndex(materials, i) : Null<Material>);
-          if (_Runtime.truthy(_Runtime.strictEquals(material, null))) { i++; continue; }
+          if ((cast _Runtime.strictEquals(material, null) : Bool)) { i++; continue; }
           _Runtime.setLength(slots, 0.0);
           _Runtime.callValue(getSceneMaterialTextures, cast ([_Runtime.field(resolver, 'registry'), material, slots] : Array<Dynamic>));
           {
             var j:Dynamic = 0.0;
-            while (_Runtime.truthy(_Runtime.compare(j, _Runtime.field(slots, 'length'), '<'))) {
+            while ((cast ((cast j : Float) < (cast _Runtime.field(slots, 'length') : Float)) : Bool)) {
               var texture:Dynamic = _Runtime.getIndex(slots, j);
-              if (_Runtime.truthy(_Runtime.looseEquals(_Runtime.field(texture, 'resource'), null))) { j++; continue; }
+              if ((cast _Runtime.looseEquals(_Runtime.field(texture, 'resource'), null) : Bool)) { j++; continue; }
               var nodes:Dynamic = ((cast out : flighthq._internal._Map).get(texture));
-              if (_Runtime.truthy(_Runtime.strictEquals(nodes, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+              if ((cast _Runtime.strictEquals(nodes, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
                 (nodes = cast (cast ([] : Array<Dynamic>) : Dynamic));
                 ((cast out : flighthq._internal._Map).set(texture, nodes));
               }
-              if (_Runtime.truthy(!_Runtime.truthy(_Runtime.includes(nodes, owner)))) { _Runtime.callProperty(nodes, 'push', cast ([owner] : Array<Dynamic>)); }
+              if ((cast !(cast _Runtime.includes(nodes, owner) : Bool) : Bool)) { _Runtime.callProperty(nodes, 'push', cast ([owner] : Array<Dynamic>)); }
               j++;
             }
           }

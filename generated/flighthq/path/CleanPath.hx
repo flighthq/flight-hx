@@ -21,46 +21,46 @@ class CleanPath {
     _Runtime.setField(out, 'winding', winding);
     for (contour in _Runtime.iterable(contours)) {
       var n:Dynamic = (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> 1);
-      if (_Runtime.truthy(_Runtime.compare(n, 2.0, '<'))) { continue; }
-      var closed:Dynamic = _Runtime.andValue(_Runtime.compare(n, 3.0, '>='), function():Dynamic return cast _Runtime.callValue(CleanPath.withinTolerance__cleanPath, cast ([_Runtime.getIndex(contour, 0.0), _Runtime.getIndex(contour, 1.0), _Runtime.getIndex(contour, ((n * 2.0) - 2.0)), _Runtime.getIndex(contour, ((n * 2.0) - 1.0)), toleranceSq] : Array<Dynamic>)));
-      var count:Dynamic = _Runtime.select(closed, function():Dynamic return cast (n - 1.0), function():Dynamic return cast n);
+      if ((cast ((cast n : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
+      var closed:Dynamic = ((cast ((cast n : Float) >= (cast 3.0 : Float)) : Bool) && (cast _Runtime.callValue(CleanPath.withinTolerance__cleanPath, cast ([_Runtime.getIndex(contour, 0.0), _Runtime.getIndex(contour, 1.0), _Runtime.getIndex(contour, ((n * 2.0) - 2.0)), _Runtime.getIndex(contour, ((n * 2.0) - 1.0)), toleranceSq] : Array<Dynamic>)) : Bool));
+      var count:Dynamic = ((cast closed : Bool) ? (cast (n - 1.0) : Dynamic) : (cast n : Dynamic));
       var kept:Array<Float> = cast ([] : Array<Dynamic>);
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, count, '<'))) {
+        while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
           _Runtime.callValue(CleanPath.pushCleanVertex__cleanPath, cast ([kept, _Runtime.getIndex(contour, (i * 2.0)), _Runtime.getIndex(contour, ((i * 2.0) + 1.0)), toleranceSq] : Array<Dynamic>));
           i++;
         }
       }
-      if (_Runtime.truthy(closed)) { _Runtime.callValue(CleanPath.collapseClosedSeam__cleanPath, cast ([kept, toleranceSq] : Array<Dynamic>)); }
+      if ((cast closed : Bool)) { _Runtime.callValue(CleanPath.collapseClosedSeam__cleanPath, cast ([kept, toleranceSq] : Array<Dynamic>)); }
       var keptCount:Dynamic = (_Runtime.toInt32(_Runtime.field(kept, 'length')) >> 1);
-      if (_Runtime.truthy(_Runtime.select(closed, function():Dynamic return cast _Runtime.compare(keptCount, 3.0, '<'), function():Dynamic return cast _Runtime.compare(keptCount, 2.0, '<')))) { continue; }
+      if ((cast ((cast closed : Bool) ? (cast ((cast keptCount : Float) < (cast 3.0 : Float)) : Dynamic) : (cast ((cast keptCount : Float) < (cast 2.0 : Float)) : Dynamic)) : Bool)) { continue; }
       _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
       _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.getIndex(kept, 0.0), _Runtime.getIndex(kept, 1.0)] : Array<Dynamic>));
       {
         var i:Dynamic = 1.0;
-        while (_Runtime.truthy(_Runtime.compare(i, keptCount, '<'))) {
+        while ((cast ((cast i : Float) < (cast keptCount : Float)) : Bool)) {
           _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.LINE_TO] : Array<Dynamic>));
           _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.getIndex(kept, (i * 2.0)), _Runtime.getIndex(kept, ((i * 2.0) + 1.0))] : Array<Dynamic>));
           i++;
         }
       }
-      if (_Runtime.truthy(closed)) { _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.CLOSE] : Array<Dynamic>)); }
+      if ((cast closed : Bool)) { _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.CLOSE] : Array<Dynamic>)); }
     }
   }
 
   public static function collapseClosedSeam__cleanPath(kept:Array<Float>, toleranceSq:Float):Void {
     var changed:Dynamic = cast _Runtime.UNDEFINED;
     changed = true;
-    while (_Runtime.truthy(_Runtime.andValue(changed, function():Dynamic return cast _Runtime.compare((_Runtime.toInt32(_Runtime.field(kept, 'length')) >> 1), 3.0, '>')))) {
+    while ((cast ((cast changed : Bool) && (cast ((cast (_Runtime.toInt32(_Runtime.field(kept, 'length')) >> 1) : Float) > (cast 3.0 : Float)) : Bool)) : Bool)) {
       (changed = cast (false : Dynamic));
       var last:Dynamic = (_Runtime.toInt32(_Runtime.field(kept, 'length')) >> 1);
-      if (_Runtime.truthy(_Runtime.callValue(CleanPath.isMiddleRemovable__cleanPath, cast ([kept, (last - 2.0), (last - 1.0), 0.0, toleranceSq] : Array<Dynamic>)))) {
+      if ((cast _Runtime.callValue(CleanPath.isMiddleRemovable__cleanPath, cast ([kept, (last - 2.0), (last - 1.0), 0.0, toleranceSq] : Array<Dynamic>)) : Bool)) {
         _Runtime.setLength(kept, (kept.length - 2.0));
         (changed = cast (true : Dynamic));
         continue;
       }
-      if (_Runtime.truthy(_Runtime.callValue(CleanPath.isMiddleRemovable__cleanPath, cast ([kept, (last - 1.0), 0.0, 1.0, toleranceSq] : Array<Dynamic>)))) {
+      if ((cast _Runtime.callValue(CleanPath.isMiddleRemovable__cleanPath, cast ([kept, (last - 1.0), 0.0, 1.0, toleranceSq] : Array<Dynamic>)) : Bool)) {
         _Runtime.copyWithin(kept, 0.0, 2.0);
         _Runtime.setLength(kept, (kept.length - 2.0));
         (changed = cast (true : Dynamic));
@@ -93,19 +93,19 @@ class CleanPath {
     dx = (sx - px);
     dy = (sy - py);
     lengthSq = ((dx * dx) + (dy * dy));
-    if (_Runtime.truthy(_Runtime.compare(lengthSq, toleranceSq, '<='))) { return cast true; }
+    if ((cast ((cast lengthSq : Float) <= (cast toleranceSq : Float)) : Bool)) { return cast true; }
     cross = ((dx * (py - my)) - (dy * (px - mx)));
-    return cast _Runtime.compare(((cross * cross) / lengthSq), toleranceSq, '<=');
+    return cast ((cast ((cross * cross) / lengthSq) : Float) <= (cast toleranceSq : Float));
     return cast null;
   }
 
   public static function pushCleanVertex__cleanPath(kept:Array<Float>, x:Float, y:Float, toleranceSq:Float):Void {
     var k:Dynamic = cast _Runtime.UNDEFINED;
     k = _Runtime.field(kept, 'length');
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(k, 2.0, '>='), function():Dynamic return cast _Runtime.callValue(CleanPath.withinTolerance__cleanPath, cast ([_Runtime.getIndex(kept, (k - 2.0)), _Runtime.getIndex(kept, (k - 1.0)), x, y, toleranceSq] : Array<Dynamic>))))) { return; }
-    while (_Runtime.truthy(_Runtime.compare(_Runtime.field(kept, 'length'), 4.0, '>='))) {
+    if ((cast ((cast ((cast k : Float) >= (cast 2.0 : Float)) : Bool) && (cast _Runtime.callValue(CleanPath.withinTolerance__cleanPath, cast ([_Runtime.getIndex(kept, (k - 2.0)), _Runtime.getIndex(kept, (k - 1.0)), x, y, toleranceSq] : Array<Dynamic>)) : Bool)) : Bool)) { return; }
+    while ((cast ((cast _Runtime.field(kept, 'length') : Float) >= (cast 4.0 : Float)) : Bool)) {
       var m:Dynamic = _Runtime.field(kept, 'length');
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(CleanPath.isRedundantMiddle__cleanPath, cast ([_Runtime.getIndex(kept, (m - 4.0)), _Runtime.getIndex(kept, (m - 3.0)), _Runtime.getIndex(kept, (m - 2.0)), _Runtime.getIndex(kept, (m - 1.0)), x, y, toleranceSq] : Array<Dynamic>))))) { break; }
+      if ((cast !(cast _Runtime.callValue(CleanPath.isRedundantMiddle__cleanPath, cast ([_Runtime.getIndex(kept, (m - 4.0)), _Runtime.getIndex(kept, (m - 3.0)), _Runtime.getIndex(kept, (m - 2.0)), _Runtime.getIndex(kept, (m - 1.0)), x, y, toleranceSq] : Array<Dynamic>)) : Bool) : Bool)) { break; }
       _Runtime.setLength(kept, (kept.length - 2.0));
     }
     _Runtime.pushMany(kept, cast ([x, y] : Array<Dynamic>));
@@ -116,7 +116,7 @@ class CleanPath {
     var dy:Dynamic = cast _Runtime.UNDEFINED;
     dx = (ax - bx);
     dy = (ay - by);
-    return cast _Runtime.compare(((dx * dx) + (dy * dy)), toleranceSq, '<=');
+    return cast ((cast ((dx * dx) + (dy * dy)) : Float) <= (cast toleranceSq : Float));
     return cast null;
   }
 }

@@ -18,10 +18,10 @@ class Net {
 
   public static function _decodeNetBuffer__net(buffer:haxe.io.Bytes, responseType:NetResponseType):NetResponseBody {
     var text:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(responseType, 'arraybuffer'))) { return cast buffer; }
-    if (_Runtime.truthy(_Runtime.strictEquals(responseType, 'blob'))) { return cast _Runtime.construct(_Runtime.globalValue('Blob'), [cast ([buffer] : Array<Dynamic>)]); }
+    if ((cast _Runtime.strictEquals(responseType, 'arraybuffer') : Bool)) { return cast buffer; }
+    if ((cast _Runtime.strictEquals(responseType, 'blob') : Bool)) { return cast _Runtime.construct(_Runtime.globalValue('Blob'), [cast ([buffer] : Array<Dynamic>)]); }
     text = _Runtime.callProperty(_Runtime.construct(_Runtime.globalValue('TextDecoder'), []), 'decode', cast ([buffer] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(responseType, 'json'))) {
+    if ((cast _Runtime.strictEquals(responseType, 'json') : Bool)) {
       try {
         return cast (cast _Runtime.jsonParse(text) : Dynamic);
       } catch (__error:Dynamic) {
@@ -36,9 +36,9 @@ class Net {
     var raw:Dynamic = cast _Runtime.UNDEFINED;
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
     raw = _Runtime.callProperty(headers, 'get', cast (['content-length'] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(raw, null))) { return cast -1.0; }
+    if ((cast _Runtime.strictEquals(raw, null) : Bool)) { return cast -1.0; }
     parsed = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([raw] : Array<Dynamic>));
-    return cast _Runtime.select(_Runtime.andValue(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)), function():Dynamic return cast _Runtime.compare(parsed, 0.0, '>=')), function():Dynamic return cast parsed, function():Dynamic return cast -1.0);
+    return cast ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) && (cast ((cast parsed : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) ? (cast parsed : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
 
@@ -47,9 +47,9 @@ class Net {
   public static function _netTransportFailure__net(url:String, signal:Dynamic, error:Dynamic):NetResponse {
     var statusText:Dynamic = cast _Runtime.UNDEFINED;
     statusText = 'network error';
-    if (_Runtime.truthy(_Runtime.field(signal, 'aborted'))) {
-      (statusText = cast (_Runtime.select(_Runtime.strictEquals(_Runtime.field(signal, 'reason'), Net._netTimeoutReason__net), function():Dynamic return cast 'timeout', function():Dynamic return cast 'aborted') : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.isError(error), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(error, 'message'), '')))) {
+    if ((cast _Runtime.field(signal, 'aborted') : Bool)) {
+      (statusText = cast (((cast _Runtime.strictEquals(_Runtime.field(signal, 'reason'), Net._netTimeoutReason__net) : Bool) ? (cast 'timeout' : Dynamic) : (cast 'aborted' : Dynamic)) : Dynamic));
+    } else { if ((cast ((cast _Runtime.isError(error) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(error, 'message'), '') : Bool)) : Bool)) {
       (statusText = cast (_Runtime.field(error, 'message') : Dynamic));
     } }
     return cast { status: 0.0, statusText: statusText, ok: false, headers: {  }, body: null, url: url };
@@ -60,7 +60,7 @@ class Net {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
         var __flowBranch0:Dynamic;
-        if (_Runtime.truthy(!_Runtime.strictEquals(progress, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+        if ((cast !_Runtime.strictEquals(progress, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           __flowBranch0 = flighthq._internal._Async.protect(function():Dynamic {
             var buffer:Dynamic = cast _Runtime.UNDEFINED;
             return flighthq._internal._Async.flatMap(_Runtime.callValue(Net._readNetResponseWithProgress__net, cast ([response, progress] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
@@ -73,7 +73,7 @@ class Net {
         }
         return flighthq._internal._Async.continueFlow(__flowBranch0, function():Dynamic {
           var __flowBranch2:Dynamic;
-          if (_Runtime.truthy(_Runtime.strictEquals(responseType, 'arraybuffer'))) {
+          if ((cast _Runtime.strictEquals(responseType, 'arraybuffer') : Bool)) {
             __flowBranch2 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flatMap(_Runtime.callProperty(response, 'arrayBuffer', cast ([] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
                 return flighthq._internal._Async.flowReturn(__awaitValue3);
@@ -84,7 +84,7 @@ class Net {
           }
           return flighthq._internal._Async.continueFlow(__flowBranch2, function():Dynamic {
             var __flowBranch4:Dynamic;
-            if (_Runtime.truthy(_Runtime.strictEquals(responseType, 'blob'))) {
+            if ((cast _Runtime.strictEquals(responseType, 'blob') : Bool)) {
               __flowBranch4 = flighthq._internal._Async.protect(function():Dynamic {
                 return flighthq._internal._Async.flatMap(_Runtime.callProperty(response, 'blob', cast ([] : Array<Dynamic>)), function(__awaitValue5:Dynamic):Dynamic {
                   return flighthq._internal._Async.flowReturn(__awaitValue5);
@@ -95,7 +95,7 @@ class Net {
             }
             return flighthq._internal._Async.continueFlow(__flowBranch4, function():Dynamic {
               var __flowBranch6:Dynamic;
-              if (_Runtime.truthy(_Runtime.strictEquals(responseType, 'json'))) {
+              if ((cast _Runtime.strictEquals(responseType, 'json') : Bool)) {
                 __flowBranch6 = flighthq._internal._Async.protect(function():Dynamic {
                   return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
                     return flighthq._internal._Async.flatMap(_Runtime.callProperty(response, 'json', cast ([] : Array<Dynamic>)), function(__awaitValue7:Dynamic):Dynamic {
@@ -148,12 +148,12 @@ class Net {
         total = _Runtime.callValue(Net._netContentLength__net, cast ([_Runtime.field(response, 'headers')] : Array<Dynamic>));
         stream = _Runtime.field(response, 'body');
         var __flowBranch11:Dynamic;
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(stream, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(stream, 'getReader')), 'function')))) {
+        if ((cast ((cast _Runtime.strictEquals(stream, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(stream, 'getReader')), 'function') : Bool)) : Bool)) {
           __flowBranch11 = flighthq._internal._Async.protect(function():Dynamic {
             var buffer:Dynamic = cast _Runtime.UNDEFINED;
             return flighthq._internal._Async.flatMap(_Runtime.callProperty(response, 'arrayBuffer', cast ([] : Array<Dynamic>)), function(__awaitValue12:Dynamic):Dynamic {
               buffer = __awaitValue12;
-              _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[progress], [{ phase: 'download', loaded: _Runtime.field(buffer, 'byteLength'), total: _Runtime.select(_Runtime.compare(total, 0.0, '>='), function():Dynamic return cast total, function():Dynamic return cast _Runtime.field(buffer, 'byteLength')) }]]), 1);
+              _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[progress], [{ phase: 'download', loaded: _Runtime.field(buffer, 'byteLength'), total: ((cast ((cast total : Float) >= (cast 0.0 : Float)) : Bool) ? (cast total : Dynamic) : (cast _Runtime.field(buffer, 'byteLength') : Dynamic)) }]]), 1);
               return flighthq._internal._Async.flowReturn(buffer);
             });
           });
@@ -176,7 +176,7 @@ class Net {
                   done = _Runtime.field(__destructure0, 'done');
                   value = _Runtime.field(__destructure0, 'value');
                   var __flowBranch14:Dynamic;
-                  if (_Runtime.truthy(done)) {
+                  if ((cast done : Bool)) {
                     __flowBranch14 = flighthq._internal._Async.protect(function():Dynamic {
                       return flighthq._internal._Async.flowBreak();
                     });
@@ -185,7 +185,7 @@ class Net {
                   }
                   return flighthq._internal._Async.continueFlow(__flowBranch14, function():Dynamic {
                     var __flowBranch15:Dynamic;
-                    if (_Runtime.truthy(_Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+                    if ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
                       __flowBranch15 = flighthq._internal._Async.protect(function():Dynamic {
                         return flighthq._internal._Async.flowContinue();
                       });
@@ -195,7 +195,7 @@ class Net {
                     return flighthq._internal._Async.continueFlow(__flowBranch15, function():Dynamic {
                       _Runtime.callProperty(chunks, 'push', cast ([value] : Array<Dynamic>));
                       (loaded = cast ((loaded + _Runtime.field(value, 'byteLength')) : Dynamic));
-                      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[progress], [{ phase: 'download', loaded: loaded, total: _Runtime.select(_Runtime.compare(total, 0.0, '>='), function():Dynamic return cast total, function():Dynamic return cast 0.0) }]]), 1);
+                      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[progress], [{ phase: 'download', loaded: loaded, total: ((cast ((cast total : Float) >= (cast 0.0 : Float)) : Bool) ? (cast total : Dynamic) : (cast 0.0 : Dynamic)) }]]), 1);
                       return flighthq._internal._Async.flowNormal();
                     });
                   });
@@ -221,10 +221,10 @@ class Net {
   public static function _toNetFetchInit__net(request:NetRequest, signal:Dynamic):Dynamic {
     var init:Dynamic = cast _Runtime.UNDEFINED;
     init = { method: _Runtime.field(request, 'method'), signal: signal };
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(request, 'headers'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(init, 'headers', _Runtime.mergeObjects([_Runtime.field(request, 'headers')])); }
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(request, 'body'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(request, 'body'), null)))) { _Runtime.setField(init, 'body', (cast _Runtime.field(request, 'body') : Dynamic)); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(request, 'credentials'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(init, 'credentials', _Runtime.field(request, 'credentials')); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(request, 'redirect'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(init, 'redirect', _Runtime.field(request, 'redirect')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(request, 'headers'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(init, 'headers', _Runtime.mergeObjects([_Runtime.field(request, 'headers')])); }
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(request, 'body'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(request, 'body'), null) : Bool)) : Bool)) { _Runtime.setField(init, 'body', (cast _Runtime.field(request, 'body') : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(request, 'credentials'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(init, 'credentials', _Runtime.field(request, 'credentials')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(request, 'redirect'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(init, 'redirect', _Runtime.field(request, 'redirect')); }
     return cast init;
     return cast null;
   }
@@ -233,12 +233,12 @@ class Net {
     var timer:Null<Dynamic> = cast _Runtime.UNDEFINED;
     var onAbort:Null<Dynamic> = cast _Runtime.UNDEFINED;
     timer = null;
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(timeoutMs), 'number'), function():Dynamic return cast _Runtime.compare(timeoutMs, 0.0, '>=')))) {
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(timeoutMs), 'number') : Bool) && (cast ((cast timeoutMs : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) {
       (timer = cast (_Runtime.setTimeout(function() return _Runtime.callProperty(controller, 'abort', cast ([Net._netTimeoutReason__net] : Array<Dynamic>)), timeoutMs) : Dynamic));
     }
     onAbort = null;
-    if (_Runtime.truthy(!_Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      if (_Runtime.truthy(_Runtime.field(signal, 'aborted'))) {
+    if ((cast !_Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      if ((cast _Runtime.field(signal, 'aborted') : Bool)) {
         _Runtime.callProperty(controller, 'abort', cast ([_Runtime.field(signal, 'reason')] : Array<Dynamic>));
       } else {
         (onAbort = cast (function() return _Runtime.callProperty(controller, 'abort', cast ([_Runtime.field(signal, 'reason')] : Array<Dynamic>)) : Dynamic));
@@ -246,8 +246,8 @@ class Net {
       }
     }
     return cast function() {
-      if (_Runtime.truthy(!_Runtime.strictEquals(timer, null))) { _Runtime.clearTimeout(timer); }
-      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(onAbort, null), function():Dynamic return cast !_Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED'))))) { _Runtime.callProperty(signal, 'removeEventListener', cast (['abort', onAbort] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(timer, null) : Bool)) { _Runtime.clearTimeout(timer); }
+      if ((cast ((cast !_Runtime.strictEquals(onAbort, null) : Bool) && (cast !_Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { _Runtime.callProperty(signal, 'removeEventListener', cast (['abort', onAbort] : Array<Dynamic>)); }
     };
     return cast null;
   }
@@ -269,7 +269,7 @@ class Net {
               headers = _Runtime.callValue(Net._readNetResponseHeaders__net, cast ([_Runtime.field(response, 'headers')] : Array<Dynamic>));
               return flighthq._internal._Async.flatMap(_Runtime.callValue(Net._readNetResponseBody__net, cast ([response, _Runtime.coalesce(_Runtime.field(request, 'responseType'), function():Dynamic return cast 'text'), _Runtime.optionalField(options, 'progress')] : Array<Dynamic>)), function(__awaitValue19:Dynamic):Dynamic {
                 body = __awaitValue19;
-                return flighthq._internal._Async.flowReturn({ status: _Runtime.field(response, 'status'), statusText: _Runtime.field(response, 'statusText'), ok: _Runtime.field(response, 'ok'), headers: headers, body: body, url: _Runtime.select(!_Runtime.strictEquals(_Runtime.field(response, 'url'), ''), function():Dynamic return cast _Runtime.field(response, 'url'), function():Dynamic return cast _Runtime.field(request, 'url')) });
+                return flighthq._internal._Async.flowReturn({ status: _Runtime.field(response, 'status'), statusText: _Runtime.field(response, 'statusText'), ok: _Runtime.field(response, 'ok'), headers: headers, body: body, url: ((cast !_Runtime.strictEquals(_Runtime.field(response, 'url'), '') : Bool) ? (cast _Runtime.field(response, 'url') : Dynamic) : (cast _Runtime.field(request, 'url') : Dynamic)) });
               });
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -290,7 +290,7 @@ class Net {
   }
 
   public static function getNetBackend():NetBackend {
-    if (_Runtime.truthy(_Runtime.strictEquals(Net._backend__net, null))) { (Net._backend__net = cast (_Runtime.callValue(createWebNetBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Net._backend__net, null) : Bool)) { (Net._backend__net = cast (_Runtime.callValue(createWebNetBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Net._backend__net;
     return cast null;
   }

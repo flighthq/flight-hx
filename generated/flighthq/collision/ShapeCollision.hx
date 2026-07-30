@@ -40,21 +40,21 @@ class ShapeCollision {
     bMaxY = _Runtime.field(b, 'maxY');
     penLeftX = (aMaxX - bMinX);
     penRightX = (bMaxX - aMinX);
-    overlapX = _Runtime.select(_Runtime.compare(penLeftX, penRightX, '<'), function():Dynamic return cast penLeftX, function():Dynamic return cast penRightX);
+    overlapX = ((cast ((cast penLeftX : Float) < (cast penRightX : Float)) : Bool) ? (cast penLeftX : Dynamic) : (cast penRightX : Dynamic));
     penDownY = (aMaxY - bMinY);
     penUpY = (bMaxY - aMinY);
-    overlapY = _Runtime.select(_Runtime.compare(penDownY, penUpY, '<'), function():Dynamic return cast penDownY, function():Dynamic return cast penUpY);
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(overlapX, 0.0, '<='), function():Dynamic return cast _Runtime.compare(overlapY, 0.0, '<=')))) {
+    overlapY = ((cast ((cast penDownY : Float) < (cast penUpY : Float)) : Bool) ? (cast penDownY : Dynamic) : (cast penUpY : Dynamic));
+    if ((cast ((cast ((cast overlapX : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast overlapY : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
       _Runtime.callValue(clearCollisionManifold, cast ([out] : Array<Dynamic>));
       return cast false;
     }
-    if (_Runtime.truthy(_Runtime.compare(overlapX, overlapY, '<'))) {
-      _Runtime.setField(out, 'normalX', _Runtime.select(_Runtime.compare(penLeftX, penRightX, '<'), function():Dynamic return cast -1.0, function():Dynamic return cast 1.0));
+    if ((cast ((cast overlapX : Float) < (cast overlapY : Float)) : Bool)) {
+      _Runtime.setField(out, 'normalX', ((cast ((cast penLeftX : Float) < (cast penRightX : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)));
       _Runtime.setField(out, 'normalY', 0.0);
       _Runtime.setField(out, 'depth', overlapX);
     } else {
       _Runtime.setField(out, 'normalX', 0.0);
-      _Runtime.setField(out, 'normalY', _Runtime.select(_Runtime.compare(penDownY, penUpY, '<'), function():Dynamic return cast -1.0, function():Dynamic return cast 1.0));
+      _Runtime.setField(out, 'normalY', ((cast ((cast penDownY : Float) < (cast penUpY : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)));
       _Runtime.setField(out, 'depth', overlapY);
     }
     _Runtime.setField(out, 'overlapping', true);
@@ -100,12 +100,12 @@ class ShapeCollision {
     dx = (ax - bx);
     dy = (ay - by);
     distSquared = ((dx * dx) + (dy * dy));
-    if (_Runtime.truthy(_Runtime.compare(distSquared, (radiusSum * radiusSum), '>='))) {
+    if ((cast ((cast distSquared : Float) >= (cast (radiusSum * radiusSum) : Float)) : Bool)) {
       _Runtime.callValue(clearCollisionManifold, cast ([out] : Array<Dynamic>));
       return cast false;
     }
     dist = HxMath.sqrt(distSquared);
-    if (_Runtime.truthy(_Runtime.compare(dist, ShapeCollision.EPS__shapeCollision, '>'))) {
+    if ((cast ((cast dist : Float) > (cast ShapeCollision.EPS__shapeCollision : Float)) : Bool)) {
       var inv:Dynamic = (1.0 / dist);
       _Runtime.setField(out, 'normalX', (dx * inv));
       _Runtime.setField(out, 'normalY', (dy * inv));
@@ -145,7 +145,7 @@ class ShapeCollision {
     dy = (cy - _Runtime.field(b, 'y'));
     localX = ((dx * cos) + (dy * sin));
     localY = ((-dx * sin) + (dy * cos));
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(ShapeCollision.circleAabbOverlap__shapeCollision, cast ([localX, localY, radius, -halfW, -halfH, halfW, halfH, out] : Array<Dynamic>))))) {
+    if ((cast !(cast _Runtime.callValue(ShapeCollision.circleAabbOverlap__shapeCollision, cast ([localX, localY, radius, -halfW, -halfH, halfW, halfH, out] : Array<Dynamic>)) : Bool) : Bool)) {
       return cast false;
     }
     localNormalX = _Runtime.field(out, 'normalX');
@@ -200,14 +200,14 @@ class ShapeCollision {
     var min:Dynamic = cast _Runtime.UNDEFINED;
     var normalX:Dynamic = cast _Runtime.UNDEFINED;
     var normalY:Dynamic = cast _Runtime.UNDEFINED;
-    closestX = _Runtime.select(_Runtime.compare(cx, minX, '<'), function():Dynamic return cast minX, function():Dynamic return cast _Runtime.select(_Runtime.compare(cx, maxX, '>'), function():Dynamic return cast maxX, function():Dynamic return cast cx));
-    closestY = _Runtime.select(_Runtime.compare(cy, minY, '<'), function():Dynamic return cast minY, function():Dynamic return cast _Runtime.select(_Runtime.compare(cy, maxY, '>'), function():Dynamic return cast maxY, function():Dynamic return cast cy));
+    closestX = ((cast ((cast cx : Float) < (cast minX : Float)) : Bool) ? (cast minX : Dynamic) : (cast ((cast ((cast cx : Float) > (cast maxX : Float)) : Bool) ? (cast maxX : Dynamic) : (cast cx : Dynamic)) : Dynamic));
+    closestY = ((cast ((cast cy : Float) < (cast minY : Float)) : Bool) ? (cast minY : Dynamic) : (cast ((cast ((cast cy : Float) > (cast maxY : Float)) : Bool) ? (cast maxY : Dynamic) : (cast cy : Dynamic)) : Dynamic));
     dx = (cx - closestX);
     dy = (cy - closestY);
     distSquared = ((dx * dx) + (dy * dy));
-    if (_Runtime.truthy(_Runtime.compare(distSquared, (ShapeCollision.EPS__shapeCollision * ShapeCollision.EPS__shapeCollision), '>'))) {
+    if ((cast ((cast distSquared : Float) > (cast (ShapeCollision.EPS__shapeCollision * ShapeCollision.EPS__shapeCollision) : Float)) : Bool)) {
       var dist:Dynamic = HxMath.sqrt(distSquared);
-      if (_Runtime.truthy(_Runtime.compare(dist, radius, '>='))) {
+      if ((cast ((cast dist : Float) >= (cast radius : Float)) : Bool)) {
         _Runtime.callValue(clearCollisionManifold, cast ([out] : Array<Dynamic>));
         return cast false;
       }
@@ -225,17 +225,17 @@ class ShapeCollision {
     min = left;
     normalX = -1.0;
     normalY = 0.0;
-    if (_Runtime.truthy(_Runtime.compare(right, min, '<'))) {
+    if ((cast ((cast right : Float) < (cast min : Float)) : Bool)) {
       (min = cast (right : Dynamic));
       (normalX = cast (1.0 : Dynamic));
       (normalY = cast (0.0 : Dynamic));
     }
-    if (_Runtime.truthy(_Runtime.compare(bottom, min, '<'))) {
+    if ((cast ((cast bottom : Float) < (cast min : Float)) : Bool)) {
       (min = cast (bottom : Dynamic));
       (normalX = cast (0.0 : Dynamic));
       (normalY = cast (-1.0 : Dynamic));
     }
-    if (_Runtime.truthy(_Runtime.compare(top, min, '<'))) {
+    if ((cast ((cast top : Float) < (cast min : Float)) : Bool)) {
       (min = cast (top : Dynamic));
       (normalX = cast (0.0 : Dynamic));
       (normalY = cast (1.0 : Dynamic));
@@ -263,7 +263,7 @@ class ShapeCollision {
     normalY = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, pn, '<'))) {
+      while ((cast ((cast i : Float) < (cast pn : Float)) : Bool)) {
         var j:Dynamic = _Runtime.fmod((i + 1.0), pn);
         var x0:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(i) << 1));
         var y0:Dynamic = _Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0));
@@ -272,15 +272,15 @@ class ShapeCollision {
         (ShapeCollision.scratchAxis__shapeCollision.x = cast ((y1 - y0) : Dynamic));
         (ShapeCollision.scratchAxis__shapeCollision.y = cast (-(x1 - x0) : Dynamic));
         var len:Dynamic = _Runtime.callValue(normalizeVector2, cast ([ShapeCollision.scratchAxis__shapeCollision, ShapeCollision.scratchAxis__shapeCollision] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.compare(len, ShapeCollision.EPS__shapeCollision, '<'))) { i++; continue; }
+        if ((cast ((cast len : Float) < (cast ShapeCollision.EPS__shapeCollision : Float)) : Bool)) { i++; continue; }
         var axisX:Dynamic = ShapeCollision.scratchAxis__shapeCollision.x;
         var axisY:Dynamic = ShapeCollision.scratchAxis__shapeCollision.y;
         var overlap:Dynamic = _Runtime.callValue(ShapeCollision.circlePolygonAxisOverlap__shapeCollision, cast ([axisX, axisY, cx, cy, radius, px, pn] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.compare(overlap, 0.0, '<='))) {
+        if ((cast ((cast overlap : Float) <= (cast 0.0 : Float)) : Bool)) {
           _Runtime.callValue(clearCollisionManifold, cast ([out] : Array<Dynamic>));
           return cast false;
         }
-        if (_Runtime.truthy(_Runtime.compare(overlap, minOverlap, '<'))) {
+        if ((cast ((cast overlap : Float) < (cast minOverlap : Float)) : Bool)) {
           (minOverlap = cast (overlap : Dynamic));
           (normalX = cast (axisX : Dynamic));
           (normalY = cast (axisY : Dynamic));
@@ -293,13 +293,13 @@ class ShapeCollision {
     nearestDistSquared = HxMath.POSITIVE_INFINITY;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, pn, '<'))) {
+      while ((cast ((cast i : Float) < (cast pn : Float)) : Bool)) {
         var vx:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(i) << 1));
         var vy:Dynamic = _Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0));
         var ddx:Dynamic = (cx - vx);
         var ddy:Dynamic = (cy - vy);
         var d2:Dynamic = ((ddx * ddx) + (ddy * ddy));
-        if (_Runtime.truthy(_Runtime.compare(d2, nearestDistSquared, '<'))) {
+        if ((cast ((cast d2 : Float) < (cast nearestDistSquared : Float)) : Bool)) {
           (nearestDistSquared = cast (d2 : Dynamic));
           (nearestX = cast (vx : Dynamic));
           (nearestY = cast (vy : Dynamic));
@@ -310,21 +310,21 @@ class ShapeCollision {
     (ShapeCollision.scratchAxis__shapeCollision.x = cast ((cx - nearestX) : Dynamic));
     (ShapeCollision.scratchAxis__shapeCollision.y = cast ((cy - nearestY) : Dynamic));
     vertexAxisLen = _Runtime.callValue(normalizeVector2, cast ([ShapeCollision.scratchAxis__shapeCollision, ShapeCollision.scratchAxis__shapeCollision] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(vertexAxisLen, ShapeCollision.EPS__shapeCollision, '>'))) {
+    if ((cast ((cast vertexAxisLen : Float) > (cast ShapeCollision.EPS__shapeCollision : Float)) : Bool)) {
       var axisX:Dynamic = ShapeCollision.scratchAxis__shapeCollision.x;
       var axisY:Dynamic = ShapeCollision.scratchAxis__shapeCollision.y;
       var overlap:Dynamic = _Runtime.callValue(ShapeCollision.circlePolygonAxisOverlap__shapeCollision, cast ([axisX, axisY, cx, cy, radius, px, pn] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.compare(overlap, 0.0, '<='))) {
+      if ((cast ((cast overlap : Float) <= (cast 0.0 : Float)) : Bool)) {
         _Runtime.callValue(clearCollisionManifold, cast ([out] : Array<Dynamic>));
         return cast false;
       }
-      if (_Runtime.truthy(_Runtime.compare(overlap, minOverlap, '<'))) {
+      if ((cast ((cast overlap : Float) < (cast minOverlap : Float)) : Bool)) {
         (minOverlap = cast (overlap : Dynamic));
         (normalX = cast (axisX : Dynamic));
         (normalY = cast (axisY : Dynamic));
       }
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(minOverlap, HxMath.POSITIVE_INFINITY))) {
+    if ((cast _Runtime.strictEquals(minOverlap, HxMath.POSITIVE_INFINITY) : Bool)) {
       _Runtime.callValue(clearCollisionManifold, cast ([out] : Array<Dynamic>));
       return cast false;
     }
@@ -332,7 +332,7 @@ class ShapeCollision {
     centroidY = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, pn, '<'))) {
+      while ((cast ((cast i : Float) < (cast pn : Float)) : Bool)) {
         (centroidX = cast ((centroidX + _Runtime.getIndex(px, (_Runtime.toInt32(i) << 1))) : Dynamic));
         (centroidY = cast ((centroidY + _Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0))) : Dynamic));
         i++;
@@ -340,7 +340,7 @@ class ShapeCollision {
     }
     (centroidX = cast ((centroidX / pn) : Dynamic));
     (centroidY = cast ((centroidY / pn) : Dynamic));
-    if (_Runtime.truthy(_Runtime.compare(((normalX * (cx - centroidX)) + (normalY * (cy - centroidY))), 0.0, '<'))) {
+    if ((cast ((cast ((normalX * (cx - centroidX)) + (normalY * (cy - centroidY))) : Float) < (cast 0.0 : Float)) : Bool)) {
       (normalX = cast (-normalX : Dynamic));
       (normalY = cast (-normalY : Dynamic));
     }
@@ -364,10 +364,10 @@ class ShapeCollision {
     maxP = -HxMath.POSITIVE_INFINITY;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, pn, '<'))) {
+      while ((cast ((cast i : Float) < (cast pn : Float)) : Bool)) {
         var d:Dynamic = ((_Runtime.getIndex(px, (_Runtime.toInt32(i) << 1)) * axisX) + (_Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0)) * axisY));
-        if (_Runtime.truthy(_Runtime.compare(d, minP, '<'))) { (minP = cast (d : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(d, maxP, '>'))) { (maxP = cast (d : Dynamic)); }
+        if ((cast ((cast d : Float) < (cast minP : Float)) : Bool)) { (minP = cast (d : Dynamic)); }
+        if ((cast ((cast d : Float) > (cast maxP : Float)) : Bool)) { (maxP = cast (d : Dynamic)); }
         i++;
       }
     }
@@ -376,7 +376,7 @@ class ShapeCollision {
     cMax = (c + radius);
     penLow = (maxP - cMin);
     penHigh = (cMax - minP);
-    return cast _Runtime.select(_Runtime.compare(penLow, penHigh, '<'), function():Dynamic return cast penLow, function():Dynamic return cast penHigh);
+    return cast ((cast ((cast penLow : Float) < (cast penHigh : Float)) : Bool) ? (cast penLow : Dynamic) : (cast penHigh : Dynamic));
     return cast null;
   }
 
@@ -390,9 +390,9 @@ class ShapeCollision {
     _Runtime.setField(ShapeCollision.minOverlapAxis__shapeCollision, 'overlap', HxMath.POSITIVE_INFINITY);
     _Runtime.setField(ShapeCollision.minOverlapAxis__shapeCollision, 'x', 0.0);
     _Runtime.setField(ShapeCollision.minOverlapAxis__shapeCollision, 'y', 0.0);
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(ShapeCollision.accumulatePolygonAxes__shapeCollision, cast ([ax, an, ax, an, bx, bn, out] : Array<Dynamic>))))) { return cast false; }
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(ShapeCollision.accumulatePolygonAxes__shapeCollision, cast ([bx, bn, ax, an, bx, bn, out] : Array<Dynamic>))))) { return cast false; }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(ShapeCollision.minOverlapAxis__shapeCollision, 'overlap'), HxMath.POSITIVE_INFINITY))) {
+    if ((cast !(cast _Runtime.callValue(ShapeCollision.accumulatePolygonAxes__shapeCollision, cast ([ax, an, ax, an, bx, bn, out] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
+    if ((cast !(cast _Runtime.callValue(ShapeCollision.accumulatePolygonAxes__shapeCollision, cast ([bx, bn, ax, an, bx, bn, out] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(ShapeCollision.minOverlapAxis__shapeCollision, 'overlap'), HxMath.POSITIVE_INFINITY) : Bool)) {
       _Runtime.callValue(clearCollisionManifold, cast ([out] : Array<Dynamic>));
       return cast false;
     }
@@ -400,7 +400,7 @@ class ShapeCollision {
     aCentroidY = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, an, '<'))) {
+      while ((cast ((cast i : Float) < (cast an : Float)) : Bool)) {
         (aCentroidX = cast ((aCentroidX + _Runtime.getIndex(ax, (_Runtime.toInt32(i) << 1))) : Dynamic));
         (aCentroidY = cast ((aCentroidY + _Runtime.getIndex(ax, ((_Runtime.toInt32(i) << 1) + 1.0))) : Dynamic));
         i++;
@@ -412,7 +412,7 @@ class ShapeCollision {
     bCentroidY = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, bn, '<'))) {
+      while ((cast ((cast i : Float) < (cast bn : Float)) : Bool)) {
         (bCentroidX = cast ((bCentroidX + _Runtime.getIndex(bx, (_Runtime.toInt32(i) << 1))) : Dynamic));
         (bCentroidY = cast ((bCentroidY + _Runtime.getIndex(bx, ((_Runtime.toInt32(i) << 1) + 1.0))) : Dynamic));
         i++;
@@ -422,7 +422,7 @@ class ShapeCollision {
     (bCentroidY = cast ((bCentroidY / bn) : Dynamic));
     normalX = _Runtime.field(ShapeCollision.minOverlapAxis__shapeCollision, 'x');
     normalY = _Runtime.field(ShapeCollision.minOverlapAxis__shapeCollision, 'y');
-    if (_Runtime.truthy(_Runtime.compare(((normalX * (aCentroidX - bCentroidX)) + (normalY * (aCentroidY - bCentroidY))), 0.0, '<'))) {
+    if ((cast ((cast ((normalX * (aCentroidX - bCentroidX)) + (normalY * (aCentroidY - bCentroidY))) : Float) < (cast 0.0 : Float)) : Bool)) {
       (normalX = cast (-normalX : Dynamic));
       (normalY = cast (-normalY : Dynamic));
     }
@@ -437,7 +437,7 @@ class ShapeCollision {
   public static function accumulatePolygonAxes__shapeCollision(sx:Dynamic, sn:Float, ax:Dynamic, an:Float, bx:Dynamic, bn:Float, out:CollisionManifold):Bool {
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, sn, '<'))) {
+      while ((cast ((cast i : Float) < (cast sn : Float)) : Bool)) {
         var j:Dynamic = _Runtime.fmod((i + 1.0), sn);
         var x0:Dynamic = _Runtime.getIndex(sx, (_Runtime.toInt32(i) << 1));
         var y0:Dynamic = _Runtime.getIndex(sx, ((_Runtime.toInt32(i) << 1) + 1.0));
@@ -446,15 +446,15 @@ class ShapeCollision {
         (ShapeCollision.scratchAxis__shapeCollision.x = cast ((y1 - y0) : Dynamic));
         (ShapeCollision.scratchAxis__shapeCollision.y = cast (-(x1 - x0) : Dynamic));
         var len:Dynamic = _Runtime.callValue(normalizeVector2, cast ([ShapeCollision.scratchAxis__shapeCollision, ShapeCollision.scratchAxis__shapeCollision] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.compare(len, ShapeCollision.EPS__shapeCollision, '<'))) { i++; continue; }
+        if ((cast ((cast len : Float) < (cast ShapeCollision.EPS__shapeCollision : Float)) : Bool)) { i++; continue; }
         var axisX:Dynamic = ShapeCollision.scratchAxis__shapeCollision.x;
         var axisY:Dynamic = ShapeCollision.scratchAxis__shapeCollision.y;
         var overlap:Dynamic = _Runtime.callValue(ShapeCollision.polygonAxisOverlap__shapeCollision, cast ([axisX, axisY, ax, an, bx, bn] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.compare(overlap, 0.0, '<='))) {
+        if ((cast ((cast overlap : Float) <= (cast 0.0 : Float)) : Bool)) {
           _Runtime.callValue(clearCollisionManifold, cast ([out] : Array<Dynamic>));
           return cast false;
         }
-        if (_Runtime.truthy(_Runtime.compare(overlap, _Runtime.field(ShapeCollision.minOverlapAxis__shapeCollision, 'overlap'), '<'))) {
+        if ((cast ((cast overlap : Float) < (cast _Runtime.field(ShapeCollision.minOverlapAxis__shapeCollision, 'overlap') : Float)) : Bool)) {
           _Runtime.setField(ShapeCollision.minOverlapAxis__shapeCollision, 'overlap', overlap);
           _Runtime.setField(ShapeCollision.minOverlapAxis__shapeCollision, 'x', axisX);
           _Runtime.setField(ShapeCollision.minOverlapAxis__shapeCollision, 'y', axisY);
@@ -477,10 +477,10 @@ class ShapeCollision {
     maxA = -HxMath.POSITIVE_INFINITY;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, an, '<'))) {
+      while ((cast ((cast i : Float) < (cast an : Float)) : Bool)) {
         var d:Dynamic = ((_Runtime.getIndex(ax, (_Runtime.toInt32(i) << 1)) * axisX) + (_Runtime.getIndex(ax, ((_Runtime.toInt32(i) << 1) + 1.0)) * axisY));
-        if (_Runtime.truthy(_Runtime.compare(d, minA, '<'))) { (minA = cast (d : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(d, maxA, '>'))) { (maxA = cast (d : Dynamic)); }
+        if ((cast ((cast d : Float) < (cast minA : Float)) : Bool)) { (minA = cast (d : Dynamic)); }
+        if ((cast ((cast d : Float) > (cast maxA : Float)) : Bool)) { (maxA = cast (d : Dynamic)); }
         i++;
       }
     }
@@ -488,16 +488,16 @@ class ShapeCollision {
     maxB = -HxMath.POSITIVE_INFINITY;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, bn, '<'))) {
+      while ((cast ((cast i : Float) < (cast bn : Float)) : Bool)) {
         var d:Dynamic = ((_Runtime.getIndex(bx, (_Runtime.toInt32(i) << 1)) * axisX) + (_Runtime.getIndex(bx, ((_Runtime.toInt32(i) << 1) + 1.0)) * axisY));
-        if (_Runtime.truthy(_Runtime.compare(d, minB, '<'))) { (minB = cast (d : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(d, maxB, '>'))) { (maxB = cast (d : Dynamic)); }
+        if ((cast ((cast d : Float) < (cast minB : Float)) : Bool)) { (minB = cast (d : Dynamic)); }
+        if ((cast ((cast d : Float) > (cast maxB : Float)) : Bool)) { (maxB = cast (d : Dynamic)); }
         i++;
       }
     }
     penLow = (maxA - minB);
     penHigh = (maxB - minA);
-    return cast _Runtime.select(_Runtime.compare(penLow, penHigh, '<'), function():Dynamic return cast penLow, function():Dynamic return cast penHigh);
+    return cast ((cast ((cast penLow : Float) < (cast penHigh : Float)) : Bool) ? (cast penLow : Dynamic) : (cast penHigh : Dynamic));
     return cast null;
   }
 

@@ -16,29 +16,29 @@ class Menu {
   public static var _menuSignals__menu:Null<MenuSignals> = _Runtime.explicitNull();
 
   public static function _validateItem__menu(item:MenuItemTemplate, seen:Dynamic):Null<String> {
-    if (_Runtime.truthy(((cast seen : flighthq._internal._Set).has(item)))) {
+    if ((cast ((cast seen : flighthq._internal._Set).has(item)) : Bool)) {
       throw _Runtime.error('validateMenuItemTemplate: cyclic submenu reference detected');
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(item, 'type'), 'separator'))) {
-      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(item, 'label'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(item, 'label'), '')))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(item, 'type'), 'separator') : Bool)) {
+      if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(item, 'label'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(item, 'label'), '') : Bool)) : Bool)) {
         return cast 'separator item has a label: "' + Std.string(_Runtime.field(item, 'label')) + '" (separators should not have labels)';
       }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(item, 'accelerator'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+      if ((cast !_Runtime.strictEquals(_Runtime.field(item, 'accelerator'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         return cast 'separator item has an accelerator: "' + Std.string(_Runtime.field(item, 'accelerator')) + '"';
       }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(item, 'submenu'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+      if ((cast !_Runtime.strictEquals(_Runtime.field(item, 'submenu'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         return cast 'separator item has a submenu';
       }
       return cast null;
     }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(item, 'type'), 'submenu'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(item, 'submenu'), _Runtime.field(_Runtime, 'UNDEFINED'))), function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.field(item, 'submenu'), 'length'), 0.0, '>')))) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(item, 'type'), 'submenu') : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(item, 'submenu'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) && (cast ((cast _Runtime.field(_Runtime.field(item, 'submenu'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       return cast 'item type "' + Std.string(_Runtime.coalesce(_Runtime.field(item, 'type'), function():Dynamic return cast 'normal')) + '" has a submenu (only type "submenu" should carry children)';
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(item, 'submenu'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(item, 'submenu'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       ((cast seen : flighthq._internal._Set).add(item));
       for (child in _Runtime.iterable(_Runtime.field(item, 'submenu'))) {
         var err:Dynamic = _Runtime.callValue(Menu._validateItem__menu, cast ([child, seen] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(err, null))) { return cast err; }
+        if ((cast !_Runtime.strictEquals(err, null) : Bool)) { return cast err; }
       }
       ((cast seen : flighthq._internal._Set).delete_(item));
     }
@@ -52,19 +52,19 @@ class Menu {
     _Runtime.setField(_Runtime.field(menu, 'style'), 'cssText', _Runtime.join(cast (['position:fixed', 'z-index:2147483647', 'margin:0', 'padding:4px 0', 'list-style:none', 'background:#fff', 'border:1px solid #ccc', 'border-radius:4px', 'box-shadow:0 4px 12px rgba(0,0,0,.15)', 'min-width:160px', 'font:13px/1.4 system-ui,sans-serif', 'color:#111', 'user-select:none'] : Array<Dynamic>), ';'));
     for (item in _Runtime.iterable(items)) {
       var li:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['li'] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(item, 'type'), 'separator'))) {
+      if ((cast _Runtime.strictEquals(_Runtime.field(item, 'type'), 'separator') : Bool)) {
         _Runtime.setField(_Runtime.field(li, 'style'), 'cssText', 'height:1px;margin:4px 8px;background:#e0e0e0;');
         _Runtime.callProperty(menu, 'appendChild', cast ([li] : Array<Dynamic>));
         continue;
       }
       var enabled:Dynamic = !_Runtime.strictEquals(_Runtime.field(item, 'enabled'), false);
-      var hasSubmenu:Dynamic = _Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(item, 'submenu'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.field(item, 'submenu'), 'length'), 0.0, '>'));
-      _Runtime.callProperty(li, 'setAttribute', cast (['data-enabled', _Runtime.select(enabled, function():Dynamic return cast 'true', function():Dynamic return cast 'false')] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(item, 'id'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(_Runtime.field(li, 'dataset'), 'itemId', _Runtime.field(item, 'id')); }
-      _Runtime.setField(_Runtime.field(li, 'style'), 'cssText', _Runtime.join(cast (['display:flex', 'align-items:center', 'padding:5px 12px 5px 28px', ('cursor:' + _Runtime.select(enabled, function():Dynamic return cast 'default', function():Dynamic return cast 'not-allowed')), ('color:' + _Runtime.select(enabled, function():Dynamic return cast '#111', function():Dynamic return cast '#999')), 'position:relative'] : Array<Dynamic>), ';'));
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(item, 'checked'), true))) {
+      var hasSubmenu:Dynamic = ((cast !_Runtime.strictEquals(_Runtime.field(item, 'submenu'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(_Runtime.field(item, 'submenu'), 'length') : Float) > (cast 0.0 : Float)) : Bool));
+      _Runtime.callProperty(li, 'setAttribute', cast (['data-enabled', ((cast enabled : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))] : Array<Dynamic>));
+      if ((cast !_Runtime.strictEquals(_Runtime.field(item, 'id'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(_Runtime.field(li, 'dataset'), 'itemId', _Runtime.field(item, 'id')); }
+      _Runtime.setField(_Runtime.field(li, 'style'), 'cssText', _Runtime.join(cast (['display:flex', 'align-items:center', 'padding:5px 12px 5px 28px', ('cursor:' + ((cast enabled : Bool) ? (cast 'default' : Dynamic) : (cast 'not-allowed' : Dynamic))), ('color:' + ((cast enabled : Bool) ? (cast '#111' : Dynamic) : (cast '#999' : Dynamic))), 'position:relative'] : Array<Dynamic>), ';'));
+      if ((cast _Runtime.strictEquals(_Runtime.field(item, 'checked'), true) : Bool)) {
         var mark:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['span'] : Array<Dynamic>));
-        _Runtime.setField(mark, 'textContent', _Runtime.select(_Runtime.strictEquals(_Runtime.field(item, 'type'), 'radio'), function():Dynamic return cast '●', function():Dynamic return cast '✓'));
+        _Runtime.setField(mark, 'textContent', ((cast _Runtime.strictEquals(_Runtime.field(item, 'type'), 'radio') : Bool) ? (cast '●' : Dynamic) : (cast '✓' : Dynamic)));
         _Runtime.setField(_Runtime.field(mark, 'style'), 'cssText', 'position:absolute;left:8px;font-size:11px;');
         _Runtime.callProperty(li, 'appendChild', cast ([mark] : Array<Dynamic>));
       }
@@ -72,25 +72,25 @@ class Menu {
       _Runtime.setField(labelEl, 'textContent', _Runtime.coalesce(_Runtime.field(item, 'label'), function():Dynamic return cast ''));
       _Runtime.setField(_Runtime.field(labelEl, 'style'), 'cssText', 'flex:1;');
       _Runtime.callProperty(li, 'appendChild', cast ([labelEl] : Array<Dynamic>));
-      if (_Runtime.truthy(hasSubmenu)) {
+      if ((cast hasSubmenu : Bool)) {
         var arrow:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['span'] : Array<Dynamic>));
         _Runtime.setField(arrow, 'textContent', '▶');
         _Runtime.setField(_Runtime.field(arrow, 'style'), 'cssText', 'margin-left:8px;font-size:9px;color:#888;');
         _Runtime.callProperty(li, 'appendChild', cast ([arrow] : Array<Dynamic>));
-      } else { if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(item, 'accelerator'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+      } else { if ((cast !_Runtime.strictEquals(_Runtime.field(item, 'accelerator'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         var accel:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['span'] : Array<Dynamic>));
         _Runtime.setField(accel, 'textContent', _Runtime.field(item, 'accelerator'));
         _Runtime.setField(_Runtime.field(accel, 'style'), 'cssText', 'margin-left:24px;color:#888;font-size:11px;');
         _Runtime.callProperty(li, 'appendChild', cast ([accel] : Array<Dynamic>));
       } }
-      if (_Runtime.truthy(enabled)) {
+      if ((cast enabled : Bool)) {
         _Runtime.callProperty(li, 'addEventListener', cast (['mouseenter', function() {
           var accelEl:Dynamic = cast _Runtime.UNDEFINED;
           _Runtime.setField(_Runtime.field(li, 'style'), 'background', '#0066cc');
           _Runtime.setField(_Runtime.field(li, 'style'), 'color', '#fff');
           accelEl = _Runtime.callProperty(li, 'querySelector', cast (['span:last-child'] : Array<Dynamic>));
-          if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(accelEl, null), function():Dynamic return cast !_Runtime.strictEquals(accelEl, labelEl)))) { _Runtime.setField(_Runtime.field(accelEl, 'style'), 'color', 'rgba(255,255,255,.7)'); }
-          if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(Menu._menuSignals__menu, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(item, 'id'), _Runtime.field(_Runtime, 'UNDEFINED'))))) {
+          if ((cast ((cast !_Runtime.strictEquals(accelEl, null) : Bool) && (cast !_Runtime.strictEquals(accelEl, labelEl) : Bool)) : Bool)) { _Runtime.setField(_Runtime.field(accelEl, 'style'), 'color', 'rgba(255,255,255,.7)'); }
+          if ((cast ((cast !_Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(item, 'id'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
             _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(Menu._menuSignals__menu, 'onMenuItemHighlight')], [_Runtime.field(item, 'id')]]), 1);
           }
         }] : Array<Dynamic>));
@@ -99,9 +99,9 @@ class Menu {
           _Runtime.setField(_Runtime.field(li, 'style'), 'background', '');
           _Runtime.setField(_Runtime.field(li, 'style'), 'color', '#111');
           accelEl = _Runtime.callProperty(li, 'querySelector', cast (['span:last-child'] : Array<Dynamic>));
-          if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(accelEl, null), function():Dynamic return cast !_Runtime.strictEquals(accelEl, labelEl)))) { _Runtime.setField(_Runtime.field(accelEl, 'style'), 'color', '#888'); }
+          if ((cast ((cast !_Runtime.strictEquals(accelEl, null) : Bool) && (cast !_Runtime.strictEquals(accelEl, labelEl) : Bool)) : Bool)) { _Runtime.setField(_Runtime.field(accelEl, 'style'), 'color', '#888'); }
         }] : Array<Dynamic>));
-        if (_Runtime.truthy(hasSubmenu)) {
+        if ((cast hasSubmenu : Bool)) {
           var submenuEl:Dynamic = _Runtime.callValue(Menu.buildWebMenuElement__menu, cast ([_Runtime.field(item, 'submenu'), onSelect] : Array<Dynamic>));
           _Runtime.setField(_Runtime.field(submenuEl, 'style'), 'position', 'absolute');
           _Runtime.setField(_Runtime.field(submenuEl, 'style'), 'top', '0');
@@ -114,7 +114,7 @@ class Menu {
           _Runtime.callProperty(li, 'addEventListener', cast (['mouseleave', function() {
             _Runtime.setField(_Runtime.field(submenuEl, 'style'), 'display', 'none');
           }] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(item, 'id'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+        } else { if ((cast !_Runtime.strictEquals(_Runtime.field(item, 'id'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           var itemId:Dynamic = _Runtime.field(item, 'id');
           _Runtime.callProperty(li, 'addEventListener', cast (['click', function(e:Dynamic) {
             _Runtime.callProperty(e, 'stopPropagation', cast ([] : Array<Dynamic>));
@@ -131,7 +131,7 @@ class Menu {
   public static function cloneMenuTemplate(template:MenuItemTemplate):MenuItemTemplate {
     var clone:MenuItemTemplate = cast _Runtime.UNDEFINED;
     clone = _Runtime.mergeObjects([template]);
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(template, 'submenu'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(template, 'submenu'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.setField(clone, 'submenu', _Runtime.callProperty(_Runtime.field(template, 'submenu'), 'map', cast ([cloneMenuTemplate] : Array<Dynamic>)));
     }
     return cast clone;
@@ -171,7 +171,7 @@ class Menu {
   public static function createMenuItemTemplate(?template:Dynamic):MenuItemTemplate {
     var item:MenuItemTemplate = cast _Runtime.UNDEFINED;
     item = _Runtime.mergeObjects([{ type: 'normal' }, { enabled: true }, template]);
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(item, 'submenu'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(item, 'submenu'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.setField(item, 'submenu', _Runtime.callProperty(_Runtime.field(item, 'submenu'), 'map', cast ([function(child:Dynamic) return _Runtime.callValue(createMenuItemTemplate, cast ([child] : Array<Dynamic>))] : Array<Dynamic>)));
     }
     return cast item;
@@ -192,7 +192,7 @@ class Menu {
   }
 
   public static function enableMenuSignals():MenuSignals {
-    if (_Runtime.truthy(_Runtime.strictEquals(Menu._menuSignals__menu, null))) {
+    if ((cast _Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool)) {
       (Menu._menuSignals__menu = cast ({ onContextMenuClose: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onContextMenuOpen: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onMenuItemHighlight: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onMenuItemSelect: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) } : Dynamic));
     }
     return cast Menu._menuSignals__menu;
@@ -200,7 +200,7 @@ class Menu {
   }
 
   public static function getMenuBackend():MenuBackend {
-    if (_Runtime.truthy(_Runtime.strictEquals(Menu._backend__menu, null))) { (Menu._backend__menu = cast (_Runtime.callValue(createWebMenuBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Menu._backend__menu, null) : Bool)) { (Menu._backend__menu = cast (_Runtime.callValue(createWebMenuBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Menu._backend__menu;
     return cast null;
   }
@@ -213,7 +213,7 @@ class Menu {
   public static function onMenuSelect(listener:Dynamic):Dynamic {
     return cast _Runtime.callProperty(_Runtime.callValue(getMenuBackend, cast ([] : Array<Dynamic>)), 'subscribeSelect', cast ([function(id:Dynamic) {
       _Runtime.callValue(listener, cast ([id] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(Menu._menuSignals__menu, null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(Menu._menuSignals__menu, 'onMenuItemSelect')], [id]]), 1); }
+      if ((cast !_Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(Menu._menuSignals__menu, 'onMenuItemSelect')], [id]]), 1); }
     }] : Array<Dynamic>));
     return cast null;
   }
@@ -229,9 +229,9 @@ class Menu {
 
   public static function showContextMenu(items:Array<MenuItemTemplate>, x:Float, y:Float):flighthq._internal._Promise<Null<String>> {
     var promise:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.strictEquals(Menu._menuSignals__menu, null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(Menu._menuSignals__menu, 'onContextMenuOpen')]]), 1); }
+    if ((cast !_Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(Menu._menuSignals__menu, 'onContextMenuOpen')]]), 1); }
     promise = _Runtime.callProperty(_Runtime.callValue(getMenuBackend, cast ([] : Array<Dynamic>)), 'popupContextMenu', cast ([items, x, y] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(Menu._menuSignals__menu, null))) {
+    if ((cast !_Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool)) {
       var signals:Dynamic = Menu._menuSignals__menu;
       _Runtime.voidValue(_Runtime.callProperty(promise, 'then', cast ([function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onContextMenuClose')]]), 1)] : Array<Dynamic>)));
     }
@@ -249,7 +249,7 @@ class Menu {
       var focusIndex:Dynamic = cast _Runtime.UNDEFINED;
       var moveFocus:Float->Void = cast _Runtime.UNDEFINED;
       var onKeyDown:Dynamic->Void = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'))) {
+      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) {
         _Runtime.callValue(resolve, cast ([null] : Array<Dynamic>));
         return;
       }
@@ -263,10 +263,10 @@ class Menu {
         _Runtime.setField(_Runtime.field(el, 'style'), 'left', '' + Std.string(anchorX) + 'px');
         _Runtime.setField(_Runtime.field(el, 'style'), 'top', '' + Std.string(anchorY) + 'px');
         rect = _Runtime.callProperty(el, 'getBoundingClientRect', cast ([] : Array<Dynamic>));
-        vw = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'), function():Dynamic return cast flighthq._internal.backend.DomWindowBackend.field(_Runtime.globalValue('window'), 'innerWidth'), function():Dynamic return cast 0.0);
-        vh = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'), function():Dynamic return cast flighthq._internal.backend.DomWindowBackend.field(_Runtime.globalValue('window'), 'innerHeight'), function():Dynamic return cast 0.0);
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.field(rect, 'right'), vw, '>'))) { _Runtime.setField(_Runtime.field(el, 'style'), 'left', '' + Std.string(HxMath.max(0.0, (anchorX - _Runtime.field(rect, 'width')))) + 'px'); }
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.field(rect, 'bottom'), vh, '>'))) { _Runtime.setField(_Runtime.field(el, 'style'), 'top', '' + Std.string(HxMath.max(0.0, (anchorY - _Runtime.field(rect, 'height')))) + 'px'); }
+        vw = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomWindowBackend.field(_Runtime.globalValue('window'), 'innerWidth') : Dynamic) : (cast 0.0 : Dynamic));
+        vh = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomWindowBackend.field(_Runtime.globalValue('window'), 'innerHeight') : Dynamic) : (cast 0.0 : Dynamic));
+        if ((cast ((cast _Runtime.field(rect, 'right') : Float) > (cast vw : Float)) : Bool)) { _Runtime.setField(_Runtime.field(el, 'style'), 'left', '' + Std.string(HxMath.max(0.0, (anchorX - _Runtime.field(rect, 'width')))) + 'px'); }
+        if ((cast ((cast _Runtime.field(rect, 'bottom') : Float) > (cast vh : Float)) : Bool)) { _Runtime.setField(_Runtime.field(el, 'style'), 'top', '' + Std.string(HxMath.max(0.0, (anchorY - _Runtime.field(rect, 'height')))) + 'px'); }
       };
       close = function close(selectedId:Null<String>):Void {
         flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'removeEventListener', cast (['keydown', onKeyDown] : Array<Dynamic>));
@@ -279,10 +279,10 @@ class Menu {
       moveFocus = function moveFocus(delta:Float):Void {
         var items:Dynamic = cast _Runtime.UNDEFINED;
         items = _Runtime.toArray(focusableItems);
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(items, 'length'), 0.0))) { return; }
+        if ((cast _Runtime.strictEquals(_Runtime.field(items, 'length'), 0.0) : Bool)) { return; }
         (focusIndex = cast (_Runtime.fmod(((focusIndex + delta) + _Runtime.field(items, 'length')), _Runtime.field(items, 'length')) : Dynamic));
         _Runtime.callProperty(items, 'forEach', cast ([function(el:Dynamic, i:Dynamic) {
-          if (_Runtime.truthy(_Runtime.strictEquals(i, focusIndex))) {
+          if ((cast _Runtime.strictEquals(i, focusIndex) : Bool)) {
             _Runtime.callProperty(el, 'setAttribute', cast (['data-focused', 'true'] : Array<Dynamic>));
             _Runtime.setField(_Runtime.field(el, 'style'), 'background', '#0066cc');
             _Runtime.setField(_Runtime.field(el, 'style'), 'color', '#fff');
@@ -292,28 +292,28 @@ class Menu {
             _Runtime.setField(_Runtime.field(el, 'style'), 'color', '#111');
           }
         }] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(Menu._menuSignals__menu, null))) {
+        if ((cast !_Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool)) {
           var focused:Dynamic = _Runtime.getIndex(items, focusIndex);
           var itemId:Dynamic = _Runtime.optionalIndex(_Runtime.optionalField(focused, 'dataset'), 'itemId');
-          if (_Runtime.truthy(!_Runtime.strictEquals(itemId, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(Menu._menuSignals__menu, 'onMenuItemHighlight')], [itemId]]), 1); }
+          if ((cast !_Runtime.strictEquals(itemId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(Menu._menuSignals__menu, 'onMenuItemHighlight')], [itemId]]), 1); }
         }
       };
       onKeyDown = function onKeyDown(e:Dynamic):Void {
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(e, 'key'), 'Escape'))) {
+        if ((cast _Runtime.strictEquals(_Runtime.field(e, 'key'), 'Escape') : Bool)) {
           _Runtime.callProperty(e, 'preventDefault', cast ([] : Array<Dynamic>));
           _Runtime.callValue(close, cast ([null] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(e, 'key'), 'ArrowDown'))) {
+        } else { if ((cast _Runtime.strictEquals(_Runtime.field(e, 'key'), 'ArrowDown') : Bool)) {
           _Runtime.callProperty(e, 'preventDefault', cast ([] : Array<Dynamic>));
           _Runtime.callValue(moveFocus, cast ([1.0] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(e, 'key'), 'ArrowUp'))) {
+        } else { if ((cast _Runtime.strictEquals(_Runtime.field(e, 'key'), 'ArrowUp') : Bool)) {
           _Runtime.callProperty(e, 'preventDefault', cast ([] : Array<Dynamic>));
           _Runtime.callValue(moveFocus, cast ([-1.0] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(e, 'key'), 'Enter'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(e, 'key'), ' ')))) {
+        } else { if ((cast ((cast _Runtime.strictEquals(_Runtime.field(e, 'key'), 'Enter') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(e, 'key'), ' ') : Bool)) : Bool)) {
           _Runtime.callProperty(e, 'preventDefault', cast ([] : Array<Dynamic>));
           var focused:Dynamic = _Runtime.getIndex(_Runtime.toArray(focusableItems), focusIndex);
-          if (_Runtime.truthy(!_Runtime.strictEquals(focused, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+          if ((cast !_Runtime.strictEquals(focused, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
             var itemId:Dynamic = _Runtime.getIndex(_Runtime.field(focused, 'dataset'), 'itemId');
-            if (_Runtime.truthy(!_Runtime.strictEquals(itemId, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callValue(close, cast ([itemId] : Array<Dynamic>)); }
+            if ((cast !_Runtime.strictEquals(itemId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callValue(close, cast ([itemId] : Array<Dynamic>)); }
           }
         } } } }
       };

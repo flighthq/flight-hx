@@ -29,9 +29,9 @@ class ExplainDisplayObjectRender {
     proxy = _Runtime.callValue(getRenderProxy2D, cast ([state, source] : Array<Dynamic>));
     prepared = !_Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED'));
     appearance = (cast (cast source : Dynamic) : HasAppearance);
-    visible = _Runtime.select(!_Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.field(proxy, 'visible'), function():Dynamic return cast _Runtime.field(appearance, 'visible'));
-    effectiveAlpha = _Runtime.select(!_Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.field(proxy, 'alpha'), function():Dynamic return cast _Runtime.field(appearance, 'alpha'));
-    if (_Runtime.truthy(!_Runtime.truthy(hasRenderer))) { (reason = cast ('no-renderer' : Dynamic)); } else { if (_Runtime.truthy(!_Runtime.truthy(prepared))) { (reason = cast ('not-prepared' : Dynamic)); } else { if (_Runtime.truthy(!_Runtime.truthy(visible))) { (reason = cast ('not-visible' : Dynamic)); } else { if (_Runtime.truthy(_Runtime.compare(effectiveAlpha, 0.0, '<='))) { (reason = cast ('zero-alpha' : Dynamic)); } else { (reason = cast ('ok' : Dynamic)); } } } }
+    visible = ((cast !_Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(proxy, 'visible') : Dynamic) : (cast _Runtime.field(appearance, 'visible') : Dynamic));
+    effectiveAlpha = ((cast !_Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(proxy, 'alpha') : Dynamic) : (cast _Runtime.field(appearance, 'alpha') : Dynamic));
+    if ((cast !(cast hasRenderer : Bool) : Bool)) { (reason = cast ('no-renderer' : Dynamic)); } else { if ((cast !(cast prepared : Bool) : Bool)) { (reason = cast ('not-prepared' : Dynamic)); } else { if ((cast !(cast visible : Bool) : Bool)) { (reason = cast ('not-visible' : Dynamic)); } else { if ((cast ((cast effectiveAlpha : Float) <= (cast 0.0 : Float)) : Bool)) { (reason = cast ('zero-alpha' : Dynamic)); } else { (reason = cast ('ok' : Dynamic)); } } } }
     return cast { kind: kind, hasRenderer: hasRenderer, prepared: prepared, visible: visible, effectiveAlpha: effectiveAlpha, reason: reason };
     return cast null;
   }

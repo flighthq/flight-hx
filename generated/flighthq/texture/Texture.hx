@@ -136,9 +136,9 @@ class Texture {
   }
 
   public static function equalsTexture(a:Null<TextureLike>, b:Null<TextureLike>):Bool {
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(a), function():Dynamic return cast !_Runtime.truthy(b)))) { return cast false; }
-    if (_Runtime.truthy(_Runtime.strictEquals(a, b))) { return cast true; }
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(a, 'colorSpace'), _Runtime.field(b, 'colorSpace')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'image'), _Runtime.field(b, 'image'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'uvRotation'), _Runtime.field(b, 'uvRotation'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'uvOffset').x, _Runtime.field(b, 'uvOffset').x)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'uvOffset').y, _Runtime.field(b, 'uvOffset').y)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'uvScale').x, _Runtime.field(b, 'uvScale').x)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'uvScale').y, _Runtime.field(b, 'uvScale').y)), function():Dynamic return cast _Runtime.callValue(equalsSampler, cast ([_Runtime.field(a, 'sampler'), _Runtime.field(b, 'sampler')] : Array<Dynamic>)));
+    if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
+    if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast true; }
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(a, 'colorSpace'), _Runtime.field(b, 'colorSpace')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'image'), _Runtime.field(b, 'image')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'uvRotation'), _Runtime.field(b, 'uvRotation')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'uvOffset').x, _Runtime.field(b, 'uvOffset').x) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'uvOffset').y, _Runtime.field(b, 'uvOffset').y) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'uvScale').x, _Runtime.field(b, 'uvScale').x) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'uvScale').y, _Runtime.field(b, 'uvScale').y) : Bool)), function():Dynamic return cast _Runtime.callValue(equalsSampler, cast ([_Runtime.field(a, 'sampler'), _Runtime.field(b, 'sampler')] : Array<Dynamic>)));
     return cast null;
   }
 
@@ -148,7 +148,7 @@ class Texture {
   }
 
   public static function getTextureHeight(texture:TextureLike):Float {
-    return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.field(texture, 'image'), null), function():Dynamic return cast _Runtime.field(_Runtime.field(texture, 'image'), 'height'), function():Dynamic return cast -1.0);
+    return cast ((cast !_Runtime.strictEquals(_Runtime.field(texture, 'image'), null) : Bool) ? (cast _Runtime.field(_Runtime.field(texture, 'image'), 'height') : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
 
@@ -186,7 +186,7 @@ class Texture {
   }
 
   public static function getTextureWidth(texture:TextureLike):Float {
-    return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.field(texture, 'image'), null), function():Dynamic return cast _Runtime.field(_Runtime.field(texture, 'image'), 'width'), function():Dynamic return cast -1.0);
+    return cast ((cast !_Runtime.strictEquals(_Runtime.field(texture, 'image'), null) : Bool) ? (cast _Runtime.field(_Runtime.field(texture, 'image'), 'width') : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
 
@@ -209,7 +209,7 @@ class Texture {
   }
 
   public static function hasTextureUvTransform(texture:TextureUvTransform):Bool {
-    return cast _Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(texture, 'uvScale').x, 1.0), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(texture, 'uvScale').y, 1.0)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(texture, 'uvOffset').x, 0.0)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(texture, 'uvOffset').y, 0.0)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(texture, 'uvRotation'), 0.0));
+    return cast _Runtime.orValue(((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(texture, 'uvScale').x, 1.0) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(texture, 'uvScale').y, 1.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(texture, 'uvOffset').x, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(texture, 'uvOffset').y, 0.0) : Bool)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(texture, 'uvRotation'), 0.0));
     return cast null;
   }
 

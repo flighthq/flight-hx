@@ -57,7 +57,7 @@ class TauriShell {
           }), function(__caughtError:Dynamic):Dynamic {
             var error:Dynamic = __caughtError;
             return flighthq._internal._Async.protect(function():Dynamic {
-              return flighthq._internal._Async.flowReturn(_Runtime.select(_Runtime.isError(error), function():Dynamic return cast _Runtime.field(error, 'message'), function():Dynamic return cast Std.string(error)));
+              return flighthq._internal._Async.flowReturn(((cast _Runtime.isError(error) : Bool) ? (cast _Runtime.field(error, 'message') : Dynamic) : (cast Std.string(error) : Dynamic)));
             });
           }), function():Dynamic {
             return flighthq._internal._Async.flowNormal();

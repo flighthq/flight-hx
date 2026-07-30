@@ -28,14 +28,14 @@ class SurfaceCrop {
     sd = _Runtime.field(source, 'data');
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, rh, '<'))) {
+      while ((cast ((cast py : Float) < (cast rh : Float)) : Bool)) {
         var sy:Dynamic = (ry + py);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(sy, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sy, sh, '>=')))) { py++; continue; }
+        if ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast sh : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, rw, '<'))) {
+          while ((cast ((cast px : Float) < (cast rw : Float)) : Bool)) {
             var sx:Dynamic = (rx + px);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(sx, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sx, sw, '>=')))) { px++; continue; }
+            if ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast sw : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Dynamic = (((sy * sw) + sx) * 4.0);
             var di:Dynamic = (((py * rw) + px) * 4.0);
             _Runtime.setIndex(data, di, _Runtime.getIndex(sd, si));
@@ -75,14 +75,14 @@ class SurfaceCrop {
     fa = (_Runtime.toInt32(fillColor) & 255);
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, dh, '<'))) {
+      while ((cast ((cast py : Float) < (cast dh : Float)) : Bool)) {
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, dw, '<'))) {
+          while ((cast ((cast px : Float) < (cast dw : Float)) : Bool)) {
             var sx:Dynamic = (px - left);
             var sy:Dynamic = (py - top);
             var di:Dynamic = (((py * dw) + px) * 4.0);
-            if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(sx, 0.0, '>='), function():Dynamic return cast _Runtime.compare(sx, sw, '<')), function():Dynamic return cast _Runtime.compare(sy, 0.0, '>=')), function():Dynamic return cast _Runtime.compare(sy, sh, '<')))) {
+            if ((cast ((cast ((cast ((cast ((cast sx : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast sx : Float) < (cast sw : Float)) : Bool)) : Bool) && (cast ((cast sy : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast sy : Float) < (cast sh : Float)) : Bool)) : Bool)) {
               var si:Dynamic = (((sy * sw) + sx) * 4.0);
               _Runtime.setIndex(data, di, _Runtime.getIndex(sd, si));
               _Runtime.setIndex(data, (di + 1.0), _Runtime.getIndex(sd, (si + 1.0)));
@@ -91,7 +91,7 @@ class SurfaceCrop {
             } else {
               var cx:Dynamic = _Runtime.callValue(SurfaceCrop.resolveEdge__surfaceCrop, cast ([sx, sw, edgeMode] : Array<Dynamic>));
               var cy:Dynamic = _Runtime.callValue(SurfaceCrop.resolveEdge__surfaceCrop, cast ([sy, sh, edgeMode] : Array<Dynamic>));
-              if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(cx, null), function():Dynamic return cast !_Runtime.strictEquals(cy, null)))) {
+              if ((cast ((cast !_Runtime.strictEquals(cx, null) : Bool) && (cast !_Runtime.strictEquals(cy, null) : Bool)) : Bool)) {
                 var si:Dynamic = (((cy * sw) + cx) * 4.0);
                 _Runtime.setIndex(data, di, _Runtime.getIndex(sd, si));
                 _Runtime.setIndex(data, (di + 1.0), _Runtime.getIndex(sd, (si + 1.0)));
@@ -131,16 +131,16 @@ class SurfaceCrop {
     maxY = -1.0;
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, sh, '<'))) {
+      while ((cast ((cast py : Float) < (cast sh : Float)) : Bool)) {
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, sw, '<'))) {
+          while ((cast ((cast px : Float) < (cast sw : Float)) : Bool)) {
             var a:Dynamic = _Runtime.getIndex(sd, ((((py * sw) + px) * 4.0) + 3.0));
-            if (_Runtime.truthy(_Runtime.compare(a, 0.0, '>'))) {
-              if (_Runtime.truthy(_Runtime.compare(px, minX, '<'))) { (minX = cast (px : Dynamic)); }
-              if (_Runtime.truthy(_Runtime.compare(px, maxX, '>'))) { (maxX = cast (px : Dynamic)); }
-              if (_Runtime.truthy(_Runtime.compare(py, minY, '<'))) { (minY = cast (py : Dynamic)); }
-              if (_Runtime.truthy(_Runtime.compare(py, maxY, '>'))) { (maxY = cast (py : Dynamic)); }
+            if ((cast ((cast a : Float) > (cast 0.0 : Float)) : Bool)) {
+              if ((cast ((cast px : Float) < (cast minX : Float)) : Bool)) { (minX = cast (px : Dynamic)); }
+              if ((cast ((cast px : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (px : Dynamic)); }
+              if ((cast ((cast py : Float) < (cast minY : Float)) : Bool)) { (minY = cast (py : Dynamic)); }
+              if ((cast ((cast py : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast (py : Dynamic)); }
             }
             px++;
           }
@@ -148,7 +148,7 @@ class SurfaceCrop {
         py++;
       }
     }
-    if (_Runtime.truthy(_Runtime.compare(maxX, 0.0, '<'))) {
+    if ((cast ((cast maxX : Float) < (cast 0.0 : Float)) : Bool)) {
       return cast _Runtime.callValue(createEntity, cast ([{ alphaType: _Runtime.field(source, 'alphaType'), colorSpace: _Runtime.field(source, 'colorSpace'), compressed: null, data: new flighthq._internal._UInt8ClampedArray(4.0), format: _Runtime.field(source, 'format'), height: 1.0, source: null, version: 0.0, width: 1.0 }] : Array<Dynamic>));
     }
     return cast _Runtime.callValue(cropSurface, cast ([source, { x: minX, y: minY, width: ((maxX - minX) + 1.0), height: ((maxY - minY) + 1.0) }] : Array<Dynamic>));
@@ -156,7 +156,7 @@ class SurfaceCrop {
   }
 
   public static function resolveEdge__surfaceCrop(v:Float, size:Float, mode:SurfaceEdgeMode):Null<Float> {
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(v, 0.0, '>='), function():Dynamic return cast _Runtime.compare(v, size, '<')))) { return cast v; }
+    if ((cast ((cast ((cast v : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast v : Float) < (cast size : Float)) : Bool)) : Bool)) { return cast v; }
     {
       var __switchValue = mode;
       if (__switchValue == 'clamp') {
@@ -169,7 +169,7 @@ class SurfaceCrop {
         {
           var period:Dynamic = (2.0 * size);
           var wrapped:Dynamic = _Runtime.fmod((_Runtime.fmod(v, period) + period), period);
-          return cast _Runtime.select(_Runtime.compare(wrapped, size, '<'), function():Dynamic return cast wrapped, function():Dynamic return cast ((period - 1.0) - wrapped));
+          return cast ((cast ((cast wrapped : Float) < (cast size : Float)) : Bool) ? (cast wrapped : Dynamic) : (cast ((period - 1.0) - wrapped) : Dynamic));
         }
       }
       else  {

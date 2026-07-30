@@ -35,18 +35,18 @@ class SpecularGlossinessPbrGlMeshMaterialRenderer {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     specGloss = (cast material : Null<SpecularGlossinessPbrMaterial>);
-    standard = _Runtime.select(!_Runtime.strictEquals(specGloss, null), function():Dynamic return cast _Runtime.callValue(SpecularGlossinessPbrGlMeshMaterialRenderer.convertSpecularGlossinessToStandard__specularGlossinessPbrGlMeshMaterialRenderer, cast ([specGloss] : Array<Dynamic>)), function():Dynamic return cast null);
-    program = _Runtime.callValue(ensureGlPbrProgram, cast ([state, _Runtime.callValue(buildGlPbrStandardDefineKey, cast ([standard, _Runtime.andValue(!_Runtime.strictEquals(specGloss, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(specGloss, 'alphaMode'), 'mask'))] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, _Runtime.andValue(!_Runtime.strictEquals(specGloss, null), function():Dynamic return cast _Runtime.field(specGloss, 'doubleSided'))] : Array<Dynamic>));
+    standard = ((cast !_Runtime.strictEquals(specGloss, null) : Bool) ? (cast _Runtime.callValue(SpecularGlossinessPbrGlMeshMaterialRenderer.convertSpecularGlossinessToStandard__specularGlossinessPbrGlMeshMaterialRenderer, cast ([specGloss] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
+    program = _Runtime.callValue(ensureGlPbrProgram, cast ([state, _Runtime.callValue(buildGlPbrStandardDefineKey, cast ([standard, ((cast !_Runtime.strictEquals(specGloss, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(specGloss, 'alphaMode'), 'mask') : Bool))] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, ((cast !_Runtime.strictEquals(specGloss, null) : Bool) && (cast _Runtime.field(specGloss, 'doubleSided') : Bool))] : Array<Dynamic>));
     _Runtime.callValue(setGlMeshViewProjection, cast ([gl, _Runtime.field(program, 'locViewProjection'), camera] : Array<Dynamic>));
     _Runtime.callValue(setGlMeshCameraPosition, cast ([gl, _Runtime.field(program, 'locCameraPosition'), camera] : Array<Dynamic>));
     _Runtime.callValue(bindGlMeshLightBlock, cast ([state, program, lights] : Array<Dynamic>));
     _Runtime.callValue(bindGlPbrStandardBlock, cast ([state, program, standard] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), _Runtime.select(!_Runtime.strictEquals(specGloss, null), function():Dynamic return cast _Runtime.field(specGloss, 'alphaCutoff'), function():Dynamic return cast 0.5));
+    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), ((cast !_Runtime.strictEquals(specGloss, null) : Bool) ? (cast _Runtime.field(specGloss, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic)));
   }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
-    if (_Runtime.truthy(_Runtime.strictEquals(program, null))) { return; }
+    if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
     _Runtime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
   } };
 
@@ -89,7 +89,7 @@ class SpecularGlossinessPbrGlMeshMaterialRenderer {
       var clamped:Dynamic = cast _Runtime.UNDEFINED;
       var srgb:Dynamic = cast _Runtime.UNDEFINED;
       clamped = HxMath.min(HxMath.max(linear, 0.0), 1.0);
-      srgb = _Runtime.select(_Runtime.compare(clamped, 0.0031308, '<='), function():Dynamic return cast (clamped * 12.92), function():Dynamic return cast ((1.055 * HxMath.pow(clamped, (1.0 / 2.4))) - 0.055));
+      srgb = ((cast ((cast clamped : Float) <= (cast 0.0031308 : Float)) : Bool) ? (cast (clamped * 12.92) : Dynamic) : (cast ((1.055 * HxMath.pow(clamped, (1.0 / 2.4))) - 0.055) : Dynamic));
       return cast (_Runtime.toInt32(HxMath.round((srgb * 255.0))) & 255);
     };
     alpha = (_Runtime.toInt32(HxMath.round((HxMath.min(HxMath.max(a, 0.0), 1.0) * 255.0))) & 255);
@@ -102,7 +102,7 @@ class SpecularGlossinessPbrGlMeshMaterialRenderer {
     var b:Dynamic = cast _Runtime.UNDEFINED;
     var c:Dynamic = cast _Runtime.UNDEFINED;
     var discriminant:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(specular, SpecularGlossinessPbrGlMeshMaterialRenderer.DIELECTRIC_SPECULAR__specularGlossinessPbrGlMeshMaterialRenderer, '<'))) { return cast 0.0; }
+    if ((cast ((cast specular : Float) < (cast SpecularGlossinessPbrGlMeshMaterialRenderer.DIELECTRIC_SPECULAR__specularGlossinessPbrGlMeshMaterialRenderer : Float)) : Bool)) { return cast 0.0; }
     a = SpecularGlossinessPbrGlMeshMaterialRenderer.DIELECTRIC_SPECULAR__specularGlossinessPbrGlMeshMaterialRenderer;
     b = ((((diffuse * oneMinusSpecularStrength) / (1.0 - SpecularGlossinessPbrGlMeshMaterialRenderer.DIELECTRIC_SPECULAR__specularGlossinessPbrGlMeshMaterialRenderer)) + specular) - (2.0 * SpecularGlossinessPbrGlMeshMaterialRenderer.DIELECTRIC_SPECULAR__specularGlossinessPbrGlMeshMaterialRenderer));
     c = (SpecularGlossinessPbrGlMeshMaterialRenderer.DIELECTRIC_SPECULAR__specularGlossinessPbrGlMeshMaterialRenderer - specular);

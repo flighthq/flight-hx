@@ -23,7 +23,7 @@ class _SceneResourceFetchValues {
             var error:Dynamic = __caughtError;
             return flighthq._internal._Async.protect(function():Dynamic {
               var __flowBranch1:Dynamic;
-              if (_Runtime.truthy(_Runtime.field(signal, 'aborted'))) {
+              if ((cast _Runtime.field(signal, 'aborted') : Bool)) {
                 __flowBranch1 = flighthq._internal._Async.protect(function():Dynamic {
                   return flighthq._internal._Async.reject(error);
                 });
@@ -44,14 +44,14 @@ class _SceneResourceFetchValues {
   }
 
   public static function resolveSceneResourceUri(uri:String, basePath:Null<String>):String {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(basePath, null), function():Dynamic return cast _Runtime.callValue(_SceneResourceFetchValues.isAbsoluteSceneResourceUri__sceneResourceFetch, cast ([uri] : Array<Dynamic>))))) { return cast uri; }
-    if (_Runtime.truthy(_Runtime.orValue(StringTools.endsWith(Std.string(basePath), '/'), function():Dynamic return cast StringTools.startsWith(uri, '/')))) { return cast '' + Std.string(basePath) + '' + Std.string(uri) + ''; }
+    if ((cast ((cast _Runtime.strictEquals(basePath, null) : Bool) || (cast _Runtime.callValue(_SceneResourceFetchValues.isAbsoluteSceneResourceUri__sceneResourceFetch, cast ([uri] : Array<Dynamic>)) : Bool)) : Bool)) { return cast uri; }
+    if ((cast ((cast StringTools.endsWith(Std.string(basePath), '/') : Bool) || (cast StringTools.startsWith(uri, '/') : Bool)) : Bool)) { return cast '' + Std.string(basePath) + '' + Std.string(uri) + ''; }
     return cast '' + Std.string(basePath) + '/' + Std.string(uri) + '';
     return cast null;
   }
 
   public static function isAbsoluteSceneResourceUri__sceneResourceFetch(uri:String):Bool {
-    return cast _Runtime.orValue(StringTools.startsWith(uri, '/'), function():Dynamic return cast _Runtime.callProperty(_Runtime.regexp('^[a-zA-Z][a-zA-Z0-9+.-]*:', ''), 'test', cast ([uri] : Array<Dynamic>)));
+    return cast ((cast StringTools.startsWith(uri, '/') : Bool) || (cast _Runtime.callProperty(_Runtime.regexp('^[a-zA-Z][a-zA-Z0-9+.-]*:', ''), 'test', cast ([uri] : Array<Dynamic>)) : Bool));
     return cast null;
   }
 }

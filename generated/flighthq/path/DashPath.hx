@@ -16,7 +16,7 @@ class DashPath {
     _Runtime.setLength(_Runtime.field(out, 'data'), 0.0);
     _Runtime.setField(out, 'winding', _Runtime.field(source, 'winding'));
     totalDashLength = _Runtime.callValue(DashPath.dashTotal__dashPath, cast ([dash] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(totalDashLength, 0.0, '<='))) {
+    if ((cast ((cast totalDashLength : Float) <= (cast 0.0 : Float)) : Bool)) {
       _Runtime.callValue(DashPath.copyCommands__dashPath, cast ([source, out] : Array<Dynamic>));
       return;
     }
@@ -34,7 +34,7 @@ class DashPath {
     var isOn:Dynamic = cast _Runtime.UNDEFINED;
     var segStarted:Dynamic = cast _Runtime.UNDEFINED;
     n = (_Runtime.toInt32(_Runtime.field(pts, 'length')) >> 1);
-    if (_Runtime.truthy(_Runtime.compare(n, 2.0, '<'))) { return; }
+    if ((cast ((cast n : Float) < (cast 2.0 : Float)) : Bool)) { return; }
     offset = _Runtime.fmod((_Runtime.fmod(dashOffset, totalDashLength) + totalDashLength), totalDashLength);
     dashIndex = 0.0;
     remaining = 0.0;
@@ -43,8 +43,8 @@ class DashPath {
       var acc:Dynamic = 0.0;
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(dash, 'length'), '<'))) {
-          if (_Runtime.truthy(_Runtime.compare((acc + _Runtime.getIndex(dash, i)), offset, '>'))) {
+        while ((cast ((cast i : Float) < (cast _Runtime.field(dash, 'length') : Float)) : Bool)) {
+          if ((cast ((cast (acc + _Runtime.getIndex(dash, i)) : Float) > (cast offset : Float)) : Bool)) {
             (dashIndex = cast (i : Dynamic));
             (remaining = cast ((_Runtime.getIndex(dash, i) - (offset - acc)) : Dynamic));
             (isOn = cast (_Runtime.strictEquals(_Runtime.fmod(i, 2.0), 0.0) : Dynamic));
@@ -58,7 +58,7 @@ class DashPath {
     segStarted = false;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, (n - 1.0), '<'))) {
+      while ((cast ((cast i : Float) < (cast (n - 1.0) : Float)) : Bool)) {
         var x0:Dynamic = _Runtime.getIndex(pts, (i * 2.0));
         var y0:Dynamic = _Runtime.getIndex(pts, ((i * 2.0) + 1.0));
         var x1:Dynamic = _Runtime.getIndex(pts, ((i + 1.0) * 2.0));
@@ -66,20 +66,20 @@ class DashPath {
         var dx:Dynamic = (x1 - x0);
         var dy:Dynamic = (y1 - y0);
         var segLen:Dynamic = HxMath.sqrt(((dx * dx) + (dy * dy)));
-        if (_Runtime.truthy(_Runtime.andValue(isOn, function():Dynamic return cast !_Runtime.truthy(segStarted)))) {
+        if ((cast ((cast isOn : Bool) && (cast !(cast segStarted : Bool) : Bool)) : Bool)) {
           _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
           _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([x0, y0] : Array<Dynamic>));
           (segStarted = cast (true : Dynamic));
         }
         var consumed:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(consumed, segLen, '<'))) {
+        while ((cast ((cast consumed : Float) < (cast segLen : Float)) : Bool)) {
           var step:Dynamic = HxMath.min(remaining, (segLen - consumed));
-          var t:Dynamic = _Runtime.select(_Runtime.compare(segLen, 0.0, '>'), function():Dynamic return cast ((consumed + step) / segLen), function():Dynamic return cast 0.0);
+          var t:Dynamic = ((cast ((cast segLen : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((consumed + step) / segLen) : Dynamic) : (cast 0.0 : Dynamic));
           var ix:Dynamic = (x0 + (t * dx));
           var iy:Dynamic = (y0 + (t * dy));
-          if (_Runtime.truthy(isOn)) {
-            if (_Runtime.truthy(!_Runtime.truthy(segStarted))) {
-              var tStart:Dynamic = _Runtime.select(_Runtime.compare(segLen, 0.0, '>'), function():Dynamic return cast (consumed / segLen), function():Dynamic return cast 0.0);
+          if ((cast isOn : Bool)) {
+            if ((cast !(cast segStarted : Bool) : Bool)) {
+              var tStart:Dynamic = ((cast ((cast segLen : Float) > (cast 0.0 : Float)) : Bool) ? (cast (consumed / segLen) : Dynamic) : (cast 0.0 : Dynamic));
               _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
               _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([(x0 + (tStart * dx)), (y0 + (tStart * dy))] : Array<Dynamic>));
               (segStarted = cast (true : Dynamic));
@@ -89,15 +89,15 @@ class DashPath {
           }
           (consumed = cast ((consumed + step) : Dynamic));
           (remaining = cast ((remaining - step) : Dynamic));
-          if (_Runtime.truthy(_Runtime.compare(remaining, 1e-10, '<='))) {
+          if ((cast ((cast remaining : Float) <= (cast 1e-10 : Float)) : Bool)) {
             (dashIndex = cast (_Runtime.fmod((dashIndex + 1.0), _Runtime.field(dash, 'length')) : Dynamic));
             (remaining = cast (_Runtime.getIndex(dash, dashIndex) : Dynamic));
             var wasOn:Dynamic = isOn;
             (isOn = cast (_Runtime.strictEquals(_Runtime.fmod(dashIndex, 2.0), 0.0) : Dynamic));
-            if (_Runtime.truthy(_Runtime.andValue(wasOn, function():Dynamic return cast !_Runtime.truthy(isOn)))) {
+            if ((cast ((cast wasOn : Bool) && (cast !(cast isOn : Bool) : Bool)) : Bool)) {
               (segStarted = cast (false : Dynamic));
             }
-            if (_Runtime.truthy(_Runtime.andValue(!_Runtime.truthy(wasOn), function():Dynamic return cast isOn))) {
+            if ((cast ((cast !(cast wasOn : Bool) : Bool) && (cast isOn : Bool)) : Bool)) {
               _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
               _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([ix, iy] : Array<Dynamic>));
               (segStarted = cast (true : Dynamic));
@@ -112,14 +112,14 @@ class DashPath {
   public static function copyCommands__dashPath(source:Path, out:Path):Void {
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(source, 'commands'), 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(source, 'commands'), 'length') : Float)) : Bool)) {
         _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([_Runtime.getIndex(_Runtime.field(source, 'commands'), i)] : Array<Dynamic>));
         i++;
       }
     }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(source, 'data'), 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(source, 'data'), 'length') : Float)) : Bool)) {
         _Runtime.callProperty(_Runtime.field(out, 'data'), 'push', cast ([_Runtime.getIndex(_Runtime.field(source, 'data'), i)] : Array<Dynamic>));
         i++;
       }
@@ -131,7 +131,7 @@ class DashPath {
     total = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(dash, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(dash, 'length') : Float)) : Bool)) {
         (total = cast ((total + _Runtime.getIndex(dash, i)) : Dynamic));
         i++;
       }

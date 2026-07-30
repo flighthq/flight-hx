@@ -51,7 +51,7 @@ class GlEffectBlitShader {
   public static function getGlBlitOffsetShader__glEffectBlitShader(state:GlRenderState):BlitOffsetShaderLocations__glEffectBlitShader {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = ((cast GlEffectBlitShader.blitOffsetShaders__glEffectBlitShader : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:Dynamic = _Runtime.field(state, 'gl');
       var base:Dynamic = _Runtime.callValue(compileGlFullscreenProgram, cast ([gl, GlEffectBlitShader.BLIT_OFFSET_FRAGMENT_SRC__glEffectBlitShader] : Array<Dynamic>));
       (loc = cast (_Runtime.mergeObjects([base, { locOffset: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_offset') }]) : Dynamic));
@@ -64,7 +64,7 @@ class GlEffectBlitShader {
   public static function getGlBlitShader__glEffectBlitShader(state:GlRenderState):GlFullscreenProgram {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = ((cast GlEffectBlitShader.blitShaders__glEffectBlitShader : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:Dynamic = _Runtime.field(state, 'gl');
       (loc = cast (_Runtime.callValue(compileGlFullscreenProgram, cast ([gl, GlEffectBlitShader.BLIT_FRAGMENT_SRC__glEffectBlitShader] : Array<Dynamic>)) : Dynamic));
       ((cast GlEffectBlitShader.blitShaders__glEffectBlitShader : flighthq._internal._WeakMap).set(state, loc));
@@ -76,7 +76,7 @@ class GlEffectBlitShader {
   public static function getGlEraseShader__glEffectBlitShader(state:GlRenderState):GlFullscreenProgram {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = ((cast GlEffectBlitShader.eraseShaders__glEffectBlitShader : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:Dynamic = _Runtime.field(state, 'gl');
       (loc = cast (_Runtime.callValue(compileGlFullscreenProgram, cast ([gl, GlEffectBlitShader.ERASE_FRAGMENT_SRC__glEffectBlitShader] : Array<Dynamic>)) : Dynamic));
       ((cast GlEffectBlitShader.eraseShaders__glEffectBlitShader : flighthq._internal._WeakMap).set(state, loc));

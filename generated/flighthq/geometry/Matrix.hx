@@ -26,12 +26,12 @@ class Matrix {
   }
 
   public static function copyMatrixColumnFromVector3(out:MatrixLike, column:Float, source:Vector3Like):Void {
-    if (_Runtime.truthy(_Runtime.compare(column, 2.0, '>'))) {
+    if ((cast ((cast column : Float) > (cast 2.0 : Float)) : Bool)) {
       throw _Runtime.rangeError((('Column ' + column) + ' out of bounds (2)'));
-    } else { if (_Runtime.truthy(_Runtime.strictEquals(column, 0.0))) {
+    } else { if ((cast _Runtime.strictEquals(column, 0.0) : Bool)) {
       _Runtime.setField(out, 'a', source.x);
       _Runtime.setField(out, 'b', source.y);
-    } else { if (_Runtime.truthy(_Runtime.strictEquals(column, 1.0))) {
+    } else { if ((cast _Runtime.strictEquals(column, 1.0) : Bool)) {
       _Runtime.setField(out, 'c', source.x);
       _Runtime.setField(out, 'd', source.y);
     } else {
@@ -41,13 +41,13 @@ class Matrix {
   }
 
   public static function copyMatrixColumnToVector3(out:Vector3Like, column:Float, source:MatrixLike):Void {
-    if (_Runtime.truthy(_Runtime.compare(column, 2.0, '>'))) {
+    if ((cast ((cast column : Float) > (cast 2.0 : Float)) : Bool)) {
       throw _Runtime.rangeError((('Column ' + column) + ' out of bounds (2)'));
-    } else { if (_Runtime.truthy(_Runtime.strictEquals(column, 0.0))) {
+    } else { if ((cast _Runtime.strictEquals(column, 0.0) : Bool)) {
       (out.x = cast (_Runtime.field(source, 'a') : Dynamic));
       (out.y = cast (_Runtime.field(source, 'b') : Dynamic));
       (out.z = cast (0.0 : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.strictEquals(column, 1.0))) {
+    } else { if ((cast _Runtime.strictEquals(column, 1.0) : Bool)) {
       (out.x = cast (_Runtime.field(source, 'c') : Dynamic));
       (out.y = cast (_Runtime.field(source, 'd') : Dynamic));
       (out.z = cast (0.0 : Dynamic));
@@ -59,13 +59,13 @@ class Matrix {
   }
 
   public static function copyMatrixRowFromVector3(out:MatrixLike, row:Float, source:Vector3Like):Void {
-    if (_Runtime.truthy(_Runtime.compare(row, 2.0, '>'))) {
+    if ((cast ((cast row : Float) > (cast 2.0 : Float)) : Bool)) {
       throw _Runtime.rangeError((('Row ' + row) + ' out of bounds (2)'));
-    } else { if (_Runtime.truthy(_Runtime.strictEquals(row, 0.0))) {
+    } else { if ((cast _Runtime.strictEquals(row, 0.0) : Bool)) {
       _Runtime.setField(out, 'a', source.x);
       _Runtime.setField(out, 'c', source.y);
       _Runtime.setField(out, 'tx', source.z);
-    } else { if (_Runtime.truthy(_Runtime.strictEquals(row, 1.0))) {
+    } else { if ((cast _Runtime.strictEquals(row, 1.0) : Bool)) {
       _Runtime.setField(out, 'b', source.x);
       _Runtime.setField(out, 'd', source.y);
       _Runtime.setField(out, 'ty', source.z);
@@ -73,13 +73,13 @@ class Matrix {
   }
 
   public static function copyMatrixRowToVector3(out:Vector3Like, row:Float, source:MatrixLike):Void {
-    if (_Runtime.truthy(_Runtime.compare(row, 2.0, '>'))) {
+    if ((cast ((cast row : Float) > (cast 2.0 : Float)) : Bool)) {
       throw _Runtime.rangeError((('Row ' + row) + ' out of bounds (2)'));
-    } else { if (_Runtime.truthy(_Runtime.strictEquals(row, 0.0))) {
+    } else { if ((cast _Runtime.strictEquals(row, 0.0) : Bool)) {
       (out.x = cast (_Runtime.field(source, 'a') : Dynamic));
       (out.y = cast (_Runtime.field(source, 'c') : Dynamic));
       (out.z = cast (_Runtime.field(source, 'tx') : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.strictEquals(row, 1.0))) {
+    } else { if ((cast _Runtime.strictEquals(row, 1.0) : Bool)) {
       (out.x = cast (_Runtime.field(source, 'b') : Dynamic));
       (out.y = cast (_Runtime.field(source, 'd') : Dynamic));
       (out.z = cast (_Runtime.field(source, 'ty') : Dynamic));
@@ -112,9 +112,9 @@ class Matrix {
   }
 
   public static function equalsMatrix(a:Null<MatrixLike>, b:Null<MatrixLike>, compareTranslation:Bool = true):Bool {
-    if (_Runtime.truthy(_Runtime.strictEquals(a, b))) { return cast true; }
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(a), function():Dynamic return cast !_Runtime.truthy(b)))) { return cast false; }
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.orValue(!_Runtime.truthy(compareTranslation), function():Dynamic return cast _Runtime.andValue(_Runtime.strictEquals(_Runtime.field(a, 'tx'), _Runtime.field(b, 'tx')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'ty'), _Runtime.field(b, 'ty')))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'a'), _Runtime.field(b, 'a'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'b'), _Runtime.field(b, 'b'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'c'), _Runtime.field(b, 'c'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'd'), _Runtime.field(b, 'd')));
+    if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast true; }
+    if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
+    return cast _Runtime.andValue(((cast ((cast ((cast _Runtime.orValue(!(cast compareTranslation : Bool), function():Dynamic return cast _Runtime.andValue(_Runtime.strictEquals(_Runtime.field(a, 'tx'), _Runtime.field(b, 'tx')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'ty'), _Runtime.field(b, 'ty')))) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'a'), _Runtime.field(b, 'a')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'b'), _Runtime.field(b, 'b')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'c'), _Runtime.field(b, 'c')) : Bool)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'd'), _Runtime.field(b, 'd')));
     return cast null;
   }
 
@@ -138,7 +138,7 @@ class Matrix {
     tx = _Runtime.field(source, 'tx');
     ty = _Runtime.field(source, 'ty');
     det = ((a * d) - (c * b));
-    if (_Runtime.truthy(_Runtime.strictEquals(det, 0.0))) {
+    if ((cast _Runtime.strictEquals(det, 0.0) : Bool)) {
       _Runtime.setField(out, 'a', _Runtime.setField(out, 'b', _Runtime.setField(out, 'c', _Runtime.setField(out, 'd', 0.0))));
       _Runtime.setField(out, 'tx', -tx);
       _Runtime.setField(out, 'ty', -ty);
@@ -166,7 +166,7 @@ class Matrix {
   public static function inverseMatrixTransformPointXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
     var norm:Dynamic = cast _Runtime.UNDEFINED;
     norm = ((_Runtime.field(source, 'a') * _Runtime.field(source, 'd')) - (_Runtime.field(source, 'b') * _Runtime.field(source, 'c')));
-    if (_Runtime.truthy(_Runtime.strictEquals(norm, 0.0))) {
+    if ((cast _Runtime.strictEquals(norm, 0.0) : Bool)) {
       (out.x = cast (-_Runtime.field(source, 'tx') : Dynamic));
       (out.y = cast (-_Runtime.field(source, 'ty') : Dynamic));
     } else {
@@ -183,7 +183,7 @@ class Matrix {
   public static function inverseMatrixTransformVectorXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
     var norm:Dynamic = cast _Runtime.UNDEFINED;
     norm = ((_Runtime.field(source, 'a') * _Runtime.field(source, 'd')) - (_Runtime.field(source, 'b') * _Runtime.field(source, 'c')));
-    if (_Runtime.truthy(_Runtime.strictEquals(norm, 0.0))) {
+    if ((cast _Runtime.strictEquals(norm, 0.0) : Bool)) {
       (out.x = cast (0.0 : Dynamic));
       (out.y = cast (0.0 : Dynamic));
     } else {
@@ -210,7 +210,7 @@ class Matrix {
     b = _Runtime.field(__destructure0, 'b');
     c = _Runtime.field(__destructure0, 'c');
     d = _Runtime.field(__destructure0, 'd');
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(ax, bx), function():Dynamic return cast _Runtime.strictEquals(ay, by)))) {
+    if ((cast ((cast _Runtime.strictEquals(ax, bx) : Bool) && (cast _Runtime.strictEquals(ay, by) : Bool)) : Bool)) {
       _Runtime.setField(out, 'x', _Runtime.field(source, 'tx'));
       _Runtime.setField(out, 'y', _Runtime.field(source, 'ty'));
       _Runtime.setField(out, 'width', 0.0);
@@ -223,22 +223,22 @@ class Matrix {
     ty1 = ty0;
     tx = ((a * bx) + (c * ay));
     ty = ((b * bx) + (d * ay));
-    if (_Runtime.truthy(_Runtime.compare(tx, tx0, '<'))) { (tx0 = cast (tx : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.compare(ty, ty0, '<'))) { (ty0 = cast (ty : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.compare(tx, tx1, '>'))) { (tx1 = cast (tx : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.compare(ty, ty1, '>'))) { (ty1 = cast (ty : Dynamic)); }
+    if ((cast ((cast tx : Float) < (cast tx0 : Float)) : Bool)) { (tx0 = cast (tx : Dynamic)); }
+    if ((cast ((cast ty : Float) < (cast ty0 : Float)) : Bool)) { (ty0 = cast (ty : Dynamic)); }
+    if ((cast ((cast tx : Float) > (cast tx1 : Float)) : Bool)) { (tx1 = cast (tx : Dynamic)); }
+    if ((cast ((cast ty : Float) > (cast ty1 : Float)) : Bool)) { (ty1 = cast (ty : Dynamic)); }
     (tx = cast (((a * bx) + (c * by)) : Dynamic));
     (ty = cast (((b * bx) + (d * by)) : Dynamic));
-    if (_Runtime.truthy(_Runtime.compare(tx, tx0, '<'))) { (tx0 = cast (tx : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.compare(ty, ty0, '<'))) { (ty0 = cast (ty : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.compare(tx, tx1, '>'))) { (tx1 = cast (tx : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.compare(ty, ty1, '>'))) { (ty1 = cast (ty : Dynamic)); }
+    if ((cast ((cast tx : Float) < (cast tx0 : Float)) : Bool)) { (tx0 = cast (tx : Dynamic)); }
+    if ((cast ((cast ty : Float) < (cast ty0 : Float)) : Bool)) { (ty0 = cast (ty : Dynamic)); }
+    if ((cast ((cast tx : Float) > (cast tx1 : Float)) : Bool)) { (tx1 = cast (tx : Dynamic)); }
+    if ((cast ((cast ty : Float) > (cast ty1 : Float)) : Bool)) { (ty1 = cast (ty : Dynamic)); }
     (tx = cast (((a * ax) + (c * by)) : Dynamic));
     (ty = cast (((b * ax) + (d * by)) : Dynamic));
-    if (_Runtime.truthy(_Runtime.compare(tx, tx0, '<'))) { (tx0 = cast (tx : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.compare(ty, ty0, '<'))) { (ty0 = cast (ty : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.compare(tx, tx1, '>'))) { (tx1 = cast (tx : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.compare(ty, ty1, '>'))) { (ty1 = cast (ty : Dynamic)); }
+    if ((cast ((cast tx : Float) < (cast tx0 : Float)) : Bool)) { (tx0 = cast (tx : Dynamic)); }
+    if ((cast ((cast ty : Float) < (cast ty0 : Float)) : Bool)) { (ty0 = cast (ty : Dynamic)); }
+    if ((cast ((cast tx : Float) > (cast tx1 : Float)) : Bool)) { (tx1 = cast (tx : Dynamic)); }
+    if ((cast ((cast ty : Float) > (cast ty1 : Float)) : Bool)) { (ty1 = cast (ty : Dynamic)); }
     _Runtime.setField(out, 'x', (tx0 + _Runtime.field(source, 'tx')));
     _Runtime.setField(out, 'y', (ty0 + _Runtime.field(source, 'ty')));
     _Runtime.setField(out, 'width', (tx1 - tx0));
@@ -335,7 +335,7 @@ class Matrix {
   public static function setGradientTransformMatrix(out:MatrixLike, width:Float, height:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):Void {
     _Runtime.setField(out, 'a', (width / 1638.4));
     _Runtime.setField(out, 'd', (height / 1638.4));
-    if (_Runtime.truthy(!_Runtime.strictEquals(rotation, 0.0))) {
+    if ((cast !_Runtime.strictEquals(rotation, 0.0) : Bool)) {
       var cos:Dynamic = HxMath.cos(rotation);
       var sin:Dynamic = HxMath.sin(rotation);
       _Runtime.setField(out, 'b', (sin * _Runtime.field(out, 'd')));
@@ -390,7 +390,7 @@ class Matrix {
   }
 
   public static function setTransformMatrix(out:MatrixLike, scaleX:Float, scaleY:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):Void {
-    if (_Runtime.truthy(!_Runtime.strictEquals(rotation, 0.0))) {
+    if ((cast !_Runtime.strictEquals(rotation, 0.0) : Bool)) {
       var cos:Dynamic = HxMath.cos(rotation);
       var sin:Dynamic = HxMath.sin(rotation);
       _Runtime.setField(out, 'a', (cos * scaleX));

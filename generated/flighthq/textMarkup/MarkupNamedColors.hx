@@ -15,9 +15,9 @@ class MarkupNamedColors {
     var hex:Dynamic = cast _Runtime.UNDEFINED;
     var named:Dynamic = cast _Runtime.UNDEFINED;
     hex = _Runtime.callValue(resolveMarkupHexColor, cast ([value] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(hex, null))) { return cast hex; }
+    if ((cast !_Runtime.strictEquals(hex, null) : Bool)) { return cast hex; }
     named = _Runtime.getIndex(MarkupNamedColors.markupNamedColors__markupNamedColors, _Runtime.callProperty(StringTools.trim(Std.string(value)), 'toLowerCase', cast ([] : Array<Dynamic>)));
-    return cast _Runtime.select(_Runtime.strictEquals(named, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast null, function():Dynamic return cast named);
+    return cast ((cast _Runtime.strictEquals(named, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast null : Dynamic) : (cast named : Dynamic));
     return cast null;
   }
 

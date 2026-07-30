@@ -11,17 +11,17 @@ import flighthq.types.TextShaperSignals;
 
 class TextShaperSignals {
   public static function disposeTextShaperSignals():Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(TextShaperSignals._signals__textShaperSignals, null))) { return; }
+    if ((cast _Runtime.strictEquals(TextShaperSignals._signals__textShaperSignals, null) : Bool)) { return; }
     _Runtime.callValue(clearSignal, cast ([_Runtime.field(TextShaperSignals._signals__textShaperSignals, 'onBackendChanged')] : Array<Dynamic>));
     (TextShaperSignals._signals__textShaperSignals = cast (null : Dynamic));
     _Runtime.callValue(_setTextShaperBackendHook, cast ([null] : Array<Dynamic>));
   }
 
   public static function enableTextShaperSignals():flighthq.types.TextShaperSignals {
-    if (_Runtime.truthy(!_Runtime.strictEquals(TextShaperSignals._signals__textShaperSignals, null))) { return cast TextShaperSignals._signals__textShaperSignals; }
+    if ((cast !_Runtime.strictEquals(TextShaperSignals._signals__textShaperSignals, null) : Bool)) { return cast TextShaperSignals._signals__textShaperSignals; }
     (TextShaperSignals._signals__textShaperSignals = cast ({ onBackendChanged: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) } : Dynamic));
     _Runtime.callValue(_setTextShaperBackendHook, cast ([function(backend:Dynamic) {
-      if (_Runtime.truthy(!_Runtime.strictEquals(TextShaperSignals._signals__textShaperSignals, null))) {
+      if ((cast !_Runtime.strictEquals(TextShaperSignals._signals__textShaperSignals, null) : Bool)) {
         _Runtime.callProperty(_Runtime.field(TextShaperSignals._signals__textShaperSignals, 'onBackendChanged'), 'emit', cast ([backend] : Array<Dynamic>));
       }
     }] : Array<Dynamic>));

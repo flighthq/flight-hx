@@ -95,7 +95,7 @@ class CapacitorApp {
       return cast false;
     }, subscribeActivate: function(listener:Dynamic) {
       return cast _Runtime.callValue(CapacitorApp.toUnsubscribe__capacitorApp, cast ([_Runtime.callProperty(app, 'addListener', cast (['appStateChange', function(state:Dynamic) {
-        if (_Runtime.truthy(_Runtime.field(state, 'isActive'))) { _Runtime.callValue(listener, cast ([] : Array<Dynamic>)); }
+        if ((cast _Runtime.field(state, 'isActive') : Bool)) { _Runtime.callValue(listener, cast ([] : Array<Dynamic>)); }
       }] : Array<Dynamic>))] : Array<Dynamic>));
     }, subscribeAllWindowsClosed: function() {
       return cast function() {
@@ -126,7 +126,7 @@ class CapacitorApp {
     handle = null;
     flighthq._internal._Async.recover(_Runtime.callProperty(handlePromise, 'then', cast ([function(resolved:Dynamic) {
       (handle = cast (resolved : Dynamic));
-      if (_Runtime.truthy(removed)) { flighthq._internal._Async.recover(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), function() {
+      if ((cast removed : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), function() {
       
       }); }
     }] : Array<Dynamic>)), function() {
@@ -134,7 +134,7 @@ class CapacitorApp {
     });
     return cast function() {
       (removed = cast (true : Dynamic));
-      if (_Runtime.truthy(!_Runtime.strictEquals(handle, null))) { flighthq._internal._Async.recover(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), function() {
+      if ((cast !_Runtime.strictEquals(handle, null) : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), function() {
       
       }); }
     };

@@ -2490,13 +2490,20 @@
       }
     }
   ],
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "summary": {
     "declarations": 9122,
     "diagnostics": 0,
     "files": 1898,
     "lowered": 9122,
     "packages": 131,
+    "staticEmission": {
+      "booleanAndExpressions": 1223,
+      "booleanConditionalExpressions": 1689,
+      "booleanOrExpressions": 1364,
+      "booleanTruthinessUses": 7882,
+      "numericRelations": 4021
+    },
     "staticFacts": {
       "booleanConditionalTruthiness": 1709,
       "booleanExplicitTruthiness": 7991,

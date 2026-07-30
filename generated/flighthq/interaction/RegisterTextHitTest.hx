@@ -25,9 +25,9 @@ class RegisterTextHitTest {
 
   public static function resolveTextCharIndex__registerTextHitTest(source:NodeAny, x:Float, y:Float):Float {
     var layout:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>))))) { return cast -1.0; }
+    if ((cast !(cast _Runtime.callValue(hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>)) : Bool) : Bool)) { return cast -1.0; }
     layout = _Runtime.callValue(getTextLayout, cast ([(cast source : TextLabel)] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(layout, null))) { return cast 0.0; }
+    if ((cast _Runtime.strictEquals(layout, null) : Bool)) { return cast 0.0; }
     _Runtime.callValue(inverseMatrixTransformPointXY, cast ([RegisterTextHitTest.textHitLocalPoint__registerTextHitTest, _Runtime.callValue(getNodeWorldMatrix, cast ([(cast source : DisplayObject)] : Array<Dynamic>)), x, y] : Array<Dynamic>));
     return cast _Runtime.callValue(computeRichTextCharIndexAtPoint, cast ([layout, _Runtime.field(RegisterTextHitTest.textHitLocalPoint__registerTextHitTest, 'x'), _Runtime.field(RegisterTextHitTest.textHitLocalPoint__registerTextHitTest, 'y')] : Array<Dynamic>));
     return cast null;

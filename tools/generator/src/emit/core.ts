@@ -23,9 +23,16 @@ import type {
   IrType,
   IrTypeField,
   LoweringDiagnostic,
+  StaticLoweringEmissionCounts,
 } from '../model/ir.ts';
 import { applySemanticPatches } from '../patch/apply.ts';
-import { emitHaxeModule, setSelfShadowTypeModules, setShadowedTypeNames } from './haxe.ts';
+import {
+  emitHaxeModule,
+  resetStaticLoweringEmissionCounts,
+  setSelfShadowTypeModules,
+  setShadowedTypeNames,
+  staticLoweringEmissionCounts,
+} from './haxe.ts';
 import { stableJson, writeOrCheck } from './reports.ts';
 import { validateWebGl2ComputedConstantDomains } from './webgl2-endpoints.ts';
 
@@ -36,7 +43,8 @@ export interface CoreGenerationReport {
     diagnostics: LoweringDiagnostic[];
     module: string;
   }>;
-  schemaVersion: 1;
+  schemaVersion: 2;
+  staticLowering: StaticLoweringEmissionCounts;
 }
 
 interface LoweredSource {
@@ -175,6 +183,7 @@ export function generateCoreModules(
   const generatedDirectory = path.join(workspaceDirectory, portConfig.generatedDirectory);
   mkdirSync(generatedDirectory, { recursive: true });
   removeStaleGeneratedModules(generatedDirectory, new Set(modules.map(moduleRelativePath)), check);
+  resetStaticLoweringEmissionCounts();
   for (const module of modules) {
     const output = path.join(generatedDirectory, moduleRelativePath(module));
     mkdirSync(path.dirname(output), { recursive: true });
@@ -255,7 +264,8 @@ export function generateCoreModules(
         module: modulePath(module),
       }))
       .sort((left, right) => left.module.localeCompare(right.module)),
-    schemaVersion: 1,
+    schemaVersion: 2,
+    staticLowering: staticLoweringEmissionCounts(),
   };
   writeOrCheck(path.join(workspaceDirectory, 'reports', 'core.json'), stableJson(report), check);
   writeOrCheck(path.join(workspaceDirectory, 'reports', 'patches.json'), stableJson(patchAudit), check);

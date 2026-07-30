@@ -34,7 +34,7 @@ class Skeleton3d {
   public static function cloneSkeleton3D(skeleton:Skeleton3D):Skeleton3D {
     var clone:Skeleton3D = cast _Runtime.UNDEFINED;
     clone = { inverseBindMatrices: new flighthq._internal._Float32Array(_Runtime.field(skeleton, 'inverseBindMatrices')), jointMatrices: new flighthq._internal._Float32Array(_Runtime.field(skeleton, 'jointMatrices')), joints: _Runtime.slice(_Runtime.field(skeleton, 'joints'), 0, null) };
-    if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(skeleton, 'names'), null))) { _Runtime.setField(clone, 'names', _Runtime.slice(_Runtime.field(skeleton, 'names'), 0, null)); } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(skeleton, 'names'), null))) { _Runtime.setField(clone, 'names', null); } }
+    if ((cast !_Runtime.looseEquals(_Runtime.field(skeleton, 'names'), null) : Bool)) { _Runtime.setField(clone, 'names', _Runtime.slice(_Runtime.field(skeleton, 'names'), 0, null)); } else { if ((cast _Runtime.strictEquals(_Runtime.field(skeleton, 'names'), null) : Bool)) { _Runtime.setField(clone, 'names', null); } }
     return cast clone;
     return cast null;
   }
@@ -50,11 +50,11 @@ class Skeleton3d {
     joints = _Runtime.field(__destructure0, 'joints');
     {
       var j:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(j, _Runtime.field(joints, 'length'), '<'))) {
+      while ((cast ((cast j : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) {
         var base:Dynamic = (j * 16.0);
         {
           var i:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(i, 16.0, '<'))) {
+          while ((cast ((cast i : Float) < (cast 16.0 : Float)) : Bool)) {
             _Runtime.setIndex(Skeleton3d._invBind__skeleton3d.m, i, _Runtime.getIndex(inverseBindMatrices, (base + i)));
             i++;
           }
@@ -71,7 +71,7 @@ class Skeleton3d {
     var skeleton:Skeleton3D = cast _Runtime.UNDEFINED;
     count = _Runtime.field(joints, 'length');
     skeleton = { inverseBindMatrices: _Runtime.coalesce(inverseBindMatrices, function():Dynamic return cast new flighthq._internal._Float32Array((count * 16.0))), jointMatrices: new flighthq._internal._Float32Array((count * 16.0)), joints: joints, names: _Runtime.coalesce(names, function():Dynamic return cast null) };
-    if (_Runtime.truthy(_Runtime.strictEquals(inverseBindMatrices, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callValue(setSkeleton3DBindPose, cast ([skeleton] : Array<Dynamic>)); }
+    if ((cast _Runtime.strictEquals(inverseBindMatrices, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callValue(setSkeleton3DBindPose, cast ([skeleton] : Array<Dynamic>)); }
     return cast skeleton;
     return cast null;
   }
@@ -84,24 +84,24 @@ class Skeleton3d {
   public static function equalsSkeleton3D(a:Skeleton3D, b:Skeleton3D):Bool {
     var aNames:Dynamic = cast _Runtime.UNDEFINED;
     var bNames:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(a, b))) { return cast true; }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(_Runtime.field(a, 'joints'), 'length'), _Runtime.field(_Runtime.field(b, 'joints'), 'length')))) { return cast false; }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(_Runtime.field(a, 'inverseBindMatrices'), 'length'), _Runtime.field(_Runtime.field(b, 'inverseBindMatrices'), 'length')))) { return cast false; }
+    if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast true; }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(a, 'joints'), 'length'), _Runtime.field(_Runtime.field(b, 'joints'), 'length')) : Bool)) { return cast false; }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(a, 'inverseBindMatrices'), 'length'), _Runtime.field(_Runtime.field(b, 'inverseBindMatrices'), 'length')) : Bool)) { return cast false; }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(a, 'inverseBindMatrices'), 'length'), '<'))) {
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(a, 'inverseBindMatrices'), i), _Runtime.getIndex(_Runtime.field(b, 'inverseBindMatrices'), i)))) { return cast false; }
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(a, 'inverseBindMatrices'), 'length') : Float)) : Bool)) {
+        if ((cast !_Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(a, 'inverseBindMatrices'), i), _Runtime.getIndex(_Runtime.field(b, 'inverseBindMatrices'), i)) : Bool)) { return cast false; }
         i++;
       }
     }
     aNames = _Runtime.coalesce(_Runtime.field(a, 'names'), function():Dynamic return cast null);
     bNames = _Runtime.coalesce(_Runtime.field(b, 'names'), function():Dynamic return cast null);
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(aNames, null), function():Dynamic return cast _Runtime.strictEquals(bNames, null)))) { return cast _Runtime.strictEquals(aNames, bNames); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(aNames, 'length'), _Runtime.field(bNames, 'length')))) { return cast false; }
+    if ((cast ((cast _Runtime.strictEquals(aNames, null) : Bool) || (cast _Runtime.strictEquals(bNames, null) : Bool)) : Bool)) { return cast _Runtime.strictEquals(aNames, bNames); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(aNames, 'length'), _Runtime.field(bNames, 'length')) : Bool)) { return cast false; }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(aNames, 'length'), '<'))) {
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(aNames, i), _Runtime.getIndex(bNames, i)))) { return cast false; }
+      while ((cast ((cast i : Float) < (cast _Runtime.field(aNames, 'length') : Float)) : Bool)) {
+        if ((cast !_Runtime.strictEquals(_Runtime.getIndex(aNames, i), _Runtime.getIndex(bNames, i)) : Bool)) { return cast false; }
         i++;
       }
     }
@@ -122,7 +122,7 @@ class Skeleton3d {
     var names:Dynamic = cast _Runtime.UNDEFINED;
     __destructure1 = skeleton;
     names = _Runtime.field(__destructure1, 'names');
-    if (_Runtime.truthy(_Runtime.looseEquals(names, null))) { return cast -1.0; }
+    if ((cast _Runtime.looseEquals(names, null) : Bool)) { return cast -1.0; }
     return cast _Runtime.callProperty(names, 'indexOf', cast ([name] : Array<Dynamic>));
     return cast null;
   }
@@ -132,7 +132,7 @@ class Skeleton3d {
     var joints:Dynamic = cast _Runtime.UNDEFINED;
     __destructure2 = skeleton;
     joints = _Runtime.field(__destructure2, 'joints');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(jointIndex, 0.0, '<'), function():Dynamic return cast _Runtime.compare(jointIndex, _Runtime.field(joints, 'length'), '>=')))) { return cast false; }
+    if ((cast ((cast ((cast jointIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast jointIndex : Float) >= (cast _Runtime.field(joints, 'length') : Float)) : Bool)) : Bool)) { return cast false; }
     _Runtime.callValue(copyMatrix4, cast ([out, _Runtime.callValue(getNodeWorldMatrix4, cast ([_Runtime.getIndex(joints, jointIndex)] : Array<Dynamic>))] : Array<Dynamic>));
     return cast true;
     return cast null;
@@ -152,7 +152,7 @@ class Skeleton3d {
     joints = _Runtime.field(__destructure3, 'joints');
     {
       var j:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(j, _Runtime.field(joints, 'length'), '<'))) {
+      while ((cast ((cast j : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) {
         _Runtime.callValue(inverseMatrix4, cast ([Skeleton3d._result__skeleton3d, _Runtime.callValue(getNodeWorldMatrix4, cast ([_Runtime.getIndex(joints, j)] : Array<Dynamic>))] : Array<Dynamic>));
         _Runtime.callProperty(inverseBindMatrices, 'set', cast ([Skeleton3d._result__skeleton3d.m, (j * 16.0)] : Array<Dynamic>));
         j++;
@@ -179,7 +179,7 @@ class Skeleton3d {
     jointCount = _Runtime.field(_Runtime.field(skeleton, 'joints'), 'length');
     expectedInverseBindMatricesLength = (jointCount * 16.0);
     inverseBindMatricesLength = _Runtime.field(_Runtime.field(skeleton, 'inverseBindMatrices'), 'length');
-    if (_Runtime.truthy(_Runtime.strictEquals(inverseBindMatricesLength, expectedInverseBindMatricesLength))) { return cast null; }
+    if ((cast _Runtime.strictEquals(inverseBindMatricesLength, expectedInverseBindMatricesLength) : Bool)) { return cast null; }
     return cast { expectedInverseBindMatricesLength: expectedInverseBindMatricesLength, inverseBindMatricesLength: inverseBindMatricesLength, jointCount: jointCount, message: 'Skeleton3D inverseBindMatrices length ' + Std.string(inverseBindMatricesLength) + ' does not match jointCount ' + Std.string(jointCount) + ' * 16 = ' + Std.string(expectedInverseBindMatricesLength) + '.' };
     return cast null;
   }

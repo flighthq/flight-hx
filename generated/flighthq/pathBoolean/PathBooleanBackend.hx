@@ -13,7 +13,7 @@ class PathBooleanBackend {
   }
 
   public static function getPathBooleanBackend():flighthq.types.PathBooleanBackend {
-    if (_Runtime.truthy(_Runtime.strictEquals(PathBooleanBackend._backend__pathBooleanBackend, null))) { (PathBooleanBackend._backend__pathBooleanBackend = cast (_Runtime.callValue(createDefaultPathBooleanBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(PathBooleanBackend._backend__pathBooleanBackend, null) : Bool)) { (PathBooleanBackend._backend__pathBooleanBackend = cast (_Runtime.callValue(createDefaultPathBooleanBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast PathBooleanBackend._backend__pathBooleanBackend;
     return cast null;
   }

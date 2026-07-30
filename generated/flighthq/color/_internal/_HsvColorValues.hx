@@ -18,7 +18,7 @@ class _HsvColorValues {
     var p:Dynamic = cast _Runtime.UNDEFINED;
     var q:Dynamic = cast _Runtime.UNDEFINED;
     var t:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(s, 0.0))) {
+    if ((cast _Runtime.strictEquals(s, 0.0) : Bool)) {
       _Runtime.setIndex(out, 0.0, v);
       _Runtime.setIndex(out, 1.0, v);
       _Runtime.setIndex(out, 2.0, v);
@@ -82,12 +82,12 @@ class _HsvColorValues {
     min = HxMath.min(HxMath.min(r, g), b);
     d = (max - min);
     v = max;
-    s = _Runtime.select(_Runtime.strictEquals(max, 0.0), function():Dynamic return cast 0.0, function():Dynamic return cast (d / max));
-    if (_Runtime.truthy(_Runtime.strictEquals(d, 0.0))) {
+    s = ((cast _Runtime.strictEquals(max, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast (d / max) : Dynamic));
+    if ((cast _Runtime.strictEquals(d, 0.0) : Bool)) {
       (h = cast (0.0 : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.strictEquals(max, r))) {
-      (h = cast (((((g - b) / d) + _Runtime.select(_Runtime.compare(g, b, '<'), function():Dynamic return cast 6.0, function():Dynamic return cast 0.0)) / 6.0) : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.strictEquals(max, g))) {
+    } else { if ((cast _Runtime.strictEquals(max, r) : Bool)) {
+      (h = cast (((((g - b) / d) + ((cast ((cast g : Float) < (cast b : Float)) : Bool) ? (cast 6.0 : Dynamic) : (cast 0.0 : Dynamic))) / 6.0) : Dynamic));
+    } else { if ((cast _Runtime.strictEquals(max, g) : Bool)) {
       (h = cast (((((b - r) / d) + 2.0) / 6.0) : Dynamic));
     } else {
       (h = cast (((((r - g) / d) + 4.0) / 6.0) : Dynamic));

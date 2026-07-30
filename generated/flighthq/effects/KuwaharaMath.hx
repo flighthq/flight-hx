@@ -20,10 +20,10 @@ class KuwaharaMath {
     sum = 0.0;
     {
       var y:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(y, size, '<'))) {
+      while ((cast ((cast y : Float) < (cast size : Float)) : Bool)) {
         {
           var x:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(x, size, '<'))) {
+          while ((cast ((cast x : Float) < (cast size : Float)) : Bool)) {
             var d:Dynamic = ((x * x) + (y * y));
             _Runtime.setIndex(out, ((y * size) + x), HxMath.exp((-d / twoSigmaSq)));
             (sum = cast ((sum + _Runtime.getIndex(out, ((y * size) + x))) : Dynamic));
@@ -33,10 +33,10 @@ class KuwaharaMath {
         y++;
       }
     }
-    invSum = _Runtime.select(_Runtime.compare(sum, 1e-10, '>'), function():Dynamic return cast (1.0 / sum), function():Dynamic return cast 1.0);
+    invSum = ((cast ((cast sum : Float) > (cast 1e-10 : Float)) : Bool) ? (cast (1.0 / sum) : Dynamic) : (cast 1.0 : Dynamic));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, (size * size), '<'))) {
+      while ((cast ((cast i : Float) < (cast (size * size) : Float)) : Bool)) {
         _Runtime.setIndex(out, i, (_Runtime.getIndex(out, i) * invSum));
         i++;
       }

@@ -38,14 +38,14 @@ class WgpuRenderEffectPipeline {
     var rgba:Dynamic = cast _Runtime.UNDEFINED;
     w = flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'width');
     h = flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'height');
-    format = _Runtime.select(_Runtime.strictEquals(_Runtime.field(_Runtime.field(pipeline, 'options'), 'format'), 'rgba16f'), function():Dynamic return cast 'rgba16float', function():Dynamic return cast _Runtime.field(state, 'format'));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(pipeline, 'sceneTarget'), null))) {
+    format = ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(pipeline, 'options'), 'format'), 'rgba16f') : Bool) ? (cast 'rgba16float' : Dynamic) : (cast _Runtime.field(state, 'format') : Dynamic));
+    if ((cast _Runtime.strictEquals(_Runtime.field(pipeline, 'sceneTarget'), null) : Bool)) {
       _Runtime.setField(pipeline, 'sceneTarget', _Runtime.callValue(createWgpuRenderTarget, cast ([state, w, h, format] : Array<Dynamic>)));
     } else {
       _Runtime.callValue(resizeWgpuRenderTarget, cast ([state, _Runtime.field(pipeline, 'sceneTarget'), w, h] : Array<Dynamic>));
     }
     rgba = _Runtime.field(state, 'backgroundColorRgba');
-    _Runtime.setField(_Runtime.field(pipeline, 'sceneTarget'), 'clearColors', _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(rgba, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.compare(_Runtime.field(rgba, 'length'), 4.0, '>=')), function():Dynamic return cast cast ([_Runtime.callValue(WgpuRenderEffectPipeline.packBackgroundClearColor__wgpuRenderEffectPipeline, cast ([rgba] : Array<Dynamic>))] : Array<Dynamic>), function():Dynamic return cast cast ([] : Array<Dynamic>)));
+    _Runtime.setField(_Runtime.field(pipeline, 'sceneTarget'), 'clearColors', ((cast ((cast !_Runtime.strictEquals(rgba, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(rgba, 'length') : Float) >= (cast 4.0 : Float)) : Bool)) : Bool) ? (cast cast ([_Runtime.callValue(WgpuRenderEffectPipeline.packBackgroundClearColor__wgpuRenderEffectPipeline, cast ([rgba] : Array<Dynamic>))] : Array<Dynamic>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic)));
     _Runtime.callValue(beginWgpuRenderPass, cast ([state, _Runtime.field(pipeline, 'sceneTarget')] : Array<Dynamic>));
   }
 
@@ -80,7 +80,7 @@ class WgpuRenderEffectPipeline {
     var ensureScratch:Dynamic = cast _Runtime.UNDEFINED;
     var flushAdjustments:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.field(pipeline, 'sceneTarget');
-    if (_Runtime.truthy(_Runtime.strictEquals(scene, null))) { return; }
+    if ((cast _Runtime.strictEquals(scene, null) : Bool)) { return; }
     _Runtime.callValue(endWgpuRenderPass, cast ([state] : Array<Dynamic>));
     format = _Runtime.field(scene, 'format');
     descriptor = { width: _Runtime.field(scene, 'width'), height: _Runtime.field(scene, 'height'), format: format };
@@ -89,21 +89,21 @@ class WgpuRenderEffectPipeline {
     scratchB = null;
     pending = cast ([] : Array<Dynamic>);
     ensureScratch = function() {
-      if (_Runtime.truthy(_Runtime.strictEquals(scratchA, null))) { (scratchA = cast (_Runtime.callValue(acquireWgpuRenderTarget, cast ([state, _Runtime.field(pipeline, 'pool'), descriptor] : Array<Dynamic>)) : Dynamic)); }
-      if (_Runtime.truthy(_Runtime.strictEquals(scratchB, null))) { (scratchB = cast (_Runtime.callValue(acquireWgpuRenderTarget, cast ([state, _Runtime.field(pipeline, 'pool'), descriptor] : Array<Dynamic>)) : Dynamic)); }
+      if ((cast _Runtime.strictEquals(scratchA, null) : Bool)) { (scratchA = cast (_Runtime.callValue(acquireWgpuRenderTarget, cast ([state, _Runtime.field(pipeline, 'pool'), descriptor] : Array<Dynamic>)) : Dynamic)); }
+      if ((cast _Runtime.strictEquals(scratchB, null) : Bool)) { (scratchB = cast (_Runtime.callValue(acquireWgpuRenderTarget, cast ([state, _Runtime.field(pipeline, 'pool'), descriptor] : Array<Dynamic>)) : Dynamic)); }
     };
     flushAdjustments = function() {
       var dest:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(pending, 'length'), 0.0))) { return; }
+      if ((cast _Runtime.strictEquals(_Runtime.field(pending, 'length'), 0.0) : Bool)) { return; }
       _Runtime.callValue(ensureScratch, cast ([] : Array<Dynamic>));
-      dest = _Runtime.select(_Runtime.strictEquals(source, scratchA), function():Dynamic return cast scratchB, function():Dynamic return cast scratchA);
-      if (_Runtime.truthy(_Runtime.callProperty(pending, 'some', cast ([isColorLutAdjustment] : Array<Dynamic>)))) {
+      dest = ((cast _Runtime.strictEquals(source, scratchA) : Bool) ? (cast scratchB : Dynamic) : (cast scratchA : Dynamic));
+      if ((cast _Runtime.callProperty(pending, 'some', cast ([isColorLutAdjustment] : Array<Dynamic>)) : Bool)) {
         _Runtime.callValue(applyColorLutPassToWgpu, cast ([state, source, dest, _Runtime.callValue(bakeColorLutForRun, cast ([_Runtime.field(pipeline, 'lutCache'), pending] : Array<Dynamic>)), _Runtime.field(pipeline, 'lutTexture')] : Array<Dynamic>));
       } else {
         var matrices:Array<Array<Float>> = cast ([] : Array<Dynamic>);
         for (op in _Runtime.iterable(pending)) {
           var matrix:Dynamic = _Runtime.callValue(getAdjustmentColorMatrix, cast ([op] : Array<Dynamic>));
-          if (_Runtime.truthy(!_Runtime.strictEquals(matrix, null))) { _Runtime.callProperty(matrices, 'push', cast ([matrix] : Array<Dynamic>)); }
+          if ((cast !_Runtime.strictEquals(matrix, null) : Bool)) { _Runtime.callProperty(matrices, 'push', cast ([matrix] : Array<Dynamic>)); }
         }
         _Runtime.callValue(applyColorMatrixPassToWgpu, cast ([state, source, dest, _Runtime.callValue(fuseColorMatrices, cast ([matrices] : Array<Dynamic>))] : Array<Dynamic>));
       }
@@ -111,22 +111,22 @@ class WgpuRenderEffectPipeline {
       (pending = cast (cast ([] : Array<Dynamic>) : Dynamic));
     };
     for (operation in _Runtime.iterable(operations)) {
-      if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.callValue(getAdjustmentColorMatrix, cast ([operation] : Array<Dynamic>)), null), function():Dynamic return cast _Runtime.callValue(isColorLutAdjustment, cast ([operation] : Array<Dynamic>))))) {
+      if ((cast ((cast !_Runtime.strictEquals(_Runtime.callValue(getAdjustmentColorMatrix, cast ([operation] : Array<Dynamic>)), null) : Bool) || (cast _Runtime.callValue(isColorLutAdjustment, cast ([operation] : Array<Dynamic>)) : Bool)) : Bool)) {
         _Runtime.callProperty(pending, 'push', cast ([(cast operation : Adjustment)] : Array<Dynamic>));
         continue;
       }
       var runner:Dynamic = _Runtime.callValue(getWgpuRenderEffectRunner, cast ([state, _Runtime.field(operation, 'kind')] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(runner, null))) { continue; }
+      if ((cast _Runtime.strictEquals(runner, null) : Bool)) { continue; }
       _Runtime.callValue(flushAdjustments, cast ([] : Array<Dynamic>));
       _Runtime.callValue(ensureScratch, cast ([] : Array<Dynamic>));
-      var dest:Dynamic = _Runtime.select(_Runtime.strictEquals(source, scratchA), function():Dynamic return cast scratchB, function():Dynamic return cast scratchA);
+      var dest:Dynamic = ((cast _Runtime.strictEquals(source, scratchA) : Bool) ? (cast scratchB : Dynamic) : (cast scratchA : Dynamic));
       _Runtime.callValue(runner, cast ([{ state: state, source: source, dest: dest, pool: _Runtime.field(pipeline, 'pool'), sceneDepthTexture: null, sceneVelocityTexture: _Runtime.field(pipeline, 'velocityTexture') }, operation] : Array<Dynamic>));
       (source = cast (dest : Dynamic));
     }
     _Runtime.callValue(flushAdjustments, cast ([] : Array<Dynamic>));
     _Runtime.callValue(WgpuRenderEffectPipeline.presentWgpuRenderEffectResult__wgpuRenderEffectPipeline, cast ([state, source] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(scratchA, null))) { _Runtime.callValue(releaseWgpuRenderTarget, cast ([_Runtime.field(pipeline, 'pool'), scratchA] : Array<Dynamic>)); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(scratchB, null))) { _Runtime.callValue(releaseWgpuRenderTarget, cast ([_Runtime.field(pipeline, 'pool'), scratchB] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(scratchA, null) : Bool)) { _Runtime.callValue(releaseWgpuRenderTarget, cast ([_Runtime.field(pipeline, 'pool'), scratchA] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(scratchB, null) : Bool)) { _Runtime.callValue(releaseWgpuRenderTarget, cast ([_Runtime.field(pipeline, 'pool'), scratchB] : Array<Dynamic>)); }
   }
 
   public static function setWgpuRenderEffectVelocityTexture(pipeline:flighthq.types.WgpuRenderEffectPipeline, texture:Null<Dynamic>):Void {
@@ -137,7 +137,7 @@ class WgpuRenderEffectPipeline {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'commandEncoder'), null))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'commandEncoder'), null) : Bool)) { return; }
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'effect.present', WgpuRenderEffectPipeline.PRESENT_FRAGMENT_WGSL__wgpuRenderEffectPipeline, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), null, pipeline, function() {
     

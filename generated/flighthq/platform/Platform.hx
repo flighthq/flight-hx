@@ -28,19 +28,19 @@ class Platform {
     var aParts:Dynamic = cast _Runtime.UNDEFINED;
     var bParts:Dynamic = cast _Runtime.UNDEFINED;
     var len:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(a, b))) { return cast 0.0; }
-    aParts = _Runtime.select(_Runtime.strictEquals(a, ''), function():Dynamic return cast cast ([] : Array<Dynamic>), function():Dynamic return cast _Runtime.callProperty(a, 'split', cast (['.'] : Array<Dynamic>)));
-    bParts = _Runtime.select(_Runtime.strictEquals(b, ''), function():Dynamic return cast cast ([] : Array<Dynamic>), function():Dynamic return cast _Runtime.callProperty(b, 'split', cast (['.'] : Array<Dynamic>)));
+    if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast 0.0; }
+    aParts = ((cast _Runtime.strictEquals(a, '') : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast _Runtime.callProperty(a, 'split', cast (['.'] : Array<Dynamic>)) : Dynamic));
+    bParts = ((cast _Runtime.strictEquals(b, '') : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast _Runtime.callProperty(b, 'split', cast (['.'] : Array<Dynamic>)) : Dynamic));
     len = HxMath.max(_Runtime.field(aParts, 'length'), _Runtime.field(bParts, 'length'));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, len, '<'))) {
-        var aNum:Dynamic = _Runtime.select(_Runtime.compare(i, _Runtime.field(aParts, 'length'), '<'), function():Dynamic return cast _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(aParts, i), 10.0] : Array<Dynamic>)), function():Dynamic return cast 0.0);
-        var bNum:Dynamic = _Runtime.select(_Runtime.compare(i, _Runtime.field(bParts, 'length'), '<'), function():Dynamic return cast _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(bParts, i), 10.0] : Array<Dynamic>)), function():Dynamic return cast 0.0);
-        var aN:Dynamic = _Runtime.select(_Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([aNum] : Array<Dynamic>)), function():Dynamic return cast 0.0, function():Dynamic return cast aNum);
-        var bN:Dynamic = _Runtime.select(_Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([bNum] : Array<Dynamic>)), function():Dynamic return cast 0.0, function():Dynamic return cast bNum);
-        if (_Runtime.truthy(_Runtime.compare(aN, bN, '<'))) { return cast -1.0; }
-        if (_Runtime.truthy(_Runtime.compare(aN, bN, '>'))) { return cast 1.0; }
+      while ((cast ((cast i : Float) < (cast len : Float)) : Bool)) {
+        var aNum:Dynamic = ((cast ((cast i : Float) < (cast _Runtime.field(aParts, 'length') : Float)) : Bool) ? (cast _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(aParts, i), 10.0] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
+        var bNum:Dynamic = ((cast ((cast i : Float) < (cast _Runtime.field(bParts, 'length') : Float)) : Bool) ? (cast _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(bParts, i), 10.0] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
+        var aN:Dynamic = ((cast _Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([aNum] : Array<Dynamic>)) : Bool) ? (cast 0.0 : Dynamic) : (cast aNum : Dynamic));
+        var bN:Dynamic = ((cast _Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([bNum] : Array<Dynamic>)) : Bool) ? (cast 0.0 : Dynamic) : (cast bNum : Dynamic));
+        if ((cast ((cast aN : Float) < (cast bN : Float)) : Bool)) { return cast -1.0; }
+        if ((cast ((cast aN : Float) > (cast bN : Float)) : Bool)) { return cast 1.0; }
         i++;
       }
     }
@@ -59,7 +59,7 @@ class Platform {
   }
 
   public static function getPlatformBackend():PlatformBackend {
-    if (_Runtime.truthy(_Runtime.strictEquals(Platform._backend__platform, null))) { (Platform._backend__platform = cast (_Runtime.callValue(createWebPlatformBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Platform._backend__platform, null) : Bool)) { (Platform._backend__platform = cast (_Runtime.callValue(createWebPlatformBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Platform._backend__platform;
     return cast null;
   }
@@ -92,15 +92,15 @@ class Platform {
   public static function getWebPlatformInfo__platform(out:PlatformInfo):PlatformInfo {
     var nav:Dynamic = cast _Runtime.UNDEFINED;
     var ua:Dynamic = cast _Runtime.UNDEFINED;
-    nav = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.globalValue('navigator'), function():Dynamic return cast null);
+    nav = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) ? (cast _Runtime.globalValue('navigator') : Dynamic) : (cast null : Dynamic));
     ua = _Runtime.coalesce(_Runtime.optionalField(nav, 'userAgent'), function():Dynamic return cast '');
     _Runtime.setField(out, 'name', _Runtime.callValue(parseUserAgentName, cast ([ua] : Array<Dynamic>)));
     _Runtime.setField(out, 'kind', _Runtime.callValue(parseUserAgentKind, cast ([_Runtime.field(out, 'name')] : Array<Dynamic>)));
     _Runtime.setField(out, 'version', _Runtime.callValue(parseUserAgentVersion, cast ([ua, _Runtime.field(out, 'name')] : Array<Dynamic>)));
     _Runtime.setField(out, 'arch', _Runtime.callValue(parseUserAgentArch, cast ([ua] : Array<Dynamic>)));
     _Runtime.setField(out, 'locale', _Runtime.coalesce(_Runtime.optionalField(nav, 'language'), function():Dynamic return cast ''));
-    _Runtime.setField(out, 'isTouch', _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.hasField(_Runtime.globalValue('navigator'), 'maxTouchPoints')), function():Dynamic return cast _Runtime.compare(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'maxTouchPoints'), 0.0, '>'), function():Dynamic return cast false));
-    _Runtime.setField(out, 'runtime', _Runtime.callValue(parseUserAgentRuntime, cast ([_Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'), function():Dynamic return cast (cast (cast _Runtime.globalValue('window') : Dynamic) : Dynamic), function():Dynamic return cast null)] : Array<Dynamic>)));
+    _Runtime.setField(out, 'isTouch', ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) && (cast _Runtime.hasField(_Runtime.globalValue('navigator'), 'maxTouchPoints') : Bool)) : Bool) ? (cast ((cast flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'maxTouchPoints') : Float) > (cast 0.0 : Float)) : Dynamic) : (cast false : Dynamic)));
+    _Runtime.setField(out, 'runtime', _Runtime.callValue(parseUserAgentRuntime, cast ([((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) ? (cast (cast (cast _Runtime.globalValue('window') : Dynamic) : Dynamic) : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)));
     _Runtime.setField(out, 'engine', _Runtime.callValue(parseUserAgentEngine, cast ([ua] : Array<Dynamic>)));
     _Runtime.setField(out, 'engineVersion', _Runtime.callValue(parseUserAgentEngineVersion, cast ([ua, _Runtime.field(out, 'engine')] : Array<Dynamic>)));
     _Runtime.setField(out, 'endianness', _Runtime.callValue(detectEndianness, cast ([] : Array<Dynamic>)));
@@ -125,7 +125,7 @@ class Platform {
   public static function isPlatformNative():Bool {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getPlatformRuntime, cast ([] : Array<Dynamic>));
-    return cast _Runtime.andValue(!_Runtime.strictEquals(runtime, 'web'), function():Dynamic return cast !_Runtime.strictEquals(runtime, 'unknown'));
+    return cast ((cast !_Runtime.strictEquals(runtime, 'web') : Bool) && (cast !_Runtime.strictEquals(runtime, 'unknown') : Bool));
     return cast null;
   }
 
@@ -137,8 +137,8 @@ class Platform {
   public static function isPlatformVersionAtLeast(minimum:String):Bool {
     var version:Dynamic = cast _Runtime.UNDEFINED;
     version = _Runtime.field(_Runtime.callValue(getPlatformInfo, cast ([Platform._scratch__platform] : Array<Dynamic>)), 'version');
-    if (_Runtime.truthy(_Runtime.strictEquals(version, ''))) { return cast false; }
-    return cast _Runtime.compare(_Runtime.callValue(comparePlatformVersions, cast ([version, minimum] : Array<Dynamic>)), 0.0, '>=');
+    if ((cast _Runtime.strictEquals(version, '') : Bool)) { return cast false; }
+    return cast ((cast _Runtime.callValue(comparePlatformVersions, cast ([version, minimum] : Array<Dynamic>)) : Float) >= (cast 0.0 : Float));
     return cast null;
   }
 

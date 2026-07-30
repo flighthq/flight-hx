@@ -15,7 +15,7 @@ class FrustumCorners {
     var ndcCorners:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var results:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     _Runtime.callValue(getCameraViewProjectionMatrix4, cast ([FrustumCorners.__scratchViewProjection__frustumCorners, camera, aspect] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(inverseMatrix4, cast ([FrustumCorners.__scratchInverseVP__frustumCorners, FrustumCorners.__scratchViewProjection__frustumCorners] : Array<Dynamic>))))) {
+    if ((cast !(cast _Runtime.callValue(inverseMatrix4, cast ([FrustumCorners.__scratchInverseVP__frustumCorners, FrustumCorners.__scratchViewProjection__frustumCorners] : Array<Dynamic>)) : Bool) : Bool)) {
       return cast false;
     }
     m = FrustumCorners.__scratchInverseVP__frustumCorners.m;
@@ -23,7 +23,7 @@ class FrustumCorners {
     results = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, 8.0, '<'))) {
+      while ((cast ((cast i : Float) < (cast 8.0 : Float)) : Bool)) {
         var __destructure0:Dynamic = _Runtime.getIndex(ndcCorners, i);
         var nx:Dynamic = _Runtime.getIndex(__destructure0, 0.0);
         var ny:Dynamic = _Runtime.getIndex(__destructure0, 1.0);
@@ -32,7 +32,7 @@ class FrustumCorners {
         var wy:Dynamic = ((((_Runtime.getIndex(m, 1.0) * nx) + (_Runtime.getIndex(m, 5.0) * ny)) + (_Runtime.getIndex(m, 9.0) * nz)) + _Runtime.getIndex(m, 13.0));
         var wz:Dynamic = ((((_Runtime.getIndex(m, 2.0) * nx) + (_Runtime.getIndex(m, 6.0) * ny)) + (_Runtime.getIndex(m, 10.0) * nz)) + _Runtime.getIndex(m, 14.0));
         var ww:Dynamic = ((((_Runtime.getIndex(m, 3.0) * nx) + (_Runtime.getIndex(m, 7.0) * ny)) + (_Runtime.getIndex(m, 11.0) * nz)) + _Runtime.getIndex(m, 15.0));
-        if (_Runtime.truthy(!_Runtime.strictEquals(ww, 0.0))) {
+        if ((cast !_Runtime.strictEquals(ww, 0.0) : Bool)) {
           var invW:Dynamic = (1.0 / ww);
           (wx = cast ((wx * invW) : Dynamic));
           (wy = cast ((wy * invW) : Dynamic));
@@ -44,7 +44,7 @@ class FrustumCorners {
     }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, 8.0, '<'))) {
+      while ((cast ((cast i : Float) < (cast 8.0 : Float)) : Bool)) {
         (_Runtime.getIndex(out, i).x = cast (_Runtime.getIndex(_Runtime.getIndex(results, i), 0.0) : Dynamic));
         (_Runtime.getIndex(out, i).y = cast (_Runtime.getIndex(_Runtime.getIndex(results, i), 1.0) : Dynamic));
         (_Runtime.getIndex(out, i).z = cast (_Runtime.getIndex(_Runtime.getIndex(results, i), 2.0) : Dynamic));

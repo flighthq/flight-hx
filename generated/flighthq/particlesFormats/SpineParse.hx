@@ -27,18 +27,18 @@ class SpineParse {
     } catch (e:Dynamic) {
       throw _Runtime.error('Invalid Spine particle JSON: ' + Std.string(_Runtime.field((cast e : haxe.Exception), 'message')) + '');
     }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(raw, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(raw), 'object')), function():Dynamic return cast _Runtime.isArray(raw)))) {
-      throw _Runtime.error('Invalid Spine particle document: expected a JSON object, got ' + Std.string(_Runtime.select(_Runtime.strictEquals(raw, null), function():Dynamic return cast 'null', function():Dynamic return cast _Runtime.select(_Runtime.isArray(raw), function():Dynamic return cast 'array', function():Dynamic return cast _Runtime.typeofValue(raw)))) + '');
+    if ((cast ((cast ((cast _Runtime.strictEquals(raw, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool)) : Bool) || (cast _Runtime.isArray(raw) : Bool)) : Bool)) {
+      throw _Runtime.error('Invalid Spine particle document: expected a JSON object, got ' + Std.string(((cast _Runtime.strictEquals(raw, null) : Bool) ? (cast 'null' : Dynamic) : (cast ((cast _Runtime.isArray(raw) : Bool) ? (cast 'array' : Dynamic) : (cast _Runtime.typeofValue(raw) : Dynamic)) : Dynamic))) + '');
     }
     return cast (cast raw : Dynamic);
     return cast null;
   }
 
   public static function rangeMid__spineParse(obj:Dynamic, def:Dynamic = 0.0):Float {
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.looseEquals(obj, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'object')))) {
+    if ((cast ((cast !_Runtime.looseEquals(obj, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'object') : Bool)) : Bool)) {
       var o:Dynamic = (cast obj : Dynamic);
-      var lo:Dynamic = _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'low')), 'number'), function():Dynamic return cast _Runtime.field(o, 'low'), function():Dynamic return cast def);
-      var hi:Dynamic = _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'high')), 'number'), function():Dynamic return cast _Runtime.field(o, 'high'), function():Dynamic return cast def);
+      var lo:Dynamic = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'low')), 'number') : Bool) ? (cast _Runtime.field(o, 'low') : Dynamic) : (cast def : Dynamic));
+      var hi:Dynamic = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'high')), 'number') : Bool) ? (cast _Runtime.field(o, 'high') : Dynamic) : (cast def : Dynamic));
       return cast ((lo + hi) * 0.5);
     }
     return cast def;
@@ -46,18 +46,18 @@ class SpineParse {
   }
 
   public static function rangeLow__spineParse(obj:Dynamic, def:Dynamic = 0.0):Float {
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.looseEquals(obj, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'object')))) {
+    if ((cast ((cast !_Runtime.looseEquals(obj, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'object') : Bool)) : Bool)) {
       var o:Dynamic = (cast obj : Dynamic);
-      return cast _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'low')), 'number'), function():Dynamic return cast _Runtime.field(o, 'low'), function():Dynamic return cast def);
+      return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'low')), 'number') : Bool) ? (cast _Runtime.field(o, 'low') : Dynamic) : (cast def : Dynamic));
     }
     return cast def;
     return cast null;
   }
 
   public static function rangeHigh__spineParse(obj:Dynamic, def:Dynamic = 0.0):Float {
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.looseEquals(obj, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'object')))) {
+    if ((cast ((cast !_Runtime.looseEquals(obj, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'object') : Bool)) : Bool)) {
       var o:Dynamic = (cast obj : Dynamic);
-      return cast _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'high')), 'number'), function():Dynamic return cast _Runtime.field(o, 'high'), function():Dynamic return cast def);
+      return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'high')), 'number') : Bool) ? (cast _Runtime.field(o, 'high') : Dynamic) : (cast def : Dynamic));
     }
     return cast def;
     return cast null;
@@ -70,30 +70,30 @@ class SpineParse {
     channel = function(i:Float) {
       var v:Dynamic = cast _Runtime.UNDEFINED;
       v = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.slice(s, i, (i + 2.0)), 16.0] : Array<Dynamic>));
-      return cast _Runtime.select(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)), function():Dynamic return cast (v / 255.0), function():Dynamic return cast 1.0);
+      return cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool) ? (cast (v / 255.0) : Dynamic) : (cast 1.0 : Dynamic));
     };
     return cast cast ([_Runtime.callValue(channel, cast ([0.0] : Array<Dynamic>)), _Runtime.callValue(channel, cast ([2.0] : Array<Dynamic>)), _Runtime.callValue(channel, cast ([4.0] : Array<Dynamic>))] : Array<Dynamic>);
     return cast null;
   }
 
   public static function firstTintColor__spineParse(arr:Dynamic):Array<Float> {
-    return cast _Runtime.callValue(SpineParse.hexToRgb__spineParse, cast ([_Runtime.select(_Runtime.andValue(_Runtime.isArray(arr), function():Dynamic return cast _Runtime.compare(_Runtime.field(arr, 'length'), 0.0, '>')), function():Dynamic return cast _Runtime.coalesce((cast _Runtime.field((cast _Runtime.getIndex(arr, 0.0) : Dynamic), 'color') : String), function():Dynamic return cast 'ffffff'), function():Dynamic return cast 'ffffff')] : Array<Dynamic>));
+    return cast _Runtime.callValue(SpineParse.hexToRgb__spineParse, cast ([((cast ((cast _Runtime.isArray(arr) : Bool) && (cast ((cast _Runtime.field(arr, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.coalesce((cast _Runtime.field((cast _Runtime.getIndex(arr, 0.0) : Dynamic), 'color') : String), function():Dynamic return cast 'ffffff') : Dynamic) : (cast 'ffffff' : Dynamic))] : Array<Dynamic>));
     return cast null;
   }
 
   public static function lastTintColor__spineParse(arr:Dynamic):Array<Float> {
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.isArray(arr)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(arr, 'length'), 0.0)))) { return cast cast ([1.0, 1.0, 1.0] : Array<Dynamic>); }
+    if ((cast ((cast !(cast _Runtime.isArray(arr) : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(arr, 'length'), 0.0) : Bool)) : Bool)) { return cast cast ([1.0, 1.0, 1.0] : Array<Dynamic>); }
     return cast _Runtime.callValue(SpineParse.hexToRgb__spineParse, cast ([_Runtime.coalesce((cast _Runtime.field((cast _Runtime.getIndex(arr, (_Runtime.field(arr, 'length') - 1.0)) : Dynamic), 'color') : String), function():Dynamic return cast 'ffffff')] : Array<Dynamic>));
     return cast null;
   }
 
   public static function firstAlpha__spineParse(arr:Dynamic):Float {
-    return cast _Runtime.select(_Runtime.andValue(_Runtime.isArray(arr), function():Dynamic return cast _Runtime.compare(_Runtime.field(arr, 'length'), 0.0, '>')), function():Dynamic return cast _Runtime.coalesce((cast _Runtime.field((cast _Runtime.getIndex(arr, 0.0) : Dynamic), 'alpha') : Float), function():Dynamic return cast 1.0), function():Dynamic return cast 1.0);
+    return cast ((cast ((cast _Runtime.isArray(arr) : Bool) && (cast ((cast _Runtime.field(arr, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.coalesce((cast _Runtime.field((cast _Runtime.getIndex(arr, 0.0) : Dynamic), 'alpha') : Float), function():Dynamic return cast 1.0) : Dynamic) : (cast 1.0 : Dynamic));
     return cast null;
   }
 
   public static function lastAlpha__spineParse(arr:Dynamic):Float {
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.isArray(arr)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(arr, 'length'), 0.0)))) { return cast 0.0; }
+    if ((cast ((cast !(cast _Runtime.isArray(arr) : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(arr, 'length'), 0.0) : Bool)) : Bool)) { return cast 0.0; }
     return cast _Runtime.coalesce((cast _Runtime.field((cast _Runtime.getIndex(arr, (_Runtime.field(arr, 'length') - 1.0)) : Dynamic), 'alpha') : Float), function():Dynamic return cast 0.0);
     return cast null;
   }
@@ -123,19 +123,19 @@ class SpineParse {
     angleHigh = _Runtime.callValue(SpineParse.rangeHigh__spineParse, cast ([_Runtime.field(raw, 'angle'), 120.0] : Array<Dynamic>));
     angleMid = (((angleLow + angleHigh) * 0.5) * SpineParse.DEG2RAD__spineParse);
     spread = (((angleHigh - angleLow) * 0.5) * SpineParse.DEG2RAD__spineParse);
-    spawnShape = _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(raw, 'spawnShape')), 'string'), function():Dynamic return cast _Runtime.field(raw, 'spawnShape'), function():Dynamic return cast 'point');
+    spawnShape = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(raw, 'spawnShape')), 'string') : Bool) ? (cast _Runtime.field(raw, 'spawnShape') : Dynamic) : (cast 'point' : Dynamic));
     sx = _Runtime.callValue(SpineParse.rangeMid__spineParse, cast ([_Runtime.field(raw, 'spawnWidth'), 0.0] : Array<Dynamic>));
     sy = _Runtime.callValue(SpineParse.rangeMid__spineParse, cast ([_Runtime.field(raw, 'spawnHeight'), 0.0] : Array<Dynamic>));
-    emitterShape = _Runtime.select(_Runtime.strictEquals(spawnShape, 'ellipse'), function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(sx, sy), function():Dynamic return cast 'circle', function():Dynamic return cast 'rect'), function():Dynamic return cast 'point');
+    emitterShape = ((cast _Runtime.strictEquals(spawnShape, 'ellipse') : Bool) ? (cast ((cast _Runtime.strictEquals(sx, sy) : Bool) ? (cast 'circle' : Dynamic) : (cast 'rect' : Dynamic)) : Dynamic) : (cast 'point' : Dynamic));
     spawnScaleMid = _Runtime.callValue(SpineParse.rangeMid__spineParse, cast ([_Runtime.field(raw, 'scale'), 1.0] : Array<Dynamic>));
     endScaleMid = _Runtime.callValue(SpineParse.rangeMid__spineParse, cast ([_Runtime.field(raw, 'scaleEnd'), 0.0] : Array<Dynamic>));
     startTint = _Runtime.callValue(SpineParse.firstTintColor__spineParse, cast ([_Runtime.field(raw, 'tint')] : Array<Dynamic>));
     endTint = _Runtime.callValue(SpineParse.lastTintColor__spineParse, cast ([_Runtime.field(raw, 'tint')] : Array<Dynamic>));
     colorCurve = _Runtime.callValue(SpineParse.tintKeyframesToCurve__spineParse, cast ([_Runtime.field(raw, 'tint')] : Array<Dynamic>));
     alphaCurve = _Runtime.callValue(SpineParse.alphaKeyframesToCurve__spineParse, cast ([_Runtime.field(raw, 'alpha')] : Array<Dynamic>));
-    continuous = _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(raw, 'continuous')), 'boolean'), function():Dynamic return cast _Runtime.field(raw, 'continuous'), function():Dynamic return cast true);
-    durationMs = _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(raw, 'duration')), 'number'), function():Dynamic return cast _Runtime.field(raw, 'duration'), function():Dynamic return cast -1.0);
-    return cast _Runtime.callValue(createParticleEmitterConfig, cast ([{ maxParticles: _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(raw, 'maxParticles')), 'number'), function():Dynamic return cast (_Runtime.toInt32(_Runtime.field(raw, 'maxParticles')) | 0), function():Dynamic return cast 500.0), spawnRate: _Runtime.callValue(SpineParse.rangeMid__spineParse, cast ([_Runtime.field(raw, 'emission'), 20.0] : Array<Dynamic>)), loop: continuous, duration: _Runtime.select(_Runtime.andValue(!_Runtime.truthy(continuous), function():Dynamic return cast _Runtime.compare(durationMs, 0.0, '>')), function():Dynamic return cast (durationMs / 1000.0), function():Dynamic return cast 0.0), colorCurve: colorCurve, alphaCurve: alphaCurve, lifetimeMin: lifeLow, lifetimeMax: lifeHigh, speedMin: _Runtime.callValue(SpineParse.rangeLow__spineParse, cast ([_Runtime.field(raw, 'velocity'), 50.0] : Array<Dynamic>)), speedMax: _Runtime.callValue(SpineParse.rangeHigh__spineParse, cast ([_Runtime.field(raw, 'velocity'), 150.0] : Array<Dynamic>)), directionX: HxMath.cos(angleMid), directionY: -HxMath.sin(angleMid), spread: spread, gravityX: _Runtime.callValue(SpineParse.rangeMid__spineParse, cast ([_Runtime.field(raw, 'wind'), 0.0] : Array<Dynamic>)), gravityY: _Runtime.callValue(SpineParse.rangeMid__spineParse, cast ([_Runtime.field(raw, 'gravity'), 0.0] : Array<Dynamic>)), emitterShape: emitterShape, emitterRadius: _Runtime.select(_Runtime.strictEquals(emitterShape, 'circle'), function():Dynamic return cast (sx * 0.5), function():Dynamic return cast 0.0), emitterWidth: _Runtime.select(_Runtime.strictEquals(emitterShape, 'rect'), function():Dynamic return cast sx, function():Dynamic return cast 0.0), emitterHeight: _Runtime.select(_Runtime.strictEquals(emitterShape, 'rect'), function():Dynamic return cast sy, function():Dynamic return cast 0.0), scaleMin: _Runtime.callValue(SpineParse.rangeLow__spineParse, cast ([_Runtime.field(raw, 'scale'), 1.0] : Array<Dynamic>)), scaleMax: _Runtime.callValue(SpineParse.rangeHigh__spineParse, cast ([_Runtime.field(raw, 'scale'), 1.0] : Array<Dynamic>)), scaleEnd: _Runtime.select(_Runtime.compare(spawnScaleMid, 0.0, '>'), function():Dynamic return cast (endScaleMid / spawnScaleMid), function():Dynamic return cast 0.0), colorStartR: _Runtime.getIndex(startTint, 0.0), colorStartG: _Runtime.getIndex(startTint, 1.0), colorStartB: _Runtime.getIndex(startTint, 2.0), colorEndR: _Runtime.getIndex(endTint, 0.0), colorEndG: _Runtime.getIndex(endTint, 1.0), colorEndB: _Runtime.getIndex(endTint, 2.0), alphaStart: _Runtime.callValue(SpineParse.firstAlpha__spineParse, cast ([_Runtime.field(raw, 'alpha')] : Array<Dynamic>)), alphaEnd: _Runtime.callValue(SpineParse.lastAlpha__spineParse, cast ([_Runtime.field(raw, 'alpha')] : Array<Dynamic>)), rotationSpeedMin: (_Runtime.callValue(SpineParse.rangeLow__spineParse, cast ([_Runtime.field(raw, 'rotation'), 0.0] : Array<Dynamic>)) * SpineParse.DEG2RAD__spineParse), rotationSpeedMax: (_Runtime.callValue(SpineParse.rangeHigh__spineParse, cast ([_Runtime.field(raw, 'rotation'), 0.0] : Array<Dynamic>)) * SpineParse.DEG2RAD__spineParse), blendMode: _Runtime.callValue(SpineParse.spineBlendMode__spineParse, cast ([_Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(raw, 'blendMode')), 'string'), function():Dynamic return cast _Runtime.field(raw, 'blendMode'), function():Dynamic return cast 'normal')] : Array<Dynamic>)) }] : Array<Dynamic>));
+    continuous = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(raw, 'continuous')), 'boolean') : Bool) ? (cast _Runtime.field(raw, 'continuous') : Dynamic) : (cast true : Dynamic));
+    durationMs = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(raw, 'duration')), 'number') : Bool) ? (cast _Runtime.field(raw, 'duration') : Dynamic) : (cast -1.0 : Dynamic));
+    return cast _Runtime.callValue(createParticleEmitterConfig, cast ([{ maxParticles: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(raw, 'maxParticles')), 'number') : Bool) ? (cast (_Runtime.toInt32(_Runtime.field(raw, 'maxParticles')) | 0) : Dynamic) : (cast 500.0 : Dynamic)), spawnRate: _Runtime.callValue(SpineParse.rangeMid__spineParse, cast ([_Runtime.field(raw, 'emission'), 20.0] : Array<Dynamic>)), loop: continuous, duration: ((cast ((cast !(cast continuous : Bool) : Bool) && (cast ((cast durationMs : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (durationMs / 1000.0) : Dynamic) : (cast 0.0 : Dynamic)), colorCurve: colorCurve, alphaCurve: alphaCurve, lifetimeMin: lifeLow, lifetimeMax: lifeHigh, speedMin: _Runtime.callValue(SpineParse.rangeLow__spineParse, cast ([_Runtime.field(raw, 'velocity'), 50.0] : Array<Dynamic>)), speedMax: _Runtime.callValue(SpineParse.rangeHigh__spineParse, cast ([_Runtime.field(raw, 'velocity'), 150.0] : Array<Dynamic>)), directionX: HxMath.cos(angleMid), directionY: -HxMath.sin(angleMid), spread: spread, gravityX: _Runtime.callValue(SpineParse.rangeMid__spineParse, cast ([_Runtime.field(raw, 'wind'), 0.0] : Array<Dynamic>)), gravityY: _Runtime.callValue(SpineParse.rangeMid__spineParse, cast ([_Runtime.field(raw, 'gravity'), 0.0] : Array<Dynamic>)), emitterShape: emitterShape, emitterRadius: ((cast _Runtime.strictEquals(emitterShape, 'circle') : Bool) ? (cast (sx * 0.5) : Dynamic) : (cast 0.0 : Dynamic)), emitterWidth: ((cast _Runtime.strictEquals(emitterShape, 'rect') : Bool) ? (cast sx : Dynamic) : (cast 0.0 : Dynamic)), emitterHeight: ((cast _Runtime.strictEquals(emitterShape, 'rect') : Bool) ? (cast sy : Dynamic) : (cast 0.0 : Dynamic)), scaleMin: _Runtime.callValue(SpineParse.rangeLow__spineParse, cast ([_Runtime.field(raw, 'scale'), 1.0] : Array<Dynamic>)), scaleMax: _Runtime.callValue(SpineParse.rangeHigh__spineParse, cast ([_Runtime.field(raw, 'scale'), 1.0] : Array<Dynamic>)), scaleEnd: ((cast ((cast spawnScaleMid : Float) > (cast 0.0 : Float)) : Bool) ? (cast (endScaleMid / spawnScaleMid) : Dynamic) : (cast 0.0 : Dynamic)), colorStartR: _Runtime.getIndex(startTint, 0.0), colorStartG: _Runtime.getIndex(startTint, 1.0), colorStartB: _Runtime.getIndex(startTint, 2.0), colorEndR: _Runtime.getIndex(endTint, 0.0), colorEndG: _Runtime.getIndex(endTint, 1.0), colorEndB: _Runtime.getIndex(endTint, 2.0), alphaStart: _Runtime.callValue(SpineParse.firstAlpha__spineParse, cast ([_Runtime.field(raw, 'alpha')] : Array<Dynamic>)), alphaEnd: _Runtime.callValue(SpineParse.lastAlpha__spineParse, cast ([_Runtime.field(raw, 'alpha')] : Array<Dynamic>)), rotationSpeedMin: (_Runtime.callValue(SpineParse.rangeLow__spineParse, cast ([_Runtime.field(raw, 'rotation'), 0.0] : Array<Dynamic>)) * SpineParse.DEG2RAD__spineParse), rotationSpeedMax: (_Runtime.callValue(SpineParse.rangeHigh__spineParse, cast ([_Runtime.field(raw, 'rotation'), 0.0] : Array<Dynamic>)) * SpineParse.DEG2RAD__spineParse), blendMode: _Runtime.callValue(SpineParse.spineBlendMode__spineParse, cast ([((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(raw, 'blendMode')), 'string') : Bool) ? (cast _Runtime.field(raw, 'blendMode') : Dynamic) : (cast 'normal' : Dynamic))] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -147,12 +147,12 @@ class SpineParse {
       var o:Dynamic = cast _Runtime.UNDEFINED;
       var r:Dynamic = cast _Runtime.UNDEFINED;
       o = _Runtime.getIndex(raw, key);
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.looseEquals(o, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(o), 'object')))) { return cast false; }
+      if ((cast ((cast _Runtime.looseEquals(o, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(o), 'object') : Bool)) : Bool)) { return cast false; }
       r = (cast o : Dynamic);
-      return cast _Runtime.orValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(r, 'low')), 'number'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(r, 'low'), 0.0)), function():Dynamic return cast _Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(r, 'high')), 'number'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(r, 'high'), 0.0)));
+      return cast ((cast _Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(r, 'low')), 'number'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(r, 'low'), 0.0)) : Bool) || (cast _Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(r, 'high')), 'number'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(r, 'high'), 0.0)) : Bool));
     };
-    if (_Runtime.truthy(_Runtime.callValue(nonZeroRange, cast (['lifeOffset'] : Array<Dynamic>)))) { _Runtime.callProperty(warnings, 'push', cast (['Spine lifeOffset is not supported and was ignored'] : Array<Dynamic>)); }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.callValue(nonZeroRange, cast (['x'] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(nonZeroRange, cast (['y'] : Array<Dynamic>))))) {
+    if ((cast _Runtime.callValue(nonZeroRange, cast (['lifeOffset'] : Array<Dynamic>)) : Bool)) { _Runtime.callProperty(warnings, 'push', cast (['Spine lifeOffset is not supported and was ignored'] : Array<Dynamic>)); }
+    if ((cast ((cast _Runtime.callValue(nonZeroRange, cast (['x'] : Array<Dynamic>)) : Bool) || (cast _Runtime.callValue(nonZeroRange, cast (['y'] : Array<Dynamic>)) : Bool)) : Bool)) {
       _Runtime.callProperty(warnings, 'push', cast (['Spine emitter x/y position ranges are not supported and were ignored'] : Array<Dynamic>));
     }
     return cast warnings;
@@ -161,17 +161,17 @@ class SpineParse {
 
   public static function tintKeyframesToCurve__spineParse(arr:Dynamic):Null<ParticleCurve> {
     var keys:Array<ColorKeyframe> = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.isArray(arr)), function():Dynamic return cast _Runtime.compare(_Runtime.field(arr, 'length'), 2.0, '<=')))) { return cast null; }
+    if ((cast ((cast !(cast _Runtime.isArray(arr) : Bool) : Bool) || (cast ((cast _Runtime.field(arr, 'length') : Float) <= (cast 2.0 : Float)) : Bool)) : Bool)) { return cast null; }
     keys = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(arr, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(arr, 'length') : Float)) : Bool)) {
         var k:Dynamic = (cast _Runtime.getIndex(arr, i) : Dynamic);
-        var __destructure0:Dynamic = _Runtime.callValue(SpineParse.hexToRgb__spineParse, cast ([_Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(k, 'color')), 'string'), function():Dynamic return cast _Runtime.field(k, 'color'), function():Dynamic return cast 'ffffff')] : Array<Dynamic>));
+        var __destructure0:Dynamic = _Runtime.callValue(SpineParse.hexToRgb__spineParse, cast ([((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(k, 'color')), 'string') : Bool) ? (cast _Runtime.field(k, 'color') : Dynamic) : (cast 'ffffff' : Dynamic))] : Array<Dynamic>));
         var r:Dynamic = _Runtime.getIndex(__destructure0, 0.0);
         var g:Dynamic = _Runtime.getIndex(__destructure0, 1.0);
         var b:Dynamic = _Runtime.getIndex(__destructure0, 2.0);
-        _Runtime.callProperty(keys, 'push', cast ([{ time: _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(k, 'time')), 'number'), function():Dynamic return cast _Runtime.field(k, 'time'), function():Dynamic return cast (i / (_Runtime.field(arr, 'length') - 1.0))), r: r, g: g, b: b }] : Array<Dynamic>));
+        _Runtime.callProperty(keys, 'push', cast ([{ time: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(k, 'time')), 'number') : Bool) ? (cast _Runtime.field(k, 'time') : Dynamic) : (cast (i / (_Runtime.field(arr, 'length') - 1.0)) : Dynamic)), r: r, g: g, b: b }] : Array<Dynamic>));
         i++;
       }
     }
@@ -181,13 +181,13 @@ class SpineParse {
 
   public static function alphaKeyframesToCurve__spineParse(arr:Dynamic):Null<ParticleCurve> {
     var keys:Array<CurveKeyframe> = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.isArray(arr)), function():Dynamic return cast _Runtime.compare(_Runtime.field(arr, 'length'), 2.0, '<=')))) { return cast null; }
+    if ((cast ((cast !(cast _Runtime.isArray(arr) : Bool) : Bool) || (cast ((cast _Runtime.field(arr, 'length') : Float) <= (cast 2.0 : Float)) : Bool)) : Bool)) { return cast null; }
     keys = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(arr, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(arr, 'length') : Float)) : Bool)) {
         var k:Dynamic = (cast _Runtime.getIndex(arr, i) : Dynamic);
-        _Runtime.callProperty(keys, 'push', cast ([{ time: _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(k, 'time')), 'number'), function():Dynamic return cast _Runtime.field(k, 'time'), function():Dynamic return cast (i / (_Runtime.field(arr, 'length') - 1.0))), value: _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(k, 'alpha')), 'number'), function():Dynamic return cast _Runtime.field(k, 'alpha'), function():Dynamic return cast 1.0) }] : Array<Dynamic>));
+        _Runtime.callProperty(keys, 'push', cast ([{ time: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(k, 'time')), 'number') : Bool) ? (cast _Runtime.field(k, 'time') : Dynamic) : (cast (i / (_Runtime.field(arr, 'length') - 1.0)) : Dynamic)), value: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(k, 'alpha')), 'number') : Bool) ? (cast _Runtime.field(k, 'alpha') : Dynamic) : (cast 1.0 : Dynamic)) }] : Array<Dynamic>));
         i++;
       }
     }
@@ -196,10 +196,10 @@ class SpineParse {
   }
 
   public static function spineBlendMode__spineParse(mode:String):Null<ParticleBlendMode> {
-    if (_Runtime.truthy(_Runtime.strictEquals(mode, 'additive'))) { return cast 'add'; }
-    if (_Runtime.truthy(_Runtime.strictEquals(mode, 'multiply'))) { return cast 'multiply'; }
-    if (_Runtime.truthy(_Runtime.strictEquals(mode, 'screen'))) { return cast 'screen'; }
-    if (_Runtime.truthy(_Runtime.strictEquals(mode, 'normal'))) { return cast 'normal'; }
+    if ((cast _Runtime.strictEquals(mode, 'additive') : Bool)) { return cast 'add'; }
+    if ((cast _Runtime.strictEquals(mode, 'multiply') : Bool)) { return cast 'multiply'; }
+    if ((cast _Runtime.strictEquals(mode, 'screen') : Bool)) { return cast 'screen'; }
+    if ((cast _Runtime.strictEquals(mode, 'normal') : Bool)) { return cast 'normal'; }
     return cast null;
     return cast null;
   }
@@ -211,13 +211,13 @@ class SpineParse {
     var rv:Dynamic = cast _Runtime.UNDEFINED;
     var tintKfs:Dynamic = cast _Runtime.UNDEFINED;
     var alphaKfs:Dynamic = cast _Runtime.UNDEFINED;
-    s = function(k:String, def:String) return _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(raw, k)), 'string'), function():Dynamic return cast (cast _Runtime.getIndex(raw, k) : String), function():Dynamic return cast def);
-    n = function(k:String, def:Float) return _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(raw, k)), 'number'), function():Dynamic return cast (cast _Runtime.getIndex(raw, k) : Float), function():Dynamic return cast def);
-    b = function(k:String, def:Bool) return _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(raw, k)), 'boolean'), function():Dynamic return cast (cast _Runtime.getIndex(raw, k) : Bool), function():Dynamic return cast def);
-    rv = function(obj:Dynamic, lo:Dynamic = 0.0, hi:Dynamic = 0.0) return { low: _Runtime.select(_Runtime.andValue(_Runtime.andValue(!_Runtime.looseEquals(obj, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'object')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast obj : Dynamic), 'low')), 'number')), function():Dynamic return cast (cast _Runtime.field((cast obj : Dynamic), 'low') : Float), function():Dynamic return cast lo), high: _Runtime.select(_Runtime.andValue(_Runtime.andValue(!_Runtime.looseEquals(obj, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'object')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast obj : Dynamic), 'high')), 'number')), function():Dynamic return cast (cast _Runtime.field((cast obj : Dynamic), 'high') : Float), function():Dynamic return cast hi) };
-    tintKfs = function(arr:Dynamic) return _Runtime.select(_Runtime.isArray(arr), function():Dynamic return cast _Runtime.callProperty(arr, 'map', cast ([function(k:Dynamic) return { time: _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast k : Dynamic), 'time')), 'number'), function():Dynamic return cast (cast _Runtime.field((cast k : Dynamic), 'time') : Float), function():Dynamic return cast 0.0), color: _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast k : Dynamic), 'color')), 'string'), function():Dynamic return cast (cast _Runtime.field((cast k : Dynamic), 'color') : String), function():Dynamic return cast 'ffffff') }] : Array<Dynamic>)), function():Dynamic return cast cast ([{ time: 0.0, color: 'ffffff' }] : Array<Dynamic>));
-    alphaKfs = function(arr:Dynamic) return _Runtime.select(_Runtime.isArray(arr), function():Dynamic return cast _Runtime.callProperty(arr, 'map', cast ([function(k:Dynamic) return { time: _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast k : Dynamic), 'time')), 'number'), function():Dynamic return cast (cast _Runtime.field((cast k : Dynamic), 'time') : Float), function():Dynamic return cast 0.0), alpha: _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast k : Dynamic), 'alpha')), 'number'), function():Dynamic return cast (cast _Runtime.field((cast k : Dynamic), 'alpha') : Float), function():Dynamic return cast 1.0) }] : Array<Dynamic>)), function():Dynamic return cast cast ([{ time: 0.0, alpha: 1.0 }, { time: 1.0, alpha: 0.0 }] : Array<Dynamic>));
-    return cast { name: _Runtime.callValue(s, cast (['name', ''] : Array<Dynamic>)), maxParticles: (_Runtime.toInt32(_Runtime.callValue(n, cast (['maxParticles', 500.0] : Array<Dynamic>))) | 0), continuous: _Runtime.callValue(b, cast (['continuous', true] : Array<Dynamic>)), duration: _Runtime.callValue(n, cast (['duration', -1.0] : Array<Dynamic>)), emission: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'emission'), 10.0, 30.0] : Array<Dynamic>)), life: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'life'), 500.0, 1500.0] : Array<Dynamic>)), lifeOffset: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'lifeOffset'), 0.0, 0.0] : Array<Dynamic>)), x: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'x'), 0.0, 0.0] : Array<Dynamic>)), y: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'y'), 0.0, 0.0] : Array<Dynamic>)), spawnShape: (cast _Runtime.callValue(s, cast (['spawnShape', 'point'] : Array<Dynamic>)) : Dynamic), spawnWidth: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'spawnWidth'), 0.0, 0.0] : Array<Dynamic>)), spawnHeight: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'spawnHeight'), 0.0, 0.0] : Array<Dynamic>)), velocity: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'velocity'), 50.0, 150.0] : Array<Dynamic>)), angle: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'angle'), 60.0, 120.0] : Array<Dynamic>)), rotation: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'rotation'), 0.0, 0.0] : Array<Dynamic>)), wind: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'wind'), 0.0, 0.0] : Array<Dynamic>)), gravity: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'gravity'), 0.0, 0.0] : Array<Dynamic>)), scale: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'scale'), 1.0, 1.0] : Array<Dynamic>)), scaleEnd: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'scaleEnd'), 0.0, 0.0] : Array<Dynamic>)), tint: _Runtime.callValue(tintKfs, cast ([_Runtime.field(raw, 'tint')] : Array<Dynamic>)), alpha: _Runtime.callValue(alphaKfs, cast ([_Runtime.field(raw, 'alpha')] : Array<Dynamic>)), blendMode: (cast _Runtime.callValue(s, cast (['blendMode', 'normal'] : Array<Dynamic>)) : Dynamic), premultiplied: _Runtime.callValue(b, cast (['premultiplied', false] : Array<Dynamic>)), images: _Runtime.select(_Runtime.isArray(_Runtime.field(raw, 'images')), function():Dynamic return cast (cast _Runtime.field(raw, 'images') : Array<String>), function():Dynamic return cast cast ([] : Array<Dynamic>)) };
+    s = function(k:String, def:String) return ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(raw, k)), 'string') : Bool) ? (cast (cast _Runtime.getIndex(raw, k) : String) : Dynamic) : (cast def : Dynamic));
+    n = function(k:String, def:Float) return ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(raw, k)), 'number') : Bool) ? (cast (cast _Runtime.getIndex(raw, k) : Float) : Dynamic) : (cast def : Dynamic));
+    b = function(k:String, def:Bool) return ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(raw, k)), 'boolean') : Bool) ? (cast (cast _Runtime.getIndex(raw, k) : Bool) : Dynamic) : (cast def : Dynamic));
+    rv = function(obj:Dynamic, lo:Dynamic = 0.0, hi:Dynamic = 0.0) return { low: ((cast ((cast ((cast !_Runtime.looseEquals(obj, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'object') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast obj : Dynamic), 'low')), 'number') : Bool)) : Bool) ? (cast (cast _Runtime.field((cast obj : Dynamic), 'low') : Float) : Dynamic) : (cast lo : Dynamic)), high: ((cast ((cast ((cast !_Runtime.looseEquals(obj, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'object') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast obj : Dynamic), 'high')), 'number') : Bool)) : Bool) ? (cast (cast _Runtime.field((cast obj : Dynamic), 'high') : Float) : Dynamic) : (cast hi : Dynamic)) };
+    tintKfs = function(arr:Dynamic) return ((cast _Runtime.isArray(arr) : Bool) ? (cast _Runtime.callProperty(arr, 'map', cast ([function(k:Dynamic) return { time: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast k : Dynamic), 'time')), 'number') : Bool) ? (cast (cast _Runtime.field((cast k : Dynamic), 'time') : Float) : Dynamic) : (cast 0.0 : Dynamic)), color: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast k : Dynamic), 'color')), 'string') : Bool) ? (cast (cast _Runtime.field((cast k : Dynamic), 'color') : String) : Dynamic) : (cast 'ffffff' : Dynamic)) }] : Array<Dynamic>)) : Dynamic) : (cast cast ([{ time: 0.0, color: 'ffffff' }] : Array<Dynamic>) : Dynamic));
+    alphaKfs = function(arr:Dynamic) return ((cast _Runtime.isArray(arr) : Bool) ? (cast _Runtime.callProperty(arr, 'map', cast ([function(k:Dynamic) return { time: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast k : Dynamic), 'time')), 'number') : Bool) ? (cast (cast _Runtime.field((cast k : Dynamic), 'time') : Float) : Dynamic) : (cast 0.0 : Dynamic)), alpha: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast k : Dynamic), 'alpha')), 'number') : Bool) ? (cast (cast _Runtime.field((cast k : Dynamic), 'alpha') : Float) : Dynamic) : (cast 1.0 : Dynamic)) }] : Array<Dynamic>)) : Dynamic) : (cast cast ([{ time: 0.0, alpha: 1.0 }, { time: 1.0, alpha: 0.0 }] : Array<Dynamic>) : Dynamic));
+    return cast { name: _Runtime.callValue(s, cast (['name', ''] : Array<Dynamic>)), maxParticles: (_Runtime.toInt32(_Runtime.callValue(n, cast (['maxParticles', 500.0] : Array<Dynamic>))) | 0), continuous: _Runtime.callValue(b, cast (['continuous', true] : Array<Dynamic>)), duration: _Runtime.callValue(n, cast (['duration', -1.0] : Array<Dynamic>)), emission: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'emission'), 10.0, 30.0] : Array<Dynamic>)), life: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'life'), 500.0, 1500.0] : Array<Dynamic>)), lifeOffset: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'lifeOffset'), 0.0, 0.0] : Array<Dynamic>)), x: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'x'), 0.0, 0.0] : Array<Dynamic>)), y: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'y'), 0.0, 0.0] : Array<Dynamic>)), spawnShape: (cast _Runtime.callValue(s, cast (['spawnShape', 'point'] : Array<Dynamic>)) : Dynamic), spawnWidth: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'spawnWidth'), 0.0, 0.0] : Array<Dynamic>)), spawnHeight: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'spawnHeight'), 0.0, 0.0] : Array<Dynamic>)), velocity: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'velocity'), 50.0, 150.0] : Array<Dynamic>)), angle: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'angle'), 60.0, 120.0] : Array<Dynamic>)), rotation: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'rotation'), 0.0, 0.0] : Array<Dynamic>)), wind: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'wind'), 0.0, 0.0] : Array<Dynamic>)), gravity: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'gravity'), 0.0, 0.0] : Array<Dynamic>)), scale: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'scale'), 1.0, 1.0] : Array<Dynamic>)), scaleEnd: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'scaleEnd'), 0.0, 0.0] : Array<Dynamic>)), tint: _Runtime.callValue(tintKfs, cast ([_Runtime.field(raw, 'tint')] : Array<Dynamic>)), alpha: _Runtime.callValue(alphaKfs, cast ([_Runtime.field(raw, 'alpha')] : Array<Dynamic>)), blendMode: (cast _Runtime.callValue(s, cast (['blendMode', 'normal'] : Array<Dynamic>)) : Dynamic), premultiplied: _Runtime.callValue(b, cast (['premultiplied', false] : Array<Dynamic>)), images: ((cast _Runtime.isArray(_Runtime.field(raw, 'images')) : Bool) ? (cast (cast _Runtime.field(raw, 'images') : Array<String>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic)) };
     return cast null;
   }
 

@@ -21,22 +21,22 @@ class MeshGeometryLayout {
     dstStride = _Runtime.field(targetLayout, 'stride');
     srcFloatsPerVertex = (srcStride / 4.0);
     dstFloatsPerVertex = (dstStride / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(srcFloatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(_Runtime.field(source, 'vertices'), 'length') / srcFloatsPerVertex)), function():Dynamic return cast 0.0);
+    vertexCount = ((cast ((cast srcFloatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(_Runtime.field(source, 'vertices'), 'length') / srcFloatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     dstVertices = new flighthq._internal._Float32Array((vertexCount * dstFloatsPerVertex));
     srcVerts = _Runtime.field(source, 'vertices');
     mapping = cast ([] : Array<Dynamic>);
     for (dstAttr in _Runtime.iterable(_Runtime.field(targetLayout, 'attributes'))) {
-      if (_Runtime.truthy(!_Runtime.truthy(StringTools.startsWith(_Runtime.field(dstAttr, 'format'), 'float32')))) { continue; }
+      if ((cast !(cast StringTools.startsWith(_Runtime.field(dstAttr, 'format'), 'float32') : Bool) : Bool)) { continue; }
       var dstFloatOffset:Dynamic = (_Runtime.field(dstAttr, 'byteOffset') / 4.0);
       var componentCount:Dynamic = _Runtime.callValue(MeshGeometryLayout.getFloat32ComponentCount__meshGeometryLayout, cast ([_Runtime.field(dstAttr, 'format')] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(componentCount, 0.0))) { continue; }
-      var srcAttr:Dynamic = _Runtime.find(_Runtime.field(_Runtime.field(source, 'layout'), 'attributes'), function(a:Dynamic) return _Runtime.andValue(_Runtime.strictEquals(_Runtime.field(a, 'semantic'), _Runtime.field(dstAttr, 'semantic')), function():Dynamic return cast StringTools.startsWith(_Runtime.field(a, 'format'), 'float32')));
-      if (_Runtime.truthy(!_Runtime.truthy(srcAttr))) { continue; }
+      if ((cast _Runtime.strictEquals(componentCount, 0.0) : Bool)) { continue; }
+      var srcAttr:Dynamic = _Runtime.find(_Runtime.field(_Runtime.field(source, 'layout'), 'attributes'), function(a:Dynamic) return ((cast _Runtime.strictEquals(_Runtime.field(a, 'semantic'), _Runtime.field(dstAttr, 'semantic')) : Bool) && (cast StringTools.startsWith(_Runtime.field(a, 'format'), 'float32') : Bool)));
+      if ((cast !_Runtime.truthy(srcAttr) : Bool)) { continue; }
       _Runtime.callProperty(mapping, 'push', cast ([{ componentCount: componentCount, dstFloatOffset: dstFloatOffset, srcFloatOffset: (_Runtime.field(srcAttr, 'byteOffset') / 4.0) }] : Array<Dynamic>));
     }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, vertexCount, '<'))) {
+      while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
         var srcBase:Dynamic = (i * srcFloatsPerVertex);
         var dstBase:Dynamic = (i * dstFloatsPerVertex);
         for (__iteration0 in _Runtime.iterable(mapping)) {
@@ -45,7 +45,7 @@ class MeshGeometryLayout {
           var componentCount:Dynamic = _Runtime.field(__iteration0, 'componentCount');
           {
             var c:Dynamic = 0.0;
-            while (_Runtime.truthy(_Runtime.compare(c, componentCount, '<'))) {
+            while ((cast ((cast c : Float) < (cast componentCount : Float)) : Bool)) {
               _Runtime.setIndex(dstVertices, ((dstBase + dstFloatOffset) + c), _Runtime.getIndex(srcVerts, ((srcBase + srcFloatOffset) + c)));
               c++;
             }
@@ -59,10 +59,10 @@ class MeshGeometryLayout {
   }
 
   public static function getFloat32ComponentCount__meshGeometryLayout(format:String):Float {
-    if (_Runtime.truthy(_Runtime.strictEquals(format, 'float32'))) { return cast 1.0; }
-    if (_Runtime.truthy(_Runtime.strictEquals(format, 'float32x2'))) { return cast 2.0; }
-    if (_Runtime.truthy(_Runtime.strictEquals(format, 'float32x3'))) { return cast 3.0; }
-    if (_Runtime.truthy(_Runtime.strictEquals(format, 'float32x4'))) { return cast 4.0; }
+    if ((cast _Runtime.strictEquals(format, 'float32') : Bool)) { return cast 1.0; }
+    if ((cast _Runtime.strictEquals(format, 'float32x2') : Bool)) { return cast 2.0; }
+    if ((cast _Runtime.strictEquals(format, 'float32x3') : Bool)) { return cast 3.0; }
+    if ((cast _Runtime.strictEquals(format, 'float32x4') : Bool)) { return cast 4.0; }
     return cast 0.0;
     return cast null;
   }

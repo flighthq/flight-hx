@@ -17,7 +17,7 @@ class ShapeHitTestRegistry {
     var fn:Dynamic = cast _Runtime.UNDEFINED;
     key = (cast _Runtime.getIndex(buf, i) : String);
     fn = ((cast ShapeHitTestRegistry.hitTests__shapeHitTestRegistry : flighthq._internal._Map).get(key));
-    if (_Runtime.truthy(_Runtime.strictEquals(fn, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast null; }
+    if ((cast _Runtime.strictEquals(fn, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
     return cast _Runtime.callValue(fn, cast ([x, y, buf, (i + 2.0)] : Array<Dynamic>));
     return cast null;
   }

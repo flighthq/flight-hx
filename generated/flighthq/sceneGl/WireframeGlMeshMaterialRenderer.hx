@@ -32,7 +32,7 @@ class WireframeGlMeshMaterialRenderer {
     program = _Runtime.callValue(ensureGlWireframeProgram, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(beginGlMeshDraw, cast ([state, program, true] : Array<Dynamic>));
     _Runtime.callValue(setGlMeshViewProjection, cast ([gl, _Runtime.field(program, 'locViewProjection'), camera] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(wireframe, null))) {
+    if ((cast _Runtime.strictEquals(wireframe, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locColor'), 1.0, 1.0, 1.0, 1.0);
       return;
     }
@@ -46,11 +46,11 @@ class WireframeGlMeshMaterialRenderer {
     var elementSize:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     program = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
-    if (_Runtime.truthy(_Runtime.strictEquals(program, null))) { return; }
+    if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
     flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(program, 'locModel'), false, _Runtime.field(proxy, 'worldMatrix').m);
     upload = _Runtime.callValue(ensureGlWireframeUpload, cast ([state, geometry] : Array<Dynamic>));
     subset = _Runtime.field(proxy, 'subset');
-    elementSize = _Runtime.select(_Runtime.strictEquals(_Runtime.field(upload, 'indexType'), flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT), function():Dynamic return cast 4.0, function():Dynamic return cast 2.0);
+    elementSize = ((cast _Runtime.strictEquals(_Runtime.field(upload, 'indexType'), flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT) : Bool) ? (cast 4.0 : Dynamic) : (cast 2.0 : Dynamic));
     flighthq._internal.backend.WebGl2Backend.drawElements(gl, flighthq._internal.backend.WebGl2Backend.LINES, (_Runtime.field(subset, 'indexCount') * 2.0), _Runtime.field(upload, 'indexType'), ((_Runtime.field(subset, 'indexOffset') * 2.0) * elementSize));
   } };
 

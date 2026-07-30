@@ -17,7 +17,7 @@ class TauriNotification {
     nextId = 0.0;
     cachedPermission = 'default';
     flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(notification, 'isPermissionGranted', cast ([] : Array<Dynamic>)), 'then', cast ([function(granted:Dynamic) {
-      (cachedPermission = cast (_Runtime.select(granted, function():Dynamic return cast 'granted', function():Dynamic return cast 'default') : Dynamic));
+      (cachedPermission = cast (((cast granted : Bool) ? (cast 'granted' : Dynamic) : (cast 'default' : Dynamic)) : Dynamic));
     }] : Array<Dynamic>)), function() {
     
     });
@@ -40,7 +40,7 @@ class TauriNotification {
             var permission:Dynamic = cast _Runtime.UNDEFINED;
             return flighthq._internal._Async.flatMap(_Runtime.callProperty(notification, 'requestPermission', cast ([] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
               permission = __awaitValue0;
-              (cachedPermission = cast (_Runtime.select(_Runtime.strictEquals(permission, 'granted'), function():Dynamic return cast 'granted', function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(permission, 'denied'), function():Dynamic return cast 'denied', function():Dynamic return cast 'default')) : Dynamic));
+              (cachedPermission = cast (((cast _Runtime.strictEquals(permission, 'granted') : Bool) ? (cast 'granted' : Dynamic) : (cast ((cast _Runtime.strictEquals(permission, 'denied') : Bool) ? (cast 'denied' : Dynamic) : (cast 'default' : Dynamic)) : Dynamic)) : Dynamic));
               return flighthq._internal._Async.flowReturn(cachedPermission);
             });
           }), function(__caughtError:Dynamic):Dynamic {

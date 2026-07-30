@@ -49,14 +49,14 @@ class WgpuOuterGlowEffect {
     _Runtime.callValue(clearWgpuEffectTarget, cast ([state, dst] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, glowPasses, '<'))) {
+      while ((cast ((cast i : Float) < (cast glowPasses : Float)) : Bool)) {
         _Runtime.callValue(applyWgpuEffectBlitPass, cast ([state, blurred, dst] : Array<Dynamic>));
         i++;
       }
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(sourceMode, 'knockout'))) {
+    if ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool)) {
       _Runtime.callValue(applyWgpuEffectErasePass, cast ([state, src, dst] : Array<Dynamic>));
-    } else { if (_Runtime.truthy(_Runtime.strictEquals(sourceMode, 'draw'))) {
+    } else { if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) {
       _Runtime.callValue(applyWgpuEffectBlitPass, cast ([state, src, dst] : Array<Dynamic>));
     } }
     _Runtime.callValue(releaseWgpuRenderTarget, cast ([pool, mask] : Array<Dynamic>));

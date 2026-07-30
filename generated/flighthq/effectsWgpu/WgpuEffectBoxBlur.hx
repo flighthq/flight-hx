@@ -30,23 +30,23 @@ class WgpuEffectBoxBlur {
     write = temp;
     {
       var pass:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(pass, passes, '<'))) {
+      while ((cast ((cast pass : Float) < (cast passes : Float)) : Bool)) {
         var radiusX:Dynamic = _Runtime.callValue(computeBoxBlurPassRadius, cast ([blurX, passes, pass] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.compare(radiusX, 0.0, '>'))) {
+        if ((cast ((cast radiusX : Float) > (cast 0.0 : Float)) : Bool)) {
           _Runtime.callValue(WgpuEffectBoxBlur.applyBoxBlurPass__wgpuEffectBoxBlur, cast ([state, read, write, radiusX, 1.0, 0.0, edgeColor] : Array<Dynamic>));
           (read = cast (write : Dynamic));
-          (write = cast (_Runtime.select(_Runtime.strictEquals(write, temp), function():Dynamic return cast dest, function():Dynamic return cast temp) : Dynamic));
+          (write = cast (((cast _Runtime.strictEquals(write, temp) : Bool) ? (cast dest : Dynamic) : (cast temp : Dynamic)) : Dynamic));
         }
         var radiusY:Dynamic = _Runtime.callValue(computeBoxBlurPassRadius, cast ([blurY, passes, pass] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.compare(radiusY, 0.0, '>'))) {
+        if ((cast ((cast radiusY : Float) > (cast 0.0 : Float)) : Bool)) {
           _Runtime.callValue(WgpuEffectBoxBlur.applyBoxBlurPass__wgpuEffectBoxBlur, cast ([state, read, write, radiusY, 0.0, 1.0, edgeColor] : Array<Dynamic>));
           (read = cast (write : Dynamic));
-          (write = cast (_Runtime.select(_Runtime.strictEquals(write, temp), function():Dynamic return cast dest, function():Dynamic return cast temp) : Dynamic));
+          (write = cast (((cast _Runtime.strictEquals(write, temp) : Bool) ? (cast dest : Dynamic) : (cast temp : Dynamic)) : Dynamic));
         }
         pass++;
       }
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(read, dest))) {
+    if ((cast !_Runtime.strictEquals(read, dest) : Bool)) {
       _Runtime.callValue(WgpuEffectBoxBlur.applyBoxBlurPass__wgpuEffectBoxBlur, cast ([state, read, dest, 0.0, 0.0, 0.0, _Runtime.field(_Runtime, 'UNDEFINED')] : Array<Dynamic>));
     }
   }
@@ -59,7 +59,7 @@ class WgpuEffectBoxBlur {
       _Runtime.setIndex(f32, 1.0, (1.0 / _Runtime.field(source, 'height')));
       _Runtime.setIndex(f32, 2.0, dirX);
       _Runtime.setIndex(f32, 3.0, dirY);
-      if (_Runtime.truthy(_Runtime.strictEquals(edgeColor, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+      if ((cast _Runtime.strictEquals(edgeColor, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         _Runtime.setIndex(f32, 4.0, 0.0);
         _Runtime.setIndex(f32, 5.0, 0.0);
         _Runtime.setIndex(f32, 6.0, 0.0);
@@ -79,7 +79,7 @@ class WgpuEffectBoxBlur {
   public static function getBoxBlurPipeline__wgpuEffectBoxBlur(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Dynamic = cast _Runtime.UNDEFINED;
     p = ((cast WgpuEffectBoxBlur.boxBlurPipelines__wgpuEffectBoxBlur : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (p = cast (_Runtime.callValue(createWgpuEffectPipeline, cast ([state, WgpuEffectBoxBlur.BOX_BLUR_WGSL__wgpuEffectBoxBlur, 'replace'] : Array<Dynamic>)) : Dynamic));
       ((cast WgpuEffectBoxBlur.boxBlurPipelines__wgpuEffectBoxBlur : flighthq._internal._WeakMap).set(state, p));
     }

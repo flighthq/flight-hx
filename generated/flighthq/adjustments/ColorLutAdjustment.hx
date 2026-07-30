@@ -12,9 +12,9 @@ class ColorLutAdjustment {
     var transform:Dynamic = cast _Runtime.UNDEFINED;
     var matrix:Dynamic = cast _Runtime.UNDEFINED;
     transform = _Runtime.field((cast operation : Dynamic), 'transform');
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(transform), 'function'))) { return cast transform; }
+    if ((cast _Runtime.strictEquals(_Runtime.typeofValue(transform), 'function') : Bool)) { return cast transform; }
     matrix = _Runtime.callValue(getAdjustmentColorMatrix, cast ([operation] : Array<Dynamic>));
-    return cast _Runtime.select(_Runtime.strictEquals(matrix, null), function():Dynamic return cast null, function():Dynamic return cast _Runtime.callValue(ColorLutAdjustment.colorMatrixTransform__colorLutAdjustment, cast ([matrix] : Array<Dynamic>)));
+    return cast ((cast _Runtime.strictEquals(matrix, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callValue(ColorLutAdjustment.colorMatrixTransform__colorLutAdjustment, cast ([matrix] : Array<Dynamic>)) : Dynamic));
     return cast null;
   }
 

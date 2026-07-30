@@ -36,7 +36,7 @@ class CanvasScanlinesEffect {
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'fillStyle', 'rgb(' + Std.string(channel) + ',' + Std.string(channel) + ',' + Std.string(channel) + ')');
     {
       var y:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(y, h, '<'))) {
+      while ((cast ((cast y : Float) < (cast h : Float)) : Bool)) {
         flighthq._internal.backend.Canvas2dBackend.call(ctx, 'fillRect', cast ([0.0, HxMath.round(y), w, lineHeight] : Array<Dynamic>));
         (y = cast ((y + spacing) : Dynamic));
       }

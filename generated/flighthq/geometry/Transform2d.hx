@@ -28,10 +28,10 @@ class Transform2d {
     c = _Runtime.field(source, 'c');
     d = _Runtime.field(source, 'd');
     scaleX = HxMath.sqrt(((a * a) + (b * b)));
-    scaleY = _Runtime.select(_Runtime.compare(((a * d) - (b * c)), 0.0, '<'), function():Dynamic return cast -HxMath.sqrt(((c * c) + (d * d))), function():Dynamic return cast HxMath.sqrt(((c * c) + (d * d))));
+    scaleY = ((cast ((cast ((a * d) - (b * c)) : Float) < (cast 0.0 : Float)) : Bool) ? (cast -HxMath.sqrt(((c * c) + (d * d))) : Dynamic) : (cast HxMath.sqrt(((c * c) + (d * d))) : Dynamic));
     skewXDegrees = (HxMath.atan2(-c, d) * Transform2d.RAD_TO_DEG__transform2d);
     skewYDegrees = (HxMath.atan2(b, a) * Transform2d.RAD_TO_DEG__transform2d);
-    if (_Runtime.truthy(_Runtime.strictEquals(skewXDegrees, skewYDegrees))) {
+    if ((cast _Runtime.strictEquals(skewXDegrees, skewYDegrees) : Bool)) {
       _Runtime.setField(out, 'rotation', skewYDegrees);
       _Runtime.setField(out, 'skewX', 0.0);
       _Runtime.setField(out, 'skewY', 0.0);

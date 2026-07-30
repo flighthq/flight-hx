@@ -32,18 +32,18 @@ class Tileset {
     tileHeight = _Runtime.field(__destructure0, 'tileHeight');
     margin = _Runtime.field(__destructure0, 'margin');
     spacing = _Runtime.field(__destructure0, 'spacing');
-    if (_Runtime.truthy(_Runtime.strictEquals(atlas, null))) { return; }
+    if ((cast _Runtime.strictEquals(atlas, null) : Bool)) { return; }
     regions = _Runtime.field(atlas, 'regions');
     count = (rows * columns);
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(regions, 'length'), count, '>'))) { _Runtime.setLength(regions, count); }
+    if ((cast ((cast _Runtime.field(regions, 'length') : Float) > (cast count : Float)) : Bool)) { _Runtime.setLength(regions, count); }
     i = 0.0;
     {
       var row:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(row, rows, '<'))) {
+      while ((cast ((cast row : Float) < (cast rows : Float)) : Bool)) {
         {
           var column:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(column, columns, '<'))) {
-            if (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(regions, 'length'), '>='))) { _Runtime.callProperty(regions, 'push', cast ([_Runtime.callValue(createTextureAtlasRegion, cast ([] : Array<Dynamic>))] : Array<Dynamic>)); }
+          while ((cast ((cast column : Float) < (cast columns : Float)) : Bool)) {
+            if ((cast ((cast i : Float) >= (cast _Runtime.field(regions, 'length') : Float)) : Bool)) { _Runtime.callProperty(regions, 'push', cast ([_Runtime.callValue(createTextureAtlasRegion, cast ([] : Array<Dynamic>))] : Array<Dynamic>)); }
             var region:Dynamic = _Runtime.getIndex(regions, i);
             var x:Dynamic = (margin + (column * (tileWidth + spacing)));
             var y:Dynamic = (margin + (row * (tileHeight + spacing)));

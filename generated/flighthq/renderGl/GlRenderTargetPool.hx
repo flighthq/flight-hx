@@ -23,9 +23,9 @@ class GlRenderTargetPool {
     sampleCount = HxMath.max(1.0, _Runtime.coalesce(_Runtime.field(descriptor, 'sampleCount'), function():Dynamic return cast 1.0));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(pool, 'free'), 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(pool, 'free'), 'length') : Float)) : Bool)) {
         var candidate:Dynamic = _Runtime.getIndex(_Runtime.field(pool, 'free'), i);
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(candidate, 'width'), w), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(candidate, 'height'), h)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(candidate, 'format'), format)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(candidate, 'sampleCount'), sampleCount)))) {
+        if ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(candidate, 'width'), w) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(candidate, 'height'), h) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(candidate, 'format'), format) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(candidate, 'sampleCount'), sampleCount) : Bool)) : Bool)) {
           _Runtime.splice(_Runtime.field(pool, 'free'), Std.int(i), Std.int(1.0), []);
           _Runtime.setField(candidate, 'colorSpace', _Runtime.coalesce(_Runtime.field(descriptor, 'colorSpace'), function():Dynamic return cast 'srgb'));
           _Runtime.callValue(clearGlRenderTarget, cast ([state, candidate] : Array<Dynamic>));

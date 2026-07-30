@@ -20,14 +20,14 @@ class GlShadedModifierSnippet {
   public static function registerGlModifierSnippet(state:GlRenderState, snippet:GlModifierSnippet):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'modifierSnippetRegistry'), null))) { _Runtime.setField(runtime, 'modifierSnippetRegistry', _Runtime.callValue(createModifierRegistry, cast ([] : Array<Dynamic>))); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'modifierSnippetRegistry'), null) : Bool)) { _Runtime.setField(runtime, 'modifierSnippetRegistry', _Runtime.callValue(createModifierRegistry, cast ([] : Array<Dynamic>))); }
     _Runtime.callValue(registerModifier, cast ([_Runtime.field(runtime, 'modifierSnippetRegistry'), snippet] : Array<Dynamic>));
   }
 
   public static function resolveGlModifierSnippet(state:GlRenderState, kind:ModifierKind):Null<GlModifierSnippet> {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'modifierSnippetRegistry');
-    if (_Runtime.truthy(_Runtime.strictEquals(registry, null))) { return cast null; }
+    if ((cast _Runtime.strictEquals(registry, null) : Bool)) { return cast null; }
     return cast (cast _Runtime.callValue(resolveModifier, cast ([registry, kind] : Array<Dynamic>)) : Null<GlModifierSnippet>);
     return cast null;
   }

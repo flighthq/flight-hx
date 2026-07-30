@@ -15,7 +15,7 @@ import flighthq.types.RenderViewport2D;
 class RenderViewport {
   public static function computeRenderProxyWorldBounds(out:Dynamic, source:Dynamic):Bool {
     var worldBounds:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(RenderViewport.isSpatial2DNode__renderViewport, cast ([source] : Array<Dynamic>))))) { return cast false; }
+    if ((cast !(cast _Runtime.callValue(RenderViewport.isSpatial2DNode__renderViewport, cast ([source] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
     worldBounds = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([source] : Array<Dynamic>));
     _Runtime.setField(out, 'x', _Runtime.field(worldBounds, 'x'));
     _Runtime.setField(out, 'y', _Runtime.field(worldBounds, 'y'));
@@ -40,9 +40,9 @@ class RenderViewport {
     var vpMinY:Dynamic = cast _Runtime.UNDEFINED;
     var vpMaxX:Dynamic = cast _Runtime.UNDEFINED;
     var vpMaxY:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(computeRenderProxyWorldBounds, cast ([RenderViewport._scratchBounds__renderViewport, source] : Array<Dynamic>))))) { return cast true; }
+    if ((cast !(cast _Runtime.callValue(computeRenderProxyWorldBounds, cast ([RenderViewport._scratchBounds__renderViewport, source] : Array<Dynamic>)) : Bool) : Bool)) { return cast true; }
     bounds = RenderViewport._scratchBounds__renderViewport;
-    if (_Runtime.truthy(!_Runtime.looseEquals(renderTransform2D, null))) {
+    if ((cast !_Runtime.looseEquals(renderTransform2D, null) : Bool)) {
       _Runtime.callValue(matrixTransformRectangle, cast ([RenderViewport._scratchTransformed__renderViewport, renderTransform2D, RenderViewport._scratchBounds__renderViewport] : Array<Dynamic>));
       (bounds = cast (RenderViewport._scratchTransformed__renderViewport : Dynamic));
     }
@@ -54,7 +54,7 @@ class RenderViewport {
     vpMinY = _Runtime.field(viewport, 'y');
     vpMaxX = (_Runtime.field(viewport, 'x') + _Runtime.field(viewport, 'width'));
     vpMaxY = (_Runtime.field(viewport, 'y') + _Runtime.field(viewport, 'height'));
-    return cast !_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(objMaxX, vpMinX, '<'), function():Dynamic return cast _Runtime.compare(objMinX, vpMaxX, '>')), function():Dynamic return cast _Runtime.compare(objMaxY, vpMinY, '<')), function():Dynamic return cast _Runtime.compare(objMinY, vpMaxY, '>')));
+    return cast !(cast _Runtime.orValue(((cast ((cast ((cast objMaxX : Float) < (cast vpMinX : Float)) : Bool) || (cast ((cast objMinX : Float) > (cast vpMaxX : Float)) : Bool)) : Bool) || (cast ((cast objMaxY : Float) < (cast vpMinY : Float)) : Bool)), function():Dynamic return cast ((cast objMinY : Float) > (cast vpMaxY : Float))) : Bool);
     return cast null;
   }
 
@@ -64,7 +64,7 @@ class RenderViewport {
   }
 
   public static function isSpatial2DNode__renderViewport(source:Dynamic):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(source, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(source), 'object')), function():Dynamic return cast _Runtime.hasField((cast source : Dynamic), 'pivotX'));
+    return cast ((cast ((cast !_Runtime.strictEquals(source, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(source), 'object') : Bool)) : Bool) && (cast _Runtime.hasField((cast source : Dynamic), 'pivotX') : Bool));
     return cast null;
   }
 

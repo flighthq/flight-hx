@@ -13,7 +13,7 @@ class VelocitySample {
     var cy:Dynamic = cast _Runtime.UNDEFINED;
     var px:Dynamic = cast _Runtime.UNDEFINED;
     var py:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(sample, 'previousWorldTransform'), null))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(sample, 'previousWorldTransform'), null) : Bool)) {
       _Runtime.setField(out, 'x', 0.0);
       _Runtime.setField(out, 'y', 0.0);
       return cast out;

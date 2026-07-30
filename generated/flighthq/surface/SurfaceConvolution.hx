@@ -28,10 +28,10 @@ class SurfaceConvolution {
     matrix = _Runtime.field(__destructure0, 'matrix');
     matrixX = _Runtime.field(__destructure0, 'matrixX');
     matrixY = _Runtime.field(__destructure0, 'matrixY');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(matrixX, 0.0, '<='), function():Dynamic return cast _Runtime.compare(matrixY, 0.0, '<=')))) { throw _Runtime.error('Convolution filter matrix dimensions must be positive'); }
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(matrix, 'length'), (matrixX * matrixY), '<'))) { throw _Runtime.error('Convolution filter matrix does not match its dimensions'); }
+    if ((cast ((cast ((cast matrixX : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast matrixY : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { throw _Runtime.error('Convolution filter matrix dimensions must be positive'); }
+    if ((cast ((cast _Runtime.field(matrix, 'length') : Float) < (cast (matrixX * matrixY) : Float)) : Bool)) { throw _Runtime.error('Convolution filter matrix does not match its dimensions'); }
     rawDivisor = _Runtime.coalesce(_Runtime.field(options, 'divisor'), function():Dynamic return cast _Runtime.callValue(SurfaceConvolution.getConvolutionDivisor__surfaceConvolution, cast ([matrix, (matrixX * matrixY)] : Array<Dynamic>)));
-    divisor = _Runtime.select(_Runtime.strictEquals(rawDivisor, 0.0), function():Dynamic return cast 1.0, function():Dynamic return cast rawDivisor);
+    divisor = ((cast _Runtime.strictEquals(rawDivisor, 0.0) : Bool) ? (cast 1.0 : Dynamic) : (cast rawDivisor : Dynamic));
     bias = _Runtime.coalesce(_Runtime.field(options, 'bias'), function():Dynamic return cast 0.0);
     edge = _Runtime.coalesce(_Runtime.field(options, 'edge'), function():Dynamic return cast 'clamp');
     preserveAlpha = _Runtime.coalesce(_Runtime.field(options, 'preserveAlpha'), function():Dynamic return cast true);
@@ -42,39 +42,39 @@ class SurfaceConvolution {
     data = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(source, 'height'), '<'))) {
+      while ((cast ((cast py : Float) < (cast _Runtime.field(source, 'height') : Float)) : Bool)) {
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, _Runtime.field(source, 'width'), '<'))) {
+          while ((cast ((cast px : Float) < (cast _Runtime.field(source, 'width') : Float)) : Bool)) {
             var r:Dynamic = 0.0;
             var g:Dynamic = 0.0;
             var b:Dynamic = 0.0;
             var a:Dynamic = 0.0;
             {
               var ky:Dynamic = 0.0;
-              while (_Runtime.truthy(_Runtime.compare(ky, matrixY, '<'))) {
+              while ((cast ((cast ky : Float) < (cast matrixY : Float)) : Bool)) {
                 var rawSampleY:Dynamic = (((_Runtime.field(source, 'y') + py) + ky) - offsetY);
                 var weight_row_start:Dynamic = (ky * matrixX);
                 {
                   var kx:Dynamic = 0.0;
-                  while (_Runtime.truthy(_Runtime.compare(kx, matrixX, '<'))) {
+                  while ((cast ((cast kx : Float) < (cast matrixX : Float)) : Bool)) {
                     var rawSampleX:Dynamic = (((_Runtime.field(source, 'x') + px) + kx) - offsetX);
                     var weight:Dynamic = _Runtime.getIndex(matrix, (weight_row_start + kx));
                     var sampleX:Float = cast _Runtime.UNDEFINED;
                     var sampleY:Float = cast _Runtime.UNDEFINED;
-                    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(rawSampleY, 0.0, '<'), function():Dynamic return cast _Runtime.compare(rawSampleY, surfaceHeight, '>=')), function():Dynamic return cast _Runtime.compare(rawSampleX, 0.0, '<')), function():Dynamic return cast _Runtime.compare(rawSampleX, surfaceWidth, '>=')))) {
-                      if (_Runtime.truthy(_Runtime.strictEquals(edge, 'transparent'))) {
+                    if ((cast ((cast ((cast ((cast ((cast rawSampleY : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast rawSampleY : Float) >= (cast surfaceHeight : Float)) : Bool)) : Bool) || (cast ((cast rawSampleX : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast rawSampleX : Float) >= (cast surfaceWidth : Float)) : Bool)) : Bool)) {
+                      if ((cast _Runtime.strictEquals(edge, 'transparent') : Bool)) {
                         kx++;
                         continue;
-                      } else { if (_Runtime.truthy(_Runtime.strictEquals(edge, 'wrap'))) {
+                      } else { if ((cast _Runtime.strictEquals(edge, 'wrap') : Bool)) {
                         (sampleX = cast (_Runtime.fmod((_Runtime.fmod(rawSampleX, surfaceWidth) + surfaceWidth), surfaceWidth) : Dynamic));
                         (sampleY = cast (_Runtime.fmod((_Runtime.fmod(rawSampleY, surfaceHeight) + surfaceHeight), surfaceHeight) : Dynamic));
-                      } else { if (_Runtime.truthy(_Runtime.strictEquals(edge, 'mirror'))) {
+                      } else { if ((cast _Runtime.strictEquals(edge, 'mirror') : Bool)) {
                         (sampleX = cast (_Runtime.callValue(SurfaceConvolution.resolveConvolutionMirror__surfaceConvolution, cast ([rawSampleX, surfaceWidth] : Array<Dynamic>)) : Dynamic));
                         (sampleY = cast (_Runtime.callValue(SurfaceConvolution.resolveConvolutionMirror__surfaceConvolution, cast ([rawSampleY, surfaceHeight] : Array<Dynamic>)) : Dynamic));
                       } else {
-                        (sampleX = cast (_Runtime.select(_Runtime.compare(rawSampleX, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(rawSampleX, surfaceWidth, '>='), function():Dynamic return cast (surfaceWidth - 1.0), function():Dynamic return cast rawSampleX)) : Dynamic));
-                        (sampleY = cast (_Runtime.select(_Runtime.compare(rawSampleY, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(rawSampleY, surfaceHeight, '>='), function():Dynamic return cast (surfaceHeight - 1.0), function():Dynamic return cast rawSampleY)) : Dynamic));
+                        (sampleX = cast (((cast ((cast rawSampleX : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast rawSampleX : Float) >= (cast surfaceWidth : Float)) : Bool) ? (cast (surfaceWidth - 1.0) : Dynamic) : (cast rawSampleX : Dynamic)) : Dynamic)) : Dynamic));
+                        (sampleY = cast (((cast ((cast rawSampleY : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast rawSampleY : Float) >= (cast surfaceHeight : Float)) : Bool) ? (cast (surfaceHeight - 1.0) : Dynamic) : (cast rawSampleY : Dynamic)) : Dynamic)) : Dynamic));
                       } } }
                     } else {
                       (sampleX = cast (rawSampleX : Dynamic));
@@ -95,7 +95,7 @@ class SurfaceConvolution {
             _Runtime.setIndex(out, di, _Runtime.callValue(SurfaceConvolution.clampByte__surfaceConvolution, cast ([((r / divisor) + bias)] : Array<Dynamic>)));
             _Runtime.setIndex(out, (di + 1.0), _Runtime.callValue(SurfaceConvolution.clampByte__surfaceConvolution, cast ([((g / divisor) + bias)] : Array<Dynamic>)));
             _Runtime.setIndex(out, (di + 2.0), _Runtime.callValue(SurfaceConvolution.clampByte__surfaceConvolution, cast ([((b / divisor) + bias)] : Array<Dynamic>)));
-            if (_Runtime.truthy(preserveAlpha)) {
+            if ((cast preserveAlpha : Bool)) {
               var cy:Dynamic = HxMath.max(0.0, HxMath.min((surfaceHeight - 1.0), (_Runtime.field(source, 'y') + py)));
               var cx:Dynamic = HxMath.max(0.0, HxMath.min((surfaceWidth - 1.0), (_Runtime.field(source, 'x') + px)));
               _Runtime.setIndex(out, (di + 3.0), _Runtime.getIndex(data, ((((cy * surfaceWidth) + cx) * 4.0) + 3.0)));
@@ -120,12 +120,12 @@ class SurfaceConvolution {
     sum = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, length, '<'))) {
+      while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
         (sum = cast ((sum + _Runtime.getIndex(matrix, i)) : Dynamic));
         i++;
       }
     }
-    return cast _Runtime.select(_Runtime.strictEquals(sum, 0.0), function():Dynamic return cast 1.0, function():Dynamic return cast sum);
+    return cast ((cast _Runtime.strictEquals(sum, 0.0) : Bool) ? (cast 1.0 : Dynamic) : (cast sum : Dynamic));
     return cast null;
   }
 
@@ -134,7 +134,7 @@ class SurfaceConvolution {
     var wrapped:Dynamic = cast _Runtime.UNDEFINED;
     period = (2.0 * size);
     wrapped = _Runtime.fmod((_Runtime.fmod(v, period) + period), period);
-    return cast _Runtime.select(_Runtime.compare(wrapped, size, '<'), function():Dynamic return cast wrapped, function():Dynamic return cast ((period - 1.0) - wrapped));
+    return cast ((cast ((cast wrapped : Float) < (cast size : Float)) : Bool) ? (cast wrapped : Dynamic) : (cast ((period - 1.0) - wrapped) : Dynamic));
     return cast null;
   }
 }

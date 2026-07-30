@@ -17,7 +17,7 @@ class FormatRegistry {
       var kind:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
       var codec:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
       try {
-        if (_Runtime.truthy(_Runtime.callProperty(codec, 'detect', cast ([text] : Array<Dynamic>)))) { return cast kind; }
+        if ((cast _Runtime.callProperty(codec, 'detect', cast ([text] : Array<Dynamic>)) : Bool)) { return cast kind; }
       } catch (__error:Dynamic) {
       }
     }
@@ -38,7 +38,7 @@ class FormatRegistry {
   public static function parseRegisteredParticleFormat(text:String, kind:String):ParticleConfigParseResult {
     var codec:Dynamic = cast _Runtime.UNDEFINED;
     codec = ((cast FormatRegistry._registry__formatRegistry : flighthq._internal._Map).get(kind));
-    if (_Runtime.truthy(!_Runtime.truthy(codec))) {
+    if ((cast !_Runtime.truthy(codec) : Bool)) {
       return cast { config: _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>)), format: kind, warnings: cast (['unknown-format: format \'' + Std.string(kind) + '\' has no registered codec'] : Array<Dynamic>) };
     }
     try {

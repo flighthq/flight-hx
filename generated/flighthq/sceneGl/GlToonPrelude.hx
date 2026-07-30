@@ -20,7 +20,7 @@ typedef GlToonProgram = Dynamic;
 
 class GlToonPrelude {
   public static function buildGlToonDefineKey(key:GlToonDefineKey):String {
-    return cast '' + Std.string(_Runtime.select(_Runtime.field(key, 'alphaMaskEnabled'), function():Dynamic return cast 'm', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasBaseColorMap'), function():Dynamic return cast 'b', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasRamp'), function():Dynamic return cast 'r', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasUvTransform'), function():Dynamic return cast 'u', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast 'k', function():Dynamic return cast '-')) + '';
+    return cast '' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasBaseColorMap') : Bool) ? (cast 'b' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasRamp') : Bool) ? (cast 'r' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasUvTransform') : Bool) ? (cast 'u' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast 'k', function():Dynamic return cast '-')) + '';
     return cast null;
   }
 
@@ -53,10 +53,10 @@ class GlToonPrelude {
   public static function buildGlToonDefineSource__glToonPrelude(key:GlToonDefineKey):String {
     var defines:Dynamic = cast _Runtime.UNDEFINED;
     defines = '#version 300 es\n#define MAX_FORWARD_LIGHTS ' + Std.string(MAX_FORWARD_LIGHTS) + '\n';
-    if (_Runtime.truthy(_Runtime.field(key, 'alphaMaskEnabled'))) { (defines = cast ((defines + '#define ALPHA_MASK\n') : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.field(key, 'hasBaseColorMap'))) { (defines = cast ((defines + '#define HAS_BASE_COLOR_MAP\n') : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.field(key, 'hasRamp'))) { (defines = cast ((defines + '#define HAS_RAMP\n') : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.field(key, 'hasUvTransform'))) { (defines = cast ((defines + '#define HAS_UV_TRANSFORM\n') : Dynamic)); }
+    if ((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool)) { (defines = cast ((defines + '#define ALPHA_MASK\n') : Dynamic)); }
+    if ((cast _Runtime.field(key, 'hasBaseColorMap') : Bool)) { (defines = cast ((defines + '#define HAS_BASE_COLOR_MAP\n') : Dynamic)); }
+    if ((cast _Runtime.field(key, 'hasRamp') : Bool)) { (defines = cast ((defines + '#define HAS_RAMP\n') : Dynamic)); }
+    if ((cast _Runtime.field(key, 'hasUvTransform') : Bool)) { (defines = cast ((defines + '#define HAS_UV_TRANSFORM\n') : Dynamic)); }
     if (_Runtime.truthy(_Runtime.field(key, 'hasSkin'))) { (defines = cast ((defines + '#define HAS_SKIN\n') : Dynamic)); }
     return cast defines;
     return cast null;

@@ -39,7 +39,7 @@ class WgpuSpriteBatch {
     var resources:WgpuQuadBatchResources = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     existing = ((cast WgpuSpriteBatch._quadBatchResources__wgpuSpriteBatch : flighthq._internal._WeakMap).get(_Runtime.field(state, 'device')));
-    if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast existing; }
+    if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
     __destructure0 = state;
     device = _Runtime.field(__destructure0, 'device');
     __destructure1 = runtime;
@@ -81,7 +81,7 @@ class WgpuSpriteBatch {
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     count = _Runtime.field(runtime, 'spriteBatchCount');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(count, 0.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null)))) {
+    if ((cast ((cast _Runtime.strictEquals(count, 0.0) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null) : Bool)) : Bool)) {
       _Runtime.callValue(WgpuSpriteBatch.resetWgpuSpriteBatch__wgpuSpriteBatch, cast ([state] : Array<Dynamic>));
       return;
     }
@@ -89,21 +89,21 @@ class WgpuSpriteBatch {
     blendMode = _Runtime.field(runtime, 'spriteBatchBlendMode');
     renderer = _Runtime.field(runtime, 'spriteBatchMaterialRenderer');
     ctFlush = _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.field(runtime, 'wgpuColorAdjustmentFold'), 'resolveFlush', cast ([state, count] : Array<Dynamic>)), function():Dynamic return cast null);
-    group3Floats = _Runtime.select(!_Runtime.strictEquals(ctFlush, null), function():Dynamic return cast _Runtime.field(ctFlush, 'floats'), function():Dynamic return cast _Runtime.field(runtime, 'spriteBatchMaterialFloats'));
-    group3Data = _Runtime.select(!_Runtime.strictEquals(ctFlush, null), function():Dynamic return cast _Runtime.field(ctFlush, 'data'), function():Dynamic return cast _Runtime.field(runtime, 'spriteBatchMaterialData'));
+    group3Floats = ((cast !_Runtime.strictEquals(ctFlush, null) : Bool) ? (cast _Runtime.field(ctFlush, 'floats') : Dynamic) : (cast _Runtime.field(runtime, 'spriteBatchMaterialFloats') : Dynamic));
+    group3Data = ((cast !_Runtime.strictEquals(ctFlush, null) : Bool) ? (cast _Runtime.field(ctFlush, 'data') : Dynamic) : (cast _Runtime.field(runtime, 'spriteBatchMaterialData') : Dynamic));
     _Runtime.callValue(WgpuSpriteBatch.resetWgpuSpriteBatch__wgpuSpriteBatch, cast ([state] : Array<Dynamic>));
     resources = _Runtime.callValue(ensureWgpuQuadBatchResources, cast ([state] : Array<Dynamic>));
     slot = _Runtime.callValue(WgpuSpriteBatch.acquireWgpuSpriteBatchBufferSlot__wgpuSpriteBatch, cast ([state] : Array<Dynamic>));
     instanceBytes = (count * WgpuSpriteBatch.SPRITE_INSTANCE_STRIDE__wgpuSpriteBatch);
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(slot, 'instanceBuffer'), null), function():Dynamic return cast _Runtime.compare(_Runtime.field(slot, 'instanceCapacity'), instanceBytes, '<')))) {
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(slot, 'instanceBuffer'), null) : Bool) || (cast ((cast _Runtime.field(slot, 'instanceCapacity') : Float) < (cast instanceBytes : Float)) : Bool)) : Bool)) {
       var capacity:Dynamic = HxMath.max(HxMath.max(instanceBytes, (_Runtime.field(slot, 'instanceCapacity') * 2.0)), (WgpuSpriteBatch.SPRITE_INSTANCE_STRIDE__wgpuSpriteBatch * 256.0));
       _Runtime.setField(slot, 'instanceBuffer', _Runtime.callValue(WgpuSpriteBatch.createWgpuSpriteBatchBuffer__wgpuSpriteBatch, cast ([state, capacity] : Array<Dynamic>)));
       _Runtime.setField(slot, 'instanceCapacity', capacity);
     }
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(slot, 'instanceBuffer'), 0.0, _Runtime.field(_Runtime.field(runtime, 'spriteBatchInstanceData'), 'buffer'), 0.0, instanceBytes] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(group3Floats, 0.0, '>'))) {
+    if ((cast ((cast group3Floats : Float) > (cast 0.0 : Float)) : Bool)) {
       var group3Bytes:Dynamic = ((count * group3Floats) * 4.0);
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(slot, 'materialBuffer'), null), function():Dynamic return cast _Runtime.compare(_Runtime.field(slot, 'materialCapacity'), group3Bytes, '<')))) {
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(slot, 'materialBuffer'), null) : Bool) || (cast ((cast _Runtime.field(slot, 'materialCapacity') : Float) < (cast group3Bytes : Float)) : Bool)) : Bool)) {
         var capacity:Dynamic = HxMath.max(HxMath.max(group3Bytes, (_Runtime.field(slot, 'materialCapacity') * 2.0)), ((group3Floats * 4.0) * 256.0));
         _Runtime.setField(slot, 'materialBuffer', _Runtime.callValue(WgpuSpriteBatch.createWgpuSpriteBatchBuffer__wgpuSpriteBatch, cast ([state, capacity] : Array<Dynamic>)));
         _Runtime.setField(slot, 'materialCapacity', capacity);
@@ -114,18 +114,18 @@ class WgpuSpriteBatch {
     textureEntry = _Runtime.callValue(bindWgpuImageResourceTexture, cast ([state, texture] : Array<Dynamic>));
     uniformOffset = _Runtime.callValue(WgpuSpriteBatch.writeWgpuSpriteBatchUniforms__wgpuSpriteBatch, cast ([state] : Array<Dynamic>));
     instanceBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(resources, 'instanceBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: { buffer: _Runtime.field(slot, 'instanceBuffer') } }] : Array<Dynamic>) }] : Array<Dynamic>));
-    module = _Runtime.select(!_Runtime.strictEquals(ctFlush, null), function():Dynamic return cast _Runtime.field(ctFlush, 'module'), function():Dynamic return cast _Runtime.callProperty(renderer, 'getShaderModule', cast ([state] : Array<Dynamic>)));
-    pipeline = _Runtime.callValue(getWgpuQuadBatchPipeline, cast ([state, resources, module, _Runtime.compare(group3Floats, 0.0, '>'), blendMode] : Array<Dynamic>));
+    module = ((cast !_Runtime.strictEquals(ctFlush, null) : Bool) ? (cast _Runtime.field(ctFlush, 'module') : Dynamic) : (cast _Runtime.callProperty(renderer, 'getShaderModule', cast ([state] : Array<Dynamic>)) : Dynamic));
+    pipeline = _Runtime.callValue(getWgpuQuadBatchPipeline, cast ([state, resources, module, ((cast group3Floats : Float) > (cast 0.0 : Float)), blendMode] : Array<Dynamic>));
     pass = _Runtime.field(runtime, 'renderPass');
     _Runtime.callProperty(pass, 'setPipeline', cast ([pipeline] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, _Runtime.field(runtime, 'uniformBindGroup'), cast ([uniformOffset] : Array<Dynamic>)] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setBindGroup', cast ([1.0, _Runtime.field(textureEntry, 'bindGroup')] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, instanceBindGroup] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(group3Floats, 0.0, '>'))) {
+    if ((cast ((cast group3Floats : Float) > (cast 0.0 : Float)) : Bool)) {
       var materialBindGroup:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(resources, 'materialBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: { buffer: _Runtime.field(slot, 'materialBuffer') } }] : Array<Dynamic>) }] : Array<Dynamic>));
       _Runtime.callProperty(pass, 'setBindGroup', cast ([3.0, materialBindGroup] : Array<Dynamic>));
     }
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(runtime, 'currentMaskDepth'), 0.0, '>'))) { _Runtime.callProperty(pass, 'setStencilReference', cast ([_Runtime.field(runtime, 'currentMaskDepth')] : Array<Dynamic>)); }
+    if ((cast ((cast _Runtime.field(runtime, 'currentMaskDepth') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(pass, 'setStencilReference', cast ([_Runtime.field(runtime, 'currentMaskDepth')] : Array<Dynamic>)); }
     _Runtime.callProperty(pass, 'draw', cast ([6.0, count, 0.0, 0.0] : Array<Dynamic>));
   }
 
@@ -144,27 +144,27 @@ class WgpuSpriteBatch {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     perModule = ((cast _Runtime.field(resources, 'pipelines') : flighthq._internal._WeakMap).get(module));
-    if (_Runtime.truthy(_Runtime.strictEquals(perModule, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(perModule, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (perModule = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
       ((cast _Runtime.field(resources, 'pipelines') : flighthq._internal._WeakMap).set(module, perModule));
     }
-    stencilMode = _Runtime.select(_Runtime.field(runtime, 'maskWriteMode'), function():Dynamic return cast 'maskwrite', function():Dynamic return cast _Runtime.select(_Runtime.compare(_Runtime.field(runtime, 'currentMaskDepth'), 0.0, '>'), function():Dynamic return cast 'masked', function():Dynamic return cast 'normal'));
+    stencilMode = ((cast _Runtime.field(runtime, 'maskWriteMode') : Bool) ? (cast 'maskwrite' : Dynamic) : (cast ((cast ((cast _Runtime.field(runtime, 'currentMaskDepth') : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'masked' : Dynamic) : (cast 'normal' : Dynamic)) : Dynamic));
     format = _Runtime.coalesce(_Runtime.field(runtime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
     key = '' + Std.string(_Runtime.coalesce(blendMode, function():Dynamic return cast 'null')) + '-' + Std.string(stencilMode) + '-' + Std.string(format) + '';
     cached = ((cast perModule : flighthq._internal._Map).get(key));
-    if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast cached; }
+    if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
     __destructure2 = state;
     device = _Runtime.field(__destructure2, 'device');
-    blend = _Runtime.select(_Runtime.strictEquals(blendMode, BlendModeValue.Add), function():Dynamic return cast WgpuSpriteBatch.ADD_BLEND__wgpuSpriteBatch, function():Dynamic return cast WgpuSpriteBatch.NORMAL_BLEND__wgpuSpriteBatch);
+    blend = ((cast _Runtime.strictEquals(blendMode, BlendModeValue.Add) : Bool) ? (cast WgpuSpriteBatch.ADD_BLEND__wgpuSpriteBatch : Dynamic) : (cast WgpuSpriteBatch.NORMAL_BLEND__wgpuSpriteBatch : Dynamic));
     isMaskWrite = _Runtime.strictEquals(stencilMode, 'maskwrite');
-    if (_Runtime.truthy(isMaskWrite)) {
+    if ((cast isMaskWrite : Bool)) {
       (stencilFace = cast ({ compare: 'always', passOp: 'replace', failOp: 'keep', depthFailOp: 'keep' } : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.strictEquals(stencilMode, 'masked'))) {
+    } else { if ((cast _Runtime.strictEquals(stencilMode, 'masked') : Bool)) {
       (stencilFace = cast ({ compare: 'equal', passOp: 'keep', failOp: 'keep', depthFailOp: 'keep' } : Dynamic));
     } else {
       (stencilFace = cast ({ compare: 'always', passOp: 'keep', failOp: 'keep', depthFailOp: 'keep' } : Dynamic));
     } }
-    pipeline = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: _Runtime.select(hasMaterialData, function():Dynamic return cast _Runtime.field(resources, 'materialPipelineLayout'), function():Dynamic return cast _Runtime.field(resources, 'basePipelineLayout')), vertex: { module: module, entryPoint: 'vs_main' }, fragment: { module: module, entryPoint: 'fs_main', targets: cast ([{ format: format, blend: _Runtime.select(isMaskWrite, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'), function():Dynamic return cast blend), writeMask: _Runtime.select(isMaskWrite, function():Dynamic return cast 0.0, function():Dynamic return cast flighthq._internal.backend.WebGpuConstantsBackend.value('GPUColorWrite', 'ALL')) }] : Array<Dynamic>) }, depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: false, depthCompare: 'always', stencilFront: stencilFace, stencilBack: stencilFace, stencilReadMask: 255.0, stencilWriteMask: _Runtime.select(isMaskWrite, function():Dynamic return cast 255.0, function():Dynamic return cast 0.0) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
+    pipeline = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: ((cast hasMaterialData : Bool) ? (cast _Runtime.field(resources, 'materialPipelineLayout') : Dynamic) : (cast _Runtime.field(resources, 'basePipelineLayout') : Dynamic)), vertex: { module: module, entryPoint: 'vs_main' }, fragment: { module: module, entryPoint: 'fs_main', targets: cast ([{ format: format, blend: ((cast isMaskWrite : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast blend : Dynamic)), writeMask: ((cast isMaskWrite : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal.backend.WebGpuConstantsBackend.value('GPUColorWrite', 'ALL') : Dynamic)) }] : Array<Dynamic>) }, depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: false, depthCompare: 'always', stencilFront: stencilFace, stencilBack: stencilFace, stencilReadMask: 255.0, stencilWriteMask: ((cast isMaskWrite : Bool) ? (cast 255.0 : Dynamic) : (cast 0.0 : Dynamic)) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
     ((cast perModule : flighthq._internal._Map).set(key, pipeline));
     return cast pipeline;
     return cast null;
@@ -181,9 +181,9 @@ class WgpuSpriteBatch {
     var renderer:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     floats = _Runtime.field(runtime, 'spriteBatchMaterialFloats');
-    if (_Runtime.truthy(_Runtime.strictEquals(floats, 0.0))) { return; }
+    if ((cast _Runtime.strictEquals(floats, 0.0) : Bool)) { return; }
     renderer = _Runtime.field(runtime, 'spriteBatchMaterialRenderer');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(renderer, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(renderer, 'packInstance'), _Runtime.field(_Runtime, 'UNDEFINED'))))) { return; }
+    if ((cast ((cast _Runtime.strictEquals(renderer, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(renderer, 'packInstance'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return; }
     _Runtime.callProperty(renderer, 'packInstance', cast ([state, _Runtime.field(runtime, 'spriteBatchMaterial'), materialData, _Runtime.field(runtime, 'spriteBatchMaterialData'), (instanceIndex * floats)] : Array<Dynamic>));
   }
 
@@ -192,7 +192,7 @@ class WgpuSpriteBatch {
     var floats:Dynamic = cast _Runtime.UNDEFINED;
     var needed:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(texture, _Runtime.field(runtime, 'spriteBatchTexture')), function():Dynamic return cast !_Runtime.strictEquals(blendMode, _Runtime.field(runtime, 'spriteBatchBlendMode'))), function():Dynamic return cast !_Runtime.strictEquals(material, _Runtime.field(runtime, 'spriteBatchMaterial'))))) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(texture, _Runtime.field(runtime, 'spriteBatchTexture')) : Bool) || (cast !_Runtime.strictEquals(blendMode, _Runtime.field(runtime, 'spriteBatchBlendMode')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(material, _Runtime.field(runtime, 'spriteBatchMaterial')) : Bool)) : Bool)) {
       _Runtime.callValue(flushWgpuSpriteBatch, cast ([state] : Array<Dynamic>));
     }
     _Runtime.setField(runtime, 'spriteBatchTexture', texture);
@@ -202,13 +202,13 @@ class WgpuSpriteBatch {
     floats = _Runtime.field(materialRenderer, 'instanceFloatCount');
     _Runtime.setField(runtime, 'spriteBatchMaterialFloats', floats);
     needed = ((_Runtime.field(runtime, 'spriteBatchCount') + maxInstances) * SPRITE_INSTANCE_FLOATS);
-    if (_Runtime.truthy(_Runtime.compare(needed, _Runtime.field(_Runtime.field(runtime, 'spriteBatchInstanceData'), 'length'), '>'))) {
+    if ((cast ((cast needed : Float) > (cast _Runtime.field(_Runtime.field(runtime, 'spriteBatchInstanceData'), 'length') : Float)) : Bool)) {
       var newSize:Dynamic = HxMath.max(HxMath.max(needed, (_Runtime.field(_Runtime.field(runtime, 'spriteBatchInstanceData'), 'length') * 2.0)), (SPRITE_INSTANCE_FLOATS * 256.0));
       _Runtime.setField(runtime, 'spriteBatchInstanceData', new flighthq._internal._Float32Array(newSize));
     }
-    if (_Runtime.truthy(_Runtime.compare(floats, 0.0, '>'))) {
+    if ((cast ((cast floats : Float) > (cast 0.0 : Float)) : Bool)) {
       var materialNeeded:Dynamic = ((_Runtime.field(runtime, 'spriteBatchCount') + maxInstances) * floats);
-      if (_Runtime.truthy(_Runtime.compare(materialNeeded, _Runtime.field(_Runtime.field(runtime, 'spriteBatchMaterialData'), 'length'), '>'))) {
+      if ((cast ((cast materialNeeded : Float) > (cast _Runtime.field(_Runtime.field(runtime, 'spriteBatchMaterialData'), 'length') : Float)) : Bool)) {
         var newSize:Dynamic = HxMath.max(HxMath.max(materialNeeded, (_Runtime.field(_Runtime.field(runtime, 'spriteBatchMaterialData'), 'length') * 2.0)), (floats * 256.0));
         _Runtime.setField(runtime, 'spriteBatchMaterialData', new flighthq._internal._Float32Array(newSize));
       }
@@ -222,11 +222,11 @@ class WgpuSpriteBatch {
     var fold:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     fold = _Runtime.field(runtime, 'wgpuColorAdjustmentFold');
-    if (_Runtime.truthy(!_Runtime.looseEquals(fold, null))) {
+    if ((cast !_Runtime.looseEquals(fold, null) : Bool)) {
       _Runtime.callProperty(fold, 'record', cast ([runtime, colorTransform, instanceIndex] : Array<Dynamic>));
       return;
     }
-    if (_Runtime.truthy(!_Runtime.looseEquals(colorTransform, null))) { _Runtime.callOptionalProperty(runtime, 'wgpuColorAdjustmentGuard', cast ([state, colorTransform] : Array<Dynamic>)); }
+    if ((cast !_Runtime.looseEquals(colorTransform, null) : Bool)) { _Runtime.callOptionalProperty(runtime, 'wgpuColorAdjustmentGuard', cast ([state, colorTransform] : Array<Dynamic>)); }
   }
 
   public static function resetWgpuSpriteBatchBufferPool(state:WgpuRenderState):Void {
@@ -240,7 +240,7 @@ class WgpuSpriteBatch {
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     pool = _Runtime.field(runtime, 'spriteBatchBufferPool');
     slot = _Runtime.getIndex(pool, _Runtime.field(runtime, 'spriteBatchBufferCursor'));
-    if (_Runtime.truthy(_Runtime.strictEquals(slot, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(slot, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (slot = cast ({ instanceBuffer: null, instanceCapacity: 0.0, materialBuffer: null, materialCapacity: 0.0 } : Dynamic));
       _Runtime.setIndex(pool, _Runtime.field(runtime, 'spriteBatchBufferCursor'), slot);
     }

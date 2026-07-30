@@ -51,14 +51,14 @@ class Path {
     var dt:Dynamic = cast _Runtime.UNDEFINED;
     var cos_u3C6_:Dynamic = cast _Runtime.UNDEFINED;
     var sin_u3C6_:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(dtheta, 0.0))) { return; }
+    if ((cast _Runtime.strictEquals(dtheta, 0.0) : Bool)) { return; }
     nSegs = HxMath.max(1.0, HxMath.ceil((HxMath.abs(dtheta) / (HxMath.PI / 2.0))));
     dt = (dtheta / nSegs);
     cos_u3C6_ = HxMath.cos(xAxisRotation);
     sin_u3C6_ = HxMath.sin(xAxisRotation);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, nSegs, '<'))) {
+      while ((cast ((cast i : Float) < (cast nSegs : Float)) : Bool)) {
         var t1:Dynamic = (theta1 + (i * dt));
         var t2:Dynamic = (t1 + dt);
         var cos1:Dynamic = HxMath.cos(t1);
@@ -90,7 +90,7 @@ class Path {
     var sinStart:Dynamic = cast _Runtime.UNDEFINED;
     var cosEnd:Dynamic = cast _Runtime.UNDEFINED;
     var sinEnd:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(radius, 0.0, '<='))) { return; }
+    if ((cast ((cast radius : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
     k = (radius * Path.KAPPA__path);
     cosStart = HxMath.cos(startAngle);
     sinStart = HxMath.sin(startAngle);
@@ -103,16 +103,16 @@ class Path {
     var sweep:Dynamic = cast _Runtime.UNDEFINED;
     var arcStartX:Dynamic = cast _Runtime.UNDEFINED;
     var arcStartY:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(radius, 0.0, '<='))) { return; }
+    if ((cast ((cast radius : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
     sweep = (endAngle - startAngle);
-    if (_Runtime.truthy(anticlockwise)) {
-      if (_Runtime.truthy(_Runtime.compare(sweep, 0.0, '>'))) { (sweep = cast ((sweep - (HxMath.PI * 2.0)) : Dynamic)); }
+    if ((cast anticlockwise : Bool)) {
+      if ((cast ((cast sweep : Float) > (cast 0.0 : Float)) : Bool)) { (sweep = cast ((sweep - (HxMath.PI * 2.0)) : Dynamic)); }
     } else {
-      if (_Runtime.truthy(_Runtime.compare(sweep, 0.0, '<'))) { (sweep = cast ((sweep + (HxMath.PI * 2.0)) : Dynamic)); }
+      if ((cast ((cast sweep : Float) < (cast 0.0 : Float)) : Bool)) { (sweep = cast ((sweep + (HxMath.PI * 2.0)) : Dynamic)); }
     }
     arcStartX = (cx + (HxMath.cos(startAngle) * radius));
     arcStartY = (cy + (HxMath.sin(startAngle) * radius));
-    if (_Runtime.truthy(connectToCurrent)) {
+    if ((cast connectToCurrent : Bool)) {
       _Runtime.callValue(appendPathLineTo, cast ([path, arcStartX, arcStartY] : Array<Dynamic>));
     } else {
       _Runtime.callValue(appendPathMoveTo, cast ([path, arcStartX, arcStartY] : Array<Dynamic>));
@@ -154,7 +154,7 @@ class Path {
     var vy:Dynamic = cast _Runtime.UNDEFINED;
     var theta1:Dynamic = cast _Runtime.UNDEFINED;
     var dtheta:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(radiusX, 0.0), function():Dynamic return cast _Runtime.strictEquals(radiusY, 0.0)))) {
+    if ((cast ((cast _Runtime.strictEquals(radiusX, 0.0) : Bool) || (cast _Runtime.strictEquals(radiusY, 0.0) : Bool)) : Bool)) {
       _Runtime.callValue(appendPathLineTo, cast ([path, endX, endY] : Array<Dynamic>));
       return;
     }
@@ -162,14 +162,14 @@ class Path {
     y1 = 0.0;
     {
       var last:Dynamic = _Runtime.callValue(getPathLastPoint, cast ([path] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(last, null))) {
+      if ((cast !_Runtime.strictEquals(last, null) : Bool)) {
         (x1 = cast (_Runtime.getIndex(last, 0.0) : Dynamic));
         (y1 = cast (_Runtime.getIndex(last, 1.0) : Dynamic));
       }
     }
     x2 = endX;
     y2 = endY;
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(x1, x2), function():Dynamic return cast _Runtime.strictEquals(y1, y2)))) { return; }
+    if ((cast ((cast _Runtime.strictEquals(x1, x2) : Bool) && (cast _Runtime.strictEquals(y1, y2) : Bool)) : Bool)) { return; }
     rx = HxMath.abs(radiusX);
     ry = HxMath.abs(radiusY);
     cos_u3C6_ = HxMath.cos(xAxisRotation);
@@ -183,7 +183,7 @@ class Path {
     rxSq = (rx * rx);
     rySq = (ry * ry);
     lambda = ((x1pSq / rxSq) + (y1pSq / rySq));
-    if (_Runtime.truthy(_Runtime.compare(lambda, 1.0, '>'))) {
+    if ((cast ((cast lambda : Float) > (cast 1.0 : Float)) : Bool)) {
       var sqrtLambda:Dynamic = HxMath.sqrt(lambda);
       (rx = cast ((rx * sqrtLambda) : Dynamic));
       (ry = cast ((ry * sqrtLambda) : Dynamic));
@@ -192,8 +192,8 @@ class Path {
     rySq2 = (ry * ry);
     num = (((rxSq2 * rySq2) - (rxSq2 * y1pSq)) - (rySq2 * x1pSq));
     den = ((rxSq2 * y1pSq) + (rySq2 * x1pSq));
-    sq = _Runtime.select(_Runtime.compare(den, 0.0, '<='), function():Dynamic return cast 0.0, function():Dynamic return cast HxMath.sqrt(HxMath.max(0.0, (num / den))));
-    sign = _Runtime.select(_Runtime.strictEquals(largeArc, sweep), function():Dynamic return cast -1.0, function():Dynamic return cast 1.0);
+    sq = ((cast ((cast den : Float) <= (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast HxMath.sqrt(HxMath.max(0.0, (num / den))) : Dynamic));
+    sign = ((cast _Runtime.strictEquals(largeArc, sweep) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic));
     cxp = (((sign * sq) * (rx * y1p)) / ry);
     cyp = (((sign * sq) * (-ry * x1p)) / rx);
     cx = (((cos_u3C6_ * cxp) - (sin_u3C6_ * cyp)) + ((x1 + x2) / 2.0));
@@ -204,8 +204,8 @@ class Path {
     vy = ((-y1p - cyp) / ry);
     theta1 = _Runtime.callValue(Path.vectorAngle__path, cast ([1.0, 0.0, ux, uy] : Array<Dynamic>));
     dtheta = _Runtime.callValue(Path.vectorAngle__path, cast ([ux, uy, vx, vy] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.truthy(sweep), function():Dynamic return cast _Runtime.compare(dtheta, 0.0, '>')))) { (dtheta = cast ((dtheta - (HxMath.PI * 2.0)) : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.andValue(sweep, function():Dynamic return cast _Runtime.compare(dtheta, 0.0, '<')))) { (dtheta = cast ((dtheta + (HxMath.PI * 2.0)) : Dynamic)); }
+    if ((cast ((cast !(cast sweep : Bool) : Bool) && (cast ((cast dtheta : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { (dtheta = cast ((dtheta - (HxMath.PI * 2.0)) : Dynamic)); }
+    if ((cast ((cast sweep : Bool) && (cast ((cast dtheta : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { (dtheta = cast ((dtheta + (HxMath.PI * 2.0)) : Dynamic)); }
     _Runtime.callValue(Path.appendArcCubics__path, cast ([path, cx, cy, rx, ry, xAxisRotation, theta1, dtheta] : Array<Dynamic>));
   }
 
@@ -251,11 +251,11 @@ class Path {
   }
 
   public static function appendPathPolygon(path:flighthq.types.Path, points:Array<Float>):Void {
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(points, 'length'), 6.0, '<'))) { return; }
+    if ((cast ((cast _Runtime.field(points, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { return; }
     _Runtime.callValue(appendPathMoveTo, cast ([path, _Runtime.getIndex(points, 0.0), _Runtime.getIndex(points, 1.0)] : Array<Dynamic>));
     {
       var i:Dynamic = 2.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(points, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) {
         _Runtime.callValue(appendPathLineTo, cast ([path, _Runtime.getIndex(points, i), _Runtime.getIndex(points, (i + 1.0))] : Array<Dynamic>));
         (i = cast ((i + 2.0) : Dynamic));
       }
@@ -264,11 +264,11 @@ class Path {
   }
 
   public static function appendPathPolyline(path:flighthq.types.Path, points:Array<Float>):Void {
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(points, 'length'), 4.0, '<'))) { return; }
+    if ((cast ((cast _Runtime.field(points, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { return; }
     _Runtime.callValue(appendPathMoveTo, cast ([path, _Runtime.getIndex(points, 0.0), _Runtime.getIndex(points, 1.0)] : Array<Dynamic>));
     {
       var i:Dynamic = 2.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(points, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) {
         _Runtime.callValue(appendPathLineTo, cast ([path, _Runtime.getIndex(points, i), _Runtime.getIndex(points, (i + 1.0))] : Array<Dynamic>));
         (i = cast ((i + 2.0) : Dynamic));
       }
@@ -379,7 +379,7 @@ class Path {
   public static function getPathLastPoint(path:flighthq.types.Path):Null<Array<Float>> {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(path, 'data');
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(data, 'length'), 2.0, '<'))) { return cast null; }
+    if ((cast ((cast _Runtime.field(data, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { return cast null; }
     return cast cast ([_Runtime.getIndex(data, (_Runtime.field(data, 'length') - 2.0)), _Runtime.getIndex(data, (_Runtime.field(data, 'length') - 1.0))] : Array<Dynamic>);
     return cast null;
   }
@@ -448,7 +448,7 @@ class Path {
     var clampTR:Dynamic = cast _Runtime.UNDEFINED;
     var clampBR:Dynamic = cast _Runtime.UNDEFINED;
     var clampBL:Dynamic = cast _Runtime.UNDEFINED;
-    __destructure1 = _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(radius), 'number'), function():Dynamic return cast cast ([radius, radius, radius, radius] : Array<Dynamic>), function():Dynamic return cast radius);
+    __destructure1 = ((cast _Runtime.strictEquals(_Runtime.typeofValue(radius), 'number') : Bool) ? (cast cast ([radius, radius, radius, radius] : Array<Dynamic>) : Dynamic) : (cast radius : Dynamic));
     rtl = _Runtime.getIndex(__destructure1, 0.0);
     rtr = _Runtime.getIndex(__destructure1, 1.0);
     rbr = _Runtime.getIndex(__destructure1, 2.0);
@@ -507,10 +507,10 @@ class Path {
     dot = ((ux * vx) + (uy * vy));
     lenU = HxMath.sqrt(((ux * ux) + (uy * uy)));
     lenV = HxMath.sqrt(((vx * vx) + (vy * vy)));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(lenU, 0.0), function():Dynamic return cast _Runtime.strictEquals(lenV, 0.0)))) { return cast 0.0; }
+    if ((cast ((cast _Runtime.strictEquals(lenU, 0.0) : Bool) || (cast _Runtime.strictEquals(lenV, 0.0) : Bool)) : Bool)) { return cast 0.0; }
     cosAngle = HxMath.max(-1.0, HxMath.min(1.0, (dot / (lenU * lenV))));
     angle = HxMath.acos(cosAngle);
-    return cast _Runtime.select(_Runtime.compare(((ux * vy) - (uy * vx)), 0.0, '<'), function():Dynamic return cast -angle, function():Dynamic return cast angle);
+    return cast ((cast ((cast ((ux * vy) - (uy * vx)) : Float) < (cast 0.0 : Float)) : Bool) ? (cast -angle : Dynamic) : (cast angle : Dynamic));
     return cast null;
   }
 }

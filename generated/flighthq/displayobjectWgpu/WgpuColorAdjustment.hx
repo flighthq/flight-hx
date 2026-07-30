@@ -16,8 +16,8 @@ class WgpuColorAdjustment {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     _Runtime.setField(runtime, 'wgpuColorAdjustmentFold', WgpuColorAdjustment.wgpuColorAdjustmentFold__wgpuColorAdjustment);
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchColorTransformMode'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(runtime, 'spriteBatchColorTransformMode', WgpuColorAdjustment.CT_MODE_NONE__wgpuColorAdjustment); }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchColorTransformData'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchColorTransformMode'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(runtime, 'spriteBatchColorTransformMode', WgpuColorAdjustment.CT_MODE_NONE__wgpuColorAdjustment); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchColorTransformData'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.setField(runtime, 'spriteBatchColorTransformData', new flighthq._internal._Float32Array((WgpuColorAdjustment.COLOR_TRANSFORM_FLOATS__wgpuColorAdjustment * 256.0)));
     }
   }
@@ -33,14 +33,14 @@ class WgpuColorAdjustment {
   public static function recordWgpuColorAdjustment__wgpuColorAdjustment(runtime:WgpuRenderStateRuntime, colorTransform:Null<ColorTransform>, instanceIndex:Float):Void {
     var mode:Dynamic = cast _Runtime.UNDEFINED;
     var tint:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchColorTransformData'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchColorTransformData'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.setField(runtime, 'spriteBatchColorTransformData', new flighthq._internal._Float32Array((WgpuColorAdjustment.COLOR_TRANSFORM_FLOATS__wgpuColorAdjustment * 256.0)));
     }
     mode = _Runtime.coalesce(_Runtime.field(runtime, 'spriteBatchColorTransformMode'), function():Dynamic return cast WgpuColorAdjustment.CT_MODE_NONE__wgpuColorAdjustment);
     tint = _Runtime.coalesce(colorTransform, function():Dynamic return cast null);
-    if (_Runtime.truthy(_Runtime.strictEquals(mode, WgpuColorAdjustment.CT_MODE_NONE__wgpuColorAdjustment))) {
-      if (_Runtime.truthy(_Runtime.strictEquals(tint, null))) { return; }
-      if (_Runtime.truthy(_Runtime.strictEquals(instanceIndex, 0.0))) {
+    if ((cast _Runtime.strictEquals(mode, WgpuColorAdjustment.CT_MODE_NONE__wgpuColorAdjustment) : Bool)) {
+      if ((cast _Runtime.strictEquals(tint, null) : Bool)) { return; }
+      if ((cast _Runtime.strictEquals(instanceIndex, 0.0) : Bool)) {
         _Runtime.setField(runtime, 'spriteBatchColorTransformMode', WgpuColorAdjustment.CT_MODE_UNIFORM__wgpuColorAdjustment);
         _Runtime.setField(runtime, 'spriteBatchUniformColorTransform', tint);
         return;
@@ -49,9 +49,9 @@ class WgpuColorAdjustment {
       _Runtime.callValue(WgpuColorAdjustment.writeWgpuColorTransformInstance__wgpuColorAdjustment, cast ([runtime, tint, instanceIndex] : Array<Dynamic>));
       return;
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(mode, WgpuColorAdjustment.CT_MODE_UNIFORM__wgpuColorAdjustment))) {
+    if ((cast _Runtime.strictEquals(mode, WgpuColorAdjustment.CT_MODE_UNIFORM__wgpuColorAdjustment) : Bool)) {
       var uniform:Dynamic = _Runtime.coalesce(_Runtime.field(runtime, 'spriteBatchUniformColorTransform'), function():Dynamic return cast null);
-      if (_Runtime.truthy(_Runtime.callValue(WgpuColorAdjustment.equalsRecordedColorTransform__wgpuColorAdjustment, cast ([tint, uniform] : Array<Dynamic>)))) { return; }
+      if ((cast _Runtime.callValue(WgpuColorAdjustment.equalsRecordedColorTransform__wgpuColorAdjustment, cast ([tint, uniform] : Array<Dynamic>)) : Bool)) { return; }
       _Runtime.callValue(WgpuColorAdjustment.promoteWgpuSpriteBatchColorTransformToPerInstance__wgpuColorAdjustment, cast ([runtime, instanceIndex, uniform] : Array<Dynamic>));
       _Runtime.callValue(WgpuColorAdjustment.writeWgpuColorTransformInstance__wgpuColorAdjustment, cast ([runtime, tint, instanceIndex] : Array<Dynamic>));
       return;
@@ -64,8 +64,8 @@ class WgpuColorAdjustment {
     var ctMode:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     ctMode = _Runtime.coalesce(_Runtime.field(runtime, 'spriteBatchColorTransformMode'), function():Dynamic return cast WgpuColorAdjustment.CT_MODE_NONE__wgpuColorAdjustment);
-    if (_Runtime.truthy(_Runtime.strictEquals(ctMode, WgpuColorAdjustment.CT_MODE_NONE__wgpuColorAdjustment))) { return cast null; }
-    if (_Runtime.truthy(_Runtime.strictEquals(ctMode, WgpuColorAdjustment.CT_MODE_UNIFORM__wgpuColorAdjustment))) {
+    if ((cast _Runtime.strictEquals(ctMode, WgpuColorAdjustment.CT_MODE_NONE__wgpuColorAdjustment) : Bool)) { return cast null; }
+    if ((cast _Runtime.strictEquals(ctMode, WgpuColorAdjustment.CT_MODE_UNIFORM__wgpuColorAdjustment) : Bool)) {
       _Runtime.callValue(WgpuColorAdjustment.fillWgpuSpriteBatchUniformColorTransform__wgpuColorAdjustment, cast ([runtime, _Runtime.field(runtime, 'spriteBatchUniformColorTransform'), count] : Array<Dynamic>));
     }
     _Runtime.setField(runtime, 'spriteBatchColorTransformMode', WgpuColorAdjustment.CT_MODE_NONE__wgpuColorAdjustment);
@@ -75,9 +75,9 @@ class WgpuColorAdjustment {
   }
 
   public static function equalsRecordedColorTransform__wgpuColorAdjustment(a:Null<ColorTransform>, b:Null<ColorTransform>):Bool {
-    if (_Runtime.truthy(_Runtime.strictEquals(a, b))) { return cast true; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(a, null), function():Dynamic return cast _Runtime.strictEquals(b, null)))) { return cast false; }
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(a.redMultiplier, b.redMultiplier), function():Dynamic return cast _Runtime.strictEquals(a.greenMultiplier, b.greenMultiplier)), function():Dynamic return cast _Runtime.strictEquals(a.blueMultiplier, b.blueMultiplier)), function():Dynamic return cast _Runtime.strictEquals(a.alphaMultiplier, b.alphaMultiplier)), function():Dynamic return cast _Runtime.strictEquals(a.redOffset, b.redOffset)), function():Dynamic return cast _Runtime.strictEquals(a.greenOffset, b.greenOffset)), function():Dynamic return cast _Runtime.strictEquals(a.blueOffset, b.blueOffset)), function():Dynamic return cast _Runtime.strictEquals(a.alphaOffset, b.alphaOffset));
+    if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast true; }
+    if ((cast ((cast _Runtime.strictEquals(a, null) : Bool) || (cast _Runtime.strictEquals(b, null) : Bool)) : Bool)) { return cast false; }
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(a.redMultiplier, b.redMultiplier) : Bool) && (cast _Runtime.strictEquals(a.greenMultiplier, b.greenMultiplier) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.blueMultiplier, b.blueMultiplier) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.alphaMultiplier, b.alphaMultiplier) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.redOffset, b.redOffset) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.greenOffset, b.greenOffset) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.blueOffset, b.blueOffset) : Bool)), function():Dynamic return cast _Runtime.strictEquals(a.alphaOffset, b.alphaOffset));
     return cast null;
   }
 
@@ -86,10 +86,10 @@ class WgpuColorAdjustment {
     var newSize:Dynamic = cast _Runtime.UNDEFINED;
     var grown:Dynamic = cast _Runtime.UNDEFINED;
     existing = _Runtime.field(runtime, 'spriteBatchColorTransformData');
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.compare(floatsNeeded, _Runtime.field(existing, 'length'), '<=')))) { return; }
+    if ((cast ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast floatsNeeded : Float) <= (cast _Runtime.field(existing, 'length') : Float)) : Bool)) : Bool)) { return; }
     newSize = HxMath.max(HxMath.max(floatsNeeded, (_Runtime.coalesce(_Runtime.optionalField(existing, 'length'), function():Dynamic return cast 0.0) * 2.0)), (WgpuColorAdjustment.COLOR_TRANSFORM_FLOATS__wgpuColorAdjustment * 256.0));
     grown = new flighthq._internal._Float32Array(newSize);
-    if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(grown, 'set', cast ([existing] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(grown, 'set', cast ([existing] : Array<Dynamic>)); }
     _Runtime.setField(runtime, 'spriteBatchColorTransformData', grown);
   }
 
@@ -97,7 +97,7 @@ class WgpuColorAdjustment {
     _Runtime.callValue(WgpuColorAdjustment.ensureWgpuColorTransformCapacity__wgpuColorAdjustment, cast ([runtime, (count * WgpuColorAdjustment.COLOR_TRANSFORM_FLOATS__wgpuColorAdjustment)] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, count, '<'))) {
+      while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         _Runtime.callValue(WgpuColorAdjustment.writeWgpuColorTransformInstance__wgpuColorAdjustment, cast ([runtime, colorTransform, i] : Array<Dynamic>));
         i++;
       }
@@ -108,7 +108,7 @@ class WgpuColorAdjustment {
     var cached:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
     cached = ((cast WgpuColorAdjustment._colorTransformModules__wgpuColorAdjustment : flighthq._internal._WeakMap).get(_Runtime.field(state, 'device')));
-    if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast cached; }
+    if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
     module = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createShaderModule', cast ([{ code: (_Runtime.callValue(getWgpuQuadBatchPreludeWGSL, cast ([] : Array<Dynamic>)) + WgpuColorAdjustment.COLOR_TRANSFORM_WGSL__wgpuColorAdjustment) }] : Array<Dynamic>));
     ((cast WgpuColorAdjustment._colorTransformModules__wgpuColorAdjustment : flighthq._internal._WeakMap).set(_Runtime.field(state, 'device'), module));
     return cast module;
@@ -119,7 +119,7 @@ class WgpuColorAdjustment {
     _Runtime.setField(runtime, 'spriteBatchColorTransformMode', WgpuColorAdjustment.CT_MODE_PER_INSTANCE__wgpuColorAdjustment);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, instanceCount, '<'))) {
+      while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
         _Runtime.callValue(WgpuColorAdjustment.writeWgpuColorTransformInstance__wgpuColorAdjustment, cast ([runtime, fill, i] : Array<Dynamic>));
         i++;
       }
@@ -132,7 +132,7 @@ class WgpuColorAdjustment {
     offset = (instanceIndex * WgpuColorAdjustment.COLOR_TRANSFORM_FLOATS__wgpuColorAdjustment);
     _Runtime.callValue(WgpuColorAdjustment.ensureWgpuColorTransformCapacity__wgpuColorAdjustment, cast ([runtime, (offset + WgpuColorAdjustment.COLOR_TRANSFORM_FLOATS__wgpuColorAdjustment)] : Array<Dynamic>));
     out = _Runtime.field(runtime, 'spriteBatchColorTransformData');
-    if (_Runtime.truthy(!_Runtime.strictEquals(colorTransform, null))) {
+    if ((cast !_Runtime.strictEquals(colorTransform, null) : Bool)) {
       _Runtime.setIndex(out, offset, colorTransform.redMultiplier);
       _Runtime.setIndex(out, (offset + 1.0), colorTransform.greenMultiplier);
       _Runtime.setIndex(out, (offset + 2.0), colorTransform.blueMultiplier);

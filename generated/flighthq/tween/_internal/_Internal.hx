@@ -16,9 +16,9 @@ class _Internal {
       var end:Dynamic = _Runtime.coalesce(_Runtime.getIndex(propertyMap, _Runtime.field(detail, 'key')), function():Dynamic return cast 0.0);
       _Runtime.setField(detail, 'start', start);
       _Runtime.setField(detail, 'change', (end - start));
-      if (_Runtime.truthy(_Runtime.field(tween, 'smartRotation'))) {
+      if ((cast _Runtime.field(tween, 'smartRotation') : Bool)) {
         var change:Dynamic = _Runtime.fmod((_Runtime.fmod(_Runtime.field(detail, 'change'), 360.0) + 360.0), 360.0);
-        if (_Runtime.truthy(_Runtime.compare(change, 180.0, '>'))) { (change = cast ((change - 360.0) : Dynamic)); }
+        if ((cast ((cast change : Float) > (cast 180.0 : Float)) : Bool)) { (change = cast ((change - 360.0) : Dynamic)); }
         _Runtime.setField(detail, 'change', change);
       }
     }

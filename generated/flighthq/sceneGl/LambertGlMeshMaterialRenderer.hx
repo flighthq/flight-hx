@@ -37,14 +37,14 @@ class LambertGlMeshMaterialRenderer {
     gl = _Runtime.field(state, 'gl');
     lambert = (cast material : Null<LambertMaterial>);
     program = _Runtime.callValue(ensureGlClassicProgram, cast ([state, _Runtime.callValue(LambertGlMeshMaterialRenderer.defineKeyForMaterial__lambertGlMeshMaterialRenderer, cast ([lambert] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, _Runtime.andValue(!_Runtime.strictEquals(lambert, null), function():Dynamic return cast _Runtime.field(lambert, 'doubleSided'))] : Array<Dynamic>));
+    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, ((cast !_Runtime.strictEquals(lambert, null) : Bool) && (cast _Runtime.field(lambert, 'doubleSided') : Bool))] : Array<Dynamic>));
     _Runtime.callValue(setGlMeshViewProjection, cast ([gl, _Runtime.field(program, 'locViewProjection'), camera] : Array<Dynamic>));
     _Runtime.callValue(bindGlMeshLightBlock, cast ([state, program, lights] : Array<Dynamic>));
     _Runtime.callValue(LambertGlMeshMaterialRenderer.bindGlLambertMaterialUniforms__lambertGlMeshMaterialRenderer, cast ([state, program, lambert] : Array<Dynamic>));
   }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
-    if (_Runtime.truthy(_Runtime.strictEquals(program, null))) { return; }
+    if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
     _Runtime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
   } };
 
@@ -56,7 +56,7 @@ class LambertGlMeshMaterialRenderer {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var diffuseMap:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
-    if (_Runtime.truthy(_Runtime.strictEquals(material, null))) {
+    if ((cast _Runtime.strictEquals(material, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locDiffuse'), 1.0, 1.0, 1.0, 1.0);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), 0.5);
       return;
@@ -65,7 +65,7 @@ class LambertGlMeshMaterialRenderer {
     flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locDiffuse'), _Runtime.getIndex(LambertGlMeshMaterialRenderer.scratchRgba__lambertGlMeshMaterialRenderer, 0.0), _Runtime.getIndex(LambertGlMeshMaterialRenderer.scratchRgba__lambertGlMeshMaterialRenderer, 1.0), _Runtime.getIndex(LambertGlMeshMaterialRenderer.scratchRgba__lambertGlMeshMaterialRenderer, 2.0), _Runtime.getIndex(LambertGlMeshMaterialRenderer.scratchRgba__lambertGlMeshMaterialRenderer, 3.0));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), _Runtime.field(material, 'alphaCutoff'));
     diffuseMap = _Runtime.field(material, 'diffuseMap');
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(diffuseMap, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(diffuseMap, 'image'), null)), function():Dynamic return cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(diffuseMap, 'image')] : Array<Dynamic>))))) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(diffuseMap, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(diffuseMap, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(diffuseMap, 'image')] : Array<Dynamic>)) : Bool)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);
       _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(diffuseMap, 'image'), _Runtime.field(diffuseMap, 'sampler')] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locDiffuseMap'), 0.0);
@@ -74,7 +74,7 @@ class LambertGlMeshMaterialRenderer {
   }
 
   public static function defineKeyForMaterial__lambertGlMeshMaterialRenderer(material:Null<LambertMaterial>):GlClassicDefineKey {
-    return cast { alphaMaskEnabled: _Runtime.andValue(!_Runtime.strictEquals(material, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask')), hasDiffuseMap: _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(material, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(material, 'diffuseMap'), null)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(material, 'diffuseMap'), 'image'), null)), hasNormalMap: false, hasSpecularMap: false, hasUvTransform: _Runtime.callValue(hasGlUvTransform, cast ([_Runtime.select(!_Runtime.strictEquals(material, null), function():Dynamic return cast _Runtime.field(material, 'diffuseMap'), function():Dynamic return cast null)] : Array<Dynamic>)), lightingModel: 'lambert' };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasDiffuseMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'diffuseMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(material, 'diffuseMap'), 'image'), null) : Bool)), hasNormalMap: false, hasSpecularMap: false, hasUvTransform: _Runtime.callValue(hasGlUvTransform, cast ([((cast !_Runtime.strictEquals(material, null) : Bool) ? (cast _Runtime.field(material, 'diffuseMap') : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)), lightingModel: 'lambert' };
     return cast null;
   }
 

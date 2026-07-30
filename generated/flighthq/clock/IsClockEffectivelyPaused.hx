@@ -9,8 +9,8 @@ class IsClockEffectivelyPaused {
   public static function isClockEffectivelyPaused(clock:Clock):Bool {
     var current:Null<Clock> = cast _Runtime.UNDEFINED;
     current = clock;
-    while (_Runtime.truthy(!_Runtime.strictEquals(current, null))) {
-      if (_Runtime.truthy(_Runtime.field(current, 'paused'))) { return cast true; }
+    while ((cast !_Runtime.strictEquals(current, null) : Bool)) {
+      if ((cast _Runtime.field(current, 'paused') : Bool)) { return cast true; }
       (current = cast (_Runtime.field(current, 'parent') : Dynamic));
     }
     return cast false;

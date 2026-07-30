@@ -28,7 +28,7 @@ class CanvasCSSFilterBinding {
   public static function setCanvasCssFilter(state:Dynamic, node:DisplayObject, filter:Null<String>):Void {
     var renderProxy:Dynamic = cast _Runtime.UNDEFINED;
     renderProxy = _Runtime.callValue(getOrCreateRenderProxy2D, cast ([state, node] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(filter, null))) {
+    if ((cast _Runtime.strictEquals(filter, null) : Bool)) {
       ((cast CanvasCSSFilterBinding._cssFilterBindings__canvasCSSFilterBinding : flighthq._internal._WeakMap).delete_(renderProxy));
       return;
     }

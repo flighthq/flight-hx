@@ -51,14 +51,14 @@ class CubeTexture {
   }
 
   public static function equalsCubeTexture(a:Null<CubeTextureLike>, b:Null<CubeTextureLike>):Bool {
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(a), function():Dynamic return cast !_Runtime.truthy(b)))) { return cast false; }
-    if (_Runtime.truthy(_Runtime.strictEquals(a, b))) { return cast true; }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(a, 'colorSpace'), _Runtime.field(b, 'colorSpace')))) { return cast false; }
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(equalsSampler, cast ([_Runtime.field(a, 'sampler'), _Runtime.field(b, 'sampler')] : Array<Dynamic>))))) { return cast false; }
+    if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
+    if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast true; }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(a, 'colorSpace'), _Runtime.field(b, 'colorSpace')) : Bool)) { return cast false; }
+    if ((cast !(cast _Runtime.callValue(equalsSampler, cast ([_Runtime.field(a, 'sampler'), _Runtime.field(b, 'sampler')] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, 6.0, '<'))) {
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(a, 'faces'), i), _Runtime.getIndex(_Runtime.field(b, 'faces'), i)))) { return cast false; }
+      while ((cast ((cast i : Float) < (cast 6.0 : Float)) : Bool)) {
+        if ((cast !_Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(a, 'faces'), i), _Runtime.getIndex(_Runtime.field(b, 'faces'), i)) : Bool)) { return cast false; }
         i++;
       }
     }
@@ -69,9 +69,9 @@ class CubeTexture {
   public static function getCubeTextureFaceSize(cube:CubeTextureLike):Float {
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, 6.0, '<'))) {
+      while ((cast ((cast i : Float) < (cast 6.0 : Float)) : Bool)) {
         var face:Dynamic = _Runtime.getIndex(_Runtime.field(cube, 'faces'), i);
-        if (_Runtime.truthy(!_Runtime.strictEquals(face, null))) { return cast _Runtime.field(face, 'width'); }
+        if ((cast !_Runtime.strictEquals(face, null) : Bool)) { return cast _Runtime.field(face, 'width'); }
         i++;
       }
     }

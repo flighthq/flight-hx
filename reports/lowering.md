@@ -12,6 +12,11 @@
 | Proven Boolean logical-left truthiness uses | 2739 |
 | Proven Boolean logical expressions | 2613 |
 | Proven numeric relations | 4033 |
+| Direct Boolean truthiness uses | 7882 |
+| Direct Boolean conditional expressions | 1689 |
+| Direct Boolean `&&` expressions | 1223 |
+| Direct Boolean `\|\|` expressions | 1364 |
+| Direct numeric relations | 4021 |
 | Proven indexed expressions | 7327 |
 | Proven indexed reads | 4524 |
 | Proven indexed writes | 2917 |

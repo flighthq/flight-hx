@@ -20,7 +20,7 @@ class RectanglePool {
 
   public static function acquireRectangle():Rectangle {
     var r:Rectangle = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(RectanglePool.pool__rectanglePool, 'length'), 0.0, '>'))) {
+    if ((cast ((cast _Runtime.field(RectanglePool.pool__rectanglePool, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       (r = cast ((cast _Runtime.callProperty(RectanglePool.pool__rectanglePool, 'pop', cast ([] : Array<Dynamic>)) : Rectangle) : Dynamic));
     } else {
       (r = cast (_Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>)) : Dynamic));
@@ -34,7 +34,7 @@ class RectanglePool {
   }
 
   public static function releaseRectangle(r:Rectangle):Void {
-    if (_Runtime.truthy(!_Runtime.truthy(r))) { return; }
+    if ((cast !_Runtime.truthy(r) : Bool)) { return; }
     _Runtime.callProperty(RectanglePool.pool__rectanglePool, 'push', cast ([r] : Array<Dynamic>));
   }
 

@@ -54,7 +54,7 @@ class FontFrom {
         url = _Runtime.field(__parameter0, 'url');
         format = _Runtime.field(__parameter0, 'format');
         fmt = _Runtime.coalesce(format, function():Dynamic return cast _Runtime.callValue(inferFontFormatFromUrl, cast ([url] : Array<Dynamic>)));
-        return cast _Runtime.select(!_Runtime.strictEquals(fmt, null), function():Dynamic return cast 'url(' + Std.string(url) + ') format(\'' + Std.string(fmt) + '\')', function():Dynamic return cast 'url(' + Std.string(url) + ')');
+        return cast ((cast !_Runtime.strictEquals(fmt, null) : Bool) ? (cast 'url(' + Std.string(url) + ') format(\'' + Std.string(fmt) + '\')' : Dynamic) : (cast 'url(' + Std.string(url) + ')' : Dynamic));
       }] : Array<Dynamic>)), ', ');
       face = _Runtime.construct(_Runtime.globalValue('FontFace'), [family, src]);
       return flighthq._internal._Async.flatMap(_Runtime.callProperty(face, 'load', cast ([] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {

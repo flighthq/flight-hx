@@ -28,7 +28,7 @@ class TextureAtlasPackerParse {
 
   public static function applyDocument__textureAtlasPackerParse(atlas:TextureAtlas, doc:TextureAtlasPackerDocument, options:TextureAtlasPackerParseOptions):Void {
     _Runtime.setLength(_Runtime.field(atlas, 'regions'), 0.0);
-    if (_Runtime.truthy(_Runtime.isArray(_Runtime.field(doc, 'frames')))) {
+    if ((cast _Runtime.isArray(_Runtime.field(doc, 'frames')) : Bool)) {
       for (entry in _Runtime.iterable(_Runtime.field(doc, 'frames'))) {
         _Runtime.callValue(TextureAtlasPackerParse.applyFrame__textureAtlasPackerParse, cast ([atlas, _Runtime.field(entry, 'filename'), entry, options] : Array<Dynamic>));
       }
@@ -45,15 +45,15 @@ class TextureAtlasPackerParse {
     var normalized:Dynamic = cast _Runtime.UNDEFINED;
     var region:Dynamic = cast _Runtime.UNDEFINED;
     normalized = _Runtime.callValue(TextureAtlasPackerParse.normalizeFrameName__textureAtlasPackerParse, cast ([name, _Runtime.coalesce(_Runtime.field(options, 'stripPathPrefix'), function():Dynamic return cast false)] : Array<Dynamic>));
-    region = _Runtime.callValue(createTextureAtlasRegion, cast ([{ height: _Runtime.select(_Runtime.field(entry, 'rotated'), function():Dynamic return cast _Runtime.field(_Runtime.field(entry, 'frame'), 'w'), function():Dynamic return cast _Runtime.field(_Runtime.field(entry, 'frame'), 'h')), id: _Runtime.field(_Runtime.field(atlas, 'regions'), 'length'), name: normalized, originalHeight: _Runtime.select(_Runtime.field(entry, 'trimmed'), function():Dynamic return cast _Runtime.field(_Runtime.field(entry, 'sourceSize'), 'h'), function():Dynamic return cast null), originalWidth: _Runtime.select(_Runtime.field(entry, 'trimmed'), function():Dynamic return cast _Runtime.field(_Runtime.field(entry, 'sourceSize'), 'w'), function():Dynamic return cast null), pivotX: _Runtime.select(!_Runtime.strictEquals(_Runtime.field(entry, 'pivot'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.field(_Runtime.field(entry, 'pivot'), 'x'), function():Dynamic return cast null), pivotY: _Runtime.select(!_Runtime.strictEquals(_Runtime.field(entry, 'pivot'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.field(_Runtime.field(entry, 'pivot'), 'y'), function():Dynamic return cast null), rotated: _Runtime.field(entry, 'rotated'), sourceX: _Runtime.field(_Runtime.field(entry, 'spriteSourceSize'), 'x'), sourceY: _Runtime.field(_Runtime.field(entry, 'spriteSourceSize'), 'y'), trimmed: _Runtime.field(entry, 'trimmed'), width: _Runtime.select(_Runtime.field(entry, 'rotated'), function():Dynamic return cast _Runtime.field(_Runtime.field(entry, 'frame'), 'h'), function():Dynamic return cast _Runtime.field(_Runtime.field(entry, 'frame'), 'w')), x: _Runtime.field(_Runtime.field(entry, 'frame'), 'x'), y: _Runtime.field(_Runtime.field(entry, 'frame'), 'y') }] : Array<Dynamic>));
+    region = _Runtime.callValue(createTextureAtlasRegion, cast ([{ height: ((cast _Runtime.field(entry, 'rotated') : Bool) ? (cast _Runtime.field(_Runtime.field(entry, 'frame'), 'w') : Dynamic) : (cast _Runtime.field(_Runtime.field(entry, 'frame'), 'h') : Dynamic)), id: _Runtime.field(_Runtime.field(atlas, 'regions'), 'length'), name: normalized, originalHeight: ((cast _Runtime.field(entry, 'trimmed') : Bool) ? (cast _Runtime.field(_Runtime.field(entry, 'sourceSize'), 'h') : Dynamic) : (cast null : Dynamic)), originalWidth: ((cast _Runtime.field(entry, 'trimmed') : Bool) ? (cast _Runtime.field(_Runtime.field(entry, 'sourceSize'), 'w') : Dynamic) : (cast null : Dynamic)), pivotX: ((cast !_Runtime.strictEquals(_Runtime.field(entry, 'pivot'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime.field(entry, 'pivot'), 'x') : Dynamic) : (cast null : Dynamic)), pivotY: ((cast !_Runtime.strictEquals(_Runtime.field(entry, 'pivot'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime.field(entry, 'pivot'), 'y') : Dynamic) : (cast null : Dynamic)), rotated: _Runtime.field(entry, 'rotated'), sourceX: _Runtime.field(_Runtime.field(entry, 'spriteSourceSize'), 'x'), sourceY: _Runtime.field(_Runtime.field(entry, 'spriteSourceSize'), 'y'), trimmed: _Runtime.field(entry, 'trimmed'), width: ((cast _Runtime.field(entry, 'rotated') : Bool) ? (cast _Runtime.field(_Runtime.field(entry, 'frame'), 'h') : Dynamic) : (cast _Runtime.field(_Runtime.field(entry, 'frame'), 'w') : Dynamic)), x: _Runtime.field(_Runtime.field(entry, 'frame'), 'x'), y: _Runtime.field(_Runtime.field(entry, 'frame'), 'y') }] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(atlas, 'regions'), 'push', cast ([region] : Array<Dynamic>));
   }
 
   public static function normalizeFrameName__textureAtlasPackerParse(name:String, strip:Bool):String {
     var slash:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(strip))) { return cast name; }
+    if ((cast !(cast strip : Bool) : Bool)) { return cast name; }
     slash = HxMath.max(_Runtime.callProperty(name, 'lastIndexOf', cast (['/'] : Array<Dynamic>)), _Runtime.callProperty(name, 'lastIndexOf', cast (['\\'] : Array<Dynamic>)));
-    return cast _Runtime.select(_Runtime.compare(slash, 0.0, '>='), function():Dynamic return cast _Runtime.slice(name, (slash + 1.0), null), function():Dynamic return cast name);
+    return cast ((cast ((cast slash : Float) >= (cast 0.0 : Float)) : Bool) ? (cast _Runtime.slice(name, (slash + 1.0), null) : Dynamic) : (cast name : Dynamic));
     return cast null;
   }
 }

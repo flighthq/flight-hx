@@ -56,7 +56,7 @@ class TauriMenu {
     }, subscribeSelect: function(listener:Dynamic) {
       (selectListener = cast (listener : Dynamic));
       return cast function() {
-        if (_Runtime.truthy(_Runtime.strictEquals(selectListener, listener))) { (selectListener = cast (null : Dynamic)); }
+        if ((cast _Runtime.strictEquals(selectListener, listener) : Bool)) { (selectListener = cast (null : Dynamic)); }
       };
     } };
     return cast null;
@@ -88,7 +88,7 @@ class TauriMenu {
       flighthq._internal._Async.protect(function():Dynamic {
         var id:Dynamic = cast _Runtime.UNDEFINED;
         var __flowBranch17:Dynamic;
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(item, 'type'), 'separator'))) {
+        if ((cast _Runtime.strictEquals(_Runtime.field(item, 'type'), 'separator') : Bool)) {
           __flowBranch17 = flighthq._internal._Async.protect(function():Dynamic {
             return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.field(menuModule, 'PredefinedMenuItem'), 'new', cast ([{ item: 'Separator' }] : Array<Dynamic>)));
           });
@@ -110,7 +110,7 @@ class TauriMenu {
           }
           return flighthq._internal._Async.continueFlow(__flowBranch18, function():Dynamic {
             id = _Runtime.field(item, 'id');
-            return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.field(menuModule, 'MenuItem'), 'new', cast ([{ id: id, text: _Runtime.field(item, 'label'), enabled: _Runtime.field(item, 'enabled'), accelerator: _Runtime.field(item, 'accelerator'), action: _Runtime.select(!_Runtime.strictEquals(id, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast function() return _Runtime.callValue(onSelect, cast ([id] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) }] : Array<Dynamic>)));
+            return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.field(menuModule, 'MenuItem'), 'new', cast ([{ id: id, text: _Runtime.field(item, 'label'), enabled: _Runtime.field(item, 'enabled'), accelerator: _Runtime.field(item, 'accelerator'), action: ((cast !_Runtime.strictEquals(id, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast function() return _Runtime.callValue(onSelect, cast ([id] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic)) }] : Array<Dynamic>)));
           });
         });
       })

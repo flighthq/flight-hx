@@ -24,8 +24,8 @@ class MeshGeometryCompute {
     var radiusSq:Dynamic = cast _Runtime.UNDEFINED;
     vertices = _Runtime.field(geometry, 'vertices');
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
-    if (_Runtime.truthy(_Runtime.strictEquals(vertexCount, 0.0))) {
+    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
+    if ((cast _Runtime.strictEquals(vertexCount, 0.0) : Bool)) {
       (out.center.x = cast (0.0 : Dynamic));
       (out.center.y = cast (0.0 : Dynamic));
       (out.center.z = cast (0.0 : Dynamic));
@@ -40,17 +40,17 @@ class MeshGeometryCompute {
     maxZ = HxMath.NEGATIVE_INFINITY;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, vertexCount, '<'))) {
+      while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
         var base:Dynamic = ((i * floatsPerVertex) + MeshGeometryCompute.POSITION_OFFSET__meshGeometryCompute);
         var px:Dynamic = _Runtime.getIndex(vertices, base);
         var py:Dynamic = _Runtime.getIndex(vertices, (base + 1.0));
         var pz:Dynamic = _Runtime.getIndex(vertices, (base + 2.0));
-        if (_Runtime.truthy(_Runtime.compare(px, minX, '<'))) { (minX = cast (px : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(py, minY, '<'))) { (minY = cast (py : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(pz, minZ, '<'))) { (minZ = cast (pz : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(px, maxX, '>'))) { (maxX = cast (px : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(py, maxY, '>'))) { (maxY = cast (py : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(pz, maxZ, '>'))) { (maxZ = cast (pz : Dynamic)); }
+        if ((cast ((cast px : Float) < (cast minX : Float)) : Bool)) { (minX = cast (px : Dynamic)); }
+        if ((cast ((cast py : Float) < (cast minY : Float)) : Bool)) { (minY = cast (py : Dynamic)); }
+        if ((cast ((cast pz : Float) < (cast minZ : Float)) : Bool)) { (minZ = cast (pz : Dynamic)); }
+        if ((cast ((cast px : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (px : Dynamic)); }
+        if ((cast ((cast py : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast (py : Dynamic)); }
+        if ((cast ((cast pz : Float) > (cast maxZ : Float)) : Bool)) { (maxZ = cast (pz : Dynamic)); }
         i++;
       }
     }
@@ -60,13 +60,13 @@ class MeshGeometryCompute {
     radiusSq = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, vertexCount, '<'))) {
+      while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
         var base:Dynamic = ((i * floatsPerVertex) + MeshGeometryCompute.POSITION_OFFSET__meshGeometryCompute);
         var dx:Dynamic = (_Runtime.getIndex(vertices, base) - cx);
         var dy:Dynamic = (_Runtime.getIndex(vertices, (base + 1.0)) - cy);
         var dz:Dynamic = (_Runtime.getIndex(vertices, (base + 2.0)) - cz);
         var dSq:Dynamic = (((dx * dx) + (dy * dy)) + (dz * dz));
-        if (_Runtime.truthy(_Runtime.compare(dSq, radiusSq, '>'))) { (radiusSq = cast (dSq : Dynamic)); }
+        if ((cast ((cast dSq : Float) > (cast radiusSq : Float)) : Bool)) { (radiusSq = cast (dSq : Dynamic)); }
         i++;
       }
     }
@@ -88,7 +88,7 @@ class MeshGeometryCompute {
     var maxZ:Dynamic = cast _Runtime.UNDEFINED;
     vertices = _Runtime.field(geometry, 'vertices');
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
+    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     minX = HxMath.POSITIVE_INFINITY;
     minY = HxMath.POSITIVE_INFINITY;
     minZ = HxMath.POSITIVE_INFINITY;
@@ -97,17 +97,17 @@ class MeshGeometryCompute {
     maxZ = HxMath.NEGATIVE_INFINITY;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, vertexCount, '<'))) {
+      while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
         var base:Dynamic = ((i * floatsPerVertex) + MeshGeometryCompute.POSITION_OFFSET__meshGeometryCompute);
         var px:Dynamic = _Runtime.getIndex(vertices, base);
         var py:Dynamic = _Runtime.getIndex(vertices, (base + 1.0));
         var pz:Dynamic = _Runtime.getIndex(vertices, (base + 2.0));
-        if (_Runtime.truthy(_Runtime.compare(px, minX, '<'))) { (minX = cast (px : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(py, minY, '<'))) { (minY = cast (py : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(pz, minZ, '<'))) { (minZ = cast (pz : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(px, maxX, '>'))) { (maxX = cast (px : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(py, maxY, '>'))) { (maxY = cast (py : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(pz, maxZ, '>'))) { (maxZ = cast (pz : Dynamic)); }
+        if ((cast ((cast px : Float) < (cast minX : Float)) : Bool)) { (minX = cast (px : Dynamic)); }
+        if ((cast ((cast py : Float) < (cast minY : Float)) : Bool)) { (minY = cast (py : Dynamic)); }
+        if ((cast ((cast pz : Float) < (cast minZ : Float)) : Bool)) { (minZ = cast (pz : Dynamic)); }
+        if ((cast ((cast px : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (px : Dynamic)); }
+        if ((cast ((cast py : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast (py : Dynamic)); }
+        if ((cast ((cast pz : Float) > (cast maxZ : Float)) : Bool)) { (maxZ = cast (pz : Dynamic)); }
         i++;
       }
     }
@@ -128,11 +128,11 @@ class MeshGeometryCompute {
     srcVerts = _Runtime.field(geometry, 'vertices');
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
     indices = _Runtime.field(geometry, 'indices');
-    indexCount = _Runtime.select(indices, function():Dynamic return cast _Runtime.field(indices, 'length'), function():Dynamic return cast _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(srcVerts, 'length') / floatsPerVertex)), function():Dynamic return cast 0.0));
+    indexCount = _Runtime.select(indices, function():Dynamic return cast _Runtime.field(indices, 'length'), function():Dynamic return cast ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(srcVerts, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic)));
     dstVerts = _Runtime.field(out, 'vertices');
     {
       var t:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare((t + 2.0), indexCount, '<'))) {
+      while ((cast ((cast (t + 2.0) : Float) < (cast indexCount : Float)) : Bool)) {
         var i0:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, t), function():Dynamic return cast t);
         var i1:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, (t + 1.0)), function():Dynamic return cast (t + 1.0));
         var i2:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, (t + 2.0)), function():Dynamic return cast (t + 2.0));
@@ -158,7 +158,7 @@ class MeshGeometryCompute {
         var ny:Dynamic = ((ez1 * ex2) - (ex1 * ez2));
         var nz:Dynamic = ((ex1 * ey2) - (ey1 * ex2));
         var len:Dynamic = HxMath.sqrt((((nx * nx) + (ny * ny)) + (nz * nz)));
-        if (_Runtime.truthy(_Runtime.compare(len, 0.0, '>'))) {
+        if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
           (nx = cast ((nx / len) : Dynamic));
           (ny = cast ((ny / len) : Dynamic));
           (nz = cast ((nz / len) : Dynamic));
@@ -191,13 +191,13 @@ class MeshGeometryCompute {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     vertices = _Runtime.field(geometry, 'vertices');
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
+    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     indices = _Runtime.field(geometry, 'indices');
     indexCount = _Runtime.select(indices, function():Dynamic return cast _Runtime.field(indices, 'length'), function():Dynamic return cast vertexCount);
     accum = new flighthq._internal._Float64Array((vertexCount * 3.0));
     {
       var t:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare((t + 2.0), indexCount, '<'))) {
+      while ((cast ((cast (t + 2.0) : Float) < (cast indexCount : Float)) : Bool)) {
         var i0:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, t), function():Dynamic return cast t);
         var i1:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, (t + 1.0)), function():Dynamic return cast (t + 1.0));
         var i2:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, (t + 2.0)), function():Dynamic return cast (t + 2.0));
@@ -228,12 +228,12 @@ class MeshGeometryCompute {
     target = _Runtime.field(out, 'vertices');
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, vertexCount, '<'))) {
+      while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
         var nx:Dynamic = _Runtime.getIndex(accum, (i * 3.0));
         var ny:Dynamic = _Runtime.getIndex(accum, ((i * 3.0) + 1.0));
         var nz:Dynamic = _Runtime.getIndex(accum, ((i * 3.0) + 2.0));
         var len:Dynamic = HxMath.sqrt((((nx * nx) + (ny * ny)) + (nz * nz)));
-        if (_Runtime.truthy(_Runtime.compare(len, 0.0, '>'))) {
+        if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
           (nx = cast ((nx / len) : Dynamic));
           (ny = cast ((ny / len) : Dynamic));
           (nz = cast ((nz / len) : Dynamic));
@@ -258,14 +258,14 @@ class MeshGeometryCompute {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     vertices = _Runtime.field(geometry, 'vertices');
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
+    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     indices = _Runtime.field(geometry, 'indices');
     indexCount = _Runtime.select(indices, function():Dynamic return cast _Runtime.field(indices, 'length'), function():Dynamic return cast vertexCount);
     tan = new flighthq._internal._Float64Array((vertexCount * 3.0));
     bitan = new flighthq._internal._Float64Array((vertexCount * 3.0));
     {
       var t:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare((t + 2.0), indexCount, '<'))) {
+      while ((cast ((cast (t + 2.0) : Float) < (cast indexCount : Float)) : Bool)) {
         var i0:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, t), function():Dynamic return cast t);
         var i1:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, (t + 1.0)), function():Dynamic return cast (t + 1.0));
         var i2:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, (t + 2.0)), function():Dynamic return cast (t + 2.0));
@@ -286,7 +286,7 @@ class MeshGeometryCompute {
         var du2:Dynamic = (_Runtime.getIndex(vertices, u2) - _Runtime.getIndex(vertices, u0));
         var dv2:Dynamic = (_Runtime.getIndex(vertices, (u2 + 1.0)) - _Runtime.getIndex(vertices, (u0 + 1.0)));
         var det:Dynamic = ((du1 * dv2) - (du2 * dv1));
-        var r:Dynamic = _Runtime.select(!_Runtime.strictEquals(det, 0.0), function():Dynamic return cast (1.0 / det), function():Dynamic return cast 0.0);
+        var r:Dynamic = ((cast !_Runtime.strictEquals(det, 0.0) : Bool) ? (cast (1.0 / det) : Dynamic) : (cast 0.0 : Dynamic));
         var tx:Dynamic = (((dv2 * e1x) - (dv1 * e2x)) * r);
         var ty:Dynamic = (((dv2 * e1y) - (dv1 * e2y)) * r);
         var tz:Dynamic = (((dv2 * e1z) - (dv1 * e2z)) * r);
@@ -317,7 +317,7 @@ class MeshGeometryCompute {
     target = _Runtime.field(out, 'vertices');
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, vertexCount, '<'))) {
+      while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
         var nBase:Dynamic = ((i * floatsPerVertex) + MeshGeometryCompute.NORMAL_OFFSET__meshGeometryCompute);
         var nx:Dynamic = _Runtime.getIndex(vertices, nBase);
         var ny:Dynamic = _Runtime.getIndex(vertices, (nBase + 1.0));
@@ -330,7 +330,7 @@ class MeshGeometryCompute {
         (ty = cast ((ty - (ny * ndt)) : Dynamic));
         (tz = cast ((tz - (nz * ndt)) : Dynamic));
         var len:Dynamic = HxMath.sqrt((((tx * tx) + (ty * ty)) + (tz * tz)));
-        if (_Runtime.truthy(_Runtime.compare(len, 0.0, '>'))) {
+        if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
           (tx = cast ((tx / len) : Dynamic));
           (ty = cast ((ty / len) : Dynamic));
           (tz = cast ((tz / len) : Dynamic));
@@ -342,7 +342,7 @@ class MeshGeometryCompute {
         var cx:Dynamic = ((ny * tz) - (nz * ty));
         var cy:Dynamic = ((nz * tx) - (nx * tz));
         var cz:Dynamic = ((nx * ty) - (ny * tx));
-        var w:Dynamic = _Runtime.select(_Runtime.compare((((cx * _Runtime.getIndex(bitan, (i * 3.0))) + (cy * _Runtime.getIndex(bitan, ((i * 3.0) + 1.0)))) + (cz * _Runtime.getIndex(bitan, ((i * 3.0) + 2.0)))), 0.0, '<'), function():Dynamic return cast -1.0, function():Dynamic return cast 1.0);
+        var w:Dynamic = ((cast ((cast (((cx * _Runtime.getIndex(bitan, (i * 3.0))) + (cy * _Runtime.getIndex(bitan, ((i * 3.0) + 1.0)))) + (cz * _Runtime.getIndex(bitan, ((i * 3.0) + 2.0)))) : Float) < (cast 0.0 : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic));
         var base:Dynamic = ((i * floatsPerVertex) + MeshGeometryCompute.TANGENT_OFFSET__meshGeometryCompute);
         _Runtime.setIndex(target, base, tx);
         _Runtime.setIndex(target, (base + 1.0), ty);

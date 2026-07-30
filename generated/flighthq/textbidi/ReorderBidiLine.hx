@@ -11,32 +11,32 @@ class ReorderBidiLine {
     var lowestOdd:Dynamic = cast _Runtime.UNDEFINED;
     count = (end - start);
     _Runtime.setLength(out, count);
-    if (_Runtime.truthy(_Runtime.compare(count, 0.0, '<='))) { return; }
+    if ((cast ((cast count : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
     highest = 0.0;
     lowestOdd = 255.0;
     {
       var i:Dynamic = start;
-      while (_Runtime.truthy(_Runtime.compare(i, end, '<'))) {
+      while ((cast ((cast i : Float) < (cast end : Float)) : Bool)) {
         var level:Dynamic = _Runtime.getIndex(levels, i);
         _Runtime.setIndex(out, (i - start), i);
-        if (_Runtime.truthy(_Runtime.compare(level, highest, '>'))) { (highest = cast (level : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.fmod(level, 2.0), 1.0), function():Dynamic return cast _Runtime.compare(level, lowestOdd, '<')))) { (lowestOdd = cast (level : Dynamic)); }
+        if ((cast ((cast level : Float) > (cast highest : Float)) : Bool)) { (highest = cast (level : Dynamic)); }
+        if ((cast ((cast _Runtime.strictEquals(_Runtime.fmod(level, 2.0), 1.0) : Bool) && (cast ((cast level : Float) < (cast lowestOdd : Float)) : Bool)) : Bool)) { (lowestOdd = cast (level : Dynamic)); }
         i++;
       }
     }
     {
       var level:Dynamic = highest;
-      while (_Runtime.truthy(_Runtime.compare(level, lowestOdd, '>='))) {
+      while ((cast ((cast level : Float) >= (cast lowestOdd : Float)) : Bool)) {
         {
           var k:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(k, count, '<'))) {
-            if (_Runtime.truthy(_Runtime.compare(_Runtime.getIndex(levels, _Runtime.getIndex(out, k)), level, '>='))) {
+          while ((cast ((cast k : Float) < (cast count : Float)) : Bool)) {
+            if ((cast ((cast _Runtime.getIndex(levels, _Runtime.getIndex(out, k)) : Float) >= (cast level : Float)) : Bool)) {
               var j:Dynamic = k;
-              while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(j, count, '<'), function():Dynamic return cast _Runtime.compare(_Runtime.getIndex(levels, _Runtime.getIndex(out, j)), level, '>=')))) { j++; }
+              while ((cast ((cast ((cast j : Float) < (cast count : Float)) : Bool) && (cast ((cast _Runtime.getIndex(levels, _Runtime.getIndex(out, j)) : Float) >= (cast level : Float)) : Bool)) : Bool)) { j++; }
               {
                 var lo:Dynamic = k;
                 var hi:Dynamic = (j - 1.0);
-                while (_Runtime.truthy(_Runtime.compare(lo, hi, '<'))) {
+                while ((cast ((cast lo : Float) < (cast hi : Float)) : Bool)) {
                   var tmp:Dynamic = _Runtime.getIndex(out, lo);
                   _Runtime.setIndex(out, lo, _Runtime.getIndex(out, hi));
                   _Runtime.setIndex(out, hi, tmp);

@@ -7,7 +7,7 @@ import flighthq.types.MotionPath;
 
 class GetMotionPathProgress {
   public static function getMotionPathProgress(mp:MotionPath):Float {
-    return cast _Runtime.select(_Runtime.compare(_Runtime.field(mp, 'length'), 0.0, '>'), function():Dynamic return cast (_Runtime.field(mp, 'distance') / _Runtime.field(mp, 'length')), function():Dynamic return cast 0.0);
+    return cast ((cast ((cast _Runtime.field(mp, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.field(mp, 'distance') / _Runtime.field(mp, 'length')) : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 }

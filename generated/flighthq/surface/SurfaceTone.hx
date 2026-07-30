@@ -19,26 +19,26 @@ class SurfaceTone {
     sd = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, h, '<'))) {
+      while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
         var sy:Dynamic = (_Runtime.field(source, 'y') + py);
         var oy:Dynamic = (_Runtime.field(out, 'y') + py);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(sy, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sy, _Runtime.field(_Runtime.field(source, 'surface'), 'height'), '>=')), function():Dynamic return cast _Runtime.compare(oy, 0.0, '<')), function():Dynamic return cast _Runtime.compare(oy, _Runtime.field(_Runtime.field(out, 'surface'), 'height'), '>=')))) { py++; continue; }
+        if ((cast ((cast ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'height') : Float)) : Bool)) : Bool) || (cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast oy : Float) >= (cast _Runtime.field(_Runtime.field(out, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, w, '<'))) {
+          while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
             var sx:Dynamic = (_Runtime.field(source, 'x') + px);
             var ox:Dynamic = (_Runtime.field(out, 'x') + px);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(sx, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sx, _Runtime.field(_Runtime.field(source, 'surface'), 'width'), '>=')), function():Dynamic return cast _Runtime.compare(ox, 0.0, '<')), function():Dynamic return cast _Runtime.compare(ox, _Runtime.field(_Runtime.field(out, 'surface'), 'width'), '>=')))) { px++; continue; }
+            if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast ox : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast ox : Float) >= (cast _Runtime.field(_Runtime.field(out, 'surface'), 'width') : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Dynamic = (((sy * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sx) * 4.0);
             var oi:Dynamic = (((oy * _Runtime.field(_Runtime.field(out, 'surface'), 'width')) + ox) * 4.0);
             var r:Dynamic = _Runtime.getIndex(sd, si);
             var g:Dynamic = _Runtime.getIndex(sd, (si + 1.0));
             var b:Dynamic = _Runtime.getIndex(sd, (si + 2.0));
             var a:Dynamic = _Runtime.getIndex(sd, (si + 3.0));
-            _Runtime.setIndex(od, oi, _Runtime.select(!_Runtime.strictEquals(redLut, null), function():Dynamic return cast _Runtime.getIndex(redLut, r), function():Dynamic return cast r));
-            _Runtime.setIndex(od, (oi + 1.0), _Runtime.select(!_Runtime.strictEquals(greenLut, null), function():Dynamic return cast _Runtime.getIndex(greenLut, g), function():Dynamic return cast g));
-            _Runtime.setIndex(od, (oi + 2.0), _Runtime.select(!_Runtime.strictEquals(blueLut, null), function():Dynamic return cast _Runtime.getIndex(blueLut, b), function():Dynamic return cast b));
-            _Runtime.setIndex(od, (oi + 3.0), _Runtime.select(!_Runtime.strictEquals(alphaLut, null), function():Dynamic return cast _Runtime.getIndex(alphaLut, a), function():Dynamic return cast a));
+            _Runtime.setIndex(od, oi, ((cast !_Runtime.strictEquals(redLut, null) : Bool) ? (cast _Runtime.getIndex(redLut, r) : Dynamic) : (cast r : Dynamic)));
+            _Runtime.setIndex(od, (oi + 1.0), ((cast !_Runtime.strictEquals(greenLut, null) : Bool) ? (cast _Runtime.getIndex(greenLut, g) : Dynamic) : (cast g : Dynamic)));
+            _Runtime.setIndex(od, (oi + 2.0), ((cast !_Runtime.strictEquals(blueLut, null) : Bool) ? (cast _Runtime.getIndex(blueLut, b) : Dynamic) : (cast b : Dynamic)));
+            _Runtime.setIndex(od, (oi + 3.0), ((cast !_Runtime.strictEquals(alphaLut, null) : Bool) ? (cast _Runtime.getIndex(alphaLut, a) : Dynamic) : (cast a : Dynamic)));
             px++;
           }
         }
@@ -57,11 +57,11 @@ class SurfaceTone {
     bp = HxMath.max(0.0, HxMath.min(254.0, blackPoint));
     wp = HxMath.max((bp + 1.0), HxMath.min(255.0, whitePoint));
     span = (wp - bp);
-    invGamma = _Runtime.select(_Runtime.compare(gamma, 0.0, '>'), function():Dynamic return cast (1.0 / gamma), function():Dynamic return cast 1.0);
+    invGamma = ((cast ((cast gamma : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / gamma) : Dynamic) : (cast 1.0 : Dynamic));
     lut = new flighthq._internal._UInt8ClampedArray(256.0);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, 256.0, '<'))) {
+      while ((cast ((cast i : Float) < (cast 256.0 : Float)) : Bool)) {
         var normalized:Dynamic = HxMath.max(0.0, HxMath.min(1.0, ((i - bp) / span)));
         _Runtime.setIndex(lut, i, HxMath.round((HxMath.pow(normalized, invGamma) * 255.0)));
         i++;

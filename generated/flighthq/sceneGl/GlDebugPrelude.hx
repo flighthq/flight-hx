@@ -19,7 +19,7 @@ class GlDebugPrelude {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locNormalScale'), normalScale);
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(normalMap, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(normalMap, 'image'), null)), function():Dynamic return cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(normalMap, 'image')] : Array<Dynamic>))))) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(normalMap, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(normalMap, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(normalMap, 'image')] : Array<Dynamic>)) : Bool)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);
       _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(normalMap, 'image'), _Runtime.field(normalMap, 'sampler')] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locNormalMap'), 0.0);
@@ -34,7 +34,7 @@ class GlDebugPrelude {
   }
 
   public static function buildGlDebugDefineKey(key:GlDebugDefineKey):String {
-    return cast '' + Std.string(_Runtime.select(_Runtime.strictEquals(_Runtime.field(key, 'mode'), 'depth'), function():Dynamic return cast 'd', function():Dynamic return cast 'n')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasNormalMap'), function():Dynamic return cast 'm', function():Dynamic return cast '-')) + '';
+    return cast '' + Std.string(((cast _Runtime.strictEquals(_Runtime.field(key, 'mode'), 'depth') : Bool) ? (cast 'd' : Dynamic) : (cast 'n' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasNormalMap') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '';
     return cast null;
   }
 
@@ -63,8 +63,8 @@ class GlDebugPrelude {
   public static function buildDefineSource__glDebugPrelude(key:GlDebugDefineKey):String {
     var defines:Dynamic = cast _Runtime.UNDEFINED;
     defines = '#version 300 es\n';
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(key, 'mode'), 'depth'))) { (defines = cast ((defines + '#define DEPTH_MODE\n') : Dynamic)); } else { (defines = cast ((defines + '#define NORMAL_MODE\n') : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.field(key, 'hasNormalMap'))) { (defines = cast ((defines + '#define HAS_NORMAL_MAP\n') : Dynamic)); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(key, 'mode'), 'depth') : Bool)) { (defines = cast ((defines + '#define DEPTH_MODE\n') : Dynamic)); } else { (defines = cast ((defines + '#define NORMAL_MODE\n') : Dynamic)); }
+    if ((cast _Runtime.field(key, 'hasNormalMap') : Bool)) { (defines = cast ((defines + '#define HAS_NORMAL_MAP\n') : Dynamic)); }
     return cast defines;
     return cast null;
   }

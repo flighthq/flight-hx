@@ -45,7 +45,7 @@ class WgpuColorLutPass {
   public static function getLutBindGroupLayout__wgpuColorLutPass(state:WgpuRenderState):Dynamic {
     var layout:Dynamic = cast _Runtime.UNDEFINED;
     layout = ((cast WgpuColorLutPass.lutBindGroupLayouts__wgpuColorLutPass : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (layout = cast (flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), texture: { viewDimension: '3d' } }, { binding: 1.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), sampler: {  } }] : Array<Dynamic>) }] : Array<Dynamic>)) : Dynamic));
       ((cast WgpuColorLutPass.lutBindGroupLayouts__wgpuColorLutPass : flighthq._internal._WeakMap).set(state, layout));
     }
@@ -57,12 +57,12 @@ class WgpuColorLutPass {
     var byFormat:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     byFormat = ((cast WgpuColorLutPass.lutPipelines__wgpuColorLutPass : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(byFormat, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(byFormat, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (byFormat = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
       ((cast WgpuColorLutPass.lutPipelines__wgpuColorLutPass : flighthq._internal._WeakMap).set(state, byFormat));
     }
     pipeline = ((cast byFormat : flighthq._internal._Map).get(format));
-    if (_Runtime.truthy(_Runtime.strictEquals(pipeline, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(pipeline, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var fs:Dynamic = _Runtime.callValue(getWgpuEffectPassState, cast ([state] : Array<Dynamic>));
       var __destructure1:Dynamic = state;
       var device:Dynamic = _Runtime.field(__destructure1, 'device');
@@ -85,8 +85,8 @@ class WgpuColorLutPass {
     __destructure2 = state;
     device = _Runtime.field(__destructure2, 'device');
     n = _Runtime.field(lut, 'size');
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(cache, 'texture'), null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(cache, 'lut'), lut)))) { return cast _Runtime.field(cache, 'texture'); }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(cache, 'texture'), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(cache, 'size'), n)))) {
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(cache, 'texture'), null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(cache, 'lut'), lut) : Bool)) : Bool)) { return cast _Runtime.field(cache, 'texture'); }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(cache, 'texture'), null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(cache, 'size'), n) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(_Runtime.field(cache, 'texture'), 'destroy', cast ([] : Array<Dynamic>));
       _Runtime.setField(cache, 'texture', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([n, n, n] : Array<Dynamic>), dimension: '3d', format: 'rgba8unorm', usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
       _Runtime.setField(cache, 'size', n);
@@ -97,7 +97,7 @@ class WgpuColorLutPass {
       var i:Dynamic = 0.0;
       var j:Dynamic = 0.0;
       var o:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, ((n * n) * n), '<'))) {
+      while ((cast ((cast i : Float) < (cast ((n * n) * n) : Float)) : Bool)) {
         _Runtime.setIndex(data, o++, HxMath.round((_Runtime.callValue(WgpuColorLutPass.clamp01__wgpuColorLutPass, cast ([_Runtime.getIndex(samples, j++)] : Array<Dynamic>)) * 255.0)));
         _Runtime.setIndex(data, o++, HxMath.round((_Runtime.callValue(WgpuColorLutPass.clamp01__wgpuColorLutPass, cast ([_Runtime.getIndex(samples, j++)] : Array<Dynamic>)) * 255.0)));
         _Runtime.setIndex(data, o++, HxMath.round((_Runtime.callValue(WgpuColorLutPass.clamp01__wgpuColorLutPass, cast ([_Runtime.getIndex(samples, j++)] : Array<Dynamic>)) * 255.0)));
@@ -112,7 +112,7 @@ class WgpuColorLutPass {
   }
 
   public static function clamp01__wgpuColorLutPass(v:Float):Float {
-    return cast _Runtime.select(_Runtime.compare(v, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(v, 1.0, '>'), function():Dynamic return cast 1.0, function():Dynamic return cast v));
+    return cast ((cast ((cast v : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast v : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast v : Dynamic)) : Dynamic));
     return cast null;
   }
 

@@ -20,7 +20,7 @@ class BitmapFontXml {
   public static function parseBitmapFontXml(text:String, ?options:BitmapFontParseOptions):Null<BitmapFont> {
     var record:Dynamic = cast _Runtime.UNDEFINED;
     record = _Runtime.callValue(BitmapFontXml.parseBitmapFontXmlRecord__bitmapFontXml, cast ([text] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(record, null))) { return cast null; }
+    if ((cast _Runtime.strictEquals(record, null) : Bool)) { return cast null; }
     return cast _Runtime.callValue(buildBitmapFontFromRecord, cast ([record, options] : Array<Dynamic>));
     return cast null;
   }
@@ -37,35 +37,35 @@ class BitmapFontXml {
     var kernings:Array<BitmapFontKerningRecord> = cast _Runtime.UNDEFINED;
     var kerningsElement:Dynamic = cast _Runtime.UNDEFINED;
     root = _Runtime.callValue(parseXmlDocument, cast ([text] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(root, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(root, 'name'), 'font')))) { return cast null; }
+    if ((cast ((cast _Runtime.strictEquals(root, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(root, 'name'), 'font') : Bool)) : Bool)) { return cast null; }
     common = _Runtime.callValue(getXmlElementChildByName, cast ([root, 'common'] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(common, null))) { return cast null; }
+    if ((cast _Runtime.strictEquals(common, null) : Bool)) { return cast null; }
     lineHeight = _Runtime.callValue(getXmlElementAttributeNumber, cast ([common, 'lineHeight'] : Array<Dynamic>));
     base = _Runtime.callValue(getXmlElementAttributeNumber, cast ([common, 'base'] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(lineHeight, null), function():Dynamic return cast _Runtime.strictEquals(base, null)))) { return cast null; }
+    if ((cast ((cast _Runtime.strictEquals(lineHeight, null) : Bool) || (cast _Runtime.strictEquals(base, null) : Bool)) : Bool)) { return cast null; }
     pages = cast ([] : Array<Dynamic>);
     pagesElement = _Runtime.callValue(getXmlElementChildByName, cast ([root, 'pages'] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(pagesElement, null))) {
+    if ((cast !_Runtime.strictEquals(pagesElement, null) : Bool)) {
       for (pageElement in _Runtime.iterable(_Runtime.callValue(getXmlElementChildrenByName, cast ([pagesElement, 'page'] : Array<Dynamic>)))) {
         var id:Dynamic = _Runtime.callValue(getXmlElementAttributeNumber, cast ([pageElement, 'id'] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(id, null))) { _Runtime.callProperty(pages, 'push', cast ([{ file: _Runtime.coalesce(_Runtime.callValue(getXmlElementAttribute, cast ([pageElement, 'file'] : Array<Dynamic>)), function():Dynamic return cast ''), id: id }] : Array<Dynamic>)); }
+        if ((cast !_Runtime.strictEquals(id, null) : Bool)) { _Runtime.callProperty(pages, 'push', cast ([{ file: _Runtime.coalesce(_Runtime.callValue(getXmlElementAttribute, cast ([pageElement, 'file'] : Array<Dynamic>)), function():Dynamic return cast ''), id: id }] : Array<Dynamic>)); }
       }
     }
     chars = cast ([] : Array<Dynamic>);
     charsElement = _Runtime.callValue(getXmlElementChildByName, cast ([root, 'chars'] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(charsElement, null))) {
+    if ((cast !_Runtime.strictEquals(charsElement, null) : Bool)) {
       for (charElement in _Runtime.iterable(_Runtime.callValue(getXmlElementChildrenByName, cast ([charsElement, 'char'] : Array<Dynamic>)))) {
         var char:Dynamic = _Runtime.callValue(BitmapFontXml.readXmlChar__bitmapFontXml, cast ([charElement] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(char, null))) { _Runtime.callProperty(chars, 'push', cast ([char] : Array<Dynamic>)); }
+        if ((cast !_Runtime.strictEquals(char, null) : Bool)) { _Runtime.callProperty(chars, 'push', cast ([char] : Array<Dynamic>)); }
       }
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(chars, 'length'), 0.0))) { return cast null; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(chars, 'length'), 0.0) : Bool)) { return cast null; }
     kernings = cast ([] : Array<Dynamic>);
     kerningsElement = _Runtime.callValue(getXmlElementChildByName, cast ([root, 'kernings'] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(kerningsElement, null))) {
+    if ((cast !_Runtime.strictEquals(kerningsElement, null) : Bool)) {
       for (kerningElement in _Runtime.iterable(_Runtime.callValue(getXmlElementChildrenByName, cast ([kerningsElement, 'kerning'] : Array<Dynamic>)))) {
         var kerning:Dynamic = _Runtime.callValue(BitmapFontXml.readXmlKerning__bitmapFontXml, cast ([kerningElement] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(kerning, null))) { _Runtime.callProperty(kernings, 'push', cast ([kerning] : Array<Dynamic>)); }
+        if ((cast !_Runtime.strictEquals(kerning, null) : Bool)) { _Runtime.callProperty(kernings, 'push', cast ([kerning] : Array<Dynamic>)); }
       }
     }
     return cast { base: base, chars: chars, encoding: 'raster', kernings: kernings, lineHeight: lineHeight, pages: pages };
@@ -89,7 +89,7 @@ class BitmapFontXml {
     xoffset = _Runtime.callValue(getXmlElementAttributeNumber, cast ([element, 'xoffset'] : Array<Dynamic>));
     yoffset = _Runtime.callValue(getXmlElementAttributeNumber, cast ([element, 'yoffset'] : Array<Dynamic>));
     xadvance = _Runtime.callValue(getXmlElementAttributeNumber, cast ([element, 'xadvance'] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(id, null), function():Dynamic return cast _Runtime.strictEquals(x, null)), function():Dynamic return cast _Runtime.strictEquals(y, null)), function():Dynamic return cast _Runtime.strictEquals(width, null)), function():Dynamic return cast _Runtime.strictEquals(height, null)), function():Dynamic return cast _Runtime.strictEquals(xoffset, null)), function():Dynamic return cast _Runtime.strictEquals(yoffset, null)), function():Dynamic return cast _Runtime.strictEquals(xadvance, null)))) {
+    if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(id, null) : Bool) || (cast _Runtime.strictEquals(x, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(y, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(width, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(height, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(xoffset, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(yoffset, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(xadvance, null) : Bool)) : Bool)) {
       return cast null;
     }
     return cast { height: height, id: id, page: _Runtime.coalesce(_Runtime.callValue(getXmlElementAttributeNumber, cast ([element, 'page'] : Array<Dynamic>)), function():Dynamic return cast 0.0), width: width, x: x, xadvance: xadvance, xoffset: xoffset, y: y, yoffset: yoffset };
@@ -103,7 +103,7 @@ class BitmapFontXml {
     first = _Runtime.callValue(getXmlElementAttributeNumber, cast ([element, 'first'] : Array<Dynamic>));
     second = _Runtime.callValue(getXmlElementAttributeNumber, cast ([element, 'second'] : Array<Dynamic>));
     amount = _Runtime.callValue(getXmlElementAttributeNumber, cast ([element, 'amount'] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(first, null), function():Dynamic return cast _Runtime.strictEquals(second, null)), function():Dynamic return cast _Runtime.strictEquals(amount, null)))) { return cast null; }
+    if ((cast ((cast ((cast _Runtime.strictEquals(first, null) : Bool) || (cast _Runtime.strictEquals(second, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(amount, null) : Bool)) : Bool)) { return cast null; }
     return cast { amount: amount, first: first, second: second };
     return cast null;
   }

@@ -39,52 +39,52 @@ class AnimationTrack {
     times = _Runtime.field(__destructure0, 'times');
     values = _Runtime.field(__destructure0, 'values');
     count = _Runtime.field(times, 'length');
-    if (_Runtime.truthy(_Runtime.strictEquals(count, 0.0))) {
+    if ((cast _Runtime.strictEquals(count, 0.0) : Bool)) {
       {
         var c:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(c, components, '<'))) {
+        while ((cast ((cast c : Float) < (cast components : Float)) : Bool)) {
           _Runtime.setIndex(out, c, 0.0);
           c++;
         }
       }
       return;
     }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(count, 1.0), function():Dynamic return cast _Runtime.compare(t, _Runtime.getIndex(times, 0.0), '<=')))) {
+    if ((cast ((cast _Runtime.strictEquals(count, 1.0) : Bool) || (cast ((cast t : Float) <= (cast _Runtime.getIndex(times, 0.0) : Float)) : Bool)) : Bool)) {
       _Runtime.callValue(AnimationTrack.copyKeyframeValue__animationTrack, cast ([out, track, 0.0] : Array<Dynamic>));
       return;
     }
-    if (_Runtime.truthy(_Runtime.compare(t, _Runtime.getIndex(times, (count - 1.0)), '>='))) {
+    if ((cast ((cast t : Float) >= (cast _Runtime.getIndex(times, (count - 1.0)) : Float)) : Bool)) {
       _Runtime.callValue(AnimationTrack.copyKeyframeValue__animationTrack, cast ([out, track, (count - 1.0)] : Array<Dynamic>));
       return;
     }
     lo = 0.0;
     hi = (count - 1.0);
-    while (_Runtime.truthy(_Runtime.compare(lo, hi, '<'))) {
+    while ((cast ((cast lo : Float) < (cast hi : Float)) : Bool)) {
       var mid:Dynamic = (_Runtime.toInt32(((lo + hi) + 1.0)) >> 1);
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.getIndex(times, mid), t, '<='))) { (lo = cast (mid : Dynamic)); } else { (hi = cast ((mid - 1.0) : Dynamic)); }
+      if ((cast ((cast _Runtime.getIndex(times, mid) : Float) <= (cast t : Float)) : Bool)) { (lo = cast (mid : Dynamic)); } else { (hi = cast ((mid - 1.0) : Dynamic)); }
     }
     i = lo;
     t0 = _Runtime.getIndex(times, i);
     dt = (_Runtime.getIndex(times, (i + 1.0)) - t0);
-    alpha = _Runtime.select(_Runtime.compare(dt, 0.0, '>'), function():Dynamic return cast ((t - t0) / dt), function():Dynamic return cast 0.0);
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(track, 'easing'), null))) { (alpha = cast (_Runtime.callProperty(track, 'easing', cast ([alpha] : Array<Dynamic>)) : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(track, 'interpolation'), 'Step'))) {
+    alpha = ((cast ((cast dt : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((t - t0) / dt) : Dynamic) : (cast 0.0 : Dynamic));
+    if ((cast !_Runtime.strictEquals(_Runtime.field(track, 'easing'), null) : Bool)) { (alpha = cast (_Runtime.callProperty(track, 'easing', cast ([alpha] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(track, 'interpolation'), 'Step') : Bool)) {
       _Runtime.callValue(AnimationTrack.copyKeyframeValue__animationTrack, cast ([out, track, i] : Array<Dynamic>));
       return;
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(track, 'interpolation'), 'Cubic'))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(track, 'interpolation'), 'Cubic') : Bool)) {
       _Runtime.callValue(AnimationTrack.sampleCubicSegment__animationTrack, cast ([out, track, i, alpha, dt] : Array<Dynamic>));
       return;
     }
     oi = _Runtime.callValue(AnimationTrack.keyframeValueOffset__animationTrack, cast ([track, i] : Array<Dynamic>));
     oj = _Runtime.callValue(AnimationTrack.keyframeValueOffset__animationTrack, cast ([track, (i + 1.0)] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.field(track, 'quaternion'), function():Dynamic return cast _Runtime.strictEquals(components, 4.0)))) {
+    if ((cast ((cast _Runtime.field(track, 'quaternion') : Bool) && (cast _Runtime.strictEquals(components, 4.0) : Bool)) : Bool)) {
       _Runtime.callValue(AnimationTrack.slerpFlatQuaternion__animationTrack, cast ([out, values, oi, oj, alpha] : Array<Dynamic>));
       return;
     }
     {
       var c:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(c, components, '<'))) {
+      while ((cast ((cast c : Float) < (cast components : Float)) : Bool)) {
         var a:Dynamic = _Runtime.getIndex(values, (oi + c));
         _Runtime.setIndex(out, c, (a + ((_Runtime.getIndex(values, (oj + c)) - a) * alpha)));
         c++;
@@ -109,14 +109,14 @@ class AnimationTrack {
     outValues = cast ([] : Array<Dynamic>);
     {
       var k:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(k, count, '<'))) {
+      while ((cast ((cast k : Float) < (cast count : Float)) : Bool)) {
         var time:Dynamic = _Runtime.getIndex(times, k);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(time, startTime, '<'), function():Dynamic return cast _Runtime.compare(time, endTime, '>')))) { k++; continue; }
+        if ((cast ((cast ((cast time : Float) < (cast startTime : Float)) : Bool) || (cast ((cast time : Float) > (cast endTime : Float)) : Bool)) : Bool)) { k++; continue; }
         _Runtime.callProperty(outTimes, 'push', cast ([(time - startTime)] : Array<Dynamic>));
         var off:Dynamic = (k * stride);
         {
           var c:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(c, stride, '<'))) {
+          while ((cast ((cast c : Float) < (cast stride : Float)) : Bool)) {
             _Runtime.callProperty(outValues, 'push', cast ([_Runtime.getIndex(_Runtime.field(track, 'values'), (off + c))] : Array<Dynamic>));
             c++;
           }
@@ -142,28 +142,28 @@ class AnimationTrack {
     count = _Runtime.field(times, 'length');
     {
       var k:Dynamic = 1.0;
-      while (_Runtime.truthy(_Runtime.compare(k, count, '<'))) {
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.getIndex(times, k), _Runtime.getIndex(times, (k - 1.0)), '<='))) {
+      while ((cast ((cast k : Float) < (cast count : Float)) : Bool)) {
+        if ((cast ((cast _Runtime.getIndex(times, k) : Float) <= (cast _Runtime.getIndex(times, (k - 1.0)) : Float)) : Bool)) {
           _Runtime.callProperty(diagnostics, 'push', cast ([{ code: 'nonAscendingTimes', index: k, message: 'times[' + Std.string(k) + '] (' + Std.string(_Runtime.getIndex(times, k)) + ') is not greater than times[' + Std.string((k - 1.0)) + '] (' + Std.string(_Runtime.getIndex(times, (k - 1.0))) + '); times must be strictly ascending.' }] : Array<Dynamic>));
         }
         k++;
       }
     }
     expected = (count * _Runtime.callValue(AnimationTrack.keyframeStride__animationTrack, cast ([track] : Array<Dynamic>)));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(values, 'length'), expected))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(values, 'length'), expected) : Bool)) {
       _Runtime.callProperty(diagnostics, 'push', cast ([{ code: 'valuesLengthMismatch', index: null, message: 'values.length (' + Std.string(_Runtime.field(values, 'length')) + ') must equal keyCount * componentsPerKeyframe (' + Std.string(expected) + ').' }] : Array<Dynamic>));
     }
-    return cast _Runtime.select(_Runtime.compare(_Runtime.field(diagnostics, 'length'), 0.0, '>'), function():Dynamic return cast diagnostics, function():Dynamic return cast null);
+    return cast ((cast ((cast _Runtime.field(diagnostics, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast diagnostics : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function cloneNumberBuffer__animationTrack(src:Dynamic):Dynamic {
     var out:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.isInstanceOf(src, _Runtime.globalValue('Float32Array')))) { return cast _Runtime.slice(src, 0, null); }
+    if ((cast _Runtime.isInstanceOf(src, _Runtime.globalValue('Float32Array')) : Bool)) { return cast _Runtime.slice(src, 0, null); }
     out = _Runtime.createArray(_Runtime.field(src, 'length'));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(src, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(src, 'length') : Float)) : Bool)) {
         _Runtime.setIndex(out, i, _Runtime.getIndex(src, i));
         i++;
       }
@@ -177,7 +177,7 @@ class AnimationTrack {
     off = _Runtime.callValue(AnimationTrack.keyframeValueOffset__animationTrack, cast ([track, k] : Array<Dynamic>));
     {
       var c:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(c, _Runtime.field(track, 'components'), '<'))) {
+      while ((cast ((cast c : Float) < (cast _Runtime.field(track, 'components') : Float)) : Bool)) {
         _Runtime.setIndex(out, c, _Runtime.getIndex(_Runtime.field(track, 'values'), (off + c)));
         c++;
       }
@@ -185,14 +185,14 @@ class AnimationTrack {
   }
 
   public static function keyframeStride__animationTrack(track:flighthq.types.AnimationTrack):Float {
-    return cast _Runtime.select(_Runtime.strictEquals(_Runtime.field(track, 'interpolation'), 'Cubic'), function():Dynamic return cast (_Runtime.field(track, 'components') * 3.0), function():Dynamic return cast _Runtime.field(track, 'components'));
+    return cast ((cast _Runtime.strictEquals(_Runtime.field(track, 'interpolation'), 'Cubic') : Bool) ? (cast (_Runtime.field(track, 'components') * 3.0) : Dynamic) : (cast _Runtime.field(track, 'components') : Dynamic));
     return cast null;
   }
 
   public static function keyframeValueOffset__animationTrack(track:flighthq.types.AnimationTrack, k:Float):Float {
     var stride:Dynamic = cast _Runtime.UNDEFINED;
     stride = _Runtime.callValue(AnimationTrack.keyframeStride__animationTrack, cast ([track] : Array<Dynamic>));
-    return cast _Runtime.select(_Runtime.strictEquals(_Runtime.field(track, 'interpolation'), 'Cubic'), function():Dynamic return cast ((k * stride) + _Runtime.field(track, 'components')), function():Dynamic return cast (k * stride));
+    return cast ((cast _Runtime.strictEquals(_Runtime.field(track, 'interpolation'), 'Cubic') : Bool) ? (cast ((k * stride) + _Runtime.field(track, 'components')) : Dynamic) : (cast (k * stride) : Dynamic));
     return cast null;
   }
 
@@ -207,7 +207,7 @@ class AnimationTrack {
     z = _Runtime.getIndex(out, 2.0);
     w = _Runtime.getIndex(out, 3.0);
     len = _Runtime.hypot(x, y, z, w);
-    if (_Runtime.truthy(_Runtime.compare(len, 0.0, '>'))) {
+    if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
       var inv:Dynamic = (1.0 / len);
       _Runtime.setIndex(out, 0.0, (x * inv));
       _Runtime.setIndex(out, 1.0, (y * inv));
@@ -243,7 +243,7 @@ class AnimationTrack {
     base1 = ((i + 1.0) * stride);
     {
       var c:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(c, components, '<'))) {
+      while ((cast ((cast c : Float) < (cast components : Float)) : Bool)) {
         var p0:Dynamic = _Runtime.getIndex(values, ((base0 + components) + c));
         var m0:Dynamic = _Runtime.getIndex(values, ((base0 + (components * 2.0)) + c));
         var p1:Dynamic = _Runtime.getIndex(values, ((base1 + components) + c));
@@ -252,7 +252,7 @@ class AnimationTrack {
         c++;
       }
     }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.field(track, 'quaternion'), function():Dynamic return cast _Runtime.strictEquals(components, 4.0)))) { _Runtime.callValue(AnimationTrack.normalizeFlatQuaternion__animationTrack, cast ([out] : Array<Dynamic>)); }
+    if ((cast ((cast _Runtime.field(track, 'quaternion') : Bool) && (cast _Runtime.strictEquals(components, 4.0) : Bool)) : Bool)) { _Runtime.callValue(AnimationTrack.normalizeFlatQuaternion__animationTrack, cast ([out] : Array<Dynamic>)); }
   }
 
   public static function slerpFlatQuaternion__animationTrack(out:Dynamic, values:Dynamic, oa:Float, ob:Float, alpha:Float):Void {
@@ -276,14 +276,14 @@ class AnimationTrack {
     bz = _Runtime.getIndex(values, (ob + 2.0));
     bw = _Runtime.getIndex(values, (ob + 3.0));
     cosom = ((((ax * bx) + (ay * by)) + (az * bz)) + (aw * bw));
-    if (_Runtime.truthy(_Runtime.compare(cosom, 0.0, '<'))) {
+    if ((cast ((cast cosom : Float) < (cast 0.0 : Float)) : Bool)) {
       (cosom = cast (-cosom : Dynamic));
       (bx = cast (-bx : Dynamic));
       (by = cast (-by : Dynamic));
       (bz = cast (-bz : Dynamic));
       (bw = cast (-bw : Dynamic));
     }
-    if (_Runtime.truthy(_Runtime.compare((1.0 - cosom), 0.000001, '>'))) {
+    if ((cast ((cast (1.0 - cosom) : Float) > (cast 0.000001 : Float)) : Bool)) {
       var omega:Dynamic = HxMath.acos(cosom);
       var sinom:Dynamic = HxMath.sin(omega);
       (scale0 = cast ((HxMath.sin(((1.0 - alpha) * omega)) / sinom) : Dynamic));

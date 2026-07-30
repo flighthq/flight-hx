@@ -34,7 +34,7 @@ class TextureAtlasRegion {
 
   public static function getTextureAtlasRegionById(atlas:TextureAtlas, id:Float):Null<flighthq.types.TextureAtlasRegion> {
     for (region in _Runtime.iterable(_Runtime.field(atlas, 'regions'))) {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(region, 'id'), id))) { return cast region; }
+      if ((cast _Runtime.strictEquals(_Runtime.field(region, 'id'), id) : Bool)) { return cast region; }
     }
     return cast null;
     return cast null;
@@ -42,7 +42,7 @@ class TextureAtlasRegion {
 
   public static function getTextureAtlasRegionByName(atlas:TextureAtlas, name:String):Null<flighthq.types.TextureAtlasRegion> {
     for (region in _Runtime.iterable(_Runtime.field(atlas, 'regions'))) {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(region, 'name'), name))) { return cast region; }
+      if ((cast _Runtime.strictEquals(_Runtime.field(region, 'name'), name) : Bool)) { return cast region; }
     }
     return cast null;
     return cast null;
@@ -52,7 +52,7 @@ class TextureAtlasRegion {
     var result:Array<flighthq.types.TextureAtlasRegion> = cast _Runtime.UNDEFINED;
     result = cast ([] : Array<Dynamic>);
     for (region in _Runtime.iterable(_Runtime.field(atlas, 'regions'))) {
-      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(region, 'name'), null), function():Dynamic return cast StringTools.startsWith(_Runtime.field(region, 'name'), prefix)))) { _Runtime.callProperty(result, 'push', cast ([region] : Array<Dynamic>)); }
+      if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(region, 'name'), null) : Bool) && (cast StringTools.startsWith(_Runtime.field(region, 'name'), prefix) : Bool)) : Bool)) { _Runtime.callProperty(result, 'push', cast ([region] : Array<Dynamic>)); }
     }
     return cast result;
     return cast null;
@@ -63,7 +63,7 @@ class TextureAtlasRegion {
     var ry:Dynamic = cast _Runtime.UNDEFINED;
     var rw:Dynamic = cast _Runtime.UNDEFINED;
     var rh:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(imageWidth, 0.0, '<='), function():Dynamic return cast _Runtime.compare(imageHeight, 0.0, '<=')))) {
+    if ((cast ((cast ((cast imageWidth : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast imageHeight : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
       _Runtime.setField(out, 'x', 0.0);
       _Runtime.setField(out, 'y', 0.0);
       _Runtime.setField(out, 'width', 0.0);

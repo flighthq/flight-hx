@@ -18,10 +18,10 @@ class BitmapFont {
     glyphs = _Runtime.construct(_Runtime.globalValue('Map'), []);
     for (glyph in _Runtime.iterable(_Runtime.field(data, 'glyphs'))) {
       var page:Dynamic = _Runtime.coalesce(_Runtime.field(glyph, 'page'), function():Dynamic return cast 0.0);
-      ((cast glyphs : flighthq._internal._Map).set(_Runtime.field(glyph, 'codepoint'), { advance: _Runtime.field(glyph, 'advance'), bearingX: _Runtime.field(glyph, 'bearingX'), bearingY: _Runtime.field(glyph, 'bearingY'), height: _Runtime.field(glyph, 'height'), page: _Runtime.select(_Runtime.andValue(_Runtime.compare(page, 0.0, '>='), function():Dynamic return cast _Runtime.compare(page, pageCount, '<')), function():Dynamic return cast page, function():Dynamic return cast 0.0), width: _Runtime.field(glyph, 'width'), x: _Runtime.field(glyph, 'x'), y: _Runtime.field(glyph, 'y') }));
+      ((cast glyphs : flighthq._internal._Map).set(_Runtime.field(glyph, 'codepoint'), { advance: _Runtime.field(glyph, 'advance'), bearingX: _Runtime.field(glyph, 'bearingX'), bearingY: _Runtime.field(glyph, 'bearingY'), height: _Runtime.field(glyph, 'height'), page: ((cast ((cast ((cast page : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast page : Float) < (cast pageCount : Float)) : Bool)) : Bool) ? (cast page : Dynamic) : (cast 0.0 : Dynamic)), width: _Runtime.field(glyph, 'width'), x: _Runtime.field(glyph, 'x'), y: _Runtime.field(glyph, 'y') }));
     }
     kerning = _Runtime.construct(_Runtime.globalValue('Map'), []);
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(data, 'kerning'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(data, 'kerning'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       for (pair in _Runtime.iterable(_Runtime.field(data, 'kerning'))) {
         ((cast kerning : flighthq._internal._Map).set(_Runtime.callValue(BitmapFont.packBitmapFontKerningKey__bitmapFont, cast ([_Runtime.field(pair, 'left'), _Runtime.field(pair, 'right')] : Array<Dynamic>)), _Runtime.field(pair, 'amount')));
       }

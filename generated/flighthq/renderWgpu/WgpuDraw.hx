@@ -32,9 +32,9 @@ class WgpuDraw {
     var entry:WgpuImageResourceTextureEntry = cast _Runtime.UNDEFINED;
     cache = _Runtime.field(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'imageResourceTextureCache');
     cached = ((cast cache : flighthq._internal._WeakMap).get(image));
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(cached, 'version'), _Runtime.field(image, 'version'))))) { return cast cached; }
+    if ((cast ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(cached, 'version'), _Runtime.field(image, 'version')) : Bool)) : Bool)) { return cast cached; }
     built = _Runtime.callValue(WgpuDraw.uploadWgpuImageResourceEntry__wgpuDraw, cast ([state, image, generateMips] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callProperty(_Runtime.field(cached, 'texture'), 'destroy', cast ([] : Array<Dynamic>));
       _Runtime.setField(cached, 'texture', _Runtime.field(built, 'texture'));
       _Runtime.setField(cached, 'view', _Runtime.field(built, 'view'));
@@ -65,35 +65,35 @@ class WgpuDraw {
     var entry:WgpuTextureEntry = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     cached = ((cast _Runtime.field(runtime, 'textureCache') : flighthq._internal._WeakMap).get(imageSource));
-    if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast cached; }
+    if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
     __destructure0 = state;
     device = _Runtime.field(__destructure0, 'device');
     __destructure1 = runtime;
     textureBindGroupLayout = _Runtime.field(__destructure1, 'textureBindGroupLayout');
     width = 1.0;
     height = 1.0;
-    if (_Runtime.truthy(_Runtime.isInstanceOf(imageSource, _Runtime.globalValue('HTMLCanvasElement')))) {
+    if ((cast _Runtime.isInstanceOf(imageSource, _Runtime.globalValue('HTMLCanvasElement')) : Bool)) {
       (width = cast (_Runtime.orValue(_Runtime.field(imageSource, 'width'), function():Dynamic return cast 1.0) : Dynamic));
       (height = cast (_Runtime.orValue(_Runtime.field(imageSource, 'height'), function():Dynamic return cast 1.0) : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.isInstanceOf(imageSource, _Runtime.globalValue('HTMLImageElement')))) {
+    } else { if ((cast _Runtime.isInstanceOf(imageSource, _Runtime.globalValue('HTMLImageElement')) : Bool)) {
       (width = cast (_Runtime.orValue(_Runtime.field(imageSource, 'naturalWidth'), function():Dynamic return cast 1.0) : Dynamic));
       (height = cast (_Runtime.orValue(_Runtime.field(imageSource, 'naturalHeight'), function():Dynamic return cast 1.0) : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.isInstanceOf(imageSource, _Runtime.globalValue('HTMLVideoElement')))) {
+    } else { if ((cast _Runtime.isInstanceOf(imageSource, _Runtime.globalValue('HTMLVideoElement')) : Bool)) {
       (width = cast (_Runtime.orValue(_Runtime.field(imageSource, 'videoWidth'), function():Dynamic return cast 1.0) : Dynamic));
       (height = cast (_Runtime.orValue(_Runtime.field(imageSource, 'videoHeight'), function():Dynamic return cast 1.0) : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.isInstanceOf(imageSource, _Runtime.globalValue('ImageBitmap')))) {
+    } else { if ((cast _Runtime.isInstanceOf(imageSource, _Runtime.globalValue('ImageBitmap')) : Bool)) {
       (width = cast (_Runtime.orValue(_Runtime.field(imageSource, 'width'), function():Dynamic return cast 1.0) : Dynamic));
       (height = cast (_Runtime.orValue(_Runtime.field(imageSource, 'height'), function():Dynamic return cast 1.0) : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('OffscreenCanvas'), 'undefined'), function():Dynamic return cast _Runtime.isInstanceOf(imageSource, _Runtime.globalValue('OffscreenCanvas'))))) {
+    } else { if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('OffscreenCanvas'), 'undefined') : Bool) && (cast _Runtime.isInstanceOf(imageSource, _Runtime.globalValue('OffscreenCanvas')) : Bool)) : Bool)) {
       (width = cast (_Runtime.orValue(_Runtime.field(imageSource, 'width'), function():Dynamic return cast 1.0) : Dynamic));
       (height = cast (_Runtime.orValue(_Runtime.field(imageSource, 'height'), function():Dynamic return cast 1.0) : Dynamic));
     } } } } }
-    mipLevelCount = _Runtime.select(generateMips, function():Dynamic return cast _Runtime.callValue(getWgpuMipLevelCount, cast ([width, height] : Array<Dynamic>)), function():Dynamic return cast 1.0);
+    mipLevelCount = ((cast generateMips : Bool) ? (cast _Runtime.callValue(getWgpuMipLevelCount, cast ([width, height] : Array<Dynamic>)) : Dynamic) : (cast 1.0 : Dynamic));
     texture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([width, height, 1.0] : Array<Dynamic>), format: 'rgba8unorm', mipLevelCount: mipLevelCount, usage: (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')))) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'copyExternalImageToTexture', cast ([{ source: (cast imageSource : Dynamic), flipY: false }, { texture: texture, premultipliedAlpha: true }, cast ([width, height] : Array<Dynamic>)] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(mipLevelCount, 1.0, '>'))) { _Runtime.callValue(generateWgpuMipmaps, cast ([state, texture, width, height, 'rgba8unorm'] : Array<Dynamic>)); }
+    if ((cast ((cast mipLevelCount : Float) > (cast 1.0 : Float)) : Bool)) { _Runtime.callValue(generateWgpuMipmaps, cast ([state, texture, width, height, 'rgba8unorm'] : Array<Dynamic>)); }
     view = _Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>));
-    sampler = _Runtime.select(_Runtime.field(state, 'allowSmoothing'), function():Dynamic return cast _Runtime.field(runtime, 'linearSampler'), function():Dynamic return cast _Runtime.field(runtime, 'nearestSampler'));
+    sampler = ((cast _Runtime.field(state, 'allowSmoothing') : Bool) ? (cast _Runtime.field(runtime, 'linearSampler') : Dynamic) : (cast _Runtime.field(runtime, 'nearestSampler') : Dynamic));
     bindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: textureBindGroupLayout, entries: cast ([{ binding: 0.0, resource: view }, { binding: 1.0, resource: sampler }] : Array<Dynamic>) }] : Array<Dynamic>));
     entry = { texture: texture, view: view, bindGroup: bindGroup };
     ((cast _Runtime.field(runtime, 'textureCache') : flighthq._internal._WeakMap).set(imageSource, entry));
@@ -105,7 +105,7 @@ class WgpuDraw {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var sampler:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    sampler = _Runtime.select(_Runtime.field(state, 'allowSmoothing'), function():Dynamic return cast _Runtime.field(runtime, 'linearSampler'), function():Dynamic return cast _Runtime.field(runtime, 'nearestSampler'));
+    sampler = ((cast _Runtime.field(state, 'allowSmoothing') : Bool) ? (cast _Runtime.field(runtime, 'linearSampler') : Dynamic) : (cast _Runtime.field(runtime, 'nearestSampler') : Dynamic));
     return cast flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(runtime, 'textureBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: view }, { binding: 1.0, resource: sampler }] : Array<Dynamic>) }] : Array<Dynamic>));
     return cast null;
   }
@@ -132,7 +132,7 @@ class WgpuDraw {
     texture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([w, h, 1.0] : Array<Dynamic>), format: 'rgba8unorm', usage: (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')))) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'copyExternalImageToTexture', cast ([{ source: (cast canvas : Dynamic), flipY: false }, { texture: texture, premultipliedAlpha: true }, cast ([w, h] : Array<Dynamic>)] : Array<Dynamic>));
     view = _Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>));
-    sampler = _Runtime.select(_Runtime.field(state, 'allowSmoothing'), function():Dynamic return cast _Runtime.field(runtime, 'linearSampler'), function():Dynamic return cast _Runtime.field(runtime, 'nearestSampler'));
+    sampler = ((cast _Runtime.field(state, 'allowSmoothing') : Bool) ? (cast _Runtime.field(runtime, 'linearSampler') : Dynamic) : (cast _Runtime.field(runtime, 'nearestSampler') : Dynamic));
     bindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: textureBindGroupLayout, entries: cast ([{ binding: 0.0, resource: view }, { binding: 1.0, resource: sampler }] : Array<Dynamic>) }] : Array<Dynamic>));
     return cast { texture: texture, view: view, bindGroup: bindGroup };
     return cast null;
@@ -144,7 +144,7 @@ class WgpuDraw {
     var uniformOffset:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     pass = _Runtime.field(runtime, 'renderPass');
-    if (_Runtime.truthy(_Runtime.strictEquals(pass, null))) { return; }
+    if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     uniformOffset = _Runtime.callValue(writeWgpuQuadUniforms, cast ([state, renderProxy, _Runtime.callValue(getWgpuRenderProxyColorTransform, cast ([renderProxy] : Array<Dynamic>)), x0, y0, x1, y1, u0, v0, u1, v1] : Array<Dynamic>));
     _Runtime.callValue(submitWgpuQuadDraw, cast ([state, uniformOffset, _Runtime.field(textureEntry, 'bindGroup')] : Array<Dynamic>));
   }
@@ -153,7 +153,7 @@ class WgpuDraw {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var uniformOffset:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null) : Bool)) { return; }
     uniformOffset = _Runtime.callValue(writeWgpuQuadUniforms, cast ([state, { alpha: _Runtime.field(renderProxy, 'alpha'), transform2D: transform }, _Runtime.callValue(getWgpuRenderProxyColorTransform, cast ([renderProxy] : Array<Dynamic>)), x0, y0, x1, y1, u0, v0, u1, v1] : Array<Dynamic>));
     _Runtime.callValue(submitWgpuQuadDraw, cast ([state, uniformOffset, _Runtime.field(textureEntry, 'bindGroup')] : Array<Dynamic>));
   }
@@ -173,12 +173,12 @@ class WgpuDraw {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     pass = _Runtime.field(runtime, 'renderPass');
-    if (_Runtime.truthy(_Runtime.strictEquals(pass, null))) { return; }
+    if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     pipeline = _Runtime.callValue(getActiveWgpuPipeline, cast ([state] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setPipeline', cast ([pipeline] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, _Runtime.field(runtime, 'uniformBindGroup'), cast ([uniformOffset] : Array<Dynamic>)] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setBindGroup', cast ([1.0, textureBindGroup] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(runtime, 'currentMaskDepth'), 0.0, '>'))) { _Runtime.callProperty(pass, 'setStencilReference', cast ([_Runtime.field(runtime, 'currentMaskDepth')] : Array<Dynamic>)); }
+    if ((cast ((cast _Runtime.field(runtime, 'currentMaskDepth') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(pass, 'setStencilReference', cast ([_Runtime.field(runtime, 'currentMaskDepth')] : Array<Dynamic>)); }
     _Runtime.callProperty(pass, 'draw', cast ([6.0] : Array<Dynamic>));
   }
 
@@ -204,7 +204,7 @@ class WgpuDraw {
     out = new flighthq._internal._UInt8ClampedArray(_Runtime.field(data, 'length'));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(data, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
         var a:Dynamic = _Runtime.getIndex(data, (i + 3.0));
         _Runtime.setIndex(out, i, ((_Runtime.getIndex(data, i) * a) / 255.0));
         _Runtime.setIndex(out, (i + 1.0), ((_Runtime.getIndex(data, (i + 1.0)) * a) / 255.0));
@@ -233,17 +233,17 @@ class WgpuDraw {
     device = _Runtime.field(__destructure5, 'device');
     width = _Runtime.orValue(_Runtime.field(image, 'width'), function():Dynamic return cast 1.0);
     height = _Runtime.orValue(_Runtime.field(image, 'height'), function():Dynamic return cast 1.0);
-    mipLevelCount = _Runtime.select(generateMips, function():Dynamic return cast _Runtime.callValue(getWgpuMipLevelCount, cast ([width, height] : Array<Dynamic>)), function():Dynamic return cast 1.0);
+    mipLevelCount = ((cast generateMips : Bool) ? (cast _Runtime.callValue(getWgpuMipLevelCount, cast ([width, height] : Array<Dynamic>)) : Dynamic) : (cast 1.0 : Dynamic));
     texture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([width, height, 1.0] : Array<Dynamic>), format: 'rgba8unorm', mipLevelCount: mipLevelCount, usage: (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')))) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(image, 'source'), null))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(image, 'source'), null) : Bool)) {
       flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'copyExternalImageToTexture', cast ([{ source: (cast _Runtime.field(image, 'source') : Dynamic), flipY: false }, { texture: texture, premultipliedAlpha: true }, cast ([width, height] : Array<Dynamic>)] : Array<Dynamic>));
     } else {
-      var data:Dynamic = _Runtime.select(_Runtime.strictEquals(_Runtime.field(image, 'alphaType'), 'straight'), function():Dynamic return cast _Runtime.callValue(WgpuDraw.premultiplyStraightRgba8__wgpuDraw, cast ([_Runtime.field(image, 'data')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(image, 'data'));
+      var data:Dynamic = ((cast _Runtime.strictEquals(_Runtime.field(image, 'alphaType'), 'straight') : Bool) ? (cast _Runtime.callValue(WgpuDraw.premultiplyStraightRgba8__wgpuDraw, cast ([_Runtime.field(image, 'data')] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.field(image, 'data') : Dynamic));
       flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeTexture', cast ([{ texture: texture }, data, { bytesPerRow: (width * 4.0), rowsPerImage: height }, cast ([width, height, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
     }
-    if (_Runtime.truthy(_Runtime.compare(mipLevelCount, 1.0, '>'))) { _Runtime.callValue(generateWgpuMipmaps, cast ([state, texture, width, height, 'rgba8unorm'] : Array<Dynamic>)); }
+    if ((cast ((cast mipLevelCount : Float) > (cast 1.0 : Float)) : Bool)) { _Runtime.callValue(generateWgpuMipmaps, cast ([state, texture, width, height, 'rgba8unorm'] : Array<Dynamic>)); }
     view = _Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>));
-    sampler = _Runtime.select(_Runtime.field(state, 'allowSmoothing'), function():Dynamic return cast _Runtime.field(runtime, 'linearSampler'), function():Dynamic return cast _Runtime.field(runtime, 'nearestSampler'));
+    sampler = ((cast _Runtime.field(state, 'allowSmoothing') : Bool) ? (cast _Runtime.field(runtime, 'linearSampler') : Dynamic) : (cast _Runtime.field(runtime, 'nearestSampler') : Dynamic));
     bindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: _Runtime.field(runtime, 'textureBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: view }, { binding: 1.0, resource: sampler }] : Array<Dynamic>) }] : Array<Dynamic>));
     return cast { texture: texture, view: view, bindGroup: bindGroup };
     return cast null;

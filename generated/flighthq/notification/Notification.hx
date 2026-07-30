@@ -92,7 +92,7 @@ class Notification {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           var __flowBranch2:Dynamic;
-          if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined'))) {
+          if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined') : Bool)) {
             __flowBranch2 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn('');
             });
@@ -103,7 +103,7 @@ class Notification {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
               var id:Dynamic = cast _Runtime.UNDEFINED;
               var __flowBranch3:Dynamic;
-              if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(_Runtime.globalValue('Notification'), 'permission'), 'granted'))) {
+              if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.globalValue('Notification'), 'permission'), 'granted') : Bool)) {
                 __flowBranch3 = flighthq._internal._Async.protect(function():Dynamic {
                   return flighthq._internal._Async.flowReturn('');
                 });
@@ -133,7 +133,7 @@ class Notification {
     backend = { cancelScheduledNotification: function(id:Dynamic) {
       var entry:Dynamic = cast _Runtime.UNDEFINED;
       entry = ((cast _scheduled : flighthq._internal._Map).get(id));
-      if (_Runtime.truthy(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+      if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         _Runtime.clearTimeout(_Runtime.field(entry, 'timeout'));
         ((cast _scheduled : flighthq._internal._Map).delete_(id));
       }
@@ -211,15 +211,15 @@ class Notification {
         return flighthq._internal._Async.resolve(_Runtime.callProperty(_Runtime.toArray(((cast _scheduled : flighthq._internal._Map).values())), 'map', cast ([function(e:Dynamic) return _Runtime.field(e, 'entry')] : Array<Dynamic>)));
       });
     }, getPermission: function() {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined'))) { return cast 'denied'; }
+      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined') : Bool)) { return cast 'denied'; }
       return cast (cast _Runtime.field(_Runtime.globalValue('Notification'), 'permission') : Dynamic);
     }, isSupported: function() {
-      return cast _Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined'), function():Dynamic return cast _Runtime.hasField(_Runtime.globalValue('navigator'), 'serviceWorker'));
+      return cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined') : Bool) && (cast _Runtime.hasField(_Runtime.globalValue('navigator'), 'serviceWorker') : Bool));
     }, notify: _show, requestPermission: function():flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           var __flowBranch12:Dynamic;
-          if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('Notification'), 'requestPermission')), 'function')))) {
+          if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('Notification'), 'requestPermission')), 'function') : Bool)) : Bool)) {
             __flowBranch12 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn('denied');
             });
@@ -255,7 +255,7 @@ class Notification {
         fireAndReschedule = function() {
           ((cast _scheduled : flighthq._internal._Map).delete_(id));
           _Runtime.voidValue(_Runtime.callValue(_show, cast ([_Runtime.mergeObjects([request, { id: id }])] : Array<Dynamic>)));
-          if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(schedule, 'repeat'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+          if ((cast !_Runtime.strictEquals(_Runtime.field(schedule, 'repeat'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
             var ms:Dynamic = _Runtime.callValue(Notification._repeatMs__notification, cast ([_Runtime.field(schedule, 'repeat')] : Array<Dynamic>));
             var timeout:Dynamic = _Runtime.setTimeout(fireAndReschedule, ms);
             ((cast _scheduled : flighthq._internal._Map).set(id, { timeout: timeout, entry: { id: id, request: request, schedule: _Runtime.mergeObjects([schedule, { at: (_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) + ms) }]) } }));
@@ -298,7 +298,7 @@ class Notification {
             __awaitValue14;
             merged = _Runtime.mergeObjects([(cast partial : NotificationRequest), { id: id }]);
             var __flowBranch15:Dynamic;
-            if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(merged, 'title'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+            if ((cast _Runtime.strictEquals(_Runtime.field(merged, 'title'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
               __flowBranch15 = flighthq._internal._Async.protect(function():Dynamic {
                 return flighthq._internal._Async.flowReturn(false);
               });
@@ -372,9 +372,9 @@ class Notification {
     };
     _notify = function(request:NotificationRequest):flighthq._internal._Promise<String> {
       return cast flighthq._internal._Async.protect(function():Dynamic {
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined'))) { return cast ''; }
+        if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined') : Bool)) { return cast ''; }
         try {
-          if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(_Runtime.globalValue('Notification'), 'permission'), 'granted'))) { return cast ''; }
+          if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.globalValue('Notification'), 'permission'), 'granted') : Bool)) { return cast ''; }
           var id:Dynamic = _Runtime.coalesce(_Runtime.field(request, 'id'), function():Dynamic return cast _Runtime.callValue(_generateId, cast ([] : Array<Dynamic>)));
           var n:Dynamic = _Runtime.construct(_Runtime.globalValue('Notification'), [_Runtime.field(request, 'title'), (cast { body: _Runtime.field(request, 'body'), badge: _Runtime.field(request, 'badge'), data: _Runtime.field(request, 'data'), dir: _Runtime.field(request, 'dir'), icon: _Runtime.field(request, 'icon'), image: _Runtime.field(request, 'image'), lang: _Runtime.field(request, 'lang'), renotify: _Runtime.field(request, 'renotify'), requireInteraction: _Runtime.field(request, 'requireInteraction'), silent: _Runtime.field(request, 'silent'), tag: _Runtime.coalesce(_Runtime.field(request, 'tag'), function():Dynamic return cast id), timestamp: _Runtime.field(request, 'timestamp'), vibrate: _Runtime.select(_Runtime.field(request, 'vibrate'), function():Dynamic return cast _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(request, 'vibrate'))]), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) } : Dynamic)]);
           ((cast _live : flighthq._internal._Map).set(id, n));
@@ -404,7 +404,7 @@ class Notification {
     return cast { cancelScheduledNotification: function(id:Dynamic) {
       var entry:Dynamic = cast _Runtime.UNDEFINED;
       entry = ((cast _scheduled : flighthq._internal._Map).get(id));
-      if (_Runtime.truthy(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+      if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         _Runtime.clearTimeout(_Runtime.field(entry, 'timeout'));
         ((cast _scheduled : flighthq._internal._Map).delete_(id));
       }
@@ -422,7 +422,7 @@ class Notification {
     }, closeNotification: function(id:Dynamic) {
       var n:Dynamic = cast _Runtime.UNDEFINED;
       n = ((cast _live : flighthq._internal._Map).get(id));
-      if (_Runtime.truthy(!_Runtime.strictEquals(n, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+      if ((cast !_Runtime.strictEquals(n, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         try {
           _Runtime.callProperty(n, 'close', cast ([] : Array<Dynamic>));
         } catch (__error:Dynamic) {
@@ -446,7 +446,7 @@ class Notification {
       });
     }, getPermission: function() {
       var p:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined'))) { return cast 'denied'; }
+      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined') : Bool)) { return cast 'denied'; }
       p = (cast _Runtime.field(_Runtime.globalValue('Notification'), 'permission') : Dynamic);
       return cast p;
     }, isSupported: function() {
@@ -455,7 +455,7 @@ class Notification {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           var __flowBranch25:Dynamic;
-          if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('Notification'), 'requestPermission')), 'function')))) {
+          if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('Notification'), 'requestPermission')), 'function') : Bool)) : Bool)) {
             __flowBranch25 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn('denied');
             });
@@ -493,7 +493,7 @@ class Notification {
         fireAndReschedule = function() {
           ((cast _scheduled : flighthq._internal._Map).delete_(id));
           _Runtime.voidValue(_Runtime.callValue(_notify, cast ([_Runtime.mergeObjects([request, { id: id }])] : Array<Dynamic>)));
-          if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(schedule, 'repeat'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+          if ((cast !_Runtime.strictEquals(_Runtime.field(schedule, 'repeat'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
             var ms:Dynamic = _Runtime.callValue(Notification._repeatMs__notification, cast ([_Runtime.field(schedule, 'repeat')] : Array<Dynamic>));
             var timeout:Dynamic = _Runtime.setTimeout(fireAndReschedule, ms);
             ((cast _scheduled : flighthq._internal._Map).set(id, { timeout: timeout, entry: { id: id, request: request, schedule: _Runtime.mergeObjects([schedule, { at: (_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) + ms) }]) } }));
@@ -537,7 +537,7 @@ class Notification {
           existing = ((cast _live : flighthq._internal._Map).get(id));
           originalRequest = ((cast _requests : flighthq._internal._Map).get(id));
           var __flowBranch27:Dynamic;
-          if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(originalRequest, _Runtime.field(_Runtime, 'UNDEFINED'))))) {
+          if ((cast ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(originalRequest, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
             __flowBranch27 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn(false);
             });
@@ -586,7 +586,7 @@ class Notification {
   }
 
   public static function getNotificationBackend():NotificationBackend {
-    if (_Runtime.truthy(_Runtime.strictEquals(Notification._backend__notification, null))) { (Notification._backend__notification = cast (_Runtime.callValue(createWebNotificationBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Notification._backend__notification, null) : Bool)) { (Notification._backend__notification = cast (_Runtime.callValue(createWebNotificationBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Notification._backend__notification;
     return cast null;
   }
@@ -620,13 +620,13 @@ class Notification {
 
   public static function notifyServiceWorkerBackendAction(backend:NotificationBackend, message:{ var type:String; var notificationId:String; @:optional var actionId:String; @:optional var reply:String; }):Void {
     var b:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(message, 'type'), 'notificationclick'))) { return; }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(message, 'type'), 'notificationclick') : Bool)) { return; }
     b = (cast backend : Dynamic);
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(message, 'actionId'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(message, 'reply'), _Runtime.field(_Runtime, 'UNDEFINED'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(b, '_dispatchReply'), _Runtime.field(_Runtime, 'UNDEFINED'))))) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(message, 'actionId'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(message, 'reply'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(b, '_dispatchReply'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
       _Runtime.callProperty(b, '_dispatchReply', cast ([_Runtime.field(message, 'notificationId'), _Runtime.field(message, 'actionId'), _Runtime.field(message, 'reply')] : Array<Dynamic>));
-    } else { if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(message, 'actionId'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(b, '_dispatchAction'), _Runtime.field(_Runtime, 'UNDEFINED'))))) {
+    } else { if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(message, 'actionId'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(b, '_dispatchAction'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
       _Runtime.callProperty(b, '_dispatchAction', cast ([_Runtime.field(message, 'notificationId'), _Runtime.field(message, 'actionId')] : Array<Dynamic>));
-    } else { if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(b, '_dispatchClick'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    } else { if ((cast !_Runtime.strictEquals(_Runtime.field(b, '_dispatchClick'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callProperty(b, '_dispatchClick', cast ([_Runtime.field(message, 'notificationId')] : Array<Dynamic>));
     } } }
   }

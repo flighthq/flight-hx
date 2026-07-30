@@ -60,11 +60,11 @@ class UpdateBitmapText {
     bounds = _Runtime.callValue(UpdateBitmapText.ensureBoundsRectangle__updateBitmapText, cast ([runtime] : Array<Dynamic>));
     for (quadBatch in _Runtime.iterable(_Runtime.field(runtime, 'quadBatches'))) {
       _Runtime.callValue(clearQuadBatch, cast ([quadBatch] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(_Runtime.field(quadBatch, 'data'), 'atlas'), null))) { _Runtime.setLength(_Runtime.field(_Runtime.field(_Runtime.field(quadBatch, 'data'), 'atlas'), 'regions'), 0.0); }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(quadBatch, 'data'), 'atlas'), null) : Bool)) { _Runtime.setLength(_Runtime.field(_Runtime.field(_Runtime.field(quadBatch, 'data'), 'atlas'), 'regions'), 0.0); }
       _Runtime.callValue(UpdateBitmapText.applyBitmapTextColor__updateBitmapText, cast ([quadBatch, _Runtime.field(data, 'color')] : Array<Dynamic>));
     }
     glyphSource = _Runtime.field(data, 'glyphSource');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(glyphSource, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(data, 'text'), 'length'), 0.0)))) {
+    if ((cast ((cast _Runtime.strictEquals(glyphSource, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(data, 'text'), 'length'), 0.0) : Bool)) : Bool)) {
       _Runtime.callValue(UpdateBitmapText.setEmptyRectangle__updateBitmapText, cast ([bounds] : Array<Dynamic>));
       _Runtime.callValue(invalidateNodeLocalBounds, cast ([bitmapText] : Array<Dynamic>));
       return;
@@ -80,37 +80,37 @@ class UpdateBitmapText {
     maxY = -HxMath.POSITIVE_INFINITY;
     {
       var li:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(li, _Runtime.field(lines, 'length'), '<'))) {
+      while ((cast ((cast li : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
         var line:Dynamic = _Runtime.getIndex(lines, li);
         var baselineY:Dynamic = (metrics.ascent + (li * lineAdvance));
         var startX:Dynamic = 0.0;
         var gapExtra:Dynamic = 0.0;
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'align'), 'center'))) { (startX = cast (((refWidth - _Runtime.field(line, 'width')) / 2.0) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'align'), 'right'))) { (startX = cast ((refWidth - _Runtime.field(line, 'width')) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(data, 'align'), 'justify'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(data, 'wrapWidth'), null)), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(line, 'paragraphEnd'))), function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.field(line, 'gaps'), 'length'), 0.0, '>')))) {
+        if ((cast _Runtime.strictEquals(_Runtime.field(data, 'align'), 'center') : Bool)) { (startX = cast (((refWidth - _Runtime.field(line, 'width')) / 2.0) : Dynamic)); } else { if ((cast _Runtime.strictEquals(_Runtime.field(data, 'align'), 'right') : Bool)) { (startX = cast ((refWidth - _Runtime.field(line, 'width')) : Dynamic)); } else { if ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'align'), 'justify') : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(data, 'wrapWidth'), null) : Bool)) : Bool) && (cast !(cast _Runtime.field(line, 'paragraphEnd') : Bool) : Bool)) : Bool) && (cast ((cast _Runtime.field(_Runtime.field(line, 'gaps'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
           (gapExtra = cast (((_Runtime.field(data, 'wrapWidth') - _Runtime.field(line, 'width')) / _Runtime.field(_Runtime.field(line, 'gaps'), 'length')) : Dynamic));
         } } }
         var penX:Dynamic = startX;
         {
           var wi:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(wi, _Runtime.field(_Runtime.field(line, 'words'), 'length'), '<'))) {
-            if (_Runtime.truthy(_Runtime.compare(wi, 0.0, '>'))) { (penX = cast ((penX + (_Runtime.getIndex(_Runtime.field(line, 'gaps'), (wi - 1.0)) + gapExtra)) : Dynamic)); }
+          while ((cast ((cast wi : Float) < (cast _Runtime.field(_Runtime.field(line, 'words'), 'length') : Float)) : Bool)) {
+            if ((cast ((cast wi : Float) > (cast 0.0 : Float)) : Bool)) { (penX = cast ((penX + (_Runtime.getIndex(_Runtime.field(line, 'gaps'), (wi - 1.0)) + gapExtra)) : Dynamic)); }
             var word:Dynamic = _Runtime.getIndex(_Runtime.field(line, 'words'), wi);
             for (glyph in _Runtime.iterable(_Runtime.field(word, 'glyphs'))) {
               var entry:Dynamic = _Runtime.field(glyph, 'entry');
               var page:Dynamic = _Runtime.callValue(UpdateBitmapText.ensureBitmapTextPageBatch__updateBitmapText, cast ([bitmapText, runtime, glyphSource, _Runtime.field(data, 'color'), pages, _Runtime.field(entry, 'page')] : Array<Dynamic>));
-              if (_Runtime.truthy(_Runtime.strictEquals(page, null))) { continue; }
+              if ((cast _Runtime.strictEquals(page, null) : Bool)) { continue; }
               var quadX:Dynamic = ((penX + _Runtime.field(glyph, 'penWithinWord')) + _Runtime.field(entry, 'bearingX'));
               var quadY:Dynamic = (baselineY - _Runtime.field(entry, 'bearingY'));
               var regionId:Dynamic = ((cast _Runtime.field(page, 'regionByCodepoint') : flighthq._internal._Map).get(_Runtime.field(glyph, 'codepoint')));
-              if (_Runtime.truthy(_Runtime.strictEquals(regionId, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+              if ((cast _Runtime.strictEquals(regionId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
                 _Runtime.callValue(addTextureAtlasRegion, cast ([_Runtime.field(page, 'atlas'), _Runtime.field(entry, 'x'), _Runtime.field(entry, 'y'), _Runtime.field(entry, 'width'), _Runtime.field(entry, 'height')] : Array<Dynamic>));
                 (regionId = cast ((_Runtime.field(_Runtime.field(_Runtime.field(page, 'atlas'), 'regions'), 'length') - 1.0) : Dynamic));
                 ((cast _Runtime.field(page, 'regionByCodepoint') : flighthq._internal._Map).set(_Runtime.field(glyph, 'codepoint'), regionId));
               }
               _Runtime.callValue(appendQuadBatchInstance, cast ([_Runtime.field(page, 'quadBatch'), regionId, quadX, quadY] : Array<Dynamic>));
-              if (_Runtime.truthy(_Runtime.compare(quadX, minX, '<'))) { (minX = cast (quadX : Dynamic)); }
-              if (_Runtime.truthy(_Runtime.compare(quadY, minY, '<'))) { (minY = cast (quadY : Dynamic)); }
-              if (_Runtime.truthy(_Runtime.compare((quadX + _Runtime.field(entry, 'width')), maxX, '>'))) { (maxX = cast ((quadX + _Runtime.field(entry, 'width')) : Dynamic)); }
-              if (_Runtime.truthy(_Runtime.compare((quadY + _Runtime.field(entry, 'height')), maxY, '>'))) { (maxY = cast ((quadY + _Runtime.field(entry, 'height')) : Dynamic)); }
+              if ((cast ((cast quadX : Float) < (cast minX : Float)) : Bool)) { (minX = cast (quadX : Dynamic)); }
+              if ((cast ((cast quadY : Float) < (cast minY : Float)) : Bool)) { (minY = cast (quadY : Dynamic)); }
+              if ((cast ((cast (quadX + _Runtime.field(entry, 'width')) : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast ((quadX + _Runtime.field(entry, 'width')) : Dynamic)); }
+              if ((cast ((cast (quadY + _Runtime.field(entry, 'height')) : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast ((quadY + _Runtime.field(entry, 'height')) : Dynamic)); }
             }
             (penX = cast ((penX + _Runtime.field(word, 'width')) : Dynamic));
             wi++;
@@ -119,7 +119,7 @@ class UpdateBitmapText {
         li++;
       }
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(minX, HxMath.POSITIVE_INFINITY))) {
+    if ((cast _Runtime.strictEquals(minX, HxMath.POSITIVE_INFINITY) : Bool)) {
       _Runtime.callValue(UpdateBitmapText.setEmptyRectangle__updateBitmapText, cast ([bounds] : Array<Dynamic>));
     } else {
       _Runtime.setField(bounds, 'x', minX);
@@ -132,7 +132,7 @@ class UpdateBitmapText {
 
   public static function applyBitmapTextColor__updateBitmapText(quadBatch:QuadBatch, color:Float):Void {
     var colorTransform:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(color, UpdateBitmapText.BITMAP_TEXT_DEFAULT_COLOR__updateBitmapText))) {
+    if ((cast _Runtime.strictEquals(color, UpdateBitmapText.BITMAP_TEXT_DEFAULT_COLOR__updateBitmapText) : Bool)) {
       _Runtime.callValue(setDisplayObjectColorAdjustments, cast ([quadBatch, null] : Array<Dynamic>));
       return;
     }
@@ -155,7 +155,7 @@ class UpdateBitmapText {
     previousCodepoint = -1.0;
     inWord = false;
     flush = function() {
-      if (_Runtime.truthy(!_Runtime.truthy(inWord))) { return; }
+      if ((cast !(cast inWord : Bool) : Bool)) { return; }
       _Runtime.callProperty(tokens, 'push', cast ([{ gap: pendingGap, word: { glyphs: glyphs, width: pen } }] : Array<Dynamic>));
       (pendingGap = cast (0.0 : Dynamic));
       (glyphs = cast (cast ([] : Array<Dynamic>) : Dynamic));
@@ -165,17 +165,17 @@ class UpdateBitmapText {
     };
     for (character in _Runtime.iterable(paragraph)) {
       var codepoint:Dynamic = _Runtime.codePointAt(character, 0.0);
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(codepoint, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(codepoint, UpdateBitmapText.CARRIAGE_RETURN__updateBitmapText)))) { continue; }
-      if (_Runtime.truthy(_Runtime.strictEquals(codepoint, UpdateBitmapText.SPACE__updateBitmapText))) {
+      if ((cast ((cast _Runtime.strictEquals(codepoint, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(codepoint, UpdateBitmapText.CARRIAGE_RETURN__updateBitmapText) : Bool)) : Bool)) { continue; }
+      if ((cast _Runtime.strictEquals(codepoint, UpdateBitmapText.SPACE__updateBitmapText) : Bool)) {
         _Runtime.callValue(flush, cast ([] : Array<Dynamic>));
         var spaceEntry:Dynamic = _Runtime.callProperty(glyphSource, 'getGlyphEntry', cast ([UpdateBitmapText.SPACE__updateBitmapText] : Array<Dynamic>));
-        (pendingGap = cast ((pendingGap + (_Runtime.select(!_Runtime.strictEquals(spaceEntry, null), function():Dynamic return cast _Runtime.field(spaceEntry, 'advance'), function():Dynamic return cast 0.0) + letterSpacing)) : Dynamic));
+        (pendingGap = cast ((pendingGap + (((cast !_Runtime.strictEquals(spaceEntry, null) : Bool) ? (cast _Runtime.field(spaceEntry, 'advance') : Dynamic) : (cast 0.0 : Dynamic)) + letterSpacing)) : Dynamic));
         continue;
       }
       var entry:Dynamic = _Runtime.callProperty(glyphSource, 'getGlyphEntry', cast ([codepoint] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(entry, null))) { continue; }
-      if (_Runtime.truthy(_Runtime.compare(previousCodepoint, 0.0, '>='))) { (pen = cast ((pen + _Runtime.callProperty(glyphSource, 'getGlyphKerning', cast ([previousCodepoint, codepoint] : Array<Dynamic>))) : Dynamic)); }
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(_Runtime.field(entry, 'width'), 0.0, '>'), function():Dynamic return cast _Runtime.compare(_Runtime.field(entry, 'height'), 0.0, '>')))) { _Runtime.callProperty(glyphs, 'push', cast ([{ codepoint: codepoint, entry: entry, penWithinWord: pen }] : Array<Dynamic>)); }
+      if ((cast _Runtime.strictEquals(entry, null) : Bool)) { continue; }
+      if ((cast ((cast previousCodepoint : Float) >= (cast 0.0 : Float)) : Bool)) { (pen = cast ((pen + _Runtime.callProperty(glyphSource, 'getGlyphKerning', cast ([previousCodepoint, codepoint] : Array<Dynamic>))) : Dynamic)); }
+      if ((cast ((cast ((cast _Runtime.field(entry, 'width') : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast _Runtime.field(entry, 'height') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.callProperty(glyphs, 'push', cast ([{ codepoint: codepoint, entry: entry, penWithinWord: pen }] : Array<Dynamic>)); }
       (pen = cast ((pen + (_Runtime.field(entry, 'advance') + letterSpacing)) : Dynamic));
       (previousCodepoint = cast (codepoint : Dynamic));
       (inWord = cast (true : Dynamic));
@@ -192,10 +192,10 @@ class UpdateBitmapText {
     var atlas:Dynamic = cast _Runtime.UNDEFINED;
     var pageBatch:BitmapTextPageBatch__updateBitmapText = cast _Runtime.UNDEFINED;
     cached = ((cast pages : flighthq._internal._Map).get(page));
-    if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast cached; }
+    if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
     image = _Runtime.callProperty(glyphSource, 'getGlyphAtlasImage', cast ([page] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(image, null))) { return cast null; }
-    while (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(runtime, 'quadBatches'), 'length'), page, '<='))) {
+    if ((cast _Runtime.strictEquals(image, null) : Bool)) { return cast null; }
+    while ((cast ((cast _Runtime.field(_Runtime.field(runtime, 'quadBatches'), 'length') : Float) <= (cast page : Float)) : Bool)) {
       var created:Dynamic = _Runtime.callValue(createQuadBatch, cast ([{ data: { atlas: _Runtime.callValue(createTextureAtlas, cast ([] : Array<Dynamic>)) } }] : Array<Dynamic>));
       _Runtime.callValue(UpdateBitmapText.applyBitmapTextColor__updateBitmapText, cast ([created, color] : Array<Dynamic>));
       _Runtime.callProperty(_Runtime.field(runtime, 'quadBatches'), 'push', cast ([created] : Array<Dynamic>));
@@ -211,7 +211,7 @@ class UpdateBitmapText {
   }
 
   public static function ensureBoundsRectangle__updateBitmapText(runtime:BitmapTextRuntime):Rectangle {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'localBoundsRectangle'), null))) { _Runtime.setField(runtime, 'localBoundsRectangle', _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>))); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'localBoundsRectangle'), null) : Bool)) { _Runtime.setField(runtime, 'localBoundsRectangle', _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>))); }
     return cast _Runtime.field(runtime, 'localBoundsRectangle');
     return cast null;
   }
@@ -223,16 +223,16 @@ class UpdateBitmapText {
     paragraphs = _Runtime.callProperty(_Runtime.field(data, 'text'), 'split', cast (['\n'] : Array<Dynamic>));
     {
       var pi:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(pi, _Runtime.field(paragraphs, 'length'), '<'))) {
+      while ((cast ((cast pi : Float) < (cast _Runtime.field(paragraphs, 'length') : Float)) : Bool)) {
         var tokens:Dynamic = _Runtime.callValue(UpdateBitmapText.buildBitmapTextWords__updateBitmapText, cast ([glyphSource, _Runtime.getIndex(paragraphs, pi), _Runtime.field(data, 'letterSpacing')] : Array<Dynamic>));
         var current:BitmapTextLine__updateBitmapText = { words: cast ([] : Array<Dynamic>), gaps: cast ([] : Array<Dynamic>), width: 0.0, paragraphEnd: false };
         for (token in _Runtime.iterable(tokens)) {
-          var wraps:Dynamic = _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(data, 'wrapWidth'), null), function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.field(current, 'words'), 'length'), 0.0, '>')), function():Dynamic return cast _Runtime.compare(((_Runtime.field(current, 'width') + _Runtime.field(token, 'gap')) + _Runtime.field(_Runtime.field(token, 'word'), 'width')), _Runtime.field(data, 'wrapWidth'), '>'));
-          if (_Runtime.truthy(wraps)) {
+          var wraps:Dynamic = ((cast ((cast !_Runtime.strictEquals(_Runtime.field(data, 'wrapWidth'), null) : Bool) && (cast ((cast _Runtime.field(_Runtime.field(current, 'words'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast ((_Runtime.field(current, 'width') + _Runtime.field(token, 'gap')) + _Runtime.field(_Runtime.field(token, 'word'), 'width')) : Float) > (cast _Runtime.field(data, 'wrapWidth') : Float)) : Bool));
+          if ((cast wraps : Bool)) {
             _Runtime.callProperty(lines, 'push', cast ([current] : Array<Dynamic>));
             (current = cast ({ words: cast ([_Runtime.field(token, 'word')] : Array<Dynamic>), gaps: cast ([] : Array<Dynamic>), width: _Runtime.field(_Runtime.field(token, 'word'), 'width'), paragraphEnd: false } : Dynamic));
           } else {
-            if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(current, 'words'), 'length'), 0.0, '>'))) {
+            if ((cast ((cast _Runtime.field(_Runtime.field(current, 'words'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
               _Runtime.callProperty(_Runtime.field(current, 'gaps'), 'push', cast ([_Runtime.field(token, 'gap')] : Array<Dynamic>));
               _Runtime.setField(current, 'width', (_Runtime.field(current, 'width') + _Runtime.field(token, 'gap')));
             }
@@ -253,7 +253,7 @@ class UpdateBitmapText {
     var max:Dynamic = cast _Runtime.UNDEFINED;
     max = 0.0;
     for (line in _Runtime.iterable(lines)) {
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(line, 'width'), max, '>'))) { (max = cast (_Runtime.field(line, 'width') : Dynamic)); }
+      if ((cast ((cast _Runtime.field(line, 'width') : Float) > (cast max : Float)) : Bool)) { (max = cast (_Runtime.field(line, 'width') : Dynamic)); }
     }
     return cast max;
     return cast null;

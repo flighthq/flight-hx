@@ -18,7 +18,7 @@ class _SceneResourceSignalsValues {
 
   public static function enableSceneResourceSignals(resolver:SceneResourceResolver):SceneResourceSignals {
     var signals:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(resolver, 'signals'), null))) { return cast _Runtime.field(resolver, 'signals'); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(resolver, 'signals'), null) : Bool)) { return cast _Runtime.field(resolver, 'signals'); }
     signals = _Runtime.callValue(createSceneResourceSignals, cast ([] : Array<Dynamic>));
     _Runtime.setField(resolver, 'signals', signals);
     return cast signals;

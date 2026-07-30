@@ -35,9 +35,9 @@ class GlBitmap {
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     __destructure0 = (cast (cast data : Dynamic) : GlBitmapData__glBitmap);
     image = _Runtime.field(__destructure0, 'image');
-    if (_Runtime.truthy(_Runtime.strictEquals(image, null))) { return; }
+    if ((cast _Runtime.strictEquals(image, null) : Bool)) { return; }
     entry = ((cast _Runtime.field(runtime, 'imageResourceTextureCache') : flighthq._internal._WeakMap).get(image));
-    if (_Runtime.truthy(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.deleteTexture(_Runtime.field(state, 'gl'), _Runtime.field(entry, 'texture'));
       ((cast _Runtime.field(runtime, 'imageResourceTextureCache') : flighthq._internal._WeakMap).delete_(image));
     }
@@ -65,17 +65,17 @@ class GlBitmap {
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     source = (cast _Runtime.field(renderProxy, 'source') : Bitmap);
     imageSource = _Runtime.field(_Runtime.field(source, 'data'), 'image');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(imageSource, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(hasImageResourcePixels, cast ([imageSource] : Array<Dynamic>)))))) { return; }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(renderProxy, 'rendererData'), null))) { return; }
+    if ((cast ((cast _Runtime.strictEquals(imageSource, null) : Bool) || (cast !(cast _Runtime.callValue(hasImageResourcePixels, cast ([imageSource] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(renderProxy, 'rendererData'), null) : Bool)) { return; }
     _Runtime.setField((cast (cast _Runtime.field(renderProxy, 'rendererData') : Dynamic) : GlBitmapData__glBitmap), 'image', imageSource);
     material = _Runtime.field(renderProxy, 'material');
     materialRenderer = _Runtime.callValue(resolveGlMaterialRenderer, cast ([state, material] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(materialRenderer, null))) { return; }
+    if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
     _Runtime.callValue(ensureGlQuadBatchShader, cast ([state] : Array<Dynamic>));
     sr = _Runtime.coalesce(_Runtime.field(_Runtime.field(source, 'data'), 'sourceRectangle'), function():Dynamic return cast null);
     iw = (1.0 / _Runtime.orValue(_Runtime.field(imageSource, 'width'), function():Dynamic return cast 1.0));
     ih = (1.0 / _Runtime.orValue(_Runtime.field(imageSource, 'height'), function():Dynamic return cast 1.0));
-    if (_Runtime.truthy(_Runtime.strictEquals(sr, null))) {
+    if ((cast _Runtime.strictEquals(sr, null) : Bool)) {
       (w = cast (_Runtime.field(imageSource, 'width') : Dynamic));
       (h = cast (_Runtime.field(imageSource, 'height') : Dynamic));
       (u0 = cast (0.0 : Dynamic));

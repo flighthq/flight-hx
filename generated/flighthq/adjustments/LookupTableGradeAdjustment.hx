@@ -16,7 +16,7 @@ class LookupTableGradeAdjustment {
     lut = _Runtime.field(options, 'lut');
     strength = _Runtime.coalesce(_Runtime.field(options, 'strength'), function():Dynamic return cast 1.0);
     transform = function(out:Dynamic, r:Dynamic, g:Dynamic, b:Dynamic) {
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(lut, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.compare(strength, 0.0, '<=')))) {
+      if ((cast ((cast _Runtime.strictEquals(lut, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast strength : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
         _Runtime.setIndex(out, 0.0, r);
         _Runtime.setIndex(out, 1.0, g);
         _Runtime.setIndex(out, 2.0, b);

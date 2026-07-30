@@ -51,7 +51,7 @@ class CanvasColorMatrixPass {
     _Runtime.callValue(drawCanvasImageDataPass, cast ([dest, source, function(data:Dynamic, pixelCount:Dynamic) {
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, pixelCount, '<'))) {
+        while ((cast ((cast i : Float) < (cast pixelCount : Float)) : Bool)) {
           var p:Dynamic = (i * 4.0);
           var r:Dynamic = _Runtime.getIndex(data, p);
           var g:Dynamic = _Runtime.getIndex(data, (p + 1.0));

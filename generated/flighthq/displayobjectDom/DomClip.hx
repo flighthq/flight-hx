@@ -28,16 +28,16 @@ class DomClip {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getDomRenderStateRuntime, cast ([(cast state : DomRenderState)] : Array<Dynamic>));
-    target = (_Runtime.field(data, 'clipDepth') - _Runtime.select(!_Runtime.looseEquals(_Runtime.field(source, 'clip'), null), function():Dynamic return cast 1.0, function():Dynamic return cast 0.0));
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(runtime, 'domClipStack'), 'length'), target, '>'))) { _Runtime.setLength(_Runtime.field(runtime, 'domClipStack'), target); }
+    target = (_Runtime.field(data, 'clipDepth') - ((cast !_Runtime.looseEquals(_Runtime.field(source, 'clip'), null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
+    if ((cast ((cast _Runtime.field(_Runtime.field(runtime, 'domClipStack'), 'length') : Float) > (cast target : Float)) : Bool)) { _Runtime.setLength(_Runtime.field(runtime, 'domClipStack'), target); }
     _Runtime.setField(state, 'currentClipDepth', _Runtime.field(_Runtime.field(runtime, 'domClipStack'), 'length'));
   }, pushClip: function(state:RenderState, data:RenderProxy2D, source:DisplayObject) {
     var clip:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     clip = _Runtime.field(source, 'clip');
-    if (_Runtime.truthy(_Runtime.strictEquals(clip, null))) { return; }
+    if ((cast _Runtime.strictEquals(clip, null) : Bool)) { return; }
     runtime = _Runtime.callValue(getDomRenderStateRuntime, cast ([(cast state : DomRenderState)] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(clip, 'contours'), null))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(clip, 'contours'), null) : Bool)) {
       _Runtime.callValue(pushDomClipRectangle, cast ([_Runtime.field(runtime, 'domClipStack'), _Runtime.field(clip, 'rect'), _Runtime.field(data, 'transform2D')] : Array<Dynamic>));
     } else {
       _Runtime.callValue(pushDomClipContours, cast ([_Runtime.field(runtime, 'domClipStack'), _Runtime.field(clip, 'contours'), _Runtime.field(clip, 'winding'), _Runtime.field(data, 'transform2D')] : Array<Dynamic>));

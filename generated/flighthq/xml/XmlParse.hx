@@ -15,9 +15,9 @@ class XmlParse {
     var m:Null<Dynamic> = cast _Runtime.UNDEFINED;
     result = {  };
     re = _Runtime.regexp('([\\w:.-]+)\\s*=\\s*(?:"([^"]*)"|\'([^\']*)\')', 'g');
-    while (_Runtime.truthy(!_Runtime.strictEquals((m = cast (_Runtime.callProperty(re, 'exec', cast ([attrs] : Array<Dynamic>)) : Dynamic)), null))) {
+    while ((cast !_Runtime.strictEquals((m = cast (_Runtime.callProperty(re, 'exec', cast ([attrs] : Array<Dynamic>)) : Dynamic)), null) : Bool)) {
       var attrName:Dynamic = _Runtime.getIndex(m, 1.0);
-      var value:Dynamic = _Runtime.select(!_Runtime.strictEquals(_Runtime.getIndex(m, 2.0), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.getIndex(m, 2.0), function():Dynamic return cast _Runtime.coalesce(_Runtime.getIndex(m, 3.0), function():Dynamic return cast ''));
+      var value:Dynamic = ((cast !_Runtime.strictEquals(_Runtime.getIndex(m, 2.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.getIndex(m, 2.0) : Dynamic) : (cast _Runtime.coalesce(_Runtime.getIndex(m, 3.0), function():Dynamic return cast '') : Dynamic));
       _Runtime.setIndex(result, attrName, _Runtime.callValue(XmlParse.decodeXmlEntities__xmlParse, cast ([value] : Array<Dynamic>)));
     }
     return cast result;
@@ -53,49 +53,49 @@ class XmlParse {
     var children:Array<XmlElement> = cast _Runtime.UNDEFINED;
     var text:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(XmlParse.skipWhitespace__xmlParse, cast ([src, state] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(state, 'pos'), _Runtime.field(src, 'length'), '>='), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.getIndex(src, _Runtime.field(state, 'pos')), '<')))) { return cast null; }
+    if ((cast ((cast ((cast _Runtime.field(state, 'pos') : Float) >= (cast _Runtime.field(src, 'length') : Float)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.getIndex(src, _Runtime.field(state, 'pos')), '<') : Bool)) : Bool)) { return cast null; }
     _Runtime.incrementField(state, 'pos', 1, true);
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.getIndex(src, _Runtime.field(state, 'pos')), '?'))) {
+    if ((cast _Runtime.strictEquals(_Runtime.getIndex(src, _Runtime.field(state, 'pos')), '?') : Bool)) {
       var end:Dynamic = _Runtime.callProperty(src, 'indexOf', cast (['?>', _Runtime.field(state, 'pos')] : Array<Dynamic>));
-      _Runtime.setField(state, 'pos', _Runtime.select(_Runtime.compare(end, 0.0, '>='), function():Dynamic return cast (end + 2.0), function():Dynamic return cast _Runtime.field(src, 'length')));
+      _Runtime.setField(state, 'pos', ((cast ((cast end : Float) >= (cast 0.0 : Float)) : Bool) ? (cast (end + 2.0) : Dynamic) : (cast _Runtime.field(src, 'length') : Dynamic)));
       return cast _Runtime.callValue(XmlParse.parseElement__xmlParse, cast ([src, state] : Array<Dynamic>));
     }
     nameStart = _Runtime.field(state, 'pos');
-    while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(_Runtime.field(state, 'pos'), _Runtime.field(src, 'length'), '<'), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.regexp('[\\s>/]', ''), 'test', cast ([_Runtime.getIndex(src, _Runtime.field(state, 'pos'))] : Array<Dynamic>)))))) { _Runtime.incrementField(state, 'pos', 1, true); }
+    while ((cast ((cast ((cast _Runtime.field(state, 'pos') : Float) < (cast _Runtime.field(src, 'length') : Float)) : Bool) && (cast !(cast _Runtime.callProperty(_Runtime.regexp('[\\s>/]', ''), 'test', cast ([_Runtime.getIndex(src, _Runtime.field(state, 'pos'))] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { _Runtime.incrementField(state, 'pos', 1, true); }
     name = _Runtime.slice(src, nameStart, _Runtime.field(state, 'pos'));
-    if (_Runtime.truthy(!_Runtime.truthy(name))) { return cast null; }
+    if ((cast !_Runtime.truthy(name) : Bool)) { return cast null; }
     _Runtime.callValue(XmlParse.skipWhitespace__xmlParse, cast ([src, state] : Array<Dynamic>));
     attrsStr = '';
     quote = '';
-    while (_Runtime.truthy(_Runtime.compare(_Runtime.field(state, 'pos'), _Runtime.field(src, 'length'), '<'))) {
+    while ((cast ((cast _Runtime.field(state, 'pos') : Float) < (cast _Runtime.field(src, 'length') : Float)) : Bool)) {
       var ch:Dynamic = _Runtime.getIndex(src, _Runtime.field(state, 'pos'));
       if (_Runtime.truthy(quote)) {
-        if (_Runtime.truthy(_Runtime.strictEquals(ch, quote))) { (quote = cast ('' : Dynamic)); }
-      } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(ch, '"'), function():Dynamic return cast _Runtime.strictEquals(ch, '\'')))) {
+        if ((cast _Runtime.strictEquals(ch, quote) : Bool)) { (quote = cast ('' : Dynamic)); }
+      } else { if ((cast ((cast _Runtime.strictEquals(ch, '"') : Bool) || (cast _Runtime.strictEquals(ch, '\'') : Bool)) : Bool)) {
         (quote = cast (ch : Dynamic));
-      } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(ch, '>'), function():Dynamic return cast _Runtime.andValue(_Runtime.strictEquals(ch, '/'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(src, (_Runtime.field(state, 'pos') + 1.0)), '>'))))) {
+      } else { if ((cast ((cast _Runtime.strictEquals(ch, '>') : Bool) || (cast _Runtime.andValue(_Runtime.strictEquals(ch, '/'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(src, (_Runtime.field(state, 'pos') + 1.0)), '>')) : Bool)) : Bool)) {
         break;
       } } }
       (attrsStr = cast ((attrsStr + ch) : Dynamic));
       _Runtime.incrementField(state, 'pos', 1, true);
     }
     selfClosing = _Runtime.strictEquals(_Runtime.getIndex(src, _Runtime.field(state, 'pos')), '/');
-    _Runtime.setField(state, 'pos', (_Runtime.field(state, 'pos') + _Runtime.select(selfClosing, function():Dynamic return cast 2.0, function():Dynamic return cast 1.0)));
+    _Runtime.setField(state, 'pos', (_Runtime.field(state, 'pos') + ((cast selfClosing : Bool) ? (cast 2.0 : Dynamic) : (cast 1.0 : Dynamic))));
     attributes = _Runtime.callValue(parseXmlAttributes, cast ([attrsStr] : Array<Dynamic>));
     children = cast ([] : Array<Dynamic>);
     text = '';
-    if (_Runtime.truthy(!_Runtime.truthy(selfClosing))) {
-      while (_Runtime.truthy(_Runtime.compare(_Runtime.field(state, 'pos'), _Runtime.field(src, 'length'), '<'))) {
+    if ((cast !(cast selfClosing : Bool) : Bool)) {
+      while ((cast ((cast _Runtime.field(state, 'pos') : Float) < (cast _Runtime.field(src, 'length') : Float)) : Bool)) {
         _Runtime.callValue(XmlParse.skipWhitespace__xmlParse, cast ([src, state] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.field(state, 'pos'), _Runtime.field(src, 'length'), '>='))) { break; }
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(src, _Runtime.field(state, 'pos')), '<'))) {
+        if ((cast ((cast _Runtime.field(state, 'pos') : Float) >= (cast _Runtime.field(src, 'length') : Float)) : Bool)) { break; }
+        if ((cast !_Runtime.strictEquals(_Runtime.getIndex(src, _Runtime.field(state, 'pos')), '<') : Bool)) {
           var textStart:Dynamic = _Runtime.field(state, 'pos');
-          while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(_Runtime.field(state, 'pos'), _Runtime.field(src, 'length'), '<'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.getIndex(src, _Runtime.field(state, 'pos')), '<')))) { _Runtime.incrementField(state, 'pos', 1, true); }
+          while ((cast ((cast ((cast _Runtime.field(state, 'pos') : Float) < (cast _Runtime.field(src, 'length') : Float)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.getIndex(src, _Runtime.field(state, 'pos')), '<') : Bool)) : Bool)) { _Runtime.incrementField(state, 'pos', 1, true); }
           (text = cast ((text + _Runtime.callValue(XmlParse.decodeXmlEntities__xmlParse, cast ([StringTools.trim(Std.string(_Runtime.slice(src, textStart, _Runtime.field(state, 'pos'))))] : Array<Dynamic>))) : Dynamic));
           continue;
         }
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.getIndex(src, (_Runtime.field(state, 'pos') + 1.0)), '/'))) {
-          while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(_Runtime.field(state, 'pos'), _Runtime.field(src, 'length'), '<'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.getIndex(src, _Runtime.field(state, 'pos')), '>')))) { _Runtime.incrementField(state, 'pos', 1, true); }
+        if ((cast _Runtime.strictEquals(_Runtime.getIndex(src, (_Runtime.field(state, 'pos') + 1.0)), '/') : Bool)) {
+          while ((cast ((cast ((cast _Runtime.field(state, 'pos') : Float) < (cast _Runtime.field(src, 'length') : Float)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.getIndex(src, _Runtime.field(state, 'pos')), '>') : Bool)) : Bool)) { _Runtime.incrementField(state, 'pos', 1, true); }
           _Runtime.incrementField(state, 'pos', 1, true);
           break;
         }
@@ -108,7 +108,7 @@ class XmlParse {
   }
 
   public static function skipWhitespace__xmlParse(src:String, state:ParseState__xmlParse):Void {
-    while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(_Runtime.field(state, 'pos'), _Runtime.field(src, 'length'), '<'), function():Dynamic return cast _Runtime.callProperty(_Runtime.regexp('\\s', ''), 'test', cast ([_Runtime.getIndex(src, _Runtime.field(state, 'pos'))] : Array<Dynamic>))))) { _Runtime.incrementField(state, 'pos', 1, true); }
+    while ((cast ((cast ((cast _Runtime.field(state, 'pos') : Float) < (cast _Runtime.field(src, 'length') : Float)) : Bool) && (cast _Runtime.callProperty(_Runtime.regexp('\\s', ''), 'test', cast ([_Runtime.getIndex(src, _Runtime.field(state, 'pos'))] : Array<Dynamic>)) : Bool)) : Bool)) { _Runtime.incrementField(state, 'pos', 1, true); }
   }
 
   public static function stripCdata__xmlParse(xml:String):String {

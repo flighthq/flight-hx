@@ -31,7 +31,7 @@ class CanvasRenderEffectPipeline {
     w = HxMath.max(1.0, HxMath.ceil(width));
     h = HxMath.max(1.0, HxMath.ceil(height));
     target = _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(pool, 'free'), 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createCanvasRenderTarget, cast ([w, h] : Array<Dynamic>)));
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(target, 'width'), w), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(target, 'height'), h)))) { _Runtime.callValue(resizeCanvasRenderTarget, cast ([target, w, h] : Array<Dynamic>)); }
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(target, 'width'), w) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(target, 'height'), h) : Bool)) : Bool)) { _Runtime.callValue(resizeCanvasRenderTarget, cast ([target, w, h] : Array<Dynamic>)); }
     _Runtime.callProperty(_Runtime.field(pool, 'inUse'), 'push', cast ([target] : Array<Dynamic>));
     return cast target;
     return cast null;
@@ -42,7 +42,7 @@ class CanvasRenderEffectPipeline {
     var h:Dynamic = cast _Runtime.UNDEFINED;
     w = flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'width');
     h = flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'height');
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(pipeline, 'sceneTarget'), null))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(pipeline, 'sceneTarget'), null) : Bool)) {
       _Runtime.setField(pipeline, 'sceneTarget', _Runtime.callValue(createCanvasRenderTarget, cast ([w, h] : Array<Dynamic>)));
     } else {
       _Runtime.callValue(resizeCanvasRenderTarget, cast ([_Runtime.field(pipeline, 'sceneTarget'), w, h] : Array<Dynamic>));
@@ -79,7 +79,7 @@ class CanvasRenderEffectPipeline {
     var ensureScratch:Dynamic = cast _Runtime.UNDEFINED;
     var flushAdjustments:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.field(pipeline, 'sceneTarget');
-    if (_Runtime.truthy(_Runtime.strictEquals(scene, null))) { return; }
+    if ((cast _Runtime.strictEquals(scene, null) : Bool)) { return; }
     _Runtime.callValue(endCanvasRenderPass, cast ([state] : Array<Dynamic>));
     pool = _Runtime.field(pipeline, 'pool');
     source = scene;
@@ -87,21 +87,21 @@ class CanvasRenderEffectPipeline {
     scratchB = null;
     pending = cast ([] : Array<Dynamic>);
     ensureScratch = function() {
-      if (_Runtime.truthy(_Runtime.strictEquals(scratchA, null))) { (scratchA = cast (_Runtime.callValue(acquireCanvasRenderTarget, cast ([pool, _Runtime.field(scene, 'width'), _Runtime.field(scene, 'height')] : Array<Dynamic>)) : Dynamic)); }
-      if (_Runtime.truthy(_Runtime.strictEquals(scratchB, null))) { (scratchB = cast (_Runtime.callValue(acquireCanvasRenderTarget, cast ([pool, _Runtime.field(scene, 'width'), _Runtime.field(scene, 'height')] : Array<Dynamic>)) : Dynamic)); }
+      if ((cast _Runtime.strictEquals(scratchA, null) : Bool)) { (scratchA = cast (_Runtime.callValue(acquireCanvasRenderTarget, cast ([pool, _Runtime.field(scene, 'width'), _Runtime.field(scene, 'height')] : Array<Dynamic>)) : Dynamic)); }
+      if ((cast _Runtime.strictEquals(scratchB, null) : Bool)) { (scratchB = cast (_Runtime.callValue(acquireCanvasRenderTarget, cast ([pool, _Runtime.field(scene, 'width'), _Runtime.field(scene, 'height')] : Array<Dynamic>)) : Dynamic)); }
     };
     flushAdjustments = function() {
       var dest:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(pending, 'length'), 0.0))) { return; }
+      if ((cast _Runtime.strictEquals(_Runtime.field(pending, 'length'), 0.0) : Bool)) { return; }
       _Runtime.callValue(ensureScratch, cast ([] : Array<Dynamic>));
-      dest = _Runtime.select(_Runtime.strictEquals(source, scratchA), function():Dynamic return cast scratchB, function():Dynamic return cast scratchA);
-      if (_Runtime.truthy(_Runtime.callProperty(pending, 'some', cast ([isColorLutAdjustment] : Array<Dynamic>)))) {
+      dest = ((cast _Runtime.strictEquals(source, scratchA) : Bool) ? (cast scratchB : Dynamic) : (cast scratchA : Dynamic));
+      if ((cast _Runtime.callProperty(pending, 'some', cast ([isColorLutAdjustment] : Array<Dynamic>)) : Bool)) {
         _Runtime.callValue(applyColorLutPassToCanvas, cast ([source, dest, _Runtime.callValue(bakeColorLutForRun, cast ([_Runtime.field(pipeline, 'lutCache'), pending] : Array<Dynamic>))] : Array<Dynamic>));
       } else {
         var matrices:Array<Array<Float>> = cast ([] : Array<Dynamic>);
         for (op in _Runtime.iterable(pending)) {
           var matrix:Dynamic = _Runtime.callValue(getAdjustmentColorMatrix, cast ([op] : Array<Dynamic>));
-          if (_Runtime.truthy(!_Runtime.strictEquals(matrix, null))) { _Runtime.callProperty(matrices, 'push', cast ([matrix] : Array<Dynamic>)); }
+          if ((cast !_Runtime.strictEquals(matrix, null) : Bool)) { _Runtime.callProperty(matrices, 'push', cast ([matrix] : Array<Dynamic>)); }
         }
         _Runtime.callValue(applyColorMatrixPassToCanvas, cast ([source, dest, _Runtime.callValue(fuseColorMatrices, cast ([matrices] : Array<Dynamic>))] : Array<Dynamic>));
       }
@@ -109,28 +109,28 @@ class CanvasRenderEffectPipeline {
       (pending = cast (cast ([] : Array<Dynamic>) : Dynamic));
     };
     for (operation in _Runtime.iterable(operations)) {
-      if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.callValue(getAdjustmentColorMatrix, cast ([operation] : Array<Dynamic>)), null), function():Dynamic return cast _Runtime.callValue(isColorLutAdjustment, cast ([operation] : Array<Dynamic>))))) {
+      if ((cast ((cast !_Runtime.strictEquals(_Runtime.callValue(getAdjustmentColorMatrix, cast ([operation] : Array<Dynamic>)), null) : Bool) || (cast _Runtime.callValue(isColorLutAdjustment, cast ([operation] : Array<Dynamic>)) : Bool)) : Bool)) {
         _Runtime.callProperty(pending, 'push', cast ([(cast operation : Adjustment)] : Array<Dynamic>));
         continue;
       }
       var runner:Dynamic = _Runtime.callValue(getCanvasRenderEffectRunner, cast ([state, _Runtime.field(operation, 'kind')] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(runner, null))) { continue; }
+      if ((cast _Runtime.strictEquals(runner, null) : Bool)) { continue; }
       _Runtime.callValue(flushAdjustments, cast ([] : Array<Dynamic>));
       _Runtime.callValue(ensureScratch, cast ([] : Array<Dynamic>));
-      var dest:Dynamic = _Runtime.select(_Runtime.strictEquals(source, scratchA), function():Dynamic return cast scratchB, function():Dynamic return cast scratchA);
+      var dest:Dynamic = ((cast _Runtime.strictEquals(source, scratchA) : Bool) ? (cast scratchB : Dynamic) : (cast scratchA : Dynamic));
       _Runtime.callValue(runner, cast ([{ state: state, source: source, dest: dest, pool: pool }, operation] : Array<Dynamic>));
       (source = cast (dest : Dynamic));
     }
     _Runtime.callValue(flushAdjustments, cast ([] : Array<Dynamic>));
     _Runtime.callValue(CanvasRenderEffectPipeline.presentCanvasRenderEffectResult__canvasRenderEffectPipeline, cast ([state, source] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(scratchA, null))) { _Runtime.callValue(releaseCanvasRenderTarget, cast ([pool, scratchA] : Array<Dynamic>)); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(scratchB, null))) { _Runtime.callValue(releaseCanvasRenderTarget, cast ([pool, scratchB] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(scratchA, null) : Bool)) { _Runtime.callValue(releaseCanvasRenderTarget, cast ([pool, scratchA] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(scratchB, null) : Bool)) { _Runtime.callValue(releaseCanvasRenderTarget, cast ([pool, scratchB] : Array<Dynamic>)); }
   }
 
   public static function releaseCanvasRenderTarget(pool:Dynamic, target:Dynamic):Void {
     var index:Dynamic = cast _Runtime.UNDEFINED;
     index = _Runtime.callProperty(_Runtime.field(pool, 'inUse'), 'indexOf', cast ([target] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(index, -1.0))) { _Runtime.splice(_Runtime.field(pool, 'inUse'), Std.int(index), Std.int(1.0), []); }
+    if ((cast !_Runtime.strictEquals(index, -1.0) : Bool)) { _Runtime.splice(_Runtime.field(pool, 'inUse'), Std.int(index), Std.int(1.0), []); }
     _Runtime.callProperty(_Runtime.field(pool, 'free'), 'push', cast ([target] : Array<Dynamic>));
   }
 

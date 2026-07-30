@@ -21,14 +21,14 @@ class SurfaceFill {
     a = (_Runtime.toInt32(color) & 255);
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(dest, 'height'), '<'))) {
+      while ((cast ((cast py : Float) < (cast _Runtime.field(dest, 'height') : Float)) : Bool)) {
         var y:Dynamic = (_Runtime.field(dest, 'y') + py);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(y, 0.0, '<'), function():Dynamic return cast _Runtime.compare(y, _Runtime.field(_Runtime.field(dest, 'surface'), 'height'), '>=')))) { py++; continue; }
+        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, _Runtime.field(dest, 'width'), '<'))) {
+          while ((cast ((cast px : Float) < (cast _Runtime.field(dest, 'width') : Float)) : Bool)) {
             var x:Dynamic = (_Runtime.field(dest, 'x') + px);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(x, 0.0, '<'), function():Dynamic return cast _Runtime.compare(x, _Runtime.field(_Runtime.field(dest, 'surface'), 'width'), '>=')))) { px++; continue; }
+            if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'width') : Float)) : Bool)) : Bool)) { px++; continue; }
             var i:Dynamic = (((y * _Runtime.field(_Runtime.field(dest, 'surface'), 'width')) + x) * 4.0);
             _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), i, r);
             _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (i + 1.0), g);
@@ -56,7 +56,7 @@ class SurfaceFill {
     var needed:Dynamic = cast _Runtime.UNDEFINED;
     var visited:Dynamic = cast _Runtime.UNDEFINED;
     var stack:Array<Float> = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(x, 0.0, '<'), function():Dynamic return cast _Runtime.compare(x, _Runtime.field(out, 'width'), '>=')), function():Dynamic return cast _Runtime.compare(y, 0.0, '<')), function():Dynamic return cast _Runtime.compare(y, _Runtime.field(out, 'height'), '>=')))) { return; }
+    if ((cast ((cast ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast _Runtime.field(out, 'width') : Float)) : Bool)) : Bool) || (cast ((cast y : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(out, 'height') : Float)) : Bool)) : Bool)) { return; }
     fillR = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255);
     fillG = (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255);
     fillB = (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255);
@@ -66,33 +66,33 @@ class SurfaceFill {
     targetG = _Runtime.getIndex(_Runtime.field(out, 'data'), (targetI + 1.0));
     targetB = _Runtime.getIndex(_Runtime.field(out, 'data'), (targetI + 2.0));
     targetA = _Runtime.getIndex(_Runtime.field(out, 'data'), (targetI + 3.0));
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(targetR, fillR), function():Dynamic return cast _Runtime.strictEquals(targetG, fillG)), function():Dynamic return cast _Runtime.strictEquals(targetB, fillB)), function():Dynamic return cast _Runtime.strictEquals(targetA, fillA)))) { return; }
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(targetR, fillR) : Bool) && (cast _Runtime.strictEquals(targetG, fillG) : Bool)) : Bool) && (cast _Runtime.strictEquals(targetB, fillB) : Bool)) : Bool) && (cast _Runtime.strictEquals(targetA, fillA) : Bool)) : Bool)) { return; }
     needed = (_Runtime.field(out, 'width') * _Runtime.field(out, 'height'));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(SurfaceFill._floodFillVisited__surfaceFill, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(SurfaceFill._floodFillVisited__surfaceFill, 'length'), needed, '<')))) {
+    if ((cast ((cast _Runtime.strictEquals(SurfaceFill._floodFillVisited__surfaceFill, null) : Bool) || (cast ((cast _Runtime.field(SurfaceFill._floodFillVisited__surfaceFill, 'length') : Float) < (cast needed : Float)) : Bool)) : Bool)) {
       (SurfaceFill._floodFillVisited__surfaceFill = cast (new flighthq._internal._UInt8Array(needed) : Dynamic));
     } else {
       _Runtime.fill(SurfaceFill._floodFillVisited__surfaceFill, 0.0, 0.0, needed, 3);
     }
     visited = SurfaceFill._floodFillVisited__surfaceFill;
     stack = cast ([(x + (y * _Runtime.field(out, 'width')))] : Array<Dynamic>);
-    while (_Runtime.truthy(_Runtime.compare(_Runtime.field(stack, 'length'), 0.0, '>'))) {
+    while ((cast ((cast _Runtime.field(stack, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       var idx:Dynamic = _Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.getIndex(visited, idx))) { continue; }
       _Runtime.setIndex(visited, idx, 1.0);
       var px:Dynamic = _Runtime.fmod(idx, _Runtime.field(out, 'width'));
       var py:Dynamic = HxMath.floor((idx / _Runtime.field(out, 'width')));
       var i:Dynamic = (idx * 4.0);
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(out, 'data'), i), targetR), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(out, 'data'), (i + 1.0)), targetG)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(out, 'data'), (i + 2.0)), targetB)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(out, 'data'), (i + 3.0)), targetA)))) {
+      if ((cast ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(out, 'data'), i), targetR) : Bool) || (cast !_Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(out, 'data'), (i + 1.0)), targetG) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(out, 'data'), (i + 2.0)), targetB) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(out, 'data'), (i + 3.0)), targetA) : Bool)) : Bool)) {
         continue;
       }
       _Runtime.setIndex(_Runtime.field(out, 'data'), i, fillR);
       _Runtime.setIndex(_Runtime.field(out, 'data'), (i + 1.0), fillG);
       _Runtime.setIndex(_Runtime.field(out, 'data'), (i + 2.0), fillB);
       _Runtime.setIndex(_Runtime.field(out, 'data'), (i + 3.0), fillA);
-      if (_Runtime.truthy(_Runtime.compare(px, 0.0, '>'))) { _Runtime.callProperty(stack, 'push', cast ([(idx - 1.0)] : Array<Dynamic>)); }
-      if (_Runtime.truthy(_Runtime.compare(px, (_Runtime.field(out, 'width') - 1.0), '<'))) { _Runtime.callProperty(stack, 'push', cast ([(idx + 1.0)] : Array<Dynamic>)); }
-      if (_Runtime.truthy(_Runtime.compare(py, 0.0, '>'))) { _Runtime.callProperty(stack, 'push', cast ([(idx - _Runtime.field(out, 'width'))] : Array<Dynamic>)); }
-      if (_Runtime.truthy(_Runtime.compare(py, (_Runtime.field(out, 'height') - 1.0), '<'))) { _Runtime.callProperty(stack, 'push', cast ([(idx + _Runtime.field(out, 'width'))] : Array<Dynamic>)); }
+      if ((cast ((cast px : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(stack, 'push', cast ([(idx - 1.0)] : Array<Dynamic>)); }
+      if ((cast ((cast px : Float) < (cast (_Runtime.field(out, 'width') - 1.0) : Float)) : Bool)) { _Runtime.callProperty(stack, 'push', cast ([(idx + 1.0)] : Array<Dynamic>)); }
+      if ((cast ((cast py : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(stack, 'push', cast ([(idx - _Runtime.field(out, 'width'))] : Array<Dynamic>)); }
+      if ((cast ((cast py : Float) < (cast (_Runtime.field(out, 'height') - 1.0) : Float)) : Bool)) { _Runtime.callProperty(stack, 'push', cast ([(idx + _Runtime.field(out, 'width'))] : Array<Dynamic>)); }
     }
     _Runtime.callValue(invalidateImageResource, cast ([out] : Array<Dynamic>));
   }

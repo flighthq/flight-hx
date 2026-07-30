@@ -23,14 +23,14 @@ class SceneNodeBounds {
 
   public static function _accumulateWorldBounds__sceneNodeBounds(out:AabbLike, node:SceneNode):Void {
     var children:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)))) {
+    if ((cast _Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)) : Bool)) {
       var geom:Dynamic = _Runtime.field(node, 'geometry');
       var localBounds:Dynamic = _Runtime.field(geom, 'bounds');
-      if (_Runtime.truthy(_Runtime.strictEquals(localBounds, null))) {
+      if ((cast _Runtime.strictEquals(localBounds, null) : Bool)) {
         _Runtime.callValue(computeMeshGeometryBounds, cast ([SceneNodeBounds._scratchLocalAabb__sceneNodeBounds, geom] : Array<Dynamic>));
         (localBounds = cast (SceneNodeBounds._scratchLocalAabb__sceneNodeBounds : Dynamic));
       }
-      if (_Runtime.truthy(_Runtime.compare(localBounds.min.x, localBounds.max.x, '<='))) {
+      if ((cast ((cast localBounds.min.x : Float) <= (cast localBounds.max.x : Float)) : Bool)) {
         _Runtime.callValue(ensureNodeWorldMatrix4, cast ([node] : Array<Dynamic>));
         var worldMatrix:Dynamic = _Runtime.callValue(getNodeWorldMatrix4, cast ([node] : Array<Dynamic>));
         _Runtime.callValue(transformAabbByMatrix4, cast ([SceneNodeBounds._scratchWorldAabb__sceneNodeBounds, localBounds, worldMatrix] : Array<Dynamic>));
@@ -38,10 +38,10 @@ class SceneNodeBounds {
       }
     }
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)), 'children');
-    if (_Runtime.truthy(!_Runtime.strictEquals(children, null))) {
+    if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(children, 'length'), '<'))) {
+        while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
           _Runtime.callValue(SceneNodeBounds._accumulateWorldBounds__sceneNodeBounds, cast ([out, (cast _Runtime.getIndex(children, i) : SceneNode)] : Array<Dynamic>));
           i++;
         }

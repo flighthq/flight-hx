@@ -28,7 +28,7 @@ class GlRenderState {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     contextAttribs = _Runtime.mergeObjects([{ alpha: true }, { antialias: _Runtime.coalesce(_Runtime.field(options, 'antialias'), function():Dynamic return cast true) }, { powerPreference: _Runtime.coalesce(_Runtime.field(options, 'powerPreference'), function():Dynamic return cast 'default') }, { stencil: true }, _Runtime.field(options, 'contextAttributes')]);
     gl = (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['webgl2', contextAttribs] : Array<Dynamic>)) : Null<Dynamic>);
-    if (_Runtime.truthy(!_Runtime.truthy(gl))) { throw _Runtime.error('Failed to get WebGL2 context.'); }
+    if ((cast !_Runtime.truthy(gl) : Bool)) { throw _Runtime.error('Failed to get WebGL2 context.'); }
     shaderLoc = _Runtime.callValue(compileDefaultGlProgram, cast ([gl] : Array<Dynamic>));
     matrixArray = new flighthq._internal._Float32Array(9.0);
     defaultBitmapShader = _Runtime.callValue(createDefaultGlBitmapShader, cast ([shaderLoc, matrixArray] : Array<Dynamic>));
@@ -42,7 +42,7 @@ class GlRenderState {
     _Runtime.setField(state, 'applyBlendMode', null);
     _Runtime.setField((cast state : { var canvas:Dynamic; }), 'canvas', canvas);
     _Runtime.setField((cast state : { var gl:Dynamic; }), 'gl', gl);
-    if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(options, 'backgroundColor'), null))) { _Runtime.callValue(setRenderStateBackgroundColor, cast ([state, _Runtime.field(options, 'backgroundColor')] : Array<Dynamic>)); }
+    if ((cast !_Runtime.looseEquals(_Runtime.field(options, 'backgroundColor'), null) : Bool)) { _Runtime.callValue(setRenderStateBackgroundColor, cast ([state, _Runtime.field(options, 'backgroundColor')] : Array<Dynamic>)); }
     runtime = _Runtime.callValue(createGlRenderStateRuntime, cast ([] : Array<Dynamic>));
     _Runtime.setIndex(state, EntityRuntimeKey, runtime);
     _Runtime.setField(runtime, 'currentBlendMode', null);

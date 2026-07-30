@@ -32,11 +32,11 @@ class Follow {
     worldBounds = ({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.worldBounds; });
     dx = (targetX - camX);
     goalX = camX;
-    if (_Runtime.truthy(_Runtime.compare(dx, deadHalfW, '>'))) { (goalX = cast ((targetX - deadHalfW) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.compare(dx, -deadHalfW, '<'))) { (goalX = cast ((targetX + deadHalfW) : Dynamic)); } }
+    if ((cast ((cast dx : Float) > (cast deadHalfW : Float)) : Bool)) { (goalX = cast ((targetX - deadHalfW) : Dynamic)); } else { if ((cast ((cast dx : Float) < (cast -deadHalfW : Float)) : Bool)) { (goalX = cast ((targetX + deadHalfW) : Dynamic)); } }
     dy = (targetY - camY);
     goalY = camY;
-    if (_Runtime.truthy(_Runtime.compare(dy, deadHalfH, '>'))) { (goalY = cast ((targetY - deadHalfH) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.compare(dy, -deadHalfH, '<'))) { (goalY = cast ((targetY + deadHalfH) : Dynamic)); } }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(smoothTime, 0.0, '>'), function():Dynamic return cast _Runtime.compare(deltaTime, 0.0, '>')))) {
+    if ((cast ((cast dy : Float) > (cast deadHalfH : Float)) : Bool)) { (goalY = cast ((targetY - deadHalfH) : Dynamic)); } else { if ((cast ((cast dy : Float) < (cast -deadHalfH : Float)) : Bool)) { (goalY = cast ((targetY + deadHalfH) : Dynamic)); } }
+    if ((cast ((cast ((cast smoothTime : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast deltaTime : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       var lambda:Dynamic = (1.0 / smoothTime);
       (nextX = cast (_Runtime.callValue(damp, cast ([camX, goalX, lambda, deltaTime] : Array<Dynamic>)) : Dynamic));
       (nextY = cast (_Runtime.callValue(damp, cast ([camY, goalY, lambda, deltaTime] : Array<Dynamic>)) : Dynamic));
@@ -48,12 +48,12 @@ class Follow {
       _Runtime.callValue(getCamera2DVisibleBounds, cast ([camera, Follow.scratchBounds__follow] : Array<Dynamic>));
       var halfVisW:Dynamic = (_Runtime.field(Follow.scratchBounds__follow, 'width') * 0.5);
       var halfVisH:Dynamic = (_Runtime.field(Follow.scratchBounds__follow, 'height') * 0.5);
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(worldBounds, 'width'), _Runtime.field(Follow.scratchBounds__follow, 'width'), '<='))) {
+      if ((cast ((cast _Runtime.field(worldBounds, 'width') : Float) <= (cast _Runtime.field(Follow.scratchBounds__follow, 'width') : Float)) : Bool)) {
         (nextX = cast ((_Runtime.field(worldBounds, 'x') + (_Runtime.field(worldBounds, 'width') * 0.5)) : Dynamic));
       } else {
         (nextX = cast (_Runtime.callValue(clamp, cast ([nextX, (_Runtime.field(worldBounds, 'x') + halfVisW), ((_Runtime.field(worldBounds, 'x') + _Runtime.field(worldBounds, 'width')) - halfVisW)] : Array<Dynamic>)) : Dynamic));
       }
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(worldBounds, 'height'), _Runtime.field(Follow.scratchBounds__follow, 'height'), '<='))) {
+      if ((cast ((cast _Runtime.field(worldBounds, 'height') : Float) <= (cast _Runtime.field(Follow.scratchBounds__follow, 'height') : Float)) : Bool)) {
         (nextY = cast ((_Runtime.field(worldBounds, 'y') + (_Runtime.field(worldBounds, 'height') * 0.5)) : Dynamic));
       } else {
         (nextY = cast (_Runtime.callValue(clamp, cast ([nextY, (_Runtime.field(worldBounds, 'y') + halfVisH), ((_Runtime.field(worldBounds, 'y') + _Runtime.field(worldBounds, 'height')) - halfVisH)] : Array<Dynamic>)) : Dynamic));

@@ -11,7 +11,7 @@ class SetMotionPathDistance {
     var clamped:Dynamic = cast _Runtime.UNDEFINED;
     length = _Runtime.field(mp, 'length');
     clamped = distance;
-    if (_Runtime.truthy(_Runtime.compare(clamped, 0.0, '<'))) { (clamped = cast (0.0 : Dynamic)); } else { if (_Runtime.truthy(_Runtime.compare(clamped, length, '>'))) { (clamped = cast (length : Dynamic)); } }
+    if ((cast ((cast clamped : Float) < (cast 0.0 : Float)) : Bool)) { (clamped = cast (0.0 : Dynamic)); } else { if ((cast ((cast clamped : Float) > (cast length : Float)) : Bool)) { (clamped = cast (length : Dynamic)); } }
     _Runtime.setField(mp, 'distance', clamped);
   }
 }

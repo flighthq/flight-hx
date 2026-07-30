@@ -40,6 +40,7 @@ try {
       writeOrCheck(path.join(reportsDirectory, 'inventory.json'), stableJson(inventory), check);
       writeOrCheck(path.join(reportsDirectory, 'inventory.md'), inventorySummary(inventory), check);
       if (!lowering) throw new Error('Expected lowering audit');
+      lowering.summary.staticEmission = core.staticLowering;
       writeOrCheck(path.join(reportsDirectory, 'lowering.json'), stableJson(lowering), check);
       writeOrCheck(path.join(reportsDirectory, 'lowering.md'), loweringSummary(lowering), check);
       if (!typedStructs) throw new Error('Expected typed-struct audit');

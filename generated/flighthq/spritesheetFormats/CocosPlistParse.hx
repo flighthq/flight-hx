@@ -37,7 +37,7 @@ class CocosPlistParse {
     children = _Runtime.field(el, 'children');
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(children, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
         var keyEl:Dynamic = _Runtime.getIndex(children, i);
         var valEl:Dynamic = _Runtime.getIndex(children, (i + 1.0));
         if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.optionalField(keyEl, 'name'), 'key'), function():Dynamic return cast valEl))) {
@@ -75,31 +75,31 @@ class CocosPlistParse {
     var frames:Dynamic = cast _Runtime.UNDEFINED;
     root = _Runtime.callValue(parseXmlDocument, cast ([xml] : Array<Dynamic>));
     rootDict = null;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.optionalField(root, 'name'), 'plist'))) {
+    if ((cast _Runtime.strictEquals(_Runtime.optionalField(root, 'name'), 'plist') : Bool)) {
       (rootDict = cast (_Runtime.coalesce(_Runtime.find(_Runtime.field(root, 'children'), function(c:Dynamic) return _Runtime.strictEquals(_Runtime.field(c, 'name'), 'dict')), function():Dynamic return cast null) : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.optionalField(root, 'name'), 'dict'))) {
+    } else { if ((cast _Runtime.strictEquals(_Runtime.optionalField(root, 'name'), 'dict') : Bool)) {
       (rootDict = cast (root : Dynamic));
     } }
-    if (_Runtime.truthy(!_Runtime.truthy(rootDict))) { return cast { frames: {  }, metadata: { format: 0.0, size: '{0,0}', textureFileName: '' } }; }
+    if ((cast !_Runtime.truthy(rootDict) : Bool)) { return cast { frames: {  }, metadata: { format: 0.0, size: '{0,0}', textureFileName: '' } }; }
     rootMap = _Runtime.callValue(CocosPlistParse.dictToMap__cocosPlistParse, cast ([rootDict] : Array<Dynamic>));
     metaEl = ((cast rootMap : flighthq._internal._Map).get('metadata'));
     metadata = { format: 0.0, size: '{0,0}', textureFileName: '' };
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.optionalField(metaEl, 'name'), 'dict'))) {
+    if ((cast _Runtime.strictEquals(_Runtime.optionalField(metaEl, 'name'), 'dict') : Bool)) {
       var metaMap:Dynamic = _Runtime.callValue(CocosPlistParse.dictToMap__cocosPlistParse, cast ([metaEl] : Array<Dynamic>));
       (metadata = cast ({ format: _Runtime.callValue(CocosPlistParse.getIntValue__cocosPlistParse, cast ([((cast metaMap : flighthq._internal._Map).get('format'))] : Array<Dynamic>)), size: _Runtime.callValue(CocosPlistParse.getTextValue__cocosPlistParse, cast ([((cast metaMap : flighthq._internal._Map).get('size'))] : Array<Dynamic>)), textureFileName: _Runtime.orValue(_Runtime.callValue(CocosPlistParse.getTextValue__cocosPlistParse, cast ([((cast metaMap : flighthq._internal._Map).get('textureFileName'))] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(CocosPlistParse.getTextValue__cocosPlistParse, cast ([((cast metaMap : flighthq._internal._Map).get('realTextureFileName'))] : Array<Dynamic>))) } : Dynamic));
     }
     framesEl = ((cast rootMap : flighthq._internal._Map).get('frames'));
     frames = {  };
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.optionalField(framesEl, 'name'), 'dict'))) {
+    if ((cast _Runtime.strictEquals(_Runtime.optionalField(framesEl, 'name'), 'dict') : Bool)) {
       var framesMap:Dynamic = _Runtime.callValue(CocosPlistParse.dictToMap__cocosPlistParse, cast ([framesEl] : Array<Dynamic>));
       for (__iteration0 in _Runtime.iterable(framesMap)) {
         var frameName:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
         var frameEl:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(frameEl, 'name'), 'dict'))) { continue; }
+        if ((cast !_Runtime.strictEquals(_Runtime.field(frameEl, 'name'), 'dict') : Bool)) { continue; }
         var fm:Dynamic = _Runtime.callValue(CocosPlistParse.dictToMap__cocosPlistParse, cast ([frameEl] : Array<Dynamic>));
         var hasSpriteFields:Dynamic = ((cast fm : flighthq._internal._Map).has('spriteOffset'));
-        var hasFrame:Dynamic = _Runtime.orValue(((cast fm : flighthq._internal._Map).has('frame')), function():Dynamic return cast ((cast fm : flighthq._internal._Map).has('textureRect')));
-        if (_Runtime.truthy(_Runtime.andValue(!_Runtime.truthy(hasFrame), function():Dynamic return cast !_Runtime.truthy(hasSpriteFields)))) { continue; }
+        var hasFrame:Dynamic = ((cast ((cast fm : flighthq._internal._Map).has('frame')) : Bool) || (cast ((cast fm : flighthq._internal._Map).has('textureRect')) : Bool));
+        if ((cast ((cast !(cast hasFrame : Bool) : Bool) && (cast !(cast hasSpriteFields : Bool) : Bool)) : Bool)) { continue; }
         var rectStr:Dynamic = _Runtime.callValue(CocosPlistParse.getTextValue__cocosPlistParse, cast ([_Runtime.coalesce(((cast fm : flighthq._internal._Map).get('frame')), function():Dynamic return cast ((cast fm : flighthq._internal._Map).get('textureRect')))] : Array<Dynamic>));
         var rotated:Dynamic = _Runtime.callValue(CocosPlistParse.getBoolValue__cocosPlistParse, cast ([_Runtime.coalesce(((cast fm : flighthq._internal._Map).get('textureRotated')), function():Dynamic return cast ((cast fm : flighthq._internal._Map).get('rotated')))] : Array<Dynamic>));
         var offsetStr:Dynamic = _Runtime.callValue(CocosPlistParse.getTextValue__cocosPlistParse, cast ([_Runtime.coalesce(((cast fm : flighthq._internal._Map).get('spriteOffset')), function():Dynamic return cast ((cast fm : flighthq._internal._Map).get('offset')))] : Array<Dynamic>));
@@ -108,12 +108,12 @@ class CocosPlistParse {
         var trimmed:Dynamic = _Runtime.callValue(CocosPlistParse.getBoolValue__cocosPlistParse, cast ([_Runtime.coalesce(((cast fm : flighthq._internal._Map).get('spriteTrimmed')), function():Dynamic return cast ((cast fm : flighthq._internal._Map).get('trimmed')))] : Array<Dynamic>));
         var aliasEl:Dynamic = ((cast fm : flighthq._internal._Map).get('aliases'));
         var aliases:Array<String> = cast ([] : Array<Dynamic>);
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.optionalField(aliasEl, 'name'), 'array'))) {
+        if ((cast _Runtime.strictEquals(_Runtime.optionalField(aliasEl, 'name'), 'array') : Bool)) {
           for (child in _Runtime.iterable(_Runtime.field(aliasEl, 'children'))) {
-            if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(child, 'name'), 'string'))) { _Runtime.callProperty(aliases, 'push', cast ([_Runtime.field(child, 'text')] : Array<Dynamic>)); }
+            if ((cast _Runtime.strictEquals(_Runtime.field(child, 'name'), 'string') : Bool)) { _Runtime.callProperty(aliases, 'push', cast ([_Runtime.field(child, 'text')] : Array<Dynamic>)); }
           }
         }
-        _Runtime.setIndex(frames, frameName, { aliases: _Runtime.select(_Runtime.compare(_Runtime.field(aliases, 'length'), 0.0, '>'), function():Dynamic return cast aliases, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), frame: rectStr, spriteOffset: offsetStr, spriteSize: sizeStr, spriteSourceSize: sourceSizeStr, spriteTrimmed: trimmed, textureRotated: rotated });
+        _Runtime.setIndex(frames, frameName, { aliases: ((cast ((cast _Runtime.field(aliases, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast aliases : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic)), frame: rectStr, spriteOffset: offsetStr, spriteSize: sizeStr, spriteSourceSize: sourceSizeStr, spriteTrimmed: trimmed, textureRotated: rotated });
       }
     }
     return cast { frames: frames, metadata: metadata };
@@ -137,9 +137,9 @@ class CocosPlistParse {
     __destructure2 = _Runtime.callValue(CocosPlistParse.parsePlistPair__cocosPlistParse, cast ([_Runtime.field(pf, 'spriteSourceSize')] : Array<Dynamic>));
     sourceWidth = _Runtime.getIndex(__destructure2, 0.0);
     sourceHeight = _Runtime.getIndex(__destructure2, 1.0);
-    atlasWidth = _Runtime.select(_Runtime.field(pf, 'textureRotated'), function():Dynamic return cast _Runtime.field(rect, 'h'), function():Dynamic return cast _Runtime.field(rect, 'w'));
-    atlasHeight = _Runtime.select(_Runtime.field(pf, 'textureRotated'), function():Dynamic return cast _Runtime.field(rect, 'w'), function():Dynamic return cast _Runtime.field(rect, 'h'));
-    return cast _Runtime.callValue(createSpritesheetFrameData, cast ([{ height: atlasHeight, name: name, offsetX: offsetX, offsetY: offsetY, pivotX: null, pivotY: null, rotated: _Runtime.field(pf, 'textureRotated'), sourceHeight: _Runtime.select(_Runtime.compare(sourceHeight, 0.0, '>'), function():Dynamic return cast sourceHeight, function():Dynamic return cast atlasHeight), sourceWidth: _Runtime.select(_Runtime.compare(sourceWidth, 0.0, '>'), function():Dynamic return cast sourceWidth, function():Dynamic return cast atlasWidth), width: atlasWidth, x: _Runtime.field(rect, 'x'), y: _Runtime.field(rect, 'y') }] : Array<Dynamic>));
+    atlasWidth = ((cast _Runtime.field(pf, 'textureRotated') : Bool) ? (cast _Runtime.field(rect, 'h') : Dynamic) : (cast _Runtime.field(rect, 'w') : Dynamic));
+    atlasHeight = ((cast _Runtime.field(pf, 'textureRotated') : Bool) ? (cast _Runtime.field(rect, 'w') : Dynamic) : (cast _Runtime.field(rect, 'h') : Dynamic));
+    return cast _Runtime.callValue(createSpritesheetFrameData, cast ([{ height: atlasHeight, name: name, offsetX: offsetX, offsetY: offsetY, pivotX: null, pivotY: null, rotated: _Runtime.field(pf, 'textureRotated'), sourceHeight: ((cast ((cast sourceHeight : Float) > (cast 0.0 : Float)) : Bool) ? (cast sourceHeight : Dynamic) : (cast atlasHeight : Dynamic)), sourceWidth: ((cast ((cast sourceWidth : Float) > (cast 0.0 : Float)) : Bool) ? (cast sourceWidth : Dynamic) : (cast atlasWidth : Dynamic)), width: atlasWidth, x: _Runtime.field(rect, 'x'), y: _Runtime.field(rect, 'y') }] : Array<Dynamic>));
     return cast null;
   }
 

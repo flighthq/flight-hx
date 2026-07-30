@@ -7,7 +7,7 @@ import flighthq.math.Constants.EPSILON;
 
 class Comparison {
   public static function approxEqual(a:Float, b:Float, epsilon:Float = 0.000001):Bool {
-    return cast _Runtime.compare(HxMath.abs((a - b)), epsilon, '<=');
+    return cast ((cast HxMath.abs((a - b)) : Float) <= (cast epsilon : Float));
     return cast null;
   }
 
@@ -16,12 +16,12 @@ class Comparison {
     var largest:Dynamic = cast _Runtime.UNDEFINED;
     diff = HxMath.abs((a - b));
     largest = HxMath.max(HxMath.abs(a), HxMath.abs(b));
-    return cast _Runtime.compare(diff, HxMath.max((relativeEpsilon * largest), EPSILON), '<=');
+    return cast ((cast diff : Float) <= (cast HxMath.max((relativeEpsilon * largest), EPSILON) : Float));
     return cast null;
   }
 
   public static function approxZero(value:Float, epsilon:Float = 0.000001):Bool {
-    return cast _Runtime.compare(HxMath.abs(value), epsilon, '<=');
+    return cast ((cast HxMath.abs(value) : Float) <= (cast epsilon : Float));
     return cast null;
   }
 }

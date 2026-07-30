@@ -20,7 +20,7 @@ class WgpuRenderEffectRegistry {
   public static function registerWgpuRenderEffect(state:WgpuRenderState, kind:String, runner:WgpuRenderEffectRunner):Void {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = ((cast WgpuRenderEffectRegistry._registries__wgpuRenderEffectRegistry : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (registry = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
       ((cast WgpuRenderEffectRegistry._registries__wgpuRenderEffectRegistry : flighthq._internal._WeakMap).set(state, registry));
     }

@@ -15,7 +15,7 @@ class RenderColorTransform {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getNodeRuntime, cast ([(cast _Runtime.field(data, 'source') : Node<Dynamic>)] : Array<Dynamic>));
     _Runtime.setField(data, 'colorTransform', _Runtime.coalesce(_Runtime.field(runtime, 'resolvedColorTransform'), function():Dynamic return cast null));
-    if (_Runtime.truthy(_Runtime.field(runtime, 'colorAdjustmentsChannelMixing'))) {
+    if ((cast _Runtime.field(runtime, 'colorAdjustmentsChannelMixing') : Bool)) {
       _Runtime.callOptionalProperty(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'colorAdjustmentChannelMixingGuard', cast ([state, (cast _Runtime.field(data, 'source') : Renderable)] : Array<Dynamic>));
     }
   }

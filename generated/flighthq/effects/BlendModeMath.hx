@@ -42,7 +42,7 @@ class BlendModeMath {
     var r:Dynamic = cast _Runtime.UNDEFINED;
     var g:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.callValue(isNonSeparableBlendMode, cast ([mode] : Array<Dynamic>)))) {
+    if ((cast _Runtime.callValue(isNonSeparableBlendMode, cast ([mode] : Array<Dynamic>)) : Bool)) {
       _Runtime.callValue(blendNonSeparableRgb, cast ([mode, cbR, cbG, cbB, csR, csG, csB, out] : Array<Dynamic>));
       return;
     }
@@ -58,15 +58,15 @@ class BlendModeMath {
     {
       var __switchValue = mode;
       if (__switchValue == AdvancedBlendModeValue.Overlay) {
-        return cast _Runtime.select(_Runtime.compare(cb, 0.5, '<='), function():Dynamic return cast ((2.0 * cb) * cs), function():Dynamic return cast (1.0 - ((2.0 * (1.0 - cb)) * (1.0 - cs))));
+        return cast ((cast ((cast cb : Float) <= (cast 0.5 : Float)) : Bool) ? (cast ((2.0 * cb) * cs) : Dynamic) : (cast (1.0 - ((2.0 * (1.0 - cb)) * (1.0 - cs))) : Dynamic));
       }
       else if (__switchValue == AdvancedBlendModeValue.HardLight) {
-        return cast _Runtime.select(_Runtime.compare(cs, 0.5, '<='), function():Dynamic return cast ((2.0 * cb) * cs), function():Dynamic return cast (1.0 - ((2.0 * (1.0 - cb)) * (1.0 - cs))));
+        return cast ((cast ((cast cs : Float) <= (cast 0.5 : Float)) : Bool) ? (cast ((2.0 * cb) * cs) : Dynamic) : (cast (1.0 - ((2.0 * (1.0 - cb)) * (1.0 - cs))) : Dynamic));
       }
       else if (__switchValue == AdvancedBlendModeValue.SoftLight) {
         {
-          var d:Dynamic = _Runtime.select(_Runtime.compare(cb, 0.25, '<='), function():Dynamic return cast (((((16.0 * cb) - 12.0) * cb) + 4.0) * cb), function():Dynamic return cast HxMath.sqrt(cb));
-          return cast _Runtime.select(_Runtime.compare(cs, 0.5, '<='), function():Dynamic return cast (cb - (((1.0 - (2.0 * cs)) * cb) * (1.0 - cb))), function():Dynamic return cast (cb + (((2.0 * cs) - 1.0) * (d - cb))));
+          var d:Dynamic = ((cast ((cast cb : Float) <= (cast 0.25 : Float)) : Bool) ? (cast (((((16.0 * cb) - 12.0) * cb) + 4.0) * cb) : Dynamic) : (cast HxMath.sqrt(cb) : Dynamic));
+          return cast ((cast ((cast cs : Float) <= (cast 0.5 : Float)) : Bool) ? (cast (cb - (((1.0 - (2.0 * cs)) * cb) * (1.0 - cb))) : Dynamic) : (cast (cb + (((2.0 * cs) - 1.0) * (d - cb))) : Dynamic));
         }
       }
       else if (__switchValue == AdvancedBlendModeValue.Difference) {
@@ -76,13 +76,13 @@ class BlendModeMath {
         return cast ((cb + cs) - ((2.0 * cb) * cs));
       }
       else if (__switchValue == AdvancedBlendModeValue.ColorDodge) {
-        if (_Runtime.truthy(_Runtime.compare(cb, 0.0, '<='))) { return cast 0.0; }
-        if (_Runtime.truthy(_Runtime.compare(cs, 1.0, '>='))) { return cast 1.0; }
+        if ((cast ((cast cb : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
+        if ((cast ((cast cs : Float) >= (cast 1.0 : Float)) : Bool)) { return cast 1.0; }
         return cast HxMath.min(1.0, (cb / (1.0 - cs)));
       }
       else if (__switchValue == AdvancedBlendModeValue.ColorBurn) {
-        if (_Runtime.truthy(_Runtime.compare(cb, 1.0, '>='))) { return cast 1.0; }
-        if (_Runtime.truthy(_Runtime.compare(cs, 0.0, '<='))) { return cast 0.0; }
+        if ((cast ((cast cb : Float) >= (cast 1.0 : Float)) : Bool)) { return cast 1.0; }
+        if ((cast ((cast cs : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
         return cast (1.0 - HxMath.min(1.0, ((1.0 - cb) / cs)));
       }
       else  {
@@ -93,7 +93,7 @@ class BlendModeMath {
   }
 
   public static function isNonSeparableBlendMode(mode:AdvancedBlendMode):Bool {
-    return cast _Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(mode, AdvancedBlendModeValue.Hue), function():Dynamic return cast _Runtime.strictEquals(mode, AdvancedBlendModeValue.Saturation)), function():Dynamic return cast _Runtime.strictEquals(mode, AdvancedBlendModeValue.Color)), function():Dynamic return cast _Runtime.strictEquals(mode, AdvancedBlendModeValue.Luminosity));
+    return cast _Runtime.orValue(((cast ((cast _Runtime.strictEquals(mode, AdvancedBlendModeValue.Hue) : Bool) || (cast _Runtime.strictEquals(mode, AdvancedBlendModeValue.Saturation) : Bool)) : Bool) || (cast _Runtime.strictEquals(mode, AdvancedBlendModeValue.Color) : Bool)), function():Dynamic return cast _Runtime.strictEquals(mode, AdvancedBlendModeValue.Luminosity));
     return cast null;
   }
 
@@ -120,13 +120,13 @@ class BlendModeMath {
     cr = r;
     cg = g;
     cb = b;
-    if (_Runtime.truthy(_Runtime.compare(min, 0.0, '<'))) {
+    if ((cast ((cast min : Float) < (cast 0.0 : Float)) : Bool)) {
       var denom:Dynamic = (l - min);
       (cr = cast ((l + (((cr - l) * l) / denom)) : Dynamic));
       (cg = cast ((l + (((cg - l) * l) / denom)) : Dynamic));
       (cb = cast ((l + (((cb - l) * l) / denom)) : Dynamic));
     }
-    if (_Runtime.truthy(_Runtime.compare(max, 1.0, '>'))) {
+    if ((cast ((cast max : Float) > (cast 1.0 : Float)) : Bool)) {
       var denom:Dynamic = (max - l);
       (cr = cast ((l + (((cr - l) * (1.0 - l)) / denom)) : Dynamic));
       (cg = cast ((l + (((cg - l) * (1.0 - l)) / denom)) : Dynamic));
@@ -153,17 +153,17 @@ class BlendModeMath {
     iMax = 0.0;
     {
       var i:Dynamic = 1.0;
-      while (_Runtime.truthy(_Runtime.compare(i, 3.0, '<'))) {
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.getIndex(out, i), _Runtime.getIndex(out, iMin), '<'))) { (iMin = cast (i : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.getIndex(out, i), _Runtime.getIndex(out, iMax), '>'))) { (iMax = cast (i : Dynamic)); }
+      while ((cast ((cast i : Float) < (cast 3.0 : Float)) : Bool)) {
+        if ((cast ((cast _Runtime.getIndex(out, i) : Float) < (cast _Runtime.getIndex(out, iMin) : Float)) : Bool)) { (iMin = cast (i : Dynamic)); }
+        if ((cast ((cast _Runtime.getIndex(out, i) : Float) > (cast _Runtime.getIndex(out, iMax) : Float)) : Bool)) { (iMax = cast (i : Dynamic)); }
         i++;
       }
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(iMin, iMax))) {
+    if ((cast _Runtime.strictEquals(iMin, iMax) : Bool)) {
       (iMax = cast (_Runtime.fmod((iMin + 1.0), 3.0) : Dynamic));
     }
     iMid = ((3.0 - iMin) - iMax);
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.getIndex(out, iMax), _Runtime.getIndex(out, iMin), '>'))) {
+    if ((cast ((cast _Runtime.getIndex(out, iMax) : Float) > (cast _Runtime.getIndex(out, iMin) : Float)) : Bool)) {
       _Runtime.setIndex(out, iMid, (((_Runtime.getIndex(out, iMid) - _Runtime.getIndex(out, iMin)) * target) / (_Runtime.getIndex(out, iMax) - _Runtime.getIndex(out, iMin))));
       _Runtime.setIndex(out, iMax, target);
     } else {

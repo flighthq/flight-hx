@@ -35,9 +35,9 @@ class Vector3 {
     maxX = max.x;
     maxY = max.y;
     maxZ = max.z;
-    (out.x = cast (_Runtime.select(_Runtime.compare(vx, minX, '<'), function():Dynamic return cast minX, function():Dynamic return cast _Runtime.select(_Runtime.compare(vx, maxX, '>'), function():Dynamic return cast maxX, function():Dynamic return cast vx)) : Dynamic));
-    (out.y = cast (_Runtime.select(_Runtime.compare(vy, minY, '<'), function():Dynamic return cast minY, function():Dynamic return cast _Runtime.select(_Runtime.compare(vy, maxY, '>'), function():Dynamic return cast maxY, function():Dynamic return cast vy)) : Dynamic));
-    (out.z = cast (_Runtime.select(_Runtime.compare(vz, minZ, '<'), function():Dynamic return cast minZ, function():Dynamic return cast _Runtime.select(_Runtime.compare(vz, maxZ, '>'), function():Dynamic return cast maxZ, function():Dynamic return cast vz)) : Dynamic));
+    (out.x = cast (((cast ((cast vx : Float) < (cast minX : Float)) : Bool) ? (cast minX : Dynamic) : (cast ((cast ((cast vx : Float) > (cast maxX : Float)) : Bool) ? (cast maxX : Dynamic) : (cast vx : Dynamic)) : Dynamic)) : Dynamic));
+    (out.y = cast (((cast ((cast vy : Float) < (cast minY : Float)) : Bool) ? (cast minY : Dynamic) : (cast ((cast ((cast vy : Float) > (cast maxY : Float)) : Bool) ? (cast maxY : Dynamic) : (cast vy : Dynamic)) : Dynamic)) : Dynamic));
+    (out.z = cast (((cast ((cast vz : Float) < (cast minZ : Float)) : Bool) ? (cast minZ : Dynamic) : (cast ((cast ((cast vz : Float) > (cast maxZ : Float)) : Bool) ? (cast maxZ : Dynamic) : (cast vz : Dynamic)) : Dynamic)) : Dynamic));
   }
 
   public static function cloneVector3(source:Vector3Like):flighthq.types.Vector3 {
@@ -89,14 +89,14 @@ class Vector3 {
     dx = divisor.x;
     dy = divisor.y;
     dz = divisor.z;
-    (out.x = cast (_Runtime.select(!_Runtime.strictEquals(dx, 0.0), function():Dynamic return cast (sx / dx), function():Dynamic return cast 0.0) : Dynamic));
-    (out.y = cast (_Runtime.select(!_Runtime.strictEquals(dy, 0.0), function():Dynamic return cast (sy / dy), function():Dynamic return cast 0.0) : Dynamic));
-    (out.z = cast (_Runtime.select(!_Runtime.strictEquals(dz, 0.0), function():Dynamic return cast (sz / dz), function():Dynamic return cast 0.0) : Dynamic));
+    (out.x = cast (((cast !_Runtime.strictEquals(dx, 0.0) : Bool) ? (cast (sx / dx) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
+    (out.y = cast (((cast !_Runtime.strictEquals(dy, 0.0) : Bool) ? (cast (sy / dy) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
+    (out.z = cast (((cast !_Runtime.strictEquals(dz, 0.0) : Bool) ? (cast (sz / dz) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
   }
 
   public static function equalsVector3(a:Null<Vector3Like>, b:Null<Vector3Like>):Bool {
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(a), function():Dynamic return cast !_Runtime.truthy(b)))) { return cast false; }
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(a.x, b.x), function():Dynamic return cast _Runtime.strictEquals(a.y, b.y)), function():Dynamic return cast _Runtime.strictEquals(a.z, b.z));
+    if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
+    return cast ((cast ((cast _Runtime.strictEquals(a.x, b.x) : Bool) && (cast _Runtime.strictEquals(a.y, b.y) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.z, b.z) : Bool));
     return cast null;
   }
 
@@ -106,7 +106,7 @@ class Vector3 {
     var _dot:Dynamic = cast _Runtime.UNDEFINED;
     la = _Runtime.callValue(getVector3Length, cast ([a] : Array<Dynamic>));
     lb = _Runtime.callValue(getVector3Length, cast ([b] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(la, 0.0), function():Dynamic return cast _Runtime.strictEquals(lb, 0.0)))) { return cast HxMath.NaN; }
+    if ((cast ((cast _Runtime.strictEquals(la, 0.0) : Bool) || (cast _Runtime.strictEquals(lb, 0.0) : Bool)) : Bool)) { return cast HxMath.NaN; }
     _dot = (_Runtime.callValue(getVector3Dot, cast ([a, b] : Array<Dynamic>)) / (la * lb));
     return cast HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, _dot)));
     return cast null;
@@ -158,7 +158,7 @@ class Vector3 {
     y = source.y;
     z = source.z;
     radius = HxMath.sqrt((((x * x) + (y * y)) + (z * z)));
-    if (_Runtime.truthy(_Runtime.strictEquals(radius, 0.0))) {
+    if ((cast _Runtime.strictEquals(radius, 0.0) : Bool)) {
       (out.x = cast (0.0 : Dynamic));
       (out.y = cast (0.0 : Dynamic));
       (out.z = cast (0.0 : Dynamic));
@@ -182,15 +182,15 @@ class Vector3 {
   }
 
   public static function maxVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
-    (out.x = cast (_Runtime.select(_Runtime.compare(a.x, b.x, '>'), function():Dynamic return cast a.x, function():Dynamic return cast b.x) : Dynamic));
-    (out.y = cast (_Runtime.select(_Runtime.compare(a.y, b.y, '>'), function():Dynamic return cast a.y, function():Dynamic return cast b.y) : Dynamic));
-    (out.z = cast (_Runtime.select(_Runtime.compare(a.z, b.z, '>'), function():Dynamic return cast a.z, function():Dynamic return cast b.z) : Dynamic));
+    (out.x = cast (((cast ((cast a.x : Float) > (cast b.x : Float)) : Bool) ? (cast a.x : Dynamic) : (cast b.x : Dynamic)) : Dynamic));
+    (out.y = cast (((cast ((cast a.y : Float) > (cast b.y : Float)) : Bool) ? (cast a.y : Dynamic) : (cast b.y : Dynamic)) : Dynamic));
+    (out.z = cast (((cast ((cast a.z : Float) > (cast b.z : Float)) : Bool) ? (cast a.z : Dynamic) : (cast b.z : Dynamic)) : Dynamic));
   }
 
   public static function minVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
-    (out.x = cast (_Runtime.select(_Runtime.compare(a.x, b.x, '<'), function():Dynamic return cast a.x, function():Dynamic return cast b.x) : Dynamic));
-    (out.y = cast (_Runtime.select(_Runtime.compare(a.y, b.y, '<'), function():Dynamic return cast a.y, function():Dynamic return cast b.y) : Dynamic));
-    (out.z = cast (_Runtime.select(_Runtime.compare(a.z, b.z, '<'), function():Dynamic return cast a.z, function():Dynamic return cast b.z) : Dynamic));
+    (out.x = cast (((cast ((cast a.x : Float) < (cast b.x : Float)) : Bool) ? (cast a.x : Dynamic) : (cast b.x : Dynamic)) : Dynamic));
+    (out.y = cast (((cast ((cast a.y : Float) < (cast b.y : Float)) : Bool) ? (cast a.y : Dynamic) : (cast b.y : Dynamic)) : Dynamic));
+    (out.z = cast (((cast ((cast a.z : Float) < (cast b.z : Float)) : Bool) ? (cast a.z : Dynamic) : (cast b.z : Dynamic)) : Dynamic));
   }
 
   public static function multiplyVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
@@ -200,7 +200,7 @@ class Vector3 {
   }
 
   public static function nearEqualsVector3(a:Vector3Like, b:Vector3Like, tolerance:Float = 0.000001):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.compare(HxMath.abs((a.x - b.x)), tolerance, '<'), function():Dynamic return cast _Runtime.compare(HxMath.abs((a.y - b.y)), tolerance, '<')), function():Dynamic return cast _Runtime.compare(HxMath.abs((a.z - b.z)), tolerance, '<'));
+    return cast ((cast ((cast ((cast HxMath.abs((a.x - b.x)) : Float) < (cast tolerance : Float)) : Bool) && (cast ((cast HxMath.abs((a.y - b.y)) : Float) < (cast tolerance : Float)) : Bool)) : Bool) && (cast ((cast HxMath.abs((a.z - b.z)) : Float) < (cast tolerance : Float)) : Bool));
     return cast null;
   }
 
@@ -213,7 +213,7 @@ class Vector3 {
   public static function normalizeVector3(out:Vector3Like, source:Vector3Like):Float {
     var l:Dynamic = cast _Runtime.UNDEFINED;
     l = _Runtime.callValue(getVector3Length, cast ([source] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(l, 0.0))) {
+    if ((cast !_Runtime.strictEquals(l, 0.0) : Bool)) {
       (out.x = cast ((source.x / l) : Dynamic));
       (out.y = cast ((source.y / l) : Dynamic));
       (out.z = cast ((source.z / l) : Dynamic));

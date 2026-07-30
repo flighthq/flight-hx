@@ -46,6 +46,7 @@ export function inventorySummary(inventory: UpstreamInventory): string {
 
 export function loweringSummary(audit: LoweringAudit): string {
   const facts = audit.summary.staticFacts;
+  const emission = audit.summary.staticEmission;
   const lines = [
     '# Lowering Audit',
     '',
@@ -61,6 +62,11 @@ export function loweringSummary(audit: LoweringAudit): string {
     `| Proven Boolean logical-left truthiness uses | ${facts.booleanLogicalTruthiness} |`,
     `| Proven Boolean logical expressions | ${facts.booleanLogicalExpressions} |`,
     `| Proven numeric relations | ${facts.numericRelations} |`,
+    `| Direct Boolean truthiness uses | ${emission.booleanTruthinessUses} |`,
+    `| Direct Boolean conditional expressions | ${emission.booleanConditionalExpressions} |`,
+    `| Direct Boolean \`&&\` expressions | ${emission.booleanAndExpressions} |`,
+    `| Direct Boolean \`\\|\\|\` expressions | ${emission.booleanOrExpressions} |`,
+    `| Direct numeric relations | ${emission.numericRelations} |`,
     `| Proven indexed expressions | ${facts.indexedAccesses.expressions} |`,
     `| Proven indexed reads | ${facts.indexedAccesses.reads} |`,
     `| Proven indexed writes | ${facts.indexedAccesses.writes} |`,

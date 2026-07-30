@@ -68,15 +68,15 @@ class WgpuParticleEmitter3D {
 
   public static function collectParticleEmitter3DNodes__wgpuParticleEmitter3D(node:NodeAny, out:Array<ParticleEmitter3D>):Void {
     var children:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(node, 'enabled')))) { return; }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(node, 'kind'), ParticleEmitter3DKind))) {
+    if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(node, 'kind'), ParticleEmitter3DKind) : Bool)) {
       _Runtime.callProperty(out, 'push', cast ([(cast (cast node : Dynamic) : ParticleEmitter3D)] : Array<Dynamic>));
     }
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)), 'children');
-    if (_Runtime.truthy(!_Runtime.strictEquals(children, null))) {
+    if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(children, 'length'), '<'))) {
+        while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
           _Runtime.callValue(WgpuParticleEmitter3D.collectParticleEmitter3DNodes__wgpuParticleEmitter3D, cast ([_Runtime.getIndex(children, i), out] : Array<Dynamic>));
           i++;
         }
@@ -95,7 +95,7 @@ class WgpuParticleEmitter3D {
     var frameBuffer:Dynamic = cast _Runtime.UNDEFINED;
     var frameBindGroup:Dynamic = cast _Runtime.UNDEFINED;
     resources = ((cast WgpuParticleEmitter3D.resourceCache__wgpuParticleEmitter3D : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(!_Runtime.strictEquals(resources, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast resources; }
+    if ((cast !_Runtime.strictEquals(resources, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast resources; }
     device = _Runtime.field(state, 'device');
     cornerBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: (8.0 * 4.0), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'VERTEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([cornerBuffer, 0.0, new flighthq._internal._Float32Array(cast ([0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0] : Array<Dynamic>))] : Array<Dynamic>));
@@ -117,10 +117,10 @@ class WgpuParticleEmitter3D {
     var key:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     format = _Runtime.coalesce(_Runtime.field(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
-    key = '' + Std.string(format) + '|' + Std.string(mode) + '|' + Std.string(_Runtime.select(hasTexture, function():Dynamic return cast 't', function():Dynamic return cast 'u')) + '';
+    key = '' + Std.string(format) + '|' + Std.string(mode) + '|' + Std.string(((cast hasTexture : Bool) ? (cast 't' : Dynamic) : (cast 'u' : Dynamic))) + '';
     pipeline = ((cast _Runtime.field(resources, 'pipelines') : flighthq._internal._Map).get(key));
-    if (_Runtime.truthy(!_Runtime.strictEquals(pipeline, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast pipeline; }
-    (pipeline = cast (flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createRenderPipeline', cast ([{ layout: _Runtime.field(resources, 'pipelineLayout'), vertex: { module: _Runtime.field(resources, 'module'), entryPoint: 'vs_main', buffers: WgpuParticleEmitter3D.VERTEX_BUFFER_LAYOUTS__wgpuParticleEmitter3D }, fragment: { module: _Runtime.field(resources, 'module'), entryPoint: 'fs_main', constants: { HAS_TEXTURE: _Runtime.select(hasTexture, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0) }, targets: cast ([{ format: format, blend: _Runtime.callValue(WgpuParticleEmitter3D.wgpuParticleBlendState__wgpuParticleEmitter3D, cast ([mode] : Array<Dynamic>)) }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list', frontFace: 'ccw', cullMode: 'none' }, depthStencil: { format: WgpuParticleEmitter3D.DEPTH_STENCIL_FORMAT__wgpuParticleEmitter3D, depthWriteEnabled: false, depthCompare: 'less' } }] : Array<Dynamic>)) : Dynamic));
+    if ((cast !_Runtime.strictEquals(pipeline, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast pipeline; }
+    (pipeline = cast (flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createRenderPipeline', cast ([{ layout: _Runtime.field(resources, 'pipelineLayout'), vertex: { module: _Runtime.field(resources, 'module'), entryPoint: 'vs_main', buffers: WgpuParticleEmitter3D.VERTEX_BUFFER_LAYOUTS__wgpuParticleEmitter3D }, fragment: { module: _Runtime.field(resources, 'module'), entryPoint: 'fs_main', constants: { HAS_TEXTURE: ((cast hasTexture : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)) }, targets: cast ([{ format: format, blend: _Runtime.callValue(WgpuParticleEmitter3D.wgpuParticleBlendState__wgpuParticleEmitter3D, cast ([mode] : Array<Dynamic>)) }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list', frontFace: 'ccw', cullMode: 'none' }, depthStencil: { format: WgpuParticleEmitter3D.DEPTH_STENCIL_FORMAT__wgpuParticleEmitter3D, depthWriteEnabled: false, depthCompare: 'less' } }] : Array<Dynamic>)) : Dynamic));
     ((cast _Runtime.field(resources, 'pipelines') : flighthq._internal._Map).set(key, pipeline));
     return cast pipeline;
     return cast null;
@@ -131,9 +131,9 @@ class WgpuParticleEmitter3D {
     var capacity:Dynamic = cast _Runtime.UNDEFINED;
     var buffer:Dynamic = cast _Runtime.UNDEFINED;
     entry = ((cast _Runtime.field(resources, 'instanceBuffers') : flighthq._internal._WeakMap).get(emitter));
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.compare(_Runtime.field(entry, 'capacity'), count, '>=')))) { return cast _Runtime.field(entry, 'buffer'); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(_Runtime.field(entry, 'buffer'), 'destroy', cast ([] : Array<Dynamic>)); }
-    capacity = HxMath.max(count, _Runtime.select(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast (_Runtime.field(entry, 'capacity') * 2.0), function():Dynamic return cast 8.0));
+    if ((cast ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(entry, 'capacity') : Float) >= (cast count : Float)) : Bool)) : Bool)) { return cast _Runtime.field(entry, 'buffer'); }
+    if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(_Runtime.field(entry, 'buffer'), 'destroy', cast ([] : Array<Dynamic>)); }
+    capacity = HxMath.max(count, ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (_Runtime.field(entry, 'capacity') * 2.0) : Dynamic) : (cast 8.0 : Dynamic)));
     buffer = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: (capacity * WgpuParticleEmitter3D.INSTANCE_STRIDE__wgpuParticleEmitter3D), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'VERTEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
     ((cast _Runtime.field(resources, 'instanceBuffers') : flighthq._internal._WeakMap).set(emitter, { buffer: buffer, capacity: capacity }));
     return cast buffer;
@@ -176,16 +176,16 @@ class WgpuParticleEmitter3D {
     particleCount = _Runtime.field(__destructure0, 'particleCount');
     positionsZ = _Runtime.field(__destructure0, 'positionsZ');
     transforms = _Runtime.field(__destructure0, 'transforms');
-    if (_Runtime.truthy(_Runtime.strictEquals(particleCount, 0.0))) { return; }
+    if ((cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) { return; }
     needed = (particleCount * WgpuParticleEmitter3D.INSTANCE_FLOATS__wgpuParticleEmitter3D);
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(resources, 'instanceData'), 'length'), needed, '<'))) {
+    if ((cast ((cast _Runtime.field(_Runtime.field(resources, 'instanceData'), 'length') : Float) < (cast needed : Float)) : Bool)) {
       _Runtime.setField(resources, 'instanceData', new flighthq._internal._Float32Array(HxMath.max(needed, (_Runtime.field(_Runtime.field(resources, 'instanceData'), 'length') * 2.0))));
     }
-    hasAtlas = _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(atlas, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(atlas, 'image'), null)), function():Dynamic return cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(atlas, 'image')] : Array<Dynamic>)));
-    regions = _Runtime.select(hasAtlas, function():Dynamic return cast _Runtime.field(atlas, 'regions'), function():Dynamic return cast null);
-    numRegions = _Runtime.select(!_Runtime.strictEquals(regions, null), function():Dynamic return cast _Runtime.field(regions, 'length'), function():Dynamic return cast 0.0);
-    iw = _Runtime.select(hasAtlas, function():Dynamic return cast (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'width'), function():Dynamic return cast 1.0)), function():Dynamic return cast 0.0);
-    ih = _Runtime.select(hasAtlas, function():Dynamic return cast (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'height'), function():Dynamic return cast 1.0)), function():Dynamic return cast 0.0);
+    hasAtlas = ((cast ((cast !_Runtime.strictEquals(atlas, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(atlas, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(atlas, 'image')] : Array<Dynamic>)) : Bool));
+    regions = ((cast hasAtlas : Bool) ? (cast _Runtime.field(atlas, 'regions') : Dynamic) : (cast null : Dynamic));
+    numRegions = ((cast !_Runtime.strictEquals(regions, null) : Bool) ? (cast _Runtime.field(regions, 'length') : Dynamic) : (cast 0.0 : Dynamic));
+    iw = ((cast hasAtlas : Bool) ? (cast (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'width'), function():Dynamic return cast 1.0)) : Dynamic) : (cast 0.0 : Dynamic));
+    ih = ((cast hasAtlas : Bool) ? (cast (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'height'), function():Dynamic return cast 1.0)) : Dynamic) : (cast 0.0 : Dynamic));
     worldMatrix = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([(cast (cast emitter : Dynamic) : SceneNode)] : Array<Dynamic>)) : Matrix4);
     wm = worldMatrix.m;
     worldSpace = _Runtime.field(data, 'worldSpace');
@@ -194,34 +194,34 @@ class WgpuParticleEmitter3D {
     drawCount = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, particleCount, '<'))) {
+      while ((cast ((cast i : Float) < (cast particleCount : Float)) : Bool)) {
         var tt:Dynamic = (i * WgpuParticleEmitter3D.PARTICLE_TRANSFORM_STRIDE__wgpuParticleEmitter3D);
         var lx:Dynamic = _Runtime.getIndex(transforms, tt);
         var ly:Dynamic = _Runtime.getIndex(transforms, (tt + 1.0));
         var rotation:Dynamic = _Runtime.getIndex(transforms, (tt + 2.0));
         var scale:Dynamic = _Runtime.getIndex(transforms, (tt + 3.0));
         var lz:Dynamic = _Runtime.getIndex(positionsZ, i);
-        var wx:Dynamic = _Runtime.select(worldSpace, function():Dynamic return cast lx, function():Dynamic return cast ((((_Runtime.getIndex(wm, 0.0) * lx) + (_Runtime.getIndex(wm, 4.0) * ly)) + (_Runtime.getIndex(wm, 8.0) * lz)) + _Runtime.getIndex(wm, 12.0)));
-        var wy:Dynamic = _Runtime.select(worldSpace, function():Dynamic return cast ly, function():Dynamic return cast ((((_Runtime.getIndex(wm, 1.0) * lx) + (_Runtime.getIndex(wm, 5.0) * ly)) + (_Runtime.getIndex(wm, 9.0) * lz)) + _Runtime.getIndex(wm, 13.0)));
-        var wz:Dynamic = _Runtime.select(worldSpace, function():Dynamic return cast lz, function():Dynamic return cast ((((_Runtime.getIndex(wm, 2.0) * lx) + (_Runtime.getIndex(wm, 6.0) * ly)) + (_Runtime.getIndex(wm, 10.0) * lz)) + _Runtime.getIndex(wm, 14.0)));
+        var wx:Dynamic = ((cast worldSpace : Bool) ? (cast lx : Dynamic) : (cast ((((_Runtime.getIndex(wm, 0.0) * lx) + (_Runtime.getIndex(wm, 4.0) * ly)) + (_Runtime.getIndex(wm, 8.0) * lz)) + _Runtime.getIndex(wm, 12.0)) : Dynamic));
+        var wy:Dynamic = ((cast worldSpace : Bool) ? (cast ly : Dynamic) : (cast ((((_Runtime.getIndex(wm, 1.0) * lx) + (_Runtime.getIndex(wm, 5.0) * ly)) + (_Runtime.getIndex(wm, 9.0) * lz)) + _Runtime.getIndex(wm, 13.0)) : Dynamic));
+        var wz:Dynamic = ((cast worldSpace : Bool) ? (cast lz : Dynamic) : (cast ((((_Runtime.getIndex(wm, 2.0) * lx) + (_Runtime.getIndex(wm, 6.0) * ly)) + (_Runtime.getIndex(wm, 10.0) * lz)) + _Runtime.getIndex(wm, 14.0)) : Dynamic));
         var cosR:Dynamic = (HxMath.cos(rotation) * scale);
         var sinR:Dynamic = (HxMath.sin(rotation) * scale);
         var ct:Dynamic = (i * 3.0);
-        var hasColors:Dynamic = _Runtime.andValue(!_Runtime.looseEquals(colors, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(colors, 'length'), (ct + 2.0), '>'));
-        var r:Dynamic = _Runtime.select(hasColors, function():Dynamic return cast _Runtime.getIndex(colors, ct), function():Dynamic return cast 1.0);
-        var g:Dynamic = _Runtime.select(hasColors, function():Dynamic return cast _Runtime.getIndex(colors, (ct + 1.0)), function():Dynamic return cast 1.0);
-        var b:Dynamic = _Runtime.select(hasColors, function():Dynamic return cast _Runtime.getIndex(colors, (ct + 2.0)), function():Dynamic return cast 1.0);
+        var hasColors:Dynamic = ((cast !_Runtime.looseEquals(colors, null) : Bool) && (cast ((cast _Runtime.field(colors, 'length') : Float) > (cast (ct + 2.0) : Float)) : Bool));
+        var r:Dynamic = ((cast hasColors : Bool) ? (cast _Runtime.getIndex(colors, ct) : Dynamic) : (cast 1.0 : Dynamic));
+        var g:Dynamic = ((cast hasColors : Bool) ? (cast _Runtime.getIndex(colors, (ct + 1.0)) : Dynamic) : (cast 1.0 : Dynamic));
+        var b:Dynamic = ((cast hasColors : Bool) ? (cast _Runtime.getIndex(colors, (ct + 2.0)) : Dynamic) : (cast 1.0 : Dynamic));
         var u0:Dynamic = 0.0;
         var v0:Dynamic = 0.0;
         var u1:Dynamic = 1.0;
         var v1:Dynamic = 1.0;
         var regionW:Dynamic = 1.0;
         var regionH:Dynamic = 1.0;
-        if (_Runtime.truthy(!_Runtime.strictEquals(regions, null))) {
+        if ((cast !_Runtime.strictEquals(regions, null) : Bool)) {
           var id:Dynamic = _Runtime.getIndex(ids, i);
-          if (_Runtime.truthy(_Runtime.compare(id, numRegions, '>='))) { i++; continue; }
+          if ((cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) { i++; continue; }
           var region:Dynamic = _Runtime.getIndex(regions, id);
-          if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(region, 'width'), 0.0, '<='), function():Dynamic return cast _Runtime.compare(_Runtime.field(region, 'height'), 0.0, '<=')))) { i++; continue; }
+          if ((cast ((cast ((cast _Runtime.field(region, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(region, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
           (u0 = cast ((_Runtime.field(region, 'x') * iw) : Dynamic));
           (v0 = cast ((_Runtime.field(region, 'y') * ih) : Dynamic));
           (u1 = cast (((_Runtime.field(region, 'x') + _Runtime.field(region, 'width')) * iw) : Dynamic));
@@ -242,7 +242,7 @@ class WgpuParticleEmitter3D {
         _Runtime.setIndex(instanceData, (base + 10.0), v0);
         _Runtime.setIndex(instanceData, (base + 11.0), u1);
         _Runtime.setIndex(instanceData, (base + 12.0), v1);
-        var maxDim:Dynamic = _Runtime.select(_Runtime.compare(regionW, regionH, '>='), function():Dynamic return cast regionW, function():Dynamic return cast regionH);
+        var maxDim:Dynamic = ((cast ((cast regionW : Float) >= (cast regionH : Float)) : Bool) ? (cast regionW : Dynamic) : (cast regionH : Dynamic));
         _Runtime.setIndex(instanceData, (base + 13.0), (regionW / maxDim));
         _Runtime.setIndex(instanceData, (base + 14.0), (regionH / maxDim));
         _Runtime.setIndex(instanceData, (base + 15.0), 0.0);
@@ -251,11 +251,11 @@ class WgpuParticleEmitter3D {
         i++;
       }
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(drawCount, 0.0))) { return; }
+    if ((cast _Runtime.strictEquals(drawCount, 0.0) : Bool)) { return; }
     instanceBuffer = _Runtime.callValue(WgpuParticleEmitter3D.ensureParticle3DInstanceBuffer__wgpuParticleEmitter3D, cast ([state, resources, (cast emitter : ParticleEmitter3D), drawCount] : Array<Dynamic>));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([instanceBuffer, 0.0, instanceData, 0.0, (drawCount * WgpuParticleEmitter3D.INSTANCE_FLOATS__wgpuParticleEmitter3D)] : Array<Dynamic>));
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    textureView = _Runtime.select(hasAtlas, function():Dynamic return cast _Runtime.field(_Runtime.callValue(bindWgpuImageResourceTexture, cast ([state, _Runtime.field(atlas, 'image')] : Array<Dynamic>)), 'view'), function():Dynamic return cast _Runtime.callValue(WgpuParticleEmitter3D.ensureDummyTextureView__wgpuParticleEmitter3D, cast ([state] : Array<Dynamic>)));
+    textureView = ((cast hasAtlas : Bool) ? (cast _Runtime.field(_Runtime.callValue(bindWgpuImageResourceTexture, cast ([state, _Runtime.field(atlas, 'image')] : Array<Dynamic>)), 'view') : Dynamic) : (cast _Runtime.callValue(WgpuParticleEmitter3D.ensureDummyTextureView__wgpuParticleEmitter3D, cast ([state] : Array<Dynamic>)) : Dynamic));
     textureBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(resources, 'textureLayout'), entries: cast ([{ binding: 0.0, resource: textureView }, { binding: 1.0, resource: _Runtime.field(runtime, 'linearSampler') }] : Array<Dynamic>) }] : Array<Dynamic>));
     pipeline = _Runtime.callValue(WgpuParticleEmitter3D.ensureParticle3DPipeline__wgpuParticleEmitter3D, cast ([state, resources, _Runtime.field(emitter, 'blendMode'), hasAtlas] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setPipeline', cast ([pipeline] : Array<Dynamic>));
@@ -271,7 +271,7 @@ class WgpuParticleEmitter3D {
     var view:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     view = ((cast WgpuParticleEmitter3D.dummyTextureCache__wgpuParticleEmitter3D : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(!_Runtime.strictEquals(view, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast view; }
+    if ((cast !_Runtime.strictEquals(view, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast view; }
     texture = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([1.0, 1.0, 1.0] : Array<Dynamic>), format: 'rgba8unorm', usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeTexture', cast ([{ texture: texture }, WgpuParticleEmitter3D.WHITE_PIXEL__wgpuParticleEmitter3D, { bytesPerRow: 4.0 }, cast ([1.0, 1.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
     (view = cast (_Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>)) : Dynamic));
@@ -283,7 +283,7 @@ class WgpuParticleEmitter3D {
   public static function destroyWgpuParticleEmitter3DResources(state:WgpuRenderState):Void {
     var resources:Dynamic = cast _Runtime.UNDEFINED;
     resources = ((cast WgpuParticleEmitter3D.resourceCache__wgpuParticleEmitter3D : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(resources, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
+    if ((cast _Runtime.strictEquals(resources, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     _Runtime.callProperty(_Runtime.field(resources, 'cornerBuffer'), 'destroy', cast ([] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(resources, 'indexBuffer'), 'destroy', cast ([] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(resources, 'frameBuffer'), 'destroy', cast ([] : Array<Dynamic>));
@@ -300,16 +300,16 @@ class WgpuParticleEmitter3D {
     var vm:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.setLength(WgpuParticleEmitter3D.emitterScratch__wgpuParticleEmitter3D, 0.0);
     _Runtime.callValue(WgpuParticleEmitter3D.collectParticleEmitter3DNodes__wgpuParticleEmitter3D, cast ([scene, WgpuParticleEmitter3D.emitterScratch__wgpuParticleEmitter3D] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(WgpuParticleEmitter3D.emitterScratch__wgpuParticleEmitter3D, 'length'), 0.0))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(WgpuParticleEmitter3D.emitterScratch__wgpuParticleEmitter3D, 'length'), 0.0) : Bool)) { return; }
     pass = _Runtime.field(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderPass');
-    if (_Runtime.truthy(_Runtime.strictEquals(pass, null))) { return; }
+    if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     list = _Runtime.callValue(prepareSceneRender, cast ([state, scene, camera, lights] : Array<Dynamic>));
     resources = _Runtime.callValue(WgpuParticleEmitter3D.ensureParticle3DResources__wgpuParticleEmitter3D, cast ([state] : Array<Dynamic>));
     f = WgpuParticleEmitter3D.frameScratch__wgpuParticleEmitter3D;
     vp = _Runtime.field(list, 'viewProjection').m;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, 16.0, '<'))) {
+      while ((cast ((cast i : Float) < (cast 16.0 : Float)) : Bool)) {
         _Runtime.setIndex(f, i, _Runtime.getIndex(vp, i));
         i++;
       }
@@ -326,7 +326,7 @@ class WgpuParticleEmitter3D {
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(resources, 'frameBuffer'), 0.0, _Runtime.field(f, 'buffer'), 0.0, WgpuParticleEmitter3D.FRAME_UNIFORM_BYTES__wgpuParticleEmitter3D] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(WgpuParticleEmitter3D.emitterScratch__wgpuParticleEmitter3D, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(WgpuParticleEmitter3D.emitterScratch__wgpuParticleEmitter3D, 'length') : Float)) : Bool)) {
         _Runtime.callValue(WgpuParticleEmitter3D.drawParticleEmitter3DNode__wgpuParticleEmitter3D, cast ([state, resources, pass, _Runtime.getIndex(WgpuParticleEmitter3D.emitterScratch__wgpuParticleEmitter3D, i)] : Array<Dynamic>));
         i++;
       }

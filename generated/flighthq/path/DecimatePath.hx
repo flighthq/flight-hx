@@ -17,9 +17,9 @@ class DecimatePath {
     _Runtime.setField(out, 'winding', _Runtime.field(source, 'winding'));
     for (contour in _Runtime.iterable(contours)) {
       var n:Dynamic = (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> 1);
-      if (_Runtime.truthy(_Runtime.compare(n, 2.0, '<'))) { continue; }
-      var closed:Dynamic = _Runtime.andValue(_Runtime.andValue(_Runtime.compare(n, 3.0, '>='), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(contour, 0.0), _Runtime.getIndex(contour, (_Runtime.field(contour, 'length') - 2.0)))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(contour, 1.0), _Runtime.getIndex(contour, (_Runtime.field(contour, 'length') - 1.0))));
-      var last:Dynamic = _Runtime.select(closed, function():Dynamic return cast (n - 1.0), function():Dynamic return cast n);
+      if ((cast ((cast n : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
+      var closed:Dynamic = ((cast ((cast ((cast n : Float) >= (cast 3.0 : Float)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(contour, 0.0), _Runtime.getIndex(contour, (_Runtime.field(contour, 'length') - 2.0))) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(contour, 1.0), _Runtime.getIndex(contour, (_Runtime.field(contour, 'length') - 1.0))) : Bool));
+      var last:Dynamic = ((cast closed : Bool) ? (cast (n - 1.0) : Dynamic) : (cast n : Dynamic));
       var keep:Dynamic = new flighthq._internal._UInt8Array(last);
       _Runtime.setIndex(keep, 0.0, 1.0);
       _Runtime.setIndex(keep, (last - 1.0), 1.0);
@@ -27,9 +27,9 @@ class DecimatePath {
       var first:Dynamic = true;
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, last, '<'))) {
-          if (_Runtime.truthy(!_Runtime.truthy(_Runtime.getIndex(keep, i)))) { i++; continue; }
-          if (_Runtime.truthy(first)) {
+        while ((cast ((cast i : Float) < (cast last : Float)) : Bool)) {
+          if ((cast !_Runtime.truthy(_Runtime.getIndex(keep, i)) : Bool)) { i++; continue; }
+          if ((cast first : Bool)) {
             _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
             (first = cast (false : Dynamic));
           } else {
@@ -39,7 +39,7 @@ class DecimatePath {
           i++;
         }
       }
-      if (_Runtime.truthy(closed)) {
+      if ((cast closed : Bool)) {
         _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.CLOSE] : Array<Dynamic>));
       }
     }
@@ -55,7 +55,7 @@ class DecimatePath {
     var lenSq:Dynamic = cast _Runtime.UNDEFINED;
     var maxDistSq:Dynamic = cast _Runtime.UNDEFINED;
     var maxIdx:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare((last - first), 2.0, '<'))) { return; }
+    if ((cast ((cast (last - first) : Float) < (cast 2.0 : Float)) : Bool)) { return; }
     x0 = _Runtime.getIndex(pts, (first * 2.0));
     y0 = _Runtime.getIndex(pts, ((first * 2.0) + 1.0));
     x1 = _Runtime.getIndex(pts, (last * 2.0));
@@ -67,11 +67,11 @@ class DecimatePath {
     maxIdx = first;
     {
       var i:Dynamic = (first + 1.0);
-      while (_Runtime.truthy(_Runtime.compare(i, last, '<'))) {
+      while ((cast ((cast i : Float) < (cast last : Float)) : Bool)) {
         var px:Dynamic = _Runtime.getIndex(pts, (i * 2.0));
         var py:Dynamic = _Runtime.getIndex(pts, ((i * 2.0) + 1.0));
         var distSq:Float = cast _Runtime.UNDEFINED;
-        if (_Runtime.truthy(_Runtime.strictEquals(lenSq, 0.0))) {
+        if ((cast _Runtime.strictEquals(lenSq, 0.0) : Bool)) {
           var ax:Dynamic = (px - x0);
           var ay:Dynamic = (py - y0);
           (distSq = cast (((ax * ax) + (ay * ay)) : Dynamic));
@@ -79,14 +79,14 @@ class DecimatePath {
           var cross:Dynamic = ((dx * (y0 - py)) - (dy * (x0 - px)));
           (distSq = cast (((cross * cross) / lenSq) : Dynamic));
         }
-        if (_Runtime.truthy(_Runtime.compare(distSq, maxDistSq, '>'))) {
+        if ((cast ((cast distSq : Float) > (cast maxDistSq : Float)) : Bool)) {
           (maxDistSq = cast (distSq : Dynamic));
           (maxIdx = cast (i : Dynamic));
         }
         i++;
       }
     }
-    if (_Runtime.truthy(_Runtime.compare(maxDistSq, toleranceSq, '>'))) {
+    if ((cast ((cast maxDistSq : Float) > (cast toleranceSq : Float)) : Bool)) {
       _Runtime.setIndex(keep, maxIdx, 1.0);
       _Runtime.callValue(DecimatePath.douglasPeucker__decimatePath, cast ([pts, first, maxIdx, toleranceSq, keep] : Array<Dynamic>));
       _Runtime.callValue(DecimatePath.douglasPeucker__decimatePath, cast ([pts, maxIdx, last, toleranceSq, keep] : Array<Dynamic>));

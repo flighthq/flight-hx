@@ -21,11 +21,11 @@ class BoundingSphere {
     var dx:Dynamic = cast _Runtime.UNDEFINED;
     var dy:Dynamic = cast _Runtime.UNDEFINED;
     var dz:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(sphere.radius, 0.0, '<'))) { return cast false; }
+    if ((cast ((cast sphere.radius : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
     dx = (point.x - sphere.center.x);
     dy = (point.y - sphere.center.y);
     dz = (point.z - sphere.center.z);
-    return cast _Runtime.compare((((dx * dx) + (dy * dy)) + (dz * dz)), (sphere.radius * sphere.radius), '<=');
+    return cast ((cast (((dx * dx) + (dy * dy)) + (dz * dz)) : Float) <= (cast (sphere.radius * sphere.radius) : Float));
     return cast null;
   }
 
@@ -57,7 +57,7 @@ class BoundingSphere {
     cy = sphere.center.y;
     cz = sphere.center.z;
     r = sphere.radius;
-    if (_Runtime.truthy(_Runtime.compare(r, 0.0, '<'))) {
+    if ((cast ((cast r : Float) < (cast 0.0 : Float)) : Bool)) {
       (out.x = cast (cx : Dynamic));
       (out.y = cast (cy : Dynamic));
       (out.z = cast (cz : Dynamic));
@@ -67,7 +67,7 @@ class BoundingSphere {
     dy = (point.y - cy);
     dz = (point.z - cz);
     dist = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
-    if (_Runtime.truthy(_Runtime.strictEquals(dist, 0.0))) {
+    if ((cast _Runtime.strictEquals(dist, 0.0) : Bool)) {
       (out.x = cast ((cx + r) : Dynamic));
       (out.y = cast (cy : Dynamic));
       (out.z = cast (cz : Dynamic));
@@ -85,13 +85,13 @@ class BoundingSphere {
     var dz:Dynamic = cast _Runtime.UNDEFINED;
     var distSq:Dynamic = cast _Runtime.UNDEFINED;
     var sumR:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(a.radius, 0.0, '<'), function():Dynamic return cast _Runtime.compare(b.radius, 0.0, '<')))) { return cast false; }
+    if ((cast ((cast ((cast a.radius : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast b.radius : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast false; }
     dx = (a.center.x - b.center.x);
     dy = (a.center.y - b.center.y);
     dz = (a.center.z - b.center.z);
     distSq = (((dx * dx) + (dy * dy)) + (dz * dz));
     sumR = (a.radius + b.radius);
-    return cast _Runtime.compare(distSq, (sumR * sumR), '<=');
+    return cast ((cast distSq : Float) <= (cast (sumR * sumR) : Float));
     return cast null;
   }
 
@@ -110,14 +110,14 @@ class BoundingSphere {
     var dist:Dynamic = cast _Runtime.UNDEFINED;
     var newRadius:Dynamic = cast _Runtime.UNDEFINED;
     var t:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(a.radius, 0.0, '<'))) {
+    if ((cast ((cast a.radius : Float) < (cast 0.0 : Float)) : Bool)) {
       (out.center.x = cast (b.center.x : Dynamic));
       (out.center.y = cast (b.center.y : Dynamic));
       (out.center.z = cast (b.center.z : Dynamic));
       (out.radius = cast (b.radius : Dynamic));
       return;
     }
-    if (_Runtime.truthy(_Runtime.compare(b.radius, 0.0, '<'))) {
+    if ((cast ((cast b.radius : Float) < (cast 0.0 : Float)) : Bool)) {
       (out.center.x = cast (a.center.x : Dynamic));
       (out.center.y = cast (a.center.y : Dynamic));
       (out.center.z = cast (a.center.z : Dynamic));
@@ -136,14 +136,14 @@ class BoundingSphere {
     dy = (bcy - acy);
     dz = (bcz - acz);
     dist = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
-    if (_Runtime.truthy(_Runtime.compare((dist + br), ar, '<='))) {
+    if ((cast ((cast (dist + br) : Float) <= (cast ar : Float)) : Bool)) {
       (out.center.x = cast (acx : Dynamic));
       (out.center.y = cast (acy : Dynamic));
       (out.center.z = cast (acz : Dynamic));
       (out.radius = cast (ar : Dynamic));
       return;
     }
-    if (_Runtime.truthy(_Runtime.compare((dist + ar), br, '<='))) {
+    if ((cast ((cast (dist + ar) : Float) <= (cast br : Float)) : Bool)) {
       (out.center.x = cast (bcx : Dynamic));
       (out.center.y = cast (bcy : Dynamic));
       (out.center.z = cast (bcz : Dynamic));
@@ -151,7 +151,7 @@ class BoundingSphere {
       return;
     }
     newRadius = (((dist + ar) + br) * 0.5);
-    t = _Runtime.select(!_Runtime.strictEquals(dist, 0.0), function():Dynamic return cast ((newRadius - ar) / dist), function():Dynamic return cast 0.0);
+    t = ((cast !_Runtime.strictEquals(dist, 0.0) : Bool) ? (cast ((newRadius - ar) / dist) : Dynamic) : (cast 0.0 : Dynamic));
     (out.center.x = cast ((acx + (dx * t)) : Dynamic));
     (out.center.y = cast ((acy + (dy * t)) : Dynamic));
     (out.center.z = cast ((acz + (dz * t)) : Dynamic));
@@ -184,7 +184,7 @@ class BoundingSphere {
     maxX = aabb.max.x;
     maxY = aabb.max.y;
     maxZ = aabb.max.z;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(minX, maxX, '>'), function():Dynamic return cast _Runtime.compare(minY, maxY, '>')), function():Dynamic return cast _Runtime.compare(minZ, maxZ, '>')))) {
+    if ((cast ((cast ((cast ((cast minX : Float) > (cast maxX : Float)) : Bool) || (cast ((cast minY : Float) > (cast maxY : Float)) : Bool)) : Bool) || (cast ((cast minZ : Float) > (cast maxZ : Float)) : Bool)) : Bool)) {
       (out.center.x = cast (0.0 : Dynamic));
       (out.center.y = cast (0.0 : Dynamic));
       (out.center.z = cast (0.0 : Dynamic));
@@ -231,6 +231,6 @@ class BoundingSphere {
     (out.center.x = cast (tcx : Dynamic));
     (out.center.y = cast (tcy : Dynamic));
     (out.center.z = cast (tcz : Dynamic));
-    (out.radius = cast (_Runtime.select(_Runtime.compare(radius, 0.0, '<'), function():Dynamic return cast radius, function():Dynamic return cast (radius * maxScale)) : Dynamic));
+    (out.radius = cast (((cast ((cast radius : Float) < (cast 0.0 : Float)) : Bool) ? (cast radius : Dynamic) : (cast (radius * maxScale) : Dynamic)) : Dynamic));
   }
 }

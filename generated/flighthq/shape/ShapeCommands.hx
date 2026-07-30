@@ -75,7 +75,7 @@ class ShapeCommands {
     penX = 0.0;
     penY = 0.0;
     i = 0.0;
-    while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(cmds, 'length'), '<'))) {
+    while ((cast ((cast i : Float) < (cast _Runtime.field(cmds, 'length') : Float)) : Bool)) {
       var key:Dynamic = (cast _Runtime.getIndex(cmds, i) : String);
       var argCount:Dynamic = (cast _Runtime.getIndex(cmds, (i + 1.0)) : Float);
       var b:Dynamic = (i + 2.0);
@@ -102,7 +102,7 @@ class ShapeCommands {
     d2y = (y2 - y1);
     len1 = HxMath.sqrt(((d1x * d1x) + (d1y * d1y)));
     len2 = HxMath.sqrt(((d2x * d2x) + (d2y * d2y)));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(len1, 1e-10, '<'), function():Dynamic return cast _Runtime.compare(len2, 1e-10, '<')))) {
+    if ((cast ((cast ((cast len1 : Float) < (cast 1e-10 : Float)) : Bool) || (cast ((cast len2 : Float) < (cast 1e-10 : Float)) : Bool)) : Bool)) {
       _Runtime.pushMany(cmds, cast (['lineTo', 2.0, x1, y1] : Array<Dynamic>));
       _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
       return;
@@ -110,7 +110,7 @@ class ShapeCommands {
     cosHalf = (((d1x * d2x) + (d1y * d2y)) / (len1 * len2));
     clampedCos = HxMath.max(-1.0, HxMath.min(1.0, cosHalf));
     halfAngle = (HxMath.acos(clampedCos) / 2.0);
-    if (_Runtime.truthy(_Runtime.compare(HxMath.abs(HxMath.sin(halfAngle)), 1e-10, '<'))) {
+    if ((cast ((cast HxMath.abs(HxMath.sin(halfAngle)) : Float) < (cast 1e-10 : Float)) : Bool)) {
       _Runtime.pushMany(cmds, cast (['lineTo', 2.0, x1, y1] : Array<Dynamic>));
       _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
       return;
@@ -134,7 +134,7 @@ class ShapeCommands {
     startA = HxMath.atan2((ty1 - ocy), (tx1 - ocx));
     endA = HxMath.atan2((ty2 - ocy), (tx2 - ocx));
     cross = ((d1x * d2y) - (d1y * d2x));
-    isAnticlockwise = _Runtime.compare(cross, 0.0, '<');
+    isAnticlockwise = ((cast cross : Float) < (cast 0.0 : Float));
     sweep = _Runtime.callValue(ShapeCommands.normalizeArcSweep__shapeCommands, cast ([startA, endA, isAnticlockwise] : Array<Dynamic>));
     segmentCount = HxMath.max(1.0, HxMath.ceil((HxMath.abs(sweep) / (HxMath.PI / 2.0))));
     segmentAngle = (sweep / segmentCount);
@@ -226,12 +226,12 @@ class ShapeCommands {
 
   public static function appendShapePolygon(shape:Shape, points:Array<Float>):Void {
     var cmds:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(points, 'length'), 4.0, '<'))) { return; }
+    if ((cast ((cast _Runtime.field(points, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { return; }
     cmds = _Runtime.field(_Runtime.field(shape, 'data'), 'commands');
     _Runtime.pushMany(cmds, cast (['moveTo', 2.0, _Runtime.getIndex(points, 0.0), _Runtime.getIndex(points, 1.0)] : Array<Dynamic>));
     {
       var k:Dynamic = 2.0;
-      while (_Runtime.truthy(_Runtime.compare(k, (_Runtime.field(points, 'length') - 1.0), '<'))) {
+      while ((cast ((cast k : Float) < (cast (_Runtime.field(points, 'length') - 1.0) : Float)) : Bool)) {
         _Runtime.pushMany(cmds, cast (['lineTo', 2.0, _Runtime.getIndex(points, k), _Runtime.getIndex(points, (k + 1.0))] : Array<Dynamic>));
         (k = cast ((k + 2.0) : Dynamic));
       }
@@ -242,12 +242,12 @@ class ShapeCommands {
 
   public static function appendShapePolyline(shape:Shape, points:Array<Float>):Void {
     var cmds:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(points, 'length'), 4.0, '<'))) { return; }
+    if ((cast ((cast _Runtime.field(points, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { return; }
     cmds = _Runtime.field(_Runtime.field(shape, 'data'), 'commands');
     _Runtime.pushMany(cmds, cast (['moveTo', 2.0, _Runtime.getIndex(points, 0.0), _Runtime.getIndex(points, 1.0)] : Array<Dynamic>));
     {
       var k:Dynamic = 2.0;
-      while (_Runtime.truthy(_Runtime.compare(k, (_Runtime.field(points, 'length') - 1.0), '<'))) {
+      while ((cast ((cast k : Float) < (cast (_Runtime.field(points, 'length') - 1.0) : Float)) : Bool)) {
         _Runtime.pushMany(cmds, cast (['lineTo', 2.0, _Runtime.getIndex(points, k), _Runtime.getIndex(points, (k + 1.0))] : Array<Dynamic>));
         (k = cast ((k + 2.0) : Dynamic));
       }
@@ -287,10 +287,10 @@ class ShapeCommands {
   public static function normalizeArcSweep__shapeCommands(startAngle:Float, endAngle:Float, anticlockwise:Bool):Float {
     var sweep:Dynamic = cast _Runtime.UNDEFINED;
     sweep = (endAngle - startAngle);
-    if (_Runtime.truthy(anticlockwise)) {
-      if (_Runtime.truthy(_Runtime.compare(sweep, 0.0, '>'))) { (sweep = cast ((sweep - (HxMath.PI * 2.0)) : Dynamic)); }
+    if ((cast anticlockwise : Bool)) {
+      if ((cast ((cast sweep : Float) > (cast 0.0 : Float)) : Bool)) { (sweep = cast ((sweep - (HxMath.PI * 2.0)) : Dynamic)); }
     } else {
-      if (_Runtime.truthy(_Runtime.compare(sweep, 0.0, '<'))) { (sweep = cast ((sweep + (HxMath.PI * 2.0)) : Dynamic)); }
+      if ((cast ((cast sweep : Float) < (cast 0.0 : Float)) : Bool)) { (sweep = cast ((sweep + (HxMath.PI * 2.0)) : Dynamic)); }
     }
     return cast sweep;
     return cast null;
@@ -301,7 +301,7 @@ class ShapeCommands {
     angle = startAngle;
     {
       var s:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(s, segmentCount, '<'))) {
+      while ((cast ((cast s : Float) < (cast segmentCount : Float)) : Bool)) {
         var nextAngle:Dynamic = (angle + segmentAngle);
         var cosA:Dynamic = HxMath.cos(angle);
         var sinA:Dynamic = HxMath.sin(angle);

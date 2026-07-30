@@ -19,17 +19,17 @@ class FitPathCurves {
     toleranceSq = (tolerance * tolerance);
     for (contour in _Runtime.iterable(contours)) {
       var n:Dynamic = (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> 1);
-      if (_Runtime.truthy(_Runtime.compare(n, 2.0, '<'))) { continue; }
-      var closed:Dynamic = _Runtime.andValue(_Runtime.andValue(_Runtime.compare(n, 3.0, '>='), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(contour, 0.0), _Runtime.getIndex(contour, (_Runtime.field(contour, 'length') - 2.0)))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(contour, 1.0), _Runtime.getIndex(contour, (_Runtime.field(contour, 'length') - 1.0))));
-      var pts:Dynamic = _Runtime.select(closed, function():Dynamic return cast _Runtime.slice(contour, 0.0, ((n - 1.0) * 2.0)), function():Dynamic return cast contour);
+      if ((cast ((cast n : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
+      var closed:Dynamic = ((cast ((cast ((cast n : Float) >= (cast 3.0 : Float)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(contour, 0.0), _Runtime.getIndex(contour, (_Runtime.field(contour, 'length') - 2.0))) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(contour, 1.0), _Runtime.getIndex(contour, (_Runtime.field(contour, 'length') - 1.0))) : Bool));
+      var pts:Dynamic = ((cast closed : Bool) ? (cast _Runtime.slice(contour, 0.0, ((n - 1.0) * 2.0)) : Dynamic) : (cast contour : Dynamic));
       var pn:Dynamic = (_Runtime.toInt32(_Runtime.field(pts, 'length')) >> 1);
-      if (_Runtime.truthy(_Runtime.compare(pn, 2.0, '<'))) { continue; }
-      if (_Runtime.truthy(_Runtime.strictEquals(pn, 2.0))) {
+      if ((cast ((cast pn : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
+      if ((cast _Runtime.strictEquals(pn, 2.0) : Bool)) {
         _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
         _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.getIndex(pts, 0.0), _Runtime.getIndex(pts, 1.0)] : Array<Dynamic>));
         _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.LINE_TO] : Array<Dynamic>));
         _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.getIndex(pts, 2.0), _Runtime.getIndex(pts, 3.0)] : Array<Dynamic>));
-        if (_Runtime.truthy(closed)) { _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.CLOSE] : Array<Dynamic>)); }
+        if ((cast closed : Bool)) { _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.CLOSE] : Array<Dynamic>)); }
         continue;
       }
       var corners:Dynamic = _Runtime.callValue(FitPathCurves.findCorners__fitPathCurves, cast ([pts, pn] : Array<Dynamic>));
@@ -37,10 +37,10 @@ class FitPathCurves {
       _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.getIndex(pts, 0.0), _Runtime.getIndex(pts, 1.0)] : Array<Dynamic>));
       {
         var ci:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(ci, (_Runtime.field(corners, 'length') - 1.0), '<'))) {
+        while ((cast ((cast ci : Float) < (cast (_Runtime.field(corners, 'length') - 1.0) : Float)) : Bool)) {
           var first:Dynamic = _Runtime.getIndex(corners, ci);
           var last:Dynamic = _Runtime.getIndex(corners, (ci + 1.0));
-          if (_Runtime.truthy(_Runtime.compare((last - first), 2.0, '<'))) {
+          if ((cast ((cast (last - first) : Float) < (cast 2.0 : Float)) : Bool)) {
             _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.LINE_TO] : Array<Dynamic>));
             _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.getIndex(pts, (last * 2.0)), _Runtime.getIndex(pts, ((last * 2.0) + 1.0))] : Array<Dynamic>));
             ci++;
@@ -52,7 +52,7 @@ class FitPathCurves {
           ci++;
         }
       }
-      if (_Runtime.truthy(closed)) { _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.CLOSE] : Array<Dynamic>)); }
+      if ((cast closed : Bool)) { _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.CLOSE] : Array<Dynamic>)); }
     }
   }
 
@@ -61,16 +61,16 @@ class FitPathCurves {
     corners = cast ([0.0] : Array<Dynamic>);
     {
       var i:Dynamic = 1.0;
-      while (_Runtime.truthy(_Runtime.compare(i, (n - 1.0), '<'))) {
+      while ((cast ((cast i : Float) < (cast (n - 1.0) : Float)) : Bool)) {
         var dx0:Dynamic = (_Runtime.getIndex(pts, (i * 2.0)) - _Runtime.getIndex(pts, ((i - 1.0) * 2.0)));
         var dy0:Dynamic = (_Runtime.getIndex(pts, ((i * 2.0) + 1.0)) - _Runtime.getIndex(pts, (((i - 1.0) * 2.0) + 1.0)));
         var dx1:Dynamic = (_Runtime.getIndex(pts, ((i + 1.0) * 2.0)) - _Runtime.getIndex(pts, (i * 2.0)));
         var dy1:Dynamic = (_Runtime.getIndex(pts, (((i + 1.0) * 2.0) + 1.0)) - _Runtime.getIndex(pts, ((i * 2.0) + 1.0)));
         var len0:Dynamic = HxMath.sqrt(((dx0 * dx0) + (dy0 * dy0)));
         var len1:Dynamic = HxMath.sqrt(((dx1 * dx1) + (dy1 * dy1)));
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(len0, 0.0), function():Dynamic return cast _Runtime.strictEquals(len1, 0.0)))) { i++; continue; }
+        if ((cast ((cast _Runtime.strictEquals(len0, 0.0) : Bool) || (cast _Runtime.strictEquals(len1, 0.0) : Bool)) : Bool)) { i++; continue; }
         var dot:Dynamic = (((dx0 * dx1) + (dy0 * dy1)) / (len0 * len1));
-        if (_Runtime.truthy(_Runtime.compare(dot, 0.5, '<'))) { _Runtime.callProperty(corners, 'push', cast ([i] : Array<Dynamic>)); }
+        if ((cast ((cast dot : Float) < (cast 0.5 : Float)) : Bool)) { _Runtime.callProperty(corners, 'push', cast ([i] : Array<Dynamic>)); }
         i++;
       }
     }
@@ -86,7 +86,7 @@ class FitPathCurves {
     dx = (_Runtime.getIndex(pts, ((idx + 1.0) * 2.0)) - _Runtime.getIndex(pts, (idx * 2.0)));
     dy = (_Runtime.getIndex(pts, (((idx + 1.0) * 2.0) + 1.0)) - _Runtime.getIndex(pts, ((idx * 2.0) + 1.0)));
     len = HxMath.sqrt(((dx * dx) + (dy * dy)));
-    return cast _Runtime.select(_Runtime.compare(len, 0.0, '>'), function():Dynamic return cast cast ([(dx / len), (dy / len)] : Array<Dynamic>), function():Dynamic return cast cast ([1.0, 0.0] : Array<Dynamic>));
+    return cast ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool) ? (cast cast ([(dx / len), (dy / len)] : Array<Dynamic>) : Dynamic) : (cast cast ([1.0, 0.0] : Array<Dynamic>) : Dynamic));
     return cast null;
   }
 
@@ -97,7 +97,7 @@ class FitPathCurves {
     dx = (_Runtime.getIndex(pts, ((idx - 1.0) * 2.0)) - _Runtime.getIndex(pts, (idx * 2.0)));
     dy = (_Runtime.getIndex(pts, (((idx - 1.0) * 2.0) + 1.0)) - _Runtime.getIndex(pts, ((idx * 2.0) + 1.0)));
     len = HxMath.sqrt(((dx * dx) + (dy * dy)));
-    return cast _Runtime.select(_Runtime.compare(len, 0.0, '>'), function():Dynamic return cast cast ([(dx / len), (dy / len)] : Array<Dynamic>), function():Dynamic return cast cast ([-1.0, 0.0] : Array<Dynamic>));
+    return cast ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool) ? (cast cast ([(dx / len), (dy / len)] : Array<Dynamic>) : Dynamic) : (cast cast ([-1.0, 0.0] : Array<Dynamic>) : Dynamic));
     return cast null;
   }
 
@@ -107,7 +107,7 @@ class FitPathCurves {
     u = cast ([0.0] : Array<Dynamic>);
     {
       var i:Dynamic = (first + 1.0);
-      while (_Runtime.truthy(_Runtime.compare(i, last, '<='))) {
+      while ((cast ((cast i : Float) <= (cast last : Float)) : Bool)) {
         var dx:Dynamic = (_Runtime.getIndex(pts, (i * 2.0)) - _Runtime.getIndex(pts, ((i - 1.0) * 2.0)));
         var dy:Dynamic = (_Runtime.getIndex(pts, ((i * 2.0) + 1.0)) - _Runtime.getIndex(pts, (((i - 1.0) * 2.0) + 1.0)));
         _Runtime.callProperty(u, 'push', cast ([(_Runtime.getIndex(u, (_Runtime.field(u, 'length') - 1.0)) + HxMath.sqrt(((dx * dx) + (dy * dy))))] : Array<Dynamic>));
@@ -115,10 +115,10 @@ class FitPathCurves {
       }
     }
     total = _Runtime.getIndex(u, (_Runtime.field(u, 'length') - 1.0));
-    if (_Runtime.truthy(_Runtime.compare(total, 0.0, '>'))) {
+    if ((cast ((cast total : Float) > (cast 0.0 : Float)) : Bool)) {
       {
         var i:Dynamic = 1.0;
-        while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(u, 'length'), '<'))) {
+        while ((cast ((cast i : Float) < (cast _Runtime.field(u, 'length') : Float)) : Bool)) {
           _Runtime.setIndex(u, i, (_Runtime.getIndex(u, i) / total));
           i++;
         }
@@ -133,7 +133,7 @@ class FitPathCurves {
     var u:Dynamic = cast _Runtime.UNDEFINED;
     var MAX_ITERATIONS:Dynamic = cast _Runtime.UNDEFINED;
     nPts = ((last - first) + 1.0);
-    if (_Runtime.truthy(_Runtime.strictEquals(nPts, 2.0))) {
+    if ((cast _Runtime.strictEquals(nPts, 2.0) : Bool)) {
       var dist:Dynamic = HxMath.sqrt((HxMath.pow((_Runtime.getIndex(pts, (last * 2.0)) - _Runtime.getIndex(pts, (first * 2.0))), 2.0) + HxMath.pow((_Runtime.getIndex(pts, ((last * 2.0) + 1.0)) - _Runtime.getIndex(pts, ((first * 2.0) + 1.0))), 2.0)));
       var d:Dynamic = (dist / 3.0);
       _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.CUBIC_CURVE_TO] : Array<Dynamic>));
@@ -144,17 +144,17 @@ class FitPathCurves {
     MAX_ITERATIONS = 4.0;
     {
       var iter:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(iter, MAX_ITERATIONS, '<='))) {
+      while ((cast ((cast iter : Float) <= (cast MAX_ITERATIONS : Float)) : Bool)) {
         var bezier:Dynamic = _Runtime.callValue(FitPathCurves.generateBezier__fitPathCurves, cast ([pts, first, last, u, tHat1, tHat2] : Array<Dynamic>));
         var __destructure0:Dynamic = _Runtime.callValue(FitPathCurves.computeMaxError__fitPathCurves, cast ([pts, first, last, bezier, u] : Array<Dynamic>));
         var maxErr:Dynamic = _Runtime.getIndex(__destructure0, 0.0);
         var splitPoint:Dynamic = _Runtime.getIndex(__destructure0, 1.0);
-        if (_Runtime.truthy(_Runtime.compare(maxErr, toleranceSq, '<'))) {
+        if ((cast ((cast maxErr : Float) < (cast toleranceSq : Float)) : Bool)) {
           _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.CUBIC_CURVE_TO] : Array<Dynamic>));
           _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.getIndex(bezier, 2.0), _Runtime.getIndex(bezier, 3.0), _Runtime.getIndex(bezier, 4.0), _Runtime.getIndex(bezier, 5.0), _Runtime.getIndex(bezier, 6.0), _Runtime.getIndex(bezier, 7.0)] : Array<Dynamic>));
           return;
         }
-        if (_Runtime.truthy(_Runtime.compare(iter, MAX_ITERATIONS, '<'))) {
+        if ((cast ((cast iter : Float) < (cast MAX_ITERATIONS : Float)) : Bool)) {
           (u = cast (_Runtime.callValue(FitPathCurves.reparameterize__fitPathCurves, cast ([pts, first, last, u, bezier] : Array<Dynamic>)) : Dynamic));
         } else {
           var tHatCenter:Dynamic = _Runtime.callValue(FitPathCurves.computeCenterTangent__fitPathCurves, cast ([pts, splitPoint] : Array<Dynamic>));
@@ -186,7 +186,7 @@ class FitPathCurves {
     x1 = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, nPts, '<'))) {
+      while ((cast ((cast i : Float) < (cast nPts : Float)) : Bool)) {
         var t:Dynamic = _Runtime.getIndex(u, i);
         var b1:Dynamic = (((3.0 * t) * (1.0 - t)) * (1.0 - t));
         var b2:Dynamic = (((3.0 * t) * t) * (1.0 - t));
@@ -207,7 +207,7 @@ class FitPathCurves {
       }
     }
     det = ((c00 * c11) - (c01 * c01));
-    if (_Runtime.truthy(_Runtime.compare(HxMath.abs(det), 1e-12, '<'))) {
+    if ((cast ((cast HxMath.abs(det) : Float) < (cast 1e-12 : Float)) : Bool)) {
       var dist:Dynamic = HxMath.sqrt((HxMath.pow((_Runtime.getIndex(pts, (last * 2.0)) - _Runtime.getIndex(pts, (first * 2.0))), 2.0) + HxMath.pow((_Runtime.getIndex(pts, ((last * 2.0) + 1.0)) - _Runtime.getIndex(pts, ((first * 2.0) + 1.0))), 2.0)));
       (alpha1 = cast ((alpha2 = cast ((dist / 3.0) : Dynamic)) : Dynamic));
     } else {
@@ -216,7 +216,7 @@ class FitPathCurves {
     }
     segLength = HxMath.sqrt((HxMath.pow((_Runtime.getIndex(pts, (last * 2.0)) - _Runtime.getIndex(pts, (first * 2.0))), 2.0) + HxMath.pow((_Runtime.getIndex(pts, ((last * 2.0) + 1.0)) - _Runtime.getIndex(pts, ((first * 2.0) + 1.0))), 2.0)));
     epsilon = (0.000001 * segLength);
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(alpha1, epsilon, '<'), function():Dynamic return cast _Runtime.compare(alpha2, epsilon, '<')))) {
+    if ((cast ((cast ((cast alpha1 : Float) < (cast epsilon : Float)) : Bool) || (cast ((cast alpha2 : Float) < (cast epsilon : Float)) : Bool)) : Bool)) {
       (alpha1 = cast ((alpha2 = cast ((segLength / 3.0) : Dynamic)) : Dynamic));
     }
     return cast cast ([_Runtime.getIndex(pts, (first * 2.0)), _Runtime.getIndex(pts, ((first * 2.0) + 1.0)), (_Runtime.getIndex(pts, (first * 2.0)) + (_Runtime.getIndex(tHat1, 0.0) * alpha1)), (_Runtime.getIndex(pts, ((first * 2.0) + 1.0)) + (_Runtime.getIndex(tHat1, 1.0) * alpha1)), (_Runtime.getIndex(pts, (last * 2.0)) + (_Runtime.getIndex(tHat2, 0.0) * alpha2)), (_Runtime.getIndex(pts, ((last * 2.0) + 1.0)) + (_Runtime.getIndex(tHat2, 1.0) * alpha2)), _Runtime.getIndex(pts, (last * 2.0)), _Runtime.getIndex(pts, ((last * 2.0) + 1.0))] : Array<Dynamic>);
@@ -230,7 +230,7 @@ class FitPathCurves {
     splitPoint = (_Runtime.toInt32(((last - first) + 1.0)) >> 1);
     {
       var i:Dynamic = 1.0;
-      while (_Runtime.truthy(_Runtime.compare(i, (last - first), '<'))) {
+      while ((cast ((cast i : Float) < (cast (last - first) : Float)) : Bool)) {
         var t:Dynamic = _Runtime.getIndex(u, i);
         var mt:Dynamic = (1.0 - t);
         var bx:Dynamic = ((((((mt * mt) * mt) * _Runtime.getIndex(bezier, 0.0)) + ((((3.0 * mt) * mt) * t) * _Runtime.getIndex(bezier, 2.0))) + ((((3.0 * mt) * t) * t) * _Runtime.getIndex(bezier, 4.0))) + (((t * t) * t) * _Runtime.getIndex(bezier, 6.0)));
@@ -238,7 +238,7 @@ class FitPathCurves {
         var dx:Dynamic = (_Runtime.getIndex(pts, ((first + i) * 2.0)) - bx);
         var dy:Dynamic = (_Runtime.getIndex(pts, (((first + i) * 2.0) + 1.0)) - by);
         var distSq:Dynamic = ((dx * dx) + (dy * dy));
-        if (_Runtime.truthy(_Runtime.compare(distSq, maxDist, '>='))) {
+        if ((cast ((cast distSq : Float) >= (cast maxDist : Float)) : Bool)) {
           (maxDist = cast (distSq : Dynamic));
           (splitPoint = cast ((first + i) : Dynamic));
         }
@@ -254,7 +254,7 @@ class FitPathCurves {
     uPrime = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, (last - first), '<='))) {
+      while ((cast ((cast i : Float) <= (cast (last - first) : Float)) : Bool)) {
         _Runtime.callProperty(uPrime, 'push', cast ([_Runtime.callValue(FitPathCurves.newtonRaphsonRootFind__fitPathCurves, cast ([bezier, _Runtime.getIndex(pts, ((first + i) * 2.0)), _Runtime.getIndex(pts, (((first + i) * 2.0) + 1.0)), _Runtime.getIndex(u, i)] : Array<Dynamic>))] : Array<Dynamic>));
         i++;
       }
@@ -282,7 +282,7 @@ class FitPathCurves {
     q2x = (((6.0 * mt) * ((_Runtime.getIndex(bezier, 4.0) - (2.0 * _Runtime.getIndex(bezier, 2.0))) + _Runtime.getIndex(bezier, 0.0))) + ((6.0 * u) * ((_Runtime.getIndex(bezier, 6.0) - (2.0 * _Runtime.getIndex(bezier, 4.0))) + _Runtime.getIndex(bezier, 2.0))));
     q2y = (((6.0 * mt) * ((_Runtime.getIndex(bezier, 5.0) - (2.0 * _Runtime.getIndex(bezier, 3.0))) + _Runtime.getIndex(bezier, 1.0))) + ((6.0 * u) * ((_Runtime.getIndex(bezier, 7.0) - (2.0 * _Runtime.getIndex(bezier, 5.0))) + _Runtime.getIndex(bezier, 3.0))));
     den = ((((q1x * q1x) + (q1y * q1y)) + ((qx - px) * q2x)) + ((qy - py) * q2y));
-    if (_Runtime.truthy(_Runtime.compare(HxMath.abs(den), 1e-12, '<'))) { return cast u; }
+    if ((cast ((cast HxMath.abs(den) : Float) < (cast 1e-12 : Float)) : Bool)) { return cast u; }
     return cast HxMath.max(0.0, HxMath.min(1.0, (u - (num / den))));
     return cast null;
   }
@@ -294,7 +294,7 @@ class FitPathCurves {
     dx = (_Runtime.getIndex(pts, ((idx - 1.0) * 2.0)) - _Runtime.getIndex(pts, ((idx + 1.0) * 2.0)));
     dy = (_Runtime.getIndex(pts, (((idx - 1.0) * 2.0) + 1.0)) - _Runtime.getIndex(pts, (((idx + 1.0) * 2.0) + 1.0)));
     len = HxMath.sqrt(((dx * dx) + (dy * dy)));
-    return cast _Runtime.select(_Runtime.compare(len, 0.0, '>'), function():Dynamic return cast cast ([(dx / len), (dy / len)] : Array<Dynamic>), function():Dynamic return cast cast ([1.0, 0.0] : Array<Dynamic>));
+    return cast ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool) ? (cast cast ([(dx / len), (dy / len)] : Array<Dynamic>) : Dynamic) : (cast cast ([1.0, 0.0] : Array<Dynamic>) : Dynamic));
     return cast null;
   }
 }

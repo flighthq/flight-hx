@@ -10,7 +10,7 @@ class ReplaceFlowState {
   public static function replaceFlowState(stack:FlowStack, state:FlowState):Void {
     var states:Dynamic = cast _Runtime.UNDEFINED;
     states = _Runtime.field(stack, 'states');
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(states, 'length'), 0.0, '>'))) {
+    if ((cast ((cast _Runtime.field(states, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       var previousTop:Dynamic = (cast _Runtime.callProperty(states, 'pop', cast ([] : Array<Dynamic>)) : FlowState);
       _Runtime.callOptionalProperty(previousTop, 'onExit', cast ([] : Array<Dynamic>));
     }

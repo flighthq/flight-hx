@@ -36,12 +36,12 @@ class TextInputEditing {
     var value:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(source, 'data');
     value = text;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(data, 'multiline')))) { (value = cast (_Runtime.replace(value, _Runtime.regexp('[\\n\\r]+', 'g'), '', false) : Dynamic)); }
+    if ((cast !(cast _Runtime.field(data, 'multiline') : Bool) : Bool)) { (value = cast (_Runtime.replace(value, _Runtime.regexp('[\\n\\r]+', 'g'), '', false) : Dynamic)); }
     (value = cast (_Runtime.callValue(TextInputEditing.restrictTextInput__textInputEditing, cast ([value, _Runtime.field(_Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>)), 'restrict')] : Array<Dynamic>)) : Dynamic));
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(data, 'maxChars'), 0.0, '>'))) {
+    if ((cast ((cast _Runtime.field(data, 'maxChars') : Float) > (cast 0.0 : Float)) : Bool)) {
       var maxLength:Dynamic = ((_Runtime.field(data, 'maxChars') - _Runtime.field(_Runtime.field(data, 'text'), 'length')) + replaceLength);
-      if (_Runtime.truthy(_Runtime.compare(maxLength, 0.0, '<='))) { return cast ''; }
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(value, 'length'), maxLength, '>'))) { (value = cast (_Runtime.slice(value, 0.0, maxLength) : Dynamic)); }
+      if ((cast ((cast maxLength : Float) <= (cast 0.0 : Float)) : Bool)) { return cast ''; }
+      if ((cast ((cast _Runtime.field(value, 'length') : Float) > (cast maxLength : Float)) : Bool)) { (value = cast (_Runtime.slice(value, 0.0, maxLength) : Dynamic)); }
     }
     return cast value;
     return cast null;
@@ -50,12 +50,12 @@ class TextInputEditing {
   public static function canRedoTextInput(source:RichText):Bool {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
-    return cast _Runtime.compare(_Runtime.field(state, 'historyIndex'), (_Runtime.field(_Runtime.field(state, 'history'), 'length') - 1.0), '<');
+    return cast ((cast _Runtime.field(state, 'historyIndex') : Float) < (cast (_Runtime.field(_Runtime.field(state, 'history'), 'length') - 1.0) : Float));
     return cast null;
   }
 
   public static function canUndoTextInput(source:RichText):Bool {
-    return cast _Runtime.compare(_Runtime.field(_Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>)), 'historyIndex'), 0.0, '>=');
+    return cast ((cast _Runtime.field(_Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>)), 'historyIndex') : Float) >= (cast 0.0 : Float));
     return cast null;
   }
 
@@ -73,9 +73,9 @@ class TextInputEditing {
     state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
     start = _Runtime.callValue(getTextInputSelectionBeginIndex, cast ([source] : Array<Dynamic>));
     end = _Runtime.callValue(getTextInputSelectionEndIndex, cast ([source] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(start, end))) {
+    if ((cast !_Runtime.strictEquals(start, end) : Bool)) {
       _Runtime.callValue(replaceTextInput, cast ([source, start, end, ''] : Array<Dynamic>));
-    } else { if (_Runtime.truthy(_Runtime.compare(start, 0.0, '>'))) {
+    } else { if ((cast ((cast start : Float) > (cast 0.0 : Float)) : Bool)) {
       _Runtime.callValue(replaceTextInput, cast ([source, (start - 1.0), start, ''] : Array<Dynamic>));
     } }
     _Runtime.setField(state, 'selectionIndex', _Runtime.field(state, 'caretIndex'));
@@ -86,9 +86,9 @@ class TextInputEditing {
     var end:Dynamic = cast _Runtime.UNDEFINED;
     start = _Runtime.callValue(getTextInputSelectionBeginIndex, cast ([source] : Array<Dynamic>));
     end = _Runtime.callValue(getTextInputSelectionEndIndex, cast ([source] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(start, end))) {
+    if ((cast !_Runtime.strictEquals(start, end) : Bool)) {
       _Runtime.callValue(replaceTextInput, cast ([source, start, end, ''] : Array<Dynamic>));
-    } else { if (_Runtime.truthy(_Runtime.compare(start, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length'), '<'))) {
+    } else { if ((cast ((cast start : Float) < (cast _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length') : Float)) : Bool)) {
       _Runtime.callValue(replaceTextInput, cast ([source, start, (start + 1.0), ''] : Array<Dynamic>));
     } }
   }
@@ -99,12 +99,12 @@ class TextInputEditing {
     var wordStart:Dynamic = cast _Runtime.UNDEFINED;
     start = _Runtime.callValue(getTextInputSelectionBeginIndex, cast ([source] : Array<Dynamic>));
     end = _Runtime.callValue(getTextInputSelectionEndIndex, cast ([source] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(start, end))) {
+    if ((cast !_Runtime.strictEquals(start, end) : Bool)) {
       _Runtime.callValue(replaceTextInput, cast ([source, start, end, ''] : Array<Dynamic>));
       return;
     }
     wordStart = _Runtime.callValue(TextInputEditing.findWordStartBefore__textInputEditing, cast ([_Runtime.field(_Runtime.field(source, 'data'), 'text'), start] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(wordStart, start, '<'))) { _Runtime.callValue(replaceTextInput, cast ([source, wordStart, start, ''] : Array<Dynamic>)); }
+    if ((cast ((cast wordStart : Float) < (cast start : Float)) : Bool)) { _Runtime.callValue(replaceTextInput, cast ([source, wordStart, start, ''] : Array<Dynamic>)); }
   }
 
   public static function deleteTextInputWordForward(source:RichText):Void {
@@ -113,12 +113,12 @@ class TextInputEditing {
     var wordEnd:Dynamic = cast _Runtime.UNDEFINED;
     start = _Runtime.callValue(getTextInputSelectionBeginIndex, cast ([source] : Array<Dynamic>));
     end = _Runtime.callValue(getTextInputSelectionEndIndex, cast ([source] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(start, end))) {
+    if ((cast !_Runtime.strictEquals(start, end) : Bool)) {
       _Runtime.callValue(replaceTextInput, cast ([source, start, end, ''] : Array<Dynamic>));
       return;
     }
     wordEnd = _Runtime.callValue(TextInputEditing.findWordEndAfter__textInputEditing, cast ([_Runtime.field(_Runtime.field(source, 'data'), 'text'), start] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(wordEnd, start, '>'))) { _Runtime.callValue(replaceTextInput, cast ([source, start, wordEnd, ''] : Array<Dynamic>)); }
+    if ((cast ((cast wordEnd : Float) > (cast start : Float)) : Bool)) { _Runtime.callValue(replaceTextInput, cast ([source, start, wordEnd, ''] : Array<Dynamic>)); }
   }
 
   public static function getTextInputCaretIndex(source:RichText):Float {
@@ -131,7 +131,7 @@ class TextInputEditing {
     var group:Dynamic = cast _Runtime.UNDEFINED;
     caretIndex = _Runtime.callValue(getTextInputCaretIndex, cast ([source] : Array<Dynamic>));
     group = _Runtime.callValue(TextInputEditing.getTextLayoutGroupAtIndex__textInputEditing, cast ([layout, caretIndex] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(group, null))) {
+    if ((cast _Runtime.strictEquals(group, null) : Bool)) {
       _Runtime.setField(out, 'x', TEXT_BOUNDS_GUTTER);
       _Runtime.setField(out, 'y', TEXT_BOUNDS_GUTTER);
       _Runtime.setField(out, 'width', 1.0);
@@ -151,16 +151,16 @@ class TextInputEditing {
     var closestLineDistance:Dynamic = cast _Runtime.UNDEFINED;
     var lineStart:Dynamic = cast _Runtime.UNDEFINED;
     var lineEnd:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(layout, 'groups'), 'length'), 0.0))) { return cast 0.0; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(layout, 'groups'), 'length'), 0.0) : Bool)) { return cast 0.0; }
     closestLineIndex = 0.0;
     closestLineDistance = HxMath.POSITIVE_INFINITY;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(layout, 'lineHeights'), 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(layout, 'lineHeights'), 'length') : Float)) : Bool)) {
         var lineTop:Dynamic = _Runtime.callValue(TextInputEditing.getLineOffsetY__textInputEditing, cast ([layout, i] : Array<Dynamic>));
         var lineBottom:Dynamic = (lineTop + _Runtime.getIndex(_Runtime.field(layout, 'lineHeights'), i));
-        var distance:Dynamic = _Runtime.select(_Runtime.compare(y, lineTop, '<'), function():Dynamic return cast (lineTop - y), function():Dynamic return cast _Runtime.select(_Runtime.compare(y, lineBottom, '>'), function():Dynamic return cast (y - lineBottom), function():Dynamic return cast 0.0));
-        if (_Runtime.truthy(_Runtime.compare(distance, closestLineDistance, '<'))) {
+        var distance:Dynamic = ((cast ((cast y : Float) < (cast lineTop : Float)) : Bool) ? (cast (lineTop - y) : Dynamic) : (cast ((cast ((cast y : Float) > (cast lineBottom : Float)) : Bool) ? (cast (y - lineBottom) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
+        if ((cast ((cast distance : Float) < (cast closestLineDistance : Float)) : Bool)) {
           (closestLineDistance = cast (distance : Dynamic));
           (closestLineIndex = cast (i : Dynamic));
         }
@@ -170,13 +170,13 @@ class TextInputEditing {
     lineStart = _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length');
     lineEnd = 0.0;
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), closestLineIndex))) { continue; }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), closestLineIndex) : Bool)) { continue; }
       (lineStart = cast (HxMath.min(lineStart, _Runtime.field(group, 'startIndex')) : Dynamic));
       (lineEnd = cast (HxMath.max(lineEnd, _Runtime.field(group, 'endIndex')) : Dynamic));
-      if (_Runtime.truthy(_Runtime.compare(x, _Runtime.field(group, 'offsetX'), '<='))) { return cast _Runtime.field(group, 'startIndex'); }
-      if (_Runtime.truthy(_Runtime.compare(x, (_Runtime.field(group, 'offsetX') + _Runtime.field(group, 'width')), '<='))) { return cast _Runtime.callValue(TextInputEditing.getTextLayoutGroupCharacterIndexAtX__textInputEditing, cast ([group, x] : Array<Dynamic>)); }
+      if ((cast ((cast x : Float) <= (cast _Runtime.field(group, 'offsetX') : Float)) : Bool)) { return cast _Runtime.field(group, 'startIndex'); }
+      if ((cast ((cast x : Float) <= (cast (_Runtime.field(group, 'offsetX') + _Runtime.field(group, 'width')) : Float)) : Bool)) { return cast _Runtime.callValue(TextInputEditing.getTextLayoutGroupCharacterIndexAtX__textInputEditing, cast ([group, x] : Array<Dynamic>)); }
     }
-    return cast _Runtime.select(_Runtime.compare(lineEnd, 0.0, '>'), function():Dynamic return cast lineEnd, function():Dynamic return cast lineStart);
+    return cast ((cast ((cast lineEnd : Float) > (cast 0.0 : Float)) : Bool) ? (cast lineEnd : Dynamic) : (cast lineStart : Dynamic));
     return cast null;
   }
 
@@ -184,8 +184,8 @@ class TextInputEditing {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     var passwordCharacter:Dynamic = cast _Runtime.UNDEFINED;
     state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'displayAsPassword')))) { return cast _Runtime.field(_Runtime.field(source, 'data'), 'text'); }
-    passwordCharacter = _Runtime.select(_Runtime.compare(_Runtime.field(_Runtime.field(state, 'passwordCharacter'), 'length'), 0.0, '>'), function():Dynamic return cast _Runtime.charAt(_Runtime.field(state, 'passwordCharacter'), 0.0), function():Dynamic return cast '•');
+    if ((cast !(cast _Runtime.field(state, 'displayAsPassword') : Bool) : Bool)) { return cast _Runtime.field(_Runtime.field(source, 'data'), 'text'); }
+    passwordCharacter = ((cast ((cast _Runtime.field(_Runtime.field(state, 'passwordCharacter'), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.charAt(_Runtime.field(state, 'passwordCharacter'), 0.0) : Dynamic) : (cast '•' : Dynamic));
     return cast _Runtime.repeat(passwordCharacter, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length'));
     return cast null;
   }
@@ -216,7 +216,7 @@ class TextInputEditing {
   public static function handleTextInputKeyboard(source:RichText, data:KeyboardEventData, ?options:HandleTextInputKeyboardOptions):Bool {
     var command:Dynamic = cast _Runtime.UNDEFINED;
     command = _Runtime.callValue(TextInputEditing.getKeyboardCommand__textInputEditing, cast ([data] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(command, 'none'))) { return cast false; }
+    if ((cast _Runtime.strictEquals(command, 'none') : Bool)) { return cast false; }
     {
       var __switchValue = command;
       if (__switchValue == 'backspace') {
@@ -226,14 +226,14 @@ class TextInputEditing {
       else if (__switchValue == 'copy') {
         {
           var copyText:Dynamic = _Runtime.callValue(getTextInputSelectionText, cast ([source] : Array<Dynamic>));
-          if (_Runtime.truthy(_Runtime.compare(_Runtime.field(copyText, 'length'), 0.0, '>'))) { _Runtime.callOptionalProperty(options, 'onCopy', cast ([copyText] : Array<Dynamic>)); }
+          if ((cast ((cast _Runtime.field(copyText, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callOptionalProperty(options, 'onCopy', cast ([copyText] : Array<Dynamic>)); }
           return cast true;
         }
       }
       else if (__switchValue == 'cut') {
         {
           var cutText:Dynamic = _Runtime.callValue(getTextInputSelectionText, cast ([source] : Array<Dynamic>));
-          if (_Runtime.truthy(_Runtime.compare(_Runtime.field(cutText, 'length'), 0.0, '>'))) {
+          if ((cast ((cast _Runtime.field(cutText, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
             _Runtime.callOptionalProperty(options, 'onCopy', cast ([cutText] : Array<Dynamic>));
             _Runtime.callValue(replaceSelectedTextInput, cast ([source, ''] : Array<Dynamic>));
           }
@@ -281,7 +281,7 @@ class TextInputEditing {
         return cast true;
       }
       else if (__switchValue == 'return') {
-        if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(_Runtime.field(source, 'data'), 'multiline')))) { return cast false; }
+        if ((cast !(cast _Runtime.field(_Runtime.field(source, 'data'), 'multiline') : Bool) : Bool)) { return cast false; }
         _Runtime.callValue(insertTextInput, cast ([source, '\n'] : Array<Dynamic>));
         return cast true;
       }
@@ -319,7 +319,7 @@ class TextInputEditing {
     caret = _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([index, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>));
     state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
     _Runtime.setField(state, 'caretIndex', caret);
-    if (_Runtime.truthy(!_Runtime.truthy(extendSelection))) { _Runtime.setField(state, 'selectionIndex', caret); }
+    if ((cast !(cast extendSelection : Bool) : Bool)) { _Runtime.setField(state, 'selectionIndex', caret); }
     _Runtime.setField(state, 'desiredCaretX', TextInputEditing.DESIRED_CARET_X_UNSET__textInputEditing);
     _Runtime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
   }
@@ -330,7 +330,7 @@ class TextInputEditing {
     var target:Float = cast _Runtime.UNDEFINED;
     caretIndex = _Runtime.callValue(getTextInputCaretIndex, cast ([source] : Array<Dynamic>));
     text = _Runtime.field(_Runtime.field(source, 'data'), 'text');
-    if (_Runtime.truthy(_Runtime.compare(direction, 0.0, '<'))) {
+    if ((cast ((cast direction : Float) < (cast 0.0 : Float)) : Bool)) {
       (target = cast (_Runtime.callValue(TextInputEditing.findWordStartBefore__textInputEditing, cast ([text, caretIndex] : Array<Dynamic>)) : Dynamic));
     } else {
       (target = cast (_Runtime.callValue(TextInputEditing.findWordEndAfter__textInputEditing, cast ([text, caretIndex] : Array<Dynamic>)) : Dynamic));
@@ -345,16 +345,16 @@ class TextInputEditing {
     var targetY:Dynamic = cast _Runtime.UNDEFINED;
     var targetIndex:Dynamic = cast _Runtime.UNDEFINED;
     var newCaret:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(layout, null), function():Dynamic return cast _Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED'))))) {
+    if ((cast ((cast _Runtime.strictEquals(layout, null) : Bool) || (cast _Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
       _Runtime.callValue(moveTextInputCaret, cast ([source, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length'), extendSelection] : Array<Dynamic>));
       return;
     }
     state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
     out = TextInputEditing.scratchRect__textInputEditing;
     _Runtime.callValue(getTextInputCaretRectangle, cast ([out, source, layout] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(state, 'desiredCaretX'), TextInputEditing.DESIRED_CARET_X_UNSET__textInputEditing))) { _Runtime.setField(state, 'desiredCaretX', _Runtime.field(out, 'x')); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(state, 'desiredCaretX'), TextInputEditing.DESIRED_CARET_X_UNSET__textInputEditing) : Bool)) { _Runtime.setField(state, 'desiredCaretX', _Runtime.field(out, 'x')); }
     targetLineIndex = (_Runtime.field(out, 'lineIndex') + 1.0);
-    if (_Runtime.truthy(_Runtime.compare(targetLineIndex, _Runtime.field(layout, 'numLines'), '>='))) {
+    if ((cast ((cast targetLineIndex : Float) >= (cast _Runtime.field(layout, 'numLines') : Float)) : Bool)) {
       _Runtime.callValue(moveTextInputCaret, cast ([source, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length'), extendSelection] : Array<Dynamic>));
       return;
     }
@@ -362,14 +362,14 @@ class TextInputEditing {
     targetIndex = _Runtime.callValue(getTextInputCharacterIndexAtPoint, cast ([source, layout, _Runtime.field(state, 'desiredCaretX'), targetY] : Array<Dynamic>));
     newCaret = _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([targetIndex, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>));
     _Runtime.setField(state, 'caretIndex', newCaret);
-    if (_Runtime.truthy(!_Runtime.truthy(extendSelection))) { _Runtime.setField(state, 'selectionIndex', newCaret); }
+    if ((cast !(cast extendSelection : Bool) : Bool)) { _Runtime.setField(state, 'selectionIndex', newCaret); }
     _Runtime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
   }
 
   public static function moveTextInputCaretToLineEnd(source:RichText, layout:Null<TextLayoutResult>, extendSelection:Dynamic = false):Void {
     var lineIndex:Dynamic = cast _Runtime.UNDEFINED;
     var lineEnd:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(layout, null), function():Dynamic return cast _Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED'))))) {
+    if ((cast ((cast _Runtime.strictEquals(layout, null) : Bool) || (cast _Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
       _Runtime.callValue(moveTextInputCaret, cast ([source, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length'), extendSelection] : Array<Dynamic>));
       return;
     }
@@ -381,7 +381,7 @@ class TextInputEditing {
   public static function moveTextInputCaretToLineStart(source:RichText, layout:Null<TextLayoutResult>, extendSelection:Dynamic = false):Void {
     var lineIndex:Dynamic = cast _Runtime.UNDEFINED;
     var lineStart:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(layout, null), function():Dynamic return cast _Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED'))))) {
+    if ((cast ((cast _Runtime.strictEquals(layout, null) : Bool) || (cast _Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
       _Runtime.callValue(moveTextInputCaret, cast ([source, 0.0, extendSelection] : Array<Dynamic>));
       return;
     }
@@ -397,16 +397,16 @@ class TextInputEditing {
     var targetY:Dynamic = cast _Runtime.UNDEFINED;
     var targetIndex:Dynamic = cast _Runtime.UNDEFINED;
     var newCaret:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(layout, null), function():Dynamic return cast _Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED'))))) {
+    if ((cast ((cast _Runtime.strictEquals(layout, null) : Bool) || (cast _Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
       _Runtime.callValue(moveTextInputCaret, cast ([source, 0.0, extendSelection] : Array<Dynamic>));
       return;
     }
     state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
     out = TextInputEditing.scratchRect__textInputEditing;
     _Runtime.callValue(getTextInputCaretRectangle, cast ([out, source, layout] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(state, 'desiredCaretX'), TextInputEditing.DESIRED_CARET_X_UNSET__textInputEditing))) { _Runtime.setField(state, 'desiredCaretX', _Runtime.field(out, 'x')); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(state, 'desiredCaretX'), TextInputEditing.DESIRED_CARET_X_UNSET__textInputEditing) : Bool)) { _Runtime.setField(state, 'desiredCaretX', _Runtime.field(out, 'x')); }
     targetLineIndex = (_Runtime.field(out, 'lineIndex') - 1.0);
-    if (_Runtime.truthy(_Runtime.compare(targetLineIndex, 0.0, '<'))) {
+    if ((cast ((cast targetLineIndex : Float) < (cast 0.0 : Float)) : Bool)) {
       _Runtime.callValue(moveTextInputCaret, cast ([source, 0.0, extendSelection] : Array<Dynamic>));
       return;
     }
@@ -414,7 +414,7 @@ class TextInputEditing {
     targetIndex = _Runtime.callValue(getTextInputCharacterIndexAtPoint, cast ([source, layout, _Runtime.field(state, 'desiredCaretX'), targetY] : Array<Dynamic>));
     newCaret = _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([targetIndex, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>));
     _Runtime.setField(state, 'caretIndex', newCaret);
-    if (_Runtime.truthy(!_Runtime.truthy(extendSelection))) { _Runtime.setField(state, 'selectionIndex', newCaret); }
+    if ((cast !(cast extendSelection : Bool) : Bool)) { _Runtime.setField(state, 'selectionIndex', newCaret); }
     _Runtime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
   }
 
@@ -422,7 +422,7 @@ class TextInputEditing {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     var record:Dynamic = cast _Runtime.UNDEFINED;
     state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(canRedoTextInput, cast ([source] : Array<Dynamic>))))) { return; }
+    if ((cast !(cast _Runtime.callValue(canRedoTextInput, cast ([source] : Array<Dynamic>)) : Bool) : Bool)) { return; }
     _Runtime.incrementField(state, 'historyIndex', 1, true);
     record = _Runtime.getIndex(_Runtime.field(state, 'history'), _Runtime.field(state, 'historyIndex'));
     _Runtime.callValue(TextInputEditing.applyHistoryRecord__textInputEditing, cast ([source, state, _Runtime.field(record, 'textAfter'), _Runtime.field(record, 'caretIndexAfter'), _Runtime.field(record, 'selectionIndexAfter')] : Array<Dynamic>));
@@ -444,13 +444,13 @@ class TextInputEditing {
     data = _Runtime.field(source, 'data');
     start = _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([beginIndex, _Runtime.field(_Runtime.field(data, 'text'), 'length')] : Array<Dynamic>));
     end = _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([endIndex, _Runtime.field(_Runtime.field(data, 'text'), 'length')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(end, start, '<'))) {
+    if ((cast ((cast end : Float) < (cast start : Float)) : Bool)) {
       var swap:Dynamic = start;
       (start = cast (end : Dynamic));
       (end = cast (swap : Dynamic));
     }
-    value = _Runtime.select(_Runtime.strictEquals(_Runtime.optionalField(options, 'applyInputRules'), true), function():Dynamic return cast _Runtime.callValue(applyTextInputRestriction, cast ([source, text, (end - start)] : Array<Dynamic>)), function():Dynamic return cast text);
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(value, 'length'), 0.0), function():Dynamic return cast _Runtime.strictEquals(start, end)))) { return; }
+    value = ((cast _Runtime.strictEquals(_Runtime.optionalField(options, 'applyInputRules'), true) : Bool) ? (cast _Runtime.callValue(applyTextInputRestriction, cast ([source, text, (end - start)] : Array<Dynamic>)) : Dynamic) : (cast text : Dynamic));
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(value, 'length'), 0.0) : Bool) && (cast _Runtime.strictEquals(start, end) : Bool)) : Bool)) { return; }
     state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
     textBefore = _Runtime.field(data, 'text');
     caretBefore = _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([_Runtime.field(state, 'caretIndex'), _Runtime.field(textBefore, 'length')] : Array<Dynamic>));
@@ -459,7 +459,7 @@ class TextInputEditing {
     _Runtime.callValue(TextInputEditing.adjustTextFormatRanges__textInputEditing, cast ([_Runtime.field(data, 'textFormatRanges'), _Runtime.field(data, 'defaultTextFormat'), start, end, _Runtime.field(value, 'length')] : Array<Dynamic>));
     _Runtime.setField(state, 'desiredCaretX', TextInputEditing.DESIRED_CARET_X_UNSET__textInputEditing);
     _Runtime.callValue(setTextInputSelection, cast ([source, (start + _Runtime.field(value, 'length')), (start + _Runtime.field(value, 'length'))] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.optionalField(options, 'skipHistory'), true), function():Dynamic return cast _Runtime.compare(_Runtime.field(state, 'historyLimit'), 0.0, '>')))) {
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.optionalField(options, 'skipHistory'), true) : Bool) && (cast ((cast _Runtime.field(state, 'historyLimit') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       _Runtime.callValue(TextInputEditing.recordTextInputEdit__textInputEditing, cast ([state, textBefore, _Runtime.field(data, 'text'), caretBefore, selectionBefore, _Runtime.coalesce(_Runtime.optionalField(options, 'mergeKind'), function():Dynamic return cast null)] : Array<Dynamic>));
     }
     _Runtime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
@@ -484,21 +484,21 @@ class TextInputEditing {
     viewTop = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, scrollVLine, '<'))) {
+      while ((cast ((cast i : Float) < (cast scrollVLine : Float)) : Bool)) {
         (viewTop = cast ((viewTop + _Runtime.coalesce(_Runtime.getIndex(_Runtime.field(layout, 'lineHeights'), i), function():Dynamic return cast 0.0)) : Dynamic));
         i++;
       }
     }
     viewBottom = (viewTop + viewportHeight);
-    if (_Runtime.truthy(_Runtime.compare(caretTop, viewTop, '<'))) {
+    if ((cast ((cast caretTop : Float) < (cast viewTop : Float)) : Bool)) {
       _Runtime.callValue(setRichTextScrollV, cast ([source, (_Runtime.field(out, 'lineIndex') + 1.0), layout] : Array<Dynamic>));
-    } else { if (_Runtime.truthy(_Runtime.compare(caretBottom, viewBottom, '>'))) {
+    } else { if ((cast ((cast caretBottom : Float) > (cast viewBottom : Float)) : Bool)) {
       var pixelOffset:Dynamic = 0.0;
       var firstVisibleLine:Dynamic = 0.0;
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(layout, 'numLines'), '<'))) {
-          if (_Runtime.truthy(_Runtime.compare((pixelOffset + _Runtime.getIndex(_Runtime.field(layout, 'lineHeights'), i)), (caretBottom - viewportHeight), '>'))) {
+        while ((cast ((cast i : Float) < (cast _Runtime.field(layout, 'numLines') : Float)) : Bool)) {
+          if ((cast ((cast (pixelOffset + _Runtime.getIndex(_Runtime.field(layout, 'lineHeights'), i)) : Float) > (cast (caretBottom - viewportHeight) : Float)) : Bool)) {
             (firstVisibleLine = cast (i : Dynamic));
             break;
           }
@@ -512,9 +512,9 @@ class TextInputEditing {
     scrollH = _Runtime.coalesce(_Runtime.field(_Runtime.field(source, 'data'), 'scrollH'), function():Dynamic return cast 0.0);
     caretLeft = (_Runtime.field(out, 'x') - scrollH);
     caretRight = (caretLeft + _Runtime.field(out, 'width'));
-    if (_Runtime.truthy(_Runtime.compare(caretLeft, 0.0, '<'))) {
+    if ((cast ((cast caretLeft : Float) < (cast 0.0 : Float)) : Bool)) {
       _Runtime.callValue(setRichTextScrollH, cast ([source, HxMath.max(0.0, (_Runtime.field(out, 'x') - CARET_SCROLL_MARGIN)), layout] : Array<Dynamic>));
-    } else { if (_Runtime.truthy(_Runtime.compare((caretRight + CARET_SCROLL_MARGIN), viewportWidth, '>'))) {
+    } else { if ((cast ((cast (caretRight + CARET_SCROLL_MARGIN) : Float) > (cast viewportWidth : Float)) : Bool)) {
       _Runtime.callValue(setRichTextScrollH, cast ([source, (((_Runtime.field(out, 'x') + _Runtime.field(out, 'width')) + CARET_SCROLL_MARGIN) - viewportWidth), layout] : Array<Dynamic>));
     } }
   }
@@ -532,8 +532,8 @@ class TextInputEditing {
     clamped = HxMath.max(0.0, HxMath.min(_Runtime.field(text, 'length'), index));
     start = clamped;
     end = clamped;
-    while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(start, 0.0, '>'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.charAt(text, (start - 1.0)), '\n')))) { start--; }
-    while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(end, _Runtime.field(text, 'length'), '<'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.charAt(text, end), '\n')))) { end++; }
+    while ((cast ((cast ((cast start : Float) > (cast 0.0 : Float)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.charAt(text, (start - 1.0)), '\n') : Bool)) : Bool)) { start--; }
+    while ((cast ((cast ((cast end : Float) < (cast _Runtime.field(text, 'length') : Float)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.charAt(text, end), '\n') : Bool)) : Bool)) { end++; }
     _Runtime.callValue(setTextInputSelection, cast ([source, start, end] : Array<Dynamic>));
   }
 
@@ -546,11 +546,11 @@ class TextInputEditing {
     clamped = HxMath.max(0.0, HxMath.min(_Runtime.field(text, 'length'), index));
     start = clamped;
     end = clamped;
-    while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(start, 0.0, '>'), function():Dynamic return cast _Runtime.callValue(TextInputEditing.isWordChar__textInputEditing, cast ([_Runtime.charAt(text, (start - 1.0))] : Array<Dynamic>))))) { start--; }
-    while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(end, _Runtime.field(text, 'length'), '<'), function():Dynamic return cast _Runtime.callValue(TextInputEditing.isWordChar__textInputEditing, cast ([_Runtime.charAt(text, end)] : Array<Dynamic>))))) { end++; }
-    if (_Runtime.truthy(_Runtime.strictEquals(start, end))) {
-      while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(start, 0.0, '>'), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(TextInputEditing.isWordChar__textInputEditing, cast ([_Runtime.charAt(text, (start - 1.0))] : Array<Dynamic>)))))) { start--; }
-      while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(end, _Runtime.field(text, 'length'), '<'), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(TextInputEditing.isWordChar__textInputEditing, cast ([_Runtime.charAt(text, end)] : Array<Dynamic>)))))) { end++; }
+    while ((cast ((cast ((cast start : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.callValue(TextInputEditing.isWordChar__textInputEditing, cast ([_Runtime.charAt(text, (start - 1.0))] : Array<Dynamic>)) : Bool)) : Bool)) { start--; }
+    while ((cast ((cast ((cast end : Float) < (cast _Runtime.field(text, 'length') : Float)) : Bool) && (cast _Runtime.callValue(TextInputEditing.isWordChar__textInputEditing, cast ([_Runtime.charAt(text, end)] : Array<Dynamic>)) : Bool)) : Bool)) { end++; }
+    if ((cast _Runtime.strictEquals(start, end) : Bool)) {
+      while ((cast ((cast ((cast start : Float) > (cast 0.0 : Float)) : Bool) && (cast !(cast _Runtime.callValue(TextInputEditing.isWordChar__textInputEditing, cast ([_Runtime.charAt(text, (start - 1.0))] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { start--; }
+      while ((cast ((cast ((cast end : Float) < (cast _Runtime.field(text, 'length') : Float)) : Bool) && (cast !(cast _Runtime.callValue(TextInputEditing.isWordChar__textInputEditing, cast ([_Runtime.charAt(text, end)] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { end++; }
     }
     _Runtime.callValue(setTextInputSelection, cast ([source, start, end] : Array<Dynamic>));
   }
@@ -567,7 +567,7 @@ class TextInputEditing {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     var record:Dynamic = cast _Runtime.UNDEFINED;
     state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(canUndoTextInput, cast ([source] : Array<Dynamic>))))) { return; }
+    if ((cast !(cast _Runtime.callValue(canUndoTextInput, cast ([source] : Array<Dynamic>)) : Bool) : Bool)) { return; }
     record = _Runtime.getIndex(_Runtime.field(state, 'history'), _Runtime.field(state, 'historyIndex'));
     _Runtime.incrementField(state, 'historyIndex', -1, true);
     _Runtime.callValue(TextInputEditing.applyHistoryRecord__textInputEditing, cast ([source, state, _Runtime.field(record, 'textBefore'), _Runtime.field(record, 'caretIndexBefore'), _Runtime.field(record, 'selectionIndexBefore')] : Array<Dynamic>));
@@ -580,32 +580,32 @@ class TextInputEditing {
     offset = (insertLength - removeLength);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(ranges, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(ranges, 'length') : Float)) : Bool)) {
         var range:Dynamic = _Runtime.getIndex(ranges, i);
-        if (_Runtime.truthy(_Runtime.strictEquals(beginIndex, endIndex))) {
-          if (_Runtime.truthy(_Runtime.compare(_Runtime.field(range, 'end'), beginIndex, '<'))) {
+        if ((cast _Runtime.strictEquals(beginIndex, endIndex) : Bool)) {
+          if ((cast ((cast _Runtime.field(range, 'end') : Float) < (cast beginIndex : Float)) : Bool)) {
             i++;
             continue;
-          } else { if (_Runtime.truthy(_Runtime.compare(_Runtime.field(range, 'start'), beginIndex, '>='))) {
+          } else { if ((cast ((cast _Runtime.field(range, 'start') : Float) >= (cast beginIndex : Float)) : Bool)) {
             _Runtime.setField(range, 'start', (_Runtime.field(range, 'start') + offset));
             _Runtime.setField(range, 'end', (_Runtime.field(range, 'end') + offset));
-          } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(_Runtime.field(range, 'start'), beginIndex, '<'), function():Dynamic return cast _Runtime.compare(_Runtime.field(range, 'end'), beginIndex, '>=')))) {
+          } else { if ((cast ((cast ((cast _Runtime.field(range, 'start') : Float) < (cast beginIndex : Float)) : Bool) && (cast ((cast _Runtime.field(range, 'end') : Float) >= (cast beginIndex : Float)) : Bool)) : Bool)) {
             _Runtime.setField(range, 'end', (_Runtime.field(range, 'end') + offset));
           } } }
-        } else { if (_Runtime.truthy(_Runtime.compare(_Runtime.field(range, 'end'), beginIndex, '<='))) {
+        } else { if ((cast ((cast _Runtime.field(range, 'end') : Float) <= (cast beginIndex : Float)) : Bool)) {
           i++;
           continue;
-        } else { if (_Runtime.truthy(_Runtime.compare(_Runtime.field(range, 'start'), endIndex, '>'))) {
+        } else { if ((cast ((cast _Runtime.field(range, 'start') : Float) > (cast endIndex : Float)) : Bool)) {
           _Runtime.setField(range, 'start', (_Runtime.field(range, 'start') + offset));
           _Runtime.setField(range, 'end', (_Runtime.field(range, 'end') + offset));
-        } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(_Runtime.field(range, 'start'), beginIndex, '<='), function():Dynamic return cast _Runtime.compare(_Runtime.field(range, 'end'), endIndex, '>')))) {
+        } else { if ((cast ((cast ((cast _Runtime.field(range, 'start') : Float) <= (cast beginIndex : Float)) : Bool) && (cast ((cast _Runtime.field(range, 'end') : Float) > (cast endIndex : Float)) : Bool)) : Bool)) {
           _Runtime.setField(range, 'end', (_Runtime.field(range, 'end') + offset));
-        } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(_Runtime.field(range, 'start'), beginIndex, '>='), function():Dynamic return cast _Runtime.compare(_Runtime.field(range, 'end'), endIndex, '<=')))) {
+        } else { if ((cast ((cast ((cast _Runtime.field(range, 'start') : Float) >= (cast beginIndex : Float)) : Bool) && (cast ((cast _Runtime.field(range, 'end') : Float) <= (cast endIndex : Float)) : Bool)) : Bool)) {
           _Runtime.splice(ranges, Std.int(i--), Std.int(1.0), []);
-        } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(_Runtime.field(range, 'end'), endIndex, '>'), function():Dynamic return cast _Runtime.compare(_Runtime.field(range, 'start'), beginIndex, '>')), function():Dynamic return cast _Runtime.compare(_Runtime.field(range, 'start'), endIndex, '<=')))) {
+        } else { if ((cast ((cast ((cast ((cast _Runtime.field(range, 'end') : Float) > (cast endIndex : Float)) : Bool) && (cast ((cast _Runtime.field(range, 'start') : Float) > (cast beginIndex : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.field(range, 'start') : Float) <= (cast endIndex : Float)) : Bool)) : Bool)) {
           _Runtime.setField(range, 'start', beginIndex);
           _Runtime.setField(range, 'end', (_Runtime.field(range, 'end') + offset));
-        } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(_Runtime.field(range, 'start'), beginIndex, '<'), function():Dynamic return cast _Runtime.compare(_Runtime.field(range, 'end'), beginIndex, '>')), function():Dynamic return cast _Runtime.compare(_Runtime.field(range, 'end'), endIndex, '<=')))) {
+        } else { if ((cast ((cast ((cast ((cast _Runtime.field(range, 'start') : Float) < (cast beginIndex : Float)) : Bool) && (cast ((cast _Runtime.field(range, 'end') : Float) > (cast beginIndex : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.field(range, 'end') : Float) <= (cast endIndex : Float)) : Bool)) : Bool)) {
           _Runtime.setField(range, 'end', beginIndex);
         } } } } } } }
         i++;
@@ -613,12 +613,12 @@ class TextInputEditing {
     }
     {
       var i:Dynamic = (_Runtime.field(ranges, 'length') - 1.0);
-      while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>='))) {
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.getIndex(ranges, i), 'start'), _Runtime.field(_Runtime.getIndex(ranges, i), 'end'), '>='))) { _Runtime.splice(ranges, Std.int(i), Std.int(1.0), []); }
+      while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
+        if ((cast ((cast _Runtime.field(_Runtime.getIndex(ranges, i), 'start') : Float) >= (cast _Runtime.field(_Runtime.getIndex(ranges, i), 'end') : Float)) : Bool)) { _Runtime.splice(ranges, Std.int(i), Std.int(1.0), []); }
         i--;
       }
     }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(ranges, 'length'), 0.0), function():Dynamic return cast _Runtime.compare(insertLength, 0.0, '>')))) {
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(ranges, 'length'), 0.0) : Bool) && (cast ((cast insertLength : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       _Runtime.callProperty(ranges, 'push', cast ([{ end: (beginIndex + insertLength), format: _Runtime.mergeObjects([defaultFormat]), start: beginIndex }] : Array<Dynamic>));
     }
   }
@@ -632,7 +632,7 @@ class TextInputEditing {
   }
 
   public static function clampIndex__textInputEditing(value:Float, length:Float):Float {
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>))))) { return cast 0.0; }
+    if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) : Bool)) { return cast 0.0; }
     return cast HxMath.max(0.0, HxMath.min(length, _Runtime.trunc(value)));
     return cast null;
   }
@@ -653,41 +653,41 @@ class TextInputEditing {
   public static function getInputState__textInputEditing(source:RichText):TextInputState {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     state = _Runtime.callValue(getTextInputState, cast ([source] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(state, null))) { throw _Runtime.error('text input is not enabled on this RichText; call enableTextInput first'); }
+    if ((cast _Runtime.strictEquals(state, null) : Bool)) { throw _Runtime.error('text input is not enabled on this RichText; call enableTextInput first'); }
     return cast state;
     return cast null;
   }
 
   public static function getKeyboardCommand__textInputEditing(data:KeyboardEventData):KeyboardCommand__textInputEditing {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.field(data, 'ctrlKey'), function():Dynamic return cast _Runtime.field(data, 'metaKey')))) {
+    if ((cast ((cast _Runtime.field(data, 'ctrlKey') : Bool) || (cast _Runtime.field(data, 'metaKey') : Bool)) : Bool)) {
       var key:Dynamic = _Runtime.callProperty(_Runtime.field(data, 'key'), 'toLowerCase', cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(key, 'a'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.A)))) { return cast 'selectAll'; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(key, 'c'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.C)))) { return cast 'copy'; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(key, 'v'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.V)))) { return cast 'paste'; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(key, 'x'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.X)))) { return cast 'cut'; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.LEFT), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowLeft')))) { return cast 'wordLeft'; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.RIGHT), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowRight')))) { return cast 'wordRight'; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.BACKSPACE), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Backspace')))) { return cast 'deleteWordBackward'; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.DELETE), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Delete')))) { return cast 'deleteWordForward'; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.HOME), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Home')))) { return cast 'documentStart'; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.END), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'End')))) { return cast 'documentEnd'; }
+      if ((cast ((cast _Runtime.strictEquals(key, 'a') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.A) : Bool)) : Bool)) { return cast 'selectAll'; }
+      if ((cast ((cast _Runtime.strictEquals(key, 'c') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.C) : Bool)) : Bool)) { return cast 'copy'; }
+      if ((cast ((cast _Runtime.strictEquals(key, 'v') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.V) : Bool)) : Bool)) { return cast 'paste'; }
+      if ((cast ((cast _Runtime.strictEquals(key, 'x') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.X) : Bool)) : Bool)) { return cast 'cut'; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.LEFT) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowLeft') : Bool)) : Bool)) { return cast 'wordLeft'; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.RIGHT) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowRight') : Bool)) : Bool)) { return cast 'wordRight'; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.BACKSPACE) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Backspace') : Bool)) : Bool)) { return cast 'deleteWordBackward'; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.DELETE) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Delete') : Bool)) : Bool)) { return cast 'deleteWordForward'; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.HOME) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Home') : Bool)) : Bool)) { return cast 'documentStart'; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.END) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'End') : Bool)) : Bool)) { return cast 'documentEnd'; }
       return cast 'none';
     }
-    if (_Runtime.truthy(_Runtime.field(data, 'altKey'))) {
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.LEFT), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowLeft')))) { return cast 'wordLeft'; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.RIGHT), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowRight')))) { return cast 'wordRight'; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.BACKSPACE), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Backspace')))) { return cast 'deleteWordBackward'; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.DELETE), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Delete')))) { return cast 'deleteWordForward'; }
+    if ((cast _Runtime.field(data, 'altKey') : Bool)) {
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.LEFT) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowLeft') : Bool)) : Bool)) { return cast 'wordLeft'; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.RIGHT) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowRight') : Bool)) : Bool)) { return cast 'wordRight'; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.BACKSPACE) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Backspace') : Bool)) : Bool)) { return cast 'deleteWordBackward'; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.DELETE) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Delete') : Bool)) : Bool)) { return cast 'deleteWordForward'; }
     }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.BACKSPACE), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Backspace')))) { return cast 'backspace'; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.DELETE), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Delete')))) { return cast 'delete'; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.DOWN), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowDown')))) { return cast 'down'; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.END), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'End')))) { return cast 'end'; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.HOME), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Home')))) { return cast 'home'; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.LEFT), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowLeft')))) { return cast 'left'; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.RETURN), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Enter')))) { return cast 'return'; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.RIGHT), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowRight')))) { return cast 'right'; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.UP), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowUp')))) { return cast 'up'; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.BACKSPACE) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Backspace') : Bool)) : Bool)) { return cast 'backspace'; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.DELETE) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Delete') : Bool)) : Bool)) { return cast 'delete'; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.DOWN) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowDown') : Bool)) : Bool)) { return cast 'down'; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.END) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'End') : Bool)) : Bool)) { return cast 'end'; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.HOME) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Home') : Bool)) : Bool)) { return cast 'home'; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.LEFT) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowLeft') : Bool)) : Bool)) { return cast 'left'; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.RETURN) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Enter') : Bool)) : Bool)) { return cast 'return'; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.RIGHT) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowRight') : Bool)) : Bool)) { return cast 'right'; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.UP) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowUp') : Bool)) : Bool)) { return cast 'up'; }
     return cast 'none';
     return cast null;
   }
@@ -696,21 +696,21 @@ class TextInputEditing {
     var end:Dynamic = cast _Runtime.UNDEFINED;
     end = -1.0;
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), lineIndex), function():Dynamic return cast _Runtime.compare(_Runtime.field(group, 'endIndex'), end, '>')))) { (end = cast (_Runtime.field(group, 'endIndex') : Dynamic)); }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), lineIndex) : Bool) && (cast ((cast _Runtime.field(group, 'endIndex') : Float) > (cast end : Float)) : Bool)) : Bool)) { (end = cast (_Runtime.field(group, 'endIndex') : Dynamic)); }
     }
-    return cast _Runtime.select(_Runtime.compare(end, 0.0, '<'), function():Dynamic return cast textLength, function():Dynamic return cast end);
+    return cast ((cast ((cast end : Float) < (cast 0.0 : Float)) : Bool) ? (cast textLength : Dynamic) : (cast end : Dynamic));
     return cast null;
   }
 
   public static function getLineOffsetY__textInputEditing(layout:TextLayoutResult, lineIndex:Float):Float {
     var y:Dynamic = cast _Runtime.UNDEFINED;
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), lineIndex))) { return cast _Runtime.field(group, 'offsetY'); }
+      if ((cast _Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), lineIndex) : Bool)) { return cast _Runtime.field(group, 'offsetY'); }
     }
     y = TEXT_BOUNDS_GUTTER;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, lineIndex, '<'))) {
+      while ((cast ((cast i : Float) < (cast lineIndex : Float)) : Bool)) {
         (y = cast ((y + _Runtime.coalesce(_Runtime.getIndex(_Runtime.field(layout, 'lineHeights'), i), function():Dynamic return cast 0.0)) : Dynamic));
         i++;
       }
@@ -723,15 +723,15 @@ class TextInputEditing {
     var start:Dynamic = cast _Runtime.UNDEFINED;
     start = -1.0;
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), lineIndex), function():Dynamic return cast _Runtime.orValue(_Runtime.compare(start, 0.0, '<'), function():Dynamic return cast _Runtime.compare(_Runtime.field(group, 'startIndex'), start, '<'))))) { (start = cast (_Runtime.field(group, 'startIndex') : Dynamic)); }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), lineIndex) : Bool) && (cast _Runtime.orValue(((cast start : Float) < (cast 0.0 : Float)), function():Dynamic return cast ((cast _Runtime.field(group, 'startIndex') : Float) < (cast start : Float))) : Bool)) : Bool)) { (start = cast (_Runtime.field(group, 'startIndex') : Dynamic)); }
     }
-    return cast _Runtime.select(_Runtime.compare(start, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast start);
+    return cast ((cast ((cast start : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast start : Dynamic));
     return cast null;
   }
 
   public static function getTextLayoutGroupAtIndex__textInputEditing(layout:TextLayoutResult, index:Float):Null<TextLayoutGroup> {
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(index, _Runtime.field(group, 'startIndex'), '>='), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(group, 'endIndex'), '<=')))) { return cast group; }
+      if ((cast ((cast ((cast index : Float) >= (cast _Runtime.field(group, 'startIndex') : Float)) : Bool) && (cast ((cast index : Float) <= (cast _Runtime.field(group, 'endIndex') : Float)) : Bool)) : Bool)) { return cast group; }
     }
     return cast _Runtime.coalesce(_Runtime.getIndex(_Runtime.field(layout, 'groups'), (_Runtime.field(_Runtime.field(layout, 'groups'), 'length') - 1.0)), function():Dynamic return cast null);
     return cast null;
@@ -744,7 +744,7 @@ class TextInputEditing {
     limit = HxMath.max(0.0, (HxMath.min(index, _Runtime.field(group, 'endIndex')) - _Runtime.field(group, 'startIndex')));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, limit, '<'))) {
+      while ((cast ((cast i : Float) < (cast limit : Float)) : Bool)) {
         (x = cast ((x + _Runtime.coalesce(_Runtime.getIndex(_Runtime.field(group, 'positions'), i), function():Dynamic return cast 0.0)) : Dynamic));
         i++;
       }
@@ -758,9 +758,9 @@ class TextInputEditing {
     currentX = _Runtime.field(group, 'offsetX');
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(group, 'positions'), 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(group, 'positions'), 'length') : Float)) : Bool)) {
         var advance:Dynamic = _Runtime.coalesce(_Runtime.getIndex(_Runtime.field(group, 'positions'), i), function():Dynamic return cast 0.0);
-        if (_Runtime.truthy(_Runtime.compare(x, (currentX + (advance / 2.0)), '<'))) { return cast (_Runtime.field(group, 'startIndex') + i); }
+        if ((cast ((cast x : Float) < (cast (currentX + (advance / 2.0)) : Float)) : Bool)) { return cast (_Runtime.field(group, 'startIndex') + i); }
         (currentX = cast ((currentX + advance) : Dynamic));
         i++;
       }
@@ -771,11 +771,11 @@ class TextInputEditing {
 
   public static function recordTextInputEdit__textInputEditing(state:TextInputState, textBefore:String, textAfter:String, caretIndexBefore:Float, selectionIndexBefore:Float, mergeKind:Null<String>):Void {
     var previous:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(state, 'historyIndex'), (_Runtime.field(_Runtime.field(state, 'history'), 'length') - 1.0), '<'))) {
+    if ((cast ((cast _Runtime.field(state, 'historyIndex') : Float) < (cast (_Runtime.field(_Runtime.field(state, 'history'), 'length') - 1.0) : Float)) : Bool)) {
       _Runtime.setLength(_Runtime.field(state, 'history'), (_Runtime.field(state, 'historyIndex') + 1.0));
     }
-    previous = _Runtime.select(_Runtime.compare(_Runtime.field(state, 'historyIndex'), 0.0, '>='), function():Dynamic return cast _Runtime.getIndex(_Runtime.field(state, 'history'), _Runtime.field(state, 'historyIndex')), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(mergeKind, null)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(previous, 'mergeKind'), mergeKind)))) {
+    previous = ((cast ((cast _Runtime.field(state, 'historyIndex') : Float) >= (cast 0.0 : Float)) : Bool) ? (cast _Runtime.getIndex(_Runtime.field(state, 'history'), _Runtime.field(state, 'historyIndex')) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+    if ((cast ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(mergeKind, null) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(previous, 'mergeKind'), mergeKind) : Bool)) : Bool)) {
       _Runtime.setField(previous, 'textAfter', textAfter);
       _Runtime.setField(previous, 'caretIndexAfter', _Runtime.field(state, 'caretIndex'));
       _Runtime.setField(previous, 'selectionIndexAfter', _Runtime.field(state, 'selectionIndex'));
@@ -783,7 +783,7 @@ class TextInputEditing {
     }
     _Runtime.callProperty(_Runtime.field(state, 'history'), 'push', cast ([{ caretIndexAfter: _Runtime.field(state, 'caretIndex'), caretIndexBefore: caretIndexBefore, mergeKind: mergeKind, selectionIndexAfter: _Runtime.field(state, 'selectionIndex'), selectionIndexBefore: selectionIndexBefore, textAfter: textAfter, textBefore: textBefore }] : Array<Dynamic>));
     _Runtime.setField(state, 'historyIndex', (_Runtime.field(_Runtime.field(state, 'history'), 'length') - 1.0));
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(state, 'history'), 'length'), _Runtime.field(state, 'historyLimit'), '>'))) {
+    if ((cast ((cast _Runtime.field(_Runtime.field(state, 'history'), 'length') : Float) > (cast _Runtime.field(state, 'historyLimit') : Float)) : Bool)) {
       var overflow:Dynamic = (_Runtime.field(_Runtime.field(state, 'history'), 'length') - _Runtime.field(state, 'historyLimit'));
       _Runtime.splice(_Runtime.field(state, 'history'), Std.int(0.0), Std.int(overflow), []);
       _Runtime.setField(state, 'historyIndex', (_Runtime.field(_Runtime.field(state, 'history'), 'length') - 1.0));
@@ -795,15 +795,15 @@ class TextInputEditing {
     var accepted:Dynamic = cast _Runtime.UNDEFINED;
     var declined:Dynamic = cast _Runtime.UNDEFINED;
     var out:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(restrict, 'length'), 0.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0)))) { return cast text; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(restrict, 'length'), 0.0) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) : Bool)) { return cast text; }
     __destructure0 = _Runtime.callValue(TextInputEditing.splitRestrictRanges__textInputEditing, cast ([restrict] : Array<Dynamic>));
     accepted = _Runtime.field(__destructure0, 'accepted');
     declined = _Runtime.field(__destructure0, 'declined');
     out = '';
     for (char in _Runtime.iterable(text)) {
-      var acceptedMatch:Dynamic = _Runtime.orValue(_Runtime.strictEquals(accepted, ''), function():Dynamic return cast _Runtime.callValue(TextInputEditing.matchesRestrictRanges__textInputEditing, cast ([char, accepted] : Array<Dynamic>)));
-      var declinedMatch:Dynamic = _Runtime.andValue(!_Runtime.strictEquals(declined, ''), function():Dynamic return cast _Runtime.callValue(TextInputEditing.matchesRestrictRanges__textInputEditing, cast ([char, declined] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.andValue(acceptedMatch, function():Dynamic return cast !_Runtime.truthy(declinedMatch)))) { (out = cast ((out + char) : Dynamic)); }
+      var acceptedMatch:Dynamic = ((cast _Runtime.strictEquals(accepted, '') : Bool) || (cast _Runtime.callValue(TextInputEditing.matchesRestrictRanges__textInputEditing, cast ([char, accepted] : Array<Dynamic>)) : Bool));
+      var declinedMatch:Dynamic = ((cast !_Runtime.strictEquals(declined, '') : Bool) && (cast _Runtime.callValue(TextInputEditing.matchesRestrictRanges__textInputEditing, cast ([char, declined] : Array<Dynamic>)) : Bool));
+      if ((cast ((cast acceptedMatch : Bool) && (cast !(cast declinedMatch : Bool) : Bool)) : Bool)) { (out = cast ((out + char) : Dynamic)); }
     }
     return cast out;
     return cast null;
@@ -812,17 +812,17 @@ class TextInputEditing {
   public static function matchesRestrictRanges__textInputEditing(char:String, ranges:String):Bool {
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(ranges, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(ranges, 'length') : Float)) : Bool)) {
         var current:Dynamic = _Runtime.charAt(ranges, i);
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(current, '\\'), function():Dynamic return cast _Runtime.compare((i + 1.0), _Runtime.field(ranges, 'length'), '<')))) {
-          if (_Runtime.truthy(_Runtime.strictEquals(char, _Runtime.charAt(ranges, (i + 1.0))))) { return cast true; }
+        if ((cast ((cast _Runtime.strictEquals(current, '\\') : Bool) && (cast ((cast (i + 1.0) : Float) < (cast _Runtime.field(ranges, 'length') : Float)) : Bool)) : Bool)) {
+          if ((cast _Runtime.strictEquals(char, _Runtime.charAt(ranges, (i + 1.0))) : Bool)) { return cast true; }
           i++;
-        } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare((i + 2.0), _Runtime.field(ranges, 'length'), '<'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.charAt(ranges, (i + 1.0)), '-')))) {
+        } else { if ((cast ((cast ((cast (i + 2.0) : Float) < (cast _Runtime.field(ranges, 'length') : Float)) : Bool) && (cast _Runtime.strictEquals(_Runtime.charAt(ranges, (i + 1.0)), '-') : Bool)) : Bool)) {
           var end:Dynamic = _Runtime.charAt(ranges, (i + 2.0));
           var code:Dynamic = _Runtime.charCodeAt(char, 0.0);
-          if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(code, _Runtime.charCodeAt(current, 0.0), '>='), function():Dynamic return cast _Runtime.compare(code, _Runtime.charCodeAt(end, 0.0), '<=')))) { return cast true; }
+          if ((cast ((cast ((cast code : Float) >= (cast _Runtime.charCodeAt(current, 0.0) : Float)) : Bool) && (cast ((cast code : Float) <= (cast _Runtime.charCodeAt(end, 0.0) : Float)) : Bool)) : Bool)) { return cast true; }
           (i = cast ((i + 2.0) : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(char, current))) {
+        } else { if ((cast _Runtime.strictEquals(char, current) : Bool)) {
           return cast true;
         } } }
         i++;
@@ -841,15 +841,15 @@ class TextInputEditing {
     declining = false;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(restrict, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(restrict, 'length') : Float)) : Bool)) {
         var char:Dynamic = _Runtime.charAt(restrict, i);
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(char, '\\'), function():Dynamic return cast _Runtime.compare((i + 1.0), _Runtime.field(restrict, 'length'), '<')))) {
+        if ((cast ((cast _Runtime.strictEquals(char, '\\') : Bool) && (cast ((cast (i + 1.0) : Float) < (cast _Runtime.field(restrict, 'length') : Float)) : Bool)) : Bool)) {
           var escaped:Dynamic = (char + _Runtime.charAt(restrict, (i + 1.0)));
-          if (_Runtime.truthy(declining)) { (declined = cast ((declined + escaped) : Dynamic)); } else { (accepted = cast ((accepted + escaped) : Dynamic)); }
+          if ((cast declining : Bool)) { (declined = cast ((declined + escaped) : Dynamic)); } else { (accepted = cast ((accepted + escaped) : Dynamic)); }
           i++;
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(char, '^'))) {
-          (declining = cast (!_Runtime.truthy(declining) : Dynamic));
-        } else { if (_Runtime.truthy(declining)) {
+        } else { if ((cast _Runtime.strictEquals(char, '^') : Bool)) {
+          (declining = cast (!(cast declining : Bool) : Dynamic));
+        } else { if ((cast declining : Bool)) {
           (declined = cast ((declined + char) : Dynamic));
         } else {
           (accepted = cast ((accepted + char) : Dynamic));
@@ -864,8 +864,8 @@ class TextInputEditing {
   public static function findWordStartBefore__textInputEditing(text:String, index:Float):Float {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     i = index;
-    while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(i, 0.0, '>'), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(TextInputEditing.isWordChar__textInputEditing, cast ([_Runtime.charAt(text, (i - 1.0))] : Array<Dynamic>)))))) { i--; }
-    while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(i, 0.0, '>'), function():Dynamic return cast _Runtime.callValue(TextInputEditing.isWordChar__textInputEditing, cast ([_Runtime.charAt(text, (i - 1.0))] : Array<Dynamic>))))) { i--; }
+    while ((cast ((cast ((cast i : Float) > (cast 0.0 : Float)) : Bool) && (cast !(cast _Runtime.callValue(TextInputEditing.isWordChar__textInputEditing, cast ([_Runtime.charAt(text, (i - 1.0))] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { i--; }
+    while ((cast ((cast ((cast i : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.callValue(TextInputEditing.isWordChar__textInputEditing, cast ([_Runtime.charAt(text, (i - 1.0))] : Array<Dynamic>)) : Bool)) : Bool)) { i--; }
     return cast i;
     return cast null;
   }
@@ -873,8 +873,8 @@ class TextInputEditing {
   public static function findWordEndAfter__textInputEditing(text:String, index:Float):Float {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     i = index;
-    while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(i, _Runtime.field(text, 'length'), '<'), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(TextInputEditing.isWordChar__textInputEditing, cast ([_Runtime.charAt(text, i)] : Array<Dynamic>)))))) { i++; }
-    while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(i, _Runtime.field(text, 'length'), '<'), function():Dynamic return cast _Runtime.callValue(TextInputEditing.isWordChar__textInputEditing, cast ([_Runtime.charAt(text, i)] : Array<Dynamic>))))) { i++; }
+    while ((cast ((cast ((cast i : Float) < (cast _Runtime.field(text, 'length') : Float)) : Bool) && (cast !(cast _Runtime.callValue(TextInputEditing.isWordChar__textInputEditing, cast ([_Runtime.charAt(text, i)] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { i++; }
+    while ((cast ((cast ((cast i : Float) < (cast _Runtime.field(text, 'length') : Float)) : Bool) && (cast _Runtime.callValue(TextInputEditing.isWordChar__textInputEditing, cast ([_Runtime.charAt(text, i)] : Array<Dynamic>)) : Bool)) : Bool)) { i++; }
     return cast i;
     return cast null;
   }

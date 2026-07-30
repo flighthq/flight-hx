@@ -15,7 +15,7 @@ class CanvasColorLutPass {
     _Runtime.callValue(drawCanvasImageDataPass, cast ([dest, source, function(data:Dynamic, pixelCount:Dynamic) {
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, pixelCount, '<'))) {
+        while ((cast ((cast i : Float) < (cast pixelCount : Float)) : Bool)) {
           var p:Dynamic = (i * 4.0);
           _Runtime.callValue(sampleColorLut, cast ([lut, rgb, (_Runtime.getIndex(data, p) / 255.0), (_Runtime.getIndex(data, (p + 1.0)) / 255.0), (_Runtime.getIndex(data, (p + 2.0)) / 255.0)] : Array<Dynamic>));
           _Runtime.setIndex(data, p, (_Runtime.getIndex(rgb, 0.0) * 255.0));

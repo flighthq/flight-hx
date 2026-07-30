@@ -54,7 +54,7 @@ class VideoTexture {
   public static function getVideoTextureHeight(videoTexture:VideoTextureLike):Float {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = _Runtime.field(_Runtime.field(videoTexture, 'source'), 'element');
-    return cast _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(element, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(element, 'videoHeight'), 0.0, '>')), function():Dynamic return cast _Runtime.field(element, 'videoHeight'), function():Dynamic return cast -1.0);
+    return cast ((cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast _Runtime.field(element, 'videoHeight') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.field(element, 'videoHeight') : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
 
@@ -94,14 +94,14 @@ class VideoTexture {
   public static function getVideoTextureWidth(videoTexture:VideoTextureLike):Float {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = _Runtime.field(_Runtime.field(videoTexture, 'source'), 'element');
-    return cast _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(element, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(element, 'videoWidth'), 0.0, '>')), function():Dynamic return cast _Runtime.field(element, 'videoWidth'), function():Dynamic return cast -1.0);
+    return cast ((cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast _Runtime.field(element, 'videoWidth') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.field(element, 'videoWidth') : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
 
   public static function isVideoTextureFrameReady(videoTexture:VideoTextureLike):Bool {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = _Runtime.field(_Runtime.field(videoTexture, 'source'), 'element');
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(element, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(element, 'readyState'), VideoTexture.HAVE_CURRENT_DATA__videoTexture, '>=')), function():Dynamic return cast _Runtime.compare(_Runtime.field(element, 'videoWidth'), 0.0, '>')), function():Dynamic return cast _Runtime.compare(_Runtime.field(element, 'videoHeight'), 0.0, '>'));
+    return cast _Runtime.andValue(((cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast _Runtime.field(element, 'readyState') : Float) >= (cast VideoTexture.HAVE_CURRENT_DATA__videoTexture : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.field(element, 'videoWidth') : Float) > (cast 0.0 : Float)) : Bool)), function():Dynamic return cast ((cast _Runtime.field(element, 'videoHeight') : Float) > (cast 0.0 : Float)));
     return cast null;
   }
 

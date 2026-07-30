@@ -69,7 +69,7 @@ class Stage {
 
   public static function setStageSize(source:flighthq.types.Stage, width:Float, height:Float):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(source, 'stageWidth'), width), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(source, 'stageHeight'), height)))) { return; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(source, 'stageWidth'), width) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(source, 'stageHeight'), height) : Bool)) : Bool)) { return; }
     _Runtime.setField(source, 'stageWidth', width);
     _Runtime.setField(source, 'stageHeight', height);
     runtime = (cast _Runtime.getIndex(source, EntityRuntimeKey) : Null<StageRuntime>);
@@ -80,7 +80,7 @@ class Stage {
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     existing = (cast _Runtime.getIndex(source, EntityRuntimeKey) : Null<StageRuntime>);
-    if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast existing; }
+    if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
     runtime = _Runtime.callValue(createStageRuntime, cast ([] : Array<Dynamic>));
     _Runtime.setIndex(source, EntityRuntimeKey, runtime);
     return cast runtime;

@@ -24,7 +24,7 @@ class WgpuToonPrelude {
     var binding:Null<WgpuMaterialBinding> = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
     binding = ((cast _Runtime.field(scene, 'materialBindGroups') : flighthq._internal._WeakMap).get(materialKey));
-    if (_Runtime.truthy(_Runtime.strictEquals(binding, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(binding, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var stateRuntime:Dynamic = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
       var buffer:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: WgpuToonPrelude.TOON_UNIFORM_BYTES__wgpuToonPrelude, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
       var placeholder:Dynamic = _Runtime.callValue(ensureWgpuPlaceholderTextureView, cast ([state] : Array<Dynamic>));
@@ -47,7 +47,7 @@ class WgpuToonPrelude {
   }
 
   public static function buildWgpuToonDefineKey(key:WgpuToonDefineKey):String {
-    return cast '' + Std.string(_Runtime.select(_Runtime.field(key, 'alphaMaskEnabled'), function():Dynamic return cast 'm', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'doubleSided'), function():Dynamic return cast 'd', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasBaseColorMap'), function():Dynamic return cast 'b', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasRamp'), function():Dynamic return cast 'r', function():Dynamic return cast '-')) + '';
+    return cast '' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'doubleSided') : Bool) ? (cast 'd' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasBaseColorMap') : Bool) ? (cast 'b' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasRamp') : Bool) ? (cast 'r' : Dynamic) : (cast '-' : Dynamic))) + '';
     return cast null;
   }
 
@@ -68,7 +68,7 @@ class WgpuToonPrelude {
   }
 
   public static function getWgpuToonModuleSourceForKey(key:WgpuToonDefineKey):String {
-    return cast ((((('const ALPHA_MASK : bool = ' + Std.string(_Runtime.select(_Runtime.field(key, 'alphaMaskEnabled'), function():Dynamic return cast 'true', function():Dynamic return cast 'false')) + ';\n' + 'const DOUBLE_SIDED : bool = ' + Std.string(_Runtime.select(_Runtime.field(key, 'doubleSided'), function():Dynamic return cast 'true', function():Dynamic return cast 'false')) + ';\n') + 'const HAS_BASE_COLOR_MAP : bool = ' + Std.string(_Runtime.select(_Runtime.field(key, 'hasBaseColorMap'), function():Dynamic return cast 'true', function():Dynamic return cast 'false')) + ';\n') + 'const HAS_RAMP : bool = ' + Std.string(_Runtime.select(_Runtime.field(key, 'hasRamp'), function():Dynamic return cast 'true', function():Dynamic return cast 'false')) + ';\n') + WGPU_MESH_PRELUDE_WGSL) + WgpuToonPrelude.TOON_WGSL_BODY__wgpuToonPrelude);
+    return cast ((((('const ALPHA_MASK : bool = ' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + ';\n' + 'const DOUBLE_SIDED : bool = ' + Std.string(((cast _Runtime.field(key, 'doubleSided') : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + ';\n') + 'const HAS_BASE_COLOR_MAP : bool = ' + Std.string(((cast _Runtime.field(key, 'hasBaseColorMap') : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + ';\n') + 'const HAS_RAMP : bool = ' + Std.string(((cast _Runtime.field(key, 'hasRamp') : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + ';\n') + WGPU_MESH_PRELUDE_WGSL) + WgpuToonPrelude.TOON_WGSL_BODY__wgpuToonPrelude);
     return cast null;
   }
 

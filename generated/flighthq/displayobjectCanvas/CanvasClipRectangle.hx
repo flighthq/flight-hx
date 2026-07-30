@@ -20,13 +20,13 @@ class CanvasClipRectangle {
     flighthq._internal.backend.Canvas2dBackend.call(_Runtime.field(state, 'context'), 'beginPath', cast ([] : Array<Dynamic>));
     {
       var c:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(c, _Runtime.field(contours, 'length'), '<'))) {
+      while ((cast ((cast c : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
         var contour:Dynamic = _Runtime.getIndex(contours, c);
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.field(contour, 'length'), 2.0, '<'))) { c++; continue; }
+        if ((cast ((cast _Runtime.field(contour, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { c++; continue; }
         flighthq._internal.backend.Canvas2dBackend.call(_Runtime.field(state, 'context'), 'moveTo', cast ([_Runtime.getIndex(contour, 0.0), _Runtime.getIndex(contour, 1.0)] : Array<Dynamic>));
         {
           var i:Dynamic = 2.0;
-          while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(contour, 'length'), '<'))) {
+          while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
             flighthq._internal.backend.Canvas2dBackend.call(_Runtime.field(state, 'context'), 'lineTo', cast ([_Runtime.getIndex(contour, i), _Runtime.getIndex(contour, (i + 1.0))] : Array<Dynamic>));
             (i = cast ((i + 2.0) : Dynamic));
           }
@@ -35,7 +35,7 @@ class CanvasClipRectangle {
         c++;
       }
     }
-    flighthq._internal.backend.Canvas2dBackend.call(_Runtime.field(state, 'context'), 'clip', cast ([_Runtime.select(_Runtime.strictEquals(winding, 'evenOdd'), function():Dynamic return cast 'evenodd', function():Dynamic return cast 'nonzero')] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(_Runtime.field(state, 'context'), 'clip', cast ([((cast _Runtime.strictEquals(winding, 'evenOdd') : Bool) ? (cast 'evenodd' : Dynamic) : (cast 'nonzero' : Dynamic))] : Array<Dynamic>));
   }
 
   public static function pushCanvasClipRectangle(state:Dynamic, rect:RectangleLike, transform:Matrix):Void {

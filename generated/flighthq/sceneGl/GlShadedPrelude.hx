@@ -30,7 +30,7 @@ typedef GlShadedProgram = Dynamic;
 class GlShadedPrelude {
   public static function buildGlShadedCacheKey(key:GlShadedDefineKey, modifierDefineKey:String):String {
     var base:Dynamic = cast _Runtime.UNDEFINED;
-    base = '' + Std.string(_Runtime.select(_Runtime.field(key, 'alphaMaskEnabled'), function():Dynamic return cast 'm', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasDiffuseMap'), function():Dynamic return cast 'd', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasSpecularMap'), function():Dynamic return cast 's', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasNormalMap'), function():Dynamic return cast 'n', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasUvTransform'), function():Dynamic return cast 'u', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast 'k', function():Dynamic return cast '-')) + '';
+    base = '' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasDiffuseMap') : Bool) ? (cast 'd' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasSpecularMap') : Bool) ? (cast 's' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasNormalMap') : Bool) ? (cast 'n' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasUvTransform') : Bool) ? (cast 'u' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast 'k', function():Dynamic return cast '-')) + '';
     return cast 'shaded:' + Std.string(base) + '|' + Std.string(modifierDefineKey) + '';
     return cast null;
   }
@@ -76,13 +76,13 @@ class GlShadedPrelude {
     effect = '';
     {
       var index:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(index, _Runtime.field(orderedModifiers, 'length'), '<'))) {
+      while ((cast ((cast index : Float) < (cast _Runtime.field(orderedModifiers, 'length') : Float)) : Bool)) {
         var modifier:Dynamic = _Runtime.getIndex(orderedModifiers, index);
         var snippet:Dynamic = (cast _Runtime.callValue(resolveModifier, cast ([registry, _Runtime.field(modifier, 'kind')] : Array<Dynamic>)) : Null<GlModifierSnippet>);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(snippet, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlotValue.Vertex)))) { index++; continue; }
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(snippet, 'declarations'), _Runtime.field(_Runtime, 'UNDEFINED')))) { (declarations = cast ((declarations + '' + Std.string(_Runtime.callProperty(snippet, 'declarations', cast ([modifier, index] : Array<Dynamic>))) + '\n') : Dynamic)); }
+        if ((cast ((cast _Runtime.strictEquals(snippet, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlotValue.Vertex) : Bool)) : Bool)) { index++; continue; }
+        if ((cast !_Runtime.strictEquals(_Runtime.field(snippet, 'declarations'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (declarations = cast ((declarations + '' + Std.string(_Runtime.callProperty(snippet, 'declarations', cast ([modifier, index] : Array<Dynamic>))) + '\n') : Dynamic)); }
         var contribution:Dynamic = '' + Std.string(_Runtime.callProperty(snippet, 'contribution', cast ([modifier, index] : Array<Dynamic>))) + '\n';
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlotValue.Normal))) { (normal = cast ((normal + contribution) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlotValue.Diffuse))) { (diffuse = cast ((diffuse + contribution) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlotValue.Specular))) { (specular = cast ((specular + contribution) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlotValue.Emissive))) { (emissive = cast ((emissive + contribution) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlotValue.Effect))) { (effect = cast ((effect + contribution) : Dynamic)); } } } } }
+        if ((cast _Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlotValue.Normal) : Bool)) { (normal = cast ((normal + contribution) : Dynamic)); } else { if ((cast _Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlotValue.Diffuse) : Bool)) { (diffuse = cast ((diffuse + contribution) : Dynamic)); } else { if ((cast _Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlotValue.Specular) : Bool)) { (specular = cast ((specular + contribution) : Dynamic)); } else { if ((cast _Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlotValue.Emissive) : Bool)) { (emissive = cast ((emissive + contribution) : Dynamic)); } else { if ((cast _Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlotValue.Effect) : Bool)) { (effect = cast ((effect + contribution) : Dynamic)); } } } } }
         index++;
       }
     }
@@ -97,11 +97,11 @@ class GlShadedPrelude {
     vertex = '';
     {
       var index:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(index, _Runtime.field(orderedModifiers, 'length'), '<'))) {
+      while ((cast ((cast index : Float) < (cast _Runtime.field(orderedModifiers, 'length') : Float)) : Bool)) {
         var modifier:Dynamic = _Runtime.getIndex(orderedModifiers, index);
         var snippet:Dynamic = (cast _Runtime.callValue(resolveModifier, cast ([registry, _Runtime.field(modifier, 'kind')] : Array<Dynamic>)) : Null<GlModifierSnippet>);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(snippet, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlotValue.Vertex)))) { index++; continue; }
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(snippet, 'declarations'), _Runtime.field(_Runtime, 'UNDEFINED')))) { (declarations = cast ((declarations + '' + Std.string(_Runtime.callProperty(snippet, 'declarations', cast ([modifier, index] : Array<Dynamic>))) + '\n') : Dynamic)); }
+        if ((cast ((cast _Runtime.strictEquals(snippet, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlotValue.Vertex) : Bool)) : Bool)) { index++; continue; }
+        if ((cast !_Runtime.strictEquals(_Runtime.field(snippet, 'declarations'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (declarations = cast ((declarations + '' + Std.string(_Runtime.callProperty(snippet, 'declarations', cast ([modifier, index] : Array<Dynamic>))) + '\n') : Dynamic)); }
         (vertex = cast ((vertex + '' + Std.string(_Runtime.callProperty(snippet, 'contribution', cast ([modifier, index] : Array<Dynamic>))) + '\n') : Dynamic));
         index++;
       }
@@ -117,9 +117,9 @@ class GlShadedPrelude {
     result = '';
     for (line in _Runtime.iterable(_Runtime.callProperty(declarations, 'split', cast (['\n'] : Array<Dynamic>)))) {
       var trimmed:Dynamic = StringTools.trim(Std.string(line));
-      var isSharedDeclaration:Dynamic = _Runtime.andValue(StringTools.startsWith(trimmed, 'uniform '), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.regexp('_\\d+\\b', ''), 'test', cast ([trimmed] : Array<Dynamic>))));
-      if (_Runtime.truthy(isSharedDeclaration)) {
-        if (_Runtime.truthy(((cast seen : flighthq._internal._Set).has(trimmed)))) { continue; }
+      var isSharedDeclaration:Dynamic = ((cast StringTools.startsWith(trimmed, 'uniform ') : Bool) && (cast !(cast _Runtime.callProperty(_Runtime.regexp('_\\d+\\b', ''), 'test', cast ([trimmed] : Array<Dynamic>)) : Bool) : Bool));
+      if ((cast isSharedDeclaration : Bool)) {
+        if ((cast ((cast seen : flighthq._internal._Set).has(trimmed)) : Bool)) { continue; }
         ((cast seen : flighthq._internal._Set).add(trimmed));
       }
       (result = cast ((result + '' + Std.string(line) + '\n') : Dynamic));
@@ -131,11 +131,11 @@ class GlShadedPrelude {
   public static function buildGlShadedDefineSource__glShadedPrelude(key:GlShadedDefineKey):String {
     var defines:Dynamic = cast _Runtime.UNDEFINED;
     defines = '#version 300 es\n#define MAX_FORWARD_LIGHTS ' + Std.string(MAX_FORWARD_LIGHTS) + '\n';
-    if (_Runtime.truthy(_Runtime.field(key, 'alphaMaskEnabled'))) { (defines = cast ((defines + '#define ALPHA_MASK\n') : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.field(key, 'hasDiffuseMap'))) { (defines = cast ((defines + '#define HAS_DIFFUSE_MAP\n') : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.field(key, 'hasSpecularMap'))) { (defines = cast ((defines + '#define HAS_SPECULAR_MAP\n') : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.field(key, 'hasNormalMap'))) { (defines = cast ((defines + '#define HAS_NORMAL_MAP\n') : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.field(key, 'hasUvTransform'))) { (defines = cast ((defines + '#define HAS_UV_TRANSFORM\n') : Dynamic)); }
+    if ((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool)) { (defines = cast ((defines + '#define ALPHA_MASK\n') : Dynamic)); }
+    if ((cast _Runtime.field(key, 'hasDiffuseMap') : Bool)) { (defines = cast ((defines + '#define HAS_DIFFUSE_MAP\n') : Dynamic)); }
+    if ((cast _Runtime.field(key, 'hasSpecularMap') : Bool)) { (defines = cast ((defines + '#define HAS_SPECULAR_MAP\n') : Dynamic)); }
+    if ((cast _Runtime.field(key, 'hasNormalMap') : Bool)) { (defines = cast ((defines + '#define HAS_NORMAL_MAP\n') : Dynamic)); }
+    if ((cast _Runtime.field(key, 'hasUvTransform') : Bool)) { (defines = cast ((defines + '#define HAS_UV_TRANSFORM\n') : Dynamic)); }
     if (_Runtime.truthy(_Runtime.field(key, 'hasSkin'))) { (defines = cast ((defines + '#define HAS_SKIN\n') : Dynamic)); }
     return cast defines;
     return cast null;

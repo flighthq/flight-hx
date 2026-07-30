@@ -23,10 +23,10 @@ class CapacitorStatusBar {
     return cast { getInfo: function(out:StatusBarInfo) {
       var info:Dynamic = cast _Runtime.UNDEFINED;
       info = cachedInfo;
-      (out.color = cast (_Runtime.select(!_Runtime.strictEquals(_Runtime.optionalField(info, 'color'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callValue(CapacitorStatusBar.hexToRgba__capacitorStatusBar, cast ([_Runtime.field(info, 'color')] : Array<Dynamic>)), function():Dynamic return cast 0.0) : Dynamic));
+      (out.color = cast (((cast !_Runtime.strictEquals(_Runtime.optionalField(info, 'color'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(CapacitorStatusBar.hexToRgba__capacitorStatusBar, cast ([_Runtime.field(info, 'color')] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
       (out.height = cast (-1.0 : Dynamic));
       (out.overlaysContent = cast (_Runtime.coalesce(_Runtime.optionalField(info, 'overlays'), function():Dynamic return cast false) : Dynamic));
-      (out.style = cast (_Runtime.select(!_Runtime.strictEquals(info, null), function():Dynamic return cast _Runtime.callValue(CapacitorStatusBar.toStatusBarStyle__capacitorStatusBar, cast ([_Runtime.field(info, 'style')] : Array<Dynamic>)), function():Dynamic return cast 'default') : Dynamic));
+      (out.style = cast (((cast !_Runtime.strictEquals(info, null) : Bool) ? (cast _Runtime.callValue(CapacitorStatusBar.toStatusBarStyle__capacitorStatusBar, cast ([_Runtime.field(info, 'style')] : Array<Dynamic>)) : Dynamic) : (cast 'default' : Dynamic)) : Dynamic));
       (out.visible = cast (_Runtime.coalesce(_Runtime.optionalField(info, 'visible'), function():Dynamic return cast true) : Dynamic));
       return cast out;
     }, setBackgroundColor: function(color:Float) {
@@ -42,7 +42,7 @@ class CapacitorStatusBar {
       
       });
     }, setVisible: function(visible:Bool) {
-      if (_Runtime.truthy(visible)) { flighthq._internal._Async.recover(_Runtime.callProperty(statusBar, 'show', cast ([] : Array<Dynamic>)), function() {
+      if ((cast visible : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(statusBar, 'show', cast ([] : Array<Dynamic>)), function() {
       
       }); } else { flighthq._internal._Async.recover(_Runtime.callProperty(statusBar, 'hide', cast ([] : Array<Dynamic>)), function() {
       
@@ -56,15 +56,15 @@ class CapacitorStatusBar {
   }
 
   public static function toCapacitorStyle__capacitorStatusBar(style:StatusBarStyle):String {
-    if (_Runtime.truthy(_Runtime.strictEquals(style, 'light'))) { return cast 'Light'; }
-    if (_Runtime.truthy(_Runtime.strictEquals(style, 'dark'))) { return cast 'Dark'; }
+    if ((cast _Runtime.strictEquals(style, 'light') : Bool)) { return cast 'Light'; }
+    if ((cast _Runtime.strictEquals(style, 'dark') : Bool)) { return cast 'Dark'; }
     return cast 'Default';
     return cast null;
   }
 
   public static function toStatusBarStyle__capacitorStatusBar(style:String):StatusBarStyle {
-    if (_Runtime.truthy(_Runtime.strictEquals(style, 'Light'))) { return cast 'light'; }
-    if (_Runtime.truthy(_Runtime.strictEquals(style, 'Dark'))) { return cast 'dark'; }
+    if ((cast _Runtime.strictEquals(style, 'Light') : Bool)) { return cast 'light'; }
+    if ((cast _Runtime.strictEquals(style, 'Dark') : Bool)) { return cast 'dark'; }
     return cast 'default';
     return cast null;
   }
@@ -79,8 +79,8 @@ class CapacitorStatusBar {
   public static function hexToRgba__capacitorStatusBar(hex:String):Float {
     var digits:Dynamic = cast _Runtime.UNDEFINED;
     digits = _Runtime.replace(hex, _Runtime.regexp('^#', ''), '', false);
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(digits, 'length'), 8.0))) { return cast _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([digits, 16.0] : Array<Dynamic>))), 0); }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(digits, 'length'), 6.0))) { return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([digits, 16.0] : Array<Dynamic>))) << 8)) | 255)), 0); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(digits, 'length'), 8.0) : Bool)) { return cast _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([digits, 16.0] : Array<Dynamic>))), 0); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(digits, 'length'), 6.0) : Bool)) { return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([digits, 16.0] : Array<Dynamic>))) << 8)) | 255)), 0); }
     return cast 0.0;
     return cast null;
   }

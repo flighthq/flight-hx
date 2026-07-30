@@ -11,11 +11,11 @@ class UpdateFlowStack {
     var index:Dynamic = cast _Runtime.UNDEFINED;
     states = _Runtime.field(stack, 'states');
     index = (_Runtime.field(states, 'length') - 1.0);
-    if (_Runtime.truthy(_Runtime.compare(index, 0.0, '<'))) {
+    if ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool)) {
       return;
     }
     _Runtime.callOptionalProperty(_Runtime.getIndex(states, index), 'onUpdate', cast ([deltaTime] : Array<Dynamic>));
-    while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(index, 0.0, '>'), function():Dynamic return cast _Runtime.field(_Runtime.getIndex(states, index), 'updateBelow')))) {
+    while (_Runtime.truthy(_Runtime.andValue(((cast index : Float) > (cast 0.0 : Float)), function():Dynamic return cast _Runtime.field(_Runtime.getIndex(states, index), 'updateBelow')))) {
       index--;
       _Runtime.callOptionalProperty(_Runtime.getIndex(states, index), 'onUpdate', cast ([deltaTime] : Array<Dynamic>));
     }

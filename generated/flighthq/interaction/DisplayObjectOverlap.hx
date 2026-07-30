@@ -32,12 +32,12 @@ class DisplayObjectOverlap {
     var bCenterY:Dynamic = cast _Runtime.UNDEFINED;
     a = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([source] : Array<Dynamic>));
     b = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([other] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(intersectsRectangle, cast ([a, b] : Array<Dynamic>))))) { return cast false; }
+    if ((cast !(cast _Runtime.callValue(intersectsRectangle, cast ([a, b] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
     aCenterX = (_Runtime.field(a, 'x') + (_Runtime.field(a, 'width') * 0.5));
     aCenterY = (_Runtime.field(a, 'y') + (_Runtime.field(a, 'height') * 0.5));
     bCenterX = (_Runtime.field(b, 'x') + (_Runtime.field(b, 'width') * 0.5));
     bCenterY = (_Runtime.field(b, 'y') + (_Runtime.field(b, 'height') * 0.5));
-    return cast _Runtime.orValue(_Runtime.callValue(containsRectanglePointXY, cast ([a, bCenterX, bCenterY] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(containsRectanglePointXY, cast ([b, aCenterX, aCenterY] : Array<Dynamic>)));
+    return cast ((cast _Runtime.callValue(containsRectanglePointXY, cast ([a, bCenterX, bCenterY] : Array<Dynamic>)) : Bool) || (cast _Runtime.callValue(containsRectanglePointXY, cast ([b, aCenterX, aCenterY] : Array<Dynamic>)) : Bool));
     return cast null;
   }
 }

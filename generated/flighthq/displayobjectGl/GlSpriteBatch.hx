@@ -95,7 +95,7 @@ class GlSpriteBatch {
     var ctHandled:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     count = _Runtime.field(runtime, 'spriteBatchCount');
-    if (_Runtime.truthy(_Runtime.strictEquals(count, 0.0))) { return; }
+    if ((cast _Runtime.strictEquals(count, 0.0) : Bool)) { return; }
     texture = _Runtime.field(runtime, 'spriteBatchTexture');
     blendMode = _Runtime.field(runtime, 'spriteBatchBlendMode');
     material = _Runtime.field(runtime, 'spriteBatchMaterial');
@@ -108,7 +108,7 @@ class GlSpriteBatch {
     _Runtime.setField(runtime, 'spriteBatchMaterialRenderer', null);
     _Runtime.setField(runtime, 'spriteBatchMaterialFloats', 0.0);
     gl = _Runtime.field(state, 'gl');
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchInstanceBuffer'), null))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchInstanceBuffer'), null) : Bool)) {
       _Runtime.setField(runtime, 'spriteBatchInstanceBuffer', flighthq._internal.backend.WebGl2Backend.createBuffer(gl));
       flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(runtime, 'spriteBatchInstanceBuffer'));
       flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(_Runtime.field(runtime, 'spriteBatchInstanceData'), 'byteLength'), flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW);
@@ -119,9 +119,9 @@ class GlSpriteBatch {
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, blendMode] : Array<Dynamic>));
     _Runtime.callValue(bindGlImageResourceTexture, cast ([state, texture] : Array<Dynamic>));
     ctHandled = _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.field(runtime, 'glColorAdjustmentFold'), 'flush', cast ([state, count] : Array<Dynamic>)), function():Dynamic return cast false);
-    if (_Runtime.truthy(!_Runtime.truthy(ctHandled))) {
-      if (_Runtime.truthy(_Runtime.compare(floats, 0.0, '>'))) {
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchMaterialBuffer'), null))) {
+    if ((cast !(cast ctHandled : Bool) : Bool)) {
+      if ((cast ((cast floats : Float) > (cast 0.0 : Float)) : Bool)) {
+        if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchMaterialBuffer'), null) : Bool)) {
           _Runtime.setField(runtime, 'spriteBatchMaterialBuffer', flighthq._internal.backend.WebGl2Backend.createBuffer(gl));
           flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(runtime, 'spriteBatchMaterialBuffer'));
           flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(_Runtime.field(runtime, 'spriteBatchMaterialData'), 'byteLength'), flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW);
@@ -136,7 +136,7 @@ class GlSpriteBatch {
     flighthq._internal.backend.WebGl2Backend.drawElementsInstanced(gl, flighthq._internal.backend.WebGl2Backend.TRIANGLES, 6.0, flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT, 0.0, count);
     {
       var loc:Dynamic = 1.0;
-      while (_Runtime.truthy(_Runtime.compare(loc, GlSpriteBatch.MAX_INSTANCE_ATTRIB_LOCATION__glSpriteBatch, '<='))) {
+      while ((cast ((cast loc : Float) <= (cast GlSpriteBatch.MAX_INSTANCE_ATTRIB_LOCATION__glSpriteBatch : Float)) : Bool)) {
         flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, loc, 0.0);
         loc++;
       }
@@ -148,7 +148,7 @@ class GlSpriteBatch {
     var renderer:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     renderer = _Runtime.field(runtime, 'spriteBatchMaterialRenderer');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(renderer, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(renderer, 'packInstance'), _Runtime.field(_Runtime, 'UNDEFINED'))))) { return; }
+    if ((cast ((cast _Runtime.strictEquals(renderer, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(renderer, 'packInstance'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return; }
     _Runtime.callProperty(renderer, 'packInstance', cast ([state, materialData, _Runtime.field(runtime, 'spriteBatchMaterialData'), (instanceIndex * _Runtime.field(runtime, 'spriteBatchMaterialFloats'))] : Array<Dynamic>));
   }
 
@@ -157,7 +157,7 @@ class GlSpriteBatch {
     var floats:Dynamic = cast _Runtime.UNDEFINED;
     var needed:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(texture, _Runtime.field(runtime, 'spriteBatchTexture')), function():Dynamic return cast !_Runtime.strictEquals(blendMode, _Runtime.field(runtime, 'spriteBatchBlendMode'))), function():Dynamic return cast !_Runtime.strictEquals(material, _Runtime.field(runtime, 'spriteBatchMaterial'))))) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(texture, _Runtime.field(runtime, 'spriteBatchTexture')) : Bool) || (cast !_Runtime.strictEquals(blendMode, _Runtime.field(runtime, 'spriteBatchBlendMode')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(material, _Runtime.field(runtime, 'spriteBatchMaterial')) : Bool)) : Bool)) {
       _Runtime.callValue(flushGlSpriteBatch, cast ([state] : Array<Dynamic>));
     }
     _Runtime.setField(runtime, 'spriteBatchTexture', texture);
@@ -167,21 +167,21 @@ class GlSpriteBatch {
     floats = _Runtime.field(materialRenderer, 'instanceFloatCount');
     _Runtime.setField(runtime, 'spriteBatchMaterialFloats', floats);
     needed = ((_Runtime.field(runtime, 'spriteBatchCount') + maxInstances) * GlSpriteBatch.SPRITE_INSTANCE_FLOATS__glSpriteBatch);
-    if (_Runtime.truthy(_Runtime.compare(needed, _Runtime.field(_Runtime.field(runtime, 'spriteBatchInstanceData'), 'length'), '>'))) {
+    if ((cast ((cast needed : Float) > (cast _Runtime.field(_Runtime.field(runtime, 'spriteBatchInstanceData'), 'length') : Float)) : Bool)) {
       var newSize:Dynamic = HxMath.max(needed, (_Runtime.field(_Runtime.field(runtime, 'spriteBatchInstanceData'), 'length') * 2.0));
       _Runtime.setField(runtime, 'spriteBatchInstanceData', new flighthq._internal._Float32Array(newSize));
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchInstanceBuffer'), null))) {
+      if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchInstanceBuffer'), null) : Bool)) {
         var gl:Dynamic = _Runtime.field(state, 'gl');
         flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(runtime, 'spriteBatchInstanceBuffer'));
         flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, (newSize * 4.0), flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW);
       }
     }
-    if (_Runtime.truthy(_Runtime.compare(floats, 0.0, '>'))) {
+    if ((cast ((cast floats : Float) > (cast 0.0 : Float)) : Bool)) {
       var materialNeeded:Dynamic = ((_Runtime.field(runtime, 'spriteBatchCount') + maxInstances) * floats);
-      if (_Runtime.truthy(_Runtime.compare(materialNeeded, _Runtime.field(_Runtime.field(runtime, 'spriteBatchMaterialData'), 'length'), '>'))) {
+      if ((cast ((cast materialNeeded : Float) > (cast _Runtime.field(_Runtime.field(runtime, 'spriteBatchMaterialData'), 'length') : Float)) : Bool)) {
         var newSize:Dynamic = HxMath.max(materialNeeded, (_Runtime.field(_Runtime.field(runtime, 'spriteBatchMaterialData'), 'length') * 2.0));
         _Runtime.setField(runtime, 'spriteBatchMaterialData', new flighthq._internal._Float32Array(newSize));
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchMaterialBuffer'), null))) {
+        if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchMaterialBuffer'), null) : Bool)) {
           var gl:Dynamic = _Runtime.field(state, 'gl');
           flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(runtime, 'spriteBatchMaterialBuffer'));
           flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, (newSize * 4.0), flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW);
@@ -197,11 +197,11 @@ class GlSpriteBatch {
     var fold:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     fold = _Runtime.field(runtime, 'glColorAdjustmentFold');
-    if (_Runtime.truthy(!_Runtime.looseEquals(fold, null))) {
+    if ((cast !_Runtime.looseEquals(fold, null) : Bool)) {
       _Runtime.callProperty(fold, 'record', cast ([runtime, colorTransform, instanceIndex] : Array<Dynamic>));
       return;
     }
-    if (_Runtime.truthy(!_Runtime.looseEquals(colorTransform, null))) { _Runtime.callOptionalProperty(runtime, 'glColorAdjustmentGuard', cast ([state, colorTransform] : Array<Dynamic>)); }
+    if ((cast !_Runtime.looseEquals(colorTransform, null) : Bool)) { _Runtime.callOptionalProperty(runtime, 'glColorAdjustmentGuard', cast ([state, colorTransform] : Array<Dynamic>)); }
   }
 
   public static function setGlQuadBatchWorldAndTexture(state:GlRenderState, locWorldMatrix:Dynamic, locTexture:Dynamic):Void {
@@ -233,7 +233,7 @@ class GlSpriteBatch {
   public static function useGlQuadBatchProgram(state:GlRenderState, program:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'currentProgram'), program))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'currentProgram'), program) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.useProgram(_Runtime.field(state, 'gl'), program);
       _Runtime.setField(runtime, 'currentProgram', program);
     }

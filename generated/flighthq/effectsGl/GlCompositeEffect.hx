@@ -25,14 +25,14 @@ class GlCompositeEffect {
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'composite.porterduff', GlCompositeEffect.COMPOSITE_FRAGMENT_SRC__glCompositeEffect] : Array<Dynamic>));
     operatorIndex = _Runtime.callValue(getCompositeEffectOperatorIndex, cast ([_Runtime.field(effect, 'operator')] : Array<Dynamic>));
     hasBackdrop = !_Runtime.strictEquals(backdrop, null);
-    inputs = cast ([_Runtime.field(source, 'texture'), _Runtime.select(hasBackdrop, function():Dynamic return cast (cast backdrop : Dynamic), function():Dynamic return cast _Runtime.field(source, 'texture'))] : Array<Dynamic>);
+    inputs = cast ([_Runtime.field(source, 'texture'), ((cast hasBackdrop : Bool) ? (cast (cast backdrop : Dynamic) : Dynamic) : (cast _Runtime.field(source, 'texture') : Dynamic))] : Array<Dynamic>);
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, inputs, dest, function(gl:Dynamic, p:Dynamic) {
       var operatorLoc:Dynamic = cast _Runtime.UNDEFINED;
       var hasBackdropLoc:Dynamic = cast _Runtime.UNDEFINED;
       operatorLoc = _Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_operator'] : Array<Dynamic>));
       hasBackdropLoc = _Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_hasBackdrop'] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(operatorLoc, null))) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, operatorLoc, operatorIndex); }
-      if (_Runtime.truthy(!_Runtime.strictEquals(hasBackdropLoc, null))) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, hasBackdropLoc, _Runtime.select(hasBackdrop, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0)); }
+      if ((cast !_Runtime.strictEquals(operatorLoc, null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, operatorLoc, operatorIndex); }
+      if ((cast !_Runtime.strictEquals(hasBackdropLoc, null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, hasBackdropLoc, ((cast hasBackdrop : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic))); }
     }] : Array<Dynamic>));
   }
 

@@ -41,7 +41,7 @@ class ElectronDialog {
               return flighthq._internal._Async.flatMap(_Runtime.callProperty(dialog, 'showOpenDialog', cast ([_Runtime.field(_Runtime, 'UNDEFINED'), { title: _Runtime.field(options, 'title'), defaultPath: _Runtime.field(options, 'defaultPath'), filters: _Runtime.field(options, 'filters'), properties: properties }] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
                 r = __awaitValue2;
                 kind = _Runtime.select(_Runtime.field(options, 'directory'), function():Dynamic return cast 'Directory', function():Dynamic return cast 'File');
-                return flighthq._internal._Async.flowReturn(_Runtime.select(_Runtime.field(r, 'canceled'), function():Dynamic return cast cast ([] : Array<Dynamic>), function():Dynamic return cast _Runtime.callProperty(_Runtime.field(r, 'filePaths'), 'map', cast ([function(path:Dynamic) return _Runtime.callValue(ElectronDialog.toFileHandle__electronDialog, cast ([path, kind] : Array<Dynamic>))] : Array<Dynamic>))));
+                return flighthq._internal._Async.flowReturn(((cast _Runtime.field(r, 'canceled') : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast _Runtime.callProperty(_Runtime.field(r, 'filePaths'), 'map', cast ([function(path:Dynamic) return _Runtime.callValue(ElectronDialog.toFileHandle__electronDialog, cast ([path, kind] : Array<Dynamic>))] : Array<Dynamic>)) : Dynamic)));
               });
             });
           });
@@ -65,7 +65,7 @@ class ElectronDialog {
           return flighthq._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
             return flighthq._internal._Async.flatMap(_Runtime.callProperty(dialog, 'showOpenDialog', cast ([_Runtime.field(_Runtime, 'UNDEFINED'), { title: _Runtime.field(options, 'title'), properties: properties }] : Array<Dynamic>)), function(__awaitValue4:Dynamic):Dynamic {
               r = __awaitValue4;
-              return flighthq._internal._Async.flowReturn(_Runtime.select(_Runtime.field(r, 'canceled'), function():Dynamic return cast cast ([] : Array<Dynamic>), function():Dynamic return cast _Runtime.callProperty(_Runtime.field(r, 'filePaths'), 'map', cast ([function(path:Dynamic) return _Runtime.callValue(ElectronDialog.toFileHandle__electronDialog, cast ([path, 'Directory'] : Array<Dynamic>))] : Array<Dynamic>))));
+              return flighthq._internal._Async.flowReturn(((cast _Runtime.field(r, 'canceled') : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast _Runtime.callProperty(_Runtime.field(r, 'filePaths'), 'map', cast ([function(path:Dynamic) return _Runtime.callValue(ElectronDialog.toFileHandle__electronDialog, cast ([path, 'Directory'] : Array<Dynamic>))] : Array<Dynamic>)) : Dynamic)));
             });
           });
         })
@@ -75,7 +75,7 @@ class ElectronDialog {
         var r:Dynamic = cast _Runtime.UNDEFINED;
         return flighthq._internal._Async.flatMap(_Runtime.callProperty(dialog, 'showSaveDialog', cast ([_Runtime.field(_Runtime, 'UNDEFINED'), { title: _Runtime.field(options, 'title'), defaultPath: _Runtime.field(options, 'defaultPath'), filters: _Runtime.field(options, 'filters') }] : Array<Dynamic>)), function(__awaitValue5:Dynamic):Dynamic {
           r = __awaitValue5;
-          return flighthq._internal._Async.resolve(_Runtime.select(_Runtime.orValue(_Runtime.field(r, 'canceled'), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(r, 'filePath'))), function():Dynamic return cast null, function():Dynamic return cast _Runtime.callValue(ElectronDialog.toFileHandle__electronDialog, cast ([_Runtime.field(r, 'filePath'), 'File'] : Array<Dynamic>))));
+          return flighthq._internal._Async.resolve(((cast ((cast _Runtime.field(r, 'canceled') : Bool) || (cast !_Runtime.truthy(_Runtime.field(r, 'filePath')) : Bool)) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callValue(ElectronDialog.toFileHandle__electronDialog, cast ([_Runtime.field(r, 'filePath'), 'File'] : Array<Dynamic>)) : Dynamic)));
         });
       });
     }, message: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
@@ -83,7 +83,7 @@ class ElectronDialog {
         var r:Dynamic = cast _Runtime.UNDEFINED;
         return flighthq._internal._Async.flatMap(_Runtime.callProperty(dialog, 'showMessageBox', cast ([_Runtime.field(_Runtime, 'UNDEFINED'), { type: _Runtime.field(options, 'kind'), title: _Runtime.field(options, 'title'), message: _Runtime.field(options, 'message'), detail: _Runtime.field(options, 'detail'), buttons: _Runtime.field(options, 'buttons'), defaultId: _Runtime.field(options, 'defaultId'), cancelId: _Runtime.field(options, 'cancelId'), checkboxLabel: _Runtime.field(options, 'checkboxLabel'), checkboxChecked: _Runtime.field(options, 'checkboxChecked') }] : Array<Dynamic>)), function(__awaitValue6:Dynamic):Dynamic {
           r = __awaitValue6;
-          return flighthq._internal._Async.resolve({ buttonIndex: _Runtime.field(r, 'response'), cancelled: _Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(options, 'cancelId'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(r, 'response'), _Runtime.field(options, 'cancelId'))), checkboxChecked: _Runtime.field(r, 'checkboxChecked') });
+          return flighthq._internal._Async.resolve({ buttonIndex: _Runtime.field(r, 'response'), cancelled: ((cast !_Runtime.strictEquals(_Runtime.field(options, 'cancelId'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(r, 'response'), _Runtime.field(options, 'cancelId')) : Bool)), checkboxChecked: _Runtime.field(r, 'checkboxChecked') });
         });
       });
     }, confirm: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
@@ -110,7 +110,7 @@ class ElectronDialog {
     var index:Dynamic = cast _Runtime.UNDEFINED;
     normalized = _Runtime.replace(path, _Runtime.regexp('[/\\\\]+$$', ''), '', false);
     index = HxMath.max(_Runtime.callProperty(normalized, 'lastIndexOf', cast (['/'] : Array<Dynamic>)), _Runtime.callProperty(normalized, 'lastIndexOf', cast (['\\'] : Array<Dynamic>)));
-    return cast _Runtime.select(_Runtime.compare(index, 0.0, '>='), function():Dynamic return cast _Runtime.slice(normalized, (index + 1.0), null), function():Dynamic return cast normalized);
+    return cast ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool) ? (cast _Runtime.slice(normalized, (index + 1.0), null) : Dynamic) : (cast normalized : Dynamic));
     return cast null;
   }
 }

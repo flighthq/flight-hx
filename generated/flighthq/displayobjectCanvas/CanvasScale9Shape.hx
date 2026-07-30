@@ -35,7 +35,7 @@ class CanvasScale9Shape {
     __destructure0 = _Runtime.field(source, 'data');
     commands = _Runtime.field(__destructure0, 'commands');
     scale9Grid = _Runtime.field(__destructure0, 'scale9Grid');
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool)) { return; }
     context = _Runtime.field(state, 'context');
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', _Runtime.field(renderProxy, 'alpha'));
@@ -43,7 +43,7 @@ class CanvasScale9Shape {
     scaleX = _Runtime.field(__destructure1, 'scaleX');
     scaleY = _Runtime.field(__destructure1, 'scaleY');
     mapper = _Runtime.callValue(buildScale9Mapper, cast ([commands, scale9Grid, scaleX, scaleY] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(mapper, null))) {
+    if ((cast _Runtime.strictEquals(mapper, null) : Bool)) {
       _Runtime.callValue(setCanvasTransform, cast ([state, context, _Runtime.field(renderProxy, 'transform2D')] : Array<Dynamic>));
       _Runtime.callValue(renderCanvasShapeCommands, cast ([context, commands] : Array<Dynamic>));
     } else {
@@ -55,18 +55,18 @@ class CanvasScale9Shape {
 
   public static function mapCanvasScale9ShapeCommands(out:Array<Dynamic>, source:Array<Dynamic>, mapper:Scale9Mapper):Void {
     var i:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.strictEquals(out, (cast source : Array<Dynamic>)))) {
+    if ((cast !_Runtime.strictEquals(out, (cast source : Array<Dynamic>)) : Bool)) {
       _Runtime.setLength(out, _Runtime.field(source, 'length'));
       {
         var k:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(k, _Runtime.field(source, 'length'), '<'))) {
+        while ((cast ((cast k : Float) < (cast _Runtime.field(source, 'length') : Float)) : Bool)) {
           _Runtime.setIndex(out, k, _Runtime.getIndex(source, k));
           k++;
         }
       }
     }
     i = 0.0;
-    while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(out, 'length'), '<'))) {
+    while ((cast ((cast i : Float) < (cast _Runtime.field(out, 'length') : Float)) : Bool)) {
       var key:Dynamic = (cast _Runtime.getIndex(out, i) : String);
       var argCount:Dynamic = (cast _Runtime.getIndex(out, (i + 1.0)) : Float);
       {
@@ -137,11 +137,11 @@ class CanvasScale9Shape {
     var b:Dynamic = cast _Runtime.UNDEFINED;
     var c:Dynamic = cast _Runtime.UNDEFINED;
     var d:Dynamic = cast _Runtime.UNDEFINED;
-    a = _Runtime.select(!_Runtime.strictEquals(scaleX, 0.0), function():Dynamic return cast (_Runtime.field(t, 'a') / scaleX), function():Dynamic return cast _Runtime.field(t, 'a'));
-    b = _Runtime.select(!_Runtime.strictEquals(scaleX, 0.0), function():Dynamic return cast (_Runtime.field(t, 'b') / scaleX), function():Dynamic return cast _Runtime.field(t, 'b'));
-    c = _Runtime.select(!_Runtime.strictEquals(scaleY, 0.0), function():Dynamic return cast (_Runtime.field(t, 'c') / scaleY), function():Dynamic return cast _Runtime.field(t, 'c'));
-    d = _Runtime.select(!_Runtime.strictEquals(scaleY, 0.0), function():Dynamic return cast (_Runtime.field(t, 'd') / scaleY), function():Dynamic return cast _Runtime.field(t, 'd'));
-    if (_Runtime.truthy(_Runtime.field(state, 'roundPixels'))) {
+    a = ((cast !_Runtime.strictEquals(scaleX, 0.0) : Bool) ? (cast (_Runtime.field(t, 'a') / scaleX) : Dynamic) : (cast _Runtime.field(t, 'a') : Dynamic));
+    b = ((cast !_Runtime.strictEquals(scaleX, 0.0) : Bool) ? (cast (_Runtime.field(t, 'b') / scaleX) : Dynamic) : (cast _Runtime.field(t, 'b') : Dynamic));
+    c = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (_Runtime.field(t, 'c') / scaleY) : Dynamic) : (cast _Runtime.field(t, 'c') : Dynamic));
+    d = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (_Runtime.field(t, 'd') / scaleY) : Dynamic) : (cast _Runtime.field(t, 'd') : Dynamic));
+    if ((cast _Runtime.field(state, 'roundPixels') : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([a, b, c, d, HxMath.fround(_Runtime.field(t, 'tx')), HxMath.fround(_Runtime.field(t, 'ty'))] : Array<Dynamic>));
     } else {
       flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([a, b, c, d, _Runtime.field(t, 'tx'), _Runtime.field(t, 'ty')] : Array<Dynamic>));
@@ -150,11 +150,11 @@ class CanvasScale9Shape {
 
   public static function remapPathData__canvasScale9Shape(out:Array<Float>, source:Array<Float>, cmds:Array<Float>, mapper:Scale9Mapper):Void {
     var di:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.strictEquals(out, (cast source : Array<Float>)))) {
+    if ((cast !_Runtime.strictEquals(out, (cast source : Array<Float>)) : Bool)) {
       _Runtime.setLength(out, _Runtime.field(source, 'length'));
       {
         var k:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(k, _Runtime.field(source, 'length'), '<'))) {
+        while ((cast ((cast k : Float) < (cast _Runtime.field(source, 'length') : Float)) : Bool)) {
           _Runtime.setIndex(out, k, _Runtime.getIndex(source, k));
           k++;
         }

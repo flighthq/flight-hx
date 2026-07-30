@@ -13,7 +13,7 @@ import flighthq.types.GlyphSource.GlyphAtlas;
 class GlyphSource {
   public static function createGlyphSourceFromGlyphAtlas(atlas:GlyphAtlas):flighthq.types.GlyphSource {
     return cast { getGlyphAtlasImage: function(page:Dynamic = 0.0) {
-      return cast _Runtime.select(_Runtime.strictEquals(page, 0.0), function():Dynamic return cast _Runtime.callValue(getGlyphAtlasSurface, cast ([atlas] : Array<Dynamic>)), function():Dynamic return cast null);
+      return cast ((cast _Runtime.strictEquals(page, 0.0) : Bool) ? (cast _Runtime.callValue(getGlyphAtlasSurface, cast ([atlas] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
     }, getGlyphEntry: function(codepoint:Dynamic) {
       return cast _Runtime.callValue(getGlyphAtlasEntry, cast ([atlas, codepoint] : Array<Dynamic>));
     }, getGlyphKerning: function(left:Dynamic, right:Dynamic) {

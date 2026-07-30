@@ -22,23 +22,23 @@ class GlTextInput {
     var scrollYOffset:Dynamic = cast _Runtime.UNDEFINED;
     var scrollXOffset:Dynamic = cast _Runtime.UNDEFINED;
     input = _Runtime.callValue(getTextInputState, cast ([source] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(input, null), function():Dynamic return cast _Runtime.andValue(!_Runtime.truthy(_Runtime.field(input, 'focused')), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(input, 'alwaysShowSelection')))))) { return; }
+    if ((cast ((cast _Runtime.strictEquals(input, null) : Bool) || (cast _Runtime.andValue(!(cast _Runtime.field(input, 'focused') : Bool), function():Dynamic return cast !(cast _Runtime.field(input, 'alwaysShowSelection') : Bool)) : Bool)) : Bool)) { return; }
     firstVisibleLine = (_Runtime.field(_Runtime.field(source, 'data'), 'scrollV') - 1.0);
-    scrollYOffset = _Runtime.select(_Runtime.compare(firstVisibleLine, 0.0, '>'), function():Dynamic return cast _Runtime.callValue(getRichTextScrollYOffset, cast ([_Runtime.field(result, 'lineHeights'), firstVisibleLine] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+    scrollYOffset = ((cast ((cast firstVisibleLine : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callValue(getRichTextScrollYOffset, cast ([_Runtime.field(result, 'lineHeights'), firstVisibleLine] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
     scrollXOffset = _Runtime.field(_Runtime.field(source, 'data'), 'scrollH');
     flighthq._internal.backend.Canvas2dBackend.call(context, 'save', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'beginPath', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'rect', cast ([0.0, 0.0, fieldW, fieldH] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'clip', cast ([] : Array<Dynamic>));
     _Runtime.callValue(getTextInputSelectionRectangles, cast ([GlTextInput.selectionRectangles__glTextInput, source, result] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(GlTextInput.selectionRectangles__glTextInput, 'length'), 0.0, '>'))) {
+    if ((cast ((cast _Runtime.field(GlTextInput.selectionRectangles__glTextInput, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', _Runtime.callValue(computeRgbHexString, cast ([_Runtime.field(input, 'selectionColor')] : Array<Dynamic>)));
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', _Runtime.field(input, 'selectionAlpha'));
       for (rect in _Runtime.iterable(GlTextInput.selectionRectangles__glTextInput)) {
         flighthq._internal.backend.Canvas2dBackend.call(context, 'fillRect', cast ([(_Runtime.field(rect, 'x') - scrollXOffset), (_Runtime.field(rect, 'y') - scrollYOffset), _Runtime.field(rect, 'width'), _Runtime.field(rect, 'height')] : Array<Dynamic>));
       }
     }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.field(input, 'focused'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.callValue(getTextInputSelectionBeginIndex, cast ([source] : Array<Dynamic>)), _Runtime.callValue(getTextInputSelectionEndIndex, cast ([source] : Array<Dynamic>)))))) {
+    if ((cast ((cast _Runtime.field(input, 'focused') : Bool) && (cast _Runtime.strictEquals(_Runtime.callValue(getTextInputSelectionBeginIndex, cast ([source] : Array<Dynamic>)), _Runtime.callValue(getTextInputSelectionEndIndex, cast ([source] : Array<Dynamic>))) : Bool)) : Bool)) {
       _Runtime.callValue(getTextInputCaretRectangle, cast ([GlTextInput.caretRectangle__glTextInput, source, result] : Array<Dynamic>));
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', GlTextInput.CARET_COLOR__glTextInput);
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', 1.0);

@@ -28,11 +28,11 @@ class DomVideo {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var element:Dynamic = cast _Runtime.UNDEFINED;
     data = (cast _Runtime.field(renderProxy, 'rendererData') : Null<DomVideoData__domVideo>);
-    if (_Runtime.truthy(_Runtime.strictEquals(data, null))) { return; }
+    if ((cast _Runtime.strictEquals(data, null) : Bool)) { return; }
     source = (cast _Runtime.field(renderProxy, 'source') : Video);
     element = _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(_Runtime.field(source, 'data'), 'source'), 'element'), function():Dynamic return cast null);
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(element, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(element, 'videoWidth'), 0.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(element, 'videoHeight'), 0.0)))) { return; }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(data, 'element'), element))) {
+    if ((cast ((cast ((cast _Runtime.strictEquals(element, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(element, 'videoWidth'), 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(element, 'videoHeight'), 0.0) : Bool)) : Bool)) { return; }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(data, 'element'), element) : Bool)) {
       _Runtime.setField(data, 'element', element);
       _Runtime.callValue(prepareDomElement, cast ([element] : Array<Dynamic>));
     }

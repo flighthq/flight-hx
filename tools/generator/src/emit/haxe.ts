@@ -6,6 +6,7 @@ import type {
   IrStatement,
   IrType,
   IrVariable,
+  StaticLoweringEmissionCounts,
 } from '../model/ir.ts';
 import { type WebGl2ComputedConstantDomain, webGl2ComputedConstantDomains } from './webgl2-endpoints.ts';
 
@@ -14,6 +15,14 @@ const binaryOperatorMap: Readonly<Record<string, string>> = {
   '!==': '!=',
   '??': '??',
 };
+
+const staticLoweringMarkers = {
+  booleanAndExpressions: '/*__flight_direct_boolean_and__*/',
+  booleanConditionalExpressions: '/*__flight_direct_boolean_conditional__*/',
+  booleanOrExpressions: '/*__flight_direct_boolean_or__*/',
+  booleanTruthinessUses: '/*__flight_direct_boolean_truthiness__*/',
+  numericRelations: '/*__flight_direct_numeric_relation__*/',
+} as const satisfies Record<keyof StaticLoweringEmissionCounts, string>;
 
 const canvas2dMethodEndpoints = new Set([
   'arc',
@@ -298,11 +307,20 @@ let currentContinueIncrement: IrExpression | undefined;
 let currentAsyncFunction = false;
 let currentAsyncReturnsNothing = false;
 let currentFinallyStack: IrStatement[] = [];
+let staticLoweringEmission: StaticLoweringEmissionCounts = emptyStaticLoweringEmissionCounts();
 
 interface ExtractedAwait {
   awaited: boolean;
   expression: IrExpression;
   name: string;
+}
+
+export function resetStaticLoweringEmissionCounts(): void {
+  staticLoweringEmission = emptyStaticLoweringEmissionCounts();
+}
+
+export function staticLoweringEmissionCounts(): StaticLoweringEmissionCounts {
+  return { ...staticLoweringEmission };
 }
 
 export function emitHaxeModule(module: IrModule): string {
@@ -352,7 +370,7 @@ export function emitHaxeModule(module: IrModule): string {
   // Do not expose namespace classes to JavaScript here. Exposure is an output policy
   // that prevents consumer DCE; the parity harness adds it only to its dedicated JS
   // build.
-  if (valueDeclarations.length === 0) return lines.join('\n');
+  if (valueDeclarations.length === 0) return finalizeStaticLoweringEmission(lines.join('\n'));
   lines.push(`class ${module.name} {`);
   for (const declaration of typeDeclarations) {
     if (declaration.kind !== 'enum') continue;
@@ -368,7 +386,7 @@ export function emitHaxeModule(module: IrModule): string {
   }
   if (lines.at(-1) === '') lines.pop();
   lines.push('}', '');
-  return lines.join('\n');
+  return finalizeStaticLoweringEmission(lines.join('\n'));
 }
 
 /**
@@ -809,7 +827,7 @@ function emitFlowStatements(statements: IrStatement[], index = 0): string[] {
     case 'if':
       return emitAwaitedExpression(statement.condition, (condition) => {
         const branch = `__flowBranch${String(temporaryIndex++)}`;
-        const lines = [`var ${branch}:Dynamic;`, `if (_Runtime.truthy(${condition})) {`];
+        const lines = [`var ${branch}:Dynamic;`, `if (${emitTruthinessValue(condition, statement.condition)}) {`];
         lines.push(
           ...indent([`${branch} = ${emitFlowProtectedStatements(statementToStatements(statement.consequent))};`]),
         );
@@ -831,7 +849,7 @@ function emitFlowStatements(statements: IrStatement[], index = 0): string[] {
         'function():Dynamic {',
         ...indent(
           emitAwaitedExpression(statement.condition, (condition) => [
-            `if (!_Runtime.truthy(${condition})) return flighthq._internal._Async.flowBreak();`,
+            `if (!${emitTruthinessValue(condition, statement.condition)}) return flighthq._internal._Async.flowBreak();`,
             `return ${emitFlowProtectedStatements(statementToStatements(statement.body))};`,
           ]),
         ),
@@ -852,7 +870,7 @@ function emitFlowStatements(statements: IrStatement[], index = 0): string[] {
         'function():Dynamic {',
         ...indent(
           emitAwaitedExpression(condition, (value) => [
-            `if (!_Runtime.truthy(${value})) return flighthq._internal._Async.flowBreak();`,
+            `if (!${emitTruthinessValue(value, condition)}) return flighthq._internal._Async.flowBreak();`,
             `return flighthq._internal._Async.continueIteration(${emitFlowProtectedStatements(statementToStatements(statement.body))}, function():Dynamic {`,
             ...indent(advance),
             '});',
@@ -1003,7 +1021,7 @@ function emitFlatMapVariableInitializers(
 function emitAwaitedExpression(expression: IrExpression, continuation: (value: string) => string[]): string[] {
   if (expression.kind === 'conditional' && expressionContainsAwait(expression)) {
     return emitAwaitedExpression(expression.condition, (condition) => [
-      `if (_Runtime.truthy(${condition})) {`,
+      `if (${emitTruthinessValue(condition, expression.condition)}) {`,
       ...indent(emitAwaitedExpression(expression.whenTrue, continuation)),
       '} else {',
       ...indent(emitAwaitedExpression(expression.whenFalse, continuation)),
@@ -1018,10 +1036,22 @@ function emitAwaitedExpression(expression: IrExpression, continuation: (value: s
     return emitAwaitedExpression(expression.left, (left) => {
       const right = emitAwaitedExpression(expression.right, continuation);
       if (expression.operator === '&&') {
-        return [`if (_Runtime.truthy(${left})) {`, ...indent(right), '} else {', ...indent(continuation(left)), '}'];
+        return [
+          `if (${emitTruthinessValue(left, expression.left)}) {`,
+          ...indent(right),
+          '} else {',
+          ...indent(continuation(left)),
+          '}',
+        ];
       }
       if (expression.operator === '||') {
-        return [`if (_Runtime.truthy(${left})) {`, ...indent(continuation(left)), '} else {', ...indent(right), '}'];
+        return [
+          `if (${emitTruthinessValue(left, expression.left)}) {`,
+          ...indent(continuation(left)),
+          '} else {',
+          ...indent(right),
+          '}',
+        ];
       }
       const absent =
         expression.operator === '??undefined'
@@ -1510,9 +1540,7 @@ function emitStatement(statement: IrStatement): string[] {
     case 'continue':
       return currentContinueIncrement ? [`${emitExpression(currentContinueIncrement)};`, 'continue;'] : ['continue;'];
     case 'do':
-      return [
-        `do ${emitLoopEmbedded(statement.body)} while (_Runtime.truthy(${emitExpression(statement.condition)}));`,
-      ];
+      return [`do ${emitLoopEmbedded(statement.body)} while (${emitTruthiness(statement.condition)});`];
     case 'expression':
       return [`${emitExpression(statement.expression)};`];
     case 'for': {
@@ -1522,11 +1550,7 @@ function emitStatement(statement: IrStatement): string[] {
       } else if (statement.initializer) {
         lines.push(...indent([`${emitExpression(statement.initializer)};`]));
       }
-      lines.push(
-        ...indent([
-          `while (${statement.condition ? `_Runtime.truthy(${emitExpression(statement.condition)})` : 'true'}) {`,
-        ]),
-      );
+      lines.push(...indent([`while (${statement.condition ? emitTruthiness(statement.condition) : 'true'}) {`]));
       const bodyStatements = statement.body.kind === 'block' ? statement.body.statements : [statement.body];
       const previousContinueIncrement = currentContinueIncrement;
       currentContinueIncrement = statement.increment;
@@ -1575,7 +1599,7 @@ function emitStatement(statement: IrStatement): string[] {
       return lines;
     }
     case 'if': {
-      const base = `if (_Runtime.truthy(${emitExpression(statement.condition)})) ${emitEmbedded(statement.consequent)}`;
+      const base = `if (${emitTruthiness(statement.condition)}) ${emitEmbedded(statement.consequent)}`;
       return [statement.otherwise ? `${base} else ${emitEmbedded(statement.otherwise)}` : base];
     }
     case 'return': {
@@ -1628,7 +1652,7 @@ function emitStatement(statement: IrStatement): string[] {
     case 'variable':
       return statement.declarations.map((item) => `${emitVariable(item, true)};`);
     case 'while':
-      return [`while (_Runtime.truthy(${emitExpression(statement.condition)})) ${emitLoopEmbedded(statement.body)}`];
+      return [`while (${emitTruthiness(statement.condition)}) ${emitLoopEmbedded(statement.body)}`];
   }
 }
 
@@ -1687,6 +1711,50 @@ function emitInt32Operand(expression: IrExpression): string {
 
 function emitArithmeticOperation(left: string, operator: string, right: string): string {
   return operator === '%' ? `_Runtime.fmod(${left}, ${right})` : `(${left} ${operator} ${right})`;
+}
+
+function emitTruthiness(expression: IrExpression): string {
+  return emitTruthinessValue(emitExpression(expression), expression);
+}
+
+function emitTruthinessValue(value: string, expression: IrExpression): string {
+  if (expression.staticFacts?.boolean) {
+    return markStaticLowering('booleanTruthinessUses', emitBooleanValue(value));
+  }
+  return `_Runtime.truthy(${value})`;
+}
+
+function emitBooleanExpression(expression: IrExpression): string {
+  return emitBooleanValue(emitExpression(expression));
+}
+
+function emitBooleanValue(value: string): string {
+  return `(cast ${value} : Bool)`;
+}
+
+function emptyStaticLoweringEmissionCounts(): StaticLoweringEmissionCounts {
+  return {
+    booleanAndExpressions: 0,
+    booleanConditionalExpressions: 0,
+    booleanOrExpressions: 0,
+    booleanTruthinessUses: 0,
+    numericRelations: 0,
+  };
+}
+
+function finalizeStaticLoweringEmission(output: string): string {
+  let finalized = output;
+  for (const [name, marker] of Object.entries(staticLoweringMarkers) as Array<
+    [keyof StaticLoweringEmissionCounts, string]
+  >) {
+    staticLoweringEmission[name] += finalized.split(marker).length - 1;
+    finalized = finalized.replaceAll(marker, '');
+  }
+  return finalized;
+}
+
+function markStaticLowering(name: keyof StaticLoweringEmissionCounts, value: string): string {
+  return `${staticLoweringMarkers[name]}${value}`;
 }
 
 function emitExpression(expression: IrExpression): string {
@@ -1836,9 +1904,21 @@ function emitExpression(expression: IrExpression): string {
         return `({ ${emitExpression(expression.left)}; ${emitExpression(expression.right)}; })`;
       }
       if (expression.kind === 'binary' && expression.operator === '||') {
+        if (expression.staticFacts?.booleanLogical) {
+          return markStaticLowering(
+            'booleanOrExpressions',
+            `(${emitBooleanExpression(expression.left)} || ${emitBooleanExpression(expression.right)})`,
+          );
+        }
         return `_Runtime.orValue(${emitExpression(expression.left)}, function():Dynamic return cast ${emitExpression(expression.right)})`;
       }
       if (expression.kind === 'binary' && expression.operator === '&&') {
+        if (expression.staticFacts?.booleanLogical) {
+          return markStaticLowering(
+            'booleanAndExpressions',
+            `(${emitBooleanExpression(expression.left)} && ${emitBooleanExpression(expression.right)})`,
+          );
+        }
         return `_Runtime.andValue(${emitExpression(expression.left)}, function():Dynamic return cast ${emitExpression(expression.right)})`;
       }
       if (expression.kind === 'binary' && expression.operator === '??') {
@@ -1851,6 +1931,12 @@ function emitExpression(expression: IrExpression): string {
         return `_Runtime.hasField(${emitExpression(expression.right)}, ${emitExpression(expression.left)})`;
       }
       if (expression.kind === 'binary' && ['<', '<=', '>', '>='].includes(expression.operator)) {
+        if (expression.staticFacts?.numericRelation) {
+          return markStaticLowering(
+            'numericRelations',
+            `((cast ${emitExpression(expression.left)} : Float) ${expression.operator} (cast ${emitExpression(expression.right)} : Float))`,
+          );
+        }
         return `_Runtime.compare(${emitExpression(expression.left)}, ${emitExpression(expression.right)}, ${quote(expression.operator)})`;
       }
       if (expression.kind === 'binary' && expression.operator === 'instanceof') {
@@ -1904,6 +1990,12 @@ function emitExpression(expression: IrExpression): string {
     case 'cast':
       return `(cast ${emitExpression(expression.expression)} : ${emitType(expression.type)})`;
     case 'conditional':
+      if (expression.condition.staticFacts?.boolean) {
+        return markStaticLowering(
+          'booleanConditionalExpressions',
+          `(${emitBooleanExpression(expression.condition)} ? (cast ${emitExpression(expression.whenTrue)} : Dynamic) : (cast ${emitExpression(expression.whenFalse)} : Dynamic))`,
+        );
+      }
       return `_Runtime.select(${emitExpression(expression.condition)}, function():Dynamic return cast ${emitExpression(expression.whenTrue)}, function():Dynamic return cast ${emitExpression(expression.whenFalse)})`;
     case 'element':
       if (expression.binding === 'WebGl2Backend') {
@@ -2152,7 +2244,7 @@ function emitExpression(expression: IrExpression): string {
         return `_Runtime.typeofValue(${emitExpression(expression.operand)})`;
       }
       if (expression.operator === 'void') return `_Runtime.voidValue(${emitExpression(expression.operand)})`;
-      if (expression.operator === '!') return `!_Runtime.truthy(${emitExpression(expression.operand)})`;
+      if (expression.operator === '!') return `!${emitTruthiness(expression.operand)}`;
       if (expression.operator === '~') return `~${emitInt32Operand(expression.operand)}`;
       if (expression.operand.kind === 'element' && (expression.operator === '++' || expression.operator === '--')) {
         if (expression.operand.binding === 'WebGl2Backend') {

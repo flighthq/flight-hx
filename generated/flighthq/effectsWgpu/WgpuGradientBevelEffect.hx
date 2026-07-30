@@ -98,9 +98,9 @@ class WgpuGradientBevelEffect {
     _Runtime.callProperty(applyPass, 'draw', cast ([6.0] : Array<Dynamic>));
     _Runtime.callProperty(applyPass, 'end', cast ([] : Array<Dynamic>));
     _Runtime.callValue(clearWgpuEffectTarget, cast ([state, dst] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(sourceMode, 'draw'))) { _Runtime.callValue(applyWgpuEffectBlitPass, cast ([state, src, dst] : Array<Dynamic>)); }
+    if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) { _Runtime.callValue(applyWgpuEffectBlitPass, cast ([state, src, dst] : Array<Dynamic>)); }
     _Runtime.callValue(applyWgpuEffectBlitPass, cast ([state, s1, dst] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(sourceMode, 'knockout'))) { _Runtime.callValue(applyWgpuEffectErasePass, cast ([state, src, dst] : Array<Dynamic>)); }
+    if ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool)) { _Runtime.callValue(applyWgpuEffectErasePass, cast ([state, src, dst] : Array<Dynamic>)); }
     _Runtime.callValue(releaseWgpuRenderTarget, cast ([pool, s0] : Array<Dynamic>));
     _Runtime.callValue(releaseWgpuRenderTarget, cast ([pool, s1] : Array<Dynamic>));
     _Runtime.callValue(releaseWgpuRenderTarget, cast ([pool, s2] : Array<Dynamic>));
@@ -117,7 +117,7 @@ class WgpuGradientBevelEffect {
   public static function getApplyPipeline__wgpuGradientBevelEffect(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Dynamic = cast _Runtime.UNDEFINED;
     p = ((cast WgpuGradientBevelEffect.applyPipelines__wgpuGradientBevelEffect : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var fs:Dynamic = _Runtime.callValue(getWgpuEffectPassState, cast ([state] : Array<Dynamic>));
       var __destructure1:Dynamic = state;
       var device:Dynamic = _Runtime.field(__destructure1, 'device');
@@ -135,7 +135,7 @@ class WgpuGradientBevelEffect {
   public static function getEncodePipeline__wgpuGradientBevelEffect(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Dynamic = cast _Runtime.UNDEFINED;
     p = ((cast WgpuGradientBevelEffect.encodePipelines__wgpuGradientBevelEffect : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var fs:Dynamic = _Runtime.callValue(getWgpuEffectPassState, cast ([state] : Array<Dynamic>));
       var __destructure2:Dynamic = state;
       var device:Dynamic = _Runtime.field(__destructure2, 'device');

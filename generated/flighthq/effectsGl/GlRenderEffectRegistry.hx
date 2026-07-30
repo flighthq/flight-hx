@@ -20,7 +20,7 @@ class GlRenderEffectRegistry {
   public static function registerGlRenderEffect(state:GlRenderState, kind:String, runner:GlRenderEffectRunner):Void {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = ((cast GlRenderEffectRegistry._registries__glRenderEffectRegistry : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (registry = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
       ((cast GlRenderEffectRegistry._registries__glRenderEffectRegistry : flighthq._internal._WeakMap).set(state, registry));
     }

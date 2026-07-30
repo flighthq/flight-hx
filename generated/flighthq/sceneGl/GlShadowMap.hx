@@ -37,7 +37,7 @@ class GlShadowMap {
     var boundProgram:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     runtime = _Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'shadowTarget'), null))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'shadowTarget'), null) : Bool)) {
       _Runtime.setField(runtime, 'shadowTarget', _Runtime.callValue(createGlRenderTarget, cast ([state, { depth: 'depth-stencil-sampled', height: GlShadowMap.SHADOW_MAP_SIZE__glShadowMap, width: GlShadowMap.SHADOW_MAP_SIZE__glShadowMap }] : Array<Dynamic>)));
     }
     target = _Runtime.field(runtime, 'shadowTarget');
@@ -62,17 +62,17 @@ class GlShadowMap {
       var program:Dynamic = cast _Runtime.UNDEFINED;
       var upload:Dynamic = cast _Runtime.UNDEFINED;
       mesh = (cast (cast node : Dynamic) : Mesh);
-      if (_Runtime.truthy(_Runtime.looseEquals(_Runtime.field(mesh, 'geometry'), null))) { return; }
-      if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(mesh, 'morph'), null))) { _Runtime.callValue(updateMeshMorph, cast ([mesh] : Array<Dynamic>)); }
-      skinned = _Runtime.andValue(!_Runtime.looseEquals(_Runtime.field(mesh, 'skin'), null), function():Dynamic return cast _Runtime.callValue(hasMeshGeometrySkin, cast ([_Runtime.field(mesh, 'geometry')] : Array<Dynamic>)));
-      program = _Runtime.select(skinned, function():Dynamic return cast (skinnedProgram ??= _Runtime.callValue(ensureGlSceneProgram, cast ([state, 'shadow:depth:skin', GlShadowMap.compileShadowDepthSkinnedProgram__glShadowMap] : Array<Dynamic>))), function():Dynamic return cast rigidProgram);
-      if (_Runtime.truthy(!_Runtime.strictEquals(program, boundProgram))) {
+      if ((cast _Runtime.looseEquals(_Runtime.field(mesh, 'geometry'), null) : Bool)) { return; }
+      if ((cast !_Runtime.looseEquals(_Runtime.field(mesh, 'morph'), null) : Bool)) { _Runtime.callValue(updateMeshMorph, cast ([mesh] : Array<Dynamic>)); }
+      skinned = ((cast !_Runtime.looseEquals(_Runtime.field(mesh, 'skin'), null) : Bool) && (cast _Runtime.callValue(hasMeshGeometrySkin, cast ([_Runtime.field(mesh, 'geometry')] : Array<Dynamic>)) : Bool));
+      program = ((cast skinned : Bool) ? (cast (skinnedProgram ??= _Runtime.callValue(ensureGlSceneProgram, cast ([state, 'shadow:depth:skin', GlShadowMap.compileShadowDepthSkinnedProgram__glShadowMap] : Array<Dynamic>))) : Dynamic) : (cast rigidProgram : Dynamic));
+      if ((cast !_Runtime.strictEquals(program, boundProgram) : Bool)) {
         flighthq._internal.backend.WebGl2Backend.useProgram(gl, _Runtime.field(program, 'program'));
         flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(program, 'locViewProjection'), false, matrix.m);
         (boundProgram = cast (program : Dynamic));
       }
       flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(program, 'locModel'), false, _Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>)).m);
-      if (_Runtime.truthy(skinned)) {
+      if ((cast skinned : Bool)) {
         var jointMatrices:Dynamic = _Runtime.field(_Runtime.field(_Runtime.field(mesh, 'skin'), 'skeleton'), 'jointMatrices');
         flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + SKIN_PALETTE_TEXTURE_UNIT));
         _Runtime.callValue(uploadGlSkinPaletteTexture, cast ([gl, _Runtime.callValue(ensureGlSkinPalette, cast ([state] : Array<Dynamic>)), jointMatrices, (_Runtime.toInt32((_Runtime.field(jointMatrices, 'length') / 16.0)) | 0)] : Array<Dynamic>));
@@ -80,7 +80,7 @@ class GlShadowMap {
       }
       upload = _Runtime.callValue(ensureGlMeshUpload, cast ([state, _Runtime.field(mesh, 'geometry'), skinned] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, _Runtime.field(upload, 'vao'));
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(upload, 'indexBuffer'), null))) {
+      if ((cast !_Runtime.strictEquals(_Runtime.field(upload, 'indexBuffer'), null) : Bool)) {
         flighthq._internal.backend.WebGl2Backend.drawElements(gl, flighthq._internal.backend.WebGl2Backend.TRIANGLES, _Runtime.field(upload, 'indexCount'), _Runtime.field(upload, 'indexType'), 0.0);
       } else {
         flighthq._internal.backend.WebGl2Backend.drawArrays(gl, flighthq._internal.backend.WebGl2Backend.TRIANGLES, 0.0, _Runtime.field(upload, 'indexCount'));

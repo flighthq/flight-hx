@@ -17,7 +17,7 @@ class Material {
   }
 
   public static function copyMaterial(out:flighthq.types.Material, source:flighthq.types.Material):Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(out, source))) { return; }
+    if ((cast _Runtime.strictEquals(out, source) : Bool)) { return; }
     _Runtime.callValue(Material.copyMaterialFields__material, cast ([out, source, _Runtime.field(source, 'kind')] : Array<Dynamic>));
   }
 
@@ -32,13 +32,13 @@ class Material {
   public static function equalsMaterial(a:flighthq.types.Material, b:flighthq.types.Material):Bool {
     var aFields:Dynamic = cast _Runtime.UNDEFINED;
     var bFields:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(a, b))) { return cast true; }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(a, 'kind'), _Runtime.field(b, 'kind')))) { return cast false; }
+    if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast true; }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(a, 'kind'), _Runtime.field(b, 'kind')) : Bool)) { return cast false; }
     aFields = (cast (cast a : Dynamic) : Dynamic);
     bFields = (cast (cast b : Dynamic) : Dynamic);
     for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(aFields))) {
-      if (_Runtime.truthy(_Runtime.strictEquals(key, 'kind'))) { continue; }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(aFields, key), _Runtime.getIndex(bFields, key)))) { return cast false; }
+      if ((cast _Runtime.strictEquals(key, 'kind') : Bool)) { continue; }
+      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(aFields, key), _Runtime.getIndex(bFields, key)) : Bool)) { return cast false; }
     }
     return cast true;
     return cast null;
@@ -50,9 +50,9 @@ class Material {
     dstFields = (cast (cast dst : Dynamic) : Dynamic);
     srcFields = (cast (cast src : Dynamic) : Dynamic);
     for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(srcFields))) {
-      if (_Runtime.truthy(_Runtime.strictEquals(key, 'kind'))) { continue; }
+      if ((cast _Runtime.strictEquals(key, 'kind') : Bool)) { continue; }
       var value:Dynamic = _Runtime.getIndex(srcFields, key);
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(key, 'standard'), function():Dynamic return cast !_Runtime.looseEquals(value, null)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'object')))) {
+      if ((cast ((cast ((cast _Runtime.strictEquals(key, 'standard') : Bool) && (cast !_Runtime.looseEquals(value, null) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'object') : Bool)) : Bool)) {
         _Runtime.setIndex(dstFields, key, _Runtime.mergeObjects([(cast value : Dynamic)]));
       } else {
         _Runtime.setIndex(dstFields, key, value);

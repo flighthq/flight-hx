@@ -26,7 +26,7 @@ class Socket {
   public static function closeSocket(socket:flighthq.types.Socket, ?code:Float, ?reason:String):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.field(socket, 'runtime');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(runtime, 'readyState'), 'closing'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(runtime, 'readyState'), 'closed')))) { return; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'readyState'), 'closing') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(runtime, 'readyState'), 'closed') : Bool)) : Bool)) { return; }
     _Runtime.setField(runtime, 'readyState', 'closing');
     _Runtime.callOptionalProperty(_Runtime.field(runtime, 'connection'), 'closeSocketConnection', cast ([code, reason] : Array<Dynamic>));
   }
@@ -44,15 +44,15 @@ class Socket {
   public static function createWebSocketBackend():SocketBackend {
     return cast { openSocket: function(options:Dynamic, events:Dynamic) {
       var ws:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('WebSocket'), 'undefined'))) { return cast null; }
-      ws = _Runtime.select(!_Runtime.strictEquals(_Runtime.field(options, 'protocols'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('WebSocket'), [_Runtime.field(options, 'url'), (cast _Runtime.field(options, 'protocols') : Array<String>)]), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('WebSocket'), [_Runtime.field(options, 'url')]));
+      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('WebSocket'), 'undefined') : Bool)) { return cast null; }
+      ws = ((cast !_Runtime.strictEquals(_Runtime.field(options, 'protocols'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.construct(_Runtime.globalValue('WebSocket'), [_Runtime.field(options, 'url'), (cast _Runtime.field(options, 'protocols') : Array<String>)]) : Dynamic) : (cast _Runtime.construct(_Runtime.globalValue('WebSocket'), [_Runtime.field(options, 'url')]) : Dynamic));
       _Runtime.setField(ws, 'binaryType', _Runtime.coalesce(_Runtime.field(options, 'binaryType'), function():Dynamic return cast 'arraybuffer'));
       _Runtime.setField(ws, 'onopen', function() return _Runtime.callProperty(events, 'handleSocketOpen', cast ([] : Array<Dynamic>)));
       _Runtime.setField(ws, 'onmessage', function(event:Dynamic) return _Runtime.callProperty(events, 'handleSocketMessage', cast ([_Runtime.callValue(Socket.toSocketMessage__socket, cast ([_Runtime.field(event, 'data')] : Array<Dynamic>))] : Array<Dynamic>)));
       _Runtime.setField(ws, 'onclose', function(event:Dynamic) return _Runtime.callProperty(events, 'handleSocketClose', cast ([{ code: _Runtime.field(event, 'code'), reason: _Runtime.field(event, 'reason'), wasClean: _Runtime.field(event, 'wasClean') }] : Array<Dynamic>)));
       _Runtime.setField(ws, 'onerror', function() return _Runtime.callProperty(events, 'handleSocketError', cast ([] : Array<Dynamic>)));
       return cast { sendSocketFrame: function(data:Dynamic) {
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(ws, 'readyState'), _Runtime.field(_Runtime.globalValue('WebSocket'), 'OPEN')))) { return cast false; }
+        if ((cast !_Runtime.strictEquals(_Runtime.field(ws, 'readyState'), _Runtime.field(_Runtime.globalValue('WebSocket'), 'OPEN')) : Bool)) { return cast false; }
         _Runtime.callProperty(ws, 'send', cast ([data] : Array<Dynamic>));
         return cast true;
       }, closeSocketConnection: function(code:Dynamic, reason:Dynamic) {
@@ -75,7 +75,7 @@ class Socket {
   public static function enableSocketSignals(socket:flighthq.types.Socket):SocketSignals {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.field(socket, 'runtime');
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'signals'), null))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'signals'), null) : Bool)) {
       _Runtime.setField(runtime, 'signals', { onSocketOpen: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onSocketMessage: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onSocketClose: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onSocketError: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) });
     }
     return cast _Runtime.field(runtime, 'signals');
@@ -83,7 +83,7 @@ class Socket {
   }
 
   public static function getSocketBackend():SocketBackend {
-    if (_Runtime.truthy(_Runtime.strictEquals(Socket._backend__socket, null))) { (Socket._backend__socket = cast (_Runtime.callValue(createWebSocketBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Socket._backend__socket, null) : Bool)) { (Socket._backend__socket = cast (_Runtime.callValue(createWebSocketBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Socket._backend__socket;
     return cast null;
   }
@@ -95,19 +95,19 @@ class Socket {
 
   public static function makeSocketEventSink__socket(runtime:SocketRuntime):SocketEventSink {
     return cast { handleSocketOpen: function() {
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(runtime, 'delivering')))) { return; }
+      if ((cast !(cast _Runtime.field(runtime, 'delivering') : Bool) : Bool)) { return; }
       _Runtime.setField(runtime, 'readyState', 'open');
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'signals'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(_Runtime.field(runtime, 'signals'), 'onSocketOpen')]]), 1); }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'signals'), null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(_Runtime.field(runtime, 'signals'), 'onSocketOpen')]]), 1); }
     }, handleSocketMessage: function(message:Dynamic) {
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(runtime, 'delivering')))) { return; }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'signals'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(_Runtime.field(runtime, 'signals'), 'onSocketMessage')], [message]]), 1); }
+      if ((cast !(cast _Runtime.field(runtime, 'delivering') : Bool) : Bool)) { return; }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'signals'), null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(_Runtime.field(runtime, 'signals'), 'onSocketMessage')], [message]]), 1); }
     }, handleSocketClose: function(info:Dynamic) {
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(runtime, 'delivering')))) { return; }
+      if ((cast !(cast _Runtime.field(runtime, 'delivering') : Bool) : Bool)) { return; }
       _Runtime.setField(runtime, 'readyState', 'closed');
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'signals'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(_Runtime.field(runtime, 'signals'), 'onSocketClose')], [info]]), 1); }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'signals'), null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(_Runtime.field(runtime, 'signals'), 'onSocketClose')], [info]]), 1); }
     }, handleSocketError: function() {
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(runtime, 'delivering')))) { return; }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'signals'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(_Runtime.field(runtime, 'signals'), 'onSocketError')]]), 1); }
+      if ((cast !(cast _Runtime.field(runtime, 'delivering') : Bool) : Bool)) { return; }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'signals'), null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(_Runtime.field(runtime, 'signals'), 'onSocketError')]]), 1); }
     } };
     return cast null;
   }
@@ -115,7 +115,7 @@ class Socket {
   public static function sendSocketMessage(socket:flighthq.types.Socket, data:Dynamic):Bool {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.field(socket, 'runtime');
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(runtime, 'readyState'), 'open'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(runtime, 'connection'), null)))) { return cast false; }
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'readyState'), 'open') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(runtime, 'connection'), null) : Bool)) : Bool)) { return cast false; }
     return cast _Runtime.callProperty(_Runtime.field(runtime, 'connection'), 'sendSocketFrame', cast ([data] : Array<Dynamic>));
     return cast null;
   }
@@ -125,7 +125,7 @@ class Socket {
   }
 
   public static function toSocketMessage__socket(data:Dynamic):SocketMessage {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(data), 'string'))) { return cast { data: data, binary: false }; }
+    if ((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'string') : Bool)) { return cast { data: data, binary: false }; }
     return cast { data: (cast data : haxe.io.Bytes), binary: true };
     return cast null;
   }

@@ -17,7 +17,7 @@ class TessellatePath {
     indices = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(contours, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
         _Runtime.callValue(TessellatePath.tessellateContour__tessellatePath, cast ([_Runtime.getIndex(contours, i), vertices, indices] : Array<Dynamic>));
         i++;
       }
@@ -37,24 +37,24 @@ class TessellatePath {
     pts = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(source, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(source, 'length') : Float)) : Bool)) {
         var x:Dynamic = _Runtime.getIndex(source, i);
         var y:Dynamic = _Runtime.getIndex(source, (i + 1.0));
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(_Runtime.field(pts, 'length'), 2.0, '>='), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(pts, (_Runtime.field(pts, 'length') - 2.0)), x)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(pts, (_Runtime.field(pts, 'length') - 1.0)), y)))) { (i = cast ((i + 2.0) : Dynamic)); continue; }
+        if ((cast ((cast ((cast ((cast _Runtime.field(pts, 'length') : Float) >= (cast 2.0 : Float)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(pts, (_Runtime.field(pts, 'length') - 2.0)), x) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(pts, (_Runtime.field(pts, 'length') - 1.0)), y) : Bool)) : Bool)) { (i = cast ((i + 2.0) : Dynamic)); continue; }
         _Runtime.pushMany(pts, cast ([x, y] : Array<Dynamic>));
         (i = cast ((i + 2.0) : Dynamic));
       }
     }
     contour = pts;
     count = (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> 1);
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(count, 2.0, '>='), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(contour, 0.0), _Runtime.getIndex(contour, ((count - 1.0) * 2.0)))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(contour, 1.0), _Runtime.getIndex(contour, (((count - 1.0) * 2.0) + 1.0)))))) {
+    if ((cast ((cast ((cast ((cast count : Float) >= (cast 2.0 : Float)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(contour, 0.0), _Runtime.getIndex(contour, ((count - 1.0) * 2.0))) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(contour, 1.0), _Runtime.getIndex(contour, (((count - 1.0) * 2.0) + 1.0))) : Bool)) : Bool)) {
       (count = cast ((count - 1.0) : Dynamic));
     }
-    if (_Runtime.truthy(_Runtime.compare(count, 3.0, '<'))) { return; }
+    if ((cast ((cast count : Float) < (cast 3.0 : Float)) : Bool)) { return; }
     base = (_Runtime.toInt32(_Runtime.field(vertices, 'length')) >> 1);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, count, '<'))) {
+      while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         _Runtime.pushMany(vertices, cast ([_Runtime.getIndex(contour, (i * 2.0)), _Runtime.getIndex(contour, ((i * 2.0) + 1.0))] : Array<Dynamic>));
         i++;
       }
@@ -62,17 +62,17 @@ class TessellatePath {
     twiceArea = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, count, '<'))) {
+      while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         var j:Dynamic = _Runtime.fmod((i + 1.0), count);
         (twiceArea = cast ((twiceArea + ((_Runtime.getIndex(contour, (i * 2.0)) * _Runtime.getIndex(contour, ((j * 2.0) + 1.0))) - (_Runtime.getIndex(contour, (j * 2.0)) * _Runtime.getIndex(contour, ((i * 2.0) + 1.0))))) : Dynamic));
         i++;
       }
     }
     ring = cast ([] : Array<Dynamic>);
-    if (_Runtime.truthy(_Runtime.compare(twiceArea, 0.0, '<'))) {
+    if ((cast ((cast twiceArea : Float) < (cast 0.0 : Float)) : Bool)) {
       {
         var i:Dynamic = (count - 1.0);
-        while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>='))) {
+        while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
           _Runtime.callProperty(ring, 'push', cast ([i] : Array<Dynamic>));
           i--;
         }
@@ -80,22 +80,22 @@ class TessellatePath {
     } else {
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, count, '<'))) {
+        while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
           _Runtime.callProperty(ring, 'push', cast ([i] : Array<Dynamic>));
           i++;
         }
       }
     }
     guard = (_Runtime.field(ring, 'length') * _Runtime.field(ring, 'length'));
-    while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(_Runtime.field(ring, 'length'), 3.0, '>'), function():Dynamic return cast _Runtime.compare(guard--, 0.0, '>')))) {
+    while ((cast ((cast ((cast _Runtime.field(ring, 'length') : Float) > (cast 3.0 : Float)) : Bool) && (cast ((cast guard-- : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       var clipped:Dynamic = false;
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(ring, 'length'), '<'))) {
+        while ((cast ((cast i : Float) < (cast _Runtime.field(ring, 'length') : Float)) : Bool)) {
           var a:Dynamic = _Runtime.getIndex(ring, _Runtime.fmod(((i + _Runtime.field(ring, 'length')) - 1.0), _Runtime.field(ring, 'length')));
           var b:Dynamic = _Runtime.getIndex(ring, i);
           var c:Dynamic = _Runtime.getIndex(ring, _Runtime.fmod((i + 1.0), _Runtime.field(ring, 'length')));
-          if (_Runtime.truthy(_Runtime.callValue(TessellatePath.isEar__tessellatePath, cast ([contour, ring, a, b, c] : Array<Dynamic>)))) {
+          if ((cast _Runtime.callValue(TessellatePath.isEar__tessellatePath, cast ([contour, ring, a, b, c] : Array<Dynamic>)) : Bool)) {
             _Runtime.pushMany(indices, cast ([(base + a), (base + b), (base + c)] : Array<Dynamic>));
             _Runtime.splice(ring, Std.int(i), Std.int(1.0), []);
             (clipped = cast (true : Dynamic));
@@ -104,9 +104,9 @@ class TessellatePath {
           i++;
         }
       }
-      if (_Runtime.truthy(!_Runtime.truthy(clipped))) { break; }
+      if ((cast !(cast clipped : Bool) : Bool)) { break; }
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(ring, 'length'), 3.0))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(ring, 'length'), 3.0) : Bool)) {
       _Runtime.pushMany(indices, cast ([(base + _Runtime.getIndex(ring, 0.0)), (base + _Runtime.getIndex(ring, 1.0)), (base + _Runtime.getIndex(ring, 2.0))] : Array<Dynamic>));
     }
   }
@@ -124,13 +124,13 @@ class TessellatePath {
     by = _Runtime.getIndex(contour, ((b * 2.0) + 1.0));
     cx = _Runtime.getIndex(contour, (c * 2.0));
     cy = _Runtime.getIndex(contour, ((c * 2.0) + 1.0));
-    if (_Runtime.truthy(_Runtime.compare((((bx - ax) * (cy - by)) - ((by - ay) * (cx - bx))), 0.0, '<='))) { return cast false; }
+    if ((cast ((cast (((bx - ax) * (cy - by)) - ((by - ay) * (cx - bx))) : Float) <= (cast 0.0 : Float)) : Bool)) { return cast false; }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(ring, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(ring, 'length') : Float)) : Bool)) {
         var p:Dynamic = _Runtime.getIndex(ring, i);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(p, a), function():Dynamic return cast _Runtime.strictEquals(p, b)), function():Dynamic return cast _Runtime.strictEquals(p, c)))) { i++; continue; }
-        if (_Runtime.truthy(_Runtime.callValue(TessellatePath.isPointInTriangle__tessellatePath, cast ([_Runtime.getIndex(contour, (p * 2.0)), _Runtime.getIndex(contour, ((p * 2.0) + 1.0)), ax, ay, bx, by, cx, cy] : Array<Dynamic>)))) { return cast false; }
+        if ((cast ((cast ((cast _Runtime.strictEquals(p, a) : Bool) || (cast _Runtime.strictEquals(p, b) : Bool)) : Bool) || (cast _Runtime.strictEquals(p, c) : Bool)) : Bool)) { i++; continue; }
+        if ((cast _Runtime.callValue(TessellatePath.isPointInTriangle__tessellatePath, cast ([_Runtime.getIndex(contour, (p * 2.0)), _Runtime.getIndex(contour, ((p * 2.0) + 1.0)), ax, ay, bx, by, cx, cy] : Array<Dynamic>)) : Bool)) { return cast false; }
         i++;
       }
     }
@@ -147,9 +147,9 @@ class TessellatePath {
     d1 = (((px - bx) * (ay - by)) - ((ax - bx) * (py - by)));
     d2 = (((px - cx) * (by - cy)) - ((bx - cx) * (py - cy)));
     d3 = (((px - ax) * (cy - ay)) - ((cx - ax) * (py - ay)));
-    hasNegative = _Runtime.orValue(_Runtime.orValue(_Runtime.compare(d1, 0.0, '<'), function():Dynamic return cast _Runtime.compare(d2, 0.0, '<')), function():Dynamic return cast _Runtime.compare(d3, 0.0, '<'));
-    hasPositive = _Runtime.orValue(_Runtime.orValue(_Runtime.compare(d1, 0.0, '>'), function():Dynamic return cast _Runtime.compare(d2, 0.0, '>')), function():Dynamic return cast _Runtime.compare(d3, 0.0, '>'));
-    return cast !_Runtime.truthy(_Runtime.andValue(hasNegative, function():Dynamic return cast hasPositive));
+    hasNegative = ((cast ((cast ((cast d1 : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast d2 : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast d3 : Float) < (cast 0.0 : Float)) : Bool));
+    hasPositive = ((cast ((cast ((cast d1 : Float) > (cast 0.0 : Float)) : Bool) || (cast ((cast d2 : Float) > (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast d3 : Float) > (cast 0.0 : Float)) : Bool));
+    return cast !(cast _Runtime.andValue(hasNegative, function():Dynamic return cast hasPositive) : Bool);
     return cast null;
   }
 }

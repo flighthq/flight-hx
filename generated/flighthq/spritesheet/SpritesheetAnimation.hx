@@ -21,24 +21,24 @@ class SpritesheetAnimation {
     __destructure0 = spritesheet;
     atlas = _Runtime.field(__destructure0, 'atlas');
     frames = _Runtime.field(__destructure0, 'frames');
-    if (_Runtime.truthy(_Runtime.strictEquals(atlas, null))) { return cast null; }
+    if ((cast _Runtime.strictEquals(atlas, null) : Bool)) { return cast null; }
     matchedIndices = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(frames, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(frames, 'length') : Float)) : Bool)) {
         var regionId:Dynamic = _Runtime.field(_Runtime.getIndex(frames, i), 'id');
         var region:Dynamic = _Runtime.getIndex(_Runtime.field(atlas, 'regions'), regionId);
-        if (_Runtime.truthy(_Runtime.strictEquals(region, _Runtime.field(_Runtime, 'UNDEFINED')))) { i++; continue; }
+        if ((cast _Runtime.strictEquals(region, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
         var name:Dynamic = _Runtime.field(region, 'name');
-        if (_Runtime.truthy(_Runtime.strictEquals(name, null))) { i++; continue; }
-        var matches:Dynamic = _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(pattern), 'string'), function():Dynamic return cast _Runtime.orValue(_Runtime.strictEquals(name, pattern), function():Dynamic return cast StringTools.startsWith(name, pattern)), function():Dynamic return cast _Runtime.callProperty(pattern, 'test', cast ([name] : Array<Dynamic>)));
-        if (_Runtime.truthy(matches)) {
+        if ((cast _Runtime.strictEquals(name, null) : Bool)) { i++; continue; }
+        var matches:Dynamic = ((cast _Runtime.strictEquals(_Runtime.typeofValue(pattern), 'string') : Bool) ? (cast ((cast _Runtime.strictEquals(name, pattern) : Bool) || (cast StringTools.startsWith(name, pattern) : Bool)) : Dynamic) : (cast _Runtime.callProperty(pattern, 'test', cast ([name] : Array<Dynamic>)) : Dynamic));
+        if ((cast matches : Bool)) {
           _Runtime.callProperty(matchedIndices, 'push', cast ([i] : Array<Dynamic>));
         }
         i++;
       }
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(matchedIndices, 'length'), 0.0))) { return cast null; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(matchedIndices, 'length'), 0.0) : Bool)) { return cast null; }
     return cast _Runtime.callValue(createSpritesheetAnimation, cast ([{ direction: _Runtime.optionalField(options, 'direction'), frameDuration: _Runtime.optionalField(options, 'frameDuration'), frameDurations: _Runtime.optionalField(options, 'frameDurations'), frames: matchedIndices, loop: _Runtime.optionalField(options, 'loop'), originX: _Runtime.optionalField(options, 'originX'), originY: _Runtime.optionalField(options, 'originY') }] : Array<Dynamic>));
     return cast null;
   }

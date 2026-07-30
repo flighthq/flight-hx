@@ -17,22 +17,22 @@ class SceneAnimation {
     channels = _Runtime.field(clip, 'channels');
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(channels, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(channels, 'length') : Float)) : Bool)) {
         var channel:Dynamic = _Runtime.getIndex(channels, i);
         var target:Dynamic = (cast _Runtime.field(channel, 'targetRef') : Null<SceneAnimationTarget>);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(target, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(target, 'node'), _Runtime.field(_Runtime, 'UNDEFINED'))))) { i++; continue; }
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(target, 'path'), 'Weights'))) {
+        if ((cast ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(target, 'node'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { i++; continue; }
+        if ((cast _Runtime.strictEquals(_Runtime.field(target, 'path'), 'Weights') : Bool)) {
           var morph:Dynamic = _Runtime.field((cast _Runtime.field(target, 'node') : Mesh), 'morph');
-          if (_Runtime.truthy(_Runtime.looseEquals(morph, null))) { i++; continue; }
+          if ((cast _Runtime.looseEquals(morph, null) : Bool)) { i++; continue; }
           _Runtime.callValue(sampleAnimationTrack, cast ([_Runtime.field(morph, 'weights'), _Runtime.field(channel, 'track'), time] : Array<Dynamic>));
           i++;
           continue;
         }
         _Runtime.callValue(sampleAnimationTrack, cast ([SceneAnimation._scratch__sceneAnimation, _Runtime.field(channel, 'track'), time] : Array<Dynamic>));
         var node:Dynamic = _Runtime.field(target, 'node');
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(target, 'path'), 'Translation'))) {
+        if ((cast _Runtime.strictEquals(_Runtime.field(target, 'path'), 'Translation') : Bool)) {
           _Runtime.callValue(setVector3, cast ([_Runtime.field(node, 'position'), _Runtime.getIndex(SceneAnimation._scratch__sceneAnimation, 0.0), _Runtime.getIndex(SceneAnimation._scratch__sceneAnimation, 1.0), _Runtime.getIndex(SceneAnimation._scratch__sceneAnimation, 2.0)] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(target, 'path'), 'Scale'))) {
+        } else { if ((cast _Runtime.strictEquals(_Runtime.field(target, 'path'), 'Scale') : Bool)) {
           _Runtime.callValue(setVector3, cast ([_Runtime.field(node, 'scale'), _Runtime.getIndex(SceneAnimation._scratch__sceneAnimation, 0.0), _Runtime.getIndex(SceneAnimation._scratch__sceneAnimation, 1.0), _Runtime.getIndex(SceneAnimation._scratch__sceneAnimation, 2.0)] : Array<Dynamic>));
         } else {
           _Runtime.callValue(setQuaternion, cast ([_Runtime.field(node, 'rotation'), _Runtime.getIndex(SceneAnimation._scratch__sceneAnimation, 0.0), _Runtime.getIndex(SceneAnimation._scratch__sceneAnimation, 1.0), _Runtime.getIndex(SceneAnimation._scratch__sceneAnimation, 2.0), _Runtime.getIndex(SceneAnimation._scratch__sceneAnimation, 3.0)] : Array<Dynamic>));

@@ -28,7 +28,7 @@ class ElectronMenu {
     }, subscribeSelect: function(listener:Dynamic) {
       (selectListener = cast (listener : Dynamic));
       return cast function() {
-        if (_Runtime.truthy(_Runtime.strictEquals(selectListener, listener))) { (selectListener = cast (null : Dynamic)); }
+        if ((cast _Runtime.strictEquals(selectListener, listener) : Bool)) { (selectListener = cast (null : Dynamic)); }
       };
     } };
     return cast null;

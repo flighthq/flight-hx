@@ -13,7 +13,7 @@ class TextLayoutRuntime {
   }
 
   public static function getTextLayoutResult(runtime:TextLabelRuntime):TextLayoutResult {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'textLayout'), null))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'textLayout'), null) : Bool)) {
       _Runtime.setField(runtime, 'textLayout', _Runtime.callValue(createTextLayoutResult, cast ([] : Array<Dynamic>)));
     }
     return cast _Runtime.field(runtime, 'textLayout');

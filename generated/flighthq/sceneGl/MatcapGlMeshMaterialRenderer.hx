@@ -32,10 +32,10 @@ class MatcapGlMeshMaterialRenderer {
     gl = _Runtime.field(state, 'gl');
     matcap = (cast material : Null<MatcapMaterial>);
     program = _Runtime.callValue(ensureGlMatcapProgram, cast ([state, _Runtime.callValue(MatcapGlMeshMaterialRenderer.defineKeyForMaterial__matcapGlMeshMaterialRenderer, cast ([matcap] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, _Runtime.andValue(!_Runtime.strictEquals(matcap, null), function():Dynamic return cast _Runtime.field(matcap, 'doubleSided'))] : Array<Dynamic>));
+    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, ((cast !_Runtime.strictEquals(matcap, null) : Bool) && (cast _Runtime.field(matcap, 'doubleSided') : Bool))] : Array<Dynamic>));
     _Runtime.callValue(setGlMeshViewProjection, cast ([gl, _Runtime.field(program, 'locViewProjection'), camera] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(program, 'locView'), false, camera.view.m);
-    if (_Runtime.truthy(_Runtime.strictEquals(matcap, null))) {
+    if ((cast _Runtime.strictEquals(matcap, null) : Bool)) {
       _Runtime.callValue(bindGlMatcapSurface, cast ([state, program, MatcapGlMeshMaterialRenderer.WHITE__matcapGlMeshMaterialRenderer, null, 0.5] : Array<Dynamic>));
       return;
     }
@@ -44,7 +44,7 @@ class MatcapGlMeshMaterialRenderer {
   }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
-    if (_Runtime.truthy(_Runtime.strictEquals(program, null))) { return; }
+    if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
     _Runtime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
   } };
 
@@ -53,7 +53,7 @@ class MatcapGlMeshMaterialRenderer {
   }
 
   public static function defineKeyForMaterial__matcapGlMeshMaterialRenderer(material:Null<MatcapMaterial>):GlMatcapDefineKey {
-    return cast { alphaMaskEnabled: _Runtime.andValue(!_Runtime.strictEquals(material, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask')), hasMatcap: _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(material, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(material, 'matcap'), null)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(material, 'matcap'), 'image'), null)) };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasMatcap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'matcap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(material, 'matcap'), 'image'), null) : Bool)) };
     return cast null;
   }
 

@@ -13,14 +13,14 @@ class SurfaceComposite {
     if (mode == null) mode = cast (SurfaceCompositeModeValue.Normal : Dynamic);
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(dest, 'height'), '<'))) {
+      while ((cast ((cast py : Float) < (cast _Runtime.field(dest, 'height') : Float)) : Bool)) {
         var y:Dynamic = (_Runtime.field(dest, 'y') + py);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(y, 0.0, '<'), function():Dynamic return cast _Runtime.compare(y, _Runtime.field(_Runtime.field(dest, 'surface'), 'height'), '>=')))) { py++; continue; }
+        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, _Runtime.field(dest, 'width'), '<'))) {
+          while ((cast ((cast px : Float) < (cast _Runtime.field(dest, 'width') : Float)) : Bool)) {
             var x:Dynamic = (_Runtime.field(dest, 'x') + px);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(x, 0.0, '<'), function():Dynamic return cast _Runtime.compare(x, _Runtime.field(_Runtime.field(dest, 'surface'), 'width'), '>=')))) { px++; continue; }
+            if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'width') : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Dynamic = (((py * _Runtime.field(dest, 'width')) + px) * 4.0);
             _Runtime.callValue(SurfaceComposite.compositePixelInto__surfaceComposite, cast ([_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (((y * _Runtime.field(_Runtime.field(dest, 'surface'), 'width')) + x) * 4.0), _Runtime.getIndex(pixels, si), _Runtime.getIndex(pixels, (si + 1.0)), _Runtime.getIndex(pixels, (si + 2.0)), _Runtime.getIndex(pixels, (si + 3.0)), mode] : Array<Dynamic>));
             px++;
@@ -40,16 +40,16 @@ class SurfaceComposite {
     sh = HxMath.min(_Runtime.field(dest, 'height'), _Runtime.field(source, 'height'));
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, sh, '<'))) {
+      while ((cast ((cast py : Float) < (cast sh : Float)) : Bool)) {
         var sourceY:Dynamic = (_Runtime.field(source, 'y') + py);
         var y:Dynamic = (_Runtime.field(dest, 'y') + py);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(sourceY, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sourceY, _Runtime.field(_Runtime.field(source, 'surface'), 'height'), '>=')), function():Dynamic return cast _Runtime.compare(y, 0.0, '<')), function():Dynamic return cast _Runtime.compare(y, _Runtime.field(_Runtime.field(dest, 'surface'), 'height'), '>=')))) { py++; continue; }
+        if ((cast ((cast ((cast ((cast ((cast sourceY : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceY : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'height') : Float)) : Bool)) : Bool) || (cast ((cast y : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, sw, '<'))) {
+          while ((cast ((cast px : Float) < (cast sw : Float)) : Bool)) {
             var sourceX:Dynamic = (_Runtime.field(source, 'x') + px);
             var x:Dynamic = (_Runtime.field(dest, 'x') + px);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(sourceX, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sourceX, _Runtime.field(_Runtime.field(source, 'surface'), 'width'), '>=')), function():Dynamic return cast _Runtime.compare(x, 0.0, '<')), function():Dynamic return cast _Runtime.compare(x, _Runtime.field(_Runtime.field(dest, 'surface'), 'width'), '>=')))) { px++; continue; }
+            if ((cast ((cast ((cast ((cast ((cast sourceX : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceX : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast x : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast x : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'width') : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Dynamic = (((sourceY * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sourceX) * 4.0);
             _Runtime.callValue(SurfaceComposite.compositePixelInto__surfaceComposite, cast ([_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (((y * _Runtime.field(_Runtime.field(dest, 'surface'), 'width')) + x) * 4.0), _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), si), _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 1.0)), _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 2.0)), _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 3.0)), mode] : Array<Dynamic>));
             px++;
@@ -64,14 +64,14 @@ class SurfaceComposite {
   public static function extractSurfacePixels(out:flighthq._internal._UInt8ClampedArray, source:SurfaceRegion):Void {
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(source, 'height'), '<'))) {
+      while ((cast ((cast py : Float) < (cast _Runtime.field(source, 'height') : Float)) : Bool)) {
         var sourceY:Dynamic = (_Runtime.field(source, 'y') + py);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(sourceY, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sourceY, _Runtime.field(_Runtime.field(source, 'surface'), 'height'), '>=')))) { py++; continue; }
+        if ((cast ((cast ((cast sourceY : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceY : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, _Runtime.field(source, 'width'), '<'))) {
+          while ((cast ((cast px : Float) < (cast _Runtime.field(source, 'width') : Float)) : Bool)) {
             var sourceX:Dynamic = (_Runtime.field(source, 'x') + px);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(sourceX, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sourceX, _Runtime.field(_Runtime.field(source, 'surface'), 'width'), '>=')))) { px++; continue; }
+            if ((cast ((cast ((cast sourceX : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceX : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'width') : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Dynamic = (((sourceY * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sourceX) * 4.0);
             var di:Dynamic = (((py * _Runtime.field(source, 'width')) + px) * 4.0);
             _Runtime.setIndex(out, di, _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), si));
@@ -89,14 +89,14 @@ class SurfaceComposite {
   public static function extractSurfacePixels32(out:flighthq._internal._UInt32Array, source:SurfaceRegion):Void {
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(source, 'height'), '<'))) {
+      while ((cast ((cast py : Float) < (cast _Runtime.field(source, 'height') : Float)) : Bool)) {
         var sourceY:Dynamic = (_Runtime.field(source, 'y') + py);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(sourceY, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sourceY, _Runtime.field(_Runtime.field(source, 'surface'), 'height'), '>=')))) { py++; continue; }
+        if ((cast ((cast ((cast sourceY : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceY : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, _Runtime.field(source, 'width'), '<'))) {
+          while ((cast ((cast px : Float) < (cast _Runtime.field(source, 'width') : Float)) : Bool)) {
             var sourceX:Dynamic = (_Runtime.field(source, 'x') + px);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(sourceX, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sourceX, _Runtime.field(_Runtime.field(source, 'surface'), 'width'), '>=')))) { px++; continue; }
+            if ((cast ((cast ((cast sourceX : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceX : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'width') : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Dynamic = (((sourceY * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sourceX) * 4.0);
             _Runtime.setIndex(out, ((py * _Runtime.field(source, 'width')) + px), _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), si)) << 24)) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 1.0))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 2.0))) << 8)))) | _Runtime.toInt32(_Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 3.0))))), 0));
             px++;
@@ -110,14 +110,14 @@ class SurfaceComposite {
   public static function writeSurfacePixels(dest:SurfaceRegion, pixels:flighthq._internal._UInt8ClampedArray):Void {
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(dest, 'height'), '<'))) {
+      while ((cast ((cast py : Float) < (cast _Runtime.field(dest, 'height') : Float)) : Bool)) {
         var y:Dynamic = (_Runtime.field(dest, 'y') + py);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(y, 0.0, '<'), function():Dynamic return cast _Runtime.compare(y, _Runtime.field(_Runtime.field(dest, 'surface'), 'height'), '>=')))) { py++; continue; }
+        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, _Runtime.field(dest, 'width'), '<'))) {
+          while ((cast ((cast px : Float) < (cast _Runtime.field(dest, 'width') : Float)) : Bool)) {
             var x:Dynamic = (_Runtime.field(dest, 'x') + px);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(x, 0.0, '<'), function():Dynamic return cast _Runtime.compare(x, _Runtime.field(_Runtime.field(dest, 'surface'), 'width'), '>=')))) { px++; continue; }
+            if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'width') : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Dynamic = (((py * _Runtime.field(dest, 'width')) + px) * 4.0);
             var di:Dynamic = (((y * _Runtime.field(_Runtime.field(dest, 'surface'), 'width')) + x) * 4.0);
             _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), di, _Runtime.getIndex(pixels, si));
@@ -136,14 +136,14 @@ class SurfaceComposite {
   public static function writeSurfacePixels32(dest:SurfaceRegion, pixels:flighthq._internal._UInt32Array):Void {
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(dest, 'height'), '<'))) {
+      while ((cast ((cast py : Float) < (cast _Runtime.field(dest, 'height') : Float)) : Bool)) {
         var y:Dynamic = (_Runtime.field(dest, 'y') + py);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(y, 0.0, '<'), function():Dynamic return cast _Runtime.compare(y, _Runtime.field(_Runtime.field(dest, 'surface'), 'height'), '>=')))) { py++; continue; }
+        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, _Runtime.field(dest, 'width'), '<'))) {
+          while ((cast ((cast px : Float) < (cast _Runtime.field(dest, 'width') : Float)) : Bool)) {
             var x:Dynamic = (_Runtime.field(dest, 'x') + px);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(x, 0.0, '<'), function():Dynamic return cast _Runtime.compare(x, _Runtime.field(_Runtime.field(dest, 'surface'), 'width'), '>=')))) { px++; continue; }
+            if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'width') : Float)) : Bool)) : Bool)) { px++; continue; }
             var color:Dynamic = _Runtime.getIndex(pixels, ((py * _Runtime.field(dest, 'width')) + px));
             var di:Dynamic = (((y * _Runtime.field(_Runtime.field(dest, 'surface'), 'width')) + x) * 4.0);
             _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), di, (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255));
@@ -227,19 +227,19 @@ class SurfaceComposite {
         return cast ((cb + cs) - (((2.0 * cb) * cs) / 255.0));
       }
       else if (__switchValue == SurfaceCompositeModeValue.Overlay) {
-        return cast _Runtime.select(_Runtime.compare(cb, 128.0, '<'), function():Dynamic return cast (((2.0 * cb) * cs) / 255.0), function():Dynamic return cast (255.0 - (((2.0 * (255.0 - cb)) * (255.0 - cs)) / 255.0)));
+        return cast ((cast ((cast cb : Float) < (cast 128.0 : Float)) : Bool) ? (cast (((2.0 * cb) * cs) / 255.0) : Dynamic) : (cast (255.0 - (((2.0 * (255.0 - cb)) * (255.0 - cs)) / 255.0)) : Dynamic));
       }
       else if (__switchValue == SurfaceCompositeModeValue.HardLight) {
-        return cast _Runtime.select(_Runtime.compare(cs, 128.0, '<'), function():Dynamic return cast (((2.0 * cb) * cs) / 255.0), function():Dynamic return cast (255.0 - (((2.0 * (255.0 - cb)) * (255.0 - cs)) / 255.0)));
+        return cast ((cast ((cast cs : Float) < (cast 128.0 : Float)) : Bool) ? (cast (((2.0 * cb) * cs) / 255.0) : Dynamic) : (cast (255.0 - (((2.0 * (255.0 - cb)) * (255.0 - cs)) / 255.0)) : Dynamic));
       }
       else if (__switchValue == SurfaceCompositeModeValue.SoftLight) {
         return cast _Runtime.callValue(SurfaceComposite.softLightChannel__surfaceComposite, cast ([cb, cs] : Array<Dynamic>));
       }
       else if (__switchValue == SurfaceCompositeModeValue.ColorDodge) {
-        return cast _Runtime.select(_Runtime.compare(cs, 255.0, '>='), function():Dynamic return cast 255.0, function():Dynamic return cast HxMath.min(255.0, ((cb * 255.0) / (255.0 - cs))));
+        return cast ((cast ((cast cs : Float) >= (cast 255.0 : Float)) : Bool) ? (cast 255.0 : Dynamic) : (cast HxMath.min(255.0, ((cb * 255.0) / (255.0 - cs))) : Dynamic));
       }
       else if (__switchValue == SurfaceCompositeModeValue.ColorBurn) {
-        return cast _Runtime.select(_Runtime.compare(cs, 0.0, '<='), function():Dynamic return cast 0.0, function():Dynamic return cast (255.0 - HxMath.min(255.0, (((255.0 - cb) * 255.0) / cs))));
+        return cast ((cast ((cast cs : Float) <= (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast (255.0 - HxMath.min(255.0, (((255.0 - cb) * 255.0) / cs))) : Dynamic));
       }
       else if (__switchValue == SurfaceCompositeModeValue.Invert) {
         return cast (255.0 - cb);
@@ -258,8 +258,8 @@ class SurfaceComposite {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     b = (cb / 255.0);
     s = (cs / 255.0);
-    d = _Runtime.select(_Runtime.compare(b, 0.25, '<='), function():Dynamic return cast (((((16.0 * b) - 12.0) * b) + 4.0) * b), function():Dynamic return cast HxMath.sqrt(b));
-    out = _Runtime.select(_Runtime.compare(s, 0.5, '<='), function():Dynamic return cast (b - (((1.0 - (2.0 * s)) * b) * (1.0 - b))), function():Dynamic return cast (b + (((2.0 * s) - 1.0) * (d - b))));
+    d = ((cast ((cast b : Float) <= (cast 0.25 : Float)) : Bool) ? (cast (((((16.0 * b) - 12.0) * b) + 4.0) * b) : Dynamic) : (cast HxMath.sqrt(b) : Dynamic));
+    out = ((cast ((cast s : Float) <= (cast 0.5 : Float)) : Bool) ? (cast (b - (((1.0 - (2.0 * s)) * b) * (1.0 - b))) : Dynamic) : (cast (b + (((2.0 * s) - 1.0) * (d - b))) : Dynamic));
     return cast (out * 255.0);
     return cast null;
   }
@@ -283,7 +283,7 @@ class SurfaceComposite {
     fa = _Runtime.getIndex(__destructure0, 0.0);
     fb = _Runtime.getIndex(__destructure0, 1.0);
     outA = ((fa * srcA) + (fb * dstA));
-    if (_Runtime.truthy(_Runtime.compare(outA, 0.0, '<='))) {
+    if ((cast ((cast outA : Float) <= (cast 0.0 : Float)) : Bool)) {
       _Runtime.setIndex(dest, di, 0.0);
       _Runtime.setIndex(dest, (di + 1.0), 0.0);
       _Runtime.setIndex(dest, (di + 2.0), 0.0);

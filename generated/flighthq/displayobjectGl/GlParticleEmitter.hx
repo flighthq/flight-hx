@@ -59,7 +59,7 @@ class GlParticleEmitter {
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
     needed = (count * GlParticleEmitter.INSTANCE_FLOATS__glParticleEmitter);
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.coalesce(_Runtime.optionalField(_Runtime.field(runtime, 'particleInstanceData'), 'length'), function():Dynamic return cast 0.0), needed, '>='))) { return; }
+    if ((cast ((cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(runtime, 'particleInstanceData'), 'length'), function():Dynamic return cast 0.0) : Float) >= (cast needed : Float)) : Bool)) { return; }
     newSize = HxMath.max(needed, (_Runtime.coalesce(_Runtime.optionalField(_Runtime.field(runtime, 'particleInstanceData'), 'length'), function():Dynamic return cast 0.0) * 2.0));
     _Runtime.setField(runtime, 'particleInstanceData', new flighthq._internal._Float32Array(newSize));
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(runtime, 'particleInstanceBuffer'));
@@ -100,7 +100,7 @@ class GlParticleEmitter {
     ids = _Runtime.field(__destructure0, 'ids');
     particleCount = _Runtime.field(__destructure0, 'particleCount');
     transforms = _Runtime.field(__destructure0, 'transforms');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(atlas, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(atlas, 'image'), null)), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(atlas, 'image')] : Array<Dynamic>)))), function():Dynamic return cast _Runtime.strictEquals(particleCount, 0.0)))) { return; }
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(atlas, 'image'), null) : Bool)) : Bool) || (cast !(cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(atlas, 'image')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) : Bool)) { return; }
     shader = _Runtime.callValue(GlParticleEmitter.ensureParticleShader__glParticleEmitter, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(GlParticleEmitter.ensureInstanceCapacity__glParticleEmitter, cast ([state, particleCount] : Array<Dynamic>));
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
@@ -118,11 +118,11 @@ class GlParticleEmitter {
     drawCount = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, particleCount, '<'))) {
+      while ((cast ((cast i : Float) < (cast particleCount : Float)) : Bool)) {
         var id:Dynamic = _Runtime.getIndex(ids, i);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(id, 0.0, '<'), function():Dynamic return cast _Runtime.compare(id, numRegions, '>=')))) { i++; continue; }
+        if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
         var region:Dynamic = _Runtime.getIndex(regions, id);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(region, 'width'), 0.0, '<='), function():Dynamic return cast _Runtime.compare(_Runtime.field(region, 'height'), 0.0, '<=')))) { i++; continue; }
+        if ((cast ((cast ((cast _Runtime.field(region, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(region, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
         var tt:Dynamic = (i * 4.0);
         var px:Dynamic = _Runtime.getIndex(transforms, tt);
         var py:Dynamic = _Runtime.getIndex(transforms, (tt + 1.0));
@@ -131,10 +131,10 @@ class GlParticleEmitter {
         var cosR:Dynamic = (HxMath.cos(rotation) * scale);
         var sinR:Dynamic = (HxMath.sin(rotation) * scale);
         var ct:Dynamic = (i * 3.0);
-        var hasColors:Dynamic = _Runtime.andValue(!_Runtime.looseEquals(colors, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(colors, 'length'), (ct + 2.0), '>'));
-        var r:Dynamic = _Runtime.select(hasColors, function():Dynamic return cast _Runtime.getIndex(colors, ct), function():Dynamic return cast 1.0);
-        var g:Dynamic = _Runtime.select(hasColors, function():Dynamic return cast _Runtime.getIndex(colors, (ct + 1.0)), function():Dynamic return cast 1.0);
-        var b:Dynamic = _Runtime.select(hasColors, function():Dynamic return cast _Runtime.getIndex(colors, (ct + 2.0)), function():Dynamic return cast 1.0);
+        var hasColors:Dynamic = ((cast !_Runtime.looseEquals(colors, null) : Bool) && (cast ((cast _Runtime.field(colors, 'length') : Float) > (cast (ct + 2.0) : Float)) : Bool));
+        var r:Dynamic = ((cast hasColors : Bool) ? (cast _Runtime.getIndex(colors, ct) : Dynamic) : (cast 1.0 : Dynamic));
+        var g:Dynamic = ((cast hasColors : Bool) ? (cast _Runtime.getIndex(colors, (ct + 1.0)) : Dynamic) : (cast 1.0 : Dynamic));
+        var b:Dynamic = ((cast hasColors : Bool) ? (cast _Runtime.getIndex(colors, (ct + 2.0)) : Dynamic) : (cast 1.0 : Dynamic));
         _Runtime.setIndex(instanceData, base, px);
         _Runtime.setIndex(instanceData, (base + 1.0), py);
         _Runtime.setIndex(instanceData, (base + 2.0), cosR);
@@ -154,17 +154,17 @@ class GlParticleEmitter {
         i++;
       }
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(drawCount, 0.0))) { return; }
+    if ((cast _Runtime.strictEquals(drawCount, 0.0) : Bool)) { return; }
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(runtime, 'particleInstanceBuffer'));
     flighthq._internal.backend.WebGl2Backend.bufferSubData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, 0.0, instanceData, 0.0, (drawCount * GlParticleEmitter.INSTANCE_FLOATS__glParticleEmitter));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'currentProgram'), _Runtime.field(shader, 'program')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'currentProgram'), _Runtime.field(shader, 'program')) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.useProgram(gl, _Runtime.field(shader, 'program'));
       _Runtime.setField(runtime, 'currentProgram', _Runtime.field(shader, 'program'));
     }
     clipW = (2.0 / _Runtime.field(viewport, 'width'));
     clipH = (2.0 / _Runtime.field(viewport, 'height'));
     m = _Runtime.field(runtime, 'matrixArray');
-    if (_Runtime.truthy(_Runtime.field(_Runtime.field(source, 'data'), 'worldSpace'))) {
+    if ((cast _Runtime.field(_Runtime.field(source, 'data'), 'worldSpace') : Bool)) {
       _Runtime.setIndex(m, 0.0, clipW);
       _Runtime.setIndex(m, 1.0, 0.0);
       _Runtime.setIndex(m, 2.0, 0.0);

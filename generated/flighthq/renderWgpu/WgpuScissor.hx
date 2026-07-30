@@ -17,7 +17,7 @@ class WgpuScissor {
     var h:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     rect = _Runtime.field(runtime, 'currentScissorRect');
-    if (_Runtime.truthy(_Runtime.strictEquals(rect, null))) { return; }
+    if ((cast _Runtime.strictEquals(rect, null) : Bool)) { return; }
     x = HxMath.max(0.0, HxMath.floor(_Runtime.field(rect, 'x')));
     y = HxMath.max(0.0, HxMath.floor(_Runtime.field(rect, 'y')));
     w = HxMath.max(1.0, HxMath.ceil(_Runtime.field(rect, 'width')));
@@ -36,7 +36,7 @@ class WgpuScissor {
   public static function pushWgpuScissorRect(state:WgpuRenderState, rect:WgpuScissorRect):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'currentScissorRect'), null))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'currentScissorRect'), null) : Bool)) {
       _Runtime.callProperty(_Runtime.field(runtime, 'scissorStack'), 'push', cast ([_Runtime.field(runtime, 'currentScissorRect')] : Array<Dynamic>));
     }
     _Runtime.setField(runtime, 'currentScissorRect', { x: _Runtime.field(rect, 'x'), y: _Runtime.field(rect, 'y'), width: _Runtime.field(rect, 'width'), height: _Runtime.field(rect, 'height') });

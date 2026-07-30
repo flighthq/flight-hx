@@ -37,19 +37,19 @@ class SurfaceRotate {
     var dStride:Dynamic = cast _Runtime.UNDEFINED;
     w = HxMath.min(_Runtime.field(dest, 'width'), _Runtime.field(source, 'width'));
     h = HxMath.min(_Runtime.field(dest, 'height'), _Runtime.field(source, 'height'));
-    if (_Runtime.truthy(_Runtime.callValue(SurfaceRotate.isSameRegion__surfaceRotate, cast ([dest, source] : Array<Dynamic>)))) {
+    if ((cast _Runtime.callValue(SurfaceRotate.isSameRegion__surfaceRotate, cast ([dest, source] : Array<Dynamic>)) : Bool)) {
       var data:Dynamic = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
       var stride:Dynamic = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
       var total:Dynamic = (w * h);
       var half:Dynamic = (_Runtime.toInt32(total) >> 1);
       {
         var k:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(k, half, '<'))) {
+        while ((cast ((cast k : Float) < (cast half : Float)) : Bool)) {
           var ax:Dynamic = (_Runtime.field(dest, 'x') + _Runtime.fmod(k, w));
           var ay:Dynamic = (_Runtime.field(dest, 'y') + HxMath.floor((k / w)));
           var bx:Dynamic = (_Runtime.field(dest, 'x') + ((w - 1.0) - _Runtime.fmod(k, w)));
           var by:Dynamic = (_Runtime.field(dest, 'y') + ((h - 1.0) - HxMath.floor((k / w))));
-          if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.callValue(SurfaceRotate.inBounds__surfaceRotate, cast ([ax, ay, stride, _Runtime.field(_Runtime.field(dest, 'surface'), 'height')] : Array<Dynamic>))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(SurfaceRotate.inBounds__surfaceRotate, cast ([bx, by, stride, _Runtime.field(_Runtime.field(dest, 'surface'), 'height')] : Array<Dynamic>)))))) { k++; continue; }
+          if ((cast ((cast !(cast _Runtime.callValue(SurfaceRotate.inBounds__surfaceRotate, cast ([ax, ay, stride, _Runtime.field(_Runtime.field(dest, 'surface'), 'height')] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callValue(SurfaceRotate.inBounds__surfaceRotate, cast ([bx, by, stride, _Runtime.field(_Runtime.field(dest, 'surface'), 'height')] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { k++; continue; }
           _Runtime.callValue(SurfaceRotate.swapPixels__surfaceRotate, cast ([data, (((ay * stride) + ax) * 4.0), (((by * stride) + bx) * 4.0)] : Array<Dynamic>));
           k++;
         }
@@ -62,16 +62,16 @@ class SurfaceRotate {
     dStride = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, h, '<'))) {
+      while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
         var sy:Dynamic = (_Runtime.field(source, 'y') + ((h - 1.0) - py));
         var dy:Dynamic = (_Runtime.field(dest, 'y') + py);
-        if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.callValue(SurfaceRotate.inBounds__surfaceRotate, cast ([0.0, sy, sStride, _Runtime.field(_Runtime.field(source, 'surface'), 'height')] : Array<Dynamic>))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(SurfaceRotate.inBounds__surfaceRotate, cast ([0.0, dy, dStride, _Runtime.field(_Runtime.field(dest, 'surface'), 'height')] : Array<Dynamic>)))))) { py++; continue; }
+        if ((cast ((cast !(cast _Runtime.callValue(SurfaceRotate.inBounds__surfaceRotate, cast ([0.0, sy, sStride, _Runtime.field(_Runtime.field(source, 'surface'), 'height')] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callValue(SurfaceRotate.inBounds__surfaceRotate, cast ([0.0, dy, dStride, _Runtime.field(_Runtime.field(dest, 'surface'), 'height')] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, w, '<'))) {
+          while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
             var sx:Dynamic = (_Runtime.field(source, 'x') + ((w - 1.0) - px));
             var dx:Dynamic = (_Runtime.field(dest, 'x') + px);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(sx, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sx, sStride, '>=')), function():Dynamic return cast _Runtime.compare(dx, 0.0, '<')), function():Dynamic return cast _Runtime.compare(dx, dStride, '>=')))) { px++; continue; }
+            if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast sStride : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) >= (cast dStride : Float)) : Bool)) : Bool)) { px++; continue; }
             _Runtime.callValue(SurfaceRotate.copyPixel__surfaceRotate, cast ([dd, (((dy * dStride) + dx) * 4.0), sd, (((sy * sStride) + sx) * 4.0)] : Array<Dynamic>));
             px++;
           }
@@ -97,17 +97,17 @@ class SurfaceRotate {
     dStride = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, sh, '<'))) {
+      while ((cast ((cast py : Float) < (cast sh : Float)) : Bool)) {
         var sy:Dynamic = (_Runtime.field(source, 'y') + py);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(sy, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sy, _Runtime.field(_Runtime.field(source, 'surface'), 'height'), '>=')))) { py++; continue; }
+        if ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, sw, '<'))) {
+          while ((cast ((cast px : Float) < (cast sw : Float)) : Bool)) {
             var sx:Dynamic = (_Runtime.field(source, 'x') + px);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(sx, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sx, sStride, '>=')))) { px++; continue; }
+            if ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast sStride : Float)) : Bool)) : Bool)) { px++; continue; }
             var dx:Dynamic = (_Runtime.field(dest, 'x') + ((sh - 1.0) - py));
             var dy:Dynamic = (_Runtime.field(dest, 'y') + px);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(dx, 0.0, '<'), function():Dynamic return cast _Runtime.compare(dx, dStride, '>=')), function():Dynamic return cast _Runtime.compare(dy, 0.0, '<')), function():Dynamic return cast _Runtime.compare(dy, _Runtime.field(_Runtime.field(dest, 'surface'), 'height'), '>=')))) { px++; continue; }
+            if ((cast ((cast ((cast ((cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast dx : Float) >= (cast dStride : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool)) { px++; continue; }
             _Runtime.callValue(SurfaceRotate.copyPixel__surfaceRotate, cast ([dd, (((dy * dStride) + dx) * 4.0), sd, (((sy * sStride) + sx) * 4.0)] : Array<Dynamic>));
             px++;
           }
@@ -133,17 +133,17 @@ class SurfaceRotate {
     dStride = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, sh, '<'))) {
+      while ((cast ((cast py : Float) < (cast sh : Float)) : Bool)) {
         var sy:Dynamic = (_Runtime.field(source, 'y') + py);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(sy, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sy, _Runtime.field(_Runtime.field(source, 'surface'), 'height'), '>=')))) { py++; continue; }
+        if ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, sw, '<'))) {
+          while ((cast ((cast px : Float) < (cast sw : Float)) : Bool)) {
             var sx:Dynamic = (_Runtime.field(source, 'x') + px);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(sx, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sx, sStride, '>=')))) { px++; continue; }
+            if ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast sStride : Float)) : Bool)) : Bool)) { px++; continue; }
             var dx:Dynamic = (_Runtime.field(dest, 'x') + py);
             var dy:Dynamic = (_Runtime.field(dest, 'y') + ((sw - 1.0) - px));
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(dx, 0.0, '<'), function():Dynamic return cast _Runtime.compare(dx, dStride, '>=')), function():Dynamic return cast _Runtime.compare(dy, 0.0, '<')), function():Dynamic return cast _Runtime.compare(dy, _Runtime.field(_Runtime.field(dest, 'surface'), 'height'), '>=')))) { px++; continue; }
+            if ((cast ((cast ((cast ((cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast dx : Float) >= (cast dStride : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool)) { px++; continue; }
             _Runtime.callValue(SurfaceRotate.copyPixel__surfaceRotate, cast ([dd, (((dy * dStride) + dx) * 4.0), sd, (((sy * sStride) + sx) * 4.0)] : Array<Dynamic>));
             px++;
           }
@@ -162,19 +162,19 @@ class SurfaceRotate {
   }
 
   public static function inBounds__surfaceRotate(x:Float, y:Float, width:Float, height:Float):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(x, 0.0, '>='), function():Dynamic return cast _Runtime.compare(x, width, '<')), function():Dynamic return cast _Runtime.compare(y, 0.0, '>=')), function():Dynamic return cast _Runtime.compare(y, height, '<'));
+    return cast ((cast ((cast ((cast ((cast x : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast x : Float) < (cast width : Float)) : Bool)) : Bool) && (cast ((cast y : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast y : Float) < (cast height : Float)) : Bool));
     return cast null;
   }
 
   public static function isSameRegion__surfaceRotate(a:SurfaceRegion, b:SurfaceRegion):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(a, 'surface'), _Runtime.field(b, 'surface')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'x'), _Runtime.field(b, 'x'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'y'), _Runtime.field(b, 'y'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'width'), _Runtime.field(b, 'width'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'height'), _Runtime.field(b, 'height')));
+    return cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(a, 'surface'), _Runtime.field(b, 'surface')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'x'), _Runtime.field(b, 'x')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'y'), _Runtime.field(b, 'y')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'width'), _Runtime.field(b, 'width')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'height'), _Runtime.field(b, 'height')) : Bool));
     return cast null;
   }
 
   public static function swapPixels__surfaceRotate(data:flighthq._internal._UInt8ClampedArray, a:Float, b:Float):Void {
     {
       var c:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(c, 4.0, '<'))) {
+      while ((cast ((cast c : Float) < (cast 4.0 : Float)) : Bool)) {
         var t:Dynamic = _Runtime.getIndex(data, (a + c));
         _Runtime.setIndex(data, (a + c), _Runtime.getIndex(data, (b + c)));
         _Runtime.setIndex(data, (b + c), t);

@@ -19,9 +19,9 @@ class RenderProxyAdapter {
     var traverseChildren:Dynamic = cast _Runtime.UNDEFINED;
     renderAdapter = _Runtime.coalesce(((cast _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderProxyAdapterMap') : flighthq._internal._WeakMap).get(source)), function():Dynamic return cast null);
     traverseChildren = true;
-    if (_Runtime.truthy(!_Runtime.strictEquals(renderAdapter, null))) {
+    if ((cast !_Runtime.strictEquals(renderAdapter, null) : Bool)) {
       var result:Dynamic = _Runtime.callProperty(renderAdapter, 'adapt', cast ([state, source, data] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(result, null))) {
+      if ((cast !_Runtime.strictEquals(result, null) : Bool)) {
         (traverseChildren = cast (result : Dynamic));
         _Runtime.callValue(updateRenderProxyRenderer, cast ([state, data] : Array<Dynamic>));
       }
@@ -36,11 +36,11 @@ class RenderProxyAdapter {
 
   public static function setRenderProxyAdapter(state:RenderState, source:Renderable, adapter:Null<flighthq.types.RenderProxyAdapter>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderAdaptHook'), applyRenderProxyAdapter))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderAdaptHook'), applyRenderProxyAdapter) : Bool)) {
       _Runtime.callValue(installRenderAdaptHook, cast ([state, applyRenderProxyAdapter] : Array<Dynamic>));
     }
     runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(adapter, null))) {
+    if ((cast _Runtime.strictEquals(adapter, null) : Bool)) {
       ((cast _Runtime.field(runtime, 'renderProxyAdapterMap') : flighthq._internal._WeakMap).delete_(source));
     } else {
       ((cast _Runtime.field(runtime, 'renderProxyAdapterMap') : flighthq._internal._WeakMap).set(source, adapter));

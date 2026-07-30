@@ -9,7 +9,7 @@ import flighthq.types.Spring;
 
 class IsSpringSettled {
   public static function isSpringSettled(spring:Spring, target:Float, positionEpsilon:Float = 0.001, velocityEpsilon:Float = 0.001):Bool {
-    return cast _Runtime.andValue(_Runtime.callValue(approxEqual, cast ([_Runtime.field(spring, 'value'), target, positionEpsilon] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(approxZero, cast ([_Runtime.field(spring, 'velocity'), velocityEpsilon] : Array<Dynamic>)));
+    return cast ((cast _Runtime.callValue(approxEqual, cast ([_Runtime.field(spring, 'value'), target, positionEpsilon] : Array<Dynamic>)) : Bool) && (cast _Runtime.callValue(approxZero, cast ([_Runtime.field(spring, 'velocity'), velocityEpsilon] : Array<Dynamic>)) : Bool));
     return cast null;
   }
 

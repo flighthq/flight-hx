@@ -24,7 +24,7 @@ class PremultiplyColorAlpha {
     var g:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
     a = ((_Runtime.toInt32(color) & 255) / 255.0);
-    if (_Runtime.truthy(_Runtime.strictEquals(a, 0.0))) { return cast color; }
+    if ((cast _Runtime.strictEquals(a, 0.0) : Bool)) { return cast color; }
     r = HxMath.min(255.0, HxMath.round(((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255) / a)));
     g = HxMath.min(255.0, HxMath.round(((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255) / a)));
     b = HxMath.min(255.0, HxMath.round(((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255) / a)));

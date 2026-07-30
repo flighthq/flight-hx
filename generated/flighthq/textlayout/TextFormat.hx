@@ -33,7 +33,7 @@ class TextFormat {
     result = _Runtime.mergeObjects([base]);
     for (key in _Runtime.iterable((cast flighthq._internal.DynamicObject.keys(override_) : Array<flighthq.types.TextFormat>))) {
       var value:Dynamic = _Runtime.getIndex(override_, key);
-      if (_Runtime.truthy(!_Runtime.looseEquals(value, null))) {
+      if ((cast !_Runtime.looseEquals(value, null) : Bool)) {
         _Runtime.setIndex((cast result : Dynamic), key, value);
       }
     }

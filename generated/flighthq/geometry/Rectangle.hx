@@ -23,7 +23,7 @@ class Rectangle {
     x1 = HxMath.min(_Runtime.callValue(getRectangleMaxX, cast ([a] : Array<Dynamic>)), _Runtime.callValue(getRectangleMaxX, cast ([b] : Array<Dynamic>)));
     y0 = HxMath.max(_Runtime.callValue(getRectangleMinY, cast ([a] : Array<Dynamic>)), _Runtime.callValue(getRectangleMinY, cast ([b] : Array<Dynamic>)));
     y1 = HxMath.min(_Runtime.callValue(getRectangleMaxY, cast ([a] : Array<Dynamic>)), _Runtime.callValue(getRectangleMaxY, cast ([b] : Array<Dynamic>)));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(x1, x0, '<='), function():Dynamic return cast _Runtime.compare(y1, y0, '<=')))) {
+    if ((cast ((cast ((cast x1 : Float) <= (cast x0 : Float)) : Bool) || (cast ((cast y1 : Float) <= (cast y0 : Float)) : Bool)) : Bool)) {
       _Runtime.callValue(setEmptyRectangle, cast ([out] : Array<Dynamic>));
       return;
     }
@@ -47,12 +47,12 @@ class Rectangle {
     x1 = HxMath.max(_Runtime.field(source, 'x'), (_Runtime.field(source, 'x') + _Runtime.field(source, 'width')));
     y0 = HxMath.min(_Runtime.field(source, 'y'), (_Runtime.field(source, 'y') + _Runtime.field(source, 'height')));
     y1 = HxMath.max(_Runtime.field(source, 'y'), (_Runtime.field(source, 'y') + _Runtime.field(source, 'height')));
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(x, x0, '>='), function():Dynamic return cast _Runtime.compare(x, x1, '<')), function():Dynamic return cast _Runtime.compare(y, y0, '>=')), function():Dynamic return cast _Runtime.compare(y, y1, '<'));
+    return cast ((cast ((cast ((cast ((cast x : Float) >= (cast x0 : Float)) : Bool) && (cast ((cast x : Float) < (cast x1 : Float)) : Bool)) : Bool) && (cast ((cast y : Float) >= (cast y0 : Float)) : Bool)) : Bool) && (cast ((cast y : Float) < (cast y1 : Float)) : Bool));
     return cast null;
   }
 
   public static function copyRectangle(out:RectangleLike, source:RectangleLike):Void {
-    if (_Runtime.truthy(!_Runtime.strictEquals(out, source))) {
+    if ((cast !_Runtime.strictEquals(out, source) : Bool)) {
       _Runtime.setField(out, 'x', _Runtime.field(source, 'x'));
       _Runtime.setField(out, 'y', _Runtime.field(source, 'y'));
       _Runtime.setField(out, 'width', _Runtime.field(source, 'width'));
@@ -82,14 +82,14 @@ class Rectangle {
     ox1 = HxMath.max(_Runtime.field(other, 'x'), (_Runtime.field(other, 'x') + _Runtime.field(other, 'width')));
     oy0 = HxMath.min(_Runtime.field(other, 'y'), (_Runtime.field(other, 'y') + _Runtime.field(other, 'height')));
     oy1 = HxMath.max(_Runtime.field(other, 'y'), (_Runtime.field(other, 'y') + _Runtime.field(other, 'height')));
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(ox0, sx0, '>='), function():Dynamic return cast _Runtime.compare(oy0, sy0, '>=')), function():Dynamic return cast _Runtime.compare(ox1, sx1, '<=')), function():Dynamic return cast _Runtime.compare(oy1, sy1, '<='));
+    return cast ((cast ((cast ((cast ((cast ox0 : Float) >= (cast sx0 : Float)) : Bool) && (cast ((cast oy0 : Float) >= (cast sy0 : Float)) : Bool)) : Bool) && (cast ((cast ox1 : Float) <= (cast sx1 : Float)) : Bool)) : Bool) && (cast ((cast oy1 : Float) <= (cast sy1 : Float)) : Bool));
     return cast null;
   }
 
   public static function equalsRectangle(a:Null<RectangleLike>, b:Null<RectangleLike>):Bool {
-    if (_Runtime.truthy(_Runtime.strictEquals(a, b))) { return cast true; }
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(a), function():Dynamic return cast !_Runtime.truthy(b)))) { return cast false; }
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(a, 'x'), _Runtime.field(b, 'x')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'y'), _Runtime.field(b, 'y'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'width'), _Runtime.field(b, 'width'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'height'), _Runtime.field(b, 'height')));
+    if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast true; }
+    if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
+    return cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(a, 'x'), _Runtime.field(b, 'x')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'y'), _Runtime.field(b, 'y')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'width'), _Runtime.field(b, 'width')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'height'), _Runtime.field(b, 'height')) : Bool));
     return cast null;
   }
 
@@ -170,22 +170,22 @@ class Rectangle {
   }
 
   public static function intersectsRectangle(a:RectangleLike, b:RectangleLike):Bool {
-    return cast !_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(_Runtime.callValue(getRectangleMaxX, cast ([a] : Array<Dynamic>)), _Runtime.callValue(getRectangleMinX, cast ([b] : Array<Dynamic>)), '<='), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(getRectangleMinX, cast ([a] : Array<Dynamic>)), _Runtime.callValue(getRectangleMaxX, cast ([b] : Array<Dynamic>)), '>=')), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(getRectangleMaxY, cast ([a] : Array<Dynamic>)), _Runtime.callValue(getRectangleMinY, cast ([b] : Array<Dynamic>)), '<=')), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(getRectangleMinY, cast ([a] : Array<Dynamic>)), _Runtime.callValue(getRectangleMaxY, cast ([b] : Array<Dynamic>)), '>=')));
+    return cast !(cast _Runtime.orValue(((cast ((cast ((cast _Runtime.callValue(getRectangleMaxX, cast ([a] : Array<Dynamic>)) : Float) <= (cast _Runtime.callValue(getRectangleMinX, cast ([b] : Array<Dynamic>)) : Float)) : Bool) || (cast ((cast _Runtime.callValue(getRectangleMinX, cast ([a] : Array<Dynamic>)) : Float) >= (cast _Runtime.callValue(getRectangleMaxX, cast ([b] : Array<Dynamic>)) : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.callValue(getRectangleMaxY, cast ([a] : Array<Dynamic>)) : Float) <= (cast _Runtime.callValue(getRectangleMinY, cast ([b] : Array<Dynamic>)) : Float)) : Bool)), function():Dynamic return cast ((cast _Runtime.callValue(getRectangleMinY, cast ([a] : Array<Dynamic>)) : Float) >= (cast _Runtime.callValue(getRectangleMaxY, cast ([b] : Array<Dynamic>)) : Float))) : Bool);
     return cast null;
   }
 
   public static function isEmptyRectangle(source:RectangleLike):Bool {
-    return cast _Runtime.orValue(_Runtime.strictEquals(_Runtime.field(source, 'width'), 0.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(source, 'height'), 0.0));
+    return cast ((cast _Runtime.strictEquals(_Runtime.field(source, 'width'), 0.0) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(source, 'height'), 0.0) : Bool));
     return cast null;
   }
 
   public static function isFlippedXRectangle(source:RectangleLike):Bool {
-    return cast _Runtime.compare(_Runtime.field(source, 'width'), 0.0, '<');
+    return cast ((cast _Runtime.field(source, 'width') : Float) < (cast 0.0 : Float));
     return cast null;
   }
 
   public static function isFlippedYRectangle(source:RectangleLike):Bool {
-    return cast _Runtime.compare(_Runtime.field(source, 'height'), 0.0, '<');
+    return cast ((cast _Runtime.field(source, 'height') : Float) < (cast 0.0 : Float));
     return cast null;
   }
 
@@ -212,14 +212,14 @@ class Rectangle {
     oy = _Runtime.field(__destructure1, 'y');
     ow = _Runtime.field(__destructure1, 'width');
     oh = _Runtime.field(__destructure1, 'height');
-    sEmpty = _Runtime.orValue(_Runtime.strictEquals(sw, 0.0), function():Dynamic return cast _Runtime.strictEquals(sh, 0.0));
-    oEmpty = _Runtime.orValue(_Runtime.strictEquals(ow, 0.0), function():Dynamic return cast _Runtime.strictEquals(oh, 0.0));
-    if (_Runtime.truthy(_Runtime.orValue(sEmpty, function():Dynamic return cast oEmpty))) {
-      if (_Runtime.truthy(_Runtime.andValue(oEmpty, function():Dynamic return cast _Runtime.strictEquals(source, out)))) { return; }
-      _Runtime.setField(out, 'x', _Runtime.select(oEmpty, function():Dynamic return cast sx, function():Dynamic return cast ox));
-      _Runtime.setField(out, 'y', _Runtime.select(oEmpty, function():Dynamic return cast sy, function():Dynamic return cast oy));
-      _Runtime.setField(out, 'width', _Runtime.select(oEmpty, function():Dynamic return cast sw, function():Dynamic return cast ow));
-      _Runtime.setField(out, 'height', _Runtime.select(oEmpty, function():Dynamic return cast sh, function():Dynamic return cast oh));
+    sEmpty = ((cast _Runtime.strictEquals(sw, 0.0) : Bool) || (cast _Runtime.strictEquals(sh, 0.0) : Bool));
+    oEmpty = ((cast _Runtime.strictEquals(ow, 0.0) : Bool) || (cast _Runtime.strictEquals(oh, 0.0) : Bool));
+    if ((cast ((cast sEmpty : Bool) || (cast oEmpty : Bool)) : Bool)) {
+      if ((cast ((cast oEmpty : Bool) && (cast _Runtime.strictEquals(source, out) : Bool)) : Bool)) { return; }
+      _Runtime.setField(out, 'x', ((cast oEmpty : Bool) ? (cast sx : Dynamic) : (cast ox : Dynamic)));
+      _Runtime.setField(out, 'y', ((cast oEmpty : Bool) ? (cast sy : Dynamic) : (cast oy : Dynamic)));
+      _Runtime.setField(out, 'width', ((cast oEmpty : Bool) ? (cast sw : Dynamic) : (cast ow : Dynamic)));
+      _Runtime.setField(out, 'height', ((cast oEmpty : Bool) ? (cast sh : Dynamic) : (cast oh : Dynamic)));
     } else {
       var sourceLeft:Dynamic = HxMath.min(sx, (sx + sw));
       var sourceRight:Dynamic = HxMath.max(sx, (sx + sw));

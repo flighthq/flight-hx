@@ -18,8 +18,8 @@ class CaptureBaseline {
     for (column in _Runtime.iterable(_Runtime.callProperty(flighthq._internal.DynamicObject.keys(baseline), 'sort', cast ([] : Array<Dynamic>)))) {
       var entry:Dynamic = _Runtime.getIndex(baseline, column);
       var out:CaptureColumnBaseline = {  };
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(entry, 'fingerprint'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(out, 'fingerprint', _Runtime.field(entry, 'fingerprint')); }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(entry, 'sha256'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(out, 'sha256', _Runtime.field(entry, 'sha256')); }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(entry, 'fingerprint'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(out, 'fingerprint', _Runtime.field(entry, 'fingerprint')); }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(entry, 'sha256'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(out, 'sha256', _Runtime.field(entry, 'sha256')); }
       _Runtime.setIndex(sorted, column, out);
     }
     return cast (_Runtime.jsonStringify(sorted, null, 2.0) + '\n');
@@ -38,7 +38,7 @@ class CaptureBaseline {
     } catch (__error:Dynamic) {
       return cast null;
     }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.typeofValue(parsed), 'object'), function():Dynamic return cast _Runtime.strictEquals(parsed, null)), function():Dynamic return cast _Runtime.isArray(parsed)))) { return cast null; }
+    if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofValue(parsed), 'object') : Bool) || (cast _Runtime.strictEquals(parsed, null) : Bool)) : Bool) || (cast _Runtime.isArray(parsed) : Bool)) : Bool)) { return cast null; }
     return cast (cast parsed : flighthq.types.CaptureBaseline);
     return cast null;
   }

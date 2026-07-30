@@ -40,9 +40,9 @@ class SheenPbrWgpuMeshMaterialRenderer {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     stateRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     pass = _Runtime.field(stateRuntime, 'renderPass');
-    if (_Runtime.truthy(_Runtime.strictEquals(pass, null))) { return; }
+    if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     sheen = (cast material : Null<SheenPbrMaterial>);
-    standard = _Runtime.select(!_Runtime.strictEquals(sheen, null), function():Dynamic return cast _Runtime.field(sheen, 'standard'), function():Dynamic return cast null);
+    standard = ((cast !_Runtime.strictEquals(sheen, null) : Bool) ? (cast _Runtime.field(sheen, 'standard') : Dynamic) : (cast null : Dynamic));
     key = _Runtime.callValue(buildWgpuPbrStandardDefineKey, cast ([standard, sheen] : Array<Dynamic>));
     _Runtime.setField(key, 'sheenEnabled', true);
     format = _Runtime.coalesce(_Runtime.field(stateRuntime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
@@ -50,9 +50,9 @@ class SheenPbrWgpuMeshMaterialRenderer {
     _Runtime.callValue(writeWgpuFrameUniform, cast ([state, camera, lights] : Array<Dynamic>));
     binding = _Runtime.callValue(ensureWgpuPbrMaterialBindGroup, cast ([state, pipeline, _Runtime.coalesce(sheen, function():Dynamic return cast SheenPbrWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__sheenPbrWgpuMeshMaterialRenderer), standard] : Array<Dynamic>));
     out = _Runtime.callValue(getWgpuPbrMaterialScratch, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(writeWgpuPbrStandardBlock, cast ([out, standard, _Runtime.select(!_Runtime.strictEquals(sheen, null), function():Dynamic return cast _Runtime.field(sheen, 'alphaCutoff'), function():Dynamic return cast 0.5)] : Array<Dynamic>));
+    _Runtime.callValue(writeWgpuPbrStandardBlock, cast ([out, standard, ((cast !_Runtime.strictEquals(sheen, null) : Bool) ? (cast _Runtime.field(sheen, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic))] : Array<Dynamic>));
     _Runtime.fill(out, 0.0, 16.0, null, 2);
-    if (_Runtime.truthy(!_Runtime.strictEquals(sheen, null))) {
+    if ((cast !_Runtime.strictEquals(sheen, null) : Bool)) {
       _Runtime.callValue(unpackColorToLinear, cast ([SheenPbrWgpuMeshMaterialRenderer._colorScratch__sheenPbrWgpuMeshMaterialRenderer, _Runtime.field(sheen, 'sheenColor')] : Array<Dynamic>));
       _Runtime.setIndex(out, 20.0, _Runtime.getIndex(SheenPbrWgpuMeshMaterialRenderer._colorScratch__sheenPbrWgpuMeshMaterialRenderer, 0.0));
       _Runtime.setIndex(out, 21.0, _Runtime.getIndex(SheenPbrWgpuMeshMaterialRenderer._colorScratch__sheenPbrWgpuMeshMaterialRenderer, 1.0));

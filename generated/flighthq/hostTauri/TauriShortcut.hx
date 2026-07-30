@@ -19,7 +19,7 @@ class TauriShortcut {
     }, register: function(accelerator:Dynamic, listener:Dynamic) {
       ((cast registered : flighthq._internal._Set).add(accelerator));
       flighthq._internal._Async.recover(_Runtime.callProperty(globalShortcut, 'register', cast ([accelerator, function(event:Dynamic) {
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(event, 'state'), 'Pressed'))) { _Runtime.callValue(listener, cast ([{ accelerator: accelerator }] : Array<Dynamic>)); }
+        if ((cast _Runtime.strictEquals(_Runtime.field(event, 'state'), 'Pressed') : Bool)) { _Runtime.callValue(listener, cast ([{ accelerator: accelerator }] : Array<Dynamic>)); }
       }] : Array<Dynamic>)), function() {
         ((cast registered : flighthq._internal._Set).delete_(accelerator));
       });

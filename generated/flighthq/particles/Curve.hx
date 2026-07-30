@@ -15,7 +15,7 @@ class Curve {
     lut = _Runtime.createArray((n * 3.0));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, n, '<'))) {
+      while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
         var __destructure0:Dynamic = _Runtime.callValue(f, cast ([(i / (n - 1.0))] : Array<Dynamic>));
         var r:Dynamic = _Runtime.getIndex(__destructure0, 0.0);
         var g:Dynamic = _Runtime.getIndex(__destructure0, 1.0);
@@ -37,7 +37,7 @@ class Curve {
     lut = _Runtime.createArray(n);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, n, '<'))) {
+      while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
         _Runtime.setIndex(lut, i, _Runtime.callValue(f, cast ([(i / (n - 1.0))] : Array<Dynamic>)));
         i++;
       }
@@ -69,7 +69,7 @@ class Curve {
     s1 = _Runtime.getIndex(__destructure2, 1.0);
     v1 = _Runtime.getIndex(__destructure2, 2.0);
     dh = (h1 - h0);
-    if (_Runtime.truthy(_Runtime.compare(dh, 0.5, '>'))) { (dh = cast ((dh - 1.0) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.compare(dh, -0.5, '<'))) { (dh = cast ((dh + 1.0) : Dynamic)); } }
+    if ((cast ((cast dh : Float) > (cast 0.5 : Float)) : Bool)) { (dh = cast ((dh - 1.0) : Dynamic)); } else { if ((cast ((cast dh : Float) < (cast -0.5 : Float)) : Bool)) { (dh = cast ((dh + 1.0) : Dynamic)); } }
     __destructure3 = _Runtime.callValue(Curve.hsvToRgb__curve, cast ([(h0 + (dh * t)), (s0 + ((s1 - s0) * t)), (v0 + ((v1 - v0) * t))] : Array<Dynamic>));
     r = _Runtime.getIndex(__destructure3, 0.0);
     g = _Runtime.getIndex(__destructure3, 1.0);
@@ -85,14 +85,14 @@ class Curve {
 
   public static function particleColorCurveFromKeyframes(keys:Array<ColorKeyframe>, samples:Dynamic = 33.0):Array<Float> {
     var sorted:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(keys, 'length'), 0.0))) { return cast cast ([0.0, 0.0, 0.0, 0.0, 0.0, 0.0] : Array<Dynamic>); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(keys, 'length'), 0.0) : Bool)) { return cast cast ([0.0, 0.0, 0.0, 0.0, 0.0, 0.0] : Array<Dynamic>); }
     sorted = _Runtime.sortAndReturn(_Runtime.slice(keys, 0, null), function(a:Dynamic, b:Dynamic) return (_Runtime.field(a, 'time') - _Runtime.field(b, 'time')));
     return cast _Runtime.callValue(buildParticleColorCurve, cast ([function(t:Dynamic) {
       var seg:Dynamic = cast _Runtime.UNDEFINED;
       var a:Dynamic = cast _Runtime.UNDEFINED;
       var b:Dynamic = cast _Runtime.UNDEFINED;
       seg = _Runtime.callValue(Curve.locateKeyframe__curve, cast ([sorted, t] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(seg, 'f'), 0.0))) { return cast cast ([_Runtime.field(_Runtime.getIndex(sorted, _Runtime.field(seg, 'i')), 'r'), _Runtime.field(_Runtime.getIndex(sorted, _Runtime.field(seg, 'i')), 'g'), _Runtime.field(_Runtime.getIndex(sorted, _Runtime.field(seg, 'i')), 'b')] : Array<Dynamic>); }
+      if ((cast _Runtime.strictEquals(_Runtime.field(seg, 'f'), 0.0) : Bool)) { return cast cast ([_Runtime.field(_Runtime.getIndex(sorted, _Runtime.field(seg, 'i')), 'r'), _Runtime.field(_Runtime.getIndex(sorted, _Runtime.field(seg, 'i')), 'g'), _Runtime.field(_Runtime.getIndex(sorted, _Runtime.field(seg, 'i')), 'b')] : Array<Dynamic>); }
       a = _Runtime.getIndex(sorted, _Runtime.field(seg, 'i'));
       b = _Runtime.getIndex(sorted, (_Runtime.field(seg, 'i') + 1.0));
       return cast cast ([(_Runtime.field(a, 'r') + ((_Runtime.field(b, 'r') - _Runtime.field(a, 'r')) * _Runtime.field(seg, 'f'))), (_Runtime.field(a, 'g') + ((_Runtime.field(b, 'g') - _Runtime.field(a, 'g')) * _Runtime.field(seg, 'f'))), (_Runtime.field(a, 'b') + ((_Runtime.field(b, 'b') - _Runtime.field(a, 'b')) * _Runtime.field(seg, 'f')))] : Array<Dynamic>);
@@ -104,12 +104,12 @@ class Curve {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     var keys:Array<ColorKeyframe> = cast _Runtime.UNDEFINED;
     n = HxMath.floor((_Runtime.field(lut, 'length') / 3.0));
-    if (_Runtime.truthy(_Runtime.strictEquals(n, 0.0))) { return cast cast ([] : Array<Dynamic>); }
-    if (_Runtime.truthy(_Runtime.strictEquals(n, 1.0))) { return cast cast ([{ time: 0.0, r: _Runtime.getIndex(lut, 0.0), g: _Runtime.getIndex(lut, 1.0), b: _Runtime.getIndex(lut, 2.0) }] : Array<Dynamic>); }
+    if ((cast _Runtime.strictEquals(n, 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
+    if ((cast _Runtime.strictEquals(n, 1.0) : Bool)) { return cast cast ([{ time: 0.0, r: _Runtime.getIndex(lut, 0.0), g: _Runtime.getIndex(lut, 1.0), b: _Runtime.getIndex(lut, 2.0) }] : Array<Dynamic>); }
     keys = _Runtime.createArray(n);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, n, '<'))) {
+      while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
         _Runtime.setIndex(keys, i, { time: (i / (n - 1.0)), r: _Runtime.getIndex(lut, (i * 3.0)), g: _Runtime.getIndex(lut, ((i * 3.0) + 1.0)), b: _Runtime.getIndex(lut, ((i * 3.0) + 2.0)) });
         i++;
       }
@@ -120,7 +120,7 @@ class Curve {
 
   public static function particleCurveFromKeyframes(keys:Array<CurveKeyframe>, samples:Dynamic = 33.0):Array<Float> {
     var sorted:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(keys, 'length'), 0.0))) { return cast cast ([0.0, 0.0] : Array<Dynamic>); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(keys, 'length'), 0.0) : Bool)) { return cast cast ([0.0, 0.0] : Array<Dynamic>); }
     sorted = _Runtime.sortAndReturn(_Runtime.slice(keys, 0, null), function(a:Dynamic, b:Dynamic) return (_Runtime.field(a, 'time') - _Runtime.field(b, 'time')));
     return cast _Runtime.callValue(buildParticleCurve, cast ([function(t:Dynamic) return _Runtime.callValue(Curve.interpKeyframe__curve, cast ([sorted, t] : Array<Dynamic>)), samples] : Array<Dynamic>));
     return cast null;
@@ -130,12 +130,12 @@ class Curve {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     var keys:Array<CurveKeyframe> = cast _Runtime.UNDEFINED;
     n = _Runtime.field(lut, 'length');
-    if (_Runtime.truthy(_Runtime.strictEquals(n, 0.0))) { return cast cast ([] : Array<Dynamic>); }
-    if (_Runtime.truthy(_Runtime.strictEquals(n, 1.0))) { return cast cast ([{ time: 0.0, value: _Runtime.getIndex(lut, 0.0) }] : Array<Dynamic>); }
+    if ((cast _Runtime.strictEquals(n, 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
+    if ((cast _Runtime.strictEquals(n, 1.0) : Bool)) { return cast cast ([{ time: 0.0, value: _Runtime.getIndex(lut, 0.0) }] : Array<Dynamic>); }
     keys = _Runtime.createArray(n);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, n, '<'))) {
+      while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
         _Runtime.setIndex(keys, i, { time: (i / (n - 1.0)), value: _Runtime.getIndex(lut, i) });
         i++;
       }
@@ -201,7 +201,7 @@ class Curve {
     var a:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
     seg = _Runtime.callValue(Curve.locateKeyframe__curve, cast ([sorted, t] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(seg, 'f'), 0.0))) { return cast _Runtime.field(_Runtime.getIndex(sorted, _Runtime.field(seg, 'i')), 'value'); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(seg, 'f'), 0.0) : Bool)) { return cast _Runtime.field(_Runtime.getIndex(sorted, _Runtime.field(seg, 'i')), 'value'); }
     a = _Runtime.field(_Runtime.getIndex(sorted, _Runtime.field(seg, 'i')), 'value');
     b = _Runtime.field(_Runtime.getIndex(sorted, (_Runtime.field(seg, 'i') + 1.0)), 'value');
     return cast (a + ((b - a) * _Runtime.field(seg, 'f')));
@@ -211,16 +211,16 @@ class Curve {
   public static function locateKeyframe__curve(sorted:Array<{ var time:Float; }>, t:Float):{ var f:Float; var i:Float; } {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     n = _Runtime.field(sorted, 'length');
-    if (_Runtime.truthy(_Runtime.compare(t, _Runtime.field(_Runtime.getIndex(sorted, 0.0), 'time'), '<='))) { return cast { f: 0.0, i: 0.0 }; }
-    if (_Runtime.truthy(_Runtime.compare(t, _Runtime.field(_Runtime.getIndex(sorted, (n - 1.0)), 'time'), '>='))) { return cast { f: 0.0, i: (n - 1.0) }; }
+    if ((cast ((cast t : Float) <= (cast _Runtime.field(_Runtime.getIndex(sorted, 0.0), 'time') : Float)) : Bool)) { return cast { f: 0.0, i: 0.0 }; }
+    if ((cast ((cast t : Float) >= (cast _Runtime.field(_Runtime.getIndex(sorted, (n - 1.0)), 'time') : Float)) : Bool)) { return cast { f: 0.0, i: (n - 1.0) }; }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, (n - 1.0), '<'))) {
+      while ((cast ((cast i : Float) < (cast (n - 1.0) : Float)) : Bool)) {
         var t0:Dynamic = _Runtime.field(_Runtime.getIndex(sorted, i), 'time');
         var t1:Dynamic = _Runtime.field(_Runtime.getIndex(sorted, (i + 1.0)), 'time');
-        if (_Runtime.truthy(_Runtime.compare(t, t1, '<='))) {
+        if ((cast ((cast t : Float) <= (cast t1 : Float)) : Bool)) {
           var span:Dynamic = (t1 - t0);
-          return cast { f: _Runtime.select(_Runtime.compare(span, 0.0, '<='), function():Dynamic return cast 0.0, function():Dynamic return cast ((t - t0) / span)), i: i };
+          return cast { f: ((cast ((cast span : Float) <= (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((t - t0) / span) : Dynamic)), i: i };
         }
         i++;
       }
@@ -238,12 +238,12 @@ class Curve {
     min = HxMath.min(HxMath.min(r, g), b);
     delta = (max - min);
     h = 0.0;
-    if (_Runtime.truthy(_Runtime.compare(delta, 0.0, '>'))) {
-      if (_Runtime.truthy(_Runtime.strictEquals(max, r))) { (h = cast (_Runtime.fmod(((g - b) / delta), 6.0) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.strictEquals(max, g))) { (h = cast ((((b - r) / delta) + 2.0) : Dynamic)); } else { (h = cast ((((r - g) / delta) + 4.0) : Dynamic)); } }
+    if ((cast ((cast delta : Float) > (cast 0.0 : Float)) : Bool)) {
+      if ((cast _Runtime.strictEquals(max, r) : Bool)) { (h = cast (_Runtime.fmod(((g - b) / delta), 6.0) : Dynamic)); } else { if ((cast _Runtime.strictEquals(max, g) : Bool)) { (h = cast ((((b - r) / delta) + 2.0) : Dynamic)); } else { (h = cast ((((r - g) / delta) + 4.0) : Dynamic)); } }
       (h = cast ((h / 6.0) : Dynamic));
-      if (_Runtime.truthy(_Runtime.compare(h, 0.0, '<'))) { (h = cast ((h + 1.0) : Dynamic)); }
+      if ((cast ((cast h : Float) < (cast 0.0 : Float)) : Bool)) { (h = cast ((h + 1.0) : Dynamic)); }
     }
-    return cast cast ([h, _Runtime.select(_Runtime.strictEquals(max, 0.0), function():Dynamic return cast 0.0, function():Dynamic return cast (delta / max)), max] : Array<Dynamic>);
+    return cast cast ([h, ((cast _Runtime.strictEquals(max, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast (delta / max) : Dynamic)), max] : Array<Dynamic>);
     return cast null;
   }
 
@@ -255,21 +255,21 @@ class Curve {
     var a:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
     n = (_Runtime.field(lut, 'length') / 3.0);
-    if (_Runtime.truthy(_Runtime.compare(n, 0.0, '<='))) {
+    if ((cast ((cast n : Float) <= (cast 0.0 : Float)) : Bool)) {
       _Runtime.setIndex(out, offset, 0.0);
       _Runtime.setIndex(out, (offset + 1.0), 0.0);
       _Runtime.setIndex(out, (offset + 2.0), 0.0);
       return;
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(n, 1.0))) {
+    if ((cast _Runtime.strictEquals(n, 1.0) : Bool)) {
       _Runtime.setIndex(out, offset, _Runtime.getIndex(lut, 0.0));
       _Runtime.setIndex(out, (offset + 1.0), _Runtime.getIndex(lut, 1.0));
       _Runtime.setIndex(out, (offset + 2.0), _Runtime.getIndex(lut, 2.0));
       return;
     }
-    x = (_Runtime.select(_Runtime.compare(t, 0.0, '<='), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(t, 1.0, '>='), function():Dynamic return cast 1.0, function():Dynamic return cast t)) * (n - 1.0));
+    x = (((cast ((cast t : Float) <= (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast t : Float) >= (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic)) * (n - 1.0));
     i = (_Runtime.toInt32(x) | 0);
-    if (_Runtime.truthy(_Runtime.compare(i, (n - 1.0), '>='))) {
+    if ((cast ((cast i : Float) >= (cast (n - 1.0) : Float)) : Bool)) {
       var base:Dynamic = ((n - 1.0) * 3.0);
       _Runtime.setIndex(out, offset, _Runtime.getIndex(lut, base));
       _Runtime.setIndex(out, (offset + 1.0), _Runtime.getIndex(lut, (base + 1.0)));
@@ -289,11 +289,11 @@ class Curve {
     var x:Dynamic = cast _Runtime.UNDEFINED;
     var i:Dynamic = cast _Runtime.UNDEFINED;
     n = _Runtime.field(lut, 'length');
-    if (_Runtime.truthy(_Runtime.strictEquals(n, 0.0))) { return cast 0.0; }
-    if (_Runtime.truthy(_Runtime.strictEquals(n, 1.0))) { return cast _Runtime.getIndex(lut, 0.0); }
-    x = (_Runtime.select(_Runtime.compare(t, 0.0, '<='), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(t, 1.0, '>='), function():Dynamic return cast 1.0, function():Dynamic return cast t)) * (n - 1.0));
+    if ((cast _Runtime.strictEquals(n, 0.0) : Bool)) { return cast 0.0; }
+    if ((cast _Runtime.strictEquals(n, 1.0) : Bool)) { return cast _Runtime.getIndex(lut, 0.0); }
+    x = (((cast ((cast t : Float) <= (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast t : Float) >= (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic)) * (n - 1.0));
     i = (_Runtime.toInt32(x) | 0);
-    if (_Runtime.truthy(_Runtime.compare(i, (n - 1.0), '>='))) { return cast _Runtime.getIndex(lut, (n - 1.0)); }
+    if ((cast ((cast i : Float) >= (cast (n - 1.0) : Float)) : Bool)) { return cast _Runtime.getIndex(lut, (n - 1.0)); }
     return cast (_Runtime.getIndex(lut, i) + ((_Runtime.getIndex(lut, (i + 1.0)) - _Runtime.getIndex(lut, i)) * (x - i)));
     return cast null;
   }

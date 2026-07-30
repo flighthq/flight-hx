@@ -21,7 +21,7 @@ class GlEnvironmentSkybox {
     var sky:Dynamic = cast _Runtime.UNDEFINED;
     var prevDepthTest:Dynamic = cast _Runtime.UNDEFINED;
     cube = _Runtime.callValue(ensureGlEnvironmentSourceCube, cast ([state, environment] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(cube, null))) { return; }
+    if ((cast _Runtime.strictEquals(cube, null) : Bool)) { return; }
     gl = _Runtime.field(state, 'gl');
     sky = _Runtime.callValue(GlEnvironmentSkybox.ensureGlSkybox__glEnvironmentSkybox, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(getCameraInverseViewProjectionMatrix4, cast ([GlEnvironmentSkybox._inverseViewProjection__glEnvironmentSkybox, camera, aspect] : Array<Dynamic>));
@@ -39,7 +39,7 @@ class GlEnvironmentSkybox {
     flighthq._internal.backend.WebGl2Backend.drawArrays(gl, flighthq._internal.backend.WebGl2Backend.TRIANGLE_STRIP, 0.0, 4.0);
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, null);
     flighthq._internal.backend.WebGl2Backend.depthMask(gl, true);
-    if (_Runtime.truthy(prevDepthTest)) { flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.DEPTH_TEST); }
+    if ((cast prevDepthTest : Bool)) { flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.DEPTH_TEST); }
   }
 
   public static function ensureGlSkybox__glEnvironmentSkybox(state:GlRenderState):GlSkybox__glEnvironmentSkybox {
@@ -50,7 +50,7 @@ class GlEnvironmentSkybox {
     var buffer:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     sky = ((cast GlEnvironmentSkybox._skyboxes__glEnvironmentSkybox : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(!_Runtime.strictEquals(sky, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast sky; }
+    if ((cast !_Runtime.strictEquals(sky, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast sky; }
     program = _Runtime.callValue(GlEnvironmentSkybox.linkGlSkyboxProgram__glEnvironmentSkybox, cast ([gl] : Array<Dynamic>));
     vao = flighthq._internal.backend.WebGl2Backend.createVertexArray(gl);
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, vao);

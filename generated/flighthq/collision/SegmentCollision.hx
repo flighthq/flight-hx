@@ -34,15 +34,15 @@ class SegmentCollision {
     dy = (_Runtime.field(a, 'y1') - y0);
     lengthSquared = ((dx * dx) + (dy * dy));
     t = 0.0;
-    if (_Runtime.truthy(_Runtime.compare(lengthSquared, SegmentCollision.EPS__segmentCollision, '>'))) {
+    if ((cast ((cast lengthSquared : Float) > (cast SegmentCollision.EPS__segmentCollision : Float)) : Bool)) {
       (t = cast (((((_Runtime.field(b, 'x') - x0) * dx) + ((_Runtime.field(b, 'y') - y0) * dy)) / lengthSquared) : Dynamic));
-      (t = cast (_Runtime.select(_Runtime.compare(t, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(t, 1.0, '>'), function():Dynamic return cast 1.0, function():Dynamic return cast t)) : Dynamic));
+      (t = cast (((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast t : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic)) : Dynamic));
     }
     closestX = (x0 + (t * dx));
     closestY = (y0 + (t * dy));
     ddx = (_Runtime.field(b, 'x') - closestX);
     ddy = (_Runtime.field(b, 'y') - closestY);
-    return cast _Runtime.compare(((ddx * ddx) + (ddy * ddy)), (_Runtime.field(b, 'radius') * _Runtime.field(b, 'radius')), '<=');
+    return cast ((cast ((ddx * ddx) + (ddy * ddy)) : Float) <= (cast (_Runtime.field(b, 'radius') * _Runtime.field(b, 'radius')) : Float));
     return cast null;
   }
 
@@ -76,13 +76,13 @@ class SegmentCollision {
     var pn:Dynamic = cast _Runtime.UNDEFINED;
     points = _Runtime.field(b, 'points');
     pn = (_Runtime.toInt32(_Runtime.field(points, 'length')) >> 1);
-    if (_Runtime.truthy(_Runtime.callValue(SegmentCollision.isPointInConvexPolygon__segmentCollision, cast ([_Runtime.field(a, 'x0'), _Runtime.field(a, 'y0'), points, pn] : Array<Dynamic>)))) { return cast true; }
-    if (_Runtime.truthy(_Runtime.callValue(SegmentCollision.isPointInConvexPolygon__segmentCollision, cast ([_Runtime.field(a, 'x1'), _Runtime.field(a, 'y1'), points, pn] : Array<Dynamic>)))) { return cast true; }
+    if ((cast _Runtime.callValue(SegmentCollision.isPointInConvexPolygon__segmentCollision, cast ([_Runtime.field(a, 'x0'), _Runtime.field(a, 'y0'), points, pn] : Array<Dynamic>)) : Bool)) { return cast true; }
+    if ((cast _Runtime.callValue(SegmentCollision.isPointInConvexPolygon__segmentCollision, cast ([_Runtime.field(a, 'x1'), _Runtime.field(a, 'y1'), points, pn] : Array<Dynamic>)) : Bool)) { return cast true; }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, pn, '<'))) {
+      while ((cast ((cast i : Float) < (cast pn : Float)) : Bool)) {
         var j:Dynamic = _Runtime.fmod((i + 1.0), pn);
-        if (_Runtime.truthy(_Runtime.callValue(SegmentCollision.isSegmentsIntersecting__segmentCollision, cast ([_Runtime.field(a, 'x0'), _Runtime.field(a, 'y0'), _Runtime.field(a, 'x1'), _Runtime.field(a, 'y1'), _Runtime.getIndex(points, (_Runtime.toInt32(i) << 1)), _Runtime.getIndex(points, ((_Runtime.toInt32(i) << 1) + 1.0)), _Runtime.getIndex(points, (_Runtime.toInt32(j) << 1)), _Runtime.getIndex(points, ((_Runtime.toInt32(j) << 1) + 1.0))] : Array<Dynamic>)))) {
+        if ((cast _Runtime.callValue(SegmentCollision.isSegmentsIntersecting__segmentCollision, cast ([_Runtime.field(a, 'x0'), _Runtime.field(a, 'y0'), _Runtime.field(a, 'x1'), _Runtime.field(a, 'y1'), _Runtime.getIndex(points, (_Runtime.toInt32(i) << 1)), _Runtime.getIndex(points, ((_Runtime.toInt32(i) << 1) + 1.0)), _Runtime.getIndex(points, (_Runtime.toInt32(j) << 1)), _Runtime.getIndex(points, ((_Runtime.toInt32(j) << 1) + 1.0))] : Array<Dynamic>)) : Bool)) {
           return cast true;
         }
         i++;
@@ -104,15 +104,15 @@ class SegmentCollision {
     negative = false;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, pn, '<'))) {
+      while ((cast ((cast i : Float) < (cast pn : Float)) : Bool)) {
         var j:Dynamic = _Runtime.fmod((i + 1.0), pn);
         var x0:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(i) << 1));
         var y0:Dynamic = _Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0));
         var x1:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(j) << 1));
         var y1:Dynamic = _Runtime.getIndex(px, ((_Runtime.toInt32(j) << 1) + 1.0));
         var cross:Dynamic = (((x1 - x0) * (y - y0)) - ((y1 - y0) * (x - x0)));
-        if (_Runtime.truthy(_Runtime.compare(cross, SegmentCollision.EPS__segmentCollision, '>'))) { (positive = cast (true : Dynamic)); } else { if (_Runtime.truthy(_Runtime.compare(cross, -SegmentCollision.EPS__segmentCollision, '<'))) { (negative = cast (true : Dynamic)); } }
-        if (_Runtime.truthy(_Runtime.andValue(positive, function():Dynamic return cast negative))) { return cast false; }
+        if ((cast ((cast cross : Float) > (cast SegmentCollision.EPS__segmentCollision : Float)) : Bool)) { (positive = cast (true : Dynamic)); } else { if ((cast ((cast cross : Float) < (cast -SegmentCollision.EPS__segmentCollision : Float)) : Bool)) { (negative = cast (true : Dynamic)); } }
+        if ((cast ((cast positive : Bool) && (cast negative : Bool)) : Bool)) { return cast false; }
         i++;
       }
     }
@@ -137,29 +137,29 @@ class SegmentCollision {
     denom = ((d1x * d2y) - (d1y * d2x));
     ex = (bx0 - ax0);
     ey = (by0 - ay0);
-    if (_Runtime.truthy(_Runtime.compare(HxMath.abs(denom), SegmentCollision.EPS__segmentCollision, '<'))) {
-      if (_Runtime.truthy(_Runtime.compare(HxMath.abs(((ex * d1y) - (ey * d1x))), SegmentCollision.EPS__segmentCollision, '>'))) { return cast false; }
+    if ((cast ((cast HxMath.abs(denom) : Float) < (cast SegmentCollision.EPS__segmentCollision : Float)) : Bool)) {
+      if ((cast ((cast HxMath.abs(((ex * d1y) - (ey * d1x))) : Float) > (cast SegmentCollision.EPS__segmentCollision : Float)) : Bool)) { return cast false; }
       var lengthSquared:Dynamic = ((d1x * d1x) + (d1y * d1y));
-      if (_Runtime.truthy(_Runtime.compare(lengthSquared, SegmentCollision.EPS__segmentCollision, '<'))) {
+      if ((cast ((cast lengthSquared : Float) < (cast SegmentCollision.EPS__segmentCollision : Float)) : Bool)) {
         var bLengthSquared:Dynamic = ((d2x * d2x) + (d2y * d2y));
-        if (_Runtime.truthy(_Runtime.compare(bLengthSquared, SegmentCollision.EPS__segmentCollision, '<'))) {
-          return cast _Runtime.andValue(_Runtime.compare(HxMath.abs(ex), SegmentCollision.EPS__segmentCollision, '<'), function():Dynamic return cast _Runtime.compare(HxMath.abs(ey), SegmentCollision.EPS__segmentCollision, '<'));
+        if ((cast ((cast bLengthSquared : Float) < (cast SegmentCollision.EPS__segmentCollision : Float)) : Bool)) {
+          return cast ((cast ((cast HxMath.abs(ex) : Float) < (cast SegmentCollision.EPS__segmentCollision : Float)) : Bool) && (cast ((cast HxMath.abs(ey) : Float) < (cast SegmentCollision.EPS__segmentCollision : Float)) : Bool));
         }
         var tb:Dynamic = ((((ax0 - bx0) * d2x) + ((ay0 - by0) * d2y)) / bLengthSquared);
-        (tb = cast (_Runtime.select(_Runtime.compare(tb, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(tb, 1.0, '>'), function():Dynamic return cast 1.0, function():Dynamic return cast tb)) : Dynamic));
+        (tb = cast (((cast ((cast tb : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast tb : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast tb : Dynamic)) : Dynamic)) : Dynamic));
         var qx:Dynamic = (bx0 + (tb * d2x));
         var qy:Dynamic = (by0 + (tb * d2y));
-        return cast _Runtime.compare((((ax0 - qx) * (ax0 - qx)) + ((ay0 - qy) * (ay0 - qy))), SegmentCollision.EPS__segmentCollision, '<');
+        return cast ((cast (((ax0 - qx) * (ax0 - qx)) + ((ay0 - qy) * (ay0 - qy))) : Float) < (cast SegmentCollision.EPS__segmentCollision : Float));
       }
       var t0:Dynamic = (((ex * d1x) + (ey * d1y)) / lengthSquared);
       var t1:Dynamic = ((((bx1 - ax0) * d1x) + ((by1 - ay0) * d1y)) / lengthSquared);
-      var lo:Dynamic = _Runtime.select(_Runtime.compare(t0, t1, '<'), function():Dynamic return cast t0, function():Dynamic return cast t1);
-      var hi:Dynamic = _Runtime.select(_Runtime.compare(t0, t1, '<'), function():Dynamic return cast t1, function():Dynamic return cast t0);
-      return cast _Runtime.andValue(_Runtime.compare(hi, -SegmentCollision.EPS__segmentCollision, '>='), function():Dynamic return cast _Runtime.compare(lo, (1.0 + SegmentCollision.EPS__segmentCollision), '<='));
+      var lo:Dynamic = ((cast ((cast t0 : Float) < (cast t1 : Float)) : Bool) ? (cast t0 : Dynamic) : (cast t1 : Dynamic));
+      var hi:Dynamic = ((cast ((cast t0 : Float) < (cast t1 : Float)) : Bool) ? (cast t1 : Dynamic) : (cast t0 : Dynamic));
+      return cast ((cast ((cast hi : Float) >= (cast -SegmentCollision.EPS__segmentCollision : Float)) : Bool) && (cast ((cast lo : Float) <= (cast (1.0 + SegmentCollision.EPS__segmentCollision) : Float)) : Bool));
     }
     t = (((ex * d2y) - (ey * d2x)) / denom);
     u = (((ex * d1y) - (ey * d1x)) / denom);
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(t, -SegmentCollision.EPS__segmentCollision, '>='), function():Dynamic return cast _Runtime.compare(t, (1.0 + SegmentCollision.EPS__segmentCollision), '<=')), function():Dynamic return cast _Runtime.compare(u, -SegmentCollision.EPS__segmentCollision, '>=')), function():Dynamic return cast _Runtime.compare(u, (1.0 + SegmentCollision.EPS__segmentCollision), '<='));
+    return cast ((cast ((cast ((cast ((cast t : Float) >= (cast -SegmentCollision.EPS__segmentCollision : Float)) : Bool) && (cast ((cast t : Float) <= (cast (1.0 + SegmentCollision.EPS__segmentCollision) : Float)) : Bool)) : Bool) && (cast ((cast u : Float) >= (cast -SegmentCollision.EPS__segmentCollision : Float)) : Bool)) : Bool) && (cast ((cast u : Float) <= (cast (1.0 + SegmentCollision.EPS__segmentCollision) : Float)) : Bool));
     return cast null;
   }
 
@@ -170,26 +170,26 @@ class SegmentCollision {
     dy = (y1 - y0);
     _Runtime.setField(SegmentCollision.clipRange__segmentCollision, 't0', 0.0);
     _Runtime.setField(SegmentCollision.clipRange__segmentCollision, 't1', 1.0);
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(SegmentCollision.clipSegmentSlab__segmentCollision, cast ([-dx, (x0 - minX)] : Array<Dynamic>))))) { return cast false; }
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(SegmentCollision.clipSegmentSlab__segmentCollision, cast ([dx, (maxX - x0)] : Array<Dynamic>))))) { return cast false; }
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(SegmentCollision.clipSegmentSlab__segmentCollision, cast ([-dy, (y0 - minY)] : Array<Dynamic>))))) { return cast false; }
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(SegmentCollision.clipSegmentSlab__segmentCollision, cast ([dy, (maxY - y0)] : Array<Dynamic>))))) { return cast false; }
-    return cast _Runtime.compare(_Runtime.field(SegmentCollision.clipRange__segmentCollision, 't0'), _Runtime.field(SegmentCollision.clipRange__segmentCollision, 't1'), '<=');
+    if ((cast !(cast _Runtime.callValue(SegmentCollision.clipSegmentSlab__segmentCollision, cast ([-dx, (x0 - minX)] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
+    if ((cast !(cast _Runtime.callValue(SegmentCollision.clipSegmentSlab__segmentCollision, cast ([dx, (maxX - x0)] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
+    if ((cast !(cast _Runtime.callValue(SegmentCollision.clipSegmentSlab__segmentCollision, cast ([-dy, (y0 - minY)] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
+    if ((cast !(cast _Runtime.callValue(SegmentCollision.clipSegmentSlab__segmentCollision, cast ([dy, (maxY - y0)] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
+    return cast ((cast _Runtime.field(SegmentCollision.clipRange__segmentCollision, 't0') : Float) <= (cast _Runtime.field(SegmentCollision.clipRange__segmentCollision, 't1') : Float));
     return cast null;
   }
 
   public static function clipSegmentSlab__segmentCollision(p:Float, q:Float):Bool {
     var r:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(HxMath.abs(p), SegmentCollision.EPS__segmentCollision, '<'))) {
-      return cast _Runtime.compare(q, 0.0, '>=');
+    if ((cast ((cast HxMath.abs(p) : Float) < (cast SegmentCollision.EPS__segmentCollision : Float)) : Bool)) {
+      return cast ((cast q : Float) >= (cast 0.0 : Float));
     }
     r = (q / p);
-    if (_Runtime.truthy(_Runtime.compare(p, 0.0, '<'))) {
-      if (_Runtime.truthy(_Runtime.compare(r, _Runtime.field(SegmentCollision.clipRange__segmentCollision, 't1'), '>'))) { return cast false; }
-      if (_Runtime.truthy(_Runtime.compare(r, _Runtime.field(SegmentCollision.clipRange__segmentCollision, 't0'), '>'))) { _Runtime.setField(SegmentCollision.clipRange__segmentCollision, 't0', r); }
+    if ((cast ((cast p : Float) < (cast 0.0 : Float)) : Bool)) {
+      if ((cast ((cast r : Float) > (cast _Runtime.field(SegmentCollision.clipRange__segmentCollision, 't1') : Float)) : Bool)) { return cast false; }
+      if ((cast ((cast r : Float) > (cast _Runtime.field(SegmentCollision.clipRange__segmentCollision, 't0') : Float)) : Bool)) { _Runtime.setField(SegmentCollision.clipRange__segmentCollision, 't0', r); }
     } else {
-      if (_Runtime.truthy(_Runtime.compare(r, _Runtime.field(SegmentCollision.clipRange__segmentCollision, 't0'), '<'))) { return cast false; }
-      if (_Runtime.truthy(_Runtime.compare(r, _Runtime.field(SegmentCollision.clipRange__segmentCollision, 't1'), '<'))) { _Runtime.setField(SegmentCollision.clipRange__segmentCollision, 't1', r); }
+      if ((cast ((cast r : Float) < (cast _Runtime.field(SegmentCollision.clipRange__segmentCollision, 't0') : Float)) : Bool)) { return cast false; }
+      if ((cast ((cast r : Float) < (cast _Runtime.field(SegmentCollision.clipRange__segmentCollision, 't1') : Float)) : Bool)) { _Runtime.setField(SegmentCollision.clipRange__segmentCollision, 't1', r); }
     }
     return cast true;
     return cast null;

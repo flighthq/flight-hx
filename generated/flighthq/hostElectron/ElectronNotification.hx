@@ -27,7 +27,7 @@ class ElectronNotification {
         var id:Dynamic = cast _Runtime.UNDEFINED;
         var actions:Dynamic = cast _Runtime.UNDEFINED;
         var n:Dynamic = cast _Runtime.UNDEFINED;
-        if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(_Runtime.field(electron, 'Notification'), 'isSupported', cast ([] : Array<Dynamic>))))) { return cast ''; }
+        if ((cast !(cast _Runtime.callProperty(_Runtime.field(electron, 'Notification'), 'isSupported', cast ([] : Array<Dynamic>)) : Bool) : Bool)) { return cast ''; }
         id = _Runtime.coalesce(_Runtime.field(request, 'id'), function():Dynamic return cast 'notification-' + Std.string(nextId++) + '');
         actions = _Runtime.coalesce(_Runtime.field(request, 'actions'), function():Dynamic return cast cast ([] : Array<Dynamic>));
         n = _Runtime.construct(_Runtime.field(electron, 'Notification'), [{ title: _Runtime.field(request, 'title'), body: _Runtime.field(request, 'body'), icon: _Runtime.field(request, 'icon'), silent: _Runtime.field(request, 'silent'), actions: _Runtime.callProperty(actions, 'map', cast ([function(a:Dynamic) return { type: 'button', text: _Runtime.field(a, 'title') }] : Array<Dynamic>)) }]);
@@ -49,10 +49,10 @@ class ElectronNotification {
       });
     }, requestPermission: function():flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve(_Runtime.select(_Runtime.callProperty(_Runtime.field(electron, 'Notification'), 'isSupported', cast ([] : Array<Dynamic>)), function():Dynamic return cast 'granted', function():Dynamic return cast 'denied'));
+        return flighthq._internal._Async.resolve(((cast _Runtime.callProperty(_Runtime.field(electron, 'Notification'), 'isSupported', cast ([] : Array<Dynamic>)) : Bool) ? (cast 'granted' : Dynamic) : (cast 'denied' : Dynamic)));
       });
     }, getPermission: function() {
-      return cast _Runtime.select(_Runtime.callProperty(_Runtime.field(electron, 'Notification'), 'isSupported', cast ([] : Array<Dynamic>)), function():Dynamic return cast 'granted', function():Dynamic return cast 'denied');
+      return cast ((cast _Runtime.callProperty(_Runtime.field(electron, 'Notification'), 'isSupported', cast ([] : Array<Dynamic>)) : Bool) ? (cast 'granted' : Dynamic) : (cast 'denied' : Dynamic));
     }, isSupported: function() {
       return cast _Runtime.callProperty(_Runtime.field(electron, 'Notification'), 'isSupported', cast ([] : Array<Dynamic>));
     }, getCapabilities: function() {
@@ -78,7 +78,7 @@ class ElectronNotification {
     }, closeNotification: function(id:Dynamic) {
       var n:Dynamic = cast _Runtime.UNDEFINED;
       n = ((cast live : flighthq._internal._Map).get(id));
-      if (_Runtime.truthy(!_Runtime.truthy(n))) { return; }
+      if ((cast !_Runtime.truthy(n) : Bool)) { return; }
       _Runtime.callProperty(n, 'close', cast ([] : Array<Dynamic>));
       ((cast live : flighthq._internal._Map).delete_(id));
     }, closeAllNotifications: function() {
@@ -93,17 +93,17 @@ class ElectronNotification {
     }, subscribeClick: function(listener:Dynamic) {
       (clickListener = cast (listener : Dynamic));
       return cast function() {
-        if (_Runtime.truthy(_Runtime.strictEquals(clickListener, listener))) { (clickListener = cast (null : Dynamic)); }
+        if ((cast _Runtime.strictEquals(clickListener, listener) : Bool)) { (clickListener = cast (null : Dynamic)); }
       };
     }, subscribeAction: function(listener:Dynamic) {
       (actionListener = cast (listener : Dynamic));
       return cast function() {
-        if (_Runtime.truthy(_Runtime.strictEquals(actionListener, listener))) { (actionListener = cast (null : Dynamic)); }
+        if ((cast _Runtime.strictEquals(actionListener, listener) : Bool)) { (actionListener = cast (null : Dynamic)); }
       };
     }, subscribeDismiss: function(listener:Dynamic) {
       (dismissListener = cast (listener : Dynamic));
       return cast function() {
-        if (_Runtime.truthy(_Runtime.strictEquals(dismissListener, listener))) { (dismissListener = cast (null : Dynamic)); }
+        if ((cast _Runtime.strictEquals(dismissListener, listener) : Bool)) { (dismissListener = cast (null : Dynamic)); }
       };
     }, subscribeReply: function() {
       return cast function() {
@@ -112,7 +112,7 @@ class ElectronNotification {
     }, subscribeShow: function(listener:Dynamic) {
       (showListener = cast (listener : Dynamic));
       return cast function() {
-        if (_Runtime.truthy(_Runtime.strictEquals(showListener, listener))) { (showListener = cast (null : Dynamic)); }
+        if ((cast _Runtime.strictEquals(showListener, listener) : Bool)) { (showListener = cast (null : Dynamic)); }
       };
     } };
     return cast null;

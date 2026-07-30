@@ -51,17 +51,17 @@ class SurfaceColorMatrix {
   }
 
   public static function colorMatrixSurface(out:flighthq._internal._UInt8ClampedArray, source:SurfaceRegion, matrix:Array<Float>):Void {
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(matrix, 'length'), 20.0, '<'))) { throw _Runtime.error('Color matrix filter requires 20 values'); }
+    if ((cast ((cast _Runtime.field(matrix, 'length') : Float) < (cast 20.0 : Float)) : Bool)) { throw _Runtime.error('Color matrix filter requires 20 values'); }
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(source, 'height'), '<'))) {
+      while ((cast ((cast py : Float) < (cast _Runtime.field(source, 'height') : Float)) : Bool)) {
         var sourceY:Dynamic = (_Runtime.field(source, 'y') + py);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(sourceY, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sourceY, _Runtime.field(_Runtime.field(source, 'surface'), 'height'), '>=')))) { py++; continue; }
+        if ((cast ((cast ((cast sourceY : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceY : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, _Runtime.field(source, 'width'), '<'))) {
+          while ((cast ((cast px : Float) < (cast _Runtime.field(source, 'width') : Float)) : Bool)) {
             var sourceX:Dynamic = (_Runtime.field(source, 'x') + px);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(sourceX, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sourceX, _Runtime.field(_Runtime.field(source, 'surface'), 'width'), '>=')))) { px++; continue; }
+            if ((cast ((cast ((cast sourceX : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceX : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'width') : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Dynamic = (((sourceY * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sourceX) * 4.0);
             var di:Dynamic = (((py * _Runtime.field(source, 'width')) + px) * 4.0);
             var r:Dynamic = _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), si);
@@ -83,15 +83,15 @@ class SurfaceColorMatrix {
   public static function concatSurfaceColorMatrix(out:Array<Float>, first:Array<Float>, second:Array<Float>):Void {
     {
       var row:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(row, 4.0, '<'))) {
+      while ((cast ((cast row : Float) < (cast 4.0 : Float)) : Bool)) {
         {
           var col:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(col, 5.0, '<'))) {
-            var sum:Dynamic = _Runtime.select(_Runtime.strictEquals(col, 4.0), function():Dynamic return cast _Runtime.getIndex(second, ((row * 5.0) + 4.0)), function():Dynamic return cast 0.0);
+          while ((cast ((cast col : Float) < (cast 5.0 : Float)) : Bool)) {
+            var sum:Dynamic = ((cast _Runtime.strictEquals(col, 4.0) : Bool) ? (cast _Runtime.getIndex(second, ((row * 5.0) + 4.0)) : Dynamic) : (cast 0.0 : Dynamic));
             {
               var k:Dynamic = 0.0;
-              while (_Runtime.truthy(_Runtime.compare(k, 4.0, '<'))) {
-                (sum = cast ((sum + (_Runtime.getIndex(second, ((row * 5.0) + k)) * _Runtime.select(_Runtime.strictEquals(col, 4.0), function():Dynamic return cast _Runtime.getIndex(first, ((k * 5.0) + 4.0)), function():Dynamic return cast _Runtime.getIndex(first, ((k * 5.0) + col))))) : Dynamic));
+              while ((cast ((cast k : Float) < (cast 4.0 : Float)) : Bool)) {
+                (sum = cast ((sum + (_Runtime.getIndex(second, ((row * 5.0) + k)) * ((cast _Runtime.strictEquals(col, 4.0) : Bool) ? (cast _Runtime.getIndex(first, ((k * 5.0) + 4.0)) : Dynamic) : (cast _Runtime.getIndex(first, ((k * 5.0) + col)) : Dynamic)))) : Dynamic));
                 k++;
               }
             }
@@ -122,7 +122,7 @@ class SurfaceColorMatrix {
   public static function setColorMatrix__surfaceColorMatrix(out:Array<Float>, ...values:Float):Void {
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, 20.0, '<'))) {
+      while ((cast ((cast i : Float) < (cast 20.0 : Float)) : Bool)) {
         _Runtime.setIndex(out, i, _Runtime.getIndex(values, i));
         i++;
       }

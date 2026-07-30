@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 
 class InterpolationAdvanced {
   public static function damp(current:Float, target:Float, lambda:Float, deltaTime:Float):Float {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(deltaTime, 0.0, '<='), function():Dynamic return cast _Runtime.compare(lambda, 0.0, '<=')))) { return cast current; }
+    if ((cast ((cast ((cast deltaTime : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast lambda : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast current; }
     return cast (target + ((current - target) * HxMath.exp((-lambda * deltaTime))));
     return cast null;
   }
@@ -16,7 +16,7 @@ class InterpolationAdvanced {
     var diff:Dynamic = cast _Runtime.UNDEFINED;
     TAU = (HxMath.PI * 2.0);
     diff = _Runtime.fmod((_Runtime.fmod((b - a), TAU) + TAU), TAU);
-    if (_Runtime.truthy(_Runtime.compare(diff, HxMath.PI, '>'))) { (diff = cast ((diff - TAU) : Dynamic)); }
+    if ((cast ((cast diff : Float) > (cast HxMath.PI : Float)) : Bool)) { (diff = cast ((diff - TAU) : Dynamic)); }
     return cast (a + (diff * t));
     return cast null;
   }
@@ -24,7 +24,7 @@ class InterpolationAdvanced {
   public static function moveTowards(current:Float, target:Float, maxDelta:Float):Float {
     var delta:Dynamic = cast _Runtime.UNDEFINED;
     delta = (target - current);
-    if (_Runtime.truthy(_Runtime.compare(HxMath.abs(delta), maxDelta, '<='))) { return cast target; }
+    if ((cast ((cast HxMath.abs(delta) : Float) <= (cast maxDelta : Float)) : Bool)) { return cast target; }
     return cast (current + (_Runtime.sign(delta) * maxDelta));
     return cast null;
   }
@@ -32,15 +32,15 @@ class InterpolationAdvanced {
   public static function pingPong(t:Float, length:Float):Float {
     var cycle:Dynamic = cast _Runtime.UNDEFINED;
     var mod:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(length, 0.0, '<='))) { return cast 0.0; }
+    if ((cast ((cast length : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
     cycle = (2.0 * length);
     mod = _Runtime.fmod((_Runtime.fmod(t, cycle) + cycle), cycle);
-    return cast _Runtime.select(_Runtime.compare(mod, length, '<='), function():Dynamic return cast mod, function():Dynamic return cast (cycle - mod));
+    return cast ((cast ((cast mod : Float) <= (cast length : Float)) : Bool) ? (cast mod : Dynamic) : (cast (cycle - mod) : Dynamic));
     return cast null;
   }
 
   public static function repeat(t:Float, length:Float):Float {
-    if (_Runtime.truthy(_Runtime.compare(length, 0.0, '<='))) { return cast 0.0; }
+    if ((cast ((cast length : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
     return cast _Runtime.fmod((_Runtime.fmod(t, length) + length), length);
     return cast null;
   }
@@ -49,7 +49,7 @@ class InterpolationAdvanced {
     var t:Dynamic = cast _Runtime.UNDEFINED;
     var s:Dynamic = cast _Runtime.UNDEFINED;
     t = ((x - edge0) / (edge1 - edge0));
-    s = _Runtime.select(_Runtime.compare(t, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(t, 1.0, '>'), function():Dynamic return cast 1.0, function():Dynamic return cast t));
+    s = ((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast t : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic));
     return cast (((s * s) * s) * ((s * ((s * 6.0) - 15.0)) + 10.0));
     return cast null;
   }

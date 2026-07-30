@@ -8,14 +8,14 @@ import flighthq.types.EasingFunction;
 class EaseBounce {
   public static final easeInBounce:EasingFunction = function(t:Dynamic) return (1.0 - _Runtime.callValue(EaseBounce.bounceOut__easeBounce, cast ([(1.0 - t)] : Array<Dynamic>)));
 
-  public static final easeInOutBounce:EasingFunction = function(t:Dynamic) return _Runtime.select(_Runtime.compare(t, 0.5, '<'), function():Dynamic return cast ((1.0 - _Runtime.callValue(EaseBounce.bounceOut__easeBounce, cast ([(1.0 - (2.0 * t))] : Array<Dynamic>))) / 2.0), function():Dynamic return cast ((1.0 + _Runtime.callValue(EaseBounce.bounceOut__easeBounce, cast ([((2.0 * t) - 1.0)] : Array<Dynamic>))) / 2.0));
+  public static final easeInOutBounce:EasingFunction = function(t:Dynamic) return ((cast ((cast t : Float) < (cast 0.5 : Float)) : Bool) ? (cast ((1.0 - _Runtime.callValue(EaseBounce.bounceOut__easeBounce, cast ([(1.0 - (2.0 * t))] : Array<Dynamic>))) / 2.0) : Dynamic) : (cast ((1.0 + _Runtime.callValue(EaseBounce.bounceOut__easeBounce, cast ([((2.0 * t) - 1.0)] : Array<Dynamic>))) / 2.0) : Dynamic));
 
   public static final easeOutBounce:EasingFunction = function(t:Dynamic) return _Runtime.callValue(EaseBounce.bounceOut__easeBounce, cast ([t] : Array<Dynamic>));
 
   public static function bounceOut__easeBounce(t:Float):Float {
-    if (_Runtime.truthy(_Runtime.compare(t, (1.0 / 2.75), '<'))) { return cast ((7.5625 * t) * t); }
-    if (_Runtime.truthy(_Runtime.compare(t, (2.0 / 2.75), '<'))) { return cast (((7.5625 * (t = cast ((t - (1.5 / 2.75)) : Dynamic))) * t) + 0.75); }
-    if (_Runtime.truthy(_Runtime.compare(t, (2.5 / 2.75), '<'))) { return cast (((7.5625 * (t = cast ((t - (2.25 / 2.75)) : Dynamic))) * t) + 0.9375); }
+    if ((cast ((cast t : Float) < (cast (1.0 / 2.75) : Float)) : Bool)) { return cast ((7.5625 * t) * t); }
+    if ((cast ((cast t : Float) < (cast (2.0 / 2.75) : Float)) : Bool)) { return cast (((7.5625 * (t = cast ((t - (1.5 / 2.75)) : Dynamic))) * t) + 0.75); }
+    if ((cast ((cast t : Float) < (cast (2.5 / 2.75) : Float)) : Bool)) { return cast (((7.5625 * (t = cast ((t - (2.25 / 2.75)) : Dynamic))) * t) + 0.9375); }
     return cast (((7.5625 * (t = cast ((t - (2.625 / 2.75)) : Dynamic))) * t) + 0.984375);
     return cast null;
   }

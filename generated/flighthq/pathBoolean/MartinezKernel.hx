@@ -31,7 +31,7 @@ class DirectedGraph__martinezKernel {
     var edge:Dynamic = cast _Runtime.UNDEFINED;
     from = (cast this : DirectedGraph__martinezKernel).vertex(fromX, fromY);
     to = (cast this : DirectedGraph__martinezKernel).vertex(toX, toY);
-    if (_Runtime.truthy(_Runtime.strictEquals(from, to))) { return; }
+    if ((cast _Runtime.strictEquals(from, to) : Bool)) { return; }
     edge = _Runtime.field(_Runtime.field(this, 'edgeFrom'), 'length');
     _Runtime.callProperty(_Runtime.field(this, 'edgeFrom'), 'push', cast ([from] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(this, 'edgeTo'), 'push', cast ([to] : Array<Dynamic>));
@@ -43,10 +43,10 @@ class DirectedGraph__martinezKernel {
     rings = cast ([] : Array<Dynamic>);
     {
       var start:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(start, _Runtime.field(_Runtime.field(this, 'edgeFrom'), 'length'), '<'))) {
-        if (_Runtime.truthy(_Runtime.getIndex(_Runtime.field(this, 'used'), start))) { start++; continue; }
+      while ((cast ((cast start : Float) < (cast _Runtime.field(_Runtime.field(this, 'edgeFrom'), 'length') : Float)) : Bool)) {
+        if ((cast _Runtime.getIndex(_Runtime.field(this, 'used'), start) : Bool)) { start++; continue; }
         var ring:Dynamic = (cast this : DirectedGraph__martinezKernel).walk(start);
-        if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(ring, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(ring, 'length'), 6.0, '>=')))) { _Runtime.callProperty(rings, 'push', cast ([ring] : Array<Dynamic>)); }
+        if ((cast ((cast !_Runtime.strictEquals(ring, null) : Bool) && (cast ((cast _Runtime.field(ring, 'length') : Float) >= (cast 6.0 : Float)) : Bool)) : Bool)) { _Runtime.callProperty(rings, 'push', cast ([ring] : Array<Dynamic>)); }
         start++;
       }
     }
@@ -62,13 +62,13 @@ class DirectedGraph__martinezKernel {
     edge = startEdge;
     guard = 0.0;
     limit = (_Runtime.field(_Runtime.field(this, 'edgeFrom'), 'length') + 2.0);
-    while (_Runtime.truthy(_Runtime.compare(guard++, limit, '<'))) {
+    while ((cast ((cast guard++ : Float) < (cast limit : Float)) : Bool)) {
       _Runtime.setIndex(_Runtime.field(this, 'used'), edge, true);
       var from:Dynamic = _Runtime.getIndex(_Runtime.field(this, 'edgeFrom'), edge);
       _Runtime.pushMany(ring, cast ([_Runtime.getIndex(_Runtime.field(this, 'xs'), from), _Runtime.getIndex(_Runtime.field(this, 'ys'), from)] : Array<Dynamic>));
       var to:Dynamic = _Runtime.getIndex(_Runtime.field(this, 'edgeTo'), edge);
       var next:Dynamic = (cast this : DirectedGraph__martinezKernel).nextEdge(to, from);
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(next, -1.0), function():Dynamic return cast _Runtime.strictEquals(next, startEdge)), function():Dynamic return cast _Runtime.getIndex(_Runtime.field(this, 'used'), next)))) { break; }
+      if ((cast ((cast ((cast _Runtime.strictEquals(next, -1.0) : Bool) || (cast _Runtime.strictEquals(next, startEdge) : Bool)) : Bool) || (cast _Runtime.getIndex(_Runtime.field(this, 'used'), next) : Bool)) : Bool)) { break; }
       (edge = cast (next : Dynamic));
     }
     return cast ring;
@@ -82,13 +82,13 @@ class DirectedGraph__martinezKernel {
     best = -1.0;
     bestGap = HxMath.POSITIVE_INFINITY;
     for (edge in _Runtime.iterable(_Runtime.getIndex(_Runtime.field(this, 'outgoing'), at))) {
-      if (_Runtime.truthy(_Runtime.getIndex(_Runtime.field(this, 'used'), edge))) { continue; }
+      if ((cast _Runtime.getIndex(_Runtime.field(this, 'used'), edge) : Bool)) { continue; }
       var to:Dynamic = _Runtime.getIndex(_Runtime.field(this, 'edgeTo'), edge);
       var angle:Dynamic = HxMath.atan2((_Runtime.getIndex(_Runtime.field(this, 'ys'), to) - _Runtime.getIndex(_Runtime.field(this, 'ys'), at)), (_Runtime.getIndex(_Runtime.field(this, 'xs'), to) - _Runtime.getIndex(_Runtime.field(this, 'xs'), at)));
       var gap:Dynamic = (incomingAngle - angle);
-      while (_Runtime.truthy(_Runtime.compare(gap, 0.0, '<='))) { (gap = cast ((gap + (HxMath.PI * 2.0)) : Dynamic)); }
-      while (_Runtime.truthy(_Runtime.compare(gap, (HxMath.PI * 2.0), '>'))) { (gap = cast ((gap - (HxMath.PI * 2.0)) : Dynamic)); }
-      if (_Runtime.truthy(_Runtime.compare(gap, bestGap, '<'))) {
+      while ((cast ((cast gap : Float) <= (cast 0.0 : Float)) : Bool)) { (gap = cast ((gap + (HxMath.PI * 2.0)) : Dynamic)); }
+      while ((cast ((cast gap : Float) > (cast (HxMath.PI * 2.0) : Float)) : Bool)) { (gap = cast ((gap - (HxMath.PI * 2.0)) : Dynamic)); }
+      if ((cast ((cast gap : Float) < (cast bestGap : Float)) : Bool)) {
         (bestGap = cast (gap : Dynamic));
         (best = cast (edge : Dynamic));
       }
@@ -102,7 +102,7 @@ class DirectedGraph__martinezKernel {
     var index:Dynamic = cast _Runtime.UNDEFINED;
     key = '' + Std.string(_Runtime.callValue(MartinezKernel.snap__martinezKernel, cast ([x] : Array<Dynamic>))) + ',' + Std.string(_Runtime.callValue(MartinezKernel.snap__martinezKernel, cast ([y] : Array<Dynamic>))) + '';
     existing = ((cast _Runtime.field(this, 'keys') : flighthq._internal._Map).get(key));
-    if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast existing; }
+    if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
     index = _Runtime.field(_Runtime.field(this, 'xs'), 'length');
     ((cast _Runtime.field(this, 'keys') : flighthq._internal._Map).set(key, index));
     _Runtime.callProperty(_Runtime.field(this, 'xs'), 'push', cast ([x] : Array<Dynamic>));
@@ -128,9 +128,9 @@ class EventHeap__martinezKernel {
     data = _Runtime.field(this, 'data');
     _Runtime.callProperty(data, 'push', cast ([event] : Array<Dynamic>));
     i = (_Runtime.field(data, 'length') - 1.0);
-    while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>'))) {
+    while ((cast ((cast i : Float) > (cast 0.0 : Float)) : Bool)) {
       var parent:Dynamic = (_Runtime.toInt32((i - 1.0)) >> 1);
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.callValue(MartinezKernel.compareEvents__martinezKernel, cast ([_Runtime.getIndex(data, i), _Runtime.getIndex(data, parent)] : Array<Dynamic>)), 0.0, '<'))) {
+      if ((cast ((cast _Runtime.callValue(MartinezKernel.compareEvents__martinezKernel, cast ([_Runtime.getIndex(data, i), _Runtime.getIndex(data, parent)] : Array<Dynamic>)) : Float) < (cast 0.0 : Float)) : Bool)) {
         _Runtime.callValue(MartinezKernel.swap__martinezKernel, cast ([data, i, parent] : Array<Dynamic>));
         (i = cast (parent : Dynamic));
       } else { break; }
@@ -143,7 +143,7 @@ class EventHeap__martinezKernel {
     data = _Runtime.field(this, 'data');
     top = _Runtime.getIndex(data, 0.0);
     last = (cast _Runtime.callProperty(data, 'pop', cast ([] : Array<Dynamic>)) : Dynamic);
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(data, 'length'), 0.0, '>'))) {
+    if ((cast ((cast _Runtime.field(data, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       _Runtime.setIndex(data, 0.0, last);
       var i:Dynamic = 0.0;
       var n:Dynamic = _Runtime.field(data, 'length');
@@ -152,9 +152,9 @@ class EventHeap__martinezKernel {
           var left:Dynamic = ((i * 2.0) + 1.0);
           var right:Dynamic = (left + 1.0);
           var smallest:Dynamic = i;
-          if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(left, n, '<'), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(MartinezKernel.compareEvents__martinezKernel, cast ([_Runtime.getIndex(data, left), _Runtime.getIndex(data, smallest)] : Array<Dynamic>)), 0.0, '<')))) { (smallest = cast (left : Dynamic)); }
-          if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(right, n, '<'), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(MartinezKernel.compareEvents__martinezKernel, cast ([_Runtime.getIndex(data, right), _Runtime.getIndex(data, smallest)] : Array<Dynamic>)), 0.0, '<')))) { (smallest = cast (right : Dynamic)); }
-          if (_Runtime.truthy(_Runtime.strictEquals(smallest, i))) { break; }
+          if ((cast ((cast ((cast left : Float) < (cast n : Float)) : Bool) && (cast ((cast _Runtime.callValue(MartinezKernel.compareEvents__martinezKernel, cast ([_Runtime.getIndex(data, left), _Runtime.getIndex(data, smallest)] : Array<Dynamic>)) : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { (smallest = cast (left : Dynamic)); }
+          if ((cast ((cast ((cast right : Float) < (cast n : Float)) : Bool) && (cast ((cast _Runtime.callValue(MartinezKernel.compareEvents__martinezKernel, cast ([_Runtime.getIndex(data, right), _Runtime.getIndex(data, smallest)] : Array<Dynamic>)) : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { (smallest = cast (right : Dynamic)); }
+          if ((cast _Runtime.strictEquals(smallest, i) : Bool)) { break; }
           _Runtime.callValue(MartinezKernel.swap__martinezKernel, cast ([data, i, smallest] : Array<Dynamic>));
           (i = cast (smallest : Dynamic));
         }
@@ -190,10 +190,10 @@ class MartinezKernel {
     (MartinezKernel.nextEventId__martinezKernel = cast (0.0 : Dynamic));
     (MartinezKernel.vertexSnap__martinezKernel = cast (_Runtime.callValue(MartinezKernel.computeVertexSnap__martinezKernel, cast ([subject, clip] : Array<Dynamic>)) : Dynamic));
     segments = _Runtime.callValue(MartinezKernel.buildArrangement__martinezKernel, cast ([subject, clip] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0))) { return cast cast ([] : Array<Dynamic>); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     unique = _Runtime.callValue(MartinezKernel.mergeCoincidentSegments__martinezKernel, cast ([segments] : Array<Dynamic>));
     kept = _Runtime.callValue(MartinezKernel.classifySegments__martinezKernel, cast ([unique, operation, fillRule] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(kept, 'length'), 0.0))) { return cast cast ([] : Array<Dynamic>); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(kept, 'length'), 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     return cast _Runtime.callValue(MartinezKernel.traceRings__martinezKernel, cast ([kept] : Array<Dynamic>));
     return cast null;
   }
@@ -207,22 +207,22 @@ class MartinezKernel {
     _Runtime.callValue(MartinezKernel.fillQueue__martinezKernel, cast ([clip, false, heap] : Array<Dynamic>));
     status = cast ([] : Array<Dynamic>);
     segments = cast ([] : Array<Dynamic>);
-    while (_Runtime.truthy(!_Runtime.truthy((cast heap : EventHeap__martinezKernel).isEmpty()))) {
+    while ((cast !(cast (cast heap : EventHeap__martinezKernel).isEmpty() : Bool) : Bool)) {
       var event:Dynamic = (cast heap : EventHeap__martinezKernel).pop();
-      if (_Runtime.truthy(_Runtime.field(event, 'left'))) {
+      if ((cast _Runtime.field(event, 'left') : Bool)) {
         var index:Dynamic = _Runtime.callValue(MartinezKernel.insertStatus__martinezKernel, cast ([status, event] : Array<Dynamic>));
-        var prev:Dynamic = _Runtime.select(_Runtime.compare(index, 0.0, '>'), function():Dynamic return cast _Runtime.getIndex(status, (index - 1.0)), function():Dynamic return cast null);
-        var next:Dynamic = _Runtime.select(_Runtime.compare(index, (_Runtime.field(status, 'length') - 1.0), '<'), function():Dynamic return cast _Runtime.getIndex(status, (index + 1.0)), function():Dynamic return cast null);
-        if (_Runtime.truthy(!_Runtime.strictEquals(next, null))) { _Runtime.callValue(MartinezKernel.possibleIntersection__martinezKernel, cast ([event, next, heap] : Array<Dynamic>)); }
-        if (_Runtime.truthy(!_Runtime.strictEquals(prev, null))) { _Runtime.callValue(MartinezKernel.possibleIntersection__martinezKernel, cast ([prev, event, heap] : Array<Dynamic>)); }
+        var prev:Dynamic = ((cast ((cast index : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.getIndex(status, (index - 1.0)) : Dynamic) : (cast null : Dynamic));
+        var next:Dynamic = ((cast ((cast index : Float) < (cast (_Runtime.field(status, 'length') - 1.0) : Float)) : Bool) ? (cast _Runtime.getIndex(status, (index + 1.0)) : Dynamic) : (cast null : Dynamic));
+        if ((cast !_Runtime.strictEquals(next, null) : Bool)) { _Runtime.callValue(MartinezKernel.possibleIntersection__martinezKernel, cast ([event, next, heap] : Array<Dynamic>)); }
+        if ((cast !_Runtime.strictEquals(prev, null) : Bool)) { _Runtime.callValue(MartinezKernel.possibleIntersection__martinezKernel, cast ([prev, event, heap] : Array<Dynamic>)); }
       } else {
         var leftEvent:Dynamic = _Runtime.field(event, 'otherEvent');
         var index:Dynamic = _Runtime.callValue(MartinezKernel.findStatus__martinezKernel, cast ([status, leftEvent] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(index, -1.0))) {
-          var prev:Dynamic = _Runtime.select(_Runtime.compare(index, 0.0, '>'), function():Dynamic return cast _Runtime.getIndex(status, (index - 1.0)), function():Dynamic return cast null);
-          var next:Dynamic = _Runtime.select(_Runtime.compare(index, (_Runtime.field(status, 'length') - 1.0), '<'), function():Dynamic return cast _Runtime.getIndex(status, (index + 1.0)), function():Dynamic return cast null);
+        if ((cast !_Runtime.strictEquals(index, -1.0) : Bool)) {
+          var prev:Dynamic = ((cast ((cast index : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.getIndex(status, (index - 1.0)) : Dynamic) : (cast null : Dynamic));
+          var next:Dynamic = ((cast ((cast index : Float) < (cast (_Runtime.field(status, 'length') - 1.0) : Float)) : Bool) ? (cast _Runtime.getIndex(status, (index + 1.0)) : Dynamic) : (cast null : Dynamic));
           _Runtime.splice(status, Std.int(index), Std.int(1.0), []);
-          if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(prev, null), function():Dynamic return cast !_Runtime.strictEquals(next, null)))) { _Runtime.callValue(MartinezKernel.possibleIntersection__martinezKernel, cast ([prev, next, heap] : Array<Dynamic>)); }
+          if ((cast ((cast !_Runtime.strictEquals(prev, null) : Bool) && (cast !_Runtime.strictEquals(next, null) : Bool)) : Bool)) { _Runtime.callValue(MartinezKernel.possibleIntersection__martinezKernel, cast ([prev, next, heap] : Array<Dynamic>)); }
         }
         _Runtime.callValue(MartinezKernel.recordSegment__martinezKernel, cast ([leftEvent, event, segments] : Array<Dynamic>));
       }
@@ -232,28 +232,28 @@ class MartinezKernel {
   }
 
   public static function recordSegment__martinezKernel(leftEvent:Dynamic, rightEvent:Dynamic, segments:Array<ArrangementSegment__martinezKernel>):Void {
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(leftEvent, 'left')))) { return; }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.callValue(MartinezKernel.approxEqual__martinezKernel, cast ([_Runtime.field(leftEvent, 'x'), _Runtime.field(rightEvent, 'x')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(MartinezKernel.approxEqual__martinezKernel, cast ([_Runtime.field(leftEvent, 'y'), _Runtime.field(rightEvent, 'y')] : Array<Dynamic>))))) { return; }
+    if ((cast !(cast _Runtime.field(leftEvent, 'left') : Bool) : Bool)) { return; }
+    if ((cast ((cast _Runtime.callValue(MartinezKernel.approxEqual__martinezKernel, cast ([_Runtime.field(leftEvent, 'x'), _Runtime.field(rightEvent, 'x')] : Array<Dynamic>)) : Bool) && (cast _Runtime.callValue(MartinezKernel.approxEqual__martinezKernel, cast ([_Runtime.field(leftEvent, 'y'), _Runtime.field(rightEvent, 'y')] : Array<Dynamic>)) : Bool)) : Bool)) { return; }
     _Runtime.callProperty(segments, 'push', cast ([{ ax: _Runtime.field(leftEvent, 'x'), ay: _Runtime.field(leftEvent, 'y'), bx: _Runtime.field(rightEvent, 'x'), by: _Runtime.field(rightEvent, 'y'), isSubject: _Runtime.field(leftEvent, 'isSubject'), windingDelta: _Runtime.field(leftEvent, 'windingDelta') }] : Array<Dynamic>));
   }
 
   public static function fillQueue__martinezKernel(contours:Array<PathBooleanContour>, isSubject:Bool, heap:EventHeap__martinezKernel):Void {
     for (contour in _Runtime.iterable(contours)) {
       var count:Dynamic = (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> 1);
-      if (_Runtime.truthy(_Runtime.compare(count, 2.0, '<'))) { continue; }
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.callValue(MartinezKernel.approxEqual__martinezKernel, cast ([_Runtime.getIndex(contour, 0.0), _Runtime.getIndex(contour, ((count - 1.0) * 2.0))] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(MartinezKernel.approxEqual__martinezKernel, cast ([_Runtime.getIndex(contour, 1.0), _Runtime.getIndex(contour, (((count - 1.0) * 2.0) + 1.0))] : Array<Dynamic>))))) {
+      if ((cast ((cast count : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
+      if ((cast ((cast _Runtime.callValue(MartinezKernel.approxEqual__martinezKernel, cast ([_Runtime.getIndex(contour, 0.0), _Runtime.getIndex(contour, ((count - 1.0) * 2.0))] : Array<Dynamic>)) : Bool) && (cast _Runtime.callValue(MartinezKernel.approxEqual__martinezKernel, cast ([_Runtime.getIndex(contour, 1.0), _Runtime.getIndex(contour, (((count - 1.0) * 2.0) + 1.0))] : Array<Dynamic>)) : Bool)) : Bool)) {
         (count = cast ((count - 1.0) : Dynamic));
       }
-      if (_Runtime.truthy(_Runtime.compare(count, 3.0, '<'))) { continue; }
+      if ((cast ((cast count : Float) < (cast 3.0 : Float)) : Bool)) { continue; }
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, count, '<'))) {
+        while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
           var ax:Dynamic = _Runtime.getIndex(contour, (i * 2.0));
           var ay:Dynamic = _Runtime.getIndex(contour, ((i * 2.0) + 1.0));
           var j:Dynamic = _Runtime.fmod((i + 1.0), count);
           var bx:Dynamic = _Runtime.getIndex(contour, (j * 2.0));
           var by:Dynamic = _Runtime.getIndex(contour, ((j * 2.0) + 1.0));
-          if (_Runtime.truthy(_Runtime.andValue(_Runtime.callValue(MartinezKernel.approxEqual__martinezKernel, cast ([ax, bx] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(MartinezKernel.approxEqual__martinezKernel, cast ([ay, by] : Array<Dynamic>))))) { i++; continue; }
+          if ((cast ((cast _Runtime.callValue(MartinezKernel.approxEqual__martinezKernel, cast ([ax, bx] : Array<Dynamic>)) : Bool) && (cast _Runtime.callValue(MartinezKernel.approxEqual__martinezKernel, cast ([ay, by] : Array<Dynamic>)) : Bool)) : Bool)) { i++; continue; }
           _Runtime.callValue(MartinezKernel.addEdge__martinezKernel, cast ([ax, ay, bx, by, isSubject, heap] : Array<Dynamic>));
           i++;
         }
@@ -268,7 +268,7 @@ class MartinezKernel {
     b = _Runtime.callValue(MartinezKernel.createEvent__martinezKernel, cast ([bx, by, isSubject] : Array<Dynamic>));
     _Runtime.setField(a, 'otherEvent', b);
     _Runtime.setField(b, 'otherEvent', a);
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.callValue(MartinezKernel.pointOrder__martinezKernel, cast ([ax, ay, bx, by] : Array<Dynamic>)), 0.0, '<'))) {
+    if ((cast ((cast _Runtime.callValue(MartinezKernel.pointOrder__martinezKernel, cast ([ax, ay, bx, by] : Array<Dynamic>)) : Float) < (cast 0.0 : Float)) : Bool)) {
       _Runtime.setField(a, 'left', true);
       _Runtime.setField(a, 'windingDelta', 1.0);
     } else {
@@ -287,12 +287,12 @@ class MartinezKernel {
   public static function possibleIntersection__martinezKernel(le1:Dynamic, le2:Dynamic, heap:EventHeap__martinezKernel):Void {
     var inter:Dynamic = cast _Runtime.UNDEFINED;
     inter = _Runtime.callValue(MartinezKernel.segmentIntersection__martinezKernel, cast ([_Runtime.field(le1, 'x'), _Runtime.field(le1, 'y'), _Runtime.field(_Runtime.field(le1, 'otherEvent'), 'x'), _Runtime.field(_Runtime.field(le1, 'otherEvent'), 'y'), _Runtime.field(le2, 'x'), _Runtime.field(le2, 'y'), _Runtime.field(_Runtime.field(le2, 'otherEvent'), 'x'), _Runtime.field(_Runtime.field(le2, 'otherEvent'), 'y')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(inter, null))) { return; }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(inter, 'length'), 1.0))) {
+    if ((cast _Runtime.strictEquals(inter, null) : Bool)) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(inter, 'length'), 1.0) : Bool)) {
       var ix:Dynamic = _Runtime.getIndex(_Runtime.getIndex(inter, 0.0), 0.0);
       var iy:Dynamic = _Runtime.getIndex(_Runtime.getIndex(inter, 0.0), 1.0);
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(MartinezKernel.pointOnEndpoint__martinezKernel, cast ([le1, ix, iy] : Array<Dynamic>))))) { _Runtime.callValue(MartinezKernel.divideSegment__martinezKernel, cast ([le1, ix, iy, heap] : Array<Dynamic>)); }
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(MartinezKernel.pointOnEndpoint__martinezKernel, cast ([le2, ix, iy] : Array<Dynamic>))))) { _Runtime.callValue(MartinezKernel.divideSegment__martinezKernel, cast ([le2, ix, iy, heap] : Array<Dynamic>)); }
+      if ((cast !(cast _Runtime.callValue(MartinezKernel.pointOnEndpoint__martinezKernel, cast ([le1, ix, iy] : Array<Dynamic>)) : Bool) : Bool)) { _Runtime.callValue(MartinezKernel.divideSegment__martinezKernel, cast ([le1, ix, iy, heap] : Array<Dynamic>)); }
+      if ((cast !(cast _Runtime.callValue(MartinezKernel.pointOnEndpoint__martinezKernel, cast ([le2, ix, iy] : Array<Dynamic>)) : Bool) : Bool)) { _Runtime.callValue(MartinezKernel.divideSegment__martinezKernel, cast ([le2, ix, iy, heap] : Array<Dynamic>)); }
       return;
     }
     _Runtime.callValue(MartinezKernel.divideIfInterior__martinezKernel, cast ([le1, _Runtime.field(le2, 'x'), _Runtime.field(le2, 'y'), heap] : Array<Dynamic>));
@@ -302,7 +302,7 @@ class MartinezKernel {
   }
 
   public static function divideIfInterior__martinezKernel(le:Dynamic, x:Float, y:Float, heap:EventHeap__martinezKernel):Void {
-    if (_Runtime.truthy(_Runtime.callValue(MartinezKernel.pointStrictlyInside__martinezKernel, cast ([_Runtime.field(le, 'x'), _Runtime.field(le, 'y'), _Runtime.field(_Runtime.field(le, 'otherEvent'), 'x'), _Runtime.field(_Runtime.field(le, 'otherEvent'), 'y'), x, y] : Array<Dynamic>)))) { _Runtime.callValue(MartinezKernel.divideSegment__martinezKernel, cast ([le, x, y, heap] : Array<Dynamic>)); }
+    if ((cast _Runtime.callValue(MartinezKernel.pointStrictlyInside__martinezKernel, cast ([_Runtime.field(le, 'x'), _Runtime.field(le, 'y'), _Runtime.field(_Runtime.field(le, 'otherEvent'), 'x'), _Runtime.field(_Runtime.field(le, 'otherEvent'), 'y'), x, y] : Array<Dynamic>)) : Bool)) { _Runtime.callValue(MartinezKernel.divideSegment__martinezKernel, cast ([le, x, y, heap] : Array<Dynamic>)); }
   }
 
   public static function divideSegment__martinezKernel(le:Dynamic, x:Float, y:Float, heap:EventHeap__martinezKernel):Void {
@@ -332,12 +332,12 @@ class MartinezKernel {
     var cross:Dynamic = cast _Runtime.UNDEFINED;
     var lenSq:Dynamic = cast _Runtime.UNDEFINED;
     var dot:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.andValue(_Runtime.callValue(MartinezKernel.approxEqual__martinezKernel, cast ([lx, x] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(MartinezKernel.approxEqual__martinezKernel, cast ([ly, y] : Array<Dynamic>))), function():Dynamic return cast _Runtime.andValue(_Runtime.callValue(MartinezKernel.approxEqual__martinezKernel, cast ([rx, x] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(MartinezKernel.approxEqual__martinezKernel, cast ([ry, y] : Array<Dynamic>)))))) { return cast false; }
+    if ((cast ((cast _Runtime.andValue(_Runtime.callValue(MartinezKernel.approxEqual__martinezKernel, cast ([lx, x] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(MartinezKernel.approxEqual__martinezKernel, cast ([ly, y] : Array<Dynamic>))) : Bool) || (cast _Runtime.andValue(_Runtime.callValue(MartinezKernel.approxEqual__martinezKernel, cast ([rx, x] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(MartinezKernel.approxEqual__martinezKernel, cast ([ry, y] : Array<Dynamic>))) : Bool)) : Bool)) { return cast false; }
     cross = (((rx - lx) * (y - ly)) - ((ry - ly) * (x - lx)));
     lenSq = (((rx - lx) * (rx - lx)) + ((ry - ly) * (ry - ly)));
-    if (_Runtime.truthy(_Runtime.compare((cross * cross), ((MartinezKernel.INTERSECTION_EPS__martinezKernel * lenSq) * lenSq), '>'))) { return cast false; }
+    if ((cast ((cast (cross * cross) : Float) > (cast ((MartinezKernel.INTERSECTION_EPS__martinezKernel * lenSq) * lenSq) : Float)) : Bool)) { return cast false; }
     dot = (((x - lx) * (rx - lx)) + ((y - ly) * (ry - ly)));
-    return cast _Runtime.andValue(_Runtime.compare(dot, 0.0, '>'), function():Dynamic return cast _Runtime.compare(dot, lenSq, '<'));
+    return cast ((cast ((cast dot : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast dot : Float) < (cast lenSq : Float)) : Bool));
     return cast null;
   }
 
@@ -346,9 +346,9 @@ class MartinezKernel {
     var hi:Dynamic = cast _Runtime.UNDEFINED;
     lo = 0.0;
     hi = _Runtime.field(status, 'length');
-    while (_Runtime.truthy(_Runtime.compare(lo, hi, '<'))) {
+    while ((cast ((cast lo : Float) < (cast hi : Float)) : Bool)) {
       var mid:Dynamic = (_Runtime.toInt32((lo + hi)) >> 1);
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.callValue(MartinezKernel.compareSegments__martinezKernel, cast ([_Runtime.getIndex(status, mid), event] : Array<Dynamic>)), 0.0, '<'))) { (lo = cast ((mid + 1.0) : Dynamic)); } else { (hi = cast (mid : Dynamic)); }
+      if ((cast ((cast _Runtime.callValue(MartinezKernel.compareSegments__martinezKernel, cast ([_Runtime.getIndex(status, mid), event] : Array<Dynamic>)) : Float) < (cast 0.0 : Float)) : Bool)) { (lo = cast ((mid + 1.0) : Dynamic)); } else { (hi = cast (mid : Dynamic)); }
     }
     _Runtime.splice(status, Std.int(lo), Std.int(0.0), [event]);
     return cast lo;
@@ -358,8 +358,8 @@ class MartinezKernel {
   public static function findStatus__martinezKernel(status:Array<Dynamic>, event:Dynamic):Float {
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(status, 'length'), '<'))) {
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.getIndex(status, i), event))) { return cast i; }
+      while ((cast ((cast i : Float) < (cast _Runtime.field(status, 'length') : Float)) : Bool)) {
+        if ((cast _Runtime.strictEquals(_Runtime.getIndex(status, i), event) : Bool)) { return cast i; }
         i++;
       }
     }
@@ -374,48 +374,48 @@ class MartinezKernel {
     var a2y:Dynamic = cast _Runtime.UNDEFINED;
     var s1:Dynamic = cast _Runtime.UNDEFINED;
     var s2:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(le1, le2))) { return cast 0.0; }
+    if ((cast _Runtime.strictEquals(le1, le2) : Bool)) { return cast 0.0; }
     a1x = _Runtime.field(le1, 'x');
     a1y = _Runtime.field(le1, 'y');
     a2x = _Runtime.field(_Runtime.field(le1, 'otherEvent'), 'x');
     a2y = _Runtime.field(_Runtime.field(le1, 'otherEvent'), 'y');
     s1 = _Runtime.callValue(MartinezKernel.signedArea__martinezKernel, cast ([a1x, a1y, a2x, a2y, _Runtime.field(le2, 'x'), _Runtime.field(le2, 'y')] : Array<Dynamic>));
     s2 = _Runtime.callValue(MartinezKernel.signedArea__martinezKernel, cast ([a1x, a1y, a2x, a2y, _Runtime.field(_Runtime.field(le2, 'otherEvent'), 'x'), _Runtime.field(_Runtime.field(le2, 'otherEvent'), 'y')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(s1, 0.0), function():Dynamic return cast !_Runtime.strictEquals(s2, 0.0)))) {
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(a1x, _Runtime.field(le2, 'x')), function():Dynamic return cast _Runtime.strictEquals(a1y, _Runtime.field(le2, 'y'))))) { return cast _Runtime.select(_Runtime.callValue(MartinezKernel.isBelow__martinezKernel, cast ([le1, _Runtime.field(_Runtime.field(le2, 'otherEvent'), 'x'), _Runtime.field(_Runtime.field(le2, 'otherEvent'), 'y')] : Array<Dynamic>)), function():Dynamic return cast -1.0, function():Dynamic return cast 1.0); }
-      if (_Runtime.truthy(_Runtime.strictEquals(a1x, _Runtime.field(le2, 'x')))) { return cast _Runtime.select(_Runtime.compare(a1y, _Runtime.field(le2, 'y'), '<'), function():Dynamic return cast -1.0, function():Dynamic return cast 1.0); }
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callValue(MartinezKernel.compareEvents__martinezKernel, cast ([le1, le2] : Array<Dynamic>)), 1.0))) { return cast _Runtime.select(_Runtime.callValue(MartinezKernel.isBelow__martinezKernel, cast ([le2, a1x, a1y] : Array<Dynamic>)), function():Dynamic return cast 1.0, function():Dynamic return cast -1.0); }
-      return cast _Runtime.select(_Runtime.callValue(MartinezKernel.isBelow__martinezKernel, cast ([le1, _Runtime.field(le2, 'x'), _Runtime.field(le2, 'y')] : Array<Dynamic>)), function():Dynamic return cast -1.0, function():Dynamic return cast 1.0);
+    if ((cast ((cast !_Runtime.strictEquals(s1, 0.0) : Bool) || (cast !_Runtime.strictEquals(s2, 0.0) : Bool)) : Bool)) {
+      if ((cast ((cast _Runtime.strictEquals(a1x, _Runtime.field(le2, 'x')) : Bool) && (cast _Runtime.strictEquals(a1y, _Runtime.field(le2, 'y')) : Bool)) : Bool)) { return cast ((cast _Runtime.callValue(MartinezKernel.isBelow__martinezKernel, cast ([le1, _Runtime.field(_Runtime.field(le2, 'otherEvent'), 'x'), _Runtime.field(_Runtime.field(le2, 'otherEvent'), 'y')] : Array<Dynamic>)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)); }
+      if ((cast _Runtime.strictEquals(a1x, _Runtime.field(le2, 'x')) : Bool)) { return cast ((cast ((cast a1y : Float) < (cast _Runtime.field(le2, 'y') : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)); }
+      if ((cast _Runtime.strictEquals(_Runtime.callValue(MartinezKernel.compareEvents__martinezKernel, cast ([le1, le2] : Array<Dynamic>)), 1.0) : Bool)) { return cast ((cast _Runtime.callValue(MartinezKernel.isBelow__martinezKernel, cast ([le2, a1x, a1y] : Array<Dynamic>)) : Bool) ? (cast 1.0 : Dynamic) : (cast -1.0 : Dynamic)); }
+      return cast ((cast _Runtime.callValue(MartinezKernel.isBelow__martinezKernel, cast ([le1, _Runtime.field(le2, 'x'), _Runtime.field(le2, 'y')] : Array<Dynamic>)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic));
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(le1, 'isSubject'), _Runtime.field(le2, 'isSubject')))) { return cast _Runtime.select(_Runtime.field(le1, 'isSubject'), function():Dynamic return cast -1.0, function():Dynamic return cast 1.0); }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(a1x, _Runtime.field(le2, 'x')), function():Dynamic return cast _Runtime.strictEquals(a1y, _Runtime.field(le2, 'y'))))) { return cast _Runtime.select(_Runtime.compare(_Runtime.field(le1, 'id'), _Runtime.field(le2, 'id'), '<'), function():Dynamic return cast -1.0, function():Dynamic return cast 1.0); }
-    return cast _Runtime.select(_Runtime.strictEquals(_Runtime.callValue(MartinezKernel.compareEvents__martinezKernel, cast ([le1, le2] : Array<Dynamic>)), 1.0), function():Dynamic return cast 1.0, function():Dynamic return cast -1.0);
+    if ((cast !_Runtime.strictEquals(_Runtime.field(le1, 'isSubject'), _Runtime.field(le2, 'isSubject')) : Bool)) { return cast ((cast _Runtime.field(le1, 'isSubject') : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)); }
+    if ((cast ((cast _Runtime.strictEquals(a1x, _Runtime.field(le2, 'x')) : Bool) && (cast _Runtime.strictEquals(a1y, _Runtime.field(le2, 'y')) : Bool)) : Bool)) { return cast ((cast ((cast _Runtime.field(le1, 'id') : Float) < (cast _Runtime.field(le2, 'id') : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)); }
+    return cast ((cast _Runtime.strictEquals(_Runtime.callValue(MartinezKernel.compareEvents__martinezKernel, cast ([le1, le2] : Array<Dynamic>)), 1.0) : Bool) ? (cast 1.0 : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
 
   public static function isBelow__martinezKernel(le:Dynamic, x:Float, y:Float):Bool {
-    return cast _Runtime.select(_Runtime.field(le, 'left'), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(MartinezKernel.signedArea__martinezKernel, cast ([_Runtime.field(le, 'x'), _Runtime.field(le, 'y'), _Runtime.field(_Runtime.field(le, 'otherEvent'), 'x'), _Runtime.field(_Runtime.field(le, 'otherEvent'), 'y'), x, y] : Array<Dynamic>)), 0.0, '>'), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(MartinezKernel.signedArea__martinezKernel, cast ([_Runtime.field(_Runtime.field(le, 'otherEvent'), 'x'), _Runtime.field(_Runtime.field(le, 'otherEvent'), 'y'), _Runtime.field(le, 'x'), _Runtime.field(le, 'y'), x, y] : Array<Dynamic>)), 0.0, '>'));
+    return cast ((cast _Runtime.field(le, 'left') : Bool) ? (cast ((cast _Runtime.callValue(MartinezKernel.signedArea__martinezKernel, cast ([_Runtime.field(le, 'x'), _Runtime.field(le, 'y'), _Runtime.field(_Runtime.field(le, 'otherEvent'), 'x'), _Runtime.field(_Runtime.field(le, 'otherEvent'), 'y'), x, y] : Array<Dynamic>)) : Float) > (cast 0.0 : Float)) : Dynamic) : (cast ((cast _Runtime.callValue(MartinezKernel.signedArea__martinezKernel, cast ([_Runtime.field(_Runtime.field(le, 'otherEvent'), 'x'), _Runtime.field(_Runtime.field(le, 'otherEvent'), 'y'), _Runtime.field(le, 'x'), _Runtime.field(le, 'y'), x, y] : Array<Dynamic>)) : Float) > (cast 0.0 : Float)) : Dynamic));
     return cast null;
   }
 
   public static function compareEvents__martinezKernel(e1:Dynamic, e2:Dynamic):Float {
     var area:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(e1, 'x'), _Runtime.field(e2, 'x')))) { return cast _Runtime.select(_Runtime.compare(_Runtime.field(e1, 'x'), _Runtime.field(e2, 'x'), '<'), function():Dynamic return cast -1.0, function():Dynamic return cast 1.0); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(e1, 'y'), _Runtime.field(e2, 'y')))) { return cast _Runtime.select(_Runtime.compare(_Runtime.field(e1, 'y'), _Runtime.field(e2, 'y'), '<'), function():Dynamic return cast -1.0, function():Dynamic return cast 1.0); }
-    if (_Runtime.truthy(_Runtime.strictEquals(e1, e2))) { return cast 0.0; }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(e1, 'left'), _Runtime.field(e2, 'left')))) { return cast _Runtime.select(_Runtime.field(e1, 'left'), function():Dynamic return cast 1.0, function():Dynamic return cast -1.0); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(e1, 'x'), _Runtime.field(e2, 'x')) : Bool)) { return cast ((cast ((cast _Runtime.field(e1, 'x') : Float) < (cast _Runtime.field(e2, 'x') : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(e1, 'y'), _Runtime.field(e2, 'y')) : Bool)) { return cast ((cast ((cast _Runtime.field(e1, 'y') : Float) < (cast _Runtime.field(e2, 'y') : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)); }
+    if ((cast _Runtime.strictEquals(e1, e2) : Bool)) { return cast 0.0; }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(e1, 'left'), _Runtime.field(e2, 'left')) : Bool)) { return cast ((cast _Runtime.field(e1, 'left') : Bool) ? (cast 1.0 : Dynamic) : (cast -1.0 : Dynamic)); }
     area = _Runtime.callValue(MartinezKernel.signedArea__martinezKernel, cast ([_Runtime.field(e1, 'x'), _Runtime.field(e1, 'y'), _Runtime.field(_Runtime.field(e1, 'otherEvent'), 'x'), _Runtime.field(_Runtime.field(e1, 'otherEvent'), 'y'), _Runtime.field(_Runtime.field(e2, 'otherEvent'), 'x'), _Runtime.field(_Runtime.field(e2, 'otherEvent'), 'y')] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(area, 0.0))) { return cast _Runtime.select(_Runtime.callValue(MartinezKernel.isBelow__martinezKernel, cast ([e1, _Runtime.field(_Runtime.field(e2, 'otherEvent'), 'x'), _Runtime.field(_Runtime.field(e2, 'otherEvent'), 'y')] : Array<Dynamic>)), function():Dynamic return cast -1.0, function():Dynamic return cast 1.0); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(e1, 'isSubject'), _Runtime.field(e2, 'isSubject')))) { return cast _Runtime.select(_Runtime.field(e1, 'isSubject'), function():Dynamic return cast -1.0, function():Dynamic return cast 1.0); }
-    return cast _Runtime.select(_Runtime.compare(_Runtime.field(e1, 'id'), _Runtime.field(e2, 'id'), '<'), function():Dynamic return cast -1.0, function():Dynamic return cast 1.0);
+    if ((cast !_Runtime.strictEquals(area, 0.0) : Bool)) { return cast ((cast _Runtime.callValue(MartinezKernel.isBelow__martinezKernel, cast ([e1, _Runtime.field(_Runtime.field(e2, 'otherEvent'), 'x'), _Runtime.field(_Runtime.field(e2, 'otherEvent'), 'y')] : Array<Dynamic>)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(e1, 'isSubject'), _Runtime.field(e2, 'isSubject')) : Bool)) { return cast ((cast _Runtime.field(e1, 'isSubject') : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)); }
+    return cast ((cast ((cast _Runtime.field(e1, 'id') : Float) < (cast _Runtime.field(e2, 'id') : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic));
     return cast null;
   }
 
   public static function pointOrder__martinezKernel(ax:Float, ay:Float, bx:Float, by:Float):Float {
-    if (_Runtime.truthy(_Runtime.compare(ax, bx, '<'))) { return cast -1.0; }
-    if (_Runtime.truthy(_Runtime.compare(ax, bx, '>'))) { return cast 1.0; }
-    if (_Runtime.truthy(_Runtime.compare(ay, by, '<'))) { return cast -1.0; }
-    if (_Runtime.truthy(_Runtime.compare(ay, by, '>'))) { return cast 1.0; }
+    if ((cast ((cast ax : Float) < (cast bx : Float)) : Bool)) { return cast -1.0; }
+    if ((cast ((cast ax : Float) > (cast bx : Float)) : Bool)) { return cast 1.0; }
+    if ((cast ((cast ay : Float) < (cast by : Float)) : Bool)) { return cast -1.0; }
+    if ((cast ((cast ay : Float) > (cast by : Float)) : Bool)) { return cast 1.0; }
     return cast 0.0;
     return cast null;
   }
@@ -451,21 +451,21 @@ class MartinezKernel {
     sqrKross = (kross * kross);
     sqrLenA = ((vax * vax) + (vay * vay));
     sqrLenB = ((vbx * vbx) + (vby * vby));
-    if (_Runtime.truthy(_Runtime.compare(sqrKross, ((MartinezKernel.INTERSECTION_EPS__martinezKernel * sqrLenA) * sqrLenB), '>'))) {
+    if ((cast ((cast sqrKross : Float) > (cast ((MartinezKernel.INTERSECTION_EPS__martinezKernel * sqrLenA) * sqrLenB) : Float)) : Bool)) {
       var s:Dynamic = (((ex * vby) - (ey * vbx)) / kross);
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(s, 0.0, '<'), function():Dynamic return cast _Runtime.compare(s, 1.0, '>')))) { return cast null; }
+      if ((cast ((cast ((cast s : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast s : Float) > (cast 1.0 : Float)) : Bool)) : Bool)) { return cast null; }
       var t:Dynamic = (((ex * vay) - (ey * vax)) / kross);
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(t, 0.0, '<'), function():Dynamic return cast _Runtime.compare(t, 1.0, '>')))) { return cast null; }
+      if ((cast ((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast t : Float) > (cast 1.0 : Float)) : Bool)) : Bool)) { return cast null; }
       return cast cast ([cast ([(a1x + (s * vax)), (a1y + (s * vay))] : Array<Dynamic>)] : Array<Dynamic>);
     }
     krossE = ((ex * vay) - (ey * vax));
-    if (_Runtime.truthy(_Runtime.compare((krossE * krossE), ((MartinezKernel.INTERSECTION_EPS__martinezKernel * sqrLenA) * ((ex * ex) + (ey * ey))), '>'))) { return cast null; }
+    if ((cast ((cast (krossE * krossE) : Float) > (cast ((MartinezKernel.INTERSECTION_EPS__martinezKernel * sqrLenA) * ((ex * ex) + (ey * ey))) : Float)) : Bool)) { return cast null; }
     sa = (((ex * vax) + (ey * vay)) / sqrLenA);
     sb = (sa + (((vbx * vax) + (vby * vay)) / sqrLenA));
     lo = HxMath.max(0.0, HxMath.min(sa, sb));
     hi = HxMath.min(1.0, HxMath.max(sa, sb));
-    if (_Runtime.truthy(_Runtime.compare(lo, (hi + 1e-12), '>'))) { return cast null; }
-    if (_Runtime.truthy(_Runtime.compare(HxMath.abs((lo - hi)), 1e-12, '<='))) { return cast cast ([cast ([(a1x + (lo * vax)), (a1y + (lo * vay))] : Array<Dynamic>)] : Array<Dynamic>); }
+    if ((cast ((cast lo : Float) > (cast (hi + 1e-12) : Float)) : Bool)) { return cast null; }
+    if ((cast ((cast HxMath.abs((lo - hi)) : Float) <= (cast 1e-12 : Float)) : Bool)) { return cast cast ([cast ([(a1x + (lo * vax)), (a1y + (lo * vay))] : Array<Dynamic>)] : Array<Dynamic>); }
     return cast cast ([cast ([(a1x + (lo * vax)), (a1y + (lo * vay))] : Array<Dynamic>), cast ([(a1x + (hi * vax)), (a1y + (hi * vay))] : Array<Dynamic>)] : Array<Dynamic>);
     return cast null;
   }
@@ -478,7 +478,7 @@ class MartinezKernel {
       var ay:Dynamic = _Runtime.field(seg, 'ay');
       var bx:Dynamic = _Runtime.field(seg, 'bx');
       var by:Dynamic = _Runtime.field(seg, 'by');
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.callValue(MartinezKernel.pointOrder__martinezKernel, cast ([ax, ay, bx, by] : Array<Dynamic>)), 0.0, '>'))) {
+      if ((cast ((cast _Runtime.callValue(MartinezKernel.pointOrder__martinezKernel, cast ([ax, ay, bx, by] : Array<Dynamic>)) : Float) > (cast 0.0 : Float)) : Bool)) {
         (ax = cast (_Runtime.field(seg, 'bx') : Dynamic));
         (ay = cast (_Runtime.field(seg, 'by') : Dynamic));
         (bx = cast (_Runtime.field(seg, 'ax') : Dynamic));
@@ -486,11 +486,11 @@ class MartinezKernel {
       }
       var key:Dynamic = '' + Std.string(_Runtime.callValue(MartinezKernel.snap__martinezKernel, cast ([ax] : Array<Dynamic>))) + ',' + Std.string(_Runtime.callValue(MartinezKernel.snap__martinezKernel, cast ([ay] : Array<Dynamic>))) + ',' + Std.string(_Runtime.callValue(MartinezKernel.snap__martinezKernel, cast ([bx] : Array<Dynamic>))) + ',' + Std.string(_Runtime.callValue(MartinezKernel.snap__martinezKernel, cast ([by] : Array<Dynamic>))) + '';
       var unique:Dynamic = ((cast map : flighthq._internal._Map).get(key));
-      if (_Runtime.truthy(_Runtime.strictEquals(unique, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+      if ((cast _Runtime.strictEquals(unique, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         (unique = cast ({ ax: ax, ay: ay, bx: bx, by: by, subjectDelta: 0.0, clipDelta: 0.0 } : Dynamic));
         ((cast map : flighthq._internal._Map).set(key, unique));
       }
-      if (_Runtime.truthy(_Runtime.field(seg, 'isSubject'))) { _Runtime.setField(unique, 'subjectDelta', (_Runtime.field(unique, 'subjectDelta') + _Runtime.field(seg, 'windingDelta'))); } else { _Runtime.setField(unique, 'clipDelta', (_Runtime.field(unique, 'clipDelta') + _Runtime.field(seg, 'windingDelta'))); }
+      if ((cast _Runtime.field(seg, 'isSubject') : Bool)) { _Runtime.setField(unique, 'subjectDelta', (_Runtime.field(unique, 'subjectDelta') + _Runtime.field(seg, 'windingDelta'))); } else { _Runtime.setField(unique, 'clipDelta', (_Runtime.field(unique, 'clipDelta') + _Runtime.field(seg, 'windingDelta'))); }
     }
     return cast _Runtime.concatArrays([_Runtime.toArray(((cast map : flighthq._internal._Map).values()))]);
     return cast null;
@@ -505,7 +505,7 @@ class MartinezKernel {
       var dx:Dynamic = (_Runtime.field(seg, 'bx') - _Runtime.field(seg, 'ax'));
       var dy:Dynamic = (_Runtime.field(seg, 'by') - _Runtime.field(seg, 'ay'));
       var len:Dynamic = _Runtime.hypot(dx, dy);
-      if (_Runtime.truthy(_Runtime.strictEquals(len, 0.0))) { continue; }
+      if ((cast _Runtime.strictEquals(len, 0.0) : Bool)) { continue; }
       var eps:Dynamic = (len * 0.0001);
       var nlx:Dynamic = ((-dy / len) * eps);
       var nly:Dynamic = ((dx / len) * eps);
@@ -515,8 +515,8 @@ class MartinezKernel {
       var rightInClip:Dynamic = _Runtime.callValue(MartinezKernel.isInside__martinezKernel, cast ([_Runtime.callValue(MartinezKernel.windingAt__martinezKernel, cast ([unique, (mx - nlx), (my - nly), false] : Array<Dynamic>)), fillRule] : Array<Dynamic>));
       var filledLeft:Dynamic = _Runtime.callValue(MartinezKernel.combine__martinezKernel, cast ([operation, leftInSubject, leftInClip] : Array<Dynamic>));
       var filledRight:Dynamic = _Runtime.callValue(MartinezKernel.combine__martinezKernel, cast ([operation, rightInSubject, rightInClip] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(filledLeft, filledRight))) { continue; }
-      if (_Runtime.truthy(filledLeft)) { _Runtime.callProperty(kept, 'push', cast ([cast ([_Runtime.field(seg, 'ax'), _Runtime.field(seg, 'ay'), _Runtime.field(seg, 'bx'), _Runtime.field(seg, 'by')] : Array<Dynamic>)] : Array<Dynamic>)); } else { _Runtime.callProperty(kept, 'push', cast ([cast ([_Runtime.field(seg, 'bx'), _Runtime.field(seg, 'by'), _Runtime.field(seg, 'ax'), _Runtime.field(seg, 'ay')] : Array<Dynamic>)] : Array<Dynamic>)); }
+      if ((cast _Runtime.strictEquals(filledLeft, filledRight) : Bool)) { continue; }
+      if ((cast filledLeft : Bool)) { _Runtime.callProperty(kept, 'push', cast ([cast ([_Runtime.field(seg, 'ax'), _Runtime.field(seg, 'ay'), _Runtime.field(seg, 'bx'), _Runtime.field(seg, 'by')] : Array<Dynamic>)] : Array<Dynamic>)); } else { _Runtime.callProperty(kept, 'push', cast ([cast ([_Runtime.field(seg, 'bx'), _Runtime.field(seg, 'by'), _Runtime.field(seg, 'ax'), _Runtime.field(seg, 'ay')] : Array<Dynamic>)] : Array<Dynamic>)); }
     }
     return cast kept;
     return cast null;
@@ -528,10 +528,10 @@ class MartinezKernel {
     for (v in _Runtime.iterable(unique)) {
       var lox:Dynamic = HxMath.min(_Runtime.field(v, 'ax'), _Runtime.field(v, 'bx'));
       var hix:Dynamic = HxMath.max(_Runtime.field(v, 'ax'), _Runtime.field(v, 'bx'));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(px, lox, '<'), function():Dynamic return cast _Runtime.compare(px, hix, '>=')))) { continue; }
+      if ((cast ((cast ((cast px : Float) < (cast lox : Float)) : Bool) || (cast ((cast px : Float) >= (cast hix : Float)) : Bool)) : Bool)) { continue; }
       var t:Dynamic = ((px - _Runtime.field(v, 'ax')) / (_Runtime.field(v, 'bx') - _Runtime.field(v, 'ax')));
       var yAt:Dynamic = (_Runtime.field(v, 'ay') + (t * (_Runtime.field(v, 'by') - _Runtime.field(v, 'ay'))));
-      if (_Runtime.truthy(_Runtime.compare(yAt, py, '<'))) { (winding = cast ((winding + _Runtime.select(subject, function():Dynamic return cast _Runtime.field(v, 'subjectDelta'), function():Dynamic return cast _Runtime.field(v, 'clipDelta'))) : Dynamic)); }
+      if ((cast ((cast yAt : Float) < (cast py : Float)) : Bool)) { (winding = cast ((winding + ((cast subject : Bool) ? (cast _Runtime.field(v, 'subjectDelta') : Dynamic) : (cast _Runtime.field(v, 'clipDelta') : Dynamic))) : Dynamic)); }
     }
     return cast winding;
     return cast null;
@@ -541,13 +541,13 @@ class MartinezKernel {
     {
       var __switchValue = operation;
       if (__switchValue == 'union') {
-        return cast _Runtime.orValue(inSubject, function():Dynamic return cast inClip);
+        return cast ((cast inSubject : Bool) || (cast inClip : Bool));
       }
       else if (__switchValue == 'intersection') {
-        return cast _Runtime.andValue(inSubject, function():Dynamic return cast inClip);
+        return cast ((cast inSubject : Bool) && (cast inClip : Bool));
       }
       else if (__switchValue == 'difference') {
-        return cast _Runtime.andValue(inSubject, function():Dynamic return cast !_Runtime.truthy(inClip));
+        return cast ((cast inSubject : Bool) && (cast !(cast inClip : Bool) : Bool));
       }
       else if (__switchValue == 'xor') {
         return cast !_Runtime.strictEquals(inSubject, inClip);
@@ -563,10 +563,10 @@ class MartinezKernel {
         return cast _Runtime.strictEquals((_Runtime.toInt32(HxMath.abs(winding)) & 1), 1.0);
       }
       else if (__switchValue == 'positive') {
-        return cast _Runtime.compare(winding, 0.0, '>');
+        return cast ((cast winding : Float) > (cast 0.0 : Float));
       }
       else if (__switchValue == 'negative') {
-        return cast _Runtime.compare(winding, 0.0, '<');
+        return cast ((cast winding : Float) < (cast 0.0 : Float));
       }
       else  {
         return cast !_Runtime.strictEquals(winding, 0.0);
@@ -586,7 +586,7 @@ class MartinezKernel {
   }
 
   public static function approxEqual__martinezKernel(a:Float, b:Float):Bool {
-    return cast _Runtime.compare(HxMath.abs((a - b)), MartinezKernel.vertexSnap__martinezKernel, '<=');
+    return cast ((cast HxMath.abs((a - b)) : Float) <= (cast MartinezKernel.vertexSnap__martinezKernel : Float));
     return cast null;
   }
 
@@ -604,20 +604,20 @@ class MartinezKernel {
       for (contour in _Runtime.iterable(contours)) {
         {
           var i:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(contour, 'length'), '<'))) {
+          while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
             var x:Dynamic = _Runtime.getIndex(contour, i);
             var y:Dynamic = _Runtime.getIndex(contour, (i + 1.0));
-            if (_Runtime.truthy(_Runtime.compare(x, minX, '<'))) { (minX = cast (x : Dynamic)); }
-            if (_Runtime.truthy(_Runtime.compare(x, maxX, '>'))) { (maxX = cast (x : Dynamic)); }
-            if (_Runtime.truthy(_Runtime.compare(y, minY, '<'))) { (minY = cast (y : Dynamic)); }
-            if (_Runtime.truthy(_Runtime.compare(y, maxY, '>'))) { (maxY = cast (y : Dynamic)); }
+            if ((cast ((cast x : Float) < (cast minX : Float)) : Bool)) { (minX = cast (x : Dynamic)); }
+            if ((cast ((cast x : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (x : Dynamic)); }
+            if ((cast ((cast y : Float) < (cast minY : Float)) : Bool)) { (minY = cast (y : Dynamic)); }
+            if ((cast ((cast y : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast (y : Dynamic)); }
             (i = cast ((i + 2.0) : Dynamic));
           }
         }
       }
     }
     extent = HxMath.max((maxX - minX), (maxY - minY));
-    return cast _Runtime.select(_Runtime.compare(extent, 0.0, '>'), function():Dynamic return cast (extent * MartinezKernel.VERTEX_SNAP_RELATIVE__martinezKernel), function():Dynamic return cast MartinezKernel.VERTEX_SNAP_FALLBACK__martinezKernel);
+    return cast ((cast ((cast extent : Float) > (cast 0.0 : Float)) : Bool) ? (cast (extent * MartinezKernel.VERTEX_SNAP_RELATIVE__martinezKernel) : Dynamic) : (cast MartinezKernel.VERTEX_SNAP_FALLBACK__martinezKernel : Dynamic));
     return cast null;
   }
 

@@ -74,13 +74,13 @@ class CocosPlistSerialize {
     offsetStr = '{' + Std.string(_Runtime.field(frame, 'offsetX')) + ',' + Std.string(_Runtime.field(frame, 'offsetY')) + '}';
     sourceSizeStr = '{' + Std.string(_Runtime.field(frame, 'sourceWidth')) + ',' + Std.string(_Runtime.field(frame, 'sourceHeight')) + '}';
     sizeStr = '{' + Std.string(_Runtime.field(frame, 'width')) + ',' + Std.string(_Runtime.field(frame, 'height')) + '}';
-    trimmed = _Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(frame, 'offsetX'), 0.0), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(frame, 'offsetY'), 0.0)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(frame, 'sourceWidth'), _Runtime.field(frame, 'width'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(frame, 'sourceHeight'), _Runtime.field(frame, 'height')));
+    trimmed = ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(frame, 'offsetX'), 0.0) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(frame, 'offsetY'), 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(frame, 'sourceWidth'), _Runtime.field(frame, 'width')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(frame, 'sourceHeight'), _Runtime.field(frame, 'height')) : Bool));
     return cast { frame: rectStr, spriteOffset: offsetStr, spriteSize: sizeStr, spriteSourceSize: sourceSizeStr, spriteTrimmed: trimmed, textureRotated: _Runtime.field(frame, 'rotated') };
     return cast null;
   }
 
   public static function plistValue__cocosPlistSerialize(el:Bool):String {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(el), 'boolean'))) { return cast _Runtime.select(el, function():Dynamic return cast '<true/>', function():Dynamic return cast '<false/>'); }
+    if ((cast _Runtime.strictEquals(_Runtime.typeofValue(el), 'boolean') : Bool)) { return cast ((cast el : Bool) ? (cast '<true/>' : Dynamic) : (cast '<false/>' : Dynamic)); }
     return cast '<string>' + Std.string(_Runtime.callValue(CocosPlistSerialize.escapeXml__cocosPlistSerialize, cast ([Std.string(el)] : Array<Dynamic>))) + '</string>';
     return cast null;
   }

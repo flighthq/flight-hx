@@ -6,13 +6,13 @@ import flighthq._internal._Runtime;
 
 class BlurDownsample {
   public static function getBlurDownsampleLevel(sigma:Float):Float {
-    if (_Runtime.truthy(_Runtime.compare(sigma, BlurDownsample.BLUR_DOWNSAMPLE_MAX_SIGMA__blurDownsample, '<='))) { return cast 0.0; }
+    if ((cast ((cast sigma : Float) <= (cast BlurDownsample.BLUR_DOWNSAMPLE_MAX_SIGMA__blurDownsample : Float)) : Bool)) { return cast 0.0; }
     return cast HxMath.ceil(_Runtime.log2((sigma / BlurDownsample.BLUR_DOWNSAMPLE_MAX_SIGMA__blurDownsample)));
     return cast null;
   }
 
   public static function getBlurResidualSigma(sigma:Float, level:Float):Float {
-    if (_Runtime.truthy(_Runtime.compare(sigma, 0.0, '<='))) { return cast 0.0; }
+    if ((cast ((cast sigma : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
     return cast (sigma / HxMath.pow(2.0, level));
     return cast null;
   }

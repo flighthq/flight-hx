@@ -33,11 +33,11 @@ class ElectronTray {
       id = nextId++;
       tray = _Runtime.construct(_Runtime.field(electron, 'Tray'), [_Runtime.coalesce(_Runtime.field(options, 'icon'), function():Dynamic return cast '')]);
       record = { tray: tray, title: '', tooltip: '', menu: null };
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'tooltip'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+      if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'tooltip'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         _Runtime.callProperty(tray, 'setToolTip', cast ([_Runtime.field(options, 'tooltip')] : Array<Dynamic>));
         _Runtime.setField(record, 'tooltip', _Runtime.field(options, 'tooltip'));
       }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'title'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+      if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'title'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         _Runtime.callProperty(tray, 'setTitle', cast ([_Runtime.field(options, 'title')] : Array<Dynamic>));
         _Runtime.setField(record, 'title', _Runtime.field(options, 'title'));
       }
@@ -49,7 +49,7 @@ class ElectronTray {
     }, destroy: function(id:Dynamic) {
       var record:Dynamic = cast _Runtime.UNDEFINED;
       record = ((cast trays : flighthq._internal._Map).get(id));
-      if (_Runtime.truthy(!_Runtime.truthy(record))) { return; }
+      if ((cast !_Runtime.truthy(record) : Bool)) { return; }
       _Runtime.callProperty(_Runtime.field(record, 'tray'), 'destroy', cast ([] : Array<Dynamic>));
       ((cast trays : flighthq._internal._Map).delete_(id));
     }, displayBalloon: function(id:Dynamic, options:Dynamic) {
@@ -75,13 +75,13 @@ class ElectronTray {
     }, popUpContextMenu: function(id:Dynamic, position:Dynamic) {
       var record:Dynamic = cast _Runtime.UNDEFINED;
       record = ((cast trays : flighthq._internal._Map).get(id));
-      if (_Runtime.truthy(!_Runtime.truthy(record))) { return; }
+      if ((cast !_Runtime.truthy(record) : Bool)) { return; }
       _Runtime.callProperty(_Runtime.field(record, 'tray'), 'popUpContextMenu', cast ([_Runtime.coalesce(_Runtime.field(record, 'menu'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), _Runtime.select(position, function():Dynamic return cast { x: position.x, y: position.y }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>));
     }, setContextMenu: function(id:Dynamic, items:Dynamic) {
       var record:Dynamic = cast _Runtime.UNDEFINED;
       var menu:Dynamic = cast _Runtime.UNDEFINED;
       record = ((cast trays : flighthq._internal._Map).get(id));
-      if (_Runtime.truthy(!_Runtime.truthy(record))) { return; }
+      if ((cast !_Runtime.truthy(record) : Bool)) { return; }
       menu = _Runtime.callProperty(_Runtime.field(electron, 'Menu'), 'buildFromTemplate', cast ([_Runtime.callValue(ElectronTray.toElectronTemplate__electronTray, cast ([items] : Array<Dynamic>))] : Array<Dynamic>));
       _Runtime.setField(record, 'menu', menu);
       _Runtime.callProperty(_Runtime.field(record, 'tray'), 'setContextMenu', cast ([menu] : Array<Dynamic>));
@@ -96,19 +96,19 @@ class ElectronTray {
     }, setTitle: function(id:Dynamic, title:Dynamic) {
       var record:Dynamic = cast _Runtime.UNDEFINED;
       record = ((cast trays : flighthq._internal._Map).get(id));
-      if (_Runtime.truthy(!_Runtime.truthy(record))) { return; }
+      if ((cast !_Runtime.truthy(record) : Bool)) { return; }
       _Runtime.callProperty(_Runtime.field(record, 'tray'), 'setTitle', cast ([title] : Array<Dynamic>));
       _Runtime.setField(record, 'title', title);
     }, setTooltip: function(id:Dynamic, tooltip:Dynamic) {
       var record:Dynamic = cast _Runtime.UNDEFINED;
       record = ((cast trays : flighthq._internal._Map).get(id));
-      if (_Runtime.truthy(!_Runtime.truthy(record))) { return; }
+      if ((cast !_Runtime.truthy(record) : Bool)) { return; }
       _Runtime.callProperty(_Runtime.field(record, 'tray'), 'setToolTip', cast ([tooltip] : Array<Dynamic>));
       _Runtime.setField(record, 'tooltip', tooltip);
     }, subscribe: function(listener:Dynamic) {
       (eventListener = cast (listener : Dynamic));
       return cast function() {
-        if (_Runtime.truthy(_Runtime.strictEquals(eventListener, listener))) { (eventListener = cast (null : Dynamic)); }
+        if ((cast _Runtime.strictEquals(eventListener, listener) : Bool)) { (eventListener = cast (null : Dynamic)); }
       };
     } };
     return cast null;

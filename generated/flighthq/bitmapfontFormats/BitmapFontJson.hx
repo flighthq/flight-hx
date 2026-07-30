@@ -15,7 +15,7 @@ class BitmapFontJson {
   public static function parseBitmapFontJson(text:String, ?options:BitmapFontParseOptions):Null<BitmapFont> {
     var record:Dynamic = cast _Runtime.UNDEFINED;
     record = _Runtime.callValue(BitmapFontJson.parseBitmapFontJsonRecord__bitmapFontJson, cast ([text] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(record, null))) { return cast null; }
+    if ((cast _Runtime.strictEquals(record, null) : Bool)) { return cast null; }
     return cast _Runtime.callValue(buildBitmapFontFromRecord, cast ([record, options] : Array<Dynamic>));
     return cast null;
   }
@@ -34,36 +34,36 @@ class BitmapFontJson {
     } catch (__error:Dynamic) {
       return cast null;
     }
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(BitmapFontJson.isObject__bitmapFontJson, cast ([root] : Array<Dynamic>))))) { return cast null; }
+    if ((cast !(cast _Runtime.callValue(BitmapFontJson.isObject__bitmapFontJson, cast ([root] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
     common = _Runtime.field(root, 'common');
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(BitmapFontJson.isObject__bitmapFontJson, cast ([common] : Array<Dynamic>))))) { return cast null; }
+    if ((cast !(cast _Runtime.callValue(BitmapFontJson.isObject__bitmapFontJson, cast ([common] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
     lineHeight = _Runtime.callValue(BitmapFontJson.readJsonNumber__bitmapFontJson, cast ([_Runtime.field(common, 'lineHeight')] : Array<Dynamic>));
     base = _Runtime.callValue(BitmapFontJson.readJsonNumber__bitmapFontJson, cast ([_Runtime.field(common, 'base')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(lineHeight, null), function():Dynamic return cast _Runtime.strictEquals(base, null)))) { return cast null; }
+    if ((cast ((cast _Runtime.strictEquals(lineHeight, null) : Bool) || (cast _Runtime.strictEquals(base, null) : Bool)) : Bool)) { return cast null; }
     rawChars = _Runtime.field(root, 'chars');
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.isArray(rawChars)))) { return cast null; }
+    if ((cast !(cast _Runtime.isArray(rawChars) : Bool) : Bool)) { return cast null; }
     chars = cast ([] : Array<Dynamic>);
     for (raw in _Runtime.iterable(rawChars)) {
       var char:Dynamic = _Runtime.callValue(BitmapFontJson.readJsonChar__bitmapFontJson, cast ([raw] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(char, null))) { _Runtime.callProperty(chars, 'push', cast ([char] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(char, null) : Bool)) { _Runtime.callProperty(chars, 'push', cast ([char] : Array<Dynamic>)); }
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(chars, 'length'), 0.0))) { return cast null; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(chars, 'length'), 0.0) : Bool)) { return cast null; }
     pages = cast ([] : Array<Dynamic>);
-    if (_Runtime.truthy(_Runtime.isArray(_Runtime.field(root, 'pages')))) {
+    if ((cast _Runtime.isArray(_Runtime.field(root, 'pages')) : Bool)) {
       {
         var id:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(id, _Runtime.field(_Runtime.field(root, 'pages'), 'length'), '<'))) {
+        while ((cast ((cast id : Float) < (cast _Runtime.field(_Runtime.field(root, 'pages'), 'length') : Float)) : Bool)) {
           var file:Dynamic = _Runtime.getIndex(_Runtime.field(root, 'pages'), id);
-          _Runtime.callProperty(pages, 'push', cast ([{ file: _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(file), 'string'), function():Dynamic return cast file, function():Dynamic return cast ''), id: id }] : Array<Dynamic>));
+          _Runtime.callProperty(pages, 'push', cast ([{ file: ((cast _Runtime.strictEquals(_Runtime.typeofValue(file), 'string') : Bool) ? (cast file : Dynamic) : (cast '' : Dynamic)), id: id }] : Array<Dynamic>));
           id++;
         }
       }
     }
     kernings = cast ([] : Array<Dynamic>);
-    if (_Runtime.truthy(_Runtime.isArray(_Runtime.field(root, 'kernings')))) {
+    if ((cast _Runtime.isArray(_Runtime.field(root, 'kernings')) : Bool)) {
       for (raw in _Runtime.iterable(_Runtime.field(root, 'kernings'))) {
         var kerning:Dynamic = _Runtime.callValue(BitmapFontJson.readJsonKerning__bitmapFontJson, cast ([raw] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(kerning, null))) { _Runtime.callProperty(kernings, 'push', cast ([kerning] : Array<Dynamic>)); }
+        if ((cast !_Runtime.strictEquals(kerning, null) : Bool)) { _Runtime.callProperty(kernings, 'push', cast ([kerning] : Array<Dynamic>)); }
       }
     }
     return cast { base: base, chars: chars, encoding: _Runtime.callValue(BitmapFontJson.readJsonEncoding__bitmapFontJson, cast ([_Runtime.field(root, 'distanceField')] : Array<Dynamic>)), kernings: kernings, lineHeight: lineHeight, pages: pages };
@@ -71,7 +71,7 @@ class BitmapFontJson {
   }
 
   public static function isObject__bitmapFontJson(value:Dynamic):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(value), 'object'), function():Dynamic return cast !_Runtime.strictEquals(value, null)), function():Dynamic return cast !_Runtime.truthy(_Runtime.isArray(value)));
+    return cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'object') : Bool) && (cast !_Runtime.strictEquals(value, null) : Bool)) : Bool) && (cast !(cast _Runtime.isArray(value) : Bool) : Bool));
     return cast null;
   }
 
@@ -84,7 +84,7 @@ class BitmapFontJson {
     var xoffset:Dynamic = cast _Runtime.UNDEFINED;
     var yoffset:Dynamic = cast _Runtime.UNDEFINED;
     var xadvance:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(BitmapFontJson.isObject__bitmapFontJson, cast ([raw] : Array<Dynamic>))))) { return cast null; }
+    if ((cast !(cast _Runtime.callValue(BitmapFontJson.isObject__bitmapFontJson, cast ([raw] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
     id = _Runtime.callValue(BitmapFontJson.readJsonNumber__bitmapFontJson, cast ([_Runtime.field(raw, 'id')] : Array<Dynamic>));
     x = _Runtime.callValue(BitmapFontJson.readJsonNumber__bitmapFontJson, cast ([_Runtime.field(raw, 'x')] : Array<Dynamic>));
     y = _Runtime.callValue(BitmapFontJson.readJsonNumber__bitmapFontJson, cast ([_Runtime.field(raw, 'y')] : Array<Dynamic>));
@@ -93,7 +93,7 @@ class BitmapFontJson {
     xoffset = _Runtime.callValue(BitmapFontJson.readJsonNumber__bitmapFontJson, cast ([_Runtime.field(raw, 'xoffset')] : Array<Dynamic>));
     yoffset = _Runtime.callValue(BitmapFontJson.readJsonNumber__bitmapFontJson, cast ([_Runtime.field(raw, 'yoffset')] : Array<Dynamic>));
     xadvance = _Runtime.callValue(BitmapFontJson.readJsonNumber__bitmapFontJson, cast ([_Runtime.field(raw, 'xadvance')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(id, null), function():Dynamic return cast _Runtime.strictEquals(x, null)), function():Dynamic return cast _Runtime.strictEquals(y, null)), function():Dynamic return cast _Runtime.strictEquals(width, null)), function():Dynamic return cast _Runtime.strictEquals(height, null)), function():Dynamic return cast _Runtime.strictEquals(xoffset, null)), function():Dynamic return cast _Runtime.strictEquals(yoffset, null)), function():Dynamic return cast _Runtime.strictEquals(xadvance, null)))) {
+    if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(id, null) : Bool) || (cast _Runtime.strictEquals(x, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(y, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(width, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(height, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(xoffset, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(yoffset, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(xadvance, null) : Bool)) : Bool)) {
       return cast null;
     }
     return cast { height: height, id: id, page: _Runtime.coalesce(_Runtime.callValue(BitmapFontJson.readJsonNumber__bitmapFontJson, cast ([_Runtime.field(raw, 'page')] : Array<Dynamic>)), function():Dynamic return cast 0.0), width: width, x: x, xadvance: xadvance, xoffset: xoffset, y: y, yoffset: yoffset };
@@ -101,9 +101,9 @@ class BitmapFontJson {
   }
 
   public static function readJsonEncoding__bitmapFontJson(distanceField:Dynamic):BitmapFontEncoding {
-    if (_Runtime.truthy(_Runtime.callValue(BitmapFontJson.isObject__bitmapFontJson, cast ([distanceField] : Array<Dynamic>)))) {
+    if ((cast _Runtime.callValue(BitmapFontJson.isObject__bitmapFontJson, cast ([distanceField] : Array<Dynamic>)) : Bool)) {
       var fieldType:Dynamic = _Runtime.field(distanceField, 'fieldType');
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(fieldType, 'msdf'), function():Dynamic return cast _Runtime.strictEquals(fieldType, 'sdf')))) { return cast fieldType; }
+      if ((cast ((cast _Runtime.strictEquals(fieldType, 'msdf') : Bool) || (cast _Runtime.strictEquals(fieldType, 'sdf') : Bool)) : Bool)) { return cast fieldType; }
     }
     return cast 'raster';
     return cast null;
@@ -113,17 +113,17 @@ class BitmapFontJson {
     var first:Dynamic = cast _Runtime.UNDEFINED;
     var second:Dynamic = cast _Runtime.UNDEFINED;
     var amount:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(BitmapFontJson.isObject__bitmapFontJson, cast ([raw] : Array<Dynamic>))))) { return cast null; }
+    if ((cast !(cast _Runtime.callValue(BitmapFontJson.isObject__bitmapFontJson, cast ([raw] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
     first = _Runtime.callValue(BitmapFontJson.readJsonNumber__bitmapFontJson, cast ([_Runtime.field(raw, 'first')] : Array<Dynamic>));
     second = _Runtime.callValue(BitmapFontJson.readJsonNumber__bitmapFontJson, cast ([_Runtime.field(raw, 'second')] : Array<Dynamic>));
     amount = _Runtime.callValue(BitmapFontJson.readJsonNumber__bitmapFontJson, cast ([_Runtime.field(raw, 'amount')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(first, null), function():Dynamic return cast _Runtime.strictEquals(second, null)), function():Dynamic return cast _Runtime.strictEquals(amount, null)))) { return cast null; }
+    if ((cast ((cast ((cast _Runtime.strictEquals(first, null) : Bool) || (cast _Runtime.strictEquals(second, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(amount, null) : Bool)) : Bool)) { return cast null; }
     return cast { amount: amount, first: first, second: second };
     return cast null;
   }
 
   public static function readJsonNumber__bitmapFontJson(value:Dynamic):Null<Float> {
-    return cast _Runtime.select(_Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(value), 'number'), function():Dynamic return cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>))), function():Dynamic return cast value, function():Dynamic return cast null);
+    return cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'number') : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool)) : Bool) ? (cast value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 }

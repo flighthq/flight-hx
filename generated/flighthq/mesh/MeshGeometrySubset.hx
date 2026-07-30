@@ -12,7 +12,7 @@ class MeshGeometrySubset {
     next = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(geometry, 'subsets'), 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(geometry, 'subsets'), 'length') : Float)) : Bool)) {
         _Runtime.callProperty(next, 'push', cast ([{ indexCount: _Runtime.field(_Runtime.getIndex(_Runtime.field(geometry, 'subsets'), i), 'indexCount'), indexOffset: _Runtime.field(_Runtime.getIndex(_Runtime.field(geometry, 'subsets'), i), 'indexOffset') }] : Array<Dynamic>));
         i++;
       }
@@ -23,10 +23,10 @@ class MeshGeometrySubset {
 
   public static function getMeshGeometrySubsetTriangleCount(geometry:MeshGeometry, subsetIndex:Float):Float {
     var indexCount:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(subsetIndex, 0.0, '<'), function():Dynamic return cast _Runtime.compare(subsetIndex, _Runtime.field(_Runtime.field(geometry, 'subsets'), 'length'), '>=')))) { return cast 0.0; }
+    if ((cast ((cast ((cast subsetIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast subsetIndex : Float) >= (cast _Runtime.field(_Runtime.field(geometry, 'subsets'), 'length') : Float)) : Bool)) : Bool)) { return cast 0.0; }
     indexCount = _Runtime.field(_Runtime.getIndex(_Runtime.field(geometry, 'subsets'), subsetIndex), 'indexCount');
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-list'))) { return cast HxMath.floor((indexCount / 3.0)); }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-strip'))) { return cast _Runtime.select(_Runtime.compare(indexCount, 2.0, '>='), function():Dynamic return cast (indexCount - 2.0), function():Dynamic return cast 0.0); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-list') : Bool)) { return cast HxMath.floor((indexCount / 3.0)); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-strip') : Bool)) { return cast ((cast ((cast indexCount : Float) >= (cast 2.0 : Float)) : Bool) ? (cast (indexCount - 2.0) : Dynamic) : (cast 0.0 : Dynamic)); }
     return cast 0.0;
     return cast null;
   }
@@ -36,7 +36,7 @@ class MeshGeometrySubset {
     next = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(subsets, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(subsets, 'length') : Float)) : Bool)) {
         _Runtime.callProperty(next, 'push', cast ([{ indexCount: _Runtime.field(_Runtime.getIndex(subsets, i), 'indexCount'), indexOffset: _Runtime.field(_Runtime.getIndex(subsets, i), 'indexOffset') }] : Array<Dynamic>));
         i++;
       }

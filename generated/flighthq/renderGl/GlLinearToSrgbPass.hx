@@ -17,7 +17,7 @@ class GlLinearToSrgbPass {
   public static function getGlLinearToSrgbProgram__glLinearToSrgbPass(state:GlRenderState):GlFullscreenProgram {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = ((cast GlLinearToSrgbPass._programs__glLinearToSrgbPass : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(program, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(program, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (program = cast (_Runtime.callValue(compileGlFullscreenProgram, cast ([_Runtime.field(state, 'gl'), LINEAR_TO_SRGB_FRAGMENT_SRC] : Array<Dynamic>)) : Dynamic));
       ((cast GlLinearToSrgbPass._programs__glLinearToSrgbPass : flighthq._internal._WeakMap).set(state, program));
     }

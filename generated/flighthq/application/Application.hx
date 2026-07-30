@@ -26,7 +26,7 @@ class Application {
   public static final _applicationObservers__application:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function _isApplicationVisible__application():Bool {
-    return cast _Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast !_Runtime.truthy(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'hidden')));
+    return cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'hidden') : Bool) : Bool));
     return cast null;
   }
 
@@ -52,7 +52,7 @@ class Application {
     var onDeactivate:Dynamic = cast _Runtime.UNDEFINED;
     var onActivate:Dynamic = cast _Runtime.UNDEFINED;
     kLifecycle = ((cast Application._lifecycleKeys__application : flighthq._internal._WeakMap).get(win));
-    if (_Runtime.truthy(_Runtime.strictEquals(kLifecycle, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(kLifecycle, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (kLifecycle = cast (_Runtime.symbol() : Dynamic));
       ((cast Application._lifecycleKeys__application : flighthq._internal._WeakMap).set(win, kLifecycle));
     }
@@ -60,11 +60,11 @@ class Application {
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map).get(kLifecycle)), cast ([] : Array<Dynamic>));
     onDeactivate = function() {
       _Runtime.callValue(pauseApplicationLoop, cast ([app] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(app, 'onDeactivate'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onDeactivate')]]), 1); }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(app, 'onDeactivate'), null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onDeactivate')]]), 1); }
     };
     onActivate = function() {
       _Runtime.callValue(resumeApplicationLoop, cast ([app] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(app, 'onActivate'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onActivate')]]), 1); }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(app, 'onActivate'), null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onActivate')]]), 1); }
     };
     _Runtime.callValue(connectSignal, cast ([_Runtime.field(win, 'onDeactivate'), onDeactivate] : Array<Dynamic>));
     _Runtime.callValue(connectSignal, cast ([_Runtime.field(win, 'onActivate'), onActivate] : Array<Dynamic>));
@@ -224,10 +224,10 @@ class Application {
   }
 
   public static function enableApplicationLifecycleSignals(app:flighthq.types.Application):Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(app, 'onActivate'), null))) { _Runtime.setField(app, 'onActivate', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(app, 'onDeactivate'), null))) { _Runtime.setField(app, 'onDeactivate', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(app, 'onError'), null))) { _Runtime.setField(app, 'onError', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(app, 'onFixedUpdate'), null))) { _Runtime.setField(app, 'onFixedUpdate', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(app, 'onActivate'), null) : Bool)) { _Runtime.setField(app, 'onActivate', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(app, 'onDeactivate'), null) : Bool)) { _Runtime.setField(app, 'onDeactivate', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(app, 'onError'), null) : Bool)) { _Runtime.setField(app, 'onError', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(app, 'onFixedUpdate'), null) : Bool)) { _Runtime.setField(app, 'onFixedUpdate', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
   }
 
   public static function exitApplicationFullscreen():flighthq._internal._Promise<flighthq._internal._Nothing> {
@@ -262,24 +262,24 @@ class Application {
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var avgDelta:Dynamic = cast _Runtime.UNDEFINED;
     state = ((cast Application._applicationLoopState__application : flighthq._internal._WeakMap).get((cast app : flighthq.types.Application)));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.field(state, 'fpsBuffer'), 'length'), 2.0, '<')))) { return cast 0.0; }
+    if ((cast ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast _Runtime.field(_Runtime.field(state, 'fpsBuffer'), 'length') : Float) < (cast 2.0 : Float)) : Bool)) : Bool)) { return cast 0.0; }
     buf = _Runtime.field(state, 'fpsBuffer');
     len = _Runtime.field(buf, 'length');
     total = 0.0;
     count = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, len, '<'))) {
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.getIndex(buf, i), 0.0, '>'))) {
+      while ((cast ((cast i : Float) < (cast len : Float)) : Bool)) {
+        if ((cast ((cast _Runtime.getIndex(buf, i) : Float) > (cast 0.0 : Float)) : Bool)) {
           (total = cast ((total + _Runtime.getIndex(buf, i)) : Dynamic));
           count++;
         }
         i++;
       }
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(count, 0.0))) { return cast 0.0; }
+    if ((cast _Runtime.strictEquals(count, 0.0) : Bool)) { return cast 0.0; }
     avgDelta = (total / count);
-    return cast _Runtime.select(_Runtime.compare(avgDelta, 0.0, '>'), function():Dynamic return cast (1000.0 / avgDelta), function():Dynamic return cast 0.0);
+    return cast ((cast ((cast avgDelta : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1000.0 / avgDelta) : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 
@@ -291,7 +291,7 @@ class Application {
   public static function getApplicationObservers__application(app:flighthq.types.Application):Dynamic {
     var observers:Dynamic = cast _Runtime.UNDEFINED;
     observers = ((cast Application._applicationObservers__application : flighthq._internal._WeakMap).get(app));
-    if (_Runtime.truthy(_Runtime.strictEquals(observers, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(observers, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (observers = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
       ((cast Application._applicationObservers__application : flighthq._internal._WeakMap).set(app, observers));
     }
@@ -305,7 +305,7 @@ class Application {
   }
 
   public static function getLoopBackend():LoopBackend {
-    if (_Runtime.truthy(_Runtime.strictEquals(Application._loopBackend__application, null))) { (Application._loopBackend__application = cast (_Runtime.callValue(createWebLoopBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Application._loopBackend__application, null) : Bool)) { (Application._loopBackend__application = cast (_Runtime.callValue(createWebLoopBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Application._loopBackend__application;
     return cast null;
   }
@@ -361,7 +361,7 @@ class Application {
   public static function pauseApplicationLoop(app:flighthq.types.Application):Void {
     var observers:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Application.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(app, 'isRunning')), function():Dynamic return cast ((cast observers : flighthq._internal._Map).has(Application.kPaused__application))))) { return; }
+    if ((cast ((cast !(cast _Runtime.field(app, 'isRunning') : Bool) : Bool) || (cast ((cast observers : flighthq._internal._Map).has(Application.kPaused__application)) : Bool)) : Bool)) { return; }
     _Runtime.setField(app, 'isRunning', false);
     ((cast observers : flighthq._internal._Map).set(Application.kPaused__application, function() {
     
@@ -373,7 +373,7 @@ class Application {
   }
 
   public static function recordFpsSample__application(state:LoopState__application, delta:Float):Void {
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(state, 'fpsBuffer'), 'length'), Application.ROLLING_FPS_WINDOW__application, '<'))) {
+    if ((cast ((cast _Runtime.field(_Runtime.field(state, 'fpsBuffer'), 'length') : Float) < (cast Application.ROLLING_FPS_WINDOW__application : Float)) : Bool)) {
       _Runtime.callProperty(_Runtime.field(state, 'fpsBuffer'), 'push', cast ([delta] : Array<Dynamic>));
     } else {
       _Runtime.setIndex(_Runtime.field(state, 'fpsBuffer'), _Runtime.field(state, 'fpsHead'), delta);
@@ -382,7 +382,7 @@ class Application {
   }
 
   public static function registerApplicationWindow(app:flighthq.types.Application, win:ApplicationWindow):Void {
-    if (_Runtime.truthy(_Runtime.includes(_Runtime.field(app, 'windows'), win))) { return; }
+    if ((cast _Runtime.includes(_Runtime.field(app, 'windows'), win) : Bool)) { return; }
     _Runtime.callProperty(_Runtime.field(app, 'windows'), 'push', cast ([win] : Array<Dynamic>));
   }
 
@@ -408,10 +408,10 @@ class Application {
     var observers:Dynamic = cast _Runtime.UNDEFINED;
     var loopState:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Application.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.truthy(((cast observers : flighthq._internal._Map).has(Application.kPaused__application))))) { return; }
+    if ((cast !(cast ((cast observers : flighthq._internal._Map).has(Application.kPaused__application)) : Bool) : Bool)) { return; }
     ((cast observers : flighthq._internal._Map).delete_(Application.kPaused__application));
     loopState = ((cast Application._applicationLoopState__application : flighthq._internal._WeakMap).get(app));
-    if (_Runtime.truthy(!_Runtime.strictEquals(loopState, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(loopState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.setField(loopState, 'lastTime', -1.0);
       _Runtime.setField(loopState, 'fixedAccumulator', 0.0);
       _Runtime.setField(loopState, 'frameRateAccumulated', 0.0);
@@ -524,8 +524,8 @@ class Application {
     backgroundFrameRate = _Runtime.coalesce(options.backgroundFrameRate, function():Dynamic return cast Application.DEFAULT_BACKGROUND_FRAME_RATE__application);
     fixedTimeStep = _Runtime.coalesce(options.fixedTimeStep, function():Dynamic return cast Application.DEFAULT_FIXED_TIMESTEP__application);
     maxUpdatesPerFrame = _Runtime.coalesce(options.maxUpdatesPerFrame, function():Dynamic return cast Application.DEFAULT_MAX_UPDATES_PER_FRAME__application);
-    frameInterval = _Runtime.select(_Runtime.compare(targetFrameRate, 0.0, '>'), function():Dynamic return cast (1000.0 / targetFrameRate), function():Dynamic return cast 0.0);
-    bgInterval = _Runtime.select(_Runtime.compare(backgroundFrameRate, 0.0, '>'), function():Dynamic return cast (1000.0 / backgroundFrameRate), function():Dynamic return cast 0.0);
+    frameInterval = ((cast ((cast targetFrameRate : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1000.0 / targetFrameRate) : Dynamic) : (cast 0.0 : Dynamic));
+    bgInterval = ((cast ((cast backgroundFrameRate : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1000.0 / backgroundFrameRate) : Dynamic) : (cast 0.0 : Dynamic));
     loopState = { fixedAccumulator: 0.0, fpsBuffer: cast ([] : Array<Dynamic>), fpsHead: 0.0, frameHandle: (cast null : Dynamic), frameRateAccumulated: 0.0, lastTime: -1.0, maxDeltaTime: maxDeltaTime };
     ((cast Application._applicationLoopState__application : flighthq._internal._WeakMap).set(app, loopState));
     _Runtime.setField(app, 'isRunning', true);
@@ -535,37 +535,37 @@ class Application {
       var activeInterval:Dynamic = cast _Runtime.UNDEFINED;
       var delta:Dynamic = cast _Runtime.UNDEFINED;
       var clamped:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(app, 'isRunning')))) {
+      if ((cast !(cast _Runtime.field(app, 'isRunning') : Bool) : Bool)) {
         _Runtime.setField(loopState, 'frameHandle', _Runtime.callProperty(backend, 'requestFrame', cast ([tick] : Array<Dynamic>)));
         ((cast observers : flighthq._internal._Map).set(Application.kLoop__application, function() return _Runtime.callProperty(backend, 'cancelFrame', cast ([_Runtime.field(loopState, 'frameHandle')] : Array<Dynamic>))));
         return;
       }
-      isFirstTick = _Runtime.compare(_Runtime.field(loopState, 'lastTime'), 0.0, '<');
-      raw = _Runtime.select(isFirstTick, function():Dynamic return cast 0.0, function():Dynamic return cast (time - _Runtime.field(loopState, 'lastTime')));
+      isFirstTick = ((cast _Runtime.field(loopState, 'lastTime') : Float) < (cast 0.0 : Float));
+      raw = ((cast isFirstTick : Bool) ? (cast 0.0 : Dynamic) : (cast (time - _Runtime.field(loopState, 'lastTime')) : Dynamic));
       _Runtime.setField(loopState, 'lastTime', time);
-      activeInterval = _Runtime.select(_Runtime.andValue(_Runtime.andValue(_Runtime.field(app, 'isRunning'), function():Dynamic return cast _Runtime.compare(bgInterval, 0.0, '>')), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(Application._isApplicationVisible__application, cast ([] : Array<Dynamic>)))), function():Dynamic return cast bgInterval, function():Dynamic return cast frameInterval);
-      if (_Runtime.truthy(!_Runtime.truthy(isFirstTick))) {
+      activeInterval = ((cast ((cast ((cast _Runtime.field(app, 'isRunning') : Bool) && (cast ((cast bgInterval : Float) > (cast 0.0 : Float)) : Bool)) : Bool) && (cast !(cast _Runtime.callValue(Application._isApplicationVisible__application, cast ([] : Array<Dynamic>)) : Bool) : Bool)) : Bool) ? (cast bgInterval : Dynamic) : (cast frameInterval : Dynamic));
+      if ((cast !(cast isFirstTick : Bool) : Bool)) {
         _Runtime.setField(loopState, 'frameRateAccumulated', (_Runtime.field(loopState, 'frameRateAccumulated') + raw));
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(activeInterval, 0.0, '>'), function():Dynamic return cast _Runtime.compare(_Runtime.field(loopState, 'frameRateAccumulated'), activeInterval, '<')))) {
+        if ((cast ((cast ((cast activeInterval : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast _Runtime.field(loopState, 'frameRateAccumulated') : Float) < (cast activeInterval : Float)) : Bool)) : Bool)) {
           _Runtime.setField(loopState, 'frameHandle', _Runtime.callProperty(backend, 'requestFrame', cast ([tick] : Array<Dynamic>)));
           ((cast observers : flighthq._internal._Map).set(Application.kLoop__application, function() return _Runtime.callProperty(backend, 'cancelFrame', cast ([_Runtime.field(loopState, 'frameHandle')] : Array<Dynamic>))));
           return;
         }
       }
-      delta = _Runtime.select(_Runtime.andValue(_Runtime.compare(activeInterval, 0.0, '>'), function():Dynamic return cast !_Runtime.truthy(isFirstTick)), function():Dynamic return cast _Runtime.field(loopState, 'frameRateAccumulated'), function():Dynamic return cast raw);
+      delta = ((cast ((cast ((cast activeInterval : Float) > (cast 0.0 : Float)) : Bool) && (cast !(cast isFirstTick : Bool) : Bool)) : Bool) ? (cast _Runtime.field(loopState, 'frameRateAccumulated') : Dynamic) : (cast raw : Dynamic));
       _Runtime.setField(loopState, 'frameRateAccumulated', 0.0);
       clamped = HxMath.min(delta, maxDeltaTime);
       _Runtime.setField(app, 'deltaTime', clamped);
       _Runtime.setField(app, 'elapsedTime', (_Runtime.field(app, 'elapsedTime') + (clamped / 1000.0)));
       _Runtime.setField(app, 'frameCount', (_Runtime.field(app, 'frameCount') + 1.0));
       _Runtime.callValue(Application.recordFpsSample__application, cast ([loopState, clamped] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(fixedTimeStep, 0.0, '>'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(app, 'onFixedUpdate'), null)))) {
+      if ((cast ((cast ((cast fixedTimeStep : Float) > (cast 0.0 : Float)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(app, 'onFixedUpdate'), null) : Bool)) : Bool)) {
         _Runtime.setField(loopState, 'fixedAccumulator', (_Runtime.field(loopState, 'fixedAccumulator') + clamped));
         var iters:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(_Runtime.field(loopState, 'fixedAccumulator'), fixedTimeStep, '>='), function():Dynamic return cast _Runtime.compare(iters, maxUpdatesPerFrame, '<')))) {
+        while ((cast ((cast ((cast _Runtime.field(loopState, 'fixedAccumulator') : Float) >= (cast fixedTimeStep : Float)) : Bool) && (cast ((cast iters : Float) < (cast maxUpdatesPerFrame : Float)) : Bool)) : Bool)) {
           _Runtime.setField(loopState, 'fixedAccumulator', (_Runtime.field(loopState, 'fixedAccumulator') - fixedTimeStep));
           iters++;
-          if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(app, 'onError'), null))) {
+          if ((cast !_Runtime.strictEquals(_Runtime.field(app, 'onError'), null) : Bool)) {
             try {
               _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onFixedUpdate')], [fixedTimeStep]]), 1);
             } catch (err:Dynamic) {
@@ -575,12 +575,12 @@ class Application {
             _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onFixedUpdate')], [fixedTimeStep]]), 1);
           }
         }
-        if (_Runtime.truthy(_Runtime.compare(iters, maxUpdatesPerFrame, '>='))) { _Runtime.setField(loopState, 'fixedAccumulator', 0.0); }
-        _Runtime.setField(app, 'interpolationAlpha', _Runtime.select(_Runtime.compare(fixedTimeStep, 0.0, '>'), function():Dynamic return cast (_Runtime.field(loopState, 'fixedAccumulator') / fixedTimeStep), function():Dynamic return cast 1.0));
+        if ((cast ((cast iters : Float) >= (cast maxUpdatesPerFrame : Float)) : Bool)) { _Runtime.setField(loopState, 'fixedAccumulator', 0.0); }
+        _Runtime.setField(app, 'interpolationAlpha', ((cast ((cast fixedTimeStep : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.field(loopState, 'fixedAccumulator') / fixedTimeStep) : Dynamic) : (cast 1.0 : Dynamic)));
       } else {
         _Runtime.setField(app, 'interpolationAlpha', 1.0);
       }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(app, 'onError'), null))) {
+      if ((cast !_Runtime.strictEquals(_Runtime.field(app, 'onError'), null) : Bool)) {
         try {
           _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onUpdate')], [clamped]]), 1);
         } catch (err:Dynamic) {
@@ -613,8 +613,8 @@ class Application {
     _Runtime.setField(app, 'elapsedTime', (_Runtime.field(app, 'elapsedTime') + (clamped / 1000.0)));
     _Runtime.setField(app, 'frameCount', (_Runtime.field(app, 'frameCount') + 1.0));
     _Runtime.setField(app, 'interpolationAlpha', 1.0);
-    if (_Runtime.truthy(!_Runtime.strictEquals(loopState, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callValue(Application.recordFpsSample__application, cast ([loopState, clamped] : Array<Dynamic>)); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(app, 'onError'), null))) {
+    if ((cast !_Runtime.strictEquals(loopState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callValue(Application.recordFpsSample__application, cast ([loopState, clamped] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(app, 'onError'), null) : Bool)) {
       try {
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onUpdate')], [clamped]]), 1);
       } catch (err:Dynamic) {
@@ -644,7 +644,7 @@ class Application {
   public static function unregisterApplicationWindow(app:flighthq.types.Application, win:ApplicationWindow):Void {
     var idx:Dynamic = cast _Runtime.UNDEFINED;
     idx = _Runtime.callProperty(_Runtime.field(app, 'windows'), 'indexOf', cast ([win] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(idx, -1.0))) { _Runtime.splice(_Runtime.field(app, 'windows'), Std.int(idx), Std.int(1.0), []); }
-    if (_Runtime.truthy(_Runtime.strictEquals(((cast Application._mainWindows__application : flighthq._internal._WeakMap).get(app)), win))) { ((cast Application._mainWindows__application : flighthq._internal._WeakMap).delete_(app)); }
+    if ((cast !_Runtime.strictEquals(idx, -1.0) : Bool)) { _Runtime.splice(_Runtime.field(app, 'windows'), Std.int(idx), Std.int(1.0), []); }
+    if ((cast _Runtime.strictEquals(((cast Application._mainWindows__application : flighthq._internal._WeakMap).get(app)), win) : Bool)) { ((cast Application._mainWindows__application : flighthq._internal._WeakMap).delete_(app)); }
   }
 }

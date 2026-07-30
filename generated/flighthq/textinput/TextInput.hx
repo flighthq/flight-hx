@@ -19,10 +19,10 @@ class TextInput {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getRichTextRuntime, cast ([node] : Array<Dynamic>)) : RichTextRuntime);
     state = _Runtime.field(runtime, 'input');
-    if (_Runtime.truthy(_Runtime.strictEquals(state, null))) {
+    if ((cast _Runtime.strictEquals(state, null) : Bool)) {
       (state = cast (_Runtime.callValue(TextInput.createTextInputState__textInput, cast ([options] : Array<Dynamic>)) : Dynamic));
       _Runtime.setField(runtime, 'input', state);
-    } else { if (_Runtime.truthy(!_Runtime.strictEquals(options, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    } else { if ((cast !_Runtime.strictEquals(options, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callValue(TextInput.applyTextInputOptions__textInput, cast ([state, options] : Array<Dynamic>));
     } }
     return cast state;
@@ -40,19 +40,19 @@ class TextInput {
   }
 
   public static function applyTextInputOptions__textInput(state:TextInputState, options:TextInputOptions):Void {
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'alwaysShowSelection'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(state, 'alwaysShowSelection', _Runtime.field(options, 'alwaysShowSelection')); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'caretColor'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(state, 'caretColor', _Runtime.field(options, 'caretColor')); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'caretWidth'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(state, 'caretWidth', _Runtime.field(options, 'caretWidth')); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'displayAsPassword'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(state, 'displayAsPassword', _Runtime.field(options, 'displayAsPassword')); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'historyLimit'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(state, 'historyLimit', HxMath.max(0.0, _Runtime.field(options, 'historyLimit'))); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'passwordCharacter'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(state, 'passwordCharacter', _Runtime.field(options, 'passwordCharacter')); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'restrict'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(state, 'restrict', _Runtime.field(options, 'restrict')); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'selectionAlpha'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(state, 'selectionAlpha', _Runtime.field(options, 'selectionAlpha')); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'selectionColor'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(state, 'selectionColor', _Runtime.field(options, 'selectionColor')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'alwaysShowSelection'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(state, 'alwaysShowSelection', _Runtime.field(options, 'alwaysShowSelection')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'caretColor'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(state, 'caretColor', _Runtime.field(options, 'caretColor')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'caretWidth'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(state, 'caretWidth', _Runtime.field(options, 'caretWidth')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'displayAsPassword'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(state, 'displayAsPassword', _Runtime.field(options, 'displayAsPassword')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'historyLimit'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(state, 'historyLimit', HxMath.max(0.0, _Runtime.field(options, 'historyLimit'))); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'passwordCharacter'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(state, 'passwordCharacter', _Runtime.field(options, 'passwordCharacter')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'restrict'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(state, 'restrict', _Runtime.field(options, 'restrict')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'selectionAlpha'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(state, 'selectionAlpha', _Runtime.field(options, 'selectionAlpha')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'selectionColor'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(state, 'selectionColor', _Runtime.field(options, 'selectionColor')); }
   }
 
   public static function createTextInputState__textInput(?options:TextInputOptions):TextInputState {
-    return cast { alwaysShowSelection: _Runtime.coalesce(_Runtime.optionalField(options, 'alwaysShowSelection'), function():Dynamic return cast false), caretColor: _Runtime.coalesce(_Runtime.optionalField(options, 'caretColor'), function():Dynamic return cast 0.0), caretIndex: 0.0, caretWidth: _Runtime.coalesce(_Runtime.optionalField(options, 'caretWidth'), function():Dynamic return cast 1.0), desiredCaretX: -1.0, displayAsPassword: _Runtime.coalesce(_Runtime.optionalField(options, 'displayAsPassword'), function():Dynamic return cast false), focused: false, history: cast ([] : Array<Dynamic>), historyIndex: -1.0, historyLimit: _Runtime.select(!_Runtime.strictEquals(_Runtime.optionalField(options, 'historyLimit'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast HxMath.max(0.0, _Runtime.field(options, 'historyLimit')), function():Dynamic return cast 100.0), passwordCharacter: _Runtime.coalesce(_Runtime.optionalField(options, 'passwordCharacter'), function():Dynamic return cast '•'), restrict: _Runtime.coalesce(_Runtime.optionalField(options, 'restrict'), function():Dynamic return cast ''), selectionAlpha: _Runtime.coalesce(_Runtime.optionalField(options, 'selectionAlpha'), function():Dynamic return cast 0.35), selectionColor: _Runtime.coalesce(_Runtime.optionalField(options, 'selectionColor'), function():Dynamic return cast 30935.0), selectionIndex: 0.0 };
+    return cast { alwaysShowSelection: _Runtime.coalesce(_Runtime.optionalField(options, 'alwaysShowSelection'), function():Dynamic return cast false), caretColor: _Runtime.coalesce(_Runtime.optionalField(options, 'caretColor'), function():Dynamic return cast 0.0), caretIndex: 0.0, caretWidth: _Runtime.coalesce(_Runtime.optionalField(options, 'caretWidth'), function():Dynamic return cast 1.0), desiredCaretX: -1.0, displayAsPassword: _Runtime.coalesce(_Runtime.optionalField(options, 'displayAsPassword'), function():Dynamic return cast false), focused: false, history: cast ([] : Array<Dynamic>), historyIndex: -1.0, historyLimit: ((cast !_Runtime.strictEquals(_Runtime.optionalField(options, 'historyLimit'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast HxMath.max(0.0, _Runtime.field(options, 'historyLimit')) : Dynamic) : (cast 100.0 : Dynamic)), passwordCharacter: _Runtime.coalesce(_Runtime.optionalField(options, 'passwordCharacter'), function():Dynamic return cast '•'), restrict: _Runtime.coalesce(_Runtime.optionalField(options, 'restrict'), function():Dynamic return cast ''), selectionAlpha: _Runtime.coalesce(_Runtime.optionalField(options, 'selectionAlpha'), function():Dynamic return cast 0.35), selectionColor: _Runtime.coalesce(_Runtime.optionalField(options, 'selectionColor'), function():Dynamic return cast 30935.0), selectionIndex: 0.0 };
     return cast null;
   }
 }

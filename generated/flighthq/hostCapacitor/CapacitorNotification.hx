@@ -129,7 +129,7 @@ class CapacitorNotification {
     }, cancelScheduledNotification: function(id:Dynamic) {
       var numericId:Dynamic = cast _Runtime.UNDEFINED;
       numericId = _Runtime.callValue(CapacitorNotification.findNumericId__capacitorNotification, cast ([idByNumber, id] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(numericId, null))) { return; }
+      if ((cast _Runtime.strictEquals(numericId, null) : Bool)) { return; }
       flighthq._internal._Async.recover(_Runtime.callProperty(notifications, 'cancel', cast ([{ notifications: cast ([{ id: numericId }] : Array<Dynamic>) }] : Array<Dynamic>)), function() {
       
       });
@@ -143,7 +143,7 @@ class CapacitorNotification {
       });
     }, subscribeClick: function(listener:Dynamic) {
       return cast _Runtime.callValue(CapacitorNotification.toUnsubscribe__capacitorNotification, cast ([_Runtime.callProperty(notifications, 'addListener', cast (['localNotificationActionPerformed', function(action:Dynamic) {
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(action, 'actionId'), 'tap'))) { _Runtime.callValue(listener, cast ([_Runtime.coalesce(((cast idByNumber : flighthq._internal._Map).get(_Runtime.field(_Runtime.field(action, 'notification'), 'id'))), function():Dynamic return cast Std.string(_Runtime.field(_Runtime.field(action, 'notification'), 'id')))] : Array<Dynamic>)); }
+        if ((cast _Runtime.strictEquals(_Runtime.field(action, 'actionId'), 'tap') : Bool)) { _Runtime.callValue(listener, cast ([_Runtime.coalesce(((cast idByNumber : flighthq._internal._Map).get(_Runtime.field(_Runtime.field(action, 'notification'), 'id'))), function():Dynamic return cast Std.string(_Runtime.field(_Runtime.field(action, 'notification'), 'id')))] : Array<Dynamic>)); }
       }] : Array<Dynamic>))] : Array<Dynamic>));
     }, subscribeAction: function(listener:Dynamic) {
       return cast _Runtime.callValue(CapacitorNotification.toUnsubscribe__capacitorNotification, cast ([_Runtime.callProperty(notifications, 'addListener', cast (['localNotificationActionPerformed', function(action:Dynamic) return _Runtime.callValue(listener, cast ([_Runtime.coalesce(((cast idByNumber : flighthq._internal._Map).get(_Runtime.field(_Runtime.field(action, 'notification'), 'id'))), function():Dynamic return cast Std.string(_Runtime.field(_Runtime.field(action, 'notification'), 'id'))), _Runtime.field(action, 'actionId')] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
@@ -168,16 +168,16 @@ class CapacitorNotification {
     for (__iteration0 in _Runtime.iterable(idByNumber)) {
       var numericId:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
       var mapped:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
-      if (_Runtime.truthy(_Runtime.strictEquals(mapped, stringId))) { return cast numericId; }
+      if ((cast _Runtime.strictEquals(mapped, stringId) : Bool)) { return cast numericId; }
     }
     parsed = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([stringId] : Array<Dynamic>));
-    return cast _Runtime.select(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isNaN', cast ([parsed] : Array<Dynamic>)), function():Dynamic return cast null, function():Dynamic return cast parsed);
+    return cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isNaN', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast null : Dynamic) : (cast parsed : Dynamic));
     return cast null;
   }
 
   public static function toNotificationPermission__capacitorNotification(display:String):Dynamic {
-    if (_Runtime.truthy(_Runtime.strictEquals(display, 'granted'))) { return cast 'granted'; }
-    if (_Runtime.truthy(_Runtime.strictEquals(display, 'denied'))) { return cast 'denied'; }
+    if ((cast _Runtime.strictEquals(display, 'granted') : Bool)) { return cast 'granted'; }
+    if ((cast _Runtime.strictEquals(display, 'denied') : Bool)) { return cast 'denied'; }
     return cast 'default';
     return cast null;
   }
@@ -189,7 +189,7 @@ class CapacitorNotification {
     handle = null;
     flighthq._internal._Async.recover(_Runtime.callProperty(handlePromise, 'then', cast ([function(resolved:Dynamic) {
       (handle = cast (resolved : Dynamic));
-      if (_Runtime.truthy(removed)) { flighthq._internal._Async.recover(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), function() {
+      if ((cast removed : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), function() {
       
       }); }
     }] : Array<Dynamic>)), function() {
@@ -197,7 +197,7 @@ class CapacitorNotification {
     });
     return cast function() {
       (removed = cast (true : Dynamic));
-      if (_Runtime.truthy(!_Runtime.strictEquals(handle, null))) { flighthq._internal._Async.recover(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), function() {
+      if ((cast !_Runtime.strictEquals(handle, null) : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), function() {
       
       }); }
     };

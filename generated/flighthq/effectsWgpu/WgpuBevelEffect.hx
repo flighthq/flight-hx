@@ -62,9 +62,9 @@ class WgpuBevelEffect {
     _Runtime.callValue(applyWgpuEffectTintPass, cast ([state, src, tinted, 16777215.0, 1.0, 1.0] : Array<Dynamic>));
     _Runtime.callValue(applyWgpuEffectBoxBlur, cast ([state, tinted, blurred, blurTemp, { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), passes: quality }] : Array<Dynamic>));
     _Runtime.callValue(clearWgpuEffectTarget, cast ([state, dst] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(sourceMode, 'draw'))) { _Runtime.callValue(applyWgpuEffectBlitPass, cast ([state, src, dst] : Array<Dynamic>)); }
-    _Runtime.callValue(WgpuBevelEffect.applyWgpuBevelCompositePass__wgpuBevelEffect, cast ([state, blurred, src, dst, { offsetX: (offsetX / _Runtime.field(source, 'width')), offsetY: (-offsetY / _Runtime.field(source, 'height')), highlightColor: highlightColor, highlightAlpha: highlightAlpha, shadowColor: shadowColor, shadowAlpha: shadowAlpha, intensity: strength, clipMode: _Runtime.select(_Runtime.strictEquals(bevelType, 'inner'), function():Dynamic return cast 1.0, function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(bevelType, 'outer'), function():Dynamic return cast 2.0, function():Dynamic return cast 0.0)) }] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(sourceMode, 'knockout'))) { _Runtime.callValue(applyWgpuEffectErasePass, cast ([state, src, dst] : Array<Dynamic>)); }
+    if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) { _Runtime.callValue(applyWgpuEffectBlitPass, cast ([state, src, dst] : Array<Dynamic>)); }
+    _Runtime.callValue(WgpuBevelEffect.applyWgpuBevelCompositePass__wgpuBevelEffect, cast ([state, blurred, src, dst, { offsetX: (offsetX / _Runtime.field(source, 'width')), offsetY: (-offsetY / _Runtime.field(source, 'height')), highlightColor: highlightColor, highlightAlpha: highlightAlpha, shadowColor: shadowColor, shadowAlpha: shadowAlpha, intensity: strength, clipMode: ((cast _Runtime.strictEquals(bevelType, 'inner') : Bool) ? (cast 1.0 : Dynamic) : (cast ((cast _Runtime.strictEquals(bevelType, 'outer') : Bool) ? (cast 2.0 : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic)) }] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool)) { _Runtime.callValue(applyWgpuEffectErasePass, cast ([state, src, dst] : Array<Dynamic>)); }
     _Runtime.callValue(releaseWgpuRenderTarget, cast ([pool, tinted] : Array<Dynamic>));
     _Runtime.callValue(releaseWgpuRenderTarget, cast ([pool, blurred] : Array<Dynamic>));
     _Runtime.callValue(releaseWgpuRenderTarget, cast ([pool, blurTemp] : Array<Dynamic>));
@@ -98,7 +98,7 @@ class WgpuBevelEffect {
   public static function getWgpuBevelCompositeShader__wgpuBevelEffect(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
     var p:Dynamic = cast _Runtime.UNDEFINED;
     p = ((cast WgpuBevelEffect.bevelCompositePipelines__wgpuBevelEffect : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (p = cast (_Runtime.callValue(createWgpuDualSourceEffectPipeline, cast ([state, WgpuBevelEffect.BEVEL_COMPOSITE_WGSL__wgpuBevelEffect] : Array<Dynamic>)) : Dynamic));
       ((cast WgpuBevelEffect.bevelCompositePipelines__wgpuBevelEffect : flighthq._internal._WeakMap).set(state, p));
     }

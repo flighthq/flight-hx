@@ -29,7 +29,7 @@ class WgpuVideo {
   public static function destroyWgpuVideoData(_state:RenderState, data:RendererData):Void {
     var videoData:Dynamic = cast _Runtime.UNDEFINED;
     videoData = _Runtime.callValue(getWgpuRendererData, cast ([data] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(videoData, null))) { return; }
+    if ((cast _Runtime.strictEquals(videoData, null) : Bool)) { return; }
     _Runtime.callOptionalProperty(_Runtime.optionalField(_Runtime.field(videoData, 'entry'), 'texture'), 'destroy', cast ([] : Array<Dynamic>));
   }
 
@@ -42,19 +42,19 @@ class WgpuVideo {
     var videoData:Dynamic = cast _Runtime.UNDEFINED;
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null) : Bool)) { return; }
     _Runtime.callValue(flushWgpuSpriteBatch, cast ([state] : Array<Dynamic>));
     source = (cast _Runtime.field(renderProxy, 'source') : Video);
     element = _Runtime.optionalField(_Runtime.field(_Runtime.field(source, 'data'), 'source'), 'element');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(element, null)), function():Dynamic return cast _Runtime.compare(_Runtime.field(element, 'readyState'), 2.0, '<')))) { return; }
+    if ((cast ((cast ((cast _Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(element, null) : Bool)) : Bool) || (cast ((cast _Runtime.field(element, 'readyState') : Float) < (cast 2.0 : Float)) : Bool)) : Bool)) { return; }
     vw = _Runtime.field(element, 'videoWidth');
     vh = _Runtime.field(element, 'videoHeight');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(vw, 0.0), function():Dynamic return cast _Runtime.strictEquals(vh, 0.0)))) { return; }
+    if ((cast ((cast _Runtime.strictEquals(vw, 0.0) : Bool) || (cast _Runtime.strictEquals(vh, 0.0) : Bool)) : Bool)) { return; }
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
     videoData = _Runtime.callValue(getWgpuRendererData, cast ([_Runtime.field(renderProxy, 'rendererData')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(videoData, null))) { return; }
+    if ((cast _Runtime.strictEquals(videoData, null) : Bool)) { return; }
     entry = _Runtime.field(videoData, 'entry');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(entry, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(videoData, 'w'), vw)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(videoData, 'h'), vh)))) {
+    if ((cast ((cast ((cast _Runtime.strictEquals(entry, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(videoData, 'w'), vw) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(videoData, 'h'), vh) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(_Runtime.optionalField(entry, 'texture'), 'destroy', cast ([] : Array<Dynamic>));
       var device:Dynamic = _Runtime.field(state, 'device');
       var __destructure0:Dynamic = runtime;

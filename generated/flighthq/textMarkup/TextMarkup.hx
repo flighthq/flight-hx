@@ -22,13 +22,13 @@ class TextMarkup {
   public static function appendMarkupBreakBefore__textMarkup(content:RichTextContent):Void {
     var text:Dynamic = cast _Runtime.UNDEFINED;
     text = _Runtime.field(content, 'text');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0), function():Dynamic return cast StringTools.endsWith(Std.string(text), '\n')))) { return; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool) || (cast StringTools.endsWith(Std.string(text), '\n') : Bool)) : Bool)) { return; }
     _Runtime.callValue(TextMarkup.appendMarkupString__textMarkup, cast ([content, '\n', TextMarkup.emptyMarkupFormat__textMarkup] : Array<Dynamic>));
   }
 
   public static function appendMarkupString__textMarkup(content:RichTextContent, value:String, format:TextFormat):Void {
     var start:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(value, 'length'), 0.0))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(value, 'length'), 0.0) : Bool)) { return; }
     start = _Runtime.field(_Runtime.field(content, 'text'), 'length');
     _Runtime.setField(content, 'text', (_Runtime.field(content, 'text') + value));
     _Runtime.callValue(TextMarkup.pushMarkupRange__textMarkup, cast ([_Runtime.field(content, 'formatRanges'), format, start, _Runtime.field(_Runtime.field(content, 'text'), 'length')] : Array<Dynamic>));
@@ -39,7 +39,7 @@ class TextMarkup {
   }
 
   public static function codePointToString__textMarkup(code:Float, fallback:String):String {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([code] : Array<Dynamic>))), function():Dynamic return cast _Runtime.compare(code, 0.0, '<')), function():Dynamic return cast _Runtime.compare(code, 1114111.0, '>')))) { return cast fallback; }
+    if ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([code] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast code : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast code : Float) > (cast 1114111.0 : Float)) : Bool)) : Bool)) { return cast fallback; }
     return cast _Runtime.fromCodePoint(code);
     return cast null;
   }
@@ -50,12 +50,12 @@ class TextMarkup {
   }
 
   public static function decodeMarkupEntities__textMarkup(value:String):String {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(value, 'indexOf', cast (['&'] : Array<Dynamic>)), -1.0))) { return cast value; }
+    if ((cast _Runtime.strictEquals(_Runtime.callProperty(value, 'indexOf', cast (['&'] : Array<Dynamic>)), -1.0) : Bool)) { return cast value; }
     return cast _Runtime.replace(value, _Runtime.regexp('&(#x[0-9a-f]+|#[0-9]+|[a-z]+);', 'gi'), function(matched:String, entity:String) {
       var lower:Dynamic = cast _Runtime.UNDEFINED;
       lower = _Runtime.callProperty(entity, 'toLowerCase', cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(StringTools.startsWith(lower, '#x'))) { return cast _Runtime.callValue(TextMarkup.codePointToString__textMarkup, cast ([_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([_Runtime.slice(lower, 2.0, null), 16.0] : Array<Dynamic>)), matched] : Array<Dynamic>)); }
-      if (_Runtime.truthy(StringTools.startsWith(lower, '#'))) { return cast _Runtime.callValue(TextMarkup.codePointToString__textMarkup, cast ([_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([_Runtime.slice(lower, 1.0, null), 10.0] : Array<Dynamic>)), matched] : Array<Dynamic>)); }
+      if ((cast StringTools.startsWith(lower, '#x') : Bool)) { return cast _Runtime.callValue(TextMarkup.codePointToString__textMarkup, cast ([_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([_Runtime.slice(lower, 2.0, null), 16.0] : Array<Dynamic>)), matched] : Array<Dynamic>)); }
+      if ((cast StringTools.startsWith(lower, '#') : Bool)) { return cast _Runtime.callValue(TextMarkup.codePointToString__textMarkup, cast ([_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([_Runtime.slice(lower, 1.0, null), 10.0] : Array<Dynamic>)), matched] : Array<Dynamic>)); }
       return cast _Runtime.coalesce(_Runtime.getIndex(TextMarkup.markupNamedEntities__textMarkup, lower), function():Dynamic return cast matched);
     }, false);
     return cast null;
@@ -70,20 +70,20 @@ class TextMarkup {
     var bKeys:Dynamic = cast _Runtime.UNDEFINED;
     aKeys = (cast flighthq._internal.DynamicObject.keys(a) : Array<TextFormat>);
     bKeys = (cast flighthq._internal.DynamicObject.keys(b) : Array<TextFormat>);
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(aKeys, 'length'), _Runtime.field(bKeys, 'length')))) { return cast false; }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(aKeys, 'length'), _Runtime.field(bKeys, 'length')) : Bool)) { return cast false; }
     for (key in _Runtime.iterable(aKeys)) {
       var aValue:Dynamic = _Runtime.getIndex(a, key);
       var bValue:Dynamic = _Runtime.getIndex(b, key);
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.isArray(aValue), function():Dynamic return cast _Runtime.isArray(bValue)))) {
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(aValue, 'length'), _Runtime.field(bValue, 'length')))) { return cast false; }
+      if ((cast ((cast _Runtime.isArray(aValue) : Bool) && (cast _Runtime.isArray(bValue) : Bool)) : Bool)) {
+        if ((cast !_Runtime.strictEquals(_Runtime.field(aValue, 'length'), _Runtime.field(bValue, 'length')) : Bool)) { return cast false; }
         {
           var i:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(aValue, 'length'), '<'))) {
-            if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(aValue, i), _Runtime.getIndex(bValue, i)))) { return cast false; }
+          while ((cast ((cast i : Float) < (cast _Runtime.field(aValue, 'length') : Float)) : Bool)) {
+            if ((cast !_Runtime.strictEquals(_Runtime.getIndex(aValue, i), _Runtime.getIndex(bValue, i)) : Bool)) { return cast false; }
             i++;
           }
         }
-      } else { if (_Runtime.truthy(!_Runtime.strictEquals(aValue, bValue))) {
+      } else { if ((cast !_Runtime.strictEquals(aValue, bValue) : Bool)) {
         return cast false;
       } }
     }
@@ -104,8 +104,8 @@ class TextMarkup {
   public static function formatMarkupAnchorTag__textMarkup(format:TextFormat):String {
     var tag:Dynamic = cast _Runtime.UNDEFINED;
     tag = '<a';
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(format, 'url'), _Runtime.field(_Runtime, 'UNDEFINED')))) { (tag = cast ((tag + ' href="' + Std.string(_Runtime.callValue(TextMarkup.escapeMarkupAttribute__textMarkup, cast ([_Runtime.field(format, 'url')] : Array<Dynamic>))) + '"') : Dynamic)); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(format, 'target'), _Runtime.field(_Runtime, 'UNDEFINED')))) { (tag = cast ((tag + ' target="' + Std.string(_Runtime.callValue(TextMarkup.escapeMarkupAttribute__textMarkup, cast ([_Runtime.field(format, 'target')] : Array<Dynamic>))) + '"') : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(format, 'url'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (tag = cast ((tag + ' href="' + Std.string(_Runtime.callValue(TextMarkup.escapeMarkupAttribute__textMarkup, cast ([_Runtime.field(format, 'url')] : Array<Dynamic>))) + '"') : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(format, 'target'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (tag = cast ((tag + ' target="' + Std.string(_Runtime.callValue(TextMarkup.escapeMarkupAttribute__textMarkup, cast ([_Runtime.field(format, 'target')] : Array<Dynamic>))) + '"') : Dynamic)); }
     return cast '' + Std.string(tag) + '>';
     return cast null;
   }
@@ -123,17 +123,17 @@ class TextMarkup {
     hasColor = !_Runtime.strictEquals(_Runtime.field(format, 'color'), _Runtime.field(_Runtime, 'UNDEFINED'));
     hasSize = !_Runtime.strictEquals(_Runtime.field(format, 'size'), _Runtime.field(_Runtime, 'UNDEFINED'));
     hasFace = !_Runtime.strictEquals(_Runtime.field(format, 'font'), _Runtime.field(_Runtime, 'UNDEFINED'));
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.truthy(hasColor), function():Dynamic return cast !_Runtime.truthy(hasSize)), function():Dynamic return cast !_Runtime.truthy(hasFace)))) { return cast null; }
+    if ((cast ((cast ((cast !(cast hasColor : Bool) : Bool) && (cast !(cast hasSize : Bool) : Bool)) : Bool) && (cast !(cast hasFace : Bool) : Bool)) : Bool)) { return cast null; }
     tag = '<font';
-    if (_Runtime.truthy(hasColor)) { (tag = cast ((tag + ' color="' + Std.string(_Runtime.callValue(TextMarkup.formatMarkupColor__textMarkup, cast ([(cast _Runtime.field(format, 'color') : Float)] : Array<Dynamic>))) + '"') : Dynamic)); }
-    if (_Runtime.truthy(hasSize)) { (tag = cast ((tag + ' size="' + Std.string(_Runtime.field(format, 'size')) + '"') : Dynamic)); }
-    if (_Runtime.truthy(hasFace)) { (tag = cast ((tag + ' face="' + Std.string(_Runtime.callValue(TextMarkup.escapeMarkupAttribute__textMarkup, cast ([(cast _Runtime.field(format, 'font') : String)] : Array<Dynamic>))) + '"') : Dynamic)); }
+    if ((cast hasColor : Bool)) { (tag = cast ((tag + ' color="' + Std.string(_Runtime.callValue(TextMarkup.formatMarkupColor__textMarkup, cast ([(cast _Runtime.field(format, 'color') : Float)] : Array<Dynamic>))) + '"') : Dynamic)); }
+    if ((cast hasSize : Bool)) { (tag = cast ((tag + ' size="' + Std.string(_Runtime.field(format, 'size')) + '"') : Dynamic)); }
+    if ((cast hasFace : Bool)) { (tag = cast ((tag + ' face="' + Std.string(_Runtime.callValue(TextMarkup.escapeMarkupAttribute__textMarkup, cast ([(cast _Runtime.field(format, 'font') : String)] : Array<Dynamic>))) + '"') : Dynamic)); }
     return cast '' + Std.string(tag) + '>';
     return cast null;
   }
 
   public static function formatMarkupListTag__textMarkup(format:TextFormat):String {
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(format, 'listMarker'), _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast '<li type="' + Std.string(_Runtime.field(format, 'listMarker')) + '">'; }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(format, 'listMarker'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast '<li type="' + Std.string(_Runtime.field(format, 'listMarker')) + '">'; }
     return cast '<li>';
     return cast null;
   }
@@ -146,40 +146,40 @@ class TextMarkup {
     open = cast ([] : Array<Dynamic>);
     close = cast ([] : Array<Dynamic>);
     textformat = _Runtime.callValue(TextMarkup.formatMarkupTextformatTag__textMarkup, cast ([format] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(textformat, null))) {
+    if ((cast !_Runtime.strictEquals(textformat, null) : Bool)) {
       _Runtime.callProperty(open, 'push', cast ([textformat] : Array<Dynamic>));
       _Runtime.callProperty(close, 'unshift', cast (['</textformat>'] : Array<Dynamic>));
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(format, 'align'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(format, 'align'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callProperty(open, 'push', cast (['<p align="' + Std.string(_Runtime.field(format, 'align')) + '">'] : Array<Dynamic>));
       _Runtime.callProperty(close, 'unshift', cast (['</p>'] : Array<Dynamic>));
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(format, 'bullet'), true))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(format, 'bullet'), true) : Bool)) {
       _Runtime.callProperty(open, 'push', cast ([_Runtime.callValue(TextMarkup.formatMarkupListTag__textMarkup, cast ([format] : Array<Dynamic>))] : Array<Dynamic>));
       _Runtime.callProperty(close, 'unshift', cast (['</li>'] : Array<Dynamic>));
     }
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(format, 'url'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(format, 'target'), _Runtime.field(_Runtime, 'UNDEFINED'))))) {
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(format, 'url'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(format, 'target'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
       _Runtime.callProperty(open, 'push', cast ([_Runtime.callValue(TextMarkup.formatMarkupAnchorTag__textMarkup, cast ([format] : Array<Dynamic>))] : Array<Dynamic>));
       _Runtime.callProperty(close, 'unshift', cast (['</a>'] : Array<Dynamic>));
     }
     font = _Runtime.callValue(TextMarkup.formatMarkupFontTag__textMarkup, cast ([format] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(font, null))) {
+    if ((cast !_Runtime.strictEquals(font, null) : Bool)) {
       _Runtime.callProperty(open, 'push', cast ([font] : Array<Dynamic>));
       _Runtime.callProperty(close, 'unshift', cast (['</font>'] : Array<Dynamic>));
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(format, 'bold'), true))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(format, 'bold'), true) : Bool)) {
       _Runtime.callProperty(open, 'push', cast (['<b>'] : Array<Dynamic>));
       _Runtime.callProperty(close, 'unshift', cast (['</b>'] : Array<Dynamic>));
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(format, 'italic'), true))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(format, 'italic'), true) : Bool)) {
       _Runtime.callProperty(open, 'push', cast (['<i>'] : Array<Dynamic>));
       _Runtime.callProperty(close, 'unshift', cast (['</i>'] : Array<Dynamic>));
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(format, 'underline'), true))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(format, 'underline'), true) : Bool)) {
       _Runtime.callProperty(open, 'push', cast (['<u>'] : Array<Dynamic>));
       _Runtime.callProperty(close, 'unshift', cast (['</u>'] : Array<Dynamic>));
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(format, 'strikethrough'), true))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(format, 'strikethrough'), true) : Bool)) {
       _Runtime.callProperty(open, 'push', cast (['<s>'] : Array<Dynamic>));
       _Runtime.callProperty(close, 'unshift', cast (['</s>'] : Array<Dynamic>));
     }
@@ -192,31 +192,31 @@ class TextMarkup {
     var any:Dynamic = cast _Runtime.UNDEFINED;
     tag = '<textformat';
     any = false;
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(format, 'blockIndent'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(format, 'blockIndent'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (tag = cast ((tag + ' blockindent="' + Std.string(_Runtime.field(format, 'blockIndent')) + '"') : Dynamic));
       (any = cast (true : Dynamic));
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(format, 'indent'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(format, 'indent'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (tag = cast ((tag + ' indent="' + Std.string(_Runtime.field(format, 'indent')) + '"') : Dynamic));
       (any = cast (true : Dynamic));
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(format, 'leading'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(format, 'leading'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (tag = cast ((tag + ' leading="' + Std.string(_Runtime.field(format, 'leading')) + '"') : Dynamic));
       (any = cast (true : Dynamic));
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(format, 'leftMargin'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(format, 'leftMargin'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (tag = cast ((tag + ' leftmargin="' + Std.string(_Runtime.field(format, 'leftMargin')) + '"') : Dynamic));
       (any = cast (true : Dynamic));
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(format, 'rightMargin'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(format, 'rightMargin'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (tag = cast ((tag + ' rightmargin="' + Std.string(_Runtime.field(format, 'rightMargin')) + '"') : Dynamic));
       (any = cast (true : Dynamic));
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(format, 'tabStops'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(format, 'tabStops'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (tag = cast ((tag + ' tabstops="' + Std.string(_Runtime.join(_Runtime.field(format, 'tabStops'), ',')) + '"') : Dynamic));
       (any = cast (true : Dynamic));
     }
-    return cast _Runtime.select(any, function():Dynamic return cast '' + Std.string(tag) + '>', function():Dynamic return cast null);
+    return cast ((cast any : Bool) ? (cast '' + Std.string(tag) + '>' : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
@@ -226,14 +226,14 @@ class TextMarkup {
     var output:Dynamic = cast _Runtime.UNDEFINED;
     var runStart:Dynamic = cast _Runtime.UNDEFINED;
     text = _Runtime.field(content, 'text');
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0))) { return cast ''; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) { return cast ''; }
     formats = _Runtime.callValue(TextMarkup.resolveMarkupFormats__textMarkup, cast ([content] : Array<Dynamic>));
     output = '';
     runStart = 0.0;
-    while (_Runtime.truthy(_Runtime.compare(runStart, _Runtime.field(text, 'length'), '<'))) {
+    while ((cast ((cast runStart : Float) < (cast _Runtime.field(text, 'length') : Float)) : Bool)) {
       var format:Dynamic = _Runtime.getIndex(formats, runStart);
       var runEnd:Dynamic = (runStart + 1.0);
-      while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(runEnd, _Runtime.field(text, 'length'), '<'), function():Dynamic return cast _Runtime.callValue(TextMarkup.equalsMarkupFormat__textMarkup, cast ([_Runtime.getIndex(formats, runEnd), format] : Array<Dynamic>))))) { runEnd++; }
+      while ((cast ((cast ((cast runEnd : Float) < (cast _Runtime.field(text, 'length') : Float)) : Bool) && (cast _Runtime.callValue(TextMarkup.equalsMarkupFormat__textMarkup, cast ([_Runtime.getIndex(formats, runEnd), format] : Array<Dynamic>)) : Bool)) : Bool)) { runEnd++; }
       (output = cast ((output + _Runtime.callValue(TextMarkup.formatMarkupRun__textMarkup, cast ([format, _Runtime.slice(text, runStart, runEnd)] : Array<Dynamic>))) : Dynamic));
       (runStart = cast (runEnd : Dynamic));
     }
@@ -244,7 +244,7 @@ class TextMarkup {
   public static function getDefaultMarkupTagRegistry__textMarkup():MarkupTagRegistry {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = TextMarkup.defaultMarkupTagRegistry__textMarkup;
-    if (_Runtime.truthy(_Runtime.strictEquals(registry, null))) {
+    if ((cast _Runtime.strictEquals(registry, null) : Bool)) {
       (registry = cast (_Runtime.callValue(createMarkupTagRegistry, cast ([] : Array<Dynamic>)) : Dynamic));
       _Runtime.callValue(registerStandardMarkupTags, cast ([registry] : Array<Dynamic>));
       (TextMarkup.defaultMarkupTagRegistry__textMarkup = cast (registry : Dynamic));
@@ -266,32 +266,32 @@ class TextMarkup {
     var result:Dynamic = cast _Runtime.UNDEFINED;
     var merged:TextFormat = cast _Runtime.UNDEFINED;
     inner = StringTools.trim(Std.string(_Runtime.slice(token, 1.0, -1.0)));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(inner, 'length'), 0.0), function():Dynamic return cast StringTools.startsWith(inner, '!')), function():Dynamic return cast StringTools.startsWith(inner, '?')))) { return; }
+    if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(inner, 'length'), 0.0) : Bool) || (cast StringTools.startsWith(inner, '!') : Bool)) : Bool) || (cast StringTools.startsWith(inner, '?') : Bool)) : Bool)) { return; }
     closing = StringTools.startsWith(inner, '/');
     selfClosing = StringTools.endsWith(Std.string(inner), '/');
-    body = StringTools.trim(Std.string(_Runtime.replace(_Runtime.select(closing, function():Dynamic return cast _Runtime.slice(inner, 1.0, null), function():Dynamic return cast inner), _Runtime.regexp('\\/$$', ''), '', false)));
+    body = StringTools.trim(Std.string(_Runtime.replace(((cast closing : Bool) ? (cast _Runtime.slice(inner, 1.0, null) : Dynamic) : (cast inner : Dynamic)), _Runtime.regexp('\\/$$', ''), '', false)));
     separator = _Runtime.callProperty(body, 'search', cast ([_Runtime.regexp('\\s', '')] : Array<Dynamic>));
-    name = _Runtime.callProperty(_Runtime.select(_Runtime.strictEquals(separator, -1.0), function():Dynamic return cast body, function():Dynamic return cast _Runtime.slice(body, 0.0, separator)), 'toLowerCase', cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(closing)) {
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(stack, 'length'), 1.0, '>'))) { _Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>)); }
+    name = _Runtime.callProperty(((cast _Runtime.strictEquals(separator, -1.0) : Bool) ? (cast body : Dynamic) : (cast _Runtime.slice(body, 0.0, separator) : Dynamic)), 'toLowerCase', cast ([] : Array<Dynamic>));
+    if ((cast closing : Bool)) {
+      if ((cast ((cast _Runtime.field(stack, 'length') : Float) > (cast 1.0 : Float)) : Bool)) { _Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>)); }
       return;
     }
     top = _Runtime.getIndex(stack, (_Runtime.field(stack, 'length') - 1.0));
     handler = ((cast handlers : flighthq._internal._Map).get(name));
-    if (_Runtime.truthy(_Runtime.strictEquals(handler, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      if (_Runtime.truthy(!_Runtime.truthy(selfClosing))) { _Runtime.callProperty(stack, 'push', cast ([_Runtime.mergeObjects([top])] : Array<Dynamic>)); }
+    if ((cast _Runtime.strictEquals(handler, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      if ((cast !(cast selfClosing : Bool) : Bool)) { _Runtime.callProperty(stack, 'push', cast ([_Runtime.mergeObjects([top])] : Array<Dynamic>)); }
       return;
     }
-    attributes = _Runtime.callValue(TextMarkup.parseMarkupAttributes__textMarkup, cast ([_Runtime.select(_Runtime.strictEquals(separator, -1.0), function():Dynamic return cast '', function():Dynamic return cast _Runtime.slice(body, (separator + 1.0), null))] : Array<Dynamic>));
+    attributes = _Runtime.callValue(TextMarkup.parseMarkupAttributes__textMarkup, cast ([((cast _Runtime.strictEquals(separator, -1.0) : Bool) ? (cast '' : Dynamic) : (cast _Runtime.slice(body, (separator + 1.0), null) : Dynamic))] : Array<Dynamic>));
     result = _Runtime.callValue(TextMarkup.normalizeMarkupTagResult__textMarkup, cast ([_Runtime.callValue(handler, cast ([attributes] : Array<Dynamic>))] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(result, 'format'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(result, 'text'), _Runtime.field(_Runtime, 'UNDEFINED'))))) {
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(result, 'format'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(result, 'text'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
       _Runtime.callValue(TextMarkup.appendMarkupString__textMarkup, cast ([content, _Runtime.field(result, 'text'), top] : Array<Dynamic>));
       return;
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(result, 'breakBefore'), true))) { _Runtime.callValue(TextMarkup.appendMarkupBreakBefore__textMarkup, cast ([content] : Array<Dynamic>)); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(result, 'text'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callValue(TextMarkup.appendMarkupString__textMarkup, cast ([content, _Runtime.field(result, 'text'), top] : Array<Dynamic>)); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(result, 'breakBefore'), true) : Bool)) { _Runtime.callValue(TextMarkup.appendMarkupBreakBefore__textMarkup, cast ([content] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(result, 'text'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callValue(TextMarkup.appendMarkupString__textMarkup, cast ([content, _Runtime.field(result, 'text'), top] : Array<Dynamic>)); }
     merged = _Runtime.mergeObjects([top, _Runtime.field(result, 'format')]);
-    if (_Runtime.truthy(!_Runtime.truthy(selfClosing))) { _Runtime.callProperty(stack, 'push', cast ([merged] : Array<Dynamic>)); }
+    if ((cast !(cast selfClosing : Bool) : Bool)) { _Runtime.callProperty(stack, 'push', cast ([merged] : Array<Dynamic>)); }
   }
 
   public static final markupAttributeEscapes__textMarkup:Dynamic = _Runtime.objectFromPairs([{ key: '"', value: '&quot;' }, { key: '&', value: '&amp;' }, { key: '<', value: '&lt;' }, { key: '>', value: '&gt;' }]);
@@ -301,7 +301,7 @@ class TextMarkup {
   public static final markupTextEscapes__textMarkup:Dynamic = _Runtime.objectFromPairs([{ key: '&', value: '&amp;' }, { key: '<', value: '&lt;' }, { key: '>', value: '&gt;' }]);
 
   public static function normalizeMarkupTagResult__textMarkup(result:MarkupTagResult):MarkupTagEffect {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.hasField(result, 'format'), function():Dynamic return cast _Runtime.hasField(result, 'breakBefore')), function():Dynamic return cast _Runtime.hasField(result, 'text')))) { return cast (cast result : MarkupTagEffect); }
+    if ((cast ((cast ((cast _Runtime.hasField(result, 'format') : Bool) || (cast _Runtime.hasField(result, 'breakBefore') : Bool)) : Bool) || (cast _Runtime.hasField(result, 'text') : Bool)) : Bool)) { return cast (cast result : MarkupTagEffect); }
     return cast { format: (cast result : Dynamic) };
     return cast null;
   }
@@ -312,7 +312,7 @@ class TextMarkup {
     var match:Null<Dynamic> = cast _Runtime.UNDEFINED;
     attributes = {  };
     pattern = _Runtime.regexp('([^\\s=]+)(?:\\s*=\\s*(?:"([^"]*)"|\'([^\']*)\'|([^\\s"\'>]+)))?', 'g');
-    while (_Runtime.truthy(!_Runtime.strictEquals((match = cast (_Runtime.callProperty(pattern, 'exec', cast ([source] : Array<Dynamic>)) : Dynamic)), null))) {
+    while ((cast !_Runtime.strictEquals((match = cast (_Runtime.callProperty(pattern, 'exec', cast ([source] : Array<Dynamic>)) : Dynamic)), null) : Bool)) {
       var name:Dynamic = _Runtime.callProperty(_Runtime.getIndex(match, 1.0), 'toLowerCase', cast ([] : Array<Dynamic>));
       _Runtime.setIndex(attributes, name, _Runtime.callValue(TextMarkup.decodeMarkupEntities__textMarkup, cast ([_Runtime.coalesce(_Runtime.coalesce(_Runtime.coalesce(_Runtime.getIndex(match, 2.0), function():Dynamic return cast _Runtime.getIndex(match, 3.0)), function():Dynamic return cast _Runtime.getIndex(match, 4.0)), function():Dynamic return cast '')] : Array<Dynamic>)));
     }
@@ -332,7 +332,7 @@ class TextMarkup {
     stack = cast ([{  }] : Array<Dynamic>);
     tagPattern = _Runtime.regexp('<[^>]*>', 'g');
     index = 0.0;
-    while (_Runtime.truthy(!_Runtime.strictEquals((match = cast (_Runtime.callProperty(tagPattern, 'exec', cast ([html] : Array<Dynamic>)) : Dynamic)), null))) {
+    while ((cast !_Runtime.strictEquals((match = cast (_Runtime.callProperty(tagPattern, 'exec', cast ([html] : Array<Dynamic>)) : Dynamic)), null) : Bool)) {
       _Runtime.callValue(TextMarkup.appendMarkupText__textMarkup, cast ([content, _Runtime.slice(html, index, _Runtime.field(match, 'index')), _Runtime.getIndex(stack, (_Runtime.field(stack, 'length') - 1.0))] : Array<Dynamic>));
       _Runtime.callValue(TextMarkup.handleMarkupToken__textMarkup, cast ([content, handlers, _Runtime.getIndex(match, 0.0), stack] : Array<Dynamic>));
       (index = cast ((_Runtime.field(match, 'index') + _Runtime.field(_Runtime.getIndex(match, 0.0), 'length')) : Dynamic));
@@ -344,10 +344,10 @@ class TextMarkup {
 
   public static function pushMarkupRange__textMarkup(ranges:Array<TextFormatRange>, format:TextFormat, start:Float, end:Float):Void {
     var previous:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(start, end))) { return; }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(flighthq._internal.DynamicObject.keys(format), 'length'), 0.0))) { return; }
+    if ((cast _Runtime.strictEquals(start, end) : Bool)) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(flighthq._internal.DynamicObject.keys(format), 'length'), 0.0) : Bool)) { return; }
     previous = _Runtime.getIndex(ranges, (_Runtime.field(ranges, 'length') - 1.0));
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(previous, 'end'), start)), function():Dynamic return cast _Runtime.callValue(TextMarkup.equalsMarkupFormat__textMarkup, cast ([_Runtime.field(previous, 'format'), format] : Array<Dynamic>))))) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(previous, 'end'), start) : Bool)) : Bool) && (cast _Runtime.callValue(TextMarkup.equalsMarkupFormat__textMarkup, cast ([_Runtime.field(previous, 'format'), format] : Array<Dynamic>)) : Bool)) : Bool)) {
       _Runtime.setField(previous, 'end', end);
       return;
     }
@@ -377,7 +377,7 @@ class TextMarkup {
     formats = _Runtime.createArray(length);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, length, '<'))) {
+      while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
         _Runtime.setIndex(formats, i, {  });
         i++;
       }
@@ -387,7 +387,7 @@ class TextMarkup {
       var end:Dynamic = HxMath.max(start, HxMath.min(length, _Runtime.field(range, 'end')));
       {
         var i:Dynamic = start;
-        while (_Runtime.truthy(_Runtime.compare(i, end, '<'))) {
+        while ((cast ((cast i : Float) < (cast end : Float)) : Bool)) {
           _Runtime.setIndex(formats, i, _Runtime.mergeObjects([_Runtime.getIndex(formats, i), _Runtime.field(range, 'format')]));
           i++;
         }

@@ -30,7 +30,7 @@ class CanvasBloomEffect {
     bright = _Runtime.callValue(acquireCanvasRenderTarget, cast ([pool, _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
     _Runtime.callValue(drawCanvasEffectPass, cast ([bright, source, 'contrast(' + Std.string(contrast) + ') brightness(' + Std.string(brightnessShift) + ')'] : Array<Dynamic>));
     blurred = _Runtime.callValue(acquireCanvasRenderTarget, cast ([pool, _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(radius, 0.0, '>'))) {
+    if ((cast ((cast radius : Float) > (cast 0.0 : Float)) : Bool)) {
       _Runtime.callValue(drawCanvasEffectPass, cast ([blurred, bright, 'blur(' + Std.string(radius) + 'px)'] : Array<Dynamic>));
     } else {
       _Runtime.callValue(drawCanvasEffectPass, cast ([blurred, bright, 'none'] : Array<Dynamic>));

@@ -22,7 +22,7 @@ class ElectronPower {
       _Runtime.setField(out, 'chargingTime', -1.0);
       _Runtime.setField(out, 'dischargingTime', -1.0);
       _Runtime.setField(out, 'isBatteryLow', false);
-      _Runtime.setField(out, 'isCharging', !_Runtime.truthy(onBattery));
+      _Runtime.setField(out, 'isCharging', !(cast onBattery : Bool));
       _Runtime.setField(out, 'isLowPower', false);
       _Runtime.setField(out, 'isOnBattery', onBattery);
       _Runtime.setField(out, 'thermalState', 'Unknown');
@@ -34,7 +34,7 @@ class ElectronPower {
     }, getSystemIdleTime: function() {
       return cast _Runtime.callProperty(powerMonitor, 'getSystemIdleTime', cast ([] : Array<Dynamic>));
     }, isKeepAwakeActive: function() {
-      return cast _Runtime.compare(blockerId, 0.0, '>=');
+      return cast ((cast blockerId : Float) >= (cast 0.0 : Float));
     }, subscribe: function(listener:Dynamic) {
       _Runtime.callProperty(powerMonitor, 'on', cast (['on-battery', listener] : Array<Dynamic>));
       _Runtime.callProperty(powerMonitor, 'on', cast (['on-ac', listener] : Array<Dynamic>));
@@ -63,11 +63,11 @@ class ElectronPower {
       return cast function() return _Runtime.callProperty(powerMonitor, 'removeListener', cast (['unlock-screen', listener] : Array<Dynamic>));
     }, setKeepAwake: function(enabled:Dynamic) {
       try {
-        if (_Runtime.truthy(_Runtime.andValue(enabled, function():Dynamic return cast _Runtime.compare(blockerId, 0.0, '<')))) {
+        if ((cast ((cast enabled : Bool) && (cast ((cast blockerId : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
           (blockerId = cast (_Runtime.callProperty(powerSaveBlocker, 'start', cast (['prevent-display-sleep'] : Array<Dynamic>)) : Dynamic));
           return cast true;
         }
-        if (_Runtime.truthy(_Runtime.andValue(!_Runtime.truthy(enabled), function():Dynamic return cast _Runtime.compare(blockerId, 0.0, '>=')))) {
+        if ((cast ((cast !(cast enabled : Bool) : Bool) && (cast ((cast blockerId : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) {
           _Runtime.callProperty(powerSaveBlocker, 'stop', cast ([blockerId] : Array<Dynamic>));
           (blockerId = cast (-1.0 : Dynamic));
           return cast true;
@@ -81,8 +81,8 @@ class ElectronPower {
   }
 
   public static function toIdleState__electronPower(state:String):PowerIdleState {
-    if (_Runtime.truthy(_Runtime.strictEquals(state, 'active'))) { return cast 'Active'; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(state, 'idle'), function():Dynamic return cast _Runtime.strictEquals(state, 'locked')))) { return cast 'Idle'; }
+    if ((cast _Runtime.strictEquals(state, 'active') : Bool)) { return cast 'Active'; }
+    if ((cast ((cast _Runtime.strictEquals(state, 'idle') : Bool) || (cast _Runtime.strictEquals(state, 'locked') : Bool)) : Bool)) { return cast 'Idle'; }
     return cast 'Unknown';
     return cast null;
   }

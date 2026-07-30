@@ -26,17 +26,17 @@ class UnionAllPaths {
         _Runtime.callProperty(contours, 'push', cast ([contour] : Array<Dynamic>));
       }
     }
-    result = _Runtime.select(_Runtime.strictEquals(_Runtime.field(contours, 'length'), 0.0), function():Dynamic return cast UnionAllPaths.EMPTY_CONTOURS__unionAllPaths, function():Dynamic return cast _Runtime.callProperty(_Runtime.callValue(getPathBooleanBackend, cast ([] : Array<Dynamic>)), 'computePathBoolean', cast ([contours, UnionAllPaths.EMPTY_CONTOURS__unionAllPaths, 'union', fillRule] : Array<Dynamic>)));
+    result = ((cast _Runtime.strictEquals(_Runtime.field(contours, 'length'), 0.0) : Bool) ? (cast UnionAllPaths.EMPTY_CONTOURS__unionAllPaths : Dynamic) : (cast _Runtime.callProperty(_Runtime.callValue(getPathBooleanBackend, cast ([] : Array<Dynamic>)), 'computePathBoolean', cast ([contours, UnionAllPaths.EMPTY_CONTOURS__unionAllPaths, 'union', fillRule] : Array<Dynamic>)) : Dynamic));
     path = _Runtime.coalesce(out, function():Dynamic return cast _Runtime.callValue(createPath, cast (['nonZero'] : Array<Dynamic>)));
     _Runtime.setLength(_Runtime.field(path, 'commands'), 0.0);
     _Runtime.setLength(_Runtime.field(path, 'data'), 0.0);
     _Runtime.setField(path, 'winding', 'nonZero');
     for (ring in _Runtime.iterable(result)) {
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(ring, 'length'), 6.0, '<'))) { continue; }
+      if ((cast ((cast _Runtime.field(ring, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { continue; }
       _Runtime.callValue(appendPathMoveTo, cast ([path, _Runtime.getIndex(ring, 0.0), _Runtime.getIndex(ring, 1.0)] : Array<Dynamic>));
       {
         var i:Dynamic = 2.0;
-        while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(ring, 'length'), '<'))) {
+        while ((cast ((cast i : Float) < (cast _Runtime.field(ring, 'length') : Float)) : Bool)) {
           _Runtime.callValue(appendPathLineTo, cast ([path, _Runtime.getIndex(ring, i), _Runtime.getIndex(ring, (i + 1.0))] : Array<Dynamic>));
           (i = cast ((i + 2.0) : Dynamic));
         }

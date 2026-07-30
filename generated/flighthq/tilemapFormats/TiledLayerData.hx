@@ -12,17 +12,17 @@ class TiledLayerData {
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var gids:Dynamic = cast _Runtime.UNDEFINED;
     bytes = _Runtime.callValue(TiledLayerData.decodeBase64__tiledLayerData, cast ([text] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(compression, null))) {
-      if (_Runtime.truthy(_Runtime.strictEquals(inflate, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast null; }
+    if ((cast !_Runtime.strictEquals(compression, null) : Bool)) {
+      if ((cast _Runtime.strictEquals(inflate, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
       var inflated:Dynamic = _Runtime.callValue(inflate, cast ([bytes, compression] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(inflated, null))) { return cast null; }
+      if ((cast _Runtime.strictEquals(inflated, null) : Bool)) { return cast null; }
       (bytes = cast (inflated : Dynamic));
     }
     count = _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.field(bytes, 'length')), 2);
     gids = new flighthq._internal._UInt32Array(count);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, count, '<'))) {
+      while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         var b:Dynamic = (i * 4.0);
         _Runtime.setIndex(gids, i, _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(bytes, b)) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(bytes, (b + 1.0))) << 8)))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(bytes, (b + 2.0))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(bytes, (b + 3.0))) << 24)))), 0));
         i++;
@@ -37,9 +37,9 @@ class TiledLayerData {
     out = cast ([] : Array<Dynamic>);
     for (part in _Runtime.iterable(_Runtime.callProperty(text, 'split', cast ([','] : Array<Dynamic>)))) {
       var trimmed:Dynamic = StringTools.trim(Std.string(part));
-      if (_Runtime.truthy(_Runtime.strictEquals(trimmed, ''))) { continue; }
+      if ((cast _Runtime.strictEquals(trimmed, '') : Bool)) { continue; }
       var n:Dynamic = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([trimmed] : Array<Dynamic>));
-      _Runtime.callProperty(out, 'push', cast ([_Runtime.select(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([n] : Array<Dynamic>)), function():Dynamic return cast _Runtime.unsignedShiftRight(_Runtime.toInt32(n), 0), function():Dynamic return cast 0.0)] : Array<Dynamic>));
+      _Runtime.callProperty(out, 'push', cast ([((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([n] : Array<Dynamic>)) : Bool) ? (cast _Runtime.unsignedShiftRight(_Runtime.toInt32(n), 0) : Dynamic) : (cast 0.0 : Dynamic))] : Array<Dynamic>));
     }
     return cast _Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([out] : Array<Dynamic>));
     return cast null;
@@ -52,15 +52,15 @@ class TiledLayerData {
     out = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(stripped, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(stripped, 'length') : Float)) : Bool)) {
         var c0:Dynamic = _Runtime.callProperty(TiledLayerData.BASE64_TABLE__tiledLayerData, 'indexOf', cast ([_Runtime.getIndex(stripped, i)] : Array<Dynamic>));
         var c1:Dynamic = _Runtime.callProperty(TiledLayerData.BASE64_TABLE__tiledLayerData, 'indexOf', cast ([_Runtime.getIndex(stripped, (i + 1.0))] : Array<Dynamic>));
-        var c2:Dynamic = _Runtime.select(_Runtime.compare((i + 2.0), _Runtime.field(stripped, 'length'), '<'), function():Dynamic return cast _Runtime.callProperty(TiledLayerData.BASE64_TABLE__tiledLayerData, 'indexOf', cast ([_Runtime.getIndex(stripped, (i + 2.0))] : Array<Dynamic>)), function():Dynamic return cast -1.0);
-        var c3:Dynamic = _Runtime.select(_Runtime.compare((i + 3.0), _Runtime.field(stripped, 'length'), '<'), function():Dynamic return cast _Runtime.callProperty(TiledLayerData.BASE64_TABLE__tiledLayerData, 'indexOf', cast ([_Runtime.getIndex(stripped, (i + 3.0))] : Array<Dynamic>)), function():Dynamic return cast -1.0);
-        var n:Dynamic = (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(c0) << 18)) | _Runtime.toInt32((_Runtime.toInt32(c1) << 12)))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.select(_Runtime.compare(c2, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast c2)) << 6)))) | _Runtime.toInt32(_Runtime.select(_Runtime.compare(c3, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast c3)));
+        var c2:Dynamic = ((cast ((cast (i + 2.0) : Float) < (cast _Runtime.field(stripped, 'length') : Float)) : Bool) ? (cast _Runtime.callProperty(TiledLayerData.BASE64_TABLE__tiledLayerData, 'indexOf', cast ([_Runtime.getIndex(stripped, (i + 2.0))] : Array<Dynamic>)) : Dynamic) : (cast -1.0 : Dynamic));
+        var c3:Dynamic = ((cast ((cast (i + 3.0) : Float) < (cast _Runtime.field(stripped, 'length') : Float)) : Bool) ? (cast _Runtime.callProperty(TiledLayerData.BASE64_TABLE__tiledLayerData, 'indexOf', cast ([_Runtime.getIndex(stripped, (i + 3.0))] : Array<Dynamic>)) : Dynamic) : (cast -1.0 : Dynamic));
+        var n:Dynamic = (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(c0) << 18)) | _Runtime.toInt32((_Runtime.toInt32(c1) << 12)))) | _Runtime.toInt32((_Runtime.toInt32(((cast ((cast c2 : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast c2 : Dynamic))) << 6)))) | _Runtime.toInt32(((cast ((cast c3 : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast c3 : Dynamic))));
         _Runtime.callProperty(out, 'push', cast ([(_Runtime.toInt32((_Runtime.toInt32(n) >> 16)) & 255)] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.compare(c2, 0.0, '>='))) { _Runtime.callProperty(out, 'push', cast ([(_Runtime.toInt32((_Runtime.toInt32(n) >> 8)) & 255)] : Array<Dynamic>)); }
-        if (_Runtime.truthy(_Runtime.compare(c3, 0.0, '>='))) { _Runtime.callProperty(out, 'push', cast ([(_Runtime.toInt32(n) & 255)] : Array<Dynamic>)); }
+        if ((cast ((cast c2 : Float) >= (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([(_Runtime.toInt32((_Runtime.toInt32(n) >> 8)) & 255)] : Array<Dynamic>)); }
+        if ((cast ((cast c3 : Float) >= (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([(_Runtime.toInt32(n) & 255)] : Array<Dynamic>)); }
         (i = cast ((i + 4.0) : Dynamic));
       }
     }

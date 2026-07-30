@@ -26,7 +26,7 @@ class StarlingParse {
     var m:Null<Dynamic> = cast _Runtime.UNDEFINED;
     result = {  };
     RE = _Runtime.regexp('(\\w+)\\s*=\\s*"([^"]*)"', 'g');
-    while (_Runtime.truthy(!_Runtime.strictEquals((m = cast (_Runtime.callProperty(RE, 'exec', cast ([attrs] : Array<Dynamic>)) : Dynamic)), null))) {
+    while ((cast !_Runtime.strictEquals((m = cast (_Runtime.callProperty(RE, 'exec', cast ([attrs] : Array<Dynamic>)) : Dynamic)), null) : Bool)) {
       _Runtime.setIndex(result, _Runtime.getIndex(m, 1.0), _Runtime.getIndex(m, 2.0));
     }
     return cast result;
@@ -47,17 +47,17 @@ class StarlingParse {
     imagePath = _Runtime.coalesce(_Runtime.getIndex(atlasAttrs, 'imagePath'), function():Dynamic return cast '');
     subTextures = cast ([] : Array<Dynamic>);
     stRE = _Runtime.regexp('<SubTexture([^/]*)\\/?>', 'g');
-    while (_Runtime.truthy(!_Runtime.strictEquals((m = cast (_Runtime.callProperty(stRE, 'exec', cast ([xml] : Array<Dynamic>)) : Dynamic)), null))) {
+    while ((cast !_Runtime.strictEquals((m = cast (_Runtime.callProperty(stRE, 'exec', cast ([xml] : Array<Dynamic>)) : Dynamic)), null) : Bool)) {
       var a:Dynamic = _Runtime.callValue(StarlingParse.parseAttrs__starlingParse, cast ([_Runtime.getIndex(m, 1.0)] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.getIndex(a, 'name')))) { continue; }
+      if ((cast !_Runtime.truthy(_Runtime.getIndex(a, 'name')) : Bool)) { continue; }
       var st:StarlingSubTexture = { height: _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'height'), function():Dynamic return cast '0')] : Array<Dynamic>)), name: _Runtime.getIndex(a, 'name'), width: _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'width'), function():Dynamic return cast '0')] : Array<Dynamic>)), x: _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'x'), function():Dynamic return cast '0')] : Array<Dynamic>)), y: _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'y'), function():Dynamic return cast '0')] : Array<Dynamic>)) };
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(a, 'frameX'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(st, 'frameX', _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'frameX')] : Array<Dynamic>))); }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(a, 'frameY'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(st, 'frameY', _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'frameY')] : Array<Dynamic>))); }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(a, 'frameWidth'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(st, 'frameWidth', _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'frameWidth')] : Array<Dynamic>))); }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(a, 'frameHeight'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(st, 'frameHeight', _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'frameHeight')] : Array<Dynamic>))); }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(a, 'pivotX'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(st, 'pivotX', _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'pivotX')] : Array<Dynamic>))); }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(a, 'pivotY'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(st, 'pivotY', _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'pivotY')] : Array<Dynamic>))); }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(a, 'rotated'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(st, 'rotated', _Runtime.strictEquals(_Runtime.getIndex(a, 'rotated'), 'true')); }
+      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameX'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(st, 'frameX', _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'frameX')] : Array<Dynamic>))); }
+      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameY'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(st, 'frameY', _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'frameY')] : Array<Dynamic>))); }
+      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameWidth'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(st, 'frameWidth', _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'frameWidth')] : Array<Dynamic>))); }
+      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameHeight'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(st, 'frameHeight', _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'frameHeight')] : Array<Dynamic>))); }
+      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'pivotX'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(st, 'pivotX', _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'pivotX')] : Array<Dynamic>))); }
+      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'pivotY'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(st, 'pivotY', _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'pivotY')] : Array<Dynamic>))); }
+      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'rotated'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(st, 'rotated', _Runtime.strictEquals(_Runtime.getIndex(a, 'rotated'), 'true')); }
       _Runtime.callProperty(subTextures, 'push', cast ([st] : Array<Dynamic>));
     }
     return cast { imagePath: imagePath, subTextures: subTextures };
@@ -69,7 +69,7 @@ class StarlingParse {
     var sourceHeight:Dynamic = cast _Runtime.UNDEFINED;
     sourceWidth = _Runtime.coalesce(_Runtime.field(region, 'originalWidth'), function():Dynamic return cast _Runtime.field(region, 'width'));
     sourceHeight = _Runtime.coalesce(_Runtime.field(region, 'originalHeight'), function():Dynamic return cast _Runtime.field(region, 'height'));
-    return cast _Runtime.callValue(createSpritesheetFrameData, cast ([{ height: _Runtime.field(region, 'height'), name: _Runtime.coalesce(_Runtime.field(region, 'name'), function():Dynamic return cast ''), offsetX: _Runtime.field(region, 'sourceX'), offsetY: _Runtime.field(region, 'sourceY'), pivotX: _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(region, 'pivotX'), null), function():Dynamic return cast _Runtime.compare(sourceWidth, 0.0, '>')), function():Dynamic return cast (_Runtime.field(region, 'pivotX') / sourceWidth), function():Dynamic return cast null), pivotY: _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(region, 'pivotY'), null), function():Dynamic return cast _Runtime.compare(sourceHeight, 0.0, '>')), function():Dynamic return cast (_Runtime.field(region, 'pivotY') / sourceHeight), function():Dynamic return cast null), rotated: _Runtime.field(region, 'rotated'), sourceHeight: sourceHeight, sourceWidth: sourceWidth, width: _Runtime.field(region, 'width'), x: _Runtime.field(region, 'x'), y: _Runtime.field(region, 'y') }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createSpritesheetFrameData, cast ([{ height: _Runtime.field(region, 'height'), name: _Runtime.coalesce(_Runtime.field(region, 'name'), function():Dynamic return cast ''), offsetX: _Runtime.field(region, 'sourceX'), offsetY: _Runtime.field(region, 'sourceY'), pivotX: ((cast ((cast !_Runtime.strictEquals(_Runtime.field(region, 'pivotX'), null) : Bool) && (cast ((cast sourceWidth : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (_Runtime.field(region, 'pivotX') / sourceWidth) : Dynamic) : (cast null : Dynamic)), pivotY: ((cast ((cast !_Runtime.strictEquals(_Runtime.field(region, 'pivotY'), null) : Bool) && (cast ((cast sourceHeight : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (_Runtime.field(region, 'pivotY') / sourceHeight) : Dynamic) : (cast null : Dynamic)), rotated: _Runtime.field(region, 'rotated'), sourceHeight: sourceHeight, sourceWidth: sourceWidth, width: _Runtime.field(region, 'width'), x: _Runtime.field(region, 'x'), y: _Runtime.field(region, 'y') }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -80,7 +80,7 @@ class StarlingParse {
     for (name in _Runtime.iterable(frameNames)) {
       var noExt:Dynamic = _Runtime.replace(name, _Runtime.regexp('\\.\\w+$$', ''), '', false);
       var match:Dynamic = _Runtime.match(noExt, _Runtime.regexp('^(.*?)_?(\\d+)$$', ''));
-      if (_Runtime.truthy(!_Runtime.truthy(match))) { continue; }
+      if ((cast !_Runtime.truthy(match) : Bool)) { continue; }
       var __destructure0:Dynamic = match;
       var base:Dynamic = _Runtime.getIndex(__destructure0, 1.0);
       var numStr:Dynamic = _Runtime.getIndex(__destructure0, 2.0);
@@ -92,7 +92,7 @@ class StarlingParse {
     for (__iteration1 in _Runtime.iterable(groups)) {
       var base:Dynamic = _Runtime.getIndex(__iteration1, 0.0);
       var entries:Dynamic = _Runtime.getIndex(__iteration1, 1.0);
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(entries, 'length'), 2.0, '<'))) { continue; }
+      if ((cast ((cast _Runtime.field(entries, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
       _Runtime.sortAndReturn(entries, function(a:Dynamic, b:Dynamic) return (_Runtime.field(a, 'index') - _Runtime.field(b, 'index')));
       _Runtime.callProperty(animations, 'push', cast ([_Runtime.callValue(createSpritesheetAnimationData, cast ([{ frameDuration: frameDuration, frameNames: _Runtime.callProperty(entries, 'map', cast ([function(e:Dynamic) return _Runtime.field(e, 'name')] : Array<Dynamic>)), loop: true, name: base }] : Array<Dynamic>))] : Array<Dynamic>));
     }

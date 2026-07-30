@@ -38,9 +38,9 @@ class IridescencePbrWgpuMeshMaterialRenderer {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     stateRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     pass = _Runtime.field(stateRuntime, 'renderPass');
-    if (_Runtime.truthy(_Runtime.strictEquals(pass, null))) { return; }
+    if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     iridescence = (cast material : Null<IridescencePbrMaterial>);
-    standard = _Runtime.select(!_Runtime.strictEquals(iridescence, null), function():Dynamic return cast _Runtime.field(iridescence, 'standard'), function():Dynamic return cast null);
+    standard = ((cast !_Runtime.strictEquals(iridescence, null) : Bool) ? (cast _Runtime.field(iridescence, 'standard') : Dynamic) : (cast null : Dynamic));
     key = _Runtime.callValue(buildWgpuPbrStandardDefineKey, cast ([standard, iridescence] : Array<Dynamic>));
     _Runtime.setField(key, 'iridescenceEnabled', true);
     format = _Runtime.coalesce(_Runtime.field(stateRuntime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
@@ -48,9 +48,9 @@ class IridescencePbrWgpuMeshMaterialRenderer {
     _Runtime.callValue(writeWgpuFrameUniform, cast ([state, camera, lights] : Array<Dynamic>));
     binding = _Runtime.callValue(ensureWgpuPbrMaterialBindGroup, cast ([state, pipeline, _Runtime.coalesce(iridescence, function():Dynamic return cast IridescencePbrWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__iridescencePbrWgpuMeshMaterialRenderer), standard] : Array<Dynamic>));
     out = _Runtime.callValue(getWgpuPbrMaterialScratch, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(writeWgpuPbrStandardBlock, cast ([out, standard, _Runtime.select(!_Runtime.strictEquals(iridescence, null), function():Dynamic return cast _Runtime.field(iridescence, 'alphaCutoff'), function():Dynamic return cast 0.5)] : Array<Dynamic>));
+    _Runtime.callValue(writeWgpuPbrStandardBlock, cast ([out, standard, ((cast !_Runtime.strictEquals(iridescence, null) : Bool) ? (cast _Runtime.field(iridescence, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic))] : Array<Dynamic>));
     _Runtime.fill(out, 0.0, 16.0, null, 2);
-    if (_Runtime.truthy(!_Runtime.strictEquals(iridescence, null))) {
+    if ((cast !_Runtime.strictEquals(iridescence, null) : Bool)) {
       _Runtime.setIndex(out, 28.0, _Runtime.field(iridescence, 'iridescence'));
       _Runtime.setIndex(out, 29.0, _Runtime.field(iridescence, 'iridescenceIor'));
       _Runtime.setIndex(out, 30.0, ((_Runtime.field(iridescence, 'iridescenceThicknessMin') + _Runtime.field(iridescence, 'iridescenceThicknessMax')) * 0.5));

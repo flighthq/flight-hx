@@ -29,9 +29,9 @@ class GlConvolutionEffect {
     matrix = _Runtime.field(__destructure0, 'matrix');
     matrixX = _Runtime.field(__destructure0, 'matrixX');
     matrixY = _Runtime.field(__destructure0, 'matrixY');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(matrixX, 0.0, '<='), function():Dynamic return cast _Runtime.compare(matrixY, 0.0, '<=')))) { throw _Runtime.error('Convolution matrix dimensions must be positive'); }
-    if (_Runtime.truthy(_Runtime.compare((matrixX * matrixY), MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE, '>'))) { throw _Runtime.error('Convolution kernel exceeds the WebGL maximum of 7×7 (' + Std.string(matrixX) + '×' + Std.string(matrixY) + ' given)'); }
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(matrix, 'length'), (matrixX * matrixY), '<'))) { throw _Runtime.error('Convolution matrix does not match its declared dimensions'); }
+    if ((cast ((cast ((cast matrixX : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast matrixY : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { throw _Runtime.error('Convolution matrix dimensions must be positive'); }
+    if ((cast ((cast (matrixX * matrixY) : Float) > (cast MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE : Float)) : Bool)) { throw _Runtime.error('Convolution kernel exceeds the WebGL maximum of 7×7 (' + Std.string(matrixX) + '×' + Std.string(matrixY) + ' given)'); }
+    if ((cast ((cast _Runtime.field(matrix, 'length') : Float) < (cast (matrixX * matrixY) : Float)) : Bool)) { throw _Runtime.error('Convolution matrix does not match its declared dimensions'); }
     bias = _Runtime.coalesce(_Runtime.field(effect, 'bias'), function():Dynamic return cast 0.0);
     clampEdge = _Runtime.coalesce(_Runtime.field(effect, 'clamp'), function():Dynamic return cast true);
     preserveAlpha = _Runtime.coalesce(_Runtime.field(effect, 'preserveAlpha'), function():Dynamic return cast true);
@@ -40,7 +40,7 @@ class GlConvolutionEffect {
     matrixData = new flighthq._internal._Float32Array(MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, (matrixX * matrixY), '<'))) {
+      while ((cast ((cast i : Float) < (cast (matrixX * matrixY) : Float)) : Bool)) {
         _Runtime.setIndex(matrixData, i, _Runtime.getIndex(matrix, i));
         i++;
       }
@@ -53,8 +53,8 @@ class GlConvolutionEffect {
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_matrixY'), matrixY);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_divisor'), divisor);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_bias'), bias);
-      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_clamp'), _Runtime.select(clampEdge, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0));
-      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_preserveAlpha'), _Runtime.select(preserveAlpha, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0));
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_clamp'), ((cast clampEdge : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_preserveAlpha'), ((cast preserveAlpha : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
       flighthq._internal.backend.WebGl2Backend.uniform4f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_edgeColor'), ((_Runtime.toInt32((_Runtime.toInt32(edgeColor) >> 16)) & 255) / 255.0), ((_Runtime.toInt32((_Runtime.toInt32(edgeColor) >> 8)) & 255) / 255.0), ((_Runtime.toInt32(edgeColor) & 255) / 255.0), ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(edgeColor), 24)) & 255) / 255.0));
     }] : Array<Dynamic>));
   }
@@ -68,12 +68,12 @@ class GlConvolutionEffect {
     sum = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, length, '<'))) {
+      while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
         (sum = cast ((sum + _Runtime.getIndex(matrix, i)) : Dynamic));
         i++;
       }
     }
-    return cast _Runtime.select(_Runtime.strictEquals(sum, 0.0), function():Dynamic return cast 1.0, function():Dynamic return cast sum);
+    return cast ((cast _Runtime.strictEquals(sum, 0.0) : Bool) ? (cast 1.0 : Dynamic) : (cast sum : Dynamic));
     return cast null;
   }
 

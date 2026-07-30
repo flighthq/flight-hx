@@ -34,18 +34,18 @@ class DrawWgpuScene {
     boundRenderer = null;
     {
       var m:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(m, _Runtime.field(list, 'meshCount'), '<'))) {
+      while ((cast ((cast m : Float) < (cast _Runtime.field(list, 'meshCount') : Float)) : Bool)) {
         var mesh:Dynamic = _Runtime.getIndex(_Runtime.field(list, 'visibleMeshes'), m);
         var subsets:Dynamic = _Runtime.field(_Runtime.field(mesh, 'geometry'), 'subsets');
         var worldMatrix:Dynamic = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>)) : Matrix4);
         _Runtime.callValue(setMatrix3NormalFromMatrix4, cast ([DrawWgpuScene.scratchNormalMatrix__drawWgpuScene, worldMatrix] : Array<Dynamic>));
         {
           var s:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(s, _Runtime.field(subsets, 'length'), '<'))) {
+          while ((cast ((cast s : Float) < (cast _Runtime.field(subsets, 'length') : Float)) : Bool)) {
             var material:Dynamic = _Runtime.callValue(DrawWgpuScene.resolveSubsetMaterial__drawWgpuScene, cast ([mesh, s] : Array<Dynamic>));
             var renderer:Dynamic = _Runtime.callValue(resolveWgpuMeshMaterialRenderer, cast ([state, material] : Array<Dynamic>));
-            if (_Runtime.truthy(_Runtime.strictEquals(renderer, null))) { s++; continue; }
-            if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(renderer, boundRenderer), function():Dynamic return cast !_Runtime.strictEquals(material, boundMaterial)))) {
+            if ((cast _Runtime.strictEquals(renderer, null) : Bool)) { s++; continue; }
+            if ((cast ((cast !_Runtime.strictEquals(renderer, boundRenderer) : Bool) || (cast !_Runtime.strictEquals(material, boundMaterial) : Bool)) : Bool)) {
               _Runtime.callProperty(renderer, 'bind', cast ([state, material, lightBlock, camera] : Array<Dynamic>));
               (boundRenderer = cast (renderer : Dynamic));
               (boundMaterial = cast (material : Dynamic));
@@ -67,7 +67,7 @@ class DrawWgpuScene {
   public static function resolveSubsetMaterial__drawWgpuScene(mesh:Mesh, subsetIndex:Float):Null<Material> {
     var materials:Dynamic = cast _Runtime.UNDEFINED;
     materials = _Runtime.field(mesh, 'materials');
-    return cast _Runtime.select(_Runtime.compare(subsetIndex, _Runtime.field(materials, 'length'), '<'), function():Dynamic return cast _Runtime.getIndex(materials, subsetIndex), function():Dynamic return cast null);
+    return cast ((cast ((cast subsetIndex : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool) ? (cast _Runtime.getIndex(materials, subsetIndex) : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 

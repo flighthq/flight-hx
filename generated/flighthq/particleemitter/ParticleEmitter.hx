@@ -35,7 +35,7 @@ class ParticleEmitter {
   public static function copyLocalBoundsRectangle__particleEmitter(out:Rectangle, source:Node<Dynamic>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([(cast source : DisplayObject)] : Array<Dynamic>)) : ParticleEmitterRuntime);
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'localBoundsRectangle'), null))) { _Runtime.callValue(copyRectangle, cast ([out, _Runtime.field(runtime, 'localBoundsRectangle')] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'localBoundsRectangle'), null) : Bool)) { _Runtime.callValue(copyRectangle, cast ([out, _Runtime.field(runtime, 'localBoundsRectangle')] : Array<Dynamic>)); }
   }
 
   public static function appendParticleEmitterParticle(target:flighthq.types.ParticleEmitter, id:Float, x:Float, y:Float, rotation:Float, scale:Float):Float {
@@ -46,7 +46,7 @@ class ParticleEmitter {
     var vt:Dynamic = cast _Runtime.UNDEFINED;
     index = _Runtime.field(_Runtime.field(target, 'data'), 'particleCount');
     needed = (index + 1.0);
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.callValue(getParticleEmitterCapacity, cast ([target] : Array<Dynamic>)), needed, '<'))) {
+    if ((cast ((cast _Runtime.callValue(getParticleEmitterCapacity, cast ([target] : Array<Dynamic>)) : Float) < (cast needed : Float)) : Bool)) {
       var newCapacity:Dynamic = HxMath.max(needed, _Runtime.orValue((_Runtime.field(_Runtime.field(target, 'data'), 'particleCount') * 2.0), function():Dynamic return cast 8.0));
       _Runtime.callValue(reserveParticleEmitter, cast ([target, newCapacity] : Array<Dynamic>));
     }
@@ -85,13 +85,13 @@ class ParticleEmitter {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var write:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(target, 'data');
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'particleCount'), 0.0))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(data, 'particleCount'), 0.0) : Bool)) { return; }
     write = 0.0;
     {
       var read:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(read, _Runtime.field(data, 'particleCount'), '<'))) {
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(data, 'ids'), read), PARTICLE_EMITTER_DELETED_ID))) { read++; continue; }
-        if (_Runtime.truthy(!_Runtime.strictEquals(write, read))) {
+      while ((cast ((cast read : Float) < (cast _Runtime.field(data, 'particleCount') : Float)) : Bool)) {
+        if ((cast _Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(data, 'ids'), read), PARTICLE_EMITTER_DELETED_ID) : Bool)) { read++; continue; }
+        if ((cast !_Runtime.strictEquals(write, read) : Bool)) {
           _Runtime.setIndex(_Runtime.field(data, 'ids'), write, _Runtime.getIndex(_Runtime.field(data, 'ids'), read));
           var tt:Dynamic = (write * ParticleEmitter.PARTICLE_TRANSFORM_STRIDE__particleEmitter);
           var tts:Dynamic = (read * ParticleEmitter.PARTICLE_TRANSFORM_STRIDE__particleEmitter);
@@ -135,7 +135,7 @@ class ParticleEmitter {
     ids = _Runtime.field(__destructure0, 'ids');
     particleCount = _Runtime.field(__destructure0, 'particleCount');
     transforms = _Runtime.field(__destructure0, 'transforms');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(atlas, null), function():Dynamic return cast _Runtime.strictEquals(particleCount, 0.0)))) {
+    if ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) : Bool)) {
       _Runtime.setField(out, 'x', 0.0);
       _Runtime.setField(out, 'y', 0.0);
       _Runtime.setField(out, 'width', 0.0);
@@ -150,11 +150,11 @@ class ParticleEmitter {
     maxY = -HxMath.POSITIVE_INFINITY;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, particleCount, '<'))) {
+      while ((cast ((cast i : Float) < (cast particleCount : Float)) : Bool)) {
         var id:Dynamic = _Runtime.getIndex(ids, i);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(id, 0.0, '<'), function():Dynamic return cast _Runtime.compare(id, numRegions, '>=')))) { i++; continue; }
+        if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
         var region:Dynamic = _Runtime.getIndex(regions, id);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(region, 'width'), 0.0, '<='), function():Dynamic return cast _Runtime.compare(_Runtime.field(region, 'height'), 0.0, '<=')))) { i++; continue; }
+        if ((cast ((cast ((cast _Runtime.field(region, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(region, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
         var tt:Dynamic = (i * ParticleEmitter.PARTICLE_TRANSFORM_STRIDE__particleEmitter);
         var px:Dynamic = _Runtime.getIndex(transforms, tt);
         var py:Dynamic = _Runtime.getIndex(transforms, (tt + 1.0));
@@ -176,14 +176,14 @@ class ParticleEmitter {
         var qMinY:Dynamic = HxMath.min(HxMath.min(HxMath.min(y0, y1), y2), y3);
         var qMaxX:Dynamic = HxMath.max(HxMath.max(HxMath.max(x0, x1), x2), x3);
         var qMaxY:Dynamic = HxMath.max(HxMath.max(HxMath.max(y0, y1), y2), y3);
-        if (_Runtime.truthy(_Runtime.compare(qMinX, minX, '<'))) { (minX = cast (qMinX : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(qMinY, minY, '<'))) { (minY = cast (qMinY : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(qMaxX, maxX, '>'))) { (maxX = cast (qMaxX : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(qMaxY, maxY, '>'))) { (maxY = cast (qMaxY : Dynamic)); }
+        if ((cast ((cast qMinX : Float) < (cast minX : Float)) : Bool)) { (minX = cast (qMinX : Dynamic)); }
+        if ((cast ((cast qMinY : Float) < (cast minY : Float)) : Bool)) { (minY = cast (qMinY : Dynamic)); }
+        if ((cast ((cast qMaxX : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (qMaxX : Dynamic)); }
+        if ((cast ((cast qMaxY : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast (qMaxY : Dynamic)); }
         i++;
       }
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(minX, HxMath.POSITIVE_INFINITY))) {
+    if ((cast _Runtime.strictEquals(minX, HxMath.POSITIVE_INFINITY) : Bool)) {
       _Runtime.setField(out, 'x', 0.0);
       _Runtime.setField(out, 'y', 0.0);
       _Runtime.setField(out, 'width', 0.0);
@@ -224,20 +224,20 @@ class ParticleEmitter {
   }
 
   public static function getParticleEmitterParticleAlpha(source:flighthq.types.ParticleEmitter, index:Float):Float {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(source, 'data'), 'particleCount'), '>=')))) { return cast -1.0; }
+    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast _Runtime.field(_Runtime.field(source, 'data'), 'particleCount') : Float)) : Bool)) : Bool)) { return cast -1.0; }
     return cast _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'data'), 'alphas'), index);
     return cast null;
   }
 
   public static function getParticleEmitterParticleId(source:flighthq.types.ParticleEmitter, index:Float):Float {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(source, 'data'), 'particleCount'), '>=')))) { return cast -1.0; }
+    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast _Runtime.field(_Runtime.field(source, 'data'), 'particleCount') : Float)) : Bool)) : Bool)) { return cast -1.0; }
     return cast _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'data'), 'ids'), index);
     return cast null;
   }
 
   public static function getParticleEmitterParticleVelocity(out:Vector2Like, source:flighthq.types.ParticleEmitter, index:Float):Bool {
     var vt:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(source, 'data'), 'particleCount'), '>=')))) { return cast false; }
+    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast _Runtime.field(_Runtime.field(source, 'data'), 'particleCount') : Float)) : Bool)) : Bool)) { return cast false; }
     vt = (index * ParticleEmitter.PARTICLE_VELOCITY_STRIDE__particleEmitter);
     (out.x = cast (_Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'data'), 'velocities'), vt) : Dynamic));
     (out.y = cast (_Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'data'), 'velocities'), (vt + 1.0)) : Dynamic));
@@ -255,8 +255,8 @@ class ParticleEmitter {
     var last:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(target, 'data');
     last = (_Runtime.field(data, 'particleCount') - 1.0);
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, last, '>')))) { return; }
-    if (_Runtime.truthy(_Runtime.compare(index, last, '<'))) {
+    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) > (cast last : Float)) : Bool)) : Bool)) { return; }
+    if ((cast ((cast index : Float) < (cast last : Float)) : Bool)) {
       _Runtime.setIndex(_Runtime.field(data, 'ids'), index, _Runtime.getIndex(_Runtime.field(data, 'ids'), last));
       var tt:Dynamic = (index * ParticleEmitter.PARTICLE_TRANSFORM_STRIDE__particleEmitter);
       var tts:Dynamic = (last * ParticleEmitter.PARTICLE_TRANSFORM_STRIDE__particleEmitter);
@@ -281,7 +281,7 @@ class ParticleEmitter {
 
   public static function reserveParticleEmitter(target:flighthq.types.ParticleEmitter, capacity:Float):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.callValue(getParticleEmitterCapacity, cast ([target] : Array<Dynamic>)), capacity, '>='))) { return; }
+    if ((cast ((cast _Runtime.callValue(getParticleEmitterCapacity, cast ([target] : Array<Dynamic>)) : Float) >= (cast capacity : Float)) : Bool)) { return; }
     data = _Runtime.field(target, 'data');
     _Runtime.setField(data, 'alphas', _Runtime.callValue(reserveFloat32Array, cast ([_Runtime.field(data, 'alphas'), capacity] : Array<Dynamic>)));
     _Runtime.setField(data, 'colors', _Runtime.callValue(reserveFloat32Array, cast ([_Runtime.field(data, 'colors'), (capacity * 3.0)] : Array<Dynamic>)));
@@ -294,7 +294,7 @@ class ParticleEmitter {
   public static function setParticleEmitterLocalBoundsRectangle(target:flighthq.types.ParticleEmitter, rect:Rectangle):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([target] : Array<Dynamic>)) : ParticleEmitterRuntime);
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'localBoundsRectangle'), null))) { _Runtime.setField(runtime, 'localBoundsRectangle', _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>))); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'localBoundsRectangle'), null) : Bool)) { _Runtime.setField(runtime, 'localBoundsRectangle', _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>))); }
     _Runtime.callValue(copyRectangle, cast ([_Runtime.field(runtime, 'localBoundsRectangle'), rect] : Array<Dynamic>));
     _Runtime.callValue(invalidateNodeLocalBounds, cast ([target] : Array<Dynamic>));
   }
@@ -303,7 +303,7 @@ class ParticleEmitter {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var tt:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(target, 'data');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(data, 'particleCount'), '>=')))) { return; }
+    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast _Runtime.field(data, 'particleCount') : Float)) : Bool)) : Bool)) { return; }
     _Runtime.setIndex(_Runtime.field(data, 'ids'), index, id);
     tt = (index * ParticleEmitter.PARTICLE_TRANSFORM_STRIDE__particleEmitter);
     _Runtime.setIndex(_Runtime.field(data, 'transforms'), tt, x);
@@ -313,13 +313,13 @@ class ParticleEmitter {
   }
 
   public static function setParticleEmitterParticleAlpha(target:flighthq.types.ParticleEmitter, index:Float, alpha:Float):Void {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(target, 'data'), 'particleCount'), '>=')))) { return; }
+    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast _Runtime.field(_Runtime.field(target, 'data'), 'particleCount') : Float)) : Bool)) : Bool)) { return; }
     _Runtime.setIndex(_Runtime.field(_Runtime.field(target, 'data'), 'alphas'), index, alpha);
   }
 
   public static function setParticleEmitterParticleColor(target:flighthq.types.ParticleEmitter, index:Float, r:Float, g:Float, b:Float):Void {
     var ct:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(target, 'data'), 'particleCount'), '>=')))) { return; }
+    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast _Runtime.field(_Runtime.field(target, 'data'), 'particleCount') : Float)) : Bool)) : Bool)) { return; }
     ct = (index * ParticleEmitter.PARTICLE_COLOR_STRIDE__particleEmitter);
     _Runtime.setIndex(_Runtime.field(_Runtime.field(target, 'data'), 'colors'), ct, r);
     _Runtime.setIndex(_Runtime.field(_Runtime.field(target, 'data'), 'colors'), (ct + 1.0), g);
@@ -328,7 +328,7 @@ class ParticleEmitter {
 
   public static function setParticleEmitterParticleVelocity(target:flighthq.types.ParticleEmitter, index:Float, vx:Float, vy:Float):Void {
     var vt:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(target, 'data'), 'particleCount'), '>=')))) { return; }
+    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast _Runtime.field(_Runtime.field(target, 'data'), 'particleCount') : Float)) : Bool)) : Bool)) { return; }
     vt = (index * ParticleEmitter.PARTICLE_VELOCITY_STRIDE__particleEmitter);
     _Runtime.setIndex(_Runtime.field(_Runtime.field(target, 'data'), 'velocities'), vt, vx);
     _Runtime.setIndex(_Runtime.field(_Runtime.field(target, 'data'), 'velocities'), (vt + 1.0), vy);

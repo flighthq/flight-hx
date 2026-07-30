@@ -15,11 +15,11 @@ class PointContainment {
         {
           var dx:Dynamic = (x - _Runtime.field(shape, 'x'));
           var dy:Dynamic = (y - _Runtime.field(shape, 'y'));
-          return cast _Runtime.compare(((dx * dx) + (dy * dy)), (_Runtime.field(shape, 'radius') * _Runtime.field(shape, 'radius')), '<=');
+          return cast ((cast ((dx * dx) + (dy * dy)) : Float) <= (cast (_Runtime.field(shape, 'radius') * _Runtime.field(shape, 'radius')) : Float));
         }
       }
       else if (__switchValue == 'aabb') {
-        return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(x, _Runtime.field(shape, 'minX'), '>='), function():Dynamic return cast _Runtime.compare(x, _Runtime.field(shape, 'maxX'), '<=')), function():Dynamic return cast _Runtime.compare(y, _Runtime.field(shape, 'minY'), '>=')), function():Dynamic return cast _Runtime.compare(y, _Runtime.field(shape, 'maxY'), '<='));
+        return cast ((cast ((cast ((cast ((cast x : Float) >= (cast _Runtime.field(shape, 'minX') : Float)) : Bool) && (cast ((cast x : Float) <= (cast _Runtime.field(shape, 'maxX') : Float)) : Bool)) : Bool) && (cast ((cast y : Float) >= (cast _Runtime.field(shape, 'minY') : Float)) : Bool)) : Bool) && (cast ((cast y : Float) <= (cast _Runtime.field(shape, 'maxY') : Float)) : Bool));
       }
       else if (__switchValue == 'obb') {
         {
@@ -29,7 +29,7 @@ class PointContainment {
           var dy:Dynamic = (y - _Runtime.field(shape, 'y'));
           var localX:Dynamic = ((dx * cos) + (dy * sin));
           var localY:Dynamic = ((-dx * sin) + (dy * cos));
-          return cast _Runtime.andValue(_Runtime.compare(HxMath.abs(localX), _Runtime.field(shape, 'halfW'), '<='), function():Dynamic return cast _Runtime.compare(HxMath.abs(localY), _Runtime.field(shape, 'halfH'), '<='));
+          return cast ((cast ((cast HxMath.abs(localX) : Float) <= (cast _Runtime.field(shape, 'halfW') : Float)) : Bool) && (cast ((cast HxMath.abs(localY) : Float) <= (cast _Runtime.field(shape, 'halfH') : Float)) : Bool));
         }
       }
       else if (__switchValue == 'polygon') {
@@ -41,22 +41,22 @@ class PointContainment {
           var dy:Dynamic = (_Runtime.field(shape, 'y1') - _Runtime.field(shape, 'y0'));
           var lengthSquared:Dynamic = ((dx * dx) + (dy * dy));
           var t:Dynamic = 0.0;
-          if (_Runtime.truthy(_Runtime.compare(lengthSquared, PointContainment.EPS__pointContainment, '>'))) {
+          if ((cast ((cast lengthSquared : Float) > (cast PointContainment.EPS__pointContainment : Float)) : Bool)) {
             (t = cast (((((x - _Runtime.field(shape, 'x0')) * dx) + ((y - _Runtime.field(shape, 'y0')) * dy)) / lengthSquared) : Dynamic));
-            (t = cast (_Runtime.select(_Runtime.compare(t, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(t, 1.0, '>'), function():Dynamic return cast 1.0, function():Dynamic return cast t)) : Dynamic));
+            (t = cast (((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast t : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic)) : Dynamic));
           }
           var closestX:Dynamic = (_Runtime.field(shape, 'x0') + (t * dx));
           var closestY:Dynamic = (_Runtime.field(shape, 'y0') + (t * dy));
           var ddx:Dynamic = (x - closestX);
           var ddy:Dynamic = (y - closestY);
-          return cast _Runtime.compare(((ddx * ddx) + (ddy * ddy)), PointContainment.EPS__pointContainment, '<=');
+          return cast ((cast ((ddx * ddx) + (ddy * ddy)) : Float) <= (cast PointContainment.EPS__pointContainment : Float));
         }
       }
       else if (__switchValue == 'point') {
         {
           var dx:Dynamic = (x - _Runtime.field(shape, 'x'));
           var dy:Dynamic = (y - _Runtime.field(shape, 'y'));
-          return cast _Runtime.compare(((dx * dx) + (dy * dy)), PointContainment.EPS__pointContainment, '<=');
+          return cast ((cast ((dx * dx) + (dy * dy)) : Float) <= (cast PointContainment.EPS__pointContainment : Float));
         }
       }
       else  {
@@ -73,15 +73,15 @@ class PointContainment {
     negative = false;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, pn, '<'))) {
+      while ((cast ((cast i : Float) < (cast pn : Float)) : Bool)) {
         var j:Dynamic = _Runtime.fmod((i + 1.0), pn);
         var x0:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(i) << 1));
         var y0:Dynamic = _Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0));
         var x1:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(j) << 1));
         var y1:Dynamic = _Runtime.getIndex(px, ((_Runtime.toInt32(j) << 1) + 1.0));
         var cross:Dynamic = (((x1 - x0) * (y - y0)) - ((y1 - y0) * (x - x0)));
-        if (_Runtime.truthy(_Runtime.compare(cross, PointContainment.EPS__pointContainment, '>'))) { (positive = cast (true : Dynamic)); } else { if (_Runtime.truthy(_Runtime.compare(cross, -PointContainment.EPS__pointContainment, '<'))) { (negative = cast (true : Dynamic)); } }
-        if (_Runtime.truthy(_Runtime.andValue(positive, function():Dynamic return cast negative))) { return cast false; }
+        if ((cast ((cast cross : Float) > (cast PointContainment.EPS__pointContainment : Float)) : Bool)) { (positive = cast (true : Dynamic)); } else { if ((cast ((cast cross : Float) < (cast -PointContainment.EPS__pointContainment : Float)) : Bool)) { (negative = cast (true : Dynamic)); } }
+        if ((cast ((cast positive : Bool) && (cast negative : Bool)) : Bool)) { return cast false; }
         i++;
       }
     }

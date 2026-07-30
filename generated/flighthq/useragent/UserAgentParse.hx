@@ -21,34 +21,34 @@ import flighthq.types._internal._DeviceFormFactorValues.DeviceFormFactorWatch;
 
 class UserAgentParse {
   public static function parseUserAgentFormFactor(ua:String, maxTouchPoints:Float):DeviceFormFactor {
-    if (_Runtime.truthy(_Runtime.callProperty(_Runtime.regexp('android auto|car browser|automotive', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) { return cast DeviceFormFactorCar; }
-    if (_Runtime.truthy(_Runtime.callProperty(_Runtime.regexp('smart[-_]?tv|smarttv|googletv|appletv|hbbtv|netcast|webos.*tv|tizen.*tv|tv safari', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) {
+    if ((cast _Runtime.callProperty(_Runtime.regexp('android auto|car browser|automotive', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool)) { return cast DeviceFormFactorCar; }
+    if ((cast _Runtime.callProperty(_Runtime.regexp('smart[-_]?tv|smarttv|googletv|appletv|hbbtv|netcast|webos.*tv|tizen.*tv|tv safari', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool)) {
       return cast DeviceFormFactorTV;
     }
-    if (_Runtime.truthy(_Runtime.callProperty(_Runtime.regexp('watch\\s*os|watch[_ ]?kit|wearable', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) { return cast DeviceFormFactorWatch; }
-    if (_Runtime.truthy(_Runtime.callProperty(_Runtime.regexp('ipad', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) { return cast DeviceFormFactorTablet; }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.callProperty(_Runtime.regexp('android', 'i'), 'test', cast ([ua] : Array<Dynamic>)), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.regexp('mobile', 'i'), 'test', cast ([ua] : Array<Dynamic>)))))) { return cast DeviceFormFactorTablet; }
-    if (_Runtime.truthy(_Runtime.callProperty(_Runtime.regexp('tablet\\s*pc|silk|kindle fire', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) { return cast DeviceFormFactorTablet; }
-    if (_Runtime.truthy(_Runtime.callProperty(_Runtime.regexp('iphone|ipod|android.*mobile|windows phone|blackberry|bb\\d+|mobile safari', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) {
+    if ((cast _Runtime.callProperty(_Runtime.regexp('watch\\s*os|watch[_ ]?kit|wearable', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool)) { return cast DeviceFormFactorWatch; }
+    if ((cast _Runtime.callProperty(_Runtime.regexp('ipad', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool)) { return cast DeviceFormFactorTablet; }
+    if ((cast ((cast _Runtime.callProperty(_Runtime.regexp('android', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool) && (cast !(cast _Runtime.callProperty(_Runtime.regexp('mobile', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast DeviceFormFactorTablet; }
+    if ((cast _Runtime.callProperty(_Runtime.regexp('tablet\\s*pc|silk|kindle fire', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool)) { return cast DeviceFormFactorTablet; }
+    if ((cast _Runtime.callProperty(_Runtime.regexp('iphone|ipod|android.*mobile|windows phone|blackberry|bb\\d+|mobile safari', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool)) {
       return cast DeviceFormFactorPhone;
     }
-    if (_Runtime.truthy(_Runtime.callProperty(_Runtime.regexp('win(?:dows)?nt|macintosh|mac os x|linux(?!.*android)|x11', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) { return cast DeviceFormFactorDesktop; }
-    if (_Runtime.truthy(_Runtime.strictEquals(maxTouchPoints, 0.0))) { return cast DeviceFormFactorDesktop; }
+    if ((cast _Runtime.callProperty(_Runtime.regexp('win(?:dows)?nt|macintosh|mac os x|linux(?!.*android)|x11', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool)) { return cast DeviceFormFactorDesktop; }
+    if ((cast _Runtime.strictEquals(maxTouchPoints, 0.0) : Bool)) { return cast DeviceFormFactorDesktop; }
     return cast DeviceFormFactorUnknown;
     return cast null;
   }
 
   public static function parseUserAgentOsName(ua:String):String {
-    if (_Runtime.truthy(_Runtime.callProperty(_Runtime.regexp('android', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) { return cast 'Android'; }
-    if (_Runtime.truthy(_Runtime.callProperty(_Runtime.regexp('ipad', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) { return cast 'iPadOS'; }
-    if (_Runtime.truthy(_Runtime.callProperty(_Runtime.regexp('iphone|ipod', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) { return cast 'iOS'; }
-    if (_Runtime.truthy(_Runtime.callProperty(_Runtime.regexp('cros', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) { return cast 'ChromeOS'; }
-    if (_Runtime.truthy(_Runtime.callProperty(_Runtime.regexp('windows nt|windows phone', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) { return cast 'Windows'; }
-    if (_Runtime.truthy(_Runtime.callProperty(_Runtime.regexp('macintosh|mac os x', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) { return cast 'macOS'; }
-    if (_Runtime.truthy(_Runtime.callProperty(_Runtime.regexp('freebsd', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) { return cast 'FreeBSD'; }
-    if (_Runtime.truthy(_Runtime.callProperty(_Runtime.regexp('openbsd', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) { return cast 'OpenBSD'; }
-    if (_Runtime.truthy(_Runtime.callProperty(_Runtime.regexp('netbsd', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) { return cast 'NetBSD'; }
-    if (_Runtime.truthy(_Runtime.callProperty(_Runtime.regexp('linux', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) { return cast 'Linux'; }
+    if ((cast _Runtime.callProperty(_Runtime.regexp('android', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool)) { return cast 'Android'; }
+    if ((cast _Runtime.callProperty(_Runtime.regexp('ipad', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool)) { return cast 'iPadOS'; }
+    if ((cast _Runtime.callProperty(_Runtime.regexp('iphone|ipod', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool)) { return cast 'iOS'; }
+    if ((cast _Runtime.callProperty(_Runtime.regexp('cros', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool)) { return cast 'ChromeOS'; }
+    if ((cast _Runtime.callProperty(_Runtime.regexp('windows nt|windows phone', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool)) { return cast 'Windows'; }
+    if ((cast _Runtime.callProperty(_Runtime.regexp('macintosh|mac os x', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool)) { return cast 'macOS'; }
+    if ((cast _Runtime.callProperty(_Runtime.regexp('freebsd', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool)) { return cast 'FreeBSD'; }
+    if ((cast _Runtime.callProperty(_Runtime.regexp('openbsd', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool)) { return cast 'OpenBSD'; }
+    if ((cast _Runtime.callProperty(_Runtime.regexp('netbsd', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool)) { return cast 'NetBSD'; }
+    if ((cast _Runtime.callProperty(_Runtime.regexp('linux', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool)) { return cast 'Linux'; }
     return cast '';
     return cast null;
   }

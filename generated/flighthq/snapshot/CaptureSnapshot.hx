@@ -15,14 +15,14 @@ class CaptureSnapshot {
   }
 
   public static function freezeSnapshotDeep__captureSnapshot(value:Dynamic):Void {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(value, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(value), 'object')))) {
+    if ((cast ((cast _Runtime.strictEquals(value, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(value), 'object') : Bool)) : Bool)) {
       return;
     }
     flighthq._internal.DynamicObject.freeze(value);
-    if (_Runtime.truthy(_Runtime.isArray(value))) {
+    if ((cast _Runtime.isArray(value) : Bool)) {
       {
         var index:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(index, _Runtime.field(value, 'length'), '<'))) {
+        while ((cast ((cast index : Float) < (cast _Runtime.field(value, 'length') : Float)) : Bool)) {
           _Runtime.callValue(CaptureSnapshot.freezeSnapshotDeep__captureSnapshot, cast ([_Runtime.getIndex(value, index)] : Array<Dynamic>));
           (index = cast ((index + 1.0) : Dynamic));
         }

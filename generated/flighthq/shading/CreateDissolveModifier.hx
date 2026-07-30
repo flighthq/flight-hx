@@ -16,7 +16,7 @@ class CreateDissolveModifier {
   public static function createDissolveModifier(options:DissolveModifierOptions):DissolveModifier {
     var modifier:DissolveModifier = cast _Runtime.UNDEFINED;
     modifier = { kind: DissolveModifierKind, slot: ModifierSlotValue.Effect, threshold: _Runtime.field(options, 'threshold'), edgeColor: _Runtime.coalesce(_Runtime.field(options, 'edgeColor'), function():Dynamic return cast 4284875007.0), edgeWidth: _Runtime.coalesce(_Runtime.field(options, 'edgeWidth'), function():Dynamic return cast 0.05), scale: _Runtime.coalesce(_Runtime.field(options, 'scale'), function():Dynamic return cast 8.0) };
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'map'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(modifier, 'map', _Runtime.field(options, 'map')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'map'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(modifier, 'map', _Runtime.field(options, 'map')); }
     return cast modifier;
     return cast null;
   }

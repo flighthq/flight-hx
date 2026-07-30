@@ -31,24 +31,24 @@ class ReversePath {
     subpaths = cast ([] : Array<Dynamic>);
     current = null;
     ensureCurrent = function() {
-      if (_Runtime.truthy(_Runtime.strictEquals(current, null))) {
+      if ((cast _Runtime.strictEquals(current, null) : Bool)) {
         (current = cast ({ points: cast ([{ x: 0.0, y: 0.0, kind: 'move' }] : Array<Dynamic>), closed: false } : Dynamic));
         _Runtime.callProperty(subpaths, 'push', cast ([current] : Array<Dynamic>));
       }
       return cast current;
     };
     _Runtime.callValue(forEachPathSegment, cast ([path, function(segment:Dynamic) {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(segment, 'kind'), 'moveTo'))) {
+      if ((cast _Runtime.strictEquals(_Runtime.field(segment, 'kind'), 'moveTo') : Bool)) {
         (current = cast ({ points: cast ([{ x: _Runtime.field(segment, 'x'), y: _Runtime.field(segment, 'y'), kind: 'move' }] : Array<Dynamic>), closed: false } : Dynamic));
         _Runtime.callProperty(subpaths, 'push', cast ([current] : Array<Dynamic>));
-      } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(segment, 'kind'), 'lineTo'))) {
+      } else { if ((cast _Runtime.strictEquals(_Runtime.field(segment, 'kind'), 'lineTo') : Bool)) {
         _Runtime.callProperty(_Runtime.field(_Runtime.callValue(ensureCurrent, cast ([] : Array<Dynamic>)), 'points'), 'push', cast ([{ x: _Runtime.field(segment, 'x'), y: _Runtime.field(segment, 'y'), kind: 'line' }] : Array<Dynamic>));
-      } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(segment, 'kind'), 'curveTo'))) {
+      } else { if ((cast _Runtime.strictEquals(_Runtime.field(segment, 'kind'), 'curveTo') : Bool)) {
         _Runtime.callProperty(_Runtime.field(_Runtime.callValue(ensureCurrent, cast ([] : Array<Dynamic>)), 'points'), 'push', cast ([{ x: _Runtime.field(segment, 'x'), y: _Runtime.field(segment, 'y'), kind: 'quad', cx: _Runtime.field(segment, 'controlX'), cy: _Runtime.field(segment, 'controlY') }] : Array<Dynamic>));
-      } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(segment, 'kind'), 'cubicCurveTo'))) {
+      } else { if ((cast _Runtime.strictEquals(_Runtime.field(segment, 'kind'), 'cubicCurveTo') : Bool)) {
         _Runtime.callProperty(_Runtime.field(_Runtime.callValue(ensureCurrent, cast ([] : Array<Dynamic>)), 'points'), 'push', cast ([{ x: _Runtime.field(segment, 'x'), y: _Runtime.field(segment, 'y'), kind: 'cubic', c1x: _Runtime.field(segment, 'control1X'), c1y: _Runtime.field(segment, 'control1Y'), c2x: _Runtime.field(segment, 'control2X'), c2y: _Runtime.field(segment, 'control2Y') }] : Array<Dynamic>));
-      } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(segment, 'kind'), 'close'))) {
-        if (_Runtime.truthy(!_Runtime.strictEquals(current, null))) { _Runtime.setField(current, 'closed', true); }
+      } else { if ((cast _Runtime.strictEquals(_Runtime.field(segment, 'kind'), 'close') : Bool)) {
+        if ((cast !_Runtime.strictEquals(current, null) : Bool)) { _Runtime.setField(current, 'closed', true); }
       } } } } }
     }] : Array<Dynamic>));
     return cast subpaths;
@@ -59,29 +59,29 @@ class ReversePath {
     var pts:Dynamic = cast _Runtime.UNDEFINED;
     var last:Dynamic = cast _Runtime.UNDEFINED;
     pts = _Runtime.field(subpath, 'points');
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(pts, 'length'), 0.0))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(pts, 'length'), 0.0) : Bool)) { return; }
     last = _Runtime.getIndex(pts, (_Runtime.field(pts, 'length') - 1.0));
     _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
     _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.field(last, 'x'), _Runtime.field(last, 'y')] : Array<Dynamic>));
     {
       var i:Dynamic = (_Runtime.field(pts, 'length') - 1.0);
-      while (_Runtime.truthy(_Runtime.compare(i, 1.0, '>='))) {
+      while ((cast ((cast i : Float) >= (cast 1.0 : Float)) : Bool)) {
         var from:Dynamic = _Runtime.getIndex(pts, i);
         var to:Dynamic = _Runtime.getIndex(pts, (i - 1.0));
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(from, 'kind'), 'line'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(from, 'kind'), 'move')))) {
+        if ((cast ((cast _Runtime.strictEquals(_Runtime.field(from, 'kind'), 'line') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(from, 'kind'), 'move') : Bool)) : Bool)) {
           _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.LINE_TO] : Array<Dynamic>));
           _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.field(to, 'x'), _Runtime.field(to, 'y')] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(from, 'kind'), 'quad'))) {
+        } else { if ((cast _Runtime.strictEquals(_Runtime.field(from, 'kind'), 'quad') : Bool)) {
           _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.CURVE_TO] : Array<Dynamic>));
           _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.field(from, 'cx'), _Runtime.field(from, 'cy'), _Runtime.field(to, 'x'), _Runtime.field(to, 'y')] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(from, 'kind'), 'cubic'))) {
+        } else { if ((cast _Runtime.strictEquals(_Runtime.field(from, 'kind'), 'cubic') : Bool)) {
           _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.CUBIC_CURVE_TO] : Array<Dynamic>));
           _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.field(from, 'c2x'), _Runtime.field(from, 'c2y'), _Runtime.field(from, 'c1x'), _Runtime.field(from, 'c1y'), _Runtime.field(to, 'x'), _Runtime.field(to, 'y')] : Array<Dynamic>));
         } } }
         i--;
       }
     }
-    if (_Runtime.truthy(_Runtime.field(subpath, 'closed'))) {
+    if ((cast _Runtime.field(subpath, 'closed') : Bool)) {
       _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.CLOSE] : Array<Dynamic>));
     }
   }

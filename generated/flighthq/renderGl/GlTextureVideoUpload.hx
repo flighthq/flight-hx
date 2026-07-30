@@ -9,9 +9,9 @@ import flighthq.types.VideoTexture;
 class GlTextureVideoUpload {
   public static function uploadGlTextureVideoFrame(gl:Dynamic, videoTexture:VideoTexture, uploadedFrameId:Float):Float {
     var element:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(videoTexture, 'frameId'), uploadedFrameId))) { return cast uploadedFrameId; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(videoTexture, 'frameId'), uploadedFrameId) : Bool)) { return cast uploadedFrameId; }
     element = _Runtime.field(_Runtime.field(videoTexture, 'source'), 'element');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(element, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(element, 'readyState'), 2.0, '<')), function():Dynamic return cast _Runtime.compare(_Runtime.field(element, 'videoWidth'), 0.0, '<=')), function():Dynamic return cast _Runtime.compare(_Runtime.field(element, 'videoHeight'), 0.0, '<=')))) {
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(element, null) : Bool) || (cast ((cast _Runtime.field(element, 'readyState') : Float) < (cast 2.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(element, 'videoWidth') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(element, 'videoHeight') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
       return cast uploadedFrameId;
     }
     _Runtime.callValue(uploadGlTextureElement, cast ([gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, (cast (cast element : Dynamic) : Dynamic)] : Array<Dynamic>));

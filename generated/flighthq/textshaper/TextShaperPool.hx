@@ -8,13 +8,13 @@ import flighthq.types.ShapedRun;
 
 class TextShaperPool {
   public static function acquireShapedRun():ShapedRun {
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(TextShaperPool._pool__textShaperPool, 'length'), 0.0, '>'))) { return cast _Runtime.callProperty(TextShaperPool._pool__textShaperPool, 'pop', cast ([] : Array<Dynamic>)); }
+    if ((cast ((cast _Runtime.field(TextShaperPool._pool__textShaperPool, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { return cast _Runtime.callProperty(TextShaperPool._pool__textShaperPool, 'pop', cast ([] : Array<Dynamic>)); }
     return cast _Runtime.callValue(createShapedRun, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
   public static function releaseShapedRun(run:ShapedRun):Void {
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(TextShaperPool._pool__textShaperPool, 'length'), TextShaperPool._POOL_MAX_SIZE__textShaperPool, '<'))) {
+    if ((cast ((cast _Runtime.field(TextShaperPool._pool__textShaperPool, 'length') : Float) < (cast TextShaperPool._POOL_MAX_SIZE__textShaperPool : Float)) : Bool)) {
       _Runtime.callProperty(TextShaperPool._pool__textShaperPool, 'push', cast ([run] : Array<Dynamic>));
     }
   }

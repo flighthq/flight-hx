@@ -7,7 +7,7 @@ import flighthq.types.EasingFunction;
 
 class EaseCombinators {
   public static function easeClamp(ease:EasingFunction):EasingFunction {
-    return cast function(t:Dynamic) return _Runtime.callValue(ease, cast ([_Runtime.select(_Runtime.compare(t, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(t, 1.0, '>'), function():Dynamic return cast 1.0, function():Dynamic return cast t))] : Array<Dynamic>));
+    return cast function(t:Dynamic) return _Runtime.callValue(ease, cast ([((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast t : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic))] : Array<Dynamic>));
     return cast null;
   }
 
@@ -15,7 +15,7 @@ class EaseCombinators {
     return cast function(t:Dynamic) {
       var v:Dynamic = cast _Runtime.UNDEFINED;
       v = _Runtime.callValue(ease, cast ([t] : Array<Dynamic>));
-      return cast _Runtime.select(_Runtime.compare(v, min, '<'), function():Dynamic return cast min, function():Dynamic return cast _Runtime.select(_Runtime.compare(v, max, '>'), function():Dynamic return cast max, function():Dynamic return cast v));
+      return cast ((cast ((cast v : Float) < (cast min : Float)) : Bool) ? (cast min : Dynamic) : (cast ((cast ((cast v : Float) > (cast max : Float)) : Bool) ? (cast max : Dynamic) : (cast v : Dynamic)) : Dynamic));
     };
     return cast null;
   }
@@ -27,7 +27,7 @@ class EaseCombinators {
 
   public static function easeMirror(easeIn:EasingFunction):EasingFunction {
     return cast function(t:Dynamic) {
-      if (_Runtime.truthy(_Runtime.compare(t, 0.5, '<'))) { return cast (_Runtime.callValue(easeIn, cast ([(t * 2.0)] : Array<Dynamic>)) * 0.5); }
+      if ((cast ((cast t : Float) < (cast 0.5 : Float)) : Bool)) { return cast (_Runtime.callValue(easeIn, cast ([(t * 2.0)] : Array<Dynamic>)) * 0.5); }
       return cast (1.0 - (_Runtime.callValue(easeIn, cast ([((1.0 - t) * 2.0)] : Array<Dynamic>)) * 0.5));
     };
     return cast null;

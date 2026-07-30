@@ -31,7 +31,7 @@ class _LoadSceneOptionsValues {
           });
         }), function():Dynamic {
           var __flowBranch6:Dynamic;
-          if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.optionalField(options, 'resolver'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+          if ((cast _Runtime.strictEquals(_Runtime.optionalField(options, 'resolver'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
             __flowBranch6 = flighthq._internal._Async.protect(function():Dynamic {
               _Runtime.callValue(disposeSceneResourceResolver, cast ([resolver] : Array<Dynamic>));
               return flighthq._internal._Async.flowNormal();

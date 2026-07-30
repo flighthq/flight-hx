@@ -63,17 +63,17 @@ class Ray3d {
     ar = (((adx * rx) + (ady * ry)) + (adz * rz));
     br = (((bdx * rx) + (bdy * ry)) + (bdz * rz));
     denom = ((aa * bb) - (ab * ab));
-    if (_Runtime.truthy(!_Runtime.strictEquals(denom, 0.0))) {
+    if ((cast !_Runtime.strictEquals(denom, 0.0) : Bool)) {
       (ta = cast ((((ab * br) - (bb * ar)) / denom) : Dynamic));
     } else {
       (ta = cast (0.0 : Dynamic));
     }
-    if (_Runtime.truthy(_Runtime.compare(ta, 0.0, '<'))) { (ta = cast (0.0 : Dynamic)); }
-    (tb = cast (_Runtime.select(!_Runtime.strictEquals(bb, 0.0), function():Dynamic return cast (((ab * ta) + br) / bb), function():Dynamic return cast 0.0) : Dynamic));
-    if (_Runtime.truthy(_Runtime.compare(tb, 0.0, '<'))) {
+    if ((cast ((cast ta : Float) < (cast 0.0 : Float)) : Bool)) { (ta = cast (0.0 : Dynamic)); }
+    (tb = cast (((cast !_Runtime.strictEquals(bb, 0.0) : Bool) ? (cast (((ab * ta) + br) / bb) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
+    if ((cast ((cast tb : Float) < (cast 0.0 : Float)) : Bool)) {
       (tb = cast (0.0 : Dynamic));
-      (ta = cast (_Runtime.select(!_Runtime.strictEquals(aa, 0.0), function():Dynamic return cast (-ar / aa), function():Dynamic return cast 0.0) : Dynamic));
-      if (_Runtime.truthy(_Runtime.compare(ta, 0.0, '<'))) { (ta = cast (0.0 : Dynamic)); }
+      (ta = cast (((cast !_Runtime.strictEquals(aa, 0.0) : Bool) ? (cast (-ar / aa) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
+      if ((cast ((cast ta : Float) < (cast 0.0 : Float)) : Bool)) { (ta = cast (0.0 : Dynamic)); }
     }
     (outA.x = cast ((aox + (adx * ta)) : Dynamic));
     (outA.y = cast ((aoy + (ady * ta)) : Dynamic));
@@ -105,8 +105,8 @@ class Ray3d {
     py = point.y;
     pz = point.z;
     lenSq = (((dx * dx) + (dy * dy)) + (dz * dz));
-    t = _Runtime.select(!_Runtime.strictEquals(lenSq, 0.0), function():Dynamic return cast (((((px - ox) * dx) + ((py - oy) * dy)) + ((pz - oz) * dz)) / lenSq), function():Dynamic return cast 0.0);
-    if (_Runtime.truthy(_Runtime.compare(t, 0.0, '<'))) { (t = cast (0.0 : Dynamic)); }
+    t = ((cast !_Runtime.strictEquals(lenSq, 0.0) : Bool) ? (cast (((((px - ox) * dx) + ((py - oy) * dy)) + ((pz - oz) * dz)) / lenSq) : Dynamic) : (cast 0.0 : Dynamic));
+    if ((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool)) { (t = cast (0.0 : Dynamic)); }
     (out.x = cast ((ox + (dx * t)) : Dynamic));
     (out.y = cast ((oy + (dy * t)) : Dynamic));
     (out.z = cast ((oz + (dz * t)) : Dynamic));
@@ -147,49 +147,49 @@ class Ray3d {
     dz = ray.direction.z;
     tMin = 0.0;
     tMax = HxMath.POSITIVE_INFINITY;
-    if (_Runtime.truthy(!_Runtime.strictEquals(dx, 0.0))) {
+    if ((cast !_Runtime.strictEquals(dx, 0.0) : Bool)) {
       var invDx:Dynamic = (1.0 / dx);
       var t1:Dynamic = ((aabb.min.x - ox) * invDx);
       var t2:Dynamic = ((aabb.max.x - ox) * invDx);
-      if (_Runtime.truthy(_Runtime.compare(t1, t2, '>'))) {
+      if ((cast ((cast t1 : Float) > (cast t2 : Float)) : Bool)) {
         var tmp:Dynamic = t1;
         (t1 = cast (t2 : Dynamic));
         (t2 = cast (tmp : Dynamic));
       }
       (tMin = cast (HxMath.max(tMin, t1) : Dynamic));
       (tMax = cast (HxMath.min(tMax, t2) : Dynamic));
-      if (_Runtime.truthy(_Runtime.compare(tMin, tMax, '>'))) { return cast -1.0; }
-    } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(ox, aabb.min.x, '<'), function():Dynamic return cast _Runtime.compare(ox, aabb.max.x, '>')))) {
+      if ((cast ((cast tMin : Float) > (cast tMax : Float)) : Bool)) { return cast -1.0; }
+    } else { if ((cast ((cast ((cast ox : Float) < (cast aabb.min.x : Float)) : Bool) || (cast ((cast ox : Float) > (cast aabb.max.x : Float)) : Bool)) : Bool)) {
       return cast -1.0;
     } }
-    if (_Runtime.truthy(!_Runtime.strictEquals(dy, 0.0))) {
+    if ((cast !_Runtime.strictEquals(dy, 0.0) : Bool)) {
       var invDy:Dynamic = (1.0 / dy);
       var t1:Dynamic = ((aabb.min.y - oy) * invDy);
       var t2:Dynamic = ((aabb.max.y - oy) * invDy);
-      if (_Runtime.truthy(_Runtime.compare(t1, t2, '>'))) {
+      if ((cast ((cast t1 : Float) > (cast t2 : Float)) : Bool)) {
         var tmp:Dynamic = t1;
         (t1 = cast (t2 : Dynamic));
         (t2 = cast (tmp : Dynamic));
       }
       (tMin = cast (HxMath.max(tMin, t1) : Dynamic));
       (tMax = cast (HxMath.min(tMax, t2) : Dynamic));
-      if (_Runtime.truthy(_Runtime.compare(tMin, tMax, '>'))) { return cast -1.0; }
-    } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(oy, aabb.min.y, '<'), function():Dynamic return cast _Runtime.compare(oy, aabb.max.y, '>')))) {
+      if ((cast ((cast tMin : Float) > (cast tMax : Float)) : Bool)) { return cast -1.0; }
+    } else { if ((cast ((cast ((cast oy : Float) < (cast aabb.min.y : Float)) : Bool) || (cast ((cast oy : Float) > (cast aabb.max.y : Float)) : Bool)) : Bool)) {
       return cast -1.0;
     } }
-    if (_Runtime.truthy(!_Runtime.strictEquals(dz, 0.0))) {
+    if ((cast !_Runtime.strictEquals(dz, 0.0) : Bool)) {
       var invDz:Dynamic = (1.0 / dz);
       var t1:Dynamic = ((aabb.min.z - oz) * invDz);
       var t2:Dynamic = ((aabb.max.z - oz) * invDz);
-      if (_Runtime.truthy(_Runtime.compare(t1, t2, '>'))) {
+      if ((cast ((cast t1 : Float) > (cast t2 : Float)) : Bool)) {
         var tmp:Dynamic = t1;
         (t1 = cast (t2 : Dynamic));
         (t2 = cast (tmp : Dynamic));
       }
       (tMin = cast (HxMath.max(tMin, t1) : Dynamic));
       (tMax = cast (HxMath.min(tMax, t2) : Dynamic));
-      if (_Runtime.truthy(_Runtime.compare(tMin, tMax, '>'))) { return cast -1.0; }
-    } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(oz, aabb.min.z, '<'), function():Dynamic return cast _Runtime.compare(oz, aabb.max.z, '>')))) {
+      if ((cast ((cast tMin : Float) > (cast tMax : Float)) : Bool)) { return cast -1.0; }
+    } else { if ((cast ((cast ((cast oz : Float) < (cast aabb.min.z : Float)) : Bool) || (cast ((cast oz : Float) > (cast aabb.max.z : Float)) : Bool)) : Bool)) {
       return cast -1.0;
     } }
     return cast tMin;
@@ -200,9 +200,9 @@ class Ray3d {
     var denom:Dynamic = cast _Runtime.UNDEFINED;
     var t:Dynamic = cast _Runtime.UNDEFINED;
     denom = (((plane.a * ray.direction.x) + (plane.b * ray.direction.y)) + (plane.c * ray.direction.z));
-    if (_Runtime.truthy(_Runtime.compare(HxMath.abs(denom), 1e-10, '<'))) { return cast -1.0; }
+    if ((cast ((cast HxMath.abs(denom) : Float) < (cast 1e-10 : Float)) : Bool)) { return cast -1.0; }
     t = (-((((plane.a * ray.origin.x) + (plane.b * ray.origin.y)) + (plane.c * ray.origin.z)) + plane.d) / denom);
-    return cast _Runtime.select(_Runtime.compare(t, 0.0, '>='), function():Dynamic return cast t, function():Dynamic return cast -1.0);
+    return cast ((cast ((cast t : Float) >= (cast 0.0 : Float)) : Bool) ? (cast t : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
 
@@ -220,7 +220,7 @@ class Ray3d {
     var sqrtDisc:Dynamic = cast _Runtime.UNDEFINED;
     var t:Dynamic = cast _Runtime.UNDEFINED;
     var t2:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(sphere.radius, 0.0, '<'))) { return cast -1.0; }
+    if ((cast ((cast sphere.radius : Float) < (cast 0.0 : Float)) : Bool)) { return cast -1.0; }
     ox = (ray.origin.x - sphere.center.x);
     oy = (ray.origin.y - sphere.center.y);
     oz = (ray.origin.z - sphere.center.z);
@@ -228,16 +228,16 @@ class Ray3d {
     dy = ray.direction.y;
     dz = ray.direction.z;
     a = (((dx * dx) + (dy * dy)) + (dz * dz));
-    if (_Runtime.truthy(_Runtime.strictEquals(a, 0.0))) { return cast -1.0; }
+    if ((cast _Runtime.strictEquals(a, 0.0) : Bool)) { return cast -1.0; }
     b = (((ox * dx) + (oy * dy)) + (oz * dz));
     c = ((((ox * ox) + (oy * oy)) + (oz * oz)) - (sphere.radius * sphere.radius));
     disc = ((b * b) - (a * c));
-    if (_Runtime.truthy(_Runtime.compare(disc, 0.0, '<'))) { return cast -1.0; }
+    if ((cast ((cast disc : Float) < (cast 0.0 : Float)) : Bool)) { return cast -1.0; }
     sqrtDisc = HxMath.sqrt(disc);
     t = ((-b - sqrtDisc) / a);
-    if (_Runtime.truthy(_Runtime.compare(t, 0.0, '>='))) { return cast t; }
+    if ((cast ((cast t : Float) >= (cast 0.0 : Float)) : Bool)) { return cast t; }
     t2 = ((-b + sqrtDisc) / a);
-    return cast _Runtime.select(_Runtime.compare(t2, 0.0, '>='), function():Dynamic return cast 0.0, function():Dynamic return cast -1.0);
+    return cast ((cast ((cast t2 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
 
@@ -278,20 +278,20 @@ class Ray3d {
     hy = ((dz * e2x) - (dx * e2z));
     hz = ((dx * e2y) - (dy * e2x));
     det = (((e1x * hx) + (e1y * hy)) + (e1z * hz));
-    if (_Runtime.truthy(_Runtime.compare(HxMath.abs(det), 1e-10, '<'))) { return cast -1.0; }
+    if ((cast ((cast HxMath.abs(det) : Float) < (cast 1e-10 : Float)) : Bool)) { return cast -1.0; }
     invDet = (1.0 / det);
     sx = (ray.origin.x - a.x);
     sy = (ray.origin.y - a.y);
     sz = (ray.origin.z - a.z);
     u = ((((sx * hx) + (sy * hy)) + (sz * hz)) * invDet);
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(u, 0.0, '<'), function():Dynamic return cast _Runtime.compare(u, 1.0, '>')))) { return cast -1.0; }
+    if ((cast ((cast ((cast u : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast u : Float) > (cast 1.0 : Float)) : Bool)) : Bool)) { return cast -1.0; }
     qx = ((sy * e1z) - (sz * e1y));
     qy = ((sz * e1x) - (sx * e1z));
     qz = ((sx * e1y) - (sy * e1x));
     v = ((((dx * qx) + (dy * qy)) + (dz * qz)) * invDet);
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(v, 0.0, '<'), function():Dynamic return cast _Runtime.compare((u + v), 1.0, '>')))) { return cast -1.0; }
+    if ((cast ((cast ((cast v : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast (u + v) : Float) > (cast 1.0 : Float)) : Bool)) : Bool)) { return cast -1.0; }
     t = ((((e2x * qx) + (e2y * qy)) + (e2z * qz)) * invDet);
-    return cast _Runtime.select(_Runtime.compare(t, 0.0, '>='), function():Dynamic return cast t, function():Dynamic return cast -1.0);
+    return cast ((cast ((cast t : Float) >= (cast 0.0 : Float)) : Bool) ? (cast t : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
 

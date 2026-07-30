@@ -16,11 +16,11 @@ class ColorLutCache {
     var transforms:Array<ColorTransformFunction> = cast _Runtime.UNDEFINED;
     var lut:Dynamic = cast _Runtime.UNDEFINED;
     signature = _Runtime.callValue(ColorLutCache.colorLutRunSignature__colorLutCache, cast ([run, size] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(cache, 'signature'), signature), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(cache, 'lut'), null)))) { return cast _Runtime.field(cache, 'lut'); }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(cache, 'signature'), signature) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(cache, 'lut'), null) : Bool)) : Bool)) { return cast _Runtime.field(cache, 'lut'); }
     transforms = cast ([] : Array<Dynamic>);
     for (operation in _Runtime.iterable(run)) {
       var transform:Dynamic = _Runtime.callValue(getAdjustmentColorTransform, cast ([operation] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(transform, null))) { _Runtime.callProperty(transforms, 'push', cast ([transform] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(transform, null) : Bool)) { _Runtime.callProperty(transforms, 'push', cast ([transform] : Array<Dynamic>)); }
     }
     lut = _Runtime.callValue(bakeColorLut, cast ([transforms, size] : Array<Dynamic>));
     _Runtime.setField(cache, 'signature', signature);

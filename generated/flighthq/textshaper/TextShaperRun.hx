@@ -30,7 +30,7 @@ class TextShaperRun {
   public static function getCodePointForGlyph(glyphId:Float, _format:TextFormat):Float {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
     backend = _Runtime.callValue(getTextShaperBackend, cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(backend, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(backend, 'getCodePointForGlyph'))))) { return cast -1.0; }
+    if ((cast ((cast _Runtime.strictEquals(backend, null) : Bool) || (cast !_Runtime.truthy(_Runtime.field(backend, 'getCodePointForGlyph')) : Bool)) : Bool)) { return cast -1.0; }
     return cast _Runtime.callProperty(backend, 'getCodePointForGlyph', cast ([glyphId] : Array<Dynamic>));
     return cast null;
   }
@@ -38,7 +38,7 @@ class TextShaperRun {
   public static function getFontMetrics(format:TextFormat):Null<FontMetrics> {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
     backend = _Runtime.callValue(getTextShaperBackend, cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(backend, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(backend, 'getFontMetrics'))))) { return cast null; }
+    if ((cast ((cast _Runtime.strictEquals(backend, null) : Bool) || (cast !_Runtime.truthy(_Runtime.field(backend, 'getFontMetrics')) : Bool)) : Bool)) { return cast null; }
     return cast _Runtime.callProperty(backend, 'getFontMetrics', cast ([format] : Array<Dynamic>));
     return cast null;
   }
@@ -46,7 +46,7 @@ class TextShaperRun {
   public static function getFontMetricsInto(format:TextFormat, out:FontMetrics):Bool {
     var metrics:Dynamic = cast _Runtime.UNDEFINED;
     metrics = _Runtime.callValue(getFontMetrics, cast ([format] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(metrics, null))) { return cast false; }
+    if ((cast _Runtime.strictEquals(metrics, null) : Bool)) { return cast false; }
     (out.ascent = cast (metrics.ascent : Dynamic));
     (out.capHeight = cast (metrics.capHeight : Dynamic));
     (out.descent = cast (metrics.descent : Dynamic));
@@ -63,7 +63,7 @@ class TextShaperRun {
     var metrics:Dynamic = cast _Runtime.UNDEFINED;
     var size:Dynamic = cast _Runtime.UNDEFINED;
     metrics = _Runtime.callValue(getFontMetrics, cast ([format] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(metrics, null))) { return cast -1.0; }
+    if ((cast _Runtime.strictEquals(metrics, null) : Bool)) { return cast -1.0; }
     size = _Runtime.coalesce(_Runtime.field(format, 'size'), function():Dynamic return cast 12.0);
     return cast (size / metrics.unitsPerEm);
     return cast null;
@@ -72,7 +72,7 @@ class TextShaperRun {
   public static function getGlyphExtents(glyphId:Float, _format:TextFormat):Null<GlyphExtents> {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
     backend = _Runtime.callValue(getTextShaperBackend, cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(backend, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(backend, 'getGlyphExtents'))))) { return cast null; }
+    if ((cast ((cast _Runtime.strictEquals(backend, null) : Bool) || (cast !_Runtime.truthy(_Runtime.field(backend, 'getGlyphExtents')) : Bool)) : Bool)) { return cast null; }
     return cast _Runtime.callProperty(backend, 'getGlyphExtents', cast ([glyphId] : Array<Dynamic>));
     return cast null;
   }
@@ -81,13 +81,13 @@ class TextShaperRun {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
     var resolved:Dynamic = cast _Runtime.UNDEFINED;
     backend = _Runtime.callValue(getTextShaperBackend, cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(backend, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(backend, 'getGlyphExtents'))))) { return cast 0.0; }
+    if ((cast ((cast _Runtime.strictEquals(backend, null) : Bool) || (cast !_Runtime.truthy(_Runtime.field(backend, 'getGlyphExtents')) : Bool)) : Bool)) { return cast 0.0; }
     resolved = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(glyphIds, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(glyphIds, 'length') : Float)) : Bool)) {
         var extents:Dynamic = _Runtime.callProperty(backend, 'getGlyphExtents', cast ([_Runtime.getIndex(glyphIds, i)] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(extents, null))) {
+        if ((cast !_Runtime.strictEquals(extents, null) : Bool)) {
           _Runtime.setIndex(out, i, extents);
           resolved++;
         } else {
@@ -103,7 +103,7 @@ class TextShaperRun {
   public static function getGlyphExtentsInto(glyphId:Float, _format:TextFormat, out:GlyphExtents):Bool {
     var extents:Dynamic = cast _Runtime.UNDEFINED;
     extents = _Runtime.callValue(getGlyphExtents, cast ([glyphId, _format] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(extents, null))) { return cast false; }
+    if ((cast _Runtime.strictEquals(extents, null) : Bool)) { return cast false; }
     _Runtime.setField(out, 'height', _Runtime.field(extents, 'height'));
     _Runtime.setField(out, 'width', _Runtime.field(extents, 'width'));
     _Runtime.setField(out, 'xBearing', _Runtime.field(extents, 'xBearing'));
@@ -115,7 +115,7 @@ class TextShaperRun {
   public static function getGlyphIndexForCodePoint(codePoint:Float, _format:TextFormat):Float {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
     backend = _Runtime.callValue(getTextShaperBackend, cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(backend, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(backend, 'getGlyphIndexForCodePoint'))))) { return cast -1.0; }
+    if ((cast ((cast _Runtime.strictEquals(backend, null) : Bool) || (cast !_Runtime.truthy(_Runtime.field(backend, 'getGlyphIndexForCodePoint')) : Bool)) : Bool)) { return cast -1.0; }
     return cast _Runtime.callProperty(backend, 'getGlyphIndexForCodePoint', cast ([codePoint] : Array<Dynamic>));
     return cast null;
   }
@@ -123,7 +123,7 @@ class TextShaperRun {
   public static function getGlyphName(glyphId:Float, _format:TextFormat):String {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
     backend = _Runtime.callValue(getTextShaperBackend, cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(backend, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(backend, 'getGlyphName'))))) { return cast ''; }
+    if ((cast ((cast _Runtime.strictEquals(backend, null) : Bool) || (cast !_Runtime.truthy(_Runtime.field(backend, 'getGlyphName')) : Bool)) : Bool)) { return cast ''; }
     return cast _Runtime.callProperty(backend, 'getGlyphName', cast ([glyphId] : Array<Dynamic>));
     return cast null;
   }
@@ -131,7 +131,7 @@ class TextShaperRun {
   public static function shapeTextRun(text:String, format:TextFormat, ?options:ShapeRunOptions):Null<ShapedRun> {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
     backend = _Runtime.callValue(getTextShaperBackend, cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(backend, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(backend, 'shapeRun'))))) { return cast null; }
+    if ((cast ((cast _Runtime.strictEquals(backend, null) : Bool) || (cast !_Runtime.truthy(_Runtime.field(backend, 'shapeRun')) : Bool)) : Bool)) { return cast null; }
     return cast _Runtime.callProperty(backend, 'shapeRun', cast ([text, format, options] : Array<Dynamic>));
     return cast null;
   }
@@ -141,7 +141,7 @@ class TextShaperRun {
     var result:Dynamic = cast _Runtime.UNDEFINED;
     var glyphs:Dynamic = cast _Runtime.UNDEFINED;
     backend = _Runtime.callValue(getTextShaperBackend, cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(backend, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(backend, 'shapeRun'))))) { return cast false; }
+    if ((cast ((cast _Runtime.strictEquals(backend, null) : Bool) || (cast !_Runtime.truthy(_Runtime.field(backend, 'shapeRun')) : Bool)) : Bool)) { return cast false; }
     result = _Runtime.callProperty(backend, 'shapeRun', cast ([text, format, options] : Array<Dynamic>));
     glyphs = _Runtime.field(out, 'glyphs');
     _Runtime.setField(out, 'advanceWidth', _Runtime.field(result, 'advanceWidth'));
@@ -152,7 +152,7 @@ class TextShaperRun {
     _Runtime.setLength(glyphs, 0.0);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(result, 'glyphs'), 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(result, 'glyphs'), 'length') : Float)) : Bool)) {
         _Runtime.callProperty(glyphs, 'push', cast ([_Runtime.getIndex(_Runtime.field(result, 'glyphs'), i)] : Array<Dynamic>));
         i++;
       }

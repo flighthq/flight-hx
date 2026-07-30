@@ -19,8 +19,8 @@ class HtmlView {
     source = (cast _Runtime.field(renderProxy, 'source') : flighthq.types.HtmlView);
     data = _Runtime.field(source, 'data');
     element = _Runtime.field(data, 'element');
-    if (_Runtime.truthy(_Runtime.strictEquals(element, null))) { return; }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(_Runtime.field(element, 'style'), 'position'), 'absolute'))) {
+    if ((cast _Runtime.strictEquals(element, null) : Bool)) { return; }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(element, 'style'), 'position'), 'absolute') : Bool)) {
       _Runtime.setField(_Runtime.field(element, 'style'), 'left', '0');
       _Runtime.setField(_Runtime.field(element, 'style'), 'overflow', 'hidden');
       _Runtime.setField(_Runtime.field(element, 'style'), 'position', 'absolute');
@@ -30,7 +30,7 @@ class HtmlView {
     _Runtime.setField(_Runtime.field(element, 'style'), 'width', '' + Std.string(_Runtime.field(data, 'width')) + 'px');
     _Runtime.setField(_Runtime.field(element, 'style'), 'height', '' + Std.string(_Runtime.field(data, 'height')) + 'px');
     _Runtime.callValue(setDomTransform, cast ([element, _Runtime.field(renderProxy, 'transform2D'), _Runtime.field(state, 'roundPixels')] : Array<Dynamic>));
-    _Runtime.setField(_Runtime.field(element, 'style'), 'opacity', _Runtime.select(_Runtime.compare(_Runtime.field(renderProxy, 'alpha'), 1.0, '<'), function():Dynamic return cast Std.string(_Runtime.field(renderProxy, 'alpha')), function():Dynamic return cast ''));
+    _Runtime.setField(_Runtime.field(element, 'style'), 'opacity', ((cast ((cast _Runtime.field(renderProxy, 'alpha') : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string(_Runtime.field(renderProxy, 'alpha')) : Dynamic) : (cast '' : Dynamic)));
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([element, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
     _Runtime.callValue(setDomRendererElement, cast ([state, element] : Array<Dynamic>));
   }

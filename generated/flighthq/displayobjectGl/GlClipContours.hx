@@ -26,7 +26,7 @@ class GlClipContours {
     gl = _Runtime.field(state, 'gl');
     nextDepth = HxMath.max(0.0, (_Runtime.coalesce(_Runtime.field(runtime, 'currentMaskDepth'), function():Dynamic return cast 0.0) - 1.0));
     _Runtime.setField(runtime, 'currentMaskDepth', nextDepth);
-    if (_Runtime.truthy(_Runtime.strictEquals(nextDepth, 0.0))) {
+    if ((cast _Runtime.strictEquals(nextDepth, 0.0) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.STENCIL_TEST);
       flighthq._internal.backend.WebGl2Backend.stencilMask(gl, 255.0);
     }
@@ -41,7 +41,7 @@ class GlClipContours {
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
     depth = _Runtime.coalesce(_Runtime.field(runtime, 'currentMaskDepth'), function():Dynamic return cast 0.0);
-    if (_Runtime.truthy(_Runtime.strictEquals(depth, 0.0))) {
+    if ((cast _Runtime.strictEquals(depth, 0.0) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.STENCIL_TEST);
       flighthq._internal.backend.WebGl2Backend.stencilMask(gl, 255.0);
       flighthq._internal.backend.WebGl2Backend.clear(gl, flighthq._internal.backend.WebGl2Backend.STENCIL_BUFFER_BIT);
@@ -54,7 +54,7 @@ class GlClipContours {
     flighthq._internal.backend.WebGl2Backend.colorMask(gl, false, false, false, false);
     flighthq._internal.backend.WebGl2Backend.stencilMask(gl, 255.0);
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.CULL_FACE);
-    if (_Runtime.truthy(_Runtime.strictEquals(winding, 'evenOdd'))) {
+    if ((cast _Runtime.strictEquals(winding, 'evenOdd') : Bool)) {
       flighthq._internal.backend.WebGl2Backend.stencilFunc(gl, flighthq._internal.backend.WebGl2Backend.ALWAYS, 0.0, 255.0);
       flighthq._internal.backend.WebGl2Backend.stencilOp(gl, flighthq._internal.backend.WebGl2Backend.KEEP, flighthq._internal.backend.WebGl2Backend.KEEP, flighthq._internal.backend.WebGl2Backend.INVERT);
     } else {
@@ -65,7 +65,7 @@ class GlClipContours {
     _Runtime.callValue(GlClipContours.drawClipContours__glClipContours, cast ([state, program, contours] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.colorMask(gl, true, true, true, true);
     flighthq._internal.backend.WebGl2Backend.stencilMask(gl, 0.0);
-    if (_Runtime.truthy(_Runtime.strictEquals(winding, 'evenOdd'))) {
+    if ((cast _Runtime.strictEquals(winding, 'evenOdd') : Bool)) {
       flighthq._internal.backend.WebGl2Backend.stencilFunc(gl, flighthq._internal.backend.WebGl2Backend.EQUAL, 1.0, 1.0);
     } else {
       flighthq._internal.backend.WebGl2Backend.stencilFunc(gl, flighthq._internal.backend.WebGl2Backend.NOTEQUAL, 0.0, 255.0);
@@ -85,7 +85,7 @@ class GlClipContours {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
-    if (_Runtime.truthy(((cast GlClipContours.clipPrograms__glClipContours : flighthq._internal._WeakMap).has(gl)))) { return; }
+    if ((cast ((cast GlClipContours.clipPrograms__glClipContours : flighthq._internal._WeakMap).has(gl)) : Bool)) { return; }
     program = _Runtime.callValue(GlClipContours.compileProgram__glClipContours, cast ([gl, GlClipContours.VERTEX_SOURCE__glClipContours, GlClipContours.FRAGMENT_SOURCE__glClipContours] : Array<Dynamic>));
     ((cast GlClipContours.clipPrograms__glClipContours : flighthq._internal._WeakMap).set(gl, { program: program, buffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), positionLocation: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_position'), worldMatrixLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_worldMatrix'), projectionLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_projection') }));
   }
@@ -110,9 +110,9 @@ class GlClipContours {
     flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, _Runtime.field(program, 'positionLocation'), 2.0, flighthq._internal.backend.WebGl2Backend.FLOAT, false, 0.0, 0.0);
     {
       var c:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(c, _Runtime.field(contours, 'length'), '<'))) {
+      while ((cast ((cast c : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
         var contour:Dynamic = _Runtime.getIndex(contours, c);
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.field(contour, 'length'), 6.0, '<'))) { c++; continue; }
+        if ((cast ((cast _Runtime.field(contour, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { c++; continue; }
         flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, new flighthq._internal._Float32Array(contour), flighthq._internal.backend.WebGl2Backend.STREAM_DRAW);
         flighthq._internal.backend.WebGl2Backend.drawArrays(gl, flighthq._internal.backend.WebGl2Backend.TRIANGLE_FAN, 0.0, (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> 1));
         c++;

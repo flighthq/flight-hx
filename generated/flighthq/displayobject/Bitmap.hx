@@ -22,7 +22,7 @@ class Bitmap {
   public static function computeBitmapLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
     var bitmapData:BitmapData = cast _Runtime.UNDEFINED;
     bitmapData = (cast _Runtime.field(source, 'data') : BitmapData);
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(bitmapData, 'sourceRectangle'), null))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(bitmapData, 'sourceRectangle'), null) : Bool)) {
       _Runtime.setField(out, 'width', _Runtime.field(_Runtime.field(bitmapData, 'sourceRectangle'), 'width'));
       _Runtime.setField(out, 'height', _Runtime.field(_Runtime.field(bitmapData, 'sourceRectangle'), 'height'));
     } else { if (_Runtime.truthy(_Runtime.field(bitmapData, 'image'))) {

@@ -59,7 +59,7 @@ class WgpuBloomEffect {
   public static function getBloomCompositePipeline__wgpuBloomEffect(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     pipeline = ((cast WgpuBloomEffect._compositePipelines__wgpuBloomEffect : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(pipeline, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(pipeline, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (pipeline = cast (_Runtime.callValue(createWgpuDualSourceEffectPipeline, cast ([state, WgpuBloomEffect.BLOOM_COMPOSITE_FRAGMENT_WGSL__wgpuBloomEffect, 'replace'] : Array<Dynamic>)) : Dynamic));
       ((cast WgpuBloomEffect._compositePipelines__wgpuBloomEffect : flighthq._internal._WeakMap).set(state, pipeline));
     }

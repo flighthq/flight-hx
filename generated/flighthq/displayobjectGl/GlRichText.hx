@@ -53,12 +53,12 @@ class GlRichText {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     __destructure0 = (cast (cast data : Dynamic) : GlRichTextData__glRichText);
     texture = _Runtime.field(__destructure0, 'texture');
-    if (_Runtime.truthy(!_Runtime.strictEquals(texture, null))) { flighthq._internal.backend.WebGl2Backend.deleteTexture(_Runtime.field(state, 'gl'), texture); }
+    if ((cast !_Runtime.strictEquals(texture, null) : Bool)) { flighthq._internal.backend.WebGl2Backend.deleteTexture(_Runtime.field(state, 'gl'), texture); }
   }
 
   public static function drawGlRichText(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var overlay:Dynamic = cast _Runtime.UNDEFINED;
-    overlay = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(GlRichText._webglTextInputOverlay__glRichText, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([(cast _Runtime.field(renderProxy, 'source') : RichText)] : Array<Dynamic>)), 'input'), null)), function():Dynamic return cast GlRichText._webglTextInputOverlay__glRichText, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
+    overlay = ((cast ((cast !_Runtime.strictEquals(GlRichText._webglTextInputOverlay__glRichText, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([(cast _Runtime.field(renderProxy, 'source') : RichText)] : Array<Dynamic>)), 'input'), null) : Bool)) : Bool) ? (cast GlRichText._webglTextInputOverlay__glRichText : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
     _Runtime.callValue(drawGlRichTextWithOverlay, cast ([state, renderProxy, overlay] : Array<Dynamic>));
   }
 
@@ -82,34 +82,34 @@ class GlRichText {
     richTextRuntime = (cast _Runtime.callValue(getRichTextRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime);
     content = _Runtime.callValue(getRichTextContent, cast ([richTextRuntime] : Array<Dynamic>));
     _Runtime.callValue(computeRichTextContent, cast ([content, data, _Runtime.callValue(getRichTextPasswordCharacter, cast ([source] : Array<Dynamic>))] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(_Runtime.field(content, 'text'), 'length'), 0.0), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(data, 'background'))), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(data, 'border'))))) { return; }
+    if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(content, 'text'), 'length'), 0.0) : Bool) && (cast !(cast _Runtime.field(data, 'background') : Bool) : Bool)) : Bool) && (cast !(cast _Runtime.field(data, 'border') : Bool) : Bool)) : Bool)) { return; }
     result = _Runtime.callValue(GlRichText.layoutRichText__glRichText, cast ([source, richTextRuntime, _Runtime.field(content, 'text'), _Runtime.field(content, 'formatRanges')] : Array<Dynamic>));
     fieldW = HxMath.ceil(_Runtime.callValue(computeTextBoundsWidth, cast ([data, result] : Array<Dynamic>)));
     fieldH = HxMath.ceil(_Runtime.callValue(computeTextBoundsHeight, cast ([data, result] : Array<Dynamic>)));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(fieldW, 0.0, '<='), function():Dynamic return cast _Runtime.compare(fieldH, 0.0, '<=')))) { return; }
+    if ((cast ((cast ((cast fieldW : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast fieldH : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
     pixelRatio = _Runtime.field(state, 'pixelRatio');
     offCtx = _Runtime.callValue(GlRichText.getOffscreenCanvas__glRichText, cast ([fieldW, fieldH, pixelRatio] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(offCtx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, 0.0, 0.0] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(offCtx, 'clearRect', cast ([0.0, 0.0, fieldW, fieldH] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.field(data, 'background'))) {
+    if ((cast _Runtime.field(data, 'background') : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.setField(offCtx, 'fillStyle', _Runtime.callValue(computeRgbHexString, cast ([_Runtime.field(data, 'backgroundColor')] : Array<Dynamic>)));
       flighthq._internal.backend.Canvas2dBackend.call(offCtx, 'fillRect', cast ([0.0, 0.0, fieldW, fieldH] : Array<Dynamic>));
     }
-    if (_Runtime.truthy(_Runtime.field(data, 'border'))) {
+    if ((cast _Runtime.field(data, 'border') : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.setField(offCtx, 'strokeStyle', _Runtime.callValue(computeRgbHexString, cast ([_Runtime.field(data, 'borderColor')] : Array<Dynamic>)));
       flighthq._internal.backend.Canvas2dBackend.setField(offCtx, 'lineWidth', 1.0);
       flighthq._internal.backend.Canvas2dBackend.call(offCtx, 'strokeRect', cast ([0.0, 0.0, fieldW, fieldH] : Array<Dynamic>));
     }
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(content, 'text'), 'length'), 0.0, '>'))) {
+    if ((cast ((cast _Runtime.field(_Runtime.field(content, 'text'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       _Runtime.callValue(GlRichText.drawRichTextToCanvas__glRichText, cast ([offCtx, source, result, fieldW, fieldH, _Runtime.field(content, 'text')] : Array<Dynamic>));
     }
     _Runtime.callOptionalValue(overlay, cast ([offCtx, source, result, fieldW, fieldH, _Runtime.field(content, 'text')] : Array<Dynamic>));
     shader = _Runtime.callValue(resolveGlShader, cast ([state, renderProxy] : Array<Dynamic>));
     _Runtime.callValue(useGlProgram, cast ([state, shader] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(renderProxy, 'rendererData'), null))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(renderProxy, 'rendererData'), null) : Bool)) { return; }
     richTextData = (cast (cast _Runtime.field(renderProxy, 'rendererData') : Dynamic) : GlRichTextData__glRichText);
     texture = _Runtime.field(richTextData, 'texture');
-    if (_Runtime.truthy(_Runtime.strictEquals(texture, null))) {
+    if ((cast _Runtime.strictEquals(texture, null) : Bool)) {
       (texture = cast (_Runtime.callValue(createGlTexture, cast ([state] : Array<Dynamic>)) : Dynamic));
       _Runtime.setField(richTextData, 'texture', texture);
     }
@@ -132,7 +132,7 @@ class GlRichText {
     var scrollXOffset:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(source, 'data');
     firstVisibleLine = (_Runtime.field(data, 'scrollV') - 1.0);
-    scrollYOffset = _Runtime.select(_Runtime.compare(firstVisibleLine, 0.0, '>'), function():Dynamic return cast _Runtime.callValue(getRichTextScrollYOffset, cast ([_Runtime.field(result, 'lineHeights'), firstVisibleLine] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+    scrollYOffset = ((cast ((cast firstVisibleLine : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callValue(getRichTextScrollYOffset, cast ([_Runtime.field(result, 'lineHeights'), firstVisibleLine] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
     scrollXOffset = _Runtime.field(data, 'scrollH');
     flighthq._internal.backend.Canvas2dBackend.call(context, 'save', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'beginPath', cast ([] : Array<Dynamic>));
@@ -141,7 +141,7 @@ class GlRichText {
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'textBaseline', 'alphabetic');
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'textAlign', 'start');
     for (group in _Runtime.iterable(_Runtime.field(result, 'groups'))) {
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(group, 'lineIndex'), firstVisibleLine, '<'))) { continue; }
+      if ((cast ((cast _Runtime.field(group, 'lineIndex') : Float) < (cast firstVisibleLine : Float)) : Bool)) { continue; }
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([_Runtime.field(group, 'format')] : Array<Dynamic>)));
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', _Runtime.callValue(computeRgbHexString, cast ([_Runtime.coalesce(_Runtime.field(_Runtime.field(group, 'format'), 'color'), function():Dynamic return cast _Runtime.field(data, 'textColor'))] : Array<Dynamic>)));
       var slice:Dynamic = _Runtime.substring(text, _Runtime.field(group, 'startIndex'), _Runtime.field(group, 'endIndex'));
@@ -173,7 +173,7 @@ class GlRichText {
       return cast _Runtime.field(flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([value] : Array<Dynamic>)), 'width');
     };
     result = _Runtime.callValue(getTextLayoutResult, cast ([(cast richTextRuntime : TextLabelRuntime)] : Array<Dynamic>));
-    _Runtime.callValue(computeTextLayout, cast ([result, { text: text, formatRanges: formatRanges, width: _Runtime.field(data, 'width'), height: _Runtime.field(data, 'height'), measure: measure, multiline: _Runtime.field(data, 'multiline'), verticalAlign: _Runtime.select(_Runtime.strictEquals(_Runtime.field(data, 'autoSize'), 'none'), function():Dynamic return cast _Runtime.field(data, 'verticalAlign'), function():Dynamic return cast 'top'), wordWrap: _Runtime.field(data, 'wordWrap') }] : Array<Dynamic>));
+    _Runtime.callValue(computeTextLayout, cast ([result, { text: text, formatRanges: formatRanges, width: _Runtime.field(data, 'width'), height: _Runtime.field(data, 'height'), measure: measure, multiline: _Runtime.field(data, 'multiline'), verticalAlign: ((cast _Runtime.strictEquals(_Runtime.field(data, 'autoSize'), 'none') : Bool) ? (cast _Runtime.field(data, 'verticalAlign') : Dynamic) : (cast 'top' : Dynamic)), wordWrap: _Runtime.field(data, 'wordWrap') }] : Array<Dynamic>));
     return cast result;
     return cast null;
   }
@@ -181,14 +181,14 @@ class GlRichText {
   public static function getOffscreenCanvas__glRichText(width:Float, height:Float, pixelRatio:Float = 1.0):Dynamic {
     var pw:Dynamic = cast _Runtime.UNDEFINED;
     var ph:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(GlRichText._offscreenCanvas__glRichText))) {
+    if ((cast !_Runtime.truthy(GlRichText._offscreenCanvas__glRichText) : Bool)) {
       (GlRichText._offscreenCanvas__glRichText = cast (flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)) : Dynamic));
       (GlRichText._offscreenCtx__glRichText = cast (flighthq._internal.backend.CanvasElementBackend.call(GlRichText._offscreenCanvas__glRichText, 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic));
     }
     pw = HxMath.ceil((width * pixelRatio));
     ph = HxMath.ceil((height * pixelRatio));
-    if (_Runtime.truthy(!_Runtime.strictEquals(flighthq._internal.backend.CanvasElementBackend.field(GlRichText._offscreenCanvas__glRichText, 'width'), pw))) { flighthq._internal.backend.CanvasElementBackend.setField(GlRichText._offscreenCanvas__glRichText, 'width', pw); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(flighthq._internal.backend.CanvasElementBackend.field(GlRichText._offscreenCanvas__glRichText, 'height'), ph))) { flighthq._internal.backend.CanvasElementBackend.setField(GlRichText._offscreenCanvas__glRichText, 'height', ph); }
+    if ((cast !_Runtime.strictEquals(flighthq._internal.backend.CanvasElementBackend.field(GlRichText._offscreenCanvas__glRichText, 'width'), pw) : Bool)) { flighthq._internal.backend.CanvasElementBackend.setField(GlRichText._offscreenCanvas__glRichText, 'width', pw); }
+    if ((cast !_Runtime.strictEquals(flighthq._internal.backend.CanvasElementBackend.field(GlRichText._offscreenCanvas__glRichText, 'height'), ph) : Bool)) { flighthq._internal.backend.CanvasElementBackend.setField(GlRichText._offscreenCanvas__glRichText, 'height', ph); }
     return cast GlRichText._offscreenCtx__glRichText;
     return cast null;
   }

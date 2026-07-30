@@ -28,14 +28,14 @@ class GlyphRasterizerBackend {
     return cast { rasterize: function(codepoint:Dynamic, options:Dynamic) {
       var context:Dynamic = cast _Runtime.UNDEFINED;
       context = _Runtime.callValue(GlyphRasterizerBackend._acquireGlyphRasterContext__glyphRasterizerBackend, cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(context, null))) { return cast null; }
+      if ((cast _Runtime.strictEquals(context, null) : Bool)) { return cast null; }
       return cast _Runtime.callValue(GlyphRasterizerBackend._rasterizeGlyphOnContext__glyphRasterizerBackend, cast ([context, codepoint, options] : Array<Dynamic>));
     } };
     return cast null;
   }
 
   public static function getGlyphRasterizerBackend():flighthq.types.GlyphSource.GlyphRasterizerBackend {
-    if (_Runtime.truthy(_Runtime.strictEquals(GlyphRasterizerBackend._backend__glyphRasterizerBackend, null))) { (GlyphRasterizerBackend._backend__glyphRasterizerBackend = cast (_Runtime.callValue(createWebGlyphRasterizerBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(GlyphRasterizerBackend._backend__glyphRasterizerBackend, null) : Bool)) { (GlyphRasterizerBackend._backend__glyphRasterizerBackend = cast (_Runtime.callValue(createWebGlyphRasterizerBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast GlyphRasterizerBackend._backend__glyphRasterizerBackend;
     return cast null;
   }
@@ -48,13 +48,13 @@ class GlyphRasterizerBackend {
 
   public static function _acquireGlyphRasterContext__glyphRasterizerBackend():Null<Dynamic> {
     try {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofGlobal('OffscreenCanvas'), 'undefined'))) {
+      if ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('OffscreenCanvas'), 'undefined') : Bool)) {
         var context:Dynamic = flighthq._internal.backend.CanvasElementBackend.call(_Runtime.construct(_Runtime.globalValue('OffscreenCanvas'), [1.0, 1.0]), 'getContext', cast (['2d'] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(context, null))) { return cast context; }
+        if ((cast !_Runtime.strictEquals(context, null) : Bool)) { return cast context; }
       }
-      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'createElement')), 'function')))) {
+      if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'createElement')), 'function') : Bool)) : Bool)) {
         var context:Dynamic = flighthq._internal.backend.CanvasElementBackend.call(flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)), 'getContext', cast (['2d'] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(context, null))) { return cast context; }
+        if ((cast !_Runtime.strictEquals(context, null) : Bool)) { return cast context; }
       }
     } catch (__error:Dynamic) {
       return cast null;
@@ -93,7 +93,7 @@ class GlyphRasterizerBackend {
     guard = 1.0;
     width = (HxMath.max(0.0, HxMath.ceil((left + right))) + (guard * 2.0));
     height = (HxMath.max(0.0, HxMath.ceil((ascent + descent))) + (guard * 2.0));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(width, (guard * 2.0), '<='), function():Dynamic return cast _Runtime.compare(height, (guard * 2.0), '<=')))) { return cast null; }
+    if ((cast ((cast ((cast width : Float) <= (cast (guard * 2.0) : Float)) : Bool) || (cast ((cast height : Float) <= (cast (guard * 2.0) : Float)) : Bool)) : Bool)) { return cast null; }
     canvas = flighthq._internal.backend.Canvas2dBackend.field(context, 'canvas');
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', width);
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', height);

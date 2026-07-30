@@ -29,7 +29,7 @@ class ShadowCamera {
     cy = ((min.y + max.y) * 0.5);
     cz = ((min.z + max.z) * 0.5);
     radius = _Runtime.hypot((max.x - cx), (max.y - cy), (max.z - cz));
-    if (_Runtime.truthy(_Runtime.strictEquals(radius, 0.0))) { (radius = cast (1.0 : Dynamic)); }
+    if ((cast _Runtime.strictEquals(radius, 0.0) : Bool)) { (radius = cast (1.0 : Dynamic)); }
     dl = _Runtime.orValue(_Runtime.hypot(lightDirection.x, lightDirection.y, lightDirection.z), function():Dynamic return cast 1.0);
     dx = (lightDirection.x / dl);
     dy = (lightDirection.y / dl);
@@ -41,7 +41,7 @@ class ShadowCamera {
     (ShadowCamera._target__shadowCamera.x = cast (cx : Dynamic));
     (ShadowCamera._target__shadowCamera.y = cast (cy : Dynamic));
     (ShadowCamera._target__shadowCamera.z = cast (cz : Dynamic));
-    up = _Runtime.select(_Runtime.compare(HxMath.abs(dy), 0.99, '>'), function():Dynamic return cast ShadowCamera._upZ__shadowCamera, function():Dynamic return cast ShadowCamera._upY__shadowCamera);
+    up = ((cast ((cast HxMath.abs(dy) : Float) > (cast 0.99 : Float)) : Bool) ? (cast ShadowCamera._upZ__shadowCamera : Dynamic) : (cast ShadowCamera._upY__shadowCamera : Dynamic));
     _Runtime.callValue(setCameraViewMatrix4FromLookAt, cast ([camera, ShadowCamera._eye__shadowCamera, ShadowCamera._target__shadowCamera, up] : Array<Dynamic>));
     (camera.near = cast (radius : Dynamic));
     (camera.far = cast ((radius * 3.0) : Dynamic));

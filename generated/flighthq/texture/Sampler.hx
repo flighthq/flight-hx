@@ -48,8 +48,8 @@ class Sampler {
   }
 
   public static function equalsSampler(a:Null<SamplerLike>, b:Null<SamplerLike>):Bool {
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(a), function():Dynamic return cast !_Runtime.truthy(b)))) { return cast false; }
-    return cast _Runtime.orValue(_Runtime.strictEquals(a, b), function():Dynamic return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(a, 'anisotropy'), _Runtime.field(b, 'anisotropy')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'magFilter'), _Runtime.field(b, 'magFilter'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'minFilter'), _Runtime.field(b, 'minFilter'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'mipmaps'), _Runtime.field(b, 'mipmaps'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'wrapU'), _Runtime.field(b, 'wrapU'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'wrapV'), _Runtime.field(b, 'wrapV'))));
+    if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
+    return cast _Runtime.orValue(_Runtime.strictEquals(a, b), function():Dynamic return cast _Runtime.andValue(((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(a, 'anisotropy'), _Runtime.field(b, 'anisotropy')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'magFilter'), _Runtime.field(b, 'magFilter')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'minFilter'), _Runtime.field(b, 'minFilter')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'mipmaps'), _Runtime.field(b, 'mipmaps')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'wrapU'), _Runtime.field(b, 'wrapU')) : Bool)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'wrapV'), _Runtime.field(b, 'wrapV'))));
     return cast null;
   }
 }

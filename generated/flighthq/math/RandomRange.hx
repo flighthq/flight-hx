@@ -7,7 +7,7 @@ import flighthq.types.RandomSource;
 
 class RandomRange {
   public static function randomBool(random:RandomSource, probability:Float = 0.5):Bool {
-    return cast _Runtime.compare(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), probability, '<');
+    return cast ((cast _Runtime.callValue(random, cast ([] : Array<Dynamic>)) : Float) < (cast probability : Float));
     return cast null;
   }
 
@@ -16,7 +16,7 @@ class RandomRange {
     var hi:Dynamic = cast _Runtime.UNDEFINED;
     lo = HxMath.floor(min);
     hi = HxMath.floor(max);
-    if (_Runtime.truthy(_Runtime.compare(lo, hi, '>'))) { throw _Runtime.rangeError('randomInt: min must be <= max'); }
+    if ((cast ((cast lo : Float) > (cast hi : Float)) : Bool)) { throw _Runtime.rangeError('randomInt: min must be <= max'); }
     return cast (lo + HxMath.floor((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * ((hi - lo) + 1.0))));
     return cast null;
   }
@@ -27,7 +27,7 @@ class RandomRange {
   }
 
   public static function randomSign(random:RandomSource):Float {
-    return cast _Runtime.select(_Runtime.compare(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), 0.5, '<'), function():Dynamic return cast -1.0, function():Dynamic return cast 1.0);
+    return cast ((cast ((cast _Runtime.callValue(random, cast ([] : Array<Dynamic>)) : Float) < (cast 0.5 : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic));
     return cast null;
   }
 }

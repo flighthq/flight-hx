@@ -40,7 +40,7 @@ class AnimationClip {
     channels = _Runtime.field(clip, 'channels');
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(channels, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(channels, 'length') : Float)) : Bool)) {
         var channel:Dynamic = _Runtime.getIndex(channels, i);
         _Runtime.callValue(sampleAnimationTrack, cast ([out, _Runtime.field(channel, 'track'), time] : Array<Dynamic>));
         _Runtime.callValue(visit, cast ([out, channel, i] : Array<Dynamic>));
@@ -55,7 +55,7 @@ class AnimationClip {
     for (channel in _Runtime.iterable(channels)) {
       var times:Dynamic = _Runtime.field(_Runtime.field(channel, 'track'), 'times');
       var last:Dynamic = _Runtime.field(times, 'length');
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(last, 0.0, '>'), function():Dynamic return cast _Runtime.compare(_Runtime.getIndex(times, (last - 1.0)), max, '>')))) { (max = cast (_Runtime.getIndex(times, (last - 1.0)) : Dynamic)); }
+      if ((cast ((cast ((cast last : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast _Runtime.getIndex(times, (last - 1.0)) : Float) > (cast max : Float)) : Bool)) : Bool)) { (max = cast (_Runtime.getIndex(times, (last - 1.0)) : Dynamic)); }
     }
     return cast max;
     return cast null;

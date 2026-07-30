@@ -15,10 +15,10 @@ class CanvasEffectDropShadowCss {
     var radians:Dynamic = cast _Runtime.UNDEFINED;
     var dx:Dynamic = cast _Runtime.UNDEFINED;
     var dy:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw'), 'draw'))) { return cast null; }
+    if ((cast !_Runtime.strictEquals(_Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw'), 'draw') : Bool)) { return cast null; }
     blurX = _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0);
     blurY = _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0);
-    if (_Runtime.truthy(!_Runtime.strictEquals(blurX, blurY))) { return cast null; }
+    if ((cast !_Runtime.strictEquals(blurX, blurY) : Bool)) { return cast null; }
     angle = _Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0);
     distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
     radians = ((angle * HxMath.PI) / 180.0);
@@ -31,10 +31,10 @@ class CanvasEffectDropShadowCss {
   public static function computeOuterGlowEffectCss(effect:OuterGlowEffect):Null<String> {
     var blurX:Dynamic = cast _Runtime.UNDEFINED;
     var blurY:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw'), 'draw'))) { return cast null; }
+    if ((cast !_Runtime.strictEquals(_Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw'), 'draw') : Bool)) { return cast null; }
     blurX = _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0);
     blurY = _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0);
-    if (_Runtime.truthy(!_Runtime.strictEquals(blurX, blurY))) { return cast null; }
+    if ((cast !_Runtime.strictEquals(blurX, blurY) : Bool)) { return cast null; }
     return cast 'drop-shadow(0px 0px ' + Std.string(blurX) + 'px ' + Std.string(_Runtime.callValue(CanvasEffectDropShadowCss.cssRgbaFromColor__canvasEffectDropShadowCss, cast ([_Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 16711680.0), _Runtime.coalesce(_Runtime.field(effect, 'alpha'), function():Dynamic return cast 1.0)] : Array<Dynamic>))) + ')';
     return cast null;
   }

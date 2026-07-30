@@ -17,7 +17,7 @@ class GlFullscreenPass {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'currentFramebuffer'), _Runtime.field(target, 'framebuffer')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'currentFramebuffer'), _Runtime.field(target, 'framebuffer')) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER, _Runtime.field(target, 'framebuffer'));
       _Runtime.setField(runtime, 'currentFramebuffer', _Runtime.field(target, 'framebuffer'));
     }
@@ -37,7 +37,7 @@ class GlFullscreenPass {
     textures = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, 8.0, '<'))) {
+      while ((cast ((cast i : Float) < (cast 8.0 : Float)) : Bool)) {
         var loc:Dynamic = flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_texture' + Std.string(i) + '');
         if (_Runtime.truthy(loc)) { _Runtime.callProperty(textures, 'push', cast ([loc] : Array<Dynamic>)); }
         i++;
@@ -57,12 +57,12 @@ class GlFullscreenPass {
     var destHeight:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'currentProgram'), _Runtime.field(program, 'program')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'currentProgram'), _Runtime.field(program, 'program')) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.useProgram(gl, _Runtime.field(program, 'program'));
       _Runtime.setField(runtime, 'currentProgram', _Runtime.field(program, 'program'));
     }
     destFramebuffer = _Runtime.coalesce(_Runtime.optionalField(dest, 'framebuffer'), function():Dynamic return cast null);
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'currentFramebuffer'), destFramebuffer))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'currentFramebuffer'), destFramebuffer) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER, destFramebuffer);
       _Runtime.setField(runtime, 'currentFramebuffer', destFramebuffer);
     }
@@ -72,7 +72,7 @@ class GlFullscreenPass {
     _Runtime.setField(runtime, 'renderTargetViewport', _Runtime.select(dest, function():Dynamic return cast { width: destWidth, height: destHeight }, function():Dynamic return cast null));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(inputs, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(inputs, 'length') : Float)) : Bool)) {
         flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + i));
         flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, _Runtime.getIndex(inputs, i));
         if (_Runtime.truthy(_Runtime.getIndex(_Runtime.field(program, 'textures'), i))) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.getIndex(_Runtime.field(program, 'textures'), i), i); }
@@ -91,7 +91,7 @@ class GlFullscreenPass {
     _Runtime.setField(runtime, 'currentBlendMode', null);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(inputs, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(inputs, 'length') : Float)) : Bool)) {
         flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + i));
         flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, null);
         i++;
@@ -108,7 +108,7 @@ class GlFullscreenPass {
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
     quadVao = ((cast GlFullscreenPass._quadVaos__glFullscreenPass : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(quadVao, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(quadVao, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (quadVao = cast (flighthq._internal.backend.WebGl2Backend.createVertexArray(gl) : Dynamic));
       ((cast GlFullscreenPass._quadVaos__glFullscreenPass : flighthq._internal._WeakMap).set(state, quadVao));
     }

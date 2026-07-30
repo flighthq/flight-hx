@@ -76,18 +76,18 @@ class Md2Parse {
     var mesh:Dynamic = cast _Runtime.UNDEFINED;
     var morph:Dynamic = cast _Runtime.UNDEFINED;
     var clip:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(bytes, 'length'), MD2_HEADER_SIZE, '<'))) {
+    if ((cast ((cast _Runtime.field(bytes, 'length') : Float) < (cast MD2_HEADER_SIZE : Float)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd2: input is shorter than the 68-byte MD2 header'] : Array<Dynamic>));
       return cast _Runtime.callValue(createScene, cast ([] : Array<Dynamic>));
     }
     view = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(bytes, 'buffer'), _Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')]);
     magic = _Runtime.callProperty(view, 'getInt32', cast ([0.0, true] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(magic, MD2_MAGIC))) {
+    if ((cast !_Runtime.strictEquals(magic, MD2_MAGIC) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd2: invalid magic 0x' + Std.string(_Runtime.numberToString(_Runtime.unsignedShiftRight(_Runtime.toInt32(magic), 0), 16.0)) + ', expected 0x32504449 (IDP2)'] : Array<Dynamic>));
       return cast _Runtime.callValue(createScene, cast ([] : Array<Dynamic>));
     }
     version = _Runtime.callProperty(view, 'getInt32', cast ([4.0, true] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(version, MD2_VERSION))) {
+    if ((cast !_Runtime.strictEquals(version, MD2_VERSION) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd2: unsupported version ' + Std.string(version) + ', expected 8'] : Array<Dynamic>));
       return cast _Runtime.callValue(createScene, cast ([] : Array<Dynamic>));
     }
@@ -102,11 +102,11 @@ class Md2Parse {
     offTexCoords = _Runtime.callProperty(view, 'getInt32', cast ([48.0, true] : Array<Dynamic>));
     offTriangles = _Runtime.callProperty(view, 'getInt32', cast ([52.0, true] : Array<Dynamic>));
     offFrames = _Runtime.callProperty(view, 'getInt32', cast ([56.0, true] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(numFrames, 1.0, '<'))) {
+    if ((cast ((cast numFrames : Float) < (cast 1.0 : Float)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd2: model has no frames'] : Array<Dynamic>));
       return cast _Runtime.callValue(createScene, cast ([] : Array<Dynamic>));
     }
-    if (_Runtime.truthy(_Runtime.compare(numTriangles, 1.0, '<'))) {
+    if ((cast ((cast numTriangles : Float) < (cast 1.0 : Float)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd2: model has no triangles'] : Array<Dynamic>));
       return cast _Runtime.callValue(createScene, cast ([] : Array<Dynamic>));
     }
@@ -114,17 +114,17 @@ class Md2Parse {
     texCoordsEnd = (offTexCoords + (numTexCoords * MD2_TEXCOORD_SIZE));
     trianglesEnd = (offTriangles + (numTriangles * MD2_TRIANGLE_SIZE));
     allFramesEnd = (offFrames + (numFrames * frameStride));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(texCoordsEnd, _Runtime.field(bytes, 'length'), '>'), function():Dynamic return cast _Runtime.compare(trianglesEnd, _Runtime.field(bytes, 'length'), '>')), function():Dynamic return cast _Runtime.compare(allFramesEnd, _Runtime.field(bytes, 'length'), '>')))) {
+    if ((cast ((cast ((cast ((cast texCoordsEnd : Float) > (cast _Runtime.field(bytes, 'length') : Float)) : Bool) || (cast ((cast trianglesEnd : Float) > (cast _Runtime.field(bytes, 'length') : Float)) : Bool)) : Bool) || (cast ((cast allFramesEnd : Float) > (cast _Runtime.field(bytes, 'length') : Float)) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd2: input is truncated; data regions extend past end of buffer'] : Array<Dynamic>));
       return cast _Runtime.callValue(createScene, cast ([] : Array<Dynamic>));
     }
-    uvScaleS = _Runtime.select(_Runtime.compare(skinWidth, 0.0, '>'), function():Dynamic return cast (1.0 / skinWidth), function():Dynamic return cast 0.0);
-    uvScaleT = _Runtime.select(_Runtime.compare(skinHeight, 0.0, '>'), function():Dynamic return cast (1.0 / skinHeight), function():Dynamic return cast 0.0);
+    uvScaleS = ((cast ((cast skinWidth : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / skinWidth) : Dynamic) : (cast 0.0 : Dynamic));
+    uvScaleT = ((cast ((cast skinHeight : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / skinHeight) : Dynamic) : (cast 0.0 : Dynamic));
     texS = new flighthq._internal._Float32Array(numTexCoords);
     texT = new flighthq._internal._Float32Array(numTexCoords);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, numTexCoords, '<'))) {
+      while ((cast ((cast i : Float) < (cast numTexCoords : Float)) : Bool)) {
         var base:Dynamic = (offTexCoords + (i * MD2_TEXCOORD_SIZE));
         _Runtime.setIndex(texS, i, (_Runtime.callProperty(view, 'getInt16', cast ([base, true] : Array<Dynamic>)) * uvScaleS));
         _Runtime.setIndex(texT, i, (_Runtime.callProperty(view, 'getInt16', cast ([(base + 2.0), true] : Array<Dynamic>)) * uvScaleT));
@@ -139,26 +139,26 @@ class Md2Parse {
     indices = cast ([] : Array<Dynamic>);
     {
       var t:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(t, numTriangles, '<'))) {
+      while ((cast ((cast t : Float) < (cast numTriangles : Float)) : Bool)) {
         var triBase:Dynamic = (offTriangles + (t * MD2_TRIANGLE_SIZE));
         {
           var c:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(c, 3.0, '<'))) {
+          while ((cast ((cast c : Float) < (cast 3.0 : Float)) : Bool)) {
             var vertIdx:Dynamic = _Runtime.callProperty(view, 'getUint16', cast ([(triBase + (c * 2.0)), true] : Array<Dynamic>));
             var texIdx:Dynamic = _Runtime.callProperty(view, 'getUint16', cast ([((triBase + 6.0) + (c * 2.0)), true] : Array<Dynamic>));
-            if (_Runtime.truthy(_Runtime.compare(vertIdx, numVertices, '>='))) {
+            if ((cast ((cast vertIdx : Float) >= (cast numVertices : Float)) : Bool)) {
               _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd2: triangle ' + Std.string(t) + ' vertex index ' + Std.string(vertIdx) + ' out of range'] : Array<Dynamic>));
               c++;
               continue;
             }
-            if (_Runtime.truthy(_Runtime.compare(texIdx, numTexCoords, '>='))) {
+            if ((cast ((cast texIdx : Float) >= (cast numTexCoords : Float)) : Bool)) {
               _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd2: triangle ' + Std.string(t) + ' texcoord index ' + Std.string(texIdx) + ' out of range'] : Array<Dynamic>));
               c++;
               continue;
             }
             var key:Dynamic = '' + Std.string(vertIdx) + '/' + Std.string(texIdx) + '';
             var idx:Dynamic = ((cast dedup : flighthq._internal._Map).get(key));
-            if (_Runtime.truthy(_Runtime.strictEquals(idx, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+            if ((cast _Runtime.strictEquals(idx, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
               (idx = cast ((_Runtime.field(interleavedVertices, 'length') / CANONICAL_FLOATS_PER_VERTEX) : Dynamic));
               var p:Dynamic = (vertIdx * 3.0);
               _Runtime.pushMany(interleavedVertices, cast ([_Runtime.getIndex(_Runtime.field(base, 'positions'), p), _Runtime.getIndex(_Runtime.field(base, 'positions'), (p + 1.0)), _Runtime.getIndex(_Runtime.field(base, 'positions'), (p + 2.0))] : Array<Dynamic>));
@@ -175,14 +175,14 @@ class Md2Parse {
         t++;
       }
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(indices, 'length'), 0.0))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(indices, 'length'), 0.0) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd2: no valid triangle indices produced'] : Array<Dynamic>));
       return cast _Runtime.callValue(createScene, cast ([] : Array<Dynamic>));
     }
     materials = cast ([] : Array<Dynamic>);
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(numSkins, 1.0, '>='), function():Dynamic return cast _Runtime.compare((offSkins + MD2_SKIN_SIZE), _Runtime.field(bytes, 'length'), '<=')))) {
+    if ((cast ((cast ((cast numSkins : Float) >= (cast 1.0 : Float)) : Bool) && (cast ((cast (offSkins + MD2_SKIN_SIZE) : Float) <= (cast _Runtime.field(bytes, 'length') : Float)) : Bool)) : Bool)) {
       var skinName:Dynamic = _Runtime.callValue(Md2Parse.readMd2SkinName__md2Parse, cast ([bytes, offSkins] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(skinName, 'length'), 0.0, '>'))) {
+      if ((cast ((cast _Runtime.field(skinName, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
         var material:Dynamic = (cast (cast _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuseMap: _Runtime.callValue(createExternalTextureRef, cast ([skinName] : Array<Dynamic>)) }] : Array<Dynamic>)) : Dynamic) : Material);
         _Runtime.setField(material, 'name', skinName);
         _Runtime.callProperty(materials, 'push', cast ([material] : Array<Dynamic>));
@@ -194,10 +194,10 @@ class Md2Parse {
     geometry = _Runtime.callValue(createMeshGeometry, cast ([{ indices: indexArray, layout: CANONICAL_LAYOUT, vertices: vertices }] : Array<Dynamic>));
     mesh = _Runtime.callValue(createMesh, cast ([geometry, materials] : Array<Dynamic>));
     morph = _Runtime.callValue(Md2Parse.buildMd2Morph__md2Parse, cast ([frames, sourceVertexIndices] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(morph, null))) { _Runtime.setField(mesh, 'morph', morph); }
+    if ((cast !_Runtime.strictEquals(morph, null) : Bool)) { _Runtime.setField(mesh, 'morph', morph); }
     _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), (cast (cast mesh : Dynamic) : SceneNode)] : Array<Dynamic>));
     clip = _Runtime.callValue(Md2Parse.buildMd2MorphClip__md2Parse, cast ([_Runtime.field(scene, 'root')] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(clip, null))) { _Runtime.setField(_Runtime.field(scene, 'animations'), 'default', clip); }
+    if ((cast !_Runtime.strictEquals(clip, null) : Bool)) { _Runtime.setField(_Runtime.field(scene, 'animations'), 'default', clip); }
     return cast scene;
     return cast null;
   }
@@ -207,7 +207,7 @@ class Md2Parse {
     frames = cast ([] : Array<Dynamic>);
     {
       var f:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(f, numFrames, '<'))) {
+      while ((cast ((cast f : Float) < (cast numFrames : Float)) : Bool)) {
         var frameBase:Dynamic = (offFrames + (f * frameStride));
         var scaleX:Dynamic = _Runtime.callProperty(view, 'getFloat32', cast ([frameBase, true] : Array<Dynamic>));
         var scaleY:Dynamic = _Runtime.callProperty(view, 'getFloat32', cast ([(frameBase + 4.0), true] : Array<Dynamic>));
@@ -220,7 +220,7 @@ class Md2Parse {
         var normals:Dynamic = new flighthq._internal._Float32Array((numVertices * 3.0));
         {
           var i:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(i, numVertices, '<'))) {
+          while ((cast ((cast i : Float) < (cast numVertices : Float)) : Bool)) {
             var b:Dynamic = (verticesBase + (i * MD2_COMPRESSED_VERTEX_SIZE));
             var px:Dynamic = ((_Runtime.getIndex(bytes, b) * scaleX) + translateX);
             var py:Dynamic = ((_Runtime.getIndex(bytes, (b + 1.0)) * scaleY) + translateY);
@@ -230,7 +230,7 @@ class Md2Parse {
             _Runtime.setIndex(positions, (p + 1.0), pz);
             _Runtime.setIndex(positions, (p + 2.0), -py);
             var ni:Dynamic = _Runtime.getIndex(bytes, (b + 3.0));
-            if (_Runtime.truthy(_Runtime.compare(ni, MD2_ANORMS.length, '<'))) {
+            if ((cast ((cast ni : Float) < (cast MD2_ANORMS.length : Float)) : Bool)) {
               var n:Dynamic = _Runtime.getIndex(MD2_ANORMS, ni);
               _Runtime.setIndex(normals, p, _Runtime.getIndex(n, 0.0));
               _Runtime.setIndex(normals, (p + 1.0), _Runtime.getIndex(n, 2.0));
@@ -251,19 +251,19 @@ class Md2Parse {
     var base:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
     var targets:Array<MorphTarget> = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(frames, 'length'), 2.0, '<'))) { return cast null; }
+    if ((cast ((cast _Runtime.field(frames, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { return cast null; }
     base = _Runtime.getIndex(frames, 0.0);
     vertexCount = _Runtime.field(sourceVertexIndices, 'length');
     targets = cast ([] : Array<Dynamic>);
     {
       var f:Dynamic = 1.0;
-      while (_Runtime.truthy(_Runtime.compare(f, _Runtime.field(frames, 'length'), '<'))) {
+      while ((cast ((cast f : Float) < (cast _Runtime.field(frames, 'length') : Float)) : Bool)) {
         var frame:Dynamic = _Runtime.getIndex(frames, f);
         var positionDeltas:Dynamic = new flighthq._internal._Float32Array((vertexCount * 3.0));
         var normalDeltas:Dynamic = new flighthq._internal._Float32Array((vertexCount * 3.0));
         {
           var v:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(v, vertexCount, '<'))) {
+          while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
             var src:Dynamic = (_Runtime.getIndex(sourceVertexIndices, v) * 3.0);
             var dst:Dynamic = (v * 3.0);
             _Runtime.setIndex(positionDeltas, dst, (_Runtime.getIndex(_Runtime.field(frame, 'positions'), src) - _Runtime.getIndex(_Runtime.field(base, 'positions'), src)));
@@ -292,17 +292,17 @@ class Md2Parse {
     var track:Dynamic = cast _Runtime.UNDEFINED;
     var channel:AnimationChannel = cast _Runtime.UNDEFINED;
     mesh = _Runtime.callValue(Md2Parse.findMd2Mesh__md2Parse, cast ([root] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(mesh, null), function():Dynamic return cast _Runtime.looseEquals(_Runtime.field(mesh, 'morph'), null)))) { return cast null; }
+    if ((cast ((cast _Runtime.strictEquals(mesh, null) : Bool) || (cast _Runtime.looseEquals(_Runtime.field(mesh, 'morph'), null) : Bool)) : Bool)) { return cast null; }
     targetCount = _Runtime.field(_Runtime.field(_Runtime.field(mesh, 'morph'), 'targets'), 'length');
-    if (_Runtime.truthy(_Runtime.strictEquals(targetCount, 0.0))) { return cast null; }
+    if ((cast _Runtime.strictEquals(targetCount, 0.0) : Bool)) { return cast null; }
     frameCount = (targetCount + 1.0);
     times = new flighthq._internal._Float32Array(frameCount);
     values = new flighthq._internal._Float32Array((frameCount * targetCount));
     {
       var k:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(k, frameCount, '<'))) {
+      while ((cast ((cast k : Float) < (cast frameCount : Float)) : Bool)) {
         _Runtime.setIndex(times, k, (k / MD2_FRAME_FPS));
-        if (_Runtime.truthy(_Runtime.compare(k, 1.0, '>='))) { _Runtime.setIndex(values, ((k * targetCount) + (k - 1.0)), 1.0); }
+        if ((cast ((cast k : Float) >= (cast 1.0 : Float)) : Bool)) { _Runtime.setIndex(values, ((k * targetCount) + (k - 1.0)), 1.0); }
         k++;
       }
     }
@@ -317,9 +317,9 @@ class Md2Parse {
     children = _Runtime.callValue(getNodeChildren, cast ([root] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(children, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
         var child:Dynamic = (cast (cast _Runtime.getIndex(children, i) : Dynamic) : SceneNode);
-        if (_Runtime.truthy(_Runtime.callValue(isMesh, cast ([child] : Array<Dynamic>)))) { return cast (cast (cast child : Dynamic) : Mesh); }
+        if ((cast _Runtime.callValue(isMesh, cast ([child] : Array<Dynamic>)) : Bool)) { return cast (cast (cast child : Dynamic) : Mesh); }
         i++;
       }
     }
@@ -333,11 +333,11 @@ class Md2Parse {
     var name:Dynamic = cast _Runtime.UNDEFINED;
     limit = (offset + MD2_SKIN_SIZE);
     end = offset;
-    while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(end, limit, '<'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.getIndex(bytes, end), 0.0)))) { end++; }
+    while ((cast ((cast ((cast end : Float) < (cast limit : Float)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.getIndex(bytes, end), 0.0) : Bool)) : Bool)) { end++; }
     name = '';
     {
       var i:Dynamic = offset;
-      while (_Runtime.truthy(_Runtime.compare(i, end, '<'))) {
+      while ((cast ((cast i : Float) < (cast end : Float)) : Bool)) {
         (name = cast ((name + _Runtime.callProperty(String, 'fromCharCode', cast ([_Runtime.getIndex(bytes, i)] : Array<Dynamic>))) : Dynamic));
         i++;
       }

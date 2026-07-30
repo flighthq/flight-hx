@@ -18,7 +18,7 @@ class TextShaperCluster {
     x = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, count, '<'))) {
+      while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         (x = cast ((x + _Runtime.field(_Runtime.getIndex(glyphs, i), 'xAdvance')) : Dynamic));
         _Runtime.setIndex(positions, (i + 1.0), x);
         i++;
@@ -31,14 +31,14 @@ class TextShaperCluster {
   public static function getClusterForIndex(run:ShapedRun, stringIndex:Float):Float {
     var glyphs:Dynamic = cast _Runtime.UNDEFINED;
     var best:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(run, 'glyphCount'), 0.0))) { return cast -1.0; }
-    if (_Runtime.truthy(_Runtime.compare(stringIndex, 0.0, '<'))) { return cast -1.0; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(run, 'glyphCount'), 0.0) : Bool)) { return cast -1.0; }
+    if ((cast ((cast stringIndex : Float) < (cast 0.0 : Float)) : Bool)) { return cast -1.0; }
     glyphs = _Runtime.field(run, 'glyphs');
     best = -1.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(glyphs, 'length'), '<'))) {
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.getIndex(glyphs, i), 'cluster'), stringIndex, '<='))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(glyphs, 'length') : Float)) : Bool)) {
+        if ((cast ((cast _Runtime.field(_Runtime.getIndex(glyphs, i), 'cluster') : Float) <= (cast stringIndex : Float)) : Bool)) {
           (best = cast (_Runtime.field(_Runtime.getIndex(glyphs, i), 'cluster') : Dynamic));
         }
         i++;
@@ -50,25 +50,25 @@ class TextShaperCluster {
 
   public static function getIndexRangeForCluster(run:ShapedRun, cluster:Float, ?stringLength:Float):Null<Array<Float>> {
     var glyphs:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(run, 'glyphCount'), 0.0))) { return cast null; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(run, 'glyphCount'), 0.0) : Bool)) { return cast null; }
     glyphs = _Runtime.field(run, 'glyphs');
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(glyphs, 'length'), '<'))) {
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.getIndex(glyphs, i), 'cluster'), cluster))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(glyphs, 'length') : Float)) : Bool)) {
+        if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.getIndex(glyphs, i), 'cluster'), cluster) : Bool)) {
           var end:Null<Float> = cast _Runtime.UNDEFINED;
           {
             var j:Dynamic = (i + 1.0);
-            while (_Runtime.truthy(_Runtime.compare(j, _Runtime.field(glyphs, 'length'), '<'))) {
-              if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(_Runtime.getIndex(glyphs, j), 'cluster'), cluster))) {
+            while ((cast ((cast j : Float) < (cast _Runtime.field(glyphs, 'length') : Float)) : Bool)) {
+              if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.getIndex(glyphs, j), 'cluster'), cluster) : Bool)) {
                 (end = cast (_Runtime.field(_Runtime.getIndex(glyphs, j), 'cluster') : Dynamic));
                 break;
               }
               j++;
             }
           }
-          if (_Runtime.truthy(_Runtime.strictEquals(end, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-            (end = cast (_Runtime.select(!_Runtime.strictEquals(stringLength, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast stringLength, function():Dynamic return cast (cluster + 1.0)) : Dynamic));
+          if ((cast _Runtime.strictEquals(end, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+            (end = cast (((cast !_Runtime.strictEquals(stringLength, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast stringLength : Dynamic) : (cast (cluster + 1.0) : Dynamic)) : Dynamic));
           }
           return cast cast ([cluster, end] : Array<Dynamic>);
         }

@@ -12,18 +12,18 @@ class TextureLevelLayout {
   public static function computeTextureContainerLevels(format:TextureContainerFormat, baseWidth:Float, baseHeight:Float, mipLevels:Float, layers:Float, faces:Float, startOffset:Float):Null<{ var levels:Array<TextureContainerLevel>; var endOffset:Float; }> {
     var levels:Array<TextureContainerLevel> = cast _Runtime.UNDEFINED;
     var offset:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callValue(TextureLevelLayout.getTextureContainerFormatBlockInfo__textureLevelLayout, cast ([format] : Array<Dynamic>)), null))) { return cast null; }
+    if ((cast _Runtime.strictEquals(_Runtime.callValue(TextureLevelLayout.getTextureContainerFormatBlockInfo__textureLevelLayout, cast ([format] : Array<Dynamic>)), null) : Bool)) { return cast null; }
     levels = cast ([] : Array<Dynamic>);
     offset = startOffset;
     {
       var layer:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(layer, layers, '<'))) {
+      while ((cast ((cast layer : Float) < (cast layers : Float)) : Bool)) {
         {
           var face:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(face, faces, '<'))) {
+          while ((cast ((cast face : Float) < (cast faces : Float)) : Bool)) {
             {
               var mip:Dynamic = 0.0;
-              while (_Runtime.truthy(_Runtime.compare(mip, mipLevels, '<'))) {
+              while ((cast ((cast mip : Float) < (cast mipLevels : Float)) : Bool)) {
                 var width:Dynamic = HxMath.max(1.0, (_Runtime.toInt32(baseWidth) >> _Runtime.toInt32(mip)));
                 var height:Dynamic = HxMath.max(1.0, (_Runtime.toInt32(baseHeight) >> _Runtime.toInt32(mip)));
                 var byteLength:Dynamic = _Runtime.callValue(getTextureContainerLevelByteLength, cast ([format, width, height] : Array<Dynamic>));
@@ -47,7 +47,7 @@ class TextureLevelLayout {
     var blocksWide:Dynamic = cast _Runtime.UNDEFINED;
     var blocksHigh:Dynamic = cast _Runtime.UNDEFINED;
     block = _Runtime.callValue(TextureLevelLayout.getTextureContainerFormatBlockInfo__textureLevelLayout, cast ([format] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(block, null))) { return cast -1.0; }
+    if ((cast _Runtime.strictEquals(block, null) : Bool)) { return cast -1.0; }
     blocksWide = HxMath.ceil((width / _Runtime.field(block, 'blockWidth')));
     blocksHigh = HxMath.ceil((height / _Runtime.field(block, 'blockHeight')));
     return cast ((blocksWide * blocksHigh) * _Runtime.field(block, 'bytesPerBlock'));

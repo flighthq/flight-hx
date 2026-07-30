@@ -24,15 +24,15 @@ class WgpuClipContours {
     entry = _Runtime.callProperty(_Runtime.field(runtime, 'clipContourStack'), 'pop', cast ([] : Array<Dynamic>));
     _Runtime.setField(runtime, 'currentMaskDepth', HxMath.max(0.0, (_Runtime.field(runtime, 'currentMaskDepth') - 1.0)));
     pass = _Runtime.field(runtime, 'renderPass');
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(pass, null), function():Dynamic return cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED'))))) {
+    if ((cast ((cast !_Runtime.strictEquals(pass, null) : Bool) && (cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
       var pipelines:Dynamic = _Runtime.callValue(WgpuClipContours.ensureClipContourPipelines__wgpuClipContours, cast ([state] : Array<Dynamic>));
       _Runtime.callProperty(pass, 'setPipeline', cast ([_Runtime.field(pipelines, 'erase')] : Array<Dynamic>));
       _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, _Runtime.field(entry, 'bindGroup')] : Array<Dynamic>));
       _Runtime.callProperty(pass, 'setVertexBuffer', cast ([0.0, _Runtime.field(entry, 'vertexBuffer')] : Array<Dynamic>));
       _Runtime.callProperty(pass, 'setStencilReference', cast ([(_Runtime.field(entry, 'depth') + 1.0)] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(entry, 'vertexCount'), 0.0, '>'))) { _Runtime.callProperty(pass, 'draw', cast ([_Runtime.field(entry, 'vertexCount')] : Array<Dynamic>)); }
+      if ((cast ((cast _Runtime.field(entry, 'vertexCount') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(pass, 'draw', cast ([_Runtime.field(entry, 'vertexCount')] : Array<Dynamic>)); }
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.pushMany(_Runtime.coalesce(_Runtime.field(runtime, 'retiredBuffers'), function():Dynamic return cast _Runtime.setField(runtime, 'retiredBuffers', cast ([] : Array<Dynamic>))), cast ([_Runtime.field(entry, 'vertexBuffer'), _Runtime.field(entry, 'uniformBuffer')] : Array<Dynamic>));
     }
   }
@@ -60,12 +60,12 @@ class WgpuClipContours {
     uniformBuffer = _Runtime.callValue(WgpuClipContours.createClipContourUniformBuffer__wgpuClipContours, cast ([state, worldTransform] : Array<Dynamic>));
     bindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: _Runtime.field(pipelines, 'bindGroupLayout'), entries: cast ([{ binding: 0.0, resource: { buffer: uniformBuffer } }] : Array<Dynamic>) }] : Array<Dynamic>));
     pass = _Runtime.field(runtime, 'renderPass');
-    if (_Runtime.truthy(!_Runtime.strictEquals(pass, null))) {
+    if ((cast !_Runtime.strictEquals(pass, null) : Bool)) {
       _Runtime.callProperty(pass, 'setPipeline', cast ([_Runtime.field(pipelines, 'write')] : Array<Dynamic>));
       _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, bindGroup] : Array<Dynamic>));
       _Runtime.callProperty(pass, 'setVertexBuffer', cast ([0.0, vertexBuffer] : Array<Dynamic>));
       _Runtime.callProperty(pass, 'setStencilReference', cast ([depth] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.compare(vertexCount, 0.0, '>'))) { _Runtime.callProperty(pass, 'draw', cast ([vertexCount] : Array<Dynamic>)); }
+      if ((cast ((cast vertexCount : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(pass, 'draw', cast ([vertexCount] : Array<Dynamic>)); }
     }
     _Runtime.callProperty(_Runtime.field(runtime, 'clipContourStack'), 'push', cast ([{ vertexBuffer: vertexBuffer, vertexCount: vertexCount, uniformBuffer: uniformBuffer, bindGroup: bindGroup, depth: depth }] : Array<Dynamic>));
     _Runtime.setField(runtime, 'currentMaskDepth', (depth + 1.0));
@@ -106,13 +106,13 @@ class WgpuClipContours {
     tris = cast ([] : Array<Dynamic>);
     {
       var c:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(c, _Runtime.field(contours, 'length'), '<'))) {
+      while ((cast ((cast c : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
         var contour:Dynamic = _Runtime.getIndex(contours, c);
         var pointCount:Dynamic = (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> 1);
-        if (_Runtime.truthy(_Runtime.compare(pointCount, 3.0, '<'))) { c++; continue; }
+        if ((cast ((cast pointCount : Float) < (cast 3.0 : Float)) : Bool)) { c++; continue; }
         {
           var i:Dynamic = 1.0;
-          while (_Runtime.truthy(_Runtime.compare(i, (pointCount - 1.0), '<'))) {
+          while ((cast ((cast i : Float) < (cast (pointCount - 1.0) : Float)) : Bool)) {
             _Runtime.pushMany(tris, cast ([_Runtime.getIndex(contour, 0.0), _Runtime.getIndex(contour, 1.0), _Runtime.getIndex(contour, (i * 2.0)), _Runtime.getIndex(contour, ((i * 2.0) + 1.0)), _Runtime.getIndex(contour, ((i + 1.0) * 2.0)), _Runtime.getIndex(contour, (((i + 1.0) * 2.0) + 1.0))] : Array<Dynamic>));
             i++;
           }
@@ -123,7 +123,7 @@ class WgpuClipContours {
     data = new flighthq._internal._Float32Array(tris);
     vertexCount = (_Runtime.toInt32(_Runtime.field(data, 'length')) >> 1);
     vertexBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: HxMath.max(4.0, _Runtime.field(data, 'byteLength')), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'VERTEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(data, 'byteLength'), 0.0, '>'))) { flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([vertexBuffer, 0.0, data] : Array<Dynamic>)); }
+    if ((cast ((cast _Runtime.field(data, 'byteLength') : Float) > (cast 0.0 : Float)) : Bool)) { flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([vertexBuffer, 0.0, data] : Array<Dynamic>)); }
     return cast { vertexBuffer: vertexBuffer, vertexCount: vertexCount };
     return cast null;
   }
@@ -144,7 +144,7 @@ class WgpuClipContours {
     format = _Runtime.coalesce(_Runtime.field(runtime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
     cache = _Runtime.coalesce(_Runtime.field(runtime, 'clipContourPipelines'), function():Dynamic return cast _Runtime.setField(runtime, 'clipContourPipelines', _Runtime.construct(_Runtime.globalValue('Map'), [])));
     existing = ((cast cache : flighthq._internal._Map).get(format));
-    if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast existing; }
+    if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
     device = _Runtime.field(state, 'device');
     module = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: WgpuClipContours.CLIP_WGSL__wgpuClipContours }] : Array<Dynamic>));
     bindGroupLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX'), buffer: { type: 'uniform' } }] : Array<Dynamic>) }] : Array<Dynamic>));

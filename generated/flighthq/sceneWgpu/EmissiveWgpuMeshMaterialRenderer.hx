@@ -35,12 +35,12 @@ class EmissiveWgpuMeshMaterialRenderer {
     var group:Dynamic = cast _Runtime.UNDEFINED;
     stateRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     pass = _Runtime.field(stateRuntime, 'renderPass');
-    if (_Runtime.truthy(_Runtime.strictEquals(pass, null))) { return; }
+    if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     emissive = (cast material : Null<EmissiveMaterial>);
     format = _Runtime.coalesce(_Runtime.field(stateRuntime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
     pipeline = _Runtime.callValue(ensureWgpuUnlitPipeline, cast ([state, _Runtime.callValue(EmissiveWgpuMeshMaterialRenderer.defineKeyForMaterial__emissiveWgpuMeshMaterialRenderer, cast ([emissive] : Array<Dynamic>)), format] : Array<Dynamic>));
     _Runtime.callValue(writeWgpuFrameUniform, cast ([state, camera, _lights] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(emissive, null))) {
+    if ((cast _Runtime.strictEquals(emissive, null) : Bool)) {
       (group = cast (_Runtime.callValue(bindWgpuUnlitSurface, cast ([state, pipeline, EmissiveWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__emissiveWgpuMeshMaterialRenderer, EmissiveWgpuMeshMaterialRenderer.WHITE__emissiveWgpuMeshMaterialRenderer, 1.0, 0.5, null] : Array<Dynamic>)) : Dynamic));
     } else {
       _Runtime.callValue(unpackColorToLinear, cast ([EmissiveWgpuMeshMaterialRenderer._scratch__emissiveWgpuMeshMaterialRenderer, _Runtime.field(emissive, 'emissive')] : Array<Dynamic>));
@@ -57,7 +57,7 @@ class EmissiveWgpuMeshMaterialRenderer {
   }
 
   public static function defineKeyForMaterial__emissiveWgpuMeshMaterialRenderer(material:Null<EmissiveMaterial>):WgpuUnlitDefineKey {
-    return cast { alphaMaskEnabled: _Runtime.andValue(!_Runtime.strictEquals(material, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask')), doubleSided: _Runtime.andValue(!_Runtime.strictEquals(material, null), function():Dynamic return cast _Runtime.field(material, 'doubleSided')), hasColorMap: _Runtime.andValue(!_Runtime.strictEquals(material, null), function():Dynamic return cast _Runtime.callValue(isWgpuTextureReady, cast ([_Runtime.field(material, 'emissiveMap')] : Array<Dynamic>))) };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), doubleSided: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.field(material, 'doubleSided') : Bool)), hasColorMap: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.callValue(isWgpuTextureReady, cast ([_Runtime.field(material, 'emissiveMap')] : Array<Dynamic>)) : Bool)) };
     return cast null;
   }
 

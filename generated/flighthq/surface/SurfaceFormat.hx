@@ -17,8 +17,8 @@ class SurfaceFormat {
     var dstG:Dynamic = cast _Runtime.UNDEFINED;
     var dstB:Dynamic = cast _Runtime.UNDEFINED;
     var dstA:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(from, to))) {
-      if (_Runtime.truthy(!_Runtime.strictEquals(out, source))) { _Runtime.callProperty(out, 'set', cast ([(cast source : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int(length))] : Array<Dynamic>)); }
+    if ((cast _Runtime.strictEquals(from, to) : Bool)) {
+      if ((cast !_Runtime.strictEquals(out, source) : Bool)) { _Runtime.callProperty(out, 'set', cast ([(cast source : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int(length))] : Array<Dynamic>)); }
       return;
     }
     __destructure0 = _Runtime.callValue(SurfaceFormat.channelOffsets__surfaceFormat, cast ([from] : Array<Dynamic>));
@@ -33,7 +33,7 @@ class SurfaceFormat {
     dstA = _Runtime.getIndex(__destructure1, 3.0);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, length, '<'))) {
+      while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
         var r:Dynamic = _Runtime.getIndex(source, (i + srcR));
         var g:Dynamic = _Runtime.getIndex(source, (i + srcG));
         var b:Dynamic = _Runtime.getIndex(source, (i + srcB));
@@ -50,7 +50,7 @@ class SurfaceFormat {
   public static function premultiplySurfacePixels(out:flighthq._internal._UInt8ClampedArray, source:flighthq._internal._UInt8ClampedArray, length:Float):Void {
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, length, '<'))) {
+      while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
         var a:Dynamic = (_Runtime.getIndex(source, (i + 3.0)) / 255.0);
         _Runtime.setIndex(out, i, HxMath.round((_Runtime.getIndex(source, i) * a)));
         _Runtime.setIndex(out, (i + 1.0), HxMath.round((_Runtime.getIndex(source, (i + 1.0)) * a)));
@@ -64,9 +64,9 @@ class SurfaceFormat {
   public static function unpremultiplySurfacePixels(out:flighthq._internal._UInt8ClampedArray, source:flighthq._internal._UInt8ClampedArray, length:Float):Void {
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, length, '<'))) {
+      while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
         var a:Dynamic = _Runtime.getIndex(source, (i + 3.0));
-        if (_Runtime.truthy(_Runtime.strictEquals(a, 0.0))) {
+        if ((cast _Runtime.strictEquals(a, 0.0) : Bool)) {
           _Runtime.setIndex(out, i, 0.0);
           _Runtime.setIndex(out, (i + 1.0), 0.0);
           _Runtime.setIndex(out, (i + 2.0), 0.0);

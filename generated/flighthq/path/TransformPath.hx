@@ -34,18 +34,18 @@ class TransformPath {
     di = 0.0;
     {
       var ci:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(ci, _Runtime.field(commands, 'length'), '<'))) {
+      while ((cast ((cast ci : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
         var command:Dynamic = _Runtime.getIndex(commands, ci);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(command, PathCommandValue.MOVE_TO), function():Dynamic return cast _Runtime.strictEquals(command, PathCommandValue.LINE_TO)))) {
+        if ((cast ((cast _Runtime.strictEquals(command, PathCommandValue.MOVE_TO) : Bool) || (cast _Runtime.strictEquals(command, PathCommandValue.LINE_TO) : Bool)) : Bool)) {
           var x:Dynamic = _Runtime.getIndex(data, di);
           var y:Dynamic = _Runtime.getIndex(data, (di + 1.0));
           _Runtime.setIndex(data, di, (((a * x) + (c * y)) + tx));
           _Runtime.setIndex(data, (di + 1.0), (((b * x) + (d * y)) + ty));
           (di = cast ((di + 2.0) : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CURVE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CURVE_TO) : Bool)) {
           {
             var k:Dynamic = 0.0;
-            while (_Runtime.truthy(_Runtime.compare(k, 4.0, '<'))) {
+            while ((cast ((cast k : Float) < (cast 4.0 : Float)) : Bool)) {
               var x:Dynamic = _Runtime.getIndex(data, (di + k));
               var y:Dynamic = _Runtime.getIndex(data, ((di + k) + 1.0));
               _Runtime.setIndex(data, (di + k), (((a * x) + (c * y)) + tx));
@@ -54,10 +54,10 @@ class TransformPath {
             }
           }
           (di = cast ((di + 4.0) : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO) : Bool)) {
           {
             var k:Dynamic = 0.0;
-            while (_Runtime.truthy(_Runtime.compare(k, 6.0, '<'))) {
+            while ((cast ((cast k : Float) < (cast 6.0 : Float)) : Bool)) {
               var x:Dynamic = _Runtime.getIndex(data, (di + k));
               var y:Dynamic = _Runtime.getIndex(data, ((di + k) + 1.0));
               _Runtime.setIndex(data, (di + k), (((a * x) + (c * y)) + tx));
@@ -66,7 +66,7 @@ class TransformPath {
             }
           }
           (di = cast ((di + 6.0) : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO), function():Dynamic return cast _Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO)))) {
+        } else { if ((cast ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO) : Bool) || (cast _Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO) : Bool)) : Bool)) {
           var x:Dynamic = _Runtime.getIndex(data, (di + 2.0));
           var y:Dynamic = _Runtime.getIndex(data, (di + 3.0));
           _Runtime.setIndex(data, (di + 2.0), (((a * x) + (c * y)) + tx));

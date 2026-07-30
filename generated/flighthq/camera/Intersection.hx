@@ -13,10 +13,10 @@ import flighthq.types.Vector3.Vector3Like;
 
 class Intersection {
   public static function getCameraRayThroughBoundingSphere(out:Ray3DLike, camera:Camera, sphere:BoundingSphereLike, aspect:Float):Bool {
-    if (_Runtime.truthy(_Runtime.compare(sphere.radius, 0.0, '<'))) {
+    if ((cast ((cast sphere.radius : Float) < (cast 0.0 : Float)) : Bool)) {
       return cast false;
     }
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(getCameraWorldToScreen, cast ([Intersection.__scratchNdc__intersection, camera, sphere.center, aspect] : Array<Dynamic>))))) {
+    if ((cast !(cast _Runtime.callValue(getCameraWorldToScreen, cast ([Intersection.__scratchNdc__intersection, camera, sphere.center, aspect] : Array<Dynamic>)) : Bool) : Bool)) {
       return cast false;
     }
     return cast _Runtime.callValue(getCameraScreenToWorldRay, cast ([out, camera, Intersection.__scratchNdc__intersection.x, Intersection.__scratchNdc__intersection.y, aspect] : Array<Dynamic>));
@@ -47,11 +47,11 @@ class Intersection {
     c = plane.c;
     d = plane.d;
     denom = (((a * dx) + (b * dy)) + (c * dz));
-    if (_Runtime.truthy(_Runtime.strictEquals(denom, 0.0))) {
+    if ((cast _Runtime.strictEquals(denom, 0.0) : Bool)) {
       return cast false;
     }
     t = (-((((a * ox) + (b * oy)) + (c * oz)) + d) / denom);
-    if (_Runtime.truthy(_Runtime.compare(t, 0.0, '<'))) {
+    if ((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool)) {
       return cast false;
     }
     (out.x = cast ((ox + (t * dx)) : Dynamic));

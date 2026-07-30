@@ -31,7 +31,7 @@ class CanvasParticleEmitter {
     ids = _Runtime.field(__destructure0, 'ids');
     particleCount = _Runtime.field(__destructure0, 'particleCount');
     transforms = _Runtime.field(__destructure0, 'transforms');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(atlas, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(atlas, 'image'), null)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(atlas, 'image'), 'source'), null)), function():Dynamic return cast _Runtime.strictEquals(particleCount, 0.0)))) { return; }
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(atlas, 'image'), null) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(atlas, 'image'), 'source'), null) : Bool)) : Bool) || (cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) : Bool)) { return; }
     regions = _Runtime.field(atlas, 'regions');
     numRegions = _Runtime.field(regions, 'length');
     nodeAlpha = _Runtime.field(renderProxy, 'alpha');
@@ -39,14 +39,14 @@ class CanvasParticleEmitter {
     imageSource = _Runtime.field(_Runtime.field(atlas, 'image'), 'source');
     context = _Runtime.field(state, 'context');
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'allowSmoothing')))) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false); }
+    if ((cast !(cast _Runtime.field(state, 'allowSmoothing') : Bool) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false); }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, particleCount, '<'))) {
+      while ((cast ((cast i : Float) < (cast particleCount : Float)) : Bool)) {
         var id:Dynamic = _Runtime.getIndex(ids, i);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(id, 0.0, '<'), function():Dynamic return cast _Runtime.compare(id, numRegions, '>=')))) { i++; continue; }
+        if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
         var region:Dynamic = _Runtime.getIndex(regions, id);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(region, 'width'), 0.0, '<='), function():Dynamic return cast _Runtime.compare(_Runtime.field(region, 'height'), 0.0, '<=')))) { i++; continue; }
+        if ((cast ((cast ((cast _Runtime.field(region, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(region, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
         var tt:Dynamic = (i * 4.0);
         var px:Dynamic = _Runtime.getIndex(transforms, tt);
         var py:Dynamic = _Runtime.getIndex(transforms, (tt + 1.0));
@@ -60,7 +60,7 @@ class CanvasParticleEmitter {
         var d:Float = cast _Runtime.UNDEFINED;
         var tx:Float = cast _Runtime.UNDEFINED;
         var ty:Float = cast _Runtime.UNDEFINED;
-        if (_Runtime.truthy(_Runtime.field(_Runtime.field(source, 'data'), 'worldSpace'))) {
+        if ((cast _Runtime.field(_Runtime.field(source, 'data'), 'worldSpace') : Bool)) {
           (a = cast (cosR : Dynamic));
           (b = cast (sinR : Dynamic));
           (c = cast (-sinR : Dynamic));
@@ -81,7 +81,7 @@ class CanvasParticleEmitter {
         i++;
       }
     }
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'allowSmoothing')))) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', true); }
+    if ((cast !(cast _Runtime.field(state, 'allowSmoothing') : Bool) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', true); }
   }
 
   public static final defaultCanvasParticleEmitterRenderer:SpriteRenderer = { createData: noopRendererData, submit: drawCanvasParticleEmitter };

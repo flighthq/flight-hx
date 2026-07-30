@@ -33,14 +33,14 @@ class SurfaceHistogram {
     surfaceWidth = _Runtime.field(_Runtime.field(source, 'surface'), 'width');
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(source, 'height'), '<'))) {
+      while ((cast ((cast py : Float) < (cast _Runtime.field(source, 'height') : Float)) : Bool)) {
         var y:Dynamic = (_Runtime.field(source, 'y') + py);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(y, 0.0, '<'), function():Dynamic return cast _Runtime.compare(y, _Runtime.field(_Runtime.field(source, 'surface'), 'height'), '>=')))) { py++; continue; }
+        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, _Runtime.field(source, 'width'), '<'))) {
+          while ((cast ((cast px : Float) < (cast _Runtime.field(source, 'width') : Float)) : Bool)) {
             var x:Dynamic = (_Runtime.field(source, 'x') + px);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(x, 0.0, '<'), function():Dynamic return cast _Runtime.compare(x, surfaceWidth, '>=')))) { px++; continue; }
+            if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast surfaceWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var i:Dynamic = (((y * surfaceWidth) + x) * 4.0);
             _Runtime.incrementIndex(red, _Runtime.getIndex(data, i), 1, true);
             _Runtime.incrementIndex(green, _Runtime.getIndex(data, (i + 1.0)), 1, true);
@@ -65,10 +65,10 @@ class SurfaceHistogram {
     cdfMin = -1.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, 256.0, '<'))) {
+      while ((cast ((cast i : Float) < (cast 256.0 : Float)) : Bool)) {
         (cdf = cast ((cdf + _Runtime.getIndex(bins, i)) : Dynamic));
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(_Runtime.getIndex(bins, i), 0.0, '>'), function():Dynamic return cast _Runtime.strictEquals(cdfMin, -1.0)))) { (cdfMin = cast (cdf : Dynamic)); }
-        _Runtime.setIndex(map, i, _Runtime.select(_Runtime.strictEquals(total, cdfMin), function():Dynamic return cast i, function():Dynamic return cast HxMath.round((((cdf - cdfMin) / (total - cdfMin)) * 255.0))));
+        if ((cast ((cast ((cast _Runtime.getIndex(bins, i) : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals(cdfMin, -1.0) : Bool)) : Bool)) { (cdfMin = cast (cdf : Dynamic)); }
+        _Runtime.setIndex(map, i, ((cast _Runtime.strictEquals(total, cdfMin) : Bool) ? (cast i : Dynamic) : (cast HxMath.round((((cdf - cdfMin) / (total - cdfMin)) * 255.0)) : Dynamic)));
         i++;
       }
     }

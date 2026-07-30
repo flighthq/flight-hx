@@ -62,14 +62,14 @@ class GlTilemap {
     columns = _Runtime.field(__destructure0, 'columns');
     rows = _Runtime.field(__destructure0, 'rows');
     tiles = _Runtime.field(__destructure0, 'tiles');
-    if (_Runtime.truthy(_Runtime.strictEquals(tileset, null))) { return; }
+    if ((cast _Runtime.strictEquals(tileset, null) : Bool)) { return; }
     atlas = _Runtime.field(tileset, 'atlas');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(atlas, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(atlas, 'image'), null)), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(atlas, 'image')] : Array<Dynamic>)))))) { return; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(columns, 0.0), function():Dynamic return cast _Runtime.strictEquals(rows, 0.0)))) { return; }
+    if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(atlas, 'image'), null) : Bool)) : Bool) || (cast !(cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(atlas, 'image')] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return; }
+    if ((cast ((cast _Runtime.strictEquals(columns, 0.0) : Bool) || (cast _Runtime.strictEquals(rows, 0.0) : Bool)) : Bool)) { return; }
     _Runtime.callValue(ensureGlQuadBatchShader, cast ([state] : Array<Dynamic>));
     material = _Runtime.field(tilemapNode, 'material');
     materialRenderer = _Runtime.callValue(resolveGlMaterialRenderer, cast ([state, material] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(materialRenderer, null))) { return; }
+    if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
     nodeMaterialData = _Runtime.field(tilemapNode, 'materialData');
     perTileColorTransform = _Runtime.field(_Runtime.field(source, 'data'), 'materialData');
     nodeColorTransform = _Runtime.field(tilemapNode, 'colorTransform');
@@ -95,14 +95,14 @@ class GlTilemap {
     drawCount = 0.0;
     {
       var row:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(row, rows, '<'))) {
+      while ((cast ((cast row : Float) < (cast rows : Float)) : Bool)) {
         {
           var col:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(col, columns, '<'))) {
+          while ((cast ((cast col : Float) < (cast columns : Float)) : Bool)) {
             var id:Dynamic = _Runtime.getIndex(tiles, ((row * columns) + col));
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(id, 0.0, '<'), function():Dynamic return cast _Runtime.compare(id, numRegions, '>=')))) { col++; continue; }
+            if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { col++; continue; }
             var region:Dynamic = _Runtime.getIndex(regions, id);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(region, 'width'), 0.0, '<='), function():Dynamic return cast _Runtime.compare(_Runtime.field(region, 'height'), 0.0, '<=')))) { col++; continue; }
+            if ((cast ((cast ((cast _Runtime.field(region, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(region, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { col++; continue; }
             var dx:Dynamic = (col * tileWidth);
             var dy:Dynamic = (row * tileHeight);
             _Runtime.setIndex(instanceData, writeBase, pa);
