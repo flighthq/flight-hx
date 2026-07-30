@@ -1448,17 +1448,21 @@ function typedStructPropertyBinding(
   const checker = context.checker;
   const registry = context.typedStructs;
   if (!checker || !registry) return undefined;
-  const resolution = registry.resolve(checker.getTypeAtLocation(node.expression));
+  const receiverType = checker.getTypeAtLocation(node.expression);
+  const resolution = registry.resolve(receiverType);
   if (resolution.kind !== 'matched') return undefined;
   if (node.name.text === 'hasOwnProperty' && ts.isCallExpression(node.parent) && node.parent.expression === node) {
     return undefined;
   }
   const schema = resolution.schemas[0]!;
   if (!schema.eligible || schema.emission.mode !== 'direct') return undefined;
-  const field = schema.fields.find((candidate) => candidate.name === node.name.text);
-  if (!field) {
+  const property = checker.getSymbolAtLocation(node.name);
+  const binding = registry.resolveField(receiverType, node.name.text, property);
+  if (!binding) {
+    if (property) return undefined;
     return unsupported(node, context, `unknown typed-struct field ${schema.name}.${node.name.text}`);
   }
+  const field = binding.field;
   if (field.receiverSensitive) return undefined;
   if (ts.isDeleteExpression(node.parent)) return undefined;
   if (field.readonly && isTypedStructWrite(node)) {
@@ -1471,8 +1475,8 @@ function typedStructPropertyBinding(
       readonly: field.readonly,
       requiredUndefined: field.requiredUndefined,
     },
-    schemaId: schema.id,
-    schemaName: schema.name,
+    schemaId: binding.schemaId,
+    schemaName: binding.schemaName,
   };
 }
 

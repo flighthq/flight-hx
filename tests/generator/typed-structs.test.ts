@@ -247,6 +247,42 @@ describe('typed struct analysis', () => {
     );
   });
 
+  it('binds intersection fields by declaration identity rather than matching their spelling', () => {
+    const result = lowerFixture(`
+      export interface Vector2 {
+        own: number;
+        collision: number;
+      }
+      interface Sibling {
+        sibling: number;
+        collision: number;
+      }
+      export function read(value: Vector2 & Sibling): number {
+        return value.own + value.sibling + value.collision;
+      }
+    `);
+    const candidate = result.registry.report.candidates[0]!;
+    const output = emitHaxeModule({
+      declarations: result.lowered.declarations,
+      imports: [],
+      name: 'Vector2',
+      packageName: '@flighthq/types',
+    });
+
+    expect(result.lowered.diagnostics).toEqual([]);
+    expect(collectTypedStructBindings(result.lowered.declarations).map((binding) => binding.field.name)).toEqual([
+      'own',
+    ]);
+    expect(candidate.accesses).toEqual({ calls: 0, reads: 1, writes: 0 });
+    expect(candidate.escapes).toEqual([
+      expect.objectContaining({ member: 'sibling', reason: 'unknown-member' }),
+      expect.objectContaining({ member: 'collision', reason: 'unknown-member' }),
+    ]);
+    expect(output).toContain('value.own');
+    expect(output).toContain("_Runtime.field(value, 'sibling')");
+    expect(output).toContain("_Runtime.field(value, 'collision')");
+  });
+
   it('rejects unknown and readonly named writes before an emitter can trust them', () => {
     const unknown = lowerFixture(`
       export interface Vector2 { readonly x: number; y: number; }
