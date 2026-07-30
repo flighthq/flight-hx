@@ -403,9 +403,47 @@ class NativeCanvas2dContext {
 
   // ---- text ----
 
+  /** Registered real font faces by family name; `fillText` and `measureText`
+   * use them when the CSS font string names a registered family, falling back
+   * to cairo's toy face and the width heuristic otherwise. */
+  static final registeredFonts:Map<String, {font:lime.text.Font, face:lime.graphics.cairo.CairoFontFace,
+    advances:Map<Int, Float>}> = [];
+
+  public static function registerFont(family:String, font:lime.text.Font):Void {
+    final face = lime.graphics.cairo.CairoFTFontFace.create(font, lime.graphics.cairo.CairoFTFontFace.FT_LOAD_FORCE_AUTOHINT);
+    registeredFonts.set(family.toLowerCase(), {font: font, face: face, advances: []});
+  }
+
+  static function resolveRegisteredFont(fontValue:String):Null<{font:lime.text.Font,
+      face:lime.graphics.cairo.CairoFontFace, advances:Map<Int, Float>}> {
+    // Families are the comma-separated tail of the CSS shorthand after the size token.
+    final sizeIndex = fontValue.indexOf('px');
+    final families = (sizeIndex >= 0 ? fontValue.substr(sizeIndex + 2) : fontValue).split(',');
+    for (family in families) {
+      final key = StringTools.trim(StringTools.replace(StringTools.replace(family, '"', ''), "'", '')).toLowerCase();
+      if (key != '' && registeredFonts.exists(key)) return registeredFonts.get(key);
+    }
+    return null;
+  }
+
+  /** Em-scaled advance of one code point in the registered font, cached. */
+  static function glyphAdvance(entry:{font:lime.text.Font, face:lime.graphics.cairo.CairoFontFace,
+      advances:Map<Int, Float>}, character:String):Float {
+    final code = character.charCodeAt(0);
+    final cached = entry.advances.get(code);
+    if (cached != null) return cached;
+    final glyph = entry.font.getGlyph(character);
+    final metrics = entry.font.getGlyphMetrics(glyph);
+    final advance = metrics != null ? metrics.advance.x / entry.font.unitsPerEM : 0.55;
+    entry.advances.set(code, advance);
+    return advance;
+  }
+
   public function fillText(text:String, x:Float, y:Float):Void {
     final ctx = context();
     ctx.save();
+    final registered = resolveRegisteredFont(font);
+    if (registered != null) ctx.fontFace = registered.face;
     ctx.setFontSize(parseFontSize(font));
     applyStyle(fillStyle);
     ctx.moveTo(x, y);
@@ -414,8 +452,15 @@ class NativeCanvas2dContext {
   }
 
   public function measureText(text:String):Dynamic {
-    // Width heuristic until a FreeType font face loader provides real extents.
-    return {width: parseFontSize(font) * 0.55 * text.length};
+    final size = parseFontSize(font);
+    final registered = resolveRegisteredFont(font);
+    if (registered == null) {
+      // Width heuristic for the toy face when no real font is registered.
+      return {width: size * 0.55 * text.length};
+    }
+    var width = 0.0;
+    for (index in 0...text.length) width += glyphAdvance(registered, text.charAt(index));
+    return {width: width * size};
   }
 
   static function parseFontSize(fontValue:String):Float {
