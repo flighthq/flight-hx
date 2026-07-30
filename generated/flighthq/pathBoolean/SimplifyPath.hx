@@ -12,8 +12,8 @@ class SimplifyPath {
   public static function simplifyPath(path:Path, ?options:PathBooleanOptions):Path {
     var fillRule:Dynamic = cast _Runtime.UNDEFINED;
     var contours:Dynamic = cast _Runtime.UNDEFINED;
-    fillRule = _Runtime.coalesce(_Runtime.optionalField(options, 'fillRule'), function():Dynamic return cast 'nonZero');
-    contours = _Runtime.callValue(flattenPath, cast ([path, _Runtime.optionalField(options, 'tolerance')] : Array<Dynamic>));
+    fillRule = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.fillRule; }), function():Dynamic return cast 'nonZero');
+    contours = _Runtime.callValue(flattenPath, cast ([path, ({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.tolerance; })] : Array<Dynamic>));
     return cast _Runtime.callValue(resolvePathRegions, cast ([contours, fillRule] : Array<Dynamic>));
     return cast null;
   }

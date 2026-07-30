@@ -36,8 +36,8 @@ class Throttle {
     var leadingFired:Dynamic = cast _Runtime.UNDEFINED;
     var clearTimer:Dynamic = cast _Runtime.UNDEFINED;
     var handler:Dynamic = cast _Runtime.UNDEFINED;
-    leading = _Runtime.coalesce(_Runtime.optionalField(options, 'leading'), function():Dynamic return cast false);
-    trailing = _Runtime.coalesce(_Runtime.optionalField(options, 'trailing'), function():Dynamic return cast true);
+    leading = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.leading; }), function():Dynamic return cast false);
+    trailing = _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.trailing; }), function():Dynamic return cast true);
     timer = null;
     lastArgs = null;
     leadingFired = false;
@@ -79,8 +79,8 @@ class Throttle {
     var lastArgs:Null<Array<Dynamic>> = cast _Runtime.UNDEFINED;
     var clearTrailing:Dynamic = cast _Runtime.UNDEFINED;
     var handler:Dynamic = cast _Runtime.UNDEFINED;
-    leading = _Runtime.coalesce(_Runtime.optionalField(options, 'leading'), function():Dynamic return cast true);
-    trailing = _Runtime.coalesce(_Runtime.optionalField(options, 'trailing'), function():Dynamic return cast true);
+    leading = _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.leading; }), function():Dynamic return cast true);
+    trailing = _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.trailing; }), function():Dynamic return cast true);
     lastFiredAt = -HxMath.POSITIVE_INFINITY;
     trailingTimer = null;
     lastArgs = null;

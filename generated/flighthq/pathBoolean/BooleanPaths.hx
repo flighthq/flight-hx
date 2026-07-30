@@ -19,9 +19,9 @@ class BooleanPaths {
     var subjectContours:Dynamic = cast _Runtime.UNDEFINED;
     var clipContours:Dynamic = cast _Runtime.UNDEFINED;
     var result:Dynamic = cast _Runtime.UNDEFINED;
-    fillRule = _Runtime.coalesce(_Runtime.optionalField(options, 'fillRule'), function():Dynamic return cast 'nonZero');
-    subjectContours = _Runtime.callValue(flattenPath, cast ([subject, _Runtime.optionalField(options, 'tolerance')] : Array<Dynamic>));
-    clipContours = _Runtime.callValue(flattenPath, cast ([clip, _Runtime.optionalField(options, 'tolerance')] : Array<Dynamic>));
+    fillRule = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.fillRule; }), function():Dynamic return cast 'nonZero');
+    subjectContours = _Runtime.callValue(flattenPath, cast ([subject, ({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.tolerance; })] : Array<Dynamic>));
+    clipContours = _Runtime.callValue(flattenPath, cast ([clip, ({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.tolerance; })] : Array<Dynamic>));
     result = _Runtime.callProperty(_Runtime.callValue(getPathBooleanBackend, cast ([] : Array<Dynamic>)), 'computePathBoolean', cast ([subjectContours, clipContours, operation, fillRule] : Array<Dynamic>));
     return cast _Runtime.callValue(BooleanPaths.writeContours__booleanPaths, cast ([result, out] : Array<Dynamic>));
     return cast null;

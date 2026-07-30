@@ -156,9 +156,9 @@ class WgpuCache {
     _Runtime.setField(cacheRuntime, 'depthStencilWidth', _Runtime.field(screenRuntime, 'depthStencilWidth'));
     _Runtime.setField(cacheRuntime, 'depthStencilHeight', _Runtime.field(screenRuntime, 'depthStencilHeight'));
     _Runtime.setField(cacheRuntime, 'uniformOffset', _Runtime.field(screenRuntime, 'uniformOffset'));
-    padding = _Runtime.coalesce(_Runtime.optionalField(options, 'padding'), function():Dynamic return cast 0.0);
-    minWidth = _Runtime.coalesce(_Runtime.optionalField(options, 'minWidth'), function():Dynamic return cast 1.0);
-    minHeight = _Runtime.coalesce(_Runtime.optionalField(options, 'minHeight'), function():Dynamic return cast 1.0);
+    padding = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.padding; }), function():Dynamic return cast 0.0);
+    minWidth = _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.minWidth; }), function():Dynamic return cast 1.0);
+    minHeight = _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.minHeight; }), function():Dynamic return cast 1.0);
     _Runtime.callValue(computeNodeBoundsRectangle, cast ([WgpuCache._bounds__wgpuCache, source, source] : Array<Dynamic>));
     __destructure0 = _Runtime.callValue(computeRenderTargetSize, cast ([WgpuCache._bounds__wgpuCache, padding, minWidth, minHeight] : Array<Dynamic>));
     width = _Runtime.field(__destructure0, 'width');

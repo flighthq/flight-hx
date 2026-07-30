@@ -32,7 +32,7 @@ class TextInputManager {
     var onKeyDown:Dynamic = cast _Runtime.UNDEFINED;
     var onTextInput:Dynamic = cast _Runtime.UNDEFINED;
     onKeyDown = function(data:InputKeyboardData) return _Runtime.callValue(dispatchTextInputKeyDown, cast ([manager, data] : Array<Dynamic>));
-    onTextInput = function(data:InputTextData) return _Runtime.callValue(dispatchTextInput, cast ([manager, _Runtime.field(data, 'text')] : Array<Dynamic>));
+    onTextInput = function(data:InputTextData) return _Runtime.callValue(dispatchTextInput, cast ([manager, data.text] : Array<Dynamic>));
     _Runtime.callValue(connectSignal, cast ([_Runtime.field(input, 'onKeyDown'), onKeyDown] : Array<Dynamic>));
     _Runtime.callValue(connectSignal, cast ([_Runtime.field(input, 'onTextInput'), onTextInput] : Array<Dynamic>));
     return cast function() {

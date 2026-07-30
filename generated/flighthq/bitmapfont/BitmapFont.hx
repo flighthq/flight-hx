@@ -26,7 +26,7 @@ class BitmapFont {
         ((cast kerning : flighthq._internal._Map).set(_Runtime.callValue(BitmapFont.packBitmapFontKerningKey__bitmapFont, cast ([_Runtime.field(pair, 'left'), _Runtime.field(pair, 'right')] : Array<Dynamic>)), _Runtime.field(pair, 'amount')));
       }
     }
-    return cast { encoding: _Runtime.coalesce(_Runtime.field(data, 'encoding'), function():Dynamic return cast 'raster'), glyphs: glyphs, kerning: kerning, metrics: { ascent: _Runtime.field(_Runtime.field(data, 'metrics'), 'ascent'), descent: _Runtime.field(_Runtime.field(data, 'metrics'), 'descent'), lineGap: _Runtime.field(_Runtime.field(data, 'metrics'), 'lineGap') }, pages: _Runtime.slice(_Runtime.field(data, 'pages'), 0, null) };
+    return cast { encoding: _Runtime.coalesce(_Runtime.field(data, 'encoding'), function():Dynamic return cast 'raster'), glyphs: glyphs, kerning: kerning, metrics: { ascent: _Runtime.field(data, 'metrics').ascent, descent: _Runtime.field(data, 'metrics').descent, lineGap: _Runtime.field(data, 'metrics').lineGap }, pages: _Runtime.slice(_Runtime.field(data, 'pages'), 0, null) };
     return cast null;
   }
 

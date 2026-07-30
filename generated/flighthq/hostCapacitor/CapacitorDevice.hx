@@ -34,18 +34,18 @@ class CapacitorDevice {
     
     });
     return cast { getCapabilities: function(out:DeviceCapabilities) {
-      _Runtime.setField(out, 'hasKeyboard', false);
-      _Runtime.setField(out, 'hasMouse', false);
-      _Runtime.setField(out, 'hasStylus', false);
+      (out.hasKeyboard = cast (false : Dynamic));
+      (out.hasMouse = cast (false : Dynamic));
+      (out.hasStylus = cast (false : Dynamic));
       return cast out;
     }, getDisplayMetrics: function(out:DeviceDisplayMetrics) {
-      _Runtime.setField(out, 'colorDepth', -1.0);
-      _Runtime.setField(out, 'densityDpi', -1.0);
-      _Runtime.setField(out, 'logicalHeight', -1.0);
-      _Runtime.setField(out, 'logicalWidth', -1.0);
-      _Runtime.setField(out, 'physicalHeight', -1.0);
-      _Runtime.setField(out, 'physicalWidth', -1.0);
-      _Runtime.setField(out, 'pixelRatio', -1.0);
+      (out.colorDepth = cast (-1.0 : Dynamic));
+      (out.densityDpi = cast (-1.0 : Dynamic));
+      (out.logicalHeight = cast (-1.0 : Dynamic));
+      (out.logicalWidth = cast (-1.0 : Dynamic));
+      (out.physicalHeight = cast (-1.0 : Dynamic));
+      (out.physicalWidth = cast (-1.0 : Dynamic));
+      (out.pixelRatio = cast (-1.0 : Dynamic));
       return cast out;
     }, getId: function() {
       return cast cachedId;

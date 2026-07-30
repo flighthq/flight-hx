@@ -70,7 +70,7 @@ class UpdateBitmapText {
       return;
     }
     metrics = _Runtime.callProperty(glyphSource, 'getGlyphMetrics', cast ([] : Array<Dynamic>));
-    lineAdvance = (((_Runtime.field(metrics, 'ascent') + _Runtime.field(metrics, 'descent')) + _Runtime.field(metrics, 'lineGap')) * _Runtime.field(data, 'lineHeight'));
+    lineAdvance = (((metrics.ascent + metrics.descent) + metrics.lineGap) * _Runtime.field(data, 'lineHeight'));
     lines = _Runtime.callValue(UpdateBitmapText.layoutBitmapTextLines__updateBitmapText, cast ([glyphSource, data] : Array<Dynamic>));
     refWidth = _Runtime.coalesce(_Runtime.field(data, 'wrapWidth'), function():Dynamic return cast _Runtime.callValue(UpdateBitmapText.maxLineWidth__updateBitmapText, cast ([lines] : Array<Dynamic>)));
     pages = _Runtime.construct(_Runtime.globalValue('Map'), []);
@@ -82,7 +82,7 @@ class UpdateBitmapText {
       var li:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(li, _Runtime.field(lines, 'length'), '<'))) {
         var line:Dynamic = _Runtime.getIndex(lines, li);
-        var baselineY:Dynamic = (_Runtime.field(metrics, 'ascent') + (li * lineAdvance));
+        var baselineY:Dynamic = (metrics.ascent + (li * lineAdvance));
         var startX:Dynamic = 0.0;
         var gapExtra:Dynamic = 0.0;
         if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'align'), 'center'))) { (startX = cast (((refWidth - _Runtime.field(line, 'width')) / 2.0) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'align'), 'right'))) { (startX = cast ((refWidth - _Runtime.field(line, 'width')) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(data, 'align'), 'justify'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(data, 'wrapWidth'), null)), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(line, 'paragraphEnd'))), function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.field(line, 'gaps'), 'length'), 0.0, '>')))) {

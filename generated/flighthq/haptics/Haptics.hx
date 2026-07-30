@@ -22,11 +22,11 @@ class Haptics {
     }, capabilities: function(out:HapticsCapabilities) {
       var supported:Dynamic = cast _Runtime.UNDEFINED;
       supported = _Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'vibrate')), 'function'));
-      _Runtime.setField(out, 'amplitudeControl', false);
-      _Runtime.setField(out, 'customEvents', false);
-      _Runtime.setField(out, 'intensity', false);
-      _Runtime.setField(out, 'patterns', supported);
-      _Runtime.setField(out, 'supported', supported);
+      (out.amplitudeControl = cast (false : Dynamic));
+      (out.customEvents = cast (false : Dynamic));
+      (out.intensity = cast (false : Dynamic));
+      (out.patterns = cast (supported : Dynamic));
+      (out.supported = cast (supported : Dynamic));
       return cast out;
     }, impact: function(style:HapticImpactStyle, ?intensity:Float) {
       var base:Dynamic = cast _Runtime.UNDEFINED;

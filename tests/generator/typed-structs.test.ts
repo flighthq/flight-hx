@@ -28,15 +28,15 @@ describe('typed struct analysis', () => {
     const color = report.candidates.find((candidate) => candidate.name === 'ColorTransform');
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 28,
+      auditOnlySchemas: 0,
       bindableAccesses: 2_284,
       candidates: 35,
-      directAccesses: 2_057,
-      directSchemas: 6,
+      directAccesses: 2_284,
+      directSchemas: 34,
       eligible: 34,
       fields: 151,
       ineligible: 1,
-      pendingAccesses: 227,
+      pendingAccesses: 0,
     });
     expect(rectangle?.eligible).toBe(false);
     expect(rectangle?.reasons).toContain('presence-sensitive-use');
@@ -50,7 +50,7 @@ describe('typed struct analysis', () => {
     );
     expect(color?.eligible).toBe(true);
     expect(color?.purpose).toContain('RGBA');
-    expect(report.summary.directAccesses).toBe(2_057);
+    expect(report.summary.directAccesses).toBe(2_284);
     expect(report.summary.reflectiveSurvivors).toBe(0);
     expect(rectangle?.emission).toEqual({
       directAccesses: 0,
@@ -86,6 +86,72 @@ describe('typed struct analysis', () => {
     });
     expect(collectTypedStructBindings(result.lowered.declarations)).toEqual([]);
     expect(output).toContain("_Runtime.field(value, 'x')");
+  });
+
+  it('preserves a partial options literal while reading its omitted field directly', () => {
+    const result = lowerFixture(`
+      export interface Vector2 {
+        maxDeltaTime?: number;
+        targetFrameRate?: number;
+      }
+      export function readMaxDelta(options: Vector2): number | undefined {
+        return options.maxDeltaTime;
+      }
+      export function readPartial(): number | undefined {
+        return readMaxDelta({ targetFrameRate: 60 });
+      }
+    `);
+    const output = emitHaxeModule({
+      declarations: result.lowered.declarations,
+      imports: [],
+      name: 'Vector2',
+      packageName: '@flighthq/types',
+    });
+
+    expect(result.lowered.diagnostics).toEqual([]);
+    expect(collectTypedStructBindings(result.lowered.declarations).map((binding) => binding.field.name)).toEqual([
+      'maxDeltaTime',
+    ]);
+    expect(output).toContain('return cast options.maxDeltaTime;');
+    expect(output).toContain('targetFrameRate: 60.0');
+    expect(output).not.toContain("_Runtime.field(options, 'maxDeltaTime')");
+    expect(output).not.toContain('maxDeltaTime: _Runtime.UNDEFINED');
+  });
+
+  it('writes result records directly inside a plain anonymous backend', () => {
+    const result = lowerFixture(`
+      export interface Vector2 {
+        hasKeyboard: boolean;
+        hasMouse: boolean;
+      }
+      export interface Backend {
+        getCapabilities(out: Vector2): Vector2;
+      }
+      export function createBackend(): Backend {
+        return {
+          getCapabilities(out) {
+            out.hasKeyboard = false;
+            out.hasMouse = false;
+            return out;
+          },
+        };
+      }
+    `);
+    const output = emitHaxeModule({
+      declarations: result.lowered.declarations,
+      imports: [],
+      name: 'Vector2',
+      packageName: '@flighthq/types',
+    });
+
+    expect(result.lowered.diagnostics).toEqual([]);
+    expect(collectTypedStructBindings(result.lowered.declarations).map((binding) => binding.field.name)).toEqual([
+      'hasKeyboard',
+      'hasMouse',
+    ]);
+    expect(output).toContain('(out.hasKeyboard = cast (false : Dynamic))');
+    expect(output).toContain('(out.hasMouse = cast (false : Dynamic))');
+    expect(output).not.toContain("_Runtime.setField(out, 'has");
   });
 
   it('emits bound fields directly while preserving optional and receiver-sensitive semantics', () => {
