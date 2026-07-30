@@ -24,8 +24,8 @@ class _HsvColorValues {
       _Runtime.setIndex(out, 2.0, v);
       return;
     }
-    hn = (((h % 360.0) + 360.0) % 360.0);
-    i = (HxMath.floor((hn / 60.0)) % 6.0);
+    hn = _Runtime.fmod((_Runtime.fmod(h, 360.0) + 360.0), 360.0);
+    i = _Runtime.fmod(HxMath.floor((hn / 60.0)), 6.0);
     f = ((hn / 60.0) - HxMath.floor((hn / 60.0)));
     p = (v * (1.0 - s));
     q = (v * (1.0 - (f * s)));

@@ -202,7 +202,7 @@ class UpdateParticleEmitter {
         _Runtime.setIndex(_Runtime.field(data, 'transforms'), (tt + 2.0), (_Runtime.getIndex(_Runtime.field(data, 'transforms'), (tt + 2.0)) + (_Runtime.getIndex(rotationSpeeds, i) * deltaTime)));
       }
       if (_Runtime.truthy(hasFlipbook)) {
-        var frame:Dynamic = (HxMath.floor((_Runtime.getIndex(lifetimes, lt) * _Runtime.field(config, 'frameRate'))) % _Runtime.field(config, 'frameCount'));
+        var frame:Dynamic = _Runtime.fmod(HxMath.floor((_Runtime.getIndex(lifetimes, lt) * _Runtime.field(config, 'frameRate'))), _Runtime.field(config, 'frameCount'));
         _Runtime.setIndex(_Runtime.field(data, 'ids'), i, (_Runtime.field(config, 'regionIdMin') + frame));
       }
       i++;

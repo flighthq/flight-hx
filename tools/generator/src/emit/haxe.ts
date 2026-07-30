@@ -1685,6 +1685,10 @@ function emitInt32Operand(expression: IrExpression): string {
   return `_Runtime.toInt32(${emitExpression(expression)})`;
 }
 
+function emitArithmeticOperation(left: string, operator: string, right: string): string {
+  return operator === '%' ? `_Runtime.fmod(${left}, ${right})` : `(${left} ${operator} ${right})`;
+}
+
 function emitExpression(expression: IrExpression): string {
   switch (expression.kind) {
     case 'array':
@@ -1722,7 +1726,11 @@ function emitExpression(expression: IrExpression): string {
         const value =
           expression.operator === '='
             ? emitExpression(expression.right)
-            : `(${owner}.length ${expression.operator.slice(0, -1)} ${emitExpression(expression.right)})`;
+            : emitArithmeticOperation(
+                `${owner}.length`,
+                expression.operator.slice(0, -1),
+                emitExpression(expression.right),
+              );
         return `_Runtime.setLength(${owner}, ${value})`;
       }
       if (expression.kind === 'assignment' && expression.left.kind === 'element') {
@@ -1741,7 +1749,7 @@ function emitExpression(expression: IrExpression): string {
             ? `_Runtime.unsignedShiftRight(_Runtime.toInt32(${current}), ${emitInt32Operand(expression.right)})`
             : ['&', '|', '^', '<<', '>>'].includes(operator)
               ? `(_Runtime.toInt32(${current}) ${operator} ${emitInt32Operand(expression.right)})`
-              : `(${current} ${operator} ${emitExpression(expression.right)})`;
+              : emitArithmeticOperation(current, operator, emitExpression(expression.right));
         return `_Runtime.setIndex(${object}, ${index}, ${value})`;
       }
       if (expression.kind === 'assignment' && expression.left.kind === 'property') {
@@ -1773,7 +1781,7 @@ function emitExpression(expression: IrExpression): string {
           const value =
             expression.operator === '='
               ? emitExpression(expression.right)
-              : `(${current} ${expression.operator.slice(0, -1)} ${emitExpression(expression.right)})`;
+              : emitArithmeticOperation(current, expression.operator.slice(0, -1), emitExpression(expression.right));
           return `${binding}.setField(${object}, ${quote(expression.left.name)}, ${value})`;
         }
         if (expression.left.typedStructBinding) {
@@ -1784,11 +1792,18 @@ function emitExpression(expression: IrExpression): string {
           if (expression.operator === '=') {
             return `(${field} = cast (${emitExpression(expression.right)} : Dynamic))`;
           }
+          if (expression.operator === '%=') {
+            return `(${field} = cast (${emitArithmeticOperation(field, '%', emitExpression(expression.right))} : Dynamic))`;
+          }
           return `(${field} ${expression.operator} ${emitExpression(expression.right)})`;
         }
         if (expression.left.object.kind === 'identifier' && expression.left.object.name === 'this') {
           if (expression.operator === '=') {
             return `(this.${safeName(expression.left.name)} = cast (${emitExpression(expression.right)} : Dynamic))`;
+          }
+          if (expression.operator === '%=') {
+            const field = `this.${safeName(expression.left.name)}`;
+            return `(${field} = cast (${emitArithmeticOperation(field, '%', emitExpression(expression.right))} : Dynamic))`;
           }
           return `(this.${safeName(expression.left.name)} ${expression.operator} ${emitExpression(expression.right)})`;
         }
@@ -1797,10 +1812,13 @@ function emitExpression(expression: IrExpression): string {
         }
         const operation = expression.operator.slice(0, -1);
         const current = `_Runtime.field(${object}, ${quote(expression.left.name)})`;
-        return `_Runtime.setField(${object}, ${quote(expression.left.name)}, (${current} ${operation} ${emitExpression(expression.right)}))`;
+        return `_Runtime.setField(${object}, ${quote(expression.left.name)}, ${emitArithmeticOperation(current, operation, emitExpression(expression.right))})`;
       }
       if (expression.kind === 'binary' && expression.operator === '**') {
         return `HxMath.pow(${emitExpression(expression.left)}, ${emitExpression(expression.right)})`;
+      }
+      if (expression.kind === 'binary' && expression.operator === '%') {
+        return `_Runtime.fmod(${emitExpression(expression.left)}, ${emitExpression(expression.right)})`;
       }
       if (
         expression.kind === 'binary' &&
@@ -1873,7 +1891,7 @@ function emitExpression(expression: IrExpression): string {
       if (expression.kind === 'assignment' && ['+=', '-=', '*=', '/=', '%='].includes(expression.operator)) {
         const operator = expression.operator.slice(0, -1);
         const left = emitExpression(expression.left);
-        return `(${left} = cast ((${left} ${operator} ${emitExpression(expression.right)}) : Dynamic))`;
+        return `(${left} = cast (${emitArithmeticOperation(left, operator, emitExpression(expression.right))} : Dynamic))`;
       }
       const operator = binaryOperatorMap[expression.operator] ?? expression.operator;
       if (expression.kind === 'assignment' && expression.operator === '=') {

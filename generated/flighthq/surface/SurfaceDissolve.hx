@@ -54,7 +54,7 @@ class SurfaceDissolve {
       cursor++;
       if (_Runtime.truthy(_Runtime.compare(pixelIndex, total, '>='))) { continue; }
       dissolved++;
-      var px:Dynamic = (pixelIndex % width);
+      var px:Dynamic = _Runtime.fmod(pixelIndex, width);
       var py:Dynamic = (_Runtime.toInt32((pixelIndex / width)) | 0);
       var dx:Dynamic = (_Runtime.field(dest, 'x') + px);
       var dy:Dynamic = (_Runtime.field(dest, 'y') + py);

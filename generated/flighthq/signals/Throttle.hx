@@ -20,7 +20,7 @@ class Throttle {
       (elapsed = cast ((elapsed + delta) : Dynamic));
       if (_Runtime.truthy(_Runtime.compare(elapsed, period, '>='))) {
         _Runtime.callValue(slot, cast ([elapsed] : Array<Dynamic>));
-        (elapsed = cast ((elapsed % period) : Dynamic));
+        (elapsed = cast (_Runtime.fmod(elapsed, period) : Dynamic));
       }
     };
     _Runtime.callValue(connectSignal, cast ([source, handler] : Array<Dynamic>));

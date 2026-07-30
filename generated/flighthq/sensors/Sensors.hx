@@ -135,7 +135,7 @@ class Sensors {
     alpha = HxMath.atan2((2.0 * ((w * z) + (x * y))), (1.0 - (2.0 * ((x * x) + (z * z)))));
     gamma = HxMath.atan2((2.0 * ((w * y) + (x * z))), (1.0 - (2.0 * ((x * x) + (y * y)))));
     toDeg = (180.0 / HxMath.PI);
-    _Runtime.setField(out, 'alpha', ((((alpha * toDeg) % 360.0) + 360.0) % 360.0));
+    _Runtime.setField(out, 'alpha', _Runtime.fmod((_Runtime.fmod((alpha * toDeg), 360.0) + 360.0), 360.0));
     _Runtime.setField(out, 'beta', (beta * toDeg));
     _Runtime.setField(out, 'gamma', (gamma * toDeg));
     _Runtime.setField(out, 'interval', _Runtime.field(quaternion, 'interval'));

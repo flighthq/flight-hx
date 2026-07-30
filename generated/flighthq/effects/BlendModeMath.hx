@@ -160,7 +160,7 @@ class BlendModeMath {
       }
     }
     if (_Runtime.truthy(_Runtime.strictEquals(iMin, iMax))) {
-      (iMax = cast (((iMin + 1.0) % 3.0) : Dynamic));
+      (iMax = cast (_Runtime.fmod((iMin + 1.0), 3.0) : Dynamic));
     }
     iMid = ((3.0 - iMin) - iMax);
     if (_Runtime.truthy(_Runtime.compare(_Runtime.getIndex(out, iMax), _Runtime.getIndex(out, iMin), '>'))) {

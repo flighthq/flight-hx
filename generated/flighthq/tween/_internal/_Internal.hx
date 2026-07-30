@@ -17,7 +17,7 @@ class _Internal {
       _Runtime.setField(detail, 'start', start);
       _Runtime.setField(detail, 'change', (end - start));
       if (_Runtime.truthy(_Runtime.field(tween, 'smartRotation'))) {
-        var change:Dynamic = (((_Runtime.field(detail, 'change') % 360.0) + 360.0) % 360.0);
+        var change:Dynamic = _Runtime.fmod((_Runtime.fmod(_Runtime.field(detail, 'change'), 360.0) + 360.0), 360.0);
         if (_Runtime.truthy(_Runtime.compare(change, 180.0, '>'))) { (change = cast ((change - 360.0) : Dynamic)); }
         _Runtime.setField(detail, 'change', change);
       }

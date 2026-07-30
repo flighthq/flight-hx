@@ -85,7 +85,7 @@ class CanvasTextInput {
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.truthy(wasFocused), function():Dynamic return cast focused))) { ((cast CanvasTextInput._blinkStart__canvasTextInput : flighthq._internal._WeakMap).set(source, _Runtime.callProperty(_Runtime.globalValue('performance'), 'now', cast ([] : Array<Dynamic>)))); }
     ((cast CanvasTextInput._prevFocused__canvasTextInput : flighthq._internal._WeakMap).set(source, focused));
     elapsed = (_Runtime.callProperty(_Runtime.globalValue('performance'), 'now', cast ([] : Array<Dynamic>)) - _Runtime.coalesce(((cast CanvasTextInput._blinkStart__canvasTextInput : flighthq._internal._WeakMap).get(source)), function():Dynamic return cast _Runtime.callProperty(_Runtime.globalValue('performance'), 'now', cast ([] : Array<Dynamic>))));
-    return cast _Runtime.compare((elapsed % (CanvasTextInput.CARET_BLINK_MS__canvasTextInput * 2.0)), CanvasTextInput.CARET_BLINK_MS__canvasTextInput, '<');
+    return cast _Runtime.compare(_Runtime.fmod(elapsed, (CanvasTextInput.CARET_BLINK_MS__canvasTextInput * 2.0)), CanvasTextInput.CARET_BLINK_MS__canvasTextInput, '<');
     return cast null;
   }
 

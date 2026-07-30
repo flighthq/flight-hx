@@ -13,7 +13,7 @@ class NextPowerOfTwo {
   public static function nextMultipleOf(value:Float, multiple:Float):Float {
     var remainder:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.compare(multiple, 0.0, '<='))) { return cast value; }
-    remainder = (value % multiple);
+    remainder = _Runtime.fmod(value, multiple);
     return cast _Runtime.select(_Runtime.strictEquals(remainder, 0.0), function():Dynamic return cast value, function():Dynamic return cast ((value + multiple) - remainder));
     return cast null;
   }

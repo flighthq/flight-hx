@@ -13,6 +13,7 @@ class CoreSmoke {
     final random = createRandomSource(0x1234);
     randomInsideUnitDisc(random, point);
     if (point.x * point.x + point.y * point.y > 1) throw 'random point escaped unit disc';
+    FmodSmoke.run();
 
     final vector = flighthq.geometry.Geometry.createVector2(3, 4);
     if (flighthq.geometry.Geometry.getVector2Length(vector) != 5) throw 'geometry failed';

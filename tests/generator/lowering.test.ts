@@ -1544,6 +1544,40 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toContain('unsignedShiftRight(Std.int(');
   });
 
+  it('uses float-safe JavaScript remainder semantics for number operands', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/sample.ts',
+      `
+        export function remainder(value: number, divisor: number, values: number[], state: { value: number }) {
+          const direct = value % divisor;
+          value %= divisor;
+          values[0] %= divisor;
+          state.value %= divisor;
+          return direct + value + values[0] + state.value;
+        }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'RemainderFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('direct = _Runtime.fmod(value, divisor)');
+    expect(output).toContain('(value = cast (_Runtime.fmod(value, divisor) : Dynamic))');
+    expect(output).toContain('_Runtime.setIndex(values, 0.0, _Runtime.fmod(_Runtime.getIndex(values, 0.0), divisor))');
+    expect(output).toContain(
+      "_Runtime.setField(state, 'value', _Runtime.fmod(_Runtime.field(state, 'value'), divisor))",
+    );
+    expect(output).not.toMatch(/\s%\s/u);
+  });
+
   it('pads object-literal closures to their declared contextual method arity', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/example/src/sample.ts',

@@ -25,7 +25,7 @@ class UpdateMotionPath {
     distance = _Runtime.field(mp, 'distance');
     direction = _Runtime.field(mp, 'direction');
     if (_Runtime.truthy(_Runtime.strictEquals(loopMode, 'loop'))) {
-      var wrapped:Dynamic = ((distance + (direction * move)) % length);
+      var wrapped:Dynamic = _Runtime.fmod((distance + (direction * move)), length);
       if (_Runtime.truthy(_Runtime.compare(wrapped, 0.0, '<'))) { (wrapped = cast ((wrapped + length) : Dynamic)); }
       _Runtime.setField(mp, 'distance', wrapped);
       return;
@@ -33,7 +33,7 @@ class UpdateMotionPath {
     if (_Runtime.truthy(_Runtime.strictEquals(loopMode, 'pingpong'))) {
       var period:Dynamic = (2.0 * length);
       var phase:Dynamic = _Runtime.select(_Runtime.compare(direction, 0.0, '<'), function():Dynamic return cast (period - distance), function():Dynamic return cast distance);
-      var advanced:Dynamic = ((phase + move) % period);
+      var advanced:Dynamic = _Runtime.fmod((phase + move), period);
       if (_Runtime.truthy(_Runtime.compare(advanced, 0.0, '<'))) { (advanced = cast ((advanced + period) : Dynamic)); }
       if (_Runtime.truthy(_Runtime.compare(advanced, length, '<='))) {
         _Runtime.setField(mp, 'distance', advanced);

@@ -84,7 +84,7 @@ class ValidateParticleEmitterConfig {
       _Runtime.callProperty(issues, 'push', cast ([{ field: field, message: '' + Std.string(field) + ' is empty and will be ignored', severity: 'warning' }] : Array<Dynamic>));
       return;
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals((_Runtime.field(curve, 'length') % stride), 0.0))) {
+    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.fmod(_Runtime.field(curve, 'length'), stride), 0.0))) {
       _Runtime.callProperty(issues, 'push', cast ([{ field: field, message: '' + Std.string(field) + ' length (' + Std.string(_Runtime.field(curve, 'length')) + ') is not a multiple of ' + Std.string(stride) + '', severity: 'warning' }] : Array<Dynamic>));
     }
     {

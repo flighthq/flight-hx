@@ -72,7 +72,7 @@ class SpritesheetPlayer {
     frameIndex = _Runtime.field(__destructure1, 'frameIndex');
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(animation, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(animation, 'frames'), 'length'), 0.0)))) { return cast null; }
     n = _Runtime.field(_Runtime.field(animation, 'frames'), 'length');
-    targetIndex = ((((frameIndex + frameOffset) % n) + n) % n);
+    targetIndex = _Runtime.fmod((_Runtime.fmod((frameIndex + frameOffset), n) + n), n);
     spriteFrameIndex = _Runtime.getIndex(_Runtime.field(animation, 'frames'), targetIndex);
     return cast _Runtime.coalesce(_Runtime.getIndex(_Runtime.field(spritesheet, 'frames'), spriteFrameIndex), function():Dynamic return cast null);
     return cast null;
@@ -176,7 +176,7 @@ class SpritesheetPlayer {
       return cast true;
     }
     if (_Runtime.truthy(_Runtime.compare(HxMath.floor((_Runtime.field(player, 'elapsed') / totalTime)), prevLoopCount, '>'))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(player, 'onLoop')]]), 1); }
-    timeInLoop = (_Runtime.field(player, 'elapsed') % totalTime);
+    timeInLoop = _Runtime.fmod(_Runtime.field(player, 'elapsed'), totalTime);
     vi = _Runtime.callValue(SpritesheetPlayer.resolveVirtualIndexFromTime__spritesheetPlayer, cast ([animation, timeInLoop] : Array<Dynamic>));
     _Runtime.setField(player, 'frameIndex', _Runtime.callValue(SpritesheetPlayer.resolveVirtualIndexToDisplayIndex__spritesheetPlayer, cast ([animation, vi] : Array<Dynamic>)));
     return cast true;
@@ -240,7 +240,7 @@ class SpritesheetPlayer {
     var timeInLoop:Dynamic = cast _Runtime.UNDEFINED;
     var vi:Dynamic = cast _Runtime.UNDEFINED;
     totalTime = _Runtime.callValue(SpritesheetPlayer.resolveAnimationTotalTime__spritesheetPlayer, cast ([animation] : Array<Dynamic>));
-    timeInLoop = (elapsed % totalTime);
+    timeInLoop = _Runtime.fmod(elapsed, totalTime);
     vi = _Runtime.callValue(SpritesheetPlayer.resolveVirtualIndexFromTime__spritesheetPlayer, cast ([animation, timeInLoop] : Array<Dynamic>));
     return cast _Runtime.callValue(SpritesheetPlayer.resolveVirtualIndexToDisplayIndex__spritesheetPlayer, cast ([animation, vi] : Array<Dynamic>));
     return cast null;

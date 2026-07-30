@@ -81,7 +81,7 @@ class SegmentCollision {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, pn, '<'))) {
-        var j:Dynamic = ((i + 1.0) % pn);
+        var j:Dynamic = _Runtime.fmod((i + 1.0), pn);
         if (_Runtime.truthy(_Runtime.callValue(SegmentCollision.isSegmentsIntersecting__segmentCollision, cast ([_Runtime.field(a, 'x0'), _Runtime.field(a, 'y0'), _Runtime.field(a, 'x1'), _Runtime.field(a, 'y1'), _Runtime.getIndex(points, (_Runtime.toInt32(i) << 1)), _Runtime.getIndex(points, ((_Runtime.toInt32(i) << 1) + 1.0)), _Runtime.getIndex(points, (_Runtime.toInt32(j) << 1)), _Runtime.getIndex(points, ((_Runtime.toInt32(j) << 1) + 1.0))] : Array<Dynamic>)))) {
           return cast true;
         }
@@ -105,7 +105,7 @@ class SegmentCollision {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, pn, '<'))) {
-        var j:Dynamic = ((i + 1.0) % pn);
+        var j:Dynamic = _Runtime.fmod((i + 1.0), pn);
         var x0:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(i) << 1));
         var y0:Dynamic = _Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0));
         var x1:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(j) << 1));

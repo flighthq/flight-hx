@@ -250,7 +250,7 @@ class MartinezKernel {
         while (_Runtime.truthy(_Runtime.compare(i, count, '<'))) {
           var ax:Dynamic = _Runtime.getIndex(contour, (i * 2.0));
           var ay:Dynamic = _Runtime.getIndex(contour, ((i * 2.0) + 1.0));
-          var j:Dynamic = ((i + 1.0) % count);
+          var j:Dynamic = _Runtime.fmod((i + 1.0), count);
           var bx:Dynamic = _Runtime.getIndex(contour, (j * 2.0));
           var by:Dynamic = _Runtime.getIndex(contour, ((j * 2.0) + 1.0));
           if (_Runtime.truthy(_Runtime.andValue(_Runtime.callValue(MartinezKernel.approxEqual__martinezKernel, cast ([ax, bx] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(MartinezKernel.approxEqual__martinezKernel, cast ([ay, by] : Array<Dynamic>))))) { i++; continue; }

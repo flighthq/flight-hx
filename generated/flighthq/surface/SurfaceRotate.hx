@@ -45,9 +45,9 @@ class SurfaceRotate {
       {
         var k:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(k, half, '<'))) {
-          var ax:Dynamic = (_Runtime.field(dest, 'x') + (k % w));
+          var ax:Dynamic = (_Runtime.field(dest, 'x') + _Runtime.fmod(k, w));
           var ay:Dynamic = (_Runtime.field(dest, 'y') + HxMath.floor((k / w)));
-          var bx:Dynamic = (_Runtime.field(dest, 'x') + ((w - 1.0) - (k % w)));
+          var bx:Dynamic = (_Runtime.field(dest, 'x') + ((w - 1.0) - _Runtime.fmod(k, w)));
           var by:Dynamic = (_Runtime.field(dest, 'y') + ((h - 1.0) - HxMath.floor((k / w))));
           if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.callValue(SurfaceRotate.inBounds__surfaceRotate, cast ([ax, ay, stride, _Runtime.field(_Runtime.field(dest, 'surface'), 'height')] : Array<Dynamic>))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(SurfaceRotate.inBounds__surfaceRotate, cast ([bx, by, stride, _Runtime.field(_Runtime.field(dest, 'surface'), 'height')] : Array<Dynamic>)))))) { k++; continue; }
           _Runtime.callValue(SurfaceRotate.swapPixels__surfaceRotate, cast ([data, (((ay * stride) + ax) * 4.0), (((by * stride) + bx) * 4.0)] : Array<Dynamic>));

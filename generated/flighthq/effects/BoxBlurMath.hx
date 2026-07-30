@@ -34,7 +34,7 @@ class BoxBlurMath {
   public static function computeBoxBlurLowerWidth__boxBlurMath(sigma:Float, passes:Float):Float {
     var width:Dynamic = cast _Runtime.UNDEFINED;
     width = HxMath.floor(HxMath.sqrt(((((12.0 * sigma) * sigma) / passes) + 1.0)));
-    if (_Runtime.truthy(_Runtime.strictEquals((width % 2.0), 0.0))) { (width = cast ((width - 1.0) : Dynamic)); }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.fmod(width, 2.0), 0.0))) { (width = cast ((width - 1.0) : Dynamic)); }
     return cast width;
     return cast null;
   }
