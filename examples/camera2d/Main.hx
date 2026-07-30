@@ -318,9 +318,13 @@ class Main extends Application {
   }
 
   function seededRandom(seed:Int):Void->Float {
-    var s = seed;
+    // Float state with explicit floor-division modulo: upstream JS numbers are
+    // doubles (s * 16807 needs ~45 bits), Int32 targets would wrap, and neko's
+    // `%` coerces the float operand back to Int32 — so avoid `%` entirely.
+    var s:Float = seed;
     return function():Float {
-      s = (s * 16807 + 0) % 2147483647;
+      s = s * 16807 + 0;
+      s -= Math.ffloor(s / 2147483647) * 2147483647;
       return s / 2147483647;
     };
   }
@@ -562,8 +566,23 @@ class Main extends Application {
   }
 
   // Upstream `render(root)`, driven by Lime's per-frame `render`.
+  var perfFrames = 0;
+  var perfStart = 0.0;
+
   override public function render(context:RenderContext):Void {
     if (!ready || root == null) return;
+    #if sys
+    if (Sys.getEnv('FLIGHT_PERF_FRAMES') != null) {
+      if (perfFrames == 0) perfStart = haxe.Timer.stamp();
+      perfFrames++;
+      final target = Std.parseInt(Sys.getEnv('FLIGHT_PERF_FRAMES'));
+      if (perfFrames >= target) {
+        final elapsed = haxe.Timer.stamp() - perfStart;
+        Sys.println('PERF frames=' + (perfFrames - 1) + ' elapsed=' + elapsed + 's fps=' + ((perfFrames - 1) / elapsed));
+        lime.system.System.exit(0);
+      }
+    }
+    #end
     if (!prepareDisplayObjectRender(renderState, root)) return;
     if (usingCairo) {
       renderCanvasBackground(renderState);
