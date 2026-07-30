@@ -112,7 +112,7 @@ export interface TypedStructResolution {
 export interface TypedStructRegistry {
   report: TypedStructAudit;
   resolve(type: ts.Type): TypedStructResolution;
-  resolveField(type: ts.Type, member: string): TypedStructFieldBinding | undefined;
+  resolveField(type: ts.Type, member: string, property?: ts.Symbol): TypedStructFieldBinding | undefined;
 }
 
 const directTypedStructCandidates: readonly TypedStructCandidate[] = [
@@ -517,7 +517,13 @@ export const initialTypedStructCandidates: readonly TypedStructCandidate[] = [
 
 interface InternalSchema {
   audit: TypedStructSchemaAudit;
-  fields: ReadonlyMap<string, TypedStructField>;
+  fields: ReadonlyMap<
+    string,
+    {
+      audit: TypedStructField;
+      declarations: ReadonlySet<ts.Declaration>;
+    }
+  >;
   symbol: ts.Symbol;
 }
 
@@ -565,8 +571,27 @@ export function createTypedStructRegistry(
   const bySymbol = new Map(schemas.map((schema) => [canonicalSymbol(schema.symbol, checker), schema]));
   const resolve = (type: ts.Type): TypedStructResolution =>
     resolveType(type, checker, bySymbol, new Set<ts.Type>(), new Set<ts.Symbol>());
+  const resolveOwnedField = (
+    type: ts.Type,
+    member: string,
+    property = checker.getPropertyOfType(type, member),
+  ):
+    | {
+        field: TypedStructField;
+        schema: InternalSchema;
+      }
+    | undefined => {
+    const resolution = resolve(type);
+    if (resolution.kind !== 'matched') return undefined;
+    const schema = schemas.find((candidate) => candidate.audit.id === resolution.schemas[0]?.id);
+    const field = schema?.fields.get(member);
+    if (!schema || !field || !property || !isCandidateFieldDeclaration(property, field.declarations)) {
+      return undefined;
+    }
+    return { field: field.audit, schema };
+  };
 
-  auditUses(workspaceDirectory, program, checker, schemas, resolve);
+  auditUses(workspaceDirectory, program, checker, schemas, resolve, resolveOwnedField);
   for (const schema of schemas) {
     if (schema.audit.escapes.some((escape) => escape.reason === 'presence-sensitive')) {
       addReason(schema.audit, 'presence-sensitive-use');
@@ -616,15 +641,21 @@ export function createTypedStructRegistry(
   return {
     report,
     resolve,
-    resolveField(type, member) {
-      const resolution = resolve(type);
-      if (resolution.kind !== 'matched') return undefined;
-      const schema = schemas.find((candidate) => candidate.audit.id === resolution.schemas[0]?.id);
-      const field = schema?.fields.get(member);
-      if (!schema?.audit.eligible || schema.audit.emission.mode !== 'direct' || !field || field.receiverSensitive) {
+    resolveField(type, member, property) {
+      const owned = resolveOwnedField(type, member, property);
+      if (
+        !owned ||
+        !owned.schema.audit.eligible ||
+        owned.schema.audit.emission.mode !== 'direct' ||
+        owned.field.receiverSensitive
+      ) {
         return undefined;
       }
-      return { field, schemaId: schema.audit.id, schemaName: schema.audit.name };
+      return {
+        field: owned.field,
+        schemaId: owned.schema.audit.id,
+        schemaName: owned.schema.audit.name,
+      };
     },
   };
 }
@@ -663,6 +694,13 @@ function analyzeCandidate(
   if ((declarations?.length ?? 0) > 1) reasons.push('declaration-merge');
 
   const fields: TypedStructField[] = [];
+  const internalFields = new Map<
+    string,
+    {
+      audit: TypedStructField;
+      declarations: ReadonlySet<ts.Declaration>;
+    }
+  >();
   const memberEscapes: TypedStructMemberEscape[] = [];
   for (const property of checker.getPropertiesOfType(type)) {
     const propertyDeclarations = property.declarations ?? [];
@@ -698,6 +736,10 @@ function analyzeCandidate(
       ),
     };
     fields.push(field);
+    internalFields.set(field.name, {
+      audit: field,
+      declarations: new Set(propertyDeclarations),
+    });
     if (receiverSensitive) {
       memberEscapes.push({
         member: field.name,
@@ -729,7 +771,7 @@ function analyzeCandidate(
     reasons,
     source: candidate.source,
   };
-  return { audit, fields: new Map(fields.map((field) => [field.name, field])), symbol };
+  return { audit, fields: internalFields, symbol };
 }
 
 function auditUses(
@@ -738,6 +780,16 @@ function auditUses(
   checker: ts.TypeChecker,
   schemas: InternalSchema[],
   resolve: (type: ts.Type) => TypedStructResolution,
+  resolveOwnedField: (
+    type: ts.Type,
+    member: string,
+    property?: ts.Symbol,
+  ) =>
+    | {
+        field: TypedStructField;
+        schema: InternalSchema;
+      }
+    | undefined,
 ): void {
   const byId = new Map(schemas.map((schema) => [schema.audit.id, schema]));
   const visit = (node: ts.Node): void => {
@@ -749,14 +801,17 @@ function auditUses(
         }
       } else if (resolution.kind === 'matched') {
         const audit = resolution.schemas[0]!;
-        const schema = byId.get(audit.id)!;
         if (isPresenceSensitiveMember(node)) {
           addEscape(audit, node, workspaceDirectory, 'presence-sensitive', node.name.text);
         } else {
-          const field = schema.fields.get(node.name.text);
-          if (!field) {
+          const owned = resolveOwnedField(
+            checker.getTypeAtLocation(node.expression),
+            node.name.text,
+            checker.getSymbolAtLocation(node.name),
+          );
+          if (!owned || owned.schema !== byId.get(audit.id)) {
             addEscape(audit, node, workspaceDirectory, 'unknown-member', node.name.text);
-          } else if (field.receiverSensitive && isCalledProperty(node)) {
+          } else if (owned.field.receiverSensitive && isCalledProperty(node)) {
             addEscape(audit, node, workspaceDirectory, 'receiver-sensitive-method', node.name.text);
           } else {
             audit.accesses[propertyAccessMode(node)] += 1;
@@ -810,6 +865,11 @@ function auditUses(
   };
 
   for (const source of program.getSourceFiles().filter(isProductionUpstreamSource)) visit(source);
+}
+
+function isCandidateFieldDeclaration(property: ts.Symbol, declarations: ReadonlySet<ts.Declaration>): boolean {
+  const propertyDeclarations = property.declarations ?? [];
+  return propertyDeclarations.length > 0 && propertyDeclarations.every((declaration) => declarations.has(declaration));
 }
 
 function resolveType(
