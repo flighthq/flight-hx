@@ -41,7 +41,33 @@ export interface IrTypedStructBinding {
   schemaName: string;
 }
 
-export type IrExpression =
+export type IrIndexedReceiver =
+  | 'Array'
+  | 'Float32Array'
+  | 'Float64Array'
+  | 'Int16Array'
+  | 'Int32Array'
+  | 'Int8Array'
+  | 'Uint16Array'
+  | 'Uint32Array'
+  | 'Uint8Array'
+  | 'Uint8ClampedArray';
+
+export interface IrExpressionStaticFacts {
+  boolean?: true | undefined;
+  booleanLogical?: true | undefined;
+  indexedAccess?:
+    | {
+        reads: 0 | 1;
+        receiver: IrIndexedReceiver;
+        writes: 0 | 1;
+      }
+    | undefined;
+  numericRelation?: true | undefined;
+  truthinessUse?: 'conditional' | 'explicit' | 'logical' | undefined;
+}
+
+type IrExpressionNode =
   | { kind: 'array'; elements: IrExpression[] }
   | { kind: 'await'; expression: IrExpression }
   | { kind: 'assignment'; left: IrExpression; operator: string; right: IrExpression }
@@ -118,6 +144,10 @@ export type IrExpression =
   | { kind: 'template'; parts: Array<IrExpression | string> }
   | { kind: 'spread'; expression: IrExpression }
   | { kind: 'unary'; operand: IrExpression; operator: string; postfix: boolean };
+
+export type IrExpression = IrExpressionNode & {
+  staticFacts?: IrExpressionStaticFacts | undefined;
+};
 
 export type IrObjectMember =
   | { key: IrExpression; kind: 'computedProperty'; value: IrExpression }
@@ -274,4 +304,29 @@ export interface LoweringResult {
   accountedDeclarations: number;
   declarations: IrDeclaration[];
   diagnostics: LoweringDiagnostic[];
+  staticFacts: StaticFactAudit;
+}
+
+export interface StaticFactCounts {
+  booleanConditionalTruthiness: number;
+  booleanExplicitTruthiness: number;
+  booleanLogicalExpressions: number;
+  booleanLogicalTruthiness: number;
+  indexedAccesses: {
+    expressions: number;
+    reads: number;
+    writes: number;
+  };
+  numericRelations: number;
+}
+
+export interface StaticFactAudit extends StaticFactCounts {
+  indexedReceivers: Record<
+    IrIndexedReceiver,
+    {
+      expressions: number;
+      reads: number;
+      writes: number;
+    }
+  >;
 }

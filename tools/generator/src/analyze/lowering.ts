@@ -3,9 +3,10 @@ import path from 'node:path';
 import ts from 'typescript';
 
 import { upstreamTypeScriptProgram } from './program.ts';
+import { staticFactCounts, sumStaticFactAudits } from './static-facts.ts';
 import { typedStructRegistry, type TypedStructRegistry } from './typed-structs.ts';
 import { lowerTypeScriptSource } from '../lower/typescript.ts';
-import type { LoweringDiagnostic } from '../model/ir.ts';
+import type { LoweringDiagnostic, StaticFactAudit, StaticFactCounts } from '../model/ir.ts';
 
 export interface PackageLoweringAudit {
   declarations: number;
@@ -13,17 +14,19 @@ export interface PackageLoweringAudit {
   files: number;
   lowered: number;
   packageName: string;
+  staticFacts: StaticFactCounts;
 }
 
 export interface LoweringAudit {
   packages: PackageLoweringAudit[];
-  schemaVersion: 1;
+  schemaVersion: 2;
   summary: {
     declarations: number;
     diagnostics: number;
     files: number;
     lowered: number;
     packages: number;
+    staticFacts: StaticFactAudit;
   };
 }
 
@@ -32,7 +35,7 @@ export function auditLowering(workspaceDirectory: string, typedStructs?: TypedSt
   const structRegistry =
     typedStructs ?? typedStructRegistry(workspaceDirectory, 'not-recorded', undefined, { checker, program });
   const packagesDirectory = path.join(workspaceDirectory, 'upstream', 'packages');
-  const packages = readdirSync(packagesDirectory, { withFileTypes: true })
+  const results = readdirSync(packagesDirectory, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
     .map((entry) => path.join(packagesDirectory, entry.name))
     .map((directory) => ({ directory, metadata: readPackageMetadata(directory) }))
@@ -40,16 +43,18 @@ export function auditLowering(workspaceDirectory: string, typedStructs?: TypedSt
     .map(({ directory, metadata }) =>
       auditPackage(directory, metadata.name, workspaceDirectory, program, checker, structRegistry),
     );
+  const packages = results.map((result) => result.packageAudit);
 
   return {
     packages,
-    schemaVersion: 1,
+    schemaVersion: 2,
     summary: {
       declarations: sum(packages, (item) => item.declarations),
       diagnostics: sum(packages, (item) => item.diagnostics.length),
       files: sum(packages, (item) => item.files),
       lowered: sum(packages, (item) => item.lowered),
       packages: packages.length,
+      staticFacts: sumStaticFactAudits(results.map((result) => result.staticFacts)),
     },
   };
 }
@@ -61,12 +66,13 @@ function auditPackage(
   program: ts.Program,
   checker: ts.TypeChecker,
   typedStructs: TypedStructRegistry,
-): PackageLoweringAudit {
+): { packageAudit: PackageLoweringAudit; staticFacts: StaticFactAudit } {
   const sourceDirectory = path.join(directory, 'src');
   const files = walkTypeScriptSources(sourceDirectory);
   let declarations = 0;
   let lowered = 0;
   const diagnostics: LoweringDiagnostic[] = [];
+  const staticFacts: StaticFactAudit[] = [];
   for (const file of files) {
     const source = program.getSourceFile(file);
     if (!source) throw new Error(`Upstream TypeScript program is missing source: ${file}`);
@@ -74,11 +80,23 @@ function auditPackage(
     const result = lowerTypeScriptSource(source, packageName, workspaceDirectory, checker, typedStructs);
     lowered += result.accountedDeclarations;
     diagnostics.push(...result.diagnostics);
+    staticFacts.push(result.staticFacts);
   }
   diagnostics.sort(
     (left, right) => left.source.localeCompare(right.source) || left.line - right.line || left.column - right.column,
   );
-  return { declarations, diagnostics, files: files.length, lowered, packageName };
+  const packageStaticFacts = sumStaticFactAudits(staticFacts);
+  return {
+    packageAudit: {
+      declarations,
+      diagnostics,
+      files: files.length,
+      lowered,
+      packageName,
+      staticFacts: staticFactCounts(packageStaticFacts),
+    },
+    staticFacts: packageStaticFacts,
+  };
 }
 
 function isCandidateDeclaration(statement: ts.Statement): boolean {

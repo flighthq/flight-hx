@@ -2,11 +2,14 @@ import { createHash } from 'node:crypto';
 import path from 'node:path';
 import ts from 'typescript';
 
+import { auditStaticFacts, indexedReceiverNames } from '../analyze/static-facts.ts';
 import type { TypedStructRegistry } from '../analyze/typed-structs.ts';
 import type {
   IrDeclaration,
   IrExpression,
+  IrExpressionStaticFacts,
   IrFunctionDeclaration,
+  IrIndexedReceiver,
   IrParameter,
   IrStatement,
   IrTypedStructBinding,
@@ -500,7 +503,7 @@ export function lowerTypeScriptSource(
     }
   }
 
-  return { accountedDeclarations, declarations, diagnostics };
+  return { accountedDeclarations, declarations, diagnostics, staticFacts: auditStaticFacts(declarations) };
 }
 
 function collectPlatformBindingNames(
@@ -1337,6 +1340,160 @@ function lowerStatement(node: ts.Statement, context: LoweringContext): IrStateme
   return unsupported(node, context, `statement ${ts.SyntaxKind[node.kind] ?? node.kind}`);
 }
 
+function expressionStaticFacts(node: ts.Expression, context: LoweringContext): IrExpressionStaticFacts | undefined {
+  const checker = context.checker;
+  if (!checker) return undefined;
+  const facts: IrExpressionStaticFacts = {};
+  const boolean = typeOnlyHasFlags(checker.getTypeAtLocation(node), checker, ts.TypeFlags.BooleanLike);
+  if (boolean) {
+    facts.boolean = true;
+    facts.truthinessUse = booleanTruthinessUse(node);
+  }
+  if (
+    ts.isBinaryExpression(node) &&
+    [ts.SyntaxKind.AmpersandAmpersandToken, ts.SyntaxKind.BarBarToken].includes(node.operatorToken.kind) &&
+    typeOnlyHasFlags(checker.getTypeAtLocation(node.left), checker, ts.TypeFlags.BooleanLike) &&
+    typeOnlyHasFlags(checker.getTypeAtLocation(node.right), checker, ts.TypeFlags.BooleanLike)
+  ) {
+    facts.booleanLogical = true;
+  }
+  if (
+    ts.isBinaryExpression(node) &&
+    [
+      ts.SyntaxKind.LessThanToken,
+      ts.SyntaxKind.LessThanEqualsToken,
+      ts.SyntaxKind.GreaterThanToken,
+      ts.SyntaxKind.GreaterThanEqualsToken,
+    ].includes(node.operatorToken.kind) &&
+    typeOnlyHasFlags(checker.getTypeAtLocation(node.left), checker, ts.TypeFlags.NumberLike) &&
+    typeOnlyHasFlags(checker.getTypeAtLocation(node.right), checker, ts.TypeFlags.NumberLike)
+  ) {
+    facts.numericRelation = true;
+  }
+  if (ts.isElementAccessExpression(node) && node.argumentExpression && !ts.isOptionalChain(node)) {
+    const receiver = indexedReceiver(checker.getTypeAtLocation(node.expression), checker);
+    const access = indexedAccessMode(node);
+    if (
+      receiver &&
+      access &&
+      typeOnlyHasFlags(checker.getTypeAtLocation(node.argumentExpression), checker, ts.TypeFlags.NumberLike)
+    ) {
+      facts.indexedAccess = { ...access, receiver };
+    }
+  }
+  return Object.keys(facts).length > 0 ? facts : undefined;
+}
+
+function booleanTruthinessUse(node: ts.Expression): IrExpressionStaticFacts['truthinessUse'] | undefined {
+  const parent = node.parent;
+  if (ts.isConditionalExpression(parent) && parent.condition === node) return 'conditional';
+  if (
+    ts.isBinaryExpression(parent) &&
+    parent.left === node &&
+    [ts.SyntaxKind.AmpersandAmpersandToken, ts.SyntaxKind.BarBarToken].includes(parent.operatorToken.kind)
+  ) {
+    return 'logical';
+  }
+  if (
+    (ts.isIfStatement(parent) && parent.expression === node) ||
+    (ts.isWhileStatement(parent) && parent.expression === node) ||
+    (ts.isDoStatement(parent) && parent.expression === node) ||
+    (ts.isForStatement(parent) && parent.condition === node) ||
+    (ts.isPrefixUnaryExpression(parent) &&
+      parent.operand === node &&
+      parent.operator === ts.SyntaxKind.ExclamationToken)
+  ) {
+    return 'explicit';
+  }
+  return undefined;
+}
+
+function indexedAccessMode(node: ts.ElementAccessExpression): { reads: 0 | 1; writes: 0 | 1 } | undefined {
+  const parent = node.parent;
+  if (ts.isDeleteExpression(parent) && parent.expression === node) return undefined;
+  if (
+    (ts.isPrefixUnaryExpression(parent) || ts.isPostfixUnaryExpression(parent)) &&
+    parent.operand === node &&
+    [ts.SyntaxKind.PlusPlusToken, ts.SyntaxKind.MinusMinusToken].includes(parent.operator)
+  ) {
+    return undefined;
+  }
+  if (
+    ts.isBinaryExpression(parent) &&
+    parent.left === node &&
+    parent.operatorToken.kind >= ts.SyntaxKind.FirstAssignment &&
+    parent.operatorToken.kind <= ts.SyntaxKind.LastAssignment
+  ) {
+    return parent.operatorToken.kind === ts.SyntaxKind.EqualsToken ? { reads: 0, writes: 1 } : { reads: 1, writes: 1 };
+  }
+  if (
+    ts.isArrayLiteralExpression(parent) &&
+    ts.isBinaryExpression(parent.parent) &&
+    parent.parent.left === parent &&
+    parent.parent.operatorToken.kind === ts.SyntaxKind.EqualsToken
+  ) {
+    return { reads: 0, writes: 1 };
+  }
+  return { reads: 1, writes: 0 };
+}
+
+function indexedReceiver(
+  type: ts.Type,
+  checker: ts.TypeChecker,
+  seen = new Set<ts.Type>(),
+): IrIndexedReceiver | undefined {
+  if (seen.has(type)) return undefined;
+  seen.add(type);
+  if (type.isUnion()) {
+    const bindings = type.types.map((item) => indexedReceiver(item, checker, seen));
+    const first = bindings[0];
+    return first && bindings.every((binding) => binding === first) ? first : undefined;
+  }
+  if (type.isIntersection()) return undefined;
+  if ((type.flags & ts.TypeFlags.TypeParameter) !== 0) {
+    const constraint = checker.getBaseConstraintOfType(type);
+    return constraint && constraint !== type ? indexedReceiver(constraint, checker, seen) : undefined;
+  }
+  if (type.aliasSymbol?.getName() === 'Readonly' && type.aliasTypeArguments?.[0]) {
+    return indexedReceiver(type.aliasTypeArguments[0], checker, seen);
+  }
+  if (checker.isArrayType(type) || checker.isTupleType(type)) return 'Array';
+  if (standardLibraryType(type, 'Array') || standardLibraryType(type, 'ReadonlyArray')) return 'Array';
+  for (const name of indexedReceiverNames) {
+    if (name !== 'Array' && standardLibraryType(type, name)) return name;
+  }
+  return undefined;
+}
+
+function standardLibraryType(type: ts.Type, name: string): boolean {
+  return [type.aliasSymbol, type.getSymbol()].some(
+    (symbol) =>
+      symbol?.getName() === name &&
+      symbol.declarations?.some((declaration) => {
+        const source = declaration.getSourceFile();
+        return source.isDeclarationFile && /^lib\..*\.d\.ts$/u.test(path.basename(source.fileName));
+      }),
+  );
+}
+
+function typeOnlyHasFlags(
+  type: ts.Type,
+  checker: ts.TypeChecker,
+  flags: ts.TypeFlags,
+  seen = new Set<ts.Type>(),
+): boolean {
+  if (seen.has(type)) return false;
+  seen.add(type);
+  if (type.isUnion())
+    return type.types.length > 0 && type.types.every((item) => typeOnlyHasFlags(item, checker, flags, seen));
+  if (type.isIntersection()) return false;
+  if ((type.flags & ts.TypeFlags.TypeParameter) !== 0) {
+    const constraint = checker.getBaseConstraintOfType(type);
+    return constraint !== undefined && constraint !== type && typeOnlyHasFlags(constraint, checker, flags, seen);
+  }
+  return (type.flags & flags) !== 0;
+}
+
 function lowerVariables(node: ts.VariableDeclarationList, mutable: boolean, context: LoweringContext): IrVariable[] {
   return node.declarations.flatMap((declaration) => {
     if (ts.isIdentifier(declaration.name)) {
@@ -1497,6 +1654,13 @@ function isTypedStructWrite(node: ts.PropertyAccessExpression): boolean {
 }
 
 function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpression {
+  const expression = lowerExpressionNode(node, context);
+  const staticFacts = expressionStaticFacts(node, context);
+  if (staticFacts) expression.staticFacts = staticFacts;
+  return expression;
+}
+
+function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrExpression {
   if (ts.isParenthesizedExpression(node)) return lowerExpression(node.expression, context);
   if (ts.isAsExpression(node) || ts.isTypeAssertionExpression(node)) {
     if (
