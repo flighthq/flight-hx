@@ -42,7 +42,7 @@ class Camera {
   public static final __scratchViewProjection__camera:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
 
   public static function configureDirectionalShadowCamera(camera:flighthq.types.Camera, lightDirection:Vector3Like, sceneBounds:AabbLike):Void {
-    _Runtime.callValue(Facade_Camera_flighthq_camera_ShadowCamera.configureDirectionalShadowCamera, cast ([camera, lightDirection, sceneBounds] : Array<Dynamic>));
+    Facade_Camera_flighthq_camera_ShadowCamera.configureDirectionalShadowCamera(camera, lightDirection, sceneBounds);
   }
 
   public static function createCamera(opts:CameraOptions):flighthq.types.Camera {
@@ -51,25 +51,25 @@ class Camera {
   }
 
   public static function createOrthographicProjection(opts:OrthographicProjectionOptions):OrthographicProjection {
-    return cast _Runtime.callValue(Facade_Camera_flighthq_camera_Projection.createOrthographicProjection, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Camera_flighthq_camera_Projection.createOrthographicProjection(opts);
     return cast null;
   }
 
   public static function createPerspectiveProjection(opts:PerspectiveProjectionOptions):PerspectiveProjection {
-    return cast _Runtime.callValue(Facade_Camera_flighthq_camera_Projection.createPerspectiveProjection, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Camera_flighthq_camera_Projection.createPerspectiveProjection(opts);
     return cast null;
   }
 
   public static function getCameraForward(out:Vector3Like, camera:flighthq.types.Camera):Void {
-    _Runtime.callValue(Facade_Camera_flighthq_camera_Basis.getCameraForward, cast ([out, camera] : Array<Dynamic>));
+    Facade_Camera_flighthq_camera_Basis.getCameraForward(out, camera);
   }
 
   public static function getCameraFrustum(out:FrustumLike, camera:flighthq.types.Camera, aspect:Float):Void {
-    _Runtime.callValue(Facade_Camera_flighthq_camera_Culling.getCameraFrustum, cast ([out, camera, aspect] : Array<Dynamic>));
+    Facade_Camera_flighthq_camera_Culling.getCameraFrustum(out, camera, aspect);
   }
 
   public static function getCameraFrustumCorners(out:Array<Vector3Like>, camera:flighthq.types.Camera, aspect:Float):Bool {
-    return cast _Runtime.callValue(Facade_Camera_flighthq_camera_FrustumCorners.getCameraFrustumCorners, cast ([out, camera, aspect] : Array<Dynamic>));
+    return cast Facade_Camera_flighthq_camera_FrustumCorners.getCameraFrustumCorners(out, camera, aspect);
     return cast null;
   }
 
@@ -80,30 +80,30 @@ class Camera {
   }
 
   public static function getCameraLinearDepth(camera:flighthq.types.Camera, ndcZ:Float):Float {
-    return cast _Runtime.callValue(Facade_Camera_flighthq_camera_Depth.getCameraLinearDepth, cast ([camera, ndcZ] : Array<Dynamic>));
+    return cast Facade_Camera_flighthq_camera_Depth.getCameraLinearDepth(camera, ndcZ);
     return cast null;
   }
 
   public static function getCameraPosition(out:Vector3Like, camera:flighthq.types.Camera):Void {
-    _Runtime.callValue(Facade_Camera_flighthq_camera_Basis.getCameraPosition, cast ([out, camera] : Array<Dynamic>));
+    Facade_Camera_flighthq_camera_Basis.getCameraPosition(out, camera);
   }
 
   public static function getCameraRayThroughBoundingSphere(out:Ray3DLike, camera:flighthq.types.Camera, sphere:BoundingSphereLike, aspect:Float):Bool {
-    return cast _Runtime.callValue(Facade_Camera_flighthq_camera_Intersection.getCameraRayThroughBoundingSphere, cast ([out, camera, sphere, aspect] : Array<Dynamic>));
+    return cast Facade_Camera_flighthq_camera_Intersection.getCameraRayThroughBoundingSphere(out, camera, sphere, aspect);
     return cast null;
   }
 
   public static function getCameraRight(out:Vector3Like, camera:flighthq.types.Camera):Void {
-    _Runtime.callValue(Facade_Camera_flighthq_camera_Basis.getCameraRight, cast ([out, camera] : Array<Dynamic>));
+    Facade_Camera_flighthq_camera_Basis.getCameraRight(out, camera);
   }
 
   public static function getCameraScreenToWorldRay(out:Ray3DLike, camera:flighthq.types.Camera, ndcX:Float, ndcY:Float, aspect:Float):Bool {
-    return cast _Runtime.callValue(Facade_Camera_flighthq_camera_Picking.getCameraScreenToWorldRay, cast ([out, camera, ndcX, ndcY, aspect] : Array<Dynamic>));
+    return cast Facade_Camera_flighthq_camera_Picking.getCameraScreenToWorldRay(out, camera, ndcX, ndcY, aspect);
     return cast null;
   }
 
   public static function getCameraUp(out:Vector3Like, camera:flighthq.types.Camera):Void {
-    _Runtime.callValue(Facade_Camera_flighthq_camera_Basis.getCameraUp, cast ([out, camera] : Array<Dynamic>));
+    Facade_Camera_flighthq_camera_Basis.getCameraUp(out, camera);
   }
 
   public static function getCameraViewProjectionMatrix4(out:Matrix4Like, camera:flighthq.types.Camera, aspect:Float):Void {
@@ -112,42 +112,42 @@ class Camera {
   }
 
   public static function getCameraViewSpaceZ(camera:flighthq.types.Camera, ndcZ:Float):Float {
-    return cast _Runtime.callValue(Facade_Camera_flighthq_camera_Depth.getCameraViewSpaceZ, cast ([camera, ndcZ] : Array<Dynamic>));
+    return cast Facade_Camera_flighthq_camera_Depth.getCameraViewSpaceZ(camera, ndcZ);
     return cast null;
   }
 
   public static function getCameraWorldToScreen(out:Vector3Like, camera:flighthq.types.Camera, worldPoint:Vector3Like, aspect:Float):Bool {
-    return cast _Runtime.callValue(Facade_Camera_flighthq_camera_Picking.getCameraWorldToScreen, cast ([out, camera, worldPoint, aspect] : Array<Dynamic>));
+    return cast Facade_Camera_flighthq_camera_Picking.getCameraWorldToScreen(out, camera, worldPoint, aspect);
     return cast null;
   }
 
   public static function intersectCameraRayWithPlane(out:Vector3Like, ray:Ray3DLike, plane:PlaneLike):Bool {
-    return cast _Runtime.callValue(Facade_Camera_flighthq_camera_Intersection.intersectCameraRayWithPlane, cast ([out, ray, plane] : Array<Dynamic>));
+    return cast Facade_Camera_flighthq_camera_Intersection.intersectCameraRayWithPlane(out, ray, plane);
     return cast null;
   }
 
   public static function isBoxInCameraFrustum(camera:flighthq.types.Camera, aabb:AabbLike, aspect:Float):Bool {
-    return cast _Runtime.callValue(Facade_Camera_flighthq_camera_Culling.isBoxInCameraFrustum, cast ([camera, aabb, aspect] : Array<Dynamic>));
+    return cast Facade_Camera_flighthq_camera_Culling.isBoxInCameraFrustum(camera, aabb, aspect);
     return cast null;
   }
 
   public static function isOrthographicProjection(projection:Projection):Bool {
-    return cast _Runtime.callValue(Facade_Camera_flighthq_camera_Projection.isOrthographicProjection, cast ([projection] : Array<Dynamic>));
+    return cast Facade_Camera_flighthq_camera_Projection.isOrthographicProjection(projection);
     return cast null;
   }
 
   public static function isPerspectiveProjection(projection:Projection):Bool {
-    return cast _Runtime.callValue(Facade_Camera_flighthq_camera_Projection.isPerspectiveProjection, cast ([projection] : Array<Dynamic>));
+    return cast Facade_Camera_flighthq_camera_Projection.isPerspectiveProjection(projection);
     return cast null;
   }
 
   public static function isPointInCameraFrustum(camera:flighthq.types.Camera, point:Vector3Like, aspect:Float):Bool {
-    return cast _Runtime.callValue(Facade_Camera_flighthq_camera_Culling.isPointInCameraFrustum, cast ([camera, point, aspect] : Array<Dynamic>));
+    return cast Facade_Camera_flighthq_camera_Culling.isPointInCameraFrustum(camera, point, aspect);
     return cast null;
   }
 
   public static function isSphereInCameraFrustum(camera:flighthq.types.Camera, sphere:BoundingSphereLike, aspect:Float):Bool {
-    return cast _Runtime.callValue(Facade_Camera_flighthq_camera_Culling.isSphereInCameraFrustum, cast ([camera, sphere, aspect] : Array<Dynamic>));
+    return cast Facade_Camera_flighthq_camera_Culling.isSphereInCameraFrustum(camera, sphere, aspect);
     return cast null;
   }
 
@@ -165,7 +165,7 @@ class Camera {
   }
 
   public static function setProjectionMatrix4(out:Matrix4Like, projection:Projection, aspect:Float, near:Float, far:Float):Void {
-    _Runtime.callValue(Facade_Camera_flighthq_camera_Projection.setProjectionMatrix4, cast ([out, projection, aspect, near, far] : Array<Dynamic>));
+    Facade_Camera_flighthq_camera_Projection.setProjectionMatrix4(out, projection, aspect, near, far);
   }
 
   public static function updateCameraInverseViewProjection(camera:flighthq.types.Camera, aspect:Float):Bool {

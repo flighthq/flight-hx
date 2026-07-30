@@ -31,17 +31,17 @@ import flighthq.types.VideoTexture.VideoTextureLike;
 
 class Texture {
   public static function advanceVideoTexture(videoTexture:VideoTextureLike):Float {
-    return cast _Runtime.callValue(Facade_Texture_flighthq_texture_VideoTexture.advanceVideoTexture, cast ([videoTexture] : Array<Dynamic>));
+    return cast Facade_Texture_flighthq_texture_VideoTexture.advanceVideoTexture(videoTexture);
     return cast null;
   }
 
   public static function cloneCubeTexture(source:CubeTextureLike):CubeTexture {
-    return cast _Runtime.callValue(Facade_Texture_flighthq_texture_CubeTexture.cloneCubeTexture, cast ([source] : Array<Dynamic>));
+    return cast Facade_Texture_flighthq_texture_CubeTexture.cloneCubeTexture(source);
     return cast null;
   }
 
   public static function cloneSampler(source:SamplerLike):Sampler {
-    return cast _Runtime.callValue(Facade_Texture_flighthq_texture_Sampler.cloneSampler, cast ([source] : Array<Dynamic>));
+    return cast Facade_Texture_flighthq_texture_Sampler.cloneSampler(source);
     return cast null;
   }
 
@@ -51,16 +51,16 @@ class Texture {
   }
 
   public static function cloneVideoTexture(source:VideoTextureLike):VideoTexture {
-    return cast _Runtime.callValue(Facade_Texture_flighthq_texture_VideoTexture.cloneVideoTexture, cast ([source] : Array<Dynamic>));
+    return cast Facade_Texture_flighthq_texture_VideoTexture.cloneVideoTexture(source);
     return cast null;
   }
 
   public static function copyCubeTexture(out:CubeTextureLike, source:CubeTextureLike):Void {
-    _Runtime.callValue(Facade_Texture_flighthq_texture_CubeTexture.copyCubeTexture, cast ([out, source] : Array<Dynamic>));
+    Facade_Texture_flighthq_texture_CubeTexture.copyCubeTexture(out, source);
   }
 
   public static function copySampler(out:SamplerLike, source:SamplerLike):Void {
-    _Runtime.callValue(Facade_Texture_flighthq_texture_Sampler.copySampler, cast ([out, source] : Array<Dynamic>));
+    Facade_Texture_flighthq_texture_Sampler.copySampler(out, source);
   }
 
   public static function copyTexture(out:TextureLike, source:TextureLike):Void {
@@ -82,31 +82,31 @@ class Texture {
   }
 
   public static function copyVideoTexture(out:VideoTextureLike, source:VideoTextureLike):Void {
-    _Runtime.callValue(Facade_Texture_flighthq_texture_VideoTexture.copyVideoTexture, cast ([out, source] : Array<Dynamic>));
+    Facade_Texture_flighthq_texture_VideoTexture.copyVideoTexture(out, source);
   }
 
   public static function createAnisotropicSampler(level:Float):Sampler {
-    return cast _Runtime.callValue(Facade_Texture_flighthq_texture_Sampler.createAnisotropicSampler, cast ([level] : Array<Dynamic>));
+    return cast Facade_Texture_flighthq_texture_Sampler.createAnisotropicSampler(level);
     return cast null;
   }
 
   public static function createClampLinearSampler():Sampler {
-    return cast _Runtime.callValue(Facade_Texture_flighthq_texture_Sampler.createClampLinearSampler, cast ([] : Array<Dynamic>));
+    return cast Facade_Texture_flighthq_texture_Sampler.createClampLinearSampler();
     return cast null;
   }
 
   public static function createCubeTexture(?opts:Dynamic):CubeTexture {
-    return cast _Runtime.callValue(Facade_Texture_flighthq_texture_CubeTexture.createCubeTexture, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Texture_flighthq_texture_CubeTexture.createCubeTexture(opts);
     return cast null;
   }
 
   public static function createPixelArtSampler():Sampler {
-    return cast _Runtime.callValue(Facade_Texture_flighthq_texture_Sampler.createPixelArtSampler, cast ([] : Array<Dynamic>));
+    return cast Facade_Texture_flighthq_texture_Sampler.createPixelArtSampler();
     return cast null;
   }
 
   public static function createSampler(?opts:Dynamic):Sampler {
-    return cast _Runtime.callValue(Facade_Texture_flighthq_texture_Sampler.createSampler, cast ([opts] : Array<Dynamic>));
+    return cast Facade_Texture_flighthq_texture_Sampler.createSampler(opts);
     return cast null;
   }
 
@@ -116,22 +116,22 @@ class Texture {
   }
 
   public static function createTilingSampler():Sampler {
-    return cast _Runtime.callValue(Facade_Texture_flighthq_texture_Sampler.createTilingSampler, cast ([] : Array<Dynamic>));
+    return cast Facade_Texture_flighthq_texture_Sampler.createTilingSampler();
     return cast null;
   }
 
   public static function createVideoTexture(source:VideoResource, ?opts:Dynamic):VideoTexture {
-    return cast _Runtime.callValue(Facade_Texture_flighthq_texture_VideoTexture.createVideoTexture, cast ([source, opts] : Array<Dynamic>));
+    return cast Facade_Texture_flighthq_texture_VideoTexture.createVideoTexture(source, opts);
     return cast null;
   }
 
   public static function equalsCubeTexture(a:Null<CubeTextureLike>, b:Null<CubeTextureLike>):Bool {
-    return cast _Runtime.callValue(Facade_Texture_flighthq_texture_CubeTexture.equalsCubeTexture, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Texture_flighthq_texture_CubeTexture.equalsCubeTexture(a, b);
     return cast null;
   }
 
   public static function equalsSampler(a:Null<SamplerLike>, b:Null<SamplerLike>):Bool {
-    return cast _Runtime.callValue(Facade_Texture_flighthq_texture_Sampler.equalsSampler, cast ([a, b] : Array<Dynamic>));
+    return cast Facade_Texture_flighthq_texture_Sampler.equalsSampler(a, b);
     return cast null;
   }
 
@@ -143,7 +143,7 @@ class Texture {
   }
 
   public static function getCubeTextureFaceSize(cube:CubeTextureLike):Float {
-    return cast _Runtime.callValue(Facade_Texture_flighthq_texture_CubeTexture.getCubeTextureFaceSize, cast ([cube] : Array<Dynamic>));
+    return cast Facade_Texture_flighthq_texture_CubeTexture.getCubeTextureFaceSize(cube);
     return cast null;
   }
 
@@ -191,20 +191,20 @@ class Texture {
   }
 
   public static function getVideoTextureHeight(videoTexture:VideoTextureLike):Float {
-    return cast _Runtime.callValue(Facade_Texture_flighthq_texture_VideoTexture.getVideoTextureHeight, cast ([videoTexture] : Array<Dynamic>));
+    return cast Facade_Texture_flighthq_texture_VideoTexture.getVideoTextureHeight(videoTexture);
     return cast null;
   }
 
   public static function getVideoTextureInverseUvMatrix(out:Matrix3Like, videoTexture:VideoTextureLike):Void {
-    _Runtime.callValue(Facade_Texture_flighthq_texture_VideoTexture.getVideoTextureInverseUvMatrix, cast ([out, videoTexture] : Array<Dynamic>));
+    Facade_Texture_flighthq_texture_VideoTexture.getVideoTextureInverseUvMatrix(out, videoTexture);
   }
 
   public static function getVideoTextureUvMatrix(out:Matrix3Like, videoTexture:VideoTextureLike):Void {
-    _Runtime.callValue(Facade_Texture_flighthq_texture_VideoTexture.getVideoTextureUvMatrix, cast ([out, videoTexture] : Array<Dynamic>));
+    Facade_Texture_flighthq_texture_VideoTexture.getVideoTextureUvMatrix(out, videoTexture);
   }
 
   public static function getVideoTextureWidth(videoTexture:VideoTextureLike):Float {
-    return cast _Runtime.callValue(Facade_Texture_flighthq_texture_VideoTexture.getVideoTextureWidth, cast ([videoTexture] : Array<Dynamic>));
+    return cast Facade_Texture_flighthq_texture_VideoTexture.getVideoTextureWidth(videoTexture);
     return cast null;
   }
 
@@ -214,7 +214,7 @@ class Texture {
   }
 
   public static function isCubeTextureComplete(cube:CubeTextureLike):Bool {
-    return cast _Runtime.callValue(Facade_Texture_flighthq_texture_CubeTexture.isCubeTextureComplete, cast ([cube] : Array<Dynamic>));
+    return cast Facade_Texture_flighthq_texture_CubeTexture.isCubeTextureComplete(cube);
     return cast null;
   }
 
@@ -224,7 +224,7 @@ class Texture {
   }
 
   public static function isVideoTextureFrameReady(videoTexture:VideoTextureLike):Bool {
-    return cast _Runtime.callValue(Facade_Texture_flighthq_texture_VideoTexture.isVideoTextureFrameReady, cast ([videoTexture] : Array<Dynamic>));
+    return cast Facade_Texture_flighthq_texture_VideoTexture.isVideoTextureFrameReady(videoTexture);
     return cast null;
   }
 
@@ -237,11 +237,11 @@ class Texture {
   }
 
   public static function resetVideoTextureFrame(videoTexture:VideoTextureLike):Void {
-    _Runtime.callValue(Facade_Texture_flighthq_texture_VideoTexture.resetVideoTextureFrame, cast ([videoTexture] : Array<Dynamic>));
+    Facade_Texture_flighthq_texture_VideoTexture.resetVideoTextureFrame(videoTexture);
   }
 
   public static function setCubeTextureFace(cube:CubeTextureLike, faceIndex:Float, image:Null<ImageResource>):Void {
-    _Runtime.callValue(Facade_Texture_flighthq_texture_CubeTexture.setCubeTextureFace, cast ([cube, faceIndex, image] : Array<Dynamic>));
+    Facade_Texture_flighthq_texture_CubeTexture.setCubeTextureFace(cube, faceIndex, image);
   }
 
   public static function setTextureImage(texture:TextureLike, image:Null<ImageResource>):Void {
@@ -263,7 +263,7 @@ class Texture {
   }
 
   public static function setVideoTextureSource(videoTexture:VideoTextureLike, source:VideoResource):Void {
-    _Runtime.callValue(Facade_Texture_flighthq_texture_VideoTexture.setVideoTextureSource, cast ([videoTexture, source] : Array<Dynamic>));
+    Facade_Texture_flighthq_texture_VideoTexture.setVideoTextureSource(videoTexture, source);
   }
 
   public static function transformTextureUv(out:Vector2Like, texture:TextureLike, u:Float, v:Float):Void {

@@ -10,12 +10,12 @@ import flighthq.types.Shape;
 
 class ShapeFormats {
   public static function formatShapeJson(shape:Shape, ?options:ShapeJsonFormatOptions):String {
-    return cast _Runtime.callValue(Facade_ShapeFormats_flighthq_shapeFormats_ShapeJson.formatShapeJson, cast ([shape, options] : Array<Dynamic>));
+    return cast Facade_ShapeFormats_flighthq_shapeFormats_ShapeJson.formatShapeJson(shape, options);
     return cast null;
   }
 
   public static function parseShapeJson(text:String, ?options:ShapeJsonParseOptions):Null<Shape> {
-    return cast _Runtime.callValue(Facade_ShapeFormats_flighthq_shapeFormats_ShapeJson.parseShapeJson, cast ([text, options] : Array<Dynamic>));
+    return cast Facade_ShapeFormats_flighthq_shapeFormats_ShapeJson.parseShapeJson(text, options);
     return cast null;
   }
 }

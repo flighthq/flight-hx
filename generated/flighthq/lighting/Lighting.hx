@@ -36,139 +36,139 @@ import flighthq.types.Vector3.Vector3Like;
 
 class Lighting {
   public static function applyLightExposure(intensity:Float, ev:Float):Float {
-    return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_LightIntensity.applyLightExposure, cast ([intensity, ev] : Array<Dynamic>));
+    return cast Facade_Lighting_flighthq_lighting_LightIntensity.applyLightExposure(intensity, ev);
     return cast null;
   }
 
   public static function cloneAmbientLight(source:AmbientLight):AmbientLight {
-    return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_AmbientLight.cloneAmbientLight, cast ([source] : Array<Dynamic>));
+    return cast Facade_Lighting_flighthq_lighting_AmbientLight.cloneAmbientLight(source);
     return cast null;
   }
 
   public static function cloneAreaLight(source:AreaLight):AreaLight {
-    return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_AreaLight.cloneAreaLight, cast ([source] : Array<Dynamic>));
+    return cast Facade_Lighting_flighthq_lighting_AreaLight.cloneAreaLight(source);
     return cast null;
   }
 
   public static function cloneDirectionalLight(source:DirectionalLight):DirectionalLight {
-    return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_DirectionalLight.cloneDirectionalLight, cast ([source] : Array<Dynamic>));
+    return cast Facade_Lighting_flighthq_lighting_DirectionalLight.cloneDirectionalLight(source);
     return cast null;
   }
 
   public static function cloneEnvironment(source:Environment):Environment {
-    return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_Environment.cloneEnvironment, cast ([source] : Array<Dynamic>));
+    return cast Facade_Lighting_flighthq_lighting_Environment.cloneEnvironment(source);
     return cast null;
   }
 
   public static function cloneHemisphereLight(source:HemisphereLight):HemisphereLight {
-    return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_HemisphereLight.cloneHemisphereLight, cast ([source] : Array<Dynamic>));
+    return cast Facade_Lighting_flighthq_lighting_HemisphereLight.cloneHemisphereLight(source);
     return cast null;
   }
 
   public static function clonePointLight(source:PointLight):PointLight {
-    return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_PointLight.clonePointLight, cast ([source] : Array<Dynamic>));
+    return cast Facade_Lighting_flighthq_lighting_PointLight.clonePointLight(source);
     return cast null;
   }
 
   public static function cloneSpotLight(source:SpotLight):SpotLight {
-    return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_SpotLight.cloneSpotLight, cast ([source] : Array<Dynamic>));
+    return cast Facade_Lighting_flighthq_lighting_SpotLight.cloneSpotLight(source);
     return cast null;
   }
 
   public static function convertLightIntensity(fromUnit:LightUnit, toUnit:LightUnit, value:Float):Float {
-    return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_LightIntensity.convertLightIntensity, cast ([fromUnit, toUnit, value] : Array<Dynamic>));
+    return cast Facade_Lighting_flighthq_lighting_LightIntensity.convertLightIntensity(fromUnit, toUnit, value);
     return cast null;
   }
 
   public static function createAmbientLight(?options:AmbientLightOptions):AmbientLight {
-    return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_AmbientLight.createAmbientLight, cast ([options] : Array<Dynamic>));
+    return cast Facade_Lighting_flighthq_lighting_AmbientLight.createAmbientLight(options);
     return cast null;
   }
 
   public static function createAreaLight(?options:AreaLightOptions):AreaLight {
-    return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_AreaLight.createAreaLight, cast ([options] : Array<Dynamic>));
+    return cast Facade_Lighting_flighthq_lighting_AreaLight.createAreaLight(options);
     return cast null;
   }
 
   public static function createDirectionalLight(?options:DirectionalLightOptions):DirectionalLight {
-    return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_DirectionalLight.createDirectionalLight, cast ([options] : Array<Dynamic>));
+    return cast Facade_Lighting_flighthq_lighting_DirectionalLight.createDirectionalLight(options);
     return cast null;
   }
 
   public static function createEnvironment(?options:EnvironmentOptions):Environment {
-    return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_Environment.createEnvironment, cast ([options] : Array<Dynamic>));
+    return cast Facade_Lighting_flighthq_lighting_Environment.createEnvironment(options);
     return cast null;
   }
 
   public static function createHemisphereLight(?options:HemisphereLightOptions):HemisphereLight {
-    return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_HemisphereLight.createHemisphereLight, cast ([options] : Array<Dynamic>));
+    return cast Facade_Lighting_flighthq_lighting_HemisphereLight.createHemisphereLight(options);
     return cast null;
   }
 
   public static function createPointLight(?options:PointLightOptions):PointLight {
-    return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_PointLight.createPointLight, cast ([options] : Array<Dynamic>));
+    return cast Facade_Lighting_flighthq_lighting_PointLight.createPointLight(options);
     return cast null;
   }
 
   public static function createSceneLights(?options:Dynamic):SceneLights {
-    return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_SceneLights.createSceneLights, cast ([options] : Array<Dynamic>));
+    return cast Facade_Lighting_flighthq_lighting_SceneLights.createSceneLights(options);
     return cast null;
   }
 
   public static function createSpotLight(?options:SpotLightOptions):SpotLight {
-    return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_SpotLight.createSpotLight, cast ([options] : Array<Dynamic>));
+    return cast Facade_Lighting_flighthq_lighting_SpotLight.createSpotLight(options);
     return cast null;
   }
 
   public static function getLightInfluenceBounds(out:BoundingSphereLike, light:Light):Void {
-    _Runtime.callValue(Facade_Lighting_flighthq_lighting_LightAnalysis.getLightInfluenceBounds, cast ([out, light] : Array<Dynamic>));
+    Facade_Lighting_flighthq_lighting_LightAnalysis.getLightInfluenceBounds(out, light);
   }
 
   public static function getLightLinearIntensity(unit:LightUnit, value:Float):Float {
-    return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_LightIntensity.getLightLinearIntensity, cast ([unit, value] : Array<Dynamic>));
+    return cast Facade_Lighting_flighthq_lighting_LightIntensity.getLightLinearIntensity(unit, value);
     return cast null;
   }
 
   public static function getLightLuminance(light:Light):Float {
-    return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_LightAnalysis.getLightLuminance, cast ([light] : Array<Dynamic>));
+    return cast Facade_Lighting_flighthq_lighting_LightAnalysis.getLightLuminance(light);
     return cast null;
   }
 
   public static function getSpotLightConeDegrees(out:SpotLightConeAngles, source:SpotLight):Void {
-    _Runtime.callValue(Facade_Lighting_flighthq_lighting_SpotLight.getSpotLightConeDegrees, cast ([out, source] : Array<Dynamic>));
+    Facade_Lighting_flighthq_lighting_SpotLight.getSpotLightConeDegrees(out, source);
   }
 
   public static function hasLightInfluenceOnBounds(light:Light, bounds:BoundingSphereLike):Bool {
-    return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_LightAnalysis.hasLightInfluenceOnBounds, cast ([light, bounds] : Array<Dynamic>));
+    return cast Facade_Lighting_flighthq_lighting_LightAnalysis.hasLightInfluenceOnBounds(light, bounds);
     return cast null;
   }
 
   public static function isLightShadowCasting(light:Light):Bool {
-    return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_LightAnalysis.isLightShadowCasting, cast ([light] : Array<Dynamic>));
+    return cast Facade_Lighting_flighthq_lighting_LightAnalysis.isLightShadowCasting(light);
     return cast null;
   }
 
   public static function setAreaLightOrientation(out:AreaLight, direction:Vector3Like, right:Vector3Like, up:Vector3Like):Void {
-    _Runtime.callValue(Facade_Lighting_flighthq_lighting_AreaLight.setAreaLightOrientation, cast ([out, direction, right, up] : Array<Dynamic>));
+    Facade_Lighting_flighthq_lighting_AreaLight.setAreaLightOrientation(out, direction, right, up);
   }
 
   public static function setDirectionalLightDirection(out:DirectionalLight, x:Float, y:Float, z:Float):Void {
-    _Runtime.callValue(Facade_Lighting_flighthq_lighting_DirectionalLight.setDirectionalLightDirection, cast ([out, x, y, z] : Array<Dynamic>));
+    Facade_Lighting_flighthq_lighting_DirectionalLight.setDirectionalLightDirection(out, x, y, z);
   }
 
   public static function setDirectionalLightTarget(out:DirectionalLight, fromX:Float, fromY:Float, fromZ:Float, toX:Float, toY:Float, toZ:Float):Void {
-    _Runtime.callValue(Facade_Lighting_flighthq_lighting_DirectionalLight.setDirectionalLightTarget, cast ([out, fromX, fromY, fromZ, toX, toY, toZ] : Array<Dynamic>));
+    Facade_Lighting_flighthq_lighting_DirectionalLight.setDirectionalLightTarget(out, fromX, fromY, fromZ, toX, toY, toZ);
   }
 
   public static function setSpotLightCone(out:SpotLight, innerDegrees:Float, outerDegrees:Float):Void {
-    _Runtime.callValue(Facade_Lighting_flighthq_lighting_SpotLight.setSpotLightCone, cast ([out, innerDegrees, outerDegrees] : Array<Dynamic>));
+    Facade_Lighting_flighthq_lighting_SpotLight.setSpotLightCone(out, innerDegrees, outerDegrees);
   }
 
   public static function setSpotLightDirection(out:SpotLight, x:Float, y:Float, z:Float):Void {
-    _Runtime.callValue(Facade_Lighting_flighthq_lighting_SpotLight.setSpotLightDirection, cast ([out, x, y, z] : Array<Dynamic>));
+    Facade_Lighting_flighthq_lighting_SpotLight.setSpotLightDirection(out, x, y, z);
   }
 
   public static function setSpotLightTarget(out:SpotLight, targetX:Float, targetY:Float, targetZ:Float):Void {
-    _Runtime.callValue(Facade_Lighting_flighthq_lighting_SpotLight.setSpotLightTarget, cast ([out, targetX, targetY, targetZ] : Array<Dynamic>));
+    Facade_Lighting_flighthq_lighting_SpotLight.setSpotLightTarget(out, targetX, targetY, targetZ);
   }
 }

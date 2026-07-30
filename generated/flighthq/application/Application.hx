@@ -75,56 +75,56 @@ class Application {
   }
 
   public static function attachWindowClose(win:ApplicationWindow):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.attachWindowClose, cast ([win] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.attachWindowClose(win);
   }
 
   public static function attachWindowDropFile(win:ApplicationWindow, element:Dynamic):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.attachWindowDropFile, cast ([win, element] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.attachWindowDropFile(win, element);
   }
 
   public static function attachWindowFocus(win:ApplicationWindow, element:Dynamic):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.attachWindowFocus, cast ([win, element] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.attachWindowFocus(win, element);
   }
 
   public static function attachWindowFullscreen(win:ApplicationWindow):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.attachWindowFullscreen, cast ([win] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.attachWindowFullscreen(win);
   }
 
   public static function attachWindowMove(win:ApplicationWindow):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.attachWindowMove, cast ([win] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.attachWindowMove(win);
   }
 
   public static function attachWindowOrientation(win:ApplicationWindow):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.attachWindowOrientation, cast ([win] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.attachWindowOrientation(win);
   }
 
   public static function attachWindowRenderContext(win:ApplicationWindow, canvas:Dynamic):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.attachWindowRenderContext, cast ([win, canvas] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.attachWindowRenderContext(win, canvas);
   }
 
   public static function attachWindowRenderState(win:ApplicationWindow, state:RenderState, canvas:Dynamic):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.attachWindowRenderState, cast ([win, state, canvas] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.attachWindowRenderState(win, state, canvas);
   }
 
   public static function attachWindowResize(win:ApplicationWindow, element:Dynamic):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.attachWindowResize, cast ([win, element] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.attachWindowResize(win, element);
   }
 
   public static function attachWindowVisibility(win:ApplicationWindow):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.attachWindowVisibility, cast ([win] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.attachWindowVisibility(win);
   }
 
   public static function centerWindow(win:ApplicationWindow):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.centerWindow, cast ([win] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.centerWindow(win);
   }
 
   public static function closeWindow(win:ApplicationWindow):Bool {
-    return cast _Runtime.callValue(Facade_Application_flighthq_application_Window.closeWindow, cast ([win] : Array<Dynamic>));
+    return cast Facade_Application_flighthq_application_Window.closeWindow(win);
     return cast null;
   }
 
   public static function computeWindowDeviceTransform(win:ApplicationWindow, out:Matrix):Matrix {
-    return cast _Runtime.callValue(Facade_Application_flighthq_application_Window.computeWindowDeviceTransform, cast ([win, out] : Array<Dynamic>));
+    return cast Facade_Application_flighthq_application_Window.computeWindowDeviceTransform(win, out);
     return cast null;
   }
 
@@ -134,7 +134,7 @@ class Application {
   }
 
   public static function createApplicationWindow():ApplicationWindow {
-    return cast _Runtime.callValue(Facade_Application_flighthq_application_Window.createApplicationWindow, cast ([] : Array<Dynamic>));
+    return cast Facade_Application_flighthq_application_Window.createApplicationWindow();
     return cast null;
   }
 
@@ -150,7 +150,7 @@ class Application {
   }
 
   public static function createWebWindowBackend():WindowBackend {
-    return cast _Runtime.callValue(Facade_Application_flighthq_application_Window.createWebWindowBackend, cast ([] : Array<Dynamic>));
+    return cast Facade_Application_flighthq_application_Window.createWebWindowBackend();
     return cast null;
   }
 
@@ -170,43 +170,43 @@ class Application {
   }
 
   public static function detachWindowClose(win:ApplicationWindow):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.detachWindowClose, cast ([win] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.detachWindowClose(win);
   }
 
   public static function detachWindowDropFile(win:ApplicationWindow):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.detachWindowDropFile, cast ([win] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.detachWindowDropFile(win);
   }
 
   public static function detachWindowFocus(win:ApplicationWindow):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.detachWindowFocus, cast ([win] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.detachWindowFocus(win);
   }
 
   public static function detachWindowFullscreen(win:ApplicationWindow):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.detachWindowFullscreen, cast ([win] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.detachWindowFullscreen(win);
   }
 
   public static function detachWindowMove(win:ApplicationWindow):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.detachWindowMove, cast ([win] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.detachWindowMove(win);
   }
 
   public static function detachWindowOrientation(win:ApplicationWindow):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.detachWindowOrientation, cast ([win] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.detachWindowOrientation(win);
   }
 
   public static function detachWindowRenderContext(win:ApplicationWindow):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.detachWindowRenderContext, cast ([win] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.detachWindowRenderContext(win);
   }
 
   public static function detachWindowRenderState(win:ApplicationWindow):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.detachWindowRenderState, cast ([win] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.detachWindowRenderState(win);
   }
 
   public static function detachWindowResize(win:ApplicationWindow):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.detachWindowResize, cast ([win] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.detachWindowResize(win);
   }
 
   public static function detachWindowVisibility(win:ApplicationWindow):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.detachWindowVisibility, cast ([win] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.detachWindowVisibility(win);
   }
 
   public static function disposeApplication(app:flighthq.types.Application):Void {
@@ -220,7 +220,7 @@ class Application {
   }
 
   public static function disposeApplicationWindow(win:ApplicationWindow):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.disposeApplicationWindow, cast ([win] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.disposeApplicationWindow(win);
   }
 
   public static function enableApplicationLifecycleSignals(app:flighthq.types.Application):Void {
@@ -231,21 +231,21 @@ class Application {
   }
 
   public static function exitApplicationFullscreen():flighthq._internal._Promise<flighthq._internal._Nothing> {
-    return cast _Runtime.callValue(Facade_Application_flighthq_application_Window.exitApplicationFullscreen, cast ([] : Array<Dynamic>));
+    return cast Facade_Application_flighthq_application_Window.exitApplicationFullscreen();
     return cast null;
   }
 
   public static function exitApplicationPointerLock():flighthq._internal._Promise<flighthq._internal._Nothing> {
-    return cast _Runtime.callValue(Facade_Application_flighthq_application_Window.exitApplicationPointerLock, cast ([] : Array<Dynamic>));
+    return cast Facade_Application_flighthq_application_Window.exitApplicationPointerLock();
     return cast null;
   }
 
   public static function flashWindowFrame(win:ApplicationWindow):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.flashWindowFrame, cast ([win] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.flashWindowFrame(win);
   }
 
   public static function focusWindow(win:ApplicationWindow):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.focusWindow, cast ([win] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.focusWindow(win);
   }
 
   public static function forEachApplicationWindow(app:flighthq.types.Application, fn:Dynamic):Void {
@@ -311,22 +311,22 @@ class Application {
   }
 
   public static function getWindowBackend():WindowBackend {
-    return cast _Runtime.callValue(Facade_Application_flighthq_application_Window.getWindowBackend, cast ([] : Array<Dynamic>));
+    return cast Facade_Application_flighthq_application_Window.getWindowBackend();
     return cast null;
   }
 
   public static function getWindowBounds(win:ApplicationWindow, out:WindowBounds):WindowBounds {
-    return cast _Runtime.callValue(Facade_Application_flighthq_application_Window.getWindowBounds, cast ([win, out] : Array<Dynamic>));
+    return cast Facade_Application_flighthq_application_Window.getWindowBounds(win, out);
     return cast null;
   }
 
   public static function getWindowDisplay(win:ApplicationWindow):Float {
-    return cast _Runtime.callValue(Facade_Application_flighthq_application_Window.getWindowDisplay, cast ([win] : Array<Dynamic>));
+    return cast Facade_Application_flighthq_application_Window.getWindowDisplay(win);
     return cast null;
   }
 
   public static function hideWindow(win:ApplicationWindow):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.hideWindow, cast ([win] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.hideWindow(win);
   }
 
   public static function isApplicationRunning(app:flighthq.types.Application):Bool {
@@ -341,20 +341,20 @@ class Application {
   public static final kPaused__application:Dynamic = _Runtime.symbol();
 
   public static function lockApplicationPointer(element:Dynamic):flighthq._internal._Promise<flighthq._internal._Nothing> {
-    return cast _Runtime.callValue(Facade_Application_flighthq_application_Window.lockApplicationPointer, cast ([element] : Array<Dynamic>));
+    return cast Facade_Application_flighthq_application_Window.lockApplicationPointer(element);
     return cast null;
   }
 
   public static function maximizeWindow(win:ApplicationWindow):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.maximizeWindow, cast ([win] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.maximizeWindow(win);
   }
 
   public static function minimizeWindow(win:ApplicationWindow):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.minimizeWindow, cast ([win] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.minimizeWindow(win);
   }
 
   public static function openWindow(win:ApplicationWindow, ?options:WindowOptions):Bool {
-    return cast _Runtime.callValue(Facade_Application_flighthq_application_Window.openWindow, cast ([win, options] : Array<Dynamic>));
+    return cast Facade_Application_flighthq_application_Window.openWindow(win, options);
     return cast null;
   }
 
@@ -369,7 +369,7 @@ class Application {
   }
 
   public static function prepareElementForInput(element:Dynamic):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.prepareElementForInput, cast ([element] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.prepareElementForInput(element);
   }
 
   public static function recordFpsSample__application(state:LoopState__application, delta:Float):Void {
@@ -387,21 +387,21 @@ class Application {
   }
 
   public static function requestApplicationFullscreen(element:Dynamic):flighthq._internal._Promise<flighthq._internal._Nothing> {
-    return cast _Runtime.callValue(Facade_Application_flighthq_application_Window.requestApplicationFullscreen, cast ([element] : Array<Dynamic>));
+    return cast Facade_Application_flighthq_application_Window.requestApplicationFullscreen(element);
     return cast null;
   }
 
   public static function requestWindowAttention(win:ApplicationWindow, attention:Bool):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.requestWindowAttention, cast ([win, attention] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.requestWindowAttention(win, attention);
   }
 
   public static function requestWindowClose(win:ApplicationWindow):Bool {
-    return cast _Runtime.callValue(Facade_Application_flighthq_application_Window.requestWindowClose, cast ([win] : Array<Dynamic>));
+    return cast Facade_Application_flighthq_application_Window.requestWindowClose(win);
     return cast null;
   }
 
   public static function restoreWindow(win:ApplicationWindow):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.restoreWindow, cast ([win] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.restoreWindow(win);
   }
 
   public static function resumeApplicationLoop(app:flighthq.types.Application):Void {
@@ -431,75 +431,75 @@ class Application {
   }
 
   public static function setWindowAlwaysOnTop(win:ApplicationWindow, alwaysOnTop:Bool):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.setWindowAlwaysOnTop, cast ([win, alwaysOnTop] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.setWindowAlwaysOnTop(win, alwaysOnTop);
   }
 
   public static function setWindowBackend(backend:Null<WindowBackend>):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.setWindowBackend, cast ([backend] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.setWindowBackend(backend);
   }
 
   public static function setWindowContentProtection(win:ApplicationWindow, enabled:Bool):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.setWindowContentProtection, cast ([win, enabled] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.setWindowContentProtection(win, enabled);
   }
 
   public static function setWindowFullscreen(win:ApplicationWindow, fullscreen:Bool):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.setWindowFullscreen, cast ([win, fullscreen] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.setWindowFullscreen(win, fullscreen);
   }
 
   public static function setWindowHasShadow(win:ApplicationWindow, hasShadow:Bool):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.setWindowHasShadow, cast ([win, hasShadow] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.setWindowHasShadow(win, hasShadow);
   }
 
   public static function setWindowIcon(win:ApplicationWindow, icon:String):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.setWindowIcon, cast ([win, icon] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.setWindowIcon(win, icon);
   }
 
   public static function setWindowMaximumSize(win:ApplicationWindow, width:Float, height:Float):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.setWindowMaximumSize, cast ([win, width, height] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.setWindowMaximumSize(win, width, height);
   }
 
   public static function setWindowMenuBarVisible(win:ApplicationWindow, visible:Bool):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.setWindowMenuBarVisible, cast ([win, visible] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.setWindowMenuBarVisible(win, visible);
   }
 
   public static function setWindowMinimumSize(win:ApplicationWindow, width:Float, height:Float):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.setWindowMinimumSize, cast ([win, width, height] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.setWindowMinimumSize(win, width, height);
   }
 
   public static function setWindowOpacity(win:ApplicationWindow, opacity:Float):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.setWindowOpacity, cast ([win, opacity] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.setWindowOpacity(win, opacity);
   }
 
   public static function setWindowParent(win:ApplicationWindow, parent:Null<ApplicationWindow>):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.setWindowParent, cast ([win, parent] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.setWindowParent(win, parent);
   }
 
   public static function setWindowPosition(win:ApplicationWindow, x:Float, y:Float):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.setWindowPosition, cast ([win, x, y] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.setWindowPosition(win, x, y);
   }
 
   public static function setWindowProgress(win:ApplicationWindow, progress:Float):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.setWindowProgress, cast ([win, progress] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.setWindowProgress(win, progress);
   }
 
   public static function setWindowResizable(win:ApplicationWindow, resizable:Bool):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.setWindowResizable, cast ([win, resizable] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.setWindowResizable(win, resizable);
   }
 
   public static function setWindowSize(win:ApplicationWindow, width:Float, height:Float):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.setWindowSize, cast ([win, width, height] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.setWindowSize(win, width, height);
   }
 
   public static function setWindowSkipTaskbar(win:ApplicationWindow, skip:Bool):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.setWindowSkipTaskbar, cast ([win, skip] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.setWindowSkipTaskbar(win, skip);
   }
 
   public static function setWindowTitle(win:ApplicationWindow, title:String):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.setWindowTitle, cast ([win, title] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.setWindowTitle(win, title);
   }
 
   public static function showWindow(win:ApplicationWindow):Void {
-    _Runtime.callValue(Facade_Application_flighthq_application_Window.showWindow, cast ([win] : Array<Dynamic>));
+    Facade_Application_flighthq_application_Window.showWindow(win);
   }
 
   public static function startApplicationLoop(app:flighthq.types.Application, ?options:ApplicationLoopOptions):Void {

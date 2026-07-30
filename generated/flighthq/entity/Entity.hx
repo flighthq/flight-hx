@@ -14,16 +14,16 @@ import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class Entity {
   public static function areEntityRuntimeGuardsEnabled():Bool {
-    return cast _Runtime.callValue(Facade_Entity_flighthq_entity_Guards.areEntityRuntimeGuardsEnabled, cast ([] : Array<Dynamic>));
+    return cast Facade_Entity_flighthq_entity_Guards.areEntityRuntimeGuardsEnabled();
     return cast null;
   }
 
   public static function attachEntityBinding(entity:flighthq.types.Entity, binding:Dynamic):Void {
-    _Runtime.callValue(Facade_Entity_flighthq_entity_Binding.attachEntityBinding, cast ([entity, binding] : Array<Dynamic>));
+    Facade_Entity_flighthq_entity_Binding.attachEntityBinding(entity, binding);
   }
 
   public static function cloneEntity<Type>(source:Type):Type {
-    return cast _Runtime.callValue(Facade_Entity_flighthq_entity_Clone.cloneEntity, cast ([source] : Array<Dynamic>));
+    return cast Facade_Entity_flighthq_entity_Clone.cloneEntity(source);
     return cast null;
   }
 
@@ -36,41 +36,41 @@ class Entity {
   }
 
   public static function createEntityRuntime():EntityRuntime {
-    return cast _Runtime.callValue(Facade_Entity_flighthq_entity_Runtime.createEntityRuntime, cast ([] : Array<Dynamic>));
+    return cast Facade_Entity_flighthq_entity_Runtime.createEntityRuntime();
     return cast null;
   }
 
   public static function createGuardedEntity<Type>(entity:Type):Type {
-    return cast _Runtime.callValue(Facade_Entity_flighthq_entity_Guards.createGuardedEntity, cast ([entity] : Array<Dynamic>));
+    return cast Facade_Entity_flighthq_entity_Guards.createGuardedEntity(entity);
     return cast null;
   }
 
   public static function createGuardedEntityRuntime(runtime:EntityRuntime):EntityRuntime {
-    return cast _Runtime.callValue(Facade_Entity_flighthq_entity_Guards.createGuardedEntityRuntime, cast ([runtime] : Array<Dynamic>));
+    return cast Facade_Entity_flighthq_entity_Guards.createGuardedEntityRuntime(runtime);
     return cast null;
   }
 
   public static function enableEntityRuntimeGuards():Void {
-    _Runtime.callValue(Facade_Entity_flighthq_entity_Guards.enableEntityRuntimeGuards, cast ([] : Array<Dynamic>));
+    Facade_Entity_flighthq_entity_Guards.enableEntityRuntimeGuards();
   }
 
   public static function getEntityBinding(source:flighthq.types.Entity):Null<Dynamic> {
-    return cast _Runtime.callValue(Facade_Entity_flighthq_entity_Binding.getEntityBinding, cast ([source] : Array<Dynamic>));
+    return cast Facade_Entity_flighthq_entity_Binding.getEntityBinding(source);
     return cast null;
   }
 
   public static function getEntityRuntime(source:flighthq.types.Entity):EntityRuntime {
-    return cast _Runtime.callValue(Facade_Entity_flighthq_entity_Runtime.getEntityRuntime, cast ([source] : Array<Dynamic>));
+    return cast Facade_Entity_flighthq_entity_Runtime.getEntityRuntime(source);
     return cast null;
   }
 
   public static function hasEntityRuntime(source:flighthq.types.Entity):Bool {
-    return cast _Runtime.callValue(Facade_Entity_flighthq_entity_Runtime.hasEntityRuntime, cast ([source] : Array<Dynamic>));
+    return cast Facade_Entity_flighthq_entity_Runtime.hasEntityRuntime(source);
     return cast null;
   }
 
   public static function stripEntityRuntime<Type>(source:Type):EntityWithoutRuntime<Type> {
-    return cast _Runtime.callValue(Facade_Entity_flighthq_entity_Clone.stripEntityRuntime, cast ([source] : Array<Dynamic>));
+    return cast Facade_Entity_flighthq_entity_Clone.stripEntityRuntime(source);
     return cast null;
   }
 }

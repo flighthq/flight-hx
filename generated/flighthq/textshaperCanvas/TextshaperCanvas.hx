@@ -7,11 +7,11 @@ import flighthq.textshaperCanvas.CanvasTextShaper as Facade_TextshaperCanvas_fli
 
 class TextshaperCanvas {
   public static function clearCanvasTextShaperBackendCache(backend:Dynamic):Void {
-    _Runtime.callValue(Facade_TextshaperCanvas_flighthq_textshaperCanvas_CanvasTextShaper.clearCanvasTextShaperBackendCache, cast ([backend] : Array<Dynamic>));
+    Facade_TextshaperCanvas_flighthq_textshaperCanvas_CanvasTextShaper.clearCanvasTextShaperBackendCache(backend);
   }
 
   public static function createCanvasTextShaperBackend():Dynamic {
-    return cast _Runtime.callValue(Facade_TextshaperCanvas_flighthq_textshaperCanvas_CanvasTextShaper.createCanvasTextShaperBackend, cast ([] : Array<Dynamic>));
+    return cast Facade_TextshaperCanvas_flighthq_textshaperCanvas_CanvasTextShaper.createCanvasTextShaperBackend();
     return cast null;
   }
 }

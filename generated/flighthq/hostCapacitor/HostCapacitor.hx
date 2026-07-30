@@ -31,66 +31,66 @@ import flighthq.types.StatusBar.StatusBarBackend;
 
 class HostCapacitor {
   public static function createCapacitorAppBackend(capacitor:CapacitorApi):AppBackend {
-    return cast _Runtime.callValue(Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorApp.createCapacitorAppBackend, cast ([capacitor] : Array<Dynamic>));
+    return cast Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorApp.createCapacitorAppBackend(capacitor);
     return cast null;
   }
 
   public static function createCapacitorClipboardBackend(capacitor:CapacitorApi):ClipboardBackend {
-    return cast _Runtime.callValue(Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorClipboard.createCapacitorClipboardBackend, cast ([capacitor] : Array<Dynamic>));
+    return cast Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorClipboard.createCapacitorClipboardBackend(capacitor);
     return cast null;
   }
 
   public static function createCapacitorConnectivityBackend(capacitor:CapacitorApi):ConnectivityBackend {
-    return cast _Runtime.callValue(Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorConnectivity.createCapacitorConnectivityBackend, cast ([capacitor] : Array<Dynamic>));
+    return cast Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorConnectivity.createCapacitorConnectivityBackend(capacitor);
     return cast null;
   }
 
   public static function createCapacitorDeviceBackend(capacitor:CapacitorApi):DeviceBackend {
-    return cast _Runtime.callValue(Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorDevice.createCapacitorDeviceBackend, cast ([capacitor] : Array<Dynamic>));
+    return cast Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorDevice.createCapacitorDeviceBackend(capacitor);
     return cast null;
   }
 
   public static function createCapacitorDialogBackend(capacitor:CapacitorApi):DialogBackend {
-    return cast _Runtime.callValue(Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorDialog.createCapacitorDialogBackend, cast ([capacitor] : Array<Dynamic>));
+    return cast Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorDialog.createCapacitorDialogBackend(capacitor);
     return cast null;
   }
 
   public static function createCapacitorFileSystemBackend(capacitor:CapacitorApi):Dynamic {
-    return cast _Runtime.callValue(Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorFileSystem.createCapacitorFileSystemBackend, cast ([capacitor] : Array<Dynamic>));
+    return cast Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorFileSystem.createCapacitorFileSystemBackend(capacitor);
     return cast null;
   }
 
   public static function createCapacitorGeolocationBackend(capacitor:CapacitorApi):GeolocationBackend {
-    return cast _Runtime.callValue(Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorGeolocation.createCapacitorGeolocationBackend, cast ([capacitor] : Array<Dynamic>));
+    return cast Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorGeolocation.createCapacitorGeolocationBackend(capacitor);
     return cast null;
   }
 
   public static function createCapacitorHapticsBackend(capacitor:CapacitorApi):HapticsBackend {
-    return cast _Runtime.callValue(Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorHaptics.createCapacitorHapticsBackend, cast ([capacitor] : Array<Dynamic>));
+    return cast Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorHaptics.createCapacitorHapticsBackend(capacitor);
     return cast null;
   }
 
   public static function createCapacitorKeyboardBackend(capacitor:CapacitorApi):SoftKeyboardBackend {
-    return cast _Runtime.callValue(Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorKeyboard.createCapacitorKeyboardBackend, cast ([capacitor] : Array<Dynamic>));
+    return cast Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorKeyboard.createCapacitorKeyboardBackend(capacitor);
     return cast null;
   }
 
   public static function createCapacitorNotificationBackend(capacitor:CapacitorApi):NotificationBackend {
-    return cast _Runtime.callValue(Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorNotification.createCapacitorNotificationBackend, cast ([capacitor] : Array<Dynamic>));
+    return cast Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorNotification.createCapacitorNotificationBackend(capacitor);
     return cast null;
   }
 
   public static function createCapacitorShareBackend(capacitor:CapacitorApi):ShareBackend {
-    return cast _Runtime.callValue(Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorShare.createCapacitorShareBackend, cast ([capacitor] : Array<Dynamic>));
+    return cast Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorShare.createCapacitorShareBackend(capacitor);
     return cast null;
   }
 
   public static function createCapacitorStatusBarBackend(capacitor:CapacitorApi):StatusBarBackend {
-    return cast _Runtime.callValue(Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorStatusBar.createCapacitorStatusBarBackend, cast ([capacitor] : Array<Dynamic>));
+    return cast Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorStatusBar.createCapacitorStatusBarBackend(capacitor);
     return cast null;
   }
 
   public static function registerCapacitorBackends(capacitor:CapacitorApi):Void {
-    _Runtime.callValue(Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorRegister.registerCapacitorBackends, cast ([capacitor] : Array<Dynamic>));
+    Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorRegister.registerCapacitorBackends(capacitor);
   }
 }

@@ -14,32 +14,32 @@ import flighthq.types.TextureContainerFormat;
 
 class TextureFormats {
   public static function detectTextureContainer(bytes:flighthq._internal._UInt8Array):Null<String> {
-    return cast _Runtime.callValue(Facade_TextureFormats_flighthq_textureFormats_DetectTextureContainer.detectTextureContainer, cast ([bytes] : Array<Dynamic>));
+    return cast Facade_TextureFormats_flighthq_textureFormats_DetectTextureContainer.detectTextureContainer(bytes);
     return cast null;
   }
 
   public static function parseAtf(bytes:flighthq._internal._UInt8Array):Null<Array<TextureContainer>> {
-    return cast _Runtime.callValue(Facade_TextureFormats_flighthq_textureFormats_ParseAtf.parseAtf, cast ([bytes] : Array<Dynamic>));
+    return cast Facade_TextureFormats_flighthq_textureFormats_ParseAtf.parseAtf(bytes);
     return cast null;
   }
 
   public static function parseBasis(bytes:flighthq._internal._UInt8Array):Null<TextureContainer> {
-    return cast _Runtime.callValue(Facade_TextureFormats_flighthq_textureFormats_ParseBasis.parseBasis, cast ([bytes] : Array<Dynamic>));
+    return cast Facade_TextureFormats_flighthq_textureFormats_ParseBasis.parseBasis(bytes);
     return cast null;
   }
 
   public static function parseDds(bytes:flighthq._internal._UInt8Array):Null<TextureContainer> {
-    return cast _Runtime.callValue(Facade_TextureFormats_flighthq_textureFormats_ParseDds.parseDds, cast ([bytes] : Array<Dynamic>));
+    return cast Facade_TextureFormats_flighthq_textureFormats_ParseDds.parseDds(bytes);
     return cast null;
   }
 
   public static function parseKtx2(bytes:flighthq._internal._UInt8Array):Null<TextureContainer> {
-    return cast _Runtime.callValue(Facade_TextureFormats_flighthq_textureFormats_ParseKtx2.parseKtx2, cast ([bytes] : Array<Dynamic>));
+    return cast Facade_TextureFormats_flighthq_textureFormats_ParseKtx2.parseKtx2(bytes);
     return cast null;
   }
 
   public static function selectTextureContainer(containers:Array<TextureContainer>, supportedFormats:Array<TextureContainerFormat>):Null<TextureContainer> {
-    return cast _Runtime.callValue(Facade_TextureFormats_flighthq_textureFormats_SelectTextureContainer.selectTextureContainer, cast ([containers, supportedFormats] : Array<Dynamic>));
+    return cast Facade_TextureFormats_flighthq_textureFormats_SelectTextureContainer.selectTextureContainer(containers, supportedFormats);
     return cast null;
   }
 }

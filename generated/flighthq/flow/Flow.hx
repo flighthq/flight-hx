@@ -17,42 +17,42 @@ import flighthq.types.Flow.FlowState;
 
 class Flow {
   public static function clearFlowStack(stack:FlowStack):Void {
-    _Runtime.callValue(Facade_Flow_flighthq_flow_ClearFlowStack.clearFlowStack, cast ([stack] : Array<Dynamic>));
+    Facade_Flow_flighthq_flow_ClearFlowStack.clearFlowStack(stack);
   }
 
   public static function createFlowStack():FlowStack {
-    return cast _Runtime.callValue(Facade_Flow_flighthq_flow_CreateFlowStack.createFlowStack, cast ([] : Array<Dynamic>));
+    return cast Facade_Flow_flighthq_flow_CreateFlowStack.createFlowStack();
     return cast null;
   }
 
   public static function getActiveFlowState(stack:FlowStack):Null<FlowState> {
-    return cast _Runtime.callValue(Facade_Flow_flighthq_flow_GetActiveFlowState.getActiveFlowState, cast ([stack] : Array<Dynamic>));
+    return cast Facade_Flow_flighthq_flow_GetActiveFlowState.getActiveFlowState(stack);
     return cast null;
   }
 
   public static function getFlowStackDepth(stack:FlowStack):Float {
-    return cast _Runtime.callValue(Facade_Flow_flighthq_flow_GetFlowStackDepth.getFlowStackDepth, cast ([stack] : Array<Dynamic>));
+    return cast Facade_Flow_flighthq_flow_GetFlowStackDepth.getFlowStackDepth(stack);
     return cast null;
   }
 
   public static function getFlowStackVisibleStates(stack:FlowStack, out:Array<FlowState>):Void {
-    _Runtime.callValue(Facade_Flow_flighthq_flow_GetFlowStackVisibleStates.getFlowStackVisibleStates, cast ([stack, out] : Array<Dynamic>));
+    Facade_Flow_flighthq_flow_GetFlowStackVisibleStates.getFlowStackVisibleStates(stack, out);
   }
 
   public static function popFlowState(stack:FlowStack):Null<FlowState> {
-    return cast _Runtime.callValue(Facade_Flow_flighthq_flow_PopFlowState.popFlowState, cast ([stack] : Array<Dynamic>));
+    return cast Facade_Flow_flighthq_flow_PopFlowState.popFlowState(stack);
     return cast null;
   }
 
   public static function pushFlowState(stack:FlowStack, state:FlowState):Void {
-    _Runtime.callValue(Facade_Flow_flighthq_flow_PushFlowState.pushFlowState, cast ([stack, state] : Array<Dynamic>));
+    Facade_Flow_flighthq_flow_PushFlowState.pushFlowState(stack, state);
   }
 
   public static function replaceFlowState(stack:FlowStack, state:FlowState):Void {
-    _Runtime.callValue(Facade_Flow_flighthq_flow_ReplaceFlowState.replaceFlowState, cast ([stack, state] : Array<Dynamic>));
+    Facade_Flow_flighthq_flow_ReplaceFlowState.replaceFlowState(stack, state);
   }
 
   public static function updateFlowStack(stack:FlowStack, deltaTime:Float):Void {
-    _Runtime.callValue(Facade_Flow_flighthq_flow_UpdateFlowStack.updateFlowStack, cast ([stack, deltaTime] : Array<Dynamic>));
+    Facade_Flow_flighthq_flow_UpdateFlowStack.updateFlowStack(stack, deltaTime);
   }
 }

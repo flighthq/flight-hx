@@ -41,17 +41,17 @@ import flighthq.types.SepiaAdjustment;
 
 class Adjustments {
   public static function applyColorMatrixToColor(matrix:Array<Float>, packedRgba:Float):Float {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.applyColorMatrixToColor, cast ([matrix, packedRgba] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.applyColorMatrixToColor(matrix, packedRgba);
     return cast null;
   }
 
   public static function bakeColorLut(transforms:Array<ColorTransformFunction>, ?size:Float):ColorLut {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorLut.bakeColorLut, cast ([transforms, size] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorLut.bakeColorLut(transforms, size);
     return cast null;
   }
 
   public static function bakeColorLutForRun(cache:ColorLutCache, run:Array<{ var kind:String; }>, ?size:Float):ColorLut {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorLutCache.bakeColorLutForRun, cast ([cache, run, size] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorLutCache.bakeColorLutForRun(cache, run, size);
     return cast null;
   }
 
@@ -66,205 +66,205 @@ class Adjustments {
   public static final COLOR_MATRIX_LENGTH:Dynamic = Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.COLOR_MATRIX_LENGTH;
 
   public static function concatColorMatrix(target:Array<Float>, source:Array<Float>):Void {
-    _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.concatColorMatrix, cast ([target, source] : Array<Dynamic>));
+    Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.concatColorMatrix(target, source);
   }
 
   public static function createBrightnessColorMatrix(amount:Float):Array<Float> {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createBrightnessColorMatrix, cast ([amount] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createBrightnessColorMatrix(amount);
     return cast null;
   }
 
   public static function createBrightnessContrastAdjustment(?options:Dynamic):BrightnessContrastAdjustment {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_BrightnessContrastAdjustment.createBrightnessContrastAdjustment, cast ([options] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_BrightnessContrastAdjustment.createBrightnessContrastAdjustment(options);
     return cast null;
   }
 
   public static function createChannelMixerAdjustment(?options:Dynamic):ChannelMixerAdjustment {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ChannelMixerAdjustment.createChannelMixerAdjustment, cast ([options] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ChannelMixerAdjustment.createChannelMixerAdjustment(options);
     return cast null;
   }
 
   public static function createChannelMixerColorMatrix(redOut:Array<Float>, greenOut:Array<Float>, blueOut:Array<Float>):Array<Float> {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createChannelMixerColorMatrix, cast ([redOut, greenOut, blueOut] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createChannelMixerColorMatrix(redOut, greenOut, blueOut);
     return cast null;
   }
 
   public static function createColorBalanceColorMatrix(shadows:Array<Float>, midtones:Array<Float>, highlights:Array<Float>):Array<Float> {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createColorBalanceColorMatrix, cast ([shadows, midtones, highlights] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createColorBalanceColorMatrix(shadows, midtones, highlights);
     return cast null;
   }
 
   public static function createColorBlindSimulationAdjustment(?options:Dynamic):ColorBlindSimulationAdjustment {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorBlindSimulationAdjustment.createColorBlindSimulationAdjustment, cast ([options] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorBlindSimulationAdjustment.createColorBlindSimulationAdjustment(options);
     return cast null;
   }
 
   public static function createColorGradeAdjustment(?options:Dynamic):ColorGradeAdjustment {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorGradeAdjustment.createColorGradeAdjustment, cast ([options] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorGradeAdjustment.createColorGradeAdjustment(options);
     return cast null;
   }
 
   public static function createColorLutCache():ColorLutCache {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorLutCache.createColorLutCache, cast ([] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorLutCache.createColorLutCache();
     return cast null;
   }
 
   public static function createColorMatrixFromTint(packedRgba:Float, amount:Float):Array<Float> {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createColorMatrixFromTint, cast ([packedRgba, amount] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createColorMatrixFromTint(packedRgba, amount);
     return cast null;
   }
 
   public static function createColorTransformAdjustment(colorTransform:ColorTransform):ColorTransformAdjustment {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorTransformAdjustment.createColorTransformAdjustment, cast ([colorTransform] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorTransformAdjustment.createColorTransformAdjustment(colorTransform);
     return cast null;
   }
 
   public static function createContrastColorMatrix(amount:Float):Array<Float> {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createContrastColorMatrix, cast ([amount] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createContrastColorMatrix(amount);
     return cast null;
   }
 
   public static function createDesaturateColorMatrix(amount:Float):Array<Float> {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createDesaturateColorMatrix, cast ([amount] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createDesaturateColorMatrix(amount);
     return cast null;
   }
 
   public static function createExposureAdjustment(?options:Dynamic):ExposureAdjustment {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ExposureAdjustment.createExposureAdjustment, cast ([options] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ExposureAdjustment.createExposureAdjustment(options);
     return cast null;
   }
 
   public static function createGrayscaleAdjustment(?options:Dynamic):GrayscaleAdjustment {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_GrayscaleAdjustment.createGrayscaleAdjustment, cast ([options] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_GrayscaleAdjustment.createGrayscaleAdjustment(options);
     return cast null;
   }
 
   public static function createGrayscaleColorMatrix():Array<Float> {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createGrayscaleColorMatrix, cast ([] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createGrayscaleColorMatrix();
     return cast null;
   }
 
   public static function createHueRotateColorMatrix(degrees:Float):Array<Float> {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createHueRotateColorMatrix, cast ([degrees] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createHueRotateColorMatrix(degrees);
     return cast null;
   }
 
   public static function createHueSaturationAdjustment(?options:Dynamic):HueSaturationAdjustment {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_HueSaturationAdjustment.createHueSaturationAdjustment, cast ([options] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_HueSaturationAdjustment.createHueSaturationAdjustment(options);
     return cast null;
   }
 
   public static function createIdentityColorMatrix():Array<Float> {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createIdentityColorMatrix, cast ([] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createIdentityColorMatrix();
     return cast null;
   }
 
   public static function createInvertAdjustment(?options:Dynamic):InvertAdjustment {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_InvertAdjustment.createInvertAdjustment, cast ([options] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_InvertAdjustment.createInvertAdjustment(options);
     return cast null;
   }
 
   public static function createInvertColorMatrix():Array<Float> {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createInvertColorMatrix, cast ([] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createInvertColorMatrix();
     return cast null;
   }
 
   public static function createLevelsColorMatrix(inBlack:Float, inWhite:Float, outBlack:Float, outWhite:Float, ?gamma:Dynamic):Array<Float> {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createLevelsColorMatrix, cast ([inBlack, inWhite, outBlack, outWhite, gamma] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createLevelsColorMatrix(inBlack, inWhite, outBlack, outWhite, gamma);
     return cast null;
   }
 
   public static function createLiftGammaGainAdjustment(?options:Dynamic):LiftGammaGainAdjustment {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_LiftGammaGainAdjustment.createLiftGammaGainAdjustment, cast ([options] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_LiftGammaGainAdjustment.createLiftGammaGainAdjustment(options);
     return cast null;
   }
 
   public static function createLookupTableGradeAdjustment(?options:Dynamic):LookupTableGradeAdjustment {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_LookupTableGradeAdjustment.createLookupTableGradeAdjustment, cast ([options] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_LookupTableGradeAdjustment.createLookupTableGradeAdjustment(options);
     return cast null;
   }
 
   public static function createOpacityColorMatrix(alpha:Float):Array<Float> {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createOpacityColorMatrix, cast ([alpha] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createOpacityColorMatrix(alpha);
     return cast null;
   }
 
   public static function createPolaroidColorMatrix():Array<Float> {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createPolaroidColorMatrix, cast ([] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createPolaroidColorMatrix();
     return cast null;
   }
 
   public static function createSaturationColorMatrix(amount:Float):Array<Float> {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createSaturationColorMatrix, cast ([amount] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createSaturationColorMatrix(amount);
     return cast null;
   }
 
   public static function createSepiaAdjustment(?options:Dynamic):SepiaAdjustment {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_SepiaAdjustment.createSepiaAdjustment, cast ([options] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_SepiaAdjustment.createSepiaAdjustment(options);
     return cast null;
   }
 
   public static function createSepiaColorMatrix():Array<Float> {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createSepiaColorMatrix, cast ([] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createSepiaColorMatrix();
     return cast null;
   }
 
   public static function createTechnicolorColorMatrix():Array<Float> {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createTechnicolorColorMatrix, cast ([] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createTechnicolorColorMatrix();
     return cast null;
   }
 
   public static function createVintageColorMatrix():Array<Float> {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createVintageColorMatrix, cast ([] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createVintageColorMatrix();
     return cast null;
   }
 
   public static function createWhiteBalanceColorMatrix(temperature:Float, tint:Float):Array<Float> {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createWhiteBalanceColorMatrix, cast ([temperature, tint] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createWhiteBalanceColorMatrix(temperature, tint);
     return cast null;
   }
 
   public static function fuseColorMatrices(matrices:Array<Array<Float>>):Array<Float> {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.fuseColorMatrices, cast ([matrices] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.fuseColorMatrices(matrices);
     return cast null;
   }
 
   public static function getAdjustmentColorMatrix(operation:{ var kind:String; }):Null<Array<Float>> {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorMatrixAdjustment.getAdjustmentColorMatrix, cast ([operation] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixAdjustment.getAdjustmentColorMatrix(operation);
     return cast null;
   }
 
   public static function getAdjustmentColorTransform(operation:{ var kind:String; }):Null<ColorTransformFunction> {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorLutAdjustment.getAdjustmentColorTransform, cast ([operation] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorLutAdjustment.getAdjustmentColorTransform(operation);
     return cast null;
   }
 
   public static function isAffineColorMatrix(matrix:Array<Float>):Bool {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorAdjustmentResolution.isAffineColorMatrix, cast ([matrix] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorAdjustmentResolution.isAffineColorMatrix(matrix);
     return cast null;
   }
 
   public static function isColorLutAdjustment(operation:{ var kind:String; }):Bool {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorLutAdjustment.isColorLutAdjustment, cast ([operation] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorLutAdjustment.isColorLutAdjustment(operation);
     return cast null;
   }
 
   public static function isColorMatrixAdjustment(operation:{ var kind:String; }):Bool {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorMatrixAdjustment.isColorMatrixAdjustment, cast ([operation] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixAdjustment.isColorMatrixAdjustment(operation);
     return cast null;
   }
 
   public static function multiplyColorMatrix(a:Array<Float>, b:Array<Float>, ?out:Array<Float>):Array<Float> {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.multiplyColorMatrix, cast ([a, b, out] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.multiplyColorMatrix(a, b, out);
     return cast null;
   }
 
   public static function resolveColorAdjustmentsColorTransform(adjustments:Null<Array<Adjustment>>, out:ColorTransform):Float {
-    return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorAdjustmentResolution.resolveColorAdjustmentsColorTransform, cast ([adjustments, out] : Array<Dynamic>));
+    return cast Facade_Adjustments_flighthq_adjustments_ColorAdjustmentResolution.resolveColorAdjustmentsColorTransform(adjustments, out);
     return cast null;
   }
 
   public static function sampleColorLut(lut:ColorLut, out:Array<Float>, r:Float, g:Float, b:Float):Void {
-    _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorLut.sampleColorLut, cast ([lut, out, r, g, b] : Array<Dynamic>));
+    Facade_Adjustments_flighthq_adjustments_ColorLut.sampleColorLut(lut, out, r, g, b);
   }
 }

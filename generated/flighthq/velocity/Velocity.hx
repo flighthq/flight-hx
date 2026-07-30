@@ -14,98 +14,98 @@ import flighthq.velocity.VelocitySample as Facade_Velocity_flighthq_velocity_Vel
 
 class Velocity {
   public static function addVelocity(out:Velocity2D, a:Velocity2D, b:Velocity2D):Velocity2D {
-    return cast _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocityField.addVelocity, cast ([out, a, b] : Array<Dynamic>));
+    return cast Facade_Velocity_flighthq_velocity_VelocityField.addVelocity(out, a, b);
     return cast null;
   }
 
   public static function beginVelocityFrame(field:VelocityField):Void {
-    _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocityField.beginVelocityFrame, cast ([field] : Array<Dynamic>));
+    Facade_Velocity_flighthq_velocity_VelocityField.beginVelocityFrame(field);
   }
 
   public static function clampVelocity(out:Velocity2D, velocity:Velocity2D, maxLength:Float):Velocity2D {
-    return cast _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocityField.clampVelocity, cast ([out, velocity, maxLength] : Array<Dynamic>));
+    return cast Facade_Velocity_flighthq_velocity_VelocityField.clampVelocity(out, velocity, maxLength);
     return cast null;
   }
 
   public static function contributeTransformVelocity<Traits>(field:VelocityField, root:Transform2DNode<Traits>):Void {
-    _Runtime.callValue(Facade_Velocity_flighthq_velocity_TransformVelocity.contributeTransformVelocity, cast ([field, root] : Array<Dynamic>));
+    Facade_Velocity_flighthq_velocity_TransformVelocity.contributeTransformVelocity(field, root);
   }
 
   public static function contributeVelocity(field:VelocityField, source:Dynamic, x:Float, y:Float):Void {
-    _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocityField.contributeVelocity, cast ([field, source, x, y] : Array<Dynamic>));
+    Facade_Velocity_flighthq_velocity_VelocityField.contributeVelocity(field, source, x, y);
   }
 
   public static function copyVelocity(out:Velocity2D, source:Velocity2D):Velocity2D {
-    return cast _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocityField.copyVelocity, cast ([out, source] : Array<Dynamic>));
+    return cast Facade_Velocity_flighthq_velocity_VelocityField.copyVelocity(out, source);
     return cast null;
   }
 
   public static function createVelocityField():VelocityField {
-    return cast _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocityField.createVelocityField, cast ([] : Array<Dynamic>));
+    return cast Facade_Velocity_flighthq_velocity_VelocityField.createVelocityField();
     return cast null;
   }
 
   public static function dampVelocity(out:Velocity2D, current:Velocity2D, previous:Velocity2D, factor:Float):Velocity2D {
-    return cast _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocityField.dampVelocity, cast ([out, current, previous, factor] : Array<Dynamic>));
+    return cast Facade_Velocity_flighthq_velocity_VelocityField.dampVelocity(out, current, previous, factor);
     return cast null;
   }
 
   public static function ensureVelocitySample(field:VelocityField, source:Dynamic):VelocitySample {
-    return cast _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocityField.ensureVelocitySample, cast ([field, source] : Array<Dynamic>));
+    return cast Facade_Velocity_flighthq_velocity_VelocityField.ensureVelocitySample(field, source);
     return cast null;
   }
 
   public static function getVelocity(field:VelocityField, source:Dynamic, out:Velocity2D):Velocity2D {
-    return cast _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocityField.getVelocity, cast ([field, source, out] : Array<Dynamic>));
+    return cast Facade_Velocity_flighthq_velocity_VelocityField.getVelocity(field, source, out);
     return cast null;
   }
 
   public static function getVelocitySampleAt(sample:VelocitySample, currentWorldTransform:Matrix, pointX:Float, pointY:Float, out:Velocity2D):Velocity2D {
-    return cast _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocitySample.getVelocitySampleAt, cast ([sample, currentWorldTransform, pointX, pointY, out] : Array<Dynamic>));
+    return cast Facade_Velocity_flighthq_velocity_VelocitySample.getVelocitySampleAt(sample, currentWorldTransform, pointX, pointY, out);
     return cast null;
   }
 
   public static function hasVelocity(field:VelocityField, source:Dynamic):Bool {
-    return cast _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocityField.hasVelocity, cast ([field, source] : Array<Dynamic>));
+    return cast Facade_Velocity_flighthq_velocity_VelocityField.hasVelocity(field, source);
     return cast null;
   }
 
   public static function isVelocityZero(velocity:Velocity2D, ?epsilon:Float):Bool {
-    return cast _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocityField.isVelocityZero, cast ([velocity, epsilon] : Array<Dynamic>));
+    return cast Facade_Velocity_flighthq_velocity_VelocityField.isVelocityZero(velocity, epsilon);
     return cast null;
   }
 
   public static function lengthOfVelocity(velocity:Velocity2D):Float {
-    return cast _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocityField.lengthOfVelocity, cast ([velocity] : Array<Dynamic>));
+    return cast Facade_Velocity_flighthq_velocity_VelocityField.lengthOfVelocity(velocity);
     return cast null;
   }
 
   public static function lerpVelocity(out:Velocity2D, a:Velocity2D, b:Velocity2D, t:Float):Velocity2D {
-    return cast _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocityField.lerpVelocity, cast ([out, a, b, t] : Array<Dynamic>));
+    return cast Facade_Velocity_flighthq_velocity_VelocityField.lerpVelocity(out, a, b, t);
     return cast null;
   }
 
   public static function normalizeVelocity(out:Velocity2D, source:Velocity2D):Velocity2D {
-    return cast _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocityField.normalizeVelocity, cast ([out, source] : Array<Dynamic>));
+    return cast Facade_Velocity_flighthq_velocity_VelocityField.normalizeVelocity(out, source);
     return cast null;
   }
 
   public static function scaleVelocity(out:Velocity2D, velocity:Velocity2D, scale:Float):Velocity2D {
-    return cast _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocityField.scaleVelocity, cast ([out, velocity, scale] : Array<Dynamic>));
+    return cast Facade_Velocity_flighthq_velocity_VelocityField.scaleVelocity(out, velocity, scale);
     return cast null;
   }
 
   public static function subtractVelocity(out:Velocity2D, a:Velocity2D, b:Velocity2D):Velocity2D {
-    return cast _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocityField.subtractVelocity, cast ([out, a, b] : Array<Dynamic>));
+    return cast Facade_Velocity_flighthq_velocity_VelocityField.subtractVelocity(out, a, b);
     return cast null;
   }
 
   public static function suppressVelocity(field:VelocityField, source:Dynamic):Void {
-    _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocityField.suppressVelocity, cast ([field, source] : Array<Dynamic>));
+    Facade_Velocity_flighthq_velocity_VelocityField.suppressVelocity(field, source);
   }
 
   public static function zeroVelocity(out:Velocity2D):Velocity2D {
-    return cast _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocityField.zeroVelocity, cast ([out] : Array<Dynamic>));
+    return cast Facade_Velocity_flighthq_velocity_VelocityField.zeroVelocity(out);
     return cast null;
   }
 }

@@ -20,69 +20,69 @@ import flighthq.types.Surface;
 
 class Glyphatlas {
   public static function clearGlyphAtlasDirty(atlas:GlyphAtlas):Void {
-    _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlasDirty.clearGlyphAtlasDirty, cast ([atlas] : Array<Dynamic>));
+    Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlasDirty.clearGlyphAtlasDirty(atlas);
   }
 
   public static function createGlyphAtlas(options:GlyphAtlasOptions):GlyphAtlas {
-    return cast _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlas.createGlyphAtlas, cast ([options] : Array<Dynamic>));
+    return cast Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlas.createGlyphAtlas(options);
     return cast null;
   }
 
   public static function createGlyphSourceFromGlyphAtlas(atlas:GlyphAtlas):GlyphSource {
-    return cast _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphSource.createGlyphSourceFromGlyphAtlas, cast ([atlas] : Array<Dynamic>));
+    return cast Facade_Glyphatlas_flighthq_glyphatlas_GlyphSource.createGlyphSourceFromGlyphAtlas(atlas);
     return cast null;
   }
 
   public static function createStubGlyphRasterizerBackend():GlyphRasterizerBackend {
-    return cast _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphRasterizerBackend.createStubGlyphRasterizerBackend, cast ([] : Array<Dynamic>));
+    return cast Facade_Glyphatlas_flighthq_glyphatlas_GlyphRasterizerBackend.createStubGlyphRasterizerBackend();
     return cast null;
   }
 
   public static function createWebGlyphRasterizerBackend():GlyphRasterizerBackend {
-    return cast _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphRasterizerBackend.createWebGlyphRasterizerBackend, cast ([] : Array<Dynamic>));
+    return cast Facade_Glyphatlas_flighthq_glyphatlas_GlyphRasterizerBackend.createWebGlyphRasterizerBackend();
     return cast null;
   }
 
   public static function deriveGlyphMetricsFromFontSize(fontSize:Float):GlyphMetrics {
-    return cast _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlas.deriveGlyphMetricsFromFontSize, cast ([fontSize] : Array<Dynamic>));
+    return cast Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlas.deriveGlyphMetricsFromFontSize(fontSize);
     return cast null;
   }
 
   public static function disposeGlyphAtlas(atlas:GlyphAtlas):Void {
-    _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlas.disposeGlyphAtlas, cast ([atlas] : Array<Dynamic>));
+    Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlas.disposeGlyphAtlas(atlas);
   }
 
   public static function getGlyphAtlasDirtyRegion(atlas:GlyphAtlas):Null<Rectangle> {
-    return cast _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlasDirty.getGlyphAtlasDirtyRegion, cast ([atlas] : Array<Dynamic>));
+    return cast Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlasDirty.getGlyphAtlasDirtyRegion(atlas);
     return cast null;
   }
 
   public static function getGlyphAtlasEntry(atlas:GlyphAtlas, codepoint:Float):Null<GlyphEntry> {
-    return cast _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlasEntry.getGlyphAtlasEntry, cast ([atlas, codepoint] : Array<Dynamic>));
+    return cast Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlasEntry.getGlyphAtlasEntry(atlas, codepoint);
     return cast null;
   }
 
   public static function getGlyphAtlasKerning(_atlas:GlyphAtlas, _left:Float, _right:Float):Float {
-    return cast _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlasMetrics.getGlyphAtlasKerning, cast ([_atlas, _left, _right] : Array<Dynamic>));
+    return cast Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlasMetrics.getGlyphAtlasKerning(_atlas, _left, _right);
     return cast null;
   }
 
   public static function getGlyphAtlasMetrics(atlas:GlyphAtlas):GlyphMetrics {
-    return cast _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlasMetrics.getGlyphAtlasMetrics, cast ([atlas] : Array<Dynamic>));
+    return cast Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlasMetrics.getGlyphAtlasMetrics(atlas);
     return cast null;
   }
 
   public static function getGlyphAtlasSurface(atlas:GlyphAtlas):Surface {
-    return cast _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlas.getGlyphAtlasSurface, cast ([atlas] : Array<Dynamic>));
+    return cast Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlas.getGlyphAtlasSurface(atlas);
     return cast null;
   }
 
   public static function getGlyphRasterizerBackend():GlyphRasterizerBackend {
-    return cast _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphRasterizerBackend.getGlyphRasterizerBackend, cast ([] : Array<Dynamic>));
+    return cast Facade_Glyphatlas_flighthq_glyphatlas_GlyphRasterizerBackend.getGlyphRasterizerBackend();
     return cast null;
   }
 
   public static function setGlyphRasterizerBackend(backend:Null<GlyphRasterizerBackend>):Void {
-    _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphRasterizerBackend.setGlyphRasterizerBackend, cast ([backend] : Array<Dynamic>));
+    Facade_Glyphatlas_flighthq_glyphatlas_GlyphRasterizerBackend.setGlyphRasterizerBackend(backend);
   }
 }

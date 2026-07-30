@@ -17,183 +17,183 @@ import flighthq.types.MouseWheelMode;
 
 class Input {
   public static function applyGamepadAxisDeadZone(value:Float, deadZone:Float):Float {
-    return cast _Runtime.callValue(Facade_Input_flighthq_input_InputManager.applyGamepadAxisDeadZone, cast ([value, deadZone] : Array<Dynamic>));
+    return cast Facade_Input_flighthq_input_InputManager.applyGamepadAxisDeadZone(value, deadZone);
     return cast null;
   }
 
   public static function applyGamepadStickDeadZone(out:{ var x:Float; var y:Float; }, x:Float, y:Float, deadZone:Float):Void {
-    _Runtime.callValue(Facade_Input_flighthq_input_InputManager.applyGamepadStickDeadZone, cast ([out, x, y, deadZone] : Array<Dynamic>));
+    Facade_Input_flighthq_input_InputManager.applyGamepadStickDeadZone(out, x, y, deadZone);
   }
 
   public static function attachGamepadInput(manager:InputManager, target:Dynamic, ?options:AttachInputOptions):Void {
-    _Runtime.callValue(Facade_Input_flighthq_input_InputManager.attachGamepadInput, cast ([manager, target, options] : Array<Dynamic>));
+    Facade_Input_flighthq_input_InputManager.attachGamepadInput(manager, target, options);
   }
 
   public static function attachKeyboardInput(manager:InputManager, target:Dynamic, ?options:AttachInputOptions):Void {
-    _Runtime.callValue(Facade_Input_flighthq_input_InputManager.attachKeyboardInput, cast ([manager, target, options] : Array<Dynamic>));
+    Facade_Input_flighthq_input_InputManager.attachKeyboardInput(manager, target, options);
   }
 
   public static function attachPointerInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
-    _Runtime.callValue(Facade_Input_flighthq_input_InputManager.attachPointerInput, cast ([manager, element, options] : Array<Dynamic>));
+    Facade_Input_flighthq_input_InputManager.attachPointerInput(manager, element, options);
   }
 
   public static function attachRelativePointerInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
-    _Runtime.callValue(Facade_Input_flighthq_input_InputManager.attachRelativePointerInput, cast ([manager, element, options] : Array<Dynamic>));
+    Facade_Input_flighthq_input_InputManager.attachRelativePointerInput(manager, element, options);
   }
 
   public static function attachTextInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
-    _Runtime.callValue(Facade_Input_flighthq_input_InputManager.attachTextInput, cast ([manager, element, options] : Array<Dynamic>));
+    Facade_Input_flighthq_input_InputManager.attachTextInput(manager, element, options);
   }
 
   public static function attachWheelInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
-    _Runtime.callValue(Facade_Input_flighthq_input_InputManager.attachWheelInput, cast ([manager, element, options] : Array<Dynamic>));
+    Facade_Input_flighthq_input_InputManager.attachWheelInput(manager, element, options);
   }
 
   public static function connectInputStateToInputManager(state:InputState, manager:InputManager):Dynamic {
-    return cast _Runtime.callValue(Facade_Input_flighthq_input_InputManager.connectInputStateToInputManager, cast ([state, manager] : Array<Dynamic>));
+    return cast Facade_Input_flighthq_input_InputManager.connectInputStateToInputManager(state, manager);
     return cast null;
   }
 
   public static function createInputKeyRepeatTimer(options:InputKeyRepeatOptions):InputKeyRepeatTimer {
-    return cast _Runtime.callValue(Facade_Input_flighthq_input_InputManager.createInputKeyRepeatTimer, cast ([options] : Array<Dynamic>));
+    return cast Facade_Input_flighthq_input_InputManager.createInputKeyRepeatTimer(options);
     return cast null;
   }
 
   public static function createInputManager():InputManager {
-    return cast _Runtime.callValue(Facade_Input_flighthq_input_InputManager.createInputManager, cast ([] : Array<Dynamic>));
+    return cast Facade_Input_flighthq_input_InputManager.createInputManager();
     return cast null;
   }
 
   public static function createInputSignals():InputSignals {
-    return cast _Runtime.callValue(Facade_Input_flighthq_input_InputManager.createInputSignals, cast ([] : Array<Dynamic>));
+    return cast Facade_Input_flighthq_input_InputManager.createInputSignals();
     return cast null;
   }
 
   public static function createInputState():InputState {
-    return cast _Runtime.callValue(Facade_Input_flighthq_input_InputManager.createInputState, cast ([] : Array<Dynamic>));
+    return cast Facade_Input_flighthq_input_InputManager.createInputState();
     return cast null;
   }
 
   public static function detachGamepadInput(manager:InputManager, target:Dynamic):Void {
-    _Runtime.callValue(Facade_Input_flighthq_input_InputManager.detachGamepadInput, cast ([manager, target] : Array<Dynamic>));
+    Facade_Input_flighthq_input_InputManager.detachGamepadInput(manager, target);
   }
 
   public static function detachKeyboardInput(manager:InputManager, target:Dynamic):Void {
-    _Runtime.callValue(Facade_Input_flighthq_input_InputManager.detachKeyboardInput, cast ([manager, target] : Array<Dynamic>));
+    Facade_Input_flighthq_input_InputManager.detachKeyboardInput(manager, target);
   }
 
   public static function detachPointerInput(manager:InputManager, element:Dynamic):Void {
-    _Runtime.callValue(Facade_Input_flighthq_input_InputManager.detachPointerInput, cast ([manager, element] : Array<Dynamic>));
+    Facade_Input_flighthq_input_InputManager.detachPointerInput(manager, element);
   }
 
   public static function detachRelativePointerInput(manager:InputManager, element:Dynamic):Void {
-    _Runtime.callValue(Facade_Input_flighthq_input_InputManager.detachRelativePointerInput, cast ([manager, element] : Array<Dynamic>));
+    Facade_Input_flighthq_input_InputManager.detachRelativePointerInput(manager, element);
   }
 
   public static function detachTextInput(manager:InputManager, element:Dynamic):Void {
-    _Runtime.callValue(Facade_Input_flighthq_input_InputManager.detachTextInput, cast ([manager, element] : Array<Dynamic>));
+    Facade_Input_flighthq_input_InputManager.detachTextInput(manager, element);
   }
 
   public static function detachWheelInput(manager:InputManager, element:Dynamic):Void {
-    _Runtime.callValue(Facade_Input_flighthq_input_InputManager.detachWheelInput, cast ([manager, element] : Array<Dynamic>));
+    Facade_Input_flighthq_input_InputManager.detachWheelInput(manager, element);
   }
 
   public static function endInputStateFrame(state:InputState):Void {
-    _Runtime.callValue(Facade_Input_flighthq_input_InputManager.endInputStateFrame, cast ([state] : Array<Dynamic>));
+    Facade_Input_flighthq_input_InputManager.endInputStateFrame(state);
   }
 
   public static function exitInputPointerLock():Void {
-    _Runtime.callValue(Facade_Input_flighthq_input_InputManager.exitInputPointerLock, cast ([] : Array<Dynamic>));
+    Facade_Input_flighthq_input_InputManager.exitInputPointerLock();
   }
 
   public static function getCoalescedInputPointerEvents(event:Dynamic, callback:Dynamic):Void {
-    _Runtime.callValue(Facade_Input_flighthq_input_InputManager.getCoalescedInputPointerEvents, cast ([event, callback] : Array<Dynamic>));
+    Facade_Input_flighthq_input_InputManager.getCoalescedInputPointerEvents(event, callback);
   }
 
   public static function getGamepadAxisName(mapping:GamepadMappingKind, index:Float):Null<GamepadAxisKind> {
-    return cast _Runtime.callValue(Facade_Input_flighthq_input_InputManager.getGamepadAxisName, cast ([mapping, index] : Array<Dynamic>));
+    return cast Facade_Input_flighthq_input_InputManager.getGamepadAxisName(mapping, index);
     return cast null;
   }
 
   public static function getGamepadButtonName(mapping:GamepadMappingKind, index:Float):Null<GamepadButtonKind> {
-    return cast _Runtime.callValue(Facade_Input_flighthq_input_InputManager.getGamepadButtonName, cast ([mapping, index] : Array<Dynamic>));
+    return cast Facade_Input_flighthq_input_InputManager.getGamepadButtonName(mapping, index);
     return cast null;
   }
 
   public static function getInputGamepadAxis(state:InputState, gamepad:Float, axis:Float):Float {
-    return cast _Runtime.callValue(Facade_Input_flighthq_input_InputManager.getInputGamepadAxis, cast ([state, gamepad, axis] : Array<Dynamic>));
+    return cast Facade_Input_flighthq_input_InputManager.getInputGamepadAxis(state, gamepad, axis);
     return cast null;
   }
 
   public static function getKeyCodeFromDomKeyboardEvent(event:Dynamic):Float {
-    return cast _Runtime.callValue(Facade_Input_flighthq_input_InputManager.getKeyCodeFromDomKeyboardEvent, cast ([event] : Array<Dynamic>));
+    return cast Facade_Input_flighthq_input_InputManager.getKeyCodeFromDomKeyboardEvent(event);
     return cast null;
   }
 
   public static function getKeyModifierFromDomKeyboardEvent(event:Dynamic):Float {
-    return cast _Runtime.callValue(Facade_Input_flighthq_input_InputManager.getKeyModifierFromDomKeyboardEvent, cast ([event] : Array<Dynamic>));
+    return cast Facade_Input_flighthq_input_InputManager.getKeyModifierFromDomKeyboardEvent(event);
     return cast null;
   }
 
   public static function getMouseWheelModeFromDomWheelEvent(event:Dynamic):MouseWheelMode {
-    return cast _Runtime.callValue(Facade_Input_flighthq_input_InputManager.getMouseWheelModeFromDomWheelEvent, cast ([event] : Array<Dynamic>));
+    return cast Facade_Input_flighthq_input_InputManager.getMouseWheelModeFromDomWheelEvent(event);
     return cast null;
   }
 
   public static function hasInputPointerLock():Bool {
-    return cast _Runtime.callValue(Facade_Input_flighthq_input_InputManager.hasInputPointerLock, cast ([] : Array<Dynamic>));
+    return cast Facade_Input_flighthq_input_InputManager.hasInputPointerLock();
     return cast null;
   }
 
   public static function isInputGamepadButtonDown(state:InputState, gamepad:Float, button:Float):Bool {
-    return cast _Runtime.callValue(Facade_Input_flighthq_input_InputManager.isInputGamepadButtonDown, cast ([state, gamepad, button] : Array<Dynamic>));
+    return cast Facade_Input_flighthq_input_InputManager.isInputGamepadButtonDown(state, gamepad, button);
     return cast null;
   }
 
   public static function isInputKeyDown(state:InputState, keyCode:Float):Bool {
-    return cast _Runtime.callValue(Facade_Input_flighthq_input_InputManager.isInputKeyDown, cast ([state, keyCode] : Array<Dynamic>));
+    return cast Facade_Input_flighthq_input_InputManager.isInputKeyDown(state, keyCode);
     return cast null;
   }
 
   public static function isInputPointerButtonDown(state:InputState, pointerId:Float, button:Float):Bool {
-    return cast _Runtime.callValue(Facade_Input_flighthq_input_InputManager.isInputPointerButtonDown, cast ([state, pointerId, button] : Array<Dynamic>));
+    return cast Facade_Input_flighthq_input_InputManager.isInputPointerButtonDown(state, pointerId, button);
     return cast null;
   }
 
   public static function pollGamepadInput(manager:InputManager):Void {
-    _Runtime.callValue(Facade_Input_flighthq_input_InputManager.pollGamepadInput, cast ([manager] : Array<Dynamic>));
+    Facade_Input_flighthq_input_InputManager.pollGamepadInput(manager);
   }
 
   public static function releaseInputPointerCapture(element:Dynamic, pointerId:Float):Void {
-    _Runtime.callValue(Facade_Input_flighthq_input_InputManager.releaseInputPointerCapture, cast ([element, pointerId] : Array<Dynamic>));
+    Facade_Input_flighthq_input_InputManager.releaseInputPointerCapture(element, pointerId);
   }
 
   public static function requestInputPointerLock(element:Dynamic):flighthq._internal._Promise<Bool> {
-    return cast _Runtime.callValue(Facade_Input_flighthq_input_InputManager.requestInputPointerLock, cast ([element] : Array<Dynamic>));
+    return cast Facade_Input_flighthq_input_InputManager.requestInputPointerLock(element);
     return cast null;
   }
 
   public static function setInputPointerCapture(element:Dynamic, pointerId:Float):Void {
-    _Runtime.callValue(Facade_Input_flighthq_input_InputManager.setInputPointerCapture, cast ([element, pointerId] : Array<Dynamic>));
+    Facade_Input_flighthq_input_InputManager.setInputPointerCapture(element, pointerId);
   }
 
   public static function wasInputGamepadButtonPressed(state:InputState, gamepad:Float, button:Float):Bool {
-    return cast _Runtime.callValue(Facade_Input_flighthq_input_InputManager.wasInputGamepadButtonPressed, cast ([state, gamepad, button] : Array<Dynamic>));
+    return cast Facade_Input_flighthq_input_InputManager.wasInputGamepadButtonPressed(state, gamepad, button);
     return cast null;
   }
 
   public static function wasInputGamepadButtonReleased(state:InputState, gamepad:Float, button:Float):Bool {
-    return cast _Runtime.callValue(Facade_Input_flighthq_input_InputManager.wasInputGamepadButtonReleased, cast ([state, gamepad, button] : Array<Dynamic>));
+    return cast Facade_Input_flighthq_input_InputManager.wasInputGamepadButtonReleased(state, gamepad, button);
     return cast null;
   }
 
   public static function wasInputKeyPressed(state:InputState, keyCode:Float):Bool {
-    return cast _Runtime.callValue(Facade_Input_flighthq_input_InputManager.wasInputKeyPressed, cast ([state, keyCode] : Array<Dynamic>));
+    return cast Facade_Input_flighthq_input_InputManager.wasInputKeyPressed(state, keyCode);
     return cast null;
   }
 
   public static function wasInputKeyReleased(state:InputState, keyCode:Float):Bool {
-    return cast _Runtime.callValue(Facade_Input_flighthq_input_InputManager.wasInputKeyReleased, cast ([state, keyCode] : Array<Dynamic>));
+    return cast Facade_Input_flighthq_input_InputManager.wasInputKeyReleased(state, keyCode);
     return cast null;
   }
 }

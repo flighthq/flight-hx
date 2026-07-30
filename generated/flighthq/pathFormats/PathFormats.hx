@@ -8,17 +8,17 @@ import flighthq.types.Path;
 
 class PathFormats {
   public static function appendSvgPathData(path:Path, d:String):Bool {
-    return cast _Runtime.callValue(Facade_PathFormats_flighthq_pathFormats_SvgPathData.appendSvgPathData, cast ([path, d] : Array<Dynamic>));
+    return cast Facade_PathFormats_flighthq_pathFormats_SvgPathData.appendSvgPathData(path, d);
     return cast null;
   }
 
   public static function formatSvgPathData(path:Path, ?options:{ @:optional var precision:Float; }):String {
-    return cast _Runtime.callValue(Facade_PathFormats_flighthq_pathFormats_SvgPathData.formatSvgPathData, cast ([path, options] : Array<Dynamic>));
+    return cast Facade_PathFormats_flighthq_pathFormats_SvgPathData.formatSvgPathData(path, options);
     return cast null;
   }
 
   public static function parseSvgPathData(d:String):Null<Path> {
-    return cast _Runtime.callValue(Facade_PathFormats_flighthq_pathFormats_SvgPathData.parseSvgPathData, cast ([d] : Array<Dynamic>));
+    return cast Facade_PathFormats_flighthq_pathFormats_SvgPathData.parseSvgPathData(d);
     return cast null;
   }
 }

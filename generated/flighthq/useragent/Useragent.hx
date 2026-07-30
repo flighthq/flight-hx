@@ -14,62 +14,62 @@ import flighthq.useragent.UserAgentParse as Facade_Useragent_flighthq_useragent_
 
 class Useragent {
   public static function detectEndianness():PlatformEndianness {
-    return cast _Runtime.callValue(Facade_Useragent_flighthq_useragent_UserAgent.detectEndianness, cast ([] : Array<Dynamic>));
+    return cast Facade_Useragent_flighthq_useragent_UserAgent.detectEndianness();
     return cast null;
   }
 
   public static function parseUserAgentArch(ua:String, ?uadPlatform:String):String {
-    return cast _Runtime.callValue(Facade_Useragent_flighthq_useragent_UserAgent.parseUserAgentArch, cast ([ua, uadPlatform] : Array<Dynamic>));
+    return cast Facade_Useragent_flighthq_useragent_UserAgent.parseUserAgentArch(ua, uadPlatform);
     return cast null;
   }
 
   public static function parseUserAgentEngine(ua:String):PlatformEngine {
-    return cast _Runtime.callValue(Facade_Useragent_flighthq_useragent_UserAgent.parseUserAgentEngine, cast ([ua] : Array<Dynamic>));
+    return cast Facade_Useragent_flighthq_useragent_UserAgent.parseUserAgentEngine(ua);
     return cast null;
   }
 
   public static function parseUserAgentEngineVersion(ua:String, engine:PlatformEngine):String {
-    return cast _Runtime.callValue(Facade_Useragent_flighthq_useragent_UserAgent.parseUserAgentEngineVersion, cast ([ua, engine] : Array<Dynamic>));
+    return cast Facade_Useragent_flighthq_useragent_UserAgent.parseUserAgentEngineVersion(ua, engine);
     return cast null;
   }
 
   public static function parseUserAgentFormFactor(ua:String, maxTouchPoints:Float):DeviceFormFactor {
-    return cast _Runtime.callValue(Facade_Useragent_flighthq_useragent_UserAgentParse.parseUserAgentFormFactor, cast ([ua, maxTouchPoints] : Array<Dynamic>));
+    return cast Facade_Useragent_flighthq_useragent_UserAgentParse.parseUserAgentFormFactor(ua, maxTouchPoints);
     return cast null;
   }
 
   public static function parseUserAgentKind(name:PlatformName):PlatformKind {
-    return cast _Runtime.callValue(Facade_Useragent_flighthq_useragent_UserAgent.parseUserAgentKind, cast ([name] : Array<Dynamic>));
+    return cast Facade_Useragent_flighthq_useragent_UserAgent.parseUserAgentKind(name);
     return cast null;
   }
 
   public static function parseUserAgentName(ua:String):PlatformName {
-    return cast _Runtime.callValue(Facade_Useragent_flighthq_useragent_UserAgent.parseUserAgentName, cast ([ua] : Array<Dynamic>));
+    return cast Facade_Useragent_flighthq_useragent_UserAgent.parseUserAgentName(ua);
     return cast null;
   }
 
   public static function parseUserAgentOsName(ua:String):String {
-    return cast _Runtime.callValue(Facade_Useragent_flighthq_useragent_UserAgentParse.parseUserAgentOsName, cast ([ua] : Array<Dynamic>));
+    return cast Facade_Useragent_flighthq_useragent_UserAgentParse.parseUserAgentOsName(ua);
     return cast null;
   }
 
   public static function parseUserAgentOsVersion(ua:String):String {
-    return cast _Runtime.callValue(Facade_Useragent_flighthq_useragent_UserAgentParse.parseUserAgentOsVersion, cast ([ua] : Array<Dynamic>));
+    return cast Facade_Useragent_flighthq_useragent_UserAgentParse.parseUserAgentOsVersion(ua);
     return cast null;
   }
 
   public static function parseUserAgentPointerWidth(arch:String):Float {
-    return cast _Runtime.callValue(Facade_Useragent_flighthq_useragent_UserAgent.parseUserAgentPointerWidth, cast ([arch] : Array<Dynamic>));
+    return cast Facade_Useragent_flighthq_useragent_UserAgent.parseUserAgentPointerWidth(arch);
     return cast null;
   }
 
   public static function parseUserAgentRuntime(win:Null<Dynamic>):PlatformRuntime {
-    return cast _Runtime.callValue(Facade_Useragent_flighthq_useragent_UserAgent.parseUserAgentRuntime, cast ([win] : Array<Dynamic>));
+    return cast Facade_Useragent_flighthq_useragent_UserAgent.parseUserAgentRuntime(win);
     return cast null;
   }
 
   public static function parseUserAgentVersion(ua:String, name:PlatformName):String {
-    return cast _Runtime.callValue(Facade_Useragent_flighthq_useragent_UserAgent.parseUserAgentVersion, cast ([ua, name] : Array<Dynamic>));
+    return cast Facade_Useragent_flighthq_useragent_UserAgent.parseUserAgentVersion(ua, name);
     return cast null;
   }
 }

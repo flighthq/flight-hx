@@ -27,7 +27,7 @@ class Skeleton3d {
   public static final _result__skeleton3d:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
 
   public static function captureMeshSkinBindPose(geometry:MeshGeometry):MeshSkinBindPose {
-    return cast _Runtime.callValue(Facade_Skeleton3d_flighthq_skeleton3d_SkinMeshGeometry.captureMeshSkinBindPose, cast ([geometry] : Array<Dynamic>));
+    return cast Facade_Skeleton3d_flighthq_skeleton3d_SkinMeshGeometry.captureMeshSkinBindPose(geometry);
     return cast null;
   }
 
@@ -110,11 +110,11 @@ class Skeleton3d {
   }
 
   public static function getMeshSkinConservativeBounds(out:AabbLike, bindPose:MeshSkinBindPose, skeleton:Skeleton3D):Void {
-    _Runtime.callValue(Facade_Skeleton3d_flighthq_skeleton3d_GetMeshSkinBounds.getMeshSkinConservativeBounds, cast ([out, bindPose, skeleton] : Array<Dynamic>));
+    Facade_Skeleton3d_flighthq_skeleton3d_GetMeshSkinBounds.getMeshSkinConservativeBounds(out, bindPose, skeleton);
   }
 
   public static function getMeshSkinExactBounds(out:AabbLike, bindPose:MeshSkinBindPose, skeleton:Skeleton3D):Void {
-    _Runtime.callValue(Facade_Skeleton3d_flighthq_skeleton3d_GetMeshSkinBounds.getMeshSkinExactBounds, cast ([out, bindPose, skeleton] : Array<Dynamic>));
+    Facade_Skeleton3d_flighthq_skeleton3d_GetMeshSkinBounds.getMeshSkinExactBounds(out, bindPose, skeleton);
   }
 
   public static function getSkeleton3DJointIndexByName(skeleton:Skeleton3D, name:String):Float {
@@ -161,15 +161,15 @@ class Skeleton3d {
   }
 
   public static function skinMeshGeometry(geometry:MeshGeometry, skeleton:Skeleton3D, bindPose:MeshSkinBindPose):Void {
-    _Runtime.callValue(Facade_Skeleton3d_flighthq_skeleton3d_SkinMeshGeometry.skinMeshGeometry, cast ([geometry, skeleton, bindPose] : Array<Dynamic>));
+    Facade_Skeleton3d_flighthq_skeleton3d_SkinMeshGeometry.skinMeshGeometry(geometry, skeleton, bindPose);
   }
 
   public static function skinVertices(outPositions:flighthq._internal._Float32Array, outNormals:flighthq._internal._Float32Array, positions:flighthq._internal._Float32Array, normals:flighthq._internal._Float32Array, joints:Dynamic, weights:flighthq._internal._Float32Array, jointMatrices:flighthq._internal._Float32Array):Void {
-    _Runtime.callValue(Facade_Skeleton3d_flighthq_skeleton3d_SkinVertices.skinVertices, cast ([outPositions, outNormals, positions, normals, joints, weights, jointMatrices] : Array<Dynamic>));
+    Facade_Skeleton3d_flighthq_skeleton3d_SkinVertices.skinVertices(outPositions, outNormals, positions, normals, joints, weights, jointMatrices);
   }
 
   public static function updateMeshSkin(mesh:Mesh):Void {
-    _Runtime.callValue(Facade_Skeleton3d_flighthq_skeleton3d_UpdateMeshSkin.updateMeshSkin, cast ([mesh] : Array<Dynamic>));
+    Facade_Skeleton3d_flighthq_skeleton3d_UpdateMeshSkin.updateMeshSkin(mesh);
   }
 
   public static function validateSkeleton3D(skeleton:Skeleton3D):Null<Skeleton3DValidationDiagnostic> {

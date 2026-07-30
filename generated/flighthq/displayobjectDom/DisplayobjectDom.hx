@@ -49,34 +49,34 @@ import flighthq.types.Renderable;
 
 class DisplayobjectDom {
   public static function applyDomBlendMode(element:Dynamic, value:Null<BlendMode>):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomMaterials.applyDomBlendMode, cast ([element, value] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomMaterials.applyDomBlendMode(element, value);
   }
 
   public static function applyDomClipRectangles(state:DomRenderState, data:RenderProxy2D, entries:Array<DomClipEntry>):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomClipRectangle.applyDomClipRectangles, cast ([state, data, entries] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomClipRectangle.applyDomClipRectangles(state, data, entries);
   }
 
   public static function applyDomStyle(state:DomRenderState, element:Dynamic, node:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomStyle.applyDomStyle, cast ([state, element, node] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomStyle.applyDomStyle(state, element, node);
   }
 
   public static function createDomRenderState(element:Dynamic, ?options:Dynamic):DomRenderState {
-    return cast _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomRenderState.createDomRenderState, cast ([element, options] : Array<Dynamic>));
+    return cast Facade_DisplayobjectDom_flighthq_displayobjectDom_DomRenderState.createDomRenderState(element, options);
     return cast null;
   }
 
   public static function createDomRenderStateRuntime():DomRenderStateRuntime {
-    return cast _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomRenderState.createDomRenderStateRuntime, cast ([] : Array<Dynamic>));
+    return cast Facade_DisplayobjectDom_flighthq_displayobjectDom_DomRenderState.createDomRenderStateRuntime();
     return cast null;
   }
 
   public static function createDomScale9ShapeData(_state:RenderState, _source:Renderable):DomScale9ShapeData__domScale9Shape {
-    return cast _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomScale9Shape.createDomScale9ShapeData, cast ([_state, _source] : Array<Dynamic>));
+    return cast Facade_DisplayobjectDom_flighthq_displayobjectDom_DomScale9Shape.createDomScale9ShapeData(_state, _source);
     return cast null;
   }
 
   public static function createDomStageRectangle(rect:RectangleLike, transform:MatrixLike):DomStageRectangle {
-    return cast _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomClipRectangle.createDomStageRectangle, cast ([rect, transform] : Array<Dynamic>));
+    return cast Facade_DisplayobjectDom_flighthq_displayobjectDom_DomClipRectangle.createDomStageRectangle(rect, transform);
     return cast null;
   }
 
@@ -103,162 +103,162 @@ class DisplayobjectDom {
   public static final defaultHtmlViewRenderer:DisplayObjectRenderer = Facade_DisplayobjectDom_flighthq_displayobjectDom_HtmlView.defaultHtmlViewRenderer;
 
   public static function drawDomBitmap(state:DomRenderState, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomBitmap.drawDomBitmap, cast ([state, renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomBitmap.drawDomBitmap(state, renderProxy);
   }
 
   public static function drawDomDisplayObject(_state:DomRenderState, _renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomDisplayObject.drawDomDisplayObject, cast ([_state, _renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomDisplayObject.drawDomDisplayObject(_state, _renderProxy);
   }
 
   public static function drawDomHtmlView(state:DomRenderState, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_HtmlView.drawDomHtmlView, cast ([state, renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_HtmlView.drawDomHtmlView(state, renderProxy);
   }
 
   public static function drawDomNativeText(state:DomRenderState, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomNativeText.drawDomNativeText, cast ([state, renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomNativeText.drawDomNativeText(state, renderProxy);
   }
 
   public static function drawDomNativeTextMask(state:DomRenderState, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomNativeText.drawDomNativeTextMask, cast ([state, renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomNativeText.drawDomNativeTextMask(state, renderProxy);
   }
 
   public static function drawDomRenderView(state:DomRenderState, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomRenderView.drawDomRenderView, cast ([state, renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomRenderView.drawDomRenderView(state, renderProxy);
   }
 
   public static function drawDomRichText(state:DomRenderState, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomRichText.drawDomRichText, cast ([state, renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomRichText.drawDomRichText(state, renderProxy);
   }
 
   public static function drawDomRichTextMask(state:DomRenderState, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomRichText.drawDomRichTextMask, cast ([state, renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomRichText.drawDomRichTextMask(state, renderProxy);
   }
 
   public static function drawDomScale9Shape(state:DomRenderState, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomScale9Shape.drawDomScale9Shape, cast ([state, renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomScale9Shape.drawDomScale9Shape(state, renderProxy);
   }
 
   public static function drawDomShape(state:DomRenderState, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomShape.drawDomShape, cast ([state, renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomShape.drawDomShape(state, renderProxy);
   }
 
   public static function drawDomTextInputOverlay(_state:DomRenderState, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomTextInput.drawDomTextInputOverlay, cast ([_state, renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomTextInput.drawDomTextInputOverlay(_state, renderProxy);
   }
 
   public static function drawDomTextLabel(state:DomRenderState, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomTextLabel.drawDomTextLabel, cast ([state, renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomTextLabel.drawDomTextLabel(state, renderProxy);
   }
 
   public static function drawDomVideo(state:DomRenderState, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomVideo.drawDomVideo, cast ([state, renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomVideo.drawDomVideo(state, renderProxy);
   }
 
   public static function enableDomBlendModeSupport(state:DomRenderState):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomMaterials.enableDomBlendModeSupport, cast ([state] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomMaterials.enableDomBlendModeSupport(state);
   }
 
   public static function enableDomClipSupport(state:DomRenderState):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomClip.enableDomClipSupport, cast ([state] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomClip.enableDomClipSupport(state);
   }
 
   public static function enableDomCssFilterSupport(state:DomRenderState):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomCSSFilterBinding.enableDomCssFilterSupport, cast ([state] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomCSSFilterBinding.enableDomCssFilterSupport(state);
   }
 
   public static function enableDomRenderCache(state:RenderState):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomCache.enableDomRenderCache, cast ([state] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomCache.enableDomRenderCache(state);
   }
 
   public static function enableDomTextInput():Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomTextInput.enableDomTextInput, cast ([] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomTextInput.enableDomTextInput();
   }
 
   public static function ensureDomRenderCacheTarget(state:DomRenderState, cache:RenderCache, width:Float, height:Float):Dynamic {
-    return cast _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomCache.ensureDomRenderCacheTarget, cast ([state, cache, width, height] : Array<Dynamic>));
+    return cast Facade_DisplayobjectDom_flighthq_displayobjectDom_DomCache.ensureDomRenderCacheTarget(state, cache, width, height);
     return cast null;
   }
 
   public static function escapeDomHtmlString(str:String):String {
-    return cast _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomTextHelpers.escapeDomHtmlString, cast ([str] : Array<Dynamic>));
+    return cast Facade_DisplayobjectDom_flighthq_displayobjectDom_DomTextHelpers.escapeDomHtmlString(str);
     return cast null;
   }
 
   public static function explainDomImageSource(image:ImageResource):DomImageSourceKind {
-    return cast _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomImageSource.explainDomImageSource, cast ([image] : Array<Dynamic>));
+    return cast Facade_DisplayobjectDom_flighthq_displayobjectDom_DomImageSource.explainDomImageSource(image);
     return cast null;
   }
 
   public static function getDomBlendModeFidelity(blendMode:BlendMode):DomBlendModeFidelity {
-    return cast _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomMaterials.getDomBlendModeFidelity, cast ([blendMode] : Array<Dynamic>));
+    return cast Facade_DisplayobjectDom_flighthq_displayobjectDom_DomMaterials.getDomBlendModeFidelity(blendMode);
     return cast null;
   }
 
   public static function getDomCssFilter(renderProxy:RenderProxy2D):Null<String> {
-    return cast _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomCSSFilterBinding.getDomCssFilter, cast ([renderProxy] : Array<Dynamic>));
+    return cast Facade_DisplayobjectDom_flighthq_displayobjectDom_DomCSSFilterBinding.getDomCssFilter(renderProxy);
     return cast null;
   }
 
   public static function getDomRenderCacheTarget(state:DomRenderState, cache:RenderCache):Null<Dynamic> {
-    return cast _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomCache.getDomRenderCacheTarget, cast ([state, cache] : Array<Dynamic>));
+    return cast Facade_DisplayobjectDom_flighthq_displayobjectDom_DomCache.getDomRenderCacheTarget(state, cache);
     return cast null;
   }
 
   public static function getDomRenderStateRuntime(state:DomRenderState):DomRenderStateRuntime {
-    return cast _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomRenderState.getDomRenderStateRuntime, cast ([state] : Array<Dynamic>));
+    return cast Facade_DisplayobjectDom_flighthq_displayobjectDom_DomRenderState.getDomRenderStateRuntime(state);
     return cast null;
   }
 
   public static function invalidateDomFontResource(source:FontResource):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomFontSource.invalidateDomFontResource, cast ([source] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomFontSource.invalidateDomFontResource(source);
   }
 
   public static function prepareDomElement(element:Dynamic):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomStyle.prepareDomElement, cast ([element] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomStyle.prepareDomElement(element);
   }
 
   public static function pushDomClipRectangle(stack:Array<DomClipEntry>, rect:RectangleLike, transform:MatrixLike):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomClipRectangle.pushDomClipRectangle, cast ([stack, rect, transform] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomClipRectangle.pushDomClipRectangle(stack, rect, transform);
   }
 
   public static function registerDomTextInputOverlay(overlay:DomTextInputOverlay):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomRichText.registerDomTextInputOverlay, cast ([overlay] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomRichText.registerDomTextInputOverlay(overlay);
   }
 
   public static function releaseDomRenderCache(state:DomRenderState, cache:RenderCache):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomCache.releaseDomRenderCache, cast ([state, cache] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomCache.releaseDomRenderCache(state, cache);
   }
 
   public static function renderDomBackground(state:DomRenderState):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomBackground.renderDomBackground, cast ([state] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomBackground.renderDomBackground(state);
   }
 
   public static function renderDomDisplayObject(state:DomRenderState, source:DisplayObject):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomDisplayObject.renderDomDisplayObject, cast ([state, source] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomDisplayObject.renderDomDisplayObject(state, source);
   }
 
   public static function resolveDomImageSource(state:DomRenderState, image:ImageResource):Null<Dynamic> {
-    return cast _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomImageSource.resolveDomImageSource, cast ([state, image] : Array<Dynamic>));
+    return cast Facade_DisplayobjectDom_flighthq_displayobjectDom_DomImageSource.resolveDomImageSource(state, image);
     return cast null;
   }
 
   public static function setDomClipHooks(state:DomRenderState):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomClipRectangle.setDomClipHooks, cast ([state] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomClipRectangle.setDomClipHooks(state);
   }
 
   public static function setDomCssFilter(state:DomRenderState, node:DisplayObject, filter:Null<String>):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomCSSFilterBinding.setDomCssFilter, cast ([state, node, filter] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomCSSFilterBinding.setDomCssFilter(state, node, filter);
   }
 
   public static function setDomRendererElement(state:DomRenderState, element:Dynamic):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomStyle.setDomRendererElement, cast ([state, element] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomStyle.setDomRendererElement(state, element);
   }
 
   public static function setDomTransform(element:Dynamic, transform:Matrix, roundPixels:Bool):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomTransform.setDomTransform, cast ([element, transform, roundPixels] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomTransform.setDomTransform(element, transform, roundPixels);
   }
 
   public static function setDomTransformWithOffset(element:Dynamic, transform:Matrix, offsetX:Float, offsetY:Float, roundPixels:Bool):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomTransform.setDomTransformWithOffset, cast ([element, transform, offsetX, offsetY, roundPixels] : Array<Dynamic>));
+    Facade_DisplayobjectDom_flighthq_displayobjectDom_DomTransform.setDomTransformWithOffset(element, transform, offsetX, offsetY, roundPixels);
   }
 }

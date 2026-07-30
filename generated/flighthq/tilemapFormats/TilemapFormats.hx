@@ -22,62 +22,62 @@ import flighthq.types.Tilemap.TilemapData;
 
 class TilemapFormats {
   public static function buildTilemapLayersFromTiled(map:TiledMap, layerIndex:Float, resolveTileset:TiledTilesetResolver):Null<Array<TilemapData>> {
-    return cast _Runtime.callValue(Facade_TilemapFormats_flighthq_tilemapFormats_TiledProject.buildTilemapLayersFromTiled, cast ([map, layerIndex, resolveTileset] : Array<Dynamic>));
+    return cast Facade_TilemapFormats_flighthq_tilemapFormats_TiledProject.buildTilemapLayersFromTiled(map, layerIndex, resolveTileset);
     return cast null;
   }
 
   public static function decodeTiledBase64Layer(text:String, compression:Null<TiledCompression>, ?inflate:TiledInflate):Null<flighthq._internal._UInt32Array> {
-    return cast _Runtime.callValue(Facade_TilemapFormats_flighthq_tilemapFormats_TiledLayerData.decodeTiledBase64Layer, cast ([text, compression, inflate] : Array<Dynamic>));
+    return cast Facade_TilemapFormats_flighthq_tilemapFormats_TiledLayerData.decodeTiledBase64Layer(text, compression, inflate);
     return cast null;
   }
 
   public static function decodeTiledCsvLayer(text:String):flighthq._internal._UInt32Array {
-    return cast _Runtime.callValue(Facade_TilemapFormats_flighthq_tilemapFormats_TiledLayerData.decodeTiledCsvLayer, cast ([text] : Array<Dynamic>));
+    return cast Facade_TilemapFormats_flighthq_tilemapFormats_TiledLayerData.decodeTiledCsvLayer(text);
     return cast null;
   }
 
   public static function decodeTiledGid(gid:Float):TiledGid {
-    return cast _Runtime.callValue(Facade_TilemapFormats_flighthq_tilemapFormats_TiledGid.decodeTiledGid, cast ([gid] : Array<Dynamic>));
+    return cast Facade_TilemapFormats_flighthq_tilemapFormats_TiledGid.decodeTiledGid(gid);
     return cast null;
   }
 
   public static function formatTiledColor(packed:Float):String {
-    return cast _Runtime.callValue(Facade_TilemapFormats_flighthq_tilemapFormats_TiledColor.formatTiledColor, cast ([packed] : Array<Dynamic>));
+    return cast Facade_TilemapFormats_flighthq_tilemapFormats_TiledColor.formatTiledColor(packed);
     return cast null;
   }
 
   public static function formatTiledTmx(map:TiledMap):String {
-    return cast _Runtime.callValue(Facade_TilemapFormats_flighthq_tilemapFormats_TiledTmxFormat.formatTiledTmx, cast ([map] : Array<Dynamic>));
+    return cast Facade_TilemapFormats_flighthq_tilemapFormats_TiledTmxFormat.formatTiledTmx(map);
     return cast null;
   }
 
   public static function getTiledTilesetRefForGid(map:TiledMap, tileId:Float):Null<TiledTilesetRef> {
-    return cast _Runtime.callValue(Facade_TilemapFormats_flighthq_tilemapFormats_TiledGid.getTiledTilesetRefForGid, cast ([map, tileId] : Array<Dynamic>));
+    return cast Facade_TilemapFormats_flighthq_tilemapFormats_TiledGid.getTiledTilesetRefForGid(map, tileId);
     return cast null;
   }
 
   public static function parseTiledColor(text:String):Null<Float> {
-    return cast _Runtime.callValue(Facade_TilemapFormats_flighthq_tilemapFormats_TiledColor.parseTiledColor, cast ([text] : Array<Dynamic>));
+    return cast Facade_TilemapFormats_flighthq_tilemapFormats_TiledColor.parseTiledColor(text);
     return cast null;
   }
 
   public static function parseTiledTileset(text:String, ?_options:TiledParseOptions):Null<TiledTileset> {
-    return cast _Runtime.callValue(Facade_TilemapFormats_flighthq_tilemapFormats_TiledXmlParse.parseTiledTileset, cast ([text, _options] : Array<Dynamic>));
+    return cast Facade_TilemapFormats_flighthq_tilemapFormats_TiledXmlParse.parseTiledTileset(text, _options);
     return cast null;
   }
 
   public static function parseTiledTilesetJson(text:String, ?_options:TiledParseOptions):Null<TiledTileset> {
-    return cast _Runtime.callValue(Facade_TilemapFormats_flighthq_tilemapFormats_TiledJsonParse.parseTiledTilesetJson, cast ([text, _options] : Array<Dynamic>));
+    return cast Facade_TilemapFormats_flighthq_tilemapFormats_TiledJsonParse.parseTiledTilesetJson(text, _options);
     return cast null;
   }
 
   public static function parseTiledTmj(text:String, ?options:TiledParseOptions):Null<TiledMap> {
-    return cast _Runtime.callValue(Facade_TilemapFormats_flighthq_tilemapFormats_TiledJsonParse.parseTiledTmj, cast ([text, options] : Array<Dynamic>));
+    return cast Facade_TilemapFormats_flighthq_tilemapFormats_TiledJsonParse.parseTiledTmj(text, options);
     return cast null;
   }
 
   public static function parseTiledTmx(text:String, ?options:TiledParseOptions):Null<TiledMap> {
-    return cast _Runtime.callValue(Facade_TilemapFormats_flighthq_tilemapFormats_TiledXmlParse.parseTiledTmx, cast ([text, options] : Array<Dynamic>));
+    return cast Facade_TilemapFormats_flighthq_tilemapFormats_TiledXmlParse.parseTiledTmx(text, options);
     return cast null;
   }
 }

@@ -91,7 +91,7 @@ class Debug {
   public static final _subsystems__debug:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
 
   public static function beginDebugSpan(name:String, ?channel:Null<String>):Null<LogTimer> {
-    return cast _Runtime.callValue(Facade_Debug_flighthq_debug_DebugTiming.beginDebugSpan, cast ([name, channel] : Array<Dynamic>));
+    return cast Facade_Debug_flighthq_debug_DebugTiming.beginDebugSpan(name, channel);
     return cast null;
   }
 
@@ -126,7 +126,7 @@ class Debug {
   }
 
   public static function endDebugSpan(timer:Null<LogTimer>):Float {
-    return cast _Runtime.callValue(Facade_Debug_flighthq_debug_DebugTiming.endDebugSpan, cast ([timer] : Array<Dynamic>));
+    return cast Facade_Debug_flighthq_debug_DebugTiming.endDebugSpan(timer);
     return cast null;
   }
 
@@ -136,11 +136,11 @@ class Debug {
   }
 
   public static function markDebugFrame(?label:String, ?channel:Null<String>):Void {
-    _Runtime.callValue(Facade_Debug_flighthq_debug_DebugTiming.markDebugFrame, cast ([label, channel] : Array<Dynamic>));
+    Facade_Debug_flighthq_debug_DebugTiming.markDebugFrame(label, channel);
   }
 
   public static function measureDebugSpan<T>(name:String, fn:Dynamic, ?channel:Null<String>):Dynamic {
-    return cast _Runtime.callValue(Facade_Debug_flighthq_debug_DebugTiming.measureDebugSpan, cast ([name, fn, channel] : Array<Dynamic>));
+    return cast Facade_Debug_flighthq_debug_DebugTiming.measureDebugSpan(name, fn, channel);
     return cast null;
   }
 

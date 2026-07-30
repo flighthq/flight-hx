@@ -65,41 +65,41 @@ import flighthq.types.Velocity.VelocityField;
 
 class DisplayobjectGl {
   public static function areGlColorAdjustmentGuardsEnabled(state:GlRenderState):Bool {
-    return cast _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_EnableGlColorAdjustmentGuards.areGlColorAdjustmentGuardsEnabled, cast ([state] : Array<Dynamic>));
+    return cast Facade_DisplayobjectGl_flighthq_displayobjectGl_EnableGlColorAdjustmentGuards.areGlColorAdjustmentGuardsEnabled(state);
     return cast null;
   }
 
   public static function bindGlQuadBatchBaseAttributes(state:GlRenderState, locCorner:Float):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlSpriteBatch.bindGlQuadBatchBaseAttributes, cast ([state, locCorner] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlSpriteBatch.bindGlQuadBatchBaseAttributes(state, locCorner);
   }
 
   public static function buildGlScale9Mapper(bounds:RectangleLike, scale9Grid:RectangleLike, scaleX:Float, scaleY:Float):Null<Scale9Mapper> {
-    return cast _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlScale9Mapper.buildGlScale9Mapper, cast ([bounds, scale9Grid, scaleX, scaleY] : Array<Dynamic>));
+    return cast Facade_DisplayobjectGl_flighthq_displayobjectGl_GlScale9Mapper.buildGlScale9Mapper(bounds, scale9Grid, scaleX, scaleY);
     return cast null;
   }
 
   public static function createGlCacheState(screenState:GlRenderState):GlRenderState {
-    return cast _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlCache.createGlCacheState, cast ([screenState] : Array<Dynamic>));
+    return cast Facade_DisplayobjectGl_flighthq_displayobjectGl_GlCache.createGlCacheState(screenState);
     return cast null;
   }
 
   public static function createGlRichTextData(_state:GlRenderState, _source:Renderable):RendererData {
-    return cast _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlRichText.createGlRichTextData, cast ([_state, _source] : Array<Dynamic>));
+    return cast Facade_DisplayobjectGl_flighthq_displayobjectGl_GlRichText.createGlRichTextData(_state, _source);
     return cast null;
   }
 
   public static function createGlScale9ShapeData(state:GlRenderState, _source:Renderable):Null<RendererData> {
-    return cast _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlScale9Shape.createGlScale9ShapeData, cast ([state, _source] : Array<Dynamic>));
+    return cast Facade_DisplayobjectGl_flighthq_displayobjectGl_GlScale9Shape.createGlScale9ShapeData(state, _source);
     return cast null;
   }
 
   public static function createGlVelocityTarget(state:GlRenderState, width:Float, height:Float):GlRenderTarget {
-    return cast _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlVelocity.createGlVelocityTarget, cast ([state, width, height] : Array<Dynamic>));
+    return cast Facade_DisplayobjectGl_flighthq_displayobjectGl_GlVelocity.createGlVelocityTarget(state, width, height);
     return cast null;
   }
 
   public static function createGlVideoData(_state:GlRenderState, _source:Renderable):RendererData {
-    return cast _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlVideo.createGlVideoData, cast ([_state, _source] : Array<Dynamic>));
+    return cast Facade_DisplayobjectGl_flighthq_displayobjectGl_GlVideo.createGlVideoData(_state, _source);
     return cast null;
   }
 
@@ -164,203 +164,203 @@ class DisplayobjectGl {
   public static final defaultGlVideoRenderer:DisplayObjectRenderer = Facade_DisplayobjectGl_flighthq_displayobjectGl_GlVideo.defaultGlVideoRenderer;
 
   public static function destroyGlRichTextData(state:GlRenderState, data:RendererData):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlRichText.destroyGlRichTextData, cast ([state, data] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlRichText.destroyGlRichTextData(state, data);
   }
 
   public static function destroyGlScale9ShapeData(state:GlRenderState, data:RendererData):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlScale9Shape.destroyGlScale9ShapeData, cast ([state, data] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlScale9Shape.destroyGlScale9ShapeData(state, data);
   }
 
   public static function destroyGlVideoData(state:GlRenderState, data:RendererData):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlVideo.destroyGlVideoData, cast ([state, data] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlVideo.destroyGlVideoData(state, data);
   }
 
   public static function drawGlBitmap(state:GlRenderState, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlBitmap.drawGlBitmap, cast ([state, renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlBitmap.drawGlBitmap(state, renderProxy);
   }
 
   public static function drawGlDisplayObject(_state:GlRenderState, _renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlDisplayObject.drawGlDisplayObject, cast ([_state, _renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlDisplayObject.drawGlDisplayObject(_state, _renderProxy);
   }
 
   public static function drawGlParticleEmitter(state:GlRenderState, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlParticleEmitter.drawGlParticleEmitter, cast ([state, renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlParticleEmitter.drawGlParticleEmitter(state, renderProxy);
   }
 
   public static function drawGlRichText(state:GlRenderState, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlRichText.drawGlRichText, cast ([state, renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlRichText.drawGlRichText(state, renderProxy);
   }
 
   public static function drawGlRichTextWithOverlay(state:GlRenderState, renderProxy:RenderProxy2D, ?overlay:GlRichTextOverlay):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlRichText.drawGlRichTextWithOverlay, cast ([state, renderProxy, overlay] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlRichText.drawGlRichTextWithOverlay(state, renderProxy, overlay);
   }
 
   public static function drawGlScale9Shape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlScale9Shape.drawGlScale9Shape, cast ([state, renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlScale9Shape.drawGlScale9Shape(state, renderProxy);
   }
 
   public static function drawGlScale9ShapeMask(state:GlRenderState, data:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlScale9Shape.drawGlScale9ShapeMask, cast ([state, data] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlScale9Shape.drawGlScale9ShapeMask(state, data);
   }
 
   public static function drawGlShape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlShape.drawGlShape, cast ([state, renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlShape.drawGlShape(state, renderProxy);
   }
 
   public static function drawGlShapeMeshBatch(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<GlShapeMesh>, binding:GlShapeMeshBinding, ?onProgramBound:Dynamic):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlShapeMesh.drawGlShapeMeshBatch, cast ([state, renderProxy, meshes, binding, onProgramBound] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlShapeMesh.drawGlShapeMeshBatch(state, renderProxy, meshes, binding, onProgramBound);
   }
 
   public static function drawGlShapeMeshes(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<GlShapeMesh>):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlShapeMesh.drawGlShapeMeshes, cast ([state, renderProxy, meshes] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlShapeMesh.drawGlShapeMeshes(state, renderProxy, meshes);
   }
 
   public static function drawGlTextInputOverlay(context:Dynamic, source:RichText, result:TextLayoutResult, fieldW:Float, fieldH:Float, _text:String):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlTextInput.drawGlTextInputOverlay, cast ([context, source, result, fieldW, fieldH, _text] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlTextInput.drawGlTextInputOverlay(context, source, result, fieldW, fieldH, _text);
   }
 
   public static function drawGlTextLabel(state:GlRenderState, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlTextLabel.drawGlTextLabel, cast ([state, renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlTextLabel.drawGlTextLabel(state, renderProxy);
   }
 
   public static function drawGlVelocityQuad(ctx:GlVelocityContext, x:Float, y:Float, width:Float, height:Float, velocityX:Float, velocityY:Float):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlVelocity.drawGlVelocityQuad, cast ([ctx, x, y, width, height, velocityX, velocityY] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlVelocity.drawGlVelocityQuad(ctx, x, y, width, height, velocityX, velocityY);
   }
 
   public static function drawGlVideo(state:GlRenderState, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlVideo.drawGlVideo, cast ([state, renderProxy] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlVideo.drawGlVideo(state, renderProxy);
   }
 
   public static function enableGlClipSupport(state:GlRenderState):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlClip.enableGlClipSupport, cast ([state] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlClip.enableGlClipSupport(state);
   }
 
   public static function enableGlColorAdjustment(state:GlRenderState):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlColorAdjustment.enableGlColorAdjustment, cast ([state] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlColorAdjustment.enableGlColorAdjustment(state);
   }
 
   public static function enableGlColorAdjustmentGuards(state:GlRenderState):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_EnableGlColorAdjustmentGuards.enableGlColorAdjustmentGuards, cast ([state] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_EnableGlColorAdjustmentGuards.enableGlColorAdjustmentGuards(state);
   }
 
   public static function enableGlRenderCache(state:GlRenderState):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlCache.enableGlRenderCache, cast ([state] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlCache.enableGlRenderCache(state);
   }
 
   public static function enableGlTextInput():Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlTextInput.enableGlTextInput, cast ([] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlTextInput.enableGlTextInput();
   }
 
   public static function ensureGlQuadBatchShader(state:GlRenderState):GlQuadBatchShader {
-    return cast _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlSpriteBatch.ensureGlQuadBatchShader, cast ([state] : Array<Dynamic>));
+    return cast Facade_DisplayobjectGl_flighthq_displayobjectGl_GlSpriteBatch.ensureGlQuadBatchShader(state);
     return cast null;
   }
 
   public static function ensureGlRenderCacheTarget(state:GlRenderState, cache:RenderCache, width:Float, height:Float):GlRenderTarget {
-    return cast _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlCache.ensureGlRenderCacheTarget, cast ([state, cache, width, height] : Array<Dynamic>));
+    return cast Facade_DisplayobjectGl_flighthq_displayobjectGl_GlCache.ensureGlRenderCacheTarget(state, cache, width, height);
     return cast null;
   }
 
   public static function ensureGlShapeMeshProgram(state:GlRenderState):GlShapeMeshBinding {
-    return cast _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlShapeMesh.ensureGlShapeMeshProgram, cast ([state] : Array<Dynamic>));
+    return cast Facade_DisplayobjectGl_flighthq_displayobjectGl_GlShapeMesh.ensureGlShapeMeshProgram(state);
     return cast null;
   }
 
   public static function flushGlSpriteBatch(state:GlRenderState):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlSpriteBatch.flushGlSpriteBatch, cast ([state] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlSpriteBatch.flushGlSpriteBatch(state);
   }
 
   public static function getGlRenderCacheTarget(state:GlRenderState, cache:RenderCache):Null<GlRenderTarget> {
-    return cast _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlCache.getGlRenderCacheTarget, cast ([state, cache] : Array<Dynamic>));
+    return cast Facade_DisplayobjectGl_flighthq_displayobjectGl_GlCache.getGlRenderCacheTarget(state, cache);
     return cast null;
   }
 
   public static function getGlVelocityWriter(state:GlRenderState, kind:Kind):Null<GlVelocityWriter> {
-    return cast _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlVelocity.getGlVelocityWriter, cast ([state, kind] : Array<Dynamic>));
+    return cast Facade_DisplayobjectGl_flighthq_displayobjectGl_GlVelocity.getGlVelocityWriter(state, kind);
     return cast null;
   }
 
   public static function packGlSpriteBatchMaterialInstance(state:GlRenderState, materialData:Null<MaterialData>, instanceIndex:Float):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlSpriteBatch.packGlSpriteBatchMaterialInstance, cast ([state, materialData, instanceIndex] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlSpriteBatch.packGlSpriteBatchMaterialInstance(state, materialData, instanceIndex);
   }
 
   public static function popGlClipContours(state:GlRenderState):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlClipContours.popGlClipContours, cast ([state] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlClipContours.popGlClipContours(state);
   }
 
   public static function popGlClipRectangle(state:GlRenderState):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlClipRectangle.popGlClipRectangle, cast ([state] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlClipRectangle.popGlClipRectangle(state);
   }
 
   public static function prepareGlSpriteBatchWrite(state:GlRenderState, texture:ImageResource, blendMode:Null<BlendMode>, material:Null<Material>, materialRenderer:GlMaterialRenderer, maxInstances:Float):Float {
-    return cast _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlSpriteBatch.prepareGlSpriteBatchWrite, cast ([state, texture, blendMode, material, materialRenderer, maxInstances] : Array<Dynamic>));
+    return cast Facade_DisplayobjectGl_flighthq_displayobjectGl_GlSpriteBatch.prepareGlSpriteBatchWrite(state, texture, blendMode, material, materialRenderer, maxInstances);
     return cast null;
   }
 
   public static function pushGlClipContours(state:GlRenderState, contours:Array<Array<Float>>, winding:PathWinding, worldTransform:Matrix):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlClipContours.pushGlClipContours, cast ([state, contours, winding, worldTransform] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlClipContours.pushGlClipContours(state, contours, winding, worldTransform);
   }
 
   public static function pushGlClipRectangle(state:GlRenderState, rect:RectangleLike, transform:MatrixLike):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlClipRectangle.pushGlClipRectangle, cast ([state, rect, transform] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlClipRectangle.pushGlClipRectangle(state, rect, transform);
   }
 
   public static final QUAD_BATCH_VS:Dynamic = Facade_DisplayobjectGl_flighthq_displayobjectGl_GlSpriteBatch.QUAD_BATCH_VS;
 
   public static function recordGlSpriteBatchColorTransform(state:GlRenderState, colorTransform:Null<ColorTransform>, instanceIndex:Float):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlSpriteBatch.recordGlSpriteBatchColorTransform, cast ([state, colorTransform, instanceIndex] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlSpriteBatch.recordGlSpriteBatchColorTransform(state, colorTransform, instanceIndex);
   }
 
   public static function refreshGlRenderCache(cacheState:GlRenderState, cache:RenderCache, source:DisplayObject, ?options:RenderCacheRefreshOptions):Bool {
-    return cast _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlCache.refreshGlRenderCache, cast ([cacheState, cache, source, options] : Array<Dynamic>));
+    return cast Facade_DisplayobjectGl_flighthq_displayobjectGl_GlCache.refreshGlRenderCache(cacheState, cache, source, options);
     return cast null;
   }
 
   public static function registerDefaultGlMaterial(state:GlRenderState):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlDefaultMaterial.registerDefaultGlMaterial, cast ([state] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlDefaultMaterial.registerDefaultGlMaterial(state);
   }
 
   public static function registerGlDisplayObjectRenderers(state:GlRenderState):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlDisplayObjectRegistration.registerGlDisplayObjectRenderers, cast ([state] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlDisplayObjectRegistration.registerGlDisplayObjectRenderers(state);
   }
 
   public static function registerGlShapeCommands(commands:Array<Dynamic>):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectCanvas_CanvasShapeRegistry.registerCanvasShapeCommands, cast ([commands] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectCanvas_CanvasShapeRegistry.registerCanvasShapeCommands(commands);
   }
 
   public static function registerGlTextInputOverlay(overlay:GlRichTextOverlay):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlRichText.registerGlTextInputOverlay, cast ([overlay] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlRichText.registerGlTextInputOverlay(overlay);
   }
 
   public static function registerGlVelocityWriter(state:GlRenderState, kind:Kind, writer:GlVelocityWriter):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlVelocity.registerGlVelocityWriter, cast ([state, kind, writer] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlVelocity.registerGlVelocityWriter(state, kind, writer);
   }
 
   public static function releaseGlRenderCache(state:GlRenderState, cache:RenderCache):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlCache.releaseGlRenderCache, cast ([state, cache] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlCache.releaseGlRenderCache(state, cache);
   }
 
   public static function remapGlScale9Commands(out:Array<Dynamic>, source:Array<Dynamic>, mapper:Dynamic):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlScale9Shape.remapGlScale9Commands, cast ([out, source, mapper] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlScale9Shape.remapGlScale9Commands(out, source, mapper);
   }
 
   public static function renderGlDisplayObject(state:GlRenderState, source:DisplayObject):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlDisplayObject.renderGlDisplayObject, cast ([state, source] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlDisplayObject.renderGlDisplayObject(state, source);
   }
 
   public static function renderGlSprite(state:GlRenderState, source:DisplayObject):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlSprite.renderGlSprite, cast ([state, source] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlSprite.renderGlSprite(state, source);
   }
 
   public static function renderGlVelocity<Traits>(state:GlRenderState, root:Transform2DNode<Traits>, field:VelocityField, target:GlRenderTarget):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlVelocity.renderGlVelocity, cast ([state, root, field, target] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlVelocity.renderGlVelocity(state, root, field, target);
   }
 
   public static function setGlQuadBatchWorldAndTexture(state:GlRenderState, locWorldMatrix:Dynamic, locTexture:Dynamic):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlSpriteBatch.setGlQuadBatchWorldAndTexture, cast ([state, locWorldMatrix, locTexture] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlSpriteBatch.setGlQuadBatchWorldAndTexture(state, locWorldMatrix, locTexture);
   }
 
   public static function useGlQuadBatchProgram(state:GlRenderState, program:Dynamic):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlSpriteBatch.useGlQuadBatchProgram, cast ([state, program] : Array<Dynamic>));
+    Facade_DisplayobjectGl_flighthq_displayobjectGl_GlSpriteBatch.useGlQuadBatchProgram(state, program);
   }
 }

@@ -10,99 +10,99 @@ import flighthq.types.ImageResourceCompressed;
 
 class Image {
   public static function cloneImageResource(resource:ImageResource):ImageResource {
-    return cast _Runtime.callValue(Facade_Image_flighthq_image_ImageResource.cloneImageResource, cast ([resource] : Array<Dynamic>));
+    return cast Facade_Image_flighthq_image_ImageResource.cloneImageResource(resource);
     return cast null;
   }
 
   public static function createCanvasFromImageResource(image:ImageResource):Null<Dynamic> {
-    return cast _Runtime.callValue(Facade_Image_flighthq_image_ImageResourceFrom.createCanvasFromImageResource, cast ([image] : Array<Dynamic>));
+    return cast Facade_Image_flighthq_image_ImageResourceFrom.createCanvasFromImageResource(image);
     return cast null;
   }
 
   public static function createCompressedImageResource(compressed:ImageResourceCompressed):ImageResource {
-    return cast _Runtime.callValue(Facade_Image_flighthq_image_ImageResource.createCompressedImageResource, cast ([compressed] : Array<Dynamic>));
+    return cast Facade_Image_flighthq_image_ImageResource.createCompressedImageResource(compressed);
     return cast null;
   }
 
   public static function createImageResource(?image:Dynamic):ImageResource {
-    return cast _Runtime.callValue(Facade_Image_flighthq_image_ImageResource.createImageResource, cast ([image] : Array<Dynamic>));
+    return cast Facade_Image_flighthq_image_ImageResource.createImageResource(image);
     return cast null;
   }
 
   public static function createImageResourceFromCanvas(canvas:Dynamic):ImageResource {
-    return cast _Runtime.callValue(Facade_Image_flighthq_image_ImageResourceFrom.createImageResourceFromCanvas, cast ([canvas] : Array<Dynamic>));
+    return cast Facade_Image_flighthq_image_ImageResourceFrom.createImageResourceFromCanvas(canvas);
     return cast null;
   }
 
   public static function createImageResourceFromImageBitmap(bitmap:Dynamic):ImageResource {
-    return cast _Runtime.callValue(Facade_Image_flighthq_image_ImageResourceFrom.createImageResourceFromImageBitmap, cast ([bitmap] : Array<Dynamic>));
+    return cast Facade_Image_flighthq_image_ImageResourceFrom.createImageResourceFromImageBitmap(bitmap);
     return cast null;
   }
 
   public static function createImageResourceFromImageElement(img:Dynamic):ImageResource {
-    return cast _Runtime.callValue(Facade_Image_flighthq_image_ImageResourceFrom.createImageResourceFromImageElement, cast ([img] : Array<Dynamic>));
+    return cast Facade_Image_flighthq_image_ImageResourceFrom.createImageResourceFromImageElement(img);
     return cast null;
   }
 
   public static function disposeImageResource(resource:ImageResource):Void {
-    _Runtime.callValue(Facade_Image_flighthq_image_ImageResource.disposeImageResource, cast ([resource] : Array<Dynamic>));
+    Facade_Image_flighthq_image_ImageResource.disposeImageResource(resource);
   }
 
   public static function getImageResourceByteSize(resource:ImageResource):Float {
-    return cast _Runtime.callValue(Facade_Image_flighthq_image_ImageResource.getImageResourceByteSize, cast ([resource] : Array<Dynamic>));
+    return cast Facade_Image_flighthq_image_ImageResource.getImageResourceByteSize(resource);
     return cast null;
   }
 
   public static function hasImageResourceData(resource:ImageResource):Bool {
-    return cast _Runtime.callValue(Facade_Image_flighthq_image_ImageResource.hasImageResourceData, cast ([resource] : Array<Dynamic>));
+    return cast Facade_Image_flighthq_image_ImageResource.hasImageResourceData(resource);
     return cast null;
   }
 
   public static function hasImageResourcePixels(resource:ImageResource):Bool {
-    return cast _Runtime.callValue(Facade_Image_flighthq_image_ImageResource.hasImageResourcePixels, cast ([resource] : Array<Dynamic>));
+    return cast Facade_Image_flighthq_image_ImageResource.hasImageResourcePixels(resource);
     return cast null;
   }
 
   public static function hasImageResourceSource(resource:ImageResource):Bool {
-    return cast _Runtime.callValue(Facade_Image_flighthq_image_ImageResource.hasImageResourceSource, cast ([resource] : Array<Dynamic>));
+    return cast Facade_Image_flighthq_image_ImageResource.hasImageResourceSource(resource);
     return cast null;
   }
 
   public static function invalidateImageResource(resource:ImageResource):Void {
-    _Runtime.callValue(Facade_Image_flighthq_image_ImageResource.invalidateImageResource, cast ([resource] : Array<Dynamic>));
+    Facade_Image_flighthq_image_ImageResource.invalidateImageResource(resource);
   }
 
   public static function isImageResourceEmpty(resource:ImageResource):Bool {
-    return cast _Runtime.callValue(Facade_Image_flighthq_image_ImageResource.isImageResourceEmpty, cast ([resource] : Array<Dynamic>));
+    return cast Facade_Image_flighthq_image_ImageResource.isImageResourceEmpty(resource);
     return cast null;
   }
 
   public static function isImageResourceSameOrigin(url:String):Bool {
-    return cast _Runtime.callValue(Facade_Image_flighthq_image_ImageResourceFrom.isImageResourceSameOrigin, cast ([url] : Array<Dynamic>));
+    return cast Facade_Image_flighthq_image_ImageResourceFrom.isImageResourceSameOrigin(url);
     return cast null;
   }
 
   public static function loadImageResourceFromBase64(base64:String, mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<ImageResource> {
-    return cast _Runtime.callValue(Facade_Image_flighthq_image_ImageResourceFrom.loadImageResourceFromBase64, cast ([base64, mimeType, signal] : Array<Dynamic>));
+    return cast Facade_Image_flighthq_image_ImageResourceFrom.loadImageResourceFromBase64(base64, mimeType, signal);
     return cast null;
   }
 
   public static function loadImageResourceFromBlob(blob:Dynamic, ?signal:Dynamic):flighthq._internal._Promise<ImageResource> {
-    return cast _Runtime.callValue(Facade_Image_flighthq_image_ImageResourceFrom.loadImageResourceFromBlob, cast ([blob, signal] : Array<Dynamic>));
+    return cast Facade_Image_flighthq_image_ImageResourceFrom.loadImageResourceFromBlob(blob, signal);
     return cast null;
   }
 
   public static function loadImageResourceFromBytes(bytes:flighthq._internal._UInt8Array, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<ImageResource> {
-    return cast _Runtime.callValue(Facade_Image_flighthq_image_ImageResourceFrom.loadImageResourceFromBytes, cast ([bytes, mimeType, signal] : Array<Dynamic>));
+    return cast Facade_Image_flighthq_image_ImageResourceFrom.loadImageResourceFromBytes(bytes, mimeType, signal);
     return cast null;
   }
 
   public static function loadImageResourceFromUrl(url:String, ?crossOrigin:String, ?signal:Dynamic):flighthq._internal._Promise<ImageResource> {
-    return cast _Runtime.callValue(Facade_Image_flighthq_image_ImageResourceFrom.loadImageResourceFromUrl, cast ([url, crossOrigin, signal] : Array<Dynamic>));
+    return cast Facade_Image_flighthq_image_ImageResourceFrom.loadImageResourceFromUrl(url, crossOrigin, signal);
     return cast null;
   }
 
   public static function setImageResourceSource(resource:ImageResource, element:Null<Dynamic>):Void {
-    _Runtime.callValue(Facade_Image_flighthq_image_ImageResource.setImageResourceSource, cast ([resource, element] : Array<Dynamic>));
+    Facade_Image_flighthq_image_ImageResource.setImageResourceSource(resource, element);
   }
 }

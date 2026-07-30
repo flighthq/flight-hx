@@ -45,7 +45,7 @@ class TextMarkup {
   }
 
   public static function createMarkupTagRegistry():MarkupTagRegistry {
-    return cast _Runtime.callValue(Facade_TextMarkup_flighthq_textMarkup_MarkupTagRegistry.createMarkupTagRegistry, cast ([] : Array<Dynamic>));
+    return cast Facade_TextMarkup_flighthq_textMarkup_MarkupTagRegistry.createMarkupTagRegistry();
     return cast null;
   }
 
@@ -355,19 +355,19 @@ class TextMarkup {
   }
 
   public static function registerMarkupClassStyles(registry:MarkupTagRegistry, styles:Dynamic):Void {
-    _Runtime.callValue(Facade_TextMarkup_flighthq_textMarkup_MarkupClassStyles.registerMarkupClassStyles, cast ([registry, styles] : Array<Dynamic>));
+    Facade_TextMarkup_flighthq_textMarkup_MarkupClassStyles.registerMarkupClassStyles(registry, styles);
   }
 
   public static function registerMarkupNamedColors(registry:MarkupTagRegistry):Void {
-    _Runtime.callValue(Facade_TextMarkup_flighthq_textMarkup_MarkupNamedColors.registerMarkupNamedColors, cast ([registry] : Array<Dynamic>));
+    Facade_TextMarkup_flighthq_textMarkup_MarkupNamedColors.registerMarkupNamedColors(registry);
   }
 
   public static function registerMarkupTag(registry:MarkupTagRegistry, name:String, handler:MarkupTagHandler):Void {
-    _Runtime.callValue(Facade_TextMarkup_flighthq_textMarkup_MarkupTagRegistry.registerMarkupTag, cast ([registry, name, handler] : Array<Dynamic>));
+    Facade_TextMarkup_flighthq_textMarkup_MarkupTagRegistry.registerMarkupTag(registry, name, handler);
   }
 
   public static function registerStandardMarkupTags(registry:MarkupTagRegistry):Void {
-    _Runtime.callValue(Facade_TextMarkup_flighthq_textMarkup_MarkupTagRegistry.registerStandardMarkupTags, cast ([registry] : Array<Dynamic>));
+    Facade_TextMarkup_flighthq_textMarkup_MarkupTagRegistry.registerStandardMarkupTags(registry);
   }
 
   public static function resolveMarkupFormats__textMarkup(content:RichTextContent):Array<TextFormat> {
@@ -398,7 +398,7 @@ class TextMarkup {
   }
 
   public static function resolveMarkupHexColor(value:String):Null<Float> {
-    return cast _Runtime.callValue(Facade_TextMarkup_flighthq_textMarkup_MarkupTagRegistry.resolveMarkupHexColor, cast ([value] : Array<Dynamic>));
+    return cast Facade_TextMarkup_flighthq_textMarkup_MarkupTagRegistry.resolveMarkupHexColor(value);
     return cast null;
   }
 }

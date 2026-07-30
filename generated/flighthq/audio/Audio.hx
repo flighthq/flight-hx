@@ -11,101 +11,101 @@ import flighthq.types.AudioResource.AudioResourceUrl;
 
 class Audio {
   public static function canPlayAudioType(mimeType:String):Bool {
-    return cast _Runtime.callValue(Facade_Audio_flighthq_audio_AudioFormat.canPlayAudioType, cast ([mimeType] : Array<Dynamic>));
+    return cast Facade_Audio_flighthq_audio_AudioFormat.canPlayAudioType(mimeType);
     return cast null;
   }
 
   public static function cloneAudioResource(resource:AudioResource):AudioResource {
-    return cast _Runtime.callValue(Facade_Audio_flighthq_audio_AudioResource.cloneAudioResource, cast ([resource] : Array<Dynamic>));
+    return cast Facade_Audio_flighthq_audio_AudioResource.cloneAudioResource(resource);
     return cast null;
   }
 
   public static function createAudioResource(?buffer:Dynamic):AudioResource {
-    return cast _Runtime.callValue(Facade_Audio_flighthq_audio_AudioResource.createAudioResource, cast ([buffer] : Array<Dynamic>));
+    return cast Facade_Audio_flighthq_audio_AudioResource.createAudioResource(buffer);
     return cast null;
   }
 
   public static function createAudioResourceFromSamples(channels:Array<flighthq._internal._Float32Array>, sampleRate:Float):AudioResource {
-    return cast _Runtime.callValue(Facade_Audio_flighthq_audio_AudioResourceFrom.createAudioResourceFromSamples, cast ([channels, sampleRate] : Array<Dynamic>));
+    return cast Facade_Audio_flighthq_audio_AudioResourceFrom.createAudioResourceFromSamples(channels, sampleRate);
     return cast null;
   }
 
   public static function detectAudioMimeType(data:Dynamic):Null<String> {
-    return cast _Runtime.callValue(Facade_Audio_flighthq_audio_AudioFormat.detectAudioMimeType, cast ([data] : Array<Dynamic>));
+    return cast Facade_Audio_flighthq_audio_AudioFormat.detectAudioMimeType(data);
     return cast null;
   }
 
   public static function disposeAudioResource(resource:AudioResource):Void {
-    _Runtime.callValue(Facade_Audio_flighthq_audio_AudioResource.disposeAudioResource, cast ([resource] : Array<Dynamic>));
+    Facade_Audio_flighthq_audio_AudioResource.disposeAudioResource(resource);
   }
 
   public static function getAudioResourceByteSize(resource:AudioResource):Float {
-    return cast _Runtime.callValue(Facade_Audio_flighthq_audio_AudioResource.getAudioResourceByteSize, cast ([resource] : Array<Dynamic>));
+    return cast Facade_Audio_flighthq_audio_AudioResource.getAudioResourceByteSize(resource);
     return cast null;
   }
 
   public static function getAudioResourceChannelCount(resource:AudioResource):Float {
-    return cast _Runtime.callValue(Facade_Audio_flighthq_audio_AudioResource.getAudioResourceChannelCount, cast ([resource] : Array<Dynamic>));
+    return cast Facade_Audio_flighthq_audio_AudioResource.getAudioResourceChannelCount(resource);
     return cast null;
   }
 
   public static function getAudioResourceChannelData(resource:AudioResource, channel:Float):Null<flighthq._internal._Float32Array> {
-    return cast _Runtime.callValue(Facade_Audio_flighthq_audio_AudioResource.getAudioResourceChannelData, cast ([resource, channel] : Array<Dynamic>));
+    return cast Facade_Audio_flighthq_audio_AudioResource.getAudioResourceChannelData(resource, channel);
     return cast null;
   }
 
   public static function getAudioResourceDuration(resource:AudioResource):Float {
-    return cast _Runtime.callValue(Facade_Audio_flighthq_audio_AudioResource.getAudioResourceDuration, cast ([resource] : Array<Dynamic>));
+    return cast Facade_Audio_flighthq_audio_AudioResource.getAudioResourceDuration(resource);
     return cast null;
   }
 
   public static function getAudioResourceSampleRate(resource:AudioResource):Float {
-    return cast _Runtime.callValue(Facade_Audio_flighthq_audio_AudioResource.getAudioResourceSampleRate, cast ([resource] : Array<Dynamic>));
+    return cast Facade_Audio_flighthq_audio_AudioResource.getAudioResourceSampleRate(resource);
     return cast null;
   }
 
   public static function hasAudioResourceBuffer(resource:AudioResource):Bool {
-    return cast _Runtime.callValue(Facade_Audio_flighthq_audio_AudioResource.hasAudioResourceBuffer, cast ([resource] : Array<Dynamic>));
+    return cast Facade_Audio_flighthq_audio_AudioResource.hasAudioResourceBuffer(resource);
     return cast null;
   }
 
   public static function inferAudioMimeType(url:String):Null<String> {
-    return cast _Runtime.callValue(Facade_Audio_flighthq_audio_AudioFormat.inferAudioMimeType, cast ([url] : Array<Dynamic>));
+    return cast Facade_Audio_flighthq_audio_AudioFormat.inferAudioMimeType(url);
     return cast null;
   }
 
   public static function isAudioResourceEmpty(resource:AudioResource):Bool {
-    return cast _Runtime.callValue(Facade_Audio_flighthq_audio_AudioResource.isAudioResourceEmpty, cast ([resource] : Array<Dynamic>));
+    return cast Facade_Audio_flighthq_audio_AudioResource.isAudioResourceEmpty(resource);
     return cast null;
   }
 
   public static function loadAudioResourceFromBase64(context:Dynamic, base64:String, mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<AudioResource> {
-    return cast _Runtime.callValue(Facade_Audio_flighthq_audio_AudioResourceFrom.loadAudioResourceFromBase64, cast ([context, base64, mimeType, signal] : Array<Dynamic>));
+    return cast Facade_Audio_flighthq_audio_AudioResourceFrom.loadAudioResourceFromBase64(context, base64, mimeType, signal);
     return cast null;
   }
 
   public static function loadAudioResourceFromBlob(context:Dynamic, blob:Dynamic, ?signal:Dynamic):flighthq._internal._Promise<AudioResource> {
-    return cast _Runtime.callValue(Facade_Audio_flighthq_audio_AudioResourceFrom.loadAudioResourceFromBlob, cast ([context, blob, signal] : Array<Dynamic>));
+    return cast Facade_Audio_flighthq_audio_AudioResourceFrom.loadAudioResourceFromBlob(context, blob, signal);
     return cast null;
   }
 
   public static function loadAudioResourceFromBytes(context:Dynamic, bytes:flighthq._internal._UInt8Array, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<AudioResource> {
-    return cast _Runtime.callValue(Facade_Audio_flighthq_audio_AudioResourceFrom.loadAudioResourceFromBytes, cast ([context, bytes, mimeType, signal] : Array<Dynamic>));
+    return cast Facade_Audio_flighthq_audio_AudioResourceFrom.loadAudioResourceFromBytes(context, bytes, mimeType, signal);
     return cast null;
   }
 
   public static function loadAudioResourceFromUrl(context:Dynamic, url:String, ?signal:Dynamic):flighthq._internal._Promise<AudioResource> {
-    return cast _Runtime.callValue(Facade_Audio_flighthq_audio_AudioResourceFrom.loadAudioResourceFromUrl, cast ([context, url, signal] : Array<Dynamic>));
+    return cast Facade_Audio_flighthq_audio_AudioResourceFrom.loadAudioResourceFromUrl(context, url, signal);
     return cast null;
   }
 
   public static function loadAudioResourceFromUrls(context:Dynamic, sources:Array<AudioResourceUrl>, ?signal:Dynamic):flighthq._internal._Promise<AudioResource> {
-    return cast _Runtime.callValue(Facade_Audio_flighthq_audio_AudioResourceFrom.loadAudioResourceFromUrls, cast ([context, sources, signal] : Array<Dynamic>));
+    return cast Facade_Audio_flighthq_audio_AudioResourceFrom.loadAudioResourceFromUrls(context, sources, signal);
     return cast null;
   }
 
   public static function selectAudioResourceUrl(sources:Array<AudioResourceUrl>):Null<String> {
-    return cast _Runtime.callValue(Facade_Audio_flighthq_audio_AudioResourceFrom.selectAudioResourceUrl, cast ([sources] : Array<Dynamic>));
+    return cast Facade_Audio_flighthq_audio_AudioResourceFrom.selectAudioResourceUrl(sources);
     return cast null;
   }
 }

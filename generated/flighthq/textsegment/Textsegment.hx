@@ -12,56 +12,56 @@ import flighthq.types.TextSegment.TextSegmenterBackend;
 
 class Textsegment {
   public static function createWebTextSegmenterBackend():TextSegmenterBackend {
-    return cast _Runtime.callValue(Facade_Textsegment_flighthq_textsegment_TextSegmenterBackend.createWebTextSegmenterBackend, cast ([] : Array<Dynamic>));
+    return cast Facade_Textsegment_flighthq_textsegment_TextSegmenterBackend.createWebTextSegmenterBackend();
     return cast null;
   }
 
   public static function getNextGraphemeBoundary(text:String, index:Float, ?locale:String):Float {
-    return cast _Runtime.callValue(Facade_Textsegment_flighthq_textsegment_TextSegmentBoundary.getNextGraphemeBoundary, cast ([text, index, locale] : Array<Dynamic>));
+    return cast Facade_Textsegment_flighthq_textsegment_TextSegmentBoundary.getNextGraphemeBoundary(text, index, locale);
     return cast null;
   }
 
   public static function getNextWordBoundary(text:String, index:Float, ?locale:String):Float {
-    return cast _Runtime.callValue(Facade_Textsegment_flighthq_textsegment_TextSegmentBoundary.getNextWordBoundary, cast ([text, index, locale] : Array<Dynamic>));
+    return cast Facade_Textsegment_flighthq_textsegment_TextSegmentBoundary.getNextWordBoundary(text, index, locale);
     return cast null;
   }
 
   public static function getPreviousGraphemeBoundary(text:String, index:Float, ?locale:String):Float {
-    return cast _Runtime.callValue(Facade_Textsegment_flighthq_textsegment_TextSegmentBoundary.getPreviousGraphemeBoundary, cast ([text, index, locale] : Array<Dynamic>));
+    return cast Facade_Textsegment_flighthq_textsegment_TextSegmentBoundary.getPreviousGraphemeBoundary(text, index, locale);
     return cast null;
   }
 
   public static function getPreviousWordBoundary(text:String, index:Float, ?locale:String):Float {
-    return cast _Runtime.callValue(Facade_Textsegment_flighthq_textsegment_TextSegmentBoundary.getPreviousWordBoundary, cast ([text, index, locale] : Array<Dynamic>));
+    return cast Facade_Textsegment_flighthq_textsegment_TextSegmentBoundary.getPreviousWordBoundary(text, index, locale);
     return cast null;
   }
 
   public static function getTextSegmenterBackend():TextSegmenterBackend {
-    return cast _Runtime.callValue(Facade_Textsegment_flighthq_textsegment_TextSegmenterBackend.getTextSegmenterBackend, cast ([] : Array<Dynamic>));
+    return cast Facade_Textsegment_flighthq_textsegment_TextSegmenterBackend.getTextSegmenterBackend();
     return cast null;
   }
 
   public static function getWordRangeAt(text:String, index:Float, ?locale:String):Null<TextSegmentRange> {
-    return cast _Runtime.callValue(Facade_Textsegment_flighthq_textsegment_TextSegmentBoundary.getWordRangeAt, cast ([text, index, locale] : Array<Dynamic>));
+    return cast Facade_Textsegment_flighthq_textsegment_TextSegmentBoundary.getWordRangeAt(text, index, locale);
     return cast null;
   }
 
   public static function segmentGraphemes(text:String, ?locale:String):Array<TextSegment> {
-    return cast _Runtime.callValue(Facade_Textsegment_flighthq_textsegment_TextSegment.segmentGraphemes, cast ([text, locale] : Array<Dynamic>));
+    return cast Facade_Textsegment_flighthq_textsegment_TextSegment.segmentGraphemes(text, locale);
     return cast null;
   }
 
   public static function segmentSentences(text:String, ?locale:String):Array<TextSegment> {
-    return cast _Runtime.callValue(Facade_Textsegment_flighthq_textsegment_TextSegment.segmentSentences, cast ([text, locale] : Array<Dynamic>));
+    return cast Facade_Textsegment_flighthq_textsegment_TextSegment.segmentSentences(text, locale);
     return cast null;
   }
 
   public static function segmentWords(text:String, ?locale:String):Array<TextSegment> {
-    return cast _Runtime.callValue(Facade_Textsegment_flighthq_textsegment_TextSegment.segmentWords, cast ([text, locale] : Array<Dynamic>));
+    return cast Facade_Textsegment_flighthq_textsegment_TextSegment.segmentWords(text, locale);
     return cast null;
   }
 
   public static function setTextSegmenterBackend(backend:Null<TextSegmenterBackend>):Void {
-    _Runtime.callValue(Facade_Textsegment_flighthq_textsegment_TextSegmenterBackend.setTextSegmenterBackend, cast ([backend] : Array<Dynamic>));
+    Facade_Textsegment_flighthq_textsegment_TextSegmenterBackend.setTextSegmenterBackend(backend);
   }
 }

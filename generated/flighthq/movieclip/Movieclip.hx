@@ -18,106 +18,106 @@ import flighthq.types.TimelineSource;
 
 class Movieclip {
   public static function addMovieClipFrameScript(clip:MovieClip, frame:Dynamic, script:FrameScript):Void {
-    _Runtime.callValue(Facade_Movieclip_flighthq_movieclip_MovieClip.addMovieClipFrameScript, cast ([clip, frame, script] : Array<Dynamic>));
+    Facade_Movieclip_flighthq_movieclip_MovieClip.addMovieClipFrameScript(clip, frame, script);
   }
 
   public static function createMovieClip(?obj:PartialNode<MovieClip>):MovieClip {
-    return cast _Runtime.callValue(Facade_Movieclip_flighthq_movieclip_MovieClip.createMovieClip, cast ([obj] : Array<Dynamic>));
+    return cast Facade_Movieclip_flighthq_movieclip_MovieClip.createMovieClip(obj);
     return cast null;
   }
 
   public static function createMovieClipData(?data:Dynamic):MovieClipData {
-    return cast _Runtime.callValue(Facade_Movieclip_flighthq_movieclip_MovieClip.createMovieClipData, cast ([data] : Array<Dynamic>));
+    return cast Facade_Movieclip_flighthq_movieclip_MovieClip.createMovieClipData(data);
     return cast null;
   }
 
   public static function createMovieClipRuntime():MovieClipRuntime {
-    return cast _Runtime.callValue(Facade_Movieclip_flighthq_movieclip_MovieClip.createMovieClipRuntime, cast ([] : Array<Dynamic>));
+    return cast Facade_Movieclip_flighthq_movieclip_MovieClip.createMovieClipRuntime();
     return cast null;
   }
 
   public static function createSpritesheetTimelineSource(spritesheet:Spritesheet, animation:SpritesheetAnimation):TimelineSource {
-    return cast _Runtime.callValue(Facade_Movieclip_flighthq_movieclip_SpritesheetTimelineSource.createSpritesheetTimelineSource, cast ([spritesheet, animation] : Array<Dynamic>));
+    return cast Facade_Movieclip_flighthq_movieclip_SpritesheetTimelineSource.createSpritesheetTimelineSource(spritesheet, animation);
     return cast null;
   }
 
   public static function disposeMovieClipSignals(clip:MovieClip):Void {
-    _Runtime.callValue(Facade_Movieclip_flighthq_movieclip_MovieClip.disposeMovieClipSignals, cast ([clip] : Array<Dynamic>));
+    Facade_Movieclip_flighthq_movieclip_MovieClip.disposeMovieClipSignals(clip);
   }
 
   public static function enableMovieClipSignals(clip:MovieClip):MovieClipSignals {
-    return cast _Runtime.callValue(Facade_Movieclip_flighthq_movieclip_MovieClip.enableMovieClipSignals, cast ([clip] : Array<Dynamic>));
+    return cast Facade_Movieclip_flighthq_movieclip_MovieClip.enableMovieClipSignals(clip);
     return cast null;
   }
 
   public static function getMovieClipCurrentFrame(clip:MovieClip):Float {
-    return cast _Runtime.callValue(Facade_Movieclip_flighthq_movieclip_MovieClip.getMovieClipCurrentFrame, cast ([clip] : Array<Dynamic>));
+    return cast Facade_Movieclip_flighthq_movieclip_MovieClip.getMovieClipCurrentFrame(clip);
     return cast null;
   }
 
   public static function getMovieClipCurrentLabel(clip:MovieClip):Null<TimelineLabel> {
-    return cast _Runtime.callValue(Facade_Movieclip_flighthq_movieclip_MovieClip.getMovieClipCurrentLabel, cast ([clip] : Array<Dynamic>));
+    return cast Facade_Movieclip_flighthq_movieclip_MovieClip.getMovieClipCurrentLabel(clip);
     return cast null;
   }
 
   public static function getMovieClipFrameScript(clip:MovieClip, frame:Dynamic):Null<FrameScript> {
-    return cast _Runtime.callValue(Facade_Movieclip_flighthq_movieclip_MovieClip.getMovieClipFrameScript, cast ([clip, frame] : Array<Dynamic>));
+    return cast Facade_Movieclip_flighthq_movieclip_MovieClip.getMovieClipFrameScript(clip, frame);
     return cast null;
   }
 
   public static function getMovieClipRuntime(source:MovieClip):MovieClipRuntime {
-    return cast _Runtime.callValue(Facade_Movieclip_flighthq_movieclip_MovieClip.getMovieClipRuntime, cast ([source] : Array<Dynamic>));
+    return cast Facade_Movieclip_flighthq_movieclip_MovieClip.getMovieClipRuntime(source);
     return cast null;
   }
 
   public static function getMovieClipSignals(clip:MovieClip):Null<MovieClipSignals> {
-    return cast _Runtime.callValue(Facade_Movieclip_flighthq_movieclip_MovieClip.getMovieClipSignals, cast ([clip] : Array<Dynamic>));
+    return cast Facade_Movieclip_flighthq_movieclip_MovieClip.getMovieClipSignals(clip);
     return cast null;
   }
 
   public static function getMovieClipTotalFrames(clip:MovieClip):Float {
-    return cast _Runtime.callValue(Facade_Movieclip_flighthq_movieclip_MovieClip.getMovieClipTotalFrames, cast ([clip] : Array<Dynamic>));
+    return cast Facade_Movieclip_flighthq_movieclip_MovieClip.getMovieClipTotalFrames(clip);
     return cast null;
   }
 
   public static function gotoAndPlayMovieClip(clip:MovieClip, frame:Dynamic):Void {
-    _Runtime.callValue(Facade_Movieclip_flighthq_movieclip_MovieClip.gotoAndPlayMovieClip, cast ([clip, frame] : Array<Dynamic>));
+    Facade_Movieclip_flighthq_movieclip_MovieClip.gotoAndPlayMovieClip(clip, frame);
   }
 
   public static function gotoAndStopMovieClip(clip:MovieClip, frame:Dynamic):Void {
-    _Runtime.callValue(Facade_Movieclip_flighthq_movieclip_MovieClip.gotoAndStopMovieClip, cast ([clip, frame] : Array<Dynamic>));
+    Facade_Movieclip_flighthq_movieclip_MovieClip.gotoAndStopMovieClip(clip, frame);
   }
 
   public static function isMovieClipPlaying(clip:MovieClip):Bool {
-    return cast _Runtime.callValue(Facade_Movieclip_flighthq_movieclip_MovieClip.isMovieClipPlaying, cast ([clip] : Array<Dynamic>));
+    return cast Facade_Movieclip_flighthq_movieclip_MovieClip.isMovieClipPlaying(clip);
     return cast null;
   }
 
   public static function nextFrameMovieClip(clip:MovieClip):Void {
-    _Runtime.callValue(Facade_Movieclip_flighthq_movieclip_MovieClip.nextFrameMovieClip, cast ([clip] : Array<Dynamic>));
+    Facade_Movieclip_flighthq_movieclip_MovieClip.nextFrameMovieClip(clip);
   }
 
   public static function playMovieClip(clip:MovieClip):Void {
-    _Runtime.callValue(Facade_Movieclip_flighthq_movieclip_MovieClip.playMovieClip, cast ([clip] : Array<Dynamic>));
+    Facade_Movieclip_flighthq_movieclip_MovieClip.playMovieClip(clip);
   }
 
   public static function prevFrameMovieClip(clip:MovieClip):Void {
-    _Runtime.callValue(Facade_Movieclip_flighthq_movieclip_MovieClip.prevFrameMovieClip, cast ([clip] : Array<Dynamic>));
+    Facade_Movieclip_flighthq_movieclip_MovieClip.prevFrameMovieClip(clip);
   }
 
   public static function removeMovieClipFrameScript(clip:MovieClip, frame:Dynamic):Void {
-    _Runtime.callValue(Facade_Movieclip_flighthq_movieclip_MovieClip.removeMovieClipFrameScript, cast ([clip, frame] : Array<Dynamic>));
+    Facade_Movieclip_flighthq_movieclip_MovieClip.removeMovieClipFrameScript(clip, frame);
   }
 
   public static function setMovieClipSource(clip:MovieClip, source:TimelineSource):Void {
-    _Runtime.callValue(Facade_Movieclip_flighthq_movieclip_MovieClip.setMovieClipSource, cast ([clip, source] : Array<Dynamic>));
+    Facade_Movieclip_flighthq_movieclip_MovieClip.setMovieClipSource(clip, source);
   }
 
   public static function stopMovieClip(clip:MovieClip):Void {
-    _Runtime.callValue(Facade_Movieclip_flighthq_movieclip_MovieClip.stopMovieClip, cast ([clip] : Array<Dynamic>));
+    Facade_Movieclip_flighthq_movieclip_MovieClip.stopMovieClip(clip);
   }
 
   public static function updateMovieClip(clip:MovieClip, deltaTime:Float):Void {
-    _Runtime.callValue(Facade_Movieclip_flighthq_movieclip_MovieClip.updateMovieClip, cast ([clip, deltaTime] : Array<Dynamic>));
+    Facade_Movieclip_flighthq_movieclip_MovieClip.updateMovieClip(clip, deltaTime);
   }
 }

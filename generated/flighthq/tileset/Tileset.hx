@@ -67,12 +67,12 @@ class Tileset {
   }
 
   public static function createTilesetFromAtlas(atlas:TextureAtlas, tileWidth:Float, tileHeight:Float, ?margin:Float, ?spacing:Float):flighthq.types.Tileset {
-    return cast _Runtime.callValue(Facade_Tileset_flighthq_tileset_TilesetFrom.createTilesetFromAtlas, cast ([atlas, tileWidth, tileHeight, margin, spacing] : Array<Dynamic>));
+    return cast Facade_Tileset_flighthq_tileset_TilesetFrom.createTilesetFromAtlas(atlas, tileWidth, tileHeight, margin, spacing);
     return cast null;
   }
 
   public static function createTilesetFromImageResource(resource:ImageResource, tileWidth:Float, tileHeight:Float, ?margin:Float, ?spacing:Float):flighthq.types.Tileset {
-    return cast _Runtime.callValue(Facade_Tileset_flighthq_tileset_TilesetFrom.createTilesetFromImageResource, cast ([resource, tileWidth, tileHeight, margin, spacing] : Array<Dynamic>));
+    return cast Facade_Tileset_flighthq_tileset_TilesetFrom.createTilesetFromImageResource(resource, tileWidth, tileHeight, margin, spacing);
     return cast null;
   }
 
@@ -81,22 +81,22 @@ class Tileset {
   }
 
   public static function loadTilesetFromBase64(base64:String, mimeType:String, tileWidth:Float, tileHeight:Float, ?margin:Float, ?spacing:Float, ?signal:Dynamic):flighthq._internal._Promise<flighthq.types.Tileset> {
-    return cast _Runtime.callValue(Facade_Tileset_flighthq_tileset_TilesetFrom.loadTilesetFromBase64, cast ([base64, mimeType, tileWidth, tileHeight, margin, spacing, signal] : Array<Dynamic>));
+    return cast Facade_Tileset_flighthq_tileset_TilesetFrom.loadTilesetFromBase64(base64, mimeType, tileWidth, tileHeight, margin, spacing, signal);
     return cast null;
   }
 
   public static function loadTilesetFromBlob(blob:Dynamic, tileWidth:Float, tileHeight:Float, ?margin:Float, ?spacing:Float, ?signal:Dynamic):flighthq._internal._Promise<flighthq.types.Tileset> {
-    return cast _Runtime.callValue(Facade_Tileset_flighthq_tileset_TilesetFrom.loadTilesetFromBlob, cast ([blob, tileWidth, tileHeight, margin, spacing, signal] : Array<Dynamic>));
+    return cast Facade_Tileset_flighthq_tileset_TilesetFrom.loadTilesetFromBlob(blob, tileWidth, tileHeight, margin, spacing, signal);
     return cast null;
   }
 
   public static function loadTilesetFromBytes(bytes:flighthq._internal._UInt8Array, tileWidth:Float, tileHeight:Float, ?margin:Float, ?spacing:Float, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<flighthq.types.Tileset> {
-    return cast _Runtime.callValue(Facade_Tileset_flighthq_tileset_TilesetFrom.loadTilesetFromBytes, cast ([bytes, tileWidth, tileHeight, margin, spacing, mimeType, signal] : Array<Dynamic>));
+    return cast Facade_Tileset_flighthq_tileset_TilesetFrom.loadTilesetFromBytes(bytes, tileWidth, tileHeight, margin, spacing, mimeType, signal);
     return cast null;
   }
 
   public static function loadTilesetFromUrl(url:String, tileWidth:Float, tileHeight:Float, ?margin:Float, ?spacing:Float, ?crossOrigin:String, ?signal:Dynamic):flighthq._internal._Promise<flighthq.types.Tileset> {
-    return cast _Runtime.callValue(Facade_Tileset_flighthq_tileset_TilesetFrom.loadTilesetFromUrl, cast ([url, tileWidth, tileHeight, margin, spacing, crossOrigin, signal] : Array<Dynamic>));
+    return cast Facade_Tileset_flighthq_tileset_TilesetFrom.loadTilesetFromUrl(url, tileWidth, tileHeight, margin, spacing, crossOrigin, signal);
     return cast null;
   }
 }

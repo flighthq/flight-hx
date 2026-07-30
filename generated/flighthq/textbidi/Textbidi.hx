@@ -13,30 +13,30 @@ import flighthq.types.Bidi.BidiRun;
 
 class Textbidi {
   public static function createCompactBidiClassBackend():BidiClassBackend {
-    return cast _Runtime.callValue(Facade_Textbidi_flighthq_textbidi_BidiClassBackend.createCompactBidiClassBackend, cast ([] : Array<Dynamic>));
+    return cast Facade_Textbidi_flighthq_textbidi_BidiClassBackend.createCompactBidiClassBackend();
     return cast null;
   }
 
   public static function getBidiClassBackend():BidiClassBackend {
-    return cast _Runtime.callValue(Facade_Textbidi_flighthq_textbidi_BidiClassBackend.getBidiClassBackend, cast ([] : Array<Dynamic>));
+    return cast Facade_Textbidi_flighthq_textbidi_BidiClassBackend.getBidiClassBackend();
     return cast null;
   }
 
   public static function getBidiRuns(text:String, baseDirection:BidiDirection):Array<BidiRun> {
-    return cast _Runtime.callValue(Facade_Textbidi_flighthq_textbidi_GetBidiRuns.getBidiRuns, cast ([text, baseDirection] : Array<Dynamic>));
+    return cast Facade_Textbidi_flighthq_textbidi_GetBidiRuns.getBidiRuns(text, baseDirection);
     return cast null;
   }
 
   public static function reorderBidiLine(levels:flighthq._internal._UInt8Array, start:Float, end:Float, out:Array<Float>):Void {
-    _Runtime.callValue(Facade_Textbidi_flighthq_textbidi_ReorderBidiLine.reorderBidiLine, cast ([levels, start, end, out] : Array<Dynamic>));
+    Facade_Textbidi_flighthq_textbidi_ReorderBidiLine.reorderBidiLine(levels, start, end, out);
   }
 
   public static function resolveBidiLevels(text:String, baseDirection:BidiDirection):flighthq._internal._UInt8Array {
-    return cast _Runtime.callValue(Facade_Textbidi_flighthq_textbidi_ResolveBidiLevels.resolveBidiLevels, cast ([text, baseDirection] : Array<Dynamic>));
+    return cast Facade_Textbidi_flighthq_textbidi_ResolveBidiLevels.resolveBidiLevels(text, baseDirection);
     return cast null;
   }
 
   public static function setBidiClassBackend(backend:Null<BidiClassBackend>):Void {
-    _Runtime.callValue(Facade_Textbidi_flighthq_textbidi_BidiClassBackend.setBidiClassBackend, cast ([backend] : Array<Dynamic>));
+    Facade_Textbidi_flighthq_textbidi_BidiClassBackend.setBidiClassBackend(backend);
   }
 }

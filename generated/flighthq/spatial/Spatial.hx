@@ -13,44 +13,44 @@ import flighthq.types.Spatial.SpatialPair;
 
 class Spatial {
   public static function clearSpatialIndex(index:SpatialIndex):Void {
-    _Runtime.callValue(Facade_Spatial_flighthq_spatial_SpatialIndex.clearSpatialIndex, cast ([index] : Array<Dynamic>));
+    Facade_Spatial_flighthq_spatial_SpatialIndex.clearSpatialIndex(index);
   }
 
   public static function createSpatialIndex(?backend:SpatialIndexBackend):SpatialIndex {
-    return cast _Runtime.callValue(Facade_Spatial_flighthq_spatial_SpatialIndex.createSpatialIndex, cast ([backend] : Array<Dynamic>));
+    return cast Facade_Spatial_flighthq_spatial_SpatialIndex.createSpatialIndex(backend);
     return cast null;
   }
 
   public static function createUniformGridSpatialBackend(cellSize:Float):SpatialIndexBackend {
-    return cast _Runtime.callValue(Facade_Spatial_flighthq_spatial_UniformGrid.createUniformGridSpatialBackend, cast ([cellSize] : Array<Dynamic>));
+    return cast Facade_Spatial_flighthq_spatial_UniformGrid.createUniformGridSpatialBackend(cellSize);
     return cast null;
   }
 
   public static function insertSpatialObject(index:SpatialIndex, id:SpatialObjectId, bounds:SpatialAabb):Void {
-    _Runtime.callValue(Facade_Spatial_flighthq_spatial_SpatialIndex.insertSpatialObject, cast ([index, id, bounds] : Array<Dynamic>));
+    Facade_Spatial_flighthq_spatial_SpatialIndex.insertSpatialObject(index, id, bounds);
   }
 
   public static function querySpatialPairs(index:SpatialIndex, out:Array<SpatialPair>):Void {
-    _Runtime.callValue(Facade_Spatial_flighthq_spatial_SpatialIndex.querySpatialPairs, cast ([index, out] : Array<Dynamic>));
+    Facade_Spatial_flighthq_spatial_SpatialIndex.querySpatialPairs(index, out);
   }
 
   public static function querySpatialPoint(index:SpatialIndex, x:Float, y:Float, out:Array<SpatialObjectId>):Void {
-    _Runtime.callValue(Facade_Spatial_flighthq_spatial_SpatialIndex.querySpatialPoint, cast ([index, x, y, out] : Array<Dynamic>));
+    Facade_Spatial_flighthq_spatial_SpatialIndex.querySpatialPoint(index, x, y, out);
   }
 
   public static function querySpatialRay(index:SpatialIndex, x:Float, y:Float, dx:Float, dy:Float, out:Array<SpatialObjectId>):Void {
-    _Runtime.callValue(Facade_Spatial_flighthq_spatial_SpatialIndex.querySpatialRay, cast ([index, x, y, dx, dy, out] : Array<Dynamic>));
+    Facade_Spatial_flighthq_spatial_SpatialIndex.querySpatialRay(index, x, y, dx, dy, out);
   }
 
   public static function querySpatialRegion(index:SpatialIndex, region:SpatialAabb, out:Array<SpatialObjectId>):Void {
-    _Runtime.callValue(Facade_Spatial_flighthq_spatial_SpatialIndex.querySpatialRegion, cast ([index, region, out] : Array<Dynamic>));
+    Facade_Spatial_flighthq_spatial_SpatialIndex.querySpatialRegion(index, region, out);
   }
 
   public static function removeSpatialObject(index:SpatialIndex, id:SpatialObjectId):Void {
-    _Runtime.callValue(Facade_Spatial_flighthq_spatial_SpatialIndex.removeSpatialObject, cast ([index, id] : Array<Dynamic>));
+    Facade_Spatial_flighthq_spatial_SpatialIndex.removeSpatialObject(index, id);
   }
 
   public static function updateSpatialObject(index:SpatialIndex, id:SpatialObjectId, bounds:SpatialAabb):Void {
-    _Runtime.callValue(Facade_Spatial_flighthq_spatial_SpatialIndex.updateSpatialObject, cast ([index, id, bounds] : Array<Dynamic>));
+    Facade_Spatial_flighthq_spatial_SpatialIndex.updateSpatialObject(index, id, bounds);
   }
 }

@@ -9,32 +9,32 @@ import flighthq.xml.XmlQuery as Facade_Xml_flighthq_xml_XmlQuery;
 
 class Xml {
   public static function getXmlElementAttribute(element:XmlElement, name:String):Null<String> {
-    return cast _Runtime.callValue(Facade_Xml_flighthq_xml_XmlQuery.getXmlElementAttribute, cast ([element, name] : Array<Dynamic>));
+    return cast Facade_Xml_flighthq_xml_XmlQuery.getXmlElementAttribute(element, name);
     return cast null;
   }
 
   public static function getXmlElementAttributeNumber(element:XmlElement, name:String):Null<Float> {
-    return cast _Runtime.callValue(Facade_Xml_flighthq_xml_XmlQuery.getXmlElementAttributeNumber, cast ([element, name] : Array<Dynamic>));
+    return cast Facade_Xml_flighthq_xml_XmlQuery.getXmlElementAttributeNumber(element, name);
     return cast null;
   }
 
   public static function getXmlElementChildByName(element:XmlElement, name:String):Null<XmlElement> {
-    return cast _Runtime.callValue(Facade_Xml_flighthq_xml_XmlQuery.getXmlElementChildByName, cast ([element, name] : Array<Dynamic>));
+    return cast Facade_Xml_flighthq_xml_XmlQuery.getXmlElementChildByName(element, name);
     return cast null;
   }
 
   public static function getXmlElementChildrenByName(element:XmlElement, name:String):Array<XmlElement> {
-    return cast _Runtime.callValue(Facade_Xml_flighthq_xml_XmlQuery.getXmlElementChildrenByName, cast ([element, name] : Array<Dynamic>));
+    return cast Facade_Xml_flighthq_xml_XmlQuery.getXmlElementChildrenByName(element, name);
     return cast null;
   }
 
   public static function parseXmlAttributes(attrs:String):Dynamic {
-    return cast _Runtime.callValue(Facade_Xml_flighthq_xml_XmlParse.parseXmlAttributes, cast ([attrs] : Array<Dynamic>));
+    return cast Facade_Xml_flighthq_xml_XmlParse.parseXmlAttributes(attrs);
     return cast null;
   }
 
   public static function parseXmlDocument(xml:String):Null<XmlElement> {
-    return cast _Runtime.callValue(Facade_Xml_flighthq_xml_XmlParse.parseXmlDocument, cast ([xml] : Array<Dynamic>));
+    return cast Facade_Xml_flighthq_xml_XmlParse.parseXmlDocument(xml);
     return cast null;
   }
 }

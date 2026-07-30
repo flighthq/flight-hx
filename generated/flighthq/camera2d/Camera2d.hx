@@ -23,30 +23,30 @@ class Camera2d {
   }
 
   public static function getCamera2DParallaxPoint(camera:Camera2D, factor:Float, out:Vector2Like):Void {
-    _Runtime.callValue(Facade_Camera2d_flighthq_camera2d_Parallax.getCamera2DParallaxPoint, cast ([camera, factor, out] : Array<Dynamic>));
+    Facade_Camera2d_flighthq_camera2d_Parallax.getCamera2DParallaxPoint(camera, factor, out);
   }
 
   public static function getCamera2DViewMatrix(camera:Camera2D, out:MatrixLike):Void {
-    _Runtime.callValue(Facade_Camera2d_flighthq_camera2d_ViewMatrix.getCamera2DViewMatrix, cast ([camera, out] : Array<Dynamic>));
+    Facade_Camera2d_flighthq_camera2d_ViewMatrix.getCamera2DViewMatrix(camera, out);
   }
 
   public static function getCamera2DVisibleBounds(camera:Camera2D, out:RectangleLike):Void {
-    _Runtime.callValue(Facade_Camera2d_flighthq_camera2d_VisibleBounds.getCamera2DVisibleBounds, cast ([camera, out] : Array<Dynamic>));
+    Facade_Camera2d_flighthq_camera2d_VisibleBounds.getCamera2DVisibleBounds(camera, out);
   }
 
   public static function projectCamera2DPoint(camera:Camera2D, worldX:Float, worldY:Float, out:Vector2Like):Void {
-    _Runtime.callValue(Facade_Camera2d_flighthq_camera2d_Projection.projectCamera2DPoint, cast ([camera, worldX, worldY, out] : Array<Dynamic>));
+    Facade_Camera2d_flighthq_camera2d_Projection.projectCamera2DPoint(camera, worldX, worldY, out);
   }
 
   public static function unprojectCamera2DPoint(camera:Camera2D, screenX:Float, screenY:Float, out:Vector2Like):Void {
-    _Runtime.callValue(Facade_Camera2d_flighthq_camera2d_Projection.unprojectCamera2DPoint, cast ([camera, screenX, screenY, out] : Array<Dynamic>));
+    Facade_Camera2d_flighthq_camera2d_Projection.unprojectCamera2DPoint(camera, screenX, screenY, out);
   }
 
   public static function updateCamera2DFollow(camera:Camera2D, targetX:Float, targetY:Float, deltaTime:Float, ?options:Camera2DFollowOptions):Void {
-    _Runtime.callValue(Facade_Camera2d_flighthq_camera2d_Follow.updateCamera2DFollow, cast ([camera, targetX, targetY, deltaTime, options] : Array<Dynamic>));
+    Facade_Camera2d_flighthq_camera2d_Follow.updateCamera2DFollow(camera, targetX, targetY, deltaTime, options);
   }
 
   public static function zoomCamera2DAtScreenPoint(camera:Camera2D, screenX:Float, screenY:Float, zoom:Float):Void {
-    _Runtime.callValue(Facade_Camera2d_flighthq_camera2d_Zoom.zoomCamera2DAtScreenPoint, cast ([camera, screenX, screenY, zoom] : Array<Dynamic>));
+    Facade_Camera2d_flighthq_camera2d_Zoom.zoomCamera2DAtScreenPoint(camera, screenX, screenY, zoom);
   }
 }

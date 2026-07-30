@@ -38,11 +38,11 @@ class Tween {
   }
 
   public static function completeTween<T>(tween:flighthq.types.Tween<Dynamic>):Void {
-    _Runtime.callValue(Facade_Tween_flighthq_tween_UpdateTweens.completeTween, cast ([tween] : Array<Dynamic>));
+    Facade_Tween_flighthq_tween_UpdateTweens.completeTween(tween);
   }
 
   public static function createColorTween(manager:TweenManager, target:Dynamic, property:String, duration:Float, toColor:Float, ?options:TweenOptions):flighthq.types.Tween<ColorComponents__colorTween> {
-    return cast _Runtime.callValue(Facade_Tween_flighthq_tween_ColorTween.createColorTween, cast ([manager, target, property, duration, toColor, options] : Array<Dynamic>));
+    return cast Facade_Tween_flighthq_tween_ColorTween.createColorTween(manager, target, property, duration, toColor, options);
     return cast null;
   }
 
@@ -73,17 +73,17 @@ class Tween {
   }
 
   public static function createTweenManager(?options:TweenManagerOptions):TweenManager {
-    return cast _Runtime.callValue(Facade_Tween_flighthq_tween_TweenManager.createTweenManager, cast ([options] : Array<Dynamic>));
+    return cast Facade_Tween_flighthq_tween_TweenManager.createTweenManager(options);
     return cast null;
   }
 
   public static function createTweenStagger<T>(manager:TweenManager, targets:Array<Dynamic>, duration:Float, propertyMap:NumericProps<Dynamic>, ?stagger:TweenStaggerOptions, ?options:TweenOptions):Array<flighthq.types.Tween<Dynamic>> {
-    return cast _Runtime.callValue(Facade_Tween_flighthq_tween_TweenStagger.createTweenStagger, cast ([manager, targets, duration, propertyMap, stagger, options] : Array<Dynamic>));
+    return cast Facade_Tween_flighthq_tween_TweenStagger.createTweenStagger(manager, targets, duration, propertyMap, stagger, options);
     return cast null;
   }
 
   public static function createTweenTimer(manager:TweenManager, duration:Float, ?options:TweenOptions):flighthq.types.Tween<Dynamic> {
-    return cast _Runtime.callValue(Facade_Tween_flighthq_tween_Timer.createTweenTimer, cast ([manager, duration, options] : Array<Dynamic>));
+    return cast Facade_Tween_flighthq_tween_Timer.createTweenTimer(manager, duration, options);
     return cast null;
   }
 
@@ -100,7 +100,7 @@ class Tween {
   }
 
   public static function getTweenProgress(tween:flighthq.types.Tween<Dynamic>):Float {
-    return cast _Runtime.callValue(Facade_Tween_flighthq_tween_TweenProgress.getTweenProgress, cast ([tween] : Array<Dynamic>));
+    return cast Facade_Tween_flighthq_tween_TweenProgress.getTweenProgress(tween);
     return cast null;
   }
 
@@ -117,7 +117,7 @@ class Tween {
   }
 
   public static function invalidateTween(tween:flighthq.types.Tween<Dynamic>):Void {
-    _Runtime.callValue(Facade_Tween_flighthq_tween_TweenProgress.invalidateTween, cast ([tween] : Array<Dynamic>));
+    Facade_Tween_flighthq_tween_TweenProgress.invalidateTween(tween);
   }
 
   public static function isTweenManager__tween(value:Dynamic):Bool {
@@ -197,7 +197,7 @@ class Tween {
   }
 
   public static function restartTween(tween:flighthq.types.Tween<Dynamic>, ?includeDelay:Dynamic):Void {
-    _Runtime.callValue(Facade_Tween_flighthq_tween_TweenProgress.restartTween, cast ([tween, includeDelay] : Array<Dynamic>));
+    Facade_Tween_flighthq_tween_TweenProgress.restartTween(tween, includeDelay);
   }
 
   public static function resumeAllTweens(manager:TweenManager):Void {
@@ -222,11 +222,11 @@ class Tween {
   }
 
   public static function seekTween(tween:flighthq.types.Tween<Dynamic>, timeSeconds:Float):Void {
-    _Runtime.callValue(Facade_Tween_flighthq_tween_TweenProgress.seekTween, cast ([tween, timeSeconds] : Array<Dynamic>));
+    Facade_Tween_flighthq_tween_TweenProgress.seekTween(tween, timeSeconds);
   }
 
   public static function setTweenProgress(tween:flighthq.types.Tween<Dynamic>, progress:Float):Void {
-    _Runtime.callValue(Facade_Tween_flighthq_tween_TweenProgress.setTweenProgress, cast ([tween, progress] : Array<Dynamic>));
+    Facade_Tween_flighthq_tween_TweenProgress.setTweenProgress(tween, progress);
   }
 
   public static function stopAllTweens(manager:TweenManager, ?options:StopTweenOptions):Void {
@@ -279,6 +279,6 @@ class Tween {
   }
 
   public static function updateTweens(manager:TweenManager, deltaTime:Float):Void {
-    _Runtime.callValue(Facade_Tween_flighthq_tween_UpdateTweens.updateTweens, cast ([manager, deltaTime] : Array<Dynamic>));
+    Facade_Tween_flighthq_tween_UpdateTweens.updateTweens(manager, deltaTime);
   }
 }

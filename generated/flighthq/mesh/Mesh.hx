@@ -30,11 +30,11 @@ import flighthq.types.MorphTarget.MeshMorph;
 
 class Mesh {
   public static function addMeshGeometrySubset(geometry:MeshGeometry, subset:MeshSubset):Void {
-    _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometrySubset.addMeshGeometrySubset, cast ([geometry, subset] : Array<Dynamic>));
+    Facade_Mesh_flighthq_mesh_MeshGeometrySubset.addMeshGeometrySubset(geometry, subset);
   }
 
   public static function blendMeshGeometryMorph(geometry:MeshGeometry, morph:MeshMorph, bindPose:MeshMorphBindPose):Void {
-    _Runtime.callValue(Facade_Mesh_flighthq_mesh_MorphMeshGeometry.blendMeshGeometryMorph, cast ([geometry, morph, bindPose] : Array<Dynamic>));
+    Facade_Mesh_flighthq_mesh_MorphMeshGeometry.blendMeshGeometryMorph(geometry, morph, bindPose);
   }
 
   public static final CANONICAL_MESH_GEOMETRY_LAYOUT:VertexAttributeLayout = Facade_Mesh_flighthq_mesh_MeshGeometryLayout.CANONICAL_MESH_GEOMETRY_LAYOUT;
@@ -42,291 +42,291 @@ class Mesh {
   public static final CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT:VertexAttributeLayout = Facade_Mesh_flighthq_mesh_MeshGeometryLayout.CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT;
 
   public static function captureMeshMorphBindPose(geometry:MeshGeometry):MeshMorphBindPose {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MorphMeshGeometry.captureMeshMorphBindPose, cast ([geometry] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MorphMeshGeometry.captureMeshMorphBindPose(geometry);
     return cast null;
   }
 
   public static function centerMeshGeometry(geometry:MeshGeometry):Void {
-    _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryTransforms.centerMeshGeometry, cast ([geometry] : Array<Dynamic>));
+    Facade_Mesh_flighthq_mesh_MeshGeometryTransforms.centerMeshGeometry(geometry);
   }
 
   public static function cloneMeshGeometry(source:MeshGeometry):MeshGeometry {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometry.cloneMeshGeometry, cast ([source] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometry.cloneMeshGeometry(source);
     return cast null;
   }
 
   public static function computeMeshGeometryBoundingSphere(out:BoundingSphereLike, geometry:MeshGeometry):Void {
-    _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryCompute.computeMeshGeometryBoundingSphere, cast ([out, geometry] : Array<Dynamic>));
+    Facade_Mesh_flighthq_mesh_MeshGeometryCompute.computeMeshGeometryBoundingSphere(out, geometry);
   }
 
   public static function computeMeshGeometryBounds(out:AabbLike, geometry:MeshGeometry):Void {
-    _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryCompute.computeMeshGeometryBounds, cast ([out, geometry] : Array<Dynamic>));
+    Facade_Mesh_flighthq_mesh_MeshGeometryCompute.computeMeshGeometryBounds(out, geometry);
   }
 
   public static function computeMeshGeometryFlatNormals(out:MeshGeometry, geometry:MeshGeometry):Void {
-    _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryCompute.computeMeshGeometryFlatNormals, cast ([out, geometry] : Array<Dynamic>));
+    Facade_Mesh_flighthq_mesh_MeshGeometryCompute.computeMeshGeometryFlatNormals(out, geometry);
   }
 
   public static function computeMeshGeometryNormals(out:MeshGeometry, geometry:MeshGeometry):Void {
-    _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryCompute.computeMeshGeometryNormals, cast ([out, geometry] : Array<Dynamic>));
+    Facade_Mesh_flighthq_mesh_MeshGeometryCompute.computeMeshGeometryNormals(out, geometry);
   }
 
   public static function computeMeshGeometryTangents(out:MeshGeometry, geometry:MeshGeometry):Void {
-    _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryCompute.computeMeshGeometryTangents, cast ([out, geometry] : Array<Dynamic>));
+    Facade_Mesh_flighthq_mesh_MeshGeometryCompute.computeMeshGeometryTangents(out, geometry);
   }
 
   public static function computeMeshGeometryWireframeIndices(geometry:MeshGeometry):Dynamic {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryIndex.computeMeshGeometryWireframeIndices, cast ([geometry] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryIndex.computeMeshGeometryWireframeIndices(geometry);
     return cast null;
   }
 
   public static function convertMeshGeometryLayout(source:MeshGeometry, targetLayout:VertexAttributeLayout):MeshGeometry {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryLayout.convertMeshGeometryLayout, cast ([source, targetLayout] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryLayout.convertMeshGeometryLayout(source, targetLayout);
     return cast null;
   }
 
   public static function createBoxMeshGeometry(?width:Float, ?height:Float, ?depth:Float):MeshGeometry {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createBoxMeshGeometry, cast ([width, height, depth] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createBoxMeshGeometry(width, height, depth);
     return cast null;
   }
 
   public static function createCapsuleMeshGeometry(?radius:Float, ?height:Float, ?radialSegments:Float, ?capSegments:Float):MeshGeometry {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createCapsuleMeshGeometry, cast ([radius, height, radialSegments, capSegments] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createCapsuleMeshGeometry(radius, height, radialSegments, capSegments);
     return cast null;
   }
 
   public static function createCircleMeshGeometry(?radius:Float, ?segments:Float):MeshGeometry {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createCircleMeshGeometry, cast ([radius, segments] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createCircleMeshGeometry(radius, segments);
     return cast null;
   }
 
   public static function createConeMeshGeometry(?radius:Float, ?height:Float, ?radialSegments:Float, ?capped:Bool):MeshGeometry {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createConeMeshGeometry, cast ([radius, height, radialSegments, capped] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createConeMeshGeometry(radius, height, radialSegments, capped);
     return cast null;
   }
 
   public static function createCylinderMeshGeometry(?topRadius:Float, ?bottomRadius:Float, ?height:Float, ?radialSegments:Float, ?capped:Bool):MeshGeometry {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createCylinderMeshGeometry, cast ([topRadius, bottomRadius, height, radialSegments, capped] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createCylinderMeshGeometry(topRadius, bottomRadius, height, radialSegments, capped);
     return cast null;
   }
 
   public static function createDodecahedronMeshGeometry(?radius:Float, ?detail:Float):MeshGeometry {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createDodecahedronMeshGeometry, cast ([radius, detail] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createDodecahedronMeshGeometry(radius, detail);
     return cast null;
   }
 
   public static function createIcosahedronMeshGeometry(?radius:Float, ?detail:Float):MeshGeometry {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createIcosahedronMeshGeometry, cast ([radius, detail] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createIcosahedronMeshGeometry(radius, detail);
     return cast null;
   }
 
   public static function createIcosphereMeshGeometry(?radius:Float, ?subdivisions:Float):MeshGeometry {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createIcosphereMeshGeometry, cast ([radius, subdivisions] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createIcosphereMeshGeometry(radius, subdivisions);
     return cast null;
   }
 
   public static function createMeshGeometry(options:MeshGeometryOptions):MeshGeometry {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometry.createMeshGeometry, cast ([options] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometry.createMeshGeometry(options);
     return cast null;
   }
 
   public static function createMeshGeometryFromAttributes(options:MeshGeometryFromAttributesOptions):MeshGeometry {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryOperations.createMeshGeometryFromAttributes, cast ([options] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryOperations.createMeshGeometryFromAttributes(options);
     return cast null;
   }
 
   public static function createOctahedronMeshGeometry(?radius:Float, ?detail:Float):MeshGeometry {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createOctahedronMeshGeometry, cast ([radius, detail] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createOctahedronMeshGeometry(radius, detail);
     return cast null;
   }
 
   public static function createPlaneMeshGeometry(?width:Float, ?depth:Float, ?widthSegments:Float, ?depthSegments:Float):MeshGeometry {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createPlaneMeshGeometry, cast ([width, depth, widthSegments, depthSegments] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createPlaneMeshGeometry(width, depth, widthSegments, depthSegments);
     return cast null;
   }
 
   public static function createPolyhedronMeshGeometry(vertexPositions:Array<Array<Float>>, faceIndices:Array<Array<Float>>, ?radius:Float, ?detail:Float):MeshGeometry {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createPolyhedronMeshGeometry, cast ([vertexPositions, faceIndices, radius, detail] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createPolyhedronMeshGeometry(vertexPositions, faceIndices, radius, detail);
     return cast null;
   }
 
   public static function createQuadMeshGeometry(?width:Float, ?height:Float):MeshGeometry {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createQuadMeshGeometry, cast ([width, height] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createQuadMeshGeometry(width, height);
     return cast null;
   }
 
   public static function createRingMeshGeometry(?innerRadius:Float, ?outerRadius:Float, ?segments:Float):MeshGeometry {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createRingMeshGeometry, cast ([innerRadius, outerRadius, segments] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createRingMeshGeometry(innerRadius, outerRadius, segments);
     return cast null;
   }
 
   public static function createSphereMeshGeometry(?radius:Float, ?widthSegments:Float, ?heightSegments:Float):MeshGeometry {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createSphereMeshGeometry, cast ([radius, widthSegments, heightSegments] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createSphereMeshGeometry(radius, widthSegments, heightSegments);
     return cast null;
   }
 
   public static function createTetrahedronMeshGeometry(?radius:Float, ?detail:Float):MeshGeometry {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createTetrahedronMeshGeometry, cast ([radius, detail] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createTetrahedronMeshGeometry(radius, detail);
     return cast null;
   }
 
   public static function createTorusKnotMeshGeometry(?radius:Float, ?tube:Float, ?tubularSegments:Float, ?radialSegments:Float, ?p:Float, ?q:Float):MeshGeometry {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createTorusKnotMeshGeometry, cast ([radius, tube, tubularSegments, radialSegments, p, q] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createTorusKnotMeshGeometry(radius, tube, tubularSegments, radialSegments, p, q);
     return cast null;
   }
 
   public static function createTorusMeshGeometry(?radius:Float, ?tube:Float, ?radialSegments:Float, ?tubularSegments:Float):MeshGeometry {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createTorusMeshGeometry, cast ([radius, tube, radialSegments, tubularSegments] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryBuilders.createTorusMeshGeometry(radius, tube, radialSegments, tubularSegments);
     return cast null;
   }
 
   public static function destroyMeshGeometryGlData(geometry:MeshGeometry):Void {
-    _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometry.destroyMeshGeometryGlData, cast ([geometry] : Array<Dynamic>));
+    Facade_Mesh_flighthq_mesh_MeshGeometry.destroyMeshGeometryGlData(geometry);
   }
 
   public static function destroyMeshGeometryWgpuData(geometry:MeshGeometry):Void {
-    _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometry.destroyMeshGeometryWgpuData, cast ([geometry] : Array<Dynamic>));
+    Facade_Mesh_flighthq_mesh_MeshGeometry.destroyMeshGeometryWgpuData(geometry);
   }
 
   public static function expandMeshGeometryIndices(geometry:MeshGeometry):MeshGeometry {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryIndex.expandMeshGeometryIndices, cast ([geometry] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryIndex.expandMeshGeometryIndices(geometry);
     return cast null;
   }
 
   public static function getMeshGeometryIndexCount(geometry:MeshGeometry):Float {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometry.getMeshGeometryIndexCount, cast ([geometry] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometry.getMeshGeometryIndexCount(geometry);
     return cast null;
   }
 
   public static function getMeshGeometryMorphBindPose(geometry:MeshGeometry):Null<MeshMorphBindPose> {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometry.getMeshGeometryMorphBindPose, cast ([geometry] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometry.getMeshGeometryMorphBindPose(geometry);
     return cast null;
   }
 
   public static function getMeshGeometrySkinBindPose(geometry:MeshGeometry):Null<MeshSkinBindPose> {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometry.getMeshGeometrySkinBindPose, cast ([geometry] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometry.getMeshGeometrySkinBindPose(geometry);
     return cast null;
   }
 
   public static function getMeshGeometrySubsetTriangleCount(geometry:MeshGeometry, subsetIndex:Float):Float {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometrySubset.getMeshGeometrySubsetTriangleCount, cast ([geometry, subsetIndex] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometrySubset.getMeshGeometrySubsetTriangleCount(geometry, subsetIndex);
     return cast null;
   }
 
   public static function getMeshGeometryTriangleCount(geometry:MeshGeometry):Float {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryOperations.getMeshGeometryTriangleCount, cast ([geometry] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryOperations.getMeshGeometryTriangleCount(geometry);
     return cast null;
   }
 
   public static function getMeshGeometryVertexCount(geometry:MeshGeometry):Float {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometry.getMeshGeometryVertexCount, cast ([geometry] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometry.getMeshGeometryVertexCount(geometry);
     return cast null;
   }
 
   public static function getMeshGeometryVertexNormal(out:{ var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.getMeshGeometryVertexNormal, cast ([out, geometry, vertexIndex] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.getMeshGeometryVertexNormal(out, geometry, vertexIndex);
     return cast null;
   }
 
   public static function getMeshGeometryVertexPosition(out:{ var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.getMeshGeometryVertexPosition, cast ([out, geometry, vertexIndex] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.getMeshGeometryVertexPosition(out, geometry, vertexIndex);
     return cast null;
   }
 
   public static function getMeshGeometryVertexTangent(out:{ var w:Float; var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.getMeshGeometryVertexTangent, cast ([out, geometry, vertexIndex] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.getMeshGeometryVertexTangent(out, geometry, vertexIndex);
     return cast null;
   }
 
   public static function getMeshGeometryVertexUv0(out:{ var x:Float; var y:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.getMeshGeometryVertexUv0, cast ([out, geometry, vertexIndex] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.getMeshGeometryVertexUv0(out, geometry, vertexIndex);
     return cast null;
   }
 
   public static function getVertexAttribute(layout:VertexAttributeLayout, semantic:VertexSemantic):Null<VertexAttribute> {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.getVertexAttribute, cast ([layout, semantic] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.getVertexAttribute(layout, semantic);
     return cast null;
   }
 
   public static function getVertexAttributeFloatOffset(layout:VertexAttributeLayout, semantic:VertexSemantic):Float {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.getVertexAttributeFloatOffset, cast ([layout, semantic] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.getVertexAttributeFloatOffset(layout, semantic);
     return cast null;
   }
 
   public static function hasMeshGeometrySkin(geometry:MeshGeometry):Bool {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometry.hasMeshGeometrySkin, cast ([geometry] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometry.hasMeshGeometrySkin(geometry);
     return cast null;
   }
 
   public static function mergeMeshGeometries(geometries:Array<MeshGeometry>):Null<MeshGeometry> {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryOperations.mergeMeshGeometries, cast ([geometries] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryOperations.mergeMeshGeometries(geometries);
     return cast null;
   }
 
   public static function offsetMeshGeometryUvs(geometry:MeshGeometry, du:Float, dv:Float):Void {
-    _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryUvs.offsetMeshGeometryUvs, cast ([geometry, du, dv] : Array<Dynamic>));
+    Facade_Mesh_flighthq_mesh_MeshGeometryUvs.offsetMeshGeometryUvs(geometry, du, dv);
   }
 
   public static function scaleMeshGeometry(geometry:MeshGeometry, sx:Float, sy:Float, sz:Float):Void {
-    _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryTransforms.scaleMeshGeometry, cast ([geometry, sx, sy, sz] : Array<Dynamic>));
+    Facade_Mesh_flighthq_mesh_MeshGeometryTransforms.scaleMeshGeometry(geometry, sx, sy, sz);
   }
 
   public static function scaleMeshGeometryUvs(geometry:MeshGeometry, su:Float, sv:Float):Void {
-    _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryUvs.scaleMeshGeometryUvs, cast ([geometry, su, sv] : Array<Dynamic>));
+    Facade_Mesh_flighthq_mesh_MeshGeometryUvs.scaleMeshGeometryUvs(geometry, su, sv);
   }
 
   public static function setMeshGeometryMorphBindPose(geometry:MeshGeometry, bindPose:Null<MeshMorphBindPose>):Void {
-    _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometry.setMeshGeometryMorphBindPose, cast ([geometry, bindPose] : Array<Dynamic>));
+    Facade_Mesh_flighthq_mesh_MeshGeometry.setMeshGeometryMorphBindPose(geometry, bindPose);
   }
 
   public static function setMeshGeometrySkinBindPose(geometry:MeshGeometry, bindPose:Null<MeshSkinBindPose>):Void {
-    _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometry.setMeshGeometrySkinBindPose, cast ([geometry, bindPose] : Array<Dynamic>));
+    Facade_Mesh_flighthq_mesh_MeshGeometry.setMeshGeometrySkinBindPose(geometry, bindPose);
   }
 
   public static function setMeshGeometrySubsets(geometry:MeshGeometry, subsets:Array<MeshSubset>):Void {
-    _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometrySubset.setMeshGeometrySubsets, cast ([geometry, subsets] : Array<Dynamic>));
+    Facade_Mesh_flighthq_mesh_MeshGeometrySubset.setMeshGeometrySubsets(geometry, subsets);
   }
 
   public static function setMeshGeometryVertexNormal(geometry:MeshGeometry, vertexIndex:Float, x:Float, y:Float, z:Float):Bool {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.setMeshGeometryVertexNormal, cast ([geometry, vertexIndex, x, y, z] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.setMeshGeometryVertexNormal(geometry, vertexIndex, x, y, z);
     return cast null;
   }
 
   public static function setMeshGeometryVertexPosition(geometry:MeshGeometry, vertexIndex:Float, x:Float, y:Float, z:Float):Bool {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.setMeshGeometryVertexPosition, cast ([geometry, vertexIndex, x, y, z] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.setMeshGeometryVertexPosition(geometry, vertexIndex, x, y, z);
     return cast null;
   }
 
   public static function setMeshGeometryVertexTangent(geometry:MeshGeometry, vertexIndex:Float, x:Float, y:Float, z:Float, w:Float):Bool {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.setMeshGeometryVertexTangent, cast ([geometry, vertexIndex, x, y, z, w] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.setMeshGeometryVertexTangent(geometry, vertexIndex, x, y, z, w);
     return cast null;
   }
 
   public static function setMeshGeometryVertexUv0(geometry:MeshGeometry, vertexIndex:Float, u:Float, v:Float):Bool {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.setMeshGeometryVertexUv0, cast ([geometry, vertexIndex, u, v] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.setMeshGeometryVertexUv0(geometry, vertexIndex, u, v);
     return cast null;
   }
 
   public static function transformMeshGeometry(geometry:MeshGeometry, matrix:Matrix4Like):Bool {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryTransforms.transformMeshGeometry, cast ([geometry, matrix] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryTransforms.transformMeshGeometry(geometry, matrix);
     return cast null;
   }
 
   public static function transformMeshGeometryInto(out:MeshGeometry, source:MeshGeometry, matrix:Matrix4Like):Bool {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryTransforms.transformMeshGeometryInto, cast ([out, source, matrix] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryTransforms.transformMeshGeometryInto(out, source, matrix);
     return cast null;
   }
 
   public static function translateMeshGeometry(geometry:MeshGeometry, x:Float, y:Float, z:Float):Void {
-    _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryTransforms.translateMeshGeometry, cast ([geometry, x, y, z] : Array<Dynamic>));
+    Facade_Mesh_flighthq_mesh_MeshGeometryTransforms.translateMeshGeometry(geometry, x, y, z);
   }
 
   public static function validateMeshGeometry(geometry:MeshGeometry):Bool {
-    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryOperations.validateMeshGeometry, cast ([geometry] : Array<Dynamic>));
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryOperations.validateMeshGeometry(geometry);
     return cast null;
   }
 
   public static function wrapMeshGeometryUvs(geometry:MeshGeometry):Void {
-    _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryUvs.wrapMeshGeometryUvs, cast ([geometry] : Array<Dynamic>));
+    Facade_Mesh_flighthq_mesh_MeshGeometryUvs.wrapMeshGeometryUvs(geometry);
   }
 }

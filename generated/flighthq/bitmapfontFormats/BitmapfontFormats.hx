@@ -11,22 +11,22 @@ import flighthq.types.BitmapFont.BitmapFontParseOptions;
 
 class BitmapfontFormats {
   public static function formatBitmapFontFnt(font:BitmapFont):String {
-    return cast _Runtime.callValue(Facade_BitmapfontFormats_flighthq_bitmapfontFormats_BitmapFontFnt.formatBitmapFontFnt, cast ([font] : Array<Dynamic>));
+    return cast Facade_BitmapfontFormats_flighthq_bitmapfontFormats_BitmapFontFnt.formatBitmapFontFnt(font);
     return cast null;
   }
 
   public static function parseBitmapFontFnt(text:String, ?options:BitmapFontParseOptions):Null<BitmapFont> {
-    return cast _Runtime.callValue(Facade_BitmapfontFormats_flighthq_bitmapfontFormats_BitmapFontFnt.parseBitmapFontFnt, cast ([text, options] : Array<Dynamic>));
+    return cast Facade_BitmapfontFormats_flighthq_bitmapfontFormats_BitmapFontFnt.parseBitmapFontFnt(text, options);
     return cast null;
   }
 
   public static function parseBitmapFontJson(text:String, ?options:BitmapFontParseOptions):Null<BitmapFont> {
-    return cast _Runtime.callValue(Facade_BitmapfontFormats_flighthq_bitmapfontFormats_BitmapFontJson.parseBitmapFontJson, cast ([text, options] : Array<Dynamic>));
+    return cast Facade_BitmapfontFormats_flighthq_bitmapfontFormats_BitmapFontJson.parseBitmapFontJson(text, options);
     return cast null;
   }
 
   public static function parseBitmapFontXml(text:String, ?options:BitmapFontParseOptions):Null<BitmapFont> {
-    return cast _Runtime.callValue(Facade_BitmapfontFormats_flighthq_bitmapfontFormats_BitmapFontXml.parseBitmapFontXml, cast ([text, options] : Array<Dynamic>));
+    return cast Facade_BitmapfontFormats_flighthq_bitmapfontFormats_BitmapFontXml.parseBitmapFontXml(text, options);
     return cast null;
   }
 }

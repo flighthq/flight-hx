@@ -815,6 +815,7 @@ function buildPublicFacades(
           : { kind: 'identifier', name: parameter.name },
       ),
       callee: { kind: 'identifier', name: alias },
+      direct: restIndex < 0,
       ...(restIndex < 0 ? {} : { haxeRestIndex: restIndex }),
       kind: 'call',
       typeArguments: [],
