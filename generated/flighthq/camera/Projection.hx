@@ -39,12 +39,12 @@ class Projection {
     var halfWidth:Dynamic = cast _Runtime.UNDEFINED;
     var halfHeight:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(projection, 'kind'), 'perspective'))) {
-      var tanHalfFovY:Dynamic = HxMath.tan((_Runtime.field(projection, 'fovY') * 0.5));
+      var tanHalfFovY:Dynamic = HxMath.tan((projection.fovY * 0.5));
       _Runtime.callValue(setPerspectiveMatrix4, cast ([out, tanHalfFovY, aspect, near, far] : Array<Dynamic>));
       return;
     }
-    halfWidth = _Runtime.field(projection, 'halfWidth');
-    halfHeight = _Runtime.field(projection, 'halfHeight');
+    halfWidth = projection.halfWidth;
+    halfHeight = projection.halfHeight;
     _Runtime.callValue(setOrthographicMatrix4, cast ([out, -halfWidth, halfWidth, -halfHeight, halfHeight, near, far] : Array<Dynamic>));
   }
 }

@@ -9,7 +9,7 @@ import flighthq.types.Vector3.Vector3Like;
 class Basis {
   public static function getCameraForward(out:Vector3Like, camera:Camera):Void {
     var m:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.field(camera, 'view').m;
+    m = camera.view.m;
     (out.x = cast (-_Runtime.getIndex(m, 2.0) : Dynamic));
     (out.y = cast (-_Runtime.getIndex(m, 6.0) : Dynamic));
     (out.z = cast (-_Runtime.getIndex(m, 10.0) : Dynamic));
@@ -29,7 +29,7 @@ class Basis {
     var tx:Dynamic = cast _Runtime.UNDEFINED;
     var ty:Dynamic = cast _Runtime.UNDEFINED;
     var tz:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.field(camera, 'view').m;
+    m = camera.view.m;
     m00 = _Runtime.getIndex(m, 0.0);
     m01 = _Runtime.getIndex(m, 1.0);
     m02 = _Runtime.getIndex(m, 2.0);
@@ -49,7 +49,7 @@ class Basis {
 
   public static function getCameraRight(out:Vector3Like, camera:Camera):Void {
     var m:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.field(camera, 'view').m;
+    m = camera.view.m;
     (out.x = cast (_Runtime.getIndex(m, 0.0) : Dynamic));
     (out.y = cast (_Runtime.getIndex(m, 4.0) : Dynamic));
     (out.z = cast (_Runtime.getIndex(m, 8.0) : Dynamic));
@@ -57,7 +57,7 @@ class Basis {
 
   public static function getCameraUp(out:Vector3Like, camera:Camera):Void {
     var m:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.field(camera, 'view').m;
+    m = camera.view.m;
     (out.x = cast (_Runtime.getIndex(m, 1.0) : Dynamic));
     (out.y = cast (_Runtime.getIndex(m, 5.0) : Dynamic));
     (out.z = cast (_Runtime.getIndex(m, 9.0) : Dynamic));

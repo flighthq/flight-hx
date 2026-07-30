@@ -43,12 +43,12 @@ class Obb {
     var d0:Dynamic = cast _Runtime.UNDEFINED;
     var d1:Dynamic = cast _Runtime.UNDEFINED;
     var d2:Dynamic = cast _Runtime.UNDEFINED;
-    cx = _Runtime.field(obb, 'centerX');
-    cy = _Runtime.field(obb, 'centerY');
-    cz = _Runtime.field(obb, 'centerZ');
-    hx = _Runtime.field(obb, 'halfExtentX');
-    hy = _Runtime.field(obb, 'halfExtentY');
-    hz = _Runtime.field(obb, 'halfExtentZ');
+    cx = obb.centerX;
+    cy = obb.centerY;
+    cz = obb.centerZ;
+    hx = obb.halfExtentX;
+    hy = obb.halfExtentY;
+    hz = obb.halfExtentZ;
     px = point.x;
     py = point.y;
     pz = point.z;
@@ -98,15 +98,15 @@ class Obb {
     var halfExts:Dynamic = cast _Runtime.UNDEFINED;
     var tMin:Dynamic = cast _Runtime.UNDEFINED;
     var tMax:Dynamic = cast _Runtime.UNDEFINED;
-    ox = (_Runtime.field(ray, 'origin').x - _Runtime.field(obb, 'centerX'));
-    oy = (_Runtime.field(ray, 'origin').y - _Runtime.field(obb, 'centerY'));
-    oz = (_Runtime.field(ray, 'origin').z - _Runtime.field(obb, 'centerZ'));
-    dx = _Runtime.field(ray, 'direction').x;
-    dy = _Runtime.field(ray, 'direction').y;
-    dz = _Runtime.field(ray, 'direction').z;
-    hx = _Runtime.field(obb, 'halfExtentX');
-    hy = _Runtime.field(obb, 'halfExtentY');
-    hz = _Runtime.field(obb, 'halfExtentZ');
+    ox = (ray.origin.x - obb.centerX);
+    oy = (ray.origin.y - obb.centerY);
+    oz = (ray.origin.z - obb.centerZ);
+    dx = ray.direction.x;
+    dy = ray.direction.y;
+    dz = ray.direction.z;
+    hx = obb.halfExtentX;
+    hy = obb.halfExtentY;
+    hz = obb.halfExtentZ;
     __destructure1 = _Runtime.callValue(Obb.obbLocalAxes__obb, cast ([obb] : Array<Dynamic>));
     ax0 = _Runtime.getIndex(__destructure1, 0.0);
     ay0 = _Runtime.getIndex(__destructure1, 1.0);
@@ -170,12 +170,12 @@ class Obb {
     var tx:Dynamic = cast _Runtime.UNDEFINED;
     var ty:Dynamic = cast _Runtime.UNDEFINED;
     var tz:Dynamic = cast _Runtime.UNDEFINED;
-    acx = ((_Runtime.field(aabb, 'min').x + _Runtime.field(aabb, 'max').x) * 0.5);
-    acy = ((_Runtime.field(aabb, 'min').y + _Runtime.field(aabb, 'max').y) * 0.5);
-    acz = ((_Runtime.field(aabb, 'min').z + _Runtime.field(aabb, 'max').z) * 0.5);
-    ahx = ((_Runtime.field(aabb, 'max').x - _Runtime.field(aabb, 'min').x) * 0.5);
-    ahy = ((_Runtime.field(aabb, 'max').y - _Runtime.field(aabb, 'min').y) * 0.5);
-    ahz = ((_Runtime.field(aabb, 'max').z - _Runtime.field(aabb, 'min').z) * 0.5);
+    acx = ((aabb.min.x + aabb.max.x) * 0.5);
+    acy = ((aabb.min.y + aabb.max.y) * 0.5);
+    acz = ((aabb.min.z + aabb.max.z) * 0.5);
+    ahx = ((aabb.max.x - aabb.min.x) * 0.5);
+    ahy = ((aabb.max.y - aabb.min.y) * 0.5);
+    ahz = ((aabb.max.z - aabb.min.z) * 0.5);
     __destructure2 = _Runtime.callValue(Obb.obbLocalAxes__obb, cast ([obb] : Array<Dynamic>));
     ax0 = _Runtime.getIndex(__destructure2, 0.0);
     ay0 = _Runtime.getIndex(__destructure2, 1.0);
@@ -186,10 +186,10 @@ class Obb {
     ax2 = _Runtime.getIndex(__destructure2, 6.0);
     ay2 = _Runtime.getIndex(__destructure2, 7.0);
     az2 = _Runtime.getIndex(__destructure2, 8.0);
-    tx = (acx - _Runtime.field(obb, 'centerX'));
-    ty = (acy - _Runtime.field(obb, 'centerY'));
-    tz = (acz - _Runtime.field(obb, 'centerZ'));
-    return cast !_Runtime.truthy(Obb.obbSatSeparated__obb(cast ([tx, ty, tz, ax0, ay0, az0, ax1, ay1, az1, ax2, ay2, az2, _Runtime.field(obb, 'halfExtentX'), _Runtime.field(obb, 'halfExtentY'), _Runtime.field(obb, 'halfExtentZ'), 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, ahx, ahy, ahz] : Array<Dynamic>)));
+    tx = (acx - obb.centerX);
+    ty = (acy - obb.centerY);
+    tz = (acz - obb.centerZ);
+    return cast !_Runtime.truthy(Obb.obbSatSeparated__obb(cast ([tx, ty, tz, ax0, ay0, az0, ax1, ay1, az1, ax2, ay2, az2, obb.halfExtentX, obb.halfExtentY, obb.halfExtentZ, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, ahx, ahy, ahz] : Array<Dynamic>)));
     return cast null;
   }
 
@@ -237,24 +237,24 @@ class Obb {
     bx2 = _Runtime.getIndex(__destructure4, 6.0);
     by2 = _Runtime.getIndex(__destructure4, 7.0);
     bz2 = _Runtime.getIndex(__destructure4, 8.0);
-    tx = (_Runtime.field(b, 'centerX') - _Runtime.field(a, 'centerX'));
-    ty = (_Runtime.field(b, 'centerY') - _Runtime.field(a, 'centerY'));
-    tz = (_Runtime.field(b, 'centerZ') - _Runtime.field(a, 'centerZ'));
-    return cast !_Runtime.truthy(Obb.obbSatSeparated__obb(cast ([tx, ty, tz, ax0, ay0, az0, ax1, ay1, az1, ax2, ay2, az2, _Runtime.field(a, 'halfExtentX'), _Runtime.field(a, 'halfExtentY'), _Runtime.field(a, 'halfExtentZ'), bx0, by0, bz0, bx1, by1, bz1, bx2, by2, bz2, _Runtime.field(b, 'halfExtentX'), _Runtime.field(b, 'halfExtentY'), _Runtime.field(b, 'halfExtentZ')] : Array<Dynamic>)));
+    tx = (b.centerX - a.centerX);
+    ty = (b.centerY - a.centerY);
+    tz = (b.centerZ - a.centerZ);
+    return cast !_Runtime.truthy(Obb.obbSatSeparated__obb(cast ([tx, ty, tz, ax0, ay0, az0, ax1, ay1, az1, ax2, ay2, az2, a.halfExtentX, a.halfExtentY, a.halfExtentZ, bx0, by0, bz0, bx1, by1, bz1, bx2, by2, bz2, b.halfExtentX, b.halfExtentY, b.halfExtentZ] : Array<Dynamic>)));
     return cast null;
   }
 
   public static function setObb(out:ObbLike, centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Void {
-    _Runtime.setField(out, 'centerX', centerX);
-    _Runtime.setField(out, 'centerY', centerY);
-    _Runtime.setField(out, 'centerZ', centerZ);
-    _Runtime.setField(out, 'halfExtentX', halfExtentX);
-    _Runtime.setField(out, 'halfExtentY', halfExtentY);
-    _Runtime.setField(out, 'halfExtentZ', halfExtentZ);
-    _Runtime.setField(out, 'orientationX', orientationX);
-    _Runtime.setField(out, 'orientationY', orientationY);
-    _Runtime.setField(out, 'orientationZ', orientationZ);
-    _Runtime.setField(out, 'orientationW', orientationW);
+    (out.centerX = cast (centerX : Dynamic));
+    (out.centerY = cast (centerY : Dynamic));
+    (out.centerZ = cast (centerZ : Dynamic));
+    (out.halfExtentX = cast (halfExtentX : Dynamic));
+    (out.halfExtentY = cast (halfExtentY : Dynamic));
+    (out.halfExtentZ = cast (halfExtentZ : Dynamic));
+    (out.orientationX = cast (orientationX : Dynamic));
+    (out.orientationY = cast (orientationY : Dynamic));
+    (out.orientationZ = cast (orientationZ : Dynamic));
+    (out.orientationW = cast (orientationW : Dynamic));
   }
 
   public static function transformObbByMatrix4(out:ObbLike, obb:ObbLike, m:Matrix4Like):Void {
@@ -289,16 +289,16 @@ class Obb {
     var mqy:Float = cast _Runtime.UNDEFINED;
     var mqz:Float = cast _Runtime.UNDEFINED;
     var trace:Dynamic = cast _Runtime.UNDEFINED;
-    cx = _Runtime.field(obb, 'centerX');
-    cy = _Runtime.field(obb, 'centerY');
-    cz = _Runtime.field(obb, 'centerZ');
-    hx = _Runtime.field(obb, 'halfExtentX');
-    hy = _Runtime.field(obb, 'halfExtentY');
-    hz = _Runtime.field(obb, 'halfExtentZ');
-    oqx = _Runtime.field(obb, 'orientationX');
-    oqy = _Runtime.field(obb, 'orientationY');
-    oqz = _Runtime.field(obb, 'orientationZ');
-    oqw = _Runtime.field(obb, 'orientationW');
+    cx = obb.centerX;
+    cy = obb.centerY;
+    cz = obb.centerZ;
+    hx = obb.halfExtentX;
+    hy = obb.halfExtentY;
+    hz = obb.halfExtentZ;
+    oqx = obb.orientationX;
+    oqy = obb.orientationY;
+    oqz = obb.orientationZ;
+    oqw = obb.orientationW;
     _m = m.m;
     newCx = ((((_Runtime.getIndex(_m, 0.0) * cx) + (_Runtime.getIndex(_m, 4.0) * cy)) + (_Runtime.getIndex(_m, 8.0) * cz)) + _Runtime.getIndex(_m, 12.0));
     newCy = ((((_Runtime.getIndex(_m, 1.0) * cx) + (_Runtime.getIndex(_m, 5.0) * cy)) + (_Runtime.getIndex(_m, 9.0) * cz)) + _Runtime.getIndex(_m, 13.0));
@@ -341,16 +341,16 @@ class Obb {
       (mqy = cast (((r21 + r12) / s) : Dynamic));
       (mqz = cast ((0.25 * s) : Dynamic));
     } } }
-    _Runtime.setField(out, 'centerX', newCx);
-    _Runtime.setField(out, 'centerY', newCy);
-    _Runtime.setField(out, 'centerZ', newCz);
-    _Runtime.setField(out, 'halfExtentX', (hx * sx));
-    _Runtime.setField(out, 'halfExtentY', (hy * sy));
-    _Runtime.setField(out, 'halfExtentZ', (hz * sz));
-    _Runtime.setField(out, 'orientationX', ((((mqw * oqx) + (mqx * oqw)) + (mqy * oqz)) - (mqz * oqy)));
-    _Runtime.setField(out, 'orientationY', ((((mqw * oqy) - (mqx * oqz)) + (mqy * oqw)) + (mqz * oqx)));
-    _Runtime.setField(out, 'orientationZ', ((((mqw * oqz) + (mqx * oqy)) - (mqy * oqx)) + (mqz * oqw)));
-    _Runtime.setField(out, 'orientationW', ((((mqw * oqw) - (mqx * oqx)) - (mqy * oqy)) - (mqz * oqz)));
+    (out.centerX = cast (newCx : Dynamic));
+    (out.centerY = cast (newCy : Dynamic));
+    (out.centerZ = cast (newCz : Dynamic));
+    (out.halfExtentX = cast ((hx * sx) : Dynamic));
+    (out.halfExtentY = cast ((hy * sy) : Dynamic));
+    (out.halfExtentZ = cast ((hz * sz) : Dynamic));
+    (out.orientationX = cast (((((mqw * oqx) + (mqx * oqw)) + (mqy * oqz)) - (mqz * oqy)) : Dynamic));
+    (out.orientationY = cast (((((mqw * oqy) - (mqx * oqz)) + (mqy * oqw)) + (mqz * oqx)) : Dynamic));
+    (out.orientationZ = cast (((((mqw * oqz) + (mqx * oqy)) - (mqy * oqx)) + (mqz * oqw)) : Dynamic));
+    (out.orientationW = cast (((((mqw * oqw) - (mqx * oqx)) - (mqy * oqy)) - (mqz * oqz)) : Dynamic));
   }
 
   public static function obbLocalAxes__obb(obb:ObbLike):Array<Float> {
@@ -367,10 +367,10 @@ class Obb {
     var wx:Dynamic = cast _Runtime.UNDEFINED;
     var wy:Dynamic = cast _Runtime.UNDEFINED;
     var wz:Dynamic = cast _Runtime.UNDEFINED;
-    qx = _Runtime.field(obb, 'orientationX');
-    qy = _Runtime.field(obb, 'orientationY');
-    qz = _Runtime.field(obb, 'orientationZ');
-    qw = _Runtime.field(obb, 'orientationW');
+    qx = obb.orientationX;
+    qy = obb.orientationY;
+    qz = obb.orientationZ;
+    qw = obb.orientationW;
     xx = (qx * qx);
     yy = (qy * qy);
     zz = (qz * qz);

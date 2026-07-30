@@ -10,10 +10,10 @@ import flighthq.types.Camera2D;
 class Zoom {
   public static function zoomCamera2DAtScreenPoint(camera:Camera2D, screenX:Float, screenY:Float, zoom:Float):Void {
     _Runtime.callValue(unprojectCamera2DPoint, cast ([camera, screenX, screenY, Zoom.scratchBefore__zoom] : Array<Dynamic>));
-    _Runtime.setField(camera, 'zoom', zoom);
+    (camera.zoom = cast (zoom : Dynamic));
     _Runtime.callValue(unprojectCamera2DPoint, cast ([camera, screenX, screenY, Zoom.scratchAfter__zoom] : Array<Dynamic>));
-    _Runtime.setField(camera, 'x', (_Runtime.field(camera, 'x') + (Zoom.scratchBefore__zoom.x - Zoom.scratchAfter__zoom.x)));
-    _Runtime.setField(camera, 'y', (_Runtime.field(camera, 'y') + (Zoom.scratchBefore__zoom.y - Zoom.scratchAfter__zoom.y)));
+    (camera.x += (Zoom.scratchBefore__zoom.x - Zoom.scratchAfter__zoom.x));
+    (camera.y += (Zoom.scratchBefore__zoom.y - Zoom.scratchAfter__zoom.y));
   }
 
   public static final scratchAfter__zoom:Dynamic = _Runtime.callValue(createVector2, cast ([] : Array<Dynamic>));

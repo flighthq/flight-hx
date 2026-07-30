@@ -1,6 +1,6 @@
 # Typed Struct Tranche 5: Camera2D Frame Projection
 
-This projection models one warm, input-free `camera2d` example update followed by one render. It counts generated Flight property accesses that are currently reflective and would become direct when the tranche-5 schemas are enabled. Handwritten accesses in `examples/camera2d/Main.hx` are already direct Haxe and are not counted.
+This projection models one warm, input-free `camera2d` example update followed by one render. It counts generated Flight property accesses that were reflective before tranche 5 and become direct when its schemas are enabled. Handwritten accesses in `examples/camera2d/Main.hx` are already direct Haxe and are not counted.
 
 ## Camera operations
 
@@ -32,13 +32,13 @@ Every one of those 71 transform recomputations reads the cached `localMatrix`. O
 
 The common warm path therefore projects **205 reflective accesses removed per frame**: 54 camera and follow accesses plus 151 node-transform accesses. Bounds-cache, 3D camera/geometry, initialization, and backend-specific fallback-raster bounds work are intentionally outside this portable steady-frame number.
 
-## Audit and enablement gates
+## Audit and enablement result
 
-The tranche-5 audit adds 20 audit-only schemas with 92 fields and 987 bindable static access sites. It also records 152 per-schema dynamic-escape records:
+Tranche 5 enables 20 schemas with 92 fields and 987 direct static access sites. It retains 152 itemized per-schema reflective survivors:
 
 - 138 records for other members of node/runtime intersections;
 - 14 records from seven projection-union discriminant sites, attributed to both projection schemas.
 
-Before direct enablement, intersection lowering must bind only the candidate that owns the accessed member and leave other intersection members on their existing dynamic path. Projection `kind` accesses remain explicit incompatible-union escapes. The audit-only commit must produce no generated Haxe expression changes.
+Declaration-owned intersection lowering binds only the candidate that owns the accessed member and leaves other intersection members on their existing dynamic path. Projection `kind` accesses remain explicit incompatible-union escapes.
 
 For the fixed-frame comparison, `FLIGHT_PERF_FRAMES=601` reports 600 elapsed frame intervals through the example's existing `PERF frames=600 ... fps=...` line. Baseline and candidate runs use the same renderer, antialiasing mode, build target, and host display.

@@ -14,10 +14,10 @@ class HasBoundsRectangle {
   }
 
   public static function initBoundsRectangleRuntimeTrait(target:HasBoundsRectangleRuntime, ?methods:Dynamic):Void {
-    _Runtime.setField(target, 'boundsRectangle', null);
-    _Runtime.setField(target, 'localBoundsRectangle', null);
-    _Runtime.setField(target, 'worldBoundsRectangle', null);
-    _Runtime.setField(target, 'computeLocalBoundsRectangle', _Runtime.coalesce(_Runtime.optionalField(methods, 'computeLocalBoundsRectangle'), function():Dynamic return cast defaultComputeLocalBoundsRectangle));
+    (target.boundsRectangle = cast (null : Dynamic));
+    (target.localBoundsRectangle = cast (null : Dynamic));
+    (target.worldBoundsRectangle = cast (null : Dynamic));
+    (target.computeLocalBoundsRectangle = cast (_Runtime.coalesce(_Runtime.optionalField(methods, 'computeLocalBoundsRectangle'), function():Dynamic return cast defaultComputeLocalBoundsRectangle) : Dynamic));
   }
 
   public static function initBoundsRectangleTrait(_target:flighthq.types.HasBoundsRectangle, ?_obj:Dynamic):Void {

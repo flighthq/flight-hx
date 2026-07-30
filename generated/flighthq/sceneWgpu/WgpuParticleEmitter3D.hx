@@ -314,7 +314,7 @@ class WgpuParticleEmitter3D {
         i++;
       }
     }
-    vm = _Runtime.field(camera, 'view').m;
+    vm = camera.view.m;
     _Runtime.setIndex(f, 16.0, _Runtime.getIndex(vm, 0.0));
     _Runtime.setIndex(f, 17.0, _Runtime.getIndex(vm, 4.0));
     _Runtime.setIndex(f, 18.0, _Runtime.getIndex(vm, 8.0));

@@ -10,14 +10,14 @@ import flighthq.types.HasTransform3D.HasTransform3DRuntime;
 
 class HasTransform3d {
   public static function initTransform3DRuntimeTrait(target:HasTransform3DRuntime):Void {
-    _Runtime.setField(target, 'localMatrix4', null);
-    _Runtime.setField(target, 'localMatrix4Detached', false);
-    _Runtime.setField(target, 'worldMatrix4', null);
+    (target.localMatrix4 = cast (null : Dynamic));
+    (target.localMatrix4Detached = cast (false : Dynamic));
+    (target.worldMatrix4 = cast (null : Dynamic));
   }
 
   public static function initTransform3DTrait(target:HasTransform3D, ?obj:Dynamic):Void {
-    _Runtime.setField(target, 'rotation', _Runtime.coalesce(_Runtime.optionalField(obj, 'rotation'), function():Dynamic return cast _Runtime.callValue(createQuaternion, cast ([] : Array<Dynamic>))));
-    _Runtime.setField(target, 'scale', _Runtime.coalesce(_Runtime.optionalField(obj, 'scale'), function():Dynamic return cast _Runtime.callValue(createVector3, cast ([1.0, 1.0, 1.0] : Array<Dynamic>))));
-    _Runtime.setField(target, 'position', _Runtime.coalesce(_Runtime.optionalField(obj, 'position'), function():Dynamic return cast _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>))));
+    (target.rotation = cast (_Runtime.coalesce(_Runtime.optionalField(obj, 'rotation'), function():Dynamic return cast _Runtime.callValue(createQuaternion, cast ([] : Array<Dynamic>))) : Dynamic));
+    (target.scale = cast (_Runtime.coalesce(_Runtime.optionalField(obj, 'scale'), function():Dynamic return cast _Runtime.callValue(createVector3, cast ([1.0, 1.0, 1.0] : Array<Dynamic>))) : Dynamic));
+    (target.position = cast (_Runtime.coalesce(_Runtime.optionalField(obj, 'position'), function():Dynamic return cast _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>))) : Dynamic));
   }
 }

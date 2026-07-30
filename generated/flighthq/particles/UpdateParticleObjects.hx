@@ -91,18 +91,18 @@ class UpdateParticleObjects {
         var vt:Dynamic = (i * 2.0);
         _Runtime.setIndex(velocities, vt, (_Runtime.getIndex(velocities, vt) + gx));
         _Runtime.setIndex(velocities, (vt + 1.0), (_Runtime.getIndex(velocities, (vt + 1.0)) + gy));
-        _Runtime.setField(_Runtime.getIndex(objects, i), 'x', (_Runtime.field(_Runtime.getIndex(objects, i), 'x') + (_Runtime.getIndex(velocities, vt) * deltaTime)));
-        _Runtime.setField(_Runtime.getIndex(objects, i), 'y', (_Runtime.field(_Runtime.getIndex(objects, i), 'y') + (_Runtime.getIndex(velocities, (vt + 1.0)) * deltaTime)));
+        (_Runtime.getIndex(objects, i).x += (_Runtime.getIndex(velocities, vt) * deltaTime));
+        (_Runtime.getIndex(objects, i).y += (_Runtime.getIndex(velocities, (vt + 1.0)) * deltaTime));
         var lifeFraction:Dynamic = (_Runtime.getIndex(lifetimes, lt) / _Runtime.getIndex(lifetimes, (lt + 1.0)));
         _Runtime.setField(_Runtime.getIndex(objects, i), 'alpha', _Runtime.select(hasAlphaCurve, function():Dynamic return cast _Runtime.callValue(sampleParticleCurve, cast ([alphaCurve, lifeFraction] : Array<Dynamic>)), function():Dynamic return cast (_Runtime.field(config, 'alphaStart') + ((_Runtime.field(config, 'alphaEnd') - _Runtime.field(config, 'alphaStart')) * lifeFraction))));
         if (_Runtime.truthy(hasScaleAnim)) {
           var factor:Dynamic = _Runtime.select(hasScaleCurve, function():Dynamic return cast _Runtime.callValue(sampleParticleCurve, cast ([scaleCurve, lifeFraction] : Array<Dynamic>)), function():Dynamic return cast (1.0 + ((_Runtime.field(config, 'scaleEnd') - 1.0) * lifeFraction)));
           var s:Dynamic = (_Runtime.getIndex(scales, i) * factor);
-          _Runtime.setField(_Runtime.getIndex(objects, i), 'scaleX', s);
-          _Runtime.setField(_Runtime.getIndex(objects, i), 'scaleY', s);
+          (_Runtime.getIndex(objects, i).scaleX = cast (s : Dynamic));
+          (_Runtime.getIndex(objects, i).scaleY = cast (s : Dynamic));
         }
         if (_Runtime.truthy(hasRotSpeed)) {
-          _Runtime.setField(_Runtime.getIndex(objects, i), 'rotation', (_Runtime.field(_Runtime.getIndex(objects, i), 'rotation') + (_Runtime.getIndex(rotationSpeeds, i) * deltaTime)));
+          (_Runtime.getIndex(objects, i).rotation += (_Runtime.getIndex(rotationSpeeds, i) * deltaTime));
         }
         i++;
       }
@@ -151,12 +151,12 @@ class UpdateParticleObjects {
           _Runtime.setIndex(scales, i, spawnScale);
           _Runtime.setIndex(rotationSpeeds, i, _Runtime.select(hasRotSpeed, function():Dynamic return cast (_Runtime.field(config, 'rotationSpeedMin') + (_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>)) * rotSpeedRange)), function():Dynamic return cast 0.0));
           var obj:Dynamic = _Runtime.getIndex(objects, i);
-          _Runtime.setField(obj, 'x', spawnX);
-          _Runtime.setField(obj, 'y', spawnY);
-          _Runtime.setField(obj, 'rotation', angle);
+          (obj.x = cast (spawnX : Dynamic));
+          (obj.y = cast (spawnY : Dynamic));
+          (obj.rotation = cast (angle : Dynamic));
           var spawnFactor:Dynamic = _Runtime.select(hasScaleCurve, function():Dynamic return cast (spawnScale * _Runtime.callValue(sampleParticleCurve, cast ([scaleCurve, 0.0] : Array<Dynamic>))), function():Dynamic return cast spawnScale);
-          _Runtime.setField(obj, 'scaleX', spawnFactor);
-          _Runtime.setField(obj, 'scaleY', spawnFactor);
+          (obj.scaleX = cast (spawnFactor : Dynamic));
+          (obj.scaleY = cast (spawnFactor : Dynamic));
           _Runtime.setField(obj, 'alpha', _Runtime.select(hasAlphaCurve, function():Dynamic return cast _Runtime.callValue(sampleParticleCurve, cast ([alphaCurve, 0.0] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(config, 'alphaStart')));
           _Runtime.setField(obj, 'visible', true);
           toSpawn--;

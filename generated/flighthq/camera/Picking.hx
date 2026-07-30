@@ -61,12 +61,12 @@ class Picking {
     (Picking.__scratchFar__picking.z = cast (farZ : Dynamic));
     _Runtime.callValue(subtractVector3, cast ([Picking.__scratchDir__picking, Picking.__scratchFar__picking, Picking.__scratchNear__picking] : Array<Dynamic>));
     _Runtime.callValue(normalizeVector3, cast ([Picking.__scratchDir__picking, Picking.__scratchDir__picking] : Array<Dynamic>));
-    (_Runtime.field(out, 'origin').x = cast (nearX : Dynamic));
-    (_Runtime.field(out, 'origin').y = cast (nearY : Dynamic));
-    (_Runtime.field(out, 'origin').z = cast (nearZ : Dynamic));
-    (_Runtime.field(out, 'direction').x = cast (Picking.__scratchDir__picking.x : Dynamic));
-    (_Runtime.field(out, 'direction').y = cast (Picking.__scratchDir__picking.y : Dynamic));
-    (_Runtime.field(out, 'direction').z = cast (Picking.__scratchDir__picking.z : Dynamic));
+    (out.origin.x = cast (nearX : Dynamic));
+    (out.origin.y = cast (nearY : Dynamic));
+    (out.origin.z = cast (nearZ : Dynamic));
+    (out.direction.x = cast (Picking.__scratchDir__picking.x : Dynamic));
+    (out.direction.y = cast (Picking.__scratchDir__picking.y : Dynamic));
+    (out.direction.z = cast (Picking.__scratchDir__picking.z : Dynamic));
     return cast true;
     return cast null;
   }

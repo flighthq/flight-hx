@@ -291,13 +291,13 @@ class SceneRender {
 
   public static function setSceneViewProjectionMatrix4__sceneRender(out:Matrix4, camera:Camera, aspect:Float):Void {
     var projection:Dynamic = cast _Runtime.UNDEFINED;
-    projection = _Runtime.field(camera, 'projection');
+    projection = camera.projection;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(projection, 'kind'), 'perspective'))) {
-      _Runtime.callValue(setPerspectiveMatrix4, cast ([SceneRender.scratchProjection__sceneRender, HxMath.tan((_Runtime.field(projection, 'fovY') * 0.5)), _Runtime.select(!_Runtime.strictEquals(_Runtime.field(projection, 'aspect'), 0.0), function():Dynamic return cast _Runtime.field(projection, 'aspect'), function():Dynamic return cast aspect), _Runtime.field(camera, 'near'), _Runtime.field(camera, 'far')] : Array<Dynamic>));
+      _Runtime.callValue(setPerspectiveMatrix4, cast ([SceneRender.scratchProjection__sceneRender, HxMath.tan((projection.fovY * 0.5)), _Runtime.select(!_Runtime.strictEquals(projection.aspect, 0.0), function():Dynamic return cast projection.aspect, function():Dynamic return cast aspect), camera.near, camera.far] : Array<Dynamic>));
     } else {
-      _Runtime.callValue(setOrthographicMatrix4, cast ([SceneRender.scratchProjection__sceneRender, -_Runtime.field(projection, 'halfWidth'), _Runtime.field(projection, 'halfWidth'), -_Runtime.field(projection, 'halfHeight'), _Runtime.field(projection, 'halfHeight'), _Runtime.field(camera, 'near'), _Runtime.field(camera, 'far')] : Array<Dynamic>));
+      _Runtime.callValue(setOrthographicMatrix4, cast ([SceneRender.scratchProjection__sceneRender, -projection.halfWidth, projection.halfWidth, -projection.halfHeight, projection.halfHeight, camera.near, camera.far] : Array<Dynamic>));
     }
-    _Runtime.callValue(multiplyMatrix4, cast ([out, SceneRender.scratchProjection__sceneRender, _Runtime.field(camera, 'view')] : Array<Dynamic>));
+    _Runtime.callValue(multiplyMatrix4, cast ([out, SceneRender.scratchProjection__sceneRender, camera.view] : Array<Dynamic>));
   }
 
   public static final DEFAULT_VIEWPORT_ASPECT__sceneRender:Dynamic = 1.0;

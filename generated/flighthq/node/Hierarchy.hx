@@ -289,15 +289,15 @@ class Hierarchy {
         var b:Dynamic = _Runtime.field(localM, 'b');
         var c:Dynamic = _Runtime.field(localM, 'c');
         var d:Dynamic = _Runtime.field(localM, 'd');
-        _Runtime.setField(child, 'scaleX', HxMath.sqrt(((a * a) + (b * b))));
-        _Runtime.setField(child, 'scaleY', HxMath.sqrt(((c * c) + (d * d))));
+        (child.scaleX = cast (HxMath.sqrt(((a * a) + (b * b))) : Dynamic));
+        (child.scaleY = cast (HxMath.sqrt(((c * c) + (d * d))) : Dynamic));
         if (_Runtime.truthy(_Runtime.compare(((a * d) - (b * c)), 0.0, '<'))) {
-          _Runtime.setField(child, 'scaleY', -_Runtime.field(child, 'scaleY'));
+          (child.scaleY = cast (-child.scaleY : Dynamic));
         }
-        var skewYRad:Dynamic = (_Runtime.field(child, 'skewY') * Hierarchy.DEG_TO_RAD__hierarchy);
-        _Runtime.setField(child, 'rotation', ((HxMath.atan2(b, a) - skewYRad) * Hierarchy.RAD_TO_DEG__hierarchy));
-        _Runtime.setField(child, 'x', (_Runtime.field(localM, 'tx') + ((a * _Runtime.field(child, 'pivotX')) + (c * _Runtime.field(child, 'pivotY')))));
-        _Runtime.setField(child, 'y', (_Runtime.field(localM, 'ty') + ((b * _Runtime.field(child, 'pivotX')) + (d * _Runtime.field(child, 'pivotY')))));
+        var skewYRad:Dynamic = (child.skewY * Hierarchy.DEG_TO_RAD__hierarchy);
+        (child.rotation = cast (((HxMath.atan2(b, a) - skewYRad) * Hierarchy.RAD_TO_DEG__hierarchy) : Dynamic));
+        (child.x = cast ((_Runtime.field(localM, 'tx') + ((a * child.pivotX) + (c * child.pivotY))) : Dynamic));
+        (child.y = cast ((_Runtime.field(localM, 'ty') + ((b * child.pivotX) + (d * child.pivotY))) : Dynamic));
         _Runtime.callValue(invalidateNodeLocalTransform, cast ([child] : Array<Dynamic>));
       } catch (__error:Dynamic) { throw __error; }
     } catch (__finallyError0:Dynamic) {

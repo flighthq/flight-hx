@@ -37,7 +37,7 @@ class SceneNodeCulling {
         _Runtime.callValue(computeMeshGeometryBounds, cast ([SceneNodeCulling._scratchLocalAabb__sceneNodeCulling, geom] : Array<Dynamic>));
         (localBounds = cast (SceneNodeCulling._scratchLocalAabb__sceneNodeCulling : Dynamic));
       }
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(localBounds, 'min').x, _Runtime.field(localBounds, 'max').x, '<='))) {
+      if (_Runtime.truthy(_Runtime.compare(localBounds.min.x, localBounds.max.x, '<='))) {
         _Runtime.callValue(ensureNodeWorldMatrix4, cast ([node] : Array<Dynamic>));
         var worldMatrix:Dynamic = _Runtime.callValue(getNodeWorldMatrix4, cast ([node] : Array<Dynamic>));
         _Runtime.callValue(transformAabbByMatrix4, cast ([SceneNodeCulling._scratchWorldAabb__sceneNodeCulling, localBounds, worldMatrix] : Array<Dynamic>));

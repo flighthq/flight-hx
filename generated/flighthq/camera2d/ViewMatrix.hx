@@ -11,8 +11,8 @@ import flighthq.types.Matrix.MatrixLike;
 class ViewMatrix {
   public static function getCamera2DViewMatrix(camera:Camera2D, out:MatrixLike):Void {
     var zoom:Dynamic = cast _Runtime.UNDEFINED;
-    zoom = _Runtime.field(camera, 'zoom');
-    _Runtime.callValue(setTransformMatrix, cast ([out, zoom, zoom, -_Runtime.field(camera, 'rotation'), (_Runtime.field(camera, 'viewportWidth') * 0.5), (_Runtime.field(camera, 'viewportHeight') * 0.5)] : Array<Dynamic>));
-    _Runtime.callValue(translateMatrixByVectorXY, cast ([out, out, -_Runtime.field(camera, 'x'), -_Runtime.field(camera, 'y')] : Array<Dynamic>));
+    zoom = camera.zoom;
+    _Runtime.callValue(setTransformMatrix, cast ([out, zoom, zoom, -camera.rotation, (camera.viewportWidth * 0.5), (camera.viewportHeight * 0.5)] : Array<Dynamic>));
+    _Runtime.callValue(translateMatrixByVectorXY, cast ([out, out, -camera.x, -camera.y] : Array<Dynamic>));
   }
 }

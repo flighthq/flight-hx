@@ -14,7 +14,7 @@ class VisibleBounds {
   public static function getCamera2DVisibleBounds(camera:Camera2D, out:RectangleLike):Void {
     _Runtime.callValue(getCamera2DViewMatrix, cast ([camera, VisibleBounds.scratchMatrix__visibleBounds] : Array<Dynamic>));
     _Runtime.callValue(inverseMatrix, cast ([VisibleBounds.scratchInverse__visibleBounds, VisibleBounds.scratchMatrix__visibleBounds] : Array<Dynamic>));
-    _Runtime.callValue(matrixTransformBounds, cast ([out, VisibleBounds.scratchInverse__visibleBounds, 0.0, 0.0, _Runtime.field(camera, 'viewportWidth'), _Runtime.field(camera, 'viewportHeight')] : Array<Dynamic>));
+    _Runtime.callValue(matrixTransformBounds, cast ([out, VisibleBounds.scratchInverse__visibleBounds, 0.0, 0.0, camera.viewportWidth, camera.viewportHeight] : Array<Dynamic>));
   }
 
   public static final scratchInverse__visibleBounds:Dynamic = _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>));

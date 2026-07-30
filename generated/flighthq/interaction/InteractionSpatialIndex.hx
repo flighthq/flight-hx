@@ -59,10 +59,10 @@ class InteractionSpatialIndex {
       var rank:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(rank, _Runtime.field(nodes, 'length'), '<'))) {
         var bounds:Dynamic = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([(cast _Runtime.getIndex(nodes, rank) : DisplayObject)] : Array<Dynamic>));
-        _Runtime.setField(InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex, 'minX', _Runtime.field(bounds, 'x'));
-        _Runtime.setField(InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex, 'minY', _Runtime.field(bounds, 'y'));
-        _Runtime.setField(InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex, 'maxX', (_Runtime.field(bounds, 'x') + _Runtime.field(bounds, 'width')));
-        _Runtime.setField(InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex, 'maxY', (_Runtime.field(bounds, 'y') + _Runtime.field(bounds, 'height')));
+        (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.minX = cast (_Runtime.field(bounds, 'x') : Dynamic));
+        (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.minY = cast (_Runtime.field(bounds, 'y') : Dynamic));
+        (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.maxX = cast ((_Runtime.field(bounds, 'x') + _Runtime.field(bounds, 'width')) : Dynamic));
+        (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.maxY = cast ((_Runtime.field(bounds, 'y') + _Runtime.field(bounds, 'height')) : Dynamic));
         _Runtime.callValue(insertSpatialObject, cast ([index, (cast rank : SpatialObjectId), InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex] : Array<Dynamic>));
         rank++;
       }
