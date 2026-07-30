@@ -102,6 +102,8 @@ Migration is leaf-first so compile failures remain local and each step reduces r
 
 Each tranche starts with an allowlist of canonical schema identities. Expanding the allowlist is reviewed from the audit diff; eligibility must not silently widen because an upstream alias changed.
 
+Each allowlist entry also has an explicit `audit-only` or `direct` emission mode. Semantic eligibility is reported independently from that mode. An eligible `audit-only` schema contributes pending-access counts but cannot create an IR binding or change generated Haxe; review advances the entry to `direct` only after accepting the audit diff.
+
 The initial canonical candidate allowlist is:
 
 - `@flighthq/types:upstream/packages/types/src/Vector2.ts#Vector2`

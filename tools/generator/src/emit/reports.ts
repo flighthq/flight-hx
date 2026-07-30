@@ -72,25 +72,28 @@ export function typedStructSummary(audit: TypedStructAudit): string {
     '',
     `Upstream commit: \`${audit.upstreamCommit}\``,
     '',
-    'Direct typed-struct expression emission is enabled for every eligible schema.',
+    'Eligibility is audited independently from emission. Audit-only schemas remain reflective until their audit diff is approved.',
     '',
     '| Metric | Count |',
     '| --- | ---: |',
     `| Candidates | ${audit.summary.candidates} |`,
     `| Eligible | ${audit.summary.eligible} |`,
     `| Ineligible | ${audit.summary.ineligible} |`,
+    `| Audit-only schemas | ${audit.summary.auditOnlySchemas} |`,
+    `| Direct schemas | ${audit.summary.directSchemas} |`,
     `| Declared fields | ${audit.summary.fields} |`,
     `| Bindable accesses | ${audit.summary.bindableAccesses} |`,
+    `| Pending accesses | ${audit.summary.pendingAccesses} |`,
     `| Directly emitted accesses | ${audit.summary.directAccesses} |`,
     `| Reflective survivors | ${audit.summary.reflectiveSurvivors} |`,
     `| Dynamic escapes | ${audit.summary.escapes} |`,
     '',
-    '| Candidate | Purpose | Fields | Reads | Writes | Calls | Direct | Reflective survivors | Escapes | Eligible | Reasons |',
-    '| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | :---: | --- |',
+    '| Candidate | Mode | Purpose | Fields | Reads | Writes | Calls | Pending | Direct | Reflective survivors | Escapes | Eligible | Reasons |',
+    '| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | :---: | --- |',
   ];
   for (const candidate of audit.candidates) {
     lines.push(
-      `| \`${candidate.name}\` | ${candidate.purpose} | ${candidate.fields.length} | ${candidate.accesses.reads} | ${candidate.accesses.writes} | ${candidate.accesses.calls} | ${candidate.emission.directAccesses} | ${candidate.emission.reflectiveSurvivors.reduce((total, survivor) => total + survivor.accesses, 0)} | ${candidate.escapes.length} | ${candidate.eligible ? 'yes' : 'no'} | ${candidate.reasons.length > 0 ? candidate.reasons.map((reason) => `\`${reason}\``).join(', ') : '—'} |`,
+      `| \`${candidate.name}\` | \`${candidate.emission.mode}\` | ${candidate.purpose} | ${candidate.fields.length} | ${candidate.accesses.reads} | ${candidate.accesses.writes} | ${candidate.accesses.calls} | ${candidate.emission.pendingAccesses} | ${candidate.emission.directAccesses} | ${candidate.emission.reflectiveSurvivors.reduce((total, survivor) => total + survivor.accesses, 0)} | ${candidate.escapes.length} | ${candidate.eligible ? 'yes' : 'no'} | ${candidate.reasons.length > 0 ? candidate.reasons.map((reason) => `\`${reason}\``).join(', ') : '—'} |`,
     );
   }
   lines.push('');

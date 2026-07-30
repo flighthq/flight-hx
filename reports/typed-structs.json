@@ -11,6 +11,8 @@
       "eligible": true,
       "emission": {
         "directAccesses": 322,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -57,6 +59,8 @@
       "eligible": true,
       "emission": {
         "directAccesses": 1140,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -111,6 +115,8 @@
       "eligible": true,
       "emission": {
         "directAccesses": 216,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -173,6 +179,8 @@
       "eligible": true,
       "emission": {
         "directAccesses": 49,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -211,6 +219,8 @@
       "eligible": true,
       "emission": {
         "directAccesses": 115,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -249,6 +259,8 @@
       "eligible": false,
       "emission": {
         "directAccesses": 0,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -326,6 +338,8 @@
       "eligible": true,
       "emission": {
         "directAccesses": 215,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -408,17 +422,1772 @@
       "purpose": "render-hot RGBA multiplier and offset record",
       "reasons": [],
       "source": "upstream/packages/types/src/ColorTransform.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 5,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:6da530e1a42c7e3a45d4d16e018a2403a0457de4ad6ce1f2ab5ad26993e83fc5",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 5,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "backgroundFrameRate",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "fixedTimeStep",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "maxDeltaTime",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "maxUpdatesPerFrame",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "targetFrameRate",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/ApplicationLoopOptions.ts#ApplicationLoopOptions",
+      "memberEscapes": [],
+      "name": "ApplicationLoopOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "application-loop option record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/ApplicationLoopOptions.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 4,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:9210d61ab3b5c83f9cee9723c9836095f16b8e0b3ce41a73704d227c93b6dfe7",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 4,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "gain",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "muted",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "name",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "pan",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/AudioBus.ts#AudioBusOptions",
+      "memberEscapes": [],
+      "name": "AudioBusOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "audio-bus option record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/AudioBus.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 4,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:07c7981f0fa5015691d9aecdffec83d3e8aa66cc930ba16af85e6de948189e8f",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 4,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "currentTime",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "gain",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "loops",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "playbackRate",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/AudioResource.ts#AudioPlayOptions",
+      "memberEscapes": [],
+      "name": "AudioPlayOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "audio-playback option record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/AudioResource.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 8,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:2ce3c70c7b5ec3d8a6559fbd1d31675efc82b30a5c1d78f8c43af58fa83e2ef7",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 8,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "allowRotation",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "border",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "growable",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "maxHeight",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "maxWidth",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "padding",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "powerOfTwo",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "square",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean | undefined"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/BinPack.ts#BinPackOptions",
+      "memberEscapes": [],
+      "name": "BinPackOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "bin-packing option record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/BinPack.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 12,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:30b3f8bb3e2d7fc885abd15048874ed6359a1c0c62dca87dbb12219b721bfea0",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 12,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "align",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "BitmapTextAlign | undefined"
+        },
+        {
+          "name": "color",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "letterSpacing",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "lineHeight",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "text",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "wrapWidth",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | null | undefined"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/BitmapText.ts#BitmapTextOptions",
+      "memberEscapes": [],
+      "name": "BitmapTextOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "bitmap-text option record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/BitmapText.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 0,
+        "writes": 6
+      },
+      "declarationFingerprint": "sha256:feb134ddf3519fe7ed01774dd8bc12ec3f7521c5e507b4cf93efb4bc88b56ee0",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 6,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "hasKeyboard",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean"
+        },
+        {
+          "name": "hasMouse",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean"
+        },
+        {
+          "name": "hasStylus",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/DeviceCapabilities.ts#DeviceCapabilities",
+      "memberEscapes": [],
+      "name": "DeviceCapabilities",
+      "packageName": "@flighthq/types",
+      "purpose": "device capability result record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/DeviceCapabilities.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 0,
+        "writes": 14
+      },
+      "declarationFingerprint": "sha256:fd5b657fabf51d428cdc82826b34ec7bec63021ebe69311aa6204fa508c6be76",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 14,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "colorDepth",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "densityDpi",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "logicalHeight",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "logicalWidth",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "physicalHeight",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "physicalWidth",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "pixelRatio",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/DeviceDisplayMetrics.ts#DeviceDisplayMetrics",
+      "memberEscapes": [],
+      "name": "DeviceDisplayMetrics",
+      "packageName": "@flighthq/types",
+      "purpose": "device display-metrics result record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/DeviceDisplayMetrics.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 12,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:53c050ed33cc396f7b2b0a42259ba0d150ab85aaabfb793de56538c274ec258e",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 12,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "kind",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "\"File\" | \"Directory\""
+        },
+        {
+          "name": "name",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string"
+        },
+        {
+          "name": "path",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | null"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/Dialog.ts#FileDialogHandle",
+      "memberEscapes": [],
+      "name": "FileDialogHandle",
+      "packageName": "@flighthq/types",
+      "purpose": "file-dialog result handle",
+      "reasons": [],
+      "source": "upstream/packages/types/src/Dialog.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 6,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:90b88974fa401779beea4ea28f131baed780d42c8ed8a9e9d2bbdf626f5a2a9d",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 6,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "blackTighten",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "contrast",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "linearLength",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "linearStart",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "maxBrightness",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "pedestal",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/FilmicToneMapOptions.ts#FilmicToneMapOptions",
+      "memberEscapes": [],
+      "name": "FilmicToneMapOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "filmic tone-map option record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/FilmicToneMapOptions.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 9,
+        "writes": 8
+      },
+      "declarationFingerprint": "sha256:6ba8523047f4f3ad5cca4aac77c669aa28d57295fdb2d2e9ae2af6feafb4adf7",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 17,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "ascent",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "capHeight",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "descent",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "lineGap",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "underlinePosition",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "underlineThickness",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "unitsPerEm",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "xHeight",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/FontMetrics.ts#FontMetrics",
+      "memberEscapes": [],
+      "name": "FontMetrics",
+      "packageName": "@flighthq/types",
+      "purpose": "font-metrics result record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/FontMetrics.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 7,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:0e4e882c018edcf42950aa1ffa8e7c33e117c5021bf9aaf9df71ea1547866b3c",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 7,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "fontFamily",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string"
+        },
+        {
+          "name": "fontSize",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "height",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "maxGlyphs",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "padding",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "width",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/GlyphSource.ts#GlyphAtlasOptions",
+      "memberEscapes": [],
+      "name": "GlyphAtlasOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "glyph-atlas option record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/GlyphSource.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 11,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:0eb6596ab428f58bb83ef3c812867a6539e640d5c18b243b4e76a11c5b205617",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 11,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "ascent",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "descent",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "lineGap",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/GlyphSource.ts#GlyphMetrics",
+      "memberEscapes": [],
+      "name": "GlyphMetrics",
+      "packageName": "@flighthq/types",
+      "purpose": "glyph-metrics result record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/GlyphSource.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 8,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:41c7407d7cd069a73c5d57fee671d76247ab5f92dfb2173c052ae8224759b857",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 8,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "fontFamily",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string"
+        },
+        {
+          "name": "fontSize",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "fontStyle",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "fontWeight",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | number | undefined"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/GlyphSource.ts#GlyphRasterizeOptions",
+      "memberEscapes": [],
+      "name": "GlyphRasterizeOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "glyph-rasterization option record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/GlyphSource.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 0,
+        "writes": 10
+      },
+      "declarationFingerprint": "sha256:493ca4196d2dc3374693378a6d9043ca983c1eaafd0ffb8973b1edd62f841d28",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 10,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "amplitudeControl",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean"
+        },
+        {
+          "name": "customEvents",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean"
+        },
+        {
+          "name": "intensity",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean"
+        },
+        {
+          "name": "patterns",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean"
+        },
+        {
+          "name": "supported",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/Haptics.ts#HapticsCapabilities",
+      "memberEscapes": [],
+      "name": "HapticsCapabilities",
+      "packageName": "@flighthq/types",
+      "purpose": "haptics capability result record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/Haptics.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 3,
+        "writes": 4
+      },
+      "declarationFingerprint": "sha256:f6f3872e38d26fd5c0c360caad23d753be822f63cb968e3c284ab16d66ff612e",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 7,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "axis",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "gamepad",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "timeStamp",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "value",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/InputGamepadData.ts#InputGamepadAxisData",
+      "memberEscapes": [],
+      "name": "InputGamepadAxisData",
+      "packageName": "@flighthq/types",
+      "purpose": "gamepad-axis input result record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/InputGamepadData.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 4,
+        "writes": 4
+      },
+      "declarationFingerprint": "sha256:67611d7cfb4735a3bd32f9efeacecff3a61b78eab1a7a05b8eeac35d932b0944",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 8,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "button",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "gamepad",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "timeStamp",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "value",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/InputGamepadData.ts#InputGamepadButtonData",
+      "memberEscapes": [],
+      "name": "InputGamepadButtonData",
+      "packageName": "@flighthq/types",
+      "purpose": "gamepad-button input result record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/InputGamepadData.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 4,
+        "writes": 6
+      },
+      "declarationFingerprint": "sha256:4177d3531b0c1218bdfe2219f99275e7b1be1971b99912f52f8debe397599417",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 10,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "gamepad",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "id",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string"
+        },
+        {
+          "name": "mapping",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "GamepadMapping"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/InputGamepadData.ts#InputGamepadConnectData",
+      "memberEscapes": [],
+      "name": "InputGamepadConnectData",
+      "packageName": "@flighthq/types",
+      "purpose": "gamepad-connection input result record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/InputGamepadData.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 1,
+        "writes": 4
+      },
+      "declarationFingerprint": "sha256:ccd247bbdcefcf45f723d0a33eeb2d3cc4c690b9b1802a4d99adf76644e9d73f",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 5,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "isComposing",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean"
+        },
+        {
+          "name": "text",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/InputTextData.ts#InputTextData",
+      "memberEscapes": [],
+      "name": "InputTextData",
+      "packageName": "@flighthq/types",
+      "purpose": "text-input result record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/InputTextData.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 12,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:034806c53b63b6077ead04323f22478a19925c34cd79a170cacfc8b5e01b4da4",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 12,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "altKey",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "buttons",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "ctrlKey",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "metaKey",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "pointerId",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "pointerType",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "PointerType | undefined"
+        },
+        {
+          "name": "shiftKey",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean | undefined"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/InteractionManager.ts#InteractionPointerOptions",
+      "memberEscapes": [],
+      "name": "InteractionPointerOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "interaction-pointer option record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/InteractionManager.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 7,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:77f27bd1ddb42906bc777d6ec44717fb5c614f61f8351f86314d8f65fdfa8d74",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 7,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "fillRule",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "PathWinding | undefined"
+        },
+        {
+          "name": "tolerance",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/PathBooleanOptions.ts#PathBooleanOptions",
+      "memberEscapes": [],
+      "name": "PathBooleanOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "path-boolean option record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/PathBooleanOptions.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 5,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:58496674ac809c68befeef91aea257e966fec422df3b0a676931ea4736ed37e0",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 5,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "arcTolerance",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "end",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "PathOffsetEnd | undefined"
+        },
+        {
+          "name": "join",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "PathOffsetJoin | undefined"
+        },
+        {
+          "name": "miterLimit",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "tolerance",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/PathOffsetOptions.ts#PathOffsetOptions",
+      "memberEscapes": [],
+      "name": "PathOffsetOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "path-offset option record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/PathOffsetOptions.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 9,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:defad2198c51a0a8b548f362dec9f66bc0f1f1c0362f81bbd9272a3d48ae62de",
+      "declarationKind": "type",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 9,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "minHeight",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "minWidth",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "padding",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/RenderCacheRefreshOptions.ts#RenderCacheRefreshOptions",
+      "memberEscapes": [],
+      "name": "RenderCacheRefreshOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "render-cache refresh option record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/RenderCacheRefreshOptions.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 1,
+        "writes": 10
+      },
+      "declarationFingerprint": "sha256:baf105696afc3a95b25b0bb94d2213bb3e4ae1f2e12440ec8fe44751dc5f0ce3",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 11,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "color",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "height",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "overlaysContent",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean"
+        },
+        {
+          "name": "style",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "StatusBarStyle"
+        },
+        {
+          "name": "visible",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/StatusBar.ts#StatusBarInfo",
+      "memberEscapes": [],
+      "name": "StatusBarInfo",
+      "packageName": "@flighthq/types",
+      "purpose": "status-bar result record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/StatusBar.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 0,
+        "writes": 6
+      },
+      "declarationFingerprint": "sha256:7f31b4bdfeab17b6c516914031a3edd6f4ba0572631550ebbcd7b90d2e985680",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 6,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "height",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "numLines",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        },
+        {
+          "name": "width",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/TextMetrics.ts#TextMetrics",
+      "memberEscapes": [],
+      "name": "TextMetrics",
+      "packageName": "@flighthq/types",
+      "purpose": "text-metrics result record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/TextMetrics.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 7,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:cde84e659e6cb64716aa79f9915d8eeea1e6f8ea8b24f44d5c1e5f7360052768",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 7,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "icon",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "iconType",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "\"none\" | \"info\" | \"warning\" | \"error\" | undefined"
+        },
+        {
+          "name": "largeIcon",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "noSound",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "respectQuietTime",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "text",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string"
+        },
+        {
+          "name": "title",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/Tray.ts#TrayBalloonOptions",
+      "memberEscapes": [],
+      "name": "TrayBalloonOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "tray-balloon option record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/Tray.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 4,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:c24ea8ca07cc852b9c31dff22d313919cb474b76f72883496272ba045776c236",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 4,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "currentTime",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "gain",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "loops",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "playbackRate",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number | undefined"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/VideoResource.ts#VideoPlayOptions",
+      "memberEscapes": [],
+      "name": "VideoPlayOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "video-playback option record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/VideoResource.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 8,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:4f40c87a867dc2c65bfcd8b5f2b66021d2d15e97b89977e5c19568929bb5da0c",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 8,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "crossOrigin",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "muted",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "playsInline",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "preload",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "readiness",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "\"metadata\" | \"canplay\" | \"canplaythrough\" | undefined"
+        }
+      ],
+      "id": "@flighthq/types:upstream/packages/types/src/VideoResource.ts#VideoResourceLoadOptions",
+      "memberEscapes": [],
+      "name": "VideoResourceLoadOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "video-resource load option record",
+      "reasons": [],
+      "source": "upstream/packages/types/src/VideoResource.ts"
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 4,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:9ff1029d5c3091e092ff0d59362f51d66eed27c820470f270b0a384f0b0e01b6",
+      "declarationKind": "interface",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 4,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "leading",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "trailing",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean | undefined"
+        }
+      ],
+      "id": "@flighthq/signals:upstream/packages/signals/src/throttle.ts#SignalThrottleOptions",
+      "memberEscapes": [],
+      "name": "SignalThrottleOptions",
+      "packageName": "@flighthq/signals",
+      "purpose": "signal-throttle option record",
+      "reasons": [],
+      "source": "upstream/packages/signals/src/throttle.ts"
     }
   ],
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "summary": {
-    "bindableAccesses": 2057,
-    "candidates": 7,
+    "auditOnlySchemas": 28,
+    "bindableAccesses": 2284,
+    "candidates": 35,
     "directAccesses": 2057,
-    "eligible": 6,
+    "directSchemas": 6,
+    "eligible": 34,
     "escapes": 2,
-    "fields": 23,
+    "fields": 151,
     "ineligible": 1,
+    "pendingAccesses": 227,
     "reflectiveSurvivors": 0
   },
   "upstreamCommit": "5d24729f7360475e28a105ae0caeeaa2e1328260"
