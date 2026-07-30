@@ -38,9 +38,13 @@ class LimeTypedArraySmoke {
     WebGl2Backend.bufferData(gl, 1, floats, 2);
     if (!Std.isOfType(gl.upload, Array)) throw 'GL upload did not receive native storage';
     WebGl2Backend.shaderSource(gl, null,
-      '#version 300 es\nprecision highp float;\nuniform highp sampler2D texture;\nvoid main() {}');
+      '#version 300 es\nprecision highp float;\n// Sébastien — shader comment\nuniform highp sampler2D texture;\nvoid main() {}');
     if (!StringTools.startsWith(gl.shader, '#version 330 core\n')) throw 'desktop shader version';
     if (gl.shader.indexOf('precision') >= 0 || gl.shader.indexOf('highp') >= 0) throw 'desktop shader precision';
+    for (index in 0...gl.shader.length) {
+      if (gl.shader.charCodeAt(index) > 0x7f) throw 'native shader source was not narrowed to ASCII';
+    }
+    if (gl.shader.indexOf('void main() {}') < 0) throw 'native shader source lost GLSL';
 
     gl.type = 'opengles';
     WebGl2Backend.shaderSource(gl, null, '#version 300 es\nprecision highp float;');

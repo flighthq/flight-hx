@@ -591,7 +591,7 @@ class WebGl2Backend {
 
   public static inline function shaderSource(gl:GlContext, shader:GlShader, source:String):Void {
     #if (lime && !js)
-    final adapted = adaptShaderSource(gl, source);
+    final adapted = toNativeShaderSource(adaptShaderSource(gl, source));
     #if flight_gl_trace
     glTrace('shaderSource: context.type=' + Std.string(Reflect.field(gl, 'type')) + ', head=' + StringTools.replace(adapted.substr(0, 40), '\n', '\\n'));
     #end
@@ -913,6 +913,23 @@ class WebGl2Backend {
       : '#version 330 core\n' + source;
     result = ~/^\s*precision\s+\w+\s+\w+\s*;\s*$/gm.replace(result, '');
     return ~/\b(lowp|mediump|highp)\s+/g.replace(result, '');
+  }
+
+  /**
+   * Lime's hxcpp Prime binding forwards `String` to the native OpenGL
+   * `HxString` ABI. A smart-string UTF-16 buffer has the same struct layout
+   * but not the narrow byte representation that `glShaderSource` consumes,
+   * so its first ASCII character is followed by a zero byte. GLSL tokens are
+   * ASCII; replace non-ASCII comment text while copying through `Bytes` so
+   * hxcpp materializes a narrow string.
+   */
+  static function toNativeShaderSource(source:String):String {
+    final bytes = haxe.io.Bytes.alloc(source.length);
+    for (index in 0...source.length) {
+      final code = source.charCodeAt(index);
+      bytes.set(index, code != null && code <= 0x7f ? code : 0x20);
+    }
+    return bytes.toString();
   }
 
   static function nativeFloats(values:GlFloatList):lime.utils.ArrayBufferView {
