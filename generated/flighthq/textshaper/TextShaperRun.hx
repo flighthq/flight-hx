@@ -47,14 +47,14 @@ class TextShaperRun {
     var metrics:Dynamic = cast _Runtime.UNDEFINED;
     metrics = _Runtime.callValue(getFontMetrics, cast ([format] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(metrics, null))) { return cast false; }
-    _Runtime.setField(out, 'ascent', _Runtime.field(metrics, 'ascent'));
-    _Runtime.setField(out, 'capHeight', _Runtime.field(metrics, 'capHeight'));
-    _Runtime.setField(out, 'descent', _Runtime.field(metrics, 'descent'));
-    _Runtime.setField(out, 'lineGap', _Runtime.field(metrics, 'lineGap'));
-    _Runtime.setField(out, 'underlinePosition', _Runtime.field(metrics, 'underlinePosition'));
-    _Runtime.setField(out, 'underlineThickness', _Runtime.field(metrics, 'underlineThickness'));
-    _Runtime.setField(out, 'unitsPerEm', _Runtime.field(metrics, 'unitsPerEm'));
-    _Runtime.setField(out, 'xHeight', _Runtime.field(metrics, 'xHeight'));
+    (out.ascent = cast (metrics.ascent : Dynamic));
+    (out.capHeight = cast (metrics.capHeight : Dynamic));
+    (out.descent = cast (metrics.descent : Dynamic));
+    (out.lineGap = cast (metrics.lineGap : Dynamic));
+    (out.underlinePosition = cast (metrics.underlinePosition : Dynamic));
+    (out.underlineThickness = cast (metrics.underlineThickness : Dynamic));
+    (out.unitsPerEm = cast (metrics.unitsPerEm : Dynamic));
+    (out.xHeight = cast (metrics.xHeight : Dynamic));
     return cast true;
     return cast null;
   }
@@ -65,7 +65,7 @@ class TextShaperRun {
     metrics = _Runtime.callValue(getFontMetrics, cast ([format] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(metrics, null))) { return cast -1.0; }
     size = _Runtime.coalesce(_Runtime.field(format, 'size'), function():Dynamic return cast 12.0);
-    return cast (size / _Runtime.field(metrics, 'unitsPerEm'));
+    return cast (size / metrics.unitsPerEm);
     return cast null;
   }
 

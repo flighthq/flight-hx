@@ -41,7 +41,7 @@ class AudioMixer {
   }
 
   public static function createAudioBus(?options:AudioBusOptions):AudioBus {
-    return cast { gain: _Runtime.coalesce(_Runtime.optionalField(options, 'gain'), function():Dynamic return cast 1.0), muted: _Runtime.coalesce(_Runtime.optionalField(options, 'muted'), function():Dynamic return cast false), name: _Runtime.coalesce(_Runtime.optionalField(options, 'name'), function():Dynamic return cast ''), pan: _Runtime.coalesce(_Runtime.optionalField(options, 'pan'), function():Dynamic return cast 0.0) };
+    return cast { gain: _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.gain; }), function():Dynamic return cast 1.0), muted: _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.muted; }), function():Dynamic return cast false), name: _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.name; }), function():Dynamic return cast ''), pan: _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.pan; }), function():Dynamic return cast 0.0) };
     return cast null;
   }
 
@@ -86,7 +86,7 @@ class AudioMixer {
     var gainNode:Dynamic = cast _Runtime.UNDEFINED;
     var now:Dynamic = cast _Runtime.UNDEFINED;
     runtime = ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap).get(mixer));
-    gainNode = ({ final __collection8:Dynamic = _Runtime.optionalField(runtime, 'busGainNodes'); __collection8 == null ? _Runtime.UNDEFINED : ((cast __collection8 : flighthq._internal._Map).get(bus)); });
+    gainNode = ({ final __collection12:Dynamic = _Runtime.optionalField(runtime, 'busGainNodes'); __collection12 == null ? _Runtime.UNDEFINED : ((cast __collection12 : flighthq._internal._Map).get(bus)); });
     if (_Runtime.truthy(_Runtime.strictEquals(gainNode, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.setField(bus, 'gain', targetGain);
       return;

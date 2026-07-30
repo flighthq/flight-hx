@@ -42,9 +42,9 @@ class TextLabelLayout {
     var layout:Dynamic = cast _Runtime.UNDEFINED;
     layout = _Runtime.callValue(getTextLayout, cast ([source] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(layout, null))) {
-      _Runtime.setField(out, 'height', 0.0);
-      _Runtime.setField(out, 'numLines', 0.0);
-      _Runtime.setField(out, 'width', 0.0);
+      (out.height = cast (0.0 : Dynamic));
+      (out.numLines = cast (0.0 : Dynamic));
+      (out.width = cast (0.0 : Dynamic));
       return;
     }
     _Runtime.callValue(getTextMetrics, cast ([out, layout] : Array<Dynamic>));

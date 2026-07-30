@@ -1157,9 +1157,9 @@ class Filesystem {
       flighthq._internal._Async.protect(function():Dynamic {
         var fsHandle:Dynamic = cast _Runtime.UNDEFINED;
         var __flowBranch105:Dynamic;
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(handle, 'path'), null))) {
+        if (_Runtime.truthy(!_Runtime.strictEquals(handle.path, null))) {
           __flowBranch105 = flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readBinaryFile', cast ([_Runtime.field(handle, 'path')] : Array<Dynamic>)));
+            return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readBinaryFile', cast ([handle.path] : Array<Dynamic>)));
           });
         } else {
           __flowBranch105 = flighthq._internal._Async.flowNormal();
@@ -1191,7 +1191,7 @@ class Filesystem {
           }
           return flighthq._internal._Async.continueFlow(__flowBranch106, function():Dynamic {
             var __flowBranch109:Dynamic;
-            if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(handle, 'name'), ''))) {
+            if (_Runtime.truthy(_Runtime.strictEquals(handle.name, ''))) {
               __flowBranch109 = flighthq._internal._Async.protect(function():Dynamic {
                 return flighthq._internal._Async.flowReturn(null);
               });
@@ -1199,7 +1199,7 @@ class Filesystem {
               __flowBranch109 = flighthq._internal._Async.flowNormal();
             }
             return flighthq._internal._Async.continueFlow(__flowBranch109, function():Dynamic {
-              return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readBinaryFile', cast ([_Runtime.field(handle, 'name')] : Array<Dynamic>)));
+              return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readBinaryFile', cast ([handle.name] : Array<Dynamic>)));
             });
           });
         });
@@ -1212,9 +1212,9 @@ class Filesystem {
       flighthq._internal._Async.protect(function():Dynamic {
         var fsHandle:Dynamic = cast _Runtime.UNDEFINED;
         var __flowBranch110:Dynamic;
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(handle, 'path'), null))) {
+        if (_Runtime.truthy(!_Runtime.strictEquals(handle.path, null))) {
           __flowBranch110 = flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readTextFile', cast ([_Runtime.field(handle, 'path')] : Array<Dynamic>)));
+            return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readTextFile', cast ([handle.path] : Array<Dynamic>)));
           });
         } else {
           __flowBranch110 = flighthq._internal._Async.flowNormal();
@@ -1246,7 +1246,7 @@ class Filesystem {
           }
           return flighthq._internal._Async.continueFlow(__flowBranch111, function():Dynamic {
             var __flowBranch114:Dynamic;
-            if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(handle, 'name'), ''))) {
+            if (_Runtime.truthy(_Runtime.strictEquals(handle.name, ''))) {
               __flowBranch114 = flighthq._internal._Async.protect(function():Dynamic {
                 return flighthq._internal._Async.flowReturn(null);
               });
@@ -1254,7 +1254,7 @@ class Filesystem {
               __flowBranch114 = flighthq._internal._Async.flowNormal();
             }
             return flighthq._internal._Async.continueFlow(__flowBranch114, function():Dynamic {
-              return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readTextFile', cast ([_Runtime.field(handle, 'name')] : Array<Dynamic>)));
+              return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readTextFile', cast ([handle.name] : Array<Dynamic>)));
             });
           });
         });
@@ -1421,9 +1421,9 @@ class Filesystem {
       flighthq._internal._Async.protect(function():Dynamic {
         var fsHandle:Dynamic = cast _Runtime.UNDEFINED;
         var __flowBranch130:Dynamic;
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(handle, 'path'), null))) {
+        if (_Runtime.truthy(!_Runtime.strictEquals(handle.path, null))) {
           __flowBranch130 = flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'writeBinaryFile', cast ([_Runtime.field(handle, 'path'), data] : Array<Dynamic>)));
+            return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'writeBinaryFile', cast ([handle.path, data] : Array<Dynamic>)));
           });
         } else {
           __flowBranch130 = flighthq._internal._Async.flowNormal();
@@ -1470,9 +1470,9 @@ class Filesystem {
       flighthq._internal._Async.protect(function():Dynamic {
         var fsHandle:Dynamic = cast _Runtime.UNDEFINED;
         var __flowBranch135:Dynamic;
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(handle, 'path'), null))) {
+        if (_Runtime.truthy(!_Runtime.strictEquals(handle.path, null))) {
           __flowBranch135 = flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'writeTextFile', cast ([_Runtime.field(handle, 'path'), data] : Array<Dynamic>)));
+            return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'writeTextFile', cast ([handle.path, data] : Array<Dynamic>)));
           });
         } else {
           __flowBranch135 = flighthq._internal._Async.flowNormal();

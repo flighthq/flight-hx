@@ -129,9 +129,9 @@ class GlCache {
     var dirty:Dynamic = cast _Runtime.UNDEFINED;
     var screenRuntime:Dynamic = cast _Runtime.UNDEFINED;
     screenState = _Runtime.coalesce(((cast GlCache._cacheStateScreen__glCache : flighthq._internal._WeakMap).get(cacheState)), function():Dynamic return cast cacheState);
-    padding = _Runtime.coalesce(_Runtime.optionalField(options, 'padding'), function():Dynamic return cast 0.0);
-    minWidth = _Runtime.coalesce(_Runtime.optionalField(options, 'minWidth'), function():Dynamic return cast 1.0);
-    minHeight = _Runtime.coalesce(_Runtime.optionalField(options, 'minHeight'), function():Dynamic return cast 1.0);
+    padding = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.padding; }), function():Dynamic return cast 0.0);
+    minWidth = _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.minWidth; }), function():Dynamic return cast 1.0);
+    minHeight = _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.minHeight; }), function():Dynamic return cast 1.0);
     _Runtime.callValue(computeNodeBoundsRectangle, cast ([GlCache._bounds__glCache, source, source] : Array<Dynamic>));
     __destructure0 = _Runtime.callValue(computeRenderTargetSize, cast ([GlCache._bounds__glCache, padding, minWidth, minHeight] : Array<Dynamic>));
     width = _Runtime.field(__destructure0, 'width');

@@ -47,11 +47,11 @@ class VideoResourceFrom {
       var onAbort:Dynamic = cast _Runtime.UNDEFINED;
       var cleanup:Dynamic = cast _Runtime.UNDEFINED;
       element = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['video'] : Array<Dynamic>));
-      _Runtime.setField(element, 'preload', (cast _Runtime.coalesce(_Runtime.optionalField(options, 'preload'), function():Dynamic return cast 'auto') : Dynamic));
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.optionalField(options, 'crossOrigin'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(element, 'crossOrigin', _Runtime.field(options, 'crossOrigin')); }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.optionalField(options, 'muted'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(element, 'muted', _Runtime.field(options, 'muted')); }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.optionalField(options, 'playsInline'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(element, 'playsInline', _Runtime.field(options, 'playsInline')); }
-      readyEvent = _Runtime.callValue(VideoResourceFrom.readinessEventName__videoResourceFrom, cast ([_Runtime.optionalField(options, 'readiness')] : Array<Dynamic>));
+      _Runtime.setField(element, 'preload', (cast _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.preload; }), function():Dynamic return cast 'auto') : Dynamic));
+      if (_Runtime.truthy(!_Runtime.strictEquals(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.crossOrigin; }), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(element, 'crossOrigin', options.crossOrigin); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.muted; }), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(element, 'muted', options.muted); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.playsInline; }), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(element, 'playsInline', options.playsInline); }
+      readyEvent = _Runtime.callValue(VideoResourceFrom.readinessEventName__videoResourceFrom, cast ([({ final __typedStruct7 = options; __typedStruct7 == null ? _Runtime.UNDEFINED : __typedStruct7.readiness; })] : Array<Dynamic>));
       onReady = function() {
         _Runtime.callValue(cleanup, cast ([] : Array<Dynamic>));
         _Runtime.callValue(resolve, cast ([_Runtime.callValue(createVideoResource, cast ([element] : Array<Dynamic>))] : Array<Dynamic>));

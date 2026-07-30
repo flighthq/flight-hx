@@ -60,12 +60,12 @@ class ToneMapMath {
     var T:Dynamic = cast _Runtime.UNDEFINED;
     var L:Dynamic = cast _Runtime.UNDEFINED;
     var S:Dynamic = cast _Runtime.UNDEFINED;
-    maxBrightness = _Runtime.coalesce(_Runtime.optionalField(options, 'maxBrightness'), function():Dynamic return cast 1.0);
-    contrast = _Runtime.coalesce(_Runtime.optionalField(options, 'contrast'), function():Dynamic return cast 1.0);
-    linearStart = _Runtime.coalesce(_Runtime.optionalField(options, 'linearStart'), function():Dynamic return cast 0.22);
-    linearLength = _Runtime.coalesce(_Runtime.optionalField(options, 'linearLength'), function():Dynamic return cast 0.4);
-    blackTighten = _Runtime.coalesce(_Runtime.optionalField(options, 'blackTighten'), function():Dynamic return cast 1.33);
-    pedestal = _Runtime.coalesce(_Runtime.optionalField(options, 'pedestal'), function():Dynamic return cast 0.0);
+    maxBrightness = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.maxBrightness; }), function():Dynamic return cast 1.0);
+    contrast = _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.contrast; }), function():Dynamic return cast 1.0);
+    linearStart = _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.linearStart; }), function():Dynamic return cast 0.22);
+    linearLength = _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.linearLength; }), function():Dynamic return cast 0.4);
+    blackTighten = _Runtime.coalesce(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.blackTighten; }), function():Dynamic return cast 1.33);
+    pedestal = _Runtime.coalesce(({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.pedestal; }), function():Dynamic return cast 0.0);
     l0 = (((maxBrightness - linearStart) * linearLength) / contrast);
     L0 = (linearStart - (linearStart / contrast));
     L1 = (linearStart + ((1.0 - linearStart) / contrast));

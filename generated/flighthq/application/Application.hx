@@ -519,11 +519,11 @@ class Application {
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map).get(Application.kLoop__application)), cast ([] : Array<Dynamic>));
     ((cast observers : flighthq._internal._Map).delete_(Application.kPaused__application));
     backend = _Runtime.callValue(getLoopBackend, cast ([] : Array<Dynamic>));
-    maxDeltaTime = _Runtime.coalesce(_Runtime.field(options, 'maxDeltaTime'), function():Dynamic return cast Application.DEFAULT_MAX_DELTA_TIME__application);
-    targetFrameRate = _Runtime.coalesce(_Runtime.field(options, 'targetFrameRate'), function():Dynamic return cast 0.0);
-    backgroundFrameRate = _Runtime.coalesce(_Runtime.field(options, 'backgroundFrameRate'), function():Dynamic return cast Application.DEFAULT_BACKGROUND_FRAME_RATE__application);
-    fixedTimeStep = _Runtime.coalesce(_Runtime.field(options, 'fixedTimeStep'), function():Dynamic return cast Application.DEFAULT_FIXED_TIMESTEP__application);
-    maxUpdatesPerFrame = _Runtime.coalesce(_Runtime.field(options, 'maxUpdatesPerFrame'), function():Dynamic return cast Application.DEFAULT_MAX_UPDATES_PER_FRAME__application);
+    maxDeltaTime = _Runtime.coalesce(options.maxDeltaTime, function():Dynamic return cast Application.DEFAULT_MAX_DELTA_TIME__application);
+    targetFrameRate = _Runtime.coalesce(options.targetFrameRate, function():Dynamic return cast 0.0);
+    backgroundFrameRate = _Runtime.coalesce(options.backgroundFrameRate, function():Dynamic return cast Application.DEFAULT_BACKGROUND_FRAME_RATE__application);
+    fixedTimeStep = _Runtime.coalesce(options.fixedTimeStep, function():Dynamic return cast Application.DEFAULT_FIXED_TIMESTEP__application);
+    maxUpdatesPerFrame = _Runtime.coalesce(options.maxUpdatesPerFrame, function():Dynamic return cast Application.DEFAULT_MAX_UPDATES_PER_FRAME__application);
     frameInterval = _Runtime.select(_Runtime.compare(targetFrameRate, 0.0, '>'), function():Dynamic return cast (1000.0 / targetFrameRate), function():Dynamic return cast 0.0);
     bgInterval = _Runtime.select(_Runtime.compare(backgroundFrameRate, 0.0, '>'), function():Dynamic return cast (1000.0 / backgroundFrameRate), function():Dynamic return cast 0.0);
     loopState = { fixedAccumulator: 0.0, fpsBuffer: cast ([] : Array<Dynamic>), fpsHead: 0.0, frameHandle: (cast null : Dynamic), frameRateAccumulated: 0.0, lastTime: -1.0, maxDeltaTime: maxDeltaTime };

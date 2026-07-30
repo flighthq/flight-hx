@@ -12,8 +12,8 @@ import flighthq.types.Surface;
 class GlyphAtlas {
   public static function createGlyphAtlas(options:GlyphAtlasOptions):flighthq.types.GlyphSource.GlyphAtlas {
     var padding:Dynamic = cast _Runtime.UNDEFINED;
-    padding = _Runtime.coalesce(_Runtime.field(options, 'padding'), function():Dynamic return cast 1.0);
-    return cast { runtime: { bitmaps: _Runtime.construct(_Runtime.globalValue('Map'), []), dirty: false, dirtyMaxX: 0.0, dirtyMaxY: 0.0, dirtyMinX: 0.0, dirtyMinY: 0.0, entries: _Runtime.construct(_Runtime.globalValue('Map'), []), lru: cast ([] : Array<Dynamic>), maxGlyphs: _Runtime.coalesce(_Runtime.field(options, 'maxGlyphs'), function():Dynamic return cast 0.0), metrics: _Runtime.callValue(deriveGlyphMetricsFromFontSize, cast ([_Runtime.field(options, 'fontSize')] : Array<Dynamic>)), packBottom: padding, padding: padding, rasterizeOptions: { fontFamily: _Runtime.field(options, 'fontFamily'), fontSize: _Runtime.field(options, 'fontSize') }, shelves: cast ([] : Array<Dynamic>), surface: _Runtime.callValue(createSurface, cast ([_Runtime.field(options, 'width'), _Runtime.field(options, 'height')] : Array<Dynamic>)) } };
+    padding = _Runtime.coalesce(options.padding, function():Dynamic return cast 1.0);
+    return cast { runtime: { bitmaps: _Runtime.construct(_Runtime.globalValue('Map'), []), dirty: false, dirtyMaxX: 0.0, dirtyMaxY: 0.0, dirtyMinX: 0.0, dirtyMinY: 0.0, entries: _Runtime.construct(_Runtime.globalValue('Map'), []), lru: cast ([] : Array<Dynamic>), maxGlyphs: _Runtime.coalesce(options.maxGlyphs, function():Dynamic return cast 0.0), metrics: _Runtime.callValue(deriveGlyphMetricsFromFontSize, cast ([options.fontSize] : Array<Dynamic>)), packBottom: padding, padding: padding, rasterizeOptions: { fontFamily: options.fontFamily, fontSize: options.fontSize }, shelves: cast ([] : Array<Dynamic>), surface: _Runtime.callValue(createSurface, cast ([options.width, options.height] : Array<Dynamic>)) } };
     return cast null;
   }
 

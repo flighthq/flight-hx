@@ -23,11 +23,11 @@ class CapacitorStatusBar {
     return cast { getInfo: function(out:StatusBarInfo) {
       var info:Dynamic = cast _Runtime.UNDEFINED;
       info = cachedInfo;
-      _Runtime.setField(out, 'color', _Runtime.select(!_Runtime.strictEquals(_Runtime.optionalField(info, 'color'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callValue(CapacitorStatusBar.hexToRgba__capacitorStatusBar, cast ([_Runtime.field(info, 'color')] : Array<Dynamic>)), function():Dynamic return cast 0.0));
-      _Runtime.setField(out, 'height', -1.0);
-      _Runtime.setField(out, 'overlaysContent', _Runtime.coalesce(_Runtime.optionalField(info, 'overlays'), function():Dynamic return cast false));
-      _Runtime.setField(out, 'style', _Runtime.select(!_Runtime.strictEquals(info, null), function():Dynamic return cast _Runtime.callValue(CapacitorStatusBar.toStatusBarStyle__capacitorStatusBar, cast ([_Runtime.field(info, 'style')] : Array<Dynamic>)), function():Dynamic return cast 'default'));
-      _Runtime.setField(out, 'visible', _Runtime.coalesce(_Runtime.optionalField(info, 'visible'), function():Dynamic return cast true));
+      (out.color = cast (_Runtime.select(!_Runtime.strictEquals(_Runtime.optionalField(info, 'color'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callValue(CapacitorStatusBar.hexToRgba__capacitorStatusBar, cast ([_Runtime.field(info, 'color')] : Array<Dynamic>)), function():Dynamic return cast 0.0) : Dynamic));
+      (out.height = cast (-1.0 : Dynamic));
+      (out.overlaysContent = cast (_Runtime.coalesce(_Runtime.optionalField(info, 'overlays'), function():Dynamic return cast false) : Dynamic));
+      (out.style = cast (_Runtime.select(!_Runtime.strictEquals(info, null), function():Dynamic return cast _Runtime.callValue(CapacitorStatusBar.toStatusBarStyle__capacitorStatusBar, cast ([_Runtime.field(info, 'style')] : Array<Dynamic>)), function():Dynamic return cast 'default') : Dynamic));
+      (out.visible = cast (_Runtime.coalesce(_Runtime.optionalField(info, 'visible'), function():Dynamic return cast true) : Dynamic));
       return cast out;
     }, setBackgroundColor: function(color:Float) {
       flighthq._internal._Async.recover(_Runtime.callProperty(statusBar, 'setBackgroundColor', cast ([{ color: _Runtime.callValue(CapacitorStatusBar.rgbaToHex__capacitorStatusBar, cast ([color] : Array<Dynamic>)) }] : Array<Dynamic>)), function() {

@@ -93,11 +93,11 @@ class Statusbar {
 
   public static function createWebStatusBarBackend():StatusBarBackend {
     return cast { getInfo: function(out:StatusBarInfo) {
-      _Runtime.setField(out, 'color', _Runtime.callValue(Statusbar._webReadThemeColor__statusbar, cast ([] : Array<Dynamic>)));
-      _Runtime.setField(out, 'height', -1.0);
-      _Runtime.setField(out, 'overlaysContent', false);
-      _Runtime.setField(out, 'style', 'default');
-      _Runtime.setField(out, 'visible', true);
+      (out.color = cast (_Runtime.callValue(Statusbar._webReadThemeColor__statusbar, cast ([] : Array<Dynamic>)) : Dynamic));
+      (out.height = cast (-1.0 : Dynamic));
+      (out.overlaysContent = cast (false : Dynamic));
+      (out.style = cast ('default' : Dynamic));
+      (out.visible = cast (true : Dynamic));
       return cast out;
     }, setBackgroundColor: function(color:Float, ?_animated:Bool) {
       var head:Dynamic = cast _Runtime.UNDEFINED;
@@ -146,7 +146,7 @@ class Statusbar {
   }
 
   public static function getStatusBarHeight():Float {
-    return cast _Runtime.field(_Runtime.callProperty(_Runtime.callValue(getStatusBarBackend, cast ([] : Array<Dynamic>)), 'getInfo', cast ([Statusbar._scratchInfo__statusbar] : Array<Dynamic>)), 'height');
+    return cast _Runtime.callProperty(_Runtime.callValue(getStatusBarBackend, cast ([] : Array<Dynamic>)), 'getInfo', cast ([Statusbar._scratchInfo__statusbar] : Array<Dynamic>)).height;
     return cast null;
   }
 

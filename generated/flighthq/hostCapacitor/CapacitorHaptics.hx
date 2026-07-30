@@ -16,11 +16,11 @@ class CapacitorHaptics {
     return cast { cancel: function() {
       return cast false;
     }, capabilities: function(out:HapticsCapabilities) {
-      _Runtime.setField(out, 'supported', true);
-      _Runtime.setField(out, 'intensity', false);
-      _Runtime.setField(out, 'patterns', false);
-      _Runtime.setField(out, 'amplitudeControl', false);
-      _Runtime.setField(out, 'customEvents', false);
+      (out.supported = cast (true : Dynamic));
+      (out.intensity = cast (false : Dynamic));
+      (out.patterns = cast (false : Dynamic));
+      (out.amplitudeControl = cast (false : Dynamic));
+      (out.customEvents = cast (false : Dynamic));
       return cast out;
     }, impact: function(style:HapticImpactStyle) {
       flighthq._internal._Async.recover(_Runtime.callProperty(haptics, 'impact', cast ([{ style: _Runtime.callValue(CapacitorHaptics.toCapacitorImpactStyle__capacitorHaptics, cast ([style] : Array<Dynamic>)) }] : Array<Dynamic>)), function() {

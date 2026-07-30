@@ -53,7 +53,7 @@ class ElectronTray {
       _Runtime.callProperty(_Runtime.field(record, 'tray'), 'destroy', cast ([] : Array<Dynamic>));
       ((cast trays : flighthq._internal._Map).delete_(id));
     }, displayBalloon: function(id:Dynamic, options:Dynamic) {
-      _Runtime.callOptionalProperty(_Runtime.optionalField(((cast trays : flighthq._internal._Map).get(id)), 'tray'), 'displayBalloon', cast ([{ icon: _Runtime.field(options, 'icon'), iconType: _Runtime.field(options, 'iconType'), title: _Runtime.field(options, 'title'), content: _Runtime.field(options, 'text'), largeIcon: _Runtime.field(options, 'largeIcon'), noSound: _Runtime.field(options, 'noSound'), respectQuietTime: _Runtime.field(options, 'respectQuietTime') }] : Array<Dynamic>));
+      _Runtime.callOptionalProperty(_Runtime.optionalField(((cast trays : flighthq._internal._Map).get(id)), 'tray'), 'displayBalloon', cast ([{ icon: options.icon, iconType: options.iconType, title: options.title, content: options.text, largeIcon: options.largeIcon, noSound: options.noSound, respectQuietTime: options.respectQuietTime }] : Array<Dynamic>));
     }, removeBalloon: function(id:Dynamic) {
       _Runtime.callOptionalProperty(_Runtime.optionalField(((cast trays : flighthq._internal._Map).get(id)), 'tray'), 'removeBalloon', cast ([] : Array<Dynamic>));
     }, getBounds: function(id:Dynamic) {

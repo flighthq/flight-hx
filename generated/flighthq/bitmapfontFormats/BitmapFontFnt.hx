@@ -25,8 +25,8 @@ class BitmapFontFnt {
     var codepoints:Dynamic = cast _Runtime.UNDEFINED;
     var kernKeys:Dynamic = cast _Runtime.UNDEFINED;
     metrics = _Runtime.callValue(getBitmapFontMetrics, cast ([font] : Array<Dynamic>));
-    lineHeight = ((_Runtime.field(metrics, 'ascent') + _Runtime.field(metrics, 'descent')) + _Runtime.field(metrics, 'lineGap'));
-    base = _Runtime.field(metrics, 'ascent');
+    lineHeight = ((metrics.ascent + metrics.descent) + metrics.lineGap);
+    base = metrics.ascent;
     primaryImage = _Runtime.coalesce(_Runtime.optionalField(_Runtime.getIndex(_Runtime.field(font, 'pages'), 0.0), 'image'), function():Dynamic return cast null);
     scaleW = _Runtime.select(!_Runtime.strictEquals(primaryImage, null), function():Dynamic return cast _Runtime.field(primaryImage, 'width'), function():Dynamic return cast 0.0);
     scaleH = _Runtime.select(!_Runtime.strictEquals(primaryImage, null), function():Dynamic return cast _Runtime.field(primaryImage, 'height'), function():Dynamic return cast 0.0);

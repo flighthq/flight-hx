@@ -25,6 +25,9 @@ class CoreSmoke {
     if (vectorAlias.x != 4 || vectorAlias.y != 5 || vectorAlias.z != 6) {
       throw 'typed struct out parameter lost alias identity';
     }
+
+    TypedStructTranche4Smoke.run();
+
     final box = flighthq.mesh.Mesh.createBoxMeshGeometry(2, 4, 6);
     if (box.bounds == null || box.bounds.min.x != -1 || box.bounds.max.y != 2 || box.bounds.max.z != 3) {
       throw 'mesh bounds failed';

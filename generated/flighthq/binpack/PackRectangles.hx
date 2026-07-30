@@ -32,14 +32,14 @@ class PackRectangles {
     var binWidth:Dynamic = cast _Runtime.UNDEFINED;
     var binHeight:Dynamic = cast _Runtime.UNDEFINED;
     var attempt:Dynamic = cast _Runtime.UNDEFINED;
-    padding = _Runtime.coalesce(_Runtime.optionalField(options, 'padding'), function():Dynamic return cast 0.0);
-    border = _Runtime.coalesce(_Runtime.optionalField(options, 'border'), function():Dynamic return cast 0.0);
-    allowRotation = _Runtime.coalesce(_Runtime.optionalField(options, 'allowRotation'), function():Dynamic return cast false);
-    growable = _Runtime.coalesce(_Runtime.optionalField(options, 'growable'), function():Dynamic return cast true);
-    powerOfTwo = _Runtime.coalesce(_Runtime.optionalField(options, 'powerOfTwo'), function():Dynamic return cast false);
-    square = _Runtime.coalesce(_Runtime.optionalField(options, 'square'), function():Dynamic return cast false);
-    maxWidth = _Runtime.coalesce(_Runtime.optionalField(options, 'maxWidth'), function():Dynamic return cast PackRectangles.DEFAULT_MAX_EXTENT__packRectangles);
-    maxHeight = _Runtime.coalesce(_Runtime.optionalField(options, 'maxHeight'), function():Dynamic return cast PackRectangles.DEFAULT_MAX_EXTENT__packRectangles);
+    padding = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.padding; }), function():Dynamic return cast 0.0);
+    border = _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.border; }), function():Dynamic return cast 0.0);
+    allowRotation = _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.allowRotation; }), function():Dynamic return cast false);
+    growable = _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.growable; }), function():Dynamic return cast true);
+    powerOfTwo = _Runtime.coalesce(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.powerOfTwo; }), function():Dynamic return cast false);
+    square = _Runtime.coalesce(({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.square; }), function():Dynamic return cast false);
+    maxWidth = _Runtime.coalesce(({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.maxWidth; }), function():Dynamic return cast PackRectangles.DEFAULT_MAX_EXTENT__packRectangles);
+    maxHeight = _Runtime.coalesce(({ final __typedStruct7 = options; __typedStruct7 == null ? _Runtime.UNDEFINED : __typedStruct7.maxHeight; }), function():Dynamic return cast PackRectangles.DEFAULT_MAX_EXTENT__packRectangles);
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(rects, 'length'), 0.0))) {
       return cast { placements: cast ([] : Array<Dynamic>), width: _Runtime.callValue(PackRectangles.finalizeExtent__packRectangles, cast ([0.0, powerOfTwo] : Array<Dynamic>)), height: _Runtime.callValue(PackRectangles.finalizeExtent__packRectangles, cast ([0.0, powerOfTwo] : Array<Dynamic>)), unpacked: cast ([] : Array<Dynamic>) };
     }

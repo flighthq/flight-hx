@@ -19,10 +19,10 @@ class UnionAllPaths {
     var contours:Array<PathBooleanContour> = cast _Runtime.UNDEFINED;
     var result:Dynamic = cast _Runtime.UNDEFINED;
     var path:Dynamic = cast _Runtime.UNDEFINED;
-    fillRule = _Runtime.coalesce(_Runtime.optionalField(options, 'fillRule'), function():Dynamic return cast 'nonZero');
+    fillRule = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.fillRule; }), function():Dynamic return cast 'nonZero');
     contours = cast ([] : Array<Dynamic>);
     for (path in _Runtime.iterable(paths)) {
-      for (contour in _Runtime.iterable(_Runtime.callValue(flattenPath, cast ([path, _Runtime.optionalField(options, 'tolerance')] : Array<Dynamic>)))) {
+      for (contour in _Runtime.iterable(_Runtime.callValue(flattenPath, cast ([path, ({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.tolerance; })] : Array<Dynamic>)))) {
         _Runtime.callProperty(contours, 'push', cast ([contour] : Array<Dynamic>));
       }
     }

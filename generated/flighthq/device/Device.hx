@@ -47,10 +47,10 @@ class Device {
       var ua:Dynamic = cast _Runtime.UNDEFINED;
       nav = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.globalValue('navigator'), function():Dynamic return cast null);
       maxTouch = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(nav, null), function():Dynamic return cast _Runtime.hasField(nav, 'maxTouchPoints')), function():Dynamic return cast _Runtime.field(nav, 'maxTouchPoints'), function():Dynamic return cast -1.0);
-      _Runtime.setField(out, 'hasMouse', _Runtime.strictEquals(maxTouch, 0.0));
+      (out.hasMouse = cast (_Runtime.strictEquals(maxTouch, 0.0) : Dynamic));
       ua = _Runtime.coalesce(_Runtime.optionalField(nav, 'userAgent'), function():Dynamic return cast '');
-      _Runtime.setField(out, 'hasKeyboard', _Runtime.callValue(Device.detectDesktopUa__device, cast ([ua] : Array<Dynamic>)));
-      _Runtime.setField(out, 'hasStylus', false);
+      (out.hasKeyboard = cast (_Runtime.callValue(Device.detectDesktopUa__device, cast ([ua] : Array<Dynamic>)) : Dynamic));
+      (out.hasStylus = cast (false : Dynamic));
       return cast out;
     }, getDisplayMetrics: function(out:DeviceDisplayMetrics) {
       var win:Dynamic = cast _Runtime.UNDEFINED;
@@ -58,14 +58,14 @@ class Device {
       var pixelRatio:Dynamic = cast _Runtime.UNDEFINED;
       win = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'), function():Dynamic return cast _Runtime.globalValue('window'), function():Dynamic return cast null);
       scr = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('screen'), 'undefined'), function():Dynamic return cast _Runtime.globalValue('screen'), function():Dynamic return cast null);
-      _Runtime.setField(out, 'colorDepth', _Runtime.select(!_Runtime.strictEquals(scr, null), function():Dynamic return cast _Runtime.field(scr, 'colorDepth'), function():Dynamic return cast -1.0));
-      _Runtime.setField(out, 'densityDpi', -1.0);
-      _Runtime.setField(out, 'logicalHeight', _Runtime.select(!_Runtime.strictEquals(scr, null), function():Dynamic return cast _Runtime.field(scr, 'height'), function():Dynamic return cast -1.0));
-      _Runtime.setField(out, 'logicalWidth', _Runtime.select(!_Runtime.strictEquals(scr, null), function():Dynamic return cast _Runtime.field(scr, 'width'), function():Dynamic return cast -1.0));
+      (out.colorDepth = cast (_Runtime.select(!_Runtime.strictEquals(scr, null), function():Dynamic return cast _Runtime.field(scr, 'colorDepth'), function():Dynamic return cast -1.0) : Dynamic));
+      (out.densityDpi = cast (-1.0 : Dynamic));
+      (out.logicalHeight = cast (_Runtime.select(!_Runtime.strictEquals(scr, null), function():Dynamic return cast _Runtime.field(scr, 'height'), function():Dynamic return cast -1.0) : Dynamic));
+      (out.logicalWidth = cast (_Runtime.select(!_Runtime.strictEquals(scr, null), function():Dynamic return cast _Runtime.field(scr, 'width'), function():Dynamic return cast -1.0) : Dynamic));
       pixelRatio = _Runtime.select(!_Runtime.strictEquals(win, null), function():Dynamic return cast _Runtime.field(win, 'devicePixelRatio'), function():Dynamic return cast -1.0);
-      _Runtime.setField(out, 'pixelRatio', pixelRatio);
-      _Runtime.setField(out, 'physicalWidth', _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(scr, null), function():Dynamic return cast _Runtime.compare(pixelRatio, 0.0, '>')), function():Dynamic return cast HxMath.round((_Runtime.field(scr, 'width') * pixelRatio)), function():Dynamic return cast -1.0));
-      _Runtime.setField(out, 'physicalHeight', _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(scr, null), function():Dynamic return cast _Runtime.compare(pixelRatio, 0.0, '>')), function():Dynamic return cast HxMath.round((_Runtime.field(scr, 'height') * pixelRatio)), function():Dynamic return cast -1.0));
+      (out.pixelRatio = cast (pixelRatio : Dynamic));
+      (out.physicalWidth = cast (_Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(scr, null), function():Dynamic return cast _Runtime.compare(pixelRatio, 0.0, '>')), function():Dynamic return cast HxMath.round((_Runtime.field(scr, 'width') * pixelRatio)), function():Dynamic return cast -1.0) : Dynamic));
+      (out.physicalHeight = cast (_Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(scr, null), function():Dynamic return cast _Runtime.compare(pixelRatio, 0.0, '>')), function():Dynamic return cast HxMath.round((_Runtime.field(scr, 'height') * pixelRatio)), function():Dynamic return cast -1.0) : Dynamic));
       return cast out;
     }, getId: function() {
       try {

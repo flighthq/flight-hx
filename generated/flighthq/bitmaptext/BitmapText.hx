@@ -124,12 +124,12 @@ class BitmapText {
   }
 
   public static function applyBitmapTextOptions__bitmapText(data:BitmapTextData, options:BitmapTextOptions):Void {
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'align'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(data, 'align', _Runtime.field(options, 'align')); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'color'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(data, 'color', _Runtime.field(options, 'color')); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'letterSpacing'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(data, 'letterSpacing', _Runtime.field(options, 'letterSpacing')); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'lineHeight'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(data, 'lineHeight', _Runtime.field(options, 'lineHeight')); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'text'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(data, 'text', _Runtime.field(options, 'text')); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'wrapWidth'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(data, 'wrapWidth', _Runtime.field(options, 'wrapWidth')); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(options.align, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(data, 'align', options.align); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(options.color, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(data, 'color', options.color); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(options.letterSpacing, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(data, 'letterSpacing', options.letterSpacing); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(options.lineHeight, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(data, 'lineHeight', options.lineHeight); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(options.text, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(data, 'text', options.text); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(options.wrapWidth, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(data, 'wrapWidth', options.wrapWidth); }
   }
 
   public static function copyLocalBoundsRectangle__bitmapText(out:Rectangle, source:Node<Dynamic>):Void {

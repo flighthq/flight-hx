@@ -19,11 +19,11 @@ class OffsetPath {
     var contours:Dynamic = cast _Runtime.UNDEFINED;
     var pointEpsSq:Dynamic = cast _Runtime.UNDEFINED;
     var rawRings:Array<Array<Float>> = cast _Runtime.UNDEFINED;
-    join = _Runtime.coalesce(_Runtime.optionalField(options, 'join'), function():Dynamic return cast 'miter');
-    end = _Runtime.coalesce(_Runtime.optionalField(options, 'end'), function():Dynamic return cast 'butt');
-    miterLimit = _Runtime.coalesce(_Runtime.optionalField(options, 'miterLimit'), function():Dynamic return cast OffsetPath.DEFAULT_MITER_LIMIT__offsetPath);
-    arcTolerance = _Runtime.coalesce(_Runtime.optionalField(options, 'arcTolerance'), function():Dynamic return cast OffsetPath.DEFAULT_ARC_TOLERANCE__offsetPath);
-    contours = _Runtime.callValue(flattenPath, cast ([path, _Runtime.optionalField(options, 'tolerance')] : Array<Dynamic>));
+    join = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.join; }), function():Dynamic return cast 'miter');
+    end = _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.end; }), function():Dynamic return cast 'butt');
+    miterLimit = _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.miterLimit; }), function():Dynamic return cast OffsetPath.DEFAULT_MITER_LIMIT__offsetPath);
+    arcTolerance = _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.arcTolerance; }), function():Dynamic return cast OffsetPath.DEFAULT_ARC_TOLERANCE__offsetPath);
+    contours = _Runtime.callValue(flattenPath, cast ([path, ({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.tolerance; })] : Array<Dynamic>));
     pointEpsSq = HxMath.pow(_Runtime.callValue(OffsetPath.getContourPointEps__offsetPath, cast ([contours] : Array<Dynamic>)), 2.0);
     rawRings = cast ([] : Array<Dynamic>);
     for (contour in _Runtime.iterable(contours)) {
