@@ -38,7 +38,7 @@ class Projection {
   public static function setProjectionMatrix4(out:Matrix4Like, projection:flighthq.types.Camera.Projection, aspect:Float, near:Float, far:Float):Void {
     var halfWidth:Dynamic = cast _Runtime.UNDEFINED;
     var halfHeight:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(projection, 'kind'), 'perspective'))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(projection, 'kind'), 'perspective') : Bool)) {
       var tanHalfFovY:Dynamic = HxMath.tan((projection.fovY * 0.5));
       _Runtime.callValue(setPerspectiveMatrix4, cast ([out, tanHalfFovY, aspect, near, far] : Array<Dynamic>));
       return;

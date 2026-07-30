@@ -15,7 +15,7 @@ class GlyphAtlasDirty {
   public static function getGlyphAtlasDirtyRegion(atlas:GlyphAtlas):Null<Rectangle> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.field(atlas, 'runtime');
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(runtime, 'dirty')))) { return cast null; }
+    if ((cast !(cast _Runtime.field(runtime, 'dirty') : Bool) : Bool)) { return cast null; }
     return cast _Runtime.callValue(createRectangle, cast ([_Runtime.field(runtime, 'dirtyMinX'), _Runtime.field(runtime, 'dirtyMinY'), (_Runtime.field(runtime, 'dirtyMaxX') - _Runtime.field(runtime, 'dirtyMinX')), (_Runtime.field(runtime, 'dirtyMaxY') - _Runtime.field(runtime, 'dirtyMinY'))] : Array<Dynamic>));
     return cast null;
   }

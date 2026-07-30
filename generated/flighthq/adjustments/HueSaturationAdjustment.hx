@@ -32,21 +32,21 @@ class HueSaturationAdjustment {
       s = 0.0;
       l = ((mx + mn) * 0.5);
       d = (mx - mn);
-      if (_Runtime.truthy(_Runtime.compare(d, 0.0001, '>'))) {
-        (s = cast (_Runtime.select(_Runtime.compare(l, 0.5, '<'), function():Dynamic return cast (d / (mx + mn)), function():Dynamic return cast (d / ((2.0 - mx) - mn))) : Dynamic));
-        if (_Runtime.truthy(_Runtime.strictEquals(mx, r))) { (h = cast ((((g - b) / d) + _Runtime.select(_Runtime.compare(g, b, '<'), function():Dynamic return cast 6.0, function():Dynamic return cast 0.0)) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.strictEquals(mx, g))) { (h = cast ((((b - r) / d) + 2.0) : Dynamic)); } else { (h = cast ((((r - g) / d) + 4.0) : Dynamic)); } }
+      if ((cast ((cast d : Float) > (cast 0.0001 : Float)) : Bool)) {
+        (s = cast (((cast ((cast l : Float) < (cast 0.5 : Float)) : Bool) ? (cast (d / (mx + mn)) : Dynamic) : (cast (d / ((2.0 - mx) - mn)) : Dynamic)) : Dynamic));
+        if ((cast _Runtime.strictEquals(mx, r) : Bool)) { (h = cast ((((g - b) / d) + ((cast ((cast g : Float) < (cast b : Float)) : Bool) ? (cast 6.0 : Dynamic) : (cast 0.0 : Dynamic))) : Dynamic)); } else { if ((cast _Runtime.strictEquals(mx, g) : Bool)) { (h = cast ((((b - r) / d) + 2.0) : Dynamic)); } else { (h = cast ((((r - g) / d) + 4.0) : Dynamic)); } }
         (h = cast ((h / 6.0) : Dynamic));
       }
       (h = cast (_Runtime.callValue(HueSaturationAdjustment.fract__hueSaturationAdjustment, cast ([(h + hue)] : Array<Dynamic>)) : Dynamic));
       (s = cast (_Runtime.callValue(HueSaturationAdjustment.clamp01__hueSaturationAdjustment, cast ([(s * saturation)] : Array<Dynamic>)) : Dynamic));
       ln = _Runtime.callValue(HueSaturationAdjustment.clamp01__hueSaturationAdjustment, cast ([(l + lightness)] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.compare(s, 0.0, '<='))) {
+      if ((cast ((cast s : Float) <= (cast 0.0 : Float)) : Bool)) {
         _Runtime.setIndex(out, 0.0, ln);
         _Runtime.setIndex(out, 1.0, ln);
         _Runtime.setIndex(out, 2.0, ln);
         return;
       }
-      q = _Runtime.select(_Runtime.compare(ln, 0.5, '<'), function():Dynamic return cast (ln * (1.0 + s)), function():Dynamic return cast ((ln + s) - (ln * s)));
+      q = ((cast ((cast ln : Float) < (cast 0.5 : Float)) : Bool) ? (cast (ln * (1.0 + s)) : Dynamic) : (cast ((ln + s) - (ln * s)) : Dynamic));
       p = ((2.0 * ln) - q);
       _Runtime.setIndex(out, 0.0, _Runtime.callValue(HueSaturationAdjustment.hue2rgb__hueSaturationAdjustment, cast ([p, q, (h + (1.0 / 3.0))] : Array<Dynamic>)));
       _Runtime.setIndex(out, 1.0, _Runtime.callValue(HueSaturationAdjustment.hue2rgb__hueSaturationAdjustment, cast ([p, q, h] : Array<Dynamic>)));
@@ -57,7 +57,7 @@ class HueSaturationAdjustment {
   }
 
   public static function clamp01__hueSaturationAdjustment(v:Float):Float {
-    return cast _Runtime.select(_Runtime.compare(v, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(v, 1.0, '>'), function():Dynamic return cast 1.0, function():Dynamic return cast v));
+    return cast ((cast ((cast v : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast v : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast v : Dynamic)) : Dynamic));
     return cast null;
   }
 
@@ -69,11 +69,11 @@ class HueSaturationAdjustment {
   public static function hue2rgb__hueSaturationAdjustment(p:Float, q:Float, tRaw:Float):Float {
     var t:Dynamic = cast _Runtime.UNDEFINED;
     t = tRaw;
-    if (_Runtime.truthy(_Runtime.compare(t, 0.0, '<'))) { (t = cast ((t + 1.0) : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.compare(t, 1.0, '>'))) { (t = cast ((t - 1.0) : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.compare(t, (1.0 / 6.0), '<'))) { return cast (p + (((q - p) * 6.0) * t)); }
-    if (_Runtime.truthy(_Runtime.compare(t, (1.0 / 2.0), '<'))) { return cast q; }
-    if (_Runtime.truthy(_Runtime.compare(t, (2.0 / 3.0), '<'))) { return cast (p + (((q - p) * ((2.0 / 3.0) - t)) * 6.0)); }
+    if ((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool)) { (t = cast ((t + 1.0) : Dynamic)); }
+    if ((cast ((cast t : Float) > (cast 1.0 : Float)) : Bool)) { (t = cast ((t - 1.0) : Dynamic)); }
+    if ((cast ((cast t : Float) < (cast (1.0 / 6.0) : Float)) : Bool)) { return cast (p + (((q - p) * 6.0) * t)); }
+    if ((cast ((cast t : Float) < (cast (1.0 / 2.0) : Float)) : Bool)) { return cast q; }
+    if ((cast ((cast t : Float) < (cast (2.0 / 3.0) : Float)) : Bool)) { return cast (p + (((q - p) * ((2.0 / 3.0) - t)) * 6.0)); }
     return cast p;
     return cast null;
   }

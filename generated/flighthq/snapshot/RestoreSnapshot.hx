@@ -7,7 +7,7 @@ import flighthq.types.Snapshot;
 
 class RestoreSnapshot {
   public static function restoreSnapshot<T>(snapshot:Snapshot<Dynamic>, target:Dynamic):Void {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(snapshot, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(snapshot), 'object')), function():Dynamic return cast _Runtime.strictEquals(target, null)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object')))) {
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(snapshot, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(snapshot), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals(target, null) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object') : Bool)) : Bool)) {
       return;
     }
     _Runtime.callValue(RestoreSnapshot.restoreSnapshotInto__restoreSnapshot, cast ([(cast target : Dynamic), (cast snapshot : Dynamic)] : Array<Dynamic>));
@@ -16,13 +16,13 @@ class RestoreSnapshot {
   public static function restoreSnapshotInto__restoreSnapshot(target:Dynamic, source:Dynamic):Void {
     var targetObject:Dynamic = cast _Runtime.UNDEFINED;
     var sourceObject:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.isArray(source))) {
+    if ((cast _Runtime.isArray(source) : Bool)) {
       var targetArray:Dynamic = (cast target : Array<Dynamic>);
       var sourceArray:Dynamic = (cast source : Array<Dynamic>);
       _Runtime.setLength(targetArray, _Runtime.field(sourceArray, 'length'));
       {
         var index:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(index, _Runtime.field(sourceArray, 'length'), '<'))) {
+        while ((cast ((cast index : Float) < (cast _Runtime.field(sourceArray, 'length') : Float)) : Bool)) {
           _Runtime.setIndex(targetArray, index, _Runtime.callValue(RestoreSnapshot.restoreSnapshotValue__restoreSnapshot, cast ([_Runtime.getIndex(targetArray, index), _Runtime.getIndex(sourceArray, index)] : Array<Dynamic>)));
           (index = cast ((index + 1.0) : Dynamic));
         }
@@ -38,11 +38,11 @@ class RestoreSnapshot {
 
   public static function restoreSnapshotValue__restoreSnapshot(targetValue:Dynamic, sourceValue:Dynamic):Dynamic {
     var sourceIsArray:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(sourceValue, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(sourceValue), 'object')))) {
+    if ((cast ((cast _Runtime.strictEquals(sourceValue, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(sourceValue), 'object') : Bool)) : Bool)) {
       return cast sourceValue;
     }
     sourceIsArray = _Runtime.isArray(sourceValue);
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(targetValue, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(targetValue), 'object')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.isArray(targetValue), sourceIsArray)))) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(targetValue, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(targetValue), 'object') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.isArray(targetValue), sourceIsArray) : Bool)) : Bool)) {
       _Runtime.callValue(RestoreSnapshot.restoreSnapshotInto__restoreSnapshot, cast ([(cast targetValue : Dynamic), (cast sourceValue : Dynamic)] : Array<Dynamic>));
       return cast targetValue;
     }

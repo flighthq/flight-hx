@@ -16,26 +16,26 @@ class EqualsSnapshot {
     var aObject:Dynamic = cast _Runtime.UNDEFINED;
     var bObject:Dynamic = cast _Runtime.UNDEFINED;
     var aKeys:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(a, b))) {
+    if ((cast _Runtime.strictEquals(a, b) : Bool)) {
       return cast true;
     }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(a, null), function():Dynamic return cast _Runtime.strictEquals(b, null)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(a), 'object')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(b), 'object')))) {
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(a, null) : Bool) || (cast _Runtime.strictEquals(b, null) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(a), 'object') : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(b), 'object') : Bool)) : Bool)) {
       return cast false;
     }
     aIsArray = _Runtime.isArray(a);
-    if (_Runtime.truthy(!_Runtime.strictEquals(aIsArray, _Runtime.isArray(b)))) {
+    if ((cast !_Runtime.strictEquals(aIsArray, _Runtime.isArray(b)) : Bool)) {
       return cast false;
     }
-    if (_Runtime.truthy(aIsArray)) {
+    if ((cast aIsArray : Bool)) {
       var aArray:Dynamic = (cast a : Array<Dynamic>);
       var bArray:Dynamic = (cast b : Array<Dynamic>);
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(aArray, 'length'), _Runtime.field(bArray, 'length')))) {
+      if ((cast !_Runtime.strictEquals(_Runtime.field(aArray, 'length'), _Runtime.field(bArray, 'length')) : Bool)) {
         return cast false;
       }
       {
         var index:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(index, _Runtime.field(aArray, 'length'), '<'))) {
-          if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(EqualsSnapshot.snapshotValuesEqual__equalsSnapshot, cast ([_Runtime.getIndex(aArray, index), _Runtime.getIndex(bArray, index)] : Array<Dynamic>))))) {
+        while ((cast ((cast index : Float) < (cast _Runtime.field(aArray, 'length') : Float)) : Bool)) {
+          if ((cast !(cast _Runtime.callValue(EqualsSnapshot.snapshotValuesEqual__equalsSnapshot, cast ([_Runtime.getIndex(aArray, index), _Runtime.getIndex(bArray, index)] : Array<Dynamic>)) : Bool) : Bool)) {
             return cast false;
           }
           (index = cast ((index + 1.0) : Dynamic));
@@ -46,14 +46,14 @@ class EqualsSnapshot {
     aObject = (cast a : Dynamic);
     bObject = (cast b : Dynamic);
     aKeys = flighthq._internal.DynamicObject.keys(aObject);
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(aKeys, 'length'), _Runtime.field(flighthq._internal.DynamicObject.keys(bObject), 'length')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(aKeys, 'length'), _Runtime.field(flighthq._internal.DynamicObject.keys(bObject), 'length')) : Bool)) {
       return cast false;
     }
     for (key in _Runtime.iterable(aKeys)) {
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(_Runtime.field(flighthq._internal.DynamicObject.field('prototype'), 'hasOwnProperty'), 'call', cast ([bObject, key] : Array<Dynamic>))))) {
+      if ((cast !(cast _Runtime.callProperty(_Runtime.field(flighthq._internal.DynamicObject.field('prototype'), 'hasOwnProperty'), 'call', cast ([bObject, key] : Array<Dynamic>)) : Bool) : Bool)) {
         return cast false;
       }
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(EqualsSnapshot.snapshotValuesEqual__equalsSnapshot, cast ([_Runtime.getIndex(aObject, key), _Runtime.getIndex(bObject, key)] : Array<Dynamic>))))) {
+      if ((cast !(cast _Runtime.callValue(EqualsSnapshot.snapshotValuesEqual__equalsSnapshot, cast ([_Runtime.getIndex(aObject, key), _Runtime.getIndex(bObject, key)] : Array<Dynamic>)) : Bool) : Bool)) {
         return cast false;
       }
     }

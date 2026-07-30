@@ -18,7 +18,7 @@ class TauriWindow {
     run = function(win:ApplicationWindow, fn:Dynamic) {
       var w:Dynamic = cast _Runtime.UNDEFINED;
       w = ((cast windows : flighthq._internal._WeakMap).get(win));
-      if (_Runtime.truthy(_Runtime.strictEquals(w, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
+      if ((cast _Runtime.strictEquals(w, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       flighthq._internal._Async.recover(_Runtime.callValue(fn, cast ([w] : Array<Dynamic>)), function() {
       
       });
@@ -27,34 +27,34 @@ class TauriWindow {
       var w:Dynamic = cast _Runtime.UNDEFINED;
       w = _Runtime.callProperty(windowModule, 'getCurrentWindow', cast ([] : Array<Dynamic>));
       ((cast windows : flighthq._internal._WeakMap).set(win, w));
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'title'), _Runtime.field(_Runtime, 'UNDEFINED')))) { flighthq._internal._Async.recover(_Runtime.callProperty(w, 'setTitle', cast ([_Runtime.field(options, 'title')] : Array<Dynamic>)), function() {
+      if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'title'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(w, 'setTitle', cast ([_Runtime.field(options, 'title')] : Array<Dynamic>)), function() {
       
       }); }
-      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(options, 'width'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(options, 'height'), _Runtime.field(_Runtime, 'UNDEFINED'))))) {
+      if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(options, 'width'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(options, 'height'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
         flighthq._internal._Async.recover(_Runtime.callProperty(w, 'setSize', cast ([_Runtime.construct(_Runtime.field(windowModule, 'LogicalSize'), [_Runtime.field(options, 'width'), _Runtime.field(options, 'height')])] : Array<Dynamic>)), function() {
         
         });
       }
-      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(options, 'x'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(options, 'y'), _Runtime.field(_Runtime, 'UNDEFINED'))))) {
+      if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(options, 'x'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(options, 'y'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
         flighthq._internal._Async.recover(_Runtime.callProperty(w, 'setPosition', cast ([_Runtime.construct(_Runtime.field(windowModule, 'LogicalPosition'), [_Runtime.field(options, 'x'), _Runtime.field(options, 'y')])] : Array<Dynamic>)), function() {
         
         });
       }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'resizable'), _Runtime.field(_Runtime, 'UNDEFINED')))) { flighthq._internal._Async.recover(_Runtime.callProperty(w, 'setResizable', cast ([_Runtime.field(options, 'resizable')] : Array<Dynamic>)), function() {
+      if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'resizable'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(w, 'setResizable', cast ([_Runtime.field(options, 'resizable')] : Array<Dynamic>)), function() {
       
       }); }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'alwaysOnTop'), _Runtime.field(_Runtime, 'UNDEFINED')))) { flighthq._internal._Async.recover(_Runtime.callProperty(w, 'setAlwaysOnTop', cast ([_Runtime.field(options, 'alwaysOnTop')] : Array<Dynamic>)), function() {
+      if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'alwaysOnTop'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(w, 'setAlwaysOnTop', cast ([_Runtime.field(options, 'alwaysOnTop')] : Array<Dynamic>)), function() {
       
       }); }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'fullscreen'), _Runtime.field(_Runtime, 'UNDEFINED')))) { flighthq._internal._Async.recover(_Runtime.callProperty(w, 'setFullscreen', cast ([_Runtime.field(options, 'fullscreen')] : Array<Dynamic>)), function() {
+      if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'fullscreen'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(w, 'setFullscreen', cast ([_Runtime.field(options, 'fullscreen')] : Array<Dynamic>)), function() {
       
       }); }
-      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(options, 'minWidth'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(options, 'minHeight'), _Runtime.field(_Runtime, 'UNDEFINED'))))) {
+      if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(options, 'minWidth'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(options, 'minHeight'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
         flighthq._internal._Async.recover(_Runtime.callProperty(w, 'setMinSize', cast ([_Runtime.construct(_Runtime.field(windowModule, 'LogicalSize'), [_Runtime.field(options, 'minWidth'), _Runtime.field(options, 'minHeight')])] : Array<Dynamic>)), function() {
         
         });
       }
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(options, 'maxWidth'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.compare(_Runtime.field(options, 'maxWidth'), 0.0, '>=')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(options, 'maxHeight'), _Runtime.field(_Runtime, 'UNDEFINED'))))) {
+      if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(options, 'maxWidth'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(options, 'maxWidth') : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(options, 'maxHeight'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
         flighthq._internal._Async.recover(_Runtime.callProperty(w, 'setMaxSize', cast ([_Runtime.construct(_Runtime.field(windowModule, 'LogicalSize'), [_Runtime.field(options, 'maxWidth'), _Runtime.field(options, 'maxHeight')])] : Array<Dynamic>)), function() {
         
         });
@@ -68,7 +68,7 @@ class TauriWindow {
       if (_Runtime.truthy(_Runtime.field(options, 'minimized'))) { flighthq._internal._Async.recover(_Runtime.callProperty(w, 'minimize', cast ([] : Array<Dynamic>)), function() {
       
       }); }
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(options, 'visible'), false))) { flighthq._internal._Async.recover(_Runtime.callProperty(w, 'hide', cast ([] : Array<Dynamic>)), function() {
+      if ((cast _Runtime.strictEquals(_Runtime.field(options, 'visible'), false) : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(w, 'hide', cast ([] : Array<Dynamic>)), function() {
       
       }); } else { flighthq._internal._Async.recover(_Runtime.callProperty(w, 'show', cast ([] : Array<Dynamic>)), function() {
       
@@ -89,7 +89,7 @@ class TauriWindow {
       });
       flighthq._internal._Async.recover(_Runtime.callProperty(w, 'onFocusChanged', cast ([function(event:Dynamic) {
         _Runtime.setField(win, 'focused', _Runtime.field(event, 'payload'));
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.select(_Runtime.field(event, 'payload'), function():Dynamic return cast _Runtime.field(win, 'onFocusIn'), function():Dynamic return cast _Runtime.field(win, 'onFocusOut'))]]), 1);
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[((cast _Runtime.field(event, 'payload') : Bool) ? (cast _Runtime.field(win, 'onFocusIn') : Dynamic) : (cast _Runtime.field(win, 'onFocusOut') : Dynamic))]]), 1);
       }] : Array<Dynamic>)), function() {
       
       });
@@ -100,7 +100,7 @@ class TauriWindow {
     }, close: function(win:Dynamic) {
       var w:Dynamic = cast _Runtime.UNDEFINED;
       w = ((cast windows : flighthq._internal._WeakMap).get(win));
-      if (_Runtime.truthy(_Runtime.strictEquals(w, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
+      if ((cast _Runtime.strictEquals(w, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       flighthq._internal._Async.recover(_Runtime.callProperty(w, 'close', cast ([] : Array<Dynamic>)), function() {
       
       });
@@ -154,7 +154,7 @@ class TauriWindow {
     }, setProgress: function() {
     
     }, requestAttention: function(win:Dynamic, attention:Dynamic) {
-      _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'requestUserAttention', cast ([_Runtime.select(attention, function():Dynamic return cast 1.0, function():Dynamic return cast null)] : Array<Dynamic>))] : Array<Dynamic>));
+      _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'requestUserAttention', cast ([((cast attention : Bool) ? (cast 1.0 : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>))] : Array<Dynamic>));
     }, setContentProtection: function(win:Dynamic, enabled:Dynamic) {
       _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'setContentProtected', cast ([enabled] : Array<Dynamic>))] : Array<Dynamic>));
     }, flashWindowFrame: function(win:Dynamic) {

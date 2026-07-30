@@ -43,7 +43,7 @@ class WgpuScale9Shape {
   public static function destroyWgpuScale9ShapeData(_state:RenderState, data:RendererData):Void {
     var shapeData:Dynamic = cast _Runtime.UNDEFINED;
     shapeData = _Runtime.callValue(getWgpuRendererData, cast ([data] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(shapeData, null))) { return; }
+    if ((cast _Runtime.strictEquals(shapeData, null) : Bool)) { return; }
     _Runtime.callOptionalProperty(_Runtime.optionalField(_Runtime.field(shapeData, 'entry'), 'texture'), 'destroy', cast ([] : Array<Dynamic>));
   }
 
@@ -65,27 +65,27 @@ class WgpuScale9Shape {
     var c:Dynamic = cast _Runtime.UNDEFINED;
     var d:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null) : Bool)) { return; }
     _Runtime.callValue(flushWgpuSpriteBatch, cast ([state] : Array<Dynamic>));
     source = (cast _Runtime.field(renderProxy, 'source') : Scale9Shape);
     __destructure0 = _Runtime.field(source, 'data');
     commands = _Runtime.field(__destructure0, 'commands');
     scale9Grid = _Runtime.field(__destructure0, 'scale9Grid');
     version = _Runtime.callValue(getNodeLocalContentRevision, cast ([source] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0))) { return; }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(renderProxy, 'rendererData'), null))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool)) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(renderProxy, 'rendererData'), null) : Bool)) { return; }
     bounds = _Runtime.callValue(getNodeLocalBoundsRectangle, cast ([source] : Array<Dynamic>));
     mapper = _Runtime.callValue(buildWgpuScale9Mapper, cast ([bounds, scale9Grid, _Runtime.field(source, 'scaleX'), _Runtime.field(source, 'scaleY')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(mapper, null))) {
+    if ((cast _Runtime.strictEquals(mapper, null) : Bool)) {
       _Runtime.callValue(drawWgpuShape, cast ([state, renderProxy] : Array<Dynamic>));
       return;
     }
     shapeData = _Runtime.callValue(getWgpuRendererData, cast ([_Runtime.field(renderProxy, 'rendererData')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(shapeData, null))) { return; }
+    if ((cast _Runtime.strictEquals(shapeData, null) : Bool)) { return; }
     w = HxMath.ceil((_Runtime.field(bounds, 'width') * _Runtime.field(source, 'scaleX')));
     h = HxMath.ceil((_Runtime.field(bounds, 'height') * _Runtime.field(source, 'scaleY')));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(w, 0.0, '<='), function():Dynamic return cast _Runtime.compare(h, 0.0, '<=')))) { return; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(version, _Runtime.field(shapeData, 'lastContentId')), function():Dynamic return cast !_Runtime.strictEquals(w, _Runtime.field(shapeData, 'lastW'))), function():Dynamic return cast !_Runtime.strictEquals(h, _Runtime.field(shapeData, 'lastH'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(source, 'scaleX'), _Runtime.field(shapeData, 'lastScaleX'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(source, 'scaleY'), _Runtime.field(shapeData, 'lastScaleY'))))) {
+    if ((cast ((cast ((cast w : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast h : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
+    if ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(version, _Runtime.field(shapeData, 'lastContentId')) : Bool) || (cast !_Runtime.strictEquals(w, _Runtime.field(shapeData, 'lastW')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(h, _Runtime.field(shapeData, 'lastH')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(source, 'scaleX'), _Runtime.field(shapeData, 'lastScaleX')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(source, 'scaleY'), _Runtime.field(shapeData, 'lastScaleY')) : Bool)) : Bool)) {
       flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(shapeData, 'canvas'), 'width', w);
       flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(shapeData, 'canvas'), 'height', h);
       var ctx:Dynamic = _Runtime.field(shapeData, 'ctx');
@@ -95,7 +95,7 @@ class WgpuScale9Shape {
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'translate', cast ([-_Runtime.field(bounds, 'x'), -_Runtime.field(bounds, 'y')] : Array<Dynamic>));
       _Runtime.callValue(renderCanvasShapeCommands, cast ([ctx, WgpuScale9Shape._remappedCommands__wgpuScale9Shape] : Array<Dynamic>));
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(shapeData, 'entry'), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(shapeData, 'lastW'), w)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(shapeData, 'lastH'), h)))) {
+      if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(shapeData, 'entry'), null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(shapeData, 'lastW'), w) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(shapeData, 'lastH'), h) : Bool)) : Bool)) {
         _Runtime.callOptionalProperty(_Runtime.optionalField(_Runtime.field(shapeData, 'entry'), 'texture'), 'destroy', cast ([] : Array<Dynamic>));
         _Runtime.setField(shapeData, 'entry', _Runtime.callValue(createWgpuTextureEntry, cast ([state, w, h, _Runtime.field(shapeData, 'canvas')] : Array<Dynamic>)));
       } else {
@@ -107,12 +107,12 @@ class WgpuScale9Shape {
       _Runtime.setField(shapeData, 'lastContentId', version);
       _Runtime.setField(shapeData, 'lastW', w);
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(shapeData, 'entry'), null))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(shapeData, 'entry'), null) : Bool)) { return; }
     t = _Runtime.field(renderProxy, 'transform2D');
-    a = _Runtime.select(!_Runtime.strictEquals(_Runtime.field(source, 'scaleX'), 0.0), function():Dynamic return cast (_Runtime.field(t, 'a') / _Runtime.field(source, 'scaleX')), function():Dynamic return cast _Runtime.field(t, 'a'));
-    b = _Runtime.select(!_Runtime.strictEquals(_Runtime.field(source, 'scaleX'), 0.0), function():Dynamic return cast (_Runtime.field(t, 'b') / _Runtime.field(source, 'scaleX')), function():Dynamic return cast _Runtime.field(t, 'b'));
-    c = _Runtime.select(!_Runtime.strictEquals(_Runtime.field(source, 'scaleY'), 0.0), function():Dynamic return cast (_Runtime.field(t, 'c') / _Runtime.field(source, 'scaleY')), function():Dynamic return cast _Runtime.field(t, 'c'));
-    d = _Runtime.select(!_Runtime.strictEquals(_Runtime.field(source, 'scaleY'), 0.0), function():Dynamic return cast (_Runtime.field(t, 'd') / _Runtime.field(source, 'scaleY')), function():Dynamic return cast _Runtime.field(t, 'd'));
+    a = ((cast !_Runtime.strictEquals(_Runtime.field(source, 'scaleX'), 0.0) : Bool) ? (cast (_Runtime.field(t, 'a') / _Runtime.field(source, 'scaleX')) : Dynamic) : (cast _Runtime.field(t, 'a') : Dynamic));
+    b = ((cast !_Runtime.strictEquals(_Runtime.field(source, 'scaleX'), 0.0) : Bool) ? (cast (_Runtime.field(t, 'b') / _Runtime.field(source, 'scaleX')) : Dynamic) : (cast _Runtime.field(t, 'b') : Dynamic));
+    c = ((cast !_Runtime.strictEquals(_Runtime.field(source, 'scaleY'), 0.0) : Bool) ? (cast (_Runtime.field(t, 'c') / _Runtime.field(source, 'scaleY')) : Dynamic) : (cast _Runtime.field(t, 'c') : Dynamic));
+    d = ((cast !_Runtime.strictEquals(_Runtime.field(source, 'scaleY'), 0.0) : Bool) ? (cast (_Runtime.field(t, 'd') / _Runtime.field(source, 'scaleY')) : Dynamic) : (cast _Runtime.field(t, 'd') : Dynamic));
     _Runtime.callValue(drawWgpuQuadWithTransform, cast ([state, renderProxy, { a: a, b: b, c: c, d: d, tx: _Runtime.field(t, 'tx'), ty: _Runtime.field(t, 'ty') }, _Runtime.field(shapeData, 'entry'), 0.0, 0.0, w, h, 0.0, 0.0, 1.0, 1.0] : Array<Dynamic>));
   }
 
@@ -124,15 +124,15 @@ class WgpuScale9Shape {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(mapCanvasScale9ShapeCommands, cast ([out, source, mapper] : Array<Dynamic>));
     i = 0.0;
-    while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(out, 'length'), '<'))) {
+    while ((cast ((cast i : Float) < (cast _Runtime.field(out, 'length') : Float)) : Bool)) {
       var key:Dynamic = (cast _Runtime.getIndex(out, i) : String);
       var argCount:Dynamic = (cast _Runtime.getIndex(out, (i + 1.0)) : Float);
-      if (_Runtime.truthy(_Runtime.strictEquals(key, 'drawPath'))) {
+      if ((cast _Runtime.strictEquals(key, 'drawPath') : Bool)) {
         var pathData:Dynamic = (cast _Runtime.getIndex(out, (i + 3.0)) : Array<Float>);
         _Runtime.setLength(WgpuScale9Shape._remappedPathData__wgpuScale9Shape, _Runtime.field(pathData, 'length'));
         {
           var k:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(k, _Runtime.field(pathData, 'length'), '<'))) {
+          while ((cast ((cast k : Float) < (cast _Runtime.field(pathData, 'length') : Float)) : Bool)) {
             _Runtime.setIndex(WgpuScale9Shape._remappedPathData__wgpuScale9Shape, k, _Runtime.getIndex(pathData, k));
             k++;
           }

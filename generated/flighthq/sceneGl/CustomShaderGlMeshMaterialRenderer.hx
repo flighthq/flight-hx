@@ -35,12 +35,12 @@ class CustomShaderGlMeshMaterialRenderer {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
     custom = (cast material : Null<CustomShaderMaterial>);
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(custom, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(custom, 'shaderKey'), '')))) {
+    if ((cast ((cast _Runtime.strictEquals(custom, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(custom, 'shaderKey'), '') : Bool)) : Bool)) {
       _Runtime.setField(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram', null);
       return;
     }
     source = _Runtime.callValue(getGlCustomMaterialShaderSource, cast ([state, _Runtime.field(custom, 'shaderKey')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(source, null))) {
+    if ((cast _Runtime.strictEquals(source, null) : Bool)) {
       _Runtime.setField(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram', null);
       return;
     }
@@ -54,7 +54,7 @@ class CustomShaderGlMeshMaterialRenderer {
   }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
-    if (_Runtime.truthy(_Runtime.strictEquals(program, null))) { return; }
+    if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
     _Runtime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
   } };
 
@@ -70,7 +70,7 @@ class CustomShaderGlMeshMaterialRenderer {
   public static function registerGlCustomMaterialShader(state:GlRenderState, shaderKey:String, source:GlCustomMaterialShaderSource):Void {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = ((cast CustomShaderGlMeshMaterialRenderer._customMaterialShaders__customShaderGlMeshMaterialRenderer : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (registry = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
       ((cast CustomShaderGlMeshMaterialRenderer._customMaterialShaders__customShaderGlMeshMaterialRenderer : flighthq._internal._WeakMap).set(state, registry));
     }
@@ -92,12 +92,12 @@ class CustomShaderGlMeshMaterialRenderer {
   public static function uploadCustomShaderMaterialUniforms__customShaderGlMeshMaterialRenderer(gl:Dynamic, program:Dynamic, material:CustomShaderMaterial):Void {
     var uniforms:Dynamic = cast _Runtime.UNDEFINED;
     uniforms = _Runtime.field(material, 'uniforms');
-    if (_Runtime.truthy(_Runtime.strictEquals(uniforms, null))) { return; }
+    if ((cast _Runtime.strictEquals(uniforms, null) : Bool)) { return; }
     for (name in _Runtime.iterable(flighthq._internal.DynamicObject.keys(uniforms))) {
       var location:Dynamic = flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, name);
-      if (_Runtime.truthy(_Runtime.strictEquals(location, null))) { continue; }
+      if ((cast _Runtime.strictEquals(location, null) : Bool)) { continue; }
       var value:Dynamic = _Runtime.getIndex(uniforms, name);
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(value), 'number'))) {
+      if ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'number') : Bool)) {
         flighthq._internal.backend.WebGl2Backend.uniform1f(gl, location, value);
         continue;
       }
@@ -127,14 +127,14 @@ class CustomShaderGlMeshMaterialRenderer {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var unit:Dynamic = cast _Runtime.UNDEFINED;
     textures = _Runtime.field(material, 'textures');
-    if (_Runtime.truthy(_Runtime.strictEquals(textures, null))) { return; }
+    if ((cast _Runtime.strictEquals(textures, null) : Bool)) { return; }
     gl = _Runtime.field(state, 'gl');
     unit = 0.0;
     for (name in _Runtime.iterable(flighthq._internal.DynamicObject.keys(textures))) {
       var texture:Texture = _Runtime.getIndex(textures, name);
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(texture, 'image'), null), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(texture, 'image')] : Array<Dynamic>)))))) { continue; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(texture, 'image'), null) : Bool) || (cast !(cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(texture, 'image')] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { continue; }
       var location:Dynamic = flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, name);
-      if (_Runtime.truthy(_Runtime.strictEquals(location, null))) { continue; }
+      if ((cast _Runtime.strictEquals(location, null) : Bool)) { continue; }
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + unit));
       _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(texture, 'image'), _Runtime.field(texture, 'sampler')] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, location, unit);

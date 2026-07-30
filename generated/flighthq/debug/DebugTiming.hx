@@ -12,18 +12,18 @@ import flighthq.types.Log.LogTimer;
 class DebugTiming {
   public static function beginDebugSpan(name:String, ?channel:Null<String>):Null<LogTimer> {
     if (channel == null) channel = cast (null : Dynamic);
-    return cast _Runtime.select(_Runtime.callValue(isDebugEnabled, cast ([] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(startLogTimer, cast ([name, channel] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast ((cast _Runtime.callValue(isDebugEnabled, cast ([] : Array<Dynamic>)) : Bool) ? (cast _Runtime.callValue(startLogTimer, cast ([name, channel] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function endDebugSpan(timer:Null<LogTimer>):Float {
-    return cast _Runtime.select(_Runtime.strictEquals(timer, null), function():Dynamic return cast -1.0, function():Dynamic return cast _Runtime.callValue(endLogTimer, cast ([timer] : Array<Dynamic>)));
+    return cast ((cast _Runtime.strictEquals(timer, null) : Bool) ? (cast -1.0 : Dynamic) : (cast _Runtime.callValue(endLogTimer, cast ([timer] : Array<Dynamic>)) : Dynamic));
     return cast null;
   }
 
   public static function markDebugFrame(?label:String, ?channel:Null<String>):Void {
     if (channel == null) channel = cast (null : Dynamic);
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(isDebugEnabled, cast ([] : Array<Dynamic>))))) { return; }
+    if ((cast !(cast _Runtime.callValue(isDebugEnabled, cast ([] : Array<Dynamic>)) : Bool) : Bool)) { return; }
     _Runtime.callValue(logDebug, cast ([{ frame: _Runtime.coalesce(label, function():Dynamic return cast ++DebugTiming._debugFrameNumber__debugTiming) }, channel] : Array<Dynamic>));
   }
 

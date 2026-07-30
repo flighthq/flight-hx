@@ -34,12 +34,12 @@ class MatcapWgpuMeshMaterialRenderer {
     var group:Dynamic = cast _Runtime.UNDEFINED;
     stateRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     pass = _Runtime.field(stateRuntime, 'renderPass');
-    if (_Runtime.truthy(_Runtime.strictEquals(pass, null))) { return; }
+    if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     matcap = (cast material : Null<MatcapMaterial>);
     format = _Runtime.coalesce(_Runtime.field(stateRuntime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
     pipeline = _Runtime.callValue(ensureWgpuMatcapPipeline, cast ([state, _Runtime.callValue(MatcapWgpuMeshMaterialRenderer.defineKeyForMaterial__matcapWgpuMeshMaterialRenderer, cast ([matcap] : Array<Dynamic>)), format] : Array<Dynamic>));
     _Runtime.callValue(writeWgpuFrameUniform, cast ([state, camera, _lights] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(matcap, null))) {
+    if ((cast _Runtime.strictEquals(matcap, null) : Bool)) {
       (group = cast (_Runtime.callValue(bindWgpuMatcapSurface, cast ([state, pipeline, MatcapWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__matcapWgpuMeshMaterialRenderer, MatcapWgpuMeshMaterialRenderer.WHITE__matcapWgpuMeshMaterialRenderer, 0.5] : Array<Dynamic>)) : Dynamic));
     } else {
       _Runtime.callValue(unpackColorToLinear, cast ([MatcapWgpuMeshMaterialRenderer._scratch__matcapWgpuMeshMaterialRenderer, _Runtime.field(matcap, 'tint')] : Array<Dynamic>));
@@ -56,7 +56,7 @@ class MatcapWgpuMeshMaterialRenderer {
   }
 
   public static function defineKeyForMaterial__matcapWgpuMeshMaterialRenderer(material:Null<MatcapMaterial>):WgpuMatcapDefineKey {
-    return cast { alphaMaskEnabled: _Runtime.andValue(!_Runtime.strictEquals(material, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask')), doubleSided: _Runtime.andValue(!_Runtime.strictEquals(material, null), function():Dynamic return cast _Runtime.field(material, 'doubleSided')), hasMatcap: false };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), doubleSided: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.field(material, 'doubleSided') : Bool)), hasMatcap: false };
     return cast null;
   }
 

@@ -34,8 +34,8 @@ class ParseKtx2 {
     var levelCountPresent:Dynamic = cast _Runtime.UNDEFINED;
     var levels:Array<TextureContainerLevel> = cast _Runtime.UNDEFINED;
     var imagesPerLevel:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(ParseKtx2.hasKtx2Identifier__parseKtx2, cast ([bytes] : Array<Dynamic>))))) { return cast null; }
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(bytes, 'byteLength'), ParseKtx2.ktx2LevelIndexOffset__parseKtx2, '<'))) { return cast null; }
+    if ((cast !(cast _Runtime.callValue(ParseKtx2.hasKtx2Identifier__parseKtx2, cast ([bytes] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
+    if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast ParseKtx2.ktx2LevelIndexOffset__parseKtx2 : Float)) : Bool)) { return cast null; }
     reader = _Runtime.callValue(createByteReader, cast ([bytes, 12.0] : Array<Dynamic>));
     vkFormat = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
     _Runtime.callValue(skipByteReader, cast ([reader, 4.0] : Array<Dynamic>));
@@ -47,30 +47,30 @@ class ParseKtx2 {
     levelCount = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
     supercompressionScheme = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
     supercompression = _Runtime.getIndex(ParseKtx2.ktx2Supercompression__parseKtx2, supercompressionScheme);
-    if (_Runtime.truthy(_Runtime.strictEquals(supercompression, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast null; }
+    if ((cast _Runtime.strictEquals(supercompression, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
     format = _Runtime.callValue(ParseKtx2.mapKtx2Format__parseKtx2, cast ([vkFormat, supercompressionScheme] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(format, null))) { return cast null; }
+    if ((cast _Runtime.strictEquals(format, null) : Bool)) { return cast null; }
     width = HxMath.max(1.0, pixelWidth);
     height = HxMath.max(1.0, pixelHeight);
     depth = HxMath.max(1.0, pixelDepth);
     layers = HxMath.max(1.0, layerCount);
-    faces = _Runtime.select(_Runtime.strictEquals(faceCount, 6.0), function():Dynamic return cast 6.0, function():Dynamic return cast 1.0);
+    faces = ((cast _Runtime.strictEquals(faceCount, 6.0) : Bool) ? (cast 6.0 : Dynamic) : (cast 1.0 : Dynamic));
     levelCountPresent = HxMath.max(1.0, levelCount);
     _Runtime.setField(reader, 'offset', ParseKtx2.ktx2LevelIndexOffset__parseKtx2);
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(hasByteReaderBytes, cast ([reader, (levelCountPresent * 24.0)] : Array<Dynamic>))))) { return cast null; }
+    if ((cast !(cast _Runtime.callValue(hasByteReaderBytes, cast ([reader, (levelCountPresent * 24.0)] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
     levels = cast ([] : Array<Dynamic>);
     imagesPerLevel = (layers * faces);
     {
       var mip:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(mip, levelCountPresent, '<'))) {
+      while ((cast ((cast mip : Float) < (cast levelCountPresent : Float)) : Bool)) {
         var byteOffset:Dynamic = _Runtime.callValue(readByteReaderU64, cast ([reader] : Array<Dynamic>));
         var byteLength:Dynamic = _Runtime.callValue(readByteReaderU64, cast ([reader] : Array<Dynamic>));
         _Runtime.callValue(skipByteReader, cast ([reader, 8.0] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.compare((byteOffset + byteLength), _Runtime.field(bytes, 'byteLength'), '>'))) { return cast null; }
+        if ((cast ((cast (byteOffset + byteLength) : Float) > (cast _Runtime.field(bytes, 'byteLength') : Float)) : Bool)) { return cast null; }
         var mipWidth:Dynamic = HxMath.max(1.0, (_Runtime.toInt32(width) >> _Runtime.toInt32(mip)));
         var mipHeight:Dynamic = HxMath.max(1.0, (_Runtime.toInt32(height) >> _Runtime.toInt32(mip)));
-        var splittable:Dynamic = _Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(supercompression, 'None'), function():Dynamic return cast _Runtime.compare(imagesPerLevel, 1.0, '>')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.fmod(byteLength, imagesPerLevel), 0.0));
-        if (_Runtime.truthy(!_Runtime.truthy(splittable))) {
+        var splittable:Dynamic = ((cast ((cast _Runtime.strictEquals(supercompression, 'None') : Bool) && (cast ((cast imagesPerLevel : Float) > (cast 1.0 : Float)) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.fmod(byteLength, imagesPerLevel), 0.0) : Bool));
+        if ((cast !(cast splittable : Bool) : Bool)) {
           _Runtime.callProperty(levels, 'push', cast ([{ byteLength: byteLength, byteOffset: byteOffset, height: mipHeight, width: mipWidth }] : Array<Dynamic>));
           (mip = cast ((mip + 1.0) : Dynamic));
           continue;
@@ -78,7 +78,7 @@ class ParseKtx2 {
         var imageSize:Dynamic = (byteLength / imagesPerLevel);
         {
           var image:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(image, imagesPerLevel, '<'))) {
+          while ((cast ((cast image : Float) < (cast imagesPerLevel : Float)) : Bool)) {
             _Runtime.callProperty(levels, 'push', cast ([{ byteLength: imageSize, byteOffset: (byteOffset + (image * imageSize)), height: mipHeight, width: mipWidth }] : Array<Dynamic>));
             (image = cast ((image + 1.0) : Dynamic));
           }
@@ -91,11 +91,11 @@ class ParseKtx2 {
   }
 
   public static function hasKtx2Identifier__parseKtx2(bytes:flighthq._internal._UInt8Array):Bool {
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(bytes, 'byteLength'), 12.0, '<'))) { return cast false; }
+    if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast 12.0 : Float)) : Bool)) { return cast false; }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, 12.0, '<'))) {
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(bytes, i), _Runtime.getIndex(ParseKtx2.ktx2Identifier__parseKtx2, i)))) { return cast false; }
+      while ((cast ((cast i : Float) < (cast 12.0 : Float)) : Bool)) {
+        if ((cast !_Runtime.strictEquals(_Runtime.getIndex(bytes, i), _Runtime.getIndex(ParseKtx2.ktx2Identifier__parseKtx2, i)) : Bool)) { return cast false; }
         (i = cast ((i + 1.0) : Dynamic));
       }
     }
@@ -104,7 +104,7 @@ class ParseKtx2 {
   }
 
   public static function mapKtx2Format__parseKtx2(vkFormat:Float, supercompressionScheme:Float):Null<TextureContainerFormat> {
-    if (_Runtime.truthy(_Runtime.strictEquals(vkFormat, 0.0))) { return cast _Runtime.select(_Runtime.strictEquals(supercompressionScheme, 1.0), function():Dynamic return cast 'etc1s', function():Dynamic return cast 'uastc'); }
+    if ((cast _Runtime.strictEquals(vkFormat, 0.0) : Bool)) { return cast ((cast _Runtime.strictEquals(supercompressionScheme, 1.0) : Bool) ? (cast 'etc1s' : Dynamic) : (cast 'uastc' : Dynamic)); }
     return cast _Runtime.coalesce(_Runtime.getIndex(ParseKtx2.ktx2VkFormat__parseKtx2, vkFormat), function():Dynamic return cast null);
     return cast null;
   }

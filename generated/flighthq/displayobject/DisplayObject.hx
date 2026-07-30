@@ -42,7 +42,7 @@ class DisplayObject {
     var current:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)) : DisplayObjectRuntime);
     current = _Runtime.field(runtime, 'colorAdjustments');
-    _Runtime.setField(runtime, 'colorAdjustments', _Runtime.select(_Runtime.strictEquals(current, null), function():Dynamic return cast cast ([adjustment] : Array<Dynamic>), function():Dynamic return cast _Runtime.concatArrays([_Runtime.toArray(current), [adjustment]])));
+    _Runtime.setField(runtime, 'colorAdjustments', ((cast _Runtime.strictEquals(current, null) : Bool) ? (cast cast ([adjustment] : Array<Dynamic>) : Dynamic) : (cast _Runtime.concatArrays([_Runtime.toArray(current), [adjustment]]) : Dynamic)));
     _Runtime.callValue(DisplayObject.resolveDisplayObjectColorAdjustments__displayObject, cast ([runtime] : Array<Dynamic>));
     _Runtime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
   }
@@ -105,7 +105,7 @@ class DisplayObject {
   }
 
   public static function setDisplayObjectColorTransform(source:flighthq.types.DisplayObject, colorTransform:Null<ColorTransform>):Void {
-    _Runtime.callValue(setDisplayObjectColorAdjustments, cast ([source, _Runtime.select(_Runtime.strictEquals(colorTransform, null), function():Dynamic return cast null, function():Dynamic return cast cast ([_Runtime.callValue(createColorTransformAdjustment, cast ([colorTransform] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callValue(setDisplayObjectColorAdjustments, cast ([source, ((cast _Runtime.strictEquals(colorTransform, null) : Bool) ? (cast null : Dynamic) : (cast cast ([_Runtime.callValue(createColorTransformAdjustment, cast ([colorTransform] : Array<Dynamic>))] : Array<Dynamic>) : Dynamic))] : Array<Dynamic>));
   }
 
   public static function resolveDisplayObjectColorAdjustments__displayObject(runtime:DisplayObjectRuntime):Void {
@@ -113,14 +113,14 @@ class DisplayObject {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     var status:Dynamic = cast _Runtime.UNDEFINED;
     adjustments = _Runtime.field(runtime, 'colorAdjustments');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(adjustments, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(adjustments, 'length'), 0.0)))) {
+    if ((cast ((cast _Runtime.strictEquals(adjustments, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(adjustments, 'length'), 0.0) : Bool)) : Bool)) {
       _Runtime.setField(runtime, 'resolvedColorTransform', null);
       _Runtime.setField(runtime, 'colorAdjustmentsChannelMixing', false);
       return;
     }
     out = _Runtime.coalesce(_Runtime.field(runtime, 'resolvedColorTransform'), function():Dynamic return cast _Runtime.callValue(createColorTransform, cast ([] : Array<Dynamic>)));
     status = _Runtime.callValue(resolveColorAdjustmentsColorTransform, cast ([adjustments, out] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(status, COLOR_ADJUSTMENT_NONE))) {
+    if ((cast _Runtime.strictEquals(status, COLOR_ADJUSTMENT_NONE) : Bool)) {
       _Runtime.setField(runtime, 'resolvedColorTransform', null);
       _Runtime.setField(runtime, 'colorAdjustmentsChannelMixing', false);
       return;

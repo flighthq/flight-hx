@@ -25,7 +25,7 @@ class WebcamStream {
   public static function getWebcamStreamRuntime(stream:flighthq.types.WebcamStream):Null<WebcamStreamRuntime> {
     var rt:Dynamic = cast _Runtime.UNDEFINED;
     rt = _Runtime.getIndex(stream, EntityRuntimeKey);
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(rt, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(rt, null)))) { return cast null; }
+    if ((cast ((cast _Runtime.strictEquals(rt, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(rt, null) : Bool)) : Bool)) { return cast null; }
     return cast (cast rt : WebcamStreamRuntime);
     return cast null;
   }

@@ -31,13 +31,13 @@ class Lifecycle {
       var state:Dynamic = cast _Runtime.UNDEFINED;
       state = _Runtime.callProperty(backend, 'getState', cast ([] : Array<Dynamic>));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onStateChange')], [state]]), 1);
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(state, 'active'), function():Dynamic return cast !_Runtime.strictEquals(previous, 'active')))) {
+      if ((cast ((cast _Runtime.strictEquals(state, 'active') : Bool) && (cast !_Runtime.strictEquals(previous, 'active') : Bool)) : Bool)) {
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onResume')]]), 1);
         var saved:Dynamic = ((cast Lifecycle._savedState__lifecycle : flighthq._internal._WeakMap).get(app));
-        if (_Runtime.truthy(!_Runtime.strictEquals(saved, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+        if ((cast !_Runtime.strictEquals(saved, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onRestoreState')], [saved]]), 1);
         }
-      } else { if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(state, 'active'), function():Dynamic return cast _Runtime.strictEquals(previous, 'active')))) {
+      } else { if ((cast ((cast !_Runtime.strictEquals(state, 'active') : Bool) && (cast _Runtime.strictEquals(previous, 'active') : Bool)) : Bool)) {
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onPause')]]), 1);
         var stateBag:Dynamic = {  };
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onSaveState')], [stateBag]]), 1);
@@ -46,7 +46,7 @@ class Lifecycle {
       (previous = cast (state : Dynamic));
     }] : Array<Dynamic>));
     memSub = _Runtime.field(backend, 'subscribeMemoryWarning');
-    if (_Runtime.truthy(!_Runtime.strictEquals(memSub, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(memSub, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (unsubscribeMemory = cast (_Runtime.callProperty(memSub, 'call', cast ([backend, function(level:AppMemoryPressure) {
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onMemoryWarning')], [level]]), 1);
       }] : Array<Dynamic>)) : Dynamic));
@@ -66,13 +66,13 @@ class Lifecycle {
     var _windowFocused:Dynamic = cast _Runtime.UNDEFINED;
     _windowFocused = !_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined');
     return cast { getState: function() {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'))) { return cast 'active'; }
-      if (_Runtime.truthy(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'hidden'))) { return cast 'background'; }
-      return cast _Runtime.select(_windowFocused, function():Dynamic return cast 'active', function():Dynamic return cast 'inactive');
+      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) { return cast 'active'; }
+      if ((cast flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'hidden') : Bool)) { return cast 'background'; }
+      return cast ((cast _windowFocused : Bool) ? (cast 'active' : Dynamic) : (cast 'inactive' : Dynamic));
     }, subscribe: function(listener:Dynamic) {
       var onFocus:Dynamic = cast _Runtime.UNDEFINED;
       var onBlur:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined')))) { return cast function() {
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) : Bool)) { return cast function() {
       
       }; }
       (_windowFocused = cast (flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'hasFocus', cast ([] : Array<Dynamic>)) : Dynamic));
@@ -98,14 +98,14 @@ class Lifecycle {
       };
     }, getLaunchKind: function() {
       var entries:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('performance'), 'undefined'))) { return cast 'cold'; }
+      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('performance'), 'undefined') : Bool)) { return cast 'cold'; }
       entries = (cast _Runtime.callProperty(_Runtime.globalValue('performance'), 'getEntriesByType', cast (['navigation'] : Array<Dynamic>)) : Array<Dynamic>);
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(_Runtime.field(entries, 'length'), 0.0, '>'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.getIndex(entries, 0.0), 'type'), 'back_forward')))) { return cast 'warm'; }
+      if ((cast ((cast ((cast _Runtime.field(entries, 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(_Runtime.getIndex(entries, 0.0), 'type'), 'back_forward') : Bool)) : Bool)) { return cast 'warm'; }
       return cast 'cold';
     }, subscribeMemoryWarning: function(listener:Dynamic) {
       var onPressure:Dynamic = cast _Runtime.UNDEFINED;
       var onPressureRelieved:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast function() {
+      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast function() {
       
       }; }
       onPressure = function(e:Dynamic) {
@@ -113,9 +113,9 @@ class Lifecycle {
         var pressure:Dynamic = cast _Runtime.UNDEFINED;
         detail = _Runtime.field((cast e : Dynamic), 'detail');
         pressure = _Runtime.optionalField(detail, 'pressure');
-        if (_Runtime.truthy(_Runtime.strictEquals(pressure, 'critical'))) {
+        if ((cast _Runtime.strictEquals(pressure, 'critical') : Bool)) {
           _Runtime.callValue(listener, cast (['critical'] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(pressure, 'moderate'))) {
+        } else { if ((cast _Runtime.strictEquals(pressure, 'moderate') : Bool)) {
           _Runtime.callValue(listener, cast (['moderate'] : Array<Dynamic>));
         } else {
           _Runtime.callValue(listener, cast (['moderate'] : Array<Dynamic>));
@@ -137,7 +137,7 @@ class Lifecycle {
   public static function detachAppLifecycle(app:AppLifecycle):Void {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
     unsubscribe = ((cast Lifecycle._subscriptions__lifecycle : flighthq._internal._WeakMap).get(app));
-    if (_Runtime.truthy(!_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callValue(unsubscribe, cast ([] : Array<Dynamic>));
       ((cast Lifecycle._subscriptions__lifecycle : flighthq._internal._WeakMap).delete_(app));
     }
@@ -151,7 +151,7 @@ class Lifecycle {
   public static function getAppLaunchKind():AppLaunchKind {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
     backend = _Runtime.callValue(getLifecycleBackend, cast ([] : Array<Dynamic>));
-    return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.field(backend, 'getLaunchKind'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callProperty(backend, 'getLaunchKind', cast ([] : Array<Dynamic>)), function():Dynamic return cast 'warm');
+    return cast ((cast !_Runtime.strictEquals(_Runtime.field(backend, 'getLaunchKind'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callProperty(backend, 'getLaunchKind', cast ([] : Array<Dynamic>)) : Dynamic) : (cast 'warm' : Dynamic));
     return cast null;
   }
 
@@ -161,7 +161,7 @@ class Lifecycle {
   }
 
   public static function getLifecycleBackend():LifecycleBackend {
-    if (_Runtime.truthy(_Runtime.strictEquals(Lifecycle._backend__lifecycle, null))) { (Lifecycle._backend__lifecycle = cast (_Runtime.callValue(createWebLifecycleBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Lifecycle._backend__lifecycle, null) : Bool)) { (Lifecycle._backend__lifecycle = cast (_Runtime.callValue(createWebLifecycleBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Lifecycle._backend__lifecycle;
     return cast null;
   }

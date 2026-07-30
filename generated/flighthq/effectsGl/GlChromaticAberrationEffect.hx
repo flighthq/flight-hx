@@ -20,7 +20,7 @@ class GlChromaticAberrationEffect {
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'lens.chromaticAberration', GlChromaticAberrationEffect.CHROMATIC_ABERRATION_FRAGMENT_SRC__glChromaticAberrationEffect] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_radial'), _Runtime.select(radial, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0));
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_radial'), ((cast radial : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
     }] : Array<Dynamic>));
   }
 

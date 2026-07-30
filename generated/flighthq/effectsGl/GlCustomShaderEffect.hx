@@ -17,7 +17,7 @@ class GlCustomShaderEffect {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     var uniforms:Dynamic = cast _Runtime.UNDEFINED;
     fragmentSource = _Runtime.callValue(getGlCustomShaderSource, cast ([state, _Runtime.field(effect, 'shaderKey')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(fragmentSource, null))) {
+    if ((cast _Runtime.strictEquals(fragmentSource, null) : Bool)) {
       var passthrough:Dynamic = _Runtime.callValue(getGlEffectProgram, cast ([state, 'custom.passthrough', GlCustomShaderEffect.PASSTHROUGH_FRAGMENT_SRC__glCustomShaderEffect] : Array<Dynamic>));
       _Runtime.callValue(drawGlFullscreenPass, cast ([state, passthrough, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, GlCustomShaderEffect.NO_UNIFORMS__glCustomShaderEffect] : Array<Dynamic>));
       return;
@@ -25,12 +25,12 @@ class GlCustomShaderEffect {
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, ('custom.' + _Runtime.field(effect, 'shaderKey')), fragmentSource] : Array<Dynamic>));
     uniforms = _Runtime.field(effect, 'uniforms');
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
-      if (_Runtime.truthy(_Runtime.strictEquals(uniforms, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
+      if ((cast _Runtime.strictEquals(uniforms, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       for (name in _Runtime.iterable(flighthq._internal.DynamicObject.keys(uniforms))) {
         var location:Dynamic = _Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, name] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.strictEquals(location, null))) { continue; }
+        if ((cast _Runtime.strictEquals(location, null) : Bool)) { continue; }
         var value:Dynamic = _Runtime.getIndex(uniforms, name);
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(value), 'number'))) {
+        if ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'number') : Bool)) {
           flighthq._internal.backend.WebGl2Backend.uniform1f(gl, location, value);
           continue;
         }
@@ -68,7 +68,7 @@ class GlCustomShaderEffect {
   public static function registerGlCustomShaderSource(state:GlRenderState, shaderKey:String, fragmentSource:String):Void {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = ((cast GlCustomShaderEffect._customShaders__glCustomShaderEffect : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (registry = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
       ((cast GlCustomShaderEffect._customShaders__glCustomShaderEffect : flighthq._internal._WeakMap).set(state, registry));
     }

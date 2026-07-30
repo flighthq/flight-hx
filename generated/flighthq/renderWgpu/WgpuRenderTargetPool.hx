@@ -19,9 +19,9 @@ class WgpuRenderTargetPool {
     format = _Runtime.coalesce(_Runtime.field(descriptor, 'format'), function():Dynamic return cast _Runtime.field(state, 'format'));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(pool, 'free'), 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(pool, 'free'), 'length') : Float)) : Bool)) {
         var candidate:Dynamic = _Runtime.getIndex(_Runtime.field(pool, 'free'), i);
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(candidate, 'width'), w), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(candidate, 'height'), h)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(candidate, 'format'), format)))) {
+        if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(candidate, 'width'), w) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(candidate, 'height'), h) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(candidate, 'format'), format) : Bool)) : Bool)) {
           _Runtime.splice(_Runtime.field(pool, 'free'), Std.int(i), Std.int(1.0), []);
           return cast candidate;
         }

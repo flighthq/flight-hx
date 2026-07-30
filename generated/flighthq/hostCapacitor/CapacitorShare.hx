@@ -21,12 +21,12 @@ class CapacitorShare {
     return cast { isAvailable: function() {
       return cast cachedAvailable;
     }, canShare: function(content:Dynamic) {
-      return cast _Runtime.andValue(cachedAvailable, function():Dynamic return cast _Runtime.callValue(CapacitorShare.hasShareableText__capacitorShare, cast ([content] : Array<Dynamic>)));
+      return cast ((cast cachedAvailable : Bool) && (cast _Runtime.callValue(CapacitorShare.hasShareableText__capacitorShare, cast ([content] : Array<Dynamic>)) : Bool));
     }, share: function(content:Dynamic, options:Dynamic):flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           var __flowBranch0:Dynamic;
-          if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(CapacitorShare.hasShareableText__capacitorShare, cast ([content] : Array<Dynamic>))))) {
+          if ((cast !(cast _Runtime.callValue(CapacitorShare.hasShareableText__capacitorShare, cast ([content] : Array<Dynamic>)) : Bool) : Bool)) {
             __flowBranch0 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn(false);
             });
@@ -54,7 +54,7 @@ class CapacitorShare {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           var __flowBranch2:Dynamic;
-          if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(CapacitorShare.hasShareableText__capacitorShare, cast ([content] : Array<Dynamic>))))) {
+          if ((cast !(cast _Runtime.callValue(CapacitorShare.hasShareableText__capacitorShare, cast ([content] : Array<Dynamic>)) : Bool) : Bool)) {
             __flowBranch2 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn({ completed: false, activityType: null, dismissed: false });
             });
@@ -84,7 +84,7 @@ class CapacitorShare {
   }
 
   public static function hasShareableText__capacitorShare(content:ShareContent):Bool {
-    return cast _Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(content, 'title'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(content, 'text'), _Runtime.field(_Runtime, 'UNDEFINED'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(content, 'url'), _Runtime.field(_Runtime, 'UNDEFINED')));
+    return cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(content, 'title'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(content, 'text'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(content, 'url'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool));
     return cast null;
   }
 }

@@ -45,18 +45,18 @@ class AreaLight {
     dirLen = HxMath.sqrt((((direction.x * direction.x) + (direction.y * direction.y)) + (direction.z * direction.z)));
     existingRightLen = HxMath.sqrt((((_Runtime.field(out, 'right').x * _Runtime.field(out, 'right').x) + (_Runtime.field(out, 'right').y * _Runtime.field(out, 'right').y)) + (_Runtime.field(out, 'right').z * _Runtime.field(out, 'right').z)));
     existingUpLen = HxMath.sqrt((((_Runtime.field(out, 'up').x * _Runtime.field(out, 'up').x) + (_Runtime.field(out, 'up').y * _Runtime.field(out, 'up').y)) + (_Runtime.field(out, 'up').z * _Runtime.field(out, 'up').z)));
-    if (_Runtime.truthy(_Runtime.compare(dirLen, 0.0, '>'))) {
+    if ((cast ((cast dirLen : Float) > (cast 0.0 : Float)) : Bool)) {
       _Runtime.callValue(normalizeVector3, cast ([_Runtime.field(out, 'direction'), direction] : Array<Dynamic>));
     }
-    if (_Runtime.truthy(_Runtime.compare(rightLen, 0.0, '>'))) {
+    if ((cast ((cast rightLen : Float) > (cast 0.0 : Float)) : Bool)) {
       _Runtime.callValue(setVector3, cast ([_Runtime.field(out, 'right'), (right.x / rightLen), (right.y / rightLen), (right.z / rightLen)] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.compare(existingRightLen, 0.0, '>'))) {
+      if ((cast ((cast existingRightLen : Float) > (cast 0.0 : Float)) : Bool)) {
         _Runtime.callValue(setVector3, cast ([_Runtime.field(out, 'right'), (_Runtime.field(out, 'right').x * existingRightLen), (_Runtime.field(out, 'right').y * existingRightLen), (_Runtime.field(out, 'right').z * existingRightLen)] : Array<Dynamic>));
       }
     }
-    if (_Runtime.truthy(_Runtime.compare(upLen, 0.0, '>'))) {
+    if ((cast ((cast upLen : Float) > (cast 0.0 : Float)) : Bool)) {
       _Runtime.callValue(setVector3, cast ([_Runtime.field(out, 'up'), (up.x / upLen), (up.y / upLen), (up.z / upLen)] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.compare(existingUpLen, 0.0, '>'))) {
+      if ((cast ((cast existingUpLen : Float) > (cast 0.0 : Float)) : Bool)) {
         _Runtime.callValue(setVector3, cast ([_Runtime.field(out, 'up'), (_Runtime.field(out, 'up').x * existingUpLen), (_Runtime.field(out, 'up').y * existingUpLen), (_Runtime.field(out, 'up').z * existingUpLen)] : Array<Dynamic>));
       }
     }

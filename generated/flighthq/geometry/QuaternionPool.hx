@@ -20,7 +20,7 @@ class QuaternionPool {
 
   public static function acquireQuaternion():Quaternion {
     var q:Quaternion = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(QuaternionPool.pool__quaternionPool, 'length'), 0.0, '>'))) {
+    if ((cast ((cast _Runtime.field(QuaternionPool.pool__quaternionPool, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       (q = cast ((cast _Runtime.callProperty(QuaternionPool.pool__quaternionPool, 'pop', cast ([] : Array<Dynamic>)) : Quaternion) : Dynamic));
     } else {
       (q = cast (_Runtime.callValue(createQuaternion, cast ([] : Array<Dynamic>)) : Dynamic));
@@ -34,7 +34,7 @@ class QuaternionPool {
   }
 
   public static function releaseQuaternion(q:Quaternion):Void {
-    if (_Runtime.truthy(!_Runtime.truthy(q))) { return; }
+    if ((cast !_Runtime.truthy(q) : Bool)) { return; }
     _Runtime.callProperty(QuaternionPool.pool__quaternionPool, 'push', cast ([q] : Array<Dynamic>));
   }
 

@@ -8,7 +8,7 @@ class Interpolation {
   public static function inverseLerp(a:Float, b:Float, value:Float):Float {
     var range:Dynamic = cast _Runtime.UNDEFINED;
     range = (b - a);
-    return cast _Runtime.select(_Runtime.strictEquals(range, 0.0), function():Dynamic return cast 0.0, function():Dynamic return cast ((value - a) / range));
+    return cast ((cast _Runtime.strictEquals(range, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast ((value - a) / range) : Dynamic));
     return cast null;
   }
 
@@ -20,7 +20,7 @@ class Interpolation {
   public static function remap(value:Float, inMin:Float, inMax:Float, outMin:Float, outMax:Float):Float {
     var inRange:Dynamic = cast _Runtime.UNDEFINED;
     inRange = (inMax - inMin);
-    if (_Runtime.truthy(_Runtime.strictEquals(inRange, 0.0))) { return cast outMin; }
+    if ((cast _Runtime.strictEquals(inRange, 0.0) : Bool)) { return cast outMin; }
     return cast (outMin + (((value - inMin) / inRange) * (outMax - outMin)));
     return cast null;
   }
@@ -29,13 +29,13 @@ class Interpolation {
     var t:Dynamic = cast _Runtime.UNDEFINED;
     var s:Dynamic = cast _Runtime.UNDEFINED;
     t = ((x - edge0) / (edge1 - edge0));
-    s = _Runtime.select(_Runtime.compare(t, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(t, 1.0, '>'), function():Dynamic return cast 1.0, function():Dynamic return cast t));
+    s = ((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast t : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic));
     return cast ((s * s) * (3.0 - (2.0 * s)));
     return cast null;
   }
 
   public static function step(edge:Float, x:Float):Float {
-    return cast _Runtime.select(_Runtime.compare(x, edge, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast 1.0);
+    return cast ((cast ((cast x : Float) < (cast edge : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast 1.0 : Dynamic));
     return cast null;
   }
 }

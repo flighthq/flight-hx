@@ -11,9 +11,9 @@ import flighthq.types.RenderProxy2D;
 class DomStyle {
   public static function applyDomStyle(state:DomRenderState, element:Dynamic, node:RenderProxy2D):Void {
     _Runtime.callValue(setDomTransform, cast ([element, _Runtime.field(node, 'transform2D'), _Runtime.field(state, 'roundPixels')] : Array<Dynamic>));
-    _Runtime.setField(_Runtime.field(element, 'style'), 'opacity', _Runtime.select(_Runtime.compare(_Runtime.field(node, 'alpha'), 1.0, '<'), function():Dynamic return cast Std.string(_Runtime.field(node, 'alpha')), function():Dynamic return cast ''));
-    _Runtime.setField(_Runtime.field(element, 'style'), 'imageRendering', _Runtime.select(_Runtime.field(state, 'allowSmoothing'), function():Dynamic return cast '', function():Dynamic return cast 'pixelated'));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(state, 'domCssFilterResolver'), null))) { _Runtime.setField(_Runtime.field(element, 'style'), 'filter', _Runtime.coalesce(_Runtime.callProperty(state, 'domCssFilterResolver', cast ([node] : Array<Dynamic>)), function():Dynamic return cast '')); }
+    _Runtime.setField(_Runtime.field(element, 'style'), 'opacity', ((cast ((cast _Runtime.field(node, 'alpha') : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string(_Runtime.field(node, 'alpha')) : Dynamic) : (cast '' : Dynamic)));
+    _Runtime.setField(_Runtime.field(element, 'style'), 'imageRendering', ((cast _Runtime.field(state, 'allowSmoothing') : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic)));
+    if ((cast !_Runtime.strictEquals(_Runtime.field(state, 'domCssFilterResolver'), null) : Bool)) { _Runtime.setField(_Runtime.field(element, 'style'), 'filter', _Runtime.coalesce(_Runtime.callProperty(state, 'domCssFilterResolver', cast ([node] : Array<Dynamic>)), function():Dynamic return cast '')); }
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([element, _Runtime.field(node, 'blendMode')] : Array<Dynamic>));
   }
 

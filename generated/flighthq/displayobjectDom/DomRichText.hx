@@ -47,7 +47,7 @@ class DomRichText {
   public static var _measureCtx__domRichText:Null<Dynamic> = _Runtime.explicitNull();
 
   public static function getMeasureCtx__domRichText():Null<Dynamic> {
-    if (_Runtime.truthy(_Runtime.strictEquals(DomRichText._measureCtx__domRichText, null))) {
+    if ((cast _Runtime.strictEquals(DomRichText._measureCtx__domRichText, null) : Bool)) {
       (DomRichText._measureCtx__domRichText = cast (flighthq._internal.backend.CanvasElementBackend.call(flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)), 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic));
     }
     return cast DomRichText._measureCtx__domRichText;
@@ -56,7 +56,7 @@ class DomRichText {
 
   public static function drawDomRichText(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(DomRichText.drawDomRichTextField__domRichText, cast ([state, renderProxy] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(DomRichText._domTextInputOverlay__domRichText, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([(cast _Runtime.field(renderProxy, 'source') : RichText)] : Array<Dynamic>)), 'input'), null)))) {
+    if ((cast ((cast !_Runtime.strictEquals(DomRichText._domTextInputOverlay__domRichText, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([(cast _Runtime.field(renderProxy, 'source') : RichText)] : Array<Dynamic>)), 'input'), null) : Bool)) : Bool)) {
       _Runtime.callValue(DomRichText._domTextInputOverlay__domRichText, cast ([state, renderProxy] : Array<Dynamic>));
     }
   }
@@ -93,7 +93,7 @@ class DomRichText {
     var html:Dynamic = cast _Runtime.UNDEFINED;
     var bulletLines:Dynamic = cast _Runtime.UNDEFINED;
     data = (cast _Runtime.field(renderProxy, 'rendererData') : Null<DomRichTextData__domRichText>);
-    if (_Runtime.truthy(_Runtime.strictEquals(data, null))) { return; }
+    if ((cast _Runtime.strictEquals(data, null) : Bool)) { return; }
     source = (cast _Runtime.field(renderProxy, 'source') : RichText);
     __destructure0 = _Runtime.field(source, 'data');
     background = _Runtime.field(__destructure0, 'background');
@@ -104,7 +104,7 @@ class DomRichText {
     multiline = _Runtime.field(__destructure0, 'multiline');
     scrollH = _Runtime.field(__destructure0, 'scrollH');
     scrollV = _Runtime.field(__destructure0, 'scrollV');
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'div'), null))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(data, 'div'), null) : Bool)) {
       _Runtime.setField(data, 'div', flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['div'] : Array<Dynamic>)));
       _Runtime.callValue(prepareDomElement, cast ([_Runtime.field(data, 'div')] : Array<Dynamic>));
       _Runtime.setField(_Runtime.field(_Runtime.field(data, 'div'), 'style'), 'overflow', 'hidden');
@@ -115,31 +115,31 @@ class DomRichText {
     __destructure1 = content;
     text = _Runtime.field(__destructure1, 'text');
     ctx = _Runtime.callValue(DomRichText.getMeasureCtx__domRichText, cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(ctx, null))) { return; }
+    if ((cast _Runtime.strictEquals(ctx, null) : Bool)) { return; }
     measure = function(t:String, fmt:TextFormat) {
       flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([fmt] : Array<Dynamic>)));
       return cast _Runtime.field(flighthq._internal.backend.Canvas2dBackend.call(ctx, 'measureText', cast ([t] : Array<Dynamic>)), 'width');
     };
     result = _Runtime.callValue(getTextLayoutResult, cast ([(cast richTextRuntime : TextLabelRuntime)] : Array<Dynamic>));
-    _Runtime.callValue(computeTextLayout, cast ([result, { text: text, formatRanges: _Runtime.field(content, 'formatRanges'), width: _Runtime.select(wordWrap, function():Dynamic return cast _Runtime.field(_Runtime.field(source, 'data'), 'width'), function():Dynamic return cast 10000.0), height: _Runtime.field(_Runtime.field(source, 'data'), 'height'), measure: measure, multiline: multiline, verticalAlign: _Runtime.select(_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'autoSize'), 'none'), function():Dynamic return cast _Runtime.field(_Runtime.field(source, 'data'), 'verticalAlign'), function():Dynamic return cast 'top'), wordWrap: wordWrap }] : Array<Dynamic>));
+    _Runtime.callValue(computeTextLayout, cast ([result, { text: text, formatRanges: _Runtime.field(content, 'formatRanges'), width: ((cast wordWrap : Bool) ? (cast _Runtime.field(_Runtime.field(source, 'data'), 'width') : Dynamic) : (cast 10000.0 : Dynamic)), height: _Runtime.field(_Runtime.field(source, 'data'), 'height'), measure: measure, multiline: multiline, verticalAlign: ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'autoSize'), 'none') : Bool) ? (cast _Runtime.field(_Runtime.field(source, 'data'), 'verticalAlign') : Dynamic) : (cast 'top' : Dynamic)), wordWrap: wordWrap }] : Array<Dynamic>));
     fieldW = _Runtime.callValue(computeTextBoundsWidth, cast ([_Runtime.field(source, 'data'), result] : Array<Dynamic>));
     fieldH = _Runtime.callValue(computeTextBoundsHeight, cast ([_Runtime.field(source, 'data'), result] : Array<Dynamic>));
     div = _Runtime.field(data, 'div');
     _Runtime.setField(_Runtime.field(div, 'style'), 'width', '' + Std.string(fieldW) + 'px');
     _Runtime.setField(_Runtime.field(div, 'style'), 'height', '' + Std.string(fieldH) + 'px');
-    _Runtime.setField(_Runtime.field(div, 'style'), 'backgroundColor', _Runtime.select(background, function():Dynamic return cast _Runtime.callValue(computeRgbHexString, cast ([backgroundColor] : Array<Dynamic>)), function():Dynamic return cast ''));
-    _Runtime.setField(_Runtime.field(div, 'style'), 'border', _Runtime.select(border, function():Dynamic return cast '1px solid ' + Std.string(_Runtime.callValue(computeRgbHexString, cast ([borderColor] : Array<Dynamic>))) + '', function():Dynamic return cast ''));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0))) {
+    _Runtime.setField(_Runtime.field(div, 'style'), 'backgroundColor', ((cast background : Bool) ? (cast _Runtime.callValue(computeRgbHexString, cast ([backgroundColor] : Array<Dynamic>)) : Dynamic) : (cast '' : Dynamic)));
+    _Runtime.setField(_Runtime.field(div, 'style'), 'border', ((cast border : Bool) ? (cast '1px solid ' + Std.string(_Runtime.callValue(computeRgbHexString, cast ([borderColor] : Array<Dynamic>))) + '' : Dynamic) : (cast '' : Dynamic)));
+    if ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) {
       _Runtime.setField(div, 'innerHTML', '');
       _Runtime.callValue(applyDomStyle, cast ([state, div, renderProxy] : Array<Dynamic>));
       _Runtime.callValue(setDomRendererElement, cast ([state, div] : Array<Dynamic>));
       return;
     }
     firstVisibleLine = (scrollV - 1.0);
-    scrollYOffset = _Runtime.select(_Runtime.compare(firstVisibleLine, 0.0, '>'), function():Dynamic return cast _Runtime.callValue(getRichTextScrollYOffset, cast ([_Runtime.field(result, 'lineHeights'), firstVisibleLine] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+    scrollYOffset = ((cast ((cast firstVisibleLine : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callValue(getRichTextScrollYOffset, cast ([_Runtime.field(result, 'lineHeights'), firstVisibleLine] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
     scrollXOffset = scrollH;
     html = '';
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.field(_Runtime.field(source, 'data'), 'selectable'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(richTextRuntime, 'selectionBeginIndex'), _Runtime.field(richTextRuntime, 'selectionEndIndex'))))) {
+    if ((cast ((cast _Runtime.field(_Runtime.field(source, 'data'), 'selectable') : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(richTextRuntime, 'selectionBeginIndex'), _Runtime.field(richTextRuntime, 'selectionEndIndex')) : Bool)) : Bool)) {
       _Runtime.callValue(getRichTextSelectionRectangles, cast ([DomRichText._richTextSelectionRectangles__domRichText, _Runtime.field(richTextRuntime, 'selectionBeginIndex'), _Runtime.field(richTextRuntime, 'selectionEndIndex'), result] : Array<Dynamic>));
       for (rectangle in _Runtime.iterable(DomRichText._richTextSelectionRectangles__domRichText)) {
         (html = cast ((html + '<div style="position:absolute;left:' + Std.string((_Runtime.field(rectangle, 'x') - scrollXOffset)) + 'px;top:' + Std.string((_Runtime.field(rectangle, 'y') - scrollYOffset)) + 'px;width:' + Std.string(_Runtime.field(rectangle, 'width')) + 'px;height:' + Std.string(_Runtime.field(rectangle, 'height')) + 'px;background:' + Std.string(DomRichText.DOM_SELECTION_COLOR__domRichText) + ';opacity:' + Std.string(DomRichText.DOM_SELECTION_ALPHA__domRichText) + ';pointer-events:none;"></div>') : Dynamic));
@@ -147,14 +147,14 @@ class DomRichText {
     }
     bulletLines = _Runtime.construct(_Runtime.globalValue('Set'), []);
     for (group in _Runtime.iterable(_Runtime.field(result, 'groups'))) {
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(group, 'lineIndex'), firstVisibleLine, '<'))) { continue; }
+      if ((cast ((cast _Runtime.field(group, 'lineIndex') : Float) < (cast firstVisibleLine : Float)) : Bool)) { continue; }
       var fmt:Dynamic = _Runtime.field(group, 'format');
       var slice:Dynamic = _Runtime.callValue(escapeDomHtmlString, cast ([_Runtime.substring(text, _Runtime.field(group, 'startIndex'), _Runtime.field(group, 'endIndex'))] : Array<Dynamic>));
       var x:Dynamic = (_Runtime.field(group, 'offsetX') - scrollXOffset);
       var fontStr:Dynamic = _Runtime.callValue(computeTextFormatFontString, cast ([fmt] : Array<Dynamic>));
       var fontAscent:Dynamic = _Runtime.callValue(DomRichText.getDomFontAscent__domRichText, cast ([ctx, fontStr] : Array<Dynamic>));
       var y:Dynamic = (((_Runtime.field(group, 'offsetY') + _Runtime.field(group, 'ascent')) - fontAscent) - scrollYOffset);
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.field(fmt, 'bullet'), function():Dynamic return cast !_Runtime.truthy(((cast bulletLines : flighthq._internal._Set).has(_Runtime.field(group, 'lineIndex'))))))) {
+      if (_Runtime.truthy(_Runtime.andValue(_Runtime.field(fmt, 'bullet'), function():Dynamic return cast !(cast ((cast bulletLines : flighthq._internal._Set).has(_Runtime.field(group, 'lineIndex'))) : Bool)))) {
         ((cast bulletLines : flighthq._internal._Set).add(_Runtime.field(group, 'lineIndex')));
         var bulletSize:Dynamic = _Runtime.coalesce(_Runtime.field(fmt, 'size'), function():Dynamic return cast 12.0);
         var bulletX:Dynamic = ((x - (bulletSize * 0.7)) - DomRichText.DOM_BULLET_GAP__domRichText);
@@ -181,9 +181,9 @@ class DomRichText {
           (style = cast ((style + 'text-align:justify;') : Dynamic));
         }
       }
-      if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(fmt, 'leftMargin'), null))) { (style = cast ((style + 'padding-left:' + Std.string(_Runtime.field(fmt, 'leftMargin')) + 'px;') : Dynamic)); }
-      if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(fmt, 'rightMargin'), null))) { (style = cast ((style + 'padding-right:' + Std.string(_Runtime.field(fmt, 'rightMargin')) + 'px;') : Dynamic)); }
-      if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(fmt, 'indent'), null))) { (style = cast ((style + 'text-indent:' + Std.string(_Runtime.field(fmt, 'indent')) + 'px;') : Dynamic)); }
+      if ((cast !_Runtime.looseEquals(_Runtime.field(fmt, 'leftMargin'), null) : Bool)) { (style = cast ((style + 'padding-left:' + Std.string(_Runtime.field(fmt, 'leftMargin')) + 'px;') : Dynamic)); }
+      if ((cast !_Runtime.looseEquals(_Runtime.field(fmt, 'rightMargin'), null) : Bool)) { (style = cast ((style + 'padding-right:' + Std.string(_Runtime.field(fmt, 'rightMargin')) + 'px;') : Dynamic)); }
+      if ((cast !_Runtime.looseEquals(_Runtime.field(fmt, 'indent'), null) : Bool)) { (style = cast ((style + 'text-indent:' + Std.string(_Runtime.field(fmt, 'indent')) + 'px;') : Dynamic)); }
       (html = cast ((html + '<div style="' + Std.string(style) + '">' + Std.string(slice) + '</div>') : Dynamic));
     }
     _Runtime.setField(div, 'innerHTML', html);
@@ -197,7 +197,7 @@ class DomRichText {
     var cached:Dynamic = cast _Runtime.UNDEFINED;
     var ascent:Dynamic = cast _Runtime.UNDEFINED;
     cached = _Runtime.callValue(getDomFontAscentCached, cast ([font] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast cached; }
+    if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
     ascent = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'body')), function():Dynamic return cast _Runtime.callValue(DomRichText.probeCssFontAscent__domRichText, cast ([font] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(DomRichText.canvasFontAscentFallback__domRichText, cast ([ctx, font] : Array<Dynamic>)));
     _Runtime.callValue(setDomFontAscentCached, cast ([font, ascent] : Array<Dynamic>));
     return cast ascent;

@@ -7,7 +7,7 @@ import flighthq.types.Signal;
 
 class Emitter {
   public static function cancelSignal<T>(signal:Signal<Dynamic>):Void {
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(signal, 'data'), null))) { _Runtime.setField(_Runtime.field(signal, 'data'), 'cancelled', true); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(signal, 'data'), null) : Bool)) { _Runtime.setField(_Runtime.field(signal, 'data'), 'cancelled', true); }
   }
 
   public static function emitSignal<T>(signal:Signal<Dynamic>, ...args:Dynamic):Void {

@@ -43,26 +43,26 @@ class DomDisplayObject {
     _Runtime.setIndex(tempStack, 0.0, source);
     newLength = 0.0;
     needsReconcile = false;
-    while (_Runtime.truthy(_Runtime.compare(stackLength, 0.0, '>'))) {
+    while ((cast ((cast stackLength : Float) > (cast 0.0 : Float)) : Bool)) {
       var current:Dynamic = (cast _Runtime.getIndex(tempStack, --stackLength) : DisplayObject);
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(current, 'enabled')))) { continue; }
+      if ((cast !(cast _Runtime.field(current, 'enabled') : Bool) : Bool)) { continue; }
       var data:Dynamic = _Runtime.callValue(getRenderProxy2D, cast ([state, current] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(data, _Runtime.field(_Runtime, 'UNDEFINED')))) { continue; }
+      if ((cast _Runtime.strictEquals(data, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
       _Runtime.callOptionalProperty(clipHooks, 'popClip', cast ([state, data, current] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(isRenderProxyVisible, cast ([data] : Array<Dynamic>))))) { continue; }
+      if ((cast !(cast _Runtime.callValue(isRenderProxyVisible, cast ([data] : Array<Dynamic>)) : Bool) : Bool)) { continue; }
       _Runtime.callOptionalProperty(clipHooks, 'pushClip', cast ([state, data, current] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(data, 'renderer'), null))) {
+      if ((cast !_Runtime.strictEquals(_Runtime.field(data, 'renderer'), null) : Bool)) {
         var result:Dynamic = _Runtime.callValue(processDomNode, cast ([runtime, data, frameId, function() return _Runtime.callProperty(_Runtime.field(data, 'renderer'), 'submit', cast ([state, data] : Array<Dynamic>)), newLength] : Array<Dynamic>));
         (newLength = cast (_Runtime.field(result, 'newLength') : Dynamic));
-        if (_Runtime.truthy(_Runtime.field(result, 'needsReconcile'))) { (needsReconcile = cast (true : Dynamic)); }
+        if ((cast _Runtime.field(result, 'needsReconcile') : Bool)) { (needsReconcile = cast (true : Dynamic)); }
         _Runtime.callOptionalProperty(applyClip, 'apply', cast ([state, data] : Array<Dynamic>));
       }
-      if (_Runtime.truthy(_Runtime.field(data, 'traverseChildren'))) {
+      if ((cast _Runtime.field(data, 'traverseChildren') : Bool)) {
         var children:Dynamic = _Runtime.field(_Runtime.callValue(getDisplayObjectRuntime, cast ([current] : Array<Dynamic>)), 'children');
-        if (_Runtime.truthy(!_Runtime.strictEquals(children, null))) {
+        if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
           {
             var i:Dynamic = (_Runtime.field(children, 'length') - 1.0);
-            while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>='))) {
+            while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
               _Runtime.setIndex(tempStack, stackLength++, (cast _Runtime.getIndex(children, i) : DisplayObject));
               i--;
             }
@@ -71,7 +71,7 @@ class DomDisplayObject {
       }
     }
     _Runtime.callOptionalProperty(clipHooks, 'finalize', cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.callValue(hasDomStructureChanged, cast ([runtime, newLength, needsReconcile] : Array<Dynamic>)))) {
+    if ((cast _Runtime.callValue(hasDomStructureChanged, cast ([runtime, newLength, needsReconcile] : Array<Dynamic>)) : Bool)) {
       _Runtime.callValue(reconcileDomContainer, cast ([container, runtime, newLength] : Array<Dynamic>));
     }
     _Runtime.callValue(swapDomOrderLists, cast ([runtime, newLength] : Array<Dynamic>));

@@ -43,7 +43,7 @@ class _GlLitProgramValues {
     var shadow:Dynamic = cast _Runtime.UNDEFINED;
     var ibl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
-    if (_Runtime.truthy(!_Runtime.strictEquals(((cast _GlLitProgramValues._uploadedLightVersion__glLitProgram : flighthq._internal._WeakMap).get(program)), _Runtime.field(lights, 'version')))) {
+    if ((cast !_Runtime.strictEquals(((cast _GlLitProgramValues._uploadedLightVersion__glLitProgram : flighthq._internal._WeakMap).get(program)), _Runtime.field(lights, 'version')) : Bool)) {
       var data:Dynamic = _Runtime.field(lights, 'data');
       flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locDirectional'), _Runtime.getIndex(data, 0.0), _Runtime.getIndex(data, 1.0), _Runtime.getIndex(data, 2.0), 0.0);
       flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locDirectionalRadiance'), _Runtime.getIndex(data, 4.0), _Runtime.getIndex(data, 5.0), _Runtime.getIndex(data, 6.0), 0.0);
@@ -60,7 +60,7 @@ class _GlLitProgramValues {
     }
     runtime = _Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>));
     shadow = _Runtime.field(runtime, 'shadow');
-    if (_Runtime.truthy(!_Runtime.strictEquals(shadow, null))) {
+    if ((cast !_Runtime.strictEquals(shadow, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + _GlLitProgramValues.SHADOW_MAP_TEXTURE_UNIT__glLitProgram));
       flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, _Runtime.field(shadow, 'texture'));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locShadowMap'), _GlLitProgramValues.SHADOW_MAP_TEXTURE_UNIT__glLitProgram);
@@ -70,7 +70,7 @@ class _GlLitProgramValues {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locShadowEnabled'), 0.0);
     }
     ibl = _Runtime.field(runtime, 'ibl');
-    if (_Runtime.truthy(!_Runtime.strictEquals(ibl, null))) {
+    if ((cast !_Runtime.strictEquals(ibl, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + _GlLitProgramValues.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram));
       flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, _Runtime.field(ibl, 'irradianceCube'));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locIblIrradiance'), _GlLitProgramValues.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram);
@@ -107,7 +107,7 @@ class _GlLitProgramValues {
     var cube:Dynamic = cast _Runtime.UNDEFINED;
     var lut:Dynamic = cast _Runtime.UNDEFINED;
     placeholders = ((cast _GlLitProgramValues._iblPlaceholders__glLitProgram : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(!_Runtime.strictEquals(placeholders, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast placeholders; }
+    if ((cast !_Runtime.strictEquals(placeholders, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast placeholders; }
     gl = _Runtime.field(state, 'gl');
     flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + _GlLitProgramValues.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram));
     black = new flighthq._internal._UInt8Array(cast ([0.0, 0.0, 0.0, 255.0] : Array<Dynamic>));
@@ -115,7 +115,7 @@ class _GlLitProgramValues {
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, cube);
     {
       var face:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(face, 6.0, '<'))) {
+      while ((cast ((cast face : Float) < (cast 6.0 : Float)) : Bool)) {
         flighthq._internal.backend.WebGl2Backend.texImage2D(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP_POSITIVE_X + face), 0.0, flighthq._internal.backend.WebGl2Backend.RGBA, 1.0, 1.0, 0.0, flighthq._internal.backend.WebGl2Backend.RGBA, flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE, black);
         face++;
       }

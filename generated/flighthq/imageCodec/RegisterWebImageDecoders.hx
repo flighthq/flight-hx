@@ -34,7 +34,7 @@ class RegisterWebImageDecoders {
           _Runtime.callProperty(bitmap, 'close', cast ([] : Array<Dynamic>));
           data = _Runtime.field(flighthq._internal.backend.Canvas2dBackend.call(context, 'getImageData', cast ([0.0, 0.0, width, height] : Array<Dynamic>)), 'data');
           var __flowBranch3:Dynamic;
-          if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.optionalField(options, 'premultiplyAlpha'), true))) {
+          if ((cast _Runtime.strictEquals(_Runtime.optionalField(options, 'premultiplyAlpha'), true) : Bool)) {
             __flowBranch3 = flighthq._internal._Async.protect(function():Dynamic {
               _Runtime.callValue(RegisterWebImageDecoders.premultiplyRgbaInPlace__registerWebImageDecoders, cast ([data] : Array<Dynamic>));
               return flighthq._internal._Async.flowNormal();
@@ -53,9 +53,9 @@ class RegisterWebImageDecoders {
   public static function premultiplyRgbaInPlace__registerWebImageDecoders(data:flighthq._internal._UInt8ClampedArray):Void {
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(data, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
         var alpha:Dynamic = _Runtime.getIndex(data, (i + 3.0));
-        if (_Runtime.truthy(_Runtime.strictEquals(alpha, 255.0))) { (i = cast ((i + 4.0) : Dynamic)); continue; }
+        if ((cast _Runtime.strictEquals(alpha, 255.0) : Bool)) { (i = cast ((i + 4.0) : Dynamic)); continue; }
         _Runtime.setIndex(data, i, ((_Runtime.getIndex(data, i) * alpha) / 255.0));
         _Runtime.setIndex(data, (i + 1.0), ((_Runtime.getIndex(data, (i + 1.0)) * alpha) / 255.0));
         _Runtime.setIndex(data, (i + 2.0), ((_Runtime.getIndex(data, (i + 2.0)) * alpha) / 255.0));

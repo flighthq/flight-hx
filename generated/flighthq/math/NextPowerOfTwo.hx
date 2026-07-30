@@ -6,20 +6,20 @@ import flighthq._internal._Runtime;
 
 class NextPowerOfTwo {
   public static function isPowerOfTwo(n:Float):Bool {
-    return cast _Runtime.andValue(_Runtime.compare(n, 0.0, '>'), function():Dynamic return cast _Runtime.strictEquals((_Runtime.toInt32(n) & _Runtime.toInt32((n - 1.0))), 0.0));
+    return cast ((cast ((cast n : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals((_Runtime.toInt32(n) & _Runtime.toInt32((n - 1.0))), 0.0) : Bool));
     return cast null;
   }
 
   public static function nextMultipleOf(value:Float, multiple:Float):Float {
     var remainder:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(multiple, 0.0, '<='))) { return cast value; }
+    if ((cast ((cast multiple : Float) <= (cast 0.0 : Float)) : Bool)) { return cast value; }
     remainder = _Runtime.fmod(value, multiple);
-    return cast _Runtime.select(_Runtime.strictEquals(remainder, 0.0), function():Dynamic return cast value, function():Dynamic return cast ((value + multiple) - remainder));
+    return cast ((cast _Runtime.strictEquals(remainder, 0.0) : Bool) ? (cast value : Dynamic) : (cast ((value + multiple) - remainder) : Dynamic));
     return cast null;
   }
 
   public static function nextPowerOfTwo(n:Float):Float {
-    if (_Runtime.truthy(_Runtime.compare(n, 1.0, '<='))) { return cast 1.0; }
+    if ((cast ((cast n : Float) <= (cast 1.0 : Float)) : Bool)) { return cast 1.0; }
     (n = cast ((_Runtime.toInt32((n - 1.0)) | 0) : Dynamic));
     (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> 1))));
     (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> 2))));
@@ -31,7 +31,7 @@ class NextPowerOfTwo {
   }
 
   public static function previousPowerOfTwo(n:Float):Float {
-    if (_Runtime.truthy(_Runtime.compare(n, 1.0, '<='))) { return cast 1.0; }
+    if ((cast ((cast n : Float) <= (cast 1.0 : Float)) : Bool)) { return cast 1.0; }
     (n = cast ((_Runtime.toInt32(n) | 0) : Dynamic));
     (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> 1))));
     (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> 2))));

@@ -17,7 +17,7 @@ class Vector2Pool {
   }
 
   public static function acquireVector2():Vector2 {
-    return cast _Runtime.select(_Runtime.compare(_Runtime.field(Vector2Pool.pool__vector2Pool, 'length'), 0.0, '>'), function():Dynamic return cast (cast _Runtime.callProperty(Vector2Pool.pool__vector2Pool, 'pop', cast ([] : Array<Dynamic>)) : Vector2), function():Dynamic return cast _Runtime.callValue(createVector2, cast ([] : Array<Dynamic>)));
+    return cast ((cast ((cast _Runtime.field(Vector2Pool.pool__vector2Pool, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast _Runtime.callProperty(Vector2Pool.pool__vector2Pool, 'pop', cast ([] : Array<Dynamic>)) : Vector2) : Dynamic) : (cast _Runtime.callValue(createVector2, cast ([] : Array<Dynamic>)) : Dynamic));
     return cast null;
   }
 
@@ -26,7 +26,7 @@ class Vector2Pool {
   }
 
   public static function releaseVector2(v:Vector2):Void {
-    if (_Runtime.truthy(!_Runtime.truthy(v))) { return; }
+    if ((cast !_Runtime.truthy(v) : Bool)) { return; }
     _Runtime.callProperty(Vector2Pool.pool__vector2Pool, 'push', cast ([v] : Array<Dynamic>));
   }
 

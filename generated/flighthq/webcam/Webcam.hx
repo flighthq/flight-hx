@@ -24,7 +24,7 @@ class Webcam {
   public static function createWebWebcamBackend():WebcamBackend {
     return cast { capture: function(options:Dynamic) {
       return cast flighthq._internal._Async.create(function(resolve:Dynamic) {
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'createElement')), 'function')))) {
+        if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'createElement')), 'function') : Bool)) : Bool)) {
           _Runtime.callValue(resolve, cast ([null] : Array<Dynamic>));
           return;
         }
@@ -32,18 +32,18 @@ class Webcam {
           var input:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['input'] : Array<Dynamic>));
           _Runtime.setField(input, 'type', 'file');
           _Runtime.setField(input, 'accept', 'image/*');
-          if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(options, 'source'), 'camera'))) { _Runtime.setField(input, 'capture', 'environment'); }
+          if ((cast _Runtime.strictEquals(_Runtime.field(options, 'source'), 'camera') : Bool)) { _Runtime.setField(input, 'capture', 'environment'); }
           _Runtime.setField(input, 'onchange', function() {
             var file:Dynamic = cast _Runtime.UNDEFINED;
             var reader:Dynamic = cast _Runtime.UNDEFINED;
             file = _Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(input, 'files'), 0.0), function():Dynamic return cast null);
-            if (_Runtime.truthy(_Runtime.strictEquals(file, null))) {
+            if ((cast _Runtime.strictEquals(file, null) : Bool)) {
               _Runtime.callValue(resolve, cast ([null] : Array<Dynamic>));
               return;
             }
             reader = _Runtime.construct(_Runtime.globalValue('FileReader'), []);
             _Runtime.setField(reader, 'onload', function() {
-              _Runtime.callValue(resolve, cast ([{ dataUrl: _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(reader, 'result')), 'string'), function():Dynamic return cast _Runtime.field(reader, 'result'), function():Dynamic return cast ''), width: 0.0, height: 0.0, format: _Runtime.field(file, 'type') }] : Array<Dynamic>));
+              _Runtime.callValue(resolve, cast ([{ dataUrl: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(reader, 'result')), 'string') : Bool) ? (cast _Runtime.field(reader, 'result') : Dynamic) : (cast '' : Dynamic)), width: 0.0, height: 0.0, format: _Runtime.field(file, 'type') }] : Array<Dynamic>));
             });
             _Runtime.setField(reader, 'onerror', function() return _Runtime.callValue(resolve, cast ([null] : Array<Dynamic>)));
             _Runtime.callProperty(reader, 'readAsDataURL', cast ([file] : Array<Dynamic>));
@@ -55,7 +55,7 @@ class Webcam {
       });
     }, captureVideo: function(options:Dynamic) {
       return cast flighthq._internal._Async.create(function(resolve:Dynamic) {
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'createElement')), 'function')))) {
+        if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'createElement')), 'function') : Bool)) : Bool)) {
           _Runtime.callValue(resolve, cast ([null] : Array<Dynamic>));
           return;
         }
@@ -63,18 +63,18 @@ class Webcam {
           var input:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['input'] : Array<Dynamic>));
           _Runtime.setField(input, 'type', 'file');
           _Runtime.setField(input, 'accept', 'video/*');
-          if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(options, 'source'), 'camera'))) { _Runtime.setField(input, 'capture', 'environment'); }
+          if ((cast _Runtime.strictEquals(_Runtime.field(options, 'source'), 'camera') : Bool)) { _Runtime.setField(input, 'capture', 'environment'); }
           _Runtime.setField(input, 'onchange', function() {
             var file:Dynamic = cast _Runtime.UNDEFINED;
             var reader:Dynamic = cast _Runtime.UNDEFINED;
             file = _Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(input, 'files'), 0.0), function():Dynamic return cast null);
-            if (_Runtime.truthy(_Runtime.strictEquals(file, null))) {
+            if ((cast _Runtime.strictEquals(file, null) : Bool)) {
               _Runtime.callValue(resolve, cast ([null] : Array<Dynamic>));
               return;
             }
             reader = _Runtime.construct(_Runtime.globalValue('FileReader'), []);
             _Runtime.setField(reader, 'onload', function() {
-              _Runtime.callValue(resolve, cast ([{ dataUrl: _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(reader, 'result')), 'string'), function():Dynamic return cast _Runtime.field(reader, 'result'), function():Dynamic return cast ''), duration: 0.0, format: _Runtime.field(file, 'type') }] : Array<Dynamic>));
+              _Runtime.callValue(resolve, cast ([{ dataUrl: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(reader, 'result')), 'string') : Bool) ? (cast _Runtime.field(reader, 'result') : Dynamic) : (cast '' : Dynamic)), duration: 0.0, format: _Runtime.field(file, 'type') }] : Array<Dynamic>));
             });
             _Runtime.setField(reader, 'onerror', function() return _Runtime.callValue(resolve, cast ([null] : Array<Dynamic>)));
             _Runtime.callProperty(reader, 'readAsDataURL', cast ([file] : Array<Dynamic>));
@@ -88,7 +88,7 @@ class Webcam {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           var __flowBranch0:Dynamic;
-          if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) {
+          if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool)) {
             __flowBranch0 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn(false);
             });
@@ -101,7 +101,7 @@ class Webcam {
               var status:Dynamic = cast _Runtime.UNDEFINED;
               permissions = flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'permissions');
               var __flowBranch1:Dynamic;
-              if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(permissions, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(permissions, 'query')), 'function')))) {
+              if ((cast ((cast _Runtime.strictEquals(permissions, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(permissions, 'query')), 'function') : Bool)) : Bool)) {
                 __flowBranch1 = flighthq._internal._Async.protect(function():Dynamic {
                   return flighthq._internal._Async.flowReturn(false);
                 });
@@ -130,7 +130,7 @@ class Webcam {
   }
 
   public static function getWebcamBackend():WebcamBackend {
-    if (_Runtime.truthy(_Runtime.strictEquals(Webcam._backend__webcam, null))) { (Webcam._backend__webcam = cast (_Runtime.callValue(createWebWebcamBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Webcam._backend__webcam, null) : Bool)) { (Webcam._backend__webcam = cast (_Runtime.callValue(createWebWebcamBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Webcam._backend__webcam;
     return cast null;
   }

@@ -63,7 +63,7 @@ class Accessibility {
   public static function _getAccessibilityLiveRegion__accessibility(root:Dynamic, liveRegions:Dynamic, liveness:AccessibilityLiveness):Dynamic {
     var region:Dynamic = cast _Runtime.UNDEFINED;
     region = ((cast liveRegions : flighthq._internal._Map).get(liveness));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(region, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(region, 'parentNode'), null)))) {
+    if ((cast ((cast _Runtime.strictEquals(region, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(region, 'parentNode'), null) : Bool)) : Bool)) {
       (region = cast (_Runtime.callProperty(_Runtime.field(root, 'ownerDocument'), 'createElement', cast (['div'] : Array<Dynamic>)) : Dynamic));
       _Runtime.callProperty(region, 'setAttribute', cast (['aria-live', liveness] : Array<Dynamic>));
       _Runtime.callProperty(region, 'setAttribute', cast (['aria-atomic', 'true'] : Array<Dynamic>));
@@ -76,7 +76,7 @@ class Accessibility {
   }
 
   public static function _reflectAccessibilityAttribute__accessibility(element:Dynamic, attribute:String, value:Null<String>):Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callProperty(element, 'removeAttribute', cast ([attribute] : Array<Dynamic>));
       return;
     }
@@ -84,15 +84,15 @@ class Accessibility {
   }
 
   public static function _reflectAccessibilityBoolean__accessibility(element:Dynamic, attribute:String, value:Null<Bool>):Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callProperty(element, 'removeAttribute', cast ([attribute] : Array<Dynamic>));
       return;
     }
-    _Runtime.callProperty(element, 'setAttribute', cast ([attribute, _Runtime.select(value, function():Dynamic return cast 'true', function():Dynamic return cast 'false')] : Array<Dynamic>));
+    _Runtime.callProperty(element, 'setAttribute', cast ([attribute, ((cast value : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))] : Array<Dynamic>));
   }
 
   public static function _reflectAccessibilityNumber__accessibility(element:Dynamic, attribute:String, value:Null<Float>):Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callProperty(element, 'removeAttribute', cast ([attribute] : Array<Dynamic>));
       return;
     }
@@ -102,21 +102,21 @@ class Accessibility {
   public static function _reparentAccessibilityElement__accessibility(element:Dynamic, parentId:Null<String>, elements:Dynamic, root:Dynamic):Void {
     var parent:Dynamic = cast _Runtime.UNDEFINED;
     parent = root;
-    if (_Runtime.truthy(!_Runtime.strictEquals(parentId, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(parentId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var found:Dynamic = ((cast elements : flighthq._internal._Map).get(parentId));
-      if (_Runtime.truthy(!_Runtime.strictEquals(found, _Runtime.field(_Runtime, 'UNDEFINED')))) { (parent = cast (found : Dynamic)); }
+      if ((cast !_Runtime.strictEquals(found, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (parent = cast (found : Dynamic)); }
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(element, 'parentNode'), parent))) { _Runtime.callProperty(parent, 'appendChild', cast ([element] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(element, 'parentNode'), parent) : Bool)) { _Runtime.callProperty(parent, 'appendChild', cast ([element] : Array<Dynamic>)); }
   }
 
   public static function _setAccessibilityElementValueText__accessibility(element:Dynamic, value:Null<String>):Void {
     var first:Dynamic = cast _Runtime.UNDEFINED;
     first = _Runtime.field(element, 'firstChild');
-    if (_Runtime.truthy(_Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(first, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(first, 'nodeType'), Accessibility._TEXT_NODE__accessibility)))) { _Runtime.callProperty(element, 'removeChild', cast ([first] : Array<Dynamic>)); }
+    if ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      if ((cast ((cast !_Runtime.strictEquals(first, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(first, 'nodeType'), Accessibility._TEXT_NODE__accessibility) : Bool)) : Bool)) { _Runtime.callProperty(element, 'removeChild', cast ([first] : Array<Dynamic>)); }
       return;
     }
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(first, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(first, 'nodeType'), Accessibility._TEXT_NODE__accessibility)))) {
+    if ((cast ((cast !_Runtime.strictEquals(first, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(first, 'nodeType'), Accessibility._TEXT_NODE__accessibility) : Bool)) : Bool)) {
       _Runtime.setField(first, 'nodeValue', value);
       return;
     }
@@ -144,9 +144,9 @@ class Accessibility {
     root = _Runtime.coalesce(container, function():Dynamic return cast null);
     rootResolved = !_Runtime.strictEquals(container, _Runtime.field(_Runtime, 'UNDEFINED'));
     getRoot = function getRoot():Null<Dynamic> {
-      if (_Runtime.truthy(rootResolved)) { return cast root; }
+      if ((cast rootResolved : Bool)) { return cast root; }
       (rootResolved = cast (true : Dynamic));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'body'), null)))) {
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool) || (cast _Runtime.strictEquals(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'body'), null) : Bool)) : Bool)) {
         (root = cast (null : Dynamic));
         return cast null;
       }
@@ -158,9 +158,9 @@ class Accessibility {
       var overlayRoot:Dynamic = cast _Runtime.UNDEFINED;
       var element:Dynamic = cast _Runtime.UNDEFINED;
       overlayRoot = _Runtime.callValue(getRoot, cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(overlayRoot, null))) { return; }
+      if ((cast _Runtime.strictEquals(overlayRoot, null) : Bool)) { return; }
       element = ((cast elements : flighthq._internal._Map).get(_Runtime.field(node, 'id')));
-      if (_Runtime.truthy(_Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+      if ((cast _Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         (element = cast (_Runtime.callProperty(_Runtime.field(overlayRoot, 'ownerDocument'), 'createElement', cast (['div'] : Array<Dynamic>)) : Dynamic));
         _Runtime.callProperty(element, 'setAttribute', cast (['data-flight-accessibility-id', _Runtime.field(node, 'id')] : Array<Dynamic>));
         ((cast elements : flighthq._internal._Map).set(_Runtime.field(node, 'id'), element));
@@ -170,33 +170,33 @@ class Accessibility {
     }, removeNode: function(id:Dynamic) {
       var element:Dynamic = cast _Runtime.UNDEFINED;
       element = ((cast elements : flighthq._internal._Map).get(id));
-      if (_Runtime.truthy(_Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
+      if ((cast _Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       for (__iteration0 in _Runtime.iterable(elements)) {
         var key:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
         var other:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
-        if (_Runtime.truthy(_Runtime.callProperty(element, 'contains', cast ([other] : Array<Dynamic>)))) { ((cast elements : flighthq._internal._Map).delete_(key)); }
+        if ((cast _Runtime.callProperty(element, 'contains', cast ([other] : Array<Dynamic>)) : Bool)) { ((cast elements : flighthq._internal._Map).delete_(key)); }
       }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(element, 'parentNode'), null))) { _Runtime.callProperty(_Runtime.field(element, 'parentNode'), 'removeChild', cast ([element] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(element, 'parentNode'), null) : Bool)) { _Runtime.callProperty(_Runtime.field(element, 'parentNode'), 'removeChild', cast ([element] : Array<Dynamic>)); }
     }, clear: function() {
       var overlayRoot:Dynamic = cast _Runtime.UNDEFINED;
       overlayRoot = _Runtime.callValue(getRoot, cast ([] : Array<Dynamic>));
       ((cast elements : flighthq._internal._Map).clear());
       ((cast liveRegions : flighthq._internal._Map).clear());
-      if (_Runtime.truthy(!_Runtime.strictEquals(overlayRoot, null))) { _Runtime.callProperty(overlayRoot, 'replaceChildren', cast ([] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(overlayRoot, null) : Bool)) { _Runtime.callProperty(overlayRoot, 'replaceChildren', cast ([] : Array<Dynamic>)); }
     }, setFocus: function(id:Dynamic) {
       var overlayRoot:Dynamic = cast _Runtime.UNDEFINED;
       var element:Dynamic = cast _Runtime.UNDEFINED;
       overlayRoot = _Runtime.callValue(getRoot, cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(overlayRoot, null))) { return cast false; }
+      if ((cast _Runtime.strictEquals(overlayRoot, null) : Bool)) { return cast false; }
       element = ((cast elements : flighthq._internal._Map).get(id));
-      if (_Runtime.truthy(_Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast false; }
+      if ((cast _Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
       _Runtime.callProperty(element, 'focus', cast ([] : Array<Dynamic>));
       return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(overlayRoot, 'ownerDocument'), 'activeElement'), element);
     }, announce: function(message:Dynamic, liveness:Dynamic) {
       var overlayRoot:Dynamic = cast _Runtime.UNDEFINED;
       var region:Dynamic = cast _Runtime.UNDEFINED;
       overlayRoot = _Runtime.callValue(getRoot, cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(overlayRoot, null))) { return; }
+      if ((cast _Runtime.strictEquals(overlayRoot, null) : Bool)) { return; }
       region = _Runtime.callValue(Accessibility._getAccessibilityLiveRegion__accessibility, cast ([overlayRoot, liveRegions, liveness] : Array<Dynamic>));
       _Runtime.setField(region, 'textContent', message);
     } };
@@ -204,7 +204,7 @@ class Accessibility {
   }
 
   public static function getAccessibilityBackend():AccessibilityBackend {
-    if (_Runtime.truthy(_Runtime.strictEquals(Accessibility._backend__accessibility, null))) { (Accessibility._backend__accessibility = cast (_Runtime.callValue(createWebAccessibilityBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Accessibility._backend__accessibility, null) : Bool)) { (Accessibility._backend__accessibility = cast (_Runtime.callValue(createWebAccessibilityBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Accessibility._backend__accessibility;
     return cast null;
   }

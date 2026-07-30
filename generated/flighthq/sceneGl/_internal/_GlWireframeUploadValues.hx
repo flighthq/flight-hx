@@ -29,18 +29,18 @@ class _GlWireframeUploadValues {
     gl = _Runtime.field(state, 'gl');
     meshUpload = _Runtime.callValue(ensureGlMeshUpload, cast ([state, geometry] : Array<Dynamic>));
     perState = ((cast _GlWireframeUploadValues.wireframeUploads__glWireframeUpload : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(perState, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(perState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (perState = cast (_Runtime.construct(_Runtime.globalValue('WeakMap'), []) : Dynamic));
       ((cast _GlWireframeUploadValues.wireframeUploads__glWireframeUpload : flighthq._internal._WeakMap).set(state, perState));
     }
     upload = ((cast perState : flighthq._internal._WeakMap).get((cast geometry : MeshGeometry)));
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(upload, 'version'), _Runtime.field(geometry, 'version'))))) {
+    if ((cast ((cast !_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(upload, 'version'), _Runtime.field(geometry, 'version')) : Bool)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, _Runtime.field(upload, 'vao'));
       return cast upload;
     }
     lineIndices = _Runtime.callValue(_GlWireframeUploadValues.buildLineIndices__glWireframeUpload, cast ([geometry] : Array<Dynamic>));
-    indexType = _Runtime.select(_Runtime.isInstanceOf(lineIndices, _Runtime.globalValue('Uint32Array')), function():Dynamic return cast flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT, function():Dynamic return cast flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT);
-    if (_Runtime.truthy(_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    indexType = ((cast _Runtime.isInstanceOf(lineIndices, _Runtime.globalValue('Uint32Array')) : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT : Dynamic));
+    if ((cast _Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (upload = cast ({ indexType: indexType, lineIndexBuffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), vao: flighthq._internal.backend.WebGl2Backend.createVertexArray(gl), version: -1.0 } : Dynamic));
       ((cast perState : flighthq._internal._WeakMap).set((cast geometry : MeshGeometry), upload));
     }
@@ -49,7 +49,7 @@ class _GlWireframeUploadValues {
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(meshUpload, 'vertexBuffer'));
     stride = _Runtime.field(_Runtime.field(geometry, 'layout'), 'stride');
     position = _Runtime.find(_Runtime.field(_Runtime.field(geometry, 'layout'), 'attributes'), function(a:Dynamic) return _Runtime.strictEquals(_Runtime.field(a, 'semantic'), 'position'));
-    byteOffset = _Runtime.select(!_Runtime.strictEquals(position, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.field(position, 'byteOffset'), function():Dynamic return cast 0.0);
+    byteOffset = ((cast !_Runtime.strictEquals(position, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(position, 'byteOffset') : Dynamic) : (cast 0.0 : Dynamic));
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, 0.0);
     flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 0.0, 3.0, flighthq._internal.backend.WebGl2Backend.FLOAT, false, stride, byteOffset);
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER, _Runtime.field(upload, 'lineIndexBuffer'));
@@ -66,17 +66,17 @@ class _GlWireframeUploadValues {
     var useUint32:Dynamic = cast _Runtime.UNDEFINED;
     var lines:Dynamic = cast _Runtime.UNDEFINED;
     triangleIndices = _Runtime.field(geometry, 'indices');
-    triangleCount = _Runtime.select(!_Runtime.strictEquals(triangleIndices, null), function():Dynamic return cast HxMath.floor((_Runtime.field(triangleIndices, 'length') / 3.0)), function():Dynamic return cast HxMath.floor((((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') * 4.0) / _Runtime.field(_Runtime.field(geometry, 'layout'), 'stride')) / 3.0)));
+    triangleCount = ((cast !_Runtime.strictEquals(triangleIndices, null) : Bool) ? (cast HxMath.floor((_Runtime.field(triangleIndices, 'length') / 3.0)) : Dynamic) : (cast HxMath.floor((((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') * 4.0) / _Runtime.field(_Runtime.field(geometry, 'layout'), 'stride')) / 3.0)) : Dynamic));
     lineCount = (triangleCount * 6.0);
-    useUint32 = _Runtime.orValue(_Runtime.isInstanceOf(triangleIndices, _Runtime.globalValue('Uint32Array')), function():Dynamic return cast _Runtime.compare(lineCount, 65535.0, '>'));
-    lines = _Runtime.select(useUint32, function():Dynamic return cast new flighthq._internal._UInt32Array(lineCount), function():Dynamic return cast new flighthq._internal._UInt16Array(lineCount));
+    useUint32 = ((cast _Runtime.isInstanceOf(triangleIndices, _Runtime.globalValue('Uint32Array')) : Bool) || (cast ((cast lineCount : Float) > (cast 65535.0 : Float)) : Bool));
+    lines = ((cast useUint32 : Bool) ? (cast new flighthq._internal._UInt32Array(lineCount) : Dynamic) : (cast new flighthq._internal._UInt16Array(lineCount) : Dynamic));
     {
       var t:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(t, triangleCount, '<'))) {
+      while ((cast ((cast t : Float) < (cast triangleCount : Float)) : Bool)) {
         var base:Dynamic = (t * 3.0);
-        var i0:Dynamic = _Runtime.select(!_Runtime.strictEquals(triangleIndices, null), function():Dynamic return cast _Runtime.getIndex(triangleIndices, base), function():Dynamic return cast base);
-        var i1:Dynamic = _Runtime.select(!_Runtime.strictEquals(triangleIndices, null), function():Dynamic return cast _Runtime.getIndex(triangleIndices, (base + 1.0)), function():Dynamic return cast (base + 1.0));
-        var i2:Dynamic = _Runtime.select(!_Runtime.strictEquals(triangleIndices, null), function():Dynamic return cast _Runtime.getIndex(triangleIndices, (base + 2.0)), function():Dynamic return cast (base + 2.0));
+        var i0:Dynamic = ((cast !_Runtime.strictEquals(triangleIndices, null) : Bool) ? (cast _Runtime.getIndex(triangleIndices, base) : Dynamic) : (cast base : Dynamic));
+        var i1:Dynamic = ((cast !_Runtime.strictEquals(triangleIndices, null) : Bool) ? (cast _Runtime.getIndex(triangleIndices, (base + 1.0)) : Dynamic) : (cast (base + 1.0) : Dynamic));
+        var i2:Dynamic = ((cast !_Runtime.strictEquals(triangleIndices, null) : Bool) ? (cast _Runtime.getIndex(triangleIndices, (base + 2.0)) : Dynamic) : (cast (base + 2.0) : Dynamic));
         var out:Dynamic = (t * 6.0);
         _Runtime.setIndex(lines, out, i0);
         _Runtime.setIndex(lines, (out + 1.0), i1);

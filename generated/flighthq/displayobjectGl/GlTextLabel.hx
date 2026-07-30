@@ -62,7 +62,7 @@ class GlTextLabel {
     __destructure0 = _Runtime.callValue(GlTextLabel.getGlTextLabelData__glTextLabel, cast ([data] : Array<Dynamic>));
     image = _Runtime.field(__destructure0, 'image');
     entry = ((cast _Runtime.field(runtime, 'imageResourceTextureCache') : flighthq._internal._WeakMap).get(image));
-    if (_Runtime.truthy(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.deleteTexture(_Runtime.field(state, 'gl'), _Runtime.field(entry, 'texture'));
       ((cast _Runtime.field(runtime, 'imageResourceTextureCache') : flighthq._internal._WeakMap).delete_(image));
     }
@@ -92,37 +92,37 @@ class GlTextLabel {
     textFormat = _Runtime.field(__destructure1, 'textFormat');
     fieldWidth = _Runtime.field(__destructure1, 'width');
     fieldHeight = _Runtime.field(__destructure1, 'height');
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0))) { return; }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(renderProxy, 'rendererData'), null))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(renderProxy, 'rendererData'), null) : Bool)) { return; }
     material = _Runtime.field(renderProxy, 'material');
     materialRenderer = _Runtime.callValue(resolveGlMaterialRenderer, cast ([state, material] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(materialRenderer, null))) { return; }
+    if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
     textData = _Runtime.callValue(GlTextLabel.getGlTextLabelData__glTextLabel, cast ([_Runtime.field(renderProxy, 'rendererData')] : Array<Dynamic>));
     pixelRatio = _Runtime.field(state, 'pixelRatio');
     version = _Runtime.callValue(getNodeLocalContentRevision, cast ([source] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(version, _Runtime.field(textData, 'lastContentId')), function():Dynamic return cast !_Runtime.strictEquals(pixelRatio, _Runtime.field(textData, 'lastPixelRatio'))))) {
+    if ((cast ((cast !_Runtime.strictEquals(version, _Runtime.field(textData, 'lastContentId')) : Bool) || (cast !_Runtime.strictEquals(pixelRatio, _Runtime.field(textData, 'lastPixelRatio')) : Bool)) : Bool)) {
       var measure:Dynamic = function(t:String, format:TextFormat) {
         flighthq._internal.backend.Canvas2dBackend.setField(_Runtime.field(textData, 'ctx'), 'font', _Runtime.callValue(computeTextFormatFontString, cast ([format] : Array<Dynamic>)));
         return cast _Runtime.field(flighthq._internal.backend.Canvas2dBackend.call(_Runtime.field(textData, 'ctx'), 'measureText', cast ([t] : Array<Dynamic>)), 'width');
       };
       var result:Dynamic = _Runtime.callValue(getTextLayoutResult, cast ([(cast _Runtime.callValue(getTextLabelRuntime, cast ([source] : Array<Dynamic>)) : TextLabelRuntime)] : Array<Dynamic>));
-      _Runtime.callValue(computeTextLayout, cast ([result, { text: text, formatRanges: cast ([_Runtime.callValue(createTextFormatRange, cast ([textFormat, 0.0, _Runtime.field(text, 'length')] : Array<Dynamic>))] : Array<Dynamic>), width: fieldWidth, height: fieldHeight, measure: measure, verticalAlign: _Runtime.select(_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'autoSize'), 'none'), function():Dynamic return cast _Runtime.field(_Runtime.field(source, 'data'), 'verticalAlign'), function():Dynamic return cast 'top') }] : Array<Dynamic>));
+      _Runtime.callValue(computeTextLayout, cast ([result, { text: text, formatRanges: cast ([_Runtime.callValue(createTextFormatRange, cast ([textFormat, 0.0, _Runtime.field(text, 'length')] : Array<Dynamic>))] : Array<Dynamic>), width: fieldWidth, height: fieldHeight, measure: measure, verticalAlign: ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'autoSize'), 'none') : Bool) ? (cast _Runtime.field(_Runtime.field(source, 'data'), 'verticalAlign') : Dynamic) : (cast 'top' : Dynamic)) }] : Array<Dynamic>));
       _Runtime.setField(textData, 'lastContentId', version);
       _Runtime.setField(textData, 'lastPixelRatio', pixelRatio);
       _Runtime.setField(textData, 'logW', 0.0);
       _Runtime.setField(textData, 'logH', 0.0);
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(result, 'groups'), 'length'), 0.0))) { return; }
+      if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(result, 'groups'), 'length'), 0.0) : Bool)) { return; }
       var maxX:Dynamic = 0.0;
       var maxY:Dynamic = 0.0;
       for (group in _Runtime.iterable(_Runtime.field(result, 'groups'))) {
         var right:Dynamic = (_Runtime.field(group, 'offsetX') + _Runtime.field(group, 'width'));
         var bottom:Dynamic = ((_Runtime.field(group, 'offsetY') + _Runtime.field(group, 'ascent')) + _Runtime.field(group, 'descent'));
-        if (_Runtime.truthy(_Runtime.compare(right, maxX, '>'))) { (maxX = cast (right : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(bottom, maxY, '>'))) { (maxY = cast (bottom : Dynamic)); }
+        if ((cast ((cast right : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (right : Dynamic)); }
+        if ((cast ((cast bottom : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast (bottom : Dynamic)); }
       }
       var w:Dynamic = HxMath.ceil(maxX);
       var h:Dynamic = HxMath.ceil(maxY);
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(w, 0.0, '<='), function():Dynamic return cast _Runtime.compare(h, 0.0, '<=')))) { return; }
+      if ((cast ((cast ((cast w : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast h : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
       var pw:Dynamic = HxMath.ceil((w * pixelRatio));
       var ph:Dynamic = HxMath.ceil((h * pixelRatio));
       flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(textData, 'canvas'), 'width', pw);
@@ -142,7 +142,7 @@ class GlTextLabel {
       _Runtime.setField(textData, 'logW', w);
       _Runtime.setField(textData, 'logH', h);
     }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(textData, 'logW'), 0.0, '<='), function():Dynamic return cast _Runtime.compare(_Runtime.field(textData, 'logH'), 0.0, '<=')))) { return; }
+    if ((cast ((cast ((cast _Runtime.field(textData, 'logW') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(textData, 'logH') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
     _Runtime.callValue(ensureGlQuadBatchShader, cast ([state] : Array<Dynamic>));
     startCount = _Runtime.field(runtime, 'spriteBatchCount');
     base = _Runtime.callValue(prepareGlSpriteBatchWrite, cast ([state, _Runtime.field(textData, 'image'), _Runtime.field(renderProxy, 'blendMode'), material, materialRenderer, 1.0] : Array<Dynamic>));

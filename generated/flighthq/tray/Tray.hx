@@ -19,7 +19,7 @@ class Tray {
   public static function createTrayIcon(?options:TrayIconOptions):Null<TrayIcon> {
     var id:Dynamic = cast _Runtime.UNDEFINED;
     id = _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'create', cast ([_Runtime.coalesce(options, function():Dynamic return cast {  })] : Array<Dynamic>));
-    return cast _Runtime.select(_Runtime.compare(id, 0.0, '<'), function():Dynamic return cast null, function():Dynamic return cast { id: id });
+    return cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) ? (cast null : Dynamic) : (cast { id: id } : Dynamic));
     return cast null;
   }
 
@@ -77,7 +77,7 @@ class Tray {
   }
 
   public static function getTrayBackend():TrayBackend {
-    if (_Runtime.truthy(_Runtime.strictEquals(Tray._backend__tray, null))) { (Tray._backend__tray = cast (_Runtime.callValue(createWebTrayBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Tray._backend__tray, null) : Bool)) { (Tray._backend__tray = cast (_Runtime.callValue(createWebTrayBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Tray._backend__tray;
     return cast null;
   }
@@ -160,7 +160,7 @@ class Tray {
   public static function startTrayIconAnimation(tray:TrayIcon, frames:Array<String>, intervalMs:Float):Dynamic {
     var index:Dynamic = cast _Runtime.UNDEFINED;
     var handle:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(frames, 'length'), 0.0))) { return cast function() {
+    if ((cast _Runtime.strictEquals(_Runtime.field(frames, 'length'), 0.0) : Bool)) { return cast function() {
     
     }; }
     index = 0.0;

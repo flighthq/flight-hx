@@ -54,7 +54,7 @@ class WgpuInnerShadowEffect {
     _Runtime.callValue(applyWgpuEffectBlitOffsetPass, cast ([state, s1, s0, dx, dy] : Array<Dynamic>));
     _Runtime.callValue(applyWgpuEffectInnerClipPass, cast ([state, s0, src, s1] : Array<Dynamic>));
     _Runtime.callValue(clearWgpuEffectTarget, cast ([state, dst] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(sourceMode, 'draw'))) {
+    if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) {
       _Runtime.callValue(applyWgpuEffectBlitPass, cast ([state, src, dst] : Array<Dynamic>));
     }
     _Runtime.callValue(applyWgpuEffectBlitPass, cast ([state, s1, dst] : Array<Dynamic>));

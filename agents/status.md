@@ -1,11 +1,12 @@
 # Project Status
 
-Last updated: 2026-07-28
+Last updated: 2026-07-30
 
 ## Current State
 
 Typed receiver lowering now uses one cached TypeScript `Program` for the pinned upstream tree. This preserves imported, aliased, and contextual receiver types during generation.
 
+- Checker-proven primitive lowering emits non-null Boolean truthiness, Boolean conditional/logical expressions, and numeric relations directly. The generated tree removes 7,882 `_Runtime.truthy`, 1,689 `_Runtime.select`, 1,223 `_Runtime.andValue`, 1,364 `_Runtime.orValue`, and 4,021 `_Runtime.compare` calls; nullable/mixed truthiness and nonnumeric comparisons remain dynamic and are covered by negative tests.
 - Every resolved `CanvasRenderingContext2D` call crosses `Canvas2dBackend` and is checked against a closed generation-time method/field inventory. Contextually typed shape-command callbacks no longer escape to `_Runtime.callProperty`. The maintained browser and native Cairo implementations cover the current upstream surface, including curves, arcs, ellipse/round-rectangle paths, and stroke cap/join/miter state.
 - Resolved `Map`, `Set`, `WeakMap`, and `WeakSet` operations emit direct calls through `_Map`, `_Set`, `_WeakMap`, and `_WeakSet`; 1,174 generated receiver sites use this path. JavaScript-sensitive methods remain non-inline so Haxe dispatches to native collection members, and `delete` is mapped at compile time instead of by `_Runtime`.
 - The typed-struct design is approved through phases 1–2. The generator now analyzes a fixed seven-schema candidate list, emits deterministic `reports/typed-structs.json`/`.md`, and attaches canonical schema/field bindings to safe property expressions in the IR. Direct struct expression emission is not enabled.

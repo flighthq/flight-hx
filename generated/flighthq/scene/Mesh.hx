@@ -33,9 +33,9 @@ class Mesh {
     clone = _Runtime.callValue(createMesh, cast ([_Runtime.field(source, 'geometry'), _Runtime.slice(_Runtime.field(source, 'materials'), 0, null), _Runtime.field(source, 'kind'), { enabled: _Runtime.field(source, 'enabled'), name: _Runtime.field(source, 'name') }] : Array<Dynamic>));
     _Runtime.setField(clone, 'alpha', _Runtime.field(source, 'alpha'));
     _Runtime.callValue(setNodeTransform3D, cast ([clone, source] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.callValue(isNodeLocalMatrix4Detached, cast ([source] : Array<Dynamic>)))) { _Runtime.callValue(setNodeLocalMatrix4, cast ([clone, _Runtime.callValue(getNodeLocalMatrix4, cast ([source] : Array<Dynamic>))] : Array<Dynamic>)); }
-    if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(source, 'skin'), null))) { _Runtime.setField(clone, 'skin', _Runtime.field(source, 'skin')); }
-    if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(source, 'morph'), null))) { _Runtime.setField(clone, 'morph', _Runtime.field(source, 'morph')); }
+    if ((cast _Runtime.callValue(isNodeLocalMatrix4Detached, cast ([source] : Array<Dynamic>)) : Bool)) { _Runtime.callValue(setNodeLocalMatrix4, cast ([clone, _Runtime.callValue(getNodeLocalMatrix4, cast ([source] : Array<Dynamic>))] : Array<Dynamic>)); }
+    if ((cast !_Runtime.looseEquals(_Runtime.field(source, 'skin'), null) : Bool)) { _Runtime.setField(clone, 'skin', _Runtime.field(source, 'skin')); }
+    if ((cast !_Runtime.looseEquals(_Runtime.field(source, 'morph'), null) : Bool)) { _Runtime.setField(clone, 'morph', _Runtime.field(source, 'morph')); }
     return cast clone;
     return cast null;
   }
@@ -56,8 +56,8 @@ class Mesh {
   }
 
   public static function getMeshDeformer(source:flighthq.types.Mesh):MeshDeformer {
-    if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(source, 'skin'), null))) { return cast MeshDeformerSkeletal; }
-    if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(source, 'morph'), null))) { return cast MeshDeformerMorph; }
+    if ((cast !_Runtime.looseEquals(_Runtime.field(source, 'skin'), null) : Bool)) { return cast MeshDeformerSkeletal; }
+    if ((cast !_Runtime.looseEquals(_Runtime.field(source, 'morph'), null) : Bool)) { return cast MeshDeformerMorph; }
     return cast MeshDeformerNone;
     return cast null;
   }

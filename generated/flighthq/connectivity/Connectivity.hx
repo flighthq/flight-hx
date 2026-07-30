@@ -26,7 +26,7 @@ class Connectivity {
   public static function anyAbortSignal__connectivity(a:Dynamic, b:Dynamic):Dynamic {
     var controller:Dynamic = cast _Runtime.UNDEFINED;
     var onAbort:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('AbortSignal'), 'undefined'), function():Dynamic return cast _Runtime.hasField(_Runtime.globalValue('AbortSignal'), 'any')))) {
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('AbortSignal'), 'undefined') : Bool) && (cast _Runtime.hasField(_Runtime.globalValue('AbortSignal'), 'any') : Bool)) : Bool)) {
       return cast _Runtime.callProperty((cast (cast _Runtime.globalValue('AbortSignal') : Dynamic) : { var any:Dynamic; }), 'any', cast ([cast ([a, b] : Array<Dynamic>)] : Array<Dynamic>));
     }
     controller = _Runtime.construct(_Runtime.globalValue('AbortController'), []);
@@ -58,15 +58,15 @@ class Connectivity {
       var status:Dynamic = cast _Runtime.UNDEFINED;
       status = _Runtime.callProperty(backend, 'getStatus', cast ([Connectivity._scratch__connectivity] : Array<Dynamic>));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(net, 'onChange')], [status]]), 1);
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(status, 'online'), wasOnline))) {
+      if ((cast !_Runtime.strictEquals(_Runtime.field(status, 'online'), wasOnline) : Bool)) {
         (wasOnline = cast (_Runtime.field(status, 'online') : Dynamic));
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.select(_Runtime.field(status, 'online'), function():Dynamic return cast _Runtime.field(net, 'onOnline'), function():Dynamic return cast _Runtime.field(net, 'onOffline'))]]), 1);
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[((cast _Runtime.field(status, 'online') : Bool) ? (cast _Runtime.field(net, 'onOnline') : Dynamic) : (cast _Runtime.field(net, 'onOffline') : Dynamic))]]), 1);
       }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(status, 'type'), wasType))) {
+      if ((cast !_Runtime.strictEquals(_Runtime.field(status, 'type'), wasType) : Bool)) {
         (wasType = cast (_Runtime.field(status, 'type') : Dynamic));
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(net, 'onConnectionTypeChange')], [_Runtime.field(status, 'type')]]), 1);
       }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(status, 'metered'), wasMetered))) {
+      if ((cast !_Runtime.strictEquals(_Runtime.field(status, 'metered'), wasMetered) : Bool)) {
         (wasMetered = cast (_Runtime.field(status, 'metered') : Dynamic));
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(net, 'onMeteredChange')], [_Runtime.field(status, 'metered')]]), 1);
       }
@@ -88,16 +88,16 @@ class Connectivity {
     return cast { getStatus: function(out:Dynamic) {
       var nav:Dynamic = cast _Runtime.UNDEFINED;
       var conn:Dynamic = cast _Runtime.UNDEFINED;
-      nav = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.globalValue('navigator'), function():Dynamic return cast null);
+      nav = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) ? (cast _Runtime.globalValue('navigator') : Dynamic) : (cast null : Dynamic));
       _Runtime.setField(out, 'online', _Runtime.coalesce(_Runtime.optionalField(nav, 'onLine'), function():Dynamic return cast true));
       conn = _Runtime.callValue(Connectivity.getWebConnection__connectivity, cast ([] : Array<Dynamic>));
       _Runtime.setField(out, 'type', _Runtime.callValue(Connectivity.mapWebConnectionType__connectivity, cast ([_Runtime.optionalField(conn, 'type')] : Array<Dynamic>)));
-      _Runtime.setField(out, 'downlink', _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.optionalField(conn, 'downlink')), 'number'), function():Dynamic return cast _Runtime.field(conn, 'downlink'), function():Dynamic return cast -1.0));
-      _Runtime.setField(out, 'downlinkMax', _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.optionalField(conn, 'downlinkMax')), 'number'), function():Dynamic return cast _Runtime.field(conn, 'downlinkMax'), function():Dynamic return cast -1.0));
-      _Runtime.setField(out, 'effectiveType', _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.optionalField(conn, 'effectiveType')), 'string'), function():Dynamic return cast _Runtime.field(conn, 'effectiveType'), function():Dynamic return cast ''));
-      _Runtime.setField(out, 'rtt', _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.optionalField(conn, 'rtt')), 'number'), function():Dynamic return cast _Runtime.field(conn, 'rtt'), function():Dynamic return cast -1.0));
+      _Runtime.setField(out, 'downlink', ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.optionalField(conn, 'downlink')), 'number') : Bool) ? (cast _Runtime.field(conn, 'downlink') : Dynamic) : (cast -1.0 : Dynamic)));
+      _Runtime.setField(out, 'downlinkMax', ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.optionalField(conn, 'downlinkMax')), 'number') : Bool) ? (cast _Runtime.field(conn, 'downlinkMax') : Dynamic) : (cast -1.0 : Dynamic)));
+      _Runtime.setField(out, 'effectiveType', ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.optionalField(conn, 'effectiveType')), 'string') : Bool) ? (cast _Runtime.field(conn, 'effectiveType') : Dynamic) : (cast '' : Dynamic)));
+      _Runtime.setField(out, 'rtt', ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.optionalField(conn, 'rtt')), 'number') : Bool) ? (cast _Runtime.field(conn, 'rtt') : Dynamic) : (cast -1.0 : Dynamic)));
       _Runtime.setField(out, 'saveData', _Runtime.strictEquals(_Runtime.optionalField(conn, 'saveData'), true));
-      _Runtime.setField(out, 'metered', _Runtime.orValue(_Runtime.field(out, 'saveData'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(out, 'type'), 'cellular')));
+      _Runtime.setField(out, 'metered', ((cast _Runtime.field(out, 'saveData') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(out, 'type'), 'cellular') : Bool)));
       return cast out;
     }, detectReachability: function(options:Dynamic, out:Dynamic):flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.finishFlow(
@@ -108,7 +108,7 @@ class Connectivity {
           var combinedSignal:Dynamic = cast _Runtime.UNDEFINED;
           var start:Dynamic = cast _Runtime.UNDEFINED;
           var __flowBranch0:Dynamic;
-          if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('fetch'), 'undefined'))) {
+          if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('fetch'), 'undefined') : Bool)) {
             __flowBranch0 = flighthq._internal._Async.protect(function():Dynamic {
               _Runtime.setField(out, 'reachable', false);
               _Runtime.setField(out, 'latency', -1.0);
@@ -148,7 +148,7 @@ class Connectivity {
       );
     }, subscribe: function(listener:Dynamic) {
       var conn:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast function() {
+      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast function() {
       
       }; }
       flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'addEventListener', cast (['online', listener] : Array<Dynamic>));
@@ -167,7 +167,7 @@ class Connectivity {
   public static function detachConnectivity(net:flighthq.types.Connectivity):Void {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
     unsubscribe = ((cast Connectivity._subscriptions__connectivity : flighthq._internal._WeakMap).get(net));
-    if (_Runtime.truthy(!_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callValue(unsubscribe, cast ([] : Array<Dynamic>));
       ((cast Connectivity._subscriptions__connectivity : flighthq._internal._WeakMap).delete_(net));
     }
@@ -178,12 +178,12 @@ class Connectivity {
       var backend:Dynamic = cast _Runtime.UNDEFINED;
       var webBackend:Dynamic = cast _Runtime.UNDEFINED;
       backend = _Runtime.callValue(getConnectivityBackend, cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(backend, 'detectReachability'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+      if ((cast !_Runtime.strictEquals(_Runtime.field(backend, 'detectReachability'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         return cast _Runtime.callProperty(backend, 'detectReachability', cast ([options, out] : Array<Dynamic>));
       }
-      if (_Runtime.truthy(_Runtime.strictEquals(Connectivity._cachedWebBackend__connectivity, null))) { (Connectivity._cachedWebBackend__connectivity = cast (_Runtime.callValue(createWebConnectivityBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+      if ((cast _Runtime.strictEquals(Connectivity._cachedWebBackend__connectivity, null) : Bool)) { (Connectivity._cachedWebBackend__connectivity = cast (_Runtime.callValue(createWebConnectivityBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
       webBackend = Connectivity._cachedWebBackend__connectivity;
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(webBackend, 'detectReachability'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+      if ((cast !_Runtime.strictEquals(_Runtime.field(webBackend, 'detectReachability'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         return cast _Runtime.callProperty(webBackend, 'detectReachability', cast ([options, out] : Array<Dynamic>));
       }
       _Runtime.setField(out, 'reachable', false);
@@ -198,7 +198,7 @@ class Connectivity {
   }
 
   public static function getConnectivityBackend():ConnectivityBackend {
-    if (_Runtime.truthy(_Runtime.strictEquals(Connectivity._backend__connectivity, null))) { (Connectivity._backend__connectivity = cast (_Runtime.callValue(createWebConnectivityBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Connectivity._backend__connectivity, null) : Bool)) { (Connectivity._backend__connectivity = cast (_Runtime.callValue(createWebConnectivityBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Connectivity._backend__connectivity;
     return cast null;
   }
@@ -210,14 +210,14 @@ class Connectivity {
 
   public static function getWebConnection__connectivity():Null<WebConnectivityConnection__connectivity> {
     var nav:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
+    if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool)) { return cast null; }
     nav = (cast _Runtime.globalValue('navigator') : { @:optional var connection:WebConnectivityConnection__connectivity; });
     return cast _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(nav, 'connection'), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function hasConnectivityStatusChanged(a:ConnectivityStatus, b:ConnectivityStatus):Bool {
-    return cast _Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(a, 'online'), _Runtime.field(b, 'online')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(a, 'type'), _Runtime.field(b, 'type'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(a, 'downlink'), _Runtime.field(b, 'downlink'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(a, 'downlinkMax'), _Runtime.field(b, 'downlinkMax'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(a, 'effectiveType'), _Runtime.field(b, 'effectiveType'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(a, 'rtt'), _Runtime.field(b, 'rtt'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(a, 'saveData'), _Runtime.field(b, 'saveData'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(a, 'metered'), _Runtime.field(b, 'metered')));
+    return cast _Runtime.orValue(((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(a, 'online'), _Runtime.field(b, 'online')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(a, 'type'), _Runtime.field(b, 'type')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(a, 'downlink'), _Runtime.field(b, 'downlink')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(a, 'downlinkMax'), _Runtime.field(b, 'downlinkMax')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(a, 'effectiveType'), _Runtime.field(b, 'effectiveType')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(a, 'rtt'), _Runtime.field(b, 'rtt')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(a, 'saveData'), _Runtime.field(b, 'saveData')) : Bool)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(a, 'metered'), _Runtime.field(b, 'metered')));
     return cast null;
   }
 

@@ -27,8 +27,8 @@ class TransformVelocity {
     _Runtime.callValue(ensureNodeWorldMatrix, cast ([mutableNode] : Array<Dynamic>));
     world = _Runtime.callValue(getNodeWorldMatrix, cast ([mutableNode] : Array<Dynamic>));
     sample = _Runtime.callValue(ensureVelocitySample, cast ([field, node] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(sample, 'explicitFrameId'), _Runtime.field(field, 'frameId')))) {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(sample, 'previousWorldTransform'), null))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(sample, 'explicitFrameId'), _Runtime.field(field, 'frameId')) : Bool)) {
+      if ((cast !_Runtime.strictEquals(_Runtime.field(sample, 'previousWorldTransform'), null) : Bool)) {
         _Runtime.setField(_Runtime.field(sample, 'velocity'), 'x', (_Runtime.field(world, 'tx') - _Runtime.field(_Runtime.field(sample, 'previousWorldTransform'), 'tx')));
         _Runtime.setField(_Runtime.field(sample, 'velocity'), 'y', (_Runtime.field(world, 'ty') - _Runtime.field(_Runtime.field(sample, 'previousWorldTransform'), 'ty')));
       } else {
@@ -37,14 +37,14 @@ class TransformVelocity {
       }
       _Runtime.setField(sample, 'lastFrameId', _Runtime.field(field, 'frameId'));
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(sample, 'previousWorldTransform'), null))) { _Runtime.setField(sample, 'previousWorldTransform', _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>))); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(sample, 'previousWorldTransform'), null) : Bool)) { _Runtime.setField(sample, 'previousWorldTransform', _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>))); }
     _Runtime.callValue(copyMatrix, cast ([_Runtime.field(sample, 'previousWorldTransform'), world] : Array<Dynamic>));
     count = _Runtime.callValue(getNodeChildCount, cast ([mutableNode] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, count, '<'))) {
+      while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         var child:Dynamic = _Runtime.callValue(getNodeChildAt, cast ([mutableNode, i] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(child, null))) { _Runtime.callValue(TransformVelocity.visitTransformVelocity__transformVelocity, cast ([field, (cast (cast child : Dynamic) : Transform2DNode<Traits>)] : Array<Dynamic>)); }
+        if ((cast !_Runtime.strictEquals(child, null) : Bool)) { _Runtime.callValue(TransformVelocity.visitTransformVelocity__transformVelocity, cast ([field, (cast (cast child : Dynamic) : Transform2DNode<Traits>)] : Array<Dynamic>)); }
         i++;
       }
     }

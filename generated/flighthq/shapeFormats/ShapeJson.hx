@@ -45,20 +45,20 @@ class ShapeJson {
     entries = cast ([] : Array<Dynamic>);
     bitmapOrdinal = 0.0;
     i = 0.0;
-    while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(commands, 'length'), '<'))) {
+    while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
       var key:Dynamic = (cast _Runtime.getIndex(commands, i) : String);
       var argCount:Dynamic = (cast _Runtime.getIndex(commands, (i + 1.0)) : Float);
       var base:Dynamic = (i + 2.0);
       var args:Array<Dynamic> = cast ([] : Array<Dynamic>);
       {
         var a:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(a, argCount, '<'))) {
+        while ((cast ((cast a : Float) < (cast argCount : Float)) : Bool)) {
           var value:Dynamic = _Runtime.getIndex(commands, (base + a));
-          if (_Runtime.truthy(_Runtime.strictEquals(value, null))) {
+          if ((cast _Runtime.strictEquals(value, null) : Bool)) {
             _Runtime.callProperty(args, 'push', cast ([null] : Array<Dynamic>));
-          } else { if (_Runtime.truthy(_Runtime.callValue(ShapeJson.isMatrixValue__shapeJson, cast ([value] : Array<Dynamic>)))) {
+          } else { if ((cast _Runtime.callValue(ShapeJson.isMatrixValue__shapeJson, cast ([value] : Array<Dynamic>)) : Bool)) {
             _Runtime.callProperty(args, 'push', cast ([{ a: _Runtime.field(value, 'a'), b: _Runtime.field(value, 'b'), c: _Runtime.field(value, 'c'), d: _Runtime.field(value, 'd'), tx: _Runtime.field(value, 'tx'), ty: _Runtime.field(value, 'ty') }] : Array<Dynamic>));
-          } else { if (_Runtime.truthy(_Runtime.callValue(ShapeJson.isSerializableScalarOrArray__shapeJson, cast ([value] : Array<Dynamic>)))) {
+          } else { if ((cast _Runtime.callValue(ShapeJson.isSerializableScalarOrArray__shapeJson, cast ([value] : Array<Dynamic>)) : Bool)) {
             _Runtime.callProperty(args, 'push', cast ([value] : Array<Dynamic>));
           } else {
             _Runtime.callProperty(args, 'push', cast ([{ bitmap: { index: bitmapOrdinal++ } }] : Array<Dynamic>));
@@ -83,31 +83,31 @@ class ShapeJson {
     } catch (__error:Dynamic) {
       return cast null;
     }
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(ShapeJson.isPlainObject__shapeJson, cast ([root] : Array<Dynamic>))))) { return cast null; }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(root, 'shapeFormat'), ShapeJson.SHAPE_JSON_FORMAT__shapeJson))) { return cast null; }
+    if ((cast !(cast _Runtime.callValue(ShapeJson.isPlainObject__shapeJson, cast ([root] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(root, 'shapeFormat'), ShapeJson.SHAPE_JSON_FORMAT__shapeJson) : Bool)) { return cast null; }
     rawCommands = _Runtime.field(root, 'commands');
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.isArray(rawCommands)))) { return cast null; }
+    if ((cast !(cast _Runtime.isArray(rawCommands) : Bool) : Bool)) { return cast null; }
     resolveBitmap = _Runtime.optionalField(options, 'resolveBitmap');
     shape = _Runtime.callValue(createShape, cast ([] : Array<Dynamic>));
     for (entry in _Runtime.iterable(rawCommands)) {
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(ShapeJson.isPlainObject__shapeJson, cast ([entry] : Array<Dynamic>))))) { return cast null; }
+      if ((cast !(cast _Runtime.callValue(ShapeJson.isPlainObject__shapeJson, cast ([entry] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
       var key:Dynamic = _Runtime.field(entry, 'key');
       var rawArgs:Dynamic = _Runtime.field(entry, 'args');
-      if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.typeofValue(key), 'string'), function():Dynamic return cast !_Runtime.truthy(_Runtime.isArray(rawArgs))))) { return cast null; }
+      if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofValue(key), 'string') : Bool) || (cast !(cast _Runtime.isArray(rawArgs) : Bool) : Bool)) : Bool)) { return cast null; }
       var appender:Dynamic = _Runtime.getIndex(ShapeJson.SHAPE_COMMAND_APPENDERS__shapeJson, key);
-      if (_Runtime.truthy(_Runtime.strictEquals(appender, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast null; }
+      if ((cast _Runtime.strictEquals(appender, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
       var args:Array<Dynamic> = cast ([] : Array<Dynamic>);
       var drop:Dynamic = false;
       for (raw in _Runtime.iterable(rawArgs)) {
         var reconstructed:Dynamic = _Runtime.callValue(ShapeJson.reconstructShapeCommandArg__shapeJson, cast ([raw, resolveBitmap] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.strictEquals(reconstructed, ShapeJson.MALFORMED_ARG__shapeJson))) { return cast null; }
-        if (_Runtime.truthy(_Runtime.strictEquals(reconstructed, ShapeJson.DROP_COMMAND__shapeJson))) {
+        if ((cast _Runtime.strictEquals(reconstructed, ShapeJson.MALFORMED_ARG__shapeJson) : Bool)) { return cast null; }
+        if ((cast _Runtime.strictEquals(reconstructed, ShapeJson.DROP_COMMAND__shapeJson) : Bool)) {
           (drop = cast (true : Dynamic));
           break;
         }
         _Runtime.callProperty(args, 'push', cast ([reconstructed] : Array<Dynamic>));
       }
-      if (_Runtime.truthy(drop)) { continue; }
+      if ((cast drop : Bool)) { continue; }
       _Runtime.callValue(appender, cast ([shape, _Runtime.toArray((cast args : Array<Dynamic>))] : Array<Dynamic>));
     }
     return cast shape;
@@ -116,16 +116,16 @@ class ShapeJson {
 
   public static function reconstructShapeCommandArg__shapeJson(value:Dynamic, resolveBitmap:Dynamic):Dynamic {
     var type:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(value, null))) { return cast null; }
+    if ((cast _Runtime.strictEquals(value, null) : Bool)) { return cast null; }
     type = _Runtime.typeofValue(value);
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(type, 'number'), function():Dynamic return cast _Runtime.strictEquals(type, 'string')), function():Dynamic return cast _Runtime.strictEquals(type, 'boolean')))) { return cast value; }
-    if (_Runtime.truthy(_Runtime.isArray(value))) { return cast value; }
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(ShapeJson.isPlainObject__shapeJson, cast ([value] : Array<Dynamic>))))) { return cast ShapeJson.MALFORMED_ARG__shapeJson; }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.callValue(ShapeJson.isPlainObject__shapeJson, cast ([_Runtime.field(value, 'bitmap')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.field(value, 'bitmap'), 'index')), 'number')))) {
+    if ((cast ((cast ((cast _Runtime.strictEquals(type, 'number') : Bool) || (cast _Runtime.strictEquals(type, 'string') : Bool)) : Bool) || (cast _Runtime.strictEquals(type, 'boolean') : Bool)) : Bool)) { return cast value; }
+    if ((cast _Runtime.isArray(value) : Bool)) { return cast value; }
+    if ((cast !(cast _Runtime.callValue(ShapeJson.isPlainObject__shapeJson, cast ([value] : Array<Dynamic>)) : Bool) : Bool)) { return cast ShapeJson.MALFORMED_ARG__shapeJson; }
+    if ((cast ((cast _Runtime.callValue(ShapeJson.isPlainObject__shapeJson, cast ([_Runtime.field(value, 'bitmap')] : Array<Dynamic>)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.field(value, 'bitmap'), 'index')), 'number') : Bool)) : Bool)) {
       var resolved:Dynamic = _Runtime.coalesce(_Runtime.callOptionalValue(resolveBitmap, cast ([{ index: _Runtime.field(_Runtime.field(value, 'bitmap'), 'index') }] : Array<Dynamic>)), function():Dynamic return cast null);
-      return cast _Runtime.select(_Runtime.strictEquals(resolved, null), function():Dynamic return cast ShapeJson.DROP_COMMAND__shapeJson, function():Dynamic return cast resolved);
+      return cast ((cast _Runtime.strictEquals(resolved, null) : Bool) ? (cast ShapeJson.DROP_COMMAND__shapeJson : Dynamic) : (cast resolved : Dynamic));
     }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'a')), 'number'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'b')), 'number')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'c')), 'number')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'd')), 'number')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'tx')), 'number')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'ty')), 'number')))) {
+    if ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'a')), 'number') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'b')), 'number') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'c')), 'number') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'd')), 'number') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'tx')), 'number') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'ty')), 'number') : Bool)) : Bool)) {
       return cast _Runtime.callValue(createMatrix, cast ([_Runtime.field(value, 'a'), _Runtime.field(value, 'b'), _Runtime.field(value, 'c'), _Runtime.field(value, 'd'), _Runtime.field(value, 'tx'), _Runtime.field(value, 'ty')] : Array<Dynamic>));
     }
     return cast ShapeJson.MALFORMED_ARG__shapeJson;
@@ -133,19 +133,19 @@ class ShapeJson {
   }
 
   public static function isMatrixValue__shapeJson(value:Dynamic):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.callValue(ShapeJson.isPlainObject__shapeJson, cast ([value] : Array<Dynamic>)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'a')), 'number')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'b')), 'number')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'c')), 'number')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'd')), 'number')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'tx')), 'number')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'ty')), 'number'));
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast _Runtime.callValue(ShapeJson.isPlainObject__shapeJson, cast ([value] : Array<Dynamic>)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'a')), 'number') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'b')), 'number') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'c')), 'number') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'd')), 'number') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'tx')), 'number') : Bool)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'ty')), 'number'));
     return cast null;
   }
 
   public static function isPlainObject__shapeJson(value:Dynamic):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(value), 'object'), function():Dynamic return cast !_Runtime.strictEquals(value, null)), function():Dynamic return cast !_Runtime.truthy(_Runtime.isArray(value)));
+    return cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'object') : Bool) && (cast !_Runtime.strictEquals(value, null) : Bool)) : Bool) && (cast !(cast _Runtime.isArray(value) : Bool) : Bool));
     return cast null;
   }
 
   public static function isSerializableScalarOrArray__shapeJson(value:Dynamic):Bool {
     var type:Dynamic = cast _Runtime.UNDEFINED;
     type = _Runtime.typeofValue(value);
-    return cast _Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(type, 'number'), function():Dynamic return cast _Runtime.strictEquals(type, 'string')), function():Dynamic return cast _Runtime.strictEquals(type, 'boolean')), function():Dynamic return cast _Runtime.isArray(value));
+    return cast ((cast ((cast ((cast _Runtime.strictEquals(type, 'number') : Bool) || (cast _Runtime.strictEquals(type, 'string') : Bool)) : Bool) || (cast _Runtime.strictEquals(type, 'boolean') : Bool)) : Bool) || (cast _Runtime.isArray(value) : Bool));
     return cast null;
   }
 

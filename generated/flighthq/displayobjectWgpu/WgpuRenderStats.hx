@@ -17,7 +17,7 @@ class WgpuRenderStats {
   public static function recordWgpuBatchFlush(state:WgpuRenderState, instances:Float):Void {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     entry = ((cast WgpuRenderStats._stats__wgpuRenderStats : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
+    if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     _Runtime.incrementField(entry, 'drawCallCount', 1, true);
     _Runtime.setField(entry, 'instanceCount', (_Runtime.field(entry, 'instanceCount') + instances));
     _Runtime.incrementField(entry, 'batchFlushCount', 1, true);
@@ -26,7 +26,7 @@ class WgpuRenderStats {
   public static function recordWgpuTextureUpload(state:WgpuRenderState):Void {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     entry = ((cast WgpuRenderStats._stats__wgpuRenderStats : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
+    if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     _Runtime.incrementField(entry, 'textureUploadCount', 1, true);
   }
 
@@ -42,7 +42,7 @@ class WgpuRenderStats {
   public static function ensureWgpuRenderStatsMutable__wgpuRenderStats(state:WgpuRenderState):Mutable__wgpuRenderStats<flighthq.types.WgpuRenderStats> {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     entry = ((cast WgpuRenderStats._stats__wgpuRenderStats : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (entry = cast ({ batchFlushCount: 0.0, drawCallCount: 0.0, instanceCount: 0.0, textureUploadCount: 0.0 } : Dynamic));
       ((cast WgpuRenderStats._stats__wgpuRenderStats : flighthq._internal._WeakMap).set(state, entry));
     }

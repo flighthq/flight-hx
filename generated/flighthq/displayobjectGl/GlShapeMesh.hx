@@ -17,7 +17,7 @@ class GlShapeMesh {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var nodeAlpha:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(meshes, 'length'), 0.0))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(meshes, 'length'), 0.0) : Bool)) { return; }
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(flushGlSpriteBatch, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
@@ -33,11 +33,11 @@ class GlShapeMesh {
     nodeAlpha = _Runtime.field(renderProxy, 'alpha');
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(meshes, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(meshes, 'length') : Float)) : Bool)) {
         var mesh:Dynamic = _Runtime.getIndex(meshes, i);
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(mesh, 'indices'), 'length'), 0.0))) { i++; continue; }
+        if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(mesh, 'indices'), 'length'), 0.0) : Bool)) { i++; continue; }
         var a:Dynamic = (_Runtime.field(mesh, 'alpha') * nodeAlpha);
-        if (_Runtime.truthy(_Runtime.compare(a, 0.0, '<='))) { i++; continue; }
+        if ((cast ((cast a : Float) <= (cast 0.0 : Float)) : Bool)) { i++; continue; }
         var r:Dynamic = ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(mesh, 'color')) >> 16)) & 255) / 255.0);
         var g:Dynamic = ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(mesh, 'color')) >> 8)) & 255) / 255.0);
         var b:Dynamic = ((_Runtime.toInt32(_Runtime.field(mesh, 'color')) & 255) / 255.0);
@@ -53,9 +53,9 @@ class GlShapeMesh {
 
   public static function drawGlShapeMeshes(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<flighthq.types.GlShapeMesh>):Void {
     var fold:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(meshes, 'length'), 0.0))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(meshes, 'length'), 0.0) : Bool)) { return; }
     fold = _Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'glColorAdjustmentFold');
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.looseEquals(fold, null), function():Dynamic return cast !_Runtime.looseEquals(_Runtime.field(renderProxy, 'colorTransform'), null)))) {
+    if ((cast ((cast !_Runtime.looseEquals(fold, null) : Bool) && (cast !_Runtime.looseEquals(_Runtime.field(renderProxy, 'colorTransform'), null) : Bool)) : Bool)) {
       _Runtime.callProperty(fold, 'drawShapeMeshes', cast ([state, renderProxy, meshes] : Array<Dynamic>));
       return;
     }
@@ -69,7 +69,7 @@ class GlShapeMesh {
     var created:GlShapeMeshBinding = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     existing = ((cast GlShapeMesh.shapeMeshPrograms__glShapeMesh : flighthq._internal._WeakMap).get(gl));
-    if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast existing; }
+    if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
     program = _Runtime.callValue(GlShapeMesh.compileShapeMeshProgram__glShapeMesh, cast ([gl] : Array<Dynamic>));
     created = { program: program, vertexBuffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), indexBuffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), positionLocation: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_position'), matrixLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_matrix'), colorLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_color') };
     ((cast GlShapeMesh.shapeMeshPrograms__glShapeMesh : flighthq._internal._WeakMap).set(gl, created));

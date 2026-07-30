@@ -57,7 +57,7 @@ class WgpuQuadBatch {
     var writeBase:Dynamic = cast _Runtime.UNDEFINED;
     var drawCount:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null) : Bool)) { return; }
     source = (cast _Runtime.field(quadBatch, 'source') : QuadBatch);
     data = _Runtime.field(source, 'data');
     __destructure0 = data;
@@ -65,10 +65,10 @@ class WgpuQuadBatch {
     instanceCount = _Runtime.field(__destructure0, 'instanceCount');
     ids = _Runtime.field(__destructure0, 'ids');
     transforms = _Runtime.field(__destructure0, 'transforms');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(atlas, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(atlas, 'image'), null)), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(atlas, 'image')] : Array<Dynamic>)))), function():Dynamic return cast _Runtime.strictEquals(instanceCount, 0.0)))) { return; }
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(atlas, 'image'), null) : Bool)) : Bool) || (cast !(cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(atlas, 'image')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(instanceCount, 0.0) : Bool)) : Bool)) { return; }
     material = _Runtime.field(quadBatch, 'material');
     materialRenderer = _Runtime.callValue(resolveWgpuMaterialRenderer, cast ([state, material] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(materialRenderer, null))) { return; }
+    if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
     nodeMaterialData = _Runtime.field(quadBatch, 'materialData');
     perQuadColorTransform = _Runtime.field(data, 'materialData');
     nodeColorTransform = _Runtime.field(quadBatch, 'colorTransform');
@@ -92,12 +92,12 @@ class WgpuQuadBatch {
     drawCount = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, instanceCount, '<'))) {
+      while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
         var id:Dynamic = _Runtime.getIndex(ids, i);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(id, 0.0, '<'), function():Dynamic return cast _Runtime.compare(id, numRegions, '>=')))) { i++; continue; }
+        if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
         var region:Dynamic = _Runtime.getIndex(regions, id);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(region, 'width'), 0.0, '<='), function():Dynamic return cast _Runtime.compare(_Runtime.field(region, 'height'), 0.0, '<=')))) { i++; continue; }
-        if (_Runtime.truthy(isVector2)) {
+        if ((cast ((cast ((cast _Runtime.field(region, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(region, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
+        if ((cast isVector2 : Bool)) {
           var dx:Dynamic = _Runtime.getIndex(transforms, (i * 2.0));
           var dy:Dynamic = _Runtime.getIndex(transforms, ((i * 2.0) + 1.0));
           _Runtime.setIndex(instanceData, writeBase, pa);

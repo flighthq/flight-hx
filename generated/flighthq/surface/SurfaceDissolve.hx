@@ -30,14 +30,14 @@ class SurfaceDissolve {
     width = _Runtime.field(dest, 'width');
     height = _Runtime.field(dest, 'height');
     total = (width * height);
-    if (_Runtime.truthy(_Runtime.compare(total, 0.0, '<='))) { return cast seed; }
+    if ((cast ((cast total : Float) <= (cast 0.0 : Float)) : Bool)) { return cast seed; }
     bits = 0.0;
-    while (_Runtime.truthy(_Runtime.compare((1 << _Runtime.toInt32(bits)), total, '<'))) { bits++; }
+    while ((cast ((cast (1 << _Runtime.toInt32(bits)) : Float) < (cast total : Float)) : Bool)) { bits++; }
     period = (1 << _Runtime.toInt32(bits));
     mask = (period - 1.0);
-    cursor = _Runtime.select(_Runtime.compare(seed, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(seed, period, '>'), function():Dynamic return cast period, function():Dynamic return cast (_Runtime.toInt32(seed) | 0)));
-    if (_Runtime.truthy(_Runtime.compare(pixelCount, 0.0, '<='))) { return cast cursor; }
-    toFill = _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(source, 'surface'), _Runtime.field(dest, 'surface')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(source, 'x'), _Runtime.field(dest, 'x'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(source, 'y'), _Runtime.field(dest, 'y'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(source, 'width'), _Runtime.field(dest, 'width'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(source, 'height'), _Runtime.field(dest, 'height')));
+    cursor = ((cast ((cast seed : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast seed : Float) > (cast period : Float)) : Bool) ? (cast period : Dynamic) : (cast (_Runtime.toInt32(seed) | 0) : Dynamic)) : Dynamic));
+    if ((cast ((cast pixelCount : Float) <= (cast 0.0 : Float)) : Bool)) { return cast cursor; }
+    toFill = ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(source, 'surface'), _Runtime.field(dest, 'surface')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(source, 'x'), _Runtime.field(dest, 'x')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(source, 'y'), _Runtime.field(dest, 'y')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(source, 'width'), _Runtime.field(dest, 'width')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(source, 'height'), _Runtime.field(dest, 'height')) : Bool));
     fillR = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(fillColor), 24)) & 255);
     fillG = (_Runtime.toInt32((_Runtime.toInt32(fillColor) >> 16)) & 255);
     fillB = (_Runtime.toInt32((_Runtime.toInt32(fillColor) >> 8)) & 255);
@@ -49,18 +49,18 @@ class SurfaceDissolve {
     sourceStride = _Runtime.field(_Runtime.field(source, 'surface'), 'width');
     sourceSurfaceHeight = _Runtime.field(_Runtime.field(source, 'surface'), 'height');
     dissolved = 0.0;
-    while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(dissolved, pixelCount, '<'), function():Dynamic return cast _Runtime.compare(cursor, period, '<')))) {
+    while ((cast ((cast ((cast dissolved : Float) < (cast pixelCount : Float)) : Bool) && (cast ((cast cursor : Float) < (cast period : Float)) : Bool)) : Bool)) {
       var pixelIndex:Dynamic = _Runtime.callValue(SurfaceDissolve.permutePixelIndex__surfaceDissolve, cast ([cursor, bits, mask] : Array<Dynamic>));
       cursor++;
-      if (_Runtime.truthy(_Runtime.compare(pixelIndex, total, '>='))) { continue; }
+      if ((cast ((cast pixelIndex : Float) >= (cast total : Float)) : Bool)) { continue; }
       dissolved++;
       var px:Dynamic = _Runtime.fmod(pixelIndex, width);
       var py:Dynamic = (_Runtime.toInt32((pixelIndex / width)) | 0);
       var dx:Dynamic = (_Runtime.field(dest, 'x') + px);
       var dy:Dynamic = (_Runtime.field(dest, 'y') + py);
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(dx, 0.0, '<'), function():Dynamic return cast _Runtime.compare(dx, destStride, '>=')), function():Dynamic return cast _Runtime.compare(dy, 0.0, '<')), function():Dynamic return cast _Runtime.compare(dy, destSurfaceHeight, '>=')))) { continue; }
+      if ((cast ((cast ((cast ((cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast dx : Float) >= (cast destStride : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast destSurfaceHeight : Float)) : Bool)) : Bool)) { continue; }
       var di:Dynamic = (((dy * destStride) + dx) * 4.0);
-      if (_Runtime.truthy(toFill)) {
+      if ((cast toFill : Bool)) {
         _Runtime.setIndex(destData, di, fillR);
         _Runtime.setIndex(destData, (di + 1.0), fillG);
         _Runtime.setIndex(destData, (di + 2.0), fillB);
@@ -69,7 +69,7 @@ class SurfaceDissolve {
       }
       var sx:Dynamic = (_Runtime.field(source, 'x') + px);
       var sy:Dynamic = (_Runtime.field(source, 'y') + py);
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(sx, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sx, sourceStride, '>=')), function():Dynamic return cast _Runtime.compare(sy, 0.0, '<')), function():Dynamic return cast _Runtime.compare(sy, sourceSurfaceHeight, '>=')))) { continue; }
+      if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast sourceStride : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) >= (cast sourceSurfaceHeight : Float)) : Bool)) : Bool)) { continue; }
       var si:Dynamic = (((sy * sourceStride) + sx) * 4.0);
       _Runtime.setIndex(destData, di, _Runtime.getIndex(sourceData, si));
       _Runtime.setIndex(destData, (di + 1.0), _Runtime.getIndex(sourceData, (si + 1.0)));
@@ -85,7 +85,7 @@ class SurfaceDissolve {
     var v:Dynamic = cast _Runtime.UNDEFINED;
     var shift:Dynamic = cast _Runtime.UNDEFINED;
     v = (_Runtime.toInt32(cursor) & _Runtime.toInt32(mask));
-    shift = _Runtime.select(_Runtime.compare(bits, 1.0, '>'), function():Dynamic return cast (_Runtime.toInt32(bits) >> 1), function():Dynamic return cast 1.0);
+    shift = ((cast ((cast bits : Float) > (cast 1.0 : Float)) : Bool) ? (cast (_Runtime.toInt32(bits) >> 1) : Dynamic) : (cast 1.0 : Dynamic));
     (v = cast ((_Runtime.toInt32(_Runtime.imul(_Runtime.toInt32(v), _Runtime.toInt32(2654435761.0))) & _Runtime.toInt32(mask)) : Dynamic));
     (v = (_Runtime.toInt32(v) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(v), _Runtime.toInt32(shift)))));
     (v = cast ((_Runtime.toInt32(_Runtime.imul(_Runtime.toInt32(v), _Runtime.toInt32(2246822519.0))) & _Runtime.toInt32(mask)) : Dynamic));

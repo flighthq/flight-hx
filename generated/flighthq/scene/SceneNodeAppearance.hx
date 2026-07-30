@@ -19,19 +19,19 @@ class SceneNodeAppearance {
     parent = (cast _Runtime.field(runtime, 'parent') : Null<SceneNode>);
     parentWorldAlpha = 1.0;
     parentWorldAppearanceId = 0.0;
-    if (_Runtime.truthy(!_Runtime.strictEquals(parent, null))) {
+    if ((cast !_Runtime.strictEquals(parent, null) : Bool)) {
       _Runtime.callValue(ensureSceneNodeWorldAlpha, cast ([parent] : Array<Dynamic>));
       var parentRuntime:Dynamic = _Runtime.callValue(getSceneNodeRuntime, cast ([parent] : Array<Dynamic>));
       (parentWorldAlpha = cast (_Runtime.field(parentRuntime, 'worldAlpha') : Dynamic));
       (parentWorldAppearanceId = cast (_Runtime.field(parentRuntime, 'worldAppearanceId') : Dynamic));
     }
     appearanceId = _Runtime.callValue(getNodeAppearanceRevision, cast ([source] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(runtime, 'worldAlpha'), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(runtime, 'worldAlphaUsingAppearanceId'), appearanceId)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(runtime, 'worldAlphaUsingParentAppearanceId'), parentWorldAppearanceId)))) {
+    if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'worldAlpha'), null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(runtime, 'worldAlphaUsingAppearanceId'), appearanceId) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(runtime, 'worldAlphaUsingParentAppearanceId'), parentWorldAppearanceId) : Bool)) : Bool)) {
       _Runtime.setField(runtime, 'worldAlpha', (parentWorldAlpha * _Runtime.field(source, 'alpha')));
       _Runtime.setField(runtime, 'worldAlphaUsingAppearanceId', appearanceId);
       _Runtime.setField(runtime, 'worldAlphaUsingParentAppearanceId', parentWorldAppearanceId);
       (SceneNodeAppearance._worldAppearanceRevisionCounter__sceneNodeAppearance = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((SceneNodeAppearance._worldAppearanceRevisionCounter__sceneNodeAppearance + 1.0)), 0) : Dynamic));
-      if (_Runtime.truthy(_Runtime.strictEquals(SceneNodeAppearance._worldAppearanceRevisionCounter__sceneNodeAppearance, 0.0))) { (SceneNodeAppearance._worldAppearanceRevisionCounter__sceneNodeAppearance = cast (1.0 : Dynamic)); }
+      if ((cast _Runtime.strictEquals(SceneNodeAppearance._worldAppearanceRevisionCounter__sceneNodeAppearance, 0.0) : Bool)) { (SceneNodeAppearance._worldAppearanceRevisionCounter__sceneNodeAppearance = cast (1.0 : Dynamic)); }
       _Runtime.setField(runtime, 'worldAppearanceId', SceneNodeAppearance._worldAppearanceRevisionCounter__sceneNodeAppearance);
     }
   }

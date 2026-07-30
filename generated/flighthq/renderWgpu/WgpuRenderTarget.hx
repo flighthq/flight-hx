@@ -31,7 +31,7 @@ class WgpuRenderTarget {
     var colorLoadOp:Dynamic = cast _Runtime.UNDEFINED;
     var depthLoadOp:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null) : Bool)) {
       _Runtime.callProperty(_Runtime.field(runtime, 'renderPass'), 'end', cast ([] : Array<Dynamic>));
       _Runtime.setField(runtime, 'renderPass', null);
     }
@@ -42,8 +42,8 @@ class WgpuRenderTarget {
     _Runtime.setField(runtime, 'maskWriteMode', false);
     _Runtime.setField(runtime, 'currentScissorRect', null);
     _Runtime.setField(runtime, 'scissorStack', cast ([] : Array<Dynamic>));
-    colorLoadOp = _Runtime.select(_Runtime.callValue(WgpuRenderTarget.isWgpuColorPreserved__wgpuRenderTarget, cast ([_Runtime.coalesce(_Runtime.optionalField(preserve, 'preserveColor'), function():Dynamic return cast false), 0.0] : Array<Dynamic>)), function():Dynamic return cast 'load', function():Dynamic return cast 'clear');
-    depthLoadOp = _Runtime.select(_Runtime.strictEquals(_Runtime.optionalField(preserve, 'preserveDepth'), true), function():Dynamic return cast 'load', function():Dynamic return cast 'clear');
+    colorLoadOp = ((cast _Runtime.callValue(WgpuRenderTarget.isWgpuColorPreserved__wgpuRenderTarget, cast ([_Runtime.coalesce(_Runtime.optionalField(preserve, 'preserveColor'), function():Dynamic return cast false), 0.0] : Array<Dynamic>)) : Bool) ? (cast 'load' : Dynamic) : (cast 'clear' : Dynamic));
+    depthLoadOp = ((cast _Runtime.strictEquals(_Runtime.optionalField(preserve, 'preserveDepth'), true) : Bool) ? (cast 'load' : Dynamic) : (cast 'clear' : Dynamic));
     _Runtime.setField(runtime, 'renderPass', _Runtime.callValue(WgpuRenderTarget.beginWgpuRenderPassEncoder__wgpuRenderTarget, cast ([state, _Runtime.field(target, 'view'), _Runtime.field(target, 'depthStencilView'), _Runtime.field(target, 'width'), _Runtime.field(target, 'height'), colorLoadOp, _Runtime.callValue(WgpuRenderTarget.resolveWgpuClearColor__wgpuRenderTarget, cast ([target] : Array<Dynamic>)), depthLoadOp, _Runtime.field(target, 'clearDepth')] : Array<Dynamic>)));
   }
 
@@ -91,9 +91,9 @@ class WgpuRenderTarget {
     var ttx:Dynamic = cast _Runtime.UNDEFINED;
     var tty:Dynamic = cast _Runtime.UNDEFINED;
     var composedTransform:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(target, 'width'), 0.0, '<='), function():Dynamic return cast _Runtime.compare(_Runtime.field(target, 'height'), 0.0, '<=')))) { return; }
+    if ((cast ((cast ((cast _Runtime.field(target, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(target, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null) : Bool)) { return; }
     __destructure0 = _Runtime.field(renderProxy, 'transform2D');
     a = _Runtime.field(__destructure0, 'a');
     b = _Runtime.field(__destructure0, 'b');
@@ -116,12 +116,12 @@ class WgpuRenderTarget {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var saved:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null) : Bool)) {
       _Runtime.callProperty(_Runtime.field(runtime, 'renderPass'), 'end', cast ([] : Array<Dynamic>));
       _Runtime.setField(runtime, 'renderPass', null);
     }
     saved = _Runtime.callProperty(_Runtime.field(runtime, 'renderTargetStack'), 'pop', cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(saved, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
+    if ((cast _Runtime.strictEquals(saved, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     _Runtime.setField(runtime, 'canvasTextureView', _Runtime.field(saved, 'canvasTextureView'));
     _Runtime.setField(runtime, 'canvasViewCleared', _Runtime.field(saved, 'canvasViewCleared'));
     _Runtime.setField(runtime, 'renderTargetViewport', _Runtime.field(saved, 'renderTargetViewport'));
@@ -131,7 +131,7 @@ class WgpuRenderTarget {
     _Runtime.setField(runtime, 'maskWriteMode', false);
     _Runtime.setField(runtime, 'currentScissorRect', null);
     _Runtime.setField(runtime, 'scissorStack', cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(saved, 'canvasTextureView'), null))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(saved, 'canvasTextureView'), null) : Bool)) {
       _Runtime.setField(runtime, 'renderPass', _Runtime.callValue(WgpuRenderTarget.beginWgpuRenderPassEncoder__wgpuRenderTarget, cast ([state, _Runtime.field(saved, 'canvasTextureView'), _Runtime.coalesce(_Runtime.field(saved, 'depthStencilView'), function():Dynamic return cast _Runtime.field(runtime, 'depthStencilView')), _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(runtime, 'renderTargetViewport'), 'width'), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'width')), _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(runtime, 'renderTargetViewport'), 'height'), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'height')), 'load'] : Array<Dynamic>)));
     }
   }
@@ -161,7 +161,7 @@ class WgpuRenderTarget {
   }
 
   public static function isWgpuColorPreserved__wgpuRenderTarget(preserve:Dynamic, index:Float):Bool {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(preserve), 'boolean'))) { return cast preserve; }
+    if ((cast _Runtime.strictEquals(_Runtime.typeofValue(preserve), 'boolean') : Bool)) { return cast preserve; }
     return cast _Runtime.strictEquals(_Runtime.getIndex(preserve, index), true);
     return cast null;
   }
@@ -169,7 +169,7 @@ class WgpuRenderTarget {
   public static function resolveWgpuClearColor__wgpuRenderTarget(target:flighthq.types.WgpuRenderTarget):Dynamic {
     var packed:Dynamic = cast _Runtime.UNDEFINED;
     packed = _Runtime.getIndex(_Runtime.field(target, 'clearColors'), 0.0);
-    if (_Runtime.truthy(_Runtime.strictEquals(packed, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast { r: 0.0, g: 0.0, b: 0.0, a: 0.0 }; }
+    if ((cast _Runtime.strictEquals(packed, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { r: 0.0, g: 0.0, b: 0.0, a: 0.0 }; }
     return cast { r: ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 24)) & 255) / 255.0), g: ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 16)) & 255) / 255.0), b: ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 8)) & 255) / 255.0), a: ((_Runtime.toInt32(packed) & 255) / 255.0) };
     return cast null;
   }

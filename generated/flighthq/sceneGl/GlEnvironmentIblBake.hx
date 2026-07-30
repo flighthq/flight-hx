@@ -26,12 +26,12 @@ class GlEnvironmentIblBake {
     var prefilteredMipCount:Dynamic = cast _Runtime.UNDEFINED;
     var brdfLut:Dynamic = cast _Runtime.UNDEFINED;
     sourceCube = _Runtime.callValue(ensureGlEnvironmentSourceCube, cast ([state, environment] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(sourceCube, null))) { return; }
+    if ((cast _Runtime.strictEquals(sourceCube, null) : Bool)) { return; }
     gl = _Runtime.field(state, 'gl');
     flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'EXT_color_buffer_float');
     flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'OES_texture_float_linear');
     runtime = _Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'iblBakeFramebuffer'), null))) { _Runtime.setField(runtime, 'iblBakeFramebuffer', flighthq._internal.backend.WebGl2Backend.createFramebuffer(gl)); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'iblBakeFramebuffer'), null) : Bool)) { _Runtime.setField(runtime, 'iblBakeFramebuffer', flighthq._internal.backend.WebGl2Backend.createFramebuffer(gl)); }
     fbo = _Runtime.field(runtime, 'iblBakeFramebuffer');
     prevFramebuffer = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER_BINDING) : Null<Dynamic>);
     prevViewport = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.VIEWPORT) : flighthq._internal._Int32Array);
@@ -53,7 +53,7 @@ class GlEnvironmentIblBake {
     var byState:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     byState = ((cast GlEnvironmentIblBake._bakePrograms__glEnvironmentIblBake : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(byState, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
+    if ((cast _Runtime.strictEquals(byState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     gl = _Runtime.field(state, 'gl');
     for (baked in _Runtime.iterable(((cast byState : flighthq._internal._Map).values()))) {
       flighthq._internal.backend.WebGl2Backend.deleteProgram(gl, _Runtime.field(baked, 'program'));
@@ -92,9 +92,9 @@ class GlEnvironmentIblBake {
     mipCount = GlEnvironmentIblBake.PREFILTERED_MIPS__glEnvironmentIblBake;
     {
       var mip:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(mip, mipCount, '<'))) {
+      while ((cast ((cast mip : Float) < (cast mipCount : Float)) : Bool)) {
         var mipSize:Dynamic = HxMath.max(1.0, (_Runtime.toInt32(GlEnvironmentIblBake.PREFILTERED_SIZE__glEnvironmentIblBake) >> _Runtime.toInt32(mip)));
-        var roughness:Dynamic = _Runtime.select(_Runtime.compare(mipCount, 1.0, '>'), function():Dynamic return cast (mip / (mipCount - 1.0)), function():Dynamic return cast 0.0);
+        var roughness:Dynamic = ((cast ((cast mipCount : Float) > (cast 1.0 : Float)) : Bool) ? (cast (mip / (mipCount - 1.0)) : Dynamic) : (cast 0.0 : Dynamic));
         flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locRoughness'), roughness);
         _Runtime.callValue(GlEnvironmentIblBake.renderGlBakeCubeFaces__glEnvironmentIblBake, cast ([state, fbo, program, cube, mipSize, mip] : Array<Dynamic>));
         mip++;
@@ -132,7 +132,7 @@ class GlEnvironmentIblBake {
     flighthq._internal.backend.WebGl2Backend.viewport(gl, 0.0, 0.0, size, size);
     {
       var face:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(face, 6.0, '<'))) {
+      while ((cast ((cast face : Float) < (cast 6.0 : Float)) : Bool)) {
         flighthq._internal.backend.WebGl2Backend.framebufferTexture2D(gl, flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER, flighthq._internal.backend.WebGl2Backend.COLOR_ATTACHMENT0, _Runtime.callValue(getGlCubeFaceTarget, cast ([gl, face] : Array<Dynamic>)), cube, mipLevel);
         var b:Dynamic = _Runtime.getIndex(GlEnvironmentIblBake.CUBE_FACE_BASIS__glEnvironmentIblBake, face);
         flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(program, 'locFaceForward'), _Runtime.getIndex(b, 0.0), _Runtime.getIndex(b, 1.0), _Runtime.getIndex(b, 2.0));
@@ -151,14 +151,14 @@ class GlEnvironmentIblBake {
     var minFilter:Dynamic = cast _Runtime.UNDEFINED;
     texture = flighthq._internal.backend.WebGl2Backend.createTexture(gl);
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, texture);
-    levels = _Runtime.select(mipped, function():Dynamic return cast GlEnvironmentIblBake.PREFILTERED_MIPS__glEnvironmentIblBake, function():Dynamic return cast 1.0);
+    levels = ((cast mipped : Bool) ? (cast GlEnvironmentIblBake.PREFILTERED_MIPS__glEnvironmentIblBake : Dynamic) : (cast 1.0 : Dynamic));
     {
       var mip:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(mip, levels, '<'))) {
+      while ((cast ((cast mip : Float) < (cast levels : Float)) : Bool)) {
         var mipSize:Dynamic = HxMath.max(1.0, (_Runtime.toInt32(size) >> _Runtime.toInt32(mip)));
         {
           var face:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(face, 6.0, '<'))) {
+          while ((cast ((cast face : Float) < (cast 6.0 : Float)) : Bool)) {
             flighthq._internal.backend.WebGl2Backend.texImage2D(gl, _Runtime.callValue(getGlCubeFaceTarget, cast ([gl, face] : Array<Dynamic>)), mip, flighthq._internal.backend.WebGl2Backend.RGBA16F, mipSize, mipSize, 0.0, flighthq._internal.backend.WebGl2Backend.RGBA, flighthq._internal.backend.WebGl2Backend.HALF_FLOAT, null);
             face++;
           }
@@ -166,13 +166,13 @@ class GlEnvironmentIblBake {
         mip++;
       }
     }
-    minFilter = _Runtime.select(mipped, function():Dynamic return cast flighthq._internal.backend.WebGl2Backend.LINEAR_MIPMAP_LINEAR, function():Dynamic return cast flighthq._internal.backend.WebGl2Backend.LINEAR);
+    minFilter = ((cast mipped : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.LINEAR_MIPMAP_LINEAR : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.LINEAR : Dynamic));
     flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, flighthq._internal.backend.WebGl2Backend.TEXTURE_MIN_FILTER, minFilter);
     flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, flighthq._internal.backend.WebGl2Backend.TEXTURE_MAG_FILTER, flighthq._internal.backend.WebGl2Backend.LINEAR);
     flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_S, flighthq._internal.backend.WebGl2Backend.CLAMP_TO_EDGE);
     flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_T, flighthq._internal.backend.WebGl2Backend.CLAMP_TO_EDGE);
     flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_R, flighthq._internal.backend.WebGl2Backend.CLAMP_TO_EDGE);
-    if (_Runtime.truthy(mipped)) { flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, flighthq._internal.backend.WebGl2Backend.TEXTURE_MAX_LEVEL, (GlEnvironmentIblBake.PREFILTERED_MIPS__glEnvironmentIblBake - 1.0)); }
+    if ((cast mipped : Bool)) { flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, flighthq._internal.backend.WebGl2Backend.TEXTURE_MAX_LEVEL, (GlEnvironmentIblBake.PREFILTERED_MIPS__glEnvironmentIblBake - 1.0)); }
     return cast texture;
     return cast null;
   }
@@ -192,12 +192,12 @@ class GlEnvironmentIblBake {
     var buffer:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     byState = ((cast GlEnvironmentIblBake._bakePrograms__glEnvironmentIblBake : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(byState, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(byState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (byState = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
       ((cast GlEnvironmentIblBake._bakePrograms__glEnvironmentIblBake : flighthq._internal._WeakMap).set(state, byState));
     }
     baked = ((cast byState : flighthq._internal._Map).get(key));
-    if (_Runtime.truthy(!_Runtime.strictEquals(baked, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast baked; }
+    if ((cast !_Runtime.strictEquals(baked, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast baked; }
     program = _Runtime.callValue(GlEnvironmentIblBake.linkGlBakeProgram__glEnvironmentIblBake, cast ([gl, fragment] : Array<Dynamic>));
     vao = flighthq._internal.backend.WebGl2Backend.createVertexArray(gl);
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, vao);

@@ -16,19 +16,19 @@ class SurfaceFlip {
     h = HxMath.min(_Runtime.field(dest, 'height'), _Runtime.field(source, 'height'));
     data = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
     stride = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
-    if (_Runtime.truthy(_Runtime.callValue(SurfaceFlip.isSameRegion__surfaceFlip, cast ([dest, source] : Array<Dynamic>)))) {
+    if ((cast _Runtime.callValue(SurfaceFlip.isSameRegion__surfaceFlip, cast ([dest, source] : Array<Dynamic>)) : Bool)) {
       var half:Dynamic = (_Runtime.toInt32(w) >> 1);
       {
         var py:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(py, h, '<'))) {
+        while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
           var y:Dynamic = (_Runtime.field(dest, 'y') + py);
-          if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(y, 0.0, '<'), function():Dynamic return cast _Runtime.compare(y, _Runtime.field(_Runtime.field(dest, 'surface'), 'height'), '>=')))) { py++; continue; }
+          if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
           {
             var px:Dynamic = 0.0;
-            while (_Runtime.truthy(_Runtime.compare(px, half, '<'))) {
+            while ((cast ((cast px : Float) < (cast half : Float)) : Bool)) {
               var xa:Dynamic = (_Runtime.field(dest, 'x') + px);
               var xb:Dynamic = (_Runtime.field(dest, 'x') + ((w - 1.0) - px));
-              if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(xa, 0.0, '<'), function():Dynamic return cast _Runtime.compare(xa, stride, '>=')), function():Dynamic return cast _Runtime.compare(xb, 0.0, '<')), function():Dynamic return cast _Runtime.compare(xb, stride, '>=')))) { px++; continue; }
+              if ((cast ((cast ((cast ((cast ((cast xa : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast xa : Float) >= (cast stride : Float)) : Bool)) : Bool) || (cast ((cast xb : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast xb : Float) >= (cast stride : Float)) : Bool)) : Bool)) { px++; continue; }
               _Runtime.callValue(SurfaceFlip.swapPixels__surfaceFlip, cast ([data, (((y * stride) + xa) * 4.0), (((y * stride) + xb) * 4.0)] : Array<Dynamic>));
               px++;
             }
@@ -51,19 +51,19 @@ class SurfaceFlip {
     h = HxMath.min(_Runtime.field(dest, 'height'), _Runtime.field(source, 'height'));
     data = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
     stride = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
-    if (_Runtime.truthy(_Runtime.callValue(SurfaceFlip.isSameRegion__surfaceFlip, cast ([dest, source] : Array<Dynamic>)))) {
+    if ((cast _Runtime.callValue(SurfaceFlip.isSameRegion__surfaceFlip, cast ([dest, source] : Array<Dynamic>)) : Bool)) {
       var half:Dynamic = (_Runtime.toInt32(h) >> 1);
       {
         var py:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(py, half, '<'))) {
+        while ((cast ((cast py : Float) < (cast half : Float)) : Bool)) {
           var yTop:Dynamic = (_Runtime.field(dest, 'y') + py);
           var yBottom:Dynamic = (_Runtime.field(dest, 'y') + ((h - 1.0) - py));
-          if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(yTop, 0.0, '<'), function():Dynamic return cast _Runtime.compare(yTop, _Runtime.field(_Runtime.field(dest, 'surface'), 'height'), '>=')), function():Dynamic return cast _Runtime.compare(yBottom, 0.0, '<')), function():Dynamic return cast _Runtime.compare(yBottom, _Runtime.field(_Runtime.field(dest, 'surface'), 'height'), '>=')))) { py++; continue; }
+          if ((cast ((cast ((cast ((cast ((cast yTop : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast yTop : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool) || (cast ((cast yBottom : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast yBottom : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
           {
             var px:Dynamic = 0.0;
-            while (_Runtime.truthy(_Runtime.compare(px, w, '<'))) {
+            while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
               var x:Dynamic = (_Runtime.field(dest, 'x') + px);
-              if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(x, 0.0, '<'), function():Dynamic return cast _Runtime.compare(x, stride, '>=')))) { px++; continue; }
+              if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast stride : Float)) : Bool)) : Bool)) { px++; continue; }
               _Runtime.callValue(SurfaceFlip.swapPixels__surfaceFlip, cast ([data, (((yTop * stride) + x) * 4.0), (((yBottom * stride) + x) * 4.0)] : Array<Dynamic>));
               px++;
             }
@@ -88,16 +88,16 @@ class SurfaceFlip {
     dStride = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, h, '<'))) {
-        var sy:Dynamic = (_Runtime.field(source, 'y') + _Runtime.select(mirrorY, function():Dynamic return cast ((h - 1.0) - py), function():Dynamic return cast py));
+      while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
+        var sy:Dynamic = (_Runtime.field(source, 'y') + ((cast mirrorY : Bool) ? (cast ((h - 1.0) - py) : Dynamic) : (cast py : Dynamic)));
         var dy:Dynamic = (_Runtime.field(dest, 'y') + py);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(sy, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sy, _Runtime.field(_Runtime.field(source, 'surface'), 'height'), '>=')), function():Dynamic return cast _Runtime.compare(dy, 0.0, '<')), function():Dynamic return cast _Runtime.compare(dy, _Runtime.field(_Runtime.field(dest, 'surface'), 'height'), '>=')))) { py++; continue; }
+        if ((cast ((cast ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'height') : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, w, '<'))) {
-            var sx:Dynamic = (_Runtime.field(source, 'x') + _Runtime.select(mirrorX, function():Dynamic return cast ((w - 1.0) - px), function():Dynamic return cast px));
+          while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
+            var sx:Dynamic = (_Runtime.field(source, 'x') + ((cast mirrorX : Bool) ? (cast ((w - 1.0) - px) : Dynamic) : (cast px : Dynamic)));
             var dx:Dynamic = (_Runtime.field(dest, 'x') + px);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(sx, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sx, sStride, '>=')), function():Dynamic return cast _Runtime.compare(dx, 0.0, '<')), function():Dynamic return cast _Runtime.compare(dx, dStride, '>=')))) { px++; continue; }
+            if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast sStride : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) >= (cast dStride : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Dynamic = (((sy * sStride) + sx) * 4.0);
             var di:Dynamic = (((dy * dStride) + dx) * 4.0);
             _Runtime.setIndex(dd, di, _Runtime.getIndex(sd, si));
@@ -113,14 +113,14 @@ class SurfaceFlip {
   }
 
   public static function isSameRegion__surfaceFlip(a:SurfaceRegion, b:SurfaceRegion):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(a, 'surface'), _Runtime.field(b, 'surface')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'x'), _Runtime.field(b, 'x'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'y'), _Runtime.field(b, 'y'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'width'), _Runtime.field(b, 'width'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'height'), _Runtime.field(b, 'height')));
+    return cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(a, 'surface'), _Runtime.field(b, 'surface')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'x'), _Runtime.field(b, 'x')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'y'), _Runtime.field(b, 'y')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'width'), _Runtime.field(b, 'width')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'height'), _Runtime.field(b, 'height')) : Bool));
     return cast null;
   }
 
   public static function swapPixels__surfaceFlip(data:flighthq._internal._UInt8ClampedArray, a:Float, b:Float):Void {
     {
       var c:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(c, 4.0, '<'))) {
+      while ((cast ((cast c : Float) < (cast 4.0 : Float)) : Bool)) {
         var t:Dynamic = _Runtime.getIndex(data, (a + c));
         _Runtime.setIndex(data, (a + c), _Runtime.getIndex(data, (b + c)));
         _Runtime.setIndex(data, (b + c), t);

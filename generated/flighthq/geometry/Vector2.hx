@@ -27,8 +27,8 @@ class Vector2 {
     minY = min.y;
     maxX = max.x;
     maxY = max.y;
-    (out.x = cast (_Runtime.select(_Runtime.compare(vx, minX, '<'), function():Dynamic return cast minX, function():Dynamic return cast _Runtime.select(_Runtime.compare(vx, maxX, '>'), function():Dynamic return cast maxX, function():Dynamic return cast vx)) : Dynamic));
-    (out.y = cast (_Runtime.select(_Runtime.compare(vy, minY, '<'), function():Dynamic return cast minY, function():Dynamic return cast _Runtime.select(_Runtime.compare(vy, maxY, '>'), function():Dynamic return cast maxY, function():Dynamic return cast vy)) : Dynamic));
+    (out.x = cast (((cast ((cast vx : Float) < (cast minX : Float)) : Bool) ? (cast minX : Dynamic) : (cast ((cast ((cast vx : Float) > (cast maxX : Float)) : Bool) ? (cast maxX : Dynamic) : (cast vx : Dynamic)) : Dynamic)) : Dynamic));
+    (out.y = cast (((cast ((cast vy : Float) < (cast minY : Float)) : Bool) ? (cast minY : Dynamic) : (cast ((cast ((cast vy : Float) > (cast maxY : Float)) : Bool) ? (cast maxY : Dynamic) : (cast vy : Dynamic)) : Dynamic)) : Dynamic));
   }
 
   public static function cloneVector2(source:Vector2Like):flighthq.types.Vector2 {
@@ -63,13 +63,13 @@ class Vector2 {
     sy = source.y;
     dx = divisor.x;
     dy = divisor.y;
-    (out.x = cast (_Runtime.select(!_Runtime.strictEquals(dx, 0.0), function():Dynamic return cast (sx / dx), function():Dynamic return cast 0.0) : Dynamic));
-    (out.y = cast (_Runtime.select(!_Runtime.strictEquals(dy, 0.0), function():Dynamic return cast (sy / dy), function():Dynamic return cast 0.0) : Dynamic));
+    (out.x = cast (((cast !_Runtime.strictEquals(dx, 0.0) : Bool) ? (cast (sx / dx) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
+    (out.y = cast (((cast !_Runtime.strictEquals(dy, 0.0) : Bool) ? (cast (sy / dy) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
   }
 
   public static function equalsVector2(a:Null<Vector2Like>, b:Null<Vector2Like>):Bool {
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(a), function():Dynamic return cast !_Runtime.truthy(b)))) { return cast false; }
-    return cast _Runtime.orValue(_Runtime.strictEquals(a, b), function():Dynamic return cast _Runtime.andValue(_Runtime.strictEquals(a.x, b.x), function():Dynamic return cast _Runtime.strictEquals(a.y, b.y)));
+    if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
+    return cast ((cast _Runtime.strictEquals(a, b) : Bool) || (cast _Runtime.andValue(_Runtime.strictEquals(a.x, b.x), function():Dynamic return cast _Runtime.strictEquals(a.y, b.y)) : Bool));
     return cast null;
   }
 
@@ -79,7 +79,7 @@ class Vector2 {
     var _dot:Dynamic = cast _Runtime.UNDEFINED;
     la = _Runtime.callValue(getVector2Length, cast ([a] : Array<Dynamic>));
     lb = _Runtime.callValue(getVector2Length, cast ([b] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(la, 0.0), function():Dynamic return cast _Runtime.strictEquals(lb, 0.0)))) { return cast HxMath.NaN; }
+    if ((cast ((cast _Runtime.strictEquals(la, 0.0) : Bool) || (cast _Runtime.strictEquals(lb, 0.0) : Bool)) : Bool)) { return cast HxMath.NaN; }
     _dot = (_Runtime.callValue(getVector2Dot, cast ([a, b] : Array<Dynamic>)) / (la * lb));
     return cast HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, _dot)));
     return cast null;
@@ -124,13 +124,13 @@ class Vector2 {
   }
 
   public static function maxVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like):Void {
-    (out.x = cast (_Runtime.select(_Runtime.compare(a.x, b.x, '>'), function():Dynamic return cast a.x, function():Dynamic return cast b.x) : Dynamic));
-    (out.y = cast (_Runtime.select(_Runtime.compare(a.y, b.y, '>'), function():Dynamic return cast a.y, function():Dynamic return cast b.y) : Dynamic));
+    (out.x = cast (((cast ((cast a.x : Float) > (cast b.x : Float)) : Bool) ? (cast a.x : Dynamic) : (cast b.x : Dynamic)) : Dynamic));
+    (out.y = cast (((cast ((cast a.y : Float) > (cast b.y : Float)) : Bool) ? (cast a.y : Dynamic) : (cast b.y : Dynamic)) : Dynamic));
   }
 
   public static function minVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like):Void {
-    (out.x = cast (_Runtime.select(_Runtime.compare(a.x, b.x, '<'), function():Dynamic return cast a.x, function():Dynamic return cast b.x) : Dynamic));
-    (out.y = cast (_Runtime.select(_Runtime.compare(a.y, b.y, '<'), function():Dynamic return cast a.y, function():Dynamic return cast b.y) : Dynamic));
+    (out.x = cast (((cast ((cast a.x : Float) < (cast b.x : Float)) : Bool) ? (cast a.x : Dynamic) : (cast b.x : Dynamic)) : Dynamic));
+    (out.y = cast (((cast ((cast a.y : Float) < (cast b.y : Float)) : Bool) ? (cast a.y : Dynamic) : (cast b.y : Dynamic)) : Dynamic));
   }
 
   public static function multiplyVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like):Void {
@@ -139,7 +139,7 @@ class Vector2 {
   }
 
   public static function nearEqualsVector2(a:Vector2Like, b:Vector2Like, tolerance:Float = 0.000001):Bool {
-    return cast _Runtime.andValue(_Runtime.compare(HxMath.abs((a.x - b.x)), tolerance, '<'), function():Dynamic return cast _Runtime.compare(HxMath.abs((a.y - b.y)), tolerance, '<'));
+    return cast ((cast ((cast HxMath.abs((a.x - b.x)) : Float) < (cast tolerance : Float)) : Bool) && (cast ((cast HxMath.abs((a.y - b.y)) : Float) < (cast tolerance : Float)) : Bool));
     return cast null;
   }
 
@@ -151,7 +151,7 @@ class Vector2 {
   public static function normalizeVector2(out:Vector2Like, source:Vector2Like):Float {
     var l:Dynamic = cast _Runtime.UNDEFINED;
     l = _Runtime.callValue(getVector2Length, cast ([source] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(l, 0.0))) {
+    if ((cast !_Runtime.strictEquals(l, 0.0) : Bool)) {
       (out.x = cast ((source.x / l) : Dynamic));
       (out.y = cast ((source.y / l) : Dynamic));
     } else {
@@ -190,7 +190,7 @@ class Vector2 {
   public static function scaleVector2ToLength(out:Vector2Like, source:Vector2Like, length:Float):Void {
     var currentLength:Dynamic = cast _Runtime.UNDEFINED;
     currentLength = _Runtime.callValue(getVector2Length, cast ([source] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(currentLength, 0.0))) {
+    if ((cast _Runtime.strictEquals(currentLength, 0.0) : Bool)) {
       (out.x = cast (0.0 : Dynamic));
       (out.y = cast (0.0 : Dynamic));
     } else {

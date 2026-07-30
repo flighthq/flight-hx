@@ -82,22 +82,22 @@ class GetPathSegmentAtParameter {
     di = 0.0;
     {
       var ci:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(ci, _Runtime.field(commands, 'length'), '<'))) {
+      while ((cast ((cast ci : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
         var command:Dynamic = _Runtime.getIndex(commands, ci);
-        if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.MOVE_TO))) {
+        if ((cast _Runtime.strictEquals(command, PathCommandValue.MOVE_TO) : Bool)) {
           (x = cast (_Runtime.getIndex(data, di) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 1.0)) : Dynamic));
           (di = cast ((di + 2.0) : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO) : Bool)) {
           (x = cast (_Runtime.getIndex(data, (di + 2.0)) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 3.0)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.LINE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.LINE_TO) : Bool)) {
           var x1:Dynamic = _Runtime.getIndex(data, di);
           var y1:Dynamic = _Runtime.getIndex(data, (di + 1.0));
           (di = cast ((di + 2.0) : Dynamic));
-          if (_Runtime.truthy(_Runtime.strictEquals(currentSegment, segmentIndex))) {
-            if (_Runtime.truthy(wantTangent)) {
+          if ((cast _Runtime.strictEquals(currentSegment, segmentIndex) : Bool)) {
+            if ((cast wantTangent : Bool)) {
               (out.x = cast ((x1 - x) : Dynamic));
               (out.y = cast ((y1 - y) : Dynamic));
             } else {
@@ -109,12 +109,12 @@ class GetPathSegmentAtParameter {
           (x = cast (x1 : Dynamic));
           (y = cast (y1 : Dynamic));
           currentSegment++;
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO) : Bool)) {
           var x1:Dynamic = _Runtime.getIndex(data, (di + 2.0));
           var y1:Dynamic = _Runtime.getIndex(data, (di + 3.0));
           (di = cast ((di + 4.0) : Dynamic));
-          if (_Runtime.truthy(_Runtime.strictEquals(currentSegment, segmentIndex))) {
-            if (_Runtime.truthy(wantTangent)) {
+          if ((cast _Runtime.strictEquals(currentSegment, segmentIndex) : Bool)) {
+            if ((cast wantTangent : Bool)) {
               (out.x = cast ((x1 - x) : Dynamic));
               (out.y = cast ((y1 - y) : Dynamic));
             } else {
@@ -126,14 +126,14 @@ class GetPathSegmentAtParameter {
           (x = cast (x1 : Dynamic));
           (y = cast (y1 : Dynamic));
           currentSegment++;
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CURVE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CURVE_TO) : Bool)) {
           var cx:Dynamic = _Runtime.getIndex(data, di);
           var cy:Dynamic = _Runtime.getIndex(data, (di + 1.0));
           var x1:Dynamic = _Runtime.getIndex(data, (di + 2.0));
           var y1:Dynamic = _Runtime.getIndex(data, (di + 3.0));
           (di = cast ((di + 4.0) : Dynamic));
-          if (_Runtime.truthy(_Runtime.strictEquals(currentSegment, segmentIndex))) {
-            if (_Runtime.truthy(wantTangent)) {
+          if ((cast _Runtime.strictEquals(currentSegment, segmentIndex) : Bool)) {
+            if ((cast wantTangent : Bool)) {
               _Runtime.callValue(getQuadraticBezierTangent, cast ([x, y, cx, cy, x1, y1, t, out] : Array<Dynamic>));
             } else {
               _Runtime.callValue(getQuadraticBezierPoint, cast ([x, y, cx, cy, x1, y1, t, out] : Array<Dynamic>));
@@ -143,7 +143,7 @@ class GetPathSegmentAtParameter {
           (x = cast (x1 : Dynamic));
           (y = cast (y1 : Dynamic));
           currentSegment++;
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO) : Bool)) {
           var c1x:Dynamic = _Runtime.getIndex(data, di);
           var c1y:Dynamic = _Runtime.getIndex(data, (di + 1.0));
           var c2x:Dynamic = _Runtime.getIndex(data, (di + 2.0));
@@ -151,8 +151,8 @@ class GetPathSegmentAtParameter {
           var x1:Dynamic = _Runtime.getIndex(data, (di + 4.0));
           var y1:Dynamic = _Runtime.getIndex(data, (di + 5.0));
           (di = cast ((di + 6.0) : Dynamic));
-          if (_Runtime.truthy(_Runtime.strictEquals(currentSegment, segmentIndex))) {
-            if (_Runtime.truthy(wantTangent)) {
+          if ((cast _Runtime.strictEquals(currentSegment, segmentIndex) : Bool)) {
+            if ((cast wantTangent : Bool)) {
               _Runtime.callValue(getCubicBezierTangent, cast ([x, y, c1x, c1y, c2x, c2y, x1, y1, t, out] : Array<Dynamic>));
             } else {
               _Runtime.callValue(getCubicBezierPoint, cast ([x, y, c1x, c1y, c2x, c2y, x1, y1, t, out] : Array<Dynamic>));
@@ -162,7 +162,7 @@ class GetPathSegmentAtParameter {
           (x = cast (x1 : Dynamic));
           (y = cast (y1 : Dynamic));
           currentSegment++;
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CLOSE))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CLOSE) : Bool)) {
         } } } } } } }
         ci++;
       }

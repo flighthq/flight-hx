@@ -17,7 +17,7 @@ class CapacitorClipboard {
             var result:Dynamic = cast _Runtime.UNDEFINED;
             return flighthq._internal._Async.flatMap(_Runtime.callProperty(clipboard, 'read', cast ([] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
               result = __awaitValue0;
-              return flighthq._internal._Async.flowReturn(_Runtime.select(StringTools.startsWith(_Runtime.field(result, 'type'), 'image'), function():Dynamic return cast '', function():Dynamic return cast _Runtime.field(result, 'value')));
+              return flighthq._internal._Async.flowReturn(((cast StringTools.startsWith(_Runtime.field(result, 'type'), 'image') : Bool) ? (cast '' : Dynamic) : (cast _Runtime.field(result, 'value') : Dynamic)));
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;
@@ -62,7 +62,7 @@ class CapacitorClipboard {
             var result:Dynamic = cast _Runtime.UNDEFINED;
             return flighthq._internal._Async.flatMap(_Runtime.callProperty(clipboard, 'read', cast ([] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
               result = __awaitValue2;
-              return flighthq._internal._Async.flowReturn(_Runtime.andValue(!_Runtime.truthy(StringTools.startsWith(_Runtime.field(result, 'type'), 'image')), function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.field(result, 'value'), 'length'), 0.0, '>')));
+              return flighthq._internal._Async.flowReturn(((cast !(cast StringTools.startsWith(_Runtime.field(result, 'type'), 'image') : Bool) : Bool) && (cast ((cast _Runtime.field(_Runtime.field(result, 'value'), 'length') : Float) > (cast 0.0 : Float)) : Bool)));
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;
@@ -81,7 +81,7 @@ class CapacitorClipboard {
             var result:Dynamic = cast _Runtime.UNDEFINED;
             return flighthq._internal._Async.flatMap(_Runtime.callProperty(clipboard, 'read', cast ([] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
               result = __awaitValue3;
-              return flighthq._internal._Async.flowReturn(_Runtime.select(StringTools.startsWith(_Runtime.field(result, 'type'), 'image'), function():Dynamic return cast _Runtime.field(result, 'value'), function():Dynamic return cast ''));
+              return flighthq._internal._Async.flowReturn(((cast StringTools.startsWith(_Runtime.field(result, 'type'), 'image') : Bool) ? (cast _Runtime.field(result, 'value') : Dynamic) : (cast '' : Dynamic)));
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;

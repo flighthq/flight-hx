@@ -31,7 +31,7 @@ class GlPbrStandardBlock {
   public static function bindGlPbrStandardBlock(state:GlRenderState, program:GlPbrProgram, standard:Null<StandardPbrMaterialProperties>):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
-    if (_Runtime.truthy(_Runtime.strictEquals(standard, null))) {
+    if ((cast _Runtime.strictEquals(standard, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locBaseColor'), 1.0, 1.0, 1.0, 1.0);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locMetallic'), 0.0);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locRoughness'), 1.0);
@@ -60,7 +60,7 @@ class GlPbrStandardBlock {
 
   public static function bindGlPbrStandardTexture(state:GlRenderState, texture:Null<Texture>, location:Null<Dynamic>, unit:Float):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(isGlTextureReady, cast ([texture] : Array<Dynamic>))))) { return; }
+    if ((cast !(cast _Runtime.callValue(isGlTextureReady, cast ([texture] : Array<Dynamic>)) : Bool) : Bool)) { return; }
     gl = _Runtime.field(state, 'gl');
     flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + unit));
     _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(texture, 'image'), _Runtime.field(texture, 'sampler')] : Array<Dynamic>));
@@ -70,12 +70,12 @@ class GlPbrStandardBlock {
   public static function buildGlPbrStandardDefineKey(standard:Null<StandardPbrMaterialProperties>, alphaMaskEnabled:Bool):GlPbrDefineKey {
     var baseColorMap:Dynamic = cast _Runtime.UNDEFINED;
     baseColorMap = _Runtime.coalesce(_Runtime.optionalField(standard, 'baseColorMap'), function():Dynamic return cast null);
-    return cast { alphaMaskEnabled: alphaMaskEnabled, anisotropyEnabled: false, clearcoatEnabled: false, hasBaseColorMap: _Runtime.callValue(isGlTextureReady, cast ([baseColorMap] : Array<Dynamic>)), hasEmissiveMap: _Runtime.callValue(isGlTextureReady, cast ([_Runtime.coalesce(_Runtime.optionalField(standard, 'emissiveMap'), function():Dynamic return cast null)] : Array<Dynamic>)), hasMetallicRoughnessMap: _Runtime.callValue(isGlTextureReady, cast ([_Runtime.coalesce(_Runtime.optionalField(standard, 'metallicRoughnessMap'), function():Dynamic return cast null)] : Array<Dynamic>)), hasNormalMap: _Runtime.callValue(isGlTextureReady, cast ([_Runtime.coalesce(_Runtime.optionalField(standard, 'normalMap'), function():Dynamic return cast null)] : Array<Dynamic>)), hasOcclusionMap: _Runtime.callValue(isGlTextureReady, cast ([_Runtime.coalesce(_Runtime.optionalField(standard, 'occlusionMap'), function():Dynamic return cast null)] : Array<Dynamic>)), hasUvTransform: _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(baseColorMap, null), function():Dynamic return cast _Runtime.callValue(isGlTextureReady, cast ([baseColorMap] : Array<Dynamic>))), function():Dynamic return cast _Runtime.callValue(hasTextureUvTransform, cast ([baseColorMap] : Array<Dynamic>))), iridescenceEnabled: false, sheenEnabled: false, specularEnabled: false, subsurfaceEnabled: false, transmissionEnabled: false };
+    return cast { alphaMaskEnabled: alphaMaskEnabled, anisotropyEnabled: false, clearcoatEnabled: false, hasBaseColorMap: _Runtime.callValue(isGlTextureReady, cast ([baseColorMap] : Array<Dynamic>)), hasEmissiveMap: _Runtime.callValue(isGlTextureReady, cast ([_Runtime.coalesce(_Runtime.optionalField(standard, 'emissiveMap'), function():Dynamic return cast null)] : Array<Dynamic>)), hasMetallicRoughnessMap: _Runtime.callValue(isGlTextureReady, cast ([_Runtime.coalesce(_Runtime.optionalField(standard, 'metallicRoughnessMap'), function():Dynamic return cast null)] : Array<Dynamic>)), hasNormalMap: _Runtime.callValue(isGlTextureReady, cast ([_Runtime.coalesce(_Runtime.optionalField(standard, 'normalMap'), function():Dynamic return cast null)] : Array<Dynamic>)), hasOcclusionMap: _Runtime.callValue(isGlTextureReady, cast ([_Runtime.coalesce(_Runtime.optionalField(standard, 'occlusionMap'), function():Dynamic return cast null)] : Array<Dynamic>)), hasUvTransform: ((cast ((cast !_Runtime.strictEquals(baseColorMap, null) : Bool) && (cast _Runtime.callValue(isGlTextureReady, cast ([baseColorMap] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callValue(hasTextureUvTransform, cast ([baseColorMap] : Array<Dynamic>)) : Bool)), iridescenceEnabled: false, sheenEnabled: false, specularEnabled: false, subsurfaceEnabled: false, transmissionEnabled: false };
     return cast null;
   }
 
   public static function isGlTextureReady(texture:Null<Texture>):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(texture, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(texture, 'image'), null)), function():Dynamic return cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(texture, 'image')] : Array<Dynamic>)));
+    return cast ((cast ((cast !_Runtime.strictEquals(texture, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(texture, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(texture, 'image')] : Array<Dynamic>)) : Bool));
     return cast null;
   }
 

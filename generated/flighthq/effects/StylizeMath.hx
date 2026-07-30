@@ -16,7 +16,7 @@ class StylizeMath {
 
   public static function computeHalftoneCellParams(frequency:Float, angle:Float, out:Array<Float>):Void {
     var cellSize:Dynamic = cast _Runtime.UNDEFINED;
-    cellSize = _Runtime.select(_Runtime.compare(frequency, 1e-10, '>'), function():Dynamic return cast (1.0 / frequency), function():Dynamic return cast 1.0);
+    cellSize = ((cast ((cast frequency : Float) > (cast 1e-10 : Float)) : Bool) ? (cast (1.0 / frequency) : Dynamic) : (cast 1.0 : Dynamic));
     _Runtime.setIndex(out, 0.0, cellSize);
     _Runtime.setIndex(out, 1.0, HxMath.cos(angle));
     _Runtime.setIndex(out, 2.0, HxMath.sin(angle));
@@ -43,16 +43,16 @@ class StylizeMath {
     _Runtime.setIndex(raw, 2.0, 3.0);
     _Runtime.setIndex(raw, 3.0, 1.0);
     currentSize = 2.0;
-    while (_Runtime.truthy(_Runtime.compare(currentSize, size, '<'))) {
+    while ((cast ((cast currentSize : Float) < (cast size : Float)) : Bool)) {
       var next:Dynamic = (currentSize * 2.0);
       var nextSq:Dynamic = (next * next);
       var tmp:Dynamic = new flighthq._internal._Float32Array(nextSq);
       {
         var y:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(y, currentSize, '<'))) {
+        while ((cast ((cast y : Float) < (cast currentSize : Float)) : Bool)) {
           {
             var x:Dynamic = 0.0;
-            while (_Runtime.truthy(_Runtime.compare(x, currentSize, '<'))) {
+            while ((cast ((cast x : Float) < (cast currentSize : Float)) : Bool)) {
               var base:Dynamic = (_Runtime.getIndex(raw, ((y * currentSize) + x)) * 4.0);
               _Runtime.setIndex(tmp, ((y * next) + x), base);
               _Runtime.setIndex(tmp, ((y * next) + (x + currentSize)), (base + 2.0));
@@ -70,7 +70,7 @@ class StylizeMath {
     invSizeSq = (1.0 / sizeSq);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, sizeSq, '<'))) {
+      while ((cast ((cast i : Float) < (cast sizeSq : Float)) : Bool)) {
         _Runtime.setIndex(out, i, (_Runtime.getIndex(raw, i) * invSizeSq));
         i++;
       }

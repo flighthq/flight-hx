@@ -32,17 +32,17 @@ class GaussianMath {
     sum = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, r, '<='))) {
+      while ((cast ((cast i : Float) <= (cast r : Float)) : Bool)) {
         var w:Dynamic = HxMath.exp((-(i * i) / twoSigmaSq));
         _Runtime.setIndex(out, i, w);
-        (sum = cast ((sum + _Runtime.select(_Runtime.strictEquals(i, 0.0), function():Dynamic return cast w, function():Dynamic return cast (2.0 * w))) : Dynamic));
+        (sum = cast ((sum + ((cast _Runtime.strictEquals(i, 0.0) : Bool) ? (cast w : Dynamic) : (cast (2.0 * w) : Dynamic))) : Dynamic));
         i++;
       }
     }
     invSum = (1.0 / sum);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, r, '<='))) {
+      while ((cast ((cast i : Float) <= (cast r : Float)) : Bool)) {
         _Runtime.setIndex(out, i, (_Runtime.getIndex(out, i) * invSum));
         i++;
       }

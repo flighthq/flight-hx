@@ -42,12 +42,12 @@ class WgpuBitmap {
     var d:Dynamic = cast _Runtime.UNDEFINED;
     var t:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null) : Bool)) { return; }
     source = (cast _Runtime.field(renderProxy, 'source') : Bitmap);
     imageSource = _Runtime.field(_Runtime.field(source, 'data'), 'image');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(imageSource, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(hasImageResourcePixels, cast ([imageSource] : Array<Dynamic>)))))) { return; }
+    if ((cast ((cast _Runtime.strictEquals(imageSource, null) : Bool) || (cast !(cast _Runtime.callValue(hasImageResourcePixels, cast ([imageSource] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return; }
     shader = _Runtime.callValue(resolveWgpuShader, cast ([state, renderProxy] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(shader, null))) {
+    if ((cast !_Runtime.strictEquals(shader, null) : Bool)) {
       _Runtime.callValue(flushWgpuSpriteBatch, cast ([state] : Array<Dynamic>));
       _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
       _Runtime.callValue(bindWgpuImageResourceTexture, cast ([state, imageSource] : Array<Dynamic>));
@@ -56,12 +56,12 @@ class WgpuBitmap {
     }
     material = _Runtime.field(renderProxy, 'material');
     materialRenderer = _Runtime.callValue(resolveWgpuMaterialRenderer, cast ([state, material] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(materialRenderer, null))) { return; }
+    if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
     _Runtime.callValue(ensureWgpuQuadBatchResources, cast ([state] : Array<Dynamic>));
     sr = _Runtime.coalesce(_Runtime.field(_Runtime.field(source, 'data'), 'sourceRectangle'), function():Dynamic return cast null);
     iw = (1.0 / _Runtime.orValue(_Runtime.field(imageSource, 'width'), function():Dynamic return cast 1.0));
     ih = (1.0 / _Runtime.orValue(_Runtime.field(imageSource, 'height'), function():Dynamic return cast 1.0));
-    if (_Runtime.truthy(_Runtime.strictEquals(sr, null))) {
+    if ((cast _Runtime.strictEquals(sr, null) : Bool)) {
       (w = cast (_Runtime.field(imageSource, 'width') : Dynamic));
       (h = cast (_Runtime.field(imageSource, 'height') : Dynamic));
       (u0 = cast (0.0 : Dynamic));

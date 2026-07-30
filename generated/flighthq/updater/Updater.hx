@@ -19,7 +19,7 @@ class Updater {
     var prev:Dynamic = cast _Runtime.UNDEFINED;
     var next:Dynamic = cast _Runtime.UNDEFINED;
     prev = _Runtime.coalesce(((cast Updater._states__updater : flighthq._internal._WeakMap).get(updater)), function():Dynamic return cast _Runtime.callValue(createUpdaterState, cast ([] : Array<Dynamic>)));
-    next = _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(update), 'function'), function():Dynamic return cast _Runtime.callValue(update, cast ([prev] : Array<Dynamic>)), function():Dynamic return cast update);
+    next = ((cast _Runtime.strictEquals(_Runtime.typeofValue(update), 'function') : Bool) ? (cast _Runtime.callValue(update, cast ([prev] : Array<Dynamic>)) : Dynamic) : (cast update : Dynamic));
     ((cast Updater._states__updater : flighthq._internal._WeakMap).set(updater, next));
   }
 
@@ -77,7 +77,7 @@ class Updater {
     var config:Dynamic = cast _Runtime.UNDEFINED;
     config = _Runtime.callValue(getUpdaterConfig, cast ([] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.callValue(getUpdaterBackend, cast ([] : Array<Dynamic>)), 'checkForUpdates', cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.field(config, 'autoDownload'))) {
+    if ((cast _Runtime.field(config, 'autoDownload') : Bool)) {
       _Runtime.callProperty(_Runtime.callValue(getUpdaterBackend, cast ([] : Array<Dynamic>)), 'downloadUpdate', cast ([] : Array<Dynamic>));
     }
   }
@@ -178,7 +178,7 @@ class Updater {
   public static function detachAppUpdater(updater:AppUpdater):Void {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
     unsubscribe = ((cast Updater._subscriptions__updater : flighthq._internal._WeakMap).get(updater));
-    if (_Runtime.truthy(!_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callValue(unsubscribe, cast ([] : Array<Dynamic>));
       ((cast Updater._subscriptions__updater : flighthq._internal._WeakMap).delete_(updater));
     }
@@ -198,7 +198,7 @@ class Updater {
   }
 
   public static function getUpdaterBackend():UpdaterBackend {
-    if (_Runtime.truthy(_Runtime.strictEquals(Updater._backend__updater, null))) { (Updater._backend__updater = cast (_Runtime.callValue(createWebUpdaterBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Updater._backend__updater, null) : Bool)) { (Updater._backend__updater = cast (_Runtime.callValue(createWebUpdaterBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Updater._backend__updater;
     return cast null;
   }
@@ -214,7 +214,7 @@ class Updater {
   }
 
   public static function isAppUpdateEligible(info:UpdateInfo, rolloutSeed:Float):Bool {
-    return cast _Runtime.compare((rolloutSeed * 100.0), _Runtime.field(info, 'stagedRolloutPercent'), '<');
+    return cast ((cast (rolloutSeed * 100.0) : Float) < (cast _Runtime.field(info, 'stagedRolloutPercent') : Float));
     return cast null;
   }
 

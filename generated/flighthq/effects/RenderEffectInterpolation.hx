@@ -19,7 +19,7 @@ class RenderEffectInterpolation {
     var aRec:Dynamic = cast _Runtime.UNDEFINED;
     var bRec:Dynamic = cast _Runtime.UNDEFINED;
     var outRecord:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(a, 'kind'), _Runtime.field(b, 'kind')))) { return cast false; }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(a, 'kind'), _Runtime.field(b, 'kind')) : Bool)) { return cast false; }
     tc = HxMath.max(0.0, HxMath.min(1.0, t));
     numericKeys = _Runtime.construct(_Runtime.globalValue('Set'), []);
     booleanKeys = _Runtime.construct(_Runtime.globalValue('Set'), []);
@@ -27,39 +27,39 @@ class RenderEffectInterpolation {
     aRec = (cast a : Dynamic);
     bRec = (cast b : Dynamic);
     for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(aRec))) {
-      if (_Runtime.truthy(_Runtime.strictEquals(key, 'kind'))) { continue; }
+      if ((cast _Runtime.strictEquals(key, 'kind') : Bool)) { continue; }
       var va:Dynamic = _Runtime.getIndex(aRec, key);
       var vb:Dynamic = _Runtime.getIndex(bRec, key);
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofValue(va), 'number'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'number')))) {
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(va), 'number') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'number') : Bool)) : Bool)) {
         ((cast numericKeys : flighthq._internal._Set).add(key));
-      } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofValue(va), 'boolean'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'boolean')))) {
+      } else { if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(va), 'boolean') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'boolean') : Bool)) : Bool)) {
         ((cast booleanKeys : flighthq._internal._Set).add(key));
-      } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofValue(va), 'string'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'string')))) {
+      } else { if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(va), 'string') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'string') : Bool)) : Bool)) {
         ((cast stringKeys : flighthq._internal._Set).add(key));
       } } }
     }
     for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(bRec))) {
-      if (_Runtime.truthy(_Runtime.strictEquals(key, 'kind'))) { continue; }
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.truthy(((cast numericKeys : flighthq._internal._Set).has(key))), function():Dynamic return cast !_Runtime.truthy(((cast booleanKeys : flighthq._internal._Set).has(key)))), function():Dynamic return cast !_Runtime.truthy(((cast stringKeys : flighthq._internal._Set).has(key)))))) {
+      if ((cast _Runtime.strictEquals(key, 'kind') : Bool)) { continue; }
+      if ((cast ((cast ((cast !(cast ((cast numericKeys : flighthq._internal._Set).has(key)) : Bool) : Bool) && (cast !(cast ((cast booleanKeys : flighthq._internal._Set).has(key)) : Bool) : Bool)) : Bool) && (cast !(cast ((cast stringKeys : flighthq._internal._Set).has(key)) : Bool) : Bool)) : Bool)) {
         var vb:Dynamic = _Runtime.getIndex(bRec, key);
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(vb), 'number'))) { ((cast numericKeys : flighthq._internal._Set).add(key)); } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(vb), 'boolean'))) { ((cast booleanKeys : flighthq._internal._Set).add(key)); } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(vb), 'string'))) { ((cast stringKeys : flighthq._internal._Set).add(key)); } } }
+        if ((cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'number') : Bool)) { ((cast numericKeys : flighthq._internal._Set).add(key)); } else { if ((cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'boolean') : Bool)) { ((cast booleanKeys : flighthq._internal._Set).add(key)); } else { if ((cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'string') : Bool)) { ((cast stringKeys : flighthq._internal._Set).add(key)); } } }
       }
     }
     outRecord = (cast (cast out : Dynamic) : Dynamic);
     for (key in _Runtime.iterable(numericKeys)) {
       var va:Dynamic = (cast _Runtime.getIndex(aRec, key) : Null<Float>);
       var vb:Dynamic = (cast _Runtime.getIndex(bRec, key) : Null<Float>);
-      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(va, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(vb, _Runtime.field(_Runtime, 'UNDEFINED'))))) {
+      if ((cast ((cast !_Runtime.strictEquals(va, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(vb, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
         _Runtime.setIndex(outRecord, key, (va + ((vb - va) * tc)));
       } else {
-        _Runtime.setIndex(outRecord, key, _Runtime.select(_Runtime.compare(tc, 0.5, '<'), function():Dynamic return cast va, function():Dynamic return cast vb));
+        _Runtime.setIndex(outRecord, key, ((cast ((cast tc : Float) < (cast 0.5 : Float)) : Bool) ? (cast va : Dynamic) : (cast vb : Dynamic)));
       }
     }
     for (key in _Runtime.iterable(booleanKeys)) {
-      _Runtime.setIndex(outRecord, key, _Runtime.select(_Runtime.compare(tc, 0.5, '<'), function():Dynamic return cast _Runtime.getIndex(aRec, key), function():Dynamic return cast _Runtime.getIndex(bRec, key)));
+      _Runtime.setIndex(outRecord, key, ((cast ((cast tc : Float) < (cast 0.5 : Float)) : Bool) ? (cast _Runtime.getIndex(aRec, key) : Dynamic) : (cast _Runtime.getIndex(bRec, key) : Dynamic)));
     }
     for (key in _Runtime.iterable(stringKeys)) {
-      _Runtime.setIndex(outRecord, key, _Runtime.select(_Runtime.compare(tc, 0.5, '<'), function():Dynamic return cast _Runtime.getIndex(aRec, key), function():Dynamic return cast _Runtime.getIndex(bRec, key)));
+      _Runtime.setIndex(outRecord, key, ((cast ((cast tc : Float) < (cast 0.5 : Float)) : Bool) ? (cast _Runtime.getIndex(aRec, key) : Dynamic) : (cast _Runtime.getIndex(bRec, key) : Dynamic)));
     }
     return cast true;
     return cast null;

@@ -37,7 +37,7 @@ class WgpuParticleEmitter {
     var module:Dynamic = cast _Runtime.UNDEFINED;
     var resources:WgpuParticleResources__wgpuParticleEmitter = cast _Runtime.UNDEFINED;
     existing = ((cast WgpuParticleEmitter._particleResources__wgpuParticleEmitter : flighthq._internal._WeakMap).get(_Runtime.field(state, 'device')));
-    if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast existing; }
+    if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     __destructure0 = state;
     device = _Runtime.field(__destructure0, 'device');
@@ -59,7 +59,7 @@ class WgpuParticleEmitter {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     format = _Runtime.coalesce(_Runtime.field(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
     existing = ((cast _Runtime.field(resources, 'pipelines') : flighthq._internal._Map).get(format));
-    if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast existing; }
+    if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
     pipeline = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createRenderPipeline', cast ([{ layout: _Runtime.field(resources, 'pipelineLayout'), vertex: { module: _Runtime.field(resources, 'module'), entryPoint: 'vs_main' }, fragment: { module: _Runtime.field(resources, 'module'), entryPoint: 'fs_main', targets: cast ([{ format: format, blend: { color: { srcFactor: 'one', dstFactor: 'one-minus-src-alpha', operation: 'add' }, alpha: { srcFactor: 'one', dstFactor: 'one-minus-src-alpha', operation: 'add' } } }] : Array<Dynamic>) }, depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: false, depthCompare: 'always', stencilFront: { compare: 'always', passOp: 'keep', failOp: 'keep', depthFailOp: 'keep' }, stencilBack: { compare: 'always', passOp: 'keep', failOp: 'keep', depthFailOp: 'keep' }, stencilReadMask: 255.0, stencilWriteMask: 0.0 }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
     ((cast _Runtime.field(resources, 'pipelines') : flighthq._internal._Map).set(format, pipeline));
     return cast pipeline;
@@ -72,8 +72,8 @@ class WgpuParticleEmitter {
     var newCapacity:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     needed = (count * WgpuParticleEmitter.INSTANCE_STRIDE__wgpuParticleEmitter);
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(_Runtime.field(runtime, 'particleInstanceCapacity'), needed, '>='), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(runtime, 'particleInstanceBuffer'), null)))) { return; }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'particleInstanceBuffer'), null))) {
+    if ((cast ((cast ((cast _Runtime.field(runtime, 'particleInstanceCapacity') : Float) >= (cast needed : Float)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(runtime, 'particleInstanceBuffer'), null) : Bool)) : Bool)) { return; }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'particleInstanceBuffer'), null) : Bool)) {
       _Runtime.callProperty(_Runtime.coalesce(_Runtime.field(runtime, 'retiredBuffers'), function():Dynamic return cast _Runtime.setField(runtime, 'retiredBuffers', cast ([] : Array<Dynamic>))), 'push', cast ([_Runtime.field(runtime, 'particleInstanceBuffer')] : Array<Dynamic>));
     }
     newCapacity = HxMath.max(needed, (_Runtime.orValue(_Runtime.field(runtime, 'particleInstanceCapacity'), function():Dynamic return cast 0.0) * 2.0));
@@ -117,7 +117,7 @@ class WgpuParticleEmitter {
     var instanceBindGroup:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null) : Bool)) { return; }
     source = (cast _Runtime.field(renderProxy, 'source') : ParticleEmitter);
     __destructure2 = _Runtime.field(source, 'data');
     atlas = _Runtime.field(__destructure2, 'atlas');
@@ -126,7 +126,7 @@ class WgpuParticleEmitter {
     ids = _Runtime.field(__destructure2, 'ids');
     particleCount = _Runtime.field(__destructure2, 'particleCount');
     transforms = _Runtime.field(__destructure2, 'transforms');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(atlas, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(atlas, 'image'), null)), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(atlas, 'image')] : Array<Dynamic>)))), function():Dynamic return cast _Runtime.strictEquals(particleCount, 0.0)))) { return; }
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(atlas, 'image'), null) : Bool)) : Bool) || (cast !(cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(atlas, 'image')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) : Bool)) { return; }
     resources = _Runtime.callValue(WgpuParticleEmitter.ensureParticleResources__wgpuParticleEmitter, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(WgpuParticleEmitter.ensureParticleInstanceBuffer__wgpuParticleEmitter, cast ([state, particleCount] : Array<Dynamic>));
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
@@ -141,11 +141,11 @@ class WgpuParticleEmitter {
     base = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, particleCount, '<'))) {
+      while ((cast ((cast i : Float) < (cast particleCount : Float)) : Bool)) {
         var id:Dynamic = _Runtime.getIndex(ids, i);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(id, 0.0, '<'), function():Dynamic return cast _Runtime.compare(id, numRegions, '>=')))) { i++; continue; }
+        if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
         var region:Dynamic = _Runtime.getIndex(regions, id);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(region, 'width'), 0.0, '<='), function():Dynamic return cast _Runtime.compare(_Runtime.field(region, 'height'), 0.0, '<=')))) { i++; continue; }
+        if ((cast ((cast ((cast _Runtime.field(region, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(region, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
         var tt:Dynamic = (i * 4.0);
         var px:Dynamic = _Runtime.getIndex(transforms, tt);
         var py:Dynamic = _Runtime.getIndex(transforms, (tt + 1.0));
@@ -154,14 +154,14 @@ class WgpuParticleEmitter {
         var cosR:Dynamic = (HxMath.cos(rotation) * scale);
         var sinR:Dynamic = (HxMath.sin(rotation) * scale);
         var ct:Dynamic = (i * 3.0);
-        var hasColors:Dynamic = _Runtime.andValue(!_Runtime.looseEquals(colors, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(colors, 'length'), (ct + 2.0), '>'));
+        var hasColors:Dynamic = ((cast !_Runtime.looseEquals(colors, null) : Bool) && (cast ((cast _Runtime.field(colors, 'length') : Float) > (cast (ct + 2.0) : Float)) : Bool));
         _Runtime.setIndex(instanceData, (base + 0.0), px);
         _Runtime.setIndex(instanceData, (base + 1.0), py);
         _Runtime.setIndex(instanceData, (base + 2.0), cosR);
         _Runtime.setIndex(instanceData, (base + 3.0), sinR);
-        _Runtime.setIndex(instanceData, (base + 4.0), _Runtime.select(hasColors, function():Dynamic return cast _Runtime.getIndex(colors, ct), function():Dynamic return cast 1.0));
-        _Runtime.setIndex(instanceData, (base + 5.0), _Runtime.select(hasColors, function():Dynamic return cast _Runtime.getIndex(colors, (ct + 1.0)), function():Dynamic return cast 1.0));
-        _Runtime.setIndex(instanceData, (base + 6.0), _Runtime.select(hasColors, function():Dynamic return cast _Runtime.getIndex(colors, (ct + 2.0)), function():Dynamic return cast 1.0));
+        _Runtime.setIndex(instanceData, (base + 4.0), ((cast hasColors : Bool) ? (cast _Runtime.getIndex(colors, ct) : Dynamic) : (cast 1.0 : Dynamic)));
+        _Runtime.setIndex(instanceData, (base + 5.0), ((cast hasColors : Bool) ? (cast _Runtime.getIndex(colors, (ct + 1.0)) : Dynamic) : (cast 1.0 : Dynamic)));
+        _Runtime.setIndex(instanceData, (base + 6.0), ((cast hasColors : Bool) ? (cast _Runtime.getIndex(colors, (ct + 2.0)) : Dynamic) : (cast 1.0 : Dynamic)));
         _Runtime.setIndex(instanceData, (base + 7.0), (nodeAlpha * _Runtime.getIndex(alphas, i)));
         _Runtime.setIndex(instanceData, (base + 8.0), (_Runtime.field(region, 'x') * iw));
         _Runtime.setIndex(instanceData, (base + 9.0), (_Runtime.field(region, 'y') * ih));
@@ -174,7 +174,7 @@ class WgpuParticleEmitter {
         i++;
       }
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(drawCount, 0.0))) { return; }
+    if ((cast _Runtime.strictEquals(drawCount, 0.0) : Bool)) { return; }
     __destructure3 = state;
     device = _Runtime.field(__destructure3, 'device');
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([_Runtime.field(runtime, 'particleInstanceBuffer'), 0.0, _Runtime.field(instanceData, 'buffer'), 0.0, (drawCount * WgpuParticleEmitter.INSTANCE_STRIDE__wgpuParticleEmitter)] : Array<Dynamic>));
@@ -186,7 +186,7 @@ class WgpuParticleEmitter {
     matrixArray = _Runtime.field(__destructure4, 'matrixArray');
     viewport = _Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));
     t = _Runtime.field(renderProxy, 'transform2D');
-    if (_Runtime.truthy(_Runtime.field(_Runtime.field(source, 'data'), 'worldSpace'))) {
+    if ((cast _Runtime.field(_Runtime.field(source, 'data'), 'worldSpace') : Bool)) {
       (iw2 = cast ((2.0 / _Runtime.field(viewport, 'width')) : Dynamic));
       (ih2 = cast ((2.0 / _Runtime.field(viewport, 'height')) : Dynamic));
       _Runtime.setIndex(matrixArray, 0.0, iw2);
@@ -227,7 +227,7 @@ class WgpuParticleEmitter {
     _Runtime.setIndex(uniformDataU32, (floatBase + 13.0), 0.0);
     {
       var k:Dynamic = 14.0;
-      while (_Runtime.truthy(_Runtime.compare(k, 32.0, '<'))) {
+      while ((cast ((cast k : Float) < (cast 32.0 : Float)) : Bool)) {
         _Runtime.setIndex(uniformData, (floatBase + k), 0.0);
         k++;
       }

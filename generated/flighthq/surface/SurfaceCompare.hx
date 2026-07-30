@@ -11,19 +11,19 @@ class SurfaceCompare {
   public static function compareSurface(source:Surface, other:Surface):Null<Surface> {
     var result:Dynamic = cast _Runtime.UNDEFINED;
     var hasDiff:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(source, 'width'), _Runtime.field(other, 'width')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(source, 'height'), _Runtime.field(other, 'height'))))) {
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(source, 'width'), _Runtime.field(other, 'width')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(source, 'height'), _Runtime.field(other, 'height')) : Bool)) : Bool)) {
       throw _Runtime.error('compareSurface: surface dimensions do not match (' + Std.string(_Runtime.field(source, 'width')) + '×' + Std.string(_Runtime.field(source, 'height')) + ' vs ' + Std.string(_Runtime.field(other, 'width')) + '×' + Std.string(_Runtime.field(other, 'height')) + ')');
     }
     result = _Runtime.callValue(createSurface, cast ([_Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
     hasDiff = false;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(source, 'data'), 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(source, 'data'), 'length') : Float)) : Bool)) {
         var dr:Dynamic = HxMath.abs((_Runtime.getIndex(_Runtime.field(source, 'data'), i) - _Runtime.getIndex(_Runtime.field(other, 'data'), i)));
         var dg:Dynamic = HxMath.abs((_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 1.0)) - _Runtime.getIndex(_Runtime.field(other, 'data'), (i + 1.0))));
         var db:Dynamic = HxMath.abs((_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 2.0)) - _Runtime.getIndex(_Runtime.field(other, 'data'), (i + 2.0))));
         var da:Dynamic = HxMath.abs((_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 3.0)) - _Runtime.getIndex(_Runtime.field(other, 'data'), (i + 3.0))));
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(dr, 0.0), function():Dynamic return cast !_Runtime.strictEquals(dg, 0.0)), function():Dynamic return cast !_Runtime.strictEquals(db, 0.0)), function():Dynamic return cast !_Runtime.strictEquals(da, 0.0)))) {
+        if ((cast ((cast ((cast ((cast !_Runtime.strictEquals(dr, 0.0) : Bool) || (cast !_Runtime.strictEquals(dg, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(db, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(da, 0.0) : Bool)) : Bool)) {
           _Runtime.setIndex(_Runtime.field(result, 'data'), i, dr);
           _Runtime.setIndex(_Runtime.field(result, 'data'), (i + 1.0), dg);
           _Runtime.setIndex(_Runtime.field(result, 'data'), (i + 2.0), db);
@@ -33,7 +33,7 @@ class SurfaceCompare {
         (i = cast ((i + 4.0) : Dynamic));
       }
     }
-    return cast _Runtime.select(hasDiff, function():Dynamic return cast result, function():Dynamic return cast null);
+    return cast ((cast hasDiff : Bool) ? (cast result : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
@@ -43,7 +43,7 @@ class SurfaceCompare {
     var totalPixels:Dynamic = cast _Runtime.UNDEFINED;
     var mismatchedPixels:Dynamic = cast _Runtime.UNDEFINED;
     var maxChannelDelta:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(source, 'width'), _Runtime.field(other, 'width')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(source, 'height'), _Runtime.field(other, 'height'))))) {
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(source, 'width'), _Runtime.field(other, 'width')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(source, 'height'), _Runtime.field(other, 'height')) : Bool)) : Bool)) {
       throw _Runtime.error('getSurfaceMismatch: surface dimensions do not match (' + Std.string(_Runtime.field(source, 'width')) + '×' + Std.string(_Runtime.field(source, 'height')) + ' vs ' + Std.string(_Runtime.field(other, 'width')) + '×' + Std.string(_Runtime.field(other, 'height')) + ')');
     }
     a = _Runtime.field(source, 'data');
@@ -53,18 +53,18 @@ class SurfaceCompare {
     maxChannelDelta = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(a, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(a, 'length') : Float)) : Bool)) {
         var dr:Dynamic = HxMath.abs((_Runtime.getIndex(a, i) - _Runtime.getIndex(b, i)));
         var dg:Dynamic = HxMath.abs((_Runtime.getIndex(a, (i + 1.0)) - _Runtime.getIndex(b, (i + 1.0))));
         var db:Dynamic = HxMath.abs((_Runtime.getIndex(a, (i + 2.0)) - _Runtime.getIndex(b, (i + 2.0))));
         var da:Dynamic = HxMath.abs((_Runtime.getIndex(a, (i + 3.0)) - _Runtime.getIndex(b, (i + 3.0))));
         var pixelDelta:Dynamic = HxMath.max(HxMath.max(HxMath.max(dr, dg), db), da);
-        if (_Runtime.truthy(_Runtime.compare(pixelDelta, maxChannelDelta, '>'))) { (maxChannelDelta = cast (pixelDelta : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(pixelDelta, channelTolerance, '>'))) { mismatchedPixels++; }
+        if ((cast ((cast pixelDelta : Float) > (cast maxChannelDelta : Float)) : Bool)) { (maxChannelDelta = cast (pixelDelta : Dynamic)); }
+        if ((cast ((cast pixelDelta : Float) > (cast channelTolerance : Float)) : Bool)) { mismatchedPixels++; }
         (i = cast ((i + 4.0) : Dynamic));
       }
     }
-    return cast { mismatchedPixels: mismatchedPixels, totalPixels: totalPixels, fraction: _Runtime.select(_Runtime.strictEquals(totalPixels, 0.0), function():Dynamic return cast 0.0, function():Dynamic return cast (mismatchedPixels / totalPixels)), maxChannelDelta: maxChannelDelta };
+    return cast { mismatchedPixels: mismatchedPixels, totalPixels: totalPixels, fraction: ((cast _Runtime.strictEquals(totalPixels, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast (mismatchedPixels / totalPixels) : Dynamic)), maxChannelDelta: maxChannelDelta };
     return cast null;
   }
 }

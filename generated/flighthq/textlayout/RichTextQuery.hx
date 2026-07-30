@@ -17,17 +17,17 @@ class RichTextQuery {
     var closestLineBottom:Dynamic = cast _Runtime.UNDEFINED;
     var lineStart:Dynamic = cast _Runtime.UNDEFINED;
     var lineEnd:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(layout, 'groups'), 'length'), 0.0))) { return cast 0.0; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(layout, 'groups'), 'length'), 0.0) : Bool)) { return cast 0.0; }
     closestLineIndex = 0.0;
     closestDist = HxMath.POSITIVE_INFINITY;
     closestLineBottom = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(layout, 'lineHeights'), 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(layout, 'lineHeights'), 'length') : Float)) : Bool)) {
         var lineTop:Dynamic = _Runtime.callValue(RichTextQuery.getLineOffsetY__richTextQuery, cast ([layout, i] : Array<Dynamic>));
         var lineBottom:Dynamic = (lineTop + _Runtime.coalesce(_Runtime.getIndex(_Runtime.field(layout, 'lineHeights'), i), function():Dynamic return cast 0.0));
-        var dist:Dynamic = _Runtime.select(_Runtime.compare(y, lineTop, '<'), function():Dynamic return cast (lineTop - y), function():Dynamic return cast _Runtime.select(_Runtime.compare(y, lineBottom, '>'), function():Dynamic return cast (y - lineBottom), function():Dynamic return cast 0.0));
-        if (_Runtime.truthy(_Runtime.compare(dist, closestDist, '<'))) {
+        var dist:Dynamic = ((cast ((cast y : Float) < (cast lineTop : Float)) : Bool) ? (cast (lineTop - y) : Dynamic) : (cast ((cast ((cast y : Float) > (cast lineBottom : Float)) : Bool) ? (cast (y - lineBottom) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
+        if ((cast ((cast dist : Float) < (cast closestDist : Float)) : Bool)) {
           (closestDist = cast (dist : Dynamic));
           (closestLineIndex = cast (i : Dynamic));
           (closestLineBottom = cast (lineBottom : Dynamic));
@@ -35,27 +35,27 @@ class RichTextQuery {
         i++;
       }
     }
-    if (_Runtime.truthy(_Runtime.compare(y, closestLineBottom, '>'))) {
+    if ((cast ((cast y : Float) > (cast closestLineBottom : Float)) : Bool)) {
       var lineEnd:Dynamic = 0.0;
       for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), closestLineIndex))) { (lineEnd = cast (HxMath.max(lineEnd, _Runtime.field(group, 'endIndex')) : Dynamic)); }
+        if ((cast _Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), closestLineIndex) : Bool)) { (lineEnd = cast (HxMath.max(lineEnd, _Runtime.field(group, 'endIndex')) : Dynamic)); }
       }
       return cast lineEnd;
     }
-    lineStart = _Runtime.select(_Runtime.compare(_Runtime.field(_Runtime.field(layout, 'groups'), 'length'), 0.0, '>'), function():Dynamic return cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.getIndex(_Runtime.field(layout, 'groups'), (_Runtime.field(_Runtime.field(layout, 'groups'), 'length') - 1.0)), 'endIndex'), function():Dynamic return cast 0.0), function():Dynamic return cast 0.0);
+    lineStart = ((cast ((cast _Runtime.field(_Runtime.field(layout, 'groups'), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.getIndex(_Runtime.field(layout, 'groups'), (_Runtime.field(_Runtime.field(layout, 'groups'), 'length') - 1.0)), 'endIndex'), function():Dynamic return cast 0.0) : Dynamic) : (cast 0.0 : Dynamic));
     lineEnd = 0.0;
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), closestLineIndex))) { continue; }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), closestLineIndex) : Bool)) { continue; }
       (lineStart = cast (HxMath.min(lineStart, _Runtime.field(group, 'startIndex')) : Dynamic));
       (lineEnd = cast (HxMath.max(lineEnd, _Runtime.field(group, 'endIndex')) : Dynamic));
-      if (_Runtime.truthy(_Runtime.compare(x, _Runtime.field(group, 'offsetX'), '<='))) { return cast _Runtime.field(group, 'startIndex'); }
-      if (_Runtime.truthy(_Runtime.compare(x, (_Runtime.field(group, 'offsetX') + _Runtime.field(group, 'width')), '<='))) {
+      if ((cast ((cast x : Float) <= (cast _Runtime.field(group, 'offsetX') : Float)) : Bool)) { return cast _Runtime.field(group, 'startIndex'); }
+      if ((cast ((cast x : Float) <= (cast (_Runtime.field(group, 'offsetX') + _Runtime.field(group, 'width')) : Float)) : Bool)) {
         var gx:Dynamic = _Runtime.field(group, 'offsetX');
         {
           var i:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(group, 'positions'), 'length'), '<'))) {
+          while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(group, 'positions'), 'length') : Float)) : Bool)) {
             var advance:Dynamic = _Runtime.coalesce(_Runtime.getIndex(_Runtime.field(group, 'positions'), i), function():Dynamic return cast 0.0);
-            if (_Runtime.truthy(_Runtime.compare(x, (gx + (advance / 2.0)), '<='))) { return cast (_Runtime.field(group, 'startIndex') + i); }
+            if ((cast ((cast x : Float) <= (cast (gx + (advance / 2.0)) : Float)) : Bool)) { return cast (_Runtime.field(group, 'startIndex') + i); }
             (gx = cast ((gx + advance) : Dynamic));
             i++;
           }
@@ -63,7 +63,7 @@ class RichTextQuery {
         return cast _Runtime.field(group, 'endIndex');
       }
     }
-    return cast _Runtime.select(_Runtime.compare(lineEnd, 0.0, '>'), function():Dynamic return cast lineEnd, function():Dynamic return cast lineStart);
+    return cast ((cast ((cast lineEnd : Float) > (cast 0.0 : Float)) : Bool) ? (cast lineEnd : Dynamic) : (cast lineStart : Dynamic));
     return cast null;
   }
 
@@ -81,7 +81,7 @@ class RichTextQuery {
     right = 0.0;
     found = false;
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), lineIndex))) { continue; }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), lineIndex) : Bool)) { continue; }
       (found = cast (true : Dynamic));
       (ascent = cast (HxMath.max(ascent, _Runtime.field(group, 'ascent')) : Dynamic));
       (descent = cast (HxMath.max(descent, _Runtime.field(group, 'descent')) : Dynamic));
@@ -89,8 +89,8 @@ class RichTextQuery {
       (x = cast (HxMath.min(x, _Runtime.field(group, 'offsetX')) : Dynamic));
       (right = cast (HxMath.max(right, (_Runtime.field(group, 'offsetX') + _Runtime.field(group, 'width'))) : Dynamic));
     }
-    if (_Runtime.truthy(!_Runtime.truthy(found))) { return cast null; }
-    return cast { ascent: ascent, descent: descent, height: _Runtime.coalesce(_Runtime.getIndex(_Runtime.field(layout, 'lineHeights'), lineIndex), function():Dynamic return cast ((ascent + descent) + leading)), leading: leading, width: (right - x), x: _Runtime.select(_Runtime.strictEquals(x, HxMath.POSITIVE_INFINITY), function():Dynamic return cast 0.0, function():Dynamic return cast x) };
+    if ((cast !(cast found : Bool) : Bool)) { return cast null; }
+    return cast { ascent: ascent, descent: descent, height: _Runtime.coalesce(_Runtime.getIndex(_Runtime.field(layout, 'lineHeights'), lineIndex), function():Dynamic return cast ((ascent + descent) + leading)), leading: leading, width: (right - x), x: ((cast _Runtime.strictEquals(x, HxMath.POSITIVE_INFINITY) : Bool) ? (cast 0.0 : Dynamic) : (cast x : Dynamic)) };
     return cast null;
   }
 
@@ -100,12 +100,12 @@ class RichTextQuery {
     var limit:Dynamic = cast _Runtime.UNDEFINED;
     var charWidth:Dynamic = cast _Runtime.UNDEFINED;
     group = _Runtime.callValue(RichTextQuery.getGroupContainingIndex__richTextQuery, cast ([layout, charIndex] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(group, null))) { return cast false; }
+    if ((cast _Runtime.strictEquals(group, null) : Bool)) { return cast false; }
     x = _Runtime.field(group, 'offsetX');
     limit = HxMath.min((charIndex - _Runtime.field(group, 'startIndex')), _Runtime.field(_Runtime.field(group, 'positions'), 'length'));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, limit, '<'))) {
+      while ((cast ((cast i : Float) < (cast limit : Float)) : Bool)) {
         (x = cast ((x + _Runtime.coalesce(_Runtime.getIndex(_Runtime.field(group, 'positions'), i), function():Dynamic return cast 0.0)) : Dynamic));
         i++;
       }
@@ -124,8 +124,8 @@ class RichTextQuery {
     clamped = HxMath.max(0.0, HxMath.min(_Runtime.field(text, 'length'), charIndex));
     {
       var i:Dynamic = (clamped - 1.0);
-      while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>='))) {
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.getIndex(text, i), '\n'))) { return cast (i + 1.0); }
+      while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
+        if ((cast _Runtime.strictEquals(_Runtime.getIndex(text, i), '\n') : Bool)) { return cast (i + 1.0); }
         i--;
       }
     }
@@ -140,11 +140,11 @@ class RichTextQuery {
     closestDist = HxMath.POSITIVE_INFINITY;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(layout, 'lineHeights'), 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(layout, 'lineHeights'), 'length') : Float)) : Bool)) {
         var lineTop:Dynamic = _Runtime.callValue(RichTextQuery.getLineOffsetY__richTextQuery, cast ([layout, i] : Array<Dynamic>));
         var lineBottom:Dynamic = (lineTop + _Runtime.getIndex(_Runtime.field(layout, 'lineHeights'), i));
-        var dist:Dynamic = _Runtime.select(_Runtime.compare(y, lineTop, '<'), function():Dynamic return cast (lineTop - y), function():Dynamic return cast _Runtime.select(_Runtime.compare(y, lineBottom, '>'), function():Dynamic return cast (y - lineBottom), function():Dynamic return cast 0.0));
-        if (_Runtime.truthy(_Runtime.compare(dist, closestDist, '<'))) {
+        var dist:Dynamic = ((cast ((cast y : Float) < (cast lineTop : Float)) : Bool) ? (cast (lineTop - y) : Dynamic) : (cast ((cast ((cast y : Float) > (cast lineBottom : Float)) : Bool) ? (cast (y - lineBottom) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
+        if ((cast ((cast dist : Float) < (cast closestDist : Float)) : Bool)) {
           (closestDist = cast (dist : Dynamic));
           (closestLineIndex = cast (i : Dynamic));
         }
@@ -168,17 +168,17 @@ class RichTextQuery {
     start = HxMath.POSITIVE_INFINITY;
     end = 0.0;
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), lineIndex))) { continue; }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), lineIndex) : Bool)) { continue; }
       (start = cast (HxMath.min(start, _Runtime.field(group, 'startIndex')) : Dynamic));
       (end = cast (HxMath.max(end, _Runtime.field(group, 'endIndex')) : Dynamic));
     }
-    return cast _Runtime.select(_Runtime.strictEquals(start, HxMath.POSITIVE_INFINITY), function():Dynamic return cast 0.0, function():Dynamic return cast (end - start));
+    return cast ((cast _Runtime.strictEquals(start, HxMath.POSITIVE_INFINITY) : Bool) ? (cast 0.0 : Dynamic) : (cast (end - start) : Dynamic));
     return cast null;
   }
 
   public static function getRichTextLineOffset(layout:TextLayoutResult, lineIndex:Float):Float {
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), lineIndex))) { return cast _Runtime.field(group, 'startIndex'); }
+      if ((cast _Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), lineIndex) : Bool)) { return cast _Runtime.field(group, 'startIndex'); }
     }
     return cast 0.0;
     return cast null;
@@ -190,18 +190,18 @@ class RichTextQuery {
     start = HxMath.POSITIVE_INFINITY;
     end = 0.0;
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), lineIndex))) { continue; }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), lineIndex) : Bool)) { continue; }
       (start = cast (HxMath.min(start, _Runtime.field(group, 'startIndex')) : Dynamic));
       (end = cast (HxMath.max(end, _Runtime.field(group, 'endIndex')) : Dynamic));
     }
-    return cast _Runtime.select(_Runtime.strictEquals(start, HxMath.POSITIVE_INFINITY), function():Dynamic return cast '', function():Dynamic return cast _Runtime.slice(text, start, end));
+    return cast ((cast _Runtime.strictEquals(start, HxMath.POSITIVE_INFINITY) : Bool) ? (cast '' : Dynamic) : (cast _Runtime.slice(text, start, end) : Dynamic));
     return cast null;
   }
 
   public static function getRichTextLinkAtPoint(layout:TextLayoutResult, x:Float, y:Float):Null<String> {
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(_Runtime.field(group, 'format'), 'url')))) { continue; }
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(x, _Runtime.field(group, 'offsetX'), '>='), function():Dynamic return cast _Runtime.compare(x, (_Runtime.field(group, 'offsetX') + _Runtime.field(group, 'width')), '<=')), function():Dynamic return cast _Runtime.compare(y, _Runtime.field(group, 'offsetY'), '>=')), function():Dynamic return cast _Runtime.compare(y, (_Runtime.field(group, 'offsetY') + _Runtime.field(group, 'height')), '<=')))) {
+      if ((cast !_Runtime.truthy(_Runtime.field(_Runtime.field(group, 'format'), 'url')) : Bool)) { continue; }
+      if ((cast ((cast ((cast ((cast ((cast x : Float) >= (cast _Runtime.field(group, 'offsetX') : Float)) : Bool) && (cast ((cast x : Float) <= (cast (_Runtime.field(group, 'offsetX') + _Runtime.field(group, 'width')) : Float)) : Bool)) : Bool) && (cast ((cast y : Float) >= (cast _Runtime.field(group, 'offsetY') : Float)) : Bool)) : Bool) && (cast ((cast y : Float) <= (cast (_Runtime.field(group, 'offsetY') + _Runtime.field(group, 'height')) : Float)) : Bool)) : Bool)) {
         return cast _Runtime.field(_Runtime.field(group, 'format'), 'url');
       }
     }
@@ -215,7 +215,7 @@ class RichTextQuery {
     var end:Dynamic = cast _Runtime.UNDEFINED;
     start = _Runtime.callValue(getRichTextFirstCharInParagraph, cast ([text, charIndex] : Array<Dynamic>));
     newline = _Runtime.callProperty(text, 'indexOf', cast (['\n', start] : Array<Dynamic>));
-    end = _Runtime.select(_Runtime.strictEquals(newline, -1.0), function():Dynamic return cast _Runtime.field(text, 'length'), function():Dynamic return cast (newline + 1.0));
+    end = ((cast _Runtime.strictEquals(newline, -1.0) : Bool) ? (cast _Runtime.field(text, 'length') : Dynamic) : (cast (newline + 1.0) : Dynamic));
     return cast (end - start);
     return cast null;
   }
@@ -224,13 +224,13 @@ class RichTextQuery {
     var start:Dynamic = cast _Runtime.UNDEFINED;
     var end:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.setLength(out, 0.0);
-    if (_Runtime.truthy(_Runtime.strictEquals(beginIndex, endIndex))) { return; }
+    if ((cast _Runtime.strictEquals(beginIndex, endIndex) : Bool)) { return; }
     start = HxMath.min(beginIndex, endIndex);
     end = HxMath.max(beginIndex, endIndex);
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
       var groupStart:Dynamic = HxMath.max(start, _Runtime.field(group, 'startIndex'));
       var groupEnd:Dynamic = HxMath.min(end, _Runtime.field(group, 'endIndex'));
-      if (_Runtime.truthy(_Runtime.compare(groupStart, groupEnd, '>='))) { continue; }
+      if ((cast ((cast groupStart : Float) >= (cast groupEnd : Float)) : Bool)) { continue; }
       var x:Dynamic = _Runtime.callValue(RichTextQuery.getCaretX__richTextQuery, cast ([group, groupStart] : Array<Dynamic>));
       var right:Dynamic = _Runtime.callValue(RichTextQuery.getCaretX__richTextQuery, cast ([group, groupEnd] : Array<Dynamic>));
       _Runtime.callProperty(out, 'push', cast ([{ height: _Runtime.field(group, 'height'), lineIndex: _Runtime.field(group, 'lineIndex'), width: (right - x), x: x, y: _Runtime.field(group, 'offsetY') }] : Array<Dynamic>));
@@ -244,7 +244,7 @@ class RichTextQuery {
     limit = HxMath.max(0.0, (HxMath.min(index, _Runtime.field(group, 'endIndex')) - _Runtime.field(group, 'startIndex')));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, limit, '<'))) {
+      while ((cast ((cast i : Float) < (cast limit : Float)) : Bool)) {
         (x = cast ((x + _Runtime.coalesce(_Runtime.getIndex(_Runtime.field(group, 'positions'), i), function():Dynamic return cast 0.0)) : Dynamic));
         i++;
       }
@@ -255,7 +255,7 @@ class RichTextQuery {
 
   public static function getGroupContainingIndex__richTextQuery(layout:TextLayoutResult, charIndex:Float):Dynamic {
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(charIndex, _Runtime.field(group, 'startIndex'), '>='), function():Dynamic return cast _Runtime.compare(charIndex, _Runtime.field(group, 'endIndex'), '<')))) { return cast group; }
+      if ((cast ((cast ((cast charIndex : Float) >= (cast _Runtime.field(group, 'startIndex') : Float)) : Bool) && (cast ((cast charIndex : Float) < (cast _Runtime.field(group, 'endIndex') : Float)) : Bool)) : Bool)) { return cast group; }
     }
     return cast null;
     return cast null;
@@ -264,12 +264,12 @@ class RichTextQuery {
   public static function getLineOffsetY__richTextQuery(layout:TextLayoutResult, lineIndex:Float):Float {
     var y:Dynamic = cast _Runtime.UNDEFINED;
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), lineIndex))) { return cast _Runtime.field(group, 'offsetY'); }
+      if ((cast _Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), lineIndex) : Bool)) { return cast _Runtime.field(group, 'offsetY'); }
     }
     y = TEXT_LAYOUT_GUTTER;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, lineIndex, '<'))) {
+      while ((cast ((cast i : Float) < (cast lineIndex : Float)) : Bool)) {
         (y = cast ((y + _Runtime.coalesce(_Runtime.getIndex(_Runtime.field(layout, 'lineHeights'), i), function():Dynamic return cast 0.0)) : Dynamic));
         i++;
       }

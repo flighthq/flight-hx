@@ -64,7 +64,7 @@ class ElectronApp {
     }, releaseSingleInstanceLock: function() {
       _Runtime.callProperty(app, 'releaseSingleInstanceLock', cast ([] : Array<Dynamic>));
     }, requestAttention: function(_critical:Dynamic) {
-      return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.field(app, 'dock'), 'bounce', cast ([_Runtime.select(_critical, function():Dynamic return cast 'critical', function():Dynamic return cast 'informational')] : Array<Dynamic>)), function():Dynamic return cast -1.0);
+      return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.field(app, 'dock'), 'bounce', cast ([((cast _critical : Bool) ? (cast 'critical' : Dynamic) : (cast 'informational' : Dynamic))] : Array<Dynamic>)), function():Dynamic return cast -1.0);
     }, requestSingleInstanceLock: function() {
       return cast _Runtime.callProperty(app, 'requestSingleInstanceLock', cast ([] : Array<Dynamic>));
     }, setActivationPolicy: function(policy:Dynamic) {
@@ -74,7 +74,7 @@ class ElectronApp {
     }, setDockBadge: function(text:Dynamic) {
       _Runtime.callOptionalProperty(_Runtime.field(app, 'dock'), 'setBadge', cast ([text] : Array<Dynamic>));
     }, setDockMenu: function(items:Dynamic) {
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(app, 'dock')))) { return; }
+      if ((cast !_Runtime.truthy(_Runtime.field(app, 'dock')) : Bool)) { return; }
       _Runtime.callProperty(_Runtime.field(app, 'dock'), 'setMenu', cast ([_Runtime.callProperty(_Runtime.field(electron, 'Menu'), 'buildFromTemplate', cast ([_Runtime.callProperty(items, 'map', cast ([ElectronApp.toMenuItemOptions__electronApp] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
     }, setLoginItem: function(settings:Dynamic) {
       _Runtime.callProperty(app, 'setLoginItemSettings', cast ([{ openAtLogin: _Runtime.field(settings, 'openAtLogin'), openAsHidden: _Runtime.field(settings, 'openAsHidden'), path: _Runtime.field(settings, 'path'), args: _Runtime.select(_Runtime.field(settings, 'args'), function():Dynamic return cast _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(settings, 'args'))]), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) }] : Array<Dynamic>));
@@ -121,8 +121,8 @@ class ElectronApp {
   }
 
   public static function toElectronPathName__electronApp(kind:AppPathKind):String {
-    if (_Runtime.truthy(_Runtime.strictEquals(kind, 'logs'))) { return cast 'logs'; }
-    if (_Runtime.truthy(_Runtime.strictEquals(kind, 'crashDumps'))) { return cast 'crashDumps'; }
+    if ((cast _Runtime.strictEquals(kind, 'logs') : Bool)) { return cast 'logs'; }
+    if ((cast _Runtime.strictEquals(kind, 'crashDumps') : Bool)) { return cast 'crashDumps'; }
     return cast 'userData';
     return cast null;
   }

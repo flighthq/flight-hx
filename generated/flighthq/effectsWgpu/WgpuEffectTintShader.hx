@@ -68,7 +68,7 @@ class WgpuEffectTintShader {
   public static function getWgpuInnerClipShader__wgpuEffectTintShader(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
     var p:Dynamic = cast _Runtime.UNDEFINED;
     p = ((cast WgpuEffectTintShader.innerClipPipelines__wgpuEffectTintShader : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (p = cast (_Runtime.callValue(createWgpuDualSourceEffectPipeline, cast ([state, WgpuEffectTintShader.INNER_CLIP_WGSL__wgpuEffectTintShader, 'replace'] : Array<Dynamic>)) : Dynamic));
       ((cast WgpuEffectTintShader.innerClipPipelines__wgpuEffectTintShader : flighthq._internal._WeakMap).set(state, p));
     }
@@ -79,7 +79,7 @@ class WgpuEffectTintShader {
   public static function getWgpuInvertTintShader__wgpuEffectTintShader(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Dynamic = cast _Runtime.UNDEFINED;
     p = ((cast WgpuEffectTintShader.invertTintPipelines__wgpuEffectTintShader : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (p = cast (_Runtime.callValue(createWgpuEffectPipeline, cast ([state, WgpuEffectTintShader.INVERT_TINT_WGSL__wgpuEffectTintShader, 'replace'] : Array<Dynamic>)) : Dynamic));
       ((cast WgpuEffectTintShader.invertTintPipelines__wgpuEffectTintShader : flighthq._internal._WeakMap).set(state, p));
     }
@@ -90,7 +90,7 @@ class WgpuEffectTintShader {
   public static function getWgpuTintShader__wgpuEffectTintShader(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Dynamic = cast _Runtime.UNDEFINED;
     p = ((cast WgpuEffectTintShader.tintPipelines__wgpuEffectTintShader : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (p = cast (_Runtime.callValue(createWgpuEffectPipeline, cast ([state, WgpuEffectTintShader.TINT_WGSL__wgpuEffectTintShader, 'replace'] : Array<Dynamic>)) : Dynamic));
       ((cast WgpuEffectTintShader.tintPipelines__wgpuEffectTintShader : flighthq._internal._WeakMap).set(state, p));
     }

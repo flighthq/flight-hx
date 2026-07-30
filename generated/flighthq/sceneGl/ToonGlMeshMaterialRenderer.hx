@@ -38,7 +38,7 @@ class ToonGlMeshMaterialRenderer {
     gl = _Runtime.field(state, 'gl');
     toon = (cast material : Null<ToonMaterial>);
     program = _Runtime.callValue(ensureGlToonProgram, cast ([state, _Runtime.callValue(ToonGlMeshMaterialRenderer.defineKeyForMaterial__toonGlMeshMaterialRenderer, cast ([toon] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, _Runtime.andValue(!_Runtime.strictEquals(toon, null), function():Dynamic return cast _Runtime.field(toon, 'doubleSided'))] : Array<Dynamic>));
+    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, ((cast !_Runtime.strictEquals(toon, null) : Bool) && (cast _Runtime.field(toon, 'doubleSided') : Bool))] : Array<Dynamic>));
     _Runtime.callValue(setGlMeshViewProjection, cast ([gl, _Runtime.field(program, 'locViewProjection'), camera] : Array<Dynamic>));
     _Runtime.callValue(setGlMeshCameraPosition, cast ([gl, _Runtime.field(program, 'locCameraPosition'), camera] : Array<Dynamic>));
     _Runtime.callValue(bindGlMeshLightBlock, cast ([state, program, lights] : Array<Dynamic>));
@@ -46,7 +46,7 @@ class ToonGlMeshMaterialRenderer {
   }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
-    if (_Runtime.truthy(_Runtime.strictEquals(program, null))) { return; }
+    if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
     _Runtime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
   } };
 
@@ -55,7 +55,7 @@ class ToonGlMeshMaterialRenderer {
   }
 
   public static function defineKeyForMaterial__toonGlMeshMaterialRenderer(material:Null<ToonMaterial>):GlToonDefineKey {
-    return cast { alphaMaskEnabled: _Runtime.andValue(!_Runtime.strictEquals(material, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask')), hasBaseColorMap: _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(material, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(material, 'baseColorMap'), null)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(material, 'baseColorMap'), 'image'), null)), hasRamp: _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(material, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(material, 'ramp'), null)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(material, 'ramp'), 'image'), null)), hasUvTransform: _Runtime.callValue(hasGlUvTransform, cast ([_Runtime.select(!_Runtime.strictEquals(material, null), function():Dynamic return cast _Runtime.field(material, 'baseColorMap'), function():Dynamic return cast null)] : Array<Dynamic>)) };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasBaseColorMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'baseColorMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(material, 'baseColorMap'), 'image'), null) : Bool)), hasRamp: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'ramp'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(material, 'ramp'), 'image'), null) : Bool)), hasUvTransform: _Runtime.callValue(hasGlUvTransform, cast ([((cast !_Runtime.strictEquals(material, null) : Bool) ? (cast _Runtime.field(material, 'baseColorMap') : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)) };
     return cast null;
   }
 
@@ -64,7 +64,7 @@ class ToonGlMeshMaterialRenderer {
     var baseColorMap:Dynamic = cast _Runtime.UNDEFINED;
     var ramp:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
-    if (_Runtime.truthy(_Runtime.strictEquals(material, null))) {
+    if ((cast _Runtime.strictEquals(material, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locBaseColor'), 1.0, 1.0, 1.0, 1.0);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locSteps'), 3.0);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), 0.5);
@@ -75,13 +75,13 @@ class ToonGlMeshMaterialRenderer {
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locSteps'), _Runtime.field(material, 'steps'));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), _Runtime.field(material, 'alphaCutoff'));
     baseColorMap = _Runtime.field(material, 'baseColorMap');
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(baseColorMap, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(baseColorMap, 'image'), null)), function():Dynamic return cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(baseColorMap, 'image')] : Array<Dynamic>))))) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(baseColorMap, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(baseColorMap, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(baseColorMap, 'image')] : Array<Dynamic>)) : Bool)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);
       _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(baseColorMap, 'image'), _Runtime.field(baseColorMap, 'sampler')] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locBaseColorMap'), 0.0);
     }
     ramp = _Runtime.field(material, 'ramp');
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(ramp, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(ramp, 'image'), null)), function():Dynamic return cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(ramp, 'image')] : Array<Dynamic>))))) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(ramp, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(ramp, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(ramp, 'image')] : Array<Dynamic>)) : Bool)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE1);
       _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(ramp, 'image'), _Runtime.field(ramp, 'sampler')] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locRamp'), 1.0);

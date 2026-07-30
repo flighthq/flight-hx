@@ -12,8 +12,8 @@ typedef CanvasImageSourceKind = String;
 
 class CanvasImageSource {
   public static function explainCanvasImageSource(image:ImageResource):Dynamic {
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(image, 'source'), null))) { return cast 'element'; }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(image, 'data'), null))) { return cast 'data'; }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(image, 'source'), null) : Bool)) { return cast 'element'; }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(image, 'data'), null) : Bool)) { return cast 'data'; }
     return cast 'none';
     return cast null;
   }
@@ -22,16 +22,16 @@ class CanvasImageSource {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var entry:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(image, 'source'), null))) { return cast _Runtime.field(image, 'source'); }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(image, 'data'), null))) { return cast null; }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(image, 'source'), null) : Bool)) { return cast _Runtime.field(image, 'source'); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(image, 'data'), null) : Bool)) { return cast null; }
     runtime = _Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>));
     cache = _Runtime.field(runtime, 'imageResourceElementCache');
-    if (_Runtime.truthy(_Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (cache = cast (_Runtime.construct(_Runtime.globalValue('WeakMap'), []) : Dynamic));
       _Runtime.setField(runtime, 'imageResourceElementCache', cache);
     }
     entry = ((cast cache : flighthq._internal._WeakMap).get(image));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(entry, 'version'), _Runtime.field(image, 'version'))))) {
+    if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(entry, 'version'), _Runtime.field(image, 'version')) : Bool)) : Bool)) {
       (entry = cast ({ element: _Runtime.callValue(createCanvasFromImageResource, cast ([image] : Array<Dynamic>)), version: _Runtime.field(image, 'version') } : Dynamic));
       ((cast cache : flighthq._internal._WeakMap).set(image, entry));
     }

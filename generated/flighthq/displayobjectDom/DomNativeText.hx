@@ -35,13 +35,13 @@ class DomNativeText {
     runtime = (cast _Runtime.callValue(getNativeTextRuntime, cast ([source] : Array<Dynamic>)) : NativeTextRuntime);
     data = _Runtime.field(source, 'data');
     element = _Runtime.field(runtime, 'element');
-    if (_Runtime.truthy(_Runtime.strictEquals(element, null))) {
+    if ((cast _Runtime.strictEquals(element, null) : Bool)) {
       (element = cast (flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['div'] : Array<Dynamic>)) : Dynamic));
       _Runtime.callValue(prepareDomElement, cast ([element] : Array<Dynamic>));
       _Runtime.setField(runtime, 'element', element);
     }
     _Runtime.callValue(DomNativeText.applyNativeTextStyle__domNativeText, cast ([element, _Runtime.field(data, 'style')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'autoSize'), 'none'))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(data, 'autoSize'), 'none') : Bool)) {
       _Runtime.setField(_Runtime.field(element, 'style'), 'whiteSpace', 'normal');
       _Runtime.setField(_Runtime.field(element, 'style'), 'width', '' + Std.string(_Runtime.field(data, 'width')) + 'px');
       _Runtime.setField(_Runtime.field(element, 'style'), 'height', '' + Std.string(_Runtime.field(data, 'height')) + 'px');
@@ -99,7 +99,7 @@ class DomNativeText {
     slant = _Runtime.select(_Runtime.field(style, 'italic'), function():Dynamic return cast 'italic ', function():Dynamic return cast '');
     _Runtime.setField(_Runtime.field(element, 'style'), 'font', '' + Std.string(slant) + '' + Std.string(weight) + '' + Std.string(size) + 'px ' + Std.string(family) + '');
     _Runtime.setField(_Runtime.field(element, 'style'), 'color', _Runtime.callValue(computeRgbHexString, cast ([_Runtime.coalesce(_Runtime.field(style, 'color'), function():Dynamic return cast 0.0)] : Array<Dynamic>)));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(style, 'align'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(_Runtime.field(element, 'style'), 'textAlign', _Runtime.field(style, 'align')); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(style, 'leading'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(_Runtime.field(element, 'style'), 'lineHeight', '' + Std.string((size + _Runtime.field(style, 'leading'))) + 'px'); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(style, 'align'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(_Runtime.field(element, 'style'), 'textAlign', _Runtime.field(style, 'align')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(style, 'leading'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(_Runtime.field(element, 'style'), 'lineHeight', '' + Std.string((size + _Runtime.field(style, 'leading'))) + 'px'); }
   }
 }

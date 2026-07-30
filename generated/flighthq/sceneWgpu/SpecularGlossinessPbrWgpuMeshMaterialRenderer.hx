@@ -41,16 +41,16 @@ class SpecularGlossinessPbrWgpuMeshMaterialRenderer {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     stateRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     pass = _Runtime.field(stateRuntime, 'renderPass');
-    if (_Runtime.truthy(_Runtime.strictEquals(pass, null))) { return; }
+    if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     specGloss = (cast material : Null<SpecularGlossinessPbrMaterial>);
-    standard = _Runtime.select(!_Runtime.strictEquals(specGloss, null), function():Dynamic return cast _Runtime.callValue(SpecularGlossinessPbrWgpuMeshMaterialRenderer.convertSpecularGlossinessToStandard__specularGlossinessPbrWgpuMeshMaterialRenderer, cast ([specGloss] : Array<Dynamic>)), function():Dynamic return cast null);
+    standard = ((cast !_Runtime.strictEquals(specGloss, null) : Bool) ? (cast _Runtime.callValue(SpecularGlossinessPbrWgpuMeshMaterialRenderer.convertSpecularGlossinessToStandard__specularGlossinessPbrWgpuMeshMaterialRenderer, cast ([specGloss] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
     key = _Runtime.callValue(buildWgpuPbrStandardDefineKey, cast ([standard, specGloss] : Array<Dynamic>));
     format = _Runtime.coalesce(_Runtime.field(stateRuntime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
     pipeline = _Runtime.callValue(ensureWgpuPbrPipeline, cast ([state, key, format] : Array<Dynamic>));
     _Runtime.callValue(writeWgpuFrameUniform, cast ([state, camera, lights] : Array<Dynamic>));
     binding = _Runtime.callValue(ensureWgpuPbrMaterialBindGroup, cast ([state, pipeline, _Runtime.coalesce(specGloss, function():Dynamic return cast SpecularGlossinessPbrWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__specularGlossinessPbrWgpuMeshMaterialRenderer), standard] : Array<Dynamic>));
     out = _Runtime.callValue(getWgpuPbrMaterialScratch, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(writeWgpuPbrStandardBlock, cast ([out, standard, _Runtime.select(!_Runtime.strictEquals(specGloss, null), function():Dynamic return cast _Runtime.field(specGloss, 'alphaCutoff'), function():Dynamic return cast 0.5)] : Array<Dynamic>));
+    _Runtime.callValue(writeWgpuPbrStandardBlock, cast ([out, standard, ((cast !_Runtime.strictEquals(specGloss, null) : Bool) ? (cast _Runtime.field(specGloss, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic))] : Array<Dynamic>));
     _Runtime.fill(out, 0.0, 16.0, null, 2);
     _Runtime.callValue(writeWgpuPbrMaterialUniform, cast ([state, binding] : Array<Dynamic>));
     _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));
@@ -98,7 +98,7 @@ class SpecularGlossinessPbrWgpuMeshMaterialRenderer {
       var clamped:Dynamic = cast _Runtime.UNDEFINED;
       var srgb:Dynamic = cast _Runtime.UNDEFINED;
       clamped = HxMath.min(HxMath.max(linear, 0.0), 1.0);
-      srgb = _Runtime.select(_Runtime.compare(clamped, 0.0031308, '<='), function():Dynamic return cast (clamped * 12.92), function():Dynamic return cast ((1.055 * HxMath.pow(clamped, (1.0 / 2.4))) - 0.055));
+      srgb = ((cast ((cast clamped : Float) <= (cast 0.0031308 : Float)) : Bool) ? (cast (clamped * 12.92) : Dynamic) : (cast ((1.055 * HxMath.pow(clamped, (1.0 / 2.4))) - 0.055) : Dynamic));
       return cast (_Runtime.toInt32(HxMath.round((srgb * 255.0))) & 255);
     };
     alpha = (_Runtime.toInt32(HxMath.round((HxMath.min(HxMath.max(a, 0.0), 1.0) * 255.0))) & 255);
@@ -111,7 +111,7 @@ class SpecularGlossinessPbrWgpuMeshMaterialRenderer {
     var b:Dynamic = cast _Runtime.UNDEFINED;
     var c:Dynamic = cast _Runtime.UNDEFINED;
     var discriminant:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(specular, SpecularGlossinessPbrWgpuMeshMaterialRenderer.DIELECTRIC_SPECULAR__specularGlossinessPbrWgpuMeshMaterialRenderer, '<'))) { return cast 0.0; }
+    if ((cast ((cast specular : Float) < (cast SpecularGlossinessPbrWgpuMeshMaterialRenderer.DIELECTRIC_SPECULAR__specularGlossinessPbrWgpuMeshMaterialRenderer : Float)) : Bool)) { return cast 0.0; }
     a = SpecularGlossinessPbrWgpuMeshMaterialRenderer.DIELECTRIC_SPECULAR__specularGlossinessPbrWgpuMeshMaterialRenderer;
     b = ((((diffuse * oneMinusSpecularStrength) / (1.0 - SpecularGlossinessPbrWgpuMeshMaterialRenderer.DIELECTRIC_SPECULAR__specularGlossinessPbrWgpuMeshMaterialRenderer)) + specular) - (2.0 * SpecularGlossinessPbrWgpuMeshMaterialRenderer.DIELECTRIC_SPECULAR__specularGlossinessPbrWgpuMeshMaterialRenderer));
     c = (SpecularGlossinessPbrWgpuMeshMaterialRenderer.DIELECTRIC_SPECULAR__specularGlossinessPbrWgpuMeshMaterialRenderer - specular);

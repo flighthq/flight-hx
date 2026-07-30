@@ -28,7 +28,7 @@ class LibgdxAtlasParse {
   }
 
   public static function isFilename__libgdxAtlasParse(line:String):Bool {
-    return cast _Runtime.orValue(_Runtime.callProperty(_Runtime.regexp('[./]', ''), 'test', cast ([line] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callProperty(_Runtime.regexp('^\\w+\\.\\w+$$', ''), 'test', cast ([line] : Array<Dynamic>)));
+    return cast ((cast _Runtime.callProperty(_Runtime.regexp('[./]', ''), 'test', cast ([line] : Array<Dynamic>)) : Bool) || (cast _Runtime.callProperty(_Runtime.regexp('^\\w+\\.\\w+$$', ''), 'test', cast ([line] : Array<Dynamic>)) : Bool));
     return cast null;
   }
 
@@ -45,20 +45,20 @@ class LibgdxAtlasParse {
     currentRegion = null;
     for (raw in _Runtime.iterable(lines)) {
       var trimmed:Dynamic = StringTools.trim(Std.string(raw));
-      if (_Runtime.truthy(_Runtime.strictEquals(trimmed, ''))) {
-        if (_Runtime.truthy(!_Runtime.strictEquals(currentRegion, null))) {
+      if ((cast _Runtime.strictEquals(trimmed, '') : Bool)) {
+        if ((cast !_Runtime.strictEquals(currentRegion, null) : Bool)) {
           _Runtime.callProperty(regions, 'push', cast ([currentRegion] : Array<Dynamic>));
           (currentRegion = cast (null : Dynamic));
         }
         continue;
       }
-      var isIndented:Dynamic = _Runtime.orValue(_Runtime.strictEquals(_Runtime.getIndex(raw, 0.0), ' '), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(raw, 0.0), '	'));
-      if (_Runtime.truthy(isIndented)) {
+      var isIndented:Dynamic = ((cast _Runtime.strictEquals(_Runtime.getIndex(raw, 0.0), ' ') : Bool) || (cast _Runtime.strictEquals(_Runtime.getIndex(raw, 0.0), '	') : Bool));
+      if ((cast isIndented : Bool)) {
         var colonIdx:Dynamic = _Runtime.callProperty(trimmed, 'indexOf', cast ([':'] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.strictEquals(colonIdx, -1.0))) { continue; }
+        if ((cast _Runtime.strictEquals(colonIdx, -1.0) : Bool)) { continue; }
         var key:Dynamic = StringTools.trim(Std.string(_Runtime.slice(trimmed, 0.0, colonIdx)));
         var value:Dynamic = StringTools.trim(Std.string(_Runtime.slice(trimmed, (colonIdx + 1.0), null)));
-        if (_Runtime.truthy(!_Runtime.strictEquals(currentRegion, null))) {
+        if ((cast !_Runtime.strictEquals(currentRegion, null) : Bool)) {
           {
             var __switchValue = key;
             if (__switchValue == 'rotate') {
@@ -104,7 +104,7 @@ class LibgdxAtlasParse {
               _Runtime.setField(currentRegion, 'index', _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([value, 10.0] : Array<Dynamic>)));
             }
           }
-        } else { if (_Runtime.truthy(!_Runtime.strictEquals(currentPage, null))) {
+        } else { if ((cast !_Runtime.strictEquals(currentPage, null) : Bool)) {
           {
             var __switchValue = key;
             if (__switchValue == 'size') {
@@ -119,18 +119,18 @@ class LibgdxAtlasParse {
           }
         } }
       } else {
-        if (_Runtime.truthy(!_Runtime.strictEquals(currentRegion, null))) {
+        if ((cast !_Runtime.strictEquals(currentRegion, null) : Bool)) {
           _Runtime.callProperty(regions, 'push', cast ([currentRegion] : Array<Dynamic>));
           (currentRegion = cast (null : Dynamic));
         }
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.callValue(LibgdxAtlasParse.isFilename__libgdxAtlasParse, cast ([trimmed] : Array<Dynamic>)), function():Dynamic return cast _Runtime.strictEquals(currentPage, null)))) {
+        if ((cast ((cast _Runtime.callValue(LibgdxAtlasParse.isFilename__libgdxAtlasParse, cast ([trimmed] : Array<Dynamic>)) : Bool) && (cast _Runtime.strictEquals(currentPage, null) : Bool)) : Bool)) {
           (currentPage = cast ({ filename: trimmed, height: 0.0, width: 0.0 } : Dynamic));
           _Runtime.callProperty(pages, 'push', cast ([currentPage] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.callValue(LibgdxAtlasParse.isFilename__libgdxAtlasParse, cast ([trimmed] : Array<Dynamic>)), function():Dynamic return cast !_Runtime.strictEquals(currentPage, null)), function():Dynamic return cast !_Runtime.strictEquals(trimmed, _Runtime.field(currentPage, 'filename'))))) {
+        } else { if ((cast ((cast ((cast _Runtime.callValue(LibgdxAtlasParse.isFilename__libgdxAtlasParse, cast ([trimmed] : Array<Dynamic>)) : Bool) && (cast !_Runtime.strictEquals(currentPage, null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(trimmed, _Runtime.field(currentPage, 'filename')) : Bool)) : Bool)) {
           (currentPage = cast ({ filename: trimmed, height: 0.0, width: 0.0 } : Dynamic));
           _Runtime.callProperty(pages, 'push', cast ([currentPage] : Array<Dynamic>));
         } else {
-          if (_Runtime.truthy(_Runtime.strictEquals(currentPage, null))) {
+          if ((cast _Runtime.strictEquals(currentPage, null) : Bool)) {
             (currentPage = cast ({ filename: '', height: 0.0, width: 0.0 } : Dynamic));
             _Runtime.callProperty(pages, 'push', cast ([currentPage] : Array<Dynamic>));
           }
@@ -138,7 +138,7 @@ class LibgdxAtlasParse {
         } }
       }
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(currentRegion, null))) {
+    if ((cast !_Runtime.strictEquals(currentRegion, null) : Bool)) {
       _Runtime.callProperty(regions, 'push', cast ([currentRegion] : Array<Dynamic>));
     }
     return cast { pages: pages, regions: regions };
@@ -157,7 +157,7 @@ class LibgdxAtlasParse {
     for (name in _Runtime.iterable(frameNames)) {
       var noExt:Dynamic = _Runtime.replace(name, _Runtime.regexp('\\.\\w+$$', ''), '', false);
       var match:Dynamic = _Runtime.match(noExt, _Runtime.regexp('^(.*?)_?(\\d+)$$', ''));
-      if (_Runtime.truthy(!_Runtime.truthy(match))) { continue; }
+      if ((cast !_Runtime.truthy(match) : Bool)) { continue; }
       var __destructure5:Dynamic = match;
       var base:Dynamic = _Runtime.getIndex(__destructure5, 1.0);
       var numStr:Dynamic = _Runtime.getIndex(__destructure5, 2.0);
@@ -169,7 +169,7 @@ class LibgdxAtlasParse {
     for (__iteration6 in _Runtime.iterable(groups)) {
       var base:Dynamic = _Runtime.getIndex(__iteration6, 0.0);
       var entries:Dynamic = _Runtime.getIndex(__iteration6, 1.0);
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(entries, 'length'), 2.0, '<'))) { continue; }
+      if ((cast ((cast _Runtime.field(entries, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
       _Runtime.sortAndReturn(entries, function(a:Dynamic, b:Dynamic) return (_Runtime.field(a, 'index') - _Runtime.field(b, 'index')));
       _Runtime.callProperty(animations, 'push', cast ([_Runtime.callValue(createSpritesheetAnimationData, cast ([{ frameDuration: frameDuration, frameNames: _Runtime.callProperty(entries, 'map', cast ([function(e:Dynamic) return _Runtime.field(e, 'name')] : Array<Dynamic>)), loop: true, name: base }] : Array<Dynamic>))] : Array<Dynamic>));
     }

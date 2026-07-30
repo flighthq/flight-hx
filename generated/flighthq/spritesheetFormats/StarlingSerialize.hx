@@ -11,17 +11,17 @@ class StarlingSerialize {
   public static function frameToSubTexture__starlingSerialize(frame:Dynamic):StarlingSubTexture {
     var st:StarlingSubTexture = cast _Runtime.UNDEFINED;
     st = { height: _Runtime.field(frame, 'height'), name: _Runtime.field(frame, 'name'), width: _Runtime.field(frame, 'width'), x: _Runtime.field(frame, 'x'), y: _Runtime.field(frame, 'y') };
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(frame, 'offsetX'), 0.0))) { _Runtime.setField(st, 'frameX', -_Runtime.field(frame, 'offsetX')); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(frame, 'offsetY'), 0.0))) { _Runtime.setField(st, 'frameY', -_Runtime.field(frame, 'offsetY')); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(frame, 'sourceWidth'), _Runtime.field(frame, 'width')))) { _Runtime.setField(st, 'frameWidth', _Runtime.field(frame, 'sourceWidth')); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(frame, 'sourceHeight'), _Runtime.field(frame, 'height')))) { _Runtime.setField(st, 'frameHeight', _Runtime.field(frame, 'sourceHeight')); }
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(frame, 'pivotX'), null), function():Dynamic return cast _Runtime.compare(_Runtime.field(frame, 'sourceWidth'), 0.0, '>')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(frame, 'offsetX'), 0.0) : Bool)) { _Runtime.setField(st, 'frameX', -_Runtime.field(frame, 'offsetX')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(frame, 'offsetY'), 0.0) : Bool)) { _Runtime.setField(st, 'frameY', -_Runtime.field(frame, 'offsetY')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(frame, 'sourceWidth'), _Runtime.field(frame, 'width')) : Bool)) { _Runtime.setField(st, 'frameWidth', _Runtime.field(frame, 'sourceWidth')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(frame, 'sourceHeight'), _Runtime.field(frame, 'height')) : Bool)) { _Runtime.setField(st, 'frameHeight', _Runtime.field(frame, 'sourceHeight')); }
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(frame, 'pivotX'), null) : Bool) && (cast ((cast _Runtime.field(frame, 'sourceWidth') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       _Runtime.setField(st, 'pivotX', (_Runtime.field(frame, 'pivotX') * _Runtime.field(frame, 'sourceWidth')));
     }
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(frame, 'pivotY'), null), function():Dynamic return cast _Runtime.compare(_Runtime.field(frame, 'sourceHeight'), 0.0, '>')))) {
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(frame, 'pivotY'), null) : Bool) && (cast ((cast _Runtime.field(frame, 'sourceHeight') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       _Runtime.setField(st, 'pivotY', (_Runtime.field(frame, 'pivotY') * _Runtime.field(frame, 'sourceHeight')));
     }
-    if (_Runtime.truthy(_Runtime.field(frame, 'rotated'))) { _Runtime.setField(st, 'rotated', true); }
+    if ((cast _Runtime.field(frame, 'rotated') : Bool)) { _Runtime.setField(st, 'rotated', true); }
     return cast st;
     return cast null;
   }
@@ -30,12 +30,12 @@ class StarlingSerialize {
     var parts:Array<String> = cast _Runtime.UNDEFINED;
     parts = cast (['name="' + Std.string(_Runtime.field(st, 'name')) + '"', 'x="' + Std.string(_Runtime.field(st, 'x')) + '"', 'y="' + Std.string(_Runtime.field(st, 'y')) + '"'] : Array<Dynamic>);
     _Runtime.pushMany(parts, cast (['width="' + Std.string(_Runtime.field(st, 'width')) + '"', 'height="' + Std.string(_Runtime.field(st, 'height')) + '"'] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(st, 'frameX'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(parts, 'push', cast (['frameX="' + Std.string(_Runtime.field(st, 'frameX')) + '"'] : Array<Dynamic>)); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(st, 'frameY'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(parts, 'push', cast (['frameY="' + Std.string(_Runtime.field(st, 'frameY')) + '"'] : Array<Dynamic>)); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(st, 'frameWidth'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(parts, 'push', cast (['frameWidth="' + Std.string(_Runtime.field(st, 'frameWidth')) + '"'] : Array<Dynamic>)); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(st, 'frameHeight'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(parts, 'push', cast (['frameHeight="' + Std.string(_Runtime.field(st, 'frameHeight')) + '"'] : Array<Dynamic>)); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(st, 'pivotX'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(parts, 'push', cast (['pivotX="' + Std.string(_Runtime.field(st, 'pivotX')) + '"'] : Array<Dynamic>)); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(st, 'pivotY'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(parts, 'push', cast (['pivotY="' + Std.string(_Runtime.field(st, 'pivotY')) + '"'] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(st, 'frameX'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(parts, 'push', cast (['frameX="' + Std.string(_Runtime.field(st, 'frameX')) + '"'] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(st, 'frameY'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(parts, 'push', cast (['frameY="' + Std.string(_Runtime.field(st, 'frameY')) + '"'] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(st, 'frameWidth'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(parts, 'push', cast (['frameWidth="' + Std.string(_Runtime.field(st, 'frameWidth')) + '"'] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(st, 'frameHeight'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(parts, 'push', cast (['frameHeight="' + Std.string(_Runtime.field(st, 'frameHeight')) + '"'] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(st, 'pivotX'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(parts, 'push', cast (['pivotX="' + Std.string(_Runtime.field(st, 'pivotX')) + '"'] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(st, 'pivotY'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(parts, 'push', cast (['pivotY="' + Std.string(_Runtime.field(st, 'pivotY')) + '"'] : Array<Dynamic>)); }
     if (_Runtime.truthy(_Runtime.field(st, 'rotated'))) { _Runtime.callProperty(parts, 'push', cast (['rotated="true"'] : Array<Dynamic>)); }
     return cast _Runtime.join(parts, ' ');
     return cast null;

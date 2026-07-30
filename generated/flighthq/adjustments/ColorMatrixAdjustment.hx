@@ -10,7 +10,7 @@ class ColorMatrixAdjustment {
   public static function getAdjustmentColorMatrix(operation:{ var kind:String; }):Null<Array<Float>> {
     var matrix:Dynamic = cast _Runtime.UNDEFINED;
     matrix = _Runtime.field((cast operation : Dynamic), 'colorMatrix');
-    return cast _Runtime.select(_Runtime.andValue(_Runtime.isArray(matrix), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(matrix, 'length'), COLOR_MATRIX_LENGTH)), function():Dynamic return cast matrix, function():Dynamic return cast null);
+    return cast ((cast ((cast _Runtime.isArray(matrix) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(matrix, 'length'), COLOR_MATRIX_LENGTH) : Bool)) : Bool) ? (cast matrix : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 

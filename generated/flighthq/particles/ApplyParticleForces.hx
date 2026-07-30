@@ -25,7 +25,7 @@ class ApplyParticleForces {
     var transforms:Dynamic = cast _Runtime.UNDEFINED;
     var positionsZ:Dynamic = cast _Runtime.UNDEFINED;
     var velocities:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(deltaTime, 0.0, '<='), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(forces, 'length'), 0.0)))) { return; }
+    if ((cast ((cast ((cast deltaTime : Float) <= (cast 0.0 : Float)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(forces, 'length'), 0.0) : Bool)) : Bool)) { return; }
     data = _Runtime.field(emitter, 'data');
     count = _Runtime.field(data, 'particleCount');
     transforms = _Runtime.field(data, 'transforms');
@@ -33,13 +33,13 @@ class ApplyParticleForces {
     velocities = _Runtime.field(state, 'velocities');
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, count, '<'))) {
+      while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         var tt:Dynamic = (i * 4.0);
         var vt:Dynamic = (i * PARTICLE_VELOCITY_STRIDE);
         _Runtime.setIndex(ApplyParticleForces.accel__applyParticleForces, 0.0, 0.0);
         _Runtime.setIndex(ApplyParticleForces.accel__applyParticleForces, 1.0, 0.0);
         _Runtime.setIndex(ApplyParticleForces.accel__applyParticleForces, 2.0, 0.0);
-        var pz:Dynamic = _Runtime.select(_Runtime.compare(_Runtime.field(positionsZ, 'length'), i, '>'), function():Dynamic return cast _Runtime.getIndex(positionsZ, i), function():Dynamic return cast 0.0);
+        var pz:Dynamic = ((cast ((cast _Runtime.field(positionsZ, 'length') : Float) > (cast i : Float)) : Bool) ? (cast _Runtime.getIndex(positionsZ, i) : Dynamic) : (cast 0.0 : Dynamic));
         _Runtime.callValue(ApplyParticleForces.accumulateForces__applyParticleForces, cast ([forces, _Runtime.getIndex(transforms, tt), _Runtime.getIndex(transforms, (tt + 1.0)), pz, _Runtime.getIndex(velocities, vt), _Runtime.getIndex(velocities, (vt + 1.0)), _Runtime.getIndex(velocities, (vt + 2.0)), ApplyParticleForces.accel__applyParticleForces] : Array<Dynamic>));
         _Runtime.setIndex(velocities, vt, (_Runtime.getIndex(velocities, vt) + (_Runtime.getIndex(ApplyParticleForces.accel__applyParticleForces, 0.0) * deltaTime)));
         _Runtime.setIndex(velocities, (vt + 1.0), (_Runtime.getIndex(velocities, (vt + 1.0)) + (_Runtime.getIndex(ApplyParticleForces.accel__applyParticleForces, 1.0) * deltaTime)));
@@ -52,13 +52,13 @@ class ApplyParticleForces {
   public static function applyParticleObjectForces(objects:Array<ParticleObject>, state:ParticleObjectsState, forces:Array<ParticleForce>, deltaTime:Float):Void {
     var velocities:Dynamic = cast _Runtime.UNDEFINED;
     var lifetimes:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(deltaTime, 0.0, '<='), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(forces, 'length'), 0.0)))) { return; }
+    if ((cast ((cast ((cast deltaTime : Float) <= (cast 0.0 : Float)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(forces, 'length'), 0.0) : Bool)) : Bool)) { return; }
     velocities = _Runtime.field(state, 'velocities');
     lifetimes = _Runtime.field(state, 'lifetimes');
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(objects, 'length'), '<'))) {
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.getIndex(lifetimes, ((i * 2.0) + 1.0)), 0.0, '<='))) { i++; continue; }
+      while ((cast ((cast i : Float) < (cast _Runtime.field(objects, 'length') : Float)) : Bool)) {
+        if ((cast ((cast _Runtime.getIndex(lifetimes, ((i * 2.0) + 1.0)) : Float) <= (cast 0.0 : Float)) : Bool)) { i++; continue; }
         var vt:Dynamic = (i * 2.0);
         _Runtime.setIndex(ApplyParticleForces.accel__applyParticleForces, 0.0, 0.0);
         _Runtime.setIndex(ApplyParticleForces.accel__applyParticleForces, 1.0, 0.0);
@@ -74,7 +74,7 @@ class ApplyParticleForces {
   public static function accumulateForces__applyParticleForces(forces:Array<ParticleForce>, px:Float, py:Float, pz:Float, vx:Float, vy:Float, vz:Float, out:Array<Float>):Void {
     {
       var f:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(f, _Runtime.field(forces, 'length'), '<'))) {
+      while ((cast ((cast f : Float) < (cast _Runtime.field(forces, 'length') : Float)) : Bool)) {
         var force:Dynamic = _Runtime.getIndex(forces, f);
         {
           var __switchValue = _Runtime.field(force, 'kind');
@@ -95,9 +95,9 @@ class ApplyParticleForces {
               var dy:Dynamic = (_Runtime.field(force, 'y') - py);
               var dz:Dynamic = (fz - pz);
               var dist:Dynamic = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
-              if (_Runtime.truthy(_Runtime.compare(dist, 0.000001, '<='))) { break; }
+              if ((cast ((cast dist : Float) <= (cast 0.000001 : Float)) : Bool)) { break; }
               var mag:Dynamic = (_Runtime.field(force, 'strength') * _Runtime.callValue(ApplyParticleForces.falloffFactor__applyParticleForces, cast ([_Runtime.field(force, 'falloff'), dist, _Runtime.field(force, 'radius')] : Array<Dynamic>)));
-              if (_Runtime.truthy(_Runtime.strictEquals(mag, 0.0))) { break; }
+              if ((cast _Runtime.strictEquals(mag, 0.0) : Bool)) { break; }
               _Runtime.setIndex(out, 0.0, (_Runtime.getIndex(out, 0.0) + ((dx / dist) * mag)));
               _Runtime.setIndex(out, 1.0, (_Runtime.getIndex(out, 1.0) + ((dy / dist) * mag)));
               _Runtime.setIndex(out, 2.0, (_Runtime.getIndex(out, 2.0) + ((dz / dist) * mag)));
@@ -110,9 +110,9 @@ class ApplyParticleForces {
               var dy:Dynamic = (py - _Runtime.field(force, 'y'));
               var dz:Dynamic = (pz - fz);
               var dist:Dynamic = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
-              if (_Runtime.truthy(_Runtime.compare(dist, 0.000001, '<='))) { break; }
+              if ((cast ((cast dist : Float) <= (cast 0.000001 : Float)) : Bool)) { break; }
               var mag:Dynamic = (_Runtime.field(force, 'strength') * _Runtime.callValue(ApplyParticleForces.falloffFactor__applyParticleForces, cast ([_Runtime.field(force, 'falloff'), dist, _Runtime.field(force, 'radius')] : Array<Dynamic>)));
-              if (_Runtime.truthy(_Runtime.strictEquals(mag, 0.0))) { break; }
+              if ((cast _Runtime.strictEquals(mag, 0.0) : Bool)) { break; }
               var ax:Dynamic = _Runtime.coalesce(_Runtime.field(force, 'axisX'), function():Dynamic return cast 0.0);
               var ay:Dynamic = _Runtime.coalesce(_Runtime.field(force, 'axisY'), function():Dynamic return cast 0.0);
               var az:Dynamic = _Runtime.coalesce(_Runtime.field(force, 'axisZ'), function():Dynamic return cast 1.0);
@@ -140,15 +140,15 @@ class ApplyParticleForces {
   }
 
   public static function falloffFactor__applyParticleForces(falloff:Null<ForceFalloff>, dist:Float, radius:Null<Float>):Float {
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.looseEquals(radius, null), function():Dynamic return cast _Runtime.compare(radius, 0.0, '>')), function():Dynamic return cast _Runtime.compare(dist, radius, '>')))) { return cast 0.0; }
+    if ((cast ((cast ((cast !_Runtime.looseEquals(radius, null) : Bool) && (cast ((cast radius : Float) > (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast dist : Float) > (cast radius : Float)) : Bool)) : Bool)) { return cast 0.0; }
     {
       var __switchValue = falloff;
       if (__switchValue == 'linear') {
-        return cast _Runtime.select(_Runtime.andValue(!_Runtime.looseEquals(radius, null), function():Dynamic return cast _Runtime.compare(radius, 0.0, '>')), function():Dynamic return cast HxMath.max(0.0, (1.0 - (dist / radius))), function():Dynamic return cast 1.0);
+        return cast ((cast ((cast !_Runtime.looseEquals(radius, null) : Bool) && (cast ((cast radius : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast HxMath.max(0.0, (1.0 - (dist / radius))) : Dynamic) : (cast 1.0 : Dynamic));
       }
       else if (__switchValue == 'inverseSquare') {
         {
-          var d:Dynamic = _Runtime.select(_Runtime.compare(dist, 1.0, '<'), function():Dynamic return cast 1.0, function():Dynamic return cast dist);
+          var d:Dynamic = ((cast ((cast dist : Float) < (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast dist : Dynamic));
           return cast (1.0 / (d * d));
         }
       }

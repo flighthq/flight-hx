@@ -16,12 +16,12 @@ class MtlParse {
     lines = _Runtime.callProperty(source, 'split', cast (['\n'] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(lines, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
         var raw:Dynamic = StringTools.trim(Std.string(_Runtime.getIndex(lines, i)));
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(raw, 'length'), 0.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.charCodeAt(raw, 0.0), 35.0)))) { i++; continue; }
+        if ((cast ((cast _Runtime.strictEquals(_Runtime.field(raw, 'length'), 0.0) : Bool) || (cast _Runtime.strictEquals(_Runtime.charCodeAt(raw, 0.0), 35.0) : Bool)) : Bool)) { i++; continue; }
         var spaceIndex:Dynamic = _Runtime.callProperty(raw, 'indexOf', cast ([' '] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.compare(spaceIndex, 0.0, '<'))) {
-          if (_Runtime.truthy(_Runtime.strictEquals(raw, 'newmtl'))) {
+        if ((cast ((cast spaceIndex : Float) < (cast 0.0 : Float)) : Bool)) {
+          if ((cast _Runtime.strictEquals(raw, 'newmtl') : Bool)) {
             _Runtime.callOptionalProperty(warnings, 'push', cast (['parseObjMaterialLibrary: newmtl on line ' + Std.string((i + 1.0)) + ' has no name; skipped'] : Array<Dynamic>));
           }
           i++;
@@ -39,77 +39,77 @@ class MtlParse {
           }
           else if (__switchValue == 'Ka') {
             {
-              if (_Runtime.truthy(_Runtime.strictEquals(current, null))) {
+              if ((cast _Runtime.strictEquals(current, null) : Bool)) {
                 _Runtime.callValue(MtlParse.warnNoMaterial__mtlParse, cast ([warnings, directive, i] : Array<Dynamic>));
                 break;
               }
               var c:Dynamic = _Runtime.callValue(MtlParse.parseColor__mtlParse, cast ([args, warnings, directive, i] : Array<Dynamic>));
-              if (_Runtime.truthy(!_Runtime.strictEquals(c, null))) { _Runtime.setField(current, 'ambient', c); }
+              if ((cast !_Runtime.strictEquals(c, null) : Bool)) { _Runtime.setField(current, 'ambient', c); }
             }
           }
           else if (__switchValue == 'Kd') {
             {
-              if (_Runtime.truthy(_Runtime.strictEquals(current, null))) {
+              if ((cast _Runtime.strictEquals(current, null) : Bool)) {
                 _Runtime.callValue(MtlParse.warnNoMaterial__mtlParse, cast ([warnings, directive, i] : Array<Dynamic>));
                 break;
               }
               var c:Dynamic = _Runtime.callValue(MtlParse.parseColor__mtlParse, cast ([args, warnings, directive, i] : Array<Dynamic>));
-              if (_Runtime.truthy(!_Runtime.strictEquals(c, null))) { _Runtime.setField(current, 'diffuse', c); }
+              if ((cast !_Runtime.strictEquals(c, null) : Bool)) { _Runtime.setField(current, 'diffuse', c); }
             }
           }
           else if (__switchValue == 'Ks') {
             {
-              if (_Runtime.truthy(_Runtime.strictEquals(current, null))) {
+              if ((cast _Runtime.strictEquals(current, null) : Bool)) {
                 _Runtime.callValue(MtlParse.warnNoMaterial__mtlParse, cast ([warnings, directive, i] : Array<Dynamic>));
                 break;
               }
               var c:Dynamic = _Runtime.callValue(MtlParse.parseColor__mtlParse, cast ([args, warnings, directive, i] : Array<Dynamic>));
-              if (_Runtime.truthy(!_Runtime.strictEquals(c, null))) { _Runtime.setField(current, 'specular', c); }
+              if ((cast !_Runtime.strictEquals(c, null) : Bool)) { _Runtime.setField(current, 'specular', c); }
             }
           }
           else if (__switchValue == 'Ns') {
             {
-              if (_Runtime.truthy(_Runtime.strictEquals(current, null))) {
+              if ((cast _Runtime.strictEquals(current, null) : Bool)) {
                 _Runtime.callValue(MtlParse.warnNoMaterial__mtlParse, cast ([warnings, directive, i] : Array<Dynamic>));
                 break;
               }
               var v:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([args] : Array<Dynamic>));
-              if (_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)))) { _Runtime.setField(current, 'specularExponent', v); } else { _Runtime.callOptionalProperty(warnings, 'push', cast (['parseObjMaterialLibrary: invalid Ns value on line ' + Std.string((i + 1.0)) + ''] : Array<Dynamic>)); }
+              if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { _Runtime.setField(current, 'specularExponent', v); } else { _Runtime.callOptionalProperty(warnings, 'push', cast (['parseObjMaterialLibrary: invalid Ns value on line ' + Std.string((i + 1.0)) + ''] : Array<Dynamic>)); }
             }
           }
           else if (__switchValue == 'd') {
             {
-              if (_Runtime.truthy(_Runtime.strictEquals(current, null))) {
+              if ((cast _Runtime.strictEquals(current, null) : Bool)) {
                 _Runtime.callValue(MtlParse.warnNoMaterial__mtlParse, cast ([warnings, directive, i] : Array<Dynamic>));
                 break;
               }
               var v:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([args] : Array<Dynamic>));
-              if (_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)))) { _Runtime.setField(current, 'dissolve', v); } else { _Runtime.callOptionalProperty(warnings, 'push', cast (['parseObjMaterialLibrary: invalid d value on line ' + Std.string((i + 1.0)) + ''] : Array<Dynamic>)); }
+              if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { _Runtime.setField(current, 'dissolve', v); } else { _Runtime.callOptionalProperty(warnings, 'push', cast (['parseObjMaterialLibrary: invalid d value on line ' + Std.string((i + 1.0)) + ''] : Array<Dynamic>)); }
             }
           }
           else if (__switchValue == 'Tr') {
             {
-              if (_Runtime.truthy(_Runtime.strictEquals(current, null))) {
+              if ((cast _Runtime.strictEquals(current, null) : Bool)) {
                 _Runtime.callValue(MtlParse.warnNoMaterial__mtlParse, cast ([warnings, directive, i] : Array<Dynamic>));
                 break;
               }
               var v:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([args] : Array<Dynamic>));
-              if (_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)))) { _Runtime.setField(current, 'dissolve', (1.0 - v)); } else { _Runtime.callOptionalProperty(warnings, 'push', cast (['parseObjMaterialLibrary: invalid Tr value on line ' + Std.string((i + 1.0)) + ''] : Array<Dynamic>)); }
+              if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { _Runtime.setField(current, 'dissolve', (1.0 - v)); } else { _Runtime.callOptionalProperty(warnings, 'push', cast (['parseObjMaterialLibrary: invalid Tr value on line ' + Std.string((i + 1.0)) + ''] : Array<Dynamic>)); }
             }
           }
           else if (__switchValue == 'illum') {
             {
-              if (_Runtime.truthy(_Runtime.strictEquals(current, null))) {
+              if ((cast _Runtime.strictEquals(current, null) : Bool)) {
                 _Runtime.callValue(MtlParse.warnNoMaterial__mtlParse, cast ([warnings, directive, i] : Array<Dynamic>));
                 break;
               }
               var v:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([args, 10.0] : Array<Dynamic>));
-              if (_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)))) { _Runtime.setField(current, 'illumination', v); } else { _Runtime.callOptionalProperty(warnings, 'push', cast (['parseObjMaterialLibrary: invalid illum value on line ' + Std.string((i + 1.0)) + ''] : Array<Dynamic>)); }
+              if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { _Runtime.setField(current, 'illumination', v); } else { _Runtime.callOptionalProperty(warnings, 'push', cast (['parseObjMaterialLibrary: invalid illum value on line ' + Std.string((i + 1.0)) + ''] : Array<Dynamic>)); }
             }
           }
           else if (__switchValue == 'map_Kd') {
             {
-              if (_Runtime.truthy(_Runtime.strictEquals(current, null))) {
+              if ((cast _Runtime.strictEquals(current, null) : Bool)) {
                 _Runtime.callValue(MtlParse.warnNoMaterial__mtlParse, cast ([warnings, directive, i] : Array<Dynamic>));
                 break;
               }
@@ -118,7 +118,7 @@ class MtlParse {
           }
           else if (__switchValue == 'map_Ka') {
             {
-              if (_Runtime.truthy(_Runtime.strictEquals(current, null))) {
+              if ((cast _Runtime.strictEquals(current, null) : Bool)) {
                 _Runtime.callValue(MtlParse.warnNoMaterial__mtlParse, cast ([warnings, directive, i] : Array<Dynamic>));
                 break;
               }
@@ -127,7 +127,7 @@ class MtlParse {
           }
           else if (__switchValue == 'map_Ks') {
             {
-              if (_Runtime.truthy(_Runtime.strictEquals(current, null))) {
+              if ((cast _Runtime.strictEquals(current, null) : Bool)) {
                 _Runtime.callValue(MtlParse.warnNoMaterial__mtlParse, cast ([warnings, directive, i] : Array<Dynamic>));
                 break;
               }
@@ -136,7 +136,7 @@ class MtlParse {
           }
           else if (__switchValue == 'map_Bump' || __switchValue == 'bump') {
             {
-              if (_Runtime.truthy(_Runtime.strictEquals(current, null))) {
+              if ((cast _Runtime.strictEquals(current, null) : Bool)) {
                 _Runtime.callValue(MtlParse.warnNoMaterial__mtlParse, cast ([warnings, directive, i] : Array<Dynamic>));
                 break;
               }
@@ -164,14 +164,14 @@ class MtlParse {
     var g:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
     parts = _Runtime.callProperty(args, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(parts, 'length'), 3.0, '<'))) {
+    if ((cast ((cast _Runtime.field(parts, 'length') : Float) < (cast 3.0 : Float)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['parseObjMaterialLibrary: ' + Std.string(directive) + ' on line ' + Std.string((lineIndex + 1.0)) + ' has fewer than 3 components'] : Array<Dynamic>));
       return cast null;
     }
     r = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(parts, 0.0)] : Array<Dynamic>));
     g = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(parts, 1.0)] : Array<Dynamic>));
     b = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(parts, 2.0)] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([r] : Array<Dynamic>))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([g] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([b] : Array<Dynamic>)))))) {
+    if ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([r] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([g] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([b] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['parseObjMaterialLibrary: ' + Std.string(directive) + ' on line ' + Std.string((lineIndex + 1.0)) + ' has non-numeric components'] : Array<Dynamic>));
       return cast null;
     }

@@ -13,20 +13,20 @@ class MeshGeometryUvs {
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
     var verts:Dynamic = cast _Runtime.UNDEFINED;
     floatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(geometry, 'layout'), 'uv0'] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(floatOffset, 0.0, '<'))) { return; }
+    if ((cast ((cast floatOffset : Float) < (cast 0.0 : Float)) : Bool)) { return; }
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
+    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     verts = _Runtime.field(geometry, 'vertices');
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, vertexCount, '<'))) {
+      while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
         var base:Dynamic = ((i * floatsPerVertex) + floatOffset);
         _Runtime.setIndex(verts, base, (_Runtime.getIndex(verts, base) + du));
         _Runtime.setIndex(verts, (base + 1.0), (_Runtime.getIndex(verts, (base + 1.0)) + dv));
         i++;
       }
     }
-    if (_Runtime.truthy(_Runtime.compare(vertexCount, 0.0, '>'))) { _Runtime.incrementField(geometry, 'version', 1, true); }
+    if ((cast ((cast vertexCount : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.incrementField(geometry, 'version', 1, true); }
   }
 
   public static function scaleMeshGeometryUvs(geometry:MeshGeometry, su:Float, sv:Float):Void {
@@ -35,20 +35,20 @@ class MeshGeometryUvs {
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
     var verts:Dynamic = cast _Runtime.UNDEFINED;
     floatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(geometry, 'layout'), 'uv0'] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(floatOffset, 0.0, '<'))) { return; }
+    if ((cast ((cast floatOffset : Float) < (cast 0.0 : Float)) : Bool)) { return; }
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
+    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     verts = _Runtime.field(geometry, 'vertices');
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, vertexCount, '<'))) {
+      while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
         var base:Dynamic = ((i * floatsPerVertex) + floatOffset);
         _Runtime.setIndex(verts, base, (_Runtime.getIndex(verts, base) * su));
         _Runtime.setIndex(verts, (base + 1.0), (_Runtime.getIndex(verts, (base + 1.0)) * sv));
         i++;
       }
     }
-    if (_Runtime.truthy(_Runtime.compare(vertexCount, 0.0, '>'))) { _Runtime.incrementField(geometry, 'version', 1, true); }
+    if ((cast ((cast vertexCount : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.incrementField(geometry, 'version', 1, true); }
   }
 
   public static function wrapMeshGeometryUvs(geometry:MeshGeometry):Void {
@@ -57,19 +57,19 @@ class MeshGeometryUvs {
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
     var verts:Dynamic = cast _Runtime.UNDEFINED;
     floatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(geometry, 'layout'), 'uv0'] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(floatOffset, 0.0, '<'))) { return; }
+    if ((cast ((cast floatOffset : Float) < (cast 0.0 : Float)) : Bool)) { return; }
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
+    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     verts = _Runtime.field(geometry, 'vertices');
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, vertexCount, '<'))) {
+      while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
         var base:Dynamic = ((i * floatsPerVertex) + floatOffset);
         _Runtime.setIndex(verts, base, (_Runtime.getIndex(verts, base) - HxMath.floor(_Runtime.getIndex(verts, base))));
         _Runtime.setIndex(verts, (base + 1.0), (_Runtime.getIndex(verts, (base + 1.0)) - HxMath.floor(_Runtime.getIndex(verts, (base + 1.0)))));
         i++;
       }
     }
-    if (_Runtime.truthy(_Runtime.compare(vertexCount, 0.0, '>'))) { _Runtime.incrementField(geometry, 'version', 1, true); }
+    if ((cast ((cast vertexCount : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.incrementField(geometry, 'version', 1, true); }
   }
 }

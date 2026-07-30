@@ -63,7 +63,7 @@ class GlParticleEmitter3D {
   public static function ensureParticle3DShader__glParticleEmitter3D(state:GlRenderState):GlParticle3DShader__glParticleEmitter3D {
     var shader:Dynamic = cast _Runtime.UNDEFINED;
     shader = ((cast GlParticleEmitter3D.shaderCache__glParticleEmitter3D : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(!_Runtime.strictEquals(shader, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast shader; }
+    if ((cast !_Runtime.strictEquals(shader, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast shader; }
     (shader = cast (_Runtime.callValue(GlParticleEmitter3D.compileParticle3DShader__glParticleEmitter3D, cast ([_Runtime.field(state, 'gl')] : Array<Dynamic>)) : Dynamic));
     ((cast GlParticleEmitter3D.shaderCache__glParticleEmitter3D : flighthq._internal._WeakMap).set(state, shader));
     return cast shader;
@@ -74,7 +74,7 @@ class GlParticleEmitter3D {
     var needed:Dynamic = cast _Runtime.UNDEFINED;
     var newSize:Dynamic = cast _Runtime.UNDEFINED;
     needed = (count * GlParticleEmitter3D.INSTANCE_FLOATS__glParticleEmitter3D);
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(shader, 'instanceData'), 'length'), needed, '>='))) { return; }
+    if ((cast ((cast _Runtime.field(_Runtime.field(shader, 'instanceData'), 'length') : Float) >= (cast needed : Float)) : Bool)) { return; }
     newSize = HxMath.max(needed, (_Runtime.field(_Runtime.field(shader, 'instanceData'), 'length') * 2.0));
     _Runtime.setField(shader, 'instanceData', new flighthq._internal._Float32Array(newSize));
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(shader, 'instanceBuffer'));
@@ -83,15 +83,15 @@ class GlParticleEmitter3D {
 
   public static function collectParticleEmitter3DNodes__glParticleEmitter3D(node:NodeAny, out:Array<ParticleEmitter3D>):Void {
     var children:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(node, 'enabled')))) { return; }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(node, 'kind'), ParticleEmitter3DKind))) {
+    if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(node, 'kind'), ParticleEmitter3DKind) : Bool)) {
       _Runtime.callProperty(out, 'push', cast ([(cast (cast node : Dynamic) : ParticleEmitter3D)] : Array<Dynamic>));
     }
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)), 'children');
-    if (_Runtime.truthy(!_Runtime.strictEquals(children, null))) {
+    if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(children, 'length'), '<'))) {
+        while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
           _Runtime.callValue(GlParticleEmitter3D.collectParticleEmitter3DNodes__glParticleEmitter3D, cast ([_Runtime.getIndex(children, i), out] : Array<Dynamic>));
           i++;
         }
@@ -149,13 +149,13 @@ class GlParticleEmitter3D {
     particleCount = _Runtime.field(__destructure0, 'particleCount');
     positionsZ = _Runtime.field(__destructure0, 'positionsZ');
     transforms = _Runtime.field(__destructure0, 'transforms');
-    if (_Runtime.truthy(_Runtime.strictEquals(particleCount, 0.0))) { return; }
+    if ((cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) { return; }
     _Runtime.callValue(GlParticleEmitter3D.ensureInstanceCapacity__glParticleEmitter3D, cast ([shader, gl, particleCount] : Array<Dynamic>));
-    hasAtlas = _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(atlas, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(atlas, 'image'), null)), function():Dynamic return cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(atlas, 'image')] : Array<Dynamic>)));
-    regions = _Runtime.select(hasAtlas, function():Dynamic return cast _Runtime.field(atlas, 'regions'), function():Dynamic return cast null);
-    numRegions = _Runtime.select(!_Runtime.strictEquals(regions, null), function():Dynamic return cast _Runtime.field(regions, 'length'), function():Dynamic return cast 0.0);
-    iw = _Runtime.select(hasAtlas, function():Dynamic return cast (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'width'), function():Dynamic return cast 1.0)), function():Dynamic return cast 0.0);
-    ih = _Runtime.select(hasAtlas, function():Dynamic return cast (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'height'), function():Dynamic return cast 1.0)), function():Dynamic return cast 0.0);
+    hasAtlas = ((cast ((cast !_Runtime.strictEquals(atlas, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(atlas, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(atlas, 'image')] : Array<Dynamic>)) : Bool));
+    regions = ((cast hasAtlas : Bool) ? (cast _Runtime.field(atlas, 'regions') : Dynamic) : (cast null : Dynamic));
+    numRegions = ((cast !_Runtime.strictEquals(regions, null) : Bool) ? (cast _Runtime.field(regions, 'length') : Dynamic) : (cast 0.0 : Dynamic));
+    iw = ((cast hasAtlas : Bool) ? (cast (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'width'), function():Dynamic return cast 1.0)) : Dynamic) : (cast 0.0 : Dynamic));
+    ih = ((cast hasAtlas : Bool) ? (cast (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'height'), function():Dynamic return cast 1.0)) : Dynamic) : (cast 0.0 : Dynamic));
     worldMatrix = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([(cast (cast emitter : Dynamic) : SceneNode)] : Array<Dynamic>)) : Matrix4);
     wm = worldMatrix.m;
     worldSpace = _Runtime.field(data, 'worldSpace');
@@ -164,34 +164,34 @@ class GlParticleEmitter3D {
     drawCount = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, particleCount, '<'))) {
+      while ((cast ((cast i : Float) < (cast particleCount : Float)) : Bool)) {
         var tt:Dynamic = (i * GlParticleEmitter3D.PARTICLE_TRANSFORM_STRIDE__glParticleEmitter3D);
         var lx:Dynamic = _Runtime.getIndex(transforms, tt);
         var ly:Dynamic = _Runtime.getIndex(transforms, (tt + 1.0));
         var rotation:Dynamic = _Runtime.getIndex(transforms, (tt + 2.0));
         var scale:Dynamic = _Runtime.getIndex(transforms, (tt + 3.0));
         var lz:Dynamic = _Runtime.getIndex(positionsZ, i);
-        var wx:Dynamic = _Runtime.select(worldSpace, function():Dynamic return cast lx, function():Dynamic return cast ((((_Runtime.getIndex(wm, 0.0) * lx) + (_Runtime.getIndex(wm, 4.0) * ly)) + (_Runtime.getIndex(wm, 8.0) * lz)) + _Runtime.getIndex(wm, 12.0)));
-        var wy:Dynamic = _Runtime.select(worldSpace, function():Dynamic return cast ly, function():Dynamic return cast ((((_Runtime.getIndex(wm, 1.0) * lx) + (_Runtime.getIndex(wm, 5.0) * ly)) + (_Runtime.getIndex(wm, 9.0) * lz)) + _Runtime.getIndex(wm, 13.0)));
-        var wz:Dynamic = _Runtime.select(worldSpace, function():Dynamic return cast lz, function():Dynamic return cast ((((_Runtime.getIndex(wm, 2.0) * lx) + (_Runtime.getIndex(wm, 6.0) * ly)) + (_Runtime.getIndex(wm, 10.0) * lz)) + _Runtime.getIndex(wm, 14.0)));
+        var wx:Dynamic = ((cast worldSpace : Bool) ? (cast lx : Dynamic) : (cast ((((_Runtime.getIndex(wm, 0.0) * lx) + (_Runtime.getIndex(wm, 4.0) * ly)) + (_Runtime.getIndex(wm, 8.0) * lz)) + _Runtime.getIndex(wm, 12.0)) : Dynamic));
+        var wy:Dynamic = ((cast worldSpace : Bool) ? (cast ly : Dynamic) : (cast ((((_Runtime.getIndex(wm, 1.0) * lx) + (_Runtime.getIndex(wm, 5.0) * ly)) + (_Runtime.getIndex(wm, 9.0) * lz)) + _Runtime.getIndex(wm, 13.0)) : Dynamic));
+        var wz:Dynamic = ((cast worldSpace : Bool) ? (cast lz : Dynamic) : (cast ((((_Runtime.getIndex(wm, 2.0) * lx) + (_Runtime.getIndex(wm, 6.0) * ly)) + (_Runtime.getIndex(wm, 10.0) * lz)) + _Runtime.getIndex(wm, 14.0)) : Dynamic));
         var cosR:Dynamic = (HxMath.cos(rotation) * scale);
         var sinR:Dynamic = (HxMath.sin(rotation) * scale);
         var ct:Dynamic = (i * 3.0);
-        var hasColors:Dynamic = _Runtime.andValue(!_Runtime.looseEquals(colors, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(colors, 'length'), (ct + 2.0), '>'));
-        var r:Dynamic = _Runtime.select(hasColors, function():Dynamic return cast _Runtime.getIndex(colors, ct), function():Dynamic return cast 1.0);
-        var g:Dynamic = _Runtime.select(hasColors, function():Dynamic return cast _Runtime.getIndex(colors, (ct + 1.0)), function():Dynamic return cast 1.0);
-        var b:Dynamic = _Runtime.select(hasColors, function():Dynamic return cast _Runtime.getIndex(colors, (ct + 2.0)), function():Dynamic return cast 1.0);
+        var hasColors:Dynamic = ((cast !_Runtime.looseEquals(colors, null) : Bool) && (cast ((cast _Runtime.field(colors, 'length') : Float) > (cast (ct + 2.0) : Float)) : Bool));
+        var r:Dynamic = ((cast hasColors : Bool) ? (cast _Runtime.getIndex(colors, ct) : Dynamic) : (cast 1.0 : Dynamic));
+        var g:Dynamic = ((cast hasColors : Bool) ? (cast _Runtime.getIndex(colors, (ct + 1.0)) : Dynamic) : (cast 1.0 : Dynamic));
+        var b:Dynamic = ((cast hasColors : Bool) ? (cast _Runtime.getIndex(colors, (ct + 2.0)) : Dynamic) : (cast 1.0 : Dynamic));
         var u0:Dynamic = 0.0;
         var v0:Dynamic = 0.0;
         var u1:Dynamic = 1.0;
         var v1:Dynamic = 1.0;
         var regionW:Dynamic = 1.0;
         var regionH:Dynamic = 1.0;
-        if (_Runtime.truthy(!_Runtime.strictEquals(regions, null))) {
+        if ((cast !_Runtime.strictEquals(regions, null) : Bool)) {
           var id:Dynamic = _Runtime.getIndex(ids, i);
-          if (_Runtime.truthy(_Runtime.compare(id, numRegions, '>='))) { i++; continue; }
+          if ((cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) { i++; continue; }
           var region:Dynamic = _Runtime.getIndex(regions, id);
-          if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(region, 'width'), 0.0, '<='), function():Dynamic return cast _Runtime.compare(_Runtime.field(region, 'height'), 0.0, '<=')))) { i++; continue; }
+          if ((cast ((cast ((cast _Runtime.field(region, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(region, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
           (u0 = cast ((_Runtime.field(region, 'x') * iw) : Dynamic));
           (v0 = cast ((_Runtime.field(region, 'y') * ih) : Dynamic));
           (u1 = cast (((_Runtime.field(region, 'x') + _Runtime.field(region, 'width')) * iw) : Dynamic));
@@ -212,7 +212,7 @@ class GlParticleEmitter3D {
         _Runtime.setIndex(instanceData, (base + 10.0), v0);
         _Runtime.setIndex(instanceData, (base + 11.0), u1);
         _Runtime.setIndex(instanceData, (base + 12.0), v1);
-        var maxDim:Dynamic = _Runtime.select(_Runtime.compare(regionW, regionH, '>='), function():Dynamic return cast regionW, function():Dynamic return cast regionH);
+        var maxDim:Dynamic = ((cast ((cast regionW : Float) >= (cast regionH : Float)) : Bool) ? (cast regionW : Dynamic) : (cast regionH : Dynamic));
         _Runtime.setIndex(instanceData, (base + 13.0), (regionW / maxDim));
         _Runtime.setIndex(instanceData, (base + 14.0), (regionH / maxDim));
         _Runtime.setIndex(instanceData, (base + 15.0), 0.0);
@@ -221,12 +221,12 @@ class GlParticleEmitter3D {
         i++;
       }
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(drawCount, 0.0))) { return; }
+    if ((cast _Runtime.strictEquals(drawCount, 0.0) : Bool)) { return; }
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, _Runtime.field(shader, 'vao'));
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(shader, 'instanceBuffer'));
     flighthq._internal.backend.WebGl2Backend.bufferSubData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, 0.0, instanceData, 0.0, (drawCount * GlParticleEmitter3D.INSTANCE_FLOATS__glParticleEmitter3D));
-    flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(shader, 'locHasTexture'), _Runtime.select(hasAtlas, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0));
-    if (_Runtime.truthy(hasAtlas)) {
+    flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(shader, 'locHasTexture'), ((cast hasAtlas : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
+    if ((cast hasAtlas : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);
       _Runtime.callValue(bindGlTexture, cast ([state, _Runtime.field(_Runtime.field(atlas, 'image'), 'source')] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(shader, 'locTexture'), 0.0);
@@ -263,7 +263,7 @@ class GlParticleEmitter3D {
     var shader:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     shader = ((cast GlParticleEmitter3D.shaderCache__glParticleEmitter3D : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(shader, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
+    if ((cast _Runtime.strictEquals(shader, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     gl = _Runtime.field(state, 'gl');
     flighthq._internal.backend.WebGl2Backend.deleteProgram(gl, _Runtime.field(shader, 'program'));
     flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, _Runtime.field(shader, 'cornerBuffer'));
@@ -279,7 +279,7 @@ class GlParticleEmitter3D {
     var vm:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.setLength(GlParticleEmitter3D.emitterScratch__glParticleEmitter3D, 0.0);
     _Runtime.callValue(GlParticleEmitter3D.collectParticleEmitter3DNodes__glParticleEmitter3D, cast ([scene, GlParticleEmitter3D.emitterScratch__glParticleEmitter3D] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(GlParticleEmitter3D.emitterScratch__glParticleEmitter3D, 'length'), 0.0))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(GlParticleEmitter3D.emitterScratch__glParticleEmitter3D, 'length'), 0.0) : Bool)) { return; }
     list = _Runtime.callValue(prepareSceneRender, cast ([state, scene, camera, lights] : Array<Dynamic>));
     shader = _Runtime.callValue(GlParticleEmitter3D.ensureParticle3DShader__glParticleEmitter3D, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
@@ -293,7 +293,7 @@ class GlParticleEmitter3D {
     flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.BLEND);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(GlParticleEmitter3D.emitterScratch__glParticleEmitter3D, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(GlParticleEmitter3D.emitterScratch__glParticleEmitter3D, 'length') : Float)) : Bool)) {
         var emitter:Dynamic = _Runtime.getIndex(GlParticleEmitter3D.emitterScratch__glParticleEmitter3D, i);
         _Runtime.callValue(GlParticleEmitter3D.applyGlParticleBlendMode__glParticleEmitter3D, cast ([gl, _Runtime.field(emitter, 'blendMode')] : Array<Dynamic>));
         _Runtime.callValue(GlParticleEmitter3D.drawParticleEmitter3DNode__glParticleEmitter3D, cast ([state, shader, emitter] : Array<Dynamic>));

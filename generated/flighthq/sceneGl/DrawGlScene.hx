@@ -36,7 +36,7 @@ typedef DrawEntry__drawGlScene = { var alpha:Float; var clipW:Float; var materia
 
 class DrawGlScene {
   public static function isGpuSkinnedDraw__drawGlScene(mesh:Mesh):Bool {
-    return cast _Runtime.andValue(!_Runtime.looseEquals(_Runtime.field(mesh, 'skin'), null), function():Dynamic return cast _Runtime.callValue(hasMeshGeometrySkin, cast ([_Runtime.field(mesh, 'geometry')] : Array<Dynamic>)));
+    return cast ((cast !_Runtime.looseEquals(_Runtime.field(mesh, 'skin'), null) : Bool) && (cast _Runtime.callValue(hasMeshGeometrySkin, cast ([_Runtime.field(mesh, 'geometry')] : Array<Dynamic>)) : Bool));
     return cast null;
   }
 
@@ -54,22 +54,22 @@ class DrawGlScene {
     lightBlock = _Runtime.field(list, 'lights');
     viewProjection = _Runtime.field(list, 'viewProjection');
     runtime = _Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(declareGlRenderTargetColorSpace, cast ([state, 'linear'] : Array<Dynamic>))))) { _Runtime.callOptionalProperty(runtime, 'colorSpaceGuard', cast ([] : Array<Dynamic>)); }
+    if ((cast !(cast _Runtime.callValue(declareGlRenderTargetColorSpace, cast ([state, 'linear'] : Array<Dynamic>)) : Bool) : Bool)) { _Runtime.callOptionalProperty(runtime, 'colorSpaceGuard', cast ([] : Array<Dynamic>)); }
     opaqueDrawList = _Runtime.field(runtime, 'opaqueDrawList');
     blendedDrawList = _Runtime.field(runtime, 'blendedDrawList');
     _Runtime.setLength(opaqueDrawList, 0.0);
     _Runtime.setLength(blendedDrawList, 0.0);
     {
       var m:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(m, _Runtime.field(list, 'meshCount'), '<'))) {
+      while ((cast ((cast m : Float) < (cast _Runtime.field(list, 'meshCount') : Float)) : Bool)) {
         var mesh:Dynamic = _Runtime.getIndex(_Runtime.field(list, 'visibleMeshes'), m);
-        if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(mesh, 'morph'), null))) { _Runtime.callValue(updateMeshMorph, cast ([mesh] : Array<Dynamic>)); }
+        if ((cast !_Runtime.looseEquals(_Runtime.field(mesh, 'morph'), null) : Bool)) { _Runtime.callValue(updateMeshMorph, cast ([mesh] : Array<Dynamic>)); }
         m++;
       }
     }
     {
       var m:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(m, _Runtime.field(list, 'meshCount'), '<'))) {
+      while ((cast ((cast m : Float) < (cast _Runtime.field(list, 'meshCount') : Float)) : Bool)) {
         var mesh:Dynamic = _Runtime.getIndex(_Runtime.field(list, 'visibleMeshes'), m);
         var subsets:Dynamic = _Runtime.field(_Runtime.field(mesh, 'geometry'), 'subsets');
         var worldMatrix:Dynamic = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>)) : Matrix4);
@@ -81,13 +81,13 @@ class DrawGlScene {
         var objectAlpha:Dynamic = _Runtime.callValue(getSceneNodeWorldAlpha, cast ([mesh] : Array<Dynamic>));
         {
           var s:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(s, _Runtime.field(subsets, 'length'), '<'))) {
+          while ((cast ((cast s : Float) < (cast _Runtime.field(subsets, 'length') : Float)) : Bool)) {
             var material:Dynamic = _Runtime.callValue(DrawGlScene.resolveSubsetMaterial__drawGlScene, cast ([mesh, s] : Array<Dynamic>));
             var renderer:Dynamic = _Runtime.callValue(resolveGlMeshMaterialRenderer, cast ([state, material] : Array<Dynamic>));
-            if (_Runtime.truthy(_Runtime.strictEquals(renderer, null))) { s++; continue; }
+            if ((cast _Runtime.strictEquals(renderer, null) : Bool)) { s++; continue; }
             var resolvedMaterial:Dynamic = _Runtime.coalesce(material, function():Dynamic return cast DrawGlScene.DEFAULT_MATERIAL__drawGlScene);
-            var isBlended:Dynamic = _Runtime.orValue(_Runtime.callValue(DrawGlScene.isBlendedMaterial__drawGlScene, cast ([resolvedMaterial] : Array<Dynamic>)), function():Dynamic return cast _Runtime.compare(objectAlpha, 1.0, '<'));
-            var entry:Dynamic = _Runtime.select(isBlended, function():Dynamic return cast _Runtime.callValue(DrawGlScene.acquireBlendedEntry__drawGlScene, cast ([_Runtime.field(runtime, 'blendedPool')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(DrawGlScene.acquireOpaqueEntry__drawGlScene, cast ([_Runtime.field(runtime, 'opaquePool')] : Array<Dynamic>)));
+            var isBlended:Dynamic = ((cast _Runtime.callValue(DrawGlScene.isBlendedMaterial__drawGlScene, cast ([resolvedMaterial] : Array<Dynamic>)) : Bool) || (cast ((cast objectAlpha : Float) < (cast 1.0 : Float)) : Bool));
+            var entry:Dynamic = ((cast isBlended : Bool) ? (cast _Runtime.callValue(DrawGlScene.acquireBlendedEntry__drawGlScene, cast ([_Runtime.field(runtime, 'blendedPool')] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(DrawGlScene.acquireOpaqueEntry__drawGlScene, cast ([_Runtime.field(runtime, 'opaquePool')] : Array<Dynamic>)) : Dynamic));
             _Runtime.setField(entry, 'alpha', objectAlpha);
             _Runtime.setField(entry, 'clipW', clipW);
             _Runtime.setField(entry, 'mesh', mesh);
@@ -96,7 +96,7 @@ class DrawGlScene {
             _Runtime.setField(entry, 'renderer', renderer);
             _Runtime.setField(entry, 'subset', _Runtime.getIndex(subsets, s));
             _Runtime.setField(entry, 'worldMatrix', worldMatrix);
-            if (_Runtime.truthy(isBlended)) {
+            if ((cast isBlended : Bool)) {
               _Runtime.callProperty(blendedDrawList, 'push', cast ([entry] : Array<Dynamic>));
             } else {
               _Runtime.callProperty(opaqueDrawList, 'push', cast ([entry] : Array<Dynamic>));
@@ -112,12 +112,12 @@ class DrawGlScene {
     boundSkinned = _Runtime.field(_Runtime, 'UNDEFINED');
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(opaqueDrawList, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(opaqueDrawList, 'length') : Float)) : Bool)) {
         var entry:Dynamic = (cast _Runtime.getIndex(opaqueDrawList, i) : DrawEntry__drawGlScene);
         var worldMatrix:Dynamic = (cast _Runtime.field(entry, 'worldMatrix') : Matrix4);
         _Runtime.callValue(setMatrix3NormalFromMatrix4, cast ([DrawGlScene.scratchNormalMatrix__drawGlScene, worldMatrix] : Array<Dynamic>));
         var skinned:Dynamic = _Runtime.callValue(DrawGlScene.isGpuSkinnedDraw__drawGlScene, cast ([_Runtime.field(entry, 'mesh')] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(entry, 'renderer'), boundRenderer), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(entry, 'material'), boundMaterial)), function():Dynamic return cast !_Runtime.strictEquals(skinned, boundSkinned)))) {
+        if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(entry, 'renderer'), boundRenderer) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(entry, 'material'), boundMaterial) : Bool)) : Bool) || (cast !_Runtime.strictEquals(skinned, boundSkinned) : Bool)) : Bool)) {
           _Runtime.setField(runtime, 'activeSkinnedRun', skinned);
           _Runtime.callProperty(_Runtime.field(entry, 'renderer'), 'bind', cast ([state, _Runtime.field(entry, 'material'), lightBlock, camera] : Array<Dynamic>));
           (boundRenderer = cast (_Runtime.field(entry, 'renderer') : Dynamic));
@@ -125,7 +125,7 @@ class DrawGlScene {
           (boundSkinned = cast (skinned : Dynamic));
         }
         _Runtime.setField(DrawGlScene.proxy__drawGlScene, 'alpha', _Runtime.field(entry, 'alpha'));
-        _Runtime.setField(DrawGlScene.proxy__drawGlScene, 'jointMatrices', _Runtime.select(skinned, function():Dynamic return cast _Runtime.field(_Runtime.field(_Runtime.field(_Runtime.field(entry, 'mesh'), 'skin'), 'skeleton'), 'jointMatrices'), function():Dynamic return cast null));
+        _Runtime.setField(DrawGlScene.proxy__drawGlScene, 'jointMatrices', ((cast skinned : Bool) ? (cast _Runtime.field(_Runtime.field(_Runtime.field(_Runtime.field(entry, 'mesh'), 'skin'), 'skeleton'), 'jointMatrices') : Dynamic) : (cast null : Dynamic)));
         _Runtime.setField(DrawGlScene.proxy__drawGlScene, 'material', _Runtime.field(entry, 'material'));
         _Runtime.setField(DrawGlScene.proxy__drawGlScene, 'normalMatrix', DrawGlScene.scratchNormalMatrix__drawGlScene);
         _Runtime.setField(DrawGlScene.proxy__drawGlScene, 'subset', _Runtime.field(entry, 'subset'));
@@ -134,7 +134,7 @@ class DrawGlScene {
         i++;
       }
     }
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(blendedDrawList, 'length'), 0.0, '>'))) {
+    if ((cast ((cast _Runtime.field(blendedDrawList, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       _Runtime.callProperty(blendedDrawList, 'sort', cast ([DrawGlScene.compareBlendedEntriesDescending__drawGlScene] : Array<Dynamic>));
       var gl:Dynamic = _Runtime.field(state, 'gl');
       flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.BLEND);
@@ -144,12 +144,12 @@ class DrawGlScene {
       (boundSkinned = cast (_Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(blendedDrawList, 'length'), '<'))) {
+        while ((cast ((cast i : Float) < (cast _Runtime.field(blendedDrawList, 'length') : Float)) : Bool)) {
           var entry:Dynamic = (cast _Runtime.getIndex(blendedDrawList, i) : DrawEntry__drawGlScene);
           var worldMatrix:Dynamic = (cast _Runtime.field(entry, 'worldMatrix') : Matrix4);
           _Runtime.callValue(setMatrix3NormalFromMatrix4, cast ([DrawGlScene.scratchNormalMatrix__drawGlScene, worldMatrix] : Array<Dynamic>));
           var skinned:Dynamic = _Runtime.callValue(DrawGlScene.isGpuSkinnedDraw__drawGlScene, cast ([_Runtime.field(entry, 'mesh')] : Array<Dynamic>));
-          if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(entry, 'renderer'), boundRenderer), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(entry, 'material'), boundMaterial)), function():Dynamic return cast !_Runtime.strictEquals(skinned, boundSkinned)))) {
+          if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(entry, 'renderer'), boundRenderer) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(entry, 'material'), boundMaterial) : Bool)) : Bool) || (cast !_Runtime.strictEquals(skinned, boundSkinned) : Bool)) : Bool)) {
             _Runtime.setField(runtime, 'activeSkinnedRun', skinned);
             _Runtime.callProperty(_Runtime.field(entry, 'renderer'), 'bind', cast ([state, _Runtime.field(entry, 'material'), lightBlock, camera] : Array<Dynamic>));
             (boundRenderer = cast (_Runtime.field(entry, 'renderer') : Dynamic));
@@ -157,7 +157,7 @@ class DrawGlScene {
             (boundSkinned = cast (skinned : Dynamic));
           }
           _Runtime.setField(DrawGlScene.proxy__drawGlScene, 'alpha', _Runtime.field(entry, 'alpha'));
-          _Runtime.setField(DrawGlScene.proxy__drawGlScene, 'jointMatrices', _Runtime.select(skinned, function():Dynamic return cast _Runtime.field(_Runtime.field(_Runtime.field(_Runtime.field(entry, 'mesh'), 'skin'), 'skeleton'), 'jointMatrices'), function():Dynamic return cast null));
+          _Runtime.setField(DrawGlScene.proxy__drawGlScene, 'jointMatrices', ((cast skinned : Bool) ? (cast _Runtime.field(_Runtime.field(_Runtime.field(_Runtime.field(entry, 'mesh'), 'skin'), 'skeleton'), 'jointMatrices') : Dynamic) : (cast null : Dynamic)));
           _Runtime.setField(DrawGlScene.proxy__drawGlScene, 'material', _Runtime.field(entry, 'material'));
           _Runtime.setField(DrawGlScene.proxy__drawGlScene, 'normalMatrix', DrawGlScene.scratchNormalMatrix__drawGlScene);
           _Runtime.setField(DrawGlScene.proxy__drawGlScene, 'subset', _Runtime.field(entry, 'subset'));
@@ -180,7 +180,7 @@ class DrawGlScene {
   public static function resolveSubsetMaterial__drawGlScene(mesh:Mesh, subsetIndex:Float):Null<Material> {
     var materials:Dynamic = cast _Runtime.UNDEFINED;
     materials = _Runtime.field(mesh, 'materials');
-    return cast _Runtime.select(_Runtime.compare(subsetIndex, _Runtime.field(materials, 'length'), '<'), function():Dynamic return cast _Runtime.getIndex(materials, subsetIndex), function():Dynamic return cast null);
+    return cast ((cast ((cast subsetIndex : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool) ? (cast _Runtime.getIndex(materials, subsetIndex) : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
@@ -190,13 +190,13 @@ class DrawGlScene {
   }
 
   public static function acquireOpaqueEntry__drawGlScene(pool:Array<GlSceneDrawEntry>):GlSceneDrawEntry {
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(pool, 'length'), 0.0, '>'))) { return cast _Runtime.callProperty(pool, 'pop', cast ([] : Array<Dynamic>)); }
+    if ((cast ((cast _Runtime.field(pool, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { return cast _Runtime.callProperty(pool, 'pop', cast ([] : Array<Dynamic>)); }
     return cast _Runtime.callValue(DrawGlScene.createDrawEntry__drawGlScene, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
   public static function acquireBlendedEntry__drawGlScene(pool:Array<GlSceneDrawEntry>):GlSceneDrawEntry {
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(pool, 'length'), 0.0, '>'))) { return cast _Runtime.callProperty(pool, 'pop', cast ([] : Array<Dynamic>)); }
+    if ((cast ((cast _Runtime.field(pool, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { return cast _Runtime.callProperty(pool, 'pop', cast ([] : Array<Dynamic>)); }
     return cast _Runtime.callValue(DrawGlScene.createDrawEntry__drawGlScene, cast ([] : Array<Dynamic>));
     return cast null;
   }

@@ -12,7 +12,7 @@ class _ByteReaderValues {
   }
 
   public static function hasByteReaderBytes(reader:ByteReader, count:Float):Bool {
-    return cast _Runtime.andValue(_Runtime.compare(count, 0.0, '>='), function():Dynamic return cast _Runtime.compare((_Runtime.field(reader, 'offset') + count), _Runtime.field(_Runtime.field(reader, 'view'), 'byteLength'), '<='));
+    return cast ((cast ((cast count : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast (_Runtime.field(reader, 'offset') + count) : Float) <= (cast _Runtime.field(_Runtime.field(reader, 'view'), 'byteLength') : Float)) : Bool));
     return cast null;
   }
 

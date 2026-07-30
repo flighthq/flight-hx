@@ -9,7 +9,7 @@ class XmlQuery {
   public static function getXmlElementAttribute(element:XmlElement, name:String):Null<String> {
     var value:Dynamic = cast _Runtime.UNDEFINED;
     value = _Runtime.getIndex(_Runtime.field(element, 'attributes'), name);
-    return cast _Runtime.select(!_Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast value, function():Dynamic return cast null);
+    return cast ((cast !_Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
@@ -17,15 +17,15 @@ class XmlQuery {
     var value:Dynamic = cast _Runtime.UNDEFINED;
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
     value = _Runtime.getIndex(_Runtime.field(element, 'attributes'), name);
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(StringTools.trim(Std.string(value)), '')))) { return cast null; }
+    if ((cast ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(StringTools.trim(Std.string(value)), '') : Bool)) : Bool)) { return cast null; }
     parsed = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([value] : Array<Dynamic>));
-    return cast _Runtime.select(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)), function():Dynamic return cast parsed, function():Dynamic return cast null);
+    return cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast parsed : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function getXmlElementChildByName(element:XmlElement, name:String):Null<XmlElement> {
     for (child in _Runtime.iterable(_Runtime.field(element, 'children'))) {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(child, 'name'), name))) { return cast child; }
+      if ((cast _Runtime.strictEquals(_Runtime.field(child, 'name'), name) : Bool)) { return cast child; }
     }
     return cast null;
     return cast null;

@@ -10,16 +10,16 @@ import flighthq.types.Clock;
 class DisposeClock {
   public static function disposeClock(clock:Clock):Void {
     var children:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(clock, 'parent'), null))) { _Runtime.callValue(removeClockChild, cast ([_Runtime.field(clock, 'parent'), clock] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(clock, 'parent'), null) : Bool)) { _Runtime.callValue(removeClockChild, cast ([_Runtime.field(clock, 'parent'), clock] : Array<Dynamic>)); }
     children = _Runtime.field(clock, 'children');
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(children, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
         _Runtime.setField(_Runtime.getIndex(children, i), 'parent', null);
         i++;
       }
     }
     _Runtime.setLength(children, 0.0);
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(clock, 'onTick'), null))) { _Runtime.callValue(clearSignal, cast ([_Runtime.field(clock, 'onTick')] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(clock, 'onTick'), null) : Bool)) { _Runtime.callValue(clearSignal, cast ([_Runtime.field(clock, 'onTick')] : Array<Dynamic>)); }
   }
 }

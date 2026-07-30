@@ -56,9 +56,9 @@ class GlGradientGlowEffect {
     flighthq._internal.backend.WebGl2Backend.deleteTexture(gl, ramp);
     _Runtime.callValue(clearGlRenderTarget, cast ([state, dst] : Array<Dynamic>));
     _Runtime.callValue(applyGlEffectBlitPass, cast ([state, s0, dst] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(sourceMode, 'knockout'))) {
+    if ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool)) {
       _Runtime.callValue(applyGlEffectErasePass, cast ([state, src, dst] : Array<Dynamic>));
-    } else { if (_Runtime.truthy(_Runtime.strictEquals(sourceMode, 'draw'))) {
+    } else { if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) {
       _Runtime.callValue(applyGlEffectBlitPass, cast ([state, src, dst] : Array<Dynamic>));
     } }
     _Runtime.callValue(releaseGlRenderTarget, cast ([pool, s0] : Array<Dynamic>));
@@ -85,7 +85,7 @@ class GlGradientGlowEffect {
   public static function getLookupShader__glGradientGlowEffect(state:GlRenderState):GradientLookupLocations__glGradientGlowEffect {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = ((cast GlGradientGlowEffect.lookupShaders__glGradientGlowEffect : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:Dynamic = _Runtime.field(state, 'gl');
       var base:Dynamic = _Runtime.callValue(compileGlFullscreenProgram, cast ([gl, GlGradientGlowEffect.GRADIENT_LOOKUP_FRAGMENT_SRC__glGradientGlowEffect] : Array<Dynamic>));
       (loc = cast (_Runtime.mergeObjects([base, { locRamp: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_ramp') }]) : Dynamic));

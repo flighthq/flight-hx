@@ -6,12 +6,12 @@ import flighthq._internal._Runtime;
 
 class SrgbTransfer {
   public static function linearChannelToSrgb(value:Float):Float {
-    return cast _Runtime.select(_Runtime.compare(value, 0.0031308, '<='), function():Dynamic return cast (value * 12.92), function():Dynamic return cast ((1.055 * HxMath.pow(value, (1.0 / 2.4))) - 0.055));
+    return cast ((cast ((cast value : Float) <= (cast 0.0031308 : Float)) : Bool) ? (cast (value * 12.92) : Dynamic) : (cast ((1.055 * HxMath.pow(value, (1.0 / 2.4))) - 0.055) : Dynamic));
     return cast null;
   }
 
   public static function srgbChannelToLinear(value:Float):Float {
-    return cast _Runtime.select(_Runtime.compare(value, 0.04045, '<='), function():Dynamic return cast (value / 12.92), function():Dynamic return cast HxMath.pow(((value + 0.055) / 1.055), 2.4));
+    return cast ((cast ((cast value : Float) <= (cast 0.04045 : Float)) : Bool) ? (cast (value / 12.92) : Dynamic) : (cast HxMath.pow(((value + 0.055) / 1.055), 2.4) : Dynamic));
     return cast null;
   }
 }

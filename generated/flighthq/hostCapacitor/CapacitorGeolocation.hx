@@ -76,9 +76,9 @@ class CapacitorGeolocation {
       numericId = nextWatchId++;
       ((cast watchIds : flighthq._internal._Map).set(numericId, null));
       flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(geolocation, 'watchPosition', cast ([options, function(position:Dynamic, err:Dynamic) {
-        if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(position, null), function():Dynamic return cast !_Runtime.strictEquals(position, _Runtime.field(_Runtime, 'UNDEFINED'))))) { _Runtime.callValue(listener, cast ([_Runtime.callValue(CapacitorGeolocation.toGeoPosition__capacitorGeolocation, cast ([position] : Array<Dynamic>))] : Array<Dynamic>)); } else { if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(err, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(onError, _Runtime.field(_Runtime, 'UNDEFINED'))))) { _Runtime.callValue(onError, cast (['unavailable'] : Array<Dynamic>)); } }
+        if ((cast ((cast !_Runtime.strictEquals(position, null) : Bool) && (cast !_Runtime.strictEquals(position, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { _Runtime.callValue(listener, cast ([_Runtime.callValue(CapacitorGeolocation.toGeoPosition__capacitorGeolocation, cast ([position] : Array<Dynamic>))] : Array<Dynamic>)); } else { if ((cast ((cast !_Runtime.strictEquals(err, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(onError, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { _Runtime.callValue(onError, cast (['unavailable'] : Array<Dynamic>)); } }
       }] : Array<Dynamic>)), 'then', cast ([function(stringId:Dynamic) {
-        if (_Runtime.truthy(((cast watchIds : flighthq._internal._Map).has(numericId)))) { ((cast watchIds : flighthq._internal._Map).set(numericId, stringId)); } else { flighthq._internal._Async.recover(_Runtime.callProperty(geolocation, 'clearWatch', cast ([{ id: stringId }] : Array<Dynamic>)), function() {
+        if ((cast ((cast watchIds : flighthq._internal._Map).has(numericId)) : Bool)) { ((cast watchIds : flighthq._internal._Map).set(numericId, stringId)); } else { flighthq._internal._Async.recover(_Runtime.callProperty(geolocation, 'clearWatch', cast ([{ id: stringId }] : Array<Dynamic>)), function() {
         
         }); }
       }] : Array<Dynamic>)), function() {
@@ -89,7 +89,7 @@ class CapacitorGeolocation {
       var stringId:Dynamic = cast _Runtime.UNDEFINED;
       stringId = ((cast watchIds : flighthq._internal._Map).get(id));
       ((cast watchIds : flighthq._internal._Map).delete_(id));
-      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(stringId, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(stringId, null)))) { flighthq._internal._Async.recover(_Runtime.callProperty(geolocation, 'clearWatch', cast ([{ id: stringId }] : Array<Dynamic>)), function() {
+      if ((cast ((cast !_Runtime.strictEquals(stringId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(stringId, null) : Bool)) : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(geolocation, 'clearWatch', cast ([{ id: stringId }] : Array<Dynamic>)), function() {
       
       }); }
     }, requestPermission: function():flighthq._internal._Promise<Dynamic> {
@@ -125,8 +125,8 @@ class CapacitorGeolocation {
   }
 
   public static function toPermissionState__capacitorGeolocation(location:String):GeolocationPermissionState {
-    if (_Runtime.truthy(_Runtime.strictEquals(location, 'granted'))) { return cast 'granted'; }
-    if (_Runtime.truthy(_Runtime.strictEquals(location, 'denied'))) { return cast 'denied'; }
+    if ((cast _Runtime.strictEquals(location, 'granted') : Bool)) { return cast 'granted'; }
+    if ((cast _Runtime.strictEquals(location, 'denied') : Bool)) { return cast 'denied'; }
     return cast 'prompt';
     return cast null;
   }

@@ -33,13 +33,13 @@ class TextSegmentBoundary {
     var clamped:Dynamic = cast _Runtime.UNDEFINED;
     var lookup:Dynamic = cast _Runtime.UNDEFINED;
     var segments:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0))) { return cast null; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) { return cast null; }
     clamped = _Runtime.callValue(TextSegmentBoundary.clampIndex__textSegmentBoundary, cast ([index, _Runtime.field(text, 'length')] : Array<Dynamic>));
-    lookup = _Runtime.select(_Runtime.strictEquals(clamped, _Runtime.field(text, 'length')), function():Dynamic return cast (_Runtime.field(text, 'length') - 1.0), function():Dynamic return cast clamped);
+    lookup = ((cast _Runtime.strictEquals(clamped, _Runtime.field(text, 'length')) : Bool) ? (cast (_Runtime.field(text, 'length') - 1.0) : Dynamic) : (cast clamped : Dynamic));
     segments = _Runtime.callValue(segmentWords, cast ([text, locale] : Array<Dynamic>));
     for (segment in _Runtime.iterable(segments)) {
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(lookup, _Runtime.field(segment, 'start'), '>='), function():Dynamic return cast _Runtime.compare(lookup, _Runtime.field(segment, 'end'), '<')))) {
-        return cast _Runtime.select(_Runtime.strictEquals(_Runtime.field(segment, 'isWordLike'), true), function():Dynamic return cast { start: _Runtime.field(segment, 'start'), end: _Runtime.field(segment, 'end') }, function():Dynamic return cast null);
+      if ((cast ((cast ((cast lookup : Float) >= (cast _Runtime.field(segment, 'start') : Float)) : Bool) && (cast ((cast lookup : Float) < (cast _Runtime.field(segment, 'end') : Float)) : Bool)) : Bool)) {
+        return cast ((cast _Runtime.strictEquals(_Runtime.field(segment, 'isWordLike'), true) : Bool) ? (cast { start: _Runtime.field(segment, 'start'), end: _Runtime.field(segment, 'end') } : Dynamic) : (cast null : Dynamic));
       }
     }
     return cast null;
@@ -47,8 +47,8 @@ class TextSegmentBoundary {
   }
 
   public static function clampIndex__textSegmentBoundary(index:Float, length:Float):Float {
-    if (_Runtime.truthy(_Runtime.compare(index, 0.0, '<'))) { return cast 0.0; }
-    if (_Runtime.truthy(_Runtime.compare(index, length, '>'))) { return cast length; }
+    if ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
+    if ((cast ((cast index : Float) > (cast length : Float)) : Bool)) { return cast length; }
     return cast index;
     return cast null;
   }
@@ -56,9 +56,9 @@ class TextSegmentBoundary {
   public static function nextSegmentBoundary__textSegmentBoundary(segments:Array<TextSegment>, index:Float, length:Float):Float {
     var from:Dynamic = cast _Runtime.UNDEFINED;
     from = _Runtime.callValue(TextSegmentBoundary.clampIndex__textSegmentBoundary, cast ([index, length] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(from, length, '>='))) { return cast length; }
+    if ((cast ((cast from : Float) >= (cast length : Float)) : Bool)) { return cast length; }
     for (segment in _Runtime.iterable(segments)) {
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(segment, 'start'), from, '>'))) { return cast _Runtime.field(segment, 'start'); }
+      if ((cast ((cast _Runtime.field(segment, 'start') : Float) > (cast from : Float)) : Bool)) { return cast _Runtime.field(segment, 'start'); }
     }
     return cast length;
     return cast null;
@@ -68,12 +68,12 @@ class TextSegmentBoundary {
     var length:Dynamic = cast _Runtime.UNDEFINED;
     var from:Dynamic = cast _Runtime.UNDEFINED;
     var previous:Dynamic = cast _Runtime.UNDEFINED;
-    length = _Runtime.select(_Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.field(_Runtime.getIndex(segments, (_Runtime.field(segments, 'length') - 1.0)), 'end'));
+    length = ((cast _Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.field(_Runtime.getIndex(segments, (_Runtime.field(segments, 'length') - 1.0)), 'end') : Dynamic));
     from = _Runtime.callValue(TextSegmentBoundary.clampIndex__textSegmentBoundary, cast ([index, length] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(from, 0.0, '<='))) { return cast 0.0; }
+    if ((cast ((cast from : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
     previous = 0.0;
     for (segment in _Runtime.iterable(segments)) {
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(segment, 'start'), from, '>='))) { break; }
+      if ((cast ((cast _Runtime.field(segment, 'start') : Float) >= (cast from : Float)) : Bool)) { break; }
       (previous = cast (_Runtime.field(segment, 'start') : Dynamic));
     }
     return cast previous;

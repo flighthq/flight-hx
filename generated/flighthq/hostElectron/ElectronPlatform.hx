@@ -11,7 +11,7 @@ class ElectronPlatform {
   public static function createElectronPlatformBackend(electron:ElectronApi):PlatformBackend {
     return cast { getInfo: function(out:Dynamic) {
       var proc:Dynamic = cast _Runtime.UNDEFINED;
-      proc = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('process'), 'undefined'), function():Dynamic return cast (cast _Runtime.globalValue('process') : { @:optional var platform:String; @:optional var arch:String; @:optional var getSystemVersion:Dynamic; }), function():Dynamic return cast null);
+      proc = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('process'), 'undefined') : Bool) ? (cast (cast _Runtime.globalValue('process') : { @:optional var platform:String; @:optional var arch:String; @:optional var getSystemVersion:Dynamic; }) : Dynamic) : (cast null : Dynamic));
       _Runtime.setField(out, 'name', _Runtime.callValue(ElectronPlatform.toPlatformName__electronPlatform, cast ([_Runtime.optionalField(proc, 'platform')] : Array<Dynamic>)));
       _Runtime.setField(out, 'kind', 'desktop');
       _Runtime.setField(out, 'version', _Runtime.coalesce(_Runtime.callOptionalProperty(proc, 'getSystemVersion', cast ([] : Array<Dynamic>)), function():Dynamic return cast ''));
@@ -24,9 +24,9 @@ class ElectronPlatform {
   }
 
   public static function toPlatformName__electronPlatform(platform:Null<String>):PlatformName {
-    if (_Runtime.truthy(_Runtime.strictEquals(platform, 'win32'))) { return cast 'windows'; }
-    if (_Runtime.truthy(_Runtime.strictEquals(platform, 'darwin'))) { return cast 'macos'; }
-    if (_Runtime.truthy(_Runtime.strictEquals(platform, 'linux'))) { return cast 'linux'; }
+    if ((cast _Runtime.strictEquals(platform, 'win32') : Bool)) { return cast 'windows'; }
+    if ((cast _Runtime.strictEquals(platform, 'darwin') : Bool)) { return cast 'macos'; }
+    if ((cast _Runtime.strictEquals(platform, 'linux') : Bool)) { return cast 'linux'; }
     return cast 'unknown';
     return cast null;
   }

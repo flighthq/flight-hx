@@ -77,19 +77,19 @@ class GlScale9Shape {
     commands = _Runtime.field(__destructure1, 'commands');
     scale9Grid = _Runtime.field(__destructure1, 'scale9Grid');
     version = _Runtime.callValue(getNodeLocalContentRevision, cast ([source] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0))) { return; }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(renderProxy, 'rendererData'), null))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool)) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(renderProxy, 'rendererData'), null) : Bool)) { return; }
     bounds = _Runtime.callValue(getNodeLocalBoundsRectangle, cast ([source] : Array<Dynamic>));
     mapper = _Runtime.callValue(buildGlScale9Mapper, cast ([bounds, scale9Grid, _Runtime.field(source, 'scaleX'), _Runtime.field(source, 'scaleY')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(mapper, null))) {
+    if ((cast _Runtime.strictEquals(mapper, null) : Bool)) {
       _Runtime.callValue(drawGlShape, cast ([state, renderProxy] : Array<Dynamic>));
       return;
     }
     shapeData = (cast (cast _Runtime.field(renderProxy, 'rendererData') : Dynamic) : GlScale9ShapeData__glScale9Shape);
     w = HxMath.ceil((_Runtime.field(bounds, 'width') * _Runtime.field(source, 'scaleX')));
     h = HxMath.ceil((_Runtime.field(bounds, 'height') * _Runtime.field(source, 'scaleY')));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(w, 0.0, '<='), function():Dynamic return cast _Runtime.compare(h, 0.0, '<=')))) { return; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(version, _Runtime.field(shapeData, 'lastContentId')), function():Dynamic return cast !_Runtime.strictEquals(w, _Runtime.field(shapeData, 'lastW'))), function():Dynamic return cast !_Runtime.strictEquals(h, _Runtime.field(shapeData, 'lastH'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(source, 'scaleX'), _Runtime.field(shapeData, 'lastScaleX'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(source, 'scaleY'), _Runtime.field(shapeData, 'lastScaleY'))))) {
+    if ((cast ((cast ((cast w : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast h : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
+    if ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(version, _Runtime.field(shapeData, 'lastContentId')) : Bool) || (cast !_Runtime.strictEquals(w, _Runtime.field(shapeData, 'lastW')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(h, _Runtime.field(shapeData, 'lastH')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(source, 'scaleX'), _Runtime.field(shapeData, 'lastScaleX')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(source, 'scaleY'), _Runtime.field(shapeData, 'lastScaleY')) : Bool)) : Bool)) {
       flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(shapeData, 'canvas'), 'width', w);
       flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(shapeData, 'canvas'), 'height', h);
       var ctx:Dynamic = _Runtime.field(shapeData, 'ctx');
@@ -108,7 +108,7 @@ class GlScale9Shape {
     }
     _Runtime.callValue(useGlProgram, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'currentTexture'), _Runtime.field(shapeData, 'texture')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'currentTexture'), _Runtime.field(shapeData, 'texture')) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, _Runtime.field(shapeData, 'texture'));
       _Runtime.setField(runtime, 'currentTexture', _Runtime.field(shapeData, 'texture'));
     }
@@ -129,15 +129,15 @@ class GlScale9Shape {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(mapCanvasScale9ShapeCommands, cast ([out, source, mapper] : Array<Dynamic>));
     i = 0.0;
-    while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(out, 'length'), '<'))) {
+    while ((cast ((cast i : Float) < (cast _Runtime.field(out, 'length') : Float)) : Bool)) {
       var key:Dynamic = (cast _Runtime.getIndex(out, i) : String);
       var argCount:Dynamic = (cast _Runtime.getIndex(out, (i + 1.0)) : Float);
-      if (_Runtime.truthy(_Runtime.strictEquals(key, 'drawPath'))) {
+      if ((cast _Runtime.strictEquals(key, 'drawPath') : Bool)) {
         var pathData:Dynamic = (cast _Runtime.getIndex(out, (i + 3.0)) : Array<Float>);
         _Runtime.setLength(GlScale9Shape._remappedPathData__glScale9Shape, _Runtime.field(pathData, 'length'));
         {
           var k:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(k, _Runtime.field(pathData, 'length'), '<'))) {
+          while ((cast ((cast k : Float) < (cast _Runtime.field(pathData, 'length') : Float)) : Bool)) {
             _Runtime.setIndex(GlScale9Shape._remappedPathData__glScale9Shape, k, _Runtime.getIndex(pathData, k));
             k++;
           }
@@ -155,10 +155,10 @@ class GlScale9Shape {
     var b:Dynamic = cast _Runtime.UNDEFINED;
     var c:Dynamic = cast _Runtime.UNDEFINED;
     var d:Dynamic = cast _Runtime.UNDEFINED;
-    a = _Runtime.select(!_Runtime.strictEquals(scaleX, 0.0), function():Dynamic return cast (_Runtime.field(t, 'a') / scaleX), function():Dynamic return cast _Runtime.field(t, 'a'));
-    b = _Runtime.select(!_Runtime.strictEquals(scaleX, 0.0), function():Dynamic return cast (_Runtime.field(t, 'b') / scaleX), function():Dynamic return cast _Runtime.field(t, 'b'));
-    c = _Runtime.select(!_Runtime.strictEquals(scaleY, 0.0), function():Dynamic return cast (_Runtime.field(t, 'c') / scaleY), function():Dynamic return cast _Runtime.field(t, 'c'));
-    d = _Runtime.select(!_Runtime.strictEquals(scaleY, 0.0), function():Dynamic return cast (_Runtime.field(t, 'd') / scaleY), function():Dynamic return cast _Runtime.field(t, 'd'));
+    a = ((cast !_Runtime.strictEquals(scaleX, 0.0) : Bool) ? (cast (_Runtime.field(t, 'a') / scaleX) : Dynamic) : (cast _Runtime.field(t, 'a') : Dynamic));
+    b = ((cast !_Runtime.strictEquals(scaleX, 0.0) : Bool) ? (cast (_Runtime.field(t, 'b') / scaleX) : Dynamic) : (cast _Runtime.field(t, 'b') : Dynamic));
+    c = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (_Runtime.field(t, 'c') / scaleY) : Dynamic) : (cast _Runtime.field(t, 'c') : Dynamic));
+    d = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (_Runtime.field(t, 'd') / scaleY) : Dynamic) : (cast _Runtime.field(t, 'd') : Dynamic));
     _Runtime.callValue(setGlMatrixFromValues, cast ([gl, loc, m, a, b, c, d, _Runtime.field(t, 'tx'), _Runtime.field(t, 'ty'), viewport] : Array<Dynamic>));
   }
 }

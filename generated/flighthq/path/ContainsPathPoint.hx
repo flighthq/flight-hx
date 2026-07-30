@@ -11,7 +11,7 @@ class ContainsPathPoint {
   public static function containsPathPoint(path:Path, px:Float, py:Float, tolerance:Dynamic = 0.25):Bool {
     var winding:Dynamic = cast _Runtime.UNDEFINED;
     winding = _Runtime.callValue(ContainsPathPoint.computePathWindingNumber__containsPathPoint, cast ([path, px, py, tolerance] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(path, 'winding'), 'evenOdd'))) { return cast !_Runtime.strictEquals((_Runtime.toInt32(winding) & 1), 0.0); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(path, 'winding'), 'evenOdd') : Bool)) { return cast !_Runtime.strictEquals((_Runtime.toInt32(winding) & 1), 0.0); }
     return cast !_Runtime.strictEquals(winding, 0.0);
     return cast null;
   }
@@ -24,7 +24,7 @@ class ContainsPathPoint {
     dx = (x1 - x0);
     dy = (y1 - y0);
     lenSq = ((dx * dx) + (dy * dy));
-    if (_Runtime.truthy(_Runtime.strictEquals(lenSq, 0.0))) {
+    if ((cast _Runtime.strictEquals(lenSq, 0.0) : Bool)) {
       var ax:Dynamic = (px - x0);
       var ay:Dynamic = (py - y0);
       return cast ((ax * ax) + (ay * ay));
@@ -61,15 +61,15 @@ class ContainsPathPoint {
     lastY = 0.0;
     di = 0.0;
     flushContour = function() {
-      if (_Runtime.truthy(hasContour)) {
+      if ((cast hasContour : Bool)) {
         (windingNumber = cast ((windingNumber + _Runtime.callValue(ContainsPathPoint.countSegmentCrossings__containsPathPoint, cast ([px, py, lastX, lastY, contourStartX, contourStartY] : Array<Dynamic>))) : Dynamic));
       }
     };
     {
       var ci:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(ci, _Runtime.field(commands, 'length'), '<'))) {
+      while ((cast ((cast ci : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
         var command:Dynamic = _Runtime.getIndex(commands, ci);
-        if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.MOVE_TO))) {
+        if ((cast _Runtime.strictEquals(command, PathCommandValue.MOVE_TO) : Bool)) {
           _Runtime.callValue(flushContour, cast ([] : Array<Dynamic>));
           (x = cast (_Runtime.getIndex(data, di) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 1.0)) : Dynamic));
@@ -79,7 +79,7 @@ class ContainsPathPoint {
           (lastX = cast (x : Dynamic));
           (lastY = cast (y : Dynamic));
           (hasContour = cast (true : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO) : Bool)) {
           _Runtime.callValue(flushContour, cast ([] : Array<Dynamic>));
           (x = cast (_Runtime.getIndex(data, (di + 2.0)) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 3.0)) : Dynamic));
@@ -89,42 +89,42 @@ class ContainsPathPoint {
           (lastX = cast (x : Dynamic));
           (lastY = cast (y : Dynamic));
           (hasContour = cast (true : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.LINE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.LINE_TO) : Bool)) {
           var nx:Dynamic = _Runtime.getIndex(data, di);
           var ny:Dynamic = _Runtime.getIndex(data, (di + 1.0));
           (di = cast ((di + 2.0) : Dynamic));
-          if (_Runtime.truthy(hasContour)) {
+          if ((cast hasContour : Bool)) {
             (windingNumber = cast ((windingNumber + _Runtime.callValue(ContainsPathPoint.countSegmentCrossings__containsPathPoint, cast ([px, py, lastX, lastY, nx, ny] : Array<Dynamic>))) : Dynamic));
           }
           (lastX = cast (nx : Dynamic));
           (lastY = cast (ny : Dynamic));
           (x = cast (nx : Dynamic));
           (y = cast (ny : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO) : Bool)) {
           var nx:Dynamic = _Runtime.getIndex(data, (di + 2.0));
           var ny:Dynamic = _Runtime.getIndex(data, (di + 3.0));
           (di = cast ((di + 4.0) : Dynamic));
-          if (_Runtime.truthy(hasContour)) {
+          if ((cast hasContour : Bool)) {
             (windingNumber = cast ((windingNumber + _Runtime.callValue(ContainsPathPoint.countSegmentCrossings__containsPathPoint, cast ([px, py, lastX, lastY, nx, ny] : Array<Dynamic>))) : Dynamic));
           }
           (lastX = cast (nx : Dynamic));
           (lastY = cast (ny : Dynamic));
           (x = cast (nx : Dynamic));
           (y = cast (ny : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CURVE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CURVE_TO) : Bool)) {
           var cx:Dynamic = _Runtime.getIndex(data, di);
           var cy:Dynamic = _Runtime.getIndex(data, (di + 1.0));
           var ax:Dynamic = _Runtime.getIndex(data, (di + 2.0));
           var ay:Dynamic = _Runtime.getIndex(data, (di + 3.0));
           (di = cast ((di + 4.0) : Dynamic));
-          if (_Runtime.truthy(hasContour)) {
+          if ((cast hasContour : Bool)) {
             (windingNumber = cast ((windingNumber + _Runtime.callValue(ContainsPathPoint.flattenQuadraticWindingNumber__containsPathPoint, cast ([px, py, lastX, lastY, cx, cy, ax, ay, toleranceSq, 0.0] : Array<Dynamic>))) : Dynamic));
           }
           (lastX = cast (ax : Dynamic));
           (lastY = cast (ay : Dynamic));
           (x = cast (ax : Dynamic));
           (y = cast (ay : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO) : Bool)) {
           var c1x:Dynamic = _Runtime.getIndex(data, di);
           var c1y:Dynamic = _Runtime.getIndex(data, (di + 1.0));
           var c2x:Dynamic = _Runtime.getIndex(data, (di + 2.0));
@@ -132,15 +132,15 @@ class ContainsPathPoint {
           var ax:Dynamic = _Runtime.getIndex(data, (di + 4.0));
           var ay:Dynamic = _Runtime.getIndex(data, (di + 5.0));
           (di = cast ((di + 6.0) : Dynamic));
-          if (_Runtime.truthy(hasContour)) {
+          if ((cast hasContour : Bool)) {
             (windingNumber = cast ((windingNumber + _Runtime.callValue(ContainsPathPoint.flattenCubicWindingNumber__containsPathPoint, cast ([px, py, lastX, lastY, c1x, c1y, c2x, c2y, ax, ay, toleranceSq, 0.0] : Array<Dynamic>))) : Dynamic));
           }
           (lastX = cast (ax : Dynamic));
           (lastY = cast (ay : Dynamic));
           (x = cast (ax : Dynamic));
           (y = cast (ay : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CLOSE))) {
-          if (_Runtime.truthy(hasContour)) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CLOSE) : Bool)) {
+          if ((cast hasContour : Bool)) {
             (windingNumber = cast ((windingNumber + _Runtime.callValue(ContainsPathPoint.countSegmentCrossings__containsPathPoint, cast ([px, py, lastX, lastY, contourStartX, contourStartY] : Array<Dynamic>))) : Dynamic));
             (lastX = cast (contourStartX : Dynamic));
             (lastY = cast (contourStartY : Dynamic));
@@ -158,10 +158,10 @@ class ContainsPathPoint {
   }
 
   public static function countSegmentCrossings__containsPathPoint(px:Float, py:Float, x0:Float, y0:Float, x1:Float, y1:Float):Float {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.andValue(_Runtime.compare(y0, py, '<='), function():Dynamic return cast _Runtime.compare(y1, py, '>')), function():Dynamic return cast _Runtime.andValue(_Runtime.compare(y1, py, '<='), function():Dynamic return cast _Runtime.compare(y0, py, '>'))))) {
+    if ((cast ((cast _Runtime.andValue(((cast y0 : Float) <= (cast py : Float)), function():Dynamic return cast ((cast y1 : Float) > (cast py : Float))) : Bool) || (cast _Runtime.andValue(((cast y1 : Float) <= (cast py : Float)), function():Dynamic return cast ((cast y0 : Float) > (cast py : Float))) : Bool)) : Bool)) {
       var crossX:Dynamic = (x0 + (((py - y0) * (x1 - x0)) / (y1 - y0)));
-      if (_Runtime.truthy(_Runtime.compare(px, crossX, '<'))) {
-        return cast _Runtime.select(_Runtime.compare(y1, y0, '>'), function():Dynamic return cast 1.0, function():Dynamic return cast -1.0);
+      if ((cast ((cast px : Float) < (cast crossX : Float)) : Bool)) {
+        return cast ((cast ((cast y1 : Float) > (cast y0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast -1.0 : Dynamic));
       }
     }
     return cast 0.0;
@@ -185,7 +185,7 @@ class ContainsPathPoint {
     var ym:Dynamic = cast _Runtime.UNDEFINED;
     d1 = _Runtime.callValue(ContainsPathPoint.chordDistSq__containsPathPoint, cast ([c1x, c1y, x0, y0, x1, y1] : Array<Dynamic>));
     d2 = _Runtime.callValue(ContainsPathPoint.chordDistSq__containsPathPoint, cast ([c2x, c2y, x0, y0, x1, y1] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(depth, ContainsPathPoint.MAX_SUBDIVISION_DEPTH__containsPathPoint, '>='), function():Dynamic return cast _Runtime.andValue(_Runtime.compare(d1, toleranceSq, '<='), function():Dynamic return cast _Runtime.compare(d2, toleranceSq, '<='))))) {
+    if ((cast ((cast ((cast depth : Float) >= (cast ContainsPathPoint.MAX_SUBDIVISION_DEPTH__containsPathPoint : Float)) : Bool) || (cast _Runtime.andValue(((cast d1 : Float) <= (cast toleranceSq : Float)), function():Dynamic return cast ((cast d2 : Float) <= (cast toleranceSq : Float))) : Bool)) : Bool)) {
       return cast _Runtime.callValue(ContainsPathPoint.countSegmentCrossings__containsPathPoint, cast ([px, py, x0, y0, x1, y1] : Array<Dynamic>));
     }
     x01 = ((x0 + c1x) / 2.0);
@@ -211,7 +211,7 @@ class ContainsPathPoint {
     var my12:Dynamic = cast _Runtime.UNDEFINED;
     var mx:Dynamic = cast _Runtime.UNDEFINED;
     var my:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(depth, ContainsPathPoint.MAX_SUBDIVISION_DEPTH__containsPathPoint, '>='), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(ContainsPathPoint.chordDistSq__containsPathPoint, cast ([cx, cy, x0, y0, x1, y1] : Array<Dynamic>)), toleranceSq, '<=')))) {
+    if ((cast ((cast ((cast depth : Float) >= (cast ContainsPathPoint.MAX_SUBDIVISION_DEPTH__containsPathPoint : Float)) : Bool) || (cast ((cast _Runtime.callValue(ContainsPathPoint.chordDistSq__containsPathPoint, cast ([cx, cy, x0, y0, x1, y1] : Array<Dynamic>)) : Float) <= (cast toleranceSq : Float)) : Bool)) : Bool)) {
       return cast _Runtime.callValue(ContainsPathPoint.countSegmentCrossings__containsPathPoint, cast ([px, py, x0, y0, x1, y1] : Array<Dynamic>));
     }
     mx01 = ((x0 + cx) / 2.0);

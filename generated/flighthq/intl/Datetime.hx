@@ -27,8 +27,8 @@ class Datetime {
     var time:Dynamic = cast _Runtime.UNDEFINED;
     var key:Dynamic = cast _Runtime.UNDEFINED;
     var formatter:Dynamic = cast _Runtime.UNDEFINED;
-    time = _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(date), 'number'), function():Dynamic return cast date, function():Dynamic return cast _Runtime.callProperty(date, 'getTime', cast ([] : Array<Dynamic>)));
-    if (_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isNaN', cast ([time] : Array<Dynamic>)))) { return cast 'Invalid Date'; }
+    time = ((cast _Runtime.strictEquals(_Runtime.typeofValue(date), 'number') : Bool) ? (cast date : Dynamic) : (cast _Runtime.callProperty(date, 'getTime', cast ([] : Array<Dynamic>)) : Dynamic));
+    if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isNaN', cast ([time] : Array<Dynamic>)) : Bool)) { return cast 'Invalid Date'; }
     key = _Runtime.callValue(getCacheKey, cast (['datetime', locale, options] : Array<Dynamic>));
     formatter = _Runtime.callValue(getCached, cast ([key, function() return _Runtime.construct(_Runtime.field(_Runtime.globalValue('Intl'), 'DateTimeFormat'), [(cast locale : Dynamic), options])] : Array<Dynamic>));
     return cast _Runtime.callProperty(formatter, 'format', cast ([date] : Array<Dynamic>));

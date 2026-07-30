@@ -44,7 +44,7 @@ class WgpuEffectBlitShader {
   public static function getWgpuBlitOffsetShader__wgpuEffectBlitShader(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Dynamic = cast _Runtime.UNDEFINED;
     p = ((cast WgpuEffectBlitShader.blitOffsetPipelines__wgpuEffectBlitShader : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (p = cast (_Runtime.callValue(createWgpuEffectPipeline, cast ([state, WgpuEffectBlitShader.BLIT_OFFSET_WGSL__wgpuEffectBlitShader] : Array<Dynamic>)) : Dynamic));
       ((cast WgpuEffectBlitShader.blitOffsetPipelines__wgpuEffectBlitShader : flighthq._internal._WeakMap).set(state, p));
     }
@@ -55,7 +55,7 @@ class WgpuEffectBlitShader {
   public static function getWgpuBlitShader__wgpuEffectBlitShader(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Dynamic = cast _Runtime.UNDEFINED;
     p = ((cast WgpuEffectBlitShader.blitPipelines__wgpuEffectBlitShader : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (p = cast (_Runtime.callValue(createWgpuEffectPipeline, cast ([state, WgpuEffectBlitShader.BLIT_WGSL__wgpuEffectBlitShader] : Array<Dynamic>)) : Dynamic));
       ((cast WgpuEffectBlitShader.blitPipelines__wgpuEffectBlitShader : flighthq._internal._WeakMap).set(state, p));
     }
@@ -66,7 +66,7 @@ class WgpuEffectBlitShader {
   public static function getWgpuEraseShader__wgpuEffectBlitShader(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Dynamic = cast _Runtime.UNDEFINED;
     p = ((cast WgpuEffectBlitShader.erasePipelines__wgpuEffectBlitShader : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (p = cast (_Runtime.callValue(createWgpuEffectPipeline, cast ([state, WgpuEffectBlitShader.ERASE_WGSL__wgpuEffectBlitShader, 'erase'] : Array<Dynamic>)) : Dynamic));
       ((cast WgpuEffectBlitShader.erasePipelines__wgpuEffectBlitShader : flighthq._internal._WeakMap).set(state, p));
     }

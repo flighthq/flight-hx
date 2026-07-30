@@ -42,10 +42,10 @@ class SurfaceDisplacement {
     fillA = (_Runtime.toInt32(fillColor) & 255);
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, h, '<'))) {
+      while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, w, '<'))) {
+          while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
             var di:Dynamic = (((py * w) + px) * 4.0);
             var mapVx:Dynamic = _Runtime.callValue(SurfaceDisplacement.sampleMapChannel__surfaceDisplacement, cast ([map, px, py, componentX] : Array<Dynamic>));
             var mapVy:Dynamic = _Runtime.callValue(SurfaceDisplacement.sampleMapChannel__surfaceDisplacement, cast ([map, px, py, componentY] : Array<Dynamic>));
@@ -53,11 +53,11 @@ class SurfaceDisplacement {
             var rawSampleY:Dynamic = (py + (((mapVy / 255.0) - 0.5) * scaleY));
             var sampleX:Dynamic = rawSampleX;
             var sampleY:Dynamic = rawSampleY;
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(rawSampleX, 0.0, '<'), function():Dynamic return cast _Runtime.compare(rawSampleX, w, '>=')), function():Dynamic return cast _Runtime.compare(rawSampleY, 0.0, '<')), function():Dynamic return cast _Runtime.compare(rawSampleY, h, '>=')))) {
-              if (_Runtime.truthy(!_Runtime.strictEquals(edgeMode, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+            if ((cast ((cast ((cast ((cast ((cast rawSampleX : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast rawSampleX : Float) >= (cast w : Float)) : Bool)) : Bool) || (cast ((cast rawSampleY : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast rawSampleY : Float) >= (cast h : Float)) : Bool)) : Bool)) {
+              if ((cast !_Runtime.strictEquals(edgeMode, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
                 var rx:Dynamic = _Runtime.callValue(SurfaceDisplacement.resolveDisplacementEdge__surfaceDisplacement, cast ([rawSampleX, w, edgeMode] : Array<Dynamic>));
                 var ry:Dynamic = _Runtime.callValue(SurfaceDisplacement.resolveDisplacementEdge__surfaceDisplacement, cast ([rawSampleY, h, edgeMode] : Array<Dynamic>));
-                if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(rx, null), function():Dynamic return cast _Runtime.strictEquals(ry, null)))) {
+                if ((cast ((cast _Runtime.strictEquals(rx, null) : Bool) || (cast _Runtime.strictEquals(ry, null) : Bool)) : Bool)) {
                   _Runtime.setIndex(out, di, 0.0);
                   _Runtime.setIndex(out, (di + 1.0), 0.0);
                   _Runtime.setIndex(out, (di + 2.0), 0.0);
@@ -67,13 +67,13 @@ class SurfaceDisplacement {
                 }
                 (sampleX = cast (rx : Dynamic));
                 (sampleY = cast (ry : Dynamic));
-              } else { if (_Runtime.truthy(_Runtime.strictEquals(mode, 'wrap'))) {
+              } else { if ((cast _Runtime.strictEquals(mode, 'wrap') : Bool)) {
                 (sampleX = cast (_Runtime.fmod((_Runtime.fmod(rawSampleX, w) + w), w) : Dynamic));
                 (sampleY = cast (_Runtime.fmod((_Runtime.fmod(rawSampleY, h) + h), h) : Dynamic));
-              } else { if (_Runtime.truthy(_Runtime.strictEquals(mode, 'clamp'))) {
+              } else { if ((cast _Runtime.strictEquals(mode, 'clamp') : Bool)) {
                 (sampleX = cast (HxMath.max(0.0, HxMath.min((w - 1.0), rawSampleX)) : Dynamic));
                 (sampleY = cast (HxMath.max(0.0, HxMath.min((h - 1.0), rawSampleY)) : Dynamic));
-              } else { if (_Runtime.truthy(_Runtime.strictEquals(mode, 'ignore'))) {
+              } else { if ((cast _Runtime.strictEquals(mode, 'ignore') : Bool)) {
                 (sampleX = cast (px : Dynamic));
                 (sampleY = cast (py : Dynamic));
               } else {
@@ -95,7 +95,7 @@ class SurfaceDisplacement {
             var x1c:Dynamic = (_Runtime.field(source, 'x') + HxMath.max(0.0, HxMath.min((w - 1.0), (x0 + 1.0))));
             var y0c:Dynamic = (_Runtime.field(source, 'y') + HxMath.max(0.0, HxMath.min((h - 1.0), y0)));
             var y1c:Dynamic = (_Runtime.field(source, 'y') + HxMath.max(0.0, HxMath.min((h - 1.0), (y0 + 1.0))));
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(x0c, 0.0, '<'), function():Dynamic return cast _Runtime.compare(x0c, (_Runtime.field(sData, 'length') / 4.0), '>=')), function():Dynamic return cast _Runtime.compare(y0c, 0.0, '<')))) {
+            if ((cast ((cast ((cast ((cast x0c : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x0c : Float) >= (cast (_Runtime.field(sData, 'length') / 4.0) : Float)) : Bool)) : Bool) || (cast ((cast y0c : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
               _Runtime.setIndex(out, di, 0.0);
               _Runtime.setIndex(out, (di + 1.0), 0.0);
               _Runtime.setIndex(out, (di + 2.0), 0.0);
@@ -109,7 +109,7 @@ class SurfaceDisplacement {
             var i11:Dynamic = (((y1c * sStride) + x1c) * 4.0);
             {
               var c:Dynamic = 0.0;
-              while (_Runtime.truthy(_Runtime.compare(c, 4.0, '<'))) {
+              while ((cast ((cast c : Float) < (cast 4.0 : Float)) : Bool)) {
                 var top:Dynamic = ((_Runtime.getIndex(sData, (i00 + c)) * (1.0 - tx)) + (_Runtime.getIndex(sData, (i10 + c)) * tx));
                 var bottom:Dynamic = ((_Runtime.getIndex(sData, (i01 + c)) * (1.0 - tx)) + (_Runtime.getIndex(sData, (i11 + c)) * tx));
                 _Runtime.setIndex(out, (di + c), HxMath.round(((top * (1.0 - ty)) + (bottom * ty))));
@@ -125,7 +125,7 @@ class SurfaceDisplacement {
   }
 
   public static function resolveDisplacementEdge__surfaceDisplacement(v:Float, size:Float, mode:SurfaceEdgeMode):Null<Float> {
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(v, 0.0, '>='), function():Dynamic return cast _Runtime.compare(v, size, '<')))) { return cast v; }
+    if ((cast ((cast ((cast v : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast v : Float) < (cast size : Float)) : Bool)) : Bool)) { return cast v; }
     {
       var __switchValue = mode;
       if (__switchValue == 'clamp') {
@@ -138,7 +138,7 @@ class SurfaceDisplacement {
         {
           var period:Dynamic = (2.0 * size);
           var wrapped:Dynamic = _Runtime.fmod((_Runtime.fmod(v, period) + period), period);
-          return cast _Runtime.select(_Runtime.compare(wrapped, size, '<'), function():Dynamic return cast wrapped, function():Dynamic return cast ((period - 1.0) - wrapped));
+          return cast ((cast ((cast wrapped : Float) < (cast size : Float)) : Bool) ? (cast wrapped : Dynamic) : (cast ((period - 1.0) - wrapped) : Dynamic));
         }
       }
       else  {
@@ -153,7 +153,7 @@ class SurfaceDisplacement {
     var my:Dynamic = cast _Runtime.UNDEFINED;
     mx = (_Runtime.field(map, 'x') + px);
     my = (_Runtime.field(map, 'y') + py);
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(mx, 0.0, '<'), function():Dynamic return cast _Runtime.compare(mx, _Runtime.field(_Runtime.field(map, 'surface'), 'width'), '>=')), function():Dynamic return cast _Runtime.compare(my, 0.0, '<')), function():Dynamic return cast _Runtime.compare(my, _Runtime.field(_Runtime.field(map, 'surface'), 'height'), '>=')))) { return cast 128.0; }
+    if ((cast ((cast ((cast ((cast ((cast mx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast mx : Float) >= (cast _Runtime.field(_Runtime.field(map, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast my : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast my : Float) >= (cast _Runtime.field(_Runtime.field(map, 'surface'), 'height') : Float)) : Bool)) : Bool)) { return cast 128.0; }
     return cast _Runtime.getIndex(_Runtime.field(_Runtime.field(map, 'surface'), 'data'), ((((my * _Runtime.field(_Runtime.field(map, 'surface'), 'width')) + mx) * 4.0) + component));
     return cast null;
   }

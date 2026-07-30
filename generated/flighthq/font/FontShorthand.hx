@@ -8,7 +8,7 @@ class FontShorthand {
   public static function getFontShorthand(family:String, ?style:String):String {
     var quoted:Dynamic = cast _Runtime.UNDEFINED;
     quoted = '\'' + Std.string(_Runtime.replace(family, _Runtime.regexp('[\\\\\']', 'g'), '\\$$&', false)) + '\'';
-    return cast _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(style, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(style, '')), function():Dynamic return cast '' + Std.string(style) + ' 1em ' + Std.string(quoted) + '', function():Dynamic return cast '1em ' + Std.string(quoted) + '');
+    return cast ((cast ((cast !_Runtime.strictEquals(style, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(style, '') : Bool)) : Bool) ? (cast '' + Std.string(style) + ' 1em ' + Std.string(quoted) + '' : Dynamic) : (cast '1em ' + Std.string(quoted) + '' : Dynamic));
     return cast null;
   }
 }

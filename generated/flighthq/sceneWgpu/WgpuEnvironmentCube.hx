@@ -19,15 +19,15 @@ class WgpuEnvironmentCube {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     var view:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(scene, 'environmentSourceCubeView'), null))) { return cast _Runtime.field(scene, 'environmentSourceCubeView'); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(scene, 'environmentSourceCubeView'), null) : Bool)) { return cast _Runtime.field(scene, 'environmentSourceCubeView'); }
     cube = _Runtime.field(environment, 'environment');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(cube, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(WgpuEnvironmentCube.hasWgpuCubeFacePixels__wgpuEnvironmentCube, cast ([cube] : Array<Dynamic>)))))) { return cast null; }
+    if ((cast ((cast _Runtime.strictEquals(cube, null) : Bool) || (cast !(cast _Runtime.callValue(WgpuEnvironmentCube.hasWgpuCubeFacePixels__wgpuEnvironmentCube, cast ([cube] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast null; }
     size = _Runtime.field(_Runtime.getIndex(_Runtime.field(cube, 'faces'), 0.0), 'width');
     device = _Runtime.field(state, 'device');
     texture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([size, size, 6.0] : Array<Dynamic>), format: WgpuEnvironmentCube.ENVIRONMENT_CUBE_FORMAT__wgpuEnvironmentCube, usage: (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')))) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
     {
       var face:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(face, 6.0, '<'))) {
+      while ((cast ((cast face : Float) < (cast 6.0 : Float)) : Bool)) {
         _Runtime.callValue(uploadWgpuTextureImageResource, cast ([device, texture, cast ([0.0, 0.0, face] : Array<Dynamic>), _Runtime.getIndex(_Runtime.field(cube, 'faces'), face)] : Array<Dynamic>));
         face++;
       }
@@ -42,7 +42,7 @@ class WgpuEnvironmentCube {
   public static function updateWgpuEnvironmentCubeFace(state:WgpuRenderState, face:Float, image:ImageResource):Bool {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     texture = _Runtime.field(_Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>)), 'environmentSourceCube');
-    if (_Runtime.truthy(_Runtime.strictEquals(texture, null))) { return cast false; }
+    if ((cast _Runtime.strictEquals(texture, null) : Bool)) { return cast false; }
     _Runtime.callValue(uploadWgpuTextureImageResource, cast ([_Runtime.field(state, 'device'), texture, cast ([0.0, 0.0, face] : Array<Dynamic>), image] : Array<Dynamic>));
     return cast true;
     return cast null;
@@ -51,9 +51,9 @@ class WgpuEnvironmentCube {
   public static function hasWgpuCubeFacePixels__wgpuEnvironmentCube(cube:CubeTexture):Bool {
     {
       var face:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(face, 6.0, '<'))) {
+      while ((cast ((cast face : Float) < (cast 6.0 : Float)) : Bool)) {
         var image:Dynamic = _Runtime.getIndex(_Runtime.field(cube, 'faces'), face);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.looseEquals(image, null), function():Dynamic return cast _Runtime.andValue(_Runtime.looseEquals(_Runtime.field(image, 'source'), null), function():Dynamic return cast _Runtime.looseEquals(_Runtime.field(image, 'data'), null))))) { return cast false; }
+        if ((cast ((cast _Runtime.looseEquals(image, null) : Bool) || (cast _Runtime.andValue(_Runtime.looseEquals(_Runtime.field(image, 'source'), null), function():Dynamic return cast _Runtime.looseEquals(_Runtime.field(image, 'data'), null)) : Bool)) : Bool)) { return cast false; }
         face++;
       }
     }

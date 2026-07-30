@@ -26,17 +26,17 @@ class SurfaceGradientFill {
     axisX = (x1 - x0);
     axisY = (y1 - y0);
     lenSq = ((axisX * axisX) + (axisY * axisY));
-    invLen = _Runtime.select(_Runtime.compare(lenSq, 0.0, '>'), function():Dynamic return cast (1.0 / lenSq), function():Dynamic return cast 0.0);
+    invLen = ((cast ((cast lenSq : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / lenSq) : Dynamic) : (cast 0.0 : Dynamic));
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, dh, '<'))) {
+      while ((cast ((cast py : Float) < (cast dh : Float)) : Bool)) {
         var y:Dynamic = (_Runtime.field(dest, 'y') + py);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(y, 0.0, '<'), function():Dynamic return cast _Runtime.compare(y, surfaceHeight, '>=')))) { py++; continue; }
+        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast surfaceHeight : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, dw, '<'))) {
+          while ((cast ((cast px : Float) < (cast dw : Float)) : Bool)) {
             var x:Dynamic = (_Runtime.field(dest, 'x') + px);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(x, 0.0, '<'), function():Dynamic return cast _Runtime.compare(x, surfaceWidth, '>=')))) { px++; continue; }
+            if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast surfaceWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var t:Dynamic = ((((px - x0) * axisX) + ((py - y0) * axisY)) * invLen);
             var idx:Dynamic = _Runtime.callValue(SurfaceGradientFill.spreadIndex__surfaceGradientFill, cast ([t, spread] : Array<Dynamic>));
             var ri:Dynamic = (idx * 4.0);
@@ -70,19 +70,19 @@ class SurfaceGradientFill {
     data = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
     surfaceWidth = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
     surfaceHeight = _Runtime.field(_Runtime.field(dest, 'surface'), 'height');
-    invRadius = _Runtime.select(_Runtime.compare(radius, 0.0, '>'), function():Dynamic return cast (1.0 / radius), function():Dynamic return cast 0.0);
+    invRadius = ((cast ((cast radius : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / radius) : Dynamic) : (cast 0.0 : Dynamic));
     fdx = (focalX - cx);
     fdy = (focalY - cy);
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, dh, '<'))) {
+      while ((cast ((cast py : Float) < (cast dh : Float)) : Bool)) {
         var y:Dynamic = (_Runtime.field(dest, 'y') + py);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(y, 0.0, '<'), function():Dynamic return cast _Runtime.compare(y, surfaceHeight, '>=')))) { py++; continue; }
+        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast surfaceHeight : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, dw, '<'))) {
+          while ((cast ((cast px : Float) < (cast dw : Float)) : Bool)) {
             var x:Dynamic = (_Runtime.field(dest, 'x') + px);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(x, 0.0, '<'), function():Dynamic return cast _Runtime.compare(x, surfaceWidth, '>=')))) { px++; continue; }
+            if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast surfaceWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var dx:Dynamic = (px - focalX);
             var dy:Dynamic = (py - focalY);
             var t:Dynamic = ((HxMath.sqrt(((dx * dx) + (dy * dy))) * invRadius) - ((((dx * fdx) + (dy * fdy)) * invRadius) * invRadius));
@@ -114,7 +114,7 @@ class SurfaceGradientFill {
       else if (__switchValue == 'reflect') {
         {
           var wrapped:Dynamic = (t - (HxMath.floor((t / 2.0)) * 2.0));
-          (s = cast (_Runtime.select(_Runtime.compare(wrapped, 1.0, '<='), function():Dynamic return cast wrapped, function():Dynamic return cast (2.0 - wrapped)) : Dynamic));
+          (s = cast (((cast ((cast wrapped : Float) <= (cast 1.0 : Float)) : Bool) ? (cast wrapped : Dynamic) : (cast (2.0 - wrapped) : Dynamic)) : Dynamic));
         }
       }
       else  {

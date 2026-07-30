@@ -28,17 +28,17 @@ class StandardPbrGlMeshMaterialRenderer {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     pbr = (cast material : Null<StandardPbrMaterial>);
-    program = _Runtime.callValue(ensureGlPbrProgram, cast ([state, _Runtime.callValue(buildGlPbrStandardDefineKey, cast ([pbr, _Runtime.andValue(!_Runtime.strictEquals(pbr, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(pbr, 'alphaMode'), 'mask'))] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, _Runtime.andValue(!_Runtime.strictEquals(pbr, null), function():Dynamic return cast _Runtime.field(pbr, 'doubleSided'))] : Array<Dynamic>));
+    program = _Runtime.callValue(ensureGlPbrProgram, cast ([state, _Runtime.callValue(buildGlPbrStandardDefineKey, cast ([pbr, ((cast !_Runtime.strictEquals(pbr, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(pbr, 'alphaMode'), 'mask') : Bool))] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, ((cast !_Runtime.strictEquals(pbr, null) : Bool) && (cast _Runtime.field(pbr, 'doubleSided') : Bool))] : Array<Dynamic>));
     _Runtime.callValue(setGlMeshViewProjection, cast ([gl, _Runtime.field(program, 'locViewProjection'), camera] : Array<Dynamic>));
     _Runtime.callValue(setGlMeshCameraPosition, cast ([gl, _Runtime.field(program, 'locCameraPosition'), camera] : Array<Dynamic>));
     _Runtime.callValue(bindGlMeshLightBlock, cast ([state, program, lights] : Array<Dynamic>));
     _Runtime.callValue(bindGlPbrStandardBlock, cast ([state, program, pbr] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), _Runtime.select(!_Runtime.strictEquals(pbr, null), function():Dynamic return cast _Runtime.field(pbr, 'alphaCutoff'), function():Dynamic return cast 0.5));
+    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), ((cast !_Runtime.strictEquals(pbr, null) : Bool) ? (cast _Runtime.field(pbr, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic)));
   }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
-    if (_Runtime.truthy(_Runtime.strictEquals(program, null))) { return; }
+    if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
     _Runtime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
   } };
 }

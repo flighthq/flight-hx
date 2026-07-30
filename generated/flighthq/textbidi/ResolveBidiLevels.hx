@@ -20,23 +20,23 @@ class ResolveBidiLevels {
     var levelArray:Dynamic = cast _Runtime.UNDEFINED;
     length = _Runtime.field(text, 'length');
     levels = new flighthq._internal._UInt8Array(length);
-    if (_Runtime.truthy(_Runtime.strictEquals(length, 0.0))) { return cast levels; }
+    if ((cast _Runtime.strictEquals(length, 0.0) : Bool)) { return cast levels; }
     backend = _Runtime.callValue(getBidiClassBackend, cast ([] : Array<Dynamic>));
     original = _Runtime.createArray(length);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, length, '<'))) {
+      while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
         var codepoint:Dynamic = (cast _Runtime.codePointAt(text, i) : Float);
         var cls:Dynamic = _Runtime.callProperty(backend, 'getBidiClass', cast ([codepoint] : Array<Dynamic>));
         _Runtime.setIndex(original, i, cls);
-        if (_Runtime.truthy(_Runtime.compare(codepoint, 65535.0, '>'))) {
+        if ((cast ((cast codepoint : Float) > (cast 65535.0 : Float)) : Bool)) {
           _Runtime.setIndex(original, (i + 1.0), cls);
           i++;
         }
         i++;
       }
     }
-    paragraphLevel = _Runtime.select(_Runtime.strictEquals(baseDirection, 'ltr'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(baseDirection, 'rtl'), function():Dynamic return cast 1.0, function():Dynamic return cast _Runtime.callValue(ResolveBidiLevels.computeParagraphLevel__resolveBidiLevels, cast ([original, 0.0, length] : Array<Dynamic>))));
+    paragraphLevel = ((cast _Runtime.strictEquals(baseDirection, 'ltr') : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast _Runtime.strictEquals(baseDirection, 'rtl') : Bool) ? (cast 1.0 : Dynamic) : (cast _Runtime.callValue(ResolveBidiLevels.computeParagraphLevel__resolveBidiLevels, cast ([original, 0.0, length] : Array<Dynamic>)) : Dynamic)) : Dynamic));
     matchingPdi = _Runtime.fill(new flighthq._internal._Int32Array(length), length, 0, null, 1);
     matchingInitiator = _Runtime.fill(new flighthq._internal._Int32Array(length), -1.0, 0, null, 1);
     _Runtime.callValue(ResolveBidiLevels.pairIsolates__resolveBidiLevels, cast ([original, matchingPdi, matchingInitiator] : Array<Dynamic>));
@@ -47,7 +47,7 @@ class ResolveBidiLevels {
     _Runtime.callValue(ResolveBidiLevels.applyLineReset__resolveBidiLevels, cast ([original, levelArray, paragraphLevel] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, length, '<'))) {
+      while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
         _Runtime.setIndex(levels, i, _Runtime.getIndex(levelArray, i));
         i++;
       }
@@ -61,15 +61,15 @@ class ResolveBidiLevels {
     isolateDepth = 0.0;
     {
       var i:Dynamic = start;
-      while (_Runtime.truthy(_Runtime.compare(i, end, '<'))) {
+      while ((cast ((cast i : Float) < (cast end : Float)) : Bool)) {
         var t:Dynamic = _Runtime.getIndex(types, i);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(t, 'LRI'), function():Dynamic return cast _Runtime.strictEquals(t, 'RLI')), function():Dynamic return cast _Runtime.strictEquals(t, 'FSI')))) {
+        if ((cast ((cast ((cast _Runtime.strictEquals(t, 'LRI') : Bool) || (cast _Runtime.strictEquals(t, 'RLI') : Bool)) : Bool) || (cast _Runtime.strictEquals(t, 'FSI') : Bool)) : Bool)) {
           isolateDepth++;
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(t, 'PDI'))) {
-          if (_Runtime.truthy(_Runtime.compare(isolateDepth, 0.0, '>'))) { isolateDepth--; }
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(isolateDepth, 0.0))) {
-          if (_Runtime.truthy(_Runtime.strictEquals(t, 'L'))) { return cast 0.0; }
-          if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(t, 'R'), function():Dynamic return cast _Runtime.strictEquals(t, 'AL')))) { return cast 1.0; }
+        } else { if ((cast _Runtime.strictEquals(t, 'PDI') : Bool)) {
+          if ((cast ((cast isolateDepth : Float) > (cast 0.0 : Float)) : Bool)) { isolateDepth--; }
+        } else { if ((cast _Runtime.strictEquals(isolateDepth, 0.0) : Bool)) {
+          if ((cast _Runtime.strictEquals(t, 'L') : Bool)) { return cast 0.0; }
+          if ((cast ((cast _Runtime.strictEquals(t, 'R') : Bool) || (cast _Runtime.strictEquals(t, 'AL') : Bool)) : Bool)) { return cast 1.0; }
         } } }
         i++;
       }
@@ -83,11 +83,11 @@ class ResolveBidiLevels {
     stack = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(types, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(types, 'length') : Float)) : Bool)) {
         var t:Dynamic = _Runtime.getIndex(types, i);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(t, 'LRI'), function():Dynamic return cast _Runtime.strictEquals(t, 'RLI')), function():Dynamic return cast _Runtime.strictEquals(t, 'FSI')))) {
+        if ((cast ((cast ((cast _Runtime.strictEquals(t, 'LRI') : Bool) || (cast _Runtime.strictEquals(t, 'RLI') : Bool)) : Bool) || (cast _Runtime.strictEquals(t, 'FSI') : Bool)) : Bool)) {
           _Runtime.callProperty(stack, 'push', cast ([i] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(t, 'PDI'), function():Dynamic return cast _Runtime.compare(_Runtime.field(stack, 'length'), 0.0, '>')))) {
+        } else { if ((cast ((cast _Runtime.strictEquals(t, 'PDI') : Bool) && (cast ((cast _Runtime.field(stack, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
           var initiator:Dynamic = (cast _Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>)) : Float);
           _Runtime.setIndex(matchingPdi, initiator, i);
           _Runtime.setIndex(matchingInitiator, i, initiator);
@@ -114,7 +114,7 @@ class ResolveBidiLevels {
     validIsolate = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(original, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(original, 'length') : Float)) : Bool)) {
         var t:Dynamic = _Runtime.getIndex(original, i);
         var top:Dynamic = (_Runtime.field(stackLevel, 'length') - 1.0);
         {
@@ -123,12 +123,12 @@ class ResolveBidiLevels {
             {
               _Runtime.setIndex(levelArray, i, _Runtime.getIndex(stackLevel, top));
               _Runtime.setIndex(working, i, 'BN');
-              var newLevel:Dynamic = _Runtime.select(_Runtime.orValue(_Runtime.strictEquals(t, 'RLE'), function():Dynamic return cast _Runtime.strictEquals(t, 'RLO')), function():Dynamic return cast _Runtime.callValue(ResolveBidiLevels.nextOdd__resolveBidiLevels, cast ([_Runtime.getIndex(stackLevel, top)] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(ResolveBidiLevels.nextEven__resolveBidiLevels, cast ([_Runtime.getIndex(stackLevel, top)] : Array<Dynamic>)));
-              if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(newLevel, MAX_DEPTH, '<='), function():Dynamic return cast _Runtime.strictEquals(overflowIsolate, 0.0)), function():Dynamic return cast _Runtime.strictEquals(overflowEmbedding, 0.0)))) {
+              var newLevel:Dynamic = ((cast ((cast _Runtime.strictEquals(t, 'RLE') : Bool) || (cast _Runtime.strictEquals(t, 'RLO') : Bool)) : Bool) ? (cast _Runtime.callValue(ResolveBidiLevels.nextOdd__resolveBidiLevels, cast ([_Runtime.getIndex(stackLevel, top)] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(ResolveBidiLevels.nextEven__resolveBidiLevels, cast ([_Runtime.getIndex(stackLevel, top)] : Array<Dynamic>)) : Dynamic));
+              if ((cast ((cast ((cast ((cast newLevel : Float) <= (cast MAX_DEPTH : Float)) : Bool) && (cast _Runtime.strictEquals(overflowIsolate, 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(overflowEmbedding, 0.0) : Bool)) : Bool)) {
                 _Runtime.callProperty(stackLevel, 'push', cast ([newLevel] : Array<Dynamic>));
-                _Runtime.callProperty(stackOverride, 'push', cast ([_Runtime.select(_Runtime.strictEquals(t, 'RLO'), function():Dynamic return cast 'R', function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(t, 'LRO'), function():Dynamic return cast 'L', function():Dynamic return cast null))] : Array<Dynamic>));
+                _Runtime.callProperty(stackOverride, 'push', cast ([((cast _Runtime.strictEquals(t, 'RLO') : Bool) ? (cast 'R' : Dynamic) : (cast ((cast _Runtime.strictEquals(t, 'LRO') : Bool) ? (cast 'L' : Dynamic) : (cast null : Dynamic)) : Dynamic))] : Array<Dynamic>));
                 _Runtime.callProperty(stackIsolate, 'push', cast ([false] : Array<Dynamic>));
-              } else { if (_Runtime.truthy(_Runtime.strictEquals(overflowIsolate, 0.0))) {
+              } else { if ((cast _Runtime.strictEquals(overflowIsolate, 0.0) : Bool)) {
                 overflowEmbedding++;
               } }
             }
@@ -136,11 +136,11 @@ class ResolveBidiLevels {
           else if (__switchValue == 'RLI' || __switchValue == 'LRI' || __switchValue == 'FSI') {
             {
               _Runtime.setIndex(levelArray, i, _Runtime.getIndex(stackLevel, top));
-              if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(stackOverride, top), null))) { _Runtime.setIndex(working, i, (cast _Runtime.getIndex(stackOverride, top) : BidiClass)); }
+              if ((cast !_Runtime.strictEquals(_Runtime.getIndex(stackOverride, top), null) : Bool)) { _Runtime.setIndex(working, i, (cast _Runtime.getIndex(stackOverride, top) : BidiClass)); }
               var asRtl:Dynamic = _Runtime.strictEquals(t, 'RLI');
-              if (_Runtime.truthy(_Runtime.strictEquals(t, 'FSI'))) { (asRtl = cast (_Runtime.strictEquals(_Runtime.callValue(ResolveBidiLevels.computeParagraphLevel__resolveBidiLevels, cast ([original, (i + 1.0), _Runtime.getIndex(matchingPdi, i)] : Array<Dynamic>)), 1.0) : Dynamic)); }
-              var newLevel:Dynamic = _Runtime.select(asRtl, function():Dynamic return cast _Runtime.callValue(ResolveBidiLevels.nextOdd__resolveBidiLevels, cast ([_Runtime.getIndex(stackLevel, top)] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(ResolveBidiLevels.nextEven__resolveBidiLevels, cast ([_Runtime.getIndex(stackLevel, top)] : Array<Dynamic>)));
-              if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(newLevel, MAX_DEPTH, '<='), function():Dynamic return cast _Runtime.strictEquals(overflowIsolate, 0.0)), function():Dynamic return cast _Runtime.strictEquals(overflowEmbedding, 0.0)))) {
+              if ((cast _Runtime.strictEquals(t, 'FSI') : Bool)) { (asRtl = cast (_Runtime.strictEquals(_Runtime.callValue(ResolveBidiLevels.computeParagraphLevel__resolveBidiLevels, cast ([original, (i + 1.0), _Runtime.getIndex(matchingPdi, i)] : Array<Dynamic>)), 1.0) : Dynamic)); }
+              var newLevel:Dynamic = ((cast asRtl : Bool) ? (cast _Runtime.callValue(ResolveBidiLevels.nextOdd__resolveBidiLevels, cast ([_Runtime.getIndex(stackLevel, top)] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(ResolveBidiLevels.nextEven__resolveBidiLevels, cast ([_Runtime.getIndex(stackLevel, top)] : Array<Dynamic>)) : Dynamic));
+              if ((cast ((cast ((cast ((cast newLevel : Float) <= (cast MAX_DEPTH : Float)) : Bool) && (cast _Runtime.strictEquals(overflowIsolate, 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(overflowEmbedding, 0.0) : Bool)) : Bool)) {
                 validIsolate++;
                 _Runtime.callProperty(stackLevel, 'push', cast ([newLevel] : Array<Dynamic>));
                 _Runtime.callProperty(stackOverride, 'push', cast ([null] : Array<Dynamic>));
@@ -152,11 +152,11 @@ class ResolveBidiLevels {
           }
           else if (__switchValue == 'PDI') {
             {
-              if (_Runtime.truthy(_Runtime.compare(overflowIsolate, 0.0, '>'))) {
+              if ((cast ((cast overflowIsolate : Float) > (cast 0.0 : Float)) : Bool)) {
                 overflowIsolate--;
-              } else { if (_Runtime.truthy(_Runtime.compare(validIsolate, 0.0, '>'))) {
+              } else { if ((cast ((cast validIsolate : Float) > (cast 0.0 : Float)) : Bool)) {
                 (overflowEmbedding = cast (0.0 : Dynamic));
-                while (_Runtime.truthy(!_Runtime.truthy(_Runtime.getIndex(stackIsolate, (_Runtime.field(stackLevel, 'length') - 1.0))))) {
+                while ((cast !(cast _Runtime.getIndex(stackIsolate, (_Runtime.field(stackLevel, 'length') - 1.0)) : Bool) : Bool)) {
                   _Runtime.callProperty(stackLevel, 'pop', cast ([] : Array<Dynamic>));
                   _Runtime.callProperty(stackOverride, 'pop', cast ([] : Array<Dynamic>));
                   _Runtime.callProperty(stackIsolate, 'pop', cast ([] : Array<Dynamic>));
@@ -168,15 +168,15 @@ class ResolveBidiLevels {
               } }
               var newTop:Dynamic = (_Runtime.field(stackLevel, 'length') - 1.0);
               _Runtime.setIndex(levelArray, i, _Runtime.getIndex(stackLevel, newTop));
-              if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(stackOverride, newTop), null))) { _Runtime.setIndex(working, i, (cast _Runtime.getIndex(stackOverride, newTop) : BidiClass)); }
+              if ((cast !_Runtime.strictEquals(_Runtime.getIndex(stackOverride, newTop), null) : Bool)) { _Runtime.setIndex(working, i, (cast _Runtime.getIndex(stackOverride, newTop) : BidiClass)); }
             }
           }
           else if (__switchValue == 'PDF') {
             {
-              if (_Runtime.truthy(_Runtime.compare(overflowIsolate, 0.0, '>'))) {
-              } else { if (_Runtime.truthy(_Runtime.compare(overflowEmbedding, 0.0, '>'))) {
+              if ((cast ((cast overflowIsolate : Float) > (cast 0.0 : Float)) : Bool)) {
+              } else { if ((cast ((cast overflowEmbedding : Float) > (cast 0.0 : Float)) : Bool)) {
                 overflowEmbedding--;
-              } else { if (_Runtime.truthy(_Runtime.andValue(!_Runtime.truthy(_Runtime.getIndex(stackIsolate, top)), function():Dynamic return cast _Runtime.compare(_Runtime.field(stackLevel, 'length'), 2.0, '>=')))) {
+              } else { if ((cast ((cast !(cast _Runtime.getIndex(stackIsolate, top) : Bool) : Bool) && (cast ((cast _Runtime.field(stackLevel, 'length') : Float) >= (cast 2.0 : Float)) : Bool)) : Bool)) {
                 _Runtime.callProperty(stackLevel, 'pop', cast ([] : Array<Dynamic>));
                 _Runtime.callProperty(stackOverride, 'pop', cast ([] : Array<Dynamic>));
                 _Runtime.callProperty(stackIsolate, 'pop', cast ([] : Array<Dynamic>));
@@ -204,7 +204,7 @@ class ResolveBidiLevels {
           else  {
             {
               _Runtime.setIndex(levelArray, i, _Runtime.getIndex(stackLevel, top));
-              if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(stackOverride, top), null))) { _Runtime.setIndex(working, i, (cast _Runtime.getIndex(stackOverride, top) : BidiClass)); }
+              if ((cast !_Runtime.strictEquals(_Runtime.getIndex(stackOverride, top), null) : Bool)) { _Runtime.setIndex(working, i, (cast _Runtime.getIndex(stackOverride, top) : BidiClass)); }
             }
           }
         }
@@ -223,22 +223,22 @@ class ResolveBidiLevels {
     kept = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, length, '<'))) {
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(working, i), 'BN'))) { _Runtime.callProperty(kept, 'push', cast ([i] : Array<Dynamic>)); }
+      while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
+        if ((cast !_Runtime.strictEquals(_Runtime.getIndex(working, i), 'BN') : Bool)) { _Runtime.callProperty(kept, 'push', cast ([i] : Array<Dynamic>)); }
         i++;
       }
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(kept, 'length'), 0.0))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(kept, 'length'), 0.0) : Bool)) { return; }
     runs = cast ([] : Array<Dynamic>);
     runStart = 0.0;
     {
       var k:Dynamic = 1.0;
-      while (_Runtime.truthy(_Runtime.compare(k, _Runtime.field(kept, 'length'), '<='))) {
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(k, _Runtime.field(kept, 'length')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.getIndex(levelArray, _Runtime.getIndex(kept, k)), _Runtime.getIndex(levelArray, _Runtime.getIndex(kept, runStart)))))) {
+      while ((cast ((cast k : Float) <= (cast _Runtime.field(kept, 'length') : Float)) : Bool)) {
+        if ((cast ((cast _Runtime.strictEquals(k, _Runtime.field(kept, 'length')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.getIndex(levelArray, _Runtime.getIndex(kept, k)), _Runtime.getIndex(levelArray, _Runtime.getIndex(kept, runStart))) : Bool)) : Bool)) {
           var indices:Array<Float> = cast ([] : Array<Dynamic>);
           {
             var m:Dynamic = runStart;
-            while (_Runtime.truthy(_Runtime.compare(m, k, '<'))) {
+            while ((cast ((cast m : Float) < (cast k : Float)) : Bool)) {
               _Runtime.callProperty(indices, 'push', cast ([_Runtime.getIndex(kept, m)] : Array<Dynamic>));
               m++;
             }
@@ -252,16 +252,16 @@ class ResolveBidiLevels {
     runByFirst = _Runtime.construct(_Runtime.globalValue('Map'), []);
     {
       var r:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(r, _Runtime.field(runs, 'length'), '<'))) {
+      while ((cast ((cast r : Float) < (cast _Runtime.field(runs, 'length') : Float)) : Bool)) {
         ((cast runByFirst : flighthq._internal._Map).set(_Runtime.getIndex(_Runtime.field(_Runtime.getIndex(runs, r), 'indices'), 0.0), r));
         r++;
       }
     }
     {
       var r:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(r, _Runtime.field(runs, 'length'), '<'))) {
+      while ((cast ((cast r : Float) < (cast _Runtime.field(runs, 'length') : Float)) : Bool)) {
         var firstIdx:Dynamic = _Runtime.getIndex(_Runtime.field(_Runtime.getIndex(runs, r), 'indices'), 0.0);
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.getIndex(original, firstIdx), 'PDI'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.getIndex(matchingInitiator, firstIdx), -1.0)))) { r++; continue; }
+        if ((cast ((cast _Runtime.strictEquals(_Runtime.getIndex(original, firstIdx), 'PDI') : Bool) && (cast !_Runtime.strictEquals(_Runtime.getIndex(matchingInitiator, firstIdx), -1.0) : Bool)) : Bool)) { r++; continue; }
         var sequence:Array<Float> = cast ([] : Array<Dynamic>);
         var keptStart:Dynamic = _Runtime.field(_Runtime.getIndex(runs, r), 'keptStart');
         var keptEnd:Dynamic = _Runtime.field(_Runtime.getIndex(runs, r), 'keptEnd');
@@ -271,7 +271,7 @@ class ResolveBidiLevels {
             var run:Dynamic = _Runtime.getIndex(runs, current);
             {
               var m:Dynamic = 0.0;
-              while (_Runtime.truthy(_Runtime.compare(m, _Runtime.field(_Runtime.field(run, 'indices'), 'length'), '<'))) {
+              while ((cast ((cast m : Float) < (cast _Runtime.field(_Runtime.field(run, 'indices'), 'length') : Float)) : Bool)) {
                 _Runtime.callProperty(sequence, 'push', cast ([_Runtime.getIndex(_Runtime.field(run, 'indices'), m)] : Array<Dynamic>));
                 m++;
               }
@@ -279,9 +279,9 @@ class ResolveBidiLevels {
             (keptEnd = cast (_Runtime.field(run, 'keptEnd') : Dynamic));
             var lastIdx:Dynamic = _Runtime.getIndex(_Runtime.field(run, 'indices'), (_Runtime.field(_Runtime.field(run, 'indices'), 'length') - 1.0));
             var lastType:Dynamic = _Runtime.getIndex(original, lastIdx);
-            if (_Runtime.truthy(_Runtime.andValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(lastType, 'LRI'), function():Dynamic return cast _Runtime.strictEquals(lastType, 'RLI')), function():Dynamic return cast _Runtime.strictEquals(lastType, 'FSI')), function():Dynamic return cast _Runtime.compare(_Runtime.getIndex(matchingPdi, lastIdx), length, '<')))) {
+            if ((cast ((cast _Runtime.orValue(((cast _Runtime.strictEquals(lastType, 'LRI') : Bool) || (cast _Runtime.strictEquals(lastType, 'RLI') : Bool)), function():Dynamic return cast _Runtime.strictEquals(lastType, 'FSI')) : Bool) && (cast ((cast _Runtime.getIndex(matchingPdi, lastIdx) : Float) < (cast length : Float)) : Bool)) : Bool)) {
               var next:Dynamic = ((cast runByFirst : flighthq._internal._Map).get(_Runtime.getIndex(matchingPdi, lastIdx)));
-              if (_Runtime.truthy(_Runtime.strictEquals(next, _Runtime.field(_Runtime, 'UNDEFINED')))) { break; }
+              if ((cast _Runtime.strictEquals(next, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { break; }
               (current = cast (next : Dynamic));
             } else {
               break;
@@ -310,18 +310,18 @@ class ResolveBidiLevels {
     var embeddingDir:BidiClass = cast _Runtime.UNDEFINED;
     var even:Dynamic = cast _Runtime.UNDEFINED;
     seqLevel = _Runtime.getIndex(levelArray, _Runtime.getIndex(sequence, 0.0));
-    prevLevel = _Runtime.select(_Runtime.compare(keptStart, 0.0, '>'), function():Dynamic return cast _Runtime.getIndex(levelArray, _Runtime.getIndex(kept, (keptStart - 1.0))), function():Dynamic return cast paragraphLevel);
-    sos = _Runtime.select(_Runtime.strictEquals(_Runtime.fmod(HxMath.max(seqLevel, prevLevel), 2.0), 1.0), function():Dynamic return cast 'R', function():Dynamic return cast 'L');
+    prevLevel = ((cast ((cast keptStart : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.getIndex(levelArray, _Runtime.getIndex(kept, (keptStart - 1.0))) : Dynamic) : (cast paragraphLevel : Dynamic));
+    sos = ((cast _Runtime.strictEquals(_Runtime.fmod(HxMath.max(seqLevel, prevLevel), 2.0), 1.0) : Bool) ? (cast 'R' : Dynamic) : (cast 'L' : Dynamic));
     lastIdx = _Runtime.getIndex(sequence, (_Runtime.field(sequence, 'length') - 1.0));
     lastType = _Runtime.getIndex(original, lastIdx);
-    endsUnmatchedIsolate = _Runtime.andValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(lastType, 'LRI'), function():Dynamic return cast _Runtime.strictEquals(lastType, 'RLI')), function():Dynamic return cast _Runtime.strictEquals(lastType, 'FSI')), function():Dynamic return cast _Runtime.compare(_Runtime.getIndex(matchingPdi, lastIdx), _Runtime.field(original, 'length'), '>='));
-    nextLevel = _Runtime.select(endsUnmatchedIsolate, function():Dynamic return cast paragraphLevel, function():Dynamic return cast _Runtime.select(_Runtime.compare(keptEnd, _Runtime.field(kept, 'length'), '<'), function():Dynamic return cast _Runtime.getIndex(levelArray, _Runtime.getIndex(kept, keptEnd)), function():Dynamic return cast paragraphLevel));
-    eos = _Runtime.select(_Runtime.strictEquals(_Runtime.fmod(HxMath.max(seqLevel, nextLevel), 2.0), 1.0), function():Dynamic return cast 'R', function():Dynamic return cast 'L');
+    endsUnmatchedIsolate = ((cast _Runtime.orValue(((cast _Runtime.strictEquals(lastType, 'LRI') : Bool) || (cast _Runtime.strictEquals(lastType, 'RLI') : Bool)), function():Dynamic return cast _Runtime.strictEquals(lastType, 'FSI')) : Bool) && (cast ((cast _Runtime.getIndex(matchingPdi, lastIdx) : Float) >= (cast _Runtime.field(original, 'length') : Float)) : Bool));
+    nextLevel = ((cast endsUnmatchedIsolate : Bool) ? (cast paragraphLevel : Dynamic) : (cast ((cast ((cast keptEnd : Float) < (cast _Runtime.field(kept, 'length') : Float)) : Bool) ? (cast _Runtime.getIndex(levelArray, _Runtime.getIndex(kept, keptEnd)) : Dynamic) : (cast paragraphLevel : Dynamic)) : Dynamic));
+    eos = ((cast _Runtime.strictEquals(_Runtime.fmod(HxMath.max(seqLevel, nextLevel), 2.0), 1.0) : Bool) ? (cast 'R' : Dynamic) : (cast 'L' : Dynamic));
     len = _Runtime.field(sequence, 'length');
     ty = _Runtime.createArray(len);
     {
       var k:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(k, len, '<'))) {
+      while ((cast ((cast k : Float) < (cast len : Float)) : Bool)) {
         _Runtime.setIndex(ty, k, _Runtime.getIndex(working, _Runtime.getIndex(sequence, k)));
         k++;
       }
@@ -329,9 +329,9 @@ class ResolveBidiLevels {
     prev = sos;
     {
       var k:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(k, len, '<'))) {
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.getIndex(ty, k), 'NSM'))) {
-          _Runtime.setIndex(ty, k, _Runtime.select(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(prev, 'LRI'), function():Dynamic return cast _Runtime.strictEquals(prev, 'RLI')), function():Dynamic return cast _Runtime.strictEquals(prev, 'FSI')), function():Dynamic return cast _Runtime.strictEquals(prev, 'PDI')), function():Dynamic return cast 'ON', function():Dynamic return cast prev));
+      while ((cast ((cast k : Float) < (cast len : Float)) : Bool)) {
+        if ((cast _Runtime.strictEquals(_Runtime.getIndex(ty, k), 'NSM') : Bool)) {
+          _Runtime.setIndex(ty, k, ((cast ((cast ((cast ((cast _Runtime.strictEquals(prev, 'LRI') : Bool) || (cast _Runtime.strictEquals(prev, 'RLI') : Bool)) : Bool) || (cast _Runtime.strictEquals(prev, 'FSI') : Bool)) : Bool) || (cast _Runtime.strictEquals(prev, 'PDI') : Bool)) : Bool) ? (cast 'ON' : Dynamic) : (cast prev : Dynamic)));
         }
         (prev = cast (_Runtime.getIndex(ty, k) : Dynamic));
         k++;
@@ -340,38 +340,38 @@ class ResolveBidiLevels {
     strong = sos;
     {
       var k:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(k, len, '<'))) {
+      while ((cast ((cast k : Float) < (cast len : Float)) : Bool)) {
         var c:Dynamic = _Runtime.getIndex(ty, k);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(c, 'L'), function():Dynamic return cast _Runtime.strictEquals(c, 'R')), function():Dynamic return cast _Runtime.strictEquals(c, 'AL')))) { (strong = cast (c : Dynamic)); } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(c, 'EN'), function():Dynamic return cast _Runtime.strictEquals(strong, 'AL')))) { _Runtime.setIndex(ty, k, 'AN'); } }
+        if ((cast ((cast ((cast _Runtime.strictEquals(c, 'L') : Bool) || (cast _Runtime.strictEquals(c, 'R') : Bool)) : Bool) || (cast _Runtime.strictEquals(c, 'AL') : Bool)) : Bool)) { (strong = cast (c : Dynamic)); } else { if ((cast ((cast _Runtime.strictEquals(c, 'EN') : Bool) && (cast _Runtime.strictEquals(strong, 'AL') : Bool)) : Bool)) { _Runtime.setIndex(ty, k, 'AN'); } }
         k++;
       }
     }
     {
       var k:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(k, len, '<'))) {
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.getIndex(ty, k), 'AL'))) { _Runtime.setIndex(ty, k, 'R'); }
+      while ((cast ((cast k : Float) < (cast len : Float)) : Bool)) {
+        if ((cast _Runtime.strictEquals(_Runtime.getIndex(ty, k), 'AL') : Bool)) { _Runtime.setIndex(ty, k, 'R'); }
         k++;
       }
     }
     {
       var k:Dynamic = 1.0;
-      while (_Runtime.truthy(_Runtime.compare(k, (len - 1.0), '<'))) {
+      while ((cast ((cast k : Float) < (cast (len - 1.0) : Float)) : Bool)) {
         var c:Dynamic = _Runtime.getIndex(ty, k);
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(c, 'ES'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(ty, (k - 1.0)), 'EN')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(ty, (k + 1.0)), 'EN')))) { _Runtime.setIndex(ty, k, 'EN'); } else { if (_Runtime.truthy(_Runtime.strictEquals(c, 'CS'))) {
-          if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.getIndex(ty, (k - 1.0)), 'EN'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(ty, (k + 1.0)), 'EN')))) { _Runtime.setIndex(ty, k, 'EN'); } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.getIndex(ty, (k - 1.0)), 'AN'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(ty, (k + 1.0)), 'AN')))) { _Runtime.setIndex(ty, k, 'AN'); } }
+        if ((cast ((cast ((cast _Runtime.strictEquals(c, 'ES') : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(ty, (k - 1.0)), 'EN') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(ty, (k + 1.0)), 'EN') : Bool)) : Bool)) { _Runtime.setIndex(ty, k, 'EN'); } else { if ((cast _Runtime.strictEquals(c, 'CS') : Bool)) {
+          if ((cast ((cast _Runtime.strictEquals(_Runtime.getIndex(ty, (k - 1.0)), 'EN') : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(ty, (k + 1.0)), 'EN') : Bool)) : Bool)) { _Runtime.setIndex(ty, k, 'EN'); } else { if ((cast ((cast _Runtime.strictEquals(_Runtime.getIndex(ty, (k - 1.0)), 'AN') : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(ty, (k + 1.0)), 'AN') : Bool)) : Bool)) { _Runtime.setIndex(ty, k, 'AN'); } }
         } }
         k++;
       }
     }
     {
       var k:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(k, len, '<'))) {
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.getIndex(ty, k), 'ET'))) {
+      while ((cast ((cast k : Float) < (cast len : Float)) : Bool)) {
+        if ((cast _Runtime.strictEquals(_Runtime.getIndex(ty, k), 'ET') : Bool)) {
           var j:Dynamic = k;
-          while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(j, len, '<'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(ty, j), 'ET')))) { j++; }
-          var before:Dynamic = _Runtime.select(_Runtime.compare(k, 0.0, '>'), function():Dynamic return cast _Runtime.getIndex(ty, (k - 1.0)), function():Dynamic return cast sos);
-          var after:Dynamic = _Runtime.select(_Runtime.compare(j, len, '<'), function():Dynamic return cast _Runtime.getIndex(ty, j), function():Dynamic return cast eos);
-          if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(before, 'EN'), function():Dynamic return cast _Runtime.strictEquals(after, 'EN')))) { {   var m:Dynamic = k;   while (_Runtime.truthy(_Runtime.compare(m, j, '<'))) {     _Runtime.setIndex(ty, m, 'EN');     m++;   } } }
+          while ((cast ((cast ((cast j : Float) < (cast len : Float)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(ty, j), 'ET') : Bool)) : Bool)) { j++; }
+          var before:Dynamic = ((cast ((cast k : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.getIndex(ty, (k - 1.0)) : Dynamic) : (cast sos : Dynamic));
+          var after:Dynamic = ((cast ((cast j : Float) < (cast len : Float)) : Bool) ? (cast _Runtime.getIndex(ty, j) : Dynamic) : (cast eos : Dynamic));
+          if ((cast ((cast _Runtime.strictEquals(before, 'EN') : Bool) || (cast _Runtime.strictEquals(after, 'EN') : Bool)) : Bool)) { {   var m:Dynamic = k;   while ((cast ((cast m : Float) < (cast j : Float)) : Bool)) {     _Runtime.setIndex(ty, m, 'EN');     m++;   } } }
           (k = cast (j : Dynamic));
         } else {
           k++;
@@ -380,33 +380,33 @@ class ResolveBidiLevels {
     }
     {
       var k:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(k, len, '<'))) {
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(_Runtime.getIndex(ty, k), 'ES'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(ty, k), 'ET')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(ty, k), 'CS')))) { _Runtime.setIndex(ty, k, 'ON'); }
+      while ((cast ((cast k : Float) < (cast len : Float)) : Bool)) {
+        if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.getIndex(ty, k), 'ES') : Bool) || (cast _Runtime.strictEquals(_Runtime.getIndex(ty, k), 'ET') : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.getIndex(ty, k), 'CS') : Bool)) : Bool)) { _Runtime.setIndex(ty, k, 'ON'); }
         k++;
       }
     }
     (strong = cast (sos : Dynamic));
     {
       var k:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(k, len, '<'))) {
+      while ((cast ((cast k : Float) < (cast len : Float)) : Bool)) {
         var c:Dynamic = _Runtime.getIndex(ty, k);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(c, 'L'), function():Dynamic return cast _Runtime.strictEquals(c, 'R')))) { (strong = cast (c : Dynamic)); } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(c, 'EN'), function():Dynamic return cast _Runtime.strictEquals(strong, 'L')))) { _Runtime.setIndex(ty, k, 'L'); } }
+        if ((cast ((cast _Runtime.strictEquals(c, 'L') : Bool) || (cast _Runtime.strictEquals(c, 'R') : Bool)) : Bool)) { (strong = cast (c : Dynamic)); } else { if ((cast ((cast _Runtime.strictEquals(c, 'EN') : Bool) && (cast _Runtime.strictEquals(strong, 'L') : Bool)) : Bool)) { _Runtime.setIndex(ty, k, 'L'); } }
         k++;
       }
     }
-    embeddingDir = _Runtime.select(_Runtime.strictEquals(_Runtime.fmod(seqLevel, 2.0), 1.0), function():Dynamic return cast 'R', function():Dynamic return cast 'L');
+    embeddingDir = ((cast _Runtime.strictEquals(_Runtime.fmod(seqLevel, 2.0), 1.0) : Bool) ? (cast 'R' : Dynamic) : (cast 'L' : Dynamic));
     {
       var k:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(k, len, '<'))) {
-        if (_Runtime.truthy(_Runtime.callValue(ResolveBidiLevels.isNeutralOrIsolate__resolveBidiLevels, cast ([_Runtime.getIndex(ty, k)] : Array<Dynamic>)))) {
+      while ((cast ((cast k : Float) < (cast len : Float)) : Bool)) {
+        if ((cast _Runtime.callValue(ResolveBidiLevels.isNeutralOrIsolate__resolveBidiLevels, cast ([_Runtime.getIndex(ty, k)] : Array<Dynamic>)) : Bool)) {
           var j:Dynamic = k;
-          while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(j, len, '<'), function():Dynamic return cast _Runtime.callValue(ResolveBidiLevels.isNeutralOrIsolate__resolveBidiLevels, cast ([_Runtime.getIndex(ty, j)] : Array<Dynamic>))))) { j++; }
-          var before:Dynamic = _Runtime.select(_Runtime.compare(k, 0.0, '>'), function():Dynamic return cast _Runtime.callValue(ResolveBidiLevels.neutralDirection__resolveBidiLevels, cast ([_Runtime.getIndex(ty, (k - 1.0))] : Array<Dynamic>)), function():Dynamic return cast sos);
-          var after:Dynamic = _Runtime.select(_Runtime.compare(j, len, '<'), function():Dynamic return cast _Runtime.callValue(ResolveBidiLevels.neutralDirection__resolveBidiLevels, cast ([_Runtime.getIndex(ty, j)] : Array<Dynamic>)), function():Dynamic return cast eos);
-          var resolved:Dynamic = _Runtime.select(_Runtime.strictEquals(before, after), function():Dynamic return cast before, function():Dynamic return cast embeddingDir);
+          while ((cast ((cast ((cast j : Float) < (cast len : Float)) : Bool) && (cast _Runtime.callValue(ResolveBidiLevels.isNeutralOrIsolate__resolveBidiLevels, cast ([_Runtime.getIndex(ty, j)] : Array<Dynamic>)) : Bool)) : Bool)) { j++; }
+          var before:Dynamic = ((cast ((cast k : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callValue(ResolveBidiLevels.neutralDirection__resolveBidiLevels, cast ([_Runtime.getIndex(ty, (k - 1.0))] : Array<Dynamic>)) : Dynamic) : (cast sos : Dynamic));
+          var after:Dynamic = ((cast ((cast j : Float) < (cast len : Float)) : Bool) ? (cast _Runtime.callValue(ResolveBidiLevels.neutralDirection__resolveBidiLevels, cast ([_Runtime.getIndex(ty, j)] : Array<Dynamic>)) : Dynamic) : (cast eos : Dynamic));
+          var resolved:Dynamic = ((cast _Runtime.strictEquals(before, after) : Bool) ? (cast before : Dynamic) : (cast embeddingDir : Dynamic));
           {
             var m:Dynamic = k;
-            while (_Runtime.truthy(_Runtime.compare(m, j, '<'))) {
+            while ((cast ((cast m : Float) < (cast j : Float)) : Bool)) {
               _Runtime.setIndex(ty, m, resolved);
               m++;
             }
@@ -420,12 +420,12 @@ class ResolveBidiLevels {
     even = _Runtime.strictEquals(_Runtime.fmod(seqLevel, 2.0), 0.0);
     {
       var k:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(k, len, '<'))) {
+      while ((cast ((cast k : Float) < (cast len : Float)) : Bool)) {
         var c:Dynamic = _Runtime.getIndex(ty, k);
         var lvl:Dynamic = seqLevel;
-        if (_Runtime.truthy(even)) {
-          if (_Runtime.truthy(_Runtime.strictEquals(c, 'R'))) { (lvl = cast ((seqLevel + 1.0) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(c, 'AN'), function():Dynamic return cast _Runtime.strictEquals(c, 'EN')))) { (lvl = cast ((seqLevel + 2.0) : Dynamic)); } }
-        } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(c, 'L'), function():Dynamic return cast _Runtime.strictEquals(c, 'EN')), function():Dynamic return cast _Runtime.strictEquals(c, 'AN')))) {
+        if ((cast even : Bool)) {
+          if ((cast _Runtime.strictEquals(c, 'R') : Bool)) { (lvl = cast ((seqLevel + 1.0) : Dynamic)); } else { if ((cast ((cast _Runtime.strictEquals(c, 'AN') : Bool) || (cast _Runtime.strictEquals(c, 'EN') : Bool)) : Bool)) { (lvl = cast ((seqLevel + 2.0) : Dynamic)); } }
+        } else { if ((cast ((cast ((cast _Runtime.strictEquals(c, 'L') : Bool) || (cast _Runtime.strictEquals(c, 'EN') : Bool)) : Bool) || (cast _Runtime.strictEquals(c, 'AN') : Bool)) : Bool)) {
           (lvl = cast ((seqLevel + 1.0) : Dynamic));
         } }
         _Runtime.setIndex(levelArray, _Runtime.getIndex(sequence, k), lvl);
@@ -439,13 +439,13 @@ class ResolveBidiLevels {
     length = _Runtime.field(original, 'length');
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, length, '<'))) {
+      while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
         var t:Dynamic = _Runtime.getIndex(original, i);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(t, 'B'), function():Dynamic return cast _Runtime.strictEquals(t, 'S')))) {
+        if ((cast ((cast _Runtime.strictEquals(t, 'B') : Bool) || (cast _Runtime.strictEquals(t, 'S') : Bool)) : Bool)) {
           _Runtime.setIndex(levelArray, i, paragraphLevel);
           {
             var j:Dynamic = (i - 1.0);
-            while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(j, 0.0, '>='), function():Dynamic return cast _Runtime.callValue(ResolveBidiLevels.isResetType__resolveBidiLevels, cast ([_Runtime.getIndex(original, j)] : Array<Dynamic>))))) {
+            while ((cast ((cast ((cast j : Float) >= (cast 0.0 : Float)) : Bool) && (cast _Runtime.callValue(ResolveBidiLevels.isResetType__resolveBidiLevels, cast ([_Runtime.getIndex(original, j)] : Array<Dynamic>)) : Bool)) : Bool)) {
               _Runtime.setIndex(levelArray, j, paragraphLevel);
               j--;
             }
@@ -456,7 +456,7 @@ class ResolveBidiLevels {
     }
     {
       var j:Dynamic = (length - 1.0);
-      while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(j, 0.0, '>='), function():Dynamic return cast _Runtime.callValue(ResolveBidiLevels.isResetType__resolveBidiLevels, cast ([_Runtime.getIndex(original, j)] : Array<Dynamic>))))) {
+      while ((cast ((cast ((cast j : Float) >= (cast 0.0 : Float)) : Bool) && (cast _Runtime.callValue(ResolveBidiLevels.isResetType__resolveBidiLevels, cast ([_Runtime.getIndex(original, j)] : Array<Dynamic>)) : Bool)) : Bool)) {
         _Runtime.setIndex(levelArray, j, paragraphLevel);
         j--;
       }
@@ -464,17 +464,17 @@ class ResolveBidiLevels {
   }
 
   public static function isNeutralOrIsolate__resolveBidiLevels(t:BidiClass):Bool {
-    return cast _Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(t, 'B'), function():Dynamic return cast _Runtime.strictEquals(t, 'S')), function():Dynamic return cast _Runtime.strictEquals(t, 'WS')), function():Dynamic return cast _Runtime.strictEquals(t, 'ON')), function():Dynamic return cast _Runtime.strictEquals(t, 'FSI')), function():Dynamic return cast _Runtime.strictEquals(t, 'LRI')), function():Dynamic return cast _Runtime.strictEquals(t, 'RLI')), function():Dynamic return cast _Runtime.strictEquals(t, 'PDI'));
+    return cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(t, 'B') : Bool) || (cast _Runtime.strictEquals(t, 'S') : Bool)) : Bool) || (cast _Runtime.strictEquals(t, 'WS') : Bool)) : Bool) || (cast _Runtime.strictEquals(t, 'ON') : Bool)) : Bool) || (cast _Runtime.strictEquals(t, 'FSI') : Bool)) : Bool) || (cast _Runtime.strictEquals(t, 'LRI') : Bool)) : Bool) || (cast _Runtime.strictEquals(t, 'RLI') : Bool)) : Bool) || (cast _Runtime.strictEquals(t, 'PDI') : Bool));
     return cast null;
   }
 
   public static function isResetType__resolveBidiLevels(t:BidiClass):Bool {
-    return cast _Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(t, 'WS'), function():Dynamic return cast _Runtime.strictEquals(t, 'LRI')), function():Dynamic return cast _Runtime.strictEquals(t, 'RLI')), function():Dynamic return cast _Runtime.strictEquals(t, 'FSI')), function():Dynamic return cast _Runtime.strictEquals(t, 'PDI')), function():Dynamic return cast _Runtime.strictEquals(t, 'LRE')), function():Dynamic return cast _Runtime.strictEquals(t, 'RLE')), function():Dynamic return cast _Runtime.strictEquals(t, 'LRO')), function():Dynamic return cast _Runtime.strictEquals(t, 'RLO')), function():Dynamic return cast _Runtime.strictEquals(t, 'PDF')), function():Dynamic return cast _Runtime.strictEquals(t, 'BN'));
+    return cast _Runtime.orValue(((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(t, 'WS') : Bool) || (cast _Runtime.strictEquals(t, 'LRI') : Bool)) : Bool) || (cast _Runtime.strictEquals(t, 'RLI') : Bool)) : Bool) || (cast _Runtime.strictEquals(t, 'FSI') : Bool)) : Bool) || (cast _Runtime.strictEquals(t, 'PDI') : Bool)) : Bool) || (cast _Runtime.strictEquals(t, 'LRE') : Bool)) : Bool) || (cast _Runtime.strictEquals(t, 'RLE') : Bool)) : Bool) || (cast _Runtime.strictEquals(t, 'LRO') : Bool)) : Bool) || (cast _Runtime.strictEquals(t, 'RLO') : Bool)) : Bool) || (cast _Runtime.strictEquals(t, 'PDF') : Bool)), function():Dynamic return cast _Runtime.strictEquals(t, 'BN'));
     return cast null;
   }
 
   public static function neutralDirection__resolveBidiLevels(t:BidiClass):String {
-    return cast _Runtime.select(_Runtime.strictEquals(t, 'L'), function():Dynamic return cast 'L', function():Dynamic return cast 'R');
+    return cast ((cast _Runtime.strictEquals(t, 'L') : Bool) ? (cast 'L' : Dynamic) : (cast 'R' : Dynamic));
     return cast null;
   }
 

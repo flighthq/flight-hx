@@ -62,7 +62,7 @@ class HitTests {
   }
 
   public static function hitTestDisplayObjects(source:DisplayObject, other:DisplayObject):Bool {
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.callValue(getNodeParent, cast ([source] : Array<Dynamic>)), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.callValue(getNodeParent, cast ([other] : Array<Dynamic>)), null)))) {
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.callValue(getNodeParent, cast ([source] : Array<Dynamic>)), null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.callValue(getNodeParent, cast ([other] : Array<Dynamic>)), null) : Bool)) : Bool)) {
       return cast _Runtime.callValue(intersectsRectangle, cast ([_Runtime.callValue(getNodeWorldBoundsRectangle, cast ([source] : Array<Dynamic>)), _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([other] : Array<Dynamic>))] : Array<Dynamic>));
     }
     return cast false;
@@ -88,7 +88,7 @@ class HitTests {
   public static function hitTestNodeRegion(source:NodeAny, x:Float, y:Float, precise:Bool = false):Bool {
     var hitArea:Dynamic = cast _Runtime.UNDEFINED;
     hitArea = _Runtime.coalesce(_Runtime.optionalField(_Runtime.callValue(getNodeInteractionState, cast ([source] : Array<Dynamic>)), 'hitArea'), function():Dynamic return cast null);
-    if (_Runtime.truthy(!_Runtime.strictEquals(hitArea, null))) { return cast _Runtime.callValue(HitTests.hitAreaContainsPoint__hitTests, cast ([source, hitArea, x, y] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(hitArea, null) : Bool)) { return cast _Runtime.callValue(HitTests.hitAreaContainsPoint__hitTests, cast ([source, hitArea, x, y] : Array<Dynamic>)); }
     return cast _Runtime.callValue(HitTests.testNodeGeometry__hitTests, cast ([source, x, y, precise] : Array<Dynamic>));
     return cast null;
   }
@@ -106,25 +106,25 @@ class HitTests {
     var enabled:Dynamic = cast _Runtime.UNDEFINED;
     var hitArea:Dynamic = cast _Runtime.UNDEFINED;
     var children:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(node, 'enabled')))) { return cast null; }
+    if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return cast null; }
     state = _Runtime.callValue(getNodeInteractionState, cast ([node] : Array<Dynamic>));
     enabled = _Runtime.strictEquals(_Runtime.optionalField(state, 'hitTestEnabled'), true);
     hitArea = _Runtime.coalesce(_Runtime.optionalField(state, 'hitArea'), function():Dynamic return cast null);
-    if (_Runtime.truthy(_Runtime.andValue(enabled, function():Dynamic return cast !_Runtime.strictEquals(hitArea, null)))) {
-      return cast _Runtime.select(_Runtime.callValue(HitTests.hitAreaContainsPoint__hitTests, cast ([node, hitArea, x, y] : Array<Dynamic>)), function():Dynamic return cast node, function():Dynamic return cast null);
+    if ((cast ((cast enabled : Bool) && (cast !_Runtime.strictEquals(hitArea, null) : Bool)) : Bool)) {
+      return cast ((cast _Runtime.callValue(HitTests.hitAreaContainsPoint__hitTests, cast ([node, hitArea, x, y] : Array<Dynamic>)) : Bool) ? (cast node : Dynamic) : (cast null : Dynamic));
     }
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)), 'children');
-    if (_Runtime.truthy(!_Runtime.strictEquals(children, null))) {
+    if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
         var i:Dynamic = (_Runtime.field(children, 'length') - 1.0);
-        while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>='))) {
+        while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
           var hit:Dynamic = _Runtime.callValue(HitTests.findFirstHit__hitTests, cast ([(cast _Runtime.getIndex(children, i) : NodeAny), x, y, precise] : Array<Dynamic>));
-          if (_Runtime.truthy(!_Runtime.strictEquals(hit, null))) { return cast hit; }
+          if ((cast !_Runtime.strictEquals(hit, null) : Bool)) { return cast hit; }
           i--;
         }
       }
     }
-    if (_Runtime.truthy(_Runtime.andValue(enabled, function():Dynamic return cast _Runtime.callValue(HitTests.testNodeGeometry__hitTests, cast ([node, x, y, precise] : Array<Dynamic>))))) { return cast node; }
+    if ((cast ((cast enabled : Bool) && (cast _Runtime.callValue(HitTests.testNodeGeometry__hitTests, cast ([node, x, y, precise] : Array<Dynamic>)) : Bool)) : Bool)) { return cast node; }
     return cast null;
     return cast null;
   }
@@ -134,16 +134,16 @@ class HitTests {
     var enabled:Dynamic = cast _Runtime.UNDEFINED;
     var hitArea:Dynamic = cast _Runtime.UNDEFINED;
     var children:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(node, 'enabled')))) { return cast false; }
+    if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return cast false; }
     state = _Runtime.callValue(getNodeInteractionState, cast ([node] : Array<Dynamic>));
     enabled = _Runtime.strictEquals(_Runtime.optionalField(state, 'hitTestEnabled'), true);
     hitArea = _Runtime.coalesce(_Runtime.optionalField(state, 'hitArea'), function():Dynamic return cast null);
-    if (_Runtime.truthy(_Runtime.andValue(enabled, function():Dynamic return cast !_Runtime.strictEquals(hitArea, null)))) { return cast _Runtime.callValue(HitTests.hitAreaContainsPoint__hitTests, cast ([node, hitArea, x, y] : Array<Dynamic>)); }
-    if (_Runtime.truthy(_Runtime.andValue(enabled, function():Dynamic return cast _Runtime.callValue(HitTests.testNodeGeometry__hitTests, cast ([node, x, y, precise] : Array<Dynamic>))))) { return cast true; }
+    if ((cast ((cast enabled : Bool) && (cast !_Runtime.strictEquals(hitArea, null) : Bool)) : Bool)) { return cast _Runtime.callValue(HitTests.hitAreaContainsPoint__hitTests, cast ([node, hitArea, x, y] : Array<Dynamic>)); }
+    if ((cast ((cast enabled : Bool) && (cast _Runtime.callValue(HitTests.testNodeGeometry__hitTests, cast ([node, x, y, precise] : Array<Dynamic>)) : Bool)) : Bool)) { return cast true; }
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)), 'children');
-    if (_Runtime.truthy(!_Runtime.strictEquals(children, null))) {
+    if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
-        if (_Runtime.truthy(_Runtime.callValue(HitTests.anyHit__hitTests, cast ([(cast child : NodeAny), x, y, precise] : Array<Dynamic>)))) { return cast true; }
+        if ((cast _Runtime.callValue(HitTests.anyHit__hitTests, cast ([(cast child : NodeAny), x, y, precise] : Array<Dynamic>)) : Bool)) { return cast true; }
       }
     }
     return cast false;
@@ -155,32 +155,32 @@ class HitTests {
     var enabled:Dynamic = cast _Runtime.UNDEFINED;
     var hitArea:Dynamic = cast _Runtime.UNDEFINED;
     var children:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(node, 'enabled')))) { return; }
+    if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return; }
     state = _Runtime.callValue(getNodeInteractionState, cast ([node] : Array<Dynamic>));
     enabled = _Runtime.strictEquals(_Runtime.optionalField(state, 'hitTestEnabled'), true);
     hitArea = _Runtime.coalesce(_Runtime.optionalField(state, 'hitArea'), function():Dynamic return cast null);
-    if (_Runtime.truthy(_Runtime.andValue(enabled, function():Dynamic return cast !_Runtime.strictEquals(hitArea, null)))) {
-      if (_Runtime.truthy(_Runtime.callValue(HitTests.hitAreaContainsPoint__hitTests, cast ([node, hitArea, x, y] : Array<Dynamic>)))) { _Runtime.callProperty(out, 'push', cast ([node] : Array<Dynamic>)); }
+    if ((cast ((cast enabled : Bool) && (cast !_Runtime.strictEquals(hitArea, null) : Bool)) : Bool)) {
+      if ((cast _Runtime.callValue(HitTests.hitAreaContainsPoint__hitTests, cast ([node, hitArea, x, y] : Array<Dynamic>)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([node] : Array<Dynamic>)); }
       return;
     }
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)), 'children');
-    if (_Runtime.truthy(!_Runtime.strictEquals(children, null))) {
+    if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
         var i:Dynamic = (_Runtime.field(children, 'length') - 1.0);
-        while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>='))) {
+        while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
           _Runtime.callValue(HitTests.collectHits__hitTests, cast ([(cast _Runtime.getIndex(children, i) : NodeAny), x, y, precise, out] : Array<Dynamic>));
           i--;
         }
       }
     }
-    if (_Runtime.truthy(_Runtime.andValue(enabled, function():Dynamic return cast _Runtime.callValue(HitTests.testNodeGeometry__hitTests, cast ([node, x, y, precise] : Array<Dynamic>))))) { _Runtime.callProperty(out, 'push', cast ([node] : Array<Dynamic>)); }
+    if ((cast ((cast enabled : Bool) && (cast _Runtime.callValue(HitTests.testNodeGeometry__hitTests, cast ([node, x, y, precise] : Array<Dynamic>)) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([node] : Array<Dynamic>)); }
   }
 
   public static function testNodeGeometry__hitTests(node:NodeAny, x:Float, y:Float, precise:Bool):Bool {
     var coarse:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(precise)) {
+    if ((cast precise : Bool)) {
       var exact:Dynamic = ((cast HitTests.hitTestExactRegistry__hitTests : flighthq._internal._Map).get(_Runtime.field(node, 'kind')));
-      if (_Runtime.truthy(!_Runtime.strictEquals(exact, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast _Runtime.compare(_Runtime.callValue(exact, cast ([node, x, y] : Array<Dynamic>)), 0.0, '>='); }
+      if ((cast !_Runtime.strictEquals(exact, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast ((cast _Runtime.callValue(exact, cast ([node, x, y] : Array<Dynamic>)) : Float) >= (cast 0.0 : Float)); }
     }
     coarse = ((cast HitTests.hitTestRegistry__hitTests : flighthq._internal._Map).get(_Runtime.field(node, 'kind')));
     return cast _Runtime.select(coarse, function():Dynamic return cast _Runtime.callValue(coarse, cast ([node, x, y] : Array<Dynamic>)), function():Dynamic return cast false);
@@ -190,8 +190,8 @@ class HitTests {
   public static function hitAreaContainsPoint__hitTests(node:NodeAny, hitArea:HitArea, x:Float, y:Float):Bool {
     var lx:Dynamic = cast _Runtime.UNDEFINED;
     var ly:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(hitArea, 'bounds'))) { return cast _Runtime.callValue(hitTestGraphLocalBounds, cast ([node, x, y] : Array<Dynamic>)); }
-    if (_Runtime.truthy(_Runtime.hasField(hitArea, 'kind'))) {
+    if ((cast _Runtime.strictEquals(hitArea, 'bounds') : Bool)) { return cast _Runtime.callValue(hitTestGraphLocalBounds, cast ([node, x, y] : Array<Dynamic>)); }
+    if ((cast _Runtime.hasField(hitArea, 'kind') : Bool)) {
       var proxy:Dynamic = (cast hitArea : NodeAny);
       var proxyHit:Dynamic = ((cast HitTests.hitTestRegistry__hitTests : flighthq._internal._Map).get(_Runtime.field(proxy, 'kind')));
       return cast _Runtime.select(proxyHit, function():Dynamic return cast _Runtime.callValue(proxyHit, cast ([proxy, x, y] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(hitTestGraphLocalBounds, cast ([proxy, x, y] : Array<Dynamic>)));
@@ -199,7 +199,7 @@ class HitTests {
     _Runtime.callValue(inverseMatrixTransformPointXY, cast ([HitTests.hitTestScratchPoint__hitTests, _Runtime.callValue(getNodeWorldMatrix, cast ([(cast node : DisplayObject)] : Array<Dynamic>)), x, y] : Array<Dynamic>));
     lx = _Runtime.field(HitTests.hitTestScratchPoint__hitTests, 'x');
     ly = _Runtime.field(HitTests.hitTestScratchPoint__hitTests, 'y');
-    if (_Runtime.truthy(_Runtime.hasField(hitArea, 'commands'))) { return cast _Runtime.callValue(containsPathPoint, cast ([(cast hitArea : Path), lx, ly] : Array<Dynamic>)); }
+    if ((cast _Runtime.hasField(hitArea, 'commands') : Bool)) { return cast _Runtime.callValue(containsPathPoint, cast ([(cast hitArea : Path), lx, ly] : Array<Dynamic>)); }
     return cast _Runtime.callValue(containsRectanglePointXY, cast ([(cast hitArea : Rectangle), lx, ly] : Array<Dynamic>));
     return cast null;
   }

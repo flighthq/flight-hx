@@ -36,9 +36,9 @@ class Quaternion {
   }
 
   public static function equalsQuaternion(a:Null<QuaternionLike>, b:Null<QuaternionLike>):Bool {
-    if (_Runtime.truthy(_Runtime.strictEquals(a, b))) { return cast true; }
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(a), function():Dynamic return cast !_Runtime.truthy(b)))) { return cast false; }
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(a.x, b.x), function():Dynamic return cast _Runtime.strictEquals(a.y, b.y)), function():Dynamic return cast _Runtime.strictEquals(a.z, b.z)), function():Dynamic return cast _Runtime.strictEquals(a.w, b.w));
+    if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast true; }
+    if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
+    return cast ((cast ((cast ((cast _Runtime.strictEquals(a.x, b.x) : Bool) && (cast _Runtime.strictEquals(a.y, b.y) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.z, b.z) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.w, b.w) : Bool));
     return cast null;
   }
 
@@ -104,7 +104,7 @@ class Quaternion {
       if (__switchValue == 'XYZ') {
         {
           (out.y = cast (HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, m02))) : Dynamic));
-          if (_Runtime.truthy(_Runtime.compare(HxMath.abs(m02), 0.9999999, '<'))) {
+          if ((cast ((cast HxMath.abs(m02) : Float) < (cast 0.9999999 : Float)) : Bool)) {
             (out.x = cast (HxMath.atan2(-m12, m22) : Dynamic));
             (out.z = cast (HxMath.atan2(-m01, m00) : Dynamic));
           } else {
@@ -116,7 +116,7 @@ class Quaternion {
       else if (__switchValue == 'XZY') {
         {
           (out.z = cast (HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, -m01))) : Dynamic));
-          if (_Runtime.truthy(_Runtime.compare(HxMath.abs(m01), 0.9999999, '<'))) {
+          if ((cast ((cast HxMath.abs(m01) : Float) < (cast 0.9999999 : Float)) : Bool)) {
             (out.x = cast (HxMath.atan2(m21, m11) : Dynamic));
             (out.y = cast (HxMath.atan2(m02, m00) : Dynamic));
           } else {
@@ -128,7 +128,7 @@ class Quaternion {
       else if (__switchValue == 'YXZ') {
         {
           (out.x = cast (HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, -m12))) : Dynamic));
-          if (_Runtime.truthy(_Runtime.compare(HxMath.abs(m12), 0.9999999, '<'))) {
+          if ((cast ((cast HxMath.abs(m12) : Float) < (cast 0.9999999 : Float)) : Bool)) {
             (out.y = cast (HxMath.atan2(m02, m22) : Dynamic));
             (out.z = cast (HxMath.atan2(m10, m11) : Dynamic));
           } else {
@@ -140,7 +140,7 @@ class Quaternion {
       else if (__switchValue == 'YZX') {
         {
           (out.z = cast (HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, m10))) : Dynamic));
-          if (_Runtime.truthy(_Runtime.compare(HxMath.abs(m10), 0.9999999, '<'))) {
+          if ((cast ((cast HxMath.abs(m10) : Float) < (cast 0.9999999 : Float)) : Bool)) {
             (out.x = cast (HxMath.atan2(-m12, m11) : Dynamic));
             (out.y = cast (HxMath.atan2(-m20, m00) : Dynamic));
           } else {
@@ -152,7 +152,7 @@ class Quaternion {
       else if (__switchValue == 'ZXY') {
         {
           (out.x = cast (HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, m21))) : Dynamic));
-          if (_Runtime.truthy(_Runtime.compare(HxMath.abs(m21), 0.9999999, '<'))) {
+          if ((cast ((cast HxMath.abs(m21) : Float) < (cast 0.9999999 : Float)) : Bool)) {
             (out.y = cast (HxMath.atan2(-m20, m22) : Dynamic));
             (out.z = cast (HxMath.atan2(-m01, m11) : Dynamic));
           } else {
@@ -164,7 +164,7 @@ class Quaternion {
       else if (__switchValue == 'ZYX') {
         {
           (out.y = cast (HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, -m20))) : Dynamic));
-          if (_Runtime.truthy(_Runtime.compare(HxMath.abs(m20), 0.9999999, '<'))) {
+          if ((cast ((cast HxMath.abs(m20) : Float) < (cast 0.9999999 : Float)) : Bool)) {
             (out.x = cast (HxMath.atan2(m21, m22) : Dynamic));
             (out.z = cast (HxMath.atan2(m10, m00) : Dynamic));
           } else {
@@ -188,7 +188,7 @@ class Quaternion {
     z = source.z;
     w = source.w;
     lenSq = ((((x * x) + (y * y)) + (z * z)) + (w * w));
-    if (_Runtime.truthy(_Runtime.strictEquals(lenSq, 0.0))) {
+    if ((cast _Runtime.strictEquals(lenSq, 0.0) : Bool)) {
       (out.x = cast (0.0 : Dynamic));
       (out.y = cast (0.0 : Dynamic));
       (out.z = cast (0.0 : Dynamic));
@@ -236,7 +236,7 @@ class Quaternion {
     z = source.z;
     w = source.w;
     l = HxMath.sqrt(((((x * x) + (y * y)) + (z * z)) + (w * w)));
-    if (_Runtime.truthy(!_Runtime.strictEquals(l, 0.0))) {
+    if ((cast !_Runtime.strictEquals(l, 0.0) : Bool)) {
       var inv:Dynamic = (1.0 / l);
       (out.x = cast ((x * inv) : Dynamic));
       (out.y = cast ((y * inv) : Dynamic));
@@ -373,19 +373,19 @@ class Quaternion {
     m12 = _Runtime.getIndex(m, 6.0);
     m22 = _Runtime.getIndex(m, 10.0);
     trace = ((m00 + m11) + m22);
-    if (_Runtime.truthy(_Runtime.compare(trace, 0.0, '>'))) {
+    if ((cast ((cast trace : Float) > (cast 0.0 : Float)) : Bool)) {
       var s:Dynamic = (0.5 / HxMath.sqrt((trace + 1.0)));
       (out.w = cast ((0.25 / s) : Dynamic));
       (out.x = cast (((m12 - m21) * s) : Dynamic));
       (out.y = cast (((m20 - m02) * s) : Dynamic));
       (out.z = cast (((m01 - m10) * s) : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(m00, m11, '>'), function():Dynamic return cast _Runtime.compare(m00, m22, '>')))) {
+    } else { if ((cast ((cast ((cast m00 : Float) > (cast m11 : Float)) : Bool) && (cast ((cast m00 : Float) > (cast m22 : Float)) : Bool)) : Bool)) {
       var s:Dynamic = (2.0 * HxMath.sqrt((((1.0 + m00) - m11) - m22)));
       (out.w = cast (((m12 - m21) / s) : Dynamic));
       (out.x = cast ((0.25 * s) : Dynamic));
       (out.y = cast (((m10 + m01) / s) : Dynamic));
       (out.z = cast (((m20 + m02) / s) : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.compare(m11, m22, '>'))) {
+    } else { if ((cast ((cast m11 : Float) > (cast m22 : Float)) : Bool)) {
       var s:Dynamic = (2.0 * HxMath.sqrt((((1.0 + m11) - m00) - m22)));
       (out.w = cast (((m20 - m02) / s) : Dynamic));
       (out.x = cast (((m10 + m01) / s) : Dynamic));
@@ -419,15 +419,15 @@ class Quaternion {
     ty = to.y;
     tz = to.z;
     dot = (((fx * tx) + (fy * ty)) + (fz * tz));
-    if (_Runtime.truthy(_Runtime.compare(dot, 0.999999, '>'))) {
+    if ((cast ((cast dot : Float) > (cast 0.999999 : Float)) : Bool)) {
       _Runtime.callValue(setQuaternionIdentity, cast ([out] : Array<Dynamic>));
       return;
     }
-    if (_Runtime.truthy(_Runtime.compare(dot, -0.999999, '<'))) {
+    if ((cast ((cast dot : Float) < (cast -0.999999 : Float)) : Bool)) {
       var ax:Dynamic = 1.0;
       var ay:Dynamic = 0.0;
       var az:Dynamic = 0.0;
-      if (_Runtime.truthy(_Runtime.compare(HxMath.abs(fx), 0.9, '>'))) {
+      if ((cast ((cast HxMath.abs(fx) : Float) > (cast 0.9 : Float)) : Bool)) {
         (ax = cast (0.0 : Dynamic));
         (ay = cast (1.0 : Dynamic));
         (az = cast (0.0 : Dynamic));
@@ -453,7 +453,7 @@ class Quaternion {
     (out.z = cast (cz : Dynamic));
     (out.w = cast ((1.0 + dot) : Dynamic));
     len = HxMath.sqrt(((((out.x * out.x) + (out.y * out.y)) + (out.z * out.z)) + (out.w * out.w)));
-    if (_Runtime.truthy(!_Runtime.strictEquals(len, 0.0))) {
+    if ((cast !_Runtime.strictEquals(len, 0.0) : Bool)) {
       var inv:Dynamic = (1.0 / len);
       (out.x *= inv);
       (out.y *= inv);
@@ -504,7 +504,7 @@ class Quaternion {
     ry = ((uz * fx) - (ux * fz));
     rz = ((ux * fy) - (uy * fx));
     rLen = HxMath.sqrt((((rx * rx) + (ry * ry)) + (rz * rz)));
-    if (_Runtime.truthy(_Runtime.strictEquals(rLen, 0.0))) {
+    if ((cast _Runtime.strictEquals(rLen, 0.0) : Bool)) {
       _Runtime.callValue(setQuaternionIdentity, cast ([out] : Array<Dynamic>));
       return;
     }
@@ -525,19 +525,19 @@ class Quaternion {
     m21 = cuz;
     m22 = fz;
     trace = ((m00 + m11) + m22);
-    if (_Runtime.truthy(_Runtime.compare(trace, 0.0, '>'))) {
+    if ((cast ((cast trace : Float) > (cast 0.0 : Float)) : Bool)) {
       var s:Dynamic = (0.5 / HxMath.sqrt((trace + 1.0)));
       (out.w = cast ((0.25 / s) : Dynamic));
       (out.x = cast (((m12 - m21) * s) : Dynamic));
       (out.y = cast (((m20 - m02) * s) : Dynamic));
       (out.z = cast (((m01 - m10) * s) : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(m00, m11, '>'), function():Dynamic return cast _Runtime.compare(m00, m22, '>')))) {
+    } else { if ((cast ((cast ((cast m00 : Float) > (cast m11 : Float)) : Bool) && (cast ((cast m00 : Float) > (cast m22 : Float)) : Bool)) : Bool)) {
       var s:Dynamic = (2.0 * HxMath.sqrt((((1.0 + m00) - m11) - m22)));
       (out.w = cast (((m12 - m21) / s) : Dynamic));
       (out.x = cast ((0.25 * s) : Dynamic));
       (out.y = cast (((m10 + m01) / s) : Dynamic));
       (out.z = cast (((m20 + m02) / s) : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.compare(m11, m22, '>'))) {
+    } else { if ((cast ((cast m11 : Float) > (cast m22 : Float)) : Bool)) {
       var s:Dynamic = (2.0 * HxMath.sqrt((((1.0 + m11) - m00) - m22)));
       (out.w = cast (((m20 - m02) / s) : Dynamic));
       (out.x = cast (((m10 + m01) / s) : Dynamic));
@@ -573,14 +573,14 @@ class Quaternion {
     bz = b.z;
     bw = b.w;
     cosHalfTheta = ((((ax * bx) + (ay * by)) + (az * bz)) + (aw * bw));
-    if (_Runtime.truthy(_Runtime.compare(cosHalfTheta, 0.0, '<'))) {
+    if ((cast ((cast cosHalfTheta : Float) < (cast 0.0 : Float)) : Bool)) {
       (cosHalfTheta = cast (-cosHalfTheta : Dynamic));
       (bx = cast (-bx : Dynamic));
       (by = cast (-by : Dynamic));
       (bz = cast (-bz : Dynamic));
       (bw = cast (-bw : Dynamic));
     }
-    if (_Runtime.truthy(_Runtime.compare(cosHalfTheta, 0.999999, '<'))) {
+    if ((cast ((cast cosHalfTheta : Float) < (cast 0.999999 : Float)) : Bool)) {
       var halfTheta:Dynamic = HxMath.acos(cosHalfTheta);
       var sinHalfTheta:Dynamic = HxMath.sin(halfTheta);
       (scaleA = cast ((HxMath.sin(((1.0 - t) * halfTheta)) / sinHalfTheta) : Dynamic));

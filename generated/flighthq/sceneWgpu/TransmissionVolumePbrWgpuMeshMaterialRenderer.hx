@@ -40,9 +40,9 @@ class TransmissionVolumePbrWgpuMeshMaterialRenderer {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     stateRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     pass = _Runtime.field(stateRuntime, 'renderPass');
-    if (_Runtime.truthy(_Runtime.strictEquals(pass, null))) { return; }
+    if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     transmission = (cast material : Null<TransmissionVolumePbrMaterial>);
-    standard = _Runtime.select(!_Runtime.strictEquals(transmission, null), function():Dynamic return cast _Runtime.field(transmission, 'standard'), function():Dynamic return cast null);
+    standard = ((cast !_Runtime.strictEquals(transmission, null) : Bool) ? (cast _Runtime.field(transmission, 'standard') : Dynamic) : (cast null : Dynamic));
     key = _Runtime.callValue(buildWgpuPbrStandardDefineKey, cast ([standard, transmission] : Array<Dynamic>));
     _Runtime.setField(key, 'transmissionEnabled', true);
     format = _Runtime.coalesce(_Runtime.field(stateRuntime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
@@ -50,9 +50,9 @@ class TransmissionVolumePbrWgpuMeshMaterialRenderer {
     _Runtime.callValue(writeWgpuFrameUniform, cast ([state, camera, lights] : Array<Dynamic>));
     binding = _Runtime.callValue(ensureWgpuPbrMaterialBindGroup, cast ([state, pipeline, _Runtime.coalesce(transmission, function():Dynamic return cast TransmissionVolumePbrWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__transmissionVolumePbrWgpuMeshMaterialRenderer), standard] : Array<Dynamic>));
     out = _Runtime.callValue(getWgpuPbrMaterialScratch, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(writeWgpuPbrStandardBlock, cast ([out, standard, _Runtime.select(!_Runtime.strictEquals(transmission, null), function():Dynamic return cast _Runtime.field(transmission, 'alphaCutoff'), function():Dynamic return cast 0.5)] : Array<Dynamic>));
+    _Runtime.callValue(writeWgpuPbrStandardBlock, cast ([out, standard, ((cast !_Runtime.strictEquals(transmission, null) : Bool) ? (cast _Runtime.field(transmission, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic))] : Array<Dynamic>));
     _Runtime.fill(out, 0.0, 16.0, null, 2);
-    if (_Runtime.truthy(!_Runtime.strictEquals(transmission, null))) {
+    if ((cast !_Runtime.strictEquals(transmission, null) : Bool)) {
       _Runtime.callValue(unpackColorToLinear, cast ([TransmissionVolumePbrWgpuMeshMaterialRenderer._colorScratch__transmissionVolumePbrWgpuMeshMaterialRenderer, _Runtime.field(transmission, 'attenuationColor')] : Array<Dynamic>));
       _Runtime.setIndex(out, 44.0, _Runtime.field(transmission, 'transmission'));
       _Runtime.setIndex(out, 45.0, _Runtime.getIndex(TransmissionVolumePbrWgpuMeshMaterialRenderer._colorScratch__transmissionVolumePbrWgpuMeshMaterialRenderer, 0.0));

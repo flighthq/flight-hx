@@ -24,11 +24,11 @@ class CanvasDropShadowEffect {
     var pool:Dynamic = cast _Runtime.UNDEFINED;
     effect = _Runtime.coalesce(maybeEffect, function():Dynamic return cast (cast poolOrEffect : DropShadowEffect));
     css = _Runtime.callValue(computeDropShadowEffectCss, cast ([effect] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(css, null))) {
+    if ((cast !_Runtime.strictEquals(css, null) : Bool)) {
       _Runtime.callValue(drawCanvasEffectPass, cast ([dest, source, css] : Array<Dynamic>));
       return;
     }
-    pool = _Runtime.select(_Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callValue(createCanvasRenderTargetPool, cast ([] : Array<Dynamic>)), function():Dynamic return cast (cast poolOrEffect : Dynamic));
+    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(createCanvasRenderTargetPool, cast ([] : Array<Dynamic>)) : Dynamic) : (cast (cast poolOrEffect : Dynamic) : Dynamic));
     _Runtime.callValue(CanvasDropShadowEffect.applyDropShadowEffectToCanvasWithPool__canvasDropShadowEffect, cast ([source, dest, pool, effect] : Array<Dynamic>));
   }
 
@@ -60,11 +60,11 @@ class CanvasDropShadowEffect {
     blur = HxMath.max(0.0, ((_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0) + _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0)) / 2.0));
     sourceMode = _Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw');
     _Runtime.callValue(drawCanvasTintedAlphaMask, cast ([mask, source, _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.field(effect, 'alpha'), function():Dynamic return cast 1.0), tintStrength] : Array<Dynamic>));
-    _Runtime.callValue(drawCanvasEffectPass, cast ([blurred, mask, _Runtime.select(_Runtime.compare(blur, 0.0, '>'), function():Dynamic return cast 'blur(' + Std.string(blur) + 'px)', function():Dynamic return cast 'none')] : Array<Dynamic>));
+    _Runtime.callValue(drawCanvasEffectPass, cast ([blurred, mask, ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic))] : Array<Dynamic>));
     _Runtime.callValue(clearCanvasTarget, cast ([dest] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, shadowPasses, '<'))) {
+      while ((cast ((cast i : Float) < (cast shadowPasses : Float)) : Bool)) {
         _Runtime.callValue(compositeCanvasImage, cast ([dest, blurred, dx, dy] : Array<Dynamic>));
         i++;
       }

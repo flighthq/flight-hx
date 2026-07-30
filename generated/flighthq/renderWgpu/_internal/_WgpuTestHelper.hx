@@ -10,19 +10,19 @@ class _WgpuTestHelper {
   public static function installWgpuConstants__wgpuTestHelper():Void {
     var g:Dynamic = cast _Runtime.UNDEFINED;
     g = (cast _Runtime.globalValue('globalThis') : Dynamic);
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.getIndex(g, 'GPUBufferUsage')))) {
+    if ((cast !_Runtime.truthy(_Runtime.getIndex(g, 'GPUBufferUsage')) : Bool)) {
       _Runtime.setIndex(g, 'GPUBufferUsage', { MAP_READ: 1.0, MAP_WRITE: 2.0, COPY_SRC: 4.0, COPY_DST: 8.0, INDEX: 16.0, VERTEX: 32.0, UNIFORM: 64.0, STORAGE: 128.0, INDIRECT: 256.0, QUERY_RESOLVE: 512.0 });
     }
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.getIndex(g, 'GPUTextureUsage')))) {
+    if ((cast !_Runtime.truthy(_Runtime.getIndex(g, 'GPUTextureUsage')) : Bool)) {
       _Runtime.setIndex(g, 'GPUTextureUsage', { COPY_SRC: 1.0, COPY_DST: 2.0, TEXTURE_BINDING: 4.0, STORAGE_BINDING: 8.0, RENDER_ATTACHMENT: 16.0 });
     }
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.getIndex(g, 'GPUShaderStage')))) {
+    if ((cast !_Runtime.truthy(_Runtime.getIndex(g, 'GPUShaderStage')) : Bool)) {
       _Runtime.setIndex(g, 'GPUShaderStage', { VERTEX: 1.0, FRAGMENT: 2.0, COMPUTE: 4.0 });
     }
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.getIndex(g, 'GPUColorWrite')))) {
+    if ((cast !_Runtime.truthy(_Runtime.getIndex(g, 'GPUColorWrite')) : Bool)) {
       _Runtime.setIndex(g, 'GPUColorWrite', { RED: 1.0, GREEN: 2.0, BLUE: 4.0, ALPHA: 8.0, ALL: 15.0 });
     }
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.getIndex(g, 'GPUMapMode')))) {
+    if ((cast !_Runtime.truthy(_Runtime.getIndex(g, 'GPUMapMode')) : Bool)) {
       _Runtime.setIndex(g, 'GPUMapMode', { READ: 1.0, WRITE: 2.0 });
     }
   }
@@ -128,13 +128,13 @@ class _WgpuTestHelper {
     var origGetContext:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(_WgpuTestHelper.installWgpuConstants__wgpuTestHelper, cast ([] : Array<Dynamic>));
     gpu = (cast (cast { getPreferredCanvasFormat: function() return (cast 'bgra8unorm' : Dynamic), requestAdapter: function() return flighthq._internal._Async.resolve(_Runtime.callValue(_WgpuTestHelper.makeAdapter__wgpuTestHelper, cast ([] : Array<Dynamic>))) } : Dynamic) : Dynamic);
-    if (_Runtime.truthy(_Runtime.looseEquals(_Runtime.field(_Runtime.globalValue('globalThis'), 'navigator'), null))) {
+    if ((cast _Runtime.looseEquals(_Runtime.field(_Runtime.globalValue('globalThis'), 'navigator'), null) : Bool)) {
       flighthq._internal.DynamicObject.defineProperty(_Runtime.globalValue('globalThis'), 'navigator', { value: {  }, configurable: true, writable: true });
     }
     flighthq._internal.DynamicObject.defineProperty(_Runtime.field(_Runtime.globalValue('globalThis'), 'navigator'), 'gpu', { value: gpu, configurable: true, writable: true });
     origGetContext = _Runtime.field(_Runtime.field(_Runtime.globalValue('HTMLCanvasElement'), 'prototype'), 'getContext');
     _Runtime.setField((cast _Runtime.field(_Runtime.globalValue('HTMLCanvasElement'), 'prototype') : { var getContext:Dynamic; }), 'getContext', function(contextId:String, ?options:Dynamic) {
-      if (_Runtime.truthy(_Runtime.strictEquals(contextId, 'webgpu'))) {
+      if ((cast _Runtime.strictEquals(contextId, 'webgpu') : Bool)) {
         return cast (cast (cast { configure: function() {
         
         }, getCurrentTexture: function() return _Runtime.callValue(_WgpuTestHelper.makeTexture__wgpuTestHelper, cast ([] : Array<Dynamic>)) } : Dynamic) : Dynamic);

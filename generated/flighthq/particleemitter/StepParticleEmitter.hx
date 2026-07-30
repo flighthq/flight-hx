@@ -15,11 +15,11 @@ import flighthq.types.ParticleForce;
 
 class StepParticleEmitter {
   public static function stepParticleEmitter(emitter:ParticleEmitter, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?callbacks:ParticleEmitterCallbacks):Void {
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.looseEquals(forces, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(forces, 'length'), 0.0, '>')))) {
+    if ((cast ((cast !_Runtime.looseEquals(forces, null) : Bool) && (cast ((cast _Runtime.field(forces, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       _Runtime.callValue(applyParticleForces, cast ([emitter, state, forces, deltaTime] : Array<Dynamic>));
     }
     _Runtime.callValue(updateParticleEmitter, cast ([emitter, state, config, deltaTime, callbacks] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.looseEquals(colliders, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(colliders, 'length'), 0.0, '>')))) {
+    if ((cast ((cast !_Runtime.looseEquals(colliders, null) : Bool) && (cast ((cast _Runtime.field(colliders, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       _Runtime.callValue(applyParticleCollisions, cast ([emitter, state, colliders] : Array<Dynamic>));
     }
   }

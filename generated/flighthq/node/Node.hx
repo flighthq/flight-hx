@@ -135,7 +135,7 @@ class Node {
     var runtimeFactory:Dynamic = cast _Runtime.UNDEFINED;
     var out:Dynamic = cast _Runtime.UNDEFINED;
     runtimeFactory = _Runtime.coalesce(createNodeRuntimeFactory, function():Dynamic return cast (cast (cast createNodeRuntime : Dynamic) : NodeRuntimeFactory<Runtime>));
-    out = (cast _Runtime.objectFromPairs([{ key: 'data', value: _Runtime.select(!_Runtime.strictEquals(createData, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callValue(createData, cast ([(cast _Runtime.optionalField(obj, 'data') : Dynamic)] : Array<Dynamic>)), function():Dynamic return cast null) }, { key: 'name', value: _Runtime.coalesce(_Runtime.optionalField(obj, 'name'), function():Dynamic return cast null) }, { key: 'kind', value: nodeKind }, { key: EntityRuntimeKey, value: _Runtime.callValue(runtimeFactory, cast ([] : Array<Dynamic>)) }]) : flighthq.types.Node<Traits>);
+    out = (cast _Runtime.objectFromPairs([{ key: 'data', value: ((cast !_Runtime.strictEquals(createData, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(createData, cast ([(cast _Runtime.optionalField(obj, 'data') : Dynamic)] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic)) }, { key: 'name', value: _Runtime.coalesce(_Runtime.optionalField(obj, 'name'), function():Dynamic return cast null) }, { key: 'kind', value: nodeKind }, { key: EntityRuntimeKey, value: _Runtime.callValue(runtimeFactory, cast ([] : Array<Dynamic>)) }]) : flighthq.types.Node<Traits>);
     _Runtime.setField(out, 'enabled', _Runtime.coalesce(_Runtime.optionalField(obj, 'enabled'), function():Dynamic return cast true));
     return cast out;
     return cast null;
@@ -197,15 +197,15 @@ class Node {
     var interactionSignals:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : NodeRuntime<Traits>);
     parent = (cast _Runtime.field(runtime, 'parent') : Null<flighthq.types.Node<Traits>>);
-    if (_Runtime.truthy(!_Runtime.strictEquals(parent, null))) {
+    if ((cast !_Runtime.strictEquals(parent, null) : Bool)) {
       _Runtime.callValue(removeNodeChild, cast ([parent, target] : Array<Dynamic>));
     }
     children = _Runtime.field(runtime, 'children');
-    if (_Runtime.truthy(!_Runtime.strictEquals(children, null))) {
+    if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       var snapshot:Dynamic = (cast _Runtime.slice(children, 0, null) : Array<flighthq.types.Node<Traits>>);
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(snapshot, 'length'), '<'))) {
+        while ((cast ((cast i : Float) < (cast _Runtime.field(snapshot, 'length') : Float)) : Bool)) {
           _Runtime.callValue(disposeNode, cast ([_Runtime.getIndex(snapshot, i)] : Array<Dynamic>));
           i++;
         }
@@ -213,7 +213,7 @@ class Node {
       _Runtime.setField(runtime, 'children', null);
     }
     nodeSignals = _Runtime.field(runtime, 'nodeSignals');
-    if (_Runtime.truthy(!_Runtime.strictEquals(nodeSignals, null))) {
+    if ((cast !_Runtime.strictEquals(nodeSignals, null) : Bool)) {
       _Runtime.callValue(clearSignal, cast ([_Runtime.field(nodeSignals, 'onChildAdded')] : Array<Dynamic>));
       _Runtime.callValue(clearSignal, cast ([_Runtime.field(nodeSignals, 'onChildRemoved')] : Array<Dynamic>));
       _Runtime.callValue(clearSignal, cast ([_Runtime.field(nodeSignals, 'onChildrenChanged')] : Array<Dynamic>));
@@ -222,7 +222,7 @@ class Node {
       _Runtime.setField(runtime, 'nodeSignals', null);
     }
     interactionSignals = _Runtime.field(runtime, 'interactionSignals');
-    if (_Runtime.truthy(!_Runtime.strictEquals(interactionSignals, null))) {
+    if ((cast !_Runtime.strictEquals(interactionSignals, null) : Bool)) {
       _Runtime.setField(runtime, 'interactionSignals', null);
     }
     _Runtime.setField(runtime, 'interactionState', null);

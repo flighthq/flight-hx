@@ -19,9 +19,9 @@ class RenderTransform2d {
     var parentDirty:Dynamic = cast _Runtime.UNDEFINED;
     var localDirty:Dynamic = cast _Runtime.UNDEFINED;
     localTransformId = _Runtime.callValue(getNodeLocalTransformRevision, cast ([(cast _Runtime.field(data, 'source') : Node<Dynamic>)] : Array<Dynamic>));
-    parentDirty = _Runtime.andValue(!_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(parentData, 'transformFrameId'), _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentFrameId')));
+    parentDirty = ((cast !_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(parentData, 'transformFrameId'), _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentFrameId')) : Bool));
     localDirty = !_Runtime.strictEquals(_Runtime.field(data, 'lastLocalTransformId'), localTransformId);
-    if (_Runtime.truthy(_Runtime.orValue(parentDirty, function():Dynamic return cast localDirty))) {
+    if ((cast ((cast parentDirty : Bool) || (cast localDirty : Bool)) : Bool)) {
       _Runtime.callValue(RenderTransform2d.recalculateRenderTransform2D__renderTransform2d, cast ([state, data, parentData] : Array<Dynamic>));
       _Runtime.setField(data, 'lastLocalTransformId', localTransformId);
       return cast true;
@@ -34,8 +34,8 @@ class RenderTransform2d {
     var transform2D:Dynamic = cast _Runtime.UNDEFINED;
     var parentTransform2D:Dynamic = cast _Runtime.UNDEFINED;
     transform2D = _Runtime.callValue(getNodeLocalMatrix, cast ([(cast _Runtime.field(data, 'source') : Dynamic)] : Array<Dynamic>));
-    parentTransform2D = _Runtime.select(!_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.field(parentData, 'transform2D'), function():Dynamic return cast _Runtime.field(state, 'renderTransform2D'));
-    if (_Runtime.truthy(!_Runtime.strictEquals(parentTransform2D, null))) {
+    parentTransform2D = ((cast !_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(parentData, 'transform2D') : Dynamic) : (cast _Runtime.field(state, 'renderTransform2D') : Dynamic));
+    if ((cast !_Runtime.strictEquals(parentTransform2D, null) : Bool)) {
       _Runtime.callValue(multiplyMatrix, cast ([_Runtime.field(data, 'transform2D'), parentTransform2D, transform2D] : Array<Dynamic>));
     } else {
       _Runtime.callValue(copyMatrix, cast ([_Runtime.field(data, 'transform2D'), transform2D] : Array<Dynamic>));

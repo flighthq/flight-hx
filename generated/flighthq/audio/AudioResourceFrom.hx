@@ -15,12 +15,12 @@ class AudioResourceFrom {
     var length:Dynamic = cast _Runtime.UNDEFINED;
     var buffer:Dynamic = cast _Runtime.UNDEFINED;
     numberOfChannels = _Runtime.field(channels, 'length');
-    length = _Runtime.select(_Runtime.compare(numberOfChannels, 0.0, '>'), function():Dynamic return cast _Runtime.field(_Runtime.getIndex(channels, 0.0), 'length'), function():Dynamic return cast 0.0);
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(numberOfChannels, 0.0), function():Dynamic return cast _Runtime.strictEquals(length, 0.0)))) { return cast _Runtime.callValue(createAudioResource, cast ([] : Array<Dynamic>)); }
+    length = ((cast ((cast numberOfChannels : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(_Runtime.getIndex(channels, 0.0), 'length') : Dynamic) : (cast 0.0 : Dynamic));
+    if ((cast ((cast _Runtime.strictEquals(numberOfChannels, 0.0) : Bool) || (cast _Runtime.strictEquals(length, 0.0) : Bool)) : Bool)) { return cast _Runtime.callValue(createAudioResource, cast ([] : Array<Dynamic>)); }
     buffer = _Runtime.construct(_Runtime.globalValue('AudioBuffer'), [{ length: length, numberOfChannels: numberOfChannels, sampleRate: sampleRate }]);
     {
       var channel:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(channel, numberOfChannels, '<'))) {
+      while ((cast ((cast channel : Float) < (cast numberOfChannels : Float)) : Bool)) {
         _Runtime.callProperty(buffer, 'copyToChannel', cast ([(cast _Runtime.getIndex(channels, channel) : flighthq._internal._Float32Array), channel] : Array<Dynamic>));
         channel++;
       }
@@ -37,7 +37,7 @@ class AudioResourceFrom {
       bytes = new flighthq._internal._UInt8Array(_Runtime.field(binary, 'length'));
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(binary, 'length'), '<'))) {
+        while ((cast ((cast i : Float) < (cast _Runtime.field(binary, 'length') : Float)) : Bool)) {
           _Runtime.setIndex(bytes, i, _Runtime.charCodeAt(binary, i));
           i++;
         }
@@ -88,7 +88,7 @@ class AudioResourceFrom {
     return cast flighthq._internal._Async.protect(function():Dynamic {
       var selected:Dynamic = cast _Runtime.UNDEFINED;
       selected = _Runtime.callValue(selectAudioResourceUrl, cast ([sources] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(selected, null))) { return cast _Runtime.callValue(createAudioResource, cast ([] : Array<Dynamic>)); }
+      if ((cast _Runtime.strictEquals(selected, null) : Bool)) { return cast _Runtime.callValue(createAudioResource, cast ([] : Array<Dynamic>)); }
       return cast _Runtime.callValue(loadAudioResourceFromUrl, cast ([context, selected, signal] : Array<Dynamic>));
       return cast null;
     });
@@ -97,7 +97,7 @@ class AudioResourceFrom {
   public static function selectAudioResourceUrl(sources:Array<AudioResourceUrl>):Null<String> {
     for (source in _Runtime.iterable(sources)) {
       var type:Dynamic = _Runtime.coalesce(_Runtime.coalesce(_Runtime.field(source, 'type'), function():Dynamic return cast _Runtime.callValue(inferAudioMimeType, cast ([_Runtime.field(source, 'url')] : Array<Dynamic>))), function():Dynamic return cast '');
-      if (_Runtime.truthy(_Runtime.callValue(canPlayAudioType, cast ([type] : Array<Dynamic>)))) { return cast _Runtime.field(source, 'url'); }
+      if ((cast _Runtime.callValue(canPlayAudioType, cast ([type] : Array<Dynamic>)) : Bool)) { return cast _Runtime.field(source, 'url'); }
     }
     return cast null;
     return cast null;

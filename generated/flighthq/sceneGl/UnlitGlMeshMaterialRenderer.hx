@@ -34,9 +34,9 @@ class UnlitGlMeshMaterialRenderer {
     gl = _Runtime.field(state, 'gl');
     unlit = (cast material : Null<UnlitMaterial>);
     program = _Runtime.callValue(ensureGlUnlitProgram, cast ([state, _Runtime.callValue(UnlitGlMeshMaterialRenderer.defineKeyForMaterial__unlitGlMeshMaterialRenderer, cast ([unlit] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, _Runtime.andValue(!_Runtime.strictEquals(unlit, null), function():Dynamic return cast _Runtime.field(unlit, 'doubleSided'))] : Array<Dynamic>));
+    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, ((cast !_Runtime.strictEquals(unlit, null) : Bool) && (cast _Runtime.field(unlit, 'doubleSided') : Bool))] : Array<Dynamic>));
     _Runtime.callValue(setGlMeshViewProjection, cast ([gl, _Runtime.field(program, 'locViewProjection'), camera] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(unlit, null))) {
+    if ((cast _Runtime.strictEquals(unlit, null) : Bool)) {
       _Runtime.callValue(bindGlUnlitSurface, cast ([state, program, UnlitGlMeshMaterialRenderer.WHITE__unlitGlMeshMaterialRenderer, 1.0, null, 0.5] : Array<Dynamic>));
       return;
     }
@@ -46,7 +46,7 @@ class UnlitGlMeshMaterialRenderer {
   }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
-    if (_Runtime.truthy(_Runtime.strictEquals(program, null))) { return; }
+    if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
     _Runtime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
   } };
 
@@ -55,7 +55,7 @@ class UnlitGlMeshMaterialRenderer {
   }
 
   public static function defineKeyForMaterial__unlitGlMeshMaterialRenderer(material:Null<UnlitMaterial>):GlUnlitDefineKey {
-    return cast { alphaMaskEnabled: _Runtime.andValue(!_Runtime.strictEquals(material, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask')), hasColorMap: _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(material, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(material, 'baseColorMap'), null)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(material, 'baseColorMap'), 'image'), null)), hasUvTransform: _Runtime.callValue(hasGlUvTransform, cast ([_Runtime.select(!_Runtime.strictEquals(material, null), function():Dynamic return cast _Runtime.field(material, 'baseColorMap'), function():Dynamic return cast null)] : Array<Dynamic>)), vertexColor: false };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasColorMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'baseColorMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(material, 'baseColorMap'), 'image'), null) : Bool)), hasUvTransform: _Runtime.callValue(hasGlUvTransform, cast ([((cast !_Runtime.strictEquals(material, null) : Bool) ? (cast _Runtime.field(material, 'baseColorMap') : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)), vertexColor: false };
     return cast null;
   }
 

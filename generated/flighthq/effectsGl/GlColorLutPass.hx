@@ -34,7 +34,7 @@ class GlColorLutPass {
     var samples:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(cache, 'texture'), null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(cache, 'lut'), lut)))) { return cast _Runtime.field(cache, 'texture'); }
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(cache, 'texture'), null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(cache, 'lut'), lut) : Bool)) : Bool)) { return cast _Runtime.field(cache, 'texture'); }
     n = _Runtime.field(lut, 'size');
     samples = _Runtime.field(lut, 'samples');
     data = new flighthq._internal._UInt8Array((((n * n) * n) * 4.0));
@@ -42,7 +42,7 @@ class GlColorLutPass {
       var i:Dynamic = 0.0;
       var j:Dynamic = 0.0;
       var o:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, ((n * n) * n), '<'))) {
+      while ((cast ((cast i : Float) < (cast ((n * n) * n) : Float)) : Bool)) {
         _Runtime.setIndex(data, o++, HxMath.round((_Runtime.callValue(GlColorLutPass.clamp01__glColorLutPass, cast ([_Runtime.getIndex(samples, j++)] : Array<Dynamic>)) * 255.0)));
         _Runtime.setIndex(data, o++, HxMath.round((_Runtime.callValue(GlColorLutPass.clamp01__glColorLutPass, cast ([_Runtime.getIndex(samples, j++)] : Array<Dynamic>)) * 255.0)));
         _Runtime.setIndex(data, o++, HxMath.round((_Runtime.callValue(GlColorLutPass.clamp01__glColorLutPass, cast ([_Runtime.getIndex(samples, j++)] : Array<Dynamic>)) * 255.0)));
@@ -51,7 +51,7 @@ class GlColorLutPass {
       }
     }
     texture = _Runtime.field(cache, 'texture');
-    if (_Runtime.truthy(_Runtime.strictEquals(texture, null))) {
+    if ((cast _Runtime.strictEquals(texture, null) : Bool)) {
       (texture = cast (flighthq._internal.backend.WebGl2Backend.createTexture(gl) : Dynamic));
       _Runtime.setField(cache, 'texture', texture);
     }
@@ -69,7 +69,7 @@ class GlColorLutPass {
   }
 
   public static function clamp01__glColorLutPass(v:Float):Float {
-    return cast _Runtime.select(_Runtime.compare(v, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(v, 1.0, '>'), function():Dynamic return cast 1.0, function():Dynamic return cast v));
+    return cast ((cast ((cast v : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast v : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast v : Dynamic)) : Dynamic));
     return cast null;
   }
 

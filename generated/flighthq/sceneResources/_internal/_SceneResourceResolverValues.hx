@@ -25,7 +25,7 @@ class _SceneResourceResolverValues {
     loader = _Runtime.callValue(createResourceLoader, cast ([{ dedupe: false, maxConcurrent: _Runtime.optionalField(options, 'maxConcurrent'), streaming: true }] : Array<Dynamic>));
     _Runtime.callValue(startResourceLoad, cast ([loader] : Array<Dynamic>));
     registry = _Runtime.optionalField(options, 'registry');
-    if (_Runtime.truthy(_Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (registry = cast (_Runtime.callValue(createSceneMaterialTextureRegistry, cast ([] : Array<Dynamic>)) : Dynamic));
       _Runtime.callValue(registerBuiltInSceneMaterialTextures, cast ([registry] : Array<Dynamic>));
     }

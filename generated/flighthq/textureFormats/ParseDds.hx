@@ -35,8 +35,8 @@ class ParseDds {
     var faces:Dynamic = cast _Runtime.UNDEFINED;
     var mipLevels:Dynamic = cast _Runtime.UNDEFINED;
     var layout:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(ParseDds.hasDdsMagic__parseDds, cast ([bytes] : Array<Dynamic>))))) { return cast null; }
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(bytes, 'byteLength'), ParseDds.ddsDataOffset__parseDds, '<'))) { return cast null; }
+    if ((cast !(cast _Runtime.callValue(ParseDds.hasDdsMagic__parseDds, cast ([bytes] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
+    if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast ParseDds.ddsDataOffset__parseDds : Float)) : Bool)) { return cast null; }
     reader = _Runtime.callValue(createByteReader, cast ([bytes, 4.0] : Array<Dynamic>));
     _Runtime.callValue(skipByteReader, cast ([reader, 4.0] : Array<Dynamic>));
     _Runtime.callValue(skipByteReader, cast ([reader, 4.0] : Array<Dynamic>));
@@ -55,50 +55,50 @@ class ParseDds {
     aMask = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
     _Runtime.setField(reader, 'offset', 112.0);
     caps2 = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals((_Runtime.toInt32(caps2) & _Runtime.toInt32(ParseDds.ddsCaps2Volume__parseDds)), 0.0), function():Dynamic return cast _Runtime.compare(dwDepth, 1.0, '>')))) { return cast null; }
+    if ((cast ((cast !_Runtime.strictEquals((_Runtime.toInt32(caps2) & _Runtime.toInt32(ParseDds.ddsCaps2Volume__parseDds)), 0.0) : Bool) || (cast ((cast dwDepth : Float) > (cast 1.0 : Float)) : Bool)) : Bool)) { return cast null; }
     cube = !_Runtime.strictEquals((_Runtime.toInt32(caps2) & _Runtime.toInt32(ParseDds.ddsCaps2Cubemap__parseDds)), 0.0);
     layers = 1.0;
     dataOffset = ParseDds.ddsDataOffset__parseDds;
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals((_Runtime.toInt32(pfFlags) & _Runtime.toInt32(ParseDds.ddsPfFourCC__parseDds)), 0.0), function():Dynamic return cast _Runtime.strictEquals(fourCC, ParseDds.ddsFourCcDx10__parseDds)))) {
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(hasByteReaderBytes, cast ([_Runtime.callValue(createByteReader, cast ([bytes, ParseDds.ddsDataOffset__parseDds] : Array<Dynamic>)), 20.0] : Array<Dynamic>))))) { return cast null; }
+    if ((cast ((cast !_Runtime.strictEquals((_Runtime.toInt32(pfFlags) & _Runtime.toInt32(ParseDds.ddsPfFourCC__parseDds)), 0.0) : Bool) && (cast _Runtime.strictEquals(fourCC, ParseDds.ddsFourCcDx10__parseDds) : Bool)) : Bool)) {
+      if ((cast !(cast _Runtime.callValue(hasByteReaderBytes, cast ([_Runtime.callValue(createByteReader, cast ([bytes, ParseDds.ddsDataOffset__parseDds] : Array<Dynamic>)), 20.0] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
       var dx10:Dynamic = _Runtime.callValue(createByteReader, cast ([bytes, ParseDds.ddsDataOffset__parseDds] : Array<Dynamic>));
       var dxgiFormat:Dynamic = _Runtime.callValue(readByteReaderU32, cast ([dx10] : Array<Dynamic>));
       _Runtime.callValue(skipByteReader, cast ([dx10, 4.0] : Array<Dynamic>));
       var miscFlag:Dynamic = _Runtime.callValue(readByteReaderU32, cast ([dx10] : Array<Dynamic>));
       var arraySize:Dynamic = _Runtime.callValue(readByteReaderU32, cast ([dx10] : Array<Dynamic>));
       (format = cast (_Runtime.coalesce(_Runtime.getIndex(ParseDds.ddsDxgiFormat__parseDds, dxgiFormat), function():Dynamic return cast null) : Dynamic));
-      (cube = cast (_Runtime.orValue(cube, function():Dynamic return cast !_Runtime.strictEquals((_Runtime.toInt32(miscFlag) & _Runtime.toInt32(ParseDds.ddsDx10MiscCube__parseDds)), 0.0)) : Dynamic));
+      (cube = cast (((cast cube : Bool) || (cast !_Runtime.strictEquals((_Runtime.toInt32(miscFlag) & _Runtime.toInt32(ParseDds.ddsDx10MiscCube__parseDds)), 0.0) : Bool)) : Dynamic));
       (layers = cast (HxMath.max(1.0, arraySize) : Dynamic));
       (dataOffset = cast ((ParseDds.ddsDataOffset__parseDds + 20.0) : Dynamic));
-    } else { if (_Runtime.truthy(!_Runtime.strictEquals((_Runtime.toInt32(pfFlags) & _Runtime.toInt32(ParseDds.ddsPfFourCC__parseDds)), 0.0))) {
+    } else { if ((cast !_Runtime.strictEquals((_Runtime.toInt32(pfFlags) & _Runtime.toInt32(ParseDds.ddsPfFourCC__parseDds)), 0.0) : Bool)) {
       (format = cast (_Runtime.coalesce(_Runtime.getIndex(ParseDds.ddsFourCcFormat__parseDds, fourCC), function():Dynamic return cast null) : Dynamic));
-    } else { if (_Runtime.truthy(!_Runtime.strictEquals((_Runtime.toInt32(pfFlags) & _Runtime.toInt32(ParseDds.ddsPfRgb__parseDds)), 0.0))) {
+    } else { if ((cast !_Runtime.strictEquals((_Runtime.toInt32(pfFlags) & _Runtime.toInt32(ParseDds.ddsPfRgb__parseDds)), 0.0) : Bool)) {
       (format = cast (_Runtime.callValue(ParseDds.mapDdsUncompressed__parseDds, cast ([rgbBitCount, rMask, gMask, bMask, aMask] : Array<Dynamic>)) : Dynamic));
     } else {
       (format = cast (null : Dynamic));
     } } }
-    if (_Runtime.truthy(_Runtime.strictEquals(format, null))) { return cast null; }
+    if ((cast _Runtime.strictEquals(format, null) : Bool)) { return cast null; }
     width = HxMath.max(1.0, dwWidth);
     height = HxMath.max(1.0, dwHeight);
-    faces = _Runtime.select(cube, function():Dynamic return cast 6.0, function():Dynamic return cast 1.0);
+    faces = ((cast cube : Bool) ? (cast 6.0 : Dynamic) : (cast 1.0 : Dynamic));
     mipLevels = HxMath.max(1.0, dwMipMapCount);
     layout = _Runtime.callValue(computeTextureContainerLevels, cast ([format, width, height, mipLevels, layers, faces, dataOffset] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(layout, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(layout, 'endOffset'), _Runtime.field(bytes, 'byteLength'), '>')))) { return cast null; }
+    if ((cast ((cast _Runtime.strictEquals(layout, null) : Bool) || (cast ((cast _Runtime.field(layout, 'endOffset') : Float) > (cast _Runtime.field(bytes, 'byteLength') : Float)) : Bool)) : Bool)) { return cast null; }
     return cast { depth: 1.0, faces: faces, format: format, height: height, layers: layers, levels: _Runtime.field(layout, 'levels'), mipLevels: mipLevels, supercompression: 'None', width: width };
     return cast null;
   }
 
   public static function hasDdsMagic__parseDds(bytes:flighthq._internal._UInt8Array):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(_Runtime.field(bytes, 'byteLength'), 4.0, '>='), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(bytes, 0.0), 68.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(bytes, 1.0), 68.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(bytes, 2.0), 83.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(bytes, 3.0), 32.0));
+    return cast ((cast ((cast ((cast ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) >= (cast 4.0 : Float)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(bytes, 0.0), 68.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(bytes, 1.0), 68.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(bytes, 2.0), 83.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(bytes, 3.0), 32.0) : Bool));
     return cast null;
   }
 
   public static function mapDdsUncompressed__parseDds(rgbBitCount:Float, rMask:Float, gMask:Float, bMask:Float, aMask:Float):Null<TextureContainerFormat> {
-    if (_Runtime.truthy(!_Runtime.strictEquals(rgbBitCount, 32.0))) { return cast null; }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(rMask, 16711680.0), function():Dynamic return cast _Runtime.strictEquals(gMask, 65280.0)), function():Dynamic return cast _Runtime.strictEquals(bMask, 255.0)), function():Dynamic return cast _Runtime.strictEquals(aMask, 4278190080.0)))) {
+    if ((cast !_Runtime.strictEquals(rgbBitCount, 32.0) : Bool)) { return cast null; }
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(rMask, 16711680.0) : Bool) && (cast _Runtime.strictEquals(gMask, 65280.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(bMask, 255.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(aMask, 4278190080.0) : Bool)) : Bool)) {
       return cast 'bgra8unorm';
     }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(rMask, 255.0), function():Dynamic return cast _Runtime.strictEquals(gMask, 65280.0)), function():Dynamic return cast _Runtime.strictEquals(bMask, 16711680.0)), function():Dynamic return cast _Runtime.strictEquals(aMask, 4278190080.0)))) {
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(rMask, 255.0) : Bool) && (cast _Runtime.strictEquals(gMask, 65280.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(bMask, 16711680.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(aMask, 4278190080.0) : Bool)) : Bool)) {
       return cast 'rgba8unorm';
     }
     return cast null;

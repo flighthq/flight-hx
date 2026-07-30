@@ -32,7 +32,7 @@ class SceneNodeTransform {
     zy = (eyeY - target.y);
     zz = (eyeZ - target.z);
     zl = HxMath.sqrt((((zx * zx) + (zy * zy)) + (zz * zz)));
-    if (_Runtime.truthy(_Runtime.strictEquals(zl, 0.0))) {
+    if ((cast _Runtime.strictEquals(zl, 0.0) : Bool)) {
       (zz = cast (1.0 : Dynamic));
       (zl = cast (1.0 : Dynamic));
     }
@@ -43,7 +43,7 @@ class SceneNodeTransform {
     xy = ((up.z * zx) - (up.x * zz));
     xz = ((up.x * zy) - (up.y * zx));
     xl = HxMath.sqrt((((xx * xx) + (xy * xy)) + (xz * xz)));
-    if (_Runtime.truthy(!_Runtime.strictEquals(xl, 0.0))) {
+    if ((cast !_Runtime.strictEquals(xl, 0.0) : Bool)) {
       (xx = cast ((xx / xl) : Dynamic));
       (xy = cast ((xy / xl) : Dynamic));
       (xz = cast ((xz / xl) : Dynamic));

@@ -35,10 +35,10 @@ class CanvasTilemap {
     columns = _Runtime.field(__destructure0, 'columns');
     rows = _Runtime.field(__destructure0, 'rows');
     tiles = _Runtime.field(__destructure0, 'tiles');
-    if (_Runtime.truthy(_Runtime.strictEquals(tileset, null))) { return; }
+    if ((cast _Runtime.strictEquals(tileset, null) : Bool)) { return; }
     atlas = _Runtime.field(tileset, 'atlas');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(atlas, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(atlas, 'image'), null)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(atlas, 'image'), 'source'), null)))) { return; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(columns, 0.0), function():Dynamic return cast _Runtime.strictEquals(rows, 0.0)))) { return; }
+    if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(atlas, 'image'), null) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(atlas, 'image'), 'source'), null) : Bool)) : Bool)) { return; }
+    if ((cast ((cast _Runtime.strictEquals(columns, 0.0) : Bool) || (cast _Runtime.strictEquals(rows, 0.0) : Bool)) : Bool)) { return; }
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(tilemapNode, 'blendMode')] : Array<Dynamic>));
     context = _Runtime.field(state, 'context');
     image = _Runtime.field(_Runtime.field(atlas, 'image'), 'source');
@@ -50,31 +50,31 @@ class CanvasTilemap {
     tileWidth = _Runtime.field(__destructure1, 'tileWidth');
     tileHeight = _Runtime.field(__destructure1, 'tileHeight');
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', _Runtime.field(tilemapNode, 'alpha'));
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'allowSmoothing')))) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false); }
+    if ((cast !(cast _Runtime.field(state, 'allowSmoothing') : Bool) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false); }
     restoreMaterial = _Runtime.callValue(applyCanvasMaterial, cast ([state, _Runtime.field(tilemapNode, 'material')] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([_Runtime.field(transform, 'a'), _Runtime.field(transform, 'b'), _Runtime.field(transform, 'c'), _Runtime.field(transform, 'd'), _Runtime.field(transform, 'tx'), _Runtime.field(transform, 'ty')] : Array<Dynamic>));
     {
       var row:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(row, rows, '<'))) {
+      while ((cast ((cast row : Float) < (cast rows : Float)) : Bool)) {
         {
           var col:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(col, columns, '<'))) {
+          while ((cast ((cast col : Float) < (cast columns : Float)) : Bool)) {
             var id:Dynamic = _Runtime.getIndex(tiles, ((row * columns) + col));
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(id, 0.0, '<'), function():Dynamic return cast _Runtime.compare(id, numRegions, '>=')))) { col++; continue; }
+            if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { col++; continue; }
             var region:Dynamic = _Runtime.getIndex(regions, id);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(region, 'width'), 0.0, '<='), function():Dynamic return cast _Runtime.compare(_Runtime.field(region, 'height'), 0.0, '<=')))) { col++; continue; }
+            if ((cast ((cast ((cast _Runtime.field(region, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(region, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { col++; continue; }
             var dx:Dynamic = (col * tileWidth);
             var dy:Dynamic = (row * tileHeight);
-            flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([image, _Runtime.field(region, 'x'), _Runtime.field(region, 'y'), _Runtime.field(region, 'width'), _Runtime.field(region, 'height'), _Runtime.select(roundPixels, function():Dynamic return cast (_Runtime.toInt32(dx) | 0), function():Dynamic return cast dx), _Runtime.select(roundPixels, function():Dynamic return cast (_Runtime.toInt32(dy) | 0), function():Dynamic return cast dy), _Runtime.field(region, 'width'), _Runtime.field(region, 'height')] : Array<Dynamic>));
+            flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([image, _Runtime.field(region, 'x'), _Runtime.field(region, 'y'), _Runtime.field(region, 'width'), _Runtime.field(region, 'height'), ((cast roundPixels : Bool) ? (cast (_Runtime.toInt32(dx) | 0) : Dynamic) : (cast dx : Dynamic)), ((cast roundPixels : Bool) ? (cast (_Runtime.toInt32(dy) | 0) : Dynamic) : (cast dy : Dynamic)), _Runtime.field(region, 'width'), _Runtime.field(region, 'height')] : Array<Dynamic>));
             col++;
           }
         }
         row++;
       }
     }
-    if (_Runtime.truthy(restoreMaterial)) { flighthq._internal.backend.Canvas2dBackend.call(context, 'restore', cast ([] : Array<Dynamic>)); }
+    if ((cast restoreMaterial : Bool)) { flighthq._internal.backend.Canvas2dBackend.call(context, 'restore', cast ([] : Array<Dynamic>)); }
     flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'allowSmoothing')))) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', true); }
+    if ((cast !(cast _Runtime.field(state, 'allowSmoothing') : Bool) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', true); }
   }
 
   public static final defaultCanvasTilemapRenderer:SpriteRenderer = { createData: noopRendererData, submit: drawCanvasTilemap };

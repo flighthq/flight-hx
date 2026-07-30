@@ -43,14 +43,14 @@ class ParseParticleConfig {
   public static function parseParticleConfig(text:String, ?options:ParseParticleConfigOptions):ParticleEmitterConfig {
     var format:Dynamic = cast _Runtime.UNDEFINED;
     format = _Runtime.callValue(detectParticleFormat, cast ([text] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(format, null))) { return cast _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>)); }
+    if ((cast _Runtime.strictEquals(format, null) : Bool)) { return cast _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>)); }
     try {
-      if (_Runtime.truthy(_Runtime.strictEquals(format, LibgdxParticleFormatKind))) { return cast _Runtime.callValue(parseLibgdxParticle, cast ([text, options] : Array<Dynamic>)); }
-      if (_Runtime.truthy(_Runtime.strictEquals(format, ParticleDesignerFormatKind))) { return cast _Runtime.callValue(parseParticleDesignerPlist, cast ([text, options] : Array<Dynamic>)); }
-      if (_Runtime.truthy(_Runtime.strictEquals(format, PixiParticleFormatKind))) { return cast _Runtime.callValue(parsePixiParticle, cast ([text] : Array<Dynamic>)); }
-      if (_Runtime.truthy(_Runtime.strictEquals(format, SpineParticleFormatKind))) { return cast _Runtime.callValue(parseSpineParticle, cast ([text] : Array<Dynamic>)); }
-      if (_Runtime.truthy(_Runtime.strictEquals(format, StarlingPexFormatKind))) { return cast _Runtime.callValue(parseStarlingPex, cast ([text, options] : Array<Dynamic>)); }
-      if (_Runtime.truthy(_Runtime.strictEquals(format, UnityParticleFormatKind))) { return cast _Runtime.callValue(parseUnityParticle, cast ([text, options] : Array<Dynamic>)); }
+      if ((cast _Runtime.strictEquals(format, LibgdxParticleFormatKind) : Bool)) { return cast _Runtime.callValue(parseLibgdxParticle, cast ([text, options] : Array<Dynamic>)); }
+      if ((cast _Runtime.strictEquals(format, ParticleDesignerFormatKind) : Bool)) { return cast _Runtime.callValue(parseParticleDesignerPlist, cast ([text, options] : Array<Dynamic>)); }
+      if ((cast _Runtime.strictEquals(format, PixiParticleFormatKind) : Bool)) { return cast _Runtime.callValue(parsePixiParticle, cast ([text] : Array<Dynamic>)); }
+      if ((cast _Runtime.strictEquals(format, SpineParticleFormatKind) : Bool)) { return cast _Runtime.callValue(parseSpineParticle, cast ([text] : Array<Dynamic>)); }
+      if ((cast _Runtime.strictEquals(format, StarlingPexFormatKind) : Bool)) { return cast _Runtime.callValue(parseStarlingPex, cast ([text, options] : Array<Dynamic>)); }
+      if ((cast _Runtime.strictEquals(format, UnityParticleFormatKind) : Bool)) { return cast _Runtime.callValue(parseUnityParticle, cast ([text, options] : Array<Dynamic>)); }
     } catch (__error:Dynamic) {
       return cast _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>));
     }
@@ -61,31 +61,31 @@ class ParseParticleConfig {
   public static function parseParticleConfigDocument(text:String, ?options:ParseParticleConfigOptions):ParticleConfigParseResult {
     var format:Dynamic = cast _Runtime.UNDEFINED;
     format = _Runtime.callValue(detectParticleFormat, cast ([text] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(format, null))) {
+    if ((cast _Runtime.strictEquals(format, null) : Bool)) {
       return cast { config: _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>)), format: null, warnings: cast (['unknown-format: input did not match any supported particle format'] : Array<Dynamic>) };
     }
     try {
-      if (_Runtime.truthy(_Runtime.strictEquals(format, LibgdxParticleFormatKind))) {
+      if ((cast _Runtime.strictEquals(format, LibgdxParticleFormatKind) : Bool)) {
         var result:Dynamic = _Runtime.callValue(parseLibgdxParticleDocument, cast ([text, options] : Array<Dynamic>));
         return cast { config: _Runtime.field(result, 'config'), format: format, warnings: _Runtime.field(result, 'warnings') };
       }
-      if (_Runtime.truthy(_Runtime.strictEquals(format, ParticleDesignerFormatKind))) {
+      if ((cast _Runtime.strictEquals(format, ParticleDesignerFormatKind) : Bool)) {
         var result:Dynamic = _Runtime.callValue(parseParticleDesignerPlistDocument, cast ([text, options] : Array<Dynamic>));
         return cast { config: _Runtime.field(result, 'config'), format: format, warnings: _Runtime.field(result, 'warnings') };
       }
-      if (_Runtime.truthy(_Runtime.strictEquals(format, PixiParticleFormatKind))) {
+      if ((cast _Runtime.strictEquals(format, PixiParticleFormatKind) : Bool)) {
         var result:Dynamic = _Runtime.callValue(parsePixiParticleDocument, cast ([text] : Array<Dynamic>));
         return cast { config: _Runtime.field(result, 'config'), format: format, warnings: _Runtime.field(result, 'warnings') };
       }
-      if (_Runtime.truthy(_Runtime.strictEquals(format, SpineParticleFormatKind))) {
+      if ((cast _Runtime.strictEquals(format, SpineParticleFormatKind) : Bool)) {
         var result:Dynamic = _Runtime.callValue(parseSpineParticleDocument, cast ([text] : Array<Dynamic>));
         return cast { config: _Runtime.field(result, 'config'), format: format, warnings: _Runtime.field(result, 'warnings') };
       }
-      if (_Runtime.truthy(_Runtime.strictEquals(format, StarlingPexFormatKind))) {
+      if ((cast _Runtime.strictEquals(format, StarlingPexFormatKind) : Bool)) {
         var result:Dynamic = _Runtime.callValue(parseStarlingPexDocument, cast ([text, options] : Array<Dynamic>));
         return cast { config: _Runtime.field(result, 'config'), format: format, warnings: _Runtime.field(result, 'warnings') };
       }
-      if (_Runtime.truthy(_Runtime.strictEquals(format, UnityParticleFormatKind))) {
+      if ((cast _Runtime.strictEquals(format, UnityParticleFormatKind) : Bool)) {
         var result:Dynamic = _Runtime.callValue(parseUnityParticleDocument, cast ([text, options] : Array<Dynamic>));
         return cast { config: _Runtime.field(result, 'config'), format: format, warnings: _Runtime.field(result, 'warnings') };
       }

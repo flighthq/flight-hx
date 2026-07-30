@@ -11,7 +11,7 @@ class GetClockEffectiveScale {
     var current:Null<Clock> = cast _Runtime.UNDEFINED;
     scale = _Runtime.field(clock, 'scale');
     current = _Runtime.field(clock, 'parent');
-    while (_Runtime.truthy(!_Runtime.strictEquals(current, null))) {
+    while ((cast !_Runtime.strictEquals(current, null) : Bool)) {
       (scale = cast ((scale * _Runtime.field(current, 'scale')) : Dynamic));
       (current = cast (_Runtime.field(current, 'parent') : Dynamic));
     }

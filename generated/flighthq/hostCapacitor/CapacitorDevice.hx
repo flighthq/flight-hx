@@ -89,8 +89,8 @@ class CapacitorDevice {
   }
 
   public static function toFormFactor__capacitorDevice(info:Null<CapacitorDeviceInfo>):String {
-    if (_Runtime.truthy(_Runtime.strictEquals(info, null))) { return cast DeviceFormFactorUnknown; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(info, 'platform'), 'ios'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(info, 'platform'), 'android')))) { return cast DeviceFormFactorPhone; }
+    if ((cast _Runtime.strictEquals(info, null) : Bool)) { return cast DeviceFormFactorUnknown; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(info, 'platform'), 'ios') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(info, 'platform'), 'android') : Bool)) : Bool)) { return cast DeviceFormFactorPhone; }
     return cast DeviceFormFactorUnknown;
     return cast null;
   }

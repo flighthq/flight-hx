@@ -22,21 +22,21 @@ class ColorLut {
     i = 0.0;
     {
       var bi:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(bi, n, '<'))) {
+      while ((cast ((cast bi : Float) < (cast n : Float)) : Bool)) {
         var b:Dynamic = (bi / denom);
         {
           var gi:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(gi, n, '<'))) {
+          while ((cast ((cast gi : Float) < (cast n : Float)) : Bool)) {
             var g:Dynamic = (gi / denom);
             {
               var ri:Dynamic = 0.0;
-              while (_Runtime.truthy(_Runtime.compare(ri, n, '<'))) {
+              while ((cast ((cast ri : Float) < (cast n : Float)) : Bool)) {
                 _Runtime.setIndex(cell, 0.0, (ri / denom));
                 _Runtime.setIndex(cell, 1.0, g);
                 _Runtime.setIndex(cell, 2.0, b);
                 {
                   var k:Dynamic = 0.0;
-                  while (_Runtime.truthy(_Runtime.compare(k, _Runtime.field(transforms, 'length'), '<'))) {
+                  while ((cast ((cast k : Float) < (cast _Runtime.field(transforms, 'length') : Float)) : Bool)) {
                     _Runtime.callValue(_Runtime.getIndex(transforms, k), cast ([cell, _Runtime.getIndex(cell, 0.0), _Runtime.getIndex(cell, 1.0), _Runtime.getIndex(cell, 2.0)] : Array<Dynamic>));
                     k++;
                   }
@@ -90,7 +90,7 @@ class ColorLut {
     db = (fb - b0);
     {
       var c:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(c, 3.0, '<'))) {
+      while ((cast ((cast c : Float) < (cast 3.0 : Float)) : Bool)) {
         var c000:Dynamic = _Runtime.getIndex(s, ((((((b0 * n) + g0) * n) + r0) * 3.0) + c));
         var c100:Dynamic = _Runtime.getIndex(s, ((((((b0 * n) + g0) * n) + r1) * 3.0) + c));
         var c010:Dynamic = _Runtime.getIndex(s, ((((((b0 * n) + g1) * n) + r0) * 3.0) + c));
@@ -112,7 +112,7 @@ class ColorLut {
   }
 
   public static function clamp01__colorLut(v:Float):Float {
-    return cast _Runtime.select(_Runtime.compare(v, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(v, 1.0, '>'), function():Dynamic return cast 1.0, function():Dynamic return cast v));
+    return cast ((cast ((cast v : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast v : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast v : Dynamic)) : Dynamic));
     return cast null;
   }
 }

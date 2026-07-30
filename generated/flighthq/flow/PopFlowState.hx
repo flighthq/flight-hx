@@ -12,12 +12,12 @@ class PopFlowState {
     var popped:Dynamic = cast _Runtime.UNDEFINED;
     var revealed:Dynamic = cast _Runtime.UNDEFINED;
     states = _Runtime.field(stack, 'states');
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(states, 'length'), 0.0))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(states, 'length'), 0.0) : Bool)) {
       return cast null;
     }
     popped = (cast _Runtime.callProperty(states, 'pop', cast ([] : Array<Dynamic>)) : FlowState);
     _Runtime.callOptionalProperty(popped, 'onExit', cast ([] : Array<Dynamic>));
-    revealed = _Runtime.select(_Runtime.compare(_Runtime.field(states, 'length'), 0.0, '>'), function():Dynamic return cast _Runtime.getIndex(states, (_Runtime.field(states, 'length') - 1.0)), function():Dynamic return cast null);
+    revealed = ((cast ((cast _Runtime.field(states, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.getIndex(states, (_Runtime.field(states, 'length') - 1.0)) : Dynamic) : (cast null : Dynamic));
     _Runtime.callOptionalProperty(revealed, 'onResume', cast ([] : Array<Dynamic>));
     return cast popped;
     return cast null;

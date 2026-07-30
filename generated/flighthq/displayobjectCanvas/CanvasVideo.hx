@@ -18,16 +18,16 @@ class CanvasVideo {
     _Runtime.callValue(drawCanvasDisplayObject, cast ([state, renderProxy] : Array<Dynamic>));
     source = (cast _Runtime.field(renderProxy, 'source') : Video);
     element = _Runtime.optionalField(_Runtime.field(_Runtime.field(source, 'data'), 'source'), 'element');
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(element, null)), function():Dynamic return cast _Runtime.compare(_Runtime.field(element, 'readyState'), 2.0, '>=')))) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(element, null) : Bool)) : Bool) && (cast ((cast _Runtime.field(element, 'readyState') : Float) >= (cast 2.0 : Float)) : Bool)) : Bool)) {
       var context:Dynamic = _Runtime.field(state, 'context');
       _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', _Runtime.field(renderProxy, 'alpha'));
       _Runtime.callValue(setCanvasTransform, cast ([state, context, _Runtime.field(renderProxy, 'transform2D')] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(state, 'allowSmoothing')), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(_Runtime.field(source, 'data'), 'smoothing'))))) {
+      if ((cast ((cast !(cast _Runtime.field(state, 'allowSmoothing') : Bool) : Bool) || (cast !(cast _Runtime.field(_Runtime.field(source, 'data'), 'smoothing') : Bool) : Bool)) : Bool)) {
         flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false);
       }
       flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([element, 0.0, 0.0, _Runtime.field(element, 'videoWidth'), _Runtime.field(element, 'videoHeight')] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(state, 'allowSmoothing')), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(_Runtime.field(source, 'data'), 'smoothing'))))) {
+      if ((cast ((cast !(cast _Runtime.field(state, 'allowSmoothing') : Bool) : Bool) || (cast !(cast _Runtime.field(_Runtime.field(source, 'data'), 'smoothing') : Bool) : Bool)) : Bool)) {
         flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', true);
       }
     }

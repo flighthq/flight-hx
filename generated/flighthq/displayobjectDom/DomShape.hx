@@ -35,12 +35,12 @@ class DomShape {
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     data = (cast _Runtime.field(renderProxy, 'rendererData') : Null<DomShapeData__domShape>);
-    if (_Runtime.truthy(_Runtime.strictEquals(data, null))) { return; }
+    if ((cast _Runtime.strictEquals(data, null) : Bool)) { return; }
     source = (cast _Runtime.field(renderProxy, 'source') : Shape);
     __destructure0 = _Runtime.field(source, 'data');
     commands = _Runtime.field(__destructure0, 'commands');
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0))) { return; }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'canvas'), null))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool)) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(data, 'canvas'), null) : Bool)) {
       _Runtime.setField(data, 'canvas', flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)));
       _Runtime.setField(data, 'context', flighthq._internal.backend.CanvasElementBackend.call(_Runtime.field(data, 'canvas'), 'getContext', cast (['2d'] : Array<Dynamic>)));
       _Runtime.callValue(prepareDomElement, cast ([_Runtime.field(data, 'canvas')] : Array<Dynamic>));
@@ -51,12 +51,12 @@ class DomShape {
     flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'width', w);
     flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'height', h);
     ctx = _Runtime.field(data, 'context');
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(bounds, 'x'), 0.0), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(bounds, 'y'), 0.0)))) {
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(bounds, 'x'), 0.0) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(bounds, 'y'), 0.0) : Bool)) : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'translate', cast ([-_Runtime.field(bounds, 'x'), -_Runtime.field(bounds, 'y')] : Array<Dynamic>));
     }
     _Runtime.callValue(renderCanvasShapeCommands, cast ([ctx, commands] : Array<Dynamic>));
-    _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'opacity', _Runtime.select(_Runtime.compare(_Runtime.field(renderProxy, 'alpha'), 1.0, '<'), function():Dynamic return cast Std.string(_Runtime.field(renderProxy, 'alpha')), function():Dynamic return cast ''));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(state, 'domCssFilterResolver'), null))) {
+    _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'opacity', ((cast ((cast _Runtime.field(renderProxy, 'alpha') : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string(_Runtime.field(renderProxy, 'alpha')) : Dynamic) : (cast '' : Dynamic)));
+    if ((cast !_Runtime.strictEquals(_Runtime.field(state, 'domCssFilterResolver'), null) : Bool)) {
       _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'filter', _Runtime.coalesce(_Runtime.callProperty(state, 'domCssFilterResolver', cast ([renderProxy] : Array<Dynamic>)), function():Dynamic return cast ''));
     }
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([_Runtime.field(data, 'canvas'), _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));

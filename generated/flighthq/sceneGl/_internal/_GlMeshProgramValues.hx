@@ -31,7 +31,7 @@ class _GlMeshProgramValues {
     flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.DEPTH_TEST);
     flighthq._internal.backend.WebGl2Backend.depthFunc(gl, flighthq._internal.backend.WebGl2Backend.LESS);
     flighthq._internal.backend.WebGl2Backend.depthMask(gl, true);
-    if (_Runtime.truthy(doubleSided)) {
+    if ((cast doubleSided : Bool)) {
       flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.CULL_FACE);
     } else {
       flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.CULL_FACE);
@@ -42,11 +42,11 @@ class _GlMeshProgramValues {
   public static function bindGlUvTransform(gl:Dynamic, program:GlMeshProgram, texture:Null<TextureLike>):Void {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.field(program, 'locUvTransform');
-    if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (loc = cast (flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(program, 'program'), 'u_uvTransform') : Dynamic));
       _Runtime.setField((cast program : GlMeshProgram), 'locUvTransform', loc);
     }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(loc, null), function():Dynamic return cast _Runtime.strictEquals(texture, null)))) { return; }
+    if ((cast ((cast _Runtime.strictEquals(loc, null) : Bool) || (cast _Runtime.strictEquals(texture, null) : Bool)) : Bool)) { return; }
     _Runtime.callValue(getTextureUvMatrix, cast ([_GlMeshProgramValues.scratchUvMatrix__glMeshProgram, texture] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, loc, false, _GlMeshProgramValues.scratchUvMatrix__glMeshProgram.m);
   }
@@ -69,16 +69,16 @@ class _GlMeshProgramValues {
     var subset:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(program, 'locModel'), false, _Runtime.field(proxy, 'worldMatrix').m);
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(program, 'locNormalMatrix'), null))) { flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, _Runtime.field(program, 'locNormalMatrix'), false, _Runtime.field(proxy, 'normalMatrix').m); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(program, 'locNormalMatrix'), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, _Runtime.field(program, 'locNormalMatrix'), false, _Runtime.field(proxy, 'normalMatrix').m); }
     locObjectAlpha = _Runtime.field(program, 'locObjectAlpha');
-    if (_Runtime.truthy(_Runtime.strictEquals(locObjectAlpha, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(locObjectAlpha, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (locObjectAlpha = cast (flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(program, 'program'), 'u_objectAlpha') : Dynamic));
       _Runtime.setField((cast program : GlMeshProgram), 'locObjectAlpha', locObjectAlpha);
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(locObjectAlpha, null))) { flighthq._internal.backend.WebGl2Backend.uniform1f(gl, locObjectAlpha, _Runtime.coalesce(_Runtime.field(proxy, 'alpha'), function():Dynamic return cast 1.0)); }
+    if ((cast !_Runtime.strictEquals(locObjectAlpha, null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1f(gl, locObjectAlpha, _Runtime.coalesce(_Runtime.field(proxy, 'alpha'), function():Dynamic return cast 1.0)); }
     jointMatrices = _Runtime.field(proxy, 'jointMatrices');
-    gpuSkinned = _Runtime.andValue(!_Runtime.looseEquals(_Runtime.field(program, 'locJointTexture'), null), function():Dynamic return cast !_Runtime.looseEquals(jointMatrices, null));
-    if (_Runtime.truthy(gpuSkinned)) {
+    gpuSkinned = ((cast !_Runtime.looseEquals(_Runtime.field(program, 'locJointTexture'), null) : Bool) && (cast !_Runtime.looseEquals(jointMatrices, null) : Bool));
+    if ((cast gpuSkinned : Bool)) {
       var palette:Dynamic = _Runtime.callValue(ensureGlSkinPalette, cast ([state] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + SKIN_PALETTE_TEXTURE_UNIT));
       _Runtime.callValue(uploadGlSkinPaletteTexture, cast ([gl, palette, jointMatrices, (_Runtime.toInt32((_Runtime.field(jointMatrices, 'length') / 16.0)) | 0)] : Array<Dynamic>));
@@ -86,8 +86,8 @@ class _GlMeshProgramValues {
     }
     upload = _Runtime.callValue(ensureGlMeshUpload, cast ([state, geometry, gpuSkinned] : Array<Dynamic>));
     subset = _Runtime.field(proxy, 'subset');
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(upload, 'indexBuffer'), null))) {
-      var elementSize:Dynamic = _Runtime.select(_Runtime.strictEquals(_Runtime.field(upload, 'indexType'), flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT), function():Dynamic return cast 4.0, function():Dynamic return cast 2.0);
+    if ((cast !_Runtime.strictEquals(_Runtime.field(upload, 'indexBuffer'), null) : Bool)) {
+      var elementSize:Dynamic = ((cast _Runtime.strictEquals(_Runtime.field(upload, 'indexType'), flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT) : Bool) ? (cast 4.0 : Dynamic) : (cast 2.0 : Dynamic));
       flighthq._internal.backend.WebGl2Backend.drawElements(gl, flighthq._internal.backend.WebGl2Backend.TRIANGLES, _Runtime.field(subset, 'indexCount'), _Runtime.field(upload, 'indexType'), (_Runtime.field(subset, 'indexOffset') * elementSize));
     } else {
       flighthq._internal.backend.WebGl2Backend.drawArrays(gl, flighthq._internal.backend.WebGl2Backend.TRIANGLES, _Runtime.field(subset, 'indexOffset'), _Runtime.field(subset, 'indexCount'));
@@ -99,7 +99,7 @@ class _GlMeshProgramValues {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>));
     program = ((cast _Runtime.field(runtime, 'programCache') : flighthq._internal._Map).get(key));
-    if (_Runtime.truthy(_Runtime.strictEquals(program, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(program, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (program = cast (_Runtime.callValue(compile, cast ([_Runtime.field(state, 'gl')] : Array<Dynamic>)) : Dynamic));
       ((cast _Runtime.field(runtime, 'programCache') : flighthq._internal._Map).set(key, program));
     }
@@ -108,7 +108,7 @@ class _GlMeshProgramValues {
   }
 
   public static function hasGlUvTransform(texture:Null<TextureLike>):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(texture, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(texture, 'image'), null)), function():Dynamic return cast _Runtime.callValue(hasTextureUvTransform, cast ([texture] : Array<Dynamic>)));
+    return cast ((cast ((cast !_Runtime.strictEquals(texture, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(texture, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasTextureUvTransform, cast ([texture] : Array<Dynamic>)) : Bool));
     return cast null;
   }
 
@@ -120,8 +120,8 @@ class _GlMeshProgramValues {
 
   public static function setGlMeshViewProjection(gl:Dynamic, locViewProjection:Null<Dynamic>, camera:Camera):Void {
     var aspect:Dynamic = cast _Runtime.UNDEFINED;
-    aspect = _Runtime.select(_Runtime.strictEquals(_Runtime.field(camera.projection, 'kind'), 'perspective'), function():Dynamic return cast camera.projection.aspect, function():Dynamic return cast 1.0);
-    _Runtime.callValue(getCameraViewProjectionMatrix4, cast ([_GlMeshProgramValues.scratchViewProjection__glMeshProgram, camera, _Runtime.select(!_Runtime.strictEquals(aspect, 0.0), function():Dynamic return cast aspect, function():Dynamic return cast 1.0)] : Array<Dynamic>));
+    aspect = ((cast _Runtime.strictEquals(_Runtime.field(camera.projection, 'kind'), 'perspective') : Bool) ? (cast camera.projection.aspect : Dynamic) : (cast 1.0 : Dynamic));
+    _Runtime.callValue(getCameraViewProjectionMatrix4, cast ([_GlMeshProgramValues.scratchViewProjection__glMeshProgram, camera, ((cast !_Runtime.strictEquals(aspect, 0.0) : Bool) ? (cast aspect : Dynamic) : (cast 1.0 : Dynamic))] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, locViewProjection, false, _GlMeshProgramValues.scratchViewProjection__glMeshProgram.m);
   }
 

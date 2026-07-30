@@ -43,21 +43,21 @@ class GetMeshSkinBounds {
     restMaxZ = HxMath.NEGATIVE_INFINITY;
     {
       var v:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(v, restVertexCount, '<'))) {
+      while ((cast ((cast v : Float) < (cast restVertexCount : Float)) : Bool)) {
         var p:Dynamic = (v * 3.0);
         var px:Dynamic = _Runtime.getIndex(positions, p);
         var py:Dynamic = _Runtime.getIndex(positions, (p + 1.0));
         var pz:Dynamic = _Runtime.getIndex(positions, (p + 2.0));
-        if (_Runtime.truthy(_Runtime.compare(px, restMinX, '<'))) { (restMinX = cast (px : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(py, restMinY, '<'))) { (restMinY = cast (py : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(pz, restMinZ, '<'))) { (restMinZ = cast (pz : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(px, restMaxX, '>'))) { (restMaxX = cast (px : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(py, restMaxY, '>'))) { (restMaxY = cast (py : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(pz, restMaxZ, '>'))) { (restMaxZ = cast (pz : Dynamic)); }
+        if ((cast ((cast px : Float) < (cast restMinX : Float)) : Bool)) { (restMinX = cast (px : Dynamic)); }
+        if ((cast ((cast py : Float) < (cast restMinY : Float)) : Bool)) { (restMinY = cast (py : Dynamic)); }
+        if ((cast ((cast pz : Float) < (cast restMinZ : Float)) : Bool)) { (restMinZ = cast (pz : Dynamic)); }
+        if ((cast ((cast px : Float) > (cast restMaxX : Float)) : Bool)) { (restMaxX = cast (px : Dynamic)); }
+        if ((cast ((cast py : Float) > (cast restMaxY : Float)) : Bool)) { (restMaxY = cast (py : Dynamic)); }
+        if ((cast ((cast pz : Float) > (cast restMaxZ : Float)) : Bool)) { (restMaxZ = cast (pz : Dynamic)); }
         v++;
       }
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(restVertexCount, 0.0))) {
+    if ((cast _Runtime.strictEquals(restVertexCount, 0.0) : Bool)) {
       (out.min.x = cast (HxMath.POSITIVE_INFINITY : Dynamic));
       (out.min.y = cast (HxMath.POSITIVE_INFINITY : Dynamic));
       (out.min.z = cast (HxMath.POSITIVE_INFINITY : Dynamic));
@@ -83,8 +83,8 @@ class GetMeshSkinBounds {
     maxZ = HxMath.NEGATIVE_INFINITY;
     {
       var j:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(j, jointCount, '<'))) {
-        if (_Runtime.truthy(!_Runtime.truthy(_Runtime.getIndex(referenced, j)))) { j++; continue; }
+      while ((cast ((cast j : Float) < (cast jointCount : Float)) : Bool)) {
+        if ((cast !_Runtime.truthy(_Runtime.getIndex(referenced, j)) : Bool)) { j++; continue; }
         var m:Dynamic = (j * 16.0);
         var tcx:Dynamic = ((((_Runtime.getIndex(palette, m) * cx) + (_Runtime.getIndex(palette, (m + 4.0)) * cy)) + (_Runtime.getIndex(palette, (m + 8.0)) * cz)) + _Runtime.getIndex(palette, (m + 12.0)));
         var tcy:Dynamic = ((((_Runtime.getIndex(palette, (m + 1.0)) * cx) + (_Runtime.getIndex(palette, (m + 5.0)) * cy)) + (_Runtime.getIndex(palette, (m + 9.0)) * cz)) + _Runtime.getIndex(palette, (m + 13.0)));
@@ -92,12 +92,12 @@ class GetMeshSkinBounds {
         var tex:Dynamic = (((HxMath.abs(_Runtime.getIndex(palette, m)) * ex) + (HxMath.abs(_Runtime.getIndex(palette, (m + 4.0))) * ey)) + (HxMath.abs(_Runtime.getIndex(palette, (m + 8.0))) * ez));
         var tey:Dynamic = (((HxMath.abs(_Runtime.getIndex(palette, (m + 1.0))) * ex) + (HxMath.abs(_Runtime.getIndex(palette, (m + 5.0))) * ey)) + (HxMath.abs(_Runtime.getIndex(palette, (m + 9.0))) * ez));
         var tez:Dynamic = (((HxMath.abs(_Runtime.getIndex(palette, (m + 2.0))) * ex) + (HxMath.abs(_Runtime.getIndex(palette, (m + 6.0))) * ey)) + (HxMath.abs(_Runtime.getIndex(palette, (m + 10.0))) * ez));
-        if (_Runtime.truthy(_Runtime.compare((tcx - tex), minX, '<'))) { (minX = cast ((tcx - tex) : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare((tcy - tey), minY, '<'))) { (minY = cast ((tcy - tey) : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare((tcz - tez), minZ, '<'))) { (minZ = cast ((tcz - tez) : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare((tcx + tex), maxX, '>'))) { (maxX = cast ((tcx + tex) : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare((tcy + tey), maxY, '>'))) { (maxY = cast ((tcy + tey) : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare((tcz + tez), maxZ, '>'))) { (maxZ = cast ((tcz + tez) : Dynamic)); }
+        if ((cast ((cast (tcx - tex) : Float) < (cast minX : Float)) : Bool)) { (minX = cast ((tcx - tex) : Dynamic)); }
+        if ((cast ((cast (tcy - tey) : Float) < (cast minY : Float)) : Bool)) { (minY = cast ((tcy - tey) : Dynamic)); }
+        if ((cast ((cast (tcz - tez) : Float) < (cast minZ : Float)) : Bool)) { (minZ = cast ((tcz - tez) : Dynamic)); }
+        if ((cast ((cast (tcx + tex) : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast ((tcx + tex) : Dynamic)); }
+        if ((cast ((cast (tcy + tey) : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast ((tcy + tey) : Dynamic)); }
+        if ((cast ((cast (tcz + tez) : Float) > (cast maxZ : Float)) : Bool)) { (maxZ = cast ((tcz + tez) : Dynamic)); }
         j++;
       }
     }
@@ -129,17 +129,17 @@ class GetMeshSkinBounds {
     maxZ = HxMath.NEGATIVE_INFINITY;
     {
       var v:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(v, vertexCount, '<'))) {
+      while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
         var p:Dynamic = (v * 3.0);
         var px:Dynamic = _Runtime.getIndex(skinned, p);
         var py:Dynamic = _Runtime.getIndex(skinned, (p + 1.0));
         var pz:Dynamic = _Runtime.getIndex(skinned, (p + 2.0));
-        if (_Runtime.truthy(_Runtime.compare(px, minX, '<'))) { (minX = cast (px : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(py, minY, '<'))) { (minY = cast (py : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(pz, minZ, '<'))) { (minZ = cast (pz : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(px, maxX, '>'))) { (maxX = cast (px : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(py, maxY, '>'))) { (maxY = cast (py : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.compare(pz, maxZ, '>'))) { (maxZ = cast (pz : Dynamic)); }
+        if ((cast ((cast px : Float) < (cast minX : Float)) : Bool)) { (minX = cast (px : Dynamic)); }
+        if ((cast ((cast py : Float) < (cast minY : Float)) : Bool)) { (minY = cast (py : Dynamic)); }
+        if ((cast ((cast pz : Float) < (cast minZ : Float)) : Bool)) { (minZ = cast (pz : Dynamic)); }
+        if ((cast ((cast px : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (px : Dynamic)); }
+        if ((cast ((cast py : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast (py : Dynamic)); }
+        if ((cast ((cast pz : Float) > (cast maxZ : Float)) : Bool)) { (maxZ = cast (pz : Dynamic)); }
         v++;
       }
     }
@@ -158,10 +158,10 @@ class GetMeshSkinBounds {
     influenceCount = _Runtime.field(joints, 'length');
     {
       var k:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(k, influenceCount, '<'))) {
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.getIndex(weights, k), 0.0))) { k++; continue; }
+      while ((cast ((cast k : Float) < (cast influenceCount : Float)) : Bool)) {
+        if ((cast _Runtime.strictEquals(_Runtime.getIndex(weights, k), 0.0) : Bool)) { k++; continue; }
         var j:Dynamic = (_Runtime.toInt32(_Runtime.getIndex(joints, k)) | 0);
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(j, 0.0, '>='), function():Dynamic return cast _Runtime.compare(j, jointCount, '<')))) { _Runtime.setIndex(referenced, j, 1.0); }
+        if ((cast ((cast ((cast j : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast j : Float) < (cast jointCount : Float)) : Bool)) : Bool)) { _Runtime.setIndex(referenced, j, 1.0); }
         k++;
       }
     }

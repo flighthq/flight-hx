@@ -16,7 +16,7 @@ class GlMeshUpload {
     gl = _Runtime.field(state, 'gl');
     flighthq._internal.backend.WebGl2Backend.deleteVertexArray(gl, _Runtime.field(upload, 'vao'));
     flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, _Runtime.field(upload, 'vertexBuffer'));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(upload, 'indexBuffer'), null))) { flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, _Runtime.field(upload, 'indexBuffer')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(upload, 'indexBuffer'), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, _Runtime.field(upload, 'indexBuffer')); }
   }
 
   public static function ensureGlMeshUpload(state:GlRenderState, geometry:MeshGeometry, gpuSkinned:Dynamic = false):Dynamic {
@@ -28,32 +28,32 @@ class GlMeshUpload {
     gl = _Runtime.field(state, 'gl');
     cache = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'uploadCache');
     upload = ((cast cache : flighthq._internal._WeakMap).get((cast geometry : MeshGeometry)));
-    bindPose = _Runtime.select(gpuSkinned, function():Dynamic return cast _Runtime.callValue(getMeshGeometrySkinBindPose, cast ([geometry] : Array<Dynamic>)), function():Dynamic return cast null);
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.select(!_Runtime.strictEquals(bindPose, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(upload, 'skinBindUploaded'), true), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(upload, 'version'), _Runtime.field(geometry, 'version')))))) {
+    bindPose = ((cast gpuSkinned : Bool) ? (cast _Runtime.callValue(getMeshGeometrySkinBindPose, cast ([geometry] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
+    if ((cast ((cast !_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast !_Runtime.strictEquals(bindPose, null) : Bool) ? (cast _Runtime.strictEquals(_Runtime.field(upload, 'skinBindUploaded'), true) : Dynamic) : (cast _Runtime.strictEquals(_Runtime.field(upload, 'version'), _Runtime.field(geometry, 'version')) : Dynamic)) : Bool)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, _Runtime.field(upload, 'vao'));
       return cast upload;
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (upload = cast ({ indexBuffer: null, indexCount: 0.0, indexType: flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT, vao: flighthq._internal.backend.WebGl2Backend.createVertexArray(gl), version: -1.0, vertexBuffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl) } : Dynamic));
       ((cast cache : flighthq._internal._WeakMap).set((cast geometry : MeshGeometry), upload));
     }
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, _Runtime.field(upload, 'vao'));
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(upload, 'vertexBuffer'));
-    flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.select(!_Runtime.strictEquals(bindPose, null), function():Dynamic return cast _Runtime.callValue(GlMeshUpload.buildSkinBindVertices__glMeshUpload, cast ([geometry, bindPose] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(geometry, 'vertices')), flighthq._internal.backend.WebGl2Backend.STATIC_DRAW);
+    flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, ((cast !_Runtime.strictEquals(bindPose, null) : Bool) ? (cast _Runtime.callValue(GlMeshUpload.buildSkinBindVertices__glMeshUpload, cast ([geometry, bindPose] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.field(geometry, 'vertices') : Dynamic)), flighthq._internal.backend.WebGl2Backend.STATIC_DRAW);
     _Runtime.setField(upload, 'skinBindUploaded', !_Runtime.strictEquals(bindPose, null));
     stride = _Runtime.field(_Runtime.field(geometry, 'layout'), 'stride');
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(_Runtime.field(geometry, 'layout'), 'attributes'), 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(_Runtime.field(geometry, 'layout'), 'attributes'), 'length') : Float)) : Bool)) {
         _Runtime.callValue(GlMeshUpload.bindGlVertexAttribute__glMeshUpload, cast ([gl, _Runtime.getIndex(_Runtime.field(_Runtime.field(geometry, 'layout'), 'attributes'), i), stride] : Array<Dynamic>));
         i++;
       }
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(geometry, 'indices'), null))) {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(upload, 'indexBuffer'), null))) { _Runtime.setField(upload, 'indexBuffer', flighthq._internal.backend.WebGl2Backend.createBuffer(gl)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(geometry, 'indices'), null) : Bool)) {
+      if ((cast _Runtime.strictEquals(_Runtime.field(upload, 'indexBuffer'), null) : Bool)) { _Runtime.setField(upload, 'indexBuffer', flighthq._internal.backend.WebGl2Backend.createBuffer(gl)); }
       flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER, _Runtime.field(upload, 'indexBuffer'));
       flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER, _Runtime.field(geometry, 'indices'), flighthq._internal.backend.WebGl2Backend.STATIC_DRAW);
-      _Runtime.setField(upload, 'indexType', _Runtime.select(_Runtime.isInstanceOf(_Runtime.field(geometry, 'indices'), _Runtime.globalValue('Uint32Array')), function():Dynamic return cast flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT, function():Dynamic return cast flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT));
+      _Runtime.setField(upload, 'indexType', ((cast _Runtime.isInstanceOf(_Runtime.field(geometry, 'indices'), _Runtime.globalValue('Uint32Array')) : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT : Dynamic)));
       _Runtime.setField(upload, 'indexCount', _Runtime.field(_Runtime.field(geometry, 'indices'), 'length'));
     } else {
       _Runtime.setField(upload, 'indexBuffer', null);
@@ -69,8 +69,8 @@ class GlMeshUpload {
     attributes = _Runtime.field(_Runtime.field(geometry, 'layout'), 'attributes');
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(attributes, 'length'), '<'))) {
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.getIndex(attributes, i), 'semantic'), 'uv1'))) { return cast true; }
+      while ((cast ((cast i : Float) < (cast _Runtime.field(attributes, 'length') : Float)) : Bool)) {
+        if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.getIndex(attributes, i), 'semantic'), 'uv1') : Bool)) { return cast true; }
         i++;
       }
     }
@@ -97,15 +97,15 @@ class GlMeshUpload {
     vertexCount = (_Runtime.toInt32((_Runtime.field(positions, 'length') / 3.0)) | 0);
     {
       var v:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(v, vertexCount, '<'))) {
+      while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
         var base:Dynamic = (v * floatsPerVertex);
         var s:Dynamic = (v * 3.0);
-        if (_Runtime.truthy(_Runtime.compare(positionOffset, 0.0, '>='))) {
+        if ((cast ((cast positionOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
           _Runtime.setIndex(out, (base + positionOffset), _Runtime.getIndex(positions, s));
           _Runtime.setIndex(out, ((base + positionOffset) + 1.0), _Runtime.getIndex(positions, (s + 1.0)));
           _Runtime.setIndex(out, ((base + positionOffset) + 2.0), _Runtime.getIndex(positions, (s + 2.0)));
         }
-        if (_Runtime.truthy(_Runtime.compare(normalOffset, 0.0, '>='))) {
+        if ((cast ((cast normalOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
           _Runtime.setIndex(out, (base + normalOffset), _Runtime.getIndex(normals, s));
           _Runtime.setIndex(out, ((base + normalOffset) + 1.0), _Runtime.getIndex(normals, (s + 1.0)));
           _Runtime.setIndex(out, ((base + normalOffset) + 2.0), _Runtime.getIndex(normals, (s + 2.0)));
@@ -122,8 +122,8 @@ class GlMeshUpload {
     attributes = _Runtime.field(_Runtime.field(geometry, 'layout'), 'attributes');
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(attributes, 'length'), '<'))) {
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.getIndex(attributes, i), 'semantic'), semantic))) { return cast (_Runtime.field(_Runtime.getIndex(attributes, i), 'byteOffset') / 4.0); }
+      while ((cast ((cast i : Float) < (cast _Runtime.field(attributes, 'length') : Float)) : Bool)) {
+        if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.getIndex(attributes, i), 'semantic'), semantic) : Bool)) { return cast (_Runtime.field(_Runtime.getIndex(attributes, i), 'byteOffset') / 4.0); }
         i++;
       }
     }
@@ -140,13 +140,13 @@ class GlMeshUpload {
     var type:Dynamic = cast _Runtime.UNDEFINED;
     var normalized:Dynamic = cast _Runtime.UNDEFINED;
     location = _Runtime.getIndex(GlMeshUpload.ATTRIBUTE_LOCATION__glMeshUpload, _Runtime.field(attribute, 'semantic'));
-    if (_Runtime.truthy(_Runtime.strictEquals(location, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
+    if ((cast _Runtime.strictEquals(location, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     __destructure1 = _Runtime.callValue(GlMeshUpload.resolveGlVertexFormat__glMeshUpload, cast ([gl, _Runtime.field(attribute, 'format')] : Array<Dynamic>));
     size = _Runtime.getIndex(__destructure1, 0.0);
     type = _Runtime.getIndex(__destructure1, 1.0);
     normalized = _Runtime.getIndex(__destructure1, 2.0);
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, location);
-    if (_Runtime.truthy(_Runtime.strictEquals(type, flighthq._internal.backend.WebGl2Backend.FLOAT))) {
+    if ((cast _Runtime.strictEquals(type, flighthq._internal.backend.WebGl2Backend.FLOAT) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, location, size, type, normalized, stride, _Runtime.field(attribute, 'byteOffset'));
     } else {
       flighthq._internal.backend.WebGl2Backend.vertexAttribIPointer(gl, location, size, type, stride, _Runtime.field(attribute, 'byteOffset'));

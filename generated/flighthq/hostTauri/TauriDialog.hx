@@ -37,7 +37,7 @@ class TauriDialog {
         var path:Dynamic = cast _Runtime.UNDEFINED;
         return flighthq._internal._Async.flatMap(_Runtime.callProperty(dialog, 'save', cast ([{ title: _Runtime.field(options, 'title'), defaultPath: _Runtime.field(options, 'defaultPath'), filters: _Runtime.callOptionalProperty(_Runtime.field(options, 'filters'), 'map', cast ([TauriDialog.toTauriFilter__tauriDialog] : Array<Dynamic>)) }] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
           path = __awaitValue2;
-          return flighthq._internal._Async.resolve(_Runtime.select(_Runtime.strictEquals(path, null), function():Dynamic return cast null, function():Dynamic return cast _Runtime.callValue(TauriDialog.toFileHandle__tauriDialog, cast ([path, 'File'] : Array<Dynamic>))));
+          return flighthq._internal._Async.resolve(((cast _Runtime.strictEquals(path, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callValue(TauriDialog.toFileHandle__tauriDialog, cast ([path, 'File'] : Array<Dynamic>)) : Dynamic)));
         });
       });
     }, message: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
@@ -66,8 +66,8 @@ class TauriDialog {
 
   public static function toHandles__tauriDialog(result:Null<Dynamic>, kind:String):Array<FileDialogHandle> {
     var paths:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(result, null))) { return cast cast ([] : Array<Dynamic>); }
-    paths = _Runtime.select(_Runtime.isArray(result), function():Dynamic return cast result, function():Dynamic return cast cast ([result] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(result, null) : Bool)) { return cast cast ([] : Array<Dynamic>); }
+    paths = ((cast _Runtime.isArray(result) : Bool) ? (cast result : Dynamic) : (cast cast ([result] : Array<Dynamic>) : Dynamic));
     return cast _Runtime.callProperty(paths, 'map', cast ([function(path:Dynamic) return _Runtime.callValue(TauriDialog.toFileHandle__tauriDialog, cast ([path, kind] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
@@ -78,8 +78,8 @@ class TauriDialog {
   }
 
   public static function toTauriMessageKind__tauriDialog(kind:Null<MessageDialogKind>):String {
-    if (_Runtime.truthy(_Runtime.strictEquals(kind, 'warning'))) { return cast 'warning'; }
-    if (_Runtime.truthy(_Runtime.strictEquals(kind, 'error'))) { return cast 'error'; }
+    if ((cast _Runtime.strictEquals(kind, 'warning') : Bool)) { return cast 'warning'; }
+    if ((cast _Runtime.strictEquals(kind, 'error') : Bool)) { return cast 'error'; }
     return cast 'info';
     return cast null;
   }
@@ -89,7 +89,7 @@ class TauriDialog {
     var index:Dynamic = cast _Runtime.UNDEFINED;
     normalized = _Runtime.replace(path, _Runtime.regexp('[/\\\\]+$$', ''), '', false);
     index = HxMath.max(_Runtime.callProperty(normalized, 'lastIndexOf', cast (['/'] : Array<Dynamic>)), _Runtime.callProperty(normalized, 'lastIndexOf', cast (['\\'] : Array<Dynamic>)));
-    return cast _Runtime.select(_Runtime.compare(index, 0.0, '>='), function():Dynamic return cast _Runtime.slice(normalized, (index + 1.0), null), function():Dynamic return cast normalized);
+    return cast ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool) ? (cast _Runtime.slice(normalized, (index + 1.0), null) : Dynamic) : (cast normalized : Dynamic));
     return cast null;
   }
 }

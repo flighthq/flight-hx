@@ -7,7 +7,7 @@ import flighthq._internal._Runtime;
 class Typedarray {
   public static function reserveFloat32Array(array:flighthq._internal._Float32Array, capacity:Float):flighthq._internal._Float32Array {
     var out:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(array, 'length'), capacity, '>='))) { return cast array; }
+    if ((cast ((cast _Runtime.field(array, 'length') : Float) >= (cast capacity : Float)) : Bool)) { return cast array; }
     out = new flighthq._internal._Float32Array(capacity);
     if (_Runtime.truthy(array)) { _Runtime.callProperty(out, 'set', cast ([array] : Array<Dynamic>)); }
     return cast out;
@@ -16,7 +16,7 @@ class Typedarray {
 
   public static function reserveInt16Array(array:flighthq._internal._Int16Array, capacity:Float):flighthq._internal._Int16Array {
     var out:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(array, 'length'), capacity, '>='))) { return cast array; }
+    if ((cast ((cast _Runtime.field(array, 'length') : Float) >= (cast capacity : Float)) : Bool)) { return cast array; }
     out = new flighthq._internal._Int16Array(capacity);
     if (_Runtime.truthy(array)) { _Runtime.callProperty(out, 'set', cast ([array] : Array<Dynamic>)); }
     return cast out;
@@ -25,7 +25,7 @@ class Typedarray {
 
   public static function reserveUint16Array(array:flighthq._internal._UInt16Array, capacity:Float):flighthq._internal._UInt16Array {
     var out:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(array, 'length'), capacity, '>='))) { return cast array; }
+    if ((cast ((cast _Runtime.field(array, 'length') : Float) >= (cast capacity : Float)) : Bool)) { return cast array; }
     out = new flighthq._internal._UInt16Array(capacity);
     if (_Runtime.truthy(array)) { _Runtime.callProperty(out, 'set', cast ([array] : Array<Dynamic>)); }
     return cast out;

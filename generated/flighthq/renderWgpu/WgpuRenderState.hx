@@ -42,7 +42,7 @@ class WgpuRenderState {
         var state:Dynamic = cast _Runtime.UNDEFINED;
         var runtime:Dynamic = cast _Runtime.UNDEFINED;
         var __flowBranch0:Dynamic;
-        if (_Runtime.truthy(!_Runtime.truthy(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'gpu')))) {
+        if ((cast !_Runtime.truthy(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'gpu')) : Bool)) {
           __flowBranch0 = flighthq._internal._Async.protect(function():Dynamic {
             return flighthq._internal._Async.reject(_Runtime.error('WebGPU is not supported in this browser.'));
           });
@@ -50,10 +50,10 @@ class WgpuRenderState {
           __flowBranch0 = flighthq._internal._Async.flowNormal();
         }
         return flighthq._internal._Async.continueFlow(__flowBranch0, function():Dynamic {
-          return flighthq._internal._Async.flatMap(_Runtime.callProperty(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'gpu'), 'requestAdapter', cast ([_Runtime.select(!_Runtime.looseEquals(_Runtime.field(options, 'powerPreference'), null), function():Dynamic return cast { powerPreference: _Runtime.field(options, 'powerPreference') }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
+          return flighthq._internal._Async.flatMap(_Runtime.callProperty(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'gpu'), 'requestAdapter', cast ([((cast !_Runtime.looseEquals(_Runtime.field(options, 'powerPreference'), null) : Bool) ? (cast { powerPreference: _Runtime.field(options, 'powerPreference') } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic))] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
             adapter = __awaitValue1;
             var __flowBranch2:Dynamic;
-            if (_Runtime.truthy(!_Runtime.truthy(adapter))) {
+            if ((cast !_Runtime.truthy(adapter) : Bool)) {
               __flowBranch2 = flighthq._internal._Async.protect(function():Dynamic {
                 return flighthq._internal._Async.reject(_Runtime.error('Failed to get WebGPU adapter.'));
               });
@@ -63,7 +63,7 @@ class WgpuRenderState {
             return flighthq._internal._Async.continueFlow(__flowBranch2, function():Dynamic {
               requiredLimits = {  };
               var __flowBranch3:Dynamic;
-              if (_Runtime.truthy(_Runtime.compare(flighthq._internal.backend.WebGpuLimitsBackend.field(_Runtime.field(adapter, 'limits'), 'maxBindGroups'), 5.0, '>='))) {
+              if ((cast _Runtime.compare(flighthq._internal.backend.WebGpuLimitsBackend.field(_Runtime.field(adapter, 'limits'), 'maxBindGroups'), 5.0, '>=') : Bool)) {
                 __flowBranch3 = flighthq._internal._Async.protect(function():Dynamic {
                   _Runtime.setField(requiredLimits, 'maxBindGroups', 5.0);
                   return flighthq._internal._Async.flowNormal();
@@ -72,12 +72,12 @@ class WgpuRenderState {
                 __flowBranch3 = flighthq._internal._Async.flowNormal();
               }
               return flighthq._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
-                return flighthq._internal._Async.flatMap(_Runtime.callProperty(adapter, 'requestDevice', cast ([_Runtime.select(_Runtime.compare(_Runtime.field(flighthq._internal.DynamicObject.keys(requiredLimits), 'length'), 0.0, '>'), function():Dynamic return cast { requiredLimits: requiredLimits }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>)), function(__awaitValue4:Dynamic):Dynamic {
+                return flighthq._internal._Async.flatMap(_Runtime.callProperty(adapter, 'requestDevice', cast ([((cast ((cast _Runtime.field(flighthq._internal.DynamicObject.keys(requiredLimits), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast { requiredLimits: requiredLimits } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic))] : Array<Dynamic>)), function(__awaitValue4:Dynamic):Dynamic {
                   device = __awaitValue4;
                   format = _Runtime.coalesce(_Runtime.field(options, 'format'), function():Dynamic return cast _Runtime.callProperty(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'gpu'), 'getPreferredCanvasFormat', cast ([] : Array<Dynamic>)));
                   context = (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['webgpu'] : Array<Dynamic>)) : Null<Dynamic>);
                   var __flowBranch5:Dynamic;
-                  if (_Runtime.truthy(!_Runtime.truthy(context))) {
+                  if ((cast !_Runtime.truthy(context) : Bool)) {
                     __flowBranch5 = flighthq._internal._Async.protect(function():Dynamic {
                       return flighthq._internal._Async.reject(_Runtime.error('Failed to get WebGPU canvas context.'));
                     });
@@ -99,7 +99,7 @@ class WgpuRenderState {
                     nearestSampler = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createSampler', cast ([{ minFilter: 'nearest', magFilter: 'nearest', addressModeU: 'clamp-to-edge', addressModeV: 'clamp-to-edge' }] : Array<Dynamic>));
                     state = (cast _Runtime.callValue(_createRenderState, cast ([{ allowSmoothing: _Runtime.coalesce(_Runtime.field(options, 'imageSmoothingEnabled'), function():Dynamic return cast true), pixelRatio: _Runtime.coalesce(_Runtime.field(options, 'pixelRatio'), function():Dynamic return cast 1.0), renderTransform2D: _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)), roundPixels: _Runtime.coalesce(_Runtime.field(options, 'roundPixels'), function():Dynamic return cast false), sceneGraphSyncPolicy: _Runtime.field(options, 'sceneGraphSyncPolicy') }] : Array<Dynamic>)) : flighthq.types.WgpuRenderState);
                     var __flowBranch6:Dynamic;
-                    if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(options, 'backgroundColor'), null))) {
+                    if ((cast !_Runtime.looseEquals(_Runtime.field(options, 'backgroundColor'), null) : Bool)) {
                       __flowBranch6 = flighthq._internal._Async.protect(function():Dynamic {
                         _Runtime.callValue(setRenderStateBackgroundColor, cast ([state, _Runtime.field(options, 'backgroundColor')] : Array<Dynamic>));
                         return flighthq._internal._Async.flowNormal();
@@ -207,14 +207,14 @@ class WgpuRenderState {
     var sampler:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     anisotropy = HxMath.max(1.0, HxMath.floor(maxAnisotropy));
-    effectiveFilter = _Runtime.select(_Runtime.compare(anisotropy, 1.0, '>'), function():Dynamic return cast 'linear', function():Dynamic return cast filter);
-    effectiveMipmapFilter = _Runtime.select(_Runtime.compare(anisotropy, 1.0, '>'), function():Dynamic return cast 'linear', function():Dynamic return cast mipmapFilter);
+    effectiveFilter = ((cast ((cast anisotropy : Float) > (cast 1.0 : Float)) : Bool) ? (cast 'linear' : Dynamic) : (cast filter : Dynamic));
+    effectiveMipmapFilter = ((cast ((cast anisotropy : Float) > (cast 1.0 : Float)) : Bool) ? (cast 'linear' : Dynamic) : (cast mipmapFilter : Dynamic));
     key = '' + Std.string(effectiveFilter) + '|' + Std.string(wrapU) + '|' + Std.string(wrapV) + '|' + Std.string(_Runtime.coalesce(effectiveMipmapFilter, function():Dynamic return cast 'none')) + '|' + Std.string(anisotropy) + '';
     sampler = ((cast _Runtime.field(runtime, 'samplerCache') : flighthq._internal._Map).get(key));
-    if (_Runtime.truthy(_Runtime.strictEquals(sampler, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(sampler, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var descriptor:Dynamic = { minFilter: effectiveFilter, magFilter: effectiveFilter, addressModeU: wrapU, addressModeV: wrapV };
-      if (_Runtime.truthy(!_Runtime.strictEquals(effectiveMipmapFilter, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(descriptor, 'mipmapFilter', effectiveMipmapFilter); }
-      if (_Runtime.truthy(_Runtime.compare(anisotropy, 1.0, '>'))) { _Runtime.setField(descriptor, 'maxAnisotropy', anisotropy); }
+      if ((cast !_Runtime.strictEquals(effectiveMipmapFilter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(descriptor, 'mipmapFilter', effectiveMipmapFilter); }
+      if ((cast ((cast anisotropy : Float) > (cast 1.0 : Float)) : Bool)) { _Runtime.setField(descriptor, 'maxAnisotropy', anisotropy); }
       (sampler = cast (flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createSampler', cast ([descriptor] : Array<Dynamic>)) : Dynamic));
       ((cast _Runtime.field(runtime, 'samplerCache') : flighthq._internal._Map).set(key, sampler));
     }
@@ -223,7 +223,7 @@ class WgpuRenderState {
   }
 
   public static function isWgpuSupported():Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.hasField(_Runtime.globalValue('navigator'), 'gpu')), function():Dynamic return cast !_Runtime.strictEquals(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'gpu'), null));
+    return cast ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) && (cast _Runtime.hasField(_Runtime.globalValue('navigator'), 'gpu') : Bool)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'gpu'), null) : Bool));
     return cast null;
   }
 }

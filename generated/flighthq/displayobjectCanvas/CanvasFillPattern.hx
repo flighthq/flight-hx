@@ -15,16 +15,16 @@ class CanvasFillPattern {
   public static final GRADIENT_HALF__canvasFillPattern:Dynamic = 819.2;
 
   public static function createBitmapPattern(context:Dynamic, bitmap:ImageResource, repeat:Bool, smooth:Dynamic = false):Null<Dynamic> {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(bitmap, 'source'), null))) { return cast null; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(bitmap, 'source'), null) : Bool)) { return cast null; }
     _Runtime.callValue(CanvasFillPattern.setSmoothing__canvasFillPattern, cast ([context, smooth] : Array<Dynamic>));
-    return cast flighthq._internal.backend.Canvas2dBackend.call(context, 'createPattern', cast ([_Runtime.field(bitmap, 'source'), _Runtime.select(repeat, function():Dynamic return cast 'repeat', function():Dynamic return cast 'no-repeat')] : Array<Dynamic>));
+    return cast flighthq._internal.backend.Canvas2dBackend.call(context, 'createPattern', cast ([_Runtime.field(bitmap, 'source'), ((cast repeat : Bool) ? (cast 'repeat' : Dynamic) : (cast 'no-repeat' : Dynamic))] : Array<Dynamic>));
     return cast null;
   }
 
   public static function createGradientPattern(context:Dynamic, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, m:Null<Matrix>, spreadMethod:SpreadMethod, _interpolationMethod:InterpolationMethod, focalPointRatio:Float):Null<Dynamic> {
     var mat:Dynamic = cast _Runtime.UNDEFINED;
     mat = _Runtime.coalesce(m, function():Dynamic return cast CanvasFillPattern.IDENTITY__canvasFillPattern);
-    if (_Runtime.truthy(_Runtime.strictEquals(gradientType, 'radial'))) {
+    if ((cast _Runtime.strictEquals(gradientType, 'radial') : Bool)) {
       return cast _Runtime.callValue(CanvasFillPattern.createRadialGradient__canvasFillPattern, cast ([context, colors, alphas, ratios, mat, focalPointRatio] : Array<Dynamic>));
     }
     return cast _Runtime.callValue(CanvasFillPattern.createLinearGradient__canvasFillPattern, cast ([context, colors, alphas, ratios, mat, spreadMethod] : Array<Dynamic>));
@@ -41,7 +41,7 @@ class CanvasFillPattern {
   public static function addColorStops__canvasFillPattern(gradient:Dynamic, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Void {
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(colors, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(colors, 'length') : Float)) : Bool)) {
         var ratio:Dynamic = HxMath.max(0.0, HxMath.min(1.0, (_Runtime.getIndex(ratios, i) / 255.0)));
         _Runtime.callProperty(gradient, 'addColorStop', cast ([ratio, _Runtime.callValue(CanvasFillPattern.rgbaString__canvasFillPattern, cast ([_Runtime.getIndex(colors, i), _Runtime.getIndex(alphas, i)] : Array<Dynamic>))] : Array<Dynamic>));
         i++;
@@ -97,7 +97,7 @@ class CanvasFillPattern {
     var offscreen:Dynamic = cast _Runtime.UNDEFINED;
     var octx:Dynamic = cast _Runtime.UNDEFINED;
     var tiledGradient:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(spreadMethod, 'pad'))) {
+    if ((cast _Runtime.strictEquals(spreadMethod, 'pad') : Bool)) {
       var __destructure3:Dynamic = _Runtime.callValue(CanvasFillPattern.tp__canvasFillPattern, cast ([m, -CanvasFillPattern.GRADIENT_HALF__canvasFillPattern, 0.0] : Array<Dynamic>));
       var x1:Dynamic = _Runtime.getIndex(__destructure3, 0.0);
       var y1:Dynamic = _Runtime.getIndex(__destructure3, 1.0);
@@ -122,14 +122,14 @@ class CanvasFillPattern {
     flighthq._internal.backend.CanvasElementBackend.setField(offscreen, 'width', flighthq._internal.backend.CanvasElementBackend.field(flighthq._internal.backend.Canvas2dBackend.field(context, 'canvas'), 'width'));
     flighthq._internal.backend.CanvasElementBackend.setField(offscreen, 'height', flighthq._internal.backend.CanvasElementBackend.field(flighthq._internal.backend.Canvas2dBackend.field(context, 'canvas'), 'height'));
     octx = flighthq._internal.backend.CanvasElementBackend.call(offscreen, 'getContext', cast (['2d'] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(octx, null))) { return cast null; }
+    if ((cast _Runtime.strictEquals(octx, null) : Bool)) { return cast null; }
     tiledGradient = flighthq._internal.backend.Canvas2dBackend.call(octx, 'createLinearGradient', cast ([(x1 - (dx * ((STEPS - 1.0) / 2.0))), (y1 - (dy * ((STEPS - 1.0) / 2.0))), (x2 + (dx * ((STEPS - 1.0) / 2.0))), (y2 + (dy * ((STEPS - 1.0) / 2.0)))] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(spreadMethod, 'reflect'))) {
+    if ((cast _Runtime.strictEquals(spreadMethod, 'reflect') : Bool)) {
       var t:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(t, 1.0, '<'))) {
+      while ((cast ((cast t : Float) < (cast 1.0 : Float)) : Bool)) {
         {
           var i:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(colors, 'length'), '<'))) {
+          while ((cast ((cast i : Float) < (cast _Runtime.field(colors, 'length') : Float)) : Bool)) {
             var ratio:Dynamic = HxMath.max(0.0, HxMath.min(1.0, (t + ((_Runtime.getIndex(ratios, i) / 255.0) * step))));
             _Runtime.callProperty(tiledGradient, 'addColorStop', cast ([ratio, _Runtime.callValue(CanvasFillPattern.rgbaString__canvasFillPattern, cast ([_Runtime.getIndex(colors, i), _Runtime.getIndex(alphas, i)] : Array<Dynamic>))] : Array<Dynamic>));
             i++;
@@ -138,7 +138,7 @@ class CanvasFillPattern {
         (t = cast ((t + step) : Dynamic));
         {
           var i:Dynamic = (_Runtime.field(colors, 'length') - 1.0);
-          while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>='))) {
+          while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
             var ratio:Dynamic = HxMath.max(0.0, HxMath.min(1.0, (t + ((1.0 - (_Runtime.getIndex(ratios, i) / 255.0)) * step))));
             _Runtime.callProperty(tiledGradient, 'addColorStop', cast ([ratio, _Runtime.callValue(CanvasFillPattern.rgbaString__canvasFillPattern, cast ([_Runtime.getIndex(colors, i), _Runtime.getIndex(alphas, i)] : Array<Dynamic>))] : Array<Dynamic>));
             i--;
@@ -148,10 +148,10 @@ class CanvasFillPattern {
       }
     } else {
       var t:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(t, 1.0, '<'))) {
+      while ((cast ((cast t : Float) < (cast 1.0 : Float)) : Bool)) {
         {
           var i:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(colors, 'length'), '<'))) {
+          while ((cast ((cast i : Float) < (cast _Runtime.field(colors, 'length') : Float)) : Bool)) {
             var ratio:Dynamic = HxMath.max(0.0, HxMath.min((1.0 - 0.001), (t + ((_Runtime.getIndex(ratios, i) / 255.0) * step))));
             _Runtime.callProperty(tiledGradient, 'addColorStop', cast ([ratio, _Runtime.callValue(CanvasFillPattern.rgbaString__canvasFillPattern, cast ([_Runtime.getIndex(colors, i), _Runtime.getIndex(alphas, i)] : Array<Dynamic>))] : Array<Dynamic>));
             i++;
@@ -170,7 +170,7 @@ class CanvasFillPattern {
   }
 
   public static function setSmoothing__canvasFillPattern(context:Dynamic, smooth:Bool):Void {
-    if (_Runtime.truthy(!_Runtime.strictEquals(flighthq._internal.backend.Canvas2dBackend.field(context, 'imageSmoothingEnabled'), smooth))) {
+    if ((cast !_Runtime.strictEquals(flighthq._internal.backend.Canvas2dBackend.field(context, 'imageSmoothingEnabled'), smooth) : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', smooth);
     }
   }

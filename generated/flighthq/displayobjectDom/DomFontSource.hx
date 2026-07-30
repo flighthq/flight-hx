@@ -17,7 +17,7 @@ class DomFontSource {
     var family:Dynamic = cast _Runtime.UNDEFINED;
     family = _Runtime.field(source, 'family');
     for (key in _Runtime.iterable(((cast DomFontSource._domFontAscentCache__domFontSource : flighthq._internal._Map).keys()))) {
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.includes(key, '\'' + Std.string(family) + '\''), function():Dynamic return cast _Runtime.includes(key, '"' + Std.string(family) + '"')))) {
+      if ((cast ((cast _Runtime.includes(key, '\'' + Std.string(family) + '\'') : Bool) || (cast _Runtime.includes(key, '"' + Std.string(family) + '"') : Bool)) : Bool)) {
         ((cast DomFontSource._domFontAscentCache__domFontSource : flighthq._internal._Map).delete_(key));
       }
     }

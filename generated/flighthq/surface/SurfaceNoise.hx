@@ -20,23 +20,23 @@ class SurfaceNoise {
     surfaceWidth = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(dest, 'height'), '<'))) {
+      while ((cast ((cast py : Float) < (cast _Runtime.field(dest, 'height') : Float)) : Bool)) {
         var y:Dynamic = (_Runtime.field(dest, 'y') + py);
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, _Runtime.field(dest, 'width'), '<'))) {
+          while ((cast ((cast px : Float) < (cast _Runtime.field(dest, 'width') : Float)) : Bool)) {
             (state = cast (_Runtime.callValue(SurfaceNoise.nextRandomState__surfaceNoise, cast ([state] : Array<Dynamic>)) : Dynamic));
             var r:Dynamic = (lo + ((state / 4294967296.0) * span));
             var g:Dynamic = r;
             var b:Dynamic = r;
-            if (_Runtime.truthy(!_Runtime.truthy(grayScale))) {
+            if ((cast !(cast grayScale : Bool) : Bool)) {
               (state = cast (_Runtime.callValue(SurfaceNoise.nextRandomState__surfaceNoise, cast ([state] : Array<Dynamic>)) : Dynamic));
               (g = cast ((lo + ((state / 4294967296.0) * span)) : Dynamic));
               (state = cast (_Runtime.callValue(SurfaceNoise.nextRandomState__surfaceNoise, cast ([state] : Array<Dynamic>)) : Dynamic));
               (b = cast ((lo + ((state / 4294967296.0) * span)) : Dynamic));
             }
             var x:Dynamic = (_Runtime.field(dest, 'x') + px);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(y, 0.0, '<'), function():Dynamic return cast _Runtime.compare(y, _Runtime.field(_Runtime.field(dest, 'surface'), 'height'), '>=')), function():Dynamic return cast _Runtime.compare(x, 0.0, '<')), function():Dynamic return cast _Runtime.compare(x, surfaceWidth, '>=')))) { px++; continue; }
+            if ((cast ((cast ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool) || (cast ((cast x : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast x : Float) >= (cast surfaceWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var i:Dynamic = (((y * surfaceWidth) + x) * 4.0);
             _Runtime.setIndex(data, i, HxMath.round(r));
             _Runtime.setIndex(data, (i + 1.0), HxMath.round(g));
@@ -59,8 +59,8 @@ class SurfaceNoise {
     var surfaceWidth:Dynamic = cast _Runtime.UNDEFINED;
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
-    fx0 = _Runtime.select(_Runtime.compare(baseX, 0.0, '>'), function():Dynamic return cast (1.0 / baseX), function():Dynamic return cast 0.0);
-    fy0 = _Runtime.select(_Runtime.compare(baseY, 0.0, '>'), function():Dynamic return cast (1.0 / baseY), function():Dynamic return cast 0.0);
+    fx0 = ((cast ((cast baseX : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / baseX) : Dynamic) : (cast 0.0 : Dynamic));
+    fy0 = ((cast ((cast baseY : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / baseY) : Dynamic) : (cast 0.0 : Dynamic));
     passes = HxMath.max(1.0, HxMath.round(octaves));
     data = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
     surfaceWidth = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
@@ -68,18 +68,18 @@ class SurfaceNoise {
     h = _Runtime.field(dest, 'height');
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(dest, 'height'), '<'))) {
+      while ((cast ((cast py : Float) < (cast _Runtime.field(dest, 'height') : Float)) : Bool)) {
         var y:Dynamic = (_Runtime.field(dest, 'y') + py);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(y, 0.0, '<'), function():Dynamic return cast _Runtime.compare(y, _Runtime.field(_Runtime.field(dest, 'surface'), 'height'), '>=')))) { py++; continue; }
+        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, _Runtime.field(dest, 'width'), '<'))) {
+          while ((cast ((cast px : Float) < (cast _Runtime.field(dest, 'width') : Float)) : Bool)) {
             var x:Dynamic = (_Runtime.field(dest, 'x') + px);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(x, 0.0, '<'), function():Dynamic return cast _Runtime.compare(x, surfaceWidth, '>=')))) { px++; continue; }
+            if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast surfaceWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var di:Dynamic = (((y * surfaceWidth) + x) * 4.0);
-            var nx:Dynamic = _Runtime.select(stitch, function():Dynamic return cast _Runtime.callValue(SurfaceNoise.stitchedCoord__surfaceNoise, cast ([(px * fx0), (w * fx0)] : Array<Dynamic>)), function():Dynamic return cast (px * fx0));
-            var ny:Dynamic = _Runtime.select(stitch, function():Dynamic return cast _Runtime.callValue(SurfaceNoise.stitchedCoord__surfaceNoise, cast ([(py * fy0), (h * fy0)] : Array<Dynamic>)), function():Dynamic return cast (py * fy0));
-            if (_Runtime.truthy(grayScale)) {
+            var nx:Dynamic = ((cast stitch : Bool) ? (cast _Runtime.callValue(SurfaceNoise.stitchedCoord__surfaceNoise, cast ([(px * fx0), (w * fx0)] : Array<Dynamic>)) : Dynamic) : (cast (px * fx0) : Dynamic));
+            var ny:Dynamic = ((cast stitch : Bool) ? (cast _Runtime.callValue(SurfaceNoise.stitchedCoord__surfaceNoise, cast ([(py * fy0), (h * fy0)] : Array<Dynamic>)) : Dynamic) : (cast (py * fy0) : Dynamic));
+            if ((cast grayScale : Bool)) {
               var value:Dynamic = _Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, (_Runtime.toInt32(seed) | 0)] : Array<Dynamic>));
               var byte:Dynamic = HxMath.round((value * 255.0));
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_R)))) { _Runtime.setIndex(data, di, byte); }
@@ -118,8 +118,8 @@ class SurfaceNoise {
     var surfaceWidth:Dynamic = cast _Runtime.UNDEFINED;
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
-    fx0 = _Runtime.select(_Runtime.compare(baseX, 0.0, '>'), function():Dynamic return cast (1.0 / baseX), function():Dynamic return cast 0.0);
-    fy0 = _Runtime.select(_Runtime.compare(baseY, 0.0, '>'), function():Dynamic return cast (1.0 / baseY), function():Dynamic return cast 0.0);
+    fx0 = ((cast ((cast baseX : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / baseX) : Dynamic) : (cast 0.0 : Dynamic));
+    fy0 = ((cast ((cast baseY : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / baseY) : Dynamic) : (cast 0.0 : Dynamic));
     passes = HxMath.max(1.0, HxMath.round(octaves));
     data = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
     surfaceWidth = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
@@ -127,18 +127,18 @@ class SurfaceNoise {
     h = _Runtime.field(dest, 'height');
     {
       var py:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(dest, 'height'), '<'))) {
+      while ((cast ((cast py : Float) < (cast _Runtime.field(dest, 'height') : Float)) : Bool)) {
         var y:Dynamic = (_Runtime.field(dest, 'y') + py);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(y, 0.0, '<'), function():Dynamic return cast _Runtime.compare(y, _Runtime.field(_Runtime.field(dest, 'surface'), 'height'), '>=')))) { py++; continue; }
+        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(px, _Runtime.field(dest, 'width'), '<'))) {
+          while ((cast ((cast px : Float) < (cast _Runtime.field(dest, 'width') : Float)) : Bool)) {
             var x:Dynamic = (_Runtime.field(dest, 'x') + px);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(x, 0.0, '<'), function():Dynamic return cast _Runtime.compare(x, surfaceWidth, '>=')))) { px++; continue; }
+            if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast surfaceWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var di:Dynamic = (((y * surfaceWidth) + x) * 4.0);
-            var nx:Dynamic = _Runtime.select(stitch, function():Dynamic return cast _Runtime.callValue(SurfaceNoise.stitchedCoord__surfaceNoise, cast ([(px * fx0), (w * fx0)] : Array<Dynamic>)), function():Dynamic return cast (px * fx0));
-            var ny:Dynamic = _Runtime.select(stitch, function():Dynamic return cast _Runtime.callValue(SurfaceNoise.stitchedCoord__surfaceNoise, cast ([(py * fy0), (h * fy0)] : Array<Dynamic>)), function():Dynamic return cast (py * fy0));
-            if (_Runtime.truthy(grayScale)) {
+            var nx:Dynamic = ((cast stitch : Bool) ? (cast _Runtime.callValue(SurfaceNoise.stitchedCoord__surfaceNoise, cast ([(px * fx0), (w * fx0)] : Array<Dynamic>)) : Dynamic) : (cast (px * fx0) : Dynamic));
+            var ny:Dynamic = ((cast stitch : Bool) ? (cast _Runtime.callValue(SurfaceNoise.stitchedCoord__surfaceNoise, cast ([(py * fy0), (h * fy0)] : Array<Dynamic>)) : Dynamic) : (cast (py * fy0) : Dynamic));
+            if ((cast grayScale : Bool)) {
               var value:Dynamic = _Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, (_Runtime.toInt32(seed) | 0)] : Array<Dynamic>));
               var byte:Dynamic = HxMath.round((value * 255.0));
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(SURFACE_NOISE_CHANNEL_R)))) { _Runtime.setIndex(data, di, byte); }
@@ -188,7 +188,7 @@ class SurfaceNoise {
     frequency = 1.0;
     {
       var o:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(o, octaves, '<'))) {
+      while ((cast ((cast o : Float) < (cast octaves : Float)) : Bool)) {
         (sum = cast ((sum + (_Runtime.callValue(SurfaceNoise.valueNoise__surfaceNoise, cast ([(x * frequency), (y * frequency), (seed + (o * 2246822507.0))] : Array<Dynamic>)) * amplitude)) : Dynamic));
         (amplitudeSum = cast ((amplitudeSum + amplitude) : Dynamic));
         (amplitude = cast ((amplitude * 0.5) : Dynamic));
@@ -196,7 +196,7 @@ class SurfaceNoise {
         o++;
       }
     }
-    return cast _Runtime.select(_Runtime.compare(amplitudeSum, 0.0, '>'), function():Dynamic return cast (sum / amplitudeSum), function():Dynamic return cast 0.0);
+    return cast ((cast ((cast amplitudeSum : Float) > (cast 0.0 : Float)) : Bool) ? (cast (sum / amplitudeSum) : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 
@@ -223,7 +223,7 @@ class SurfaceNoise {
   }
 
   public static function stitchedCoord__surfaceNoise(t:Float, period:Float):Float {
-    if (_Runtime.truthy(_Runtime.compare(period, 0.0, '<='))) { return cast t; }
+    if ((cast ((cast period : Float) <= (cast 0.0 : Float)) : Bool)) { return cast t; }
     return cast _Runtime.fmod((_Runtime.fmod(t, period) + period), period);
     return cast null;
   }
@@ -239,7 +239,7 @@ class SurfaceNoise {
     frequency = 1.0;
     {
       var o:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(o, octaves, '<'))) {
+      while ((cast ((cast o : Float) < (cast octaves : Float)) : Bool)) {
         (sum = cast ((sum + (HxMath.abs(((_Runtime.callValue(SurfaceNoise.valueNoise__surfaceNoise, cast ([(x * frequency), (y * frequency), (seed + (o * 2246822507.0))] : Array<Dynamic>)) * 2.0) - 1.0)) * amplitude)) : Dynamic));
         (amplitudeSum = cast ((amplitudeSum + amplitude) : Dynamic));
         (amplitude = cast ((amplitude * 0.5) : Dynamic));
@@ -247,7 +247,7 @@ class SurfaceNoise {
         o++;
       }
     }
-    return cast _Runtime.select(_Runtime.compare(amplitudeSum, 0.0, '>'), function():Dynamic return cast (sum / amplitudeSum), function():Dynamic return cast 0.0);
+    return cast ((cast ((cast amplitudeSum : Float) > (cast 0.0 : Float)) : Bool) ? (cast (sum / amplitudeSum) : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 

@@ -26,17 +26,17 @@ class LightAnalysis {
   public static function getLightInfluenceBounds(out:BoundingSphereLike, light:Light):Void {
     var kind:Dynamic = cast _Runtime.UNDEFINED;
     kind = _Runtime.field(light, 'kind');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(kind, AmbientLightKind), function():Dynamic return cast _Runtime.strictEquals(kind, HemisphereLightKind)), function():Dynamic return cast _Runtime.strictEquals(kind, EnvironmentKind)), function():Dynamic return cast _Runtime.strictEquals(kind, DirectionalLightKind)))) {
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(kind, AmbientLightKind) : Bool) || (cast _Runtime.strictEquals(kind, HemisphereLightKind) : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, EnvironmentKind) : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, DirectionalLightKind) : Bool)) : Bool)) {
       (out.center.x = cast (0.0 : Dynamic));
       (out.center.y = cast (0.0 : Dynamic));
       (out.center.z = cast (0.0 : Dynamic));
       (out.radius = cast (-1.0 : Dynamic));
       return;
     }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(kind, PointLightKind), function():Dynamic return cast _Runtime.strictEquals(kind, SpotLightKind)), function():Dynamic return cast _Runtime.strictEquals(kind, AreaLightKind)))) {
+    if ((cast ((cast ((cast _Runtime.strictEquals(kind, PointLightKind) : Bool) || (cast _Runtime.strictEquals(kind, SpotLightKind) : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, AreaLightKind) : Bool)) : Bool)) {
       var spatial:Dynamic = (cast light : PointLight);
       var range:Dynamic = _Runtime.field(spatial, 'range');
-      if (_Runtime.truthy(_Runtime.compare(range, 0.0, '<'))) {
+      if ((cast ((cast range : Float) < (cast 0.0 : Float)) : Bool)) {
         (out.center.x = cast (0.0 : Dynamic));
         (out.center.y = cast (0.0 : Dynamic));
         (out.center.z = cast (0.0 : Dynamic));
@@ -65,7 +65,7 @@ class LightAnalysis {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     colored = (cast light : { @:optional var color:Float; @:optional var intensity:Float; });
     color = _Runtime.field(colored, 'color');
-    if (_Runtime.truthy(_Runtime.strictEquals(color, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast 0.0; }
+    if ((cast _Runtime.strictEquals(color, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast 0.0; }
     r = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255) / 255.0);
     g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255) / 255.0);
     b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255) / 255.0);
@@ -82,21 +82,21 @@ class LightAnalysis {
     var distSq:Dynamic = cast _Runtime.UNDEFINED;
     var radSum:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(getLightInfluenceBounds, cast ([LightAnalysis.scratchSphere__lightAnalysis, light] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(LightAnalysis.scratchSphere__lightAnalysis.radius, 0.0, '<'))) { return cast true; }
-    if (_Runtime.truthy(_Runtime.compare(bounds.radius, 0.0, '<'))) { return cast false; }
+    if ((cast ((cast LightAnalysis.scratchSphere__lightAnalysis.radius : Float) < (cast 0.0 : Float)) : Bool)) { return cast true; }
+    if ((cast ((cast bounds.radius : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
     dx = (LightAnalysis.scratchSphere__lightAnalysis.center.x - bounds.center.x);
     dy = (LightAnalysis.scratchSphere__lightAnalysis.center.y - bounds.center.y);
     dz = (LightAnalysis.scratchSphere__lightAnalysis.center.z - bounds.center.z);
     distSq = (((dx * dx) + (dy * dy)) + (dz * dz));
     radSum = (LightAnalysis.scratchSphere__lightAnalysis.radius + bounds.radius);
-    return cast _Runtime.compare(distSq, (radSum * radSum), '<=');
+    return cast ((cast distSq : Float) <= (cast (radSum * radSum) : Float));
     return cast null;
   }
 
   public static function isLightShadowCasting(light:Light):Bool {
     var kind:Dynamic = cast _Runtime.UNDEFINED;
     kind = _Runtime.field(light, 'kind');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(kind, AmbientLightKind), function():Dynamic return cast _Runtime.strictEquals(kind, HemisphereLightKind)), function():Dynamic return cast _Runtime.strictEquals(kind, EnvironmentKind)))) {
+    if ((cast ((cast ((cast _Runtime.strictEquals(kind, AmbientLightKind) : Bool) || (cast _Runtime.strictEquals(kind, HemisphereLightKind) : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, EnvironmentKind) : Bool)) : Bool)) {
       return cast false;
     }
     return cast _Runtime.field((cast (cast light : Dynamic) : { var castsShadow:Bool; }), 'castsShadow');

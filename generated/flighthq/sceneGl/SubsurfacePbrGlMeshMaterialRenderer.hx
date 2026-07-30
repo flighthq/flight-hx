@@ -35,17 +35,17 @@ class SubsurfacePbrGlMeshMaterialRenderer {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     subsurface = (cast material : Null<SubsurfacePbrMaterial>);
-    standard = _Runtime.select(!_Runtime.strictEquals(subsurface, null), function():Dynamic return cast _Runtime.field(subsurface, 'standard'), function():Dynamic return cast null);
-    key = _Runtime.callValue(buildGlPbrStandardDefineKey, cast ([standard, _Runtime.andValue(!_Runtime.strictEquals(subsurface, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(subsurface, 'alphaMode'), 'mask'))] : Array<Dynamic>));
+    standard = ((cast !_Runtime.strictEquals(subsurface, null) : Bool) ? (cast _Runtime.field(subsurface, 'standard') : Dynamic) : (cast null : Dynamic));
+    key = _Runtime.callValue(buildGlPbrStandardDefineKey, cast ([standard, ((cast !_Runtime.strictEquals(subsurface, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(subsurface, 'alphaMode'), 'mask') : Bool))] : Array<Dynamic>));
     _Runtime.setField(key, 'subsurfaceEnabled', true);
     program = _Runtime.callValue(ensureGlPbrProgram, cast ([state, key] : Array<Dynamic>));
-    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, _Runtime.andValue(!_Runtime.strictEquals(subsurface, null), function():Dynamic return cast _Runtime.field(subsurface, 'doubleSided'))] : Array<Dynamic>));
+    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, ((cast !_Runtime.strictEquals(subsurface, null) : Bool) && (cast _Runtime.field(subsurface, 'doubleSided') : Bool))] : Array<Dynamic>));
     _Runtime.callValue(setGlMeshViewProjection, cast ([gl, _Runtime.field(program, 'locViewProjection'), camera] : Array<Dynamic>));
     _Runtime.callValue(setGlMeshCameraPosition, cast ([gl, _Runtime.field(program, 'locCameraPosition'), camera] : Array<Dynamic>));
     _Runtime.callValue(bindGlMeshLightBlock, cast ([state, program, lights] : Array<Dynamic>));
     _Runtime.callValue(bindGlPbrStandardBlock, cast ([state, program, standard] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), _Runtime.select(!_Runtime.strictEquals(subsurface, null), function():Dynamic return cast _Runtime.field(subsurface, 'alphaCutoff'), function():Dynamic return cast 0.5));
-    if (_Runtime.truthy(!_Runtime.strictEquals(subsurface, null))) {
+    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), ((cast !_Runtime.strictEquals(subsurface, null) : Bool) ? (cast _Runtime.field(subsurface, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic)));
+    if ((cast !_Runtime.strictEquals(subsurface, null) : Bool)) {
       _Runtime.callValue(unpackColorToLinear, cast ([SubsurfacePbrGlMeshMaterialRenderer.scratchRgba__subsurfacePbrGlMeshMaterialRenderer, _Runtime.field(subsurface, 'subsurfaceColor')] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locSubsurface'), _Runtime.field(subsurface, 'subsurface'));
       flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(program, 'locSubsurfaceColor'), _Runtime.getIndex(SubsurfacePbrGlMeshMaterialRenderer.scratchRgba__subsurfacePbrGlMeshMaterialRenderer, 0.0), _Runtime.getIndex(SubsurfacePbrGlMeshMaterialRenderer.scratchRgba__subsurfacePbrGlMeshMaterialRenderer, 1.0), _Runtime.getIndex(SubsurfacePbrGlMeshMaterialRenderer.scratchRgba__subsurfacePbrGlMeshMaterialRenderer, 2.0));
@@ -58,7 +58,7 @@ class SubsurfacePbrGlMeshMaterialRenderer {
   }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
-    if (_Runtime.truthy(_Runtime.strictEquals(program, null))) { return; }
+    if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
     _Runtime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
   } };
 

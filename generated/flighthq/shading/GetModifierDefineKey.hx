@@ -15,8 +15,8 @@ class GetModifierDefineKey {
     key = '';
     for (modifier in _Runtime.iterable(ordered)) {
       var signature:Dynamic = _Runtime.callValue(GetModifierDefineKey.getDefineSignature__getModifierDefineKey, cast ([modifier, registry] : Array<Dynamic>));
-      var token:Dynamic = _Runtime.select(_Runtime.compare(_Runtime.field(signature, 'length'), 0.0, '>'), function():Dynamic return cast '' + Std.string(_Runtime.field(modifier, 'kind')) + ':' + Std.string(signature) + '', function():Dynamic return cast _Runtime.field(modifier, 'kind'));
-      (key = cast (_Runtime.select(_Runtime.compare(_Runtime.field(key, 'length'), 0.0, '>'), function():Dynamic return cast '' + Std.string(key) + '+' + Std.string(token) + '', function():Dynamic return cast token) : Dynamic));
+      var token:Dynamic = ((cast ((cast _Runtime.field(signature, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast '' + Std.string(_Runtime.field(modifier, 'kind')) + ':' + Std.string(signature) + '' : Dynamic) : (cast _Runtime.field(modifier, 'kind') : Dynamic));
+      (key = cast (((cast ((cast _Runtime.field(key, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast '' + Std.string(key) + '+' + Std.string(token) + '' : Dynamic) : (cast token : Dynamic)) : Dynamic));
     }
     return cast key;
     return cast null;
@@ -24,9 +24,9 @@ class GetModifierDefineKey {
 
   public static function getDefineSignature__getModifierDefineKey(modifier:Modifier, ?registry:ModifierRegistry):String {
     var definition:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast ''; }
+    if ((cast _Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast ''; }
     definition = _Runtime.callValue(resolveModifier, cast ([registry, _Runtime.field(modifier, 'kind')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(definition, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(definition, 'getDefineSignature'), _Runtime.field(_Runtime, 'UNDEFINED'))))) { return cast ''; }
+    if ((cast ((cast _Runtime.strictEquals(definition, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(definition, 'getDefineSignature'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return cast ''; }
     return cast _Runtime.callProperty(definition, 'getDefineSignature', cast ([modifier] : Array<Dynamic>));
     return cast null;
   }

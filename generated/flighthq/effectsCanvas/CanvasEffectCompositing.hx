@@ -19,7 +19,7 @@ class CanvasEffectCompositing {
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalAlpha', (1.0 / clampedSamples));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, clampedSamples, '<'))) {
+      while ((cast ((cast i : Float) < (cast clampedSamples : Float)) : Bool)) {
         flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));
         _Runtime.callValue(perSampleTransform, cast ([ctx, i, clampedSamples] : Array<Dynamic>));
         flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([_Runtime.field(source, 'canvas'), 0.0, 0.0] : Array<Dynamic>));
@@ -55,7 +55,7 @@ class CanvasEffectCompositing {
     var dstCtx:Dynamic = cast _Runtime.UNDEFINED;
     w = _Runtime.field(source, 'width');
     h = _Runtime.field(source, 'height');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(w, 0.0, '<='), function():Dynamic return cast _Runtime.compare(h, 0.0, '<=')))) { return; }
+    if ((cast ((cast ((cast w : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast h : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
     srcCtx = _Runtime.field(source, 'context');
     imageData = flighthq._internal.backend.Canvas2dBackend.call(srcCtx, 'getImageData', cast ([0.0, 0.0, w, h] : Array<Dynamic>));
     data = _Runtime.field(imageData, 'data');

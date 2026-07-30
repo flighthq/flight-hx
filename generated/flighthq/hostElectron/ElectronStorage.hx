@@ -15,14 +15,14 @@ class ElectronStorage {
     fs = _Runtime.field(electron, 'fs');
     store = null;
     load = function load():Dynamic {
-      if (_Runtime.truthy(!_Runtime.strictEquals(store, null))) { return cast store; }
+      if ((cast !_Runtime.strictEquals(store, null) : Bool)) { return cast store; }
       try {
         var dir:Dynamic = _Runtime.callProperty(_Runtime.field(electron, 'app'), 'getPath', cast (['userData'] : Array<Dynamic>));
         var path:Dynamic = '' + Std.string(dir) + '/' + Std.string(fileName) + '';
-        if (_Runtime.truthy(_Runtime.callProperty(fs, 'existsSync', cast ([path] : Array<Dynamic>)))) {
+        if ((cast _Runtime.callProperty(fs, 'existsSync', cast ([path] : Array<Dynamic>)) : Bool)) {
           var raw:Dynamic = _Runtime.callProperty(fs, 'readFileSync', cast ([path, 'utf-8'] : Array<Dynamic>));
           var parsed:Dynamic = _Runtime.jsonParse(raw);
-          if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(parsed, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(parsed), 'object')), function():Dynamic return cast !_Runtime.truthy(_Runtime.isArray(parsed))))) {
+          if ((cast ((cast ((cast !_Runtime.strictEquals(parsed, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(parsed), 'object') : Bool)) : Bool) && (cast !(cast _Runtime.isArray(parsed) : Bool) : Bool)) : Bool)) {
             (store = cast ((cast parsed : Dynamic) : Dynamic));
             return cast store;
           }
@@ -48,13 +48,13 @@ class ElectronStorage {
     }, getItem: function(key:Dynamic) {
       var s:Dynamic = cast _Runtime.UNDEFINED;
       s = _Runtime.callValue(load, cast ([] : Array<Dynamic>));
-      return cast _Runtime.select(_Runtime.callProperty(_Runtime.field(flighthq._internal.DynamicObject.field('prototype'), 'hasOwnProperty'), 'call', cast ([s, key] : Array<Dynamic>)), function():Dynamic return cast _Runtime.getIndex(s, key), function():Dynamic return cast null);
+      return cast ((cast _Runtime.callProperty(_Runtime.field(flighthq._internal.DynamicObject.field('prototype'), 'hasOwnProperty'), 'call', cast ([s, key] : Array<Dynamic>)) : Bool) ? (cast _Runtime.getIndex(s, key) : Dynamic) : (cast null : Dynamic));
     }, keys: function() {
       return cast flighthq._internal.DynamicObject.keys(_Runtime.callValue(load, cast ([] : Array<Dynamic>)));
     }, removeItem: function(key:Dynamic) {
       var s:Dynamic = cast _Runtime.UNDEFINED;
       s = _Runtime.callValue(load, cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(_Runtime.field(flighthq._internal.DynamicObject.field('prototype'), 'hasOwnProperty'), 'call', cast ([s, key] : Array<Dynamic>))))) { return cast false; }
+      if ((cast !(cast _Runtime.callProperty(_Runtime.field(flighthq._internal.DynamicObject.field('prototype'), 'hasOwnProperty'), 'call', cast ([s, key] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
       _Runtime.deleteIndex(s, key);
       return cast _Runtime.callValue(save, cast ([] : Array<Dynamic>));
     }, setItem: function(key:Dynamic, value:Dynamic) {

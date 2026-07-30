@@ -10,9 +10,9 @@ import flighthq.types.Tween;
 class TweenProgress {
   public static function getTweenProgress(tween:Tween<Dynamic>):Float {
     var activeElapsed:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.field(tween, 'complete'))) { return cast 1.0; }
+    if ((cast _Runtime.field(tween, 'complete') : Bool)) { return cast 1.0; }
     activeElapsed = (_Runtime.field(tween, 'elapsed') - _Runtime.field(tween, 'delay'));
-    if (_Runtime.truthy(_Runtime.compare(activeElapsed, 0.0, '<='))) { return cast 0.0; }
+    if ((cast ((cast activeElapsed : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
     return cast HxMath.min((activeElapsed / _Runtime.field(tween, 'duration')), 1.0);
     return cast null;
   }
@@ -26,7 +26,7 @@ class TweenProgress {
   public static function restartTween(tween:Tween<Dynamic>, includeDelay:Dynamic = true):Void {
     _Runtime.setField(tween, 'initialized', false);
     _Runtime.setField(tween, 'complete', false);
-    _Runtime.setField(tween, 'elapsed', _Runtime.select(includeDelay, function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.field(tween, 'delay')));
+    _Runtime.setField(tween, 'elapsed', ((cast includeDelay : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.field(tween, 'delay') : Dynamic)));
   }
 
   public static function seekTween(tween:Tween<Dynamic>, timeSeconds:Float):Void {
@@ -38,19 +38,19 @@ class TweenProgress {
     var easedT:Dynamic = cast _Runtime.UNDEFINED;
     var writes:Array<{ var key:String; var value:Float; }> = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(tween, 'initialized')))) { _Runtime.callValue(initializeTween, cast ([tween] : Array<Dynamic>)); }
+    if ((cast !(cast _Runtime.field(tween, 'initialized') : Bool) : Bool)) { _Runtime.callValue(initializeTween, cast ([tween] : Array<Dynamic>)); }
     maxElapsed = (_Runtime.field(tween, 'delay') + _Runtime.field(tween, 'duration'));
     clampedElapsed = HxMath.max(0.0, HxMath.min(timeSeconds, maxElapsed));
     _Runtime.setField(tween, 'elapsed', clampedElapsed);
     activeElapsed = (clampedElapsed - _Runtime.field(tween, 'delay'));
-    if (_Runtime.truthy(_Runtime.compare(activeElapsed, 0.0, '<='))) { return; }
+    if ((cast ((cast activeElapsed : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
     t = HxMath.min((activeElapsed / _Runtime.field(tween, 'duration')), 1.0);
-    effectiveT = _Runtime.select(_Runtime.field(tween, 'reverse'), function():Dynamic return cast (1.0 - t), function():Dynamic return cast t);
+    effectiveT = ((cast _Runtime.field(tween, 'reverse') : Bool) ? (cast (1.0 - t) : Dynamic) : (cast t : Dynamic));
     easedT = _Runtime.callProperty(tween, 'ease', cast ([effectiveT] : Array<Dynamic>));
     writes = cast ([] : Array<Dynamic>);
     for (detail in _Runtime.iterable(_Runtime.field(tween, 'properties'))) {
       var value:Dynamic = (_Runtime.field(detail, 'start') + (_Runtime.field(detail, 'change') * easedT));
-      if (_Runtime.truthy(_Runtime.field(tween, 'snapping'))) { (value = cast (HxMath.round(value) : Dynamic)); }
+      if ((cast _Runtime.field(tween, 'snapping') : Bool)) { (value = cast (HxMath.round(value) : Dynamic)); }
       _Runtime.callProperty(writes, 'push', cast ([{ key: _Runtime.field(detail, 'key'), value: value }] : Array<Dynamic>));
     }
     target = (cast _Runtime.field(tween, 'target') : Dynamic);
@@ -60,7 +60,7 @@ class TweenProgress {
       _Runtime.setIndex(target, key, value);
     }
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(tween, 'onUpdate')]]), 1);
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(t, 1.0, '>='), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(tween, 'complete'))))) {
+    if ((cast ((cast ((cast t : Float) >= (cast 1.0 : Float)) : Bool) && (cast !(cast _Runtime.field(tween, 'complete') : Bool) : Bool)) : Bool)) {
       _Runtime.setField(tween, 'complete', true);
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(tween, 'onComplete')]]), 1);
     }

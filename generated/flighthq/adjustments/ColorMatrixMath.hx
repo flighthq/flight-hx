@@ -124,8 +124,8 @@ class ColorMatrixMath {
     var gammaCorrectedScale:Dynamic = cast _Runtime.UNDEFINED;
     var offset:Dynamic = cast _Runtime.UNDEFINED;
     inRange = (inWhite - inBlack);
-    scale = _Runtime.select(_Runtime.strictEquals(inRange, 0.0), function():Dynamic return cast 1.0, function():Dynamic return cast ((outWhite - outBlack) / inRange));
-    gammaCorrectedScale = (scale * _Runtime.select(_Runtime.strictEquals(gamma, 1.0), function():Dynamic return cast 1.0, function():Dynamic return cast HxMath.pow(0.5, ((1.0 / gamma) - 1.0))));
+    scale = ((cast _Runtime.strictEquals(inRange, 0.0) : Bool) ? (cast 1.0 : Dynamic) : (cast ((outWhite - outBlack) / inRange) : Dynamic));
+    gammaCorrectedScale = (scale * ((cast _Runtime.strictEquals(gamma, 1.0) : Bool) ? (cast 1.0 : Dynamic) : (cast HxMath.pow(0.5, ((1.0 / gamma) - 1.0)) : Dynamic)));
     offset = (outBlack - (inBlack * gammaCorrectedScale));
     return cast cast ([gammaCorrectedScale, 0.0, 0.0, 0.0, offset, 0.0, gammaCorrectedScale, 0.0, 0.0, offset, 0.0, 0.0, gammaCorrectedScale, 0.0, offset, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
@@ -184,11 +184,11 @@ class ColorMatrixMath {
 
   public static function fuseColorMatrices(matrices:Array<Array<Float>>):Array<Float> {
     var out:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(matrices, 'length'), 0.0))) { return cast _Runtime.callValue(createIdentityColorMatrix, cast ([] : Array<Dynamic>)); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(matrices, 'length'), 0.0) : Bool)) { return cast _Runtime.callValue(createIdentityColorMatrix, cast ([] : Array<Dynamic>)); }
     out = _Runtime.slice(_Runtime.getIndex(matrices, 0.0), 0, null);
     {
       var i:Dynamic = 1.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(matrices, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(matrices, 'length') : Float)) : Bool)) {
         _Runtime.callValue(multiplyColorMatrix, cast ([_Runtime.getIndex(matrices, i), out, out] : Array<Dynamic>));
         i++;
       }

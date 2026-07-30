@@ -14,11 +14,11 @@ class Depth {
     near = camera.near;
     far = camera.far;
     range = (far - near);
-    if (_Runtime.truthy(_Runtime.strictEquals(range, 0.0))) {
+    if ((cast _Runtime.strictEquals(range, 0.0) : Bool)) {
       return cast 0.0;
     }
     denominator = ((ndcZ * range) - (far + near));
-    if (_Runtime.truthy(_Runtime.strictEquals(denominator, 0.0))) {
+    if ((cast _Runtime.strictEquals(denominator, 0.0) : Bool)) {
       return cast 0.0;
     }
     return cast (((2.0 * far) * near) / denominator);

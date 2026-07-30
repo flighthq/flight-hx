@@ -37,7 +37,7 @@ class App {
     unsubscribeOpenFile = _Runtime.callProperty(backend, 'subscribeOpenFile', cast ([function(path:Dynamic) return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onOpenFile')], [path]]), 1)] : Array<Dynamic>));
     unsubscribeQuitRequest = _Runtime.callProperty(backend, 'subscribeQuitRequest', cast ([function(cancelHost:Dynamic) {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onQuitRequest')]]), 1);
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.optionalField(_Runtime.field(_Runtime.field(app, 'onQuitRequest'), 'data'), 'cancelled'), true))) {
+      if ((cast _Runtime.strictEquals(_Runtime.optionalField(_Runtime.field(_Runtime.field(app, 'onQuitRequest'), 'data'), 'cancelled'), true) : Bool)) {
         _Runtime.callValue(cancelHost, cast ([] : Array<Dynamic>));
       } else {
         _Runtime.callProperty(backend, 'quit', cast ([] : Array<Dynamic>));
@@ -94,7 +94,7 @@ class App {
     }, clearRecentDocuments: function() {
     
     }, focus: function() {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) {
+      if ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) {
         try {
           flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'focus', cast ([] : Array<Dynamic>));
         } catch (__error:Dynamic) {
@@ -109,22 +109,22 @@ class App {
     }, getExecutablePath: function() {
       return cast '';
     }, getLocale: function() {
-      return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'language'), function():Dynamic return cast ''), function():Dynamic return cast '');
+      return cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) ? (cast _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'language'), function():Dynamic return cast '') : Dynamic) : (cast '' : Dynamic));
     }, getPreferredSystemLanguages: function() {
-      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.isArray(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'languages'))))) {
+      if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) && (cast _Runtime.isArray(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'languages')) : Bool)) : Bool)) {
         return cast (cast flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'languages') : Array<String>);
       }
       return cast cast ([] : Array<Dynamic>);
     }, getSystemLocale: function() {
       try {
-        return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('Intl'), 'undefined'), function():Dynamic return cast _Runtime.field(_Runtime.callProperty(_Runtime.construct(_Runtime.field(_Runtime.globalValue('Intl'), 'DateTimeFormat'), []), 'resolvedOptions', cast ([] : Array<Dynamic>)), 'locale'), function():Dynamic return cast '');
+        return cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('Intl'), 'undefined') : Bool) ? (cast _Runtime.field(_Runtime.callProperty(_Runtime.construct(_Runtime.field(_Runtime.globalValue('Intl'), 'DateTimeFormat'), []), 'resolvedOptions', cast ([] : Array<Dynamic>)), 'locale') : Dynamic) : (cast '' : Dynamic));
       } catch (__error:Dynamic) {
         return cast '';
       }
     }, getLoginItem: function() {
       return cast { args: cast ([] : Array<Dynamic>), openAsHidden: false, openAtLogin: false, path: '' };
     }, getName: function() {
-      return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'title'), function():Dynamic return cast '');
+      return cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'title') : Dynamic) : (cast '' : Dynamic));
     }, getVersion: function() {
       return cast '';
     }, hasSingleInstanceLock: function() {
@@ -134,14 +134,14 @@ class App {
     }, isAppHidden: function() {
       return cast false;
     }, quit: function() {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) {
+      if ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) {
         try {
           flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'close', cast ([] : Array<Dynamic>));
         } catch (__error:Dynamic) {
         }
       }
     }, relaunch: function() {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofGlobal('location'), 'undefined'))) {
+      if ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('location'), 'undefined') : Bool)) {
         try {
           _Runtime.callProperty(_Runtime.globalValue('location'), 'reload', cast ([] : Array<Dynamic>));
         } catch (__error:Dynamic) {
@@ -156,7 +156,7 @@ class App {
     }, setActivationPolicy: function() {
     
     }, setBadgeCount: function(count:Dynamic) {
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.hasField(_Runtime.globalValue('navigator'), 'setAppBadge'))))) { return cast false; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) || (cast !(cast _Runtime.hasField(_Runtime.globalValue('navigator'), 'setAppBadge') : Bool) : Bool)) : Bool)) { return cast false; }
       try {
         _Runtime.callProperty((cast _Runtime.globalValue('navigator') : { var setAppBadge:Dynamic; }), 'setAppBadge', cast ([count] : Array<Dynamic>));
         return cast true;
@@ -209,7 +209,7 @@ class App {
   public static function detachApp(app:flighthq.types.App):Void {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
     unsubscribe = ((cast App._subscriptions__app : flighthq._internal._WeakMap).get(app));
-    if (_Runtime.truthy(!_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callValue(unsubscribe, cast ([] : Array<Dynamic>));
       ((cast App._subscriptions__app : flighthq._internal._WeakMap).delete_(app));
     }
@@ -224,7 +224,7 @@ class App {
   }
 
   public static function getAppBackend():AppBackend {
-    if (_Runtime.truthy(_Runtime.strictEquals(App._backend__app, null))) { (App._backend__app = cast (_Runtime.callValue(createWebAppBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(App._backend__app, null) : Bool)) { (App._backend__app = cast (_Runtime.callValue(createWebAppBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast App._backend__app;
     return cast null;
   }
@@ -240,8 +240,8 @@ class App {
     prefix = '--' + Std.string(name) + '=';
     args = _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'getCommandLine', cast ([] : Array<Dynamic>));
     for (arg in _Runtime.iterable(args)) {
-      if (_Runtime.truthy(_Runtime.strictEquals(arg, '--' + Std.string(name) + ''))) { return cast ''; }
-      if (_Runtime.truthy(StringTools.startsWith(arg, prefix))) { return cast _Runtime.slice(arg, _Runtime.field(prefix, 'length'), null); }
+      if ((cast _Runtime.strictEquals(arg, '--' + Std.string(name) + '') : Bool)) { return cast ''; }
+      if ((cast StringTools.startsWith(arg, prefix) : Bool)) { return cast _Runtime.slice(arg, _Runtime.field(prefix, 'length'), null); }
     }
     return cast null;
     return cast null;

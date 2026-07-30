@@ -40,9 +40,9 @@ class SpecularPbrWgpuMeshMaterialRenderer {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     stateRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     pass = _Runtime.field(stateRuntime, 'renderPass');
-    if (_Runtime.truthy(_Runtime.strictEquals(pass, null))) { return; }
+    if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     specular = (cast material : Null<SpecularPbrMaterial>);
-    standard = _Runtime.select(!_Runtime.strictEquals(specular, null), function():Dynamic return cast _Runtime.field(specular, 'standard'), function():Dynamic return cast null);
+    standard = ((cast !_Runtime.strictEquals(specular, null) : Bool) ? (cast _Runtime.field(specular, 'standard') : Dynamic) : (cast null : Dynamic));
     key = _Runtime.callValue(buildWgpuPbrStandardDefineKey, cast ([standard, specular] : Array<Dynamic>));
     _Runtime.setField(key, 'specularEnabled', true);
     format = _Runtime.coalesce(_Runtime.field(stateRuntime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
@@ -50,9 +50,9 @@ class SpecularPbrWgpuMeshMaterialRenderer {
     _Runtime.callValue(writeWgpuFrameUniform, cast ([state, camera, lights] : Array<Dynamic>));
     binding = _Runtime.callValue(ensureWgpuPbrMaterialBindGroup, cast ([state, pipeline, _Runtime.coalesce(specular, function():Dynamic return cast SpecularPbrWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__specularPbrWgpuMeshMaterialRenderer), standard] : Array<Dynamic>));
     out = _Runtime.callValue(getWgpuPbrMaterialScratch, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(writeWgpuPbrStandardBlock, cast ([out, standard, _Runtime.select(!_Runtime.strictEquals(specular, null), function():Dynamic return cast _Runtime.field(specular, 'alphaCutoff'), function():Dynamic return cast 0.5)] : Array<Dynamic>));
+    _Runtime.callValue(writeWgpuPbrStandardBlock, cast ([out, standard, ((cast !_Runtime.strictEquals(specular, null) : Bool) ? (cast _Runtime.field(specular, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic))] : Array<Dynamic>));
     _Runtime.fill(out, 0.0, 16.0, null, 2);
-    if (_Runtime.truthy(!_Runtime.strictEquals(specular, null))) {
+    if ((cast !_Runtime.strictEquals(specular, null) : Bool)) {
       _Runtime.callValue(unpackColorToLinear, cast ([SpecularPbrWgpuMeshMaterialRenderer._colorScratch__specularPbrWgpuMeshMaterialRenderer, _Runtime.field(specular, 'specularColor')] : Array<Dynamic>));
       _Runtime.setIndex(out, 32.0, _Runtime.field(specular, 'specular'));
       _Runtime.setIndex(out, 33.0, _Runtime.getIndex(SpecularPbrWgpuMeshMaterialRenderer._colorScratch__specularPbrWgpuMeshMaterialRenderer, 0.0));

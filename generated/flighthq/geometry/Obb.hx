@@ -124,23 +124,23 @@ class Obb {
     tMax = HxMath.POSITIVE_INFINITY;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, 3.0, '<'))) {
+      while ((cast ((cast i : Float) < (cast 3.0 : Float)) : Bool)) {
         var o:Dynamic = _Runtime.getIndex(origins, i);
         var d:Dynamic = _Runtime.getIndex(dirs, i);
         var h:Dynamic = _Runtime.getIndex(halfExts, i);
-        if (_Runtime.truthy(_Runtime.compare(HxMath.abs(d), 1e-10, '>'))) {
+        if ((cast ((cast HxMath.abs(d) : Float) > (cast 1e-10 : Float)) : Bool)) {
           var invD:Dynamic = (1.0 / d);
           var t1:Dynamic = ((-h - o) * invD);
           var t2:Dynamic = ((h - o) * invD);
-          if (_Runtime.truthy(_Runtime.compare(t1, t2, '>'))) {
+          if ((cast ((cast t1 : Float) > (cast t2 : Float)) : Bool)) {
             var tmp:Dynamic = t1;
             (t1 = cast (t2 : Dynamic));
             (t2 = cast (tmp : Dynamic));
           }
           (tMin = cast (HxMath.max(tMin, t1) : Dynamic));
           (tMax = cast (HxMath.min(tMax, t2) : Dynamic));
-          if (_Runtime.truthy(_Runtime.compare(tMin, tMax, '>'))) { return cast -1.0; }
-        } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(o, -h, '<'), function():Dynamic return cast _Runtime.compare(o, h, '>')))) {
+          if ((cast ((cast tMin : Float) > (cast tMax : Float)) : Bool)) { return cast -1.0; }
+        } else { if ((cast ((cast ((cast o : Float) < (cast -h : Float)) : Bool) || (cast ((cast o : Float) > (cast h : Float)) : Bool)) : Bool)) {
           return cast -1.0;
         } }
         i++;
@@ -189,7 +189,7 @@ class Obb {
     tx = (acx - obb.centerX);
     ty = (acy - obb.centerY);
     tz = (acz - obb.centerZ);
-    return cast !_Runtime.truthy(Obb.obbSatSeparated__obb(cast ([tx, ty, tz, ax0, ay0, az0, ax1, ay1, az1, ax2, ay2, az2, obb.halfExtentX, obb.halfExtentY, obb.halfExtentZ, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, ahx, ahy, ahz] : Array<Dynamic>)));
+    return cast !(cast Obb.obbSatSeparated__obb(cast ([tx, ty, tz, ax0, ay0, az0, ax1, ay1, az1, ax2, ay2, az2, obb.halfExtentX, obb.halfExtentY, obb.halfExtentZ, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, ahx, ahy, ahz] : Array<Dynamic>)) : Bool);
     return cast null;
   }
 
@@ -240,7 +240,7 @@ class Obb {
     tx = (b.centerX - a.centerX);
     ty = (b.centerY - a.centerY);
     tz = (b.centerZ - a.centerZ);
-    return cast !_Runtime.truthy(Obb.obbSatSeparated__obb(cast ([tx, ty, tz, ax0, ay0, az0, ax1, ay1, az1, ax2, ay2, az2, a.halfExtentX, a.halfExtentY, a.halfExtentZ, bx0, by0, bz0, bx1, by1, bz1, bx2, by2, bz2, b.halfExtentX, b.halfExtentY, b.halfExtentZ] : Array<Dynamic>)));
+    return cast !(cast Obb.obbSatSeparated__obb(cast ([tx, ty, tz, ax0, ay0, az0, ax1, ay1, az1, ax2, ay2, az2, a.halfExtentX, a.halfExtentY, a.halfExtentZ, bx0, by0, bz0, bx1, by1, bz1, bx2, by2, bz2, b.halfExtentX, b.halfExtentY, b.halfExtentZ] : Array<Dynamic>)) : Bool);
     return cast null;
   }
 
@@ -306,29 +306,29 @@ class Obb {
     sx = HxMath.sqrt((((_Runtime.getIndex(_m, 0.0) * _Runtime.getIndex(_m, 0.0)) + (_Runtime.getIndex(_m, 1.0) * _Runtime.getIndex(_m, 1.0))) + (_Runtime.getIndex(_m, 2.0) * _Runtime.getIndex(_m, 2.0))));
     sy = HxMath.sqrt((((_Runtime.getIndex(_m, 4.0) * _Runtime.getIndex(_m, 4.0)) + (_Runtime.getIndex(_m, 5.0) * _Runtime.getIndex(_m, 5.0))) + (_Runtime.getIndex(_m, 6.0) * _Runtime.getIndex(_m, 6.0))));
     sz = HxMath.sqrt((((_Runtime.getIndex(_m, 8.0) * _Runtime.getIndex(_m, 8.0)) + (_Runtime.getIndex(_m, 9.0) * _Runtime.getIndex(_m, 9.0))) + (_Runtime.getIndex(_m, 10.0) * _Runtime.getIndex(_m, 10.0))));
-    r00 = _Runtime.select(_Runtime.compare(sx, 0.0, '>'), function():Dynamic return cast (_Runtime.getIndex(_m, 0.0) / sx), function():Dynamic return cast 1.0);
-    r10 = _Runtime.select(_Runtime.compare(sx, 0.0, '>'), function():Dynamic return cast (_Runtime.getIndex(_m, 1.0) / sx), function():Dynamic return cast 0.0);
-    r20 = _Runtime.select(_Runtime.compare(sx, 0.0, '>'), function():Dynamic return cast (_Runtime.getIndex(_m, 2.0) / sx), function():Dynamic return cast 0.0);
-    r01 = _Runtime.select(_Runtime.compare(sy, 0.0, '>'), function():Dynamic return cast (_Runtime.getIndex(_m, 4.0) / sy), function():Dynamic return cast 0.0);
-    r11 = _Runtime.select(_Runtime.compare(sy, 0.0, '>'), function():Dynamic return cast (_Runtime.getIndex(_m, 5.0) / sy), function():Dynamic return cast 1.0);
-    r21 = _Runtime.select(_Runtime.compare(sy, 0.0, '>'), function():Dynamic return cast (_Runtime.getIndex(_m, 6.0) / sy), function():Dynamic return cast 0.0);
-    r02 = _Runtime.select(_Runtime.compare(sz, 0.0, '>'), function():Dynamic return cast (_Runtime.getIndex(_m, 8.0) / sz), function():Dynamic return cast 0.0);
-    r12 = _Runtime.select(_Runtime.compare(sz, 0.0, '>'), function():Dynamic return cast (_Runtime.getIndex(_m, 9.0) / sz), function():Dynamic return cast 0.0);
-    r22 = _Runtime.select(_Runtime.compare(sz, 0.0, '>'), function():Dynamic return cast (_Runtime.getIndex(_m, 10.0) / sz), function():Dynamic return cast 1.0);
+    r00 = ((cast ((cast sx : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.getIndex(_m, 0.0) / sx) : Dynamic) : (cast 1.0 : Dynamic));
+    r10 = ((cast ((cast sx : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.getIndex(_m, 1.0) / sx) : Dynamic) : (cast 0.0 : Dynamic));
+    r20 = ((cast ((cast sx : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.getIndex(_m, 2.0) / sx) : Dynamic) : (cast 0.0 : Dynamic));
+    r01 = ((cast ((cast sy : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.getIndex(_m, 4.0) / sy) : Dynamic) : (cast 0.0 : Dynamic));
+    r11 = ((cast ((cast sy : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.getIndex(_m, 5.0) / sy) : Dynamic) : (cast 1.0 : Dynamic));
+    r21 = ((cast ((cast sy : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.getIndex(_m, 6.0) / sy) : Dynamic) : (cast 0.0 : Dynamic));
+    r02 = ((cast ((cast sz : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.getIndex(_m, 8.0) / sz) : Dynamic) : (cast 0.0 : Dynamic));
+    r12 = ((cast ((cast sz : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.getIndex(_m, 9.0) / sz) : Dynamic) : (cast 0.0 : Dynamic));
+    r22 = ((cast ((cast sz : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.getIndex(_m, 10.0) / sz) : Dynamic) : (cast 1.0 : Dynamic));
     trace = ((r00 + r11) + r22);
-    if (_Runtime.truthy(_Runtime.compare(trace, 0.0, '>'))) {
+    if ((cast ((cast trace : Float) > (cast 0.0 : Float)) : Bool)) {
       var s:Dynamic = (0.5 / HxMath.sqrt((trace + 1.0)));
       (mqw = cast ((0.25 / s) : Dynamic));
       (mqx = cast (((r12 - r21) * s) : Dynamic));
       (mqy = cast (((r20 - r02) * s) : Dynamic));
       (mqz = cast (((r01 - r10) * s) : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(r00, r11, '>'), function():Dynamic return cast _Runtime.compare(r00, r22, '>')))) {
+    } else { if ((cast ((cast ((cast r00 : Float) > (cast r11 : Float)) : Bool) && (cast ((cast r00 : Float) > (cast r22 : Float)) : Bool)) : Bool)) {
       var s:Dynamic = (2.0 * HxMath.sqrt((((1.0 + r00) - r11) - r22)));
       (mqw = cast (((r12 - r21) / s) : Dynamic));
       (mqx = cast ((0.25 * s) : Dynamic));
       (mqy = cast (((r10 + r01) / s) : Dynamic));
       (mqz = cast (((r20 + r02) / s) : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.compare(r11, r22, '>'))) {
+    } else { if ((cast ((cast r11 : Float) > (cast r22 : Float)) : Bool)) {
       var s:Dynamic = (2.0 * HxMath.sqrt((((1.0 + r11) - r00) - r22)));
       (mqw = cast (((r20 - r02) / s) : Dynamic));
       (mqx = cast (((r10 + r01) / s) : Dynamic));
@@ -419,27 +419,27 @@ class Obb {
       var pA:Dynamic = cast _Runtime.UNDEFINED;
       var pB:Dynamic = cast _Runtime.UNDEFINED;
       lenSq = (((lx * lx) + (ly * ly)) + (lz * lz));
-      if (_Runtime.truthy(_Runtime.compare(lenSq, 1e-10, '<'))) { return cast false; }
+      if ((cast ((cast lenSq : Float) < (cast 1e-10 : Float)) : Bool)) { return cast false; }
       d = HxMath.abs((((tx * lx) + (ty * ly)) + (tz * lz)));
       pA = (((HxMath.abs((((ax0 * lx) + (ay0 * ly)) + (az0 * lz))) * hax) + (HxMath.abs((((ax1 * lx) + (ay1 * ly)) + (az1 * lz))) * hay)) + (HxMath.abs((((ax2 * lx) + (ay2 * ly)) + (az2 * lz))) * haz));
       pB = (((HxMath.abs((((bx0 * lx) + (by0 * ly)) + (bz0 * lz))) * hbx) + (HxMath.abs((((bx1 * lx) + (by1 * ly)) + (bz1 * lz))) * hby)) + (HxMath.abs((((bx2 * lx) + (by2 * ly)) + (bz2 * lz))) * hbz));
-      return cast _Runtime.compare(d, (pA + pB), '>');
+      return cast ((cast d : Float) > (cast (pA + pB) : Float));
     };
-    if (_Runtime.truthy(_Runtime.callValue(onAxis, cast ([ax0, ay0, az0] : Array<Dynamic>)))) { return cast true; }
-    if (_Runtime.truthy(_Runtime.callValue(onAxis, cast ([ax1, ay1, az1] : Array<Dynamic>)))) { return cast true; }
-    if (_Runtime.truthy(_Runtime.callValue(onAxis, cast ([ax2, ay2, az2] : Array<Dynamic>)))) { return cast true; }
-    if (_Runtime.truthy(_Runtime.callValue(onAxis, cast ([bx0, by0, bz0] : Array<Dynamic>)))) { return cast true; }
-    if (_Runtime.truthy(_Runtime.callValue(onAxis, cast ([bx1, by1, bz1] : Array<Dynamic>)))) { return cast true; }
-    if (_Runtime.truthy(_Runtime.callValue(onAxis, cast ([bx2, by2, bz2] : Array<Dynamic>)))) { return cast true; }
-    if (_Runtime.truthy(_Runtime.callValue(onAxis, cast ([((ay0 * bz0) - (az0 * by0)), ((az0 * bx0) - (ax0 * bz0)), ((ax0 * by0) - (ay0 * bx0))] : Array<Dynamic>)))) { return cast true; }
-    if (_Runtime.truthy(_Runtime.callValue(onAxis, cast ([((ay0 * bz1) - (az0 * by1)), ((az0 * bx1) - (ax0 * bz1)), ((ax0 * by1) - (ay0 * bx1))] : Array<Dynamic>)))) { return cast true; }
-    if (_Runtime.truthy(_Runtime.callValue(onAxis, cast ([((ay0 * bz2) - (az0 * by2)), ((az0 * bx2) - (ax0 * bz2)), ((ax0 * by2) - (ay0 * bx2))] : Array<Dynamic>)))) { return cast true; }
-    if (_Runtime.truthy(_Runtime.callValue(onAxis, cast ([((ay1 * bz0) - (az1 * by0)), ((az1 * bx0) - (ax1 * bz0)), ((ax1 * by0) - (ay1 * bx0))] : Array<Dynamic>)))) { return cast true; }
-    if (_Runtime.truthy(_Runtime.callValue(onAxis, cast ([((ay1 * bz1) - (az1 * by1)), ((az1 * bx1) - (ax1 * bz1)), ((ax1 * by1) - (ay1 * bx1))] : Array<Dynamic>)))) { return cast true; }
-    if (_Runtime.truthy(_Runtime.callValue(onAxis, cast ([((ay1 * bz2) - (az1 * by2)), ((az1 * bx2) - (ax1 * bz2)), ((ax1 * by2) - (ay1 * bx2))] : Array<Dynamic>)))) { return cast true; }
-    if (_Runtime.truthy(_Runtime.callValue(onAxis, cast ([((ay2 * bz0) - (az2 * by0)), ((az2 * bx0) - (ax2 * bz0)), ((ax2 * by0) - (ay2 * bx0))] : Array<Dynamic>)))) { return cast true; }
-    if (_Runtime.truthy(_Runtime.callValue(onAxis, cast ([((ay2 * bz1) - (az2 * by1)), ((az2 * bx1) - (ax2 * bz1)), ((ax2 * by1) - (ay2 * bx1))] : Array<Dynamic>)))) { return cast true; }
-    if (_Runtime.truthy(_Runtime.callValue(onAxis, cast ([((ay2 * bz2) - (az2 * by2)), ((az2 * bx2) - (ax2 * bz2)), ((ax2 * by2) - (ay2 * bx2))] : Array<Dynamic>)))) { return cast true; }
+    if ((cast _Runtime.callValue(onAxis, cast ([ax0, ay0, az0] : Array<Dynamic>)) : Bool)) { return cast true; }
+    if ((cast _Runtime.callValue(onAxis, cast ([ax1, ay1, az1] : Array<Dynamic>)) : Bool)) { return cast true; }
+    if ((cast _Runtime.callValue(onAxis, cast ([ax2, ay2, az2] : Array<Dynamic>)) : Bool)) { return cast true; }
+    if ((cast _Runtime.callValue(onAxis, cast ([bx0, by0, bz0] : Array<Dynamic>)) : Bool)) { return cast true; }
+    if ((cast _Runtime.callValue(onAxis, cast ([bx1, by1, bz1] : Array<Dynamic>)) : Bool)) { return cast true; }
+    if ((cast _Runtime.callValue(onAxis, cast ([bx2, by2, bz2] : Array<Dynamic>)) : Bool)) { return cast true; }
+    if ((cast _Runtime.callValue(onAxis, cast ([((ay0 * bz0) - (az0 * by0)), ((az0 * bx0) - (ax0 * bz0)), ((ax0 * by0) - (ay0 * bx0))] : Array<Dynamic>)) : Bool)) { return cast true; }
+    if ((cast _Runtime.callValue(onAxis, cast ([((ay0 * bz1) - (az0 * by1)), ((az0 * bx1) - (ax0 * bz1)), ((ax0 * by1) - (ay0 * bx1))] : Array<Dynamic>)) : Bool)) { return cast true; }
+    if ((cast _Runtime.callValue(onAxis, cast ([((ay0 * bz2) - (az0 * by2)), ((az0 * bx2) - (ax0 * bz2)), ((ax0 * by2) - (ay0 * bx2))] : Array<Dynamic>)) : Bool)) { return cast true; }
+    if ((cast _Runtime.callValue(onAxis, cast ([((ay1 * bz0) - (az1 * by0)), ((az1 * bx0) - (ax1 * bz0)), ((ax1 * by0) - (ay1 * bx0))] : Array<Dynamic>)) : Bool)) { return cast true; }
+    if ((cast _Runtime.callValue(onAxis, cast ([((ay1 * bz1) - (az1 * by1)), ((az1 * bx1) - (ax1 * bz1)), ((ax1 * by1) - (ay1 * bx1))] : Array<Dynamic>)) : Bool)) { return cast true; }
+    if ((cast _Runtime.callValue(onAxis, cast ([((ay1 * bz2) - (az1 * by2)), ((az1 * bx2) - (ax1 * bz2)), ((ax1 * by2) - (ay1 * bx2))] : Array<Dynamic>)) : Bool)) { return cast true; }
+    if ((cast _Runtime.callValue(onAxis, cast ([((ay2 * bz0) - (az2 * by0)), ((az2 * bx0) - (ax2 * bz0)), ((ax2 * by0) - (ay2 * bx0))] : Array<Dynamic>)) : Bool)) { return cast true; }
+    if ((cast _Runtime.callValue(onAxis, cast ([((ay2 * bz1) - (az2 * by1)), ((az2 * bx1) - (ax2 * bz1)), ((ax2 * by1) - (ay2 * bx1))] : Array<Dynamic>)) : Bool)) { return cast true; }
+    if ((cast _Runtime.callValue(onAxis, cast ([((ay2 * bz2) - (az2 * by2)), ((az2 * bx2) - (ax2 * bz2)), ((ax2 * by2) - (ay2 * bx2))] : Array<Dynamic>)) : Bool)) { return cast true; }
     return cast false;
     return cast null;
   }

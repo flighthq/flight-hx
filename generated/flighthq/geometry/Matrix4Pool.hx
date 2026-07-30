@@ -18,7 +18,7 @@ class Matrix4Pool {
 
   public static function acquireMatrix4():Matrix4 {
     var m:Matrix4 = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(Matrix4Pool.pool__matrix4Pool, 'length'), 0.0, '>'))) {
+    if ((cast ((cast _Runtime.field(Matrix4Pool.pool__matrix4Pool, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       (m = cast ((cast _Runtime.callProperty(Matrix4Pool.pool__matrix4Pool, 'pop', cast ([] : Array<Dynamic>)) : Matrix4) : Dynamic));
     } else {
       (m = cast (_Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) : Dynamic));
@@ -32,7 +32,7 @@ class Matrix4Pool {
   }
 
   public static function releaseMatrix4(m:Matrix4):Void {
-    if (_Runtime.truthy(!_Runtime.truthy(m))) { return; }
+    if ((cast !_Runtime.truthy(m) : Bool)) { return; }
     _Runtime.callProperty(Matrix4Pool.pool__matrix4Pool, 'push', cast ([m] : Array<Dynamic>));
   }
 

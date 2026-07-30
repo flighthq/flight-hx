@@ -35,12 +35,12 @@ class WireframeWgpuMeshMaterialRenderer {
     var group:Dynamic = cast _Runtime.UNDEFINED;
     stateRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     pass = _Runtime.field(stateRuntime, 'renderPass');
-    if (_Runtime.truthy(_Runtime.strictEquals(pass, null))) { return; }
+    if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     wireframe = (cast material : Null<WireframeMaterial>);
     format = _Runtime.coalesce(_Runtime.field(stateRuntime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
     pipeline = _Runtime.callValue(ensureWgpuWireframePipeline, cast ([state, format] : Array<Dynamic>));
     _Runtime.callValue(writeWgpuFrameUniform, cast ([state, camera, _lights] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(wireframe, null))) {
+    if ((cast _Runtime.strictEquals(wireframe, null) : Bool)) {
       (group = cast (_Runtime.callValue(bindWgpuWireframeColor, cast ([state, pipeline, WireframeWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__wireframeWgpuMeshMaterialRenderer, WireframeWgpuMeshMaterialRenderer.WHITE__wireframeWgpuMeshMaterialRenderer] : Array<Dynamic>)) : Dynamic));
     } else {
       _Runtime.callValue(unpackColorToLinear, cast ([WireframeWgpuMeshMaterialRenderer._scratch__wireframeWgpuMeshMaterialRenderer, _Runtime.field(wireframe, 'color')] : Array<Dynamic>));
@@ -58,11 +58,11 @@ class WireframeWgpuMeshMaterialRenderer {
     stateRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     pass = _Runtime.field(stateRuntime, 'renderPass');
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(pass, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(scene, 'activeMeshPipeline'), null)))) { return; }
+    if ((cast ((cast _Runtime.strictEquals(pass, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(scene, 'activeMeshPipeline'), null) : Bool)) : Bool)) { return; }
     subset = _Runtime.field(proxy, 'subset');
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(subset, 'indexCount'), 0.0))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(subset, 'indexCount'), 0.0) : Bool)) { return; }
     upload = _Runtime.callValue(ensureWgpuWireframeUpload, cast ([state, geometry] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(upload, null))) { return; }
+    if ((cast _Runtime.strictEquals(upload, null) : Bool)) { return; }
     drawBindGroup = _Runtime.callValue(writeWgpuDrawUniform, cast ([state, proxy] : Array<Dynamic>));
     _Runtime.setIndex(WireframeWgpuMeshMaterialRenderer._dynamicOffsets__wireframeWgpuMeshMaterialRenderer, 0.0, _Runtime.field(scene, 'pendingDrawOffset'));
     _Runtime.callProperty(pass, 'setBindGroup', cast ([1.0, drawBindGroup, WireframeWgpuMeshMaterialRenderer._dynamicOffsets__wireframeWgpuMeshMaterialRenderer] : Array<Dynamic>));

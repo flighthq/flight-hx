@@ -13,7 +13,7 @@ import flighthq.types.GlRenderTarget;
 class GlPresentRenderTarget {
   public static function presentGlRenderTarget(state:GlRenderState, target:GlRenderTarget, ?dest:Null<GlRenderTarget>):Void {
     if (dest == null) dest = cast (null : Dynamic);
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(target, 'colorSpace'), 'linear'))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(target, 'colorSpace'), 'linear') : Bool)) {
       _Runtime.callValue(drawGlLinearToSrgbPass, cast ([state, target, dest] : Array<Dynamic>));
       return;
     }
@@ -23,7 +23,7 @@ class GlPresentRenderTarget {
   public static function getGlCopyProgram__glPresentRenderTarget(state:GlRenderState):GlFullscreenProgram {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = ((cast GlPresentRenderTarget._programs__glPresentRenderTarget : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(program, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(program, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (program = cast (_Runtime.callValue(compileGlFullscreenProgram, cast ([_Runtime.field(state, 'gl'), GlPresentRenderTarget.COPY_FRAGMENT_SRC__glPresentRenderTarget] : Array<Dynamic>)) : Dynamic));
       ((cast GlPresentRenderTarget._programs__glPresentRenderTarget : flighthq._internal._WeakMap).set(state, program));
     }

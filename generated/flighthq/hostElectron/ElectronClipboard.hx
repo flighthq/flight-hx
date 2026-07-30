@@ -53,7 +53,7 @@ class ElectronClipboard {
     }, hasText: function():flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.protect(function():Dynamic {
         try {
-          return cast _Runtime.compare(_Runtime.field(_Runtime.callProperty(cb, 'readText', cast ([] : Array<Dynamic>)), 'length'), 0.0, '>');
+          return cast ((cast _Runtime.field(_Runtime.callProperty(cb, 'readText', cast ([] : Array<Dynamic>)), 'length') : Float) > (cast 0.0 : Float));
         } catch (__error:Dynamic) {
           return cast false;
         }
@@ -63,7 +63,7 @@ class ElectronClipboard {
       return cast flighthq._internal._Async.protect(function():Dynamic {
         try {
           var image:Dynamic = _Runtime.callProperty(cb, 'readImage', cast ([] : Array<Dynamic>));
-          return cast _Runtime.select(_Runtime.callProperty(image, 'isEmpty', cast ([] : Array<Dynamic>)), function():Dynamic return cast '', function():Dynamic return cast _Runtime.callProperty(image, 'toDataUrl', cast ([] : Array<Dynamic>)));
+          return cast ((cast _Runtime.callProperty(image, 'isEmpty', cast ([] : Array<Dynamic>)) : Bool) ? (cast '' : Dynamic) : (cast _Runtime.callProperty(image, 'toDataUrl', cast ([] : Array<Dynamic>)) : Dynamic));
         } catch (__error:Dynamic) {
           return cast '';
         }
@@ -82,7 +82,7 @@ class ElectronClipboard {
     }, hasImage: function():flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.protect(function():Dynamic {
         try {
-          return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(cb, 'readImage', cast ([] : Array<Dynamic>)), 'isEmpty', cast ([] : Array<Dynamic>)));
+          return cast !(cast _Runtime.callProperty(_Runtime.callProperty(cb, 'readImage', cast ([] : Array<Dynamic>)), 'isEmpty', cast ([] : Array<Dynamic>)) : Bool);
         } catch (__error:Dynamic) {
           return cast false;
         }
@@ -111,7 +111,7 @@ class ElectronClipboard {
       return cast flighthq._internal._Async.protect(function():Dynamic {
         try {
           var bookmark:Dynamic = _Runtime.callProperty(cb, 'readBookmark', cast ([] : Array<Dynamic>));
-          if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(bookmark, 'title'), ''), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(bookmark, 'url'), '')))) { return cast null; }
+          if ((cast ((cast _Runtime.strictEquals(_Runtime.field(bookmark, 'title'), '') : Bool) && (cast _Runtime.strictEquals(_Runtime.field(bookmark, 'url'), '') : Bool)) : Bool)) { return cast null; }
           var out:ClipboardBookmark = { title: _Runtime.field(bookmark, 'title'), url: _Runtime.field(bookmark, 'url') };
           return cast out;
         } catch (__error:Dynamic) {
@@ -174,7 +174,7 @@ class ElectronClipboard {
         out = {  };
         for (format in _Runtime.iterable(formats)) {
           try {
-            if (_Runtime.truthy(_Runtime.callProperty(cb, 'has', cast ([format] : Array<Dynamic>)))) { _Runtime.setIndex(out, format, _Runtime.callProperty(cb, 'read', cast ([format] : Array<Dynamic>))); }
+            if ((cast _Runtime.callProperty(cb, 'has', cast ([format] : Array<Dynamic>)) : Bool)) { _Runtime.setIndex(out, format, _Runtime.callProperty(cb, 'read', cast ([format] : Array<Dynamic>))); }
           } catch (__error:Dynamic) {
           }
         }
@@ -224,9 +224,9 @@ class ElectronClipboard {
   }
 
   public static function formatKey__electronClipboard(format:String):String {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(format, 'text/html'), function():Dynamic return cast _Runtime.strictEquals(format, 'html')))) { return cast 'html'; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(format, 'text/rtf'), function():Dynamic return cast _Runtime.strictEquals(format, 'application/rtf')), function():Dynamic return cast _Runtime.strictEquals(format, 'rtf')))) { return cast 'rtf'; }
-    if (_Runtime.truthy(_Runtime.strictEquals(format, 'bookmark'))) { return cast 'bookmark'; }
+    if ((cast ((cast _Runtime.strictEquals(format, 'text/html') : Bool) || (cast _Runtime.strictEquals(format, 'html') : Bool)) : Bool)) { return cast 'html'; }
+    if ((cast ((cast ((cast _Runtime.strictEquals(format, 'text/rtf') : Bool) || (cast _Runtime.strictEquals(format, 'application/rtf') : Bool)) : Bool) || (cast _Runtime.strictEquals(format, 'rtf') : Bool)) : Bool)) { return cast 'rtf'; }
+    if ((cast _Runtime.strictEquals(format, 'bookmark') : Bool)) { return cast 'bookmark'; }
     return cast 'text';
     return cast null;
   }

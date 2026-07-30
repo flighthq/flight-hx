@@ -18,7 +18,7 @@ class DomRenderState {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     state = (cast _Runtime.callValue(_createRenderState, cast ([{ pixelRatio: _Runtime.coalesce(_Runtime.field(options, 'pixelRatio'), function():Dynamic return cast 1.0), renderTransform2D: _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)), roundPixels: _Runtime.coalesce(_Runtime.field(options, 'roundPixels'), function():Dynamic return cast false), sceneGraphSyncPolicy: _Runtime.field(options, 'sceneGraphSyncPolicy') }] : Array<Dynamic>)) : flighthq.types.DomRenderState);
-    if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(options, 'backgroundColor'), null))) { _Runtime.callValue(setRenderStateBackgroundColor, cast ([state, _Runtime.field(options, 'backgroundColor')] : Array<Dynamic>)); }
+    if ((cast !_Runtime.looseEquals(_Runtime.field(options, 'backgroundColor'), null) : Bool)) { _Runtime.callValue(setRenderStateBackgroundColor, cast ([state, _Runtime.field(options, 'backgroundColor')] : Array<Dynamic>)); }
     _Runtime.setField(state, 'applyBlendMode', null);
     _Runtime.setField(state, 'domCssFilterResolver', null);
     _Runtime.setField((cast state : { var element:Dynamic; }), 'element', element);

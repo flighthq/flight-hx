@@ -7,12 +7,12 @@ import flighthq._internal._Runtime;
 class NumberTheory {
   public static function factorial(n:Float):Float {
     var result:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([n] : Array<Dynamic>))), function():Dynamic return cast _Runtime.compare(n, 0.0, '<')))) { throw _Runtime.rangeError('factorial: n must be a non-negative integer'); }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(n, 0.0), function():Dynamic return cast _Runtime.strictEquals(n, 1.0)))) { return cast 1.0; }
+    if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([n] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast n : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { throw _Runtime.rangeError('factorial: n must be a non-negative integer'); }
+    if ((cast ((cast _Runtime.strictEquals(n, 0.0) : Bool) || (cast _Runtime.strictEquals(n, 1.0) : Bool)) : Bool)) { return cast 1.0; }
     result = 1.0;
     {
       var i:Dynamic = 2.0;
-      while (_Runtime.truthy(_Runtime.compare(i, n, '<='))) {
+      while ((cast ((cast i : Float) <= (cast n : Float)) : Bool)) {
         (result = cast ((result * i) : Dynamic));
         i++;
       }
@@ -24,8 +24,8 @@ class NumberTheory {
   public static function gcd(a:Float, b:Float):Float {
     (a = cast (HxMath.abs(_Runtime.trunc(a)) : Dynamic));
     (b = cast (HxMath.abs(_Runtime.trunc(b)) : Dynamic));
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(a, 0.0), function():Dynamic return cast _Runtime.strictEquals(b, 0.0)))) { throw _Runtime.rangeError('gcd: both arguments must not be 0'); }
-    while (_Runtime.truthy(!_Runtime.strictEquals(b, 0.0))) {
+    if ((cast ((cast _Runtime.strictEquals(a, 0.0) : Bool) && (cast _Runtime.strictEquals(b, 0.0) : Bool)) : Bool)) { throw _Runtime.rangeError('gcd: both arguments must not be 0'); }
+    while ((cast !_Runtime.strictEquals(b, 0.0) : Bool)) {
       var t:Dynamic = b;
       (b = cast (_Runtime.fmod(a, b) : Dynamic));
       (a = cast (t : Dynamic));

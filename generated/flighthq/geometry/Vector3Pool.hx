@@ -19,7 +19,7 @@ class Vector3Pool {
 
   public static function acquireVector3():Vector3 {
     var v:Vector3 = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(Vector3Pool.pool__vector3Pool, 'length'), 0.0, '>'))) {
+    if ((cast ((cast _Runtime.field(Vector3Pool.pool__vector3Pool, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       (v = cast ((cast _Runtime.callProperty(Vector3Pool.pool__vector3Pool, 'pop', cast ([] : Array<Dynamic>)) : Vector3) : Dynamic));
     } else {
       (v = cast (_Runtime.callValue(createVector3, cast ([] : Array<Dynamic>)) : Dynamic));
@@ -33,7 +33,7 @@ class Vector3Pool {
   }
 
   public static function releaseVector3(v:Vector3):Void {
-    if (_Runtime.truthy(!_Runtime.truthy(v))) { return; }
+    if ((cast !_Runtime.truthy(v) : Bool)) { return; }
     _Runtime.callProperty(Vector3Pool.pool__vector3Pool, 'push', cast ([v] : Array<Dynamic>));
   }
 

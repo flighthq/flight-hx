@@ -14,7 +14,7 @@ class DomScale9Mapper {
     var gh:Dynamic = cast _Runtime.UNDEFINED;
     var bw:Dynamic = cast _Runtime.UNDEFINED;
     var bh:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(scaleX, 0.0, '<='), function():Dynamic return cast _Runtime.compare(scaleY, 0.0, '<=')), function():Dynamic return cast _Runtime.compare(_Runtime.field(bounds, 'width'), 0.0, '<=')), function():Dynamic return cast _Runtime.compare(_Runtime.field(bounds, 'height'), 0.0, '<=')))) { return cast null; }
+    if ((cast ((cast ((cast ((cast ((cast scaleX : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast scaleY : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(bounds, 'width') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(bounds, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
     gx = _Runtime.field(scale9Grid, 'x');
     gy = _Runtime.field(scale9Grid, 'y');
     gw = _Runtime.field(scale9Grid, 'width');
@@ -32,19 +32,19 @@ class DomScale9Mapper {
     scale9End = ((unscaledSize - scale9Center) - scale9Start);
     size = (unscaledSize * scale);
     center = ((size - scale9Start) - scale9End);
-    if (_Runtime.truthy(_Runtime.compare(pos, scale9Start, '<='))) {
-      if (_Runtime.truthy(_Runtime.compare(center, 0.0, '<'))) {
+    if ((cast ((cast pos : Float) <= (cast scale9Start : Float)) : Bool)) {
+      if ((cast ((cast center : Float) < (cast 0.0 : Float)) : Bool)) {
         return cast ((pos * ((scale9Start + scale9End) + center)) / (scale9Start + scale9End));
       }
       return cast pos;
     }
-    if (_Runtime.truthy(_Runtime.compare(pos, (scale9Start + scale9Center), '>='))) {
-      if (_Runtime.truthy(_Runtime.compare(center, 0.0, '<'))) {
+    if ((cast ((cast pos : Float) >= (cast (scale9Start + scale9Center) : Float)) : Bool)) {
+      if ((cast ((cast center : Float) < (cast 0.0 : Float)) : Bool)) {
         return cast (((scale9Start + ((pos - scale9Start) - scale9Center)) * ((scale9Start + scale9End) + center)) / (scale9Start + scale9End));
       }
       return cast ((scale9Start + center) + ((pos - scale9Start) - scale9Center));
     }
-    if (_Runtime.truthy(_Runtime.compare(center, 0.0, '<'))) {
+    if ((cast ((cast center : Float) < (cast 0.0 : Float)) : Bool)) {
       return cast ((scale9Start * ((scale9Start + scale9End) + center)) / (scale9Start + scale9End));
     }
     return cast (scale9Start + ((center * (pos - scale9Start)) / scale9Center));

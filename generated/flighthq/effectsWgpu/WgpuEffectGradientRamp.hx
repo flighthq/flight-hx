@@ -11,13 +11,13 @@ class WgpuEffectGradientRamp {
     var key:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     cache = ((cast WgpuEffectGradientRamp.rampCaches__wgpuEffectGradientRamp : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (cache = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
       ((cast WgpuEffectGradientRamp.rampCaches__wgpuEffectGradientRamp : flighthq._internal._WeakMap).set(state, cache));
     }
     key = '' + Std.string(_Runtime.join(colors, ',')) + '|' + Std.string(_Runtime.join(alphas, ',')) + '|' + Std.string(_Runtime.join(ratios, ',')) + '';
     texture = ((cast cache : flighthq._internal._Map).get(key));
-    if (_Runtime.truthy(_Runtime.strictEquals(texture, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(texture, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (texture = cast (_Runtime.callValue(WgpuEffectGradientRamp.createWgpuEffectGradientRampTexture__wgpuEffectGradientRamp, cast ([state, colors, alphas, ratios] : Array<Dynamic>)) : Dynamic));
       ((cast cache : flighthq._internal._Map).set(key, texture));
     }
@@ -28,22 +28,22 @@ class WgpuEffectGradientRamp {
   public static function buildRampData__wgpuEffectGradientRamp(colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):flighthq._internal._UInt8ClampedArray {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     out = new flighthq._internal._UInt8ClampedArray((256.0 * 4.0));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(colors, 'length'), 0.0))) { return cast out; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(colors, 'length'), 0.0) : Bool)) { return cast out; }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, 256.0, '<'))) {
+      while ((cast ((cast i : Float) < (cast 256.0 : Float)) : Bool)) {
         var t:Dynamic = i;
         var r:Dynamic = 0.0;
         var g:Dynamic = 0.0;
         var b:Dynamic = 0.0;
         var a:Dynamic = 0.0;
-        if (_Runtime.truthy(_Runtime.compare(t, _Runtime.getIndex(ratios, 0.0), '<='))) {
+        if ((cast ((cast t : Float) <= (cast _Runtime.getIndex(ratios, 0.0) : Float)) : Bool)) {
           var c:Dynamic = _Runtime.getIndex(colors, 0.0);
           (r = cast ((_Runtime.toInt32((_Runtime.toInt32(c) >> 16)) & 255) : Dynamic));
           (g = cast ((_Runtime.toInt32((_Runtime.toInt32(c) >> 8)) & 255) : Dynamic));
           (b = cast ((_Runtime.toInt32(c) & 255) : Dynamic));
           (a = cast (HxMath.round((_Runtime.getIndex(alphas, 0.0) * 255.0)) : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.compare(t, _Runtime.getIndex(ratios, (_Runtime.field(ratios, 'length') - 1.0)), '>='))) {
+        } else { if ((cast ((cast t : Float) >= (cast _Runtime.getIndex(ratios, (_Runtime.field(ratios, 'length') - 1.0)) : Float)) : Bool)) {
           var c:Dynamic = _Runtime.getIndex(colors, (_Runtime.field(colors, 'length') - 1.0));
           (r = cast ((_Runtime.toInt32((_Runtime.toInt32(c) >> 16)) & 255) : Dynamic));
           (g = cast ((_Runtime.toInt32((_Runtime.toInt32(c) >> 8)) & 255) : Dynamic));
@@ -52,11 +52,11 @@ class WgpuEffectGradientRamp {
         } else {
           {
             var j:Dynamic = 0.0;
-            while (_Runtime.truthy(_Runtime.compare(j, (_Runtime.field(ratios, 'length') - 1.0), '<'))) {
+            while ((cast ((cast j : Float) < (cast (_Runtime.field(ratios, 'length') - 1.0) : Float)) : Bool)) {
               var r0:Dynamic = _Runtime.getIndex(ratios, j);
               var r1:Dynamic = _Runtime.getIndex(ratios, (j + 1.0));
-              if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(t, r0, '>='), function():Dynamic return cast _Runtime.compare(t, r1, '<=')))) {
-                var blend:Dynamic = _Runtime.select(_Runtime.compare(r1, r0, '>'), function():Dynamic return cast ((t - r0) / (r1 - r0)), function():Dynamic return cast 0.0);
+              if ((cast ((cast ((cast t : Float) >= (cast r0 : Float)) : Bool) && (cast ((cast t : Float) <= (cast r1 : Float)) : Bool)) : Bool)) {
+                var blend:Dynamic = ((cast ((cast r1 : Float) > (cast r0 : Float)) : Bool) ? (cast ((t - r0) / (r1 - r0)) : Dynamic) : (cast 0.0 : Dynamic));
                 var c0:Dynamic = _Runtime.getIndex(colors, j);
                 var c1:Dynamic = _Runtime.getIndex(colors, (j + 1.0));
                 (r = cast (HxMath.round((((_Runtime.toInt32((_Runtime.toInt32(c0) >> 16)) & 255) * (1.0 - blend)) + ((_Runtime.toInt32((_Runtime.toInt32(c1) >> 16)) & 255) * blend))) : Dynamic));

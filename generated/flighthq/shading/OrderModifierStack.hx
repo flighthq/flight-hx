@@ -14,7 +14,7 @@ class OrderModifierStack {
     _Runtime.callProperty(indexed, 'sort', cast ([function(a:Dynamic, b:Dynamic) {
       var rankDelta:Dynamic = cast _Runtime.UNDEFINED;
       rankDelta = (_Runtime.callValue(OrderModifierStack.getModifierSlotRank__orderModifierStack, cast ([_Runtime.field(_Runtime.field(a, 'modifier'), 'slot')] : Array<Dynamic>)) - _Runtime.callValue(OrderModifierStack.getModifierSlotRank__orderModifierStack, cast ([_Runtime.field(_Runtime.field(b, 'modifier'), 'slot')] : Array<Dynamic>)));
-      return cast _Runtime.select(!_Runtime.strictEquals(rankDelta, 0.0), function():Dynamic return cast rankDelta, function():Dynamic return cast (_Runtime.field(a, 'index') - _Runtime.field(b, 'index')));
+      return cast ((cast !_Runtime.strictEquals(rankDelta, 0.0) : Bool) ? (cast rankDelta : Dynamic) : (cast (_Runtime.field(a, 'index') - _Runtime.field(b, 'index')) : Dynamic));
     }] : Array<Dynamic>));
     return cast _Runtime.callProperty(indexed, 'map', cast ([function(entry:Dynamic) return _Runtime.field(entry, 'modifier')] : Array<Dynamic>));
     return cast null;
@@ -23,7 +23,7 @@ class OrderModifierStack {
   public static function getModifierSlotRank__orderModifierStack(slot:ModifierSlot):Float {
     var rank:Dynamic = cast _Runtime.UNDEFINED;
     rank = ((cast OrderModifierStack.SLOT_RANK__orderModifierStack : flighthq._internal._Map).get(slot));
-    return cast _Runtime.select(!_Runtime.strictEquals(rank, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast rank, function():Dynamic return cast (cast OrderModifierStack.SLOT_RANK__orderModifierStack : flighthq._internal._Map).size);
+    return cast ((cast !_Runtime.strictEquals(rank, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast rank : Dynamic) : (cast (cast OrderModifierStack.SLOT_RANK__orderModifierStack : flighthq._internal._Map).size : Dynamic));
     return cast null;
   }
 

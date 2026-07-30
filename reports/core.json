@@ -9767,5 +9767,12 @@
       "module": "flighthq.xml.XmlQuery"
     }
   ],
-  "schemaVersion": 1
+  "schemaVersion": 2,
+  "staticLowering": {
+    "booleanAndExpressions": 1223,
+    "booleanConditionalExpressions": 1689,
+    "booleanOrExpressions": 1364,
+    "booleanTruthinessUses": 7882,
+    "numericRelations": 4021
+  }
 }

@@ -10,21 +10,21 @@ class CreateEasingSamples {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     var result:Dynamic = cast _Runtime.UNDEFINED;
     var step:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([count] : Array<Dynamic>))), function():Dynamic return cast _Runtime.compare(count, 1.0, '<')))) {
+    if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([count] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast count : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) {
       throw _Runtime.error('createEasingSamples: count must be a finite integer >= 1');
     }
     n = HxMath.floor(count);
     result = _Runtime.coalesce(out, function():Dynamic return cast new flighthq._internal._Float32Array(n));
-    if (_Runtime.truthy(_Runtime.strictEquals(n, 1.0))) {
+    if ((cast _Runtime.strictEquals(n, 1.0) : Bool)) {
       _Runtime.setIndex(result, 0.0, _Runtime.callValue(ease, cast ([0.5] : Array<Dynamic>)));
       return cast result;
     }
     step = (1.0 / (n - 1.0));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, n, '<'))) {
+      while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
         var t:Dynamic = (i * step);
-        _Runtime.setIndex(result, i, _Runtime.callValue(ease, cast ([_Runtime.select(_Runtime.compare(t, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(t, 1.0, '>'), function():Dynamic return cast 1.0, function():Dynamic return cast t))] : Array<Dynamic>)));
+        _Runtime.setIndex(result, i, _Runtime.callValue(ease, cast ([((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast t : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic))] : Array<Dynamic>)));
         i++;
       }
     }

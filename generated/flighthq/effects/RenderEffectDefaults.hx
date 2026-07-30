@@ -9,7 +9,7 @@ class RenderEffectDefaults {
   public static function getRenderEffectDefaults(kind:String):Dynamic {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     entry = _Runtime.getIndex(RenderEffectDefaults.DEFAULTS__renderEffectDefaults, kind);
-    if (_Runtime.truthy(!_Runtime.truthy(entry))) { return cast {  }; }
+    if ((cast !_Runtime.truthy(entry) : Bool)) { return cast {  }; }
     return cast _Runtime.mergeObjects([entry]);
     return cast null;
   }
@@ -19,14 +19,14 @@ class RenderEffectDefaults {
     var effectRec:Dynamic = cast _Runtime.UNDEFINED;
     var outRec:Dynamic = cast _Runtime.UNDEFINED;
     entry = _Runtime.getIndex(RenderEffectDefaults.DEFAULTS__renderEffectDefaults, _Runtime.field(effect, 'kind'));
-    if (_Runtime.truthy(!_Runtime.truthy(entry))) { return cast false; }
+    if ((cast !_Runtime.truthy(entry) : Bool)) { return cast false; }
     effectRec = (cast effect : Dynamic);
     outRec = (cast (cast out : Dynamic) : Dynamic);
     for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(entry))) {
-      _Runtime.setIndex(outRec, key, _Runtime.select(!_Runtime.strictEquals(_Runtime.getIndex(effectRec, key), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.getIndex(effectRec, key), function():Dynamic return cast _Runtime.getIndex(entry, key)));
+      _Runtime.setIndex(outRec, key, ((cast !_Runtime.strictEquals(_Runtime.getIndex(effectRec, key), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.getIndex(effectRec, key) : Dynamic) : (cast _Runtime.getIndex(entry, key) : Dynamic)));
     }
     for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(effectRec))) {
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.hasField(entry, key)))) {
+      if ((cast !(cast _Runtime.hasField(entry, key) : Bool) : Bool)) {
         _Runtime.setIndex(outRec, key, _Runtime.getIndex(effectRec, key));
       }
     }

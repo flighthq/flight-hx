@@ -52,7 +52,7 @@ class Capsule {
     aby = (by - ay);
     abz = (bz - az);
     abLen2 = (((abx * abx) + (aby * aby)) + (abz * abz));
-    if (_Runtime.truthy(_Runtime.compare(abLen2, 1e-20, '<'))) {
+    if ((cast ((cast abLen2 : Float) < (cast 1e-20 : Float)) : Bool)) {
       (closestX = cast (ax : Dynamic));
       (closestY = cast (ay : Dynamic));
       (closestZ = cast (az : Dynamic));
@@ -66,7 +66,7 @@ class Capsule {
     dy = (py - closestY);
     dz = (pz - closestZ);
     dist = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
-    if (_Runtime.truthy(_Runtime.compare(dist, 1e-10, '<'))) {
+    if ((cast ((cast dist : Float) < (cast 1e-10 : Float)) : Bool)) {
       (out.x = cast ((closestX + r) : Dynamic));
       (out.y = cast (closestY : Dynamic));
       (out.z = cast (closestZ : Dynamic));
@@ -147,18 +147,18 @@ class Capsule {
       my = (oy - cy);
       mz = (oz - cz);
       lenD2 = (((dx * dx) + (dy * dy)) + (dz * dz));
-      if (_Runtime.truthy(_Runtime.strictEquals(lenD2, 0.0))) { return cast -1.0; }
+      if ((cast _Runtime.strictEquals(lenD2, 0.0) : Bool)) { return cast -1.0; }
       b = (((mx * dx) + (my * dy)) + (mz * dz));
       c = ((((mx * mx) + (my * my)) + (mz * mz)) - (r * r));
       disc = ((b * b) - (lenD2 * c));
-      if (_Runtime.truthy(_Runtime.compare(disc, 0.0, '<'))) { return cast -1.0; }
+      if ((cast ((cast disc : Float) < (cast 0.0 : Float)) : Bool)) { return cast -1.0; }
       sqrtD = HxMath.sqrt(disc);
       t1 = ((-b - sqrtD) / lenD2);
-      if (_Runtime.truthy(_Runtime.compare(t1, 0.0, '>='))) { return cast t1; }
+      if ((cast ((cast t1 : Float) >= (cast 0.0 : Float)) : Bool)) { return cast t1; }
       t2 = ((-b + sqrtD) / lenD2);
-      return cast _Runtime.select(_Runtime.compare(t2, 0.0, '>='), function():Dynamic return cast 0.0, function():Dynamic return cast -1.0);
+      return cast ((cast ((cast t2 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast -1.0 : Dynamic));
     };
-    if (_Runtime.truthy(_Runtime.compare(abLen2, 1e-20, '<'))) { return cast _Runtime.callValue(sphereHit, cast ([ax, ay, az] : Array<Dynamic>)); }
+    if ((cast ((cast abLen2 : Float) < (cast 1e-20 : Float)) : Bool)) { return cast _Runtime.callValue(sphereHit, cast ([ax, ay, az] : Array<Dynamic>)); }
     tBest = -1.0;
     invAb2 = (1.0 / abLen2);
     aox = (ox - ax);
@@ -175,27 +175,27 @@ class Capsule {
     qa = (((dpx * dpx) + (dpy * dpy)) + (dpz * dpz));
     qb = (((apx * dpx) + (apy * dpy)) + (apz * dpz));
     qc = ((((apx * apx) + (apy * apy)) + (apz * apz)) - (r * r));
-    if (_Runtime.truthy(_Runtime.compare(qa, 1e-20, '>'))) {
+    if ((cast ((cast qa : Float) > (cast 1e-20 : Float)) : Bool)) {
       var disc:Dynamic = ((qb * qb) - (qa * qc));
-      if (_Runtime.truthy(_Runtime.compare(disc, 0.0, '>='))) {
+      if ((cast ((cast disc : Float) >= (cast 0.0 : Float)) : Bool)) {
         var sqrtD:Dynamic = HxMath.sqrt(disc);
         var t1:Dynamic = ((-qb - sqrtD) / qa);
         var s1:Dynamic = ((aoab + (t1 * dab)) * invAb2);
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(t1, 0.0, '>='), function():Dynamic return cast _Runtime.compare(s1, 0.0, '>=')), function():Dynamic return cast _Runtime.compare(s1, 1.0, '<=')))) {
+        if ((cast ((cast ((cast ((cast t1 : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast s1 : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast s1 : Float) <= (cast 1.0 : Float)) : Bool)) : Bool)) {
           (tBest = cast (t1 : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.compare(t1, 0.0, '<'))) {
+        } else { if ((cast ((cast t1 : Float) < (cast 0.0 : Float)) : Bool)) {
           var t2:Dynamic = ((-qb + sqrtD) / qa);
-          if (_Runtime.truthy(_Runtime.compare(t2, 0.0, '>='))) {
+          if ((cast ((cast t2 : Float) >= (cast 0.0 : Float)) : Bool)) {
             var s0:Dynamic = (aoab * invAb2);
-            if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(s0, 0.0, '>='), function():Dynamic return cast _Runtime.compare(s0, 1.0, '<=')))) { return cast 0.0; }
+            if ((cast ((cast ((cast s0 : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast s0 : Float) <= (cast 1.0 : Float)) : Bool)) : Bool)) { return cast 0.0; }
           }
         } }
       }
     }
     tA = _Runtime.callValue(sphereHit, cast ([ax, ay, az] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(tA, 0.0, '>='), function():Dynamic return cast _Runtime.orValue(_Runtime.compare(tBest, 0.0, '<'), function():Dynamic return cast _Runtime.compare(tA, tBest, '<'))))) { (tBest = cast (tA : Dynamic)); }
+    if ((cast ((cast ((cast tA : Float) >= (cast 0.0 : Float)) : Bool) && (cast _Runtime.orValue(((cast tBest : Float) < (cast 0.0 : Float)), function():Dynamic return cast ((cast tA : Float) < (cast tBest : Float))) : Bool)) : Bool)) { (tBest = cast (tA : Dynamic)); }
     tB = _Runtime.callValue(sphereHit, cast ([bx, by, bz] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(tB, 0.0, '>='), function():Dynamic return cast _Runtime.orValue(_Runtime.compare(tBest, 0.0, '<'), function():Dynamic return cast _Runtime.compare(tB, tBest, '<'))))) { (tBest = cast (tB : Dynamic)); }
+    if ((cast ((cast ((cast tB : Float) >= (cast 0.0 : Float)) : Bool) && (cast _Runtime.orValue(((cast tBest : Float) < (cast 0.0 : Float)), function():Dynamic return cast ((cast tB : Float) < (cast tBest : Float))) : Bool)) : Bool)) { (tBest = cast (tB : Dynamic)); }
     return cast tBest;
     return cast null;
   }
@@ -203,20 +203,20 @@ class Capsule {
   public static function isCapsuleIntersectingCapsule(a:CapsuleLike, b:CapsuleLike):Bool {
     var dist:Dynamic = cast _Runtime.UNDEFINED;
     var sumR:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(a.radius, 0.0, '<'), function():Dynamic return cast _Runtime.compare(b.radius, 0.0, '<')))) { return cast false; }
+    if ((cast ((cast ((cast a.radius : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast b.radius : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast false; }
     dist = _Runtime.callValue(Capsule.segmentToSegmentDistanceSq__capsule, cast ([a.startX, a.startY, a.startZ, a.endX, a.endY, a.endZ, b.startX, b.startY, b.startZ, b.endX, b.endY, b.endZ] : Array<Dynamic>));
     sumR = (a.radius + b.radius);
-    return cast _Runtime.compare(dist, (sumR * sumR), '<=');
+    return cast ((cast dist : Float) <= (cast (sumR * sumR) : Float));
     return cast null;
   }
 
   public static function isCapsuleIntersectingSphere(capsule:CapsuleLike, sphere:BoundingSphereLike):Bool {
     var dist2:Dynamic = cast _Runtime.UNDEFINED;
     var sumR:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(capsule.radius, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sphere.radius, 0.0, '<')))) { return cast false; }
+    if ((cast ((cast ((cast capsule.radius : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sphere.radius : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast false; }
     dist2 = _Runtime.callValue(Capsule.pointToSegmentDistanceSq__capsule, cast ([sphere.center.x, sphere.center.y, sphere.center.z, capsule.startX, capsule.startY, capsule.startZ, capsule.endX, capsule.endY, capsule.endZ] : Array<Dynamic>));
     sumR = (capsule.radius + sphere.radius);
-    return cast _Runtime.compare(dist2, (sumR * sumR), '<=');
+    return cast ((cast dist2 : Float) <= (cast (sumR * sumR) : Float));
     return cast null;
   }
 
@@ -249,7 +249,7 @@ class Capsule {
     apy = (py - ay);
     apz = (pz - az);
     len2 = (((abx * abx) + (aby * aby)) + (abz * abz));
-    t = _Runtime.select(_Runtime.compare(len2, 0.0, '>'), function():Dynamic return cast ((((apx * abx) + (apy * aby)) + (apz * abz)) / len2), function():Dynamic return cast 0.0);
+    t = ((cast ((cast len2 : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((((apx * abx) + (apy * aby)) + (apz * abz)) / len2) : Dynamic) : (cast 0.0 : Dynamic));
     (t = cast (HxMath.min(HxMath.max(t, 0.0), 1.0) : Dynamic));
     cx = ((ax + (t * abx)) - px);
     cy = ((ay + (t * aby)) - py);
@@ -288,30 +288,30 @@ class Capsule {
     a = (((d1x * d1x) + (d1y * d1y)) + (d1z * d1z));
     e = (((d2x * d2x) + (d2y * d2y)) + (d2z * d2z));
     f = (((d2x * rx) + (d2y * ry)) + (d2z * rz));
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(a, 1e-20, '<'), function():Dynamic return cast _Runtime.compare(e, 1e-20, '<')))) {
+    if ((cast ((cast ((cast a : Float) < (cast 1e-20 : Float)) : Bool) && (cast ((cast e : Float) < (cast 1e-20 : Float)) : Bool)) : Bool)) {
       (s = cast (0.0 : Dynamic));
       (t = cast (0.0 : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.compare(a, 1e-20, '<'))) {
+    } else { if ((cast ((cast a : Float) < (cast 1e-20 : Float)) : Bool)) {
       (s = cast (0.0 : Dynamic));
       (t = cast (HxMath.min(HxMath.max((f / e), 0.0), 1.0) : Dynamic));
     } else {
       var c:Dynamic = (((d1x * rx) + (d1y * ry)) + (d1z * rz));
-      if (_Runtime.truthy(_Runtime.compare(e, 1e-20, '<'))) {
+      if ((cast ((cast e : Float) < (cast 1e-20 : Float)) : Bool)) {
         (t = cast (0.0 : Dynamic));
         (s = cast (HxMath.min(HxMath.max((-c / a), 0.0), 1.0) : Dynamic));
       } else {
         var b:Dynamic = (((d1x * d2x) + (d1y * d2y)) + (d1z * d2z));
         var denom:Dynamic = ((a * e) - (b * b));
-        if (_Runtime.truthy(_Runtime.compare(denom, 1e-20, '>'))) {
+        if ((cast ((cast denom : Float) > (cast 1e-20 : Float)) : Bool)) {
           (s = cast (HxMath.min(HxMath.max((((b * f) - (c * e)) / denom), 0.0), 1.0) : Dynamic));
         } else {
           (s = cast (0.0 : Dynamic));
         }
         (t = cast ((((b * s) + f) / e) : Dynamic));
-        if (_Runtime.truthy(_Runtime.compare(t, 0.0, '<'))) {
+        if ((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool)) {
           (t = cast (0.0 : Dynamic));
           (s = cast (HxMath.min(HxMath.max((-c / a), 0.0), 1.0) : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.compare(t, 1.0, '>'))) {
+        } else { if ((cast ((cast t : Float) > (cast 1.0 : Float)) : Bool)) {
           (t = cast (1.0 : Dynamic));
           (s = cast (HxMath.min(HxMath.max(((b - c) / a), 0.0), 1.0) : Dynamic));
         } }

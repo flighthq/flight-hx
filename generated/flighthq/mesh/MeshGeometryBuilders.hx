@@ -32,10 +32,10 @@ class MeshGeometryBuilders {
       start = (_Runtime.field(positions, 'length') / 3.0);
       {
         var iv:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(iv, 2.0, '<'))) {
+        while ((cast ((cast iv : Float) < (cast 2.0 : Float)) : Bool)) {
           {
             var iu:Dynamic = 0.0;
-            while (_Runtime.truthy(_Runtime.compare(iu, 2.0, '<'))) {
+            while ((cast ((cast iu : Float) < (cast 2.0 : Float)) : Bool)) {
               _Runtime.pushMany(positions, cast ([((ox + (ux * iu)) + (vx * iv)), ((oy + (uy * iu)) + (vy * iv)), ((oz + (uz * iu)) + (vz * iv))] : Array<Dynamic>));
               _Runtime.pushMany(normals, cast ([nx, ny, nz] : Array<Dynamic>));
               _Runtime.pushMany(uvs, cast ([iu, iv] : Array<Dynamic>));
@@ -84,7 +84,7 @@ class MeshGeometryBuilders {
       cosPhi = HxMath.cos(phi);
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, rSeg, '<='))) {
+        while ((cast ((cast i : Float) <= (cast rSeg : Float)) : Bool)) {
           var theta:Dynamic = (((i / rSeg) * HxMath.PI) * 2.0);
           var cosTheta:Dynamic = HxMath.cos(theta);
           var sinTheta:Dynamic = HxMath.sin(theta);
@@ -102,14 +102,14 @@ class MeshGeometryBuilders {
     vDivisor = ((2.0 * cSeg) + 1.0);
     {
       var j:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(j, cSeg, '<='))) {
+      while ((cast ((cast j : Float) <= (cast cSeg : Float)) : Bool)) {
         _Runtime.callValue(addRing, cast ([((j / cSeg) * (HxMath.PI * 0.5)), halfH] : Array<Dynamic>));
         j++;
       }
     }
     {
       var j:Dynamic = 1.0;
-      while (_Runtime.truthy(_Runtime.compare(j, cSeg, '<='))) {
+      while ((cast ((cast j : Float) <= (cast cSeg : Float)) : Bool)) {
         _Runtime.callValue(addRing, cast ([((HxMath.PI * 0.5) + ((j / cSeg) * (HxMath.PI * 0.5))), -halfH] : Array<Dynamic>));
         j++;
       }
@@ -117,11 +117,11 @@ class MeshGeometryBuilders {
     ringCount = ((2.0 * cSeg) + 1.0);
     {
       var j:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(j, ringCount, '<'))) {
+      while ((cast ((cast j : Float) < (cast ringCount : Float)) : Bool)) {
         var v:Dynamic = (j / vDivisor);
         {
           var i:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(i, rSeg, '<='))) {
+          while ((cast ((cast i : Float) <= (cast rSeg : Float)) : Bool)) {
             _Runtime.setIndex(uvs, ((((j * ringVertexCount) + i) * 2.0) + 1.0), v);
             i++;
           }
@@ -132,10 +132,10 @@ class MeshGeometryBuilders {
     totalRings = ((2.0 * cSeg) + 1.0);
     {
       var j:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(j, (totalRings - 1.0), '<'))) {
+      while ((cast ((cast j : Float) < (cast (totalRings - 1.0) : Float)) : Bool)) {
         {
           var i:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(i, rSeg, '<'))) {
+          while ((cast ((cast i : Float) < (cast rSeg : Float)) : Bool)) {
             var a:Dynamic = ((j * ringVertexCount) + i);
             var b:Dynamic = (a + 1.0);
             var c:Dynamic = (a + ringVertexCount);
@@ -191,12 +191,12 @@ class MeshGeometryBuilders {
     sideStart = (_Runtime.field(positions, 'length') / 3.0);
     {
       var y:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(y, 1.0, '<='))) {
-        var radius:Dynamic = _Runtime.select(_Runtime.strictEquals(y, 0.0), function():Dynamic return cast bottomRadius, function():Dynamic return cast topRadius);
-        var py:Dynamic = _Runtime.select(_Runtime.strictEquals(y, 0.0), function():Dynamic return cast -halfHeight, function():Dynamic return cast halfHeight);
+      while ((cast ((cast y : Float) <= (cast 1.0 : Float)) : Bool)) {
+        var radius:Dynamic = ((cast _Runtime.strictEquals(y, 0.0) : Bool) ? (cast bottomRadius : Dynamic) : (cast topRadius : Dynamic));
+        var py:Dynamic = ((cast _Runtime.strictEquals(y, 0.0) : Bool) ? (cast -halfHeight : Dynamic) : (cast halfHeight : Dynamic));
         {
           var s:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(s, segments, '<='))) {
+          while ((cast ((cast s : Float) <= (cast segments : Float)) : Bool)) {
             var theta:Dynamic = (((s / segments) * HxMath.PI) * 2.0);
             var cos:Dynamic = HxMath.cos(theta);
             var sin:Dynamic = HxMath.sin(theta);
@@ -218,7 +218,7 @@ class MeshGeometryBuilders {
     }
     {
       var s:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(s, segments, '<'))) {
+      while ((cast ((cast s : Float) < (cast segments : Float)) : Bool)) {
         var a:Dynamic = (sideStart + s);
         var b:Dynamic = ((sideStart + s) + 1.0);
         var c:Dynamic = ((sideStart + (segments + 1.0)) + s);
@@ -227,11 +227,11 @@ class MeshGeometryBuilders {
         s++;
       }
     }
-    if (_Runtime.truthy(capped)) {
-      if (_Runtime.truthy(_Runtime.compare(bottomRadius, 0.0, '>'))) {
+    if ((cast capped : Bool)) {
+      if ((cast ((cast bottomRadius : Float) > (cast 0.0 : Float)) : Bool)) {
         _Runtime.callValue(MeshGeometryBuilders.addDisc__meshGeometryBuilders, cast ([positions, normals, uvs, indices, segments, bottomRadius, -halfHeight, -1.0] : Array<Dynamic>));
       }
-      if (_Runtime.truthy(_Runtime.compare(topRadius, 0.0, '>'))) {
+      if ((cast ((cast topRadius : Float) > (cast 0.0 : Float)) : Bool)) {
         _Runtime.callValue(MeshGeometryBuilders.addDisc__meshGeometryBuilders, cast ([positions, normals, uvs, indices, segments, topRadius, halfHeight, 1.0] : Array<Dynamic>));
       }
     }
@@ -287,9 +287,9 @@ class MeshGeometryBuilders {
       var mz:Dynamic = cast _Runtime.UNDEFINED;
       var len:Dynamic = cast _Runtime.UNDEFINED;
       var idx:Dynamic = cast _Runtime.UNDEFINED;
-      key = _Runtime.select(_Runtime.compare(a, b, '<'), function():Dynamic return cast '' + Std.string(a) + '_' + Std.string(b) + '', function():Dynamic return cast '' + Std.string(b) + '_' + Std.string(a) + '');
+      key = ((cast ((cast a : Float) < (cast b : Float)) : Bool) ? (cast '' + Std.string(a) + '_' + Std.string(b) + '' : Dynamic) : (cast '' + Std.string(b) + '_' + Std.string(a) + '' : Dynamic));
       cached = ((cast midpointCache : flighthq._internal._Map).get(key));
-      if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast cached; }
+      if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
       va = _Runtime.getIndex(verts, a);
       vb = _Runtime.getIndex(verts, b);
       mx = ((_Runtime.getIndex(va, 0.0) + _Runtime.getIndex(vb, 0.0)) * 0.5);
@@ -306,7 +306,7 @@ class MeshGeometryBuilders {
     };
     {
       var s:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(s, subs, '<'))) {
+      while ((cast ((cast s : Float) < (cast subs : Float)) : Bool)) {
         var newFaces:Array<Array<Float>> = cast ([] : Array<Dynamic>);
         for (__iteration1 in _Runtime.iterable(faces)) {
           var a:Dynamic = _Runtime.getIndex(__iteration1, 0.0);
@@ -344,7 +344,7 @@ class MeshGeometryBuilders {
     }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, (_Runtime.field(positions, 'length') / 3.0), '<'))) {
+      while ((cast ((cast i : Float) < (cast (_Runtime.field(positions, 'length') / 3.0) : Float)) : Bool)) {
         _Runtime.callProperty(faceIndices, 'push', cast ([i] : Array<Dynamic>));
         i++;
       }
@@ -378,12 +378,12 @@ class MeshGeometryBuilders {
     indices = cast ([] : Array<Dynamic>);
     {
       var iz:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(iz, dSeg, '<='))) {
+      while ((cast ((cast iz : Float) <= (cast dSeg : Float)) : Bool)) {
         var v:Dynamic = (iz / dSeg);
         var z:Dynamic = (-hd + (v * depth));
         {
           var ix:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(ix, wSeg, '<='))) {
+          while ((cast ((cast ix : Float) <= (cast wSeg : Float)) : Bool)) {
             var u:Dynamic = (ix / wSeg);
             var x:Dynamic = (-hw + (u * width));
             _Runtime.pushMany(positions, cast ([x, 0.0, z] : Array<Dynamic>));
@@ -398,10 +398,10 @@ class MeshGeometryBuilders {
     rowStride = (wSeg + 1.0);
     {
       var iz:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(iz, dSeg, '<'))) {
+      while ((cast ((cast iz : Float) < (cast dSeg : Float)) : Bool)) {
         {
           var ix:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(ix, wSeg, '<'))) {
+          while ((cast ((cast ix : Float) < (cast wSeg : Float)) : Bool)) {
             var a:Dynamic = ((iz * rowStride) + ix);
             var b:Dynamic = (a + 1.0);
             var c:Dynamic = (a + rowStride);
@@ -438,7 +438,7 @@ class MeshGeometryBuilders {
       return cast cast ([(x / len), (y / len), (z / len)] : Array<Dynamic>);
     }] : Array<Dynamic>));
     faces = _Runtime.callProperty(faceIndices, 'map', cast ([function(f:Dynamic) return cast ([_Runtime.getIndex(f, 0.0), _Runtime.getIndex(f, 1.0), _Runtime.getIndex(f, 2.0)] : Array<Dynamic>)] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(subs, 0.0, '>'))) {
+    if ((cast ((cast subs : Float) > (cast 0.0 : Float)) : Bool)) {
       var midCache:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
       var getMid:Dynamic = function(a:Float, b:Float) {
         var key:Dynamic = cast _Runtime.UNDEFINED;
@@ -450,9 +450,9 @@ class MeshGeometryBuilders {
         var mz:Dynamic = cast _Runtime.UNDEFINED;
         var mlen:Dynamic = cast _Runtime.UNDEFINED;
         var idx:Dynamic = cast _Runtime.UNDEFINED;
-        key = _Runtime.select(_Runtime.compare(a, b, '<'), function():Dynamic return cast '' + Std.string(a) + '_' + Std.string(b) + '', function():Dynamic return cast '' + Std.string(b) + '_' + Std.string(a) + '');
+        key = ((cast ((cast a : Float) < (cast b : Float)) : Bool) ? (cast '' + Std.string(a) + '_' + Std.string(b) + '' : Dynamic) : (cast '' + Std.string(b) + '_' + Std.string(a) + '' : Dynamic));
         hit = ((cast midCache : flighthq._internal._Map).get(key));
-        if (_Runtime.truthy(!_Runtime.strictEquals(hit, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast hit; }
+        if ((cast !_Runtime.strictEquals(hit, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast hit; }
         va = _Runtime.getIndex(verts, a);
         vb = _Runtime.getIndex(verts, b);
         mx = ((_Runtime.getIndex(va, 0.0) + _Runtime.getIndex(vb, 0.0)) * 0.5);
@@ -469,7 +469,7 @@ class MeshGeometryBuilders {
       };
       {
         var s:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(s, subs, '<'))) {
+        while ((cast ((cast s : Float) < (cast subs : Float)) : Bool)) {
           var newFaces:Array<Array<Float>> = cast ([] : Array<Dynamic>);
           for (__iteration4 in _Runtime.iterable(faces)) {
             var a:Dynamic = _Runtime.getIndex(__iteration4, 0.0);
@@ -508,7 +508,7 @@ class MeshGeometryBuilders {
     }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, (_Runtime.field(positions, 'length') / 3.0), '<'))) {
+      while ((cast ((cast i : Float) < (cast (_Runtime.field(positions, 'length') / 3.0) : Float)) : Bool)) {
         _Runtime.callProperty(flatIndices, 'push', cast ([i] : Array<Dynamic>));
         i++;
       }
@@ -547,7 +547,7 @@ class MeshGeometryBuilders {
     indices = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, segs, '<='))) {
+      while ((cast ((cast i : Float) <= (cast segs : Float)) : Bool)) {
         var theta:Dynamic = (((i / segs) * HxMath.PI) * 2.0);
         var cos:Dynamic = HxMath.cos(theta);
         var sin:Dynamic = HxMath.sin(theta);
@@ -562,7 +562,7 @@ class MeshGeometryBuilders {
     }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, segs, '<'))) {
+      while ((cast ((cast i : Float) < (cast segs : Float)) : Bool)) {
         var inner0:Dynamic = (i * 2.0);
         var outer0:Dynamic = ((i * 2.0) + 1.0);
         var inner1:Dynamic = ((i + 1.0) * 2.0);
@@ -591,14 +591,14 @@ class MeshGeometryBuilders {
     indices = cast ([] : Array<Dynamic>);
     {
       var iy:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(iy, hSeg, '<='))) {
+      while ((cast ((cast iy : Float) <= (cast hSeg : Float)) : Bool)) {
         var v:Dynamic = (iy / hSeg);
         var phi:Dynamic = (v * HxMath.PI);
         var sinPhi:Dynamic = HxMath.sin(phi);
         var cosPhi:Dynamic = HxMath.cos(phi);
         {
           var ix:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(ix, wSeg, '<='))) {
+          while ((cast ((cast ix : Float) <= (cast wSeg : Float)) : Bool)) {
             var u:Dynamic = (ix / wSeg);
             var theta:Dynamic = ((u * HxMath.PI) * 2.0);
             var sinTheta:Dynamic = HxMath.sin(theta);
@@ -618,10 +618,10 @@ class MeshGeometryBuilders {
     rowStride = (wSeg + 1.0);
     {
       var iy:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(iy, hSeg, '<'))) {
+      while ((cast ((cast iy : Float) < (cast hSeg : Float)) : Bool)) {
         {
           var ix:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(ix, wSeg, '<'))) {
+          while ((cast ((cast ix : Float) < (cast wSeg : Float)) : Bool)) {
             var a:Dynamic = ((iy * rowStride) + ix);
             var b:Dynamic = (a + 1.0);
             var c:Dynamic = (a + rowStride);
@@ -670,7 +670,7 @@ class MeshGeometryBuilders {
     };
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, tSeg, '<='))) {
+      while ((cast ((cast i : Float) <= (cast tSeg : Float)) : Bool)) {
         var u:Dynamic = (i / tSeg);
         var __destructure6:Dynamic = _Runtime.callValue(curvePoint, cast ([u] : Array<Dynamic>));
         var cx:Dynamic = _Runtime.getIndex(__destructure6, 0.0);
@@ -710,7 +710,7 @@ class MeshGeometryBuilders {
         var bnz:Dynamic = ((tgx * nny) - (tgy * nnx));
         {
           var j:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(j, rSeg, '<='))) {
+          while ((cast ((cast j : Float) <= (cast rSeg : Float)) : Bool)) {
             var v:Dynamic = (j / rSeg);
             var phi:Dynamic = ((v * HxMath.PI) * 2.0);
             var cosPhi:Dynamic = HxMath.cos(phi);
@@ -730,10 +730,10 @@ class MeshGeometryBuilders {
     rowStride = (rSeg + 1.0);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, tSeg, '<'))) {
+      while ((cast ((cast i : Float) < (cast tSeg : Float)) : Bool)) {
         {
           var j:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(j, rSeg, '<'))) {
+          while ((cast ((cast j : Float) < (cast rSeg : Float)) : Bool)) {
             var a:Dynamic = ((i * rowStride) + j);
             var b:Dynamic = (a + 1.0);
             var c:Dynamic = (a + rowStride);
@@ -765,13 +765,13 @@ class MeshGeometryBuilders {
     indices = cast ([] : Array<Dynamic>);
     {
       var j:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(j, rSeg, '<='))) {
+      while ((cast ((cast j : Float) <= (cast rSeg : Float)) : Bool)) {
         var v:Dynamic = (((j / rSeg) * HxMath.PI) * 2.0);
         var cosV:Dynamic = HxMath.cos(v);
         var sinV:Dynamic = HxMath.sin(v);
         {
           var i:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(i, tSeg, '<='))) {
+          while ((cast ((cast i : Float) <= (cast tSeg : Float)) : Bool)) {
             var u:Dynamic = (((i / tSeg) * HxMath.PI) * 2.0);
             var cosU:Dynamic = HxMath.cos(u);
             var sinU:Dynamic = HxMath.sin(u);
@@ -799,10 +799,10 @@ class MeshGeometryBuilders {
     rowStride = (tSeg + 1.0);
     {
       var j:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(j, rSeg, '<'))) {
+      while ((cast ((cast j : Float) < (cast rSeg : Float)) : Bool)) {
         {
           var i:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(i, tSeg, '<'))) {
+          while ((cast ((cast i : Float) < (cast tSeg : Float)) : Bool)) {
             var a:Dynamic = ((j * rowStride) + i);
             var b:Dynamic = (a + 1.0);
             var c:Dynamic = (a + rowStride);
@@ -828,7 +828,7 @@ class MeshGeometryBuilders {
     ringStart = (_Runtime.field(positions, 'length') / 3.0);
     {
       var s:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(s, segments, '<='))) {
+      while ((cast ((cast s : Float) <= (cast segments : Float)) : Bool)) {
         var theta:Dynamic = (((s / segments) * HxMath.PI) * 2.0);
         var cos:Dynamic = HxMath.cos(theta);
         var sin:Dynamic = HxMath.sin(theta);
@@ -840,10 +840,10 @@ class MeshGeometryBuilders {
     }
     {
       var s:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(s, segments, '<'))) {
+      while ((cast ((cast s : Float) < (cast segments : Float)) : Bool)) {
         var a:Dynamic = (ringStart + s);
         var b:Dynamic = ((ringStart + s) + 1.0);
-        if (_Runtime.truthy(_Runtime.compare(direction, 0.0, '>'))) {
+        if ((cast ((cast direction : Float) > (cast 0.0 : Float)) : Bool)) {
           _Runtime.pushMany(indices, cast ([center, a, b] : Array<Dynamic>));
         } else {
           _Runtime.pushMany(indices, cast ([center, b, a] : Array<Dynamic>));
@@ -863,7 +863,7 @@ class MeshGeometryBuilders {
     vertices = new flighthq._internal._Float32Array((vertexCount * MeshGeometryBuilders.CANONICAL_FLOATS_PER_VERTEX__meshGeometryBuilders));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, vertexCount, '<'))) {
+      while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
         var base:Dynamic = (i * MeshGeometryBuilders.CANONICAL_FLOATS_PER_VERTEX__meshGeometryBuilders);
         _Runtime.setIndex(vertices, base, _Runtime.getIndex(positions, (i * 3.0)));
         _Runtime.setIndex(vertices, (base + 1.0), _Runtime.getIndex(positions, ((i * 3.0) + 1.0)));

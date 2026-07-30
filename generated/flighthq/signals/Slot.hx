@@ -19,13 +19,13 @@ class Slot {
     var repeat:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     priority = _Runtime.coalesce(_Runtime.optionalField(options, 'priority'), function():Dynamic return cast 0.0);
-    repeat = !_Runtime.truthy(_Runtime.coalesce(_Runtime.optionalField(options, 'once'), function():Dynamic return cast false));
+    repeat = !(cast _Runtime.coalesce(_Runtime.optionalField(options, 'once'), function():Dynamic return cast false) : Bool);
     _Runtime.callValue(Slot.initSignal__slot, cast ([signal] : Array<Dynamic>));
     data = _Runtime.field(signal, 'data');
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(data, 'priorities'), 'length'), '<'))) {
-        if (_Runtime.truthy(_Runtime.compare(priority, _Runtime.getIndex(_Runtime.field(data, 'priorities'), i), '>'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(data, 'priorities'), 'length') : Float)) : Bool)) {
+        if ((cast ((cast priority : Float) > (cast _Runtime.getIndex(_Runtime.field(data, 'priorities'), i) : Float)) : Bool)) {
           _Runtime.splice(_Runtime.field(data, 'slots'), Std.int(i), Std.int(0.0), [slot]);
           _Runtime.splice(_Runtime.field(data, 'priorities'), Std.int(i), Std.int(0.0), [priority]);
           _Runtime.splice(_Runtime.field(data, 'repeat'), Std.int(i), Std.int(0.0), [repeat]);
@@ -43,36 +43,36 @@ class Slot {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var i:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(signal, 'data');
-    if (_Runtime.truthy(_Runtime.strictEquals(data, null))) { return; }
+    if ((cast _Runtime.strictEquals(data, null) : Bool)) { return; }
     i = _Runtime.field(_Runtime.field(data, 'slots'), 'length');
-    while (_Runtime.truthy(_Runtime.compare(--i, 0.0, '>='))) {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(data, 'slots'), i), slot))) {
+    while ((cast ((cast --i : Float) >= (cast 0.0 : Float)) : Bool)) {
+      if ((cast _Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(data, 'slots'), i), slot) : Bool)) {
         _Runtime.splice(_Runtime.field(data, 'slots'), Std.int(i), Std.int(1.0), []);
         _Runtime.splice(_Runtime.field(data, 'priorities'), Std.int(i), Std.int(1.0), []);
         _Runtime.splice(_Runtime.field(data, 'repeat'), Std.int(i), Std.int(1.0), []);
       }
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(data, 'slots'), 'length'), 0.0))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(data, 'slots'), 'length'), 0.0) : Bool)) {
       _Runtime.setField(signal, 'emit', (cast (cast nullSignalEmit : Dynamic) : Dynamic));
       _Runtime.setField(signal, 'data', null);
     }
   }
 
   public static function hasSignalSlots<T>(signal:Signal<Dynamic>):Bool {
-    return cast _Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(signal, 'data'), null), function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.field(_Runtime.field(signal, 'data'), 'slots'), 'length'), 0.0, '>'));
+    return cast ((cast !_Runtime.strictEquals(_Runtime.field(signal, 'data'), null) : Bool) && (cast ((cast _Runtime.field(_Runtime.field(_Runtime.field(signal, 'data'), 'slots'), 'length') : Float) > (cast 0.0 : Float)) : Bool));
     return cast null;
   }
 
   public static function initSignal__slot<T>(signal:Signal<Dynamic>):Void {
     var data:SignalData<Dynamic> = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(signal, 'data'), null))) { return; }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(signal, 'data'), null) : Bool)) { return; }
     data = { slots: cast ([] : Array<Dynamic>), priorities: cast ([] : Array<Dynamic>), repeat: cast ([] : Array<Dynamic>), cancelled: false };
     _Runtime.setField(signal, 'data', data);
     _Runtime.setField(signal, 'emit', _Runtime.callValue(Slot.makeDispatch__slot, cast ([data] : Array<Dynamic>)));
   }
 
   public static function isSlotConnected<T>(signal:Signal<Dynamic>, slot:Dynamic):Bool {
-    return cast _Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(signal, 'data'), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.callProperty(_Runtime.field(_Runtime.field(signal, 'data'), 'slots'), 'indexOf', cast ([slot] : Array<Dynamic>)), -1.0));
+    return cast ((cast !_Runtime.strictEquals(_Runtime.field(signal, 'data'), null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.callProperty(_Runtime.field(_Runtime.field(signal, 'data'), 'slots'), 'indexOf', cast ([slot] : Array<Dynamic>)), -1.0) : Bool));
     return cast null;
   }
 
@@ -81,10 +81,10 @@ class Slot {
       var i:Dynamic = cast _Runtime.UNDEFINED;
       _Runtime.setField(data, 'cancelled', false);
       i = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(data, 'slots'), 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(data, 'slots'), 'length') : Float)) : Bool)) {
         _Runtime.apply(_Runtime.getIndex(_Runtime.field(data, 'slots'), i), _Runtime.concatArrays([_Runtime.toArray(args)]));
-        if (_Runtime.truthy(_Runtime.field(data, 'cancelled'))) { break; }
-        if (_Runtime.truthy(!_Runtime.truthy(_Runtime.getIndex(_Runtime.field(data, 'repeat'), i)))) {
+        if ((cast _Runtime.field(data, 'cancelled') : Bool)) { break; }
+        if ((cast !(cast _Runtime.getIndex(_Runtime.field(data, 'repeat'), i) : Bool) : Bool)) {
           _Runtime.splice(_Runtime.field(data, 'slots'), Std.int(i), Std.int(1.0), []);
           _Runtime.splice(_Runtime.field(data, 'priorities'), Std.int(i), Std.int(1.0), []);
           _Runtime.splice(_Runtime.field(data, 'repeat'), Std.int(i), Std.int(1.0), []);

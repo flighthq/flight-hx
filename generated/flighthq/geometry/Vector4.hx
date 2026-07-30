@@ -41,10 +41,10 @@ class Vector4 {
     maxY = _Runtime.field(max, 'y');
     maxZ = _Runtime.field(max, 'z');
     maxW = _Runtime.field(max, 'w');
-    _Runtime.setField(out, 'x', _Runtime.select(_Runtime.compare(vx, minX, '<'), function():Dynamic return cast minX, function():Dynamic return cast _Runtime.select(_Runtime.compare(vx, maxX, '>'), function():Dynamic return cast maxX, function():Dynamic return cast vx)));
-    _Runtime.setField(out, 'y', _Runtime.select(_Runtime.compare(vy, minY, '<'), function():Dynamic return cast minY, function():Dynamic return cast _Runtime.select(_Runtime.compare(vy, maxY, '>'), function():Dynamic return cast maxY, function():Dynamic return cast vy)));
-    _Runtime.setField(out, 'z', _Runtime.select(_Runtime.compare(vz, minZ, '<'), function():Dynamic return cast minZ, function():Dynamic return cast _Runtime.select(_Runtime.compare(vz, maxZ, '>'), function():Dynamic return cast maxZ, function():Dynamic return cast vz)));
-    _Runtime.setField(out, 'w', _Runtime.select(_Runtime.compare(vw, minW, '<'), function():Dynamic return cast minW, function():Dynamic return cast _Runtime.select(_Runtime.compare(vw, maxW, '>'), function():Dynamic return cast maxW, function():Dynamic return cast vw)));
+    _Runtime.setField(out, 'x', ((cast ((cast vx : Float) < (cast minX : Float)) : Bool) ? (cast minX : Dynamic) : (cast ((cast ((cast vx : Float) > (cast maxX : Float)) : Bool) ? (cast maxX : Dynamic) : (cast vx : Dynamic)) : Dynamic)));
+    _Runtime.setField(out, 'y', ((cast ((cast vy : Float) < (cast minY : Float)) : Bool) ? (cast minY : Dynamic) : (cast ((cast ((cast vy : Float) > (cast maxY : Float)) : Bool) ? (cast maxY : Dynamic) : (cast vy : Dynamic)) : Dynamic)));
+    _Runtime.setField(out, 'z', ((cast ((cast vz : Float) < (cast minZ : Float)) : Bool) ? (cast minZ : Dynamic) : (cast ((cast ((cast vz : Float) > (cast maxZ : Float)) : Bool) ? (cast maxZ : Dynamic) : (cast vz : Dynamic)) : Dynamic)));
+    _Runtime.setField(out, 'w', ((cast ((cast vw : Float) < (cast minW : Float)) : Bool) ? (cast minW : Dynamic) : (cast ((cast ((cast vw : Float) > (cast maxW : Float)) : Bool) ? (cast maxW : Dynamic) : (cast vw : Dynamic)) : Dynamic)));
   }
 
   public static function cloneVector4(source:Vector4Like):flighthq.types.Vector4 {
@@ -81,15 +81,15 @@ class Vector4 {
     dy = _Runtime.field(divisor, 'y');
     dz = _Runtime.field(divisor, 'z');
     dw = _Runtime.field(divisor, 'w');
-    _Runtime.setField(out, 'x', _Runtime.select(!_Runtime.strictEquals(dx, 0.0), function():Dynamic return cast (sx / dx), function():Dynamic return cast 0.0));
-    _Runtime.setField(out, 'y', _Runtime.select(!_Runtime.strictEquals(dy, 0.0), function():Dynamic return cast (sy / dy), function():Dynamic return cast 0.0));
-    _Runtime.setField(out, 'z', _Runtime.select(!_Runtime.strictEquals(dz, 0.0), function():Dynamic return cast (sz / dz), function():Dynamic return cast 0.0));
-    _Runtime.setField(out, 'w', _Runtime.select(!_Runtime.strictEquals(dw, 0.0), function():Dynamic return cast (sw / dw), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'x', ((cast !_Runtime.strictEquals(dx, 0.0) : Bool) ? (cast (sx / dx) : Dynamic) : (cast 0.0 : Dynamic)));
+    _Runtime.setField(out, 'y', ((cast !_Runtime.strictEquals(dy, 0.0) : Bool) ? (cast (sy / dy) : Dynamic) : (cast 0.0 : Dynamic)));
+    _Runtime.setField(out, 'z', ((cast !_Runtime.strictEquals(dz, 0.0) : Bool) ? (cast (sz / dz) : Dynamic) : (cast 0.0 : Dynamic)));
+    _Runtime.setField(out, 'w', ((cast !_Runtime.strictEquals(dw, 0.0) : Bool) ? (cast (sw / dw) : Dynamic) : (cast 0.0 : Dynamic)));
   }
 
   public static function equalsVector4(a:Null<Vector4Like>, b:Null<Vector4Like>):Bool {
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(a), function():Dynamic return cast !_Runtime.truthy(b)))) { return cast false; }
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(a, 'x'), _Runtime.field(b, 'x')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'y'), _Runtime.field(b, 'y'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'z'), _Runtime.field(b, 'z'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'w'), _Runtime.field(b, 'w')));
+    if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
+    return cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(a, 'x'), _Runtime.field(b, 'x')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'y'), _Runtime.field(b, 'y')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'z'), _Runtime.field(b, 'z')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'w'), _Runtime.field(b, 'w')) : Bool));
     return cast null;
   }
 
@@ -99,7 +99,7 @@ class Vector4 {
     var _dot:Dynamic = cast _Runtime.UNDEFINED;
     la = _Runtime.callValue(getVector4Length, cast ([a] : Array<Dynamic>));
     lb = _Runtime.callValue(getVector4Length, cast ([b] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(la, 0.0), function():Dynamic return cast _Runtime.strictEquals(lb, 0.0)))) { return cast HxMath.NaN; }
+    if ((cast ((cast _Runtime.strictEquals(la, 0.0) : Bool) || (cast _Runtime.strictEquals(lb, 0.0) : Bool)) : Bool)) { return cast HxMath.NaN; }
     _dot = (_Runtime.callValue(getVector4Dot, cast ([a, b] : Array<Dynamic>)) / (la * lb));
     return cast HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, _dot)));
     return cast null;
@@ -162,17 +162,17 @@ class Vector4 {
   }
 
   public static function maxVector4(out:Vector4Like, a:Vector4Like, b:Vector4Like):Void {
-    _Runtime.setField(out, 'x', _Runtime.select(_Runtime.compare(_Runtime.field(a, 'x'), _Runtime.field(b, 'x'), '>'), function():Dynamic return cast _Runtime.field(a, 'x'), function():Dynamic return cast _Runtime.field(b, 'x')));
-    _Runtime.setField(out, 'y', _Runtime.select(_Runtime.compare(_Runtime.field(a, 'y'), _Runtime.field(b, 'y'), '>'), function():Dynamic return cast _Runtime.field(a, 'y'), function():Dynamic return cast _Runtime.field(b, 'y')));
-    _Runtime.setField(out, 'z', _Runtime.select(_Runtime.compare(_Runtime.field(a, 'z'), _Runtime.field(b, 'z'), '>'), function():Dynamic return cast _Runtime.field(a, 'z'), function():Dynamic return cast _Runtime.field(b, 'z')));
-    _Runtime.setField(out, 'w', _Runtime.select(_Runtime.compare(_Runtime.field(a, 'w'), _Runtime.field(b, 'w'), '>'), function():Dynamic return cast _Runtime.field(a, 'w'), function():Dynamic return cast _Runtime.field(b, 'w')));
+    _Runtime.setField(out, 'x', ((cast ((cast _Runtime.field(a, 'x') : Float) > (cast _Runtime.field(b, 'x') : Float)) : Bool) ? (cast _Runtime.field(a, 'x') : Dynamic) : (cast _Runtime.field(b, 'x') : Dynamic)));
+    _Runtime.setField(out, 'y', ((cast ((cast _Runtime.field(a, 'y') : Float) > (cast _Runtime.field(b, 'y') : Float)) : Bool) ? (cast _Runtime.field(a, 'y') : Dynamic) : (cast _Runtime.field(b, 'y') : Dynamic)));
+    _Runtime.setField(out, 'z', ((cast ((cast _Runtime.field(a, 'z') : Float) > (cast _Runtime.field(b, 'z') : Float)) : Bool) ? (cast _Runtime.field(a, 'z') : Dynamic) : (cast _Runtime.field(b, 'z') : Dynamic)));
+    _Runtime.setField(out, 'w', ((cast ((cast _Runtime.field(a, 'w') : Float) > (cast _Runtime.field(b, 'w') : Float)) : Bool) ? (cast _Runtime.field(a, 'w') : Dynamic) : (cast _Runtime.field(b, 'w') : Dynamic)));
   }
 
   public static function minVector4(out:Vector4Like, a:Vector4Like, b:Vector4Like):Void {
-    _Runtime.setField(out, 'x', _Runtime.select(_Runtime.compare(_Runtime.field(a, 'x'), _Runtime.field(b, 'x'), '<'), function():Dynamic return cast _Runtime.field(a, 'x'), function():Dynamic return cast _Runtime.field(b, 'x')));
-    _Runtime.setField(out, 'y', _Runtime.select(_Runtime.compare(_Runtime.field(a, 'y'), _Runtime.field(b, 'y'), '<'), function():Dynamic return cast _Runtime.field(a, 'y'), function():Dynamic return cast _Runtime.field(b, 'y')));
-    _Runtime.setField(out, 'z', _Runtime.select(_Runtime.compare(_Runtime.field(a, 'z'), _Runtime.field(b, 'z'), '<'), function():Dynamic return cast _Runtime.field(a, 'z'), function():Dynamic return cast _Runtime.field(b, 'z')));
-    _Runtime.setField(out, 'w', _Runtime.select(_Runtime.compare(_Runtime.field(a, 'w'), _Runtime.field(b, 'w'), '<'), function():Dynamic return cast _Runtime.field(a, 'w'), function():Dynamic return cast _Runtime.field(b, 'w')));
+    _Runtime.setField(out, 'x', ((cast ((cast _Runtime.field(a, 'x') : Float) < (cast _Runtime.field(b, 'x') : Float)) : Bool) ? (cast _Runtime.field(a, 'x') : Dynamic) : (cast _Runtime.field(b, 'x') : Dynamic)));
+    _Runtime.setField(out, 'y', ((cast ((cast _Runtime.field(a, 'y') : Float) < (cast _Runtime.field(b, 'y') : Float)) : Bool) ? (cast _Runtime.field(a, 'y') : Dynamic) : (cast _Runtime.field(b, 'y') : Dynamic)));
+    _Runtime.setField(out, 'z', ((cast ((cast _Runtime.field(a, 'z') : Float) < (cast _Runtime.field(b, 'z') : Float)) : Bool) ? (cast _Runtime.field(a, 'z') : Dynamic) : (cast _Runtime.field(b, 'z') : Dynamic)));
+    _Runtime.setField(out, 'w', ((cast ((cast _Runtime.field(a, 'w') : Float) < (cast _Runtime.field(b, 'w') : Float)) : Bool) ? (cast _Runtime.field(a, 'w') : Dynamic) : (cast _Runtime.field(b, 'w') : Dynamic)));
   }
 
   public static function multiplyVector4(out:Vector4Like, a:Vector4Like, b:Vector4Like):Void {
@@ -183,7 +183,7 @@ class Vector4 {
   }
 
   public static function nearEqualsVector4(a:Vector4Like, b:Vector4Like, tolerance:Float = 0.000001):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(HxMath.abs((_Runtime.field(a, 'x') - _Runtime.field(b, 'x'))), tolerance, '<'), function():Dynamic return cast _Runtime.compare(HxMath.abs((_Runtime.field(a, 'y') - _Runtime.field(b, 'y'))), tolerance, '<')), function():Dynamic return cast _Runtime.compare(HxMath.abs((_Runtime.field(a, 'z') - _Runtime.field(b, 'z'))), tolerance, '<')), function():Dynamic return cast _Runtime.compare(HxMath.abs((_Runtime.field(a, 'w') - _Runtime.field(b, 'w'))), tolerance, '<'));
+    return cast _Runtime.andValue(((cast ((cast ((cast HxMath.abs((_Runtime.field(a, 'x') - _Runtime.field(b, 'x'))) : Float) < (cast tolerance : Float)) : Bool) && (cast ((cast HxMath.abs((_Runtime.field(a, 'y') - _Runtime.field(b, 'y'))) : Float) < (cast tolerance : Float)) : Bool)) : Bool) && (cast ((cast HxMath.abs((_Runtime.field(a, 'z') - _Runtime.field(b, 'z'))) : Float) < (cast tolerance : Float)) : Bool)), function():Dynamic return cast ((cast HxMath.abs((_Runtime.field(a, 'w') - _Runtime.field(b, 'w'))) : Float) < (cast tolerance : Float)));
     return cast null;
   }
 
@@ -197,7 +197,7 @@ class Vector4 {
   public static function normalizeVector4(out:Vector4Like, source:Vector4Like):Float {
     var l:Dynamic = cast _Runtime.UNDEFINED;
     l = _Runtime.callValue(getVector4Length, cast ([source] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(l, 0.0))) {
+    if ((cast !_Runtime.strictEquals(l, 0.0) : Bool)) {
       _Runtime.setField(out, 'x', (_Runtime.field(source, 'x') / l));
       _Runtime.setField(out, 'y', (_Runtime.field(source, 'y') / l));
       _Runtime.setField(out, 'z', (_Runtime.field(source, 'z') / l));

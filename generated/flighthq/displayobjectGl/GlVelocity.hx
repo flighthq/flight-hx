@@ -39,7 +39,7 @@ class GlVelocity {
     var spatial:Dynamic = cast _Runtime.UNDEFINED;
     var bounds:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(getVelocity, cast ([_Runtime.field(ctx, 'field'), node, GlVelocity._scratchVelocity__glVelocity] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(GlVelocity._scratchVelocity__glVelocity, 'x'), 0.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(GlVelocity._scratchVelocity__glVelocity, 'y'), 0.0)))) { return; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(GlVelocity._scratchVelocity__glVelocity, 'x'), 0.0) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(GlVelocity._scratchVelocity__glVelocity, 'y'), 0.0) : Bool)) : Bool)) { return; }
     spatial = (cast (cast node : Dynamic) : Spatial2DNode<Dynamic>);
     _Runtime.callValue(ensureNodeWorldBoundsRectangle, cast ([spatial] : Array<Dynamic>));
     bounds = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([spatial] : Array<Dynamic>));
@@ -71,7 +71,7 @@ class GlVelocity {
     transforms = _Runtime.field(__destructure0, 'transforms');
     velocities = _Runtime.field(__destructure0, 'velocities');
     worldSpace = _Runtime.field(__destructure0, 'worldSpace');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(atlas, null), function():Dynamic return cast _Runtime.strictEquals(particleCount, 0.0)), function():Dynamic return cast _Runtime.compare(_Runtime.field(velocities, 'length'), (particleCount * 2.0), '<')))) { return; }
+    if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) : Bool) || (cast ((cast _Runtime.field(velocities, 'length') : Float) < (cast (particleCount * 2.0) : Float)) : Bool)) : Bool)) { return; }
     regions = _Runtime.field(atlas, 'regions');
     numRegions = _Runtime.field(regions, 'length');
     wa = 1.0;
@@ -80,7 +80,7 @@ class GlVelocity {
     wd = 1.0;
     wtx = 0.0;
     wty = 0.0;
-    if (_Runtime.truthy(!_Runtime.truthy(worldSpace))) {
+    if ((cast !(cast worldSpace : Bool) : Bool)) {
       _Runtime.callValue(ensureNodeWorldMatrix, cast ([(cast (cast node : Dynamic) : Transform2DNode<Dynamic>)] : Array<Dynamic>));
       var transform:Dynamic = _Runtime.callValue(getNodeWorldMatrix, cast ([(cast (cast node : Dynamic) : Transform2DNode<Dynamic>)] : Array<Dynamic>));
       (wa = cast (_Runtime.field(transform, 'a') : Dynamic));
@@ -92,16 +92,16 @@ class GlVelocity {
     }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, particleCount, '<'))) {
+      while ((cast ((cast i : Float) < (cast particleCount : Float)) : Bool)) {
         var velocityX:Dynamic = _Runtime.getIndex(velocities, (i * 2.0));
         var velocityY:Dynamic = _Runtime.getIndex(velocities, ((i * 2.0) + 1.0));
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(velocityX, 0.0), function():Dynamic return cast _Runtime.strictEquals(velocityY, 0.0)))) { i++; continue; }
+        if ((cast ((cast _Runtime.strictEquals(velocityX, 0.0) : Bool) && (cast _Runtime.strictEquals(velocityY, 0.0) : Bool)) : Bool)) { i++; continue; }
         var id:Dynamic = _Runtime.getIndex(ids, i);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(id, 0.0, '<'), function():Dynamic return cast _Runtime.compare(id, numRegions, '>=')))) { i++; continue; }
+        if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
         var region:Dynamic = _Runtime.getIndex(regions, id);
         var rw:Dynamic = _Runtime.field(region, 'width');
         var rh:Dynamic = _Runtime.field(region, 'height');
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(rw, 0.0, '<='), function():Dynamic return cast _Runtime.compare(rh, 0.0, '<=')))) { i++; continue; }
+        if ((cast ((cast ((cast rw : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast rh : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
         var tt:Dynamic = (i * 4.0);
         var px:Dynamic = _Runtime.getIndex(transforms, tt);
         var py:Dynamic = _Runtime.getIndex(transforms, (tt + 1.0));
@@ -115,17 +115,17 @@ class GlVelocity {
         var maxY:Dynamic = -HxMath.POSITIVE_INFINITY;
         {
           var c:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(c, 4.0, '<'))) {
+          while ((cast ((cast c : Float) < (cast 4.0 : Float)) : Bool)) {
             var lx:Dynamic = ((_Runtime.toInt32(c) & 1) * rw);
             var ly:Dynamic = ((_Runtime.toInt32(c) >> 1) * rh);
             var rx:Dynamic = (((cosScale * lx) - (sinScale * ly)) + px);
             var ry:Dynamic = (((sinScale * lx) + (cosScale * ly)) + py);
-            var wx:Dynamic = _Runtime.select(worldSpace, function():Dynamic return cast rx, function():Dynamic return cast (((wa * rx) + (wc * ry)) + wtx));
-            var wy:Dynamic = _Runtime.select(worldSpace, function():Dynamic return cast ry, function():Dynamic return cast (((wb * rx) + (wd * ry)) + wty));
-            if (_Runtime.truthy(_Runtime.compare(wx, minX, '<'))) { (minX = cast (wx : Dynamic)); }
-            if (_Runtime.truthy(_Runtime.compare(wx, maxX, '>'))) { (maxX = cast (wx : Dynamic)); }
-            if (_Runtime.truthy(_Runtime.compare(wy, minY, '<'))) { (minY = cast (wy : Dynamic)); }
-            if (_Runtime.truthy(_Runtime.compare(wy, maxY, '>'))) { (maxY = cast (wy : Dynamic)); }
+            var wx:Dynamic = ((cast worldSpace : Bool) ? (cast rx : Dynamic) : (cast (((wa * rx) + (wc * ry)) + wtx) : Dynamic));
+            var wy:Dynamic = ((cast worldSpace : Bool) ? (cast ry : Dynamic) : (cast (((wb * rx) + (wd * ry)) + wty) : Dynamic));
+            if ((cast ((cast wx : Float) < (cast minX : Float)) : Bool)) { (minX = cast (wx : Dynamic)); }
+            if ((cast ((cast wx : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (wx : Dynamic)); }
+            if ((cast ((cast wy : Float) < (cast minY : Float)) : Bool)) { (minY = cast (wy : Dynamic)); }
+            if ((cast ((cast wy : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast (wy : Dynamic)); }
             c++;
           }
         }
@@ -158,7 +158,7 @@ class GlVelocity {
     instanceCount = _Runtime.field(__destructure1, 'instanceCount');
     transforms = _Runtime.field(__destructure1, 'transforms');
     transformType = _Runtime.field(__destructure1, 'transformType');
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(instanceVelocities, null), function():Dynamic return cast !_Runtime.strictEquals(atlas, null)), function():Dynamic return cast _Runtime.compare(instanceCount, 0.0, '>')))) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(instanceVelocities, null) : Bool) && (cast !_Runtime.strictEquals(atlas, null) : Bool)) : Bool) && (cast ((cast instanceCount : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       var regions:Dynamic = _Runtime.field(atlas, 'regions');
       var numRegions:Dynamic = _Runtime.field(regions, 'length');
       _Runtime.callValue(ensureNodeWorldMatrix, cast ([(cast (cast node : Dynamic) : Transform2DNode<Dynamic>)] : Array<Dynamic>));
@@ -172,23 +172,23 @@ class GlVelocity {
       var isVector2:Dynamic = _Runtime.strictEquals(transformType, 'vector2');
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, instanceCount, '<'))) {
+        while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
           var velocityX:Dynamic = _Runtime.getIndex(instanceVelocities, (i * 2.0));
           var velocityY:Dynamic = _Runtime.getIndex(instanceVelocities, ((i * 2.0) + 1.0));
-          if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(velocityX, 0.0), function():Dynamic return cast _Runtime.strictEquals(velocityY, 0.0)))) { i++; continue; }
+          if ((cast ((cast _Runtime.strictEquals(velocityX, 0.0) : Bool) && (cast _Runtime.strictEquals(velocityY, 0.0) : Bool)) : Bool)) { i++; continue; }
           var id:Dynamic = _Runtime.getIndex(ids, i);
-          if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(id, 0.0, '<'), function():Dynamic return cast _Runtime.compare(id, numRegions, '>=')))) { i++; continue; }
+          if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
           var region:Dynamic = _Runtime.getIndex(regions, id);
           var w:Dynamic = _Runtime.field(region, 'width');
           var h:Dynamic = _Runtime.field(region, 'height');
-          if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(w, 0.0, '<='), function():Dynamic return cast _Runtime.compare(h, 0.0, '<=')))) { i++; continue; }
+          if ((cast ((cast ((cast w : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast h : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
           var wa:Float = cast _Runtime.UNDEFINED;
           var wb:Float = cast _Runtime.UNDEFINED;
           var wc:Float = cast _Runtime.UNDEFINED;
           var wd:Float = cast _Runtime.UNDEFINED;
           var wtx:Float = cast _Runtime.UNDEFINED;
           var wty:Float = cast _Runtime.UNDEFINED;
-          if (_Runtime.truthy(isVector2)) {
+          if ((cast isVector2 : Bool)) {
             var dx:Dynamic = _Runtime.getIndex(transforms, (i * 2.0));
             var dy:Dynamic = _Runtime.getIndex(transforms, ((i * 2.0) + 1.0));
             (wa = cast (pa : Dynamic));
@@ -231,7 +231,7 @@ class GlVelocity {
       return;
     }
     _Runtime.callValue(getVelocity, cast ([_Runtime.field(ctx, 'field'), node, GlVelocity._scratchVelocity__glVelocity] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(GlVelocity._scratchVelocity__glVelocity, 'x'), 0.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(GlVelocity._scratchVelocity__glVelocity, 'y'), 0.0)))) { return; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(GlVelocity._scratchVelocity__glVelocity, 'x'), 0.0) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(GlVelocity._scratchVelocity__glVelocity, 'y'), 0.0) : Bool)) : Bool)) { return; }
     spatial = (cast (cast node : Dynamic) : Spatial2DNode<Dynamic>);
     _Runtime.callValue(ensureNodeWorldBoundsRectangle, cast ([spatial] : Array<Dynamic>));
     bounds = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([spatial] : Array<Dynamic>));
@@ -264,7 +264,7 @@ class GlVelocity {
   public static function registerGlVelocityWriter(state:GlRenderState, kind:Kind, writer:GlVelocityWriter):Void {
     var writers:Dynamic = cast _Runtime.UNDEFINED;
     writers = ((cast GlVelocity._velocityWriters__glVelocity : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(writers, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(writers, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (writers = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
       ((cast GlVelocity._velocityWriters__glVelocity : flighthq._internal._WeakMap).set(state, writers));
     }
@@ -300,7 +300,7 @@ class GlVelocity {
     var glProgram:Dynamic = cast _Runtime.UNDEFINED;
     var quadBuffer:Dynamic = cast _Runtime.UNDEFINED;
     program = ((cast GlVelocity._velocityPrograms__glVelocity : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(!_Runtime.strictEquals(program, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast program; }
+    if ((cast !_Runtime.strictEquals(program, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast program; }
     gl = _Runtime.field(state, 'gl');
     glProgram = _Runtime.callValue(createGlProgram, cast ([gl, GlVelocity.VELOCITY_VERTEX_SRC__glVelocity, GlVelocity.VELOCITY_FRAGMENT_SRC__glVelocity, 'Velocity'] : Array<Dynamic>));
     quadBuffer = flighthq._internal.backend.WebGl2Backend.createBuffer(gl);
@@ -316,13 +316,13 @@ class GlVelocity {
     var writer:Dynamic = cast _Runtime.UNDEFINED;
     var count:Dynamic = cast _Runtime.UNDEFINED;
     writer = _Runtime.callValue(getGlVelocityWriter, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(node, 'kind')] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(writer, null))) { _Runtime.callValue(writer, cast ([ctx, node] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(writer, null) : Bool)) { _Runtime.callValue(writer, cast ([ctx, node] : Array<Dynamic>)); }
     count = _Runtime.callValue(getNodeChildCount, cast ([node] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, count, '<'))) {
+      while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         var child:Dynamic = _Runtime.callValue(getNodeChildAt, cast ([node, i] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(child, null))) { _Runtime.callValue(GlVelocity.visitGlVelocity__glVelocity, cast ([ctx, (cast (cast child : Dynamic) : Transform2DNode<Traits>)] : Array<Dynamic>)); }
+        if ((cast !_Runtime.strictEquals(child, null) : Bool)) { _Runtime.callValue(GlVelocity.visitGlVelocity__glVelocity, cast ([ctx, (cast (cast child : Dynamic) : Transform2DNode<Traits>)] : Array<Dynamic>)); }
         i++;
       }
     }

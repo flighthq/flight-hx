@@ -72,9 +72,9 @@ class GlBevelEffect {
     _Runtime.callValue(applyGlEffectTintPass, cast ([state, src, tinted, 16777215.0, 1.0, 1.0] : Array<Dynamic>));
     _Runtime.callValue(applyGlEffectBoxBlur, cast ([state, tinted, blurred, blurTemp, { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), passes: quality }] : Array<Dynamic>));
     _Runtime.callValue(clearGlRenderTarget, cast ([state, dst] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(sourceMode, 'draw'))) { _Runtime.callValue(applyGlEffectBlitPass, cast ([state, src, dst] : Array<Dynamic>)); }
-    _Runtime.callValue(GlBevelEffect.applyGlBevelCompositePass__glBevelEffect, cast ([state, blurred, src, dst, { offsetX: (offsetX / _Runtime.field(src, 'width')), offsetY: (-offsetY / _Runtime.field(src, 'height')), highlightColor: highlightColor, highlightAlpha: highlightAlpha, shadowColor: shadowColor, shadowAlpha: shadowAlpha, intensity: strength, clipMode: _Runtime.select(_Runtime.strictEquals(bevelType, 'inner'), function():Dynamic return cast 1.0, function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(bevelType, 'outer'), function():Dynamic return cast 2.0, function():Dynamic return cast 0.0)) }] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(sourceMode, 'knockout'))) { _Runtime.callValue(applyGlEffectErasePass, cast ([state, src, dst] : Array<Dynamic>)); }
+    if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) { _Runtime.callValue(applyGlEffectBlitPass, cast ([state, src, dst] : Array<Dynamic>)); }
+    _Runtime.callValue(GlBevelEffect.applyGlBevelCompositePass__glBevelEffect, cast ([state, blurred, src, dst, { offsetX: (offsetX / _Runtime.field(src, 'width')), offsetY: (-offsetY / _Runtime.field(src, 'height')), highlightColor: highlightColor, highlightAlpha: highlightAlpha, shadowColor: shadowColor, shadowAlpha: shadowAlpha, intensity: strength, clipMode: ((cast _Runtime.strictEquals(bevelType, 'inner') : Bool) ? (cast 1.0 : Dynamic) : (cast ((cast _Runtime.strictEquals(bevelType, 'outer') : Bool) ? (cast 2.0 : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic)) }] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool)) { _Runtime.callValue(applyGlEffectErasePass, cast ([state, src, dst] : Array<Dynamic>)); }
     _Runtime.callValue(releaseGlRenderTarget, cast ([pool, s0] : Array<Dynamic>));
     _Runtime.callValue(releaseGlRenderTarget, cast ([pool, s1] : Array<Dynamic>));
     _Runtime.callValue(releaseGlRenderTarget, cast ([pool, s2] : Array<Dynamic>));
@@ -103,7 +103,7 @@ class GlBevelEffect {
   public static function getGlBevelCompositeShader__glBevelEffect(state:GlRenderState):BevelCompositeLocations__glBevelEffect {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = ((cast GlBevelEffect.bevelCompositeShaders__glBevelEffect : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:Dynamic = _Runtime.field(state, 'gl');
       var base:Dynamic = _Runtime.callValue(compileGlFullscreenProgram, cast ([gl, GlBevelEffect.BEVEL_COMPOSITE_FRAGMENT_SRC__glBevelEffect] : Array<Dynamic>));
       (loc = cast (_Runtime.mergeObjects([base, { locHighlight: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_highlight') }, { locShadow: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_shadow') }, { locOffset: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_offset') }, { locIntensity: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_intensity') }, { locClipMode: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_clipMode') }]) : Dynamic));

@@ -10,14 +10,14 @@ class AdvanceClock {
   public static function advanceClock(clock:Clock, deltaSeconds:Float):Void {
     var scaledDelta:Dynamic = cast _Runtime.UNDEFINED;
     var children:Dynamic = cast _Runtime.UNDEFINED;
-    scaledDelta = _Runtime.select(_Runtime.field(clock, 'paused'), function():Dynamic return cast 0.0, function():Dynamic return cast (deltaSeconds * _Runtime.field(clock, 'scale')));
+    scaledDelta = ((cast _Runtime.field(clock, 'paused') : Bool) ? (cast 0.0 : Dynamic) : (cast (deltaSeconds * _Runtime.field(clock, 'scale')) : Dynamic));
     _Runtime.setField(clock, 'deltaTime', scaledDelta);
     _Runtime.setField(clock, 'elapsed', (_Runtime.field(clock, 'elapsed') + scaledDelta));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(clock, 'onTick'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(clock, 'onTick')], [scaledDelta]]), 1); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(clock, 'onTick'), null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(clock, 'onTick')], [scaledDelta]]), 1); }
     children = _Runtime.field(clock, 'children');
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(children, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
         _Runtime.callValue(advanceClock, cast ([_Runtime.getIndex(children, i), scaledDelta] : Array<Dynamic>));
         i++;
       }

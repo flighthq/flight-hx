@@ -10,15 +10,15 @@ class EaseSteps {
   public static function easeSteps(count:Float, position:StepPosition = 'jumpEnd'):EasingFunction {
     var jumps:Dynamic = cast _Runtime.UNDEFINED;
     var startOffset:Dynamic = cast _Runtime.UNDEFINED;
-    jumps = _Runtime.select(_Runtime.strictEquals(position, 'jumpNone'), function():Dynamic return cast (count - 1.0), function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(position, 'jumpBoth'), function():Dynamic return cast (count + 1.0), function():Dynamic return cast count));
-    startOffset = _Runtime.select(_Runtime.orValue(_Runtime.strictEquals(position, 'jumpStart'), function():Dynamic return cast _Runtime.strictEquals(position, 'jumpBoth')), function():Dynamic return cast 1.0, function():Dynamic return cast 0.0);
+    jumps = ((cast _Runtime.strictEquals(position, 'jumpNone') : Bool) ? (cast (count - 1.0) : Dynamic) : (cast ((cast _Runtime.strictEquals(position, 'jumpBoth') : Bool) ? (cast (count + 1.0) : Dynamic) : (cast count : Dynamic)) : Dynamic));
+    startOffset = ((cast ((cast _Runtime.strictEquals(position, 'jumpStart') : Bool) || (cast _Runtime.strictEquals(position, 'jumpBoth') : Bool)) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic));
     return cast function(t:Dynamic) {
       var step:Dynamic = cast _Runtime.UNDEFINED;
       step = (HxMath.floor((t * count)) + startOffset);
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(t, 0.0, '>='), function():Dynamic return cast _Runtime.compare(step, 0.0, '<')))) {
+      if ((cast ((cast ((cast t : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast step : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
         (step = cast (0.0 : Dynamic));
       }
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(t, 1.0, '<='), function():Dynamic return cast _Runtime.compare(step, jumps, '>')))) {
+      if ((cast ((cast ((cast t : Float) <= (cast 1.0 : Float)) : Bool) && (cast ((cast step : Float) > (cast jumps : Float)) : Bool)) : Bool)) {
         (step = cast (jumps : Dynamic));
       }
       return cast (step / jumps);

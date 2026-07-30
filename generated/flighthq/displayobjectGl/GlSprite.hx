@@ -18,18 +18,18 @@ class GlSprite {
     tempStack = _Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'tempStack');
     stackLength = 1.0;
     _Runtime.setIndex(tempStack, 0.0, source);
-    while (_Runtime.truthy(_Runtime.compare(stackLength, 0.0, '>'))) {
+    while ((cast ((cast stackLength : Float) > (cast 0.0 : Float)) : Bool)) {
       var current:Dynamic = (cast _Runtime.getIndex(tempStack, --stackLength) : DisplayObject);
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(current, 'enabled')))) { continue; }
+      if ((cast !(cast _Runtime.field(current, 'enabled') : Bool) : Bool)) { continue; }
       var data:Dynamic = _Runtime.callValue(getRenderProxy2D, cast ([state, current] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(data, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(isRenderProxyVisible, cast ([data] : Array<Dynamic>)))))) { continue; }
+      if ((cast ((cast _Runtime.strictEquals(data, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast _Runtime.callValue(isRenderProxyVisible, cast ([data] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { continue; }
       _Runtime.callOptionalProperty(_Runtime.field(data, 'renderer'), 'submit', cast ([state, data] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.field(data, 'traverseChildren'))) {
+      if ((cast _Runtime.field(data, 'traverseChildren') : Bool)) {
         var children:Dynamic = _Runtime.field(_Runtime.callValue(getDisplayObjectRuntime, cast ([current] : Array<Dynamic>)), 'children');
-        if (_Runtime.truthy(!_Runtime.strictEquals(children, null))) {
+        if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
           {
             var i:Dynamic = (_Runtime.field(children, 'length') - 1.0);
-            while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>='))) {
+            while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
               _Runtime.setIndex(tempStack, stackLength++, (cast _Runtime.getIndex(children, i) : DisplayObject));
               i--;
             }

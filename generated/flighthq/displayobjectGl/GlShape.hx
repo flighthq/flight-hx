@@ -60,7 +60,7 @@ class GlShape {
     __destructure0 = _Runtime.callValue(GlShape.getGlShapeData__glShape, cast ([data] : Array<Dynamic>));
     image = _Runtime.field(__destructure0, 'image');
     entry = ((cast _Runtime.field(runtime, 'imageResourceTextureCache') : flighthq._internal._WeakMap).get(image));
-    if (_Runtime.truthy(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.deleteTexture(_Runtime.field(state, 'gl'), _Runtime.field(entry, 'texture'));
       ((cast _Runtime.field(runtime, 'imageResourceTextureCache') : flighthq._internal._WeakMap).delete_(image));
     }
@@ -90,12 +90,12 @@ class GlShape {
     __destructure1 = _Runtime.field(source, 'data');
     commands = _Runtime.field(__destructure1, 'commands');
     version = _Runtime.callValue(getNodeLocalContentRevision, cast ([source] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0))) { return; }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(renderProxy, 'rendererData'), null))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool)) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(renderProxy, 'rendererData'), null) : Bool)) { return; }
     regions = _Runtime.callValue(getShapeFillRegions, cast ([commands] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(regions, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(regions, 'length'), 0.0, '>')))) {
+    if ((cast ((cast !_Runtime.strictEquals(regions, null) : Bool) && (cast ((cast _Runtime.field(regions, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       var meshData:Dynamic = _Runtime.callValue(GlShape.getGlShapeData__glShape, cast ([_Runtime.field(renderProxy, 'rendererData')] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(meshData, 'meshVersion'), version))) {
+      if ((cast !_Runtime.strictEquals(_Runtime.field(meshData, 'meshVersion'), version) : Bool)) {
         _Runtime.setField(meshData, 'meshes', _Runtime.callProperty(regions, 'map', cast ([function(region:Dynamic) {
           var mesh:Dynamic = cast _Runtime.UNDEFINED;
           mesh = _Runtime.callValue(tessellatePath, cast ([_Runtime.field(region, 'path')] : Array<Dynamic>));
@@ -108,13 +108,13 @@ class GlShape {
     }
     material = _Runtime.field(renderProxy, 'material');
     materialRenderer = _Runtime.callValue(resolveGlMaterialRenderer, cast ([state, material] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(materialRenderer, null))) { return; }
+    if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
     shapeData = _Runtime.callValue(GlShape.getGlShapeData__glShape, cast ([_Runtime.field(renderProxy, 'rendererData')] : Array<Dynamic>));
     bounds = _Runtime.callValue(getNodeLocalBoundsRectangle, cast ([source] : Array<Dynamic>));
     w = HxMath.ceil(_Runtime.field(bounds, 'width'));
     h = HxMath.ceil(_Runtime.field(bounds, 'height'));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(w, 0.0, '<='), function():Dynamic return cast _Runtime.compare(h, 0.0, '<=')))) { return; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(version, _Runtime.field(shapeData, 'lastContentId')), function():Dynamic return cast !_Runtime.strictEquals(w, _Runtime.field(shapeData, 'lastW'))), function():Dynamic return cast !_Runtime.strictEquals(h, _Runtime.field(shapeData, 'lastH'))))) {
+    if ((cast ((cast ((cast w : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast h : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
+    if ((cast ((cast ((cast !_Runtime.strictEquals(version, _Runtime.field(shapeData, 'lastContentId')) : Bool) || (cast !_Runtime.strictEquals(w, _Runtime.field(shapeData, 'lastW')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(h, _Runtime.field(shapeData, 'lastH')) : Bool)) : Bool)) {
       flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(shapeData, 'canvas'), 'width', w);
       flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(shapeData, 'canvas'), 'height', h);
       var ctx:Dynamic = _Runtime.field(shapeData, 'ctx');

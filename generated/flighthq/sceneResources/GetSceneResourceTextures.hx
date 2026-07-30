@@ -23,20 +23,20 @@ class GetSceneResourceTextures {
 
   public static function collectNodeResourceTextures__getSceneResourceTextures(node:SceneNode, registry:SceneMaterialTextureRegistry, out:Array<Texture>, seen:Dynamic, slots:Array<Texture>):Void {
     var materials:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>))))) { return; }
+    if ((cast !(cast _Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)) : Bool) : Bool)) { return; }
     materials = _Runtime.field(node, 'materials');
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(materials, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
         var material:Dynamic = (cast _Runtime.getIndex(materials, i) : Null<Material>);
-        if (_Runtime.truthy(_Runtime.strictEquals(material, null))) { i++; continue; }
+        if ((cast _Runtime.strictEquals(material, null) : Bool)) { i++; continue; }
         _Runtime.setLength(slots, 0.0);
         _Runtime.callValue(getSceneMaterialTextures, cast ([registry, material, slots] : Array<Dynamic>));
         {
           var j:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(j, _Runtime.field(slots, 'length'), '<'))) {
+          while ((cast ((cast j : Float) < (cast _Runtime.field(slots, 'length') : Float)) : Bool)) {
             var texture:Dynamic = _Runtime.getIndex(slots, j);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.looseEquals(_Runtime.field(texture, 'resource'), null), function():Dynamic return cast ((cast seen : flighthq._internal._Set).has(texture))))) { j++; continue; }
+            if ((cast ((cast _Runtime.looseEquals(_Runtime.field(texture, 'resource'), null) : Bool) || (cast ((cast seen : flighthq._internal._Set).has(texture)) : Bool)) : Bool)) { j++; continue; }
             ((cast seen : flighthq._internal._Set).add(texture));
             _Runtime.callProperty(out, 'push', cast ([texture] : Array<Dynamic>));
             j++;

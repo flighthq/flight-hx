@@ -20,10 +20,10 @@ class DomRenderView {
     source = (cast _Runtime.field(renderProxy, 'source') : RenderView);
     __destructure0 = _Runtime.field(source, 'data');
     renderer = _Runtime.field(__destructure0, 'renderer');
-    if (_Runtime.truthy(_Runtime.strictEquals(renderer, null))) { return; }
+    if ((cast _Runtime.strictEquals(renderer, null) : Bool)) { return; }
     _Runtime.callProperty(renderer, 'render', cast ([] : Array<Dynamic>));
     canvas = _Runtime.field(renderer, 'canvas');
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(_Runtime.field(canvas, 'style'), 'position'), 'absolute'))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(canvas, 'style'), 'position'), 'absolute') : Bool)) {
       _Runtime.setField(_Runtime.field(canvas, 'style'), 'left', '0');
       _Runtime.setField(_Runtime.field(canvas, 'style'), 'position', 'absolute');
       _Runtime.setField(_Runtime.field(canvas, 'style'), 'top', '0');

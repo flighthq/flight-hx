@@ -28,13 +28,13 @@ class TestCollision {
     var overlapping:Dynamic = cast _Runtime.UNDEFINED;
     rankA = _Runtime.callValue(TestCollision.shapeKindRank__testCollision, cast ([_Runtime.field(a, 'kind')] : Array<Dynamic>));
     rankB = _Runtime.callValue(TestCollision.shapeKindRank__testCollision, cast ([_Runtime.field(b, 'kind')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(rankA, 0.0, '<'), function():Dynamic return cast _Runtime.compare(rankB, 0.0, '<')))) {
+    if ((cast ((cast ((cast rankA : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast rankB : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
       _Runtime.callValue(clearCollisionManifold, cast ([out] : Array<Dynamic>));
       return cast false;
     }
-    swapped = _Runtime.compare(rankA, rankB, '>');
-    lo = _Runtime.select(swapped, function():Dynamic return cast b, function():Dynamic return cast a);
-    hi = _Runtime.select(swapped, function():Dynamic return cast a, function():Dynamic return cast b);
+    swapped = ((cast rankA : Float) > (cast rankB : Float));
+    lo = ((cast swapped : Bool) ? (cast b : Dynamic) : (cast a : Dynamic));
+    hi = ((cast swapped : Bool) ? (cast a : Dynamic) : (cast b : Dynamic));
     overlapping = false;
     {
       var __switchValue = _Runtime.field(lo, 'kind');
@@ -81,12 +81,12 @@ class TestCollision {
         }
       }
       else if (__switchValue == 'polygon') {
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(hi, 'kind'), 'polygon'))) {
+        if ((cast _Runtime.strictEquals(_Runtime.field(hi, 'kind'), 'polygon') : Bool)) {
           (overlapping = cast (_Runtime.callValue(testPolygonPolygonCollision, cast ([lo, hi, out] : Array<Dynamic>)) : Dynamic));
         }
       }
     }
-    if (_Runtime.truthy(_Runtime.andValue(overlapping, function():Dynamic return cast swapped))) {
+    if ((cast ((cast overlapping : Bool) && (cast swapped : Bool)) : Bool)) {
       _Runtime.setField(out, 'normalX', -_Runtime.field(out, 'normalX'));
       _Runtime.setField(out, 'normalY', -_Runtime.field(out, 'normalY'));
     }

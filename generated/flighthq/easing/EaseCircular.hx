@@ -8,7 +8,7 @@ import flighthq.types.EasingFunction;
 class EaseCircular {
   public static final easeInCircular:EasingFunction = function(t:Dynamic) return (1.0 - HxMath.sqrt((1.0 - (t * t))));
 
-  public static final easeInOutCircular:EasingFunction = function(t:Dynamic) return _Runtime.select(_Runtime.compare(t, 0.5, '<'), function():Dynamic return cast ((1.0 - HxMath.sqrt((1.0 - ((4.0 * t) * t)))) / 2.0), function():Dynamic return cast ((HxMath.sqrt((1.0 - HxMath.pow(((-2.0 * t) + 2.0), 2.0))) + 1.0) / 2.0));
+  public static final easeInOutCircular:EasingFunction = function(t:Dynamic) return ((cast ((cast t : Float) < (cast 0.5 : Float)) : Bool) ? (cast ((1.0 - HxMath.sqrt((1.0 - ((4.0 * t) * t)))) / 2.0) : Dynamic) : (cast ((HxMath.sqrt((1.0 - HxMath.pow(((-2.0 * t) + 2.0), 2.0))) + 1.0) / 2.0) : Dynamic));
 
   public static final easeOutCircular:EasingFunction = function(t:Dynamic) return HxMath.sqrt((1.0 - ((t - 1.0) * (t - 1.0))));
 }

@@ -26,13 +26,13 @@ class Tilemap {
     var signals:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.fill(_Runtime.field(_Runtime.field(tilemap, 'data'), 'tiles'), -1.0, 0, null, 1);
     signals = _Runtime.callValue(getTilemapSignals, cast ([tilemap] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callProperty(_Runtime.field(signals, 'onCleared'), 'emit', cast ([] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callProperty(_Runtime.field(signals, 'onCleared'), 'emit', cast ([] : Array<Dynamic>)); }
   }
 
   public static function cloneTilemap(source:flighthq.types.Tilemap):flighthq.types.Tilemap {
     var src:Dynamic = cast _Runtime.UNDEFINED;
     src = _Runtime.field(source, 'data');
-    return cast _Runtime.callValue(createTilemap, cast ([{ data: { columns: _Runtime.field(src, 'columns'), materialData: _Runtime.select(!_Runtime.strictEquals(_Runtime.field(src, 'materialData'), null), function():Dynamic return cast _Runtime.slice(_Runtime.field(src, 'materialData'), 0, null), function():Dynamic return cast null), rows: _Runtime.field(src, 'rows'), tiles: _Runtime.slice(_Runtime.field(src, 'tiles'), 0, null), tileset: _Runtime.field(src, 'tileset') } }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createTilemap, cast ([{ data: { columns: _Runtime.field(src, 'columns'), materialData: ((cast !_Runtime.strictEquals(_Runtime.field(src, 'materialData'), null) : Bool) ? (cast _Runtime.slice(_Runtime.field(src, 'materialData'), 0, null) : Dynamic) : (cast null : Dynamic)), rows: _Runtime.field(src, 'rows'), tiles: _Runtime.slice(_Runtime.field(src, 'tiles'), 0, null), tileset: _Runtime.field(src, 'tileset') } }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -49,8 +49,8 @@ class Tilemap {
     rows = _Runtime.field(__destructure0, 'rows');
     _Runtime.setField(out, 'x', 0.0);
     _Runtime.setField(out, 'y', 0.0);
-    _Runtime.setField(out, 'width', _Runtime.select(!_Runtime.strictEquals(tileset, null), function():Dynamic return cast (columns * _Runtime.field(tileset, 'tileWidth')), function():Dynamic return cast 0.0));
-    _Runtime.setField(out, 'height', _Runtime.select(!_Runtime.strictEquals(tileset, null), function():Dynamic return cast (rows * _Runtime.field(tileset, 'tileHeight')), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'width', ((cast !_Runtime.strictEquals(tileset, null) : Bool) ? (cast (columns * _Runtime.field(tileset, 'tileWidth')) : Dynamic) : (cast 0.0 : Dynamic)));
+    _Runtime.setField(out, 'height', ((cast !_Runtime.strictEquals(tileset, null) : Bool) ? (cast (rows * _Runtime.field(tileset, 'tileHeight')) : Dynamic) : (cast 0.0 : Dynamic)));
   }
 
   public static function createTilemap(?obj:PartialNode<flighthq.types.Tilemap>):flighthq.types.Tilemap {
@@ -96,9 +96,9 @@ class Tilemap {
     __destructure1 = _Runtime.field(source, 'data');
     tileset = _Runtime.field(__destructure1, 'tileset');
     columns = _Runtime.field(__destructure1, 'columns');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(tileset, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(tileset, 'tileWidth'), 0.0, '<=')))) { return cast -1.0; }
+    if ((cast ((cast _Runtime.strictEquals(tileset, null) : Bool) || (cast ((cast _Runtime.field(tileset, 'tileWidth') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast -1.0; }
     col = HxMath.floor((x / _Runtime.field(tileset, 'tileWidth')));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(col, 0.0, '<'), function():Dynamic return cast _Runtime.compare(col, columns, '>=')))) { return cast -1.0; }
+    if ((cast ((cast ((cast col : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast col : Float) >= (cast columns : Float)) : Bool)) : Bool)) { return cast -1.0; }
     return cast col;
     return cast null;
   }
@@ -108,7 +108,7 @@ class Tilemap {
     var row:Dynamic = cast _Runtime.UNDEFINED;
     col = _Runtime.callValue(getTilemapColumnAtX, cast ([source, x] : Array<Dynamic>));
     row = _Runtime.callValue(getTilemapRowAtY, cast ([source, y] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(col, 0.0, '<'), function():Dynamic return cast _Runtime.compare(row, 0.0, '<')))) { return cast false; }
+    if ((cast ((cast ((cast col : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast row : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast false; }
     (out.x = cast (col : Dynamic));
     (out.y = cast (row : Dynamic));
     return cast true;
@@ -123,9 +123,9 @@ class Tilemap {
     __destructure2 = _Runtime.field(source, 'data');
     tileset = _Runtime.field(__destructure2, 'tileset');
     rows = _Runtime.field(__destructure2, 'rows');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(tileset, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(tileset, 'tileHeight'), 0.0, '<=')))) { return cast -1.0; }
+    if ((cast ((cast _Runtime.strictEquals(tileset, null) : Bool) || (cast ((cast _Runtime.field(tileset, 'tileHeight') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast -1.0; }
     row = HxMath.floor((y / _Runtime.field(tileset, 'tileHeight')));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(row, 0.0, '<'), function():Dynamic return cast _Runtime.compare(row, rows, '>=')))) { return cast -1.0; }
+    if ((cast ((cast ((cast row : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast row : Float) >= (cast rows : Float)) : Bool)) : Bool)) { return cast -1.0; }
     return cast row;
     return cast null;
   }
@@ -149,7 +149,7 @@ class Tilemap {
     columns = _Runtime.field(__destructure3, 'columns');
     rows = _Runtime.field(__destructure3, 'rows');
     tiles = _Runtime.field(__destructure3, 'tiles');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(column, 0.0, '<'), function():Dynamic return cast _Runtime.compare(column, columns, '>=')), function():Dynamic return cast _Runtime.compare(row, 0.0, '<')), function():Dynamic return cast _Runtime.compare(row, rows, '>=')))) { return cast -1.0; }
+    if ((cast ((cast ((cast ((cast ((cast column : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast column : Float) >= (cast columns : Float)) : Bool)) : Bool) || (cast ((cast row : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast row : Float) >= (cast rows : Float)) : Bool)) : Bool)) { return cast -1.0; }
     return cast _Runtime.getIndex(tiles, ((row * columns) + column));
     return cast null;
   }
@@ -164,7 +164,7 @@ class Tilemap {
     var row:Dynamic = cast _Runtime.UNDEFINED;
     col = _Runtime.callValue(getTilemapColumnAtX, cast ([source, x] : Array<Dynamic>));
     row = _Runtime.callValue(getTilemapRowAtY, cast ([source, y] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(col, 0.0, '<'), function():Dynamic return cast _Runtime.compare(row, 0.0, '<')))) { return cast -1.0; }
+    if ((cast ((cast ((cast col : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast row : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast -1.0; }
     return cast _Runtime.callValue(getTilemapTile, cast ([source, col, row] : Array<Dynamic>));
     return cast null;
   }
@@ -178,7 +178,7 @@ class Tilemap {
     tileset = _Runtime.field(__destructure4, 'tileset');
     columns = _Runtime.field(__destructure4, 'columns');
     rows = _Runtime.field(__destructure4, 'rows');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(tileset, null), function():Dynamic return cast _Runtime.compare(column, 0.0, '<')), function():Dynamic return cast _Runtime.compare(column, columns, '>=')), function():Dynamic return cast _Runtime.compare(row, 0.0, '<')), function():Dynamic return cast _Runtime.compare(row, rows, '>=')))) { return cast false; }
+    if ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(tileset, null) : Bool) || (cast ((cast column : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast column : Float) >= (cast columns : Float)) : Bool)) : Bool) || (cast ((cast row : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast row : Float) >= (cast rows : Float)) : Bool)) : Bool)) { return cast false; }
     _Runtime.setField(out, 'x', (column * _Runtime.field(tileset, 'tileWidth')));
     _Runtime.setField(out, 'y', (row * _Runtime.field(tileset, 'tileHeight')));
     _Runtime.setField(out, 'width', _Runtime.field(tileset, 'tileWidth'));
@@ -198,10 +198,10 @@ class Tilemap {
     copyRows = HxMath.min(rows, _Runtime.field(data, 'rows'));
     {
       var r:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(r, copyRows, '<'))) {
+      while ((cast ((cast r : Float) < (cast copyRows : Float)) : Bool)) {
         {
           var c:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(c, copyColumns, '<'))) {
+          while ((cast ((cast c : Float) < (cast copyColumns : Float)) : Bool)) {
             _Runtime.setIndex(newTiles, ((r * columns) + c), _Runtime.getIndex(_Runtime.field(data, 'tiles'), ((r * _Runtime.field(data, 'columns')) + c)));
             c++;
           }
@@ -224,10 +224,10 @@ class Tilemap {
     columns = _Runtime.field(__destructure5, 'columns');
     rows = _Runtime.field(__destructure5, 'rows');
     tiles = _Runtime.field(__destructure5, 'tiles');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(column, 0.0, '<'), function():Dynamic return cast _Runtime.compare(column, columns, '>=')), function():Dynamic return cast _Runtime.compare(row, 0.0, '<')), function():Dynamic return cast _Runtime.compare(row, rows, '>=')))) { return; }
+    if ((cast ((cast ((cast ((cast ((cast column : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast column : Float) >= (cast columns : Float)) : Bool)) : Bool) || (cast ((cast row : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast row : Float) >= (cast rows : Float)) : Bool)) : Bool)) { return; }
     _Runtime.setIndex(tiles, ((row * columns) + column), id);
     signals = _Runtime.callValue(getTilemapSignals, cast ([tilemap] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callProperty(_Runtime.field(signals, 'onTileChanged'), 'emit', cast ([column, row, id] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callProperty(_Runtime.field(signals, 'onTileChanged'), 'emit', cast ([column, row, id] : Array<Dynamic>)); }
   }
 
   public static function setTilemapTiles(tilemap:flighthq.types.Tilemap, ids:Dynamic, offsetColumn:Float, offsetRow:Float, width:Float, height:Float):Void {
@@ -242,14 +242,14 @@ class Tilemap {
     tiles = _Runtime.field(__destructure6, 'tiles');
     {
       var r:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(r, height, '<'))) {
+      while ((cast ((cast r : Float) < (cast height : Float)) : Bool)) {
         var targetRow:Dynamic = (offsetRow + r);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(targetRow, 0.0, '<'), function():Dynamic return cast _Runtime.compare(targetRow, rows, '>=')))) { r++; continue; }
+        if ((cast ((cast ((cast targetRow : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast targetRow : Float) >= (cast rows : Float)) : Bool)) : Bool)) { r++; continue; }
         {
           var c:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(c, width, '<'))) {
+          while ((cast ((cast c : Float) < (cast width : Float)) : Bool)) {
             var targetCol:Dynamic = (offsetColumn + c);
-            if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(targetCol, 0.0, '<'), function():Dynamic return cast _Runtime.compare(targetCol, columns, '>=')))) { c++; continue; }
+            if ((cast ((cast ((cast targetCol : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast targetCol : Float) >= (cast columns : Float)) : Bool)) : Bool)) { c++; continue; }
             _Runtime.setIndex(tiles, ((targetRow * columns) + targetCol), _Runtime.getIndex(ids, ((r * width) + c)));
             c++;
           }
@@ -258,7 +258,7 @@ class Tilemap {
       }
     }
     signals = _Runtime.callValue(getTilemapSignals, cast ([tilemap] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callProperty(_Runtime.field(signals, 'onTilesChanged'), 'emit', cast ([offsetColumn, offsetRow, width, height] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callProperty(_Runtime.field(signals, 'onTilesChanged'), 'emit', cast ([offsetColumn, offsetRow, width, height] : Array<Dynamic>)); }
   }
 
   public static final defaultMethods__tilemap:Dynamic = { computeLocalBoundsRectangle: computeTilemapLocalBoundsRectangle };

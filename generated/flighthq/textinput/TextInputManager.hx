@@ -24,7 +24,7 @@ class TextInputManager {
   public static function blurTextInput(manager:flighthq.types.TextInputManager):Void {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     target = _Runtime.field(manager, 'focused');
-    if (_Runtime.truthy(!_Runtime.strictEquals(target, null))) { _Runtime.callValue(TextInputManager.setTextInputFocused__textInputManager, cast ([target, false] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(target, null) : Bool)) { _Runtime.callValue(TextInputManager.setTextInputFocused__textInputManager, cast ([target, false] : Array<Dynamic>)); }
     _Runtime.setField(manager, 'focused', null);
   }
 
@@ -50,7 +50,7 @@ class TextInputManager {
   public static function dispatchTextInput(manager:flighthq.types.TextInputManager, text:String):Bool {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     target = _Runtime.callValue(TextInputManager.getTextInputFocusTarget__textInputManager, cast ([manager] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(target, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0)))) { return cast false; }
+    if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) : Bool)) { return cast false; }
     _Runtime.callValue(insertTextInput, cast ([target, text] : Array<Dynamic>));
     return cast true;
     return cast null;
@@ -59,7 +59,7 @@ class TextInputManager {
   public static function dispatchTextInputKeyDown(manager:flighthq.types.TextInputManager, data:InputKeyboardData, ?clipboardText:String, ?onCopy:Dynamic):Bool {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     target = _Runtime.callValue(TextInputManager.getTextInputFocusTarget__textInputManager, cast ([manager] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(target, null))) { return cast false; }
+    if ((cast _Runtime.strictEquals(target, null) : Bool)) { return cast false; }
     return cast _Runtime.callValue(handleTextInputKeyboard, cast ([target, data, { clipboardText: clipboardText, onCopy: onCopy }] : Array<Dynamic>));
     return cast null;
   }
@@ -69,11 +69,11 @@ class TextInputManager {
     var index:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(focusTextInput, cast ([manager, target] : Array<Dynamic>));
     layout = _Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([target] : Array<Dynamic>)), 'textLayout');
-    if (_Runtime.truthy(_Runtime.strictEquals(layout, null))) { return; }
+    if ((cast _Runtime.strictEquals(layout, null) : Bool)) { return; }
     index = _Runtime.callValue(getTextInputCharacterIndexAtPoint, cast ([target, layout, x, y] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(clickCount, 3.0, '>='))) {
+    if ((cast ((cast clickCount : Float) >= (cast 3.0 : Float)) : Bool)) {
       _Runtime.callValue(selectLineAtTextInputIndex, cast ([target, index] : Array<Dynamic>));
-    } else { if (_Runtime.truthy(_Runtime.strictEquals(clickCount, 2.0))) {
+    } else { if ((cast _Runtime.strictEquals(clickCount, 2.0) : Bool)) {
       _Runtime.callValue(selectWordAtTextInputIndex, cast ([target, index] : Array<Dynamic>));
     } else {
       _Runtime.callValue(moveTextInputCaret, cast ([target, index, extend] : Array<Dynamic>));
@@ -85,9 +85,9 @@ class TextInputManager {
     var layout:Dynamic = cast _Runtime.UNDEFINED;
     var index:Dynamic = cast _Runtime.UNDEFINED;
     target = _Runtime.field(manager, 'focused');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(target, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(target, 'enabled'))))) { return; }
+    if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !(cast _Runtime.field(target, 'enabled') : Bool) : Bool)) : Bool)) { return; }
     layout = _Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([target] : Array<Dynamic>)), 'textLayout');
-    if (_Runtime.truthy(_Runtime.strictEquals(layout, null))) { return; }
+    if ((cast _Runtime.strictEquals(layout, null) : Bool)) { return; }
     index = _Runtime.callValue(getTextInputCharacterIndexAtPoint, cast ([target, layout, x, y] : Array<Dynamic>));
     _Runtime.callValue(moveTextInputCaret, cast ([target, index, true] : Array<Dynamic>));
   }
@@ -95,14 +95,14 @@ class TextInputManager {
   public static function dispatchTextInputWheel(manager:flighthq.types.TextInputManager, deltaLines:Float):Void {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     target = _Runtime.field(manager, 'focused');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(target, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(target, 'enabled'))))) { return; }
+    if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !(cast _Runtime.field(target, 'enabled') : Bool) : Bool)) : Bool)) { return; }
     _Runtime.callValue(setRichTextScrollV, cast ([target, (_Runtime.field(_Runtime.field(target, 'data'), 'scrollV') + HxMath.round(deltaLines))] : Array<Dynamic>));
   }
 
   public static function focusTextInput(manager:flighthq.types.TextInputManager, target:RichText):Void {
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(manager, 'focused'), target))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(manager, 'focused'), target) : Bool)) {
       var previous:Dynamic = _Runtime.field(manager, 'focused');
-      if (_Runtime.truthy(!_Runtime.strictEquals(previous, null))) { _Runtime.callValue(TextInputManager.setTextInputFocused__textInputManager, cast ([previous, false] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(previous, null) : Bool)) { _Runtime.callValue(TextInputManager.setTextInputFocused__textInputManager, cast ([previous, false] : Array<Dynamic>)); }
     }
     _Runtime.setField(manager, 'focused', target);
     _Runtime.callValue(TextInputManager.setTextInputFocused__textInputManager, cast ([target, true] : Array<Dynamic>));
@@ -110,9 +110,9 @@ class TextInputManager {
 
   public static function getTextInputFocusTarget__textInputManager(manager:flighthq.types.TextInputManager):Null<RichText> {
     var target:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(manager, 'enabled')))) { return cast null; }
+    if ((cast !(cast _Runtime.field(manager, 'enabled') : Bool) : Bool)) { return cast null; }
     target = _Runtime.field(manager, 'focused');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(target, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(target, 'enabled'))))) { return cast null; }
+    if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !(cast _Runtime.field(target, 'enabled') : Bool) : Bool)) : Bool)) { return cast null; }
     return cast target;
     return cast null;
   }
@@ -120,6 +120,6 @@ class TextInputManager {
   public static function setTextInputFocused__textInputManager(target:RichText, focused:Bool):Void {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     state = _Runtime.callValue(getTextInputState, cast ([target] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(state, null))) { _Runtime.setField(state, 'focused', focused); }
+    if ((cast !_Runtime.strictEquals(state, null) : Bool)) { _Runtime.setField(state, 'focused', focused); }
   }
 }

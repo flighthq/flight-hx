@@ -54,11 +54,11 @@ class BooleanPaths {
     _Runtime.setLength(_Runtime.field(path, 'data'), 0.0);
     _Runtime.setField(path, 'winding', 'nonZero');
     for (ring in _Runtime.iterable(contours)) {
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.field(ring, 'length'), 6.0, '<'))) { continue; }
+      if ((cast ((cast _Runtime.field(ring, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { continue; }
       _Runtime.callValue(appendPathMoveTo, cast ([path, _Runtime.getIndex(ring, 0.0), _Runtime.getIndex(ring, 1.0)] : Array<Dynamic>));
       {
         var i:Dynamic = 2.0;
-        while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(ring, 'length'), '<'))) {
+        while ((cast ((cast i : Float) < (cast _Runtime.field(ring, 'length') : Float)) : Bool)) {
           _Runtime.callValue(appendPathLineTo, cast ([path, _Runtime.getIndex(ring, i), _Runtime.getIndex(ring, (i + 1.0))] : Array<Dynamic>));
           (i = cast ((i + 2.0) : Dynamic));
         }

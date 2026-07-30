@@ -12,7 +12,7 @@ class Revision {
     _Runtime.setField(runtime, 'worldTransformUsingLocalTransformId', _Runtime.field(runtime, 'localTransformId'));
     _Runtime.setField(runtime, 'worldTransformUsingParentTransformId', _Runtime.select(parentRuntime, function():Dynamic return cast _Runtime.field(parentRuntime, 'worldTransformId'), function():Dynamic return cast 0.0));
     (Revision._worldTransformRevisionCounter__revision = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((Revision._worldTransformRevisionCounter__revision + 1.0)), 0) : Dynamic));
-    if (_Runtime.truthy(_Runtime.strictEquals(Revision._worldTransformRevisionCounter__revision, 0.0))) { (Revision._worldTransformRevisionCounter__revision = cast (1.0 : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Revision._worldTransformRevisionCounter__revision, 0.0) : Bool)) { (Revision._worldTransformRevisionCounter__revision = cast (1.0 : Dynamic)); }
     _Runtime.setField(runtime, 'worldTransformId', Revision._worldTransformRevisionCounter__revision);
   }
 

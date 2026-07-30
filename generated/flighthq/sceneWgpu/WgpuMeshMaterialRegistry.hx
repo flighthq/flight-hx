@@ -24,9 +24,9 @@ class WgpuMeshMaterialRegistry {
   public static function resolveWgpuMeshMaterialRenderer(state:WgpuRenderState, material:Null<Material>):Null<WgpuMeshMaterialRenderer> {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = _Runtime.field(_Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry');
-    if (_Runtime.truthy(!_Runtime.strictEquals(material, null))) {
+    if ((cast !_Runtime.strictEquals(material, null) : Bool)) {
       var renderer:Dynamic = ((cast registry : flighthq._internal._Map).get(_Runtime.field(material, 'kind')));
-      if (_Runtime.truthy(!_Runtime.strictEquals(renderer, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast renderer; }
+      if ((cast !_Runtime.strictEquals(renderer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast renderer; }
     }
     return cast _Runtime.coalesce(((cast registry : flighthq._internal._Map).get(DefaultMaterialKind)), function():Dynamic return cast null);
     return cast null;

@@ -24,7 +24,7 @@ class _SceneMaterialTextureRegistryValues {
   public static function getSceneMaterialTextures(registry:SceneMaterialTextureRegistry, material:Material, out:Array<Texture>):Void {
     var lister:Dynamic = cast _Runtime.UNDEFINED;
     lister = ((cast _Runtime.field(registry, 'listers') : flighthq._internal._Map).get(_Runtime.field(material, 'kind')));
-    if (_Runtime.truthy(!_Runtime.strictEquals(lister, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callValue(lister, cast ([material, out] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(lister, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callValue(lister, cast ([material, out] : Array<Dynamic>)); }
   }
 
   public static function registerBuiltInSceneMaterialTextures(registry:SceneMaterialTextureRegistry):Void {
@@ -39,16 +39,16 @@ class _SceneMaterialTextureRegistryValues {
   public static function listStandardPbrMaterialTextures__sceneMaterialTextureRegistry(material:Material, out:Array<Texture>):Void {
     var pbr:Dynamic = cast _Runtime.UNDEFINED;
     pbr = (cast material : StandardPbrMaterial);
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(pbr, 'baseColorMap'), null))) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(pbr, 'baseColorMap')] : Array<Dynamic>)); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(pbr, 'emissiveMap'), null))) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(pbr, 'emissiveMap')] : Array<Dynamic>)); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(pbr, 'metallicRoughnessMap'), null))) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(pbr, 'metallicRoughnessMap')] : Array<Dynamic>)); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(pbr, 'normalMap'), null))) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(pbr, 'normalMap')] : Array<Dynamic>)); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(pbr, 'occlusionMap'), null))) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(pbr, 'occlusionMap')] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(pbr, 'baseColorMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(pbr, 'baseColorMap')] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(pbr, 'emissiveMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(pbr, 'emissiveMap')] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(pbr, 'metallicRoughnessMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(pbr, 'metallicRoughnessMap')] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(pbr, 'normalMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(pbr, 'normalMap')] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(pbr, 'occlusionMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(pbr, 'occlusionMap')] : Array<Dynamic>)); }
   }
 
   public static function listUnlitMaterialTextures__sceneMaterialTextureRegistry(material:Material, out:Array<Texture>):Void {
     var unlit:Dynamic = cast _Runtime.UNDEFINED;
     unlit = (cast material : UnlitMaterial);
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(unlit, 'baseColorMap'), null))) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(unlit, 'baseColorMap')] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(unlit, 'baseColorMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(unlit, 'baseColorMap')] : Array<Dynamic>)); }
   }
 }

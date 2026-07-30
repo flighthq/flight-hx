@@ -11,7 +11,7 @@ class PushFlowState {
     var states:Dynamic = cast _Runtime.UNDEFINED;
     var previousTop:Dynamic = cast _Runtime.UNDEFINED;
     states = _Runtime.field(stack, 'states');
-    previousTop = _Runtime.select(_Runtime.compare(_Runtime.field(states, 'length'), 0.0, '>'), function():Dynamic return cast _Runtime.getIndex(states, (_Runtime.field(states, 'length') - 1.0)), function():Dynamic return cast null);
+    previousTop = ((cast ((cast _Runtime.field(states, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.getIndex(states, (_Runtime.field(states, 'length') - 1.0)) : Dynamic) : (cast null : Dynamic));
     _Runtime.callOptionalProperty(previousTop, 'onPause', cast ([] : Array<Dynamic>));
     _Runtime.callProperty(states, 'push', cast ([state] : Array<Dynamic>));
     _Runtime.callOptionalProperty(state, 'onEnter', cast ([] : Array<Dynamic>));

@@ -25,8 +25,8 @@ class GlBlurEffect {
     var radiusY:Dynamic = cast _Runtime.UNDEFINED;
     sigmaX = _Runtime.coalesce(_Runtime.field(options, 'blurX'), function():Dynamic return cast 4.0);
     sigmaY = _Runtime.coalesce(_Runtime.field(options, 'blurY'), function():Dynamic return cast 4.0);
-    radiusX = _Runtime.select(_Runtime.compare(sigmaX, 0.0, '>'), function():Dynamic return cast HxMath.ceil((sigmaX * 3.0)), function():Dynamic return cast 0.0);
-    radiusY = _Runtime.select(_Runtime.compare(sigmaY, 0.0, '>'), function():Dynamic return cast HxMath.ceil((sigmaY * 3.0)), function():Dynamic return cast 0.0);
+    radiusX = ((cast ((cast sigmaX : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.ceil((sigmaX * 3.0)) : Dynamic) : (cast 0.0 : Dynamic));
+    radiusY = ((cast ((cast sigmaY : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.ceil((sigmaY * 3.0)) : Dynamic) : (cast 0.0 : Dynamic));
     _Runtime.callValue(GlBlurEffect.applyGlGaussianBlurPass__glBlurEffect, cast ([state, source, temp, sigmaX, radiusX, 1.0, 0.0] : Array<Dynamic>));
     _Runtime.callValue(GlBlurEffect.applyGlGaussianBlurPass__glBlurEffect, cast ([state, temp, dest, sigmaY, radiusY, 0.0, 1.0] : Array<Dynamic>));
   }

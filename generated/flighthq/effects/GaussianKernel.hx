@@ -13,7 +13,7 @@ class GaussianKernel {
     var inverseSum:Dynamic = cast _Runtime.UNDEFINED;
     size = _Runtime.callValue(getGaussianKernelSize, cast ([sigma] : Array<Dynamic>));
     _Runtime.setLength(out, size);
-    if (_Runtime.truthy(_Runtime.strictEquals(size, 1.0))) {
+    if ((cast _Runtime.strictEquals(size, 1.0) : Bool)) {
       _Runtime.setIndex(out, 0.0, 1.0);
       return cast out;
     }
@@ -22,7 +22,7 @@ class GaussianKernel {
     sum = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, size, '<'))) {
+      while ((cast ((cast i : Float) < (cast size : Float)) : Bool)) {
         var x:Dynamic = (i - radius);
         var weight:Dynamic = HxMath.exp((-(x * x) / twoSigmaSquared));
         _Runtime.setIndex(out, i, weight);
@@ -33,7 +33,7 @@ class GaussianKernel {
     inverseSum = (1.0 / sum);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, size, '<'))) {
+      while ((cast ((cast i : Float) < (cast size : Float)) : Bool)) {
         _Runtime.setIndex(out, i, (_Runtime.getIndex(out, i) * inverseSum));
         i++;
       }
@@ -44,7 +44,7 @@ class GaussianKernel {
 
   public static function getGaussianKernelSize(sigma:Float):Float {
     var radius:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(sigma, 0.0, '<='))) { return cast 1.0; }
+    if ((cast ((cast sigma : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 1.0; }
     radius = HxMath.ceil((3.0 * sigma));
     return cast ((radius * 2.0) + 1.0);
     return cast null;

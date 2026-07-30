@@ -1,5 +1,7 @@
 # Static Lowering Next Levers
 
+Status: the shared static-facts mechanism and primitive Boolean/numeric emission are enabled. Indexed access remains audit-only pending its separate review gate.
+
 This proposal covers two independent generator optimizations after typed-struct tranche 5:
 
 1. checker-proven indexed access for arrays and typed arrays;

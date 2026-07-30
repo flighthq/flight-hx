@@ -11,10 +11,10 @@ class ColorTemperatureMath {
     var g:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
     temp = (HxMath.max(1000.0, HxMath.min(40000.0, kelvin)) / 100.0);
-    if (_Runtime.truthy(_Runtime.compare(temp, 66.0, '<='))) {
+    if ((cast ((cast temp : Float) <= (cast 66.0 : Float)) : Bool)) {
       (r = cast (1.0 : Dynamic));
       (g = cast ((((99.4708025861 * HxMath.log(temp)) - 161.1195681661) / 255.0) : Dynamic));
-      (b = cast (_Runtime.select(_Runtime.compare(temp, 19.0, '<='), function():Dynamic return cast 0.0, function():Dynamic return cast (((138.5177312231 * HxMath.log((temp - 10.0))) - 305.0447927307) / 255.0)) : Dynamic));
+      (b = cast (((cast ((cast temp : Float) <= (cast 19.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast (((138.5177312231 * HxMath.log((temp - 10.0))) - 305.0447927307) / 255.0) : Dynamic)) : Dynamic));
     } else {
       (r = cast (((329.698727446 * HxMath.pow((temp - 60.0), -0.1332047592)) / 255.0) : Dynamic));
       (g = cast (((288.1221695283 * HxMath.pow((temp - 60.0), -0.0755148492)) / 255.0) : Dynamic));

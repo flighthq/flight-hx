@@ -27,8 +27,8 @@ class GlColorAdjustment {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     _Runtime.setField(runtime, 'glColorAdjustmentFold', GlColorAdjustment.glColorAdjustmentFold__glColorAdjustment);
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchColorTransformMode'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(runtime, 'spriteBatchColorTransformMode', GlColorAdjustment.CT_MODE_NONE__glColorAdjustment); }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchColorTransformData'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchColorTransformMode'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(runtime, 'spriteBatchColorTransformMode', GlColorAdjustment.CT_MODE_NONE__glColorAdjustment); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchColorTransformData'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.setField(runtime, 'spriteBatchColorTransformData', new flighthq._internal._Float32Array((GlColorAdjustment.COLOR_TRANSFORM_FLOATS__glColorAdjustment * 256.0)));
     }
   }
@@ -107,9 +107,9 @@ class GlColorAdjustment {
   }
 
   public static function equalsRecordedColorTransform__glColorAdjustment(a:Null<ColorTransform>, b:Null<ColorTransform>):Bool {
-    if (_Runtime.truthy(_Runtime.strictEquals(a, b))) { return cast true; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(a, null), function():Dynamic return cast _Runtime.strictEquals(b, null)))) { return cast false; }
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(a.redMultiplier, b.redMultiplier), function():Dynamic return cast _Runtime.strictEquals(a.greenMultiplier, b.greenMultiplier)), function():Dynamic return cast _Runtime.strictEquals(a.blueMultiplier, b.blueMultiplier)), function():Dynamic return cast _Runtime.strictEquals(a.alphaMultiplier, b.alphaMultiplier)), function():Dynamic return cast _Runtime.strictEquals(a.redOffset, b.redOffset)), function():Dynamic return cast _Runtime.strictEquals(a.greenOffset, b.greenOffset)), function():Dynamic return cast _Runtime.strictEquals(a.blueOffset, b.blueOffset)), function():Dynamic return cast _Runtime.strictEquals(a.alphaOffset, b.alphaOffset));
+    if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast true; }
+    if ((cast ((cast _Runtime.strictEquals(a, null) : Bool) || (cast _Runtime.strictEquals(b, null) : Bool)) : Bool)) { return cast false; }
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(a.redMultiplier, b.redMultiplier) : Bool) && (cast _Runtime.strictEquals(a.greenMultiplier, b.greenMultiplier) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.blueMultiplier, b.blueMultiplier) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.alphaMultiplier, b.alphaMultiplier) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.redOffset, b.redOffset) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.greenOffset, b.greenOffset) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.blueOffset, b.blueOffset) : Bool)), function():Dynamic return cast _Runtime.strictEquals(a.alphaOffset, b.alphaOffset));
     return cast null;
   }
 
@@ -119,13 +119,13 @@ class GlColorAdjustment {
     var uniformColorTransform:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     ctMode = _Runtime.coalesce(_Runtime.field(runtime, 'spriteBatchColorTransformMode'), function():Dynamic return cast GlColorAdjustment.CT_MODE_NONE__glColorAdjustment);
-    if (_Runtime.truthy(_Runtime.strictEquals(ctMode, GlColorAdjustment.CT_MODE_NONE__glColorAdjustment))) { return cast false; }
+    if ((cast _Runtime.strictEquals(ctMode, GlColorAdjustment.CT_MODE_NONE__glColorAdjustment) : Bool)) { return cast false; }
     uniformColorTransform = _Runtime.coalesce(_Runtime.field(runtime, 'spriteBatchUniformColorTransform'), function():Dynamic return cast null);
     _Runtime.setField(runtime, 'spriteBatchColorTransformMode', GlColorAdjustment.CT_MODE_NONE__glColorAdjustment);
     _Runtime.setField(runtime, 'spriteBatchUniformColorTransform', null);
-    if (_Runtime.truthy(_Runtime.strictEquals(ctMode, GlColorAdjustment.CT_MODE_PER_INSTANCE__glColorAdjustment))) {
+    if ((cast _Runtime.strictEquals(ctMode, GlColorAdjustment.CT_MODE_PER_INSTANCE__glColorAdjustment) : Bool)) {
       var gl:Dynamic = _Runtime.field(state, 'gl');
-      if (_Runtime.truthy(_Runtime.looseEquals(_Runtime.field(runtime, 'spriteBatchColorTransformBuffer'), null))) {
+      if ((cast _Runtime.looseEquals(_Runtime.field(runtime, 'spriteBatchColorTransformBuffer'), null) : Bool)) {
         _Runtime.setField(runtime, 'spriteBatchColorTransformBuffer', flighthq._internal.backend.WebGl2Backend.createBuffer(gl));
       }
       flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(runtime, 'spriteBatchColorTransformBuffer'));
@@ -142,7 +142,7 @@ class GlColorAdjustment {
     _Runtime.setField(runtime, 'spriteBatchColorTransformMode', GlColorAdjustment.CT_MODE_PER_INSTANCE__glColorAdjustment);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, instanceCount, '<'))) {
+      while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
         _Runtime.callValue(GlColorAdjustment.writeGlColorTransformInstance__glColorAdjustment, cast ([runtime, fill, i] : Array<Dynamic>));
         i++;
       }
@@ -152,14 +152,14 @@ class GlColorAdjustment {
   public static function recordGlColorAdjustment__glColorAdjustment(runtime:GlRenderStateRuntime, colorTransform:Null<ColorTransform>, instanceIndex:Float):Void {
     var mode:Dynamic = cast _Runtime.UNDEFINED;
     var tint:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchColorTransformData'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchColorTransformData'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.setField(runtime, 'spriteBatchColorTransformData', new flighthq._internal._Float32Array((GlColorAdjustment.COLOR_TRANSFORM_FLOATS__glColorAdjustment * 256.0)));
     }
     mode = _Runtime.coalesce(_Runtime.field(runtime, 'spriteBatchColorTransformMode'), function():Dynamic return cast GlColorAdjustment.CT_MODE_NONE__glColorAdjustment);
     tint = _Runtime.coalesce(colorTransform, function():Dynamic return cast null);
-    if (_Runtime.truthy(_Runtime.strictEquals(mode, GlColorAdjustment.CT_MODE_NONE__glColorAdjustment))) {
-      if (_Runtime.truthy(_Runtime.strictEquals(tint, null))) { return; }
-      if (_Runtime.truthy(_Runtime.strictEquals(instanceIndex, 0.0))) {
+    if ((cast _Runtime.strictEquals(mode, GlColorAdjustment.CT_MODE_NONE__glColorAdjustment) : Bool)) {
+      if ((cast _Runtime.strictEquals(tint, null) : Bool)) { return; }
+      if ((cast _Runtime.strictEquals(instanceIndex, 0.0) : Bool)) {
         _Runtime.setField(runtime, 'spriteBatchColorTransformMode', GlColorAdjustment.CT_MODE_UNIFORM__glColorAdjustment);
         _Runtime.setField(runtime, 'spriteBatchUniformColorTransform', tint);
         return;
@@ -168,9 +168,9 @@ class GlColorAdjustment {
       _Runtime.callValue(GlColorAdjustment.writeGlColorTransformInstance__glColorAdjustment, cast ([runtime, tint, instanceIndex] : Array<Dynamic>));
       return;
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(mode, GlColorAdjustment.CT_MODE_UNIFORM__glColorAdjustment))) {
+    if ((cast _Runtime.strictEquals(mode, GlColorAdjustment.CT_MODE_UNIFORM__glColorAdjustment) : Bool)) {
       var uniform:Dynamic = _Runtime.coalesce(_Runtime.field(runtime, 'spriteBatchUniformColorTransform'), function():Dynamic return cast null);
-      if (_Runtime.truthy(_Runtime.callValue(GlColorAdjustment.equalsRecordedColorTransform__glColorAdjustment, cast ([tint, uniform] : Array<Dynamic>)))) { return; }
+      if ((cast _Runtime.callValue(GlColorAdjustment.equalsRecordedColorTransform__glColorAdjustment, cast ([tint, uniform] : Array<Dynamic>)) : Bool)) { return; }
       _Runtime.callValue(GlColorAdjustment.promoteGlSpriteBatchColorTransformToPerInstance__glColorAdjustment, cast ([runtime, instanceIndex, uniform] : Array<Dynamic>));
       _Runtime.callValue(GlColorAdjustment.writeGlColorTransformInstance__glColorAdjustment, cast ([runtime, tint, instanceIndex] : Array<Dynamic>));
       return;
@@ -183,14 +183,14 @@ class GlColorAdjustment {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     offset = (instanceIndex * GlColorAdjustment.COLOR_TRANSFORM_FLOATS__glColorAdjustment);
     data = _Runtime.field(runtime, 'spriteBatchColorTransformData');
-    if (_Runtime.truthy(_Runtime.compare((offset + GlColorAdjustment.COLOR_TRANSFORM_FLOATS__glColorAdjustment), _Runtime.field(data, 'length'), '>'))) {
+    if ((cast ((cast (offset + GlColorAdjustment.COLOR_TRANSFORM_FLOATS__glColorAdjustment) : Float) > (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
       var newSize:Dynamic = HxMath.max((offset + GlColorAdjustment.COLOR_TRANSFORM_FLOATS__glColorAdjustment), (_Runtime.field(data, 'length') * 2.0));
       var grown:Dynamic = new flighthq._internal._Float32Array(newSize);
       _Runtime.callProperty(grown, 'set', cast ([data] : Array<Dynamic>));
       _Runtime.setField(runtime, 'spriteBatchColorTransformData', grown);
       (data = cast (grown : Dynamic));
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(colorTransform, null))) {
+    if ((cast !_Runtime.strictEquals(colorTransform, null) : Bool)) {
       _Runtime.setIndex(data, offset, colorTransform.redMultiplier);
       _Runtime.setIndex(data, (offset + 1.0), colorTransform.greenMultiplier);
       _Runtime.setIndex(data, (offset + 2.0), colorTransform.blueMultiplier);
@@ -218,7 +218,7 @@ class GlColorAdjustment {
     var binding:GlShapeMeshBinding = cast _Runtime.UNDEFINED;
     colorTransform = _Runtime.field(renderProxy, 'colorTransform');
     base = _Runtime.callValue(ensureGlShapeMeshProgram, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(colorTransform, null))) {
+    if ((cast _Runtime.strictEquals(colorTransform, null) : Bool)) {
       _Runtime.callValue(drawGlShapeMeshBatch, cast ([state, renderProxy, meshes, base] : Array<Dynamic>));
       return;
     }

@@ -48,9 +48,9 @@ class VideoResourceFrom {
       var cleanup:Dynamic = cast _Runtime.UNDEFINED;
       element = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['video'] : Array<Dynamic>));
       _Runtime.setField(element, 'preload', (cast _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.preload; }), function():Dynamic return cast 'auto') : Dynamic));
-      if (_Runtime.truthy(!_Runtime.strictEquals(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.crossOrigin; }), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(element, 'crossOrigin', options.crossOrigin); }
-      if (_Runtime.truthy(!_Runtime.strictEquals(({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.muted; }), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(element, 'muted', options.muted); }
-      if (_Runtime.truthy(!_Runtime.strictEquals(({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.playsInline; }), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(element, 'playsInline', options.playsInline); }
+      if ((cast !_Runtime.strictEquals(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.crossOrigin; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(element, 'crossOrigin', options.crossOrigin); }
+      if ((cast !_Runtime.strictEquals(({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.muted; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(element, 'muted', options.muted); }
+      if ((cast !_Runtime.strictEquals(({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.playsInline; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(element, 'playsInline', options.playsInline); }
       readyEvent = _Runtime.callValue(VideoResourceFrom.readinessEventName__videoResourceFrom, cast ([({ final __typedStruct7 = options; __typedStruct7 == null ? _Runtime.UNDEFINED : __typedStruct7.readiness; })] : Array<Dynamic>));
       onReady = function() {
         _Runtime.callValue(cleanup, cast ([] : Array<Dynamic>));
@@ -68,11 +68,11 @@ class VideoResourceFrom {
       cleanup = function() {
         _Runtime.callProperty(element, 'removeEventListener', cast ([readyEvent, onReady] : Array<Dynamic>));
         _Runtime.callProperty(element, 'removeEventListener', cast (['error', onError] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(signal, 'removeEventListener', cast (['abort', onAbort] : Array<Dynamic>)); }
+        if ((cast !_Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(signal, 'removeEventListener', cast (['abort', onAbort] : Array<Dynamic>)); }
       };
       _Runtime.callProperty(element, 'addEventListener', cast ([readyEvent, onReady, { once: true }] : Array<Dynamic>));
       _Runtime.callProperty(element, 'addEventListener', cast (['error', onError, { once: true }] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(signal, 'addEventListener', cast (['abort', onAbort, { once: true }] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(signal, 'addEventListener', cast (['abort', onAbort, { once: true }] : Array<Dynamic>)); }
       _Runtime.setField(element, 'src', url);
     });
     return cast null;
@@ -81,7 +81,7 @@ class VideoResourceFrom {
   public static function loadVideoResourceFromUrls(sources:Array<VideoResourceUrl>, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flighthq._internal._Promise<VideoResource> {
     var selected:Dynamic = cast _Runtime.UNDEFINED;
     selected = _Runtime.callValue(selectVideoResourceUrl, cast ([sources] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(selected, null))) { return cast flighthq._internal._Async.resolve(_Runtime.callValue(createVideoResource, cast ([] : Array<Dynamic>))); }
+    if ((cast _Runtime.strictEquals(selected, null) : Bool)) { return cast flighthq._internal._Async.resolve(_Runtime.callValue(createVideoResource, cast ([] : Array<Dynamic>))); }
     return cast _Runtime.callValue(loadVideoResourceFromUrl, cast ([_Runtime.field(selected, 'url'), options, signal] : Array<Dynamic>));
     return cast null;
   }

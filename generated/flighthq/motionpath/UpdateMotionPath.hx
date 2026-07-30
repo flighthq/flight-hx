@@ -9,9 +9,9 @@ class UpdateMotionPath {
   public static function updateMotionPath(mp:MotionPath, deltaTime:Float):Void {
     var length:Dynamic = cast _Runtime.UNDEFINED;
     var move:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(deltaTime, 0.0, '<='))) { return; }
+    if ((cast ((cast deltaTime : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
     length = _Runtime.field(mp, 'length');
-    if (_Runtime.truthy(_Runtime.compare(length, 0.0, '<='))) { return; }
+    if ((cast ((cast length : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
     move = (_Runtime.field(mp, 'speed') * deltaTime);
     _Runtime.callValue(UpdateMotionPath.applyMotionPathLoopMode__updateMotionPath, cast ([mp, move, length] : Array<Dynamic>));
   }
@@ -24,18 +24,18 @@ class UpdateMotionPath {
     loopMode = _Runtime.field(mp, 'loopMode');
     distance = _Runtime.field(mp, 'distance');
     direction = _Runtime.field(mp, 'direction');
-    if (_Runtime.truthy(_Runtime.strictEquals(loopMode, 'loop'))) {
+    if ((cast _Runtime.strictEquals(loopMode, 'loop') : Bool)) {
       var wrapped:Dynamic = _Runtime.fmod((distance + (direction * move)), length);
-      if (_Runtime.truthy(_Runtime.compare(wrapped, 0.0, '<'))) { (wrapped = cast ((wrapped + length) : Dynamic)); }
+      if ((cast ((cast wrapped : Float) < (cast 0.0 : Float)) : Bool)) { (wrapped = cast ((wrapped + length) : Dynamic)); }
       _Runtime.setField(mp, 'distance', wrapped);
       return;
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(loopMode, 'pingpong'))) {
+    if ((cast _Runtime.strictEquals(loopMode, 'pingpong') : Bool)) {
       var period:Dynamic = (2.0 * length);
-      var phase:Dynamic = _Runtime.select(_Runtime.compare(direction, 0.0, '<'), function():Dynamic return cast (period - distance), function():Dynamic return cast distance);
+      var phase:Dynamic = ((cast ((cast direction : Float) < (cast 0.0 : Float)) : Bool) ? (cast (period - distance) : Dynamic) : (cast distance : Dynamic));
       var advanced:Dynamic = _Runtime.fmod((phase + move), period);
-      if (_Runtime.truthy(_Runtime.compare(advanced, 0.0, '<'))) { (advanced = cast ((advanced + period) : Dynamic)); }
-      if (_Runtime.truthy(_Runtime.compare(advanced, length, '<='))) {
+      if ((cast ((cast advanced : Float) < (cast 0.0 : Float)) : Bool)) { (advanced = cast ((advanced + period) : Dynamic)); }
+      if ((cast ((cast advanced : Float) <= (cast length : Float)) : Bool)) {
         _Runtime.setField(mp, 'distance', advanced);
         _Runtime.setField(mp, 'direction', 1.0);
       } else {
@@ -45,7 +45,7 @@ class UpdateMotionPath {
       return;
     }
     clamped = (distance + (direction * move));
-    if (_Runtime.truthy(_Runtime.compare(clamped, 0.0, '<'))) { (clamped = cast (0.0 : Dynamic)); } else { if (_Runtime.truthy(_Runtime.compare(clamped, length, '>'))) { (clamped = cast (length : Dynamic)); } }
+    if ((cast ((cast clamped : Float) < (cast 0.0 : Float)) : Bool)) { (clamped = cast (0.0 : Dynamic)); } else { if ((cast ((cast clamped : Float) > (cast length : Float)) : Bool)) { (clamped = cast (length : Dynamic)); } }
     _Runtime.setField(mp, 'distance', clamped);
   }
 }

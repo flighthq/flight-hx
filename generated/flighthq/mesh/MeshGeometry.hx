@@ -26,7 +26,7 @@ class MeshGeometry {
     _Runtime.callProperty(vertices, 'set', cast ([_Runtime.field(source, 'vertices')] : Array<Dynamic>));
     indices = null;
     if (_Runtime.truthy(_Runtime.field(source, 'indices'))) {
-      if (_Runtime.truthy(_Runtime.isInstanceOf(_Runtime.field(source, 'indices'), _Runtime.globalValue('Uint32Array')))) {
+      if ((cast _Runtime.isInstanceOf(_Runtime.field(source, 'indices'), _Runtime.globalValue('Uint32Array')) : Bool)) {
         (indices = cast (new flighthq._internal._UInt32Array(_Runtime.field(_Runtime.field(source, 'indices'), 'length')) : Dynamic));
       } else {
         (indices = cast (new flighthq._internal._UInt16Array(_Runtime.field(_Runtime.field(source, 'indices'), 'length')) : Dynamic));
@@ -36,7 +36,7 @@ class MeshGeometry {
     subsets = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(source, 'subsets'), 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(source, 'subsets'), 'length') : Float)) : Bool)) {
         _Runtime.callProperty(subsets, 'push', cast ([{ indexCount: _Runtime.field(_Runtime.getIndex(_Runtime.field(source, 'subsets'), i), 'indexCount'), indexOffset: _Runtime.field(_Runtime.getIndex(_Runtime.field(source, 'subsets'), i), 'indexOffset') }] : Array<Dynamic>));
         i++;
       }
@@ -62,7 +62,7 @@ class MeshGeometry {
       (indices = cast (_Runtime.callValue(MeshGeometry.promoteIndices__meshGeometry, cast ([_Runtime.field(options, 'indices'), vertexCount] : Array<Dynamic>)) : Dynamic));
     }
     subsets = _Runtime.field(options, 'subsets');
-    if (_Runtime.truthy(!_Runtime.truthy(subsets))) {
+    if ((cast !_Runtime.truthy(subsets) : Bool)) {
       var count:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.field(indices, 'length'), function():Dynamic return cast vertexCount);
       (subsets = cast (cast ([{ indexCount: count, indexOffset: 0.0 }] : Array<Dynamic>) : Dynamic));
     }
@@ -111,8 +111,8 @@ class MeshGeometry {
     attributes = _Runtime.field(_Runtime.field(geometry, 'layout'), 'attributes');
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(attributes, 'length'), '<'))) {
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.getIndex(attributes, i), 'semantic'), 'joints0'))) { return cast true; }
+      while ((cast ((cast i : Float) < (cast _Runtime.field(attributes, 'length') : Float)) : Bool)) {
+        if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.getIndex(attributes, i), 'semantic'), 'joints0') : Bool)) { return cast true; }
         i++;
       }
     }
@@ -145,14 +145,14 @@ class MeshGeometry {
   public static function getVertexCountFromLayout__meshGeometry(vertices:flighthq._internal._Float32Array, layout:VertexAttributeLayout):Float {
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     floatsPerVertex = (_Runtime.field(layout, 'stride') / 4.0);
-    if (_Runtime.truthy(_Runtime.compare(floatsPerVertex, 0.0, '<='))) { return cast 0.0; }
+    if ((cast ((cast floatsPerVertex : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
     return cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex));
     return cast null;
   }
 
   public static function promoteIndices__meshGeometry(source:Dynamic, vertexCount:Float):Dynamic {
     var out:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(vertexCount, MeshGeometry.UINT16_INDEX_CEILING__meshGeometry, '>'), function():Dynamic return cast _Runtime.isInstanceOf(source, _Runtime.globalValue('Uint32Array'))))) {
+    if ((cast ((cast ((cast vertexCount : Float) > (cast MeshGeometry.UINT16_INDEX_CEILING__meshGeometry : Float)) : Bool) || (cast _Runtime.isInstanceOf(source, _Runtime.globalValue('Uint32Array')) : Bool)) : Bool)) {
       var out:Dynamic = new flighthq._internal._UInt32Array(_Runtime.field(source, 'length'));
       _Runtime.callProperty(out, 'set', cast ([source] : Array<Dynamic>));
       return cast out;

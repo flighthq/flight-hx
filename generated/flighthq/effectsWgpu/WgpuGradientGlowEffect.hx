@@ -71,9 +71,9 @@ class WgpuGradientGlowEffect {
     _Runtime.callProperty(pass, 'end', cast ([] : Array<Dynamic>));
     _Runtime.callValue(clearWgpuEffectTarget, cast ([state, dst] : Array<Dynamic>));
     _Runtime.callValue(applyWgpuEffectBlitPass, cast ([state, s0, dst] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(sourceMode, 'knockout'))) {
+    if ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool)) {
       _Runtime.callValue(applyWgpuEffectErasePass, cast ([state, src, dst] : Array<Dynamic>));
-    } else { if (_Runtime.truthy(_Runtime.strictEquals(sourceMode, 'draw'))) {
+    } else { if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) {
       _Runtime.callValue(applyWgpuEffectBlitPass, cast ([state, src, dst] : Array<Dynamic>));
     } }
     _Runtime.callValue(releaseWgpuRenderTarget, cast ([pool, s0] : Array<Dynamic>));
@@ -90,7 +90,7 @@ class WgpuGradientGlowEffect {
   public static function getLookupPipeline__wgpuGradientGlowEffect(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Dynamic = cast _Runtime.UNDEFINED;
     p = ((cast WgpuGradientGlowEffect.lookupPipelines__wgpuGradientGlowEffect : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var fs:Dynamic = _Runtime.callValue(getWgpuEffectPassState, cast ([state] : Array<Dynamic>));
       var __destructure1:Dynamic = state;
       var device:Dynamic = _Runtime.field(__destructure1, 'device');

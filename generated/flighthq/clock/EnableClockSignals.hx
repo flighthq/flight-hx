@@ -9,7 +9,7 @@ import flighthq.types.Signal;
 
 class EnableClockSignals {
   public static function enableClockSignals(clock:Clock):Signal<Dynamic> {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(clock, 'onTick'), null))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(clock, 'onTick'), null) : Bool)) {
       _Runtime.setField(clock, 'onTick', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)));
     }
     return cast _Runtime.field(clock, 'onTick');

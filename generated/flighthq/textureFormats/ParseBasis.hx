@@ -25,25 +25,25 @@ class ParseBasis {
     var baseWidth:Dynamic = cast _Runtime.UNDEFINED;
     var baseHeight:Dynamic = cast _Runtime.UNDEFINED;
     var maxLevel:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(ParseBasis.hasBasisSignature__parseBasis, cast ([bytes] : Array<Dynamic>))))) { return cast null; }
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(bytes, 'byteLength'), ParseBasis.basisHeaderMinSize__parseBasis, '<'))) { return cast null; }
+    if ((cast !(cast _Runtime.callValue(ParseBasis.hasBasisSignature__parseBasis, cast ([bytes] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
+    if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast ParseBasis.basisHeaderMinSize__parseBasis : Float)) : Bool)) { return cast null; }
     header = _Runtime.callValue(createByteReader, cast ([bytes, ParseBasis.basisTotalSlicesOffset__parseBasis] : Array<Dynamic>));
     totalSlices = _Runtime.callValue(readByteReaderU16, cast ([header] : Array<Dynamic>));
     totalImages = _Runtime.callValue(readByteReaderU16, cast ([header] : Array<Dynamic>));
     format = _Runtime.getIndex(ParseBasis.basisTexFormat__parseBasis, _Runtime.getIndex(bytes, ParseBasis.basisTexFormatOffset__parseBasis));
-    if (_Runtime.truthy(_Runtime.strictEquals(format, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast null; }
-    if (_Runtime.truthy(_Runtime.strictEquals(totalSlices, 0.0))) { return cast null; }
+    if ((cast _Runtime.strictEquals(format, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
+    if ((cast _Runtime.strictEquals(totalSlices, 0.0) : Bool)) { return cast null; }
     sliceDescReader = _Runtime.callValue(createByteReader, cast ([bytes, ParseBasis.basisSliceDescOffsetField__parseBasis] : Array<Dynamic>));
     sliceDescOffset = _Runtime.callValue(readByteReaderU32, cast ([sliceDescReader] : Array<Dynamic>));
     table = _Runtime.callValue(createByteReader, cast ([bytes, sliceDescOffset] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(hasByteReaderBytes, cast ([table, (totalSlices * ParseBasis.basisSliceDescSize__parseBasis)] : Array<Dynamic>))))) { return cast null; }
+    if ((cast !(cast _Runtime.callValue(hasByteReaderBytes, cast ([table, (totalSlices * ParseBasis.basisSliceDescSize__parseBasis)] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
     levels = cast ([] : Array<Dynamic>);
     baseWidth = 0.0;
     baseHeight = 0.0;
     maxLevel = 0.0;
     {
       var slice:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(slice, totalSlices, '<'))) {
+      while ((cast ((cast slice : Float) < (cast totalSlices : Float)) : Bool)) {
         var imageIndex:Dynamic = _Runtime.callValue(readByteReaderU16, cast ([table] : Array<Dynamic>));
         var levelIndex:Dynamic = _Runtime.callValue(readByteReaderU8, cast ([table] : Array<Dynamic>));
         _Runtime.callValue(readByteReaderU8, cast ([table] : Array<Dynamic>));
@@ -54,12 +54,12 @@ class ParseBasis {
         var byteOffset:Dynamic = _Runtime.callValue(readByteReaderU32, cast ([table] : Array<Dynamic>));
         var byteLength:Dynamic = _Runtime.callValue(readByteReaderU32, cast ([table] : Array<Dynamic>));
         _Runtime.callValue(readByteReaderU16, cast ([table] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.compare((byteOffset + byteLength), _Runtime.field(bytes, 'byteLength'), '>'))) { return cast null; }
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(imageIndex, 0.0), function():Dynamic return cast _Runtime.strictEquals(levelIndex, 0.0)))) {
+        if ((cast ((cast (byteOffset + byteLength) : Float) > (cast _Runtime.field(bytes, 'byteLength') : Float)) : Bool)) { return cast null; }
+        if ((cast ((cast _Runtime.strictEquals(imageIndex, 0.0) : Bool) && (cast _Runtime.strictEquals(levelIndex, 0.0) : Bool)) : Bool)) {
           (baseWidth = cast (width : Dynamic));
           (baseHeight = cast (height : Dynamic));
         }
-        if (_Runtime.truthy(_Runtime.compare((levelIndex + 1.0), maxLevel, '>'))) { (maxLevel = cast ((levelIndex + 1.0) : Dynamic)); }
+        if ((cast ((cast (levelIndex + 1.0) : Float) > (cast maxLevel : Float)) : Bool)) { (maxLevel = cast ((levelIndex + 1.0) : Dynamic)); }
         _Runtime.callProperty(levels, 'push', cast ([{ byteLength: byteLength, byteOffset: byteOffset, height: height, width: width }] : Array<Dynamic>));
         (slice = cast ((slice + 1.0) : Dynamic));
       }
@@ -69,7 +69,7 @@ class ParseBasis {
   }
 
   public static function hasBasisSignature__parseBasis(bytes:flighthq._internal._UInt8Array):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.compare(_Runtime.field(bytes, 'byteLength'), 2.0, '>='), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(bytes, 0.0), 115.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(bytes, 1.0), 66.0));
+    return cast ((cast ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) >= (cast 2.0 : Float)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(bytes, 0.0), 115.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(bytes, 1.0), 66.0) : Bool));
     return cast null;
   }
 

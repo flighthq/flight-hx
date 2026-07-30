@@ -19,10 +19,10 @@ class GetBidiRuns {
     start = 0.0;
     {
       var i:Dynamic = 1.0;
-      while (_Runtime.truthy(_Runtime.compare(i, length, '<='))) {
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(i, length), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.getIndex(levels, i), _Runtime.getIndex(levels, start))))) {
+      while ((cast ((cast i : Float) <= (cast length : Float)) : Bool)) {
+        if ((cast ((cast _Runtime.strictEquals(i, length) : Bool) || (cast !_Runtime.strictEquals(_Runtime.getIndex(levels, i), _Runtime.getIndex(levels, start)) : Bool)) : Bool)) {
           var level:Dynamic = _Runtime.getIndex(levels, start);
-          _Runtime.callProperty(runs, 'push', cast ([{ start: start, end: i, level: level, direction: _Runtime.select(_Runtime.strictEquals(_Runtime.fmod(level, 2.0), 0.0), function():Dynamic return cast 'ltr', function():Dynamic return cast 'rtl') }] : Array<Dynamic>));
+          _Runtime.callProperty(runs, 'push', cast ([{ start: start, end: i, level: level, direction: ((cast _Runtime.strictEquals(_Runtime.fmod(level, 2.0), 0.0) : Bool) ? (cast 'ltr' : Dynamic) : (cast 'rtl' : Dynamic)) }] : Array<Dynamic>));
           (start = cast (i : Dynamic));
         }
         i++;

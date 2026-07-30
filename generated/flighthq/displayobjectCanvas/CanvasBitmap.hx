@@ -20,22 +20,22 @@ class CanvasBitmap {
     _Runtime.callValue(drawCanvasDisplayObject, cast ([state, bitmap] : Array<Dynamic>));
     source = (cast _Runtime.field(bitmap, 'source') : Bitmap);
     imageSource = _Runtime.field(_Runtime.field(source, 'data'), 'image');
-    drawable = _Runtime.select(!_Runtime.strictEquals(imageSource, null), function():Dynamic return cast _Runtime.callValue(resolveCanvasImageSource, cast ([state, imageSource] : Array<Dynamic>)), function():Dynamic return cast null);
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(imageSource, null), function():Dynamic return cast !_Runtime.strictEquals(drawable, null)))) {
+    drawable = ((cast !_Runtime.strictEquals(imageSource, null) : Bool) ? (cast _Runtime.callValue(resolveCanvasImageSource, cast ([state, imageSource] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
+    if ((cast ((cast !_Runtime.strictEquals(imageSource, null) : Bool) && (cast !_Runtime.strictEquals(drawable, null) : Bool)) : Bool)) {
       var context:Dynamic = _Runtime.field(state, 'context');
       _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(bitmap, 'blendMode')] : Array<Dynamic>));
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', _Runtime.field(bitmap, 'alpha'));
       var sourceRectangle:Dynamic = _Runtime.coalesce(_Runtime.field(_Runtime.field(source, 'data'), 'sourceRectangle'), function():Dynamic return cast null);
       _Runtime.callValue(setCanvasTransform, cast ([state, context, _Runtime.field(bitmap, 'transform2D')] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(state, 'allowSmoothing')), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(_Runtime.field(source, 'data'), 'smoothing'))))) {
+      if ((cast ((cast !(cast _Runtime.field(state, 'allowSmoothing') : Bool) : Bool) || (cast !(cast _Runtime.field(_Runtime.field(source, 'data'), 'smoothing') : Bool) : Bool)) : Bool)) {
         flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false);
       }
-      if (_Runtime.truthy(_Runtime.strictEquals(sourceRectangle, null))) {
+      if ((cast _Runtime.strictEquals(sourceRectangle, null) : Bool)) {
         flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([drawable, 0.0, 0.0, _Runtime.field(imageSource, 'width'), _Runtime.field(imageSource, 'height')] : Array<Dynamic>));
       } else {
         flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([drawable, _Runtime.field(sourceRectangle, 'x'), _Runtime.field(sourceRectangle, 'y'), _Runtime.field(sourceRectangle, 'width'), _Runtime.field(sourceRectangle, 'height'), 0.0, 0.0, _Runtime.field(sourceRectangle, 'width'), _Runtime.field(sourceRectangle, 'height')] : Array<Dynamic>));
       }
-      if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(state, 'allowSmoothing')), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(_Runtime.field(source, 'data'), 'smoothing'))))) {
+      if ((cast ((cast !(cast _Runtime.field(state, 'allowSmoothing') : Bool) : Bool) || (cast !(cast _Runtime.field(_Runtime.field(source, 'data'), 'smoothing') : Bool) : Bool)) : Bool)) {
         flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', true);
       }
     }

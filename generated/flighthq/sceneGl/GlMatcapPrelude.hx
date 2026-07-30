@@ -21,7 +21,7 @@ class GlMatcapPrelude {
     gl = _Runtime.field(state, 'gl');
     flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locTint'), _Runtime.getIndex(tint, 0.0), _Runtime.getIndex(tint, 1.0), _Runtime.getIndex(tint, 2.0), _Runtime.getIndex(tint, 3.0));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), alphaCutoff);
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(matcap, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(matcap, 'image'), null)), function():Dynamic return cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(matcap, 'image')] : Array<Dynamic>))))) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(matcap, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(matcap, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(matcap, 'image')] : Array<Dynamic>)) : Bool)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);
       _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(matcap, 'image'), _Runtime.field(matcap, 'sampler')] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locMatcap'), 0.0);
@@ -29,7 +29,7 @@ class GlMatcapPrelude {
   }
 
   public static function buildGlMatcapDefineKey(key:GlMatcapDefineKey):String {
-    return cast '' + Std.string(_Runtime.select(_Runtime.field(key, 'alphaMaskEnabled'), function():Dynamic return cast 'm', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasMatcap'), function():Dynamic return cast 't', function():Dynamic return cast '-')) + '';
+    return cast '' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasMatcap') : Bool) ? (cast 't' : Dynamic) : (cast '-' : Dynamic))) + '';
     return cast null;
   }
 
@@ -58,8 +58,8 @@ class GlMatcapPrelude {
   public static function buildDefineSource__glMatcapPrelude(key:GlMatcapDefineKey):String {
     var defines:Dynamic = cast _Runtime.UNDEFINED;
     defines = '#version 300 es\n';
-    if (_Runtime.truthy(_Runtime.field(key, 'alphaMaskEnabled'))) { (defines = cast ((defines + '#define ALPHA_MASK\n') : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.field(key, 'hasMatcap'))) { (defines = cast ((defines + '#define HAS_MATCAP\n') : Dynamic)); }
+    if ((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool)) { (defines = cast ((defines + '#define ALPHA_MASK\n') : Dynamic)); }
+    if ((cast _Runtime.field(key, 'hasMatcap') : Bool)) { (defines = cast ((defines + '#define HAS_MATCAP\n') : Dynamic)); }
     return cast defines;
     return cast null;
   }

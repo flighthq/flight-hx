@@ -34,12 +34,12 @@ class VertexColorWgpuMeshMaterialRenderer {
     var group:Dynamic = cast _Runtime.UNDEFINED;
     stateRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     pass = _Runtime.field(stateRuntime, 'renderPass');
-    if (_Runtime.truthy(_Runtime.strictEquals(pass, null))) { return; }
+    if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     vertexColor = (cast material : Null<VertexColorMaterial>);
     format = _Runtime.coalesce(_Runtime.field(stateRuntime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
     pipeline = _Runtime.callValue(ensureWgpuUnlitPipeline, cast ([state, _Runtime.callValue(VertexColorWgpuMeshMaterialRenderer.defineKeyForMaterial__vertexColorWgpuMeshMaterialRenderer, cast ([vertexColor] : Array<Dynamic>)), format] : Array<Dynamic>));
     _Runtime.callValue(writeWgpuFrameUniform, cast ([state, camera, _lights] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(vertexColor, null))) {
+    if ((cast _Runtime.strictEquals(vertexColor, null) : Bool)) {
       (group = cast (_Runtime.callValue(bindWgpuUnlitSurface, cast ([state, pipeline, VertexColorWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__vertexColorWgpuMeshMaterialRenderer, VertexColorWgpuMeshMaterialRenderer.WHITE__vertexColorWgpuMeshMaterialRenderer, 1.0, 0.5, null] : Array<Dynamic>)) : Dynamic));
     } else {
       _Runtime.callValue(unpackColorToLinear, cast ([VertexColorWgpuMeshMaterialRenderer._scratch__vertexColorWgpuMeshMaterialRenderer, _Runtime.field(vertexColor, 'tint')] : Array<Dynamic>));
@@ -56,7 +56,7 @@ class VertexColorWgpuMeshMaterialRenderer {
   }
 
   public static function defineKeyForMaterial__vertexColorWgpuMeshMaterialRenderer(material:Null<VertexColorMaterial>):WgpuUnlitDefineKey {
-    return cast { alphaMaskEnabled: _Runtime.andValue(!_Runtime.strictEquals(material, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask')), doubleSided: _Runtime.andValue(!_Runtime.strictEquals(material, null), function():Dynamic return cast _Runtime.field(material, 'doubleSided')), hasColorMap: false };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), doubleSided: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.field(material, 'doubleSided') : Bool)), hasColorMap: false };
     return cast null;
   }
 

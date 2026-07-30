@@ -10,11 +10,11 @@ class Cache {
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var built:Dynamic = cast _Runtime.UNDEFINED;
     existing = ((cast Cache.formatterCache__cache : flighthq._internal._Map).get(key));
-    if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast (cast existing : Dynamic); }
+    if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast (cast existing : Dynamic); }
     built = _Runtime.callValue(build, cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare((cast Cache.formatterCache__cache : flighthq._internal._Map).size, Cache.cacheCapacity__cache, '>='))) {
+    if ((cast ((cast (cast Cache.formatterCache__cache : flighthq._internal._Map).size : Float) >= (cast Cache.cacheCapacity__cache : Float)) : Bool)) {
       var oldest:Dynamic = _Runtime.field(_Runtime.callProperty(((cast Cache.formatterCache__cache : flighthq._internal._Map).keys()), 'next', cast ([] : Array<Dynamic>)), 'value');
-      if (_Runtime.truthy(!_Runtime.strictEquals(oldest, _Runtime.field(_Runtime, 'UNDEFINED')))) { ((cast Cache.formatterCache__cache : flighthq._internal._Map).delete_(oldest)); }
+      if ((cast !_Runtime.strictEquals(oldest, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast Cache.formatterCache__cache : flighthq._internal._Map).delete_(oldest)); }
     }
     ((cast Cache.formatterCache__cache : flighthq._internal._Map).set(key, built));
     return cast built;
@@ -23,8 +23,8 @@ class Cache {
 
   public static function getCacheKey(kind:String, locale:LocaleInput, options:Null<Dynamic>):String {
     var localeKey:Dynamic = cast _Runtime.UNDEFINED;
-    localeKey = _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(locale), 'string'), function():Dynamic return cast locale, function():Dynamic return cast _Runtime.join(locale, ','));
-    return cast '' + Std.string(kind) + '|' + Std.string(localeKey) + '|' + Std.string(_Runtime.select(_Runtime.strictEquals(options, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast '', function():Dynamic return cast _Runtime.jsonStringify(options))) + '';
+    localeKey = ((cast _Runtime.strictEquals(_Runtime.typeofValue(locale), 'string') : Bool) ? (cast locale : Dynamic) : (cast _Runtime.join(locale, ',') : Dynamic));
+    return cast '' + Std.string(kind) + '|' + Std.string(localeKey) + '|' + Std.string(((cast _Runtime.strictEquals(options, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '' : Dynamic) : (cast _Runtime.jsonStringify(options) : Dynamic))) + '';
     return cast null;
   }
 

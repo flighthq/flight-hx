@@ -13,12 +13,12 @@ class SceneMaterial {
     var rootMatch:Dynamic = cast _Runtime.UNDEFINED;
     var found:Null<Material> = cast _Runtime.UNDEFINED;
     rootMatch = _Runtime.callValue(SceneMaterial.getNamedNodeMaterial__sceneMaterial, cast ([root, name] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(rootMatch, null))) { return cast rootMatch; }
+    if ((cast !_Runtime.strictEquals(rootMatch, null) : Bool)) { return cast rootMatch; }
     found = null;
     _Runtime.callValue(findNode, cast ([root, function(node:Dynamic) {
       var match:Dynamic = cast _Runtime.UNDEFINED;
       match = _Runtime.callValue(SceneMaterial.getNamedNodeMaterial__sceneMaterial, cast ([(cast node : SceneNode), name] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(match, null))) { return cast false; }
+      if ((cast _Runtime.strictEquals(match, null) : Bool)) { return cast false; }
       (found = cast (match : Dynamic));
       return cast true;
     }] : Array<Dynamic>));
@@ -29,12 +29,12 @@ class SceneMaterial {
   public static function getNamedNodeMaterial__sceneMaterial(node:SceneNode, name:String):Null<Material> {
     var materials:Dynamic = cast _Runtime.UNDEFINED;
     materials = _Runtime.field((cast node : Dynamic), 'materials');
-    if (_Runtime.truthy(_Runtime.looseEquals(materials, null))) { return cast null; }
+    if ((cast _Runtime.looseEquals(materials, null) : Bool)) { return cast null; }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(materials, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
         var material:Dynamic = _Runtime.getIndex(materials, i);
-        if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(material, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(material, 'name'), name)))) { return cast material; }
+        if ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'name'), name) : Bool)) : Bool)) { return cast material; }
         i++;
       }
     }

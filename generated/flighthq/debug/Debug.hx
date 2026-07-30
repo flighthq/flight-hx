@@ -31,9 +31,9 @@ class Debug {
     var channels:Array<String> = cast _Runtime.UNDEFINED;
     channels = cast ([] : Array<Dynamic>);
     for (hooks in _Runtime.iterable(subsystems)) {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(hooks, 'channels'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(channels, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(hooks, 'channels'))])); }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(hooks, 'channels'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(channels, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(hooks, 'channels'))])); }
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(extra, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(channels, 'push', _Runtime.concatArrays([_Runtime.toArray(extra)])); }
+    if ((cast !_Runtime.strictEquals(extra, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(channels, 'push', _Runtime.concatArrays([_Runtime.toArray(extra)])); }
     return cast channels;
     return cast null;
   }
@@ -45,7 +45,7 @@ class Debug {
     formatter = _Runtime.callValue(createTextLogFormatter, cast ([{ levelPrefix: true }] : Array<Dynamic>));
     return cast function(entry:LogEntry) {
       var method:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('console'), 'undefined'))) { return; }
+      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('console'), 'undefined') : Bool)) { return; }
       method = _Runtime.coalesce(_Runtime.getIndex(Debug._consoleMethods__debug, _Runtime.field(entry, 'level')), function():Dynamic return cast 'log');
       _Runtime.console(Std.string(method), [_Runtime.callValue(formatter, cast ([entry] : Array<Dynamic>))]);
     };
@@ -64,18 +64,18 @@ class Debug {
   public static var _installedSink__debug:Null<LogSink> = _Runtime.explicitNull();
 
   public static function _removeDebugSink__debug():Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(Debug._installedSink__debug, null))) { return; }
+    if ((cast _Runtime.strictEquals(Debug._installedSink__debug, null) : Bool)) { return; }
     _Runtime.callValue(removeLogSink, cast ([Debug._installedSink__debug] : Array<Dynamic>));
     (Debug._installedSink__debug = cast (null : Dynamic));
   }
 
   public static function _resolveDebugSubsystems__debug(names:Null<Array<DebugSubsystemName>>):Array<DebugSubsystemHooks> {
     var resolved:Array<DebugSubsystemHooks> = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(names, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast _Runtime.concatArrays([_Runtime.toArray(((cast Debug._subsystems__debug : flighthq._internal._Map).values()))]); }
+    if ((cast _Runtime.strictEquals(names, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast _Runtime.concatArrays([_Runtime.toArray(((cast Debug._subsystems__debug : flighthq._internal._Map).values()))]); }
     resolved = cast ([] : Array<Dynamic>);
     for (name in _Runtime.iterable(names)) {
       var hooks:Dynamic = ((cast Debug._subsystems__debug : flighthq._internal._Map).get(name));
-      if (_Runtime.truthy(!_Runtime.strictEquals(hooks, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(resolved, 'push', cast ([hooks] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(hooks, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(resolved, 'push', cast ([hooks] : Array<Dynamic>)); }
     }
     return cast resolved;
     return cast null;
@@ -96,7 +96,7 @@ class Debug {
   }
 
   public static function disableDebug():Void {
-    if (_Runtime.truthy(!_Runtime.truthy(Debug._enabled__debug))) { return; }
+    if ((cast !(cast Debug._enabled__debug : Bool) : Bool)) { return; }
     for (hooks in _Runtime.iterable(Debug._enabledSubsystems__debug)) {
       _Runtime.callOptionalProperty(hooks, 'disableGuards', cast ([] : Array<Dynamic>));
     }
@@ -111,7 +111,7 @@ class Debug {
     var level:Dynamic = cast _Runtime.UNDEFINED;
     var subsystems:Dynamic = cast _Runtime.UNDEFINED;
     var channels:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(Debug._enabled__debug)) { return; }
+    if ((cast Debug._enabled__debug : Bool)) { return; }
     level = _Runtime.coalesce(_Runtime.field(options, 'level'), function():Dynamic return cast LogLevel.Debug);
     subsystems = _Runtime.callValue(Debug._resolveDebugSubsystems__debug, cast ([_Runtime.field(options, 'subsystems')] : Array<Dynamic>));
     channels = _Runtime.callValue(Debug._collectDebugChannels__debug, cast ([subsystems, _Runtime.field(options, 'channels')] : Array<Dynamic>));

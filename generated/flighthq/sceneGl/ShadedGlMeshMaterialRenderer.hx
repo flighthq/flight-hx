@@ -45,19 +45,19 @@ class ShadedGlMeshMaterialRenderer {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     shaded = (cast material : Null<ShadedMaterial>);
-    modifiers = _Runtime.select(!_Runtime.strictEquals(shaded, null), function():Dynamic return cast _Runtime.field(shaded, 'modifiers'), function():Dynamic return cast ShadedGlMeshMaterialRenderer.EMPTY_MODIFIERS__shadedGlMeshMaterialRenderer);
+    modifiers = ((cast !_Runtime.strictEquals(shaded, null) : Bool) ? (cast _Runtime.field(shaded, 'modifiers') : Dynamic) : (cast ShadedGlMeshMaterialRenderer.EMPTY_MODIFIERS__shadedGlMeshMaterialRenderer : Dynamic));
     program = _Runtime.callValue(ensureGlShadedProgram, cast ([state, _Runtime.callValue(ShadedGlMeshMaterialRenderer.defineKeyForMaterial__shadedGlMeshMaterialRenderer, cast ([shaded] : Array<Dynamic>)), modifiers] : Array<Dynamic>));
-    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, _Runtime.andValue(!_Runtime.strictEquals(shaded, null), function():Dynamic return cast _Runtime.field(shaded, 'doubleSided'))] : Array<Dynamic>));
+    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, ((cast !_Runtime.strictEquals(shaded, null) : Bool) && (cast _Runtime.field(shaded, 'doubleSided') : Bool))] : Array<Dynamic>));
     _Runtime.callValue(setGlMeshViewProjection, cast ([gl, _Runtime.field(program, 'locViewProjection'), camera] : Array<Dynamic>));
     _Runtime.callValue(setGlMeshCameraPosition, cast ([gl, _Runtime.field(program, 'locCameraPosition'), camera] : Array<Dynamic>));
     _Runtime.callValue(bindGlMeshLightBlock, cast ([state, program, lights] : Array<Dynamic>));
     _Runtime.callValue(ShadedGlMeshMaterialRenderer.bindGlShadedMaterialUniforms__shadedGlMeshMaterialRenderer, cast ([state, program, shaded] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locTime'), _Runtime.callValue(getGlSceneTime, cast ([state] : Array<Dynamic>)));
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(modifiers, 'length'), 0.0, '>'))) { _Runtime.callValue(ShadedGlMeshMaterialRenderer.bindGlShadedModifiers__shadedGlMeshMaterialRenderer, cast ([state, program, modifiers] : Array<Dynamic>)); }
+    if ((cast ((cast _Runtime.field(modifiers, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callValue(ShadedGlMeshMaterialRenderer.bindGlShadedModifiers__shadedGlMeshMaterialRenderer, cast ([state, program, modifiers] : Array<Dynamic>)); }
   }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
-    if (_Runtime.truthy(_Runtime.strictEquals(program, null))) { return; }
+    if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
     _Runtime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
   } };
 
@@ -71,16 +71,16 @@ class ShadedGlMeshMaterialRenderer {
     var nextTextureUnit:Dynamic = cast _Runtime.UNDEFINED;
     var context:GlModifierBindContext = cast _Runtime.UNDEFINED;
     registry = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'modifierSnippetRegistry');
-    if (_Runtime.truthy(_Runtime.strictEquals(registry, null))) { return; }
+    if ((cast _Runtime.strictEquals(registry, null) : Bool)) { return; }
     ordered = _Runtime.callValue(orderModifierStack, cast ([modifiers] : Array<Dynamic>));
     nextTextureUnit = ShadedGlMeshMaterialRenderer.MODIFIER_TEXTURE_UNIT_BASE__shadedGlMeshMaterialRenderer;
-    context = { acquireModifierTextureUnit: function() return _Runtime.select(_Runtime.compare(nextTextureUnit, ShadedGlMeshMaterialRenderer.MODIFIER_TEXTURE_UNIT_LIMIT__shadedGlMeshMaterialRenderer, '<'), function():Dynamic return cast nextTextureUnit++, function():Dynamic return cast -1.0), index: 0.0, program: _Runtime.field(program, 'program'), state: state };
+    context = { acquireModifierTextureUnit: function() return ((cast ((cast nextTextureUnit : Float) < (cast ShadedGlMeshMaterialRenderer.MODIFIER_TEXTURE_UNIT_LIMIT__shadedGlMeshMaterialRenderer : Float)) : Bool) ? (cast nextTextureUnit++ : Dynamic) : (cast -1.0 : Dynamic)), index: 0.0, program: _Runtime.field(program, 'program'), state: state };
     {
       var index:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(index, _Runtime.field(ordered, 'length'), '<'))) {
+      while ((cast ((cast index : Float) < (cast _Runtime.field(ordered, 'length') : Float)) : Bool)) {
         var modifier:Dynamic = _Runtime.getIndex(ordered, index);
         var snippet:Dynamic = (cast _Runtime.callValue(resolveModifier, cast ([registry, _Runtime.field(modifier, 'kind')] : Array<Dynamic>)) : Null<GlModifierSnippet>);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(snippet, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(snippet, 'bind'), _Runtime.field(_Runtime, 'UNDEFINED'))))) { index++; continue; }
+        if ((cast ((cast _Runtime.strictEquals(snippet, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(snippet, 'bind'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { index++; continue; }
         _Runtime.setField(context, 'index', index);
         _Runtime.callProperty(snippet, 'bind', cast ([modifier, context] : Array<Dynamic>));
         index++;
@@ -94,7 +94,7 @@ class ShadedGlMeshMaterialRenderer {
     var specularMap:Dynamic = cast _Runtime.UNDEFINED;
     var normalMap:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
-    if (_Runtime.truthy(_Runtime.strictEquals(material, null))) {
+    if ((cast _Runtime.strictEquals(material, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locDiffuse'), 1.0, 1.0, 1.0, 1.0);
       flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locSpecular'), 1.0, 1.0, 1.0, 1.0);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locShininess'), 32.0);
@@ -110,19 +110,19 @@ class ShadedGlMeshMaterialRenderer {
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locNormalScale'), _Runtime.field(material, 'normalScale'));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), _Runtime.field(material, 'alphaCutoff'));
     diffuseMap = _Runtime.field(material, 'diffuseMap');
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(diffuseMap, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(diffuseMap, 'image'), null)), function():Dynamic return cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(diffuseMap, 'image')] : Array<Dynamic>))))) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(diffuseMap, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(diffuseMap, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(diffuseMap, 'image')] : Array<Dynamic>)) : Bool)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);
       _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(diffuseMap, 'image'), _Runtime.field(diffuseMap, 'sampler')] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locDiffuseMap'), 0.0);
     }
     specularMap = _Runtime.field(material, 'specularMap');
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(specularMap, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(specularMap, 'image'), null)), function():Dynamic return cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(specularMap, 'image')] : Array<Dynamic>))))) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(specularMap, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(specularMap, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(specularMap, 'image')] : Array<Dynamic>)) : Bool)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE1);
       _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(specularMap, 'image'), _Runtime.field(specularMap, 'sampler')] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locSpecularMap'), 1.0);
     }
     normalMap = _Runtime.field(material, 'normalMap');
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(normalMap, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(normalMap, 'image'), null)), function():Dynamic return cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(normalMap, 'image')] : Array<Dynamic>))))) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(normalMap, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(normalMap, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(normalMap, 'image')] : Array<Dynamic>)) : Bool)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE2);
       _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(normalMap, 'image'), _Runtime.field(normalMap, 'sampler')] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locNormalMap'), 2.0);
@@ -131,7 +131,7 @@ class ShadedGlMeshMaterialRenderer {
   }
 
   public static function defineKeyForMaterial__shadedGlMeshMaterialRenderer(material:Null<ShadedMaterial>):GlShadedDefineKey {
-    return cast { alphaMaskEnabled: _Runtime.andValue(!_Runtime.strictEquals(material, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask')), hasDiffuseMap: _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(material, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(material, 'diffuseMap'), null)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(material, 'diffuseMap'), 'image'), null)), hasNormalMap: _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(material, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(material, 'normalMap'), null)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(material, 'normalMap'), 'image'), null)), hasSpecularMap: _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(material, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(material, 'specularMap'), null)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(material, 'specularMap'), 'image'), null)), hasUvTransform: _Runtime.callValue(hasGlUvTransform, cast ([_Runtime.select(!_Runtime.strictEquals(material, null), function():Dynamic return cast _Runtime.field(material, 'diffuseMap'), function():Dynamic return cast null)] : Array<Dynamic>)) };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasDiffuseMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'diffuseMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(material, 'diffuseMap'), 'image'), null) : Bool)), hasNormalMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'normalMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(material, 'normalMap'), 'image'), null) : Bool)), hasSpecularMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'specularMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(material, 'specularMap'), 'image'), null) : Bool)), hasUvTransform: _Runtime.callValue(hasGlUvTransform, cast ([((cast !_Runtime.strictEquals(material, null) : Bool) ? (cast _Runtime.field(material, 'diffuseMap') : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)) };
     return cast null;
   }
 

@@ -32,17 +32,17 @@ class PixiParse {
     var warnings:Array<String> = cast _Runtime.UNDEFINED;
     var accel:Dynamic = cast _Runtime.UNDEFINED;
     warnings = cast ([] : Array<Dynamic>);
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(raw, 'spawnBurst'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(raw, 'spawnBurst'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callProperty(warnings, 'push', cast (['Pixi spawnBurst spawn type has no equivalent and was mapped to point emitter'] : Array<Dynamic>));
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(raw, 'spawnPolygon'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(raw, 'spawnPolygon'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callProperty(warnings, 'push', cast (['Pixi spawnPolygon spawn type has no equivalent and was mapped to point emitter'] : Array<Dynamic>));
     }
     accel = (cast _Runtime.field(raw, 'acceleration') : Null<{ @:optional var x:Dynamic; @:optional var y:Dynamic; }>);
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(accel, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.orValue(!_Runtime.strictEquals(_Runtime.callValue(PixiParse.rn__pixiParse, cast ([_Runtime.field(accel, 'x'), 0.0] : Array<Dynamic>)), 0.0), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.callValue(PixiParse.rn__pixiParse, cast ([_Runtime.field(accel, 'y'), 0.0] : Array<Dynamic>)), 0.0))))) {
+    if ((cast ((cast !_Runtime.strictEquals(accel, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.orValue(!_Runtime.strictEquals(_Runtime.callValue(PixiParse.rn__pixiParse, cast ([_Runtime.field(accel, 'x'), 0.0] : Array<Dynamic>)), 0.0), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.callValue(PixiParse.rn__pixiParse, cast ([_Runtime.field(accel, 'y'), 0.0] : Array<Dynamic>)), 0.0)) : Bool)) : Bool)) {
       _Runtime.callProperty(warnings, 'push', cast (['Pixi acceleration is not supported and was ignored'] : Array<Dynamic>));
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(raw, 'behaviors'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(raw, 'behaviors'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callProperty(warnings, 'push', cast (['Pixi v5+ behaviors array is partially supported; only core properties were imported'] : Array<Dynamic>));
     }
     return cast warnings;
@@ -56,8 +56,8 @@ class PixiParse {
     } catch (e:Dynamic) {
       throw _Runtime.error('Invalid Pixi particle JSON: ' + Std.string(_Runtime.field((cast e : haxe.Exception), 'message')) + '');
     }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(raw, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(raw), 'object')), function():Dynamic return cast _Runtime.isArray(raw)))) {
-      throw _Runtime.error('Invalid Pixi particle document: expected a JSON object, got ' + Std.string(_Runtime.select(_Runtime.strictEquals(raw, null), function():Dynamic return cast 'null', function():Dynamic return cast _Runtime.select(_Runtime.isArray(raw), function():Dynamic return cast 'array', function():Dynamic return cast _Runtime.typeofValue(raw)))) + '');
+    if ((cast ((cast ((cast _Runtime.strictEquals(raw, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool)) : Bool) || (cast _Runtime.isArray(raw) : Bool)) : Bool)) {
+      throw _Runtime.error('Invalid Pixi particle document: expected a JSON object, got ' + Std.string(((cast _Runtime.strictEquals(raw, null) : Bool) ? (cast 'null' : Dynamic) : (cast ((cast _Runtime.isArray(raw) : Bool) ? (cast 'array' : Dynamic) : (cast _Runtime.typeofValue(raw) : Dynamic)) : Dynamic))) + '');
     }
     return cast (cast raw : PixiRaw__pixiParse);
     return cast null;
@@ -109,7 +109,7 @@ class PixiParse {
     var rotationSpeed:Dynamic = cast _Runtime.UNDEFINED;
     maxParticles = (_Runtime.toInt32(_Runtime.callValue(PixiParse.rn__pixiParse, cast ([_Runtime.field(raw, 'maxParticles'), 1000.0] : Array<Dynamic>))) | 0);
     frequency = _Runtime.callValue(PixiParse.rn__pixiParse, cast ([_Runtime.field(raw, 'frequency'), 0.1] : Array<Dynamic>));
-    spawnRate = _Runtime.select(_Runtime.compare(frequency, 0.0, '>'), function():Dynamic return cast (1.0 / frequency), function():Dynamic return cast 10.0);
+    spawnRate = ((cast ((cast frequency : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / frequency) : Dynamic) : (cast 10.0 : Dynamic));
     life = (cast _Runtime.field(raw, 'lifetime') : Null<{ @:optional var min:Dynamic; @:optional var max:Dynamic; }>);
     lifetimeMin = _Runtime.callValue(PixiParse.rn__pixiParse, cast ([_Runtime.optionalField(life, 'min'), 0.5] : Array<Dynamic>));
     lifetimeMax = _Runtime.callValue(PixiParse.rn__pixiParse, cast ([_Runtime.optionalField(life, 'max'), 1.0] : Array<Dynamic>));
@@ -123,7 +123,7 @@ class PixiParse {
     scaleEnd = _Runtime.getIndex(__destructure1, 1.0);
     scaleMin = HxMath.min(scaleStart, scaleEnd);
     scaleMax = HxMath.max(scaleStart, scaleEnd);
-    scaleEndRatio = _Runtime.select(_Runtime.compare(scaleMax, 0.0, '>'), function():Dynamic return cast (HxMath.min(scaleStart, scaleEnd) / scaleMax), function():Dynamic return cast 1.0);
+    scaleEndRatio = ((cast ((cast scaleMax : Float) > (cast 0.0 : Float)) : Bool) ? (cast (HxMath.min(scaleStart, scaleEnd) / scaleMax) : Dynamic) : (cast 1.0 : Dynamic));
     __destructure2 = _Runtime.callValue(PixiParse.readStartEnd__pixiParse, cast ([_Runtime.field(raw, 'alpha'), 1.0, 0.0] : Array<Dynamic>));
     alphaStart = _Runtime.getIndex(__destructure2, 0.0);
     alphaEnd = _Runtime.getIndex(__destructure2, 1.0);
@@ -157,7 +157,7 @@ class PixiParse {
     } }
     blendModeStr = _Runtime.callProperty(_Runtime.callValue(PixiParse.rs__pixiParse, cast ([_Runtime.field(raw, 'blendMode'), 'normal'] : Array<Dynamic>)), 'toLowerCase', cast ([] : Array<Dynamic>));
     blendMode = null;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(blendModeStr, 'add'), function():Dynamic return cast _Runtime.strictEquals(blendModeStr, 'additive')))) { (blendMode = cast ('add' : Dynamic)); } else { if (_Runtime.truthy(_Runtime.strictEquals(blendModeStr, 'multiply'))) { (blendMode = cast ('multiply' : Dynamic)); } else { if (_Runtime.truthy(_Runtime.strictEquals(blendModeStr, 'screen'))) { (blendMode = cast ('screen' : Dynamic)); } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(blendModeStr, 'normal'), function():Dynamic return cast _Runtime.strictEquals(blendModeStr, 'src_alpha')))) { (blendMode = cast ('normal' : Dynamic)); } } } }
+    if ((cast ((cast _Runtime.strictEquals(blendModeStr, 'add') : Bool) || (cast _Runtime.strictEquals(blendModeStr, 'additive') : Bool)) : Bool)) { (blendMode = cast ('add' : Dynamic)); } else { if ((cast _Runtime.strictEquals(blendModeStr, 'multiply') : Bool)) { (blendMode = cast ('multiply' : Dynamic)); } else { if ((cast _Runtime.strictEquals(blendModeStr, 'screen') : Bool)) { (blendMode = cast ('screen' : Dynamic)); } else { if ((cast ((cast _Runtime.strictEquals(blendModeStr, 'normal') : Bool) || (cast _Runtime.strictEquals(blendModeStr, 'src_alpha') : Bool)) : Bool)) { (blendMode = cast ('normal' : Dynamic)); } } } }
     rotationSpeed = (_Runtime.callValue(PixiParse.rn__pixiParse, cast ([_Runtime.field(raw, 'rotationSpeed'), 0.0] : Array<Dynamic>)) * PixiParse.DEG2RAD__pixiParse);
     return cast _Runtime.callValue(createParticleEmitterConfig, cast ([{ maxParticles: maxParticles, spawnRate: spawnRate, lifetimeMin: lifetimeMin, lifetimeMax: lifetimeMax, speedMin: speedMin, speedMax: speedMax, directionX: HxMath.cos(angleMid), directionY: HxMath.sin(angleMid), spread: spread, emitterShape: emitterShape, emitterRadius: emitterRadius, emitterWidth: emitterWidth, emitterHeight: emitterHeight, scaleMin: scaleMin, scaleMax: scaleMax, scaleEnd: scaleEndRatio, colorStartR: sr, colorStartG: sg, colorStartB: sb, colorEndR: er, colorEndG: eg, colorEndB: eb, alphaStart: alphaStart, alphaEnd: alphaEnd, rotationSpeedMin: rotationSpeed, rotationSpeedMax: rotationSpeed, blendMode: blendMode }] : Array<Dynamic>));
     return cast null;
@@ -169,12 +169,12 @@ class PixiParse {
     var s:Dynamic = cast _Runtime.UNDEFINED;
     var channel:Dynamic = cast _Runtime.UNDEFINED;
     valueObj = (cast obj : Null<{ @:optional var value:Dynamic; }>);
-    hex = _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(obj), 'string'), function():Dynamic return cast obj, function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.optionalField(valueObj, 'value')), 'string'), function():Dynamic return cast _Runtime.field(valueObj, 'value'), function():Dynamic return cast def));
+    hex = ((cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'string') : Bool) ? (cast obj : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.optionalField(valueObj, 'value')), 'string') : Bool) ? (cast _Runtime.field(valueObj, 'value') : Dynamic) : (cast def : Dynamic)) : Dynamic));
     s = _Runtime.padEnd(_Runtime.replace(hex, _Runtime.regexp('^#', ''), '', false), 6.0, 'f');
     channel = function(i:Float) {
       var v:Dynamic = cast _Runtime.UNDEFINED;
       v = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.slice(s, i, (i + 2.0)), 16.0] : Array<Dynamic>));
-      return cast _Runtime.select(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)), function():Dynamic return cast (v / 255.0), function():Dynamic return cast 1.0);
+      return cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool) ? (cast (v / 255.0) : Dynamic) : (cast 1.0 : Dynamic));
     };
     return cast cast ([_Runtime.callValue(channel, cast ([0.0] : Array<Dynamic>)), _Runtime.callValue(channel, cast ([2.0] : Array<Dynamic>)), _Runtime.callValue(channel, cast ([4.0] : Array<Dynamic>))] : Array<Dynamic>);
     return cast null;
@@ -186,23 +186,23 @@ class PixiParse {
     var endObj:Dynamic = cast _Runtime.UNDEFINED;
     var start:Dynamic = cast _Runtime.UNDEFINED;
     var end:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.looseEquals(obj, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(obj), 'object')))) { return cast cast ([defStart, defEnd] : Array<Dynamic>); }
+    if ((cast ((cast _Runtime.looseEquals(obj, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(obj), 'object') : Bool)) : Bool)) { return cast cast ([defStart, defEnd] : Array<Dynamic>); }
     o = (cast obj : { @:optional var start:Dynamic; @:optional var end:Dynamic; });
     startObj = (cast _Runtime.field(o, 'start') : Null<{ @:optional var value:Dynamic; }>);
     endObj = (cast _Runtime.field(o, 'end') : Null<{ @:optional var value:Dynamic; }>);
-    start = _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'start')), 'number'), function():Dynamic return cast _Runtime.field(o, 'start'), function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.optionalField(startObj, 'value')), 'number'), function():Dynamic return cast _Runtime.field(startObj, 'value'), function():Dynamic return cast defStart));
-    end = _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'end')), 'number'), function():Dynamic return cast _Runtime.field(o, 'end'), function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.optionalField(endObj, 'value')), 'number'), function():Dynamic return cast _Runtime.field(endObj, 'value'), function():Dynamic return cast defEnd));
+    start = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'start')), 'number') : Bool) ? (cast _Runtime.field(o, 'start') : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.optionalField(startObj, 'value')), 'number') : Bool) ? (cast _Runtime.field(startObj, 'value') : Dynamic) : (cast defStart : Dynamic)) : Dynamic));
+    end = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'end')), 'number') : Bool) ? (cast _Runtime.field(o, 'end') : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.optionalField(endObj, 'value')), 'number') : Bool) ? (cast _Runtime.field(endObj, 'value') : Dynamic) : (cast defEnd : Dynamic)) : Dynamic));
     return cast cast ([_Runtime.callValue(PixiParse.rn__pixiParse, cast ([start, defStart] : Array<Dynamic>)), _Runtime.callValue(PixiParse.rn__pixiParse, cast ([end, defEnd] : Array<Dynamic>))] : Array<Dynamic>);
     return cast null;
   }
 
   public static function rn__pixiParse(v:Dynamic, def:Dynamic = 0.0):Float {
-    return cast _Runtime.select(_Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(v), 'number'), function():Dynamic return cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>))), function():Dynamic return cast v, function():Dynamic return cast def);
+    return cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(v), 'number') : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) : Bool) ? (cast v : Dynamic) : (cast def : Dynamic));
     return cast null;
   }
 
   public static function rs__pixiParse(v:Dynamic, def:Dynamic = ''):String {
-    return cast _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(v), 'string'), function():Dynamic return cast v, function():Dynamic return cast def);
+    return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(v), 'string') : Bool) ? (cast v : Dynamic) : (cast def : Dynamic));
     return cast null;
   }
 }

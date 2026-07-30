@@ -12,7 +12,7 @@ class SurfaceBlur {
   public static function blurSurfacePixelsHorizontal(out:flighthq._internal._UInt8ClampedArray, source:flighthq._internal._UInt8ClampedArray, width:Float, height:Float, radius:Float):Void {
     {
       var y:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(y, height, '<'))) {
+      while ((cast ((cast y : Float) < (cast height : Float)) : Bool)) {
         var rowOffset:Dynamic = (y * width);
         var r:Dynamic = 0.0;
         var g:Dynamic = 0.0;
@@ -22,7 +22,7 @@ class SurfaceBlur {
         var initEnd:Dynamic = HxMath.min((radius + 1.0), width);
         {
           var x:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(x, initEnd, '<'))) {
+          while ((cast ((cast x : Float) < (cast initEnd : Float)) : Bool)) {
             var i:Dynamic = ((rowOffset + x) * 4.0);
             (r = cast ((r + _Runtime.getIndex(source, i)) : Dynamic));
             (g = cast ((g + _Runtime.getIndex(source, (i + 1.0))) : Dynamic));
@@ -34,14 +34,14 @@ class SurfaceBlur {
         }
         {
           var x:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(x, width, '<'))) {
+          while ((cast ((cast x : Float) < (cast width : Float)) : Bool)) {
             var di:Dynamic = ((rowOffset + x) * 4.0);
             _Runtime.setIndex(out, di, HxMath.round((r / count)));
             _Runtime.setIndex(out, (di + 1.0), HxMath.round((g / count)));
             _Runtime.setIndex(out, (di + 2.0), HxMath.round((b / count)));
             _Runtime.setIndex(out, (di + 3.0), HxMath.round((a / count)));
             var leaving:Dynamic = (x - radius);
-            if (_Runtime.truthy(_Runtime.compare(leaving, 0.0, '>='))) {
+            if ((cast ((cast leaving : Float) >= (cast 0.0 : Float)) : Bool)) {
               var li:Dynamic = ((rowOffset + leaving) * 4.0);
               (r = cast ((r - _Runtime.getIndex(source, li)) : Dynamic));
               (g = cast ((g - _Runtime.getIndex(source, (li + 1.0))) : Dynamic));
@@ -50,7 +50,7 @@ class SurfaceBlur {
               count--;
             }
             var entering:Dynamic = ((x + radius) + 1.0);
-            if (_Runtime.truthy(_Runtime.compare(entering, width, '<'))) {
+            if ((cast ((cast entering : Float) < (cast width : Float)) : Bool)) {
               var ei:Dynamic = ((rowOffset + entering) * 4.0);
               (r = cast ((r + _Runtime.getIndex(source, ei)) : Dynamic));
               (g = cast ((g + _Runtime.getIndex(source, (ei + 1.0))) : Dynamic));
@@ -71,17 +71,17 @@ class SurfaceBlur {
     radius = (_Runtime.toInt32((_Runtime.field(kernel, 'length') - 1.0)) >> 1);
     {
       var y:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(y, height, '<'))) {
+      while ((cast ((cast y : Float) < (cast height : Float)) : Bool)) {
         {
           var x:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(x, width, '<'))) {
+          while ((cast ((cast x : Float) < (cast width : Float)) : Bool)) {
             var r:Dynamic = 0.0;
             var g:Dynamic = 0.0;
             var b:Dynamic = 0.0;
             var a:Dynamic = 0.0;
             {
               var k:Dynamic = 0.0;
-              while (_Runtime.truthy(_Runtime.compare(k, _Runtime.field(kernel, 'length'), '<'))) {
+              while ((cast ((cast k : Float) < (cast _Runtime.field(kernel, 'length') : Float)) : Bool)) {
                 var px:Dynamic = HxMath.max(0.0, HxMath.min((width - 1.0), ((x + k) - radius)));
                 var i:Dynamic = (((y * width) + px) * 4.0);
                 var w:Dynamic = _Runtime.getIndex(kernel, k);
@@ -108,7 +108,7 @@ class SurfaceBlur {
   public static function blurSurfacePixelsVertical(out:flighthq._internal._UInt8ClampedArray, source:flighthq._internal._UInt8ClampedArray, width:Float, height:Float, radius:Float):Void {
     {
       var x:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(x, width, '<'))) {
+      while ((cast ((cast x : Float) < (cast width : Float)) : Bool)) {
         var r:Dynamic = 0.0;
         var g:Dynamic = 0.0;
         var b:Dynamic = 0.0;
@@ -117,7 +117,7 @@ class SurfaceBlur {
         var initEnd:Dynamic = HxMath.min((radius + 1.0), height);
         {
           var y:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(y, initEnd, '<'))) {
+          while ((cast ((cast y : Float) < (cast initEnd : Float)) : Bool)) {
             var i:Dynamic = (((y * width) + x) * 4.0);
             (r = cast ((r + _Runtime.getIndex(source, i)) : Dynamic));
             (g = cast ((g + _Runtime.getIndex(source, (i + 1.0))) : Dynamic));
@@ -129,14 +129,14 @@ class SurfaceBlur {
         }
         {
           var y:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(y, height, '<'))) {
+          while ((cast ((cast y : Float) < (cast height : Float)) : Bool)) {
             var di:Dynamic = (((y * width) + x) * 4.0);
             _Runtime.setIndex(out, di, HxMath.round((r / count)));
             _Runtime.setIndex(out, (di + 1.0), HxMath.round((g / count)));
             _Runtime.setIndex(out, (di + 2.0), HxMath.round((b / count)));
             _Runtime.setIndex(out, (di + 3.0), HxMath.round((a / count)));
             var leaving:Dynamic = (y - radius);
-            if (_Runtime.truthy(_Runtime.compare(leaving, 0.0, '>='))) {
+            if ((cast ((cast leaving : Float) >= (cast 0.0 : Float)) : Bool)) {
               var li:Dynamic = (((leaving * width) + x) * 4.0);
               (r = cast ((r - _Runtime.getIndex(source, li)) : Dynamic));
               (g = cast ((g - _Runtime.getIndex(source, (li + 1.0))) : Dynamic));
@@ -145,7 +145,7 @@ class SurfaceBlur {
               count--;
             }
             var entering:Dynamic = ((y + radius) + 1.0);
-            if (_Runtime.truthy(_Runtime.compare(entering, height, '<'))) {
+            if ((cast ((cast entering : Float) < (cast height : Float)) : Bool)) {
               var ei:Dynamic = (((entering * width) + x) * 4.0);
               (r = cast ((r + _Runtime.getIndex(source, ei)) : Dynamic));
               (g = cast ((g + _Runtime.getIndex(source, (ei + 1.0))) : Dynamic));
@@ -166,17 +166,17 @@ class SurfaceBlur {
     radius = (_Runtime.toInt32((_Runtime.field(kernel, 'length') - 1.0)) >> 1);
     {
       var y:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(y, height, '<'))) {
+      while ((cast ((cast y : Float) < (cast height : Float)) : Bool)) {
         {
           var x:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(x, width, '<'))) {
+          while ((cast ((cast x : Float) < (cast width : Float)) : Bool)) {
             var r:Dynamic = 0.0;
             var g:Dynamic = 0.0;
             var b:Dynamic = 0.0;
             var a:Dynamic = 0.0;
             {
               var k:Dynamic = 0.0;
-              while (_Runtime.truthy(_Runtime.compare(k, _Runtime.field(kernel, 'length'), '<'))) {
+              while ((cast ((cast k : Float) < (cast _Runtime.field(kernel, 'length') : Float)) : Bool)) {
                 var py:Dynamic = HxMath.max(0.0, HxMath.min((height - 1.0), ((y + k) - radius)));
                 var i:Dynamic = (((py * width) + x) * 4.0);
                 var w:Dynamic = _Runtime.getIndex(kernel, k);
@@ -215,14 +215,14 @@ class SurfaceBlur {
     b = scratch;
     {
       var pass:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(pass, passes, '<'))) {
-        if (_Runtime.truthy(_Runtime.compare(radiusX, 0.0, '>'))) {
+      while ((cast ((cast pass : Float) < (cast passes : Float)) : Bool)) {
+        if ((cast ((cast radiusX : Float) > (cast 0.0 : Float)) : Bool)) {
           _Runtime.callValue(blurSurfacePixelsHorizontal, cast ([b, a, _Runtime.field(source, 'width'), _Runtime.field(source, 'height'), radiusX] : Array<Dynamic>));
           var t:Dynamic = a;
           (a = cast (b : Dynamic));
           (b = cast (t : Dynamic));
         }
-        if (_Runtime.truthy(_Runtime.compare(radiusY, 0.0, '>'))) {
+        if ((cast ((cast radiusY : Float) > (cast 0.0 : Float)) : Bool)) {
           _Runtime.callValue(blurSurfacePixelsVertical, cast ([b, a, _Runtime.field(source, 'width'), _Runtime.field(source, 'height'), radiusY] : Array<Dynamic>));
           var t:Dynamic = a;
           (a = cast (b : Dynamic));
@@ -231,7 +231,7 @@ class SurfaceBlur {
         pass++;
       }
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(a, out))) {
+    if ((cast !_Runtime.strictEquals(a, out) : Bool)) {
       _Runtime.callProperty(out, 'set', cast ([(cast a : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int(((_Runtime.field(source, 'width') * _Runtime.field(source, 'height')) * 4.0)))] : Array<Dynamic>));
     }
   }
@@ -241,7 +241,7 @@ class SurfaceBlur {
     var sum:Dynamic = cast _Runtime.UNDEFINED;
     var twoSigmaSq:Dynamic = cast _Runtime.UNDEFINED;
     len = ((2.0 * radius) + 1.0);
-    if (_Runtime.truthy(_Runtime.compare(sigma, 0.0, '<='))) {
+    if ((cast ((cast sigma : Float) <= (cast 0.0 : Float)) : Bool)) {
       _Runtime.fill(out, 0.0, 0.0, len, 3);
       _Runtime.setIndex(out, radius, 1.0);
       return;
@@ -250,7 +250,7 @@ class SurfaceBlur {
     twoSigmaSq = ((2.0 * sigma) * sigma);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, len, '<'))) {
+      while ((cast ((cast i : Float) < (cast len : Float)) : Bool)) {
         var x:Dynamic = (i - radius);
         _Runtime.setIndex(out, i, HxMath.exp((-(x * x) / twoSigmaSq)));
         (sum = cast ((sum + _Runtime.getIndex(out, i)) : Dynamic));
@@ -259,7 +259,7 @@ class SurfaceBlur {
     }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, len, '<'))) {
+      while ((cast ((cast i : Float) < (cast len : Float)) : Bool)) {
         _Runtime.setIndex(out, i, (_Runtime.getIndex(out, i) / sum));
         i++;
       }
@@ -278,8 +278,8 @@ class SurfaceBlur {
     passCount = HxMath.max(1.0, HxMath.round(passes));
     radiusX = HxMath.max(0.0, HxMath.ceil((sigmaX * 3.0)));
     radiusY = HxMath.max(0.0, HxMath.ceil((sigmaY * 3.0)));
-    kernelX = _Runtime.select(_Runtime.compare(radiusX, 0.0, '>'), function():Dynamic return cast new flighthq._internal._Float32Array(((2.0 * radiusX) + 1.0)), function():Dynamic return cast null);
-    kernelY = _Runtime.select(_Runtime.compare(radiusY, 0.0, '>'), function():Dynamic return cast new flighthq._internal._Float32Array(((2.0 * radiusY) + 1.0)), function():Dynamic return cast null);
+    kernelX = ((cast ((cast radiusX : Float) > (cast 0.0 : Float)) : Bool) ? (cast new flighthq._internal._Float32Array(((2.0 * radiusX) + 1.0)) : Dynamic) : (cast null : Dynamic));
+    kernelY = ((cast ((cast radiusY : Float) > (cast 0.0 : Float)) : Bool) ? (cast new flighthq._internal._Float32Array(((2.0 * radiusY) + 1.0)) : Dynamic) : (cast null : Dynamic));
     if (_Runtime.truthy(kernelX)) { _Runtime.callValue(computeGaussianKernel, cast ([kernelX, radiusX, sigmaX] : Array<Dynamic>)); }
     if (_Runtime.truthy(kernelY)) { _Runtime.callValue(computeGaussianKernel, cast ([kernelY, radiusY, sigmaY] : Array<Dynamic>)); }
     _Runtime.callValue(extractSurfacePixels, cast ([out, source] : Array<Dynamic>));
@@ -287,7 +287,7 @@ class SurfaceBlur {
     b = scratch;
     {
       var pass:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(pass, passCount, '<'))) {
+      while ((cast ((cast pass : Float) < (cast passCount : Float)) : Bool)) {
         if (_Runtime.truthy(kernelX)) {
           _Runtime.callValue(blurSurfacePixelsHorizontalWeighted, cast ([b, a, _Runtime.field(source, 'width'), _Runtime.field(source, 'height'), kernelX] : Array<Dynamic>));
           var t:Dynamic = a;
@@ -303,7 +303,7 @@ class SurfaceBlur {
         pass++;
       }
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(a, out))) {
+    if ((cast !_Runtime.strictEquals(a, out) : Bool)) {
       _Runtime.callProperty(out, 'set', cast ([(cast a : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int(((_Runtime.field(source, 'width') * _Runtime.field(source, 'height')) * 4.0)))] : Array<Dynamic>));
     }
   }

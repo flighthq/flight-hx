@@ -11,10 +11,10 @@ class GetPathSignedArea {
     var contours:Dynamic = cast _Runtime.UNDEFINED;
     var area:Dynamic = cast _Runtime.UNDEFINED;
     contours = _Runtime.callValue(flattenPath, cast ([path, tolerance] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(contours, 'length'), 0.0))) { return cast 'degenerate'; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(contours, 'length'), 0.0) : Bool)) { return cast 'degenerate'; }
     area = _Runtime.callValue(GetPathSignedArea.shoelaceArea__getPathSignedArea, cast ([_Runtime.getIndex(contours, 0.0)] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(area, 0.0, '>'))) { return cast 'ccw'; }
-    if (_Runtime.truthy(_Runtime.compare(area, 0.0, '<'))) { return cast 'cw'; }
+    if ((cast ((cast area : Float) > (cast 0.0 : Float)) : Bool)) { return cast 'ccw'; }
+    if ((cast ((cast area : Float) < (cast 0.0 : Float)) : Bool)) { return cast 'cw'; }
     return cast 'degenerate';
     return cast null;
   }
@@ -26,7 +26,7 @@ class GetPathSignedArea {
     total = 0.0;
     {
       var ci:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(ci, _Runtime.field(contours, 'length'), '<'))) {
+      while ((cast ((cast ci : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
         (total = cast ((total + _Runtime.callValue(GetPathSignedArea.shoelaceArea__getPathSignedArea, cast ([_Runtime.getIndex(contours, ci)] : Array<Dynamic>))) : Dynamic));
         ci++;
       }
@@ -39,11 +39,11 @@ class GetPathSignedArea {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     var area:Dynamic = cast _Runtime.UNDEFINED;
     n = (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> 1);
-    if (_Runtime.truthy(_Runtime.compare(n, 3.0, '<'))) { return cast 0.0; }
+    if ((cast ((cast n : Float) < (cast 3.0 : Float)) : Bool)) { return cast 0.0; }
     area = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, n, '<'))) {
+      while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
         var j:Dynamic = _Runtime.fmod((i + 1.0), n);
         (area = cast ((area + (_Runtime.getIndex(contour, (i * 2.0)) * _Runtime.getIndex(contour, ((j * 2.0) + 1.0)))) : Dynamic));
         (area = cast ((area - (_Runtime.getIndex(contour, (j * 2.0)) * _Runtime.getIndex(contour, ((i * 2.0) + 1.0)))) : Dynamic));

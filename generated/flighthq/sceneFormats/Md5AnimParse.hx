@@ -38,73 +38,73 @@ class Md5AnimParse {
     hierarchy = cast ([] : Array<Dynamic>);
     baseframe = cast ([] : Array<Dynamic>);
     frames = cast ([] : Array<Dynamic>);
-    while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(lines, 'length'), '<'))) {
+    while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
       var line:Dynamic = StringTools.trim(Std.string(_Runtime.getIndex(lines, i)));
       i++;
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0), function():Dynamic return cast StringTools.startsWith(line, '//')))) { continue; }
-      if (_Runtime.truthy(StringTools.startsWith(line, 'MD5Version'))) {
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0) : Bool) || (cast StringTools.startsWith(line, '//') : Bool)) : Bool)) { continue; }
+      if ((cast StringTools.startsWith(line, 'MD5Version') : Bool)) {
         var version:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([version] : Array<Dynamic>)), function():Dynamic return cast !_Runtime.strictEquals(version, 10.0)))) {
+        if ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([version] : Array<Dynamic>)) : Bool) && (cast !_Runtime.strictEquals(version, 10.0) : Bool)) : Bool)) {
           _Runtime.callOptionalProperty(warnings, 'push', cast (['parseMd5Anim: unsupported MD5Version ' + Std.string(version) + ' (expected 10)'] : Array<Dynamic>));
         }
         continue;
       }
-      if (_Runtime.truthy(StringTools.startsWith(line, 'commandline'))) { continue; }
-      if (_Runtime.truthy(StringTools.startsWith(line, 'numFrames'))) {
+      if ((cast StringTools.startsWith(line, 'commandline') : Bool)) { continue; }
+      if ((cast StringTools.startsWith(line, 'numFrames') : Bool)) {
         (numFrames = cast (_Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>)) : Dynamic));
-        if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([numFrames] : Array<Dynamic>))))) {
+        if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([numFrames] : Array<Dynamic>)) : Bool) : Bool)) {
           _Runtime.callOptionalProperty(warnings, 'push', cast (['parseMd5Anim: non-numeric numFrames'] : Array<Dynamic>));
           (numFrames = cast (0.0 : Dynamic));
         }
         continue;
       }
-      if (_Runtime.truthy(StringTools.startsWith(line, 'numJoints'))) {
+      if ((cast StringTools.startsWith(line, 'numJoints') : Bool)) {
         (numJoints = cast (_Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>)) : Dynamic));
-        if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([numJoints] : Array<Dynamic>))))) {
+        if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([numJoints] : Array<Dynamic>)) : Bool) : Bool)) {
           _Runtime.callOptionalProperty(warnings, 'push', cast (['parseMd5Anim: non-numeric numJoints'] : Array<Dynamic>));
           (numJoints = cast (0.0 : Dynamic));
         }
         continue;
       }
-      if (_Runtime.truthy(StringTools.startsWith(line, 'frameRate'))) {
+      if ((cast StringTools.startsWith(line, 'frameRate') : Bool)) {
         (frameRate = cast (_Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>)) : Dynamic));
-        if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([frameRate] : Array<Dynamic>))), function():Dynamic return cast _Runtime.compare(frameRate, 0.0, '<=')))) {
+        if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([frameRate] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast frameRate : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
           _Runtime.callOptionalProperty(warnings, 'push', cast (['parseMd5Anim: invalid frameRate, defaulting to 24'] : Array<Dynamic>));
           (frameRate = cast (24.0 : Dynamic));
         }
         continue;
       }
-      if (_Runtime.truthy(StringTools.startsWith(line, 'numAnimatedComponents'))) { continue; }
-      if (_Runtime.truthy(_Runtime.strictEquals(line, 'hierarchy {'))) {
+      if ((cast StringTools.startsWith(line, 'numAnimatedComponents') : Bool)) { continue; }
+      if ((cast _Runtime.strictEquals(line, 'hierarchy {') : Bool)) {
         (i = cast (_Runtime.callValue(Md5AnimParse.parseHierarchyBlock__md5AnimParse, cast ([lines, i, hierarchy, warnings] : Array<Dynamic>)) : Dynamic));
         continue;
       }
-      if (_Runtime.truthy(_Runtime.strictEquals(line, 'bounds {'))) {
+      if ((cast _Runtime.strictEquals(line, 'bounds {') : Bool)) {
         (i = cast (_Runtime.callValue(Md5AnimParse.skipBlock__md5AnimParse, cast ([lines, i] : Array<Dynamic>)) : Dynamic));
         continue;
       }
-      if (_Runtime.truthy(_Runtime.strictEquals(line, 'baseframe {'))) {
+      if ((cast _Runtime.strictEquals(line, 'baseframe {') : Bool)) {
         (i = cast (_Runtime.callValue(Md5AnimParse.parseBaseframeBlock__md5AnimParse, cast ([lines, i, baseframe, warnings] : Array<Dynamic>)) : Dynamic));
         continue;
       }
-      if (_Runtime.truthy(_Runtime.andValue(StringTools.startsWith(line, 'frame '), function():Dynamic return cast StringTools.endsWith(Std.string(line), '{')))) {
+      if ((cast ((cast StringTools.startsWith(line, 'frame ') : Bool) && (cast StringTools.endsWith(Std.string(line), '{') : Bool)) : Bool)) {
         var frameData:Array<Float> = cast ([] : Array<Dynamic>);
         (i = cast (_Runtime.callValue(Md5AnimParse.parseFrameBlock__md5AnimParse, cast ([lines, i, frameData, warnings] : Array<Dynamic>)) : Dynamic));
         _Runtime.callProperty(frames, 'push', cast ([frameData] : Array<Dynamic>));
         continue;
       }
     }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(hierarchy, 'length'), 0.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(frames, 'length'), 0.0)))) {
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(hierarchy, 'length'), 0.0) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(frames, 'length'), 0.0) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['parseMd5Anim: no hierarchy or frame data found'] : Array<Dynamic>));
       return cast null;
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(hierarchy, 'length'), numJoints))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(hierarchy, 'length'), numJoints) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['parseMd5Anim: hierarchy has ' + Std.string(_Runtime.field(hierarchy, 'length')) + ' entries but numJoints declared ' + Std.string(numJoints) + ''] : Array<Dynamic>));
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(frames, 'length'), numFrames))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(frames, 'length'), numFrames) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['parseMd5Anim: found ' + Std.string(_Runtime.field(frames, 'length')) + ' frames but numFrames declared ' + Std.string(numFrames) + ''] : Array<Dynamic>));
     }
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(joints, 'length'), _Runtime.field(hierarchy, 'length'), '<'))) {
+    if ((cast ((cast _Runtime.field(joints, 'length') : Float) < (cast _Runtime.field(hierarchy, 'length') : Float)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['parseMd5Anim: joints array has ' + Std.string(_Runtime.field(joints, 'length')) + ' nodes but animation has ' + Std.string(_Runtime.field(hierarchy, 'length')) + ' joints'] : Array<Dynamic>));
       return cast null;
     }
@@ -124,7 +124,7 @@ class Md5AnimParse {
     times = cast ([] : Array<Dynamic>);
     {
       var f:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(f, frameCount, '<'))) {
+      while ((cast ((cast f : Float) < (cast frameCount : Float)) : Bool)) {
         _Runtime.callProperty(times, 'push', cast ([(f / frameRate)] : Array<Dynamic>));
         f++;
       }
@@ -135,15 +135,15 @@ class Md5AnimParse {
     }
     {
       var j:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(j, jointCount, '<'))) {
+      while ((cast ((cast j : Float) < (cast jointCount : Float)) : Bool)) {
         var entry:Dynamic = _Runtime.getIndex(hierarchy, j);
-        var base:Dynamic = _Runtime.select(_Runtime.compare(j, _Runtime.field(baseframe, 'length'), '<'), function():Dynamic return cast _Runtime.getIndex(baseframe, j), function():Dynamic return cast Md5AnimParse.DEFAULT_BASEFRAME__md5AnimParse);
+        var base:Dynamic = ((cast ((cast j : Float) < (cast _Runtime.field(baseframe, 'length') : Float)) : Bool) ? (cast _Runtime.getIndex(baseframe, j) : Dynamic) : (cast Md5AnimParse.DEFAULT_BASEFRAME__md5AnimParse : Dynamic));
         var flags:Dynamic = _Runtime.field(entry, 'flags');
         var translationValues:Array<Float> = cast ([] : Array<Dynamic>);
         var rotationValues:Array<Float> = cast ([] : Array<Dynamic>);
         {
           var f:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(f, frameCount, '<'))) {
+          while ((cast ((cast f : Float) < (cast frameCount : Float)) : Bool)) {
             var frameData:Dynamic = _Runtime.getIndex(frames, f);
             var tx:Dynamic = _Runtime.field(base, 'positionX');
             var ty:Dynamic = _Runtime.field(base, 'positionY');
@@ -171,7 +171,7 @@ class Md5AnimParse {
               (qz = cast (_Runtime.coalesce(_Runtime.getIndex(frameData, componentOffset++), function():Dynamic return cast qz) : Dynamic));
             }
             var sumSq:Dynamic = (((qx * qx) + (qy * qy)) + (qz * qz));
-            var qw:Dynamic = _Runtime.select(_Runtime.compare(sumSq, 1.0, '<'), function():Dynamic return cast -HxMath.sqrt((1.0 - sumSq)), function():Dynamic return cast 0.0);
+            var qw:Dynamic = ((cast ((cast sumSq : Float) < (cast 1.0 : Float)) : Bool) ? (cast -HxMath.sqrt((1.0 - sumSq)) : Dynamic) : (cast 0.0 : Dynamic));
             _Runtime.pushMany(translationValues, cast ([tx, ty, tz] : Array<Dynamic>));
             _Runtime.pushMany(rotationValues, cast ([qx, qy, qz, qw] : Array<Dynamic>));
             f++;
@@ -194,13 +194,13 @@ class Md5AnimParse {
   public static function parseHierarchyBlock__md5AnimParse(lines:Array<String>, startLine:Float, hierarchy:Array<Md5AnimHierarchyEntry__md5AnimParse>, warnings:Null<Array<String>>):Float {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     i = startLine;
-    while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(lines, 'length'), '<'))) {
+    while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
       var line:Dynamic = StringTools.trim(Std.string(_Runtime.getIndex(lines, i)));
       i++;
-      if (_Runtime.truthy(_Runtime.strictEquals(line, '}'))) { return cast i; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0), function():Dynamic return cast StringTools.startsWith(line, '//')))) { continue; }
+      if ((cast _Runtime.strictEquals(line, '}') : Bool)) { return cast i; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0) : Bool) || (cast StringTools.startsWith(line, '//') : Bool)) : Bool)) { continue; }
       var entry:Dynamic = _Runtime.callValue(Md5AnimParse.parseHierarchyLine__md5AnimParse, cast ([line, warnings, (i - 1.0)] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(entry, null))) { _Runtime.callProperty(hierarchy, 'push', cast ([entry] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(entry, null) : Bool)) { _Runtime.callProperty(hierarchy, 'push', cast ([entry] : Array<Dynamic>)); }
     }
     _Runtime.callOptionalProperty(warnings, 'push', cast (['parseMd5Anim: hierarchy block was not closed'] : Array<Dynamic>));
     return cast i;
@@ -218,21 +218,21 @@ class Md5AnimParse {
     var startIndex:Dynamic = cast _Runtime.UNDEFINED;
     nameStart = _Runtime.callProperty(line, 'indexOf', cast (['"'] : Array<Dynamic>));
     nameEnd = _Runtime.callProperty(line, 'indexOf', cast (['"', (nameStart + 1.0)] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(nameStart, 0.0, '<'), function():Dynamic return cast _Runtime.compare(nameEnd, 0.0, '<')))) {
+    if ((cast ((cast ((cast nameStart : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast nameEnd : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['parseMd5Anim: malformed hierarchy entry on line ' + Std.string((lineIndex + 1.0)) + ': missing name quotes'] : Array<Dynamic>));
       return cast null;
     }
     name = _Runtime.slice(line, (nameStart + 1.0), nameEnd);
     rest = StringTools.trim(Std.string(_Runtime.slice(line, (nameEnd + 1.0), null)));
-    tokens = _Runtime.callProperty(_Runtime.callProperty(rest, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:Dynamic) return _Runtime.compare(_Runtime.field(t, 'length'), 0.0, '>')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(tokens, 'length'), 3.0, '<'))) {
+    tokens = _Runtime.callProperty(_Runtime.callProperty(rest, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:Dynamic) return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>));
+    if ((cast ((cast _Runtime.field(tokens, 'length') : Float) < (cast 3.0 : Float)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['parseMd5Anim: malformed hierarchy entry on line ' + Std.string((lineIndex + 1.0)) + ': not enough components'] : Array<Dynamic>));
       return cast null;
     }
     parentIndex = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(tokens, 0.0), 10.0] : Array<Dynamic>));
     flags = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(tokens, 1.0), 10.0] : Array<Dynamic>));
     startIndex = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(tokens, 2.0), 10.0] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parentIndex] : Array<Dynamic>))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([flags] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([startIndex] : Array<Dynamic>)))))) {
+    if ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parentIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([flags] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([startIndex] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['parseMd5Anim: malformed hierarchy entry on line ' + Std.string((lineIndex + 1.0)) + ': non-numeric values'] : Array<Dynamic>));
       return cast null;
     }
@@ -243,13 +243,13 @@ class Md5AnimParse {
   public static function parseBaseframeBlock__md5AnimParse(lines:Array<String>, startLine:Float, baseframe:Array<Md5AnimBaseframePose__md5AnimParse>, warnings:Null<Array<String>>):Float {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     i = startLine;
-    while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(lines, 'length'), '<'))) {
+    while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
       var line:Dynamic = StringTools.trim(Std.string(_Runtime.getIndex(lines, i)));
       i++;
-      if (_Runtime.truthy(_Runtime.strictEquals(line, '}'))) { return cast i; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0), function():Dynamic return cast StringTools.startsWith(line, '//')))) { continue; }
+      if ((cast _Runtime.strictEquals(line, '}') : Bool)) { return cast i; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0) : Bool) || (cast StringTools.startsWith(line, '//') : Bool)) : Bool)) { continue; }
       var pose:Dynamic = _Runtime.callValue(Md5AnimParse.parseBaseframeLine__md5AnimParse, cast ([line, warnings, (i - 1.0)] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(pose, null))) { _Runtime.callProperty(baseframe, 'push', cast ([pose] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(pose, null) : Bool)) { _Runtime.callProperty(baseframe, 'push', cast ([pose] : Array<Dynamic>)); }
     }
     _Runtime.callOptionalProperty(warnings, 'push', cast (['parseMd5Anim: baseframe block was not closed'] : Array<Dynamic>));
     return cast i;
@@ -264,8 +264,8 @@ class Md5AnimParse {
     var orientationX:Dynamic = cast _Runtime.UNDEFINED;
     var orientationY:Dynamic = cast _Runtime.UNDEFINED;
     var orientationZ:Dynamic = cast _Runtime.UNDEFINED;
-    tokens = _Runtime.callProperty(_Runtime.callProperty(_Runtime.replace(line, _Runtime.regexp('[()]', 'g'), '', false), 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:Dynamic) return _Runtime.compare(_Runtime.field(t, 'length'), 0.0, '>')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(tokens, 'length'), 6.0, '<'))) {
+    tokens = _Runtime.callProperty(_Runtime.callProperty(_Runtime.replace(line, _Runtime.regexp('[()]', 'g'), '', false), 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:Dynamic) return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>));
+    if ((cast ((cast _Runtime.field(tokens, 'length') : Float) < (cast 6.0 : Float)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['parseMd5Anim: malformed baseframe entry on line ' + Std.string((lineIndex + 1.0)) + ': not enough components'] : Array<Dynamic>));
       return cast null;
     }
@@ -275,7 +275,7 @@ class Md5AnimParse {
     orientationX = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 3.0)] : Array<Dynamic>));
     orientationY = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 4.0)] : Array<Dynamic>));
     orientationZ = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 5.0)] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionX] : Array<Dynamic>))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionY] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionZ] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([orientationX] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([orientationY] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([orientationZ] : Array<Dynamic>)))))) {
+    if ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionZ] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([orientationX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([orientationY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([orientationZ] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['parseMd5Anim: malformed baseframe entry on line ' + Std.string((lineIndex + 1.0)) + ': non-numeric values'] : Array<Dynamic>));
       return cast null;
     }
@@ -286,15 +286,15 @@ class Md5AnimParse {
   public static function parseFrameBlock__md5AnimParse(lines:Array<String>, startLine:Float, frameData:Array<Float>, warnings:Null<Array<String>>):Float {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     i = startLine;
-    while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(lines, 'length'), '<'))) {
+    while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
       var line:Dynamic = StringTools.trim(Std.string(_Runtime.getIndex(lines, i)));
       i++;
-      if (_Runtime.truthy(_Runtime.strictEquals(line, '}'))) { return cast i; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0), function():Dynamic return cast StringTools.startsWith(line, '//')))) { continue; }
-      var tokens:Dynamic = _Runtime.callProperty(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:Dynamic) return _Runtime.compare(_Runtime.field(t, 'length'), 0.0, '>')] : Array<Dynamic>));
+      if ((cast _Runtime.strictEquals(line, '}') : Bool)) { return cast i; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0) : Bool) || (cast StringTools.startsWith(line, '//') : Bool)) : Bool)) { continue; }
+      var tokens:Dynamic = _Runtime.callProperty(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:Dynamic) return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>));
       for (token in _Runtime.iterable(tokens)) {
         var value:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([token] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>))))) {
+        if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) : Bool)) {
           _Runtime.callOptionalProperty(warnings, 'push', cast (['parseMd5Anim: non-numeric frame value "' + Std.string(token) + '" on line ' + Std.string(i) + ''] : Array<Dynamic>));
           continue;
         }
@@ -309,8 +309,8 @@ class Md5AnimParse {
   public static function skipBlock__md5AnimParse(lines:Array<String>, startLine:Float):Float {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     i = startLine;
-    while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(lines, 'length'), '<'))) {
-      if (_Runtime.truthy(_Runtime.strictEquals(StringTools.trim(Std.string(_Runtime.getIndex(lines, i))), '}'))) { return cast (i + 1.0); }
+    while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
+      if ((cast _Runtime.strictEquals(StringTools.trim(Std.string(_Runtime.getIndex(lines, i))), '}') : Bool)) { return cast (i + 1.0); }
       i++;
     }
     return cast i;

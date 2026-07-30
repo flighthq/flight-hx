@@ -14,7 +14,7 @@ class TextShaper {
   }
 
   public static function measureText(text:String, format:TextFormat):Float {
-    if (_Runtime.truthy(_Runtime.strictEquals(TextShaper._backend__textShaper, null))) { return cast -1.0; }
+    if ((cast _Runtime.strictEquals(TextShaper._backend__textShaper, null) : Bool)) { return cast -1.0; }
     return cast _Runtime.callProperty(TextShaper._backend__textShaper, 'measureText', cast ([text, format] : Array<Dynamic>));
     return cast null;
   }

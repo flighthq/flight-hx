@@ -39,10 +39,10 @@ class CanvasFilmGrainEffect {
     s = seed;
     {
       var y:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(y, cells, '<'))) {
+      while ((cast ((cast y : Float) < (cast cells : Float)) : Bool)) {
         {
           var x:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(x, cells, '<'))) {
+          while ((cast ((cast x : Float) < (cast cells : Float)) : Bool)) {
             (s = cast ((_Runtime.toInt32(((s * 1103515245.0) + 12345.0)) & 2147483647) : Dynamic));
             var v:Dynamic = HxMath.floor(((s / 2147483647.0) * 255.0));
             flighthq._internal.backend.Canvas2dBackend.setField(nctx, 'fillStyle', 'rgb(' + Std.string(v) + ',' + Std.string(v) + ',' + Std.string(v) + ')');
@@ -61,7 +61,7 @@ class CanvasFilmGrainEffect {
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalCompositeOperation', 'overlay');
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalAlpha', HxMath.max(0.0, HxMath.min(1.0, intensity)));
     pattern = flighthq._internal.backend.Canvas2dBackend.call(ctx, 'createPattern', cast ([_Runtime.field(noise, 'canvas'), 'repeat'] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(pattern, null))) {
+    if ((cast !_Runtime.strictEquals(pattern, null) : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'fillStyle', pattern);
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'fillRect', cast ([0.0, 0.0, _Runtime.field(dest, 'width'), _Runtime.field(dest, 'height')] : Array<Dynamic>));
     }

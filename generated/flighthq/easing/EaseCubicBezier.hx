@@ -33,13 +33,13 @@ class EaseCubicBezier {
       s = x;
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, 8.0, '<'))) {
+        while ((cast ((cast i : Float) < (cast 8.0 : Float)) : Bool)) {
           var xError:Dynamic = (_Runtime.callValue(sampleX, cast ([s] : Array<Dynamic>)) - x);
-          if (_Runtime.truthy(_Runtime.compare(HxMath.abs(xError), epsilon, '<'))) {
+          if ((cast ((cast HxMath.abs(xError) : Float) < (cast epsilon : Float)) : Bool)) {
             return cast s;
           }
           var derivative:Dynamic = _Runtime.callValue(sampleDerivativeX, cast ([s] : Array<Dynamic>));
-          if (_Runtime.truthy(_Runtime.compare(HxMath.abs(derivative), 0.000001, '<'))) {
+          if ((cast ((cast HxMath.abs(derivative) : Float) < (cast 0.000001 : Float)) : Bool)) {
             break;
           }
           (s = cast ((s - (xError / derivative)) : Dynamic));
@@ -49,18 +49,18 @@ class EaseCubicBezier {
       low = 0.0;
       high = 1.0;
       (s = cast (x : Dynamic));
-      if (_Runtime.truthy(_Runtime.compare(s, low, '<'))) {
+      if ((cast ((cast s : Float) < (cast low : Float)) : Bool)) {
         return cast low;
       }
-      if (_Runtime.truthy(_Runtime.compare(s, high, '>'))) {
+      if ((cast ((cast s : Float) > (cast high : Float)) : Bool)) {
         return cast high;
       }
-      while (_Runtime.truthy(_Runtime.compare(low, high, '<'))) {
+      while ((cast ((cast low : Float) < (cast high : Float)) : Bool)) {
         var sampled:Dynamic = _Runtime.callValue(sampleX, cast ([s] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.compare(HxMath.abs((sampled - x)), epsilon, '<'))) {
+        if ((cast ((cast HxMath.abs((sampled - x)) : Float) < (cast epsilon : Float)) : Bool)) {
           return cast s;
         }
-        if (_Runtime.truthy(_Runtime.compare(x, sampled, '>'))) {
+        if ((cast ((cast x : Float) > (cast sampled : Float)) : Bool)) {
           (low = cast (s : Dynamic));
         } else {
           (high = cast (s : Dynamic));
@@ -70,10 +70,10 @@ class EaseCubicBezier {
       return cast s;
     };
     return cast function(t:Dynamic) {
-      if (_Runtime.truthy(_Runtime.compare(t, 0.0, '<='))) {
+      if ((cast ((cast t : Float) <= (cast 0.0 : Float)) : Bool)) {
         return cast 0.0;
       }
-      if (_Runtime.truthy(_Runtime.compare(t, 1.0, '>='))) {
+      if ((cast ((cast t : Float) >= (cast 1.0 : Float)) : Bool)) {
         return cast 1.0;
       }
       return cast _Runtime.callValue(sampleY, cast ([_Runtime.callValue(solveParameterForX, cast ([t, 1e-7] : Array<Dynamic>))] : Array<Dynamic>));

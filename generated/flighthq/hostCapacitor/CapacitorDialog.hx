@@ -42,7 +42,7 @@ class CapacitorDialog {
         var result:Dynamic = cast _Runtime.UNDEFINED;
         return flighthq._internal._Async.flatMap(_Runtime.callProperty(dialog, 'prompt', cast ([{ title: _Runtime.field(options, 'title'), message: _Runtime.field(options, 'message'), inputText: _Runtime.field(options, 'defaultValue'), inputPlaceholder: _Runtime.field(options, 'placeholder') }] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
           result = __awaitValue2;
-          return flighthq._internal._Async.resolve(_Runtime.select(_Runtime.field(result, 'cancelled'), function():Dynamic return cast null, function():Dynamic return cast _Runtime.field(result, 'value')));
+          return flighthq._internal._Async.resolve(((cast _Runtime.field(result, 'cancelled') : Bool) ? (cast null : Dynamic) : (cast _Runtime.field(result, 'value') : Dynamic)));
         });
       });
     } };

@@ -10,7 +10,7 @@ class SkinVertices {
     vertexCount = (_Runtime.toInt32((_Runtime.field(positions, 'length') / 3.0)) | 0);
     {
       var v:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(v, vertexCount, '<'))) {
+      while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
         var p:Dynamic = (v * 3.0);
         var px:Dynamic = _Runtime.getIndex(positions, p);
         var py:Dynamic = _Runtime.getIndex(positions, (p + 1.0));
@@ -27,9 +27,9 @@ class SkinVertices {
         var w:Dynamic = (v * 4.0);
         {
           var k:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(k, 4.0, '<'))) {
+          while ((cast ((cast k : Float) < (cast 4.0 : Float)) : Bool)) {
             var weight:Dynamic = _Runtime.getIndex(weights, (w + k));
-            if (_Runtime.truthy(_Runtime.strictEquals(weight, 0.0))) { k++; continue; }
+            if ((cast _Runtime.strictEquals(weight, 0.0) : Bool)) { k++; continue; }
             var m:Dynamic = (_Runtime.getIndex(joints, (w + k)) * 16.0);
             var m0:Dynamic = _Runtime.getIndex(jointMatrices, m);
             var m1:Dynamic = _Runtime.getIndex(jointMatrices, (m + 1.0));

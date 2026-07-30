@@ -20,7 +20,7 @@ class WgpuMotionBlurEffect {
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
     samples = _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0);
     pipeline = _Runtime.callValue(WgpuMotionBlurEffect.getMotionBlurPipeline__wgpuMotionBlurEffect, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(velocityTexture, null))) {
+    if ((cast _Runtime.strictEquals(velocityTexture, null) : Bool)) {
       _Runtime.callValue(drawWgpuDualSourceEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
         _Runtime.setIndex(f32, 0.0, intensity);
         _Runtime.setIndex(f32, 1.0, samples);
@@ -47,7 +47,7 @@ class WgpuMotionBlurEffect {
   public static function getMotionBlurPipeline__wgpuMotionBlurEffect(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     pipeline = ((cast WgpuMotionBlurEffect._motionBlurPipelines__wgpuMotionBlurEffect : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(pipeline, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(pipeline, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (pipeline = cast (_Runtime.callValue(createWgpuDualSourceEffectPipeline, cast ([state, WgpuMotionBlurEffect.MOTION_BLUR_FRAGMENT_WGSL__wgpuMotionBlurEffect, 'replace'] : Array<Dynamic>)) : Dynamic));
       ((cast WgpuMotionBlurEffect._motionBlurPipelines__wgpuMotionBlurEffect : flighthq._internal._WeakMap).set(state, pipeline));
     }

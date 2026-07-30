@@ -27,7 +27,7 @@ class GlUnlitPrelude {
     flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locColor'), _Runtime.getIndex(color, 0.0), _Runtime.getIndex(color, 1.0), _Runtime.getIndex(color, 2.0), _Runtime.getIndex(color, 3.0));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locIntensity'), intensity);
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), alphaCutoff);
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(colorMap, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(colorMap, 'image'), null)), function():Dynamic return cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(colorMap, 'image')] : Array<Dynamic>))))) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(colorMap, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(colorMap, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(colorMap, 'image')] : Array<Dynamic>)) : Bool)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);
       _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(colorMap, 'image'), _Runtime.field(colorMap, 'sampler')] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locColorMap'), 0.0);
@@ -46,7 +46,7 @@ class GlUnlitPrelude {
   }
 
   public static function buildGlUnlitDefineKey(key:GlUnlitDefineKey):String {
-    return cast '' + Std.string(_Runtime.select(_Runtime.field(key, 'alphaMaskEnabled'), function():Dynamic return cast 'm', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasColorMap'), function():Dynamic return cast 'c', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'vertexColor'), function():Dynamic return cast 'v', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasUvTransform'), function():Dynamic return cast 'u', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast 'k', function():Dynamic return cast '-')) + '';
+    return cast '' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasColorMap') : Bool) ? (cast 'c' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'vertexColor') : Bool) ? (cast 'v' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasUvTransform') : Bool) ? (cast 'u' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast 'k', function():Dynamic return cast '-')) + '';
     return cast null;
   }
 
@@ -77,10 +77,10 @@ class GlUnlitPrelude {
   public static function buildDefineSource__glUnlitPrelude(key:GlUnlitDefineKey):String {
     var defines:Dynamic = cast _Runtime.UNDEFINED;
     defines = '#version 300 es\n';
-    if (_Runtime.truthy(_Runtime.field(key, 'alphaMaskEnabled'))) { (defines = cast ((defines + '#define ALPHA_MASK\n') : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.field(key, 'hasColorMap'))) { (defines = cast ((defines + '#define HAS_COLOR_MAP\n') : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.field(key, 'hasUvTransform'))) { (defines = cast ((defines + '#define HAS_UV_TRANSFORM\n') : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.field(key, 'vertexColor'))) { (defines = cast ((defines + '#define VERTEX_COLOR\n') : Dynamic)); }
+    if ((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool)) { (defines = cast ((defines + '#define ALPHA_MASK\n') : Dynamic)); }
+    if ((cast _Runtime.field(key, 'hasColorMap') : Bool)) { (defines = cast ((defines + '#define HAS_COLOR_MAP\n') : Dynamic)); }
+    if ((cast _Runtime.field(key, 'hasUvTransform') : Bool)) { (defines = cast ((defines + '#define HAS_UV_TRANSFORM\n') : Dynamic)); }
+    if ((cast _Runtime.field(key, 'vertexColor') : Bool)) { (defines = cast ((defines + '#define VERTEX_COLOR\n') : Dynamic)); }
     if (_Runtime.truthy(_Runtime.field(key, 'hasSkin'))) { (defines = cast ((defines + '#define HAS_SKIN\n') : Dynamic)); }
     return cast defines;
     return cast null;

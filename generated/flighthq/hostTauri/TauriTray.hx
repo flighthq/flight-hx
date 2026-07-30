@@ -39,7 +39,7 @@ class TauriTray {
       flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(_Runtime.field(trayModule, 'TrayIcon'), 'new', cast ([{ icon: _Runtime.field(options, 'icon'), title: _Runtime.field(options, 'title'), tooltip: _Runtime.field(options, 'tooltip'), action: function(event:Dynamic) {
         var type:Dynamic = cast _Runtime.UNDEFINED;
         type = _Runtime.callValue(TauriTray.toTrayEventType__tauriTray, cast ([event] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(type, null))) { _Runtime.callValue(emit, cast ([id, type] : Array<Dynamic>)); }
+        if ((cast !_Runtime.strictEquals(type, null) : Bool)) { _Runtime.callValue(emit, cast ([id, type] : Array<Dynamic>)); }
       } }] : Array<Dynamic>)), 'then', cast ([function(icon:Dynamic) {
         _Runtime.setField(record, 'icon', icon);
       }] : Array<Dynamic>)), function() {
@@ -49,7 +49,7 @@ class TauriTray {
     }, destroy: function(id:Dynamic) {
       var record:Dynamic = cast _Runtime.UNDEFINED;
       record = ((cast trays : flighthq._internal._Map).get(id));
-      if (_Runtime.truthy(!_Runtime.truthy(record))) { return; }
+      if ((cast !_Runtime.truthy(record) : Bool)) { return; }
       _Runtime.callOptionalProperty(_Runtime.callOptionalProperty(_Runtime.field(record, 'icon'), 'close', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
       
       }] : Array<Dynamic>));
@@ -67,7 +67,7 @@ class TauriTray {
     }, getTooltip: function(id:Dynamic) {
       return cast _Runtime.coalesce(_Runtime.optionalField(((cast trays : flighthq._internal._Map).get(id)), 'tooltip'), function():Dynamic return cast '');
     }, isDestroyed: function(id:Dynamic) {
-      return cast !_Runtime.truthy(((cast trays : flighthq._internal._Map).has(id)));
+      return cast !(cast ((cast trays : flighthq._internal._Map).has(id)) : Bool);
     }, listIds: function() {
       return cast _Runtime.concatArrays([_Runtime.toArray(((cast trays : flighthq._internal._Map).keys()))]);
     }, popUpContextMenu: function(id:Dynamic) {
@@ -75,7 +75,7 @@ class TauriTray {
     }, setContextMenu: function(id:Dynamic, items:Dynamic) {
       var record:Dynamic = cast _Runtime.UNDEFINED;
       record = ((cast trays : flighthq._internal._Map).get(id));
-      if (_Runtime.truthy(!_Runtime.truthy(record))) { return; }
+      if ((cast !_Runtime.truthy(record) : Bool)) { return; }
       _Runtime.voidValue(flighthq._internal._Async.recover(_Runtime.callValue(function():flighthq._internal._Promise<Dynamic> {
         return cast flighthq._internal._Async.protect(function():Dynamic {
           var built:Dynamic = cast _Runtime.UNDEFINED;
@@ -107,7 +107,7 @@ class TauriTray {
     }, setTitle: function(id:Dynamic, title:Dynamic) {
       var record:Dynamic = cast _Runtime.UNDEFINED;
       record = ((cast trays : flighthq._internal._Map).get(id));
-      if (_Runtime.truthy(!_Runtime.truthy(record))) { return; }
+      if ((cast !_Runtime.truthy(record) : Bool)) { return; }
       _Runtime.setField(record, 'title', title);
       _Runtime.callOptionalProperty(_Runtime.callOptionalProperty(_Runtime.field(record, 'icon'), 'setTitle', cast ([title] : Array<Dynamic>)), 'catch', cast ([function() {
       
@@ -115,7 +115,7 @@ class TauriTray {
     }, setTooltip: function(id:Dynamic, tooltip:Dynamic) {
       var record:Dynamic = cast _Runtime.UNDEFINED;
       record = ((cast trays : flighthq._internal._Map).get(id));
-      if (_Runtime.truthy(!_Runtime.truthy(record))) { return; }
+      if ((cast !_Runtime.truthy(record) : Bool)) { return; }
       _Runtime.setField(record, 'tooltip', tooltip);
       _Runtime.callOptionalProperty(_Runtime.callOptionalProperty(_Runtime.field(record, 'icon'), 'setTooltip', cast ([tooltip] : Array<Dynamic>)), 'catch', cast ([function() {
       
@@ -123,15 +123,15 @@ class TauriTray {
     }, subscribe: function(listener:Dynamic) {
       (eventListener = cast (listener : Dynamic));
       return cast function() {
-        if (_Runtime.truthy(_Runtime.strictEquals(eventListener, listener))) { (eventListener = cast (null : Dynamic)); }
+        if ((cast _Runtime.strictEquals(eventListener, listener) : Bool)) { (eventListener = cast (null : Dynamic)); }
       };
     } };
     return cast null;
   }
 
   public static function toTrayEventType__tauriTray(event:Dynamic):Null<TrayEventType> {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(event, 'type'), 'DoubleClick'))) { return cast 'doubleClick'; }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(event, 'type'), 'Click'))) { return cast _Runtime.select(_Runtime.strictEquals(_Runtime.field(event, 'button'), 'Right'), function():Dynamic return cast 'rightClick', function():Dynamic return cast 'click'); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(event, 'type'), 'DoubleClick') : Bool)) { return cast 'doubleClick'; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(event, 'type'), 'Click') : Bool)) { return cast ((cast _Runtime.strictEquals(_Runtime.field(event, 'button'), 'Right') : Bool) ? (cast 'rightClick' : Dynamic) : (cast 'click' : Dynamic)); }
     return cast null;
     return cast null;
   }
@@ -147,7 +147,7 @@ class TauriTray {
           if (__flowIndex9 >= __flowIterator8.length) return flighthq._internal._Async.flowBreak();
           var item:Dynamic = __flowIterator8[__flowIndex9++];
           var __flowBranch10:Dynamic;
-          if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(item, 'type'), 'separator'))) {
+          if ((cast _Runtime.strictEquals(_Runtime.field(item, 'type'), 'separator') : Bool)) {
             __flowBranch10 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flatMap(_Runtime.callProperty(_Runtime.field(menuModule, 'PredefinedMenuItem'), 'new', cast ([{ item: 'Separator' }] : Array<Dynamic>)), function(__awaitValue11:Dynamic):Dynamic {
                 _Runtime.callProperty(built, 'push', cast ([__awaitValue11] : Array<Dynamic>));

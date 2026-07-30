@@ -18,36 +18,36 @@ class ForEachPathSegment {
     di = 0.0;
     {
       var ci:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(ci, _Runtime.field(commands, 'length'), '<'))) {
+      while ((cast ((cast ci : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
         var command:Dynamic = _Runtime.getIndex(commands, ci);
-        if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.MOVE_TO))) {
+        if ((cast _Runtime.strictEquals(command, PathCommandValue.MOVE_TO) : Bool)) {
           var x:Dynamic = _Runtime.getIndex(data, di);
           var y:Dynamic = _Runtime.getIndex(data, (di + 1.0));
           (di = cast ((di + 2.0) : Dynamic));
           _Runtime.callValue(visitor, cast ([{ kind: 'moveTo', x: x, y: y }] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO) : Bool)) {
           var x:Dynamic = _Runtime.getIndex(data, (di + 2.0));
           var y:Dynamic = _Runtime.getIndex(data, (di + 3.0));
           (di = cast ((di + 4.0) : Dynamic));
           _Runtime.callValue(visitor, cast ([{ kind: 'moveTo', x: x, y: y }] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.LINE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.LINE_TO) : Bool)) {
           var x:Dynamic = _Runtime.getIndex(data, di);
           var y:Dynamic = _Runtime.getIndex(data, (di + 1.0));
           (di = cast ((di + 2.0) : Dynamic));
           _Runtime.callValue(visitor, cast ([{ kind: 'lineTo', x: x, y: y }] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO) : Bool)) {
           var x:Dynamic = _Runtime.getIndex(data, (di + 2.0));
           var y:Dynamic = _Runtime.getIndex(data, (di + 3.0));
           (di = cast ((di + 4.0) : Dynamic));
           _Runtime.callValue(visitor, cast ([{ kind: 'lineTo', x: x, y: y }] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CURVE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CURVE_TO) : Bool)) {
           var controlX:Dynamic = _Runtime.getIndex(data, di);
           var controlY:Dynamic = _Runtime.getIndex(data, (di + 1.0));
           var x:Dynamic = _Runtime.getIndex(data, (di + 2.0));
           var y:Dynamic = _Runtime.getIndex(data, (di + 3.0));
           (di = cast ((di + 4.0) : Dynamic));
           _Runtime.callValue(visitor, cast ([{ kind: 'curveTo', controlX: controlX, controlY: controlY, x: x, y: y }] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO) : Bool)) {
           var control1X:Dynamic = _Runtime.getIndex(data, di);
           var control1Y:Dynamic = _Runtime.getIndex(data, (di + 1.0));
           var control2X:Dynamic = _Runtime.getIndex(data, (di + 2.0));
@@ -56,7 +56,7 @@ class ForEachPathSegment {
           var y:Dynamic = _Runtime.getIndex(data, (di + 5.0));
           (di = cast ((di + 6.0) : Dynamic));
           _Runtime.callValue(visitor, cast ([{ kind: 'cubicCurveTo', control1X: control1X, control1Y: control1Y, control2X: control2X, control2Y: control2Y, x: x, y: y }] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CLOSE))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CLOSE) : Bool)) {
           _Runtime.callValue(visitor, cast ([{ kind: 'close' }] : Array<Dynamic>));
         } } } } } } }
         ci++;

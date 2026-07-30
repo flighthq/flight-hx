@@ -32,10 +32,10 @@ class VertexColorGlMeshMaterialRenderer {
     gl = _Runtime.field(state, 'gl');
     vertexColor = (cast material : Null<VertexColorMaterial>);
     program = _Runtime.callValue(ensureGlUnlitProgram, cast ([state, _Runtime.callValue(VertexColorGlMeshMaterialRenderer.defineKeyForMaterial__vertexColorGlMeshMaterialRenderer, cast ([vertexColor] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, _Runtime.andValue(!_Runtime.strictEquals(vertexColor, null), function():Dynamic return cast _Runtime.field(vertexColor, 'doubleSided'))] : Array<Dynamic>));
+    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, ((cast !_Runtime.strictEquals(vertexColor, null) : Bool) && (cast _Runtime.field(vertexColor, 'doubleSided') : Bool))] : Array<Dynamic>));
     _Runtime.callValue(setGlMeshViewProjection, cast ([gl, _Runtime.field(program, 'locViewProjection'), camera] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.vertexAttrib4f(gl, 4.0, 1.0, 1.0, 1.0, 1.0);
-    if (_Runtime.truthy(_Runtime.strictEquals(vertexColor, null))) {
+    if ((cast _Runtime.strictEquals(vertexColor, null) : Bool)) {
       _Runtime.callValue(bindGlUnlitSurface, cast ([state, program, VertexColorGlMeshMaterialRenderer.WHITE__vertexColorGlMeshMaterialRenderer, 1.0, null, 0.5] : Array<Dynamic>));
       return;
     }
@@ -44,7 +44,7 @@ class VertexColorGlMeshMaterialRenderer {
   }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
-    if (_Runtime.truthy(_Runtime.strictEquals(program, null))) { return; }
+    if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
     _Runtime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
   } };
 
@@ -53,7 +53,7 @@ class VertexColorGlMeshMaterialRenderer {
   }
 
   public static function defineKeyForMaterial__vertexColorGlMeshMaterialRenderer(material:Null<VertexColorMaterial>):GlUnlitDefineKey {
-    return cast { alphaMaskEnabled: _Runtime.andValue(!_Runtime.strictEquals(material, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask')), hasColorMap: false, hasUvTransform: false, vertexColor: true };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasColorMap: false, hasUvTransform: false, vertexColor: true };
     return cast null;
   }
 

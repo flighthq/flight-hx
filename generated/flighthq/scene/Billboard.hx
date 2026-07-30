@@ -48,7 +48,7 @@ class Billboard {
   public static function isBillboard(source:SceneNode):Bool {
     var candidate:Dynamic = cast _Runtime.UNDEFINED;
     candidate = (cast source : Dynamic);
-    return cast _Runtime.andValue(!_Runtime.looseEquals(_Runtime.field(candidate, 'geometry'), null), function():Dynamic return cast !_Runtime.looseEquals(_Runtime.field(candidate, 'mode'), null));
+    return cast ((cast !_Runtime.looseEquals(_Runtime.field(candidate, 'geometry'), null) : Bool) && (cast !_Runtime.looseEquals(_Runtime.field(candidate, 'mode'), null) : Bool));
     return cast null;
   }
 }

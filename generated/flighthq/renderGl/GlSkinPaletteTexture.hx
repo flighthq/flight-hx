@@ -19,7 +19,7 @@ class GlSkinPaletteTexture {
     var width:Dynamic = cast _Runtime.UNDEFINED;
     width = (jointCount * 4.0);
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, _Runtime.field(palette, 'texture'));
-    if (_Runtime.truthy(_Runtime.compare(jointCount, _Runtime.field(palette, 'jointCapacity'), '>'))) {
+    if ((cast ((cast jointCount : Float) > (cast _Runtime.field(palette, 'jointCapacity') : Float)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.texImage2D(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, 0.0, flighthq._internal.backend.WebGl2Backend.RGBA32F, width, 1.0, 0.0, flighthq._internal.backend.WebGl2Backend.RGBA, flighthq._internal.backend.WebGl2Backend.FLOAT, (cast jointMatrices : flighthq._internal._Float32Array));
       flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, flighthq._internal.backend.WebGl2Backend.TEXTURE_MIN_FILTER, flighthq._internal.backend.WebGl2Backend.NEAREST);
       flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, flighthq._internal.backend.WebGl2Backend.TEXTURE_MAG_FILTER, flighthq._internal.backend.WebGl2Backend.NEAREST);

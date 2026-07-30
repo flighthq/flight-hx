@@ -18,7 +18,7 @@ class Throttle {
     elapsed = 0.0;
     handler = function(delta:Float) {
       (elapsed = cast ((elapsed + delta) : Dynamic));
-      if (_Runtime.truthy(_Runtime.compare(elapsed, period, '>='))) {
+      if ((cast ((cast elapsed : Float) >= (cast period : Float)) : Bool)) {
         _Runtime.callValue(slot, cast ([elapsed] : Array<Dynamic>));
         (elapsed = cast (_Runtime.fmod(elapsed, period) : Dynamic));
       }
@@ -42,14 +42,14 @@ class Throttle {
     lastArgs = null;
     leadingFired = false;
     clearTimer = function() {
-      if (_Runtime.truthy(!_Runtime.strictEquals(timer, null))) {
+      if ((cast !_Runtime.strictEquals(timer, null) : Bool)) {
         _Runtime.clearTimeout(timer);
         (timer = cast (null : Dynamic));
       }
     };
     handler = (cast function(args:Array<Dynamic>) {
       (lastArgs = cast (args : Dynamic));
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(leading, function():Dynamic return cast _Runtime.strictEquals(timer, null)), function():Dynamic return cast !_Runtime.truthy(leadingFired)))) {
+      if ((cast ((cast ((cast leading : Bool) && (cast _Runtime.strictEquals(timer, null) : Bool)) : Bool) && (cast !(cast leadingFired : Bool) : Bool)) : Bool)) {
         (leadingFired = cast (true : Dynamic));
         _Runtime.apply(slot, _Runtime.concatArrays([_Runtime.toArray(args)]));
       }
@@ -57,7 +57,7 @@ class Throttle {
       (timer = cast (_Runtime.setTimeout(function() {
         (timer = cast (null : Dynamic));
         (leadingFired = cast (false : Dynamic));
-        if (_Runtime.truthy(_Runtime.andValue(trailing, function():Dynamic return cast !_Runtime.strictEquals(lastArgs, null)))) {
+        if ((cast ((cast trailing : Bool) && (cast !_Runtime.strictEquals(lastArgs, null) : Bool)) : Bool)) {
           _Runtime.apply(slot, _Runtime.concatArrays([_Runtime.toArray(lastArgs)]));
           (lastArgs = cast (null : Dynamic));
         }
@@ -85,7 +85,7 @@ class Throttle {
     trailingTimer = null;
     lastArgs = null;
     clearTrailing = function() {
-      if (_Runtime.truthy(!_Runtime.strictEquals(trailingTimer, null))) {
+      if ((cast !_Runtime.strictEquals(trailingTimer, null) : Bool)) {
         _Runtime.clearTimeout(trailingTimer);
         (trailingTimer = cast (null : Dynamic));
       }
@@ -95,21 +95,21 @@ class Throttle {
       var remaining:Dynamic = cast _Runtime.UNDEFINED;
       now = _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>));
       remaining = (intervalMs - (now - lastFiredAt));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(remaining, 0.0, '<='), function():Dynamic return cast _Runtime.compare(remaining, intervalMs, '>')))) {
+      if ((cast ((cast ((cast remaining : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast remaining : Float) > (cast intervalMs : Float)) : Bool)) : Bool)) {
         _Runtime.callValue(clearTrailing, cast ([] : Array<Dynamic>));
         (lastFiredAt = cast (now : Dynamic));
-        if (_Runtime.truthy(leading)) {
+        if ((cast leading : Bool)) {
           _Runtime.apply(slot, _Runtime.concatArrays([_Runtime.toArray(args)]));
         } else {
           (lastArgs = cast (args : Dynamic));
         }
-      } else { if (_Runtime.truthy(trailing)) {
+      } else { if ((cast trailing : Bool)) {
         _Runtime.callValue(clearTrailing, cast ([] : Array<Dynamic>));
         (lastArgs = cast (args : Dynamic));
         (trailingTimer = cast (_Runtime.setTimeout(function() {
           (lastFiredAt = cast (_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) : Dynamic));
           (trailingTimer = cast (null : Dynamic));
-          if (_Runtime.truthy(!_Runtime.strictEquals(lastArgs, null))) {
+          if ((cast !_Runtime.strictEquals(lastArgs, null) : Bool)) {
             _Runtime.apply(slot, _Runtime.concatArrays([_Runtime.toArray(lastArgs)]));
             (lastArgs = cast (null : Dynamic));
           }

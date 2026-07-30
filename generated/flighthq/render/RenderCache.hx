@@ -31,7 +31,7 @@ class RenderCache {
       var attached:Dynamic = cast _Runtime.UNDEFINED;
       _Runtime.callOptionalProperty(_Runtime.optionalField(_Runtime.field(adapter, 'signals'), 'onPrepare'), 'emit', cast ([] : Array<Dynamic>));
       attached = _Runtime.coalesce(_Runtime.field(adapter, 'cache'), function():Dynamic return cast null);
-      if (_Runtime.truthy(_Runtime.strictEquals(attached, null))) { return cast null; }
+      if ((cast _Runtime.strictEquals(attached, null) : Bool)) { return cast null; }
       _Runtime.setField(node, 'kind', RenderCacheKindValue);
       _Runtime.callValue(multiplyMatrix, cast ([_Runtime.field(node, 'transform2D'), _Runtime.field(node, 'transform2D'), _Runtime.field(attached, 'transform')] : Array<Dynamic>));
       return cast false;
@@ -47,17 +47,17 @@ class RenderCache {
   public static function getRenderProxyCache(state:RenderState, source:Renderable):Null<flighthq.types.RenderCache> {
     var adapter:Dynamic = cast _Runtime.UNDEFINED;
     adapter = _Runtime.callValue(getRenderProxyAdapter, cast ([state, source] : Array<Dynamic>));
-    return cast _Runtime.select(_Runtime.callValue(isRenderCacheAdapter, cast ([adapter] : Array<Dynamic>)), function():Dynamic return cast _Runtime.coalesce(_Runtime.field(adapter, 'cache'), function():Dynamic return cast null), function():Dynamic return cast null);
+    return cast ((cast _Runtime.callValue(isRenderCacheAdapter, cast ([adapter] : Array<Dynamic>)) : Bool) ? (cast _Runtime.coalesce(_Runtime.field(adapter, 'cache'), function():Dynamic return cast null) : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function isRenderCache(source:Dynamic):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(source), 'object'), function():Dynamic return cast !_Runtime.strictEquals(source, null)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field((cast source : flighthq.types.RenderCache), 'kind'), RenderCacheKindValue));
+    return cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(source), 'object') : Bool) && (cast !_Runtime.strictEquals(source, null) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field((cast source : flighthq.types.RenderCache), 'kind'), RenderCacheKindValue) : Bool));
     return cast null;
   }
 
   public static function isRenderCacheAdapter(value:Dynamic):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(value), 'object'), function():Dynamic return cast !_Runtime.strictEquals(value, null)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast value : RenderCacheAdapter), 'adapt')), 'function')), function():Dynamic return cast _Runtime.hasField((cast value : RenderCacheAdapter), 'cache'));
+    return cast _Runtime.andValue(((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'object') : Bool) && (cast !_Runtime.strictEquals(value, null) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast value : RenderCacheAdapter), 'adapt')), 'function') : Bool)), function():Dynamic return cast _Runtime.hasField((cast value : RenderCacheAdapter), 'cache'));
     return cast null;
   }
 
@@ -69,7 +69,7 @@ class RenderCache {
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var adapter:Dynamic = cast _Runtime.UNDEFINED;
     existing = _Runtime.callValue(getRenderProxyAdapter, cast ([state, source] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.callValue(isRenderCacheAdapter, cast ([existing] : Array<Dynamic>)))) {
+    if ((cast _Runtime.callValue(isRenderCacheAdapter, cast ([existing] : Array<Dynamic>)) : Bool)) {
       _Runtime.setField(existing, 'cache', cache);
       return cast existing;
     }

@@ -30,40 +30,40 @@ class GetPathBounds {
     y = 0.0;
     di = 0.0;
     expand = function(px:Float, py:Float) {
-      if (_Runtime.truthy(_Runtime.compare(px, minX, '<'))) { (minX = cast (px : Dynamic)); }
-      if (_Runtime.truthy(_Runtime.compare(px, maxX, '>'))) { (maxX = cast (px : Dynamic)); }
-      if (_Runtime.truthy(_Runtime.compare(py, minY, '<'))) { (minY = cast (py : Dynamic)); }
-      if (_Runtime.truthy(_Runtime.compare(py, maxY, '>'))) { (maxY = cast (py : Dynamic)); }
+      if ((cast ((cast px : Float) < (cast minX : Float)) : Bool)) { (minX = cast (px : Dynamic)); }
+      if ((cast ((cast px : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (px : Dynamic)); }
+      if ((cast ((cast py : Float) < (cast minY : Float)) : Bool)) { (minY = cast (py : Dynamic)); }
+      if ((cast ((cast py : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast (py : Dynamic)); }
     };
     {
       var ci:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(ci, _Runtime.field(commands, 'length'), '<'))) {
+      while ((cast ((cast ci : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
         var command:Dynamic = _Runtime.getIndex(commands, ci);
-        if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.MOVE_TO))) {
+        if ((cast _Runtime.strictEquals(command, PathCommandValue.MOVE_TO) : Bool)) {
           (x = cast (_Runtime.getIndex(data, di) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 1.0)) : Dynamic));
           (di = cast ((di + 2.0) : Dynamic));
           _Runtime.callValue(expand, cast ([x, y] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO) : Bool)) {
           (x = cast (_Runtime.getIndex(data, (di + 2.0)) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 3.0)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
           _Runtime.callValue(expand, cast ([x, y] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.LINE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.LINE_TO) : Bool)) {
           var nx:Dynamic = _Runtime.getIndex(data, di);
           var ny:Dynamic = _Runtime.getIndex(data, (di + 1.0));
           (di = cast ((di + 2.0) : Dynamic));
           _Runtime.callValue(expand, cast ([nx, ny] : Array<Dynamic>));
           (x = cast (nx : Dynamic));
           (y = cast (ny : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO) : Bool)) {
           var nx:Dynamic = _Runtime.getIndex(data, (di + 2.0));
           var ny:Dynamic = _Runtime.getIndex(data, (di + 3.0));
           (di = cast ((di + 4.0) : Dynamic));
           _Runtime.callValue(expand, cast ([nx, ny] : Array<Dynamic>));
           (x = cast (nx : Dynamic));
           (y = cast (ny : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CURVE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CURVE_TO) : Bool)) {
           var cx:Dynamic = _Runtime.getIndex(data, di);
           var cy:Dynamic = _Runtime.getIndex(data, (di + 1.0));
           var ax:Dynamic = _Runtime.getIndex(data, (di + 2.0));
@@ -72,7 +72,7 @@ class GetPathBounds {
           _Runtime.callValue(GetPathBounds.expandQuadraticBounds__getPathBounds, cast ([x, y, cx, cy, ax, ay, expand] : Array<Dynamic>));
           (x = cast (ax : Dynamic));
           (y = cast (ay : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO))) {
+        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO) : Bool)) {
           var c1x:Dynamic = _Runtime.getIndex(data, di);
           var c1y:Dynamic = _Runtime.getIndex(data, (di + 1.0));
           var c2x:Dynamic = _Runtime.getIndex(data, (di + 2.0));
@@ -87,7 +87,7 @@ class GetPathBounds {
         ci++;
       }
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(minX, HxMath.POSITIVE_INFINITY))) {
+    if ((cast _Runtime.strictEquals(minX, HxMath.POSITIVE_INFINITY) : Bool)) {
       _Runtime.setField(out, 'x', 0.0);
       _Runtime.setField(out, 'y', 0.0);
       _Runtime.setField(out, 'width', 0.0);
@@ -113,19 +113,19 @@ class GetPathBounds {
     a = (((-p0 + (3.0 * p1)) - (3.0 * p2)) + p3);
     b = (2.0 * ((p0 - (2.0 * p1)) + p2));
     c = (p1 - p0);
-    if (_Runtime.truthy(_Runtime.compare(HxMath.abs(a), 1e-12, '<'))) {
-      if (_Runtime.truthy(_Runtime.compare(HxMath.abs(b), 1e-12, '<'))) { return; }
+    if ((cast ((cast HxMath.abs(a) : Float) < (cast 1e-12 : Float)) : Bool)) {
+      if ((cast ((cast HxMath.abs(b) : Float) < (cast 1e-12 : Float)) : Bool)) { return; }
       var t:Dynamic = (-c / b);
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(t, 0.0, '>'), function():Dynamic return cast _Runtime.compare(t, 1.0, '<')))) { _Runtime.callValue(cb, cast ([t] : Array<Dynamic>)); }
+      if ((cast ((cast ((cast t : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast t : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { _Runtime.callValue(cb, cast ([t] : Array<Dynamic>)); }
       return;
     }
     discriminant = ((b * b) - ((4.0 * a) * c));
-    if (_Runtime.truthy(_Runtime.compare(discriminant, 0.0, '<'))) { return; }
+    if ((cast ((cast discriminant : Float) < (cast 0.0 : Float)) : Bool)) { return; }
     sqrtD = HxMath.sqrt(discriminant);
     t1 = ((-b + sqrtD) / (2.0 * a));
     t2 = ((-b - sqrtD) / (2.0 * a));
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(t1, 0.0, '>'), function():Dynamic return cast _Runtime.compare(t1, 1.0, '<')))) { _Runtime.callValue(cb, cast ([t1] : Array<Dynamic>)); }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(t2, 0.0, '>'), function():Dynamic return cast _Runtime.compare(t2, 1.0, '<')), function():Dynamic return cast _Runtime.compare(HxMath.abs((t2 - t1)), 1e-12, '>')))) { _Runtime.callValue(cb, cast ([t2] : Array<Dynamic>)); }
+    if ((cast ((cast ((cast t1 : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast t1 : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { _Runtime.callValue(cb, cast ([t1] : Array<Dynamic>)); }
+    if ((cast ((cast ((cast ((cast t2 : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast t2 : Float) < (cast 1.0 : Float)) : Bool)) : Bool) && (cast ((cast HxMath.abs((t2 - t1)) : Float) > (cast 1e-12 : Float)) : Bool)) : Bool)) { _Runtime.callValue(cb, cast ([t2] : Array<Dynamic>)); }
   }
 
   public static function evalCubic__getPathBounds(p0:Float, p1:Float, p2:Float, p3:Float, t:Float):Float {
@@ -157,18 +157,18 @@ class GetPathBounds {
     var ty:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(expand, cast ([x2, y2] : Array<Dynamic>));
     tx = _Runtime.callValue(GetPathBounds.quadraticExtremumT__getPathBounds, cast ([x0, cx, x2] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(tx, null))) { _Runtime.callValue(expand, cast ([_Runtime.callValue(GetPathBounds.evalQuadratic__getPathBounds, cast ([x0, cx, x2, tx] : Array<Dynamic>)), _Runtime.callValue(GetPathBounds.evalQuadratic__getPathBounds, cast ([y0, cy, y2, tx] : Array<Dynamic>))] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(tx, null) : Bool)) { _Runtime.callValue(expand, cast ([_Runtime.callValue(GetPathBounds.evalQuadratic__getPathBounds, cast ([x0, cx, x2, tx] : Array<Dynamic>)), _Runtime.callValue(GetPathBounds.evalQuadratic__getPathBounds, cast ([y0, cy, y2, tx] : Array<Dynamic>))] : Array<Dynamic>)); }
     ty = _Runtime.callValue(GetPathBounds.quadraticExtremumT__getPathBounds, cast ([y0, cy, y2] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(ty, null))) { _Runtime.callValue(expand, cast ([_Runtime.callValue(GetPathBounds.evalQuadratic__getPathBounds, cast ([x0, cx, x2, ty] : Array<Dynamic>)), _Runtime.callValue(GetPathBounds.evalQuadratic__getPathBounds, cast ([y0, cy, y2, ty] : Array<Dynamic>))] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(ty, null) : Bool)) { _Runtime.callValue(expand, cast ([_Runtime.callValue(GetPathBounds.evalQuadratic__getPathBounds, cast ([x0, cx, x2, ty] : Array<Dynamic>)), _Runtime.callValue(GetPathBounds.evalQuadratic__getPathBounds, cast ([y0, cy, y2, ty] : Array<Dynamic>))] : Array<Dynamic>)); }
   }
 
   public static function quadraticExtremumT__getPathBounds(p0:Float, p1:Float, p2:Float):Null<Float> {
     var denom:Dynamic = cast _Runtime.UNDEFINED;
     var t:Dynamic = cast _Runtime.UNDEFINED;
     denom = ((p0 - (2.0 * p1)) + p2);
-    if (_Runtime.truthy(_Runtime.strictEquals(denom, 0.0))) { return cast null; }
+    if ((cast _Runtime.strictEquals(denom, 0.0) : Bool)) { return cast null; }
     t = ((p0 - p1) / denom);
-    return cast _Runtime.select(_Runtime.andValue(_Runtime.compare(t, 0.0, '>'), function():Dynamic return cast _Runtime.compare(t, 1.0, '<')), function():Dynamic return cast t, function():Dynamic return cast null);
+    return cast ((cast ((cast ((cast t : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast t : Float) < (cast 1.0 : Float)) : Bool)) : Bool) ? (cast t : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 }

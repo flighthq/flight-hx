@@ -21,14 +21,14 @@ class SurfaceEncode {
     domImageData = _Runtime.construct(_Runtime.field(_Runtime.globalValue('globalThis'), 'ImageData'), [_Runtime.field(source, 'width'), _Runtime.field(source, 'height')]);
     _Runtime.callProperty(_Runtime.field(domImageData, 'data'), 'set', cast ([_Runtime.field(source, 'data')] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([domImageData, 0.0, 0.0] : Array<Dynamic>));
-    mimeType = _Runtime.select(_Runtime.strictEquals(format, 'jpeg'), function():Dynamic return cast 'image/jpeg', function():Dynamic return cast 'image/png');
+    mimeType = ((cast _Runtime.strictEquals(format, 'jpeg') : Bool) ? (cast 'image/jpeg' : Dynamic) : (cast 'image/png' : Dynamic));
     dataUrl = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'toDataURL', cast ([mimeType, quality] : Array<Dynamic>));
     base64 = _Runtime.slice(dataUrl, (_Runtime.callProperty(dataUrl, 'indexOf', cast ([','] : Array<Dynamic>)) + 1.0), null);
     binary = _Runtime.callValue(_Runtime.globalValue('atob'), cast ([base64] : Array<Dynamic>));
     bytes = new flighthq._internal._UInt8Array(_Runtime.field(binary, 'length'));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(binary, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(binary, 'length') : Float)) : Bool)) {
         _Runtime.setIndex(bytes, i, _Runtime.charCodeAt(binary, i));
         i++;
       }

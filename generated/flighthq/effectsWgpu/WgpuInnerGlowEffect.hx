@@ -44,7 +44,7 @@ class WgpuInnerGlowEffect {
     _Runtime.callValue(applyWgpuEffectBoxBlur, cast ([state, s0, s1, s2, { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0), edgeColor: _Runtime.callValue(WgpuInnerGlowEffect.getInvertTintEdgeColor__wgpuInnerGlowEffect, cast ([color, alpha, strength] : Array<Dynamic>)), passes: quality }] : Array<Dynamic>));
     _Runtime.callValue(applyWgpuEffectInnerClipPass, cast ([state, s1, src, s0] : Array<Dynamic>));
     _Runtime.callValue(clearWgpuEffectTarget, cast ([state, dst] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(sourceMode, 'draw'))) {
+    if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) {
       _Runtime.callValue(applyWgpuEffectBlitPass, cast ([state, src, dst] : Array<Dynamic>));
     }
     _Runtime.callValue(applyWgpuEffectBlitPass, cast ([state, s0, dst] : Array<Dynamic>));

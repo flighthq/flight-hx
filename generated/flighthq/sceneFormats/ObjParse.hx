@@ -44,11 +44,11 @@ class ObjParse {
     lines = _Runtime.callProperty(source, 'split', cast (['\n'] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(lines, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
         var raw:Dynamic = StringTools.trim(Std.string(_Runtime.getIndex(lines, i)));
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(raw, 'length'), 0.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.charCodeAt(raw, 0.0), 35.0)))) { i++; continue; }
+        if ((cast ((cast _Runtime.strictEquals(_Runtime.field(raw, 'length'), 0.0) : Bool) || (cast _Runtime.strictEquals(_Runtime.charCodeAt(raw, 0.0), 35.0) : Bool)) : Bool)) { i++; continue; }
         var spaceIndex:Dynamic = _Runtime.callProperty(raw, 'indexOf', cast ([' '] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.compare(spaceIndex, 0.0, '<'))) { i++; continue; }
+        if ((cast ((cast spaceIndex : Float) < (cast 0.0 : Float)) : Bool)) { i++; continue; }
         var directive:Dynamic = _Runtime.slice(raw, 0.0, spaceIndex);
         var args:Dynamic = StringTools.trim(Std.string(_Runtime.slice(raw, (spaceIndex + 1.0), null)));
         {
@@ -56,14 +56,14 @@ class ObjParse {
           if (__switchValue == 'v') {
             {
               var parts:Dynamic = _Runtime.callProperty(args, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>));
-              if (_Runtime.truthy(_Runtime.compare(_Runtime.field(parts, 'length'), 3.0, '<'))) {
+              if ((cast ((cast _Runtime.field(parts, 'length') : Float) < (cast 3.0 : Float)) : Bool)) {
                 _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromObj: v on line ' + Std.string((i + 1.0)) + ' has fewer than 3 components'] : Array<Dynamic>));
                 break;
               }
               var x:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(parts, 0.0)] : Array<Dynamic>));
               var y:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(parts, 1.0)] : Array<Dynamic>));
               var z:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(parts, 2.0)] : Array<Dynamic>));
-              if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([x] : Array<Dynamic>))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([y] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([z] : Array<Dynamic>)))))) {
+              if ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([x] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([y] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([z] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
                 _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromObj: v on line ' + Std.string((i + 1.0)) + ' has non-numeric components'] : Array<Dynamic>));
                 break;
               }
@@ -73,14 +73,14 @@ class ObjParse {
           else if (__switchValue == 'vn') {
             {
               var parts:Dynamic = _Runtime.callProperty(args, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>));
-              if (_Runtime.truthy(_Runtime.compare(_Runtime.field(parts, 'length'), 3.0, '<'))) {
+              if ((cast ((cast _Runtime.field(parts, 'length') : Float) < (cast 3.0 : Float)) : Bool)) {
                 _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromObj: vn on line ' + Std.string((i + 1.0)) + ' has fewer than 3 components'] : Array<Dynamic>));
                 break;
               }
               var x:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(parts, 0.0)] : Array<Dynamic>));
               var y:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(parts, 1.0)] : Array<Dynamic>));
               var z:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(parts, 2.0)] : Array<Dynamic>));
-              if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([x] : Array<Dynamic>))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([y] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([z] : Array<Dynamic>)))))) {
+              if ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([x] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([y] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([z] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
                 _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromObj: vn on line ' + Std.string((i + 1.0)) + ' has non-numeric components'] : Array<Dynamic>));
                 break;
               }
@@ -90,13 +90,13 @@ class ObjParse {
           else if (__switchValue == 'vt') {
             {
               var parts:Dynamic = _Runtime.callProperty(args, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>));
-              if (_Runtime.truthy(_Runtime.compare(_Runtime.field(parts, 'length'), 2.0, '<'))) {
+              if ((cast ((cast _Runtime.field(parts, 'length') : Float) < (cast 2.0 : Float)) : Bool)) {
                 _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromObj: vt on line ' + Std.string((i + 1.0)) + ' has fewer than 2 components'] : Array<Dynamic>));
                 break;
               }
               var u:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(parts, 0.0)] : Array<Dynamic>));
               var v:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(parts, 1.0)] : Array<Dynamic>));
-              if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([u] : Array<Dynamic>))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)))))) {
+              if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([u] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
                 _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromObj: vt on line ' + Std.string((i + 1.0)) + ' has non-numeric components'] : Array<Dynamic>));
                 break;
               }
@@ -106,7 +106,7 @@ class ObjParse {
           else if (__switchValue == 'f') {
             {
               var vertexTokens:Dynamic = _Runtime.callProperty(args, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>));
-              if (_Runtime.truthy(_Runtime.compare(_Runtime.field(vertexTokens, 'length'), 3.0, '<'))) {
+              if ((cast ((cast _Runtime.field(vertexTokens, 'length') : Float) < (cast 3.0 : Float)) : Bool)) {
                 _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromObj: f on line ' + Std.string((i + 1.0)) + ' has fewer than 3 vertices'] : Array<Dynamic>));
                 break;
               }
@@ -114,17 +114,17 @@ class ObjParse {
               var faceIndices:Array<Float> = cast ([] : Array<Dynamic>);
               {
                 var vi:Dynamic = 0.0;
-                while (_Runtime.truthy(_Runtime.compare(vi, _Runtime.field(vertexTokens, 'length'), '<'))) {
+                while ((cast ((cast vi : Float) < (cast _Runtime.field(vertexTokens, 'length') : Float)) : Bool)) {
                   var idx:Dynamic = _Runtime.callValue(ObjParse.parseFaceVertex__objParse, cast ([_Runtime.getIndex(vertexTokens, vi), positions, uvs, normals, bucket, warnings, i] : Array<Dynamic>));
-                  if (_Runtime.truthy(_Runtime.compare(idx, 0.0, '<'))) { break; }
+                  if ((cast ((cast idx : Float) < (cast 0.0 : Float)) : Bool)) { break; }
                   _Runtime.callProperty(faceIndices, 'push', cast ([idx] : Array<Dynamic>));
                   vi++;
                 }
               }
-              if (_Runtime.truthy(_Runtime.compare(_Runtime.field(faceIndices, 'length'), 3.0, '>='))) {
+              if ((cast ((cast _Runtime.field(faceIndices, 'length') : Float) >= (cast 3.0 : Float)) : Bool)) {
                 {
                   var t:Dynamic = 1.0;
-                  while (_Runtime.truthy(_Runtime.compare(t, (_Runtime.field(faceIndices, 'length') - 1.0), '<'))) {
+                  while ((cast ((cast t : Float) < (cast (_Runtime.field(faceIndices, 'length') - 1.0) : Float)) : Bool)) {
                     _Runtime.pushMany(_Runtime.field(bucket, 'indices'), cast ([_Runtime.getIndex(faceIndices, 0.0), _Runtime.getIndex(faceIndices, t), _Runtime.getIndex(faceIndices, (t + 1.0))] : Array<Dynamic>));
                     t++;
                   }
@@ -162,7 +162,7 @@ class ObjParse {
   public static function getOrCreateBucket__objParse(buckets:Dynamic, material:String):MaterialBucket__objParse {
     var bucket:Dynamic = cast _Runtime.UNDEFINED;
     bucket = ((cast buckets : flighthq._internal._Map).get(material));
-    if (_Runtime.truthy(_Runtime.strictEquals(bucket, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(bucket, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (bucket = cast ({ dedup: _Runtime.construct(_Runtime.globalValue('Map'), []), indices: cast ([] : Array<Dynamic>), vertices: cast ([] : Array<Dynamic>) } : Dynamic));
       ((cast buckets : flighthq._internal._Map).set(material, bucket));
     }
@@ -187,32 +187,32 @@ class ObjParse {
     uvCount = (_Runtime.field(uvs, 'length') / 2.0);
     normalCount = (_Runtime.field(normals, 'length') / 3.0);
     rawPosIdx = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(parts, 0.0), 10.0] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([rawPosIdx] : Array<Dynamic>))), function():Dynamic return cast _Runtime.strictEquals(rawPosIdx, 0.0)))) {
+    if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([rawPosIdx] : Array<Dynamic>)) : Bool) : Bool) || (cast _Runtime.strictEquals(rawPosIdx, 0.0) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromObj: invalid face vertex index \'' + Std.string(token) + '\' on line ' + Std.string((lineIndex + 1.0)) + ''] : Array<Dynamic>));
       return cast -1.0;
     }
-    posIdx = _Runtime.select(_Runtime.compare(rawPosIdx, 0.0, '>'), function():Dynamic return cast (rawPosIdx - 1.0), function():Dynamic return cast (posCount + rawPosIdx));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(posIdx, 0.0, '<'), function():Dynamic return cast _Runtime.compare(posIdx, posCount, '>=')))) {
+    posIdx = ((cast ((cast rawPosIdx : Float) > (cast 0.0 : Float)) : Bool) ? (cast (rawPosIdx - 1.0) : Dynamic) : (cast (posCount + rawPosIdx) : Dynamic));
+    if ((cast ((cast ((cast posIdx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast posIdx : Float) >= (cast posCount : Float)) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromObj: position index ' + Std.string(rawPosIdx) + ' out of range on line ' + Std.string((lineIndex + 1.0)) + ''] : Array<Dynamic>));
       return cast -1.0;
     }
     uvIdx = -1.0;
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(_Runtime.field(parts, 'length'), 2.0, '>='), function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.getIndex(parts, 1.0), 'length'), 0.0, '>')))) {
+    if ((cast ((cast ((cast _Runtime.field(parts, 'length') : Float) >= (cast 2.0 : Float)) : Bool) && (cast ((cast _Runtime.field(_Runtime.getIndex(parts, 1.0), 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       var rawUvIdx:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(parts, 1.0), 10.0] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([rawUvIdx] : Array<Dynamic>)), function():Dynamic return cast !_Runtime.strictEquals(rawUvIdx, 0.0)))) {
-        (uvIdx = cast (_Runtime.select(_Runtime.compare(rawUvIdx, 0.0, '>'), function():Dynamic return cast (rawUvIdx - 1.0), function():Dynamic return cast (uvCount + rawUvIdx)) : Dynamic));
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(uvIdx, 0.0, '<'), function():Dynamic return cast _Runtime.compare(uvIdx, uvCount, '>=')))) {
+      if ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([rawUvIdx] : Array<Dynamic>)) : Bool) && (cast !_Runtime.strictEquals(rawUvIdx, 0.0) : Bool)) : Bool)) {
+        (uvIdx = cast (((cast ((cast rawUvIdx : Float) > (cast 0.0 : Float)) : Bool) ? (cast (rawUvIdx - 1.0) : Dynamic) : (cast (uvCount + rawUvIdx) : Dynamic)) : Dynamic));
+        if ((cast ((cast ((cast uvIdx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast uvIdx : Float) >= (cast uvCount : Float)) : Bool)) : Bool)) {
           _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromObj: uv index ' + Std.string(rawUvIdx) + ' out of range on line ' + Std.string((lineIndex + 1.0)) + ''] : Array<Dynamic>));
           (uvIdx = cast (-1.0 : Dynamic));
         }
       }
     }
     normalIdx = -1.0;
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(_Runtime.field(parts, 'length'), 3.0, '>='), function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.getIndex(parts, 2.0), 'length'), 0.0, '>')))) {
+    if ((cast ((cast ((cast _Runtime.field(parts, 'length') : Float) >= (cast 3.0 : Float)) : Bool) && (cast ((cast _Runtime.field(_Runtime.getIndex(parts, 2.0), 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       var rawNormalIdx:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(parts, 2.0), 10.0] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([rawNormalIdx] : Array<Dynamic>)), function():Dynamic return cast !_Runtime.strictEquals(rawNormalIdx, 0.0)))) {
-        (normalIdx = cast (_Runtime.select(_Runtime.compare(rawNormalIdx, 0.0, '>'), function():Dynamic return cast (rawNormalIdx - 1.0), function():Dynamic return cast (normalCount + rawNormalIdx)) : Dynamic));
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(normalIdx, 0.0, '<'), function():Dynamic return cast _Runtime.compare(normalIdx, normalCount, '>=')))) {
+      if ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([rawNormalIdx] : Array<Dynamic>)) : Bool) && (cast !_Runtime.strictEquals(rawNormalIdx, 0.0) : Bool)) : Bool)) {
+        (normalIdx = cast (((cast ((cast rawNormalIdx : Float) > (cast 0.0 : Float)) : Bool) ? (cast (rawNormalIdx - 1.0) : Dynamic) : (cast (normalCount + rawNormalIdx) : Dynamic)) : Dynamic));
+        if ((cast ((cast ((cast normalIdx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast normalIdx : Float) >= (cast normalCount : Float)) : Bool)) : Bool)) {
           _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromObj: normal index ' + Std.string(rawNormalIdx) + ' out of range on line ' + Std.string((lineIndex + 1.0)) + ''] : Array<Dynamic>));
           (normalIdx = cast (-1.0 : Dynamic));
         }
@@ -220,16 +220,16 @@ class ObjParse {
     }
     key = '' + Std.string(posIdx) + '/' + Std.string(uvIdx) + '/' + Std.string(normalIdx) + '';
     existing = ((cast _Runtime.field(bucket, 'dedup') : flighthq._internal._Map).get(key));
-    if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast existing; }
+    if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
     vertexIndex = (_Runtime.field(_Runtime.field(bucket, 'vertices'), 'length') / CANONICAL_FLOATS_PER_VERTEX);
     _Runtime.pushMany(_Runtime.field(bucket, 'vertices'), cast ([_Runtime.getIndex(positions, (posIdx * 3.0)), _Runtime.getIndex(positions, ((posIdx * 3.0) + 1.0)), _Runtime.getIndex(positions, ((posIdx * 3.0) + 2.0))] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(normalIdx, 0.0, '>='))) {
+    if ((cast ((cast normalIdx : Float) >= (cast 0.0 : Float)) : Bool)) {
       _Runtime.pushMany(_Runtime.field(bucket, 'vertices'), cast ([_Runtime.getIndex(normals, (normalIdx * 3.0)), _Runtime.getIndex(normals, ((normalIdx * 3.0) + 1.0)), _Runtime.getIndex(normals, ((normalIdx * 3.0) + 2.0))] : Array<Dynamic>));
     } else {
       _Runtime.pushMany(_Runtime.field(bucket, 'vertices'), cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
     }
     _Runtime.pushMany(_Runtime.field(bucket, 'vertices'), cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(uvIdx, 0.0, '>='))) {
+    if ((cast ((cast uvIdx : Float) >= (cast 0.0 : Float)) : Bool)) {
       _Runtime.pushMany(_Runtime.field(bucket, 'vertices'), cast ([_Runtime.getIndex(uvs, (uvIdx * 2.0)), _Runtime.getIndex(uvs, ((uvIdx * 2.0) + 1.0))] : Array<Dynamic>));
     } else {
       _Runtime.pushMany(_Runtime.field(bucket, 'vertices'), cast ([0.0, 0.0] : Array<Dynamic>));
@@ -252,19 +252,19 @@ class ObjParse {
     for (__iteration0 in _Runtime.iterable(buckets)) {
       var materialName:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
       var bucket:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(bucket, 'indices'), 'length'), 0.0))) { continue; }
+      if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(bucket, 'indices'), 'length'), 0.0) : Bool)) { continue; }
       var vertexBase:Dynamic = (_Runtime.field(vertices, 'length') / CANONICAL_FLOATS_PER_VERTEX);
       var indexOffset:Dynamic = _Runtime.field(indices, 'length');
       {
         var k:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(k, _Runtime.field(_Runtime.field(bucket, 'indices'), 'length'), '<'))) {
+        while ((cast ((cast k : Float) < (cast _Runtime.field(_Runtime.field(bucket, 'indices'), 'length') : Float)) : Bool)) {
           _Runtime.callProperty(indices, 'push', cast ([(_Runtime.getIndex(_Runtime.field(bucket, 'indices'), k) + vertexBase)] : Array<Dynamic>));
           k++;
         }
       }
       {
         var k:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(k, _Runtime.field(_Runtime.field(bucket, 'vertices'), 'length'), '<'))) {
+        while ((cast ((cast k : Float) < (cast _Runtime.field(_Runtime.field(bucket, 'vertices'), 'length') : Float)) : Bool)) {
           _Runtime.callProperty(vertices, 'push', cast ([_Runtime.getIndex(_Runtime.field(bucket, 'vertices'), k)] : Array<Dynamic>));
           k++;
         }
@@ -272,7 +272,7 @@ class ObjParse {
       _Runtime.callProperty(subsets, 'push', cast ([{ indexCount: _Runtime.field(_Runtime.field(bucket, 'indices'), 'length'), indexOffset: indexOffset }] : Array<Dynamic>));
       _Runtime.callProperty(materials, 'push', cast ([_Runtime.callValue(ObjParse.resolveObjMaterial__objParse, cast ([materialName, library, resolvedMaterials] : Array<Dynamic>))] : Array<Dynamic>));
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(subsets, 'length'), 0.0))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(subsets, 'length'), 0.0) : Bool)) { return; }
     geometry = _Runtime.callValue(createMeshGeometry, cast ([{ indices: _Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([indices] : Array<Dynamic>)), layout: CANONICAL_LAYOUT, subsets: subsets, vertices: new flighthq._internal._Float32Array(vertices) }] : Array<Dynamic>));
     _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), _Runtime.callValue(createMesh, cast ([geometry, materials, MeshKind, { name: name }] : Array<Dynamic>))] : Array<Dynamic>));
   }
@@ -280,13 +280,13 @@ class ObjParse {
   public static function objMaterialToBlinnPhong__objParse(material:ObjMaterial):BlinnPhongMaterial {
     var result:Dynamic = cast _Runtime.UNDEFINED;
     result = _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuse: _Runtime.callValue(ObjParse.packObjColor__objParse, cast ([_Runtime.field(material, 'diffuse'), _Runtime.field(material, 'dissolve')] : Array<Dynamic>)), diffuseMap: _Runtime.callValue(ObjParse.externalObjTexture__objParse, cast ([_Runtime.field(material, 'mapDiffuse')] : Array<Dynamic>)), normalMap: _Runtime.callValue(ObjParse.externalObjTexture__objParse, cast ([_Runtime.field(material, 'mapBump')] : Array<Dynamic>)), shininess: _Runtime.field(material, 'specularExponent'), specular: _Runtime.callValue(ObjParse.packObjColor__objParse, cast ([_Runtime.field(material, 'specular'), 1.0] : Array<Dynamic>)), specularMap: _Runtime.callValue(ObjParse.externalObjTexture__objParse, cast ([_Runtime.field(material, 'mapSpecular')] : Array<Dynamic>)) }] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(material, 'dissolve'), 1.0, '<'))) { _Runtime.setField(result, 'alphaMode', 'blend'); }
+    if ((cast ((cast _Runtime.field(material, 'dissolve') : Float) < (cast 1.0 : Float)) : Bool)) { _Runtime.setField(result, 'alphaMode', 'blend'); }
     return cast result;
     return cast null;
   }
 
   public static function externalObjTexture__objParse(uri:Null<String>):Null<Texture> {
-    return cast _Runtime.select(_Runtime.strictEquals(uri, null), function():Dynamic return cast null, function():Dynamic return cast _Runtime.callValue(createExternalTextureRef, cast ([uri] : Array<Dynamic>)));
+    return cast ((cast _Runtime.strictEquals(uri, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callValue(createExternalTextureRef, cast ([uri] : Array<Dynamic>)) : Dynamic));
     return cast null;
   }
 
@@ -312,12 +312,12 @@ class ObjParse {
     var cached:Dynamic = cast _Runtime.UNDEFINED;
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
     var material:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(name, ''))) { return cast null; }
+    if ((cast _Runtime.strictEquals(name, '') : Bool)) { return cast null; }
     cached = ((cast cache : flighthq._internal._Map).get(name));
-    if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast cached; }
+    if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
     parsed = ({ final __collection2:Dynamic = _Runtime.optionalField(library, 'materials'); __collection2 == null ? _Runtime.UNDEFINED : ((cast __collection2 : flighthq._internal._Map).get(name)); });
-    material = _Runtime.select(!_Runtime.strictEquals(parsed, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast (cast (cast _Runtime.callValue(ObjParse.objMaterialToBlinnPhong__objParse, cast ([parsed] : Array<Dynamic>)) : Dynamic) : Material), function():Dynamic return cast null);
-    if (_Runtime.truthy(!_Runtime.strictEquals(material, null))) { _Runtime.setField(material, 'name', name); }
+    material = ((cast !_Runtime.strictEquals(parsed, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast (cast _Runtime.callValue(ObjParse.objMaterialToBlinnPhong__objParse, cast ([parsed] : Array<Dynamic>)) : Dynamic) : Material) : Dynamic) : (cast null : Dynamic));
+    if ((cast !_Runtime.strictEquals(material, null) : Bool)) { _Runtime.setField(material, 'name', name); }
     ((cast cache : flighthq._internal._Map).set(name, material));
     return cast material;
     return cast null;

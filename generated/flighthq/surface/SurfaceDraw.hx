@@ -9,7 +9,7 @@ import flighthq.types.SurfaceRegion;
 class SurfaceDraw {
   public static function drawSurface(dest:Dynamic, source:SurfaceRegion, x:Float, y:Float):Void {
     var domImageData:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(source, 'width'), 0.0, '<='), function():Dynamic return cast _Runtime.compare(_Runtime.field(source, 'height'), 0.0, '<=')))) { return; }
+    if ((cast ((cast ((cast _Runtime.field(source, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(source, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
     domImageData = _Runtime.construct(_Runtime.field(_Runtime.globalValue('globalThis'), 'ImageData'), [_Runtime.field(source, 'width'), _Runtime.field(source, 'height')]);
     _Runtime.callValue(extractSurfacePixels, cast ([_Runtime.field(domImageData, 'data'), source] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(flighthq._internal.backend.CanvasElementBackend.call(dest, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([domImageData, x, y] : Array<Dynamic>));

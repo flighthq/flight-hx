@@ -27,7 +27,7 @@ class ClipRegion {
   public static function acquireClipRegion():flighthq.types.ClipRegion {
     var region:Dynamic = cast _Runtime.UNDEFINED;
     region = _Runtime.callProperty(ClipRegion.clipRegionPool__clipRegion, 'pop', cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(region, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(region, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.setField(_Runtime.field(region, 'rect'), 'x', 0.0);
       _Runtime.setField(_Runtime.field(region, 'rect'), 'y', 0.0);
       _Runtime.setField(_Runtime.field(region, 'rect'), 'width', 0.0);
@@ -42,8 +42,8 @@ class ClipRegion {
   }
 
   public static function clipRegionContainsPoint(clip:flighthq.types.ClipRegion, x:Float, y:Float):Bool {
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(containsRectanglePointXY, cast ([_Runtime.field(clip, 'rect'), x, y] : Array<Dynamic>))))) { return cast false; }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(clip, 'contours'), null))) { return cast true; }
+    if ((cast !(cast _Runtime.callValue(containsRectanglePointXY, cast ([_Runtime.field(clip, 'rect'), x, y] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(clip, 'contours'), null) : Bool)) { return cast true; }
     return cast _Runtime.callValue(ClipRegion.pointInContours__clipRegion, cast ([_Runtime.field(clip, 'contours'), _Runtime.field(clip, 'winding'), x, y] : Array<Dynamic>));
     return cast null;
   }
@@ -62,15 +62,15 @@ class ClipRegion {
     var rect:Dynamic = cast _Runtime.UNDEFINED;
     var contours:Dynamic = cast _Runtime.UNDEFINED;
     rect = _Runtime.callValue(cloneRectangle, cast ([_Runtime.field(clip, 'rect')] : Array<Dynamic>));
-    contours = _Runtime.select(_Runtime.strictEquals(_Runtime.field(clip, 'contours'), null), function():Dynamic return cast null, function():Dynamic return cast _Runtime.callProperty(_Runtime.field(clip, 'contours'), 'map', cast ([function(c:Dynamic) return _Runtime.slice(c, 0, null)] : Array<Dynamic>)));
+    contours = ((cast _Runtime.strictEquals(_Runtime.field(clip, 'contours'), null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callProperty(_Runtime.field(clip, 'contours'), 'map', cast ([function(c:Dynamic) return _Runtime.slice(c, 0, null)] : Array<Dynamic>)) : Dynamic));
     return cast { contours: contours, rect: rect, version: _Runtime.field(clip, 'version'), winding: _Runtime.field(clip, 'winding') };
     return cast null;
   }
 
   public static function copyClipRegion(out:flighthq.types.ClipRegion, source:flighthq.types.ClipRegion):Void {
-    if (_Runtime.truthy(_Runtime.strictEquals((cast out : Dynamic), (cast source : Dynamic)))) { return; }
+    if ((cast _Runtime.strictEquals((cast out : Dynamic), (cast source : Dynamic)) : Bool)) { return; }
     _Runtime.callValue(copyRectangle, cast ([_Runtime.field(out, 'rect'), _Runtime.field(source, 'rect')] : Array<Dynamic>));
-    _Runtime.setField(out, 'contours', _Runtime.select(_Runtime.strictEquals(_Runtime.field(source, 'contours'), null), function():Dynamic return cast null, function():Dynamic return cast _Runtime.callProperty(_Runtime.field(source, 'contours'), 'map', cast ([function(c:Dynamic) return _Runtime.slice(c, 0, null)] : Array<Dynamic>))));
+    _Runtime.setField(out, 'contours', ((cast _Runtime.strictEquals(_Runtime.field(source, 'contours'), null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callProperty(_Runtime.field(source, 'contours'), 'map', cast ([function(c:Dynamic) return _Runtime.slice(c, 0, null)] : Array<Dynamic>)) : Dynamic)));
     _Runtime.setField(out, 'winding', _Runtime.field(source, 'winding'));
     _Runtime.setField(out, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(out, 'version') + 1.0)), 0));
   }
@@ -118,7 +118,7 @@ class ClipRegion {
 
   public static function createClipRegionFromRoundedRectangle(rectangle:RectangleLike, radius:Float, tolerance:Dynamic = 0.25):flighthq.types.ClipRegion {
     var path:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(radius, 0.0, '<='))) { return cast _Runtime.callValue(createClipRegionFromRectangle, cast ([rectangle] : Array<Dynamic>)); }
+    if ((cast ((cast radius : Float) <= (cast 0.0 : Float)) : Bool)) { return cast _Runtime.callValue(createClipRegionFromRectangle, cast ([rectangle] : Array<Dynamic>)); }
     path = _Runtime.callValue(createPath, cast (['nonZero'] : Array<Dynamic>));
     _Runtime.callValue(ClipRegion.appendRoundedRectToPath__clipRegion, cast ([path, _Runtime.field(rectangle, 'x'), _Runtime.field(rectangle, 'y'), _Runtime.field(rectangle, 'width'), _Runtime.field(rectangle, 'height'), radius] : Array<Dynamic>));
     return cast _Runtime.callValue(createClipRegionFromPath, cast ([path, tolerance] : Array<Dynamic>));
@@ -130,26 +130,26 @@ class ClipRegion {
     var br:Dynamic = cast _Runtime.UNDEFINED;
     var ac:Dynamic = cast _Runtime.UNDEFINED;
     var bc:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(a, b))) { return cast true; }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(a, 'winding'), _Runtime.field(b, 'winding')))) { return cast false; }
+    if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast true; }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(a, 'winding'), _Runtime.field(b, 'winding')) : Bool)) { return cast false; }
     ar = _Runtime.field(a, 'rect');
     br = _Runtime.field(b, 'rect');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(ar, 'x'), _Runtime.field(br, 'x')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(ar, 'y'), _Runtime.field(br, 'y'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(ar, 'width'), _Runtime.field(br, 'width'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(ar, 'height'), _Runtime.field(br, 'height'))))) { return cast false; }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(a, 'contours'), null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(b, 'contours'), null)))) { return cast true; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(a, 'contours'), null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(b, 'contours'), null)))) { return cast false; }
+    if ((cast ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(ar, 'x'), _Runtime.field(br, 'x')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(ar, 'y'), _Runtime.field(br, 'y')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(ar, 'width'), _Runtime.field(br, 'width')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(ar, 'height'), _Runtime.field(br, 'height')) : Bool)) : Bool)) { return cast false; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(a, 'contours'), null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(b, 'contours'), null) : Bool)) : Bool)) { return cast true; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(a, 'contours'), null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(b, 'contours'), null) : Bool)) : Bool)) { return cast false; }
     ac = _Runtime.field(a, 'contours');
     bc = _Runtime.field(b, 'contours');
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(ac, 'length'), _Runtime.field(bc, 'length')))) { return cast false; }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(ac, 'length'), _Runtime.field(bc, 'length')) : Bool)) { return cast false; }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(ac, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(ac, 'length') : Float)) : Bool)) {
         var ai:Dynamic = _Runtime.getIndex(ac, i);
         var bi:Dynamic = _Runtime.getIndex(bc, i);
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(ai, 'length'), _Runtime.field(bi, 'length')))) { return cast false; }
+        if ((cast !_Runtime.strictEquals(_Runtime.field(ai, 'length'), _Runtime.field(bi, 'length')) : Bool)) { return cast false; }
         {
           var j:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(j, _Runtime.field(ai, 'length'), '<'))) {
-            if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(ai, j), _Runtime.getIndex(bi, j)))) { return cast false; }
+          while ((cast ((cast j : Float) < (cast _Runtime.field(ai, 'length') : Float)) : Bool)) {
+            if ((cast !_Runtime.strictEquals(_Runtime.getIndex(ai, j), _Runtime.getIndex(bi, j)) : Bool)) { return cast false; }
             j++;
           }
         }
@@ -206,7 +206,7 @@ class ClipRegion {
     y0 = HxMath.max(ay, by);
     x1 = HxMath.min((ax + aw), (bx + bw));
     y1 = HxMath.min((ay + ah), (by + bh));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(x1, x0, '<='), function():Dynamic return cast _Runtime.compare(y1, y0, '<=')))) {
+    if ((cast ((cast ((cast x1 : Float) <= (cast x0 : Float)) : Bool) || (cast ((cast y1 : Float) <= (cast y0 : Float)) : Bool)) : Bool)) {
       _Runtime.setField(_Runtime.field(out, 'rect'), 'x', 0.0);
       _Runtime.setField(_Runtime.field(out, 'rect'), 'y', 0.0);
       _Runtime.setField(_Runtime.field(out, 'rect'), 'width', 0.0);
@@ -220,19 +220,19 @@ class ClipRegion {
     _Runtime.setField(_Runtime.field(out, 'rect'), 'y', y0);
     _Runtime.setField(_Runtime.field(out, 'rect'), 'width', (x1 - x0));
     _Runtime.setField(_Runtime.field(out, 'rect'), 'height', (y1 - y0));
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(aContours, null), function():Dynamic return cast _Runtime.strictEquals(bContours, null)))) {
+    if ((cast ((cast _Runtime.strictEquals(aContours, null) : Bool) && (cast _Runtime.strictEquals(bContours, null) : Bool)) : Bool)) {
       _Runtime.setField(out, 'contours', null);
       _Runtime.setField(out, 'winding', 'nonZero');
-    } else { if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(aContours, null), function():Dynamic return cast _Runtime.strictEquals(bContours, null)))) {
+    } else { if ((cast ((cast !_Runtime.strictEquals(aContours, null) : Bool) && (cast _Runtime.strictEquals(bContours, null) : Bool)) : Bool)) {
       _Runtime.setField(out, 'contours', _Runtime.callProperty(aContours, 'map', cast ([function(c:Dynamic) return _Runtime.slice(c, 0, null)] : Array<Dynamic>)));
       _Runtime.setField(out, 'winding', aWinding);
-    } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(aContours, null), function():Dynamic return cast !_Runtime.strictEquals(bContours, null)))) {
+    } else { if ((cast ((cast _Runtime.strictEquals(aContours, null) : Bool) && (cast !_Runtime.strictEquals(bContours, null) : Bool)) : Bool)) {
       _Runtime.setField(out, 'contours', _Runtime.callProperty(bContours, 'map', cast ([function(c:Dynamic) return _Runtime.slice(c, 0, null)] : Array<Dynamic>)));
       _Runtime.setField(out, 'winding', bWinding);
     } else {
-      var keepA:Dynamic = _Runtime.compare(_Runtime.field(aContours, 'length'), _Runtime.field(bContours, 'length'), '>=');
-      _Runtime.setField(out, 'contours', _Runtime.callProperty(_Runtime.select(keepA, function():Dynamic return cast aContours, function():Dynamic return cast bContours), 'map', cast ([function(c:Dynamic) return _Runtime.slice(c, 0, null)] : Array<Dynamic>)));
-      _Runtime.setField(out, 'winding', _Runtime.select(keepA, function():Dynamic return cast aWinding, function():Dynamic return cast bWinding));
+      var keepA:Dynamic = ((cast _Runtime.field(aContours, 'length') : Float) >= (cast _Runtime.field(bContours, 'length') : Float));
+      _Runtime.setField(out, 'contours', _Runtime.callProperty(((cast keepA : Bool) ? (cast aContours : Dynamic) : (cast bContours : Dynamic)), 'map', cast ([function(c:Dynamic) return _Runtime.slice(c, 0, null)] : Array<Dynamic>)));
+      _Runtime.setField(out, 'winding', ((cast keepA : Bool) ? (cast aWinding : Dynamic) : (cast bWinding : Dynamic)));
     } } }
     _Runtime.setField(out, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(out, 'version') + 1.0)), 0));
   }
@@ -242,8 +242,8 @@ class ClipRegion {
   }
 
   public static function isClipRegionEmpty(clip:flighthq.types.ClipRegion):Bool {
-    if (_Runtime.truthy(_Runtime.callValue(isEmptyRectangle, cast ([_Runtime.field(clip, 'rect')] : Array<Dynamic>)))) { return cast true; }
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(clip, 'contours'), null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'contours'), 'length'), 0.0)))) { return cast true; }
+    if ((cast _Runtime.callValue(isEmptyRectangle, cast ([_Runtime.field(clip, 'rect')] : Array<Dynamic>)) : Bool)) { return cast true; }
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(clip, 'contours'), null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'contours'), 'length'), 0.0) : Bool)) : Bool)) { return cast true; }
     return cast false;
     return cast null;
   }
@@ -260,14 +260,14 @@ class ClipRegion {
     inContours = _Runtime.field(clip, 'contours');
     inRect = _Runtime.field(clip, 'rect');
     inWinding = _Runtime.field(clip, 'winding');
-    if (_Runtime.truthy(_Runtime.strictEquals(inContours, null))) {
+    if ((cast _Runtime.strictEquals(inContours, null) : Bool)) {
       _Runtime.callValue(copyRectangle, cast ([_Runtime.field(out, 'rect'), inRect] : Array<Dynamic>));
       _Runtime.setField(out, 'contours', null);
       _Runtime.setField(out, 'winding', inWinding);
       _Runtime.setField(out, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(out, 'version') + 1.0)), 0));
       return;
     }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(inContours, 'length'), 1.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.getIndex(inContours, 0.0), 'length'), 8.0)))) {
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(inContours, 'length'), 1.0) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(_Runtime.getIndex(inContours, 0.0), 'length'), 8.0) : Bool)) : Bool)) {
       var c:Dynamic = _Runtime.getIndex(inContours, 0.0);
       var e:Dynamic = ClipRegion.NORMALIZE_EPSILON__clipRegion;
       var minX:Dynamic = HxMath.POSITIVE_INFINITY;
@@ -276,34 +276,34 @@ class ClipRegion {
       var maxY:Dynamic = -HxMath.POSITIVE_INFINITY;
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, 8.0, '<'))) {
+        while ((cast ((cast i : Float) < (cast 8.0 : Float)) : Bool)) {
           var cx:Dynamic = _Runtime.getIndex(c, i);
           var cy:Dynamic = _Runtime.getIndex(c, (i + 1.0));
-          if (_Runtime.truthy(_Runtime.compare(cx, minX, '<'))) { (minX = cast (cx : Dynamic)); }
-          if (_Runtime.truthy(_Runtime.compare(cx, maxX, '>'))) { (maxX = cast (cx : Dynamic)); }
-          if (_Runtime.truthy(_Runtime.compare(cy, minY, '<'))) { (minY = cast (cy : Dynamic)); }
-          if (_Runtime.truthy(_Runtime.compare(cy, maxY, '>'))) { (maxY = cast (cy : Dynamic)); }
+          if ((cast ((cast cx : Float) < (cast minX : Float)) : Bool)) { (minX = cast (cx : Dynamic)); }
+          if ((cast ((cast cx : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (cx : Dynamic)); }
+          if ((cast ((cast cy : Float) < (cast minY : Float)) : Bool)) { (minY = cast (cy : Dynamic)); }
+          if ((cast ((cast cy : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast (cy : Dynamic)); }
           (i = cast ((i + 2.0) : Dynamic));
         }
       }
       var isAxisAligned:Dynamic = true;
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, 8.0, '<'))) {
+        while ((cast ((cast i : Float) < (cast 8.0 : Float)) : Bool)) {
           var cx:Dynamic = _Runtime.getIndex(c, i);
           var cy:Dynamic = _Runtime.getIndex(c, (i + 1.0));
-          if (_Runtime.truthy(!_Runtime.truthy(_Runtime.orValue(_Runtime.compare(HxMath.abs((cx - minX)), e, '<='), function():Dynamic return cast _Runtime.compare(HxMath.abs((cx - maxX)), e, '<='))))) {
+          if ((cast !(cast _Runtime.orValue(((cast HxMath.abs((cx - minX)) : Float) <= (cast e : Float)), function():Dynamic return cast ((cast HxMath.abs((cx - maxX)) : Float) <= (cast e : Float))) : Bool) : Bool)) {
             (isAxisAligned = cast (false : Dynamic));
             break;
           }
-          if (_Runtime.truthy(!_Runtime.truthy(_Runtime.orValue(_Runtime.compare(HxMath.abs((cy - minY)), e, '<='), function():Dynamic return cast _Runtime.compare(HxMath.abs((cy - maxY)), e, '<='))))) {
+          if ((cast !(cast _Runtime.orValue(((cast HxMath.abs((cy - minY)) : Float) <= (cast e : Float)), function():Dynamic return cast ((cast HxMath.abs((cy - maxY)) : Float) <= (cast e : Float))) : Bool) : Bool)) {
             (isAxisAligned = cast (false : Dynamic));
             break;
           }
           (i = cast ((i + 2.0) : Dynamic));
         }
       }
-      if (_Runtime.truthy(isAxisAligned)) {
+      if ((cast isAxisAligned : Bool)) {
         _Runtime.setField(_Runtime.field(out, 'rect'), 'x', minX);
         _Runtime.setField(_Runtime.field(out, 'rect'), 'y', minY);
         _Runtime.setField(_Runtime.field(out, 'rect'), 'width', (maxX - minX));
@@ -350,9 +350,9 @@ class ClipRegion {
     inContours = _Runtime.field(clip, 'contours');
     inRect = _Runtime.field(clip, 'rect');
     inWinding = _Runtime.field(clip, 'winding');
-    if (_Runtime.truthy(_Runtime.strictEquals(inContours, null))) {
-      var axisAligned:Dynamic = _Runtime.andValue(_Runtime.strictEquals(mb, 0.0), function():Dynamic return cast _Runtime.strictEquals(mc, 0.0));
-      if (_Runtime.truthy(axisAligned)) {
+    if ((cast _Runtime.strictEquals(inContours, null) : Bool)) {
+      var axisAligned:Dynamic = ((cast _Runtime.strictEquals(mb, 0.0) : Bool) && (cast _Runtime.strictEquals(mc, 0.0) : Bool));
+      if ((cast axisAligned : Bool)) {
         _Runtime.callValue(matrixTransformRectangle, cast ([_Runtime.field(out, 'rect'), matrix, inRect] : Array<Dynamic>));
         _Runtime.setField(out, 'contours', null);
         _Runtime.setField(out, 'winding', 'nonZero');
@@ -378,12 +378,12 @@ class ClipRegion {
       var newContours:Array<Array<Float>> = _Runtime.createArray(_Runtime.field(inContours, 'length'));
       {
         var c:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(c, _Runtime.field(inContours, 'length'), '<'))) {
+        while ((cast ((cast c : Float) < (cast _Runtime.field(inContours, 'length') : Float)) : Bool)) {
           var src:Dynamic = _Runtime.getIndex(inContours, c);
           var dst:Array<Float> = _Runtime.createArray(_Runtime.field(src, 'length'));
           {
             var i:Dynamic = 0.0;
-            while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(src, 'length'), '<'))) {
+            while ((cast ((cast i : Float) < (cast _Runtime.field(src, 'length') : Float)) : Bool)) {
               var ox:Dynamic = _Runtime.getIndex(src, i);
               var oy:Dynamic = _Runtime.getIndex(src, (i + 1.0));
               _Runtime.setIndex(dst, i, (((ma * ox) + (mc * oy)) + mtx));
@@ -416,19 +416,19 @@ class ClipRegion {
     aWinding = _Runtime.field(a, 'winding');
     bWinding = _Runtime.field(b, 'winding');
     _Runtime.callValue(mergeRectangle, cast ([_Runtime.field(out, 'rect'), aRect, bRect] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(aContours, null), function():Dynamic return cast _Runtime.strictEquals(bContours, null)))) {
+    if ((cast ((cast _Runtime.strictEquals(aContours, null) : Bool) && (cast _Runtime.strictEquals(bContours, null) : Bool)) : Bool)) {
       _Runtime.setField(out, 'contours', null);
       _Runtime.setField(out, 'winding', 'nonZero');
-    } else { if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(aContours, null), function():Dynamic return cast _Runtime.strictEquals(bContours, null)))) {
+    } else { if ((cast ((cast !_Runtime.strictEquals(aContours, null) : Bool) && (cast _Runtime.strictEquals(bContours, null) : Bool)) : Bool)) {
       _Runtime.setField(out, 'contours', _Runtime.callProperty(aContours, 'map', cast ([function(c:Dynamic) return _Runtime.slice(c, 0, null)] : Array<Dynamic>)));
       _Runtime.setField(out, 'winding', aWinding);
-    } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(aContours, null), function():Dynamic return cast !_Runtime.strictEquals(bContours, null)))) {
+    } else { if ((cast ((cast _Runtime.strictEquals(aContours, null) : Bool) && (cast !_Runtime.strictEquals(bContours, null) : Bool)) : Bool)) {
       _Runtime.setField(out, 'contours', _Runtime.callProperty(bContours, 'map', cast ([function(c:Dynamic) return _Runtime.slice(c, 0, null)] : Array<Dynamic>)));
       _Runtime.setField(out, 'winding', bWinding);
     } else {
-      var keepA:Dynamic = _Runtime.compare(_Runtime.field(aContours, 'length'), _Runtime.field(bContours, 'length'), '>=');
-      _Runtime.setField(out, 'contours', _Runtime.callProperty(_Runtime.select(keepA, function():Dynamic return cast aContours, function():Dynamic return cast bContours), 'map', cast ([function(c:Dynamic) return _Runtime.slice(c, 0, null)] : Array<Dynamic>)));
-      _Runtime.setField(out, 'winding', _Runtime.select(keepA, function():Dynamic return cast aWinding, function():Dynamic return cast bWinding));
+      var keepA:Dynamic = ((cast _Runtime.field(aContours, 'length') : Float) >= (cast _Runtime.field(bContours, 'length') : Float));
+      _Runtime.setField(out, 'contours', _Runtime.callProperty(((cast keepA : Bool) ? (cast aContours : Dynamic) : (cast bContours : Dynamic)), 'map', cast ([function(c:Dynamic) return _Runtime.slice(c, 0, null)] : Array<Dynamic>)));
+      _Runtime.setField(out, 'winding', ((cast keepA : Bool) ? (cast aWinding : Dynamic) : (cast bWinding : Dynamic)));
     } } }
     _Runtime.setField(out, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(out, 'version') + 1.0)), 0));
   }
@@ -449,26 +449,26 @@ class ClipRegion {
     windingNumber = 0.0;
     {
       var c:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(c, _Runtime.field(contours, 'length'), '<'))) {
+      while ((cast ((cast c : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
         var contour:Dynamic = _Runtime.getIndex(contours, c);
         var n:Dynamic = _Runtime.field(contour, 'length');
-        if (_Runtime.truthy(_Runtime.compare(n, 4.0, '<'))) { c++; continue; }
+        if ((cast ((cast n : Float) < (cast 4.0 : Float)) : Bool)) { c++; continue; }
         {
           var i:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(i, n, '<'))) {
+          while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
             var x0:Dynamic = _Runtime.getIndex(contour, i);
             var y0:Dynamic = _Runtime.getIndex(contour, (i + 1.0));
             var x1:Dynamic = _Runtime.getIndex(contour, _Runtime.fmod((i + 2.0), n));
             var y1:Dynamic = _Runtime.getIndex(contour, _Runtime.fmod((i + 3.0), n));
-            if (_Runtime.truthy(_Runtime.compare(y0, py, '<='))) {
-              if (_Runtime.truthy(_Runtime.compare(y1, py, '>'))) {
-                if (_Runtime.truthy(_Runtime.compare((((x1 - x0) * (py - y0)) - ((px - x0) * (y1 - y0))), 0.0, '>'))) {
+            if ((cast ((cast y0 : Float) <= (cast py : Float)) : Bool)) {
+              if ((cast ((cast y1 : Float) > (cast py : Float)) : Bool)) {
+                if ((cast ((cast (((x1 - x0) * (py - y0)) - ((px - x0) * (y1 - y0))) : Float) > (cast 0.0 : Float)) : Bool)) {
                   windingNumber++;
                 }
               }
             } else {
-              if (_Runtime.truthy(_Runtime.compare(y1, py, '<='))) {
-                if (_Runtime.truthy(_Runtime.compare((((x1 - x0) * (py - y0)) - ((px - x0) * (y1 - y0))), 0.0, '<'))) {
+              if ((cast ((cast y1 : Float) <= (cast py : Float)) : Bool)) {
+                if ((cast ((cast (((x1 - x0) * (py - y0)) - ((px - x0) * (y1 - y0))) : Float) < (cast 0.0 : Float)) : Bool)) {
                   windingNumber--;
                 }
               }
@@ -479,7 +479,7 @@ class ClipRegion {
         c++;
       }
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(winding, 'evenOdd'))) {
+    if ((cast _Runtime.strictEquals(winding, 'evenOdd') : Bool)) {
       return cast !_Runtime.strictEquals((_Runtime.toInt32(windingNumber) & 1), 0.0);
     }
     return cast !_Runtime.strictEquals(windingNumber, 0.0);
@@ -553,24 +553,24 @@ class ClipRegion {
     maxY = -HxMath.POSITIVE_INFINITY;
     {
       var c:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(c, _Runtime.field(contours, 'length'), '<'))) {
+      while ((cast ((cast c : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
         var contour:Dynamic = _Runtime.getIndex(contours, c);
         {
           var i:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(contour, 'length'), '<'))) {
+          while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
             var x:Dynamic = _Runtime.getIndex(contour, i);
             var y:Dynamic = _Runtime.getIndex(contour, (i + 1.0));
-            if (_Runtime.truthy(_Runtime.compare(x, minX, '<'))) { (minX = cast (x : Dynamic)); }
-            if (_Runtime.truthy(_Runtime.compare(x, maxX, '>'))) { (maxX = cast (x : Dynamic)); }
-            if (_Runtime.truthy(_Runtime.compare(y, minY, '<'))) { (minY = cast (y : Dynamic)); }
-            if (_Runtime.truthy(_Runtime.compare(y, maxY, '>'))) { (maxY = cast (y : Dynamic)); }
+            if ((cast ((cast x : Float) < (cast minX : Float)) : Bool)) { (minX = cast (x : Dynamic)); }
+            if ((cast ((cast x : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (x : Dynamic)); }
+            if ((cast ((cast y : Float) < (cast minY : Float)) : Bool)) { (minY = cast (y : Dynamic)); }
+            if ((cast ((cast y : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast (y : Dynamic)); }
             (i = cast ((i + 2.0) : Dynamic));
           }
         }
         c++;
       }
     }
-    if (_Runtime.truthy(_Runtime.compare(minX, maxX, '>'))) {
+    if ((cast ((cast minX : Float) > (cast maxX : Float)) : Bool)) {
       _Runtime.setField(out, 'x', 0.0);
       _Runtime.setField(out, 'y', 0.0);
       _Runtime.setField(out, 'width', 0.0);

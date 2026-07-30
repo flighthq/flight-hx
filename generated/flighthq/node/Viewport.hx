@@ -15,15 +15,15 @@ import flighthq.types.ViewportAlign;
 
 class Viewport {
   public static function computeViewportAlignX(scaledContentWidth:Float, viewWidth:Float, align:ViewportAlign):Float {
-    if (_Runtime.truthy(_Runtime.includes(align, 'left'))) { return cast 0.0; }
-    if (_Runtime.truthy(_Runtime.includes(align, 'right'))) { return cast (viewWidth - scaledContentWidth); }
+    if ((cast _Runtime.includes(align, 'left') : Bool)) { return cast 0.0; }
+    if ((cast _Runtime.includes(align, 'right') : Bool)) { return cast (viewWidth - scaledContentWidth); }
     return cast ((viewWidth - scaledContentWidth) / 2.0);
     return cast null;
   }
 
   public static function computeViewportAlignY(scaledContentHeight:Float, viewHeight:Float, align:ViewportAlign):Float {
-    if (_Runtime.truthy(_Runtime.includes(align, 'top'))) { return cast 0.0; }
-    if (_Runtime.truthy(_Runtime.includes(align, 'bottom'))) { return cast (viewHeight - scaledContentHeight); }
+    if ((cast _Runtime.includes(align, 'top') : Bool)) { return cast 0.0; }
+    if ((cast _Runtime.includes(align, 'bottom') : Bool)) { return cast (viewHeight - scaledContentHeight); }
     return cast ((viewHeight - scaledContentHeight) / 2.0);
     return cast null;
   }
@@ -45,9 +45,9 @@ class Viewport {
     var sy:Float = cast _Runtime.UNDEFINED;
     contentWidth = 0.0;
     contentHeight = 0.0;
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(scene, 'root'), null))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(scene, 'root'), null) : Bool)) {
       var runtime:Dynamic = (cast (cast _Runtime.callValue(getNodeRuntime, cast ([(cast _Runtime.field(scene, 'root') : Dynamic)] : Array<Dynamic>)) : Dynamic) : Null<Dynamic>);
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.optionalField(runtime, 'computeLocalBoundsRectangle'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+      if ((cast !_Runtime.strictEquals(_Runtime.optionalField(runtime, 'computeLocalBoundsRectangle'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         _Runtime.setField(Viewport._tempRectangle__viewport, 'width', 0.0);
         _Runtime.setField(Viewport._tempRectangle__viewport, 'height', 0.0);
         _Runtime.callProperty(runtime, 'computeLocalBoundsRectangle', cast ([Viewport._tempRectangle__viewport, (cast _Runtime.field(scene, 'root') : Dynamic)] : Array<Dynamic>));
@@ -55,7 +55,7 @@ class Viewport {
         (contentHeight = cast (_Runtime.field(Viewport._tempRectangle__viewport, 'height') : Dynamic));
       }
     }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(contentWidth, 0.0), function():Dynamic return cast _Runtime.strictEquals(contentHeight, 0.0)))) {
+    if ((cast ((cast _Runtime.strictEquals(contentWidth, 0.0) : Bool) || (cast _Runtime.strictEquals(contentHeight, 0.0) : Bool)) : Bool)) {
       _Runtime.setField(out, 'a', 1.0);
       _Runtime.setField(out, 'b', 0.0);
       _Runtime.setField(out, 'c', 0.0);
@@ -64,13 +64,13 @@ class Viewport {
       _Runtime.setField(out, 'ty', 0.0);
       return;
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'scaleMode'), 'noscale'))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(scene, 'scaleMode'), 'noscale') : Bool)) {
       (sx = cast (1.0 : Dynamic));
       (sy = cast (1.0 : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'scaleMode'), 'exactfit'))) {
+    } else { if ((cast _Runtime.strictEquals(_Runtime.field(scene, 'scaleMode'), 'exactfit') : Bool)) {
       (sx = cast ((viewWidth / contentWidth) : Dynamic));
       (sy = cast ((viewHeight / contentHeight) : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'scaleMode'), 'showall'))) {
+    } else { if ((cast _Runtime.strictEquals(_Runtime.field(scene, 'scaleMode'), 'showall') : Bool)) {
       (sx = cast ((sy = cast (_Runtime.callValue(computeViewportFitScale, cast ([contentWidth, contentHeight, viewWidth, viewHeight] : Array<Dynamic>)) : Dynamic)) : Dynamic));
     } else {
       (sx = cast ((sy = cast (_Runtime.callValue(computeViewportFillScale, cast ([contentWidth, contentHeight, viewWidth, viewHeight] : Array<Dynamic>)) : Dynamic)) : Dynamic));

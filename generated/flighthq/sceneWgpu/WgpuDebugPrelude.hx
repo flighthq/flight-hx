@@ -23,7 +23,7 @@ class WgpuDebugPrelude {
     var binding:Null<WgpuMaterialBinding> = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
     binding = ((cast _Runtime.field(scene, 'materialBindGroups') : flighthq._internal._WeakMap).get(materialKey));
-    if (_Runtime.truthy(_Runtime.strictEquals(binding, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(binding, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var stateRuntime:Dynamic = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
       var buffer:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: WgpuDebugPrelude.DEBUG_UNIFORM_BYTES__wgpuDebugPrelude, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
       var bindGroup:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(pipeline, 'materialBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: { buffer: buffer } }, { binding: 1.0, resource: _Runtime.field(stateRuntime, 'linearSampler') }, { binding: 2.0, resource: _Runtime.callValue(ensureWgpuPlaceholderTextureView, cast ([state] : Array<Dynamic>)) }] : Array<Dynamic>) }] : Array<Dynamic>));
@@ -41,7 +41,7 @@ class WgpuDebugPrelude {
   }
 
   public static function buildWgpuDebugDefineKey(key:WgpuDebugDefineKey):String {
-    return cast '' + Std.string(_Runtime.select(_Runtime.strictEquals(_Runtime.field(key, 'mode'), 'depth'), function():Dynamic return cast 'd', function():Dynamic return cast 'n')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasNormalMap'), function():Dynamic return cast 'm', function():Dynamic return cast '-')) + '';
+    return cast '' + Std.string(((cast _Runtime.strictEquals(_Runtime.field(key, 'mode'), 'depth') : Bool) ? (cast 'd' : Dynamic) : (cast 'n' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasNormalMap') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '';
     return cast null;
   }
 
@@ -62,7 +62,7 @@ class WgpuDebugPrelude {
   }
 
   public static function getWgpuDebugModuleSourceForKey(key:WgpuDebugDefineKey):String {
-    return cast (((('const MODE : i32 = ' + Std.string(_Runtime.select(_Runtime.strictEquals(_Runtime.field(key, 'mode'), 'depth'), function():Dynamic return cast 'DEPTH_MODE', function():Dynamic return cast 'NORMAL_MODE')) + ';\n' + 'const HAS_NORMAL_MAP : bool = ' + Std.string(_Runtime.select(_Runtime.field(key, 'hasNormalMap'), function():Dynamic return cast 'true', function():Dynamic return cast 'false')) + ';\n') + WgpuDebugPrelude.DEBUG_MODE_CONSTS_WGSL__wgpuDebugPrelude) + WGPU_MESH_PRELUDE_WGSL) + WgpuDebugPrelude.DEBUG_WGSL_BODY__wgpuDebugPrelude);
+    return cast (((('const MODE : i32 = ' + Std.string(((cast _Runtime.strictEquals(_Runtime.field(key, 'mode'), 'depth') : Bool) ? (cast 'DEPTH_MODE' : Dynamic) : (cast 'NORMAL_MODE' : Dynamic))) + ';\n' + 'const HAS_NORMAL_MAP : bool = ' + Std.string(((cast _Runtime.field(key, 'hasNormalMap') : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + ';\n') + WgpuDebugPrelude.DEBUG_MODE_CONSTS_WGSL__wgpuDebugPrelude) + WGPU_MESH_PRELUDE_WGSL) + WgpuDebugPrelude.DEBUG_WGSL_BODY__wgpuDebugPrelude);
     return cast null;
   }
 

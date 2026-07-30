@@ -6,18 +6,18 @@ import flighthq._internal._Runtime;
 
 class Clamp {
   public static function clamp(value:Float, min:Float, max:Float):Float {
-    return cast _Runtime.select(_Runtime.compare(value, min, '<'), function():Dynamic return cast min, function():Dynamic return cast _Runtime.select(_Runtime.compare(value, max, '>'), function():Dynamic return cast max, function():Dynamic return cast value));
+    return cast ((cast ((cast value : Float) < (cast min : Float)) : Bool) ? (cast min : Dynamic) : (cast ((cast ((cast value : Float) > (cast max : Float)) : Bool) ? (cast max : Dynamic) : (cast value : Dynamic)) : Dynamic));
     return cast null;
   }
 
   public static function inRange(value:Float, min:Float, max:Float):Bool {
-    return cast _Runtime.andValue(_Runtime.compare(value, min, '>='), function():Dynamic return cast _Runtime.compare(value, max, '<='));
+    return cast ((cast ((cast value : Float) >= (cast min : Float)) : Bool) && (cast ((cast value : Float) <= (cast max : Float)) : Bool));
     return cast null;
   }
 
   public static function saturate(value:Float):Float {
-    if (_Runtime.truthy(!_Runtime.strictEquals(value, value))) { return cast 0.0; }
-    return cast _Runtime.select(_Runtime.compare(value, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(value, 1.0, '>'), function():Dynamic return cast 1.0, function():Dynamic return cast value));
+    if ((cast !_Runtime.strictEquals(value, value) : Bool)) { return cast 0.0; }
+    return cast ((cast ((cast value : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast value : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast value : Dynamic)) : Dynamic));
     return cast null;
   }
 }

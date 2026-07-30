@@ -21,7 +21,7 @@ class DomCSSFilterBinding {
   public static function setDomCssFilter(state:DomRenderState, node:DisplayObject, filter:Null<String>):Void {
     var renderProxy:Dynamic = cast _Runtime.UNDEFINED;
     renderProxy = _Runtime.callValue(getOrCreateRenderProxy2D, cast ([state, node] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(filter, null))) {
+    if ((cast _Runtime.strictEquals(filter, null) : Bool)) {
       ((cast DomCSSFilterBinding._cssFilterBindings__domCSSFilterBinding : flighthq._internal._WeakMap).delete_(renderProxy));
       return;
     }

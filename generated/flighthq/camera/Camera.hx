@@ -171,7 +171,7 @@ class Camera {
   public static function updateCameraInverseViewProjection(camera:flighthq.types.Camera, aspect:Float):Bool {
     var ok:Dynamic = cast _Runtime.UNDEFINED;
     ok = _Runtime.callValue(getCameraInverseViewProjectionMatrix4, cast ([Camera.__scratchInverse__camera, camera, aspect] : Array<Dynamic>));
-    if (_Runtime.truthy(ok)) {
+    if ((cast ok : Bool)) {
       _Runtime.callProperty(camera.inverseViewProjection.m, 'set', cast ([Camera.__scratchInverse__camera.m] : Array<Dynamic>));
     }
     return cast ok;

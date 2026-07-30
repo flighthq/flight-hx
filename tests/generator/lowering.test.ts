@@ -4,7 +4,11 @@ import path from 'node:path';
 import ts from 'typescript';
 
 import { padContextualObjectFunctionParameters } from '../../tools/generator/src/emit/core.ts';
-import { emitHaxeModule } from '../../tools/generator/src/emit/haxe.ts';
+import {
+  emitHaxeModule,
+  resetStaticLoweringEmissionCounts,
+  staticLoweringEmissionCounts,
+} from '../../tools/generator/src/emit/haxe.ts';
 import { lowerTypeScriptSource } from '../../tools/generator/src/lower/typescript.ts';
 
 function typedSource(fileName: string, text: string): { checker: ts.TypeChecker; source: ts.SourceFile } {
@@ -1007,6 +1011,7 @@ describe('TypeScript lowering and Haxe emission', () => {
       `,
     );
     const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    resetStaticLoweringEmissionCounts();
     const output = emitHaxeModule({
       declarations: lowered.declarations,
       imports: [],
@@ -1338,7 +1343,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('_Runtime.looseEquals(a, b)');
   });
 
-  it('records conservative static facts without changing dynamic emission', () => {
+  it('emits only checker-proven primitive truthiness and numeric relations directly', () => {
     const { checker, source } = typedSource(
       '/workspace/upstream/packages/example/src/sample.ts',
       `
@@ -1367,7 +1372,22 @@ describe('TypeScript lowering and Haxe emission', () => {
           const mixedValue = mixed[3];
           const shadowedValue = shadowed[4];
           const logical = flag && true;
-          return { logical, mixedValue, numericOrder, shadowedValue, stringOrder, value };
+          const mixedLogical = flag && text;
+          const selected = flag ? a : b;
+          const nullableSelected = maybe ? a : b;
+          const negated = !flag;
+          return {
+            logical,
+            mixedLogical,
+            mixedValue,
+            negated,
+            nullableSelected,
+            numericOrder,
+            selected,
+            shadowedValue,
+            stringOrder,
+            value,
+          };
         }
       `,
     );
@@ -1381,11 +1401,18 @@ describe('TypeScript lowering and Haxe emission', () => {
 
     expect(lowered.diagnostics).toEqual([]);
     expect(lowered.staticFacts).toMatchObject({
-      booleanConditionalTruthiness: 0,
-      booleanExplicitTruthiness: 1,
+      booleanConditionalTruthiness: 1,
+      booleanExplicitTruthiness: 2,
       booleanLogicalExpressions: 1,
-      booleanLogicalTruthiness: 1,
+      booleanLogicalTruthiness: 2,
       indexedAccesses: { expressions: 3, reads: 2, writes: 2 },
+      numericRelations: 1,
+    });
+    expect(staticLoweringEmissionCounts()).toEqual({
+      booleanAndExpressions: 1,
+      booleanConditionalExpressions: 1,
+      booleanOrExpressions: 0,
+      booleanTruthinessUses: 2,
       numericRelations: 1,
     });
     expect(lowered.staticFacts.indexedReceivers.Array).toEqual({ expressions: 1, reads: 0, writes: 1 });
@@ -1396,13 +1423,20 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
     expect(lowered.staticFacts.indexedReceivers.Uint8Array).toEqual({ expressions: 0, reads: 0, writes: 0 });
 
-    expect(output).toContain('_Runtime.truthy(flag)');
+    expect(output).toContain('if ((cast flag : Bool))');
+    expect(output).toContain('!(cast flag : Bool)');
+    expect(output).not.toContain('_Runtime.truthy(flag)');
     expect(output).toContain('_Runtime.truthy(maybe)');
-    expect(output).toContain("_Runtime.compare(a, b, '<')");
+    expect(output).toContain('((cast a : Float) < (cast b : Float))');
+    expect(output).not.toContain("_Runtime.compare(a, b, '<')");
     expect(output).toContain("_Runtime.compare(text, 'z', '<')");
     expect(output).toContain('_Runtime.getIndex(mixed, 3.0)');
     expect(output).toContain('_Runtime.getIndex(shadowed, 4.0)');
-    expect(output).toContain('_Runtime.andValue(flag');
+    expect(output).toContain('((cast flag : Bool) && (cast true : Bool))');
+    expect(output).toContain('_Runtime.andValue(flag, function():Dynamic return cast text)');
+    expect(output.match(/_Runtime\.andValue\(flag/gu)).toHaveLength(1);
+    expect(output).not.toContain('_Runtime.select(flag');
+    expect(output).toContain('_Runtime.select(maybe');
   });
 
   it('preserves Haxe keyword property names in JavaScript objects', () => {

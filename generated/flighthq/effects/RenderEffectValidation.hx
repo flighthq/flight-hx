@@ -12,7 +12,7 @@ class RenderEffectValidation {
     for (effect in _Runtime.iterable(effects)) {
       var required:Dynamic = _Runtime.callValue(getRenderEffectInputs, cast ([effect] : Array<Dynamic>));
       for (input in _Runtime.iterable(required)) {
-        if (_Runtime.truthy(!_Runtime.truthy(_Runtime.includes(available, input)))) {
+        if ((cast !(cast _Runtime.includes(available, input) : Bool) : Bool)) {
           return cast input;
         }
       }

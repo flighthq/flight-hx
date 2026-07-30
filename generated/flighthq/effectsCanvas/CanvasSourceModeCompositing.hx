@@ -33,8 +33,8 @@ class CanvasSourceModeCompositing {
   }
 
   public static function compositeCanvasSourceMode(dest:Dynamic, source:Dynamic, sourceMode:Dynamic):Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(sourceMode, 'hide'))) { return; }
-    _Runtime.callValue(compositeCanvasImage, cast ([dest, source, 0.0, 0.0, _Runtime.select(_Runtime.strictEquals(sourceMode, 'knockout'), function():Dynamic return cast 'destination-out', function():Dynamic return cast 'source-over')] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(sourceMode, 'hide') : Bool)) { return; }
+    _Runtime.callValue(compositeCanvasImage, cast ([dest, source, 0.0, 0.0, ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool) ? (cast 'destination-out' : Dynamic) : (cast 'source-over' : Dynamic))] : Array<Dynamic>));
   }
 
   public static function drawCanvasTintedAlphaMask(dest:Dynamic, source:Dynamic, color:Float, alpha:Float, strength:Float):Void {

@@ -91,7 +91,7 @@ class CapacitorFileSystem {
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
             var __flowBranch4:Dynamic;
-            if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(data), 'string'))) {
+            if ((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'string') : Bool)) {
               __flowBranch4 = flighthq._internal._Async.protect(function():Dynamic {
                 return flighthq._internal._Async.flatMap(_Runtime.callProperty(filesystem, 'writeFile', cast ([{ path: path, data: data, encoding: 'utf8', recursive: true }] : Array<Dynamic>)), function(__awaitValue5:Dynamic):Dynamic {
                   __awaitValue5;
@@ -361,7 +361,7 @@ class CapacitorFileSystem {
     bytes = new flighthq._internal._UInt8Array(_Runtime.field(binary, 'length'));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(binary, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(binary, 'length') : Float)) : Bool)) {
         _Runtime.setIndex(bytes, i, _Runtime.charCodeAt(binary, i));
         i++;
       }
@@ -375,7 +375,7 @@ class CapacitorFileSystem {
     binary = '';
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(bytes, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(bytes, 'length') : Float)) : Bool)) {
         (binary = cast ((binary + _Runtime.callProperty(String, 'fromCharCode', cast ([_Runtime.getIndex(bytes, i)] : Array<Dynamic>))) : Dynamic));
         i++;
       }

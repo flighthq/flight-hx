@@ -11,12 +11,12 @@ class DomClipContours {
   public static function buildDomContourClipPath(entry:DomClipContourEntry, mapPointToElement:Dynamic):String {
     var d:Dynamic = cast _Runtime.UNDEFINED;
     var rule:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(entry, 'contours'), 'length'), 1.0))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(entry, 'contours'), 'length'), 1.0) : Bool)) {
       var pts:Array<String> = cast ([] : Array<Dynamic>);
       var contour:Dynamic = _Runtime.getIndex(_Runtime.field(entry, 'contours'), 0.0);
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(contour, 'length'), '<'))) {
+        while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
           var __destructure0:Dynamic = _Runtime.callValue(mapPointToElement, cast ([_Runtime.getIndex(contour, i), _Runtime.getIndex(contour, (i + 1.0))] : Array<Dynamic>));
           var x:Dynamic = _Runtime.getIndex(__destructure0, 0.0);
           var y:Dynamic = _Runtime.getIndex(__destructure0, 1.0);
@@ -29,15 +29,15 @@ class DomClipContours {
     d = '';
     {
       var c:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(c, _Runtime.field(_Runtime.field(entry, 'contours'), 'length'), '<'))) {
+      while ((cast ((cast c : Float) < (cast _Runtime.field(_Runtime.field(entry, 'contours'), 'length') : Float)) : Bool)) {
         var contour:Dynamic = _Runtime.getIndex(_Runtime.field(entry, 'contours'), c);
         {
           var i:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(contour, 'length'), '<'))) {
+          while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
             var __destructure1:Dynamic = _Runtime.callValue(mapPointToElement, cast ([_Runtime.getIndex(contour, i), _Runtime.getIndex(contour, (i + 1.0))] : Array<Dynamic>));
             var x:Dynamic = _Runtime.getIndex(__destructure1, 0.0);
             var y:Dynamic = _Runtime.getIndex(__destructure1, 1.0);
-            (d = cast ((d + '' + Std.string(_Runtime.select(_Runtime.strictEquals(i, 0.0), function():Dynamic return cast 'M', function():Dynamic return cast 'L')) + '' + Std.string(x) + ' ' + Std.string(y) + ' ') : Dynamic));
+            (d = cast ((d + '' + Std.string(((cast _Runtime.strictEquals(i, 0.0) : Bool) ? (cast 'M' : Dynamic) : (cast 'L' : Dynamic))) + '' + Std.string(x) + ' ' + Std.string(y) + ' ') : Dynamic));
             (i = cast ((i + 2.0) : Dynamic));
           }
         }
@@ -45,7 +45,7 @@ class DomClipContours {
         c++;
       }
     }
-    rule = _Runtime.select(_Runtime.strictEquals(_Runtime.field(entry, 'winding'), 'evenOdd'), function():Dynamic return cast 'evenodd', function():Dynamic return cast 'nonzero');
+    rule = ((cast _Runtime.strictEquals(_Runtime.field(entry, 'winding'), 'evenOdd') : Bool) ? (cast 'evenodd' : Dynamic) : (cast 'nonzero' : Dynamic));
     return cast 'path(\'' + Std.string(rule) + '\', \'' + Std.string(StringTools.trim(Std.string(d))) + '\')';
     return cast null;
   }
@@ -55,12 +55,12 @@ class DomClipContours {
     staged = cast ([] : Array<Dynamic>);
     {
       var c:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(c, _Runtime.field(contours, 'length'), '<'))) {
+      while ((cast ((cast c : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
         var src:Dynamic = _Runtime.getIndex(contours, c);
         var out:Array<Float> = cast ([] : Array<Dynamic>);
         {
           var i:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(src, 'length'), '<'))) {
+          while ((cast ((cast i : Float) < (cast _Runtime.field(src, 'length') : Float)) : Bool)) {
             var x:Dynamic = _Runtime.getIndex(src, i);
             var y:Dynamic = _Runtime.getIndex(src, (i + 1.0));
             _Runtime.pushMany(out, cast ([(((_Runtime.field(transform, 'a') * x) + (_Runtime.field(transform, 'c') * y)) + _Runtime.field(transform, 'tx')), (((_Runtime.field(transform, 'b') * x) + (_Runtime.field(transform, 'd') * y)) + _Runtime.field(transform, 'ty'))] : Array<Dynamic>));

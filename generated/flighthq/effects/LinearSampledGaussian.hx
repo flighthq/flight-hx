@@ -19,15 +19,15 @@ class LinearSampledGaussian {
     _Runtime.setLength(outOffsets, tapCount);
     {
       var tap:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(tap, tapCount, '<'))) {
+      while ((cast ((cast tap : Float) < (cast tapCount : Float)) : Bool)) {
         var i:Dynamic = (tap * 2.0);
         var posA:Dynamic = (i - radius);
-        if (_Runtime.truthy(_Runtime.compare((i + 1.0), size, '<'))) {
+        if ((cast ((cast (i + 1.0) : Float) < (cast size : Float)) : Bool)) {
           var weightA:Dynamic = _Runtime.getIndex(LinearSampledGaussian.scratchWeights__linearSampledGaussian, i);
           var weightB:Dynamic = _Runtime.getIndex(LinearSampledGaussian.scratchWeights__linearSampledGaussian, (i + 1.0));
           var combined:Dynamic = (weightA + weightB);
           _Runtime.setIndex(outWeights, tap, combined);
-          _Runtime.setIndex(outOffsets, tap, _Runtime.select(_Runtime.strictEquals(combined, 0.0), function():Dynamic return cast (posA + 0.5), function():Dynamic return cast (((posA * weightA) + ((posA + 1.0) * weightB)) / combined)));
+          _Runtime.setIndex(outOffsets, tap, ((cast _Runtime.strictEquals(combined, 0.0) : Bool) ? (cast (posA + 0.5) : Dynamic) : (cast (((posA * weightA) + ((posA + 1.0) * weightB)) / combined) : Dynamic)));
         } else {
           _Runtime.setIndex(outWeights, tap, _Runtime.getIndex(LinearSampledGaussian.scratchWeights__linearSampledGaussian, i));
           _Runtime.setIndex(outOffsets, tap, posA);

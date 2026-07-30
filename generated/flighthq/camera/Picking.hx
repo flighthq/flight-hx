@@ -27,7 +27,7 @@ class Picking {
     var farZ:Dynamic = cast _Runtime.UNDEFINED;
     var farW:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(getCameraViewProjectionMatrix4, cast ([Picking.__scratchViewProjection__picking, camera, aspect] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(inverseMatrix4, cast ([Picking.__scratchInverseVP__picking, Picking.__scratchViewProjection__picking] : Array<Dynamic>))))) {
+    if ((cast !(cast _Runtime.callValue(inverseMatrix4, cast ([Picking.__scratchInverseVP__picking, Picking.__scratchViewProjection__picking] : Array<Dynamic>)) : Bool) : Bool)) {
       return cast false;
     }
     m = Picking.__scratchInverseVP__picking.m;
@@ -37,7 +37,7 @@ class Picking {
     nearY = ((((_Runtime.getIndex(m, 1.0) * nx) + (_Runtime.getIndex(m, 5.0) * ny)) + (_Runtime.getIndex(m, 9.0) * -1.0)) + _Runtime.getIndex(m, 13.0));
     nearZ = ((((_Runtime.getIndex(m, 2.0) * nx) + (_Runtime.getIndex(m, 6.0) * ny)) + (_Runtime.getIndex(m, 10.0) * -1.0)) + _Runtime.getIndex(m, 14.0));
     nearW = ((((_Runtime.getIndex(m, 3.0) * nx) + (_Runtime.getIndex(m, 7.0) * ny)) + (_Runtime.getIndex(m, 11.0) * -1.0)) + _Runtime.getIndex(m, 15.0));
-    if (_Runtime.truthy(!_Runtime.strictEquals(nearW, 0.0))) {
+    if ((cast !_Runtime.strictEquals(nearW, 0.0) : Bool)) {
       var invW:Dynamic = (1.0 / nearW);
       (nearX = cast ((nearX * invW) : Dynamic));
       (nearY = cast ((nearY * invW) : Dynamic));
@@ -47,7 +47,7 @@ class Picking {
     farY = ((((_Runtime.getIndex(m, 1.0) * nx) + (_Runtime.getIndex(m, 5.0) * ny)) + _Runtime.getIndex(m, 9.0)) + _Runtime.getIndex(m, 13.0));
     farZ = ((((_Runtime.getIndex(m, 2.0) * nx) + (_Runtime.getIndex(m, 6.0) * ny)) + _Runtime.getIndex(m, 10.0)) + _Runtime.getIndex(m, 14.0));
     farW = ((((_Runtime.getIndex(m, 3.0) * nx) + (_Runtime.getIndex(m, 7.0) * ny)) + _Runtime.getIndex(m, 11.0)) + _Runtime.getIndex(m, 15.0));
-    if (_Runtime.truthy(!_Runtime.strictEquals(farW, 0.0))) {
+    if ((cast !_Runtime.strictEquals(farW, 0.0) : Bool)) {
       var invW:Dynamic = (1.0 / farW);
       (farX = cast ((farX * invW) : Dynamic));
       (farY = cast ((farY * invW) : Dynamic));
@@ -90,7 +90,7 @@ class Picking {
     clipY = ((((_Runtime.getIndex(m, 1.0) * wx) + (_Runtime.getIndex(m, 5.0) * wy)) + (_Runtime.getIndex(m, 9.0) * wz)) + _Runtime.getIndex(m, 13.0));
     clipZ = ((((_Runtime.getIndex(m, 2.0) * wx) + (_Runtime.getIndex(m, 6.0) * wy)) + (_Runtime.getIndex(m, 10.0) * wz)) + _Runtime.getIndex(m, 14.0));
     clipW = ((((_Runtime.getIndex(m, 3.0) * wx) + (_Runtime.getIndex(m, 7.0) * wy)) + (_Runtime.getIndex(m, 11.0) * wz)) + _Runtime.getIndex(m, 15.0));
-    if (_Runtime.truthy(_Runtime.compare(clipW, 0.0, '<='))) {
+    if ((cast ((cast clipW : Float) <= (cast 0.0 : Float)) : Bool)) {
       return cast false;
     }
     invW = (1.0 / clipW);

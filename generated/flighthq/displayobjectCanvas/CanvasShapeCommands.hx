@@ -24,12 +24,12 @@ class CanvasShapeCommands {
     matrix = (cast _Runtime.getIndex(buf, (i + 1.0)) : Null<Matrix>);
     repeat = (cast _Runtime.getIndex(buf, (i + 2.0)) : Bool);
     smooth = (cast _Runtime.getIndex(buf, (i + 3.0)) : Bool);
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.field(state, 'hasPendingPath'), function():Dynamic return cast _Runtime.orValue(_Runtime.field(state, 'hasFill'), function():Dynamic return cast _Runtime.field(state, 'hasStroke'))))) { _Runtime.callProperty(state, 'flush', cast ([] : Array<Dynamic>)); }
+    if ((cast ((cast _Runtime.field(state, 'hasPendingPath') : Bool) && (cast _Runtime.orValue(_Runtime.field(state, 'hasFill'), function():Dynamic return cast _Runtime.field(state, 'hasStroke')) : Bool)) : Bool)) { _Runtime.callProperty(state, 'flush', cast ([] : Array<Dynamic>)); }
     pattern = _Runtime.callValue(createBitmapPattern, cast ([context, bitmap, repeat, smooth] : Array<Dynamic>));
     _Runtime.setField(state, 'hasFill', !_Runtime.strictEquals(pattern, null));
     _Runtime.setField(state, 'fillStyle', _Runtime.coalesce(pattern, function():Dynamic return cast ''));
     _Runtime.setField(state, 'fillMatrix', matrix);
-    if (_Runtime.truthy(!_Runtime.strictEquals(matrix, null))) {
+    if ((cast !_Runtime.strictEquals(matrix, null) : Bool)) {
       _Runtime.callValue(inverseMatrix, cast ([CanvasShapeCommands._fillMatrixInverse__canvasShapeCommands, matrix] : Array<Dynamic>));
       _Runtime.setField(state, 'fillMatrixInverse', CanvasShapeCommands._fillMatrixInverse__canvasShapeCommands);
     } else {
@@ -45,9 +45,9 @@ class CanvasShapeCommands {
     var alpha:Dynamic = cast _Runtime.UNDEFINED;
     color = (cast _Runtime.getIndex(buf, i) : Float);
     alpha = (cast _Runtime.getIndex(buf, (i + 1.0)) : Float);
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.field(state, 'hasPendingPath'), function():Dynamic return cast _Runtime.orValue(_Runtime.field(state, 'hasFill'), function():Dynamic return cast _Runtime.field(state, 'hasStroke'))))) { _Runtime.callProperty(state, 'flush', cast ([] : Array<Dynamic>)); }
-    _Runtime.setField(state, 'hasFill', _Runtime.compare(alpha, 0.005, '>='));
-    _Runtime.setField(state, 'fillStyle', _Runtime.select(_Runtime.field(state, 'hasFill'), function():Dynamic return cast _Runtime.callValue(CanvasShapeCommands.rgbaString__canvasShapeCommands, cast ([color, alpha] : Array<Dynamic>)), function():Dynamic return cast ''));
+    if ((cast ((cast _Runtime.field(state, 'hasPendingPath') : Bool) && (cast _Runtime.orValue(_Runtime.field(state, 'hasFill'), function():Dynamic return cast _Runtime.field(state, 'hasStroke')) : Bool)) : Bool)) { _Runtime.callProperty(state, 'flush', cast ([] : Array<Dynamic>)); }
+    _Runtime.setField(state, 'hasFill', ((cast alpha : Float) >= (cast 0.005 : Float)));
+    _Runtime.setField(state, 'fillStyle', ((cast _Runtime.field(state, 'hasFill') : Bool) ? (cast _Runtime.callValue(CanvasShapeCommands.rgbaString__canvasShapeCommands, cast ([color, alpha] : Array<Dynamic>)) : Dynamic) : (cast '' : Dynamic)));
     _Runtime.setField(state, 'fillMatrix', null);
     _Runtime.setField(state, 'fillMatrixInverse', null);
     _Runtime.setField(state, 'bitmapSrc', null);
@@ -71,7 +71,7 @@ class CanvasShapeCommands {
     spreadMethod = (cast _Runtime.getIndex(buf, (i + 5.0)) : Dynamic);
     interpolationMethod = (cast _Runtime.getIndex(buf, (i + 6.0)) : Dynamic);
     focalPointRatio = (cast _Runtime.getIndex(buf, (i + 7.0)) : Float);
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.field(state, 'hasPendingPath'), function():Dynamic return cast _Runtime.orValue(_Runtime.field(state, 'hasFill'), function():Dynamic return cast _Runtime.field(state, 'hasStroke'))))) { _Runtime.callProperty(state, 'flush', cast ([] : Array<Dynamic>)); }
+    if ((cast ((cast _Runtime.field(state, 'hasPendingPath') : Bool) && (cast _Runtime.orValue(_Runtime.field(state, 'hasFill'), function():Dynamic return cast _Runtime.field(state, 'hasStroke')) : Bool)) : Bool)) { _Runtime.callProperty(state, 'flush', cast ([] : Array<Dynamic>)); }
     pattern = _Runtime.callValue(createGradientPattern, cast ([context, gradientType, colors, alphas, ratios, matrix, spreadMethod, interpolationMethod, focalPointRatio] : Array<Dynamic>));
     _Runtime.setField(state, 'hasFill', !_Runtime.strictEquals(pattern, null));
     _Runtime.setField(state, 'fillStyle', _Runtime.coalesce(pattern, function():Dynamic return cast ''));
@@ -93,7 +93,7 @@ class CanvasShapeCommands {
     controlY2 = (cast _Runtime.getIndex(buf, (i + 3.0)) : Float);
     anchorX = (cast _Runtime.getIndex(buf, (i + 4.0)) : Float);
     anchorY = (cast _Runtime.getIndex(buf, (i + 5.0)) : Float);
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'hasCurrentPoint')))) {
+    if ((cast !(cast _Runtime.field(state, 'hasCurrentPoint') : Bool) : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([0.0, 0.0] : Array<Dynamic>));
       _Runtime.setField(state, 'hasCurrentPoint', true);
     }
@@ -110,7 +110,7 @@ class CanvasShapeCommands {
     controlY = (cast _Runtime.getIndex(buf, (i + 1.0)) : Float);
     anchorX = (cast _Runtime.getIndex(buf, (i + 2.0)) : Float);
     anchorY = (cast _Runtime.getIndex(buf, (i + 3.0)) : Float);
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'hasCurrentPoint')))) {
+    if ((cast !(cast _Runtime.field(state, 'hasCurrentPoint') : Bool) : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([0.0, 0.0] : Array<Dynamic>));
       _Runtime.setField(state, 'hasCurrentPoint', true);
     }
@@ -158,7 +158,7 @@ class CanvasShapeCommands {
     commands = (cast _Runtime.getIndex(buf, i) : Array<Float>);
     data = (cast _Runtime.getIndex(buf, (i + 1.0)) : Array<Float>);
     winding = (cast _Runtime.getIndex(buf, (i + 2.0)) : String);
-    _Runtime.setField(state, 'windingRule', _Runtime.select(_Runtime.strictEquals(winding, 'nonZero'), function():Dynamic return cast 'nonzero', function():Dynamic return cast 'evenodd'));
+    _Runtime.setField(state, 'windingRule', ((cast _Runtime.strictEquals(winding, 'nonZero') : Bool) ? (cast 'nonzero' : Dynamic) : (cast 'evenodd' : Dynamic)));
     di = 0.0;
     for (pc in _Runtime.iterable(commands)) {
       {
@@ -170,7 +170,7 @@ class CanvasShapeCommands {
           _Runtime.setField(state, 'hasCurrentPoint', true);
         }
         else if (__switchValue == 2.0) {
-          if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'hasCurrentPoint')))) {
+          if ((cast !(cast _Runtime.field(state, 'hasCurrentPoint') : Bool) : Bool)) {
             flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([0.0, 0.0] : Array<Dynamic>));
             _Runtime.setField(state, 'hasCurrentPoint', true);
           }
@@ -179,7 +179,7 @@ class CanvasShapeCommands {
           _Runtime.setField(state, 'hasPendingPath', true);
         }
         else if (__switchValue == 3.0) {
-          if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'hasCurrentPoint')))) {
+          if ((cast !(cast _Runtime.field(state, 'hasCurrentPoint') : Bool) : Bool)) {
             flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([0.0, 0.0] : Array<Dynamic>));
             _Runtime.setField(state, 'hasCurrentPoint', true);
           }
@@ -194,7 +194,7 @@ class CanvasShapeCommands {
           _Runtime.setField(state, 'hasCurrentPoint', true);
         }
         else if (__switchValue == 5.0) {
-          if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'hasCurrentPoint')))) {
+          if ((cast !(cast _Runtime.field(state, 'hasCurrentPoint') : Bool) : Bool)) {
             flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([0.0, 0.0] : Array<Dynamic>));
             _Runtime.setField(state, 'hasCurrentPoint', true);
           }
@@ -203,7 +203,7 @@ class CanvasShapeCommands {
           _Runtime.setField(state, 'hasPendingPath', true);
         }
         else if (__switchValue == 6.0) {
-          if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'hasCurrentPoint')))) {
+          if ((cast !(cast _Runtime.field(state, 'hasCurrentPoint') : Bool) : Bool)) {
             flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([0.0, 0.0] : Array<Dynamic>));
             _Runtime.setField(state, 'hasCurrentPoint', true);
           }
@@ -224,14 +224,14 @@ class CanvasShapeCommands {
     y = (cast _Runtime.getIndex(buf, (i + 1.0)) : Float);
     width = (cast _Runtime.getIndex(buf, (i + 2.0)) : Float);
     height = (cast _Runtime.getIndex(buf, (i + 3.0)) : Float);
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(state, 'bitmapSrc'), null))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(state, 'bitmapSrc'), null) : Bool)) {
       var sl:Dynamic = x;
       var st:Dynamic = y;
       var sr:Dynamic = (x + width);
       var sb:Dynamic = (y + height);
       var canOptimize:Dynamic = true;
-      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(state, 'fillMatrix'), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(state, 'fillMatrixInverse'), null)))) {
-        if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(_Runtime.field(state, 'fillMatrix'), 'b'), 0.0), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(state, 'fillMatrix'), 'c'), 0.0)))) {
+      if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(state, 'fillMatrix'), null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(state, 'fillMatrixInverse'), null) : Bool)) : Bool)) {
+        if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(state, 'fillMatrix'), 'b'), 0.0) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(state, 'fillMatrix'), 'c'), 0.0) : Bool)) : Bool)) {
           (canOptimize = cast (false : Dynamic));
         } else {
           var inv:Dynamic = _Runtime.field(state, 'fillMatrixInverse');
@@ -241,8 +241,8 @@ class CanvasShapeCommands {
           (sb = cast ((((_Runtime.field(inv, 'b') * (x + width)) + (_Runtime.field(inv, 'd') * (y + height))) + _Runtime.field(inv, 'ty')) : Dynamic));
         }
       }
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(canOptimize, function():Dynamic return cast _Runtime.compare(sl, 0.0, '>=')), function():Dynamic return cast _Runtime.compare(st, 0.0, '>=')), function():Dynamic return cast _Runtime.compare(sr, _Runtime.field(state, 'bitmapW'), '<=')), function():Dynamic return cast _Runtime.compare(sb, _Runtime.field(state, 'bitmapH'), '<=')))) {
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.field(state, 'hasPendingPath'), function():Dynamic return cast _Runtime.orValue(_Runtime.field(state, 'hasFill'), function():Dynamic return cast _Runtime.field(state, 'hasStroke'))))) { _Runtime.callProperty(state, 'flush', cast ([] : Array<Dynamic>)); }
+      if ((cast ((cast ((cast ((cast ((cast canOptimize : Bool) && (cast ((cast sl : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast st : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast sr : Float) <= (cast _Runtime.field(state, 'bitmapW') : Float)) : Bool)) : Bool) && (cast ((cast sb : Float) <= (cast _Runtime.field(state, 'bitmapH') : Float)) : Bool)) : Bool)) {
+        if ((cast ((cast _Runtime.field(state, 'hasPendingPath') : Bool) && (cast _Runtime.orValue(_Runtime.field(state, 'hasFill'), function():Dynamic return cast _Runtime.field(state, 'hasStroke')) : Bool)) : Bool)) { _Runtime.callProperty(state, 'flush', cast ([] : Array<Dynamic>)); }
         flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([_Runtime.field(state, 'bitmapSrc'), sl, st, (sr - sl), (sb - st), x, y, width, height] : Array<Dynamic>));
         return;
       }
@@ -271,7 +271,7 @@ class CanvasShapeCommands {
     rx = HxMath.min((ellipseWidth / 2.0), (width / 2.0));
     ry = HxMath.min((ellipseHeight / 2.0), (height / 2.0));
     radius = HxMath.min(rx, ry);
-    if (_Runtime.truthy(_Runtime.strictEquals('function', 'function'))) {
+    if ((cast _Runtime.strictEquals('function', 'function') : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.call(context, 'roundRect', cast ([x, y, width, height, radius] : Array<Dynamic>));
     } else {
       flighthq._internal.backend.Canvas2dBackend.call(context, 'rect', cast ([x, y, width, height] : Array<Dynamic>));
@@ -281,7 +281,7 @@ class CanvasShapeCommands {
   } };
 
   public static final defaultCanvasEndFill:Dynamic = { key: 'endFill', draw: function(_ctx:Dynamic, state:Dynamic) {
-    if (_Runtime.truthy(_Runtime.field(state, 'hasPendingPath'))) { _Runtime.callProperty(state, 'flush', cast ([] : Array<Dynamic>)); }
+    if ((cast _Runtime.field(state, 'hasPendingPath') : Bool)) { _Runtime.callProperty(state, 'flush', cast ([] : Array<Dynamic>)); }
     _Runtime.setField(state, 'hasFill', false);
     _Runtime.setField(state, 'fillMatrix', null);
     _Runtime.setField(state, 'fillMatrixInverse', null);
@@ -297,7 +297,7 @@ class CanvasShapeCommands {
     repeat = (cast _Runtime.getIndex(buf, (i + 2.0)) : Bool);
     smooth = (cast _Runtime.getIndex(buf, (i + 3.0)) : Bool);
     pattern = _Runtime.callValue(createBitmapPattern, cast ([context, bitmap, repeat, smooth] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(pattern, null))) {
+    if ((cast !_Runtime.strictEquals(pattern, null) : Bool)) {
       _Runtime.setField(state, 'strokeStyle', pattern);
       _Runtime.setField(state, 'hasStroke', true);
     }
@@ -322,7 +322,7 @@ class CanvasShapeCommands {
     interpolationMethod = (cast _Runtime.getIndex(buf, (i + 6.0)) : Dynamic);
     focalPointRatio = (cast _Runtime.getIndex(buf, (i + 7.0)) : Float);
     pattern = _Runtime.callValue(createGradientPattern, cast ([context, gradientType, colors, alphas, ratios, matrix, spreadMethod, interpolationMethod, focalPointRatio] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(pattern, null))) {
+    if ((cast !_Runtime.strictEquals(pattern, null) : Bool)) {
       _Runtime.setField(state, 'strokeStyle', pattern);
       _Runtime.setField(state, 'hasStroke', true);
     }
@@ -341,11 +341,11 @@ class CanvasShapeCommands {
     caps = (cast _Runtime.getIndex(buf, (i + 5.0)) : String);
     joints = (cast _Runtime.getIndex(buf, (i + 6.0)) : String);
     miterLimit = (cast _Runtime.getIndex(buf, (i + 7.0)) : Float);
-    _Runtime.setField(state, 'hasStroke', _Runtime.compare(thickness, 0.0, '>'));
-    if (_Runtime.truthy(_Runtime.field(state, 'hasStroke'))) {
+    _Runtime.setField(state, 'hasStroke', ((cast thickness : Float) > (cast 0.0 : Float)));
+    if ((cast _Runtime.field(state, 'hasStroke') : Bool)) {
       _Runtime.setField(state, 'strokeWidth', thickness);
       _Runtime.setField(state, 'strokeStyle', _Runtime.callValue(CanvasShapeCommands.rgbaString__canvasShapeCommands, cast ([color, alpha] : Array<Dynamic>)));
-      flighthq._internal.backend.Canvas2dBackend.setField(context, 'lineCap', _Runtime.select(_Runtime.strictEquals(caps, 'none'), function():Dynamic return cast 'butt', function():Dynamic return cast (cast caps : Dynamic)));
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'lineCap', ((cast _Runtime.strictEquals(caps, 'none') : Bool) ? (cast 'butt' : Dynamic) : (cast (cast caps : Dynamic) : Dynamic)));
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'lineJoin', (cast joints : Dynamic));
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'miterLimit', miterLimit);
     }
@@ -356,7 +356,7 @@ class CanvasShapeCommands {
     var y:Dynamic = cast _Runtime.UNDEFINED;
     x = (cast _Runtime.getIndex(buf, i) : Float);
     y = (cast _Runtime.getIndex(buf, (i + 1.0)) : Float);
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'hasCurrentPoint')))) {
+    if ((cast !(cast _Runtime.field(state, 'hasCurrentPoint') : Bool) : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([0.0, 0.0] : Array<Dynamic>));
       _Runtime.setField(state, 'hasCurrentPoint', true);
     }

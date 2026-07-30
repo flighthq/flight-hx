@@ -12,14 +12,14 @@ class CopyPath {
   }
 
   public static function copyPath(source:Path, ?out:Path):Path {
-    if (_Runtime.truthy(_Runtime.strictEquals(out, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(out, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       return cast { commands: _Runtime.slice(_Runtime.field(source, 'commands'), 0, null), data: _Runtime.slice(_Runtime.field(source, 'data'), 0, null), winding: _Runtime.field(source, 'winding') };
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(out, source))) {
+    if ((cast !_Runtime.strictEquals(out, source) : Bool)) {
       _Runtime.setLength(_Runtime.field(out, 'commands'), 0.0);
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(source, 'commands'), 'length'), '<'))) {
+        while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(source, 'commands'), 'length') : Float)) : Bool)) {
           _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([_Runtime.getIndex(_Runtime.field(source, 'commands'), i)] : Array<Dynamic>));
           i++;
         }
@@ -27,7 +27,7 @@ class CopyPath {
       _Runtime.setLength(_Runtime.field(out, 'data'), 0.0);
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(source, 'data'), 'length'), '<'))) {
+        while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(source, 'data'), 'length') : Float)) : Bool)) {
           _Runtime.callProperty(_Runtime.field(out, 'data'), 'push', cast ([_Runtime.getIndex(_Runtime.field(source, 'data'), i)] : Array<Dynamic>));
           i++;
         }

@@ -22,9 +22,9 @@ class ValidateParticleEmitterConfig {
     mutable = (cast (cast out : Dynamic) : Dynamic);
     defaultsRec = (cast (cast defaults : Dynamic) : Dynamic);
     for (field in _Runtime.iterable(ValidateParticleEmitterConfig.NUMERIC_FIELDS__validateParticleEmitterConfig)) {
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.getIndex(mutable, field)] : Array<Dynamic>))))) { _Runtime.setIndex(mutable, field, _Runtime.getIndex(defaultsRec, field)); }
+      if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.getIndex(mutable, field)] : Array<Dynamic>)) : Bool) : Bool)) { _Runtime.setIndex(mutable, field, _Runtime.getIndex(defaultsRec, field)); }
     }
-    return cast _Runtime.mergeObjects([out, { alphaCurve: _Runtime.select(_Runtime.callValue(ValidateParticleEmitterConfig.isFiniteCurve__validateParticleEmitterConfig, cast ([_Runtime.field(out, 'alphaCurve')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(out, 'alphaCurve'), function():Dynamic return cast null) }, { colorCurve: _Runtime.select(_Runtime.callValue(ValidateParticleEmitterConfig.isFiniteCurve__validateParticleEmitterConfig, cast ([_Runtime.field(out, 'colorCurve')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(out, 'colorCurve'), function():Dynamic return cast null) }, { scaleCurve: _Runtime.select(_Runtime.callValue(ValidateParticleEmitterConfig.isFiniteCurve__validateParticleEmitterConfig, cast ([_Runtime.field(out, 'scaleCurve')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(out, 'scaleCurve'), function():Dynamic return cast null) }, { maxParticles: HxMath.max(0.0, HxMath.floor(_Runtime.field(out, 'maxParticles'))) }, { burstCount: HxMath.max(0.0, HxMath.floor(_Runtime.field(out, 'burstCount'))) }, { burstInterval: HxMath.max(0.0, _Runtime.field(out, 'burstInterval')) }, { duration: HxMath.max(0.0, _Runtime.field(out, 'duration')) }, { frameCount: HxMath.max(1.0, HxMath.floor(_Runtime.field(out, 'frameCount'))) }, { frameRate: HxMath.max(0.0, _Runtime.field(out, 'frameRate')) }, { regionIdMin: HxMath.max(0.0, HxMath.floor(_Runtime.field(out, 'regionIdMin'))) }, { regionIdMax: HxMath.max(HxMath.max(0.0, HxMath.floor(_Runtime.field(out, 'regionIdMin'))), HxMath.floor(_Runtime.field(out, 'regionIdMax'))) }, { spawnRate: HxMath.max(0.0, _Runtime.field(out, 'spawnRate')) }, { lifetimeMin: HxMath.max(0.0, _Runtime.field(out, 'lifetimeMin')) }, { lifetimeMax: HxMath.max(0.0, _Runtime.field(out, 'lifetimeMax')) }, { speedMin: HxMath.max(0.0, _Runtime.field(out, 'speedMin')) }, { speedMax: HxMath.max(0.0, _Runtime.field(out, 'speedMax')) }, { scaleMin: HxMath.max(0.0, _Runtime.field(out, 'scaleMin')) }, { scaleMax: HxMath.max(0.0, _Runtime.field(out, 'scaleMax')) }, { emitterConeAngle: HxMath.max(0.0, _Runtime.field(out, 'emitterConeAngle')) }, { emitterDepth: HxMath.max(0.0, _Runtime.field(out, 'emitterDepth')) }, { emitterRadius: HxMath.max(0.0, _Runtime.field(out, 'emitterRadius')) }, { emitterWidth: HxMath.max(0.0, _Runtime.field(out, 'emitterWidth')) }, { emitterHeight: HxMath.max(0.0, _Runtime.field(out, 'emitterHeight')) }]);
+    return cast _Runtime.mergeObjects([out, { alphaCurve: ((cast _Runtime.callValue(ValidateParticleEmitterConfig.isFiniteCurve__validateParticleEmitterConfig, cast ([_Runtime.field(out, 'alphaCurve')] : Array<Dynamic>)) : Bool) ? (cast _Runtime.field(out, 'alphaCurve') : Dynamic) : (cast null : Dynamic)) }, { colorCurve: ((cast _Runtime.callValue(ValidateParticleEmitterConfig.isFiniteCurve__validateParticleEmitterConfig, cast ([_Runtime.field(out, 'colorCurve')] : Array<Dynamic>)) : Bool) ? (cast _Runtime.field(out, 'colorCurve') : Dynamic) : (cast null : Dynamic)) }, { scaleCurve: ((cast _Runtime.callValue(ValidateParticleEmitterConfig.isFiniteCurve__validateParticleEmitterConfig, cast ([_Runtime.field(out, 'scaleCurve')] : Array<Dynamic>)) : Bool) ? (cast _Runtime.field(out, 'scaleCurve') : Dynamic) : (cast null : Dynamic)) }, { maxParticles: HxMath.max(0.0, HxMath.floor(_Runtime.field(out, 'maxParticles'))) }, { burstCount: HxMath.max(0.0, HxMath.floor(_Runtime.field(out, 'burstCount'))) }, { burstInterval: HxMath.max(0.0, _Runtime.field(out, 'burstInterval')) }, { duration: HxMath.max(0.0, _Runtime.field(out, 'duration')) }, { frameCount: HxMath.max(1.0, HxMath.floor(_Runtime.field(out, 'frameCount'))) }, { frameRate: HxMath.max(0.0, _Runtime.field(out, 'frameRate')) }, { regionIdMin: HxMath.max(0.0, HxMath.floor(_Runtime.field(out, 'regionIdMin'))) }, { regionIdMax: HxMath.max(HxMath.max(0.0, HxMath.floor(_Runtime.field(out, 'regionIdMin'))), HxMath.floor(_Runtime.field(out, 'regionIdMax'))) }, { spawnRate: HxMath.max(0.0, _Runtime.field(out, 'spawnRate')) }, { lifetimeMin: HxMath.max(0.0, _Runtime.field(out, 'lifetimeMin')) }, { lifetimeMax: HxMath.max(0.0, _Runtime.field(out, 'lifetimeMax')) }, { speedMin: HxMath.max(0.0, _Runtime.field(out, 'speedMin')) }, { speedMax: HxMath.max(0.0, _Runtime.field(out, 'speedMax')) }, { scaleMin: HxMath.max(0.0, _Runtime.field(out, 'scaleMin')) }, { scaleMax: HxMath.max(0.0, _Runtime.field(out, 'scaleMax')) }, { emitterConeAngle: HxMath.max(0.0, _Runtime.field(out, 'emitterConeAngle')) }, { emitterDepth: HxMath.max(0.0, _Runtime.field(out, 'emitterDepth')) }, { emitterRadius: HxMath.max(0.0, _Runtime.field(out, 'emitterRadius')) }, { emitterWidth: HxMath.max(0.0, _Runtime.field(out, 'emitterWidth')) }, { emitterHeight: HxMath.max(0.0, _Runtime.field(out, 'emitterHeight')) }]);
     return cast null;
   }
 
@@ -33,23 +33,23 @@ class ValidateParticleEmitterConfig {
     issues = cast ([] : Array<Dynamic>);
     for (field in _Runtime.iterable(ValidateParticleEmitterConfig.NUMERIC_FIELDS__validateParticleEmitterConfig)) {
       var value:Dynamic = _Runtime.getIndex(config, field);
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>))))) {
+      if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) : Bool)) {
         _Runtime.callProperty(issues, 'push', cast ([{ field: field, message: '' + Std.string(field) + ' must be a finite number (got ' + Std.string(Std.string(value)) + ')', severity: 'error' }] : Array<Dynamic>));
       }
     }
     for (field in _Runtime.iterable(ValidateParticleEmitterConfig.NON_NEGATIVE_FIELDS__validateParticleEmitterConfig)) {
       var value:Dynamic = _Runtime.getIndex(config, field);
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)), function():Dynamic return cast _Runtime.compare(value, 0.0, '<')))) {
+      if ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) && (cast ((cast value : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
         _Runtime.callProperty(issues, 'push', cast ([{ field: field, message: '' + Std.string(field) + ' must not be negative (got ' + Std.string(value) + ')', severity: 'warning' }] : Array<Dynamic>));
       }
     }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.field(config, 'lifetimeMax')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.compare(_Runtime.field(config, 'lifetimeMax'), 0.0, '<=')))) {
+    if ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.field(config, 'lifetimeMax')] : Array<Dynamic>)) : Bool) && (cast ((cast _Runtime.field(config, 'lifetimeMax') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
       _Runtime.callProperty(issues, 'push', cast ([{ field: 'lifetimeMax', message: 'lifetimeMax must be > 0 or particles die instantly', severity: 'warning' }] : Array<Dynamic>));
     }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.field(config, 'maxParticles')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.compare(_Runtime.field(config, 'maxParticles'), 0.0, '<=')))) {
+    if ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.field(config, 'maxParticles')] : Array<Dynamic>)) : Bool) && (cast ((cast _Runtime.field(config, 'maxParticles') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
       _Runtime.callProperty(issues, 'push', cast ([{ field: 'maxParticles', message: 'maxParticles must be >= 1 or nothing ever spawns', severity: 'warning' }] : Array<Dynamic>));
     }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.field(config, 'frameCount')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.compare(_Runtime.field(config, 'frameCount'), 1.0, '<')))) {
+    if ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.field(config, 'frameCount')] : Array<Dynamic>)) : Bool) && (cast ((cast _Runtime.field(config, 'frameCount') : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) {
       _Runtime.callProperty(issues, 'push', cast ([{ field: 'frameCount', message: 'frameCount must be >= 1', severity: 'warning' }] : Array<Dynamic>));
     }
     _Runtime.callValue(ValidateParticleEmitterConfig.reportInvertedRange__validateParticleEmitterConfig, cast ([issues, config, 'lifetimeMin', 'lifetimeMax'] : Array<Dynamic>));
@@ -66,11 +66,11 @@ class ValidateParticleEmitterConfig {
   }
 
   public static function isFiniteCurve__validateParticleEmitterConfig(curve:Null<Array<Float>>):Bool {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.looseEquals(curve, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(curve, 'length'), 0.0)))) { return cast false; }
+    if ((cast ((cast _Runtime.looseEquals(curve, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(curve, 'length'), 0.0) : Bool)) : Bool)) { return cast false; }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(curve, 'length'), '<'))) {
-        if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.getIndex(curve, i)] : Array<Dynamic>))))) { return cast false; }
+      while ((cast ((cast i : Float) < (cast _Runtime.field(curve, 'length') : Float)) : Bool)) {
+        if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.getIndex(curve, i)] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
         i++;
       }
     }
@@ -79,18 +79,18 @@ class ValidateParticleEmitterConfig {
   }
 
   public static function reportCurve__validateParticleEmitterConfig(issues:Array<ParticleConfigIssue>, curve:Null<Array<Float>>, field:ParticleEmitterConfig, stride:Float):Void {
-    if (_Runtime.truthy(_Runtime.looseEquals(curve, null))) { return; }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(curve, 'length'), 0.0))) {
+    if ((cast _Runtime.looseEquals(curve, null) : Bool)) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(curve, 'length'), 0.0) : Bool)) {
       _Runtime.callProperty(issues, 'push', cast ([{ field: field, message: '' + Std.string(field) + ' is empty and will be ignored', severity: 'warning' }] : Array<Dynamic>));
       return;
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.fmod(_Runtime.field(curve, 'length'), stride), 0.0))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.fmod(_Runtime.field(curve, 'length'), stride), 0.0) : Bool)) {
       _Runtime.callProperty(issues, 'push', cast ([{ field: field, message: '' + Std.string(field) + ' length (' + Std.string(_Runtime.field(curve, 'length')) + ') is not a multiple of ' + Std.string(stride) + '', severity: 'warning' }] : Array<Dynamic>));
     }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(curve, 'length'), '<'))) {
-        if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.getIndex(curve, i)] : Array<Dynamic>))))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(curve, 'length') : Float)) : Bool)) {
+        if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.getIndex(curve, i)] : Array<Dynamic>)) : Bool) : Bool)) {
           _Runtime.callProperty(issues, 'push', cast ([{ field: field, message: '' + Std.string(field) + ' contains a non-finite sample at index ' + Std.string(i) + '', severity: 'error' }] : Array<Dynamic>));
           break;
         }
@@ -104,7 +104,7 @@ class ValidateParticleEmitterConfig {
     var max:Dynamic = cast _Runtime.UNDEFINED;
     min = _Runtime.getIndex(config, minField);
     max = _Runtime.getIndex(config, maxField);
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([min] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([max] : Array<Dynamic>))), function():Dynamic return cast _Runtime.compare((cast min : Float), (cast max : Float), '>')))) {
+    if ((cast ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([min] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([max] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast (cast min : Float) : Float) > (cast (cast max : Float) : Float)) : Bool)) : Bool)) {
       _Runtime.callProperty(issues, 'push', cast ([{ field: minField, message: '' + Std.string(minField) + ' (' + Std.string(min) + ') is greater than ' + Std.string(maxField) + ' (' + Std.string(max) + ')', severity: 'warning' }] : Array<Dynamic>));
     }
   }
@@ -112,7 +112,7 @@ class ValidateParticleEmitterConfig {
   public static function reportUnitRange__validateParticleEmitterConfig(issues:Array<ParticleConfigIssue>, config:ParticleEmitterConfig, field:ParticleEmitterConfig):Void {
     var value:Dynamic = cast _Runtime.UNDEFINED;
     value = _Runtime.getIndex(config, field);
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)), function():Dynamic return cast _Runtime.orValue(_Runtime.compare((cast value : Float), 0.0, '<'), function():Dynamic return cast _Runtime.compare((cast value : Float), 1.0, '>'))))) {
+    if ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) && (cast _Runtime.orValue(((cast (cast value : Float) : Float) < (cast 0.0 : Float)), function():Dynamic return cast ((cast (cast value : Float) : Float) > (cast 1.0 : Float))) : Bool)) : Bool)) {
       _Runtime.callProperty(issues, 'push', cast ([{ field: field, message: '' + Std.string(field) + ' (' + Std.string(value) + ') is outside the expected 0–1 range', severity: 'warning' }] : Array<Dynamic>));
     }
   }

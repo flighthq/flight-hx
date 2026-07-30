@@ -14,7 +14,7 @@ class TextBounds {
   public static final TEXT_BOUNDS_GUTTER:Dynamic = 2.0;
 
   public static function computeTextBoundsHeight(spec:TextBoundsSpec, layout:TextLayoutResult):Float {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(spec, 'autoSize'), 'none'))) { return cast _Runtime.field(spec, 'height'); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(spec, 'autoSize'), 'none') : Bool)) { return cast _Runtime.field(spec, 'height'); }
     return cast HxMath.ceil((_Runtime.field(layout, 'textHeight') + (TEXT_LAYOUT_GUTTER * 2.0)));
     return cast null;
   }
@@ -22,8 +22,8 @@ class TextBounds {
   public static function computeTextBoundsOffsetX(spec:TextBoundsSpec, layout:TextLayoutResult):Float {
     var slack:Dynamic = cast _Runtime.UNDEFINED;
     slack = (_Runtime.field(spec, 'width') - _Runtime.callValue(computeTextBoundsWidth, cast ([spec, layout] : Array<Dynamic>)));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(spec, 'autoSize'), 'right'))) { return cast slack; }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(spec, 'autoSize'), 'center'))) { return cast (slack / 2.0); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(spec, 'autoSize'), 'right') : Bool)) { return cast slack; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(spec, 'autoSize'), 'center') : Bool)) { return cast (slack / 2.0); }
     return cast 0.0;
     return cast null;
   }
@@ -33,7 +33,7 @@ class TextBounds {
     var slack:Dynamic = cast _Runtime.UNDEFINED;
     width = _Runtime.callValue(computeTextBoundsWidth, cast ([spec, layout] : Array<Dynamic>));
     slack = (_Runtime.field(spec, 'width') - width);
-    _Runtime.setField(out, 'x', _Runtime.select(_Runtime.strictEquals(_Runtime.field(spec, 'autoSize'), 'right'), function():Dynamic return cast slack, function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(_Runtime.field(spec, 'autoSize'), 'center'), function():Dynamic return cast (slack / 2.0), function():Dynamic return cast 0.0)));
+    _Runtime.setField(out, 'x', ((cast _Runtime.strictEquals(_Runtime.field(spec, 'autoSize'), 'right') : Bool) ? (cast slack : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.field(spec, 'autoSize'), 'center') : Bool) ? (cast (slack / 2.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic)));
     _Runtime.setField(out, 'y', 0.0);
     _Runtime.setField(out, 'width', width);
     _Runtime.setField(out, 'height', _Runtime.callValue(computeTextBoundsHeight, cast ([spec, layout] : Array<Dynamic>)));

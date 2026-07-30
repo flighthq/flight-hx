@@ -46,14 +46,14 @@ class ThreeDsParse {
     var meshes:Dynamic = cast _Runtime.UNDEFINED;
     var resolved:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(createScene, cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(bytes, 'byteLength'), THREE_DS_CHUNK_HEADER_BYTES, '<'))) {
+    if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast THREE_DS_CHUNK_HEADER_BYTES : Float)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFrom3ds: input is smaller than the minimum chunk header (6 bytes)'] : Array<Dynamic>));
       return cast scene;
     }
     source = (cast bytes : flighthq._internal._UInt8Array);
     view = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(source, 'buffer'), _Runtime.field(source, 'byteOffset'), _Runtime.field(source, 'byteLength')]);
     mainId = _Runtime.callProperty(view, 'getUint16', cast ([0.0, true] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(mainId, THREE_DS_MAIN))) {
+    if ((cast !_Runtime.strictEquals(mainId, THREE_DS_MAIN) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFrom3ds: expected main chunk ID 0x4D4D but found 0x' + Std.string(_Runtime.padStart(_Runtime.callProperty(_Runtime.numberToString(mainId, 16.0), 'toUpperCase', cast ([] : Array<Dynamic>)), 4.0, '0')) + ''] : Array<Dynamic>));
       return cast scene;
     }
@@ -62,9 +62,9 @@ class ThreeDsParse {
     resolved = _Runtime.construct(_Runtime.globalValue('Map'), []);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(meshes, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(meshes, 'length') : Float)) : Bool)) {
         var meshNode:Dynamic = _Runtime.callValue(ThreeDsParse.buildMeshNode__threeDsParse, cast ([_Runtime.getIndex(meshes, i), materials, resolved] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(meshNode, null))) { _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), meshNode] : Array<Dynamic>)); }
+        if ((cast !_Runtime.strictEquals(meshNode, null) : Bool)) { _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), meshNode] : Array<Dynamic>)); }
         i++;
       }
     }
@@ -79,29 +79,29 @@ class ThreeDsParse {
     end = HxMath.min((offset + _Runtime.callValue(ThreeDsParse.readChunkLength__threeDsParse, cast ([view, offset] : Array<Dynamic>))), _Runtime.field(view, 'byteLength'));
     meshes = cast ([] : Array<Dynamic>);
     cursor = (offset + THREE_DS_CHUNK_HEADER_BYTES);
-    while (_Runtime.truthy(_Runtime.compare((cursor + THREE_DS_CHUNK_HEADER_BYTES), end, '<='))) {
+    while ((cast ((cast (cursor + THREE_DS_CHUNK_HEADER_BYTES) : Float) <= (cast end : Float)) : Bool)) {
       var chunkId:Dynamic = _Runtime.callProperty(view, 'getUint16', cast ([cursor, true] : Array<Dynamic>));
       var chunkLength:Dynamic = _Runtime.callValue(ThreeDsParse.readChunkLength__threeDsParse, cast ([view, cursor] : Array<Dynamic>));
       var chunkEnd:Dynamic = (cursor + chunkLength);
-      if (_Runtime.truthy(_Runtime.compare(chunkEnd, end, '>'))) {
+      if ((cast ((cast chunkEnd : Float) > (cast end : Float)) : Bool)) {
         _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFrom3ds: chunk 0x' + Std.string(_Runtime.padStart(_Runtime.callProperty(_Runtime.numberToString(chunkId, 16.0), 'toUpperCase', cast ([] : Array<Dynamic>)), 4.0, '0')) + ' at offset ' + Std.string(cursor) + ' declares length ' + Std.string(chunkLength) + ' which exceeds parent boundary'] : Array<Dynamic>));
         break;
       }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(chunkId, THREE_DS_EDITOR), function():Dynamic return cast _Runtime.strictEquals(chunkId, THREE_DS_MAIN)))) {
+      if ((cast ((cast _Runtime.strictEquals(chunkId, THREE_DS_EDITOR) : Bool) || (cast _Runtime.strictEquals(chunkId, THREE_DS_MAIN) : Bool)) : Bool)) {
         var inner:Dynamic = _Runtime.callValue(ThreeDsParse.collectMeshes__threeDsParse, cast ([view, cursor, materials, warnings] : Array<Dynamic>));
         {
           var i:Dynamic = 0.0;
-          while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(inner, 'length'), '<'))) {
+          while ((cast ((cast i : Float) < (cast _Runtime.field(inner, 'length') : Float)) : Bool)) {
             _Runtime.callProperty(meshes, 'push', cast ([_Runtime.getIndex(inner, i)] : Array<Dynamic>));
             i++;
           }
         }
-      } else { if (_Runtime.truthy(_Runtime.strictEquals(chunkId, THREE_DS_OBJECT))) {
+      } else { if ((cast _Runtime.strictEquals(chunkId, THREE_DS_OBJECT) : Bool)) {
         var mesh:Dynamic = _Runtime.callValue(ThreeDsParse.parseObject__threeDsParse, cast ([view, cursor, chunkEnd, warnings] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(mesh, null))) { _Runtime.callProperty(meshes, 'push', cast ([mesh] : Array<Dynamic>)); }
-      } else { if (_Runtime.truthy(_Runtime.strictEquals(chunkId, THREE_DS_MATERIAL))) {
+        if ((cast !_Runtime.strictEquals(mesh, null) : Bool)) { _Runtime.callProperty(meshes, 'push', cast ([mesh] : Array<Dynamic>)); }
+      } else { if ((cast _Runtime.strictEquals(chunkId, THREE_DS_MATERIAL) : Bool)) {
         var material:Dynamic = _Runtime.callValue(ThreeDsParse.parseMaterial__threeDsParse, cast ([view, cursor, chunkEnd] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(material, 'name'), 'length'), 0.0, '>'))) { ((cast materials : flighthq._internal._Map).set(_Runtime.field(material, 'name'), material)); }
+        if ((cast ((cast _Runtime.field(_Runtime.field(material, 'name'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) { ((cast materials : flighthq._internal._Map).set(_Runtime.field(material, 'name'), material)); }
       } } }
       (cursor = cast (chunkEnd : Dynamic));
     }
@@ -115,15 +115,15 @@ class ThreeDsParse {
     cursor = (offset + THREE_DS_CHUNK_HEADER_BYTES);
     name = _Runtime.callValue(ThreeDsParse.readNullTerminatedString__threeDsParse, cast ([view, cursor, end] : Array<Dynamic>));
     (cursor = cast ((cursor + (_Runtime.field(name, 'length') + 1.0)) : Dynamic));
-    while (_Runtime.truthy(_Runtime.compare((cursor + THREE_DS_CHUNK_HEADER_BYTES), end, '<='))) {
+    while ((cast ((cast (cursor + THREE_DS_CHUNK_HEADER_BYTES) : Float) <= (cast end : Float)) : Bool)) {
       var chunkId:Dynamic = _Runtime.callProperty(view, 'getUint16', cast ([cursor, true] : Array<Dynamic>));
       var chunkLength:Dynamic = _Runtime.callValue(ThreeDsParse.readChunkLength__threeDsParse, cast ([view, cursor] : Array<Dynamic>));
       var chunkEnd:Dynamic = (cursor + chunkLength);
-      if (_Runtime.truthy(_Runtime.compare(chunkEnd, end, '>'))) {
+      if ((cast ((cast chunkEnd : Float) > (cast end : Float)) : Bool)) {
         _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFrom3ds: trimesh sub-chunk at offset ' + Std.string(cursor) + ' exceeds object boundary'] : Array<Dynamic>));
         break;
       }
-      if (_Runtime.truthy(_Runtime.strictEquals(chunkId, THREE_DS_TRIMESH))) {
+      if ((cast _Runtime.strictEquals(chunkId, THREE_DS_TRIMESH) : Bool)) {
         return cast _Runtime.callValue(ThreeDsParse.parseTrimesh__threeDsParse, cast ([view, cursor, chunkEnd, name, warnings] : Array<Dynamic>));
       }
       (cursor = cast (chunkEnd : Dynamic));
@@ -143,30 +143,30 @@ class ThreeDsParse {
     uvs = null;
     materialNames = cast ([] : Array<Dynamic>);
     cursor = (offset + THREE_DS_CHUNK_HEADER_BYTES);
-    while (_Runtime.truthy(_Runtime.compare((cursor + THREE_DS_CHUNK_HEADER_BYTES), end, '<='))) {
+    while ((cast ((cast (cursor + THREE_DS_CHUNK_HEADER_BYTES) : Float) <= (cast end : Float)) : Bool)) {
       var chunkId:Dynamic = _Runtime.callProperty(view, 'getUint16', cast ([cursor, true] : Array<Dynamic>));
       var chunkLength:Dynamic = _Runtime.callValue(ThreeDsParse.readChunkLength__threeDsParse, cast ([view, cursor] : Array<Dynamic>));
       var chunkEnd:Dynamic = (cursor + chunkLength);
-      if (_Runtime.truthy(_Runtime.compare(chunkEnd, end, '>'))) {
+      if ((cast ((cast chunkEnd : Float) > (cast end : Float)) : Bool)) {
         _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFrom3ds: sub-chunk 0x' + Std.string(_Runtime.padStart(_Runtime.callProperty(_Runtime.numberToString(chunkId, 16.0), 'toUpperCase', cast ([] : Array<Dynamic>)), 4.0, '0')) + ' in mesh \'' + Std.string(name) + '\' exceeds trimesh boundary'] : Array<Dynamic>));
         break;
       }
       var dataStart:Dynamic = (cursor + THREE_DS_CHUNK_HEADER_BYTES);
-      if (_Runtime.truthy(_Runtime.strictEquals(chunkId, THREE_DS_VERTICES))) {
+      if ((cast _Runtime.strictEquals(chunkId, THREE_DS_VERTICES) : Bool)) {
         (vertices = cast (_Runtime.callValue(ThreeDsParse.parseVertices__threeDsParse, cast ([view, dataStart, chunkEnd, warnings] : Array<Dynamic>)) : Dynamic));
-      } else { if (_Runtime.truthy(_Runtime.strictEquals(chunkId, THREE_DS_FACES))) {
+      } else { if ((cast _Runtime.strictEquals(chunkId, THREE_DS_FACES) : Bool)) {
         var parsed:Dynamic = _Runtime.callValue(ThreeDsParse.parseFaces__threeDsParse, cast ([view, dataStart, chunkEnd, warnings] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(parsed, null))) {
+        if ((cast !_Runtime.strictEquals(parsed, null) : Bool)) {
           (faces = cast (_Runtime.field(parsed, 'faces') : Dynamic));
           (materialNames = cast (_Runtime.field(parsed, 'materialNames') : Dynamic));
         }
-      } else { if (_Runtime.truthy(_Runtime.strictEquals(chunkId, THREE_DS_UV_COORDS))) {
+      } else { if ((cast _Runtime.strictEquals(chunkId, THREE_DS_UV_COORDS) : Bool)) {
         (uvs = cast (_Runtime.callValue(ThreeDsParse.parseUvCoords__threeDsParse, cast ([view, dataStart, chunkEnd, warnings] : Array<Dynamic>)) : Dynamic));
       } } }
       (cursor = cast (chunkEnd : Dynamic));
     }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(vertices, null), function():Dynamic return cast _Runtime.strictEquals(faces, null)))) {
-      _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFrom3ds: mesh \'' + Std.string(name) + '\' is missing ' + Std.string(_Runtime.select(_Runtime.strictEquals(vertices, null), function():Dynamic return cast 'vertices', function():Dynamic return cast 'faces')) + '; skipping'] : Array<Dynamic>));
+    if ((cast ((cast _Runtime.strictEquals(vertices, null) : Bool) || (cast _Runtime.strictEquals(faces, null) : Bool)) : Bool)) {
+      _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFrom3ds: mesh \'' + Std.string(name) + '\' is missing ' + Std.string(((cast _Runtime.strictEquals(vertices, null) : Bool) ? (cast 'vertices' : Dynamic) : (cast 'faces' : Dynamic))) + '; skipping'] : Array<Dynamic>));
       return cast null;
     }
     return cast { faces: faces, materialNames: materialNames, name: name, uvs: uvs, vertices: vertices };
@@ -179,14 +179,14 @@ class ThreeDsParse {
     var bytesNeeded:Dynamic = cast _Runtime.UNDEFINED;
     var vertices:Dynamic = cast _Runtime.UNDEFINED;
     var offset:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare((dataStart + 2.0), end, '>'))) {
+    if ((cast ((cast (dataStart + 2.0) : Float) > (cast end : Float)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFrom3ds: vertex sub-chunk too small to read count'] : Array<Dynamic>));
       return cast null;
     }
     count = _Runtime.callProperty(view, 'getUint16', cast ([dataStart, true] : Array<Dynamic>));
     floatsNeeded = (count * 3.0);
     bytesNeeded = ((dataStart + 2.0) + (floatsNeeded * 4.0));
-    if (_Runtime.truthy(_Runtime.compare(bytesNeeded, end, '>'))) {
+    if ((cast ((cast bytesNeeded : Float) > (cast end : Float)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFrom3ds: vertex sub-chunk declares ' + Std.string(count) + ' vertices but data is truncated'] : Array<Dynamic>));
       return cast null;
     }
@@ -194,7 +194,7 @@ class ThreeDsParse {
     offset = (dataStart + 2.0);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, floatsNeeded, '<'))) {
+      while ((cast ((cast i : Float) < (cast floatsNeeded : Float)) : Bool)) {
         _Runtime.setIndex(vertices, i, _Runtime.callProperty(view, 'getFloat32', cast ([offset, true] : Array<Dynamic>)));
         (offset = cast ((offset + 4.0) : Dynamic));
         i++;
@@ -211,13 +211,13 @@ class ThreeDsParse {
     var offset:Dynamic = cast _Runtime.UNDEFINED;
     var materialNames:Array<String> = cast _Runtime.UNDEFINED;
     var cursor:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare((dataStart + 2.0), end, '>'))) {
+    if ((cast ((cast (dataStart + 2.0) : Float) > (cast end : Float)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFrom3ds: face sub-chunk too small to read count'] : Array<Dynamic>));
       return cast null;
     }
     count = _Runtime.callProperty(view, 'getUint16', cast ([dataStart, true] : Array<Dynamic>));
     facesEnd = ((dataStart + 2.0) + ((count * 4.0) * 2.0));
-    if (_Runtime.truthy(_Runtime.compare(facesEnd, end, '>'))) {
+    if ((cast ((cast facesEnd : Float) > (cast end : Float)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFrom3ds: face sub-chunk declares ' + Std.string(count) + ' faces but data is truncated'] : Array<Dynamic>));
       return cast null;
     }
@@ -225,7 +225,7 @@ class ThreeDsParse {
     offset = (dataStart + 2.0);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, count, '<'))) {
+      while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         _Runtime.setIndex(faces, (i * 3.0), _Runtime.callProperty(view, 'getUint16', cast ([offset, true] : Array<Dynamic>)));
         _Runtime.setIndex(faces, ((i * 3.0) + 1.0), _Runtime.callProperty(view, 'getUint16', cast ([(offset + 2.0), true] : Array<Dynamic>)));
         _Runtime.setIndex(faces, ((i * 3.0) + 2.0), _Runtime.callProperty(view, 'getUint16', cast ([(offset + 4.0), true] : Array<Dynamic>)));
@@ -235,15 +235,15 @@ class ThreeDsParse {
     }
     materialNames = cast ([] : Array<Dynamic>);
     cursor = facesEnd;
-    while (_Runtime.truthy(_Runtime.compare((cursor + THREE_DS_CHUNK_HEADER_BYTES), end, '<='))) {
+    while ((cast ((cast (cursor + THREE_DS_CHUNK_HEADER_BYTES) : Float) <= (cast end : Float)) : Bool)) {
       var subId:Dynamic = _Runtime.callProperty(view, 'getUint16', cast ([cursor, true] : Array<Dynamic>));
       var subLength:Dynamic = _Runtime.callValue(ThreeDsParse.readChunkLength__threeDsParse, cast ([view, cursor] : Array<Dynamic>));
       var subEnd:Dynamic = (cursor + subLength);
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(subLength, THREE_DS_CHUNK_HEADER_BYTES, '<'), function():Dynamic return cast _Runtime.compare(subEnd, end, '>')))) { break; }
-      if (_Runtime.truthy(_Runtime.strictEquals(subId, THREE_DS_FACE_MATERIAL))) {
+      if ((cast ((cast ((cast subLength : Float) < (cast THREE_DS_CHUNK_HEADER_BYTES : Float)) : Bool) || (cast ((cast subEnd : Float) > (cast end : Float)) : Bool)) : Bool)) { break; }
+      if ((cast _Runtime.strictEquals(subId, THREE_DS_FACE_MATERIAL) : Bool)) {
         var dataOffset:Dynamic = (cursor + THREE_DS_CHUNK_HEADER_BYTES);
         var materialName:Dynamic = _Runtime.callValue(ThreeDsParse.readNullTerminatedString__threeDsParse, cast ([view, dataOffset, subEnd] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.field(materialName, 'length'), 0.0, '>'))) { _Runtime.callProperty(materialNames, 'push', cast ([materialName] : Array<Dynamic>)); }
+        if ((cast ((cast _Runtime.field(materialName, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(materialNames, 'push', cast ([materialName] : Array<Dynamic>)); }
       }
       (cursor = cast (subEnd : Dynamic));
     }
@@ -257,14 +257,14 @@ class ThreeDsParse {
     var bytesNeeded:Dynamic = cast _Runtime.UNDEFINED;
     var uvCoords:Dynamic = cast _Runtime.UNDEFINED;
     var offset:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare((dataStart + 2.0), end, '>'))) {
+    if ((cast ((cast (dataStart + 2.0) : Float) > (cast end : Float)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFrom3ds: UV sub-chunk too small to read count'] : Array<Dynamic>));
       return cast null;
     }
     count = _Runtime.callProperty(view, 'getUint16', cast ([dataStart, true] : Array<Dynamic>));
     floatsNeeded = (count * 2.0);
     bytesNeeded = ((dataStart + 2.0) + (floatsNeeded * 4.0));
-    if (_Runtime.truthy(_Runtime.compare(bytesNeeded, end, '>'))) {
+    if ((cast ((cast bytesNeeded : Float) > (cast end : Float)) : Bool)) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFrom3ds: UV sub-chunk declares ' + Std.string(count) + ' entries but data is truncated'] : Array<Dynamic>));
       return cast null;
     }
@@ -272,7 +272,7 @@ class ThreeDsParse {
     offset = (dataStart + 2.0);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, floatsNeeded, '<'))) {
+      while ((cast ((cast i : Float) < (cast floatsNeeded : Float)) : Bool)) {
         _Runtime.setIndex(uvCoords, i, _Runtime.callProperty(view, 'getFloat32', cast ([offset, true] : Array<Dynamic>)));
         (offset = cast ((offset + 4.0) : Dynamic));
         i++;
@@ -294,14 +294,14 @@ class ThreeDsParse {
     var seen:Dynamic = cast _Runtime.UNDEFINED;
     vertexCount = (_Runtime.field(_Runtime.field(mesh, 'vertices'), 'length') / 3.0);
     faceCount = (_Runtime.field(_Runtime.field(mesh, 'faces'), 'length') / 3.0);
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(vertexCount, 0.0), function():Dynamic return cast _Runtime.strictEquals(faceCount, 0.0)))) { return cast null; }
+    if ((cast ((cast _Runtime.strictEquals(vertexCount, 0.0) : Bool) || (cast _Runtime.strictEquals(faceCount, 0.0) : Bool)) : Bool)) { return cast null; }
     positions = _Runtime.toArray(_Runtime.field(mesh, 'vertices'));
     _Runtime.callValue(convertPositionsZUpToYUp, cast ([positions] : Array<Dynamic>));
     vertices = new flighthq._internal._Float32Array((vertexCount * CANONICAL_FLOATS_PER_VERTEX));
     normals = new flighthq._internal._Float32Array((vertexCount * 3.0));
     {
       var f:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(f, faceCount, '<'))) {
+      while ((cast ((cast f : Float) < (cast faceCount : Float)) : Bool)) {
         var i0:Dynamic = _Runtime.getIndex(_Runtime.field(mesh, 'faces'), (f * 3.0));
         var i1:Dynamic = _Runtime.getIndex(_Runtime.field(mesh, 'faces'), ((f * 3.0) + 1.0));
         var i2:Dynamic = _Runtime.getIndex(_Runtime.field(mesh, 'faces'), ((f * 3.0) + 2.0));
@@ -337,7 +337,7 @@ class ThreeDsParse {
     }
     {
       var v:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(v, vertexCount, '<'))) {
+      while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
         var o:Dynamic = (v * CANONICAL_FLOATS_PER_VERTEX);
         _Runtime.setIndex(vertices, o, _Runtime.getIndex(positions, (v * 3.0)));
         _Runtime.setIndex(vertices, (o + 1.0), _Runtime.getIndex(positions, ((v * 3.0) + 1.0)));
@@ -346,7 +346,7 @@ class ThreeDsParse {
         var nny:Dynamic = _Runtime.getIndex(normals, ((v * 3.0) + 1.0));
         var nnz:Dynamic = _Runtime.getIndex(normals, ((v * 3.0) + 2.0));
         var len:Dynamic = HxMath.sqrt((((nnx * nnx) + (nny * nny)) + (nnz * nnz)));
-        if (_Runtime.truthy(_Runtime.compare(len, 0.0, '>'))) {
+        if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
           (nnx = cast ((nnx / len) : Dynamic));
           (nny = cast ((nny / len) : Dynamic));
           (nnz = cast ((nnz / len) : Dynamic));
@@ -354,7 +354,7 @@ class ThreeDsParse {
         _Runtime.setIndex(vertices, (o + 3.0), nnx);
         _Runtime.setIndex(vertices, (o + 4.0), nny);
         _Runtime.setIndex(vertices, (o + 5.0), nnz);
-        if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(mesh, 'uvs'), null), function():Dynamic return cast _Runtime.compare(v, (_Runtime.field(_Runtime.field(mesh, 'uvs'), 'length') / 2.0), '<')))) {
+        if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(mesh, 'uvs'), null) : Bool) && (cast ((cast v : Float) < (cast (_Runtime.field(_Runtime.field(mesh, 'uvs'), 'length') / 2.0) : Float)) : Bool)) : Bool)) {
           _Runtime.setIndex(vertices, (o + 10.0), _Runtime.getIndex(_Runtime.field(mesh, 'uvs'), (v * 2.0)));
           _Runtime.setIndex(vertices, (o + 11.0), (1.0 - _Runtime.getIndex(_Runtime.field(mesh, 'uvs'), ((v * 2.0) + 1.0))));
         }
@@ -366,25 +366,25 @@ class ThreeDsParse {
     meshMaterials = cast ([] : Array<Dynamic>);
     seen = _Runtime.construct(_Runtime.globalValue('Set'), []);
     for (materialName in _Runtime.iterable(_Runtime.field(mesh, 'materialNames'))) {
-      if (_Runtime.truthy(((cast seen : flighthq._internal._Set).has(materialName)))) { continue; }
+      if ((cast ((cast seen : flighthq._internal._Set).has(materialName)) : Bool)) { continue; }
       ((cast seen : flighthq._internal._Set).add(materialName));
       var parsed:Dynamic = ((cast materials : flighthq._internal._Map).get(materialName));
-      if (_Runtime.truthy(_Runtime.strictEquals(parsed, _Runtime.field(_Runtime, 'UNDEFINED')))) { continue; }
+      if ((cast _Runtime.strictEquals(parsed, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
       var material:Dynamic = ((cast resolved : flighthq._internal._Map).get(materialName));
-      if (_Runtime.truthy(_Runtime.strictEquals(material, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+      if ((cast _Runtime.strictEquals(material, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         (material = cast (_Runtime.callValue(ThreeDsParse.threeDsMaterialToBlinnPhong__threeDsParse, cast ([parsed] : Array<Dynamic>)) : Dynamic));
         ((cast resolved : flighthq._internal._Map).set(materialName, material));
       }
       _Runtime.callProperty(meshMaterials, 'push', cast ([material] : Array<Dynamic>));
     }
-    return cast (cast (cast _Runtime.callValue(createMesh, cast ([geometry, meshMaterials, _Runtime.field(_Runtime, 'UNDEFINED'), _Runtime.select(_Runtime.compare(_Runtime.field(_Runtime.field(mesh, 'name'), 'length'), 0.0, '>'), function():Dynamic return cast { name: _Runtime.field(mesh, 'name') }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>)) : Dynamic) : SceneNode);
+    return cast (cast (cast _Runtime.callValue(createMesh, cast ([geometry, meshMaterials, _Runtime.field(_Runtime, 'UNDEFINED'), ((cast ((cast _Runtime.field(_Runtime.field(mesh, 'name'), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast { name: _Runtime.field(mesh, 'name') } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic))] : Array<Dynamic>)) : Dynamic) : SceneNode);
     return cast null;
   }
 
   public static function threeDsMaterialToBlinnPhong__threeDsParse(material:ThreeDsMaterial):Material {
     var result:Dynamic = cast _Runtime.UNDEFINED;
-    result = (cast (cast _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuse: _Runtime.callValue(ThreeDsParse.packThreeDsColor__threeDsParse, cast ([_Runtime.field(material, 'diffuse')] : Array<Dynamic>)), diffuseMap: _Runtime.select(!_Runtime.strictEquals(_Runtime.field(material, 'textureFilename'), null), function():Dynamic return cast _Runtime.callValue(createExternalTextureRef, cast ([_Runtime.field(material, 'textureFilename')] : Array<Dynamic>)), function():Dynamic return cast null), specular: _Runtime.callValue(ThreeDsParse.packThreeDsColor__threeDsParse, cast ([_Runtime.field(material, 'specular')] : Array<Dynamic>)) }] : Array<Dynamic>)) : Dynamic) : Material);
-    _Runtime.setField(result, 'name', _Runtime.select(_Runtime.compare(_Runtime.field(_Runtime.field(material, 'name'), 'length'), 0.0, '>'), function():Dynamic return cast _Runtime.field(material, 'name'), function():Dynamic return cast null));
+    result = (cast (cast _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuse: _Runtime.callValue(ThreeDsParse.packThreeDsColor__threeDsParse, cast ([_Runtime.field(material, 'diffuse')] : Array<Dynamic>)), diffuseMap: ((cast !_Runtime.strictEquals(_Runtime.field(material, 'textureFilename'), null) : Bool) ? (cast _Runtime.callValue(createExternalTextureRef, cast ([_Runtime.field(material, 'textureFilename')] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic)), specular: _Runtime.callValue(ThreeDsParse.packThreeDsColor__threeDsParse, cast ([_Runtime.field(material, 'specular')] : Array<Dynamic>)) }] : Array<Dynamic>)) : Dynamic) : Material);
+    _Runtime.setField(result, 'name', ((cast ((cast _Runtime.field(_Runtime.field(material, 'name'), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(material, 'name') : Dynamic) : (cast null : Dynamic)));
     return cast result;
     return cast null;
   }
@@ -402,21 +402,21 @@ class ThreeDsParse {
     specular = cast ([1.0, 1.0, 1.0] : Array<Dynamic>);
     textureFilename = null;
     cursor = (offset + THREE_DS_CHUNK_HEADER_BYTES);
-    while (_Runtime.truthy(_Runtime.compare((cursor + THREE_DS_CHUNK_HEADER_BYTES), end, '<='))) {
+    while ((cast ((cast (cursor + THREE_DS_CHUNK_HEADER_BYTES) : Float) <= (cast end : Float)) : Bool)) {
       var chunkId:Dynamic = _Runtime.callProperty(view, 'getUint16', cast ([cursor, true] : Array<Dynamic>));
       var chunkLength:Dynamic = _Runtime.callValue(ThreeDsParse.readChunkLength__threeDsParse, cast ([view, cursor] : Array<Dynamic>));
       var chunkEnd:Dynamic = (cursor + chunkLength);
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(chunkLength, THREE_DS_CHUNK_HEADER_BYTES, '<'), function():Dynamic return cast _Runtime.compare(chunkEnd, end, '>')))) { break; }
+      if ((cast ((cast ((cast chunkLength : Float) < (cast THREE_DS_CHUNK_HEADER_BYTES : Float)) : Bool) || (cast ((cast chunkEnd : Float) > (cast end : Float)) : Bool)) : Bool)) { break; }
       var dataStart:Dynamic = (cursor + THREE_DS_CHUNK_HEADER_BYTES);
-      if (_Runtime.truthy(_Runtime.strictEquals(chunkId, THREE_DS_MATERIAL_NAME))) {
+      if ((cast _Runtime.strictEquals(chunkId, THREE_DS_MATERIAL_NAME) : Bool)) {
         (name = cast (_Runtime.callValue(ThreeDsParse.readNullTerminatedString__threeDsParse, cast ([view, dataStart, chunkEnd] : Array<Dynamic>)) : Dynamic));
-      } else { if (_Runtime.truthy(_Runtime.strictEquals(chunkId, THREE_DS_MATERIAL_AMBIENT))) {
+      } else { if ((cast _Runtime.strictEquals(chunkId, THREE_DS_MATERIAL_AMBIENT) : Bool)) {
         (ambient = cast (_Runtime.coalesce(_Runtime.callValue(ThreeDsParse.parseColorChunk__threeDsParse, cast ([view, dataStart, chunkEnd] : Array<Dynamic>)), function():Dynamic return cast ambient) : Dynamic));
-      } else { if (_Runtime.truthy(_Runtime.strictEquals(chunkId, THREE_DS_MATERIAL_DIFFUSE))) {
+      } else { if ((cast _Runtime.strictEquals(chunkId, THREE_DS_MATERIAL_DIFFUSE) : Bool)) {
         (diffuse = cast (_Runtime.coalesce(_Runtime.callValue(ThreeDsParse.parseColorChunk__threeDsParse, cast ([view, dataStart, chunkEnd] : Array<Dynamic>)), function():Dynamic return cast diffuse) : Dynamic));
-      } else { if (_Runtime.truthy(_Runtime.strictEquals(chunkId, THREE_DS_MATERIAL_SPECULAR))) {
+      } else { if ((cast _Runtime.strictEquals(chunkId, THREE_DS_MATERIAL_SPECULAR) : Bool)) {
         (specular = cast (_Runtime.coalesce(_Runtime.callValue(ThreeDsParse.parseColorChunk__threeDsParse, cast ([view, dataStart, chunkEnd] : Array<Dynamic>)), function():Dynamic return cast specular) : Dynamic));
-      } else { if (_Runtime.truthy(_Runtime.strictEquals(chunkId, THREE_DS_MATERIAL_TEXTURE_MAP))) {
+      } else { if ((cast _Runtime.strictEquals(chunkId, THREE_DS_MATERIAL_TEXTURE_MAP) : Bool)) {
         (textureFilename = cast (_Runtime.callValue(ThreeDsParse.parseTextureFilename__threeDsParse, cast ([view, dataStart, chunkEnd] : Array<Dynamic>)) : Dynamic));
       } } } } }
       (cursor = cast (chunkEnd : Dynamic));
@@ -428,16 +428,16 @@ class ThreeDsParse {
   public static function parseColorChunk__threeDsParse(view:Dynamic, offset:Float, end:Float):Null<Array<Float>> {
     var cursor:Dynamic = cast _Runtime.UNDEFINED;
     cursor = offset;
-    while (_Runtime.truthy(_Runtime.compare((cursor + THREE_DS_CHUNK_HEADER_BYTES), end, '<='))) {
+    while ((cast ((cast (cursor + THREE_DS_CHUNK_HEADER_BYTES) : Float) <= (cast end : Float)) : Bool)) {
       var chunkId:Dynamic = _Runtime.callProperty(view, 'getUint16', cast ([cursor, true] : Array<Dynamic>));
       var chunkLength:Dynamic = _Runtime.callValue(ThreeDsParse.readChunkLength__threeDsParse, cast ([view, cursor] : Array<Dynamic>));
       var chunkEnd:Dynamic = (cursor + chunkLength);
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(chunkLength, THREE_DS_CHUNK_HEADER_BYTES, '<'), function():Dynamic return cast _Runtime.compare(chunkEnd, end, '>')))) { break; }
+      if ((cast ((cast ((cast chunkLength : Float) < (cast THREE_DS_CHUNK_HEADER_BYTES : Float)) : Bool) || (cast ((cast chunkEnd : Float) > (cast end : Float)) : Bool)) : Bool)) { break; }
       var dataStart:Dynamic = (cursor + THREE_DS_CHUNK_HEADER_BYTES);
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(chunkId, THREE_DS_COLOR_FLOAT), function():Dynamic return cast _Runtime.compare((dataStart + 12.0), chunkEnd, '<=')))) {
+      if ((cast ((cast _Runtime.strictEquals(chunkId, THREE_DS_COLOR_FLOAT) : Bool) && (cast ((cast (dataStart + 12.0) : Float) <= (cast chunkEnd : Float)) : Bool)) : Bool)) {
         return cast cast ([_Runtime.callProperty(view, 'getFloat32', cast ([dataStart, true] : Array<Dynamic>)), _Runtime.callProperty(view, 'getFloat32', cast ([(dataStart + 4.0), true] : Array<Dynamic>)), _Runtime.callProperty(view, 'getFloat32', cast ([(dataStart + 8.0), true] : Array<Dynamic>))] : Array<Dynamic>);
       }
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(chunkId, THREE_DS_COLOR_BYTE), function():Dynamic return cast _Runtime.compare((dataStart + 3.0), chunkEnd, '<=')))) {
+      if ((cast ((cast _Runtime.strictEquals(chunkId, THREE_DS_COLOR_BYTE) : Bool) && (cast ((cast (dataStart + 3.0) : Float) <= (cast chunkEnd : Float)) : Bool)) : Bool)) {
         return cast cast ([(_Runtime.callProperty(view, 'getUint8', cast ([dataStart] : Array<Dynamic>)) / 255.0), (_Runtime.callProperty(view, 'getUint8', cast ([(dataStart + 1.0)] : Array<Dynamic>)) / 255.0), (_Runtime.callProperty(view, 'getUint8', cast ([(dataStart + 2.0)] : Array<Dynamic>)) / 255.0)] : Array<Dynamic>);
       }
       (cursor = cast (chunkEnd : Dynamic));
@@ -449,14 +449,14 @@ class ThreeDsParse {
   public static function parseTextureFilename__threeDsParse(view:Dynamic, offset:Float, end:Float):Null<String> {
     var cursor:Dynamic = cast _Runtime.UNDEFINED;
     cursor = offset;
-    while (_Runtime.truthy(_Runtime.compare((cursor + THREE_DS_CHUNK_HEADER_BYTES), end, '<='))) {
+    while ((cast ((cast (cursor + THREE_DS_CHUNK_HEADER_BYTES) : Float) <= (cast end : Float)) : Bool)) {
       var chunkId:Dynamic = _Runtime.callProperty(view, 'getUint16', cast ([cursor, true] : Array<Dynamic>));
       var chunkLength:Dynamic = _Runtime.callValue(ThreeDsParse.readChunkLength__threeDsParse, cast ([view, cursor] : Array<Dynamic>));
       var chunkEnd:Dynamic = (cursor + chunkLength);
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(chunkLength, THREE_DS_CHUNK_HEADER_BYTES, '<'), function():Dynamic return cast _Runtime.compare(chunkEnd, end, '>')))) { break; }
-      if (_Runtime.truthy(_Runtime.strictEquals(chunkId, THREE_DS_MATERIAL_TEXTURE_FILENAME))) {
+      if ((cast ((cast ((cast chunkLength : Float) < (cast THREE_DS_CHUNK_HEADER_BYTES : Float)) : Bool) || (cast ((cast chunkEnd : Float) > (cast end : Float)) : Bool)) : Bool)) { break; }
+      if ((cast _Runtime.strictEquals(chunkId, THREE_DS_MATERIAL_TEXTURE_FILENAME) : Bool)) {
         var name:Dynamic = _Runtime.callValue(ThreeDsParse.readNullTerminatedString__threeDsParse, cast ([view, (cursor + THREE_DS_CHUNK_HEADER_BYTES), chunkEnd] : Array<Dynamic>));
-        return cast _Runtime.select(_Runtime.compare(_Runtime.field(name, 'length'), 0.0, '>'), function():Dynamic return cast name, function():Dynamic return cast null);
+        return cast ((cast ((cast _Runtime.field(name, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast name : Dynamic) : (cast null : Dynamic));
       }
       (cursor = cast (chunkEnd : Dynamic));
     }
@@ -480,9 +480,9 @@ class ThreeDsParse {
     var cursor:Dynamic = cast _Runtime.UNDEFINED;
     chars = cast ([] : Array<Dynamic>);
     cursor = offset;
-    while (_Runtime.truthy(_Runtime.compare(cursor, end, '<'))) {
+    while ((cast ((cast cursor : Float) < (cast end : Float)) : Bool)) {
       var byte:Dynamic = _Runtime.callProperty(view, 'getUint8', cast ([cursor] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(byte, 0.0))) { break; }
+      if ((cast _Runtime.strictEquals(byte, 0.0) : Bool)) { break; }
       _Runtime.callProperty(chars, 'push', cast ([_Runtime.callProperty(String, 'fromCharCode', cast ([byte] : Array<Dynamic>))] : Array<Dynamic>));
       cursor++;
     }

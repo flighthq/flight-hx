@@ -25,7 +25,7 @@ class WgpuEnvironmentIblBake {
     var brdfView:Dynamic = cast _Runtime.UNDEFINED;
     var ibl:WgpuSceneIbl = cast _Runtime.UNDEFINED;
     sourceCubeView = _Runtime.callValue(ensureWgpuEnvironmentSourceCube, cast ([state, environment] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(sourceCubeView, null))) { return; }
+    if ((cast _Runtime.strictEquals(sourceCubeView, null) : Bool)) { return; }
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
     programs = _Runtime.callValue(WgpuEnvironmentIblBake.ensureWgpuBakePrograms__wgpuEnvironmentIblBake, cast ([state] : Array<Dynamic>));
     sourceBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(programs, 'sourceBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: sourceCubeView }, { binding: 1.0, resource: _Runtime.field(programs, 'sampler') }] : Array<Dynamic>) }] : Array<Dynamic>));
@@ -40,27 +40,27 @@ class WgpuEnvironmentIblBake {
   public static function destroyWgpuSceneIbl(state:WgpuRenderState):Void {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(scene, 'ibl'), null))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(scene, 'ibl'), null) : Bool)) {
       _Runtime.callProperty(_Runtime.field(_Runtime.field(scene, 'ibl'), 'brdfLut'), 'destroy', cast ([] : Array<Dynamic>));
       _Runtime.callProperty(_Runtime.field(_Runtime.field(scene, 'ibl'), 'irradianceCube'), 'destroy', cast ([] : Array<Dynamic>));
       _Runtime.callProperty(_Runtime.field(_Runtime.field(scene, 'ibl'), 'prefilteredCube'), 'destroy', cast ([] : Array<Dynamic>));
       _Runtime.setField(scene, 'ibl', null);
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(scene, 'environmentSourceCube'), null))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(scene, 'environmentSourceCube'), null) : Bool)) {
       _Runtime.callProperty(_Runtime.field(scene, 'environmentSourceCube'), 'destroy', cast ([] : Array<Dynamic>));
       _Runtime.setField(scene, 'environmentSourceCube', null);
       _Runtime.setField(scene, 'environmentSourceCubeView', null);
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(scene, 'iblUniformBuffer'), null))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(scene, 'iblUniformBuffer'), null) : Bool)) {
       _Runtime.callProperty(_Runtime.field(scene, 'iblUniformBuffer'), 'destroy', cast ([] : Array<Dynamic>));
       _Runtime.setField(scene, 'iblUniformBuffer', null);
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(scene, 'iblDummyCubeTexture'), null))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(scene, 'iblDummyCubeTexture'), null) : Bool)) {
       _Runtime.callProperty(_Runtime.field(scene, 'iblDummyCubeTexture'), 'destroy', cast ([] : Array<Dynamic>));
       _Runtime.setField(scene, 'iblDummyCubeTexture', null);
       _Runtime.setField(scene, 'iblDummyCubeView', null);
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(scene, 'iblDummyLutTexture'), null))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(scene, 'iblDummyLutTexture'), null) : Bool)) {
       _Runtime.callProperty(_Runtime.field(scene, 'iblDummyLutTexture'), 'destroy', cast ([] : Array<Dynamic>));
       _Runtime.setField(scene, 'iblDummyLutTexture', null);
       _Runtime.setField(scene, 'iblDummyLutView', null);
@@ -87,9 +87,9 @@ class WgpuEnvironmentIblBake {
     texture = _Runtime.callValue(WgpuEnvironmentIblBake.createWgpuBakeCube__wgpuEnvironmentIblBake, cast ([state, WgpuEnvironmentIblBake.PREFILTERED_SIZE__wgpuEnvironmentIblBake, WgpuEnvironmentIblBake.PREFILTERED_MIPS__wgpuEnvironmentIblBake] : Array<Dynamic>));
     {
       var mip:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(mip, WgpuEnvironmentIblBake.PREFILTERED_MIPS__wgpuEnvironmentIblBake, '<'))) {
+      while ((cast ((cast mip : Float) < (cast WgpuEnvironmentIblBake.PREFILTERED_MIPS__wgpuEnvironmentIblBake : Float)) : Bool)) {
         var mipSize:Dynamic = HxMath.max(1.0, (_Runtime.toInt32(WgpuEnvironmentIblBake.PREFILTERED_SIZE__wgpuEnvironmentIblBake) >> _Runtime.toInt32(mip)));
-        var roughness:Dynamic = _Runtime.select(_Runtime.compare(WgpuEnvironmentIblBake.PREFILTERED_MIPS__wgpuEnvironmentIblBake, 1.0, '>'), function():Dynamic return cast (mip / (WgpuEnvironmentIblBake.PREFILTERED_MIPS__wgpuEnvironmentIblBake - 1.0)), function():Dynamic return cast 0.0);
+        var roughness:Dynamic = ((cast ((cast WgpuEnvironmentIblBake.PREFILTERED_MIPS__wgpuEnvironmentIblBake : Float) > (cast 1.0 : Float)) : Bool) ? (cast (mip / (WgpuEnvironmentIblBake.PREFILTERED_MIPS__wgpuEnvironmentIblBake - 1.0)) : Dynamic) : (cast 0.0 : Dynamic));
         _Runtime.callValue(WgpuEnvironmentIblBake.renderWgpuBakeCubeFaces__wgpuEnvironmentIblBake, cast ([state, _Runtime.field(programs, 'prefilteredPipeline'), programs, texture, mipSize, mip, roughness, sourceBindGroup] : Array<Dynamic>));
         mip++;
       }
@@ -120,7 +120,7 @@ class WgpuEnvironmentIblBake {
     device = _Runtime.field(state, 'device');
     {
       var face:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(face, 6.0, '<'))) {
+      while ((cast ((cast face : Float) < (cast 6.0 : Float)) : Bool)) {
         var b:Dynamic = _Runtime.getIndex(WgpuEnvironmentIblBake.CUBE_FACE_BASIS__wgpuEnvironmentIblBake, face);
         var u:Dynamic = WgpuEnvironmentIblBake._bakeScratch__wgpuEnvironmentIblBake;
         _Runtime.setIndex(u, 0.0, _Runtime.getIndex(b, 0.0));
@@ -172,7 +172,7 @@ class WgpuEnvironmentIblBake {
     var brdfModule:Dynamic = cast _Runtime.UNDEFINED;
     var uniformBuffer:Dynamic = cast _Runtime.UNDEFINED;
     programs = ((cast WgpuEnvironmentIblBake._bakePrograms__wgpuEnvironmentIblBake : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(!_Runtime.strictEquals(programs, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast programs; }
+    if ((cast !_Runtime.strictEquals(programs, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast programs; }
     device = _Runtime.field(state, 'device');
     uniformBindGroupLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), buffer: { type: 'uniform' } }] : Array<Dynamic>) }] : Array<Dynamic>));
     sourceBindGroupLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), texture: { sampleType: 'float', viewDimension: 'cube' } }, { binding: 1.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), sampler: { type: 'filtering' } }] : Array<Dynamic>) }] : Array<Dynamic>));

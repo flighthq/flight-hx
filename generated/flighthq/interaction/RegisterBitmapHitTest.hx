@@ -31,18 +31,18 @@ class RegisterBitmapHitTest {
     var rect:Dynamic = cast _Runtime.UNDEFINED;
     var px:Dynamic = cast _Runtime.UNDEFINED;
     var py:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>))))) { return cast -1.0; }
+    if ((cast !(cast _Runtime.callValue(hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>)) : Bool) : Bool)) { return cast -1.0; }
     bitmap = (cast source : Bitmap);
     image = _Runtime.field(_Runtime.field(bitmap, 'data'), 'image');
-    if (_Runtime.truthy(_Runtime.strictEquals(image, null))) { return cast 0.0; }
+    if ((cast _Runtime.strictEquals(image, null) : Bool)) { return cast 0.0; }
     surface = _Runtime.callValue(RegisterBitmapHitTest.surfaceForImage__registerBitmapHitTest, cast ([image] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(surface, null))) { return cast 0.0; }
+    if ((cast _Runtime.strictEquals(surface, null) : Bool)) { return cast 0.0; }
     _Runtime.callValue(inverseMatrixTransformPointXY, cast ([RegisterBitmapHitTest.bitmapAlphaLocalPoint__registerBitmapHitTest, _Runtime.callValue(getNodeWorldMatrix, cast ([(cast source : DisplayObject)] : Array<Dynamic>)), x, y] : Array<Dynamic>));
     rect = _Runtime.field(_Runtime.field(bitmap, 'data'), 'sourceRectangle');
-    px = HxMath.floor((_Runtime.field(RegisterBitmapHitTest.bitmapAlphaLocalPoint__registerBitmapHitTest, 'x') + _Runtime.select(!_Runtime.strictEquals(rect, null), function():Dynamic return cast _Runtime.field(rect, 'x'), function():Dynamic return cast 0.0)));
-    py = HxMath.floor((_Runtime.field(RegisterBitmapHitTest.bitmapAlphaLocalPoint__registerBitmapHitTest, 'y') + _Runtime.select(!_Runtime.strictEquals(rect, null), function():Dynamic return cast _Runtime.field(rect, 'y'), function():Dynamic return cast 0.0)));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(px, 0.0, '<'), function():Dynamic return cast _Runtime.compare(py, 0.0, '<')), function():Dynamic return cast _Runtime.compare(px, _Runtime.field(surface, 'width'), '>=')), function():Dynamic return cast _Runtime.compare(py, _Runtime.field(surface, 'height'), '>=')))) { return cast -1.0; }
-    return cast _Runtime.select(_Runtime.compare(_Runtime.callValue(getSurfacePixelChannel, cast ([surface, px, py, ImageChannelValue.Alpha] : Array<Dynamic>)), alphaThreshold, '>='), function():Dynamic return cast 0.0, function():Dynamic return cast -1.0);
+    px = HxMath.floor((_Runtime.field(RegisterBitmapHitTest.bitmapAlphaLocalPoint__registerBitmapHitTest, 'x') + ((cast !_Runtime.strictEquals(rect, null) : Bool) ? (cast _Runtime.field(rect, 'x') : Dynamic) : (cast 0.0 : Dynamic))));
+    py = HxMath.floor((_Runtime.field(RegisterBitmapHitTest.bitmapAlphaLocalPoint__registerBitmapHitTest, 'y') + ((cast !_Runtime.strictEquals(rect, null) : Bool) ? (cast _Runtime.field(rect, 'y') : Dynamic) : (cast 0.0 : Dynamic))));
+    if ((cast ((cast ((cast ((cast ((cast px : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast py : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast px : Float) >= (cast _Runtime.field(surface, 'width') : Float)) : Bool)) : Bool) || (cast ((cast py : Float) >= (cast _Runtime.field(surface, 'height') : Float)) : Bool)) : Bool)) { return cast -1.0; }
+    return cast ((cast ((cast _Runtime.callValue(getSurfacePixelChannel, cast ([surface, px, py, ImageChannelValue.Alpha] : Array<Dynamic>)) : Float) >= (cast alphaThreshold : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
 
@@ -50,14 +50,14 @@ class RegisterBitmapHitTest {
     var cached:Dynamic = cast _Runtime.UNDEFINED;
     var surface:Null<Surface> = cast _Runtime.UNDEFINED;
     cached = ((cast RegisterBitmapHitTest.surfaceCache__registerBitmapHitTest : flighthq._internal._WeakMap).get(image));
-    if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast cached; }
+    if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
     surface = null;
     try {
       (surface = cast (_Runtime.callValue(createSurfaceFromImageResource, cast ([image] : Array<Dynamic>)) : Dynamic));
     } catch (__error:Dynamic) {
       (surface = cast (null : Dynamic));
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(surface, null))) { ((cast RegisterBitmapHitTest.surfaceCache__registerBitmapHitTest : flighthq._internal._WeakMap).set(image, surface)); }
+    if ((cast !_Runtime.strictEquals(surface, null) : Bool)) { ((cast RegisterBitmapHitTest.surfaceCache__registerBitmapHitTest : flighthq._internal._WeakMap).set(image, surface)); }
     return cast surface;
     return cast null;
   }

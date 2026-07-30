@@ -28,7 +28,7 @@ class SkinMeshGeometry {
     layout = _Runtime.field(__destructure0, 'layout');
     vertices = _Runtime.field(__destructure0, 'vertices');
     floatsPerVertex = (_Runtime.field(layout, 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast (_Runtime.toInt32((_Runtime.field(vertices, 'length') / floatsPerVertex)) | 0), function():Dynamic return cast 0.0);
+    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.toInt32((_Runtime.field(vertices, 'length') / floatsPerVertex)) | 0) : Dynamic) : (cast 0.0 : Dynamic));
     positionOffset = _Runtime.callValue(SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry, cast ([layout, 'position'] : Array<Dynamic>));
     normalOffset = _Runtime.callValue(SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry, cast ([layout, 'normal'] : Array<Dynamic>));
     jointsOffset = _Runtime.callValue(SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry, cast ([layout, 'joints0'] : Array<Dynamic>));
@@ -39,27 +39,27 @@ class SkinMeshGeometry {
     weights = new flighthq._internal._Float32Array((vertexCount * 4.0));
     {
       var v:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(v, vertexCount, '<'))) {
+      while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
         var base:Dynamic = (v * floatsPerVertex);
         var p:Dynamic = (v * 3.0);
         var w:Dynamic = (v * 4.0);
-        if (_Runtime.truthy(_Runtime.compare(positionOffset, 0.0, '>='))) {
+        if ((cast ((cast positionOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
           _Runtime.setIndex(positions, p, _Runtime.getIndex(vertices, (base + positionOffset)));
           _Runtime.setIndex(positions, (p + 1.0), _Runtime.getIndex(vertices, ((base + positionOffset) + 1.0)));
           _Runtime.setIndex(positions, (p + 2.0), _Runtime.getIndex(vertices, ((base + positionOffset) + 2.0)));
         }
-        if (_Runtime.truthy(_Runtime.compare(normalOffset, 0.0, '>='))) {
+        if ((cast ((cast normalOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
           _Runtime.setIndex(normals, p, _Runtime.getIndex(vertices, (base + normalOffset)));
           _Runtime.setIndex(normals, (p + 1.0), _Runtime.getIndex(vertices, ((base + normalOffset) + 1.0)));
           _Runtime.setIndex(normals, (p + 2.0), _Runtime.getIndex(vertices, ((base + normalOffset) + 2.0)));
         }
-        if (_Runtime.truthy(_Runtime.compare(jointsOffset, 0.0, '>='))) {
+        if ((cast ((cast jointsOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
           _Runtime.setIndex(joints, w, _Runtime.getIndex(vertices, (base + jointsOffset)));
           _Runtime.setIndex(joints, (w + 1.0), _Runtime.getIndex(vertices, ((base + jointsOffset) + 1.0)));
           _Runtime.setIndex(joints, (w + 2.0), _Runtime.getIndex(vertices, ((base + jointsOffset) + 2.0)));
           _Runtime.setIndex(joints, (w + 3.0), _Runtime.getIndex(vertices, ((base + jointsOffset) + 3.0)));
         }
-        if (_Runtime.truthy(_Runtime.compare(weightsOffset, 0.0, '>='))) {
+        if ((cast ((cast weightsOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
           _Runtime.setIndex(weights, w, _Runtime.getIndex(vertices, (base + weightsOffset)));
           _Runtime.setIndex(weights, (w + 1.0), _Runtime.getIndex(vertices, ((base + weightsOffset) + 1.0)));
           _Runtime.setIndex(weights, (w + 2.0), _Runtime.getIndex(vertices, ((base + weightsOffset) + 2.0)));
@@ -96,15 +96,15 @@ class SkinMeshGeometry {
     vertexCount = (_Runtime.toInt32((_Runtime.field(skinnedPositions, 'length') / 3.0)) | 0);
     {
       var v:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(v, vertexCount, '<'))) {
+      while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
         var base:Dynamic = (v * floatsPerVertex);
         var s:Dynamic = (v * 3.0);
-        if (_Runtime.truthy(_Runtime.compare(positionOffset, 0.0, '>='))) {
+        if ((cast ((cast positionOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
           _Runtime.setIndex(vertices, (base + positionOffset), _Runtime.getIndex(skinnedPositions, s));
           _Runtime.setIndex(vertices, ((base + positionOffset) + 1.0), _Runtime.getIndex(skinnedPositions, (s + 1.0)));
           _Runtime.setIndex(vertices, ((base + positionOffset) + 2.0), _Runtime.getIndex(skinnedPositions, (s + 2.0)));
         }
-        if (_Runtime.truthy(_Runtime.compare(normalOffset, 0.0, '>='))) {
+        if ((cast ((cast normalOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
           _Runtime.setIndex(vertices, (base + normalOffset), _Runtime.getIndex(skinnedNormals, s));
           _Runtime.setIndex(vertices, ((base + normalOffset) + 1.0), _Runtime.getIndex(skinnedNormals, (s + 1.0)));
           _Runtime.setIndex(vertices, ((base + normalOffset) + 2.0), _Runtime.getIndex(skinnedNormals, (s + 2.0)));
@@ -120,8 +120,8 @@ class SkinMeshGeometry {
     attributes = _Runtime.field(layout, 'attributes');
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(attributes, 'length'), '<'))) {
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.getIndex(attributes, i), 'semantic'), semantic))) { return cast (_Runtime.field(_Runtime.getIndex(attributes, i), 'byteOffset') / 4.0); }
+      while ((cast ((cast i : Float) < (cast _Runtime.field(attributes, 'length') : Float)) : Bool)) {
+        if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.getIndex(attributes, i), 'semantic'), semantic) : Bool)) { return cast (_Runtime.field(_Runtime.getIndex(attributes, i), 'byteOffset') / 4.0); }
         i++;
       }
     }

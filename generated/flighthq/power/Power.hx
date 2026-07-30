@@ -49,39 +49,39 @@ class Power {
     unsubscribeChange = _Runtime.callProperty(backend, 'subscribe', cast ([function() {
       var status:Dynamic = cast _Runtime.UNDEFINED;
       status = _Runtime.callProperty(backend, 'getStatus', cast ([Power._scratch__power] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(power, 'onChange'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onChange')], [status]]), 1); }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(status, 'isCharging'), wasCharging))) {
+      if ((cast !_Runtime.strictEquals(_Runtime.field(power, 'onChange'), null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onChange')], [status]]), 1); }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(status, 'isCharging'), wasCharging) : Bool)) {
         (wasCharging = cast (_Runtime.field(status, 'isCharging') : Dynamic));
-        var transition:Dynamic = _Runtime.select(_Runtime.field(status, 'isCharging'), function():Dynamic return cast _Runtime.field(power, 'onCharging'), function():Dynamic return cast _Runtime.field(power, 'onDischarging'));
-        if (_Runtime.truthy(!_Runtime.strictEquals(transition, null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[transition]]), 1); }
+        var transition:Dynamic = ((cast _Runtime.field(status, 'isCharging') : Bool) ? (cast _Runtime.field(power, 'onCharging') : Dynamic) : (cast _Runtime.field(power, 'onDischarging') : Dynamic));
+        if ((cast !_Runtime.strictEquals(transition, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[transition]]), 1); }
       }
     }] : Array<Dynamic>));
     unsubscribeLockScreen = _Runtime.callProperty(backend, 'subscribeLockScreen', cast ([function() {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(power, 'onLockScreen'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onLockScreen')]]), 1); }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(power, 'onLockScreen'), null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onLockScreen')]]), 1); }
     }] : Array<Dynamic>));
     unsubscribeLowPowerModeChange = _Runtime.callProperty(backend, 'subscribeLowPowerModeChange', cast ([function() {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(power, 'onLowPowerModeChange'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onLowPowerModeChange')]]), 1); }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(power, 'onLowPowerModeChange'), null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onLowPowerModeChange')]]), 1); }
     }] : Array<Dynamic>));
     unsubscribeResume = _Runtime.callProperty(backend, 'subscribeResume', cast ([function() {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(power, 'onResume'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onResume')]]), 1); }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(power, 'onResume'), null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onResume')]]), 1); }
     }] : Array<Dynamic>));
     unsubscribeSuspend = _Runtime.callProperty(backend, 'subscribeSuspend', cast ([function() {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(power, 'onSuspend'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onSuspend')]]), 1); }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(power, 'onSuspend'), null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onSuspend')]]), 1); }
     }] : Array<Dynamic>));
     unsubscribeThermalStateChange = _Runtime.callProperty(backend, 'subscribeThermalStateChange', cast ([function() {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(power, 'onThermalStateChange'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onThermalStateChange')]]), 1); }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(power, 'onThermalStateChange'), null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onThermalStateChange')]]), 1); }
     }] : Array<Dynamic>));
     unsubscribeUnlockScreen = _Runtime.callProperty(backend, 'subscribeUnlockScreen', cast ([function() {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(power, 'onUnlockScreen'), null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onUnlockScreen')]]), 1); }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(power, 'onUnlockScreen'), null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onUnlockScreen')]]), 1); }
     }] : Array<Dynamic>));
     lastIdleState = _Runtime.callProperty(backend, 'getSystemIdleState', cast ([idleThresholdSeconds] : Array<Dynamic>));
     idleIntervalId = _Runtime.setInterval(function() {
       var idleSignal:Dynamic = cast _Runtime.UNDEFINED;
       var current:Dynamic = cast _Runtime.UNDEFINED;
       idleSignal = _Runtime.field(power, 'onIdleStateChange');
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(idleSignal, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(hasSignalSlots, cast ([idleSignal] : Array<Dynamic>)))))) { return; }
+      if ((cast ((cast _Runtime.strictEquals(idleSignal, null) : Bool) || (cast !(cast _Runtime.callValue(hasSignalSlots, cast ([idleSignal] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return; }
       current = _Runtime.callProperty(backend, 'getSystemIdleState', cast ([idleThresholdSeconds] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(current, lastIdleState))) {
+      if ((cast !_Runtime.strictEquals(current, lastIdleState) : Bool)) {
         (lastIdleState = cast (current : Dynamic));
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[idleSignal]]), 1);
       }
@@ -138,9 +138,9 @@ class Power {
       _Runtime.setField(out, 'batteryLevel', level);
       _Runtime.setField(out, 'chargingTime', chargingTime);
       _Runtime.setField(out, 'dischargingTime', dischargingTime);
-      _Runtime.setField(out, 'isBatteryLow', _Runtime.andValue(_Runtime.andValue(_Runtime.compare(level, 0.0, '>='), function():Dynamic return cast _Runtime.compare(level, 0.2, '<=')), function():Dynamic return cast !_Runtime.truthy(charging)));
+      _Runtime.setField(out, 'isBatteryLow', ((cast ((cast ((cast level : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast level : Float) <= (cast 0.2 : Float)) : Bool)) : Bool) && (cast !(cast charging : Bool) : Bool)));
       _Runtime.setField(out, 'isCharging', charging);
-      _Runtime.setField(out, 'isOnBattery', _Runtime.andValue(_Runtime.compare(level, 0.0, '>='), function():Dynamic return cast !_Runtime.truthy(charging)));
+      _Runtime.setField(out, 'isOnBattery', ((cast ((cast level : Float) >= (cast 0.0 : Float)) : Bool) && (cast !(cast charging : Bool) : Bool)));
       _Runtime.setField(out, 'isLowPower', false);
       _Runtime.setField(out, 'thermalState', 'Unknown');
       return cast out;
@@ -152,12 +152,12 @@ class Power {
       var resolvedMode:Dynamic = cast _Runtime.UNDEFINED;
       var wakeLock:Dynamic = cast _Runtime.UNDEFINED;
       resolvedMode = _Runtime.coalesce(mode, function():Dynamic return cast 'PreventDisplaySleep');
-      if (_Runtime.truthy(_Runtime.strictEquals(resolvedMode, 'PreventAppSuspension'))) { return cast false; }
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast false; }
+      if ((cast _Runtime.strictEquals(resolvedMode, 'PreventAppSuspension') : Bool)) { return cast false; }
+      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool)) { return cast false; }
       wakeLock = flighthq._internal.backend.DomNavigatorBackend.field((cast _Runtime.globalValue('navigator') : { @:optional var wakeLock:WebWakeLock__power; }), 'wakeLock');
-      if (_Runtime.truthy(_Runtime.strictEquals(wakeLock, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast false; }
+      if ((cast _Runtime.strictEquals(wakeLock, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
       try {
-        if (_Runtime.truthy(!_Runtime.truthy(enabled))) {
+        if ((cast !(cast enabled : Bool) : Bool)) {
           _Runtime.callOptionalProperty(_Runtime.callOptionalProperty(Power._wakeLockSentinel__power, 'release', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
           
           }] : Array<Dynamic>));
@@ -167,9 +167,9 @@ class Power {
         flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(wakeLock, 'request', cast (['screen'] : Array<Dynamic>)), 'then', cast ([function(sentinel:Dynamic) {
           (Power._wakeLockSentinel__power = cast (sentinel : Dynamic));
           _Runtime.callOptionalProperty(sentinel, 'addEventListener', cast (['release', function() {
-            if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(Power._wakeLockSentinel__power, sentinel), function():Dynamic return cast !_Runtime.truthy(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'hidden'))))) {
+            if ((cast ((cast _Runtime.strictEquals(Power._wakeLockSentinel__power, sentinel) : Bool) && (cast !(cast flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'hidden') : Bool) : Bool)) : Bool)) {
               flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(wakeLock, 'request', cast (['screen'] : Array<Dynamic>)), 'then', cast ([function(newSentinel:Dynamic) {
-                if (_Runtime.truthy(_Runtime.strictEquals(Power._wakeLockSentinel__power, sentinel))) { (Power._wakeLockSentinel__power = cast (newSentinel : Dynamic)); }
+                if ((cast _Runtime.strictEquals(Power._wakeLockSentinel__power, sentinel) : Bool)) { (Power._wakeLockSentinel__power = cast (newSentinel : Dynamic)); }
               }] : Array<Dynamic>)), function() {
               
               });
@@ -191,40 +191,40 @@ class Power {
       var onDischargingTimeChange:Dynamic = cast _Runtime.UNDEFINED;
       var cancelled:Dynamic = cast _Runtime.UNDEFINED;
       battery = _Runtime.callValue(Power.getWebBatteryManagerPromise__power, cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(battery, null))) { return cast function() {
+      if ((cast _Runtime.strictEquals(battery, null) : Bool)) { return cast function() {
       
       }; }
       manager = null;
       onLevelChange = function() {
-        if (_Runtime.truthy(!_Runtime.strictEquals(manager, null))) { (cachedLevel = cast (_Runtime.field(manager, 'level') : Dynamic)); }
+        if ((cast !_Runtime.strictEquals(manager, null) : Bool)) { (cachedLevel = cast (_Runtime.field(manager, 'level') : Dynamic)); }
         _Runtime.callValue(listener, cast ([] : Array<Dynamic>));
       };
       onChargingChange = function() {
-        if (_Runtime.truthy(!_Runtime.strictEquals(manager, null))) { (cachedCharging = cast (_Runtime.field(manager, 'charging') : Dynamic)); }
+        if ((cast !_Runtime.strictEquals(manager, null) : Bool)) { (cachedCharging = cast (_Runtime.field(manager, 'charging') : Dynamic)); }
         _Runtime.callValue(listener, cast ([] : Array<Dynamic>));
       };
       onChargingTimeChange = function() {
-        if (_Runtime.truthy(!_Runtime.strictEquals(manager, null))) {
+        if ((cast !_Runtime.strictEquals(manager, null) : Bool)) {
           var t:Dynamic = _Runtime.field(manager, 'chargingTime');
-          (cachedChargingTime = cast (_Runtime.select(_Runtime.strictEquals(t, HxMath.POSITIVE_INFINITY), function():Dynamic return cast -1.0, function():Dynamic return cast t) : Dynamic));
+          (cachedChargingTime = cast (((cast _Runtime.strictEquals(t, HxMath.POSITIVE_INFINITY) : Bool) ? (cast -1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic));
         }
         _Runtime.callValue(listener, cast ([] : Array<Dynamic>));
       };
       onDischargingTimeChange = function() {
-        if (_Runtime.truthy(!_Runtime.strictEquals(manager, null))) {
+        if ((cast !_Runtime.strictEquals(manager, null) : Bool)) {
           var t:Dynamic = _Runtime.field(manager, 'dischargingTime');
-          (cachedDischargingTime = cast (_Runtime.select(_Runtime.strictEquals(t, HxMath.POSITIVE_INFINITY), function():Dynamic return cast -1.0, function():Dynamic return cast t) : Dynamic));
+          (cachedDischargingTime = cast (((cast _Runtime.strictEquals(t, HxMath.POSITIVE_INFINITY) : Bool) ? (cast -1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic));
         }
         _Runtime.callValue(listener, cast ([] : Array<Dynamic>));
       };
       cancelled = false;
       flighthq._internal._Async.recover(_Runtime.callProperty(battery, 'then', cast ([function(m:Dynamic) {
-        if (_Runtime.truthy(cancelled)) { return; }
+        if ((cast cancelled : Bool)) { return; }
         (manager = cast (m : Dynamic));
         (cachedLevel = cast (_Runtime.field(m, 'level') : Dynamic));
         (cachedCharging = cast (_Runtime.field(m, 'charging') : Dynamic));
-        (cachedChargingTime = cast (_Runtime.select(_Runtime.strictEquals(_Runtime.field(m, 'chargingTime'), HxMath.POSITIVE_INFINITY), function():Dynamic return cast -1.0, function():Dynamic return cast _Runtime.field(m, 'chargingTime')) : Dynamic));
-        (cachedDischargingTime = cast (_Runtime.select(_Runtime.strictEquals(_Runtime.field(m, 'dischargingTime'), HxMath.POSITIVE_INFINITY), function():Dynamic return cast -1.0, function():Dynamic return cast _Runtime.field(m, 'dischargingTime')) : Dynamic));
+        (cachedChargingTime = cast (((cast _Runtime.strictEquals(_Runtime.field(m, 'chargingTime'), HxMath.POSITIVE_INFINITY) : Bool) ? (cast -1.0 : Dynamic) : (cast _Runtime.field(m, 'chargingTime') : Dynamic)) : Dynamic));
+        (cachedDischargingTime = cast (((cast _Runtime.strictEquals(_Runtime.field(m, 'dischargingTime'), HxMath.POSITIVE_INFINITY) : Bool) ? (cast -1.0 : Dynamic) : (cast _Runtime.field(m, 'dischargingTime') : Dynamic)) : Dynamic));
         _Runtime.callOptionalProperty(m, 'addEventListener', cast (['levelchange', onLevelChange] : Array<Dynamic>));
         _Runtime.callOptionalProperty(m, 'addEventListener', cast (['chargingchange', onChargingChange] : Array<Dynamic>));
         _Runtime.callOptionalProperty(m, 'addEventListener', cast (['chargingtimechange', onChargingTimeChange] : Array<Dynamic>));
@@ -250,13 +250,13 @@ class Power {
       
       };
     }, subscribeResume: function(listener:Dynamic) {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'))) { return cast function() {
+      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) { return cast function() {
       
       }; }
       flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'addEventListener', cast (['resume', listener] : Array<Dynamic>));
       return cast function() return flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'removeEventListener', cast (['resume', listener] : Array<Dynamic>));
     }, subscribeSuspend: function(listener:Dynamic) {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'))) { return cast function() {
+      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) { return cast function() {
       
       }; }
       flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'addEventListener', cast (['freeze', listener] : Array<Dynamic>));
@@ -276,7 +276,7 @@ class Power {
   public static function detachPower(power:flighthq.types.Power):Void {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
     unsubscribe = ((cast Power._subscriptions__power : flighthq._internal._WeakMap).get(power));
-    if (_Runtime.truthy(!_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callValue(unsubscribe, cast ([] : Array<Dynamic>));
       ((cast Power._subscriptions__power : flighthq._internal._WeakMap).delete_(power));
     }
@@ -287,20 +287,20 @@ class Power {
   }
 
   public static function enablePowerSignals(power:flighthq.types.Power):Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(power, 'onChange'), null))) { _Runtime.setField(power, 'onChange', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(power, 'onCharging'), null))) { _Runtime.setField(power, 'onCharging', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(power, 'onDischarging'), null))) { _Runtime.setField(power, 'onDischarging', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(power, 'onIdleStateChange'), null))) { _Runtime.setField(power, 'onIdleStateChange', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(power, 'onLockScreen'), null))) { _Runtime.setField(power, 'onLockScreen', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(power, 'onLowPowerModeChange'), null))) { _Runtime.setField(power, 'onLowPowerModeChange', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(power, 'onResume'), null))) { _Runtime.setField(power, 'onResume', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(power, 'onSuspend'), null))) { _Runtime.setField(power, 'onSuspend', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(power, 'onThermalStateChange'), null))) { _Runtime.setField(power, 'onThermalStateChange', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(power, 'onUnlockScreen'), null))) { _Runtime.setField(power, 'onUnlockScreen', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(power, 'onChange'), null) : Bool)) { _Runtime.setField(power, 'onChange', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(power, 'onCharging'), null) : Bool)) { _Runtime.setField(power, 'onCharging', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(power, 'onDischarging'), null) : Bool)) { _Runtime.setField(power, 'onDischarging', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(power, 'onIdleStateChange'), null) : Bool)) { _Runtime.setField(power, 'onIdleStateChange', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(power, 'onLockScreen'), null) : Bool)) { _Runtime.setField(power, 'onLockScreen', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(power, 'onLowPowerModeChange'), null) : Bool)) { _Runtime.setField(power, 'onLowPowerModeChange', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(power, 'onResume'), null) : Bool)) { _Runtime.setField(power, 'onResume', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(power, 'onSuspend'), null) : Bool)) { _Runtime.setField(power, 'onSuspend', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(power, 'onThermalStateChange'), null) : Bool)) { _Runtime.setField(power, 'onThermalStateChange', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(power, 'onUnlockScreen'), null) : Bool)) { _Runtime.setField(power, 'onUnlockScreen', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
   }
 
   public static function getPowerBackend():PowerBackend {
-    if (_Runtime.truthy(_Runtime.strictEquals(Power._backend__power, null))) { (Power._backend__power = cast (_Runtime.callValue(createWebPowerBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Power._backend__power, null) : Bool)) { (Power._backend__power = cast (_Runtime.callValue(createWebPowerBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Power._backend__power;
     return cast null;
   }
@@ -337,9 +337,9 @@ class Power {
 
   public static function getWebBatteryManagerPromise__power():Null<flighthq._internal._Promise<WebBatteryManager__power>> {
     var nav:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
+    if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool)) { return cast null; }
     nav = (cast _Runtime.globalValue('navigator') : { @:optional var getBattery:Dynamic; });
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(nav, 'getBattery')), 'function'))) { return cast null; }
+    if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(nav, 'getBattery')), 'function') : Bool)) { return cast null; }
     try {
       return cast flighthq._internal.backend.DomNavigatorBackend.call(nav, 'getBattery', cast ([] : Array<Dynamic>));
     } catch (__error:Dynamic) {

@@ -13,12 +13,12 @@ class GlEffectProgramCache {
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var compiled:Dynamic = cast _Runtime.UNDEFINED;
     cache = ((cast GlEffectProgramCache._programs__glEffectProgramCache : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (cache = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
       ((cast GlEffectProgramCache._programs__glEffectProgramCache : flighthq._internal._WeakMap).set(state, cache));
     }
     existing = ((cast cache : flighthq._internal._Map).get(key));
-    if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast existing; }
+    if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
     compiled = _Runtime.callValue(compileGlFullscreenProgram, cast ([_Runtime.field(state, 'gl'), fragmentSource] : Array<Dynamic>));
     ((cast cache : flighthq._internal._Map).set(key, compiled));
     return cast compiled;
@@ -30,12 +30,12 @@ class GlEffectProgramCache {
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     cache = ((cast GlEffectProgramCache._uniformLocations__glEffectProgramCache : flighthq._internal._WeakMap).get(program));
-    if (_Runtime.truthy(_Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (cache = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
       ((cast GlEffectProgramCache._uniformLocations__glEffectProgramCache : flighthq._internal._WeakMap).set(program, cache));
     }
     existing = ((cast cache : flighthq._internal._Map).get(name));
-    if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast existing; }
+    if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
     loc = flighthq._internal.backend.WebGl2Backend.getUniformLocation(_Runtime.field(state, 'gl'), _Runtime.field(program, 'program'), name);
     ((cast cache : flighthq._internal._Map).set(name, loc));
     return cast loc;

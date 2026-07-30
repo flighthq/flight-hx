@@ -16,7 +16,7 @@ class WgpuMipmap {
     var layout:Dynamic = cast _Runtime.UNDEFINED;
     var encoder:Dynamic = cast _Runtime.UNDEFINED;
     levelCount = _Runtime.callValue(getWgpuMipLevelCount, cast ([width, height] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(levelCount, 1.0, '<='))) { return; }
+    if ((cast ((cast levelCount : Float) <= (cast 1.0 : Float)) : Bool)) { return; }
     __destructure0 = state;
     device = _Runtime.field(__destructure0, 'device');
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -25,7 +25,7 @@ class WgpuMipmap {
     encoder = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createCommandEncoder', cast ([] : Array<Dynamic>));
     {
       var level:Dynamic = 1.0;
-      while (_Runtime.truthy(_Runtime.compare(level, levelCount, '<'))) {
+      while ((cast ((cast level : Float) < (cast levelCount : Float)) : Bool)) {
         var srcView:Dynamic = _Runtime.callProperty(texture, 'createView', cast ([{ baseMipLevel: (level - 1.0), mipLevelCount: 1.0 }] : Array<Dynamic>));
         var dstView:Dynamic = _Runtime.callProperty(texture, 'createView', cast ([{ baseMipLevel: level, mipLevelCount: 1.0 }] : Array<Dynamic>));
         var bindGroup:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: layout, entries: cast ([{ binding: 0.0, resource: srcView }, { binding: 1.0, resource: _Runtime.field(runtime, 'linearSampler') }] : Array<Dynamic>) }] : Array<Dynamic>));
@@ -53,7 +53,7 @@ class WgpuMipmap {
     var module:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(runtime, 'mipmapPipeline'), null))) { return cast _Runtime.field(runtime, 'mipmapPipeline'); }
+    if ((cast !_Runtime.looseEquals(_Runtime.field(runtime, 'mipmapPipeline'), null) : Bool)) { return cast _Runtime.field(runtime, 'mipmapPipeline'); }
     __destructure1 = state;
     device = _Runtime.field(__destructure1, 'device');
     bindGroupLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), texture: { sampleType: 'float' } }, { binding: 1.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), sampler: { type: 'filtering' } }] : Array<Dynamic>) }] : Array<Dynamic>));

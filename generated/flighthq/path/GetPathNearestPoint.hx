@@ -19,11 +19,11 @@ class GetPathNearestPoint {
     bestY = 0.0;
     {
       var ci:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(ci, _Runtime.field(contours, 'length'), '<'))) {
+      while ((cast ((cast ci : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
         var contour:Dynamic = _Runtime.getIndex(contours, ci);
         {
           var i:Dynamic = 2.0;
-          while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(contour, 'length'), '<'))) {
+          while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
             var ax:Dynamic = _Runtime.getIndex(contour, (i - 2.0));
             var ay:Dynamic = _Runtime.getIndex(contour, (i - 1.0));
             var bx:Dynamic = _Runtime.getIndex(contour, i);
@@ -32,16 +32,16 @@ class GetPathNearestPoint {
             var dy:Dynamic = (by - ay);
             var lenSq:Dynamic = ((dx * dx) + (dy * dy));
             var t:Float = cast _Runtime.UNDEFINED;
-            if (_Runtime.truthy(_Runtime.strictEquals(lenSq, 0.0))) {
+            if ((cast _Runtime.strictEquals(lenSq, 0.0) : Bool)) {
               (t = cast (0.0 : Dynamic));
             } else {
               (t = cast (((((px - ax) * dx) + ((py - ay) * dy)) / lenSq) : Dynamic));
-              if (_Runtime.truthy(_Runtime.compare(t, 0.0, '<'))) { (t = cast (0.0 : Dynamic)); } else { if (_Runtime.truthy(_Runtime.compare(t, 1.0, '>'))) { (t = cast (1.0 : Dynamic)); } }
+              if ((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool)) { (t = cast (0.0 : Dynamic)); } else { if ((cast ((cast t : Float) > (cast 1.0 : Float)) : Bool)) { (t = cast (1.0 : Dynamic)); } }
             }
             var cx:Dynamic = (ax + (t * dx));
             var cy:Dynamic = (ay + (t * dy));
             var distSq:Dynamic = (((px - cx) * (px - cx)) + ((py - cy) * (py - cy)));
-            if (_Runtime.truthy(_Runtime.compare(distSq, bestDistSq, '<'))) {
+            if ((cast ((cast distSq : Float) < (cast bestDistSq : Float)) : Bool)) {
               (bestDistSq = cast (distSq : Dynamic));
               (bestX = cast (cx : Dynamic));
               (bestY = cast (cy : Dynamic));
@@ -52,7 +52,7 @@ class GetPathNearestPoint {
         ci++;
       }
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(bestDistSq, HxMath.POSITIVE_INFINITY))) { return cast -1.0; }
+    if ((cast _Runtime.strictEquals(bestDistSq, HxMath.POSITIVE_INFINITY) : Bool)) { return cast -1.0; }
     (out.x = cast (bestX : Dynamic));
     (out.y = cast (bestY : Dynamic));
     return cast HxMath.sqrt(bestDistSq);

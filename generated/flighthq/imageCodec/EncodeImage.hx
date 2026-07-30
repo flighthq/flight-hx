@@ -12,7 +12,7 @@ class EncodeImage {
     return cast flighthq._internal._Async.protect(function():Dynamic {
       var encoder:Dynamic = cast _Runtime.UNDEFINED;
       encoder = _Runtime.callValue(getImageEncoder, cast ([mimeType] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(encoder, null))) { return cast null; }
+      if ((cast _Runtime.strictEquals(encoder, null) : Bool)) { return cast null; }
       return cast _Runtime.callValue(encoder, cast ([image, options] : Array<Dynamic>));
       return cast null;
     });

@@ -11,7 +11,7 @@ class ImageResourceFrom {
   public static function createCanvasFromImageResource(image:ImageResource):Null<Dynamic> {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var imageData:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(image, 'data'), null))) { return cast null; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(image, 'data'), null) : Bool)) { return cast null; }
     canvas = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', _Runtime.field(image, 'width'));
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', _Runtime.field(image, 'height'));
@@ -38,7 +38,7 @@ class ImageResourceFrom {
   }
 
   public static function isImageResourceSameOrigin(url:String):Bool {
-    if (_Runtime.truthy(_Runtime.orValue(StringTools.startsWith(url, 'data:'), function():Dynamic return cast StringTools.startsWith(url, 'blob:')))) { return cast true; }
+    if ((cast ((cast StringTools.startsWith(url, 'data:') : Bool) || (cast StringTools.startsWith(url, 'blob:') : Bool)) : Bool)) { return cast true; }
     try {
       return cast _Runtime.strictEquals(_Runtime.field(_Runtime.construct(_Runtime.globalValue('URL'), [url, _Runtime.field(_Runtime.globalValue('location'), 'href')]), 'origin'), _Runtime.field(_Runtime.globalValue('location'), 'origin'));
     } catch (__error:Dynamic) {
@@ -77,7 +77,7 @@ class ImageResourceFrom {
       var type:Dynamic = cast _Runtime.UNDEFINED;
       var buf:Dynamic = cast _Runtime.UNDEFINED;
       type = _Runtime.coalesce(mimeType, function():Dynamic return cast _Runtime.callValue(detectImageMimeType, cast ([bytes] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(type, null))) {
+      if ((cast _Runtime.strictEquals(type, null) : Bool)) {
         throw _Runtime.error('Unable to determine image type from bytes');
       }
       buf = _Runtime.slice((cast _Runtime.field(bytes, 'buffer') : haxe.io.Bytes), _Runtime.field(bytes, 'byteOffset'), (_Runtime.field(bytes, 'byteOffset') + _Runtime.field(bytes, 'byteLength')));
@@ -93,7 +93,7 @@ class ImageResourceFrom {
         _Runtime.callOptionalProperty(signal, 'throwIfAborted', cast ([] : Array<Dynamic>));
         img = _Runtime.construct(_Runtime.globalValue('Image'), []);
         var __flowBranch3:Dynamic;
-        if (_Runtime.truthy(!_Runtime.strictEquals(crossOrigin, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+        if ((cast !_Runtime.strictEquals(crossOrigin, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           __flowBranch3 = flighthq._internal._Async.protect(function():Dynamic {
             _Runtime.setField(img, 'crossOrigin', crossOrigin);
             return flighthq._internal._Async.flowNormal();
@@ -104,7 +104,7 @@ class ImageResourceFrom {
         return flighthq._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
           _Runtime.setField(img, 'src', url);
           var __flowBranch4:Dynamic;
-          if (_Runtime.truthy(!_Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+          if ((cast !_Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
             __flowBranch4 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flatMap(flighthq._internal._Async.race(cast ([_Runtime.callProperty(img, 'decode', cast ([] : Array<Dynamic>)), flighthq._internal._Async.create(function(_:Dynamic, reject:Dynamic) return _Runtime.callProperty(signal, 'addEventListener', cast (['abort', function() return _Runtime.callValue(reject, cast ([_Runtime.field(signal, 'reason')] : Array<Dynamic>)), { once: true }] : Array<Dynamic>)))] : Array<Dynamic>)), function(__awaitValue5:Dynamic):Dynamic {
                 __awaitValue5;

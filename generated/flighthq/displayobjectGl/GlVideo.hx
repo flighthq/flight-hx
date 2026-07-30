@@ -37,10 +37,10 @@ class GlVideo {
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     __destructure0 = (cast (cast data : Dynamic) : GlVideoData__glVideo);
     videoTexture = _Runtime.field(__destructure0, 'videoTexture');
-    if (_Runtime.truthy(_Runtime.strictEquals(videoTexture, null))) { return; }
+    if ((cast _Runtime.strictEquals(videoTexture, null) : Bool)) { return; }
     cache = _Runtime.field(runtime, 'videoTextureCache');
     entry = ({ final __collection0:Dynamic = cache; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._WeakMap).get(videoTexture)); });
-    if (_Runtime.truthy(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.deleteTexture(_Runtime.field(state, 'gl'), _Runtime.field(entry, 'texture'));
       ((cast cache : flighthq._internal._WeakMap).delete_(videoTexture));
     }
@@ -59,16 +59,16 @@ class GlVideo {
     source = (cast _Runtime.field(renderProxy, 'source') : Video);
     resource = _Runtime.coalesce(_Runtime.field(_Runtime.field(source, 'data'), 'source'), function():Dynamic return cast null);
     element = _Runtime.coalesce(_Runtime.optionalField(resource, 'element'), function():Dynamic return cast null);
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(resource, null), function():Dynamic return cast _Runtime.strictEquals(element, null)), function():Dynamic return cast _Runtime.compare(_Runtime.field(element, 'readyState'), 2.0, '<')))) { return; }
+    if ((cast ((cast ((cast _Runtime.strictEquals(resource, null) : Bool) || (cast _Runtime.strictEquals(element, null) : Bool)) : Bool) || (cast ((cast _Runtime.field(element, 'readyState') : Float) < (cast 2.0 : Float)) : Bool)) : Bool)) { return; }
     vw = _Runtime.field(element, 'videoWidth');
     vh = _Runtime.field(element, 'videoHeight');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(vw, 0.0), function():Dynamic return cast _Runtime.strictEquals(vh, 0.0)))) { return; }
+    if ((cast ((cast _Runtime.strictEquals(vw, 0.0) : Bool) || (cast _Runtime.strictEquals(vh, 0.0) : Bool)) : Bool)) { return; }
     data = (cast (cast _Runtime.field(renderProxy, 'rendererData') : Dynamic) : Null<GlVideoData__glVideo>);
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(data, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(data, 'videoTexture'), null)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'source'), resource)))) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(data, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(data, 'videoTexture'), null) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(data, 'source'), resource) : Bool)) : Bool)) {
       (videoTexture = cast (_Runtime.field(data, 'videoTexture') : Dynamic));
     } else {
       (videoTexture = cast (_Runtime.callValue(createVideoTexture, cast ([resource] : Array<Dynamic>)) : Dynamic));
-      if (_Runtime.truthy(!_Runtime.strictEquals(data, null))) {
+      if ((cast !_Runtime.strictEquals(data, null) : Bool)) {
         _Runtime.setField(data, 'source', resource);
         _Runtime.setField(data, 'videoTexture', videoTexture);
       }

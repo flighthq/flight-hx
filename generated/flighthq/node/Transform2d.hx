@@ -32,7 +32,7 @@ class Transform2d {
   public static function ensureNodeLocalMatrix<Traits>(target:Transform2DNode<Traits>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : Dynamic);
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'localTransformUsingLocalTransformId'), _Runtime.field(runtime, 'localTransformId')))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'localTransformUsingLocalTransformId'), _Runtime.field(runtime, 'localTransformId')) : Bool)) {
       _Runtime.callValue(Transform2d.recomputeLocalTransform2D__transform2d, cast ([target, runtime] : Array<Dynamic>));
     }
   }
@@ -45,12 +45,12 @@ class Transform2d {
     runtime = (cast _Runtime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : Dynamic);
     parent = (cast _Runtime.field(runtime, 'parent') : Transform2DNode<Traits>);
     parentWorldTransformId = 0.0;
-    if (_Runtime.truthy(!_Runtime.strictEquals(parent, null))) {
+    if ((cast !_Runtime.strictEquals(parent, null) : Bool)) {
       _Runtime.callValue(ensureNodeWorldMatrix, cast ([parent] : Array<Dynamic>));
       (parentRuntime = cast ((cast _Runtime.callValue(getEntityRuntime, cast ([parent] : Array<Dynamic>)) : Dynamic) : Dynamic));
       (parentWorldTransformId = cast (_Runtime.field(parentRuntime, 'worldTransformId') : Dynamic));
     }
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(runtime, 'worldTransformUsingLocalTransformId'), _Runtime.field(runtime, 'localTransformId')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(runtime, 'worldTransformUsingParentTransformId'), parentWorldTransformId)))) {
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'worldTransformUsingLocalTransformId'), _Runtime.field(runtime, 'localTransformId')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(runtime, 'worldTransformUsingParentTransformId'), parentWorldTransformId) : Bool)) : Bool)) {
       _Runtime.callValue(Transform2d.recomputeWorldTransform2D__transform2d, cast ([target, runtime, parentRuntime] : Array<Dynamic>));
     }
   }
@@ -99,11 +99,11 @@ class Transform2d {
 
   public static function recomputeLocalTransform2D__transform2d<Traits>(target:Transform2DNode<Traits>, runtime:Dynamic):Void {
     var matrix:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.strictEquals(target.rotation, runtime.rotationAngle))) {
+    if ((cast !_Runtime.strictEquals(target.rotation, runtime.rotationAngle) : Bool)) {
       var angle:Dynamic = _Runtime.fmod(target.rotation, 360.0);
-      if (_Runtime.truthy(_Runtime.compare(angle, 180.0, '>'))) {
+      if ((cast ((cast angle : Float) > (cast 180.0 : Float)) : Bool)) {
         (angle = cast ((angle - 360.0) : Dynamic));
-      } else { if (_Runtime.truthy(_Runtime.compare(angle, -180.0, '<'))) {
+      } else { if ((cast ((cast angle : Float) < (cast -180.0 : Float)) : Bool)) {
         (angle = cast ((angle + 360.0) : Dynamic));
       } }
       var rad:Dynamic = (angle * Transform2d.DEG_TO_RAD__transform2d);
@@ -113,9 +113,9 @@ class Transform2d {
       (runtime.rotationSine = cast (sin : Dynamic));
       (runtime.rotationCosine = cast (cos : Dynamic));
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(runtime.localMatrix, null))) { (runtime.localMatrix = cast (_Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(runtime.localMatrix, null) : Bool)) { (runtime.localMatrix = cast (_Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) : Dynamic)); }
     matrix = runtime.localMatrix;
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(target.skewX, 0.0), function():Dynamic return cast _Runtime.strictEquals(target.skewY, 0.0)))) {
+    if ((cast ((cast _Runtime.strictEquals(target.skewX, 0.0) : Bool) && (cast _Runtime.strictEquals(target.skewY, 0.0) : Bool)) : Bool)) {
       _Runtime.setField(matrix, 'a', (runtime.rotationCosine * target.scaleX));
       _Runtime.setField(matrix, 'b', (runtime.rotationSine * target.scaleX));
       _Runtime.setField(matrix, 'c', (-runtime.rotationSine * target.scaleY));
@@ -134,9 +134,9 @@ class Transform2d {
   }
 
   public static function recomputeWorldTransform2D__transform2d<Traits>(target:Transform2DNode<Traits>, runtime:Dynamic, ?parentRuntime:Dynamic):Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(runtime.worldMatrix, null))) { (runtime.worldMatrix = cast (_Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(runtime.worldMatrix, null) : Bool)) { (runtime.worldMatrix = cast (_Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) : Dynamic)); }
     _Runtime.callValue(ensureNodeLocalMatrix, cast ([target] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(parentRuntime, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(parentRuntime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callValue(multiplyMatrix, cast ([runtime.worldMatrix, parentRuntime.worldMatrix, runtime.localMatrix] : Array<Dynamic>));
     } else {
       _Runtime.callValue(copyMatrix, cast ([runtime.worldMatrix, runtime.localMatrix] : Array<Dynamic>));

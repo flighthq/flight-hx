@@ -52,17 +52,17 @@ class ColorTransform {
   }
 
   public static function equalsColorTransform(a:ColorTransformLike, b:ColorTransformLike):Bool {
-    return cast _Runtime.andValue(_Runtime.callValue(equalsColorTransformOffsets, cast ([a, b] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(equalsColorTransformMultipliers, cast ([a, b] : Array<Dynamic>)));
+    return cast ((cast _Runtime.callValue(equalsColorTransformOffsets, cast ([a, b] : Array<Dynamic>)) : Bool) && (cast _Runtime.callValue(equalsColorTransformMultipliers, cast ([a, b] : Array<Dynamic>)) : Bool));
     return cast null;
   }
 
   public static function equalsColorTransformMultipliers(a:ColorTransformLike, b:ColorTransformLike, compareAlpha:Bool = true):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(a.redMultiplier, b.redMultiplier), function():Dynamic return cast _Runtime.strictEquals(a.greenMultiplier, b.greenMultiplier)), function():Dynamic return cast _Runtime.strictEquals(a.blueMultiplier, b.blueMultiplier)), function():Dynamic return cast _Runtime.orValue(!_Runtime.truthy(compareAlpha), function():Dynamic return cast _Runtime.strictEquals(a.alphaMultiplier, b.alphaMultiplier)));
+    return cast _Runtime.andValue(((cast ((cast _Runtime.strictEquals(a.redMultiplier, b.redMultiplier) : Bool) && (cast _Runtime.strictEquals(a.greenMultiplier, b.greenMultiplier) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.blueMultiplier, b.blueMultiplier) : Bool)), function():Dynamic return cast _Runtime.orValue(!(cast compareAlpha : Bool), function():Dynamic return cast _Runtime.strictEquals(a.alphaMultiplier, b.alphaMultiplier)));
     return cast null;
   }
 
   public static function equalsColorTransformOffsets(a:ColorTransformLike, b:ColorTransformLike, compareAlpha:Bool = true):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(a.redOffset, b.redOffset), function():Dynamic return cast _Runtime.strictEquals(a.greenOffset, b.greenOffset)), function():Dynamic return cast _Runtime.strictEquals(a.blueOffset, b.blueOffset)), function():Dynamic return cast _Runtime.orValue(!_Runtime.truthy(compareAlpha), function():Dynamic return cast _Runtime.strictEquals(a.alphaOffset, b.alphaOffset)));
+    return cast _Runtime.andValue(((cast ((cast _Runtime.strictEquals(a.redOffset, b.redOffset) : Bool) && (cast _Runtime.strictEquals(a.greenOffset, b.greenOffset) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.blueOffset, b.blueOffset) : Bool)), function():Dynamic return cast _Runtime.orValue(!(cast compareAlpha : Bool), function():Dynamic return cast _Runtime.strictEquals(a.alphaOffset, b.alphaOffset)));
     return cast null;
   }
 
@@ -77,10 +77,10 @@ class ColorTransform {
   }
 
   public static function invertColorTransform(out:ColorTransformLike, source:ColorTransformLike):Void {
-    (out.redMultiplier = cast (_Runtime.select(!_Runtime.strictEquals(source.redMultiplier, 0.0), function():Dynamic return cast (1.0 / source.redMultiplier), function():Dynamic return cast 1.0) : Dynamic));
-    (out.greenMultiplier = cast (_Runtime.select(!_Runtime.strictEquals(source.greenMultiplier, 0.0), function():Dynamic return cast (1.0 / source.greenMultiplier), function():Dynamic return cast 1.0) : Dynamic));
-    (out.blueMultiplier = cast (_Runtime.select(!_Runtime.strictEquals(source.blueMultiplier, 0.0), function():Dynamic return cast (1.0 / source.blueMultiplier), function():Dynamic return cast 1.0) : Dynamic));
-    (out.alphaMultiplier = cast (_Runtime.select(!_Runtime.strictEquals(source.alphaMultiplier, 0.0), function():Dynamic return cast (1.0 / source.alphaMultiplier), function():Dynamic return cast 1.0) : Dynamic));
+    (out.redMultiplier = cast (((cast !_Runtime.strictEquals(source.redMultiplier, 0.0) : Bool) ? (cast (1.0 / source.redMultiplier) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
+    (out.greenMultiplier = cast (((cast !_Runtime.strictEquals(source.greenMultiplier, 0.0) : Bool) ? (cast (1.0 / source.greenMultiplier) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
+    (out.blueMultiplier = cast (((cast !_Runtime.strictEquals(source.blueMultiplier, 0.0) : Bool) ? (cast (1.0 / source.blueMultiplier) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
+    (out.alphaMultiplier = cast (((cast !_Runtime.strictEquals(source.alphaMultiplier, 0.0) : Bool) ? (cast (1.0 / source.alphaMultiplier) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
     (out.redOffset = cast (-source.redOffset : Dynamic));
     (out.greenOffset = cast (-source.greenOffset : Dynamic));
     (out.blueOffset = cast (-source.blueOffset : Dynamic));

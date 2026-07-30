@@ -16,7 +16,7 @@ class TextShaperItemize {
     var runStart:Dynamic = cast _Runtime.UNDEFINED;
     var runScript:Dynamic = cast _Runtime.UNDEFINED;
     var runDirection:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0))) { return cast cast ([] : Array<Dynamic>); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     baseDirection = _Runtime.coalesce(_Runtime.optionalField(options, 'direction'), function():Dynamic return cast 'LeftToRight');
     items = cast ([] : Array<Dynamic>);
     runStart = 0.0;
@@ -24,25 +24,25 @@ class TextShaperItemize {
     runDirection = baseDirection;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(text, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(text, 'length') : Float)) : Bool)) {
         var codePoint:Dynamic = _Runtime.coalesce(_Runtime.codePointAt(text, i), function():Dynamic return cast 0.0);
-        var charLen:Dynamic = _Runtime.select(_Runtime.compare(codePoint, 65535.0, '>'), function():Dynamic return cast 2.0, function():Dynamic return cast 1.0);
+        var charLen:Dynamic = ((cast ((cast codePoint : Float) > (cast 65535.0 : Float)) : Bool) ? (cast 2.0 : Dynamic) : (cast 1.0 : Dynamic));
         var charScript:Dynamic = _Runtime.callValue(TextShaperItemize.getCodePointScript__textShaperItemize, cast ([codePoint] : Array<Dynamic>));
         var charBidi:Dynamic = _Runtime.callValue(TextShaperItemize.getCodePointBidiClass__textShaperItemize, cast ([codePoint] : Array<Dynamic>));
         var charDirection:Dynamic = cast _Runtime.UNDEFINED;
-        if (_Runtime.truthy(_Runtime.strictEquals(charBidi, 'rtl'))) {
+        if ((cast _Runtime.strictEquals(charBidi, 'rtl') : Bool)) {
           (charDirection = cast ('RightToLeft' : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(charBidi, 'ltr'))) {
+        } else { if ((cast _Runtime.strictEquals(charBidi, 'ltr') : Bool)) {
           (charDirection = cast ('LeftToRight' : Dynamic));
         } else {
           (charDirection = cast (runDirection : Dynamic));
         } }
-        var effectiveScript:Dynamic = _Runtime.select(_Runtime.strictEquals(charScript, 'Zyyy'), function():Dynamic return cast _Runtime.orValue(runScript, function():Dynamic return cast 'Latn'), function():Dynamic return cast charScript);
-        if (_Runtime.truthy(_Runtime.strictEquals(i, 0.0))) {
+        var effectiveScript:Dynamic = ((cast _Runtime.strictEquals(charScript, 'Zyyy') : Bool) ? (cast _Runtime.orValue(runScript, function():Dynamic return cast 'Latn') : Dynamic) : (cast charScript : Dynamic));
+        if ((cast _Runtime.strictEquals(i, 0.0) : Bool)) {
           (runScript = cast (effectiveScript : Dynamic));
           (runDirection = cast (charDirection : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(effectiveScript, runScript), function():Dynamic return cast !_Runtime.strictEquals(charDirection, runDirection)))) {
-          if (_Runtime.truthy(_Runtime.compare(i, runStart, '>'))) {
+        } else { if ((cast ((cast !_Runtime.strictEquals(effectiveScript, runScript) : Bool) || (cast !_Runtime.strictEquals(charDirection, runDirection) : Bool)) : Bool)) {
+          if ((cast ((cast i : Float) > (cast runStart : Float)) : Bool)) {
             _Runtime.callProperty(items, 'push', cast ([{ direction: runDirection, end: i, script: runScript, start: runStart }] : Array<Dynamic>));
           }
           (runStart = cast (i : Dynamic));
@@ -52,7 +52,7 @@ class TextShaperItemize {
         (i = cast ((i + charLen) : Dynamic));
       }
     }
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(text, 'length'), runStart, '>'))) {
+    if ((cast ((cast _Runtime.field(text, 'length') : Float) > (cast runStart : Float)) : Bool)) {
       _Runtime.callProperty(items, 'push', cast ([{ direction: runDirection, end: _Runtime.field(text, 'length'), script: runScript, start: runStart }] : Array<Dynamic>));
     }
     return cast items;
@@ -62,46 +62,46 @@ class TextShaperItemize {
   public static function shapeTextRuns(text:String, format:TextFormat, ?options:TextShaperOptions):Array<ShapedRun> {
     var items:Dynamic = cast _Runtime.UNDEFINED;
     var result:Array<ShapedRun> = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0))) { return cast cast ([] : Array<Dynamic>); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     items = _Runtime.callValue(itemizeText, cast ([text, format, options] : Array<Dynamic>));
     result = cast ([] : Array<Dynamic>);
     for (item in _Runtime.iterable(items)) {
       var sub:Dynamic = _Runtime.slice(text, _Runtime.field(item, 'start'), _Runtime.field(item, 'end'));
-      var runOptions:Dynamic = _Runtime.mergeObjects([options, { direction: _Runtime.select(_Runtime.strictEquals(_Runtime.field(item, 'direction'), 'TopToBottom'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'), function():Dynamic return cast _Runtime.field(item, 'direction')) }, { script: _Runtime.field(item, 'script') }]);
+      var runOptions:Dynamic = _Runtime.mergeObjects([options, { direction: ((cast _Runtime.strictEquals(_Runtime.field(item, 'direction'), 'TopToBottom') : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.field(item, 'direction') : Dynamic)) }, { script: _Runtime.field(item, 'script') }]);
       var run:Dynamic = _Runtime.callValue(shapeTextRun, cast ([sub, format, runOptions] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(run, null))) { _Runtime.callProperty(result, 'push', cast ([run] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(run, null) : Bool)) { _Runtime.callProperty(result, 'push', cast ([run] : Array<Dynamic>)); }
     }
     return cast result;
     return cast null;
   }
 
   public static function getCodePointBidiClass__textShaperItemize(codePoint:Float):String {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.andValue(_Runtime.compare(codePoint, 1536.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 1791.0, '<=')), function():Dynamic return cast _Runtime.andValue(_Runtime.compare(codePoint, 1872.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 1919.0, '<='))), function():Dynamic return cast _Runtime.andValue(_Runtime.compare(codePoint, 2208.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 2303.0, '<='))), function():Dynamic return cast _Runtime.andValue(_Runtime.compare(codePoint, 64336.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 65023.0, '<='))), function():Dynamic return cast _Runtime.andValue(_Runtime.compare(codePoint, 65136.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 65279.0, '<='))))) { return cast 'rtl'; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.andValue(_Runtime.compare(codePoint, 1424.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 1535.0, '<=')), function():Dynamic return cast _Runtime.andValue(_Runtime.compare(codePoint, 64285.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 64335.0, '<='))))) { return cast 'rtl'; }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(codePoint, 1920.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 2111.0, '<=')))) { return cast 'rtl'; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.andValue(_Runtime.compare(codePoint, 1792.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 1871.0, '<=')), function():Dynamic return cast _Runtime.andValue(_Runtime.compare(codePoint, 2112.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 2143.0, '<='))))) { return cast 'rtl'; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.andValue(_Runtime.compare(codePoint, 65.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 90.0, '<=')), function():Dynamic return cast _Runtime.andValue(_Runtime.compare(codePoint, 97.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 122.0, '<='))), function():Dynamic return cast _Runtime.andValue(_Runtime.compare(codePoint, 48.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 57.0, '<='))))) { return cast 'ltr'; }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(codePoint, 192.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 767.0, '<=')))) { return cast 'ltr'; }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(codePoint, 880.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 1279.0, '<=')))) { return cast 'ltr'; }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(codePoint, 19968.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 40959.0, '<=')))) { return cast 'ltr'; }
+    if ((cast ((cast ((cast ((cast ((cast _Runtime.andValue(((cast codePoint : Float) >= (cast 1536.0 : Float)), function():Dynamic return cast ((cast codePoint : Float) <= (cast 1791.0 : Float))) : Bool) || (cast _Runtime.andValue(((cast codePoint : Float) >= (cast 1872.0 : Float)), function():Dynamic return cast ((cast codePoint : Float) <= (cast 1919.0 : Float))) : Bool)) : Bool) || (cast _Runtime.andValue(((cast codePoint : Float) >= (cast 2208.0 : Float)), function():Dynamic return cast ((cast codePoint : Float) <= (cast 2303.0 : Float))) : Bool)) : Bool) || (cast _Runtime.andValue(((cast codePoint : Float) >= (cast 64336.0 : Float)), function():Dynamic return cast ((cast codePoint : Float) <= (cast 65023.0 : Float))) : Bool)) : Bool) || (cast _Runtime.andValue(((cast codePoint : Float) >= (cast 65136.0 : Float)), function():Dynamic return cast ((cast codePoint : Float) <= (cast 65279.0 : Float))) : Bool)) : Bool)) { return cast 'rtl'; }
+    if ((cast ((cast _Runtime.andValue(((cast codePoint : Float) >= (cast 1424.0 : Float)), function():Dynamic return cast ((cast codePoint : Float) <= (cast 1535.0 : Float))) : Bool) || (cast _Runtime.andValue(((cast codePoint : Float) >= (cast 64285.0 : Float)), function():Dynamic return cast ((cast codePoint : Float) <= (cast 64335.0 : Float))) : Bool)) : Bool)) { return cast 'rtl'; }
+    if ((cast ((cast ((cast codePoint : Float) >= (cast 1920.0 : Float)) : Bool) && (cast ((cast codePoint : Float) <= (cast 2111.0 : Float)) : Bool)) : Bool)) { return cast 'rtl'; }
+    if ((cast ((cast _Runtime.andValue(((cast codePoint : Float) >= (cast 1792.0 : Float)), function():Dynamic return cast ((cast codePoint : Float) <= (cast 1871.0 : Float))) : Bool) || (cast _Runtime.andValue(((cast codePoint : Float) >= (cast 2112.0 : Float)), function():Dynamic return cast ((cast codePoint : Float) <= (cast 2143.0 : Float))) : Bool)) : Bool)) { return cast 'rtl'; }
+    if ((cast ((cast ((cast _Runtime.andValue(((cast codePoint : Float) >= (cast 65.0 : Float)), function():Dynamic return cast ((cast codePoint : Float) <= (cast 90.0 : Float))) : Bool) || (cast _Runtime.andValue(((cast codePoint : Float) >= (cast 97.0 : Float)), function():Dynamic return cast ((cast codePoint : Float) <= (cast 122.0 : Float))) : Bool)) : Bool) || (cast _Runtime.andValue(((cast codePoint : Float) >= (cast 48.0 : Float)), function():Dynamic return cast ((cast codePoint : Float) <= (cast 57.0 : Float))) : Bool)) : Bool)) { return cast 'ltr'; }
+    if ((cast ((cast ((cast codePoint : Float) >= (cast 192.0 : Float)) : Bool) && (cast ((cast codePoint : Float) <= (cast 767.0 : Float)) : Bool)) : Bool)) { return cast 'ltr'; }
+    if ((cast ((cast ((cast codePoint : Float) >= (cast 880.0 : Float)) : Bool) && (cast ((cast codePoint : Float) <= (cast 1279.0 : Float)) : Bool)) : Bool)) { return cast 'ltr'; }
+    if ((cast ((cast ((cast codePoint : Float) >= (cast 19968.0 : Float)) : Bool) && (cast ((cast codePoint : Float) <= (cast 40959.0 : Float)) : Bool)) : Bool)) { return cast 'ltr'; }
     return cast 'neutral';
     return cast null;
   }
 
   public static function getCodePointScript__textShaperItemize(codePoint:Float):String {
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(codePoint, 65.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 122.0, '<=')))) { return cast 'Latn'; }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(codePoint, 192.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 591.0, '<=')))) { return cast 'Latn'; }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(codePoint, 880.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 1023.0, '<=')))) { return cast 'Grek'; }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(codePoint, 1024.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 1279.0, '<=')))) { return cast 'Cyrl'; }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(codePoint, 1424.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 1535.0, '<=')))) { return cast 'Hebr'; }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(codePoint, 1536.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 1791.0, '<=')))) { return cast 'Arab'; }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(codePoint, 1792.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 1871.0, '<=')))) { return cast 'Syrc'; }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(codePoint, 2304.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 2431.0, '<=')))) { return cast 'Deva'; }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(codePoint, 3584.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 3711.0, '<=')))) { return cast 'Thai'; }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(codePoint, 12352.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 12447.0, '<=')))) { return cast 'Hira'; }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(codePoint, 12448.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 12543.0, '<=')))) { return cast 'Kana'; }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(codePoint, 19968.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 40959.0, '<=')))) { return cast 'Hans'; }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(codePoint, 44032.0, '>='), function():Dynamic return cast _Runtime.compare(codePoint, 55215.0, '<=')))) { return cast 'Hang'; }
+    if ((cast ((cast ((cast codePoint : Float) >= (cast 65.0 : Float)) : Bool) && (cast ((cast codePoint : Float) <= (cast 122.0 : Float)) : Bool)) : Bool)) { return cast 'Latn'; }
+    if ((cast ((cast ((cast codePoint : Float) >= (cast 192.0 : Float)) : Bool) && (cast ((cast codePoint : Float) <= (cast 591.0 : Float)) : Bool)) : Bool)) { return cast 'Latn'; }
+    if ((cast ((cast ((cast codePoint : Float) >= (cast 880.0 : Float)) : Bool) && (cast ((cast codePoint : Float) <= (cast 1023.0 : Float)) : Bool)) : Bool)) { return cast 'Grek'; }
+    if ((cast ((cast ((cast codePoint : Float) >= (cast 1024.0 : Float)) : Bool) && (cast ((cast codePoint : Float) <= (cast 1279.0 : Float)) : Bool)) : Bool)) { return cast 'Cyrl'; }
+    if ((cast ((cast ((cast codePoint : Float) >= (cast 1424.0 : Float)) : Bool) && (cast ((cast codePoint : Float) <= (cast 1535.0 : Float)) : Bool)) : Bool)) { return cast 'Hebr'; }
+    if ((cast ((cast ((cast codePoint : Float) >= (cast 1536.0 : Float)) : Bool) && (cast ((cast codePoint : Float) <= (cast 1791.0 : Float)) : Bool)) : Bool)) { return cast 'Arab'; }
+    if ((cast ((cast ((cast codePoint : Float) >= (cast 1792.0 : Float)) : Bool) && (cast ((cast codePoint : Float) <= (cast 1871.0 : Float)) : Bool)) : Bool)) { return cast 'Syrc'; }
+    if ((cast ((cast ((cast codePoint : Float) >= (cast 2304.0 : Float)) : Bool) && (cast ((cast codePoint : Float) <= (cast 2431.0 : Float)) : Bool)) : Bool)) { return cast 'Deva'; }
+    if ((cast ((cast ((cast codePoint : Float) >= (cast 3584.0 : Float)) : Bool) && (cast ((cast codePoint : Float) <= (cast 3711.0 : Float)) : Bool)) : Bool)) { return cast 'Thai'; }
+    if ((cast ((cast ((cast codePoint : Float) >= (cast 12352.0 : Float)) : Bool) && (cast ((cast codePoint : Float) <= (cast 12447.0 : Float)) : Bool)) : Bool)) { return cast 'Hira'; }
+    if ((cast ((cast ((cast codePoint : Float) >= (cast 12448.0 : Float)) : Bool) && (cast ((cast codePoint : Float) <= (cast 12543.0 : Float)) : Bool)) : Bool)) { return cast 'Kana'; }
+    if ((cast ((cast ((cast codePoint : Float) >= (cast 19968.0 : Float)) : Bool) && (cast ((cast codePoint : Float) <= (cast 40959.0 : Float)) : Bool)) : Bool)) { return cast 'Hans'; }
+    if ((cast ((cast ((cast codePoint : Float) >= (cast 44032.0 : Float)) : Bool) && (cast ((cast codePoint : Float) <= (cast 55215.0 : Float)) : Bool)) : Bool)) { return cast 'Hang'; }
     return cast 'Zyyy';
     return cast null;
   }

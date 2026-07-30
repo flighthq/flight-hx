@@ -23,13 +23,13 @@ class Detect {
     var firstLine:Dynamic = cast _Runtime.UNDEFINED;
     var raw:Dynamic = cast _Runtime.UNDEFINED;
     var obj:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofValue(text), 'string'))) { return cast null; }
+    if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(text), 'string') : Bool)) { return cast null; }
     trimmed = _Runtime.callProperty(text, 'trimStart', cast ([] : Array<Dynamic>));
     firstLine = _Runtime.callOptionalProperty(_Runtime.getIndex(_Runtime.callProperty(trimmed, 'split', cast (['\n'] : Array<Dynamic>)), 0.0), 'trim', cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(firstLine, 'Particle Effect'))) { return cast LibgdxParticleFormatKind; }
-    if (_Runtime.truthy(_Runtime.orValue(StringTools.startsWith(trimmed, '<'), function():Dynamic return cast StringTools.startsWith(trimmed, '<?xml')))) {
-      if (_Runtime.truthy(_Runtime.includes(trimmed, '<particleEmitterConfig'))) { return cast StarlingPexFormatKind; }
-      if (_Runtime.truthy(_Runtime.includes(trimmed, '<plist'))) { return cast ParticleDesignerFormatKind; }
+    if ((cast _Runtime.strictEquals(firstLine, 'Particle Effect') : Bool)) { return cast LibgdxParticleFormatKind; }
+    if ((cast ((cast StringTools.startsWith(trimmed, '<') : Bool) || (cast StringTools.startsWith(trimmed, '<?xml') : Bool)) : Bool)) {
+      if ((cast _Runtime.includes(trimmed, '<particleEmitterConfig') : Bool)) { return cast StarlingPexFormatKind; }
+      if ((cast _Runtime.includes(trimmed, '<plist') : Bool)) { return cast ParticleDesignerFormatKind; }
       return cast null;
     }
     try {
@@ -37,15 +37,15 @@ class Detect {
     } catch (__error:Dynamic) {
       return cast null;
     }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(raw, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(raw), 'object')), function():Dynamic return cast _Runtime.isArray(raw)))) { return cast null; }
+    if ((cast ((cast ((cast _Runtime.strictEquals(raw, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool)) : Bool) || (cast _Runtime.isArray(raw) : Bool)) : Bool)) { return cast null; }
     obj = (cast raw : Dynamic);
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.callValue(Detect.hasMinMaxCurveMode__detect, cast ([_Runtime.field(obj, 'startLifetime')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(Detect.hasMinMaxCurveMode__detect, cast ([_Runtime.field(obj, 'startSpeed')] : Array<Dynamic>))), function():Dynamic return cast _Runtime.callValue(Detect.hasMinMaxCurveMode__detect, cast ([_Runtime.field(obj, 'startSize')] : Array<Dynamic>))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(obj, 'gravityModifier')), 'number')), function():Dynamic return cast _Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(obj, 'looping')), 'boolean'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(obj, 'startLifetime'), _Runtime.field(_Runtime, 'UNDEFINED')))))) {
+    if ((cast ((cast ((cast ((cast ((cast _Runtime.callValue(Detect.hasMinMaxCurveMode__detect, cast ([_Runtime.field(obj, 'startLifetime')] : Array<Dynamic>)) : Bool) || (cast _Runtime.callValue(Detect.hasMinMaxCurveMode__detect, cast ([_Runtime.field(obj, 'startSpeed')] : Array<Dynamic>)) : Bool)) : Bool) || (cast _Runtime.callValue(Detect.hasMinMaxCurveMode__detect, cast ([_Runtime.field(obj, 'startSize')] : Array<Dynamic>)) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(obj, 'gravityModifier')), 'number') : Bool)) : Bool) || (cast _Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(obj, 'looping')), 'boolean'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(obj, 'startLifetime'), _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool)) : Bool)) {
       return cast UnityParticleFormatKind;
     }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(obj, 'pos'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(obj, 'alpha'), _Runtime.field(_Runtime, 'UNDEFINED'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(obj, 'alpha')), 'object')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(obj, 'alpha'), null)), function():Dynamic return cast _Runtime.orValue(_Runtime.hasField(_Runtime.field(obj, 'alpha'), 'start'), function():Dynamic return cast _Runtime.hasField(_Runtime.field(obj, 'alpha'), 'end'))))) {
+    if ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(obj, 'pos'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(obj, 'alpha'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(obj, 'alpha')), 'object') : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(obj, 'alpha'), null) : Bool)) : Bool) && (cast _Runtime.orValue(_Runtime.hasField(_Runtime.field(obj, 'alpha'), 'start'), function():Dynamic return cast _Runtime.hasField(_Runtime.field(obj, 'alpha'), 'end')) : Bool)) : Bool)) {
       return cast PixiParticleFormatKind;
     }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(obj, 'continuous')), 'boolean'), function():Dynamic return cast _Runtime.callValue(Detect.isRangeObject__detect, cast ([_Runtime.field(obj, 'emission')] : Array<Dynamic>))), function():Dynamic return cast _Runtime.callValue(Detect.isRangeObject__detect, cast ([_Runtime.field(obj, 'life')] : Array<Dynamic>))))) {
+    if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(obj, 'continuous')), 'boolean') : Bool) || (cast _Runtime.callValue(Detect.isRangeObject__detect, cast ([_Runtime.field(obj, 'emission')] : Array<Dynamic>)) : Bool)) : Bool) || (cast _Runtime.callValue(Detect.isRangeObject__detect, cast ([_Runtime.field(obj, 'life')] : Array<Dynamic>)) : Bool)) : Bool)) {
       return cast SpineParticleFormatKind;
     }
     return cast null;
@@ -53,15 +53,15 @@ class Detect {
   }
 
   public static function hasMinMaxCurveMode__detect(val:Dynamic):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(val, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(val), 'object')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast val : { @:optional var mode:Dynamic; }), 'mode')), 'string'));
+    return cast ((cast ((cast !_Runtime.strictEquals(val, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(val), 'object') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast val : { @:optional var mode:Dynamic; }), 'mode')), 'string') : Bool));
     return cast null;
   }
 
   public static function isRangeObject__detect(val:Dynamic):Bool {
     var o:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(val, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(val), 'object')))) { return cast false; }
+    if ((cast ((cast _Runtime.strictEquals(val, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(val), 'object') : Bool)) : Bool)) { return cast false; }
     o = (cast val : { @:optional var low:Dynamic; @:optional var high:Dynamic; });
-    return cast _Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'low')), 'number'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'high')), 'number'));
+    return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'low')), 'number') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'high')), 'number') : Bool));
     return cast null;
   }
 }

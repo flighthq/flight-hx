@@ -45,7 +45,7 @@ class GlRenderEffectPipeline {
     sampleCount = _Runtime.field(__destructure0, 'sampleCount');
     format = _Runtime.field(__destructure0, 'format');
     depth = _Runtime.field(__destructure0, 'depth');
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(pipeline, 'sceneTarget'), null))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(pipeline, 'sceneTarget'), null) : Bool)) {
       _Runtime.setField(pipeline, 'sceneTarget', _Runtime.callValue(createGlRenderTarget, cast ([state, { width: w, height: h, sampleCount: sampleCount, format: format, depth: depth }] : Array<Dynamic>)));
     } else {
       _Runtime.callValue(resizeGlRenderTarget, cast ([state, _Runtime.field(pipeline, 'sceneTarget'), w, h] : Array<Dynamic>));
@@ -66,7 +66,7 @@ class GlRenderEffectPipeline {
       _Runtime.setField(pipeline, 'sceneTarget', null);
     }
     _Runtime.callValue(destroyGlRenderTargetPool, cast ([state, _Runtime.field(pipeline, 'pool')] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(_Runtime.field(pipeline, 'lutTexture'), 'texture'), null))) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(pipeline, 'lutTexture'), 'texture'), null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.deleteTexture(_Runtime.field(state, 'gl'), _Runtime.field(_Runtime.field(pipeline, 'lutTexture'), 'texture'));
       _Runtime.setField(_Runtime.field(pipeline, 'lutTexture'), 'texture', null);
     }
@@ -86,7 +86,7 @@ class GlRenderEffectPipeline {
     var ensureScratch:Dynamic = cast _Runtime.UNDEFINED;
     var flushAdjustments:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.field(pipeline, 'sceneTarget');
-    if (_Runtime.truthy(_Runtime.strictEquals(scene, null))) { return; }
+    if ((cast _Runtime.strictEquals(scene, null) : Bool)) { return; }
     _Runtime.callValue(endGlRenderPass, cast ([state] : Array<Dynamic>));
     format = _Runtime.coalesce(_Runtime.field(_Runtime.field(pipeline, 'options'), 'format'), function():Dynamic return cast 'rgba8');
     descriptor = { width: _Runtime.field(scene, 'width'), height: _Runtime.field(scene, 'height'), format: format, colorSpace: _Runtime.field(scene, 'colorSpace') };
@@ -95,22 +95,22 @@ class GlRenderEffectPipeline {
     scratchB = null;
     pending = cast ([] : Array<Dynamic>);
     ensureScratch = function() {
-      if (_Runtime.truthy(_Runtime.strictEquals(scratchA, null))) { (scratchA = cast (_Runtime.callValue(acquireGlRenderTarget, cast ([state, _Runtime.field(pipeline, 'pool'), descriptor] : Array<Dynamic>)) : Dynamic)); }
-      if (_Runtime.truthy(_Runtime.strictEquals(scratchB, null))) { (scratchB = cast (_Runtime.callValue(acquireGlRenderTarget, cast ([state, _Runtime.field(pipeline, 'pool'), descriptor] : Array<Dynamic>)) : Dynamic)); }
+      if ((cast _Runtime.strictEquals(scratchA, null) : Bool)) { (scratchA = cast (_Runtime.callValue(acquireGlRenderTarget, cast ([state, _Runtime.field(pipeline, 'pool'), descriptor] : Array<Dynamic>)) : Dynamic)); }
+      if ((cast _Runtime.strictEquals(scratchB, null) : Bool)) { (scratchB = cast (_Runtime.callValue(acquireGlRenderTarget, cast ([state, _Runtime.field(pipeline, 'pool'), descriptor] : Array<Dynamic>)) : Dynamic)); }
     };
     flushAdjustments = function() {
       var dest:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(pending, 'length'), 0.0))) { return; }
+      if ((cast _Runtime.strictEquals(_Runtime.field(pending, 'length'), 0.0) : Bool)) { return; }
       _Runtime.callValue(ensureScratch, cast ([] : Array<Dynamic>));
-      dest = _Runtime.select(_Runtime.strictEquals(source, scratchA), function():Dynamic return cast scratchB, function():Dynamic return cast scratchA);
+      dest = ((cast _Runtime.strictEquals(source, scratchA) : Bool) ? (cast scratchB : Dynamic) : (cast scratchA : Dynamic));
       _Runtime.callValue(clearGlRenderTarget, cast ([state, dest] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.callProperty(pending, 'some', cast ([isColorLutAdjustment] : Array<Dynamic>)))) {
+      if ((cast _Runtime.callProperty(pending, 'some', cast ([isColorLutAdjustment] : Array<Dynamic>)) : Bool)) {
         _Runtime.callValue(applyColorLutPassToGl, cast ([state, source, dest, _Runtime.callValue(bakeColorLutForRun, cast ([_Runtime.field(pipeline, 'lutCache'), pending] : Array<Dynamic>)), _Runtime.field(pipeline, 'lutTexture')] : Array<Dynamic>));
       } else {
         var matrices:Array<Array<Float>> = cast ([] : Array<Dynamic>);
         for (op in _Runtime.iterable(pending)) {
           var matrix:Dynamic = _Runtime.callValue(getAdjustmentColorMatrix, cast ([op] : Array<Dynamic>));
-          if (_Runtime.truthy(!_Runtime.strictEquals(matrix, null))) { _Runtime.callProperty(matrices, 'push', cast ([matrix] : Array<Dynamic>)); }
+          if ((cast !_Runtime.strictEquals(matrix, null) : Bool)) { _Runtime.callProperty(matrices, 'push', cast ([matrix] : Array<Dynamic>)); }
         }
         _Runtime.callValue(applyColorMatrixPassToGl, cast ([state, source, dest, _Runtime.callValue(fuseColorMatrices, cast ([matrices] : Array<Dynamic>))] : Array<Dynamic>));
       }
@@ -118,23 +118,23 @@ class GlRenderEffectPipeline {
       (pending = cast (cast ([] : Array<Dynamic>) : Dynamic));
     };
     for (operation in _Runtime.iterable(operations)) {
-      if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.callValue(getAdjustmentColorMatrix, cast ([operation] : Array<Dynamic>)), null), function():Dynamic return cast _Runtime.callValue(isColorLutAdjustment, cast ([operation] : Array<Dynamic>))))) {
+      if ((cast ((cast !_Runtime.strictEquals(_Runtime.callValue(getAdjustmentColorMatrix, cast ([operation] : Array<Dynamic>)), null) : Bool) || (cast _Runtime.callValue(isColorLutAdjustment, cast ([operation] : Array<Dynamic>)) : Bool)) : Bool)) {
         _Runtime.callProperty(pending, 'push', cast ([(cast operation : Adjustment)] : Array<Dynamic>));
         continue;
       }
       var runner:Dynamic = _Runtime.callValue(getGlRenderEffectRunner, cast ([state, _Runtime.field(operation, 'kind')] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(runner, null))) { continue; }
+      if ((cast _Runtime.strictEquals(runner, null) : Bool)) { continue; }
       _Runtime.callValue(flushAdjustments, cast ([] : Array<Dynamic>));
       _Runtime.callValue(ensureScratch, cast ([] : Array<Dynamic>));
-      var dest:Dynamic = _Runtime.select(_Runtime.strictEquals(source, scratchA), function():Dynamic return cast scratchB, function():Dynamic return cast scratchA);
+      var dest:Dynamic = ((cast _Runtime.strictEquals(source, scratchA) : Bool) ? (cast scratchB : Dynamic) : (cast scratchA : Dynamic));
       _Runtime.callValue(clearGlRenderTarget, cast ([state, dest] : Array<Dynamic>));
       _Runtime.callValue(runner, cast ([{ state: state, source: source, dest: dest, pool: _Runtime.field(pipeline, 'pool'), sceneDepthTexture: _Runtime.field(scene, 'depthTexture'), sceneVelocityTexture: _Runtime.field(pipeline, 'velocityTexture') }, operation] : Array<Dynamic>));
       (source = cast (dest : Dynamic));
     }
     _Runtime.callValue(flushAdjustments, cast ([] : Array<Dynamic>));
     _Runtime.callValue(GlRenderEffectPipeline.presentGlRenderEffectResult__glRenderEffectPipeline, cast ([state, source] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(scratchA, null))) { _Runtime.callValue(releaseGlRenderTarget, cast ([_Runtime.field(pipeline, 'pool'), scratchA] : Array<Dynamic>)); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(scratchB, null))) { _Runtime.callValue(releaseGlRenderTarget, cast ([_Runtime.field(pipeline, 'pool'), scratchB] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(scratchA, null) : Bool)) { _Runtime.callValue(releaseGlRenderTarget, cast ([_Runtime.field(pipeline, 'pool'), scratchA] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(scratchB, null) : Bool)) { _Runtime.callValue(releaseGlRenderTarget, cast ([_Runtime.field(pipeline, 'pool'), scratchB] : Array<Dynamic>)); }
   }
 
   public static function setGlRenderEffectVelocityTexture(pipeline:flighthq.types.GlRenderEffectPipeline, texture:Null<Dynamic>):Void {
@@ -143,7 +143,7 @@ class GlRenderEffectPipeline {
 
   public static function presentGlRenderEffectResult__glRenderEffectPipeline(state:GlRenderState, source:GlRenderTarget):Void {
     var program:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(source, 'colorSpace'), 'linear'))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(source, 'colorSpace'), 'linear') : Bool)) {
       _Runtime.callValue(drawGlLinearToSrgbPass, cast ([state, source, null] : Array<Dynamic>));
       return;
     }

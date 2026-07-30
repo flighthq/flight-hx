@@ -14,9 +14,9 @@ class Guards {
   }
 
   public static function createGuardedEntity<Type>(entity:Type):Type {
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(Guards._guardsEnabled__guards), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofGlobal('Proxy'), 'undefined')))) { return cast entity; }
+    if ((cast ((cast !(cast Guards._guardsEnabled__guards : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofGlobal('Proxy'), 'undefined') : Bool)) : Bool)) { return cast entity; }
     return cast _Runtime.createProxy(entity, { set: function(target:Dynamic, prop:Dynamic, value:Dynamic) {
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(prop, EntityRuntimeKey), function():Dynamic return cast Guards._guardsEnabled__guards))) {
+      if ((cast ((cast _Runtime.strictEquals(prop, EntityRuntimeKey) : Bool) && (cast Guards._guardsEnabled__guards : Bool)) : Bool)) {
         _Runtime.console('warn', ['[entity] Direct write to EntityRuntimeKey detected. Use ensureEntityRuntime or attachEntityBinding instead.', entity]);
       }
       _Runtime.setIndex((cast (cast target : Dynamic) : Dynamic), prop, value);
@@ -26,9 +26,9 @@ class Guards {
   }
 
   public static function createGuardedEntityRuntime(runtime:EntityRuntime):EntityRuntime {
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(Guards._guardsEnabled__guards), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofGlobal('Proxy'), 'undefined')))) { return cast runtime; }
+    if ((cast ((cast !(cast Guards._guardsEnabled__guards : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofGlobal('Proxy'), 'undefined') : Bool)) : Bool)) { return cast runtime; }
     return cast _Runtime.createProxy(runtime, { set: function(target:Dynamic, prop:Dynamic, value:Dynamic) {
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(prop, 'binding'), function():Dynamic return cast Guards._guardsEnabled__guards))) {
+      if ((cast ((cast _Runtime.strictEquals(prop, 'binding') : Bool) && (cast Guards._guardsEnabled__guards : Bool)) : Bool)) {
         _Runtime.console('warn', ['[entity] Direct write to EntityRuntime.binding detected. Use attachEntityBinding or detachEntityBinding instead.', runtime]);
       }
       _Runtime.setIndex((cast (cast target : Dynamic) : Dynamic), prop, value);
@@ -38,7 +38,7 @@ class Guards {
   }
 
   public static function enableEntityRuntimeGuards():Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('Proxy'), 'undefined'))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('Proxy'), 'undefined') : Bool)) { return; }
     (Guards._guardsEnabled__guards = cast (true : Dynamic));
   }
 

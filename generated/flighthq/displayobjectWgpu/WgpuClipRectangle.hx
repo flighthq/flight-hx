@@ -20,14 +20,14 @@ class WgpuClipRectangle {
     _Runtime.callValue(flushWgpuSpriteBatch, cast ([state] : Array<Dynamic>));
     stack = _Runtime.field(runtime, 'scissorStack');
     _Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>));
-    previous = _Runtime.select(_Runtime.compare(_Runtime.field(stack, 'length'), 0.0, '>'), function():Dynamic return cast _Runtime.getIndex(stack, (_Runtime.field(stack, 'length') - 1.0)), function():Dynamic return cast null);
+    previous = ((cast ((cast _Runtime.field(stack, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.getIndex(stack, (_Runtime.field(stack, 'length') - 1.0)) : Dynamic) : (cast null : Dynamic));
     _Runtime.setField(runtime, 'currentScissorRect', previous);
     pass = _Runtime.field(runtime, 'renderPass');
-    if (_Runtime.truthy(_Runtime.strictEquals(pass, null))) { return; }
-    if (_Runtime.truthy(_Runtime.strictEquals(previous, null))) {
+    if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
+    if ((cast _Runtime.strictEquals(previous, null) : Bool)) {
       var viewport:Dynamic = _Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));
       _Runtime.callProperty(pass, 'setScissorRect', cast ([0.0, 0.0, _Runtime.field(viewport, 'width'), _Runtime.field(viewport, 'height')] : Array<Dynamic>));
-    } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(previous, 'width'), 0.0, '<='), function():Dynamic return cast _Runtime.compare(_Runtime.field(previous, 'height'), 0.0, '<=')))) {
+    } else { if ((cast ((cast ((cast _Runtime.field(previous, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(previous, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
       _Runtime.callProperty(pass, 'setScissorRect', cast ([0.0, 0.0, 1.0, 1.0] : Array<Dynamic>));
     } else {
       _Runtime.callProperty(pass, 'setScissorRect', cast ([_Runtime.field(previous, 'x'), _Runtime.field(previous, 'y'), _Runtime.field(previous, 'width'), _Runtime.field(previous, 'height')] : Array<Dynamic>));
@@ -44,8 +44,8 @@ class WgpuClipRectangle {
     _Runtime.setField(runtime, 'currentScissorRect', next);
     _Runtime.callProperty(_Runtime.field(runtime, 'scissorStack'), 'push', cast ([next] : Array<Dynamic>));
     pass = _Runtime.field(runtime, 'renderPass');
-    if (_Runtime.truthy(_Runtime.strictEquals(pass, null))) { return; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(next, 'width'), 0.0, '<='), function():Dynamic return cast _Runtime.compare(_Runtime.field(next, 'height'), 0.0, '<=')))) {
+    if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
+    if ((cast ((cast ((cast _Runtime.field(next, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(next, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
       _Runtime.callProperty(pass, 'setScissorRect', cast ([0.0, 0.0, 1.0, 1.0] : Array<Dynamic>));
     } else {
       _Runtime.callProperty(pass, 'setScissorRect', cast ([_Runtime.field(next, 'x'), _Runtime.field(next, 'y'), _Runtime.field(next, 'width'), _Runtime.field(next, 'height')] : Array<Dynamic>));
@@ -90,7 +90,7 @@ class WgpuClipRectangle {
     var y:Dynamic = cast _Runtime.UNDEFINED;
     var right:Dynamic = cast _Runtime.UNDEFINED;
     var bottom:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(a, null))) { return cast { height: _Runtime.field(b, 'height'), width: _Runtime.field(b, 'width'), x: _Runtime.field(b, 'x'), y: _Runtime.field(b, 'y') }; }
+    if ((cast _Runtime.strictEquals(a, null) : Bool)) { return cast { height: _Runtime.field(b, 'height'), width: _Runtime.field(b, 'width'), x: _Runtime.field(b, 'x'), y: _Runtime.field(b, 'y') }; }
     x = HxMath.max(_Runtime.field(a, 'x'), _Runtime.field(b, 'x'));
     y = HxMath.max(_Runtime.field(a, 'y'), _Runtime.field(b, 'y'));
     right = HxMath.min((_Runtime.field(a, 'x') + _Runtime.field(a, 'width')), (_Runtime.field(b, 'x') + _Runtime.field(b, 'width')));

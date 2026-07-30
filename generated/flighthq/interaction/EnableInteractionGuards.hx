@@ -30,11 +30,11 @@ class EnableInteractionGuards {
 
   public static function hasEligibleNodeInSubtree__enableInteractionGuards(node:NodeAny):Bool {
     var children:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.callValue(isNodeHitTestEnabled, cast ([node] : Array<Dynamic>)))) { return cast true; }
+    if ((cast _Runtime.callValue(isNodeHitTestEnabled, cast ([node] : Array<Dynamic>)) : Bool)) { return cast true; }
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)), 'children');
-    if (_Runtime.truthy(!_Runtime.strictEquals(children, null))) {
+    if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
-        if (_Runtime.truthy(_Runtime.callValue(EnableInteractionGuards.hasEligibleNodeInSubtree__enableInteractionGuards, cast ([child] : Array<Dynamic>)))) { return cast true; }
+        if ((cast _Runtime.callValue(EnableInteractionGuards.hasEligibleNodeInSubtree__enableInteractionGuards, cast ([child] : Array<Dynamic>)) : Bool)) { return cast true; }
       }
     }
     return cast false;
@@ -43,11 +43,11 @@ class EnableInteractionGuards {
 
   public static function hasFocusableNodeInSubtree__enableInteractionGuards(node:NodeAny):Bool {
     var children:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.callValue(isNodeFocusable, cast ([node] : Array<Dynamic>)))) { return cast true; }
+    if ((cast _Runtime.callValue(isNodeFocusable, cast ([node] : Array<Dynamic>)) : Bool)) { return cast true; }
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)), 'children');
-    if (_Runtime.truthy(!_Runtime.strictEquals(children, null))) {
+    if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
-        if (_Runtime.truthy(_Runtime.callValue(EnableInteractionGuards.hasFocusableNodeInSubtree__enableInteractionGuards, cast ([child] : Array<Dynamic>)))) { return cast true; }
+        if ((cast _Runtime.callValue(EnableInteractionGuards.hasFocusableNodeInSubtree__enableInteractionGuards, cast ([child] : Array<Dynamic>)) : Bool)) { return cast true; }
       }
     }
     return cast false;
@@ -55,13 +55,13 @@ class EnableInteractionGuards {
   }
 
   public static function warnOnInertInteractionTarget__enableInteractionGuards(target:NodeAny, name:InteractionSignalName):Void {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(name, 'onKeyDown'), function():Dynamic return cast _Runtime.strictEquals(name, 'onKeyUp')))) { return; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(name, 'onFocusIn'), function():Dynamic return cast _Runtime.strictEquals(name, 'onFocusOut')))) {
-      if (_Runtime.truthy(_Runtime.callValue(EnableInteractionGuards.hasFocusableNodeInSubtree__enableInteractionGuards, cast ([target] : Array<Dynamic>)))) { return; }
+    if ((cast ((cast _Runtime.strictEquals(name, 'onKeyDown') : Bool) || (cast _Runtime.strictEquals(name, 'onKeyUp') : Bool)) : Bool)) { return; }
+    if ((cast ((cast _Runtime.strictEquals(name, 'onFocusIn') : Bool) || (cast _Runtime.strictEquals(name, 'onFocusOut') : Bool)) : Bool)) {
+      if ((cast _Runtime.callValue(EnableInteractionGuards.hasFocusableNodeInSubtree__enableInteractionGuards, cast ([target] : Array<Dynamic>)) : Bool)) { return; }
       _Runtime.callValue(logOnce, cast (['interaction:focus-listener-on-non-focusable', LogLevel.Warn, { message: 'connectInteractionSignal(\'' + Std.string(name) + '\'): target has no focusable node in its subtree — call setNodeFocusable(node, true) so it can receive focus events' }, 'interaction'] : Array<Dynamic>));
       return;
     }
-    if (_Runtime.truthy(_Runtime.callValue(EnableInteractionGuards.hasEligibleNodeInSubtree__enableInteractionGuards, cast ([target] : Array<Dynamic>)))) { return; }
+    if ((cast _Runtime.callValue(EnableInteractionGuards.hasEligibleNodeInSubtree__enableInteractionGuards, cast ([target] : Array<Dynamic>)) : Bool)) { return; }
     _Runtime.callValue(logOnce, cast (['interaction:listener-on-inert-node', LogLevel.Warn, { message: 'connectInteractionSignal(\'' + Std.string(name) + '\'): target has no hit-testable node in its subtree — call setNodeHitTestEnabled(node, true) so it can receive pointer events' }, 'interaction'] : Array<Dynamic>));
   }
 }

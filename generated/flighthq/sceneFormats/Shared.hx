@@ -30,7 +30,7 @@ class Shared {
   public static function convertPositionsZUpToYUp(values:{  }, stride:Dynamic = 3.0, offset:Dynamic = 0.0):Void {
     {
       var i:Dynamic = offset;
-      while (_Runtime.truthy(_Runtime.compare((i + 2.0), _Runtime.field(values, 'length'), '<'))) {
+      while ((cast ((cast (i + 2.0) : Float) < (cast _Runtime.field(values, 'length') : Float)) : Bool)) {
         var y:Dynamic = _Runtime.getIndex(values, (i + 1.0));
         _Runtime.setIndex(values, (i + 1.0), _Runtime.getIndex(values, (i + 2.0)));
         _Runtime.setIndex(values, (i + 2.0), _Runtime.normalizeZero(-y));
@@ -42,7 +42,7 @@ class Shared {
   public static function convertQuaternionsZUpToYUp(values:Array<Float>, stride:Dynamic = 4.0, offset:Dynamic = 0.0):Void {
     {
       var i:Dynamic = offset;
-      while (_Runtime.truthy(_Runtime.compare((i + 3.0), _Runtime.field(values, 'length'), '<'))) {
+      while ((cast ((cast (i + 3.0) : Float) < (cast _Runtime.field(values, 'length') : Float)) : Bool)) {
         var qy:Dynamic = _Runtime.getIndex(values, (i + 1.0));
         _Runtime.setIndex(values, (i + 1.0), _Runtime.getIndex(values, (i + 2.0)));
         _Runtime.setIndex(values, (i + 2.0), _Runtime.normalizeZero(-qy));
@@ -73,11 +73,11 @@ class Shared {
   public static function findSceneSkeletonJoints(root:SceneNode):Null<Array<SceneNode>> {
     var stack:Array<SceneNode> = cast _Runtime.UNDEFINED;
     stack = _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(getNodeChildren, cast ([root] : Array<Dynamic>)))]);
-    while (_Runtime.truthy(_Runtime.compare(_Runtime.field(stack, 'length'), 0.0, '>'))) {
+    while ((cast ((cast _Runtime.field(stack, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       var node:Dynamic = _Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)))) {
+      if ((cast _Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)) : Bool)) {
         var skin:Dynamic = _Runtime.field((cast (cast node : Dynamic) : Mesh), 'skin');
-        if (_Runtime.truthy(!_Runtime.looseEquals(skin, null))) { return cast _Runtime.field(_Runtime.field(skin, 'skeleton'), 'joints'); }
+        if ((cast !_Runtime.looseEquals(skin, null) : Bool)) { return cast _Runtime.field(_Runtime.field(skin, 'skeleton'), 'joints'); }
       }
       _Runtime.callProperty(stack, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(getNodeChildren, cast ([node] : Array<Dynamic>)))]));
     }
@@ -88,7 +88,7 @@ class Shared {
   public static function negateVec3Z(values:Array<Float>):Void {
     {
       var i:Dynamic = 2.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(values, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(values, 'length') : Float)) : Bool)) {
         _Runtime.setIndex(values, i, _Runtime.normalizeZero(-_Runtime.getIndex(values, i)));
         (i = cast ((i + 3.0) : Dynamic));
       }
@@ -100,7 +100,7 @@ class Shared {
     var sum:Dynamic = cast _Runtime.UNDEFINED;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, MAX_SKIN_INFLUENCES, '<'))) {
+      while ((cast ((cast i : Float) < (cast MAX_SKIN_INFLUENCES : Float)) : Bool)) {
         _Runtime.setIndex(outJoints, i, 0.0);
         _Runtime.setIndex(outWeights, i, 0.0);
         i++;
@@ -111,16 +111,16 @@ class Shared {
     sum = 0.0;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, kept, '<'))) {
+      while ((cast ((cast i : Float) < (cast kept : Float)) : Bool)) {
         (sum = cast ((sum + _Runtime.field(_Runtime.getIndex(influences, i), 'weight')) : Dynamic));
         i++;
       }
     }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, kept, '<'))) {
+      while ((cast ((cast i : Float) < (cast kept : Float)) : Bool)) {
         _Runtime.setIndex(outJoints, i, _Runtime.field(_Runtime.getIndex(influences, i), 'jointIndex'));
-        _Runtime.setIndex(outWeights, i, _Runtime.select(_Runtime.compare(sum, 0.0, '>'), function():Dynamic return cast (_Runtime.field(_Runtime.getIndex(influences, i), 'weight') / sum), function():Dynamic return cast 0.0));
+        _Runtime.setIndex(outWeights, i, ((cast ((cast sum : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.field(_Runtime.getIndex(influences, i), 'weight') / sum) : Dynamic) : (cast 0.0 : Dynamic)));
         i++;
       }
     }
@@ -129,7 +129,7 @@ class Shared {
   public static function reverseTriangleWinding(indices:Array<Float>):Void {
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare((i + 2.0), _Runtime.field(indices, 'length'), '<'))) {
+      while ((cast ((cast (i + 2.0) : Float) < (cast _Runtime.field(indices, 'length') : Float)) : Bool)) {
         var tmp:Dynamic = _Runtime.getIndex(indices, (i + 1.0));
         _Runtime.setIndex(indices, (i + 1.0), _Runtime.getIndex(indices, (i + 2.0)));
         _Runtime.setIndex(indices, (i + 2.0), tmp);

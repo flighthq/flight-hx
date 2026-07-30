@@ -33,17 +33,17 @@ class IridescencePbrGlMeshMaterialRenderer {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     iridescence = (cast material : Null<IridescencePbrMaterial>);
-    standard = _Runtime.select(!_Runtime.strictEquals(iridescence, null), function():Dynamic return cast _Runtime.field(iridescence, 'standard'), function():Dynamic return cast null);
-    key = _Runtime.callValue(buildGlPbrStandardDefineKey, cast ([standard, _Runtime.andValue(!_Runtime.strictEquals(iridescence, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(iridescence, 'alphaMode'), 'mask'))] : Array<Dynamic>));
+    standard = ((cast !_Runtime.strictEquals(iridescence, null) : Bool) ? (cast _Runtime.field(iridescence, 'standard') : Dynamic) : (cast null : Dynamic));
+    key = _Runtime.callValue(buildGlPbrStandardDefineKey, cast ([standard, ((cast !_Runtime.strictEquals(iridescence, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(iridescence, 'alphaMode'), 'mask') : Bool))] : Array<Dynamic>));
     _Runtime.setField(key, 'iridescenceEnabled', true);
     program = _Runtime.callValue(ensureGlPbrProgram, cast ([state, key] : Array<Dynamic>));
-    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, _Runtime.andValue(!_Runtime.strictEquals(iridescence, null), function():Dynamic return cast _Runtime.field(iridescence, 'doubleSided'))] : Array<Dynamic>));
+    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, ((cast !_Runtime.strictEquals(iridescence, null) : Bool) && (cast _Runtime.field(iridescence, 'doubleSided') : Bool))] : Array<Dynamic>));
     _Runtime.callValue(setGlMeshViewProjection, cast ([gl, _Runtime.field(program, 'locViewProjection'), camera] : Array<Dynamic>));
     _Runtime.callValue(setGlMeshCameraPosition, cast ([gl, _Runtime.field(program, 'locCameraPosition'), camera] : Array<Dynamic>));
     _Runtime.callValue(bindGlMeshLightBlock, cast ([state, program, lights] : Array<Dynamic>));
     _Runtime.callValue(bindGlPbrStandardBlock, cast ([state, program, standard] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), _Runtime.select(!_Runtime.strictEquals(iridescence, null), function():Dynamic return cast _Runtime.field(iridescence, 'alphaCutoff'), function():Dynamic return cast 0.5));
-    if (_Runtime.truthy(!_Runtime.strictEquals(iridescence, null))) {
+    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), ((cast !_Runtime.strictEquals(iridescence, null) : Bool) ? (cast _Runtime.field(iridescence, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic)));
+    if ((cast !_Runtime.strictEquals(iridescence, null) : Bool)) {
       var thickness:Dynamic = ((_Runtime.field(iridescence, 'iridescenceThicknessMin') + _Runtime.field(iridescence, 'iridescenceThicknessMax')) * 0.5);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locIridescence'), _Runtime.field(iridescence, 'iridescence'));
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locIridescenceIor'), _Runtime.field(iridescence, 'iridescenceIor'));
@@ -56,7 +56,7 @@ class IridescencePbrGlMeshMaterialRenderer {
   }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
-    if (_Runtime.truthy(_Runtime.strictEquals(program, null))) { return; }
+    if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
     _Runtime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
   } };
 

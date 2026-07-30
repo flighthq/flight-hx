@@ -39,11 +39,11 @@ class BillboardCamera {
     _Runtime.callValue(decomposeMatrix4, cast ([BillboardCamera._position__billboardCamera, BillboardCamera._rotationScratch__billboardCamera, BillboardCamera._scale__billboardCamera, world] : Array<Dynamic>));
     _Runtime.callValue(BillboardCamera.writeBillboardFacingMatrix__billboardCamera, cast ([BillboardCamera._facingWorld__billboardCamera, _Runtime.field(billboard, 'mode')] : Array<Dynamic>));
     parent = (cast _Runtime.callValue(getNodeParent, cast ([(cast billboard : SceneNode)] : Array<Dynamic>)) : Null<SceneNode>);
-    if (_Runtime.truthy(_Runtime.strictEquals(parent, null))) {
+    if ((cast _Runtime.strictEquals(parent, null) : Bool)) {
       _Runtime.callValue(copyMatrix4, cast ([BillboardCamera._localScratch__billboardCamera, BillboardCamera._facingWorld__billboardCamera] : Array<Dynamic>));
     } else {
       var parentWorld:Dynamic = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([parent] : Array<Dynamic>)) : Matrix4);
-      if (_Runtime.truthy(_Runtime.callValue(inverseMatrix4, cast ([BillboardCamera._inverseParentWorld__billboardCamera, parentWorld] : Array<Dynamic>)))) {
+      if ((cast _Runtime.callValue(inverseMatrix4, cast ([BillboardCamera._inverseParentWorld__billboardCamera, parentWorld] : Array<Dynamic>)) : Bool)) {
         _Runtime.callValue(multiplyMatrix4, cast ([BillboardCamera._localScratch__billboardCamera, BillboardCamera._inverseParentWorld__billboardCamera, BillboardCamera._facingWorld__billboardCamera] : Array<Dynamic>));
       } else {
         _Runtime.callValue(copyMatrix4, cast ([BillboardCamera._localScratch__billboardCamera, BillboardCamera._facingWorld__billboardCamera] : Array<Dynamic>));
@@ -54,14 +54,14 @@ class BillboardCamera {
 
   public static function orientBillboardSubtree__billboardCamera(node:SceneNode):Void {
     var children:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.callValue(isBillboard, cast ([node] : Array<Dynamic>)))) {
+    if ((cast _Runtime.callValue(isBillboard, cast ([node] : Array<Dynamic>)) : Bool)) {
       _Runtime.callValue(BillboardCamera.applyBillboardFacing__billboardCamera, cast ([node] : Array<Dynamic>));
     }
     children = _Runtime.field(_Runtime.callValue(getSceneNodeRuntime, cast ([node] : Array<Dynamic>)), 'children');
-    if (_Runtime.truthy(!_Runtime.strictEquals(children, null))) {
+    if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(children, 'length'), '<'))) {
+        while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
           _Runtime.callValue(BillboardCamera.orientBillboardSubtree__billboardCamera, cast ([(cast _Runtime.getIndex(children, i) : SceneNode)] : Array<Dynamic>));
           i++;
         }
@@ -125,7 +125,7 @@ class BillboardCamera {
     sx = BillboardCamera._scale__billboardCamera.x;
     sy = BillboardCamera._scale__billboardCamera.y;
     sz = BillboardCamera._scale__billboardCamera.z;
-    if (_Runtime.truthy(_Runtime.strictEquals(mode, 'screenAligned'))) {
+    if ((cast _Runtime.strictEquals(mode, 'screenAligned') : Bool)) {
       (rx = cast (BillboardCamera._cameraRightX__billboardCamera : Dynamic));
       (ry = cast (BillboardCamera._cameraRightY__billboardCamera : Dynamic));
       (rz = cast (BillboardCamera._cameraRightZ__billboardCamera : Dynamic));
@@ -135,15 +135,15 @@ class BillboardCamera {
       (nx = cast (BillboardCamera._cameraBackX__billboardCamera : Dynamic));
       (ny = cast (BillboardCamera._cameraBackY__billboardCamera : Dynamic));
       (nz = cast (BillboardCamera._cameraBackZ__billboardCamera : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.strictEquals(mode, 'axisY'))) {
+    } else { if ((cast _Runtime.strictEquals(mode, 'axisY') : Bool)) {
       var dx:Dynamic = (BillboardCamera._cameraEyeX__billboardCamera - px);
       var dz:Dynamic = (BillboardCamera._cameraEyeZ__billboardCamera - pz);
       var dl:Dynamic = _Runtime.hypot(dx, dz);
-      if (_Runtime.truthy(_Runtime.compare(dl, BillboardCamera.FACING_EPSILON__billboardCamera, '<'))) {
+      if ((cast ((cast dl : Float) < (cast BillboardCamera.FACING_EPSILON__billboardCamera : Float)) : Bool)) {
         (dx = cast (BillboardCamera._cameraBackX__billboardCamera : Dynamic));
         (dz = cast (BillboardCamera._cameraBackZ__billboardCamera : Dynamic));
         (dl = cast (_Runtime.hypot(dx, dz) : Dynamic));
-        if (_Runtime.truthy(_Runtime.compare(dl, BillboardCamera.FACING_EPSILON__billboardCamera, '<'))) {
+        if ((cast ((cast dl : Float) < (cast BillboardCamera.FACING_EPSILON__billboardCamera : Float)) : Bool)) {
           (dx = cast (0.0 : Dynamic));
           (dz = cast (1.0 : Dynamic));
           (dl = cast (1.0 : Dynamic));
@@ -163,7 +163,7 @@ class BillboardCamera {
       var dny:Dynamic = (BillboardCamera._cameraEyeY__billboardCamera - py);
       var dnz:Dynamic = (BillboardCamera._cameraEyeZ__billboardCamera - pz);
       var dnl:Dynamic = _Runtime.hypot(dnx, dny, dnz);
-      if (_Runtime.truthy(_Runtime.compare(dnl, BillboardCamera.FACING_EPSILON__billboardCamera, '<'))) {
+      if ((cast ((cast dnl : Float) < (cast BillboardCamera.FACING_EPSILON__billboardCamera : Float)) : Bool)) {
         (dnx = cast (BillboardCamera._cameraBackX__billboardCamera : Dynamic));
         (dny = cast (BillboardCamera._cameraBackY__billboardCamera : Dynamic));
         (dnz = cast (BillboardCamera._cameraBackZ__billboardCamera : Dynamic));
@@ -176,13 +176,13 @@ class BillboardCamera {
       (ry = cast (((BillboardCamera._cameraUpZ__billboardCamera * nx) - (BillboardCamera._cameraUpX__billboardCamera * nz)) : Dynamic));
       (rz = cast (((BillboardCamera._cameraUpX__billboardCamera * ny) - (BillboardCamera._cameraUpY__billboardCamera * nx)) : Dynamic));
       var rl:Dynamic = _Runtime.hypot(rx, ry, rz);
-      if (_Runtime.truthy(_Runtime.compare(rl, BillboardCamera.FACING_EPSILON__billboardCamera, '<'))) {
+      if ((cast ((cast rl : Float) < (cast BillboardCamera.FACING_EPSILON__billboardCamera : Float)) : Bool)) {
         var d:Dynamic = (((BillboardCamera._cameraRightX__billboardCamera * nx) + (BillboardCamera._cameraRightY__billboardCamera * ny)) + (BillboardCamera._cameraRightZ__billboardCamera * nz));
         (rx = cast ((BillboardCamera._cameraRightX__billboardCamera - (d * nx)) : Dynamic));
         (ry = cast ((BillboardCamera._cameraRightY__billboardCamera - (d * ny)) : Dynamic));
         (rz = cast ((BillboardCamera._cameraRightZ__billboardCamera - (d * nz)) : Dynamic));
         (rl = cast (_Runtime.hypot(rx, ry, rz) : Dynamic));
-        if (_Runtime.truthy(_Runtime.compare(rl, BillboardCamera.FACING_EPSILON__billboardCamera, '<'))) {
+        if ((cast ((cast rl : Float) < (cast BillboardCamera.FACING_EPSILON__billboardCamera : Float)) : Bool)) {
           (rx = cast (1.0 : Dynamic));
           (ry = cast (0.0 : Dynamic));
           (rz = cast (0.0 : Dynamic));

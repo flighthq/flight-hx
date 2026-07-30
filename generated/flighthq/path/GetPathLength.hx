@@ -14,7 +14,7 @@ class GetPathLength {
     total = 0.0;
     {
       var ci:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(ci, _Runtime.field(contours, 'length'), '<'))) {
+      while ((cast ((cast ci : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
         (total = cast ((total + _Runtime.callValue(GetPathLength.contourLength__getPathLength, cast ([_Runtime.getIndex(contours, ci)] : Array<Dynamic>))) : Dynamic));
         ci++;
       }
@@ -28,7 +28,7 @@ class GetPathLength {
     len = 0.0;
     {
       var i:Dynamic = 2.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(contour, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
         var dx:Dynamic = (_Runtime.getIndex(contour, i) - _Runtime.getIndex(contour, (i - 2.0)));
         var dy:Dynamic = (_Runtime.getIndex(contour, (i + 1.0)) - _Runtime.getIndex(contour, (i - 1.0)));
         (len = cast ((len + HxMath.sqrt(((dx * dx) + (dy * dy)))) : Dynamic));

@@ -35,7 +35,7 @@ class DomTextLabel {
   public static var _measureCtx__domTextLabel:Null<Dynamic> = _Runtime.explicitNull();
 
   public static function getMeasureCtx__domTextLabel():Null<Dynamic> {
-    if (_Runtime.truthy(_Runtime.strictEquals(DomTextLabel._measureCtx__domTextLabel, null))) {
+    if ((cast _Runtime.strictEquals(DomTextLabel._measureCtx__domTextLabel, null) : Bool)) {
       (DomTextLabel._measureCtx__domTextLabel = cast (flighthq._internal.backend.CanvasElementBackend.call(flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)), 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic));
     }
     return cast DomTextLabel._measureCtx__domTextLabel;
@@ -54,15 +54,15 @@ class DomTextLabel {
     var divWidth:Dynamic = cast _Runtime.UNDEFINED;
     var html:Dynamic = cast _Runtime.UNDEFINED;
     data = (cast _Runtime.field(renderProxy, 'rendererData') : Null<DomTextData__domTextLabel>);
-    if (_Runtime.truthy(_Runtime.strictEquals(data, null))) { return; }
+    if ((cast _Runtime.strictEquals(data, null) : Bool)) { return; }
     source = (cast _Runtime.field(renderProxy, 'source') : TextLabel);
     __destructure0 = _Runtime.field(source, 'data');
     text = _Runtime.field(__destructure0, 'text');
     textFormat = _Runtime.field(__destructure0, 'textFormat');
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) { return; }
     ctx = _Runtime.callValue(DomTextLabel.getMeasureCtx__domTextLabel, cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(ctx, null))) { return; }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'div'), null))) {
+    if ((cast _Runtime.strictEquals(ctx, null) : Bool)) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(data, 'div'), null) : Bool)) {
       _Runtime.setField(data, 'div', flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['div'] : Array<Dynamic>)));
       _Runtime.callValue(prepareDomElement, cast ([_Runtime.field(data, 'div')] : Array<Dynamic>));
       _Runtime.setField(_Runtime.field(_Runtime.field(data, 'div'), 'style'), 'overflow', 'hidden');
@@ -72,11 +72,11 @@ class DomTextLabel {
       return cast _Runtime.field(flighthq._internal.backend.Canvas2dBackend.call(ctx, 'measureText', cast ([t] : Array<Dynamic>)), 'width');
     };
     result = _Runtime.callValue(getTextLayoutResult, cast ([(cast _Runtime.callValue(getTextLabelRuntime, cast ([source] : Array<Dynamic>)) : TextLabelRuntime)] : Array<Dynamic>));
-    _Runtime.callValue(computeTextLayout, cast ([result, { text: text, formatRanges: cast ([_Runtime.callValue(createTextFormatRange, cast ([textFormat, 0.0, _Runtime.field(text, 'length')] : Array<Dynamic>))] : Array<Dynamic>), width: _Runtime.field(_Runtime.field(source, 'data'), 'width'), height: _Runtime.field(_Runtime.field(source, 'data'), 'height'), measure: measure, verticalAlign: _Runtime.select(_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'autoSize'), 'none'), function():Dynamic return cast _Runtime.field(_Runtime.field(source, 'data'), 'verticalAlign'), function():Dynamic return cast 'top') }] : Array<Dynamic>));
+    _Runtime.callValue(computeTextLayout, cast ([result, { text: text, formatRanges: cast ([_Runtime.callValue(createTextFormatRange, cast ([textFormat, 0.0, _Runtime.field(text, 'length')] : Array<Dynamic>))] : Array<Dynamic>), width: _Runtime.field(_Runtime.field(source, 'data'), 'width'), height: _Runtime.field(_Runtime.field(source, 'data'), 'height'), measure: measure, verticalAlign: ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'autoSize'), 'none') : Bool) ? (cast _Runtime.field(_Runtime.field(source, 'data'), 'verticalAlign') : Dynamic) : (cast 'top' : Dynamic)) }] : Array<Dynamic>));
     divWidth = 0.0;
     for (group in _Runtime.iterable(_Runtime.field(result, 'groups'))) {
       var right:Dynamic = (_Runtime.field(group, 'offsetX') + _Runtime.field(group, 'width'));
-      if (_Runtime.truthy(_Runtime.compare(right, divWidth, '>'))) { (divWidth = cast (right : Dynamic)); }
+      if ((cast ((cast right : Float) > (cast divWidth : Float)) : Bool)) { (divWidth = cast (right : Dynamic)); }
     }
     _Runtime.setField(_Runtime.field(_Runtime.field(data, 'div'), 'style'), 'width', '' + Std.string(divWidth) + 'px');
     _Runtime.setField(_Runtime.field(_Runtime.field(data, 'div'), 'style'), 'height', '' + Std.string(_Runtime.field(result, 'textHeight')) + 'px');

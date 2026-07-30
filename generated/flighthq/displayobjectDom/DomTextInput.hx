@@ -34,18 +34,18 @@ class DomTextInput {
     var selColor:Dynamic = cast _Runtime.UNDEFINED;
     var selAlpha:Dynamic = cast _Runtime.UNDEFINED;
     var html:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(DomTextInput._keyframesInjected__domTextInput))) {
+    if ((cast !(cast DomTextInput._keyframesInjected__domTextInput : Bool) : Bool)) {
       _Runtime.callValue(DomTextInput.injectCaretBlinkKeyframes__domTextInput, cast ([] : Array<Dynamic>));
       (DomTextInput._keyframesInjected__domTextInput = cast (true : Dynamic));
     }
     source = (cast _Runtime.field(renderProxy, 'source') : RichText);
     input = _Runtime.callValue(getTextInputState, cast ([source] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(input, null))) { return; }
+    if ((cast _Runtime.strictEquals(input, null) : Bool)) { return; }
     layout = _Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([source] : Array<Dynamic>)), 'textLayout');
     data = (cast _Runtime.field(renderProxy, 'rendererData') : Null<DomTextInputData__domTextInput>);
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.andValue(!_Runtime.truthy(_Runtime.field(input, 'focused')), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(input, 'alwaysShowSelection'))), function():Dynamic return cast _Runtime.strictEquals(layout, null)), function():Dynamic return cast _Runtime.looseEquals(_Runtime.optionalField(data, 'div'), null)))) { return; }
+    if ((cast ((cast ((cast _Runtime.andValue(!(cast _Runtime.field(input, 'focused') : Bool), function():Dynamic return cast !(cast _Runtime.field(input, 'alwaysShowSelection') : Bool)) : Bool) || (cast _Runtime.strictEquals(layout, null) : Bool)) : Bool) || (cast _Runtime.looseEquals(_Runtime.optionalField(data, 'div'), null) : Bool)) : Bool)) { return; }
     firstVisibleLine = (_Runtime.field(_Runtime.field(source, 'data'), 'scrollV') - 1.0);
-    scrollYOffset = _Runtime.select(_Runtime.compare(firstVisibleLine, 0.0, '>'), function():Dynamic return cast _Runtime.callValue(getRichTextScrollYOffset, cast ([_Runtime.field(layout, 'lineHeights'), firstVisibleLine] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+    scrollYOffset = ((cast ((cast firstVisibleLine : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callValue(getRichTextScrollYOffset, cast ([_Runtime.field(layout, 'lineHeights'), firstVisibleLine] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
     scrollXOffset = _Runtime.field(_Runtime.field(source, 'data'), 'scrollH');
     selColor = _Runtime.callValue(computeRgbHexString, cast ([_Runtime.field(input, 'selectionColor')] : Array<Dynamic>));
     selAlpha = _Runtime.field(input, 'selectionAlpha');
@@ -54,14 +54,14 @@ class DomTextInput {
     for (rect in _Runtime.iterable(DomTextInput.selectionRectangles__domTextInput)) {
       (html = cast ((html + '<div data-input-overlay style="position:absolute;left:' + Std.string((_Runtime.field(rect, 'x') - scrollXOffset)) + 'px;top:' + Std.string((_Runtime.field(rect, 'y') - scrollYOffset)) + 'px;width:' + Std.string(_Runtime.field(rect, 'width')) + 'px;height:' + Std.string(_Runtime.field(rect, 'height')) + 'px;background:' + Std.string(selColor) + ';opacity:' + Std.string(selAlpha) + ';pointer-events:none;"></div>') : Dynamic));
     }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.field(input, 'focused'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.callValue(getTextInputSelectionBeginIndex, cast ([source] : Array<Dynamic>)), _Runtime.callValue(getTextInputSelectionEndIndex, cast ([source] : Array<Dynamic>)))))) {
+    if ((cast ((cast _Runtime.field(input, 'focused') : Bool) && (cast _Runtime.strictEquals(_Runtime.callValue(getTextInputSelectionBeginIndex, cast ([source] : Array<Dynamic>)), _Runtime.callValue(getTextInputSelectionEndIndex, cast ([source] : Array<Dynamic>))) : Bool)) : Bool)) {
       _Runtime.callValue(getTextInputCaretRectangle, cast ([DomTextInput.caretRectangle__domTextInput, source, layout] : Array<Dynamic>));
       (html = cast ((html + '<div data-input-overlay style="position:absolute;left:' + Std.string((_Runtime.field(DomTextInput.caretRectangle__domTextInput, 'x') - scrollXOffset)) + 'px;top:' + Std.string((_Runtime.field(DomTextInput.caretRectangle__domTextInput, 'y') - scrollYOffset)) + 'px;width:' + Std.string(_Runtime.field(input, 'caretWidth')) + 'px;height:' + Std.string(_Runtime.field(DomTextInput.caretRectangle__domTextInput, 'height')) + 'px;background:' + Std.string(_Runtime.callValue(computeRgbHexString, cast ([_Runtime.field(input, 'caretColor')] : Array<Dynamic>))) + ';animation:flight-caret-blink 1s step-end infinite;pointer-events:none;"></div>') : Dynamic));
     }
     for (el in _Runtime.iterable(_Runtime.callProperty(_Runtime.field(data, 'div'), 'querySelectorAll', cast (['[data-input-overlay]'] : Array<Dynamic>)))) {
       _Runtime.callProperty(el, 'remove', cast ([] : Array<Dynamic>));
     }
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(html, 'length'), 0.0, '>'))) {
+    if ((cast ((cast _Runtime.field(html, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       _Runtime.callProperty(_Runtime.field(data, 'div'), 'insertAdjacentHTML', cast (['beforeend', html] : Array<Dynamic>));
     }
   }
@@ -73,7 +73,7 @@ class DomTextInput {
   public static function injectCaretBlinkKeyframes__domTextInput():Void {
     var id:Dynamic = cast _Runtime.UNDEFINED;
     var style:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) { return; }
     id = 'flight-caret-blink-style';
     if (_Runtime.truthy(flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'getElementById', cast ([id] : Array<Dynamic>)))) { return; }
     style = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['style'] : Array<Dynamic>));

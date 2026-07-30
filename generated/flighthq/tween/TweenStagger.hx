@@ -20,7 +20,7 @@ class TweenStagger {
     var baseDelay:Dynamic = cast _Runtime.UNDEFINED;
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var tweens:Array<Tween<Dynamic>> = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(targets, 'length'), 0.0))) { return cast cast ([] : Array<Dynamic>); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(targets, 'length'), 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     each = _Runtime.coalesce(_Runtime.optionalField(stagger, 'each'), function():Dynamic return cast 0.1);
     from = _Runtime.coalesce(_Runtime.optionalField(stagger, 'from'), function():Dynamic return cast 'start');
     staggerEase = _Runtime.optionalField(stagger, 'staggerEase');
@@ -29,7 +29,7 @@ class TweenStagger {
     tweens = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, count, '<'))) {
+      while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         var staggerOffset:Dynamic = _Runtime.callValue(TweenStagger.computeStaggerDelay__tweenStagger, cast ([i, count, each, from, staggerEase] : Array<Dynamic>));
         var tween:Dynamic = _Runtime.callValue(createTween, cast ([manager, _Runtime.getIndex(targets, i), duration, propertyMap, _Runtime.mergeObjects([options, { delay: (baseDelay + staggerOffset) }])] : Array<Dynamic>));
         _Runtime.callProperty(tweens, 'push', cast ([tween] : Array<Dynamic>));
@@ -43,20 +43,20 @@ class TweenStagger {
   public static function computeStaggerDelay__tweenStagger(index:Float, count:Float, each:Float, from:Dynamic, ?staggerEase:EasingFunction):Float {
     var normalizedPosition:Float = cast _Runtime.UNDEFINED;
     var eased:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(count, 1.0, '<='))) { return cast 0.0; }
-    if (_Runtime.truthy(_Runtime.strictEquals(from, 'start'))) {
+    if ((cast ((cast count : Float) <= (cast 1.0 : Float)) : Bool)) { return cast 0.0; }
+    if ((cast _Runtime.strictEquals(from, 'start') : Bool)) {
       (normalizedPosition = cast ((index / (count - 1.0)) : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.strictEquals(from, 'end'))) {
+    } else { if ((cast _Runtime.strictEquals(from, 'end') : Bool)) {
       (normalizedPosition = cast ((((count - 1.0) - index) / (count - 1.0)) : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.strictEquals(from, 'center'))) {
+    } else { if ((cast _Runtime.strictEquals(from, 'center') : Bool)) {
       var center:Dynamic = ((count - 1.0) / 2.0);
       (normalizedPosition = cast ((HxMath.abs((index - center)) / center) : Dynamic));
     } else {
       var origin:Dynamic = HxMath.max(0.0, HxMath.min(from, (count - 1.0)));
       var maxDistance:Dynamic = HxMath.max(origin, ((count - 1.0) - origin));
-      (normalizedPosition = cast (_Runtime.select(_Runtime.compare(maxDistance, 0.0, '>'), function():Dynamic return cast (HxMath.abs((index - origin)) / maxDistance), function():Dynamic return cast 0.0) : Dynamic));
+      (normalizedPosition = cast (((cast ((cast maxDistance : Float) > (cast 0.0 : Float)) : Bool) ? (cast (HxMath.abs((index - origin)) / maxDistance) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
     } } }
-    eased = _Runtime.select(!_Runtime.strictEquals(staggerEase, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callValue(staggerEase, cast ([normalizedPosition] : Array<Dynamic>)), function():Dynamic return cast normalizedPosition);
+    eased = ((cast !_Runtime.strictEquals(staggerEase, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(staggerEase, cast ([normalizedPosition] : Array<Dynamic>)) : Dynamic) : (cast normalizedPosition : Dynamic));
     return cast ((eased * each) * (count - 1.0));
     return cast null;
   }

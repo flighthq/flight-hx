@@ -25,10 +25,10 @@ class RegisterShapeHitTest {
   public static function hitTestShapeFill__registerShapeHitTest(source:NodeAny, x:Float, y:Float):Float {
     var regions:Dynamic = cast _Runtime.UNDEFINED;
     regions = _Runtime.callValue(getShapeFillRegions, cast ([_Runtime.field(_Runtime.field((cast source : Shape), 'data'), 'commands')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(regions, null))) { return cast -1.0; }
+    if ((cast _Runtime.strictEquals(regions, null) : Bool)) { return cast -1.0; }
     _Runtime.callValue(inverseMatrixTransformPointXY, cast ([RegisterShapeHitTest.shapeHitTestLocalPoint__registerShapeHitTest, _Runtime.callValue(getNodeWorldMatrix, cast ([(cast source : DisplayObject)] : Array<Dynamic>)), x, y] : Array<Dynamic>));
     for (region in _Runtime.iterable(regions)) {
-      if (_Runtime.truthy(_Runtime.callValue(containsPathPoint, cast ([_Runtime.field(region, 'path'), _Runtime.field(RegisterShapeHitTest.shapeHitTestLocalPoint__registerShapeHitTest, 'x'), _Runtime.field(RegisterShapeHitTest.shapeHitTestLocalPoint__registerShapeHitTest, 'y')] : Array<Dynamic>)))) { return cast 0.0; }
+      if ((cast _Runtime.callValue(containsPathPoint, cast ([_Runtime.field(region, 'path'), _Runtime.field(RegisterShapeHitTest.shapeHitTestLocalPoint__registerShapeHitTest, 'x'), _Runtime.field(RegisterShapeHitTest.shapeHitTestLocalPoint__registerShapeHitTest, 'y')] : Array<Dynamic>)) : Bool)) { return cast 0.0; }
     }
     return cast -1.0;
     return cast null;

@@ -16,7 +16,7 @@ class ColorAdjustmentResolution {
   public static final COLOR_ADJUSTMENT_CHANNEL_MIXING:Dynamic = 2.0;
 
   public static function isAffineColorMatrix(matrix:Array<Float>):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.getIndex(matrix, 1.0), 0.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 2.0), 0.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 3.0), 0.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 5.0), 0.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 7.0), 0.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 8.0), 0.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 10.0), 0.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 11.0), 0.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 13.0), 0.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 15.0), 0.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 16.0), 0.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 17.0), 0.0));
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 1.0), 0.0) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 2.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 3.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 5.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 7.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 8.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 10.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 11.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 13.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 15.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 16.0), 0.0) : Bool)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(matrix, 17.0), 0.0));
     return cast null;
   }
 
@@ -24,14 +24,14 @@ class ColorAdjustmentResolution {
     var matrices:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var inlineable:Dynamic = cast _Runtime.UNDEFINED;
     var fused:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(adjustments, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(adjustments, 'length'), 0.0)))) { return cast COLOR_ADJUSTMENT_NONE; }
+    if ((cast ((cast _Runtime.strictEquals(adjustments, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(adjustments, 'length'), 0.0) : Bool)) : Bool)) { return cast COLOR_ADJUSTMENT_NONE; }
     matrices = cast ([] : Array<Dynamic>);
     inlineable = true;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(adjustments, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(adjustments, 'length') : Float)) : Bool)) {
         var matrix:Dynamic = _Runtime.callValue(getAdjustmentColorMatrix, cast ([_Runtime.getIndex(adjustments, i)] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.strictEquals(matrix, null))) { (inlineable = cast (false : Dynamic)); } else { _Runtime.callProperty(matrices, 'push', cast ([matrix] : Array<Dynamic>)); }
+        if ((cast _Runtime.strictEquals(matrix, null) : Bool)) { (inlineable = cast (false : Dynamic)); } else { _Runtime.callProperty(matrices, 'push', cast ([matrix] : Array<Dynamic>)); }
         i++;
       }
     }
@@ -44,7 +44,7 @@ class ColorAdjustmentResolution {
     (out.greenOffset = cast (_Runtime.getIndex(fused, 9.0) : Dynamic));
     (out.blueOffset = cast (_Runtime.getIndex(fused, 14.0) : Dynamic));
     (out.alphaOffset = cast (_Runtime.getIndex(fused, 19.0) : Dynamic));
-    return cast _Runtime.select(_Runtime.andValue(inlineable, function():Dynamic return cast _Runtime.callValue(isAffineColorMatrix, cast ([fused] : Array<Dynamic>))), function():Dynamic return cast COLOR_ADJUSTMENT_AFFINE, function():Dynamic return cast COLOR_ADJUSTMENT_CHANNEL_MIXING);
+    return cast ((cast ((cast inlineable : Bool) && (cast _Runtime.callValue(isAffineColorMatrix, cast ([fused] : Array<Dynamic>)) : Bool)) : Bool) ? (cast COLOR_ADJUSTMENT_AFFINE : Dynamic) : (cast COLOR_ADJUSTMENT_CHANNEL_MIXING : Dynamic));
     return cast null;
   }
 }

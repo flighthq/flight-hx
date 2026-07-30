@@ -42,19 +42,19 @@ class DomScale9Shape {
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     data = (cast _Runtime.field(renderProxy, 'rendererData') : Null<DomScale9ShapeData__domScale9Shape>);
-    if (_Runtime.truthy(_Runtime.strictEquals(data, null))) { return; }
+    if ((cast _Runtime.strictEquals(data, null) : Bool)) { return; }
     source = (cast _Runtime.field(renderProxy, 'source') : Scale9Shape);
     __destructure0 = _Runtime.field(source, 'data');
     commands = _Runtime.field(__destructure0, 'commands');
     scale9Grid = _Runtime.field(__destructure0, 'scale9Grid');
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool)) { return; }
     bounds = _Runtime.callValue(getNodeLocalBoundsRectangle, cast ([source] : Array<Dynamic>));
     mapper = _Runtime.callValue(buildDomScale9Mapper, cast ([bounds, scale9Grid, _Runtime.field(source, 'scaleX'), _Runtime.field(source, 'scaleY')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(mapper, null))) {
+    if ((cast _Runtime.strictEquals(mapper, null) : Bool)) {
       _Runtime.callValue(drawDomShape, cast ([state, renderProxy] : Array<Dynamic>));
       return;
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'canvas'), null))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(data, 'canvas'), null) : Bool)) {
       _Runtime.setField(data, 'canvas', flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)));
       _Runtime.setField(data, 'context', flighthq._internal.backend.CanvasElementBackend.call(_Runtime.field(data, 'canvas'), 'getContext', cast (['2d'] : Array<Dynamic>)));
       _Runtime.callValue(prepareDomElement, cast ([_Runtime.field(data, 'canvas')] : Array<Dynamic>));
@@ -65,12 +65,12 @@ class DomScale9Shape {
     flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'height', h);
     ctx = _Runtime.field(data, 'context');
     _Runtime.callValue(mapCanvasScale9ShapeCommands, cast ([DomScale9Shape._remappedCommands__domScale9Shape, commands, mapper] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(bounds, 'x'), 0.0), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(bounds, 'y'), 0.0)))) {
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(bounds, 'x'), 0.0) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(bounds, 'y'), 0.0) : Bool)) : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'translate', cast ([-_Runtime.field(bounds, 'x'), -_Runtime.field(bounds, 'y')] : Array<Dynamic>));
     }
     _Runtime.callValue(renderCanvasShapeCommands, cast ([ctx, DomScale9Shape._remappedCommands__domScale9Shape] : Array<Dynamic>));
-    _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'opacity', _Runtime.select(_Runtime.compare(_Runtime.field(renderProxy, 'alpha'), 1.0, '<'), function():Dynamic return cast Std.string(_Runtime.field(renderProxy, 'alpha')), function():Dynamic return cast ''));
-    _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'imageRendering', _Runtime.select(_Runtime.field(state, 'allowSmoothing'), function():Dynamic return cast '', function():Dynamic return cast 'pixelated'));
+    _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'opacity', ((cast ((cast _Runtime.field(renderProxy, 'alpha') : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string(_Runtime.field(renderProxy, 'alpha')) : Dynamic) : (cast '' : Dynamic)));
+    _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'imageRendering', ((cast _Runtime.field(state, 'allowSmoothing') : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic)));
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([_Runtime.field(data, 'canvas'), _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
     _Runtime.callValue(DomScale9Shape.setStrippedDomTransform__domScale9Shape, cast ([_Runtime.field(data, 'canvas'), _Runtime.field(renderProxy, 'transform2D'), _Runtime.field(source, 'scaleX'), _Runtime.field(source, 'scaleY'), _Runtime.field(state, 'roundPixels')] : Array<Dynamic>));
     _Runtime.callValue(setDomRendererElement, cast ([state, _Runtime.field(data, 'canvas')] : Array<Dynamic>));
@@ -85,12 +85,12 @@ class DomScale9Shape {
     var d:Dynamic = cast _Runtime.UNDEFINED;
     var tx:Dynamic = cast _Runtime.UNDEFINED;
     var ty:Dynamic = cast _Runtime.UNDEFINED;
-    a = _Runtime.select(!_Runtime.strictEquals(scaleX, 0.0), function():Dynamic return cast (_Runtime.field(transform, 'a') / scaleX), function():Dynamic return cast _Runtime.field(transform, 'a'));
-    b = _Runtime.select(!_Runtime.strictEquals(scaleX, 0.0), function():Dynamic return cast (_Runtime.field(transform, 'b') / scaleX), function():Dynamic return cast _Runtime.field(transform, 'b'));
-    c = _Runtime.select(!_Runtime.strictEquals(scaleY, 0.0), function():Dynamic return cast (_Runtime.field(transform, 'c') / scaleY), function():Dynamic return cast _Runtime.field(transform, 'c'));
-    d = _Runtime.select(!_Runtime.strictEquals(scaleY, 0.0), function():Dynamic return cast (_Runtime.field(transform, 'd') / scaleY), function():Dynamic return cast _Runtime.field(transform, 'd'));
-    tx = _Runtime.select(roundPixels, function():Dynamic return cast HxMath.fround(_Runtime.field(transform, 'tx')), function():Dynamic return cast _Runtime.field(transform, 'tx'));
-    ty = _Runtime.select(roundPixels, function():Dynamic return cast HxMath.fround(_Runtime.field(transform, 'ty')), function():Dynamic return cast _Runtime.field(transform, 'ty'));
+    a = ((cast !_Runtime.strictEquals(scaleX, 0.0) : Bool) ? (cast (_Runtime.field(transform, 'a') / scaleX) : Dynamic) : (cast _Runtime.field(transform, 'a') : Dynamic));
+    b = ((cast !_Runtime.strictEquals(scaleX, 0.0) : Bool) ? (cast (_Runtime.field(transform, 'b') / scaleX) : Dynamic) : (cast _Runtime.field(transform, 'b') : Dynamic));
+    c = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (_Runtime.field(transform, 'c') / scaleY) : Dynamic) : (cast _Runtime.field(transform, 'c') : Dynamic));
+    d = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (_Runtime.field(transform, 'd') / scaleY) : Dynamic) : (cast _Runtime.field(transform, 'd') : Dynamic));
+    tx = ((cast roundPixels : Bool) ? (cast HxMath.fround(_Runtime.field(transform, 'tx')) : Dynamic) : (cast _Runtime.field(transform, 'tx') : Dynamic));
+    ty = ((cast roundPixels : Bool) ? (cast HxMath.fround(_Runtime.field(transform, 'ty')) : Dynamic) : (cast _Runtime.field(transform, 'ty') : Dynamic));
     _Runtime.setField(_Runtime.field(element, 'style'), 'transform', 'matrix(' + Std.string(a) + ',' + Std.string(b) + ',' + Std.string(c) + ',' + Std.string(d) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')');
   }
 }

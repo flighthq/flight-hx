@@ -41,7 +41,7 @@ class WgpuEffectPass {
     var textureBGLayout:Dynamic = cast _Runtime.UNDEFINED;
     var sampler:Dynamic = cast _Runtime.UNDEFINED;
     fs = ((cast WgpuEffectPass.effectPassStates__wgpuEffectPass : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(!_Runtime.strictEquals(fs, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast fs; }
+    if ((cast !_Runtime.strictEquals(fs, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast fs; }
     __destructure0 = state;
     device = _Runtime.field(__destructure0, 'device');
     format = _Runtime.field(__destructure0, 'format');
@@ -63,7 +63,7 @@ class WgpuEffectPass {
   public static function getOrCreateTextureBG__wgpuEffectPass(fs:WgpuEffectPassState__wgpuEffectPass, device:Dynamic, view:Dynamic):Dynamic {
     var bg:Dynamic = cast _Runtime.UNDEFINED;
     bg = ((cast _Runtime.field(fs, 'textureBGs') : flighthq._internal._WeakMap).get(view));
-    if (_Runtime.truthy(_Runtime.strictEquals(bg, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(bg, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (bg = cast (flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: _Runtime.field(fs, 'textureBGLayout'), entries: cast ([{ binding: 0.0, resource: view }, { binding: 1.0, resource: _Runtime.field(fs, 'sampler') }] : Array<Dynamic>) }] : Array<Dynamic>)) : Dynamic));
       ((cast _Runtime.field(fs, 'textureBGs') : flighthq._internal._WeakMap).set(view, bg));
     }
@@ -95,14 +95,14 @@ class WgpuEffectPass {
     var view:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'commandEncoder'), null))) { throw _Runtime.error('No active command encoder — call renderWgpuBackground first'); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'commandEncoder'), null) : Bool)) { throw _Runtime.error('No active command encoder — call renderWgpuBackground first'); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null) : Bool)) {
       _Runtime.callProperty(_Runtime.field(runtime, 'renderPass'), 'end', cast ([] : Array<Dynamic>));
       _Runtime.setField(runtime, 'renderPass', null);
     }
-    view = _Runtime.select(!_Runtime.strictEquals(dest, null), function():Dynamic return cast _Runtime.field(dest, 'view'), function():Dynamic return cast _Runtime.field(runtime, 'canvasTextureView'));
+    view = ((cast !_Runtime.strictEquals(dest, null) : Bool) ? (cast _Runtime.field(dest, 'view') : Dynamic) : (cast _Runtime.field(runtime, 'canvasTextureView') : Dynamic));
     pass = _Runtime.callProperty(_Runtime.field(runtime, 'commandEncoder'), 'beginRenderPass', cast ([{ colorAttachments: cast ([{ view: view, loadOp: loadOp, storeOp: 'store', clearValue: { r: 0.0, g: 0.0, b: 0.0, a: 0.0 } }] : Array<Dynamic>) }] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(dest, null))) {
+    if ((cast !_Runtime.strictEquals(dest, null) : Bool)) {
       _Runtime.callProperty(pass, 'setViewport', cast ([0.0, 0.0, _Runtime.field(dest, 'width'), _Runtime.field(dest, 'height'), 0.0, 1.0] : Array<Dynamic>));
     } else {
       var w:Dynamic = _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(runtime, 'renderTargetViewport'), 'width'), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'width'));
@@ -118,12 +118,12 @@ class WgpuEffectPass {
     var targetFormat:Dynamic = cast _Runtime.UNDEFINED;
     var variant:Dynamic = cast _Runtime.UNDEFINED;
     canvasFormat = _Runtime.field(_Runtime.callValue(WgpuEffectPass.getOrCreateEffectPassState__wgpuEffectPass, cast ([state] : Array<Dynamic>)), 'format');
-    targetFormat = _Runtime.select(!_Runtime.strictEquals(dest, null), function():Dynamic return cast _Runtime.field(dest, 'format'), function():Dynamic return cast canvasFormat);
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(pipeline, 'compileForFormat'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(pipeline, 'variants'), _Runtime.field(_Runtime, 'UNDEFINED'))), function():Dynamic return cast _Runtime.strictEquals(targetFormat, canvasFormat)))) {
+    targetFormat = ((cast !_Runtime.strictEquals(dest, null) : Bool) ? (cast _Runtime.field(dest, 'format') : Dynamic) : (cast canvasFormat : Dynamic));
+    if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(pipeline, 'compileForFormat'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(pipeline, 'variants'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) || (cast _Runtime.strictEquals(targetFormat, canvasFormat) : Bool)) : Bool)) {
       return cast _Runtime.field(pipeline, 'pipeline');
     }
     variant = ((cast _Runtime.field(pipeline, 'variants') : flighthq._internal._Map).get(targetFormat));
-    if (_Runtime.truthy(_Runtime.strictEquals(variant, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(variant, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (variant = cast (_Runtime.callProperty(pipeline, 'compileForFormat', cast ([targetFormat] : Array<Dynamic>)) : Dynamic));
       ((cast _Runtime.field(pipeline, 'variants') : flighthq._internal._Map).set(targetFormat, variant));
     }
@@ -172,8 +172,8 @@ class WgpuEffectPass {
   }
 
   public static function getBlendState__wgpuEffectPass(blend:WgpuEffectBlendMode):Dynamic {
-    if (_Runtime.truthy(_Runtime.strictEquals(blend, 'replace'))) { return cast WgpuEffectPass.REPLACE_BLEND__wgpuEffectPass; }
-    if (_Runtime.truthy(_Runtime.strictEquals(blend, 'erase'))) { return cast WgpuEffectPass.ERASE_BLEND__wgpuEffectPass; }
+    if ((cast _Runtime.strictEquals(blend, 'replace') : Bool)) { return cast WgpuEffectPass.REPLACE_BLEND__wgpuEffectPass; }
+    if ((cast _Runtime.strictEquals(blend, 'erase') : Bool)) { return cast WgpuEffectPass.ERASE_BLEND__wgpuEffectPass; }
     return cast WgpuEffectPass.PREMUL_BLEND__wgpuEffectPass;
     return cast null;
   }

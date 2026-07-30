@@ -27,20 +27,20 @@ class RenderQueue {
     stackLength = 1.0;
     _Runtime.setIndex(stack, 0.0, source);
     sceneOrder = 0.0;
-    while (_Runtime.truthy(_Runtime.compare(stackLength, 0.0, '>'))) {
+    while ((cast ((cast stackLength : Float) > (cast 0.0 : Float)) : Bool)) {
       var current:Dynamic = _Runtime.getIndex(stack, --stackLength);
       var proxy:Dynamic = ((cast renderProxyMap : flighthq._internal._WeakMap).get(current));
-      if (_Runtime.truthy(_Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED')))) { continue; }
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(proxy, 'visible')))) { continue; }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(proxy, 'renderer'), null))) {
+      if ((cast _Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
+      if ((cast !(cast _Runtime.field(proxy, 'visible') : Bool) : Bool)) { continue; }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(proxy, 'renderer'), null) : Bool)) {
         _Runtime.callValue(pushRenderQueueEntry, cast ([out, proxy, sceneOrder] : Array<Dynamic>));
       }
       sceneOrder++;
       var children:Dynamic = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([(cast current : NodeAny)] : Array<Dynamic>)), 'children');
-      if (_Runtime.truthy(!_Runtime.strictEquals(children, null))) {
+      if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
         {
           var i:Dynamic = (_Runtime.field(children, 'length') - 1.0);
-          while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>='))) {
+          while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
             _Runtime.setIndex(stack, stackLength++, _Runtime.getIndex(children, i));
             i--;
           }
@@ -68,7 +68,7 @@ class RenderQueue {
     var transparentBit:Dynamic = cast _Runtime.UNDEFINED;
     var depthBits:Dynamic = cast _Runtime.UNDEFINED;
     layerBits = (_Runtime.toInt32((_Runtime.toInt32(HxMath.max(0.0, HxMath.min(32767.0, (_Runtime.toInt32(layer) | 0)))) & 32767)) << 16);
-    transparentBit = _Runtime.select(isTransparent, function():Dynamic return cast (1 << 15), function():Dynamic return cast 0.0);
+    transparentBit = ((cast isTransparent : Bool) ? (cast (1 << 15) : Dynamic) : (cast 0.0 : Dynamic));
     depthBits = (_Runtime.toInt32(HxMath.max(0.0, HxMath.min(32767.0, HxMath.round((depth * 32767.0))))) & 32767);
     return cast (_Runtime.toInt32((_Runtime.toInt32(layerBits) | _Runtime.toInt32(transparentBit))) | _Runtime.toInt32(depthBits));
     return cast null;
@@ -77,7 +77,7 @@ class RenderQueue {
   public static function pushRenderQueueEntry(queue:flighthq.types.RenderQueue, proxy:RenderProxy, sortKey:RenderSortKey):Void {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     entry = { proxy: proxy, sortKey: sortKey };
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(queue, 'entryCount'), _Runtime.field(_Runtime.field(queue, 'entries'), 'length'), '<'))) {
+    if ((cast ((cast _Runtime.field(queue, 'entryCount') : Float) < (cast _Runtime.field(_Runtime.field(queue, 'entries'), 'length') : Float)) : Bool)) {
       _Runtime.setIndex(_Runtime.field(queue, 'entries'), _Runtime.field(queue, 'entryCount'), entry);
     } else {
       _Runtime.callProperty(_Runtime.field(queue, 'entries'), 'push', cast ([entry] : Array<Dynamic>));
@@ -91,7 +91,7 @@ class RenderQueue {
     _Runtime.callProperty(slice, 'sort', cast ([_Runtime.coalesce(compare, function():Dynamic return cast RenderQueue.compareRenderQueueEntriesByKey__renderQueue)] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(slice, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(slice, 'length') : Float)) : Bool)) {
         _Runtime.setIndex(_Runtime.field(queue, 'entries'), i, _Runtime.getIndex(slice, i));
         i++;
       }

@@ -34,7 +34,7 @@ import flighthq.types._internal._MovieClipValues.MovieClipKind;
 
 class MovieClip {
   public static function addMovieClipFrameScript(clip:flighthq.types.MovieClip, frame:Dynamic, script:FrameScript):Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null) : Bool)) { return; }
     _Runtime.callValue(addTimelineFrameScript, cast ([_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), frame, script] : Array<Dynamic>));
   }
 
@@ -59,7 +59,7 @@ class MovieClip {
   public static function disposeMovieClipSignals(clip:flighthq.types.MovieClip):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(clip, EntityRuntimeKey) : MovieClipRuntime);
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null))) { _Runtime.callValue(disposeTimelineSignals, cast ([_Runtime.field(_Runtime.field(clip, 'data'), 'timeline')] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null) : Bool)) { _Runtime.callValue(disposeTimelineSignals, cast ([_Runtime.field(_Runtime.field(clip, 'data'), 'timeline')] : Array<Dynamic>)); }
     _Runtime.setField(runtime, 'movieClipSignals', null);
   }
 
@@ -67,8 +67,8 @@ class MovieClip {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var signals:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(clip, EntityRuntimeKey) : MovieClipRuntime);
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'movieClipSignals'), null))) { return cast _Runtime.field(runtime, 'movieClipSignals'); }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null))) { _Runtime.setField(_Runtime.field(clip, 'data'), 'timeline', _Runtime.callValue(createTimeline, cast ([] : Array<Dynamic>))); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'movieClipSignals'), null) : Bool)) { return cast _Runtime.field(runtime, 'movieClipSignals'); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null) : Bool)) { _Runtime.setField(_Runtime.field(clip, 'data'), 'timeline', _Runtime.callValue(createTimeline, cast ([] : Array<Dynamic>))); }
     signals = _Runtime.callValue(enableTimelineSignals, cast ([_Runtime.field(_Runtime.field(clip, 'data'), 'timeline')] : Array<Dynamic>));
     _Runtime.setField(runtime, 'movieClipSignals', signals);
     return cast signals;
@@ -81,13 +81,13 @@ class MovieClip {
   }
 
   public static function getMovieClipCurrentLabel(clip:flighthq.types.MovieClip):Null<TimelineLabel> {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null))) { return cast null; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null) : Bool)) { return cast null; }
     return cast _Runtime.callValue(getTimelineCurrentLabel, cast ([_Runtime.field(_Runtime.field(clip, 'data'), 'timeline')] : Array<Dynamic>));
     return cast null;
   }
 
   public static function getMovieClipFrameScript(clip:flighthq.types.MovieClip, frame:Dynamic):Null<FrameScript> {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null))) { return cast null; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null) : Bool)) { return cast null; }
     return cast _Runtime.callValue(getTimelineFrameScript, cast ([_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), frame] : Array<Dynamic>));
     return cast null;
   }
@@ -110,12 +110,12 @@ class MovieClip {
   }
 
   public static function gotoAndPlayMovieClip(clip:flighthq.types.MovieClip, frame:Dynamic):Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null) : Bool)) { return; }
     _Runtime.callValue(gotoAndPlayTimeline, cast ([_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), frame] : Array<Dynamic>));
   }
 
   public static function gotoAndStopMovieClip(clip:flighthq.types.MovieClip, frame:Dynamic):Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null) : Bool)) { return; }
     _Runtime.callValue(gotoAndStopTimeline, cast ([_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), frame] : Array<Dynamic>));
   }
 
@@ -125,22 +125,22 @@ class MovieClip {
   }
 
   public static function nextFrameMovieClip(clip:flighthq.types.MovieClip):Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null) : Bool)) { return; }
     _Runtime.callValue(nextFrameTimeline, cast ([_Runtime.field(_Runtime.field(clip, 'data'), 'timeline')] : Array<Dynamic>));
   }
 
   public static function playMovieClip(clip:flighthq.types.MovieClip):Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null) : Bool)) { return; }
     _Runtime.callValue(playTimeline, cast ([_Runtime.field(_Runtime.field(clip, 'data'), 'timeline')] : Array<Dynamic>));
   }
 
   public static function prevFrameMovieClip(clip:flighthq.types.MovieClip):Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null) : Bool)) { return; }
     _Runtime.callValue(prevFrameTimeline, cast ([_Runtime.field(_Runtime.field(clip, 'data'), 'timeline')] : Array<Dynamic>));
   }
 
   public static function removeMovieClipFrameScript(clip:flighthq.types.MovieClip, frame:Dynamic):Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null) : Bool)) { return; }
     _Runtime.callValue(removeTimelineFrameScript, cast ([_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), frame] : Array<Dynamic>));
   }
 
@@ -154,12 +154,12 @@ class MovieClip {
   }
 
   public static function stopMovieClip(clip:flighthq.types.MovieClip):Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null) : Bool)) { return; }
     _Runtime.callValue(stopTimeline, cast ([_Runtime.field(_Runtime.field(clip, 'data'), 'timeline')] : Array<Dynamic>));
   }
 
   public static function updateMovieClip(clip:flighthq.types.MovieClip, deltaTime:Float):Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null))) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), null) : Bool)) { return; }
     _Runtime.callValue(updateTimeline, cast ([_Runtime.field(_Runtime.field(clip, 'data'), 'timeline'), deltaTime] : Array<Dynamic>));
   }
 }

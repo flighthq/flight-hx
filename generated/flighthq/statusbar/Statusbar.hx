@@ -24,20 +24,20 @@ class Statusbar {
     backend = _Runtime.callValue(getStatusBarBackend, cast ([] : Array<Dynamic>));
     {
       var i:Dynamic = (_Runtime.field(Statusbar._styleStack__statusbar, 'length') - 1.0);
-      while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>='))) {
+      while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
         var e:Dynamic = _Runtime.field(_Runtime.getIndex(Statusbar._styleStack__statusbar, i), 'entry');
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(style, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(e, 'style'), _Runtime.field(_Runtime, 'UNDEFINED'))))) { (style = cast (_Runtime.field(e, 'style') : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(visible, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(e, 'visible'), _Runtime.field(_Runtime, 'UNDEFINED'))))) { (visible = cast (_Runtime.field(e, 'visible') : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(color, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(e, 'color'), _Runtime.field(_Runtime, 'UNDEFINED'))))) { (color = cast (_Runtime.field(e, 'color') : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(overlaysContent, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(e, 'overlaysContent'), _Runtime.field(_Runtime, 'UNDEFINED'))))) { (overlaysContent = cast (_Runtime.field(e, 'overlaysContent') : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(animation, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(e, 'animation'), _Runtime.field(_Runtime, 'UNDEFINED'))))) { (animation = cast (_Runtime.field(e, 'animation') : Dynamic)); }
+        if ((cast ((cast _Runtime.strictEquals(style, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(e, 'style'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (style = cast (_Runtime.field(e, 'style') : Dynamic)); }
+        if ((cast ((cast _Runtime.strictEquals(visible, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(e, 'visible'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (visible = cast (_Runtime.field(e, 'visible') : Dynamic)); }
+        if ((cast ((cast _Runtime.strictEquals(color, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(e, 'color'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (color = cast (_Runtime.field(e, 'color') : Dynamic)); }
+        if ((cast ((cast _Runtime.strictEquals(overlaysContent, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(e, 'overlaysContent'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (overlaysContent = cast (_Runtime.field(e, 'overlaysContent') : Dynamic)); }
+        if ((cast ((cast _Runtime.strictEquals(animation, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(e, 'animation'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (animation = cast (_Runtime.field(e, 'animation') : Dynamic)); }
         i--;
       }
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(style, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(backend, 'setStyle', cast ([style] : Array<Dynamic>)); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(visible, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(backend, 'setVisible', cast ([visible, _Runtime.coalesce(animation, function():Dynamic return cast 'none')] : Array<Dynamic>)); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(color, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(backend, 'setBackgroundColor', cast ([color, false] : Array<Dynamic>)); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(overlaysContent, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(backend, 'setOverlaysContent', cast ([overlaysContent] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(style, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(backend, 'setStyle', cast ([style] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(visible, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(backend, 'setVisible', cast ([visible, _Runtime.coalesce(animation, function():Dynamic return cast 'none')] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(color, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(backend, 'setBackgroundColor', cast ([color, false] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(overlaysContent, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(backend, 'setOverlaysContent', cast ([overlaysContent] : Array<Dynamic>)); }
   }
 
   public static var _backend__statusbar:Null<StatusBarBackend> = _Runtime.explicitNull();
@@ -55,15 +55,15 @@ class Statusbar {
     var content:Dynamic = cast _Runtime.UNDEFINED;
     var hex:Dynamic = cast _Runtime.UNDEFINED;
     var rgb:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'))) { return cast 0.0; }
+    if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) { return cast 0.0; }
     meta = _Runtime.callOptionalProperty(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'head'), 'querySelector', cast (['meta[name="theme-color"]'] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(meta, null), function():Dynamic return cast _Runtime.strictEquals(meta, _Runtime.field(_Runtime, 'UNDEFINED'))))) { return cast 0.0; }
+    if ((cast ((cast _Runtime.strictEquals(meta, null) : Bool) || (cast _Runtime.strictEquals(meta, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return cast 0.0; }
     content = _Runtime.callProperty(meta, 'getAttribute', cast (['content'] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(content, null), function():Dynamic return cast !_Runtime.truthy(StringTools.startsWith(content, '#'))))) { return cast 0.0; }
+    if ((cast ((cast _Runtime.strictEquals(content, null) : Bool) || (cast !(cast StringTools.startsWith(content, '#') : Bool) : Bool)) : Bool)) { return cast 0.0; }
     hex = _Runtime.slice(content, 1.0, null);
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(hex, 'length'), 6.0))) { return cast 0.0; }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(hex, 'length'), 6.0) : Bool)) { return cast 0.0; }
     rgb = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([hex, 16.0] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([rgb] : Array<Dynamic>)))) { return cast 0.0; }
+    if ((cast _Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([rgb] : Array<Dynamic>)) : Bool)) { return cast 0.0; }
     return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(rgb) << 8)) | 255)), 0);
     return cast null;
   }
@@ -102,11 +102,11 @@ class Statusbar {
     }, setBackgroundColor: function(color:Float, ?_animated:Bool) {
       var head:Dynamic = cast _Runtime.UNDEFINED;
       var meta:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'))) { return; }
+      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) { return; }
       head = flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'head');
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(head, null), function():Dynamic return cast _Runtime.strictEquals(head, _Runtime.field(_Runtime, 'UNDEFINED'))))) { return; }
+      if ((cast ((cast _Runtime.strictEquals(head, null) : Bool) || (cast _Runtime.strictEquals(head, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return; }
       meta = _Runtime.callProperty(head, 'querySelector', cast (['meta[name="theme-color"]'] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(meta, null))) {
+      if ((cast _Runtime.strictEquals(meta, null) : Bool)) {
         (meta = cast (flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['meta'] : Array<Dynamic>)) : Dynamic));
         _Runtime.callProperty(meta, 'setAttribute', cast (['name', 'theme-color'] : Array<Dynamic>));
         _Runtime.callProperty(head, 'appendChild', cast ([meta] : Array<Dynamic>));
@@ -129,7 +129,7 @@ class Statusbar {
   public static function detachStatusBar(bar:StatusBar):Void {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
     unsubscribe = ((cast Statusbar._subscriptions__statusbar : flighthq._internal._WeakMap).get(bar));
-    if (_Runtime.truthy(!_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callValue(unsubscribe, cast ([] : Array<Dynamic>));
       ((cast Statusbar._subscriptions__statusbar : flighthq._internal._WeakMap).delete_(bar));
     }
@@ -140,7 +140,7 @@ class Statusbar {
   }
 
   public static function getStatusBarBackend():StatusBarBackend {
-    if (_Runtime.truthy(_Runtime.strictEquals(Statusbar._backend__statusbar, null))) { (Statusbar._backend__statusbar = cast (_Runtime.callValue(createWebStatusBarBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Statusbar._backend__statusbar, null) : Bool)) { (Statusbar._backend__statusbar = cast (_Runtime.callValue(createWebStatusBarBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Statusbar._backend__statusbar;
     return cast null;
   }
@@ -166,9 +166,9 @@ class Statusbar {
 
   public static function popStatusBarStyleEntry(handle:StatusBarStyleEntryHandle):Void {
     var idx:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(handle, Statusbar.INVALID_HANDLE__statusbar))) { return; }
+    if ((cast _Runtime.strictEquals(handle, Statusbar.INVALID_HANDLE__statusbar) : Bool)) { return; }
     idx = _Runtime.findIndex(Statusbar._styleStack__statusbar, function(e:Dynamic) return _Runtime.strictEquals(_Runtime.field(e, 'handle'), handle));
-    if (_Runtime.truthy(_Runtime.strictEquals(idx, -1.0))) { return; }
+    if ((cast _Runtime.strictEquals(idx, -1.0) : Bool)) { return; }
     _Runtime.splice(Statusbar._styleStack__statusbar, Std.int(idx), Std.int(1.0), []);
     _Runtime.callValue(Statusbar._applyTopStyleEntry__statusbar, cast ([] : Array<Dynamic>));
   }

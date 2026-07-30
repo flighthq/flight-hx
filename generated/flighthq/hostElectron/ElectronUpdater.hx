@@ -66,7 +66,7 @@ class ElectronUpdater {
         var message:Dynamic = cast _Runtime.UNDEFINED;
         var error:UpdaterError = cast _Runtime.UNDEFINED;
         raw = (cast _Runtime.getIndex(args, 0.0) : Null<Dynamic>);
-        message = _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(raw), 'object'), function():Dynamic return cast _Runtime.coalesce(_Runtime.optionalField(raw, 'message'), function():Dynamic return cast ''), function():Dynamic return cast Std.string(_Runtime.coalesce(raw, function():Dynamic return cast '')));
+        message = ((cast _Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool) ? (cast _Runtime.coalesce(_Runtime.optionalField(raw, 'message'), function():Dynamic return cast '') : Dynamic) : (cast Std.string(_Runtime.coalesce(raw, function():Dynamic return cast '')) : Dynamic));
         error = { kind: 'Network', message: message };
         _Runtime.callValue(listener, cast ([error] : Array<Dynamic>));
       };

@@ -74,23 +74,23 @@ class SceneRender {
     _Runtime.fill(SceneRender.scratchLightData__sceneRender, 0.0, 0, null, 1);
     directionalCount = 0.0;
     directional = _Runtime.field(lights, 'directional');
-    if (_Runtime.truthy(!_Runtime.strictEquals(directional, null))) {
+    if ((cast !_Runtime.strictEquals(directional, null) : Bool)) {
       _Runtime.callValue(SceneRender.packDirectionalLight__sceneRender, cast ([SceneRender.scratchLightData__sceneRender, directional] : Array<Dynamic>));
       (directionalCount = cast (1.0 : Dynamic));
     }
     ambientCount = 0.0;
     ambient = _Runtime.field(lights, 'ambient');
-    if (_Runtime.truthy(!_Runtime.strictEquals(ambient, null))) {
+    if ((cast !_Runtime.strictEquals(ambient, null) : Bool)) {
       _Runtime.callValue(SceneRender.packAmbientLight__sceneRender, cast ([SceneRender.scratchLightData__sceneRender, ambient] : Array<Dynamic>));
       (ambientCount = cast (1.0 : Dynamic));
     }
     pointCount = 0.0;
     point = _Runtime.field(lights, 'point');
-    if (_Runtime.truthy(!_Runtime.strictEquals(point, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(point, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (pointCount = cast (HxMath.min(_Runtime.field(point, 'length'), MAX_FORWARD_LIGHTS) : Dynamic));
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, pointCount, '<'))) {
+        while ((cast ((cast i : Float) < (cast pointCount : Float)) : Bool)) {
           _Runtime.callValue(SceneRender.packPointLight__sceneRender, cast ([SceneRender.scratchLightData__sceneRender, (SCENE_LIGHT_POINT_OFFSET + (i * SCENE_LIGHT_POINT_STRIDE)), _Runtime.getIndex(point, i)] : Array<Dynamic>));
           i++;
         }
@@ -98,11 +98,11 @@ class SceneRender {
     }
     spotCount = 0.0;
     spot = _Runtime.field(lights, 'spot');
-    if (_Runtime.truthy(!_Runtime.strictEquals(spot, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(spot, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (spotCount = cast (HxMath.min(_Runtime.field(spot, 'length'), MAX_FORWARD_LIGHTS) : Dynamic));
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, spotCount, '<'))) {
+        while ((cast ((cast i : Float) < (cast spotCount : Float)) : Bool)) {
           _Runtime.callValue(SceneRender.packSpotLight__sceneRender, cast ([SceneRender.scratchLightData__sceneRender, (SCENE_LIGHT_SPOT_OFFSET + (i * SCENE_LIGHT_SPOT_STRIDE)), _Runtime.getIndex(spot, i)] : Array<Dynamic>));
           i++;
         }
@@ -110,17 +110,17 @@ class SceneRender {
     }
     hemisphereCount = 0.0;
     hemisphere = _Runtime.field(lights, 'hemisphere');
-    if (_Runtime.truthy(!_Runtime.strictEquals(hemisphere, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(hemisphere, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (hemisphereCount = cast (HxMath.min(_Runtime.field(hemisphere, 'length'), MAX_FORWARD_LIGHTS) : Dynamic));
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, hemisphereCount, '<'))) {
+        while ((cast ((cast i : Float) < (cast hemisphereCount : Float)) : Bool)) {
           _Runtime.callValue(SceneRender.packHemisphereLight__sceneRender, cast ([SceneRender.scratchLightData__sceneRender, (SCENE_LIGHT_HEMISPHERE_OFFSET + (i * SCENE_LIGHT_HEMISPHERE_STRIDE)), _Runtime.getIndex(hemisphere, i)] : Array<Dynamic>));
           i++;
         }
       }
     }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(out, 'directionalCount'), directionalCount), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(out, 'ambientCount'), ambientCount)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(out, 'pointCount'), pointCount)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(out, 'spotCount'), spotCount)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(out, 'hemisphereCount'), hemisphereCount)), function():Dynamic return cast _Runtime.callValue(SceneRender.isFloat32ArrayEqual__sceneRender, cast ([_Runtime.field(out, 'data'), SceneRender.scratchLightData__sceneRender] : Array<Dynamic>))))) {
+    if ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(out, 'directionalCount'), directionalCount) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(out, 'ambientCount'), ambientCount) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(out, 'pointCount'), pointCount) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(out, 'spotCount'), spotCount) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(out, 'hemisphereCount'), hemisphereCount) : Bool)) : Bool) && (cast _Runtime.callValue(SceneRender.isFloat32ArrayEqual__sceneRender, cast ([_Runtime.field(out, 'data'), SceneRender.scratchLightData__sceneRender] : Array<Dynamic>)) : Bool)) : Bool)) {
       return;
     }
     _Runtime.callProperty(_Runtime.field(out, 'data'), 'set', cast ([SceneRender.scratchLightData__sceneRender] : Array<Dynamic>));
@@ -145,9 +145,9 @@ class SceneRender {
     _Runtime.setField(list, 'meshCount', _Runtime.field(_Runtime.field(prepared, 'meshes'), 'length'));
     {
       var m:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(m, _Runtime.field(_Runtime.field(prepared, 'meshes'), 'length'), '<'))) {
+      while ((cast ((cast m : Float) < (cast _Runtime.field(_Runtime.field(prepared, 'meshes'), 'length') : Float)) : Bool)) {
         var skin:Dynamic = _Runtime.field(_Runtime.getIndex(_Runtime.field(prepared, 'meshes'), m), 'skin');
-        if (_Runtime.truthy(!_Runtime.looseEquals(skin, null))) { _Runtime.callValue(computeSkeleton3DJointMatrices, cast ([_Runtime.field(skin, 'skeleton')] : Array<Dynamic>)); }
+        if ((cast !_Runtime.looseEquals(skin, null) : Bool)) { _Runtime.callValue(computeSkeleton3DJointMatrices, cast ([_Runtime.field(skin, 'skeleton')] : Array<Dynamic>)); }
         m++;
       }
     }
@@ -158,18 +158,18 @@ class SceneRender {
   public static function collectVisibleMeshes__sceneRender(node:NodeAny, frustum:Frustum, worldBounds:Aabb, out:Array<Mesh>):Void {
     var mesh:Dynamic = cast _Runtime.UNDEFINED;
     var children:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(node, 'enabled')), function():Dynamic return cast !_Runtime.truthy(_Runtime.field((cast (cast node : Dynamic) : HasAppearance), 'visible'))))) {
+    if ((cast ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool) || (cast !(cast _Runtime.field((cast (cast node : Dynamic) : HasAppearance), 'visible') : Bool) : Bool)) : Bool)) {
       return;
     }
     mesh = (cast (cast node : Dynamic) : Mesh);
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.looseEquals(_Runtime.field(mesh, 'geometry'), null), function():Dynamic return cast _Runtime.callValue(SceneRender.isMeshVisible__sceneRender, cast ([mesh, frustum, worldBounds] : Array<Dynamic>))))) {
+    if ((cast ((cast !_Runtime.looseEquals(_Runtime.field(mesh, 'geometry'), null) : Bool) && (cast _Runtime.callValue(SceneRender.isMeshVisible__sceneRender, cast ([mesh, frustum, worldBounds] : Array<Dynamic>)) : Bool)) : Bool)) {
       _Runtime.callProperty(out, 'push', cast ([mesh] : Array<Dynamic>));
     }
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)), 'children');
-    if (_Runtime.truthy(!_Runtime.strictEquals(children, null))) {
+    if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(children, 'length'), '<'))) {
+        while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
           _Runtime.callValue(SceneRender.collectVisibleMeshes__sceneRender, cast ([_Runtime.getIndex(children, i), frustum, worldBounds, out] : Array<Dynamic>));
           i++;
         }
@@ -180,7 +180,7 @@ class SceneRender {
   public static function ensurePreparedScene__sceneRender(state:RenderState):PreparedScene__sceneRender {
     var prepared:Dynamic = cast _Runtime.UNDEFINED;
     prepared = ((cast SceneRender.preparedScenes__sceneRender : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(prepared, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(prepared, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var viewProjection:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
       var meshes:Array<Mesh> = cast ([] : Array<Dynamic>);
       var list:SceneRenderList = { lights: { ambientCount: 0.0, data: new flighthq._internal._Float32Array(SCENE_LIGHT_BLOCK_FLOATS), directionalCount: 0.0, hemisphereCount: 0.0, pointCount: 0.0, spotCount: 0.0, version: 0.0 }, meshCount: 0.0, viewProjection: viewProjection, visibleMeshes: meshes };
@@ -192,11 +192,11 @@ class SceneRender {
   }
 
   public static function isFloat32ArrayEqual__sceneRender(a:flighthq._internal._Float32Array, b:flighthq._internal._Float32Array):Bool {
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(a, 'length'), _Runtime.field(b, 'length')))) { return cast false; }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(a, 'length'), _Runtime.field(b, 'length')) : Bool)) { return cast false; }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(a, 'length'), '<'))) {
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(a, i), _Runtime.getIndex(b, i)))) { return cast false; }
+      while ((cast ((cast i : Float) < (cast _Runtime.field(a, 'length') : Float)) : Bool)) {
+        if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, i), _Runtime.getIndex(b, i)) : Bool)) { return cast false; }
         i++;
       }
     }
@@ -207,7 +207,7 @@ class SceneRender {
   public static function isMeshVisible__sceneRender(mesh:Mesh, frustum:Frustum, worldBounds:Aabb):Bool {
     var bounds:Dynamic = cast _Runtime.UNDEFINED;
     bounds = _Runtime.field(_Runtime.field(mesh, 'geometry'), 'bounds');
-    if (_Runtime.truthy(_Runtime.strictEquals(bounds, null))) {
+    if ((cast _Runtime.strictEquals(bounds, null) : Bool)) {
       return cast true;
     }
     _Runtime.callValue(transformAabbByMatrix4, cast ([worldBounds, bounds, _Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>))] : Array<Dynamic>));
@@ -265,7 +265,7 @@ class SceneRender {
     _Runtime.setIndex(data, (offset + 4.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 0.0) * intensity));
     _Runtime.setIndex(data, (offset + 5.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 1.0) * intensity));
     _Runtime.setIndex(data, (offset + 6.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 2.0) * intensity));
-    _Runtime.setIndex(data, (offset + 7.0), _Runtime.select(_Runtime.compare(range, 0.0, '>'), function():Dynamic return cast (1.0 / (range * range)), function():Dynamic return cast 0.0));
+    _Runtime.setIndex(data, (offset + 7.0), ((cast ((cast range : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / (range * range)) : Dynamic) : (cast 0.0 : Dynamic)));
   }
 
   public static function packSpotLight__sceneRender(data:flighthq._internal._Float32Array, offset:Float, spot:SpotLight):Void {
@@ -281,7 +281,7 @@ class SceneRender {
     _Runtime.setIndex(data, (offset + 4.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 0.0) * intensity));
     _Runtime.setIndex(data, (offset + 5.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 1.0) * intensity));
     _Runtime.setIndex(data, (offset + 6.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 2.0) * intensity));
-    _Runtime.setIndex(data, (offset + 7.0), _Runtime.select(_Runtime.compare(range, 0.0, '>'), function():Dynamic return cast (1.0 / (range * range)), function():Dynamic return cast 0.0));
+    _Runtime.setIndex(data, (offset + 7.0), ((cast ((cast range : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / (range * range)) : Dynamic) : (cast 0.0 : Dynamic)));
     _Runtime.setIndex(data, (offset + 8.0), _Runtime.field(spot, 'direction').x);
     _Runtime.setIndex(data, (offset + 9.0), _Runtime.field(spot, 'direction').y);
     _Runtime.setIndex(data, (offset + 10.0), _Runtime.field(spot, 'direction').z);
@@ -292,8 +292,8 @@ class SceneRender {
   public static function setSceneViewProjectionMatrix4__sceneRender(out:Matrix4, camera:Camera, aspect:Float):Void {
     var projection:Dynamic = cast _Runtime.UNDEFINED;
     projection = camera.projection;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(projection, 'kind'), 'perspective'))) {
-      _Runtime.callValue(setPerspectiveMatrix4, cast ([SceneRender.scratchProjection__sceneRender, HxMath.tan((projection.fovY * 0.5)), _Runtime.select(!_Runtime.strictEquals(projection.aspect, 0.0), function():Dynamic return cast projection.aspect, function():Dynamic return cast aspect), camera.near, camera.far] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(_Runtime.field(projection, 'kind'), 'perspective') : Bool)) {
+      _Runtime.callValue(setPerspectiveMatrix4, cast ([SceneRender.scratchProjection__sceneRender, HxMath.tan((projection.fovY * 0.5)), ((cast !_Runtime.strictEquals(projection.aspect, 0.0) : Bool) ? (cast projection.aspect : Dynamic) : (cast aspect : Dynamic)), camera.near, camera.far] : Array<Dynamic>));
     } else {
       _Runtime.callValue(setOrthographicMatrix4, cast ([SceneRender.scratchProjection__sceneRender, -projection.halfWidth, projection.halfWidth, -projection.halfHeight, projection.halfHeight, camera.near, camera.far] : Array<Dynamic>));
     }

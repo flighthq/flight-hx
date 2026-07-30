@@ -23,19 +23,19 @@ class InteractionSpatialIndex {
     var best:Null<Dynamic> = cast _Runtime.UNDEFINED;
     var bestRank:Dynamic = cast _Runtime.UNDEFINED;
     index = _Runtime.field(manager, 'spatialIndex');
-    if (_Runtime.truthy(_Runtime.strictEquals(index, null))) { return cast null; }
+    if ((cast _Runtime.strictEquals(index, null) : Bool)) { return cast null; }
     nodes = ((cast InteractionSpatialIndex.managerCandidates__interactionSpatialIndex : flighthq._internal._WeakMap).get(manager));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(nodes, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(nodes, 'length'), 0.0)))) { return cast null; }
+    if ((cast ((cast _Runtime.strictEquals(nodes, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(nodes, 'length'), 0.0) : Bool)) : Bool)) { return cast null; }
     _Runtime.callValue(querySpatialPoint, cast ([index, x, y, InteractionSpatialIndex.spatialQueryOut__interactionSpatialIndex] : Array<Dynamic>));
     best = null;
     bestRank = HxMath.POSITIVE_INFINITY;
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(InteractionSpatialIndex.spatialQueryOut__interactionSpatialIndex, 'length'), '<'))) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(InteractionSpatialIndex.spatialQueryOut__interactionSpatialIndex, 'length') : Float)) : Bool)) {
         var rank:Dynamic = _Runtime.getIndex(InteractionSpatialIndex.spatialQueryOut__interactionSpatialIndex, i);
-        if (_Runtime.truthy(_Runtime.compare(rank, bestRank, '>='))) { i++; continue; }
+        if ((cast ((cast rank : Float) >= (cast bestRank : Float)) : Bool)) { i++; continue; }
         var node:Dynamic = (cast _Runtime.getIndex(nodes, rank) : Null<Dynamic>);
-        if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callValue(hitTestNodeRegion, cast ([node, x, y, precise] : Array<Dynamic>))))) {
+        if ((cast ((cast !_Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.callValue(hitTestNodeRegion, cast ([node, x, y, precise] : Array<Dynamic>)) : Bool)) : Bool)) {
           (best = cast (node : Dynamic));
           (bestRank = cast (rank : Dynamic));
         }
@@ -50,14 +50,14 @@ class InteractionSpatialIndex {
     var index:Dynamic = cast _Runtime.UNDEFINED;
     var nodes:Array<NodeAny> = cast _Runtime.UNDEFINED;
     index = _Runtime.field(manager, 'spatialIndex');
-    if (_Runtime.truthy(_Runtime.strictEquals(index, null))) { return; }
+    if ((cast _Runtime.strictEquals(index, null) : Bool)) { return; }
     nodes = cast ([] : Array<Dynamic>);
     _Runtime.callValue(InteractionSpatialIndex.collectSpatialCandidates__interactionSpatialIndex, cast ([_Runtime.field(manager, 'root'), nodes] : Array<Dynamic>));
     ((cast InteractionSpatialIndex.managerCandidates__interactionSpatialIndex : flighthq._internal._WeakMap).set(manager, nodes));
     _Runtime.callValue(clearSpatialIndex, cast ([index] : Array<Dynamic>));
     {
       var rank:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(rank, _Runtime.field(nodes, 'length'), '<'))) {
+      while ((cast ((cast rank : Float) < (cast _Runtime.field(nodes, 'length') : Float)) : Bool)) {
         var bounds:Dynamic = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([(cast _Runtime.getIndex(nodes, rank) : DisplayObject)] : Array<Dynamic>));
         (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.minX = cast (_Runtime.field(bounds, 'x') : Dynamic));
         (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.minY = cast (_Runtime.field(bounds, 'y') : Dynamic));
@@ -73,24 +73,24 @@ class InteractionSpatialIndex {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     var enabled:Dynamic = cast _Runtime.UNDEFINED;
     var children:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(node, 'enabled')))) { return; }
+    if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return; }
     state = _Runtime.callValue(getNodeInteractionState, cast ([node] : Array<Dynamic>));
     enabled = _Runtime.strictEquals(_Runtime.optionalField(state, 'hitTestEnabled'), true);
-    if (_Runtime.truthy(_Runtime.andValue(enabled, function():Dynamic return cast !_Runtime.looseEquals(_Runtime.optionalField(state, 'hitArea'), null)))) {
+    if ((cast ((cast enabled : Bool) && (cast !_Runtime.looseEquals(_Runtime.optionalField(state, 'hitArea'), null) : Bool)) : Bool)) {
       _Runtime.callProperty(out, 'push', cast ([node] : Array<Dynamic>));
       return;
     }
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)), 'children');
-    if (_Runtime.truthy(!_Runtime.strictEquals(children, null))) {
+    if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
         var i:Dynamic = (_Runtime.field(children, 'length') - 1.0);
-        while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>='))) {
+        while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
           _Runtime.callValue(InteractionSpatialIndex.collectSpatialCandidates__interactionSpatialIndex, cast ([_Runtime.getIndex(children, i), out] : Array<Dynamic>));
           i--;
         }
       }
     }
-    if (_Runtime.truthy(enabled)) { _Runtime.callProperty(out, 'push', cast ([node] : Array<Dynamic>)); }
+    if ((cast enabled : Bool)) { _Runtime.callProperty(out, 'push', cast ([node] : Array<Dynamic>)); }
   }
 
   public static final managerCandidates__interactionSpatialIndex:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);

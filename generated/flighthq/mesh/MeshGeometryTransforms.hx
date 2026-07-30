@@ -15,7 +15,7 @@ class MeshGeometryTransforms {
     var cx:Dynamic = cast _Runtime.UNDEFINED;
     var cy:Dynamic = cast _Runtime.UNDEFINED;
     var cz:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(geometry, 'bounds')))) {
+    if ((cast !_Runtime.truthy(_Runtime.field(geometry, 'bounds')) : Bool)) {
       var bounds:Dynamic = _Runtime.callValue(createAabb, cast ([] : Array<Dynamic>));
       _Runtime.callValue(computeMeshGeometryBounds, cast ([bounds, geometry] : Array<Dynamic>));
       _Runtime.setField(geometry, 'bounds', bounds);
@@ -24,7 +24,7 @@ class MeshGeometryTransforms {
     cx = ((b.min.x + b.max.x) * 0.5);
     cy = ((b.min.y + b.max.y) * 0.5);
     cz = ((b.min.z + b.max.z) * 0.5);
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(cx, 0.0), function():Dynamic return cast _Runtime.strictEquals(cy, 0.0)), function():Dynamic return cast _Runtime.strictEquals(cz, 0.0)))) { return; }
+    if ((cast ((cast ((cast _Runtime.strictEquals(cx, 0.0) : Bool) && (cast _Runtime.strictEquals(cy, 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(cz, 0.0) : Bool)) : Bool)) { return; }
     _Runtime.callValue(translateMeshGeometry, cast ([geometry, -cx, -cy, -cz] : Array<Dynamic>));
   }
 
@@ -48,23 +48,23 @@ class MeshGeometryTransforms {
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
     var dstVerts:Dynamic = cast _Runtime.UNDEFINED;
     invT = _Runtime.callValue(MeshGeometryTransforms.computeMatrix3x3InverseTranspose__meshGeometryTransforms, cast ([matrix] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.truthy(invT))) { return cast false; }
+    if ((cast !_Runtime.truthy(invT) : Bool)) { return cast false; }
     m = matrix.m;
     posFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(source, 'layout'), 'position'] : Array<Dynamic>));
     normFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(source, 'layout'), 'normal'] : Array<Dynamic>));
     tanFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(source, 'layout'), 'tangent'] : Array<Dynamic>));
     srcVerts = _Runtime.field(source, 'vertices');
     floatsPerVertex = (_Runtime.field(_Runtime.field(source, 'layout'), 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(srcVerts, 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
-    dstVerts = _Runtime.select(_Runtime.strictEquals(out, source), function():Dynamic return cast srcVerts, function():Dynamic return cast _Runtime.field(out, 'vertices'));
-    if (_Runtime.truthy(!_Runtime.strictEquals(out, source))) {
+    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(srcVerts, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
+    dstVerts = ((cast _Runtime.strictEquals(out, source) : Bool) ? (cast srcVerts : Dynamic) : (cast _Runtime.field(out, 'vertices') : Dynamic));
+    if ((cast !_Runtime.strictEquals(out, source) : Bool)) {
       _Runtime.callProperty(dstVerts, 'set', cast ([srcVerts] : Array<Dynamic>));
     }
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, vertexCount, '<'))) {
+      while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
         var vertBase:Dynamic = (i * floatsPerVertex);
-        if (_Runtime.truthy(_Runtime.compare(posFloatOffset, 0.0, '>='))) {
+        if ((cast ((cast posFloatOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
           var pb:Dynamic = (vertBase + posFloatOffset);
           var px:Dynamic = _Runtime.getIndex(srcVerts, pb);
           var py:Dynamic = _Runtime.getIndex(srcVerts, (pb + 1.0));
@@ -73,7 +73,7 @@ class MeshGeometryTransforms {
           _Runtime.setIndex(dstVerts, (pb + 1.0), ((((_Runtime.getIndex(m, 1.0) * px) + (_Runtime.getIndex(m, 5.0) * py)) + (_Runtime.getIndex(m, 9.0) * pz)) + _Runtime.getIndex(m, 13.0)));
           _Runtime.setIndex(dstVerts, (pb + 2.0), ((((_Runtime.getIndex(m, 2.0) * px) + (_Runtime.getIndex(m, 6.0) * py)) + (_Runtime.getIndex(m, 10.0) * pz)) + _Runtime.getIndex(m, 14.0)));
         }
-        if (_Runtime.truthy(_Runtime.compare(normFloatOffset, 0.0, '>='))) {
+        if ((cast ((cast normFloatOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
           var nb:Dynamic = (vertBase + normFloatOffset);
           var nx:Dynamic = _Runtime.getIndex(srcVerts, nb);
           var ny:Dynamic = _Runtime.getIndex(srcVerts, (nb + 1.0));
@@ -82,7 +82,7 @@ class MeshGeometryTransforms {
           var tny:Dynamic = (((_Runtime.getIndex(invT, 1.0) * nx) + (_Runtime.getIndex(invT, 4.0) * ny)) + (_Runtime.getIndex(invT, 7.0) * nz));
           var tnz:Dynamic = (((_Runtime.getIndex(invT, 2.0) * nx) + (_Runtime.getIndex(invT, 5.0) * ny)) + (_Runtime.getIndex(invT, 8.0) * nz));
           var len:Dynamic = HxMath.sqrt((((tnx * tnx) + (tny * tny)) + (tnz * tnz)));
-          if (_Runtime.truthy(_Runtime.compare(len, 0.0, '>'))) {
+          if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
             (tnx = cast ((tnx / len) : Dynamic));
             (tny = cast ((tny / len) : Dynamic));
             (tnz = cast ((tnz / len) : Dynamic));
@@ -91,7 +91,7 @@ class MeshGeometryTransforms {
           _Runtime.setIndex(dstVerts, (nb + 1.0), tny);
           _Runtime.setIndex(dstVerts, (nb + 2.0), tnz);
         }
-        if (_Runtime.truthy(_Runtime.compare(tanFloatOffset, 0.0, '>='))) {
+        if ((cast ((cast tanFloatOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
           var tb:Dynamic = (vertBase + tanFloatOffset);
           var tx:Dynamic = _Runtime.getIndex(srcVerts, tb);
           var ty:Dynamic = _Runtime.getIndex(srcVerts, (tb + 1.0));
@@ -101,7 +101,7 @@ class MeshGeometryTransforms {
           var tty:Dynamic = (((_Runtime.getIndex(invT, 1.0) * tx) + (_Runtime.getIndex(invT, 4.0) * ty)) + (_Runtime.getIndex(invT, 7.0) * tz));
           var ttz:Dynamic = (((_Runtime.getIndex(invT, 2.0) * tx) + (_Runtime.getIndex(invT, 5.0) * ty)) + (_Runtime.getIndex(invT, 8.0) * tz));
           var len:Dynamic = HxMath.sqrt((((ttx * ttx) + (tty * tty)) + (ttz * ttz)));
-          if (_Runtime.truthy(_Runtime.compare(len, 0.0, '>'))) {
+          if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
             (ttx = cast ((ttx / len) : Dynamic));
             (tty = cast ((tty / len) : Dynamic));
             (ttz = cast ((ttz / len) : Dynamic));
@@ -128,13 +128,13 @@ class MeshGeometryTransforms {
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
     var verts:Dynamic = cast _Runtime.UNDEFINED;
     posFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(geometry, 'layout'), 'position'] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.compare(posFloatOffset, 0.0, '<'))) { return; }
+    if ((cast ((cast posFloatOffset : Float) < (cast 0.0 : Float)) : Bool)) { return; }
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
+    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     verts = _Runtime.field(geometry, 'vertices');
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, vertexCount, '<'))) {
+      while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
         var base:Dynamic = ((i * floatsPerVertex) + posFloatOffset);
         _Runtime.setIndex(verts, base, (_Runtime.getIndex(verts, base) + x));
         _Runtime.setIndex(verts, (base + 1.0), (_Runtime.getIndex(verts, (base + 1.0)) + y));
@@ -196,7 +196,7 @@ class MeshGeometryTransforms {
     c21 = -((a00 * a12) - (a02 * a10));
     c22 = ((a00 * a11) - (a01 * a10));
     det = (((a00 * c00) + (a01 * c01)) + (a02 * c02));
-    if (_Runtime.truthy(_Runtime.compare(HxMath.abs(det), 1e-10, '<'))) { return cast null; }
+    if ((cast ((cast HxMath.abs(det) : Float) < (cast 1e-10 : Float)) : Bool)) { return cast null; }
     invDet = (1.0 / det);
     out = new flighthq._internal._Float32Array(9.0);
     _Runtime.setIndex(out, 0.0, (c00 * invDet));
@@ -228,19 +228,19 @@ class MeshGeometryTransforms {
     tanFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(source, 'layout'), 'tangent'] : Array<Dynamic>));
     srcVerts = _Runtime.field(source, 'vertices');
     floatsPerVertex = (_Runtime.field(_Runtime.field(source, 'layout'), 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(srcVerts, 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
+    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(srcVerts, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     dstVerts = _Runtime.field(out, 'vertices');
-    if (_Runtime.truthy(!_Runtime.strictEquals(out, source))) {
+    if ((cast !_Runtime.strictEquals(out, source) : Bool)) {
       _Runtime.callProperty(dstVerts, 'set', cast ([srcVerts] : Array<Dynamic>));
     }
-    invSx = _Runtime.select(!_Runtime.strictEquals(sx, 0.0), function():Dynamic return cast (1.0 / sx), function():Dynamic return cast 0.0);
-    invSy = _Runtime.select(!_Runtime.strictEquals(sy, 0.0), function():Dynamic return cast (1.0 / sy), function():Dynamic return cast 0.0);
-    invSz = _Runtime.select(!_Runtime.strictEquals(sz, 0.0), function():Dynamic return cast (1.0 / sz), function():Dynamic return cast 0.0);
+    invSx = ((cast !_Runtime.strictEquals(sx, 0.0) : Bool) ? (cast (1.0 / sx) : Dynamic) : (cast 0.0 : Dynamic));
+    invSy = ((cast !_Runtime.strictEquals(sy, 0.0) : Bool) ? (cast (1.0 / sy) : Dynamic) : (cast 0.0 : Dynamic));
+    invSz = ((cast !_Runtime.strictEquals(sz, 0.0) : Bool) ? (cast (1.0 / sz) : Dynamic) : (cast 0.0 : Dynamic));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, vertexCount, '<'))) {
+      while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
         var vertBase:Dynamic = (i * floatsPerVertex);
-        if (_Runtime.truthy(_Runtime.compare(posFloatOffset, 0.0, '>='))) {
+        if ((cast ((cast posFloatOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
           var pb:Dynamic = (vertBase + posFloatOffset);
           var px:Dynamic = _Runtime.getIndex(srcVerts, pb);
           var py:Dynamic = _Runtime.getIndex(srcVerts, (pb + 1.0));
@@ -249,7 +249,7 @@ class MeshGeometryTransforms {
           _Runtime.setIndex(dstVerts, (pb + 1.0), ((py * sy) + ty));
           _Runtime.setIndex(dstVerts, (pb + 2.0), ((pz * sz) + tz));
         }
-        if (_Runtime.truthy(_Runtime.compare(normFloatOffset, 0.0, '>='))) {
+        if ((cast ((cast normFloatOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
           var nb:Dynamic = (vertBase + normFloatOffset);
           var nx:Dynamic = _Runtime.getIndex(srcVerts, nb);
           var ny:Dynamic = _Runtime.getIndex(srcVerts, (nb + 1.0));
@@ -258,7 +258,7 @@ class MeshGeometryTransforms {
           var nny:Dynamic = (ny * invSy);
           var nnz:Dynamic = (nz * invSz);
           var len:Dynamic = HxMath.sqrt((((nnx * nnx) + (nny * nny)) + (nnz * nnz)));
-          if (_Runtime.truthy(_Runtime.compare(len, 0.0, '>'))) {
+          if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
             (nnx = cast ((nnx / len) : Dynamic));
             (nny = cast ((nny / len) : Dynamic));
             (nnz = cast ((nnz / len) : Dynamic));
@@ -267,7 +267,7 @@ class MeshGeometryTransforms {
           _Runtime.setIndex(dstVerts, (nb + 1.0), nny);
           _Runtime.setIndex(dstVerts, (nb + 2.0), nnz);
         }
-        if (_Runtime.truthy(_Runtime.compare(tanFloatOffset, 0.0, '>='))) {
+        if ((cast ((cast tanFloatOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
           var tb:Dynamic = (vertBase + tanFloatOffset);
           var ttx:Dynamic = _Runtime.getIndex(srcVerts, tb);
           var tty:Dynamic = _Runtime.getIndex(srcVerts, (tb + 1.0));
@@ -277,7 +277,7 @@ class MeshGeometryTransforms {
           var nty:Dynamic = (tty * invSy);
           var ntz:Dynamic = (ttz * invSz);
           var len:Dynamic = HxMath.sqrt((((ntx * ntx) + (nty * nty)) + (ntz * ntz)));
-          if (_Runtime.truthy(_Runtime.compare(len, 0.0, '>'))) {
+          if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
             (ntx = cast ((ntx / len) : Dynamic));
             (nty = cast ((nty / len) : Dynamic));
             (ntz = cast ((ntz / len) : Dynamic));

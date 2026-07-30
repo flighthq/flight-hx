@@ -37,13 +37,13 @@ class FocusManager {
     arrowKeys = _Runtime.coalesce(_Runtime.field(options, 'arrowKeys'), function():Dynamic return cast false);
     onKeyDown = function(data:InputKeyboardData) {
       var direction:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'key'), 'Tab'))) {
-        if (_Runtime.truthy(_Runtime.field(data, 'shiftKey'))) { _Runtime.callValue(focusPreviousNode, cast ([manager] : Array<Dynamic>)); } else { _Runtime.callValue(focusNextNode, cast ([manager] : Array<Dynamic>)); }
+      if ((cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Tab') : Bool)) {
+        if ((cast _Runtime.field(data, 'shiftKey') : Bool)) { _Runtime.callValue(focusPreviousNode, cast ([manager] : Array<Dynamic>)); } else { _Runtime.callValue(focusNextNode, cast ([manager] : Array<Dynamic>)); }
         return;
       }
-      if (_Runtime.truthy(!_Runtime.truthy(arrowKeys))) { return; }
+      if ((cast !(cast arrowKeys : Bool) : Bool)) { return; }
       direction = _Runtime.callValue(FocusManager.arrowKeyDirection__focusManager, cast ([_Runtime.field(data, 'key')] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(direction, null))) { _Runtime.callValue(focusNodeInDirection, cast ([manager, direction] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(direction, null) : Bool)) { _Runtime.callValue(focusNodeInDirection, cast ([manager, direction] : Array<Dynamic>)); }
     };
     _Runtime.callValue(connectSignal, cast ([_Runtime.field(input, 'onKeyDown'), onKeyDown] : Array<Dynamic>));
     return cast function() return _Runtime.callValue(disconnectSignal, cast ([_Runtime.field(input, 'onKeyDown'), onKeyDown] : Array<Dynamic>));
@@ -70,7 +70,7 @@ class FocusManager {
     var best:Null<Dynamic> = cast _Runtime.UNDEFINED;
     var bestScore:Dynamic = cast _Runtime.UNDEFINED;
     current = _Runtime.field(manager, 'focused');
-    if (_Runtime.truthy(_Runtime.strictEquals(current, null))) { return cast null; }
+    if ((cast _Runtime.strictEquals(current, null) : Bool)) { return cast null; }
     order = _Runtime.callValue(getFocusOrder, cast ([manager, (cast FocusManager._orderScratch__focusManager : Array<Dynamic>)] : Array<Dynamic>));
     origin = _Runtime.callValue(FocusManager.boundsCenter__focusManager, cast ([current, FocusManager._originCenter__focusManager] : Array<Dynamic>));
     originX = _Runtime.field(origin, 'x');
@@ -78,15 +78,15 @@ class FocusManager {
     best = null;
     bestScore = HxMath.POSITIVE_INFINITY;
     for (candidate in _Runtime.iterable(order)) {
-      if (_Runtime.truthy(_Runtime.strictEquals(candidate, current))) { continue; }
+      if ((cast _Runtime.strictEquals(candidate, current) : Bool)) { continue; }
       var center:Dynamic = _Runtime.callValue(FocusManager.boundsCenter__focusManager, cast ([candidate, FocusManager._candidateCenter__focusManager] : Array<Dynamic>));
       var score:Dynamic = _Runtime.callValue(FocusManager.directionScore__focusManager, cast ([direction, originX, originY, _Runtime.field(center, 'x'), _Runtime.field(center, 'y')] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.compare(score, bestScore, '<'))) {
+      if ((cast ((cast score : Float) < (cast bestScore : Float)) : Bool)) {
         (bestScore = cast (score : Dynamic));
         (best = cast (candidate : Dynamic));
       }
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(best, null))) { _Runtime.callValue(setFocusedNode, cast ([manager, best] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(best, null) : Bool)) { _Runtime.callValue(setFocusedNode, cast ([manager, best] : Array<Dynamic>)); }
     return cast best;
     return cast null;
   }
@@ -117,12 +117,12 @@ class FocusManager {
 
   public static function setFocusedNode<N>(manager:flighthq.types.FocusManager<Dynamic>, node:Null<Dynamic>):Bool {
     var previous:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(node, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(isNodeFocusable, cast ([node] : Array<Dynamic>)))))) { return cast false; }
+    if ((cast ((cast !_Runtime.strictEquals(node, null) : Bool) && (cast !(cast _Runtime.callValue(isNodeFocusable, cast ([node] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast false; }
     previous = _Runtime.field(manager, 'focused');
-    if (_Runtime.truthy(_Runtime.strictEquals(node, previous))) { return cast true; }
+    if ((cast _Runtime.strictEquals(node, previous) : Bool)) { return cast true; }
     _Runtime.setField(manager, 'focused', node);
-    if (_Runtime.truthy(!_Runtime.strictEquals(previous, null))) { _Runtime.callValue(FocusManager.emitFocusSignal__focusManager, cast ([previous, _Runtime.field(manager, 'root'), 'onFocusOut', node] : Array<Dynamic>)); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(node, null))) { _Runtime.callValue(FocusManager.emitFocusSignal__focusManager, cast ([node, _Runtime.field(manager, 'root'), 'onFocusIn', previous] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(previous, null) : Bool)) { _Runtime.callValue(FocusManager.emitFocusSignal__focusManager, cast ([previous, _Runtime.field(manager, 'root'), 'onFocusOut', node] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(node, null) : Bool)) { _Runtime.callValue(FocusManager.emitFocusSignal__focusManager, cast ([node, _Runtime.field(manager, 'root'), 'onFocusIn', previous] : Array<Dynamic>)); }
     return cast true;
     return cast null;
   }
@@ -165,10 +165,10 @@ class FocusManager {
 
   public static function collectFocusStops__focusManager(node:NodeAny, out:Array<NodeAny>):Void {
     var children:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(node, 'enabled')))) { return; }
-    if (_Runtime.truthy(_Runtime.callValue(isNodeFocusable, cast ([node] : Array<Dynamic>)))) { _Runtime.callProperty(out, 'push', cast ([node] : Array<Dynamic>)); }
+    if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return; }
+    if ((cast _Runtime.callValue(isNodeFocusable, cast ([node] : Array<Dynamic>)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([node] : Array<Dynamic>)); }
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)), 'children');
-    if (_Runtime.truthy(!_Runtime.strictEquals(children, null))) {
+    if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
         _Runtime.callValue(FocusManager.collectFocusStops__focusManager, cast ([(cast child : NodeAny), out] : Array<Dynamic>));
       }
@@ -201,7 +201,7 @@ class FocusManager {
         (perpendicular = cast (dx : Dynamic));
       }
     }
-    if (_Runtime.truthy(_Runtime.compare(along, FocusManager.DIRECTION_EPSILON__focusManager, '<='))) { return cast HxMath.POSITIVE_INFINITY; }
+    if ((cast ((cast along : Float) <= (cast FocusManager.DIRECTION_EPSILON__focusManager : Float)) : Bool)) { return cast HxMath.POSITIVE_INFINITY; }
     return cast (along + (2.0 * HxMath.abs(perpendicular)));
     return cast null;
   }
@@ -211,12 +211,12 @@ class FocusManager {
     _Runtime.setField(FocusManager._focusData__focusManager, 'relatedTarget', relatedTarget);
     _Runtime.setField(FocusManager._focusData__focusManager, 'target', target);
     current = target;
-    while (_Runtime.truthy(!_Runtime.strictEquals(current, null))) {
+    while ((cast !_Runtime.strictEquals(current, null) : Bool)) {
       _Runtime.setField(FocusManager._focusData__focusManager, 'currentTarget', current);
       var signals:Dynamic = _Runtime.callValue(getInteractionSignals, cast ([current] : Array<Dynamic>));
-      var signal:Dynamic = _Runtime.select(!_Runtime.strictEquals(signals, null), function():Dynamic return cast _Runtime.getIndex(signals, name), function():Dynamic return cast null);
-      if (_Runtime.truthy(!_Runtime.strictEquals(signal, null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signal : Signal<Dynamic>)], [FocusManager._focusData__focusManager]]), 1); }
-      if (_Runtime.truthy(_Runtime.strictEquals(current, root))) { break; }
+      var signal:Dynamic = ((cast !_Runtime.strictEquals(signals, null) : Bool) ? (cast _Runtime.getIndex(signals, name) : Dynamic) : (cast null : Dynamic));
+      if ((cast !_Runtime.strictEquals(signal, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signal : Signal<Dynamic>)], [FocusManager._focusData__focusManager]]), 1); }
+      if ((cast _Runtime.strictEquals(current, root) : Bool)) { break; }
       (current = cast ((cast _Runtime.callValue(getNodeParent, cast ([current] : Array<Dynamic>)) : Null<NodeAny>) : Dynamic));
     }
   }
@@ -224,7 +224,7 @@ class FocusManager {
   public static function focusOrderKey__focusManager(node:NodeAny):Float {
     var tabIndex:Dynamic = cast _Runtime.UNDEFINED;
     tabIndex = _Runtime.callValue(getNodeTabIndex, cast ([node] : Array<Dynamic>));
-    return cast _Runtime.select(_Runtime.compare(tabIndex, 0.0, '<'), function():Dynamic return cast HxMath.POSITIVE_INFINITY, function():Dynamic return cast tabIndex);
+    return cast ((cast ((cast tabIndex : Float) < (cast 0.0 : Float)) : Bool) ? (cast HxMath.POSITIVE_INFINITY : Dynamic) : (cast tabIndex : Dynamic));
     return cast null;
   }
 
@@ -235,15 +235,15 @@ class FocusManager {
     var index:Float = cast _Runtime.UNDEFINED;
     var next:Dynamic = cast _Runtime.UNDEFINED;
     order = _Runtime.callValue(getFocusOrder, cast ([manager, (cast FocusManager._orderScratch__focusManager : Array<Dynamic>)] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(order, 'length'), 0.0))) { return cast null; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(order, 'length'), 0.0) : Bool)) { return cast null; }
     current = _Runtime.field(manager, 'focused');
-    from = _Runtime.select(!_Runtime.strictEquals(current, null), function():Dynamic return cast _Runtime.callProperty(order, 'indexOf', cast ([current] : Array<Dynamic>)), function():Dynamic return cast -1.0);
-    if (_Runtime.truthy(_Runtime.strictEquals(from, -1.0))) {
-      (index = cast (_Runtime.select(_Runtime.compare(delta, 0.0, '>'), function():Dynamic return cast 0.0, function():Dynamic return cast (_Runtime.field(order, 'length') - 1.0)) : Dynamic));
+    from = ((cast !_Runtime.strictEquals(current, null) : Bool) ? (cast _Runtime.callProperty(order, 'indexOf', cast ([current] : Array<Dynamic>)) : Dynamic) : (cast -1.0 : Dynamic));
+    if ((cast _Runtime.strictEquals(from, -1.0) : Bool)) {
+      (index = cast (((cast ((cast delta : Float) > (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast (_Runtime.field(order, 'length') - 1.0) : Dynamic)) : Dynamic));
     } else {
       (index = cast ((from + delta) : Dynamic));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(order, 'length'), '>=')))) {
-        if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(manager, 'wrap')))) { return cast null; }
+      if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast _Runtime.field(order, 'length') : Float)) : Bool)) : Bool)) {
+        if ((cast !(cast _Runtime.field(manager, 'wrap') : Bool) : Bool)) { return cast null; }
         (index = cast (_Runtime.fmod((index + _Runtime.field(order, 'length')), _Runtime.field(order, 'length')) : Dynamic));
       }
     }

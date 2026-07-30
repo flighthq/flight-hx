@@ -11,11 +11,11 @@ class EasePiecewise {
     var totalWeight:Dynamic = cast _Runtime.UNDEFINED;
     var breakpoints:Array<{ var ease:EasingFunction; var end:Float; var start:Float; }> = cast _Runtime.UNDEFINED;
     var accumulated:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0))) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0) : Bool)) {
       throw _Runtime.error('easePiecewise: segments array must not be empty');
     }
     totalWeight = _Runtime.reduce(segments, function(sum:Dynamic, seg:Dynamic) return (sum + _Runtime.coalesce(_Runtime.field(seg, 'weight'), function():Dynamic return cast 1.0)), 0.0);
-    if (_Runtime.truthy(_Runtime.compare(totalWeight, 0.0, '<='))) {
+    if ((cast ((cast totalWeight : Float) <= (cast 0.0 : Float)) : Bool)) {
       throw _Runtime.error('easePiecewise: total segment weight must be greater than zero');
     }
     breakpoints = cast ([] : Array<Dynamic>);
@@ -30,12 +30,12 @@ class EasePiecewise {
     return cast function(t:Dynamic) {
       {
         var i:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(breakpoints, 'length'), '<'))) {
+        while ((cast ((cast i : Float) < (cast _Runtime.field(breakpoints, 'length') : Float)) : Bool)) {
           var bp:Dynamic = _Runtime.getIndex(breakpoints, i);
-          if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(t, _Runtime.field(bp, 'end'), '<='), function():Dynamic return cast _Runtime.strictEquals(i, (_Runtime.field(breakpoints, 'length') - 1.0))))) {
+          if ((cast ((cast ((cast t : Float) <= (cast _Runtime.field(bp, 'end') : Float)) : Bool) || (cast _Runtime.strictEquals(i, (_Runtime.field(breakpoints, 'length') - 1.0)) : Bool)) : Bool)) {
             var span:Dynamic = (_Runtime.field(bp, 'end') - _Runtime.field(bp, 'start'));
-            var localT:Dynamic = _Runtime.select(_Runtime.compare(span, 0.0, '>'), function():Dynamic return cast ((t - _Runtime.field(bp, 'start')) / span), function():Dynamic return cast 1.0);
-            var clampedT:Dynamic = _Runtime.select(_Runtime.compare(localT, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(localT, 1.0, '>'), function():Dynamic return cast 1.0, function():Dynamic return cast localT));
+            var localT:Dynamic = ((cast ((cast span : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((t - _Runtime.field(bp, 'start')) / span) : Dynamic) : (cast 1.0 : Dynamic));
+            var clampedT:Dynamic = ((cast ((cast localT : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast localT : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast localT : Dynamic)) : Dynamic));
             return cast _Runtime.callProperty(bp, 'ease', cast ([clampedT] : Array<Dynamic>));
           }
           i++;

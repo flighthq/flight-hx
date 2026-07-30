@@ -19,7 +19,7 @@ class WgpuDefaultMaterial {
     var cached:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
     cached = ((cast WgpuDefaultMaterial._modules__wgpuDefaultMaterial : flighthq._internal._WeakMap).get(_Runtime.field(state, 'device')));
-    if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast cached; }
+    if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
     module = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createShaderModule', cast ([{ code: (_Runtime.callValue(getWgpuQuadBatchPreludeWGSL, cast ([] : Array<Dynamic>)) + WgpuDefaultMaterial.DEFAULT_MATERIAL_WGSL__wgpuDefaultMaterial) }] : Array<Dynamic>));
     ((cast WgpuDefaultMaterial._modules__wgpuDefaultMaterial : flighthq._internal._WeakMap).set(_Runtime.field(state, 'device'), module));
     return cast module;

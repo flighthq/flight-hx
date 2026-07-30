@@ -131,7 +131,7 @@ class Sensors {
     z = _Runtime.field(quaternion, 'z');
     w = _Runtime.field(quaternion, 'w');
     sinBeta = (2.0 * ((w * x) - (y * z)));
-    beta = _Runtime.select(_Runtime.compare(HxMath.abs(sinBeta), 1.0, '>='), function():Dynamic return cast ((_Runtime.sign(sinBeta) * HxMath.PI) / 2.0), function():Dynamic return cast HxMath.asin(sinBeta));
+    beta = ((cast ((cast HxMath.abs(sinBeta) : Float) >= (cast 1.0 : Float)) : Bool) ? (cast ((_Runtime.sign(sinBeta) * HxMath.PI) / 2.0) : Dynamic) : (cast HxMath.asin(sinBeta) : Dynamic));
     alpha = HxMath.atan2((2.0 * ((w * z) + (x * y))), (1.0 - (2.0 * ((x * x) + (z * z)))));
     gamma = HxMath.atan2((2.0 * ((w * y) + (x * z))), (1.0 - (2.0 * ((x * x) + (y * y)))));
     toDeg = (180.0 / HxMath.PI);
@@ -352,21 +352,21 @@ class Sensors {
     }, isBarometerSupported: function() {
       return cast false;
     }, isGravitySupported: function() {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast false; }
+      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast false; }
       return cast !_Runtime.strictEquals(_Runtime.typeofGlobal('DeviceMotionEvent'), 'undefined');
     }, isGyroscopeSupported: function() {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast false; }
+      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast false; }
       return cast !_Runtime.strictEquals(_Runtime.typeofGlobal('DeviceMotionEvent'), 'undefined');
     }, isLinearAccelerationSupported: function() {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast false; }
+      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast false; }
       return cast !_Runtime.strictEquals(_Runtime.typeofGlobal('DeviceMotionEvent'), 'undefined');
     }, isMagnetometerSupported: function() {
       return cast !_Runtime.strictEquals(_Runtime.callValue(Sensors.getWebMagnetometerConstructor__sensors, cast ([] : Array<Dynamic>)), null);
     }, isMotionSupported: function() {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast false; }
+      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast false; }
       return cast !_Runtime.strictEquals(_Runtime.typeofGlobal('DeviceMotionEvent'), 'undefined');
     }, isOrientationSupported: function() {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast false; }
+      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast false; }
       return cast !_Runtime.strictEquals(_Runtime.typeofValue(Sensors.DeviceOrientationEvent__sensors), 'undefined');
     }, isProximitySupported: function() {
       return cast false;
@@ -376,7 +376,7 @@ class Sensors {
           var request:Dynamic = cast _Runtime.UNDEFINED;
           request = _Runtime.callValue(Sensors.getWebMotionPermissionRequest__sensors, cast ([] : Array<Dynamic>));
           var __flowBranch0:Dynamic;
-          if (_Runtime.truthy(_Runtime.strictEquals(request, null))) {
+          if ((cast _Runtime.strictEquals(request, null) : Bool)) {
             __flowBranch0 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn(true);
             });
@@ -404,13 +404,13 @@ class Sensors {
     }, subscribeAbsoluteOrientation: function(listener:Dynamic, ?options:SensorSubscribeOptions) {
       var ctor:Dynamic = cast _Runtime.UNDEFINED;
       var handler:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast function() {
+      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast function() {
       
       }; }
       ctor = _Runtime.callValue(Sensors.getWebGenericSensorConstructor__sensors, cast (['AbsoluteOrientationSensor'] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(ctor, null))) {
+      if ((cast !_Runtime.strictEquals(ctor, null) : Bool)) {
         try {
-          var sensorOptions:Dynamic = _Runtime.select(!_Runtime.strictEquals(_Runtime.optionalField(options, 'frequency'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast { frequency: _Runtime.field(options, 'frequency') }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
+          var sensorOptions:Dynamic = ((cast !_Runtime.strictEquals(_Runtime.optionalField(options, 'frequency'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { frequency: _Runtime.field(options, 'frequency') } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
           var sensor:Dynamic = (cast _Runtime.construct(ctor, [sensorOptions]) : WebOrientationSensor__sensors);
           var handler:Dynamic = function() {
             var q:Dynamic = cast _Runtime.UNDEFINED;
@@ -452,11 +452,11 @@ class Sensors {
     }, subscribeAmbientLight: function(listener:Dynamic, ?options:SensorSubscribeOptions) {
       var ctor:Dynamic = cast _Runtime.UNDEFINED;
       ctor = _Runtime.callValue(Sensors.getWebGenericSensorConstructor__sensors, cast (['AmbientLightSensor'] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(ctor, null))) { return cast function() {
+      if ((cast _Runtime.strictEquals(ctor, null) : Bool)) { return cast function() {
       
       }; }
       try {
-        var sensorOptions:Dynamic = _Runtime.select(!_Runtime.strictEquals(_Runtime.optionalField(options, 'frequency'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast { frequency: _Runtime.field(options, 'frequency') }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
+        var sensorOptions:Dynamic = ((cast !_Runtime.strictEquals(_Runtime.optionalField(options, 'frequency'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { frequency: _Runtime.field(options, 'frequency') } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
         var sensor:Dynamic = (cast _Runtime.construct(ctor, [sensorOptions]) : WebAmbientLightSensor__sensors);
         var handler:Dynamic = function() {
           _Runtime.setField(Sensors._ambientLight__sensors, 'illuminance', _Runtime.coalesce(_Runtime.field(sensor, 'illuminance'), function():Dynamic return cast 0.0));
@@ -481,7 +481,7 @@ class Sensors {
       };
     }, subscribeGravity: function(listener:Dynamic, ?_options:SensorSubscribeOptions) {
       var handler:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast function() {
+      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast function() {
       
       }; }
       handler = function(event:Dynamic) {
@@ -489,7 +489,7 @@ class Sensors {
         var linearAccel:Dynamic = cast _Runtime.UNDEFINED;
         withGravity = _Runtime.field(event, 'accelerationIncludingGravity');
         linearAccel = _Runtime.field(event, 'acceleration');
-        if (_Runtime.truthy(!_Runtime.truthy(withGravity))) { return; }
+        if ((cast !_Runtime.truthy(withGravity) : Bool)) { return; }
         _Runtime.setField(Sensors._gravity__sensors, 'x', (_Runtime.coalesce(_Runtime.field(withGravity, 'x'), function():Dynamic return cast 0.0) - _Runtime.coalesce(_Runtime.optionalField(linearAccel, 'x'), function():Dynamic return cast 0.0)));
         _Runtime.setField(Sensors._gravity__sensors, 'y', (_Runtime.coalesce(_Runtime.field(withGravity, 'y'), function():Dynamic return cast 0.0) - _Runtime.coalesce(_Runtime.optionalField(linearAccel, 'y'), function():Dynamic return cast 0.0)));
         _Runtime.setField(Sensors._gravity__sensors, 'z', (_Runtime.coalesce(_Runtime.field(withGravity, 'z'), function():Dynamic return cast 0.0) - _Runtime.coalesce(_Runtime.optionalField(linearAccel, 'z'), function():Dynamic return cast 0.0)));
@@ -503,13 +503,13 @@ class Sensors {
       };
     }, subscribeLinearAcceleration: function(listener:Dynamic, ?_options:SensorSubscribeOptions) {
       var handler:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast function() {
+      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast function() {
       
       }; }
       handler = function(event:Dynamic) {
         var accel:Dynamic = cast _Runtime.UNDEFINED;
         accel = _Runtime.field(event, 'acceleration');
-        if (_Runtime.truthy(!_Runtime.truthy(accel))) { return; }
+        if ((cast !_Runtime.truthy(accel) : Bool)) { return; }
         _Runtime.setField(Sensors._linearAcceleration__sensors, 'x', _Runtime.coalesce(_Runtime.field(accel, 'x'), function():Dynamic return cast 0.0));
         _Runtime.setField(Sensors._linearAcceleration__sensors, 'y', _Runtime.coalesce(_Runtime.field(accel, 'y'), function():Dynamic return cast 0.0));
         _Runtime.setField(Sensors._linearAcceleration__sensors, 'z', _Runtime.coalesce(_Runtime.field(accel, 'z'), function():Dynamic return cast 0.0));
@@ -524,11 +524,11 @@ class Sensors {
     }, subscribeMagnetometer: function(listener:Dynamic, ?options:SensorSubscribeOptions) {
       var ctor:Dynamic = cast _Runtime.UNDEFINED;
       ctor = _Runtime.callValue(Sensors.getWebMagnetometerConstructor__sensors, cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(ctor, null))) { return cast function() {
+      if ((cast _Runtime.strictEquals(ctor, null) : Bool)) { return cast function() {
       
       }; }
       try {
-        var sensorOptions:Dynamic = _Runtime.select(!_Runtime.strictEquals(_Runtime.optionalField(options, 'frequency'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast { frequency: _Runtime.field(options, 'frequency') }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
+        var sensorOptions:Dynamic = ((cast !_Runtime.strictEquals(_Runtime.optionalField(options, 'frequency'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { frequency: _Runtime.field(options, 'frequency') } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
         var sensor:Dynamic = _Runtime.construct(ctor, [sensorOptions]);
         var handler:Dynamic = function() {
           _Runtime.setField(Sensors._magnetometer__sensors, 'x', _Runtime.coalesce(_Runtime.field(sensor, 'x'), function():Dynamic return cast 0.0));
@@ -551,7 +551,7 @@ class Sensors {
       }
     }, subscribeMotion: function(listener:Dynamic, ?_options:SensorSubscribeOptions) {
       var handler:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast function() {
+      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast function() {
       
       }; }
       handler = function(event:Dynamic) {
@@ -577,7 +577,7 @@ class Sensors {
       };
     }, subscribeOrientation: function(listener:Dynamic, ?_options:SensorSubscribeOptions) {
       var handler:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast function() {
+      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast function() {
       
       }; }
       handler = function(event:Dynamic) {
@@ -589,7 +589,7 @@ class Sensors {
         _Runtime.setField(Sensors._orientation__sensors, 'interval', -1.0);
         _Runtime.setField(Sensors._orientation__sensors, 'timestamp', -1.0);
         heading = _Runtime.field((cast event : { @:optional var webkitCompassHeading:Float; }), 'webkitCompassHeading');
-        _Runtime.setField(Sensors._orientation__sensors, 'heading', _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(heading), 'number'), function():Dynamic return cast heading, function():Dynamic return cast -1.0));
+        _Runtime.setField(Sensors._orientation__sensors, 'heading', ((cast _Runtime.strictEquals(_Runtime.typeofValue(heading), 'number') : Bool) ? (cast heading : Dynamic) : (cast -1.0 : Dynamic)));
         _Runtime.callValue(listener, cast ([Sensors._orientation__sensors] : Array<Dynamic>));
       };
       flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'addEventListener', cast (['deviceorientation', (cast handler : Dynamic)] : Array<Dynamic>));
@@ -603,11 +603,11 @@ class Sensors {
     }, subscribeQuaternion: function(listener:Dynamic, ?options:SensorSubscribeOptions) {
       var ctor:Dynamic = cast _Runtime.UNDEFINED;
       ctor = _Runtime.callValue(Sensors.getWebGenericSensorConstructor__sensors, cast (['AbsoluteOrientationSensor'] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(ctor, null))) { return cast function() {
+      if ((cast _Runtime.strictEquals(ctor, null) : Bool)) { return cast function() {
       
       }; }
       try {
-        var sensorOptions:Dynamic = _Runtime.select(!_Runtime.strictEquals(_Runtime.optionalField(options, 'frequency'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast { frequency: _Runtime.field(options, 'frequency') }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
+        var sensorOptions:Dynamic = ((cast !_Runtime.strictEquals(_Runtime.optionalField(options, 'frequency'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { frequency: _Runtime.field(options, 'frequency') } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
         var sensor:Dynamic = (cast _Runtime.construct(ctor, [sensorOptions]) : WebOrientationSensor__sensors);
         var handler:Dynamic = function() {
           var q:Dynamic = cast _Runtime.UNDEFINED;
@@ -638,7 +638,7 @@ class Sensors {
   public static function detachSensors(sensors:flighthq.types.Sensors):Void {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
     unsubscribe = ((cast Sensors._subscriptions__sensors : flighthq._internal._WeakMap).get(sensors));
-    if (_Runtime.truthy(!_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast !_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callValue(unsubscribe, cast ([] : Array<Dynamic>));
       ((cast Sensors._subscriptions__sensors : flighthq._internal._WeakMap).delete_(sensors));
     }
@@ -651,7 +651,7 @@ class Sensors {
   }
 
   public static function getSensorsBackend():SensorsBackend {
-    if (_Runtime.truthy(_Runtime.strictEquals(Sensors._backend__sensors, null))) { (Sensors._backend__sensors = cast (_Runtime.callValue(createWebSensorsBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Sensors._backend__sensors, null) : Bool)) { (Sensors._backend__sensors = cast (_Runtime.callValue(createWebSensorsBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Sensors._backend__sensors;
     return cast null;
   }
@@ -664,7 +664,7 @@ class Sensors {
   public static function getWebGenericSensorConstructor__sensors(name:String):Null<Dynamic> {
     try {
       var ctor:Dynamic = _Runtime.getIndex((cast _Runtime.globalValue('globalThis') : Dynamic), name);
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofValue(ctor), 'function'))) { return cast null; }
+      if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(ctor), 'function') : Bool)) { return cast null; }
       return cast (cast ctor : Dynamic);
     } catch (__error:Dynamic) {
       return cast null;
@@ -673,16 +673,16 @@ class Sensors {
   }
 
   public static function getWebMagnetometerConstructor__sensors():Null<Dynamic> {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(Sensors.Magnetometer__sensors), 'undefined'))) { return cast null; }
+    if ((cast _Runtime.strictEquals(_Runtime.typeofValue(Sensors.Magnetometer__sensors), 'undefined') : Bool)) { return cast null; }
     return cast (cast (cast Sensors.Magnetometer__sensors : Dynamic) : Dynamic);
     return cast null;
   }
 
   public static function getWebMotionPermissionRequest__sensors():Null<Dynamic> {
     var ctor:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('DeviceMotionEvent'), 'undefined'))) { return cast null; }
+    if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('DeviceMotionEvent'), 'undefined') : Bool)) { return cast null; }
     ctor = (cast (cast _Runtime.globalValue('DeviceMotionEvent') : Dynamic) : { @:optional var requestPermission:Dynamic; });
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(ctor, 'requestPermission')), 'function'))) { return cast null; }
+    if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(ctor, 'requestPermission')), 'function') : Bool)) { return cast null; }
     return cast function() return _Runtime.callProperty(ctor, 'requestPermission', cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -692,7 +692,7 @@ class Sensors {
       flighthq._internal._Async.protect(function():Dynamic {
         var permissionName:Dynamic = cast _Runtime.UNDEFINED;
         var __flowBranch2:Dynamic;
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) {
+        if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) {
           __flowBranch2 = flighthq._internal._Async.protect(function():Dynamic {
             return flighthq._internal._Async.flowReturn('unsupported');
           });
@@ -700,7 +700,7 @@ class Sensors {
           __flowBranch2 = flighthq._internal._Async.flowNormal();
         }
         return flighthq._internal._Async.continueFlow(__flowBranch2, function():Dynamic {
-          permissionName = _Runtime.select(_Runtime.strictEquals(sensor, 'magnetometer'), function():Dynamic return cast 'magnetometer', function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(sensor, 'orientation'), function():Dynamic return cast 'gyroscope', function():Dynamic return cast 'accelerometer'));
+          permissionName = ((cast _Runtime.strictEquals(sensor, 'magnetometer') : Bool) ? (cast 'magnetometer' : Dynamic) : (cast ((cast _Runtime.strictEquals(sensor, 'orientation') : Bool) ? (cast 'gyroscope' : Dynamic) : (cast 'accelerometer' : Dynamic)) : Dynamic));
           var __flowBranch3:Dynamic;
           if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'permissions')))) {
             __flowBranch3 = flighthq._internal._Async.protect(function():Dynamic {
@@ -709,7 +709,7 @@ class Sensors {
                 return flighthq._internal._Async.flatMap(_Runtime.callProperty(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'permissions'), 'query', cast ([{ name: (cast permissionName : PermissionName) }] : Array<Dynamic>)), function(__awaitValue4:Dynamic):Dynamic {
                   status = __awaitValue4;
                   var __flowBranch5:Dynamic;
-                  if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(status, 'state'), 'granted'))) {
+                  if ((cast _Runtime.strictEquals(_Runtime.field(status, 'state'), 'granted') : Bool)) {
                     __flowBranch5 = flighthq._internal._Async.protect(function():Dynamic {
                       return flighthq._internal._Async.flowReturn('granted');
                     });
@@ -718,7 +718,7 @@ class Sensors {
                   }
                   return flighthq._internal._Async.continueFlow(__flowBranch5, function():Dynamic {
                     var __flowBranch6:Dynamic;
-                    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(status, 'state'), 'denied'))) {
+                    if ((cast _Runtime.strictEquals(_Runtime.field(status, 'state'), 'denied') : Bool)) {
                       __flowBranch6 = flighthq._internal._Async.protect(function():Dynamic {
                         return flighthq._internal._Async.flowReturn('denied');
                       });
@@ -744,12 +744,12 @@ class Sensors {
           }
           return flighthq._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
             var __flowBranch7:Dynamic;
-            if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(sensor, 'magnetometer'), function():Dynamic return cast !_Runtime.strictEquals(sensor, 'orientation')))) {
+            if ((cast ((cast !_Runtime.strictEquals(sensor, 'magnetometer') : Bool) && (cast !_Runtime.strictEquals(sensor, 'orientation') : Bool)) : Bool)) {
               __flowBranch7 = flighthq._internal._Async.protect(function():Dynamic {
                 var hasMotion:Dynamic = cast _Runtime.UNDEFINED;
                 hasMotion = !_Runtime.strictEquals(_Runtime.typeofGlobal('DeviceMotionEvent'), 'undefined');
                 var __flowBranch8:Dynamic;
-                if (_Runtime.truthy(!_Runtime.truthy(hasMotion))) {
+                if ((cast !(cast hasMotion : Bool) : Bool)) {
                   __flowBranch8 = flighthq._internal._Async.protect(function():Dynamic {
                     return flighthq._internal._Async.flowReturn('unsupported');
                   });

@@ -8,7 +8,7 @@ import flighthq.types.EasingFunction;
 class EaseBack {
   public static final easeInBack:EasingFunction = function(t:Dynamic) return ((t * t) * (((EaseBack.s__easeBack + 1.0) * t) - EaseBack.s__easeBack));
 
-  public static final easeInOutBack:EasingFunction = function(t:Dynamic) return _Runtime.select(_Runtime.compare((t = cast ((t * 2.0) : Dynamic)), 1.0, '<'), function():Dynamic return cast (0.5 * ((t * t) * (((EaseBack.s2__easeBack + 1.0) * t) - EaseBack.s2__easeBack))), function():Dynamic return cast (0.5 * ((((t = cast ((t - 2.0) : Dynamic)) * t) * (((EaseBack.s2__easeBack + 1.0) * t) + EaseBack.s2__easeBack)) + 2.0)));
+  public static final easeInOutBack:EasingFunction = function(t:Dynamic) return ((cast ((cast (t = cast ((t * 2.0) : Dynamic)) : Float) < (cast 1.0 : Float)) : Bool) ? (cast (0.5 * ((t * t) * (((EaseBack.s2__easeBack + 1.0) * t) - EaseBack.s2__easeBack))) : Dynamic) : (cast (0.5 * ((((t = cast ((t - 2.0) : Dynamic)) * t) * (((EaseBack.s2__easeBack + 1.0) * t) + EaseBack.s2__easeBack)) + 2.0)) : Dynamic));
 
   public static final easeOutBack:EasingFunction = function(t:Dynamic) return ((((t = cast ((t - 1.0) : Dynamic)) * t) * (((EaseBack.s__easeBack + 1.0) * t) + EaseBack.s__easeBack)) + 1.0);
 

@@ -63,7 +63,7 @@ class Plane {
     c = source.c;
     d = source.d;
     len = HxMath.sqrt((((a * a) + (b * b)) + (c * c)));
-    if (_Runtime.truthy(_Runtime.strictEquals(len, 0.0))) {
+    if ((cast _Runtime.strictEquals(len, 0.0) : Bool)) {
       (out.a = cast (a : Dynamic));
       (out.b = cast (b : Dynamic));
       (out.c = cast (c : Dynamic));
@@ -127,7 +127,7 @@ class Plane {
     ny = ((e1z * e2x) - (e1x * e2z));
     nz = ((e1x * e2y) - (e1y * e2x));
     len = HxMath.sqrt((((nx * nx) + (ny * ny)) + (nz * nz)));
-    if (_Runtime.truthy(_Runtime.strictEquals(len, 0.0))) {
+    if ((cast _Runtime.strictEquals(len, 0.0) : Bool)) {
       (out.a = cast (nx : Dynamic));
       (out.b = cast (ny : Dynamic));
       (out.c = cast (nz : Dynamic));

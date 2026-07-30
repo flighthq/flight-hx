@@ -20,7 +20,7 @@ class CanvasRenderEffectRegistry {
   public static function registerCanvasRenderEffect(state:Dynamic, kind:String, runner:Dynamic):Void {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = ((cast CanvasRenderEffectRegistry._registries__canvasRenderEffectRegistry : flighthq._internal._WeakMap).get(state));
-    if (_Runtime.truthy(_Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+    if ((cast _Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (registry = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
       ((cast CanvasRenderEffectRegistry._registries__canvasRenderEffectRegistry : flighthq._internal._WeakMap).set(state, registry));
     }

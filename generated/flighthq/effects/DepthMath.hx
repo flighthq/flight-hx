@@ -28,7 +28,7 @@ class DepthMath {
     n = HxMath.max(1.0, HxMath.round(samples));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, n, '<'))) {
+      while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
         var h2:Dynamic = _Runtime.callValue(DepthMath.halton__depthMath, cast ([(i + 1.0), 2.0] : Array<Dynamic>));
         var h3:Dynamic = _Runtime.callValue(DepthMath.halton__depthMath, cast ([(i + 1.0), 3.0] : Array<Dynamic>));
         var theta:Dynamic = ((h2 * 2.0) * HxMath.PI);
@@ -52,7 +52,7 @@ class DepthMath {
     result = 0.0;
     f = 1.0;
     i = index;
-    while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>'))) {
+    while ((cast ((cast i : Float) > (cast 0.0 : Float)) : Bool)) {
       (f = cast ((f / base) : Dynamic));
       (result = cast ((result + (f * _Runtime.fmod(i, base))) : Dynamic));
       (i = cast (HxMath.floor((i / base)) : Dynamic));

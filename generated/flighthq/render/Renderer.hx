@@ -13,7 +13,7 @@ import flighthq.types.RendererData;
 class Renderer {
   public static function copyAllRenderersFromRenderState(target:RenderState, source:RenderState):Void {
     _Runtime.callValue(copyRenderersFromRenderState, cast ([target, source] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(source, 'displayObjectClipHooks'), null))) { _Runtime.setField(target, 'displayObjectClipHooks', _Runtime.field(source, 'displayObjectClipHooks')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(source, 'displayObjectClipHooks'), null) : Bool)) { _Runtime.setField(target, 'displayObjectClipHooks', _Runtime.field(source, 'displayObjectClipHooks')); }
   }
 
   public static function copyRenderersFromRenderState(target:RenderState, source:RenderState):Void {
@@ -30,7 +30,7 @@ class Renderer {
   public static function registerRenderer(state:RenderState, kind:Kind, renderer:flighthq.types.Renderer):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(((cast _Runtime.field(runtime, 'rendererMap') : flighthq._internal._Map).get(kind)), renderer))) { return; }
+    if ((cast _Runtime.strictEquals(((cast _Runtime.field(runtime, 'rendererMap') : flighthq._internal._Map).get(kind)), renderer) : Bool)) { return; }
     _Runtime.setField(runtime, 'rendererMapId', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(runtime, 'rendererMapId') + 1.0)), 0));
     ((cast _Runtime.field(runtime, 'rendererMap') : flighthq._internal._Map).set(kind, renderer));
   }

@@ -20,7 +20,7 @@ class CanvasClip {
   public static final canvasClipHooks__canvasClip:DisplayObjectClipHooks = { finalize: function(state:RenderState) {
     var s:Dynamic = cast _Runtime.UNDEFINED;
     s = (cast state : Dynamic);
-    while (_Runtime.truthy(_Runtime.compare(_Runtime.field(s, 'currentClipDepth'), 0.0, '>'))) {
+    while ((cast ((cast _Runtime.field(s, 'currentClipDepth') : Float) > (cast 0.0 : Float)) : Bool)) {
       _Runtime.callValue(popCanvasClipRectangle, cast ([s] : Array<Dynamic>));
       _Runtime.incrementField(s, 'currentClipDepth', -1, true);
     }
@@ -28,8 +28,8 @@ class CanvasClip {
     var s:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     s = (cast state : Dynamic);
-    target = (_Runtime.field(data, 'clipDepth') - _Runtime.select(!_Runtime.looseEquals(_Runtime.field(source, 'clip'), null), function():Dynamic return cast 1.0, function():Dynamic return cast 0.0));
-    while (_Runtime.truthy(_Runtime.compare(_Runtime.field(s, 'currentClipDepth'), target, '>'))) {
+    target = (_Runtime.field(data, 'clipDepth') - ((cast !_Runtime.looseEquals(_Runtime.field(source, 'clip'), null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
+    while ((cast ((cast _Runtime.field(s, 'currentClipDepth') : Float) > (cast target : Float)) : Bool)) {
       _Runtime.callValue(popCanvasClipRectangle, cast ([s] : Array<Dynamic>));
       _Runtime.incrementField(s, 'currentClipDepth', -1, true);
     }
@@ -38,8 +38,8 @@ class CanvasClip {
     var clip:Dynamic = cast _Runtime.UNDEFINED;
     s = (cast state : Dynamic);
     clip = _Runtime.field(source, 'clip');
-    if (_Runtime.truthy(_Runtime.strictEquals(clip, null))) { return; }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(clip, 'contours'), null))) {
+    if ((cast _Runtime.strictEquals(clip, null) : Bool)) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(clip, 'contours'), null) : Bool)) {
       _Runtime.callValue(pushCanvasClipRectangle, cast ([s, _Runtime.field(clip, 'rect'), _Runtime.field(data, 'transform2D')] : Array<Dynamic>));
     } else {
       _Runtime.callValue(pushCanvasClipContours, cast ([s, _Runtime.field(clip, 'contours'), _Runtime.field(clip, 'winding'), _Runtime.field(data, 'transform2D')] : Array<Dynamic>));

@@ -39,22 +39,22 @@ class MorphMeshGeometry {
     vertexCount = (_Runtime.toInt32((_Runtime.field(positions, 'length') / 3.0)) | 0);
     floats = (vertexCount * 3.0);
     _Runtime.callProperty(blendedPositions, 'set', cast ([(cast positions : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int(floats))] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(blendedNormals, null), function():Dynamic return cast !_Runtime.strictEquals(normals, null)))) { _Runtime.callProperty(blendedNormals, 'set', cast ([(cast normals : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int(floats))] : Array<Dynamic>)); }
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(blendedTangents, null), function():Dynamic return cast !_Runtime.strictEquals(tangents, null)))) { _Runtime.callProperty(blendedTangents, 'set', cast ([(cast tangents : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int(floats))] : Array<Dynamic>)); }
+    if ((cast ((cast !_Runtime.strictEquals(blendedNormals, null) : Bool) && (cast !_Runtime.strictEquals(normals, null) : Bool)) : Bool)) { _Runtime.callProperty(blendedNormals, 'set', cast ([(cast normals : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int(floats))] : Array<Dynamic>)); }
+    if ((cast ((cast !_Runtime.strictEquals(blendedTangents, null) : Bool) && (cast !_Runtime.strictEquals(tangents, null) : Bool)) : Bool)) { _Runtime.callProperty(blendedTangents, 'set', cast ([(cast tangents : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int(floats))] : Array<Dynamic>)); }
     targets = _Runtime.field(morph, 'targets');
     weights = _Runtime.field(morph, 'weights');
     targetCount = HxMath.min(_Runtime.field(targets, 'length'), _Runtime.field(weights, 'length'));
     {
       var t:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(t, targetCount, '<'))) {
+      while ((cast ((cast t : Float) < (cast targetCount : Float)) : Bool)) {
         var weight:Dynamic = _Runtime.getIndex(weights, t);
-        if (_Runtime.truthy(_Runtime.strictEquals(weight, 0.0))) { t++; continue; }
+        if ((cast _Runtime.strictEquals(weight, 0.0) : Bool)) { t++; continue; }
         var target:Dynamic = _Runtime.getIndex(targets, t);
         _Runtime.callValue(MorphMeshGeometry.accumulateDeltas__morphMeshGeometry, cast ([blendedPositions, _Runtime.field(target, 'positionDeltas'), weight, floats] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(blendedNormals, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(target, 'normalDeltas'), null)))) {
+        if ((cast ((cast !_Runtime.strictEquals(blendedNormals, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(target, 'normalDeltas'), null) : Bool)) : Bool)) {
           _Runtime.callValue(MorphMeshGeometry.accumulateDeltas__morphMeshGeometry, cast ([blendedNormals, _Runtime.field(target, 'normalDeltas'), weight, floats] : Array<Dynamic>));
         }
-        if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(blendedTangents, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(target, 'tangentDeltas'), null)))) {
+        if ((cast ((cast !_Runtime.strictEquals(blendedTangents, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(target, 'tangentDeltas'), null) : Bool)) : Bool)) {
           _Runtime.callValue(MorphMeshGeometry.accumulateDeltas__morphMeshGeometry, cast ([blendedTangents, _Runtime.field(target, 'tangentDeltas'), weight, floats] : Array<Dynamic>));
         }
         t++;
@@ -69,20 +69,20 @@ class MorphMeshGeometry {
     tangentOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'tangent'] : Array<Dynamic>));
     {
       var v:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(v, vertexCount, '<'))) {
+      while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
         var dst:Dynamic = (v * floatsPerVertex);
         var s:Dynamic = (v * 3.0);
-        if (_Runtime.truthy(_Runtime.compare(positionOffset, 0.0, '>='))) {
+        if ((cast ((cast positionOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
           _Runtime.setIndex(vertices, (dst + positionOffset), _Runtime.getIndex(blendedPositions, s));
           _Runtime.setIndex(vertices, ((dst + positionOffset) + 1.0), _Runtime.getIndex(blendedPositions, (s + 1.0)));
           _Runtime.setIndex(vertices, ((dst + positionOffset) + 2.0), _Runtime.getIndex(blendedPositions, (s + 2.0)));
         }
-        if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(blendedNormals, null), function():Dynamic return cast _Runtime.compare(normalOffset, 0.0, '>=')))) {
+        if ((cast ((cast !_Runtime.strictEquals(blendedNormals, null) : Bool) && (cast ((cast normalOffset : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) {
           _Runtime.setIndex(vertices, (dst + normalOffset), _Runtime.getIndex(blendedNormals, s));
           _Runtime.setIndex(vertices, ((dst + normalOffset) + 1.0), _Runtime.getIndex(blendedNormals, (s + 1.0)));
           _Runtime.setIndex(vertices, ((dst + normalOffset) + 2.0), _Runtime.getIndex(blendedNormals, (s + 2.0)));
         }
-        if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(blendedTangents, null), function():Dynamic return cast _Runtime.compare(tangentOffset, 0.0, '>=')))) {
+        if ((cast ((cast !_Runtime.strictEquals(blendedTangents, null) : Bool) && (cast ((cast tangentOffset : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) {
           _Runtime.setIndex(vertices, (dst + tangentOffset), _Runtime.getIndex(blendedTangents, s));
           _Runtime.setIndex(vertices, ((dst + tangentOffset) + 1.0), _Runtime.getIndex(blendedTangents, (s + 1.0)));
           _Runtime.setIndex(vertices, ((dst + tangentOffset) + 2.0), _Runtime.getIndex(blendedTangents, (s + 2.0)));
@@ -109,29 +109,29 @@ class MorphMeshGeometry {
     layout = _Runtime.field(__destructure2, 'layout');
     vertices = _Runtime.field(__destructure2, 'vertices');
     floatsPerVertex = (_Runtime.field(layout, 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast (_Runtime.toInt32((_Runtime.field(vertices, 'length') / floatsPerVertex)) | 0), function():Dynamic return cast 0.0);
+    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.toInt32((_Runtime.field(vertices, 'length') / floatsPerVertex)) | 0) : Dynamic) : (cast 0.0 : Dynamic));
     positionOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'position'] : Array<Dynamic>));
     normalOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'normal'] : Array<Dynamic>));
     tangentOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'tangent'] : Array<Dynamic>));
     positions = new flighthq._internal._Float32Array((vertexCount * 3.0));
-    normals = _Runtime.select(_Runtime.compare(normalOffset, 0.0, '>='), function():Dynamic return cast new flighthq._internal._Float32Array((vertexCount * 3.0)), function():Dynamic return cast null);
-    tangents = _Runtime.select(_Runtime.compare(tangentOffset, 0.0, '>='), function():Dynamic return cast new flighthq._internal._Float32Array((vertexCount * 3.0)), function():Dynamic return cast null);
+    normals = ((cast ((cast normalOffset : Float) >= (cast 0.0 : Float)) : Bool) ? (cast new flighthq._internal._Float32Array((vertexCount * 3.0)) : Dynamic) : (cast null : Dynamic));
+    tangents = ((cast ((cast tangentOffset : Float) >= (cast 0.0 : Float)) : Bool) ? (cast new flighthq._internal._Float32Array((vertexCount * 3.0)) : Dynamic) : (cast null : Dynamic));
     {
       var v:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(v, vertexCount, '<'))) {
+      while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
         var base:Dynamic = (v * floatsPerVertex);
         var p:Dynamic = (v * 3.0);
-        if (_Runtime.truthy(_Runtime.compare(positionOffset, 0.0, '>='))) {
+        if ((cast ((cast positionOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
           _Runtime.setIndex(positions, p, _Runtime.getIndex(vertices, (base + positionOffset)));
           _Runtime.setIndex(positions, (p + 1.0), _Runtime.getIndex(vertices, ((base + positionOffset) + 1.0)));
           _Runtime.setIndex(positions, (p + 2.0), _Runtime.getIndex(vertices, ((base + positionOffset) + 2.0)));
         }
-        if (_Runtime.truthy(!_Runtime.strictEquals(normals, null))) {
+        if ((cast !_Runtime.strictEquals(normals, null) : Bool)) {
           _Runtime.setIndex(normals, p, _Runtime.getIndex(vertices, (base + normalOffset)));
           _Runtime.setIndex(normals, (p + 1.0), _Runtime.getIndex(vertices, ((base + normalOffset) + 1.0)));
           _Runtime.setIndex(normals, (p + 2.0), _Runtime.getIndex(vertices, ((base + normalOffset) + 2.0)));
         }
-        if (_Runtime.truthy(!_Runtime.strictEquals(tangents, null))) {
+        if ((cast !_Runtime.strictEquals(tangents, null) : Bool)) {
           _Runtime.setIndex(tangents, p, _Runtime.getIndex(vertices, (base + tangentOffset)));
           _Runtime.setIndex(tangents, (p + 1.0), _Runtime.getIndex(vertices, ((base + tangentOffset) + 1.0)));
           _Runtime.setIndex(tangents, (p + 2.0), _Runtime.getIndex(vertices, ((base + tangentOffset) + 2.0)));
@@ -139,7 +139,7 @@ class MorphMeshGeometry {
         v++;
       }
     }
-    return cast { blendedNormals: _Runtime.select(!_Runtime.strictEquals(normals, null), function():Dynamic return cast new flighthq._internal._Float32Array((vertexCount * 3.0)), function():Dynamic return cast null), blendedPositions: new flighthq._internal._Float32Array((vertexCount * 3.0)), blendedTangents: _Runtime.select(!_Runtime.strictEquals(tangents, null), function():Dynamic return cast new flighthq._internal._Float32Array((vertexCount * 3.0)), function():Dynamic return cast null), normals: normals, positions: positions, tangents: tangents };
+    return cast { blendedNormals: ((cast !_Runtime.strictEquals(normals, null) : Bool) ? (cast new flighthq._internal._Float32Array((vertexCount * 3.0)) : Dynamic) : (cast null : Dynamic)), blendedPositions: new flighthq._internal._Float32Array((vertexCount * 3.0)), blendedTangents: ((cast !_Runtime.strictEquals(tangents, null) : Bool) ? (cast new flighthq._internal._Float32Array((vertexCount * 3.0)) : Dynamic) : (cast null : Dynamic)), normals: normals, positions: positions, tangents: tangents };
     return cast null;
   }
 
@@ -148,7 +148,7 @@ class MorphMeshGeometry {
     n = HxMath.min(count, _Runtime.field(deltas, 'length'));
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, n, '<'))) {
+      while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
         _Runtime.setIndex(accumulator, i, (_Runtime.getIndex(accumulator, i) + (weight * _Runtime.getIndex(deltas, i))));
         i++;
       }
