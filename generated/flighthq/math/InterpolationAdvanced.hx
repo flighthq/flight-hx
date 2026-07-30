@@ -15,7 +15,7 @@ class InterpolationAdvanced {
     var TAU:Dynamic = cast _Runtime.UNDEFINED;
     var diff:Dynamic = cast _Runtime.UNDEFINED;
     TAU = (HxMath.PI * 2.0);
-    diff = ((((b - a) % TAU) + TAU) % TAU);
+    diff = _Runtime.fmod((_Runtime.fmod((b - a), TAU) + TAU), TAU);
     if (_Runtime.truthy(_Runtime.compare(diff, HxMath.PI, '>'))) { (diff = cast ((diff - TAU) : Dynamic)); }
     return cast (a + (diff * t));
     return cast null;
@@ -34,14 +34,14 @@ class InterpolationAdvanced {
     var mod:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.compare(length, 0.0, '<='))) { return cast 0.0; }
     cycle = (2.0 * length);
-    mod = (((t % cycle) + cycle) % cycle);
+    mod = _Runtime.fmod((_Runtime.fmod(t, cycle) + cycle), cycle);
     return cast _Runtime.select(_Runtime.compare(mod, length, '<='), function():Dynamic return cast mod, function():Dynamic return cast (cycle - mod));
     return cast null;
   }
 
   public static function repeat(t:Float, length:Float):Float {
     if (_Runtime.truthy(_Runtime.compare(length, 0.0, '<='))) { return cast 0.0; }
-    return cast (((t % length) + length) % length);
+    return cast _Runtime.fmod((_Runtime.fmod(t, length) + length), length);
     return cast null;
   }
 

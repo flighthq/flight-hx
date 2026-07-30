@@ -100,7 +100,7 @@ class Transform2d {
   public static function recomputeLocalTransform2D__transform2d<Traits>(target:Transform2DNode<Traits>, runtime:Dynamic):Void {
     var matrix:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(target, 'rotation'), _Runtime.field(runtime, 'rotationAngle')))) {
-      var angle:Dynamic = (_Runtime.field(target, 'rotation') % 360.0);
+      var angle:Dynamic = _Runtime.fmod(_Runtime.field(target, 'rotation'), 360.0);
       if (_Runtime.truthy(_Runtime.compare(angle, 180.0, '>'))) {
         (angle = cast ((angle - 360.0) : Dynamic));
       } else { if (_Runtime.truthy(_Runtime.compare(angle, -180.0, '<'))) {

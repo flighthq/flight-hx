@@ -173,7 +173,7 @@ class StrokePath {
       _Runtime.callProperty(result, 'push', cast ([{ points: (cast pts : Array<Float>), closed: closed }] : Array<Dynamic>));
       return cast result;
     }
-    offset = (((dashOffset % totalDashLength) + totalDashLength) % totalDashLength);
+    offset = _Runtime.fmod((_Runtime.fmod(dashOffset, totalDashLength) + totalDashLength), totalDashLength);
     dashIndex = 0.0;
     remaining = 0.0;
     isOn = true;
@@ -185,7 +185,7 @@ class StrokePath {
           if (_Runtime.truthy(_Runtime.compare((acc + _Runtime.getIndex(dash, i)), offset, '>'))) {
             (dashIndex = cast (i : Dynamic));
             (remaining = cast ((_Runtime.getIndex(dash, i) - (offset - acc)) : Dynamic));
-            (isOn = cast (_Runtime.strictEquals((i % 2.0), 0.0) : Dynamic));
+            (isOn = cast (_Runtime.strictEquals(_Runtime.fmod(i, 2.0), 0.0) : Dynamic));
             break;
           }
           (acc = cast ((acc + _Runtime.getIndex(dash, i)) : Dynamic));
@@ -229,9 +229,9 @@ class StrokePath {
           (consumed = cast ((consumed + step) : Dynamic));
           (remaining = cast ((remaining - step) : Dynamic));
           if (_Runtime.truthy(_Runtime.compare(remaining, 1e-10, '<='))) {
-            (dashIndex = cast (((dashIndex + 1.0) % _Runtime.field(dash, 'length')) : Dynamic));
+            (dashIndex = cast (_Runtime.fmod((dashIndex + 1.0), _Runtime.field(dash, 'length')) : Dynamic));
             (remaining = cast (_Runtime.getIndex(dash, dashIndex) : Dynamic));
-            (isOn = cast (_Runtime.strictEquals((dashIndex % 2.0), 0.0) : Dynamic));
+            (isOn = cast (_Runtime.strictEquals(_Runtime.fmod(dashIndex, 2.0), 0.0) : Dynamic));
             if (_Runtime.truthy(_Runtime.andValue(isOn, function():Dynamic return cast _Runtime.strictEquals(current, null)))) {
               (current = cast (cast ([ix, iy] : Array<Dynamic>) : Dynamic));
             } else { if (_Runtime.truthy(_Runtime.andValue(!_Runtime.truthy(isOn), function():Dynamic return cast !_Runtime.strictEquals(current, null)))) {
@@ -461,7 +461,7 @@ class StrokePath {
       {
         var i:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(i, (n - 1.0), '<'))) {
-          var prev:Dynamic = (((i + n) - 2.0) % (n - 1.0));
+          var prev:Dynamic = _Runtime.fmod(((i + n) - 2.0), (n - 1.0));
           var curr:Dynamic = i;
           var nx0:Dynamic = _Runtime.getIndex(normals, (prev * 2.0));
           var ny0:Dynamic = _Runtime.getIndex(normals, ((prev * 2.0) + 1.0));

@@ -67,8 +67,8 @@ class SurfaceConvolution {
                         kx++;
                         continue;
                       } else { if (_Runtime.truthy(_Runtime.strictEquals(edge, 'wrap'))) {
-                        (sampleX = cast ((((rawSampleX % surfaceWidth) + surfaceWidth) % surfaceWidth) : Dynamic));
-                        (sampleY = cast ((((rawSampleY % surfaceHeight) + surfaceHeight) % surfaceHeight) : Dynamic));
+                        (sampleX = cast (_Runtime.fmod((_Runtime.fmod(rawSampleX, surfaceWidth) + surfaceWidth), surfaceWidth) : Dynamic));
+                        (sampleY = cast (_Runtime.fmod((_Runtime.fmod(rawSampleY, surfaceHeight) + surfaceHeight), surfaceHeight) : Dynamic));
                       } else { if (_Runtime.truthy(_Runtime.strictEquals(edge, 'mirror'))) {
                         (sampleX = cast (_Runtime.callValue(SurfaceConvolution.resolveConvolutionMirror__surfaceConvolution, cast ([rawSampleX, surfaceWidth] : Array<Dynamic>)) : Dynamic));
                         (sampleY = cast (_Runtime.callValue(SurfaceConvolution.resolveConvolutionMirror__surfaceConvolution, cast ([rawSampleY, surfaceHeight] : Array<Dynamic>)) : Dynamic));
@@ -133,7 +133,7 @@ class SurfaceConvolution {
     var period:Dynamic = cast _Runtime.UNDEFINED;
     var wrapped:Dynamic = cast _Runtime.UNDEFINED;
     period = (2.0 * size);
-    wrapped = (((v % period) + period) % period);
+    wrapped = _Runtime.fmod((_Runtime.fmod(v, period) + period), period);
     return cast _Runtime.select(_Runtime.compare(wrapped, size, '<'), function():Dynamic return cast wrapped, function():Dynamic return cast ((period - 1.0) - wrapped));
     return cast null;
   }

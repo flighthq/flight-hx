@@ -144,11 +144,11 @@ class SurfaceTransform {
     {
       var py:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(out, 'height'), '<'))) {
-        var srcY:Dynamic = ((((py - dy) % _Runtime.field(out, 'height')) + _Runtime.field(out, 'height')) % _Runtime.field(out, 'height'));
+        var srcY:Dynamic = _Runtime.fmod((_Runtime.fmod((py - dy), _Runtime.field(out, 'height')) + _Runtime.field(out, 'height')), _Runtime.field(out, 'height'));
         {
           var px:Dynamic = 0.0;
           while (_Runtime.truthy(_Runtime.compare(px, _Runtime.field(out, 'width'), '<'))) {
-            var srcX:Dynamic = ((((px - dx) % _Runtime.field(out, 'width')) + _Runtime.field(out, 'width')) % _Runtime.field(out, 'width'));
+            var srcX:Dynamic = _Runtime.fmod((_Runtime.fmod((px - dx), _Runtime.field(out, 'width')) + _Runtime.field(out, 'width')), _Runtime.field(out, 'width'));
             var si:Dynamic = (((srcY * _Runtime.field(out, 'width')) + srcX) * 4.0);
             var di:Dynamic = (((py * _Runtime.field(out, 'width')) + px) * 4.0);
             _Runtime.setIndex(_Runtime.field(out, 'data'), di, _Runtime.getIndex(SurfaceTransform._scrollScratch__surfaceTransform, si));

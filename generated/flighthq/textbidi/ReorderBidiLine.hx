@@ -20,7 +20,7 @@ class ReorderBidiLine {
         var level:Dynamic = _Runtime.getIndex(levels, i);
         _Runtime.setIndex(out, (i - start), i);
         if (_Runtime.truthy(_Runtime.compare(level, highest, '>'))) { (highest = cast (level : Dynamic)); }
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals((level % 2.0), 1.0), function():Dynamic return cast _Runtime.compare(level, lowestOdd, '<')))) { (lowestOdd = cast (level : Dynamic)); }
+        if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.fmod(level, 2.0), 1.0), function():Dynamic return cast _Runtime.compare(level, lowestOdd, '<')))) { (lowestOdd = cast (level : Dynamic)); }
         i++;
       }
     }

@@ -224,7 +224,7 @@ class SurfaceNoise {
 
   public static function stitchedCoord__surfaceNoise(t:Float, period:Float):Float {
     if (_Runtime.truthy(_Runtime.compare(period, 0.0, '<='))) { return cast t; }
-    return cast (((t % period) + period) % period);
+    return cast _Runtime.fmod((_Runtime.fmod(t, period) + period), period);
     return cast null;
   }
 

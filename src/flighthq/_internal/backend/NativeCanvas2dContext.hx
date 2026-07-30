@@ -195,14 +195,14 @@ class NativeCanvas2dContext {
     if (anticlockwise == true) {
       if (sweep <= -tau || sweep >= tau) sweep = -tau;
       else {
-        sweep = sweep % tau;
+        sweep = _Runtime.fmod(sweep, tau);
         if (sweep > 0) sweep -= tau;
       }
       context().arcNegative(x, y, radius, startAngle, startAngle + sweep);
     } else {
       if (sweep >= tau || sweep <= -tau) sweep = tau;
       else {
-        sweep = sweep % tau;
+        sweep = _Runtime.fmod(sweep, tau);
         if (sweep < 0) sweep += tau;
       }
       context().arc(x, y, radius, startAngle, startAngle + sweep);

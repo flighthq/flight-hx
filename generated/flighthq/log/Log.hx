@@ -358,7 +358,7 @@ class Log {
         _Runtime.callProperty(_Runtime.field(state, 'buf'), 'push', cast ([stored] : Array<Dynamic>));
       } else {
         _Runtime.setIndex(_Runtime.field(state, 'buf'), _Runtime.field(state, 'head'), stored);
-        _Runtime.setField(state, 'head', ((_Runtime.field(state, 'head') + 1.0) % capacity));
+        _Runtime.setField(state, 'head', _Runtime.fmod((_Runtime.field(state, 'head') + 1.0), capacity));
       }
     };
     handle = { sink: sink };
@@ -405,7 +405,7 @@ class Log {
     if (_Runtime.truthy(_Runtime.compare(rate, 1.0, '<='))) { return cast target; }
     counter = 0.0;
     return cast function(entry:LogEntry) {
-      (counter = cast (((counter + 1.0) % rate) : Dynamic));
+      (counter = cast (_Runtime.fmod((counter + 1.0), rate) : Dynamic));
       if (_Runtime.truthy(_Runtime.strictEquals(counter, 0.0))) { _Runtime.callValue(target, cast ([entry] : Array<Dynamic>)); }
     };
     return cast null;

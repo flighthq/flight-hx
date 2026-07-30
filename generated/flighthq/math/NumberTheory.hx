@@ -27,7 +27,7 @@ class NumberTheory {
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(a, 0.0), function():Dynamic return cast _Runtime.strictEquals(b, 0.0)))) { throw _Runtime.rangeError('gcd: both arguments must not be 0'); }
     while (_Runtime.truthy(!_Runtime.strictEquals(b, 0.0))) {
       var t:Dynamic = b;
-      (b = cast ((a % b) : Dynamic));
+      (b = cast (_Runtime.fmod(a, b) : Dynamic));
       (a = cast (t : Dynamic));
     }
     return cast a;

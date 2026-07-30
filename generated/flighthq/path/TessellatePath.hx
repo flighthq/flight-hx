@@ -63,7 +63,7 @@ class TessellatePath {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, count, '<'))) {
-        var j:Dynamic = ((i + 1.0) % count);
+        var j:Dynamic = _Runtime.fmod((i + 1.0), count);
         (twiceArea = cast ((twiceArea + ((_Runtime.getIndex(contour, (i * 2.0)) * _Runtime.getIndex(contour, ((j * 2.0) + 1.0))) - (_Runtime.getIndex(contour, (j * 2.0)) * _Runtime.getIndex(contour, ((i * 2.0) + 1.0))))) : Dynamic));
         i++;
       }
@@ -92,9 +92,9 @@ class TessellatePath {
       {
         var i:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(ring, 'length'), '<'))) {
-          var a:Dynamic = _Runtime.getIndex(ring, (((i + _Runtime.field(ring, 'length')) - 1.0) % _Runtime.field(ring, 'length')));
+          var a:Dynamic = _Runtime.getIndex(ring, _Runtime.fmod(((i + _Runtime.field(ring, 'length')) - 1.0), _Runtime.field(ring, 'length')));
           var b:Dynamic = _Runtime.getIndex(ring, i);
-          var c:Dynamic = _Runtime.getIndex(ring, ((i + 1.0) % _Runtime.field(ring, 'length')));
+          var c:Dynamic = _Runtime.getIndex(ring, _Runtime.fmod((i + 1.0), _Runtime.field(ring, 'length')));
           if (_Runtime.truthy(_Runtime.callValue(TessellatePath.isEar__tessellatePath, cast ([contour, ring, a, b, c] : Array<Dynamic>)))) {
             _Runtime.pushMany(indices, cast ([(base + a), (base + b), (base + c)] : Array<Dynamic>));
             _Runtime.splice(ring, Std.int(i), Std.int(1.0), []);

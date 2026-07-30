@@ -377,7 +377,7 @@ class Application {
       _Runtime.callProperty(_Runtime.field(state, 'fpsBuffer'), 'push', cast ([delta] : Array<Dynamic>));
     } else {
       _Runtime.setIndex(_Runtime.field(state, 'fpsBuffer'), _Runtime.field(state, 'fpsHead'), delta);
-      _Runtime.setField(state, 'fpsHead', ((_Runtime.field(state, 'fpsHead') + 1.0) % Application.ROLLING_FPS_WINDOW__application));
+      _Runtime.setField(state, 'fpsHead', _Runtime.fmod((_Runtime.field(state, 'fpsHead') + 1.0), Application.ROLLING_FPS_WINDOW__application));
     }
   }
 

@@ -254,7 +254,7 @@ class WgpuVelocity {
     clipWidth = ((width / _Runtime.field(ctx, 'width')) * 2.0);
     clipHeight = -((height / _Runtime.field(ctx, 'height')) * 2.0);
     slot = _Runtime.field(pipeline, 'cursor');
-    _Runtime.setField(pipeline, 'cursor', ((slot + WgpuVelocity.UNIFORM_STRIDE__wgpuVelocity) % (WgpuVelocity.UNIFORM_SLOTS__wgpuVelocity * WgpuVelocity.UNIFORM_STRIDE__wgpuVelocity)));
+    _Runtime.setField(pipeline, 'cursor', _Runtime.fmod((slot + WgpuVelocity.UNIFORM_STRIDE__wgpuVelocity), (WgpuVelocity.UNIFORM_SLOTS__wgpuVelocity * WgpuVelocity.UNIFORM_STRIDE__wgpuVelocity)));
     scratch = _Runtime.field(pipeline, 'scratch');
     _Runtime.setIndex(scratch, 0.0, clipX0);
     _Runtime.setIndex(scratch, 1.0, clipY0);

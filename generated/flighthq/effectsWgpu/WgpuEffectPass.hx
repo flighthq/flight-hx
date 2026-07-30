@@ -74,7 +74,7 @@ class WgpuEffectPass {
   public static function acquireUniformSlot__wgpuEffectPass(fs:WgpuEffectPassState__wgpuEffectPass):Float {
     var offset:Dynamic = cast _Runtime.UNDEFINED;
     offset = _Runtime.field(fs, 'uniformOffset');
-    _Runtime.setField(fs, 'uniformOffset', ((offset + _Runtime.field(fs, 'uniformStride')) % (_Runtime.field(fs, 'uniformSlots') * _Runtime.field(fs, 'uniformStride'))));
+    _Runtime.setField(fs, 'uniformOffset', _Runtime.fmod((offset + _Runtime.field(fs, 'uniformStride')), (_Runtime.field(fs, 'uniformSlots') * _Runtime.field(fs, 'uniformStride'))));
     return cast offset;
     return cast null;
   }

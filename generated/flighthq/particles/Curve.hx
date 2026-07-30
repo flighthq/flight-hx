@@ -153,9 +153,9 @@ class Curve {
     var g:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
     c = (v * s);
-    x = (c * (1.0 - HxMath.abs((((h * 6.0) % 2.0) - 1.0))));
+    x = (c * (1.0 - HxMath.abs((_Runtime.fmod((h * 6.0), 2.0) - 1.0))));
     m = (v - c);
-    hi = (HxMath.floor((h * 6.0)) % 6.0);
+    hi = _Runtime.fmod(HxMath.floor((h * 6.0)), 6.0);
     r = 0.0;
     g = 0.0;
     b = 0.0;
@@ -239,7 +239,7 @@ class Curve {
     delta = (max - min);
     h = 0.0;
     if (_Runtime.truthy(_Runtime.compare(delta, 0.0, '>'))) {
-      if (_Runtime.truthy(_Runtime.strictEquals(max, r))) { (h = cast ((((g - b) / delta) % 6.0) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.strictEquals(max, g))) { (h = cast ((((b - r) / delta) + 2.0) : Dynamic)); } else { (h = cast ((((r - g) / delta) + 4.0) : Dynamic)); } }
+      if (_Runtime.truthy(_Runtime.strictEquals(max, r))) { (h = cast (_Runtime.fmod(((g - b) / delta), 6.0) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.strictEquals(max, g))) { (h = cast ((((b - r) / delta) + 2.0) : Dynamic)); } else { (h = cast ((((r - g) / delta) + 4.0) : Dynamic)); } }
       (h = cast ((h / 6.0) : Dynamic));
       if (_Runtime.truthy(_Runtime.compare(h, 0.0, '<'))) { (h = cast ((h + 1.0) : Dynamic)); }
     }

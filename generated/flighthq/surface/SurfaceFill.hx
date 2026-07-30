@@ -79,7 +79,7 @@ class SurfaceFill {
       var idx:Dynamic = _Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.getIndex(visited, idx))) { continue; }
       _Runtime.setIndex(visited, idx, 1.0);
-      var px:Dynamic = (idx % _Runtime.field(out, 'width'));
+      var px:Dynamic = _Runtime.fmod(idx, _Runtime.field(out, 'width'));
       var py:Dynamic = HxMath.floor((idx / _Runtime.field(out, 'width')));
       var i:Dynamic = (idx * 4.0);
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(out, 'data'), i), targetR), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(out, 'data'), (i + 1.0)), targetG)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(out, 'data'), (i + 2.0)), targetB)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(out, 'data'), (i + 3.0)), targetA)))) {

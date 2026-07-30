@@ -458,8 +458,8 @@ class ClipRegion {
           while (_Runtime.truthy(_Runtime.compare(i, n, '<'))) {
             var x0:Dynamic = _Runtime.getIndex(contour, i);
             var y0:Dynamic = _Runtime.getIndex(contour, (i + 1.0));
-            var x1:Dynamic = _Runtime.getIndex(contour, ((i + 2.0) % n));
-            var y1:Dynamic = _Runtime.getIndex(contour, ((i + 3.0) % n));
+            var x1:Dynamic = _Runtime.getIndex(contour, _Runtime.fmod((i + 2.0), n));
+            var y1:Dynamic = _Runtime.getIndex(contour, _Runtime.fmod((i + 3.0), n));
             if (_Runtime.truthy(_Runtime.compare(y0, py, '<='))) {
               if (_Runtime.truthy(_Runtime.compare(y1, py, '>'))) {
                 if (_Runtime.truthy(_Runtime.compare((((x1 - x0) * (py - y0)) - ((px - x0) * (y1 - y0))), 0.0, '>'))) {

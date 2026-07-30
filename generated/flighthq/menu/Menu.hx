@@ -280,7 +280,7 @@ class Menu {
         var items:Dynamic = cast _Runtime.UNDEFINED;
         items = _Runtime.toArray(focusableItems);
         if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(items, 'length'), 0.0))) { return; }
-        (focusIndex = cast ((((focusIndex + delta) + _Runtime.field(items, 'length')) % _Runtime.field(items, 'length')) : Dynamic));
+        (focusIndex = cast (_Runtime.fmod(((focusIndex + delta) + _Runtime.field(items, 'length')), _Runtime.field(items, 'length')) : Dynamic));
         _Runtime.callProperty(items, 'forEach', cast ([function(el:Dynamic, i:Dynamic) {
           if (_Runtime.truthy(_Runtime.strictEquals(i, focusIndex))) {
             _Runtime.callProperty(el, 'setAttribute', cast (['data-focused', 'true'] : Array<Dynamic>));

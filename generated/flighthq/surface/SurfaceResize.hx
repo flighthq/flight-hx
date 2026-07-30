@@ -220,12 +220,12 @@ class SurfaceResize {
         return cast HxMath.max(0.0, HxMath.min((size - 1.0), v));
       }
       else if (__switchValue == 'wrap') {
-        return cast (((v % size) + size) % size);
+        return cast _Runtime.fmod((_Runtime.fmod(v, size) + size), size);
       }
       else if (__switchValue == 'mirror') {
         {
           var period:Dynamic = (2.0 * size);
-          var wrapped:Dynamic = (((v % period) + period) % period);
+          var wrapped:Dynamic = _Runtime.fmod((_Runtime.fmod(v, period) + period), period);
           return cast _Runtime.select(_Runtime.compare(wrapped, size, '<'), function():Dynamic return cast wrapped, function():Dynamic return cast ((period - 1.0) - wrapped));
         }
       }

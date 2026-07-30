@@ -311,12 +311,12 @@ class ResolveBidiLevels {
     var even:Dynamic = cast _Runtime.UNDEFINED;
     seqLevel = _Runtime.getIndex(levelArray, _Runtime.getIndex(sequence, 0.0));
     prevLevel = _Runtime.select(_Runtime.compare(keptStart, 0.0, '>'), function():Dynamic return cast _Runtime.getIndex(levelArray, _Runtime.getIndex(kept, (keptStart - 1.0))), function():Dynamic return cast paragraphLevel);
-    sos = _Runtime.select(_Runtime.strictEquals((HxMath.max(seqLevel, prevLevel) % 2.0), 1.0), function():Dynamic return cast 'R', function():Dynamic return cast 'L');
+    sos = _Runtime.select(_Runtime.strictEquals(_Runtime.fmod(HxMath.max(seqLevel, prevLevel), 2.0), 1.0), function():Dynamic return cast 'R', function():Dynamic return cast 'L');
     lastIdx = _Runtime.getIndex(sequence, (_Runtime.field(sequence, 'length') - 1.0));
     lastType = _Runtime.getIndex(original, lastIdx);
     endsUnmatchedIsolate = _Runtime.andValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(lastType, 'LRI'), function():Dynamic return cast _Runtime.strictEquals(lastType, 'RLI')), function():Dynamic return cast _Runtime.strictEquals(lastType, 'FSI')), function():Dynamic return cast _Runtime.compare(_Runtime.getIndex(matchingPdi, lastIdx), _Runtime.field(original, 'length'), '>='));
     nextLevel = _Runtime.select(endsUnmatchedIsolate, function():Dynamic return cast paragraphLevel, function():Dynamic return cast _Runtime.select(_Runtime.compare(keptEnd, _Runtime.field(kept, 'length'), '<'), function():Dynamic return cast _Runtime.getIndex(levelArray, _Runtime.getIndex(kept, keptEnd)), function():Dynamic return cast paragraphLevel));
-    eos = _Runtime.select(_Runtime.strictEquals((HxMath.max(seqLevel, nextLevel) % 2.0), 1.0), function():Dynamic return cast 'R', function():Dynamic return cast 'L');
+    eos = _Runtime.select(_Runtime.strictEquals(_Runtime.fmod(HxMath.max(seqLevel, nextLevel), 2.0), 1.0), function():Dynamic return cast 'R', function():Dynamic return cast 'L');
     len = _Runtime.field(sequence, 'length');
     ty = _Runtime.createArray(len);
     {
@@ -394,7 +394,7 @@ class ResolveBidiLevels {
         k++;
       }
     }
-    embeddingDir = _Runtime.select(_Runtime.strictEquals((seqLevel % 2.0), 1.0), function():Dynamic return cast 'R', function():Dynamic return cast 'L');
+    embeddingDir = _Runtime.select(_Runtime.strictEquals(_Runtime.fmod(seqLevel, 2.0), 1.0), function():Dynamic return cast 'R', function():Dynamic return cast 'L');
     {
       var k:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(k, len, '<'))) {
@@ -417,7 +417,7 @@ class ResolveBidiLevels {
         }
       }
     }
-    even = _Runtime.strictEquals((seqLevel % 2.0), 0.0);
+    even = _Runtime.strictEquals(_Runtime.fmod(seqLevel, 2.0), 0.0);
     {
       var k:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(k, len, '<'))) {

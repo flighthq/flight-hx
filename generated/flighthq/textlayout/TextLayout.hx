@@ -140,7 +140,7 @@ class TextLayout {
     }
     spaceW = (_Runtime.callValue(measure, cast (['    ', format] : Array<Dynamic>)) / 4.0);
     tabW = (HxMath.max(spaceW, 1.0) * 4.0);
-    return cast (tabW - (currentX % tabW));
+    return cast (tabW - _Runtime.fmod(currentX, tabW));
     return cast null;
   }
 

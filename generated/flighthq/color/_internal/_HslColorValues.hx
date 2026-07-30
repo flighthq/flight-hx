@@ -69,7 +69,7 @@ class _HslColorValues {
 
   public static function hueToRgbChannel__hslColor(p:Float, q:Float, t:Float):Float {
     var tn:Dynamic = cast _Runtime.UNDEFINED;
-    tn = (((t % 1.0) + 1.0) % 1.0);
+    tn = _Runtime.fmod((_Runtime.fmod(t, 1.0) + 1.0), 1.0);
     if (_Runtime.truthy(_Runtime.compare(tn, (1.0 / 6.0), '<'))) { return cast (p + (((q - p) * 6.0) * tn)); }
     if (_Runtime.truthy(_Runtime.compare(tn, (1.0 / 2.0), '<'))) { return cast q; }
     if (_Runtime.truthy(_Runtime.compare(tn, (2.0 / 3.0), '<'))) { return cast (p + (((q - p) * ((2.0 / 3.0) - tn)) * 6.0)); }

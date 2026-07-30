@@ -54,7 +54,7 @@ class DepthMath {
     i = index;
     while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>'))) {
       (f = cast ((f / base) : Dynamic));
-      (result = cast ((result + (f * (i % base))) : Dynamic));
+      (result = cast ((result + (f * _Runtime.fmod(i, base))) : Dynamic));
       (i = cast (HxMath.floor((i / base)) : Dynamic));
     }
     return cast result;

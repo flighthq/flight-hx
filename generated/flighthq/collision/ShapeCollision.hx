@@ -264,7 +264,7 @@ class ShapeCollision {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, pn, '<'))) {
-        var j:Dynamic = ((i + 1.0) % pn);
+        var j:Dynamic = _Runtime.fmod((i + 1.0), pn);
         var x0:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(i) << 1));
         var y0:Dynamic = _Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0));
         var x1:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(j) << 1));
@@ -438,7 +438,7 @@ class ShapeCollision {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, sn, '<'))) {
-        var j:Dynamic = ((i + 1.0) % sn);
+        var j:Dynamic = _Runtime.fmod((i + 1.0), sn);
         var x0:Dynamic = _Runtime.getIndex(sx, (_Runtime.toInt32(i) << 1));
         var y0:Dynamic = _Runtime.getIndex(sx, ((_Runtime.toInt32(i) << 1) + 1.0));
         var x1:Dynamic = _Runtime.getIndex(sx, (_Runtime.toInt32(j) << 1));

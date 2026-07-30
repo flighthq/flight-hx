@@ -69,7 +69,7 @@ class ParseKtx2 {
         if (_Runtime.truthy(_Runtime.compare((byteOffset + byteLength), _Runtime.field(bytes, 'byteLength'), '>'))) { return cast null; }
         var mipWidth:Dynamic = HxMath.max(1.0, (_Runtime.toInt32(width) >> _Runtime.toInt32(mip)));
         var mipHeight:Dynamic = HxMath.max(1.0, (_Runtime.toInt32(height) >> _Runtime.toInt32(mip)));
-        var splittable:Dynamic = _Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(supercompression, 'None'), function():Dynamic return cast _Runtime.compare(imagesPerLevel, 1.0, '>')), function():Dynamic return cast _Runtime.strictEquals((byteLength % imagesPerLevel), 0.0));
+        var splittable:Dynamic = _Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(supercompression, 'None'), function():Dynamic return cast _Runtime.compare(imagesPerLevel, 1.0, '>')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.fmod(byteLength, imagesPerLevel), 0.0));
         if (_Runtime.truthy(!_Runtime.truthy(splittable))) {
           _Runtime.callProperty(levels, 'push', cast ([{ byteLength: byteLength, byteOffset: byteOffset, height: mipHeight, width: mipWidth }] : Array<Dynamic>));
           (mip = cast ((mip + 1.0) : Dynamic));

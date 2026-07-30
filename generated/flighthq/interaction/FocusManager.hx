@@ -244,7 +244,7 @@ class FocusManager {
       (index = cast ((from + delta) : Dynamic));
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(order, 'length'), '>=')))) {
         if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(manager, 'wrap')))) { return cast null; }
-        (index = cast (((index + _Runtime.field(order, 'length')) % _Runtime.field(order, 'length')) : Dynamic));
+        (index = cast (_Runtime.fmod((index + _Runtime.field(order, 'length')), _Runtime.field(order, 'length')) : Dynamic));
       }
     }
     next = _Runtime.getIndex(order, index);

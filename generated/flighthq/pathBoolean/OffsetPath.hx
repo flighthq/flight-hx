@@ -66,7 +66,7 @@ class OffsetPath {
     {
       var k:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(k, count, '<'))) {
-        var kn:Dynamic = ((k + 1.0) % count);
+        var kn:Dynamic = _Runtime.fmod((k + 1.0), count);
         var dx:Dynamic = (_Runtime.getIndex(vertices, (2.0 * kn)) - _Runtime.getIndex(vertices, (2.0 * k)));
         var dy:Dynamic = (_Runtime.getIndex(vertices, ((2.0 * kn) + 1.0)) - _Runtime.getIndex(vertices, ((2.0 * k) + 1.0)));
         var length:Dynamic = _Runtime.hypot(dx, dy);
@@ -82,7 +82,7 @@ class OffsetPath {
     {
       var k:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(k, count, '<'))) {
-        var previous:Dynamic = (((k - 1.0) + count) % count);
+        var previous:Dynamic = _Runtime.fmod(((k - 1.0) + count), count);
         var vx:Dynamic = _Runtime.getIndex(vertices, (2.0 * k));
         var vy:Dynamic = _Runtime.getIndex(vertices, ((2.0 * k) + 1.0));
         var previousEndX:Dynamic = (vx + (signedDelta * _Runtime.getIndex(normalX, previous)));
@@ -236,7 +236,7 @@ class OffsetPath {
     {
       var k:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(k, count, '<'))) {
-        var kn:Dynamic = ((k + 1.0) % count);
+        var kn:Dynamic = _Runtime.fmod((k + 1.0), count);
         (area = cast ((area + ((_Runtime.getIndex(vertices, (2.0 * k)) * _Runtime.getIndex(vertices, ((2.0 * kn) + 1.0))) - (_Runtime.getIndex(vertices, (2.0 * kn)) * _Runtime.getIndex(vertices, ((2.0 * k) + 1.0))))) : Dynamic));
         k++;
       }

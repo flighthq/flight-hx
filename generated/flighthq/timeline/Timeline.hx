@@ -30,7 +30,7 @@ class Timeline {
       var frameTime:Dynamic = (1000.0 / frameRate);
       _Runtime.setField(timeline, 'timeElapsed', (_Runtime.field(timeline, 'timeElapsed') + deltaTime));
       var next:Dynamic = (_Runtime.field(timeline, 'currentFrame') + HxMath.floor((_Runtime.field(timeline, 'timeElapsed') / frameTime)));
-      _Runtime.setField(timeline, 'timeElapsed', (_Runtime.field(timeline, 'timeElapsed') % frameTime));
+      _Runtime.setField(timeline, 'timeElapsed', _Runtime.fmod(_Runtime.field(timeline, 'timeElapsed'), frameTime));
       if (_Runtime.truthy(_Runtime.compare(next, totalFrames, '>'))) {
         if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(timeline, 'playMode'), 'once'))) {
           _Runtime.setField(timeline, 'isPlaying', false);
@@ -39,7 +39,7 @@ class Timeline {
           if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onComplete')]]), 1); }
           return cast completed;
         }
-        (next = cast ((((next - 1.0) % totalFrames) + 1.0) : Dynamic));
+        (next = cast ((_Runtime.fmod((next - 1.0), totalFrames) + 1.0) : Dynamic));
         var signals:Dynamic = _Runtime.field(timeline, 'signals');
         if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onLoop')]]), 1); }
       }

@@ -187,7 +187,7 @@ class MeshGeometryOperations {
     var posOffset:Dynamic = cast _Runtime.UNDEFINED;
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
     if (_Runtime.truthy(_Runtime.compare(floatsPerVertex, 0.0, '<='))) { return cast false; }
-    if (_Runtime.truthy(!_Runtime.strictEquals((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') % floatsPerVertex), 0.0))) { return cast false; }
+    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.fmod(_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length'), floatsPerVertex), 0.0))) { return cast false; }
     vertexCount = HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex));
     if (_Runtime.truthy(_Runtime.field(geometry, 'indices'))) {
       {

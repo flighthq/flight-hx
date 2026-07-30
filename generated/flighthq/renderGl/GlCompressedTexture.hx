@@ -221,9 +221,9 @@ class GlCompressedTexture {
         while (_Runtime.truthy(_Runtime.compare(index, _Runtime.field(_Runtime.field(container, 'levels'), 'length'), '<'))) {
           var entry:Dynamic = _Runtime.getIndex(_Runtime.field(container, 'levels'), index);
           var view:Dynamic = new flighthq._internal._UInt8Array(_Runtime.field(payload, 'buffer'), (_Runtime.field(payload, 'byteOffset') + _Runtime.field(entry, 'byteOffset')), _Runtime.field(entry, 'byteLength'));
-          var mip:Dynamic = (index % mipLevels);
+          var mip:Dynamic = _Runtime.fmod(index, mipLevels);
           var faceLayer:Dynamic = ((index - mip) / mipLevels);
-          var face:Dynamic = (faceLayer % faces);
+          var face:Dynamic = _Runtime.fmod(faceLayer, faces);
           var layer:Dynamic = ((faceLayer - face) / faces);
           if (_Runtime.truthy(_Runtime.compare(layers, 1.0, '>'))) {
             flighthq._internal.backend.WebGl2Backend.compressedTexSubImage3D(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D_ARRAY, mip, 0.0, 0.0, layer, _Runtime.field(entry, 'width'), _Runtime.field(entry, 'height'), 1.0, nativeFormat, view);

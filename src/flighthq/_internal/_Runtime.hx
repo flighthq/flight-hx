@@ -1042,7 +1042,7 @@ class _Runtime {
     #else
     if (Math.isNaN(value) || !Math.isFinite(value)) return 0;
     var truncated = value < 0 ? Math.fceil(value) : Math.ffloor(value);
-    var wrapped = truncated % 4294967296.0;
+    var wrapped = fmod(truncated, 4294967296.0);
     if (wrapped < 0) wrapped += 4294967296.0;
     return wrapped >= 2147483648.0 ? Std.int(wrapped - 4294967296.0) : Std.int(wrapped);
     #end
