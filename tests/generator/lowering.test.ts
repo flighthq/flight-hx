@@ -1338,6 +1338,73 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('_Runtime.looseEquals(a, b)');
   });
 
+  it('records conservative static facts without changing dynamic emission', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/sample.ts',
+      `
+        interface Float32Array {
+          [index: number]: number;
+        }
+
+        export function inspect(
+          flag: boolean,
+          maybe: boolean | null,
+          a: number,
+          b: number,
+          text: string,
+          values: number[],
+          floats: globalThis.Float32Array,
+          mixed: globalThis.Float32Array | Uint8Array,
+          shadowed: Float32Array,
+        ) {
+          if (flag) a += 1;
+          if (maybe) b += 1;
+          const numericOrder = a < b;
+          const stringOrder = text < 'z';
+          const value = floats[0];
+          values[1] = a;
+          floats[2] += b;
+          const mixedValue = mixed[3];
+          const shadowedValue = shadowed[4];
+          const logical = flag && true;
+          return { logical, mixedValue, numericOrder, shadowedValue, stringOrder, value };
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'StaticFactsFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(lowered.staticFacts).toMatchObject({
+      booleanConditionalTruthiness: 0,
+      booleanExplicitTruthiness: 1,
+      booleanLogicalExpressions: 1,
+      booleanLogicalTruthiness: 1,
+      indexedAccesses: { expressions: 3, reads: 2, writes: 2 },
+      numericRelations: 1,
+    });
+    expect(lowered.staticFacts.indexedReceivers.Array).toEqual({ expressions: 1, reads: 0, writes: 1 });
+    expect(lowered.staticFacts.indexedReceivers.Float32Array).toEqual({
+      expressions: 2,
+      reads: 2,
+      writes: 1,
+    });
+    expect(lowered.staticFacts.indexedReceivers.Uint8Array).toEqual({ expressions: 0, reads: 0, writes: 0 });
+
+    expect(output).toContain('_Runtime.truthy(flag)');
+    expect(output).toContain('_Runtime.truthy(maybe)');
+    expect(output).toContain("_Runtime.compare(a, b, '<')");
+    expect(output).toContain("_Runtime.compare(text, 'z', '<')");
+    expect(output).toContain('_Runtime.getIndex(mixed, 3.0)');
+    expect(output).toContain('_Runtime.getIndex(shadowed, 4.0)');
+    expect(output).toContain('_Runtime.andValue(flag');
+  });
+
   it('preserves Haxe keyword property names in JavaScript objects', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/example/src/sample.ts',

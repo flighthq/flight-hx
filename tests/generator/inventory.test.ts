@@ -36,8 +36,13 @@ describe('auditLowering', () => {
     expect(audit.summary.declarations).toBeGreaterThan(5_000);
     expect(audit.summary.lowered).toBe(audit.summary.declarations);
     expect(audit.summary.diagnostics).toBe(0);
+    expect(audit.summary.staticFacts.booleanExplicitTruthiness).toBeGreaterThan(1_000);
+    expect(audit.summary.staticFacts.numericRelations).toBeGreaterThan(1_000);
+    expect(audit.summary.staticFacts.indexedAccesses.reads).toBeGreaterThan(1_000);
+    expect(audit.summary.staticFacts.indexedReceivers.Float32Array.expressions).toBeGreaterThan(1_000);
     expect(math?.lowered).toBeGreaterThan(50);
-  });
+    expect(math?.staticFacts.numericRelations).toBeGreaterThan(10);
+  }, 60_000);
 });
 
 describe('packageNameToModule', () => {

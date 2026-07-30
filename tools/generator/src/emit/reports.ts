@@ -45,6 +45,7 @@ export function inventorySummary(inventory: UpstreamInventory): string {
 }
 
 export function loweringSummary(audit: LoweringAudit): string {
+  const facts = audit.summary.staticFacts;
   const lines = [
     '# Lowering Audit',
     '',
@@ -55,12 +56,33 @@ export function loweringSummary(audit: LoweringAudit): string {
     `| Candidate declarations | ${audit.summary.declarations} |`,
     `| Lowered declarations | ${audit.summary.lowered} |`,
     `| Current diagnostics | ${audit.summary.diagnostics} |`,
+    `| Proven explicit Boolean truthiness uses | ${facts.booleanExplicitTruthiness} |`,
+    `| Proven Boolean conditional conditions | ${facts.booleanConditionalTruthiness} |`,
+    `| Proven Boolean logical-left truthiness uses | ${facts.booleanLogicalTruthiness} |`,
+    `| Proven Boolean logical expressions | ${facts.booleanLogicalExpressions} |`,
+    `| Proven numeric relations | ${facts.numericRelations} |`,
+    `| Proven indexed expressions | ${facts.indexedAccesses.expressions} |`,
+    `| Proven indexed reads | ${facts.indexedAccesses.reads} |`,
+    `| Proven indexed writes | ${facts.indexedAccesses.writes} |`,
     '',
-    '| Package | Declarations | Lowered | Diagnostics |',
+    '| Indexed receiver | Expressions | Reads | Writes |',
     '| --- | ---: | ---: | ---: |',
   ];
+  for (const [receiver, counts] of Object.entries(facts.indexedReceivers)) {
+    lines.push(`| \`${receiver}\` | ${counts.expressions} | ${counts.reads} | ${counts.writes} |`);
+  }
+  lines.push(
+    '',
+    '| Package | Declarations | Lowered | Diagnostics | Boolean truthiness | Numeric relations | Indexed calls |',
+    '| --- | ---: | ---: | ---: | ---: | ---: | ---: |',
+  );
   for (const item of audit.packages) {
-    lines.push(`| \`${item.packageName}\` | ${item.declarations} | ${item.lowered} | ${item.diagnostics.length} |`);
+    const itemFacts = item.staticFacts;
+    const booleanTruthiness =
+      itemFacts.booleanExplicitTruthiness + itemFacts.booleanConditionalTruthiness + itemFacts.booleanLogicalTruthiness;
+    lines.push(
+      `| \`${item.packageName}\` | ${item.declarations} | ${item.lowered} | ${item.diagnostics.length} | ${booleanTruthiness} | ${itemFacts.numericRelations} | ${itemFacts.indexedAccesses.reads + itemFacts.indexedAccesses.writes} |`,
+    );
   }
   lines.push('');
   return lines.join('\n');
