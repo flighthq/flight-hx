@@ -584,6 +584,11 @@ class Main extends Application {
     }
     #end
     if (!prepareDisplayObjectRender(renderState, root)) return;
+    #if sys
+    // Script-only bench mode: full update/prepare cost without backend draws,
+    // so tranche measurements are not flattened by the rasterizer floor.
+    if (Sys.getEnv('FLIGHT_PERF_MODE') == 'script') return;
+    #end
     if (usingCairo) {
       renderCanvasBackground(renderState);
       renderCanvasDisplayObject(renderState, root);
