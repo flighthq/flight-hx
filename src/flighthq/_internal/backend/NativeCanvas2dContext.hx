@@ -187,8 +187,26 @@ class NativeCanvas2dContext {
   }
 
   public function arc(x:Float, y:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Bool):Void {
-    if (anticlockwise == true) context().arcNegative(x, y, radius, startAngle, endAngle);
-    else context().arc(x, y, radius, startAngle, endAngle);
+    // Browsers draw the whole circle whenever the sweep spans 2pi or more in
+    // either direction; cairo's own normalization instead collapses a
+    // full-turn arcNegative(0, 2pi) to an empty path, so normalize here.
+    final tau = Math.PI * 2;
+    var sweep = endAngle - startAngle;
+    if (anticlockwise == true) {
+      if (sweep <= -tau || sweep >= tau) sweep = -tau;
+      else {
+        sweep = sweep % tau;
+        if (sweep > 0) sweep -= tau;
+      }
+      context().arcNegative(x, y, radius, startAngle, startAngle + sweep);
+    } else {
+      if (sweep >= tau || sweep <= -tau) sweep = tau;
+      else {
+        sweep = sweep % tau;
+        if (sweep < 0) sweep += tau;
+      }
+      context().arc(x, y, radius, startAngle, startAngle + sweep);
+    }
   }
 
   public function ellipse(x:Float, y:Float, radiusX:Float, radiusY:Float, rotation:Float, startAngle:Float,
