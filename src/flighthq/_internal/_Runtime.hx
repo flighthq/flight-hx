@@ -1008,6 +1008,22 @@ class _Runtime {
     return bits == 0 && shifted < 0 ? shifted + 4294967296.0 : shifted;
   }
 
+  /**
+   * JavaScript `%`: truncated (toward-zero) remainder with the dividend's
+   * sign, computed in float math. Haxe `%` is unsafe here: neko coerces Float
+   * operands back to Int32, wrapping any value beyond 31 bits.
+   */
+  public static function fmod(a:Float, b:Float):Float {
+    #if js
+    return js.Syntax.code('({0} % {1})', a, b);
+    #else
+    if (b == 0 || Math.isNaN(a) || Math.isNaN(b) || !Math.isFinite(a)) return Math.NaN;
+    final quotient = a / b;
+    final truncated = quotient < 0 ? Math.fceil(quotient) : Math.ffloor(quotient);
+    return a - truncated * b;
+    #end
+  }
+
   /** JavaScript `ToUint32`: like `ToInt32` but reinterpreted as unsigned. */
   public static inline function toUint32(value:Float):Float {
     final signed = toInt32(value);
