@@ -14,55 +14,55 @@ class ElectronWindow {
     return cast { open: function(win:Dynamic, options:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
       var onUnmaximize:Dynamic = cast _Runtime.UNDEFINED;
-      bw = _Runtime.construct(_Runtime.field(electron, 'BrowserWindow'), [{ title: _Runtime.field(options, 'title'), x: _Runtime.field(options, 'x'), y: _Runtime.field(options, 'y'), width: _Runtime.field(options, 'width'), height: _Runtime.field(options, 'height'), resizable: _Runtime.field(options, 'resizable'), alwaysOnTop: _Runtime.field(options, 'alwaysOnTop'), fullscreen: _Runtime.field(options, 'fullscreen'), show: _Runtime.field(options, 'visible'), minWidth: _Runtime.field(options, 'minWidth'), minHeight: _Runtime.field(options, 'minHeight'), maxWidth: _Runtime.field(options, 'maxWidth'), maxHeight: _Runtime.field(options, 'maxHeight'), frame: _Runtime.field(options, 'frame'), transparent: _Runtime.field(options, 'transparent') }]);
+      bw = _Runtime.construct(_Runtime.field(electron, 'BrowserWindow'), [{ title: options.title, x: options.x, y: options.y, width: options.width, height: options.height, resizable: options.resizable, alwaysOnTop: options.alwaysOnTop, fullscreen: options.fullscreen, show: options.visible, minWidth: options.minWidth, minHeight: options.minHeight, maxWidth: options.maxWidth, maxHeight: options.maxHeight, frame: options.frame, transparent: options.transparent }]);
       ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).set(win, bw));
       ((cast ElectronWindow._windowsById__electronWindow : flighthq._internal._Map).set(_Runtime.field(bw, 'id'), win));
       _Runtime.callProperty(bw, 'on', cast (['move', function() {
         var bounds:Dynamic = cast _Runtime.UNDEFINED;
         bounds = _Runtime.callProperty(bw, 'getBounds', cast ([] : Array<Dynamic>));
-        _Runtime.setField(win, 'x', _Runtime.field(bounds, 'x'));
-        _Runtime.setField(win, 'y', _Runtime.field(bounds, 'y'));
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onMove')]]), 1);
+        (win.x = cast (_Runtime.field(bounds, 'x') : Dynamic));
+        (win.y = cast (_Runtime.field(bounds, 'y') : Dynamic));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onMove]]), 1);
       }] : Array<Dynamic>));
       _Runtime.callProperty(bw, 'on', cast (['resize', function() {
         var bounds:Dynamic = cast _Runtime.UNDEFINED;
         bounds = _Runtime.callProperty(bw, 'getBounds', cast ([] : Array<Dynamic>));
-        _Runtime.setField(win, 'width', _Runtime.field(bounds, 'width'));
-        _Runtime.setField(win, 'height', _Runtime.field(bounds, 'height'));
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onResize')]]), 1);
+        (win.width = cast (_Runtime.field(bounds, 'width') : Dynamic));
+        (win.height = cast (_Runtime.field(bounds, 'height') : Dynamic));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onResize]]), 1);
       }] : Array<Dynamic>));
       _Runtime.callProperty(bw, 'on', cast (['minimize', function() {
-        _Runtime.setField(win, 'minimized', true);
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onMinimize')]]), 1);
+        (win.minimized = cast (true : Dynamic));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onMinimize]]), 1);
       }] : Array<Dynamic>));
       _Runtime.callProperty(bw, 'on', cast (['maximize', function() {
-        _Runtime.setField(win, 'maximized', true);
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onMaximize')]]), 1);
+        (win.maximized = cast (true : Dynamic));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onMaximize]]), 1);
       }] : Array<Dynamic>));
       onUnmaximize = function() {
-        _Runtime.setField(win, 'minimized', false);
-        _Runtime.setField(win, 'maximized', false);
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onRestore')]]), 1);
+        (win.minimized = cast (false : Dynamic));
+        (win.maximized = cast (false : Dynamic));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onRestore]]), 1);
       };
       _Runtime.callProperty(bw, 'on', cast (['unmaximize', onUnmaximize] : Array<Dynamic>));
       _Runtime.callProperty(bw, 'on', cast (['restore', onUnmaximize] : Array<Dynamic>));
       _Runtime.callProperty(bw, 'on', cast (['enter-full-screen', function() {
-        _Runtime.setField(win, 'fullscreen', true);
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onFullscreenChanged')]]), 1);
+        (win.fullscreen = cast (true : Dynamic));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onFullscreenChanged]]), 1);
       }] : Array<Dynamic>));
       _Runtime.callProperty(bw, 'on', cast (['leave-full-screen', function() {
-        _Runtime.setField(win, 'fullscreen', false);
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onFullscreenChanged')]]), 1);
+        (win.fullscreen = cast (false : Dynamic));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onFullscreenChanged]]), 1);
       }] : Array<Dynamic>));
       _Runtime.callProperty(bw, 'on', cast (['focus', function() {
-        _Runtime.setField(win, 'focused', true);
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onFocusIn')]]), 1);
+        (win.focused = cast (true : Dynamic));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onFocusIn]]), 1);
       }] : Array<Dynamic>));
       _Runtime.callProperty(bw, 'on', cast (['blur', function() {
-        _Runtime.setField(win, 'focused', false);
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onFocusOut')]]), 1);
+        (win.focused = cast (false : Dynamic));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onFocusOut]]), 1);
       }] : Array<Dynamic>));
-      _Runtime.callProperty(bw, 'on', cast (['close', function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(win, 'onClose')]]), 1)] : Array<Dynamic>));
+      _Runtime.callProperty(bw, 'on', cast (['close', function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onClose]]), 1)] : Array<Dynamic>));
       return cast true;
     }, close: function(win:Dynamic) {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
@@ -102,10 +102,10 @@ class ElectronWindow {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
       bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        _Runtime.setField(out, 'x', _Runtime.field(win, 'x'));
-        _Runtime.setField(out, 'y', _Runtime.field(win, 'y'));
-        _Runtime.setField(out, 'width', _Runtime.field(win, 'width'));
-        _Runtime.setField(out, 'height', _Runtime.field(win, 'height'));
+        _Runtime.setField(out, 'x', win.x);
+        _Runtime.setField(out, 'y', win.y);
+        _Runtime.setField(out, 'width', win.width);
+        _Runtime.setField(out, 'height', win.height);
         return cast out;
       }
       try {
@@ -115,10 +115,10 @@ class ElectronWindow {
         _Runtime.setField(out, 'width', _Runtime.field(bounds, 'width'));
         _Runtime.setField(out, 'height', _Runtime.field(bounds, 'height'));
       } catch (__error:Dynamic) {
-        _Runtime.setField(out, 'x', _Runtime.field(win, 'x'));
-        _Runtime.setField(out, 'y', _Runtime.field(win, 'y'));
-        _Runtime.setField(out, 'width', _Runtime.field(win, 'width'));
-        _Runtime.setField(out, 'height', _Runtime.field(win, 'height'));
+        _Runtime.setField(out, 'x', win.x);
+        _Runtime.setField(out, 'y', win.y);
+        _Runtime.setField(out, 'width', win.width);
+        _Runtime.setField(out, 'height', win.height);
       }
       return cast out;
     }, minimize: function(win:Dynamic) {

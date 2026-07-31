@@ -42,7 +42,7 @@ class TexturePackerParse {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var meta:Dynamic = cast _Runtime.UNDEFINED;
     var animations:Dynamic = cast _Runtime.UNDEFINED;
-    regions = _Runtime.field(_Runtime.callValue(parseTextureAtlasPackerDocument, cast ([doc, _Runtime.callValue(createTextureAtlas, cast ([] : Array<Dynamic>))] : Array<Dynamic>)), 'regions');
+    regions = _Runtime.callValue(parseTextureAtlasPackerDocument, cast ([doc, _Runtime.callValue(createTextureAtlas, cast ([] : Array<Dynamic>))] : Array<Dynamic>)).regions;
     frames = _Runtime.callProperty(regions, 'map', cast ([TexturePackerParse.frameFromRegion__texturePackerParse] : Array<Dynamic>));
     frameNames = _Runtime.callProperty(regions, 'map', cast ([function(region:Dynamic) return _Runtime.coalesce(region.name, function():Dynamic return cast '')] : Array<Dynamic>));
     __destructure0 = doc;

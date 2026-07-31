@@ -13,7 +13,7 @@ class GlyphAtlasMetrics {
   }
 
   public static function getGlyphAtlasMetrics(atlas:GlyphAtlas):GlyphMetrics {
-    return cast _Runtime.field(_Runtime.field(atlas, 'runtime'), 'metrics');
+    return cast _Runtime.field(atlas, 'runtime').metrics;
     return cast null;
   }
 }

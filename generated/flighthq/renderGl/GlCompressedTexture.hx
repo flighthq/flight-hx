@@ -259,7 +259,7 @@ class GlCompressedTexture {
 
   public static function uploadGlCompressedImageResource__glCompressedTexture(gl:Dynamic, image:ImageResource, decode:Null<GlCompressedTextureDecoder>):Bool {
     var compressed:Dynamic = cast _Runtime.UNDEFINED;
-    compressed = _Runtime.field(image, 'compressed');
+    compressed = image.compressed;
     if ((cast _Runtime.strictEquals(compressed, null) : Bool)) { return cast false; }
     return cast _Runtime.callValue(uploadGlCompressedTextureContainer, cast ([gl, _Runtime.field(compressed, 'container'), _Runtime.field(compressed, 'payload'), _Runtime.coalesce(decode, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>));
     return cast null;

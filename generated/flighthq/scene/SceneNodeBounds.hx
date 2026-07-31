@@ -24,7 +24,7 @@ class SceneNodeBounds {
   public static function _accumulateWorldBounds__sceneNodeBounds(out:AabbLike, node:SceneNode):Void {
     var children:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)) : Bool)) {
-      var geom:Dynamic = _Runtime.field(node, 'geometry');
+      var geom:Dynamic = (cast node : flighthq.types.Mesh).geometry;
       var localBounds:Dynamic = geom.bounds;
       if ((cast _Runtime.strictEquals(localBounds, null) : Bool)) {
         _Runtime.callValue(computeMeshGeometryBounds, cast ([SceneNodeBounds._scratchLocalAabb__sceneNodeBounds, geom] : Array<Dynamic>));

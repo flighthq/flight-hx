@@ -12,7 +12,7 @@ import flighthq.types.Vector2.Vector2Like;
 
 class TextureAtlasRegion {
   public static function addTextureAtlasRegion(target:TextureAtlas, x:Float, y:Float, width:Float, height:Float, ?pivotX:Float, ?pivotY:Float, ?name:String):Void {
-    _Runtime.callProperty(_Runtime.field(target, 'regions'), 'push', cast ([_Runtime.callValue(createTextureAtlasRegion, cast ([{ x: x, y: y, width: width, height: height, id: _Runtime.field(_Runtime.field(target, 'regions'), 'length'), pivotX: _Runtime.coalesce(pivotX, function():Dynamic return cast null), pivotY: _Runtime.coalesce(pivotY, function():Dynamic return cast null), name: _Runtime.coalesce(name, function():Dynamic return cast null) }] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callProperty(target.regions, 'push', cast ([_Runtime.callValue(createTextureAtlasRegion, cast ([{ x: x, y: y, width: width, height: height, id: _Runtime.field(target.regions, 'length'), pivotX: _Runtime.coalesce(pivotX, function():Dynamic return cast null), pivotY: _Runtime.coalesce(pivotY, function():Dynamic return cast null), name: _Runtime.coalesce(name, function():Dynamic return cast null) }] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
   public static function addTextureAtlasRegionRectangle(target:TextureAtlas, rect:RectangleLike, ?pivot:Vector2Like, ?name:String):Void {
@@ -33,7 +33,7 @@ class TextureAtlasRegion {
   }
 
   public static function getTextureAtlasRegionById(atlas:TextureAtlas, id:Float):Null<flighthq.types.TextureAtlasRegion> {
-    for (region in _Runtime.iterable(_Runtime.field(atlas, 'regions'))) {
+    for (region in _Runtime.iterable(atlas.regions)) {
       if ((cast _Runtime.strictEquals(region.id, id) : Bool)) { return cast region; }
     }
     return cast null;
@@ -41,7 +41,7 @@ class TextureAtlasRegion {
   }
 
   public static function getTextureAtlasRegionByName(atlas:TextureAtlas, name:String):Null<flighthq.types.TextureAtlasRegion> {
-    for (region in _Runtime.iterable(_Runtime.field(atlas, 'regions'))) {
+    for (region in _Runtime.iterable(atlas.regions)) {
       if ((cast _Runtime.strictEquals(region.name, name) : Bool)) { return cast region; }
     }
     return cast null;
@@ -51,7 +51,7 @@ class TextureAtlasRegion {
   public static function getTextureAtlasRegionSequence(atlas:TextureAtlas, prefix:String):Array<flighthq.types.TextureAtlasRegion> {
     var result:Array<flighthq.types.TextureAtlasRegion> = cast _Runtime.UNDEFINED;
     result = cast ([] : Array<Dynamic>);
-    for (region in _Runtime.iterable(_Runtime.field(atlas, 'regions'))) {
+    for (region in _Runtime.iterable(atlas.regions)) {
       if ((cast ((cast !_Runtime.strictEquals(region.name, null) : Bool) && (cast StringTools.startsWith(region.name, prefix) : Bool)) : Bool)) { _Runtime.callProperty(result, 'push', cast ([region] : Array<Dynamic>)); }
     }
     return cast result;

@@ -66,11 +66,11 @@ class Application {
       _Runtime.callValue(resumeApplicationLoop, cast ([app] : Array<Dynamic>));
       if ((cast !_Runtime.strictEquals(_Runtime.field(app, 'onActivate'), null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onActivate')]]), 1); }
     };
-    _Runtime.callValue(connectSignal, cast ([_Runtime.field(win, 'onDeactivate'), onDeactivate] : Array<Dynamic>));
-    _Runtime.callValue(connectSignal, cast ([_Runtime.field(win, 'onActivate'), onActivate] : Array<Dynamic>));
+    _Runtime.callValue(connectSignal, cast ([win.onDeactivate, onDeactivate] : Array<Dynamic>));
+    _Runtime.callValue(connectSignal, cast ([win.onActivate, onActivate] : Array<Dynamic>));
     ((cast observers : flighthq._internal._Map).set(kLifecycle, function() {
-      _Runtime.callValue(disconnectSignal, cast ([_Runtime.field(win, 'onDeactivate'), onDeactivate] : Array<Dynamic>));
-      _Runtime.callValue(disconnectSignal, cast ([_Runtime.field(win, 'onActivate'), onActivate] : Array<Dynamic>));
+      _Runtime.callValue(disconnectSignal, cast ([win.onDeactivate, onDeactivate] : Array<Dynamic>));
+      _Runtime.callValue(disconnectSignal, cast ([win.onActivate, onActivate] : Array<Dynamic>));
     }));
   }
 

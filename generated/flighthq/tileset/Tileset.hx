@@ -33,7 +33,7 @@ class Tileset {
     margin = _Runtime.field(__destructure0, 'margin');
     spacing = _Runtime.field(__destructure0, 'spacing');
     if ((cast _Runtime.strictEquals(atlas, null) : Bool)) { return; }
-    regions = _Runtime.field(atlas, 'regions');
+    regions = atlas.regions;
     count = (rows * columns);
     if ((cast ((cast _Runtime.field(regions, 'length') : Float) > (cast count : Float)) : Bool)) { _Runtime.setLength(regions, count); }
     i = 0.0;

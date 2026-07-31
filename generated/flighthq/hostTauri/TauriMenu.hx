@@ -88,7 +88,7 @@ class TauriMenu {
       flighthq._internal._Async.protect(function():Dynamic {
         var id:Dynamic = cast _Runtime.UNDEFINED;
         var __flowBranch17:Dynamic;
-        if ((cast _Runtime.strictEquals(_Runtime.field(item, 'type'), 'separator') : Bool)) {
+        if ((cast _Runtime.strictEquals(item.type, 'separator') : Bool)) {
           __flowBranch17 = flighthq._internal._Async.protect(function():Dynamic {
             return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.field(menuModule, 'PredefinedMenuItem'), 'new', cast ([{ item: 'Separator' }] : Array<Dynamic>)));
           });
@@ -97,20 +97,20 @@ class TauriMenu {
         }
         return flighthq._internal._Async.continueFlow(__flowBranch17, function():Dynamic {
           var __flowBranch18:Dynamic;
-          if (_Runtime.truthy(_Runtime.field(item, 'submenu'))) {
+          if (_Runtime.truthy(item.submenu)) {
             __flowBranch18 = flighthq._internal._Async.protect(function():Dynamic {
               var children:Dynamic = cast _Runtime.UNDEFINED;
-              return flighthq._internal._Async.flatMap(_Runtime.callValue(TauriMenu.buildItems__tauriMenu, cast ([menuModule, _Runtime.field(item, 'submenu'), onSelect] : Array<Dynamic>)), function(__awaitValue19:Dynamic):Dynamic {
+              return flighthq._internal._Async.flatMap(_Runtime.callValue(TauriMenu.buildItems__tauriMenu, cast ([menuModule, item.submenu, onSelect] : Array<Dynamic>)), function(__awaitValue19:Dynamic):Dynamic {
                 children = __awaitValue19;
-                return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.field(menuModule, 'Submenu'), 'new', cast ([{ text: _Runtime.field(item, 'label'), enabled: _Runtime.field(item, 'enabled'), items: children }] : Array<Dynamic>)));
+                return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.field(menuModule, 'Submenu'), 'new', cast ([{ text: item.label, enabled: item.enabled, items: children }] : Array<Dynamic>)));
               });
             });
           } else {
             __flowBranch18 = flighthq._internal._Async.flowNormal();
           }
           return flighthq._internal._Async.continueFlow(__flowBranch18, function():Dynamic {
-            id = _Runtime.field(item, 'id');
-            return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.field(menuModule, 'MenuItem'), 'new', cast ([{ id: id, text: _Runtime.field(item, 'label'), enabled: _Runtime.field(item, 'enabled'), accelerator: _Runtime.field(item, 'accelerator'), action: ((cast !_Runtime.strictEquals(id, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast function() return _Runtime.callValue(onSelect, cast ([id] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic)) }] : Array<Dynamic>)));
+            id = item.id;
+            return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.field(menuModule, 'MenuItem'), 'new', cast ([{ id: id, text: item.label, enabled: item.enabled, accelerator: item.accelerator, action: ((cast !_Runtime.strictEquals(id, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast function() return _Runtime.callValue(onSelect, cast ([id] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic)) }] : Array<Dynamic>)));
           });
         });
       })

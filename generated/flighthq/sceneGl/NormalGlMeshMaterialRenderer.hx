@@ -29,7 +29,7 @@ class NormalGlMeshMaterialRenderer {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     normal = (cast material : Null<NormalMaterial>);
-    hasNormalMap = ((cast ((cast !_Runtime.strictEquals(normal, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(normal, 'normalMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(normal, 'normalMap'), 'image'), null) : Bool));
+    hasNormalMap = ((cast ((cast !_Runtime.strictEquals(normal, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(normal, 'normalMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(normal, 'normalMap').image, null) : Bool));
     program = _Runtime.callValue(ensureGlDebugProgram, cast ([state, { hasNormalMap: hasNormalMap, mode: 'normal' }] : Array<Dynamic>));
     _Runtime.callValue(beginGlMeshDraw, cast ([state, program, ((cast !_Runtime.strictEquals(normal, null) : Bool) && (cast _Runtime.field(normal, 'doubleSided') : Bool))] : Array<Dynamic>));
     _Runtime.callValue(setGlMeshViewProjection, cast ([gl, _Runtime.field(program, 'locViewProjection'), camera] : Array<Dynamic>));

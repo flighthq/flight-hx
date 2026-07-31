@@ -37,11 +37,11 @@ class ElectronMenu {
   public static function toElectronTemplate__electronMenu(items:Array<MenuItemTemplate>, ?onSelect:Dynamic):Array<ElectronMenuItemOptions> {
     return cast _Runtime.callProperty(items, 'map', cast ([function(item:Dynamic) {
       var options:ElectronMenuItemOptions = cast _Runtime.UNDEFINED;
-      options = { id: _Runtime.field(item, 'id'), label: _Runtime.field(item, 'label'), type: _Runtime.field(item, 'type'), role: _Runtime.field(item, 'role'), accelerator: _Runtime.field(item, 'accelerator'), enabled: _Runtime.field(item, 'enabled'), checked: _Runtime.field(item, 'checked') };
-      if (_Runtime.truthy(_Runtime.field(item, 'submenu'))) {
-        _Runtime.setField(options, 'submenu', _Runtime.callValue(ElectronMenu.toElectronTemplate__electronMenu, cast ([_Runtime.field(item, 'submenu'), onSelect] : Array<Dynamic>)));
-      } else { if (_Runtime.truthy(_Runtime.andValue(onSelect, function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(item, 'id'), _Runtime.field(_Runtime, 'UNDEFINED'))))) {
-        _Runtime.setField(options, 'click', function() return _Runtime.callValue(onSelect, cast ([_Runtime.field(item, 'id')] : Array<Dynamic>)));
+      options = { id: item.id, label: item.label, type: item.type, role: item.role, accelerator: item.accelerator, enabled: item.enabled, checked: item.checked };
+      if (_Runtime.truthy(item.submenu)) {
+        _Runtime.setField(options, 'submenu', _Runtime.callValue(ElectronMenu.toElectronTemplate__electronMenu, cast ([item.submenu, onSelect] : Array<Dynamic>)));
+      } else { if (_Runtime.truthy(_Runtime.andValue(onSelect, function():Dynamic return cast !_Runtime.strictEquals(item.id, _Runtime.field(_Runtime, 'UNDEFINED'))))) {
+        _Runtime.setField(options, 'click', function() return _Runtime.callValue(onSelect, cast ([item.id] : Array<Dynamic>)));
       } }
       return cast options;
     }] : Array<Dynamic>));

@@ -72,7 +72,7 @@ class GlVelocity {
     velocities = _Runtime.field(__destructure0, 'velocities');
     worldSpace = _Runtime.field(__destructure0, 'worldSpace');
     if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) : Bool) || (cast ((cast _Runtime.field(velocities, 'length') : Float) < (cast (particleCount * 2.0) : Float)) : Bool)) : Bool)) { return; }
-    regions = _Runtime.field(atlas, 'regions');
+    regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
     wa = 1.0;
     wb = 0.0;
@@ -159,7 +159,7 @@ class GlVelocity {
     transforms = _Runtime.field(__destructure1, 'transforms');
     transformType = _Runtime.field(__destructure1, 'transformType');
     if ((cast ((cast ((cast !_Runtime.strictEquals(instanceVelocities, null) : Bool) && (cast !_Runtime.strictEquals(atlas, null) : Bool)) : Bool) && (cast ((cast instanceCount : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      var regions:Dynamic = _Runtime.field(atlas, 'regions');
+      var regions:Dynamic = atlas.regions;
       var numRegions:Dynamic = _Runtime.field(regions, 'length');
       _Runtime.callValue(ensureNodeWorldMatrix, cast ([(cast (cast node : Dynamic) : Transform2DNode<Dynamic>)] : Array<Dynamic>));
       var transform:Dynamic = _Runtime.callValue(getNodeWorldMatrix, cast ([(cast (cast node : Dynamic) : Transform2DNode<Dynamic>)] : Array<Dynamic>));

@@ -61,7 +61,7 @@ class GlQuadBatch {
     instanceCount = _Runtime.field(__destructure0, 'instanceCount');
     ids = _Runtime.field(__destructure0, 'ids');
     transforms = _Runtime.field(__destructure0, 'transforms');
-    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(atlas, 'image'), null) : Bool)) : Bool) || (cast !(cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(atlas, 'image')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(instanceCount, 0.0) : Bool)) : Bool)) { return; }
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.image, null) : Bool)) : Bool) || (cast !(cast _Runtime.callValue(hasImageResourcePixels, cast ([atlas.image] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(instanceCount, 0.0) : Bool)) : Bool)) { return; }
     _Runtime.callValue(ensureGlQuadBatchShader, cast ([state] : Array<Dynamic>));
     material = _Runtime.field(quadBatch, 'material');
     materialRenderer = _Runtime.callValue(resolveGlMaterialRenderer, cast ([state, material] : Array<Dynamic>));
@@ -70,11 +70,11 @@ class GlQuadBatch {
     perQuadColorTransform = _Runtime.field(data, 'materialData');
     nodeColorTransform = _Runtime.field(quadBatch, 'colorTransform');
     startCount = _Runtime.field(runtime, 'spriteBatchCount');
-    base = _Runtime.callValue(prepareGlSpriteBatchWrite, cast ([state, _Runtime.field(atlas, 'image'), _Runtime.field(quadBatch, 'blendMode'), material, materialRenderer, instanceCount] : Array<Dynamic>));
-    regions = _Runtime.field(atlas, 'regions');
+    base = _Runtime.callValue(prepareGlSpriteBatchWrite, cast ([state, atlas.image, _Runtime.field(quadBatch, 'blendMode'), material, materialRenderer, instanceCount] : Array<Dynamic>));
+    regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
-    iw = (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'width'), function():Dynamic return cast 1.0));
-    ih = (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'height'), function():Dynamic return cast 1.0));
+    iw = (1.0 / _Runtime.orValue(atlas.image.width, function():Dynamic return cast 1.0));
+    ih = (1.0 / _Runtime.orValue(atlas.image.height, function():Dynamic return cast 1.0));
     instanceData = _Runtime.field(runtime, 'spriteBatchInstanceData');
     isVector2 = _Runtime.strictEquals(_Runtime.field(data, 'transformType'), 'vector2');
     pt = _Runtime.field(quadBatch, 'transform2D');

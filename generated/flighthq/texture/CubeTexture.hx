@@ -71,7 +71,7 @@ class CubeTexture {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast 6.0 : Float)) : Bool)) {
         var face:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(cube, 'faces'), i);
-        if ((cast !_Runtime.strictEquals(face, null) : Bool)) { return cast _Runtime.field(face, 'width'); }
+        if ((cast !_Runtime.strictEquals(face, null) : Bool)) { return cast face.width; }
         i++;
       }
     }

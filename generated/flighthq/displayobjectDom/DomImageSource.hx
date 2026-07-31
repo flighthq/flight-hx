@@ -12,8 +12,8 @@ typedef DomImageSourceKind = String;
 
 class DomImageSource {
   public static function explainDomImageSource(image:ImageResource):DomImageSourceKind {
-    if ((cast !_Runtime.strictEquals(_Runtime.field(image, 'source'), null) : Bool)) { return cast 'element'; }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(image, 'data'), null) : Bool)) { return cast 'data'; }
+    if ((cast !_Runtime.strictEquals(image.source, null) : Bool)) { return cast 'element'; }
+    if ((cast !_Runtime.strictEquals(image.data, null) : Bool)) { return cast 'data'; }
     return cast 'none';
     return cast null;
   }
@@ -22,8 +22,8 @@ class DomImageSource {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var entry:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals(_Runtime.field(image, 'source'), null) : Bool)) { return cast _Runtime.field(image, 'source'); }
-    if ((cast _Runtime.strictEquals(_Runtime.field(image, 'data'), null) : Bool)) { return cast null; }
+    if ((cast !_Runtime.strictEquals(image.source, null) : Bool)) { return cast image.source; }
+    if ((cast _Runtime.strictEquals(image.data, null) : Bool)) { return cast null; }
     runtime = _Runtime.callValue(getDomRenderStateRuntime, cast ([state] : Array<Dynamic>));
     cache = _Runtime.field(runtime, 'imageResourceElementCache');
     if ((cast _Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
@@ -31,8 +31,8 @@ class DomImageSource {
       _Runtime.setField(runtime, 'imageResourceElementCache', cache);
     }
     entry = ((cast cache : flighthq._internal._WeakMap).get(image));
-    if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(entry, 'version'), _Runtime.field(image, 'version')) : Bool)) : Bool)) {
-      (entry = cast ({ element: _Runtime.callValue(createCanvasFromImageResource, cast ([image] : Array<Dynamic>)), version: _Runtime.field(image, 'version') } : Dynamic));
+    if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(entry, 'version'), image.version) : Bool)) : Bool)) {
+      (entry = cast ({ element: _Runtime.callValue(createCanvasFromImageResource, cast ([image] : Array<Dynamic>)), version: image.version } : Dynamic));
       ((cast cache : flighthq._internal._WeakMap).set(image, entry));
     }
     return cast _Runtime.field(entry, 'element');

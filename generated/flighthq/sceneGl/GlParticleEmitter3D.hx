@@ -151,11 +151,11 @@ class GlParticleEmitter3D {
     transforms = _Runtime.field(__destructure0, 'transforms');
     if ((cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) { return; }
     _Runtime.callValue(GlParticleEmitter3D.ensureInstanceCapacity__glParticleEmitter3D, cast ([shader, gl, particleCount] : Array<Dynamic>));
-    hasAtlas = ((cast ((cast !_Runtime.strictEquals(atlas, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(atlas, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(atlas, 'image')] : Array<Dynamic>)) : Bool));
-    regions = ((cast hasAtlas : Bool) ? (cast _Runtime.field(atlas, 'regions') : Dynamic) : (cast null : Dynamic));
+    hasAtlas = ((cast ((cast !_Runtime.strictEquals(atlas, null) : Bool) && (cast !_Runtime.strictEquals(atlas.image, null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([atlas.image] : Array<Dynamic>)) : Bool));
+    regions = ((cast hasAtlas : Bool) ? (cast atlas.regions : Dynamic) : (cast null : Dynamic));
     numRegions = ((cast !_Runtime.strictEquals(regions, null) : Bool) ? (cast _Runtime.field(regions, 'length') : Dynamic) : (cast 0.0 : Dynamic));
-    iw = ((cast hasAtlas : Bool) ? (cast (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'width'), function():Dynamic return cast 1.0)) : Dynamic) : (cast 0.0 : Dynamic));
-    ih = ((cast hasAtlas : Bool) ? (cast (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'height'), function():Dynamic return cast 1.0)) : Dynamic) : (cast 0.0 : Dynamic));
+    iw = ((cast hasAtlas : Bool) ? (cast (1.0 / _Runtime.orValue(atlas.image.width, function():Dynamic return cast 1.0)) : Dynamic) : (cast 0.0 : Dynamic));
+    ih = ((cast hasAtlas : Bool) ? (cast (1.0 / _Runtime.orValue(atlas.image.height, function():Dynamic return cast 1.0)) : Dynamic) : (cast 0.0 : Dynamic));
     worldMatrix = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([(cast (cast emitter : Dynamic) : SceneNode)] : Array<Dynamic>)) : Matrix4);
     wm = worldMatrix.m;
     worldSpace = data.worldSpace;
@@ -228,7 +228,7 @@ class GlParticleEmitter3D {
     flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(shader, 'locHasTexture'), ((cast hasAtlas : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
     if ((cast hasAtlas : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);
-      _Runtime.callValue(bindGlTexture, cast ([state, _Runtime.field(_Runtime.field(atlas, 'image'), 'source')] : Array<Dynamic>));
+      _Runtime.callValue(bindGlTexture, cast ([state, atlas.image.source] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(shader, 'locTexture'), 0.0);
     }
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(shader, 'cornerBuffer'));

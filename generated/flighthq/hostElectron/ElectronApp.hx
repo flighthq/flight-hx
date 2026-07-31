@@ -129,8 +129,8 @@ class ElectronApp {
 
   public static function toMenuItemOptions__electronApp(item:MenuItemTemplate):ElectronMenuItemOptions {
     var out:ElectronMenuItemOptions = cast _Runtime.UNDEFINED;
-    out = { id: _Runtime.field(item, 'id'), label: _Runtime.field(item, 'label'), type: _Runtime.field(item, 'type'), role: _Runtime.field(item, 'role'), accelerator: _Runtime.field(item, 'accelerator'), enabled: _Runtime.field(item, 'enabled'), checked: _Runtime.field(item, 'checked') };
-    if (_Runtime.truthy(_Runtime.field(item, 'submenu'))) { _Runtime.setField(out, 'submenu', _Runtime.callProperty(_Runtime.field(item, 'submenu'), 'map', cast ([ElectronApp.toMenuItemOptions__electronApp] : Array<Dynamic>))); }
+    out = { id: item.id, label: item.label, type: item.type, role: item.role, accelerator: item.accelerator, enabled: item.enabled, checked: item.checked };
+    if (_Runtime.truthy(item.submenu)) { _Runtime.setField(out, 'submenu', _Runtime.callProperty(item.submenu, 'map', cast ([ElectronApp.toMenuItemOptions__electronApp] : Array<Dynamic>))); }
     return cast out;
     return cast null;
   }

@@ -35,9 +35,9 @@ class CanvasShapeCommands {
     } else {
       _Runtime.setField(state, 'fillMatrixInverse', null);
     }
-    _Runtime.setField(state, 'bitmapSrc', _Runtime.field(bitmap, 'source'));
-    _Runtime.setField(state, 'bitmapW', _Runtime.field(bitmap, 'width'));
-    _Runtime.setField(state, 'bitmapH', _Runtime.field(bitmap, 'height'));
+    _Runtime.setField(state, 'bitmapSrc', bitmap.source);
+    _Runtime.setField(state, 'bitmapW', bitmap.width);
+    _Runtime.setField(state, 'bitmapH', bitmap.height);
   } };
 
   public static final defaultCanvasBeginFill:Dynamic = { key: 'beginFill', draw: function(_ctx:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {

@@ -47,13 +47,13 @@ class StarlingPexParse {
   public static function collectStarlingPexWarnings__starlingPexParse(doc:StarlingPexDocument):Array<String> {
     var warnings:Array<String> = cast _Runtime.UNDEFINED;
     warnings = cast ([] : Array<Dynamic>);
-    if ((cast _Runtime.strictEquals(_Runtime.field(doc, 'emitterType'), 1.0) : Bool)) {
+    if ((cast _Runtime.strictEquals(doc.emitterType, 1.0) : Bool)) {
       _Runtime.callProperty(warnings, 'push', cast (['Radial (emitterType=1) emitter was approximated as a gravity emitter; radial motion is not simulated'] : Array<Dynamic>));
     }
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(doc, 'radialAcceleration'), 0.0) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(doc, 'radialAccelVariance'), 0.0) : Bool)) : Bool)) {
+    if ((cast ((cast !_Runtime.strictEquals(doc.radialAcceleration, 0.0) : Bool) || (cast !_Runtime.strictEquals(doc.radialAccelVariance, 0.0) : Bool)) : Bool)) {
       _Runtime.callProperty(warnings, 'push', cast (['radialAcceleration is not supported and was ignored'] : Array<Dynamic>));
     }
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(doc, 'tangentialAcceleration'), 0.0) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(doc, 'tangentialAccelVariance'), 0.0) : Bool)) : Bool)) {
+    if ((cast ((cast !_Runtime.strictEquals(doc.tangentialAcceleration, 0.0) : Bool) || (cast !_Runtime.strictEquals(doc.tangentialAccelVariance, 0.0) : Bool)) : Bool)) {
       _Runtime.callProperty(warnings, 'push', cast (['tangentialAcceleration is not supported and was ignored'] : Array<Dynamic>));
     }
     return cast warnings;
@@ -91,26 +91,26 @@ class StarlingPexParse {
     var rotSpeedMid:Dynamic = cast _Runtime.UNDEFINED;
     var rotSpeedVar:Dynamic = cast _Runtime.UNDEFINED;
     var pdDuration:Dynamic = cast _Runtime.UNDEFINED;
-    angleRad = (_Runtime.field(doc, 'angle') * StarlingPexParse.DEG2RAD__starlingPexParse);
-    lifespan = _Runtime.field(doc, 'particleLifespan');
-    lifespanVar = _Runtime.field(doc, 'particleLifespanVariance');
-    speed = _Runtime.field(doc, 'speed');
-    speedVar = _Runtime.field(doc, 'speedVariance');
-    vx = _Runtime.field(doc, 'sourcePositionVariancex');
-    vy = _Runtime.field(doc, 'sourcePositionVariancey');
+    angleRad = (doc.angle * StarlingPexParse.DEG2RAD__starlingPexParse);
+    lifespan = doc.particleLifespan;
+    lifespanVar = doc.particleLifespanVariance;
+    speed = doc.speed;
+    speedVar = doc.speedVariance;
+    vx = doc.sourcePositionVariancex;
+    vy = doc.sourcePositionVariancey;
     emitterShape = ((cast ((cast _Runtime.strictEquals(vx, 0.0) : Bool) && (cast _Runtime.strictEquals(vy, 0.0) : Bool)) : Bool) ? (cast 'point' : Dynamic) : (cast ((cast _Runtime.strictEquals(vx, vy) : Bool) ? (cast 'circle' : Dynamic) : (cast 'rect' : Dynamic)) : Dynamic));
-    startSize = (_Runtime.field(doc, 'startParticleSize') / textureSize);
-    startVar = (_Runtime.field(doc, 'startParticleSizeVariance') / textureSize);
-    finishSize = (_Runtime.field(doc, 'finishParticleSize') / textureSize);
-    rotStart = _Runtime.field(doc, 'rotationStart');
-    rotEnd = _Runtime.field(doc, 'rotationEnd');
-    rotStartVar = _Runtime.field(doc, 'rotationStartVariance');
-    rotEndVar = _Runtime.field(doc, 'rotationEndVariance');
+    startSize = (doc.startParticleSize / textureSize);
+    startVar = (doc.startParticleSizeVariance / textureSize);
+    finishSize = (doc.finishParticleSize / textureSize);
+    rotStart = doc.rotationStart;
+    rotEnd = doc.rotationEnd;
+    rotStartVar = doc.rotationStartVariance;
+    rotEndVar = doc.rotationEndVariance;
     lifetimeMid = _Runtime.orValue((lifespan + (lifespanVar * 0.5)), function():Dynamic return cast 1.0);
     rotSpeedMid = ((((rotStart + rotEnd) * 0.5) * StarlingPexParse.DEG2RAD__starlingPexParse) / lifetimeMid);
     rotSpeedVar = ((HxMath.max(rotStartVar, rotEndVar) * StarlingPexParse.DEG2RAD__starlingPexParse) / lifetimeMid);
-    pdDuration = _Runtime.field(doc, 'duration');
-    return cast _Runtime.callValue(createParticleEmitterConfig, cast ([{ maxParticles: _Runtime.field(doc, 'maxParticles'), loop: ((cast pdDuration : Float) <= (cast 0.0 : Float)), duration: ((cast ((cast pdDuration : Float) > (cast 0.0 : Float)) : Bool) ? (cast pdDuration : Dynamic) : (cast 0.0 : Dynamic)), lifetimeMin: HxMath.max(0.0, (lifespan - lifespanVar)), lifetimeMax: (lifespan + lifespanVar), speedMin: HxMath.max(0.0, (speed - speedVar)), speedMax: (speed + speedVar), directionX: HxMath.cos(angleRad), directionY: -HxMath.sin(angleRad), spread: (_Runtime.field(doc, 'angleVariance') * StarlingPexParse.DEG2RAD__starlingPexParse), gravityX: _Runtime.field(doc, 'gravityx'), gravityY: _Runtime.field(doc, 'gravityy'), emitterShape: emitterShape, emitterRadius: ((cast _Runtime.strictEquals(emitterShape, 'circle') : Bool) ? (cast vx : Dynamic) : (cast 0.0 : Dynamic)), emitterWidth: ((cast _Runtime.strictEquals(emitterShape, 'rect') : Bool) ? (cast (vx * 2.0) : Dynamic) : (cast 0.0 : Dynamic)), emitterHeight: ((cast _Runtime.strictEquals(emitterShape, 'rect') : Bool) ? (cast (vy * 2.0) : Dynamic) : (cast 0.0 : Dynamic)), scaleMin: HxMath.max(0.0, (startSize - startVar)), scaleMax: (startSize + startVar), scaleEnd: ((cast ((cast startSize : Float) > (cast 0.0 : Float)) : Bool) ? (cast (finishSize / startSize) : Dynamic) : (cast 1.0 : Dynamic)), colorStartR: _Runtime.field(_Runtime.field(doc, 'startColor'), 'red'), colorStartG: _Runtime.field(_Runtime.field(doc, 'startColor'), 'green'), colorStartB: _Runtime.field(_Runtime.field(doc, 'startColor'), 'blue'), colorStartVarianceR: _Runtime.field(_Runtime.field(doc, 'startColorVariance'), 'red'), colorStartVarianceG: _Runtime.field(_Runtime.field(doc, 'startColorVariance'), 'green'), colorStartVarianceB: _Runtime.field(_Runtime.field(doc, 'startColorVariance'), 'blue'), colorEndR: _Runtime.field(_Runtime.field(doc, 'finishColor'), 'red'), colorEndG: _Runtime.field(_Runtime.field(doc, 'finishColor'), 'green'), colorEndB: _Runtime.field(_Runtime.field(doc, 'finishColor'), 'blue'), colorEndVarianceR: _Runtime.field(_Runtime.field(doc, 'finishColorVariance'), 'red'), colorEndVarianceG: _Runtime.field(_Runtime.field(doc, 'finishColorVariance'), 'green'), colorEndVarianceB: _Runtime.field(_Runtime.field(doc, 'finishColorVariance'), 'blue'), alphaStart: _Runtime.field(_Runtime.field(doc, 'startColor'), 'alpha'), alphaEnd: _Runtime.field(_Runtime.field(doc, 'finishColor'), 'alpha'), rotationSpeedMin: (rotSpeedMid - rotSpeedVar), rotationSpeedMax: (rotSpeedMid + rotSpeedVar), blendMode: _Runtime.callValue(StarlingPexParse.pexBlendMode__starlingPexParse, cast ([_Runtime.field(doc, 'blendFuncSource'), _Runtime.field(doc, 'blendFuncDestination')] : Array<Dynamic>)) }] : Array<Dynamic>));
+    pdDuration = doc.duration;
+    return cast _Runtime.callValue(createParticleEmitterConfig, cast ([{ maxParticles: doc.maxParticles, loop: ((cast pdDuration : Float) <= (cast 0.0 : Float)), duration: ((cast ((cast pdDuration : Float) > (cast 0.0 : Float)) : Bool) ? (cast pdDuration : Dynamic) : (cast 0.0 : Dynamic)), lifetimeMin: HxMath.max(0.0, (lifespan - lifespanVar)), lifetimeMax: (lifespan + lifespanVar), speedMin: HxMath.max(0.0, (speed - speedVar)), speedMax: (speed + speedVar), directionX: HxMath.cos(angleRad), directionY: -HxMath.sin(angleRad), spread: (doc.angleVariance * StarlingPexParse.DEG2RAD__starlingPexParse), gravityX: doc.gravityx, gravityY: doc.gravityy, emitterShape: emitterShape, emitterRadius: ((cast _Runtime.strictEquals(emitterShape, 'circle') : Bool) ? (cast vx : Dynamic) : (cast 0.0 : Dynamic)), emitterWidth: ((cast _Runtime.strictEquals(emitterShape, 'rect') : Bool) ? (cast (vx * 2.0) : Dynamic) : (cast 0.0 : Dynamic)), emitterHeight: ((cast _Runtime.strictEquals(emitterShape, 'rect') : Bool) ? (cast (vy * 2.0) : Dynamic) : (cast 0.0 : Dynamic)), scaleMin: HxMath.max(0.0, (startSize - startVar)), scaleMax: (startSize + startVar), scaleEnd: ((cast ((cast startSize : Float) > (cast 0.0 : Float)) : Bool) ? (cast (finishSize / startSize) : Dynamic) : (cast 1.0 : Dynamic)), colorStartR: _Runtime.field(doc.startColor, 'red'), colorStartG: _Runtime.field(doc.startColor, 'green'), colorStartB: _Runtime.field(doc.startColor, 'blue'), colorStartVarianceR: _Runtime.field(doc.startColorVariance, 'red'), colorStartVarianceG: _Runtime.field(doc.startColorVariance, 'green'), colorStartVarianceB: _Runtime.field(doc.startColorVariance, 'blue'), colorEndR: _Runtime.field(doc.finishColor, 'red'), colorEndG: _Runtime.field(doc.finishColor, 'green'), colorEndB: _Runtime.field(doc.finishColor, 'blue'), colorEndVarianceR: _Runtime.field(doc.finishColorVariance, 'red'), colorEndVarianceG: _Runtime.field(doc.finishColorVariance, 'green'), colorEndVarianceB: _Runtime.field(doc.finishColorVariance, 'blue'), alphaStart: _Runtime.field(doc.startColor, 'alpha'), alphaEnd: _Runtime.field(doc.finishColor, 'alpha'), rotationSpeedMin: (rotSpeedMid - rotSpeedVar), rotationSpeedMax: (rotSpeedMid + rotSpeedVar), blendMode: _Runtime.callValue(StarlingPexParse.pexBlendMode__starlingPexParse, cast ([doc.blendFuncSource, doc.blendFuncDestination] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 

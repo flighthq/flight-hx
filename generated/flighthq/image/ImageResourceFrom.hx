@@ -11,12 +11,12 @@ class ImageResourceFrom {
   public static function createCanvasFromImageResource(image:ImageResource):Null<Dynamic> {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var imageData:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(_Runtime.field(image, 'data'), null) : Bool)) { return cast null; }
+    if ((cast _Runtime.strictEquals(image.data, null) : Bool)) { return cast null; }
     canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
-    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', _Runtime.field(image, 'width'));
-    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', _Runtime.field(image, 'height'));
-    imageData = _Runtime.construct(_Runtime.field(_Runtime.globalValue('globalThis'), 'ImageData'), [_Runtime.field(image, 'width'), _Runtime.field(image, 'height')]);
-    _Runtime.callProperty(_Runtime.field(imageData, 'data'), 'set', cast ([_Runtime.field(image, 'data')] : Array<Dynamic>));
+    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', image.width);
+    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', image.height);
+    imageData = _Runtime.construct(_Runtime.field(_Runtime.globalValue('globalThis'), 'ImageData'), [image.width, image.height]);
+    _Runtime.callProperty(_Runtime.field(imageData, 'data'), 'set', cast ([image.data] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([imageData, 0.0, 0.0] : Array<Dynamic>));
     return cast canvas;
     return cast null;

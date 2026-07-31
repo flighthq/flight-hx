@@ -59,11 +59,11 @@ class WgpuBitmap {
     if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
     _Runtime.callValue(ensureWgpuQuadBatchResources, cast ([state] : Array<Dynamic>));
     sr = _Runtime.coalesce(_Runtime.field(_Runtime.field(source, 'data'), 'sourceRectangle'), function():Dynamic return cast null);
-    iw = (1.0 / _Runtime.orValue(_Runtime.field(imageSource, 'width'), function():Dynamic return cast 1.0));
-    ih = (1.0 / _Runtime.orValue(_Runtime.field(imageSource, 'height'), function():Dynamic return cast 1.0));
+    iw = (1.0 / _Runtime.orValue(imageSource.width, function():Dynamic return cast 1.0));
+    ih = (1.0 / _Runtime.orValue(imageSource.height, function():Dynamic return cast 1.0));
     if ((cast _Runtime.strictEquals(sr, null) : Bool)) {
-      (w = cast (_Runtime.field(imageSource, 'width') : Dynamic));
-      (h = cast (_Runtime.field(imageSource, 'height') : Dynamic));
+      (w = cast (imageSource.width : Dynamic));
+      (h = cast (imageSource.height : Dynamic));
       (u0 = cast (0.0 : Dynamic));
       (v0 = cast (0.0 : Dynamic));
       (u1 = cast (1.0 : Dynamic));

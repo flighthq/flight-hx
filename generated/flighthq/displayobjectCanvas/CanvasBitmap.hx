@@ -31,7 +31,7 @@ class CanvasBitmap {
         flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false);
       }
       if ((cast _Runtime.strictEquals(sourceRectangle, null) : Bool)) {
-        flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([drawable, 0.0, 0.0, _Runtime.field(imageSource, 'width'), _Runtime.field(imageSource, 'height')] : Array<Dynamic>));
+        flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([drawable, 0.0, 0.0, imageSource.width, imageSource.height] : Array<Dynamic>));
       } else {
         flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([drawable, _Runtime.field(sourceRectangle, 'x'), _Runtime.field(sourceRectangle, 'y'), _Runtime.field(sourceRectangle, 'width'), _Runtime.field(sourceRectangle, 'height'), 0.0, 0.0, _Runtime.field(sourceRectangle, 'width'), _Runtime.field(sourceRectangle, 'height')] : Array<Dynamic>));
       }

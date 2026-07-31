@@ -150,7 +150,7 @@ class PickScene {
     if ((cast !(cast _Runtime.callValue(inverseMatrix4, cast ([PickScene._inverseWorld__pickScene, worldMatrix] : Array<Dynamic>)) : Bool) : Bool)) { return; }
     _Runtime.callValue(PickScene.transformPointByMatrix4__pickScene, cast ([PickScene._localRay__pickScene.origin, ray.origin, PickScene._inverseWorld__pickScene.m] : Array<Dynamic>));
     _Runtime.callValue(PickScene.transformDirectionByMatrix4__pickScene, cast ([PickScene._localRay__pickScene.direction, ray.direction, PickScene._inverseWorld__pickScene.m] : Array<Dynamic>));
-    geometry = _Runtime.field(mesh, 'geometry');
+    geometry = mesh.geometry;
     indices = geometry.indices;
     triangleCount = _Runtime.callValue(getMeshGeometryTriangleCount, cast ([geometry] : Array<Dynamic>));
     {

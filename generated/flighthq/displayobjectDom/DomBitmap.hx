@@ -41,7 +41,7 @@ class DomBitmap {
     if ((cast ((cast _Runtime.strictEquals(sr, null) : Bool) && (cast _Runtime.isInstanceOf(src, _Runtime.globalValue('HTMLImageElement')) : Bool)) : Bool)) {
       _Runtime.callValue(DomBitmap.renderBitmapAsImage__domBitmap, cast ([state, renderProxy, data, src] : Array<Dynamic>));
     } else {
-      _Runtime.callValue(DomBitmap.renderBitmapAsCanvas__domBitmap, cast ([state, renderProxy, data, _Runtime.field(imageSource, 'width'), _Runtime.field(imageSource, 'height'), src, sr] : Array<Dynamic>));
+      _Runtime.callValue(DomBitmap.renderBitmapAsCanvas__domBitmap, cast ([state, renderProxy, data, imageSource.width, imageSource.height, src, sr] : Array<Dynamic>));
     }
   }
 

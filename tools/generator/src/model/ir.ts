@@ -37,6 +37,7 @@ export interface IrTypedStructBinding {
     readonly: boolean;
     requiredUndefined: boolean;
   };
+  receiverCast?: string | undefined;
   schemaId: string;
   schemaName: string;
 }

@@ -11,7 +11,7 @@ class TextureAtlasLibgdxParse {
     var lines:Dynamic = cast _Runtime.UNDEFINED;
     var i:Dynamic = cast _Runtime.UNDEFINED;
     var id:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.setLength(_Runtime.field(atlas, 'regions'), 0.0);
+    _Runtime.setLength(atlas.regions, 0.0);
     lines = _Runtime.callProperty(text, 'split', cast ([_Runtime.regexp('\\r?\\n', '')] : Array<Dynamic>));
     i = 0.0;
     id = 0.0;
@@ -87,7 +87,7 @@ class TextureAtlasLibgdxParse {
           }
           var name:Dynamic = ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool) ? (cast '' + Std.string(regionName) + '_' + Std.string(index) + '' : Dynamic) : (cast regionName : Dynamic));
           var trimmed:Dynamic = ((cast ((cast ((cast origW : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast origH : Float) > (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.orValue(!_Runtime.strictEquals(origW, atlasW), function():Dynamic return cast !_Runtime.strictEquals(origH, atlasH)) : Bool));
-          _Runtime.callProperty(_Runtime.field(atlas, 'regions'), 'push', cast ([_Runtime.callValue(createTextureAtlasRegion, cast ([{ height: atlasH, id: id, name: name, originalHeight: ((cast trimmed : Bool) ? (cast origH : Dynamic) : (cast null : Dynamic)), originalWidth: ((cast trimmed : Bool) ? (cast origW : Dynamic) : (cast null : Dynamic)), pivotX: null, pivotY: null, rotated: rotated, sourceX: offsetX, sourceY: offsetY, trimmed: trimmed, width: atlasW, x: atlasX, y: atlasY }] : Array<Dynamic>))] : Array<Dynamic>));
+          _Runtime.callProperty(atlas.regions, 'push', cast ([_Runtime.callValue(createTextureAtlasRegion, cast ([{ height: atlasH, id: id, name: name, originalHeight: ((cast trimmed : Bool) ? (cast origH : Dynamic) : (cast null : Dynamic)), originalWidth: ((cast trimmed : Bool) ? (cast origW : Dynamic) : (cast null : Dynamic)), pivotX: null, pivotY: null, rotated: rotated, sourceX: offsetX, sourceY: offsetY, trimmed: trimmed, width: atlasW, x: atlasX, y: atlasY }] : Array<Dynamic>))] : Array<Dynamic>));
           id++;
         } else {
           i++;

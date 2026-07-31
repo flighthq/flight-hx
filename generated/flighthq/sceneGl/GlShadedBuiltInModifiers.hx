@@ -317,9 +317,9 @@ class GlShadedBuiltInModifiers {
     unit = _Runtime.callProperty(context, 'acquireModifierTextureUnit', cast ([] : Array<Dynamic>));
     if ((cast ((cast unit : Float) < (cast 0.0 : Float)) : Bool)) { return; }
     flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + unit));
-    image = _Runtime.field(texture, 'image');
+    image = texture.image;
     if ((cast ((cast !_Runtime.strictEquals(image, null) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([image] : Array<Dynamic>)) : Bool)) : Bool)) {
-      _Runtime.callValue(bindGlImageResourceTexture, cast ([state, image, _Runtime.field(texture, 'sampler')] : Array<Dynamic>));
+      _Runtime.callValue(bindGlImageResourceTexture, cast ([state, image, texture.sampler] : Array<Dynamic>));
     }
     flighthq._internal.backend.WebGl2Backend.uniform1i(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), uniformName), unit);
     flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);

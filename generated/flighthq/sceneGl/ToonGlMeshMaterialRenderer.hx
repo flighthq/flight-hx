@@ -55,7 +55,7 @@ class ToonGlMeshMaterialRenderer {
   }
 
   public static function defineKeyForMaterial__toonGlMeshMaterialRenderer(material:Null<ToonMaterial>):GlToonDefineKey {
-    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasBaseColorMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'baseColorMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(material, 'baseColorMap'), 'image'), null) : Bool)), hasRamp: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'ramp'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(material, 'ramp'), 'image'), null) : Bool)), hasUvTransform: _Runtime.callValue(hasGlUvTransform, cast ([((cast !_Runtime.strictEquals(material, null) : Bool) ? (cast _Runtime.field(material, 'baseColorMap') : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)) };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasBaseColorMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'baseColorMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'baseColorMap').image, null) : Bool)), hasRamp: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'ramp'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'ramp').image, null) : Bool)), hasUvTransform: _Runtime.callValue(hasGlUvTransform, cast ([((cast !_Runtime.strictEquals(material, null) : Bool) ? (cast _Runtime.field(material, 'baseColorMap') : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)) };
     return cast null;
   }
 
@@ -75,15 +75,15 @@ class ToonGlMeshMaterialRenderer {
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locSteps'), _Runtime.field(material, 'steps'));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), _Runtime.field(material, 'alphaCutoff'));
     baseColorMap = _Runtime.field(material, 'baseColorMap');
-    if ((cast ((cast ((cast !_Runtime.strictEquals(baseColorMap, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(baseColorMap, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(baseColorMap, 'image')] : Array<Dynamic>)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(baseColorMap, null) : Bool) && (cast !_Runtime.strictEquals(baseColorMap.image, null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([baseColorMap.image] : Array<Dynamic>)) : Bool)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);
-      _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(baseColorMap, 'image'), _Runtime.field(baseColorMap, 'sampler')] : Array<Dynamic>));
+      _Runtime.callValue(bindGlImageResourceTexture, cast ([state, baseColorMap.image, baseColorMap.sampler] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locBaseColorMap'), 0.0);
     }
     ramp = _Runtime.field(material, 'ramp');
-    if ((cast ((cast ((cast !_Runtime.strictEquals(ramp, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(ramp, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(ramp, 'image')] : Array<Dynamic>)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(ramp, null) : Bool) && (cast !_Runtime.strictEquals(ramp.image, null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([ramp.image] : Array<Dynamic>)) : Bool)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE1);
-      _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(ramp, 'image'), _Runtime.field(ramp, 'sampler')] : Array<Dynamic>));
+      _Runtime.callValue(bindGlImageResourceTexture, cast ([state, ramp.image, ramp.sampler] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locRamp'), 1.0);
     }
     _Runtime.callValue(bindGlUvTransform, cast ([gl, program, baseColorMap] : Array<Dynamic>));

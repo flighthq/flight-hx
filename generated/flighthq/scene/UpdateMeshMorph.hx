@@ -14,9 +14,9 @@ class UpdateMeshMorph {
     var morph:Dynamic = cast _Runtime.UNDEFINED;
     var geometry:Dynamic = cast _Runtime.UNDEFINED;
     var bindPose:Dynamic = cast _Runtime.UNDEFINED;
-    morph = _Runtime.field(mesh, 'morph');
+    morph = mesh.morph;
     if ((cast _Runtime.looseEquals(morph, null) : Bool)) { return; }
-    geometry = _Runtime.field(mesh, 'geometry');
+    geometry = mesh.geometry;
     bindPose = _Runtime.callValue(getMeshGeometryMorphBindPose, cast ([geometry] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(bindPose, null) : Bool)) {
       (bindPose = cast (_Runtime.callValue(captureMeshMorphBindPose, cast ([geometry] : Array<Dynamic>)) : Dynamic));

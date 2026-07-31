@@ -215,7 +215,7 @@ class Md5Parse {
             _Runtime.callProperty(materials, 'push', cast ([material] : Array<Dynamic>));
           }
           var meshNode:Mesh = _Runtime.callValue(createMesh, cast ([geometry, materials] : Array<Dynamic>));
-          if ((cast !_Runtime.strictEquals(skeleton, null) : Bool)) { _Runtime.setField(meshNode, 'skin', { skeleton: skeleton, skeletonRoot: skeletonRoot }); }
+          if ((cast !_Runtime.strictEquals(skeleton, null) : Bool)) { (meshNode.skin = cast ({ skeleton: skeleton, skeletonRoot: skeletonRoot } : Dynamic)); }
           _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), (cast (cast meshNode : Dynamic) : SceneNode)] : Array<Dynamic>));
         }
         m++;

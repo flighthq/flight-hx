@@ -36,7 +36,7 @@ typedef DrawEntry__drawGlScene = { var alpha:Float; var clipW:Float; var materia
 
 class DrawGlScene {
   public static function isGpuSkinnedDraw__drawGlScene(mesh:Mesh):Bool {
-    return cast ((cast !_Runtime.looseEquals(_Runtime.field(mesh, 'skin'), null) : Bool) && (cast _Runtime.callValue(hasMeshGeometrySkin, cast ([_Runtime.field(mesh, 'geometry')] : Array<Dynamic>)) : Bool));
+    return cast ((cast !_Runtime.looseEquals(mesh.skin, null) : Bool) && (cast _Runtime.callValue(hasMeshGeometrySkin, cast ([mesh.geometry] : Array<Dynamic>)) : Bool));
     return cast null;
   }
 
@@ -63,7 +63,7 @@ class DrawGlScene {
       var m:Dynamic = 0.0;
       while ((cast ((cast m : Float) < (cast _Runtime.field(list, 'meshCount') : Float)) : Bool)) {
         var mesh:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(list, 'visibleMeshes'), m);
-        if ((cast !_Runtime.looseEquals(_Runtime.field(mesh, 'morph'), null) : Bool)) { _Runtime.callValue(updateMeshMorph, cast ([mesh] : Array<Dynamic>)); }
+        if ((cast !_Runtime.looseEquals(mesh.morph, null) : Bool)) { _Runtime.callValue(updateMeshMorph, cast ([mesh] : Array<Dynamic>)); }
         m++;
       }
     }
@@ -71,7 +71,7 @@ class DrawGlScene {
       var m:Dynamic = 0.0;
       while ((cast ((cast m : Float) < (cast _Runtime.field(list, 'meshCount') : Float)) : Bool)) {
         var mesh:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(list, 'visibleMeshes'), m);
-        var subsets:Dynamic = _Runtime.field(mesh, 'geometry').subsets;
+        var subsets:Dynamic = mesh.geometry.subsets;
         var worldMatrix:Dynamic = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>)) : Matrix4);
         var wx:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(worldMatrix.m, 12.0);
         var wy:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(worldMatrix.m, 13.0);
@@ -125,12 +125,12 @@ class DrawGlScene {
           (boundSkinned = cast (skinned : Dynamic));
         }
         _Runtime.setField(DrawGlScene.proxy__drawGlScene, 'alpha', _Runtime.field(entry, 'alpha'));
-        _Runtime.setField(DrawGlScene.proxy__drawGlScene, 'jointMatrices', ((cast skinned : Bool) ? (cast _Runtime.field(_Runtime.field(_Runtime.field(_Runtime.field(entry, 'mesh'), 'skin'), 'skeleton'), 'jointMatrices') : Dynamic) : (cast null : Dynamic)));
+        _Runtime.setField(DrawGlScene.proxy__drawGlScene, 'jointMatrices', ((cast skinned : Bool) ? (cast _Runtime.field(_Runtime.field(_Runtime.field(entry, 'mesh').skin, 'skeleton'), 'jointMatrices') : Dynamic) : (cast null : Dynamic)));
         _Runtime.setField(DrawGlScene.proxy__drawGlScene, 'material', _Runtime.field(entry, 'material'));
         _Runtime.setField(DrawGlScene.proxy__drawGlScene, 'normalMatrix', DrawGlScene.scratchNormalMatrix__drawGlScene);
         _Runtime.setField(DrawGlScene.proxy__drawGlScene, 'subset', _Runtime.field(entry, 'subset'));
         _Runtime.setField(DrawGlScene.proxy__drawGlScene, 'worldMatrix', worldMatrix);
-        _Runtime.callProperty(_Runtime.field(entry, 'renderer'), 'draw', cast ([state, DrawGlScene.proxy__drawGlScene, _Runtime.field(_Runtime.field(entry, 'mesh'), 'geometry')] : Array<Dynamic>));
+        _Runtime.callProperty(_Runtime.field(entry, 'renderer'), 'draw', cast ([state, DrawGlScene.proxy__drawGlScene, _Runtime.field(entry, 'mesh').geometry] : Array<Dynamic>));
         i++;
       }
     }
@@ -157,12 +157,12 @@ class DrawGlScene {
             (boundSkinned = cast (skinned : Dynamic));
           }
           _Runtime.setField(DrawGlScene.proxy__drawGlScene, 'alpha', _Runtime.field(entry, 'alpha'));
-          _Runtime.setField(DrawGlScene.proxy__drawGlScene, 'jointMatrices', ((cast skinned : Bool) ? (cast _Runtime.field(_Runtime.field(_Runtime.field(_Runtime.field(entry, 'mesh'), 'skin'), 'skeleton'), 'jointMatrices') : Dynamic) : (cast null : Dynamic)));
+          _Runtime.setField(DrawGlScene.proxy__drawGlScene, 'jointMatrices', ((cast skinned : Bool) ? (cast _Runtime.field(_Runtime.field(_Runtime.field(entry, 'mesh').skin, 'skeleton'), 'jointMatrices') : Dynamic) : (cast null : Dynamic)));
           _Runtime.setField(DrawGlScene.proxy__drawGlScene, 'material', _Runtime.field(entry, 'material'));
           _Runtime.setField(DrawGlScene.proxy__drawGlScene, 'normalMatrix', DrawGlScene.scratchNormalMatrix__drawGlScene);
           _Runtime.setField(DrawGlScene.proxy__drawGlScene, 'subset', _Runtime.field(entry, 'subset'));
           _Runtime.setField(DrawGlScene.proxy__drawGlScene, 'worldMatrix', worldMatrix);
-          _Runtime.callProperty(_Runtime.field(entry, 'renderer'), 'draw', cast ([state, DrawGlScene.proxy__drawGlScene, _Runtime.field(_Runtime.field(entry, 'mesh'), 'geometry')] : Array<Dynamic>));
+          _Runtime.callProperty(_Runtime.field(entry, 'renderer'), 'draw', cast ([state, DrawGlScene.proxy__drawGlScene, _Runtime.field(entry, 'mesh').geometry] : Array<Dynamic>));
           i++;
         }
       }
@@ -179,7 +179,7 @@ class DrawGlScene {
 
   public static function resolveSubsetMaterial__drawGlScene(mesh:Mesh, subsetIndex:Float):Null<Material> {
     var materials:Dynamic = cast _Runtime.UNDEFINED;
-    materials = _Runtime.field(mesh, 'materials');
+    materials = mesh.materials;
     return cast ((cast ((cast subsetIndex : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(materials, subsetIndex) : Dynamic) : (cast null : Dynamic));
     return cast null;
   }

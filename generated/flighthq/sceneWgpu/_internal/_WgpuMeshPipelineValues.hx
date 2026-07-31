@@ -389,7 +389,7 @@ class _WgpuMeshPipelineValues {
     var useMips:Dynamic = cast _Runtime.UNDEFINED;
     var mipmapFilter:Null<Dynamic> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(texture, null) : Bool)) { return cast _Runtime.field(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'linearSampler'); }
-    sampler = _Runtime.field(texture, 'sampler');
+    sampler = texture.sampler;
     filter = ((cast StringTools.startsWith(_Runtime.field(sampler, 'magFilter'), 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic));
     useMips = ((cast ((cast _Runtime.field(sampler, 'mipmaps') : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(sampler, 'minFilter'), 'linear') : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(sampler, 'minFilter'), 'nearest') : Bool));
     mipmapFilter = ((cast useMips : Bool) ? (cast ((cast StringTools.endsWith(Std.string(_Runtime.field(sampler, 'minFilter')), 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
@@ -398,13 +398,13 @@ class _WgpuMeshPipelineValues {
   }
 
   public static function isWgpuTextureReady(texture:Null<Texture>):Bool {
-    return cast ((cast ((cast !_Runtime.strictEquals(texture, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(texture, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(texture, 'image')] : Array<Dynamic>)) : Bool));
+    return cast ((cast ((cast !_Runtime.strictEquals(texture, null) : Bool) && (cast !_Runtime.strictEquals(texture.image, null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([texture.image] : Array<Dynamic>)) : Bool));
     return cast null;
   }
 
   public static function resolveWgpuMaterialTextureView(state:WgpuRenderState, texture:Null<Texture>):Dynamic {
-    if ((cast ((cast ((cast !_Runtime.strictEquals(texture, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(texture, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(texture, 'image')] : Array<Dynamic>)) : Bool)) : Bool)) {
-      return cast _Runtime.field(_Runtime.callValue(bindWgpuImageResourceTexture, cast ([state, _Runtime.field(texture, 'image'), _Runtime.field(_Runtime.field(texture, 'sampler'), 'mipmaps')] : Array<Dynamic>)), 'view');
+    if ((cast ((cast ((cast !_Runtime.strictEquals(texture, null) : Bool) && (cast !_Runtime.strictEquals(texture.image, null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([texture.image] : Array<Dynamic>)) : Bool)) : Bool)) {
+      return cast _Runtime.field(_Runtime.callValue(bindWgpuImageResourceTexture, cast ([state, texture.image, _Runtime.field(texture.sampler, 'mipmaps')] : Array<Dynamic>)), 'view');
     }
     return cast _Runtime.callValue(ensureWgpuPlaceholderTextureView, cast ([state] : Array<Dynamic>));
     return cast null;
@@ -414,7 +414,7 @@ class _WgpuMeshPipelineValues {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     var m:Dynamic = cast _Runtime.UNDEFINED;
     out = _Runtime.field(_Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>)), 'pendingUvTransform');
-    if ((cast ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(texture, 'image'), null) : Bool)) : Bool) || (cast !(cast _Runtime.callValue(hasTextureUvTransform, cast ([texture] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast _Runtime.strictEquals(texture.image, null) : Bool)) : Bool) || (cast !(cast _Runtime.callValue(hasTextureUvTransform, cast ([texture] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       _Runtime.callValue(_WgpuMeshPipelineValues.resetWgpuUvTransformStash__wgpuMeshPipeline, cast ([out] : Array<Dynamic>));
       return;
     }

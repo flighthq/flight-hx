@@ -11,7 +11,7 @@ import flighthq.types.TextureAtlas;
 
 class TextureAtlasAsepriteParse {
   public static function parseTextureAtlasAsepriteDocument(doc:TextureAtlasAsepriteDocument, atlas:TextureAtlas):TextureAtlas {
-    _Runtime.setLength(_Runtime.field(atlas, 'regions'), 0.0);
+    _Runtime.setLength(atlas.regions, 0.0);
     if ((cast _Runtime.isArray(_Runtime.field(doc, 'frames')) : Bool)) {
       for (entry in _Runtime.iterable(_Runtime.field(doc, 'frames'))) {
         _Runtime.callValue(TextureAtlasAsepriteParse.applyAsepriteFrame__textureAtlasAsepriteParse, cast ([atlas, _Runtime.field(entry, 'filename'), entry] : Array<Dynamic>));
@@ -35,6 +35,6 @@ class TextureAtlasAsepriteParse {
   }
 
   public static function applyAsepriteFrame__textureAtlasAsepriteParse(atlas:TextureAtlas, name:String, entry:Dynamic):Void {
-    _Runtime.callProperty(_Runtime.field(atlas, 'regions'), 'push', cast ([_Runtime.callValue(createTextureAtlasRegion, cast ([{ height: _Runtime.field(_Runtime.field(entry, 'frame'), 'h'), id: _Runtime.field(_Runtime.field(atlas, 'regions'), 'length'), name: name, originalHeight: ((cast _Runtime.field(entry, 'trimmed') : Bool) ? (cast _Runtime.field(_Runtime.field(entry, 'sourceSize'), 'h') : Dynamic) : (cast null : Dynamic)), originalWidth: ((cast _Runtime.field(entry, 'trimmed') : Bool) ? (cast _Runtime.field(_Runtime.field(entry, 'sourceSize'), 'w') : Dynamic) : (cast null : Dynamic)), pivotX: null, pivotY: null, rotated: _Runtime.field(entry, 'rotated'), sourceX: _Runtime.field(_Runtime.field(entry, 'spriteSourceSize'), 'x'), sourceY: _Runtime.field(_Runtime.field(entry, 'spriteSourceSize'), 'y'), trimmed: _Runtime.field(entry, 'trimmed'), width: _Runtime.field(_Runtime.field(entry, 'frame'), 'w'), x: _Runtime.field(_Runtime.field(entry, 'frame'), 'x'), y: _Runtime.field(_Runtime.field(entry, 'frame'), 'y') }] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callProperty(atlas.regions, 'push', cast ([_Runtime.callValue(createTextureAtlasRegion, cast ([{ height: _Runtime.field(_Runtime.field(entry, 'frame'), 'h'), id: _Runtime.field(atlas.regions, 'length'), name: name, originalHeight: ((cast _Runtime.field(entry, 'trimmed') : Bool) ? (cast _Runtime.field(_Runtime.field(entry, 'sourceSize'), 'h') : Dynamic) : (cast null : Dynamic)), originalWidth: ((cast _Runtime.field(entry, 'trimmed') : Bool) ? (cast _Runtime.field(_Runtime.field(entry, 'sourceSize'), 'w') : Dynamic) : (cast null : Dynamic)), pivotX: null, pivotY: null, rotated: _Runtime.field(entry, 'rotated'), sourceX: _Runtime.field(_Runtime.field(entry, 'spriteSourceSize'), 'x'), sourceY: _Runtime.field(_Runtime.field(entry, 'spriteSourceSize'), 'y'), trimmed: _Runtime.field(entry, 'trimmed'), width: _Runtime.field(_Runtime.field(entry, 'frame'), 'w'), x: _Runtime.field(_Runtime.field(entry, 'frame'), 'x'), y: _Runtime.field(_Runtime.field(entry, 'frame'), 'y') }] : Array<Dynamic>))] : Array<Dynamic>));
   }
 }

@@ -100,19 +100,19 @@ class GlParticleEmitter {
     ids = _Runtime.field(__destructure0, 'ids');
     particleCount = _Runtime.field(__destructure0, 'particleCount');
     transforms = _Runtime.field(__destructure0, 'transforms');
-    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(atlas, 'image'), null) : Bool)) : Bool) || (cast !(cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(atlas, 'image')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) : Bool)) { return; }
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.image, null) : Bool)) : Bool) || (cast !(cast _Runtime.callValue(hasImageResourcePixels, cast ([atlas.image] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) : Bool)) { return; }
     shader = _Runtime.callValue(GlParticleEmitter.ensureParticleShader__glParticleEmitter, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(GlParticleEmitter.ensureInstanceCapacity__glParticleEmitter, cast ([state, particleCount] : Array<Dynamic>));
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
-    _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(atlas, 'image')] : Array<Dynamic>));
+    _Runtime.callValue(bindGlImageResourceTexture, cast ([state, atlas.image] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    regions = _Runtime.field(atlas, 'regions');
+    regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
     nodeAlpha = _Runtime.field(renderProxy, 'alpha');
     t = _Runtime.field(renderProxy, 'transform2D');
     viewport = _Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));
-    iw = (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'width'), function():Dynamic return cast 1.0));
-    ih = (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'height'), function():Dynamic return cast 1.0));
+    iw = (1.0 / _Runtime.orValue(atlas.image.width, function():Dynamic return cast 1.0));
+    ih = (1.0 / _Runtime.orValue(atlas.image.height, function():Dynamic return cast 1.0));
     instanceData = _Runtime.field(runtime, 'particleInstanceData');
     base = 0.0;
     drawCount = 0.0;

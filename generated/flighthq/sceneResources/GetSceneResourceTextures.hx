@@ -24,7 +24,7 @@ class GetSceneResourceTextures {
   public static function collectNodeResourceTextures__getSceneResourceTextures(node:SceneNode, registry:SceneMaterialTextureRegistry, out:Array<Texture>, seen:Dynamic, slots:Array<Texture>):Void {
     var materials:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)) : Bool) : Bool)) { return; }
-    materials = _Runtime.field(node, 'materials');
+    materials = (cast node : flighthq.types.Mesh).materials;
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
@@ -36,7 +36,7 @@ class GetSceneResourceTextures {
           var j:Dynamic = 0.0;
           while ((cast ((cast j : Float) < (cast _Runtime.field(slots, 'length') : Float)) : Bool)) {
             var texture:Dynamic = flighthq._internal._StaticIndex.readArray(slots, j);
-            if ((cast ((cast _Runtime.looseEquals(_Runtime.field(texture, 'resource'), null) : Bool) || (cast ((cast seen : flighthq._internal._Set).has(texture)) : Bool)) : Bool)) { j++; continue; }
+            if ((cast ((cast _Runtime.looseEquals(texture.resource, null) : Bool) || (cast ((cast seen : flighthq._internal._Set).has(texture)) : Bool)) : Bool)) { j++; continue; }
             ((cast seen : flighthq._internal._Set).add(texture));
             _Runtime.callProperty(out, 'push', cast ([texture] : Array<Dynamic>));
             j++;

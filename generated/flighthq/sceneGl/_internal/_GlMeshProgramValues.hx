@@ -108,7 +108,7 @@ class _GlMeshProgramValues {
   }
 
   public static function hasGlUvTransform(texture:Null<TextureLike>):Bool {
-    return cast ((cast ((cast !_Runtime.strictEquals(texture, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(texture, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasTextureUvTransform, cast ([texture] : Array<Dynamic>)) : Bool));
+    return cast ((cast ((cast !_Runtime.strictEquals(texture, null) : Bool) && (cast !_Runtime.strictEquals(texture.image, null) : Bool)) : Bool) && (cast _Runtime.callValue(hasTextureUvTransform, cast ([texture] : Array<Dynamic>)) : Bool));
     return cast null;
   }
 

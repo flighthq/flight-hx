@@ -22,21 +22,21 @@ class SpritesheetFrom {
     var frameNameToIndex:Dynamic = cast _Runtime.UNDEFINED;
     var animations:Dynamic = cast _Runtime.UNDEFINED;
     nameToRegionId = _Runtime.construct(_Runtime.globalValue('Map'), []);
-    for (region in _Runtime.iterable(_Runtime.field(atlas, 'regions'))) {
+    for (region in _Runtime.iterable(atlas.regions)) {
       if ((cast !_Runtime.strictEquals(region.name, null) : Bool)) {
         ((cast nameToRegionId : flighthq._internal._Map).set(region.name, region.id));
       }
     }
     frames = _Runtime.callProperty(_Runtime.field(data, 'frames'), 'map', cast ([function(fd:Dynamic, index:Dynamic) {
       var regionId:Dynamic = cast _Runtime.UNDEFINED;
-      regionId = ((cast !_Runtime.strictEquals(_Runtime.field(fd, 'name'), '') : Bool) ? (cast _Runtime.coalesce(((cast nameToRegionId : flighthq._internal._Map).get(_Runtime.field(fd, 'name'))), function():Dynamic return cast index) : Dynamic) : (cast index : Dynamic));
-      return cast _Runtime.callValue(createSpritesheetFrame, cast ([{ id: regionId, offsetX: _Runtime.field(fd, 'offsetX'), offsetY: _Runtime.field(fd, 'offsetY'), pivotX: _Runtime.field(fd, 'pivotX'), pivotY: _Runtime.field(fd, 'pivotY'), rotated: _Runtime.field(fd, 'rotated') }] : Array<Dynamic>));
+      regionId = ((cast !_Runtime.strictEquals(fd.name, '') : Bool) ? (cast _Runtime.coalesce(((cast nameToRegionId : flighthq._internal._Map).get(fd.name)), function():Dynamic return cast index) : Dynamic) : (cast index : Dynamic));
+      return cast _Runtime.callValue(createSpritesheetFrame, cast ([{ id: regionId, offsetX: fd.offsetX, offsetY: fd.offsetY, pivotX: fd.pivotX, pivotY: fd.pivotY, rotated: fd.rotated }] : Array<Dynamic>));
     }] : Array<Dynamic>));
     frameNameToIndex = _Runtime.construct(_Runtime.globalValue('Map'), []);
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(data, 'frames'), 'length') : Float)) : Bool)) {
-        var name:Dynamic = _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(data, 'frames'), i), 'name');
+        var name:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(data, 'frames'), i).name;
         if ((cast !_Runtime.strictEquals(name, '') : Bool)) {
           ((cast frameNameToIndex : flighthq._internal._Map).set(name, i));
         }
@@ -92,7 +92,7 @@ class SpritesheetFrom {
             var x:Dynamic = (marginX + (col * (frameWidth + spacingX)));
             var y:Dynamic = (marginY + (row * (frameHeight + spacingY)));
             var region:Dynamic = _Runtime.callValue(createTextureAtlasRegion, cast ([{ height: frameHeight, id: id, name: '' + Std.string(namePrefix) + '' + Std.string(id) + '', width: frameWidth, x: x, y: y }] : Array<Dynamic>));
-            _Runtime.callProperty(_Runtime.field(atlas, 'regions'), 'push', cast ([region] : Array<Dynamic>));
+            _Runtime.callProperty(atlas.regions, 'push', cast ([region] : Array<Dynamic>));
             _Runtime.callProperty(frames, 'push', cast ([_Runtime.callValue(createSpritesheetFrame, cast ([{ id: id }] : Array<Dynamic>))] : Array<Dynamic>));
             id++;
             col++;
@@ -111,7 +111,7 @@ class SpritesheetFrom {
     var frames:Dynamic = cast _Runtime.UNDEFINED;
     __destructure1 = tileset;
     atlas = _Runtime.field(__destructure1, 'atlas');
-    frames = _Runtime.callProperty(_Runtime.coalesce(_Runtime.optionalField(atlas, 'regions'), function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(region:Dynamic) return _Runtime.callValue(createSpritesheetFrame, cast ([{ id: region.id }] : Array<Dynamic>))] : Array<Dynamic>));
+    frames = _Runtime.callProperty(_Runtime.coalesce(({ final __typedStruct6 = atlas; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.regions; }), function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(region:Dynamic) return _Runtime.callValue(createSpritesheetFrame, cast ([{ id: region.id }] : Array<Dynamic>))] : Array<Dynamic>));
     return cast _Runtime.callValue(createSpritesheet, cast ([{ atlas: atlas, frames: frames }] : Array<Dynamic>));
     return cast null;
   }

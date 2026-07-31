@@ -60,7 +60,7 @@ class UpdateBitmapText {
     bounds = _Runtime.callValue(UpdateBitmapText.ensureBoundsRectangle__updateBitmapText, cast ([runtime] : Array<Dynamic>));
     for (quadBatch in _Runtime.iterable(_Runtime.field(runtime, 'quadBatches'))) {
       _Runtime.callValue(clearQuadBatch, cast ([quadBatch] : Array<Dynamic>));
-      if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(quadBatch, 'data'), 'atlas'), null) : Bool)) { _Runtime.setLength(_Runtime.field(_Runtime.field(_Runtime.field(quadBatch, 'data'), 'atlas'), 'regions'), 0.0); }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(quadBatch, 'data'), 'atlas'), null) : Bool)) { _Runtime.setLength(_Runtime.field(_Runtime.field(quadBatch, 'data'), 'atlas').regions, 0.0); }
       _Runtime.callValue(UpdateBitmapText.applyBitmapTextColor__updateBitmapText, cast ([quadBatch, _Runtime.field(data, 'color')] : Array<Dynamic>));
     }
     glyphSource = _Runtime.field(data, 'glyphSource');
@@ -103,7 +103,7 @@ class UpdateBitmapText {
               var regionId:Dynamic = ((cast _Runtime.field(page, 'regionByCodepoint') : flighthq._internal._Map).get(_Runtime.field(glyph, 'codepoint')));
               if ((cast _Runtime.strictEquals(regionId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
                 _Runtime.callValue(addTextureAtlasRegion, cast ([_Runtime.field(page, 'atlas'), _Runtime.field(entry, 'x'), _Runtime.field(entry, 'y'), _Runtime.field(entry, 'width'), _Runtime.field(entry, 'height')] : Array<Dynamic>));
-                (regionId = cast ((_Runtime.field(_Runtime.field(_Runtime.field(page, 'atlas'), 'regions'), 'length') - 1.0) : Dynamic));
+                (regionId = cast ((_Runtime.field(_Runtime.field(page, 'atlas').regions, 'length') - 1.0) : Dynamic));
                 ((cast _Runtime.field(page, 'regionByCodepoint') : flighthq._internal._Map).set(_Runtime.field(glyph, 'codepoint'), regionId));
               }
               _Runtime.callValue(appendQuadBatchInstance, cast ([_Runtime.field(page, 'quadBatch'), regionId, quadX, quadY] : Array<Dynamic>));
@@ -203,7 +203,7 @@ class UpdateBitmapText {
     }
     quadBatch = flighthq._internal._StaticIndex.readArray(_Runtime.field(runtime, 'quadBatches'), page);
     atlas = _Runtime.field(_Runtime.field(quadBatch, 'data'), 'atlas');
-    _Runtime.setField(atlas, 'image', image);
+    (atlas.image = cast (image : Dynamic));
     pageBatch = { atlas: atlas, quadBatch: quadBatch, regionByCodepoint: _Runtime.construct(_Runtime.globalValue('Map'), []) };
     ((cast pages : flighthq._internal._Map).set(page, pageBatch));
     return cast pageBatch;

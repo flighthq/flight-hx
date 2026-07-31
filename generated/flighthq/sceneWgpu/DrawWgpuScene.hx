@@ -36,7 +36,7 @@ class DrawWgpuScene {
       var m:Dynamic = 0.0;
       while ((cast ((cast m : Float) < (cast _Runtime.field(list, 'meshCount') : Float)) : Bool)) {
         var mesh:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(list, 'visibleMeshes'), m);
-        var subsets:Dynamic = _Runtime.field(mesh, 'geometry').subsets;
+        var subsets:Dynamic = mesh.geometry.subsets;
         var worldMatrix:Dynamic = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>)) : Matrix4);
         _Runtime.callValue(setMatrix3NormalFromMatrix4, cast ([DrawWgpuScene.scratchNormalMatrix__drawWgpuScene, worldMatrix] : Array<Dynamic>));
         {
@@ -54,7 +54,7 @@ class DrawWgpuScene {
             _Runtime.setField(DrawWgpuScene.proxy__drawWgpuScene, 'normalMatrix', DrawWgpuScene.scratchNormalMatrix__drawWgpuScene);
             _Runtime.setField(DrawWgpuScene.proxy__drawWgpuScene, 'subset', flighthq._internal._StaticIndex.readArray(subsets, s));
             _Runtime.setField(DrawWgpuScene.proxy__drawWgpuScene, 'worldMatrix', worldMatrix);
-            _Runtime.callProperty(renderer, 'draw', cast ([state, DrawWgpuScene.proxy__drawWgpuScene, _Runtime.field(mesh, 'geometry')] : Array<Dynamic>));
+            _Runtime.callProperty(renderer, 'draw', cast ([state, DrawWgpuScene.proxy__drawWgpuScene, mesh.geometry] : Array<Dynamic>));
             s++;
           }
         }
@@ -66,7 +66,7 @@ class DrawWgpuScene {
 
   public static function resolveSubsetMaterial__drawWgpuScene(mesh:Mesh, subsetIndex:Float):Null<Material> {
     var materials:Dynamic = cast _Runtime.UNDEFINED;
-    materials = _Runtime.field(mesh, 'materials');
+    materials = mesh.materials;
     return cast ((cast ((cast subsetIndex : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(materials, subsetIndex) : Dynamic) : (cast null : Dynamic));
     return cast null;
   }

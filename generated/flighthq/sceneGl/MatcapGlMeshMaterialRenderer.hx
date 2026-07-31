@@ -53,7 +53,7 @@ class MatcapGlMeshMaterialRenderer {
   }
 
   public static function defineKeyForMaterial__matcapGlMeshMaterialRenderer(material:Null<MatcapMaterial>):GlMatcapDefineKey {
-    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasMatcap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'matcap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(material, 'matcap'), 'image'), null) : Bool)) };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasMatcap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'matcap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'matcap').image, null) : Bool)) };
     return cast null;
   }
 

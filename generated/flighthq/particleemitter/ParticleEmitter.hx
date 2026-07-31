@@ -142,7 +142,7 @@ class ParticleEmitter {
       _Runtime.setField(out, 'height', 0.0);
       return;
     }
-    regions = _Runtime.field(atlas, 'regions');
+    regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
     minX = HxMath.POSITIVE_INFINITY;
     minY = HxMath.POSITIVE_INFINITY;

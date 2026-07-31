@@ -194,7 +194,7 @@ class Md2Parse {
     geometry = _Runtime.callValue(createMeshGeometry, cast ([{ indices: indexArray, layout: CANONICAL_LAYOUT, vertices: vertices }] : Array<Dynamic>));
     mesh = _Runtime.callValue(createMesh, cast ([geometry, materials] : Array<Dynamic>));
     morph = _Runtime.callValue(Md2Parse.buildMd2Morph__md2Parse, cast ([frames, sourceVertexIndices] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(morph, null) : Bool)) { _Runtime.setField(mesh, 'morph', morph); }
+    if ((cast !_Runtime.strictEquals(morph, null) : Bool)) { (mesh.morph = cast (morph : Dynamic)); }
     _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), (cast (cast mesh : Dynamic) : SceneNode)] : Array<Dynamic>));
     clip = _Runtime.callValue(Md2Parse.buildMd2MorphClip__md2Parse, cast ([_Runtime.field(scene, 'root')] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(clip, null) : Bool)) { _Runtime.setField(_Runtime.field(scene, 'animations'), 'default', clip); }
@@ -292,8 +292,8 @@ class Md2Parse {
     var track:Dynamic = cast _Runtime.UNDEFINED;
     var channel:AnimationChannel = cast _Runtime.UNDEFINED;
     mesh = _Runtime.callValue(Md2Parse.findMd2Mesh__md2Parse, cast ([root] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.strictEquals(mesh, null) : Bool) || (cast _Runtime.looseEquals(_Runtime.field(mesh, 'morph'), null) : Bool)) : Bool)) { return cast null; }
-    targetCount = _Runtime.field(_Runtime.field(_Runtime.field(mesh, 'morph'), 'targets'), 'length');
+    if ((cast ((cast _Runtime.strictEquals(mesh, null) : Bool) || (cast _Runtime.looseEquals(mesh.morph, null) : Bool)) : Bool)) { return cast null; }
+    targetCount = _Runtime.field(_Runtime.field(mesh.morph, 'targets'), 'length');
     if ((cast _Runtime.strictEquals(targetCount, 0.0) : Bool)) { return cast null; }
     frameCount = (targetCount + 1.0);
     times = new flighthq._internal._Float32Array(frameCount);

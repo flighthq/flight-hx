@@ -15,6 +15,6 @@ class GlTextureUpload {
   }
 
   public static function uploadGlTextureImageResource(gl:Dynamic, target:Float, image:ImageResource):Void {
-    if ((cast !_Runtime.strictEquals(_Runtime.field(image, 'source'), null) : Bool)) { _Runtime.callValue(uploadGlTextureElement, cast ([gl, target, (cast _Runtime.field(image, 'source') : Dynamic)] : Array<Dynamic>)); } else { _Runtime.callValue(uploadGlTextureData, cast ([gl, target, _Runtime.field(image, 'width'), _Runtime.field(image, 'height'), _Runtime.field(image, 'data')] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(image.source, null) : Bool)) { _Runtime.callValue(uploadGlTextureElement, cast ([gl, target, (cast image.source : Dynamic)] : Array<Dynamic>)); } else { _Runtime.callValue(uploadGlTextureData, cast ([gl, target, image.width, image.height, image.data] : Array<Dynamic>)); }
   }
 }

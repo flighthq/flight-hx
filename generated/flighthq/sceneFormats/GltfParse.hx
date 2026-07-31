@@ -299,7 +299,7 @@ class GltfParse {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(meshes, 'length') : Float)) : Bool)) {
-        var morph:Dynamic = _Runtime.field(flighthq._internal._StaticIndex.readArray(meshes, i), 'morph');
+        var morph:Dynamic = flighthq._internal._StaticIndex.readArray(meshes, i).morph;
         if ((cast ((cast _Runtime.looseEquals(morph, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(morph, 'targets'), 'length'), 0.0) : Bool)) : Bool)) { i++; continue; }
         var track:Dynamic = _Runtime.callValue(createAnimationTrack, cast ([{ components: _Runtime.field(_Runtime.field(morph, 'targets'), 'length'), interpolation: _Runtime.getIndex(GltfParse.GLTF_SAMPLER_INTERPOLATIONS__gltfParse, _Runtime.coalesce(interpolation, function():Dynamic return cast 'LINEAR')), times: times, values: values }] : Array<Dynamic>));
         _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([track, { node: flighthq._internal._StaticIndex.readArray(meshes, i), path: SceneAnimationPathWeights }] : Array<Dynamic>))] : Array<Dynamic>));
@@ -332,7 +332,7 @@ class GltfParse {
   public static function applySkinToMeshNodes__gltfParse(node:SceneNode, skin:Skin):Void {
     var children:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)) : Bool)) {
-      _Runtime.setField((cast node : Mesh), 'skin', skin);
+      ((cast node : Mesh).skin = cast (skin : Dynamic));
       return;
     }
     children = _Runtime.callValue(getNodeChildren, cast ([node] : Array<Dynamic>));
@@ -340,7 +340,7 @@ class GltfParse {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
         var child:Dynamic = (cast (cast flighthq._internal._StaticIndex.readArray(children, i) : Dynamic) : SceneNode);
-        if ((cast _Runtime.callValue(isMesh, cast ([child] : Array<Dynamic>)) : Bool)) { _Runtime.setField((cast (cast child : Dynamic) : Mesh), 'skin', skin); }
+        if ((cast _Runtime.callValue(isMesh, cast ([child] : Array<Dynamic>)) : Bool)) { ((cast (cast child : Dynamic) : Mesh).skin = cast (skin : Dynamic)); }
         i++;
       }
     }
@@ -416,7 +416,7 @@ class GltfParse {
       var morph:Dynamic = cast _Runtime.UNDEFINED;
       mesh = _Runtime.callValue(createMesh, cast ([flighthq._internal._StaticIndex.readArray(geometries, i), _Runtime.callValue(materialsFor, cast ([i] : Array<Dynamic>))] : Array<Dynamic>));
       morph = _Runtime.coalesce(_Runtime.optionalIndex(morphs, i), function():Dynamic return cast null);
-      if ((cast !_Runtime.strictEquals(morph, null) : Bool)) { _Runtime.setField(mesh, 'morph', morph); }
+      if ((cast !_Runtime.strictEquals(morph, null) : Bool)) { (mesh.morph = cast (morph : Dynamic)); }
       return cast mesh;
     };
     if ((cast _Runtime.strictEquals(_Runtime.field(geometries, 'length'), 1.0) : Bool)) { return cast (cast (cast _Runtime.callValue(buildMesh, cast ([0.0] : Array<Dynamic>)) : Dynamic) : SceneNode); }
@@ -456,7 +456,7 @@ class GltfParse {
     if ((cast _Runtime.strictEquals(image, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
     result = _Runtime.callValue(GltfParse.gltfImageToTexture__gltfParse, cast ([doc, buffers, image, options] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(result, null) : Bool)) { return cast null; }
-    _Runtime.setField(result, 'colorSpace', colorSpace);
+    (result.colorSpace = cast (colorSpace : Dynamic));
     _Runtime.callValue(GltfParse.applyGltfSampler__gltfParse, cast ([result, ((cast !_Runtime.strictEquals(_Runtime.field(texture, 'sampler'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.optionalIndex(_Runtime.field(doc, 'samplers'), _Runtime.field(texture, 'sampler')) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic))] : Array<Dynamic>));
     _Runtime.callValue(GltfParse.applyGltfTextureTransform__gltfParse, cast ([result, _Runtime.optionalField(_Runtime.field(info, 'extensions'), 'KHR_texture_transform')] : Array<Dynamic>));
     return cast result;
@@ -465,22 +465,22 @@ class GltfParse {
 
   public static function applyGltfSampler__gltfParse(texture:Texture, sampler:Null<GltfSampler>):Void {
     if ((cast _Runtime.strictEquals(sampler, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(sampler, 'wrapS'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(_Runtime.field(texture, 'sampler'), 'wrapU', _Runtime.getIndex(GltfParse.GLTF_TEXTURE_WRAP__gltfParse, _Runtime.field(sampler, 'wrapS'))); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(sampler, 'wrapT'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(_Runtime.field(texture, 'sampler'), 'wrapV', _Runtime.getIndex(GltfParse.GLTF_TEXTURE_WRAP__gltfParse, _Runtime.field(sampler, 'wrapT'))); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(sampler, 'magFilter'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(_Runtime.field(texture, 'sampler'), 'magFilter', _Runtime.getIndex(GltfParse.GLTF_TEXTURE_FILTER__gltfParse, _Runtime.field(sampler, 'magFilter'))); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(sampler, 'wrapS'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(texture.sampler, 'wrapU', _Runtime.getIndex(GltfParse.GLTF_TEXTURE_WRAP__gltfParse, _Runtime.field(sampler, 'wrapS'))); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(sampler, 'wrapT'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(texture.sampler, 'wrapV', _Runtime.getIndex(GltfParse.GLTF_TEXTURE_WRAP__gltfParse, _Runtime.field(sampler, 'wrapT'))); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(sampler, 'magFilter'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(texture.sampler, 'magFilter', _Runtime.getIndex(GltfParse.GLTF_TEXTURE_FILTER__gltfParse, _Runtime.field(sampler, 'magFilter'))); }
     if ((cast !_Runtime.strictEquals(_Runtime.field(sampler, 'minFilter'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.setField(_Runtime.field(texture, 'sampler'), 'minFilter', _Runtime.getIndex(GltfParse.GLTF_TEXTURE_FILTER__gltfParse, _Runtime.field(sampler, 'minFilter')));
-      _Runtime.setField(_Runtime.field(texture, 'sampler'), 'mipmaps', _Runtime.getIndex(GltfParse.GLTF_MIN_FILTER_MIPMAPS__gltfParse, _Runtime.field(sampler, 'minFilter')));
+      _Runtime.setField(texture.sampler, 'minFilter', _Runtime.getIndex(GltfParse.GLTF_TEXTURE_FILTER__gltfParse, _Runtime.field(sampler, 'minFilter')));
+      _Runtime.setField(texture.sampler, 'mipmaps', _Runtime.getIndex(GltfParse.GLTF_MIN_FILTER_MIPMAPS__gltfParse, _Runtime.field(sampler, 'minFilter')));
     }
   }
 
   public static function applyGltfTextureTransform__gltfParse(texture:Texture, transform:Null<Dynamic>):Void {
     if ((cast _Runtime.strictEquals(transform, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    (_Runtime.field(texture, 'uvOffset').x = cast (_Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(transform, 'offset'), 0.0), function():Dynamic return cast 0.0) : Dynamic));
-    (_Runtime.field(texture, 'uvOffset').y = cast (_Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(transform, 'offset'), 1.0), function():Dynamic return cast 0.0) : Dynamic));
-    _Runtime.setField(texture, 'uvRotation', _Runtime.coalesce(_Runtime.field(transform, 'rotation'), function():Dynamic return cast 0.0));
-    (_Runtime.field(texture, 'uvScale').x = cast (_Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(transform, 'scale'), 0.0), function():Dynamic return cast 1.0) : Dynamic));
-    (_Runtime.field(texture, 'uvScale').y = cast (_Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(transform, 'scale'), 1.0), function():Dynamic return cast 1.0) : Dynamic));
+    (texture.uvOffset.x = cast (_Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(transform, 'offset'), 0.0), function():Dynamic return cast 0.0) : Dynamic));
+    (texture.uvOffset.y = cast (_Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(transform, 'offset'), 1.0), function():Dynamic return cast 0.0) : Dynamic));
+    (texture.uvRotation = cast (_Runtime.coalesce(_Runtime.field(transform, 'rotation'), function():Dynamic return cast 0.0) : Dynamic));
+    (texture.uvScale.x = cast (_Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(transform, 'scale'), 0.0), function():Dynamic return cast 1.0) : Dynamic));
+    (texture.uvScale.y = cast (_Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(transform, 'scale'), 1.0), function():Dynamic return cast 1.0) : Dynamic));
   }
 
   public static function gltfImageToTexture__gltfParse(doc:GltfDocument, buffers:Array<flighthq._internal._UInt8Array>, image:GltfImage, options:Null<GltfImportOptions>):Null<Texture> {

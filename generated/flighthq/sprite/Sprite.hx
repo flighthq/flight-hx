@@ -82,7 +82,7 @@ class Sprite {
       return;
     }
     if ((cast !_Runtime.strictEquals(_Runtime.field(data, 'atlas'), null) : Bool)) {
-      var region:Dynamic = _Runtime.find(_Runtime.field(_Runtime.field(data, 'atlas'), 'regions'), function(r:Dynamic) return _Runtime.strictEquals(r.id, _Runtime.field(data, 'id')));
+      var region:Dynamic = _Runtime.find(_Runtime.field(data, 'atlas').regions, function(r:Dynamic) return _Runtime.strictEquals(r.id, _Runtime.field(data, 'id')));
       if ((cast !_Runtime.strictEquals(region, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         var pivotX:Dynamic = _Runtime.coalesce(region.pivotX, function():Dynamic return cast 0.0);
         var pivotY:Dynamic = _Runtime.coalesce(region.pivotY, function():Dynamic return cast 0.0);
@@ -230,7 +230,7 @@ class Sprite {
     atlas = _Runtime.field(__destructure0, 'atlas');
     id = _Runtime.field(__destructure0, 'id');
     if ((cast _Runtime.strictEquals(atlas, null) : Bool)) { return cast null; }
-    return cast _Runtime.coalesce(_Runtime.find(_Runtime.field(atlas, 'regions'), function(r:Dynamic) return _Runtime.strictEquals(r.id, id)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(_Runtime.find(atlas.regions, function(r:Dynamic) return _Runtime.strictEquals(r.id, id)), function():Dynamic return cast null);
     return cast null;
   }
 

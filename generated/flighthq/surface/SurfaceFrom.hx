@@ -40,15 +40,15 @@ class SurfaceFrom {
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     var raw:Dynamic = cast _Runtime.UNDEFINED;
     canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
-    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', _Runtime.field(resource, 'width'));
-    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', _Runtime.field(resource, 'height'));
-    if ((cast _Runtime.strictEquals(_Runtime.field(resource, 'source'), null) : Bool)) {
-      return cast _Runtime.callValue(createEntity, cast ([{ alphaType: _Runtime.field(resource, 'alphaType'), colorSpace: 'srgb', compressed: null, data: ((cast !_Runtime.strictEquals(_Runtime.field(resource, 'data'), null) : Bool) ? (cast new flighthq._internal._UInt8ClampedArray(_Runtime.field(resource, 'data')) : Dynamic) : (cast new flighthq._internal._UInt8ClampedArray(((_Runtime.field(resource, 'width') * _Runtime.field(resource, 'height')) * 4.0)) : Dynamic)), format: _Runtime.field(resource, 'format'), height: _Runtime.field(resource, 'height'), source: null, version: 0.0, width: _Runtime.field(resource, 'width') }] : Array<Dynamic>));
+    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', resource.width);
+    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', resource.height);
+    if ((cast _Runtime.strictEquals(resource.source, null) : Bool)) {
+      return cast _Runtime.callValue(createEntity, cast ([{ alphaType: resource.alphaType, colorSpace: 'srgb', compressed: null, data: ((cast !_Runtime.strictEquals(resource.data, null) : Bool) ? (cast new flighthq._internal._UInt8ClampedArray(resource.data) : Dynamic) : (cast new flighthq._internal._UInt8ClampedArray(((resource.width * resource.height) * 4.0)) : Dynamic)), format: resource.format, height: resource.height, source: null, version: 0.0, width: resource.width }] : Array<Dynamic>));
     }
     ctx = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
-    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([_Runtime.field(resource, 'source'), 0.0, 0.0] : Array<Dynamic>));
-    raw = flighthq._internal.backend.Canvas2dBackend.call(ctx, 'getImageData', cast ([0.0, 0.0, _Runtime.field(resource, 'width'), _Runtime.field(resource, 'height')] : Array<Dynamic>));
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: 'straight', colorSpace: (cast _Runtime.field(raw, 'colorSpace') : String), compressed: null, data: _Runtime.field(raw, 'data'), format: 'rgba8unorm', height: _Runtime.field(resource, 'height'), source: null, version: 0.0, width: _Runtime.field(resource, 'width') }] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([resource.source, 0.0, 0.0] : Array<Dynamic>));
+    raw = flighthq._internal.backend.Canvas2dBackend.call(ctx, 'getImageData', cast ([0.0, 0.0, resource.width, resource.height] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: 'straight', colorSpace: (cast _Runtime.field(raw, 'colorSpace') : String), compressed: null, data: _Runtime.field(raw, 'data'), format: 'rgba8unorm', height: resource.height, source: null, version: 0.0, width: resource.width }] : Array<Dynamic>));
     return cast null;
   }
 

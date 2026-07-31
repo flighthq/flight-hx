@@ -63,7 +63,7 @@ class GlPbrStandardBlock {
     if ((cast !(cast _Runtime.callValue(isGlTextureReady, cast ([texture] : Array<Dynamic>)) : Bool) : Bool)) { return; }
     gl = _Runtime.field(state, 'gl');
     flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + unit));
-    _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(texture, 'image'), _Runtime.field(texture, 'sampler')] : Array<Dynamic>));
+    _Runtime.callValue(bindGlImageResourceTexture, cast ([state, texture.image, texture.sampler] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.uniform1i(gl, location, unit);
   }
 
@@ -75,7 +75,7 @@ class GlPbrStandardBlock {
   }
 
   public static function isGlTextureReady(texture:Null<Texture>):Bool {
-    return cast ((cast ((cast !_Runtime.strictEquals(texture, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(texture, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(texture, 'image')] : Array<Dynamic>)) : Bool));
+    return cast ((cast ((cast !_Runtime.strictEquals(texture, null) : Bool) && (cast !_Runtime.strictEquals(texture.image, null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([texture.image] : Array<Dynamic>)) : Bool));
     return cast null;
   }
 

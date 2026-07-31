@@ -76,7 +76,7 @@ class Shared {
     while ((cast ((cast _Runtime.field(stack, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       var node:Dynamic = _Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>));
       if ((cast _Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)) : Bool)) {
-        var skin:Dynamic = _Runtime.field((cast (cast node : Dynamic) : Mesh), 'skin');
+        var skin:Dynamic = (cast (cast node : Dynamic) : Mesh).skin;
         if ((cast !_Runtime.looseEquals(skin, null) : Bool)) { return cast _Runtime.field(_Runtime.field(skin, 'skeleton'), 'joints'); }
       }
       _Runtime.callProperty(stack, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(getNodeChildren, cast ([node] : Array<Dynamic>)))]));
