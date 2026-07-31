@@ -5249,9 +5249,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 61,
+        "directAccesses": 61,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -7774,9 +7774,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 72,
+        "directAccesses": 72,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -8371,9 +8371,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 159,
+        "directAccesses": 159,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -11263,9 +11263,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 102,
+        "directAccesses": 102,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -11385,9 +11385,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 65,
+        "directAccesses": 65,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -11645,9 +11645,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 170,
+        "directAccesses": 170,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -11733,9 +11733,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 121,
+        "directAccesses": 121,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -12875,9 +12875,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 139,
+        "directAccesses": 139,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -13247,9 +13247,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 75,
+        "directAccesses": 75,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -15656,10 +15656,15 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 81,
-        "reflectiveSurvivors": []
+        "directAccesses": 81,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 1,
+            "reason": "dynamic-enumeration"
+          }
+        ]
       },
       "escapes": [
         {
@@ -20287,9 +20292,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 76,
+        "directAccesses": 76,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -22126,9 +22131,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 79,
+        "directAccesses": 79,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -29520,17 +29525,17 @@
   ],
   "schemaVersion": 3,
   "summary": {
-    "auditOnlySchemas": 342,
+    "auditOnlySchemas": 330,
     "bindableAccesses": 10257,
     "candidates": 405,
-    "directAccesses": 6458,
-    "directSchemas": 62,
+    "directAccesses": 7658,
+    "directSchemas": 74,
     "eligible": 404,
     "escapes": 348,
     "fields": 2028,
     "ineligible": 1,
-    "pendingAccesses": 3799,
-    "reflectiveSurvivors": 171
+    "pendingAccesses": 2599,
+    "reflectiveSurvivors": 172
   },
   "upstreamCommit": "5d24729f7360475e28a105ae0caeeaa2e1328260"
 }

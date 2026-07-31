@@ -20,9 +20,9 @@ class TilesetFrom {
     var columns:Dynamic = cast _Runtime.UNDEFINED;
     var rows:Dynamic = cast _Runtime.UNDEFINED;
     var tileset:Dynamic = cast _Runtime.UNDEFINED;
-    image = _Runtime.field(atlas, 'image');
-    columns = ((cast ((cast !_Runtime.strictEquals(image, null) : Bool) && (cast ((cast tileWidth : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast HxMath.floor((((_Runtime.field(image, 'width') - (margin * 2.0)) + spacing) / (tileWidth + spacing))) : Dynamic) : (cast 0.0 : Dynamic));
-    rows = ((cast ((cast !_Runtime.strictEquals(image, null) : Bool) && (cast ((cast tileHeight : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast HxMath.floor((((_Runtime.field(image, 'height') - (margin * 2.0)) + spacing) / (tileHeight + spacing))) : Dynamic) : (cast 0.0 : Dynamic));
+    image = atlas.image;
+    columns = ((cast ((cast !_Runtime.strictEquals(image, null) : Bool) && (cast ((cast tileWidth : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast HxMath.floor((((image.width - (margin * 2.0)) + spacing) / (tileWidth + spacing))) : Dynamic) : (cast 0.0 : Dynamic));
+    rows = ((cast ((cast !_Runtime.strictEquals(image, null) : Bool) && (cast ((cast tileHeight : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast HxMath.floor((((image.height - (margin * 2.0)) + spacing) / (tileHeight + spacing))) : Dynamic) : (cast 0.0 : Dynamic));
     tileset = _Runtime.callValue(createTileset, cast ([{ atlas: atlas, columns: columns, margin: margin, rows: rows, spacing: spacing, tileHeight: tileHeight, tileWidth: tileWidth }] : Array<Dynamic>));
     _Runtime.callValue(buildTilesetRegions, cast ([tileset] : Array<Dynamic>));
     return cast tileset;

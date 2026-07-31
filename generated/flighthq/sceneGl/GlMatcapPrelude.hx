@@ -21,9 +21,9 @@ class GlMatcapPrelude {
     gl = _Runtime.field(state, 'gl');
     flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locTint'), flighthq._internal._StaticIndex.readArray(tint, 0.0), flighthq._internal._StaticIndex.readArray(tint, 1.0), flighthq._internal._StaticIndex.readArray(tint, 2.0), flighthq._internal._StaticIndex.readArray(tint, 3.0));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), alphaCutoff);
-    if ((cast ((cast ((cast !_Runtime.strictEquals(matcap, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(matcap, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(matcap, 'image')] : Array<Dynamic>)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(matcap, null) : Bool) && (cast !_Runtime.strictEquals(matcap.image, null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([matcap.image] : Array<Dynamic>)) : Bool)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);
-      _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(matcap, 'image'), _Runtime.field(matcap, 'sampler')] : Array<Dynamic>));
+      _Runtime.callValue(bindGlImageResourceTexture, cast ([state, matcap.image, matcap.sampler] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locMatcap'), 0.0);
     }
   }

@@ -147,7 +147,7 @@ class TauriTray {
           if (__flowIndex9 >= __flowIterator8.length) return flighthq._internal._Async.flowBreak();
           var item:Dynamic = __flowIterator8[__flowIndex9++];
           var __flowBranch10:Dynamic;
-          if ((cast _Runtime.strictEquals(_Runtime.field(item, 'type'), 'separator') : Bool)) {
+          if ((cast _Runtime.strictEquals(item.type, 'separator') : Bool)) {
             __flowBranch10 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flatMap(_Runtime.callProperty(_Runtime.field(menuModule, 'PredefinedMenuItem'), 'new', cast ([{ item: 'Separator' }] : Array<Dynamic>)), function(__awaitValue11:Dynamic):Dynamic {
                 _Runtime.callProperty(built, 'push', cast ([__awaitValue11] : Array<Dynamic>));
@@ -157,10 +157,10 @@ class TauriTray {
           } else {
             __flowBranch10 = flighthq._internal._Async.protect(function():Dynamic {
               var __flowBranch12:Dynamic;
-              if (_Runtime.truthy(_Runtime.field(item, 'submenu'))) {
+              if (_Runtime.truthy(item.submenu)) {
                 __flowBranch12 = flighthq._internal._Async.protect(function():Dynamic {
-                  return flighthq._internal._Async.flatMap(_Runtime.callValue(TauriTray.buildTrayItems__tauriTray, cast ([menuModule, _Runtime.field(item, 'submenu')] : Array<Dynamic>)), function(__awaitValue13:Dynamic):Dynamic {
-                    return flighthq._internal._Async.flatMap(_Runtime.callProperty(_Runtime.field(menuModule, 'Submenu'), 'new', cast ([{ text: _Runtime.field(item, 'label'), enabled: _Runtime.field(item, 'enabled'), items: __awaitValue13 }] : Array<Dynamic>)), function(__awaitValue14:Dynamic):Dynamic {
+                  return flighthq._internal._Async.flatMap(_Runtime.callValue(TauriTray.buildTrayItems__tauriTray, cast ([menuModule, item.submenu] : Array<Dynamic>)), function(__awaitValue13:Dynamic):Dynamic {
+                    return flighthq._internal._Async.flatMap(_Runtime.callProperty(_Runtime.field(menuModule, 'Submenu'), 'new', cast ([{ text: item.label, enabled: item.enabled, items: __awaitValue13 }] : Array<Dynamic>)), function(__awaitValue14:Dynamic):Dynamic {
                       _Runtime.callProperty(built, 'push', cast ([__awaitValue14] : Array<Dynamic>));
                       return flighthq._internal._Async.flowNormal();
                     });
@@ -168,7 +168,7 @@ class TauriTray {
                 });
               } else {
                 __flowBranch12 = flighthq._internal._Async.protect(function():Dynamic {
-                  return flighthq._internal._Async.flatMap(_Runtime.callProperty(_Runtime.field(menuModule, 'MenuItem'), 'new', cast ([{ id: _Runtime.field(item, 'id'), text: _Runtime.field(item, 'label'), enabled: _Runtime.field(item, 'enabled') }] : Array<Dynamic>)), function(__awaitValue15:Dynamic):Dynamic {
+                  return flighthq._internal._Async.flatMap(_Runtime.callProperty(_Runtime.field(menuModule, 'MenuItem'), 'new', cast ([{ id: item.id, text: item.label, enabled: item.enabled }] : Array<Dynamic>)), function(__awaitValue15:Dynamic):Dynamic {
                     _Runtime.callProperty(built, 'push', cast ([__awaitValue15] : Array<Dynamic>));
                     return flighthq._internal._Async.flowNormal();
                   });

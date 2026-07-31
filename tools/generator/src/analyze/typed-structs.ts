@@ -4,6 +4,7 @@ import ts from 'typescript';
 
 import { portConfig } from '../../port.config.ts';
 
+import { sourcePathToHaxePackage, sourcePathToImplementationModule } from './inventory.ts';
 import { upstreamTypeScriptProgram } from './program.ts';
 
 export interface TypedStructCandidate {
@@ -25,6 +26,7 @@ export interface TypedStructField {
 
 export interface TypedStructFieldBinding {
   field: TypedStructField;
+  schemaHaxeType: string;
   schemaId: string;
   schemaName: string;
 }
@@ -529,7 +531,22 @@ export const tranche6aDirectTypedStructIds: readonly string[] = [
   '@flighthq/types:upstream/packages/types/src/MeshGeometry.ts#MeshGeometry',
 ];
 
-const tranche6aDirectTypedStructIdSet = new Set(tranche6aDirectTypedStructIds);
+export const tranche6bDirectTypedStructIds: readonly string[] = [
+  '@flighthq/types:upstream/packages/types/src/Texture.ts#Texture',
+  '@flighthq/types:upstream/packages/types/src/ImageResource.ts#ImageResource',
+  '@flighthq/types:upstream/packages/types/src/ApplicationWindow.ts#ApplicationWindow',
+  '@flighthq/types:upstream/packages/types/src/TextureAtlas.ts#TextureAtlas',
+  '@flighthq/types:upstream/packages/types/src/SpritesheetFrameData.ts#SpritesheetFrameData',
+  '@flighthq/types:upstream/packages/types/src/Menu.ts#MenuItemTemplate',
+  '@flighthq/particles-formats:upstream/packages/particles-formats/src/starlingPexSchema.ts#StarlingPexDocument',
+  '@flighthq/particles-formats:upstream/packages/particles-formats/src/libgdxSchema.ts#LibgdxParticleDocument',
+  '@flighthq/types:upstream/packages/types/src/ApplicationWindow.ts#WindowOptions',
+  '@flighthq/types:upstream/packages/types/src/GlyphSource.ts#GlyphAtlasRuntime',
+  '@flighthq/types:upstream/packages/types/src/SpritesheetPlayer.ts#SpritesheetPlayer',
+  '@flighthq/types:upstream/packages/types/src/Mesh.ts#Mesh',
+];
+
+const tranche6DirectTypedStructIdSet = new Set([...tranche6aDirectTypedStructIds, ...tranche6bDirectTypedStructIds]);
 
 function typedStructCandidatesFromGroups(
   groups: readonly TypedStructCandidateGroup[],
@@ -538,7 +555,7 @@ function typedStructCandidatesFromGroups(
     group.names.map((name) => {
       const id = `${group.packageName}:${group.source}#${name}`;
       return {
-        emission: tranche6aDirectTypedStructIdSet.has(id) ? ('direct' as const) : ('audit-only' as const),
+        emission: tranche6DirectTypedStructIdSet.has(id) ? ('direct' as const) : ('audit-only' as const),
         name,
         packageName: group.packageName,
         purpose: group.purpose,
@@ -1743,11 +1760,18 @@ export function createTypedStructRegistry(
       }
       return {
         field: owned.field,
+        schemaHaxeType: typedStructHaxeType(owned.schema.audit),
         schemaId: owned.schema.audit.id,
         schemaName: owned.schema.audit.name,
       };
     },
   };
+}
+
+function typedStructHaxeType(schema: TypedStructSchemaAudit): string {
+  const moduleName = sourcePathToImplementationModule(schema.source);
+  const modulePath = `${sourcePathToHaxePackage(schema.packageName, schema.source)}.${moduleName}`;
+  return moduleName === schema.name ? modulePath : `${modulePath}.${schema.name}`;
 }
 
 function analyzeCandidate(

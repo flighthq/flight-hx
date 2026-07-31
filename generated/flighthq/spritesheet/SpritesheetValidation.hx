@@ -20,7 +20,7 @@ class SpritesheetValidation {
     animations = _Runtime.field(__destructure0, 'animations');
     frames = _Runtime.field(__destructure0, 'frames');
     if ((cast !_Runtime.strictEquals(atlas, null) : Bool)) {
-      var regionIds:Dynamic = _Runtime.construct(_Runtime.globalValue('Set'), [_Runtime.callProperty(_Runtime.field(atlas, 'regions'), 'map', cast ([function(r:Dynamic) return r.id] : Array<Dynamic>))]);
+      var regionIds:Dynamic = _Runtime.construct(_Runtime.globalValue('Set'), [_Runtime.callProperty(atlas.regions, 'map', cast ([function(r:Dynamic) return r.id] : Array<Dynamic>))]);
       {
         var fi:Dynamic = 0.0;
         while ((cast ((cast fi : Float) < (cast _Runtime.field(frames, 'length') : Float)) : Bool)) {
@@ -64,8 +64,8 @@ class SpritesheetValidation {
     frames = _Runtime.field(__destructure2, 'frames');
     frameNameSet = _Runtime.construct(_Runtime.globalValue('Set'), []);
     for (fd in _Runtime.iterable(frames)) {
-      if ((cast !_Runtime.strictEquals(_Runtime.field(fd, 'name'), '') : Bool)) {
-        ((cast frameNameSet : flighthq._internal._Set).add(_Runtime.field(fd, 'name')));
+      if ((cast !_Runtime.strictEquals(fd.name, '') : Bool)) {
+        ((cast frameNameSet : flighthq._internal._Set).add(fd.name));
       }
     }
     for (ad in _Runtime.iterable(animations)) {

@@ -14,7 +14,7 @@ class CocosPlistSerialize {
     var doc:CocosPlistDocument = cast _Runtime.UNDEFINED;
     frames = {  };
     for (frame in _Runtime.iterable(_Runtime.field(data, 'frames'))) {
-      _Runtime.setIndex(frames, _Runtime.field(frame, 'name'), _Runtime.callValue(CocosPlistSerialize.frameToEntry__cocosPlistSerialize, cast ([frame] : Array<Dynamic>)));
+      _Runtime.setIndex(frames, frame.name, _Runtime.callValue(CocosPlistSerialize.frameToEntry__cocosPlistSerialize, cast ([frame] : Array<Dynamic>)));
     }
     doc = { frames: frames, metadata: { format: _Runtime.coalesce(_Runtime.optionalField(_Runtime.optionalField(existing, 'metadata'), 'format'), function():Dynamic return cast 3.0), size: '{' + Std.string(_Runtime.field(data, 'imageWidth')) + ',' + Std.string(_Runtime.field(data, 'imageHeight')) + '}', textureFileName: _Runtime.orValue(_Runtime.orValue(_Runtime.field(data, 'imageFile'), function():Dynamic return cast _Runtime.optionalField(_Runtime.optionalField(existing, 'metadata'), 'textureFileName')), function():Dynamic return cast '') } };
     return cast _Runtime.callValue(CocosPlistSerialize.documentToXml__cocosPlistSerialize, cast ([doc] : Array<Dynamic>));
@@ -70,12 +70,12 @@ class CocosPlistSerialize {
     var sourceSizeStr:Dynamic = cast _Runtime.UNDEFINED;
     var sizeStr:Dynamic = cast _Runtime.UNDEFINED;
     var trimmed:Dynamic = cast _Runtime.UNDEFINED;
-    rectStr = '{{' + Std.string(_Runtime.field(frame, 'x')) + ',' + Std.string(_Runtime.field(frame, 'y')) + '},{' + Std.string(_Runtime.field(frame, 'width')) + ',' + Std.string(_Runtime.field(frame, 'height')) + '}}';
-    offsetStr = '{' + Std.string(_Runtime.field(frame, 'offsetX')) + ',' + Std.string(_Runtime.field(frame, 'offsetY')) + '}';
-    sourceSizeStr = '{' + Std.string(_Runtime.field(frame, 'sourceWidth')) + ',' + Std.string(_Runtime.field(frame, 'sourceHeight')) + '}';
-    sizeStr = '{' + Std.string(_Runtime.field(frame, 'width')) + ',' + Std.string(_Runtime.field(frame, 'height')) + '}';
-    trimmed = ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(frame, 'offsetX'), 0.0) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(frame, 'offsetY'), 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(frame, 'sourceWidth'), _Runtime.field(frame, 'width')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(frame, 'sourceHeight'), _Runtime.field(frame, 'height')) : Bool));
-    return cast { frame: rectStr, spriteOffset: offsetStr, spriteSize: sizeStr, spriteSourceSize: sourceSizeStr, spriteTrimmed: trimmed, textureRotated: _Runtime.field(frame, 'rotated') };
+    rectStr = '{{' + Std.string(frame.x) + ',' + Std.string(frame.y) + '},{' + Std.string(frame.width) + ',' + Std.string(frame.height) + '}}';
+    offsetStr = '{' + Std.string(frame.offsetX) + ',' + Std.string(frame.offsetY) + '}';
+    sourceSizeStr = '{' + Std.string(frame.sourceWidth) + ',' + Std.string(frame.sourceHeight) + '}';
+    sizeStr = '{' + Std.string(frame.width) + ',' + Std.string(frame.height) + '}';
+    trimmed = ((cast ((cast ((cast !_Runtime.strictEquals(frame.offsetX, 0.0) : Bool) || (cast !_Runtime.strictEquals(frame.offsetY, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(frame.sourceWidth, frame.width) : Bool)) : Bool) || (cast !_Runtime.strictEquals(frame.sourceHeight, frame.height) : Bool));
+    return cast { frame: rectStr, spriteOffset: offsetStr, spriteSize: sizeStr, spriteSourceSize: sourceSizeStr, spriteTrimmed: trimmed, textureRotated: frame.rotated };
     return cast null;
   }
 

@@ -105,14 +105,14 @@ class StarlingParse {
     var frameNames:Dynamic = cast _Runtime.UNDEFINED;
     var animations:Dynamic = cast _Runtime.UNDEFINED;
     frames = _Runtime.callProperty(regions, 'map', cast ([StarlingParse.frameFromRegion__starlingParse] : Array<Dynamic>));
-    frameNames = _Runtime.callProperty(frames, 'map', cast ([function(f:Dynamic) return _Runtime.field(f, 'name')] : Array<Dynamic>));
+    frameNames = _Runtime.callProperty(frames, 'map', cast ([function(f:Dynamic) return f.name] : Array<Dynamic>));
     animations = _Runtime.callValue(StarlingParse.inferAnimations__starlingParse, cast ([frameNames, frameDuration] : Array<Dynamic>));
     return cast _Runtime.callValue(createSpritesheetData, cast ([{ animations: animations, frames: frames, imageFile: _Runtime.field(doc, 'imagePath'), imageHeight: 0.0, imageWidth: 0.0, scale: 1.0 }] : Array<Dynamic>));
     return cast null;
   }
 
   public static function regionsFromXml__starlingParse(xml:String):Array<TextureAtlasRegion> {
-    return cast _Runtime.field(_Runtime.callValue(parseTextureAtlasStarlingXml, cast ([xml, _Runtime.callValue(createTextureAtlas, cast ([] : Array<Dynamic>))] : Array<Dynamic>)), 'regions');
+    return cast _Runtime.callValue(parseTextureAtlasStarlingXml, cast ([xml, _Runtime.callValue(createTextureAtlas, cast ([] : Array<Dynamic>))] : Array<Dynamic>)).regions;
     return cast null;
   }
 

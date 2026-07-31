@@ -81,8 +81,8 @@ class WgpuShadowMap {
       var world:Dynamic = cast _Runtime.UNDEFINED;
       var drawBindGroup:Dynamic = cast _Runtime.UNDEFINED;
       mesh = (cast (cast node : Dynamic) : Mesh);
-      if ((cast _Runtime.looseEquals(_Runtime.field(mesh, 'geometry'), null) : Bool)) { return; }
-      upload = _Runtime.callValue(ensureWgpuMeshUpload, cast ([state, _Runtime.field(mesh, 'geometry')] : Array<Dynamic>));
+      if ((cast _Runtime.looseEquals(mesh.geometry, null) : Bool)) { return; }
+      upload = _Runtime.callValue(ensureWgpuMeshUpload, cast ([state, mesh.geometry] : Array<Dynamic>));
       if ((cast ((cast _Runtime.strictEquals(upload, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(upload, 'indexBuffer'), null) : Bool)) : Bool)) { return; }
       world = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>)) : Matrix4);
       _Runtime.callValue(multiplyMatrix4, cast ([_Runtime.field(WgpuShadowMap._shadowProxy__wgpuShadowMap, 'worldMatrix'), lightMatrix, world] : Array<Dynamic>));

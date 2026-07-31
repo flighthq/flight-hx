@@ -37,12 +37,12 @@ class CanvasTilemap {
     tiles = _Runtime.field(__destructure0, 'tiles');
     if ((cast _Runtime.strictEquals(tileset, null) : Bool)) { return; }
     atlas = _Runtime.field(tileset, 'atlas');
-    if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(atlas, 'image'), null) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(atlas, 'image'), 'source'), null) : Bool)) : Bool)) { return; }
+    if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.image, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(atlas.image.source, null) : Bool)) : Bool)) { return; }
     if ((cast ((cast _Runtime.strictEquals(columns, 0.0) : Bool) || (cast _Runtime.strictEquals(rows, 0.0) : Bool)) : Bool)) { return; }
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(tilemapNode, 'blendMode')] : Array<Dynamic>));
     context = _Runtime.field(state, 'context');
-    image = _Runtime.field(_Runtime.field(atlas, 'image'), 'source');
-    regions = _Runtime.field(atlas, 'regions');
+    image = atlas.image.source;
+    regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
     transform = _Runtime.field(tilemapNode, 'transform2D');
     roundPixels = _Runtime.field(state, 'roundPixels');

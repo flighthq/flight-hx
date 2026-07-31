@@ -218,7 +218,7 @@ class AwdParse {
       if ((cast ((cast !_Runtime.strictEquals(geometries, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(geometries, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
         if ((cast _Runtime.strictEquals(_Runtime.field(geometries, 'length'), 1.0) : Bool)) {
           var mesh:Dynamic = _Runtime.callValue(createMesh, cast ([_Runtime.field(flighthq._internal._StaticIndex.readArray(geometries, 0.0), 'geometry'), _Runtime.callValue(materialForSubset, cast ([meshInst, 0.0] : Array<Dynamic>)), MeshKind, { name: _Runtime.orValue(_Runtime.field(meshInst, 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) }] : Array<Dynamic>));
-          if ((cast ((cast !_Runtime.strictEquals(skin, null) : Bool) && (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(geometries, 0.0), 'skinned') : Bool)) : Bool)) { _Runtime.setField(mesh, 'skin', skin); }
+          if ((cast ((cast !_Runtime.strictEquals(skin, null) : Bool) && (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(geometries, 0.0), 'skinned') : Bool)) : Bool)) { (mesh.skin = cast (skin : Dynamic)); }
           (node = cast ((cast (cast mesh : Dynamic) : SceneNode) : Dynamic));
         } else {
           (node = cast (_Runtime.callValue(createSceneNode, cast ([_Runtime.field(_Runtime, 'UNDEFINED'), { name: _Runtime.orValue(_Runtime.field(meshInst, 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) }] : Array<Dynamic>)) : Dynamic));
@@ -226,7 +226,7 @@ class AwdParse {
             var i:Dynamic = 0.0;
             while ((cast ((cast i : Float) < (cast _Runtime.field(geometries, 'length') : Float)) : Bool)) {
               var mesh:Dynamic = _Runtime.callValue(createMesh, cast ([_Runtime.field(flighthq._internal._StaticIndex.readArray(geometries, i), 'geometry'), _Runtime.callValue(materialForSubset, cast ([meshInst, i] : Array<Dynamic>))] : Array<Dynamic>));
-              if ((cast ((cast !_Runtime.strictEquals(skin, null) : Bool) && (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(geometries, i), 'skinned') : Bool)) : Bool)) { _Runtime.setField(mesh, 'skin', skin); }
+              if ((cast ((cast !_Runtime.strictEquals(skin, null) : Bool) && (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(geometries, i), 'skinned') : Bool)) : Bool)) { (mesh.skin = cast (skin : Dynamic)); }
               _Runtime.callValue(addNodeChild, cast ([node, (cast (cast mesh : Dynamic) : SceneNode)] : Array<Dynamic>));
               i++;
             }

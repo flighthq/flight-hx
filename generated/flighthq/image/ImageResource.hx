@@ -9,7 +9,7 @@ import flighthq.types.ImageResourceCompressed;
 
 class ImageResource {
   public static function cloneImageResource(resource:flighthq.types.ImageResource):flighthq.types.ImageResource {
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: _Runtime.field(resource, 'alphaType'), compressed: _Runtime.field(resource, 'compressed'), data: _Runtime.field(resource, 'data'), format: _Runtime.field(resource, 'format'), height: _Runtime.field(resource, 'height'), source: _Runtime.field(resource, 'source'), version: _Runtime.field(resource, 'version'), width: _Runtime.field(resource, 'width') }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: resource.alphaType, compressed: resource.compressed, data: resource.data, format: resource.format, height: resource.height, source: resource.source, version: resource.version, width: resource.width }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -21,63 +21,63 @@ class ImageResource {
   public static function createImageResource(?image:Dynamic):flighthq.types.ImageResource {
     var resource:flighthq.types.ImageResource = cast _Runtime.UNDEFINED;
     resource = _Runtime.callValue(createEntity, cast ([{ alphaType: 'straight', compressed: null, data: null, format: 'rgba8unorm', height: 0.0, source: _Runtime.coalesce(image, function():Dynamic return cast null), version: 0.0, width: 0.0 }] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(resource, 'source'), null) : Bool)) { _Runtime.callValue(ImageResource.updateImageResourceSize__imageResource, cast ([resource] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(resource.source, null) : Bool)) { _Runtime.callValue(ImageResource.updateImageResourceSize__imageResource, cast ([resource] : Array<Dynamic>)); }
     return cast resource;
     return cast null;
   }
 
   public static function disposeImageResource(resource:flighthq.types.ImageResource):Void {
-    _Runtime.setField(resource, 'compressed', null);
-    _Runtime.setField(resource, 'data', null);
-    _Runtime.setField(resource, 'source', null);
+    (resource.compressed = cast (null : Dynamic));
+    (resource.data = cast (null : Dynamic));
+    (resource.source = cast (null : Dynamic));
     _Runtime.callValue(invalidateImageResource, cast ([resource] : Array<Dynamic>));
   }
 
   public static function getImageResourceByteSize(resource:flighthq.types.ImageResource):Float {
-    return cast ((cast !_Runtime.strictEquals(_Runtime.field(resource, 'data'), null) : Bool) ? (cast _Runtime.field(_Runtime.field(resource, 'data'), 'byteLength') : Dynamic) : (cast 0.0 : Dynamic));
+    return cast ((cast !_Runtime.strictEquals(resource.data, null) : Bool) ? (cast _Runtime.field(resource.data, 'byteLength') : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 
   public static function hasImageResourceData(resource:flighthq.types.ImageResource):Bool {
-    return cast !_Runtime.strictEquals(_Runtime.field(resource, 'data'), null);
+    return cast !_Runtime.strictEquals(resource.data, null);
     return cast null;
   }
 
   public static function hasImageResourcePixels(resource:flighthq.types.ImageResource):Bool {
-    return cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(resource, 'source'), null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(resource, 'data'), null) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(resource, 'compressed'), null) : Bool));
+    return cast ((cast ((cast !_Runtime.strictEquals(resource.source, null) : Bool) || (cast !_Runtime.strictEquals(resource.data, null) : Bool)) : Bool) || (cast !_Runtime.strictEquals(resource.compressed, null) : Bool));
     return cast null;
   }
 
   public static function hasImageResourceSource(resource:flighthq.types.ImageResource):Bool {
-    return cast !_Runtime.strictEquals(_Runtime.field(resource, 'source'), null);
+    return cast !_Runtime.strictEquals(resource.source, null);
     return cast null;
   }
 
   public static function invalidateImageResource(resource:flighthq.types.ImageResource):Void {
-    _Runtime.setField(resource, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(resource, 'version') + 1.0)), 0));
+    (resource.version = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((resource.version + 1.0)), 0) : Dynamic));
   }
 
   public static function isImageResourceEmpty(resource:flighthq.types.ImageResource):Bool {
-    return cast ((cast ((cast _Runtime.field(resource, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(resource, 'height') : Float) <= (cast 0.0 : Float)) : Bool));
+    return cast ((cast ((cast resource.width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast resource.height : Float) <= (cast 0.0 : Float)) : Bool));
     return cast null;
   }
 
   public static function setImageResourceSource(resource:flighthq.types.ImageResource, element:Null<Dynamic>):Void {
-    _Runtime.setField(resource, 'source', element);
+    (resource.source = cast (element : Dynamic));
     if ((cast !_Runtime.strictEquals(element, null) : Bool)) { _Runtime.callValue(ImageResource.updateImageResourceSize__imageResource, cast ([resource] : Array<Dynamic>)); }
     _Runtime.callValue(invalidateImageResource, cast ([resource] : Array<Dynamic>));
   }
 
   public static function updateImageResourceSize__imageResource(resource:flighthq.types.ImageResource):Void {
     var element:Dynamic = cast _Runtime.UNDEFINED;
-    element = _Runtime.field(resource, 'source');
+    element = resource.source;
     if ((cast _Runtime.isInstanceOf(element, _Runtime.globalValue('HTMLVideoElement')) : Bool)) {
-      _Runtime.setField(resource, 'width', _Runtime.field(element, 'videoWidth'));
-      _Runtime.setField(resource, 'height', _Runtime.field(element, 'videoHeight'));
+      (resource.width = cast (_Runtime.field(element, 'videoWidth') : Dynamic));
+      (resource.height = cast (_Runtime.field(element, 'videoHeight') : Dynamic));
     } else {
       var sized:Dynamic = (cast element : Dynamic);
-      _Runtime.setField(resource, 'width', _Runtime.field(sized, 'width'));
-      _Runtime.setField(resource, 'height', _Runtime.field(sized, 'height'));
+      (resource.width = cast (_Runtime.field(sized, 'width') : Dynamic));
+      (resource.height = cast (_Runtime.field(sized, 'height') : Dynamic));
     }
   }
 }

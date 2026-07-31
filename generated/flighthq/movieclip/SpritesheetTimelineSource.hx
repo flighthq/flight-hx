@@ -25,13 +25,13 @@ class SpritesheetTimelineSource {
       bitmap = ((cast bitmaps : flighthq._internal._WeakMap).get(target));
       if ((cast _Runtime.strictEquals(bitmap, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         (bitmap = cast (_Runtime.callValue(createBitmap, cast ([] : Array<Dynamic>)) : Dynamic));
-        _Runtime.setField(_Runtime.field(bitmap, 'data'), 'image', _Runtime.field(atlas, 'image'));
+        _Runtime.setField(_Runtime.field(bitmap, 'data'), 'image', atlas.image);
         _Runtime.callValue(addNodeChild, cast ([target, bitmap] : Array<Dynamic>));
         ((cast bitmaps : flighthq._internal._WeakMap).set(target, bitmap));
       }
       sheetFrame = flighthq._internal._StaticIndex.readArray(_Runtime.field(spritesheet, 'frames'), flighthq._internal._StaticIndex.readArray(_Runtime.field(animation, 'frames'), (frame - 1.0)));
       if ((cast _Runtime.strictEquals(sheetFrame, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-      _Runtime.setField(_Runtime.field(bitmap, 'data'), 'sourceRectangle', flighthq._internal._StaticIndex.readArray(_Runtime.field(atlas, 'regions'), _Runtime.field(sheetFrame, 'id')));
+      _Runtime.setField(_Runtime.field(bitmap, 'data'), 'sourceRectangle', flighthq._internal._StaticIndex.readArray(atlas.regions, _Runtime.field(sheetFrame, 'id')));
       _Runtime.setField(bitmap, 'x', (_Runtime.field(sheetFrame, 'offsetX') - _Runtime.field(animation, 'originX')));
       _Runtime.setField(bitmap, 'y', (_Runtime.field(sheetFrame, 'offsetY') - _Runtime.field(animation, 'originY')));
       _Runtime.callValue(invalidateNodeLocalTransform, cast ([bitmap] : Array<Dynamic>));

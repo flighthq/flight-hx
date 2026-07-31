@@ -132,11 +132,11 @@ class CustomShaderGlMeshMaterialRenderer {
     unit = 0.0;
     for (name in _Runtime.iterable(flighthq._internal.DynamicObject.keys(textures))) {
       var texture:Texture = _Runtime.getIndex(textures, name);
-      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(texture, 'image'), null) : Bool) || (cast !(cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(texture, 'image')] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { continue; }
+      if ((cast ((cast _Runtime.strictEquals(texture.image, null) : Bool) || (cast !(cast _Runtime.callValue(hasImageResourcePixels, cast ([texture.image] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { continue; }
       var location:Dynamic = flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, name);
       if ((cast _Runtime.strictEquals(location, null) : Bool)) { continue; }
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + unit));
-      _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(texture, 'image'), _Runtime.field(texture, 'sampler')] : Array<Dynamic>));
+      _Runtime.callValue(bindGlImageResourceTexture, cast ([state, texture.image, texture.sampler] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, location, unit);
       unit++;
     }

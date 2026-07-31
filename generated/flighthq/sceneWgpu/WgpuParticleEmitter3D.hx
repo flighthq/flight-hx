@@ -181,11 +181,11 @@ class WgpuParticleEmitter3D {
     if ((cast ((cast _Runtime.field(_Runtime.field(resources, 'instanceData'), 'length') : Float) < (cast needed : Float)) : Bool)) {
       _Runtime.setField(resources, 'instanceData', new flighthq._internal._Float32Array(HxMath.max(needed, (_Runtime.field(_Runtime.field(resources, 'instanceData'), 'length') * 2.0))));
     }
-    hasAtlas = ((cast ((cast !_Runtime.strictEquals(atlas, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(atlas, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(atlas, 'image')] : Array<Dynamic>)) : Bool));
-    regions = ((cast hasAtlas : Bool) ? (cast _Runtime.field(atlas, 'regions') : Dynamic) : (cast null : Dynamic));
+    hasAtlas = ((cast ((cast !_Runtime.strictEquals(atlas, null) : Bool) && (cast !_Runtime.strictEquals(atlas.image, null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([atlas.image] : Array<Dynamic>)) : Bool));
+    regions = ((cast hasAtlas : Bool) ? (cast atlas.regions : Dynamic) : (cast null : Dynamic));
     numRegions = ((cast !_Runtime.strictEquals(regions, null) : Bool) ? (cast _Runtime.field(regions, 'length') : Dynamic) : (cast 0.0 : Dynamic));
-    iw = ((cast hasAtlas : Bool) ? (cast (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'width'), function():Dynamic return cast 1.0)) : Dynamic) : (cast 0.0 : Dynamic));
-    ih = ((cast hasAtlas : Bool) ? (cast (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'height'), function():Dynamic return cast 1.0)) : Dynamic) : (cast 0.0 : Dynamic));
+    iw = ((cast hasAtlas : Bool) ? (cast (1.0 / _Runtime.orValue(atlas.image.width, function():Dynamic return cast 1.0)) : Dynamic) : (cast 0.0 : Dynamic));
+    ih = ((cast hasAtlas : Bool) ? (cast (1.0 / _Runtime.orValue(atlas.image.height, function():Dynamic return cast 1.0)) : Dynamic) : (cast 0.0 : Dynamic));
     worldMatrix = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([(cast (cast emitter : Dynamic) : SceneNode)] : Array<Dynamic>)) : Matrix4);
     wm = worldMatrix.m;
     worldSpace = data.worldSpace;
@@ -255,7 +255,7 @@ class WgpuParticleEmitter3D {
     instanceBuffer = _Runtime.callValue(WgpuParticleEmitter3D.ensureParticle3DInstanceBuffer__wgpuParticleEmitter3D, cast ([state, resources, (cast emitter : ParticleEmitter3D), drawCount] : Array<Dynamic>));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([instanceBuffer, 0.0, instanceData, 0.0, (drawCount * WgpuParticleEmitter3D.INSTANCE_FLOATS__wgpuParticleEmitter3D)] : Array<Dynamic>));
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    textureView = ((cast hasAtlas : Bool) ? (cast _Runtime.field(_Runtime.callValue(bindWgpuImageResourceTexture, cast ([state, _Runtime.field(atlas, 'image')] : Array<Dynamic>)), 'view') : Dynamic) : (cast _Runtime.callValue(WgpuParticleEmitter3D.ensureDummyTextureView__wgpuParticleEmitter3D, cast ([state] : Array<Dynamic>)) : Dynamic));
+    textureView = ((cast hasAtlas : Bool) ? (cast _Runtime.field(_Runtime.callValue(bindWgpuImageResourceTexture, cast ([state, atlas.image] : Array<Dynamic>)), 'view') : Dynamic) : (cast _Runtime.callValue(WgpuParticleEmitter3D.ensureDummyTextureView__wgpuParticleEmitter3D, cast ([state] : Array<Dynamic>)) : Dynamic));
     textureBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(resources, 'textureLayout'), entries: cast ([{ binding: 0.0, resource: textureView }, { binding: 1.0, resource: _Runtime.field(runtime, 'linearSampler') }] : Array<Dynamic>) }] : Array<Dynamic>));
     pipeline = _Runtime.callValue(WgpuParticleEmitter3D.ensureParticle3DPipeline__wgpuParticleEmitter3D, cast ([state, resources, _Runtime.field(emitter, 'blendMode'), hasAtlas] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setPipeline', cast ([pipeline] : Array<Dynamic>));

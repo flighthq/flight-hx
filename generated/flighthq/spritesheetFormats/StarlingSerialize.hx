@@ -10,18 +10,18 @@ import flighthq.types.SpritesheetData;
 class StarlingSerialize {
   public static function frameToSubTexture__starlingSerialize(frame:Dynamic):StarlingSubTexture {
     var st:StarlingSubTexture = cast _Runtime.UNDEFINED;
-    st = { height: _Runtime.field(frame, 'height'), name: _Runtime.field(frame, 'name'), width: _Runtime.field(frame, 'width'), x: _Runtime.field(frame, 'x'), y: _Runtime.field(frame, 'y') };
-    if ((cast !_Runtime.strictEquals(_Runtime.field(frame, 'offsetX'), 0.0) : Bool)) { _Runtime.setField(st, 'frameX', -_Runtime.field(frame, 'offsetX')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(frame, 'offsetY'), 0.0) : Bool)) { _Runtime.setField(st, 'frameY', -_Runtime.field(frame, 'offsetY')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(frame, 'sourceWidth'), _Runtime.field(frame, 'width')) : Bool)) { _Runtime.setField(st, 'frameWidth', _Runtime.field(frame, 'sourceWidth')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(frame, 'sourceHeight'), _Runtime.field(frame, 'height')) : Bool)) { _Runtime.setField(st, 'frameHeight', _Runtime.field(frame, 'sourceHeight')); }
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(frame, 'pivotX'), null) : Bool) && (cast ((cast _Runtime.field(frame, 'sourceWidth') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      _Runtime.setField(st, 'pivotX', (_Runtime.field(frame, 'pivotX') * _Runtime.field(frame, 'sourceWidth')));
+    st = { height: frame.height, name: frame.name, width: frame.width, x: frame.x, y: frame.y };
+    if ((cast !_Runtime.strictEquals(frame.offsetX, 0.0) : Bool)) { _Runtime.setField(st, 'frameX', -frame.offsetX); }
+    if ((cast !_Runtime.strictEquals(frame.offsetY, 0.0) : Bool)) { _Runtime.setField(st, 'frameY', -frame.offsetY); }
+    if ((cast !_Runtime.strictEquals(frame.sourceWidth, frame.width) : Bool)) { _Runtime.setField(st, 'frameWidth', frame.sourceWidth); }
+    if ((cast !_Runtime.strictEquals(frame.sourceHeight, frame.height) : Bool)) { _Runtime.setField(st, 'frameHeight', frame.sourceHeight); }
+    if ((cast ((cast !_Runtime.strictEquals(frame.pivotX, null) : Bool) && (cast ((cast frame.sourceWidth : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+      _Runtime.setField(st, 'pivotX', (frame.pivotX * frame.sourceWidth));
     }
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(frame, 'pivotY'), null) : Bool) && (cast ((cast _Runtime.field(frame, 'sourceHeight') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      _Runtime.setField(st, 'pivotY', (_Runtime.field(frame, 'pivotY') * _Runtime.field(frame, 'sourceHeight')));
+    if ((cast ((cast !_Runtime.strictEquals(frame.pivotY, null) : Bool) && (cast ((cast frame.sourceHeight : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+      _Runtime.setField(st, 'pivotY', (frame.pivotY * frame.sourceHeight));
     }
-    if ((cast _Runtime.field(frame, 'rotated') : Bool)) { _Runtime.setField(st, 'rotated', true); }
+    if ((cast frame.rotated : Bool)) { _Runtime.setField(st, 'rotated', true); }
     return cast st;
     return cast null;
   }

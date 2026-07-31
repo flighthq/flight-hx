@@ -9,13 +9,13 @@ Eligibility is audited independently from emission. Audit-only schemas remain re
 | Candidates | 405 |
 | Eligible | 404 |
 | Ineligible | 1 |
-| Audit-only schemas | 342 |
-| Direct schemas | 62 |
+| Audit-only schemas | 330 |
+| Direct schemas | 74 |
 | Declared fields | 2028 |
 | Bindable accesses | 10257 |
-| Pending accesses | 3799 |
-| Directly emitted accesses | 6458 |
-| Reflective survivors | 171 |
+| Pending accesses | 2599 |
+| Directly emitted accesses | 7658 |
+| Reflective survivors | 172 |
 | Dynamic escapes | 348 |
 
 | Candidate | Mode | Purpose | Fields | Reads | Writes | Calls | Pending | Direct | Reflective survivors | Escapes | Eligible | Reasons |
@@ -87,7 +87,7 @@ Eligibility is audited independently from emission. Audit-only schemas remain re
 | `SceneResourceSignals` | `audit-only` | broad scene document | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `AnimationClip` | `audit-only` | broad scene document | 2 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `Billboard` | `audit-only` | broad scene document | 12 | 1 | 3 | 0 | 4 | 0 | 0 | 0 | yes | — |
-| `Mesh` | `audit-only` | broad scene document | 13 | 49 | 12 | 0 | 61 | 0 | 0 | 0 | yes | — |
+| `Mesh` | `direct` | broad scene document | 13 | 49 | 12 | 0 | 0 | 61 | 0 | 0 | yes | — |
 | `MeshGeometry` | `direct` | broad scene document | 7 | 203 | 18 | 0 | 0 | 221 | 8 | 8 | yes | — |
 | `MeshSubset` | `audit-only` | broad scene document | 2 | 23 | 0 | 0 | 23 | 0 | 0 | 0 | yes | — |
 | `VertexAttribute` | `audit-only` | broad scene document | 3 | 32 | 0 | 0 | 32 | 0 | 0 | 0 | yes | — |
@@ -128,13 +128,13 @@ Eligibility is audited independently from emission. Audit-only schemas remain re
 | `FontUrl` | `audit-only` | broad asset document | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `FontResource` | `audit-only` | broad asset document | 2 | 5 | 4 | 0 | 9 | 0 | 0 | 0 | yes | — |
 | `GlyphAtlas` | `audit-only` | broad asset document | 1 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
-| `GlyphAtlasRuntime` | `audit-only` | broad asset document | 15 | 58 | 14 | 0 | 72 | 0 | 0 | 0 | yes | — |
+| `GlyphAtlasRuntime` | `direct` | broad asset document | 15 | 58 | 14 | 0 | 0 | 72 | 0 | 0 | yes | — |
 | `GlyphAtlasShelf` | `audit-only` | broad asset document | 3 | 5 | 1 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `GlyphEntry` | `audit-only` | broad asset document | 8 | 37 | 2 | 0 | 39 | 0 | 0 | 0 | yes | — |
 | `GlyphRasterizedBitmap` | `audit-only` | broad asset document | 6 | 17 | 0 | 0 | 17 | 0 | 0 | 0 | yes | — |
 | `GlyphSource` | `audit-only` | broad asset document | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | yes | — |
 | `GridSliceOptions` | `audit-only` | broad asset document | 12 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
-| `ImageResource` | `audit-only` | broad asset document | 8 | 150 | 9 | 0 | 159 | 0 | 0 | 0 | yes | — |
+| `ImageResource` | `direct` | broad asset document | 8 | 150 | 9 | 0 | 0 | 159 | 0 | 0 | yes | — |
 | `ImageResourceCompressed` | `audit-only` | broad asset document | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `ParticleConfigIssue` | `audit-only` | broad asset document | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `ColorKeyframe` | `audit-only` | broad asset document | 4 | 22 | 0 | 0 | 22 | 0 | 0 | 0 | yes | — |
@@ -162,12 +162,12 @@ Eligibility is audited independently from emission. Audit-only schemas remain re
 | `SpritesheetAnimationData` | `audit-only` | broad asset document | 8 | 38 | 0 | 0 | 38 | 0 | 0 | 0 | yes | — |
 | `SpritesheetData` | `audit-only` | broad asset document | 6 | 33 | 0 | 0 | 33 | 0 | 0 | 0 | yes | — |
 | `SpritesheetFrame` | `audit-only` | broad asset document | 6 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
-| `SpritesheetFrameData` | `audit-only` | broad asset document | 12 | 102 | 0 | 0 | 102 | 0 | 0 | 0 | yes | — |
-| `SpritesheetPlayer` | `audit-only` | broad asset document | 9 | 30 | 35 | 0 | 65 | 0 | 0 | 0 | yes | — |
+| `SpritesheetFrameData` | `direct` | broad asset document | 12 | 102 | 0 | 0 | 0 | 102 | 0 | 0 | yes | — |
+| `SpritesheetPlayer` | `direct` | broad asset document | 9 | 30 | 35 | 0 | 0 | 65 | 0 | 0 | yes | — |
 | `SpritesheetValidationDiagnostic` | `audit-only` | broad asset document | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `Surface` | `direct` | broad asset document | 9 | 432 | 1 | 0 | 0 | 433 | 0 | 0 | yes | — |
-| `Texture` | `audit-only` | broad asset document | 7 | 160 | 10 | 0 | 170 | 0 | 0 | 0 | yes | — |
-| `TextureAtlas` | `audit-only` | broad asset document | 2 | 120 | 1 | 0 | 121 | 0 | 0 | 0 | yes | — |
+| `Texture` | `direct` | broad asset document | 7 | 160 | 10 | 0 | 0 | 170 | 0 | 0 | yes | — |
+| `TextureAtlas` | `direct` | broad asset document | 2 | 120 | 1 | 0 | 0 | 121 | 0 | 0 | yes | — |
 | `TextureAtlasRegion` | `direct` | broad asset document | 14 | 248 | 10 | 0 | 0 | 258 | 0 | 0 | yes | — |
 | `TextureUvTransform` | `audit-only` | broad asset document | 3 | 10 | 0 | 0 | 10 | 0 | 0 | 0 | yes | — |
 | `Tileset` | `audit-only` | broad asset document | 7 | 13 | 1 | 0 | 14 | 0 | 0 | 0 | yes | — |
@@ -182,9 +182,9 @@ Eligibility is audited independently from emission. Audit-only schemas remain re
 | `AppLoginItem` | `audit-only` | broad host document | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `AppLoginItemLike` | `audit-only` | broad host document | 4 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `Application` | `audit-only` | broad host document | 13 | 39 | 18 | 0 | 57 | 0 | 0 | 0 | yes | — |
-| `ApplicationWindow` | `audit-only` | broad host document | 36 | 80 | 59 | 0 | 139 | 0 | 0 | 0 | yes | — |
+| `ApplicationWindow` | `direct` | broad host document | 36 | 80 | 59 | 0 | 0 | 139 | 0 | 0 | yes | — |
 | `WindowBounds` | `audit-only` | broad host document | 4 | 0 | 24 | 0 | 24 | 0 | 0 | 0 | yes | — |
-| `WindowOptions` | `audit-only` | broad host document | 18 | 75 | 0 | 0 | 75 | 0 | 0 | 0 | yes | — |
+| `WindowOptions` | `direct` | broad host document | 18 | 75 | 0 | 0 | 0 | 75 | 0 | 0 | yes | — |
 | `ClipboardBookmark` | `audit-only` | broad host document | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `ClipboardWriteItem` | `audit-only` | broad host document | 2 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `ClipboardWatch` | `audit-only` | broad host document | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
@@ -221,7 +221,7 @@ Eligibility is audited independently from emission. Audit-only schemas remain re
 | `MediaSessionArtwork` | `audit-only` | broad host document | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `MediaSessionMetadata` | `audit-only` | broad host document | 4 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `MediaSessionPositionState` | `audit-only` | broad host document | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `MenuItemTemplate` | `audit-only` | broad host document | 8 | 79 | 2 | 0 | 81 | 0 | 0 | 1 | yes | — |
+| `MenuItemTemplate` | `direct` | broad host document | 8 | 79 | 2 | 0 | 0 | 81 | 1 | 1 | yes | — |
 | `MenuSignals` | `audit-only` | broad host document | 4 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `NotificationAction` | `audit-only` | broad host document | 3 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `NotificationCapabilities` | `audit-only` | broad host document | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -290,7 +290,7 @@ Eligibility is audited independently from emission. Audit-only schemas remain re
 | `LibgdxParseOptions` | `audit-only` | broad serialization document | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `LibgdxParseResult` | `audit-only` | broad serialization document | 3 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `LibgdxParsed` | `audit-only` | broad serialization document | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `LibgdxParticleDocument` | `audit-only` | broad serialization document | 25 | 76 | 0 | 0 | 76 | 0 | 0 | 0 | yes | — |
+| `LibgdxParticleDocument` | `direct` | broad serialization document | 25 | 76 | 0 | 0 | 0 | 76 | 0 | 0 | yes | — |
 | `LibgdxRangeValue` | `audit-only` | broad serialization document | 7 | 19 | 0 | 0 | 19 | 0 | 0 | 27 | yes | — |
 | `LibgdxSerializeOptions` | `audit-only` | broad serialization document | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `ParseParticleConfigOptions` | `audit-only` | broad serialization document | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -311,7 +311,7 @@ Eligibility is audited independently from emission. Audit-only schemas remain re
 | `StarlingPexParseResult` | `audit-only` | broad serialization document | 3 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `StarlingPexParsed` | `audit-only` | broad serialization document | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `StarlingPexColor` | `audit-only` | broad serialization document | 4 | 30 | 0 | 0 | 30 | 0 | 0 | 0 | yes | — |
-| `StarlingPexDocument` | `audit-only` | broad serialization document | 38 | 79 | 0 | 0 | 79 | 0 | 0 | 0 | yes | — |
+| `StarlingPexDocument` | `direct` | broad serialization document | 38 | 79 | 0 | 0 | 0 | 79 | 0 | 0 | yes | — |
 | `StarlingPexSerializeOptions` | `audit-only` | broad serialization document | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `UnityParseOptions` | `audit-only` | broad serialization document | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `UnityParsed` | `audit-only` | broad serialization document | 3 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |

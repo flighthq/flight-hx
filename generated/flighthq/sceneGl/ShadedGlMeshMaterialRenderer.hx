@@ -110,28 +110,28 @@ class ShadedGlMeshMaterialRenderer {
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locNormalScale'), _Runtime.field(material, 'normalScale'));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), _Runtime.field(material, 'alphaCutoff'));
     diffuseMap = _Runtime.field(material, 'diffuseMap');
-    if ((cast ((cast ((cast !_Runtime.strictEquals(diffuseMap, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(diffuseMap, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(diffuseMap, 'image')] : Array<Dynamic>)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(diffuseMap, null) : Bool) && (cast !_Runtime.strictEquals(diffuseMap.image, null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([diffuseMap.image] : Array<Dynamic>)) : Bool)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);
-      _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(diffuseMap, 'image'), _Runtime.field(diffuseMap, 'sampler')] : Array<Dynamic>));
+      _Runtime.callValue(bindGlImageResourceTexture, cast ([state, diffuseMap.image, diffuseMap.sampler] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locDiffuseMap'), 0.0);
     }
     specularMap = _Runtime.field(material, 'specularMap');
-    if ((cast ((cast ((cast !_Runtime.strictEquals(specularMap, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(specularMap, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(specularMap, 'image')] : Array<Dynamic>)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(specularMap, null) : Bool) && (cast !_Runtime.strictEquals(specularMap.image, null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([specularMap.image] : Array<Dynamic>)) : Bool)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE1);
-      _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(specularMap, 'image'), _Runtime.field(specularMap, 'sampler')] : Array<Dynamic>));
+      _Runtime.callValue(bindGlImageResourceTexture, cast ([state, specularMap.image, specularMap.sampler] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locSpecularMap'), 1.0);
     }
     normalMap = _Runtime.field(material, 'normalMap');
-    if ((cast ((cast ((cast !_Runtime.strictEquals(normalMap, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(normalMap, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(normalMap, 'image')] : Array<Dynamic>)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(normalMap, null) : Bool) && (cast !_Runtime.strictEquals(normalMap.image, null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([normalMap.image] : Array<Dynamic>)) : Bool)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE2);
-      _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(normalMap, 'image'), _Runtime.field(normalMap, 'sampler')] : Array<Dynamic>));
+      _Runtime.callValue(bindGlImageResourceTexture, cast ([state, normalMap.image, normalMap.sampler] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locNormalMap'), 2.0);
     }
     _Runtime.callValue(bindGlUvTransform, cast ([gl, program, diffuseMap] : Array<Dynamic>));
   }
 
   public static function defineKeyForMaterial__shadedGlMeshMaterialRenderer(material:Null<ShadedMaterial>):GlShadedDefineKey {
-    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasDiffuseMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'diffuseMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(material, 'diffuseMap'), 'image'), null) : Bool)), hasNormalMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'normalMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(material, 'normalMap'), 'image'), null) : Bool)), hasSpecularMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'specularMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(material, 'specularMap'), 'image'), null) : Bool)), hasUvTransform: _Runtime.callValue(hasGlUvTransform, cast ([((cast !_Runtime.strictEquals(material, null) : Bool) ? (cast _Runtime.field(material, 'diffuseMap') : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)) };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasDiffuseMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'diffuseMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'diffuseMap').image, null) : Bool)), hasNormalMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'normalMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'normalMap').image, null) : Bool)), hasSpecularMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'specularMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'specularMap').image, null) : Bool)), hasUvTransform: _Runtime.callValue(hasGlUvTransform, cast ([((cast !_Runtime.strictEquals(material, null) : Bool) ? (cast _Runtime.field(material, 'diffuseMap') : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)) };
     return cast null;
   }
 

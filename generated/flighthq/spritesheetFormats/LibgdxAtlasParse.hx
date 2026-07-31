@@ -196,9 +196,9 @@ class LibgdxAtlasParse {
     imageFile = _Runtime.coalesce(_Runtime.optionalField(firstPage, 'filename'), function():Dynamic return cast '');
     imageWidth = _Runtime.coalesce(_Runtime.optionalField(firstPage, 'width'), function():Dynamic return cast 0.0);
     imageHeight = _Runtime.coalesce(_Runtime.optionalField(firstPage, 'height'), function():Dynamic return cast 0.0);
-    regions = _Runtime.field(_Runtime.callValue(parseTextureAtlasLibgdxAtlas, cast ([text, _Runtime.callValue(createTextureAtlas, cast ([] : Array<Dynamic>))] : Array<Dynamic>)), 'regions');
+    regions = _Runtime.callValue(parseTextureAtlasLibgdxAtlas, cast ([text, _Runtime.callValue(createTextureAtlas, cast ([] : Array<Dynamic>))] : Array<Dynamic>)).regions;
     frames = _Runtime.callProperty(regions, 'map', cast ([LibgdxAtlasParse.frameFromRegion__libgdxAtlasParse] : Array<Dynamic>));
-    frameNames = _Runtime.callProperty(frames, 'map', cast ([function(f:Dynamic) return _Runtime.field(f, 'name')] : Array<Dynamic>));
+    frameNames = _Runtime.callProperty(frames, 'map', cast ([function(f:Dynamic) return f.name] : Array<Dynamic>));
     animations = _Runtime.callValue(LibgdxAtlasParse.inferAnimations__libgdxAtlasParse, cast ([frameNames, frameDuration] : Array<Dynamic>));
     return cast _Runtime.callValue(createSpritesheetData, cast ([{ animations: animations, frames: frames, imageFile: imageFile, imageHeight: imageHeight, imageWidth: imageWidth, scale: 1.0 }] : Array<Dynamic>));
     return cast null;

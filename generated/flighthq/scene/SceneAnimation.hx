@@ -22,7 +22,7 @@ class SceneAnimation {
         var target:Dynamic = (cast _Runtime.field(channel, 'targetRef') : Null<SceneAnimationTarget>);
         if ((cast ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(target, 'node'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { i++; continue; }
         if ((cast _Runtime.strictEquals(_Runtime.field(target, 'path'), 'Weights') : Bool)) {
-          var morph:Dynamic = _Runtime.field((cast _Runtime.field(target, 'node') : Mesh), 'morph');
+          var morph:Dynamic = (cast _Runtime.field(target, 'node') : Mesh).morph;
           if ((cast _Runtime.looseEquals(morph, null) : Bool)) { i++; continue; }
           _Runtime.callValue(sampleAnimationTrack, cast ([_Runtime.field(morph, 'weights'), _Runtime.field(channel, 'track'), time] : Array<Dynamic>));
           i++;

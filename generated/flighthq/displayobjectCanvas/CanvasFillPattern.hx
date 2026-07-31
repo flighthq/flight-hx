@@ -15,9 +15,9 @@ class CanvasFillPattern {
   public static final GRADIENT_HALF__canvasFillPattern:Dynamic = 819.2;
 
   public static function createBitmapPattern(context:Dynamic, bitmap:ImageResource, repeat:Bool, smooth:Dynamic = false):Null<Dynamic> {
-    if ((cast _Runtime.strictEquals(_Runtime.field(bitmap, 'source'), null) : Bool)) { return cast null; }
+    if ((cast _Runtime.strictEquals(bitmap.source, null) : Bool)) { return cast null; }
     _Runtime.callValue(CanvasFillPattern.setSmoothing__canvasFillPattern, cast ([context, smooth] : Array<Dynamic>));
-    return cast flighthq._internal.backend.Canvas2dBackend.call(context, 'createPattern', cast ([_Runtime.field(bitmap, 'source'), ((cast repeat : Bool) ? (cast 'repeat' : Dynamic) : (cast 'no-repeat' : Dynamic))] : Array<Dynamic>));
+    return cast flighthq._internal.backend.Canvas2dBackend.call(context, 'createPattern', cast ([bitmap.source, ((cast repeat : Bool) ? (cast 'repeat' : Dynamic) : (cast 'no-repeat' : Dynamic))] : Array<Dynamic>));
     return cast null;
   }
 

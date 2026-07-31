@@ -64,7 +64,7 @@ class GlTilemap {
     tiles = _Runtime.field(__destructure0, 'tiles');
     if ((cast _Runtime.strictEquals(tileset, null) : Bool)) { return; }
     atlas = _Runtime.field(tileset, 'atlas');
-    if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(atlas, 'image'), null) : Bool)) : Bool) || (cast !(cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(atlas, 'image')] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return; }
+    if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.image, null) : Bool)) : Bool) || (cast !(cast _Runtime.callValue(hasImageResourcePixels, cast ([atlas.image] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return; }
     if ((cast ((cast _Runtime.strictEquals(columns, 0.0) : Bool) || (cast _Runtime.strictEquals(rows, 0.0) : Bool)) : Bool)) { return; }
     _Runtime.callValue(ensureGlQuadBatchShader, cast ([state] : Array<Dynamic>));
     material = _Runtime.field(tilemapNode, 'material');
@@ -74,14 +74,14 @@ class GlTilemap {
     perTileColorTransform = _Runtime.field(_Runtime.field(source, 'data'), 'materialData');
     nodeColorTransform = _Runtime.field(tilemapNode, 'colorTransform');
     startCount = _Runtime.field(runtime, 'spriteBatchCount');
-    base = _Runtime.callValue(prepareGlSpriteBatchWrite, cast ([state, _Runtime.field(atlas, 'image'), _Runtime.field(tilemapNode, 'blendMode'), material, materialRenderer, (columns * rows)] : Array<Dynamic>));
-    regions = _Runtime.field(atlas, 'regions');
+    base = _Runtime.callValue(prepareGlSpriteBatchWrite, cast ([state, atlas.image, _Runtime.field(tilemapNode, 'blendMode'), material, materialRenderer, (columns * rows)] : Array<Dynamic>));
+    regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
     __destructure1 = tileset;
     tileWidth = _Runtime.field(__destructure1, 'tileWidth');
     tileHeight = _Runtime.field(__destructure1, 'tileHeight');
-    iw = (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'width'), function():Dynamic return cast 1.0));
-    ih = (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'height'), function():Dynamic return cast 1.0));
+    iw = (1.0 / _Runtime.orValue(atlas.image.width, function():Dynamic return cast 1.0));
+    ih = (1.0 / _Runtime.orValue(atlas.image.height, function():Dynamic return cast 1.0));
     instanceData = _Runtime.field(runtime, 'spriteBatchInstanceData');
     pt = _Runtime.field(tilemapNode, 'transform2D');
     pa = pt.a;

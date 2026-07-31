@@ -15,10 +15,10 @@ class WgpuTextureUpload {
   }
 
   public static function uploadWgpuTextureImageResource(device:Dynamic, texture:Dynamic, origin:Dynamic, image:ImageResource):Void {
-    if ((cast !_Runtime.strictEquals(_Runtime.field(image, 'source'), null) : Bool)) {
-      _Runtime.callValue(uploadWgpuTextureElement, cast ([device, texture, origin, _Runtime.field(image, 'width'), _Runtime.field(image, 'height'), (cast _Runtime.field(image, 'source') : Dynamic)] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals(image.source, null) : Bool)) {
+      _Runtime.callValue(uploadWgpuTextureElement, cast ([device, texture, origin, image.width, image.height, (cast image.source : Dynamic)] : Array<Dynamic>));
     } else {
-      _Runtime.callValue(uploadWgpuTextureData, cast ([device, texture, origin, _Runtime.field(image, 'width'), _Runtime.field(image, 'height'), _Runtime.field(image, 'data')] : Array<Dynamic>));
+      _Runtime.callValue(uploadWgpuTextureData, cast ([device, texture, origin, image.width, image.height, image.data] : Array<Dynamic>));
     }
   }
 }

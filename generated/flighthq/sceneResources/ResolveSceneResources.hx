@@ -38,7 +38,7 @@ class ResolveSceneResources {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(pending, 'length') : Float)) : Bool)) {
         var texture:Dynamic = flighthq._internal._StaticIndex.readArray(pending, i);
-        var ref:Dynamic = _Runtime.field(texture, 'resource');
+        var ref:Dynamic = texture.resource;
         if ((cast _Runtime.looseEquals(ref, null) : Bool)) { i++; continue; }
         if ((cast ((cast _Runtime.strictEquals(_Runtime.optionalField(options, 'select'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.callProperty(options, 'select', cast ([texture, ref] : Array<Dynamic>)) : Bool)) : Bool)) { ((cast working : flighthq._internal._Set).add(texture)); }
         i++;
@@ -55,7 +55,7 @@ class ResolveSceneResources {
       if ((cast ((cast working : flighthq._internal._Set).has(texture)) : Bool)) { continue; }
       _Runtime.callProperty(_Runtime.field(entry, 'controller'), 'abort', cast ([] : Array<Dynamic>));
       ((cast _Runtime.field(resolver, 'inFlight') : flighthq._internal._Map).delete_(texture));
-      var ref:Dynamic = _Runtime.field(texture, 'resource');
+      var ref:Dynamic = texture.resource;
       if ((cast ((cast !_Runtime.looseEquals(ref, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(ref, 'state'), ResourceResolutionStateValue.Loading) : Bool)) : Bool)) {
         _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Unresolved);
       }
@@ -70,7 +70,7 @@ class ResolveSceneResources {
       _Runtime.callValue(ResolveSceneResources.emitSceneResourceEvent__resolveSceneResources, cast ([resolver, texture, ref, false] : Array<Dynamic>));
       return;
     }
-    _Runtime.setField(texture, 'image', image);
+    (texture.image = cast (image : Dynamic));
     _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Resolved);
     _Runtime.callValue(ResolveSceneResources.emitSceneResourceEvent__resolveSceneResources, cast ([resolver, texture, ref, true] : Array<Dynamic>));
   }
@@ -94,7 +94,7 @@ class ResolveSceneResources {
 
   public static function requestWorkingResolutions__resolveSceneResources(resolver:SceneResourceResolver, working:Dynamic, ?options:ResolveSceneResourcesOptions):Void {
     for (texture in _Runtime.iterable(working)) {
-      var ref:Dynamic = _Runtime.field(texture, 'resource');
+      var ref:Dynamic = texture.resource;
       if ((cast ((cast ((cast _Runtime.looseEquals(ref, null) : Bool) || (cast ((cast _Runtime.field(resolver, 'inFlight') : flighthq._internal._Map).has(texture)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(ref, 'state'), ResourceResolutionStateValue.Unresolved) : Bool)) : Bool)) {
         continue;
       }

@@ -2440,7 +2440,8 @@ function directTypedStructField(
   if (!binding || binding.field.name !== expression.name) {
     throw new Error(`Invalid typed-struct field binding: ${currentSourceIdentity}:${expression.name}`);
   }
-  return `${owner}.${safeName(binding.field.name)}`;
+  const typedOwner = binding.receiverCast ? `(cast ${owner} : ${binding.receiverCast})` : owner;
+  return `${typedOwner}.${safeName(binding.field.name)}`;
 }
 
 function emitTypedStructRead(expression: Extract<IrExpression, { kind: 'property' }>): string {

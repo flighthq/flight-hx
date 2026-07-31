@@ -60,15 +60,15 @@ class LibgdxParse {
   public static function collectLibgdxWarnings__libgdxParse(doc:LibgdxParticleDocument):Array<String> {
     var warnings:Array<String> = cast _Runtime.UNDEFINED;
     warnings = cast ([] : Array<Dynamic>);
-    if ((cast _Runtime.field(_Runtime.field(doc, 'delay'), 'active') : Bool)) { _Runtime.callProperty(warnings, 'push', cast (['libGDX emission delay is not supported and was ignored'] : Array<Dynamic>)); }
-    if ((cast _Runtime.field(_Runtime.field(doc, 'lifeOffset'), 'active') : Bool)) { _Runtime.callProperty(warnings, 'push', cast (['libGDX lifeOffset is not supported and was ignored'] : Array<Dynamic>)); }
-    if ((cast ((cast _Runtime.field(_Runtime.field(doc, 'xOffset'), 'active') : Bool) || (cast _Runtime.field(_Runtime.field(doc, 'yOffset'), 'active') : Bool)) : Bool)) {
+    if ((cast _Runtime.field(doc.delay, 'active') : Bool)) { _Runtime.callProperty(warnings, 'push', cast (['libGDX emission delay is not supported and was ignored'] : Array<Dynamic>)); }
+    if ((cast _Runtime.field(doc.lifeOffset, 'active') : Bool)) { _Runtime.callProperty(warnings, 'push', cast (['libGDX lifeOffset is not supported and was ignored'] : Array<Dynamic>)); }
+    if ((cast ((cast _Runtime.field(doc.xOffset, 'active') : Bool) || (cast _Runtime.field(doc.yOffset, 'active') : Bool)) : Bool)) {
       _Runtime.callProperty(warnings, 'push', cast (['libGDX emitter x/y position offsets are not supported and were ignored'] : Array<Dynamic>));
     }
-    if ((cast _Runtime.field(doc, 'premultipliedAlpha') : Bool)) {
+    if ((cast doc.premultipliedAlpha : Bool)) {
       _Runtime.callProperty(warnings, 'push', cast (['libGDX premultipliedAlpha flag is informational only; blending behavior may differ'] : Array<Dynamic>));
     }
-    if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(doc, 'spawnShape'), 'shape'), 'line') : Bool)) {
+    if ((cast _Runtime.strictEquals(_Runtime.field(doc.spawnShape, 'shape'), 'line') : Bool)) {
       _Runtime.callProperty(warnings, 'push', cast (['libGDX line spawn shape has no equivalent and was mapped to point emitter'] : Array<Dynamic>));
     }
     return cast warnings;
@@ -134,33 +134,33 @@ class LibgdxParse {
     var rotSpeedMin:Dynamic = cast _Runtime.UNDEFINED;
     var rotSpeedMax:Dynamic = cast _Runtime.UNDEFINED;
     var blendMode:Dynamic = cast _Runtime.UNDEFINED;
-    __destructure2 = _Runtime.callValue(LibgdxParse.rangeToMinMax__libgdxParse, cast ([_Runtime.field(doc, 'life')] : Array<Dynamic>));
+    __destructure2 = _Runtime.callValue(LibgdxParse.rangeToMinMax__libgdxParse, cast ([doc.life] : Array<Dynamic>));
     lifeMin = _Runtime.getIndex(__destructure2, 0.0);
     lifeMax = _Runtime.getIndex(__destructure2, 1.0);
-    __destructure3 = ((cast _Runtime.field(_Runtime.field(doc, 'velocity'), 'active') : Bool) ? (cast _Runtime.callValue(LibgdxParse.rangeToMinMax__libgdxParse, cast ([_Runtime.field(doc, 'velocity')] : Array<Dynamic>)) : Dynamic) : (cast cast ([0.0, 0.0] : Array<Dynamic>) : Dynamic));
+    __destructure3 = ((cast _Runtime.field(doc.velocity, 'active') : Bool) ? (cast _Runtime.callValue(LibgdxParse.rangeToMinMax__libgdxParse, cast ([doc.velocity] : Array<Dynamic>)) : Dynamic) : (cast cast ([0.0, 0.0] : Array<Dynamic>) : Dynamic));
     velMin = _Runtime.getIndex(__destructure3, 0.0);
     velMax = _Runtime.getIndex(__destructure3, 1.0);
-    __destructure4 = ((cast _Runtime.field(_Runtime.field(doc, 'angle'), 'active') : Bool) ? (cast _Runtime.callValue(LibgdxParse.rangeToMinMax__libgdxParse, cast ([_Runtime.field(doc, 'angle')] : Array<Dynamic>)) : Dynamic) : (cast cast ([0.0, 360.0] : Array<Dynamic>) : Dynamic));
+    __destructure4 = ((cast _Runtime.field(doc.angle, 'active') : Bool) ? (cast _Runtime.callValue(LibgdxParse.rangeToMinMax__libgdxParse, cast ([doc.angle] : Array<Dynamic>)) : Dynamic) : (cast cast ([0.0, 360.0] : Array<Dynamic>) : Dynamic));
     angleMin = _Runtime.getIndex(__destructure4, 0.0);
     angleMax = _Runtime.getIndex(__destructure4, 1.0);
     angleMid = (((angleMin + angleMax) * 0.5) * LibgdxParse.DEG2RAD__libgdxParse);
     spread = (((angleMax - angleMin) * 0.5) * LibgdxParse.DEG2RAD__libgdxParse);
-    __destructure5 = _Runtime.callValue(LibgdxParse.rangeToMinMax__libgdxParse, cast ([_Runtime.field(doc, 'scale')] : Array<Dynamic>));
+    __destructure5 = _Runtime.callValue(LibgdxParse.rangeToMinMax__libgdxParse, cast ([doc.scale] : Array<Dynamic>));
     scaleMinPx = _Runtime.getIndex(__destructure5, 0.0);
     scaleMaxPx = _Runtime.getIndex(__destructure5, 1.0);
     scaleMin = (scaleMinPx / textureSize);
     scaleMax = (scaleMaxPx / textureSize);
-    lastScaling = ((cast ((cast _Runtime.field(_Runtime.field(_Runtime.field(doc, 'scale'), 'scaling'), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(_Runtime.field(doc, 'scale'), 'scaling'), (_Runtime.field(_Runtime.field(_Runtime.field(doc, 'scale'), 'scaling'), 'length') - 1.0)) : Dynamic) : (cast 1.0 : Dynamic));
+    lastScaling = ((cast ((cast _Runtime.field(_Runtime.field(doc.scale, 'scaling'), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(doc.scale, 'scaling'), (_Runtime.field(_Runtime.field(doc.scale, 'scaling'), 'length') - 1.0)) : Dynamic) : (cast 1.0 : Dynamic));
     scaleEnd = lastScaling;
-    __destructure6 = ((cast _Runtime.field(_Runtime.field(doc, 'wind'), 'active') : Bool) ? (cast _Runtime.callValue(LibgdxParse.rangeToMinMax__libgdxParse, cast ([_Runtime.field(doc, 'wind')] : Array<Dynamic>)) : Dynamic) : (cast cast ([0.0, 0.0] : Array<Dynamic>) : Dynamic));
+    __destructure6 = ((cast _Runtime.field(doc.wind, 'active') : Bool) ? (cast _Runtime.callValue(LibgdxParse.rangeToMinMax__libgdxParse, cast ([doc.wind] : Array<Dynamic>)) : Dynamic) : (cast cast ([0.0, 0.0] : Array<Dynamic>) : Dynamic));
     windMin = _Runtime.getIndex(__destructure6, 0.0);
-    __destructure7 = ((cast _Runtime.field(_Runtime.field(doc, 'gravity'), 'active') : Bool) ? (cast _Runtime.callValue(LibgdxParse.rangeToMinMax__libgdxParse, cast ([_Runtime.field(doc, 'gravity')] : Array<Dynamic>)) : Dynamic) : (cast cast ([0.0, 0.0] : Array<Dynamic>) : Dynamic));
+    __destructure7 = ((cast _Runtime.field(doc.gravity, 'active') : Bool) ? (cast _Runtime.callValue(LibgdxParse.rangeToMinMax__libgdxParse, cast ([doc.gravity] : Array<Dynamic>)) : Dynamic) : (cast cast ([0.0, 0.0] : Array<Dynamic>) : Dynamic));
     gravMin = _Runtime.getIndex(__destructure7, 0.0);
-    shape = _Runtime.field(_Runtime.field(doc, 'spawnShape'), 'shape');
-    __destructure8 = _Runtime.callValue(LibgdxParse.rangeToMinMax__libgdxParse, cast ([_Runtime.field(doc, 'spawnWidth')] : Array<Dynamic>));
+    shape = _Runtime.field(doc.spawnShape, 'shape');
+    __destructure8 = _Runtime.callValue(LibgdxParse.rangeToMinMax__libgdxParse, cast ([doc.spawnWidth] : Array<Dynamic>));
     swMin = _Runtime.getIndex(__destructure8, 0.0);
     swMax = _Runtime.getIndex(__destructure8, 1.0);
-    __destructure9 = _Runtime.callValue(LibgdxParse.rangeToMinMax__libgdxParse, cast ([_Runtime.field(doc, 'spawnHeight')] : Array<Dynamic>));
+    __destructure9 = _Runtime.callValue(LibgdxParse.rangeToMinMax__libgdxParse, cast ([doc.spawnHeight] : Array<Dynamic>));
     shMin = _Runtime.getIndex(__destructure9, 0.0);
     shMax = _Runtime.getIndex(__destructure9, 1.0);
     swMid = ((swMin + swMax) * 0.5);
@@ -183,8 +183,8 @@ class LibgdxParse {
       (emitterWidth = cast (swMid : Dynamic));
       (emitterHeight = cast (shMid : Dynamic));
     } }
-    firstColor = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(_Runtime.field(doc, 'tint'), 'colors'), 0.0), function():Dynamic return cast 'ffffff');
-    lastColor = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(_Runtime.field(doc, 'tint'), 'colors'), (_Runtime.field(_Runtime.field(_Runtime.field(doc, 'tint'), 'colors'), 'length') - 1.0)), function():Dynamic return cast 'ffffff');
+    firstColor = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(doc.tint, 'colors'), 0.0), function():Dynamic return cast 'ffffff');
+    lastColor = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(doc.tint, 'colors'), (_Runtime.field(_Runtime.field(doc.tint, 'colors'), 'length') - 1.0)), function():Dynamic return cast 'ffffff');
     __destructure10 = _Runtime.callValue(LibgdxParse.hexToRgb__libgdxParse, cast ([firstColor] : Array<Dynamic>));
     sr = _Runtime.getIndex(__destructure10, 0.0);
     sg = _Runtime.getIndex(__destructure10, 1.0);
@@ -193,20 +193,20 @@ class LibgdxParse {
     er = _Runtime.getIndex(__destructure11, 0.0);
     eg = _Runtime.getIndex(__destructure11, 1.0);
     eb = _Runtime.getIndex(__destructure11, 2.0);
-    alphaStart = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(_Runtime.field(doc, 'transparency'), 'scaling'), 0.0), function():Dynamic return cast 1.0);
-    alphaEnd = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(_Runtime.field(doc, 'transparency'), 'scaling'), (_Runtime.field(_Runtime.field(_Runtime.field(doc, 'transparency'), 'scaling'), 'length') - 1.0)), function():Dynamic return cast 0.0);
-    __destructure12 = _Runtime.callValue(LibgdxParse.rangeToMinMax__libgdxParse, cast ([_Runtime.field(doc, 'duration')] : Array<Dynamic>));
+    alphaStart = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(doc.transparency, 'scaling'), 0.0), function():Dynamic return cast 1.0);
+    alphaEnd = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(doc.transparency, 'scaling'), (_Runtime.field(_Runtime.field(doc.transparency, 'scaling'), 'length') - 1.0)), function():Dynamic return cast 0.0);
+    __destructure12 = _Runtime.callValue(LibgdxParse.rangeToMinMax__libgdxParse, cast ([doc.duration] : Array<Dynamic>));
     durMin = _Runtime.getIndex(__destructure12, 0.0);
     durMax = _Runtime.getIndex(__destructure12, 1.0);
     durMid = ((durMin + durMax) * 0.5);
-    __destructure13 = ((cast _Runtime.field(_Runtime.field(doc, 'rotation'), 'active') : Bool) ? (cast _Runtime.callValue(LibgdxParse.rangeToMinMax__libgdxParse, cast ([_Runtime.field(doc, 'rotation')] : Array<Dynamic>)) : Dynamic) : (cast cast ([0.0, 0.0] : Array<Dynamic>) : Dynamic));
+    __destructure13 = ((cast _Runtime.field(doc.rotation, 'active') : Bool) ? (cast _Runtime.callValue(LibgdxParse.rangeToMinMax__libgdxParse, cast ([doc.rotation] : Array<Dynamic>)) : Dynamic) : (cast cast ([0.0, 0.0] : Array<Dynamic>) : Dynamic));
     rotMin = _Runtime.getIndex(__destructure13, 0.0);
     rotMax = _Runtime.getIndex(__destructure13, 1.0);
     lifetimeMid = _Runtime.orValue((((lifeMin / 1000.0) + (lifeMax / 1000.0)) * 0.5), function():Dynamic return cast 1.0);
     rotSpeedMin = ((rotMin * LibgdxParse.DEG2RAD__libgdxParse) / lifetimeMid);
     rotSpeedMax = ((rotMax * LibgdxParse.DEG2RAD__libgdxParse) / lifetimeMid);
-    blendMode = ((cast _Runtime.field(doc, 'additive') : Bool) ? (cast 'add' : Dynamic) : (cast 'normal' : Dynamic));
-    return cast _Runtime.callValue(createParticleEmitterConfig, cast ([{ maxParticles: _Runtime.field(doc, 'maxParticleCount'), loop: ((cast durMid : Float) <= (cast 0.0 : Float)), duration: ((cast ((cast durMid : Float) > (cast 0.0 : Float)) : Bool) ? (cast (durMid / 1000.0) : Dynamic) : (cast 0.0 : Dynamic)), lifetimeMin: HxMath.max(0.0, (lifeMin / 1000.0)), lifetimeMax: (lifeMax / 1000.0), speedMin: velMin, speedMax: velMax, directionX: HxMath.cos(angleMid), directionY: -HxMath.sin(angleMid), spread: spread, gravityX: windMin, gravityY: gravMin, emitterShape: emitterShape, emitterRadius: emitterRadius, emitterWidth: emitterWidth, emitterHeight: emitterHeight, scaleMin: scaleMin, scaleMax: scaleMax, scaleEnd: scaleEnd, colorStartR: sr, colorStartG: sg, colorStartB: sb, colorEndR: er, colorEndG: eg, colorEndB: eb, alphaStart: alphaStart, alphaEnd: alphaEnd, rotationSpeedMin: rotSpeedMin, rotationSpeedMax: rotSpeedMax, blendMode: blendMode }] : Array<Dynamic>));
+    blendMode = ((cast doc.additive : Bool) ? (cast 'add' : Dynamic) : (cast 'normal' : Dynamic));
+    return cast _Runtime.callValue(createParticleEmitterConfig, cast ([{ maxParticles: doc.maxParticleCount, loop: ((cast durMid : Float) <= (cast 0.0 : Float)), duration: ((cast ((cast durMid : Float) > (cast 0.0 : Float)) : Bool) ? (cast (durMid / 1000.0) : Dynamic) : (cast 0.0 : Dynamic)), lifetimeMin: HxMath.max(0.0, (lifeMin / 1000.0)), lifetimeMax: (lifeMax / 1000.0), speedMin: velMin, speedMax: velMax, directionX: HxMath.cos(angleMid), directionY: -HxMath.sin(angleMid), spread: spread, gravityX: windMin, gravityY: gravMin, emitterShape: emitterShape, emitterRadius: emitterRadius, emitterWidth: emitterWidth, emitterHeight: emitterHeight, scaleMin: scaleMin, scaleMax: scaleMax, scaleEnd: scaleEnd, colorStartR: sr, colorStartG: sg, colorStartB: sb, colorEndR: er, colorEndG: eg, colorEndB: eb, alphaStart: alphaStart, alphaEnd: alphaEnd, rotationSpeedMin: rotSpeedMin, rotationSpeedMax: rotSpeedMax, blendMode: blendMode }] : Array<Dynamic>));
     return cast null;
   }
 

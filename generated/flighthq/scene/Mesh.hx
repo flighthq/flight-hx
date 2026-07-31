@@ -30,12 +30,12 @@ import flighthq.types._internal._MeshValues.MeshKind;
 class Mesh {
   public static function cloneMesh(source:flighthq.types.Mesh):flighthq.types.Mesh {
     var clone:Dynamic = cast _Runtime.UNDEFINED;
-    clone = _Runtime.callValue(createMesh, cast ([_Runtime.field(source, 'geometry'), _Runtime.slice(_Runtime.field(source, 'materials'), 0, null), _Runtime.field(source, 'kind'), { enabled: _Runtime.field(source, 'enabled'), name: _Runtime.field(source, 'name') }] : Array<Dynamic>));
-    _Runtime.setField(clone, 'alpha', _Runtime.field(source, 'alpha'));
+    clone = _Runtime.callValue(createMesh, cast ([source.geometry, _Runtime.slice(source.materials, 0, null), source.kind, { enabled: source.enabled, name: source.name }] : Array<Dynamic>));
+    (clone.alpha = cast (source.alpha : Dynamic));
     _Runtime.callValue(setNodeTransform3D, cast ([clone, source] : Array<Dynamic>));
     if ((cast _Runtime.callValue(isNodeLocalMatrix4Detached, cast ([source] : Array<Dynamic>)) : Bool)) { _Runtime.callValue(setNodeLocalMatrix4, cast ([clone, _Runtime.callValue(getNodeLocalMatrix4, cast ([source] : Array<Dynamic>))] : Array<Dynamic>)); }
-    if ((cast !_Runtime.looseEquals(_Runtime.field(source, 'skin'), null) : Bool)) { _Runtime.setField(clone, 'skin', _Runtime.field(source, 'skin')); }
-    if ((cast !_Runtime.looseEquals(_Runtime.field(source, 'morph'), null) : Bool)) { _Runtime.setField(clone, 'morph', _Runtime.field(source, 'morph')); }
+    if ((cast !_Runtime.looseEquals(source.skin, null) : Bool)) { (clone.skin = cast (source.skin : Dynamic)); }
+    if ((cast !_Runtime.looseEquals(source.morph, null) : Bool)) { (clone.morph = cast (source.morph : Dynamic)); }
     return cast clone;
     return cast null;
   }
@@ -44,8 +44,8 @@ class Mesh {
     if (kind == null) kind = cast (MeshKind : Dynamic);
     var mesh:Dynamic = cast _Runtime.UNDEFINED;
     mesh = (cast _Runtime.callValue(createSceneNode, cast ([kind, obj] : Array<Dynamic>)) : flighthq.types.Mesh);
-    _Runtime.setField(mesh, 'geometry', geometry);
-    _Runtime.setField(mesh, 'materials', materials);
+    (mesh.geometry = cast (geometry : Dynamic));
+    (mesh.materials = cast (materials : Dynamic));
     return cast mesh;
     return cast null;
   }
@@ -56,8 +56,8 @@ class Mesh {
   }
 
   public static function getMeshDeformer(source:flighthq.types.Mesh):MeshDeformer {
-    if ((cast !_Runtime.looseEquals(_Runtime.field(source, 'skin'), null) : Bool)) { return cast MeshDeformerSkeletal; }
-    if ((cast !_Runtime.looseEquals(_Runtime.field(source, 'morph'), null) : Bool)) { return cast MeshDeformerMorph; }
+    if ((cast !_Runtime.looseEquals(source.skin, null) : Bool)) { return cast MeshDeformerSkeletal; }
+    if ((cast !_Runtime.looseEquals(source.morph, null) : Bool)) { return cast MeshDeformerMorph; }
     return cast MeshDeformerNone;
     return cast null;
   }

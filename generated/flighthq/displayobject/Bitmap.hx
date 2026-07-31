@@ -26,8 +26,8 @@ class Bitmap {
       _Runtime.setField(out, 'width', _Runtime.field(_Runtime.field(bitmapData, 'sourceRectangle'), 'width'));
       _Runtime.setField(out, 'height', _Runtime.field(_Runtime.field(bitmapData, 'sourceRectangle'), 'height'));
     } else { if (_Runtime.truthy(_Runtime.field(bitmapData, 'image'))) {
-      _Runtime.setField(out, 'width', _Runtime.field(_Runtime.field(bitmapData, 'image'), 'width'));
-      _Runtime.setField(out, 'height', _Runtime.field(_Runtime.field(bitmapData, 'image'), 'height'));
+      _Runtime.setField(out, 'width', _Runtime.field(bitmapData, 'image').width);
+      _Runtime.setField(out, 'height', _Runtime.field(bitmapData, 'image').height);
     } }
   }
 

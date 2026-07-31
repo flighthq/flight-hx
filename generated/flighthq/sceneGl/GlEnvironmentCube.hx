@@ -64,7 +64,7 @@ class GlEnvironmentCube {
       var face:Dynamic = 0.0;
       while ((cast ((cast face : Float) < (cast 6.0 : Float)) : Bool)) {
         var image:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(cube, 'faces'), face);
-        if ((cast ((cast _Runtime.looseEquals(image, null) : Bool) || (cast _Runtime.andValue(_Runtime.looseEquals(_Runtime.field(image, 'source'), null), function():Dynamic return cast _Runtime.looseEquals(_Runtime.field(image, 'data'), null)) : Bool)) : Bool)) { return cast false; }
+        if ((cast ((cast _Runtime.looseEquals(image, null) : Bool) || (cast _Runtime.andValue(_Runtime.looseEquals(image.source, null), function():Dynamic return cast _Runtime.looseEquals(image.data, null)) : Bool)) : Bool)) { return cast false; }
         face++;
       }
     }

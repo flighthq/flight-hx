@@ -19,9 +19,9 @@ class GlDebugPrelude {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locNormalScale'), normalScale);
-    if ((cast ((cast ((cast !_Runtime.strictEquals(normalMap, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(normalMap, 'image'), null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(normalMap, 'image')] : Array<Dynamic>)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(normalMap, null) : Bool) && (cast !_Runtime.strictEquals(normalMap.image, null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([normalMap.image] : Array<Dynamic>)) : Bool)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);
-      _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(normalMap, 'image'), _Runtime.field(normalMap, 'sampler')] : Array<Dynamic>));
+      _Runtime.callValue(bindGlImageResourceTexture, cast ([state, normalMap.image, normalMap.sampler] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locNormalMap'), 0.0);
     }
   }

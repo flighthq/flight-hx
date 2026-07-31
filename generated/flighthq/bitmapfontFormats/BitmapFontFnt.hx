@@ -27,9 +27,9 @@ class BitmapFontFnt {
     metrics = _Runtime.callValue(getBitmapFontMetrics, cast ([font] : Array<Dynamic>));
     lineHeight = ((metrics.ascent + metrics.descent) + metrics.lineGap);
     base = metrics.ascent;
-    primaryImage = _Runtime.coalesce(_Runtime.optionalField(flighthq._internal._StaticIndex.readArray(_Runtime.field(font, 'pages'), 0.0), 'image'), function():Dynamic return cast null);
-    scaleW = ((cast !_Runtime.strictEquals(primaryImage, null) : Bool) ? (cast _Runtime.field(primaryImage, 'width') : Dynamic) : (cast 0.0 : Dynamic));
-    scaleH = ((cast !_Runtime.strictEquals(primaryImage, null) : Bool) ? (cast _Runtime.field(primaryImage, 'height') : Dynamic) : (cast 0.0 : Dynamic));
+    primaryImage = _Runtime.coalesce(({ final __typedStruct0 = flighthq._internal._StaticIndex.readArray(_Runtime.field(font, 'pages'), 0.0); __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.image; }), function():Dynamic return cast null);
+    scaleW = ((cast !_Runtime.strictEquals(primaryImage, null) : Bool) ? (cast primaryImage.width : Dynamic) : (cast 0.0 : Dynamic));
+    scaleH = ((cast !_Runtime.strictEquals(primaryImage, null) : Bool) ? (cast primaryImage.height : Dynamic) : (cast 0.0 : Dynamic));
     pageCount = HxMath.max(_Runtime.field(_Runtime.field(font, 'pages'), 'length'), 1.0);
     lines = cast ([] : Array<Dynamic>);
     _Runtime.callProperty(lines, 'push', cast (['info face="" size=' + Std.string(lineHeight) + ' bold=0 italic=0 charset="" unicode=1 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=0,0 outline=0'] : Array<Dynamic>));

@@ -128,7 +128,7 @@ class QuadBatch {
       _Runtime.setField(out, 'height', 0.0);
       return;
     }
-    regions = _Runtime.field(atlas, 'regions');
+    regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
     minX = HxMath.POSITIVE_INFINITY;
     minY = HxMath.POSITIVE_INFINITY;
@@ -315,7 +315,7 @@ class QuadBatch {
     transforms = _Runtime.field(__destructure2, 'transforms');
     transformType = _Runtime.field(__destructure2, 'transformType');
     if ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(instanceCount, 0.0) : Bool)) : Bool)) { return cast -1.0; }
-    regions = _Runtime.field(atlas, 'regions');
+    regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
     if ((cast _Runtime.strictEquals(transformType, 'vector2') : Bool)) {
       {
@@ -380,7 +380,7 @@ class QuadBatch {
     transforms = _Runtime.field(__destructure3, 'transforms');
     transformType = _Runtime.field(__destructure3, 'transformType');
     if ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(instanceCount, 0.0) : Bool)) : Bool)) { return cast -1.0; }
-    regions = _Runtime.field(atlas, 'regions');
+    regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
     if ((cast _Runtime.strictEquals(transformType, 'vector2') : Bool)) {
       {

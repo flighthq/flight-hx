@@ -50,9 +50,9 @@ class GlDraw {
     }
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, _Runtime.field(entry, 'texture'));
     _Runtime.setField(runtime, 'currentTexture', _Runtime.field(entry, 'texture'));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(entry, 'version'), _Runtime.field(image, 'version')) : Bool)) {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(entry, 'version'), image.version) : Bool)) {
       _Runtime.callValue(GlDraw.uploadGlDisplayTexture__glDraw, cast ([state, image] : Array<Dynamic>));
-      _Runtime.setField(entry, 'version', _Runtime.field(image, 'version'));
+      _Runtime.setField(entry, 'version', image.version);
     }
     _Runtime.callValue(GlDraw.applyGlSamplerState__glDraw, cast ([state, runtime, _Runtime.field(entry, 'texture'), _Runtime.coalesce(sampler, function():Dynamic return cast null)] : Array<Dynamic>));
     return cast _Runtime.field(entry, 'texture');
@@ -225,18 +225,18 @@ class GlDraw {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
-    if ((cast !_Runtime.strictEquals(_Runtime.field(image, 'source'), null) : Bool)) {
+    if ((cast !_Runtime.strictEquals(image.source, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.pixelStorei(gl, flighthq._internal.backend.WebGl2Backend.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
-      _Runtime.callValue(uploadGlTextureElement, cast ([gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, (cast _Runtime.field(image, 'source') : Dynamic)] : Array<Dynamic>));
+      _Runtime.callValue(uploadGlTextureElement, cast ([gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, (cast image.source : Dynamic)] : Array<Dynamic>));
       return;
     }
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(image, 'data'), null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(image, 'compressed'), null) : Bool)) : Bool)) {
+    if ((cast ((cast _Runtime.strictEquals(image.data, null) : Bool) && (cast !_Runtime.strictEquals(image.compressed, null) : Bool)) : Bool)) {
       var runtime:Dynamic = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
       _Runtime.callOptionalProperty(runtime, 'compressedTextureUpload', cast ([gl, image, _Runtime.coalesce(_Runtime.field(runtime, 'compressedTextureDecoder'), function():Dynamic return cast null)] : Array<Dynamic>));
       return;
     }
-    data = ((cast _Runtime.strictEquals(_Runtime.field(image, 'alphaType'), 'straight') : Bool) ? (cast _Runtime.callValue(GlDraw.premultiplyStraightRgba8__glDraw, cast ([_Runtime.field(image, 'data')] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.field(image, 'data') : Dynamic));
-    _Runtime.callValue(uploadGlTextureData, cast ([gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, _Runtime.field(image, 'width'), _Runtime.field(image, 'height'), data] : Array<Dynamic>));
+    data = ((cast _Runtime.strictEquals(image.alphaType, 'straight') : Bool) ? (cast _Runtime.callValue(GlDraw.premultiplyStraightRgba8__glDraw, cast ([image.data] : Array<Dynamic>)) : Dynamic) : (cast image.data : Dynamic));
+    _Runtime.callValue(uploadGlTextureData, cast ([gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, image.width, image.height, data] : Array<Dynamic>));
   }
 
   public static function premultiplyStraightRgba8__glDraw(data:flighthq._internal._UInt8ClampedArray):flighthq._internal._UInt8ClampedArray {

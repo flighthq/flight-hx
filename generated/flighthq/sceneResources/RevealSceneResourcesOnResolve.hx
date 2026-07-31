@@ -59,7 +59,7 @@ class RevealSceneResourcesOnResolve {
       var materials:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast !(cast _Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)) : Bool) : Bool)) { return; }
       owner = (cast node : SceneNode);
-      materials = _Runtime.field(node, 'materials');
+      materials = (cast node : flighthq.types.Mesh).materials;
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
@@ -71,7 +71,7 @@ class RevealSceneResourcesOnResolve {
             var j:Dynamic = 0.0;
             while ((cast ((cast j : Float) < (cast _Runtime.field(slots, 'length') : Float)) : Bool)) {
               var texture:Dynamic = flighthq._internal._StaticIndex.readArray(slots, j);
-              if ((cast _Runtime.looseEquals(_Runtime.field(texture, 'resource'), null) : Bool)) { j++; continue; }
+              if ((cast _Runtime.looseEquals(texture.resource, null) : Bool)) { j++; continue; }
               var nodes:Dynamic = ((cast out : flighthq._internal._Map).get(texture));
               if ((cast _Runtime.strictEquals(nodes, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
                 (nodes = cast (cast ([] : Array<Dynamic>) : Dynamic));

@@ -127,8 +127,8 @@ class ElectronTray {
   public static function toElectronTemplate__electronTray(items:Array<MenuItemTemplate>):Array<ElectronMenuItemOptions> {
     return cast _Runtime.callProperty(items, 'map', cast ([function(item:Dynamic) {
       var options:ElectronMenuItemOptions = cast _Runtime.UNDEFINED;
-      options = { id: _Runtime.field(item, 'id'), label: _Runtime.field(item, 'label'), type: _Runtime.field(item, 'type'), role: _Runtime.field(item, 'role'), accelerator: _Runtime.field(item, 'accelerator'), enabled: _Runtime.field(item, 'enabled'), checked: _Runtime.field(item, 'checked') };
-      if (_Runtime.truthy(_Runtime.field(item, 'submenu'))) { _Runtime.setField(options, 'submenu', _Runtime.callValue(ElectronTray.toElectronTemplate__electronTray, cast ([_Runtime.field(item, 'submenu')] : Array<Dynamic>))); }
+      options = { id: item.id, label: item.label, type: item.type, role: item.role, accelerator: item.accelerator, enabled: item.enabled, checked: item.checked };
+      if (_Runtime.truthy(item.submenu)) { _Runtime.setField(options, 'submenu', _Runtime.callValue(ElectronTray.toElectronTemplate__electronTray, cast ([item.submenu] : Array<Dynamic>))); }
       return cast options;
     }] : Array<Dynamic>));
     return cast null;

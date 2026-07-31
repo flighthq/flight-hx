@@ -25,16 +25,16 @@ class GlyphAtlas {
   public static function disposeGlyphAtlas(atlas:flighthq.types.GlyphSource.GlyphAtlas):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.field(atlas, 'runtime');
-    ((cast _Runtime.field(runtime, 'entries') : flighthq._internal._Map).clear());
-    ((cast _Runtime.field(runtime, 'bitmaps') : flighthq._internal._Map).clear());
-    _Runtime.setLength(_Runtime.field(runtime, 'lru'), 0.0);
-    _Runtime.setLength(_Runtime.field(runtime, 'shelves'), 0.0);
-    _Runtime.setField(runtime, 'packBottom', _Runtime.field(runtime, 'padding'));
-    _Runtime.setField(runtime, 'dirty', false);
+    ((cast runtime.entries : flighthq._internal._Map).clear());
+    ((cast runtime.bitmaps : flighthq._internal._Map).clear());
+    _Runtime.setLength(runtime.lru, 0.0);
+    _Runtime.setLength(runtime.shelves, 0.0);
+    (runtime.packBottom = cast (runtime.padding : Dynamic));
+    (runtime.dirty = cast (false : Dynamic));
   }
 
   public static function getGlyphAtlasSurface(atlas:flighthq.types.GlyphSource.GlyphAtlas):Surface {
-    return cast _Runtime.field(_Runtime.field(atlas, 'runtime'), 'surface');
+    return cast _Runtime.field(atlas, 'runtime').surface;
     return cast null;
   }
 }

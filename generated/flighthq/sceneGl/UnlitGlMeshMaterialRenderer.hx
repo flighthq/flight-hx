@@ -55,7 +55,7 @@ class UnlitGlMeshMaterialRenderer {
   }
 
   public static function defineKeyForMaterial__unlitGlMeshMaterialRenderer(material:Null<UnlitMaterial>):GlUnlitDefineKey {
-    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasColorMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'baseColorMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(material, 'baseColorMap'), 'image'), null) : Bool)), hasUvTransform: _Runtime.callValue(hasGlUvTransform, cast ([((cast !_Runtime.strictEquals(material, null) : Bool) ? (cast _Runtime.field(material, 'baseColorMap') : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)), vertexColor: false };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasColorMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'baseColorMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'baseColorMap').image, null) : Bool)), hasUvTransform: _Runtime.callValue(hasGlUvTransform, cast ([((cast !_Runtime.strictEquals(material, null) : Bool) ? (cast _Runtime.field(material, 'baseColorMap') : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)), vertexColor: false };
     return cast null;
   }
 

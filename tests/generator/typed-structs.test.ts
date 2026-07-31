@@ -4,6 +4,7 @@ import ts from 'typescript';
 import {
   createTypedStructRegistry,
   tranche6aDirectTypedStructIds,
+  tranche6bDirectTypedStructIds,
   tranche6TypedStructCandidates,
   typedStructRegistry,
   type TypedStructCandidate,
@@ -37,21 +38,22 @@ describe('typed struct analysis', () => {
     const host = report.candidates.find((candidate) => candidate.name === 'DeviceInfo');
     const serialization = report.candidates.find((candidate) => candidate.name === 'GltfDocument');
     const codec = report.candidates.find((candidate) => candidate.name === 'ParticleFormatCodec');
+    const menuItemTemplate = report.candidates.find((candidate) => candidate.name === 'MenuItemTemplate');
     const surface = report.candidates.find((candidate) => candidate.name === 'Surface');
     const trancheSix = report.candidates.slice(-tranche6TypedStructCandidates.length);
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 342,
+      auditOnlySchemas: 330,
       bindableAccesses: 10_257,
       candidates: 405,
-      directAccesses: 6_458,
-      directSchemas: 62,
+      directAccesses: 7_658,
+      directSchemas: 74,
       eligible: 404,
       escapes: 348,
       fields: 2_028,
       ineligible: 1,
-      pendingAccesses: 3_799,
-      reflectiveSurvivors: 171,
+      pendingAccesses: 2_599,
+      reflectiveSurvivors: 172,
     });
     expect(rectangle?.eligible).toBe(false);
     expect(rectangle?.reasons).toContain('presence-sensitive-use');
@@ -65,7 +67,7 @@ describe('typed struct analysis', () => {
     );
     expect(color?.eligible).toBe(true);
     expect(color?.purpose).toContain('RGBA');
-    expect(report.summary.directAccesses).toBe(6_458);
+    expect(report.summary.directAccesses).toBe(7_658);
     expect(rectangle?.emission).toEqual({
       directAccesses: 0,
       mode: 'direct',
@@ -111,14 +113,20 @@ describe('typed struct analysis', () => {
     expect(trancheSix.every((candidate) => candidate.eligible && candidate.reasons.length === 0)).toBe(true);
     expect(
       new Set(trancheSix.filter((candidate) => candidate.emission.mode === 'direct').map((candidate) => candidate.id)),
-    ).toEqual(new Set(tranche6aDirectTypedStructIds));
-    expect(trancheSix.filter((candidate) => candidate.emission.mode === 'direct')).toHaveLength(8);
-    expect(trancheSix.filter((candidate) => candidate.emission.mode === 'audit-only')).toHaveLength(342);
+    ).toEqual(new Set([...tranche6aDirectTypedStructIds, ...tranche6bDirectTypedStructIds]));
+    expect(trancheSix.filter((candidate) => candidate.emission.mode === 'direct')).toHaveLength(20);
+    expect(trancheSix.filter((candidate) => candidate.emission.mode === 'audit-only')).toHaveLength(330);
     expect(
       trancheSix
-        .filter((candidate) => candidate.emission.mode === 'direct')
+        .filter((candidate) => tranche6aDirectTypedStructIds.includes(candidate.id))
         .reduce((total, candidate) => total + candidate.emission.directAccesses, 0),
     ).toBe(3_187);
+    expect(
+      trancheSix
+        .filter((candidate) => tranche6bDirectTypedStructIds.includes(candidate.id))
+        .reduce((total, candidate) => total + candidate.emission.directAccesses, 0),
+    ).toBe(1_200);
+    expect(menuItemTemplate?.emission.reflectiveSurvivors).toEqual([{ accesses: 1, reason: 'dynamic-enumeration' }]);
     expect(surface?.emission.directAccesses).toBe(433);
     expect(new Set(tranche6TypedStructCandidates.map(candidateId)).size).toBe(tranche6TypedStructCandidates.length);
     expect(scene?.emission.pendingAccesses).toBe(14);
@@ -325,6 +333,30 @@ describe('typed struct analysis', () => {
     expect(new Set(bindings.map((binding) => binding.schemaId))).toEqual(
       new Set(['@flighthq/types:upstream/packages/types/src/Vector2.ts#Vector2']),
     );
+  });
+
+  it('casts a type-guard-narrowed receiver to its canonical struct before direct access', () => {
+    const result = lowerFixture(`
+      export interface SceneNode { enabled: boolean; }
+      export interface Vector2 extends SceneNode { x: number; y: number; }
+      export function isVector2(value: SceneNode): value is Vector2 { return 'x' in value; }
+      export function read(value: SceneNode): number {
+        return isVector2(value) ? value.x : 0;
+      }
+    `);
+    const output = emitHaxeModule({
+      declarations: result.lowered.declarations,
+      imports: [],
+      name: 'Vector2',
+      packageName: '@flighthq/types',
+    });
+
+    expect(result.lowered.diagnostics).toEqual([]);
+    expect(collectTypedStructBindings(result.lowered.declarations)).toEqual([
+      expect.objectContaining({ receiverCast: 'flighthq.types.Vector2' }),
+    ]);
+    expect(output).toContain('(cast value : flighthq.types.Vector2).x');
+    expect(output).not.toContain("_Runtime.field(value, 'x')");
   });
 
   it('binds intersection fields by declaration identity rather than matching their spelling', () => {

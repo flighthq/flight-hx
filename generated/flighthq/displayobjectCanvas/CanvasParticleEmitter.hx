@@ -31,12 +31,12 @@ class CanvasParticleEmitter {
     ids = _Runtime.field(__destructure0, 'ids');
     particleCount = _Runtime.field(__destructure0, 'particleCount');
     transforms = _Runtime.field(__destructure0, 'transforms');
-    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(atlas, 'image'), null) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(atlas, 'image'), 'source'), null) : Bool)) : Bool) || (cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) : Bool)) { return; }
-    regions = _Runtime.field(atlas, 'regions');
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.image, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(atlas.image.source, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) : Bool)) { return; }
+    regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
     nodeAlpha = _Runtime.field(renderProxy, 'alpha');
     t = _Runtime.field(renderProxy, 'transform2D');
-    imageSource = _Runtime.field(_Runtime.field(atlas, 'image'), 'source');
+    imageSource = atlas.image.source;
     context = _Runtime.field(state, 'context');
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
     if ((cast !(cast _Runtime.field(state, 'allowSmoothing') : Bool) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false); }

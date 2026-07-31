@@ -146,7 +146,7 @@ class SceneRender {
     {
       var m:Dynamic = 0.0;
       while ((cast ((cast m : Float) < (cast _Runtime.field(_Runtime.field(prepared, 'meshes'), 'length') : Float)) : Bool)) {
-        var skin:Dynamic = _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(prepared, 'meshes'), m), 'skin');
+        var skin:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(prepared, 'meshes'), m).skin;
         if ((cast !_Runtime.looseEquals(skin, null) : Bool)) { _Runtime.callValue(computeSkeleton3DJointMatrices, cast ([_Runtime.field(skin, 'skeleton')] : Array<Dynamic>)); }
         m++;
       }
@@ -162,7 +162,7 @@ class SceneRender {
       return;
     }
     mesh = (cast (cast node : Dynamic) : Mesh);
-    if ((cast ((cast !_Runtime.looseEquals(_Runtime.field(mesh, 'geometry'), null) : Bool) && (cast _Runtime.callValue(SceneRender.isMeshVisible__sceneRender, cast ([mesh, frustum, worldBounds] : Array<Dynamic>)) : Bool)) : Bool)) {
+    if ((cast ((cast !_Runtime.looseEquals(mesh.geometry, null) : Bool) && (cast _Runtime.callValue(SceneRender.isMeshVisible__sceneRender, cast ([mesh, frustum, worldBounds] : Array<Dynamic>)) : Bool)) : Bool)) {
       _Runtime.callProperty(out, 'push', cast ([mesh] : Array<Dynamic>));
     }
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)), 'children');
@@ -206,7 +206,7 @@ class SceneRender {
 
   public static function isMeshVisible__sceneRender(mesh:Mesh, frustum:Frustum, worldBounds:Aabb):Bool {
     var bounds:Dynamic = cast _Runtime.UNDEFINED;
-    bounds = _Runtime.field(mesh, 'geometry').bounds;
+    bounds = mesh.geometry.bounds;
     if ((cast _Runtime.strictEquals(bounds, null) : Bool)) {
       return cast true;
     }

@@ -106,57 +106,57 @@ class LibgdxSerialize {
     var lines:Array<String> = cast _Runtime.UNDEFINED;
     lines = cast ([] : Array<Dynamic>);
     _Runtime.callProperty(lines, 'push', cast (['Particle Effect'] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.field(doc, 'name'))) { _Runtime.callProperty(lines, 'push', cast (['- ' + Std.string(_Runtime.field(doc, 'name')) + ' -'] : Array<Dynamic>)); }
-    _Runtime.callProperty(lines, 'push', cast (['minParticleCount: ' + Std.string(_Runtime.field(doc, 'minParticleCount')) + ''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', cast (['maxParticleCount: ' + Std.string(_Runtime.field(doc, 'maxParticleCount')) + ''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', cast (['additive: ' + Std.string(_Runtime.field(doc, 'additive')) + ''] : Array<Dynamic>));
-    if ((cast _Runtime.field(doc, 'premultipliedAlpha') : Bool)) { _Runtime.callProperty(lines, 'push', cast (['premultipliedAlpha: ' + Std.string(_Runtime.field(doc, 'premultipliedAlpha')) + ''] : Array<Dynamic>)); }
-    if (_Runtime.truthy(_Runtime.field(doc, 'imagePath'))) { _Runtime.callProperty(lines, 'push', cast (['imagePath: ' + Std.string(_Runtime.field(doc, 'imagePath')) + ''] : Array<Dynamic>)); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(doc, 'imageCount'), 1.0) : Bool)) { _Runtime.callProperty(lines, 'push', cast (['imageCount: ' + Std.string(_Runtime.field(doc, 'imageCount')) + ''] : Array<Dynamic>)); }
+    if (_Runtime.truthy(doc.name)) { _Runtime.callProperty(lines, 'push', cast (['- ' + Std.string(doc.name) + ' -'] : Array<Dynamic>)); }
+    _Runtime.callProperty(lines, 'push', cast (['minParticleCount: ' + Std.string(doc.minParticleCount) + ''] : Array<Dynamic>));
+    _Runtime.callProperty(lines, 'push', cast (['maxParticleCount: ' + Std.string(doc.maxParticleCount) + ''] : Array<Dynamic>));
+    _Runtime.callProperty(lines, 'push', cast (['additive: ' + Std.string(doc.additive) + ''] : Array<Dynamic>));
+    if ((cast doc.premultipliedAlpha : Bool)) { _Runtime.callProperty(lines, 'push', cast (['premultipliedAlpha: ' + Std.string(doc.premultipliedAlpha) + ''] : Array<Dynamic>)); }
+    if (_Runtime.truthy(doc.imagePath)) { _Runtime.callProperty(lines, 'push', cast (['imagePath: ' + Std.string(doc.imagePath) + ''] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(doc.imageCount, 1.0) : Bool)) { _Runtime.callProperty(lines, 'push', cast (['imageCount: ' + Std.string(doc.imageCount) + ''] : Array<Dynamic>)); }
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Delay', _Runtime.field(doc, 'delay'), _Runtime.field(_Runtime.field(doc, 'delay'), 'active')] : Array<Dynamic>)))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Delay', doc.delay, _Runtime.field(doc.delay, 'active')] : Array<Dynamic>)))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Duration', _Runtime.field(doc, 'duration')] : Array<Dynamic>)))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Duration', doc.duration] : Array<Dynamic>)))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Emission', _Runtime.field(doc, 'emission')] : Array<Dynamic>)))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Emission', doc.emission] : Array<Dynamic>)))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Life', _Runtime.field(doc, 'life')] : Array<Dynamic>)))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Life', doc.life] : Array<Dynamic>)))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Life Offset', _Runtime.field(doc, 'lifeOffset'), _Runtime.field(_Runtime.field(doc, 'lifeOffset'), 'active')] : Array<Dynamic>)))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Life Offset', doc.lifeOffset, _Runtime.field(doc.lifeOffset, 'active')] : Array<Dynamic>)))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['X Offset', _Runtime.field(doc, 'xOffset'), _Runtime.field(_Runtime.field(doc, 'xOffset'), 'active')] : Array<Dynamic>)))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['X Offset', doc.xOffset, _Runtime.field(doc.xOffset, 'active')] : Array<Dynamic>)))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Y Offset', _Runtime.field(doc, 'yOffset'), _Runtime.field(_Runtime.field(doc, 'yOffset'), 'active')] : Array<Dynamic>)))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Y Offset', doc.yOffset, _Runtime.field(doc.yOffset, 'active')] : Array<Dynamic>)))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['Spawn Shape'] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', cast (['shape: ' + Std.string(_Runtime.field(_Runtime.field(doc, 'spawnShape'), 'shape')) + ''] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(doc, 'spawnShape'), 'shape'), 'ellipse') : Bool)) {
-      _Runtime.callProperty(lines, 'push', cast (['edges: ' + Std.string(_Runtime.field(_Runtime.field(doc, 'spawnShape'), 'edges')) + ''] : Array<Dynamic>));
-      _Runtime.callProperty(lines, 'push', cast (['side: ' + Std.string(_Runtime.field(_Runtime.field(doc, 'spawnShape'), 'side')) + ''] : Array<Dynamic>));
+    _Runtime.callProperty(lines, 'push', cast (['shape: ' + Std.string(_Runtime.field(doc.spawnShape, 'shape')) + ''] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(_Runtime.field(doc.spawnShape, 'shape'), 'ellipse') : Bool)) {
+      _Runtime.callProperty(lines, 'push', cast (['edges: ' + Std.string(_Runtime.field(doc.spawnShape, 'edges')) + ''] : Array<Dynamic>));
+      _Runtime.callProperty(lines, 'push', cast (['side: ' + Std.string(_Runtime.field(doc.spawnShape, 'side')) + ''] : Array<Dynamic>));
     }
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Spawn Width', _Runtime.field(doc, 'spawnWidth')] : Array<Dynamic>)))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Spawn Width', doc.spawnWidth] : Array<Dynamic>)))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Spawn Height', _Runtime.field(doc, 'spawnHeight')] : Array<Dynamic>)))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Spawn Height', doc.spawnHeight] : Array<Dynamic>)))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Scale', _Runtime.field(doc, 'scale')] : Array<Dynamic>)))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Scale', doc.scale] : Array<Dynamic>)))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Velocity', _Runtime.field(doc, 'velocity'), _Runtime.field(_Runtime.field(doc, 'velocity'), 'active')] : Array<Dynamic>)))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Velocity', doc.velocity, _Runtime.field(doc.velocity, 'active')] : Array<Dynamic>)))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Angle', _Runtime.field(doc, 'angle'), _Runtime.field(_Runtime.field(doc, 'angle'), 'active')] : Array<Dynamic>)))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Angle', doc.angle, _Runtime.field(doc.angle, 'active')] : Array<Dynamic>)))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Rotation', _Runtime.field(doc, 'rotation'), _Runtime.field(_Runtime.field(doc, 'rotation'), 'active')] : Array<Dynamic>)))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Rotation', doc.rotation, _Runtime.field(doc.rotation, 'active')] : Array<Dynamic>)))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Wind', _Runtime.field(doc, 'wind'), _Runtime.field(_Runtime.field(doc, 'wind'), 'active')] : Array<Dynamic>)))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Wind', doc.wind, _Runtime.field(doc.wind, 'active')] : Array<Dynamic>)))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Gravity', _Runtime.field(doc, 'gravity'), _Runtime.field(_Runtime.field(doc, 'gravity'), 'active')] : Array<Dynamic>)))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Gravity', doc.gravity, _Runtime.field(doc.gravity, 'active')] : Array<Dynamic>)))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['Tint'] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', cast (['colors: ' + Std.string(_Runtime.join(_Runtime.field(_Runtime.field(doc, 'tint'), 'colors'), ',')) + ''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', cast (['timelineCount: ' + Std.string(_Runtime.field(_Runtime.field(_Runtime.field(doc, 'tint'), 'timeline'), 'length')) + ''] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.field(_Runtime.field(doc, 'tint'), 'timeline'), 'forEach', cast ([function(v:Dynamic, i:Dynamic) return _Runtime.callProperty(lines, 'push', cast (['timeline' + Std.string(i) + ': ' + Std.string(v) + ''] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callProperty(lines, 'push', cast (['colors: ' + Std.string(_Runtime.join(_Runtime.field(doc.tint, 'colors'), ',')) + ''] : Array<Dynamic>));
+    _Runtime.callProperty(lines, 'push', cast (['timelineCount: ' + Std.string(_Runtime.field(_Runtime.field(doc.tint, 'timeline'), 'length')) + ''] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.field(doc.tint, 'timeline'), 'forEach', cast ([function(v:Dynamic, i:Dynamic) return _Runtime.callProperty(lines, 'push', cast (['timeline' + Std.string(i) + ': ' + Std.string(v) + ''] : Array<Dynamic>))] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Transparency', _Runtime.field(doc, 'transparency')] : Array<Dynamic>)))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(LibgdxSerialize.rangeToLines__libgdxSerialize, cast (['Transparency', doc.transparency] : Array<Dynamic>)))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
     return cast _Runtime.join(lines, '\n');
     return cast null;

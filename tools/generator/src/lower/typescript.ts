@@ -1662,9 +1662,40 @@ function typedStructPropertyBinding(
       readonly: field.readonly,
       requiredUndefined: field.requiredUndefined,
     },
+    receiverCast: typedStructReceiverCast(node.expression, binding.schemaId, binding.schemaHaxeType, context),
     schemaId: binding.schemaId,
     schemaName: binding.schemaName,
   };
+}
+
+function typedStructReceiverCast(
+  receiver: ts.Expression,
+  schemaId: string,
+  schemaHaxeType: string,
+  context: LoweringContext,
+): string | undefined {
+  if (!ts.isIdentifier(receiver) || !context.checker || !context.typedStructs) return undefined;
+  const symbol = context.checker.getSymbolAtLocation(receiver);
+  const declaration = symbol?.valueDeclaration;
+  const declaredTypeNode =
+    declaration &&
+    (ts.isParameter(declaration) || ts.isVariableDeclaration(declaration) || ts.isPropertyDeclaration(declaration))
+      ? declaration.type
+      : undefined;
+  if (!declaredTypeNode) return undefined;
+  const declaredType = context.checker.getTypeFromTypeNode(declaredTypeNode);
+  // Union aliases already lower to Dynamic, so their narrowed fields do not need a Haxe cast.
+  if (declaredType.isUnion()) return undefined;
+  const declaredResolution = context.typedStructs.resolve(declaredType);
+  if (declaredResolution.kind === 'matched' && declaredResolution.schemas[0]?.id === schemaId) return undefined;
+  try {
+    const storageType = lowerType(declaredTypeNode, context);
+    const concreteStorageType = storageType.kind === 'nullable' ? storageType.inner : storageType;
+    return concreteStorageType.kind === 'named' ? schemaHaxeType : undefined;
+  } catch (error) {
+    if (error instanceof UnsupportedSyntaxError) return undefined;
+    throw error;
+  }
 }
 
 function isTypedStructWrite(node: ts.PropertyAccessExpression): boolean {
