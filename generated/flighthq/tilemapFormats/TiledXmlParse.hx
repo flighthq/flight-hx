@@ -193,8 +193,8 @@ class TiledXmlParse {
     for (pair in _Runtime.iterable(_Runtime.callProperty(StringTools.trim(Std.string(text)), 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)))) {
       if ((cast _Runtime.strictEquals(pair, '') : Bool)) { continue; }
       var __destructure0:Dynamic = _Runtime.callProperty(pair, 'split', cast ([','] : Array<Dynamic>));
-      var x:Dynamic = _Runtime.getIndex(__destructure0, 0.0);
-      var y:Dynamic = _Runtime.getIndex(__destructure0, 1.0);
+      var x:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
+      var y:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
       _Runtime.callProperty(points, 'push', cast ([{ x: _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('Number'), cast ([x] : Array<Dynamic>)), function():Dynamic return cast 0.0), y: _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('Number'), cast ([y] : Array<Dynamic>)), function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     }
     return cast points;

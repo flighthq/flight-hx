@@ -67,8 +67,8 @@ class LibgdxAtlasParse {
             else if (__switchValue == 'xy') {
               {
                 var __destructure0:Dynamic = _Runtime.callValue(LibgdxAtlasParse.parseIntPair__libgdxAtlasParse, cast ([value] : Array<Dynamic>));
-                var x:Dynamic = _Runtime.getIndex(__destructure0, 0.0);
-                var y:Dynamic = _Runtime.getIndex(__destructure0, 1.0);
+                var x:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
+                var y:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
                 _Runtime.setField(currentRegion, 'x', x);
                 _Runtime.setField(currentRegion, 'y', y);
               }
@@ -76,8 +76,8 @@ class LibgdxAtlasParse {
             else if (__switchValue == 'size') {
               {
                 var __destructure1:Dynamic = _Runtime.callValue(LibgdxAtlasParse.parseIntPair__libgdxAtlasParse, cast ([value] : Array<Dynamic>));
-                var w:Dynamic = _Runtime.getIndex(__destructure1, 0.0);
-                var h:Dynamic = _Runtime.getIndex(__destructure1, 1.0);
+                var w:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure1, 0.0);
+                var h:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure1, 1.0);
                 _Runtime.setField(currentRegion, 'spriteWidth', w);
                 _Runtime.setField(currentRegion, 'spriteHeight', h);
               }
@@ -85,8 +85,8 @@ class LibgdxAtlasParse {
             else if (__switchValue == 'orig') {
               {
                 var __destructure2:Dynamic = _Runtime.callValue(LibgdxAtlasParse.parseIntPair__libgdxAtlasParse, cast ([value] : Array<Dynamic>));
-                var sw:Dynamic = _Runtime.getIndex(__destructure2, 0.0);
-                var sh:Dynamic = _Runtime.getIndex(__destructure2, 1.0);
+                var sw:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure2, 0.0);
+                var sh:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure2, 1.0);
                 _Runtime.setField(currentRegion, 'sourceWidth', sw);
                 _Runtime.setField(currentRegion, 'sourceHeight', sh);
               }
@@ -94,8 +94,8 @@ class LibgdxAtlasParse {
             else if (__switchValue == 'offset') {
               {
                 var __destructure3:Dynamic = _Runtime.callValue(LibgdxAtlasParse.parseIntPair__libgdxAtlasParse, cast ([value] : Array<Dynamic>));
-                var ox:Dynamic = _Runtime.getIndex(__destructure3, 0.0);
-                var oy:Dynamic = _Runtime.getIndex(__destructure3, 1.0);
+                var ox:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure3, 0.0);
+                var oy:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure3, 1.0);
                 _Runtime.setField(currentRegion, 'offsetX', ox);
                 _Runtime.setField(currentRegion, 'offsetY', oy);
               }
@@ -110,8 +110,8 @@ class LibgdxAtlasParse {
             if (__switchValue == 'size') {
               {
                 var __destructure4:Dynamic = _Runtime.callValue(LibgdxAtlasParse.parseIntPair__libgdxAtlasParse, cast ([value] : Array<Dynamic>));
-                var w:Dynamic = _Runtime.getIndex(__destructure4, 0.0);
-                var h:Dynamic = _Runtime.getIndex(__destructure4, 1.0);
+                var w:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure4, 0.0);
+                var h:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure4, 1.0);
                 _Runtime.setField(currentPage, 'width', w);
                 _Runtime.setField(currentPage, 'height', h);
               }

@@ -366,8 +366,9 @@ export interface StaticLoweringEmissionCounts {
   destructuringReads: Record<
     IrDestructuringReadSource,
     {
-      eligible: number;
+      direct: number;
       parked: number;
+      proven: number;
     }
   >;
   destructuringReceivers: Record<IrIndexedReceiver, Record<IrDestructuringReadSource, number>>;

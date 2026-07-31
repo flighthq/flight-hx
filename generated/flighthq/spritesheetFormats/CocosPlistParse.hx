@@ -132,11 +132,11 @@ class CocosPlistParse {
     var atlasHeight:Dynamic = cast _Runtime.UNDEFINED;
     rect = _Runtime.callValue(CocosPlistParse.parsePlistRect__cocosPlistParse, cast ([pf.frame] : Array<Dynamic>));
     __destructure1 = _Runtime.callValue(CocosPlistParse.parsePlistPair__cocosPlistParse, cast ([pf.spriteOffset] : Array<Dynamic>));
-    offsetX = _Runtime.getIndex(__destructure1, 0.0);
-    offsetY = _Runtime.getIndex(__destructure1, 1.0);
+    offsetX = flighthq._internal._StaticIndex.readArray(__destructure1, 0.0);
+    offsetY = flighthq._internal._StaticIndex.readArray(__destructure1, 1.0);
     __destructure2 = _Runtime.callValue(CocosPlistParse.parsePlistPair__cocosPlistParse, cast ([pf.spriteSourceSize] : Array<Dynamic>));
-    sourceWidth = _Runtime.getIndex(__destructure2, 0.0);
-    sourceHeight = _Runtime.getIndex(__destructure2, 1.0);
+    sourceWidth = flighthq._internal._StaticIndex.readArray(__destructure2, 0.0);
+    sourceHeight = flighthq._internal._StaticIndex.readArray(__destructure2, 1.0);
     atlasWidth = ((cast pf.textureRotated : Bool) ? (cast _Runtime.field(rect, 'h') : Dynamic) : (cast _Runtime.field(rect, 'w') : Dynamic));
     atlasHeight = ((cast pf.textureRotated : Bool) ? (cast _Runtime.field(rect, 'w') : Dynamic) : (cast _Runtime.field(rect, 'h') : Dynamic));
     return cast _Runtime.callValue(createSpritesheetFrameData, cast ([{ height: atlasHeight, name: name, offsetX: offsetX, offsetY: offsetY, pivotX: null, pivotY: null, rotated: pf.textureRotated, sourceHeight: ((cast ((cast sourceHeight : Float) > (cast 0.0 : Float)) : Bool) ? (cast sourceHeight : Dynamic) : (cast atlasHeight : Dynamic)), sourceWidth: ((cast ((cast sourceWidth : Float) > (cast 0.0 : Float)) : Bool) ? (cast sourceWidth : Dynamic) : (cast atlasWidth : Dynamic)), width: atlasWidth, x: _Runtime.field(rect, 'x'), y: _Runtime.field(rect, 'y') }] : Array<Dynamic>));
@@ -151,13 +151,13 @@ class CocosPlistParse {
     frames = _Runtime.callProperty(flighthq._internal.DynamicObject.entries(doc.frames), 'map', cast ([function(__parameter3:Dynamic) {
       var name:Dynamic = cast _Runtime.UNDEFINED;
       var pf:Dynamic = cast _Runtime.UNDEFINED;
-      name = _Runtime.getIndex(__parameter3, 0.0);
-      pf = _Runtime.getIndex(__parameter3, 1.0);
+      name = flighthq._internal._StaticIndex.readArray(__parameter3, 0.0);
+      pf = flighthq._internal._StaticIndex.readArray(__parameter3, 1.0);
       return cast _Runtime.callValue(CocosPlistParse.plistFrameToData__cocosPlistParse, cast ([name, pf] : Array<Dynamic>));
     }] : Array<Dynamic>));
     __destructure4 = _Runtime.callValue(CocosPlistParse.parsePlistPair__cocosPlistParse, cast ([doc.metadata.size] : Array<Dynamic>));
-    imageWidth = _Runtime.getIndex(__destructure4, 0.0);
-    imageHeight = _Runtime.getIndex(__destructure4, 1.0);
+    imageWidth = flighthq._internal._StaticIndex.readArray(__destructure4, 0.0);
+    imageHeight = flighthq._internal._StaticIndex.readArray(__destructure4, 1.0);
     return cast _Runtime.callValue(createSpritesheetData, cast ([{ animations: cast ([] : Array<Dynamic>), frames: frames, imageFile: doc.metadata.textureFileName, imageHeight: imageHeight, imageWidth: imageWidth, scale: 1.0 }] : Array<Dynamic>));
     return cast null;
   }

@@ -58,9 +58,9 @@ class GlDropShadowEffect {
     tintStrength = HxMath.min(1.0, strength);
     shadowPasses = HxMath.max(1.0, HxMath.floor(strength));
     __destructure0 = cast ([s0, s1, s2] : Array<Dynamic>);
-    mask = _Runtime.getIndex(__destructure0, 0.0);
-    blurred = _Runtime.getIndex(__destructure0, 1.0);
-    blurTemp = _Runtime.getIndex(__destructure0, 2.0);
+    mask = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
+    blurred = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
+    blurTemp = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
     _Runtime.callValue(applyGlEffectTintPass, cast ([state, src, mask, color, alpha, tintStrength] : Array<Dynamic>));
     _Runtime.callValue(applyGlEffectBoxBlur, cast ([state, mask, blurred, blurTemp, { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), passes: quality }] : Array<Dynamic>));
     _Runtime.callValue(clearGlRenderTarget, cast ([state, dst] : Array<Dynamic>));

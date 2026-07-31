@@ -31,12 +31,12 @@ class SurfaceAffine {
     sh = _Runtime.field(source, 'height');
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(dw, 0.0) : Bool) || (cast _Runtime.strictEquals(dh, 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(sw, 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(sh, 0.0) : Bool)) : Bool)) { return; }
     __destructure0 = matrix;
-    a = _Runtime.getIndex(__destructure0, 0.0);
-    b = _Runtime.getIndex(__destructure0, 1.0);
-    c = _Runtime.getIndex(__destructure0, 2.0);
-    d = _Runtime.getIndex(__destructure0, 3.0);
-    e = _Runtime.getIndex(__destructure0, 4.0);
-    f = _Runtime.getIndex(__destructure0, 5.0);
+    a = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
+    b = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
+    c = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
+    d = flighthq._internal._StaticIndex.readArray(__destructure0, 3.0);
+    e = flighthq._internal._StaticIndex.readArray(__destructure0, 4.0);
+    f = flighthq._internal._StaticIndex.readArray(__destructure0, 5.0);
     sd = _Runtime.field(source, 'surface').data;
     dd = _Runtime.field(dest, 'surface').data;
     sStride = _Runtime.field(source, 'surface').width;

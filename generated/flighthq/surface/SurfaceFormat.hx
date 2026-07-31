@@ -22,15 +22,15 @@ class SurfaceFormat {
       return;
     }
     __destructure0 = _Runtime.callValue(SurfaceFormat.channelOffsets__surfaceFormat, cast ([from] : Array<Dynamic>));
-    srcR = _Runtime.getIndex(__destructure0, 0.0);
-    srcG = _Runtime.getIndex(__destructure0, 1.0);
-    srcB = _Runtime.getIndex(__destructure0, 2.0);
-    srcA = _Runtime.getIndex(__destructure0, 3.0);
+    srcR = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
+    srcG = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
+    srcB = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
+    srcA = flighthq._internal._StaticIndex.readArray(__destructure0, 3.0);
     __destructure1 = _Runtime.callValue(SurfaceFormat.channelOffsets__surfaceFormat, cast ([to] : Array<Dynamic>));
-    dstR = _Runtime.getIndex(__destructure1, 0.0);
-    dstG = _Runtime.getIndex(__destructure1, 1.0);
-    dstB = _Runtime.getIndex(__destructure1, 2.0);
-    dstA = _Runtime.getIndex(__destructure1, 3.0);
+    dstR = flighthq._internal._StaticIndex.readArray(__destructure1, 0.0);
+    dstG = flighthq._internal._StaticIndex.readArray(__destructure1, 1.0);
+    dstB = flighthq._internal._StaticIndex.readArray(__destructure1, 2.0);
+    dstA = flighthq._internal._StaticIndex.readArray(__destructure1, 3.0);
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {

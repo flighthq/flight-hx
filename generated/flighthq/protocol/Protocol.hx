@@ -64,15 +64,15 @@ class Protocol {
     if (_Runtime.truthy(query)) {
       var entries:Dynamic = _Runtime.callProperty(flighthq._internal.DynamicObject.entries(query), 'filter', cast ([function(__parameter0:Dynamic) {
         var k:Dynamic = cast _Runtime.UNDEFINED;
-        k = _Runtime.getIndex(__parameter0, 0.0);
+        k = flighthq._internal._StaticIndex.readArray(__parameter0, 0.0);
         return cast ((cast _Runtime.field(k, 'length') : Float) > (cast 0.0 : Float));
       }] : Array<Dynamic>));
       if ((cast ((cast _Runtime.field(entries, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
         var qs:Dynamic = _Runtime.join(_Runtime.callProperty(entries, 'map', cast ([function(__parameter1:Dynamic) {
           var k:Dynamic = cast _Runtime.UNDEFINED;
           var v:Dynamic = cast _Runtime.UNDEFINED;
-          k = _Runtime.getIndex(__parameter1, 0.0);
-          v = _Runtime.getIndex(__parameter1, 1.0);
+          k = flighthq._internal._StaticIndex.readArray(__parameter1, 0.0);
+          v = flighthq._internal._StaticIndex.readArray(__parameter1, 1.0);
           return cast '' + Std.string(_Runtime.callValue(_Runtime.globalValue('encodeURIComponent'), cast ([k] : Array<Dynamic>))) + '=' + Std.string(_Runtime.callValue(_Runtime.globalValue('encodeURIComponent'), cast ([v] : Array<Dynamic>))) + '';
         }] : Array<Dynamic>)), '&');
         (url = cast ((url + '?' + Std.string(qs) + '') : Dynamic));

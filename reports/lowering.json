@@ -2883,7 +2883,7 @@
       }
     }
   ],
-  "schemaVersion": 7,
+  "schemaVersion": 8,
   "summary": {
     "declarations": 9122,
     "diagnostics": 0,
@@ -2909,16 +2909,19 @@
       },
       "destructuringReads": {
         "assignment": {
-          "eligible": 20,
-          "parked": 0
+          "direct": 20,
+          "parked": 0,
+          "proven": 20
         },
         "declaration": {
-          "eligible": 209,
-          "parked": 12
+          "direct": 209,
+          "parked": 12,
+          "proven": 209
         },
         "parameter": {
-          "eligible": 11,
-          "parked": 0
+          "direct": 11,
+          "parked": 0,
+          "proven": 11
         }
       },
       "destructuringReceivers": {
@@ -2984,12 +2987,12 @@
         }
       },
       "indexedAccesses": {
-        "reads": 4658,
+        "reads": 4898,
         "writes": 2930
       },
       "indexedReceivers": {
         "Array": {
-          "reads": 2615,
+          "reads": 2855,
           "writes": 453
         },
         "ArrayOrFloat32Array": {

@@ -1,6 +1,6 @@
 # Static Lowering Next Levers
 
-Status: the shared static-facts mechanism, primitive Boolean/numeric emission, the checker-proven indexed-access tranche, the emitter-known synthetic Array follow-up, and the storage-compatible part of the mixed-union follow-up are enabled. Destructuring source-receiver retention is audited but remains emission-neutral pending review. Review's Step 3 script benchmark was positive overall: camera2d stayed flat while particles improved 21% by median.
+Status: the shared static-facts mechanism, primitive Boolean/numeric emission, the checker-proven indexed-access tranche, the emitter-known synthetic Array follow-up, the storage-compatible part of the mixed-union follow-up, and the proven Array destructuring tranche are enabled. Review's Step 3 script benchmark was positive overall: camera2d stayed flat while particles improved 21% by median.
 
 This proposal covers two independent generator optimizations after typed-struct tranche 5:
 
@@ -87,7 +87,7 @@ Generation now emits `_StaticIndex` inline endpoints for the ten single-family a
 | `Uint8ClampedArray`        |          340 |           359 |       699 |
 | **Total**                  |    **4,658** |     **2,930** | **7,588** |
 
-The generated tree retains 646 `_Runtime.getIndex` and 126 `_Runtime.setIndex` calls. Checker-proven source facts account for 4,555 reads and 2,932 writes before final module/patch selection; exact final-output counters are authoritative and additionally include the 106 emitter-known reads below.
+The generated tree retains 406 `_Runtime.getIndex` and 126 `_Runtime.setIndex` calls. Checker-proven source facts account for 4,555 reads and 2,932 writes before final module/patch selection; exact final-output counters are authoritative and additionally include the 106 emitter-known reads and 240 direct destructuring reads below.
 
 Adversarial coverage includes all ten families, locally shadowed types, unconstrained and constrained generics, same-family and mixed-family unions, readonly wrappers, fractional keys, side-effecting receiver/key/value expressions, out-of-bounds reads, setter result identity, and signed/unsigned/clamped coercion. The endpoint smoke passes Eval, JavaScript, and Python. It also replaces fixed-width-shift coercion in the portable `Int8Array`/`Int16Array` fallbacks, which was incorrect on Python's unbounded integers.
 
@@ -103,16 +103,16 @@ The emitter now marks two Array sources it creates itself instead of routing the
 
 Both classes use `_StaticIndex.readArray` and contribute to the exact Array/direct-index totals above. Dedicated report counters keep them separate from checker-proven source expressions. Dictionary and presence-sensitive schemas are unchanged.
 
-## Audited destructuring source facts
+## Enabled Array destructuring reads
 
-Destructuring now retains a checker-proven source receiver in IR and records final-output counts with emission markers that are stripped before generated Haxe is written. This is analysis-only: every read still uses `_Runtime.getIndex`, and the generated-tree SHA-256 remains `55e27a2468b1090c8f893719c632ebfedf3c624b1cdc25e7b17be1105c1e17c2` before and after regeneration.
+Destructuring retains a checker-proven source receiver in IR and records final-output counts with emission markers that are stripped before generated Haxe is written. The exact 240 reads whose source is proven to use ordinary Array storage now call `_StaticIndex.readArray`; the generated-tree SHA-256 is `7fb39b6fb779838926fded9d2aa44ff31f2ca54f7778801660fa046c7ea9914f`.
 
-| Source shape | Retained `Array` reads | Parked reads |   Total |
-| ------------ | ---------------------: | -----------: | ------: |
-| Assignment   |                     20 |            0 |      20 |
-| Declaration  |                    209 |           12 |     221 |
-| Parameter    |                     11 |            0 |      11 |
-| **Total**    |                **240** |       **12** | **252** |
+| Source shape | Direct `Array` reads | Parked reads |   Total |
+| ------------ | -------------------: | -----------: | ------: |
+| Assignment   |                   20 |            0 |      20 |
+| Declaration  |                  209 |           12 |     221 |
+| Parameter    |                   11 |            0 |      11 |
+| **Total**    |              **240** |       **12** | **252** |
 
 The 12 parked reads are specialized regexp result arrays, kept outside the ordinary Array identity proof:
 
@@ -123,7 +123,7 @@ The 12 parked reads are specialized regexp result arrays, kept outside the ordin
 | `upstream/packages/spritesheet-formats/src/libgdxAtlasParse.ts:201`   | `RegExpMatchArray` |     2 |
 | `upstream/packages/spritesheet-formats/src/starlingParse.ts:101`      | `RegExpMatchArray` |     2 |
 
-The schema-v7 lowering report records both receiver/source-shape counts and parked reasons. Adversarial coverage keeps nullable sources, structural `ArrayLike` and dictionary shapes, heterogeneous storage unions, wider unions, and regexp result arrays dynamic. No direct destructuring endpoint is enabled without review.
+The schema-v8 lowering report records proven, direct, receiver/source-shape, and parked-reason counts. Adversarial coverage keeps non-Array proven storage families, nullable sources, structural `ArrayLike` and dictionary shapes, heterogeneous storage unions, wider unions, and regexp result arrays dynamic. This confines the approved endpoint to exact Array facts even if future upstream code adds other provable receiver families.
 
 ## Enabled storage-compatible mixed unions
 
@@ -181,6 +181,6 @@ Direct numeric relation preserves `NaN`, infinities, signed zero, evaluation ord
 3. Enable typed indexed endpoints for the ten single-family receiver bindings. Completed locally with exact generated counters and cross-target smoke coverage.
 4. Measure Step 3 in review's update-and-prepare benchmark against the new 8.8 ms baseline. Completed: camera2d was flat; particles improved from 35.0 to 42.9 median fps across five runs per side, a 21% gain with non-overlapping samples.
 5. Consider emitter-known synthetic arrays and homogeneous mixed typed-array unions only as separately audited follow-ups. The 106-read synthetic Array slice and 46 storage-compatible mixed-union operations are completed; 13 width-sensitive mixed writes remain explicitly parked.
-6. Retain and audit destructuring source receivers without changing emission. Completed: 240 `Array` reads are proven and 12 regexp-result reads remain explicitly parked; direct emission awaits review.
+6. Retain, audit, and directly emit exact Array destructuring sources. Completed: 240 `Array` reads use `_StaticIndex.readArray`, while 12 regexp-result reads remain explicitly parked and dynamic.
 
 Each enablement should retain exact generated coverage counters, analogous to typed-struct direct-emission coverage, so a checker or upstream drift cannot silently change the optimized surface.

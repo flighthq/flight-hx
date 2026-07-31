@@ -25,9 +25,9 @@ class FrustumCorners {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast 8.0 : Float)) : Bool)) {
         var __destructure0:Dynamic = flighthq._internal._StaticIndex.readArray(ndcCorners, i);
-        var nx:Dynamic = _Runtime.getIndex(__destructure0, 0.0);
-        var ny:Dynamic = _Runtime.getIndex(__destructure0, 1.0);
-        var nz:Dynamic = _Runtime.getIndex(__destructure0, 2.0);
+        var nx:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
+        var ny:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
+        var nz:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
         var wx:Dynamic = ((((flighthq._internal._StaticIndex.readFloat32Array(m, 0.0) * nx) + (flighthq._internal._StaticIndex.readFloat32Array(m, 4.0) * ny)) + (flighthq._internal._StaticIndex.readFloat32Array(m, 8.0) * nz)) + flighthq._internal._StaticIndex.readFloat32Array(m, 12.0));
         var wy:Dynamic = ((((flighthq._internal._StaticIndex.readFloat32Array(m, 1.0) * nx) + (flighthq._internal._StaticIndex.readFloat32Array(m, 5.0) * ny)) + (flighthq._internal._StaticIndex.readFloat32Array(m, 9.0) * nz)) + flighthq._internal._StaticIndex.readFloat32Array(m, 13.0));
         var wz:Dynamic = ((((flighthq._internal._StaticIndex.readFloat32Array(m, 2.0) * nx) + (flighthq._internal._StaticIndex.readFloat32Array(m, 6.0) * ny)) + (flighthq._internal._StaticIndex.readFloat32Array(m, 10.0) * nz)) + flighthq._internal._StaticIndex.readFloat32Array(m, 14.0));

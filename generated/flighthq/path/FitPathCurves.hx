@@ -147,8 +147,8 @@ class FitPathCurves {
       while ((cast ((cast iter : Float) <= (cast MAX_ITERATIONS : Float)) : Bool)) {
         var bezier:Dynamic = _Runtime.callValue(FitPathCurves.generateBezier__fitPathCurves, cast ([pts, first, last, u, tHat1, tHat2] : Array<Dynamic>));
         var __destructure0:Dynamic = _Runtime.callValue(FitPathCurves.computeMaxError__fitPathCurves, cast ([pts, first, last, bezier, u] : Array<Dynamic>));
-        var maxErr:Dynamic = _Runtime.getIndex(__destructure0, 0.0);
-        var splitPoint:Dynamic = _Runtime.getIndex(__destructure0, 1.0);
+        var maxErr:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
+        var splitPoint:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
         if ((cast ((cast maxErr : Float) < (cast toleranceSq : Float)) : Bool)) {
           _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.CUBIC_CURVE_TO] : Array<Dynamic>));
           _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([flighthq._internal._StaticIndex.readArray(bezier, 2.0), flighthq._internal._StaticIndex.readArray(bezier, 3.0), flighthq._internal._StaticIndex.readArray(bezier, 4.0), flighthq._internal._StaticIndex.readArray(bezier, 5.0), flighthq._internal._StaticIndex.readArray(bezier, 6.0), flighthq._internal._StaticIndex.readArray(bezier, 7.0)] : Array<Dynamic>));

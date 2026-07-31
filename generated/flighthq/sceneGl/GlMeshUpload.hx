@@ -142,9 +142,9 @@ class GlMeshUpload {
     location = _Runtime.getIndex(GlMeshUpload.ATTRIBUTE_LOCATION__glMeshUpload, attribute.semantic);
     if ((cast _Runtime.strictEquals(location, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     __destructure1 = _Runtime.callValue(GlMeshUpload.resolveGlVertexFormat__glMeshUpload, cast ([gl, attribute.format] : Array<Dynamic>));
-    size = _Runtime.getIndex(__destructure1, 0.0);
-    type = _Runtime.getIndex(__destructure1, 1.0);
-    normalized = _Runtime.getIndex(__destructure1, 2.0);
+    size = flighthq._internal._StaticIndex.readArray(__destructure1, 0.0);
+    type = flighthq._internal._StaticIndex.readArray(__destructure1, 1.0);
+    normalized = flighthq._internal._StaticIndex.readArray(__destructure1, 2.0);
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, location);
     if ((cast _Runtime.strictEquals(type, flighthq._internal.backend.WebGl2Backend.FLOAT) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, location, size, type, normalized, stride, attribute.byteOffset);

@@ -34,15 +34,15 @@ class SurfaceWarp {
     sh = _Runtime.field(source, 'height');
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(dw, 0.0) : Bool) || (cast _Runtime.strictEquals(dh, 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(sw, 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(sh, 0.0) : Bool)) : Bool)) { return; }
     __destructure0 = matrix;
-    m0 = _Runtime.getIndex(__destructure0, 0.0);
-    m1 = _Runtime.getIndex(__destructure0, 1.0);
-    m2 = _Runtime.getIndex(__destructure0, 2.0);
-    m3 = _Runtime.getIndex(__destructure0, 3.0);
-    m4 = _Runtime.getIndex(__destructure0, 4.0);
-    m5 = _Runtime.getIndex(__destructure0, 5.0);
-    m6 = _Runtime.getIndex(__destructure0, 6.0);
-    m7 = _Runtime.getIndex(__destructure0, 7.0);
-    m8 = _Runtime.getIndex(__destructure0, 8.0);
+    m0 = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
+    m1 = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
+    m2 = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
+    m3 = flighthq._internal._StaticIndex.readArray(__destructure0, 3.0);
+    m4 = flighthq._internal._StaticIndex.readArray(__destructure0, 4.0);
+    m5 = flighthq._internal._StaticIndex.readArray(__destructure0, 5.0);
+    m6 = flighthq._internal._StaticIndex.readArray(__destructure0, 6.0);
+    m7 = flighthq._internal._StaticIndex.readArray(__destructure0, 7.0);
+    m8 = flighthq._internal._StaticIndex.readArray(__destructure0, 8.0);
     sd = _Runtime.field(source, 'surface').data;
     dd = _Runtime.field(dest, 'surface').data;
     sStride = _Runtime.field(source, 'surface').width;
@@ -284,7 +284,7 @@ class SurfaceWarp {
           }
         }
         if ((cast ((cast maxVal : Float) < (cast 1e-12 : Float)) : Bool)) { return cast null; }
-        ({ var __destructure0:Dynamic = cast ([flighthq._internal._StaticIndex.readArray(aug, maxRow), flighthq._internal._StaticIndex.readArray(aug, col)] : Array<Dynamic>); _Runtime.setIndex(aug, col, _Runtime.getIndex(__destructure0, 0)); _Runtime.setIndex(aug, maxRow, _Runtime.getIndex(__destructure0, 1)); __destructure0; });
+        ({ var __destructure0:Dynamic = cast ([flighthq._internal._StaticIndex.readArray(aug, maxRow), flighthq._internal._StaticIndex.readArray(aug, col)] : Array<Dynamic>); _Runtime.setIndex(aug, col, flighthq._internal._StaticIndex.readArray(__destructure0, 0)); _Runtime.setIndex(aug, maxRow, flighthq._internal._StaticIndex.readArray(__destructure0, 1)); __destructure0; });
         var pivot:Dynamic = flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(aug, col), col);
         {
           var row:Dynamic = (col + 1.0);
@@ -337,15 +337,15 @@ class SurfaceWarp {
     var det:Dynamic = cast _Runtime.UNDEFINED;
     var invDet:Dynamic = cast _Runtime.UNDEFINED;
     __destructure1 = m;
-    a = _Runtime.getIndex(__destructure1, 0.0);
-    b = _Runtime.getIndex(__destructure1, 1.0);
-    c = _Runtime.getIndex(__destructure1, 2.0);
-    d = _Runtime.getIndex(__destructure1, 3.0);
-    e = _Runtime.getIndex(__destructure1, 4.0);
-    f = _Runtime.getIndex(__destructure1, 5.0);
-    g = _Runtime.getIndex(__destructure1, 6.0);
-    h = _Runtime.getIndex(__destructure1, 7.0);
-    k = _Runtime.getIndex(__destructure1, 8.0);
+    a = flighthq._internal._StaticIndex.readArray(__destructure1, 0.0);
+    b = flighthq._internal._StaticIndex.readArray(__destructure1, 1.0);
+    c = flighthq._internal._StaticIndex.readArray(__destructure1, 2.0);
+    d = flighthq._internal._StaticIndex.readArray(__destructure1, 3.0);
+    e = flighthq._internal._StaticIndex.readArray(__destructure1, 4.0);
+    f = flighthq._internal._StaticIndex.readArray(__destructure1, 5.0);
+    g = flighthq._internal._StaticIndex.readArray(__destructure1, 6.0);
+    h = flighthq._internal._StaticIndex.readArray(__destructure1, 7.0);
+    k = flighthq._internal._StaticIndex.readArray(__destructure1, 8.0);
     det = (((a * ((e * k) - (f * h))) - (b * ((d * k) - (f * g)))) + (c * ((d * h) - (e * g))));
     if ((cast ((cast HxMath.abs(det) : Float) < (cast 1e-12 : Float)) : Bool)) { return cast null; }
     invDet = (1.0 / det);

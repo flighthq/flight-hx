@@ -32,9 +32,9 @@ class WgpuEffectTintShader {
     var b:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     __destructure0 = _Runtime.callValue(WgpuEffectTintShader.packColor__wgpuEffectTintShader, cast ([color] : Array<Dynamic>));
-    r = _Runtime.getIndex(__destructure0, 0.0);
-    g = _Runtime.getIndex(__destructure0, 1.0);
-    b = _Runtime.getIndex(__destructure0, 2.0);
+    r = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
+    g = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
+    b = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
     pipeline = _Runtime.callValue(WgpuEffectTintShader.getWgpuInvertTintShader__wgpuEffectTintShader, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, source, dest, pipeline, function(f32:Dynamic) {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, r);
@@ -52,9 +52,9 @@ class WgpuEffectTintShader {
     var b:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     __destructure1 = _Runtime.callValue(WgpuEffectTintShader.packColor__wgpuEffectTintShader, cast ([color] : Array<Dynamic>));
-    r = _Runtime.getIndex(__destructure1, 0.0);
-    g = _Runtime.getIndex(__destructure1, 1.0);
-    b = _Runtime.getIndex(__destructure1, 2.0);
+    r = flighthq._internal._StaticIndex.readArray(__destructure1, 0.0);
+    g = flighthq._internal._StaticIndex.readArray(__destructure1, 1.0);
+    b = flighthq._internal._StaticIndex.readArray(__destructure1, 2.0);
     pipeline = _Runtime.callValue(WgpuEffectTintShader.getWgpuTintShader__wgpuEffectTintShader, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, source, dest, pipeline, function(f32:Dynamic) {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, r);

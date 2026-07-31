@@ -21,17 +21,19 @@
 | Proven indexed reads | 4555 |
 | Proven indexed writes | 2932 |
 | Parked width-sensitive mixed indexed writes | 13 |
-| Direct indexed reads | 4658 |
+| Direct indexed reads | 4898 |
 | Direct indexed writes | 2930 |
 | Direct synthetic iteration-binding Array reads | 79 |
 | Direct synthetic high-arity-argument Array reads | 27 |
 | Audited ordinary destructuring indexed reads | 252 |
 | Destructuring reads with retained receiver facts | 240 |
+| Direct destructuring Array reads | 240 |
+| Proven destructuring reads awaiting a direct endpoint | 0 |
 | Parked destructuring reads | 12 |
 
 | Indexed receiver | Proven expressions | Proven reads | Proven writes | Direct reads | Direct writes |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| `Array` | 2944 | 2512 | 455 | 2615 | 453 |
+| `Array` | 2944 | 2512 | 455 | 2855 | 453 |
 | `ArrayOrFloat32Array` | 19 | 4 | 15 | 4 | 15 |
 | `Float32Array` | 3307 | 1392 | 1979 | 1392 | 1979 |
 | `Float64Array` | 83 | 59 | 51 | 59 | 51 |
@@ -44,7 +46,13 @@
 | `Uint8Array` | 192 | 164 | 28 | 164 | 28 |
 | `Uint8ClampedArray` | 699 | 340 | 359 | 340 | 359 |
 
-| Destructuring receiver | Assignment reads | Declaration reads | Parameter reads | Total |
+| Destructuring emission | Assignment reads | Declaration reads | Parameter reads | Total |
+| --- | ---: | ---: | ---: | ---: |
+| Direct Array | 20 | 209 | 11 | 240 |
+| Proven, awaiting endpoint | 0 | 0 | 0 | 0 |
+| Parked | 0 | 12 | 0 | 12 |
+
+| Proven destructuring receiver | Assignment reads | Declaration reads | Parameter reads | Total |
 | --- | ---: | ---: | ---: | ---: |
 | <code>Array</code> | 20 | 209 | 11 | 240 |
 | <code>ArrayOrFloat32Array</code> | 0 | 0 | 0 | 0 |
@@ -58,7 +66,6 @@
 | <code>Uint32Array</code> | 0 | 0 | 0 | 0 |
 | <code>Uint8Array</code> | 0 | 0 | 0 | 0 |
 | <code>Uint8ClampedArray</code> | 0 | 0 | 0 | 0 |
-| Parked | 0 | 12 | 0 | 12 |
 
 | Destructuring parked reason | Assignment reads | Declaration reads | Parameter reads | Total |
 | --- | ---: | ---: | ---: | ---: |
