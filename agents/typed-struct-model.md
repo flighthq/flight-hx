@@ -1,6 +1,6 @@
 # Typed Struct Lowering Proposal
 
-Status: design approved; schema analysis, declaration-owned IR binding, and direct expression emission for 54 eligible schemas through migration tranches 1–3 are enabled. `Rectangle` remains dynamic because of presence-sensitive use.
+Status: design approved and implemented for 404 eligible canonical schemas. Schema analysis, declaration-owned IR binding, and direct expression emission are enabled; `Rectangle` remains dynamic because of presence-sensitive use. Class-layout emission remains an audited follow-up, not an enabled behavior.
 
 ## Goal
 
@@ -129,7 +129,7 @@ Basic direct reads and writes need no new runtime API. The complete model needs 
 
 `UNDEFINED` should not become a new native sentinel object as part of the first implementation. That would be a repository-wide semantic change and must be reviewed separately.
 
-After tranches 1–3 land and are measured, evaluate Haxe `@:structInit` classes for the leaf types as an hxcpp performance follow-up. Anonymous-structure access remains hash-based on hxcpp; semantic parity and alias preservation come first, so this is explicitly not part of the current implementation.
+The class-layout follow-up is now audited in [`typed-struct-class-design.md`](typed-struct-class-design.md) and the generated `reports/typed-struct-classes.{json,md}` census. It recommends a cpp-only `@:structInit` class allowlist beginning with clean required-field schemas. Anonymous-structure access remains hash-oriented on hxcpp; semantic parity and alias preservation still come first, and no class emission is currently enabled.
 
 ## Implementation and verification gates
 
@@ -143,4 +143,4 @@ Implementation should be split into reviewable phases:
 
 Every phase runs generator unit tests, `npm run generate:check`, `npm run test:haxe:all`, the portability matrix, and all 131 upstream Vitest suites. A tranche is incomplete if a migrated schema still reaches `_Runtime.field`, `_Runtime.setField`, or `_Runtime.hasField` at an allowlisted source site.
 
-The audit report is generated as `reports/typed-structs.json` with a compact review table in `reports/typed-structs.md`. It records canonical identities, field optionality/readonly/undefinedability, member-level escapes, bindable access counts, and source locations for every dynamic escape.
+The lowering audit report is generated as `reports/typed-structs.json` with a compact review table in `reports/typed-structs.md`. It records canonical identities, field optionality/readonly/undefinedability, member-level escapes, bindable access counts, and source locations for every dynamic escape. The separate class-feasibility census is generated as `reports/typed-struct-classes.json` and `reports/typed-struct-classes.md`.

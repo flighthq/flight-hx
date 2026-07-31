@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
+import type { TypedStructClassFeasibilityAudit } from '../analyze/typed-struct-classes.ts';
 import type { TypedStructAudit } from '../analyze/typed-structs.ts';
 import type { ApiReport, UpstreamInventory } from '../model/inventory.ts';
 import type { LoweringAudit } from '../analyze/lowering.ts';
@@ -205,6 +206,61 @@ export function typedStructSummary(audit: TypedStructAudit): string {
     for (const { candidate, escape } of memberEscapes) {
       lines.push(`| \`${candidate.id}\` | \`${escape.member}\` | \`${escape.reason}\` | \`${escape.source}\` |`);
     }
+  }
+  lines.push('');
+  return lines.join('\n');
+}
+
+export function typedStructClassFeasibilitySummary(audit: TypedStructClassFeasibilityAudit): string {
+  const summary = audit.summary;
+  const lines = [
+    '# Typed Struct Class Feasibility Audit',
+    '',
+    `Upstream commit: \`${audit.upstreamCommit}\``,
+    '',
+    'This is a construction, structural-flow, and observability census. It does not enable class emission.',
+    '',
+    '| Metric | Count |',
+    '| --- | ---: |',
+    `| Eligible canonical schemas | ${summary.schemas} |`,
+    `| Direct field accesses | ${summary.directAccesses} |`,
+    `| Declared optional fields | ${summary.optionalFields} |`,
+    `| Declared required-undefined fields | ${summary.requiredUndefinedFields} |`,
+    `| Production object literals | ${summary.objectLiterals} |`,
+    `| Production object literals omitting optional fields | ${summary.objectLiteralsOmittingOptionalFields} |`,
+    `| Production object literals with spread | ${summary.objectLiteralsWithSpread} |`,
+    `| Production object literals with computed keys | ${summary.objectLiteralsWithComputedKeys} |`,
+    `| Test object literals | ${summary.testObjectLiterals} |`,
+    `| Cross-schema transfers | ${summary.crossSchemaTransfers} |`,
+    `| Anonymous structural transfers | ${summary.anonymousStructuralTransfers} |`,
+    `| Dynamic ingresses | ${summary.dynamicIngresses} |`,
+    `| Production enumerations | ${summary.productionEnumerations} |`,
+    `| Production JSON serializations | ${summary.productionJsonSerializations} |`,
+    `| Production object rests | ${summary.productionObjectRests} |`,
+    `| Production object spreads | ${summary.productionObjectSpreads} |`,
+    `| Exported input signature references | ${summary.bridgeInputSignatures} |`,
+    `| Exported output signature references | ${summary.bridgeOutputSignatures} |`,
+    `| Vitest oracle observations | ${summary.oracleObservations} |`,
+    `| Mechanically compatible schemas | ${summary.mechanicallyCompatibleSchemas} |`,
+    `| Schemas requiring normalization | ${summary.normalizationRequiredSchemas} |`,
+    `| Schemas requiring observability review | ${summary.observabilityReviewSchemas} |`,
+    '',
+    'Counts below are per canonical schema. Exact source locations and related schema identities are in `typed-struct-classes.json`.',
+    '',
+    '| Candidate | Direct | Fields | Optional | Required undefined | Object literals | Plain | Literal spread | Computed | Optional omitted | Cross schema | Anonymous | Dynamic | Enumerate | JSON | Rest | Spread | Bridge in | Bridge out | Test literals | Oracle | Mechanical | Normalization | Observability |',
+    '| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | :---: | --- | --- |',
+  ];
+  for (const schema of audit.schemas) {
+    const oracle =
+      schema.oracle.enumerations +
+      schema.oracle.jsonSerializations +
+      schema.oracle.objectRests +
+      schema.oracle.objectSpreads +
+      schema.oracle.prototypeObservations +
+      schema.oracle.strictEqualityAssertions;
+    lines.push(
+      `| \`${schema.id}\` | ${schema.directAccesses} | ${schema.fields.total} | ${schema.fields.optional} | ${schema.fields.requiredUndefined} | ${schema.construction.objectLiterals} | ${schema.construction.plainObjectLiterals} | ${schema.construction.objectLiteralsWithSpread} | ${schema.construction.computedObjectLiterals} | ${schema.construction.objectLiteralsOmittingOptionalFields} | ${schema.production.crossSchemaTransfers} | ${schema.production.anonymousStructuralTransfers} | ${schema.production.dynamicIngresses} | ${schema.production.enumerations} | ${schema.production.jsonSerializations} | ${schema.production.objectRests} | ${schema.production.objectSpreads} | ${schema.bridge.inputSignatures} | ${schema.bridge.outputSignatures} | ${schema.construction.testObjectLiterals} | ${oracle} | ${schema.migration.mechanicallyCompatible ? 'yes' : 'no'} | ${schema.migration.normalizationReasons.length > 0 ? schema.migration.normalizationReasons.map((reason) => `\`${reason}\``).join(', ') : '—'} | ${schema.migration.observabilityReasons.length > 0 ? schema.migration.observabilityReasons.map((reason) => `\`${reason}\``).join(', ') : '—'} |`,
+    );
   }
   lines.push('');
   return lines.join('\n');

@@ -1,6 +1,7 @@
 import path from 'node:path';
 import ts from 'typescript';
 
+import { auditTypedStructClassFeasibility } from '../../tools/generator/src/analyze/typed-struct-classes.ts';
 import {
   createTypedStructRegistry,
   tranche6aDirectTypedStructIds,
@@ -11,7 +12,7 @@ import {
 } from '../../tools/generator/src/analyze/typed-structs.ts';
 import { upstreamTypeScriptProgram } from '../../tools/generator/src/analyze/program.ts';
 import { emitHaxeModule } from '../../tools/generator/src/emit/haxe.ts';
-import { typedStructSummary } from '../../tools/generator/src/emit/reports.ts';
+import { typedStructClassFeasibilitySummary, typedStructSummary } from '../../tools/generator/src/emit/reports.ts';
 import { lowerTypeScriptSource } from '../../tools/generator/src/lower/typescript.ts';
 import type { IrExpression, IrTypedStructBinding } from '../../tools/generator/src/model/ir.ts';
 
@@ -24,6 +25,127 @@ const fixtureCandidate: TypedStructCandidate = {
 };
 
 describe('typed struct analysis', () => {
+  it('censuses class migration flows and observability by canonical schema', () => {
+    const audit = classAuditFixture(
+      `
+        export interface A { x: number; y?: number; }
+        export interface B { x: number; y?: number; }
+        declare const dynamicValue: any;
+        const inferred = { x: 3 };
+        const key = 'x' as const;
+        const plain: A = { x: 1 };
+        const spread: A = { ...plain };
+        const computed: A = { [key]: 4 };
+        const typedB: B = { x: 2 };
+        const cross: A = typedB;
+        const dynamicIngress: A = dynamicValue;
+        const anonymous: A = inferred;
+        const incompatibleUnion: A | { label: string } = { x: 9 };
+        export function exercise(value: A): A {
+          Object.keys(value);
+          JSON.stringify(value);
+          const copy = { ...value };
+          const { x, ...rest } = value;
+          return value;
+        }
+      `,
+      `
+        import type { A } from '../src/Vector2';
+        declare function expect(value: unknown): { toStrictEqual(expected: unknown): void };
+        declare const value: A;
+        const fixture: A = { x: 1 };
+        Object.keys(value);
+        JSON.stringify(value);
+        const copy = { ...value };
+        const { x, ...rest } = value;
+        value.constructor;
+        expect(value).toStrictEqual({ x: 1 });
+      `,
+    );
+    const a = audit.schemas.find((schema) => schema.name === 'A');
+    const b = audit.schemas.find((schema) => schema.name === 'B');
+
+    expect(a).toMatchObject({
+      bridge: { inputSignatures: 1, outputSignatures: 1 },
+      construction: {
+        computedObjectLiterals: 1,
+        objectLiterals: 3,
+        objectLiteralsOmittingOptionalFields: 2,
+        objectLiteralsWithSpread: 1,
+        plainObjectLiterals: 1,
+        testObjectLiterals: 1,
+      },
+      fields: { optional: 1, requiredUndefined: 0, total: 2 },
+      migration: {
+        mechanicallyCompatible: false,
+        normalizationReasons: [
+          'anonymous-structural-transfer',
+          'cross-schema-transfer',
+          'dynamic-ingress',
+          'object-literal-computed',
+          'object-literal-spread',
+        ],
+        observabilityReasons: [
+          'enumeration',
+          'json-serialization',
+          'object-rest',
+          'object-spread',
+          'optional-omission',
+          'prototype-observation',
+          'strict-equality',
+        ],
+      },
+      oracle: {
+        enumerations: 1,
+        jsonSerializations: 1,
+        objectRests: 1,
+        objectSpreads: 1,
+        prototypeObservations: 1,
+        strictEqualityAssertions: 1,
+      },
+      production: {
+        anonymousStructuralTransfers: 1,
+        crossSchemaTransfers: 1,
+        dynamicIngresses: 1,
+        enumerations: 1,
+        jsonSerializations: 1,
+        objectRests: 1,
+        objectSpreads: 2,
+      },
+    });
+    expect(b).toMatchObject({
+      construction: {
+        objectLiterals: 1,
+        objectLiteralsOmittingOptionalFields: 1,
+        plainObjectLiterals: 1,
+      },
+      migration: { mechanicallyCompatible: true, normalizationReasons: [] },
+    });
+    expect(a?.sites).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ kind: 'cross-schema-transfer', relatedSchemaIds: [b?.id] }),
+        expect.objectContaining({ kind: 'prototype-observation', scope: 'test' }),
+      ]),
+    );
+    expect(audit.summary).toMatchObject({
+      anonymousStructuralTransfers: 1,
+      bridgeInputSignatures: 1,
+      bridgeOutputSignatures: 1,
+      crossSchemaTransfers: 1,
+      dynamicIngresses: 1,
+      mechanicallyCompatibleSchemas: 1,
+      normalizationRequiredSchemas: 1,
+      objectLiterals: 4,
+      objectLiteralsOmittingOptionalFields: 3,
+      objectLiteralsWithComputedKeys: 1,
+      objectLiteralsWithSpread: 1,
+      oracleObservations: 6,
+      schemas: 2,
+      testObjectLiterals: 1,
+    });
+    expect(typedStructClassFeasibilitySummary(audit)).toContain('| Eligible canonical schemas | 2 |');
+  });
+
   it('enables the reviewed tranche-six allowlist while leaving ineligible Rectangle parked', () => {
     const workspace = path.resolve('.');
     const programAndChecker = upstreamTypeScriptProgram(workspace);
@@ -474,6 +596,55 @@ function lowerFixture(text: string, candidate: TypedStructCandidate = fixtureCan
     lowered: lowerTypeScriptSource(source, '@flighthq/types', workspace, checker, registry),
     registry,
   };
+}
+
+function classAuditFixture(productionText: string, testText: string) {
+  const workspace = '/workspace';
+  const source = 'upstream/packages/types/src/Vector2.ts';
+  const productionFile = `${workspace}/${source}`;
+  const testFile = `${workspace}/upstream/packages/types/test/Vector2.test.ts`;
+  const options: ts.CompilerOptions = {
+    lib: ['lib.es2022.d.ts'],
+    module: ts.ModuleKind.ESNext,
+    moduleResolution: ts.ModuleResolutionKind.Bundler,
+    skipLibCheck: true,
+    strict: true,
+    target: ts.ScriptTarget.ESNext,
+  };
+  const fixtures = new Map([
+    [
+      productionFile,
+      ts.createSourceFile(productionFile, productionText, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS),
+    ],
+    [testFile, ts.createSourceFile(testFile, testText, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS)],
+  ]);
+  const host = ts.createCompilerHost(options);
+  const directoryExists = host.directoryExists?.bind(host);
+  const fileExists = host.fileExists.bind(host);
+  const getSourceFile = host.getSourceFile.bind(host);
+  const readFile = host.readFile.bind(host);
+  host.fileExists = (requested) => fixtures.has(requested) || fileExists(requested);
+  host.directoryExists = (requested) => requested.startsWith(`${workspace}/`) || directoryExists?.(requested) === true;
+  host.readFile = (requested) => fixtures.get(requested)?.text ?? readFile(requested);
+  host.getSourceFile = (requested, languageVersion, onError, shouldCreateNewSourceFile) =>
+    fixtures.get(requested) ?? getSourceFile(requested, languageVersion, onError, shouldCreateNewSourceFile);
+  const program = ts.createProgram([...fixtures.keys()], options, host);
+  const diagnostics = program.getSemanticDiagnostics();
+  if (diagnostics.length > 0) {
+    throw new Error(
+      diagnostics.map((diagnostic) => ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n')).join('\n'),
+    );
+  }
+  const checker = program.getTypeChecker();
+  const candidates: TypedStructCandidate[] = ['A', 'B'].map((name) => ({
+    emission: 'direct',
+    name,
+    packageName: '@flighthq/types',
+    purpose: 'class audit fixture',
+    source,
+  }));
+  const registry = createTypedStructRegistry(workspace, 'fixture', candidates, program, checker);
+  return auditTypedStructClassFeasibility(workspace, 'fixture', registry, { checker, program });
 }
 
 function candidateId(candidate: TypedStructCandidate): string {

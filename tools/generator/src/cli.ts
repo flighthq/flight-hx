@@ -4,6 +4,7 @@ import path from 'node:path';
 import { portConfig } from '../port.config.ts';
 import { analyzeUpstream } from './analyze/inventory.ts';
 import { auditLowering } from './analyze/lowering.ts';
+import { auditTypedStructClassFeasibility } from './analyze/typed-struct-classes.ts';
 import { typedStructRegistry } from './analyze/typed-structs.ts';
 import { generateCoreModules } from './emit/core.ts';
 import {
@@ -11,6 +12,7 @@ import {
   inventorySummary,
   loweringSummary,
   stableJson,
+  typedStructClassFeasibilitySummary,
   typedStructSummary,
   writeOrCheck,
 } from './emit/reports.ts';
@@ -25,6 +27,10 @@ const reportsDirectory = path.join(workspaceDirectory, portConfig.reportsDirecto
 try {
   const inventory = analyzeUpstream(workspaceDirectory);
   const typedStructs = apiOnly ? undefined : typedStructRegistry(workspaceDirectory, inventory.upstreamCommit);
+  const typedStructClasses =
+    apiOnly || !typedStructs
+      ? undefined
+      : auditTypedStructClassFeasibility(workspaceDirectory, inventory.upstreamCommit, typedStructs);
   const lowering = apiOnly ? undefined : auditLowering(workspaceDirectory, typedStructs);
   const api = createApiReport(inventory);
 
@@ -46,6 +52,13 @@ try {
       if (!typedStructs) throw new Error('Expected typed-struct audit');
       writeOrCheck(path.join(reportsDirectory, 'typed-structs.json'), stableJson(typedStructs.report), check);
       writeOrCheck(path.join(reportsDirectory, 'typed-structs.md'), typedStructSummary(typedStructs.report), check);
+      if (!typedStructClasses) throw new Error('Expected typed-struct class-feasibility audit');
+      writeOrCheck(path.join(reportsDirectory, 'typed-struct-classes.json'), stableJson(typedStructClasses), check);
+      writeOrCheck(
+        path.join(reportsDirectory, 'typed-struct-classes.md'),
+        typedStructClassFeasibilitySummary(typedStructClasses),
+        check,
+      );
     }
     writeOrCheck(path.join(reportsDirectory, 'api.json'), stableJson(api), check);
     process.stdout.write(
