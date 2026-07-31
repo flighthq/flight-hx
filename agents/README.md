@@ -8,6 +8,8 @@ This directory records the durable design and execution context for the Flight H
 - [`quality.md`](quality.md): implemented npm scripts, checks, test layers, and completion gates.
 - [`non-html5.md`](non-html5.md): verified cross-target compile status and remaining native Lime renderer boundaries.
 - [`typed-struct-model.md`](typed-struct-model.md): approved direct structural field-lowering model, audit gates, and optional/dynamic escape semantics.
+- [`typed-struct-class-design.md`](typed-struct-class-design.md): cpp target-conditional class feasibility, census, migration gates, and benchmark policy.
+- [`typed-struct-optional-policy.md`](typed-struct-optional-policy.md): Gate-6 constructor, absence, nominal-provenance, and staging policy for optional/undefined schemas.
 - [`plan.md`](plan.md): completed implementation phases and the upstream-update workflow.
 - [`status.md`](status.md): current decisions, verified state, prerequisites, and release decisions.
 - [`flight-port-core.md`](flight-port-core.md): plan to extract the language-neutral kernel into a shared core with Haxe and Rust emitters over one oracle.

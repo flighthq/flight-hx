@@ -108,7 +108,7 @@ The 55 dynamic ingresses across eight schemas require the existing typed-struct 
 
 ### Optional fields and observation
 
-An optional constructor parameter can make `@:structInit` accept an omitted argument, but a native class field still exists after construction. That is not the same model as an absent JavaScript own property. The 86 actual omissions across 21 schemas are therefore an observability gate. The one required-undefined field, `ResourceLoadReport.error`, must remain a required nullable constructor argument; it must not silently become optional.
+An optional constructor parameter can make `@:structInit` accept an omitted argument, but a native class field still exists after construction. That is not the same model as an absent JavaScript own property. The 86 actual omissions across 21 schemas are therefore an observability gate. The one required-undefined field, `ResourceLoadReport.group`, must remain a required nullable constructor argument; it must not silently become optional.
 
 On cpp, Flight already collapses much of absent/`undefined` behavior to `null`, but serialization, enumeration, and spread can still reveal field presence. Optional class migration needs target-specific tests for omission, explicit `undefined`, `null`, JSON, and copy/spread behavior before it joins the allowlist.
 
@@ -143,7 +143,7 @@ The Linux missing-shapes/text defect is outside this design. It was traced indep
 3. Require unchanged JS generation and upstream Vitest results, cpp compile/portable tests, and a camera2d cpp benchmark against the same renderer, build mode, frame count, and machine.
 4. Add `ParticleEmitterData` and `ParticleEmitterState`; benchmark particles and record allocation as well as frame time.
 5. Expand to the 199 clean required-field schemas only through reviewed allowlist diffs. Compile success is necessary but not sufficient; preserve mutation and reference identity.
-6. Define optional-field constructor/default semantics, then consider the remaining 92 clean schemas.
+6. Apply the constructor/default, absence, and provenance policy in [`typed-struct-optional-policy.md`](typed-struct-optional-policy.md), then consider reviewed subsets of the remaining 92 clean schemas. The current direct-site filter is not sufficient for bulk enablement.
 7. Resolve the itemized normalization and observability sites before enabling any of the remaining schemas. Never replace normalization with an unchecked native cast.
 8. After hxcpp results are positive, try the identical reviewed allowlist on Neko behind a separate condition and CPU-only benchmark. Keep it target-disabled if it does not earn its complexity.
 
