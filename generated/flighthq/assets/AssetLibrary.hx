@@ -68,8 +68,8 @@ class AssetLibrary {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = library.runtime;
     for (__iteration0 in _Runtime.iterable(runtime.entries)) {
-      var id:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
-      var entry:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
+      var id:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+      var entry:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
       if ((cast !(cast entry.resident : Bool) : Bool)) { continue; }
       var descriptor:Dynamic = ((cast runtime.descriptors : flighthq._internal._Map).get(id));
       var adapter:Dynamic = ((cast !_Runtime.strictEquals(descriptor, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast ((cast runtime.adapters : flighthq._internal._Map).get(descriptor.type)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));

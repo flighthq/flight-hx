@@ -99,6 +99,7 @@ type IrExpressionNode =
       object: IrExpression;
       index: IrExpression;
       optional?: boolean | undefined;
+      syntheticArrayRead?: 'iterationBinding' | undefined;
       webGlComputedDomain?: 'GlBlendEquation' | 'GlBlendFactor' | undefined;
     }
   | {
@@ -357,4 +358,8 @@ export interface StaticLoweringEmissionCounts {
     }
   >;
   numericRelations: number;
+  syntheticArrayReads: {
+    highArityArguments: number;
+    iterationBindings: number;
+  };
 }

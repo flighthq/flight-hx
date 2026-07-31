@@ -62,8 +62,8 @@ class AsepriteParse {
       }
     } else {
       for (__iteration0 in _Runtime.iterable(flighthq._internal.DynamicObject.entries(_Runtime.field(doc, 'frames')))) {
-        var name:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
-        var entry:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
+        var name:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+        var entry:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
         ((cast durationMap : flighthq._internal._Map).set(name, entry.duration));
       }
     }

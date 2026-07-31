@@ -410,8 +410,8 @@ class Notification {
       }
     }, closeAllNotifications: function() {
       for (__iteration0 in _Runtime.iterable(_live)) {
-        var id:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
-        var n:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
+        var id:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+        var n:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
         try {
           _Runtime.callProperty(n, 'close', cast ([] : Array<Dynamic>));
         } catch (__error:Dynamic) {

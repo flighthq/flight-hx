@@ -93,8 +93,8 @@ class CocosPlistParse {
     if ((cast _Runtime.strictEquals(({ final __typedStruct7 = framesEl; __typedStruct7 == null ? _Runtime.UNDEFINED : __typedStruct7.name; }), 'dict') : Bool)) {
       var framesMap:Dynamic = _Runtime.callValue(CocosPlistParse.dictToMap__cocosPlistParse, cast ([framesEl] : Array<Dynamic>));
       for (__iteration0 in _Runtime.iterable(framesMap)) {
-        var frameName:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
-        var frameEl:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
+        var frameName:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+        var frameEl:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
         if ((cast !_Runtime.strictEquals(frameEl.name, 'dict') : Bool)) { continue; }
         var fm:Dynamic = _Runtime.callValue(CocosPlistParse.dictToMap__cocosPlistParse, cast ([frameEl] : Array<Dynamic>));
         var hasSpriteFields:Dynamic = ((cast fm : flighthq._internal._Map).has('spriteOffset'));

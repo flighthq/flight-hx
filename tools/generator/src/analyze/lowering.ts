@@ -24,7 +24,7 @@ export interface PackageLoweringAudit {
 
 export interface LoweringAudit {
   packages: PackageLoweringAudit[];
-  schemaVersion: 4;
+  schemaVersion: 5;
   summary: {
     declarations: number;
     diagnostics: number;
@@ -53,7 +53,7 @@ export function auditLowering(workspaceDirectory: string, typedStructs?: TypedSt
 
   return {
     packages,
-    schemaVersion: 4,
+    schemaVersion: 5,
     summary: {
       declarations: sum(packages, (item) => item.declarations),
       diagnostics: sum(packages, (item) => item.diagnostics.length),
@@ -73,6 +73,10 @@ export function auditLowering(workspaceDirectory: string, typedStructs?: TypedSt
           indexedReceiverNames.map((receiver) => [receiver, { reads: 0, writes: 0 }]),
         ) as StaticLoweringEmissionCounts['indexedReceivers'],
         numericRelations: 0,
+        syntheticArrayReads: {
+          highArityArguments: 0,
+          iterationBindings: 0,
+        },
       },
       staticFacts: sumStaticFactAudits(results.map((result) => result.staticFacts)),
     },

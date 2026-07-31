@@ -50,8 +50,8 @@ class ResolveSceneResources {
 
   public static function cancelDroppedResolutions__resolveSceneResources(resolver:SceneResourceResolver, working:Dynamic):Void {
     for (__iteration0 in _Runtime.iterable(resolver.inFlight)) {
-      var texture:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
-      var entry:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
+      var texture:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+      var entry:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
       if ((cast ((cast working : flighthq._internal._Set).has(texture)) : Bool)) { continue; }
       _Runtime.callProperty(entry.controller, 'abort', cast ([] : Array<Dynamic>));
       ((cast resolver.inFlight : flighthq._internal._Map).delete_(texture));

@@ -90,8 +90,8 @@ class StarlingParse {
     }
     animations = cast ([] : Array<Dynamic>);
     for (__iteration1 in _Runtime.iterable(groups)) {
-      var base:Dynamic = _Runtime.getIndex(__iteration1, 0.0);
-      var entries:Dynamic = _Runtime.getIndex(__iteration1, 1.0);
+      var base:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
+      var entries:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
       if ((cast ((cast _Runtime.field(entries, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
       _Runtime.sortAndReturn(entries, function(a:Dynamic, b:Dynamic) return (_Runtime.field(a, 'index') - _Runtime.field(b, 'index')));
       _Runtime.callProperty(animations, 'push', cast ([_Runtime.callValue(createSpritesheetAnimationData, cast ([{ frameDuration: frameDuration, frameNames: _Runtime.callProperty(entries, 'map', cast ([function(e:Dynamic) return _Runtime.field(e, 'name')] : Array<Dynamic>)), loop: true, name: base }] : Array<Dynamic>))] : Array<Dynamic>));

@@ -14,8 +14,8 @@ typedef ParticleFormatCodec = { var detect:Dynamic; var parseToConfig:Dynamic; v
 class FormatRegistry {
   public static function detectRegisteredParticleFormat(text:String):Null<String> {
     for (__iteration0 in _Runtime.iterable(FormatRegistry._registry__formatRegistry)) {
-      var kind:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
-      var codec:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
+      var kind:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+      var codec:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
       try {
         if ((cast _Runtime.callProperty(codec, 'detect', cast ([text] : Array<Dynamic>)) : Bool)) { return cast kind; }
       } catch (__error:Dynamic) {

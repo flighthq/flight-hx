@@ -47,8 +47,8 @@ class Log {
     if ((cast _Runtime.strictEquals((cast Log._serializers__log : flighthq._internal._Map).size, 0.0) : Bool)) { return cast data; }
     result = {  };
     for (__iteration10 in _Runtime.iterable(flighthq._internal.DynamicObject.entries(data))) {
-      var key:Dynamic = _Runtime.getIndex(__iteration10, 0.0);
-      var value:Dynamic = _Runtime.getIndex(__iteration10, 1.0);
+      var key:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration10, 0.0);
+      var value:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration10, 1.0);
       if ((cast ((cast ((cast ((cast !_Runtime.strictEquals(value, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'object') : Bool)) : Bool) && (cast _Runtime.hasField(value, '__kind') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast value : Dynamic), '__kind')), 'string') : Bool)) : Bool)) {
         var kind:Dynamic = (cast _Runtime.field((cast value : Dynamic), '__kind') : String);
         var fn:Dynamic = ((cast Log._serializers__log : flighthq._internal._Map).get(kind));

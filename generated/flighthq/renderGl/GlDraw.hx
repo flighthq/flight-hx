@@ -177,8 +177,8 @@ class GlDraw {
 
   public static function registerDefaultGlBlendModes(state:GlRenderState):Void {
     for (__iteration1 in _Runtime.iterable(GlDraw.DEFAULT_GL_BLEND_MODES__glDraw)) {
-      var mode:Dynamic = _Runtime.getIndex(__iteration1, 0.0);
-      var realization:Dynamic = _Runtime.getIndex(__iteration1, 1.0);
+      var mode:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
+      var realization:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
       _Runtime.callValue(registerGlBlendMode, cast ([state, mode, realization] : Array<Dynamic>));
     }
   }

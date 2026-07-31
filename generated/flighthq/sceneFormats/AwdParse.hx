@@ -196,8 +196,8 @@ class AwdParse {
       }
     }
     for (__iteration0 in _Runtime.iterable(containerBlocks)) {
-      var blockId:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
-      var container:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
+      var blockId:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+      var container:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
       var node:Dynamic = _Runtime.callValue(createSceneNode, cast ([_Runtime.field(_Runtime, 'UNDEFINED'), { name: _Runtime.orValue(_Runtime.field(container, 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) }] : Array<Dynamic>));
       _Runtime.callValue(AwdParse.applyAwdTransform__awdParse, cast ([node, _Runtime.field(container, 'transform')] : Array<Dynamic>));
       ((cast sceneNodes : flighthq._internal._Map).set(blockId, node));
@@ -211,8 +211,8 @@ class AwdParse {
       return cast ((cast !_Runtime.strictEquals(material, null) : Bool) ? (cast cast ([material] : Array<Dynamic>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
     };
     for (__iteration1 in _Runtime.iterable(meshInstanceBlocks)) {
-      var blockId:Dynamic = _Runtime.getIndex(__iteration1, 0.0);
-      var meshInst:Dynamic = _Runtime.getIndex(__iteration1, 1.0);
+      var blockId:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
+      var meshInst:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
       var geometries:Dynamic = ((cast geometryBlocks : flighthq._internal._Map).get(_Runtime.field(meshInst, 'geometryId')));
       var node:SceneNode = cast _Runtime.UNDEFINED;
       if ((cast ((cast !_Runtime.strictEquals(geometries, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(geometries, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
@@ -243,8 +243,8 @@ class AwdParse {
     }
     parented = _Runtime.construct(_Runtime.globalValue('Set'), []);
     for (__iteration2 in _Runtime.iterable(containerBlocks)) {
-      var blockId:Dynamic = _Runtime.getIndex(__iteration2, 0.0);
-      var container:Dynamic = _Runtime.getIndex(__iteration2, 1.0);
+      var blockId:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration2, 0.0);
+      var container:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration2, 1.0);
       if ((cast !_Runtime.strictEquals(_Runtime.field(container, 'parentId'), 0.0) : Bool)) {
         var parent:Dynamic = ((cast sceneNodes : flighthq._internal._Map).get(_Runtime.field(container, 'parentId')));
         if ((cast !_Runtime.strictEquals(parent, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
@@ -254,8 +254,8 @@ class AwdParse {
       }
     }
     for (__iteration3 in _Runtime.iterable(meshInstanceBlocks)) {
-      var blockId:Dynamic = _Runtime.getIndex(__iteration3, 0.0);
-      var meshInst:Dynamic = _Runtime.getIndex(__iteration3, 1.0);
+      var blockId:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration3, 0.0);
+      var meshInst:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration3, 1.0);
       if ((cast !_Runtime.strictEquals(_Runtime.field(meshInst, 'parentId'), 0.0) : Bool)) {
         var parent:Dynamic = ((cast sceneNodes : flighthq._internal._Map).get(_Runtime.field(meshInst, 'parentId')));
         if ((cast !_Runtime.strictEquals(parent, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
@@ -265,8 +265,8 @@ class AwdParse {
       }
     }
     for (__iteration4 in _Runtime.iterable(sceneNodes)) {
-      var blockId:Dynamic = _Runtime.getIndex(__iteration4, 0.0);
-      var node:Dynamic = _Runtime.getIndex(__iteration4, 1.0);
+      var blockId:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration4, 0.0);
+      var node:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration4, 1.0);
       if ((cast !(cast ((cast parented : flighthq._internal._Set).has(blockId)) : Bool) : Bool)) {
         _Runtime.callValue(addNodeChild, cast ([scene.root, node] : Array<Dynamic>));
       }

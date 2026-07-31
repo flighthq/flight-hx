@@ -200,8 +200,8 @@ class UnityParse {
     var bursts:Dynamic = cast _Runtime.UNDEFINED;
     warnings = cast ([] : Array<Dynamic>);
     for (__iteration0 in _Runtime.iterable(UnityParse.UNSUPPORTED_UNITY_MODULES__unityParse)) {
-      var key:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
-      var label:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
+      var key:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+      var label:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
       var mod:Dynamic = _Runtime.getIndex(raw, key);
       if ((cast ((cast ((cast !_Runtime.looseEquals(mod, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(mod), 'object') : Bool)) : Bool) && (cast _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.field((cast mod : Dynamic), 'enabled'), false] : Array<Dynamic>)) : Bool)) : Bool)) {
         _Runtime.callProperty(warnings, 'push', cast (['Unity ' + Std.string(label) + ' module is not supported and was ignored'] : Array<Dynamic>));
