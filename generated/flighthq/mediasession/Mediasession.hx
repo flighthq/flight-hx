@@ -66,8 +66,8 @@ class Mediasession {
   }
 
   public static function getWebMediaSession__mediasession():Null<MediaSession> {
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) || (cast !(cast _Runtime.hasField(_Runtime.globalValue('navigator'), 'mediaSession') : Bool) : Bool)) : Bool)) { return cast null; }
-    return cast flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'mediaSession');
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'mediaSession') : Bool) : Bool)) : Bool)) { return cast null; }
+    return cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'mediaSession');
     return cast null;
   }
 

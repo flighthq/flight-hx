@@ -75,11 +75,11 @@ class DomTextInput {
     var style:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) { return; }
     id = 'flight-caret-blink-style';
-    if (_Runtime.truthy(flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'getElementById', cast ([id] : Array<Dynamic>)))) { return; }
-    style = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['style'] : Array<Dynamic>));
+    if (_Runtime.truthy(flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'getElementById', cast ([id] : Array<Dynamic>)))) { return; }
+    style = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['style'] : Array<Dynamic>));
     _Runtime.setField(style, 'id', id);
     _Runtime.setField(style, 'textContent', '@keyframes flight-caret-blink{0%,100%{opacity:1}50%{opacity:0}}');
-    _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'head'), 'appendChild', cast ([style] : Array<Dynamic>));
+    _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'head'), 'appendChild', cast ([style] : Array<Dynamic>));
   }
 
   public static final caretRectangle__domTextInput:Dynamic = { height: 0.0, lineIndex: 0.0, width: 0.0, x: 0.0, y: 0.0 };

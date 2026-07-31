@@ -106,7 +106,7 @@ class Keyboard {
         _Runtime.callProperty(virtualKeyboard, 'addEventListener', cast (['geometrychange', fire] : Array<Dynamic>));
         return cast function() return _Runtime.callProperty(virtualKeyboard, 'removeEventListener', cast (['geometrychange', fire] : Array<Dynamic>));
       }
-      viewport = flighthq._internal.backend.DomWindowBackend.field(_Runtime.globalValue('window'), 'visualViewport');
+      viewport = flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'visualViewport');
       if ((cast ((cast _Runtime.strictEquals(viewport, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(viewport, null) : Bool)) : Bool)) { return cast function() {
       
       }; }
@@ -171,7 +171,7 @@ class Keyboard {
   public static function getVirtualKeyboard__keyboard():Null<VirtualKeyboard__keyboard> {
     var nav:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool)) { return cast null; }
-    nav = (cast _Runtime.globalValue('navigator') : { @:optional var virtualKeyboard:VirtualKeyboard__keyboard; });
+    nav = (cast flighthq._internal.backend.DomNavigatorBackend.value() : { @:optional var virtualKeyboard:VirtualKeyboard__keyboard; });
     return cast _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(nav, 'virtualKeyboard'), function():Dynamic return cast null);
     return cast null;
   }
@@ -189,11 +189,11 @@ class Keyboard {
       var rect:Dynamic = _Runtime.field(vk, 'boundingRect');
       return cast { height: _Runtime.field(rect, 'height'), width: _Runtime.field(rect, 'width'), x: _Runtime.field(rect, 'x'), y: _Runtime.field(rect, 'y') };
     }
-    viewport = flighthq._internal.backend.DomWindowBackend.field(_Runtime.globalValue('window'), 'visualViewport');
+    viewport = flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'visualViewport');
     if ((cast ((cast _Runtime.strictEquals(viewport, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(viewport, null) : Bool)) : Bool)) { return cast { height: 0.0, width: 0.0, x: 0.0, y: 0.0 }; }
-    shrink = (flighthq._internal.backend.DomWindowBackend.field(_Runtime.globalValue('window'), 'innerHeight') - _Runtime.field(viewport, 'height'));
+    shrink = (flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'innerHeight') - _Runtime.field(viewport, 'height'));
     height = ((cast ((cast shrink : Float) > (cast 0.0 : Float)) : Bool) ? (cast shrink : Dynamic) : (cast 0.0 : Dynamic));
-    width = ((cast ((cast height : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal.backend.DomWindowBackend.field(_Runtime.globalValue('window'), 'innerWidth') : Dynamic) : (cast 0.0 : Dynamic));
+    width = ((cast ((cast height : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'innerWidth') : Dynamic) : (cast 0.0 : Dynamic));
     y = ((cast ((cast height : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(viewport, 'height') : Dynamic) : (cast 0.0 : Dynamic));
     return cast { height: height, width: width, x: 0.0, y: y };
     return cast null;

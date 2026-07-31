@@ -127,8 +127,8 @@ class Storage {
       handler = function(event:Dynamic) {
         _Runtime.callValue(listener, cast ([{ key: _Runtime.field(event, 'key'), oldValue: _Runtime.field(event, 'oldValue'), newValue: _Runtime.field(event, 'newValue') }] : Array<Dynamic>));
       };
-      flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'addEventListener', cast (['storage', handler] : Array<Dynamic>));
-      return cast function() return flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'removeEventListener', cast (['storage', handler] : Array<Dynamic>));
+      flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['storage', handler] : Array<Dynamic>));
+      return cast function() return flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['storage', handler] : Array<Dynamic>));
     } };
     return cast null;
   }
@@ -359,7 +359,7 @@ class Storage {
           __flowBranch12 = flighthq._internal._Async.flowNormal();
         }
         return flighthq._internal._Async.continueFlow(__flowBranch12, function():Dynamic {
-          storage = flighthq._internal.backend.DomNavigatorBackend.field((cast _Runtime.globalValue('navigator') : { @:optional var storage:{ @:optional var estimate:Dynamic; }; }), 'storage');
+          storage = flighthq._internal.backend.DomNavigatorBackend.field((cast flighthq._internal.backend.DomNavigatorBackend.value() : { @:optional var storage:{ @:optional var estimate:Dynamic; }; }), 'storage');
           var __flowBranch13:Dynamic;
           if ((cast _Runtime.strictEquals(_Runtime.optionalField(storage, 'estimate'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
             __flowBranch13 = flighthq._internal._Async.protect(function():Dynamic {
@@ -401,7 +401,7 @@ class Storage {
   public static function getWebStorage__storage():Null<Storage> {
     if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast null; }
     try {
-      return cast _Runtime.coalesce(flighthq._internal.backend.DomWindowBackend.field(_Runtime.globalValue('window'), 'localStorage'), function():Dynamic return cast null);
+      return cast _Runtime.coalesce(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'localStorage'), function():Dynamic return cast null);
     } catch (__error:Dynamic) {
       return cast null;
     }

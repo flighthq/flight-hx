@@ -6,6 +6,7 @@ import { auditStaticFacts, indexedReceiverNames } from '../analyze/static-facts.
 import type { TypedStructRegistry } from '../analyze/typed-structs.ts';
 import type {
   IrDeclaration,
+  IrDomRootBinding,
   IrExpression,
   IrExpressionStaticFacts,
   IrFunctionDeclaration,
@@ -30,6 +31,12 @@ const collectionMembers = {
 } as const;
 
 type CollectionBinding = keyof typeof collectionMembers;
+
+const domRootBindings = {
+  document: 'DomDocumentBackend',
+  navigator: 'DomNavigatorBackend',
+  window: 'DomWindowBackend',
+} as const satisfies Readonly<Record<string, IrDomRootBinding>>;
 
 const typedArrayTypeReferenceMap = {
   Float32Array: 'flighthq._internal._Float32Array',
@@ -548,25 +555,35 @@ function collectPlatformBindingNames(
 
 function collectGlobalRootNames(sourceFile: ts.SourceFile, root: string): ReadonlySet<string> {
   const names = new Set([root]);
+  const scopeBindings = new WeakMap<ts.Node, ReadonlySet<string>>();
   const isRootValue = (node: ts.Expression): boolean => {
     if (ts.isParenthesizedExpression(node) || ts.isAsExpression(node) || ts.isNonNullExpression(node)) {
       return isRootValue(node.expression);
     }
-    return ts.isIdentifier(node) && names.has(node.text);
+    return (
+      ts.isIdentifier(node) &&
+      names.has(node.text) &&
+      (node.text !== root || !isLexicallyBoundInScopes(node, scopeBindings))
+    );
   };
   const visit = (node: ts.Node): void => {
     if (
       ts.isVariableDeclaration(node) &&
       ts.isIdentifier(node.name) &&
       node.initializer &&
+      ts.isVariableDeclarationList(node.parent) &&
+      (node.parent.flags & ts.NodeFlags.Const) !== 0 &&
       isRootValue(node.initializer)
     ) {
       names.add(node.name.text);
     }
     ts.forEachChild(node, visit);
   };
-  visit(sourceFile);
-  visit(sourceFile);
+  let previousSize = -1;
+  while (names.size !== previousSize) {
+    previousSize = names.size;
+    visit(sourceFile);
+  }
   return names;
 }
 
@@ -581,6 +598,19 @@ function isBoundGlobalRootExpression(
   }
   if (!ts.isIdentifier(node) || !names.has(node.text)) return false;
   return node.text !== root || !isLexicallyBound(node, context);
+}
+
+function domRootBinding(node: ts.Expression, context: LoweringContext): IrDomRootBinding | undefined {
+  for (const [root, binding] of Object.entries(domRootBindings)) {
+    const names =
+      root === 'window'
+        ? context.domWindowBindingNames
+        : root === 'document'
+          ? context.domDocumentBindingNames
+          : context.domNavigatorBindingNames;
+    if (isBoundGlobalRootExpression(node, context, root, names)) return binding;
+  }
+  return undefined;
 }
 
 function isWebGlValueExpression(node: ts.Expression, names: ReadonlySet<string>): boolean {
@@ -1947,11 +1977,15 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
     const assignment =
       node.operatorToken.kind >= ts.SyntaxKind.FirstAssignment &&
       node.operatorToken.kind <= ts.SyntaxKind.LastAssignment;
+    const left = lowerExpression(node.left, context);
+    const right = lowerExpression(node.right, context);
+    if (assignment) return { kind: 'assignment', left, operator, right };
     return {
-      kind: assignment ? 'assignment' : 'binary',
-      left: lowerExpression(node.left, context),
+      domRootBinding: operator === 'in' ? domRootBinding(node.right, context) : undefined,
+      kind: 'binary',
+      left,
       operator,
-      right: lowerExpression(node.right, context),
+      right,
     };
   }
   if (ts.isPrefixUnaryExpression(node) || ts.isPostfixUnaryExpression(node)) {
@@ -2032,6 +2066,8 @@ function lowerIdentifier(name: string, context: LoweringContext, locallyBound = 
       typeArguments: [],
     };
   }
+  const domRootBinding = locallyBound ? undefined : domRootBindings[name as keyof typeof domRootBindings];
+  if (domRootBinding) return { domRootBinding, kind: 'identifier', name };
   if (!locallyBound && (platformGlobalValues.has(name) || platformDynamicTypes.has(name) || name.startsWith('GPU'))) {
     return {
       arguments: [{ kind: 'literal', value: name }],
@@ -2048,10 +2084,17 @@ function lowerIdentifier(name: string, context: LoweringContext, locallyBound = 
 }
 
 function isLexicallyBound(identifier: ts.Identifier, context: LoweringContext): boolean {
+  return isLexicallyBoundInScopes(identifier, context.scopeBindings);
+}
+
+function isLexicallyBoundInScopes(
+  identifier: ts.Identifier,
+  scopeBindings: WeakMap<ts.Node, ReadonlySet<string>>,
+): boolean {
   let current: ts.Node | undefined = identifier.parent;
   while (current) {
     if (ts.isFunctionLike(current) || ts.isSourceFile(current)) {
-      let bindings = context.scopeBindings.get(current);
+      let bindings = scopeBindings.get(current);
       if (!bindings) {
         const collected = new Set<string>();
         if (ts.isFunctionLike(current)) {
@@ -2073,7 +2116,7 @@ function isLexicallyBound(identifier: ts.Identifier, context: LoweringContext): 
           visit(root);
         }
         bindings = collected;
-        context.scopeBindings.set(current, bindings);
+        scopeBindings.set(current, bindings);
       }
       if (bindings.has(identifier.text)) return true;
     }

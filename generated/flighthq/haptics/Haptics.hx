@@ -21,7 +21,7 @@ class Haptics {
       return cast _Runtime.callValue(Haptics.webVibrate__haptics, cast ([0.0] : Array<Dynamic>));
     }, capabilities: function(out:HapticsCapabilities) {
       var supported:Dynamic = cast _Runtime.UNDEFINED;
-      supported = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'vibrate')), 'function') : Bool));
+      supported = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'vibrate')), 'function') : Bool));
       (out.amplitudeControl = cast (false : Dynamic));
       (out.customEvents = cast (false : Dynamic));
       (out.intensity = cast (false : Dynamic));
@@ -35,7 +35,7 @@ class Haptics {
       ms = ((cast !_Runtime.strictEquals(intensity, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast HxMath.round((base * HxMath.max(0.0, HxMath.min(1.0, intensity)))) : Dynamic) : (cast base : Dynamic));
       return cast _Runtime.callValue(Haptics.webVibrate__haptics, cast ([ms] : Array<Dynamic>));
     }, isSupported: function() {
-      return cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'vibrate')), 'function') : Bool));
+      return cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'vibrate')), 'function') : Bool));
     }, notification: function(type:HapticNotificationType) {
       var pattern:Dynamic = cast _Runtime.UNDEFINED;
       pattern = ((cast _Runtime.strictEquals(type, 'error') : Bool) ? (cast cast ([20.0, 60.0, 20.0] : Array<Dynamic>) : Dynamic) : (cast ((cast _Runtime.strictEquals(type, 'warning') : Bool) ? (cast cast ([20.0, 60.0, 20.0, 60.0] : Array<Dynamic>) : Dynamic) : (cast cast ([15.0, 50.0, 15.0] : Array<Dynamic>) : Dynamic)) : Dynamic));
@@ -120,11 +120,11 @@ class Haptics {
   }
 
   public static function webVibrate__haptics(pattern:Dynamic):Bool {
-    if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) || (cast !(cast _Runtime.hasField(_Runtime.globalValue('navigator'), 'vibrate') : Bool) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'vibrate')), 'function') : Bool)) : Bool)) {
+    if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'vibrate') : Bool) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'vibrate')), 'function') : Bool)) : Bool)) {
       return cast false;
     }
     try {
-      return cast flighthq._internal.backend.DomNavigatorBackend.call(_Runtime.globalValue('navigator'), 'vibrate', cast ([(cast pattern : Dynamic)] : Array<Dynamic>));
+      return cast flighthq._internal.backend.DomNavigatorBackend.call(flighthq._internal.backend.DomNavigatorBackend.value(), 'vibrate', cast ([(cast pattern : Dynamic)] : Array<Dynamic>));
     } catch (__error:Dynamic) {
       return cast false;
     }

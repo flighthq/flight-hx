@@ -53,6 +53,8 @@ export type IrIndexedReceiver =
   | 'Uint8Array'
   | 'Uint8ClampedArray';
 
+export type IrDomRootBinding = 'DomDocumentBackend' | 'DomNavigatorBackend' | 'DomWindowBackend';
+
 export interface IrExpressionStaticFacts {
   boolean?: true | undefined;
   booleanLogical?: true | undefined;
@@ -71,7 +73,13 @@ type IrExpressionNode =
   | { kind: 'array'; elements: IrExpression[] }
   | { kind: 'await'; expression: IrExpression }
   | { kind: 'assignment'; left: IrExpression; operator: string; right: IrExpression }
-  | { kind: 'binary'; left: IrExpression; operator: string; right: IrExpression }
+  | {
+      domRootBinding?: IrDomRootBinding | undefined;
+      kind: 'binary';
+      left: IrExpression;
+      operator: string;
+      right: IrExpression;
+    }
   | {
       kind: 'call';
       arguments: IrExpression[];
@@ -101,7 +109,7 @@ type IrExpressionNode =
       expression?: IrExpression | undefined;
       returns?: IrType | undefined;
     }
-  | { kind: 'identifier'; name: string }
+  | { domRootBinding?: IrDomRootBinding | undefined; kind: 'identifier'; name: string }
   | { kind: 'literal'; value: boolean | null | number | string }
   | { kind: 'new'; arguments: IrExpression[]; callee: IrExpression }
   | { kind: 'object'; properties: IrObjectMember[] }

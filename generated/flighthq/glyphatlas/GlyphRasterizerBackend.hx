@@ -52,8 +52,8 @@ class GlyphRasterizerBackend {
         var context:Dynamic = flighthq._internal.backend.CanvasElementBackend.call(_Runtime.construct(_Runtime.globalValue('OffscreenCanvas'), [1.0, 1.0]), 'getContext', cast (['2d'] : Array<Dynamic>));
         if ((cast !_Runtime.strictEquals(context, null) : Bool)) { return cast context; }
       }
-      if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'createElement')), 'function') : Bool)) : Bool)) {
-        var context:Dynamic = flighthq._internal.backend.CanvasElementBackend.call(flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)), 'getContext', cast (['2d'] : Array<Dynamic>));
+      if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement')), 'function') : Bool)) : Bool)) {
+        var context:Dynamic = flighthq._internal.backend.CanvasElementBackend.call(flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>)), 'getContext', cast (['2d'] : Array<Dynamic>));
         if ((cast !_Runtime.strictEquals(context, null) : Bool)) { return cast context; }
       }
     } catch (__error:Dynamic) {

@@ -214,7 +214,7 @@ class Notification {
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined') : Bool)) { return cast 'denied'; }
       return cast (cast _Runtime.field(_Runtime.globalValue('Notification'), 'permission') : Dynamic);
     }, isSupported: function() {
-      return cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined') : Bool) && (cast _Runtime.hasField(_Runtime.globalValue('navigator'), 'serviceWorker') : Bool));
+      return cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined') : Bool) && (cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'serviceWorker') : Bool));
     }, notify: _show, requestPermission: function():flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {

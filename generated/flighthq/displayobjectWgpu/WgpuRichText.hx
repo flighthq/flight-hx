@@ -180,7 +180,7 @@ class WgpuRichText {
     var pw:Dynamic = cast _Runtime.UNDEFINED;
     var ph:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.truthy(WgpuRichText._offscreenCanvas__wgpuRichText) : Bool)) {
-      (WgpuRichText._offscreenCanvas__wgpuRichText = cast (flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)) : Dynamic));
+      (WgpuRichText._offscreenCanvas__wgpuRichText = cast (flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>)) : Dynamic));
       (WgpuRichText._offscreenCtx__wgpuRichText = cast (flighthq._internal.backend.CanvasElementBackend.call(WgpuRichText._offscreenCanvas__wgpuRichText, 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic));
     }
     pw = HxMath.ceil((width * pixelRatio));

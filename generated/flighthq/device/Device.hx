@@ -45,7 +45,7 @@ class Device {
       var nav:Dynamic = cast _Runtime.UNDEFINED;
       var maxTouch:Dynamic = cast _Runtime.UNDEFINED;
       var ua:Dynamic = cast _Runtime.UNDEFINED;
-      nav = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) ? (cast _Runtime.globalValue('navigator') : Dynamic) : (cast null : Dynamic));
+      nav = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic) : (cast null : Dynamic));
       maxTouch = ((cast ((cast !_Runtime.strictEquals(nav, null) : Bool) && (cast _Runtime.hasField(nav, 'maxTouchPoints') : Bool)) : Bool) ? (cast _Runtime.field(nav, 'maxTouchPoints') : Dynamic) : (cast -1.0 : Dynamic));
       (out.hasMouse = cast (_Runtime.strictEquals(maxTouch, 0.0) : Dynamic));
       ua = _Runtime.coalesce(_Runtime.optionalField(nav, 'userAgent'), function():Dynamic return cast '');
@@ -56,7 +56,7 @@ class Device {
       var win:Dynamic = cast _Runtime.UNDEFINED;
       var scr:Dynamic = cast _Runtime.UNDEFINED;
       var pixelRatio:Dynamic = cast _Runtime.UNDEFINED;
-      win = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) ? (cast _Runtime.globalValue('window') : Dynamic) : (cast null : Dynamic));
+      win = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomWindowBackend.value() : Dynamic) : (cast null : Dynamic));
       scr = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('screen'), 'undefined') : Bool) ? (cast _Runtime.globalValue('screen') : Dynamic) : (cast null : Dynamic));
       (out.colorDepth = cast (((cast !_Runtime.strictEquals(scr, null) : Bool) ? (cast _Runtime.field(scr, 'colorDepth') : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
       (out.densityDpi = cast (-1.0 : Dynamic));
@@ -86,7 +86,7 @@ class Device {
       var cores:Dynamic = cast _Runtime.UNDEFINED;
       var gpuInfo:Dynamic = cast _Runtime.UNDEFINED;
       var devMem:Dynamic = cast _Runtime.UNDEFINED;
-      nav = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) ? (cast _Runtime.globalValue('navigator') : Dynamic) : (cast null : Dynamic));
+      nav = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic) : (cast null : Dynamic));
       ua = _Runtime.coalesce(_Runtime.optionalField(nav, 'userAgent'), function():Dynamic return cast '');
       uadPlatform = _Runtime.optionalField(_Runtime.optionalField((cast nav : Null<{ @:optional var userAgentData:{ @:optional var platform:String; }; }>), 'userAgentData'), 'platform');
       _Runtime.setField(out, 'arch', _Runtime.callValue(parseUserAgentArch, cast ([ua, uadPlatform] : Array<Dynamic>)));
@@ -156,9 +156,9 @@ class Device {
     if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) { return cast function() {
     
     }; }
-    el = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['div'] : Array<Dynamic>));
+    el = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['div'] : Array<Dynamic>));
     _Runtime.setField(_Runtime.field(el, 'style'), 'cssText', (('position:fixed;top:env(safe-area-inset-top,0px);right:env(safe-area-inset-right,0px);' + 'bottom:env(safe-area-inset-bottom,0px);left:env(safe-area-inset-left,0px);') + 'pointer-events:none;visibility:hidden;'));
-    _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'body'), 'appendChild', cast ([el] : Array<Dynamic>));
+    _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'body'), 'appendChild', cast ([el] : Array<Dynamic>));
     readInsets = function readInsets():Void {
       var style:Dynamic = cast _Runtime.UNDEFINED;
       style = _Runtime.callValue(_Runtime.globalValue('getComputedStyle'), cast ([el] : Array<Dynamic>));
@@ -166,7 +166,7 @@ class Device {
     };
     _Runtime.callValue(readInsets, cast ([] : Array<Dynamic>));
     observer = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('ResizeObserver'), 'undefined') : Bool) ? (cast _Runtime.construct(_Runtime.globalValue('ResizeObserver'), [readInsets]) : Dynamic) : (cast null : Dynamic));
-    if ((cast !_Runtime.strictEquals(observer, null) : Bool)) { _Runtime.callProperty(observer, 'observe', cast ([flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'documentElement')] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(observer, null) : Bool)) { _Runtime.callProperty(observer, 'observe', cast ([flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'documentElement')] : Array<Dynamic>)); }
     return cast function() {
       if ((cast !_Runtime.strictEquals(observer, null) : Bool)) { _Runtime.callProperty(observer, 'disconnect', cast ([] : Array<Dynamic>)); }
       _Runtime.callOptionalProperty(_Runtime.field(el, 'parentNode'), 'removeChild', cast ([el] : Array<Dynamic>));
@@ -209,7 +209,7 @@ class Device {
   public static function readWebGpuInfo__device():{ var vendor:String; var renderer:String; } {
     try {
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) { return cast { renderer: '', vendor: '' }; }
-      var canvas:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
+      var canvas:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
       var gl:Dynamic = _Runtime.coalesce((cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['webgl'] : Array<Dynamic>)) : Null<Dynamic>), function():Dynamic return cast (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['experimental-webgl'] : Array<Dynamic>)) : Null<Dynamic>));
       if ((cast _Runtime.strictEquals(gl, null) : Bool)) { return cast { renderer: '', vendor: '' }; }
       var ext:Dynamic = flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'WEBGL_debug_renderer_info');

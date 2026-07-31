@@ -36,7 +36,7 @@ class DomTextLabel {
 
   public static function getMeasureCtx__domTextLabel():Null<Dynamic> {
     if ((cast _Runtime.strictEquals(DomTextLabel._measureCtx__domTextLabel, null) : Bool)) {
-      (DomTextLabel._measureCtx__domTextLabel = cast (flighthq._internal.backend.CanvasElementBackend.call(flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)), 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic));
+      (DomTextLabel._measureCtx__domTextLabel = cast (flighthq._internal.backend.CanvasElementBackend.call(flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>)), 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic));
     }
     return cast DomTextLabel._measureCtx__domTextLabel;
     return cast null;
@@ -63,7 +63,7 @@ class DomTextLabel {
     ctx = _Runtime.callValue(DomTextLabel.getMeasureCtx__domTextLabel, cast ([] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(ctx, null) : Bool)) { return; }
     if ((cast _Runtime.strictEquals(_Runtime.field(data, 'div'), null) : Bool)) {
-      _Runtime.setField(data, 'div', flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['div'] : Array<Dynamic>)));
+      _Runtime.setField(data, 'div', flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['div'] : Array<Dynamic>)));
       _Runtime.callValue(prepareDomElement, cast ([_Runtime.field(data, 'div')] : Array<Dynamic>));
       _Runtime.setField(_Runtime.field(_Runtime.field(data, 'div'), 'style'), 'overflow', 'hidden');
     }

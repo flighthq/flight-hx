@@ -56,7 +56,7 @@ class Statusbar {
     var hex:Dynamic = cast _Runtime.UNDEFINED;
     var rgb:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) { return cast 0.0; }
-    meta = _Runtime.callOptionalProperty(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'head'), 'querySelector', cast (['meta[name="theme-color"]'] : Array<Dynamic>));
+    meta = _Runtime.callOptionalProperty(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'head'), 'querySelector', cast (['meta[name="theme-color"]'] : Array<Dynamic>));
     if ((cast ((cast _Runtime.strictEquals(meta, null) : Bool) || (cast _Runtime.strictEquals(meta, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return cast 0.0; }
     content = _Runtime.callProperty(meta, 'getAttribute', cast (['content'] : Array<Dynamic>));
     if ((cast ((cast _Runtime.strictEquals(content, null) : Bool) || (cast !(cast StringTools.startsWith(content, '#') : Bool) : Bool)) : Bool)) { return cast 0.0; }
@@ -103,11 +103,11 @@ class Statusbar {
       var head:Dynamic = cast _Runtime.UNDEFINED;
       var meta:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) { return; }
-      head = flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'head');
+      head = flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'head');
       if ((cast ((cast _Runtime.strictEquals(head, null) : Bool) || (cast _Runtime.strictEquals(head, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return; }
       meta = _Runtime.callProperty(head, 'querySelector', cast (['meta[name="theme-color"]'] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(meta, null) : Bool)) {
-        (meta = cast (flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['meta'] : Array<Dynamic>)) : Dynamic));
+        (meta = cast (flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['meta'] : Array<Dynamic>)) : Dynamic));
         _Runtime.callProperty(meta, 'setAttribute', cast (['name', 'theme-color'] : Array<Dynamic>));
         _Runtime.callProperty(head, 'appendChild', cast ([meta] : Array<Dynamic>));
       }

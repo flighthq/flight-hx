@@ -528,11 +528,11 @@ class Clipboard {
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast function() {
       
       }; }
-      target = (cast _Runtime.globalValue('window') : { @:optional var onclipboardchange:Dynamic; });
-      if ((cast ((cast _Runtime.hasField(target, 'onclipboardchange') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex((cast (cast _Runtime.globalValue('window') : Dynamic) : Dynamic), 'clipboardchange')), 'undefined') : Bool)) : Bool)) {
+      target = (cast flighthq._internal.backend.DomWindowBackend.value() : { @:optional var onclipboardchange:Dynamic; });
+      if ((cast ((cast flighthq._internal.backend.DomWindowBackend.hasField(target, 'onclipboardchange') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex((cast (cast flighthq._internal.backend.DomWindowBackend.value() : Dynamic) : Dynamic), 'clipboardchange')), 'undefined') : Bool)) : Bool)) {
         var handler:Dynamic = function() return _Runtime.callValue(listener, cast ([] : Array<Dynamic>));
-        flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'addEventListener', cast ([(cast 'clipboardchange' : Dynamic), (cast handler : Dynamic)] : Array<Dynamic>));
-        return cast function() return flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'removeEventListener', cast ([(cast 'clipboardchange' : Dynamic), (cast handler : Dynamic)] : Array<Dynamic>));
+        flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast ([(cast 'clipboardchange' : Dynamic), (cast handler : Dynamic)] : Array<Dynamic>));
+        return cast function() return flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast ([(cast 'clipboardchange' : Dynamic), (cast handler : Dynamic)] : Array<Dynamic>));
       }
       return cast function() {
       
@@ -572,7 +572,7 @@ class Clipboard {
 
   public static function getWebClipboard__clipboard():Null<Clipboard> {
     if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool)) { return cast null; }
-    return cast _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'clipboard'), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'clipboard'), function():Dynamic return cast null);
     return cast null;
   }
 

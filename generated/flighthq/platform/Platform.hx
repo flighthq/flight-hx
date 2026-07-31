@@ -92,15 +92,15 @@ class Platform {
   public static function getWebPlatformInfo__platform(out:PlatformInfo):PlatformInfo {
     var nav:Dynamic = cast _Runtime.UNDEFINED;
     var ua:Dynamic = cast _Runtime.UNDEFINED;
-    nav = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) ? (cast _Runtime.globalValue('navigator') : Dynamic) : (cast null : Dynamic));
+    nav = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic) : (cast null : Dynamic));
     ua = _Runtime.coalesce(_Runtime.optionalField(nav, 'userAgent'), function():Dynamic return cast '');
     _Runtime.setField(out, 'name', _Runtime.callValue(parseUserAgentName, cast ([ua] : Array<Dynamic>)));
     _Runtime.setField(out, 'kind', _Runtime.callValue(parseUserAgentKind, cast ([_Runtime.field(out, 'name')] : Array<Dynamic>)));
     _Runtime.setField(out, 'version', _Runtime.callValue(parseUserAgentVersion, cast ([ua, _Runtime.field(out, 'name')] : Array<Dynamic>)));
     _Runtime.setField(out, 'arch', _Runtime.callValue(parseUserAgentArch, cast ([ua] : Array<Dynamic>)));
     _Runtime.setField(out, 'locale', _Runtime.coalesce(_Runtime.optionalField(nav, 'language'), function():Dynamic return cast ''));
-    _Runtime.setField(out, 'isTouch', ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) && (cast _Runtime.hasField(_Runtime.globalValue('navigator'), 'maxTouchPoints') : Bool)) : Bool) ? (cast ((cast flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'maxTouchPoints') : Float) > (cast 0.0 : Float)) : Dynamic) : (cast false : Dynamic)));
-    _Runtime.setField(out, 'runtime', _Runtime.callValue(parseUserAgentRuntime, cast ([((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) ? (cast (cast (cast _Runtime.globalValue('window') : Dynamic) : Dynamic) : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)));
+    _Runtime.setField(out, 'isTouch', ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) && (cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'maxTouchPoints') : Bool)) : Bool) ? (cast ((cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'maxTouchPoints') : Float) > (cast 0.0 : Float)) : Dynamic) : (cast false : Dynamic)));
+    _Runtime.setField(out, 'runtime', _Runtime.callValue(parseUserAgentRuntime, cast ([((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) ? (cast (cast (cast flighthq._internal.backend.DomWindowBackend.value() : Dynamic) : Dynamic) : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)));
     _Runtime.setField(out, 'engine', _Runtime.callValue(parseUserAgentEngine, cast ([ua] : Array<Dynamic>)));
     _Runtime.setField(out, 'engineVersion', _Runtime.callValue(parseUserAgentEngineVersion, cast ([ua, _Runtime.field(out, 'engine')] : Array<Dynamic>)));
     _Runtime.setField(out, 'endianness', _Runtime.callValue(detectEndianness, cast ([] : Array<Dynamic>)));

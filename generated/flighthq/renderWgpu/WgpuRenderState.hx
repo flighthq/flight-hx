@@ -42,7 +42,7 @@ class WgpuRenderState {
         var state:Dynamic = cast _Runtime.UNDEFINED;
         var runtime:Dynamic = cast _Runtime.UNDEFINED;
         var __flowBranch0:Dynamic;
-        if ((cast !_Runtime.truthy(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'gpu')) : Bool)) {
+        if ((cast !_Runtime.truthy(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'gpu')) : Bool)) {
           __flowBranch0 = flighthq._internal._Async.protect(function():Dynamic {
             return flighthq._internal._Async.reject(_Runtime.error('WebGPU is not supported in this browser.'));
           });
@@ -50,7 +50,7 @@ class WgpuRenderState {
           __flowBranch0 = flighthq._internal._Async.flowNormal();
         }
         return flighthq._internal._Async.continueFlow(__flowBranch0, function():Dynamic {
-          return flighthq._internal._Async.flatMap(_Runtime.callProperty(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'gpu'), 'requestAdapter', cast ([((cast !_Runtime.looseEquals(_Runtime.field(options, 'powerPreference'), null) : Bool) ? (cast { powerPreference: _Runtime.field(options, 'powerPreference') } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic))] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
+          return flighthq._internal._Async.flatMap(_Runtime.callProperty(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'gpu'), 'requestAdapter', cast ([((cast !_Runtime.looseEquals(_Runtime.field(options, 'powerPreference'), null) : Bool) ? (cast { powerPreference: _Runtime.field(options, 'powerPreference') } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic))] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
             adapter = __awaitValue1;
             var __flowBranch2:Dynamic;
             if ((cast !_Runtime.truthy(adapter) : Bool)) {
@@ -74,7 +74,7 @@ class WgpuRenderState {
               return flighthq._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
                 return flighthq._internal._Async.flatMap(_Runtime.callProperty(adapter, 'requestDevice', cast ([((cast ((cast _Runtime.field(flighthq._internal.DynamicObject.keys(requiredLimits), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast { requiredLimits: requiredLimits } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic))] : Array<Dynamic>)), function(__awaitValue4:Dynamic):Dynamic {
                   device = __awaitValue4;
-                  format = _Runtime.coalesce(_Runtime.field(options, 'format'), function():Dynamic return cast _Runtime.callProperty(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'gpu'), 'getPreferredCanvasFormat', cast ([] : Array<Dynamic>)));
+                  format = _Runtime.coalesce(_Runtime.field(options, 'format'), function():Dynamic return cast _Runtime.callProperty(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'gpu'), 'getPreferredCanvasFormat', cast ([] : Array<Dynamic>)));
                   context = (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['webgpu'] : Array<Dynamic>)) : Null<Dynamic>);
                   var __flowBranch5:Dynamic;
                   if ((cast !_Runtime.truthy(context) : Bool)) {
@@ -223,7 +223,7 @@ class WgpuRenderState {
   }
 
   public static function isWgpuSupported():Bool {
-    return cast ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) && (cast _Runtime.hasField(_Runtime.globalValue('navigator'), 'gpu') : Bool)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'gpu'), null) : Bool));
+    return cast ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) && (cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'gpu') : Bool)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'gpu'), null) : Bool));
     return cast null;
   }
 }

@@ -26,7 +26,7 @@ class Application {
   public static final _applicationObservers__application:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function _isApplicationVisible__application():Bool {
-    return cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'hidden') : Bool) : Bool));
+    return cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'hidden') : Bool) : Bool));
     return cast null;
   }
 
@@ -42,8 +42,8 @@ class Application {
     observers = _Runtime.callValue(Application.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map).get(Application.kExit__application)), cast ([] : Array<Dynamic>));
     handler = function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onExit')]]), 1);
-    flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'addEventListener', cast (['beforeunload', handler] : Array<Dynamic>));
-    ((cast observers : flighthq._internal._Map).set(Application.kExit__application, function() return flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'removeEventListener', cast (['beforeunload', handler] : Array<Dynamic>))));
+    flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['beforeunload', handler] : Array<Dynamic>));
+    ((cast observers : flighthq._internal._Map).set(Application.kExit__application, function() return flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['beforeunload', handler] : Array<Dynamic>))));
   }
 
   public static function attachApplicationLifecycle(app:flighthq.types.Application, win:ApplicationWindow):Void {

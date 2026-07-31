@@ -88,7 +88,7 @@ class Protocol {
     return cast { register: function(scheme:Dynamic) {
       var nav:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofGlobal('location'), 'undefined') : Bool)) : Bool)) { return cast false; }
-      nav = (cast _Runtime.globalValue('navigator') : { @:optional var registerProtocolHandler:Dynamic; });
+      nav = (cast flighthq._internal.backend.DomNavigatorBackend.value() : { @:optional var registerProtocolHandler:Dynamic; });
       if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(nav, 'registerProtocolHandler')), 'function') : Bool)) { return cast false; }
       try {
         _Runtime.callProperty(nav, 'registerProtocolHandler', cast ([scheme, (_Runtime.field(_Runtime.globalValue('location'), 'origin') + '/?url=%s')] : Array<Dynamic>));

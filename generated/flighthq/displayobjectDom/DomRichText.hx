@@ -48,7 +48,7 @@ class DomRichText {
 
   public static function getMeasureCtx__domRichText():Null<Dynamic> {
     if ((cast _Runtime.strictEquals(DomRichText._measureCtx__domRichText, null) : Bool)) {
-      (DomRichText._measureCtx__domRichText = cast (flighthq._internal.backend.CanvasElementBackend.call(flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)), 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic));
+      (DomRichText._measureCtx__domRichText = cast (flighthq._internal.backend.CanvasElementBackend.call(flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>)), 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic));
     }
     return cast DomRichText._measureCtx__domRichText;
     return cast null;
@@ -105,7 +105,7 @@ class DomRichText {
     scrollH = _Runtime.field(__destructure0, 'scrollH');
     scrollV = _Runtime.field(__destructure0, 'scrollV');
     if ((cast _Runtime.strictEquals(_Runtime.field(data, 'div'), null) : Bool)) {
-      _Runtime.setField(data, 'div', flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['div'] : Array<Dynamic>)));
+      _Runtime.setField(data, 'div', flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['div'] : Array<Dynamic>)));
       _Runtime.callValue(prepareDomElement, cast ([_Runtime.field(data, 'div')] : Array<Dynamic>));
       _Runtime.setField(_Runtime.field(_Runtime.field(data, 'div'), 'style'), 'overflow', 'hidden');
     }
@@ -198,7 +198,7 @@ class DomRichText {
     var ascent:Dynamic = cast _Runtime.UNDEFINED;
     cached = _Runtime.callValue(getDomFontAscentCached, cast ([font] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
-    ascent = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'body')), function():Dynamic return cast _Runtime.callValue(DomRichText.probeCssFontAscent__domRichText, cast ([font] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(DomRichText.canvasFontAscentFallback__domRichText, cast ([ctx, font] : Array<Dynamic>)));
+    ascent = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'body')), function():Dynamic return cast _Runtime.callValue(DomRichText.probeCssFontAscent__domRichText, cast ([font] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(DomRichText.canvasFontAscentFallback__domRichText, cast ([ctx, font] : Array<Dynamic>)));
     _Runtime.callValue(setDomFontAscentCached, cast ([font, ascent] : Array<Dynamic>));
     return cast ascent;
     return cast null;
@@ -209,16 +209,16 @@ class DomRichText {
     var probe:Dynamic = cast _Runtime.UNDEFINED;
     var containerTop:Dynamic = cast _Runtime.UNDEFINED;
     var probeTop:Dynamic = cast _Runtime.UNDEFINED;
-    container = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['div'] : Array<Dynamic>));
+    container = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['div'] : Array<Dynamic>));
     _Runtime.setField(_Runtime.field(container, 'style'), 'cssText', 'font:' + Std.string(font) + ';line-height:1;position:fixed;top:0;left:0;visibility:hidden;pointer-events:none;white-space:nowrap');
-    probe = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['span'] : Array<Dynamic>));
+    probe = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['span'] : Array<Dynamic>));
     _Runtime.setField(_Runtime.field(probe, 'style'), 'cssText', 'display:inline-block;height:0;vertical-align:baseline');
-    _Runtime.callProperty(container, 'appendChild', cast ([flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createTextNode', cast (['H'] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callProperty(container, 'appendChild', cast ([flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createTextNode', cast (['H'] : Array<Dynamic>))] : Array<Dynamic>));
     _Runtime.callProperty(container, 'appendChild', cast ([probe] : Array<Dynamic>));
-    _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'body'), 'appendChild', cast ([container] : Array<Dynamic>));
+    _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'body'), 'appendChild', cast ([container] : Array<Dynamic>));
     containerTop = _Runtime.field(_Runtime.callProperty(container, 'getBoundingClientRect', cast ([] : Array<Dynamic>)), 'top');
     probeTop = _Runtime.field(_Runtime.callProperty(probe, 'getBoundingClientRect', cast ([] : Array<Dynamic>)), 'top');
-    _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'body'), 'removeChild', cast ([container] : Array<Dynamic>));
+    _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'body'), 'removeChild', cast ([container] : Array<Dynamic>));
     return cast (probeTop - containerTop);
     return cast null;
   }

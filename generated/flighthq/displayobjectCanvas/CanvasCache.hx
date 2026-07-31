@@ -38,7 +38,7 @@ class CanvasCache {
     var screen:Dynamic = cast _Runtime.UNDEFINED;
     var cacheState:Dynamic = cast _Runtime.UNDEFINED;
     screen = _Runtime.callValue(getCanvasRenderStateRuntime, cast ([screenState] : Array<Dynamic>));
-    cacheState = _Runtime.callValue(createCanvasRenderState, cast ([flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)), { imageSmoothingEnabled: _Runtime.field(screen, 'imageSmoothingEnabled'), imageSmoothingQuality: _Runtime.field(screen, 'imageSmoothingQuality'), pixelRatio: _Runtime.field(screenState, 'pixelRatio'), roundPixels: _Runtime.field(screenState, 'roundPixels'), sceneGraphSyncPolicy: _Runtime.field(screenState, 'sceneGraphSyncPolicy') }] : Array<Dynamic>));
+    cacheState = _Runtime.callValue(createCanvasRenderState, cast ([flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>)), { imageSmoothingEnabled: _Runtime.field(screen, 'imageSmoothingEnabled'), imageSmoothingQuality: _Runtime.field(screen, 'imageSmoothingQuality'), pixelRatio: _Runtime.field(screenState, 'pixelRatio'), roundPixels: _Runtime.field(screenState, 'roundPixels'), sceneGraphSyncPolicy: _Runtime.field(screenState, 'sceneGraphSyncPolicy') }] : Array<Dynamic>));
     _Runtime.callValue(copyAllRenderersFromRenderState, cast ([cacheState, screenState] : Array<Dynamic>));
     ((cast CanvasCache._cacheStateScreen__canvasCache : flighthq._internal._WeakMap).set(cacheState, screenState));
     return cast cacheState;

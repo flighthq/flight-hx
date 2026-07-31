@@ -1080,7 +1080,12 @@ describe('TypeScript lowering and Haxe emission', () => {
       `
         export function roots() {
           const win = window as Window & { getScreenDetails(): Promise<unknown> };
+          const doc = document;
           const nav = navigator as Navigator & { getBattery(): Promise<unknown> };
+          const values = [window, document, navigator];
+          const hasScreen = 'screen' in win;
+          const hasBody = 'body' in doc;
+          const hasShare = 'share' in navigator;
           window.addEventListener('resize', () => {});
           const media = window.matchMedia('(dark)');
           const details = win.getScreenDetails();
@@ -1090,10 +1095,26 @@ describe('TypeScript lowering and Haxe emission', () => {
           const pads = navigator.getGamepads();
           const language = navigator.language;
           const battery = nav.getBattery();
-          return { media, details, canvas, focused, pads, language, battery };
+          return { values, hasScreen, hasBody, hasShare, media, details, canvas, focused, pads, language, battery };
         }
-        export function local(document: { title: string }) {
-          return document.title;
+        export function local(
+          window: Record<string, unknown>,
+          document: { title: string },
+          navigator: Record<string, unknown>,
+        ) {
+          return [window, document.title, navigator, 'local' in window, 'local' in document, 'local' in navigator];
+        }
+        export function availability() {
+          return typeof window !== 'undefined' && typeof document !== 'undefined' && typeof navigator !== 'undefined';
+        }
+        export function shadowed(navigator: Record<string, unknown>) {
+          const localNavigator = navigator;
+          return ['share' in localNavigator, localNavigator.share];
+        }
+        export function mutableAlias() {
+          let mutableNavigator = navigator;
+          mutableNavigator = {};
+          return 'share' in mutableNavigator;
         }
       `,
       ts.ScriptTarget.Latest,
@@ -1109,17 +1130,55 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain("DomWindowBackend.call(_Runtime.globalValue('window'), 'addEventListener'");
-    expect(output).toContain("DomWindowBackend.call(_Runtime.globalValue('window'), 'matchMedia'");
+    expect(output).toContain('DomWindowBackend.value()');
+    expect(output).toContain('DomDocumentBackend.value()');
+    expect(output).toContain('DomNavigatorBackend.value()');
+    expect(output).toContain("DomWindowBackend.hasField(win, 'screen')");
+    expect(output).toContain("DomDocumentBackend.hasField(doc, 'body')");
+    expect(output).toContain(
+      "DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'share')",
+    );
+    expect(output).toContain(
+      "DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener'",
+    );
+    expect(output).toContain("DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'matchMedia'");
     expect(output).toContain("DomWindowBackend.call(win, 'getScreenDetails'");
-    expect(output).toContain("DomDocumentBackend.setField(_Runtime.globalValue('document'), 'title', 'Flight')");
-    expect(output).toContain("DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement'");
-    expect(output).toContain("DomDocumentBackend.call(_Runtime.globalValue('document'), 'hasFocus'");
-    expect(output).toContain("DomNavigatorBackend.call(_Runtime.globalValue('navigator'), 'getGamepads'");
-    expect(output).toContain("DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'language')");
+    expect(output).toContain(
+      "DomDocumentBackend.setField(flighthq._internal.backend.DomDocumentBackend.value(), 'title', 'Flight')",
+    );
+    expect(output).toContain(
+      "DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement'",
+    );
+    expect(output).toContain(
+      "DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'hasFocus'",
+    );
+    expect(output).toContain(
+      "DomNavigatorBackend.call(flighthq._internal.backend.DomNavigatorBackend.value(), 'getGamepads'",
+    );
+    expect(output).toContain(
+      "DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'language')",
+    );
     expect(output).toContain("DomNavigatorBackend.call(nav, 'getBattery'");
-    expect(output).toContain("return cast _Runtime.field(document, 'title')");
+    expect(output).toContain("_Runtime.field(document, 'title')");
+    expect(output).toContain("_Runtime.hasField(window, 'local')");
+    expect(output).toContain("_Runtime.hasField(document, 'local')");
+    expect(output).toContain("_Runtime.hasField(navigator, 'local')");
+    expect(output).toContain("_Runtime.typeofGlobal('window')");
+    expect(output).toContain("_Runtime.typeofGlobal('document')");
+    expect(output).toContain("_Runtime.typeofGlobal('navigator')");
+    expect(output).toContain("_Runtime.hasField(localNavigator, 'share')");
+    expect(output).toContain("_Runtime.field(localNavigator, 'share')");
+    expect(output).toContain("_Runtime.hasField(mutableNavigator, 'share')");
+    expect(output).not.toContain("_Runtime.globalValue('window')");
+    expect(output).not.toContain("_Runtime.globalValue('document')");
+    expect(output).not.toContain("_Runtime.globalValue('navigator')");
     expect(output).not.toContain("DomDocumentBackend.field(document, 'title')");
+    expect(output).not.toContain('DomWindowBackend.hasField(window');
+    expect(output).not.toContain('DomDocumentBackend.hasField(document');
+    expect(output).not.toContain('DomNavigatorBackend.hasField(navigator');
+    expect(output).not.toContain('DomNavigatorBackend.hasField(localNavigator');
+    expect(output).not.toContain('DomNavigatorBackend.hasField(mutableNavigator');
+    expect(output).not.toContain("DomNavigatorBackend.field(localNavigator, 'share')");
   });
 
   it('routes global Object operations through named portable bindings', () => {
