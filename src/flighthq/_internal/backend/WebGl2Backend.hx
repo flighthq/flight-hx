@@ -263,11 +263,12 @@ class WebGl2Backend {
       + srcOffset + ', length=' + Std.string(length) + ', view.byteLength=' + data.byteLength + ', view.length='
       + data.length + ')');
     #end
-    #if neko
-    // glBufferSubData through the neko CFFI raises GL_INVALID_VALUE for valid
-    // arguments (under investigation); re-uploading the whole view through
-    // glBufferData is correct for Flight's usage, where the view spans the
-    // buffer store and ranged uploads always start at offset zero.
+    #if (neko || cpp)
+    // glBufferSubData through the Lime CFFI raises GL_INVALID_VALUE for valid
+    // arguments on both neko and hxcpp (verified by GL trace on each);
+    // re-uploading the whole view through glBufferData is correct for Flight's
+    // usage, where the view spans the buffer store and ranged uploads always
+    // start at offset zero.
     gl.bufferData(Std.int(target), data, DYNAMIC_DRAW);
     #else
     if (length == null) {
@@ -540,7 +541,7 @@ class WebGl2Backend {
 
   public static inline function getUniformLocation(gl:GlContext, program:GlProgram, name:String):GlUniformLocation {
     final result = gl.getUniformLocation(program, name);
-    #if flight_gl_trace glTrace('getUniformLocation(' + name + ') -> ' + (result == null ? 'NULL' : Std.string(result))); #end
+    #if flight_gl_trace glTrace('getUniformLocation(' + name + ') -> ' + ((result : Dynamic) == null ? 'NULL' : Std.string(result))); #end
     return result;
   }
 
