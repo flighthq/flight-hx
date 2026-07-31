@@ -189,9 +189,29 @@ class Main extends Application {
   }
 
   // Upstream `render(root)`, driven by Lime's per-frame `render`.
+  var perfFrames = 0;
+  var perfStart = 0.0;
+
   override public function render(context:RenderContext):Void {
     if (!ready || root == null) return;
+    #if sys
+    if (Sys.getEnv('FLIGHT_PERF_FRAMES') != null) {
+      if (perfFrames == 0) perfStart = haxe.Timer.stamp();
+      perfFrames++;
+      final target = Std.parseInt(Sys.getEnv('FLIGHT_PERF_FRAMES'));
+      if (perfFrames >= target) {
+        final elapsed = haxe.Timer.stamp() - perfStart;
+        Sys.println('PERF frames=' + (perfFrames - 1) + ' elapsed=' + elapsed + 's fps=' + ((perfFrames - 1) / elapsed));
+        lime.system.System.exit(0);
+      }
+    }
+    #end
     if (!prepareDisplayObjectRender(renderState, root)) return;
+    #if sys
+    // Script-only bench mode: full update/prepare cost without backend draws,
+    // so tranche measurements are not flattened by the rasterizer floor.
+    if (Sys.getEnv('FLIGHT_PERF_MODE') == 'script') return;
+    #end
     if (usingCairo) {
       renderCanvasBackground(renderState);
       renderCanvasDisplayObject(renderState, root);
