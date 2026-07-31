@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import path from 'node:path';
 import ts from 'typescript';
 
-import { auditStaticFacts, indexedReceiverNames } from '../analyze/static-facts.ts';
+import { auditStaticFacts } from '../analyze/static-facts.ts';
 import type { TypedStructRegistry } from '../analyze/typed-structs.ts';
 import type {
   IrDeclaration,
@@ -51,6 +51,8 @@ const typedArrayTypeReferenceMap = {
 } as const;
 
 type TypedArrayBinding = keyof typeof typedArrayTypeReferenceMap;
+
+const typedArrayBindings = Object.keys(typedArrayTypeReferenceMap) as TypedArrayBinding[];
 
 const portableTypeReferenceMap: Readonly<Record<string, string>> = {
   ArrayBuffer: 'haxe.io.Bytes',
@@ -1410,11 +1412,15 @@ function expressionStaticFacts(node: ts.Expression, context: LoweringContext): I
   if (ts.isElementAccessExpression(node) && node.argumentExpression && !ts.isOptionalChain(node)) {
     const receiver = indexedReceiver(checker.getTypeAtLocation(node.expression), checker);
     const access = indexedAccessMode(node);
-    if (
-      receiver &&
-      access &&
-      typeOnlyHasFlags(checker.getTypeAtLocation(node.argumentExpression), checker, ts.TypeFlags.NumberLike)
-    ) {
+    const numericKey = typeOnlyHasFlags(
+      checker.getTypeAtLocation(node.argumentExpression),
+      checker,
+      ts.TypeFlags.NumberLike,
+    );
+    if (receiver === 'Uint16ArrayOrUint32Array' && access?.writes === 1 && numericKey) {
+      facts.indexedAccessEscape = 'width-sensitive-mixed-write';
+    }
+    if (receiver && access && !(receiver === 'Uint16ArrayOrUint32Array' && access.writes === 1) && numericKey) {
       facts.indexedAccess = { ...access, receiver };
     }
   }
@@ -1483,8 +1489,13 @@ function indexedReceiver(
   seen.add(type);
   if (type.isUnion()) {
     const bindings = type.types.map((item) => indexedReceiver(item, checker, new Set(seen)));
-    const first = bindings[0];
-    return first && bindings.every((binding) => binding === first) ? first : undefined;
+    if (bindings.some((binding) => binding === undefined)) return undefined;
+    const unique = [...new Set(bindings as IrIndexedReceiver[])];
+    if (unique.length === 1) return unique[0];
+    if (bindings.length !== 2 || unique.length !== 2) return undefined;
+    if (unique.includes('Array') && unique.includes('Float32Array')) return 'ArrayOrFloat32Array';
+    if (unique.includes('Uint16Array') && unique.includes('Uint32Array')) return 'Uint16ArrayOrUint32Array';
+    return undefined;
   }
   if (type.isIntersection()) return undefined;
   if ((type.flags & ts.TypeFlags.TypeParameter) !== 0) {
@@ -1496,9 +1507,7 @@ function indexedReceiver(
   }
   if (checker.isArrayType(type) || checker.isTupleType(type)) return 'Array';
   if (standardLibraryType(type, 'Array') || standardLibraryType(type, 'ReadonlyArray')) return 'Array';
-  for (const name of indexedReceiverNames) {
-    if (name !== 'Array' && standardLibraryType(type, name)) return name;
-  }
+  for (const name of typedArrayBindings) if (standardLibraryType(type, name)) return name;
   return undefined;
 }
 

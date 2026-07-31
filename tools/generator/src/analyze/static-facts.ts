@@ -8,12 +8,14 @@ import type {
 
 export const indexedReceiverNames = [
   'Array',
+  'ArrayOrFloat32Array',
   'Float32Array',
   'Float64Array',
   'Int16Array',
   'Int32Array',
   'Int8Array',
   'Uint16Array',
+  'Uint16ArrayOrUint32Array',
   'Uint32Array',
   'Uint8Array',
   'Uint8ClampedArray',
@@ -29,6 +31,9 @@ export function emptyStaticFactAudit(): StaticFactAudit {
       expressions: 0,
       reads: 0,
       writes: 0,
+    },
+    indexedAccessEscapes: {
+      widthSensitiveMixedWrites: 0,
     },
     indexedReceivers: Object.fromEntries(
       indexedReceiverNames.map((receiver) => [receiver, { expressions: 0, reads: 0, writes: 0 }]),
@@ -68,6 +73,7 @@ export function sumStaticFactAudits(audits: StaticFactAudit[]): StaticFactAudit 
     total.indexedAccesses.expressions += audit.indexedAccesses.expressions;
     total.indexedAccesses.reads += audit.indexedAccesses.reads;
     total.indexedAccesses.writes += audit.indexedAccesses.writes;
+    total.indexedAccessEscapes.widthSensitiveMixedWrites += audit.indexedAccessEscapes.widthSensitiveMixedWrites;
     total.numericRelations += audit.numericRelations;
     for (const receiver of indexedReceiverNames) {
       total.indexedReceivers[receiver].expressions += audit.indexedReceivers[receiver].expressions;
@@ -85,6 +91,7 @@ export function staticFactCounts(audit: StaticFactAudit): StaticFactCounts {
     booleanLogicalExpressions: audit.booleanLogicalExpressions,
     booleanLogicalTruthiness: audit.booleanLogicalTruthiness,
     indexedAccesses: { ...audit.indexedAccesses },
+    indexedAccessEscapes: { ...audit.indexedAccessEscapes },
     numericRelations: audit.numericRelations,
   };
 }
@@ -95,6 +102,9 @@ function addFacts(audit: StaticFactAudit, facts: IrExpressionStaticFacts): void 
   if (facts.truthinessUse === 'logical') audit.booleanLogicalTruthiness += 1;
   if (facts.booleanLogical) audit.booleanLogicalExpressions += 1;
   if (facts.numericRelation) audit.numericRelations += 1;
+  if (facts.indexedAccessEscape === 'width-sensitive-mixed-write') {
+    audit.indexedAccessEscapes.widthSensitiveMixedWrites += 1;
+  }
   if (!facts.indexedAccess) return;
   const receiver = audit.indexedReceivers[facts.indexedAccess.receiver];
   audit.indexedAccesses.expressions += 1;

@@ -44,12 +44,14 @@ export interface IrTypedStructBinding {
 
 export type IrIndexedReceiver =
   | 'Array'
+  | 'ArrayOrFloat32Array'
   | 'Float32Array'
   | 'Float64Array'
   | 'Int16Array'
   | 'Int32Array'
   | 'Int8Array'
   | 'Uint16Array'
+  | 'Uint16ArrayOrUint32Array'
   | 'Uint32Array'
   | 'Uint8Array'
   | 'Uint8ClampedArray';
@@ -66,6 +68,7 @@ export interface IrExpressionStaticFacts {
         writes: 0 | 1;
       }
     | undefined;
+  indexedAccessEscape?: 'width-sensitive-mixed-write' | undefined;
   numericRelation?: true | undefined;
   truthinessUse?: 'conditional' | 'explicit' | 'logical' | undefined;
 }
@@ -326,6 +329,9 @@ export interface StaticFactCounts {
     expressions: number;
     reads: number;
     writes: number;
+  };
+  indexedAccessEscapes: {
+    widthSensitiveMixedWrites: number;
   };
   numericRelations: number;
 }

@@ -16,6 +16,9 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 0
       }
     },
@@ -35,6 +38,9 @@
           "reads": 169,
           "writes": 51
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 26
       }
     },
@@ -50,9 +56,12 @@
         "booleanLogicalExpressions": 6,
         "booleanLogicalTruthiness": 6,
         "indexedAccesses": {
-          "expressions": 2,
-          "reads": 1,
-          "writes": 1
+          "expressions": 18,
+          "reads": 5,
+          "writes": 13
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 36
       }
@@ -73,6 +82,9 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 0
       }
     },
@@ -91,6 +103,9 @@
           "expressions": 4,
           "reads": 3,
           "writes": 1
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 17
       }
@@ -111,6 +126,9 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 2
       }
     },
@@ -129,6 +147,9 @@
           "expressions": 33,
           "reads": 32,
           "writes": 1
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 8
       }
@@ -149,6 +170,9 @@
           "reads": 5,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 29
       }
     },
@@ -167,6 +191,9 @@
           "expressions": 2,
           "reads": 2,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 2
       }
@@ -187,6 +214,9 @@
           "reads": 2,
           "writes": 1
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 6
       }
     },
@@ -205,6 +235,9 @@
           "expressions": 5,
           "reads": 5,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 17
       }
@@ -225,6 +258,9 @@
           "reads": 95,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 6
       }
     },
@@ -243,6 +279,9 @@
           "expressions": 0,
           "reads": 0,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 8
       }
@@ -263,6 +302,9 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 2
       }
     },
@@ -281,6 +323,9 @@
           "expressions": 24,
           "reads": 21,
           "writes": 3
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 34
       }
@@ -301,6 +346,9 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 2
       }
     },
@@ -319,6 +367,9 @@
           "expressions": 2,
           "reads": 2,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 2
       }
@@ -339,6 +390,9 @@
           "reads": 12,
           "writes": 16
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 98
       }
     },
@@ -357,6 +411,9 @@
           "expressions": 72,
           "reads": 12,
           "writes": 60
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 13
       }
@@ -377,6 +434,9 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 0
       }
     },
@@ -395,6 +455,9 @@
           "expressions": 0,
           "reads": 0,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 0
       }
@@ -415,6 +478,9 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 7
       }
     },
@@ -433,6 +499,9 @@
           "expressions": 3,
           "reads": 3,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 5
       }
@@ -453,6 +522,9 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 0
       }
     },
@@ -471,6 +543,9 @@
           "expressions": 254,
           "reads": 211,
           "writes": 43
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 65
       }
@@ -491,6 +566,9 @@
           "reads": 22,
           "writes": 3
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 38
       }
     },
@@ -509,6 +587,9 @@
           "expressions": 201,
           "reads": 54,
           "writes": 147
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 88
       }
@@ -529,6 +610,9 @@
           "reads": 70,
           "writes": 197
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 106
       }
     },
@@ -547,6 +631,9 @@
           "expressions": 6,
           "reads": 2,
           "writes": 4
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 44
       }
@@ -567,6 +654,9 @@
           "reads": 22,
           "writes": 97
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 44
       }
     },
@@ -585,6 +675,9 @@
           "expressions": 37,
           "reads": 30,
           "writes": 7
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 14
       }
@@ -605,6 +698,9 @@
           "reads": 23,
           "writes": 10
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 24
       }
     },
@@ -623,6 +719,9 @@
           "expressions": 260,
           "reads": 45,
           "writes": 215
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 24
       }
@@ -643,6 +742,9 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 0
       }
     },
@@ -661,6 +763,9 @@
           "expressions": 6,
           "reads": 6,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 7
       }
@@ -681,6 +786,9 @@
           "reads": 9,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 10
       }
     },
@@ -699,6 +807,9 @@
           "expressions": 26,
           "reads": 26,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 2
       }
@@ -719,6 +830,9 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 0
       }
     },
@@ -737,6 +851,9 @@
           "expressions": 875,
           "reads": 514,
           "writes": 361
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 262
       }
@@ -757,6 +874,9 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 11
       }
     },
@@ -775,6 +895,9 @@
           "expressions": 0,
           "reads": 0,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 0
       }
@@ -795,6 +918,9 @@
           "reads": 1,
           "writes": 1
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 3
       }
     },
@@ -813,6 +939,9 @@
           "expressions": 13,
           "reads": 12,
           "writes": 1
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 6
       }
@@ -833,6 +962,9 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 3
       }
     },
@@ -851,6 +983,9 @@
           "expressions": 0,
           "reads": 0,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 2
       }
@@ -871,6 +1006,9 @@
           "reads": 25,
           "writes": 3
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 3
       }
     },
@@ -889,6 +1027,9 @@
           "expressions": 8,
           "reads": 6,
           "writes": 2
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 13
       }
@@ -909,6 +1050,9 @@
           "reads": 8,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 24
       }
     },
@@ -927,6 +1071,9 @@
           "expressions": 0,
           "reads": 0,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 1
       }
@@ -947,6 +1094,9 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 0
       }
     },
@@ -965,6 +1115,9 @@
           "expressions": 0,
           "reads": 0,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 4
       }
@@ -985,6 +1138,9 @@
           "reads": 1,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 1
       }
     },
@@ -1003,6 +1159,9 @@
           "expressions": 0,
           "reads": 0,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 13
       }
@@ -1023,6 +1182,9 @@
           "reads": 1,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 11
       }
     },
@@ -1041,6 +1203,9 @@
           "expressions": 2,
           "reads": 1,
           "writes": 1
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 14
       }
@@ -1061,6 +1226,9 @@
           "reads": 7,
           "writes": 8
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 10
       }
     },
@@ -1079,6 +1247,9 @@
           "expressions": 15,
           "reads": 13,
           "writes": 2
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 52
       }
@@ -1099,6 +1270,9 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 2
       }
     },
@@ -1117,6 +1291,9 @@
           "expressions": 0,
           "reads": 0,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 0
       }
@@ -1137,6 +1314,9 @@
           "reads": 2,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 4
       }
     },
@@ -1152,9 +1332,12 @@
         "booleanLogicalExpressions": 24,
         "booleanLogicalTruthiness": 24,
         "indexedAccesses": {
-          "expressions": 349,
-          "reads": 254,
+          "expressions": 367,
+          "reads": 272,
           "writes": 130
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 1
         },
         "numericRelations": 175
       }
@@ -1175,6 +1358,9 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 13
       }
     },
@@ -1193,6 +1379,9 @@
           "expressions": 3,
           "reads": 3,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 0
       }
@@ -1213,6 +1402,9 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 4
       }
     },
@@ -1231,6 +1423,9 @@
           "expressions": 20,
           "reads": 16,
           "writes": 4
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 30
       }
@@ -1251,6 +1446,9 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 0
       }
     },
@@ -1270,6 +1468,9 @@
           "reads": 231,
           "writes": 333
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 179
       }
     },
@@ -1285,9 +1486,12 @@
         "booleanLogicalExpressions": 39,
         "booleanLogicalTruthiness": 41,
         "indexedAccesses": {
-          "expressions": 220,
+          "expressions": 223,
           "reads": 160,
-          "writes": 86
+          "writes": 89
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 96
       }
@@ -1308,6 +1512,9 @@
           "reads": 22,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 47
       }
     },
@@ -1326,6 +1533,9 @@
           "expressions": 465,
           "reads": 448,
           "writes": 18
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 200
       }
@@ -1346,6 +1556,9 @@
           "reads": 107,
           "writes": 12
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 102
       }
     },
@@ -1364,6 +1577,9 @@
           "expressions": 0,
           "reads": 0,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 12
       }
@@ -1384,6 +1600,9 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 0
       }
     },
@@ -1399,9 +1618,12 @@
         "booleanLogicalExpressions": 3,
         "booleanLogicalTruthiness": 4,
         "indexedAccesses": {
-          "expressions": 24,
-          "reads": 23,
+          "expressions": 27,
+          "reads": 26,
           "writes": 1
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 7
       }
@@ -1422,6 +1644,9 @@
           "reads": 2,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 7
       }
     },
@@ -1440,6 +1665,9 @@
           "expressions": 0,
           "reads": 0,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 3
       }
@@ -1460,6 +1688,9 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 14
       }
     },
@@ -1478,6 +1709,9 @@
           "expressions": 83,
           "reads": 32,
           "writes": 51
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 24
       }
@@ -1498,6 +1732,9 @@
           "reads": 23,
           "writes": 62
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 31
       }
     },
@@ -1516,6 +1753,9 @@
           "expressions": 79,
           "reads": 30,
           "writes": 49
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 23
       }
@@ -1536,6 +1776,9 @@
           "reads": 27,
           "writes": 32
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 12
       }
     },
@@ -1555,6 +1798,9 @@
           "reads": 314,
           "writes": 113
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 283
       }
     },
@@ -1570,9 +1816,12 @@
         "booleanLogicalExpressions": 135,
         "booleanLogicalTruthiness": 136,
         "indexedAccesses": {
-          "expressions": 205,
-          "reads": 183,
+          "expressions": 208,
+          "reads": 186,
           "writes": 22
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 6
         },
         "numericRelations": 44
       }
@@ -1593,6 +1842,9 @@
           "reads": 5,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 5
       }
     },
@@ -1608,9 +1860,12 @@
         "booleanLogicalExpressions": 61,
         "booleanLogicalTruthiness": 62,
         "indexedAccesses": {
-          "expressions": 402,
-          "reads": 141,
+          "expressions": 405,
+          "reads": 144,
           "writes": 261
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 6
         },
         "numericRelations": 35
       }
@@ -1631,6 +1886,9 @@
           "reads": 18,
           "writes": 4
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 18
       }
     },
@@ -1649,6 +1907,9 @@
           "expressions": 0,
           "reads": 0,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 0
       }
@@ -1669,6 +1930,9 @@
           "reads": 4,
           "writes": 9
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 1
       }
     },
@@ -1687,6 +1951,9 @@
           "expressions": 0,
           "reads": 0,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 2
       }
@@ -1707,6 +1974,9 @@
           "reads": 138,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 58
       }
     },
@@ -1725,6 +1995,9 @@
           "expressions": 3,
           "reads": 3,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 2
       }
@@ -1745,6 +2018,9 @@
           "reads": 0,
           "writes": 1
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 4
       }
     },
@@ -1763,6 +2039,9 @@
           "expressions": 0,
           "reads": 0,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 0
       }
@@ -1783,6 +2062,9 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 1
       }
     },
@@ -1801,6 +2083,9 @@
           "expressions": 4,
           "reads": 4,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 8
       }
@@ -1821,6 +2106,9 @@
           "reads": 79,
           "writes": 28
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 43
       }
     },
@@ -1839,6 +2127,9 @@
           "expressions": 6,
           "reads": 5,
           "writes": 1
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 3
       }
@@ -1859,6 +2150,9 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 0
       }
     },
@@ -1877,6 +2171,9 @@
           "expressions": 2,
           "reads": 2,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 45
       }
@@ -1897,6 +2194,9 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 5
       }
     },
@@ -1915,6 +2215,9 @@
           "expressions": 91,
           "reads": 58,
           "writes": 33
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 102
       }
@@ -1935,6 +2238,9 @@
           "reads": 15,
           "writes": 2
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 23
       }
     },
@@ -1953,6 +2259,9 @@
           "expressions": 12,
           "reads": 12,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 15
       }
@@ -1973,6 +2282,9 @@
           "reads": 1,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 1
       }
     },
@@ -1991,6 +2303,9 @@
           "expressions": 2,
           "reads": 1,
           "writes": 1
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 5
       }
@@ -2011,6 +2326,9 @@
           "reads": 426,
           "writes": 352
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 628
       }
     },
@@ -2029,6 +2347,9 @@
           "expressions": 3,
           "reads": 3,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 22
       }
@@ -2049,6 +2370,9 @@
           "reads": 9,
           "writes": 2
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 9
       }
     },
@@ -2067,6 +2391,9 @@
           "expressions": 131,
           "reads": 96,
           "writes": 35
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 60
       }
@@ -2087,6 +2414,9 @@
           "reads": 17,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 84
       }
     },
@@ -2105,6 +2435,9 @@
           "expressions": 44,
           "reads": 39,
           "writes": 7
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 111
       }
@@ -2125,6 +2458,9 @@
           "reads": 1,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 9
       }
     },
@@ -2143,6 +2479,9 @@
           "expressions": 12,
           "reads": 8,
           "writes": 4
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 72
       }
@@ -2163,6 +2502,9 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 1
       }
     },
@@ -2181,6 +2523,9 @@
           "expressions": 34,
           "reads": 9,
           "writes": 25
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 7
       }
@@ -2201,6 +2546,9 @@
           "reads": 34,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 38
       }
     },
@@ -2219,6 +2567,9 @@
           "expressions": 0,
           "reads": 0,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 2
       }
@@ -2239,6 +2590,9 @@
           "reads": 16,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 10
       }
     },
@@ -2257,6 +2611,9 @@
           "expressions": 8,
           "reads": 6,
           "writes": 2
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 15
       }
@@ -2277,6 +2634,9 @@
           "reads": 1,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 6
       }
     },
@@ -2295,6 +2655,9 @@
           "expressions": 0,
           "reads": 0,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 5
       }
@@ -2315,6 +2678,9 @@
           "reads": 2,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 12
       }
     },
@@ -2333,6 +2699,9 @@
           "expressions": 2,
           "reads": 2,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 1
       }
@@ -2353,6 +2722,9 @@
           "reads": 4,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 13
       }
     },
@@ -2371,6 +2743,9 @@
           "expressions": 0,
           "reads": 0,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 0
       }
@@ -2391,6 +2766,9 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 1
       }
     },
@@ -2409,6 +2787,9 @@
           "expressions": 3,
           "reads": 2,
           "writes": 1
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 0
       }
@@ -2429,6 +2810,9 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 6
       }
     },
@@ -2447,6 +2831,9 @@
           "expressions": 13,
           "reads": 13,
           "writes": 0
+        },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
         },
         "numericRelations": 5
       }
@@ -2467,6 +2854,9 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 0
       }
     },
@@ -2486,11 +2876,14 @@
           "reads": 0,
           "writes": 0
         },
+        "indexedAccessEscapes": {
+          "widthSensitiveMixedWrites": 0
+        },
         "numericRelations": 9
       }
     }
   ],
-  "schemaVersion": 5,
+  "schemaVersion": 6,
   "summary": {
     "declarations": 9122,
     "diagnostics": 0,
@@ -2503,13 +2896,17 @@
       "booleanOrExpressions": 1364,
       "booleanTruthinessUses": 7882,
       "indexedAccesses": {
-        "reads": 4627,
-        "writes": 2915
+        "reads": 4658,
+        "writes": 2930
       },
       "indexedReceivers": {
         "Array": {
           "reads": 2615,
           "writes": 453
+        },
+        "ArrayOrFloat32Array": {
+          "reads": 4,
+          "writes": 15
         },
         "Float32Array": {
           "reads": 1392,
@@ -2534,6 +2931,10 @@
         "Uint16Array": {
           "reads": 37,
           "writes": 26
+        },
+        "Uint16ArrayOrUint32Array": {
+          "reads": 27,
+          "writes": 0
         },
         "Uint32Array": {
           "reads": 2,
@@ -2560,15 +2961,23 @@
       "booleanLogicalExpressions": 2613,
       "booleanLogicalTruthiness": 2739,
       "indexedAccesses": {
-        "expressions": 7327,
-        "reads": 4524,
-        "writes": 2917
+        "expressions": 7373,
+        "reads": 4555,
+        "writes": 2932
+      },
+      "indexedAccessEscapes": {
+        "widthSensitiveMixedWrites": 13
       },
       "indexedReceivers": {
         "Array": {
           "expressions": 2944,
           "reads": 2512,
           "writes": 455
+        },
+        "ArrayOrFloat32Array": {
+          "expressions": 19,
+          "reads": 4,
+          "writes": 15
         },
         "Float32Array": {
           "expressions": 3307,
@@ -2599,6 +3008,11 @@
           "expressions": 63,
           "reads": 37,
           "writes": 26
+        },
+        "Uint16ArrayOrUint32Array": {
+          "expressions": 27,
+          "reads": 27,
+          "writes": 0
         },
         "Uint32Array": {
           "expressions": 10,

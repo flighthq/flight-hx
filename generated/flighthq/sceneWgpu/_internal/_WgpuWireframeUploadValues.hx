@@ -53,9 +53,9 @@ class _WgpuWireframeUploadValues {
       var t:Dynamic = 0.0;
       while ((cast ((cast t : Float) < (cast triangleCount : Float)) : Bool)) {
         var base:Dynamic = (t * 3.0);
-        var i0:Dynamic = _Runtime.getIndex(triangleIndices, base);
-        var i1:Dynamic = _Runtime.getIndex(triangleIndices, (base + 1.0));
-        var i2:Dynamic = _Runtime.getIndex(triangleIndices, (base + 2.0));
+        var i0:Dynamic = flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(triangleIndices, base);
+        var i1:Dynamic = flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(triangleIndices, (base + 1.0));
+        var i2:Dynamic = flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(triangleIndices, (base + 2.0));
         var out:Dynamic = (t * 6.0);
         _Runtime.setIndex(lines, out, i0);
         _Runtime.setIndex(lines, (out + 1.0), i1);

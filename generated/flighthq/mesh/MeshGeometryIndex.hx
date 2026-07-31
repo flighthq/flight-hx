@@ -28,9 +28,9 @@ class MeshGeometryIndex {
       {
         var t:Dynamic = 0.0;
         while ((cast ((cast (t + 2.0) : Float) < (cast indexCount : Float)) : Bool)) {
-          var a:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, t), function():Dynamic return cast t);
-          var b:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, (t + 1.0)), function():Dynamic return cast (t + 1.0));
-          var c:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, (t + 2.0)), function():Dynamic return cast (t + 2.0));
+          var a:Dynamic = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, t), function():Dynamic return cast t);
+          var b:Dynamic = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, (t + 1.0)), function():Dynamic return cast (t + 1.0));
+          var c:Dynamic = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, (t + 2.0)), function():Dynamic return cast (t + 2.0));
           _Runtime.pushMany(lines, cast ([a, b, b, c, c, a] : Array<Dynamic>));
           (t = cast ((t + 3.0) : Dynamic));
         }
@@ -39,9 +39,9 @@ class MeshGeometryIndex {
       {
         var t:Dynamic = 0.0;
         while ((cast ((cast (t + 2.0) : Float) < (cast indexCount : Float)) : Bool)) {
-          var a:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, t), function():Dynamic return cast t);
-          var b:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, (t + 1.0)), function():Dynamic return cast (t + 1.0));
-          var c:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, (t + 2.0)), function():Dynamic return cast (t + 2.0));
+          var a:Dynamic = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, t), function():Dynamic return cast t);
+          var b:Dynamic = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, (t + 1.0)), function():Dynamic return cast (t + 1.0));
+          var c:Dynamic = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, (t + 2.0)), function():Dynamic return cast (t + 2.0));
           _Runtime.pushMany(lines, cast ([a, b, b, c, c, a] : Array<Dynamic>));
           t++;
         }
@@ -75,7 +75,7 @@ class MeshGeometryIndex {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(indices, 'length') : Float)) : Bool)) {
-        var src:Dynamic = (_Runtime.getIndex(indices, i) * floatsPerVertex);
+        var src:Dynamic = (flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, i) * floatsPerVertex);
         var dst:Dynamic = (i * floatsPerVertex);
         {
           var f:Dynamic = 0.0;

@@ -157,9 +157,9 @@ class PickScene {
       var triangle:Dynamic = 0.0;
       while ((cast ((cast triangle : Float) < (cast triangleCount : Float)) : Bool)) {
         var base:Dynamic = (triangle * 3.0);
-        var i0:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, base), function():Dynamic return cast base);
-        var i1:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, (base + 1.0)), function():Dynamic return cast (base + 1.0));
-        var i2:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, (base + 2.0)), function():Dynamic return cast (base + 2.0));
+        var i0:Dynamic = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, base), function():Dynamic return cast base);
+        var i1:Dynamic = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, (base + 1.0)), function():Dynamic return cast (base + 1.0));
+        var i2:Dynamic = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, (base + 2.0)), function():Dynamic return cast (base + 2.0));
         _Runtime.callValue(getMeshGeometryVertexPosition, cast ([PickScene._a__pickScene, geometry, i0] : Array<Dynamic>));
         _Runtime.callValue(getMeshGeometryVertexPosition, cast ([PickScene._b__pickScene, geometry, i1] : Array<Dynamic>));
         _Runtime.callValue(getMeshGeometryVertexPosition, cast ([PickScene._c__pickScene, geometry, i2] : Array<Dynamic>));

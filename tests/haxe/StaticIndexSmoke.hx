@@ -55,6 +55,26 @@ class StaticIndexSmoke {
       throw 'typed-array out-of-bounds read was not nullish';
     }
 
+    final mixedArray:Array<Dynamic> = [3, 4];
+    final mixedFloat32 = new _Float32Array([5, 6]);
+    if (_StaticIndex.readArrayOrFloat32Array(mixedArray, 1) != 4
+      || _StaticIndex.readArrayOrFloat32Array(mixedFloat32, 1) != 6) {
+      throw 'Array-or-Float32Array read';
+    }
+    if (_StaticIndex.writeArrayOrFloat32Array(mixedArray, 0, 7) != 7
+      || _StaticIndex.writeArrayOrFloat32Array(mixedFloat32, 0, 8) != 8
+      || mixedArray[0] != 7
+      || _StaticIndex.readFloat32Array(mixedFloat32, 0) != 8) {
+      throw 'Array-or-Float32Array write';
+    }
+
+    final mixedUint16 = new _UInt16Array([65535]);
+    final mixedUint32 = new _UInt32Array([4294967295.0]);
+    if (_StaticIndex.readUint16ArrayOrUint32Array(mixedUint16, 0) != 65535
+      || _StaticIndex.readUint16ArrayOrUint32Array(mixedUint32, 0) != 4294967295.0) {
+      throw 'Uint16Array-or-Uint32Array read';
+    }
+
     assertWrite(
       _StaticIndex.writeFloat32Array(new _Float32Array(1), 0, 1.25),
       1.25,

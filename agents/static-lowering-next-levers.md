@@ -1,6 +1,6 @@
 # Static Lowering Next Levers
 
-Status: the shared static-facts mechanism, primitive Boolean/numeric emission, the checker-proven indexed-access tranche, and the emitter-known synthetic Array follow-up are enabled. Review's Step 3 script benchmark was positive overall: camera2d stayed flat while particles improved 21% by median.
+Status: the shared static-facts mechanism, primitive Boolean/numeric emission, the checker-proven indexed-access tranche, the emitter-known synthetic Array follow-up, and the storage-compatible part of the mixed-union follow-up are enabled. Review's Step 3 script benchmark was positive overall: camera2d stayed flat while particles improved 21% by median.
 
 This proposal covers two independent generator optimizations after typed-struct tranche 5:
 
@@ -69,23 +69,25 @@ The first implementation should convert ordinary reads, simple writes, and the c
 
 ## Enabled indexed result
 
-Generation now emits `_StaticIndex` inline endpoints for the ten proven receiver families. Exact final-output counters, collected after speculative emission has been discarded, report 7,436 direct operations:
+Generation now emits `_StaticIndex` inline endpoints for the ten single-family and two mixed receiver bindings. Exact final-output counters, collected after speculative emission has been discarded, report 7,588 direct operations:
 
-| Receiver            | Direct reads | Direct writes |     Total |
-| ------------------- | -----------: | ------------: | --------: |
-| `Array`             |        2,615 |           453 |     3,068 |
-| `Float32Array`      |        1,392 |         1,979 |     3,371 |
-| `Float64Array`      |           59 |            51 |       110 |
-| `Int16Array`        |            5 |             4 |         9 |
-| `Int32Array`        |           13 |             7 |        20 |
-| `Int8Array`         |            0 |             0 |         0 |
-| `Uint16Array`       |           37 |            26 |        63 |
-| `Uint32Array`       |            2 |             8 |        10 |
-| `Uint8Array`        |          164 |            28 |       192 |
-| `Uint8ClampedArray` |          340 |           359 |       699 |
-| **Total**           |    **4,627** |     **2,915** | **7,542** |
+| Receiver                   | Direct reads | Direct writes |     Total |
+| -------------------------- | -----------: | ------------: | --------: |
+| `Array`                    |        2,615 |           453 |     3,068 |
+| `ArrayOrFloat32Array`      |            4 |            15 |        19 |
+| `Float32Array`             |        1,392 |         1,979 |     3,371 |
+| `Float64Array`             |           59 |            51 |       110 |
+| `Int16Array`               |            5 |             4 |         9 |
+| `Int32Array`               |           13 |             7 |        20 |
+| `Int8Array`                |            0 |             0 |         0 |
+| `Uint16Array`              |           37 |            26 |        63 |
+| `Uint16ArrayOrUint32Array` |           27 |             0 |        27 |
+| `Uint32Array`              |            2 |             8 |        10 |
+| `Uint8Array`               |          164 |            28 |       192 |
+| `Uint8ClampedArray`        |          340 |           359 |       699 |
+| **Total**                  |    **4,658** |     **2,930** | **7,588** |
 
-The generated tree retains 677 `_Runtime.getIndex` and 141 `_Runtime.setIndex` calls. Checker-proven source facts account for 4,524 reads and 2,917 writes before final module/patch selection; exact final-output counters are authoritative and additionally include the 106 emitter-known reads below.
+The generated tree retains 646 `_Runtime.getIndex` and 126 `_Runtime.setIndex` calls. Checker-proven source facts account for 4,555 reads and 2,932 writes before final module/patch selection; exact final-output counters are authoritative and additionally include the 106 emitter-known reads below.
 
 Adversarial coverage includes all ten families, locally shadowed types, unconstrained and constrained generics, same-family and mixed-family unions, readonly wrappers, fractional keys, side-effecting receiver/key/value expressions, out-of-bounds reads, setter result identity, and signed/unsigned/clamped coercion. The endpoint smoke passes Eval, JavaScript, and Python. It also replaces fixed-width-shift coercion in the portable `Int8Array`/`Int16Array` fallbacks, which was incorrect on Python's unbounded integers.
 
@@ -99,7 +101,20 @@ The emitter now marks two Array sources it creates itself instead of routing the
 | Packed high-arity function arguments |           27 |
 | **Total**                            |      **106** |
 
-Both classes use `_StaticIndex.readArray` and contribute to the exact Array/direct-index totals above. Dedicated report counters keep them separate from checker-proven source expressions. Ordinary destructuring remains dynamic: 241 generated local reads plus 11 destructured-parameter reads are parked until the source receiver fact survives lowering. The 59 mixed typed-array-union sites and all dictionary/presence-sensitive schemas are also unchanged.
+Both classes use `_StaticIndex.readArray` and contribute to the exact Array/direct-index totals above. Dedicated report counters keep them separate from checker-proven source expressions. Ordinary destructuring remains dynamic: 241 generated local reads plus 11 destructured-parameter reads are parked until the source receiver fact survives lowering. Dictionary and presence-sensitive schemas are also unchanged.
+
+## Enabled storage-compatible mixed unions
+
+The approved pool contains 59 exact two-member mixed-union sites. The generator now binds the 46 operations whose members can share a sound endpoint:
+
+| Receiver binding                | Direct reads | Direct writes |  Total |
+| ------------------------------- | -----------: | ------------: | -----: |
+| `ArrayOrFloat32Array`           |            4 |            15 |     19 |
+| `Uint16ArrayOrUint32Array`      |           27 |             0 |     27 |
+| **Enabled**                     |       **31** |        **15** | **46** |
+| Width-sensitive unsigned writes |            0 |            13 |     13 |
+
+The 13 `Uint16Array | Uint32Array` writes remain dynamic and are counted explicitly as `widthSensitiveMixedWrites`. JavaScript can preserve the selected typed array's coercion through raw indexing, but the non-Lime portable fallback erases both wrappers to an underlying `Array`; a shared setter therefore cannot distinguish 16-bit from 32-bit coercion soundly. Eight wider tuple/Array/Float32Array-union writes were outside the approved pool and also remain dynamic. Optional/nullish receivers, heterogeneous Array/typed-array unions, dictionaries, presence-sensitive schemas, and destructuring remain parked.
 
 ## Truthiness and comparison census
 
@@ -143,6 +158,6 @@ Direct numeric relation preserves `NaN`, infinities, signed zero, evaluation ord
 2. Enable Boolean truthiness plus numeric relations. Completed; review measured script frame cost at about 8.8 ms versus 15.2 ms before enablement.
 3. Enable typed indexed endpoints for the ten single-family receiver bindings. Completed locally with exact generated counters and cross-target smoke coverage.
 4. Measure Step 3 in review's update-and-prepare benchmark against the new 8.8 ms baseline. Completed: camera2d was flat; particles improved from 35.0 to 42.9 median fps across five runs per side, a 21% gain with non-overlapping samples.
-5. Consider emitter-known synthetic arrays and homogeneous mixed typed-array unions only as separately audited follow-ups. The 106-read synthetic Array slice is completed; mixed unions remain parked.
+5. Consider emitter-known synthetic arrays and homogeneous mixed typed-array unions only as separately audited follow-ups. The 106-read synthetic Array slice and 46 storage-compatible mixed-union operations are completed; 13 width-sensitive mixed writes remain explicitly parked.
 
 Each enablement should retain exact generated coverage counters, analogous to typed-struct direct-emission coverage, so a checker or upstream drift cannot silently change the optimized surface.

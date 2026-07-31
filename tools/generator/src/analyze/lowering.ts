@@ -24,7 +24,7 @@ export interface PackageLoweringAudit {
 
 export interface LoweringAudit {
   packages: PackageLoweringAudit[];
-  schemaVersion: 5;
+  schemaVersion: 6;
   summary: {
     declarations: number;
     diagnostics: number;
@@ -53,7 +53,7 @@ export function auditLowering(workspaceDirectory: string, typedStructs?: TypedSt
 
   return {
     packages,
-    schemaVersion: 5,
+    schemaVersion: 6,
     summary: {
       declarations: sum(packages, (item) => item.declarations),
       diagnostics: sum(packages, (item) => item.diagnostics.length),
