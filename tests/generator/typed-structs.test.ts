@@ -3,11 +3,13 @@ import ts from 'typescript';
 
 import {
   createTypedStructRegistry,
+  tranche6TypedStructCandidates,
   typedStructRegistry,
   type TypedStructCandidate,
 } from '../../tools/generator/src/analyze/typed-structs.ts';
 import { upstreamTypeScriptProgram } from '../../tools/generator/src/analyze/program.ts';
 import { emitHaxeModule } from '../../tools/generator/src/emit/haxe.ts';
+import { typedStructSummary } from '../../tools/generator/src/emit/reports.ts';
 import { lowerTypeScriptSource } from '../../tools/generator/src/lower/typescript.ts';
 import type { IrExpression, IrTypedStructBinding } from '../../tools/generator/src/model/ir.ts';
 
@@ -20,7 +22,7 @@ const fixtureCandidate: TypedStructCandidate = {
 };
 
 describe('typed struct analysis', () => {
-  it('enables the eligible allowlist through tranche five while leaving Rectangle dynamic', () => {
+  it('audits tranche six without widening direct emission or enabling Rectangle', () => {
     const workspace = path.resolve('.');
     const programAndChecker = upstreamTypeScriptProgram(workspace);
     const report = typedStructRegistry(workspace, 'fixture', undefined, programAndChecker).report;
@@ -29,18 +31,24 @@ describe('typed struct analysis', () => {
     const camera2D = report.candidates.find((candidate) => candidate.name === 'Camera2D');
     const transform2DRuntime = report.candidates.find((candidate) => candidate.name === 'HasTransform2DRuntime');
     const perspective = report.candidates.find((candidate) => candidate.name === 'PerspectiveProjection');
+    const scene = report.candidates.find((candidate) => candidate.name === 'Scene');
+    const asset = report.candidates.find((candidate) => candidate.name === 'AssetDescriptor');
+    const host = report.candidates.find((candidate) => candidate.name === 'DeviceInfo');
+    const serialization = report.candidates.find((candidate) => candidate.name === 'GltfDocument');
+    const codec = report.candidates.find((candidate) => candidate.name === 'ParticleFormatCodec');
+    const trancheSix = report.candidates.slice(-tranche6TypedStructCandidates.length);
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 0,
-      bindableAccesses: 3_271,
-      candidates: 55,
+      auditOnlySchemas: 350,
+      bindableAccesses: 10_263,
+      candidates: 405,
       directAccesses: 3_271,
       directSchemas: 54,
-      eligible: 54,
-      escapes: 154,
-      fields: 243,
+      eligible: 404,
+      escapes: 348,
+      fields: 2_028,
       ineligible: 1,
-      pendingAccesses: 0,
+      pendingAccesses: 6_992,
       reflectiveSurvivors: 152,
     });
     expect(rectangle?.eligible).toBe(false);
@@ -86,6 +94,53 @@ describe('typed struct analysis', () => {
     });
     expect(perspective?.escapes).toHaveLength(7);
     expect(perspective?.escapes.every((escape) => escape.reason === 'incompatible-union')).toBe(true);
+    expect(tranche6TypedStructCandidates).toHaveLength(350);
+    expect(new Set(tranche6TypedStructCandidates.map((candidate) => candidate.purpose))).toEqual(
+      new Set(['broad asset document', 'broad host document', 'broad scene document', 'broad serialization document']),
+    );
+    expect(
+      Object.fromEntries(
+        ['scene', 'asset', 'host', 'serialization'].map((family) => [
+          family,
+          tranche6TypedStructCandidates.filter((candidate) => candidate.purpose === `broad ${family} document`).length,
+        ]),
+      ),
+    ).toEqual({ asset: 76, host: 104, scene: 27, serialization: 143 });
+    expect(trancheSix.every((candidate) => candidate.eligible && candidate.reasons.length === 0)).toBe(true);
+    expect(trancheSix.every((candidate) => candidate.emission.mode === 'audit-only')).toBe(true);
+    expect(new Set(tranche6TypedStructCandidates.map(candidateId)).size).toBe(tranche6TypedStructCandidates.length);
+    expect(scene?.emission.pendingAccesses).toBe(14);
+    expect(asset?.emission.pendingAccesses).toBe(10);
+    expect(host?.emission.pendingAccesses).toBe(50);
+    expect(serialization?.emission.pendingAccesses).toBe(25);
+    expect(codec?.memberEscapes).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          member: 'parseToDocument',
+          reason: 'receiver-sensitive-method',
+          source: 'upstream/packages/particles-formats/src/formatRegistry.ts:23',
+        }),
+      ]),
+    );
+    expect(typedStructSummary(report)).toContain(
+      '| `@flighthq/particles-formats:upstream/packages/particles-formats/src/formatRegistry.ts#ParticleFormatCodec` | `parseToDocument` | `receiver-sensitive-method` | `upstream/packages/particles-formats/src/formatRegistry.ts:23` |',
+    );
+    expect(
+      tranche6TypedStructCandidates.some(
+        (candidate) => candidate.name.endsWith('Backend') || candidate.source.includes('/host-'),
+      ),
+    ).toBe(false);
+    expect(tranche6TypedStructCandidates.map((candidate) => candidate.name)).not.toEqual(
+      expect.arrayContaining([
+        'AcceleratorParseError',
+        'CubeTextureLike',
+        'EntityWithoutRuntime',
+        'MeshGeometryGlData',
+        'MeshGeometryRuntime',
+        'MeshGeometryWgpuData',
+        'ParticleDesignerRawDict',
+      ]),
+    );
   });
 
   it('keeps eligible audit-only schemas reflective until review enables them', () => {
@@ -370,6 +425,10 @@ function lowerFixture(text: string, candidate: TypedStructCandidate = fixtureCan
     lowered: lowerTypeScriptSource(source, '@flighthq/types', workspace, checker, registry),
     registry,
   };
+}
+
+function candidateId(candidate: TypedStructCandidate): string {
+  return `${candidate.packageName}:${candidate.source}#${candidate.name}`;
 }
 
 function collectTypedStructBindings(value: unknown): IrTypedStructBinding[] {
