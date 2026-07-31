@@ -55,7 +55,7 @@ class Shortcut {
     var p:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(platform, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast _Runtime.callProperty(_Runtime.regexp('^mac', 'i'), 'test', cast ([platform] : Array<Dynamic>)); }
     if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool)) { return cast false; }
-    p = _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'platform'), function():Dynamic return cast '');
+    p = _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'platform'), function():Dynamic return cast '');
     return cast _Runtime.callProperty(_Runtime.regexp('mac', 'i'), 'test', cast ([p] : Array<Dynamic>));
     return cast null;
   }

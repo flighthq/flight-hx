@@ -28,12 +28,12 @@ class Share {
 
   public static function createWebShareBackend():ShareBackend {
     return cast { isAvailable: function() {
-      return cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) && (cast _Runtime.hasField(_Runtime.globalValue('navigator'), 'share') : Bool));
+      return cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) && (cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'share') : Bool));
     }, canShare: function(content:Dynamic) {
-      if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) || (cast !(cast _Runtime.hasField(_Runtime.globalValue('navigator'), 'share') : Bool) : Bool)) : Bool)) { return cast false; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'share') : Bool) : Bool)) : Bool)) { return cast false; }
       try {
         var data:Dynamic = _Runtime.callValue(Share.shareContentToNavigatorData__share, cast ([content] : Array<Dynamic>));
-        return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.globalValue('navigator'), 'canShare', cast ([data] : Array<Dynamic>)), function():Dynamic return cast false);
+        return cast _Runtime.coalesce(_Runtime.callOptionalProperty(flighthq._internal.backend.DomNavigatorBackend.value(), 'canShare', cast ([data] : Array<Dynamic>)), function():Dynamic return cast false);
       } catch (__error:Dynamic) {
         return cast false;
       }
@@ -41,7 +41,7 @@ class Share {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           var __flowBranch0:Dynamic;
-          if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) || (cast !(cast _Runtime.hasField(_Runtime.globalValue('navigator'), 'share') : Bool) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'share')), 'function') : Bool)) : Bool)) {
+          if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'share') : Bool) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'share')), 'function') : Bool)) : Bool)) {
             __flowBranch0 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn(false);
             });
@@ -52,7 +52,7 @@ class Share {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
               var data:Dynamic = cast _Runtime.UNDEFINED;
               data = _Runtime.callValue(Share.shareContentToNavigatorData__share, cast ([content] : Array<Dynamic>));
-              return flighthq._internal._Async.flatMap(flighthq._internal.backend.DomNavigatorBackend.call(_Runtime.globalValue('navigator'), 'share', cast ([data] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
+              return flighthq._internal._Async.flatMap(flighthq._internal.backend.DomNavigatorBackend.call(flighthq._internal.backend.DomNavigatorBackend.value(), 'share', cast ([data] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
                 __awaitValue1;
                 return flighthq._internal._Async.flowReturn(true);
               });
@@ -71,7 +71,7 @@ class Share {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           var __flowBranch2:Dynamic;
-          if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) || (cast !(cast _Runtime.hasField(_Runtime.globalValue('navigator'), 'share') : Bool) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'share')), 'function') : Bool)) : Bool)) {
+          if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'share') : Bool) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'share')), 'function') : Bool)) : Bool)) {
             __flowBranch2 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn({ completed: false, activityType: null, dismissed: false });
             });
@@ -82,7 +82,7 @@ class Share {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
               var data:Dynamic = cast _Runtime.UNDEFINED;
               data = _Runtime.callValue(Share.shareContentToNavigatorData__share, cast ([content] : Array<Dynamic>));
-              return flighthq._internal._Async.flatMap(flighthq._internal.backend.DomNavigatorBackend.call(_Runtime.globalValue('navigator'), 'share', cast ([data] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
+              return flighthq._internal._Async.flatMap(flighthq._internal.backend.DomNavigatorBackend.call(flighthq._internal.backend.DomNavigatorBackend.value(), 'share', cast ([data] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
                 __awaitValue3;
                 return flighthq._internal._Async.flowReturn({ completed: true, activityType: null, dismissed: false });
               });

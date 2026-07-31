@@ -2020,6 +2020,9 @@ function emitExpression(expression: IrExpression): string {
         return `_Runtime.defaultUndefined(${emitExpression(expression.left)}, function():Dynamic return cast ${emitExpression(expression.right)})`;
       }
       if (expression.kind === 'binary' && expression.operator === 'in') {
+        if (expression.domRootBinding) {
+          return `flighthq._internal.backend.${expression.domRootBinding}.hasField(${emitExpression(expression.right)}, ${emitExpression(expression.left)})`;
+        }
         return `_Runtime.hasField(${emitExpression(expression.right)}, ${emitExpression(expression.left)})`;
       }
       if (expression.kind === 'binary' && ['<', '<=', '>', '>='].includes(expression.operator)) {
@@ -2137,6 +2140,9 @@ function emitExpression(expression: IrExpression): string {
       return output;
     }
     case 'identifier':
+      if (expression.domRootBinding) {
+        return `flighthq._internal.backend.${expression.domRootBinding}.value()`;
+      }
       if (expression.name === 'super' || expression.name === 'this') return expression.name;
       // Barrel values are statics of the module's namespace class; nominal classes in
       // the same module reference them cross-class, so qualify with the class name.

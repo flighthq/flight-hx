@@ -48,10 +48,10 @@ class Menu {
 
   public static function buildWebMenuElement__menu(items:Array<MenuItemTemplate>, onSelect:Dynamic):Dynamic {
     var menu:Dynamic = cast _Runtime.UNDEFINED;
-    menu = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['ul'] : Array<Dynamic>));
+    menu = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['ul'] : Array<Dynamic>));
     _Runtime.setField(_Runtime.field(menu, 'style'), 'cssText', _Runtime.join(cast (['position:fixed', 'z-index:2147483647', 'margin:0', 'padding:4px 0', 'list-style:none', 'background:#fff', 'border:1px solid #ccc', 'border-radius:4px', 'box-shadow:0 4px 12px rgba(0,0,0,.15)', 'min-width:160px', 'font:13px/1.4 system-ui,sans-serif', 'color:#111', 'user-select:none'] : Array<Dynamic>), ';'));
     for (item in _Runtime.iterable(items)) {
-      var li:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['li'] : Array<Dynamic>));
+      var li:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['li'] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(_Runtime.field(item, 'type'), 'separator') : Bool)) {
         _Runtime.setField(_Runtime.field(li, 'style'), 'cssText', 'height:1px;margin:4px 8px;background:#e0e0e0;');
         _Runtime.callProperty(menu, 'appendChild', cast ([li] : Array<Dynamic>));
@@ -63,22 +63,22 @@ class Menu {
       if ((cast !_Runtime.strictEquals(_Runtime.field(item, 'id'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(_Runtime.field(li, 'dataset'), 'itemId', _Runtime.field(item, 'id')); }
       _Runtime.setField(_Runtime.field(li, 'style'), 'cssText', _Runtime.join(cast (['display:flex', 'align-items:center', 'padding:5px 12px 5px 28px', ('cursor:' + ((cast enabled : Bool) ? (cast 'default' : Dynamic) : (cast 'not-allowed' : Dynamic))), ('color:' + ((cast enabled : Bool) ? (cast '#111' : Dynamic) : (cast '#999' : Dynamic))), 'position:relative'] : Array<Dynamic>), ';'));
       if ((cast _Runtime.strictEquals(_Runtime.field(item, 'checked'), true) : Bool)) {
-        var mark:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['span'] : Array<Dynamic>));
+        var mark:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['span'] : Array<Dynamic>));
         _Runtime.setField(mark, 'textContent', ((cast _Runtime.strictEquals(_Runtime.field(item, 'type'), 'radio') : Bool) ? (cast '●' : Dynamic) : (cast '✓' : Dynamic)));
         _Runtime.setField(_Runtime.field(mark, 'style'), 'cssText', 'position:absolute;left:8px;font-size:11px;');
         _Runtime.callProperty(li, 'appendChild', cast ([mark] : Array<Dynamic>));
       }
-      var labelEl:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['span'] : Array<Dynamic>));
+      var labelEl:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['span'] : Array<Dynamic>));
       _Runtime.setField(labelEl, 'textContent', _Runtime.coalesce(_Runtime.field(item, 'label'), function():Dynamic return cast ''));
       _Runtime.setField(_Runtime.field(labelEl, 'style'), 'cssText', 'flex:1;');
       _Runtime.callProperty(li, 'appendChild', cast ([labelEl] : Array<Dynamic>));
       if ((cast hasSubmenu : Bool)) {
-        var arrow:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['span'] : Array<Dynamic>));
+        var arrow:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['span'] : Array<Dynamic>));
         _Runtime.setField(arrow, 'textContent', '▶');
         _Runtime.setField(_Runtime.field(arrow, 'style'), 'cssText', 'margin-left:8px;font-size:9px;color:#888;');
         _Runtime.callProperty(li, 'appendChild', cast ([arrow] : Array<Dynamic>));
       } else { if ((cast !_Runtime.strictEquals(_Runtime.field(item, 'accelerator'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        var accel:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['span'] : Array<Dynamic>));
+        var accel:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['span'] : Array<Dynamic>));
         _Runtime.setField(accel, 'textContent', _Runtime.field(item, 'accelerator'));
         _Runtime.setField(_Runtime.field(accel, 'style'), 'cssText', 'margin-left:24px;color:#888;font-size:11px;');
         _Runtime.callProperty(li, 'appendChild', cast ([accel] : Array<Dynamic>));
@@ -253,7 +253,7 @@ class Menu {
         _Runtime.callValue(resolve, cast ([null] : Array<Dynamic>));
         return;
       }
-      overlay = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['div'] : Array<Dynamic>));
+      overlay = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['div'] : Array<Dynamic>));
       _Runtime.setField(_Runtime.field(overlay, 'style'), 'cssText', 'position:fixed;inset:0;z-index:2147483646;');
       menu = _Runtime.callValue(Menu.buildWebMenuElement__menu, cast ([items, function(id:Dynamic) return _Runtime.callValue(close, cast ([id] : Array<Dynamic>))] : Array<Dynamic>));
       clampMenu = function clampMenu(el:Dynamic, anchorX:Float, anchorY:Float):Void {
@@ -263,13 +263,13 @@ class Menu {
         _Runtime.setField(_Runtime.field(el, 'style'), 'left', '' + Std.string(anchorX) + 'px');
         _Runtime.setField(_Runtime.field(el, 'style'), 'top', '' + Std.string(anchorY) + 'px');
         rect = _Runtime.callProperty(el, 'getBoundingClientRect', cast ([] : Array<Dynamic>));
-        vw = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomWindowBackend.field(_Runtime.globalValue('window'), 'innerWidth') : Dynamic) : (cast 0.0 : Dynamic));
-        vh = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomWindowBackend.field(_Runtime.globalValue('window'), 'innerHeight') : Dynamic) : (cast 0.0 : Dynamic));
+        vw = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'innerWidth') : Dynamic) : (cast 0.0 : Dynamic));
+        vh = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'innerHeight') : Dynamic) : (cast 0.0 : Dynamic));
         if ((cast ((cast _Runtime.field(rect, 'right') : Float) > (cast vw : Float)) : Bool)) { _Runtime.setField(_Runtime.field(el, 'style'), 'left', '' + Std.string(HxMath.max(0.0, (anchorX - _Runtime.field(rect, 'width')))) + 'px'); }
         if ((cast ((cast _Runtime.field(rect, 'bottom') : Float) > (cast vh : Float)) : Bool)) { _Runtime.setField(_Runtime.field(el, 'style'), 'top', '' + Std.string(HxMath.max(0.0, (anchorY - _Runtime.field(rect, 'height')))) + 'px'); }
       };
       close = function close(selectedId:Null<String>):Void {
-        flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'removeEventListener', cast (['keydown', onKeyDown] : Array<Dynamic>));
+        flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'removeEventListener', cast (['keydown', onKeyDown] : Array<Dynamic>));
         _Runtime.callProperty(overlay, 'remove', cast ([] : Array<Dynamic>));
         _Runtime.callProperty(menu, 'remove', cast ([] : Array<Dynamic>));
         _Runtime.callValue(resolve, cast ([selectedId] : Array<Dynamic>));
@@ -318,9 +318,9 @@ class Menu {
         } } } }
       };
       _Runtime.callProperty(overlay, 'addEventListener', cast (['click', function() return _Runtime.callValue(close, cast ([null] : Array<Dynamic>))] : Array<Dynamic>));
-      flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'addEventListener', cast (['keydown', onKeyDown] : Array<Dynamic>));
-      _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'body'), 'appendChild', cast ([overlay] : Array<Dynamic>));
-      _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'body'), 'appendChild', cast ([menu] : Array<Dynamic>));
+      flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'addEventListener', cast (['keydown', onKeyDown] : Array<Dynamic>));
+      _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'body'), 'appendChild', cast ([overlay] : Array<Dynamic>));
+      _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'body'), 'appendChild', cast ([menu] : Array<Dynamic>));
       _Runtime.callValue(clampMenu, cast ([menu, x, y] : Array<Dynamic>));
     });
     return cast null;

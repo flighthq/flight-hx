@@ -116,7 +116,7 @@ class _WgpuTestHelper {
   public static function createWgpuRenderStateForTest():flighthq._internal._Promise<WgpuRenderState> {
     return cast flighthq._internal._Async.protect(function():Dynamic {
       var canvas:Dynamic = cast _Runtime.UNDEFINED;
-      canvas = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
+      canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
       flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', 800.0);
       flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', 600.0);
       return flighthq._internal._Async.resolve(_Runtime.callValue(createWgpuRenderState, cast ([canvas] : Array<Dynamic>)));

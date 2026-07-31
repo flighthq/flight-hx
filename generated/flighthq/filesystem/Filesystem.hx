@@ -808,7 +808,7 @@ class Filesystem {
             __flowBranch82 = flighthq._internal._Async.flowNormal();
           }
           return flighthq._internal._Async.continueFlow(__flowBranch82, function():Dynamic {
-            storage = flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'storage');
+            storage = flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'storage');
             var __flowBranch83:Dynamic;
             if ((cast ((cast _Runtime.strictEquals(storage, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(storage, 'estimate')), 'function') : Bool)) : Bool)) {
               __flowBranch83 = flighthq._internal._Async.protect(function():Dynamic {
@@ -1032,7 +1032,7 @@ class Filesystem {
           __flowBranch98 = flighthq._internal._Async.flowNormal();
         }
         return flighthq._internal._Async.continueFlow(__flowBranch98, function():Dynamic {
-          storage = flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'storage');
+          storage = flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'storage');
           var __flowBranch99:Dynamic;
           if ((cast ((cast _Runtime.strictEquals(storage, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(storage, 'getDirectory')), 'function') : Bool)) : Bool)) {
             __flowBranch99 = flighthq._internal._Async.protect(function():Dynamic {
