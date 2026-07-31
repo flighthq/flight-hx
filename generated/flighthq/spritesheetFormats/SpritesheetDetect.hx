@@ -71,8 +71,8 @@ class SpritesheetDetect {
 
   public static function detectSpritesheetFormat(text:String):Null<SpritesheetFormatKind> {
     for (__iteration0 in _Runtime.iterable(_Runtime.callValue(SpritesheetDetect.getRegistry__spritesheetDetect, cast ([] : Array<Dynamic>)))) {
-      var kind:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
-      var entry:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
+      var kind:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+      var entry:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
       if ((cast _Runtime.callProperty(entry, 'detect', cast ([text] : Array<Dynamic>)) : Bool)) { return cast kind; }
     }
     return cast null;

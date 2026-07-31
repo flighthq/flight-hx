@@ -172,8 +172,8 @@ class Accessibility {
       element = ((cast elements : flighthq._internal._Map).get(id));
       if ((cast _Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       for (__iteration0 in _Runtime.iterable(elements)) {
-        var key:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
-        var other:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
+        var key:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+        var other:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
         if ((cast _Runtime.callProperty(element, 'contains', cast ([other] : Array<Dynamic>)) : Bool)) { ((cast elements : flighthq._internal._Map).delete_(key)); }
       }
       if ((cast !_Runtime.strictEquals(_Runtime.field(element, 'parentNode'), null) : Bool)) { _Runtime.callProperty(_Runtime.field(element, 'parentNode'), 'removeChild', cast ([element] : Array<Dynamic>)); }

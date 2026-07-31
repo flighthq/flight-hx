@@ -1295,7 +1295,14 @@ function lowerStatement(node: ts.Statement, context: LoweringContext): IrStateme
       ? declaration.name.text
       : `__iteration${String(context.temporaryIndex++)}`;
     if (!ts.isIdentifier(declaration.name)) {
-      lowerBindingPattern(declaration.name, { kind: 'identifier', name: variable }, mutable, bindings, context);
+      lowerBindingPattern(
+        declaration.name,
+        { kind: 'identifier', name: variable },
+        mutable,
+        bindings,
+        context,
+        'iterationBinding',
+      );
     }
     return {
       async: Boolean(node.awaitModifier),
@@ -1554,6 +1561,7 @@ function lowerBindingPattern(
   mutable: boolean,
   variables: IrVariable[],
   context: LoweringContext,
+  syntheticArrayRead?: 'iterationBinding',
 ): void {
   if (ts.isObjectBindingPattern(pattern)) {
     for (const element of pattern.elements) {
@@ -1573,7 +1581,7 @@ function lowerBindingPattern(
       if (ts.isIdentifier(element.name)) {
         variables.push({ initializer: value, mutable, name: element.name.text });
       } else {
-        lowerBindingPattern(element.name, value, mutable, variables, context);
+        lowerBindingPattern(element.name, value, mutable, variables, context, syntheticArrayRead);
       }
     }
     return;
@@ -1585,6 +1593,7 @@ function lowerBindingPattern(
       index: { kind: 'literal', value: index },
       kind: 'element',
       object: source,
+      syntheticArrayRead,
     };
     if (element.initializer) {
       value = {
@@ -1597,7 +1606,7 @@ function lowerBindingPattern(
     if (ts.isIdentifier(element.name)) {
       variables.push({ initializer: value, mutable, name: element.name.text });
     } else {
-      lowerBindingPattern(element.name, value, mutable, variables, context);
+      lowerBindingPattern(element.name, value, mutable, variables, context, syntheticArrayRead);
     }
   });
 }

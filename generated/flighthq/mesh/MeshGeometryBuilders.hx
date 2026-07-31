@@ -309,9 +309,9 @@ class MeshGeometryBuilders {
       while ((cast ((cast s : Float) < (cast subs : Float)) : Bool)) {
         var newFaces:Array<Array<Float>> = cast ([] : Array<Dynamic>);
         for (__iteration1 in _Runtime.iterable(faces)) {
-          var a:Dynamic = _Runtime.getIndex(__iteration1, 0.0);
-          var b:Dynamic = _Runtime.getIndex(__iteration1, 1.0);
-          var c:Dynamic = _Runtime.getIndex(__iteration1, 2.0);
+          var a:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
+          var b:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
+          var c:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 2.0);
           var ab:Dynamic = _Runtime.callValue(getMidpoint, cast ([a, b] : Array<Dynamic>));
           var bc:Dynamic = _Runtime.callValue(getMidpoint, cast ([b, c] : Array<Dynamic>));
           var ca:Dynamic = _Runtime.callValue(getMidpoint, cast ([c, a] : Array<Dynamic>));
@@ -327,9 +327,9 @@ class MeshGeometryBuilders {
     uvs = cast ([] : Array<Dynamic>);
     faceIndices = cast ([] : Array<Dynamic>);
     for (__iteration2 in _Runtime.iterable(faces)) {
-      var a:Dynamic = _Runtime.getIndex(__iteration2, 0.0);
-      var b:Dynamic = _Runtime.getIndex(__iteration2, 1.0);
-      var c:Dynamic = _Runtime.getIndex(__iteration2, 2.0);
+      var a:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration2, 0.0);
+      var b:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration2, 1.0);
+      var c:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration2, 2.0);
       for (vi in _Runtime.iterable(cast ([a, b, c] : Array<Dynamic>))) {
         var v:Dynamic = flighthq._internal._StaticIndex.readArray(verts, vi);
         var nx:Dynamic = flighthq._internal._StaticIndex.readArray(v, 0.0);
@@ -472,9 +472,9 @@ class MeshGeometryBuilders {
         while ((cast ((cast s : Float) < (cast subs : Float)) : Bool)) {
           var newFaces:Array<Array<Float>> = cast ([] : Array<Dynamic>);
           for (__iteration4 in _Runtime.iterable(faces)) {
-            var a:Dynamic = _Runtime.getIndex(__iteration4, 0.0);
-            var b:Dynamic = _Runtime.getIndex(__iteration4, 1.0);
-            var c:Dynamic = _Runtime.getIndex(__iteration4, 2.0);
+            var a:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration4, 0.0);
+            var b:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration4, 1.0);
+            var c:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration4, 2.0);
             var ab:Dynamic = _Runtime.callValue(getMid, cast ([a, b] : Array<Dynamic>));
             var bc:Dynamic = _Runtime.callValue(getMid, cast ([b, c] : Array<Dynamic>));
             var ca:Dynamic = _Runtime.callValue(getMid, cast ([c, a] : Array<Dynamic>));
@@ -491,9 +491,9 @@ class MeshGeometryBuilders {
     uvs = cast ([] : Array<Dynamic>);
     flatIndices = cast ([] : Array<Dynamic>);
     for (__iteration5 in _Runtime.iterable(faces)) {
-      var a:Dynamic = _Runtime.getIndex(__iteration5, 0.0);
-      var b:Dynamic = _Runtime.getIndex(__iteration5, 1.0);
-      var c:Dynamic = _Runtime.getIndex(__iteration5, 2.0);
+      var a:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration5, 0.0);
+      var b:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration5, 1.0);
+      var c:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration5, 2.0);
       for (vi in _Runtime.iterable(cast ([a, b, c] : Array<Dynamic>))) {
         var v:Dynamic = flighthq._internal._StaticIndex.readArray(verts, vi);
         var nx:Dynamic = flighthq._internal._StaticIndex.readArray(v, 0.0);

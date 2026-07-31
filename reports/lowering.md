@@ -20,12 +20,14 @@
 | Proven indexed expressions | 7327 |
 | Proven indexed reads | 4524 |
 | Proven indexed writes | 2917 |
-| Direct indexed reads | 4521 |
+| Direct indexed reads | 4627 |
 | Direct indexed writes | 2915 |
+| Direct synthetic iteration-binding Array reads | 79 |
+| Direct synthetic high-arity-argument Array reads | 27 |
 
 | Indexed receiver | Proven expressions | Proven reads | Proven writes | Direct reads | Direct writes |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| `Array` | 2944 | 2512 | 455 | 2509 | 453 |
+| `Array` | 2944 | 2512 | 455 | 2615 | 453 |
 | `Float32Array` | 3307 | 1392 | 1979 | 1392 | 1979 |
 | `Float64Array` | 83 | 59 | 51 | 59 | 51 |
 | `Int16Array` | 9 | 5 | 4 | 5 | 4 |

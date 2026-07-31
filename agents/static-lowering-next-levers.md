@@ -1,6 +1,6 @@
 # Static Lowering Next Levers
 
-Status: the shared static-facts mechanism, primitive Boolean/numeric emission, and the first typed indexed-access tranche are enabled. The remaining gate is review's Step 3 script benchmark against the post-Step 2 baseline.
+Status: the shared static-facts mechanism, primitive Boolean/numeric emission, the checker-proven indexed-access tranche, and the emitter-known synthetic Array follow-up are enabled. Review's Step 3 script benchmark was positive overall: camera2d stayed flat while particles improved 21% by median.
 
 This proposal covers two independent generator optimizations after typed-struct tranche 5:
 
@@ -73,7 +73,7 @@ Generation now emits `_StaticIndex` inline endpoints for the ten proven receiver
 
 | Receiver            | Direct reads | Direct writes |     Total |
 | ------------------- | -----------: | ------------: | --------: |
-| `Array`             |        2,509 |           453 |     2,962 |
+| `Array`             |        2,615 |           453 |     3,068 |
 | `Float32Array`      |        1,392 |         1,979 |     3,371 |
 | `Float64Array`      |           59 |            51 |       110 |
 | `Int16Array`        |            5 |             4 |         9 |
@@ -83,11 +83,23 @@ Generation now emits `_StaticIndex` inline endpoints for the ten proven receiver
 | `Uint32Array`       |            2 |             8 |        10 |
 | `Uint8Array`        |          164 |            28 |       192 |
 | `Uint8ClampedArray` |          340 |           359 |       699 |
-| **Total**           |    **4,521** |     **2,915** | **7,436** |
+| **Total**           |    **4,627** |     **2,915** | **7,542** |
 
-The generated tree retains 783 `_Runtime.getIndex` and 141 `_Runtime.setIndex` calls. The broader pre-emission fact audit is higher by three reads and two writes, all on `Array`; the exact emission counters are authoritative because the fact audit runs before final module/patch selection and includes source destructuring targets that deliberately remain dynamic.
+The generated tree retains 677 `_Runtime.getIndex` and 141 `_Runtime.setIndex` calls. Checker-proven source facts account for 4,524 reads and 2,917 writes before final module/patch selection; exact final-output counters are authoritative and additionally include the 106 emitter-known reads below.
 
 Adversarial coverage includes all ten families, locally shadowed types, unconstrained and constrained generics, same-family and mixed-family unions, readonly wrappers, fractional keys, side-effecting receiver/key/value expressions, out-of-bounds reads, setter result identity, and signed/unsigned/clamped coercion. The endpoint smoke passes Eval, JavaScript, and Python. It also replaces fixed-width-shift coercion in the portable `Int8Array`/`Int16Array` fallbacks, which was incorrect on Python's unbounded integers.
+
+## Enabled synthetic Array result
+
+The emitter now marks two Array sources it creates itself instead of routing their reads through `_Runtime.getIndex`:
+
+| Synthetic source                     | Direct reads |
+| ------------------------------------ | -----------: |
+| For-of iteration bindings            |           79 |
+| Packed high-arity function arguments |           27 |
+| **Total**                            |      **106** |
+
+Both classes use `_StaticIndex.readArray` and contribute to the exact Array/direct-index totals above. Dedicated report counters keep them separate from checker-proven source expressions. Ordinary destructuring remains dynamic: 241 generated local reads plus 11 destructured-parameter reads are parked until the source receiver fact survives lowering. The 59 mixed typed-array-union sites and all dictionary/presence-sensitive schemas are also unchanged.
 
 ## Truthiness and comparison census
 
@@ -130,7 +142,7 @@ Direct numeric relation preserves `NaN`, infinities, signed zero, evaluation ord
 1. Land the shared static-facts mechanism with adversarial lowering tests and no emission change. Completed.
 2. Enable Boolean truthiness plus numeric relations. Completed; review measured script frame cost at about 8.8 ms versus 15.2 ms before enablement.
 3. Enable typed indexed endpoints for the ten single-family receiver bindings. Completed locally with exact generated counters and cross-target smoke coverage.
-4. Measure Step 3 in review's update-and-prepare benchmark against the new 8.8 ms baseline before considering additional helpers.
-5. Consider emitter-known synthetic arrays and homogeneous mixed typed-array unions only as separately audited follow-ups.
+4. Measure Step 3 in review's update-and-prepare benchmark against the new 8.8 ms baseline. Completed: camera2d was flat; particles improved from 35.0 to 42.9 median fps across five runs per side, a 21% gain with non-overlapping samples.
+5. Consider emitter-known synthetic arrays and homogeneous mixed typed-array unions only as separately audited follow-ups. The 106-read synthetic Array slice is completed; mixed unions remain parked.
 
 Each enablement should retain exact generated coverage counters, analogous to typed-struct direct-emission coverage, so a checker or upstream drift cannot silently change the optimized surface.

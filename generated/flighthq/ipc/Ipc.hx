@@ -191,7 +191,7 @@ class Ipc {
       }
     } else {
       for (__iteration0 in _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray(Ipc._listeners__ipc)]))) {
-        var set:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
+        var set:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
         for (unsubscribe in _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray(set)]))) {
           _Runtime.callValue(unsubscribe, cast ([] : Array<Dynamic>));
         }

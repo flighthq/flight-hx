@@ -46,8 +46,8 @@ class CanvasRegistration {
 
   public static function registerCanvasDisplayObjectRenderers(state:Dynamic):Void {
     for (__iteration0 in _Runtime.iterable(canvasDisplayObjectRendererEntries)) {
-      var kind:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
-      var renderer:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
+      var kind:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+      var renderer:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
       _Runtime.callValue(registerRenderer, cast ([state, kind, renderer] : Array<Dynamic>));
     }
   }

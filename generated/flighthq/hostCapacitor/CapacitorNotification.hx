@@ -166,8 +166,8 @@ class CapacitorNotification {
   public static function findNumericId__capacitorNotification(idByNumber:Dynamic, stringId:String):Null<Float> {
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
     for (__iteration0 in _Runtime.iterable(idByNumber)) {
-      var numericId:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
-      var mapped:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
+      var numericId:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+      var mapped:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
       if ((cast _Runtime.strictEquals(mapped, stringId) : Bool)) { return cast numericId; }
     }
     parsed = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([stringId] : Array<Dynamic>));

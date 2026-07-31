@@ -1360,6 +1360,42 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain("_Runtime.defaultUndefined(_Runtime.field(__destructure0, 'mode')");
   });
 
+  it('emits direct Array reads for synthetic iteration bindings only', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/sample.ts',
+      `export function readPairs(values: Array<[number, string]>) {
+         for (const [key, value] of values) void key + value;
+       }
+       export async function readAsyncPairs(values: AsyncIterable<[number, string]>) {
+         for await (const [key, value] of values) void key + value;
+       }
+       export function readPair(value: [number, string]) {
+         const [key, label] = value;
+         return key + label;
+       }`,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+    resetStaticLoweringEmissionCounts();
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'IterationBindingFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output.match(/_StaticIndex\.readArray\(__iteration\d+,/gu)).toHaveLength(4);
+    expect(output).not.toContain('_Runtime.getIndex(__iteration');
+    expect(output.match(/_Runtime\.getIndex\(__destructure\d+,/gu)).toHaveLength(2);
+    expect(staticLoweringEmissionCounts().syntheticArrayReads).toEqual({
+      highArityArguments: 0,
+      iterationBindings: 4,
+    });
+  });
+
   it('erases TypeScript this parameters from runtime function arity', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/example/src/sample.ts',
@@ -1451,6 +1487,7 @@ describe('TypeScript lowering and Haxe emission', () => {
       `,
     );
     const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    resetStaticLoweringEmissionCounts();
     const output = emitHaxeModule({
       declarations: lowered.declarations,
       imports: [],
@@ -1489,6 +1526,10 @@ describe('TypeScript lowering and Haxe emission', () => {
         Uint8ClampedArray: { reads: 0, writes: 0 },
       },
       numericRelations: 1,
+      syntheticArrayReads: {
+        highArityArguments: 0,
+        iterationBindings: 0,
+      },
     });
     expect(lowered.staticFacts.indexedReceivers.Array).toEqual({ expressions: 1, reads: 0, writes: 1 });
     expect(lowered.staticFacts.indexedReceivers.Float32Array).toEqual({
@@ -1939,6 +1980,7 @@ describe('TypeScript lowering and Haxe emission', () => {
       ts.ScriptKind.TS,
     );
     const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+    resetStaticLoweringEmissionCounts();
     const output = emitHaxeModule({
       declarations: lowered.declarations,
       imports: [],
@@ -1949,6 +1991,12 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(lowered.diagnostics).toEqual([]);
     expect(output).toContain('private static function oversized(__flightArguments:Array<Dynamic>)');
     expect(output).toContain('CppArityFixture.oversized(cast ([');
+    expect(output.match(/_StaticIndex\.readArray\(__flightArguments,/gu)).toHaveLength(27);
+    expect(output).not.toContain('_Runtime.getIndex(__flightArguments,');
     expect(output).not.toContain('_Runtime.callValue(CppArityFixture.oversized');
+    expect(staticLoweringEmissionCounts().syntheticArrayReads).toEqual({
+      highArityArguments: 27,
+      iterationBindings: 0,
+    });
   });
 });

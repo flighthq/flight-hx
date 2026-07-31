@@ -13,7 +13,7 @@ import { type WebGl2ComputedConstantDomain, webGl2ComputedConstantDomains } from
 
 type ScalarStaticLoweringEmissionName = Exclude<
   keyof StaticLoweringEmissionCounts,
-  'indexedAccesses' | 'indexedReceivers'
+  'indexedAccesses' | 'indexedReceivers' | 'syntheticArrayReads'
 >;
 
 const binaryOperatorMap: Readonly<Record<string, string>> = {
@@ -29,6 +29,11 @@ const staticLoweringMarkers = {
   booleanTruthinessUses: '/*__flight_direct_boolean_truthiness__*/',
   numericRelations: '/*__flight_direct_numeric_relation__*/',
 } as const satisfies Record<ScalarStaticLoweringEmissionName, string>;
+
+const syntheticArrayReadMarkers = {
+  highArityArguments: '/*__flight_direct_synthetic_array_high_arity_arguments__*/',
+  iterationBindings: '/*__flight_direct_synthetic_array_iteration_bindings__*/',
+} as const satisfies Record<keyof StaticLoweringEmissionCounts['syntheticArrayReads'], string>;
 
 const indexedReceiverNames = [
   'Array',
@@ -345,6 +350,7 @@ export function staticLoweringEmissionCounts(): StaticLoweringEmissionCounts {
     indexedReceivers: Object.fromEntries(
       indexedReceiverNames.map((receiver) => [receiver, { ...staticLoweringEmission.indexedReceivers[receiver] }]),
     ) as StaticLoweringEmissionCounts['indexedReceivers'],
+    syntheticArrayReads: { ...staticLoweringEmission.syntheticArrayReads },
   };
 }
 
@@ -446,7 +452,7 @@ function emitModuleValue(declaration: Extract<IrDeclaration, { kind: 'function' 
     bodyLines.push(
       ...declaration.parameters.map(
         (parameter, index) =>
-          `var ${safeName(parameter.name)}:${emitType(parameter.type)} = cast _Runtime.getIndex(__flightArguments, ${index});`,
+          `var ${safeName(parameter.name)}:${emitType(parameter.type)} = cast ${emitSyntheticArrayRead('highArityArguments', '__flightArguments', String(index))};`,
       ),
     );
   }
@@ -687,7 +693,7 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
     bodyLines.push(
       ...declaration.parameters.map(
         (parameter, index) =>
-          `var ${safeName(parameter.name)}:${emitType(parameter.type)} = cast _Runtime.getIndex(__flightArguments, ${index});`,
+          `var ${safeName(parameter.name)}:${emitType(parameter.type)} = cast ${emitSyntheticArrayRead('highArityArguments', '__flightArguments', String(index))};`,
       ),
     );
   }
@@ -1771,6 +1777,10 @@ function emptyStaticLoweringEmissionCounts(): StaticLoweringEmissionCounts {
       indexedReceiverNames.map((receiver) => [receiver, { reads: 0, writes: 0 }]),
     ) as StaticLoweringEmissionCounts['indexedReceivers'],
     numericRelations: 0,
+    syntheticArrayReads: {
+      highArityArguments: 0,
+      iterationBindings: 0,
+    },
   };
 }
 
@@ -1791,6 +1801,12 @@ function finalizeStaticLoweringEmission(output: string): string {
       finalized = finalized.replaceAll(marker, '');
     }
   }
+  for (const [name, marker] of Object.entries(syntheticArrayReadMarkers) as Array<
+    [keyof StaticLoweringEmissionCounts['syntheticArrayReads'], string]
+  >) {
+    staticLoweringEmission.syntheticArrayReads[name] += finalized.split(marker).length - 1;
+    finalized = finalized.replaceAll(marker, '');
+  }
   return finalized;
 }
 
@@ -1806,11 +1822,26 @@ function markStaticIndexedLowering(receiver: IrIndexedReceiver, operation: 'read
   return `${staticIndexedLoweringMarker(receiver, operation)}${value}`;
 }
 
+function emitSyntheticArrayRead(
+  kind: keyof StaticLoweringEmissionCounts['syntheticArrayReads'],
+  object: string,
+  index: string,
+): string {
+  return `${syntheticArrayReadMarkers[kind]}${markStaticIndexedLowering(
+    'Array',
+    'reads',
+    `flighthq._internal._StaticIndex.readArray(${object}, ${index})`,
+  )}`;
+}
+
 function emitStaticIndexedRead(
   expression: Extract<IrExpression, { kind: 'element' }>,
   object = emitExpression(expression.object),
   index = emitExpression(expression.index),
 ): string | undefined {
+  if (expression.syntheticArrayRead === 'iterationBinding') {
+    return emitSyntheticArrayRead('iterationBindings', object, index);
+  }
   const indexedAccess = expression.staticFacts?.indexedAccess;
   if (!indexedAccess || indexedAccess.reads !== 1 || expression.optional) return undefined;
   return markStaticIndexedLowering(

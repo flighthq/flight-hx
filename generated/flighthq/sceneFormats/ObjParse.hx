@@ -250,8 +250,8 @@ class ObjParse {
     subsets = cast ([] : Array<Dynamic>);
     materials = cast ([] : Array<Dynamic>);
     for (__iteration0 in _Runtime.iterable(buckets)) {
-      var materialName:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
-      var bucket:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
+      var materialName:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+      var bucket:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
       if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(bucket, 'indices'), 'length'), 0.0) : Bool)) { continue; }
       var vertexBase:Dynamic = (_Runtime.field(vertices, 'length') / CANONICAL_FLOATS_PER_VERTEX);
       var indexOffset:Dynamic = _Runtime.field(indices, 'length');

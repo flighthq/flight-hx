@@ -322,8 +322,8 @@ class Filesystem {
                         var name:Dynamic = cast _Runtime.UNDEFINED;
                         var handle:Dynamic = cast _Runtime.UNDEFINED;
                         var isDirectory:Dynamic = cast _Runtime.UNDEFINED;
-                        name = _Runtime.getIndex(__iteration0, 0.0);
-                        handle = _Runtime.getIndex(__iteration0, 1.0);
+                        name = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+                        handle = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
                         isDirectory = _Runtime.strictEquals(_Runtime.field(handle, 'kind'), 'directory');
                         _Runtime.callProperty(entries, 'push', cast ([{ name: name, path: ((cast _Runtime.strictEquals(base, '') : Bool) ? (cast name : Dynamic) : (cast '' + Std.string(base) + '/' + Std.string(name) + '' : Dynamic)), isDirectory: isDirectory }] : Array<Dynamic>));
                         return flighthq._internal._Async.flowNormal();
@@ -1328,8 +1328,8 @@ class Filesystem {
             var handle:Dynamic = cast _Runtime.UNDEFINED;
             var entryPath:Dynamic = cast _Runtime.UNDEFINED;
             var isDirectory:Dynamic = cast _Runtime.UNDEFINED;
-            name = _Runtime.getIndex(__iteration1, 0.0);
-            handle = _Runtime.getIndex(__iteration1, 1.0);
+            name = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
+            handle = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
             entryPath = ((cast _Runtime.strictEquals(basePath, '') : Bool) ? (cast name : Dynamic) : (cast '' + Std.string(basePath) + '/' + Std.string(name) + '' : Dynamic));
             isDirectory = _Runtime.strictEquals(_Runtime.field(handle, 'kind'), 'directory');
             _Runtime.callProperty(out, 'push', cast ([{ name: name, path: entryPath, isDirectory: isDirectory }] : Array<Dynamic>));

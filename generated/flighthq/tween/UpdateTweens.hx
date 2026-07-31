@@ -66,8 +66,8 @@ class UpdateTweens {
 
   public static function updateTweens(manager:TweenManager, deltaTime:Float):Void {
     for (__iteration0 in _Runtime.iterable(manager.tweens)) {
-      var target:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
-      var list:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
+      var target:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+      var list:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
       var i:Dynamic = (_Runtime.field(list, 'length') - 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
         if ((cast _Runtime.field(flighthq._internal._StaticIndex.readArray(list, i), 'complete') : Bool)) {

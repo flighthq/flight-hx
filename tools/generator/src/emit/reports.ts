@@ -72,6 +72,8 @@ export function loweringSummary(audit: LoweringAudit): string {
     `| Proven indexed writes | ${facts.indexedAccesses.writes} |`,
     `| Direct indexed reads | ${emission.indexedAccesses.reads} |`,
     `| Direct indexed writes | ${emission.indexedAccesses.writes} |`,
+    `| Direct synthetic iteration-binding Array reads | ${emission.syntheticArrayReads.iterationBindings} |`,
+    `| Direct synthetic high-arity-argument Array reads | ${emission.syntheticArrayReads.highArityArguments} |`,
     '',
     '| Indexed receiver | Proven expressions | Proven reads | Proven writes | Direct reads | Direct writes |',
     '| --- | ---: | ---: | ---: | ---: | ---: |',

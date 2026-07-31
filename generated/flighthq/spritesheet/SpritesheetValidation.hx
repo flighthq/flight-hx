@@ -32,8 +32,8 @@ class SpritesheetValidation {
       }
     }
     for (__iteration1 in _Runtime.iterable(flighthq._internal.DynamicObject.entries(animations))) {
-      var animName:Dynamic = _Runtime.getIndex(__iteration1, 0.0);
-      var anim:Dynamic = _Runtime.getIndex(__iteration1, 1.0);
+      var animName:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
+      var anim:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
       if ((cast _Runtime.strictEquals(_Runtime.field(anim.frames, 'length'), 0.0) : Bool)) {
         _Runtime.callProperty(diagnostics, 'push', cast ([{ animationName: animName, frameIndex: null, message: 'Animation "' + Std.string(animName) + '" has no frames.', severity: 'warning' }] : Array<Dynamic>));
       }

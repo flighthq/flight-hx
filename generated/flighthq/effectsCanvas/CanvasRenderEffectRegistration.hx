@@ -48,40 +48,40 @@ class CanvasRenderEffectRegistration {
 
   public static function registerBlurCanvasRenderEffects(state:Dynamic):Void {
     for (__iteration0 in _Runtime.iterable(CanvasRenderEffectRegistration.BLUR_CANVAS_EFFECT_KINDS__canvasRenderEffectRegistration)) {
-      var kind:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
-      var runner:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
+      var kind:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+      var runner:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
       _Runtime.callValue(registerCanvasRenderEffect, cast ([state, kind, runner] : Array<Dynamic>));
     }
   }
 
   public static function registerColorGradeCanvasRenderEffects(state:Dynamic):Void {
     for (__iteration1 in _Runtime.iterable(CanvasRenderEffectRegistration.COLOR_GRADE_CANVAS_EFFECT_KINDS__canvasRenderEffectRegistration)) {
-      var kind:Dynamic = _Runtime.getIndex(__iteration1, 0.0);
-      var runner:Dynamic = _Runtime.getIndex(__iteration1, 1.0);
+      var kind:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
+      var runner:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
       _Runtime.callValue(registerCanvasRenderEffect, cast ([state, kind, runner] : Array<Dynamic>));
     }
   }
 
   public static function registerCompositeCanvasRenderEffects(state:Dynamic):Void {
     for (__iteration2 in _Runtime.iterable(CanvasRenderEffectRegistration.COMPOSITE_CANVAS_EFFECT_KINDS__canvasRenderEffectRegistration)) {
-      var kind:Dynamic = _Runtime.getIndex(__iteration2, 0.0);
-      var runner:Dynamic = _Runtime.getIndex(__iteration2, 1.0);
+      var kind:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration2, 0.0);
+      var runner:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration2, 1.0);
       _Runtime.callValue(registerCanvasRenderEffect, cast ([state, kind, runner] : Array<Dynamic>));
     }
   }
 
   public static function registerScreenSpaceCanvasRenderEffects(state:Dynamic):Void {
     for (__iteration3 in _Runtime.iterable(CanvasRenderEffectRegistration.SCREENSPACE_CANVAS_EFFECT_KINDS__canvasRenderEffectRegistration)) {
-      var kind:Dynamic = _Runtime.getIndex(__iteration3, 0.0);
-      var runner:Dynamic = _Runtime.getIndex(__iteration3, 1.0);
+      var kind:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration3, 0.0);
+      var runner:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration3, 1.0);
       _Runtime.callValue(registerCanvasRenderEffect, cast ([state, kind, runner] : Array<Dynamic>));
     }
   }
 
   public static function registerStylizeCanvasRenderEffects(state:Dynamic):Void {
     for (__iteration4 in _Runtime.iterable(CanvasRenderEffectRegistration.STYLIZE_CANVAS_EFFECT_KINDS__canvasRenderEffectRegistration)) {
-      var kind:Dynamic = _Runtime.getIndex(__iteration4, 0.0);
-      var runner:Dynamic = _Runtime.getIndex(__iteration4, 1.0);
+      var kind:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration4, 0.0);
+      var runner:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration4, 1.0);
       _Runtime.callValue(registerCanvasRenderEffect, cast ([state, kind, runner] : Array<Dynamic>));
     }
   }
