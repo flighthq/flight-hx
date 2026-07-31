@@ -13,7 +13,11 @@ import {
   sourcePathToModule,
 } from '../analyze/inventory.ts';
 import { upstreamTypeScriptProgram } from '../analyze/program.ts';
-import { typedStructRegistry, type TypedStructRegistry } from '../analyze/typed-structs.ts';
+import {
+  cppStructInitTypedStructIds,
+  typedStructRegistry,
+  type TypedStructRegistry,
+} from '../analyze/typed-structs.ts';
 import { lowerTypeScriptSource } from '../lower/typescript.ts';
 import type {
   IrDeclaration,
@@ -154,6 +158,7 @@ export function generateCoreModules(
       });
     }
   }
+  markCppStructInitTypes(modules, structRegistry);
   verifyTypedStructEmissionCoverage(modules, structRegistry);
   const shadowedTypeNames = markShadowedSecondaryTypes(modules);
   populateSourceImports(
@@ -270,6 +275,36 @@ export function generateCoreModules(
   writeOrCheck(path.join(workspaceDirectory, 'reports', 'core.json'), stableJson(report), check);
   writeOrCheck(path.join(workspaceDirectory, 'reports', 'patches.json'), stableJson(patchAudit), check);
   return report;
+}
+
+function markCppStructInitTypes(modules: IrModule[], registry: TypedStructRegistry): void {
+  const allowlist = new Set(cppStructInitTypedStructIds);
+  const candidates = new Map(registry.report.candidates.map((candidate) => [candidate.id, candidate]));
+  const seen = new Set<string>();
+  for (const module of modules) {
+    for (const declaration of module.declarations) {
+      if (declaration.kind !== 'type') continue;
+      const id = `${declaration.origin.packageName}:${declaration.origin.source}#${declaration.name}`;
+      if (!allowlist.has(id)) continue;
+      const candidate = candidates.get(id);
+      if (!candidate?.eligible || candidate.emission.mode !== 'direct') {
+        throw new Error(`cpp @:structInit schema is not direct-eligible: ${id}`);
+      }
+      if (
+        declaration.type.kind !== 'anonymous' ||
+        declaration.type.extends.length > 0 ||
+        declaration.typeParameters.length > 0 ||
+        declaration.type.fields.some((field) => field.optional)
+      ) {
+        throw new Error(`cpp @:structInit schema is not a closed required-field record: ${id}`);
+      }
+      declaration.cppStructInitSchemaId = id;
+      seen.add(id);
+    }
+  }
+  const missing = [...allowlist].filter((id) => !seen.has(id));
+  if (missing.length > 0)
+    throw new Error(`cpp @:structInit allowlist identities were not emitted: ${missing.join(', ')}`);
 }
 
 function verifyTypedStructEmissionCoverage(modules: IrModule[], registry: TypedStructRegistry): void {

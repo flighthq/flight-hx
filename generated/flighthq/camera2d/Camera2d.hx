@@ -18,7 +18,7 @@ import flighthq.types.Vector2.Vector2Like;
 
 class Camera2d {
   public static function createCamera2D(viewportWidth:Float, viewportHeight:Float, ?options:Camera2DOptions):Camera2D {
-    return cast { rotation: _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.rotation; }), function():Dynamic return cast 0.0), viewportHeight: viewportHeight, viewportWidth: viewportWidth, x: _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.x; }), function():Dynamic return cast 0.0), y: _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.y; }), function():Dynamic return cast 0.0), zoom: _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.zoom; }), function():Dynamic return cast 1.0) };
+    return { rotation: _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.rotation; }), function():Dynamic return cast 0.0), viewportHeight: viewportHeight, viewportWidth: viewportWidth, x: _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.x; }), function():Dynamic return cast 0.0), y: _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.y; }), function():Dynamic return cast 0.0), zoom: _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.zoom; }), function():Dynamic return cast 1.0) };
     return cast null;
   }
 

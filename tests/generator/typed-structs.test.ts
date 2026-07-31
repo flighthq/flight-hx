@@ -1,8 +1,11 @@
+import { execFileSync } from 'node:child_process';
+import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import ts from 'typescript';
 
 import { auditTypedStructClassFeasibility } from '../../tools/generator/src/analyze/typed-struct-classes.ts';
 import {
+  cppStructInitTypedStructIds,
   createTypedStructRegistry,
   tranche6aDirectTypedStructIds,
   tranche6bDirectTypedStructIds,
@@ -25,6 +28,103 @@ const fixtureCandidate: TypedStructCandidate = {
 };
 
 describe('typed struct analysis', () => {
+  it('emits and constructs an allowlisted struct-init class only on the cpp branch', () => {
+    const candidate: TypedStructCandidate = {
+      emission: 'direct',
+      name: 'Camera2D',
+      packageName: '@flighthq/types',
+      purpose: 'cpp class pilot fixture',
+      source: 'upstream/packages/types/src/Camera2D.ts',
+    };
+    const result = lowerFixture(
+      `
+        export interface Camera2D {
+          rotation: number;
+          viewportHeight: number;
+          viewportWidth: number;
+          x: number;
+          y: number;
+          zoom: number;
+        }
+        export function createCamera2D(): Camera2D {
+          return { rotation: 0, viewportHeight: 480, viewportWidth: 640, x: 12, y: 34, zoom: 2 };
+        }
+      `,
+      candidate,
+    );
+    const declaration = result.lowered.declarations.find(
+      (item) => item.kind === 'type' && item.name === candidate.name,
+    );
+    if (!declaration || declaration.kind !== 'type') throw new Error('Expected Camera2D fixture type');
+    declaration.cppStructInitSchemaId = candidateId(candidate);
+    const output = emitHaxeModule({
+      declarations: result.lowered.declarations,
+      haxePackage: 'flighthq.types',
+      imports: [],
+      name: 'CameraPilot',
+      packageName: '@flighthq/types',
+    });
+
+    expect(result.lowered.diagnostics).toEqual([]);
+    expect(output).toContain('#if cpp\n@:structInit\nclass Camera2D {');
+    expect(output).toContain(
+      'public function new(rotation:Float, viewportHeight:Float, viewportWidth:Float, x:Float, y:Float, zoom:Float):Void',
+    );
+    expect(output).toContain('return { rotation: 0.0, viewportHeight: 480.0, viewportWidth: 640.0, x: 12.0');
+    expect(output).not.toContain('return cast { rotation: 0.0');
+
+    const fixtureDirectory = path.resolve('build/haxe-cpp-struct-init-fixture');
+    const packageDirectory = path.join(fixtureDirectory, 'flighthq', 'types');
+    rmSync(fixtureDirectory, { force: true, recursive: true });
+    mkdirSync(packageDirectory, { recursive: true });
+    writeFileSync(path.join(packageDirectory, 'CameraPilot.hx'), output.replace('#if cpp', '#if (cpp || eval)'));
+    writeFileSync(
+      path.join(fixtureDirectory, 'Main.hx'),
+      `
+        class Main {
+          static function main() {
+            final camera = flighthq.types.CameraPilot.createCamera2D();
+            if (!Std.isOfType(camera, flighthq.types.CameraPilot.Camera2D)) throw 'not a class';
+            if (camera.x != 12 || camera.viewportHeight != 480 || camera.zoom != 2) throw 'bad fields';
+          }
+        }
+      `,
+    );
+    expect(() =>
+      execFileSync('node', ['tools/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '--main', 'Main', '--interp'], {
+        cwd: path.resolve('.'),
+        stdio: 'pipe',
+      }),
+    ).not.toThrow();
+
+    writeFileSync(
+      path.join(fixtureDirectory, 'JsMain.hx'),
+      `
+        class JsMain {
+          static function main() {
+            final camera = flighthq.types.CameraPilot.createCamera2D();
+            if (camera.x != 12 || camera.viewportHeight != 480 || camera.zoom != 2) throw 'bad fields';
+          }
+        }
+      `,
+    );
+    const candidateJavaScript = path.join(fixtureDirectory, 'candidate.cjs');
+    const baselineJavaScript = path.join(fixtureDirectory, 'baseline.cjs');
+    writeFileSync(path.join(packageDirectory, 'CameraPilot.hx'), output);
+    execFileSync(
+      'node',
+      ['tools/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '--main', 'JsMain', '--js', candidateJavaScript],
+      { cwd: path.resolve('.'), stdio: 'pipe' },
+    );
+    writeFileSync(path.join(packageDirectory, 'CameraPilot.hx'), output.replace('return {', 'return cast {'));
+    execFileSync(
+      'node',
+      ['tools/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '--main', 'JsMain', '--js', baselineJavaScript],
+      { cwd: path.resolve('.'), stdio: 'pipe' },
+    );
+    expect(readFileSync(candidateJavaScript)).toEqual(readFileSync(baselineJavaScript));
+  });
+
   it('censuses class migration flows and observability by canonical schema', () => {
     const audit = classAuditFixture(
       `
@@ -163,6 +263,8 @@ describe('typed struct analysis', () => {
     const menuItemTemplate = report.candidates.find((candidate) => candidate.name === 'MenuItemTemplate');
     const surface = report.candidates.find((candidate) => candidate.name === 'Surface');
     const trancheSix = report.candidates.slice(-tranche6TypedStructCandidates.length);
+
+    expect(cppStructInitTypedStructIds).toEqual(['@flighthq/types:upstream/packages/types/src/Camera2D.ts#Camera2D']);
 
     expect(report.summary).toMatchObject({
       auditOnlySchemas: 0,

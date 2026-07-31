@@ -42,6 +42,13 @@ export interface IrTypedStructBinding {
   schemaName: string;
 }
 
+export interface IrCppStructInitConstruction {
+  fieldNames: string[];
+  schemaHaxeType: string;
+  schemaId: string;
+  schemaName: string;
+}
+
 export type IrIndexedReceiver =
   | 'Array'
   | 'ArrayOrFloat32Array'
@@ -127,7 +134,11 @@ type IrExpressionNode =
   | { domRootBinding?: IrDomRootBinding | undefined; kind: 'identifier'; name: string }
   | { kind: 'literal'; value: boolean | null | number | string }
   | { kind: 'new'; arguments: IrExpression[]; callee: IrExpression }
-  | { kind: 'object'; properties: IrObjectMember[] }
+  | {
+      cppStructInit?: IrCppStructInitConstruction | undefined;
+      kind: 'object';
+      properties: IrObjectMember[];
+    }
   | {
       binding?:
         | 'Canvas2dBackend'
@@ -244,6 +255,7 @@ export interface IrVariableDeclaration extends IrVariable {
 }
 
 export interface IrTypeDeclaration {
+  cppStructInitSchemaId?: string | undefined;
   exported: boolean;
   kind: 'type';
   name: string;

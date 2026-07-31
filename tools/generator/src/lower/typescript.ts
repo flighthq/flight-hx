@@ -1837,7 +1837,14 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
     return { elements: node.elements.map((element) => lowerExpression(element, context)), kind: 'array' };
   }
   if (ts.isObjectLiteralExpression(node)) {
+    const cppStructInit =
+      context.checker && context.typedStructs
+        ? context.typedStructs.resolveCppStructInitConstruction(
+            context.checker.getContextualType(node) ?? context.checker.getTypeAtLocation(node),
+          )
+        : undefined;
     return {
+      ...(cppStructInit ? { cppStructInit } : {}),
       kind: 'object',
       properties: node.properties.map((property) => {
         if (ts.isSpreadAssignment(property)) {

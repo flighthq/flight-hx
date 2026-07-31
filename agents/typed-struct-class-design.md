@@ -1,6 +1,6 @@
 # Typed Struct Class-Emission Feasibility
 
-Status: audit complete; no class emission is enabled. The deterministic census covers all 404 eligible canonical typed-struct schemas at the pinned upstream commit.
+Status: Gates 1-3 are implemented for the `Camera2D`-only cpp pilot and await the rebase-time native compile and benchmark. Gate 4 remains a separate contingent change. The deterministic census covers all 404 eligible canonical typed-struct schemas at the pinned upstream commit.
 
 ## Decision
 
@@ -28,7 +28,15 @@ typedef Camera2D = {
 #end
 ```
 
-The example is illustrative rather than an authorized emitter change. The generated constructor must include every declared field in deterministic declaration order and use the same lowered field types as the typedef. `@:structInit` is the compatibility mechanism for contextual object literals; it is not a license to cast anonymous or dynamic native objects to a class.
+This is now the emitted shape for the exact canonical ID `@flighthq/types:upstream/packages/types/src/Camera2D.ts#Camera2D`. The generated constructor includes every declared field in deterministic declaration order and uses the same lowered field types as the typedef. `@:structInit` is the compatibility mechanism for contextual object literals; it is not a license to cast anonymous or dynamic native objects to a class.
+
+The allowlist is default-off: only exact reviewed canonical IDs enter, and generation fails when an enabled identity is absent, indirect, ineligible, generic, inherited, optional, or not an anonymous required-field record. The pilot also records construction identity in the IR, validates the exact field set and declaration order at emission, and leaves all non-cpp declarations on the existing typedef branch.
+
+## Pilot verification state
+
+The class fixture constructs a real nominal instance under the compiler interpreter while exercising the cpp branch syntax, and the maintained Haxe smoke checks every `Camera2D` field. A focused JavaScript fixture compares the pilot emission against the previous return-cast emission byte for byte; both files currently have SHA-256 `2d0b0b4da3dba8d197b56b68453cecccf230fe044026fbcdbb0a7ef6cb6a92b1`.
+
+The complete generated-source tree changed from SHA-256 `7fb39b6fb779838926fded9d2aa44ff31f2ca54f7778801660fa046c7ea9914f` to `fd76c64a2957d9d52a31c1f5b6d8a900271bb56bb8e92dc41c18998195aaecb4`; only `Camera2D.hx` and its construction site changed. A separate full generated-JavaScript-tree SHA is still a mandatory acceptance gate. It cannot be produced on this isolated pre-integration branch because the full compilation reaches the already-fixed DOM backend `value`/`hasField` errors before JavaScript emission. This workspace also has no `g++` or `clang++`, so review must perform the cpp compile, portable cpp smoke, full JavaScript-tree comparison, and five-run parent/candidate camera benchmark after rebasing onto the integrated DOM fix.
 
 ## Census result
 

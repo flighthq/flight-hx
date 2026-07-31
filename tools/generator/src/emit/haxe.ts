@@ -700,6 +700,29 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
   if (declaration.kind === 'type') {
     const generics = declaration.typeParameters.length > 0 ? `<${declaration.typeParameters.join(', ')}>` : '';
     const modifier = declaration.packagePrivate ? 'private ' : '';
+    if (declaration.cppStructInitSchemaId) {
+      if (declaration.type.kind !== 'anonymous') {
+        throw new Error(`cpp @:structInit declaration is not anonymous: ${declaration.cppStructInitSchemaId}`);
+      }
+      const fields = declaration.type.fields;
+      const lines = ['#if cpp', '@:structInit', `${modifier}class ${safeName(declaration.name)}${generics} {`];
+      for (const field of fields) {
+        lines.push(`  public var ${safeName(field.name)}:${emitType(field.type)};`);
+      }
+      lines.push(
+        '',
+        `  public function new(${fields.map((field) => `${safeName(field.name)}:${emitType(field.type)}`).join(', ')}):Void {`,
+      );
+      for (const field of fields) lines.push(`    this.${safeName(field.name)} = ${safeName(field.name)};`);
+      lines.push(
+        '  }',
+        '}',
+        '#else',
+        `${modifier}typedef ${safeName(declaration.name)}${generics} = ${emitType(declaration.type)};`,
+        '#end',
+      );
+      return lines;
+    }
     return [`${modifier}typedef ${safeName(declaration.name)}${generics} = ${emitType(declaration.type)};`];
   }
   if (declaration.kind === 'variable') {
@@ -1678,7 +1701,7 @@ function emitStatement(statement: IrStatement): string[] {
       return [
         ...finalizers,
         statement.expression
-          ? `return cast ${emitExpression(statement.expression)};`
+          ? `${statement.expression.kind === 'object' && statement.expression.cppStructInit ? 'return ' : 'return cast '}${emitExpression(statement.expression)};`
           : currentReturnRequiresValue
             ? 'return cast null;'
             : 'return;',
@@ -2327,6 +2350,19 @@ function emitExpression(expression: IrExpression): string {
       }
       return `new ${emitExpression(expression.callee)}(${expression.arguments.map(emitExpression).join(', ')})`;
     case 'object':
+      if (expression.cppStructInit) {
+        const actualFields = expression.properties.map((property) =>
+          property.kind === 'property' ? property.name : property.kind,
+        );
+        if (
+          actualFields.length !== expression.cppStructInit.fieldNames.length ||
+          actualFields.some((field, index) => field !== expression.cppStructInit!.fieldNames[index])
+        ) {
+          throw new Error(
+            `cpp @:structInit construction order mismatch for ${expression.cppStructInit.schemaId}: expected ${expression.cppStructInit.fieldNames.join(', ')}, received ${actualFields.join(', ')}`,
+          );
+        }
+      }
       if (expression.properties.some((property) => property.kind === 'spread')) {
         return `_Runtime.mergeObjects([${expression.properties
           .map((property) =>

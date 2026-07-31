@@ -7,6 +7,14 @@ import { portConfig } from '../../port.config.ts';
 import { sourcePathToHaxePackage, sourcePathToImplementationModule } from './inventory.ts';
 import { upstreamTypeScriptProgram } from './program.ts';
 
+// Target-conditional class emission is default-off. Every enabled schema is an
+// explicit canonical identity so an upstream declaration cannot enter silently.
+export const cppStructInitTypedStructIds: readonly string[] = [
+  '@flighthq/types:upstream/packages/types/src/Camera2D.ts#Camera2D',
+];
+
+const cppStructInitTypedStructIdSet = new Set(cppStructInitTypedStructIds);
+
 export interface TypedStructCandidate {
   emission: 'audit-only' | 'direct';
   name: string;
@@ -26,6 +34,13 @@ export interface TypedStructField {
 
 export interface TypedStructFieldBinding {
   field: TypedStructField;
+  schemaHaxeType: string;
+  schemaId: string;
+  schemaName: string;
+}
+
+export interface TypedStructConstructionBinding {
+  fieldNames: string[];
   schemaHaxeType: string;
   schemaId: string;
   schemaName: string;
@@ -116,6 +131,7 @@ export interface TypedStructResolution {
 export interface TypedStructRegistry {
   report: TypedStructAudit;
   resolve(type: ts.Type): TypedStructResolution;
+  resolveCppStructInitConstruction(type: ts.Type): TypedStructConstructionBinding | undefined;
   resolveField(type: ts.Type, member: string, property?: ts.Symbol): TypedStructFieldBinding | undefined;
 }
 
@@ -1743,6 +1759,25 @@ export function createTypedStructRegistry(
   return {
     report,
     resolve,
+    resolveCppStructInitConstruction(type) {
+      const resolution = resolve(type);
+      const schema = resolution.kind === 'matched' ? resolution.schemas[0] : undefined;
+      if (
+        resolution.schemas.length !== 1 ||
+        !schema ||
+        !schema.eligible ||
+        schema.emission.mode !== 'direct' ||
+        !cppStructInitTypedStructIdSet.has(schema.id)
+      ) {
+        return undefined;
+      }
+      return {
+        fieldNames: schema.fields.map((field) => field.name),
+        schemaHaxeType: typedStructHaxeType(schema),
+        schemaId: schema.id,
+        schemaName: schema.name,
+      };
+    },
     resolveField(type, member, property) {
       const owned = resolveOwnedField(type, member, property);
       if (

@@ -4,7 +4,28 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+#if cpp
+@:structInit
+class Camera2D {
+  public var rotation:Float;
+  public var viewportHeight:Float;
+  public var viewportWidth:Float;
+  public var x:Float;
+  public var y:Float;
+  public var zoom:Float;
+
+  public function new(rotation:Float, viewportHeight:Float, viewportWidth:Float, x:Float, y:Float, zoom:Float):Void {
+    this.rotation = rotation;
+    this.viewportHeight = viewportHeight;
+    this.viewportWidth = viewportWidth;
+    this.x = x;
+    this.y = y;
+    this.zoom = zoom;
+  }
+}
+#else
 typedef Camera2D = { var rotation:Float; var viewportHeight:Float; var viewportWidth:Float; var x:Float; var y:Float; var zoom:Float; };
+#end
 
 typedef Camera2DFollowOptions = { @:optional var deadzoneHalfHeight:Float; @:optional var deadzoneHalfWidth:Float; @:optional var smoothTime:Float; @:optional var worldBounds:Rectangle; };
 
