@@ -12,34 +12,7 @@ import flighthq.types.Node.NodeData;
 import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node.NodeTraitsKey;
 
-#if cpp
-@:structInit
-class ParticleEmitterData {
-  public var alphas:flighthq._internal._Float32Array;
-  public var atlas:Null<TextureAtlas>;
-  public var colors:flighthq._internal._Float32Array;
-  public var ids:flighthq._internal._UInt16Array;
-  public var particleCount:Float;
-  public var positionsZ:flighthq._internal._Float32Array;
-  public var transforms:flighthq._internal._Float32Array;
-  public var velocities:flighthq._internal._Float32Array;
-  public var worldSpace:Bool;
-
-  public function new(alphas:flighthq._internal._Float32Array, atlas:Null<TextureAtlas>, colors:flighthq._internal._Float32Array, ids:flighthq._internal._UInt16Array, particleCount:Float, positionsZ:flighthq._internal._Float32Array, transforms:flighthq._internal._Float32Array, velocities:flighthq._internal._Float32Array, worldSpace:Bool):Void {
-    this.alphas = alphas;
-    this.atlas = atlas;
-    this.colors = colors;
-    this.ids = ids;
-    this.particleCount = particleCount;
-    this.positionsZ = positionsZ;
-    this.transforms = transforms;
-    this.velocities = velocities;
-    this.worldSpace = worldSpace;
-  }
-}
-#else
 typedef ParticleEmitterData = { var alphas:flighthq._internal._Float32Array; var atlas:Null<TextureAtlas>; var colors:flighthq._internal._Float32Array; var ids:flighthq._internal._UInt16Array; var particleCount:Float; var positionsZ:flighthq._internal._Float32Array; var transforms:flighthq._internal._Float32Array; var velocities:flighthq._internal._Float32Array; var worldSpace:Bool; };
-#end
 
 typedef ParticleEmitterRuntime = { var binding:Null<Dynamic>; var appearanceId:Float; var boundsUsingLocalBoundsId:Float; var boundsUsingLocalTransformId:Float; var canAddChild:Dynamic; var children:Null<Array<Node<DisplayObjectTraits>>>; var colorAdjustments:Null<Array<Adjustment>>; var resolvedColorTransform:Null<ColorTransform>; var colorAdjustmentsChannelMixing:Bool; @:optional var traits:NodeTraitsKey<DisplayObjectTraits>; var interactionSignals:Null<InteractionSignals>; var localBoundsId:Float; var localBoundsUsingLocalBoundsId:Float; var localContentId:Float; var localTransformId:Float; var localTransformUsingLocalTransformId:Float; var nodeSignals:Null<NodeSignals>; var interactionState:Null<NodeInteractionState>; var parent:Null<Node<DisplayObjectTraits>>; var worldBoundsUsingLocalBoundsId:Float; var worldBoundsUsingWorldTransformId:Float; var worldTransformId:Float; var worldTransformUsingLocalTransformId:Float; var worldTransformUsingParentTransformId:Float; var localMatrix:Null<Matrix>; var rotationAngle:Float; var rotationCosine:Float; var rotationSine:Float; var worldMatrix:Null<Matrix>; var boundsRectangle:Null<Rectangle>; var computeLocalBoundsRectangle:Dynamic; var localBoundsRectangle:Null<Rectangle>; var worldBoundsRectangle:Null<Rectangle>; var stage:Null<Stage>; };
 

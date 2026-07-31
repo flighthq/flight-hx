@@ -1,6 +1,6 @@
 # Typed Struct Class-Emission Feasibility
 
-Status: the `Camera2D` cpp pilot passed every Gate 1-3 acceptance check. Gate 4 is implemented for `ParticleEmitterData` and `ParticleEmitterState` in a separate parcel and awaits its integrated native benchmark/battery. No Gate-5 schema is enabled. The deterministic census covers all 404 eligible canonical typed-struct schemas at the pinned upstream commit.
+Status: the `Camera2D` cpp pilot passed every Gate 1-3 acceptance check. Gate 4 retains `ParticleEmitterState`; `ParticleEmitterData` was reverted after the provenance audit proved its parent ingress can carry anonymous data into a class-typed read. No Gate-5 schema is enabled. The deterministic census covers all 404 eligible canonical typed-struct schemas at the pinned upstream commit.
 
 ## Decision
 
@@ -42,14 +42,13 @@ The integrated html5 camera bundle matched its parent byte for byte except for L
 
 The cpp camera build compiled cleanly and rendered pixel-identically to the known-good post-`bufferSubData` capture. On the quiet llvmpipe Linux machine, six interleaved parent/candidate pairs of the 600-frame script benchmark measured 102.0 fps parent mean versus 108.2 fps candidate mean; the candidate won four of six pairs, about a 6% positive lean. A sequential-block run had first reported a false regression from machine drift. Interleaved parent/candidate pairs are therefore mandatory for all future class benchmarks.
 
-## Gate-4 particle state
+## Gate-4 particle resolution
 
-The Gate-4 allowlist adds exactly:
+The initial Gate-4 experiment added both `ParticleEmitterData` and `ParticleEmitterState`. Its integrated JS, cpp compile, render, and interleaved performance gates were green, and its allocation window showed a consistent reduction from about 2.36 MB to 1.64 MB. Correctness still takes precedence: the later containment audit found that `ParticleEmitterData` inherits normalization provenance through its `ParticleEmitter` parent.
 
-- `@flighthq/types:upstream/packages/types/src/ParticleEmitter.ts#ParticleEmitterData`;
-- `@flighthq/types:upstream/packages/types/src/ParticleEmitterState.ts#ParticleEmitterState`.
+That taint is realizable on cpp. The generated `ParticleEmitter` and `ParticleEmitter3D` outer typedefs flatten their overridden `data: ParticleEmitterData` field to `data: Null<NodeData>`, while `NodeData` is `Dynamic`. A structurally supplied outer emitter can therefore carry anonymous `data`. The generated GL and WGPU 3D render paths assign that dynamic slot to a local typed as `ParticleEmitterData` and then read `data.worldSpace`, so the nominal boundary is not closed. The seven parent findings are all casts, but the erased outer field means those casts do not prove or restore child identity.
 
-They are closed required-field records with no normalization or observability finding and 641 direct accesses combined. The generated-source tree changes from the accepted camera SHA `fd76c64a2957d9d52a31c1f5b6d8a900271bb56bb8e92dc41c18998195aaecb4` to `4f77361fa772d1b009930aecf87fbb3cc14483f0827fcb78d7061f00b1655ba0`. The delta is exactly the two particle type declarations and their two factory return sites. A targeted parent/candidate particle JavaScript build is byte-identical at SHA-256 `ebf43afd9f170a817377b0dbc25317dad02f1b658dfd2682659bfaeb0cc8f312`; the integrated Lime bundle comparison remains a separate acceptance gate.
+Gate 4 therefore uses the revert resolution: `ParticleEmitterData` remains a typedef, and the allowlist retains only the provenance-closed `@flighthq/types:upstream/packages/types/src/ParticleEmitterState.ts#ParticleEmitterState`. The full generated-source SHA is `7d3a64de84e772382b9d85b7adbf02694f0f4e820ebf667f61d6f3bec15103c9`. Relative to the accepted Camera2D parent, the generated delta is exactly the `ParticleEmitterState` type declaration and factory module. Relative to the rejected two-schema experiment at `4f77361fa772d1b009930aecf87fbb3cc14483f0827fcb78d7061f00b1655ba0`, the revert changes exactly the `ParticleEmitterData` type declaration and factory module.
 
 ## Census result
 
@@ -143,7 +142,7 @@ The current 10,257 direct Haxe accesses are the maximum static opportunity, not 
 
 `Camera2D` is an ideal correctness/performance pilot: it has six required fields, one plain production literal, no normalization or observability finding, and 17 direct static sites. The existing camera projection executes 50 `Camera2D` field accesses in one representative update. Converting the clean camera record first can validate the layout hypothesis without entangling transform normalization. Converting all relevant camera/transform records could eventually address the full 205-access frame projection, but `HasTransform2D` and `HasTransform2DRuntime` first need their anonymous, dynamic, and cross-schema sites normalized.
 
-`ParticleEmitterData` and `ParticleEmitterState` are clean required-field candidates with 641 direct static sites combined. They form a useful second benchmark lane after the single-schema camera pilot.
+`ParticleEmitterState` is a closed required-field record with 236 direct static sites and remains the Gate-4 particle class. `ParticleEmitterData` has 405 direct sites but is parked until its containing outer types preserve or normalize the nominal data identity.
 
 Neko has a hash-oriented object model too, so the same source hot paths could benefit from a more nominal representation, but it does not offer the same fixed native-layout argument as hxcpp. Treat the benefit as plausible and unquantified. More importantly, the known Neko GL cost includes a large FFI component that this change cannot remove. Neko acceptance should use a CPU-only camera/math/particle benchmark and must not infer class success or failure from GL frame time.
 
@@ -154,7 +153,7 @@ The Linux missing-shapes/text defect is outside this design. It was traced indep
 1. Add a default-off cpp class allowlist keyed by the exact canonical IDs already used by typed-struct lowering. No checker-derived schema may enter automatically.
 2. Emit `@:structInit` class plus deterministic constructor under `#if cpp`, with the current typedef under `#else`. Start with `Camera2D` only.
 3. Require unchanged JS generation and upstream Vitest results, cpp compile/portable tests, and an interleaved parent/candidate cpp benchmark against the same renderer, build mode, frame count, and machine.
-4. Add `ParticleEmitterData` and `ParticleEmitterState`; benchmark particles in at least six interleaved pairs and record allocation as well as frame time.
+4. Retain the provenance-closed `ParticleEmitterState`. Keep `ParticleEmitterData` as a typedef until the outer `ParticleEmitter` and `ParticleEmitter3D` data slots preserve or normalize its nominal identity; the positive experimental allocation result does not waive this correctness gate.
 5. Apply the containment and nominal-closure policy in [`typed-struct-provenance-audit.md`](typed-struct-provenance-audit.md) before any further required-field entry. The 199-row direct-census set is not a bulk gate: each schema must be closed or carry a reviewed source-specific proof before a separate allowlist diff. Compile success is necessary but not sufficient; preserve mutation and reference identity.
 6. Apply the constructor/default, absence, and provenance policy in [`typed-struct-optional-policy.md`](typed-struct-optional-policy.md), then consider reviewed subsets of the remaining 92 clean schemas. The current direct-site filter is not sufficient for bulk enablement.
 7. Resolve the itemized normalization and observability sites before enabling any of the remaining schemas. Never replace normalization with an unchecked native cast.

@@ -13,11 +13,8 @@ import {
   sourcePathToModule,
 } from '../analyze/inventory.ts';
 import { upstreamTypeScriptProgram } from '../analyze/program.ts';
-import {
-  cppStructInitTypedStructIds,
-  typedStructRegistry,
-  type TypedStructRegistry,
-} from '../analyze/typed-structs.ts';
+import type { TypedStructProvenanceAudit } from '../analyze/typed-struct-provenance.ts';
+import { cppStructInitTypedStructIds, type TypedStructRegistry } from '../analyze/typed-structs.ts';
 import { lowerTypeScriptSource } from '../lower/typescript.ts';
 import type {
   IrDeclaration,
@@ -67,11 +64,12 @@ interface LoweredPackageEntry {
 export function generateCoreModules(
   workspaceDirectory: string,
   check: boolean,
-  typedStructs?: TypedStructRegistry,
+  typedStructs: TypedStructRegistry,
+  typedStructProvenance: TypedStructProvenanceAudit,
 ): CoreGenerationReport {
   validateWebGl2ComputedConstantDomains(workspaceDirectory);
   const inventory = analyzeUpstream(workspaceDirectory);
-  const structRegistry = typedStructs ?? typedStructRegistry(workspaceDirectory, inventory.upstreamCommit);
+  const structRegistry = typedStructs;
   const inventoryByName = new Map(inventory.packages.map((item) => [item.name, item]));
   const packagesDirectory = path.join(workspaceDirectory, 'upstream', 'packages');
   const loweredPackages = readdirSync(packagesDirectory, { withFileTypes: true })
@@ -158,7 +156,7 @@ export function generateCoreModules(
       });
     }
   }
-  markCppStructInitTypes(modules, structRegistry);
+  markCppStructInitTypes(modules, structRegistry, typedStructProvenance);
   verifyTypedStructEmissionCoverage(modules, structRegistry);
   const shadowedTypeNames = markShadowedSecondaryTypes(modules);
   populateSourceImports(
@@ -277,9 +275,14 @@ export function generateCoreModules(
   return report;
 }
 
-function markCppStructInitTypes(modules: IrModule[], registry: TypedStructRegistry): void {
+function markCppStructInitTypes(
+  modules: IrModule[],
+  registry: TypedStructRegistry,
+  provenance: TypedStructProvenanceAudit,
+): void {
   const allowlist = new Set(cppStructInitTypedStructIds);
   const candidates = new Map(registry.report.candidates.map((candidate) => [candidate.id, candidate]));
+  validateCppStructInitProvenance(cppStructInitTypedStructIds, provenance);
   const seen = new Set<string>();
   for (const module of modules) {
     for (const declaration of module.declarations) {
@@ -305,6 +308,19 @@ function markCppStructInitTypes(modules: IrModule[], registry: TypedStructRegist
   const missing = [...allowlist].filter((id) => !seen.has(id));
   if (missing.length > 0)
     throw new Error(`cpp @:structInit allowlist identities were not emitted: ${missing.join(', ')}`);
+}
+
+export function validateCppStructInitProvenance(
+  ids: readonly string[],
+  provenance: {
+    schemas: readonly { id: string; nominalIdentity: { closed: boolean } }[];
+  },
+): void {
+  const schemas = new Map(provenance.schemas.map((schema) => [schema.id, schema]));
+  const blocked = ids.filter((id) => schemas.get(id)?.nominalIdentity.closed !== true);
+  if (blocked.length > 0) {
+    throw new Error(`cpp @:structInit schemas are not provenance-closed: ${blocked.join(', ')}`);
+  }
 }
 
 function verifyTypedStructEmissionCoverage(modules: IrModule[], registry: TypedStructRegistry): void {

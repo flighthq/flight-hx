@@ -41,11 +41,8 @@ class TypedStructParticleClassSmoke {
     }
 
     #if cpp
-    if (!Std.isOfType(data, flighthq.types.ParticleEmitter.ParticleEmitterData)) {
-      throw 'ParticleEmitterData Gate 4 did not construct a class instance';
-    }
     if (!Std.isOfType(state, flighthq.types.ParticleEmitterState)) {
-      throw 'ParticleEmitterState Gate 4 did not construct a class instance';
+      throw 'ParticleEmitterState retained Gate 4 class did not construct an instance';
     }
     #end
   }

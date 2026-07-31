@@ -45,7 +45,9 @@ try {
   } else {
     mkdirSync(reportsDirectory, { recursive: true });
     if (!apiOnly) {
-      const core = generateCoreModules(workspaceDirectory, check, typedStructs);
+      if (!typedStructs) throw new Error('Expected typed-struct audit');
+      if (!typedStructProvenance) throw new Error('Expected typed-struct provenance audit');
+      const core = generateCoreModules(workspaceDirectory, check, typedStructs, typedStructProvenance);
       for (const excluded of core.excludedPackages) {
         process.stderr.write(`Excluded (not translated): ${excluded.packageName} — ${excluded.reason}\n`);
       }
@@ -55,7 +57,6 @@ try {
       lowering.summary.staticEmission = core.staticLowering;
       writeOrCheck(path.join(reportsDirectory, 'lowering.json'), stableJson(lowering), check);
       writeOrCheck(path.join(reportsDirectory, 'lowering.md'), loweringSummary(lowering), check);
-      if (!typedStructs) throw new Error('Expected typed-struct audit');
       writeOrCheck(path.join(reportsDirectory, 'typed-structs.json'), stableJson(typedStructs.report), check);
       writeOrCheck(path.join(reportsDirectory, 'typed-structs.md'), typedStructSummary(typedStructs.report), check);
       if (!typedStructClasses) throw new Error('Expected typed-struct class-feasibility audit');
@@ -65,7 +66,6 @@ try {
         typedStructClassFeasibilitySummary(typedStructClasses),
         check,
       );
-      if (!typedStructProvenance) throw new Error('Expected typed-struct provenance audit');
       writeOrCheck(
         path.join(reportsDirectory, 'typed-struct-provenance.json'),
         stableJson(typedStructProvenance),

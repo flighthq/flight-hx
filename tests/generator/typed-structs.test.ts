@@ -15,6 +15,7 @@ import {
   type TypedStructCandidate,
 } from '../../tools/generator/src/analyze/typed-structs.ts';
 import { upstreamTypeScriptProgram } from '../../tools/generator/src/analyze/program.ts';
+import { validateCppStructInitProvenance } from '../../tools/generator/src/emit/core.ts';
 import { emitHaxeModule } from '../../tools/generator/src/emit/haxe.ts';
 import {
   typedStructClassFeasibilitySummary,
@@ -309,7 +310,7 @@ describe('typed struct analysis', () => {
     expect(typedStructProvenanceSummary(audit)).toContain('| Clean required-field candidates | 2 |');
   });
 
-  it('enables the reviewed tranche-six allowlist while leaving ineligible Rectangle parked', () => {
+  it('keeps the reviewed class allowlist provenance-closed while leaving parked schemas direct', () => {
     const workspace = path.resolve('.');
     const programAndChecker = upstreamTypeScriptProgram(workspace);
     const report = typedStructRegistry(workspace, 'fixture', undefined, programAndChecker).report;
@@ -331,9 +332,28 @@ describe('typed struct analysis', () => {
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:upstream/packages/types/src/Camera2D.ts#Camera2D',
-      '@flighthq/types:upstream/packages/types/src/ParticleEmitter.ts#ParticleEmitterData',
       '@flighthq/types:upstream/packages/types/src/ParticleEmitterState.ts#ParticleEmitterState',
     ]);
+    const provenance = JSON.parse(readFileSync('reports/typed-struct-provenance.json', 'utf8')) as {
+      schemas: Array<{ id: string; nominalIdentity: { closed: boolean } }>;
+    };
+    const provenanceById = new Map(provenance.schemas.map((schema) => [schema.id, schema]));
+    expect(cppStructInitTypedStructIds.every((id) => provenanceById.get(id)?.nominalIdentity.closed === true)).toBe(
+      true,
+    );
+    const particleEmitterDataId = '@flighthq/types:upstream/packages/types/src/ParticleEmitter.ts#ParticleEmitterData';
+    expect(provenanceById.get(particleEmitterDataId)?.nominalIdentity.closed).toBe(false);
+    expect(() => validateCppStructInitProvenance(cppStructInitTypedStructIds, provenance)).not.toThrow();
+    expect(() => validateCppStructInitProvenance([particleEmitterDataId], provenance)).toThrow(
+      `cpp @:structInit schemas are not provenance-closed: ${particleEmitterDataId}`,
+    );
+    expect(readFileSync('generated/flighthq/types/ParticleEmitter.hx', 'utf8')).toContain(
+      'typedef ParticleEmitter = { var data:Null<NodeData>;',
+    );
+    expect(readFileSync('generated/flighthq/types/ParticleEmitter3D.hx', 'utf8')).toContain(
+      'typedef ParticleEmitter3D = { var data:Null<NodeData>;',
+    );
+    expect(readFileSync('generated/flighthq/types/Node.hx', 'utf8')).toContain('typedef NodeData = Dynamic;');
 
     expect(report.summary).toMatchObject({
       auditOnlySchemas: 0,

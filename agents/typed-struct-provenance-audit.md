@@ -48,10 +48,12 @@ Container findings partition into 16 candidates with anonymous callback/generic 
 - `BitmapFontKerningData` is constructed by `record.kernings.map(...)` at `upstream/packages/bitmapfont-formats/src/bitmapFontRecord.ts:114`. Its outer result is structurally inferred and assigned to `BitmapFontKerningData[]`; the direct schema transfer audit never sees the callback result as that canonical identity.
 - `GltfAccessorSparse` has no direct normalization finding, but `GltfDocument` is a dynamic and explicit JSON root. The report carries the exact path `GltfDocument -> accessors[]:GltfAccessor -> sparse:GltfAccessorSparse`.
 - `Camera2D` and `ParticleEmitterState` remain closed controls.
-- `ParticleEmitterData` has no missed container construction after plain contextual object literals are recognized, but is conservatively reachable from normalization findings on its containing `ParticleEmitter`. Those findings are outer downcasts in renderer and generic display-object code, so a later ingress-sensitive proof may discharge this blocker; the audit does not silently assume that proof.
+- `ParticleEmitterData` has no missed container construction after plain contextual object literals are recognized, but its containing `ParticleEmitter` is a normalization root. This blocker is realizable: generated outer emitter types erase their overridden `data` field to dynamic `NodeData`, while generated 3D render paths assign that slot to `ParticleEmitterData` and perform class-typed reads. Gate 4 therefore reverted `ParticleEmitterData` to a typedef and retained only `ParticleEmitterState`.
 
 ## Gate policy
 
 Before a Gate-5 class entry is proposed, its row must be closed in the generated report or carry a reviewed, source-specific proof that narrows a conservative root. Container findings require canonical construction or normalization at the reported site. JSON document descendants require an explicit recursive materialization boundary. Bridge exposure continues to require target compilation and behavioral tests but does not fail closure by count alone.
 
 Changing this policy, the root classification, or the clean-set predicate requires a report schema/version change and focused positive and negative tests. Adding a class allowlist entry is a separate reviewed diff.
+
+The generator also rejects every cpp class allowlist identity whose provenance row is absent or not closed. A blocked schema can be reconsidered only after its normalization changes the generated report; deleting or bypassing that guard is not a source-specific proof.
