@@ -1,6 +1,6 @@
 # Static Lowering Next Levers
 
-Status: the shared static-facts mechanism, primitive Boolean/numeric emission, the checker-proven indexed-access tranche, the emitter-known synthetic Array follow-up, and the storage-compatible part of the mixed-union follow-up are enabled. Review's Step 3 script benchmark was positive overall: camera2d stayed flat while particles improved 21% by median.
+Status: the shared static-facts mechanism, primitive Boolean/numeric emission, the checker-proven indexed-access tranche, the emitter-known synthetic Array follow-up, and the storage-compatible part of the mixed-union follow-up are enabled. Destructuring source-receiver retention is audited but remains emission-neutral pending review. Review's Step 3 script benchmark was positive overall: camera2d stayed flat while particles improved 21% by median.
 
 This proposal covers two independent generator optimizations after typed-struct tranche 5:
 
@@ -101,7 +101,29 @@ The emitter now marks two Array sources it creates itself instead of routing the
 | Packed high-arity function arguments |           27 |
 | **Total**                            |      **106** |
 
-Both classes use `_StaticIndex.readArray` and contribute to the exact Array/direct-index totals above. Dedicated report counters keep them separate from checker-proven source expressions. Ordinary destructuring remains dynamic: 241 generated local reads plus 11 destructured-parameter reads are parked until the source receiver fact survives lowering. Dictionary and presence-sensitive schemas are also unchanged.
+Both classes use `_StaticIndex.readArray` and contribute to the exact Array/direct-index totals above. Dedicated report counters keep them separate from checker-proven source expressions. Dictionary and presence-sensitive schemas are unchanged.
+
+## Audited destructuring source facts
+
+Destructuring now retains a checker-proven source receiver in IR and records final-output counts with emission markers that are stripped before generated Haxe is written. This is analysis-only: every read still uses `_Runtime.getIndex`, and the generated-tree SHA-256 remains `55e27a2468b1090c8f893719c632ebfedf3c624b1cdc25e7b17be1105c1e17c2` before and after regeneration.
+
+| Source shape | Retained `Array` reads | Parked reads |   Total |
+| ------------ | ---------------------: | -----------: | ------: |
+| Assignment   |                     20 |            0 |      20 |
+| Declaration  |                    209 |           12 |     221 |
+| Parameter    |                     11 |            0 |      11 |
+| **Total**    |                **240** |       **12** | **252** |
+
+The 12 parked reads are specialized regexp result arrays, kept outside the ordinary Array identity proof:
+
+| Source identity                                                       | Type               | Reads |
+| --------------------------------------------------------------------- | ------------------ | ----: |
+| `upstream/packages/particles-formats/src/particleDesignerParse.ts:32` | `RegExpExecArray`  |     4 |
+| `upstream/packages/particles-formats/src/starlingPexParse.ts:244`     | `RegExpExecArray`  |     4 |
+| `upstream/packages/spritesheet-formats/src/libgdxAtlasParse.ts:201`   | `RegExpMatchArray` |     2 |
+| `upstream/packages/spritesheet-formats/src/starlingParse.ts:101`      | `RegExpMatchArray` |     2 |
+
+The schema-v7 lowering report records both receiver/source-shape counts and parked reasons. Adversarial coverage keeps nullable sources, structural `ArrayLike` and dictionary shapes, heterogeneous storage unions, wider unions, and regexp result arrays dynamic. No direct destructuring endpoint is enabled without review.
 
 ## Enabled storage-compatible mixed unions
 
@@ -159,5 +181,6 @@ Direct numeric relation preserves `NaN`, infinities, signed zero, evaluation ord
 3. Enable typed indexed endpoints for the ten single-family receiver bindings. Completed locally with exact generated counters and cross-target smoke coverage.
 4. Measure Step 3 in review's update-and-prepare benchmark against the new 8.8 ms baseline. Completed: camera2d was flat; particles improved from 35.0 to 42.9 median fps across five runs per side, a 21% gain with non-overlapping samples.
 5. Consider emitter-known synthetic arrays and homogeneous mixed typed-array unions only as separately audited follow-ups. The 106-read synthetic Array slice and 46 storage-compatible mixed-union operations are completed; 13 width-sensitive mixed writes remain explicitly parked.
+6. Retain and audit destructuring source receivers without changing emission. Completed: 240 `Array` reads are proven and 12 regexp-result reads remain explicitly parked; direct emission awaits review.
 
 Each enablement should retain exact generated coverage counters, analogous to typed-struct direct-emission coverage, so a checker or upstream drift cannot silently change the optimized surface.

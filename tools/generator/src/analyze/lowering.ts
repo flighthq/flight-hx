@@ -24,7 +24,7 @@ export interface PackageLoweringAudit {
 
 export interface LoweringAudit {
   packages: PackageLoweringAudit[];
-  schemaVersion: 6;
+  schemaVersion: 7;
   summary: {
     declarations: number;
     diagnostics: number;
@@ -53,7 +53,7 @@ export function auditLowering(workspaceDirectory: string, typedStructs?: TypedSt
 
   return {
     packages,
-    schemaVersion: 6,
+    schemaVersion: 7,
     summary: {
       declarations: sum(packages, (item) => item.declarations),
       diagnostics: sum(packages, (item) => item.diagnostics.length),
@@ -65,6 +65,25 @@ export function auditLowering(workspaceDirectory: string, typedStructs?: TypedSt
         booleanConditionalExpressions: 0,
         booleanOrExpressions: 0,
         booleanTruthinessUses: 0,
+        destructuringEscapes: {
+          'regexp-result-array': { assignment: 0, declaration: 0, parameter: 0 },
+          'unproven-receiver': { assignment: 0, declaration: 0, parameter: 0 },
+        },
+        destructuringReads: {
+          assignment: { eligible: 0, parked: 0 },
+          declaration: { eligible: 0, parked: 0 },
+          parameter: { eligible: 0, parked: 0 },
+        },
+        destructuringReceivers: Object.fromEntries(
+          indexedReceiverNames.map((receiver) => [
+            receiver,
+            {
+              assignment: 0,
+              declaration: 0,
+              parameter: 0,
+            },
+          ]),
+        ) as StaticLoweringEmissionCounts['destructuringReceivers'],
         indexedAccesses: {
           reads: 0,
           writes: 0,

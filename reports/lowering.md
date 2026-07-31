@@ -25,6 +25,9 @@
 | Direct indexed writes | 2930 |
 | Direct synthetic iteration-binding Array reads | 79 |
 | Direct synthetic high-arity-argument Array reads | 27 |
+| Audited ordinary destructuring indexed reads | 252 |
+| Destructuring reads with retained receiver facts | 240 |
+| Parked destructuring reads | 12 |
 
 | Indexed receiver | Proven expressions | Proven reads | Proven writes | Direct reads | Direct writes |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -40,6 +43,27 @@
 | `Uint32Array` | 10 | 2 | 8 | 2 | 8 |
 | `Uint8Array` | 192 | 164 | 28 | 164 | 28 |
 | `Uint8ClampedArray` | 699 | 340 | 359 | 340 | 359 |
+
+| Destructuring receiver | Assignment reads | Declaration reads | Parameter reads | Total |
+| --- | ---: | ---: | ---: | ---: |
+| <code>Array</code> | 20 | 209 | 11 | 240 |
+| <code>ArrayOrFloat32Array</code> | 0 | 0 | 0 | 0 |
+| <code>Float32Array</code> | 0 | 0 | 0 | 0 |
+| <code>Float64Array</code> | 0 | 0 | 0 | 0 |
+| <code>Int16Array</code> | 0 | 0 | 0 | 0 |
+| <code>Int32Array</code> | 0 | 0 | 0 | 0 |
+| <code>Int8Array</code> | 0 | 0 | 0 | 0 |
+| <code>Uint16Array</code> | 0 | 0 | 0 | 0 |
+| <code>Uint16ArrayOrUint32Array</code> | 0 | 0 | 0 | 0 |
+| <code>Uint32Array</code> | 0 | 0 | 0 | 0 |
+| <code>Uint8Array</code> | 0 | 0 | 0 | 0 |
+| <code>Uint8ClampedArray</code> | 0 | 0 | 0 | 0 |
+| Parked | 0 | 12 | 0 | 12 |
+
+| Destructuring parked reason | Assignment reads | Declaration reads | Parameter reads | Total |
+| --- | ---: | ---: | ---: | ---: |
+| regexp-result-array | 0 | 12 | 0 | 12 |
+| unproven-receiver | 0 | 0 | 0 | 0 |
 
 | Package | Declarations | Lowered | Diagnostics | Boolean truthiness | Numeric relations | Indexed calls |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
