@@ -1,6 +1,6 @@
 # Typed Struct Class-Emission Feasibility
 
-Status: Gates 1-3 are implemented for the `Camera2D`-only cpp pilot and await the rebase-time native compile and benchmark. Gate 4 remains a separate contingent change. The deterministic census covers all 404 eligible canonical typed-struct schemas at the pinned upstream commit.
+Status: the `Camera2D` cpp pilot passed every Gate 1-3 acceptance check. Gate 4 is implemented for `ParticleEmitterData` and `ParticleEmitterState` in a separate parcel and awaits its integrated native benchmark/battery. No Gate-5 schema is enabled. The deterministic census covers all 404 eligible canonical typed-struct schemas at the pinned upstream commit.
 
 ## Decision
 
@@ -32,11 +32,24 @@ This is now the emitted shape for the exact canonical ID `@flighthq/types:upstre
 
 The allowlist is default-off: only exact reviewed canonical IDs enter, and generation fails when an enabled identity is absent, indirect, ineligible, generic, inherited, optional, or not an anonymous required-field record. The pilot also records construction identity in the IR, validates the exact field set and declaration order at emission, and leaves all non-cpp declarations on the existing typedef branch.
 
-## Pilot verification state
+## Camera pilot verdict
 
 The class fixture constructs a real nominal instance under the compiler interpreter while exercising the cpp branch syntax, and the maintained Haxe smoke checks every `Camera2D` field. A focused JavaScript fixture compares the pilot emission against the previous return-cast emission byte for byte; both files currently have SHA-256 `2d0b0b4da3dba8d197b56b68453cecccf230fe044026fbcdbb0a7ef6cb6a92b1`.
 
-The complete generated-source tree changed from SHA-256 `7fb39b6fb779838926fded9d2aa44ff31f2ca54f7778801660fa046c7ea9914f` to `fd76c64a2957d9d52a31c1f5b6d8a900271bb56bb8e92dc41c18998195aaecb4`; only `Camera2D.hx` and its construction site changed. A separate full generated-JavaScript-tree SHA is still a mandatory acceptance gate. It cannot be produced on this isolated pre-integration branch because the full compilation reaches the already-fixed DOM backend `value`/`hasField` errors before JavaScript emission. This workspace also has no `g++` or `clang++`, so review must perform the cpp compile, portable cpp smoke, full JavaScript-tree comparison, and five-run parent/candidate camera benchmark after rebasing onto the integrated DOM fix.
+The complete generated-source tree changed from SHA-256 `7fb39b6fb779838926fded9d2aa44ff31f2ca54f7778801660fa046c7ea9914f` to `fd76c64a2957d9d52a31c1f5b6d8a900271bb56bb8e92dc41c18998195aaecb4`; only `Camera2D.hx` and its construction site changed. Review confirmed the same candidate hash after integration.
+
+The integrated html5 camera bundle matched its parent byte for byte except for Lime's auto-incrementing `app.meta` build-counter line. Future class parcels compare the whole bundle after excluding only that nondeterministic build-meta line; every remaining byte must match. The focused raw-Haxe fixture remains supporting byte-identity evidence.
+
+The cpp camera build compiled cleanly and rendered pixel-identically to the known-good post-`bufferSubData` capture. On the quiet llvmpipe Linux machine, six interleaved parent/candidate pairs of the 600-frame script benchmark measured 102.0 fps parent mean versus 108.2 fps candidate mean; the candidate won four of six pairs, about a 6% positive lean. A sequential-block run had first reported a false regression from machine drift. Interleaved parent/candidate pairs are therefore mandatory for all future class benchmarks.
+
+## Gate-4 particle state
+
+The Gate-4 allowlist adds exactly:
+
+- `@flighthq/types:upstream/packages/types/src/ParticleEmitter.ts#ParticleEmitterData`;
+- `@flighthq/types:upstream/packages/types/src/ParticleEmitterState.ts#ParticleEmitterState`.
+
+They are closed required-field records with no normalization or observability finding and 641 direct accesses combined. The generated-source tree changes from the accepted camera SHA `fd76c64a2957d9d52a31c1f5b6d8a900271bb56bb8e92dc41c18998195aaecb4` to `4f77361fa772d1b009930aecf87fbb3cc14483f0827fcb78d7061f00b1655ba0`. The delta is exactly the two particle type declarations and their two factory return sites. A targeted parent/candidate particle JavaScript build is byte-identical at SHA-256 `ebf43afd9f170a817377b0dbc25317dad02f1b658dfd2682659bfaeb0cc8f312`; the integrated Lime bundle comparison remains a separate acceptance gate.
 
 ## Census result
 
@@ -140,8 +153,8 @@ The Linux missing-shapes/text defect is outside this design. It was traced indep
 
 1. Add a default-off cpp class allowlist keyed by the exact canonical IDs already used by typed-struct lowering. No checker-derived schema may enter automatically.
 2. Emit `@:structInit` class plus deterministic constructor under `#if cpp`, with the current typedef under `#else`. Start with `Camera2D` only.
-3. Require unchanged JS generation and upstream Vitest results, cpp compile/portable tests, and a camera2d cpp benchmark against the same renderer, build mode, frame count, and machine.
-4. Add `ParticleEmitterData` and `ParticleEmitterState`; benchmark particles and record allocation as well as frame time.
+3. Require unchanged JS generation and upstream Vitest results, cpp compile/portable tests, and an interleaved parent/candidate cpp benchmark against the same renderer, build mode, frame count, and machine.
+4. Add `ParticleEmitterData` and `ParticleEmitterState`; benchmark particles in at least six interleaved pairs and record allocation as well as frame time.
 5. Expand to the 199 clean required-field schemas only through reviewed allowlist diffs. Compile success is necessary but not sufficient; preserve mutation and reference identity.
 6. Apply the constructor/default, absence, and provenance policy in [`typed-struct-optional-policy.md`](typed-struct-optional-policy.md), then consider reviewed subsets of the remaining 92 clean schemas. The current direct-site filter is not sufficient for bulk enablement.
 7. Resolve the itemized normalization and observability sites before enabling any of the remaining schemas. Never replace normalization with an unchecked native cast.

@@ -11,6 +11,8 @@ import { upstreamTypeScriptProgram } from './program.ts';
 // explicit canonical identity so an upstream declaration cannot enter silently.
 export const cppStructInitTypedStructIds: readonly string[] = [
   '@flighthq/types:upstream/packages/types/src/Camera2D.ts#Camera2D',
+  '@flighthq/types:upstream/packages/types/src/ParticleEmitter.ts#ParticleEmitterData',
+  '@flighthq/types:upstream/packages/types/src/ParticleEmitterState.ts#ParticleEmitterState',
 ];
 
 const cppStructInitTypedStructIdSet = new Set(cppStructInitTypedStructIds);

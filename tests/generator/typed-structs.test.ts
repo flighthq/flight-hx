@@ -253,6 +253,8 @@ describe('typed struct analysis', () => {
     const rectangle = report.candidates.find((candidate) => candidate.name === 'Rectangle');
     const color = report.candidates.find((candidate) => candidate.name === 'ColorTransform');
     const camera2D = report.candidates.find((candidate) => candidate.name === 'Camera2D');
+    const particleEmitterData = report.candidates.find((candidate) => candidate.name === 'ParticleEmitterData');
+    const particleEmitterState = report.candidates.find((candidate) => candidate.name === 'ParticleEmitterState');
     const transform2DRuntime = report.candidates.find((candidate) => candidate.name === 'HasTransform2DRuntime');
     const perspective = report.candidates.find((candidate) => candidate.name === 'PerspectiveProjection');
     const scene = report.candidates.find((candidate) => candidate.name === 'Scene');
@@ -264,7 +266,11 @@ describe('typed struct analysis', () => {
     const surface = report.candidates.find((candidate) => candidate.name === 'Surface');
     const trancheSix = report.candidates.slice(-tranche6TypedStructCandidates.length);
 
-    expect(cppStructInitTypedStructIds).toEqual(['@flighthq/types:upstream/packages/types/src/Camera2D.ts#Camera2D']);
+    expect(cppStructInitTypedStructIds).toEqual([
+      '@flighthq/types:upstream/packages/types/src/Camera2D.ts#Camera2D',
+      '@flighthq/types:upstream/packages/types/src/ParticleEmitter.ts#ParticleEmitterData',
+      '@flighthq/types:upstream/packages/types/src/ParticleEmitterState.ts#ParticleEmitterState',
+    ]);
 
     expect(report.summary).toMatchObject({
       auditOnlySchemas: 0,
@@ -303,6 +309,26 @@ describe('typed struct analysis', () => {
       mode: 'direct',
       pendingAccesses: 0,
       reflectiveSurvivors: [],
+    });
+    expect(particleEmitterData).toMatchObject({
+      eligible: true,
+      emission: { directAccesses: 405, mode: 'direct', pendingAccesses: 0 },
+      escapes: [],
+      fields: expect.arrayContaining([
+        expect.objectContaining({ name: 'particleCount', optional: false, type: 'number' }),
+        expect.objectContaining({ name: 'transforms', optional: false, type: 'Float32Array<ArrayBufferLike>' }),
+      ]),
+      reasons: [],
+    });
+    expect(particleEmitterState).toMatchObject({
+      eligible: true,
+      emission: { directAccesses: 236, mode: 'direct', pendingAccesses: 0 },
+      escapes: [],
+      fields: expect.arrayContaining([
+        expect.objectContaining({ name: 'random', optional: false, type: 'RandomSource' }),
+        expect.objectContaining({ name: 'velocities', optional: false, type: 'Float32Array<ArrayBufferLike>' }),
+      ]),
+      reasons: [],
     });
     expect(transform2DRuntime?.emission).toEqual({
       directAccesses: 27,

@@ -12,7 +12,7 @@ class ParticleEmitterState {
 
   public static function createParticleEmitterState(?random:RandomSource):flighthq.types.ParticleEmitterState {
     if (random == null) random = cast (HxMath.random : Dynamic);
-    return cast { burstTimer: 0.0, colorBirth: new flighthq._internal._Float32Array(), colorDeath: new flighthq._internal._Float32Array(), emitterAge: 0.0, lifetimes: new flighthq._internal._Float32Array(), prevX: HxMath.NaN, prevY: HxMath.NaN, prevZ: HxMath.NaN, random: random, rotationSpeeds: new flighthq._internal._Float32Array(), scales: new flighthq._internal._Float32Array(), spawnAccumulator: 0.0, velocities: new flighthq._internal._Float32Array() };
+    return { burstTimer: 0.0, colorBirth: new flighthq._internal._Float32Array(), colorDeath: new flighthq._internal._Float32Array(), emitterAge: 0.0, lifetimes: new flighthq._internal._Float32Array(), prevX: HxMath.NaN, prevY: HxMath.NaN, prevZ: HxMath.NaN, random: random, rotationSpeeds: new flighthq._internal._Float32Array(), scales: new flighthq._internal._Float32Array(), spawnAccumulator: 0.0, velocities: new flighthq._internal._Float32Array() };
     return cast null;
   }
 
