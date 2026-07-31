@@ -403,40 +403,62 @@ class NativeCanvas2dContext {
 
   // ---- text ----
 
-  /** Registered real font faces by family name; `fillText` and `measureText`
-   * use them when the CSS font string names a registered family, falling back
-   * to cairo's toy face and the width heuristic otherwise. */
-  static final registeredFonts:Map<String, {font:lime.text.Font, face:lime.graphics.cairo.CairoFontFace,
-    advances:Map<Int, Float>}> = [];
+  /** Registered real font faces keyed by family plus optional style suffixes
+   * (`family`, `family|b`, `family|i`, `family|b|i`); `fillText` and
+   * `measureText` use them when the CSS font string names a registered family,
+   * preferring an exact style match and falling back to the plain family, then
+   * to cairo's toy face. */
+  static final registeredFonts:Map<String, {font:lime.text.Font, face:lime.graphics.cairo.CairoFontFace}> = [];
 
-  public static function registerFont(family:String, font:lime.text.Font):Void {
+  public static function registerFont(family:String, font:lime.text.Font, bold:Bool = false, italic:Bool = false):Void {
     final face = lime.graphics.cairo.CairoFTFontFace.create(font, lime.graphics.cairo.CairoFTFontFace.FT_LOAD_FORCE_AUTOHINT);
-    registeredFonts.set(family.toLowerCase(), {font: font, face: face, advances: []});
+    registeredFonts.set(styleKey(family.toLowerCase(), bold, italic), {font: font, face: face});
   }
 
-  static function resolveRegisteredFont(fontValue:String):Null<{font:lime.text.Font,
-      face:lime.graphics.cairo.CairoFontFace, advances:Map<Int, Float>}> {
-    // Families are the comma-separated tail of the CSS shorthand after the size token.
+  static function styleKey(family:String, bold:Bool, italic:Bool):String {
+    return family + (bold ? '|b' : '') + (italic ? '|i' : '');
+  }
+
+  static function resolveRegisteredFont(fontValue:String):Null<{font:lime.text.Font, face:lime.graphics.cairo.CairoFontFace}> {
+    // CSS font shorthand: style/weight tokens precede the size token, and the
+    // comma-separated family list is the tail after it.
     final sizeIndex = fontValue.indexOf('px');
+    final head = sizeIndex >= 0 ? fontValue.substr(0, sizeIndex).toLowerCase() : '';
+    final bold = head.indexOf('bold') >= 0;
+    final italic = head.indexOf('italic') >= 0 || head.indexOf('oblique') >= 0;
     final families = (sizeIndex >= 0 ? fontValue.substr(sizeIndex + 2) : fontValue).split(',');
     for (family in families) {
       final key = StringTools.trim(StringTools.replace(StringTools.replace(family, '"', ''), "'", '')).toLowerCase();
-      if (key != '' && registeredFonts.exists(key)) return registeredFonts.get(key);
+      if (key == '') continue;
+      final styled = styleKey(key, bold, italic);
+      if (registeredFonts.exists(styled)) return registeredFonts.get(styled);
+      if (registeredFonts.exists(key)) return registeredFonts.get(key);
     }
     return null;
   }
 
-  /** Em-scaled advance of one code point in the registered font, cached. */
-  static function glyphAdvance(entry:{font:lime.text.Font, face:lime.graphics.cairo.CairoFontFace,
-      advances:Map<Int, Float>}, character:String):Float {
-    final code = character.charCodeAt(0);
-    final cached = entry.advances.get(code);
-    if (cached != null) return cached;
-    final glyph = entry.font.getGlyph(character);
-    final metrics = entry.font.getGlyphMetrics(glyph);
-    final advance = metrics != null ? metrics.advance.x / entry.font.unitsPerEM : 0.55;
-    entry.advances.set(code, advance);
-    return advance;
+  /** Canvas `fillText`/`measureText` replace ASCII whitespace with spaces, so
+   * control characters never reach cairo as missing-glyph boxes. */
+  static function normalizeDrawnText(text:String):String {
+    if (text.indexOf('\n') < 0 && text.indexOf('\r') < 0 && text.indexOf('\t') < 0) return text;
+    text = StringTools.replace(text, '\r\n', ' ');
+    text = StringTools.replace(text, '\n', ' ');
+    text = StringTools.replace(text, '\r', ' ');
+    return StringTools.replace(text, '\t', ' ');
+  }
+
+  /** Dedicated 1x1 measurement context: `textPath` advances the current point
+   * exactly like `showText` (kerning and space advances included) without
+   * painting, and using a scratch context keeps the canvas path untouched. */
+  static var measureContext:Null<lime.graphics.cairo.Cairo> = null;
+
+  static function measurementContext():lime.graphics.cairo.Cairo {
+    if (measureContext == null) {
+      final pixels = new lime.utils.UInt8Array(4);
+      final surface = lime.graphics.cairo.CairoImageSurface.create(pixels, lime.graphics.cairo.CairoFormat.ARGB32, 1, 1, 4);
+      measureContext = new lime.graphics.cairo.Cairo(surface);
+    }
+    return measureContext;
   }
 
   public function fillText(text:String, x:Float, y:Float):Void {
@@ -447,20 +469,23 @@ class NativeCanvas2dContext {
     ctx.setFontSize(parseFontSize(font));
     applyStyle(fillStyle);
     ctx.moveTo(x, y);
-    ctx.showText(text);
+    ctx.showText(normalizeDrawnText(text));
     ctx.restore();
   }
 
   public function measureText(text:String):Dynamic {
-    final size = parseFontSize(font);
+    final ctx = measurementContext();
+    ctx.save();
     final registered = resolveRegisteredFont(font);
-    if (registered == null) {
-      // Width heuristic for the toy face when no real font is registered.
-      return {width: size * 0.55 * text.length};
-    }
-    var width = 0.0;
-    for (index in 0...text.length) width += glyphAdvance(registered, text.charAt(index));
-    return {width: width * size};
+    if (registered != null) ctx.fontFace = registered.face;
+    ctx.setFontSize(parseFontSize(font));
+    ctx.newPath();
+    ctx.moveTo(0, 0);
+    ctx.textPath(normalizeDrawnText(text));
+    final width = ctx.hasCurrentPoint ? ctx.currentPoint.x : 0.0;
+    ctx.newPath();
+    ctx.restore();
+    return {width: width};
   }
 
   static function parseFontSize(fontValue:String):Float {
