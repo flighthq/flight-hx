@@ -1515,12 +1515,14 @@ describe('TypeScript lowering and Haxe emission', () => {
       },
       indexedReceivers: {
         Array: { reads: 0, writes: 1 },
+        ArrayOrFloat32Array: { reads: 0, writes: 0 },
         Float32Array: { reads: 2, writes: 1 },
         Float64Array: { reads: 0, writes: 0 },
         Int16Array: { reads: 0, writes: 0 },
         Int32Array: { reads: 0, writes: 0 },
         Int8Array: { reads: 0, writes: 0 },
         Uint16Array: { reads: 0, writes: 0 },
+        Uint16ArrayOrUint32Array: { reads: 0, writes: 0 },
         Uint32Array: { reads: 0, writes: 0 },
         Uint8Array: { reads: 0, writes: 0 },
         Uint8ClampedArray: { reads: 0, writes: 0 },
@@ -1667,6 +1669,55 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toMatch(
       /\(\{ var (__indexedObject\d+):Dynamic = .*receiver.*; var (__indexedKey\d+):Dynamic = .*key.*; flighthq\._internal\._StaticIndex\.writeArray\(\1, \2, \(flighthq\._internal\._StaticIndex\.readArray\(\1, \2\) \+ .*value.*\)\); \}\)/u,
     );
+  });
+
+  it('emits only storage-compatible mixed indexed unions', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/mixed-indexed.ts',
+      `export function mixed(
+         values: number[] | Float32Array,
+         readonlyValues: ReadonlyArray<number> | Readonly<Float32Array>,
+         wider: readonly [number, number] | ReadonlyArray<number> | Readonly<Float32Array>,
+         indices: Uint16Array | Uint32Array,
+         incompatible: Float32Array | Uint8Array,
+         heterogeneous: number[] | Uint8Array,
+         key: number,
+         value: number,
+       ) {
+         const valueRead = values[key];
+         values[key] = value;
+         values[key] += value;
+         const readonlyRead = readonlyValues[key];
+         const indexRead = indices[key];
+         indices[key] = value;
+         indices[key] += value;
+         return [valueRead, readonlyRead, indexRead, wider[key], incompatible[key], heterogeneous[key]];
+       }`,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    resetStaticLoweringEmissionCounts();
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'MixedIndexedFixture',
+      packageName: '@flighthq/example',
+    });
+    const emission = staticLoweringEmissionCounts();
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(emission.indexedAccesses).toEqual({ reads: 4, writes: 2 });
+    expect(emission.indexedReceivers.ArrayOrFloat32Array).toEqual({ reads: 3, writes: 2 });
+    expect(emission.indexedReceivers.Uint16ArrayOrUint32Array).toEqual({ reads: 1, writes: 0 });
+    expect(lowered.staticFacts.indexedAccessEscapes.widthSensitiveMixedWrites).toBe(2);
+    expect(output).toContain('_StaticIndex.readArrayOrFloat32Array(values, key)');
+    expect(output).toContain('_StaticIndex.writeArrayOrFloat32Array(values, key, value)');
+    expect(output).toContain('_StaticIndex.readArrayOrFloat32Array(readonlyValues, key)');
+    expect(output).toContain('_StaticIndex.readUint16ArrayOrUint32Array(indices, key)');
+    expect(output).toContain('_Runtime.setIndex(indices, key, value)');
+    expect(output).toContain('_Runtime.setIndex(indices, key, (_Runtime.getIndex(indices, key) + value))');
+    expect(output).toContain('_Runtime.getIndex(wider, key)');
+    expect(output).toContain('_Runtime.getIndex(incompatible, key)');
+    expect(output).toContain('_Runtime.getIndex(heterogeneous, key)');
   });
 
   it('preserves Haxe keyword property names in JavaScript objects', () => {

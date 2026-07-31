@@ -9774,13 +9774,17 @@
     "booleanOrExpressions": 1364,
     "booleanTruthinessUses": 7882,
     "indexedAccesses": {
-      "reads": 4627,
-      "writes": 2915
+      "reads": 4658,
+      "writes": 2930
     },
     "indexedReceivers": {
       "Array": {
         "reads": 2615,
         "writes": 453
+      },
+      "ArrayOrFloat32Array": {
+        "reads": 4,
+        "writes": 15
       },
       "Float32Array": {
         "reads": 1392,
@@ -9805,6 +9809,10 @@
       "Uint16Array": {
         "reads": 37,
         "writes": 26
+      },
+      "Uint16ArrayOrUint32Array": {
+        "reads": 27,
+        "writes": 0
       },
       "Uint32Array": {
         "reads": 2,

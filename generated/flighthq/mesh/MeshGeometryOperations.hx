@@ -157,7 +157,7 @@ class MeshGeometryOperations {
         {
           var j:Dynamic = 0.0;
           while ((cast ((cast j : Float) < (cast srcCount : Float)) : Bool)) {
-            var srcIdx:Dynamic = _Runtime.select(geo.indices, function():Dynamic return cast _Runtime.getIndex(geo.indices, j), function():Dynamic return cast j);
+            var srcIdx:Dynamic = _Runtime.select(geo.indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(geo.indices, j), function():Dynamic return cast j);
             _Runtime.setIndex(mergedIndices, (indexOffset + j), (srcIdx + vertexOffset));
             j++;
           }
@@ -193,7 +193,7 @@ class MeshGeometryOperations {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(geometry.indices, 'length') : Float)) : Bool)) {
-          if ((cast ((cast _Runtime.getIndex(geometry.indices, i) : Float) >= (cast vertexCount : Float)) : Bool)) { return cast false; }
+          if ((cast ((cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(geometry.indices, i) : Float) >= (cast vertexCount : Float)) : Bool)) { return cast false; }
           i++;
         }
       }

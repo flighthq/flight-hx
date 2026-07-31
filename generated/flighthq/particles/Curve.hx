@@ -74,9 +74,9 @@ class Curve {
     r = _Runtime.getIndex(__destructure3, 0.0);
     g = _Runtime.getIndex(__destructure3, 1.0);
     b = _Runtime.getIndex(__destructure3, 2.0);
-    _Runtime.setIndex(out, offset, r);
-    _Runtime.setIndex(out, (offset + 1.0), g);
-    _Runtime.setIndex(out, (offset + 2.0), b);
+    flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, offset, r);
+    flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, (offset + 1.0), g);
+    flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, (offset + 2.0), b);
   }
 
   public static function lerpHsvInPlace(colorsOut:Dynamic, offset:Float, birth:flighthq._internal._Float32Array, death:flighthq._internal._Float32Array, t:Float):Void {

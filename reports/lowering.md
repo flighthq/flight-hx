@@ -17,23 +17,26 @@
 | Direct Boolean `&&` expressions | 1223 |
 | Direct Boolean `\|\|` expressions | 1364 |
 | Direct numeric relations | 4021 |
-| Proven indexed expressions | 7327 |
-| Proven indexed reads | 4524 |
-| Proven indexed writes | 2917 |
-| Direct indexed reads | 4627 |
-| Direct indexed writes | 2915 |
+| Proven indexed expressions | 7373 |
+| Proven indexed reads | 4555 |
+| Proven indexed writes | 2932 |
+| Parked width-sensitive mixed indexed writes | 13 |
+| Direct indexed reads | 4658 |
+| Direct indexed writes | 2930 |
 | Direct synthetic iteration-binding Array reads | 79 |
 | Direct synthetic high-arity-argument Array reads | 27 |
 
 | Indexed receiver | Proven expressions | Proven reads | Proven writes | Direct reads | Direct writes |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | `Array` | 2944 | 2512 | 455 | 2615 | 453 |
+| `ArrayOrFloat32Array` | 19 | 4 | 15 | 4 | 15 |
 | `Float32Array` | 3307 | 1392 | 1979 | 1392 | 1979 |
 | `Float64Array` | 83 | 59 | 51 | 59 | 51 |
 | `Int16Array` | 9 | 5 | 4 | 5 | 4 |
 | `Int32Array` | 20 | 13 | 7 | 13 | 7 |
 | `Int8Array` | 0 | 0 | 0 | 0 | 0 |
 | `Uint16Array` | 63 | 37 | 26 | 37 | 26 |
+| `Uint16ArrayOrUint32Array` | 27 | 27 | 0 | 27 | 0 |
 | `Uint32Array` | 10 | 2 | 8 | 2 | 8 |
 | `Uint8Array` | 192 | 164 | 28 | 164 | 28 |
 | `Uint8ClampedArray` | 699 | 340 | 359 | 340 | 359 |
@@ -42,7 +45,7 @@
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | `@flighthq/accessibility` | 20 | 20 | 0 | 27 | 0 | 0 |
 | `@flighthq/adjustments` | 62 | 62 | 0 | 55 | 26 | 220 |
-| `@flighthq/animation` | 30 | 30 | 0 | 69 | 36 | 2 |
+| `@flighthq/animation` | 30 | 30 | 0 | 69 | 36 | 18 |
 | `@flighthq/app` | 44 | 44 | 0 | 16 | 0 | 0 |
 | `@flighthq/application` | 113 | 113 | 0 | 115 | 17 | 4 |
 | `@flighthq/assets` | 11 | 11 | 0 | 29 | 2 | 0 |
@@ -100,20 +103,20 @@
 | `@flighthq/media` | 61 | 61 | 0 | 79 | 2 | 0 |
 | `@flighthq/mediasession` | 12 | 12 | 0 | 11 | 0 | 0 |
 | `@flighthq/menu` | 22 | 22 | 0 | 53 | 4 | 2 |
-| `@flighthq/mesh` | 98 | 98 | 0 | 255 | 175 | 384 |
+| `@flighthq/mesh` | 98 | 98 | 0 | 255 | 175 | 402 |
 | `@flighthq/motionpath` | 9 | 9 | 0 | 15 | 13 | 0 |
 | `@flighthq/movieclip` | 23 | 23 | 0 | 17 | 0 | 3 |
 | `@flighthq/net` | 14 | 14 | 0 | 34 | 4 | 0 |
 | `@flighthq/node` | 119 | 119 | 0 | 175 | 30 | 20 |
 | `@flighthq/notification` | 29 | 29 | 0 | 27 | 0 | 0 |
 | `@flighthq/particleemitter` | 78 | 78 | 0 | 359 | 179 | 564 |
-| `@flighthq/particles` | 52 | 52 | 0 | 184 | 96 | 246 |
+| `@flighthq/particles` | 52 | 52 | 0 | 184 | 96 | 249 |
 | `@flighthq/particles-formats` | 197 | 197 | 0 | 500 | 47 | 22 |
 | `@flighthq/path` | 118 | 118 | 0 | 374 | 200 | 466 |
 | `@flighthq/path-boolean` | 76 | 76 | 0 | 186 | 102 | 119 |
 | `@flighthq/path-formats` | 5 | 5 | 0 | 128 | 12 | 0 |
 | `@flighthq/permissions` | 23 | 23 | 0 | 27 | 0 | 0 |
-| `@flighthq/picking` | 30 | 30 | 0 | 27 | 7 | 24 |
+| `@flighthq/picking` | 30 | 30 | 0 | 27 | 7 | 27 |
 | `@flighthq/platform` | 19 | 19 | 0 | 17 | 7 | 2 |
 | `@flighthq/power` | 28 | 28 | 0 | 54 | 3 | 0 |
 | `@flighthq/protocol` | 25 | 25 | 0 | 37 | 14 | 0 |
@@ -122,9 +125,9 @@
 | `@flighthq/render-wgpu` | 96 | 96 | 0 | 124 | 23 | 79 |
 | `@flighthq/scene` | 65 | 65 | 0 | 54 | 12 | 59 |
 | `@flighthq/scene-formats` | 261 | 261 | 0 | 707 | 283 | 427 |
-| `@flighthq/scene-gl` | 352 | 352 | 0 | 503 | 44 | 205 |
+| `@flighthq/scene-gl` | 352 | 352 | 0 | 503 | 44 | 208 |
 | `@flighthq/scene-resources` | 48 | 48 | 0 | 52 | 5 | 5 |
-| `@flighthq/scene-wgpu` | 317 | 317 | 0 | 362 | 35 | 402 |
+| `@flighthq/scene-wgpu` | 317 | 317 | 0 | 362 | 35 | 405 |
 | `@flighthq/screen` | 45 | 45 | 0 | 95 | 18 | 22 |
 | `@flighthq/sdk` | 0 | 0 | 0 | 0 | 0 | 0 |
 | `@flighthq/sensors` | 57 | 57 | 0 | 39 | 1 | 13 |

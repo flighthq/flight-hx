@@ -37,12 +37,14 @@ const syntheticArrayReadMarkers = {
 
 const indexedReceiverNames = [
   'Array',
+  'ArrayOrFloat32Array',
   'Float32Array',
   'Float64Array',
   'Int16Array',
   'Int32Array',
   'Int8Array',
   'Uint16Array',
+  'Uint16ArrayOrUint32Array',
   'Uint32Array',
   'Uint8Array',
   'Uint8ClampedArray',

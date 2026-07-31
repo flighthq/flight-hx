@@ -43,7 +43,7 @@ class AnimationTrack {
       {
         var c:Dynamic = 0.0;
         while ((cast ((cast c : Float) < (cast components : Float)) : Bool)) {
-          _Runtime.setIndex(out, c, 0.0);
+          flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, c, 0.0);
           c++;
         }
       }
@@ -86,7 +86,7 @@ class AnimationTrack {
       var c:Dynamic = 0.0;
       while ((cast ((cast c : Float) < (cast components : Float)) : Bool)) {
         var a:Dynamic = _Runtime.getIndex(values, (oi + c));
-        _Runtime.setIndex(out, c, (a + ((_Runtime.getIndex(values, (oj + c)) - a) * alpha)));
+        flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, c, (a + ((_Runtime.getIndex(values, (oj + c)) - a) * alpha)));
         c++;
       }
     }
@@ -178,7 +178,7 @@ class AnimationTrack {
     {
       var c:Dynamic = 0.0;
       while ((cast ((cast c : Float) < (cast _Runtime.field(track, 'components') : Float)) : Bool)) {
-        _Runtime.setIndex(out, c, _Runtime.getIndex(_Runtime.field(track, 'values'), (off + c)));
+        flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, c, _Runtime.getIndex(_Runtime.field(track, 'values'), (off + c)));
         c++;
       }
     }
@@ -202,17 +202,17 @@ class AnimationTrack {
     var z:Dynamic = cast _Runtime.UNDEFINED;
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var len:Dynamic = cast _Runtime.UNDEFINED;
-    x = _Runtime.getIndex(out, 0.0);
-    y = _Runtime.getIndex(out, 1.0);
-    z = _Runtime.getIndex(out, 2.0);
-    w = _Runtime.getIndex(out, 3.0);
+    x = flighthq._internal._StaticIndex.readArrayOrFloat32Array(out, 0.0);
+    y = flighthq._internal._StaticIndex.readArrayOrFloat32Array(out, 1.0);
+    z = flighthq._internal._StaticIndex.readArrayOrFloat32Array(out, 2.0);
+    w = flighthq._internal._StaticIndex.readArrayOrFloat32Array(out, 3.0);
     len = _Runtime.hypot(x, y, z, w);
     if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
       var inv:Dynamic = (1.0 / len);
-      _Runtime.setIndex(out, 0.0, (x * inv));
-      _Runtime.setIndex(out, 1.0, (y * inv));
-      _Runtime.setIndex(out, 2.0, (z * inv));
-      _Runtime.setIndex(out, 3.0, (w * inv));
+      flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, 0.0, (x * inv));
+      flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, 1.0, (y * inv));
+      flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, 2.0, (z * inv));
+      flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, 3.0, (w * inv));
     }
   }
 
@@ -248,7 +248,7 @@ class AnimationTrack {
         var m0:Dynamic = _Runtime.getIndex(values, ((base0 + (components * 2.0)) + c));
         var p1:Dynamic = _Runtime.getIndex(values, ((base1 + components) + c));
         var m1:Dynamic = _Runtime.getIndex(values, (base1 + c));
-        _Runtime.setIndex(out, c, ((((h00 * p0) + ((h10 * dt) * m0)) + (h01 * p1)) + ((h11 * dt) * m1)));
+        flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, c, ((((h00 * p0) + ((h10 * dt) * m0)) + (h01 * p1)) + ((h11 * dt) * m1)));
         c++;
       }
     }
@@ -292,9 +292,9 @@ class AnimationTrack {
       (scale0 = cast ((1.0 - alpha) : Dynamic));
       (scale1 = cast (alpha : Dynamic));
     }
-    _Runtime.setIndex(out, 0.0, ((scale0 * ax) + (scale1 * bx)));
-    _Runtime.setIndex(out, 1.0, ((scale0 * ay) + (scale1 * by)));
-    _Runtime.setIndex(out, 2.0, ((scale0 * az) + (scale1 * bz)));
-    _Runtime.setIndex(out, 3.0, ((scale0 * aw) + (scale1 * bw)));
+    flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, 0.0, ((scale0 * ax) + (scale1 * bx)));
+    flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, 1.0, ((scale0 * ay) + (scale1 * by)));
+    flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, 2.0, ((scale0 * az) + (scale1 * bz)));
+    flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, 3.0, ((scale0 * aw) + (scale1 * bw)));
   }
 }

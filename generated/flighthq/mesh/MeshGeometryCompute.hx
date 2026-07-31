@@ -133,9 +133,9 @@ class MeshGeometryCompute {
     {
       var t:Dynamic = 0.0;
       while ((cast ((cast (t + 2.0) : Float) < (cast indexCount : Float)) : Bool)) {
-        var i0:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, t), function():Dynamic return cast t);
-        var i1:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, (t + 1.0)), function():Dynamic return cast (t + 1.0));
-        var i2:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, (t + 2.0)), function():Dynamic return cast (t + 2.0));
+        var i0:Dynamic = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, t), function():Dynamic return cast t);
+        var i1:Dynamic = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, (t + 1.0)), function():Dynamic return cast (t + 1.0));
+        var i2:Dynamic = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, (t + 2.0)), function():Dynamic return cast (t + 2.0));
         var p0:Dynamic = ((i0 * floatsPerVertex) + MeshGeometryCompute.POSITION_OFFSET__meshGeometryCompute);
         var p1:Dynamic = ((i1 * floatsPerVertex) + MeshGeometryCompute.POSITION_OFFSET__meshGeometryCompute);
         var p2:Dynamic = ((i2 * floatsPerVertex) + MeshGeometryCompute.POSITION_OFFSET__meshGeometryCompute);
@@ -198,9 +198,9 @@ class MeshGeometryCompute {
     {
       var t:Dynamic = 0.0;
       while ((cast ((cast (t + 2.0) : Float) < (cast indexCount : Float)) : Bool)) {
-        var i0:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, t), function():Dynamic return cast t);
-        var i1:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, (t + 1.0)), function():Dynamic return cast (t + 1.0));
-        var i2:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, (t + 2.0)), function():Dynamic return cast (t + 2.0));
+        var i0:Dynamic = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, t), function():Dynamic return cast t);
+        var i1:Dynamic = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, (t + 1.0)), function():Dynamic return cast (t + 1.0));
+        var i2:Dynamic = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, (t + 2.0)), function():Dynamic return cast (t + 2.0));
         var b0:Dynamic = ((i0 * floatsPerVertex) + MeshGeometryCompute.POSITION_OFFSET__meshGeometryCompute);
         var b1:Dynamic = ((i1 * floatsPerVertex) + MeshGeometryCompute.POSITION_OFFSET__meshGeometryCompute);
         var b2:Dynamic = ((i2 * floatsPerVertex) + MeshGeometryCompute.POSITION_OFFSET__meshGeometryCompute);
@@ -266,9 +266,9 @@ class MeshGeometryCompute {
     {
       var t:Dynamic = 0.0;
       while ((cast ((cast (t + 2.0) : Float) < (cast indexCount : Float)) : Bool)) {
-        var i0:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, t), function():Dynamic return cast t);
-        var i1:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, (t + 1.0)), function():Dynamic return cast (t + 1.0));
-        var i2:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, (t + 2.0)), function():Dynamic return cast (t + 2.0));
+        var i0:Dynamic = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, t), function():Dynamic return cast t);
+        var i1:Dynamic = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, (t + 1.0)), function():Dynamic return cast (t + 1.0));
+        var i2:Dynamic = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, (t + 2.0)), function():Dynamic return cast (t + 2.0));
         var p0:Dynamic = ((i0 * floatsPerVertex) + MeshGeometryCompute.POSITION_OFFSET__meshGeometryCompute);
         var p1:Dynamic = ((i1 * floatsPerVertex) + MeshGeometryCompute.POSITION_OFFSET__meshGeometryCompute);
         var p2:Dynamic = ((i2 * floatsPerVertex) + MeshGeometryCompute.POSITION_OFFSET__meshGeometryCompute);

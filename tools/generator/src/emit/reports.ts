@@ -70,6 +70,7 @@ export function loweringSummary(audit: LoweringAudit): string {
     `| Proven indexed expressions | ${facts.indexedAccesses.expressions} |`,
     `| Proven indexed reads | ${facts.indexedAccesses.reads} |`,
     `| Proven indexed writes | ${facts.indexedAccesses.writes} |`,
+    `| Parked width-sensitive mixed indexed writes | ${facts.indexedAccessEscapes.widthSensitiveMixedWrites} |`,
     `| Direct indexed reads | ${emission.indexedAccesses.reads} |`,
     `| Direct indexed writes | ${emission.indexedAccesses.writes} |`,
     `| Direct synthetic iteration-binding Array reads | ${emission.syntheticArrayReads.iterationBindings} |`,

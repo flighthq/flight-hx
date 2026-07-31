@@ -74,9 +74,9 @@ class _GlWireframeUploadValues {
       var t:Dynamic = 0.0;
       while ((cast ((cast t : Float) < (cast triangleCount : Float)) : Bool)) {
         var base:Dynamic = (t * 3.0);
-        var i0:Dynamic = ((cast !_Runtime.strictEquals(triangleIndices, null) : Bool) ? (cast _Runtime.getIndex(triangleIndices, base) : Dynamic) : (cast base : Dynamic));
-        var i1:Dynamic = ((cast !_Runtime.strictEquals(triangleIndices, null) : Bool) ? (cast _Runtime.getIndex(triangleIndices, (base + 1.0)) : Dynamic) : (cast (base + 1.0) : Dynamic));
-        var i2:Dynamic = ((cast !_Runtime.strictEquals(triangleIndices, null) : Bool) ? (cast _Runtime.getIndex(triangleIndices, (base + 2.0)) : Dynamic) : (cast (base + 2.0) : Dynamic));
+        var i0:Dynamic = ((cast !_Runtime.strictEquals(triangleIndices, null) : Bool) ? (cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(triangleIndices, base) : Dynamic) : (cast base : Dynamic));
+        var i1:Dynamic = ((cast !_Runtime.strictEquals(triangleIndices, null) : Bool) ? (cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(triangleIndices, (base + 1.0)) : Dynamic) : (cast (base + 1.0) : Dynamic));
+        var i2:Dynamic = ((cast !_Runtime.strictEquals(triangleIndices, null) : Bool) ? (cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(triangleIndices, (base + 2.0)) : Dynamic) : (cast (base + 2.0) : Dynamic));
         var out:Dynamic = (t * 6.0);
         _Runtime.setIndex(lines, out, i0);
         _Runtime.setIndex(lines, (out + 1.0), i1);
