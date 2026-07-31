@@ -15,31 +15,31 @@ class _LoadSceneOptionsValues {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
         var resolver:Dynamic = cast _Runtime.UNDEFINED;
-        resolver = _Runtime.coalesce(_Runtime.optionalField(options, 'resolver'), function():Dynamic return cast _Runtime.callValue(createSceneResourceResolver, cast ([] : Array<Dynamic>)));
+        resolver = _Runtime.coalesce(({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.resolver; }), function():Dynamic return cast _Runtime.callValue(createSceneResourceResolver, cast ([] : Array<Dynamic>)));
         return flighthq._internal._Async.continueFlow(flighthq._internal._Async.finalizeFlow(flighthq._internal._Async.protect(function():Dynamic {
-          var __flowIterator3:Array<Dynamic> = _Runtime.iterable(scenes);
-          var __flowIndex4:Int = 0;
+          var __flowIterator7:Array<Dynamic> = _Runtime.iterable(scenes);
+          var __flowIndex8:Int = 0;
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.repeatFlow(function():Dynamic {
-            if (__flowIndex4 >= __flowIterator3.length) return flighthq._internal._Async.flowBreak();
-            var scene:Dynamic = __flowIterator3[__flowIndex4++];
-            return flighthq._internal._Async.flatMap(_Runtime.callValue(resolveSceneResourcesAndWait, cast ([_Runtime.field(scene, 'root'), resolver] : Array<Dynamic>)), function(__awaitValue5:Dynamic):Dynamic {
-              __awaitValue5;
+            if (__flowIndex8 >= __flowIterator7.length) return flighthq._internal._Async.flowBreak();
+            var scene:Dynamic = __flowIterator7[__flowIndex8++];
+            return flighthq._internal._Async.flatMap(_Runtime.callValue(resolveSceneResourcesAndWait, cast ([scene.root, resolver] : Array<Dynamic>)), function(__awaitValue9:Dynamic):Dynamic {
+              __awaitValue9;
               return flighthq._internal._Async.flowNormal();
             });
           }), function():Dynamic {
             return flighthq._internal._Async.flowNormal();
           });
         }), function():Dynamic {
-          var __flowBranch6:Dynamic;
-          if ((cast _Runtime.strictEquals(_Runtime.optionalField(options, 'resolver'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-            __flowBranch6 = flighthq._internal._Async.protect(function():Dynamic {
+          var __flowBranch11:Dynamic;
+          if ((cast _Runtime.strictEquals(({ final __typedStruct10 = options; __typedStruct10 == null ? _Runtime.UNDEFINED : __typedStruct10.resolver; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+            __flowBranch11 = flighthq._internal._Async.protect(function():Dynamic {
               _Runtime.callValue(disposeSceneResourceResolver, cast ([resolver] : Array<Dynamic>));
               return flighthq._internal._Async.flowNormal();
             });
           } else {
-            __flowBranch6 = flighthq._internal._Async.flowNormal();
+            __flowBranch11 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch6, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(__flowBranch11, function():Dynamic {
             return flighthq._internal._Async.flowNormal();
           });
         }), function():Dynamic {

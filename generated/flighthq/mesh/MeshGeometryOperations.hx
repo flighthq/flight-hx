@@ -128,7 +128,7 @@ class MeshGeometryOperations {
         i++;
       }
     }
-    floatsPerVertex = (_Runtime.field(layout, 'stride') / 4.0);
+    floatsPerVertex = (layout.stride / 4.0);
     totalVertexFloats = 0.0;
     totalIndexCount = 0.0;
     allIndexed = true;
@@ -163,7 +163,7 @@ class MeshGeometryOperations {
           }
         }
         for (subset in _Runtime.iterable(geo.subsets)) {
-          _Runtime.callProperty(mergedSubsets, 'push', cast ([{ indexCount: _Runtime.field(subset, 'indexCount'), indexOffset: (_Runtime.field(subset, 'indexOffset') + indexOffset) }] : Array<Dynamic>));
+          _Runtime.callProperty(mergedSubsets, 'push', cast ([{ indexCount: subset.indexCount, indexOffset: (subset.indexOffset + indexOffset) }] : Array<Dynamic>));
         }
         (indexOffset = cast ((indexOffset + srcCount) : Dynamic));
       }
@@ -185,7 +185,7 @@ class MeshGeometryOperations {
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
     var posOffset:Dynamic = cast _Runtime.UNDEFINED;
-    floatsPerVertex = (_Runtime.field(geometry.layout, 'stride') / 4.0);
+    floatsPerVertex = (geometry.layout.stride / 4.0);
     if ((cast ((cast floatsPerVertex : Float) <= (cast 0.0 : Float)) : Bool)) { return cast false; }
     if ((cast !_Runtime.strictEquals(_Runtime.fmod(_Runtime.field(geometry.vertices, 'length'), floatsPerVertex), 0.0) : Bool)) { return cast false; }
     vertexCount = HxMath.floor((_Runtime.field(geometry.vertices, 'length') / floatsPerVertex));
@@ -201,10 +201,10 @@ class MeshGeometryOperations {
     posOffset = -1.0;
     {
       var i:Dynamic = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(geometry.layout, 'attributes'), 'length') : Float)) : Bool)) {
-        var attr:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(geometry.layout, 'attributes'), i);
-        if ((cast ((cast _Runtime.strictEquals(_Runtime.field(attr, 'semantic'), 'position') : Bool) && (cast StringTools.startsWith(_Runtime.field(attr, 'format'), 'float32') : Bool)) : Bool)) {
-          (posOffset = cast ((_Runtime.field(attr, 'byteOffset') / 4.0) : Dynamic));
+      while ((cast ((cast i : Float) < (cast _Runtime.field(geometry.layout.attributes, 'length') : Float)) : Bool)) {
+        var attr:Dynamic = flighthq._internal._StaticIndex.readArray(geometry.layout.attributes, i);
+        if ((cast ((cast _Runtime.strictEquals(attr.semantic, 'position') : Bool) && (cast StringTools.startsWith(attr.format, 'float32') : Bool)) : Bool)) {
+          (posOffset = cast ((attr.byteOffset / 4.0) : Dynamic));
           break;
         }
         i++;
@@ -229,14 +229,14 @@ class MeshGeometryOperations {
   }
 
   public static function layoutsMatch__meshGeometryOperations(a:VertexAttributeLayout, b:VertexAttributeLayout):Bool {
-    if ((cast !_Runtime.strictEquals(_Runtime.field(a, 'stride'), _Runtime.field(b, 'stride')) : Bool)) { return cast false; }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(a, 'attributes'), 'length'), _Runtime.field(_Runtime.field(b, 'attributes'), 'length')) : Bool)) { return cast false; }
+    if ((cast !_Runtime.strictEquals(a.stride, b.stride) : Bool)) { return cast false; }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(a.attributes, 'length'), _Runtime.field(b.attributes, 'length')) : Bool)) { return cast false; }
     {
       var i:Dynamic = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(a, 'attributes'), 'length') : Float)) : Bool)) {
-        var aa:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(a, 'attributes'), i);
-        var ba:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(b, 'attributes'), i);
-        if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(aa, 'semantic'), _Runtime.field(ba, 'semantic')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(aa, 'format'), _Runtime.field(ba, 'format')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(aa, 'byteOffset'), _Runtime.field(ba, 'byteOffset')) : Bool)) : Bool)) { return cast false; }
+      while ((cast ((cast i : Float) < (cast _Runtime.field(a.attributes, 'length') : Float)) : Bool)) {
+        var aa:Dynamic = flighthq._internal._StaticIndex.readArray(a.attributes, i);
+        var ba:Dynamic = flighthq._internal._StaticIndex.readArray(b.attributes, i);
+        if ((cast ((cast ((cast !_Runtime.strictEquals(aa.semantic, ba.semantic) : Bool) || (cast !_Runtime.strictEquals(aa.format, ba.format) : Bool)) : Bool) || (cast !_Runtime.strictEquals(aa.byteOffset, ba.byteOffset) : Bool)) : Bool)) { return cast false; }
         i++;
       }
     }

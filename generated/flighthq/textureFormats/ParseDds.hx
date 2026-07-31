@@ -45,7 +45,7 @@ class ParseDds {
     _Runtime.callValue(skipByteReader, cast ([reader, 4.0] : Array<Dynamic>));
     dwDepth = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
     dwMipMapCount = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
-    _Runtime.setField(reader, 'offset', 80.0);
+    (reader.offset = cast (80.0 : Dynamic));
     pfFlags = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
     fourCC = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
     rgbBitCount = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
@@ -53,7 +53,7 @@ class ParseDds {
     gMask = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
     bMask = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
     aMask = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
-    _Runtime.setField(reader, 'offset', 112.0);
+    (reader.offset = cast (112.0 : Dynamic));
     caps2 = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
     if ((cast ((cast !_Runtime.strictEquals((_Runtime.toInt32(caps2) & _Runtime.toInt32(ParseDds.ddsCaps2Volume__parseDds)), 0.0) : Bool) || (cast ((cast dwDepth : Float) > (cast 1.0 : Float)) : Bool)) : Bool)) { return cast null; }
     cube = !_Runtime.strictEquals((_Runtime.toInt32(caps2) & _Runtime.toInt32(ParseDds.ddsCaps2Cubemap__parseDds)), 0.0);

@@ -60,7 +60,7 @@ class WireframeWgpuMeshMaterialRenderer {
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
     if ((cast ((cast _Runtime.strictEquals(pass, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(scene, 'activeMeshPipeline'), null) : Bool)) : Bool)) { return; }
     subset = _Runtime.field(proxy, 'subset');
-    if ((cast _Runtime.strictEquals(_Runtime.field(subset, 'indexCount'), 0.0) : Bool)) { return; }
+    if ((cast _Runtime.strictEquals(subset.indexCount, 0.0) : Bool)) { return; }
     upload = _Runtime.callValue(ensureWgpuWireframeUpload, cast ([state, geometry] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(upload, null) : Bool)) { return; }
     drawBindGroup = _Runtime.callValue(writeWgpuDrawUniform, cast ([state, proxy] : Array<Dynamic>));
@@ -68,7 +68,7 @@ class WireframeWgpuMeshMaterialRenderer {
     _Runtime.callProperty(pass, 'setBindGroup', cast ([1.0, drawBindGroup, WireframeWgpuMeshMaterialRenderer._dynamicOffsets__wireframeWgpuMeshMaterialRenderer] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setVertexBuffer', cast ([0.0, _Runtime.field(upload, 'vertexBuffer')] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setIndexBuffer', cast ([_Runtime.field(upload, 'lineIndexBuffer'), _Runtime.field(upload, 'indexFormat')] : Array<Dynamic>));
-    _Runtime.callProperty(pass, 'drawIndexed', cast ([(_Runtime.field(subset, 'indexCount') * 2.0), 1.0, (_Runtime.field(subset, 'indexOffset') * 2.0), 0.0, 0.0] : Array<Dynamic>));
+    _Runtime.callProperty(pass, 'drawIndexed', cast ([(subset.indexCount * 2.0), 1.0, (subset.indexOffset * 2.0), 0.0, 0.0] : Array<Dynamic>));
   } };
 
   public static function registerWireframeWgpuMaterial(state:WgpuRenderState):Void {

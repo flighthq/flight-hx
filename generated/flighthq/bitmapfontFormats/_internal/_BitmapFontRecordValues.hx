@@ -22,21 +22,21 @@ class _BitmapFontRecordValues {
     var glyphs:Array<BitmapFontGlyphData> = cast _Runtime.UNDEFINED;
     var kerning:Array<BitmapFontKerningData> = cast _Runtime.UNDEFINED;
     var data:BitmapFontData = cast _Runtime.UNDEFINED;
-    resolvePage = _Runtime.optionalField(options, 'resolvePage');
+    resolvePage = ({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.resolvePage; });
     resolved = _Runtime.construct(_Runtime.globalValue('Map'), []);
     maxPageId = -1.0;
     if ((cast !_Runtime.strictEquals(resolvePage, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      for (page in _Runtime.iterable(_Runtime.field(record, 'pages'))) {
-        var atlas:Dynamic = _Runtime.callValue(resolvePage, cast ([_Runtime.field(page, 'id'), _Runtime.field(page, 'file')] : Array<Dynamic>));
+      for (page in _Runtime.iterable(record.pages)) {
+        var atlas:Dynamic = _Runtime.callValue(resolvePage, cast ([page.id, page.file] : Array<Dynamic>));
         if ((cast !_Runtime.strictEquals(atlas, null) : Bool)) {
-          ((cast resolved : flighthq._internal._Map).set(_Runtime.field(page, 'id'), atlas));
-          if ((cast ((cast _Runtime.field(page, 'id') : Float) > (cast maxPageId : Float)) : Bool)) { (maxPageId = cast (_Runtime.field(page, 'id') : Dynamic)); }
+          ((cast resolved : flighthq._internal._Map).set(page.id, atlas));
+          if ((cast ((cast page.id : Float) > (cast maxPageId : Float)) : Bool)) { (maxPageId = cast (page.id : Dynamic)); }
         }
       }
     }
-    for (char in _Runtime.iterable(_Runtime.field(record, 'chars'))) {
-      if ((cast !(cast ((cast resolved : flighthq._internal._Map).has(_Runtime.field(char, 'page'))) : Bool) : Bool)) { return cast null; }
-      if ((cast ((cast _Runtime.field(char, 'page') : Float) > (cast maxPageId : Float)) : Bool)) { (maxPageId = cast (_Runtime.field(char, 'page') : Dynamic)); }
+    for (char in _Runtime.iterable(record.chars)) {
+      if ((cast !(cast ((cast resolved : flighthq._internal._Map).has(char.page)) : Bool) : Bool)) { return cast null; }
+      if ((cast ((cast char.page : Float) > (cast maxPageId : Float)) : Bool)) { (maxPageId = cast (char.page : Dynamic)); }
     }
     pages = cast ([] : Array<Dynamic>);
     {
@@ -47,9 +47,9 @@ class _BitmapFontRecordValues {
         id++;
       }
     }
-    glyphs = _Runtime.callProperty(_Runtime.field(record, 'chars'), 'map', cast ([function(char:Dynamic) return { advance: _Runtime.field(char, 'xadvance'), bearingX: _Runtime.field(char, 'xoffset'), bearingY: (_Runtime.field(record, 'base') - _Runtime.field(char, 'yoffset')), codepoint: _Runtime.field(char, 'id'), height: _Runtime.field(char, 'height'), page: _Runtime.field(char, 'page'), width: _Runtime.field(char, 'width'), x: _Runtime.field(char, 'x'), y: _Runtime.field(char, 'y') }] : Array<Dynamic>));
-    kerning = _Runtime.callProperty(_Runtime.field(record, 'kernings'), 'map', cast ([function(pair:Dynamic) return { amount: _Runtime.field(pair, 'amount'), left: _Runtime.field(pair, 'first'), right: _Runtime.field(pair, 'second') }] : Array<Dynamic>));
-    data = { encoding: _Runtime.field(record, 'encoding'), glyphs: glyphs, kerning: kerning, metrics: { ascent: _Runtime.field(record, 'base'), descent: (_Runtime.field(record, 'lineHeight') - _Runtime.field(record, 'base')), lineGap: 0.0 }, pages: pages };
+    glyphs = _Runtime.callProperty(record.chars, 'map', cast ([function(char:Dynamic) return { advance: char.xadvance, bearingX: char.xoffset, bearingY: (record.base - char.yoffset), codepoint: char.id, height: char.height, page: char.page, width: char.width, x: char.x, y: char.y }] : Array<Dynamic>));
+    kerning = _Runtime.callProperty(record.kernings, 'map', cast ([function(pair:Dynamic) return { amount: pair.amount, left: pair.first, right: pair.second }] : Array<Dynamic>));
+    data = { encoding: record.encoding, glyphs: glyphs, kerning: kerning, metrics: { ascent: record.base, descent: (record.lineHeight - record.base), lineGap: 0.0 }, pages: pages };
     return cast _Runtime.callValue(createBitmapFont, cast ([data] : Array<Dynamic>));
     return cast null;
   }

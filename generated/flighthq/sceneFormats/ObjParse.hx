@@ -274,13 +274,13 @@ class ObjParse {
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(subsets, 'length'), 0.0) : Bool)) { return; }
     geometry = _Runtime.callValue(createMeshGeometry, cast ([{ indices: _Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([indices] : Array<Dynamic>)), layout: CANONICAL_LAYOUT, subsets: subsets, vertices: new flighthq._internal._Float32Array(vertices) }] : Array<Dynamic>));
-    _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), _Runtime.callValue(createMesh, cast ([geometry, materials, MeshKind, { name: name }] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callValue(addNodeChild, cast ([scene.root, _Runtime.callValue(createMesh, cast ([geometry, materials, MeshKind, { name: name }] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
   public static function objMaterialToBlinnPhong__objParse(material:ObjMaterial):BlinnPhongMaterial {
     var result:Dynamic = cast _Runtime.UNDEFINED;
-    result = _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuse: _Runtime.callValue(ObjParse.packObjColor__objParse, cast ([_Runtime.field(material, 'diffuse'), _Runtime.field(material, 'dissolve')] : Array<Dynamic>)), diffuseMap: _Runtime.callValue(ObjParse.externalObjTexture__objParse, cast ([_Runtime.field(material, 'mapDiffuse')] : Array<Dynamic>)), normalMap: _Runtime.callValue(ObjParse.externalObjTexture__objParse, cast ([_Runtime.field(material, 'mapBump')] : Array<Dynamic>)), shininess: _Runtime.field(material, 'specularExponent'), specular: _Runtime.callValue(ObjParse.packObjColor__objParse, cast ([_Runtime.field(material, 'specular'), 1.0] : Array<Dynamic>)), specularMap: _Runtime.callValue(ObjParse.externalObjTexture__objParse, cast ([_Runtime.field(material, 'mapSpecular')] : Array<Dynamic>)) }] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.field(material, 'dissolve') : Float) < (cast 1.0 : Float)) : Bool)) { _Runtime.setField(result, 'alphaMode', 'blend'); }
+    result = _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuse: _Runtime.callValue(ObjParse.packObjColor__objParse, cast ([material.diffuse, material.dissolve] : Array<Dynamic>)), diffuseMap: _Runtime.callValue(ObjParse.externalObjTexture__objParse, cast ([material.mapDiffuse] : Array<Dynamic>)), normalMap: _Runtime.callValue(ObjParse.externalObjTexture__objParse, cast ([material.mapBump] : Array<Dynamic>)), shininess: material.specularExponent, specular: _Runtime.callValue(ObjParse.packObjColor__objParse, cast ([material.specular, 1.0] : Array<Dynamic>)), specularMap: _Runtime.callValue(ObjParse.externalObjTexture__objParse, cast ([material.mapSpecular] : Array<Dynamic>)) }] : Array<Dynamic>));
+    if ((cast ((cast material.dissolve : Float) < (cast 1.0 : Float)) : Bool)) { _Runtime.setField(result, 'alphaMode', 'blend'); }
     return cast result;
     return cast null;
   }
@@ -315,7 +315,7 @@ class ObjParse {
     if ((cast _Runtime.strictEquals(name, '') : Bool)) { return cast null; }
     cached = ((cast cache : flighthq._internal._Map).get(name));
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
-    parsed = ({ final __collection2:Dynamic = _Runtime.optionalField(library, 'materials'); __collection2 == null ? _Runtime.UNDEFINED : ((cast __collection2 : flighthq._internal._Map).get(name)); });
+    parsed = ({ final __collection4:Dynamic = ({ final __typedStruct3 = library; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.materials; }); __collection4 == null ? _Runtime.UNDEFINED : ((cast __collection4 : flighthq._internal._Map).get(name)); });
     material = ((cast !_Runtime.strictEquals(parsed, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast (cast _Runtime.callValue(ObjParse.objMaterialToBlinnPhong__objParse, cast ([parsed] : Array<Dynamic>)) : Dynamic) : Material) : Dynamic) : (cast null : Dynamic));
     if ((cast !_Runtime.strictEquals(material, null) : Bool)) { _Runtime.setField(material, 'name', name); }
     ((cast cache : flighthq._internal._Map).set(name, material));

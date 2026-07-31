@@ -189,7 +189,7 @@ class AwdParse {
     skin = null;
     if ((cast ((cast (cast skeletonBlocks : flighthq._internal._Map).size : Float) > (cast 0.0 : Float)) : Bool)) {
       var built:Dynamic = _Runtime.callValue(AwdParse.buildAwdSkeleton__awdParse, cast ([_Runtime.field(_Runtime.callProperty(((cast skeletonBlocks : flighthq._internal._Map).values()), 'next', cast ([] : Array<Dynamic>)), 'value')] : Array<Dynamic>));
-      _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), _Runtime.field(built, 'skeletonRoot')] : Array<Dynamic>));
+      _Runtime.callValue(addNodeChild, cast ([scene.root, _Runtime.field(built, 'skeletonRoot')] : Array<Dynamic>));
       (skin = cast ({ skeleton: _Runtime.field(built, 'skeleton'), skeletonRoot: _Runtime.field(built, 'skeletonRoot') } : Dynamic));
       if ((cast ((cast (cast skeletonBlocks : flighthq._internal._Map).size : Float) > (cast 1.0 : Float)) : Bool)) {
         _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromAwd: file has ' + Std.string((cast skeletonBlocks : flighthq._internal._Map).size) + ' skeletons; every skinned mesh binds to the first'] : Array<Dynamic>));
@@ -268,11 +268,11 @@ class AwdParse {
       var blockId:Dynamic = _Runtime.getIndex(__iteration4, 0.0);
       var node:Dynamic = _Runtime.getIndex(__iteration4, 1.0);
       if ((cast !(cast ((cast parented : flighthq._internal._Set).has(blockId)) : Bool) : Bool)) {
-        _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), node] : Array<Dynamic>));
+        _Runtime.callValue(addNodeChild, cast ([scene.root, node] : Array<Dynamic>));
       }
     }
-    joints = _Runtime.callValue(findSceneSkeletonJoints, cast ([_Runtime.field(scene, 'root')] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(joints, null) : Bool)) { flighthq._internal.DynamicObject.assign(_Runtime.field(scene, 'animations'), _Runtime.callValue(parseAwdSkeletonAnimations, cast ([bytes, joints, warnings] : Array<Dynamic>))); }
+    joints = _Runtime.callValue(findSceneSkeletonJoints, cast ([scene.root] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals(joints, null) : Bool)) { flighthq._internal.DynamicObject.assign(scene.animations, _Runtime.callValue(parseAwdSkeletonAnimations, cast ([bytes, joints, warnings] : Array<Dynamic>))); }
     return cast scene;
     return cast null;
   }

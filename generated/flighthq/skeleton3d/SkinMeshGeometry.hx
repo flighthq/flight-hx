@@ -27,7 +27,7 @@ class SkinMeshGeometry {
     __destructure0 = geometry;
     layout = _Runtime.field(__destructure0, 'layout');
     vertices = _Runtime.field(__destructure0, 'vertices');
-    floatsPerVertex = (_Runtime.field(layout, 'stride') / 4.0);
+    floatsPerVertex = (layout.stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.toInt32((_Runtime.field(vertices, 'length') / floatsPerVertex)) | 0) : Dynamic) : (cast 0.0 : Dynamic));
     positionOffset = _Runtime.callValue(SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry, cast ([layout, 'position'] : Array<Dynamic>));
     normalOffset = _Runtime.callValue(SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry, cast ([layout, 'normal'] : Array<Dynamic>));
@@ -87,7 +87,7 @@ class SkinMeshGeometry {
     __destructure1 = geometry;
     layout = _Runtime.field(__destructure1, 'layout');
     vertices = _Runtime.field(__destructure1, 'vertices');
-    floatsPerVertex = (_Runtime.field(layout, 'stride') / 4.0);
+    floatsPerVertex = (layout.stride / 4.0);
     positionOffset = _Runtime.callValue(SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry, cast ([layout, 'position'] : Array<Dynamic>));
     normalOffset = _Runtime.callValue(SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry, cast ([layout, 'normal'] : Array<Dynamic>));
     __destructure2 = bindPose;
@@ -117,11 +117,11 @@ class SkinMeshGeometry {
 
   public static function floatOffsetForSemantic__skinMeshGeometry(layout:VertexAttributeLayout, semantic:String):Float {
     var attributes:Dynamic = cast _Runtime.UNDEFINED;
-    attributes = _Runtime.field(layout, 'attributes');
+    attributes = layout.attributes;
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(attributes, 'length') : Float)) : Bool)) {
-        if ((cast _Runtime.strictEquals(_Runtime.field(flighthq._internal._StaticIndex.readArray(attributes, i), 'semantic'), semantic) : Bool)) { return cast (_Runtime.field(flighthq._internal._StaticIndex.readArray(attributes, i), 'byteOffset') / 4.0); }
+        if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(attributes, i).semantic, semantic) : Bool)) { return cast (flighthq._internal._StaticIndex.readArray(attributes, i).byteOffset / 4.0); }
         i++;
       }
     }

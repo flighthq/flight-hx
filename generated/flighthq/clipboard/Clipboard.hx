@@ -25,7 +25,7 @@ class Clipboard {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(detachClipboardWatch, cast ([watch] : Array<Dynamic>));
     unsubscribe = _Runtime.callProperty(_Runtime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'subscribeClipboardChange', cast ([function() {
-      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(watch, 'onChange')]]), 1);
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[watch.onChange]]), 1);
     }] : Array<Dynamic>));
     ((cast Clipboard._watchSubscriptions__clipboard : flighthq._internal._WeakMap).set(watch, unsubscribe));
   }
@@ -229,8 +229,8 @@ class Clipboard {
                 if (__flowIndex21 >= __flowIterator20.length) return flighthq._internal._Async.flowBreak();
                 var item:Dynamic = __flowIterator20[__flowIndex21++];
                 var __beforeAwait22:Dynamic = entry;
-                var __beforeAwait23:Dynamic = _Runtime.field(item, 'format');
-                return flighthq._internal._Async.flatMap(_Runtime.callValue(Clipboard.blobFromFormatData__clipboard, cast ([_Runtime.field(item, 'format'), _Runtime.field(item, 'data')] : Array<Dynamic>)), function(__awaitValue24:Dynamic):Dynamic {
+                var __beforeAwait23:Dynamic = item.format;
+                return flighthq._internal._Async.flatMap(_Runtime.callValue(Clipboard.blobFromFormatData__clipboard, cast ([item.format, item.data] : Array<Dynamic>)), function(__awaitValue24:Dynamic):Dynamic {
                   _Runtime.setIndex(__beforeAwait22, __beforeAwait23, __awaitValue24);
                   return flighthq._internal._Async.flowNormal();
                 });

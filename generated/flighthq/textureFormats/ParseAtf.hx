@@ -80,8 +80,8 @@ class ParseAtf {
                 var blockLength:Dynamic = ((cast _Runtime.strictEquals(version, 0.0) : Bool) ? (cast _Runtime.callValue(readByteReaderU24BigEndian, cast ([reader] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(readByteReaderU32BigEndian, cast ([reader] : Array<Dynamic>)) : Dynamic));
                 if ((cast !(cast _Runtime.callValue(hasByteReaderBytes, cast ([reader, blockLength] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
                 if ((cast _Runtime.strictEquals(blockLength, 0.0) : Bool)) { (slot = cast ((slot + 1.0) : Dynamic)); continue; }
-                var byteOffset:Dynamic = _Runtime.field(reader, 'offset');
-                _Runtime.setField(reader, 'offset', (_Runtime.field(reader, 'offset') + blockLength));
+                var byteOffset:Dynamic = reader.offset;
+                (reader.offset += blockLength);
                 _Runtime.callProperty(flighthq._internal._StaticIndex.readArray(perSlotLevels, slot), 'push', cast ([{ byteLength: blockLength, byteOffset: byteOffset, height: HxMath.max(1.0, (_Runtime.toInt32(height) >> _Runtime.toInt32(level))), width: HxMath.max(1.0, (_Runtime.toInt32(width) >> _Runtime.toInt32(level))) }] : Array<Dynamic>));
                 (slot = cast ((slot + 1.0) : Dynamic));
               }

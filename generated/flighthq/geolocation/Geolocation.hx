@@ -240,7 +240,7 @@ class Geolocation {
   }
 
   public static function toPositionOptions__geolocation(options:GeolocationRequestOptions):Dynamic {
-    return cast { enableHighAccuracy: _Runtime.coalesce(_Runtime.field(options, 'enableHighAccuracy'), function():Dynamic return cast false), maximumAge: _Runtime.field(options, 'maximumAgeMs'), timeout: _Runtime.field(options, 'timeoutMs') };
+    return cast { enableHighAccuracy: _Runtime.coalesce(options.enableHighAccuracy, function():Dynamic return cast false), maximumAge: options.maximumAgeMs, timeout: options.timeoutMs };
     return cast null;
   }
 

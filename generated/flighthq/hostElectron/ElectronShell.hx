@@ -130,7 +130,7 @@ class ElectronShell {
     }, writeShortcutLink: function(shortcutPath:Dynamic, link:Dynamic, operation:Dynamic = 'create'):flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.protect(function():Dynamic {
         try {
-          var details:ElectronShortcutDetails = { target: _Runtime.field(link, 'target'), appUserModelId: _Runtime.field(link, 'appUserModelId'), args: _Runtime.field(link, 'args'), description: _Runtime.field(link, 'description'), icon: _Runtime.field(link, 'icon'), iconIndex: _Runtime.field(link, 'iconIndex'), cwd: _Runtime.field(link, 'workingDirectory') };
+          var details:ElectronShortcutDetails = { target: link.target, appUserModelId: link.appUserModelId, args: link.args, description: link.description, icon: link.icon, iconIndex: link.iconIndex, cwd: link.workingDirectory };
           return cast _Runtime.callProperty(shell, 'writeShortcutLink', cast ([shortcutPath, operation, details] : Array<Dynamic>));
         } catch (__error:Dynamic) {
           return cast false;

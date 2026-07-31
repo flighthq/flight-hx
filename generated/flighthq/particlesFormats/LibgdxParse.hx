@@ -27,7 +27,7 @@ class LibgdxParse {
     __destructure0 = _Runtime.callValue(LibgdxParse.parseLibgdxText__libgdxParse, cast ([text] : Array<Dynamic>));
     sections = _Runtime.field(__destructure0, 'sections');
     doc = _Runtime.callValue(LibgdxParse.sectionsToDocument__libgdxParse, cast ([sections] : Array<Dynamic>));
-    return cast _Runtime.callValue(LibgdxParse.documentToConfig__libgdxParse, cast ([doc, _Runtime.coalesce(_Runtime.optionalField(options, 'textureSize'), function():Dynamic return cast 1.0)] : Array<Dynamic>));
+    return cast _Runtime.callValue(LibgdxParse.documentToConfig__libgdxParse, cast ([doc, _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.textureSize; }), function():Dynamic return cast 1.0)] : Array<Dynamic>));
     return cast null;
   }
 
@@ -42,7 +42,7 @@ class LibgdxParse {
     __destructure1 = _Runtime.callValue(LibgdxParse.parseLibgdxText__libgdxParse, cast ([text] : Array<Dynamic>));
     sections = _Runtime.field(__destructure1, 'sections');
     doc = _Runtime.callValue(LibgdxParse.sectionsToDocument__libgdxParse, cast ([sections] : Array<Dynamic>));
-    textureSize = _Runtime.coalesce(_Runtime.optionalField(options, 'textureSize'), function():Dynamic return cast 1.0);
+    textureSize = _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.textureSize; }), function():Dynamic return cast 1.0);
     return cast { config: _Runtime.callValue(LibgdxParse.documentToConfig__libgdxParse, cast ([doc, textureSize] : Array<Dynamic>)), document: doc, warnings: _Runtime.callValue(LibgdxParse.collectLibgdxWarnings__libgdxParse, cast ([doc] : Array<Dynamic>)) };
     return cast null;
   }
@@ -150,7 +150,7 @@ class LibgdxParse {
     scaleMaxPx = _Runtime.getIndex(__destructure5, 1.0);
     scaleMin = (scaleMinPx / textureSize);
     scaleMax = (scaleMaxPx / textureSize);
-    lastScaling = ((cast ((cast _Runtime.field(_Runtime.field(doc.scale, 'scaling'), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(doc.scale, 'scaling'), (_Runtime.field(_Runtime.field(doc.scale, 'scaling'), 'length') - 1.0)) : Dynamic) : (cast 1.0 : Dynamic));
+    lastScaling = ((cast ((cast _Runtime.field(doc.scale.scaling, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(doc.scale.scaling, (_Runtime.field(doc.scale.scaling, 'length') - 1.0)) : Dynamic) : (cast 1.0 : Dynamic));
     scaleEnd = lastScaling;
     __destructure6 = ((cast _Runtime.field(doc.wind, 'active') : Bool) ? (cast _Runtime.callValue(LibgdxParse.rangeToMinMax__libgdxParse, cast ([doc.wind] : Array<Dynamic>)) : Dynamic) : (cast cast ([0.0, 0.0] : Array<Dynamic>) : Dynamic));
     windMin = _Runtime.getIndex(__destructure6, 0.0);
@@ -193,8 +193,8 @@ class LibgdxParse {
     er = _Runtime.getIndex(__destructure11, 0.0);
     eg = _Runtime.getIndex(__destructure11, 1.0);
     eb = _Runtime.getIndex(__destructure11, 2.0);
-    alphaStart = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(doc.transparency, 'scaling'), 0.0), function():Dynamic return cast 1.0);
-    alphaEnd = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(doc.transparency, 'scaling'), (_Runtime.field(_Runtime.field(doc.transparency, 'scaling'), 'length') - 1.0)), function():Dynamic return cast 0.0);
+    alphaStart = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(doc.transparency.scaling, 0.0), function():Dynamic return cast 1.0);
+    alphaEnd = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(doc.transparency.scaling, (_Runtime.field(doc.transparency.scaling, 'length') - 1.0)), function():Dynamic return cast 0.0);
     __destructure12 = _Runtime.callValue(LibgdxParse.rangeToMinMax__libgdxParse, cast ([doc.duration] : Array<Dynamic>));
     durMin = _Runtime.getIndex(__destructure12, 0.0);
     durMax = _Runtime.getIndex(__destructure12, 1.0);
@@ -271,8 +271,8 @@ class LibgdxParse {
   public static function rangeToMinMax__libgdxParse(r:LibgdxRangeValue):Array<Float> {
     var lo:Dynamic = cast _Runtime.UNDEFINED;
     var hi:Dynamic = cast _Runtime.UNDEFINED;
-    lo = ((_Runtime.field(r, 'lowMin') + _Runtime.field(r, 'lowMax')) * 0.5);
-    hi = ((_Runtime.field(r, 'highMin') + _Runtime.field(r, 'highMax')) * 0.5);
+    lo = ((r.lowMin + r.lowMax) * 0.5);
+    hi = ((r.highMin + r.highMax) * 0.5);
     return cast cast ([HxMath.min(lo, hi), HxMath.max(lo, hi)] : Array<Dynamic>);
     return cast null;
   }

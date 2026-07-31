@@ -39,12 +39,12 @@ class Dialog {
     if ((cast ((cast _Runtime.strictEquals(filters, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(filters, 'length'), 0.0) : Bool)) : Bool)) { return cast ''; }
     parts = cast ([] : Array<Dynamic>);
     for (filter in _Runtime.iterable(filters)) {
-      for (extension in _Runtime.iterable(_Runtime.field(filter, 'extensions'))) {
+      for (extension in _Runtime.iterable(filter.extensions)) {
         if ((cast _Runtime.strictEquals(extension, '*') : Bool)) { continue; }
         _Runtime.callProperty(parts, 'push', cast ([((cast StringTools.startsWith(extension, '.') : Bool) ? (cast extension : Dynamic) : (cast '.' + Std.string(extension) + '' : Dynamic))] : Array<Dynamic>));
       }
-      if (_Runtime.truthy(_Runtime.field(filter, 'mimeTypes'))) {
-        for (mime in _Runtime.iterable(_Runtime.field(filter, 'mimeTypes'))) {
+      if (_Runtime.truthy(filter.mimeTypes)) {
+        for (mime in _Runtime.iterable(filter.mimeTypes)) {
           _Runtime.callProperty(parts, 'push', cast ([mime] : Array<Dynamic>));
         }
       }
@@ -59,18 +59,18 @@ class Dialog {
     types = cast ([] : Array<Dynamic>);
     for (filter in _Runtime.iterable(filters)) {
       var accept:Dynamic = {  };
-      var extensions:Dynamic = _Runtime.callProperty(_Runtime.callProperty(_Runtime.field(filter, 'extensions'), 'filter', cast ([function(e:Dynamic) return !_Runtime.strictEquals(e, '*')] : Array<Dynamic>)), 'map', cast ([function(e:Dynamic) return ((cast StringTools.startsWith(e, '.') : Bool) ? (cast e : Dynamic) : (cast '.' + Std.string(e) + '' : Dynamic))] : Array<Dynamic>));
+      var extensions:Dynamic = _Runtime.callProperty(_Runtime.callProperty(filter.extensions, 'filter', cast ([function(e:Dynamic) return !_Runtime.strictEquals(e, '*')] : Array<Dynamic>)), 'map', cast ([function(e:Dynamic) return ((cast StringTools.startsWith(e, '.') : Bool) ? (cast e : Dynamic) : (cast '.' + Std.string(e) + '' : Dynamic))] : Array<Dynamic>));
       if ((cast ((cast _Runtime.field(extensions, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-        var mime:Dynamic = _Runtime.select(_Runtime.andValue(_Runtime.field(filter, 'mimeTypes'), function():Dynamic return cast ((cast _Runtime.field(_Runtime.field(filter, 'mimeTypes'), 'length') : Float) > (cast 0.0 : Float))), function():Dynamic return cast flighthq._internal._StaticIndex.readArray(_Runtime.field(filter, 'mimeTypes'), 0.0), function():Dynamic return cast 'application/octet-stream');
+        var mime:Dynamic = _Runtime.select(_Runtime.andValue(filter.mimeTypes, function():Dynamic return cast ((cast _Runtime.field(filter.mimeTypes, 'length') : Float) > (cast 0.0 : Float))), function():Dynamic return cast flighthq._internal._StaticIndex.readArray(filter.mimeTypes, 0.0), function():Dynamic return cast 'application/octet-stream');
         _Runtime.setIndex(accept, mime, extensions);
       }
-      if (_Runtime.truthy(_Runtime.field(filter, 'mimeTypes'))) {
-        for (mime in _Runtime.iterable(_Runtime.field(filter, 'mimeTypes'))) {
+      if (_Runtime.truthy(filter.mimeTypes)) {
+        for (mime in _Runtime.iterable(filter.mimeTypes)) {
           if ((cast !_Runtime.truthy(_Runtime.getIndex(accept, mime)) : Bool)) { _Runtime.setIndex(accept, mime, extensions); }
         }
       }
       if ((cast _Runtime.strictEquals(_Runtime.field(flighthq._internal.DynamicObject.keys(accept), 'length'), 0.0) : Bool)) { continue; }
-      _Runtime.callProperty(types, 'push', cast ([{ accept: accept, description: _Runtime.field(filter, 'name') }] : Array<Dynamic>));
+      _Runtime.callProperty(types, 'push', cast ([{ accept: accept, description: filter.name }] : Array<Dynamic>));
     }
     return cast ((cast ((cast _Runtime.field(types, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast types : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
     return cast null;
@@ -81,7 +81,7 @@ class Dialog {
       return cast flighthq._internal._Async.protect(function():Dynamic {
         if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'confirm')), 'function') : Bool)) : Bool)) { return cast false; }
         try {
-          return cast _Runtime.strictEquals(flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'confirm', cast ([_Runtime.field(options, 'message')] : Array<Dynamic>)), true);
+          return cast _Runtime.strictEquals(flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'confirm', cast ([options.message] : Array<Dynamic>)), true);
         } catch (__error:Dynamic) {
           return cast false;
         }
@@ -90,12 +90,12 @@ class Dialog {
     }, message: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.protect(function():Dynamic {
         var checkboxChecked:Dynamic = cast _Runtime.UNDEFINED;
-        checkboxChecked = _Runtime.coalesce(_Runtime.field(options, 'checkboxChecked'), function():Dynamic return cast false);
+        checkboxChecked = _Runtime.coalesce(options.checkboxChecked, function():Dynamic return cast false);
         if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'alert')), 'function') : Bool)) : Bool)) {
           return cast { buttonIndex: 0.0, cancelled: false, checkboxChecked: checkboxChecked };
         }
         try {
-          flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'alert', cast ([_Runtime.field(options, 'message')] : Array<Dynamic>));
+          flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'alert', cast ([options.message] : Array<Dynamic>));
         } catch (__error:Dynamic) {
           return cast { buttonIndex: 0.0, cancelled: false, checkboxChecked: checkboxChecked };
         }
@@ -110,7 +110,7 @@ class Dialog {
       return cast flighthq._internal._Async.protect(function():Dynamic {
         if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'prompt')), 'function') : Bool)) : Bool)) { return cast null; }
         try {
-          return cast flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'prompt', cast ([_Runtime.field(options, 'message'), _Runtime.coalesce(_Runtime.field(options, 'defaultValue'), function():Dynamic return cast '')] : Array<Dynamic>));
+          return cast flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'prompt', cast ([options.message, _Runtime.coalesce(options.defaultValue, function():Dynamic return cast '')] : Array<Dynamic>));
         } catch (__error:Dynamic) {
           return cast null;
         }
@@ -160,10 +160,10 @@ class Dialog {
             var handle:FileDialogHandle = cast _Runtime.UNDEFINED;
             pickerOptions = { mode: 'readwrite' };
             var __flowBranch11:Dynamic;
-            if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'startIn'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+            if ((cast !_Runtime.strictEquals(options.startIn, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
               __flowBranch11 = flighthq._internal._Async.protect(function():Dynamic {
                 var startIn:Dynamic = cast _Runtime.UNDEFINED;
-                startIn = _Runtime.callValue(Dialog.toFileSystemAccessStartIn__dialog, cast ([_Runtime.field(options, 'startIn')] : Array<Dynamic>));
+                startIn = _Runtime.callValue(Dialog.toFileSystemAccessStartIn__dialog, cast ([options.startIn] : Array<Dynamic>));
                 var __flowBranch12:Dynamic;
                 if ((cast !_Runtime.strictEquals(startIn, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
                   __flowBranch12 = flighthq._internal._Async.protect(function():Dynamic {
@@ -222,8 +222,8 @@ class Dialog {
             var types:Dynamic = cast _Runtime.UNDEFINED;
             var nativeHandles:Dynamic = cast _Runtime.UNDEFINED;
             var handles:Array<FileDialogHandle> = cast _Runtime.UNDEFINED;
-            pickerOptions = { multiple: _Runtime.coalesce(_Runtime.field(options, 'multiple'), function():Dynamic return cast false) };
-            types = _Runtime.callValue(Dialog.buildFileSystemAccessTypes__dialog, cast ([_Runtime.field(options, 'filters')] : Array<Dynamic>));
+            pickerOptions = { multiple: _Runtime.coalesce(options.multiple, function():Dynamic return cast false) };
+            types = _Runtime.callValue(Dialog.buildFileSystemAccessTypes__dialog, cast ([options.filters] : Array<Dynamic>));
             var __flowBranch17:Dynamic;
             if ((cast !_Runtime.strictEquals(types, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
               __flowBranch17 = flighthq._internal._Async.protect(function():Dynamic {
@@ -235,10 +235,10 @@ class Dialog {
             }
             return flighthq._internal._Async.continueFlow(__flowBranch17, function():Dynamic {
               var __flowBranch18:Dynamic;
-              if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'startIn'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+              if ((cast !_Runtime.strictEquals(options.startIn, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
                 __flowBranch18 = flighthq._internal._Async.protect(function():Dynamic {
                   var startIn:Dynamic = cast _Runtime.UNDEFINED;
-                  startIn = _Runtime.callValue(Dialog.toFileSystemAccessStartIn__dialog, cast ([_Runtime.field(options, 'startIn')] : Array<Dynamic>));
+                  startIn = _Runtime.callValue(Dialog.toFileSystemAccessStartIn__dialog, cast ([options.startIn] : Array<Dynamic>));
                   var __flowBranch19:Dynamic;
                   if ((cast !_Runtime.strictEquals(startIn, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
                     __flowBranch19 = flighthq._internal._Async.protect(function():Dynamic {
@@ -292,7 +292,7 @@ class Dialog {
       try {
         var input:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['input'] : Array<Dynamic>));
         _Runtime.setField(input, 'type', 'file');
-        if ((cast _Runtime.strictEquals(_Runtime.field(options, 'multiple'), true) : Bool)) { _Runtime.setField(input, 'multiple', true); }
+        if ((cast _Runtime.strictEquals(options.multiple, true) : Bool)) { _Runtime.setField(input, 'multiple', true); }
         _Runtime.setField((cast input : { var webkitdirectory:Bool; }), 'webkitdirectory', true);
         _Runtime.callProperty(input, 'addEventListener', cast (['change', function() {
           var files:Dynamic = cast _Runtime.UNDEFINED;
@@ -339,11 +339,11 @@ class Dialog {
       try {
         var input:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['input'] : Array<Dynamic>));
         _Runtime.setField(input, 'type', 'file');
-        if ((cast _Runtime.strictEquals(_Runtime.field(options, 'multiple'), true) : Bool)) { _Runtime.setField(input, 'multiple', true); }
-        if ((cast _Runtime.strictEquals(_Runtime.field(options, 'directory'), true) : Bool)) {
+        if ((cast _Runtime.strictEquals(options.multiple, true) : Bool)) { _Runtime.setField(input, 'multiple', true); }
+        if ((cast _Runtime.strictEquals(options.directory, true) : Bool)) {
           _Runtime.setField((cast input : { var webkitdirectory:Bool; }), 'webkitdirectory', true);
         }
-        var accept:Dynamic = _Runtime.callValue(Dialog.buildAcceptAttribute__dialog, cast ([_Runtime.field(options, 'filters')] : Array<Dynamic>));
+        var accept:Dynamic = _Runtime.callValue(Dialog.buildAcceptAttribute__dialog, cast ([options.filters] : Array<Dynamic>));
         if ((cast !_Runtime.strictEquals(accept, '') : Bool)) { _Runtime.setField(input, 'accept', accept); }
         _Runtime.callProperty(input, 'addEventListener', cast (['change', function() {
           var files:Dynamic = cast _Runtime.UNDEFINED;
@@ -393,18 +393,18 @@ class Dialog {
             var handle:FileDialogHandle = cast _Runtime.UNDEFINED;
             pickerOptions = {  };
             var __flowBranch24:Dynamic;
-            if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'defaultName'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+            if ((cast !_Runtime.strictEquals(options.defaultName, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
               __flowBranch24 = flighthq._internal._Async.protect(function():Dynamic {
-                _Runtime.setField(pickerOptions, 'suggestedName', _Runtime.field(options, 'defaultName'));
+                _Runtime.setField(pickerOptions, 'suggestedName', options.defaultName);
                 return flighthq._internal._Async.flowNormal();
               });
             } else {
               __flowBranch24 = flighthq._internal._Async.protect(function():Dynamic {
                 var __flowBranch25:Dynamic;
-                if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'defaultPath'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+                if ((cast !_Runtime.strictEquals(options.defaultPath, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
                   __flowBranch25 = flighthq._internal._Async.protect(function():Dynamic {
                     var parts:Dynamic = cast _Runtime.UNDEFINED;
-                    parts = _Runtime.callProperty(_Runtime.replace(_Runtime.field(options, 'defaultPath'), _Runtime.regexp('\\\\', 'g'), '/', false), 'split', cast (['/'] : Array<Dynamic>));
+                    parts = _Runtime.callProperty(_Runtime.replace(options.defaultPath, _Runtime.regexp('\\\\', 'g'), '/', false), 'split', cast (['/'] : Array<Dynamic>));
                     _Runtime.setField(pickerOptions, 'suggestedName', flighthq._internal._StaticIndex.readArray(parts, (_Runtime.field(parts, 'length') - 1.0)));
                     return flighthq._internal._Async.flowNormal();
                   });
@@ -417,7 +417,7 @@ class Dialog {
               });
             }
             return flighthq._internal._Async.continueFlow(__flowBranch24, function():Dynamic {
-              types = _Runtime.callValue(Dialog.buildFileSystemAccessTypes__dialog, cast ([_Runtime.field(options, 'filters')] : Array<Dynamic>));
+              types = _Runtime.callValue(Dialog.buildFileSystemAccessTypes__dialog, cast ([options.filters] : Array<Dynamic>));
               var __flowBranch26:Dynamic;
               if ((cast !_Runtime.strictEquals(types, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
                 __flowBranch26 = flighthq._internal._Async.protect(function():Dynamic {
@@ -429,10 +429,10 @@ class Dialog {
               }
               return flighthq._internal._Async.continueFlow(__flowBranch26, function():Dynamic {
                 var __flowBranch27:Dynamic;
-                if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'startIn'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+                if ((cast !_Runtime.strictEquals(options.startIn, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
                   __flowBranch27 = flighthq._internal._Async.protect(function():Dynamic {
                     var startIn:Dynamic = cast _Runtime.UNDEFINED;
-                    startIn = _Runtime.callValue(Dialog.toFileSystemAccessStartIn__dialog, cast ([_Runtime.field(options, 'startIn')] : Array<Dynamic>));
+                    startIn = _Runtime.callValue(Dialog.toFileSystemAccessStartIn__dialog, cast ([options.startIn] : Array<Dynamic>));
                     var __flowBranch28:Dynamic;
                     if ((cast !_Runtime.strictEquals(startIn, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
                       __flowBranch28 = flighthq._internal._Async.protect(function():Dynamic {

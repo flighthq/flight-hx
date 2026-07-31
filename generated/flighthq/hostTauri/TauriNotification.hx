@@ -24,9 +24,9 @@ class TauriNotification {
     return cast { notify: function(request:Dynamic):flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.protect(function():Dynamic {
         var id:Dynamic = cast _Runtime.UNDEFINED;
-        id = _Runtime.coalesce(_Runtime.field(request, 'id'), function():Dynamic return cast 'notification-' + Std.string(nextId++) + '');
+        id = _Runtime.coalesce(request.id, function():Dynamic return cast 'notification-' + Std.string(nextId++) + '');
         try {
-          _Runtime.callProperty(notification, 'sendNotification', cast ([{ title: _Runtime.field(request, 'title'), body: _Runtime.field(request, 'body'), icon: _Runtime.field(request, 'icon') }] : Array<Dynamic>));
+          _Runtime.callProperty(notification, 'sendNotification', cast ([{ title: request.title, body: request.body, icon: request.icon }] : Array<Dynamic>));
           return cast id;
         } catch (__error:Dynamic) {
           return cast '';

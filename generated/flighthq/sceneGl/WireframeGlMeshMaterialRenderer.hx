@@ -51,7 +51,7 @@ class WireframeGlMeshMaterialRenderer {
     upload = _Runtime.callValue(ensureGlWireframeUpload, cast ([state, geometry] : Array<Dynamic>));
     subset = _Runtime.field(proxy, 'subset');
     elementSize = ((cast _Runtime.strictEquals(_Runtime.field(upload, 'indexType'), flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT) : Bool) ? (cast 4.0 : Dynamic) : (cast 2.0 : Dynamic));
-    flighthq._internal.backend.WebGl2Backend.drawElements(gl, flighthq._internal.backend.WebGl2Backend.LINES, (_Runtime.field(subset, 'indexCount') * 2.0), _Runtime.field(upload, 'indexType'), ((_Runtime.field(subset, 'indexOffset') * 2.0) * elementSize));
+    flighthq._internal.backend.WebGl2Backend.drawElements(gl, flighthq._internal.backend.WebGl2Backend.LINES, (subset.indexCount * 2.0), _Runtime.field(upload, 'indexType'), ((subset.indexOffset * 2.0) * elementSize));
   } };
 
   public static function registerWireframeGlMaterial(state:GlRenderState):Void {

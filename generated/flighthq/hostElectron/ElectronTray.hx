@@ -31,15 +31,15 @@ class ElectronTray {
       var tray:Dynamic = cast _Runtime.UNDEFINED;
       var record:TrayRecord__electronTray = cast _Runtime.UNDEFINED;
       id = nextId++;
-      tray = _Runtime.construct(_Runtime.field(electron, 'Tray'), [_Runtime.coalesce(_Runtime.field(options, 'icon'), function():Dynamic return cast '')]);
+      tray = _Runtime.construct(_Runtime.field(electron, 'Tray'), [_Runtime.coalesce(options.icon, function():Dynamic return cast '')]);
       record = { tray: tray, title: '', tooltip: '', menu: null };
-      if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'tooltip'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        _Runtime.callProperty(tray, 'setToolTip', cast ([_Runtime.field(options, 'tooltip')] : Array<Dynamic>));
-        _Runtime.setField(record, 'tooltip', _Runtime.field(options, 'tooltip'));
+      if ((cast !_Runtime.strictEquals(options.tooltip, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+        _Runtime.callProperty(tray, 'setToolTip', cast ([options.tooltip] : Array<Dynamic>));
+        _Runtime.setField(record, 'tooltip', options.tooltip);
       }
-      if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'title'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        _Runtime.callProperty(tray, 'setTitle', cast ([_Runtime.field(options, 'title')] : Array<Dynamic>));
-        _Runtime.setField(record, 'title', _Runtime.field(options, 'title'));
+      if ((cast !_Runtime.strictEquals(options.title, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+        _Runtime.callProperty(tray, 'setTitle', cast ([options.title] : Array<Dynamic>));
+        _Runtime.setField(record, 'title', options.title);
       }
       _Runtime.callProperty(tray, 'on', cast (['click', function() return _Runtime.callValue(emit, cast ([id, 'click'] : Array<Dynamic>))] : Array<Dynamic>));
       _Runtime.callProperty(tray, 'on', cast (['right-click', function() return _Runtime.callValue(emit, cast ([id, 'rightClick'] : Array<Dynamic>))] : Array<Dynamic>));

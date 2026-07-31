@@ -37,7 +37,7 @@ class BitmapFontXml {
     var kernings:Array<BitmapFontKerningRecord> = cast _Runtime.UNDEFINED;
     var kerningsElement:Dynamic = cast _Runtime.UNDEFINED;
     root = _Runtime.callValue(parseXmlDocument, cast ([text] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.strictEquals(root, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(root, 'name'), 'font') : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast _Runtime.strictEquals(root, null) : Bool) || (cast !_Runtime.strictEquals(root.name, 'font') : Bool)) : Bool)) { return cast null; }
     common = _Runtime.callValue(getXmlElementChildByName, cast ([root, 'common'] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(common, null) : Bool)) { return cast null; }
     lineHeight = _Runtime.callValue(getXmlElementAttributeNumber, cast ([common, 'lineHeight'] : Array<Dynamic>));

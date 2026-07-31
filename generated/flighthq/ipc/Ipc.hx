@@ -141,7 +141,7 @@ class Ipc {
     backend = _Runtime.callValue(getIpcBackend, cast ([] : Array<Dynamic>));
     signals = Ipc._ipcSignals__ipc;
     unsubscribe = _Runtime.callProperty(backend, 'subscribe', cast ([name, function(args:Dynamic) {
-      if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onChannelMessage')], [name]]), 1); }
+      if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signals.onChannelMessage], [name]]), 1); }
       _Runtime.callValue(listener, cast ([_Runtime.toArray(args)] : Array<Dynamic>));
     }] : Array<Dynamic>));
     tracked = function() {
@@ -164,10 +164,10 @@ class Ipc {
     signals = Ipc._ipcSignals__ipc;
     unsubscribe = _Runtime.callProperty(backend, 'subscribe', cast ([name, function(args:Dynamic) {
       var event:Dynamic = cast _Runtime.UNDEFINED;
-      if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onChannelMessage')], [name]]), 1); }
+      if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signals.onChannelMessage], [name]]), 1); }
       event = { channel: name, senderId: -1.0, args: args, reply: function(replyArgs:Array<Dynamic>) {
-        if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.thisValue(), 'senderId'), -1.0) : Bool)) { return; }
-        _Runtime.callOptionalProperty(backend, 'sendTo', cast ([{ windowId: _Runtime.field(_Runtime.thisValue(), 'senderId') }, name, replyArgs] : Array<Dynamic>));
+        if ((cast _Runtime.strictEquals(_Runtime.thisValue().senderId, -1.0) : Bool)) { return; }
+        _Runtime.callOptionalProperty(backend, 'sendTo', cast ([{ windowId: _Runtime.thisValue().senderId }, name, replyArgs] : Array<Dynamic>));
       } };
       _Runtime.callValue(listener, cast ([event] : Array<Dynamic>));
     }] : Array<Dynamic>));
@@ -200,7 +200,7 @@ class Ipc {
   }
 
   public static function resolveChannel__ipc(channel:Dynamic):String {
-    return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(channel), 'string') : Bool) ? (cast channel : Dynamic) : (cast _Runtime.field(channel, 'name') : Dynamic));
+    return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(channel), 'string') : Bool) ? (cast channel : Dynamic) : (cast channel.name : Dynamic));
     return cast null;
   }
 
@@ -214,6 +214,6 @@ class Ipc {
 
   public static function setIpcBackend(backend:Null<IpcBackend>):Void {
     (Ipc._backend__ipc = cast (backend : Dynamic));
-    if ((cast !_Runtime.strictEquals(Ipc._ipcSignals__ipc, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(Ipc._ipcSignals__ipc, 'onBackendChanged')]]), 1); }
+    if ((cast !_Runtime.strictEquals(Ipc._ipcSignals__ipc, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[Ipc._ipcSignals__ipc.onBackendChanged]]), 1); }
   }
 }

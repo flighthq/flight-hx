@@ -37,7 +37,7 @@ class MeshGeometry {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(source.subsets, 'length') : Float)) : Bool)) {
-        _Runtime.callProperty(subsets, 'push', cast ([{ indexCount: _Runtime.field(flighthq._internal._StaticIndex.readArray(source.subsets, i), 'indexCount'), indexOffset: _Runtime.field(flighthq._internal._StaticIndex.readArray(source.subsets, i), 'indexOffset') }] : Array<Dynamic>));
+        _Runtime.callProperty(subsets, 'push', cast ([{ indexCount: flighthq._internal._StaticIndex.readArray(source.subsets, i).indexCount, indexOffset: flighthq._internal._StaticIndex.readArray(source.subsets, i).indexOffset }] : Array<Dynamic>));
         i++;
       }
     }
@@ -55,18 +55,18 @@ class MeshGeometry {
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
     var indices:Null<Dynamic> = cast _Runtime.UNDEFINED;
     var subsets:Dynamic = cast _Runtime.UNDEFINED;
-    vertices = _Runtime.field(options, 'vertices');
-    vertexCount = _Runtime.callValue(MeshGeometry.getVertexCountFromLayout__meshGeometry, cast ([vertices, _Runtime.field(options, 'layout')] : Array<Dynamic>));
+    vertices = options.vertices;
+    vertexCount = _Runtime.callValue(MeshGeometry.getVertexCountFromLayout__meshGeometry, cast ([vertices, options.layout] : Array<Dynamic>));
     indices = null;
-    if (_Runtime.truthy(_Runtime.field(options, 'indices'))) {
-      (indices = cast (_Runtime.callValue(MeshGeometry.promoteIndices__meshGeometry, cast ([_Runtime.field(options, 'indices'), vertexCount] : Array<Dynamic>)) : Dynamic));
+    if (_Runtime.truthy(options.indices)) {
+      (indices = cast (_Runtime.callValue(MeshGeometry.promoteIndices__meshGeometry, cast ([options.indices, vertexCount] : Array<Dynamic>)) : Dynamic));
     }
-    subsets = _Runtime.field(options, 'subsets');
+    subsets = options.subsets;
     if ((cast !_Runtime.truthy(subsets) : Bool)) {
       var count:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.field(indices, 'length'), function():Dynamic return cast vertexCount);
       (subsets = cast (cast ([{ indexCount: count, indexOffset: 0.0 }] : Array<Dynamic>) : Dynamic));
     }
-    return cast _Runtime.callValue(MeshGeometry.createMeshGeometryRuntime__meshGeometry, cast ([{ bounds: null, indices: indices, layout: _Runtime.field(options, 'layout'), subsets: subsets, topology: _Runtime.coalesce(_Runtime.field(options, 'topology'), function():Dynamic return cast 'triangle-list'), version: 0.0, vertices: vertices }] : Array<Dynamic>));
+    return cast _Runtime.callValue(MeshGeometry.createMeshGeometryRuntime__meshGeometry, cast ([{ bounds: null, indices: indices, layout: options.layout, subsets: subsets, topology: _Runtime.coalesce(options.topology, function():Dynamic return cast 'triangle-list'), version: 0.0, vertices: vertices }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -108,11 +108,11 @@ class MeshGeometry {
 
   public static function hasMeshGeometrySkin(geometry:flighthq.types.MeshGeometry):Bool {
     var attributes:Dynamic = cast _Runtime.UNDEFINED;
-    attributes = _Runtime.field(geometry.layout, 'attributes');
+    attributes = geometry.layout.attributes;
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(attributes, 'length') : Float)) : Bool)) {
-        if ((cast _Runtime.strictEquals(_Runtime.field(flighthq._internal._StaticIndex.readArray(attributes, i), 'semantic'), 'joints0') : Bool)) { return cast true; }
+        if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(attributes, i).semantic, 'joints0') : Bool)) { return cast true; }
         i++;
       }
     }
@@ -144,7 +144,7 @@ class MeshGeometry {
 
   public static function getVertexCountFromLayout__meshGeometry(vertices:flighthq._internal._Float32Array, layout:VertexAttributeLayout):Float {
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
-    floatsPerVertex = (_Runtime.field(layout, 'stride') / 4.0);
+    floatsPerVertex = (layout.stride / 4.0);
     if ((cast ((cast floatsPerVertex : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
     return cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex));
     return cast null;

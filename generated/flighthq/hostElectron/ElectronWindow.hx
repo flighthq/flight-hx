@@ -102,23 +102,23 @@ class ElectronWindow {
       var bw:Dynamic = cast _Runtime.UNDEFINED;
       bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap).get(win));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        _Runtime.setField(out, 'x', win.x);
-        _Runtime.setField(out, 'y', win.y);
-        _Runtime.setField(out, 'width', win.width);
-        _Runtime.setField(out, 'height', win.height);
+        (out.x = cast (win.x : Dynamic));
+        (out.y = cast (win.y : Dynamic));
+        (out.width = cast (win.width : Dynamic));
+        (out.height = cast (win.height : Dynamic));
         return cast out;
       }
       try {
         var bounds:Dynamic = _Runtime.callProperty(bw, 'getBounds', cast ([] : Array<Dynamic>));
-        _Runtime.setField(out, 'x', _Runtime.field(bounds, 'x'));
-        _Runtime.setField(out, 'y', _Runtime.field(bounds, 'y'));
-        _Runtime.setField(out, 'width', _Runtime.field(bounds, 'width'));
-        _Runtime.setField(out, 'height', _Runtime.field(bounds, 'height'));
+        (out.x = cast (_Runtime.field(bounds, 'x') : Dynamic));
+        (out.y = cast (_Runtime.field(bounds, 'y') : Dynamic));
+        (out.width = cast (_Runtime.field(bounds, 'width') : Dynamic));
+        (out.height = cast (_Runtime.field(bounds, 'height') : Dynamic));
       } catch (__error:Dynamic) {
-        _Runtime.setField(out, 'x', win.x);
-        _Runtime.setField(out, 'y', win.y);
-        _Runtime.setField(out, 'width', win.width);
-        _Runtime.setField(out, 'height', win.height);
+        (out.x = cast (win.x : Dynamic));
+        (out.y = cast (win.y : Dynamic));
+        (out.width = cast (win.width : Dynamic));
+        (out.height = cast (win.height : Dynamic));
       }
       return cast out;
     }, minimize: function(win:Dynamic) {

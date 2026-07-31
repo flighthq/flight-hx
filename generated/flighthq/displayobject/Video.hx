@@ -21,7 +21,7 @@ import flighthq.types._internal._VideoValues.VideoKind;
 class Video {
   public static function computeVideoLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
     var element:Dynamic = cast _Runtime.UNDEFINED;
-    element = _Runtime.optionalField(_Runtime.field((cast _Runtime.field(source, 'data') : VideoData), 'source'), 'element');
+    element = ({ final __typedStruct0 = _Runtime.field((cast _Runtime.field(source, 'data') : VideoData), 'source'); __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.element; });
     if ((cast ((cast !_Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(element, null) : Bool)) : Bool)) {
       _Runtime.setField(out, 'width', _Runtime.field(element, 'videoWidth'));
       _Runtime.setField(out, 'height', _Runtime.field(element, 'videoHeight'));

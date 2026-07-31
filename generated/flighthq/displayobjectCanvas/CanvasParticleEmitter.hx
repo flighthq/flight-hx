@@ -25,7 +25,7 @@ class CanvasParticleEmitter {
     var imageSource:Dynamic = cast _Runtime.UNDEFINED;
     var context:Dynamic = cast _Runtime.UNDEFINED;
     source = (cast _Runtime.field(renderProxy, 'source') : ParticleEmitter);
-    __destructure0 = _Runtime.field(source, 'data');
+    __destructure0 = source.data;
     atlas = _Runtime.field(__destructure0, 'atlas');
     alphas = _Runtime.field(__destructure0, 'alphas');
     ids = _Runtime.field(__destructure0, 'ids');
@@ -60,7 +60,7 @@ class CanvasParticleEmitter {
         var d:Float = cast _Runtime.UNDEFINED;
         var tx:Float = cast _Runtime.UNDEFINED;
         var ty:Float = cast _Runtime.UNDEFINED;
-        if ((cast _Runtime.field(source, 'data').worldSpace : Bool)) {
+        if ((cast source.data.worldSpace : Bool)) {
           (a = cast (cosR : Dynamic));
           (b = cast (sinR : Dynamic));
           (c = cast (-sinR : Dynamic));

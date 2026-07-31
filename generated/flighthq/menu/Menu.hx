@@ -91,7 +91,7 @@ class Menu {
           accelEl = _Runtime.callProperty(li, 'querySelector', cast (['span:last-child'] : Array<Dynamic>));
           if ((cast ((cast !_Runtime.strictEquals(accelEl, null) : Bool) && (cast !_Runtime.strictEquals(accelEl, labelEl) : Bool)) : Bool)) { _Runtime.setField(_Runtime.field(accelEl, 'style'), 'color', 'rgba(255,255,255,.7)'); }
           if ((cast ((cast !_Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool) && (cast !_Runtime.strictEquals(item.id, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(Menu._menuSignals__menu, 'onMenuItemHighlight')], [item.id]]), 1);
+            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[Menu._menuSignals__menu.onMenuItemHighlight], [item.id]]), 1);
           }
         }] : Array<Dynamic>));
         _Runtime.callProperty(li, 'addEventListener', cast (['mouseleave', function() {
@@ -213,7 +213,7 @@ class Menu {
   public static function onMenuSelect(listener:Dynamic):Dynamic {
     return cast _Runtime.callProperty(_Runtime.callValue(getMenuBackend, cast ([] : Array<Dynamic>)), 'subscribeSelect', cast ([function(id:Dynamic) {
       _Runtime.callValue(listener, cast ([id] : Array<Dynamic>));
-      if ((cast !_Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(Menu._menuSignals__menu, 'onMenuItemSelect')], [id]]), 1); }
+      if ((cast !_Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[Menu._menuSignals__menu.onMenuItemSelect], [id]]), 1); }
     }] : Array<Dynamic>));
     return cast null;
   }
@@ -229,11 +229,11 @@ class Menu {
 
   public static function showContextMenu(items:Array<MenuItemTemplate>, x:Float, y:Float):flighthq._internal._Promise<Null<String>> {
     var promise:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(Menu._menuSignals__menu, 'onContextMenuOpen')]]), 1); }
+    if ((cast !_Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[Menu._menuSignals__menu.onContextMenuOpen]]), 1); }
     promise = _Runtime.callProperty(_Runtime.callValue(getMenuBackend, cast ([] : Array<Dynamic>)), 'popupContextMenu', cast ([items, x, y] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool)) {
       var signals:Dynamic = Menu._menuSignals__menu;
-      _Runtime.voidValue(_Runtime.callProperty(promise, 'then', cast ([function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onContextMenuClose')]]), 1)] : Array<Dynamic>)));
+      _Runtime.voidValue(_Runtime.callProperty(promise, 'then', cast ([function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signals.onContextMenuClose]]), 1)] : Array<Dynamic>)));
     }
     return cast promise;
     return cast null;
@@ -295,7 +295,7 @@ class Menu {
         if ((cast !_Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool)) {
           var focused:Dynamic = flighthq._internal._StaticIndex.readArray(items, focusIndex);
           var itemId:Dynamic = _Runtime.optionalIndex(_Runtime.optionalField(focused, 'dataset'), 'itemId');
-          if ((cast !_Runtime.strictEquals(itemId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(Menu._menuSignals__menu, 'onMenuItemHighlight')], [itemId]]), 1); }
+          if ((cast !_Runtime.strictEquals(itemId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[Menu._menuSignals__menu.onMenuItemHighlight], [itemId]]), 1); }
         }
       };
       onKeyDown = function onKeyDown(e:Dynamic):Void {

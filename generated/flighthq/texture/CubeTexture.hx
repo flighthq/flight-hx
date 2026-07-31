@@ -14,7 +14,7 @@ import flighthq.types.ImageResource;
 
 class CubeTexture {
   public static function cloneCubeTexture(source:CubeTextureLike):flighthq.types.CubeTexture {
-    return cast _Runtime.callValue(createEntity, cast ([{ colorSpace: _Runtime.field(source, 'colorSpace'), faces: _Runtime.slice(_Runtime.field(source, 'faces'), 0, null), sampler: _Runtime.callValue(cloneSampler, cast ([_Runtime.field(source, 'sampler')] : Array<Dynamic>)) }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ colorSpace: source.colorSpace, faces: _Runtime.slice(source.faces, 0, null), sampler: _Runtime.callValue(cloneSampler, cast ([source.sampler] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -27,16 +27,16 @@ class CubeTexture {
     var f4:Dynamic = cast _Runtime.UNDEFINED;
     var f5:Dynamic = cast _Runtime.UNDEFINED;
     var faces:Dynamic = cast _Runtime.UNDEFINED;
-    colorSpace = _Runtime.field(source, 'colorSpace');
-    f0 = flighthq._internal._StaticIndex.readArray(_Runtime.field(source, 'faces'), 0.0);
-    f1 = flighthq._internal._StaticIndex.readArray(_Runtime.field(source, 'faces'), 1.0);
-    f2 = flighthq._internal._StaticIndex.readArray(_Runtime.field(source, 'faces'), 2.0);
-    f3 = flighthq._internal._StaticIndex.readArray(_Runtime.field(source, 'faces'), 3.0);
-    f4 = flighthq._internal._StaticIndex.readArray(_Runtime.field(source, 'faces'), 4.0);
-    f5 = flighthq._internal._StaticIndex.readArray(_Runtime.field(source, 'faces'), 5.0);
-    _Runtime.callValue(copySampler, cast ([_Runtime.field(out, 'sampler'), _Runtime.field(source, 'sampler')] : Array<Dynamic>));
-    _Runtime.setField(out, 'colorSpace', colorSpace);
-    faces = (cast _Runtime.field(out, 'faces') : Array<Null<ImageResource>>);
+    colorSpace = source.colorSpace;
+    f0 = flighthq._internal._StaticIndex.readArray(source.faces, 0.0);
+    f1 = flighthq._internal._StaticIndex.readArray(source.faces, 1.0);
+    f2 = flighthq._internal._StaticIndex.readArray(source.faces, 2.0);
+    f3 = flighthq._internal._StaticIndex.readArray(source.faces, 3.0);
+    f4 = flighthq._internal._StaticIndex.readArray(source.faces, 4.0);
+    f5 = flighthq._internal._StaticIndex.readArray(source.faces, 5.0);
+    _Runtime.callValue(copySampler, cast ([out.sampler, source.sampler] : Array<Dynamic>));
+    (out.colorSpace = cast (colorSpace : Dynamic));
+    faces = (cast out.faces : Array<Null<ImageResource>>);
     flighthq._internal._StaticIndex.writeArray(faces, 0.0, f0);
     flighthq._internal._StaticIndex.writeArray(faces, 1.0, f1);
     flighthq._internal._StaticIndex.writeArray(faces, 2.0, f2);
@@ -53,12 +53,12 @@ class CubeTexture {
   public static function equalsCubeTexture(a:Null<CubeTextureLike>, b:Null<CubeTextureLike>):Bool {
     if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
     if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast true; }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(a, 'colorSpace'), _Runtime.field(b, 'colorSpace')) : Bool)) { return cast false; }
-    if ((cast !(cast _Runtime.callValue(equalsSampler, cast ([_Runtime.field(a, 'sampler'), _Runtime.field(b, 'sampler')] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
+    if ((cast !_Runtime.strictEquals(a.colorSpace, b.colorSpace) : Bool)) { return cast false; }
+    if ((cast !(cast _Runtime.callValue(equalsSampler, cast ([a.sampler, b.sampler] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast 6.0 : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(_Runtime.field(a, 'faces'), i), flighthq._internal._StaticIndex.readArray(_Runtime.field(b, 'faces'), i)) : Bool)) { return cast false; }
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(a.faces, i), flighthq._internal._StaticIndex.readArray(b.faces, i)) : Bool)) { return cast false; }
         i++;
       }
     }
@@ -70,7 +70,7 @@ class CubeTexture {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast 6.0 : Float)) : Bool)) {
-        var face:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(cube, 'faces'), i);
+        var face:Dynamic = flighthq._internal._StaticIndex.readArray(cube.faces, i);
         if ((cast !_Runtime.strictEquals(face, null) : Bool)) { return cast face.width; }
         i++;
       }
@@ -80,11 +80,11 @@ class CubeTexture {
   }
 
   public static function isCubeTextureComplete(cube:CubeTextureLike):Bool {
-    return cast _Runtime.callProperty(_Runtime.field(cube, 'faces'), 'every', cast ([function(face:Dynamic) return !_Runtime.strictEquals(face, null)] : Array<Dynamic>));
+    return cast _Runtime.callProperty(cube.faces, 'every', cast ([function(face:Dynamic) return !_Runtime.strictEquals(face, null)] : Array<Dynamic>));
     return cast null;
   }
 
   public static function setCubeTextureFace(cube:CubeTextureLike, faceIndex:Float, image:Null<ImageResource>):Void {
-    flighthq._internal._StaticIndex.writeArray((cast _Runtime.field(cube, 'faces') : Array<Null<ImageResource>>), faceIndex, image);
+    flighthq._internal._StaticIndex.writeArray((cast cube.faces : Array<Null<ImageResource>>), faceIndex, image);
   }
 }

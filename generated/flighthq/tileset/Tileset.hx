@@ -77,7 +77,7 @@ class Tileset {
   }
 
   public static function disposeTileset(tileset:flighthq.types.Tileset):Void {
-    _Runtime.setField(tileset, 'atlas', null);
+    (tileset.atlas = cast (null : Dynamic));
   }
 
   public static function loadTilesetFromBase64(base64:String, mimeType:String, tileWidth:Float, tileHeight:Float, ?margin:Float, ?spacing:Float, ?signal:Dynamic):flighthq._internal._Promise<flighthq.types.Tileset> {

@@ -48,7 +48,7 @@ class EmitParticleBurst {
     var tintG:Dynamic = cast _Runtime.UNDEFINED;
     var tintB:Dynamic = cast _Runtime.UNDEFINED;
     var tintA:Dynamic = cast _Runtime.UNDEFINED;
-    data = _Runtime.field(emitter, 'data');
+    data = emitter.data;
     liveCount = data.particleCount;
     toSpawn = HxMath.floor(count);
     maxNew = (config.maxParticles - liveCount);

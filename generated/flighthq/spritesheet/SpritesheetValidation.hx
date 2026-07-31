@@ -24,8 +24,8 @@ class SpritesheetValidation {
       {
         var fi:Dynamic = 0.0;
         while ((cast ((cast fi : Float) < (cast _Runtime.field(frames, 'length') : Float)) : Bool)) {
-          if ((cast !(cast ((cast regionIds : flighthq._internal._Set).has(_Runtime.field(flighthq._internal._StaticIndex.readArray(frames, fi), 'id'))) : Bool) : Bool)) {
-            _Runtime.callProperty(diagnostics, 'push', cast ([{ animationName: null, frameIndex: fi, message: 'Frame ' + Std.string(fi) + ' references atlas region id ' + Std.string(_Runtime.field(flighthq._internal._StaticIndex.readArray(frames, fi), 'id')) + ' which does not exist in the atlas.', severity: 'error' }] : Array<Dynamic>));
+          if ((cast !(cast ((cast regionIds : flighthq._internal._Set).has(flighthq._internal._StaticIndex.readArray(frames, fi).id)) : Bool) : Bool)) {
+            _Runtime.callProperty(diagnostics, 'push', cast ([{ animationName: null, frameIndex: fi, message: 'Frame ' + Std.string(fi) + ' references atlas region id ' + Std.string(flighthq._internal._StaticIndex.readArray(frames, fi).id) + ' which does not exist in the atlas.', severity: 'error' }] : Array<Dynamic>));
           }
           fi++;
         }
@@ -34,13 +34,13 @@ class SpritesheetValidation {
     for (__iteration1 in _Runtime.iterable(flighthq._internal.DynamicObject.entries(animations))) {
       var animName:Dynamic = _Runtime.getIndex(__iteration1, 0.0);
       var anim:Dynamic = _Runtime.getIndex(__iteration1, 1.0);
-      if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(anim, 'frames'), 'length'), 0.0) : Bool)) {
+      if ((cast _Runtime.strictEquals(_Runtime.field(anim.frames, 'length'), 0.0) : Bool)) {
         _Runtime.callProperty(diagnostics, 'push', cast ([{ animationName: animName, frameIndex: null, message: 'Animation "' + Std.string(animName) + '" has no frames.', severity: 'warning' }] : Array<Dynamic>));
       }
       {
         var ai:Dynamic = 0.0;
-        while ((cast ((cast ai : Float) < (cast _Runtime.field(_Runtime.field(anim, 'frames'), 'length') : Float)) : Bool)) {
-          var frameRef:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(anim, 'frames'), ai);
+        while ((cast ((cast ai : Float) < (cast _Runtime.field(anim.frames, 'length') : Float)) : Bool)) {
+          var frameRef:Dynamic = flighthq._internal._StaticIndex.readArray(anim.frames, ai);
           if ((cast ((cast ((cast frameRef : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast frameRef : Float) >= (cast _Runtime.field(frames, 'length') : Float)) : Bool)) : Bool)) {
             _Runtime.callProperty(diagnostics, 'push', cast ([{ animationName: animName, frameIndex: ai, message: 'Animation "' + Std.string(animName) + '" references frame index ' + Std.string(frameRef) + ' which is out of range (sheet has ' + Std.string(_Runtime.field(frames, 'length')) + ' frames).', severity: 'error' }] : Array<Dynamic>));
           }
@@ -69,21 +69,21 @@ class SpritesheetValidation {
       }
     }
     for (ad in _Runtime.iterable(animations)) {
-      if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(ad, 'frameNames'), 'length'), 0.0) : Bool)) {
-        _Runtime.callProperty(diagnostics, 'push', cast ([{ animationName: _Runtime.field(ad, 'name'), frameIndex: null, message: 'Animation "' + Std.string(_Runtime.field(ad, 'name')) + '" has no frameNames — all sheet frames will be used as the frame list.', severity: 'warning' }] : Array<Dynamic>));
+      if ((cast _Runtime.strictEquals(_Runtime.field(ad.frameNames, 'length'), 0.0) : Bool)) {
+        _Runtime.callProperty(diagnostics, 'push', cast ([{ animationName: ad.name, frameIndex: null, message: 'Animation "' + Std.string(ad.name) + '" has no frameNames — all sheet frames will be used as the frame list.', severity: 'warning' }] : Array<Dynamic>));
       } else {
         {
           var ai:Dynamic = 0.0;
-          while ((cast ((cast ai : Float) < (cast _Runtime.field(_Runtime.field(ad, 'frameNames'), 'length') : Float)) : Bool)) {
-            var fname:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(ad, 'frameNames'), ai);
+          while ((cast ((cast ai : Float) < (cast _Runtime.field(ad.frameNames, 'length') : Float)) : Bool)) {
+            var fname:Dynamic = flighthq._internal._StaticIndex.readArray(ad.frameNames, ai);
             if ((cast !(cast ((cast frameNameSet : flighthq._internal._Set).has(fname)) : Bool) : Bool)) {
-              _Runtime.callProperty(diagnostics, 'push', cast ([{ animationName: _Runtime.field(ad, 'name'), frameIndex: ai, message: 'Animation "' + Std.string(_Runtime.field(ad, 'name')) + '" references frame name "' + Std.string(fname) + '" which is not present in the data frame list.', severity: 'error' }] : Array<Dynamic>));
+              _Runtime.callProperty(diagnostics, 'push', cast ([{ animationName: ad.name, frameIndex: ai, message: 'Animation "' + Std.string(ad.name) + '" references frame name "' + Std.string(fname) + '" which is not present in the data frame list.', severity: 'error' }] : Array<Dynamic>));
             }
             ai++;
           }
         }
-        if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(ad, 'frameDurations'), null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(ad, 'frameDurations'), 'length'), _Runtime.field(_Runtime.field(ad, 'frameNames'), 'length')) : Bool)) : Bool)) {
-          _Runtime.callProperty(diagnostics, 'push', cast ([{ animationName: _Runtime.field(ad, 'name'), frameIndex: null, message: 'Animation "' + Std.string(_Runtime.field(ad, 'name')) + '" has ' + Std.string(_Runtime.field(_Runtime.field(ad, 'frameDurations'), 'length')) + ' frameDurations but ' + Std.string(_Runtime.field(_Runtime.field(ad, 'frameNames'), 'length')) + ' frameNames — lengths should match.', severity: 'warning' }] : Array<Dynamic>));
+        if ((cast ((cast !_Runtime.strictEquals(ad.frameDurations, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(ad.frameDurations, 'length'), _Runtime.field(ad.frameNames, 'length')) : Bool)) : Bool)) {
+          _Runtime.callProperty(diagnostics, 'push', cast ([{ animationName: ad.name, frameIndex: null, message: 'Animation "' + Std.string(ad.name) + '" has ' + Std.string(_Runtime.field(ad.frameDurations, 'length')) + ' frameDurations but ' + Std.string(_Runtime.field(ad.frameNames, 'length')) + ' frameNames — lengths should match.', severity: 'warning' }] : Array<Dynamic>));
         }
       }
     }

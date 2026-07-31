@@ -44,7 +44,7 @@ class Window {
     if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return; }
     onBeforeUnload = function(e:Dynamic) {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onCloseRequest]]), 1);
-      if ((cast _Runtime.strictEquals(_Runtime.optionalField(_Runtime.field(win.onCloseRequest, 'data'), 'cancelled'), true) : Bool)) {
+      if ((cast _Runtime.strictEquals(({ final __typedStruct0 = win.onCloseRequest.data; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.cancelled; }), true) : Bool)) {
         _Runtime.callProperty(e, 'preventDefault', cast ([] : Array<Dynamic>));
         _Runtime.setField(e, 'returnValue', '');
       }
@@ -262,16 +262,16 @@ class Window {
       }
     }, getBounds: function(win:Dynamic, out:Dynamic) {
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) {
-        _Runtime.setField(out, 'x', win.x);
-        _Runtime.setField(out, 'y', win.y);
-        _Runtime.setField(out, 'width', win.width);
-        _Runtime.setField(out, 'height', win.height);
+        (out.x = cast (win.x : Dynamic));
+        (out.y = cast (win.y : Dynamic));
+        (out.width = cast (win.width : Dynamic));
+        (out.height = cast (win.height : Dynamic));
         return cast out;
       }
-      _Runtime.setField(out, 'x', _Runtime.coalesce(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screenX'), function():Dynamic return cast win.x));
-      _Runtime.setField(out, 'y', _Runtime.coalesce(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screenY'), function():Dynamic return cast win.y));
-      _Runtime.setField(out, 'width', _Runtime.coalesce(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'innerWidth'), function():Dynamic return cast win.width));
-      _Runtime.setField(out, 'height', _Runtime.coalesce(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'innerHeight'), function():Dynamic return cast win.height));
+      (out.x = cast (_Runtime.coalesce(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screenX'), function():Dynamic return cast win.x) : Dynamic));
+      (out.y = cast (_Runtime.coalesce(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screenY'), function():Dynamic return cast win.y) : Dynamic));
+      (out.width = cast (_Runtime.coalesce(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'innerWidth'), function():Dynamic return cast win.width) : Dynamic));
+      (out.height = cast (_Runtime.coalesce(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'innerHeight'), function():Dynamic return cast win.height) : Dynamic));
       return cast out;
     }, minimize: function() {
     
@@ -528,7 +528,7 @@ class Window {
 
   public static function requestWindowClose(win:ApplicationWindow):Bool {
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onCloseRequest]]), 1);
-    return cast !_Runtime.strictEquals(_Runtime.optionalField(_Runtime.field(win.onCloseRequest, 'data'), 'cancelled'), true);
+    return cast !_Runtime.strictEquals(({ final __typedStruct7 = win.onCloseRequest.data; __typedStruct7 == null ? _Runtime.UNDEFINED : __typedStruct7.cancelled; }), true);
     return cast null;
   }
 

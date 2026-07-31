@@ -13,10 +13,10 @@ class AnimationClip {
   public static function cloneAnimationClip(clip:flighthq.types.AnimationClip):flighthq.types.AnimationClip {
     var channels:Array<AnimationChannel> = cast _Runtime.UNDEFINED;
     channels = cast ([] : Array<Dynamic>);
-    for (channel in _Runtime.iterable(_Runtime.field(clip, 'channels'))) {
+    for (channel in _Runtime.iterable(clip.channels)) {
       _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([_Runtime.callValue(cloneAnimationTrack, cast ([_Runtime.field(channel, 'track')] : Array<Dynamic>)), _Runtime.field(channel, 'targetRef')] : Array<Dynamic>))] : Array<Dynamic>));
     }
-    return cast { channels: channels, duration: _Runtime.field(clip, 'duration') };
+    return cast { channels: channels, duration: clip.duration };
     return cast null;
   }
 
@@ -31,13 +31,13 @@ class AnimationClip {
   }
 
   public static function getAnimationClipDuration(clip:flighthq.types.AnimationClip):Float {
-    return cast _Runtime.field(clip, 'duration');
+    return cast clip.duration;
     return cast null;
   }
 
   public static function sampleAnimationClip(out:Dynamic, clip:flighthq.types.AnimationClip, time:Float, visit:Dynamic):Void {
     var channels:Dynamic = cast _Runtime.UNDEFINED;
-    channels = _Runtime.field(clip, 'channels');
+    channels = clip.channels;
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(channels, 'length') : Float)) : Bool)) {

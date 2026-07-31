@@ -25,13 +25,13 @@ class TexturePackerParse {
   }
 
   public static function animationsFromFrameTags__texturePackerParse(tags:Array<TexturePackerFrameTag>, frameNames:Array<String>):Array<SpritesheetAnimationData> {
-    return cast _Runtime.callProperty(tags, 'map', cast ([function(tag:Dynamic) return _Runtime.callValue(createSpritesheetAnimationData, cast ([{ direction: _Runtime.coalesce(_Runtime.field(tag, 'direction'), function():Dynamic return cast 'forward'), frameDuration: 100.0, frameNames: _Runtime.slice(frameNames, _Runtime.field(tag, 'from'), (_Runtime.field(tag, 'to') + 1.0)), loop: true, name: _Runtime.field(tag, 'name') }] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast _Runtime.callProperty(tags, 'map', cast ([function(tag:Dynamic) return _Runtime.callValue(createSpritesheetAnimationData, cast ([{ direction: _Runtime.coalesce(tag.direction, function():Dynamic return cast 'forward'), frameDuration: 100.0, frameNames: _Runtime.slice(frameNames, tag.from, (tag.to + 1.0)), loop: true, name: tag.name }] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
   public static function metaScale__texturePackerParse(meta:TexturePackerMeta):Float {
-    if ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(meta, 'scale')), 'string') : Bool)) { return cast _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.field(meta, 'scale')] : Array<Dynamic>)), function():Dynamic return cast 1.0); }
-    return cast _Runtime.field(meta, 'scale');
+    if ((cast _Runtime.strictEquals(_Runtime.typeofValue(meta.scale), 'string') : Bool)) { return cast _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([meta.scale] : Array<Dynamic>)), function():Dynamic return cast 1.0); }
+    return cast meta.scale;
     return cast null;
   }
 
@@ -47,8 +47,8 @@ class TexturePackerParse {
     frameNames = _Runtime.callProperty(regions, 'map', cast ([function(region:Dynamic) return _Runtime.coalesce(region.name, function():Dynamic return cast '')] : Array<Dynamic>));
     __destructure0 = doc;
     meta = _Runtime.field(__destructure0, 'meta');
-    animations = _Runtime.select(_Runtime.field(meta, 'frameTags'), function():Dynamic return cast _Runtime.callValue(TexturePackerParse.animationsFromFrameTags__texturePackerParse, cast ([_Runtime.field(meta, 'frameTags'), frameNames] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>));
-    return cast _Runtime.callValue(createSpritesheetData, cast ([{ animations: animations, frames: frames, imageFile: _Runtime.field(meta, 'image'), imageHeight: _Runtime.field(_Runtime.field(meta, 'size'), 'h'), imageWidth: _Runtime.field(_Runtime.field(meta, 'size'), 'w'), scale: _Runtime.callValue(TexturePackerParse.metaScale__texturePackerParse, cast ([meta] : Array<Dynamic>)) }] : Array<Dynamic>));
+    animations = _Runtime.select(meta.frameTags, function():Dynamic return cast _Runtime.callValue(TexturePackerParse.animationsFromFrameTags__texturePackerParse, cast ([meta.frameTags, frameNames] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>));
+    return cast _Runtime.callValue(createSpritesheetData, cast ([{ animations: animations, frames: frames, imageFile: meta.image, imageHeight: meta.size.h, imageWidth: meta.size.w, scale: _Runtime.callValue(TexturePackerParse.metaScale__texturePackerParse, cast ([meta] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 

@@ -45,7 +45,7 @@ class WgpuVideo {
     if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null) : Bool)) { return; }
     _Runtime.callValue(flushWgpuSpriteBatch, cast ([state] : Array<Dynamic>));
     source = (cast _Runtime.field(renderProxy, 'source') : Video);
-    element = _Runtime.optionalField(_Runtime.field(_Runtime.field(source, 'data'), 'source'), 'element');
+    element = ({ final __typedStruct0 = _Runtime.field(_Runtime.field(source, 'data'), 'source'); __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.element; });
     if ((cast ((cast ((cast _Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(element, null) : Bool)) : Bool) || (cast ((cast _Runtime.field(element, 'readyState') : Float) < (cast 2.0 : Float)) : Bool)) : Bool)) { return; }
     vw = _Runtime.field(element, 'videoWidth');
     vh = _Runtime.field(element, 'videoHeight');

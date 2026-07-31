@@ -27,7 +27,7 @@ class SceneNodeAppearance {
     }
     appearanceId = _Runtime.callValue(getNodeAppearanceRevision, cast ([source] : Array<Dynamic>));
     if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'worldAlpha'), null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(runtime, 'worldAlphaUsingAppearanceId'), appearanceId) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(runtime, 'worldAlphaUsingParentAppearanceId'), parentWorldAppearanceId) : Bool)) : Bool)) {
-      _Runtime.setField(runtime, 'worldAlpha', (parentWorldAlpha * _Runtime.field(source, 'alpha')));
+      _Runtime.setField(runtime, 'worldAlpha', (parentWorldAlpha * source.alpha));
       _Runtime.setField(runtime, 'worldAlphaUsingAppearanceId', appearanceId);
       _Runtime.setField(runtime, 'worldAlphaUsingParentAppearanceId', parentWorldAppearanceId);
       (SceneNodeAppearance._worldAppearanceRevisionCounter__sceneNodeAppearance = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((SceneNodeAppearance._worldAppearanceRevisionCounter__sceneNodeAppearance + 1.0)), 0) : Dynamic));
@@ -43,7 +43,7 @@ class SceneNodeAppearance {
   }
 
   public static function setSceneNodeAlpha(source:SceneNode, alpha:Float):Void {
-    _Runtime.setField(source, 'alpha', alpha);
+    (source.alpha = cast (alpha : Dynamic));
     _Runtime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
   }
 

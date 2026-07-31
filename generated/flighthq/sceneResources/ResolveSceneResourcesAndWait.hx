@@ -14,8 +14,8 @@ class ResolveSceneResourcesAndWait {
         var promises:Array<flighthq._internal._Promise<flighthq._internal._Nothing>> = cast _Runtime.UNDEFINED;
         _Runtime.callValue(resolveSceneResources, cast ([scene, resolver, options] : Array<Dynamic>));
         promises = cast ([] : Array<Dynamic>);
-        for (entry in _Runtime.iterable(((cast _Runtime.field(resolver, 'inFlight') : flighthq._internal._Map).values()))) {
-          _Runtime.callProperty(promises, 'push', cast ([_Runtime.field(entry, 'promise')] : Array<Dynamic>));
+        for (entry in _Runtime.iterable(((cast resolver.inFlight : flighthq._internal._Map).values()))) {
+          _Runtime.callProperty(promises, 'push', cast ([entry.promise] : Array<Dynamic>));
         }
         return flighthq._internal._Async.flatMap(flighthq._internal._Async.allSettled(promises), function(__awaitValue4:Dynamic):Dynamic {
           __awaitValue4;

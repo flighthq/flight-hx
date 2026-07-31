@@ -26,11 +26,11 @@ class Statusbar {
       var i:Dynamic = (_Runtime.field(Statusbar._styleStack__statusbar, 'length') - 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
         var e:Dynamic = _Runtime.field(flighthq._internal._StaticIndex.readArray(Statusbar._styleStack__statusbar, i), 'entry');
-        if ((cast ((cast _Runtime.strictEquals(style, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(e, 'style'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (style = cast (_Runtime.field(e, 'style') : Dynamic)); }
-        if ((cast ((cast _Runtime.strictEquals(visible, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(e, 'visible'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (visible = cast (_Runtime.field(e, 'visible') : Dynamic)); }
-        if ((cast ((cast _Runtime.strictEquals(color, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(e, 'color'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (color = cast (_Runtime.field(e, 'color') : Dynamic)); }
-        if ((cast ((cast _Runtime.strictEquals(overlaysContent, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(e, 'overlaysContent'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (overlaysContent = cast (_Runtime.field(e, 'overlaysContent') : Dynamic)); }
-        if ((cast ((cast _Runtime.strictEquals(animation, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(e, 'animation'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (animation = cast (_Runtime.field(e, 'animation') : Dynamic)); }
+        if ((cast ((cast _Runtime.strictEquals(style, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(e.style, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (style = cast (e.style : Dynamic)); }
+        if ((cast ((cast _Runtime.strictEquals(visible, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(e.visible, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (visible = cast (e.visible : Dynamic)); }
+        if ((cast ((cast _Runtime.strictEquals(color, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(e.color, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (color = cast (e.color : Dynamic)); }
+        if ((cast ((cast _Runtime.strictEquals(overlaysContent, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(e.overlaysContent, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (overlaysContent = cast (e.overlaysContent : Dynamic)); }
+        if ((cast ((cast _Runtime.strictEquals(animation, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(e.animation, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (animation = cast (e.animation : Dynamic)); }
         i--;
       }
     }
@@ -76,7 +76,7 @@ class Statusbar {
     unsubscribe = _Runtime.callProperty(backend, 'subscribe', cast ([function() {
       var info:Dynamic = cast _Runtime.UNDEFINED;
       info = _Runtime.callProperty(backend, 'getInfo', cast ([Statusbar._scratchInfo__statusbar] : Array<Dynamic>));
-      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(bar, 'onChange')], [info]]), 1);
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[bar.onChange], [info]]), 1);
     }] : Array<Dynamic>));
     ((cast Statusbar._subscriptions__statusbar : flighthq._internal._WeakMap).set(bar, unsubscribe));
   }

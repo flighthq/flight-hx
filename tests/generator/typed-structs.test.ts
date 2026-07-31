@@ -24,7 +24,7 @@ const fixtureCandidate: TypedStructCandidate = {
 };
 
 describe('typed struct analysis', () => {
-  it('enables the reviewed tranche 6a slice while leaving the remaining audit and Rectangle parked', () => {
+  it('enables the reviewed tranche-six allowlist while leaving ineligible Rectangle parked', () => {
     const workspace = path.resolve('.');
     const programAndChecker = upstreamTypeScriptProgram(workspace);
     const report = typedStructRegistry(workspace, 'fixture', undefined, programAndChecker).report;
@@ -43,17 +43,17 @@ describe('typed struct analysis', () => {
     const trancheSix = report.candidates.slice(-tranche6TypedStructCandidates.length);
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 330,
+      auditOnlySchemas: 0,
       bindableAccesses: 10_257,
       candidates: 405,
-      directAccesses: 7_658,
-      directSchemas: 74,
+      directAccesses: 10_257,
+      directSchemas: 404,
       eligible: 404,
       escapes: 348,
       fields: 2_028,
       ineligible: 1,
-      pendingAccesses: 2_599,
-      reflectiveSurvivors: 172,
+      pendingAccesses: 0,
+      reflectiveSurvivors: 346,
     });
     expect(rectangle?.eligible).toBe(false);
     expect(rectangle?.reasons).toContain('presence-sensitive-use');
@@ -67,7 +67,7 @@ describe('typed struct analysis', () => {
     );
     expect(color?.eligible).toBe(true);
     expect(color?.purpose).toContain('RGBA');
-    expect(report.summary.directAccesses).toBe(7_658);
+    expect(report.summary.directAccesses).toBe(10_257);
     expect(rectangle?.emission).toEqual({
       directAccesses: 0,
       mode: 'direct',
@@ -111,11 +111,7 @@ describe('typed struct analysis', () => {
       ),
     ).toEqual({ asset: 76, host: 104, scene: 27, serialization: 143 });
     expect(trancheSix.every((candidate) => candidate.eligible && candidate.reasons.length === 0)).toBe(true);
-    expect(
-      new Set(trancheSix.filter((candidate) => candidate.emission.mode === 'direct').map((candidate) => candidate.id)),
-    ).toEqual(new Set([...tranche6aDirectTypedStructIds, ...tranche6bDirectTypedStructIds]));
-    expect(trancheSix.filter((candidate) => candidate.emission.mode === 'direct')).toHaveLength(20);
-    expect(trancheSix.filter((candidate) => candidate.emission.mode === 'audit-only')).toHaveLength(330);
+    expect(trancheSix.every((candidate) => candidate.emission.mode === 'direct')).toBe(true);
     expect(
       trancheSix
         .filter((candidate) => tranche6aDirectTypedStructIds.includes(candidate.id))
@@ -126,13 +122,22 @@ describe('typed struct analysis', () => {
         .filter((candidate) => tranche6bDirectTypedStructIds.includes(candidate.id))
         .reduce((total, candidate) => total + candidate.emission.directAccesses, 0),
     ).toBe(1_200);
+    expect(
+      trancheSix
+        .filter(
+          (candidate) =>
+            !tranche6aDirectTypedStructIds.includes(candidate.id) &&
+            !tranche6bDirectTypedStructIds.includes(candidate.id),
+        )
+        .reduce((total, candidate) => total + candidate.emission.directAccesses, 0),
+    ).toBe(2_599);
     expect(menuItemTemplate?.emission.reflectiveSurvivors).toEqual([{ accesses: 1, reason: 'dynamic-enumeration' }]);
     expect(surface?.emission.directAccesses).toBe(433);
     expect(new Set(tranche6TypedStructCandidates.map(candidateId)).size).toBe(tranche6TypedStructCandidates.length);
-    expect(scene?.emission.pendingAccesses).toBe(14);
-    expect(asset?.emission.pendingAccesses).toBe(10);
-    expect(host?.emission.pendingAccesses).toBe(50);
-    expect(serialization?.emission.pendingAccesses).toBe(25);
+    expect(scene?.emission.directAccesses).toBe(14);
+    expect(asset?.emission.directAccesses).toBe(10);
+    expect(host?.emission.directAccesses).toBe(50);
+    expect(serialization?.emission.directAccesses).toBe(25);
     expect(codec?.memberEscapes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({

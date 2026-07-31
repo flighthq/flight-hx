@@ -31,8 +31,8 @@ class Spritesheet {
 
   public static function cloneSpritesheet(spritesheet:flighthq.types.Spritesheet):flighthq.types.Spritesheet {
     var frames:Dynamic = cast _Runtime.UNDEFINED;
-    frames = _Runtime.callProperty(_Runtime.field(spritesheet, 'frames'), 'map', cast ([function(f:Dynamic) return _Runtime.callValue(createSpritesheetFrame, cast ([{ id: _Runtime.field(f, 'id'), offsetX: _Runtime.field(f, 'offsetX'), offsetY: _Runtime.field(f, 'offsetY'), pivotX: _Runtime.field(f, 'pivotX'), pivotY: _Runtime.field(f, 'pivotY'), rotated: _Runtime.field(f, 'rotated') }] : Array<Dynamic>))] : Array<Dynamic>));
-    return cast _Runtime.callValue(createEntity, cast ([{ atlas: _Runtime.field(spritesheet, 'atlas'), animations: _Runtime.mergeObjects([_Runtime.field(spritesheet, 'animations')]), frames: frames }] : Array<Dynamic>));
+    frames = _Runtime.callProperty(spritesheet.frames, 'map', cast ([function(f:Dynamic) return _Runtime.callValue(createSpritesheetFrame, cast ([{ id: f.id, offsetX: f.offsetX, offsetY: f.offsetY, pivotX: f.pivotX, pivotY: f.pivotY, rotated: f.rotated }] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ atlas: spritesheet.atlas, animations: _Runtime.mergeObjects([spritesheet.animations]), frames: frames }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -101,7 +101,7 @@ class Spritesheet {
   }
 
   public static function getSpritesheetAnimation(spritesheet:flighthq.types.Spritesheet, label:String):Null<SpritesheetAnimation> {
-    return cast _Runtime.coalesce(_Runtime.getIndex(_Runtime.field(spritesheet, 'animations'), label), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(_Runtime.getIndex(spritesheet.animations, label), function():Dynamic return cast null);
     return cast null;
   }
 

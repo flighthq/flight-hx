@@ -73,21 +73,21 @@ class UnitySerialize {
   public static function buildGradient__unitySerialize(config:ParticleEmitterConfig):UnityGradient {
     var colorKeys:Dynamic = cast _Runtime.UNDEFINED;
     var alphaKeys:Dynamic = cast _Runtime.UNDEFINED;
-    colorKeys = _Runtime.select(config.colorCurve, function():Dynamic return cast _Runtime.callProperty(_Runtime.callValue(particleColorCurveToKeyframes, cast ([config.colorCurve] : Array<Dynamic>)), 'map', cast ([function(k:Dynamic) return { time: _Runtime.field(k, 'time'), color: { r: _Runtime.field(k, 'r'), g: _Runtime.field(k, 'g'), b: _Runtime.field(k, 'b') } }] : Array<Dynamic>)), function():Dynamic return cast cast ([{ time: 0.0, color: { r: config.colorStartR, g: config.colorStartG, b: config.colorStartB } }, { time: 1.0, color: { r: config.colorEndR, g: config.colorEndG, b: config.colorEndB } }] : Array<Dynamic>));
-    alphaKeys = _Runtime.select(config.alphaCurve, function():Dynamic return cast _Runtime.callProperty(_Runtime.callValue(particleCurveToKeyframes, cast ([config.alphaCurve] : Array<Dynamic>)), 'map', cast ([function(k:Dynamic) return { time: _Runtime.field(k, 'time'), alpha: _Runtime.field(k, 'value') }] : Array<Dynamic>)), function():Dynamic return cast cast ([{ time: 0.0, alpha: config.alphaStart }, { time: 1.0, alpha: config.alphaEnd }] : Array<Dynamic>));
+    colorKeys = _Runtime.select(config.colorCurve, function():Dynamic return cast _Runtime.callProperty(_Runtime.callValue(particleColorCurveToKeyframes, cast ([config.colorCurve] : Array<Dynamic>)), 'map', cast ([function(k:Dynamic) return { time: k.time, color: { r: k.r, g: k.g, b: k.b } }] : Array<Dynamic>)), function():Dynamic return cast cast ([{ time: 0.0, color: { r: config.colorStartR, g: config.colorStartG, b: config.colorStartB } }, { time: 1.0, color: { r: config.colorEndR, g: config.colorEndG, b: config.colorEndB } }] : Array<Dynamic>));
+    alphaKeys = _Runtime.select(config.alphaCurve, function():Dynamic return cast _Runtime.callProperty(_Runtime.callValue(particleCurveToKeyframes, cast ([config.alphaCurve] : Array<Dynamic>)), 'map', cast ([function(k:Dynamic) return { time: k.time, alpha: k.value }] : Array<Dynamic>)), function():Dynamic return cast cast ([{ time: 0.0, alpha: config.alphaStart }, { time: 1.0, alpha: config.alphaEnd }] : Array<Dynamic>));
     return cast { colorKeys: colorKeys, alphaKeys: alphaKeys };
     return cast null;
   }
 
   public static function buildSizeCurve__unitySerialize(scaleCurve:Array<Float>):UnityAnimationCurve {
-    return cast { keys: _Runtime.callProperty(_Runtime.callValue(particleCurveToKeyframes, cast ([scaleCurve] : Array<Dynamic>)), 'map', cast ([function(k:Dynamic) return { time: _Runtime.field(k, 'time'), value: _Runtime.field(k, 'value') }] : Array<Dynamic>)) };
+    return cast { keys: _Runtime.callProperty(_Runtime.callValue(particleCurveToKeyframes, cast ([scaleCurve] : Array<Dynamic>)), 'map', cast ([function(k:Dynamic) return { time: k.time, value: k.value }] : Array<Dynamic>)) };
     return cast null;
   }
 
   public static function serializeUnityParticle(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:UnitySerializeOptions):String {
     var ppu:Dynamic = cast _Runtime.UNDEFINED;
     var doc:Dynamic = cast _Runtime.UNDEFINED;
-    ppu = _Runtime.coalesce(_Runtime.optionalField(options, 'pixelsPerUnit'), function():Dynamic return cast UnitySerialize.DEFAULT_PPU__unitySerialize);
+    ppu = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.pixelsPerUnit; }), function():Dynamic return cast UnitySerialize.DEFAULT_PPU__unitySerialize);
     doc = _Runtime.callValue(UnitySerialize.configToDocument__unitySerialize, cast ([config, _Runtime.coalesce(existing, function():Dynamic return cast {  }), ppu] : Array<Dynamic>));
     return cast _Runtime.jsonStringify(doc, null, 2.0);
     return cast null;

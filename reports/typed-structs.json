@@ -4603,9 +4603,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 7,
+        "directAccesses": 7,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -4669,9 +4669,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -4703,9 +4703,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 3,
+        "directAccesses": 3,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -4745,9 +4745,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 4,
+        "directAccesses": 4,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -4795,9 +4795,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -4829,9 +4829,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 5,
+        "directAccesses": 5,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -4879,9 +4879,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 22,
+        "directAccesses": 22,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -4945,9 +4945,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 3,
+        "directAccesses": 3,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -4996,7 +4996,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -5037,9 +5037,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 4,
+        "directAccesses": 4,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -5079,9 +5079,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 8,
+        "directAccesses": 8,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -5121,9 +5121,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 4,
+        "directAccesses": 4,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -5527,9 +5527,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 23,
+        "directAccesses": 23,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -5569,9 +5569,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 32,
+        "directAccesses": 32,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -5619,9 +5619,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 53,
+        "directAccesses": 53,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -5661,9 +5661,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 14,
+        "directAccesses": 14,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -5727,9 +5727,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 14,
+        "directAccesses": 14,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -5784,7 +5784,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -5817,9 +5817,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 6,
+        "directAccesses": 6,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -5859,10 +5859,15 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 11,
-        "reflectiveSurvivors": []
+        "directAccesses": 11,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 4,
+            "reason": "unknown-member"
+          }
+        ]
       },
       "escapes": [
         {
@@ -5954,10 +5959,15 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
-        "reflectiveSurvivors": []
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 8,
+            "reason": "incompatible-union"
+          }
+        ]
       },
       "escapes": [
         {
@@ -6069,10 +6079,15 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
-        "reflectiveSurvivors": []
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 8,
+            "reason": "incompatible-union"
+          }
+        ]
       },
       "escapes": [
         {
@@ -6192,9 +6207,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 40,
+        "directAccesses": 40,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -6234,9 +6249,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 30,
+        "directAccesses": 30,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -6292,9 +6307,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 16,
+        "directAccesses": 16,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -6342,9 +6357,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 10,
+        "directAccesses": 10,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -6400,9 +6415,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 19,
+        "directAccesses": 19,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -6458,9 +6473,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -6492,9 +6507,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 9,
+        "directAccesses": 9,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -6526,9 +6541,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 25,
+        "directAccesses": 25,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -6585,7 +6600,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -6627,9 +6642,14 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
-        "reflectiveSurvivors": []
+        "reflectiveSurvivors": [
+          {
+            "accesses": 4,
+            "reason": "receiver-sensitive-method"
+          }
+        ]
       },
       "escapes": [
         {
@@ -6708,10 +6728,15 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 6,
-        "reflectiveSurvivors": []
+        "directAccesses": 6,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 1,
+            "reason": "incompatible-union"
+          }
+        ]
       },
       "escapes": [
         {
@@ -6798,9 +6823,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 16,
+        "directAccesses": 16,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -6856,9 +6881,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 6,
+        "directAccesses": 6,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -6898,9 +6923,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 3,
+        "directAccesses": 3,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -6940,9 +6965,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 40,
+        "directAccesses": 40,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -7030,9 +7055,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 17,
+        "directAccesses": 17,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -7064,9 +7089,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 3,
+        "directAccesses": 3,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -7106,9 +7131,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 12,
+        "directAccesses": 12,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -7172,9 +7197,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 9,
+        "directAccesses": 9,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -7238,9 +7263,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 9,
+        "directAccesses": 9,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -7336,9 +7361,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 3,
+        "directAccesses": 3,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -7386,9 +7411,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -7420,10 +7445,15 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 17,
-        "reflectiveSurvivors": []
+        "directAccesses": 17,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 1,
+            "reason": "incompatible-union"
+          }
+        ]
       },
       "escapes": [
         {
@@ -7510,9 +7540,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 28,
+        "directAccesses": 28,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -7566,10 +7596,15 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 3,
-        "reflectiveSurvivors": []
+        "directAccesses": 3,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 1,
+            "reason": "incompatible-union"
+          }
+        ]
       },
       "escapes": [
         {
@@ -7617,7 +7652,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -7657,7 +7692,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -7698,9 +7733,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 9,
+        "directAccesses": 9,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -7740,9 +7775,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 6,
+        "directAccesses": 6,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -7920,9 +7955,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 6,
+        "directAccesses": 6,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -7970,9 +8005,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 39,
+        "directAccesses": 39,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -8060,9 +8095,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 17,
+        "directAccesses": 17,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -8135,9 +8170,14 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
-        "reflectiveSurvivors": []
+        "reflectiveSurvivors": [
+          {
+            "accesses": 5,
+            "reason": "receiver-sensitive-method"
+          }
+        ]
       },
       "escapes": [
         {
@@ -8249,9 +8289,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -8467,9 +8507,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 4,
+        "directAccesses": 4,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -8510,7 +8550,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -8559,9 +8599,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 22,
+        "directAccesses": 22,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -8617,9 +8657,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 11,
+        "directAccesses": 11,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -8659,9 +8699,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 54,
+        "directAccesses": 54,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -8941,9 +8981,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 6,
+        "directAccesses": 6,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -9727,9 +9767,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 6,
+        "directAccesses": 6,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -9907,9 +9947,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 36,
+        "directAccesses": 36,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -10013,9 +10053,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 4,
+        "directAccesses": 4,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -10063,10 +10103,15 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 10,
-        "reflectiveSurvivors": []
+        "directAccesses": 10,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 1,
+            "reason": "incompatible-union"
+          }
+        ]
       },
       "escapes": [
         {
@@ -10153,10 +10198,15 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 9,
-        "reflectiveSurvivors": []
+        "directAccesses": 9,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 1,
+            "reason": "incompatible-union"
+          }
+        ]
       },
       "escapes": [
         {
@@ -10251,9 +10301,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 20,
+        "directAccesses": 20,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -10325,9 +10375,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 8,
+        "directAccesses": 8,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -10383,9 +10433,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 12,
+        "directAccesses": 12,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -10489,9 +10539,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -10531,9 +10581,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 11,
+        "directAccesses": 11,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -10629,9 +10679,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 3,
+        "directAccesses": 3,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -10703,9 +10753,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 51,
+        "directAccesses": 51,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -10783,10 +10833,15 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 22,
-        "reflectiveSurvivors": []
+        "directAccesses": 22,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 1,
+            "reason": "incompatible-union"
+          }
+        ]
       },
       "escapes": [
         {
@@ -10881,9 +10936,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 8,
+        "directAccesses": 8,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -10937,9 +10992,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 20,
+        "directAccesses": 20,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -11025,9 +11080,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 38,
+        "directAccesses": 38,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -11115,9 +11170,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 33,
+        "directAccesses": 33,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -11189,9 +11244,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 12,
+        "directAccesses": 12,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -11484,7 +11539,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -11925,9 +11980,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 10,
+        "directAccesses": 10,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -11975,9 +12030,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 14,
+        "directAccesses": 14,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -12063,10 +12118,15 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 4,
-        "reflectiveSurvivors": []
+        "directAccesses": 4,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 1,
+            "reason": "incompatible-union"
+          }
+        ]
       },
       "escapes": [
         {
@@ -12121,9 +12181,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 44,
+        "directAccesses": 44,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -12211,9 +12271,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 33,
+        "directAccesses": 33,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -12245,9 +12305,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 3,
+        "directAccesses": 3,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -12287,9 +12347,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 37,
+        "directAccesses": 37,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -12375,10 +12435,15 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 9,
-        "reflectiveSurvivors": []
+        "directAccesses": 9,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 1,
+            "reason": "incompatible-union"
+          }
+        ]
       },
       "escapes": [
         {
@@ -12489,10 +12554,15 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 3,
-        "reflectiveSurvivors": []
+        "directAccesses": 3,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 1,
+            "reason": "incompatible-union"
+          }
+        ]
       },
       "escapes": [
         {
@@ -12555,9 +12625,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 7,
+        "directAccesses": 7,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -12630,7 +12700,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -12687,9 +12757,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 5,
+        "directAccesses": 5,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -12745,9 +12815,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 57,
+        "directAccesses": 57,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -13189,9 +13259,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 24,
+        "directAccesses": 24,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -13418,7 +13488,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -13459,9 +13529,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 5,
+        "directAccesses": 5,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -13501,9 +13571,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -13535,9 +13605,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 5,
+        "directAccesses": 5,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -13601,9 +13671,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 8,
+        "directAccesses": 8,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -13643,9 +13713,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 4,
+        "directAccesses": 4,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -13693,9 +13763,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 50,
+        "directAccesses": 50,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -13783,9 +13853,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 50,
+        "directAccesses": 50,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -14009,9 +14079,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 16,
+        "directAccesses": 16,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -14067,9 +14137,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 12,
+        "directAccesses": 12,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -14117,10 +14187,15 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 28,
-        "reflectiveSurvivors": []
+        "directAccesses": 28,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 3,
+            "reason": "dynamic-enumeration"
+          }
+        ]
       },
       "escapes": [
         {
@@ -14243,7 +14318,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -14292,9 +14367,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 7,
+        "directAccesses": 7,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -14350,9 +14425,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 19,
+        "directAccesses": 19,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -14432,9 +14507,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 6,
+        "directAccesses": 6,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -14498,9 +14573,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 13,
+        "directAccesses": 13,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -14572,9 +14647,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -14623,7 +14698,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -14673,7 +14748,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -14739,7 +14814,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -14780,9 +14855,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -14815,7 +14890,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -14857,7 +14932,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -14955,7 +15030,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -14996,9 +15071,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 3,
+        "directAccesses": 3,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -15047,7 +15122,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -15104,9 +15179,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -15138,9 +15213,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -15203,7 +15278,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -15236,9 +15311,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 3,
+        "directAccesses": 3,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -15278,9 +15353,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 8,
+        "directAccesses": 8,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -15441,7 +15516,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -15499,7 +15574,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -15548,9 +15623,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 4,
+        "directAccesses": 4,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -15607,7 +15682,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -15758,9 +15833,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 5,
+        "directAccesses": 5,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -15816,9 +15891,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 5,
+        "directAccesses": 5,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -15867,7 +15942,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -15949,7 +16024,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -15990,10 +16065,15 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 52,
-        "reflectiveSurvivors": []
+        "directAccesses": 52,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 4,
+            "reason": "dynamic-enumeration"
+          }
+        ]
       },
       "escapes": [
         {
@@ -16169,10 +16249,15 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 7,
-        "reflectiveSurvivors": []
+        "directAccesses": 7,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 2,
+            "reason": "dynamic-enumeration"
+          }
+        ]
       },
       "escapes": [
         {
@@ -16225,7 +16310,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -16275,7 +16360,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -16316,9 +16401,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 37,
+        "directAccesses": 37,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -16454,9 +16539,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 37,
+        "directAccesses": 37,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -16560,9 +16645,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 21,
+        "directAccesses": 21,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -16651,7 +16736,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -16717,7 +16802,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -16774,9 +16859,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -17070,9 +17155,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 4,
+        "directAccesses": 4,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -17121,7 +17206,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -17178,9 +17263,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 10,
+        "directAccesses": 10,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -17244,9 +17329,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 3,
+        "directAccesses": 3,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -17294,9 +17379,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 3,
+        "directAccesses": 3,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -17352,9 +17437,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 38,
+        "directAccesses": 38,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -17426,9 +17511,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 49,
+        "directAccesses": 49,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -17517,7 +17602,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -17583,7 +17668,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -17656,9 +17741,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 32,
+        "directAccesses": 32,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -17738,9 +17823,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 5,
+        "directAccesses": 5,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -17813,7 +17898,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -17862,9 +17947,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 8,
+        "directAccesses": 8,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -17896,9 +17981,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 11,
+        "directAccesses": 11,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -18010,9 +18095,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 26,
+        "directAccesses": 26,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -18068,9 +18153,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -18111,7 +18196,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -18160,9 +18245,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -18195,7 +18280,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -18229,7 +18314,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -18270,9 +18355,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 7,
+        "directAccesses": 7,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -18353,7 +18438,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -18386,9 +18471,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -18420,9 +18505,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -18454,9 +18539,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 10,
+        "directAccesses": 10,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -18521,7 +18606,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -18570,10 +18655,15 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 4,
-        "reflectiveSurvivors": []
+        "directAccesses": 4,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 1,
+            "reason": "receiver-sensitive-method"
+          }
+        ]
       },
       "escapes": [
         {
@@ -18626,9 +18716,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 6,
+        "directAccesses": 6,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -18661,7 +18751,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -18702,9 +18792,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -18737,7 +18827,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -18811,7 +18901,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -18916,9 +19006,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 15,
+        "directAccesses": 15,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -18950,9 +19040,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 12,
+        "directAccesses": 12,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -19008,9 +19098,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 10,
+        "directAccesses": 10,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -19114,9 +19204,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -19213,7 +19303,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -19278,10 +19368,15 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
-        "reflectiveSurvivors": []
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 1,
+            "reason": "dynamic-enumeration"
+          }
+        ]
       },
       "escapes": [
         {
@@ -19336,7 +19431,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -19378,7 +19473,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -19420,9 +19515,14 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
-        "reflectiveSurvivors": []
+        "reflectiveSurvivors": [
+          {
+            "accesses": 7,
+            "reason": "dynamic-enumeration"
+          }
+        ]
       },
       "escapes": [
         {
@@ -19520,10 +19620,15 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
-        "reflectiveSurvivors": []
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 3,
+            "reason": "dynamic-enumeration"
+          }
+        ]
       },
       "escapes": [
         {
@@ -19598,7 +19703,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -19656,7 +19761,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -19706,9 +19811,14 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
-        "reflectiveSurvivors": []
+        "reflectiveSurvivors": [
+          {
+            "accesses": 1,
+            "reason": "computed-key"
+          }
+        ]
       },
       "escapes": [
         {
@@ -19800,9 +19910,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 12,
+        "directAccesses": 12,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -19898,9 +20008,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 3,
+        "directAccesses": 3,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -19948,9 +20058,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 5,
+        "directAccesses": 5,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -19990,9 +20100,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 9,
+        "directAccesses": 9,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -20065,9 +20175,14 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
-        "reflectiveSurvivors": []
+        "reflectiveSurvivors": [
+          {
+            "accesses": 2,
+            "reason": "receiver-sensitive-method"
+          }
+        ]
       },
       "escapes": [
         {
@@ -20158,9 +20273,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -20192,9 +20307,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -20243,7 +20358,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -20518,10 +20633,19 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 19,
-        "reflectiveSurvivors": []
+        "directAccesses": 19,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 9,
+            "reason": "dynamic-enumeration"
+          },
+          {
+            "accesses": 18,
+            "reason": "unknown-member"
+          }
+        ]
       },
       "escapes": [
         {
@@ -20781,9 +20905,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -20816,7 +20940,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -20858,7 +20982,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -20907,9 +21031,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -20941,9 +21065,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -20991,9 +21115,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 46,
+        "directAccesses": 46,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -21385,9 +21509,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -21419,9 +21543,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -21462,7 +21586,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -21504,7 +21628,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -21545,9 +21669,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -21596,7 +21720,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -21638,7 +21762,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -21856,7 +21980,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -21898,7 +22022,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -21939,9 +22063,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -21973,9 +22097,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -22024,7 +22148,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -22073,9 +22197,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 30,
+        "directAccesses": 30,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -22461,9 +22585,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -22495,9 +22619,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -22529,9 +22653,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -22580,7 +22704,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -22614,7 +22738,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -22671,10 +22795,15 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 12,
-        "reflectiveSurvivors": []
+        "directAccesses": 12,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 1,
+            "reason": "dynamic-enumeration"
+          }
+        ]
       },
       "escapes": [
         {
@@ -22736,9 +22865,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -22795,7 +22924,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -22837,7 +22966,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -22879,7 +23008,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -22921,7 +23050,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -22963,7 +23092,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -23005,7 +23134,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -23063,7 +23192,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -23225,7 +23354,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -23267,7 +23396,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -23333,7 +23462,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -23390,9 +23519,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -23424,9 +23553,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 18,
+        "directAccesses": 18,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -23506,9 +23635,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 7,
+        "directAccesses": 7,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -23556,9 +23685,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 3,
+        "directAccesses": 3,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -23606,9 +23735,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 6,
+        "directAccesses": 6,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -23648,9 +23777,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 4,
+        "directAccesses": 4,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -23698,9 +23827,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -23740,9 +23869,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 13,
+        "directAccesses": 13,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -23798,9 +23927,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 25,
+        "directAccesses": 25,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -23952,9 +24081,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 11,
+        "directAccesses": 11,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -24002,9 +24131,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -24044,9 +24173,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 12,
+        "directAccesses": 12,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -24142,9 +24271,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 4,
+        "directAccesses": 4,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -24192,9 +24321,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 6,
+        "directAccesses": 6,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -24242,9 +24371,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 15,
+        "directAccesses": 15,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -24332,9 +24461,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -24390,9 +24519,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -24448,9 +24577,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 5,
+        "directAccesses": 5,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -24514,9 +24643,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 19,
+        "directAccesses": 19,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -24580,9 +24709,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 9,
+        "directAccesses": 9,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -24638,9 +24767,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -24680,9 +24809,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 6,
+        "directAccesses": 6,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -24738,9 +24867,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 4,
+        "directAccesses": 4,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -24780,9 +24909,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -24830,9 +24959,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 5,
+        "directAccesses": 5,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -24888,9 +25017,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 26,
+        "directAccesses": 26,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -24986,9 +25115,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 9,
+        "directAccesses": 9,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -25044,9 +25173,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 4,
+        "directAccesses": 4,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -25102,9 +25231,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 18,
+        "directAccesses": 18,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -25168,9 +25297,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 19,
+        "directAccesses": 19,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -25282,9 +25411,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -25316,9 +25445,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 5,
+        "directAccesses": 5,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -25358,9 +25487,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 8,
+        "directAccesses": 8,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -25424,9 +25553,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 14,
+        "directAccesses": 14,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -25491,7 +25620,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -25524,9 +25653,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -25558,9 +25687,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -25593,7 +25722,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -25634,10 +25763,15 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
-        "reflectiveSurvivors": []
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 3,
+            "reason": "incompatible-union"
+          }
+        ]
       },
       "escapes": [
         {
@@ -25698,9 +25832,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -25780,10 +25914,15 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
-        "reflectiveSurvivors": []
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 1,
+            "reason": "dynamic-enumeration"
+          }
+        ]
       },
       "escapes": [
         {
@@ -25861,9 +26000,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 6,
+        "directAccesses": 6,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -25928,9 +26067,14 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
-        "reflectiveSurvivors": []
+        "reflectiveSurvivors": [
+          {
+            "accesses": 3,
+            "reason": "incompatible-union"
+          }
+        ]
       },
       "escapes": [
         {
@@ -25992,7 +26136,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -26066,7 +26210,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -26115,9 +26259,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 9,
+        "directAccesses": 9,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -26214,7 +26358,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -26271,9 +26415,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -26313,9 +26457,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -26348,7 +26492,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -26389,9 +26533,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 7,
+        "directAccesses": 7,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -26431,9 +26575,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 12,
+        "directAccesses": 12,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -26513,9 +26657,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 7,
+        "directAccesses": 7,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -26563,9 +26707,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -26598,7 +26742,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -26632,7 +26776,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -26714,7 +26858,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -26803,9 +26947,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -26853,9 +26997,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -26888,7 +27032,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -26929,9 +27073,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 3,
+        "directAccesses": 3,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -26971,9 +27115,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 32,
+        "directAccesses": 32,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -27094,7 +27238,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -27135,9 +27279,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -27178,7 +27322,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -27259,9 +27403,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 4,
+        "directAccesses": 4,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -27318,7 +27462,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -27360,9 +27504,14 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
-        "reflectiveSurvivors": []
+        "reflectiveSurvivors": [
+          {
+            "accesses": 1,
+            "reason": "dynamic-enumeration"
+          }
+        ]
       },
       "escapes": [
         {
@@ -27440,9 +27589,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 8,
+        "directAccesses": 8,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -27523,7 +27672,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -27565,7 +27714,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -27622,9 +27771,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -27664,9 +27813,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -27698,9 +27847,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 28,
+        "directAccesses": 28,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -27741,9 +27890,14 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
-        "reflectiveSurvivors": []
+        "reflectiveSurvivors": [
+          {
+            "accesses": 3,
+            "reason": "incompatible-union"
+          }
+        ]
       },
       "escapes": [
         {
@@ -27804,10 +27958,15 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
-        "reflectiveSurvivors": []
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 12,
+            "reason": "incompatible-union"
+          }
+        ]
       },
       "escapes": [
         {
@@ -27972,9 +28131,14 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
-        "reflectiveSurvivors": []
+        "reflectiveSurvivors": [
+          {
+            "accesses": 12,
+            "reason": "incompatible-union"
+          }
+        ]
       },
       "escapes": [
         {
@@ -28131,7 +28295,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -28197,9 +28361,14 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
-        "reflectiveSurvivors": []
+        "reflectiveSurvivors": [
+          {
+            "accesses": 3,
+            "reason": "incompatible-union"
+          }
+        ]
       },
       "escapes": [
         {
@@ -28261,7 +28430,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -28335,7 +28504,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -28416,9 +28585,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 6,
+        "directAccesses": 6,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -28474,9 +28643,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -28516,9 +28685,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -28551,9 +28720,14 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
-        "reflectiveSurvivors": []
+        "reflectiveSurvivors": [
+          {
+            "accesses": 3,
+            "reason": "incompatible-union"
+          }
+        ]
       },
       "escapes": [
         {
@@ -28614,10 +28788,15 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
-        "reflectiveSurvivors": []
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 20,
+            "reason": "incompatible-union"
+          }
+        ]
       },
       "escapes": [
         {
@@ -28838,7 +29017,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -28896,9 +29075,14 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
-        "reflectiveSurvivors": []
+        "reflectiveSurvivors": [
+          {
+            "accesses": 3,
+            "reason": "incompatible-union"
+          }
+        ]
       },
       "escapes": [
         {
@@ -28960,9 +29144,14 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
-        "reflectiveSurvivors": []
+        "reflectiveSurvivors": [
+          {
+            "accesses": 20,
+            "reason": "incompatible-union"
+          }
+        ]
       },
       "escapes": [
         {
@@ -29175,7 +29364,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -29256,9 +29445,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -29298,9 +29487,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 8,
+        "directAccesses": 8,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -29356,9 +29545,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -29399,7 +29588,7 @@
       "eligible": true,
       "emission": {
         "directAccesses": 0,
-        "mode": "audit-only",
+        "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
@@ -29440,9 +29629,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -29474,9 +29663,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 41,
+        "directAccesses": 41,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -29525,17 +29714,17 @@
   ],
   "schemaVersion": 3,
   "summary": {
-    "auditOnlySchemas": 330,
+    "auditOnlySchemas": 0,
     "bindableAccesses": 10257,
     "candidates": 405,
-    "directAccesses": 7658,
-    "directSchemas": 74,
+    "directAccesses": 10257,
+    "directSchemas": 404,
     "eligible": 404,
     "escapes": 348,
     "fields": 2028,
     "ineligible": 1,
-    "pendingAccesses": 2599,
-    "reflectiveSurvivors": 172
+    "pendingAccesses": 0,
+    "reflectiveSurvivors": 346
   },
   "upstreamCommit": "5d24729f7360475e28a105ae0caeeaa2e1328260"
 }

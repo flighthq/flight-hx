@@ -9,17 +9,17 @@ import flighthq.types.Sampler.SamplerLike;
 
 class Sampler {
   public static function cloneSampler(source:SamplerLike):flighthq.types.Sampler {
-    return cast _Runtime.callValue(createEntity, cast ([{ anisotropy: _Runtime.field(source, 'anisotropy'), magFilter: _Runtime.field(source, 'magFilter'), minFilter: _Runtime.field(source, 'minFilter'), mipmaps: _Runtime.field(source, 'mipmaps'), wrapU: _Runtime.field(source, 'wrapU'), wrapV: _Runtime.field(source, 'wrapV') }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ anisotropy: source.anisotropy, magFilter: source.magFilter, minFilter: source.minFilter, mipmaps: source.mipmaps, wrapU: source.wrapU, wrapV: source.wrapV }] : Array<Dynamic>));
     return cast null;
   }
 
   public static function copySampler(out:SamplerLike, source:SamplerLike):Void {
-    _Runtime.setField(out, 'anisotropy', _Runtime.field(source, 'anisotropy'));
-    _Runtime.setField(out, 'magFilter', _Runtime.field(source, 'magFilter'));
-    _Runtime.setField(out, 'minFilter', _Runtime.field(source, 'minFilter'));
-    _Runtime.setField(out, 'mipmaps', _Runtime.field(source, 'mipmaps'));
-    _Runtime.setField(out, 'wrapU', _Runtime.field(source, 'wrapU'));
-    _Runtime.setField(out, 'wrapV', _Runtime.field(source, 'wrapV'));
+    (out.anisotropy = cast (source.anisotropy : Dynamic));
+    (out.magFilter = cast (source.magFilter : Dynamic));
+    (out.minFilter = cast (source.minFilter : Dynamic));
+    (out.mipmaps = cast (source.mipmaps : Dynamic));
+    (out.wrapU = cast (source.wrapU : Dynamic));
+    (out.wrapV = cast (source.wrapV : Dynamic));
   }
 
   public static function createAnisotropicSampler(level:Float):flighthq.types.Sampler {
@@ -49,7 +49,7 @@ class Sampler {
 
   public static function equalsSampler(a:Null<SamplerLike>, b:Null<SamplerLike>):Bool {
     if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
-    return cast _Runtime.orValue(_Runtime.strictEquals(a, b), function():Dynamic return cast _Runtime.andValue(((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(a, 'anisotropy'), _Runtime.field(b, 'anisotropy')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'magFilter'), _Runtime.field(b, 'magFilter')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'minFilter'), _Runtime.field(b, 'minFilter')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'mipmaps'), _Runtime.field(b, 'mipmaps')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'wrapU'), _Runtime.field(b, 'wrapU')) : Bool)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'wrapV'), _Runtime.field(b, 'wrapV'))));
+    return cast _Runtime.orValue(_Runtime.strictEquals(a, b), function():Dynamic return cast _Runtime.andValue(((cast ((cast ((cast ((cast _Runtime.strictEquals(a.anisotropy, b.anisotropy) : Bool) && (cast _Runtime.strictEquals(a.magFilter, b.magFilter) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.minFilter, b.minFilter) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.mipmaps, b.mipmaps) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.wrapU, b.wrapU) : Bool)), function():Dynamic return cast _Runtime.strictEquals(a.wrapV, b.wrapV)));
     return cast null;
   }
 }

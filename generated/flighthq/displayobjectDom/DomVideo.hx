@@ -30,7 +30,7 @@ class DomVideo {
     data = (cast _Runtime.field(renderProxy, 'rendererData') : Null<DomVideoData__domVideo>);
     if ((cast _Runtime.strictEquals(data, null) : Bool)) { return; }
     source = (cast _Runtime.field(renderProxy, 'source') : Video);
-    element = _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(_Runtime.field(source, 'data'), 'source'), 'element'), function():Dynamic return cast null);
+    element = _Runtime.coalesce(({ final __typedStruct0 = _Runtime.field(_Runtime.field(source, 'data'), 'source'); __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.element; }), function():Dynamic return cast null);
     if ((cast ((cast ((cast _Runtime.strictEquals(element, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(element, 'videoWidth'), 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(element, 'videoHeight'), 0.0) : Bool)) : Bool)) { return; }
     if ((cast !_Runtime.strictEquals(_Runtime.field(data, 'element'), element) : Bool)) {
       _Runtime.setField(data, 'element', element);

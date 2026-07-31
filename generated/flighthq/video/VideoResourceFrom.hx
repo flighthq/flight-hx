@@ -82,7 +82,7 @@ class VideoResourceFrom {
     var selected:Dynamic = cast _Runtime.UNDEFINED;
     selected = _Runtime.callValue(selectVideoResourceUrl, cast ([sources] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(selected, null) : Bool)) { return cast flighthq._internal._Async.resolve(_Runtime.callValue(createVideoResource, cast ([] : Array<Dynamic>))); }
-    return cast _Runtime.callValue(loadVideoResourceFromUrl, cast ([_Runtime.field(selected, 'url'), options, signal] : Array<Dynamic>));
+    return cast _Runtime.callValue(loadVideoResourceFromUrl, cast ([selected.url, options, signal] : Array<Dynamic>));
     return cast null;
   }
 

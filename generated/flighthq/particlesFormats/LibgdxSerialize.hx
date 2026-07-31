@@ -14,7 +14,7 @@ class LibgdxSerialize {
   public static function serializeLibgdxParticle(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:LibgdxSerializeOptions):String {
     var textureSize:Dynamic = cast _Runtime.UNDEFINED;
     var doc:Dynamic = cast _Runtime.UNDEFINED;
-    textureSize = _Runtime.coalesce(_Runtime.optionalField(options, 'textureSize'), function():Dynamic return cast 1.0);
+    textureSize = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.textureSize; }), function():Dynamic return cast 1.0);
     doc = _Runtime.callValue(LibgdxSerialize.configToDocument__libgdxSerialize, cast ([config, _Runtime.coalesce(existing, function():Dynamic return cast {  }), textureSize] : Array<Dynamic>));
     return cast _Runtime.callValue(LibgdxSerialize.documentToText__libgdxSerialize, cast ([doc] : Array<Dynamic>));
     return cast null;
@@ -171,15 +171,15 @@ class LibgdxSerialize {
     var lines:Dynamic = cast _Runtime.UNDEFINED;
     lines = cast ([section] : Array<Dynamic>);
     if ((cast !_Runtime.strictEquals(active, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(lines, 'push', cast (['active: ' + Std.string(active) + ''] : Array<Dynamic>)); }
-    _Runtime.callProperty(lines, 'push', cast (['lowMin: ' + Std.string(_Runtime.field(r, 'lowMin')) + ''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', cast (['lowMax: ' + Std.string(_Runtime.field(r, 'lowMax')) + ''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', cast (['highMin: ' + Std.string(_Runtime.field(r, 'highMin')) + ''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', cast (['highMax: ' + Std.string(_Runtime.field(r, 'highMax')) + ''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', cast (['relative: ' + Std.string(_Runtime.field(r, 'relative')) + ''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', cast (['scalingCount: ' + Std.string(_Runtime.field(_Runtime.field(r, 'scaling'), 'length')) + ''] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.field(r, 'scaling'), 'forEach', cast ([function(v:Dynamic, i:Dynamic) return _Runtime.callProperty(lines, 'push', cast (['scaling' + Std.string(i) + ': ' + Std.string(v) + ''] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', cast (['timelineCount: ' + Std.string(_Runtime.field(_Runtime.field(r, 'timeline'), 'length')) + ''] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.field(r, 'timeline'), 'forEach', cast ([function(v:Dynamic, i:Dynamic) return _Runtime.callProperty(lines, 'push', cast (['timeline' + Std.string(i) + ': ' + Std.string(v) + ''] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callProperty(lines, 'push', cast (['lowMin: ' + Std.string(r.lowMin) + ''] : Array<Dynamic>));
+    _Runtime.callProperty(lines, 'push', cast (['lowMax: ' + Std.string(r.lowMax) + ''] : Array<Dynamic>));
+    _Runtime.callProperty(lines, 'push', cast (['highMin: ' + Std.string(r.highMin) + ''] : Array<Dynamic>));
+    _Runtime.callProperty(lines, 'push', cast (['highMax: ' + Std.string(r.highMax) + ''] : Array<Dynamic>));
+    _Runtime.callProperty(lines, 'push', cast (['relative: ' + Std.string(r.relative) + ''] : Array<Dynamic>));
+    _Runtime.callProperty(lines, 'push', cast (['scalingCount: ' + Std.string(_Runtime.field(r.scaling, 'length')) + ''] : Array<Dynamic>));
+    _Runtime.callProperty(r.scaling, 'forEach', cast ([function(v:Dynamic, i:Dynamic) return _Runtime.callProperty(lines, 'push', cast (['scaling' + Std.string(i) + ': ' + Std.string(v) + ''] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callProperty(lines, 'push', cast (['timelineCount: ' + Std.string(_Runtime.field(r.timeline, 'length')) + ''] : Array<Dynamic>));
+    _Runtime.callProperty(r.timeline, 'forEach', cast ([function(v:Dynamic, i:Dynamic) return _Runtime.callProperty(lines, 'push', cast (['timeline' + Std.string(i) + ': ' + Std.string(v) + ''] : Array<Dynamic>))] : Array<Dynamic>));
     return cast lines;
     return cast null;
   }

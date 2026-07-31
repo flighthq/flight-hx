@@ -27,10 +27,10 @@ class BitmapFontFnt {
     metrics = _Runtime.callValue(getBitmapFontMetrics, cast ([font] : Array<Dynamic>));
     lineHeight = ((metrics.ascent + metrics.descent) + metrics.lineGap);
     base = metrics.ascent;
-    primaryImage = _Runtime.coalesce(({ final __typedStruct0 = flighthq._internal._StaticIndex.readArray(_Runtime.field(font, 'pages'), 0.0); __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.image; }), function():Dynamic return cast null);
+    primaryImage = _Runtime.coalesce(({ final __typedStruct0 = flighthq._internal._StaticIndex.readArray(font.pages, 0.0); __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.image; }), function():Dynamic return cast null);
     scaleW = ((cast !_Runtime.strictEquals(primaryImage, null) : Bool) ? (cast primaryImage.width : Dynamic) : (cast 0.0 : Dynamic));
     scaleH = ((cast !_Runtime.strictEquals(primaryImage, null) : Bool) ? (cast primaryImage.height : Dynamic) : (cast 0.0 : Dynamic));
-    pageCount = HxMath.max(_Runtime.field(_Runtime.field(font, 'pages'), 'length'), 1.0);
+    pageCount = HxMath.max(_Runtime.field(font.pages, 'length'), 1.0);
     lines = cast ([] : Array<Dynamic>);
     _Runtime.callProperty(lines, 'push', cast (['info face="" size=' + Std.string(lineHeight) + ' bold=0 italic=0 charset="" unicode=1 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=0,0 outline=0'] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['common lineHeight=' + Std.string(lineHeight) + ' base=' + Std.string(base) + ' scaleW=' + Std.string(scaleW) + ' scaleH=' + Std.string(scaleH) + ' pages=' + Std.string(pageCount) + ' packed=0 alphaChnl=1 redChnl=0 greenChnl=0 blueChnl=0'] : Array<Dynamic>));
@@ -41,16 +41,16 @@ class BitmapFontFnt {
         id++;
       }
     }
-    codepoints = _Runtime.concatArrays([_Runtime.toArray(((cast _Runtime.field(font, 'glyphs') : flighthq._internal._Map).keys()))]);
+    codepoints = _Runtime.concatArrays([_Runtime.toArray(((cast font.glyphs : flighthq._internal._Map).keys()))]);
     _Runtime.callProperty(lines, 'push', cast (['chars count=' + Std.string(_Runtime.field(codepoints, 'length')) + ''] : Array<Dynamic>));
     for (codepoint in _Runtime.iterable(codepoints)) {
-      var glyph:Dynamic = (cast ((cast _Runtime.field(font, 'glyphs') : flighthq._internal._Map).get(codepoint)) : GlyphEntry);
-      _Runtime.callProperty(lines, 'push', cast ([('char id=' + Std.string(codepoint) + ' x=' + Std.string(_Runtime.field(glyph, 'x')) + ' y=' + Std.string(_Runtime.field(glyph, 'y')) + ' width=' + Std.string(_Runtime.field(glyph, 'width')) + ' height=' + Std.string(_Runtime.field(glyph, 'height')) + ' ' + 'xoffset=' + Std.string(_Runtime.field(glyph, 'bearingX')) + ' yoffset=' + Std.string((base - _Runtime.field(glyph, 'bearingY'))) + ' xadvance=' + Std.string(_Runtime.field(glyph, 'advance')) + ' page=' + Std.string(_Runtime.field(glyph, 'page')) + ' chnl=15')] : Array<Dynamic>));
+      var glyph:Dynamic = (cast ((cast font.glyphs : flighthq._internal._Map).get(codepoint)) : GlyphEntry);
+      _Runtime.callProperty(lines, 'push', cast ([('char id=' + Std.string(codepoint) + ' x=' + Std.string(glyph.x) + ' y=' + Std.string(glyph.y) + ' width=' + Std.string(glyph.width) + ' height=' + Std.string(glyph.height) + ' ' + 'xoffset=' + Std.string(glyph.bearingX) + ' yoffset=' + Std.string((base - glyph.bearingY)) + ' xadvance=' + Std.string(glyph.advance) + ' page=' + Std.string(glyph.page) + ' chnl=15')] : Array<Dynamic>));
     }
-    kernKeys = _Runtime.concatArrays([_Runtime.toArray(((cast _Runtime.field(font, 'kerning') : flighthq._internal._Map).keys()))]);
+    kernKeys = _Runtime.concatArrays([_Runtime.toArray(((cast font.kerning : flighthq._internal._Map).keys()))]);
     _Runtime.callProperty(lines, 'push', cast (['kernings count=' + Std.string(_Runtime.field(kernKeys, 'length')) + ''] : Array<Dynamic>));
     for (key in _Runtime.iterable(kernKeys)) {
-      var amount:Dynamic = (cast ((cast _Runtime.field(font, 'kerning') : flighthq._internal._Map).get(key)) : Float);
+      var amount:Dynamic = (cast ((cast font.kerning : flighthq._internal._Map).get(key)) : Float);
       var first:Dynamic = _Runtime.unsignedShiftRight(_Runtime.toInt32(key), 16);
       var second:Dynamic = (_Runtime.toInt32(key) & 65535);
       _Runtime.callProperty(lines, 'push', cast (['kerning first=' + Std.string(first) + ' second=' + Std.string(second) + ' amount=' + Std.string(amount) + ''] : Array<Dynamic>));

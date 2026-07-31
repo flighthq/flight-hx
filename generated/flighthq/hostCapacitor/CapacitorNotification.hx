@@ -31,10 +31,10 @@ class CapacitorNotification {
           var numericId:Dynamic = cast _Runtime.UNDEFINED;
           var stringId:Dynamic = cast _Runtime.UNDEFINED;
           numericId = nextNumericId++;
-          stringId = _Runtime.coalesce(_Runtime.field(request, 'id'), function():Dynamic return cast 'notification-' + Std.string(numericId) + '');
+          stringId = _Runtime.coalesce(request.id, function():Dynamic return cast 'notification-' + Std.string(numericId) + '');
           ((cast idByNumber : flighthq._internal._Map).set(numericId, stringId));
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(notifications, 'schedule', cast ([{ notifications: cast ([{ id: numericId, title: _Runtime.field(request, 'title'), body: _Runtime.field(request, 'body') }] : Array<Dynamic>) }] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap(_Runtime.callProperty(notifications, 'schedule', cast ([{ notifications: cast ([{ id: numericId, title: request.title, body: request.body }] : Array<Dynamic>) }] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
               __awaitValue0;
               return flighthq._internal._Async.flowReturn(stringId);
             });
@@ -108,9 +108,9 @@ class CapacitorNotification {
           var stringId:Dynamic = cast _Runtime.UNDEFINED;
           var schema:CapacitorLocalNotificationSchema = cast _Runtime.UNDEFINED;
           numericId = nextNumericId++;
-          stringId = _Runtime.coalesce(_Runtime.field(request, 'id'), function():Dynamic return cast 'notification-' + Std.string(numericId) + '');
+          stringId = _Runtime.coalesce(request.id, function():Dynamic return cast 'notification-' + Std.string(numericId) + '');
           ((cast idByNumber : flighthq._internal._Map).set(numericId, stringId));
-          schema = { id: numericId, title: _Runtime.field(request, 'title'), body: _Runtime.field(request, 'body'), schedule: { at: _Runtime.construct(_Runtime.globalValue('Date'), [_Runtime.field(schedule, 'at')]) } };
+          schema = { id: numericId, title: request.title, body: request.body, schedule: { at: _Runtime.construct(_Runtime.globalValue('Date'), [schedule.at]) } };
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
             return flighthq._internal._Async.flatMap(_Runtime.callProperty(notifications, 'schedule', cast ([{ notifications: cast ([schema] : Array<Dynamic>) }] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
               __awaitValue3;

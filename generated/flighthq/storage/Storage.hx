@@ -19,11 +19,11 @@ class Storage {
   public static var _crossTabUnsubscribe__storage:Null<Dynamic> = _Runtime.explicitNull();
 
   public static function _emitStorageChange__storage(change:StorageChange):Void {
-    if ((cast !_Runtime.strictEquals(Storage._signals__storage, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(Storage._signals__storage, 'onChange')], [change]]), 1); }
+    if ((cast !_Runtime.strictEquals(Storage._signals__storage, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[Storage._signals__storage.onChange], [change]]), 1); }
   }
 
   public static function _namespacedKey__storage(namespace:StorageNamespace, key:String):String {
-    return cast ((_Runtime.field(namespace, 'prefix') + '.') + key);
+    return cast ((namespace.prefix + '.') + key);
     return cast null;
   }
 
@@ -45,7 +45,7 @@ class Storage {
     var prefix:Dynamic = cast _Runtime.UNDEFINED;
     var backend:Dynamic = cast _Runtime.UNDEFINED;
     var success:Dynamic = cast _Runtime.UNDEFINED;
-    prefix = (_Runtime.field(namespace, 'prefix') + '.');
+    prefix = (namespace.prefix + '.');
     backend = _Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>));
     success = true;
     for (key in _Runtime.iterable(_Runtime.callProperty(backend, 'keys', cast ([] : Array<Dynamic>)))) {
@@ -141,7 +141,7 @@ class Storage {
       (Storage._crossTabUnsubscribe__storage = cast (null : Dynamic));
     }
     if ((cast !_Runtime.strictEquals(Storage._signals__storage, null) : Bool)) {
-      _Runtime.callValue(clearSignal, cast ([_Runtime.field(Storage._signals__storage, 'onChange')] : Array<Dynamic>));
+      _Runtime.callValue(clearSignal, cast ([Storage._signals__storage.onChange] : Array<Dynamic>));
       (Storage._signals__storage = cast (null : Dynamic));
     }
   }
@@ -166,7 +166,7 @@ class Storage {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
     var keys:Dynamic = cast _Runtime.UNDEFINED;
     var total:Dynamic = cast _Runtime.UNDEFINED;
-    prefix = (_Runtime.field(namespace, 'prefix') + '.');
+    prefix = (namespace.prefix + '.');
     backend = _Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>));
     keys = _Runtime.callProperty(backend, 'keys', cast ([] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(_Runtime.field(keys, 'length'), 0.0) : Bool)) { return cast 0.0; }
@@ -186,7 +186,7 @@ class Storage {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
     var keys:Dynamic = cast _Runtime.UNDEFINED;
     var out:Array<Array<String>> = cast _Runtime.UNDEFINED;
-    prefix = (_Runtime.field(namespace, 'prefix') + '.');
+    prefix = (namespace.prefix + '.');
     backend = _Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>));
     keys = _Runtime.callProperty(backend, 'keys', cast ([] : Array<Dynamic>));
     out = cast ([] : Array<Dynamic>);
@@ -208,7 +208,7 @@ class Storage {
   public static function getNamespacedStorageKeys(namespace:StorageNamespace):Array<String> {
     var prefix:Dynamic = cast _Runtime.UNDEFINED;
     var out:Array<String> = cast _Runtime.UNDEFINED;
-    prefix = (_Runtime.field(namespace, 'prefix') + '.');
+    prefix = (namespace.prefix + '.');
     out = cast ([] : Array<Dynamic>);
     for (rawKey in _Runtime.iterable(_Runtime.callProperty(_Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'keys', cast ([] : Array<Dynamic>)))) {
       if ((cast StringTools.startsWith(rawKey, prefix) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.slice(rawKey, _Runtime.field(prefix, 'length'), null)] : Array<Dynamic>)); }
@@ -427,16 +427,16 @@ class Storage {
     versionKey = '__flight_storage_version';
     raw = ((cast !_Runtime.strictEquals(namespace, null) : Bool) ? (cast _Runtime.callValue(getNamespacedStorageItem, cast ([namespace, versionKey] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(getStorageItem, cast ([versionKey] : Array<Dynamic>)) : Dynamic));
     currentVersion = ((cast !_Runtime.strictEquals(raw, null) : Bool) ? (cast _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([raw, 10.0] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
-    sorted = _Runtime.sortAndReturn(_Runtime.concatArrays([_Runtime.toArray(migrations)]), function(a:Dynamic, b:Dynamic) return (_Runtime.field(a, 'version') - _Runtime.field(b, 'version')));
+    sorted = _Runtime.sortAndReturn(_Runtime.concatArrays([_Runtime.toArray(migrations)]), function(a:Dynamic, b:Dynamic) return (a.version - b.version));
     newVersion = currentVersion;
     for (migration in _Runtime.iterable(sorted)) {
-      if ((cast ((cast _Runtime.field(migration, 'version') : Float) <= (cast currentVersion : Float)) : Bool)) { continue; }
+      if ((cast ((cast migration.version : Float) <= (cast currentVersion : Float)) : Bool)) { continue; }
       try {
-        _Runtime.callProperty(migration, 'migrate', cast ([_Runtime.coalesce(_Runtime.optionalField(namespace, 'prefix'), function():Dynamic return cast null)] : Array<Dynamic>));
+        _Runtime.callProperty(migration, 'migrate', cast ([_Runtime.coalesce(({ final __typedStruct17 = namespace; __typedStruct17 == null ? _Runtime.UNDEFINED : __typedStruct17.prefix; }), function():Dynamic return cast null)] : Array<Dynamic>));
       } catch (__error:Dynamic) {
         return cast -1.0;
       }
-      (newVersion = cast (_Runtime.field(migration, 'version') : Dynamic));
+      (newVersion = cast (migration.version : Dynamic));
     }
     if ((cast !_Runtime.strictEquals(newVersion, currentVersion) : Bool)) {
       var stored:Dynamic = ((cast !_Runtime.strictEquals(namespace, null) : Bool) ? (cast _Runtime.callValue(setNamespacedStorageItem, cast ([namespace, versionKey, Std.string(newVersion)] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(setStorageItem, cast ([versionKey, Std.string(newVersion)] : Array<Dynamic>)) : Dynamic));

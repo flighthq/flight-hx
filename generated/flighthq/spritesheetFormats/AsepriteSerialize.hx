@@ -16,14 +16,14 @@ typedef AsepriteSerializeOptions = { @:optional var variant:String; };
 class AsepriteSerialize {
   public static function dataToMeta__asepriteSerialize(data:SpritesheetData, existing:Dynamic):AsepriteMeta {
     var tags:Dynamic = cast _Runtime.UNDEFINED;
-    tags = _Runtime.callProperty(_Runtime.field(data, 'animations'), 'map', cast ([function(anim:Dynamic, i:Dynamic) {
+    tags = _Runtime.callProperty(data.animations, 'map', cast ([function(anim:Dynamic, i:Dynamic) {
       var firstIdx:Dynamic = cast _Runtime.UNDEFINED;
       var lastIdx:Dynamic = cast _Runtime.UNDEFINED;
-      firstIdx = _Runtime.findIndex(_Runtime.field(data, 'frames'), function(f:Dynamic) return _Runtime.strictEquals(f.name, flighthq._internal._StaticIndex.readArray(_Runtime.field(anim, 'frameNames'), 0.0)));
-      lastIdx = _Runtime.findIndex(_Runtime.field(data, 'frames'), function(f:Dynamic) return _Runtime.strictEquals(f.name, flighthq._internal._StaticIndex.readArray(_Runtime.field(anim, 'frameNames'), (_Runtime.field(_Runtime.field(anim, 'frameNames'), 'length') - 1.0))));
-      return cast _Runtime.mergeObjects([{ direction: _Runtime.field(anim, 'direction') }, { from: ((cast ((cast firstIdx : Float) >= (cast 0.0 : Float)) : Bool) ? (cast firstIdx : Dynamic) : (cast 0.0 : Dynamic)) }, { name: _Runtime.field(anim, 'name') }, { to: ((cast ((cast lastIdx : Float) >= (cast 0.0 : Float)) : Bool) ? (cast lastIdx : Dynamic) : (cast 0.0 : Dynamic)) }, ((cast !_Runtime.strictEquals(_Runtime.optionalField(_Runtime.optionalIndex(_Runtime.field(existing, 'frameTags'), i), 'color'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { color: _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(existing, 'frameTags'), i), 'color') } : Dynamic) : (cast {  } : Dynamic))]);
+      firstIdx = _Runtime.findIndex(data.frames, function(f:Dynamic) return _Runtime.strictEquals(f.name, flighthq._internal._StaticIndex.readArray(anim.frameNames, 0.0)));
+      lastIdx = _Runtime.findIndex(data.frames, function(f:Dynamic) return _Runtime.strictEquals(f.name, flighthq._internal._StaticIndex.readArray(anim.frameNames, (_Runtime.field(anim.frameNames, 'length') - 1.0))));
+      return cast _Runtime.mergeObjects([{ direction: anim.direction }, { from: ((cast ((cast firstIdx : Float) >= (cast 0.0 : Float)) : Bool) ? (cast firstIdx : Dynamic) : (cast 0.0 : Dynamic)) }, { name: anim.name }, { to: ((cast ((cast lastIdx : Float) >= (cast 0.0 : Float)) : Bool) ? (cast lastIdx : Dynamic) : (cast 0.0 : Dynamic)) }, ((cast !_Runtime.strictEquals(({ final __typedStruct0 = _Runtime.optionalIndex(_Runtime.field(existing, 'frameTags'), i); __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.color; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { color: flighthq._internal._StaticIndex.readArray(_Runtime.field(existing, 'frameTags'), i).color } : Dynamic) : (cast {  } : Dynamic))]);
     }] : Array<Dynamic>));
-    return cast _Runtime.mergeObjects([{ app: _Runtime.coalesce(_Runtime.field(existing, 'app'), function():Dynamic return cast 'https://www.aseprite.org/') }, { format: _Runtime.coalesce(_Runtime.field(existing, 'format'), function():Dynamic return cast 'RGBA8888') }, { frameTags: tags }, { image: _Runtime.orValue(_Runtime.orValue(_Runtime.field(data, 'imageFile'), function():Dynamic return cast _Runtime.field(existing, 'image')), function():Dynamic return cast '') }, ((cast !_Runtime.strictEquals(_Runtime.field(existing, 'layers'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { layers: _Runtime.field(existing, 'layers') } : Dynamic) : (cast {  } : Dynamic)), { scale: ((cast !_Runtime.strictEquals(_Runtime.field(data, 'scale'), 1.0) : Bool) ? (cast Std.string(_Runtime.field(data, 'scale')) : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(existing, 'scale'), function():Dynamic return cast '1') : Dynamic)) }, { size: { h: _Runtime.field(data, 'imageHeight'), w: _Runtime.field(data, 'imageWidth') } }, { version: _Runtime.coalesce(_Runtime.field(existing, 'version'), function():Dynamic return cast '1.3') }]);
+    return cast _Runtime.mergeObjects([{ app: _Runtime.coalesce(_Runtime.field(existing, 'app'), function():Dynamic return cast 'https://www.aseprite.org/') }, { format: _Runtime.coalesce(_Runtime.field(existing, 'format'), function():Dynamic return cast 'RGBA8888') }, { frameTags: tags }, { image: _Runtime.orValue(_Runtime.orValue(data.imageFile, function():Dynamic return cast _Runtime.field(existing, 'image')), function():Dynamic return cast '') }, ((cast !_Runtime.strictEquals(_Runtime.field(existing, 'layers'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { layers: _Runtime.field(existing, 'layers') } : Dynamic) : (cast {  } : Dynamic)), { scale: ((cast !_Runtime.strictEquals(data.scale, 1.0) : Bool) ? (cast Std.string(data.scale) : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(existing, 'scale'), function():Dynamic return cast '1') : Dynamic)) }, { size: { h: data.imageHeight, w: data.imageWidth } }, { version: _Runtime.coalesce(_Runtime.field(existing, 'version'), function():Dynamic return cast '1.3') }]);
     return cast null;
   }
 
@@ -35,11 +35,11 @@ class AsepriteSerialize {
   }
 
   public static function resolveFrameDuration__asepriteSerialize(data:SpritesheetData, frameName:String):Float {
-    for (anim in _Runtime.iterable(_Runtime.field(data, 'animations'))) {
-      var idx:Dynamic = _Runtime.callProperty(_Runtime.field(anim, 'frameNames'), 'indexOf', cast ([frameName] : Array<Dynamic>));
+    for (anim in _Runtime.iterable(data.animations)) {
+      var idx:Dynamic = _Runtime.callProperty(anim.frameNames, 'indexOf', cast ([frameName] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(idx, -1.0) : Bool)) { continue; }
-      if ((cast !_Runtime.strictEquals(_Runtime.field(anim, 'frameDurations'), null) : Bool)) { return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(anim, 'frameDurations'), idx), function():Dynamic return cast _Runtime.field(anim, 'frameDuration')); }
-      return cast _Runtime.field(anim, 'frameDuration');
+      if ((cast !_Runtime.strictEquals(anim.frameDurations, null) : Bool)) { return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(anim.frameDurations, idx), function():Dynamic return cast anim.frameDuration); }
+      return cast anim.frameDuration;
     }
     return cast 100.0;
     return cast null;
@@ -48,7 +48,7 @@ class AsepriteSerialize {
   public static function dataToHashDocument__asepriteSerialize(data:SpritesheetData, existing:Dynamic):AsepriteHashDocument {
     var frames:Dynamic = cast _Runtime.UNDEFINED;
     frames = {  };
-    for (frame in _Runtime.iterable(_Runtime.field(data, 'frames'))) {
+    for (frame in _Runtime.iterable(data.frames)) {
       _Runtime.setIndex(frames, frame.name, _Runtime.callValue(AsepriteSerialize.frameToEntry__asepriteSerialize, cast ([frame, _Runtime.callValue(AsepriteSerialize.resolveFrameDuration__asepriteSerialize, cast ([data, frame.name] : Array<Dynamic>))] : Array<Dynamic>)));
     }
     return cast { frames: frames, meta: _Runtime.callValue(AsepriteSerialize.dataToMeta__asepriteSerialize, cast ([data, _Runtime.coalesce(_Runtime.field(existing, 'meta'), function():Dynamic return cast {  })] : Array<Dynamic>)) };
@@ -57,7 +57,7 @@ class AsepriteSerialize {
 
   public static function dataToArrayDocument__asepriteSerialize(data:SpritesheetData, existing:Dynamic):AsepriteArrayDocument {
     var frames:Array<AsepriteArrayFrame> = cast _Runtime.UNDEFINED;
-    frames = _Runtime.callProperty(_Runtime.field(data, 'frames'), 'map', cast ([function(frame:Dynamic) return _Runtime.mergeObjects([{ filename: frame.name }, _Runtime.callValue(AsepriteSerialize.frameToEntry__asepriteSerialize, cast ([frame, _Runtime.callValue(AsepriteSerialize.resolveFrameDuration__asepriteSerialize, cast ([data, frame.name] : Array<Dynamic>))] : Array<Dynamic>))])] : Array<Dynamic>));
+    frames = _Runtime.callProperty(data.frames, 'map', cast ([function(frame:Dynamic) return _Runtime.mergeObjects([{ filename: frame.name }, _Runtime.callValue(AsepriteSerialize.frameToEntry__asepriteSerialize, cast ([frame, _Runtime.callValue(AsepriteSerialize.resolveFrameDuration__asepriteSerialize, cast ([data, frame.name] : Array<Dynamic>))] : Array<Dynamic>))])] : Array<Dynamic>));
     return cast { frames: frames, meta: _Runtime.callValue(AsepriteSerialize.dataToMeta__asepriteSerialize, cast ([data, _Runtime.coalesce(_Runtime.field(existing, 'meta'), function():Dynamic return cast {  })] : Array<Dynamic>)) };
     return cast null;
   }
@@ -66,8 +66,8 @@ class AsepriteSerialize {
     var existingIsArray:Dynamic = cast _Runtime.UNDEFINED;
     var variant:Dynamic = cast _Runtime.UNDEFINED;
     var doc:Dynamic = cast _Runtime.UNDEFINED;
-    existingIsArray = ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.isArray(_Runtime.field((cast existing : AsepriteArrayDocument), 'frames')) : Bool));
-    variant = _Runtime.coalesce(_Runtime.optionalField(options, 'variant'), function():Dynamic return cast ((cast existingIsArray : Bool) ? (cast 'array' : Dynamic) : (cast 'hash' : Dynamic)));
+    existingIsArray = ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.isArray((cast existing : AsepriteArrayDocument).frames) : Bool));
+    variant = _Runtime.coalesce(({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.variant; }), function():Dynamic return cast ((cast existingIsArray : Bool) ? (cast 'array' : Dynamic) : (cast 'hash' : Dynamic)));
     if ((cast _Runtime.strictEquals(variant, 'array') : Bool)) {
       var doc:Dynamic = _Runtime.callValue(AsepriteSerialize.dataToArrayDocument__asepriteSerialize, cast ([data, _Runtime.coalesce((cast existing : Dynamic), function():Dynamic return cast {  })] : Array<Dynamic>));
       return cast _Runtime.jsonStringify(doc, null, 2.0);

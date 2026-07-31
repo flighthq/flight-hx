@@ -123,10 +123,10 @@ class Share {
   }
 
   public static function hasShareContentFields(content:ShareContent):Bool {
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(content, 'title'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(content, 'title'), '') : Bool)) : Bool)) { return cast true; }
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(content, 'text'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(content, 'text'), '') : Bool)) : Bool)) { return cast true; }
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(content, 'url'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(content, 'url'), '') : Bool)) : Bool)) { return cast true; }
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(content, 'files'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(_Runtime.field(content, 'files'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { return cast true; }
+    if ((cast ((cast !_Runtime.strictEquals(content.title, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(content.title, '') : Bool)) : Bool)) { return cast true; }
+    if ((cast ((cast !_Runtime.strictEquals(content.text, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(content.text, '') : Bool)) : Bool)) { return cast true; }
+    if ((cast ((cast !_Runtime.strictEquals(content.url, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(content.url, '') : Bool)) : Bool)) { return cast true; }
+    if ((cast ((cast !_Runtime.strictEquals(content.files, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(content.files, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { return cast true; }
     return cast false;
     return cast null;
   }
@@ -149,11 +149,11 @@ class Share {
   public static function shareContentToNavigatorData__share(content:ShareContent):Dynamic {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     data = {  };
-    if ((cast !_Runtime.strictEquals(_Runtime.field(content, 'title'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(data, 'title', _Runtime.field(content, 'title')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(content, 'text'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(data, 'text', _Runtime.field(content, 'text')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(content, 'url'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(data, 'url', _Runtime.field(content, 'url')); }
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(content, 'files'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(_Runtime.field(content, 'files'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      _Runtime.setField(data, 'files', _Runtime.callProperty(_Runtime.field(content, 'files'), 'map', cast ([function(f:Dynamic) return _Runtime.callValue(Share.shareFileToDomFile__share, cast ([f] : Array<Dynamic>))] : Array<Dynamic>)));
+    if ((cast !_Runtime.strictEquals(content.title, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(data, 'title', content.title); }
+    if ((cast !_Runtime.strictEquals(content.text, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(data, 'text', content.text); }
+    if ((cast !_Runtime.strictEquals(content.url, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(data, 'url', content.url); }
+    if ((cast ((cast !_Runtime.strictEquals(content.files, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(content.files, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+      _Runtime.setField(data, 'files', _Runtime.callProperty(content.files, 'map', cast ([function(f:Dynamic) return _Runtime.callValue(Share.shareFileToDomFile__share, cast ([f] : Array<Dynamic>))] : Array<Dynamic>)));
     }
     return cast data;
     return cast null;
@@ -178,7 +178,7 @@ class Share {
             if ((cast ((cast (cast Share._signalListeners__share : flighthq._internal._Map).size : Float) > (cast 0.0 : Float)) : Bool)) {
               __flowBranch8 = flighthq._internal._Async.protect(function():Dynamic {
                 for (signals in _Runtime.iterable(((cast Share._signalListeners__share : flighthq._internal._Map).keys()))) {
-                  _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onShareResult')], [result]]), 1);
+                  _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signals.onShareResult], [result]]), 1);
                 }
                 return flighthq._internal._Async.flowNormal();
               });

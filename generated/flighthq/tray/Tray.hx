@@ -69,11 +69,11 @@ class Tray {
   }
 
   public static function destroyTrayIcon(tray:TrayIcon):Void {
-    _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'destroy', cast ([_Runtime.field(tray, 'id')] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'destroy', cast ([tray.id] : Array<Dynamic>));
   }
 
   public static function displayTrayBalloon(tray:TrayIcon, options:TrayBalloonOptions):Void {
-    _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'displayBalloon', cast ([_Runtime.field(tray, 'id'), options] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'displayBalloon', cast ([tray.id, options] : Array<Dynamic>));
   }
 
   public static function getTrayBackend():TrayBackend {
@@ -88,7 +88,7 @@ class Tray {
   }
 
   public static function getTrayIconBounds(tray:TrayIcon):Null<RectangleLike> {
-    return cast _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'getBounds', cast ([_Runtime.field(tray, 'id')] : Array<Dynamic>));
+    return cast _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'getBounds', cast ([tray.id] : Array<Dynamic>));
     return cast null;
   }
 
@@ -98,17 +98,17 @@ class Tray {
   }
 
   public static function getTrayIconTitle(tray:TrayIcon):String {
-    return cast _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'getTitle', cast ([_Runtime.field(tray, 'id')] : Array<Dynamic>));
+    return cast _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'getTitle', cast ([tray.id] : Array<Dynamic>));
     return cast null;
   }
 
   public static function getTrayIconTooltip(tray:TrayIcon):String {
-    return cast _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'getTooltip', cast ([_Runtime.field(tray, 'id')] : Array<Dynamic>));
+    return cast _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'getTooltip', cast ([tray.id] : Array<Dynamic>));
     return cast null;
   }
 
   public static function isTrayDestroyed(tray:TrayIcon):Bool {
-    return cast _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'isDestroyed', cast ([_Runtime.field(tray, 'id')] : Array<Dynamic>));
+    return cast _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'isDestroyed', cast ([tray.id] : Array<Dynamic>));
     return cast null;
   }
 
@@ -118,11 +118,11 @@ class Tray {
   }
 
   public static function popupTrayContextMenu(tray:TrayIcon, ?position:Vector2Like):Void {
-    _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'popUpContextMenu', cast ([_Runtime.field(tray, 'id'), position] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'popUpContextMenu', cast ([tray.id, position] : Array<Dynamic>));
   }
 
   public static function removeTrayBalloon(tray:TrayIcon):Void {
-    _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'removeBalloon', cast ([_Runtime.field(tray, 'id')] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'removeBalloon', cast ([tray.id] : Array<Dynamic>));
   }
 
   public static function setTrayBackend(backend:Null<TrayBackend>):Void {
@@ -130,31 +130,31 @@ class Tray {
   }
 
   public static function setTrayIcon(tray:TrayIcon, icon:String):Void {
-    _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'setIcon', cast ([_Runtime.field(tray, 'id'), icon] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'setIcon', cast ([tray.id, icon] : Array<Dynamic>));
   }
 
   public static function setTrayIconContextMenu(tray:TrayIcon, items:Array<MenuItemTemplate>):Void {
-    _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'setContextMenu', cast ([_Runtime.field(tray, 'id'), items] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'setContextMenu', cast ([tray.id, items] : Array<Dynamic>));
   }
 
   public static function setTrayIconTemplate(tray:TrayIcon, isTemplate:Bool):Void {
-    _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'setTemplate', cast ([_Runtime.field(tray, 'id'), isTemplate] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'setTemplate', cast ([tray.id, isTemplate] : Array<Dynamic>));
   }
 
   public static function setTrayIconTitle(tray:TrayIcon, title:String):Void {
-    _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'setTitle', cast ([_Runtime.field(tray, 'id'), title] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'setTitle', cast ([tray.id, title] : Array<Dynamic>));
   }
 
   public static function setTrayIconTooltip(tray:TrayIcon, tooltip:String):Void {
-    _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'setTooltip', cast ([_Runtime.field(tray, 'id'), tooltip] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'setTooltip', cast ([tray.id, tooltip] : Array<Dynamic>));
   }
 
   public static function setTrayIgnoreDoubleClickEvents(tray:TrayIcon, ignore:Bool):Void {
-    _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'setIgnoreDoubleClickEvents', cast ([_Runtime.field(tray, 'id'), ignore] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'setIgnoreDoubleClickEvents', cast ([tray.id, ignore] : Array<Dynamic>));
   }
 
   public static function setTrayPressedIcon(tray:TrayIcon, icon:String):Void {
-    _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'setPressedIcon', cast ([_Runtime.field(tray, 'id'), icon] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'setPressedIcon', cast ([tray.id, icon] : Array<Dynamic>));
   }
 
   public static function startTrayIconAnimation(tray:TrayIcon, frames:Array<String>, intervalMs:Float):Dynamic {

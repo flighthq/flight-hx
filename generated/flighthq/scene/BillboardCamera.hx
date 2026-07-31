@@ -37,7 +37,7 @@ class BillboardCamera {
     var parent:Dynamic = cast _Runtime.UNDEFINED;
     world = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([billboard] : Array<Dynamic>)) : Matrix4);
     _Runtime.callValue(decomposeMatrix4, cast ([BillboardCamera._position__billboardCamera, BillboardCamera._rotationScratch__billboardCamera, BillboardCamera._scale__billboardCamera, world] : Array<Dynamic>));
-    _Runtime.callValue(BillboardCamera.writeBillboardFacingMatrix__billboardCamera, cast ([BillboardCamera._facingWorld__billboardCamera, _Runtime.field(billboard, 'mode')] : Array<Dynamic>));
+    _Runtime.callValue(BillboardCamera.writeBillboardFacingMatrix__billboardCamera, cast ([BillboardCamera._facingWorld__billboardCamera, billboard.mode] : Array<Dynamic>));
     parent = (cast _Runtime.callValue(getNodeParent, cast ([(cast billboard : SceneNode)] : Array<Dynamic>)) : Null<SceneNode>);
     if ((cast _Runtime.strictEquals(parent, null) : Bool)) {
       _Runtime.callValue(copyMatrix4, cast ([BillboardCamera._localScratch__billboardCamera, BillboardCamera._facingWorld__billboardCamera] : Array<Dynamic>));

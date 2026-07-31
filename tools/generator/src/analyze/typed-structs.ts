@@ -546,22 +546,17 @@ export const tranche6bDirectTypedStructIds: readonly string[] = [
   '@flighthq/types:upstream/packages/types/src/Mesh.ts#Mesh',
 ];
 
-const tranche6DirectTypedStructIdSet = new Set([...tranche6aDirectTypedStructIds, ...tranche6bDirectTypedStructIds]);
-
-function typedStructCandidatesFromGroups(
+function directTypedStructCandidatesFromGroups(
   groups: readonly TypedStructCandidateGroup[],
 ): readonly TypedStructCandidate[] {
   return groups.flatMap((group) =>
-    group.names.map((name) => {
-      const id = `${group.packageName}:${group.source}#${name}`;
-      return {
-        emission: tranche6DirectTypedStructIdSet.has(id) ? ('direct' as const) : ('audit-only' as const),
-        name,
-        packageName: group.packageName,
-        purpose: group.purpose,
-        source: group.source,
-      };
-    }),
+    group.names.map((name) => ({
+      emission: 'direct' as const,
+      name,
+      packageName: group.packageName,
+      purpose: group.purpose,
+      source: group.source,
+    })),
   );
 }
 
@@ -569,7 +564,7 @@ function typedStructCandidatesFromGroups(
 // silently enter the allowlist. Backend-owned host contracts, renderer/material records,
 // open or presence-sensitive shapes, declaration merges, and aliases of existing direct
 // identities remain outside this tranche.
-export const tranche6TypedStructCandidates: readonly TypedStructCandidate[] = typedStructCandidatesFromGroups([
+export const tranche6TypedStructCandidates: readonly TypedStructCandidate[] = directTypedStructCandidatesFromGroups([
   {
     names: ['MeshGeometryOptions'],
     packageName: '@flighthq/mesh',

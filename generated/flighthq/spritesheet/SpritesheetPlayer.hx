@@ -54,9 +54,9 @@ class SpritesheetPlayer {
     __destructure0 = player;
     animation = _Runtime.field(__destructure0, 'animation');
     frameIndex = _Runtime.field(__destructure0, 'frameIndex');
-    if ((cast ((cast _Runtime.strictEquals(animation, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(animation, 'frames'), 'length'), 0.0) : Bool)) : Bool)) { return cast null; }
-    spriteFrameIndex = flighthq._internal._StaticIndex.readArray(_Runtime.field(animation, 'frames'), frameIndex);
-    return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(spritesheet, 'frames'), spriteFrameIndex), function():Dynamic return cast null);
+    if ((cast ((cast _Runtime.strictEquals(animation, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(animation.frames, 'length'), 0.0) : Bool)) : Bool)) { return cast null; }
+    spriteFrameIndex = flighthq._internal._StaticIndex.readArray(animation.frames, frameIndex);
+    return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(spritesheet.frames, spriteFrameIndex), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -70,11 +70,11 @@ class SpritesheetPlayer {
     __destructure1 = player;
     animation = _Runtime.field(__destructure1, 'animation');
     frameIndex = _Runtime.field(__destructure1, 'frameIndex');
-    if ((cast ((cast _Runtime.strictEquals(animation, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(animation, 'frames'), 'length'), 0.0) : Bool)) : Bool)) { return cast null; }
-    n = _Runtime.field(_Runtime.field(animation, 'frames'), 'length');
+    if ((cast ((cast _Runtime.strictEquals(animation, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(animation.frames, 'length'), 0.0) : Bool)) : Bool)) { return cast null; }
+    n = _Runtime.field(animation.frames, 'length');
     targetIndex = _Runtime.fmod((_Runtime.fmod((frameIndex + frameOffset), n) + n), n);
-    spriteFrameIndex = flighthq._internal._StaticIndex.readArray(_Runtime.field(animation, 'frames'), targetIndex);
-    return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(spritesheet, 'frames'), spriteFrameIndex), function():Dynamic return cast null);
+    spriteFrameIndex = flighthq._internal._StaticIndex.readArray(animation.frames, targetIndex);
+    return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(spritesheet.frames, spriteFrameIndex), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -118,8 +118,8 @@ class SpritesheetPlayer {
     var clamped:Dynamic = cast _Runtime.UNDEFINED;
     __destructure2 = player;
     animation = _Runtime.field(__destructure2, 'animation');
-    if ((cast ((cast _Runtime.strictEquals(animation, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(animation, 'frames'), 'length'), 0.0) : Bool)) : Bool)) { return; }
-    clamped = HxMath.max(0.0, HxMath.min(frameIndex, (_Runtime.field(_Runtime.field(animation, 'frames'), 'length') - 1.0)));
+    if ((cast ((cast _Runtime.strictEquals(animation, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(animation.frames, 'length'), 0.0) : Bool)) : Bool)) { return; }
+    clamped = HxMath.max(0.0, HxMath.min(frameIndex, (_Runtime.field(animation.frames, 'length') - 1.0)));
     (player.frameIndex = cast (clamped : Dynamic));
     (player.elapsed = cast (_Runtime.callValue(SpritesheetPlayer.resolveVirtualIndexStartTime__spritesheetPlayer, cast ([animation, clamped] : Array<Dynamic>)) : Dynamic));
   }
@@ -130,7 +130,7 @@ class SpritesheetPlayer {
     var totalTime:Dynamic = cast _Runtime.UNDEFINED;
     __destructure3 = player;
     animation = _Runtime.field(__destructure3, 'animation');
-    if ((cast ((cast _Runtime.strictEquals(animation, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(animation, 'frames'), 'length'), 0.0) : Bool)) : Bool)) { return; }
+    if ((cast ((cast _Runtime.strictEquals(animation, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(animation.frames, 'length'), 0.0) : Bool)) : Bool)) { return; }
     totalTime = _Runtime.callValue(SpritesheetPlayer.resolveAnimationTotalTime__spritesheetPlayer, cast ([animation] : Array<Dynamic>));
     (player.elapsed = cast (HxMath.max(0.0, HxMath.min(time, totalTime)) : Dynamic));
     (player.frameIndex = cast (_Runtime.callValue(SpritesheetPlayer.resolveFrameIndexFromElapsed__spritesheetPlayer, cast ([animation, player.elapsed] : Array<Dynamic>)) : Dynamic));
@@ -154,7 +154,7 @@ class SpritesheetPlayer {
     var vi:Dynamic = cast _Runtime.UNDEFINED;
     __destructure4 = player;
     animation = _Runtime.field(__destructure4, 'animation');
-    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(animation, null) : Bool) || (cast player.complete : Bool)) : Bool) || (cast player.paused : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(animation, 'frames'), 'length'), 0.0) : Bool)) : Bool)) { return cast false; }
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(animation, null) : Bool) || (cast player.complete : Bool)) : Bool) || (cast player.paused : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(animation.frames, 'length'), 0.0) : Bool)) : Bool)) { return cast false; }
     __destructure5 = animation;
     loop = _Runtime.field(__destructure5, 'loop');
     totalTime = _Runtime.callValue(SpritesheetPlayer.resolveAnimationTotalTime__spritesheetPlayer, cast ([animation] : Array<Dynamic>));
@@ -249,8 +249,8 @@ class SpritesheetPlayer {
   public static function resolveVirtualFrameCount__spritesheetPlayer(animation:SpritesheetAnimation):Float {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     var isPingpong:Dynamic = cast _Runtime.UNDEFINED;
-    n = _Runtime.field(_Runtime.field(animation, 'frames'), 'length');
-    isPingpong = ((cast _Runtime.strictEquals(_Runtime.field(animation, 'direction'), 'pingpong') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(animation, 'direction'), 'pingpong_reverse') : Bool));
+    n = _Runtime.field(animation.frames, 'length');
+    isPingpong = ((cast _Runtime.strictEquals(animation.direction, 'pingpong') : Bool) || (cast _Runtime.strictEquals(animation.direction, 'pingpong_reverse') : Bool));
     if ((cast ((cast isPingpong : Bool) && (cast ((cast n : Float) > (cast 1.0 : Float)) : Bool)) : Bool)) { return cast ((2.0 * n) - 2.0); }
     return cast n;
     return cast null;

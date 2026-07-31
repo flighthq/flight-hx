@@ -63,7 +63,7 @@ class GlTilemap {
     rows = _Runtime.field(__destructure0, 'rows');
     tiles = _Runtime.field(__destructure0, 'tiles');
     if ((cast _Runtime.strictEquals(tileset, null) : Bool)) { return; }
-    atlas = _Runtime.field(tileset, 'atlas');
+    atlas = tileset.atlas;
     if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.image, null) : Bool)) : Bool) || (cast !(cast _Runtime.callValue(hasImageResourcePixels, cast ([atlas.image] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return; }
     if ((cast ((cast _Runtime.strictEquals(columns, 0.0) : Bool) || (cast _Runtime.strictEquals(rows, 0.0) : Bool)) : Bool)) { return; }
     _Runtime.callValue(ensureGlQuadBatchShader, cast ([state] : Array<Dynamic>));
