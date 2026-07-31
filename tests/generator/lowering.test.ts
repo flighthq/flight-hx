@@ -1360,6 +1360,97 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain("_Runtime.defaultUndefined(_Runtime.field(__destructure0, 'mode')");
   });
 
+  it('retains destructuring receiver facts without changing dynamic emission', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/destructuring.ts',
+      `export function read(
+         [parameter0, parameter1]: readonly [number, number],
+         compatible: number[] | Float32Array,
+         indices: Uint16Array | Uint32Array,
+         nullable: number[] | null,
+         heterogeneous: number[] | Uint8Array,
+         arrayLike: ArrayLike<number>,
+         wider: readonly [number, number] | ReadonlyArray<number> | Readonly<Float32Array>,
+         dictionary: { readonly [key: number]: number },
+         regexpResult: RegExpMatchArray,
+         nested: readonly [readonly [number, number]],
+       ) {
+         const [float0, float1] = new Float32Array(2);
+         const [compatible0] = compatible;
+         const [nullable0] = nullable;
+         const [heterogeneous0] = heterogeneous;
+         const [arrayLike0] = arrayLike;
+         const [wider0] = wider;
+         const [dictionary0] = dictionary;
+         const [regexp0] = regexpResult;
+         const [[nested0, nested1]] = nested;
+         let assigned0 = 0;
+         let assigned1 = 0;
+         [assigned0, assigned1] = indices;
+         return [
+           parameter0,
+           parameter1,
+           float0,
+           float1,
+           compatible0,
+           nullable0,
+           heterogeneous0,
+           arrayLike0,
+           wider0,
+           dictionary0,
+           regexp0,
+           nested0,
+           nested1,
+           assigned0,
+           assigned1,
+         ];
+       }`,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    resetStaticLoweringEmissionCounts();
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'DestructuringAuditFixture',
+      packageName: '@flighthq/example',
+    });
+    const emission = staticLoweringEmissionCounts();
+    const ir = JSON.stringify(lowered.declarations);
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(ir).toContain('"destructuringSource":{"receiver":"Float32Array","source":"declaration"}');
+    expect(ir).toContain('"destructuringSource":{"receiver":"Uint16ArrayOrUint32Array","source":"assignment"}');
+    expect(ir).toContain('"destructuringSource":{"escape":"regexp-result-array","source":"declaration"}');
+    expect(emission.destructuringReads).toEqual({
+      assignment: { eligible: 2, parked: 0 },
+      declaration: { eligible: 7, parked: 6 },
+      parameter: { eligible: 2, parked: 0 },
+    });
+    expect(emission.destructuringEscapes).toEqual({
+      'regexp-result-array': { assignment: 0, declaration: 1, parameter: 0 },
+      'unproven-receiver': { assignment: 0, declaration: 5, parameter: 0 },
+    });
+    expect(emission.destructuringReceivers.Array).toEqual({ assignment: 0, declaration: 4, parameter: 2 });
+    expect(emission.destructuringReceivers.ArrayOrFloat32Array).toEqual({
+      assignment: 0,
+      declaration: 1,
+      parameter: 0,
+    });
+    expect(emission.destructuringReceivers.Float32Array).toEqual({
+      assignment: 0,
+      declaration: 2,
+      parameter: 0,
+    });
+    expect(emission.destructuringReceivers.Uint16ArrayOrUint32Array).toEqual({
+      assignment: 2,
+      declaration: 0,
+      parameter: 0,
+    });
+    expect(output.match(/_Runtime\.getIndex\(/gu)).toHaveLength(17);
+    expect(output).not.toContain('__flight_destructuring_index');
+    expect(output).not.toContain('_StaticIndex.read');
+  });
+
   it('emits direct Array reads for synthetic iteration bindings only', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/example/src/sample.ts',
@@ -1509,6 +1600,29 @@ describe('TypeScript lowering and Haxe emission', () => {
       booleanConditionalExpressions: 1,
       booleanOrExpressions: 0,
       booleanTruthinessUses: 2,
+      destructuringEscapes: {
+        'regexp-result-array': { assignment: 0, declaration: 0, parameter: 0 },
+        'unproven-receiver': { assignment: 0, declaration: 0, parameter: 0 },
+      },
+      destructuringReads: {
+        assignment: { eligible: 0, parked: 0 },
+        declaration: { eligible: 0, parked: 0 },
+        parameter: { eligible: 0, parked: 0 },
+      },
+      destructuringReceivers: {
+        Array: { assignment: 0, declaration: 0, parameter: 0 },
+        ArrayOrFloat32Array: { assignment: 0, declaration: 0, parameter: 0 },
+        Float32Array: { assignment: 0, declaration: 0, parameter: 0 },
+        Float64Array: { assignment: 0, declaration: 0, parameter: 0 },
+        Int16Array: { assignment: 0, declaration: 0, parameter: 0 },
+        Int32Array: { assignment: 0, declaration: 0, parameter: 0 },
+        Int8Array: { assignment: 0, declaration: 0, parameter: 0 },
+        Uint16Array: { assignment: 0, declaration: 0, parameter: 0 },
+        Uint16ArrayOrUint32Array: { assignment: 0, declaration: 0, parameter: 0 },
+        Uint32Array: { assignment: 0, declaration: 0, parameter: 0 },
+        Uint8Array: { assignment: 0, declaration: 0, parameter: 0 },
+        Uint8ClampedArray: { assignment: 0, declaration: 0, parameter: 0 },
+      },
       indexedAccesses: {
         reads: 2,
         writes: 2,

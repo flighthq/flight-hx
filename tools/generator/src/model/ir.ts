@@ -56,11 +56,21 @@ export type IrIndexedReceiver =
   | 'Uint8Array'
   | 'Uint8ClampedArray';
 
+export type IrDestructuringReadSource = 'assignment' | 'declaration' | 'parameter';
+export type IrDestructuringReadEscape = 'regexp-result-array' | 'unproven-receiver';
+
 export type IrDomRootBinding = 'DomDocumentBackend' | 'DomNavigatorBackend' | 'DomWindowBackend';
 
 export interface IrExpressionStaticFacts {
   boolean?: true | undefined;
   booleanLogical?: true | undefined;
+  destructuringSource?:
+    | {
+        escape?: IrDestructuringReadEscape | undefined;
+        receiver?: IrIndexedReceiver | undefined;
+        source: IrDestructuringReadSource;
+      }
+    | undefined;
   indexedAccess?:
     | {
         reads: 0 | 1;
@@ -352,6 +362,15 @@ export interface StaticLoweringEmissionCounts {
   booleanConditionalExpressions: number;
   booleanOrExpressions: number;
   booleanTruthinessUses: number;
+  destructuringEscapes: Record<IrDestructuringReadEscape, Record<IrDestructuringReadSource, number>>;
+  destructuringReads: Record<
+    IrDestructuringReadSource,
+    {
+      eligible: number;
+      parked: number;
+    }
+  >;
+  destructuringReceivers: Record<IrIndexedReceiver, Record<IrDestructuringReadSource, number>>;
   indexedAccesses: {
     reads: number;
     writes: number;

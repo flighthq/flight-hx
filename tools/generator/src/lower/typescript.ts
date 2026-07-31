@@ -6,6 +6,8 @@ import { auditStaticFacts } from '../analyze/static-facts.ts';
 import type { TypedStructRegistry } from '../analyze/typed-structs.ts';
 import type {
   IrDeclaration,
+  IrDestructuringReadEscape,
+  IrDestructuringReadSource,
   IrDomRootBinding,
   IrExpression,
   IrExpressionStaticFacts,
@@ -1006,7 +1008,9 @@ function lowerParameterList(
       type: node.type ? lowerType(node.type, context) : { kind: 'dynamic' },
     });
     const declarations: IrVariable[] = [];
-    lowerBindingPattern(node.name, { kind: 'identifier', name }, false, declarations, context);
+    lowerBindingPattern(node.name, { kind: 'identifier', name }, false, declarations, context, {
+      destructuringSource: 'parameter',
+    });
     prefix.push({ declarations, kind: 'variable' });
   }
   return { parameters, prefix };
@@ -1297,14 +1301,9 @@ function lowerStatement(node: ts.Statement, context: LoweringContext): IrStateme
       ? declaration.name.text
       : `__iteration${String(context.temporaryIndex++)}`;
     if (!ts.isIdentifier(declaration.name)) {
-      lowerBindingPattern(
-        declaration.name,
-        { kind: 'identifier', name: variable },
-        mutable,
-        bindings,
-        context,
-        'iterationBinding',
-      );
+      lowerBindingPattern(declaration.name, { kind: 'identifier', name: variable }, mutable, bindings, context, {
+        syntheticArrayRead: 'iterationBinding',
+      });
     }
     return {
       async: Boolean(node.awaitModifier),
@@ -1408,6 +1407,13 @@ function expressionStaticFacts(node: ts.Expression, context: LoweringContext): I
     typeOnlyHasFlags(checker.getTypeAtLocation(node.right), checker, ts.TypeFlags.NumberLike)
   ) {
     facts.numericRelation = true;
+  }
+  if (
+    ts.isBinaryExpression(node) &&
+    node.operatorToken.kind === ts.SyntaxKind.EqualsToken &&
+    ts.isArrayLiteralExpression(node.left)
+  ) {
+    facts.destructuringSource = destructuringSourceFact(checker.getTypeAtLocation(node.right), 'assignment', checker);
   }
   if (ts.isElementAccessExpression(node) && node.argumentExpression && !ts.isOptionalChain(node)) {
     const receiver = indexedReceiver(checker.getTypeAtLocation(node.expression), checker);
@@ -1559,9 +1565,16 @@ function lowerVariables(node: ts.VariableDeclarationList, mutable: boolean, cont
         name: temporaryName,
       },
     ];
-    lowerBindingPattern(declaration.name, { kind: 'identifier', name: temporaryName }, mutable, variables, context);
+    lowerBindingPattern(declaration.name, { kind: 'identifier', name: temporaryName }, mutable, variables, context, {
+      destructuringSource: 'declaration',
+    });
     return variables;
   });
+}
+
+interface BindingPatternOptions {
+  destructuringSource?: IrDestructuringReadSource | undefined;
+  syntheticArrayRead?: 'iterationBinding' | undefined;
 }
 
 function lowerBindingPattern(
@@ -1570,7 +1583,7 @@ function lowerBindingPattern(
   mutable: boolean,
   variables: IrVariable[],
   context: LoweringContext,
-  syntheticArrayRead?: 'iterationBinding',
+  options?: BindingPatternOptions,
 ): void {
   if (ts.isObjectBindingPattern(pattern)) {
     for (const element of pattern.elements) {
@@ -1590,11 +1603,17 @@ function lowerBindingPattern(
       if (ts.isIdentifier(element.name)) {
         variables.push({ initializer: value, mutable, name: element.name.text });
       } else {
-        lowerBindingPattern(element.name, value, mutable, variables, context, syntheticArrayRead);
+        lowerBindingPattern(element.name, value, mutable, variables, context, options);
       }
     }
     return;
   }
+  const destructuringSource = options?.destructuringSource;
+  const sourceFact = destructuringSource
+    ? context.checker
+      ? destructuringSourceFact(context.checker.getTypeAtLocation(pattern), destructuringSource, context.checker)
+      : { escape: 'unproven-receiver' as const, source: destructuringSource }
+    : undefined;
   pattern.elements.forEach((element, index) => {
     if (ts.isOmittedExpression(element)) return;
     if (element.dotDotDotToken) unsupported(element, context, 'array rest binding');
@@ -1602,7 +1621,8 @@ function lowerBindingPattern(
       index: { kind: 'literal', value: index },
       kind: 'element',
       object: source,
-      syntheticArrayRead,
+      staticFacts: sourceFact ? { destructuringSource: sourceFact } : undefined,
+      syntheticArrayRead: options?.syntheticArrayRead,
     };
     if (element.initializer) {
       value = {
@@ -1615,9 +1635,23 @@ function lowerBindingPattern(
     if (ts.isIdentifier(element.name)) {
       variables.push({ initializer: value, mutable, name: element.name.text });
     } else {
-      lowerBindingPattern(element.name, value, mutable, variables, context, syntheticArrayRead);
+      lowerBindingPattern(element.name, value, mutable, variables, context, options);
     }
   });
+}
+
+function destructuringSourceFact(
+  type: ts.Type,
+  source: IrDestructuringReadSource,
+  checker: ts.TypeChecker,
+): NonNullable<IrExpressionStaticFacts['destructuringSource']> {
+  const receiver = indexedReceiver(type, checker);
+  if (receiver) return { receiver, source };
+  const escape: IrDestructuringReadEscape =
+    standardLibraryType(type, 'RegExpExecArray') || standardLibraryType(type, 'RegExpMatchArray')
+      ? 'regexp-result-array'
+      : 'unproven-receiver';
+  return { escape, source };
 }
 
 function webGlComputedConstantDomain(node: ts.Expression): 'GlBlendEquation' | 'GlBlendFactor' | undefined {

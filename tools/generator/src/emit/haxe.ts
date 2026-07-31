@@ -1,5 +1,7 @@
 import type {
   IrDeclaration,
+  IrDestructuringReadEscape,
+  IrDestructuringReadSource,
   IrExpression,
   IrIndexedReceiver,
   IrModule,
@@ -13,7 +15,12 @@ import { type WebGl2ComputedConstantDomain, webGl2ComputedConstantDomains } from
 
 type ScalarStaticLoweringEmissionName = Exclude<
   keyof StaticLoweringEmissionCounts,
-  'indexedAccesses' | 'indexedReceivers' | 'syntheticArrayReads'
+  | 'destructuringEscapes'
+  | 'destructuringReads'
+  | 'destructuringReceivers'
+  | 'indexedAccesses'
+  | 'indexedReceivers'
+  | 'syntheticArrayReads'
 >;
 
 const binaryOperatorMap: Readonly<Record<string, string>> = {
@@ -34,6 +41,17 @@ const syntheticArrayReadMarkers = {
   highArityArguments: '/*__flight_direct_synthetic_array_high_arity_arguments__*/',
   iterationBindings: '/*__flight_direct_synthetic_array_iteration_bindings__*/',
 } as const satisfies Record<keyof StaticLoweringEmissionCounts['syntheticArrayReads'], string>;
+
+const destructuringReadSources = [
+  'assignment',
+  'declaration',
+  'parameter',
+] as const satisfies readonly IrDestructuringReadSource[];
+
+const destructuringReadEscapes = [
+  'regexp-result-array',
+  'unproven-receiver',
+] as const satisfies readonly IrDestructuringReadEscape[];
 
 const indexedReceiverNames = [
   'Array',
@@ -348,6 +366,18 @@ export function resetStaticLoweringEmissionCounts(): void {
 export function staticLoweringEmissionCounts(): StaticLoweringEmissionCounts {
   return {
     ...staticLoweringEmission,
+    destructuringEscapes: Object.fromEntries(
+      destructuringReadEscapes.map((escape) => [escape, { ...staticLoweringEmission.destructuringEscapes[escape] }]),
+    ) as StaticLoweringEmissionCounts['destructuringEscapes'],
+    destructuringReads: Object.fromEntries(
+      destructuringReadSources.map((source) => [source, { ...staticLoweringEmission.destructuringReads[source] }]),
+    ) as StaticLoweringEmissionCounts['destructuringReads'],
+    destructuringReceivers: Object.fromEntries(
+      indexedReceiverNames.map((receiver) => [
+        receiver,
+        { ...staticLoweringEmission.destructuringReceivers[receiver] },
+      ]),
+    ) as StaticLoweringEmissionCounts['destructuringReceivers'],
     indexedAccesses: { ...staticLoweringEmission.indexedAccesses },
     indexedReceivers: Object.fromEntries(
       indexedReceiverNames.map((receiver) => [receiver, { ...staticLoweringEmission.indexedReceivers[receiver] }]),
@@ -1771,6 +1801,21 @@ function emptyStaticLoweringEmissionCounts(): StaticLoweringEmissionCounts {
     booleanConditionalExpressions: 0,
     booleanOrExpressions: 0,
     booleanTruthinessUses: 0,
+    destructuringEscapes: Object.fromEntries(
+      destructuringReadEscapes.map((escape) => [
+        escape,
+        Object.fromEntries(destructuringReadSources.map((source) => [source, 0])),
+      ]),
+    ) as StaticLoweringEmissionCounts['destructuringEscapes'],
+    destructuringReads: Object.fromEntries(
+      destructuringReadSources.map((source) => [source, { eligible: 0, parked: 0 }]),
+    ) as StaticLoweringEmissionCounts['destructuringReads'],
+    destructuringReceivers: Object.fromEntries(
+      indexedReceiverNames.map((receiver) => [
+        receiver,
+        Object.fromEntries(destructuringReadSources.map((source) => [source, 0])),
+      ]),
+    ) as StaticLoweringEmissionCounts['destructuringReceivers'],
     indexedAccesses: {
       reads: 0,
       writes: 0,
@@ -1809,7 +1854,37 @@ function finalizeStaticLoweringEmission(output: string): string {
     staticLoweringEmission.syntheticArrayReads[name] += finalized.split(marker).length - 1;
     finalized = finalized.replaceAll(marker, '');
   }
+  for (const source of destructuringReadSources) {
+    for (const escape of destructuringReadEscapes) {
+      const marker = destructuringReadMarker(source, escape);
+      const count = finalized.split(marker).length - 1;
+      staticLoweringEmission.destructuringReads[source].parked += count;
+      staticLoweringEmission.destructuringEscapes[escape][source] += count;
+      finalized = finalized.replaceAll(marker, '');
+    }
+    for (const receiver of indexedReceiverNames) {
+      const marker = destructuringReadMarker(source, receiver);
+      const count = finalized.split(marker).length - 1;
+      staticLoweringEmission.destructuringReads[source].eligible += count;
+      staticLoweringEmission.destructuringReceivers[receiver][source] += count;
+      finalized = finalized.replaceAll(marker, '');
+    }
+  }
   return finalized;
+}
+
+function destructuringReadMarker(
+  source: IrDestructuringReadSource,
+  target: IrDestructuringReadEscape | IrIndexedReceiver,
+): string {
+  return `/*__flight_destructuring_index_${source}_${target}__*/`;
+}
+
+function markDestructuringRead(expression: IrExpression, value: string): string {
+  const source = expression.staticFacts?.destructuringSource;
+  return source
+    ? `${destructuringReadMarker(source.source, source.receiver ?? source.escape ?? 'unproven-receiver')}${value}`
+    : value;
 }
 
 function markStaticLowering(name: ScalarStaticLoweringEmissionName, value: string): string {
@@ -1889,7 +1964,7 @@ function emitExpression(expression: IrExpression): string {
         const temporary = `__destructure${String(temporaryIndex++)}`;
         return `({ var ${temporary}:Dynamic = ${emitExpression(expression.right)}; ${expression.left.elements
           .map((element, index) => {
-            const value = `_Runtime.getIndex(${temporary}, ${String(index)})`;
+            const value = markDestructuringRead(expression, `_Runtime.getIndex(${temporary}, ${String(index)})`);
             return element.kind === 'element'
               ? `_Runtime.setIndex(${emitExpression(element.object)}, ${emitExpression(element.index)}, ${value})`
               : `${emitExpression(element)} = cast ${value}`;
@@ -2137,7 +2212,10 @@ function emitExpression(expression: IrExpression): string {
       }
       return (
         emitStaticIndexedRead(expression) ??
-        `_Runtime.${expression.optional ? 'optionalIndex' : 'getIndex'}(${emitExpression(expression.object)}, ${emitExpression(expression.index)})`
+        markDestructuringRead(
+          expression,
+          `_Runtime.${expression.optional ? 'optionalIndex' : 'getIndex'}(${emitExpression(expression.object)}, ${emitExpression(expression.index)})`,
+        )
       );
     case 'function': {
       const name = expression.name && !expression.async ? ` ${safeName(expression.name)}` : '';

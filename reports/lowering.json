@@ -2883,7 +2883,7 @@
       }
     }
   ],
-  "schemaVersion": 6,
+  "schemaVersion": 7,
   "summary": {
     "declarations": 9122,
     "diagnostics": 0,
@@ -2895,6 +2895,94 @@
       "booleanConditionalExpressions": 1689,
       "booleanOrExpressions": 1364,
       "booleanTruthinessUses": 7882,
+      "destructuringEscapes": {
+        "regexp-result-array": {
+          "assignment": 0,
+          "declaration": 12,
+          "parameter": 0
+        },
+        "unproven-receiver": {
+          "assignment": 0,
+          "declaration": 0,
+          "parameter": 0
+        }
+      },
+      "destructuringReads": {
+        "assignment": {
+          "eligible": 20,
+          "parked": 0
+        },
+        "declaration": {
+          "eligible": 209,
+          "parked": 12
+        },
+        "parameter": {
+          "eligible": 11,
+          "parked": 0
+        }
+      },
+      "destructuringReceivers": {
+        "Array": {
+          "assignment": 20,
+          "declaration": 209,
+          "parameter": 11
+        },
+        "ArrayOrFloat32Array": {
+          "assignment": 0,
+          "declaration": 0,
+          "parameter": 0
+        },
+        "Float32Array": {
+          "assignment": 0,
+          "declaration": 0,
+          "parameter": 0
+        },
+        "Float64Array": {
+          "assignment": 0,
+          "declaration": 0,
+          "parameter": 0
+        },
+        "Int16Array": {
+          "assignment": 0,
+          "declaration": 0,
+          "parameter": 0
+        },
+        "Int32Array": {
+          "assignment": 0,
+          "declaration": 0,
+          "parameter": 0
+        },
+        "Int8Array": {
+          "assignment": 0,
+          "declaration": 0,
+          "parameter": 0
+        },
+        "Uint16Array": {
+          "assignment": 0,
+          "declaration": 0,
+          "parameter": 0
+        },
+        "Uint16ArrayOrUint32Array": {
+          "assignment": 0,
+          "declaration": 0,
+          "parameter": 0
+        },
+        "Uint32Array": {
+          "assignment": 0,
+          "declaration": 0,
+          "parameter": 0
+        },
+        "Uint8Array": {
+          "assignment": 0,
+          "declaration": 0,
+          "parameter": 0
+        },
+        "Uint8ClampedArray": {
+          "assignment": 0,
+          "declaration": 0,
+          "parameter": 0
+        }
+      },
       "indexedAccesses": {
         "reads": 4658,
         "writes": 2930
