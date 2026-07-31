@@ -23,7 +23,7 @@ class MeshGeometryCompute {
     var cz:Dynamic = cast _Runtime.UNDEFINED;
     var radiusSq:Dynamic = cast _Runtime.UNDEFINED;
     vertices = geometry.vertices;
-    floatsPerVertex = (_Runtime.field(geometry.layout, 'stride') / 4.0);
+    floatsPerVertex = (geometry.layout.stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     if ((cast _Runtime.strictEquals(vertexCount, 0.0) : Bool)) {
       (out.center.x = cast (0.0 : Dynamic));
@@ -87,7 +87,7 @@ class MeshGeometryCompute {
     var maxY:Dynamic = cast _Runtime.UNDEFINED;
     var maxZ:Dynamic = cast _Runtime.UNDEFINED;
     vertices = geometry.vertices;
-    floatsPerVertex = (_Runtime.field(geometry.layout, 'stride') / 4.0);
+    floatsPerVertex = (geometry.layout.stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     minX = HxMath.POSITIVE_INFINITY;
     minY = HxMath.POSITIVE_INFINITY;
@@ -126,7 +126,7 @@ class MeshGeometryCompute {
     var indexCount:Dynamic = cast _Runtime.UNDEFINED;
     var dstVerts:Dynamic = cast _Runtime.UNDEFINED;
     srcVerts = geometry.vertices;
-    floatsPerVertex = (_Runtime.field(geometry.layout, 'stride') / 4.0);
+    floatsPerVertex = (geometry.layout.stride / 4.0);
     indices = geometry.indices;
     indexCount = _Runtime.select(indices, function():Dynamic return cast _Runtime.field(indices, 'length'), function():Dynamic return cast ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(srcVerts, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic)));
     dstVerts = out.vertices;
@@ -190,7 +190,7 @@ class MeshGeometryCompute {
     var accum:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     vertices = geometry.vertices;
-    floatsPerVertex = (_Runtime.field(geometry.layout, 'stride') / 4.0);
+    floatsPerVertex = (geometry.layout.stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     indices = geometry.indices;
     indexCount = _Runtime.select(indices, function():Dynamic return cast _Runtime.field(indices, 'length'), function():Dynamic return cast vertexCount);
@@ -257,7 +257,7 @@ class MeshGeometryCompute {
     var bitan:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     vertices = geometry.vertices;
-    floatsPerVertex = (_Runtime.field(geometry.layout, 'stride') / 4.0);
+    floatsPerVertex = (geometry.layout.stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     indices = geometry.indices;
     indexCount = _Runtime.select(indices, function():Dynamic return cast _Runtime.field(indices, 'length'), function():Dynamic return cast vertexCount);

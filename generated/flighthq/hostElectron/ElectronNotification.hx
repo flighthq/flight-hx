@@ -28,15 +28,15 @@ class ElectronNotification {
         var actions:Dynamic = cast _Runtime.UNDEFINED;
         var n:Dynamic = cast _Runtime.UNDEFINED;
         if ((cast !(cast _Runtime.callProperty(_Runtime.field(electron, 'Notification'), 'isSupported', cast ([] : Array<Dynamic>)) : Bool) : Bool)) { return cast ''; }
-        id = _Runtime.coalesce(_Runtime.field(request, 'id'), function():Dynamic return cast 'notification-' + Std.string(nextId++) + '');
-        actions = _Runtime.coalesce(_Runtime.field(request, 'actions'), function():Dynamic return cast cast ([] : Array<Dynamic>));
-        n = _Runtime.construct(_Runtime.field(electron, 'Notification'), [{ title: _Runtime.field(request, 'title'), body: _Runtime.field(request, 'body'), icon: _Runtime.field(request, 'icon'), silent: _Runtime.field(request, 'silent'), actions: _Runtime.callProperty(actions, 'map', cast ([function(a:Dynamic) return { type: 'button', text: _Runtime.field(a, 'title') }] : Array<Dynamic>)) }]);
+        id = _Runtime.coalesce(request.id, function():Dynamic return cast 'notification-' + Std.string(nextId++) + '');
+        actions = _Runtime.coalesce(request.actions, function():Dynamic return cast cast ([] : Array<Dynamic>));
+        n = _Runtime.construct(_Runtime.field(electron, 'Notification'), [{ title: request.title, body: request.body, icon: request.icon, silent: request.silent, actions: _Runtime.callProperty(actions, 'map', cast ([function(a:Dynamic) return { type: 'button', text: a.title }] : Array<Dynamic>)) }]);
         _Runtime.callProperty(n, 'on', cast (['show', function() return _Runtime.callOptionalValue(showListener, cast ([id] : Array<Dynamic>))] : Array<Dynamic>));
         _Runtime.callProperty(n, 'on', cast (['click', function() return _Runtime.callOptionalValue(clickListener, cast ([id] : Array<Dynamic>))] : Array<Dynamic>));
         _Runtime.callProperty(n, 'on', cast (['action', function(args:Dynamic) {
           var index:Dynamic = cast _Runtime.UNDEFINED;
           index = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([flighthq._internal._StaticIndex.readArray(args, 1.0)] : Array<Dynamic>));
-          _Runtime.callOptionalValue(actionListener, cast ([id, Std.string(_Runtime.coalesce(_Runtime.optionalField(flighthq._internal._StaticIndex.readArray(actions, index), 'id'), function():Dynamic return cast ''))] : Array<Dynamic>));
+          _Runtime.callOptionalValue(actionListener, cast ([id, Std.string(_Runtime.coalesce(({ final __typedStruct0 = flighthq._internal._StaticIndex.readArray(actions, index); __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.id; }), function():Dynamic return cast ''))] : Array<Dynamic>));
         }] : Array<Dynamic>));
         _Runtime.callProperty(n, 'on', cast (['close', function() {
           ((cast live : flighthq._internal._Map).delete_(id));

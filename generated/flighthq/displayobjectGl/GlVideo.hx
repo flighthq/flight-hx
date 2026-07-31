@@ -58,7 +58,7 @@ class GlVideo {
     _Runtime.callValue(flushGlSpriteBatch, cast ([state] : Array<Dynamic>));
     source = (cast _Runtime.field(renderProxy, 'source') : Video);
     resource = _Runtime.coalesce(_Runtime.field(_Runtime.field(source, 'data'), 'source'), function():Dynamic return cast null);
-    element = _Runtime.coalesce(_Runtime.optionalField(resource, 'element'), function():Dynamic return cast null);
+    element = _Runtime.coalesce(({ final __typedStruct1 = resource; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.element; }), function():Dynamic return cast null);
     if ((cast ((cast ((cast _Runtime.strictEquals(resource, null) : Bool) || (cast _Runtime.strictEquals(element, null) : Bool)) : Bool) || (cast ((cast _Runtime.field(element, 'readyState') : Float) < (cast 2.0 : Float)) : Bool)) : Bool)) { return; }
     vw = _Runtime.field(element, 'videoWidth');
     vh = _Runtime.field(element, 'videoHeight');

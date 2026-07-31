@@ -11,40 +11,40 @@ class StarlingSerialize {
   public static function frameToSubTexture__starlingSerialize(frame:Dynamic):StarlingSubTexture {
     var st:StarlingSubTexture = cast _Runtime.UNDEFINED;
     st = { height: frame.height, name: frame.name, width: frame.width, x: frame.x, y: frame.y };
-    if ((cast !_Runtime.strictEquals(frame.offsetX, 0.0) : Bool)) { _Runtime.setField(st, 'frameX', -frame.offsetX); }
-    if ((cast !_Runtime.strictEquals(frame.offsetY, 0.0) : Bool)) { _Runtime.setField(st, 'frameY', -frame.offsetY); }
-    if ((cast !_Runtime.strictEquals(frame.sourceWidth, frame.width) : Bool)) { _Runtime.setField(st, 'frameWidth', frame.sourceWidth); }
-    if ((cast !_Runtime.strictEquals(frame.sourceHeight, frame.height) : Bool)) { _Runtime.setField(st, 'frameHeight', frame.sourceHeight); }
+    if ((cast !_Runtime.strictEquals(frame.offsetX, 0.0) : Bool)) { (st.frameX = cast (-frame.offsetX : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(frame.offsetY, 0.0) : Bool)) { (st.frameY = cast (-frame.offsetY : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(frame.sourceWidth, frame.width) : Bool)) { (st.frameWidth = cast (frame.sourceWidth : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(frame.sourceHeight, frame.height) : Bool)) { (st.frameHeight = cast (frame.sourceHeight : Dynamic)); }
     if ((cast ((cast !_Runtime.strictEquals(frame.pivotX, null) : Bool) && (cast ((cast frame.sourceWidth : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      _Runtime.setField(st, 'pivotX', (frame.pivotX * frame.sourceWidth));
+      (st.pivotX = cast ((frame.pivotX * frame.sourceWidth) : Dynamic));
     }
     if ((cast ((cast !_Runtime.strictEquals(frame.pivotY, null) : Bool) && (cast ((cast frame.sourceHeight : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      _Runtime.setField(st, 'pivotY', (frame.pivotY * frame.sourceHeight));
+      (st.pivotY = cast ((frame.pivotY * frame.sourceHeight) : Dynamic));
     }
-    if ((cast frame.rotated : Bool)) { _Runtime.setField(st, 'rotated', true); }
+    if ((cast frame.rotated : Bool)) { (st.rotated = cast (true : Dynamic)); }
     return cast st;
     return cast null;
   }
 
   public static function subTextureToAttr__starlingSerialize(st:StarlingSubTexture):String {
     var parts:Array<String> = cast _Runtime.UNDEFINED;
-    parts = cast (['name="' + Std.string(_Runtime.field(st, 'name')) + '"', 'x="' + Std.string(_Runtime.field(st, 'x')) + '"', 'y="' + Std.string(_Runtime.field(st, 'y')) + '"'] : Array<Dynamic>);
-    _Runtime.pushMany(parts, cast (['width="' + Std.string(_Runtime.field(st, 'width')) + '"', 'height="' + Std.string(_Runtime.field(st, 'height')) + '"'] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(st, 'frameX'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(parts, 'push', cast (['frameX="' + Std.string(_Runtime.field(st, 'frameX')) + '"'] : Array<Dynamic>)); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(st, 'frameY'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(parts, 'push', cast (['frameY="' + Std.string(_Runtime.field(st, 'frameY')) + '"'] : Array<Dynamic>)); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(st, 'frameWidth'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(parts, 'push', cast (['frameWidth="' + Std.string(_Runtime.field(st, 'frameWidth')) + '"'] : Array<Dynamic>)); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(st, 'frameHeight'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(parts, 'push', cast (['frameHeight="' + Std.string(_Runtime.field(st, 'frameHeight')) + '"'] : Array<Dynamic>)); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(st, 'pivotX'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(parts, 'push', cast (['pivotX="' + Std.string(_Runtime.field(st, 'pivotX')) + '"'] : Array<Dynamic>)); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(st, 'pivotY'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(parts, 'push', cast (['pivotY="' + Std.string(_Runtime.field(st, 'pivotY')) + '"'] : Array<Dynamic>)); }
-    if (_Runtime.truthy(_Runtime.field(st, 'rotated'))) { _Runtime.callProperty(parts, 'push', cast (['rotated="true"'] : Array<Dynamic>)); }
+    parts = cast (['name="' + Std.string(st.name) + '"', 'x="' + Std.string(st.x) + '"', 'y="' + Std.string(st.y) + '"'] : Array<Dynamic>);
+    _Runtime.pushMany(parts, cast (['width="' + Std.string(st.width) + '"', 'height="' + Std.string(st.height) + '"'] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals(st.frameX, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(parts, 'push', cast (['frameX="' + Std.string(st.frameX) + '"'] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(st.frameY, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(parts, 'push', cast (['frameY="' + Std.string(st.frameY) + '"'] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(st.frameWidth, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(parts, 'push', cast (['frameWidth="' + Std.string(st.frameWidth) + '"'] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(st.frameHeight, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(parts, 'push', cast (['frameHeight="' + Std.string(st.frameHeight) + '"'] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(st.pivotX, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(parts, 'push', cast (['pivotX="' + Std.string(st.pivotX) + '"'] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(st.pivotY, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(parts, 'push', cast (['pivotY="' + Std.string(st.pivotY) + '"'] : Array<Dynamic>)); }
+    if (_Runtime.truthy(st.rotated)) { _Runtime.callProperty(parts, 'push', cast (['rotated="true"'] : Array<Dynamic>)); }
     return cast _Runtime.join(parts, ' ');
     return cast null;
   }
 
   public static function documentToXml__starlingSerialize(doc:StarlingDocument):String {
     var lines:Array<String> = cast _Runtime.UNDEFINED;
-    lines = cast (['<?xml version="1.0" encoding="UTF-8"?>', '<TextureAtlas imagePath="' + Std.string(_Runtime.field(doc, 'imagePath')) + '">'] : Array<Dynamic>);
-    for (st in _Runtime.iterable(_Runtime.field(doc, 'subTextures'))) {
+    lines = cast (['<?xml version="1.0" encoding="UTF-8"?>', '<TextureAtlas imagePath="' + Std.string(doc.imagePath) + '">'] : Array<Dynamic>);
+    for (st in _Runtime.iterable(doc.subTextures)) {
       _Runtime.callProperty(lines, 'push', cast (['	<SubTexture ' + Std.string(_Runtime.callValue(StarlingSerialize.subTextureToAttr__starlingSerialize, cast ([st] : Array<Dynamic>))) + '/>'] : Array<Dynamic>));
     }
     _Runtime.callProperty(lines, 'push', cast (['</TextureAtlas>'] : Array<Dynamic>));
@@ -54,7 +54,7 @@ class StarlingSerialize {
 
   public static function serializeStarlingSpritesheet(data:SpritesheetData, ?existing:Dynamic):String {
     var doc:StarlingDocument = cast _Runtime.UNDEFINED;
-    doc = { imagePath: _Runtime.orValue(_Runtime.orValue(_Runtime.field(data, 'imageFile'), function():Dynamic return cast _Runtime.optionalField(existing, 'imagePath')), function():Dynamic return cast ''), subTextures: _Runtime.callProperty(_Runtime.field(data, 'frames'), 'map', cast ([StarlingSerialize.frameToSubTexture__starlingSerialize] : Array<Dynamic>)) };
+    doc = { imagePath: _Runtime.orValue(_Runtime.orValue(data.imageFile, function():Dynamic return cast _Runtime.optionalField(existing, 'imagePath')), function():Dynamic return cast ''), subTextures: _Runtime.callProperty(data.frames, 'map', cast ([StarlingSerialize.frameToSubTexture__starlingSerialize] : Array<Dynamic>)) };
     return cast _Runtime.callValue(StarlingSerialize.documentToXml__starlingSerialize, cast ([doc] : Array<Dynamic>));
     return cast null;
   }

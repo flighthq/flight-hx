@@ -65,7 +65,7 @@ class UpdateTweens {
   }
 
   public static function updateTweens(manager:TweenManager, deltaTime:Float):Void {
-    for (__iteration0 in _Runtime.iterable(_Runtime.field(manager, 'tweens'))) {
+    for (__iteration0 in _Runtime.iterable(manager.tweens)) {
       var target:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
       var list:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
       var i:Dynamic = (_Runtime.field(list, 'length') - 1.0);
@@ -77,7 +77,7 @@ class UpdateTweens {
         }
         i--;
       }
-      if ((cast _Runtime.strictEquals(_Runtime.field(list, 'length'), 0.0) : Bool)) { ((cast _Runtime.field(manager, 'tweens') : flighthq._internal._Map).delete_(target)); }
+      if ((cast _Runtime.strictEquals(_Runtime.field(list, 'length'), 0.0) : Bool)) { ((cast manager.tweens : flighthq._internal._Map).delete_(target)); }
     }
   }
 }

@@ -162,7 +162,7 @@ class RichText {
       var signals:Dynamic = _Runtime.field((cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime), 'textFieldSignals');
       if ((cast !_Runtime.strictEquals(signals, null) : Bool)) {
         var event:Dynamic = { url: url, x: x, y: y };
-        _Runtime.callProperty(_Runtime.field(signals, 'onTextFieldLink'), 'emit', cast ([event] : Array<Dynamic>));
+        _Runtime.callValue(_Runtime.field(signals, 'onTextFieldLink').emit, cast ([event] : Array<Dynamic>));
       }
     }
     return cast url;
@@ -592,7 +592,7 @@ class RichText {
     signals = _Runtime.field((cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime), 'textFieldSignals');
     if ((cast _Runtime.strictEquals(signals, null) : Bool)) { return; }
     event = { previousText: previousText, text: _Runtime.field(_Runtime.field(source, 'data'), 'text') };
-    _Runtime.callProperty(_Runtime.field(signals, 'onTextFieldChange'), 'emit', cast ([event] : Array<Dynamic>));
+    _Runtime.callValue(_Runtime.field(signals, 'onTextFieldChange').emit, cast ([event] : Array<Dynamic>));
   }
 
   public static function emitTextFieldScroll__richText(source:flighthq.types.RichText, previousScrollH:Float, previousScrollV:Float):Void {
@@ -601,6 +601,6 @@ class RichText {
     signals = _Runtime.field((cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime), 'textFieldSignals');
     if ((cast _Runtime.strictEquals(signals, null) : Bool)) { return; }
     event = { previousScrollH: previousScrollH, previousScrollV: previousScrollV, scrollH: _Runtime.field(_Runtime.field(source, 'data'), 'scrollH'), scrollV: _Runtime.field(_Runtime.field(source, 'data'), 'scrollV') };
-    _Runtime.callProperty(_Runtime.field(signals, 'onTextFieldScroll'), 'emit', cast ([event] : Array<Dynamic>));
+    _Runtime.callValue(_Runtime.field(signals, 'onTextFieldScroll').emit, cast ([event] : Array<Dynamic>));
   }
 }

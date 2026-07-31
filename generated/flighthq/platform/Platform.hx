@@ -65,7 +65,7 @@ class Platform {
   }
 
   public static function getPlatformEngine():PlatformEngine {
-    return cast _Runtime.field(_Runtime.callValue(getPlatformInfo, cast ([Platform._scratch__platform] : Array<Dynamic>)), 'engine');
+    return cast _Runtime.callValue(getPlatformInfo, cast ([Platform._scratch__platform] : Array<Dynamic>)).engine;
     return cast null;
   }
 
@@ -75,17 +75,17 @@ class Platform {
   }
 
   public static function getPlatformKind():PlatformKind {
-    return cast _Runtime.field(_Runtime.callValue(getPlatformInfo, cast ([Platform._scratch__platform] : Array<Dynamic>)), 'kind');
+    return cast _Runtime.callValue(getPlatformInfo, cast ([Platform._scratch__platform] : Array<Dynamic>)).kind;
     return cast null;
   }
 
   public static function getPlatformName():PlatformName {
-    return cast _Runtime.field(_Runtime.callValue(getPlatformInfo, cast ([Platform._scratch__platform] : Array<Dynamic>)), 'name');
+    return cast _Runtime.callValue(getPlatformInfo, cast ([Platform._scratch__platform] : Array<Dynamic>)).name;
     return cast null;
   }
 
   public static function getPlatformRuntime():PlatformRuntime {
-    return cast _Runtime.field(_Runtime.callValue(getPlatformInfo, cast ([Platform._scratch__platform] : Array<Dynamic>)), 'runtime');
+    return cast _Runtime.callValue(getPlatformInfo, cast ([Platform._scratch__platform] : Array<Dynamic>)).runtime;
     return cast null;
   }
 
@@ -94,20 +94,20 @@ class Platform {
     var ua:Dynamic = cast _Runtime.UNDEFINED;
     nav = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic) : (cast null : Dynamic));
     ua = _Runtime.coalesce(_Runtime.optionalField(nav, 'userAgent'), function():Dynamic return cast '');
-    _Runtime.setField(out, 'name', _Runtime.callValue(parseUserAgentName, cast ([ua] : Array<Dynamic>)));
-    _Runtime.setField(out, 'kind', _Runtime.callValue(parseUserAgentKind, cast ([_Runtime.field(out, 'name')] : Array<Dynamic>)));
-    _Runtime.setField(out, 'version', _Runtime.callValue(parseUserAgentVersion, cast ([ua, _Runtime.field(out, 'name')] : Array<Dynamic>)));
-    _Runtime.setField(out, 'arch', _Runtime.callValue(parseUserAgentArch, cast ([ua] : Array<Dynamic>)));
-    _Runtime.setField(out, 'locale', _Runtime.coalesce(_Runtime.optionalField(nav, 'language'), function():Dynamic return cast ''));
-    _Runtime.setField(out, 'isTouch', ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) && (cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'maxTouchPoints') : Bool)) : Bool) ? (cast ((cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'maxTouchPoints') : Float) > (cast 0.0 : Float)) : Dynamic) : (cast false : Dynamic)));
-    _Runtime.setField(out, 'runtime', _Runtime.callValue(parseUserAgentRuntime, cast ([((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) ? (cast (cast (cast flighthq._internal.backend.DomWindowBackend.value() : Dynamic) : Dynamic) : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)));
-    _Runtime.setField(out, 'engine', _Runtime.callValue(parseUserAgentEngine, cast ([ua] : Array<Dynamic>)));
-    _Runtime.setField(out, 'engineVersion', _Runtime.callValue(parseUserAgentEngineVersion, cast ([ua, _Runtime.field(out, 'engine')] : Array<Dynamic>)));
-    _Runtime.setField(out, 'endianness', _Runtime.callValue(detectEndianness, cast ([] : Array<Dynamic>)));
-    _Runtime.setField(out, 'pointerWidth', _Runtime.callValue(parseUserAgentPointerWidth, cast ([_Runtime.field(out, 'arch')] : Array<Dynamic>)));
-    _Runtime.setField(out, 'osBuild', '');
-    _Runtime.setField(out, 'distro', '');
-    _Runtime.setField(out, 'distroVersion', '');
+    (out.name = cast (_Runtime.callValue(parseUserAgentName, cast ([ua] : Array<Dynamic>)) : Dynamic));
+    (out.kind = cast (_Runtime.callValue(parseUserAgentKind, cast ([out.name] : Array<Dynamic>)) : Dynamic));
+    (out.version = cast (_Runtime.callValue(parseUserAgentVersion, cast ([ua, out.name] : Array<Dynamic>)) : Dynamic));
+    (out.arch = cast (_Runtime.callValue(parseUserAgentArch, cast ([ua] : Array<Dynamic>)) : Dynamic));
+    (out.locale = cast (_Runtime.coalesce(_Runtime.optionalField(nav, 'language'), function():Dynamic return cast '') : Dynamic));
+    (out.isTouch = cast (((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) && (cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'maxTouchPoints') : Bool)) : Bool) ? (cast ((cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'maxTouchPoints') : Float) > (cast 0.0 : Float)) : Dynamic) : (cast false : Dynamic)) : Dynamic));
+    (out.runtime = cast (_Runtime.callValue(parseUserAgentRuntime, cast ([((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) ? (cast (cast (cast flighthq._internal.backend.DomWindowBackend.value() : Dynamic) : Dynamic) : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)) : Dynamic));
+    (out.engine = cast (_Runtime.callValue(parseUserAgentEngine, cast ([ua] : Array<Dynamic>)) : Dynamic));
+    (out.engineVersion = cast (_Runtime.callValue(parseUserAgentEngineVersion, cast ([ua, out.engine] : Array<Dynamic>)) : Dynamic));
+    (out.endianness = cast (_Runtime.callValue(detectEndianness, cast ([] : Array<Dynamic>)) : Dynamic));
+    (out.pointerWidth = cast (_Runtime.callValue(parseUserAgentPointerWidth, cast ([out.arch] : Array<Dynamic>)) : Dynamic));
+    (out.osBuild = cast ('' : Dynamic));
+    (out.distro = cast ('' : Dynamic));
+    (out.distroVersion = cast ('' : Dynamic));
     return cast out;
     return cast null;
   }
@@ -130,13 +130,13 @@ class Platform {
   }
 
   public static function isPlatformTouch():Bool {
-    return cast _Runtime.field(_Runtime.callValue(getPlatformInfo, cast ([Platform._scratch__platform] : Array<Dynamic>)), 'isTouch');
+    return cast _Runtime.callValue(getPlatformInfo, cast ([Platform._scratch__platform] : Array<Dynamic>)).isTouch;
     return cast null;
   }
 
   public static function isPlatformVersionAtLeast(minimum:String):Bool {
     var version:Dynamic = cast _Runtime.UNDEFINED;
-    version = _Runtime.field(_Runtime.callValue(getPlatformInfo, cast ([Platform._scratch__platform] : Array<Dynamic>)), 'version');
+    version = _Runtime.callValue(getPlatformInfo, cast ([Platform._scratch__platform] : Array<Dynamic>)).version;
     if ((cast _Runtime.strictEquals(version, '') : Bool)) { return cast false; }
     return cast ((cast _Runtime.callValue(comparePlatformVersions, cast ([version, minimum] : Array<Dynamic>)) : Float) >= (cast 0.0 : Float));
     return cast null;

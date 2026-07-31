@@ -101,7 +101,7 @@ class GlDraw {
     _Runtime.setField(runtime, 'currentTexture', _Runtime.field(entry, 'texture'));
     flighthq._internal.backend.WebGl2Backend.pixelStorei(gl, flighthq._internal.backend.WebGl2Backend.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
     _Runtime.setField(entry, 'uploadedFrameId', _Runtime.callValue(uploadGlTextureVideoFrame, cast ([gl, videoTexture, _Runtime.field(entry, 'uploadedFrameId')] : Array<Dynamic>)));
-    _Runtime.callValue(GlDraw.applyGlSamplerState__glDraw, cast ([state, runtime, _Runtime.field(entry, 'texture'), _Runtime.coalesce(_Runtime.coalesce(sampler, function():Dynamic return cast _Runtime.field(videoTexture, 'sampler')), function():Dynamic return cast null)] : Array<Dynamic>));
+    _Runtime.callValue(GlDraw.applyGlSamplerState__glDraw, cast ([state, runtime, _Runtime.field(entry, 'texture'), _Runtime.coalesce(_Runtime.coalesce(sampler, function():Dynamic return cast videoTexture.sampler), function():Dynamic return cast null)] : Array<Dynamic>));
     return cast _Runtime.field(entry, 'texture');
     return cast null;
   }
@@ -270,14 +270,14 @@ class GlDraw {
       flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_T, flighthq._internal.backend.WebGl2Backend.CLAMP_TO_EDGE);
       return;
     }
-    useMips = ((cast _Runtime.field(sampler, 'mipmaps') : Bool) && (cast _Runtime.callValue(GlDraw.isGlMipmapFilter__glDraw, cast ([_Runtime.field(sampler, 'minFilter')] : Array<Dynamic>)) : Bool));
-    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, flighthq._internal.backend.WebGl2Backend.TEXTURE_MIN_FILTER, _Runtime.callValue(GlDraw.glMinFilterValue__glDraw, cast ([gl, _Runtime.field(sampler, 'minFilter'), useMips] : Array<Dynamic>)));
-    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, flighthq._internal.backend.WebGl2Backend.TEXTURE_MAG_FILTER, _Runtime.callValue(GlDraw.glMagFilterValue__glDraw, cast ([gl, _Runtime.field(sampler, 'magFilter')] : Array<Dynamic>)));
-    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_S, _Runtime.callValue(GlDraw.glTextureWrapValue__glDraw, cast ([gl, _Runtime.field(sampler, 'wrapU')] : Array<Dynamic>)));
-    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_T, _Runtime.callValue(GlDraw.glTextureWrapValue__glDraw, cast ([gl, _Runtime.field(sampler, 'wrapV')] : Array<Dynamic>)));
+    useMips = ((cast sampler.mipmaps : Bool) && (cast _Runtime.callValue(GlDraw.isGlMipmapFilter__glDraw, cast ([sampler.minFilter] : Array<Dynamic>)) : Bool));
+    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, flighthq._internal.backend.WebGl2Backend.TEXTURE_MIN_FILTER, _Runtime.callValue(GlDraw.glMinFilterValue__glDraw, cast ([gl, sampler.minFilter, useMips] : Array<Dynamic>)));
+    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, flighthq._internal.backend.WebGl2Backend.TEXTURE_MAG_FILTER, _Runtime.callValue(GlDraw.glMagFilterValue__glDraw, cast ([gl, sampler.magFilter] : Array<Dynamic>)));
+    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_S, _Runtime.callValue(GlDraw.glTextureWrapValue__glDraw, cast ([gl, sampler.wrapU] : Array<Dynamic>)));
+    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_T, _Runtime.callValue(GlDraw.glTextureWrapValue__glDraw, cast ([gl, sampler.wrapV] : Array<Dynamic>)));
     ext = _Runtime.callValue(GlDraw.ensureGlAnisotropyExt__glDraw, cast ([state, runtime] : Array<Dynamic>));
     if (_Runtime.truthy(ext)) {
-      var level:Dynamic = HxMath.max(1.0, HxMath.min(_Runtime.field(sampler, 'anisotropy'), _Runtime.coalesce(_Runtime.field(runtime, 'maxAnisotropy'), function():Dynamic return cast 1.0)));
+      var level:Dynamic = HxMath.max(1.0, HxMath.min(sampler.anisotropy, _Runtime.coalesce(_Runtime.field(runtime, 'maxAnisotropy'), function():Dynamic return cast 1.0)));
       flighthq._internal.backend.WebGl2Backend.texParameterf(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, _Runtime.field(ext, 'TEXTURE_MAX_ANISOTROPY_EXT'), level);
     }
     if ((cast useMips : Bool)) {

@@ -22,13 +22,13 @@ class WgpuEnvironmentCube {
     if ((cast !_Runtime.strictEquals(_Runtime.field(scene, 'environmentSourceCubeView'), null) : Bool)) { return cast _Runtime.field(scene, 'environmentSourceCubeView'); }
     cube = _Runtime.field(environment, 'environment');
     if ((cast ((cast _Runtime.strictEquals(cube, null) : Bool) || (cast !(cast _Runtime.callValue(WgpuEnvironmentCube.hasWgpuCubeFacePixels__wgpuEnvironmentCube, cast ([cube] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast null; }
-    size = flighthq._internal._StaticIndex.readArray(_Runtime.field(cube, 'faces'), 0.0).width;
+    size = flighthq._internal._StaticIndex.readArray(cube.faces, 0.0).width;
     device = _Runtime.field(state, 'device');
     texture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([size, size, 6.0] : Array<Dynamic>), format: WgpuEnvironmentCube.ENVIRONMENT_CUBE_FORMAT__wgpuEnvironmentCube, usage: (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')))) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
     {
       var face:Dynamic = 0.0;
       while ((cast ((cast face : Float) < (cast 6.0 : Float)) : Bool)) {
-        _Runtime.callValue(uploadWgpuTextureImageResource, cast ([device, texture, cast ([0.0, 0.0, face] : Array<Dynamic>), flighthq._internal._StaticIndex.readArray(_Runtime.field(cube, 'faces'), face)] : Array<Dynamic>));
+        _Runtime.callValue(uploadWgpuTextureImageResource, cast ([device, texture, cast ([0.0, 0.0, face] : Array<Dynamic>), flighthq._internal._StaticIndex.readArray(cube.faces, face)] : Array<Dynamic>));
         face++;
       }
     }
@@ -52,7 +52,7 @@ class WgpuEnvironmentCube {
     {
       var face:Dynamic = 0.0;
       while ((cast ((cast face : Float) < (cast 6.0 : Float)) : Bool)) {
-        var image:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(cube, 'faces'), face);
+        var image:Dynamic = flighthq._internal._StaticIndex.readArray(cube.faces, face);
         if ((cast ((cast _Runtime.looseEquals(image, null) : Bool) || (cast _Runtime.andValue(_Runtime.looseEquals(image.source, null), function():Dynamic return cast _Runtime.looseEquals(image.data, null)) : Bool)) : Bool)) { return cast false; }
         face++;
       }

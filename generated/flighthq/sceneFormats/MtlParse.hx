@@ -44,7 +44,7 @@ class MtlParse {
                 break;
               }
               var c:Dynamic = _Runtime.callValue(MtlParse.parseColor__mtlParse, cast ([args, warnings, directive, i] : Array<Dynamic>));
-              if ((cast !_Runtime.strictEquals(c, null) : Bool)) { _Runtime.setField(current, 'ambient', c); }
+              if ((cast !_Runtime.strictEquals(c, null) : Bool)) { (current.ambient = cast (c : Dynamic)); }
             }
           }
           else if (__switchValue == 'Kd') {
@@ -54,7 +54,7 @@ class MtlParse {
                 break;
               }
               var c:Dynamic = _Runtime.callValue(MtlParse.parseColor__mtlParse, cast ([args, warnings, directive, i] : Array<Dynamic>));
-              if ((cast !_Runtime.strictEquals(c, null) : Bool)) { _Runtime.setField(current, 'diffuse', c); }
+              if ((cast !_Runtime.strictEquals(c, null) : Bool)) { (current.diffuse = cast (c : Dynamic)); }
             }
           }
           else if (__switchValue == 'Ks') {
@@ -64,7 +64,7 @@ class MtlParse {
                 break;
               }
               var c:Dynamic = _Runtime.callValue(MtlParse.parseColor__mtlParse, cast ([args, warnings, directive, i] : Array<Dynamic>));
-              if ((cast !_Runtime.strictEquals(c, null) : Bool)) { _Runtime.setField(current, 'specular', c); }
+              if ((cast !_Runtime.strictEquals(c, null) : Bool)) { (current.specular = cast (c : Dynamic)); }
             }
           }
           else if (__switchValue == 'Ns') {
@@ -74,7 +74,7 @@ class MtlParse {
                 break;
               }
               var v:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([args] : Array<Dynamic>));
-              if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { _Runtime.setField(current, 'specularExponent', v); } else { _Runtime.callOptionalProperty(warnings, 'push', cast (['parseObjMaterialLibrary: invalid Ns value on line ' + Std.string((i + 1.0)) + ''] : Array<Dynamic>)); }
+              if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.specularExponent = cast (v : Dynamic)); } else { _Runtime.callOptionalProperty(warnings, 'push', cast (['parseObjMaterialLibrary: invalid Ns value on line ' + Std.string((i + 1.0)) + ''] : Array<Dynamic>)); }
             }
           }
           else if (__switchValue == 'd') {
@@ -84,7 +84,7 @@ class MtlParse {
                 break;
               }
               var v:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([args] : Array<Dynamic>));
-              if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { _Runtime.setField(current, 'dissolve', v); } else { _Runtime.callOptionalProperty(warnings, 'push', cast (['parseObjMaterialLibrary: invalid d value on line ' + Std.string((i + 1.0)) + ''] : Array<Dynamic>)); }
+              if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.dissolve = cast (v : Dynamic)); } else { _Runtime.callOptionalProperty(warnings, 'push', cast (['parseObjMaterialLibrary: invalid d value on line ' + Std.string((i + 1.0)) + ''] : Array<Dynamic>)); }
             }
           }
           else if (__switchValue == 'Tr') {
@@ -94,7 +94,7 @@ class MtlParse {
                 break;
               }
               var v:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([args] : Array<Dynamic>));
-              if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { _Runtime.setField(current, 'dissolve', (1.0 - v)); } else { _Runtime.callOptionalProperty(warnings, 'push', cast (['parseObjMaterialLibrary: invalid Tr value on line ' + Std.string((i + 1.0)) + ''] : Array<Dynamic>)); }
+              if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.dissolve = cast ((1.0 - v) : Dynamic)); } else { _Runtime.callOptionalProperty(warnings, 'push', cast (['parseObjMaterialLibrary: invalid Tr value on line ' + Std.string((i + 1.0)) + ''] : Array<Dynamic>)); }
             }
           }
           else if (__switchValue == 'illum') {
@@ -104,7 +104,7 @@ class MtlParse {
                 break;
               }
               var v:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([args, 10.0] : Array<Dynamic>));
-              if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { _Runtime.setField(current, 'illumination', v); } else { _Runtime.callOptionalProperty(warnings, 'push', cast (['parseObjMaterialLibrary: invalid illum value on line ' + Std.string((i + 1.0)) + ''] : Array<Dynamic>)); }
+              if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.illumination = cast (v : Dynamic)); } else { _Runtime.callOptionalProperty(warnings, 'push', cast (['parseObjMaterialLibrary: invalid illum value on line ' + Std.string((i + 1.0)) + ''] : Array<Dynamic>)); }
             }
           }
           else if (__switchValue == 'map_Kd') {
@@ -113,7 +113,7 @@ class MtlParse {
                 _Runtime.callValue(MtlParse.warnNoMaterial__mtlParse, cast ([warnings, directive, i] : Array<Dynamic>));
                 break;
               }
-              _Runtime.setField(current, 'mapDiffuse', args);
+              (current.mapDiffuse = cast (args : Dynamic));
             }
           }
           else if (__switchValue == 'map_Ka') {
@@ -122,7 +122,7 @@ class MtlParse {
                 _Runtime.callValue(MtlParse.warnNoMaterial__mtlParse, cast ([warnings, directive, i] : Array<Dynamic>));
                 break;
               }
-              _Runtime.setField(current, 'mapAmbient', args);
+              (current.mapAmbient = cast (args : Dynamic));
             }
           }
           else if (__switchValue == 'map_Ks') {
@@ -131,7 +131,7 @@ class MtlParse {
                 _Runtime.callValue(MtlParse.warnNoMaterial__mtlParse, cast ([warnings, directive, i] : Array<Dynamic>));
                 break;
               }
-              _Runtime.setField(current, 'mapSpecular', args);
+              (current.mapSpecular = cast (args : Dynamic));
             }
           }
           else if (__switchValue == 'map_Bump' || __switchValue == 'bump') {
@@ -140,7 +140,7 @@ class MtlParse {
                 _Runtime.callValue(MtlParse.warnNoMaterial__mtlParse, cast ([warnings, directive, i] : Array<Dynamic>));
                 break;
               }
-              _Runtime.setField(current, 'mapBump', args);
+              (current.mapBump = cast (args : Dynamic));
             }
           }
           else  {

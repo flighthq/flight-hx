@@ -8,7 +8,7 @@ import flighthq.xml.XmlParse.XmlElement;
 class XmlQuery {
   public static function getXmlElementAttribute(element:XmlElement, name:String):Null<String> {
     var value:Dynamic = cast _Runtime.UNDEFINED;
-    value = _Runtime.getIndex(_Runtime.field(element, 'attributes'), name);
+    value = _Runtime.getIndex(element.attributes, name);
     return cast ((cast !_Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
@@ -16,7 +16,7 @@ class XmlQuery {
   public static function getXmlElementAttributeNumber(element:XmlElement, name:String):Null<Float> {
     var value:Dynamic = cast _Runtime.UNDEFINED;
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
-    value = _Runtime.getIndex(_Runtime.field(element, 'attributes'), name);
+    value = _Runtime.getIndex(element.attributes, name);
     if ((cast ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(StringTools.trim(Std.string(value)), '') : Bool)) : Bool)) { return cast null; }
     parsed = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([value] : Array<Dynamic>));
     return cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast parsed : Dynamic) : (cast null : Dynamic));
@@ -24,15 +24,15 @@ class XmlQuery {
   }
 
   public static function getXmlElementChildByName(element:XmlElement, name:String):Null<XmlElement> {
-    for (child in _Runtime.iterable(_Runtime.field(element, 'children'))) {
-      if ((cast _Runtime.strictEquals(_Runtime.field(child, 'name'), name) : Bool)) { return cast child; }
+    for (child in _Runtime.iterable(element.children)) {
+      if ((cast _Runtime.strictEquals(child.name, name) : Bool)) { return cast child; }
     }
     return cast null;
     return cast null;
   }
 
   public static function getXmlElementChildrenByName(element:XmlElement, name:String):Array<XmlElement> {
-    return cast _Runtime.callProperty(_Runtime.field(element, 'children'), 'filter', cast ([function(child:Dynamic) return _Runtime.strictEquals(_Runtime.field(child, 'name'), name)] : Array<Dynamic>));
+    return cast _Runtime.callProperty(element.children, 'filter', cast ([function(child:Dynamic) return _Runtime.strictEquals(child.name, name)] : Array<Dynamic>));
     return cast null;
   }
 }

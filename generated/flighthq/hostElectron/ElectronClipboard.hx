@@ -186,7 +186,7 @@ class ElectronClipboard {
         try {
           var data:ElectronClipboardData = {  };
           for (item in _Runtime.iterable(items)) {
-            _Runtime.setIndex(data, _Runtime.callValue(ElectronClipboard.formatKey__electronClipboard, cast ([_Runtime.field(item, 'format')] : Array<Dynamic>)), _Runtime.field(item, 'data'));
+            _Runtime.setIndex(data, _Runtime.callValue(ElectronClipboard.formatKey__electronClipboard, cast ([item.format] : Array<Dynamic>)), item.data);
           }
           _Runtime.callProperty(cb, 'write', cast ([data] : Array<Dynamic>));
           return cast true;

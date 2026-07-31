@@ -112,10 +112,10 @@ class TauriWindow {
     }, setSize: function(win:Dynamic, width:Dynamic, height:Dynamic) {
       _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'setSize', cast ([_Runtime.construct(_Runtime.field(windowModule, 'LogicalSize'), [width, height])] : Array<Dynamic>))] : Array<Dynamic>));
     }, getBounds: function(win:Dynamic, out:Dynamic) {
-      _Runtime.setField(out, 'x', win.x);
-      _Runtime.setField(out, 'y', win.y);
-      _Runtime.setField(out, 'width', win.width);
-      _Runtime.setField(out, 'height', win.height);
+      (out.x = cast (win.x : Dynamic));
+      (out.y = cast (win.y : Dynamic));
+      (out.width = cast (win.width : Dynamic));
+      (out.height = cast (win.height : Dynamic));
       return cast out;
     }, minimize: function(win:Dynamic) {
       _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'minimize', cast ([] : Array<Dynamic>))] : Array<Dynamic>));

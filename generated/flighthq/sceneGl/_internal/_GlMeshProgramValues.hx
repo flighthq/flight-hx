@@ -88,9 +88,9 @@ class _GlMeshProgramValues {
     subset = _Runtime.field(proxy, 'subset');
     if ((cast !_Runtime.strictEquals(_Runtime.field(upload, 'indexBuffer'), null) : Bool)) {
       var elementSize:Dynamic = ((cast _Runtime.strictEquals(_Runtime.field(upload, 'indexType'), flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT) : Bool) ? (cast 4.0 : Dynamic) : (cast 2.0 : Dynamic));
-      flighthq._internal.backend.WebGl2Backend.drawElements(gl, flighthq._internal.backend.WebGl2Backend.TRIANGLES, _Runtime.field(subset, 'indexCount'), _Runtime.field(upload, 'indexType'), (_Runtime.field(subset, 'indexOffset') * elementSize));
+      flighthq._internal.backend.WebGl2Backend.drawElements(gl, flighthq._internal.backend.WebGl2Backend.TRIANGLES, subset.indexCount, _Runtime.field(upload, 'indexType'), (subset.indexOffset * elementSize));
     } else {
-      flighthq._internal.backend.WebGl2Backend.drawArrays(gl, flighthq._internal.backend.WebGl2Backend.TRIANGLES, _Runtime.field(subset, 'indexOffset'), _Runtime.field(subset, 'indexCount'));
+      flighthq._internal.backend.WebGl2Backend.drawArrays(gl, flighthq._internal.backend.WebGl2Backend.TRIANGLES, subset.indexOffset, subset.indexCount);
     }
   }
 

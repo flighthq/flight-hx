@@ -30,7 +30,7 @@ class TiledXmlParse {
   public static function parseTiledTileset(text:String, ?_options:TiledParseOptions):Null<TiledTileset> {
     var root:Dynamic = cast _Runtime.UNDEFINED;
     root = _Runtime.callValue(parseXmlDocument, cast ([text] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.strictEquals(root, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(root, 'name'), 'tileset') : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast _Runtime.strictEquals(root, null) : Bool) || (cast !_Runtime.strictEquals(root.name, 'tileset') : Bool)) : Bool)) { return cast null; }
     return cast _Runtime.callValue(TiledXmlParse.buildTiledTilesetFromXml__tiledXmlParse, cast ([root] : Array<Dynamic>));
     return cast null;
   }
@@ -41,13 +41,13 @@ class TiledXmlParse {
     var layers:Array<TiledLayer> = cast _Runtime.UNDEFINED;
     var background:Dynamic = cast _Runtime.UNDEFINED;
     root = _Runtime.callValue(parseXmlDocument, cast ([text] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.strictEquals(root, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(root, 'name'), 'map') : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast _Runtime.strictEquals(root, null) : Bool) || (cast !_Runtime.strictEquals(root.name, 'map') : Bool)) : Bool)) { return cast null; }
     tilesets = cast ([] : Array<Dynamic>);
     for (element in _Runtime.iterable(_Runtime.callValue(getXmlElementChildrenByName, cast ([root, 'tileset'] : Array<Dynamic>)))) {
       _Runtime.callProperty(tilesets, 'push', cast ([_Runtime.callValue(TiledXmlParse.buildTiledTilesetRefFromXml__tiledXmlParse, cast ([element] : Array<Dynamic>))] : Array<Dynamic>));
     }
     layers = cast ([] : Array<Dynamic>);
-    for (element in _Runtime.iterable(_Runtime.field(root, 'children'))) {
+    for (element in _Runtime.iterable(root.children)) {
       var layer:Dynamic = _Runtime.callValue(TiledXmlParse.buildTiledLayerFromXml__tiledXmlParse, cast ([element, options] : Array<Dynamic>));
       if ((cast !_Runtime.strictEquals(layer, null) : Bool)) { _Runtime.callProperty(layers, 'push', cast ([layer] : Array<Dynamic>)); }
     }
@@ -89,21 +89,21 @@ class TiledXmlParse {
   public static function buildTiledLayerFromXml__tiledXmlParse(element:XmlElement, ?options:TiledParseOptions):Null<TiledLayer> {
     var base:Dynamic = cast _Runtime.UNDEFINED;
     base = _Runtime.callValue(TiledXmlParse.buildTiledLayerBaseFromXml__tiledXmlParse, cast ([element] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(_Runtime.field(element, 'name'), 'layer') : Bool)) {
+    if ((cast _Runtime.strictEquals(element.name, 'layer') : Bool)) {
       var width:Dynamic = _Runtime.callValue(TiledXmlParse.attrNumber__tiledXmlParse, cast ([element, 'width', 0.0] : Array<Dynamic>));
       var height:Dynamic = _Runtime.callValue(TiledXmlParse.attrNumber__tiledXmlParse, cast ([element, 'height', 0.0] : Array<Dynamic>));
       return cast _Runtime.mergeObjects([base, { data: _Runtime.callValue(TiledXmlParse.buildTiledLayerDataFromXml__tiledXmlParse, cast ([element, width, height, options] : Array<Dynamic>)) }, { height: height }, { type: 'tilelayer' }, { width: width }]);
     }
-    if ((cast _Runtime.strictEquals(_Runtime.field(element, 'name'), 'objectgroup') : Bool)) {
+    if ((cast _Runtime.strictEquals(element.name, 'objectgroup') : Bool)) {
       return cast _Runtime.mergeObjects([base, { objects: _Runtime.callProperty(_Runtime.callValue(getXmlElementChildrenByName, cast ([element, 'object'] : Array<Dynamic>)), 'map', cast ([TiledXmlParse.buildTiledObjectFromXml__tiledXmlParse] : Array<Dynamic>)) }, { type: 'objectgroup' }]);
     }
-    if ((cast _Runtime.strictEquals(_Runtime.field(element, 'name'), 'imagelayer') : Bool)) {
+    if ((cast _Runtime.strictEquals(element.name, 'imagelayer') : Bool)) {
       var image:Dynamic = _Runtime.callValue(getXmlElementChildByName, cast ([element, 'image'] : Array<Dynamic>));
       return cast _Runtime.mergeObjects([base, { image: ((cast !_Runtime.strictEquals(image, null) : Bool) ? (cast _Runtime.callValue(TiledXmlParse.attrString__tiledXmlParse, cast ([image, 'source', ''] : Array<Dynamic>)) : Dynamic) : (cast '' : Dynamic)) }, { type: 'imagelayer' }]);
     }
-    if ((cast _Runtime.strictEquals(_Runtime.field(element, 'name'), 'group') : Bool)) {
+    if ((cast _Runtime.strictEquals(element.name, 'group') : Bool)) {
       var layers:Array<TiledLayer> = cast ([] : Array<Dynamic>);
-      for (child in _Runtime.iterable(_Runtime.field(element, 'children'))) {
+      for (child in _Runtime.iterable(element.children)) {
         var layer:Dynamic = _Runtime.callValue(TiledXmlParse.buildTiledLayerFromXml__tiledXmlParse, cast ([child, options] : Array<Dynamic>));
         if ((cast !_Runtime.strictEquals(layer, null) : Bool)) { _Runtime.callProperty(layers, 'push', cast ([layer] : Array<Dynamic>)); }
       }
@@ -123,9 +123,9 @@ class TiledXmlParse {
     if ((cast _Runtime.strictEquals(data, null) : Bool)) { return cast grid; }
     encoding = _Runtime.callValue(getXmlElementAttribute, cast ([data, 'encoding'] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(encoding, 'csv') : Bool)) {
-      (decoded = cast (_Runtime.callValue(decodeTiledCsvLayer, cast ([_Runtime.field(data, 'text')] : Array<Dynamic>)) : Dynamic));
+      (decoded = cast (_Runtime.callValue(decodeTiledCsvLayer, cast ([data.text] : Array<Dynamic>)) : Dynamic));
     } else { if ((cast _Runtime.strictEquals(encoding, 'base64') : Bool)) {
-      (decoded = cast (_Runtime.callValue(decodeTiledBase64Layer, cast ([_Runtime.field(data, 'text'), _Runtime.callValue(TiledXmlParse.asCompression__tiledXmlParse, cast ([_Runtime.callValue(getXmlElementAttribute, cast ([data, 'compression'] : Array<Dynamic>))] : Array<Dynamic>)), _Runtime.optionalField(options, 'inflate')] : Array<Dynamic>)) : Dynamic));
+      (decoded = cast (_Runtime.callValue(decodeTiledBase64Layer, cast ([data.text, _Runtime.callValue(TiledXmlParse.asCompression__tiledXmlParse, cast ([_Runtime.callValue(getXmlElementAttribute, cast ([data, 'compression'] : Array<Dynamic>))] : Array<Dynamic>)), ({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.inflate; })] : Array<Dynamic>)) : Dynamic));
     } else {
       (decoded = cast (_Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([_Runtime.callProperty(_Runtime.callValue(getXmlElementChildrenByName, cast ([data, 'tile'] : Array<Dynamic>)), 'map', cast ([function(tile:Dynamic) return _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.callValue(TiledXmlParse.attrNumber__tiledXmlParse, cast ([tile, 'gid', 0.0] : Array<Dynamic>))), 0)] : Array<Dynamic>))] : Array<Dynamic>)) : Dynamic));
     } }
@@ -154,7 +154,7 @@ class TiledXmlParse {
       var type:Dynamic = cast _Runtime.UNDEFINED;
       var raw:Dynamic = cast _Runtime.UNDEFINED;
       type = _Runtime.callValue(TiledXmlParse.asPropertyType__tiledXmlParse, cast ([_Runtime.callValue(getXmlElementAttribute, cast ([property, 'type'] : Array<Dynamic>))] : Array<Dynamic>));
-      raw = _Runtime.coalesce(_Runtime.callValue(getXmlElementAttribute, cast ([property, 'value'] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(property, 'text'));
+      raw = _Runtime.coalesce(_Runtime.callValue(getXmlElementAttribute, cast ([property, 'value'] : Array<Dynamic>)), function():Dynamic return cast property.text);
       return cast { name: _Runtime.callValue(TiledXmlParse.attrString__tiledXmlParse, cast ([property, 'name', ''] : Array<Dynamic>)), type: type, value: _Runtime.callValue(TiledXmlParse.parsePropertyValue__tiledXmlParse, cast ([type, raw] : Array<Dynamic>)) };
     }] : Array<Dynamic>));
     return cast null;

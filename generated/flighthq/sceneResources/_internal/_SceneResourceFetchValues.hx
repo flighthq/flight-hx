@@ -14,7 +14,7 @@ class _SceneResourceFetchValues {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           var url:Dynamic = cast _Runtime.UNDEFINED;
-          url = _Runtime.callValue(resolveSceneResourceUri, cast ([_Runtime.field(ref, 'uri'), _Runtime.field(ref, 'basePath')] : Array<Dynamic>));
+          url = _Runtime.callValue(resolveSceneResourceUri, cast ([ref.uri, ref.basePath] : Array<Dynamic>));
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
             return flighthq._internal._Async.flatMap(_Runtime.callValue(loadImageResourceFromUrl, cast ([url, _Runtime.field(_Runtime, 'UNDEFINED'), signal] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
               return flighthq._internal._Async.flowReturn(__awaitValue0);

@@ -30,17 +30,17 @@ class Lifecycle {
     unsubscribeState = _Runtime.callProperty(backend, 'subscribe', cast ([function() {
       var state:Dynamic = cast _Runtime.UNDEFINED;
       state = _Runtime.callProperty(backend, 'getState', cast ([] : Array<Dynamic>));
-      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onStateChange')], [state]]), 1);
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onStateChange], [state]]), 1);
       if ((cast ((cast _Runtime.strictEquals(state, 'active') : Bool) && (cast !_Runtime.strictEquals(previous, 'active') : Bool)) : Bool)) {
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onResume')]]), 1);
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onResume]]), 1);
         var saved:Dynamic = ((cast Lifecycle._savedState__lifecycle : flighthq._internal._WeakMap).get(app));
         if ((cast !_Runtime.strictEquals(saved, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onRestoreState')], [saved]]), 1);
+          _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onRestoreState], [saved]]), 1);
         }
       } else { if ((cast ((cast !_Runtime.strictEquals(state, 'active') : Bool) && (cast _Runtime.strictEquals(previous, 'active') : Bool)) : Bool)) {
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onPause')]]), 1);
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onPause]]), 1);
         var stateBag:Dynamic = {  };
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onSaveState')], [stateBag]]), 1);
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onSaveState], [stateBag]]), 1);
         ((cast Lifecycle._savedState__lifecycle : flighthq._internal._WeakMap).set(app, stateBag));
       } }
       (previous = cast (state : Dynamic));
@@ -48,7 +48,7 @@ class Lifecycle {
     memSub = _Runtime.field(backend, 'subscribeMemoryWarning');
     if ((cast !_Runtime.strictEquals(memSub, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (unsubscribeMemory = cast (_Runtime.callProperty(memSub, 'call', cast ([backend, function(level:AppMemoryPressure) {
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onMemoryWarning')], [level]]), 1);
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onMemoryWarning], [level]]), 1);
       }] : Array<Dynamic>)) : Dynamic));
     }
     ((cast Lifecycle._subscriptions__lifecycle : flighthq._internal._WeakMap).set(app, function() {
@@ -182,8 +182,8 @@ class Lifecycle {
   }
 
   public static function requestAppBack(app:AppLifecycle):Bool {
-    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(app, 'onBackButton')]]), 1);
-    return cast !_Runtime.strictEquals(_Runtime.optionalField(_Runtime.field(_Runtime.field(app, 'onBackButton'), 'data'), 'cancelled'), true);
+    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onBackButton]]), 1);
+    return cast !_Runtime.strictEquals(({ final __typedStruct0 = app.onBackButton.data; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.cancelled; }), true);
     return cast null;
   }
 

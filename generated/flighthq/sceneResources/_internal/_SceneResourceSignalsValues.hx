@@ -18,15 +18,15 @@ class _SceneResourceSignalsValues {
 
   public static function enableSceneResourceSignals(resolver:SceneResourceResolver):SceneResourceSignals {
     var signals:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals(_Runtime.field(resolver, 'signals'), null) : Bool)) { return cast _Runtime.field(resolver, 'signals'); }
+    if ((cast !_Runtime.strictEquals(resolver.signals, null) : Bool)) { return cast resolver.signals; }
     signals = _Runtime.callValue(createSceneResourceSignals, cast ([] : Array<Dynamic>));
-    _Runtime.setField(resolver, 'signals', signals);
+    (resolver.signals = cast (signals : Dynamic));
     return cast signals;
     return cast null;
   }
 
   public static function getSceneResourceSignals(resolver:SceneResourceResolver):Null<SceneResourceSignals> {
-    return cast _Runtime.field(resolver, 'signals');
+    return cast resolver.signals;
     return cast null;
   }
 }

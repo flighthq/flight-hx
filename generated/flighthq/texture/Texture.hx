@@ -166,11 +166,11 @@ class Texture {
     var cosR:Dynamic = cast _Runtime.UNDEFINED;
     var sinR:Dynamic = cast _Runtime.UNDEFINED;
     var m:Dynamic = cast _Runtime.UNDEFINED;
-    r = _Runtime.field(texture, 'uvRotation');
-    sx = _Runtime.field(texture, 'uvScale').x;
-    sy = _Runtime.field(texture, 'uvScale').y;
-    tx = _Runtime.field(texture, 'uvOffset').x;
-    ty = _Runtime.field(texture, 'uvOffset').y;
+    r = texture.uvRotation;
+    sx = texture.uvScale.x;
+    sy = texture.uvScale.y;
+    tx = texture.uvOffset.x;
+    ty = texture.uvOffset.y;
     cosR = HxMath.cos(r);
     sinR = HxMath.sin(r);
     m = out.m;
@@ -209,7 +209,7 @@ class Texture {
   }
 
   public static function hasTextureUvTransform(texture:TextureUvTransform):Bool {
-    return cast _Runtime.orValue(((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(texture, 'uvScale').x, 1.0) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(texture, 'uvScale').y, 1.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(texture, 'uvOffset').x, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(texture, 'uvOffset').y, 0.0) : Bool)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(texture, 'uvRotation'), 0.0));
+    return cast _Runtime.orValue(((cast ((cast ((cast !_Runtime.strictEquals(texture.uvScale.x, 1.0) : Bool) || (cast !_Runtime.strictEquals(texture.uvScale.y, 1.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(texture.uvOffset.x, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(texture.uvOffset.y, 0.0) : Bool)), function():Dynamic return cast !_Runtime.strictEquals(texture.uvRotation, 0.0));
     return cast null;
   }
 

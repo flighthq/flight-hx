@@ -24,7 +24,7 @@ class CapacitorDialog {
       });
     }, message: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.flatMap(_Runtime.callProperty(dialog, 'alert', cast ([{ title: _Runtime.field(options, 'title'), message: _Runtime.field(options, 'message') }] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
+        return flighthq._internal._Async.flatMap(_Runtime.callProperty(dialog, 'alert', cast ([{ title: options.title, message: options.message }] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
           __awaitValue0;
           return flighthq._internal._Async.resolve({ buttonIndex: 0.0, cancelled: false, checkboxChecked: false });
         });
@@ -32,7 +32,7 @@ class CapacitorDialog {
     }, confirm: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.protect(function():Dynamic {
         var result:Dynamic = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap(_Runtime.callProperty(dialog, 'confirm', cast ([{ title: _Runtime.field(options, 'title'), message: _Runtime.field(options, 'message') }] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
+        return flighthq._internal._Async.flatMap(_Runtime.callProperty(dialog, 'confirm', cast ([{ title: options.title, message: options.message }] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
           result = __awaitValue1;
           return flighthq._internal._Async.resolve(_Runtime.field(result, 'value'));
         });
@@ -40,7 +40,7 @@ class CapacitorDialog {
     }, prompt: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.protect(function():Dynamic {
         var result:Dynamic = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap(_Runtime.callProperty(dialog, 'prompt', cast ([{ title: _Runtime.field(options, 'title'), message: _Runtime.field(options, 'message'), inputText: _Runtime.field(options, 'defaultValue'), inputPlaceholder: _Runtime.field(options, 'placeholder') }] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
+        return flighthq._internal._Async.flatMap(_Runtime.callProperty(dialog, 'prompt', cast ([{ title: options.title, message: options.message, inputText: options.defaultValue, inputPlaceholder: options.placeholder }] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
           result = __awaitValue2;
           return flighthq._internal._Async.resolve(((cast _Runtime.field(result, 'cancelled') : Bool) ? (cast null : Dynamic) : (cast _Runtime.field(result, 'value') : Dynamic)));
         });

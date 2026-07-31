@@ -195,9 +195,9 @@ class Md2Parse {
     mesh = _Runtime.callValue(createMesh, cast ([geometry, materials] : Array<Dynamic>));
     morph = _Runtime.callValue(Md2Parse.buildMd2Morph__md2Parse, cast ([frames, sourceVertexIndices] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(morph, null) : Bool)) { (mesh.morph = cast (morph : Dynamic)); }
-    _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), (cast (cast mesh : Dynamic) : SceneNode)] : Array<Dynamic>));
-    clip = _Runtime.callValue(Md2Parse.buildMd2MorphClip__md2Parse, cast ([_Runtime.field(scene, 'root')] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(clip, null) : Bool)) { _Runtime.setField(_Runtime.field(scene, 'animations'), 'default', clip); }
+    _Runtime.callValue(addNodeChild, cast ([scene.root, (cast (cast mesh : Dynamic) : SceneNode)] : Array<Dynamic>));
+    clip = _Runtime.callValue(Md2Parse.buildMd2MorphClip__md2Parse, cast ([scene.root] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals(clip, null) : Bool)) { _Runtime.setField(scene.animations, 'default', clip); }
     return cast scene;
     return cast null;
   }

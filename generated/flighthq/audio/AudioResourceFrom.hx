@@ -96,8 +96,8 @@ class AudioResourceFrom {
 
   public static function selectAudioResourceUrl(sources:Array<AudioResourceUrl>):Null<String> {
     for (source in _Runtime.iterable(sources)) {
-      var type:Dynamic = _Runtime.coalesce(_Runtime.coalesce(_Runtime.field(source, 'type'), function():Dynamic return cast _Runtime.callValue(inferAudioMimeType, cast ([_Runtime.field(source, 'url')] : Array<Dynamic>))), function():Dynamic return cast '');
-      if ((cast _Runtime.callValue(canPlayAudioType, cast ([type] : Array<Dynamic>)) : Bool)) { return cast _Runtime.field(source, 'url'); }
+      var type:Dynamic = _Runtime.coalesce(_Runtime.coalesce(source.type, function():Dynamic return cast _Runtime.callValue(inferAudioMimeType, cast ([source.url] : Array<Dynamic>))), function():Dynamic return cast '');
+      if ((cast _Runtime.callValue(canPlayAudioType, cast ([type] : Array<Dynamic>)) : Bool)) { return cast source.url; }
     }
     return cast null;
     return cast null;

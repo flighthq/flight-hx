@@ -22,23 +22,23 @@ class _SceneResourceResolverValues {
   public static function createSceneResourceResolver(?options:SceneResourceResolverOptions):SceneResourceResolver {
     var loader:Dynamic = cast _Runtime.UNDEFINED;
     var registry:Dynamic = cast _Runtime.UNDEFINED;
-    loader = _Runtime.callValue(createResourceLoader, cast ([{ dedupe: false, maxConcurrent: _Runtime.optionalField(options, 'maxConcurrent'), streaming: true }] : Array<Dynamic>));
+    loader = _Runtime.callValue(createResourceLoader, cast ([{ dedupe: false, maxConcurrent: ({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.maxConcurrent; }), streaming: true }] : Array<Dynamic>));
     _Runtime.callValue(startResourceLoad, cast ([loader] : Array<Dynamic>));
-    registry = _Runtime.optionalField(options, 'registry');
+    registry = ({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.registry; });
     if ((cast _Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (registry = cast (_Runtime.callValue(createSceneMaterialTextureRegistry, cast ([] : Array<Dynamic>)) : Dynamic));
       _Runtime.callValue(registerBuiltInSceneMaterialTextures, cast ([registry] : Array<Dynamic>));
     }
-    return cast { fetch: _Runtime.coalesce(_Runtime.optionalField(options, 'fetch'), function():Dynamic return cast _Runtime.callValue(createWebSceneResourceFetch, cast ([] : Array<Dynamic>))), inFlight: _Runtime.construct(_Runtime.globalValue('Map'), []), loader: loader, registry: registry, signals: null };
+    return cast { fetch: _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.fetch; }), function():Dynamic return cast _Runtime.callValue(createWebSceneResourceFetch, cast ([] : Array<Dynamic>))), inFlight: _Runtime.construct(_Runtime.globalValue('Map'), []), loader: loader, registry: registry, signals: null };
     return cast null;
   }
 
   public static function disposeSceneResourceResolver(resolver:SceneResourceResolver):Void {
-    _Runtime.callValue(cancelResourceLoad, cast ([_Runtime.field(resolver, 'loader')] : Array<Dynamic>));
-    _Runtime.callValue(disposeResourceLoader, cast ([_Runtime.field(resolver, 'loader')] : Array<Dynamic>));
-    for (entry in _Runtime.iterable(((cast _Runtime.field(resolver, 'inFlight') : flighthq._internal._Map).values()))) {
-      _Runtime.callProperty(_Runtime.field(entry, 'controller'), 'abort', cast ([] : Array<Dynamic>));
+    _Runtime.callValue(cancelResourceLoad, cast ([resolver.loader] : Array<Dynamic>));
+    _Runtime.callValue(disposeResourceLoader, cast ([resolver.loader] : Array<Dynamic>));
+    for (entry in _Runtime.iterable(((cast resolver.inFlight : flighthq._internal._Map).values()))) {
+      _Runtime.callProperty(entry.controller, 'abort', cast ([] : Array<Dynamic>));
     }
-    ((cast _Runtime.field(resolver, 'inFlight') : flighthq._internal._Map).clear());
+    ((cast resolver.inFlight : flighthq._internal._Map).clear());
   }
 }

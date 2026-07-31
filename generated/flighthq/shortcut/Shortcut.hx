@@ -307,7 +307,7 @@ class Shortcut {
     if ((cast _Runtime.strictEquals(normalized, null) : Bool)) { return cast false; }
     wrappedHandler = function(event:Dynamic) {
       _Runtime.callValue(handler, cast ([event] : Array<Dynamic>));
-      if ((cast !_Runtime.strictEquals(Shortcut._signals__shortcut, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(Shortcut._signals__shortcut, 'onTrigger')], [event]]), 1); }
+      if ((cast !_Runtime.strictEquals(Shortcut._signals__shortcut, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[Shortcut._signals__shortcut.onTrigger], [event]]), 1); }
     };
     return cast _Runtime.callProperty(_Runtime.callValue(getShortcutBackend, cast ([] : Array<Dynamic>)), 'register', cast ([normalized, wrappedHandler] : Array<Dynamic>));
     return cast null;

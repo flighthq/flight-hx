@@ -54,7 +54,7 @@ class MeshGeometryTransforms {
     normFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([source.layout, 'normal'] : Array<Dynamic>));
     tanFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([source.layout, 'tangent'] : Array<Dynamic>));
     srcVerts = source.vertices;
-    floatsPerVertex = (_Runtime.field(source.layout, 'stride') / 4.0);
+    floatsPerVertex = (source.layout.stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(srcVerts, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     dstVerts = ((cast _Runtime.strictEquals(out, source) : Bool) ? (cast srcVerts : Dynamic) : (cast out.vertices : Dynamic));
     if ((cast !_Runtime.strictEquals(out, source) : Bool)) {
@@ -129,7 +129,7 @@ class MeshGeometryTransforms {
     var verts:Dynamic = cast _Runtime.UNDEFINED;
     posFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([geometry.layout, 'position'] : Array<Dynamic>));
     if ((cast ((cast posFloatOffset : Float) < (cast 0.0 : Float)) : Bool)) { return; }
-    floatsPerVertex = (_Runtime.field(geometry.layout, 'stride') / 4.0);
+    floatsPerVertex = (geometry.layout.stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(geometry.vertices, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     verts = geometry.vertices;
     {
@@ -227,7 +227,7 @@ class MeshGeometryTransforms {
     normFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([source.layout, 'normal'] : Array<Dynamic>));
     tanFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([source.layout, 'tangent'] : Array<Dynamic>));
     srcVerts = source.vertices;
-    floatsPerVertex = (_Runtime.field(source.layout, 'stride') / 4.0);
+    floatsPerVertex = (source.layout.stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(srcVerts, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     dstVerts = out.vertices;
     if ((cast !_Runtime.strictEquals(out, source) : Bool)) {

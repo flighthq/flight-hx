@@ -34,12 +34,12 @@ class Screen {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(detachScreenSignals, cast ([signals] : Array<Dynamic>));
     unsubscribe = _Runtime.callProperty(_Runtime.callValue(getScreenBackend, cast ([] : Array<Dynamic>)), 'subscribe', cast ([function(event:Dynamic) {
-      if ((cast _Runtime.strictEquals(_Runtime.field(event, 'kind'), 'ScreenAdded') : Bool)) {
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onScreenAdded')], [_Runtime.field(event, 'screen')]]), 1);
-      } else { if ((cast _Runtime.strictEquals(_Runtime.field(event, 'kind'), 'ScreenRemoved') : Bool)) {
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onScreenRemoved')], [_Runtime.field(event, 'screen')]]), 1);
+      if ((cast _Runtime.strictEquals(event.kind, 'ScreenAdded') : Bool)) {
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signals.onScreenAdded], [event.screen]]), 1);
+      } else { if ((cast _Runtime.strictEquals(event.kind, 'ScreenRemoved') : Bool)) {
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signals.onScreenRemoved], [event.screen]]), 1);
       } else {
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onScreenMetricsChanged')], [event]]), 1);
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signals.onScreenMetricsChanged], [event]]), 1);
       } }
     }] : Array<Dynamic>));
     ((cast Screen._signalSubscriptions__screen : flighthq._internal._WeakMap).set(signals, unsubscribe));
@@ -304,11 +304,11 @@ class Screen {
     }, getModes: function(screen:Dynamic, out:Dynamic) {
       _Runtime.setLength(out, 1.0);
       if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(out, 0.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeArray(out, 0.0, _Runtime.callValue(createScreenMode, cast ([] : Array<Dynamic>))); }
-      _Runtime.setField(flighthq._internal._StaticIndex.readArray(out, 0.0), 'width', screen.width);
-      _Runtime.setField(flighthq._internal._StaticIndex.readArray(out, 0.0), 'height', screen.height);
-      _Runtime.setField(flighthq._internal._StaticIndex.readArray(out, 0.0), 'refreshRate', screen.refreshRate);
-      _Runtime.setField(flighthq._internal._StaticIndex.readArray(out, 0.0), 'colorDepth', screen.colorDepth);
-      _Runtime.setField(flighthq._internal._StaticIndex.readArray(out, 0.0), 'pixelFormat', '');
+      (flighthq._internal._StaticIndex.readArray(out, 0.0).width = cast (screen.width : Dynamic));
+      (flighthq._internal._StaticIndex.readArray(out, 0.0).height = cast (screen.height : Dynamic));
+      (flighthq._internal._StaticIndex.readArray(out, 0.0).refreshRate = cast (screen.refreshRate : Dynamic));
+      (flighthq._internal._StaticIndex.readArray(out, 0.0).colorDepth = cast (screen.colorDepth : Dynamic));
+      (flighthq._internal._StaticIndex.readArray(out, 0.0).pixelFormat = cast ('' : Dynamic));
       return cast out;
     } };
     return cast backend;
@@ -482,11 +482,11 @@ class Screen {
   }
 
   public static function getScreenCurrentMode(screen:ScreenInfo, out:ScreenMode):ScreenMode {
-    _Runtime.setField(out, 'width', screen.width);
-    _Runtime.setField(out, 'height', screen.height);
-    _Runtime.setField(out, 'refreshRate', screen.refreshRate);
-    _Runtime.setField(out, 'colorDepth', screen.colorDepth);
-    _Runtime.setField(out, 'pixelFormat', '');
+    (out.width = cast (screen.width : Dynamic));
+    (out.height = cast (screen.height : Dynamic));
+    (out.refreshRate = cast (screen.refreshRate : Dynamic));
+    (out.colorDepth = cast (screen.colorDepth : Dynamic));
+    (out.pixelFormat = cast ('' : Dynamic));
     return cast out;
     return cast null;
   }

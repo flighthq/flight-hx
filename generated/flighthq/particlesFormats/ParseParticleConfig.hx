@@ -67,27 +67,27 @@ class ParseParticleConfig {
     try {
       if ((cast _Runtime.strictEquals(format, LibgdxParticleFormatKind) : Bool)) {
         var result:Dynamic = _Runtime.callValue(parseLibgdxParticleDocument, cast ([text, options] : Array<Dynamic>));
-        return cast { config: _Runtime.field(result, 'config'), format: format, warnings: _Runtime.field(result, 'warnings') };
+        return cast { config: result.config, format: format, warnings: result.warnings };
       }
       if ((cast _Runtime.strictEquals(format, ParticleDesignerFormatKind) : Bool)) {
         var result:Dynamic = _Runtime.callValue(parseParticleDesignerPlistDocument, cast ([text, options] : Array<Dynamic>));
-        return cast { config: _Runtime.field(result, 'config'), format: format, warnings: _Runtime.field(result, 'warnings') };
+        return cast { config: result.config, format: format, warnings: result.warnings };
       }
       if ((cast _Runtime.strictEquals(format, PixiParticleFormatKind) : Bool)) {
         var result:Dynamic = _Runtime.callValue(parsePixiParticleDocument, cast ([text] : Array<Dynamic>));
-        return cast { config: _Runtime.field(result, 'config'), format: format, warnings: _Runtime.field(result, 'warnings') };
+        return cast { config: result.config, format: format, warnings: result.warnings };
       }
       if ((cast _Runtime.strictEquals(format, SpineParticleFormatKind) : Bool)) {
         var result:Dynamic = _Runtime.callValue(parseSpineParticleDocument, cast ([text] : Array<Dynamic>));
-        return cast { config: _Runtime.field(result, 'config'), format: format, warnings: _Runtime.field(result, 'warnings') };
+        return cast { config: result.config, format: format, warnings: result.warnings };
       }
       if ((cast _Runtime.strictEquals(format, StarlingPexFormatKind) : Bool)) {
         var result:Dynamic = _Runtime.callValue(parseStarlingPexDocument, cast ([text, options] : Array<Dynamic>));
-        return cast { config: _Runtime.field(result, 'config'), format: format, warnings: _Runtime.field(result, 'warnings') };
+        return cast { config: result.config, format: format, warnings: result.warnings };
       }
       if ((cast _Runtime.strictEquals(format, UnityParticleFormatKind) : Bool)) {
         var result:Dynamic = _Runtime.callValue(parseUnityParticleDocument, cast ([text, options] : Array<Dynamic>));
-        return cast { config: _Runtime.field(result, 'config'), format: format, warnings: _Runtime.field(result, 'warnings') };
+        return cast { config: result.config, format: format, warnings: result.warnings };
       }
     } catch (err:Dynamic) {
       return cast { config: _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>)), format: format, warnings: cast (['parse-error: ' + Std.string(_Runtime.field((cast err : haxe.Exception), 'message')) + ''] : Array<Dynamic>) };

@@ -69,7 +69,7 @@ class ShapeJson {
       _Runtime.callProperty(entries, 'push', cast ([{ key: key, args: args }] : Array<Dynamic>));
       (i = cast ((i + (argCount + 2.0)) : Dynamic));
     }
-    return cast _Runtime.jsonStringify({ shapeFormat: ShapeJson.SHAPE_JSON_FORMAT__shapeJson, commands: entries }, null, _Runtime.optionalField(options, 'space'));
+    return cast _Runtime.jsonStringify({ shapeFormat: ShapeJson.SHAPE_JSON_FORMAT__shapeJson, commands: entries }, null, ({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.space; }));
     return cast null;
   }
 
@@ -87,7 +87,7 @@ class ShapeJson {
     if ((cast !_Runtime.strictEquals(_Runtime.field(root, 'shapeFormat'), ShapeJson.SHAPE_JSON_FORMAT__shapeJson) : Bool)) { return cast null; }
     rawCommands = _Runtime.field(root, 'commands');
     if ((cast !(cast _Runtime.isArray(rawCommands) : Bool) : Bool)) { return cast null; }
-    resolveBitmap = _Runtime.optionalField(options, 'resolveBitmap');
+    resolveBitmap = ({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.resolveBitmap; });
     shape = _Runtime.callValue(createShape, cast ([] : Array<Dynamic>));
     for (entry in _Runtime.iterable(rawCommands)) {
       if ((cast !(cast _Runtime.callValue(ShapeJson.isPlainObject__shapeJson, cast ([entry] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }

@@ -93,7 +93,7 @@ class GlParticleEmitter {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     source = (cast _Runtime.field(renderProxy, 'source') : ParticleEmitter);
-    __destructure0 = _Runtime.field(source, 'data');
+    __destructure0 = source.data;
     atlas = _Runtime.field(__destructure0, 'atlas');
     alphas = _Runtime.field(__destructure0, 'alphas');
     colors = _Runtime.field(__destructure0, 'colors');
@@ -164,7 +164,7 @@ class GlParticleEmitter {
     clipW = (2.0 / _Runtime.field(viewport, 'width'));
     clipH = (2.0 / _Runtime.field(viewport, 'height'));
     m = _Runtime.field(runtime, 'matrixArray');
-    if ((cast _Runtime.field(source, 'data').worldSpace : Bool)) {
+    if ((cast source.data.worldSpace : Bool)) {
       flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, clipW);
       flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, 0.0);
       flighthq._internal._StaticIndex.writeFloat32Array(m, 2.0, 0.0);

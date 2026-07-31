@@ -64,7 +64,7 @@ class ThreeDsParse {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(meshes, 'length') : Float)) : Bool)) {
         var meshNode:Dynamic = _Runtime.callValue(ThreeDsParse.buildMeshNode__threeDsParse, cast ([flighthq._internal._StaticIndex.readArray(meshes, i), materials, resolved] : Array<Dynamic>));
-        if ((cast !_Runtime.strictEquals(meshNode, null) : Bool)) { _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), meshNode] : Array<Dynamic>)); }
+        if ((cast !_Runtime.strictEquals(meshNode, null) : Bool)) { _Runtime.callValue(addNodeChild, cast ([scene.root, meshNode] : Array<Dynamic>)); }
         i++;
       }
     }
@@ -101,7 +101,7 @@ class ThreeDsParse {
         if ((cast !_Runtime.strictEquals(mesh, null) : Bool)) { _Runtime.callProperty(meshes, 'push', cast ([mesh] : Array<Dynamic>)); }
       } else { if ((cast _Runtime.strictEquals(chunkId, THREE_DS_MATERIAL) : Bool)) {
         var material:Dynamic = _Runtime.callValue(ThreeDsParse.parseMaterial__threeDsParse, cast ([view, cursor, chunkEnd] : Array<Dynamic>));
-        if ((cast ((cast _Runtime.field(_Runtime.field(material, 'name'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) { ((cast materials : flighthq._internal._Map).set(_Runtime.field(material, 'name'), material)); }
+        if ((cast ((cast _Runtime.field(material.name, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { ((cast materials : flighthq._internal._Map).set(material.name, material)); }
       } } }
       (cursor = cast (chunkEnd : Dynamic));
     }
@@ -292,19 +292,19 @@ class ThreeDsParse {
     var geometry:Dynamic = cast _Runtime.UNDEFINED;
     var meshMaterials:Array<Material> = cast _Runtime.UNDEFINED;
     var seen:Dynamic = cast _Runtime.UNDEFINED;
-    vertexCount = (_Runtime.field(_Runtime.field(mesh, 'vertices'), 'length') / 3.0);
-    faceCount = (_Runtime.field(_Runtime.field(mesh, 'faces'), 'length') / 3.0);
+    vertexCount = (_Runtime.field(mesh.vertices, 'length') / 3.0);
+    faceCount = (_Runtime.field(mesh.faces, 'length') / 3.0);
     if ((cast ((cast _Runtime.strictEquals(vertexCount, 0.0) : Bool) || (cast _Runtime.strictEquals(faceCount, 0.0) : Bool)) : Bool)) { return cast null; }
-    positions = _Runtime.toArray(_Runtime.field(mesh, 'vertices'));
+    positions = _Runtime.toArray(mesh.vertices);
     _Runtime.callValue(convertPositionsZUpToYUp, cast ([positions] : Array<Dynamic>));
     vertices = new flighthq._internal._Float32Array((vertexCount * CANONICAL_FLOATS_PER_VERTEX));
     normals = new flighthq._internal._Float32Array((vertexCount * 3.0));
     {
       var f:Dynamic = 0.0;
       while ((cast ((cast f : Float) < (cast faceCount : Float)) : Bool)) {
-        var i0:Dynamic = flighthq._internal._StaticIndex.readUint16Array(_Runtime.field(mesh, 'faces'), (f * 3.0));
-        var i1:Dynamic = flighthq._internal._StaticIndex.readUint16Array(_Runtime.field(mesh, 'faces'), ((f * 3.0) + 1.0));
-        var i2:Dynamic = flighthq._internal._StaticIndex.readUint16Array(_Runtime.field(mesh, 'faces'), ((f * 3.0) + 2.0));
+        var i0:Dynamic = flighthq._internal._StaticIndex.readUint16Array(mesh.faces, (f * 3.0));
+        var i1:Dynamic = flighthq._internal._StaticIndex.readUint16Array(mesh.faces, ((f * 3.0) + 1.0));
+        var i2:Dynamic = flighthq._internal._StaticIndex.readUint16Array(mesh.faces, ((f * 3.0) + 2.0));
         var x0:Dynamic = flighthq._internal._StaticIndex.readArray(positions, (i0 * 3.0));
         var y0:Dynamic = flighthq._internal._StaticIndex.readArray(positions, ((i0 * 3.0) + 1.0));
         var z0:Dynamic = flighthq._internal._StaticIndex.readArray(positions, ((i0 * 3.0) + 2.0));
@@ -354,18 +354,18 @@ class ThreeDsParse {
         flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 3.0), nnx);
         flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 4.0), nny);
         flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 5.0), nnz);
-        if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(mesh, 'uvs'), null) : Bool) && (cast ((cast v : Float) < (cast (_Runtime.field(_Runtime.field(mesh, 'uvs'), 'length') / 2.0) : Float)) : Bool)) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 10.0), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(mesh, 'uvs'), (v * 2.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 11.0), (1.0 - flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(mesh, 'uvs'), ((v * 2.0) + 1.0))));
+        if ((cast ((cast !_Runtime.strictEquals(mesh.uvs, null) : Bool) && (cast ((cast v : Float) < (cast (_Runtime.field(mesh.uvs, 'length') / 2.0) : Float)) : Bool)) : Bool)) {
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 10.0), flighthq._internal._StaticIndex.readFloat32Array(mesh.uvs, (v * 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 11.0), (1.0 - flighthq._internal._StaticIndex.readFloat32Array(mesh.uvs, ((v * 2.0) + 1.0))));
         }
         v++;
       }
     }
-    indices = _Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([_Runtime.field(mesh, 'faces')] : Array<Dynamic>));
+    indices = _Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([mesh.faces] : Array<Dynamic>));
     geometry = _Runtime.callValue(createMeshGeometry, cast ([{ indices: indices, layout: CANONICAL_LAYOUT, vertices: vertices }] : Array<Dynamic>));
     meshMaterials = cast ([] : Array<Dynamic>);
     seen = _Runtime.construct(_Runtime.globalValue('Set'), []);
-    for (materialName in _Runtime.iterable(_Runtime.field(mesh, 'materialNames'))) {
+    for (materialName in _Runtime.iterable(mesh.materialNames)) {
       if ((cast ((cast seen : flighthq._internal._Set).has(materialName)) : Bool)) { continue; }
       ((cast seen : flighthq._internal._Set).add(materialName));
       var parsed:Dynamic = ((cast materials : flighthq._internal._Map).get(materialName));
@@ -377,14 +377,14 @@ class ThreeDsParse {
       }
       _Runtime.callProperty(meshMaterials, 'push', cast ([material] : Array<Dynamic>));
     }
-    return cast (cast (cast _Runtime.callValue(createMesh, cast ([geometry, meshMaterials, _Runtime.field(_Runtime, 'UNDEFINED'), ((cast ((cast _Runtime.field(_Runtime.field(mesh, 'name'), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast { name: _Runtime.field(mesh, 'name') } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic))] : Array<Dynamic>)) : Dynamic) : SceneNode);
+    return cast (cast (cast _Runtime.callValue(createMesh, cast ([geometry, meshMaterials, _Runtime.field(_Runtime, 'UNDEFINED'), ((cast ((cast _Runtime.field(mesh.name, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast { name: mesh.name } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic))] : Array<Dynamic>)) : Dynamic) : SceneNode);
     return cast null;
   }
 
   public static function threeDsMaterialToBlinnPhong__threeDsParse(material:ThreeDsMaterial):Material {
     var result:Dynamic = cast _Runtime.UNDEFINED;
-    result = (cast (cast _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuse: _Runtime.callValue(ThreeDsParse.packThreeDsColor__threeDsParse, cast ([_Runtime.field(material, 'diffuse')] : Array<Dynamic>)), diffuseMap: ((cast !_Runtime.strictEquals(_Runtime.field(material, 'textureFilename'), null) : Bool) ? (cast _Runtime.callValue(createExternalTextureRef, cast ([_Runtime.field(material, 'textureFilename')] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic)), specular: _Runtime.callValue(ThreeDsParse.packThreeDsColor__threeDsParse, cast ([_Runtime.field(material, 'specular')] : Array<Dynamic>)) }] : Array<Dynamic>)) : Dynamic) : Material);
-    _Runtime.setField(result, 'name', ((cast ((cast _Runtime.field(_Runtime.field(material, 'name'), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(material, 'name') : Dynamic) : (cast null : Dynamic)));
+    result = (cast (cast _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuse: _Runtime.callValue(ThreeDsParse.packThreeDsColor__threeDsParse, cast ([material.diffuse] : Array<Dynamic>)), diffuseMap: ((cast !_Runtime.strictEquals(material.textureFilename, null) : Bool) ? (cast _Runtime.callValue(createExternalTextureRef, cast ([material.textureFilename] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic)), specular: _Runtime.callValue(ThreeDsParse.packThreeDsColor__threeDsParse, cast ([material.specular] : Array<Dynamic>)) }] : Array<Dynamic>)) : Dynamic) : Material);
+    _Runtime.setField(result, 'name', ((cast ((cast _Runtime.field(material.name, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast material.name : Dynamic) : (cast null : Dynamic)));
     return cast result;
     return cast null;
   }

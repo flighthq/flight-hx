@@ -63,7 +63,7 @@ class WgpuVelocity {
     var wtx:Dynamic = cast _Runtime.UNDEFINED;
     var wty:Dynamic = cast _Runtime.UNDEFINED;
     emitter = (cast (cast node : Dynamic) : ParticleEmitter);
-    __destructure0 = _Runtime.field(emitter, 'data');
+    __destructure0 = emitter.data;
     atlas = _Runtime.field(__destructure0, 'atlas');
     ids = _Runtime.field(__destructure0, 'ids');
     particleCount = _Runtime.field(__destructure0, 'particleCount');

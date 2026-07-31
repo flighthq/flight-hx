@@ -23,9 +23,9 @@ class Billboard {
     if (kind == null) kind = cast (BillboardKind : Dynamic);
     var billboard:Dynamic = cast _Runtime.UNDEFINED;
     billboard = (cast _Runtime.callValue(createSceneNode, cast ([kind, obj] : Array<Dynamic>)) : flighthq.types.Billboard);
-    _Runtime.setField(billboard, 'geometry', geometry);
-    _Runtime.setField(billboard, 'materials', materials);
-    _Runtime.setField(billboard, 'mode', mode);
+    (billboard.geometry = cast (geometry : Dynamic));
+    (billboard.materials = cast (materials : Dynamic));
+    (billboard.mode = cast (mode : Dynamic));
     return cast billboard;
     return cast null;
   }

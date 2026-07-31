@@ -45,7 +45,7 @@ class QuadBatch {
     flighthq._internal._StaticIndex.writeFloat32Array(_Runtime.field(_Runtime.field(target, 'data'), 'transforms'), o, x);
     flighthq._internal._StaticIndex.writeFloat32Array(_Runtime.field(_Runtime.field(target, 'data'), 'transforms'), (o + 1.0), y);
     signals = _Runtime.callValue(getQuadBatchSignals, cast ([target] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callProperty(_Runtime.field(signals, 'onInstanceAppended'), 'emit', cast ([index] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callValue(_Runtime.field(signals, 'onInstanceAppended').emit, cast ([index] : Array<Dynamic>)); }
     return cast index;
     return cast null;
   }
@@ -54,7 +54,7 @@ class QuadBatch {
     var signals:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.setField(_Runtime.field(target, 'data'), 'instanceCount', 0.0);
     signals = _Runtime.callValue(getQuadBatchSignals, cast ([target] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callProperty(_Runtime.field(signals, 'onCleared'), 'emit', cast ([] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callValue(_Runtime.field(signals, 'onCleared').emit, cast ([] : Array<Dynamic>)); }
   }
 
   public static function cloneQuadBatch(source:flighthq.types.QuadBatch):flighthq.types.QuadBatch {
@@ -488,7 +488,7 @@ class QuadBatch {
     }
     _Runtime.setField(data, 'instanceCount', last);
     signals = _Runtime.callValue(getQuadBatchSignals, cast ([target] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callProperty(_Runtime.field(signals, 'onInstanceRemoved'), 'emit', cast ([index, swapSource] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callValue(_Runtime.field(signals, 'onInstanceRemoved').emit, cast ([index, swapSource] : Array<Dynamic>)); }
   }
 
   public static function reserveQuadBatch(target:flighthq.types.QuadBatch, capacity:Float):Void {

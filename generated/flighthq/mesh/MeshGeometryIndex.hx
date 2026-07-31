@@ -20,7 +20,7 @@ class MeshGeometryIndex {
       return cast ((cast useUint32 : Bool) ? (cast new flighthq._internal._UInt32Array(0.0) : Dynamic) : (cast new flighthq._internal._UInt16Array(0.0) : Dynamic));
     }
     indices = geometry.indices;
-    floatsPerVertex = (_Runtime.field(geometry.layout, 'stride') / 4.0);
+    floatsPerVertex = (geometry.layout.stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(geometry.vertices, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     indexCount = _Runtime.select(indices, function():Dynamic return cast _Runtime.field(indices, 'length'), function():Dynamic return cast vertexCount);
     lines = cast ([] : Array<Dynamic>);
@@ -64,7 +64,7 @@ class MeshGeometryIndex {
     var sourceVertices:Dynamic = cast _Runtime.UNDEFINED;
     var vertices:Dynamic = cast _Runtime.UNDEFINED;
     indices = geometry.indices;
-    floatsPerVertex = (_Runtime.field(geometry.layout, 'stride') / 4.0);
+    floatsPerVertex = (geometry.layout.stride / 4.0);
     sourceVertices = geometry.vertices;
     if ((cast !_Runtime.truthy(indices) : Bool)) {
       var vertices:Dynamic = new flighthq._internal._Float32Array(_Runtime.field(sourceVertices, 'length'));

@@ -27,7 +27,7 @@ class SpritesheetFrom {
         ((cast nameToRegionId : flighthq._internal._Map).set(region.name, region.id));
       }
     }
-    frames = _Runtime.callProperty(_Runtime.field(data, 'frames'), 'map', cast ([function(fd:Dynamic, index:Dynamic) {
+    frames = _Runtime.callProperty(data.frames, 'map', cast ([function(fd:Dynamic, index:Dynamic) {
       var regionId:Dynamic = cast _Runtime.UNDEFINED;
       regionId = ((cast !_Runtime.strictEquals(fd.name, '') : Bool) ? (cast _Runtime.coalesce(((cast nameToRegionId : flighthq._internal._Map).get(fd.name)), function():Dynamic return cast index) : Dynamic) : (cast index : Dynamic));
       return cast _Runtime.callValue(createSpritesheetFrame, cast ([{ id: regionId, offsetX: fd.offsetX, offsetY: fd.offsetY, pivotX: fd.pivotX, pivotY: fd.pivotY, rotated: fd.rotated }] : Array<Dynamic>));
@@ -35,8 +35,8 @@ class SpritesheetFrom {
     frameNameToIndex = _Runtime.construct(_Runtime.globalValue('Map'), []);
     {
       var i:Dynamic = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(data, 'frames'), 'length') : Float)) : Bool)) {
-        var name:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(data, 'frames'), i).name;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(data.frames, 'length') : Float)) : Bool)) {
+        var name:Dynamic = flighthq._internal._StaticIndex.readArray(data.frames, i).name;
         if ((cast !_Runtime.strictEquals(name, '') : Bool)) {
           ((cast frameNameToIndex : flighthq._internal._Map).set(name, i));
         }
@@ -44,9 +44,9 @@ class SpritesheetFrom {
       }
     }
     animations = {  };
-    for (ad in _Runtime.iterable(_Runtime.field(data, 'animations'))) {
-      var resolvedFrames:Dynamic = ((cast ((cast _Runtime.field(_Runtime.field(ad, 'frameNames'), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callProperty(_Runtime.callProperty(_Runtime.field(ad, 'frameNames'), 'map', cast ([function(n:Dynamic) return ((cast frameNameToIndex : flighthq._internal._Map).get(n))] : Array<Dynamic>)), 'filter', cast ([function(i:Dynamic) return !_Runtime.strictEquals(i, _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.toArray({ length: _Runtime.field(_Runtime.field(data, 'frames'), 'length') }, function(_:Dynamic, i:Dynamic) return i) : Dynamic));
-      _Runtime.setIndex(animations, _Runtime.field(ad, 'name'), _Runtime.callValue(createSpritesheetAnimation, cast ([{ direction: _Runtime.field(ad, 'direction'), frameDuration: _Runtime.field(ad, 'frameDuration'), frameDurations: _Runtime.field(ad, 'frameDurations'), frames: resolvedFrames, loop: _Runtime.field(ad, 'loop'), originX: _Runtime.field(ad, 'originX'), originY: _Runtime.field(ad, 'originY') }] : Array<Dynamic>)));
+    for (ad in _Runtime.iterable(data.animations)) {
+      var resolvedFrames:Dynamic = ((cast ((cast _Runtime.field(ad.frameNames, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callProperty(_Runtime.callProperty(ad.frameNames, 'map', cast ([function(n:Dynamic) return ((cast frameNameToIndex : flighthq._internal._Map).get(n))] : Array<Dynamic>)), 'filter', cast ([function(i:Dynamic) return !_Runtime.strictEquals(i, _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.toArray({ length: _Runtime.field(data.frames, 'length') }, function(_:Dynamic, i:Dynamic) return i) : Dynamic));
+      _Runtime.setIndex(animations, ad.name, _Runtime.callValue(createSpritesheetAnimation, cast ([{ direction: ad.direction, frameDuration: ad.frameDuration, frameDurations: ad.frameDurations, frames: resolvedFrames, loop: ad.loop, originX: ad.originX, originY: ad.originY }] : Array<Dynamic>)));
     }
     return cast _Runtime.callValue(createSpritesheet, cast ([{ animations: animations, atlas: atlas, frames: frames }] : Array<Dynamic>));
     return cast null;
@@ -78,8 +78,8 @@ class SpritesheetFrom {
     spacingX = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'spacingX'), function():Dynamic return cast 0.0);
     spacingY = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'spacingY'), function():Dynamic return cast 0.0);
     namePrefix = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'namePrefix'), function():Dynamic return cast 'frame_');
-    frameWidth = _Runtime.coalesce(_Runtime.field(options, 'frameWidth'), function():Dynamic return cast HxMath.floor((((imageWidth - (2.0 * marginX)) - (spacingX * (columns - 1.0))) / columns)));
-    frameHeight = _Runtime.coalesce(_Runtime.field(options, 'frameHeight'), function():Dynamic return cast HxMath.floor((((imageHeight - (2.0 * marginY)) - (spacingY * (rows - 1.0))) / rows)));
+    frameWidth = _Runtime.coalesce(options.frameWidth, function():Dynamic return cast HxMath.floor((((imageWidth - (2.0 * marginX)) - (spacingX * (columns - 1.0))) / columns)));
+    frameHeight = _Runtime.coalesce(options.frameHeight, function():Dynamic return cast HxMath.floor((((imageHeight - (2.0 * marginY)) - (spacingY * (rows - 1.0))) / rows)));
     atlas = _Runtime.callValue(createTextureAtlas, cast ([] : Array<Dynamic>));
     frames = cast ([] : Array<Dynamic>);
     id = 0.0;

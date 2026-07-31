@@ -95,7 +95,7 @@ class _WgpuMeshPipelineValues {
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
     if ((cast ((cast _Runtime.strictEquals(pass, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(scene, 'activeMeshPipeline'), null) : Bool)) : Bool)) { return; }
     subset = _Runtime.field(proxy, 'subset');
-    if ((cast _Runtime.strictEquals(_Runtime.field(subset, 'indexCount'), 0.0) : Bool)) { return; }
+    if ((cast _Runtime.strictEquals(subset.indexCount, 0.0) : Bool)) { return; }
     upload = _Runtime.callValue(ensureWgpuMeshUpload, cast ([state, geometry] : Array<Dynamic>));
     if ((cast ((cast _Runtime.strictEquals(upload, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(upload, 'indexBuffer'), null) : Bool)) : Bool)) { return; }
     drawBindGroup = _Runtime.callValue(writeWgpuDrawUniform, cast ([state, proxy] : Array<Dynamic>));
@@ -103,7 +103,7 @@ class _WgpuMeshPipelineValues {
     _Runtime.callProperty(pass, 'setBindGroup', cast ([1.0, drawBindGroup, _WgpuMeshPipelineValues._dynamicOffsets__wgpuMeshPipeline] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setVertexBuffer', cast ([0.0, _Runtime.field(upload, 'vertexBuffer')] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setIndexBuffer', cast ([_Runtime.field(upload, 'indexBuffer'), _Runtime.field(upload, 'indexFormat')] : Array<Dynamic>));
-    _Runtime.callProperty(pass, 'drawIndexed', cast ([_Runtime.field(subset, 'indexCount'), 1.0, _Runtime.field(subset, 'indexOffset'), 0.0, 0.0] : Array<Dynamic>));
+    _Runtime.callProperty(pass, 'drawIndexed', cast ([subset.indexCount, 1.0, subset.indexOffset, 0.0, 0.0] : Array<Dynamic>));
   }
 
   public static function ensureWgpuFrameBindGroup(state:WgpuRenderState):Dynamic {
@@ -390,10 +390,10 @@ class _WgpuMeshPipelineValues {
     var mipmapFilter:Null<Dynamic> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(texture, null) : Bool)) { return cast _Runtime.field(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'linearSampler'); }
     sampler = texture.sampler;
-    filter = ((cast StringTools.startsWith(_Runtime.field(sampler, 'magFilter'), 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic));
-    useMips = ((cast ((cast _Runtime.field(sampler, 'mipmaps') : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(sampler, 'minFilter'), 'linear') : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(sampler, 'minFilter'), 'nearest') : Bool));
-    mipmapFilter = ((cast useMips : Bool) ? (cast ((cast StringTools.endsWith(Std.string(_Runtime.field(sampler, 'minFilter')), 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
-    return cast _Runtime.callValue(getWgpuSampler, cast ([state, filter, _Runtime.field(sampler, 'wrapU'), _Runtime.field(sampler, 'wrapV'), mipmapFilter, _Runtime.field(sampler, 'anisotropy')] : Array<Dynamic>));
+    filter = ((cast StringTools.startsWith(sampler.magFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic));
+    useMips = ((cast ((cast sampler.mipmaps : Bool) && (cast !_Runtime.strictEquals(sampler.minFilter, 'linear') : Bool)) : Bool) && (cast !_Runtime.strictEquals(sampler.minFilter, 'nearest') : Bool));
+    mipmapFilter = ((cast useMips : Bool) ? (cast ((cast StringTools.endsWith(Std.string(sampler.minFilter), 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+    return cast _Runtime.callValue(getWgpuSampler, cast ([state, filter, sampler.wrapU, sampler.wrapV, mipmapFilter, sampler.anisotropy] : Array<Dynamic>));
     return cast null;
   }
 
@@ -404,7 +404,7 @@ class _WgpuMeshPipelineValues {
 
   public static function resolveWgpuMaterialTextureView(state:WgpuRenderState, texture:Null<Texture>):Dynamic {
     if ((cast ((cast ((cast !_Runtime.strictEquals(texture, null) : Bool) && (cast !_Runtime.strictEquals(texture.image, null) : Bool)) : Bool) && (cast _Runtime.callValue(hasImageResourcePixels, cast ([texture.image] : Array<Dynamic>)) : Bool)) : Bool)) {
-      return cast _Runtime.field(_Runtime.callValue(bindWgpuImageResourceTexture, cast ([state, texture.image, _Runtime.field(texture.sampler, 'mipmaps')] : Array<Dynamic>)), 'view');
+      return cast _Runtime.field(_Runtime.callValue(bindWgpuImageResourceTexture, cast ([state, texture.image, texture.sampler.mipmaps] : Array<Dynamic>)), 'view');
     }
     return cast _Runtime.callValue(ensureWgpuPlaceholderTextureView, cast ([state] : Array<Dynamic>));
     return cast null;

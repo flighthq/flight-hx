@@ -14,44 +14,44 @@ class BitmapFont {
     var pageCount:Dynamic = cast _Runtime.UNDEFINED;
     var glyphs:Dynamic = cast _Runtime.UNDEFINED;
     var kerning:Dynamic = cast _Runtime.UNDEFINED;
-    pageCount = _Runtime.field(_Runtime.field(data, 'pages'), 'length');
+    pageCount = _Runtime.field(data.pages, 'length');
     glyphs = _Runtime.construct(_Runtime.globalValue('Map'), []);
-    for (glyph in _Runtime.iterable(_Runtime.field(data, 'glyphs'))) {
-      var page:Dynamic = _Runtime.coalesce(_Runtime.field(glyph, 'page'), function():Dynamic return cast 0.0);
-      ((cast glyphs : flighthq._internal._Map).set(_Runtime.field(glyph, 'codepoint'), { advance: _Runtime.field(glyph, 'advance'), bearingX: _Runtime.field(glyph, 'bearingX'), bearingY: _Runtime.field(glyph, 'bearingY'), height: _Runtime.field(glyph, 'height'), page: ((cast ((cast ((cast page : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast page : Float) < (cast pageCount : Float)) : Bool)) : Bool) ? (cast page : Dynamic) : (cast 0.0 : Dynamic)), width: _Runtime.field(glyph, 'width'), x: _Runtime.field(glyph, 'x'), y: _Runtime.field(glyph, 'y') }));
+    for (glyph in _Runtime.iterable(data.glyphs)) {
+      var page:Dynamic = _Runtime.coalesce(glyph.page, function():Dynamic return cast 0.0);
+      ((cast glyphs : flighthq._internal._Map).set(glyph.codepoint, { advance: glyph.advance, bearingX: glyph.bearingX, bearingY: glyph.bearingY, height: glyph.height, page: ((cast ((cast ((cast page : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast page : Float) < (cast pageCount : Float)) : Bool)) : Bool) ? (cast page : Dynamic) : (cast 0.0 : Dynamic)), width: glyph.width, x: glyph.x, y: glyph.y }));
     }
     kerning = _Runtime.construct(_Runtime.globalValue('Map'), []);
-    if ((cast !_Runtime.strictEquals(_Runtime.field(data, 'kerning'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      for (pair in _Runtime.iterable(_Runtime.field(data, 'kerning'))) {
-        ((cast kerning : flighthq._internal._Map).set(_Runtime.callValue(BitmapFont.packBitmapFontKerningKey__bitmapFont, cast ([_Runtime.field(pair, 'left'), _Runtime.field(pair, 'right')] : Array<Dynamic>)), _Runtime.field(pair, 'amount')));
+    if ((cast !_Runtime.strictEquals(data.kerning, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      for (pair in _Runtime.iterable(data.kerning)) {
+        ((cast kerning : flighthq._internal._Map).set(_Runtime.callValue(BitmapFont.packBitmapFontKerningKey__bitmapFont, cast ([pair.left, pair.right] : Array<Dynamic>)), pair.amount));
       }
     }
-    return cast { encoding: _Runtime.coalesce(_Runtime.field(data, 'encoding'), function():Dynamic return cast 'raster'), glyphs: glyphs, kerning: kerning, metrics: { ascent: _Runtime.field(data, 'metrics').ascent, descent: _Runtime.field(data, 'metrics').descent, lineGap: _Runtime.field(data, 'metrics').lineGap }, pages: _Runtime.slice(_Runtime.field(data, 'pages'), 0, null) };
+    return cast { encoding: _Runtime.coalesce(data.encoding, function():Dynamic return cast 'raster'), glyphs: glyphs, kerning: kerning, metrics: { ascent: data.metrics.ascent, descent: data.metrics.descent, lineGap: data.metrics.lineGap }, pages: _Runtime.slice(data.pages, 0, null) };
     return cast null;
   }
 
   public static function getBitmapFontGlyph(font:flighthq.types.BitmapFont, codepoint:Float):Null<GlyphEntry> {
-    return cast _Runtime.coalesce(((cast _Runtime.field(font, 'glyphs') : flighthq._internal._Map).get(codepoint)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast font.glyphs : flighthq._internal._Map).get(codepoint)), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getBitmapFontKerning(font:flighthq.types.BitmapFont, left:Float, right:Float):Float {
-    return cast _Runtime.coalesce(((cast _Runtime.field(font, 'kerning') : flighthq._internal._Map).get(_Runtime.callValue(BitmapFont.packBitmapFontKerningKey__bitmapFont, cast ([left, right] : Array<Dynamic>)))), function():Dynamic return cast 0.0);
+    return cast _Runtime.coalesce(((cast font.kerning : flighthq._internal._Map).get(_Runtime.callValue(BitmapFont.packBitmapFontKerningKey__bitmapFont, cast ([left, right] : Array<Dynamic>)))), function():Dynamic return cast 0.0);
     return cast null;
   }
 
   public static function getBitmapFontMetrics(font:flighthq.types.BitmapFont):GlyphMetrics {
-    return cast _Runtime.field(font, 'metrics');
+    return cast font.metrics;
     return cast null;
   }
 
   public static function getBitmapFontPage(font:flighthq.types.BitmapFont, page:Dynamic = 0.0):Null<TextureAtlas> {
-    return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(font, 'pages'), page), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(font.pages, page), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getBitmapFontPages(font:flighthq.types.BitmapFont):Array<TextureAtlas> {
-    return cast _Runtime.field(font, 'pages');
+    return cast font.pages;
     return cast null;
   }
 

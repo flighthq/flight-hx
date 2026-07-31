@@ -106,21 +106,21 @@ class Shared {
         i++;
       }
     }
-    _Runtime.sortAndReturn(influences, function(a:Dynamic, b:Dynamic) return (_Runtime.field(b, 'weight') - _Runtime.field(a, 'weight')));
+    _Runtime.sortAndReturn(influences, function(a:Dynamic, b:Dynamic) return (b.weight - a.weight));
     kept = HxMath.min(_Runtime.field(influences, 'length'), MAX_SKIN_INFLUENCES);
     sum = 0.0;
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast kept : Float)) : Bool)) {
-        (sum = cast ((sum + _Runtime.field(flighthq._internal._StaticIndex.readArray(influences, i), 'weight')) : Dynamic));
+        (sum = cast ((sum + flighthq._internal._StaticIndex.readArray(influences, i).weight) : Dynamic));
         i++;
       }
     }
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast kept : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArray(outJoints, i, _Runtime.field(flighthq._internal._StaticIndex.readArray(influences, i), 'jointIndex'));
-        flighthq._internal._StaticIndex.writeArray(outWeights, i, ((cast ((cast sum : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.field(flighthq._internal._StaticIndex.readArray(influences, i), 'weight') / sum) : Dynamic) : (cast 0.0 : Dynamic)));
+        flighthq._internal._StaticIndex.writeArray(outJoints, i, flighthq._internal._StaticIndex.readArray(influences, i).jointIndex);
+        flighthq._internal._StaticIndex.writeArray(outWeights, i, ((cast ((cast sum : Float) > (cast 0.0 : Float)) : Bool) ? (cast (flighthq._internal._StaticIndex.readArray(influences, i).weight / sum) : Dynamic) : (cast 0.0 : Dynamic)));
         i++;
       }
     }

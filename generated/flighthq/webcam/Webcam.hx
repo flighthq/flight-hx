@@ -32,7 +32,7 @@ class Webcam {
           var input:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['input'] : Array<Dynamic>));
           _Runtime.setField(input, 'type', 'file');
           _Runtime.setField(input, 'accept', 'image/*');
-          if ((cast _Runtime.strictEquals(_Runtime.field(options, 'source'), 'camera') : Bool)) { _Runtime.setField(input, 'capture', 'environment'); }
+          if ((cast _Runtime.strictEquals(options.source, 'camera') : Bool)) { _Runtime.setField(input, 'capture', 'environment'); }
           _Runtime.setField(input, 'onchange', function() {
             var file:Dynamic = cast _Runtime.UNDEFINED;
             var reader:Dynamic = cast _Runtime.UNDEFINED;
@@ -63,7 +63,7 @@ class Webcam {
           var input:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['input'] : Array<Dynamic>));
           _Runtime.setField(input, 'type', 'file');
           _Runtime.setField(input, 'accept', 'video/*');
-          if ((cast _Runtime.strictEquals(_Runtime.field(options, 'source'), 'camera') : Bool)) { _Runtime.setField(input, 'capture', 'environment'); }
+          if ((cast _Runtime.strictEquals(options.source, 'camera') : Bool)) { _Runtime.setField(input, 'capture', 'environment'); }
           _Runtime.setField(input, 'onchange', function() {
             var file:Dynamic = cast _Runtime.UNDEFINED;
             var reader:Dynamic = cast _Runtime.UNDEFINED;

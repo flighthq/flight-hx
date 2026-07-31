@@ -119,7 +119,7 @@ class WgpuParticleEmitter {
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null) : Bool)) { return; }
     source = (cast _Runtime.field(renderProxy, 'source') : ParticleEmitter);
-    __destructure2 = _Runtime.field(source, 'data');
+    __destructure2 = source.data;
     atlas = _Runtime.field(__destructure2, 'atlas');
     alphas = _Runtime.field(__destructure2, 'alphas');
     colors = _Runtime.field(__destructure2, 'colors');
@@ -186,7 +186,7 @@ class WgpuParticleEmitter {
     matrixArray = _Runtime.field(__destructure4, 'matrixArray');
     viewport = _Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));
     t = _Runtime.field(renderProxy, 'transform2D');
-    if ((cast _Runtime.field(source, 'data').worldSpace : Bool)) {
+    if ((cast source.data.worldSpace : Bool)) {
       (iw2 = cast ((2.0 / _Runtime.field(viewport, 'width')) : Dynamic));
       (ih2 = cast ((2.0 / _Runtime.field(viewport, 'height')) : Dynamic));
       flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 0.0, iw2);

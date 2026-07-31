@@ -355,7 +355,7 @@ class Sprite {
     var signals:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.setField(_Runtime.field(target, 'data'), 'id', id);
     signals = _Runtime.callValue(getSpriteSignals, cast ([target] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callProperty(_Runtime.field(signals, 'onFrameChanged'), 'emit', cast ([id] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callValue(_Runtime.field(signals, 'onFrameChanged').emit, cast ([id] : Array<Dynamic>)); }
   }
 
   public static function setSpriteFrameRect(target:flighthq.types.Sprite, rect:Null<Rectangle>):Void {

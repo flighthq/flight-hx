@@ -18,13 +18,13 @@ import flighthq.types.VideoTexture.VideoTextureLike;
 
 class VideoTexture {
   public static function advanceVideoTexture(videoTexture:VideoTextureLike):Float {
-    _Runtime.setField(videoTexture, 'frameId', (_Runtime.field(videoTexture, 'frameId') + 1.0));
-    return cast _Runtime.field(videoTexture, 'frameId');
+    (videoTexture.frameId += 1.0);
+    return cast videoTexture.frameId;
     return cast null;
   }
 
   public static function cloneVideoTexture(source:VideoTextureLike):flighthq.types.VideoTexture {
-    return cast _Runtime.callValue(createEntity, cast ([{ colorSpace: _Runtime.field(source, 'colorSpace'), frameId: -1.0, sampler: _Runtime.callValue(cloneSampler, cast ([_Runtime.field(source, 'sampler')] : Array<Dynamic>)), source: _Runtime.field(source, 'source'), uvOffset: _Runtime.callValue(cloneVector2, cast ([_Runtime.field(source, 'uvOffset')] : Array<Dynamic>)), uvRotation: _Runtime.field(source, 'uvRotation'), uvScale: _Runtime.callValue(cloneVector2, cast ([_Runtime.field(source, 'uvScale')] : Array<Dynamic>)) }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ colorSpace: source.colorSpace, frameId: -1.0, sampler: _Runtime.callValue(cloneSampler, cast ([source.sampler] : Array<Dynamic>)), source: source.source, uvOffset: _Runtime.callValue(cloneVector2, cast ([source.uvOffset] : Array<Dynamic>)), uvRotation: source.uvRotation, uvScale: _Runtime.callValue(cloneVector2, cast ([source.uvScale] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -33,17 +33,17 @@ class VideoTexture {
     var frameId:Dynamic = cast _Runtime.UNDEFINED;
     var src:Dynamic = cast _Runtime.UNDEFINED;
     var uvRotation:Dynamic = cast _Runtime.UNDEFINED;
-    colorSpace = _Runtime.field(source, 'colorSpace');
-    frameId = _Runtime.field(source, 'frameId');
-    src = _Runtime.field(source, 'source');
-    uvRotation = _Runtime.field(source, 'uvRotation');
-    _Runtime.callValue(copySampler, cast ([_Runtime.field(out, 'sampler'), _Runtime.field(source, 'sampler')] : Array<Dynamic>));
-    _Runtime.callValue(copyVector2, cast ([_Runtime.field(out, 'uvOffset'), _Runtime.field(source, 'uvOffset')] : Array<Dynamic>));
-    _Runtime.callValue(copyVector2, cast ([_Runtime.field(out, 'uvScale'), _Runtime.field(source, 'uvScale')] : Array<Dynamic>));
-    _Runtime.setField(out, 'colorSpace', colorSpace);
-    _Runtime.setField(out, 'frameId', frameId);
-    _Runtime.setField(out, 'source', src);
-    _Runtime.setField(out, 'uvRotation', uvRotation);
+    colorSpace = source.colorSpace;
+    frameId = source.frameId;
+    src = source.source;
+    uvRotation = source.uvRotation;
+    _Runtime.callValue(copySampler, cast ([out.sampler, source.sampler] : Array<Dynamic>));
+    _Runtime.callValue(copyVector2, cast ([out.uvOffset, source.uvOffset] : Array<Dynamic>));
+    _Runtime.callValue(copyVector2, cast ([out.uvScale, source.uvScale] : Array<Dynamic>));
+    (out.colorSpace = cast (colorSpace : Dynamic));
+    (out.frameId = cast (frameId : Dynamic));
+    (out.source = cast (src : Dynamic));
+    (out.uvRotation = cast (uvRotation : Dynamic));
   }
 
   public static function createVideoTexture(source:VideoResource, ?opts:Dynamic):flighthq.types.VideoTexture {
@@ -53,7 +53,7 @@ class VideoTexture {
 
   public static function getVideoTextureHeight(videoTexture:VideoTextureLike):Float {
     var element:Dynamic = cast _Runtime.UNDEFINED;
-    element = _Runtime.field(_Runtime.field(videoTexture, 'source'), 'element');
+    element = videoTexture.source.element;
     return cast ((cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast _Runtime.field(element, 'videoHeight') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.field(element, 'videoHeight') : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
@@ -72,11 +72,11 @@ class VideoTexture {
     var cosR:Dynamic = cast _Runtime.UNDEFINED;
     var sinR:Dynamic = cast _Runtime.UNDEFINED;
     var m:Dynamic = cast _Runtime.UNDEFINED;
-    r = _Runtime.field(videoTexture, 'uvRotation');
-    sx = _Runtime.field(videoTexture, 'uvScale').x;
-    sy = _Runtime.field(videoTexture, 'uvScale').y;
-    tx = _Runtime.field(videoTexture, 'uvOffset').x;
-    ty = _Runtime.field(videoTexture, 'uvOffset').y;
+    r = videoTexture.uvRotation;
+    sx = videoTexture.uvScale.x;
+    sy = videoTexture.uvScale.y;
+    tx = videoTexture.uvOffset.x;
+    ty = videoTexture.uvOffset.y;
     cosR = HxMath.cos(r);
     sinR = HxMath.sin(r);
     m = out.m;
@@ -93,25 +93,25 @@ class VideoTexture {
 
   public static function getVideoTextureWidth(videoTexture:VideoTextureLike):Float {
     var element:Dynamic = cast _Runtime.UNDEFINED;
-    element = _Runtime.field(_Runtime.field(videoTexture, 'source'), 'element');
+    element = videoTexture.source.element;
     return cast ((cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast _Runtime.field(element, 'videoWidth') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.field(element, 'videoWidth') : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
 
   public static function isVideoTextureFrameReady(videoTexture:VideoTextureLike):Bool {
     var element:Dynamic = cast _Runtime.UNDEFINED;
-    element = _Runtime.field(_Runtime.field(videoTexture, 'source'), 'element');
+    element = videoTexture.source.element;
     return cast _Runtime.andValue(((cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast _Runtime.field(element, 'readyState') : Float) >= (cast VideoTexture.HAVE_CURRENT_DATA__videoTexture : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.field(element, 'videoWidth') : Float) > (cast 0.0 : Float)) : Bool)), function():Dynamic return cast ((cast _Runtime.field(element, 'videoHeight') : Float) > (cast 0.0 : Float)));
     return cast null;
   }
 
   public static function resetVideoTextureFrame(videoTexture:VideoTextureLike):Void {
-    _Runtime.setField(videoTexture, 'frameId', -1.0);
+    (videoTexture.frameId = cast (-1.0 : Dynamic));
   }
 
   public static function setVideoTextureSource(videoTexture:VideoTextureLike, source:VideoResource):Void {
-    _Runtime.setField(videoTexture, 'source', source);
-    _Runtime.setField(videoTexture, 'frameId', -1.0);
+    (videoTexture.source = cast (source : Dynamic));
+    (videoTexture.frameId = cast (-1.0 : Dynamic));
   }
 
   public static final HAVE_CURRENT_DATA__videoTexture:Dynamic = 2.0;

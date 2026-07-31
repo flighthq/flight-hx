@@ -56,7 +56,7 @@ class ParseKtx2 {
     layers = HxMath.max(1.0, layerCount);
     faces = ((cast _Runtime.strictEquals(faceCount, 6.0) : Bool) ? (cast 6.0 : Dynamic) : (cast 1.0 : Dynamic));
     levelCountPresent = HxMath.max(1.0, levelCount);
-    _Runtime.setField(reader, 'offset', ParseKtx2.ktx2LevelIndexOffset__parseKtx2);
+    (reader.offset = cast (ParseKtx2.ktx2LevelIndexOffset__parseKtx2 : Dynamic));
     if ((cast !(cast _Runtime.callValue(hasByteReaderBytes, cast ([reader, (levelCountPresent * 24.0)] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
     levels = cast ([] : Array<Dynamic>);
     imagesPerLevel = (layers * faces);

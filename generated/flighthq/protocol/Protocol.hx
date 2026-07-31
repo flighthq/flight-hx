@@ -35,9 +35,9 @@ class Protocol {
     backend = _Runtime.callValue(getProtocolBackend, cast ([] : Array<Dynamic>));
     pending = _Runtime.callProperty(backend, 'drainPendingUrls', cast ([] : Array<Dynamic>));
     for (url in _Runtime.iterable(pending)) {
-      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(handler, 'onOpenUrl')], [url]]), 1);
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[handler.onOpenUrl], [url]]), 1);
     }
-    unsubscribe = _Runtime.callProperty(backend, 'subscribe', cast ([function(url:Dynamic) return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(handler, 'onOpenUrl')], [url]]), 1)] : Array<Dynamic>));
+    unsubscribe = _Runtime.callProperty(backend, 'subscribe', cast ([function(url:Dynamic) return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[handler.onOpenUrl], [url]]), 1)] : Array<Dynamic>));
     ((cast Protocol._subscriptions__protocol : flighthq._internal._WeakMap).set(handler, unsubscribe));
   }
 

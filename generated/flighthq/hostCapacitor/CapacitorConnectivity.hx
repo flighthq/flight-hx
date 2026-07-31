@@ -27,14 +27,14 @@ class CapacitorConnectivity {
     
     });
     return cast { getStatus: function(out:ConnectivityStatus) {
-      _Runtime.setField(out, 'online', _Runtime.field(mirror, 'connected'));
-      _Runtime.setField(out, 'type', _Runtime.callValue(CapacitorConnectivity.toConnectionType__capacitorConnectivity, cast ([_Runtime.field(mirror, 'connectionType')] : Array<Dynamic>)));
-      _Runtime.setField(out, 'downlink', -1.0);
-      _Runtime.setField(out, 'downlinkMax', -1.0);
-      _Runtime.setField(out, 'effectiveType', '');
-      _Runtime.setField(out, 'rtt', -1.0);
-      _Runtime.setField(out, 'saveData', false);
-      _Runtime.setField(out, 'metered', _Runtime.strictEquals(_Runtime.field(out, 'type'), 'cellular'));
+      (out.online = cast (_Runtime.field(mirror, 'connected') : Dynamic));
+      (out.type = cast (_Runtime.callValue(CapacitorConnectivity.toConnectionType__capacitorConnectivity, cast ([_Runtime.field(mirror, 'connectionType')] : Array<Dynamic>)) : Dynamic));
+      (out.downlink = cast (-1.0 : Dynamic));
+      (out.downlinkMax = cast (-1.0 : Dynamic));
+      (out.effectiveType = cast ('' : Dynamic));
+      (out.rtt = cast (-1.0 : Dynamic));
+      (out.saveData = cast (false : Dynamic));
+      (out.metered = cast (_Runtime.strictEquals(out.type, 'cellular') : Dynamic));
       return cast out;
     }, subscribe: function(listener:Dynamic) {
       return cast _Runtime.callValue(CapacitorConnectivity.toUnsubscribe__capacitorConnectivity, cast ([_Runtime.callProperty(network, 'addListener', cast (['networkStatusChange', function() return _Runtime.callValue(listener, cast ([] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));

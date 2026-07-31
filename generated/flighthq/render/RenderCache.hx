@@ -29,7 +29,7 @@ class RenderCache {
     var adapter:RenderCacheAdapter = cast _Runtime.UNDEFINED;
     adapter = { cache: cache, signals: null, adapt: function(_state:Dynamic, _source:Dynamic, node:Dynamic) {
       var attached:Dynamic = cast _Runtime.UNDEFINED;
-      _Runtime.callOptionalProperty(_Runtime.optionalField(_Runtime.field(adapter, 'signals'), 'onPrepare'), 'emit', cast ([] : Array<Dynamic>));
+      _Runtime.callOptionalValue(({ final __typedStruct0 = _Runtime.optionalField(_Runtime.field(adapter, 'signals'), 'onPrepare'); __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.emit; }), cast ([] : Array<Dynamic>));
       attached = _Runtime.coalesce(_Runtime.field(adapter, 'cache'), function():Dynamic return cast null);
       if ((cast _Runtime.strictEquals(attached, null) : Bool)) { return cast null; }
       _Runtime.setField(node, 'kind', RenderCacheKindValue);

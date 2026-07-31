@@ -15,13 +15,13 @@ typedef TexturePackerSerializeOptions = { @:optional var variant:String; };
 
 class TexturePackerSerialize {
   public static function dataToMeta__texturePackerSerialize(data:SpritesheetData, existing:Dynamic):TexturePackerMeta {
-    return cast { app: _Runtime.coalesce(_Runtime.field(existing, 'app'), function():Dynamic return cast 'https://www.codeandweb.com/texturepacker'), format: _Runtime.coalesce(_Runtime.field(existing, 'format'), function():Dynamic return cast 'RGBA8888'), frameTags: _Runtime.select(_Runtime.field(_Runtime.field(data, 'animations'), 'length'), function():Dynamic return cast _Runtime.callProperty(_Runtime.field(data, 'animations'), 'map', cast ([function(anim:Dynamic) {
+    return cast { app: _Runtime.coalesce(_Runtime.field(existing, 'app'), function():Dynamic return cast 'https://www.codeandweb.com/texturepacker'), format: _Runtime.coalesce(_Runtime.field(existing, 'format'), function():Dynamic return cast 'RGBA8888'), frameTags: _Runtime.select(_Runtime.field(data.animations, 'length'), function():Dynamic return cast _Runtime.callProperty(data.animations, 'map', cast ([function(anim:Dynamic) {
       var firstIdx:Dynamic = cast _Runtime.UNDEFINED;
       var lastIdx:Dynamic = cast _Runtime.UNDEFINED;
-      firstIdx = _Runtime.findIndex(_Runtime.field(data, 'frames'), function(f:Dynamic) return _Runtime.strictEquals(f.name, flighthq._internal._StaticIndex.readArray(_Runtime.field(anim, 'frameNames'), 0.0)));
-      lastIdx = _Runtime.findIndex(_Runtime.field(data, 'frames'), function(f:Dynamic) return _Runtime.strictEquals(f.name, flighthq._internal._StaticIndex.readArray(_Runtime.field(anim, 'frameNames'), (_Runtime.field(_Runtime.field(anim, 'frameNames'), 'length') - 1.0))));
-      return cast { direction: _Runtime.field(anim, 'direction'), from: ((cast ((cast firstIdx : Float) >= (cast 0.0 : Float)) : Bool) ? (cast firstIdx : Dynamic) : (cast 0.0 : Dynamic)), name: _Runtime.field(anim, 'name'), to: ((cast ((cast lastIdx : Float) >= (cast 0.0 : Float)) : Bool) ? (cast lastIdx : Dynamic) : (cast 0.0 : Dynamic)) };
-    }] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), image: _Runtime.orValue(_Runtime.orValue(_Runtime.field(data, 'imageFile'), function():Dynamic return cast _Runtime.field(existing, 'image')), function():Dynamic return cast ''), scale: ((cast !_Runtime.strictEquals(_Runtime.field(data, 'scale'), 1.0) : Bool) ? (cast _Runtime.field(data, 'scale') : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(existing, 'scale'), function():Dynamic return cast 1.0) : Dynamic)), size: { h: _Runtime.field(data, 'imageHeight'), w: _Runtime.field(data, 'imageWidth') }, version: _Runtime.coalesce(_Runtime.field(existing, 'version'), function():Dynamic return cast '1.0') };
+      firstIdx = _Runtime.findIndex(data.frames, function(f:Dynamic) return _Runtime.strictEquals(f.name, flighthq._internal._StaticIndex.readArray(anim.frameNames, 0.0)));
+      lastIdx = _Runtime.findIndex(data.frames, function(f:Dynamic) return _Runtime.strictEquals(f.name, flighthq._internal._StaticIndex.readArray(anim.frameNames, (_Runtime.field(anim.frameNames, 'length') - 1.0))));
+      return cast { direction: anim.direction, from: ((cast ((cast firstIdx : Float) >= (cast 0.0 : Float)) : Bool) ? (cast firstIdx : Dynamic) : (cast 0.0 : Dynamic)), name: anim.name, to: ((cast ((cast lastIdx : Float) >= (cast 0.0 : Float)) : Bool) ? (cast lastIdx : Dynamic) : (cast 0.0 : Dynamic)) };
+    }] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), image: _Runtime.orValue(_Runtime.orValue(data.imageFile, function():Dynamic return cast _Runtime.field(existing, 'image')), function():Dynamic return cast ''), scale: ((cast !_Runtime.strictEquals(data.scale, 1.0) : Bool) ? (cast data.scale : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(existing, 'scale'), function():Dynamic return cast 1.0) : Dynamic)), size: { h: data.imageHeight, w: data.imageWidth }, version: _Runtime.coalesce(_Runtime.field(existing, 'version'), function():Dynamic return cast '1.0') };
     return cast null;
   }
 
@@ -35,7 +35,7 @@ class TexturePackerSerialize {
   public static function dataToHashDocument__texturePackerSerialize(data:SpritesheetData, existing:Dynamic):TexturePackerHashDocument {
     var frames:Dynamic = cast _Runtime.UNDEFINED;
     frames = {  };
-    for (frame in _Runtime.iterable(_Runtime.field(data, 'frames'))) {
+    for (frame in _Runtime.iterable(data.frames)) {
       _Runtime.setIndex(frames, frame.name, _Runtime.callValue(TexturePackerSerialize.frameToEntry__texturePackerSerialize, cast ([frame] : Array<Dynamic>)));
     }
     return cast { frames: frames, meta: _Runtime.callValue(TexturePackerSerialize.dataToMeta__texturePackerSerialize, cast ([data, _Runtime.coalesce(_Runtime.field(existing, 'meta'), function():Dynamic return cast {  })] : Array<Dynamic>)) };
@@ -44,7 +44,7 @@ class TexturePackerSerialize {
 
   public static function dataToArrayDocument__texturePackerSerialize(data:SpritesheetData, existing:Dynamic):TexturePackerArrayDocument {
     var frames:Array<TexturePackerArrayFrame> = cast _Runtime.UNDEFINED;
-    frames = _Runtime.callProperty(_Runtime.field(data, 'frames'), 'map', cast ([function(frame:Dynamic) return _Runtime.mergeObjects([{ filename: frame.name }, _Runtime.callValue(TexturePackerSerialize.frameToEntry__texturePackerSerialize, cast ([frame] : Array<Dynamic>))])] : Array<Dynamic>));
+    frames = _Runtime.callProperty(data.frames, 'map', cast ([function(frame:Dynamic) return _Runtime.mergeObjects([{ filename: frame.name }, _Runtime.callValue(TexturePackerSerialize.frameToEntry__texturePackerSerialize, cast ([frame] : Array<Dynamic>))])] : Array<Dynamic>));
     return cast { frames: frames, meta: _Runtime.callValue(TexturePackerSerialize.dataToMeta__texturePackerSerialize, cast ([data, _Runtime.coalesce(_Runtime.field(existing, 'meta'), function():Dynamic return cast {  })] : Array<Dynamic>)) };
     return cast null;
   }
@@ -53,8 +53,8 @@ class TexturePackerSerialize {
     var existingIsArray:Dynamic = cast _Runtime.UNDEFINED;
     var variant:Dynamic = cast _Runtime.UNDEFINED;
     var doc:Dynamic = cast _Runtime.UNDEFINED;
-    existingIsArray = ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.isArray(_Runtime.field((cast existing : TexturePackerArrayDocument), 'frames')) : Bool));
-    variant = _Runtime.coalesce(_Runtime.optionalField(options, 'variant'), function():Dynamic return cast ((cast existingIsArray : Bool) ? (cast 'array' : Dynamic) : (cast 'hash' : Dynamic)));
+    existingIsArray = ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.isArray((cast existing : TexturePackerArrayDocument).frames) : Bool));
+    variant = _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.variant; }), function():Dynamic return cast ((cast existingIsArray : Bool) ? (cast 'array' : Dynamic) : (cast 'hash' : Dynamic)));
     if ((cast _Runtime.strictEquals(variant, 'array') : Bool)) {
       var doc:Dynamic = _Runtime.callValue(TexturePackerSerialize.dataToArrayDocument__texturePackerSerialize, cast ([data, _Runtime.coalesce((cast existing : Dynamic), function():Dynamic return cast {  })] : Array<Dynamic>));
       return cast _Runtime.jsonStringify(doc, null, 2.0);

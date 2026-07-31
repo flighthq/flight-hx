@@ -63,7 +63,7 @@ class MorphMeshGeometry {
     __destructure1 = geometry;
     layout = _Runtime.field(__destructure1, 'layout');
     vertices = _Runtime.field(__destructure1, 'vertices');
-    floatsPerVertex = (_Runtime.field(layout, 'stride') / 4.0);
+    floatsPerVertex = (layout.stride / 4.0);
     positionOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'position'] : Array<Dynamic>));
     normalOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'normal'] : Array<Dynamic>));
     tangentOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'tangent'] : Array<Dynamic>));
@@ -108,7 +108,7 @@ class MorphMeshGeometry {
     __destructure2 = geometry;
     layout = _Runtime.field(__destructure2, 'layout');
     vertices = _Runtime.field(__destructure2, 'vertices');
-    floatsPerVertex = (_Runtime.field(layout, 'stride') / 4.0);
+    floatsPerVertex = (layout.stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.toInt32((_Runtime.field(vertices, 'length') / floatsPerVertex)) | 0) : Dynamic) : (cast 0.0 : Dynamic));
     positionOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'position'] : Array<Dynamic>));
     normalOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'normal'] : Array<Dynamic>));

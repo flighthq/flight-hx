@@ -26,8 +26,8 @@ class AsepriteParse {
   }
 
   public static function metaScale__asepriteParse(meta:AsepriteMeta):Float {
-    if ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(meta, 'scale')), 'string') : Bool)) { return cast _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.field(meta, 'scale')] : Array<Dynamic>)), function():Dynamic return cast 1.0); }
-    return cast _Runtime.field(meta, 'scale');
+    if ((cast _Runtime.strictEquals(_Runtime.typeofValue(meta.scale), 'string') : Bool)) { return cast _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([meta.scale] : Array<Dynamic>)), function():Dynamic return cast 1.0); }
+    return cast meta.scale;
     return cast null;
   }
 
@@ -36,11 +36,11 @@ class AsepriteParse {
     var durations:Dynamic = cast _Runtime.UNDEFINED;
     var firstDuration:Dynamic = cast _Runtime.UNDEFINED;
     var uniform:Dynamic = cast _Runtime.UNDEFINED;
-    tagFrameNames = _Runtime.slice(frameNames, _Runtime.field(tag, 'from'), (_Runtime.field(tag, 'to') + 1.0));
+    tagFrameNames = _Runtime.slice(frameNames, tag.from, (tag.to + 1.0));
     durations = _Runtime.callProperty(tagFrameNames, 'map', cast ([function(n:Dynamic) return _Runtime.coalesce(((cast durationMap : flighthq._internal._Map).get(n)), function():Dynamic return cast 100.0)] : Array<Dynamic>));
     firstDuration = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(durations, 0.0), function():Dynamic return cast 100.0);
     uniform = _Runtime.callProperty(durations, 'every', cast ([function(d:Dynamic) return _Runtime.strictEquals(d, firstDuration)] : Array<Dynamic>));
-    return cast _Runtime.callValue(createSpritesheetAnimationData, cast ([{ direction: _Runtime.coalesce(_Runtime.field(tag, 'direction'), function():Dynamic return cast 'forward'), frameDuration: firstDuration, frameDurations: ((cast uniform : Bool) ? (cast null : Dynamic) : (cast durations : Dynamic)), frameNames: tagFrameNames, loop: true, name: _Runtime.field(tag, 'name') }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createSpritesheetAnimationData, cast ([{ direction: _Runtime.coalesce(tag.direction, function():Dynamic return cast 'forward'), frameDuration: firstDuration, frameDurations: ((cast uniform : Bool) ? (cast null : Dynamic) : (cast durations : Dynamic)), frameNames: tagFrameNames, loop: true, name: tag.name }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -58,19 +58,19 @@ class AsepriteParse {
     durationMap = _Runtime.construct(_Runtime.globalValue('Map'), []);
     if ((cast _Runtime.isArray(_Runtime.field(doc, 'frames')) : Bool)) {
       for (entry in _Runtime.iterable((cast _Runtime.field(doc, 'frames') : Array<AsepriteArrayFrame>))) {
-        ((cast durationMap : flighthq._internal._Map).set(_Runtime.field(entry, 'filename'), _Runtime.field(entry, 'duration')));
+        ((cast durationMap : flighthq._internal._Map).set(entry.filename, entry.duration));
       }
     } else {
       for (__iteration0 in _Runtime.iterable(flighthq._internal.DynamicObject.entries(_Runtime.field(doc, 'frames')))) {
         var name:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
         var entry:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
-        ((cast durationMap : flighthq._internal._Map).set(name, _Runtime.field(entry, 'duration')));
+        ((cast durationMap : flighthq._internal._Map).set(name, entry.duration));
       }
     }
     __destructure1 = doc;
     meta = _Runtime.field(__destructure1, 'meta');
-    animations = ((cast _Runtime.andValue(_Runtime.field(meta, 'frameTags'), function():Dynamic return cast ((cast _Runtime.field(_Runtime.field(meta, 'frameTags'), 'length') : Float) > (cast 0.0 : Float))) : Bool) ? (cast _Runtime.callProperty(_Runtime.field(meta, 'frameTags'), 'map', cast ([function(tag:Dynamic) return _Runtime.callValue(AsepriteParse.animationFromTag__asepriteParse, cast ([tag, frameNames, durationMap] : Array<Dynamic>))] : Array<Dynamic>)) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
-    return cast _Runtime.callValue(createSpritesheetData, cast ([{ animations: animations, frames: frames, imageFile: _Runtime.field(meta, 'image'), imageHeight: _Runtime.field(_Runtime.field(meta, 'size'), 'h'), imageWidth: _Runtime.field(_Runtime.field(meta, 'size'), 'w'), scale: _Runtime.callValue(AsepriteParse.metaScale__asepriteParse, cast ([meta] : Array<Dynamic>)) }] : Array<Dynamic>));
+    animations = ((cast _Runtime.andValue(meta.frameTags, function():Dynamic return cast ((cast _Runtime.field(meta.frameTags, 'length') : Float) > (cast 0.0 : Float))) : Bool) ? (cast _Runtime.callProperty(meta.frameTags, 'map', cast ([function(tag:Dynamic) return _Runtime.callValue(AsepriteParse.animationFromTag__asepriteParse, cast ([tag, frameNames, durationMap] : Array<Dynamic>))] : Array<Dynamic>)) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
+    return cast _Runtime.callValue(createSpritesheetData, cast ([{ animations: animations, frames: frames, imageFile: meta.image, imageHeight: meta.size.h, imageWidth: meta.size.w, scale: _Runtime.callValue(AsepriteParse.metaScale__asepriteParse, cast ([meta] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 

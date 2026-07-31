@@ -34,9 +34,9 @@ class TauriTray {
       var id:Dynamic = cast _Runtime.UNDEFINED;
       var record:TrayRecord__tauriTray = cast _Runtime.UNDEFINED;
       id = nextId++;
-      record = { icon: null, title: _Runtime.coalesce(_Runtime.field(options, 'title'), function():Dynamic return cast ''), tooltip: _Runtime.coalesce(_Runtime.field(options, 'tooltip'), function():Dynamic return cast '') };
+      record = { icon: null, title: _Runtime.coalesce(options.title, function():Dynamic return cast ''), tooltip: _Runtime.coalesce(options.tooltip, function():Dynamic return cast '') };
       ((cast trays : flighthq._internal._Map).set(id, record));
-      flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(_Runtime.field(trayModule, 'TrayIcon'), 'new', cast ([{ icon: _Runtime.field(options, 'icon'), title: _Runtime.field(options, 'title'), tooltip: _Runtime.field(options, 'tooltip'), action: function(event:Dynamic) {
+      flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(_Runtime.field(trayModule, 'TrayIcon'), 'new', cast ([{ icon: options.icon, title: options.title, tooltip: options.tooltip, action: function(event:Dynamic) {
         var type:Dynamic = cast _Runtime.UNDEFINED;
         type = _Runtime.callValue(TauriTray.toTrayEventType__tauriTray, cast ([event] : Array<Dynamic>));
         if ((cast !_Runtime.strictEquals(type, null) : Bool)) { _Runtime.callValue(emit, cast ([id, type] : Array<Dynamic>)); }

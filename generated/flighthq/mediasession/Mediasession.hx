@@ -36,7 +36,7 @@ class Mediasession {
         return;
       }
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('MediaMetadata'), 'undefined') : Bool)) { return; }
-      _Runtime.setField(session, 'metadata', _Runtime.construct(_Runtime.globalValue('MediaMetadata'), [{ title: _Runtime.field(metadata, 'title'), artist: _Runtime.field(metadata, 'artist'), album: _Runtime.field(metadata, 'album'), artwork: _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(metadata, 'artwork'))]) }]));
+      _Runtime.setField(session, 'metadata', _Runtime.construct(_Runtime.globalValue('MediaMetadata'), [{ title: metadata.title, artist: metadata.artist, album: metadata.album, artwork: _Runtime.concatArrays([_Runtime.toArray(metadata.artwork)]) }]));
     }, setPlaybackState: function(state:Dynamic) {
       var session:Dynamic = cast _Runtime.UNDEFINED;
       session = _Runtime.callValue(Mediasession.getWebMediaSession__mediasession, cast ([] : Array<Dynamic>));

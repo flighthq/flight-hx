@@ -83,8 +83,8 @@ class Md5Parse {
       var jointPositions:Array<Float> = cast ([] : Array<Dynamic>);
       var jointOrientations:Array<Float> = cast ([] : Array<Dynamic>);
       for (joint in _Runtime.iterable(joints)) {
-        _Runtime.pushMany(jointPositions, cast ([_Runtime.field(joint, 'positionX'), _Runtime.field(joint, 'positionY'), _Runtime.field(joint, 'positionZ')] : Array<Dynamic>));
-        _Runtime.pushMany(jointOrientations, cast ([_Runtime.field(joint, 'orientationX'), _Runtime.field(joint, 'orientationY'), _Runtime.field(joint, 'orientationZ'), _Runtime.field(joint, 'orientationW')] : Array<Dynamic>));
+        _Runtime.pushMany(jointPositions, cast ([joint.positionX, joint.positionY, joint.positionZ] : Array<Dynamic>));
+        _Runtime.pushMany(jointOrientations, cast ([joint.orientationX, joint.orientationY, joint.orientationZ, joint.orientationW] : Array<Dynamic>));
       }
       _Runtime.callValue(convertPositionsZUpToYUp, cast ([jointPositions] : Array<Dynamic>));
       _Runtime.callValue(convertQuaternionsZUpToYUp, cast ([jointOrientations] : Array<Dynamic>));
@@ -95,10 +95,10 @@ class Md5Parse {
         var j:Dynamic = 0.0;
         while ((cast ((cast j : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) {
           var joint:Dynamic = flighthq._internal._StaticIndex.readArray(joints, j);
-          var node:Dynamic = _Runtime.callValue(createSceneNode, cast ([_Runtime.field(_Runtime, 'UNDEFINED'), { name: _Runtime.field(joint, 'name') }] : Array<Dynamic>));
+          var node:Dynamic = _Runtime.callValue(createSceneNode, cast ([_Runtime.field(_Runtime, 'UNDEFINED'), { name: joint.name }] : Array<Dynamic>));
           var pi:Dynamic = (j * 3.0);
           var qi:Dynamic = (j * 4.0);
-          var parentIndex:Dynamic = _Runtime.field(joint, 'parentIndex');
+          var parentIndex:Dynamic = joint.parentIndex;
           var localPx:Dynamic = flighthq._internal._StaticIndex.readArray(jointPositions, pi);
           var localPy:Dynamic = flighthq._internal._StaticIndex.readArray(jointPositions, (pi + 1.0));
           var localPz:Dynamic = flighthq._internal._StaticIndex.readArray(jointPositions, (pi + 2.0));
@@ -122,8 +122,8 @@ class Md5Parse {
           } else { if ((cast ((cast parentIndex : Float) >= (cast _Runtime.field(joints, 'length') : Float)) : Bool)) {
             _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: joint ' + Std.string(j) + ' has out-of-range parent index ' + Std.string(parentIndex) + ''] : Array<Dynamic>));
           } }
-          _Runtime.callValue(setVector3, cast ([_Runtime.field(node, 'position'), localPx, localPy, localPz] : Array<Dynamic>));
-          _Runtime.callValue(setQuaternion, cast ([_Runtime.field(node, 'rotation'), localQx, localQy, localQz, localQw] : Array<Dynamic>));
+          _Runtime.callValue(setVector3, cast ([node.position, localPx, localPy, localPz] : Array<Dynamic>));
+          _Runtime.callValue(setQuaternion, cast ([node.rotation, localQx, localQy, localQz, localQw] : Array<Dynamic>));
           _Runtime.callValue(invalidateNodeLocalTransform, cast ([node] : Array<Dynamic>));
           _Runtime.callProperty(jointNodes, 'push', cast ([node] : Array<Dynamic>));
           j++;
@@ -132,7 +132,7 @@ class Md5Parse {
       {
         var j:Dynamic = 0.0;
         while ((cast ((cast j : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) {
-          var parentIndex:Dynamic = _Runtime.field(flighthq._internal._StaticIndex.readArray(joints, j), 'parentIndex');
+          var parentIndex:Dynamic = flighthq._internal._StaticIndex.readArray(joints, j).parentIndex;
           if ((cast ((cast ((cast parentIndex : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast parentIndex : Float) < (cast _Runtime.field(jointNodes, 'length') : Float)) : Bool)) : Bool)) {
             _Runtime.callValue(addNodeChild, cast ([flighthq._internal._StaticIndex.readArray(jointNodes, parentIndex), flighthq._internal._StaticIndex.readArray(jointNodes, j)] : Array<Dynamic>));
           } else {
@@ -141,8 +141,8 @@ class Md5Parse {
           j++;
         }
       }
-      _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), skeletonRoot] : Array<Dynamic>));
-      var jointNames:Dynamic = _Runtime.callProperty(joints, 'map', cast ([function(joint:Dynamic) return _Runtime.field(joint, 'name')] : Array<Dynamic>));
+      _Runtime.callValue(addNodeChild, cast ([scene.root, skeletonRoot] : Array<Dynamic>));
+      var jointNames:Dynamic = _Runtime.callProperty(joints, 'map', cast ([function(joint:Dynamic) return joint.name] : Array<Dynamic>));
       (skeleton = cast (_Runtime.callValue(createSkeleton3D, cast ([jointNodes, _Runtime.field(_Runtime, 'UNDEFINED'), jointNames] : Array<Dynamic>)) : Dynamic));
     }
     {
@@ -155,34 +155,34 @@ class Md5Parse {
         var weightScratch:Dynamic = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
         {
           var v:Dynamic = 0.0;
-          while ((cast ((cast v : Float) < (cast _Runtime.field(_Runtime.field(md5Mesh, 'vertices'), 'length') : Float)) : Bool)) {
-            var vert:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(md5Mesh, 'vertices'), v);
+          while ((cast ((cast v : Float) < (cast _Runtime.field(md5Mesh.vertices, 'length') : Float)) : Bool)) {
+            var vert:Dynamic = flighthq._internal._StaticIndex.readArray(md5Mesh.vertices, v);
             var px:Dynamic = 0.0;
             var py:Dynamic = 0.0;
             var pz:Dynamic = 0.0;
             var influences:Array<SkinInfluence> = cast ([] : Array<Dynamic>);
             {
               var w:Dynamic = 0.0;
-              while ((cast ((cast w : Float) < (cast _Runtime.field(vert, 'countWeights') : Float)) : Bool)) {
-                var weightIndex:Dynamic = (_Runtime.field(vert, 'startWeight') + w);
-                if ((cast ((cast weightIndex : Float) >= (cast _Runtime.field(_Runtime.field(md5Mesh, 'weights'), 'length') : Float)) : Bool)) {
+              while ((cast ((cast w : Float) < (cast vert.countWeights : Float)) : Bool)) {
+                var weightIndex:Dynamic = (vert.startWeight + w);
+                if ((cast ((cast weightIndex : Float) >= (cast _Runtime.field(md5Mesh.weights, 'length') : Float)) : Bool)) {
                   _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: vertex ' + Std.string(v) + ' references weight index ' + Std.string(weightIndex) + ' out of range'] : Array<Dynamic>));
                   break;
                 }
-                var weight:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(md5Mesh, 'weights'), weightIndex);
-                if ((cast ((cast ((cast _Runtime.field(weight, 'jointIndex') : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(weight, 'jointIndex') : Float) >= (cast _Runtime.field(joints, 'length') : Float)) : Bool)) : Bool)) {
-                  _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: weight ' + Std.string(weightIndex) + ' references joint index ' + Std.string(_Runtime.field(weight, 'jointIndex')) + ' out of range'] : Array<Dynamic>));
+                var weight:Dynamic = flighthq._internal._StaticIndex.readArray(md5Mesh.weights, weightIndex);
+                if ((cast ((cast ((cast weight.jointIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast weight.jointIndex : Float) >= (cast _Runtime.field(joints, 'length') : Float)) : Bool)) : Bool)) {
+                  _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: weight ' + Std.string(weightIndex) + ' references joint index ' + Std.string(weight.jointIndex) + ' out of range'] : Array<Dynamic>));
                   w++;
                   continue;
                 }
-                var joint:Dynamic = flighthq._internal._StaticIndex.readArray(joints, _Runtime.field(weight, 'jointIndex'));
-                var rx:Dynamic = _Runtime.callValue(Md5Parse.quatRotateVec3X__md5Parse, cast ([_Runtime.field(joint, 'orientationX'), _Runtime.field(joint, 'orientationY'), _Runtime.field(joint, 'orientationZ'), _Runtime.field(joint, 'orientationW'), _Runtime.field(weight, 'positionX'), _Runtime.field(weight, 'positionY'), _Runtime.field(weight, 'positionZ')] : Array<Dynamic>));
-                var ry:Dynamic = _Runtime.callValue(Md5Parse.quatRotateVec3Y__md5Parse, cast ([_Runtime.field(joint, 'orientationX'), _Runtime.field(joint, 'orientationY'), _Runtime.field(joint, 'orientationZ'), _Runtime.field(joint, 'orientationW'), _Runtime.field(weight, 'positionX'), _Runtime.field(weight, 'positionY'), _Runtime.field(weight, 'positionZ')] : Array<Dynamic>));
-                var rz:Dynamic = _Runtime.callValue(Md5Parse.quatRotateVec3Z__md5Parse, cast ([_Runtime.field(joint, 'orientationX'), _Runtime.field(joint, 'orientationY'), _Runtime.field(joint, 'orientationZ'), _Runtime.field(joint, 'orientationW'), _Runtime.field(weight, 'positionX'), _Runtime.field(weight, 'positionY'), _Runtime.field(weight, 'positionZ')] : Array<Dynamic>));
-                (px = cast ((px + (_Runtime.field(weight, 'bias') * (_Runtime.field(joint, 'positionX') + rx))) : Dynamic));
-                (py = cast ((py + (_Runtime.field(weight, 'bias') * (_Runtime.field(joint, 'positionY') + ry))) : Dynamic));
-                (pz = cast ((pz + (_Runtime.field(weight, 'bias') * (_Runtime.field(joint, 'positionZ') + rz))) : Dynamic));
-                _Runtime.callProperty(influences, 'push', cast ([{ jointIndex: _Runtime.field(weight, 'jointIndex'), weight: _Runtime.field(weight, 'bias') }] : Array<Dynamic>));
+                var joint:Dynamic = flighthq._internal._StaticIndex.readArray(joints, weight.jointIndex);
+                var rx:Dynamic = _Runtime.callValue(Md5Parse.quatRotateVec3X__md5Parse, cast ([joint.orientationX, joint.orientationY, joint.orientationZ, joint.orientationW, weight.positionX, weight.positionY, weight.positionZ] : Array<Dynamic>));
+                var ry:Dynamic = _Runtime.callValue(Md5Parse.quatRotateVec3Y__md5Parse, cast ([joint.orientationX, joint.orientationY, joint.orientationZ, joint.orientationW, weight.positionX, weight.positionY, weight.positionZ] : Array<Dynamic>));
+                var rz:Dynamic = _Runtime.callValue(Md5Parse.quatRotateVec3Z__md5Parse, cast ([joint.orientationX, joint.orientationY, joint.orientationZ, joint.orientationW, weight.positionX, weight.positionY, weight.positionZ] : Array<Dynamic>));
+                (px = cast ((px + (weight.bias * (joint.positionX + rx))) : Dynamic));
+                (py = cast ((py + (weight.bias * (joint.positionY + ry))) : Dynamic));
+                (pz = cast ((pz + (weight.bias * (joint.positionZ + rz))) : Dynamic));
+                _Runtime.callProperty(influences, 'push', cast ([{ jointIndex: weight.jointIndex, weight: weight.bias }] : Array<Dynamic>));
                 w++;
               }
             }
@@ -190,7 +190,7 @@ class Md5Parse {
             _Runtime.pushMany(vertices, cast ([px, py, pz] : Array<Dynamic>));
             _Runtime.pushMany(vertices, cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
             _Runtime.pushMany(vertices, cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
-            _Runtime.pushMany(vertices, cast ([_Runtime.field(vert, 'u'), _Runtime.field(vert, 'v')] : Array<Dynamic>));
+            _Runtime.pushMany(vertices, cast ([vert.u, vert.v] : Array<Dynamic>));
             _Runtime.pushMany(vertices, cast ([flighthq._internal._StaticIndex.readArray(jointScratch, 0.0), flighthq._internal._StaticIndex.readArray(jointScratch, 1.0), flighthq._internal._StaticIndex.readArray(jointScratch, 2.0), flighthq._internal._StaticIndex.readArray(jointScratch, 3.0)] : Array<Dynamic>));
             _Runtime.pushMany(vertices, cast ([flighthq._internal._StaticIndex.readArray(weightScratch, 0.0), flighthq._internal._StaticIndex.readArray(weightScratch, 1.0), flighthq._internal._StaticIndex.readArray(weightScratch, 2.0), flighthq._internal._StaticIndex.readArray(weightScratch, 3.0)] : Array<Dynamic>));
             v++;
@@ -199,8 +199,8 @@ class Md5Parse {
         _Runtime.callValue(convertPositionsZUpToYUp, cast ([vertices, SKINNED_FLOATS_PER_VERTEX, 0.0] : Array<Dynamic>));
         {
           var t:Dynamic = 0.0;
-          while ((cast ((cast t : Float) < (cast _Runtime.field(_Runtime.field(md5Mesh, 'indices'), 'length') : Float)) : Bool)) {
-            _Runtime.callProperty(indices, 'push', cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(md5Mesh, 'indices'), t)] : Array<Dynamic>));
+          while ((cast ((cast t : Float) < (cast _Runtime.field(md5Mesh.indices, 'length') : Float)) : Bool)) {
+            _Runtime.callProperty(indices, 'push', cast ([flighthq._internal._StaticIndex.readArray(md5Mesh.indices, t)] : Array<Dynamic>));
             t++;
           }
         }
@@ -209,14 +209,14 @@ class Md5Parse {
           var geometry:Dynamic = _Runtime.callValue(createMeshGeometry, cast ([{ indices: _Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([indices] : Array<Dynamic>)), layout: CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT, vertices: new flighthq._internal._Float32Array(vertices) }] : Array<Dynamic>));
           _Runtime.callValue(computeMeshGeometryNormals, cast ([geometry, geometry] : Array<Dynamic>));
           var materials:Array<Material> = cast ([] : Array<Dynamic>);
-          if ((cast ((cast _Runtime.field(_Runtime.field(md5Mesh, 'shader'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-            var material:Dynamic = (cast (cast _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuseMap: _Runtime.callValue(createExternalTextureRef, cast ([_Runtime.field(md5Mesh, 'shader')] : Array<Dynamic>)) }] : Array<Dynamic>)) : Dynamic) : Material);
-            _Runtime.setField(material, 'name', _Runtime.field(md5Mesh, 'shader'));
+          if ((cast ((cast _Runtime.field(md5Mesh.shader, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
+            var material:Dynamic = (cast (cast _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuseMap: _Runtime.callValue(createExternalTextureRef, cast ([md5Mesh.shader] : Array<Dynamic>)) }] : Array<Dynamic>)) : Dynamic) : Material);
+            _Runtime.setField(material, 'name', md5Mesh.shader);
             _Runtime.callProperty(materials, 'push', cast ([material] : Array<Dynamic>));
           }
           var meshNode:Mesh = _Runtime.callValue(createMesh, cast ([geometry, materials] : Array<Dynamic>));
           if ((cast !_Runtime.strictEquals(skeleton, null) : Bool)) { (meshNode.skin = cast ({ skeleton: skeleton, skeletonRoot: skeletonRoot } : Dynamic)); }
-          _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), (cast (cast meshNode : Dynamic) : SceneNode)] : Array<Dynamic>));
+          _Runtime.callValue(addNodeChild, cast ([scene.root, (cast (cast meshNode : Dynamic) : SceneNode)] : Array<Dynamic>));
         }
         m++;
       }

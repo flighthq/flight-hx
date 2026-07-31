@@ -26,14 +26,14 @@ class RevealSceneResourcesOnResolve {
     var owners:Dynamic = cast _Runtime.UNDEFINED;
     var signals:Dynamic = cast _Runtime.UNDEFINED;
     var slot:Dynamic = cast _Runtime.UNDEFINED;
-    fadeSeconds = _Runtime.coalesce(_Runtime.optionalField(options, 'fadeSeconds'), function():Dynamic return cast 0.4);
-    from = _Runtime.coalesce(_Runtime.optionalField(options, 'from'), function():Dynamic return cast 0.0);
-    tweenOptions = ((cast !_Runtime.strictEquals(_Runtime.optionalField(options, 'ease'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { ease: _Runtime.field(options, 'ease') } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+    fadeSeconds = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.fadeSeconds; }), function():Dynamic return cast 0.4);
+    from = _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.from; }), function():Dynamic return cast 0.0);
+    tweenOptions = ((cast !_Runtime.strictEquals(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.ease; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { ease: options.ease } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
     owners = _Runtime.construct(_Runtime.globalValue('Map'), []);
     _Runtime.callValue(RevealSceneResourcesOnResolve.collectPendingTextureOwners__revealSceneResourcesOnResolve, cast ([scene, resolver, owners] : Array<Dynamic>));
     for (nodes in _Runtime.iterable(((cast owners : flighthq._internal._Map).values()))) {
       for (node in _Runtime.iterable(nodes)) {
-        _Runtime.setField(node, 'alpha', from);
+        (node.alpha = cast (from : Dynamic));
       }
     }
     signals = _Runtime.callValue(enableSceneResourceSignals, cast ([resolver] : Array<Dynamic>));
@@ -45,8 +45,8 @@ class RevealSceneResourcesOnResolve {
         _Runtime.callValue(createTween, cast ([tweenManager, node, fadeSeconds, { alpha: 1.0 }, tweenOptions] : Array<Dynamic>));
       }
     };
-    _Runtime.callValue(connectSignal, cast ([_Runtime.field(signals, 'onResourceResolved'), slot] : Array<Dynamic>));
-    return cast function() return _Runtime.callValue(disconnectSignal, cast ([_Runtime.field(signals, 'onResourceResolved'), slot] : Array<Dynamic>));
+    _Runtime.callValue(connectSignal, cast ([signals.onResourceResolved, slot] : Array<Dynamic>));
+    return cast function() return _Runtime.callValue(disconnectSignal, cast ([signals.onResourceResolved, slot] : Array<Dynamic>));
     return cast null;
   }
 
@@ -66,7 +66,7 @@ class RevealSceneResourcesOnResolve {
           var material:Dynamic = (cast flighthq._internal._StaticIndex.readArray(materials, i) : Null<Material>);
           if ((cast _Runtime.strictEquals(material, null) : Bool)) { i++; continue; }
           _Runtime.setLength(slots, 0.0);
-          _Runtime.callValue(getSceneMaterialTextures, cast ([_Runtime.field(resolver, 'registry'), material, slots] : Array<Dynamic>));
+          _Runtime.callValue(getSceneMaterialTextures, cast ([resolver.registry, material, slots] : Array<Dynamic>));
           {
             var j:Dynamic = 0.0;
             while ((cast ((cast j : Float) < (cast _Runtime.field(slots, 'length') : Float)) : Bool)) {

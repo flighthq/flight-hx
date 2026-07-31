@@ -86,16 +86,16 @@ class Curve {
   public static function particleColorCurveFromKeyframes(keys:Array<ColorKeyframe>, samples:Dynamic = 33.0):Array<Float> {
     var sorted:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(keys, 'length'), 0.0) : Bool)) { return cast cast ([0.0, 0.0, 0.0, 0.0, 0.0, 0.0] : Array<Dynamic>); }
-    sorted = _Runtime.sortAndReturn(_Runtime.slice(keys, 0, null), function(a:Dynamic, b:Dynamic) return (_Runtime.field(a, 'time') - _Runtime.field(b, 'time')));
+    sorted = _Runtime.sortAndReturn(_Runtime.slice(keys, 0, null), function(a:Dynamic, b:Dynamic) return (a.time - b.time));
     return cast _Runtime.callValue(buildParticleColorCurve, cast ([function(t:Dynamic) {
       var seg:Dynamic = cast _Runtime.UNDEFINED;
       var a:Dynamic = cast _Runtime.UNDEFINED;
       var b:Dynamic = cast _Runtime.UNDEFINED;
       seg = _Runtime.callValue(Curve.locateKeyframe__curve, cast ([sorted, t] : Array<Dynamic>));
-      if ((cast _Runtime.strictEquals(_Runtime.field(seg, 'f'), 0.0) : Bool)) { return cast cast ([_Runtime.field(flighthq._internal._StaticIndex.readArray(sorted, _Runtime.field(seg, 'i')), 'r'), _Runtime.field(flighthq._internal._StaticIndex.readArray(sorted, _Runtime.field(seg, 'i')), 'g'), _Runtime.field(flighthq._internal._StaticIndex.readArray(sorted, _Runtime.field(seg, 'i')), 'b')] : Array<Dynamic>); }
+      if ((cast _Runtime.strictEquals(_Runtime.field(seg, 'f'), 0.0) : Bool)) { return cast cast ([flighthq._internal._StaticIndex.readArray(sorted, _Runtime.field(seg, 'i')).r, flighthq._internal._StaticIndex.readArray(sorted, _Runtime.field(seg, 'i')).g, flighthq._internal._StaticIndex.readArray(sorted, _Runtime.field(seg, 'i')).b] : Array<Dynamic>); }
       a = flighthq._internal._StaticIndex.readArray(sorted, _Runtime.field(seg, 'i'));
       b = flighthq._internal._StaticIndex.readArray(sorted, (_Runtime.field(seg, 'i') + 1.0));
-      return cast cast ([(_Runtime.field(a, 'r') + ((_Runtime.field(b, 'r') - _Runtime.field(a, 'r')) * _Runtime.field(seg, 'f'))), (_Runtime.field(a, 'g') + ((_Runtime.field(b, 'g') - _Runtime.field(a, 'g')) * _Runtime.field(seg, 'f'))), (_Runtime.field(a, 'b') + ((_Runtime.field(b, 'b') - _Runtime.field(a, 'b')) * _Runtime.field(seg, 'f')))] : Array<Dynamic>);
+      return cast cast ([(a.r + ((b.r - a.r) * _Runtime.field(seg, 'f'))), (a.g + ((b.g - a.g) * _Runtime.field(seg, 'f'))), (a.b + ((b.b - a.b) * _Runtime.field(seg, 'f')))] : Array<Dynamic>);
     }, samples] : Array<Dynamic>));
     return cast null;
   }
@@ -121,7 +121,7 @@ class Curve {
   public static function particleCurveFromKeyframes(keys:Array<CurveKeyframe>, samples:Dynamic = 33.0):Array<Float> {
     var sorted:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(keys, 'length'), 0.0) : Bool)) { return cast cast ([0.0, 0.0] : Array<Dynamic>); }
-    sorted = _Runtime.sortAndReturn(_Runtime.slice(keys, 0, null), function(a:Dynamic, b:Dynamic) return (_Runtime.field(a, 'time') - _Runtime.field(b, 'time')));
+    sorted = _Runtime.sortAndReturn(_Runtime.slice(keys, 0, null), function(a:Dynamic, b:Dynamic) return (a.time - b.time));
     return cast _Runtime.callValue(buildParticleCurve, cast ([function(t:Dynamic) return _Runtime.callValue(Curve.interpKeyframe__curve, cast ([sorted, t] : Array<Dynamic>)), samples] : Array<Dynamic>));
     return cast null;
   }
@@ -201,9 +201,9 @@ class Curve {
     var a:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
     seg = _Runtime.callValue(Curve.locateKeyframe__curve, cast ([sorted, t] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(_Runtime.field(seg, 'f'), 0.0) : Bool)) { return cast _Runtime.field(flighthq._internal._StaticIndex.readArray(sorted, _Runtime.field(seg, 'i')), 'value'); }
-    a = _Runtime.field(flighthq._internal._StaticIndex.readArray(sorted, _Runtime.field(seg, 'i')), 'value');
-    b = _Runtime.field(flighthq._internal._StaticIndex.readArray(sorted, (_Runtime.field(seg, 'i') + 1.0)), 'value');
+    if ((cast _Runtime.strictEquals(_Runtime.field(seg, 'f'), 0.0) : Bool)) { return cast flighthq._internal._StaticIndex.readArray(sorted, _Runtime.field(seg, 'i')).value; }
+    a = flighthq._internal._StaticIndex.readArray(sorted, _Runtime.field(seg, 'i')).value;
+    b = flighthq._internal._StaticIndex.readArray(sorted, (_Runtime.field(seg, 'i') + 1.0)).value;
     return cast (a + ((b - a) * _Runtime.field(seg, 'f')));
     return cast null;
   }

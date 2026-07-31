@@ -51,13 +51,13 @@ class StarlingParse {
       var a:Dynamic = _Runtime.callValue(StarlingParse.parseAttrs__starlingParse, cast ([_Runtime.getIndex(m, 1.0)] : Array<Dynamic>));
       if ((cast !_Runtime.truthy(_Runtime.getIndex(a, 'name')) : Bool)) { continue; }
       var st:StarlingSubTexture = { height: _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'height'), function():Dynamic return cast '0')] : Array<Dynamic>)), name: _Runtime.getIndex(a, 'name'), width: _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'width'), function():Dynamic return cast '0')] : Array<Dynamic>)), x: _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'x'), function():Dynamic return cast '0')] : Array<Dynamic>)), y: _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'y'), function():Dynamic return cast '0')] : Array<Dynamic>)) };
-      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameX'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(st, 'frameX', _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'frameX')] : Array<Dynamic>))); }
-      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameY'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(st, 'frameY', _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'frameY')] : Array<Dynamic>))); }
-      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameWidth'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(st, 'frameWidth', _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'frameWidth')] : Array<Dynamic>))); }
-      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameHeight'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(st, 'frameHeight', _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'frameHeight')] : Array<Dynamic>))); }
-      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'pivotX'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(st, 'pivotX', _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'pivotX')] : Array<Dynamic>))); }
-      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'pivotY'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(st, 'pivotY', _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'pivotY')] : Array<Dynamic>))); }
-      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'rotated'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(st, 'rotated', _Runtime.strictEquals(_Runtime.getIndex(a, 'rotated'), 'true')); }
+      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameX'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (st.frameX = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'frameX')] : Array<Dynamic>)) : Dynamic)); }
+      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameY'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (st.frameY = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'frameY')] : Array<Dynamic>)) : Dynamic)); }
+      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameWidth'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (st.frameWidth = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'frameWidth')] : Array<Dynamic>)) : Dynamic)); }
+      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameHeight'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (st.frameHeight = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'frameHeight')] : Array<Dynamic>)) : Dynamic)); }
+      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'pivotX'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (st.pivotX = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'pivotX')] : Array<Dynamic>)) : Dynamic)); }
+      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'pivotY'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (st.pivotY = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'pivotY')] : Array<Dynamic>)) : Dynamic)); }
+      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'rotated'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (st.rotated = cast (_Runtime.strictEquals(_Runtime.getIndex(a, 'rotated'), 'true') : Dynamic)); }
       _Runtime.callProperty(subTextures, 'push', cast ([st] : Array<Dynamic>));
     }
     return cast { imagePath: imagePath, subTextures: subTextures };
@@ -107,7 +107,7 @@ class StarlingParse {
     frames = _Runtime.callProperty(regions, 'map', cast ([StarlingParse.frameFromRegion__starlingParse] : Array<Dynamic>));
     frameNames = _Runtime.callProperty(frames, 'map', cast ([function(f:Dynamic) return f.name] : Array<Dynamic>));
     animations = _Runtime.callValue(StarlingParse.inferAnimations__starlingParse, cast ([frameNames, frameDuration] : Array<Dynamic>));
-    return cast _Runtime.callValue(createSpritesheetData, cast ([{ animations: animations, frames: frames, imageFile: _Runtime.field(doc, 'imagePath'), imageHeight: 0.0, imageWidth: 0.0, scale: 1.0 }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createSpritesheetData, cast ([{ animations: animations, frames: frames, imageFile: doc.imagePath, imageHeight: 0.0, imageWidth: 0.0, scale: 1.0 }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -117,14 +117,14 @@ class StarlingParse {
   }
 
   public static function parseStarlingSpritesheet(xml:String, ?options:StarlingParseOptions):SpritesheetData {
-    return cast _Runtime.callValue(StarlingParse.documentToData__starlingParse, cast ([_Runtime.callValue(StarlingParse.parseStarlingXml__starlingParse, cast ([xml] : Array<Dynamic>)), _Runtime.callValue(StarlingParse.regionsFromXml__starlingParse, cast ([xml] : Array<Dynamic>)), _Runtime.coalesce(_Runtime.optionalField(options, 'frameDuration'), function():Dynamic return cast 100.0)] : Array<Dynamic>));
+    return cast _Runtime.callValue(StarlingParse.documentToData__starlingParse, cast ([_Runtime.callValue(StarlingParse.parseStarlingXml__starlingParse, cast ([xml] : Array<Dynamic>)), _Runtime.callValue(StarlingParse.regionsFromXml__starlingParse, cast ([xml] : Array<Dynamic>)), _Runtime.coalesce(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.frameDuration; }), function():Dynamic return cast 100.0)] : Array<Dynamic>));
     return cast null;
   }
 
   public static function parseStarlingSpritesheetDocument(xml:String, ?options:StarlingParseOptions):StarlingParsed {
     var document:Dynamic = cast _Runtime.UNDEFINED;
     document = _Runtime.callValue(StarlingParse.parseStarlingXml__starlingParse, cast ([xml] : Array<Dynamic>));
-    return cast { data: _Runtime.callValue(StarlingParse.documentToData__starlingParse, cast ([document, _Runtime.callValue(StarlingParse.regionsFromXml__starlingParse, cast ([xml] : Array<Dynamic>)), _Runtime.coalesce(_Runtime.optionalField(options, 'frameDuration'), function():Dynamic return cast 100.0)] : Array<Dynamic>)), document: document };
+    return cast { data: _Runtime.callValue(StarlingParse.documentToData__starlingParse, cast ([document, _Runtime.callValue(StarlingParse.regionsFromXml__starlingParse, cast ([xml] : Array<Dynamic>)), _Runtime.coalesce(({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.frameDuration; }), function():Dynamic return cast 100.0)] : Array<Dynamic>)), document: document };
     return cast null;
   }
 }

@@ -17,11 +17,11 @@ class TextureAtlasStarlingParse {
     _Runtime.setLength(atlas.regions, 0.0);
     root = _Runtime.callValue(parseXmlDocument, cast ([xml] : Array<Dynamic>));
     if ((cast !_Runtime.truthy(root) : Bool)) { return cast atlas; }
-    atlasEl = ((cast _Runtime.strictEquals(_Runtime.field(root, 'name'), 'TextureAtlas') : Bool) ? (cast root : Dynamic) : (cast _Runtime.coalesce(_Runtime.find(_Runtime.field(root, 'children'), function(c:Dynamic) return _Runtime.strictEquals(_Runtime.field(c, 'name'), 'TextureAtlas')), function():Dynamic return cast root) : Dynamic));
+    atlasEl = ((cast _Runtime.strictEquals(root.name, 'TextureAtlas') : Bool) ? (cast root : Dynamic) : (cast _Runtime.coalesce(_Runtime.find(root.children, function(c:Dynamic) return _Runtime.strictEquals(c.name, 'TextureAtlas')), function():Dynamic return cast root) : Dynamic));
     id = 0.0;
-    for (el in _Runtime.iterable(_Runtime.field(atlasEl, 'children'))) {
-      if ((cast !_Runtime.strictEquals(_Runtime.field(el, 'name'), 'SubTexture') : Bool)) { continue; }
-      var a:Dynamic = _Runtime.field(el, 'attributes');
+    for (el in _Runtime.iterable(atlasEl.children)) {
+      if ((cast !_Runtime.strictEquals(el.name, 'SubTexture') : Bool)) { continue; }
+      var a:Dynamic = el.attributes;
       if ((cast !_Runtime.truthy(_Runtime.getIndex(a, 'name')) : Bool)) { continue; }
       var x:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'x'), function():Dynamic return cast '0')] : Array<Dynamic>));
       var y:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'y'), function():Dynamic return cast '0')] : Array<Dynamic>));

@@ -12,7 +12,7 @@ import flighthq.types.GlyphSource;
 class GlyphSource {
   public static function createGlyphSourceFromBitmapFont(font:BitmapFont):flighthq.types.GlyphSource {
     return cast { getGlyphAtlasImage: function(page:Dynamic = 0.0) {
-      return cast _Runtime.coalesce(({ final __typedStruct0 = flighthq._internal._StaticIndex.readArray(_Runtime.field(font, 'pages'), page); __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.image; }), function():Dynamic return cast null);
+      return cast _Runtime.coalesce(({ final __typedStruct0 = flighthq._internal._StaticIndex.readArray(font.pages, page); __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.image; }), function():Dynamic return cast null);
     }, getGlyphEntry: function(codepoint:Dynamic) {
       return cast _Runtime.callValue(getBitmapFontGlyph, cast ([font, codepoint] : Array<Dynamic>));
     }, getGlyphKerning: function(left:Dynamic, right:Dynamic) {

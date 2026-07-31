@@ -214,11 +214,11 @@ class Node {
     }
     nodeSignals = _Runtime.field(runtime, 'nodeSignals');
     if ((cast !_Runtime.strictEquals(nodeSignals, null) : Bool)) {
-      _Runtime.callValue(clearSignal, cast ([_Runtime.field(nodeSignals, 'onChildAdded')] : Array<Dynamic>));
-      _Runtime.callValue(clearSignal, cast ([_Runtime.field(nodeSignals, 'onChildRemoved')] : Array<Dynamic>));
-      _Runtime.callValue(clearSignal, cast ([_Runtime.field(nodeSignals, 'onChildrenChanged')] : Array<Dynamic>));
-      _Runtime.callValue(clearSignal, cast ([_Runtime.field(nodeSignals, 'onChildrenOrderChanged')] : Array<Dynamic>));
-      _Runtime.callValue(clearSignal, cast ([_Runtime.field(nodeSignals, 'onParentChanged')] : Array<Dynamic>));
+      _Runtime.callValue(clearSignal, cast ([nodeSignals.onChildAdded] : Array<Dynamic>));
+      _Runtime.callValue(clearSignal, cast ([nodeSignals.onChildRemoved] : Array<Dynamic>));
+      _Runtime.callValue(clearSignal, cast ([nodeSignals.onChildrenChanged] : Array<Dynamic>));
+      _Runtime.callValue(clearSignal, cast ([nodeSignals.onChildrenOrderChanged] : Array<Dynamic>));
+      _Runtime.callValue(clearSignal, cast ([nodeSignals.onParentChanged] : Array<Dynamic>));
       _Runtime.setField(runtime, 'nodeSignals', null);
     }
     interactionSignals = _Runtime.field(runtime, 'interactionSignals');

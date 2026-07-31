@@ -24,7 +24,7 @@ class ApplyParticleCollisions {
     var positionsZ:Dynamic = cast _Runtime.UNDEFINED;
     var velocities:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(colliders, 'length'), 0.0) : Bool)) { return; }
-    data = _Runtime.field(emitter, 'data');
+    data = emitter.data;
     count = data.particleCount;
     transforms = data.transforms;
     positionsZ = data.positionsZ;
@@ -57,8 +57,8 @@ class ApplyParticleCollisions {
     var velocities:Dynamic = cast _Runtime.UNDEFINED;
     var lifetimes:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(colliders, 'length'), 0.0) : Bool)) { return; }
-    velocities = _Runtime.field(state, 'velocities');
-    lifetimes = _Runtime.field(state, 'lifetimes');
+    velocities = state.velocities;
+    lifetimes = state.lifetimes;
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(objects, 'length') : Float)) : Bool)) {
@@ -113,13 +113,13 @@ class ApplyParticleCollisions {
   public static function resolvePlane__applyParticleCollisions(c:PlaneCollider, p:Array<Float>):Bool {
     var nz:Dynamic = cast _Runtime.UNDEFINED;
     var depth:Dynamic = cast _Runtime.UNDEFINED;
-    nz = _Runtime.coalesce(_Runtime.field(c, 'nz'), function():Dynamic return cast 0.0);
-    depth = ((((_Runtime.field(c, 'nx') * flighthq._internal._StaticIndex.readArray(p, 0.0)) + (_Runtime.field(c, 'ny') * flighthq._internal._StaticIndex.readArray(p, 1.0))) + (nz * flighthq._internal._StaticIndex.readArray(p, 2.0))) - _Runtime.field(c, 'distance'));
+    nz = _Runtime.coalesce(c.nz, function():Dynamic return cast 0.0);
+    depth = ((((c.nx * flighthq._internal._StaticIndex.readArray(p, 0.0)) + (c.ny * flighthq._internal._StaticIndex.readArray(p, 1.0))) + (nz * flighthq._internal._StaticIndex.readArray(p, 2.0))) - c.distance);
     if ((cast ((cast depth : Float) >= (cast 0.0 : Float)) : Bool)) { return cast false; }
-    ({ var __indexedObject0:Dynamic = p; var __indexedKey1:Dynamic = 0.0; flighthq._internal._StaticIndex.writeArray(__indexedObject0, __indexedKey1, (flighthq._internal._StaticIndex.readArray(__indexedObject0, __indexedKey1) - (_Runtime.field(c, 'nx') * depth))); });
-    ({ var __indexedObject2:Dynamic = p; var __indexedKey3:Dynamic = 1.0; flighthq._internal._StaticIndex.writeArray(__indexedObject2, __indexedKey3, (flighthq._internal._StaticIndex.readArray(__indexedObject2, __indexedKey3) - (_Runtime.field(c, 'ny') * depth))); });
+    ({ var __indexedObject0:Dynamic = p; var __indexedKey1:Dynamic = 0.0; flighthq._internal._StaticIndex.writeArray(__indexedObject0, __indexedKey1, (flighthq._internal._StaticIndex.readArray(__indexedObject0, __indexedKey1) - (c.nx * depth))); });
+    ({ var __indexedObject2:Dynamic = p; var __indexedKey3:Dynamic = 1.0; flighthq._internal._StaticIndex.writeArray(__indexedObject2, __indexedKey3, (flighthq._internal._StaticIndex.readArray(__indexedObject2, __indexedKey3) - (c.ny * depth))); });
     ({ var __indexedObject4:Dynamic = p; var __indexedKey5:Dynamic = 2.0; flighthq._internal._StaticIndex.writeArray(__indexedObject4, __indexedKey5, (flighthq._internal._StaticIndex.readArray(__indexedObject4, __indexedKey5) - (nz * depth))); });
-    _Runtime.callValue(ApplyParticleCollisions.reflect3__applyParticleCollisions, cast ([p, _Runtime.field(c, 'nx'), _Runtime.field(c, 'ny'), nz, _Runtime.coalesce(_Runtime.field(c, 'restitution'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.field(c, 'friction'), function():Dynamic return cast 0.0)] : Array<Dynamic>));
+    _Runtime.callValue(ApplyParticleCollisions.reflect3__applyParticleCollisions, cast ([p, c.nx, c.ny, nz, _Runtime.coalesce(c.restitution, function():Dynamic return cast 0.0), _Runtime.coalesce(c.friction, function():Dynamic return cast 0.0)] : Array<Dynamic>));
     return cast true;
     return cast null;
   }
@@ -130,24 +130,24 @@ class ApplyParticleCollisions {
     var dist:Dynamic = cast _Runtime.UNDEFINED;
     var nx:Dynamic = cast _Runtime.UNDEFINED;
     var ny:Dynamic = cast _Runtime.UNDEFINED;
-    dx = (flighthq._internal._StaticIndex.readArray(p, 0.0) - _Runtime.field(c, 'x'));
-    dy = (flighthq._internal._StaticIndex.readArray(p, 1.0) - _Runtime.field(c, 'y'));
+    dx = (flighthq._internal._StaticIndex.readArray(p, 0.0) - c.x);
+    dy = (flighthq._internal._StaticIndex.readArray(p, 1.0) - c.y);
     dist = HxMath.sqrt(((dx * dx) + (dy * dy)));
-    if ((cast _Runtime.strictEquals(_Runtime.field(c, 'mode'), 'exclude') : Bool)) {
-      if ((cast ((cast ((cast dist : Float) >= (cast _Runtime.field(c, 'radius') : Float)) : Bool) || (cast ((cast dist : Float) <= (cast 0.000001 : Float)) : Bool)) : Bool)) { return cast false; }
+    if ((cast _Runtime.strictEquals(c.mode, 'exclude') : Bool)) {
+      if ((cast ((cast ((cast dist : Float) >= (cast c.radius : Float)) : Bool) || (cast ((cast dist : Float) <= (cast 0.000001 : Float)) : Bool)) : Bool)) { return cast false; }
       var nx:Dynamic = (dx / dist);
       var ny:Dynamic = (dy / dist);
-      flighthq._internal._StaticIndex.writeArray(p, 0.0, (_Runtime.field(c, 'x') + (nx * _Runtime.field(c, 'radius'))));
-      flighthq._internal._StaticIndex.writeArray(p, 1.0, (_Runtime.field(c, 'y') + (ny * _Runtime.field(c, 'radius'))));
-      _Runtime.callValue(ApplyParticleCollisions.reflect3__applyParticleCollisions, cast ([p, nx, ny, 0.0, _Runtime.coalesce(_Runtime.field(c, 'restitution'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.field(c, 'friction'), function():Dynamic return cast 0.0)] : Array<Dynamic>));
+      flighthq._internal._StaticIndex.writeArray(p, 0.0, (c.x + (nx * c.radius)));
+      flighthq._internal._StaticIndex.writeArray(p, 1.0, (c.y + (ny * c.radius)));
+      _Runtime.callValue(ApplyParticleCollisions.reflect3__applyParticleCollisions, cast ([p, nx, ny, 0.0, _Runtime.coalesce(c.restitution, function():Dynamic return cast 0.0), _Runtime.coalesce(c.friction, function():Dynamic return cast 0.0)] : Array<Dynamic>));
       return cast true;
     }
-    if ((cast ((cast dist : Float) <= (cast _Runtime.field(c, 'radius') : Float)) : Bool)) { return cast false; }
+    if ((cast ((cast dist : Float) <= (cast c.radius : Float)) : Bool)) { return cast false; }
     nx = ((cast ((cast dist : Float) <= (cast 0.000001 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast (-dx / dist) : Dynamic));
     ny = ((cast ((cast dist : Float) <= (cast 0.000001 : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast (-dy / dist) : Dynamic));
-    flighthq._internal._StaticIndex.writeArray(p, 0.0, (_Runtime.field(c, 'x') - (nx * _Runtime.field(c, 'radius'))));
-    flighthq._internal._StaticIndex.writeArray(p, 1.0, (_Runtime.field(c, 'y') - (ny * _Runtime.field(c, 'radius'))));
-    _Runtime.callValue(ApplyParticleCollisions.reflect3__applyParticleCollisions, cast ([p, nx, ny, 0.0, _Runtime.coalesce(_Runtime.field(c, 'restitution'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.field(c, 'friction'), function():Dynamic return cast 0.0)] : Array<Dynamic>));
+    flighthq._internal._StaticIndex.writeArray(p, 0.0, (c.x - (nx * c.radius)));
+    flighthq._internal._StaticIndex.writeArray(p, 1.0, (c.y - (ny * c.radius)));
+    _Runtime.callValue(ApplyParticleCollisions.reflect3__applyParticleCollisions, cast ([p, nx, ny, 0.0, _Runtime.coalesce(c.restitution, function():Dynamic return cast 0.0), _Runtime.coalesce(c.friction, function():Dynamic return cast 0.0)] : Array<Dynamic>));
     return cast true;
     return cast null;
   }
@@ -166,15 +166,15 @@ class ApplyParticleCollisions {
     var top:Dynamic = cast _Runtime.UNDEFINED;
     var bottom:Dynamic = cast _Runtime.UNDEFINED;
     var minPen:Dynamic = cast _Runtime.UNDEFINED;
-    hw = (_Runtime.field(c, 'width') / 2.0);
-    hh = (_Runtime.field(c, 'height') / 2.0);
-    minX = (_Runtime.field(c, 'x') - hw);
-    maxX = (_Runtime.field(c, 'x') + hw);
-    minY = (_Runtime.field(c, 'y') - hh);
-    maxY = (_Runtime.field(c, 'y') + hh);
-    restitution = _Runtime.coalesce(_Runtime.field(c, 'restitution'), function():Dynamic return cast 0.0);
-    friction = _Runtime.coalesce(_Runtime.field(c, 'friction'), function():Dynamic return cast 0.0);
-    if ((cast _Runtime.strictEquals(_Runtime.field(c, 'mode'), 'contain') : Bool)) {
+    hw = (c.width / 2.0);
+    hh = (c.height / 2.0);
+    minX = (c.x - hw);
+    maxX = (c.x + hw);
+    minY = (c.y - hh);
+    maxY = (c.y + hh);
+    restitution = _Runtime.coalesce(c.restitution, function():Dynamic return cast 0.0);
+    friction = _Runtime.coalesce(c.friction, function():Dynamic return cast 0.0);
+    if ((cast _Runtime.strictEquals(c.mode, 'contain') : Bool)) {
       var hit:Dynamic = false;
       if ((cast ((cast flighthq._internal._StaticIndex.readArray(p, 0.0) : Float) < (cast minX : Float)) : Bool)) {
         flighthq._internal._StaticIndex.writeArray(p, 0.0, minX);
@@ -227,29 +227,29 @@ class ApplyParticleCollisions {
     var nx:Dynamic = cast _Runtime.UNDEFINED;
     var ny:Dynamic = cast _Runtime.UNDEFINED;
     var nz:Dynamic = cast _Runtime.UNDEFINED;
-    dx = (flighthq._internal._StaticIndex.readArray(p, 0.0) - _Runtime.field(c, 'x'));
-    dy = (flighthq._internal._StaticIndex.readArray(p, 1.0) - _Runtime.field(c, 'y'));
-    dz = (flighthq._internal._StaticIndex.readArray(p, 2.0) - _Runtime.field(c, 'z'));
+    dx = (flighthq._internal._StaticIndex.readArray(p, 0.0) - c.x);
+    dy = (flighthq._internal._StaticIndex.readArray(p, 1.0) - c.y);
+    dz = (flighthq._internal._StaticIndex.readArray(p, 2.0) - c.z);
     dist = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
-    if ((cast _Runtime.strictEquals(_Runtime.field(c, 'mode'), 'exclude') : Bool)) {
-      if ((cast ((cast ((cast dist : Float) >= (cast _Runtime.field(c, 'radius') : Float)) : Bool) || (cast ((cast dist : Float) <= (cast 0.000001 : Float)) : Bool)) : Bool)) { return cast false; }
+    if ((cast _Runtime.strictEquals(c.mode, 'exclude') : Bool)) {
+      if ((cast ((cast ((cast dist : Float) >= (cast c.radius : Float)) : Bool) || (cast ((cast dist : Float) <= (cast 0.000001 : Float)) : Bool)) : Bool)) { return cast false; }
       var nx:Dynamic = (dx / dist);
       var ny:Dynamic = (dy / dist);
       var nz:Dynamic = (dz / dist);
-      flighthq._internal._StaticIndex.writeArray(p, 0.0, (_Runtime.field(c, 'x') + (nx * _Runtime.field(c, 'radius'))));
-      flighthq._internal._StaticIndex.writeArray(p, 1.0, (_Runtime.field(c, 'y') + (ny * _Runtime.field(c, 'radius'))));
-      flighthq._internal._StaticIndex.writeArray(p, 2.0, (_Runtime.field(c, 'z') + (nz * _Runtime.field(c, 'radius'))));
-      _Runtime.callValue(ApplyParticleCollisions.reflect3__applyParticleCollisions, cast ([p, nx, ny, nz, _Runtime.coalesce(_Runtime.field(c, 'restitution'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.field(c, 'friction'), function():Dynamic return cast 0.0)] : Array<Dynamic>));
+      flighthq._internal._StaticIndex.writeArray(p, 0.0, (c.x + (nx * c.radius)));
+      flighthq._internal._StaticIndex.writeArray(p, 1.0, (c.y + (ny * c.radius)));
+      flighthq._internal._StaticIndex.writeArray(p, 2.0, (c.z + (nz * c.radius)));
+      _Runtime.callValue(ApplyParticleCollisions.reflect3__applyParticleCollisions, cast ([p, nx, ny, nz, _Runtime.coalesce(c.restitution, function():Dynamic return cast 0.0), _Runtime.coalesce(c.friction, function():Dynamic return cast 0.0)] : Array<Dynamic>));
       return cast true;
     }
-    if ((cast ((cast dist : Float) <= (cast _Runtime.field(c, 'radius') : Float)) : Bool)) { return cast false; }
+    if ((cast ((cast dist : Float) <= (cast c.radius : Float)) : Bool)) { return cast false; }
     nx = ((cast ((cast dist : Float) <= (cast 0.000001 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast (-dx / dist) : Dynamic));
     ny = ((cast ((cast dist : Float) <= (cast 0.000001 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast (-dy / dist) : Dynamic));
     nz = ((cast ((cast dist : Float) <= (cast 0.000001 : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast (-dz / dist) : Dynamic));
-    flighthq._internal._StaticIndex.writeArray(p, 0.0, (_Runtime.field(c, 'x') - (nx * _Runtime.field(c, 'radius'))));
-    flighthq._internal._StaticIndex.writeArray(p, 1.0, (_Runtime.field(c, 'y') - (ny * _Runtime.field(c, 'radius'))));
-    flighthq._internal._StaticIndex.writeArray(p, 2.0, (_Runtime.field(c, 'z') - (nz * _Runtime.field(c, 'radius'))));
-    _Runtime.callValue(ApplyParticleCollisions.reflect3__applyParticleCollisions, cast ([p, nx, ny, nz, _Runtime.coalesce(_Runtime.field(c, 'restitution'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.field(c, 'friction'), function():Dynamic return cast 0.0)] : Array<Dynamic>));
+    flighthq._internal._StaticIndex.writeArray(p, 0.0, (c.x - (nx * c.radius)));
+    flighthq._internal._StaticIndex.writeArray(p, 1.0, (c.y - (ny * c.radius)));
+    flighthq._internal._StaticIndex.writeArray(p, 2.0, (c.z - (nz * c.radius)));
+    _Runtime.callValue(ApplyParticleCollisions.reflect3__applyParticleCollisions, cast ([p, nx, ny, nz, _Runtime.coalesce(c.restitution, function():Dynamic return cast 0.0), _Runtime.coalesce(c.friction, function():Dynamic return cast 0.0)] : Array<Dynamic>));
     return cast true;
     return cast null;
   }

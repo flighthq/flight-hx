@@ -12,13 +12,13 @@ class TauriPlatform {
     var os:Dynamic = cast _Runtime.UNDEFINED;
     os = _Runtime.field(tauri, 'os');
     return cast { getInfo: function(out:Dynamic) {
-      _Runtime.setField(out, 'name', _Runtime.callValue(TauriPlatform.toPlatformName__tauriPlatform, cast ([_Runtime.callProperty(os, 'platform', cast ([] : Array<Dynamic>))] : Array<Dynamic>)));
-      _Runtime.setField(out, 'kind', 'desktop');
-      _Runtime.setField(out, 'version', _Runtime.callProperty(os, 'version', cast ([] : Array<Dynamic>)));
-      _Runtime.setField(out, 'arch', _Runtime.callProperty(os, 'arch', cast ([] : Array<Dynamic>)));
-      _Runtime.setField(out, 'locale', _Runtime.coalesce(_Runtime.callProperty(os, 'locale', cast ([] : Array<Dynamic>)), function():Dynamic return cast ''));
-      _Runtime.setField(out, 'isTouch', false);
-      _Runtime.setField(out, 'runtime', 'tauri');
+      (out.name = cast (_Runtime.callValue(TauriPlatform.toPlatformName__tauriPlatform, cast ([_Runtime.callProperty(os, 'platform', cast ([] : Array<Dynamic>))] : Array<Dynamic>)) : Dynamic));
+      (out.kind = cast ('desktop' : Dynamic));
+      (out.version = cast (_Runtime.callProperty(os, 'version', cast ([] : Array<Dynamic>)) : Dynamic));
+      (out.arch = cast (_Runtime.callProperty(os, 'arch', cast ([] : Array<Dynamic>)) : Dynamic));
+      (out.locale = cast (_Runtime.coalesce(_Runtime.callProperty(os, 'locale', cast ([] : Array<Dynamic>)), function():Dynamic return cast '') : Dynamic));
+      (out.isTouch = cast (false : Dynamic));
+      (out.runtime = cast ('tauri' : Dynamic));
       return cast out;
     } };
     return cast null;

@@ -12,12 +12,12 @@ class ElectronPlatform {
     return cast { getInfo: function(out:Dynamic) {
       var proc:Dynamic = cast _Runtime.UNDEFINED;
       proc = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('process'), 'undefined') : Bool) ? (cast (cast _Runtime.globalValue('process') : { @:optional var platform:String; @:optional var arch:String; @:optional var getSystemVersion:Dynamic; }) : Dynamic) : (cast null : Dynamic));
-      _Runtime.setField(out, 'name', _Runtime.callValue(ElectronPlatform.toPlatformName__electronPlatform, cast ([_Runtime.optionalField(proc, 'platform')] : Array<Dynamic>)));
-      _Runtime.setField(out, 'kind', 'desktop');
-      _Runtime.setField(out, 'version', _Runtime.coalesce(_Runtime.callOptionalProperty(proc, 'getSystemVersion', cast ([] : Array<Dynamic>)), function():Dynamic return cast ''));
-      _Runtime.setField(out, 'arch', _Runtime.coalesce(_Runtime.optionalField(proc, 'arch'), function():Dynamic return cast ''));
-      _Runtime.setField(out, 'locale', _Runtime.callProperty(_Runtime.field(electron, 'app'), 'getLocale', cast ([] : Array<Dynamic>)));
-      _Runtime.setField(out, 'isTouch', false);
+      (out.name = cast (_Runtime.callValue(ElectronPlatform.toPlatformName__electronPlatform, cast ([_Runtime.optionalField(proc, 'platform')] : Array<Dynamic>)) : Dynamic));
+      (out.kind = cast ('desktop' : Dynamic));
+      (out.version = cast (_Runtime.coalesce(_Runtime.callOptionalProperty(proc, 'getSystemVersion', cast ([] : Array<Dynamic>)), function():Dynamic return cast '') : Dynamic));
+      (out.arch = cast (_Runtime.coalesce(_Runtime.optionalField(proc, 'arch'), function():Dynamic return cast '') : Dynamic));
+      (out.locale = cast (_Runtime.callProperty(_Runtime.field(electron, 'app'), 'getLocale', cast ([] : Array<Dynamic>)) : Dynamic));
+      (out.isTouch = cast (false : Dynamic));
       return cast out;
     } };
     return cast null;

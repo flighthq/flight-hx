@@ -17,22 +17,22 @@ class MeshGeometryLayout {
     var dstVertices:Dynamic = cast _Runtime.UNDEFINED;
     var srcVerts:Dynamic = cast _Runtime.UNDEFINED;
     var mapping:Array<{ var componentCount:Float; var dstFloatOffset:Float; var srcFloatOffset:Float; }> = cast _Runtime.UNDEFINED;
-    srcStride = _Runtime.field(source.layout, 'stride');
-    dstStride = _Runtime.field(targetLayout, 'stride');
+    srcStride = source.layout.stride;
+    dstStride = targetLayout.stride;
     srcFloatsPerVertex = (srcStride / 4.0);
     dstFloatsPerVertex = (dstStride / 4.0);
     vertexCount = ((cast ((cast srcFloatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(source.vertices, 'length') / srcFloatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     dstVertices = new flighthq._internal._Float32Array((vertexCount * dstFloatsPerVertex));
     srcVerts = source.vertices;
     mapping = cast ([] : Array<Dynamic>);
-    for (dstAttr in _Runtime.iterable(_Runtime.field(targetLayout, 'attributes'))) {
-      if ((cast !(cast StringTools.startsWith(_Runtime.field(dstAttr, 'format'), 'float32') : Bool) : Bool)) { continue; }
-      var dstFloatOffset:Dynamic = (_Runtime.field(dstAttr, 'byteOffset') / 4.0);
-      var componentCount:Dynamic = _Runtime.callValue(MeshGeometryLayout.getFloat32ComponentCount__meshGeometryLayout, cast ([_Runtime.field(dstAttr, 'format')] : Array<Dynamic>));
+    for (dstAttr in _Runtime.iterable(targetLayout.attributes)) {
+      if ((cast !(cast StringTools.startsWith(dstAttr.format, 'float32') : Bool) : Bool)) { continue; }
+      var dstFloatOffset:Dynamic = (dstAttr.byteOffset / 4.0);
+      var componentCount:Dynamic = _Runtime.callValue(MeshGeometryLayout.getFloat32ComponentCount__meshGeometryLayout, cast ([dstAttr.format] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(componentCount, 0.0) : Bool)) { continue; }
-      var srcAttr:Dynamic = _Runtime.find(_Runtime.field(source.layout, 'attributes'), function(a:Dynamic) return ((cast _Runtime.strictEquals(_Runtime.field(a, 'semantic'), _Runtime.field(dstAttr, 'semantic')) : Bool) && (cast StringTools.startsWith(_Runtime.field(a, 'format'), 'float32') : Bool)));
+      var srcAttr:Dynamic = _Runtime.find(source.layout.attributes, function(a:Dynamic) return ((cast _Runtime.strictEquals(a.semantic, dstAttr.semantic) : Bool) && (cast StringTools.startsWith(a.format, 'float32') : Bool)));
       if ((cast !_Runtime.truthy(srcAttr) : Bool)) { continue; }
-      _Runtime.callProperty(mapping, 'push', cast ([{ componentCount: componentCount, dstFloatOffset: dstFloatOffset, srcFloatOffset: (_Runtime.field(srcAttr, 'byteOffset') / 4.0) }] : Array<Dynamic>));
+      _Runtime.callProperty(mapping, 'push', cast ([{ componentCount: componentCount, dstFloatOffset: dstFloatOffset, srcFloatOffset: (srcAttr.byteOffset / 4.0) }] : Array<Dynamic>));
     }
     {
       var i:Dynamic = 0.0;

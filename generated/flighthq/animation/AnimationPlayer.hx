@@ -19,7 +19,7 @@ class AnimationPlayer {
     var time:Dynamic = cast _Runtime.UNDEFINED;
     var looped:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.field(player, 'playing') : Bool) : Bool)) { return; }
-    duration = _Runtime.field(_Runtime.field(player, 'clip'), 'duration');
+    duration = _Runtime.field(player, 'clip').duration;
     if ((cast ((cast duration : Float) <= (cast 0.0 : Float)) : Bool)) {
       _Runtime.setField(player, 'time', 0.0);
       return;
@@ -104,7 +104,7 @@ class AnimationPlayer {
   public static function getAnimationPlayerNormalizedTime(player:flighthq.types.AnimationPlayer):Float {
     var duration:Dynamic = cast _Runtime.UNDEFINED;
     var n:Dynamic = cast _Runtime.UNDEFINED;
-    duration = _Runtime.field(_Runtime.field(player, 'clip'), 'duration');
+    duration = _Runtime.field(player, 'clip').duration;
     if ((cast ((cast duration : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
     n = (_Runtime.field(player, 'time') / duration);
     return cast ((cast ((cast n : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast n : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast n : Dynamic)) : Dynamic));
@@ -117,7 +117,7 @@ class AnimationPlayer {
 
   public static function seekAnimationPlayer(player:flighthq.types.AnimationPlayer, time:Float):Void {
     var duration:Dynamic = cast _Runtime.UNDEFINED;
-    duration = _Runtime.field(_Runtime.field(player, 'clip'), 'duration');
+    duration = _Runtime.field(player, 'clip').duration;
     _Runtime.setField(player, 'time', ((cast ((cast time : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast time : Float) > (cast duration : Float)) : Bool) ? (cast duration : Dynamic) : (cast time : Dynamic)) : Dynamic)));
   }
 

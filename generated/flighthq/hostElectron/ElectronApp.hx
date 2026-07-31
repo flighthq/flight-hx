@@ -77,7 +77,7 @@ class ElectronApp {
       if ((cast !_Runtime.truthy(_Runtime.field(app, 'dock')) : Bool)) { return; }
       _Runtime.callProperty(_Runtime.field(app, 'dock'), 'setMenu', cast ([_Runtime.callProperty(_Runtime.field(electron, 'Menu'), 'buildFromTemplate', cast ([_Runtime.callProperty(items, 'map', cast ([ElectronApp.toMenuItemOptions__electronApp] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
     }, setLoginItem: function(settings:Dynamic) {
-      _Runtime.callProperty(app, 'setLoginItemSettings', cast ([{ openAtLogin: _Runtime.field(settings, 'openAtLogin'), openAsHidden: _Runtime.field(settings, 'openAsHidden'), path: _Runtime.field(settings, 'path'), args: _Runtime.select(_Runtime.field(settings, 'args'), function():Dynamic return cast _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(settings, 'args'))]), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) }] : Array<Dynamic>));
+      _Runtime.callProperty(app, 'setLoginItemSettings', cast ([{ openAtLogin: settings.openAtLogin, openAsHidden: settings.openAsHidden, path: settings.path, args: _Runtime.select(settings.args, function():Dynamic return cast _Runtime.concatArrays([_Runtime.toArray(settings.args)]), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) }] : Array<Dynamic>));
       return cast true;
     }, setName: function(name:Dynamic) {
       _Runtime.callProperty(app, 'setName', cast ([name] : Array<Dynamic>));

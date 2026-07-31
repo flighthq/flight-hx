@@ -189,7 +189,7 @@ class LibgdxAtlasParse {
     var frames:Array<SpritesheetFrameData> = cast _Runtime.UNDEFINED;
     var frameNames:Dynamic = cast _Runtime.UNDEFINED;
     var animations:Dynamic = cast _Runtime.UNDEFINED;
-    frameDuration = _Runtime.coalesce(_Runtime.optionalField(options, 'frameDuration'), function():Dynamic return cast 100.0);
+    frameDuration = _Runtime.coalesce(({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.frameDuration; }), function():Dynamic return cast 100.0);
     __destructure7 = _Runtime.callValue(LibgdxAtlasParse.parseLibgdxAtlas__libgdxAtlasParse, cast ([text] : Array<Dynamic>));
     pages = _Runtime.field(__destructure7, 'pages');
     firstPage = flighthq._internal._StaticIndex.readArray(pages, 0.0);

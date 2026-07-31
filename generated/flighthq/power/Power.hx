@@ -45,40 +45,40 @@ class Power {
     var idleIntervalId:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(detachPower, cast ([power] : Array<Dynamic>));
     backend = _Runtime.callValue(getPowerBackend, cast ([] : Array<Dynamic>));
-    wasCharging = _Runtime.field(_Runtime.callProperty(backend, 'getStatus', cast ([Power._scratch__power] : Array<Dynamic>)), 'isCharging');
+    wasCharging = _Runtime.callProperty(backend, 'getStatus', cast ([Power._scratch__power] : Array<Dynamic>)).isCharging;
     unsubscribeChange = _Runtime.callProperty(backend, 'subscribe', cast ([function() {
       var status:Dynamic = cast _Runtime.UNDEFINED;
       status = _Runtime.callProperty(backend, 'getStatus', cast ([Power._scratch__power] : Array<Dynamic>));
-      if ((cast !_Runtime.strictEquals(_Runtime.field(power, 'onChange'), null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onChange')], [status]]), 1); }
-      if ((cast !_Runtime.strictEquals(_Runtime.field(status, 'isCharging'), wasCharging) : Bool)) {
-        (wasCharging = cast (_Runtime.field(status, 'isCharging') : Dynamic));
-        var transition:Dynamic = ((cast _Runtime.field(status, 'isCharging') : Bool) ? (cast _Runtime.field(power, 'onCharging') : Dynamic) : (cast _Runtime.field(power, 'onDischarging') : Dynamic));
+      if ((cast !_Runtime.strictEquals(power.onChange, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[power.onChange], [status]]), 1); }
+      if ((cast !_Runtime.strictEquals(status.isCharging, wasCharging) : Bool)) {
+        (wasCharging = cast (status.isCharging : Dynamic));
+        var transition:Dynamic = ((cast status.isCharging : Bool) ? (cast power.onCharging : Dynamic) : (cast power.onDischarging : Dynamic));
         if ((cast !_Runtime.strictEquals(transition, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[transition]]), 1); }
       }
     }] : Array<Dynamic>));
     unsubscribeLockScreen = _Runtime.callProperty(backend, 'subscribeLockScreen', cast ([function() {
-      if ((cast !_Runtime.strictEquals(_Runtime.field(power, 'onLockScreen'), null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onLockScreen')]]), 1); }
+      if ((cast !_Runtime.strictEquals(power.onLockScreen, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[power.onLockScreen]]), 1); }
     }] : Array<Dynamic>));
     unsubscribeLowPowerModeChange = _Runtime.callProperty(backend, 'subscribeLowPowerModeChange', cast ([function() {
-      if ((cast !_Runtime.strictEquals(_Runtime.field(power, 'onLowPowerModeChange'), null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onLowPowerModeChange')]]), 1); }
+      if ((cast !_Runtime.strictEquals(power.onLowPowerModeChange, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[power.onLowPowerModeChange]]), 1); }
     }] : Array<Dynamic>));
     unsubscribeResume = _Runtime.callProperty(backend, 'subscribeResume', cast ([function() {
-      if ((cast !_Runtime.strictEquals(_Runtime.field(power, 'onResume'), null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onResume')]]), 1); }
+      if ((cast !_Runtime.strictEquals(power.onResume, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[power.onResume]]), 1); }
     }] : Array<Dynamic>));
     unsubscribeSuspend = _Runtime.callProperty(backend, 'subscribeSuspend', cast ([function() {
-      if ((cast !_Runtime.strictEquals(_Runtime.field(power, 'onSuspend'), null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onSuspend')]]), 1); }
+      if ((cast !_Runtime.strictEquals(power.onSuspend, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[power.onSuspend]]), 1); }
     }] : Array<Dynamic>));
     unsubscribeThermalStateChange = _Runtime.callProperty(backend, 'subscribeThermalStateChange', cast ([function() {
-      if ((cast !_Runtime.strictEquals(_Runtime.field(power, 'onThermalStateChange'), null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onThermalStateChange')]]), 1); }
+      if ((cast !_Runtime.strictEquals(power.onThermalStateChange, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[power.onThermalStateChange]]), 1); }
     }] : Array<Dynamic>));
     unsubscribeUnlockScreen = _Runtime.callProperty(backend, 'subscribeUnlockScreen', cast ([function() {
-      if ((cast !_Runtime.strictEquals(_Runtime.field(power, 'onUnlockScreen'), null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(power, 'onUnlockScreen')]]), 1); }
+      if ((cast !_Runtime.strictEquals(power.onUnlockScreen, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[power.onUnlockScreen]]), 1); }
     }] : Array<Dynamic>));
     lastIdleState = _Runtime.callProperty(backend, 'getSystemIdleState', cast ([idleThresholdSeconds] : Array<Dynamic>));
     idleIntervalId = _Runtime.setInterval(function() {
       var idleSignal:Dynamic = cast _Runtime.UNDEFINED;
       var current:Dynamic = cast _Runtime.UNDEFINED;
-      idleSignal = _Runtime.field(power, 'onIdleStateChange');
+      idleSignal = power.onIdleStateChange;
       if ((cast ((cast _Runtime.strictEquals(idleSignal, null) : Bool) || (cast !(cast _Runtime.callValue(hasSignalSlots, cast ([idleSignal] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return; }
       current = _Runtime.callProperty(backend, 'getSystemIdleState', cast ([idleThresholdSeconds] : Array<Dynamic>));
       if ((cast !_Runtime.strictEquals(current, lastIdleState) : Bool)) {
@@ -135,14 +135,14 @@ class Power {
       charging = cachedCharging;
       chargingTime = cachedChargingTime;
       dischargingTime = cachedDischargingTime;
-      _Runtime.setField(out, 'batteryLevel', level);
-      _Runtime.setField(out, 'chargingTime', chargingTime);
-      _Runtime.setField(out, 'dischargingTime', dischargingTime);
-      _Runtime.setField(out, 'isBatteryLow', ((cast ((cast ((cast level : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast level : Float) <= (cast 0.2 : Float)) : Bool)) : Bool) && (cast !(cast charging : Bool) : Bool)));
-      _Runtime.setField(out, 'isCharging', charging);
-      _Runtime.setField(out, 'isOnBattery', ((cast ((cast level : Float) >= (cast 0.0 : Float)) : Bool) && (cast !(cast charging : Bool) : Bool)));
-      _Runtime.setField(out, 'isLowPower', false);
-      _Runtime.setField(out, 'thermalState', 'Unknown');
+      (out.batteryLevel = cast (level : Dynamic));
+      (out.chargingTime = cast (chargingTime : Dynamic));
+      (out.dischargingTime = cast (dischargingTime : Dynamic));
+      (out.isBatteryLow = cast (((cast ((cast ((cast level : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast level : Float) <= (cast 0.2 : Float)) : Bool)) : Bool) && (cast !(cast charging : Bool) : Bool)) : Dynamic));
+      (out.isCharging = cast (charging : Dynamic));
+      (out.isOnBattery = cast (((cast ((cast level : Float) >= (cast 0.0 : Float)) : Bool) && (cast !(cast charging : Bool) : Bool)) : Dynamic));
+      (out.isLowPower = cast (false : Dynamic));
+      (out.thermalState = cast ('Unknown' : Dynamic));
       return cast out;
     }, getSystemIdleState: function(_thresholdSeconds:Dynamic) {
       return cast 'Unknown';
@@ -287,16 +287,16 @@ class Power {
   }
 
   public static function enablePowerSignals(power:flighthq.types.Power):Void {
-    if ((cast _Runtime.strictEquals(_Runtime.field(power, 'onChange'), null) : Bool)) { _Runtime.setField(power, 'onChange', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
-    if ((cast _Runtime.strictEquals(_Runtime.field(power, 'onCharging'), null) : Bool)) { _Runtime.setField(power, 'onCharging', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
-    if ((cast _Runtime.strictEquals(_Runtime.field(power, 'onDischarging'), null) : Bool)) { _Runtime.setField(power, 'onDischarging', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
-    if ((cast _Runtime.strictEquals(_Runtime.field(power, 'onIdleStateChange'), null) : Bool)) { _Runtime.setField(power, 'onIdleStateChange', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
-    if ((cast _Runtime.strictEquals(_Runtime.field(power, 'onLockScreen'), null) : Bool)) { _Runtime.setField(power, 'onLockScreen', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
-    if ((cast _Runtime.strictEquals(_Runtime.field(power, 'onLowPowerModeChange'), null) : Bool)) { _Runtime.setField(power, 'onLowPowerModeChange', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
-    if ((cast _Runtime.strictEquals(_Runtime.field(power, 'onResume'), null) : Bool)) { _Runtime.setField(power, 'onResume', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
-    if ((cast _Runtime.strictEquals(_Runtime.field(power, 'onSuspend'), null) : Bool)) { _Runtime.setField(power, 'onSuspend', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
-    if ((cast _Runtime.strictEquals(_Runtime.field(power, 'onThermalStateChange'), null) : Bool)) { _Runtime.setField(power, 'onThermalStateChange', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
-    if ((cast _Runtime.strictEquals(_Runtime.field(power, 'onUnlockScreen'), null) : Bool)) { _Runtime.setField(power, 'onUnlockScreen', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
+    if ((cast _Runtime.strictEquals(power.onChange, null) : Bool)) { (power.onChange = cast (_Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(power.onCharging, null) : Bool)) { (power.onCharging = cast (_Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(power.onDischarging, null) : Bool)) { (power.onDischarging = cast (_Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(power.onIdleStateChange, null) : Bool)) { (power.onIdleStateChange = cast (_Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(power.onLockScreen, null) : Bool)) { (power.onLockScreen = cast (_Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(power.onLowPowerModeChange, null) : Bool)) { (power.onLowPowerModeChange = cast (_Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(power.onResume, null) : Bool)) { (power.onResume = cast (_Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(power.onSuspend, null) : Bool)) { (power.onSuspend = cast (_Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(power.onThermalStateChange, null) : Bool)) { (power.onThermalStateChange = cast (_Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(power.onUnlockScreen, null) : Bool)) { (power.onUnlockScreen = cast (_Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) : Dynamic)); }
   }
 
   public static function getPowerBackend():PowerBackend {
@@ -331,7 +331,7 @@ class Power {
   }
 
   public static function getPowerThermalState():PowerThermalState {
-    return cast _Runtime.field(_Runtime.callProperty(_Runtime.callValue(getPowerBackend, cast ([] : Array<Dynamic>)), 'getStatus', cast ([Power._scratch__power] : Array<Dynamic>)), 'thermalState');
+    return cast _Runtime.callProperty(_Runtime.callValue(getPowerBackend, cast ([] : Array<Dynamic>)), 'getStatus', cast ([Power._scratch__power] : Array<Dynamic>)).thermalState;
     return cast null;
   }
 

@@ -36,7 +36,7 @@ class CanvasTilemap {
     rows = _Runtime.field(__destructure0, 'rows');
     tiles = _Runtime.field(__destructure0, 'tiles');
     if ((cast _Runtime.strictEquals(tileset, null) : Bool)) { return; }
-    atlas = _Runtime.field(tileset, 'atlas');
+    atlas = tileset.atlas;
     if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.image, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(atlas.image.source, null) : Bool)) : Bool)) { return; }
     if ((cast ((cast _Runtime.strictEquals(columns, 0.0) : Bool) || (cast _Runtime.strictEquals(rows, 0.0) : Bool)) : Bool)) { return; }
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(tilemapNode, 'blendMode')] : Array<Dynamic>));

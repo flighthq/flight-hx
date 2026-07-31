@@ -420,7 +420,7 @@ class InteractionManager {
     var signal:Dynamic = cast _Runtime.UNDEFINED;
     var children:Dynamic = cast _Runtime.UNDEFINED;
     signal = _Runtime.callValue(InteractionManager.getInteractionSignal__interactionManager, cast ([source, name] : Array<Dynamic>));
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.optionalField(signal, 'data'), null) : Bool) && (cast !_Runtime.strictEquals(signal, null) : Bool)) : Bool)) { return cast true; }
+    if ((cast ((cast !_Runtime.strictEquals(({ final __typedStruct10 = signal; __typedStruct10 == null ? _Runtime.UNDEFINED : __typedStruct10.data; }), null) : Bool) && (cast !_Runtime.strictEquals(signal, null) : Bool)) : Bool)) { return cast true; }
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
@@ -436,7 +436,7 @@ class InteractionManager {
   }
 
   public static function isInteractionSignalCancelled__interactionManager<N>(source:Dynamic, name:InteractionSignalName):Bool {
-    return cast _Runtime.strictEquals(_Runtime.optionalField(_Runtime.optionalField(_Runtime.callValue(InteractionManager.getInteractionSignal__interactionManager, cast ([source, name] : Array<Dynamic>)), 'data'), 'cancelled'), true);
+    return cast _Runtime.strictEquals(({ final __typedStruct14 = ({ final __typedStruct13 = _Runtime.callValue(InteractionManager.getInteractionSignal__interactionManager, cast ([source, name] : Array<Dynamic>)); __typedStruct13 == null ? _Runtime.UNDEFINED : __typedStruct13.data; }); __typedStruct14 == null ? _Runtime.UNDEFINED : __typedStruct14.cancelled; }), true);
     return cast null;
   }
 
@@ -453,7 +453,7 @@ class InteractionManager {
     var targetSlots:Dynamic = cast _Runtime.UNDEFINED;
     var signalSlots:Dynamic = cast _Runtime.UNDEFINED;
     targetSlots = ((cast _Runtime.field(manager, 'trackedSignalSlots') : flighthq._internal._Map).get(target));
-    signalSlots = ({ final __collection14:Dynamic = targetSlots; __collection14 == null ? _Runtime.UNDEFINED : ((cast __collection14 : flighthq._internal._Map).get(name)); });
+    signalSlots = ({ final __collection17:Dynamic = targetSlots; __collection17 == null ? _Runtime.UNDEFINED : ((cast __collection17 : flighthq._internal._Map).get(name)); });
     if ((cast _Runtime.strictEquals(signalSlots, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     ((cast signalSlots : flighthq._internal._Map).delete_((cast slot : AnyInteractionSignalSlot)));
     if ((cast _Runtime.strictEquals((cast signalSlots : flighthq._internal._Map).size, 0.0) : Bool)) { ((cast targetSlots : flighthq._internal._Map).delete_(name)); }
@@ -479,19 +479,19 @@ class InteractionManager {
   }
 
   public static function setPointerData__interactionManager(target:Null<NodeAny>, currentTarget:Null<NodeAny>, x:Float, y:Float, button:Float, deltaX:Float = 0.0, deltaY:Float = 0.0, ?options:InteractionPointerOptions):Void {
-    _Runtime.setField(InteractionManager._pointerData__interactionManager, 'altKey', _Runtime.coalesce(({ final __typedStruct15 = options; __typedStruct15 == null ? _Runtime.UNDEFINED : __typedStruct15.altKey; }), function():Dynamic return cast false));
+    _Runtime.setField(InteractionManager._pointerData__interactionManager, 'altKey', _Runtime.coalesce(({ final __typedStruct18 = options; __typedStruct18 == null ? _Runtime.UNDEFINED : __typedStruct18.altKey; }), function():Dynamic return cast false));
     _Runtime.setField(InteractionManager._pointerData__interactionManager, 'button', button);
-    _Runtime.setField(InteractionManager._pointerData__interactionManager, 'buttons', _Runtime.coalesce(({ final __typedStruct16 = options; __typedStruct16 == null ? _Runtime.UNDEFINED : __typedStruct16.buttons; }), function():Dynamic return cast ((cast ((cast button : Float) >= (cast 0.0 : Float)) : Bool) ? (cast (1 << _Runtime.toInt32(button)) : Dynamic) : (cast 0.0 : Dynamic))));
-    _Runtime.setField(InteractionManager._pointerData__interactionManager, 'ctrlKey', _Runtime.coalesce(({ final __typedStruct17 = options; __typedStruct17 == null ? _Runtime.UNDEFINED : __typedStruct17.ctrlKey; }), function():Dynamic return cast false));
+    _Runtime.setField(InteractionManager._pointerData__interactionManager, 'buttons', _Runtime.coalesce(({ final __typedStruct19 = options; __typedStruct19 == null ? _Runtime.UNDEFINED : __typedStruct19.buttons; }), function():Dynamic return cast ((cast ((cast button : Float) >= (cast 0.0 : Float)) : Bool) ? (cast (1 << _Runtime.toInt32(button)) : Dynamic) : (cast 0.0 : Dynamic))));
+    _Runtime.setField(InteractionManager._pointerData__interactionManager, 'ctrlKey', _Runtime.coalesce(({ final __typedStruct20 = options; __typedStruct20 == null ? _Runtime.UNDEFINED : __typedStruct20.ctrlKey; }), function():Dynamic return cast false));
     _Runtime.setField(InteractionManager._pointerData__interactionManager, 'currentTarget', currentTarget);
     _Runtime.setField(InteractionManager._pointerData__interactionManager, 'deltaX', deltaX);
     _Runtime.setField(InteractionManager._pointerData__interactionManager, 'deltaY', deltaY);
     _Runtime.setField(InteractionManager._pointerData__interactionManager, 'localX', x);
     _Runtime.setField(InteractionManager._pointerData__interactionManager, 'localY', y);
-    _Runtime.setField(InteractionManager._pointerData__interactionManager, 'metaKey', _Runtime.coalesce(({ final __typedStruct18 = options; __typedStruct18 == null ? _Runtime.UNDEFINED : __typedStruct18.metaKey; }), function():Dynamic return cast false));
-    _Runtime.setField(InteractionManager._pointerData__interactionManager, 'pointerId', _Runtime.coalesce(({ final __typedStruct19 = options; __typedStruct19 == null ? _Runtime.UNDEFINED : __typedStruct19.pointerId; }), function():Dynamic return cast 0.0));
-    _Runtime.setField(InteractionManager._pointerData__interactionManager, 'pointerType', _Runtime.coalesce(({ final __typedStruct20 = options; __typedStruct20 == null ? _Runtime.UNDEFINED : __typedStruct20.pointerType; }), function():Dynamic return cast 'mouse'));
-    _Runtime.setField(InteractionManager._pointerData__interactionManager, 'shiftKey', _Runtime.coalesce(({ final __typedStruct21 = options; __typedStruct21 == null ? _Runtime.UNDEFINED : __typedStruct21.shiftKey; }), function():Dynamic return cast false));
+    _Runtime.setField(InteractionManager._pointerData__interactionManager, 'metaKey', _Runtime.coalesce(({ final __typedStruct21 = options; __typedStruct21 == null ? _Runtime.UNDEFINED : __typedStruct21.metaKey; }), function():Dynamic return cast false));
+    _Runtime.setField(InteractionManager._pointerData__interactionManager, 'pointerId', _Runtime.coalesce(({ final __typedStruct22 = options; __typedStruct22 == null ? _Runtime.UNDEFINED : __typedStruct22.pointerId; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(InteractionManager._pointerData__interactionManager, 'pointerType', _Runtime.coalesce(({ final __typedStruct23 = options; __typedStruct23 == null ? _Runtime.UNDEFINED : __typedStruct23.pointerType; }), function():Dynamic return cast 'mouse'));
+    _Runtime.setField(InteractionManager._pointerData__interactionManager, 'shiftKey', _Runtime.coalesce(({ final __typedStruct24 = options; __typedStruct24 == null ? _Runtime.UNDEFINED : __typedStruct24.shiftKey; }), function():Dynamic return cast false));
     _Runtime.setField(InteractionManager._pointerData__interactionManager, 'target', target);
     _Runtime.setField(InteractionManager._pointerData__interactionManager, 'worldX', x);
     _Runtime.setField(InteractionManager._pointerData__interactionManager, 'worldY', y);

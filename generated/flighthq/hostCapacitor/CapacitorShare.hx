@@ -35,7 +35,7 @@ class CapacitorShare {
           }
           return flighthq._internal._Async.continueFlow(__flowBranch0, function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-              return flighthq._internal._Async.flatMap(_Runtime.callProperty(share, 'share', cast ([{ title: _Runtime.field(content, 'title'), text: _Runtime.field(content, 'text'), url: _Runtime.field(content, 'url'), dialogTitle: _Runtime.optionalField(options, 'chooserTitle') }] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
+              return flighthq._internal._Async.flatMap(_Runtime.callProperty(share, 'share', cast ([{ title: content.title, text: content.text, url: content.url, dialogTitle: ({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.chooserTitle; }) }] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
                 __awaitValue1;
                 return flighthq._internal._Async.flowReturn(true);
               });
@@ -53,19 +53,19 @@ class CapacitorShare {
     }, shareWithResult: function(content:Dynamic, options:Dynamic):flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
-          var __flowBranch2:Dynamic;
+          var __flowBranch3:Dynamic;
           if ((cast !(cast _Runtime.callValue(CapacitorShare.hasShareableText__capacitorShare, cast ([content] : Array<Dynamic>)) : Bool) : Bool)) {
-            __flowBranch2 = flighthq._internal._Async.protect(function():Dynamic {
+            __flowBranch3 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn({ completed: false, activityType: null, dismissed: false });
             });
           } else {
-            __flowBranch2 = flighthq._internal._Async.flowNormal();
+            __flowBranch3 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch2, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
               var result:Dynamic = cast _Runtime.UNDEFINED;
-              return flighthq._internal._Async.flatMap(_Runtime.callProperty(share, 'share', cast ([{ title: _Runtime.field(content, 'title'), text: _Runtime.field(content, 'text'), url: _Runtime.field(content, 'url'), dialogTitle: _Runtime.optionalField(options, 'chooserTitle') }] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
-                result = __awaitValue3;
+              return flighthq._internal._Async.flatMap(_Runtime.callProperty(share, 'share', cast ([{ title: content.title, text: content.text, url: content.url, dialogTitle: ({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.chooserTitle; }) }] : Array<Dynamic>)), function(__awaitValue4:Dynamic):Dynamic {
+                result = __awaitValue4;
                 return flighthq._internal._Async.flowReturn({ completed: true, activityType: _Runtime.coalesce(_Runtime.field(result, 'activityType'), function():Dynamic return cast null), dismissed: false });
               });
             }), function(__caughtError:Dynamic):Dynamic {
@@ -84,7 +84,7 @@ class CapacitorShare {
   }
 
   public static function hasShareableText__capacitorShare(content:ShareContent):Bool {
-    return cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(content, 'title'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(content, 'text'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(content, 'url'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool));
+    return cast ((cast ((cast !_Runtime.strictEquals(content.title, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(content.text, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(content.url, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool));
     return cast null;
   }
 }

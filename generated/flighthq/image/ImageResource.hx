@@ -14,7 +14,7 @@ class ImageResource {
   }
 
   public static function createCompressedImageResource(compressed:ImageResourceCompressed):flighthq.types.ImageResource {
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: 'straight', compressed: compressed, data: null, format: 'rgba8unorm', height: _Runtime.field(_Runtime.field(compressed, 'container'), 'height'), source: null, version: 0.0, width: _Runtime.field(_Runtime.field(compressed, 'container'), 'width') }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: 'straight', compressed: compressed, data: null, format: 'rgba8unorm', height: _Runtime.field(compressed.container, 'height'), source: null, version: 0.0, width: _Runtime.field(compressed.container, 'width') }] : Array<Dynamic>));
     return cast null;
   }
 

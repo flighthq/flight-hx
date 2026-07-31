@@ -111,8 +111,8 @@ class Notification {
                 __flowBranch3 = flighthq._internal._Async.flowNormal();
               }
               return flighthq._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
-                id = _Runtime.coalesce(_Runtime.field(request, 'id'), function():Dynamic return cast _Runtime.callValue(_generateId, cast ([] : Array<Dynamic>)));
-                return flighthq._internal._Async.flatMap(_Runtime.callProperty(registration, 'showNotification', cast ([_Runtime.field(request, 'title'), (cast { body: _Runtime.field(request, 'body'), badge: _Runtime.field(request, 'badge'), dir: _Runtime.field(request, 'dir'), icon: _Runtime.field(request, 'icon'), image: _Runtime.field(request, 'image'), lang: _Runtime.field(request, 'lang'), renotify: _Runtime.field(request, 'renotify'), requireInteraction: _Runtime.field(request, 'requireInteraction'), silent: _Runtime.field(request, 'silent'), tag: _Runtime.coalesce(_Runtime.field(request, 'tag'), function():Dynamic return cast id), timestamp: _Runtime.field(request, 'timestamp'), vibrate: _Runtime.select(_Runtime.field(request, 'vibrate'), function():Dynamic return cast _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(request, 'vibrate'))]), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), data: _Runtime.mergeObjects([(cast _Runtime.field(request, 'data') : Null<Dynamic>), { notificationId: id }]), actions: _Runtime.callOptionalProperty(_Runtime.field(request, 'actions'), 'map', cast ([function(a:Dynamic) return { action: _Runtime.field(a, 'id'), title: _Runtime.field(a, 'title'), icon: _Runtime.field(a, 'icon') }] : Array<Dynamic>)) } : Dynamic)] : Array<Dynamic>)), function(__awaitValue4:Dynamic):Dynamic {
+                id = _Runtime.coalesce(request.id, function():Dynamic return cast _Runtime.callValue(_generateId, cast ([] : Array<Dynamic>)));
+                return flighthq._internal._Async.flatMap(_Runtime.callProperty(registration, 'showNotification', cast ([request.title, (cast { body: request.body, badge: request.badge, dir: request.dir, icon: request.icon, image: request.image, lang: request.lang, renotify: request.renotify, requireInteraction: request.requireInteraction, silent: request.silent, tag: _Runtime.coalesce(request.tag, function():Dynamic return cast id), timestamp: request.timestamp, vibrate: _Runtime.select(request.vibrate, function():Dynamic return cast _Runtime.concatArrays([_Runtime.toArray(request.vibrate)]), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), data: _Runtime.mergeObjects([(cast request.data : Null<Dynamic>), { notificationId: id }]), actions: _Runtime.callOptionalProperty(request.actions, 'map', cast ([function(a:Dynamic) return { action: a.id, title: a.title, icon: a.icon }] : Array<Dynamic>)) } : Dynamic)] : Array<Dynamic>)), function(__awaitValue4:Dynamic):Dynamic {
                   __awaitValue4;
                   _Runtime.callValue(_fire, cast ([_showListeners, id] : Array<Dynamic>));
                   return flighthq._internal._Async.flowReturn(id);
@@ -249,14 +249,14 @@ class Notification {
         var entry:ScheduledNotification = cast _Runtime.UNDEFINED;
         var fireAndReschedule:Dynamic = cast _Runtime.UNDEFINED;
         var timeout:Dynamic = cast _Runtime.UNDEFINED;
-        id = _Runtime.coalesce(_Runtime.field(request, 'id'), function():Dynamic return cast _Runtime.callValue(_generateId, cast ([] : Array<Dynamic>)));
-        delay = HxMath.max(0.0, (_Runtime.field(schedule, 'at') - _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>))));
+        id = _Runtime.coalesce(request.id, function():Dynamic return cast _Runtime.callValue(_generateId, cast ([] : Array<Dynamic>)));
+        delay = HxMath.max(0.0, (schedule.at - _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>))));
         entry = { id: id, request: request, schedule: schedule };
         fireAndReschedule = function() {
           ((cast _scheduled : flighthq._internal._Map).delete_(id));
           _Runtime.voidValue(_Runtime.callValue(_show, cast ([_Runtime.mergeObjects([request, { id: id }])] : Array<Dynamic>)));
-          if ((cast !_Runtime.strictEquals(_Runtime.field(schedule, 'repeat'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-            var ms:Dynamic = _Runtime.callValue(Notification._repeatMs__notification, cast ([_Runtime.field(schedule, 'repeat')] : Array<Dynamic>));
+          if ((cast !_Runtime.strictEquals(schedule.repeat, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+            var ms:Dynamic = _Runtime.callValue(Notification._repeatMs__notification, cast ([schedule.repeat] : Array<Dynamic>));
             var timeout:Dynamic = _Runtime.setTimeout(fireAndReschedule, ms);
             ((cast _scheduled : flighthq._internal._Map).set(id, { timeout: timeout, entry: { id: id, request: request, schedule: _Runtime.mergeObjects([schedule, { at: (_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) + ms) }]) } }));
           }
@@ -298,7 +298,7 @@ class Notification {
             __awaitValue14;
             merged = _Runtime.mergeObjects([(cast partial : NotificationRequest), { id: id }]);
             var __flowBranch15:Dynamic;
-            if ((cast _Runtime.strictEquals(_Runtime.field(merged, 'title'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+            if ((cast _Runtime.strictEquals(merged.title, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
               __flowBranch15 = flighthq._internal._Async.protect(function():Dynamic {
                 return flighthq._internal._Async.flowReturn(false);
               });
@@ -375,8 +375,8 @@ class Notification {
         if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined') : Bool)) { return cast ''; }
         try {
           if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.globalValue('Notification'), 'permission'), 'granted') : Bool)) { return cast ''; }
-          var id:Dynamic = _Runtime.coalesce(_Runtime.field(request, 'id'), function():Dynamic return cast _Runtime.callValue(_generateId, cast ([] : Array<Dynamic>)));
-          var n:Dynamic = _Runtime.construct(_Runtime.globalValue('Notification'), [_Runtime.field(request, 'title'), (cast { body: _Runtime.field(request, 'body'), badge: _Runtime.field(request, 'badge'), data: _Runtime.field(request, 'data'), dir: _Runtime.field(request, 'dir'), icon: _Runtime.field(request, 'icon'), image: _Runtime.field(request, 'image'), lang: _Runtime.field(request, 'lang'), renotify: _Runtime.field(request, 'renotify'), requireInteraction: _Runtime.field(request, 'requireInteraction'), silent: _Runtime.field(request, 'silent'), tag: _Runtime.coalesce(_Runtime.field(request, 'tag'), function():Dynamic return cast id), timestamp: _Runtime.field(request, 'timestamp'), vibrate: _Runtime.select(_Runtime.field(request, 'vibrate'), function():Dynamic return cast _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(request, 'vibrate'))]), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) } : Dynamic)]);
+          var id:Dynamic = _Runtime.coalesce(request.id, function():Dynamic return cast _Runtime.callValue(_generateId, cast ([] : Array<Dynamic>)));
+          var n:Dynamic = _Runtime.construct(_Runtime.globalValue('Notification'), [request.title, (cast { body: request.body, badge: request.badge, data: request.data, dir: request.dir, icon: request.icon, image: request.image, lang: request.lang, renotify: request.renotify, requireInteraction: request.requireInteraction, silent: request.silent, tag: _Runtime.coalesce(request.tag, function():Dynamic return cast id), timestamp: request.timestamp, vibrate: _Runtime.select(request.vibrate, function():Dynamic return cast _Runtime.concatArrays([_Runtime.toArray(request.vibrate)]), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) } : Dynamic)]);
           ((cast _live : flighthq._internal._Map).set(id, n));
           ((cast _requests : flighthq._internal._Map).set(id, request));
           _Runtime.setField(n, 'onshow', function() {
@@ -487,14 +487,14 @@ class Notification {
         var entry:ScheduledNotification = cast _Runtime.UNDEFINED;
         var fireAndReschedule:Dynamic = cast _Runtime.UNDEFINED;
         var timeout:Dynamic = cast _Runtime.UNDEFINED;
-        id = _Runtime.coalesce(_Runtime.field(request, 'id'), function():Dynamic return cast _Runtime.callValue(_generateId, cast ([] : Array<Dynamic>)));
-        delay = HxMath.max(0.0, (_Runtime.field(schedule, 'at') - _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>))));
+        id = _Runtime.coalesce(request.id, function():Dynamic return cast _Runtime.callValue(_generateId, cast ([] : Array<Dynamic>)));
+        delay = HxMath.max(0.0, (schedule.at - _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>))));
         entry = { id: id, request: request, schedule: schedule };
         fireAndReschedule = function() {
           ((cast _scheduled : flighthq._internal._Map).delete_(id));
           _Runtime.voidValue(_Runtime.callValue(_notify, cast ([_Runtime.mergeObjects([request, { id: id }])] : Array<Dynamic>)));
-          if ((cast !_Runtime.strictEquals(_Runtime.field(schedule, 'repeat'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-            var ms:Dynamic = _Runtime.callValue(Notification._repeatMs__notification, cast ([_Runtime.field(schedule, 'repeat')] : Array<Dynamic>));
+          if ((cast !_Runtime.strictEquals(schedule.repeat, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+            var ms:Dynamic = _Runtime.callValue(Notification._repeatMs__notification, cast ([schedule.repeat] : Array<Dynamic>));
             var timeout:Dynamic = _Runtime.setTimeout(fireAndReschedule, ms);
             ((cast _scheduled : flighthq._internal._Map).set(id, { timeout: timeout, entry: { id: id, request: request, schedule: _Runtime.mergeObjects([schedule, { at: (_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) + ms) }]) } }));
           }
