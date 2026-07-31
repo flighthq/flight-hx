@@ -15,6 +15,33 @@ import flighthq._internal._Runtime;
  * silently passing through.
  */
 class DomDocumentBackend {
+  /**
+   * Typed binding for the bare `document` root. Mirrors the previous
+   * `_Runtime.globalValue('document')` semantics: `undefined` when the global
+   * is absent on JavaScript, `null` on native targets. `call` below already
+   * accepts a null root for the native scratch-canvas path.
+   */
+  public static function value():Dynamic {
+    #if js
+    return js.Syntax.code("(typeof document === 'undefined' ? void 0 : document)");
+    #else
+    return null;
+    #end
+  }
+
+  /**
+   * Typed `key in <root-or-proven-alias>` containment. Matches JavaScript `in`
+   * (prototype chain included) and is null-safe: an absent root reports every
+   * key as missing rather than throwing.
+   */
+  public static function hasField(obj:Dynamic, key:String):Bool {
+    #if js
+    return js.Syntax.code('({0} != null && {1} in {0})', obj, key);
+    #else
+    return obj != null && Reflect.hasField(obj, key);
+    #end
+  }
+
   public static function call(obj:Dynamic, name:String, arguments:Array<Dynamic>):Dynamic {
     #if (lime && !js)
     // Flight's GL renderers eagerly create scratch canvases for raster

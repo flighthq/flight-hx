@@ -15,6 +15,33 @@ import flighthq._internal._Runtime;
  * silently passing through.
  */
 class DomWindowBackend {
+  /**
+   * Typed binding for the bare `window` root. Mirrors the previous
+   * `_Runtime.globalValue('window')` semantics: `undefined` when the global is
+   * absent on JavaScript, `null` on native targets (no DOM window), so
+   * feature checks and truthy tests keep their existing behavior.
+   */
+  public static function value():Dynamic {
+    #if js
+    return js.Syntax.code("(typeof window === 'undefined' ? void 0 : window)");
+    #else
+    return null;
+    #end
+  }
+
+  /**
+   * Typed `key in <root-or-proven-alias>` containment. Matches JavaScript `in`
+   * (prototype chain included) and is null-safe: an absent root reports every
+   * key as missing rather than throwing.
+   */
+  public static function hasField(obj:Dynamic, key:String):Bool {
+    #if js
+    return js.Syntax.code('({0} != null && {1} in {0})', obj, key);
+    #else
+    return obj != null && Reflect.hasField(obj, key);
+    #end
+  }
+
   public static function call(obj:Dynamic, name:String, arguments:Array<Dynamic>):Dynamic {
     if (obj == null) return null;
     #if (js && html5)
