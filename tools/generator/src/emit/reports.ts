@@ -129,6 +129,21 @@ export function typedStructSummary(audit: TypedStructAudit): string {
       `| \`${candidate.name}\` | \`${candidate.emission.mode}\` | ${candidate.purpose} | ${candidate.fields.length} | ${candidate.accesses.reads} | ${candidate.accesses.writes} | ${candidate.accesses.calls} | ${candidate.emission.pendingAccesses} | ${candidate.emission.directAccesses} | ${candidate.emission.reflectiveSurvivors.reduce((total, survivor) => total + survivor.accesses, 0)} | ${candidate.escapes.length} | ${candidate.eligible ? 'yes' : 'no'} | ${candidate.reasons.length > 0 ? candidate.reasons.map((reason) => `\`${reason}\``).join(', ') : '—'} |`,
     );
   }
+  const memberEscapes = audit.candidates.flatMap((candidate) =>
+    candidate.memberEscapes.map((escape) => ({ candidate, escape })),
+  );
+  if (memberEscapes.length > 0) {
+    lines.push(
+      '',
+      '## Member-level escapes',
+      '',
+      '| Candidate identity | Member | Reason | Source identity |',
+      '| --- | --- | --- | --- |',
+    );
+    for (const { candidate, escape } of memberEscapes) {
+      lines.push(`| \`${candidate.id}\` | \`${escape.member}\` | \`${escape.reason}\` | \`${escape.source}\` |`);
+    }
+  }
   lines.push('');
   return lines.join('\n');
 }
