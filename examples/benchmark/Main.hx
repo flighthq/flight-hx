@@ -112,6 +112,17 @@ class Main extends Application {
       addShape();
     }
 
+    #if sys
+    // Probe-only population: headless runs have no pointer to grow the scene,
+    // so the perf harness sets a fixed shape count for a stable workload.
+    final perfShapes = Sys.getEnv('FLIGHT_PERF_SHAPES');
+    if (perfShapes != null) {
+      while (posX.length < Std.parseInt(perfShapes)) {
+        addShape();
+      }
+    }
+    #end
+
     ready = true;
   }
 
