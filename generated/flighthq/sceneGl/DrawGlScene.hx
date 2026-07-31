@@ -71,7 +71,7 @@ class DrawGlScene {
       var m:Dynamic = 0.0;
       while ((cast ((cast m : Float) < (cast _Runtime.field(list, 'meshCount') : Float)) : Bool)) {
         var mesh:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(list, 'visibleMeshes'), m);
-        var subsets:Dynamic = _Runtime.field(_Runtime.field(mesh, 'geometry'), 'subsets');
+        var subsets:Dynamic = _Runtime.field(mesh, 'geometry').subsets;
         var worldMatrix:Dynamic = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>)) : Matrix4);
         var wx:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(worldMatrix.m, 12.0);
         var wy:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(worldMatrix.m, 13.0);

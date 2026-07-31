@@ -24,16 +24,16 @@ class MeshGeometryAttributes {
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
     var base:Dynamic = cast _Runtime.UNDEFINED;
-    floatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(geometry, 'layout'), 'tangent'] : Array<Dynamic>));
+    floatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([geometry.layout, 'tangent'] : Array<Dynamic>));
     if ((cast ((cast floatOffset : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
-    floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
+    floatsPerVertex = (_Runtime.field(geometry.layout, 'stride') / 4.0);
+    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(geometry.vertices, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     if ((cast ((cast ((cast vertexIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast vertexIndex : Float) >= (cast vertexCount : Float)) : Bool)) : Bool)) { return cast false; }
     base = ((vertexIndex * floatsPerVertex) + floatOffset);
-    _Runtime.setField(out, 'x', flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(geometry, 'vertices'), base));
-    _Runtime.setField(out, 'y', flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(geometry, 'vertices'), (base + 1.0)));
-    _Runtime.setField(out, 'z', flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(geometry, 'vertices'), (base + 2.0)));
-    _Runtime.setField(out, 'w', flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(geometry, 'vertices'), (base + 3.0)));
+    _Runtime.setField(out, 'x', flighthq._internal._StaticIndex.readFloat32Array(geometry.vertices, base));
+    _Runtime.setField(out, 'y', flighthq._internal._StaticIndex.readFloat32Array(geometry.vertices, (base + 1.0)));
+    _Runtime.setField(out, 'z', flighthq._internal._StaticIndex.readFloat32Array(geometry.vertices, (base + 2.0)));
+    _Runtime.setField(out, 'w', flighthq._internal._StaticIndex.readFloat32Array(geometry.vertices, (base + 3.0)));
     return cast true;
     return cast null;
   }
@@ -43,14 +43,14 @@ class MeshGeometryAttributes {
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
     var base:Dynamic = cast _Runtime.UNDEFINED;
-    floatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(geometry, 'layout'), 'uv0'] : Array<Dynamic>));
+    floatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([geometry.layout, 'uv0'] : Array<Dynamic>));
     if ((cast ((cast floatOffset : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
-    floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
+    floatsPerVertex = (_Runtime.field(geometry.layout, 'stride') / 4.0);
+    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(geometry.vertices, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     if ((cast ((cast ((cast vertexIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast vertexIndex : Float) >= (cast vertexCount : Float)) : Bool)) : Bool)) { return cast false; }
     base = ((vertexIndex * floatsPerVertex) + floatOffset);
-    _Runtime.setField(out, 'x', flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(geometry, 'vertices'), base));
-    _Runtime.setField(out, 'y', flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(geometry, 'vertices'), (base + 1.0)));
+    _Runtime.setField(out, 'x', flighthq._internal._StaticIndex.readFloat32Array(geometry.vertices, base));
+    _Runtime.setField(out, 'y', flighthq._internal._StaticIndex.readFloat32Array(geometry.vertices, (base + 1.0)));
     return cast true;
     return cast null;
   }
@@ -102,17 +102,17 @@ class MeshGeometryAttributes {
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
     var base:Dynamic = cast _Runtime.UNDEFINED;
-    floatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(geometry, 'layout'), 'tangent'] : Array<Dynamic>));
+    floatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([geometry.layout, 'tangent'] : Array<Dynamic>));
     if ((cast ((cast floatOffset : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
-    floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
+    floatsPerVertex = (_Runtime.field(geometry.layout, 'stride') / 4.0);
+    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(geometry.vertices, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     if ((cast ((cast ((cast vertexIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast vertexIndex : Float) >= (cast vertexCount : Float)) : Bool)) : Bool)) { return cast false; }
     base = ((vertexIndex * floatsPerVertex) + floatOffset);
-    flighthq._internal._StaticIndex.writeFloat32Array(_Runtime.field(geometry, 'vertices'), base, x);
-    flighthq._internal._StaticIndex.writeFloat32Array(_Runtime.field(geometry, 'vertices'), (base + 1.0), y);
-    flighthq._internal._StaticIndex.writeFloat32Array(_Runtime.field(geometry, 'vertices'), (base + 2.0), z);
-    flighthq._internal._StaticIndex.writeFloat32Array(_Runtime.field(geometry, 'vertices'), (base + 3.0), w);
-    _Runtime.incrementField(geometry, 'version', 1, true);
+    flighthq._internal._StaticIndex.writeFloat32Array(geometry.vertices, base, x);
+    flighthq._internal._StaticIndex.writeFloat32Array(geometry.vertices, (base + 1.0), y);
+    flighthq._internal._StaticIndex.writeFloat32Array(geometry.vertices, (base + 2.0), z);
+    flighthq._internal._StaticIndex.writeFloat32Array(geometry.vertices, (base + 3.0), w);
+    geometry.version++;
     return cast true;
     return cast null;
   }
@@ -122,15 +122,15 @@ class MeshGeometryAttributes {
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
     var base:Dynamic = cast _Runtime.UNDEFINED;
-    floatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(geometry, 'layout'), 'uv0'] : Array<Dynamic>));
+    floatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([geometry.layout, 'uv0'] : Array<Dynamic>));
     if ((cast ((cast floatOffset : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
-    floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
+    floatsPerVertex = (_Runtime.field(geometry.layout, 'stride') / 4.0);
+    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(geometry.vertices, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     if ((cast ((cast ((cast vertexIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast vertexIndex : Float) >= (cast vertexCount : Float)) : Bool)) : Bool)) { return cast false; }
     base = ((vertexIndex * floatsPerVertex) + floatOffset);
-    flighthq._internal._StaticIndex.writeFloat32Array(_Runtime.field(geometry, 'vertices'), base, u);
-    flighthq._internal._StaticIndex.writeFloat32Array(_Runtime.field(geometry, 'vertices'), (base + 1.0), v);
-    _Runtime.incrementField(geometry, 'version', 1, true);
+    flighthq._internal._StaticIndex.writeFloat32Array(geometry.vertices, base, u);
+    flighthq._internal._StaticIndex.writeFloat32Array(geometry.vertices, (base + 1.0), v);
+    geometry.version++;
     return cast true;
     return cast null;
   }
@@ -140,15 +140,15 @@ class MeshGeometryAttributes {
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
     var base:Dynamic = cast _Runtime.UNDEFINED;
-    floatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(geometry, 'layout'), semantic] : Array<Dynamic>));
+    floatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([geometry.layout, semantic] : Array<Dynamic>));
     if ((cast ((cast floatOffset : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
-    floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
+    floatsPerVertex = (_Runtime.field(geometry.layout, 'stride') / 4.0);
+    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(geometry.vertices, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     if ((cast ((cast ((cast vertexIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast vertexIndex : Float) >= (cast vertexCount : Float)) : Bool)) : Bool)) { return cast false; }
     base = ((vertexIndex * floatsPerVertex) + floatOffset);
-    _Runtime.setField(out, 'x', flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(geometry, 'vertices'), base));
-    _Runtime.setField(out, 'y', flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(geometry, 'vertices'), (base + 1.0)));
-    _Runtime.setField(out, 'z', flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(geometry, 'vertices'), (base + 2.0)));
+    _Runtime.setField(out, 'x', flighthq._internal._StaticIndex.readFloat32Array(geometry.vertices, base));
+    _Runtime.setField(out, 'y', flighthq._internal._StaticIndex.readFloat32Array(geometry.vertices, (base + 1.0)));
+    _Runtime.setField(out, 'z', flighthq._internal._StaticIndex.readFloat32Array(geometry.vertices, (base + 2.0)));
     return cast true;
     return cast null;
   }
@@ -158,16 +158,16 @@ class MeshGeometryAttributes {
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
     var base:Dynamic = cast _Runtime.UNDEFINED;
-    floatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(geometry, 'layout'), semantic] : Array<Dynamic>));
+    floatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([geometry.layout, semantic] : Array<Dynamic>));
     if ((cast ((cast floatOffset : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
-    floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
+    floatsPerVertex = (_Runtime.field(geometry.layout, 'stride') / 4.0);
+    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(geometry.vertices, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     if ((cast ((cast ((cast vertexIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast vertexIndex : Float) >= (cast vertexCount : Float)) : Bool)) : Bool)) { return cast false; }
     base = ((vertexIndex * floatsPerVertex) + floatOffset);
-    flighthq._internal._StaticIndex.writeFloat32Array(_Runtime.field(geometry, 'vertices'), base, x);
-    flighthq._internal._StaticIndex.writeFloat32Array(_Runtime.field(geometry, 'vertices'), (base + 1.0), y);
-    flighthq._internal._StaticIndex.writeFloat32Array(_Runtime.field(geometry, 'vertices'), (base + 2.0), z);
-    _Runtime.incrementField(geometry, 'version', 1, true);
+    flighthq._internal._StaticIndex.writeFloat32Array(geometry.vertices, base, x);
+    flighthq._internal._StaticIndex.writeFloat32Array(geometry.vertices, (base + 1.0), y);
+    flighthq._internal._StaticIndex.writeFloat32Array(geometry.vertices, (base + 2.0), z);
+    geometry.version++;
     return cast true;
     return cast null;
   }

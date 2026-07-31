@@ -35,18 +35,18 @@ class SurfaceResize {
     dw = _Runtime.field(dest, 'width');
     dh = _Runtime.field(dest, 'height');
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(sw, 0.0) : Bool) || (cast _Runtime.strictEquals(sh, 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(dw, 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(dh, 0.0) : Bool)) : Bool)) { return; }
-    sd = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
-    dd = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
-    sStride = _Runtime.field(_Runtime.field(source, 'surface'), 'width');
-    dStride = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
+    sd = _Runtime.field(source, 'surface').data;
+    dd = _Runtime.field(dest, 'surface').data;
+    sStride = _Runtime.field(source, 'surface').width;
+    dStride = _Runtime.field(dest, 'surface').width;
     if ((cast _Runtime.strictEquals(mode, 'nearest') : Bool)) {
       {
         var dy:Dynamic = 0.0;
         while ((cast ((cast dy : Float) < (cast dh : Float)) : Bool)) {
           var oy:Dynamic = (_Runtime.field(dest, 'y') + dy);
-          if ((cast ((cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast oy : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool)) { dy++; continue; }
+          if ((cast ((cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast oy : Float) >= (cast _Runtime.field(dest, 'surface').height : Float)) : Bool)) : Bool)) { dy++; continue; }
           var sy:Dynamic = (_Runtime.field(source, 'y') + HxMath.min((sh - 1.0), HxMath.floor(((dy * sh) / dh))));
-          if ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'height') : Float)) : Bool)) : Bool)) { dy++; continue; }
+          if ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(source, 'surface').height : Float)) : Bool)) : Bool)) { dy++; continue; }
           {
             var dx:Dynamic = 0.0;
             while ((cast ((cast dx : Float) < (cast dw : Float)) : Bool)) {
@@ -75,7 +75,7 @@ class SurfaceResize {
         var dy:Dynamic = 0.0;
         while ((cast ((cast dy : Float) < (cast dh : Float)) : Bool)) {
           var oy:Dynamic = (_Runtime.field(dest, 'y') + dy);
-          if ((cast ((cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast oy : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool)) { dy++; continue; }
+          if ((cast ((cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast oy : Float) >= (cast _Runtime.field(dest, 'surface').height : Float)) : Bool)) : Bool)) { dy++; continue; }
           var fy:Dynamic = (((dy + 0.5) * scaleY) - 0.5);
           var y1:Dynamic = HxMath.floor(fy);
           var ty:Dynamic = (fy - y1);
@@ -142,7 +142,7 @@ class SurfaceResize {
       var dy:Dynamic = 0.0;
       while ((cast ((cast dy : Float) < (cast dh : Float)) : Bool)) {
         var oy:Dynamic = (_Runtime.field(dest, 'y') + dy);
-        if ((cast ((cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast oy : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool)) { dy++; continue; }
+        if ((cast ((cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast oy : Float) >= (cast _Runtime.field(dest, 'surface').height : Float)) : Bool)) : Bool)) { dy++; continue; }
         var fy:Dynamic = (((dy + 0.5) * scaleY) - 0.5);
         var y0:Dynamic = HxMath.floor(fy);
         var ty:Dynamic = (fy - y0);

@@ -21,9 +21,9 @@ class SurfaceMedian {
     r = HxMath.max(0.0, HxMath.round(radius));
     w = _Runtime.field(source, 'width');
     h = _Runtime.field(source, 'height');
-    surfaceWidth = _Runtime.field(_Runtime.field(source, 'surface'), 'width');
-    surfaceHeight = _Runtime.field(_Runtime.field(source, 'surface'), 'height');
-    data = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
+    surfaceWidth = _Runtime.field(source, 'surface').width;
+    surfaceHeight = _Runtime.field(source, 'surface').height;
+    data = _Runtime.field(source, 'surface').data;
     area = (((2.0 * r) + 1.0) * ((2.0 * r) + 1.0));
     if ((cast ((cast _Runtime.strictEquals(SurfaceMedian._windowRed__surfaceMedian, null) : Bool) || (cast ((cast _Runtime.field(SurfaceMedian._windowRed__surfaceMedian, 'length') : Float) < (cast area : Float)) : Bool)) : Bool)) {
       (SurfaceMedian._windowRed__surfaceMedian = cast (new flighthq._internal._UInt8Array(area) : Dynamic));

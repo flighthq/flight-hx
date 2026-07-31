@@ -11,23 +11,23 @@ class SurfaceCompare {
   public static function compareSurface(source:Surface, other:Surface):Null<Surface> {
     var result:Dynamic = cast _Runtime.UNDEFINED;
     var hasDiff:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(source, 'width'), _Runtime.field(other, 'width')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(source, 'height'), _Runtime.field(other, 'height')) : Bool)) : Bool)) {
-      throw _Runtime.error('compareSurface: surface dimensions do not match (' + Std.string(_Runtime.field(source, 'width')) + '×' + Std.string(_Runtime.field(source, 'height')) + ' vs ' + Std.string(_Runtime.field(other, 'width')) + '×' + Std.string(_Runtime.field(other, 'height')) + ')');
+    if ((cast ((cast !_Runtime.strictEquals(source.width, other.width) : Bool) || (cast !_Runtime.strictEquals(source.height, other.height) : Bool)) : Bool)) {
+      throw _Runtime.error('compareSurface: surface dimensions do not match (' + Std.string(source.width) + '×' + Std.string(source.height) + ' vs ' + Std.string(other.width) + '×' + Std.string(other.height) + ')');
     }
-    result = _Runtime.callValue(createSurface, cast ([_Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
+    result = _Runtime.callValue(createSurface, cast ([source.width, source.height] : Array<Dynamic>));
     hasDiff = false;
     {
       var i:Dynamic = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(source, 'data'), 'length') : Float)) : Bool)) {
-        var dr:Dynamic = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'data'), i) - flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(other, 'data'), i)));
-        var dg:Dynamic = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'data'), (i + 1.0)) - flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(other, 'data'), (i + 1.0))));
-        var db:Dynamic = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'data'), (i + 2.0)) - flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(other, 'data'), (i + 2.0))));
-        var da:Dynamic = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'data'), (i + 3.0)) - flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(other, 'data'), (i + 3.0))));
+      while ((cast ((cast i : Float) < (cast _Runtime.field(source.data, 'length') : Float)) : Bool)) {
+        var dr:Dynamic = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, i) - flighthq._internal._StaticIndex.readUint8ClampedArray(other.data, i)));
+        var dg:Dynamic = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, (i + 1.0)) - flighthq._internal._StaticIndex.readUint8ClampedArray(other.data, (i + 1.0))));
+        var db:Dynamic = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, (i + 2.0)) - flighthq._internal._StaticIndex.readUint8ClampedArray(other.data, (i + 2.0))));
+        var da:Dynamic = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, (i + 3.0)) - flighthq._internal._StaticIndex.readUint8ClampedArray(other.data, (i + 3.0))));
         if ((cast ((cast ((cast ((cast !_Runtime.strictEquals(dr, 0.0) : Bool) || (cast !_Runtime.strictEquals(dg, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(db, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(da, 0.0) : Bool)) : Bool)) {
-          flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(result, 'data'), i, dr);
-          flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(result, 'data'), (i + 1.0), dg);
-          flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(result, 'data'), (i + 2.0), db);
-          flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(result, 'data'), (i + 3.0), 255.0);
+          flighthq._internal._StaticIndex.writeUint8ClampedArray(result.data, i, dr);
+          flighthq._internal._StaticIndex.writeUint8ClampedArray(result.data, (i + 1.0), dg);
+          flighthq._internal._StaticIndex.writeUint8ClampedArray(result.data, (i + 2.0), db);
+          flighthq._internal._StaticIndex.writeUint8ClampedArray(result.data, (i + 3.0), 255.0);
           (hasDiff = cast (true : Dynamic));
         }
         (i = cast ((i + 4.0) : Dynamic));
@@ -43,12 +43,12 @@ class SurfaceCompare {
     var totalPixels:Dynamic = cast _Runtime.UNDEFINED;
     var mismatchedPixels:Dynamic = cast _Runtime.UNDEFINED;
     var maxChannelDelta:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(source, 'width'), _Runtime.field(other, 'width')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(source, 'height'), _Runtime.field(other, 'height')) : Bool)) : Bool)) {
-      throw _Runtime.error('getSurfaceMismatch: surface dimensions do not match (' + Std.string(_Runtime.field(source, 'width')) + '×' + Std.string(_Runtime.field(source, 'height')) + ' vs ' + Std.string(_Runtime.field(other, 'width')) + '×' + Std.string(_Runtime.field(other, 'height')) + ')');
+    if ((cast ((cast !_Runtime.strictEquals(source.width, other.width) : Bool) || (cast !_Runtime.strictEquals(source.height, other.height) : Bool)) : Bool)) {
+      throw _Runtime.error('getSurfaceMismatch: surface dimensions do not match (' + Std.string(source.width) + '×' + Std.string(source.height) + ' vs ' + Std.string(other.width) + '×' + Std.string(other.height) + ')');
     }
-    a = _Runtime.field(source, 'data');
-    b = _Runtime.field(other, 'data');
-    totalPixels = (_Runtime.field(source, 'width') * _Runtime.field(source, 'height'));
+    a = source.data;
+    b = other.data;
+    totalPixels = (source.width * source.height);
     mismatchedPixels = 0.0;
     maxChannelDelta = 0.0;
     {

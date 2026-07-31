@@ -24,7 +24,7 @@ class _WgpuWireframeUploadValues {
       ((cast _WgpuWireframeUploadValues.wireframeUploads__wgpuWireframeUpload : flighthq._internal._WeakMap).set(state, perState));
     }
     upload = ((cast perState : flighthq._internal._WeakMap).get((cast geometry : MeshGeometry)));
-    if ((cast ((cast !_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(upload, 'version'), _Runtime.field(geometry, 'version')) : Bool)) : Bool)) {
+    if ((cast ((cast !_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(upload, 'version'), geometry.version) : Bool)) : Bool)) {
       return cast upload;
     }
     device = _Runtime.field(state, 'device');
@@ -32,7 +32,7 @@ class _WgpuWireframeUploadValues {
     lines = _Runtime.callValue(_WgpuWireframeUploadValues.buildLineIndices__wgpuWireframeUpload, cast ([geometry] : Array<Dynamic>));
     lineIndexBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: HxMath.max(4.0, _Runtime.callValue(_WgpuWireframeUploadValues.alignTo4__wgpuWireframeUpload, cast ([_Runtime.field(lines, 'byteLength')] : Array<Dynamic>))), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'INDEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([lineIndexBuffer, 0.0, _Runtime.field(lines, 'buffer'), _Runtime.field(lines, 'byteOffset'), _Runtime.field(lines, 'byteLength')] : Array<Dynamic>));
-    (upload = cast ({ indexFormat: ((cast _Runtime.isInstanceOf(lines, _Runtime.globalValue('Uint32Array')) : Bool) ? (cast 'uint32' : Dynamic) : (cast 'uint16' : Dynamic)), lineIndexBuffer: lineIndexBuffer, version: _Runtime.field(geometry, 'version'), vertexBuffer: _Runtime.field(meshUpload, 'vertexBuffer') } : Dynamic));
+    (upload = cast ({ indexFormat: ((cast _Runtime.isInstanceOf(lines, _Runtime.globalValue('Uint32Array')) : Bool) ? (cast 'uint32' : Dynamic) : (cast 'uint16' : Dynamic)), lineIndexBuffer: lineIndexBuffer, version: geometry.version, vertexBuffer: _Runtime.field(meshUpload, 'vertexBuffer') } : Dynamic));
     ((cast perState : flighthq._internal._WeakMap).set((cast geometry : MeshGeometry), upload));
     return cast upload;
     return cast null;
@@ -44,7 +44,7 @@ class _WgpuWireframeUploadValues {
     var lineCount:Dynamic = cast _Runtime.UNDEFINED;
     var useUint32:Dynamic = cast _Runtime.UNDEFINED;
     var lines:Dynamic = cast _Runtime.UNDEFINED;
-    triangleIndices = _Runtime.field(geometry, 'indices');
+    triangleIndices = geometry.indices;
     triangleCount = HxMath.floor((_Runtime.field(triangleIndices, 'length') / 3.0));
     lineCount = (triangleCount * 6.0);
     useUint32 = ((cast _Runtime.isInstanceOf(triangleIndices, _Runtime.globalValue('Uint32Array')) : Bool) || (cast ((cast lineCount : Float) > (cast 65535.0 : Float)) : Bool));

@@ -22,21 +22,21 @@ class Matrix {
   }
 
   public static function copyMatrix(out:MatrixLike, source:MatrixLike):Void {
-    _Runtime.callValue(setMatrix, cast ([out, _Runtime.field(source, 'a'), _Runtime.field(source, 'b'), _Runtime.field(source, 'c'), _Runtime.field(source, 'd'), _Runtime.field(source, 'tx'), _Runtime.field(source, 'ty')] : Array<Dynamic>));
+    _Runtime.callValue(setMatrix, cast ([out, source.a, source.b, source.c, source.d, source.tx, source.ty] : Array<Dynamic>));
   }
 
   public static function copyMatrixColumnFromVector3(out:MatrixLike, column:Float, source:Vector3Like):Void {
     if ((cast ((cast column : Float) > (cast 2.0 : Float)) : Bool)) {
       throw _Runtime.rangeError((('Column ' + column) + ' out of bounds (2)'));
     } else { if ((cast _Runtime.strictEquals(column, 0.0) : Bool)) {
-      _Runtime.setField(out, 'a', source.x);
-      _Runtime.setField(out, 'b', source.y);
+      (out.a = cast (source.x : Dynamic));
+      (out.b = cast (source.y : Dynamic));
     } else { if ((cast _Runtime.strictEquals(column, 1.0) : Bool)) {
-      _Runtime.setField(out, 'c', source.x);
-      _Runtime.setField(out, 'd', source.y);
+      (out.c = cast (source.x : Dynamic));
+      (out.d = cast (source.y : Dynamic));
     } else {
-      _Runtime.setField(out, 'tx', source.x);
-      _Runtime.setField(out, 'ty', source.y);
+      (out.tx = cast (source.x : Dynamic));
+      (out.ty = cast (source.y : Dynamic));
     } } }
   }
 
@@ -44,16 +44,16 @@ class Matrix {
     if ((cast ((cast column : Float) > (cast 2.0 : Float)) : Bool)) {
       throw _Runtime.rangeError((('Column ' + column) + ' out of bounds (2)'));
     } else { if ((cast _Runtime.strictEquals(column, 0.0) : Bool)) {
-      (out.x = cast (_Runtime.field(source, 'a') : Dynamic));
-      (out.y = cast (_Runtime.field(source, 'b') : Dynamic));
+      (out.x = cast (source.a : Dynamic));
+      (out.y = cast (source.b : Dynamic));
       (out.z = cast (0.0 : Dynamic));
     } else { if ((cast _Runtime.strictEquals(column, 1.0) : Bool)) {
-      (out.x = cast (_Runtime.field(source, 'c') : Dynamic));
-      (out.y = cast (_Runtime.field(source, 'd') : Dynamic));
+      (out.x = cast (source.c : Dynamic));
+      (out.y = cast (source.d : Dynamic));
       (out.z = cast (0.0 : Dynamic));
     } else {
-      (out.x = cast (_Runtime.field(source, 'tx') : Dynamic));
-      (out.y = cast (_Runtime.field(source, 'ty') : Dynamic));
+      (out.x = cast (source.tx : Dynamic));
+      (out.y = cast (source.ty : Dynamic));
       (out.z = cast (1.0 : Dynamic));
     } } }
   }
@@ -62,13 +62,13 @@ class Matrix {
     if ((cast ((cast row : Float) > (cast 2.0 : Float)) : Bool)) {
       throw _Runtime.rangeError((('Row ' + row) + ' out of bounds (2)'));
     } else { if ((cast _Runtime.strictEquals(row, 0.0) : Bool)) {
-      _Runtime.setField(out, 'a', source.x);
-      _Runtime.setField(out, 'c', source.y);
-      _Runtime.setField(out, 'tx', source.z);
+      (out.a = cast (source.x : Dynamic));
+      (out.c = cast (source.y : Dynamic));
+      (out.tx = cast (source.z : Dynamic));
     } else { if ((cast _Runtime.strictEquals(row, 1.0) : Bool)) {
-      _Runtime.setField(out, 'b', source.x);
-      _Runtime.setField(out, 'd', source.y);
-      _Runtime.setField(out, 'ty', source.z);
+      (out.b = cast (source.x : Dynamic));
+      (out.d = cast (source.y : Dynamic));
+      (out.ty = cast (source.z : Dynamic));
     } } }
   }
 
@@ -76,13 +76,13 @@ class Matrix {
     if ((cast ((cast row : Float) > (cast 2.0 : Float)) : Bool)) {
       throw _Runtime.rangeError((('Row ' + row) + ' out of bounds (2)'));
     } else { if ((cast _Runtime.strictEquals(row, 0.0) : Bool)) {
-      (out.x = cast (_Runtime.field(source, 'a') : Dynamic));
-      (out.y = cast (_Runtime.field(source, 'c') : Dynamic));
-      (out.z = cast (_Runtime.field(source, 'tx') : Dynamic));
+      (out.x = cast (source.a : Dynamic));
+      (out.y = cast (source.c : Dynamic));
+      (out.z = cast (source.tx : Dynamic));
     } else { if ((cast _Runtime.strictEquals(row, 1.0) : Bool)) {
-      (out.x = cast (_Runtime.field(source, 'b') : Dynamic));
-      (out.y = cast (_Runtime.field(source, 'd') : Dynamic));
-      (out.z = cast (_Runtime.field(source, 'ty') : Dynamic));
+      (out.x = cast (source.b : Dynamic));
+      (out.y = cast (source.d : Dynamic));
+      (out.z = cast (source.ty : Dynamic));
     } else {
       (out.x = cast (0.0 : Dynamic));
       (out.y = cast (0.0 : Dynamic));
@@ -114,7 +114,7 @@ class Matrix {
   public static function equalsMatrix(a:Null<MatrixLike>, b:Null<MatrixLike>, compareTranslation:Bool = true):Bool {
     if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast true; }
     if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
-    return cast _Runtime.andValue(((cast ((cast ((cast _Runtime.orValue(!(cast compareTranslation : Bool), function():Dynamic return cast _Runtime.andValue(_Runtime.strictEquals(_Runtime.field(a, 'tx'), _Runtime.field(b, 'tx')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'ty'), _Runtime.field(b, 'ty')))) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'a'), _Runtime.field(b, 'a')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'b'), _Runtime.field(b, 'b')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'c'), _Runtime.field(b, 'c')) : Bool)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'd'), _Runtime.field(b, 'd')));
+    return cast _Runtime.andValue(((cast ((cast ((cast _Runtime.orValue(!(cast compareTranslation : Bool), function():Dynamic return cast _Runtime.andValue(_Runtime.strictEquals(a.tx, b.tx), function():Dynamic return cast _Runtime.strictEquals(a.ty, b.ty))) : Bool) && (cast _Runtime.strictEquals(a.a, b.a) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.b, b.b) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.c, b.c) : Bool)), function():Dynamic return cast _Runtime.strictEquals(a.d, b.d));
     return cast null;
   }
 
@@ -131,17 +131,17 @@ class Matrix {
     var outB:Dynamic = cast _Runtime.UNDEFINED;
     var outC:Dynamic = cast _Runtime.UNDEFINED;
     var outD:Dynamic = cast _Runtime.UNDEFINED;
-    a = _Runtime.field(source, 'a');
-    b = _Runtime.field(source, 'b');
-    c = _Runtime.field(source, 'c');
-    d = _Runtime.field(source, 'd');
-    tx = _Runtime.field(source, 'tx');
-    ty = _Runtime.field(source, 'ty');
+    a = source.a;
+    b = source.b;
+    c = source.c;
+    d = source.d;
+    tx = source.tx;
+    ty = source.ty;
     det = ((a * d) - (c * b));
     if ((cast _Runtime.strictEquals(det, 0.0) : Bool)) {
-      _Runtime.setField(out, 'a', _Runtime.setField(out, 'b', _Runtime.setField(out, 'c', _Runtime.setField(out, 'd', 0.0))));
-      _Runtime.setField(out, 'tx', -tx);
-      _Runtime.setField(out, 'ty', -ty);
+      (out.a = cast ((out.b = cast ((out.c = cast ((out.d = cast (0.0 : Dynamic)) : Dynamic)) : Dynamic)) : Dynamic));
+      (out.tx = cast (-tx : Dynamic));
+      (out.ty = cast (-ty : Dynamic));
       return cast false;
     }
     invDet = (1.0 / det);
@@ -149,12 +149,12 @@ class Matrix {
     outB = (-b * invDet);
     outC = (-c * invDet);
     outD = (a * invDet);
-    _Runtime.setField(out, 'a', outA);
-    _Runtime.setField(out, 'b', outB);
-    _Runtime.setField(out, 'c', outC);
-    _Runtime.setField(out, 'd', outD);
-    _Runtime.setField(out, 'tx', -((outA * tx) + (outC * ty)));
-    _Runtime.setField(out, 'ty', -((outB * tx) + (outD * ty)));
+    (out.a = cast (outA : Dynamic));
+    (out.b = cast (outB : Dynamic));
+    (out.c = cast (outC : Dynamic));
+    (out.d = cast (outD : Dynamic));
+    (out.tx = cast (-((outA * tx) + (outC * ty)) : Dynamic));
+    (out.ty = cast (-((outB * tx) + (outD * ty)) : Dynamic));
     return cast true;
     return cast null;
   }
@@ -165,13 +165,13 @@ class Matrix {
 
   public static function inverseMatrixTransformPointXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
     var norm:Dynamic = cast _Runtime.UNDEFINED;
-    norm = ((_Runtime.field(source, 'a') * _Runtime.field(source, 'd')) - (_Runtime.field(source, 'b') * _Runtime.field(source, 'c')));
+    norm = ((source.a * source.d) - (source.b * source.c));
     if ((cast _Runtime.strictEquals(norm, 0.0) : Bool)) {
-      (out.x = cast (-_Runtime.field(source, 'tx') : Dynamic));
-      (out.y = cast (-_Runtime.field(source, 'ty') : Dynamic));
+      (out.x = cast (-source.tx : Dynamic));
+      (out.y = cast (-source.ty : Dynamic));
     } else {
-      var px:Dynamic = ((1.0 / norm) * ((_Runtime.field(source, 'c') * (_Runtime.field(source, 'ty') - y)) + (_Runtime.field(source, 'd') * (x - _Runtime.field(source, 'tx')))));
-      (out.y = cast (((1.0 / norm) * ((_Runtime.field(source, 'a') * (y - _Runtime.field(source, 'ty'))) + (_Runtime.field(source, 'b') * (_Runtime.field(source, 'tx') - x)))) : Dynamic));
+      var px:Dynamic = ((1.0 / norm) * ((source.c * (source.ty - y)) + (source.d * (x - source.tx))));
+      (out.y = cast (((1.0 / norm) * ((source.a * (y - source.ty)) + (source.b * (source.tx - x)))) : Dynamic));
       (out.x = cast (px : Dynamic));
     }
   }
@@ -182,13 +182,13 @@ class Matrix {
 
   public static function inverseMatrixTransformVectorXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
     var norm:Dynamic = cast _Runtime.UNDEFINED;
-    norm = ((_Runtime.field(source, 'a') * _Runtime.field(source, 'd')) - (_Runtime.field(source, 'b') * _Runtime.field(source, 'c')));
+    norm = ((source.a * source.d) - (source.b * source.c));
     if ((cast _Runtime.strictEquals(norm, 0.0) : Bool)) {
       (out.x = cast (0.0 : Dynamic));
       (out.y = cast (0.0 : Dynamic));
     } else {
-      var px:Dynamic = ((1.0 / norm) * ((_Runtime.field(source, 'd') * x) - (_Runtime.field(source, 'c') * y)));
-      (out.y = cast (((1.0 / norm) * ((-_Runtime.field(source, 'b') * x) + (_Runtime.field(source, 'a') * y))) : Dynamic));
+      var px:Dynamic = ((1.0 / norm) * ((source.d * x) - (source.c * y)));
+      (out.y = cast (((1.0 / norm) * ((-source.b * x) + (source.a * y))) : Dynamic));
       (out.x = cast (px : Dynamic));
     }
   }
@@ -211,8 +211,8 @@ class Matrix {
     c = _Runtime.field(__destructure0, 'c');
     d = _Runtime.field(__destructure0, 'd');
     if ((cast ((cast _Runtime.strictEquals(ax, bx) : Bool) && (cast _Runtime.strictEquals(ay, by) : Bool)) : Bool)) {
-      _Runtime.setField(out, 'x', _Runtime.field(source, 'tx'));
-      _Runtime.setField(out, 'y', _Runtime.field(source, 'ty'));
+      _Runtime.setField(out, 'x', source.tx);
+      _Runtime.setField(out, 'y', source.ty);
       _Runtime.setField(out, 'width', 0.0);
       _Runtime.setField(out, 'height', 0.0);
       return;
@@ -239,8 +239,8 @@ class Matrix {
     if ((cast ((cast ty : Float) < (cast ty0 : Float)) : Bool)) { (ty0 = cast (ty : Dynamic)); }
     if ((cast ((cast tx : Float) > (cast tx1 : Float)) : Bool)) { (tx1 = cast (tx : Dynamic)); }
     if ((cast ((cast ty : Float) > (cast ty1 : Float)) : Bool)) { (ty1 = cast (ty : Dynamic)); }
-    _Runtime.setField(out, 'x', (tx0 + _Runtime.field(source, 'tx')));
-    _Runtime.setField(out, 'y', (ty0 + _Runtime.field(source, 'ty')));
+    _Runtime.setField(out, 'x', (tx0 + source.tx));
+    _Runtime.setField(out, 'y', (ty0 + source.ty));
     _Runtime.setField(out, 'width', (tx1 - tx0));
     _Runtime.setField(out, 'height', (ty1 - ty0));
   }
@@ -254,8 +254,8 @@ class Matrix {
   }
 
   public static function matrixTransformPointXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
-    (out.x = cast ((((x * _Runtime.field(source, 'a')) + (y * _Runtime.field(source, 'c'))) + _Runtime.field(source, 'tx')) : Dynamic));
-    (out.y = cast ((((x * _Runtime.field(source, 'b')) + (y * _Runtime.field(source, 'd'))) + _Runtime.field(source, 'ty')) : Dynamic));
+    (out.x = cast ((((x * source.a) + (y * source.c)) + source.tx) : Dynamic));
+    (out.y = cast ((((x * source.b) + (y * source.d)) + source.ty) : Dynamic));
   }
 
   public static function matrixTransformRectangle(out:RectangleLike, matrix:MatrixLike, source:RectangleLike):Void {
@@ -267,8 +267,8 @@ class Matrix {
   }
 
   public static function matrixTransformVectorXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
-    (out.x = cast (((x * _Runtime.field(source, 'a')) + (y * _Runtime.field(source, 'c'))) : Dynamic));
-    (out.y = cast (((x * _Runtime.field(source, 'b')) + (y * _Runtime.field(source, 'd'))) : Dynamic));
+    (out.x = cast (((x * source.a) + (y * source.c)) : Dynamic));
+    (out.y = cast (((x * source.b) + (y * source.d)) : Dynamic));
   }
 
   public static function multiplyMatrix(out:MatrixLike, a:MatrixLike, b:MatrixLike):Void {
@@ -284,24 +284,24 @@ class Matrix {
     var c2:Dynamic = cast _Runtime.UNDEFINED;
     var d2:Dynamic = cast _Runtime.UNDEFINED;
     var ty2:Dynamic = cast _Runtime.UNDEFINED;
-    a1 = _Runtime.field(a, 'a');
-    b1 = _Runtime.field(a, 'b');
-    tx1 = _Runtime.field(a, 'tx');
-    c1 = _Runtime.field(a, 'c');
-    d1 = _Runtime.field(a, 'd');
-    ty1 = _Runtime.field(a, 'ty');
-    a2 = _Runtime.field(b, 'a');
-    b2 = _Runtime.field(b, 'b');
-    tx2 = _Runtime.field(b, 'tx');
-    c2 = _Runtime.field(b, 'c');
-    d2 = _Runtime.field(b, 'd');
-    ty2 = _Runtime.field(b, 'ty');
-    _Runtime.setField(out, 'a', ((a1 * a2) + (c1 * b2)));
-    _Runtime.setField(out, 'b', ((b1 * a2) + (d1 * b2)));
-    _Runtime.setField(out, 'tx', (((a1 * tx2) + (c1 * ty2)) + tx1));
-    _Runtime.setField(out, 'c', ((a1 * c2) + (c1 * d2)));
-    _Runtime.setField(out, 'd', ((b1 * c2) + (d1 * d2)));
-    _Runtime.setField(out, 'ty', (((b1 * tx2) + (d1 * ty2)) + ty1));
+    a1 = a.a;
+    b1 = a.b;
+    tx1 = a.tx;
+    c1 = a.c;
+    d1 = a.d;
+    ty1 = a.ty;
+    a2 = b.a;
+    b2 = b.b;
+    tx2 = b.tx;
+    c2 = b.c;
+    d2 = b.d;
+    ty2 = b.ty;
+    (out.a = cast (((a1 * a2) + (c1 * b2)) : Dynamic));
+    (out.b = cast (((b1 * a2) + (d1 * b2)) : Dynamic));
+    (out.tx = cast ((((a1 * tx2) + (c1 * ty2)) + tx1) : Dynamic));
+    (out.c = cast (((a1 * c2) + (c1 * d2)) : Dynamic));
+    (out.d = cast (((b1 * c2) + (d1 * d2)) : Dynamic));
+    (out.ty = cast ((((b1 * tx2) + (d1 * ty2)) + ty1) : Dynamic));
   }
 
   public static function rotateMatrix(out:MatrixLike, source:MatrixLike, theta:Float):Void {
@@ -312,60 +312,60 @@ class Matrix {
     var tx1:Dynamic = cast _Runtime.UNDEFINED;
     cos = HxMath.cos(theta);
     sin = HxMath.sin(theta);
-    a1 = ((_Runtime.field(source, 'a') * cos) - (_Runtime.field(source, 'b') * sin));
-    _Runtime.setField(out, 'b', ((_Runtime.field(source, 'a') * sin) + (_Runtime.field(source, 'b') * cos)));
-    _Runtime.setField(out, 'a', a1);
-    c1 = ((_Runtime.field(source, 'c') * cos) - (_Runtime.field(source, 'd') * sin));
-    _Runtime.setField(out, 'd', ((_Runtime.field(source, 'c') * sin) + (_Runtime.field(source, 'd') * cos)));
-    _Runtime.setField(out, 'c', c1);
-    tx1 = ((_Runtime.field(source, 'tx') * cos) - (_Runtime.field(source, 'ty') * sin));
-    _Runtime.setField(out, 'ty', ((_Runtime.field(source, 'tx') * sin) + (_Runtime.field(source, 'ty') * cos)));
-    _Runtime.setField(out, 'tx', tx1);
+    a1 = ((source.a * cos) - (source.b * sin));
+    (out.b = cast (((source.a * sin) + (source.b * cos)) : Dynamic));
+    (out.a = cast (a1 : Dynamic));
+    c1 = ((source.c * cos) - (source.d * sin));
+    (out.d = cast (((source.c * sin) + (source.d * cos)) : Dynamic));
+    (out.c = cast (c1 : Dynamic));
+    tx1 = ((source.tx * cos) - (source.ty * sin));
+    (out.ty = cast (((source.tx * sin) + (source.ty * cos)) : Dynamic));
+    (out.tx = cast (tx1 : Dynamic));
   }
 
   public static function scaleMatrix(out:MatrixLike, source:MatrixLike, sx:Float, sy:Float):Void {
-    _Runtime.setField(out, 'a', (_Runtime.field(source, 'a') * sx));
-    _Runtime.setField(out, 'b', (_Runtime.field(source, 'b') * sy));
-    _Runtime.setField(out, 'c', (_Runtime.field(source, 'c') * sx));
-    _Runtime.setField(out, 'd', (_Runtime.field(source, 'd') * sy));
-    _Runtime.setField(out, 'tx', (_Runtime.field(source, 'tx') * sx));
-    _Runtime.setField(out, 'ty', (_Runtime.field(source, 'ty') * sy));
+    (out.a = cast ((source.a * sx) : Dynamic));
+    (out.b = cast ((source.b * sy) : Dynamic));
+    (out.c = cast ((source.c * sx) : Dynamic));
+    (out.d = cast ((source.d * sy) : Dynamic));
+    (out.tx = cast ((source.tx * sx) : Dynamic));
+    (out.ty = cast ((source.ty * sy) : Dynamic));
   }
 
   public static function setGradientTransformMatrix(out:MatrixLike, width:Float, height:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):Void {
-    _Runtime.setField(out, 'a', (width / 1638.4));
-    _Runtime.setField(out, 'd', (height / 1638.4));
+    (out.a = cast ((width / 1638.4) : Dynamic));
+    (out.d = cast ((height / 1638.4) : Dynamic));
     if ((cast !_Runtime.strictEquals(rotation, 0.0) : Bool)) {
       var cos:Dynamic = HxMath.cos(rotation);
       var sin:Dynamic = HxMath.sin(rotation);
-      _Runtime.setField(out, 'b', (sin * _Runtime.field(out, 'd')));
-      _Runtime.setField(out, 'c', (-sin * _Runtime.field(out, 'a')));
-      _Runtime.setField(out, 'a', (_Runtime.field(out, 'a') * cos));
-      _Runtime.setField(out, 'd', (_Runtime.field(out, 'd') * cos));
+      (out.b = cast ((sin * out.d) : Dynamic));
+      (out.c = cast ((-sin * out.a) : Dynamic));
+      (out.a *= cos);
+      (out.d *= cos);
     } else {
-      _Runtime.setField(out, 'b', 0.0);
-      _Runtime.setField(out, 'c', 0.0);
+      (out.b = cast (0.0 : Dynamic));
+      (out.c = cast (0.0 : Dynamic));
     }
-    _Runtime.setField(out, 'tx', (tx + (width / 2.0)));
-    _Runtime.setField(out, 'ty', (ty + (height / 2.0)));
+    (out.tx = cast ((tx + (width / 2.0)) : Dynamic));
+    (out.ty = cast ((ty + (height / 2.0)) : Dynamic));
   }
 
   public static function setMatrix(out:MatrixLike, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Void {
-    _Runtime.setField(out, 'a', a);
-    _Runtime.setField(out, 'b', b);
-    _Runtime.setField(out, 'c', c);
-    _Runtime.setField(out, 'd', d);
-    _Runtime.setField(out, 'tx', tx);
-    _Runtime.setField(out, 'ty', ty);
+    (out.a = cast (a : Dynamic));
+    (out.b = cast (b : Dynamic));
+    (out.c = cast (c : Dynamic));
+    (out.d = cast (d : Dynamic));
+    (out.tx = cast (tx : Dynamic));
+    (out.ty = cast (ty : Dynamic));
   }
 
   public static function setMatrixFromFloat32Array(out:MatrixLike, offset:Float, source:flighthq._internal._Float32Array):Void {
-    _Runtime.setField(out, 'a', flighthq._internal._StaticIndex.readFloat32Array(source, offset));
-    _Runtime.setField(out, 'b', flighthq._internal._StaticIndex.readFloat32Array(source, (offset + 1.0)));
-    _Runtime.setField(out, 'c', flighthq._internal._StaticIndex.readFloat32Array(source, (offset + 2.0)));
-    _Runtime.setField(out, 'd', flighthq._internal._StaticIndex.readFloat32Array(source, (offset + 3.0)));
-    _Runtime.setField(out, 'tx', flighthq._internal._StaticIndex.readFloat32Array(source, (offset + 4.0)));
-    _Runtime.setField(out, 'ty', flighthq._internal._StaticIndex.readFloat32Array(source, (offset + 5.0)));
+    (out.a = cast (flighthq._internal._StaticIndex.readFloat32Array(source, offset) : Dynamic));
+    (out.b = cast (flighthq._internal._StaticIndex.readFloat32Array(source, (offset + 1.0)) : Dynamic));
+    (out.c = cast (flighthq._internal._StaticIndex.readFloat32Array(source, (offset + 2.0)) : Dynamic));
+    (out.d = cast (flighthq._internal._StaticIndex.readFloat32Array(source, (offset + 3.0)) : Dynamic));
+    (out.tx = cast (flighthq._internal._StaticIndex.readFloat32Array(source, (offset + 4.0)) : Dynamic));
+    (out.ty = cast (flighthq._internal._StaticIndex.readFloat32Array(source, (offset + 5.0)) : Dynamic));
   }
 
   public static function setMatrixFromMatrix3(out:MatrixLike, source:Matrix3Like):Void {
@@ -377,12 +377,12 @@ class Matrix {
   public static function setMatrixFromMatrix4(out:MatrixLike, source:Matrix4Like):Void {
     var s:Dynamic = cast _Runtime.UNDEFINED;
     s = source.m;
-    _Runtime.setField(out, 'a', flighthq._internal._StaticIndex.readFloat32Array(s, 0.0));
-    _Runtime.setField(out, 'b', flighthq._internal._StaticIndex.readFloat32Array(s, 4.0));
-    _Runtime.setField(out, 'tx', flighthq._internal._StaticIndex.readFloat32Array(s, 12.0));
-    _Runtime.setField(out, 'c', flighthq._internal._StaticIndex.readFloat32Array(s, 1.0));
-    _Runtime.setField(out, 'd', flighthq._internal._StaticIndex.readFloat32Array(s, 5.0));
-    _Runtime.setField(out, 'ty', flighthq._internal._StaticIndex.readFloat32Array(s, 13.0));
+    (out.a = cast (flighthq._internal._StaticIndex.readFloat32Array(s, 0.0) : Dynamic));
+    (out.b = cast (flighthq._internal._StaticIndex.readFloat32Array(s, 4.0) : Dynamic));
+    (out.tx = cast (flighthq._internal._StaticIndex.readFloat32Array(s, 12.0) : Dynamic));
+    (out.c = cast (flighthq._internal._StaticIndex.readFloat32Array(s, 1.0) : Dynamic));
+    (out.d = cast (flighthq._internal._StaticIndex.readFloat32Array(s, 5.0) : Dynamic));
+    (out.ty = cast (flighthq._internal._StaticIndex.readFloat32Array(s, 13.0) : Dynamic));
   }
 
   public static function setMatrixIdentity(out:MatrixLike):Void {
@@ -393,23 +393,23 @@ class Matrix {
     if ((cast !_Runtime.strictEquals(rotation, 0.0) : Bool)) {
       var cos:Dynamic = HxMath.cos(rotation);
       var sin:Dynamic = HxMath.sin(rotation);
-      _Runtime.setField(out, 'a', (cos * scaleX));
-      _Runtime.setField(out, 'b', (sin * scaleY));
-      _Runtime.setField(out, 'c', (-sin * scaleX));
-      _Runtime.setField(out, 'd', (cos * scaleY));
+      (out.a = cast ((cos * scaleX) : Dynamic));
+      (out.b = cast ((sin * scaleY) : Dynamic));
+      (out.c = cast ((-sin * scaleX) : Dynamic));
+      (out.d = cast ((cos * scaleY) : Dynamic));
     } else {
-      _Runtime.setField(out, 'a', scaleX);
-      _Runtime.setField(out, 'b', 0.0);
-      _Runtime.setField(out, 'c', 0.0);
-      _Runtime.setField(out, 'd', scaleY);
+      (out.a = cast (scaleX : Dynamic));
+      (out.b = cast (0.0 : Dynamic));
+      (out.c = cast (0.0 : Dynamic));
+      (out.d = cast (scaleY : Dynamic));
     }
-    _Runtime.setField(out, 'tx', tx);
-    _Runtime.setField(out, 'ty', ty);
+    (out.tx = cast (tx : Dynamic));
+    (out.ty = cast (ty : Dynamic));
   }
 
   public static function translateMatrix(out:MatrixLike, source:MatrixLike, dx:Float, dy:Float):Void {
-    _Runtime.setField(out, 'tx', (_Runtime.field(source, 'tx') + dx));
-    _Runtime.setField(out, 'ty', (_Runtime.field(source, 'ty') + dy));
+    (out.tx = cast ((source.tx + dx) : Dynamic));
+    (out.ty = cast ((source.ty + dy) : Dynamic));
   }
 
   public static function translateMatrixByVector(out:MatrixLike, matrix:MatrixLike, vector:Vector2Like):Void {
@@ -417,16 +417,16 @@ class Matrix {
   }
 
   public static function translateMatrixByVectorXY(out:MatrixLike, source:MatrixLike, x:Float, y:Float):Void {
-    _Runtime.setField(out, 'tx', ((_Runtime.field(source, 'tx') + (_Runtime.field(source, 'a') * x)) + (_Runtime.field(source, 'c') * y)));
-    _Runtime.setField(out, 'ty', ((_Runtime.field(source, 'ty') + (_Runtime.field(source, 'b') * x)) + (_Runtime.field(source, 'd') * y)));
+    (out.tx = cast (((source.tx + (source.a * x)) + (source.c * y)) : Dynamic));
+    (out.ty = cast (((source.ty + (source.b * x)) + (source.d * y)) : Dynamic));
   }
 
   public static function writeMatrixToFloat32Array(out:flighthq._internal._Float32Array, offset:Float, source:MatrixLike):Void {
-    flighthq._internal._StaticIndex.writeFloat32Array(out, offset, _Runtime.field(source, 'a'));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 1.0), _Runtime.field(source, 'b'));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 2.0), _Runtime.field(source, 'c'));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 3.0), _Runtime.field(source, 'd'));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 4.0), _Runtime.field(source, 'tx'));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 5.0), _Runtime.field(source, 'ty'));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, offset, source.a);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 1.0), source.b);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 2.0), source.c);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 3.0), source.d);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 4.0), source.tx);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 5.0), source.ty);
   }
 }

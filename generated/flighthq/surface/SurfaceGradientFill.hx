@@ -20,9 +20,9 @@ class SurfaceGradientFill {
     var invLen:Dynamic = cast _Runtime.UNDEFINED;
     dw = _Runtime.field(dest, 'width');
     dh = _Runtime.field(dest, 'height');
-    data = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
-    surfaceWidth = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
-    surfaceHeight = _Runtime.field(_Runtime.field(dest, 'surface'), 'height');
+    data = _Runtime.field(dest, 'surface').data;
+    surfaceWidth = _Runtime.field(dest, 'surface').width;
+    surfaceHeight = _Runtime.field(dest, 'surface').height;
     axisX = (x1 - x0);
     axisY = (y1 - y0);
     lenSq = ((axisX * axisX) + (axisY * axisY));
@@ -67,9 +67,9 @@ class SurfaceGradientFill {
     var fdy:Dynamic = cast _Runtime.UNDEFINED;
     dw = _Runtime.field(dest, 'width');
     dh = _Runtime.field(dest, 'height');
-    data = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
-    surfaceWidth = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
-    surfaceHeight = _Runtime.field(_Runtime.field(dest, 'surface'), 'height');
+    data = _Runtime.field(dest, 'surface').data;
+    surfaceWidth = _Runtime.field(dest, 'surface').width;
+    surfaceHeight = _Runtime.field(dest, 'surface').height;
     invRadius = ((cast ((cast radius : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / radius) : Dynamic) : (cast 0.0 : Dynamic));
     fdx = (focalX - cx);
     fdy = (focalY - cy);

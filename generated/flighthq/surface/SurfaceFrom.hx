@@ -13,10 +13,10 @@ class SurfaceFrom {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var domImageData:Dynamic = cast _Runtime.UNDEFINED;
     canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
-    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', _Runtime.field(surface, 'width'));
-    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', _Runtime.field(surface, 'height'));
-    domImageData = _Runtime.construct(_Runtime.field(_Runtime.globalValue('globalThis'), 'ImageData'), [_Runtime.field(surface, 'width'), _Runtime.field(surface, 'height')]);
-    _Runtime.callProperty(_Runtime.field(domImageData, 'data'), 'set', cast ([_Runtime.field(surface, 'data')] : Array<Dynamic>));
+    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', surface.width);
+    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', surface.height);
+    domImageData = _Runtime.construct(_Runtime.field(_Runtime.globalValue('globalThis'), 'ImageData'), [surface.width, surface.height]);
+    _Runtime.callProperty(_Runtime.field(domImageData, 'data'), 'set', cast ([surface.data] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([domImageData, 0.0, 0.0] : Array<Dynamic>));
     return cast _Runtime.callValue(createImageResourceFromCanvas, cast ([canvas] : Array<Dynamic>));
     return cast null;

@@ -109,11 +109,11 @@ class WgpuScale9Shape {
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(shapeData, 'entry'), null) : Bool)) { return; }
     t = _Runtime.field(renderProxy, 'transform2D');
-    a = ((cast !_Runtime.strictEquals(_Runtime.field(source, 'scaleX'), 0.0) : Bool) ? (cast (_Runtime.field(t, 'a') / _Runtime.field(source, 'scaleX')) : Dynamic) : (cast _Runtime.field(t, 'a') : Dynamic));
-    b = ((cast !_Runtime.strictEquals(_Runtime.field(source, 'scaleX'), 0.0) : Bool) ? (cast (_Runtime.field(t, 'b') / _Runtime.field(source, 'scaleX')) : Dynamic) : (cast _Runtime.field(t, 'b') : Dynamic));
-    c = ((cast !_Runtime.strictEquals(_Runtime.field(source, 'scaleY'), 0.0) : Bool) ? (cast (_Runtime.field(t, 'c') / _Runtime.field(source, 'scaleY')) : Dynamic) : (cast _Runtime.field(t, 'c') : Dynamic));
-    d = ((cast !_Runtime.strictEquals(_Runtime.field(source, 'scaleY'), 0.0) : Bool) ? (cast (_Runtime.field(t, 'd') / _Runtime.field(source, 'scaleY')) : Dynamic) : (cast _Runtime.field(t, 'd') : Dynamic));
-    _Runtime.callValue(drawWgpuQuadWithTransform, cast ([state, renderProxy, { a: a, b: b, c: c, d: d, tx: _Runtime.field(t, 'tx'), ty: _Runtime.field(t, 'ty') }, _Runtime.field(shapeData, 'entry'), 0.0, 0.0, w, h, 0.0, 0.0, 1.0, 1.0] : Array<Dynamic>));
+    a = ((cast !_Runtime.strictEquals(_Runtime.field(source, 'scaleX'), 0.0) : Bool) ? (cast (t.a / _Runtime.field(source, 'scaleX')) : Dynamic) : (cast t.a : Dynamic));
+    b = ((cast !_Runtime.strictEquals(_Runtime.field(source, 'scaleX'), 0.0) : Bool) ? (cast (t.b / _Runtime.field(source, 'scaleX')) : Dynamic) : (cast t.b : Dynamic));
+    c = ((cast !_Runtime.strictEquals(_Runtime.field(source, 'scaleY'), 0.0) : Bool) ? (cast (t.c / _Runtime.field(source, 'scaleY')) : Dynamic) : (cast t.c : Dynamic));
+    d = ((cast !_Runtime.strictEquals(_Runtime.field(source, 'scaleY'), 0.0) : Bool) ? (cast (t.d / _Runtime.field(source, 'scaleY')) : Dynamic) : (cast t.d : Dynamic));
+    _Runtime.callValue(drawWgpuQuadWithTransform, cast ([state, renderProxy, { a: a, b: b, c: c, d: d, tx: t.tx, ty: t.ty }, _Runtime.field(shapeData, 'entry'), 0.0, 0.0, w, h, 0.0, 0.0, 1.0, 1.0] : Array<Dynamic>));
   }
 
   public static function drawWgpuScale9ShapeMask(state:WgpuRenderState, data:RenderProxy2D):Void {

@@ -36,7 +36,7 @@ class DrawWgpuScene {
       var m:Dynamic = 0.0;
       while ((cast ((cast m : Float) < (cast _Runtime.field(list, 'meshCount') : Float)) : Bool)) {
         var mesh:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(list, 'visibleMeshes'), m);
-        var subsets:Dynamic = _Runtime.field(_Runtime.field(mesh, 'geometry'), 'subsets');
+        var subsets:Dynamic = _Runtime.field(mesh, 'geometry').subsets;
         var worldMatrix:Dynamic = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>)) : Matrix4);
         _Runtime.callValue(setMatrix3NormalFromMatrix4, cast ([DrawWgpuScene.scratchNormalMatrix__drawWgpuScene, worldMatrix] : Array<Dynamic>));
         {

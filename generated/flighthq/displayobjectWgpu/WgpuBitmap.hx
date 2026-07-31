@@ -80,12 +80,12 @@ class WgpuBitmap {
     base = _Runtime.callValue(prepareWgpuSpriteBatchWrite, cast ([state, imageSource, _Runtime.field(renderProxy, 'blendMode'), material, materialRenderer, 1.0] : Array<Dynamic>));
     d = _Runtime.field(runtime, 'spriteBatchInstanceData');
     t = _Runtime.field(renderProxy, 'transform2D');
-    flighthq._internal._StaticIndex.writeFloat32Array(d, base, _Runtime.field(t, 'a'));
-    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 1.0), _Runtime.field(t, 'b'));
-    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 2.0), _Runtime.field(t, 'c'));
-    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 3.0), _Runtime.field(t, 'd'));
-    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 4.0), _Runtime.field(t, 'tx'));
-    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 5.0), _Runtime.field(t, 'ty'));
+    flighthq._internal._StaticIndex.writeFloat32Array(d, base, t.a);
+    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 1.0), t.b);
+    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 2.0), t.c);
+    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 3.0), t.d);
+    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 4.0), t.tx);
+    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 5.0), t.ty);
     flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 6.0), w);
     flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 7.0), h);
     flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 8.0), u0);

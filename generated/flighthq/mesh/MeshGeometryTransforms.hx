@@ -15,12 +15,12 @@ class MeshGeometryTransforms {
     var cx:Dynamic = cast _Runtime.UNDEFINED;
     var cy:Dynamic = cast _Runtime.UNDEFINED;
     var cz:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.truthy(_Runtime.field(geometry, 'bounds')) : Bool)) {
+    if ((cast !_Runtime.truthy(geometry.bounds) : Bool)) {
       var bounds:Dynamic = _Runtime.callValue(createAabb, cast ([] : Array<Dynamic>));
       _Runtime.callValue(computeMeshGeometryBounds, cast ([bounds, geometry] : Array<Dynamic>));
-      _Runtime.setField(geometry, 'bounds', bounds);
+      (geometry.bounds = cast (bounds : Dynamic));
     }
-    b = _Runtime.field(geometry, 'bounds');
+    b = geometry.bounds;
     cx = ((b.min.x + b.max.x) * 0.5);
     cy = ((b.min.y + b.max.y) * 0.5);
     cz = ((b.min.z + b.max.z) * 0.5);
@@ -50,13 +50,13 @@ class MeshGeometryTransforms {
     invT = _Runtime.callValue(MeshGeometryTransforms.computeMatrix3x3InverseTranspose__meshGeometryTransforms, cast ([matrix] : Array<Dynamic>));
     if ((cast !_Runtime.truthy(invT) : Bool)) { return cast false; }
     m = matrix.m;
-    posFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(source, 'layout'), 'position'] : Array<Dynamic>));
-    normFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(source, 'layout'), 'normal'] : Array<Dynamic>));
-    tanFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(source, 'layout'), 'tangent'] : Array<Dynamic>));
-    srcVerts = _Runtime.field(source, 'vertices');
-    floatsPerVertex = (_Runtime.field(_Runtime.field(source, 'layout'), 'stride') / 4.0);
+    posFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([source.layout, 'position'] : Array<Dynamic>));
+    normFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([source.layout, 'normal'] : Array<Dynamic>));
+    tanFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([source.layout, 'tangent'] : Array<Dynamic>));
+    srcVerts = source.vertices;
+    floatsPerVertex = (_Runtime.field(source.layout, 'stride') / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(srcVerts, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
-    dstVerts = ((cast _Runtime.strictEquals(out, source) : Bool) ? (cast srcVerts : Dynamic) : (cast _Runtime.field(out, 'vertices') : Dynamic));
+    dstVerts = ((cast _Runtime.strictEquals(out, source) : Bool) ? (cast srcVerts : Dynamic) : (cast out.vertices : Dynamic));
     if ((cast !_Runtime.strictEquals(out, source) : Bool)) {
       _Runtime.callProperty(dstVerts, 'set', cast ([srcVerts] : Array<Dynamic>));
     }
@@ -114,9 +114,9 @@ class MeshGeometryTransforms {
         i++;
       }
     }
-    _Runtime.incrementField(out, 'version', 1, true);
-    if (_Runtime.truthy(_Runtime.field(out, 'bounds'))) {
-      _Runtime.callValue(computeMeshGeometryBounds, cast ([_Runtime.field(out, 'bounds'), out] : Array<Dynamic>));
+    out.version++;
+    if (_Runtime.truthy(out.bounds)) {
+      _Runtime.callValue(computeMeshGeometryBounds, cast ([out.bounds, out] : Array<Dynamic>));
     }
     return cast true;
     return cast null;
@@ -127,11 +127,11 @@ class MeshGeometryTransforms {
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
     var verts:Dynamic = cast _Runtime.UNDEFINED;
-    posFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(geometry, 'layout'), 'position'] : Array<Dynamic>));
+    posFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([geometry.layout, 'position'] : Array<Dynamic>));
     if ((cast ((cast posFloatOffset : Float) < (cast 0.0 : Float)) : Bool)) { return; }
-    floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
-    verts = _Runtime.field(geometry, 'vertices');
+    floatsPerVertex = (_Runtime.field(geometry.layout, 'stride') / 4.0);
+    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(geometry.vertices, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
+    verts = geometry.vertices;
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
@@ -142,14 +142,14 @@ class MeshGeometryTransforms {
         i++;
       }
     }
-    _Runtime.incrementField(geometry, 'version', 1, true);
-    if (_Runtime.truthy(_Runtime.field(geometry, 'bounds'))) {
-      (_Runtime.field(geometry, 'bounds').min.x += x);
-      (_Runtime.field(geometry, 'bounds').min.y += y);
-      (_Runtime.field(geometry, 'bounds').min.z += z);
-      (_Runtime.field(geometry, 'bounds').max.x += x);
-      (_Runtime.field(geometry, 'bounds').max.y += y);
-      (_Runtime.field(geometry, 'bounds').max.z += z);
+    geometry.version++;
+    if (_Runtime.truthy(geometry.bounds)) {
+      (geometry.bounds.min.x += x);
+      (geometry.bounds.min.y += y);
+      (geometry.bounds.min.z += z);
+      (geometry.bounds.max.x += x);
+      (geometry.bounds.max.y += y);
+      (geometry.bounds.max.z += z);
     }
   }
 
@@ -223,13 +223,13 @@ class MeshGeometryTransforms {
     var invSx:Dynamic = cast _Runtime.UNDEFINED;
     var invSy:Dynamic = cast _Runtime.UNDEFINED;
     var invSz:Dynamic = cast _Runtime.UNDEFINED;
-    posFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(source, 'layout'), 'position'] : Array<Dynamic>));
-    normFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(source, 'layout'), 'normal'] : Array<Dynamic>));
-    tanFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(source, 'layout'), 'tangent'] : Array<Dynamic>));
-    srcVerts = _Runtime.field(source, 'vertices');
-    floatsPerVertex = (_Runtime.field(_Runtime.field(source, 'layout'), 'stride') / 4.0);
+    posFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([source.layout, 'position'] : Array<Dynamic>));
+    normFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([source.layout, 'normal'] : Array<Dynamic>));
+    tanFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([source.layout, 'tangent'] : Array<Dynamic>));
+    srcVerts = source.vertices;
+    floatsPerVertex = (_Runtime.field(source.layout, 'stride') / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(srcVerts, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
-    dstVerts = _Runtime.field(out, 'vertices');
+    dstVerts = out.vertices;
     if ((cast !_Runtime.strictEquals(out, source) : Bool)) {
       _Runtime.callProperty(dstVerts, 'set', cast ([srcVerts] : Array<Dynamic>));
     }
@@ -290,9 +290,9 @@ class MeshGeometryTransforms {
         i++;
       }
     }
-    _Runtime.incrementField(out, 'version', 1, true);
-    if (_Runtime.truthy(_Runtime.field(out, 'bounds'))) {
-      _Runtime.callValue(computeMeshGeometryBounds, cast ([_Runtime.field(out, 'bounds'), out] : Array<Dynamic>));
+    out.version++;
+    if (_Runtime.truthy(out.bounds)) {
+      _Runtime.callValue(computeMeshGeometryBounds, cast ([out.bounds, out] : Array<Dynamic>));
     }
   }
 }

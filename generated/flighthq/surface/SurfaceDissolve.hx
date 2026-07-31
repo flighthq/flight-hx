@@ -42,12 +42,12 @@ class SurfaceDissolve {
     fillG = (_Runtime.toInt32((_Runtime.toInt32(fillColor) >> 16)) & 255);
     fillB = (_Runtime.toInt32((_Runtime.toInt32(fillColor) >> 8)) & 255);
     fillA = (_Runtime.toInt32(fillColor) & 255);
-    destData = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
-    destStride = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
-    destSurfaceHeight = _Runtime.field(_Runtime.field(dest, 'surface'), 'height');
-    sourceData = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
-    sourceStride = _Runtime.field(_Runtime.field(source, 'surface'), 'width');
-    sourceSurfaceHeight = _Runtime.field(_Runtime.field(source, 'surface'), 'height');
+    destData = _Runtime.field(dest, 'surface').data;
+    destStride = _Runtime.field(dest, 'surface').width;
+    destSurfaceHeight = _Runtime.field(dest, 'surface').height;
+    sourceData = _Runtime.field(source, 'surface').data;
+    sourceStride = _Runtime.field(source, 'surface').width;
+    sourceSurfaceHeight = _Runtime.field(source, 'surface').height;
     dissolved = 0.0;
     while ((cast ((cast ((cast dissolved : Float) < (cast pixelCount : Float)) : Bool) && (cast ((cast cursor : Float) < (cast period : Float)) : Bool)) : Bool)) {
       var pixelIndex:Dynamic = _Runtime.callValue(SurfaceDissolve.permutePixelIndex__surfaceDissolve, cast ([cursor, bits, mask] : Array<Dynamic>));

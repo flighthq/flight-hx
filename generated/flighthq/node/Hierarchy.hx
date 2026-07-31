@@ -285,10 +285,10 @@ class Hierarchy {
         _Runtime.callValue(addNodeChild, cast ([newParent, child] : Array<Dynamic>));
         _Runtime.callValue(inverseMatrix, cast ([localM, _Runtime.callValue(getNodeWorldMatrix, cast ([newParent] : Array<Dynamic>))] : Array<Dynamic>));
         _Runtime.callValue(multiplyMatrix, cast ([localM, localM, oldWorld] : Array<Dynamic>));
-        var a:Dynamic = _Runtime.field(localM, 'a');
-        var b:Dynamic = _Runtime.field(localM, 'b');
-        var c:Dynamic = _Runtime.field(localM, 'c');
-        var d:Dynamic = _Runtime.field(localM, 'd');
+        var a:Dynamic = localM.a;
+        var b:Dynamic = localM.b;
+        var c:Dynamic = localM.c;
+        var d:Dynamic = localM.d;
         (child.scaleX = cast (HxMath.sqrt(((a * a) + (b * b))) : Dynamic));
         (child.scaleY = cast (HxMath.sqrt(((c * c) + (d * d))) : Dynamic));
         if ((cast ((cast ((a * d) - (b * c)) : Float) < (cast 0.0 : Float)) : Bool)) {
@@ -296,8 +296,8 @@ class Hierarchy {
         }
         var skewYRad:Dynamic = (child.skewY * Hierarchy.DEG_TO_RAD__hierarchy);
         (child.rotation = cast (((HxMath.atan2(b, a) - skewYRad) * Hierarchy.RAD_TO_DEG__hierarchy) : Dynamic));
-        (child.x = cast ((_Runtime.field(localM, 'tx') + ((a * child.pivotX) + (c * child.pivotY))) : Dynamic));
-        (child.y = cast ((_Runtime.field(localM, 'ty') + ((b * child.pivotX) + (d * child.pivotY))) : Dynamic));
+        (child.x = cast ((localM.tx + ((a * child.pivotX) + (c * child.pivotY))) : Dynamic));
+        (child.y = cast ((localM.ty + ((b * child.pivotX) + (d * child.pivotY))) : Dynamic));
         _Runtime.callValue(invalidateNodeLocalTransform, cast ([child] : Array<Dynamic>));
       } catch (__error:Dynamic) { throw __error; }
     } catch (__finallyError0:Dynamic) {

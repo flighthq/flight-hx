@@ -37,9 +37,9 @@ class SurfaceConvolution {
     preserveAlpha = _Runtime.coalesce(_Runtime.field(options, 'preserveAlpha'), function():Dynamic return cast true);
     offsetX = HxMath.floor((matrixX / 2.0));
     offsetY = HxMath.floor((matrixY / 2.0));
-    surfaceWidth = _Runtime.field(_Runtime.field(source, 'surface'), 'width');
-    surfaceHeight = _Runtime.field(_Runtime.field(source, 'surface'), 'height');
-    data = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
+    surfaceWidth = _Runtime.field(source, 'surface').width;
+    surfaceHeight = _Runtime.field(source, 'surface').height;
+    data = _Runtime.field(source, 'surface').data;
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(source, 'height') : Float)) : Bool)) {

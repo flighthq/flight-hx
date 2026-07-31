@@ -22,8 +22,8 @@ class MeshGeometryCompute {
     var cy:Dynamic = cast _Runtime.UNDEFINED;
     var cz:Dynamic = cast _Runtime.UNDEFINED;
     var radiusSq:Dynamic = cast _Runtime.UNDEFINED;
-    vertices = _Runtime.field(geometry, 'vertices');
-    floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
+    vertices = geometry.vertices;
+    floatsPerVertex = (_Runtime.field(geometry.layout, 'stride') / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     if ((cast _Runtime.strictEquals(vertexCount, 0.0) : Bool)) {
       (out.center.x = cast (0.0 : Dynamic));
@@ -86,8 +86,8 @@ class MeshGeometryCompute {
     var maxX:Dynamic = cast _Runtime.UNDEFINED;
     var maxY:Dynamic = cast _Runtime.UNDEFINED;
     var maxZ:Dynamic = cast _Runtime.UNDEFINED;
-    vertices = _Runtime.field(geometry, 'vertices');
-    floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
+    vertices = geometry.vertices;
+    floatsPerVertex = (_Runtime.field(geometry.layout, 'stride') / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     minX = HxMath.POSITIVE_INFINITY;
     minY = HxMath.POSITIVE_INFINITY;
@@ -125,11 +125,11 @@ class MeshGeometryCompute {
     var indices:Dynamic = cast _Runtime.UNDEFINED;
     var indexCount:Dynamic = cast _Runtime.UNDEFINED;
     var dstVerts:Dynamic = cast _Runtime.UNDEFINED;
-    srcVerts = _Runtime.field(geometry, 'vertices');
-    floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    indices = _Runtime.field(geometry, 'indices');
+    srcVerts = geometry.vertices;
+    floatsPerVertex = (_Runtime.field(geometry.layout, 'stride') / 4.0);
+    indices = geometry.indices;
     indexCount = _Runtime.select(indices, function():Dynamic return cast _Runtime.field(indices, 'length'), function():Dynamic return cast ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(srcVerts, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic)));
-    dstVerts = _Runtime.field(out, 'vertices');
+    dstVerts = out.vertices;
     {
       var t:Dynamic = 0.0;
       while ((cast ((cast (t + 2.0) : Float) < (cast indexCount : Float)) : Bool)) {
@@ -178,7 +178,7 @@ class MeshGeometryCompute {
         (t = cast ((t + 3.0) : Dynamic));
       }
     }
-    _Runtime.incrementField(out, 'version', 1, true);
+    out.version++;
   }
 
   public static function computeMeshGeometryNormals(out:MeshGeometry, geometry:MeshGeometry):Void {
@@ -189,10 +189,10 @@ class MeshGeometryCompute {
     var indexCount:Dynamic = cast _Runtime.UNDEFINED;
     var accum:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
-    vertices = _Runtime.field(geometry, 'vertices');
-    floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
+    vertices = geometry.vertices;
+    floatsPerVertex = (_Runtime.field(geometry.layout, 'stride') / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
-    indices = _Runtime.field(geometry, 'indices');
+    indices = geometry.indices;
     indexCount = _Runtime.select(indices, function():Dynamic return cast _Runtime.field(indices, 'length'), function():Dynamic return cast vertexCount);
     accum = new flighthq._internal._Float64Array((vertexCount * 3.0));
     {
@@ -225,7 +225,7 @@ class MeshGeometryCompute {
         (t = cast ((t + 3.0) : Dynamic));
       }
     }
-    target = _Runtime.field(out, 'vertices');
+    target = out.vertices;
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
@@ -256,10 +256,10 @@ class MeshGeometryCompute {
     var tan:Dynamic = cast _Runtime.UNDEFINED;
     var bitan:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
-    vertices = _Runtime.field(geometry, 'vertices');
-    floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
+    vertices = geometry.vertices;
+    floatsPerVertex = (_Runtime.field(geometry.layout, 'stride') / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
-    indices = _Runtime.field(geometry, 'indices');
+    indices = geometry.indices;
     indexCount = _Runtime.select(indices, function():Dynamic return cast _Runtime.field(indices, 'length'), function():Dynamic return cast vertexCount);
     tan = new flighthq._internal._Float64Array((vertexCount * 3.0));
     bitan = new flighthq._internal._Float64Array((vertexCount * 3.0));
@@ -314,7 +314,7 @@ class MeshGeometryCompute {
         (t = cast ((t + 3.0) : Dynamic));
       }
     }
-    target = _Runtime.field(out, 'vertices');
+    target = out.vertices;
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {

@@ -34,7 +34,7 @@ class CanvasFillPattern {
   public static final IDENTITY__canvasFillPattern:Dynamic = _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>));
 
   public static function tp__canvasFillPattern(m:MatrixLike, x:Float, y:Float):Array<Float> {
-    return cast cast ([(((_Runtime.field(m, 'a') * x) + (_Runtime.field(m, 'c') * y)) + _Runtime.field(m, 'tx')), (((_Runtime.field(m, 'b') * x) + (_Runtime.field(m, 'd') * y)) + _Runtime.field(m, 'ty'))] : Array<Dynamic>);
+    return cast cast ([(((m.a * x) + (m.c * y)) + m.tx), (((m.b * x) + (m.d * y)) + m.ty)] : Array<Dynamic>);
     return cast null;
   }
 

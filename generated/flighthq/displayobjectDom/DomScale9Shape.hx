@@ -85,12 +85,12 @@ class DomScale9Shape {
     var d:Dynamic = cast _Runtime.UNDEFINED;
     var tx:Dynamic = cast _Runtime.UNDEFINED;
     var ty:Dynamic = cast _Runtime.UNDEFINED;
-    a = ((cast !_Runtime.strictEquals(scaleX, 0.0) : Bool) ? (cast (_Runtime.field(transform, 'a') / scaleX) : Dynamic) : (cast _Runtime.field(transform, 'a') : Dynamic));
-    b = ((cast !_Runtime.strictEquals(scaleX, 0.0) : Bool) ? (cast (_Runtime.field(transform, 'b') / scaleX) : Dynamic) : (cast _Runtime.field(transform, 'b') : Dynamic));
-    c = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (_Runtime.field(transform, 'c') / scaleY) : Dynamic) : (cast _Runtime.field(transform, 'c') : Dynamic));
-    d = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (_Runtime.field(transform, 'd') / scaleY) : Dynamic) : (cast _Runtime.field(transform, 'd') : Dynamic));
-    tx = ((cast roundPixels : Bool) ? (cast HxMath.fround(_Runtime.field(transform, 'tx')) : Dynamic) : (cast _Runtime.field(transform, 'tx') : Dynamic));
-    ty = ((cast roundPixels : Bool) ? (cast HxMath.fround(_Runtime.field(transform, 'ty')) : Dynamic) : (cast _Runtime.field(transform, 'ty') : Dynamic));
+    a = ((cast !_Runtime.strictEquals(scaleX, 0.0) : Bool) ? (cast (transform.a / scaleX) : Dynamic) : (cast transform.a : Dynamic));
+    b = ((cast !_Runtime.strictEquals(scaleX, 0.0) : Bool) ? (cast (transform.b / scaleX) : Dynamic) : (cast transform.b : Dynamic));
+    c = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (transform.c / scaleY) : Dynamic) : (cast transform.c : Dynamic));
+    d = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (transform.d / scaleY) : Dynamic) : (cast transform.d : Dynamic));
+    tx = ((cast roundPixels : Bool) ? (cast HxMath.fround(transform.tx) : Dynamic) : (cast transform.tx : Dynamic));
+    ty = ((cast roundPixels : Bool) ? (cast HxMath.fround(transform.ty) : Dynamic) : (cast transform.ty : Dynamic));
     _Runtime.setField(_Runtime.field(element, 'style'), 'transform', 'matrix(' + Std.string(a) + ',' + Std.string(b) + ',' + Std.string(c) + ',' + Std.string(d) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')');
   }
 }

@@ -9,9 +9,9 @@ class DomTransform {
   public static function setDomTransform(element:Dynamic, transform:Matrix, roundPixels:Bool):Void {
     var tx:Dynamic = cast _Runtime.UNDEFINED;
     var ty:Dynamic = cast _Runtime.UNDEFINED;
-    tx = ((cast roundPixels : Bool) ? (cast HxMath.fround(_Runtime.field(transform, 'tx')) : Dynamic) : (cast _Runtime.field(transform, 'tx') : Dynamic));
-    ty = ((cast roundPixels : Bool) ? (cast HxMath.fround(_Runtime.field(transform, 'ty')) : Dynamic) : (cast _Runtime.field(transform, 'ty') : Dynamic));
-    _Runtime.setField(_Runtime.field(element, 'style'), 'transform', 'matrix(' + Std.string(_Runtime.field(transform, 'a')) + ',' + Std.string(_Runtime.field(transform, 'b')) + ',' + Std.string(_Runtime.field(transform, 'c')) + ',' + Std.string(_Runtime.field(transform, 'd')) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')');
+    tx = ((cast roundPixels : Bool) ? (cast HxMath.fround(transform.tx) : Dynamic) : (cast transform.tx : Dynamic));
+    ty = ((cast roundPixels : Bool) ? (cast HxMath.fround(transform.ty) : Dynamic) : (cast transform.ty : Dynamic));
+    _Runtime.setField(_Runtime.field(element, 'style'), 'transform', 'matrix(' + Std.string(transform.a) + ',' + Std.string(transform.b) + ',' + Std.string(transform.c) + ',' + Std.string(transform.d) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')');
   }
 
   public static function setDomTransformWithOffset(element:Dynamic, transform:Matrix, offsetX:Float, offsetY:Float, roundPixels:Bool):Void {
@@ -27,8 +27,8 @@ class DomTransform {
     b = _Runtime.field(__destructure0, 'b');
     c = _Runtime.field(__destructure0, 'c');
     d = _Runtime.field(__destructure0, 'd');
-    tx = (((a * offsetX) + (c * offsetY)) + _Runtime.field(transform, 'tx'));
-    ty = (((b * offsetX) + (d * offsetY)) + _Runtime.field(transform, 'ty'));
+    tx = (((a * offsetX) + (c * offsetY)) + transform.tx);
+    ty = (((b * offsetX) + (d * offsetY)) + transform.ty);
     if ((cast roundPixels : Bool)) {
       (tx = cast (HxMath.fround(tx) : Dynamic));
       (ty = cast (HxMath.fround(ty) : Dynamic));

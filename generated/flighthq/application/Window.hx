@@ -219,12 +219,12 @@ class Window {
   public static function computeWindowDeviceTransform(win:ApplicationWindow, out:Matrix):Matrix {
     var scale:Dynamic = cast _Runtime.UNDEFINED;
     scale = _Runtime.field(win, 'devicePixelRatio');
-    _Runtime.setField(out, 'a', scale);
-    _Runtime.setField(out, 'b', 0.0);
-    _Runtime.setField(out, 'c', 0.0);
-    _Runtime.setField(out, 'd', scale);
-    _Runtime.setField(out, 'tx', 0.0);
-    _Runtime.setField(out, 'ty', 0.0);
+    (out.a = cast (scale : Dynamic));
+    (out.b = cast (0.0 : Dynamic));
+    (out.c = cast (0.0 : Dynamic));
+    (out.d = cast (scale : Dynamic));
+    (out.tx = cast (0.0 : Dynamic));
+    (out.ty = cast (0.0 : Dynamic));
     return cast out;
     return cast null;
   }

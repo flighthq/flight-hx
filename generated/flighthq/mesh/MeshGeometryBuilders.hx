@@ -882,7 +882,7 @@ class MeshGeometryBuilders {
     _Runtime.callValue(computeMeshGeometryTangents, cast ([geometry, geometry] : Array<Dynamic>));
     bounds = _Runtime.callValue(createAabb, cast ([] : Array<Dynamic>));
     _Runtime.callValue(computeMeshGeometryBounds, cast ([bounds, geometry] : Array<Dynamic>));
-    _Runtime.setField(geometry, 'bounds', bounds);
+    (geometry.bounds = cast (bounds : Dynamic));
     return cast geometry;
     return cast null;
   }

@@ -82,14 +82,14 @@ class Sprite {
       return;
     }
     if ((cast !_Runtime.strictEquals(_Runtime.field(data, 'atlas'), null) : Bool)) {
-      var region:Dynamic = _Runtime.find(_Runtime.field(_Runtime.field(data, 'atlas'), 'regions'), function(r:Dynamic) return _Runtime.strictEquals(_Runtime.field(r, 'id'), _Runtime.field(data, 'id')));
+      var region:Dynamic = _Runtime.find(_Runtime.field(_Runtime.field(data, 'atlas'), 'regions'), function(r:Dynamic) return _Runtime.strictEquals(r.id, _Runtime.field(data, 'id')));
       if ((cast !_Runtime.strictEquals(region, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        var pivotX:Dynamic = _Runtime.coalesce(_Runtime.field(region, 'pivotX'), function():Dynamic return cast 0.0);
-        var pivotY:Dynamic = _Runtime.coalesce(_Runtime.field(region, 'pivotY'), function():Dynamic return cast 0.0);
+        var pivotX:Dynamic = _Runtime.coalesce(region.pivotX, function():Dynamic return cast 0.0);
+        var pivotY:Dynamic = _Runtime.coalesce(region.pivotY, function():Dynamic return cast 0.0);
         _Runtime.setField(out, 'x', ((cast _Runtime.strictEquals(pivotX, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast -pivotX : Dynamic)));
         _Runtime.setField(out, 'y', ((cast _Runtime.strictEquals(pivotY, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast -pivotY : Dynamic)));
-        _Runtime.setField(out, 'width', _Runtime.field(region, 'width'));
-        _Runtime.setField(out, 'height', _Runtime.field(region, 'height'));
+        _Runtime.setField(out, 'width', region.width);
+        _Runtime.setField(out, 'height', region.height);
       }
     }
   }
@@ -216,8 +216,8 @@ class Sprite {
     var pivotX:Dynamic = cast _Runtime.UNDEFINED;
     var pivotY:Dynamic = cast _Runtime.UNDEFINED;
     region = _Runtime.callValue(getSpriteRegion, cast ([source] : Array<Dynamic>));
-    pivotX = ((cast !_Runtime.strictEquals(region, null) : Bool) ? (cast _Runtime.coalesce(_Runtime.field(region, 'pivotX'), function():Dynamic return cast 0.0) : Dynamic) : (cast 0.0 : Dynamic));
-    pivotY = ((cast !_Runtime.strictEquals(region, null) : Bool) ? (cast _Runtime.coalesce(_Runtime.field(region, 'pivotY'), function():Dynamic return cast 0.0) : Dynamic) : (cast 0.0 : Dynamic));
+    pivotX = ((cast !_Runtime.strictEquals(region, null) : Bool) ? (cast _Runtime.coalesce(region.pivotX, function():Dynamic return cast 0.0) : Dynamic) : (cast 0.0 : Dynamic));
+    pivotY = ((cast !_Runtime.strictEquals(region, null) : Bool) ? (cast _Runtime.coalesce(region.pivotY, function():Dynamic return cast 0.0) : Dynamic) : (cast 0.0 : Dynamic));
     (out.x = cast (((cast _Runtime.strictEquals(pivotX, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast -pivotX : Dynamic)) : Dynamic));
     (out.y = cast (((cast _Runtime.strictEquals(pivotY, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast -pivotY : Dynamic)) : Dynamic));
   }
@@ -230,7 +230,7 @@ class Sprite {
     atlas = _Runtime.field(__destructure0, 'atlas');
     id = _Runtime.field(__destructure0, 'id');
     if ((cast _Runtime.strictEquals(atlas, null) : Bool)) { return cast null; }
-    return cast _Runtime.coalesce(_Runtime.find(_Runtime.field(atlas, 'regions'), function(r:Dynamic) return _Runtime.strictEquals(_Runtime.field(r, 'id'), id)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(_Runtime.find(_Runtime.field(atlas, 'regions'), function(r:Dynamic) return _Runtime.strictEquals(r.id, id)), function():Dynamic return cast null);
     return cast null;
   }
 

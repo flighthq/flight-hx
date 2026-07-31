@@ -54,14 +54,14 @@ class CanvasQuadBatch {
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false);
     }
     restoreMaterial = _Runtime.callValue(applyCanvasMaterial, cast ([state, _Runtime.field(quadBatch, 'material')] : Array<Dynamic>));
-    flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([_Runtime.field(transform, 'a'), _Runtime.field(transform, 'b'), _Runtime.field(transform, 'c'), _Runtime.field(transform, 'd'), _Runtime.field(transform, 'tx'), _Runtime.field(transform, 'ty')] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([transform.a, transform.b, transform.c, transform.d, transform.tx, transform.ty] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
         var id:Dynamic = flighthq._internal._StaticIndex.readUint16Array(ids, i);
         if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
         var region:Dynamic = flighthq._internal._StaticIndex.readArray(regions, id);
-        if ((cast ((cast ((cast _Runtime.field(region, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(region, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
+        if ((cast ((cast ((cast region.width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast region.height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
           i++;
           continue;
         }
@@ -69,16 +69,16 @@ class CanvasQuadBatch {
         if ((cast _Runtime.strictEquals(stride, 2.0) : Bool)) {
           var dx:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, offset);
           var dy:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (offset + 1.0));
-          flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([image, _Runtime.field(region, 'x'), _Runtime.field(region, 'y'), _Runtime.field(region, 'width'), _Runtime.field(region, 'height'), ((cast roundPixels : Bool) ? (cast (_Runtime.toInt32(dx) | 0) : Dynamic) : (cast dx : Dynamic)), ((cast roundPixels : Bool) ? (cast (_Runtime.toInt32(dy) | 0) : Dynamic) : (cast dy : Dynamic)), _Runtime.field(region, 'width'), _Runtime.field(region, 'height')] : Array<Dynamic>));
+          flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([image, region.x, region.y, region.width, region.height, ((cast roundPixels : Bool) ? (cast (_Runtime.toInt32(dx) | 0) : Dynamic) : (cast dx : Dynamic)), ((cast roundPixels : Bool) ? (cast (_Runtime.toInt32(dy) | 0) : Dynamic) : (cast dy : Dynamic)), region.width, region.height] : Array<Dynamic>));
         } else {
           _Runtime.callValue(setMatrixFromFloat32Array, cast ([quadTransform, offset, transforms] : Array<Dynamic>));
           _Runtime.callValue(multiplyMatrix, cast ([quadTransform, transform, quadTransform] : Array<Dynamic>));
           if ((cast roundPixels : Bool)) {
-            _Runtime.setField(quadTransform, 'tx', HxMath.round(_Runtime.field(quadTransform, 'tx')));
-            _Runtime.setField(quadTransform, 'ty', HxMath.round(_Runtime.field(quadTransform, 'ty')));
+            (quadTransform.tx = cast (HxMath.round(quadTransform.tx) : Dynamic));
+            (quadTransform.ty = cast (HxMath.round(quadTransform.ty) : Dynamic));
           }
-          flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([_Runtime.field(quadTransform, 'a'), _Runtime.field(quadTransform, 'b'), _Runtime.field(quadTransform, 'c'), _Runtime.field(quadTransform, 'd'), _Runtime.field(quadTransform, 'tx'), _Runtime.field(quadTransform, 'ty')] : Array<Dynamic>));
-          flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([image, _Runtime.field(region, 'x'), _Runtime.field(region, 'y'), _Runtime.field(region, 'width'), _Runtime.field(region, 'height'), 0.0, 0.0, _Runtime.field(region, 'width'), _Runtime.field(region, 'height')] : Array<Dynamic>));
+          flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([quadTransform.a, quadTransform.b, quadTransform.c, quadTransform.d, quadTransform.tx, quadTransform.ty] : Array<Dynamic>));
+          flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([image, region.x, region.y, region.width, region.height, 0.0, 0.0, region.width, region.height] : Array<Dynamic>));
         }
         i++;
       }

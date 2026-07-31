@@ -18,8 +18,8 @@ class SurfaceCoverage {
     bg = (_Runtime.toInt32((_Runtime.toInt32(backgroundColor) >> 16)) & 255);
     bb = (_Runtime.toInt32((_Runtime.toInt32(backgroundColor) >> 8)) & 255);
     ba = (_Runtime.toInt32(backgroundColor) & 255);
-    data = _Runtime.field(source, 'data');
-    totalPixels = (_Runtime.field(source, 'width') * _Runtime.field(source, 'height'));
+    data = source.data;
+    totalPixels = (source.width * source.height);
     if ((cast _Runtime.strictEquals(totalPixels, 0.0) : Bool)) { return cast 0.0; }
     covered = 0.0;
     {

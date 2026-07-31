@@ -2,6 +2,8 @@ import { createHash } from 'node:crypto';
 import path from 'node:path';
 import ts from 'typescript';
 
+import { portConfig } from '../../port.config.ts';
+
 import { upstreamTypeScriptProgram } from './program.ts';
 
 export interface TypedStructCandidate {
@@ -516,15 +518,33 @@ interface TypedStructCandidateGroup {
   source: string;
 }
 
-function auditOnlyTypedStructCandidates(groups: readonly TypedStructCandidateGroup[]): readonly TypedStructCandidate[] {
+export const tranche6aDirectTypedStructIds: readonly string[] = [
+  '@flighthq/types:upstream/packages/types/src/ParticleEmitterConfig.ts#ParticleEmitterConfig',
+  '@flighthq/types:upstream/packages/types/src/Matrix.ts#Matrix',
+  '@flighthq/types:upstream/packages/types/src/Surface.ts#Surface',
+  '@flighthq/types:upstream/packages/types/src/ParticleEmitter.ts#ParticleEmitterData',
+  '@flighthq/types:upstream/packages/types/src/TextureAtlasRegion.ts#TextureAtlasRegion',
+  '@flighthq/types:upstream/packages/types/src/ParticleEmitterState.ts#ParticleEmitterState',
+  '@flighthq/types:upstream/packages/types/src/Screen.ts#ScreenInfo',
+  '@flighthq/types:upstream/packages/types/src/MeshGeometry.ts#MeshGeometry',
+];
+
+const tranche6aDirectTypedStructIdSet = new Set(tranche6aDirectTypedStructIds);
+
+function typedStructCandidatesFromGroups(
+  groups: readonly TypedStructCandidateGroup[],
+): readonly TypedStructCandidate[] {
   return groups.flatMap((group) =>
-    group.names.map((name) => ({
-      emission: 'audit-only' as const,
-      name,
-      packageName: group.packageName,
-      purpose: group.purpose,
-      source: group.source,
-    })),
+    group.names.map((name) => {
+      const id = `${group.packageName}:${group.source}#${name}`;
+      return {
+        emission: tranche6aDirectTypedStructIdSet.has(id) ? ('direct' as const) : ('audit-only' as const),
+        name,
+        packageName: group.packageName,
+        purpose: group.purpose,
+        source: group.source,
+      };
+    }),
   );
 }
 
@@ -532,7 +552,7 @@ function auditOnlyTypedStructCandidates(groups: readonly TypedStructCandidateGro
 // silently enter the allowlist. Backend-owned host contracts, renderer/material records,
 // open or presence-sensitive shapes, declaration merges, and aliases of existing direct
 // identities remain outside this tranche.
-export const tranche6TypedStructCandidates: readonly TypedStructCandidate[] = auditOnlyTypedStructCandidates([
+export const tranche6TypedStructCandidates: readonly TypedStructCandidate[] = typedStructCandidatesFromGroups([
   {
     names: ['MeshGeometryOptions'],
     packageName: '@flighthq/mesh',
@@ -2184,9 +2204,11 @@ function isNullish(type: ts.Type): boolean {
 
 function isProductionUpstreamSource(source: ts.SourceFile): boolean {
   const normalized = source.fileName.split(path.sep).join('/');
+  const packageDirectory = /\/upstream\/packages\/([^/]+)\/src\//u.exec(normalized)?.[1];
   return (
-    normalized.includes('/upstream/packages/') &&
-    normalized.includes('/src/') &&
+    packageDirectory !== undefined &&
+    // Direct-access coverage is measured against the packages that can reach generated IR.
+    !(packageDirectory in portConfig.excludedPackages) &&
     !/\.(?:test|spec)\.tsx?$/u.test(normalized) &&
     !normalized.endsWith('.d.ts')
   );

@@ -90,7 +90,7 @@ class MorphMeshGeometry {
         v++;
       }
     }
-    _Runtime.incrementField(geometry, 'version', 1, true);
+    geometry.version++;
   }
 
   public static function captureMeshMorphBindPose(geometry:MeshGeometry):MeshMorphBindPose {

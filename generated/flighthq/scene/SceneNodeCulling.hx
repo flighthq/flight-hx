@@ -32,7 +32,7 @@ class SceneNodeCulling {
     if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return; }
     if ((cast _Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)) : Bool)) {
       var geom:Dynamic = _Runtime.field(node, 'geometry');
-      var localBounds:Dynamic = _Runtime.field(geom, 'bounds');
+      var localBounds:Dynamic = geom.bounds;
       if ((cast _Runtime.strictEquals(localBounds, null) : Bool)) {
         _Runtime.callValue(computeMeshGeometryBounds, cast ([SceneNodeCulling._scratchLocalAabb__sceneNodeCulling, geom] : Array<Dynamic>));
         (localBounds = cast (SceneNodeCulling._scratchLocalAabb__sceneNodeCulling : Dynamic));

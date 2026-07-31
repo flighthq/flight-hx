@@ -14,15 +14,15 @@ class SurfaceFlip {
     var stride:Dynamic = cast _Runtime.UNDEFINED;
     w = HxMath.min(_Runtime.field(dest, 'width'), _Runtime.field(source, 'width'));
     h = HxMath.min(_Runtime.field(dest, 'height'), _Runtime.field(source, 'height'));
-    data = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
-    stride = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
+    data = _Runtime.field(dest, 'surface').data;
+    stride = _Runtime.field(dest, 'surface').width;
     if ((cast _Runtime.callValue(SurfaceFlip.isSameRegion__surfaceFlip, cast ([dest, source] : Array<Dynamic>)) : Bool)) {
       var half:Dynamic = (_Runtime.toInt32(w) >> 1);
       {
         var py:Dynamic = 0.0;
         while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
           var y:Dynamic = (_Runtime.field(dest, 'y') + py);
-          if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
+          if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(dest, 'surface').height : Float)) : Bool)) : Bool)) { py++; continue; }
           {
             var px:Dynamic = 0.0;
             while ((cast ((cast px : Float) < (cast half : Float)) : Bool)) {
@@ -49,8 +49,8 @@ class SurfaceFlip {
     var stride:Dynamic = cast _Runtime.UNDEFINED;
     w = HxMath.min(_Runtime.field(dest, 'width'), _Runtime.field(source, 'width'));
     h = HxMath.min(_Runtime.field(dest, 'height'), _Runtime.field(source, 'height'));
-    data = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
-    stride = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
+    data = _Runtime.field(dest, 'surface').data;
+    stride = _Runtime.field(dest, 'surface').width;
     if ((cast _Runtime.callValue(SurfaceFlip.isSameRegion__surfaceFlip, cast ([dest, source] : Array<Dynamic>)) : Bool)) {
       var half:Dynamic = (_Runtime.toInt32(h) >> 1);
       {
@@ -58,7 +58,7 @@ class SurfaceFlip {
         while ((cast ((cast py : Float) < (cast half : Float)) : Bool)) {
           var yTop:Dynamic = (_Runtime.field(dest, 'y') + py);
           var yBottom:Dynamic = (_Runtime.field(dest, 'y') + ((h - 1.0) - py));
-          if ((cast ((cast ((cast ((cast ((cast yTop : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast yTop : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool) || (cast ((cast yBottom : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast yBottom : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
+          if ((cast ((cast ((cast ((cast ((cast yTop : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast yTop : Float) >= (cast _Runtime.field(dest, 'surface').height : Float)) : Bool)) : Bool) || (cast ((cast yBottom : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast yBottom : Float) >= (cast _Runtime.field(dest, 'surface').height : Float)) : Bool)) : Bool)) { py++; continue; }
           {
             var px:Dynamic = 0.0;
             while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
@@ -82,16 +82,16 @@ class SurfaceFlip {
     var dd:Dynamic = cast _Runtime.UNDEFINED;
     var sStride:Dynamic = cast _Runtime.UNDEFINED;
     var dStride:Dynamic = cast _Runtime.UNDEFINED;
-    sd = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
-    dd = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
-    sStride = _Runtime.field(_Runtime.field(source, 'surface'), 'width');
-    dStride = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
+    sd = _Runtime.field(source, 'surface').data;
+    dd = _Runtime.field(dest, 'surface').data;
+    sStride = _Runtime.field(source, 'surface').width;
+    dStride = _Runtime.field(dest, 'surface').width;
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
         var sy:Dynamic = (_Runtime.field(source, 'y') + ((cast mirrorY : Bool) ? (cast ((h - 1.0) - py) : Dynamic) : (cast py : Dynamic)));
         var dy:Dynamic = (_Runtime.field(dest, 'y') + py);
-        if ((cast ((cast ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'height') : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
+        if ((cast ((cast ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(source, 'surface').height : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast _Runtime.field(dest, 'surface').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {

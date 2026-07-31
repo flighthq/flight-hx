@@ -29,7 +29,7 @@ class SpritesheetAnimation {
         var regionId:Dynamic = _Runtime.field(flighthq._internal._StaticIndex.readArray(frames, i), 'id');
         var region:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(atlas, 'regions'), regionId);
         if ((cast _Runtime.strictEquals(region, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
-        var name:Dynamic = _Runtime.field(region, 'name');
+        var name:Dynamic = region.name;
         if ((cast _Runtime.strictEquals(name, null) : Bool)) { i++; continue; }
         var matches:Dynamic = ((cast _Runtime.strictEquals(_Runtime.typeofValue(pattern), 'string') : Bool) ? (cast ((cast _Runtime.strictEquals(name, pattern) : Bool) || (cast StringTools.startsWith(name, pattern) : Bool)) : Dynamic) : (cast _Runtime.callProperty(pattern, 'test', cast ([name] : Array<Dynamic>)) : Dynamic));
         if ((cast matches : Bool)) {

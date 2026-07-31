@@ -23,10 +23,10 @@ class Transform2d {
     var scaleY:Dynamic = cast _Runtime.UNDEFINED;
     var skewXDegrees:Dynamic = cast _Runtime.UNDEFINED;
     var skewYDegrees:Dynamic = cast _Runtime.UNDEFINED;
-    a = _Runtime.field(source, 'a');
-    b = _Runtime.field(source, 'b');
-    c = _Runtime.field(source, 'c');
-    d = _Runtime.field(source, 'd');
+    a = source.a;
+    b = source.b;
+    c = source.c;
+    d = source.d;
     scaleX = HxMath.sqrt(((a * a) + (b * b)));
     scaleY = ((cast ((cast ((a * d) - (b * c)) : Float) < (cast 0.0 : Float)) : Bool) ? (cast -HxMath.sqrt(((c * c) + (d * d))) : Dynamic) : (cast HxMath.sqrt(((c * c) + (d * d))) : Dynamic));
     skewXDegrees = (HxMath.atan2(-c, d) * Transform2d.RAD_TO_DEG__transform2d);
@@ -44,8 +44,8 @@ class Transform2d {
     _Runtime.setField(out, 'pivotY', 0.0);
     _Runtime.setField(out, 'scaleX', scaleX);
     _Runtime.setField(out, 'scaleY', scaleY);
-    _Runtime.setField(out, 'x', _Runtime.field(source, 'tx'));
-    _Runtime.setField(out, 'y', _Runtime.field(source, 'ty'));
+    _Runtime.setField(out, 'x', source.tx);
+    _Runtime.setField(out, 'y', source.ty);
   }
 
   public static final RAD_TO_DEG__transform2d:Dynamic = (180.0 / HxMath.PI);

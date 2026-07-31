@@ -16,10 +16,10 @@ class SurfaceEncode {
     var binary:Dynamic = cast _Runtime.UNDEFINED;
     var bytes:Dynamic = cast _Runtime.UNDEFINED;
     canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
-    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', _Runtime.field(source, 'width'));
-    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', _Runtime.field(source, 'height'));
-    domImageData = _Runtime.construct(_Runtime.field(_Runtime.globalValue('globalThis'), 'ImageData'), [_Runtime.field(source, 'width'), _Runtime.field(source, 'height')]);
-    _Runtime.callProperty(_Runtime.field(domImageData, 'data'), 'set', cast ([_Runtime.field(source, 'data')] : Array<Dynamic>));
+    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', source.width);
+    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', source.height);
+    domImageData = _Runtime.construct(_Runtime.field(_Runtime.globalValue('globalThis'), 'ImageData'), [source.width, source.height]);
+    _Runtime.callProperty(_Runtime.field(domImageData, 'data'), 'set', cast ([source.data] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([domImageData, 0.0, 0.0] : Array<Dynamic>));
     mimeType = ((cast _Runtime.strictEquals(format, 'jpeg') : Bool) ? (cast 'image/jpeg' : Dynamic) : (cast 'image/png' : Dynamic));
     dataUrl = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'toDataURL', cast ([mimeType, quality] : Array<Dynamic>));

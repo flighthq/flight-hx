@@ -19,11 +19,11 @@ class SurfaceChannel {
     var ad:Dynamic = cast _Runtime.UNDEFINED;
     w = HxMath.min(HxMath.min(HxMath.min(HxMath.min(_Runtime.field(out, 'width'), _Runtime.field(r, 'width')), _Runtime.field(g, 'width')), _Runtime.field(b, 'width')), _Runtime.field(a, 'width'));
     h = HxMath.min(HxMath.min(HxMath.min(HxMath.min(_Runtime.field(out, 'height'), _Runtime.field(r, 'height')), _Runtime.field(g, 'height')), _Runtime.field(b, 'height')), _Runtime.field(a, 'height'));
-    od = _Runtime.field(_Runtime.field(out, 'surface'), 'data');
-    rd = _Runtime.field(_Runtime.field(r, 'surface'), 'data');
-    gd = _Runtime.field(_Runtime.field(g, 'surface'), 'data');
-    bd = _Runtime.field(_Runtime.field(b, 'surface'), 'data');
-    ad = _Runtime.field(_Runtime.field(a, 'surface'), 'data');
+    od = _Runtime.field(out, 'surface').data;
+    rd = _Runtime.field(r, 'surface').data;
+    gd = _Runtime.field(g, 'surface').data;
+    bd = _Runtime.field(b, 'surface').data;
+    ad = _Runtime.field(a, 'surface').data;
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
@@ -32,7 +32,7 @@ class SurfaceChannel {
         var gy:Dynamic = (_Runtime.field(g, 'y') + py);
         var by:Dynamic = (_Runtime.field(b, 'y') + py);
         var ay:Dynamic = (_Runtime.field(a, 'y') + py);
-        if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast oy : Float) >= (cast _Runtime.field(_Runtime.field(out, 'surface'), 'height') : Float)) : Bool)) : Bool) || (cast ((cast ry : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast ry : Float) >= (cast _Runtime.field(_Runtime.field(r, 'surface'), 'height') : Float)) : Bool)) : Bool) || (cast ((cast gy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast gy : Float) >= (cast _Runtime.field(_Runtime.field(g, 'surface'), 'height') : Float)) : Bool)) : Bool) || (cast ((cast by : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast by : Float) >= (cast _Runtime.field(_Runtime.field(b, 'surface'), 'height') : Float)) : Bool)) : Bool) || (cast ((cast ay : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast ay : Float) >= (cast _Runtime.field(_Runtime.field(a, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
+        if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast oy : Float) >= (cast _Runtime.field(out, 'surface').height : Float)) : Bool)) : Bool) || (cast ((cast ry : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast ry : Float) >= (cast _Runtime.field(r, 'surface').height : Float)) : Bool)) : Bool) || (cast ((cast gy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast gy : Float) >= (cast _Runtime.field(g, 'surface').height : Float)) : Bool)) : Bool) || (cast ((cast by : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast by : Float) >= (cast _Runtime.field(b, 'surface').height : Float)) : Bool)) : Bool) || (cast ((cast ay : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast ay : Float) >= (cast _Runtime.field(a, 'surface').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
@@ -41,12 +41,12 @@ class SurfaceChannel {
             var gx:Dynamic = (_Runtime.field(g, 'x') + px);
             var bx:Dynamic = (_Runtime.field(b, 'x') + px);
             var ax:Dynamic = (_Runtime.field(a, 'x') + px);
-            if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ox : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast ox : Float) >= (cast _Runtime.field(_Runtime.field(out, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast rx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast rx : Float) >= (cast _Runtime.field(_Runtime.field(r, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast gx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast gx : Float) >= (cast _Runtime.field(_Runtime.field(g, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast bx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast bx : Float) >= (cast _Runtime.field(_Runtime.field(b, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast ax : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast ax : Float) >= (cast _Runtime.field(_Runtime.field(a, 'surface'), 'width') : Float)) : Bool)) : Bool)) { px++; continue; }
-            var di:Dynamic = (((oy * _Runtime.field(_Runtime.field(out, 'surface'), 'width')) + ox) * 4.0);
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, di, flighthq._internal._StaticIndex.readUint8ClampedArray(rd, (((ry * _Runtime.field(_Runtime.field(r, 'surface'), 'width')) + rx) * 4.0)));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, (di + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(gd, ((((gy * _Runtime.field(_Runtime.field(g, 'surface'), 'width')) + gx) * 4.0) + 1.0)));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(bd, ((((by * _Runtime.field(_Runtime.field(b, 'surface'), 'width')) + bx) * 4.0) + 2.0)));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, (di + 3.0), flighthq._internal._StaticIndex.readUint8ClampedArray(ad, ((((ay * _Runtime.field(_Runtime.field(a, 'surface'), 'width')) + ax) * 4.0) + 3.0)));
+            if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ox : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast ox : Float) >= (cast _Runtime.field(out, 'surface').width : Float)) : Bool)) : Bool) || (cast ((cast rx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast rx : Float) >= (cast _Runtime.field(r, 'surface').width : Float)) : Bool)) : Bool) || (cast ((cast gx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast gx : Float) >= (cast _Runtime.field(g, 'surface').width : Float)) : Bool)) : Bool) || (cast ((cast bx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast bx : Float) >= (cast _Runtime.field(b, 'surface').width : Float)) : Bool)) : Bool) || (cast ((cast ax : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast ax : Float) >= (cast _Runtime.field(a, 'surface').width : Float)) : Bool)) : Bool)) { px++; continue; }
+            var di:Dynamic = (((oy * _Runtime.field(out, 'surface').width) + ox) * 4.0);
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, di, flighthq._internal._StaticIndex.readUint8ClampedArray(rd, (((ry * _Runtime.field(r, 'surface').width) + rx) * 4.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, (di + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(gd, ((((gy * _Runtime.field(g, 'surface').width) + gx) * 4.0) + 1.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(bd, ((((by * _Runtime.field(b, 'surface').width) + bx) * 4.0) + 2.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, (di + 3.0), flighthq._internal._StaticIndex.readUint8ClampedArray(ad, ((((ay * _Runtime.field(a, 'surface').width) + ax) * 4.0) + 3.0)));
             px++;
           }
         }
@@ -64,9 +64,9 @@ class SurfaceChannel {
     var gData:Dynamic = cast _Runtime.UNDEFINED;
     var bData:Dynamic = cast _Runtime.UNDEFINED;
     var aData:Dynamic = cast _Runtime.UNDEFINED;
-    w = _Runtime.field(source, 'width');
-    h = _Runtime.field(source, 'height');
-    sd = _Runtime.field(source, 'data');
+    w = source.width;
+    h = source.height;
+    sd = source.data;
     rData = new flighthq._internal._UInt8ClampedArray(((w * h) * 4.0));
     gData = new flighthq._internal._UInt8ClampedArray(((w * h) * 4.0));
     bData = new flighthq._internal._UInt8ClampedArray(((w * h) * 4.0));
@@ -103,7 +103,7 @@ class SurfaceChannel {
   }
 
   public static function makeSurface__surfaceChannel(data:flighthq._internal._UInt8ClampedArray, width:Float, height:Float, source:Surface):Surface {
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: _Runtime.field(source, 'alphaType'), colorSpace: _Runtime.field(source, 'colorSpace'), compressed: null, data: data, format: _Runtime.field(source, 'format'), height: height, source: null, version: 0.0, width: width }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: source.alphaType, colorSpace: source.colorSpace, compressed: null, data: data, format: source.format, height: height, source: null, version: 0.0, width: width }] : Array<Dynamic>));
     return cast null;
   }
 }

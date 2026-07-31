@@ -43,15 +43,15 @@ class SurfaceWarp {
     m6 = _Runtime.getIndex(__destructure0, 6.0);
     m7 = _Runtime.getIndex(__destructure0, 7.0);
     m8 = _Runtime.getIndex(__destructure0, 8.0);
-    sd = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
-    dd = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
-    sStride = _Runtime.field(_Runtime.field(source, 'surface'), 'width');
-    dStride = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
+    sd = _Runtime.field(source, 'surface').data;
+    dd = _Runtime.field(dest, 'surface').data;
+    sStride = _Runtime.field(source, 'surface').width;
+    dStride = _Runtime.field(dest, 'surface').width;
     {
       var dy:Dynamic = 0.0;
       while ((cast ((cast dy : Float) < (cast dh : Float)) : Bool)) {
         var oy:Dynamic = (_Runtime.field(dest, 'y') + dy);
-        if ((cast ((cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast oy : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool)) { dy++; continue; }
+        if ((cast ((cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast oy : Float) >= (cast _Runtime.field(dest, 'surface').height : Float)) : Bool)) : Bool)) { dy++; continue; }
         {
           var dx:Dynamic = 0.0;
           while ((cast ((cast dx : Float) < (cast dw : Float)) : Bool)) {
@@ -70,7 +70,7 @@ class SurfaceWarp {
             var invW:Dynamic = (1.0 / w);
             var sx:Dynamic = ((((m0 * dx) + (m1 * dy)) + m2) * invW);
             var sy:Dynamic = ((((m3 * dx) + (m4 * dy)) + m5) * invW);
-            _Runtime.callValue(SurfaceWarp.warpSampleSurface__surfaceWarp, cast ([dd, di, sd, sw, sh, _Runtime.field(source, 'x'), _Runtime.field(source, 'y'), sStride, _Runtime.field(_Runtime.field(source, 'surface'), 'height'), sx, sy, sampleMode, edgeMode] : Array<Dynamic>));
+            _Runtime.callValue(SurfaceWarp.warpSampleSurface__surfaceWarp, cast ([dd, di, sd, sw, sh, _Runtime.field(source, 'x'), _Runtime.field(source, 'y'), sStride, _Runtime.field(source, 'surface').height, sx, sy, sampleMode, edgeMode] : Array<Dynamic>));
             dx++;
           }
         }

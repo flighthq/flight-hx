@@ -103,7 +103,7 @@ class RenderProxy {
   }
 
   public static function isRenderProxyVisible(data:RenderProxy2D):Bool {
-    return cast ((cast ((cast _Runtime.field(data, 'visible') : Bool) && (cast ((cast _Runtime.field(data, 'alpha') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) && (cast !(cast _Runtime.andValue(_Runtime.strictEquals(_Runtime.field(_Runtime.field(data, 'transform2D'), 'a'), 0.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(data, 'transform2D'), 'd'), 0.0)) : Bool) : Bool));
+    return cast ((cast ((cast _Runtime.field(data, 'visible') : Bool) && (cast ((cast _Runtime.field(data, 'alpha') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) && (cast !(cast _Runtime.andValue(_Runtime.strictEquals(_Runtime.field(data, 'transform2D').a, 0.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'transform2D').d, 0.0)) : Bool) : Bool));
     return cast null;
   }
 

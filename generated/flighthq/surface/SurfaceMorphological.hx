@@ -25,9 +25,9 @@ class SurfaceMorphological {
     r = HxMath.max(0.0, HxMath.round(radius));
     w = _Runtime.field(source, 'width');
     h = _Runtime.field(source, 'height');
-    surfaceWidth = _Runtime.field(_Runtime.field(source, 'surface'), 'width');
-    surfaceHeight = _Runtime.field(_Runtime.field(source, 'surface'), 'height');
-    data = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
+    surfaceWidth = _Runtime.field(source, 'surface').width;
+    surfaceHeight = _Runtime.field(source, 'surface').height;
+    data = _Runtime.field(source, 'surface').data;
     identity = ((cast dilate : Bool) ? (cast 0.0 : Dynamic) : (cast 255.0 : Dynamic));
     {
       var py:Dynamic = 0.0;

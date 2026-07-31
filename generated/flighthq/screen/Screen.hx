@@ -46,31 +46,31 @@ class Screen {
   }
 
   public static function copyScreenInfo__screen(src:ScreenInfo, dst:ScreenInfo):Void {
-    _Runtime.setField(dst, 'id', _Runtime.field(src, 'id'));
-    _Runtime.setField(dst, 'x', _Runtime.field(src, 'x'));
-    _Runtime.setField(dst, 'y', _Runtime.field(src, 'y'));
-    _Runtime.setField(dst, 'width', _Runtime.field(src, 'width'));
-    _Runtime.setField(dst, 'height', _Runtime.field(src, 'height'));
-    _Runtime.setField(dst, 'workWidth', _Runtime.field(src, 'workWidth'));
-    _Runtime.setField(dst, 'workHeight', _Runtime.field(src, 'workHeight'));
-    _Runtime.setField(dst, 'scaleFactor', _Runtime.field(src, 'scaleFactor'));
-    _Runtime.setField(dst, 'isPrimary', _Runtime.field(src, 'isPrimary'));
-    _Runtime.setField(dst, 'rotation', _Runtime.field(src, 'rotation'));
-    _Runtime.setField(dst, 'orientation', _Runtime.field(src, 'orientation'));
-    _Runtime.setField(dst, 'refreshRate', _Runtime.field(src, 'refreshRate'));
-    _Runtime.setField(dst, 'colorDepth', _Runtime.field(src, 'colorDepth'));
-    _Runtime.setField(dst, 'pixelDepth', _Runtime.field(src, 'pixelDepth'));
-    _Runtime.setField(dst, 'physicalWidth', _Runtime.field(src, 'physicalWidth'));
-    _Runtime.setField(dst, 'physicalHeight', _Runtime.field(src, 'physicalHeight'));
-    _Runtime.setField(dst, 'isHdr', _Runtime.field(src, 'isHdr'));
-    _Runtime.setField(dst, 'colorSpace', _Runtime.field(src, 'colorSpace'));
-    _Runtime.setField(dst, 'maxLuminance', _Runtime.field(src, 'maxLuminance'));
-    _Runtime.setField(dst, 'depthPerComponent', _Runtime.field(src, 'depthPerComponent'));
-    _Runtime.setField(dst, 'dpi', _Runtime.field(src, 'dpi'));
-    _Runtime.setField(dst, 'label', _Runtime.field(src, 'label'));
-    _Runtime.setField(dst, 'internal', _Runtime.field(src, 'internal'));
-    _Runtime.setField(dst, 'touchSupport', _Runtime.field(src, 'touchSupport'));
-    _Runtime.setField(dst, 'monochrome', _Runtime.field(src, 'monochrome'));
+    (dst.id = cast (src.id : Dynamic));
+    (dst.x = cast (src.x : Dynamic));
+    (dst.y = cast (src.y : Dynamic));
+    (dst.width = cast (src.width : Dynamic));
+    (dst.height = cast (src.height : Dynamic));
+    (dst.workWidth = cast (src.workWidth : Dynamic));
+    (dst.workHeight = cast (src.workHeight : Dynamic));
+    (dst.scaleFactor = cast (src.scaleFactor : Dynamic));
+    (dst.isPrimary = cast (src.isPrimary : Dynamic));
+    (dst.rotation = cast (src.rotation : Dynamic));
+    (dst.orientation = cast (src.orientation : Dynamic));
+    (dst.refreshRate = cast (src.refreshRate : Dynamic));
+    (dst.colorDepth = cast (src.colorDepth : Dynamic));
+    (dst.pixelDepth = cast (src.pixelDepth : Dynamic));
+    (dst.physicalWidth = cast (src.physicalWidth : Dynamic));
+    (dst.physicalHeight = cast (src.physicalHeight : Dynamic));
+    (dst.isHdr = cast (src.isHdr : Dynamic));
+    (dst.colorSpace = cast (src.colorSpace : Dynamic));
+    (dst.maxLuminance = cast (src.maxLuminance : Dynamic));
+    (dst.depthPerComponent = cast (src.depthPerComponent : Dynamic));
+    (dst.dpi = cast (src.dpi : Dynamic));
+    (dst.label = cast (src.label : Dynamic));
+    (dst.internal = cast (src.internal : Dynamic));
+    (dst.touchSupport = cast (src.touchSupport : Dynamic));
+    (dst.monochrome = cast (src.monochrome : Dynamic));
   }
 
   public static function createScreenInfo():ScreenInfo {
@@ -117,31 +117,31 @@ class Screen {
       (_cachedScreens = cast (null : Dynamic));
     };
     buildScreenInfoFromDetailed = function buildScreenInfoFromDetailed(sd:ScreenDetailed__screen, index:Float, primaryIndex:Float, out:ScreenInfo):Void {
-      _Runtime.setField(out, 'id', index);
-      _Runtime.setField(out, 'x', _Runtime.field(sd, 'left'));
-      _Runtime.setField(out, 'y', _Runtime.field(sd, 'top'));
-      _Runtime.setField(out, 'width', _Runtime.field(sd, 'width'));
-      _Runtime.setField(out, 'height', _Runtime.field(sd, 'height'));
-      _Runtime.setField(out, 'workWidth', _Runtime.field(sd, 'availWidth'));
-      _Runtime.setField(out, 'workHeight', _Runtime.field(sd, 'availHeight'));
-      _Runtime.setField(out, 'scaleFactor', ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(sd, 'devicePixelRatio')), 'number') : Bool) ? (cast _Runtime.field(sd, 'devicePixelRatio') : Dynamic) : (cast 1.0 : Dynamic)));
-      _Runtime.setField(out, 'isPrimary', ((cast _Runtime.strictEquals(index, primaryIndex) : Bool) || (cast _Runtime.coalesce(_Runtime.field(sd, 'isPrimary'), function():Dynamic return cast _Runtime.strictEquals(index, 0.0)) : Bool)));
-      _Runtime.setField(out, 'rotation', _Runtime.callValue(Screen.getWebRotation__screen, cast ([] : Array<Dynamic>)));
-      _Runtime.setField(out, 'orientation', _Runtime.callValue(Screen.getWebOrientation__screen, cast ([] : Array<Dynamic>)));
-      _Runtime.setField(out, 'refreshRate', ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(sd, 'refreshRate')), 'number') : Bool) && (cast ((cast _Runtime.field(sd, 'refreshRate') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.field(sd, 'refreshRate') : Dynamic) : (cast -1.0 : Dynamic)));
-      _Runtime.setField(out, 'colorDepth', ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(sd, 'colorDepth')), 'number') : Bool) ? (cast _Runtime.field(sd, 'colorDepth') : Dynamic) : (cast -1.0 : Dynamic)));
-      _Runtime.setField(out, 'pixelDepth', ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(sd, 'pixelDepth')), 'number') : Bool) ? (cast _Runtime.field(sd, 'pixelDepth') : Dynamic) : (cast -1.0 : Dynamic)));
-      _Runtime.setField(out, 'physicalWidth', HxMath.round((_Runtime.field(out, 'width') * _Runtime.field(out, 'scaleFactor'))));
-      _Runtime.setField(out, 'physicalHeight', HxMath.round((_Runtime.field(out, 'height') * _Runtime.field(out, 'scaleFactor'))));
-      _Runtime.setField(out, 'isHdr', _Runtime.callValue(Screen.getWebIsHdr__screen, cast ([] : Array<Dynamic>)));
-      _Runtime.setField(out, 'colorSpace', _Runtime.callValue(Screen.getWebColorSpace__screen, cast ([] : Array<Dynamic>)));
-      _Runtime.setField(out, 'maxLuminance', -1.0);
-      _Runtime.setField(out, 'depthPerComponent', -1.0);
-      _Runtime.setField(out, 'dpi', -1.0);
-      _Runtime.setField(out, 'label', ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(sd, 'label')), 'string') : Bool) ? (cast _Runtime.field(sd, 'label') : Dynamic) : (cast '' : Dynamic)));
-      _Runtime.setField(out, 'internal', _Runtime.coalesce(_Runtime.field(sd, 'isInternal'), function():Dynamic return cast false));
-      _Runtime.setField(out, 'touchSupport', 'unknown');
-      _Runtime.setField(out, 'monochrome', false);
+      (out.id = cast (index : Dynamic));
+      (out.x = cast (_Runtime.field(sd, 'left') : Dynamic));
+      (out.y = cast (_Runtime.field(sd, 'top') : Dynamic));
+      (out.width = cast (_Runtime.field(sd, 'width') : Dynamic));
+      (out.height = cast (_Runtime.field(sd, 'height') : Dynamic));
+      (out.workWidth = cast (_Runtime.field(sd, 'availWidth') : Dynamic));
+      (out.workHeight = cast (_Runtime.field(sd, 'availHeight') : Dynamic));
+      (out.scaleFactor = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(sd, 'devicePixelRatio')), 'number') : Bool) ? (cast _Runtime.field(sd, 'devicePixelRatio') : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
+      (out.isPrimary = cast (((cast _Runtime.strictEquals(index, primaryIndex) : Bool) || (cast _Runtime.coalesce(_Runtime.field(sd, 'isPrimary'), function():Dynamic return cast _Runtime.strictEquals(index, 0.0)) : Bool)) : Dynamic));
+      (out.rotation = cast (_Runtime.callValue(Screen.getWebRotation__screen, cast ([] : Array<Dynamic>)) : Dynamic));
+      (out.orientation = cast (_Runtime.callValue(Screen.getWebOrientation__screen, cast ([] : Array<Dynamic>)) : Dynamic));
+      (out.refreshRate = cast (((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(sd, 'refreshRate')), 'number') : Bool) && (cast ((cast _Runtime.field(sd, 'refreshRate') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.field(sd, 'refreshRate') : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
+      (out.colorDepth = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(sd, 'colorDepth')), 'number') : Bool) ? (cast _Runtime.field(sd, 'colorDepth') : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
+      (out.pixelDepth = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(sd, 'pixelDepth')), 'number') : Bool) ? (cast _Runtime.field(sd, 'pixelDepth') : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
+      (out.physicalWidth = cast (HxMath.round((out.width * out.scaleFactor)) : Dynamic));
+      (out.physicalHeight = cast (HxMath.round((out.height * out.scaleFactor)) : Dynamic));
+      (out.isHdr = cast (_Runtime.callValue(Screen.getWebIsHdr__screen, cast ([] : Array<Dynamic>)) : Dynamic));
+      (out.colorSpace = cast (_Runtime.callValue(Screen.getWebColorSpace__screen, cast ([] : Array<Dynamic>)) : Dynamic));
+      (out.maxLuminance = cast (-1.0 : Dynamic));
+      (out.depthPerComponent = cast (-1.0 : Dynamic));
+      (out.dpi = cast (-1.0 : Dynamic));
+      (out.label = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(sd, 'label')), 'string') : Bool) ? (cast _Runtime.field(sd, 'label') : Dynamic) : (cast '' : Dynamic)) : Dynamic));
+      (out.internal = cast (_Runtime.coalesce(_Runtime.field(sd, 'isInternal'), function():Dynamic return cast false) : Dynamic));
+      (out.touchSupport = cast ('unknown' : Dynamic));
+      (out.monochrome = cast (false : Dynamic));
     };
     buildCurrentScreenInfo = function buildCurrentScreenInfo(out:ScreenInfo):Void {
       var s:Dynamic = cast _Runtime.UNDEFINED;
@@ -158,31 +158,31 @@ class Screen {
         return;
       }
       s = flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screen');
-      _Runtime.setField(out, 'id', 0.0);
-      _Runtime.setField(out, 'x', 0.0);
-      _Runtime.setField(out, 'y', 0.0);
-      _Runtime.setField(out, 'width', _Runtime.field(s, 'width'));
-      _Runtime.setField(out, 'height', _Runtime.field(s, 'height'));
-      _Runtime.setField(out, 'workWidth', _Runtime.field(s, 'availWidth'));
-      _Runtime.setField(out, 'workHeight', _Runtime.field(s, 'availHeight'));
-      _Runtime.setField(out, 'scaleFactor', ((cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'devicePixelRatio')), 'number') : Bool) ? (cast flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'devicePixelRatio') : Dynamic) : (cast 1.0 : Dynamic)));
-      _Runtime.setField(out, 'isPrimary', true);
-      _Runtime.setField(out, 'rotation', _Runtime.callValue(Screen.getWebRotation__screen, cast ([] : Array<Dynamic>)));
-      _Runtime.setField(out, 'orientation', _Runtime.callValue(Screen.getWebOrientation__screen, cast ([] : Array<Dynamic>)));
-      _Runtime.setField(out, 'refreshRate', -1.0);
-      _Runtime.setField(out, 'colorDepth', ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(s, 'colorDepth')), 'number') : Bool) ? (cast _Runtime.field(s, 'colorDepth') : Dynamic) : (cast -1.0 : Dynamic)));
-      _Runtime.setField(out, 'pixelDepth', ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(s, 'pixelDepth')), 'number') : Bool) ? (cast _Runtime.field(s, 'pixelDepth') : Dynamic) : (cast -1.0 : Dynamic)));
-      _Runtime.setField(out, 'physicalWidth', HxMath.round((_Runtime.field(out, 'width') * _Runtime.field(out, 'scaleFactor'))));
-      _Runtime.setField(out, 'physicalHeight', HxMath.round((_Runtime.field(out, 'height') * _Runtime.field(out, 'scaleFactor'))));
-      _Runtime.setField(out, 'isHdr', _Runtime.callValue(Screen.getWebIsHdr__screen, cast ([] : Array<Dynamic>)));
-      _Runtime.setField(out, 'colorSpace', _Runtime.callValue(Screen.getWebColorSpace__screen, cast ([] : Array<Dynamic>)));
-      _Runtime.setField(out, 'maxLuminance', -1.0);
-      _Runtime.setField(out, 'depthPerComponent', -1.0);
-      _Runtime.setField(out, 'dpi', -1.0);
-      _Runtime.setField(out, 'label', '');
-      _Runtime.setField(out, 'internal', false);
-      _Runtime.setField(out, 'touchSupport', 'unknown');
-      _Runtime.setField(out, 'monochrome', false);
+      (out.id = cast (0.0 : Dynamic));
+      (out.x = cast (0.0 : Dynamic));
+      (out.y = cast (0.0 : Dynamic));
+      (out.width = cast (_Runtime.field(s, 'width') : Dynamic));
+      (out.height = cast (_Runtime.field(s, 'height') : Dynamic));
+      (out.workWidth = cast (_Runtime.field(s, 'availWidth') : Dynamic));
+      (out.workHeight = cast (_Runtime.field(s, 'availHeight') : Dynamic));
+      (out.scaleFactor = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'devicePixelRatio')), 'number') : Bool) ? (cast flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'devicePixelRatio') : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
+      (out.isPrimary = cast (true : Dynamic));
+      (out.rotation = cast (_Runtime.callValue(Screen.getWebRotation__screen, cast ([] : Array<Dynamic>)) : Dynamic));
+      (out.orientation = cast (_Runtime.callValue(Screen.getWebOrientation__screen, cast ([] : Array<Dynamic>)) : Dynamic));
+      (out.refreshRate = cast (-1.0 : Dynamic));
+      (out.colorDepth = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(s, 'colorDepth')), 'number') : Bool) ? (cast _Runtime.field(s, 'colorDepth') : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
+      (out.pixelDepth = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(s, 'pixelDepth')), 'number') : Bool) ? (cast _Runtime.field(s, 'pixelDepth') : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
+      (out.physicalWidth = cast (HxMath.round((out.width * out.scaleFactor)) : Dynamic));
+      (out.physicalHeight = cast (HxMath.round((out.height * out.scaleFactor)) : Dynamic));
+      (out.isHdr = cast (_Runtime.callValue(Screen.getWebIsHdr__screen, cast ([] : Array<Dynamic>)) : Dynamic));
+      (out.colorSpace = cast (_Runtime.callValue(Screen.getWebColorSpace__screen, cast ([] : Array<Dynamic>)) : Dynamic));
+      (out.maxLuminance = cast (-1.0 : Dynamic));
+      (out.depthPerComponent = cast (-1.0 : Dynamic));
+      (out.dpi = cast (-1.0 : Dynamic));
+      (out.label = cast ('' : Dynamic));
+      (out.internal = cast (false : Dynamic));
+      (out.touchSupport = cast ('unknown' : Dynamic));
+      (out.monochrome = cast (false : Dynamic));
     };
     backend = { _upgrade: upgradeToScreenDetails, getScreens: function(out:Dynamic) {
       if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screen')), 'undefined') : Bool)) : Bool)) {
@@ -253,13 +253,13 @@ class Screen {
           }] : Array<Dynamic>));
           var prevCache:Dynamic = _Runtime.coalesce(_cachedScreens, function():Dynamic return cast cast ([] : Array<Dynamic>));
           for (prev in _Runtime.iterable(prevCache)) {
-            var stillPresent:Dynamic = _Runtime.callProperty(newInfos, 'some', cast ([function(n:Dynamic) return _Runtime.strictEquals(_Runtime.field(n, 'id'), _Runtime.field(prev, 'id'))] : Array<Dynamic>));
+            var stillPresent:Dynamic = _Runtime.callProperty(newInfos, 'some', cast ([function(n:Dynamic) return _Runtime.strictEquals(n.id, prev.id)] : Array<Dynamic>));
             if ((cast !(cast stillPresent : Bool) : Bool)) {
               _Runtime.callValue(listener, cast ([{ kind: 'ScreenRemoved', screen: prev, changedMetrics: null }] : Array<Dynamic>));
             }
           }
           for (curr in _Runtime.iterable(newInfos)) {
-            var prev:Dynamic = _Runtime.find(prevCache, function(p:Dynamic) return _Runtime.strictEquals(_Runtime.field(p, 'id'), _Runtime.field(curr, 'id')));
+            var prev:Dynamic = _Runtime.find(prevCache, function(p:Dynamic) return _Runtime.strictEquals(p.id, curr.id));
             if ((cast _Runtime.strictEquals(prev, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
               _Runtime.callValue(listener, cast ([{ kind: 'ScreenAdded', screen: curr, changedMetrics: null }] : Array<Dynamic>));
             } else {
@@ -304,10 +304,10 @@ class Screen {
     }, getModes: function(screen:Dynamic, out:Dynamic) {
       _Runtime.setLength(out, 1.0);
       if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(out, 0.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeArray(out, 0.0, _Runtime.callValue(createScreenMode, cast ([] : Array<Dynamic>))); }
-      _Runtime.setField(flighthq._internal._StaticIndex.readArray(out, 0.0), 'width', _Runtime.field(screen, 'width'));
-      _Runtime.setField(flighthq._internal._StaticIndex.readArray(out, 0.0), 'height', _Runtime.field(screen, 'height'));
-      _Runtime.setField(flighthq._internal._StaticIndex.readArray(out, 0.0), 'refreshRate', _Runtime.field(screen, 'refreshRate'));
-      _Runtime.setField(flighthq._internal._StaticIndex.readArray(out, 0.0), 'colorDepth', _Runtime.field(screen, 'colorDepth'));
+      _Runtime.setField(flighthq._internal._StaticIndex.readArray(out, 0.0), 'width', screen.width);
+      _Runtime.setField(flighthq._internal._StaticIndex.readArray(out, 0.0), 'height', screen.height);
+      _Runtime.setField(flighthq._internal._StaticIndex.readArray(out, 0.0), 'refreshRate', screen.refreshRate);
+      _Runtime.setField(flighthq._internal._StaticIndex.readArray(out, 0.0), 'colorDepth', screen.colorDepth);
       _Runtime.setField(flighthq._internal._StaticIndex.readArray(out, 0.0), 'pixelFormat', '');
       return cast out;
     } };
@@ -329,10 +329,10 @@ class Screen {
     var workAreaChanged:Dynamic = cast _Runtime.UNDEFINED;
     var scaleChanged:Dynamic = cast _Runtime.UNDEFINED;
     var orientationChanged:Dynamic = cast _Runtime.UNDEFINED;
-    boundsChanged = ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(prev, 'x'), _Runtime.field(curr, 'x')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(prev, 'y'), _Runtime.field(curr, 'y')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(prev, 'width'), _Runtime.field(curr, 'width')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(prev, 'height'), _Runtime.field(curr, 'height')) : Bool));
-    workAreaChanged = ((cast !_Runtime.strictEquals(_Runtime.field(prev, 'workWidth'), _Runtime.field(curr, 'workWidth')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(prev, 'workHeight'), _Runtime.field(curr, 'workHeight')) : Bool));
-    scaleChanged = !_Runtime.strictEquals(_Runtime.field(prev, 'scaleFactor'), _Runtime.field(curr, 'scaleFactor'));
-    orientationChanged = ((cast !_Runtime.strictEquals(_Runtime.field(prev, 'rotation'), _Runtime.field(curr, 'rotation')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(prev, 'orientation'), _Runtime.field(curr, 'orientation')) : Bool));
+    boundsChanged = ((cast ((cast ((cast !_Runtime.strictEquals(prev.x, curr.x) : Bool) || (cast !_Runtime.strictEquals(prev.y, curr.y) : Bool)) : Bool) || (cast !_Runtime.strictEquals(prev.width, curr.width) : Bool)) : Bool) || (cast !_Runtime.strictEquals(prev.height, curr.height) : Bool));
+    workAreaChanged = ((cast !_Runtime.strictEquals(prev.workWidth, curr.workWidth) : Bool) || (cast !_Runtime.strictEquals(prev.workHeight, curr.workHeight) : Bool));
+    scaleChanged = !_Runtime.strictEquals(prev.scaleFactor, curr.scaleFactor);
+    orientationChanged = ((cast !_Runtime.strictEquals(prev.rotation, curr.rotation) : Bool) || (cast !_Runtime.strictEquals(prev.orientation, curr.orientation) : Bool));
     if ((cast ((cast ((cast ((cast !(cast boundsChanged : Bool) : Bool) && (cast !(cast workAreaChanged : Bool) : Bool)) : Bool) && (cast !(cast scaleChanged : Bool) : Bool)) : Bool) && (cast !(cast orientationChanged : Bool) : Bool)) : Bool)) { return cast null; }
     return cast { bounds: boundsChanged, workArea: workAreaChanged, scaleFactor: scaleChanged, orientation: orientationChanged };
     return cast null;
@@ -343,8 +343,8 @@ class Screen {
     var py:Dynamic = cast _Runtime.UNDEFINED;
     px = point.x;
     py = point.y;
-    _Runtime.setField(out, 'x', ((px - _Runtime.field(screen, 'x')) * _Runtime.field(screen, 'scaleFactor')));
-    _Runtime.setField(out, 'y', ((py - _Runtime.field(screen, 'y')) * _Runtime.field(screen, 'scaleFactor')));
+    _Runtime.setField(out, 'x', ((px - screen.x) * screen.scaleFactor));
+    _Runtime.setField(out, 'y', ((py - screen.y) * screen.scaleFactor));
     return cast out;
     return cast null;
   }
@@ -359,9 +359,9 @@ class Screen {
     ry = _Runtime.field(rect, 'y');
     rw = _Runtime.field(rect, 'width');
     rh = _Runtime.field(rect, 'height');
-    sf = _Runtime.field(screen, 'scaleFactor');
-    _Runtime.setField(out, 'x', ((rx - _Runtime.field(screen, 'x')) * sf));
-    _Runtime.setField(out, 'y', ((ry - _Runtime.field(screen, 'y')) * sf));
+    sf = screen.scaleFactor;
+    _Runtime.setField(out, 'x', ((rx - screen.x) * sf));
+    _Runtime.setField(out, 'y', ((ry - screen.y) * sf));
     _Runtime.setField(out, 'width', (rw * sf));
     _Runtime.setField(out, 'height', (rh * sf));
     return cast out;
@@ -378,31 +378,31 @@ class Screen {
   }
 
   public static function fillDefaultScreenInfo__screen(out:ScreenInfo):Void {
-    _Runtime.setField(out, 'id', 0.0);
-    _Runtime.setField(out, 'x', 0.0);
-    _Runtime.setField(out, 'y', 0.0);
-    _Runtime.setField(out, 'width', 0.0);
-    _Runtime.setField(out, 'height', 0.0);
-    _Runtime.setField(out, 'workWidth', 0.0);
-    _Runtime.setField(out, 'workHeight', 0.0);
-    _Runtime.setField(out, 'scaleFactor', 1.0);
-    _Runtime.setField(out, 'isPrimary', false);
-    _Runtime.setField(out, 'rotation', -1.0);
-    _Runtime.setField(out, 'orientation', 'Landscape');
-    _Runtime.setField(out, 'refreshRate', -1.0);
-    _Runtime.setField(out, 'colorDepth', -1.0);
-    _Runtime.setField(out, 'pixelDepth', -1.0);
-    _Runtime.setField(out, 'physicalWidth', -1.0);
-    _Runtime.setField(out, 'physicalHeight', -1.0);
-    _Runtime.setField(out, 'isHdr', false);
-    _Runtime.setField(out, 'colorSpace', 'srgb');
-    _Runtime.setField(out, 'maxLuminance', -1.0);
-    _Runtime.setField(out, 'depthPerComponent', -1.0);
-    _Runtime.setField(out, 'dpi', -1.0);
-    _Runtime.setField(out, 'label', '');
-    _Runtime.setField(out, 'internal', false);
-    _Runtime.setField(out, 'touchSupport', 'unknown');
-    _Runtime.setField(out, 'monochrome', false);
+    (out.id = cast (0.0 : Dynamic));
+    (out.x = cast (0.0 : Dynamic));
+    (out.y = cast (0.0 : Dynamic));
+    (out.width = cast (0.0 : Dynamic));
+    (out.height = cast (0.0 : Dynamic));
+    (out.workWidth = cast (0.0 : Dynamic));
+    (out.workHeight = cast (0.0 : Dynamic));
+    (out.scaleFactor = cast (1.0 : Dynamic));
+    (out.isPrimary = cast (false : Dynamic));
+    (out.rotation = cast (-1.0 : Dynamic));
+    (out.orientation = cast ('Landscape' : Dynamic));
+    (out.refreshRate = cast (-1.0 : Dynamic));
+    (out.colorDepth = cast (-1.0 : Dynamic));
+    (out.pixelDepth = cast (-1.0 : Dynamic));
+    (out.physicalWidth = cast (-1.0 : Dynamic));
+    (out.physicalHeight = cast (-1.0 : Dynamic));
+    (out.isHdr = cast (false : Dynamic));
+    (out.colorSpace = cast ('srgb' : Dynamic));
+    (out.maxLuminance = cast (-1.0 : Dynamic));
+    (out.depthPerComponent = cast (-1.0 : Dynamic));
+    (out.dpi = cast (-1.0 : Dynamic));
+    (out.label = cast ('' : Dynamic));
+    (out.internal = cast (false : Dynamic));
+    (out.touchSupport = cast ('unknown' : Dynamic));
+    (out.monochrome = cast (false : Dynamic));
   }
 
   public static function getPrimaryScreen(out:ScreenInfo):ScreenInfo {
@@ -417,10 +417,10 @@ class Screen {
   }
 
   public static function getScreenBounds(screen:ScreenInfo, out:{ var x:Float; var y:Float; var width:Float; var height:Float; }):{ var x:Float; var y:Float; var width:Float; var height:Float; } {
-    _Runtime.setField(out, 'x', _Runtime.field(screen, 'x'));
-    _Runtime.setField(out, 'y', _Runtime.field(screen, 'y'));
-    _Runtime.setField(out, 'width', _Runtime.field(screen, 'width'));
-    _Runtime.setField(out, 'height', _Runtime.field(screen, 'height'));
+    _Runtime.setField(out, 'x', screen.x);
+    _Runtime.setField(out, 'y', screen.y);
+    _Runtime.setField(out, 'width', screen.width);
+    _Runtime.setField(out, 'height', screen.height);
     return cast out;
     return cast null;
   }
@@ -430,7 +430,7 @@ class Screen {
     screens = cast ([] : Array<Dynamic>);
     _Runtime.callValue(getScreens, cast ([screens] : Array<Dynamic>));
     for (screen in _Runtime.iterable(screens)) {
-      if ((cast _Runtime.strictEquals(_Runtime.field(screen, 'id'), id) : Bool)) {
+      if ((cast _Runtime.strictEquals(screen.id, id) : Bool)) {
         _Runtime.callValue(Screen.copyScreenInfo__screen, cast ([screen, out] : Array<Dynamic>));
         return cast out;
       }
@@ -452,8 +452,8 @@ class Screen {
     bestScreen = flighthq._internal._StaticIndex.readArray(screens, 0.0);
     bestOverlap = -1.0;
     for (screen in _Runtime.iterable(screens)) {
-      var ox:Dynamic = HxMath.max(0.0, (HxMath.min((_Runtime.field(rect, 'x') + _Runtime.field(rect, 'width')), (_Runtime.field(screen, 'x') + _Runtime.field(screen, 'width'))) - HxMath.max(_Runtime.field(rect, 'x'), _Runtime.field(screen, 'x'))));
-      var oy:Dynamic = HxMath.max(0.0, (HxMath.min((_Runtime.field(rect, 'y') + _Runtime.field(rect, 'height')), (_Runtime.field(screen, 'y') + _Runtime.field(screen, 'height'))) - HxMath.max(_Runtime.field(rect, 'y'), _Runtime.field(screen, 'y'))));
+      var ox:Dynamic = HxMath.max(0.0, (HxMath.min((_Runtime.field(rect, 'x') + _Runtime.field(rect, 'width')), (screen.x + screen.width)) - HxMath.max(_Runtime.field(rect, 'x'), screen.x)));
+      var oy:Dynamic = HxMath.max(0.0, (HxMath.min((_Runtime.field(rect, 'y') + _Runtime.field(rect, 'height')), (screen.y + screen.height)) - HxMath.max(_Runtime.field(rect, 'y'), screen.y)));
       var overlap:Dynamic = (ox * oy);
       if ((cast ((cast overlap : Float) > (cast bestOverlap : Float)) : Bool)) {
         (bestOverlap = cast (overlap : Dynamic));
@@ -465,8 +465,8 @@ class Screen {
       var cy:Dynamic = (_Runtime.field(rect, 'y') + (_Runtime.field(rect, 'height') / 2.0));
       var bestDist:Dynamic = HxMath.POSITIVE_INFINITY;
       for (screen in _Runtime.iterable(screens)) {
-        var scx:Dynamic = (_Runtime.field(screen, 'x') + (_Runtime.field(screen, 'width') / 2.0));
-        var scy:Dynamic = (_Runtime.field(screen, 'y') + (_Runtime.field(screen, 'height') / 2.0));
+        var scx:Dynamic = (screen.x + (screen.width / 2.0));
+        var scy:Dynamic = (screen.y + (screen.height / 2.0));
         var dx:Dynamic = (cx - scx);
         var dy:Dynamic = (cy - scy);
         var dist:Dynamic = ((dx * dx) + (dy * dy));
@@ -482,10 +482,10 @@ class Screen {
   }
 
   public static function getScreenCurrentMode(screen:ScreenInfo, out:ScreenMode):ScreenMode {
-    _Runtime.setField(out, 'width', _Runtime.field(screen, 'width'));
-    _Runtime.setField(out, 'height', _Runtime.field(screen, 'height'));
-    _Runtime.setField(out, 'refreshRate', _Runtime.field(screen, 'refreshRate'));
-    _Runtime.setField(out, 'colorDepth', _Runtime.field(screen, 'colorDepth'));
+    _Runtime.setField(out, 'width', screen.width);
+    _Runtime.setField(out, 'height', screen.height);
+    _Runtime.setField(out, 'refreshRate', screen.refreshRate);
+    _Runtime.setField(out, 'colorDepth', screen.colorDepth);
     _Runtime.setField(out, 'pixelFormat', '');
     return cast out;
     return cast null;
@@ -559,7 +559,7 @@ class Screen {
       return cast out;
     }
     for (screen in _Runtime.iterable(screens)) {
-      if ((cast ((cast ((cast ((cast ((cast point.x : Float) >= (cast _Runtime.field(screen, 'x') : Float)) : Bool) && (cast ((cast point.x : Float) < (cast (_Runtime.field(screen, 'x') + _Runtime.field(screen, 'width')) : Float)) : Bool)) : Bool) && (cast ((cast point.y : Float) >= (cast _Runtime.field(screen, 'y') : Float)) : Bool)) : Bool) && (cast ((cast point.y : Float) < (cast (_Runtime.field(screen, 'y') + _Runtime.field(screen, 'height')) : Float)) : Bool)) : Bool)) {
+      if ((cast ((cast ((cast ((cast ((cast point.x : Float) >= (cast screen.x : Float)) : Bool) && (cast ((cast point.x : Float) < (cast (screen.x + screen.width) : Float)) : Bool)) : Bool) && (cast ((cast point.y : Float) >= (cast screen.y : Float)) : Bool)) : Bool) && (cast ((cast point.y : Float) < (cast (screen.y + screen.height) : Float)) : Bool)) : Bool)) {
         _Runtime.callValue(Screen.copyScreenInfo__screen, cast ([screen, out] : Array<Dynamic>));
         return cast out;
       }
@@ -567,8 +567,8 @@ class Screen {
     bestScreen = flighthq._internal._StaticIndex.readArray(screens, 0.0);
     bestDist = HxMath.POSITIVE_INFINITY;
     for (screen in _Runtime.iterable(screens)) {
-      var cx:Dynamic = (_Runtime.field(screen, 'x') + (_Runtime.field(screen, 'width') / 2.0));
-      var cy:Dynamic = (_Runtime.field(screen, 'y') + (_Runtime.field(screen, 'height') / 2.0));
+      var cx:Dynamic = (screen.x + (screen.width / 2.0));
+      var cy:Dynamic = (screen.y + (screen.height / 2.0));
       var dx:Dynamic = (point.x - cx);
       var dy:Dynamic = (point.y - cy);
       var dist:Dynamic = ((dx * dx) + (dy * dy));
@@ -595,7 +595,7 @@ class Screen {
       return cast out;
     }
     for (screen in _Runtime.iterable(screens)) {
-      if ((cast ((cast ((cast ((cast ((cast _Runtime.field(rect, 'x') : Float) >= (cast _Runtime.field(screen, 'x') : Float)) : Bool) && (cast ((cast _Runtime.field(rect, 'y') : Float) >= (cast _Runtime.field(screen, 'y') : Float)) : Bool)) : Bool) && (cast ((cast (_Runtime.field(rect, 'x') + _Runtime.field(rect, 'width')) : Float) <= (cast (_Runtime.field(screen, 'x') + _Runtime.field(screen, 'width')) : Float)) : Bool)) : Bool) && (cast ((cast (_Runtime.field(rect, 'y') + _Runtime.field(rect, 'height')) : Float) <= (cast (_Runtime.field(screen, 'y') + _Runtime.field(screen, 'height')) : Float)) : Bool)) : Bool)) {
+      if ((cast ((cast ((cast ((cast ((cast _Runtime.field(rect, 'x') : Float) >= (cast screen.x : Float)) : Bool) && (cast ((cast _Runtime.field(rect, 'y') : Float) >= (cast screen.y : Float)) : Bool)) : Bool) && (cast ((cast (_Runtime.field(rect, 'x') + _Runtime.field(rect, 'width')) : Float) <= (cast (screen.x + screen.width) : Float)) : Bool)) : Bool) && (cast ((cast (_Runtime.field(rect, 'y') + _Runtime.field(rect, 'height')) : Float) <= (cast (screen.y + screen.height) : Float)) : Bool)) : Bool)) {
         _Runtime.callValue(Screen.copyScreenInfo__screen, cast ([screen, out] : Array<Dynamic>));
         return cast out;
       }
@@ -605,8 +605,8 @@ class Screen {
     bestScreen = flighthq._internal._StaticIndex.readArray(screens, 0.0);
     bestDist = HxMath.POSITIVE_INFINITY;
     for (screen in _Runtime.iterable(screens)) {
-      var scx:Dynamic = (_Runtime.field(screen, 'x') + (_Runtime.field(screen, 'width') / 2.0));
-      var scy:Dynamic = (_Runtime.field(screen, 'y') + (_Runtime.field(screen, 'height') / 2.0));
+      var scx:Dynamic = (screen.x + (screen.width / 2.0));
+      var scy:Dynamic = (screen.y + (screen.height / 2.0));
       var dx:Dynamic = (cx - scx);
       var dy:Dynamic = (cy - scy);
       var dist:Dynamic = ((dx * dx) + (dy * dy));
@@ -626,10 +626,10 @@ class Screen {
   }
 
   public static function getScreenWorkArea(screen:ScreenInfo, out:{ var x:Float; var y:Float; var width:Float; var height:Float; }):{ var x:Float; var y:Float; var width:Float; var height:Float; } {
-    _Runtime.setField(out, 'x', _Runtime.field(screen, 'x'));
-    _Runtime.setField(out, 'y', _Runtime.field(screen, 'y'));
-    _Runtime.setField(out, 'width', _Runtime.field(screen, 'workWidth'));
-    _Runtime.setField(out, 'height', _Runtime.field(screen, 'workHeight'));
+    _Runtime.setField(out, 'x', screen.x);
+    _Runtime.setField(out, 'y', screen.y);
+    _Runtime.setField(out, 'width', screen.workWidth);
+    _Runtime.setField(out, 'height', screen.workHeight);
     return cast out;
     return cast null;
   }
@@ -763,8 +763,8 @@ class Screen {
     var py:Dynamic = cast _Runtime.UNDEFINED;
     px = point.x;
     py = point.y;
-    _Runtime.setField(out, 'x', ((px / _Runtime.field(screen, 'scaleFactor')) + _Runtime.field(screen, 'x')));
-    _Runtime.setField(out, 'y', ((py / _Runtime.field(screen, 'scaleFactor')) + _Runtime.field(screen, 'y')));
+    _Runtime.setField(out, 'x', ((px / screen.scaleFactor) + screen.x));
+    _Runtime.setField(out, 'y', ((py / screen.scaleFactor) + screen.y));
     return cast out;
     return cast null;
   }
@@ -779,9 +779,9 @@ class Screen {
     ry = _Runtime.field(rect, 'y');
     rw = _Runtime.field(rect, 'width');
     rh = _Runtime.field(rect, 'height');
-    sf = _Runtime.field(screen, 'scaleFactor');
-    _Runtime.setField(out, 'x', ((rx / sf) + _Runtime.field(screen, 'x')));
-    _Runtime.setField(out, 'y', ((ry / sf) + _Runtime.field(screen, 'y')));
+    sf = screen.scaleFactor;
+    _Runtime.setField(out, 'x', ((rx / sf) + screen.x));
+    _Runtime.setField(out, 'y', ((ry / sf) + screen.y));
     _Runtime.setField(out, 'width', (rw / sf));
     _Runtime.setField(out, 'height', (rh / sf));
     return cast out;
