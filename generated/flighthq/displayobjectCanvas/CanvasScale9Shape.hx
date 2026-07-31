@@ -137,14 +137,14 @@ class CanvasScale9Shape {
     var b:Dynamic = cast _Runtime.UNDEFINED;
     var c:Dynamic = cast _Runtime.UNDEFINED;
     var d:Dynamic = cast _Runtime.UNDEFINED;
-    a = ((cast !_Runtime.strictEquals(scaleX, 0.0) : Bool) ? (cast (_Runtime.field(t, 'a') / scaleX) : Dynamic) : (cast _Runtime.field(t, 'a') : Dynamic));
-    b = ((cast !_Runtime.strictEquals(scaleX, 0.0) : Bool) ? (cast (_Runtime.field(t, 'b') / scaleX) : Dynamic) : (cast _Runtime.field(t, 'b') : Dynamic));
-    c = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (_Runtime.field(t, 'c') / scaleY) : Dynamic) : (cast _Runtime.field(t, 'c') : Dynamic));
-    d = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (_Runtime.field(t, 'd') / scaleY) : Dynamic) : (cast _Runtime.field(t, 'd') : Dynamic));
+    a = ((cast !_Runtime.strictEquals(scaleX, 0.0) : Bool) ? (cast (t.a / scaleX) : Dynamic) : (cast t.a : Dynamic));
+    b = ((cast !_Runtime.strictEquals(scaleX, 0.0) : Bool) ? (cast (t.b / scaleX) : Dynamic) : (cast t.b : Dynamic));
+    c = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (t.c / scaleY) : Dynamic) : (cast t.c : Dynamic));
+    d = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (t.d / scaleY) : Dynamic) : (cast t.d : Dynamic));
     if ((cast _Runtime.field(state, 'roundPixels') : Bool)) {
-      flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([a, b, c, d, HxMath.fround(_Runtime.field(t, 'tx')), HxMath.fround(_Runtime.field(t, 'ty'))] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([a, b, c, d, HxMath.fround(t.tx), HxMath.fround(t.ty)] : Array<Dynamic>));
     } else {
-      flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([a, b, c, d, _Runtime.field(t, 'tx'), _Runtime.field(t, 'ty')] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([a, b, c, d, t.tx, t.ty] : Array<Dynamic>));
     }
   }
 

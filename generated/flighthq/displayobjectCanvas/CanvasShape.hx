@@ -64,9 +64,9 @@ class CanvasShape {
       if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(state, 'fillMatrix'), null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(state, 'fillMatrixInverse'), null) : Bool)) : Bool)) {
         var m:Dynamic = _Runtime.field(state, 'fillMatrix');
         var inv:Dynamic = _Runtime.field(state, 'fillMatrixInverse');
-        flighthq._internal.backend.Canvas2dBackend.call(context, 'transform', cast ([_Runtime.field(m, 'a'), _Runtime.field(m, 'b'), _Runtime.field(m, 'c'), _Runtime.field(m, 'd'), _Runtime.field(m, 'tx'), _Runtime.field(m, 'ty')] : Array<Dynamic>));
+        flighthq._internal.backend.Canvas2dBackend.call(context, 'transform', cast ([m.a, m.b, m.c, m.d, m.tx, m.ty] : Array<Dynamic>));
         flighthq._internal.backend.Canvas2dBackend.call(context, 'fill', cast ([_Runtime.field(state, 'windingRule')] : Array<Dynamic>));
-        flighthq._internal.backend.Canvas2dBackend.call(context, 'transform', cast ([_Runtime.field(inv, 'a'), _Runtime.field(inv, 'b'), _Runtime.field(inv, 'c'), _Runtime.field(inv, 'd'), _Runtime.field(inv, 'tx'), _Runtime.field(inv, 'ty')] : Array<Dynamic>));
+        flighthq._internal.backend.Canvas2dBackend.call(context, 'transform', cast ([inv.a, inv.b, inv.c, inv.d, inv.tx, inv.ty] : Array<Dynamic>));
       } else {
         flighthq._internal.backend.Canvas2dBackend.call(context, 'fill', cast ([_Runtime.field(state, 'windingRule')] : Array<Dynamic>));
       }

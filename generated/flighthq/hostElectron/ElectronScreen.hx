@@ -67,15 +67,15 @@ class ElectronScreen {
   }
 
   public static function fillScreenInfo__electronScreen(out:ScreenInfo, display:ElectronDisplay, isPrimary:Bool):ScreenInfo {
-    _Runtime.setField(out, 'id', _Runtime.field(display, 'id'));
-    _Runtime.setField(out, 'x', _Runtime.field(_Runtime.field(display, 'bounds'), 'x'));
-    _Runtime.setField(out, 'y', _Runtime.field(_Runtime.field(display, 'bounds'), 'y'));
-    _Runtime.setField(out, 'width', _Runtime.field(_Runtime.field(display, 'bounds'), 'width'));
-    _Runtime.setField(out, 'height', _Runtime.field(_Runtime.field(display, 'bounds'), 'height'));
-    _Runtime.setField(out, 'workWidth', _Runtime.field(_Runtime.field(display, 'workArea'), 'width'));
-    _Runtime.setField(out, 'workHeight', _Runtime.field(_Runtime.field(display, 'workArea'), 'height'));
-    _Runtime.setField(out, 'scaleFactor', _Runtime.field(display, 'scaleFactor'));
-    _Runtime.setField(out, 'isPrimary', isPrimary);
+    (out.id = cast (_Runtime.field(display, 'id') : Dynamic));
+    (out.x = cast (_Runtime.field(_Runtime.field(display, 'bounds'), 'x') : Dynamic));
+    (out.y = cast (_Runtime.field(_Runtime.field(display, 'bounds'), 'y') : Dynamic));
+    (out.width = cast (_Runtime.field(_Runtime.field(display, 'bounds'), 'width') : Dynamic));
+    (out.height = cast (_Runtime.field(_Runtime.field(display, 'bounds'), 'height') : Dynamic));
+    (out.workWidth = cast (_Runtime.field(_Runtime.field(display, 'workArea'), 'width') : Dynamic));
+    (out.workHeight = cast (_Runtime.field(_Runtime.field(display, 'workArea'), 'height') : Dynamic));
+    (out.scaleFactor = cast (_Runtime.field(display, 'scaleFactor') : Dynamic));
+    (out.isPrimary = cast (isPrimary : Dynamic));
     return cast out;
     return cast null;
   }

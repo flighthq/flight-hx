@@ -9,13 +9,13 @@ Eligibility is audited independently from emission. Audit-only schemas remain re
 | Candidates | 405 |
 | Eligible | 404 |
 | Ineligible | 1 |
-| Audit-only schemas | 350 |
-| Direct schemas | 54 |
+| Audit-only schemas | 342 |
+| Direct schemas | 62 |
 | Declared fields | 2028 |
-| Bindable accesses | 10263 |
-| Pending accesses | 6992 |
-| Directly emitted accesses | 3271 |
-| Reflective survivors | 152 |
+| Bindable accesses | 10257 |
+| Pending accesses | 3799 |
+| Directly emitted accesses | 6458 |
+| Reflective survivors | 171 |
 | Dynamic escapes | 348 |
 
 | Candidate | Mode | Purpose | Fields | Reads | Writes | Calls | Pending | Direct | Reflective survivors | Escapes | Eligible | Reasons |
@@ -88,7 +88,7 @@ Eligibility is audited independently from emission. Audit-only schemas remain re
 | `AnimationClip` | `audit-only` | broad scene document | 2 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `Billboard` | `audit-only` | broad scene document | 12 | 1 | 3 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `Mesh` | `audit-only` | broad scene document | 13 | 49 | 12 | 0 | 61 | 0 | 0 | 0 | yes | — |
-| `MeshGeometry` | `audit-only` | broad scene document | 7 | 203 | 18 | 0 | 221 | 0 | 0 | 8 | yes | — |
+| `MeshGeometry` | `direct` | broad scene document | 7 | 203 | 18 | 0 | 0 | 221 | 8 | 8 | yes | — |
 | `MeshSubset` | `audit-only` | broad scene document | 2 | 23 | 0 | 0 | 23 | 0 | 0 | 0 | yes | — |
 | `VertexAttribute` | `audit-only` | broad scene document | 3 | 32 | 0 | 0 | 32 | 0 | 0 | 0 | yes | — |
 | `VertexAttributeLayout` | `audit-only` | broad scene document | 2 | 53 | 0 | 0 | 53 | 0 | 0 | 0 | yes | — |
@@ -140,11 +140,11 @@ Eligibility is audited independently from emission. Audit-only schemas remain re
 | `ColorKeyframe` | `audit-only` | broad asset document | 4 | 22 | 0 | 0 | 22 | 0 | 0 | 0 | yes | — |
 | `CurveKeyframe` | `audit-only` | broad asset document | 2 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
 | `ParticleEmitter` | `audit-only` | broad asset document | 19 | 54 | 0 | 0 | 54 | 0 | 0 | 0 | yes | — |
-| `ParticleEmitterData` | `audit-only` | broad asset document | 9 | 377 | 28 | 0 | 405 | 0 | 0 | 0 | yes | — |
+| `ParticleEmitterData` | `direct` | broad asset document | 9 | 377 | 28 | 0 | 0 | 405 | 0 | 0 | yes | — |
 | `ParticleEmitterRuntime` | `audit-only` | broad asset document | 34 | 4 | 2 | 0 | 6 | 0 | 0 | 0 | yes | — |
-| `ParticleEmitterConfig` | `audit-only` | broad asset document | 52 | 705 | 0 | 0 | 705 | 0 | 0 | 6 | yes | — |
+| `ParticleEmitterConfig` | `direct` | broad asset document | 52 | 705 | 0 | 0 | 0 | 705 | 6 | 6 | yes | — |
 | `ParticleEmitterSignals` | `audit-only` | broad asset document | 3 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
-| `ParticleEmitterState` | `audit-only` | broad asset document | 13 | 157 | 23 | 56 | 236 | 0 | 0 | 0 | yes | — |
+| `ParticleEmitterState` | `direct` | broad asset document | 13 | 157 | 23 | 56 | 0 | 236 | 0 | 0 | yes | — |
 | `ParticleObjectsState` | `audit-only` | broad asset document | 10 | 16 | 11 | 9 | 36 | 0 | 0 | 0 | yes | — |
 | `ParticleObjectsUpdateOptions` | `audit-only` | broad asset document | 3 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `PlaneCollider` | `audit-only` | broad asset document | 7 | 10 | 0 | 0 | 10 | 0 | 0 | 1 | yes | — |
@@ -165,10 +165,10 @@ Eligibility is audited independently from emission. Audit-only schemas remain re
 | `SpritesheetFrameData` | `audit-only` | broad asset document | 12 | 102 | 0 | 0 | 102 | 0 | 0 | 0 | yes | — |
 | `SpritesheetPlayer` | `audit-only` | broad asset document | 9 | 30 | 35 | 0 | 65 | 0 | 0 | 0 | yes | — |
 | `SpritesheetValidationDiagnostic` | `audit-only` | broad asset document | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `Surface` | `audit-only` | broad asset document | 9 | 438 | 1 | 0 | 439 | 0 | 0 | 0 | yes | — |
+| `Surface` | `direct` | broad asset document | 9 | 432 | 1 | 0 | 0 | 433 | 0 | 0 | yes | — |
 | `Texture` | `audit-only` | broad asset document | 7 | 160 | 10 | 0 | 170 | 0 | 0 | 0 | yes | — |
 | `TextureAtlas` | `audit-only` | broad asset document | 2 | 120 | 1 | 0 | 121 | 0 | 0 | 0 | yes | — |
-| `TextureAtlasRegion` | `audit-only` | broad asset document | 14 | 248 | 10 | 0 | 258 | 0 | 0 | 0 | yes | — |
+| `TextureAtlasRegion` | `direct` | broad asset document | 14 | 248 | 10 | 0 | 0 | 258 | 0 | 0 | yes | — |
 | `TextureUvTransform` | `audit-only` | broad asset document | 3 | 10 | 0 | 0 | 10 | 0 | 0 | 0 | yes | — |
 | `Tileset` | `audit-only` | broad asset document | 7 | 13 | 1 | 0 | 14 | 0 | 0 | 0 | yes | — |
 | `TurbulenceForce` | `audit-only` | broad asset document | 3 | 4 | 0 | 0 | 4 | 0 | 0 | 1 | yes | — |
@@ -216,7 +216,7 @@ Eligibility is audited independently from emission. Audit-only schemas remain re
 | `IpcTarget` | `audit-only` | broad host document | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `IpcSignals` | `audit-only` | broad host document | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `AppLifecycle` | `audit-only` | broad host document | 7 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
-| `Matrix` | `audit-only` | broad host document | 6 | 576 | 128 | 0 | 704 | 0 | 0 | 0 | yes | — |
+| `Matrix` | `direct` | broad host document | 6 | 576 | 128 | 0 | 0 | 704 | 0 | 0 | yes | — |
 | `MediaSessionActionDetails` | `audit-only` | broad host document | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `MediaSessionArtwork` | `audit-only` | broad host document | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `MediaSessionMetadata` | `audit-only` | broad host document | 4 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
@@ -236,7 +236,7 @@ Eligibility is audited independently from emission. Audit-only schemas remain re
 | `PowerBatteryHealth` | `audit-only` | broad host document | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `ParsedProtocolUrl` | `audit-only` | broad host document | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `ProtocolHandler` | `audit-only` | broad host document | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
-| `ScreenInfo` | `audit-only` | broad host document | 25 | 116 | 109 | 0 | 225 | 0 | 0 | 5 | yes | — |
+| `ScreenInfo` | `direct` | broad host document | 25 | 116 | 109 | 0 | 0 | 225 | 5 | 5 | yes | — |
 | `ScreenChangeEvent` | `audit-only` | broad host document | 3 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `ScreenChangedMetrics` | `audit-only` | broad host document | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `ScreenMode` | `audit-only` | broad host document | 5 | 0 | 10 | 0 | 10 | 0 | 0 | 0 | yes | — |

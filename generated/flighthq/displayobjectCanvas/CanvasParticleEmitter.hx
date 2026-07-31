@@ -46,7 +46,7 @@ class CanvasParticleEmitter {
         var id:Dynamic = flighthq._internal._StaticIndex.readUint16Array(ids, i);
         if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
         var region:Dynamic = flighthq._internal._StaticIndex.readArray(regions, id);
-        if ((cast ((cast ((cast _Runtime.field(region, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(region, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
+        if ((cast ((cast ((cast region.width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast region.height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
         var tt:Dynamic = (i * 4.0);
         var px:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, tt);
         var py:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 1.0));
@@ -60,7 +60,7 @@ class CanvasParticleEmitter {
         var d:Float = cast _Runtime.UNDEFINED;
         var tx:Float = cast _Runtime.UNDEFINED;
         var ty:Float = cast _Runtime.UNDEFINED;
-        if ((cast _Runtime.field(_Runtime.field(source, 'data'), 'worldSpace') : Bool)) {
+        if ((cast _Runtime.field(source, 'data').worldSpace : Bool)) {
           (a = cast (cosR : Dynamic));
           (b = cast (sinR : Dynamic));
           (c = cast (-sinR : Dynamic));
@@ -68,16 +68,16 @@ class CanvasParticleEmitter {
           (tx = cast (px : Dynamic));
           (ty = cast (py : Dynamic));
         } else {
-          (a = cast (((_Runtime.field(t, 'a') * cosR) + (_Runtime.field(t, 'c') * sinR)) : Dynamic));
-          (b = cast (((_Runtime.field(t, 'b') * cosR) + (_Runtime.field(t, 'd') * sinR)) : Dynamic));
-          (c = cast (((_Runtime.field(t, 'a') * -sinR) + (_Runtime.field(t, 'c') * cosR)) : Dynamic));
-          (d = cast (((_Runtime.field(t, 'b') * -sinR) + (_Runtime.field(t, 'd') * cosR)) : Dynamic));
-          (tx = cast ((((_Runtime.field(t, 'a') * px) + (_Runtime.field(t, 'c') * py)) + _Runtime.field(t, 'tx')) : Dynamic));
-          (ty = cast ((((_Runtime.field(t, 'b') * px) + (_Runtime.field(t, 'd') * py)) + _Runtime.field(t, 'ty')) : Dynamic));
+          (a = cast (((t.a * cosR) + (t.c * sinR)) : Dynamic));
+          (b = cast (((t.b * cosR) + (t.d * sinR)) : Dynamic));
+          (c = cast (((t.a * -sinR) + (t.c * cosR)) : Dynamic));
+          (d = cast (((t.b * -sinR) + (t.d * cosR)) : Dynamic));
+          (tx = cast ((((t.a * px) + (t.c * py)) + t.tx) : Dynamic));
+          (ty = cast ((((t.b * px) + (t.d * py)) + t.ty) : Dynamic));
         }
         flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (nodeAlpha * flighthq._internal._StaticIndex.readFloat32Array(alphas, i)));
         flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([a, b, c, d, tx, ty] : Array<Dynamic>));
-        flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([imageSource, _Runtime.field(region, 'x'), _Runtime.field(region, 'y'), _Runtime.field(region, 'width'), _Runtime.field(region, 'height'), 0.0, 0.0, _Runtime.field(region, 'width'), _Runtime.field(region, 'height')] : Array<Dynamic>));
+        flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([imageSource, region.x, region.y, region.width, region.height, 0.0, 0.0, region.width, region.height] : Array<Dynamic>));
         i++;
       }
     }

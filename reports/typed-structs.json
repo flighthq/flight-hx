@@ -5385,10 +5385,15 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 221,
-        "reflectiveSurvivors": []
+        "directAccesses": 221,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 8,
+            "reason": "computed-key"
+          }
+        ]
       },
       "escapes": [
         {
@@ -8838,9 +8843,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 405,
+        "directAccesses": 405,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -9234,10 +9239,19 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 705,
-        "reflectiveSurvivors": []
+        "directAccesses": 705,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 5,
+            "reason": "computed-key"
+          },
+          {
+            "accesses": 1,
+            "reason": "dynamic-enumeration"
+          }
+        ]
       },
       "escapes": [
         {
@@ -9763,9 +9777,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 236,
+        "directAccesses": 236,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -11520,16 +11534,16 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 438,
+        "reads": 432,
         "writes": 1
       },
       "declarationFingerprint": "sha256:b1031fe4ef5c1d3deb40e43e9ac35498c8bc35ad4217086bd1f8732d1f78a0f3",
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 439,
+        "directAccesses": 433,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -11767,9 +11781,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 258,
+        "directAccesses": 258,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -15346,9 +15360,9 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 704,
+        "directAccesses": 704,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -16789,10 +16803,15 @@
       "declarationKind": "interface",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 225,
-        "reflectiveSurvivors": []
+        "directAccesses": 225,
+        "mode": "direct",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": [
+          {
+            "accesses": 5,
+            "reason": "dynamic-enumeration"
+          }
+        ]
       },
       "escapes": [
         {
@@ -29501,17 +29520,17 @@
   ],
   "schemaVersion": 3,
   "summary": {
-    "auditOnlySchemas": 350,
-    "bindableAccesses": 10263,
+    "auditOnlySchemas": 342,
+    "bindableAccesses": 10257,
     "candidates": 405,
-    "directAccesses": 3271,
-    "directSchemas": 54,
+    "directAccesses": 6458,
+    "directSchemas": 62,
     "eligible": 404,
     "escapes": 348,
     "fields": 2028,
     "ineligible": 1,
-    "pendingAccesses": 6992,
-    "reflectiveSurvivors": 152
+    "pendingAccesses": 3799,
+    "reflectiveSurvivors": 171
   },
   "upstreamCommit": "5d24729f7360475e28a105ae0caeeaa2e1328260"
 }

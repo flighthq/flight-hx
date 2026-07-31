@@ -21,9 +21,9 @@ class SurfaceSharpen {
     _Runtime.callValue(boxBlurSurface, cast ([out, scratch, source, { radiusX: _Runtime.coalesce(_Runtime.field(options, 'radiusX'), function():Dynamic return cast 2.0), radiusY: _Runtime.coalesce(_Runtime.field(options, 'radiusY'), function():Dynamic return cast 2.0), passes: _Runtime.coalesce(_Runtime.field(options, 'passes'), function():Dynamic return cast 1.0) }] : Array<Dynamic>));
     w = _Runtime.field(source, 'width');
     h = _Runtime.field(source, 'height');
-    surfaceWidth = _Runtime.field(_Runtime.field(source, 'surface'), 'width');
-    surfaceHeight = _Runtime.field(_Runtime.field(source, 'surface'), 'height');
-    data = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
+    surfaceWidth = _Runtime.field(source, 'surface').width;
+    surfaceHeight = _Runtime.field(source, 'surface').height;
+    data = _Runtime.field(source, 'surface').data;
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {

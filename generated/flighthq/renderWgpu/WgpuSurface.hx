@@ -60,7 +60,7 @@ class WgpuSurface {
             __awaitValue1;
             mapped = new flighthq._internal._UInt8Array(_Runtime.callProperty(buffer, 'getMappedRange', cast ([] : Array<Dynamic>)));
             surface = _Runtime.callValue(createSurface, cast ([width, height] : Array<Dynamic>));
-            out = _Runtime.field(surface, 'data');
+            out = surface.data;
             swizzleBGRA = ((cast _Runtime.strictEquals(_Runtime.field(state, 'format'), 'bgra8unorm') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(state, 'format'), 'bgra8unorm-srgb') : Bool));
             {
               var y:Dynamic = 0.0;

@@ -18,10 +18,10 @@ class VelocitySample {
       _Runtime.setField(out, 'y', 0.0);
       return cast out;
     }
-    cx = (((_Runtime.field(currentWorldTransform, 'a') * pointX) + (_Runtime.field(currentWorldTransform, 'c') * pointY)) + _Runtime.field(currentWorldTransform, 'tx'));
-    cy = (((_Runtime.field(currentWorldTransform, 'b') * pointX) + (_Runtime.field(currentWorldTransform, 'd') * pointY)) + _Runtime.field(currentWorldTransform, 'ty'));
-    px = (((_Runtime.field(_Runtime.field(sample, 'previousWorldTransform'), 'a') * pointX) + (_Runtime.field(_Runtime.field(sample, 'previousWorldTransform'), 'c') * pointY)) + _Runtime.field(_Runtime.field(sample, 'previousWorldTransform'), 'tx'));
-    py = (((_Runtime.field(_Runtime.field(sample, 'previousWorldTransform'), 'b') * pointX) + (_Runtime.field(_Runtime.field(sample, 'previousWorldTransform'), 'd') * pointY)) + _Runtime.field(_Runtime.field(sample, 'previousWorldTransform'), 'ty'));
+    cx = (((currentWorldTransform.a * pointX) + (currentWorldTransform.c * pointY)) + currentWorldTransform.tx);
+    cy = (((currentWorldTransform.b * pointX) + (currentWorldTransform.d * pointY)) + currentWorldTransform.ty);
+    px = (((_Runtime.field(sample, 'previousWorldTransform').a * pointX) + (_Runtime.field(sample, 'previousWorldTransform').c * pointY)) + _Runtime.field(sample, 'previousWorldTransform').tx);
+    py = (((_Runtime.field(sample, 'previousWorldTransform').b * pointX) + (_Runtime.field(sample, 'previousWorldTransform').d * pointY)) + _Runtime.field(sample, 'previousWorldTransform').ty);
     _Runtime.setField(out, 'x', (cx - px));
     _Runtime.setField(out, 'y', (cy - py));
     return cast out;

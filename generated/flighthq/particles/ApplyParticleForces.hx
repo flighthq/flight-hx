@@ -27,10 +27,10 @@ class ApplyParticleForces {
     var velocities:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast deltaTime : Float) <= (cast 0.0 : Float)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(forces, 'length'), 0.0) : Bool)) : Bool)) { return; }
     data = _Runtime.field(emitter, 'data');
-    count = _Runtime.field(data, 'particleCount');
-    transforms = _Runtime.field(data, 'transforms');
-    positionsZ = _Runtime.field(data, 'positionsZ');
-    velocities = _Runtime.field(state, 'velocities');
+    count = data.particleCount;
+    transforms = data.transforms;
+    positionsZ = data.positionsZ;
+    velocities = state.velocities;
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {

@@ -116,20 +116,20 @@ class Transform2d {
     if ((cast _Runtime.strictEquals(runtime.localMatrix, null) : Bool)) { (runtime.localMatrix = cast (_Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) : Dynamic)); }
     matrix = runtime.localMatrix;
     if ((cast ((cast _Runtime.strictEquals(target.skewX, 0.0) : Bool) && (cast _Runtime.strictEquals(target.skewY, 0.0) : Bool)) : Bool)) {
-      _Runtime.setField(matrix, 'a', (runtime.rotationCosine * target.scaleX));
-      _Runtime.setField(matrix, 'b', (runtime.rotationSine * target.scaleX));
-      _Runtime.setField(matrix, 'c', (-runtime.rotationSine * target.scaleY));
-      _Runtime.setField(matrix, 'd', (runtime.rotationCosine * target.scaleY));
+      (matrix.a = cast ((runtime.rotationCosine * target.scaleX) : Dynamic));
+      (matrix.b = cast ((runtime.rotationSine * target.scaleX) : Dynamic));
+      (matrix.c = cast ((-runtime.rotationSine * target.scaleY) : Dynamic));
+      (matrix.d = cast ((runtime.rotationCosine * target.scaleY) : Dynamic));
     } else {
       var radY:Dynamic = ((runtime.rotationAngle + target.skewY) * Transform2d.DEG_TO_RAD__transform2d);
       var radX:Dynamic = ((runtime.rotationAngle + target.skewX) * Transform2d.DEG_TO_RAD__transform2d);
-      _Runtime.setField(matrix, 'a', (HxMath.cos(radY) * target.scaleX));
-      _Runtime.setField(matrix, 'b', (HxMath.sin(radY) * target.scaleX));
-      _Runtime.setField(matrix, 'c', (-HxMath.sin(radX) * target.scaleY));
-      _Runtime.setField(matrix, 'd', (HxMath.cos(radX) * target.scaleY));
+      (matrix.a = cast ((HxMath.cos(radY) * target.scaleX) : Dynamic));
+      (matrix.b = cast ((HxMath.sin(radY) * target.scaleX) : Dynamic));
+      (matrix.c = cast ((-HxMath.sin(radX) * target.scaleY) : Dynamic));
+      (matrix.d = cast ((HxMath.cos(radX) * target.scaleY) : Dynamic));
     }
-    _Runtime.setField(matrix, 'tx', (target.x - ((_Runtime.field(matrix, 'a') * target.pivotX) + (_Runtime.field(matrix, 'c') * target.pivotY))));
-    _Runtime.setField(matrix, 'ty', (target.y - ((_Runtime.field(matrix, 'b') * target.pivotX) + (_Runtime.field(matrix, 'd') * target.pivotY))));
+    (matrix.tx = cast ((target.x - ((matrix.a * target.pivotX) + (matrix.c * target.pivotY))) : Dynamic));
+    (matrix.ty = cast ((target.y - ((matrix.b * target.pivotX) + (matrix.d * target.pivotY))) : Dynamic));
     _Runtime.setField(runtime, 'localTransformUsingLocalTransformId', _Runtime.field(runtime, 'localTransformId'));
   }
 

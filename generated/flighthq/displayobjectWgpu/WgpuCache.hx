@@ -168,8 +168,8 @@ class WgpuCache {
     target = _Runtime.callValue(ensureWgpuRenderCacheTarget, cast ([screenState, cache, width, height] : Array<Dynamic>));
     _Runtime.callValue(computeDisplayObjectRenderTargetTransform, cast ([WgpuCache._renderTransform__wgpuCache, source, WgpuCache._bounds__wgpuCache, padding, padding] : Array<Dynamic>));
     _Runtime.callValue(computeRenderCacheTransform, cast ([_Runtime.field(cache, 'transform'), WgpuCache._bounds__wgpuCache, padding, padding] : Array<Dynamic>));
-    _Runtime.setField(WgpuCache._yInvert__wgpuCache, 'd', -1.0);
-    _Runtime.setField(WgpuCache._yInvert__wgpuCache, 'ty', _Runtime.field(target, 'height'));
+    (WgpuCache._yInvert__wgpuCache.d = cast (-1.0 : Dynamic));
+    (WgpuCache._yInvert__wgpuCache.ty = cast (_Runtime.field(target, 'height') : Dynamic));
     _Runtime.callValue(multiplyMatrix, cast ([WgpuCache._bakeTransform__wgpuCache, WgpuCache._yInvert__wgpuCache, WgpuCache._renderTransform__wgpuCache] : Array<Dynamic>));
     _Runtime.setField(cacheRuntime, 'spriteBatchBufferCursor', 0.0);
     _Runtime.callValue(beginWgpuRenderPass, cast ([cacheState, target] : Array<Dynamic>));

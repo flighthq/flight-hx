@@ -151,7 +151,7 @@ class PickScene {
     _Runtime.callValue(PickScene.transformPointByMatrix4__pickScene, cast ([PickScene._localRay__pickScene.origin, ray.origin, PickScene._inverseWorld__pickScene.m] : Array<Dynamic>));
     _Runtime.callValue(PickScene.transformDirectionByMatrix4__pickScene, cast ([PickScene._localRay__pickScene.direction, ray.direction, PickScene._inverseWorld__pickScene.m] : Array<Dynamic>));
     geometry = _Runtime.field(mesh, 'geometry');
-    indices = _Runtime.field(geometry, 'indices');
+    indices = geometry.indices;
     triangleCount = _Runtime.callValue(getMeshGeometryTriangleCount, cast ([geometry] : Array<Dynamic>));
     {
       var triangle:Dynamic = 0.0;

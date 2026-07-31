@@ -115,8 +115,8 @@ class SurfaceBevel {
     var sy:Dynamic = cast _Runtime.UNDEFINED;
     sx = (_Runtime.field(source, 'x') + px);
     sy = (_Runtime.field(source, 'y') + py);
-    if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'height') : Float)) : Bool)) : Bool)) { return cast 0.0; }
-    return cast flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), ((((sy * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sx) * 4.0) + 3.0));
+    if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast _Runtime.field(source, 'surface').width : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(source, 'surface').height : Float)) : Bool)) : Bool)) { return cast 0.0; }
+    return cast flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'surface').data, ((((sy * _Runtime.field(source, 'surface').width) + sx) * 4.0) + 3.0));
     return cast null;
   }
 

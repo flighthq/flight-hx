@@ -17,20 +17,20 @@ class ParticleEmitterState {
   }
 
   public static function ensureParticleEmitterStateCapacity(state:flighthq.types.ParticleEmitterState, capacity:Float, hasColorVariance:Bool):Void {
-    if ((cast ((cast _Runtime.field(_Runtime.field(state, 'lifetimes'), 'length') : Float) >= (cast (capacity * 2.0) : Float)) : Bool)) {
-      if ((cast ((cast hasColorVariance : Bool) && (cast ((cast _Runtime.field(_Runtime.field(state, 'colorBirth'), 'length') : Float) < (cast (capacity * 3.0) : Float)) : Bool)) : Bool)) {
-        _Runtime.setField(state, 'colorBirth', _Runtime.callValue(reserveFloat32Array, cast ([_Runtime.field(state, 'colorBirth'), (capacity * 3.0)] : Array<Dynamic>)));
-        _Runtime.setField(state, 'colorDeath', _Runtime.callValue(reserveFloat32Array, cast ([_Runtime.field(state, 'colorDeath'), (capacity * 3.0)] : Array<Dynamic>)));
+    if ((cast ((cast _Runtime.field(state.lifetimes, 'length') : Float) >= (cast (capacity * 2.0) : Float)) : Bool)) {
+      if ((cast ((cast hasColorVariance : Bool) && (cast ((cast _Runtime.field(state.colorBirth, 'length') : Float) < (cast (capacity * 3.0) : Float)) : Bool)) : Bool)) {
+        (state.colorBirth = cast (_Runtime.callValue(reserveFloat32Array, cast ([state.colorBirth, (capacity * 3.0)] : Array<Dynamic>)) : Dynamic));
+        (state.colorDeath = cast (_Runtime.callValue(reserveFloat32Array, cast ([state.colorDeath, (capacity * 3.0)] : Array<Dynamic>)) : Dynamic));
       }
       return;
     }
-    _Runtime.setField(state, 'lifetimes', _Runtime.callValue(reserveFloat32Array, cast ([_Runtime.field(state, 'lifetimes'), (capacity * 2.0)] : Array<Dynamic>)));
-    _Runtime.setField(state, 'velocities', _Runtime.callValue(reserveFloat32Array, cast ([_Runtime.field(state, 'velocities'), (capacity * PARTICLE_VELOCITY_STRIDE)] : Array<Dynamic>)));
-    _Runtime.setField(state, 'scales', _Runtime.callValue(reserveFloat32Array, cast ([_Runtime.field(state, 'scales'), capacity] : Array<Dynamic>)));
-    _Runtime.setField(state, 'rotationSpeeds', _Runtime.callValue(reserveFloat32Array, cast ([_Runtime.field(state, 'rotationSpeeds'), capacity] : Array<Dynamic>)));
+    (state.lifetimes = cast (_Runtime.callValue(reserveFloat32Array, cast ([state.lifetimes, (capacity * 2.0)] : Array<Dynamic>)) : Dynamic));
+    (state.velocities = cast (_Runtime.callValue(reserveFloat32Array, cast ([state.velocities, (capacity * PARTICLE_VELOCITY_STRIDE)] : Array<Dynamic>)) : Dynamic));
+    (state.scales = cast (_Runtime.callValue(reserveFloat32Array, cast ([state.scales, capacity] : Array<Dynamic>)) : Dynamic));
+    (state.rotationSpeeds = cast (_Runtime.callValue(reserveFloat32Array, cast ([state.rotationSpeeds, capacity] : Array<Dynamic>)) : Dynamic));
     if ((cast hasColorVariance : Bool)) {
-      _Runtime.setField(state, 'colorBirth', _Runtime.callValue(reserveFloat32Array, cast ([_Runtime.field(state, 'colorBirth'), (capacity * 3.0)] : Array<Dynamic>)));
-      _Runtime.setField(state, 'colorDeath', _Runtime.callValue(reserveFloat32Array, cast ([_Runtime.field(state, 'colorDeath'), (capacity * 3.0)] : Array<Dynamic>)));
+      (state.colorBirth = cast (_Runtime.callValue(reserveFloat32Array, cast ([state.colorBirth, (capacity * 3.0)] : Array<Dynamic>)) : Dynamic));
+      (state.colorDeath = cast (_Runtime.callValue(reserveFloat32Array, cast ([state.colorDeath, (capacity * 3.0)] : Array<Dynamic>)) : Dynamic));
     }
   }
 }

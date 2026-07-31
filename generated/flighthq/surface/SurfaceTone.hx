@@ -15,22 +15,22 @@ class SurfaceTone {
     var sd:Dynamic = cast _Runtime.UNDEFINED;
     w = HxMath.min(_Runtime.field(out, 'width'), _Runtime.field(source, 'width'));
     h = HxMath.min(_Runtime.field(out, 'height'), _Runtime.field(source, 'height'));
-    od = _Runtime.field(_Runtime.field(out, 'surface'), 'data');
-    sd = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
+    od = _Runtime.field(out, 'surface').data;
+    sd = _Runtime.field(source, 'surface').data;
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
         var sy:Dynamic = (_Runtime.field(source, 'y') + py);
         var oy:Dynamic = (_Runtime.field(out, 'y') + py);
-        if ((cast ((cast ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'height') : Float)) : Bool)) : Bool) || (cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast oy : Float) >= (cast _Runtime.field(_Runtime.field(out, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
+        if ((cast ((cast ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(source, 'surface').height : Float)) : Bool)) : Bool) || (cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast oy : Float) >= (cast _Runtime.field(out, 'surface').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
             var sx:Dynamic = (_Runtime.field(source, 'x') + px);
             var ox:Dynamic = (_Runtime.field(out, 'x') + px);
-            if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast ox : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast ox : Float) >= (cast _Runtime.field(_Runtime.field(out, 'surface'), 'width') : Float)) : Bool)) : Bool)) { px++; continue; }
-            var si:Dynamic = (((sy * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sx) * 4.0);
-            var oi:Dynamic = (((oy * _Runtime.field(_Runtime.field(out, 'surface'), 'width')) + ox) * 4.0);
+            if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast _Runtime.field(source, 'surface').width : Float)) : Bool)) : Bool) || (cast ((cast ox : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast ox : Float) >= (cast _Runtime.field(out, 'surface').width : Float)) : Bool)) : Bool)) { px++; continue; }
+            var si:Dynamic = (((sy * _Runtime.field(source, 'surface').width) + sx) * 4.0);
+            var oi:Dynamic = (((oy * _Runtime.field(out, 'surface').width) + ox) * 4.0);
             var r:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, si);
             var g:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 1.0));
             var b:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 2.0));

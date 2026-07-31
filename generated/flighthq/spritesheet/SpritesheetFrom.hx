@@ -23,8 +23,8 @@ class SpritesheetFrom {
     var animations:Dynamic = cast _Runtime.UNDEFINED;
     nameToRegionId = _Runtime.construct(_Runtime.globalValue('Map'), []);
     for (region in _Runtime.iterable(_Runtime.field(atlas, 'regions'))) {
-      if ((cast !_Runtime.strictEquals(_Runtime.field(region, 'name'), null) : Bool)) {
-        ((cast nameToRegionId : flighthq._internal._Map).set(_Runtime.field(region, 'name'), _Runtime.field(region, 'id')));
+      if ((cast !_Runtime.strictEquals(region.name, null) : Bool)) {
+        ((cast nameToRegionId : flighthq._internal._Map).set(region.name, region.id));
       }
     }
     frames = _Runtime.callProperty(_Runtime.field(data, 'frames'), 'map', cast ([function(fd:Dynamic, index:Dynamic) {
@@ -111,7 +111,7 @@ class SpritesheetFrom {
     var frames:Dynamic = cast _Runtime.UNDEFINED;
     __destructure1 = tileset;
     atlas = _Runtime.field(__destructure1, 'atlas');
-    frames = _Runtime.callProperty(_Runtime.coalesce(_Runtime.optionalField(atlas, 'regions'), function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(region:Dynamic) return _Runtime.callValue(createSpritesheetFrame, cast ([{ id: _Runtime.field(region, 'id') }] : Array<Dynamic>))] : Array<Dynamic>));
+    frames = _Runtime.callProperty(_Runtime.coalesce(_Runtime.optionalField(atlas, 'regions'), function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(region:Dynamic) return _Runtime.callValue(createSpritesheetFrame, cast ([{ id: region.id }] : Array<Dynamic>))] : Array<Dynamic>));
     return cast _Runtime.callValue(createSpritesheet, cast ([{ atlas: atlas, frames: frames }] : Array<Dynamic>));
     return cast null;
   }

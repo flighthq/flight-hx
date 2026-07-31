@@ -83,12 +83,12 @@ class GlVelocity {
     if ((cast !(cast worldSpace : Bool) : Bool)) {
       _Runtime.callValue(ensureNodeWorldMatrix, cast ([(cast (cast node : Dynamic) : Transform2DNode<Dynamic>)] : Array<Dynamic>));
       var transform:Dynamic = _Runtime.callValue(getNodeWorldMatrix, cast ([(cast (cast node : Dynamic) : Transform2DNode<Dynamic>)] : Array<Dynamic>));
-      (wa = cast (_Runtime.field(transform, 'a') : Dynamic));
-      (wb = cast (_Runtime.field(transform, 'b') : Dynamic));
-      (wc = cast (_Runtime.field(transform, 'c') : Dynamic));
-      (wd = cast (_Runtime.field(transform, 'd') : Dynamic));
-      (wtx = cast (_Runtime.field(transform, 'tx') : Dynamic));
-      (wty = cast (_Runtime.field(transform, 'ty') : Dynamic));
+      (wa = cast (transform.a : Dynamic));
+      (wb = cast (transform.b : Dynamic));
+      (wc = cast (transform.c : Dynamic));
+      (wd = cast (transform.d : Dynamic));
+      (wtx = cast (transform.tx : Dynamic));
+      (wty = cast (transform.ty : Dynamic));
     }
     {
       var i:Dynamic = 0.0;
@@ -99,8 +99,8 @@ class GlVelocity {
         var id:Dynamic = flighthq._internal._StaticIndex.readUint16Array(ids, i);
         if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
         var region:Dynamic = flighthq._internal._StaticIndex.readArray(regions, id);
-        var rw:Dynamic = _Runtime.field(region, 'width');
-        var rh:Dynamic = _Runtime.field(region, 'height');
+        var rw:Dynamic = region.width;
+        var rh:Dynamic = region.height;
         if ((cast ((cast ((cast rw : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast rh : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
         var tt:Dynamic = (i * 4.0);
         var px:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, tt);
@@ -163,12 +163,12 @@ class GlVelocity {
       var numRegions:Dynamic = _Runtime.field(regions, 'length');
       _Runtime.callValue(ensureNodeWorldMatrix, cast ([(cast (cast node : Dynamic) : Transform2DNode<Dynamic>)] : Array<Dynamic>));
       var transform:Dynamic = _Runtime.callValue(getNodeWorldMatrix, cast ([(cast (cast node : Dynamic) : Transform2DNode<Dynamic>)] : Array<Dynamic>));
-      var pa:Dynamic = _Runtime.field(transform, 'a');
-      var pb:Dynamic = _Runtime.field(transform, 'b');
-      var pc:Dynamic = _Runtime.field(transform, 'c');
-      var pd:Dynamic = _Runtime.field(transform, 'd');
-      var ptx:Dynamic = _Runtime.field(transform, 'tx');
-      var pty:Dynamic = _Runtime.field(transform, 'ty');
+      var pa:Dynamic = transform.a;
+      var pb:Dynamic = transform.b;
+      var pc:Dynamic = transform.c;
+      var pd:Dynamic = transform.d;
+      var ptx:Dynamic = transform.tx;
+      var pty:Dynamic = transform.ty;
       var isVector2:Dynamic = _Runtime.strictEquals(transformType, 'vector2');
       {
         var i:Dynamic = 0.0;
@@ -179,8 +179,8 @@ class GlVelocity {
           var id:Dynamic = flighthq._internal._StaticIndex.readUint16Array(ids, i);
           if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
           var region:Dynamic = flighthq._internal._StaticIndex.readArray(regions, id);
-          var w:Dynamic = _Runtime.field(region, 'width');
-          var h:Dynamic = _Runtime.field(region, 'height');
+          var w:Dynamic = region.width;
+          var h:Dynamic = region.height;
           if ((cast ((cast ((cast w : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast h : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
           var wa:Float = cast _Runtime.UNDEFINED;
           var wb:Float = cast _Runtime.UNDEFINED;

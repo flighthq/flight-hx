@@ -112,7 +112,7 @@ class SkinMeshGeometry {
         v++;
       }
     }
-    _Runtime.incrementField(geometry, 'version', 1, true);
+    geometry.version++;
   }
 
   public static function floatOffsetForSemantic__skinMeshGeometry(layout:VertexAttributeLayout, semantic:String):Float {

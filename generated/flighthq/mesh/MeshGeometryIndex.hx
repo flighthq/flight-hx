@@ -15,16 +15,16 @@ class MeshGeometryIndex {
     var indexCount:Dynamic = cast _Runtime.UNDEFINED;
     var lines:Array<Float> = cast _Runtime.UNDEFINED;
     var out:Dynamic = cast _Runtime.UNDEFINED;
-    useUint32 = _Runtime.select(_Runtime.field(geometry, 'indices'), function():Dynamic return cast _Runtime.isInstanceOf(_Runtime.field(geometry, 'indices'), _Runtime.globalValue('Uint32Array')), function():Dynamic return cast true);
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-list') : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-strip') : Bool)) : Bool)) {
+    useUint32 = _Runtime.select(geometry.indices, function():Dynamic return cast _Runtime.isInstanceOf(geometry.indices, _Runtime.globalValue('Uint32Array')), function():Dynamic return cast true);
+    if ((cast ((cast !_Runtime.strictEquals(geometry.topology, 'triangle-list') : Bool) && (cast !_Runtime.strictEquals(geometry.topology, 'triangle-strip') : Bool)) : Bool)) {
       return cast ((cast useUint32 : Bool) ? (cast new flighthq._internal._UInt32Array(0.0) : Dynamic) : (cast new flighthq._internal._UInt16Array(0.0) : Dynamic));
     }
-    indices = _Runtime.field(geometry, 'indices');
-    floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
+    indices = geometry.indices;
+    floatsPerVertex = (_Runtime.field(geometry.layout, 'stride') / 4.0);
+    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(geometry.vertices, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     indexCount = _Runtime.select(indices, function():Dynamic return cast _Runtime.field(indices, 'length'), function():Dynamic return cast vertexCount);
     lines = cast ([] : Array<Dynamic>);
-    if ((cast _Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-list') : Bool)) {
+    if ((cast _Runtime.strictEquals(geometry.topology, 'triangle-list') : Bool)) {
       {
         var t:Dynamic = 0.0;
         while ((cast ((cast (t + 2.0) : Float) < (cast indexCount : Float)) : Bool)) {
@@ -63,13 +63,13 @@ class MeshGeometryIndex {
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var sourceVertices:Dynamic = cast _Runtime.UNDEFINED;
     var vertices:Dynamic = cast _Runtime.UNDEFINED;
-    indices = _Runtime.field(geometry, 'indices');
-    floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    sourceVertices = _Runtime.field(geometry, 'vertices');
+    indices = geometry.indices;
+    floatsPerVertex = (_Runtime.field(geometry.layout, 'stride') / 4.0);
+    sourceVertices = geometry.vertices;
     if ((cast !_Runtime.truthy(indices) : Bool)) {
       var vertices:Dynamic = new flighthq._internal._Float32Array(_Runtime.field(sourceVertices, 'length'));
       _Runtime.callProperty(vertices, 'set', cast ([sourceVertices] : Array<Dynamic>));
-      return cast _Runtime.callValue(createMeshGeometry, cast ([{ indices: null, layout: _Runtime.field(geometry, 'layout'), topology: _Runtime.field(geometry, 'topology'), vertices: vertices }] : Array<Dynamic>));
+      return cast _Runtime.callValue(createMeshGeometry, cast ([{ indices: null, layout: geometry.layout, topology: geometry.topology, vertices: vertices }] : Array<Dynamic>));
     }
     vertices = new flighthq._internal._Float32Array((_Runtime.field(indices, 'length') * floatsPerVertex));
     {
@@ -87,7 +87,7 @@ class MeshGeometryIndex {
         i++;
       }
     }
-    return cast _Runtime.callValue(createMeshGeometry, cast ([{ indices: null, layout: _Runtime.field(geometry, 'layout'), topology: _Runtime.field(geometry, 'topology'), vertices: vertices }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createMeshGeometry, cast ([{ indices: null, layout: geometry.layout, topology: geometry.topology, vertices: vertices }] : Array<Dynamic>));
     return cast null;
   }
 }

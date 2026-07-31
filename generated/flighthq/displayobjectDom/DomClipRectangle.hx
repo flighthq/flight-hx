@@ -68,14 +68,14 @@ class DomClipRectangle {
     var y2:Dynamic = cast _Runtime.UNDEFINED;
     var x3:Dynamic = cast _Runtime.UNDEFINED;
     var y3:Dynamic = cast _Runtime.UNDEFINED;
-    x0 = (((_Runtime.field(transform, 'a') * _Runtime.field(rect, 'x')) + (_Runtime.field(transform, 'c') * _Runtime.field(rect, 'y'))) + _Runtime.field(transform, 'tx'));
-    y0 = (((_Runtime.field(transform, 'b') * _Runtime.field(rect, 'x')) + (_Runtime.field(transform, 'd') * _Runtime.field(rect, 'y'))) + _Runtime.field(transform, 'ty'));
-    x1 = (((_Runtime.field(transform, 'a') * (_Runtime.field(rect, 'x') + _Runtime.field(rect, 'width'))) + (_Runtime.field(transform, 'c') * _Runtime.field(rect, 'y'))) + _Runtime.field(transform, 'tx'));
-    y1 = (((_Runtime.field(transform, 'b') * (_Runtime.field(rect, 'x') + _Runtime.field(rect, 'width'))) + (_Runtime.field(transform, 'd') * _Runtime.field(rect, 'y'))) + _Runtime.field(transform, 'ty'));
-    x2 = (((_Runtime.field(transform, 'a') * _Runtime.field(rect, 'x')) + (_Runtime.field(transform, 'c') * (_Runtime.field(rect, 'y') + _Runtime.field(rect, 'height')))) + _Runtime.field(transform, 'tx'));
-    y2 = (((_Runtime.field(transform, 'b') * _Runtime.field(rect, 'x')) + (_Runtime.field(transform, 'd') * (_Runtime.field(rect, 'y') + _Runtime.field(rect, 'height')))) + _Runtime.field(transform, 'ty'));
-    x3 = (((_Runtime.field(transform, 'a') * (_Runtime.field(rect, 'x') + _Runtime.field(rect, 'width'))) + (_Runtime.field(transform, 'c') * (_Runtime.field(rect, 'y') + _Runtime.field(rect, 'height')))) + _Runtime.field(transform, 'tx'));
-    y3 = (((_Runtime.field(transform, 'b') * (_Runtime.field(rect, 'x') + _Runtime.field(rect, 'width'))) + (_Runtime.field(transform, 'd') * (_Runtime.field(rect, 'y') + _Runtime.field(rect, 'height')))) + _Runtime.field(transform, 'ty'));
+    x0 = (((transform.a * _Runtime.field(rect, 'x')) + (transform.c * _Runtime.field(rect, 'y'))) + transform.tx);
+    y0 = (((transform.b * _Runtime.field(rect, 'x')) + (transform.d * _Runtime.field(rect, 'y'))) + transform.ty);
+    x1 = (((transform.a * (_Runtime.field(rect, 'x') + _Runtime.field(rect, 'width'))) + (transform.c * _Runtime.field(rect, 'y'))) + transform.tx);
+    y1 = (((transform.b * (_Runtime.field(rect, 'x') + _Runtime.field(rect, 'width'))) + (transform.d * _Runtime.field(rect, 'y'))) + transform.ty);
+    x2 = (((transform.a * _Runtime.field(rect, 'x')) + (transform.c * (_Runtime.field(rect, 'y') + _Runtime.field(rect, 'height')))) + transform.tx);
+    y2 = (((transform.b * _Runtime.field(rect, 'x')) + (transform.d * (_Runtime.field(rect, 'y') + _Runtime.field(rect, 'height')))) + transform.ty);
+    x3 = (((transform.a * (_Runtime.field(rect, 'x') + _Runtime.field(rect, 'width'))) + (transform.c * (_Runtime.field(rect, 'y') + _Runtime.field(rect, 'height')))) + transform.tx);
+    y3 = (((transform.b * (_Runtime.field(rect, 'x') + _Runtime.field(rect, 'width'))) + (transform.d * (_Runtime.field(rect, 'y') + _Runtime.field(rect, 'height')))) + transform.ty);
     return cast { bottom: HxMath.max(HxMath.max(HxMath.max(y0, y1), y2), y3), left: HxMath.min(HxMath.min(HxMath.min(x0, x1), x2), x3), right: HxMath.max(HxMath.max(HxMath.max(x0, x1), x2), x3), top: HxMath.min(HxMath.min(HxMath.min(y0, y1), y2), y3) };
     return cast null;
   }
@@ -100,14 +100,14 @@ class DomClipRectangle {
     var invTx:Dynamic = cast _Runtime.UNDEFINED;
     var invTy:Dynamic = cast _Runtime.UNDEFINED;
     matrix = _Runtime.callValue(DomClipRectangle.getElementMatrix__domClipRectangle, cast ([element] : Array<Dynamic>));
-    det = ((_Runtime.field(matrix, 'a') * _Runtime.field(matrix, 'd')) - (_Runtime.field(matrix, 'b') * _Runtime.field(matrix, 'c')));
+    det = ((matrix.a * matrix.d) - (matrix.b * matrix.c));
     if ((cast _Runtime.strictEquals(det, 0.0) : Bool)) { return cast function() return cast ([0.0, 0.0] : Array<Dynamic>); }
-    invA = (_Runtime.field(matrix, 'd') / det);
-    invB = (-_Runtime.field(matrix, 'b') / det);
-    invC = (-_Runtime.field(matrix, 'c') / det);
-    invD = (_Runtime.field(matrix, 'a') / det);
-    invTx = (((_Runtime.field(matrix, 'c') * _Runtime.field(matrix, 'ty')) - (_Runtime.field(matrix, 'd') * _Runtime.field(matrix, 'tx'))) / det);
-    invTy = (((_Runtime.field(matrix, 'b') * _Runtime.field(matrix, 'tx')) - (_Runtime.field(matrix, 'a') * _Runtime.field(matrix, 'ty'))) / det);
+    invA = (matrix.d / det);
+    invB = (-matrix.b / det);
+    invC = (-matrix.c / det);
+    invD = (matrix.a / det);
+    invTx = (((matrix.c * matrix.ty) - (matrix.d * matrix.tx)) / det);
+    invTy = (((matrix.b * matrix.tx) - (matrix.a * matrix.ty)) / det);
     return cast function(x:Dynamic, y:Dynamic) return cast ([(((invA * x) + (invC * y)) + invTx), (((invB * x) + (invD * y)) + invTy)] : Array<Dynamic>);
     return cast null;
   }
@@ -164,14 +164,14 @@ class DomClipRectangle {
     var x3:Dynamic = cast _Runtime.UNDEFINED;
     var y3:Dynamic = cast _Runtime.UNDEFINED;
     matrix = _Runtime.callValue(DomClipRectangle.getElementMatrix__domClipRectangle, cast ([element] : Array<Dynamic>));
-    det = ((_Runtime.field(matrix, 'a') * _Runtime.field(matrix, 'd')) - (_Runtime.field(matrix, 'b') * _Runtime.field(matrix, 'c')));
+    det = ((matrix.a * matrix.d) - (matrix.b * matrix.c));
     if ((cast _Runtime.strictEquals(det, 0.0) : Bool)) { return cast { bottom: 0.0, left: 0.0, right: 0.0, top: 0.0 }; }
-    invA = (_Runtime.field(matrix, 'd') / det);
-    invB = (-_Runtime.field(matrix, 'b') / det);
-    invC = (-_Runtime.field(matrix, 'c') / det);
-    invD = (_Runtime.field(matrix, 'a') / det);
-    invTx = (((_Runtime.field(matrix, 'c') * _Runtime.field(matrix, 'ty')) - (_Runtime.field(matrix, 'd') * _Runtime.field(matrix, 'tx'))) / det);
-    invTy = (((_Runtime.field(matrix, 'b') * _Runtime.field(matrix, 'tx')) - (_Runtime.field(matrix, 'a') * _Runtime.field(matrix, 'ty'))) / det);
+    invA = (matrix.d / det);
+    invB = (-matrix.b / det);
+    invC = (-matrix.c / det);
+    invD = (matrix.a / det);
+    invTx = (((matrix.c * matrix.ty) - (matrix.d * matrix.tx)) / det);
+    invTy = (((matrix.b * matrix.tx) - (matrix.a * matrix.ty)) / det);
     x0 = (((invA * _Runtime.field(rect, 'left')) + (invC * _Runtime.field(rect, 'top'))) + invTx);
     y0 = (((invB * _Runtime.field(rect, 'left')) + (invD * _Runtime.field(rect, 'top'))) + invTy);
     x1 = (((invA * _Runtime.field(rect, 'right')) + (invC * _Runtime.field(rect, 'top'))) + invTx);

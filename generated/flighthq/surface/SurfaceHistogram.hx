@@ -29,13 +29,13 @@ class SurfaceHistogram {
     green = _Runtime.fill(_Runtime.createArray(256.0), 0.0, 0, null, 1);
     blue = _Runtime.fill(_Runtime.createArray(256.0), 0.0, 0, null, 1);
     alpha = _Runtime.fill(_Runtime.createArray(256.0), 0.0, 0, null, 1);
-    data = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
-    surfaceWidth = _Runtime.field(_Runtime.field(source, 'surface'), 'width');
+    data = _Runtime.field(source, 'surface').data;
+    surfaceWidth = _Runtime.field(source, 'surface').width;
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(source, 'height') : Float)) : Bool)) {
         var y:Dynamic = (_Runtime.field(source, 'y') + py);
-        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
+        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(source, 'surface').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast _Runtime.field(source, 'width') : Float)) : Bool)) {

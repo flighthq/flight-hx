@@ -97,7 +97,7 @@ class GlShapeMesh {
     iw = (2.0 / _Runtime.orValue(_Runtime.field(viewport, 'width'), function():Dynamic return cast 1.0));
     ih = (2.0 / _Runtime.orValue(_Runtime.field(viewport, 'height'), function():Dynamic return cast 1.0));
     t = _Runtime.field(renderProxy, 'transform2D');
-    return cast new flighthq._internal._Float32Array(cast ([(_Runtime.field(t, 'a') * iw), (-_Runtime.field(t, 'b') * ih), 0.0, (_Runtime.field(t, 'c') * iw), (-_Runtime.field(t, 'd') * ih), 0.0, ((_Runtime.field(t, 'tx') * iw) - 1.0), ((-_Runtime.field(t, 'ty') * ih) + 1.0), 1.0] : Array<Dynamic>));
+    return cast new flighthq._internal._Float32Array(cast ([(t.a * iw), (-t.b * ih), 0.0, (t.c * iw), (-t.d * ih), 0.0, ((t.tx * iw) - 1.0), ((-t.ty * ih) + 1.0), 1.0] : Array<Dynamic>));
     return cast null;
   }
 }

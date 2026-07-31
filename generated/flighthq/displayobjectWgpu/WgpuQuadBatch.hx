@@ -81,12 +81,12 @@ class WgpuQuadBatch {
     instanceData = _Runtime.field(runtime, 'spriteBatchInstanceData');
     isVector2 = _Runtime.strictEquals(_Runtime.field(data, 'transformType'), 'vector2');
     pt = _Runtime.field(quadBatch, 'transform2D');
-    pa = _Runtime.field(pt, 'a');
-    pb = _Runtime.field(pt, 'b');
-    pc = _Runtime.field(pt, 'c');
-    pd = _Runtime.field(pt, 'd');
-    ptx = _Runtime.field(pt, 'tx');
-    pty = _Runtime.field(pt, 'ty');
+    pa = pt.a;
+    pb = pt.b;
+    pc = pt.c;
+    pd = pt.d;
+    ptx = pt.tx;
+    pty = pt.ty;
     alpha = _Runtime.field(quadBatch, 'alpha');
     writeBase = base;
     drawCount = 0.0;
@@ -96,7 +96,7 @@ class WgpuQuadBatch {
         var id:Dynamic = flighthq._internal._StaticIndex.readUint16Array(ids, i);
         if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
         var region:Dynamic = flighthq._internal._StaticIndex.readArray(regions, id);
-        if ((cast ((cast ((cast _Runtime.field(region, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(region, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
+        if ((cast ((cast ((cast region.width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast region.height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
         if ((cast isVector2 : Bool)) {
           var dx:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (i * 2.0));
           var dy:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, ((i * 2.0) + 1.0));
@@ -121,12 +121,12 @@ class WgpuQuadBatch {
           flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 4.0), (((pa * ltx) + (pc * lty)) + ptx));
           flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 5.0), (((pb * ltx) + (pd * lty)) + pty));
         }
-        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 6.0), _Runtime.field(region, 'width'));
-        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 7.0), _Runtime.field(region, 'height'));
-        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 8.0), (_Runtime.field(region, 'x') * iw));
-        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 9.0), (_Runtime.field(region, 'y') * ih));
-        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 10.0), ((_Runtime.field(region, 'x') + _Runtime.field(region, 'width')) * iw));
-        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 11.0), ((_Runtime.field(region, 'y') + _Runtime.field(region, 'height')) * ih));
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 6.0), region.width);
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 7.0), region.height);
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 8.0), (region.x * iw));
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 9.0), (region.y * ih));
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 10.0), ((region.x + region.width) * iw));
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 11.0), ((region.y + region.height) * ih));
         flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 12.0), alpha);
         _Runtime.callValue(packWgpuSpriteBatchMaterialInstance, cast ([state, nodeMaterialData, (startCount + drawCount)] : Array<Dynamic>));
         var colorTransform:Dynamic = _Runtime.coalesce((cast _Runtime.optionalIndex(perQuadColorTransform, i) : Null<ColorTransform>), function():Dynamic return cast nodeColorTransform);

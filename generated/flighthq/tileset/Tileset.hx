@@ -48,10 +48,10 @@ class Tileset {
             var x:Dynamic = (margin + (column * (tileWidth + spacing)));
             var y:Dynamic = (margin + (row * (tileHeight + spacing)));
             _Runtime.callValue(setTextureAtlasRegion, cast ([region, x, y, tileWidth, tileHeight] : Array<Dynamic>));
-            _Runtime.setField(region, 'id', i);
-            _Runtime.setField(region, 'name', null);
-            _Runtime.setField(region, 'rotated', false);
-            _Runtime.setField(region, 'trimmed', false);
+            (region.id = cast (i : Dynamic));
+            (region.name = cast (null : Dynamic));
+            (region.rotated = cast (false : Dynamic));
+            (region.trimmed = cast (false : Dynamic));
             i++;
             column++;
           }

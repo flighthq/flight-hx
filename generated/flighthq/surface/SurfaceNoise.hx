@@ -16,8 +16,8 @@ class SurfaceNoise {
     state = _Runtime.orValue(_Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(seed) | 0)), 0), function():Dynamic return cast 1.0);
     lo = HxMath.max(0.0, HxMath.min(255.0, low));
     span = (HxMath.max(0.0, HxMath.min(255.0, high)) - lo);
-    data = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
-    surfaceWidth = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
+    data = _Runtime.field(dest, 'surface').data;
+    surfaceWidth = _Runtime.field(dest, 'surface').width;
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(dest, 'height') : Float)) : Bool)) {
@@ -36,7 +36,7 @@ class SurfaceNoise {
               (b = cast ((lo + ((state / 4294967296.0) * span)) : Dynamic));
             }
             var x:Dynamic = (_Runtime.field(dest, 'x') + px);
-            if ((cast ((cast ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool) || (cast ((cast x : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast x : Float) >= (cast surfaceWidth : Float)) : Bool)) : Bool)) { px++; continue; }
+            if ((cast ((cast ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(dest, 'surface').height : Float)) : Bool)) : Bool) || (cast ((cast x : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast x : Float) >= (cast surfaceWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var i:Dynamic = (((y * surfaceWidth) + x) * 4.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(data, i, HxMath.round(r));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 1.0), HxMath.round(g));
@@ -62,15 +62,15 @@ class SurfaceNoise {
     fx0 = ((cast ((cast baseX : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / baseX) : Dynamic) : (cast 0.0 : Dynamic));
     fy0 = ((cast ((cast baseY : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / baseY) : Dynamic) : (cast 0.0 : Dynamic));
     passes = HxMath.max(1.0, HxMath.round(octaves));
-    data = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
-    surfaceWidth = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
+    data = _Runtime.field(dest, 'surface').data;
+    surfaceWidth = _Runtime.field(dest, 'surface').width;
     w = _Runtime.field(dest, 'width');
     h = _Runtime.field(dest, 'height');
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(dest, 'height') : Float)) : Bool)) {
         var y:Dynamic = (_Runtime.field(dest, 'y') + py);
-        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
+        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(dest, 'surface').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast _Runtime.field(dest, 'width') : Float)) : Bool)) {
@@ -121,15 +121,15 @@ class SurfaceNoise {
     fx0 = ((cast ((cast baseX : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / baseX) : Dynamic) : (cast 0.0 : Dynamic));
     fy0 = ((cast ((cast baseY : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / baseY) : Dynamic) : (cast 0.0 : Dynamic));
     passes = HxMath.max(1.0, HxMath.round(octaves));
-    data = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
-    surfaceWidth = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
+    data = _Runtime.field(dest, 'surface').data;
+    surfaceWidth = _Runtime.field(dest, 'surface').width;
     w = _Runtime.field(dest, 'width');
     h = _Runtime.field(dest, 'height');
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(dest, 'height') : Float)) : Bool)) {
         var y:Dynamic = (_Runtime.field(dest, 'y') + py);
-        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(_Runtime.field(dest, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
+        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(dest, 'surface').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast _Runtime.field(dest, 'width') : Float)) : Bool)) {

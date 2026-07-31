@@ -21,7 +21,7 @@ typedef AsepriteParsed = { var data:SpritesheetData; var document:AsepriteDocume
 
 class AsepriteParse {
   public static function frameFromRegion__asepriteParse(region:TextureAtlasRegion):SpritesheetFrameData {
-    return cast _Runtime.callValue(createSpritesheetFrameData, cast ([{ height: _Runtime.field(region, 'height'), name: _Runtime.coalesce(_Runtime.field(region, 'name'), function():Dynamic return cast ''), offsetX: _Runtime.field(region, 'sourceX'), offsetY: _Runtime.field(region, 'sourceY'), pivotX: _Runtime.field(region, 'pivotX'), pivotY: _Runtime.field(region, 'pivotY'), rotated: _Runtime.field(region, 'rotated'), sourceHeight: _Runtime.coalesce(_Runtime.field(region, 'originalHeight'), function():Dynamic return cast _Runtime.field(region, 'height')), sourceWidth: _Runtime.coalesce(_Runtime.field(region, 'originalWidth'), function():Dynamic return cast _Runtime.field(region, 'width')), width: _Runtime.field(region, 'width'), x: _Runtime.field(region, 'x'), y: _Runtime.field(region, 'y') }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createSpritesheetFrameData, cast ([{ height: region.height, name: _Runtime.coalesce(region.name, function():Dynamic return cast ''), offsetX: region.sourceX, offsetY: region.sourceY, pivotX: region.pivotX, pivotY: region.pivotY, rotated: region.rotated, sourceHeight: _Runtime.coalesce(region.originalHeight, function():Dynamic return cast region.height), sourceWidth: _Runtime.coalesce(region.originalWidth, function():Dynamic return cast region.width), width: region.width, x: region.x, y: region.y }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -54,7 +54,7 @@ class AsepriteParse {
     var animations:Dynamic = cast _Runtime.UNDEFINED;
     regions = _Runtime.field(_Runtime.callValue(parseTextureAtlasAsepriteDocument, cast ([doc, _Runtime.callValue(createTextureAtlas, cast ([] : Array<Dynamic>))] : Array<Dynamic>)), 'regions');
     frames = _Runtime.callProperty(regions, 'map', cast ([AsepriteParse.frameFromRegion__asepriteParse] : Array<Dynamic>));
-    frameNames = _Runtime.callProperty(regions, 'map', cast ([function(region:Dynamic) return _Runtime.coalesce(_Runtime.field(region, 'name'), function():Dynamic return cast '')] : Array<Dynamic>));
+    frameNames = _Runtime.callProperty(regions, 'map', cast ([function(region:Dynamic) return _Runtime.coalesce(region.name, function():Dynamic return cast '')] : Array<Dynamic>));
     durationMap = _Runtime.construct(_Runtime.globalValue('Map'), []);
     if ((cast _Runtime.isArray(_Runtime.field(doc, 'frames')) : Bool)) {
       for (entry in _Runtime.iterable((cast _Runtime.field(doc, 'frames') : Array<AsepriteArrayFrame>))) {

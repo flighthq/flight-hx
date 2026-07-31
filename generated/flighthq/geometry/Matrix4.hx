@@ -800,7 +800,7 @@ class Matrix4 {
   }
 
   public static function setMatrix4FromMatrix(out:Matrix4Like, source:MatrixLike):Void {
-    _Runtime.callValue(setMatrix4From2D, cast ([out, _Runtime.field(source, 'a'), _Runtime.field(source, 'b'), _Runtime.field(source, 'c'), _Runtime.field(source, 'd'), _Runtime.field(source, 'tx'), _Runtime.field(source, 'ty')] : Array<Dynamic>));
+    _Runtime.callValue(setMatrix4From2D, cast ([out, source.a, source.b, source.c, source.d, source.tx, source.ty] : Array<Dynamic>));
   }
 
   public static function setMatrix4FromMatrix3(out:Matrix4Like, source:Matrix3Like):Void {

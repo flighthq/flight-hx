@@ -158,7 +158,7 @@ class GlParticleEmitter3D {
     ih = ((cast hasAtlas : Bool) ? (cast (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'height'), function():Dynamic return cast 1.0)) : Dynamic) : (cast 0.0 : Dynamic));
     worldMatrix = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([(cast (cast emitter : Dynamic) : SceneNode)] : Array<Dynamic>)) : Matrix4);
     wm = worldMatrix.m;
-    worldSpace = _Runtime.field(data, 'worldSpace');
+    worldSpace = data.worldSpace;
     instanceData = _Runtime.field(shader, 'instanceData');
     base = 0.0;
     drawCount = 0.0;
@@ -191,13 +191,13 @@ class GlParticleEmitter3D {
           var id:Dynamic = flighthq._internal._StaticIndex.readUint16Array(ids, i);
           if ((cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) { i++; continue; }
           var region:Dynamic = flighthq._internal._StaticIndex.readArray(regions, id);
-          if ((cast ((cast ((cast _Runtime.field(region, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(region, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
-          (u0 = cast ((_Runtime.field(region, 'x') * iw) : Dynamic));
-          (v0 = cast ((_Runtime.field(region, 'y') * ih) : Dynamic));
-          (u1 = cast (((_Runtime.field(region, 'x') + _Runtime.field(region, 'width')) * iw) : Dynamic));
-          (v1 = cast (((_Runtime.field(region, 'y') + _Runtime.field(region, 'height')) * ih) : Dynamic));
-          (regionW = cast (_Runtime.field(region, 'width') : Dynamic));
-          (regionH = cast (_Runtime.field(region, 'height') : Dynamic));
+          if ((cast ((cast ((cast region.width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast region.height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
+          (u0 = cast ((region.x * iw) : Dynamic));
+          (v0 = cast ((region.y * ih) : Dynamic));
+          (u1 = cast (((region.x + region.width) * iw) : Dynamic));
+          (v1 = cast (((region.y + region.height) * ih) : Dynamic));
+          (regionW = cast (region.width : Dynamic));
+          (regionH = cast (region.height : Dynamic));
         }
         flighthq._internal._StaticIndex.writeFloat32Array(instanceData, base, wx);
         flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 1.0), wy);

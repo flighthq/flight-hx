@@ -84,12 +84,12 @@ class GlTilemap {
     ih = (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'height'), function():Dynamic return cast 1.0));
     instanceData = _Runtime.field(runtime, 'spriteBatchInstanceData');
     pt = _Runtime.field(tilemapNode, 'transform2D');
-    pa = _Runtime.field(pt, 'a');
-    pb = _Runtime.field(pt, 'b');
-    pc = _Runtime.field(pt, 'c');
-    pd = _Runtime.field(pt, 'd');
-    ptx = _Runtime.field(pt, 'tx');
-    pty = _Runtime.field(pt, 'ty');
+    pa = pt.a;
+    pb = pt.b;
+    pc = pt.c;
+    pd = pt.d;
+    ptx = pt.tx;
+    pty = pt.ty;
     alpha = _Runtime.field(tilemapNode, 'alpha');
     writeBase = base;
     drawCount = 0.0;
@@ -102,7 +102,7 @@ class GlTilemap {
             var id:Dynamic = flighthq._internal._StaticIndex.readInt16Array(tiles, ((row * columns) + col));
             if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { col++; continue; }
             var region:Dynamic = flighthq._internal._StaticIndex.readArray(regions, id);
-            if ((cast ((cast ((cast _Runtime.field(region, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(region, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { col++; continue; }
+            if ((cast ((cast ((cast region.width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast region.height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { col++; continue; }
             var dx:Dynamic = (col * tileWidth);
             var dy:Dynamic = (row * tileHeight);
             flighthq._internal._StaticIndex.writeFloat32Array(instanceData, writeBase, pa);
@@ -113,10 +113,10 @@ class GlTilemap {
             flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 5.0), (((pb * dx) + (pd * dy)) + pty));
             flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 6.0), tileWidth);
             flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 7.0), tileHeight);
-            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 8.0), (_Runtime.field(region, 'x') * iw));
-            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 9.0), (_Runtime.field(region, 'y') * ih));
-            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 10.0), ((_Runtime.field(region, 'x') + _Runtime.field(region, 'width')) * iw));
-            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 11.0), ((_Runtime.field(region, 'y') + _Runtime.field(region, 'height')) * ih));
+            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 8.0), (region.x * iw));
+            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 9.0), (region.y * ih));
+            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 10.0), ((region.x + region.width) * iw));
+            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 11.0), ((region.y + region.height) * ih));
             flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 12.0), alpha);
             _Runtime.callValue(packGlSpriteBatchMaterialInstance, cast ([state, nodeMaterialData, (startCount + drawCount)] : Array<Dynamic>));
             var colorTransform:Dynamic = _Runtime.coalesce((cast _Runtime.optionalIndex(perTileColorTransform, ((row * columns) + col)) : Null<ColorTransform>), function():Dynamic return cast nodeColorTransform);

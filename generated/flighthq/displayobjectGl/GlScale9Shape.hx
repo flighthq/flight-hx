@@ -155,10 +155,10 @@ class GlScale9Shape {
     var b:Dynamic = cast _Runtime.UNDEFINED;
     var c:Dynamic = cast _Runtime.UNDEFINED;
     var d:Dynamic = cast _Runtime.UNDEFINED;
-    a = ((cast !_Runtime.strictEquals(scaleX, 0.0) : Bool) ? (cast (_Runtime.field(t, 'a') / scaleX) : Dynamic) : (cast _Runtime.field(t, 'a') : Dynamic));
-    b = ((cast !_Runtime.strictEquals(scaleX, 0.0) : Bool) ? (cast (_Runtime.field(t, 'b') / scaleX) : Dynamic) : (cast _Runtime.field(t, 'b') : Dynamic));
-    c = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (_Runtime.field(t, 'c') / scaleY) : Dynamic) : (cast _Runtime.field(t, 'c') : Dynamic));
-    d = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (_Runtime.field(t, 'd') / scaleY) : Dynamic) : (cast _Runtime.field(t, 'd') : Dynamic));
-    _Runtime.callValue(setGlMatrixFromValues, cast ([gl, loc, m, a, b, c, d, _Runtime.field(t, 'tx'), _Runtime.field(t, 'ty'), viewport] : Array<Dynamic>));
+    a = ((cast !_Runtime.strictEquals(scaleX, 0.0) : Bool) ? (cast (t.a / scaleX) : Dynamic) : (cast t.a : Dynamic));
+    b = ((cast !_Runtime.strictEquals(scaleX, 0.0) : Bool) ? (cast (t.b / scaleX) : Dynamic) : (cast t.b : Dynamic));
+    c = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (t.c / scaleY) : Dynamic) : (cast t.c : Dynamic));
+    d = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (t.d / scaleY) : Dynamic) : (cast t.d : Dynamic));
+    _Runtime.callValue(setGlMatrixFromValues, cast ([gl, loc, m, a, b, c, d, t.tx, t.ty, viewport] : Array<Dynamic>));
   }
 }

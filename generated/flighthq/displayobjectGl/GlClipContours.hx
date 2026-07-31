@@ -98,7 +98,7 @@ class GlClipContours {
   public static function uploadClipUniforms__glClipContours(state:GlRenderState, program:ClipProgram__glClipContours, m:Matrix):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
-    flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, _Runtime.field(program, 'worldMatrixLocation'), false, cast ([_Runtime.field(m, 'a'), _Runtime.field(m, 'b'), 0.0, _Runtime.field(m, 'c'), _Runtime.field(m, 'd'), 0.0, _Runtime.field(m, 'tx'), _Runtime.field(m, 'ty'), 1.0] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, _Runtime.field(program, 'worldMatrixLocation'), false, cast ([m.a, m.b, 0.0, m.c, m.d, 0.0, m.tx, m.ty, 1.0] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, _Runtime.field(program, 'projectionLocation'), false, _Runtime.callValue(GlClipContours.getProjectionMat3__glClipContours, cast ([state] : Array<Dynamic>)));
   }
 

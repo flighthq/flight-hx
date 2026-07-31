@@ -29,8 +29,8 @@ class TransformVelocity {
     sample = _Runtime.callValue(ensureVelocitySample, cast ([field, node] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(_Runtime.field(sample, 'explicitFrameId'), _Runtime.field(field, 'frameId')) : Bool)) {
       if ((cast !_Runtime.strictEquals(_Runtime.field(sample, 'previousWorldTransform'), null) : Bool)) {
-        _Runtime.setField(_Runtime.field(sample, 'velocity'), 'x', (_Runtime.field(world, 'tx') - _Runtime.field(_Runtime.field(sample, 'previousWorldTransform'), 'tx')));
-        _Runtime.setField(_Runtime.field(sample, 'velocity'), 'y', (_Runtime.field(world, 'ty') - _Runtime.field(_Runtime.field(sample, 'previousWorldTransform'), 'ty')));
+        _Runtime.setField(_Runtime.field(sample, 'velocity'), 'x', (world.tx - _Runtime.field(sample, 'previousWorldTransform').tx));
+        _Runtime.setField(_Runtime.field(sample, 'velocity'), 'y', (world.ty - _Runtime.field(sample, 'previousWorldTransform').ty));
       } else {
         _Runtime.setField(_Runtime.field(sample, 'velocity'), 'x', 0.0);
         _Runtime.setField(_Runtime.field(sample, 'velocity'), 'y', 0.0);

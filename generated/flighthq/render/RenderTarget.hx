@@ -18,22 +18,22 @@ class RenderTarget {
     var localTransform:Dynamic = cast _Runtime.UNDEFINED;
     localTransform = _Runtime.callValue(getNodeLocalMatrix, cast ([source] : Array<Dynamic>));
     _Runtime.callValue(inverseMatrix, cast ([RenderTarget._tempInvLocal__renderTarget, localTransform] : Array<Dynamic>));
-    _Runtime.setField(RenderTarget._tempTranslation__renderTarget, 'a', 1.0);
-    _Runtime.setField(RenderTarget._tempTranslation__renderTarget, 'b', 0.0);
-    _Runtime.setField(RenderTarget._tempTranslation__renderTarget, 'c', 0.0);
-    _Runtime.setField(RenderTarget._tempTranslation__renderTarget, 'd', 1.0);
-    _Runtime.setField(RenderTarget._tempTranslation__renderTarget, 'tx', (contentX - _Runtime.field(bounds, 'x')));
-    _Runtime.setField(RenderTarget._tempTranslation__renderTarget, 'ty', (contentY - _Runtime.field(bounds, 'y')));
+    (RenderTarget._tempTranslation__renderTarget.a = cast (1.0 : Dynamic));
+    (RenderTarget._tempTranslation__renderTarget.b = cast (0.0 : Dynamic));
+    (RenderTarget._tempTranslation__renderTarget.c = cast (0.0 : Dynamic));
+    (RenderTarget._tempTranslation__renderTarget.d = cast (1.0 : Dynamic));
+    (RenderTarget._tempTranslation__renderTarget.tx = cast ((contentX - _Runtime.field(bounds, 'x')) : Dynamic));
+    (RenderTarget._tempTranslation__renderTarget.ty = cast ((contentY - _Runtime.field(bounds, 'y')) : Dynamic));
     _Runtime.callValue(multiplyMatrix, cast ([outRenderTransform, RenderTarget._tempTranslation__renderTarget, RenderTarget._tempInvLocal__renderTarget] : Array<Dynamic>));
   }
 
   public static function computeRenderCacheTransform(outCacheTransform:MatrixLike, bounds:RectangleLike, contentX:Float = 0.0, contentY:Float = 0.0):Void {
-    _Runtime.setField(outCacheTransform, 'a', 1.0);
-    _Runtime.setField(outCacheTransform, 'b', 0.0);
-    _Runtime.setField(outCacheTransform, 'c', 0.0);
-    _Runtime.setField(outCacheTransform, 'd', 1.0);
-    _Runtime.setField(outCacheTransform, 'tx', (_Runtime.field(bounds, 'x') - contentX));
-    _Runtime.setField(outCacheTransform, 'ty', (_Runtime.field(bounds, 'y') - contentY));
+    (outCacheTransform.a = cast (1.0 : Dynamic));
+    (outCacheTransform.b = cast (0.0 : Dynamic));
+    (outCacheTransform.c = cast (0.0 : Dynamic));
+    (outCacheTransform.d = cast (1.0 : Dynamic));
+    (outCacheTransform.tx = cast ((_Runtime.field(bounds, 'x') - contentX) : Dynamic));
+    (outCacheTransform.ty = cast ((_Runtime.field(bounds, 'y') - contentY) : Dynamic));
   }
 
   public static function computeRenderTargetSize(bounds:RectangleLike, padding:Float = 0.0, minWidth:Float = 1.0, minHeight:Float = 1.0):{ var width:Float; var height:Float; } {

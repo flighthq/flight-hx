@@ -133,8 +133,8 @@ class SurfaceShadow {
     var sy:Dynamic = cast _Runtime.UNDEFINED;
     sx = (_Runtime.field(source, 'x') + px);
     sy = (_Runtime.field(source, 'y') + py);
-    if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'height') : Float)) : Bool)) : Bool)) { return cast 0.0; }
-    return cast flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), ((((sy * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sx) * 4.0) + 3.0));
+    if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast _Runtime.field(source, 'surface').width : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(source, 'surface').height : Float)) : Bool)) : Bool)) { return cast 0.0; }
+    return cast flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'surface').data, ((((sy * _Runtime.field(source, 'surface').width) + sx) * 4.0) + 3.0));
     return cast null;
   }
 
@@ -153,18 +153,18 @@ class SurfaceShadow {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(source, 'height') : Float)) : Bool)) {
         var sourceY:Dynamic = (_Runtime.field(source, 'y') + py);
-        if ((cast ((cast ((cast sourceY : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceY : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
+        if ((cast ((cast ((cast sourceY : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceY : Float) >= (cast _Runtime.field(source, 'surface').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast _Runtime.field(source, 'width') : Float)) : Bool)) {
             var sourceX:Dynamic = (_Runtime.field(source, 'x') + px);
-            if ((cast ((cast ((cast sourceX : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceX : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'width') : Float)) : Bool)) : Bool)) { px++; continue; }
-            var si:Dynamic = (((sourceY * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sourceX) * 4.0);
+            if ((cast ((cast ((cast sourceX : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceX : Float) >= (cast _Runtime.field(source, 'surface').width : Float)) : Bool)) : Bool)) { px++; continue; }
+            var si:Dynamic = (((sourceY * _Runtime.field(source, 'surface').width) + sourceX) * 4.0);
             var di:Dynamic = (((py * _Runtime.field(source, 'width')) + px) * 4.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, cr);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), cg);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), cb);
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), HxMath.min(255.0, HxMath.round((flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 3.0)) * alphaScale))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), HxMath.min(255.0, HxMath.round((flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'surface').data, (si + 3.0)) * alphaScale))));
             px++;
           }
         }

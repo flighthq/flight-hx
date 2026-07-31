@@ -52,7 +52,7 @@ class CanvasTilemap {
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', _Runtime.field(tilemapNode, 'alpha'));
     if ((cast !(cast _Runtime.field(state, 'allowSmoothing') : Bool) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false); }
     restoreMaterial = _Runtime.callValue(applyCanvasMaterial, cast ([state, _Runtime.field(tilemapNode, 'material')] : Array<Dynamic>));
-    flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([_Runtime.field(transform, 'a'), _Runtime.field(transform, 'b'), _Runtime.field(transform, 'c'), _Runtime.field(transform, 'd'), _Runtime.field(transform, 'tx'), _Runtime.field(transform, 'ty')] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([transform.a, transform.b, transform.c, transform.d, transform.tx, transform.ty] : Array<Dynamic>));
     {
       var row:Dynamic = 0.0;
       while ((cast ((cast row : Float) < (cast rows : Float)) : Bool)) {
@@ -62,10 +62,10 @@ class CanvasTilemap {
             var id:Dynamic = flighthq._internal._StaticIndex.readInt16Array(tiles, ((row * columns) + col));
             if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { col++; continue; }
             var region:Dynamic = flighthq._internal._StaticIndex.readArray(regions, id);
-            if ((cast ((cast ((cast _Runtime.field(region, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(region, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { col++; continue; }
+            if ((cast ((cast ((cast region.width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast region.height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { col++; continue; }
             var dx:Dynamic = (col * tileWidth);
             var dy:Dynamic = (row * tileHeight);
-            flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([image, _Runtime.field(region, 'x'), _Runtime.field(region, 'y'), _Runtime.field(region, 'width'), _Runtime.field(region, 'height'), ((cast roundPixels : Bool) ? (cast (_Runtime.toInt32(dx) | 0) : Dynamic) : (cast dx : Dynamic)), ((cast roundPixels : Bool) ? (cast (_Runtime.toInt32(dy) | 0) : Dynamic) : (cast dy : Dynamic)), _Runtime.field(region, 'width'), _Runtime.field(region, 'height')] : Array<Dynamic>));
+            flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([image, region.x, region.y, region.width, region.height, ((cast roundPixels : Bool) ? (cast (_Runtime.toInt32(dx) | 0) : Dynamic) : (cast dx : Dynamic)), ((cast roundPixels : Bool) ? (cast (_Runtime.toInt32(dy) | 0) : Dynamic) : (cast dy : Dynamic)), region.width, region.height] : Array<Dynamic>));
             col++;
           }
         }

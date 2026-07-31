@@ -17,20 +17,20 @@ class MeshGeometryLayout {
     var dstVertices:Dynamic = cast _Runtime.UNDEFINED;
     var srcVerts:Dynamic = cast _Runtime.UNDEFINED;
     var mapping:Array<{ var componentCount:Float; var dstFloatOffset:Float; var srcFloatOffset:Float; }> = cast _Runtime.UNDEFINED;
-    srcStride = _Runtime.field(_Runtime.field(source, 'layout'), 'stride');
+    srcStride = _Runtime.field(source.layout, 'stride');
     dstStride = _Runtime.field(targetLayout, 'stride');
     srcFloatsPerVertex = (srcStride / 4.0);
     dstFloatsPerVertex = (dstStride / 4.0);
-    vertexCount = ((cast ((cast srcFloatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(_Runtime.field(source, 'vertices'), 'length') / srcFloatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
+    vertexCount = ((cast ((cast srcFloatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(source.vertices, 'length') / srcFloatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     dstVertices = new flighthq._internal._Float32Array((vertexCount * dstFloatsPerVertex));
-    srcVerts = _Runtime.field(source, 'vertices');
+    srcVerts = source.vertices;
     mapping = cast ([] : Array<Dynamic>);
     for (dstAttr in _Runtime.iterable(_Runtime.field(targetLayout, 'attributes'))) {
       if ((cast !(cast StringTools.startsWith(_Runtime.field(dstAttr, 'format'), 'float32') : Bool) : Bool)) { continue; }
       var dstFloatOffset:Dynamic = (_Runtime.field(dstAttr, 'byteOffset') / 4.0);
       var componentCount:Dynamic = _Runtime.callValue(MeshGeometryLayout.getFloat32ComponentCount__meshGeometryLayout, cast ([_Runtime.field(dstAttr, 'format')] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(componentCount, 0.0) : Bool)) { continue; }
-      var srcAttr:Dynamic = _Runtime.find(_Runtime.field(_Runtime.field(source, 'layout'), 'attributes'), function(a:Dynamic) return ((cast _Runtime.strictEquals(_Runtime.field(a, 'semantic'), _Runtime.field(dstAttr, 'semantic')) : Bool) && (cast StringTools.startsWith(_Runtime.field(a, 'format'), 'float32') : Bool)));
+      var srcAttr:Dynamic = _Runtime.find(_Runtime.field(source.layout, 'attributes'), function(a:Dynamic) return ((cast _Runtime.strictEquals(_Runtime.field(a, 'semantic'), _Runtime.field(dstAttr, 'semantic')) : Bool) && (cast StringTools.startsWith(_Runtime.field(a, 'format'), 'float32') : Bool)));
       if ((cast !_Runtime.truthy(srcAttr) : Bool)) { continue; }
       _Runtime.callProperty(mapping, 'push', cast ([{ componentCount: componentCount, dstFloatOffset: dstFloatOffset, srcFloatOffset: (_Runtime.field(srcAttr, 'byteOffset') / 4.0) }] : Array<Dynamic>));
     }
@@ -54,7 +54,7 @@ class MeshGeometryLayout {
         i++;
       }
     }
-    return cast _Runtime.callValue(createMeshGeometry, cast ([{ indices: _Runtime.coalesce(_Runtime.field(source, 'indices'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), layout: targetLayout, subsets: _Runtime.field(source, 'subsets'), topology: _Runtime.field(source, 'topology'), vertices: dstVertices }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createMeshGeometry, cast ([{ indices: _Runtime.coalesce(source.indices, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), layout: targetLayout, subsets: source.subsets, topology: source.topology, vertices: dstVertices }] : Array<Dynamic>));
     return cast null;
   }
 

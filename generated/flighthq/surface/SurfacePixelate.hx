@@ -16,9 +16,9 @@ class SurfacePixelate {
     block = HxMath.max(1.0, HxMath.round(blockSize));
     w = _Runtime.field(source, 'width');
     h = _Runtime.field(source, 'height');
-    surfaceWidth = _Runtime.field(_Runtime.field(source, 'surface'), 'width');
-    surfaceHeight = _Runtime.field(_Runtime.field(source, 'surface'), 'height');
-    data = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
+    surfaceWidth = _Runtime.field(source, 'surface').width;
+    surfaceHeight = _Runtime.field(source, 'surface').height;
+    data = _Runtime.field(source, 'surface').data;
     {
       var by:Dynamic = 0.0;
       while ((cast ((cast by : Float) < (cast h : Float)) : Bool)) {

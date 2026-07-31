@@ -135,15 +135,15 @@ class WgpuShape {
     }
     _Runtime.callValue(ensureWgpuQuadBatchResources, cast ([state] : Array<Dynamic>));
     t = _Runtime.field(renderProxy, 'transform2D');
-    tx = ((_Runtime.field(t, 'tx') + (_Runtime.field(t, 'a') * _Runtime.field(bounds, 'x'))) + (_Runtime.field(t, 'c') * _Runtime.field(bounds, 'y')));
-    ty = ((_Runtime.field(t, 'ty') + (_Runtime.field(t, 'b') * _Runtime.field(bounds, 'x'))) + (_Runtime.field(t, 'd') * _Runtime.field(bounds, 'y')));
+    tx = ((t.tx + (t.a * _Runtime.field(bounds, 'x'))) + (t.c * _Runtime.field(bounds, 'y')));
+    ty = ((t.ty + (t.b * _Runtime.field(bounds, 'x'))) + (t.d * _Runtime.field(bounds, 'y')));
     startCount = _Runtime.field(runtime, 'spriteBatchCount');
     base = _Runtime.callValue(prepareWgpuSpriteBatchWrite, cast ([state, _Runtime.field(shapeData, 'image'), _Runtime.field(renderProxy, 'blendMode'), material, materialRenderer, 1.0] : Array<Dynamic>));
     d = _Runtime.field(runtime, 'spriteBatchInstanceData');
-    flighthq._internal._StaticIndex.writeFloat32Array(d, base, _Runtime.field(t, 'a'));
-    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 1.0), _Runtime.field(t, 'b'));
-    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 2.0), _Runtime.field(t, 'c'));
-    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 3.0), _Runtime.field(t, 'd'));
+    flighthq._internal._StaticIndex.writeFloat32Array(d, base, t.a);
+    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 1.0), t.b);
+    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 2.0), t.c);
+    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 3.0), t.d);
     flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 4.0), tx);
     flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 5.0), ty);
     flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 6.0), w);

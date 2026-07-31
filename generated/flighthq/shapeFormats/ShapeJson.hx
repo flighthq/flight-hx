@@ -57,7 +57,7 @@ class ShapeJson {
           if ((cast _Runtime.strictEquals(value, null) : Bool)) {
             _Runtime.callProperty(args, 'push', cast ([null] : Array<Dynamic>));
           } else { if ((cast _Runtime.callValue(ShapeJson.isMatrixValue__shapeJson, cast ([value] : Array<Dynamic>)) : Bool)) {
-            _Runtime.callProperty(args, 'push', cast ([{ a: _Runtime.field(value, 'a'), b: _Runtime.field(value, 'b'), c: _Runtime.field(value, 'c'), d: _Runtime.field(value, 'd'), tx: _Runtime.field(value, 'tx'), ty: _Runtime.field(value, 'ty') }] : Array<Dynamic>));
+            _Runtime.callProperty(args, 'push', cast ([{ a: value.a, b: value.b, c: value.c, d: value.d, tx: value.tx, ty: value.ty }] : Array<Dynamic>));
           } else { if ((cast _Runtime.callValue(ShapeJson.isSerializableScalarOrArray__shapeJson, cast ([value] : Array<Dynamic>)) : Bool)) {
             _Runtime.callProperty(args, 'push', cast ([value] : Array<Dynamic>));
           } else {

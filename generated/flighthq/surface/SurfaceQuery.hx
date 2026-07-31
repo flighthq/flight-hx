@@ -15,8 +15,8 @@ class SurfaceQuery {
     var minY:Dynamic = cast _Runtime.UNDEFINED;
     var maxX:Dynamic = cast _Runtime.UNDEFINED;
     var maxY:Dynamic = cast _Runtime.UNDEFINED;
-    data = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
-    surfaceWidth = _Runtime.field(_Runtime.field(source, 'surface'), 'width');
+    data = _Runtime.field(source, 'surface').data;
+    surfaceWidth = _Runtime.field(source, 'surface').width;
     maskedColor = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 0)) & _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(mask), 0)));
     minX = HxMath.POSITIVE_INFINITY;
     minY = HxMath.POSITIVE_INFINITY;
@@ -26,7 +26,7 @@ class SurfaceQuery {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(source, 'height') : Float)) : Bool)) {
         var y:Dynamic = (_Runtime.field(source, 'y') + py);
-        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(_Runtime.field(source, 'surface'), 'height') : Float)) : Bool)) : Bool)) { py++; continue; }
+        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(source, 'surface').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast _Runtime.field(source, 'width') : Float)) : Bool)) {

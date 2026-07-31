@@ -206,7 +206,7 @@ class SceneRender {
 
   public static function isMeshVisible__sceneRender(mesh:Mesh, frustum:Frustum, worldBounds:Aabb):Bool {
     var bounds:Dynamic = cast _Runtime.UNDEFINED;
-    bounds = _Runtime.field(_Runtime.field(mesh, 'geometry'), 'bounds');
+    bounds = _Runtime.field(mesh, 'geometry').bounds;
     if ((cast _Runtime.strictEquals(bounds, null) : Bool)) {
       return cast true;
     }

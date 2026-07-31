@@ -34,7 +34,7 @@ class CanvasSprite {
     regions = _Runtime.field(atlas, 'regions');
     if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast _Runtime.field(regions, 'length') : Float)) : Bool)) : Bool)) { return; }
     region = flighthq._internal._StaticIndex.readArray(regions, id);
-    if ((cast ((cast ((cast _Runtime.field(region, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(region, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
+    if ((cast ((cast ((cast region.width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast region.height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(spriteNode, 'blendMode')] : Array<Dynamic>));
     context = _Runtime.field(state, 'context');
     transform = _Runtime.field(spriteNode, 'transform2D');
@@ -43,8 +43,8 @@ class CanvasSprite {
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false);
     }
     restoreMaterial = _Runtime.callValue(applyCanvasMaterial, cast ([state, _Runtime.field(spriteNode, 'material')] : Array<Dynamic>));
-    flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([_Runtime.field(transform, 'a'), _Runtime.field(transform, 'b'), _Runtime.field(transform, 'c'), _Runtime.field(transform, 'd'), _Runtime.field(transform, 'tx'), _Runtime.field(transform, 'ty')] : Array<Dynamic>));
-    flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([_Runtime.field(_Runtime.field(atlas, 'image'), 'source'), _Runtime.field(region, 'x'), _Runtime.field(region, 'y'), _Runtime.field(region, 'width'), _Runtime.field(region, 'height'), 0.0, 0.0, _Runtime.field(region, 'width'), _Runtime.field(region, 'height')] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([transform.a, transform.b, transform.c, transform.d, transform.tx, transform.ty] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([_Runtime.field(_Runtime.field(atlas, 'image'), 'source'), region.x, region.y, region.width, region.height, 0.0, 0.0, region.width, region.height] : Array<Dynamic>));
     if ((cast restoreMaterial : Bool)) { flighthq._internal.backend.Canvas2dBackend.call(context, 'restore', cast ([] : Array<Dynamic>)); }
     if ((cast !(cast _Runtime.field(state, 'allowSmoothing') : Bool) : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', true);

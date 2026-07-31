@@ -333,14 +333,14 @@ class Matrix3 {
   public static function setMatrix3FromMatrix(out:Matrix3Like, source:MatrixLike):Void {
     var _out:Dynamic = cast _Runtime.UNDEFINED;
     _out = out.m;
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 0.0, _Runtime.field(source, 'a'));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 1.0, _Runtime.field(source, 'c'));
+    flighthq._internal._StaticIndex.writeFloat32Array(_out, 0.0, source.a);
+    flighthq._internal._StaticIndex.writeFloat32Array(_out, 1.0, source.c);
     flighthq._internal._StaticIndex.writeFloat32Array(_out, 2.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 3.0, _Runtime.field(source, 'b'));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 4.0, _Runtime.field(source, 'd'));
+    flighthq._internal._StaticIndex.writeFloat32Array(_out, 3.0, source.b);
+    flighthq._internal._StaticIndex.writeFloat32Array(_out, 4.0, source.d);
     flighthq._internal._StaticIndex.writeFloat32Array(_out, 5.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 6.0, _Runtime.field(source, 'tx'));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 7.0, _Runtime.field(source, 'ty'));
+    flighthq._internal._StaticIndex.writeFloat32Array(_out, 6.0, source.tx);
+    flighthq._internal._StaticIndex.writeFloat32Array(_out, 7.0, source.ty);
     flighthq._internal._StaticIndex.writeFloat32Array(_out, 8.0, 1.0);
   }
 

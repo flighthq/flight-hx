@@ -3,6 +3,7 @@ import ts from 'typescript';
 
 import {
   createTypedStructRegistry,
+  tranche6aDirectTypedStructIds,
   tranche6TypedStructCandidates,
   typedStructRegistry,
   type TypedStructCandidate,
@@ -22,7 +23,7 @@ const fixtureCandidate: TypedStructCandidate = {
 };
 
 describe('typed struct analysis', () => {
-  it('audits tranche six without widening direct emission or enabling Rectangle', () => {
+  it('enables the reviewed tranche 6a slice while leaving the remaining audit and Rectangle parked', () => {
     const workspace = path.resolve('.');
     const programAndChecker = upstreamTypeScriptProgram(workspace);
     const report = typedStructRegistry(workspace, 'fixture', undefined, programAndChecker).report;
@@ -36,20 +37,21 @@ describe('typed struct analysis', () => {
     const host = report.candidates.find((candidate) => candidate.name === 'DeviceInfo');
     const serialization = report.candidates.find((candidate) => candidate.name === 'GltfDocument');
     const codec = report.candidates.find((candidate) => candidate.name === 'ParticleFormatCodec');
+    const surface = report.candidates.find((candidate) => candidate.name === 'Surface');
     const trancheSix = report.candidates.slice(-tranche6TypedStructCandidates.length);
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 350,
-      bindableAccesses: 10_263,
+      auditOnlySchemas: 342,
+      bindableAccesses: 10_257,
       candidates: 405,
-      directAccesses: 3_271,
-      directSchemas: 54,
+      directAccesses: 6_458,
+      directSchemas: 62,
       eligible: 404,
       escapes: 348,
       fields: 2_028,
       ineligible: 1,
-      pendingAccesses: 6_992,
-      reflectiveSurvivors: 152,
+      pendingAccesses: 3_799,
+      reflectiveSurvivors: 171,
     });
     expect(rectangle?.eligible).toBe(false);
     expect(rectangle?.reasons).toContain('presence-sensitive-use');
@@ -63,7 +65,7 @@ describe('typed struct analysis', () => {
     );
     expect(color?.eligible).toBe(true);
     expect(color?.purpose).toContain('RGBA');
-    expect(report.summary.directAccesses).toBe(3_271);
+    expect(report.summary.directAccesses).toBe(6_458);
     expect(rectangle?.emission).toEqual({
       directAccesses: 0,
       mode: 'direct',
@@ -107,7 +109,17 @@ describe('typed struct analysis', () => {
       ),
     ).toEqual({ asset: 76, host: 104, scene: 27, serialization: 143 });
     expect(trancheSix.every((candidate) => candidate.eligible && candidate.reasons.length === 0)).toBe(true);
-    expect(trancheSix.every((candidate) => candidate.emission.mode === 'audit-only')).toBe(true);
+    expect(
+      new Set(trancheSix.filter((candidate) => candidate.emission.mode === 'direct').map((candidate) => candidate.id)),
+    ).toEqual(new Set(tranche6aDirectTypedStructIds));
+    expect(trancheSix.filter((candidate) => candidate.emission.mode === 'direct')).toHaveLength(8);
+    expect(trancheSix.filter((candidate) => candidate.emission.mode === 'audit-only')).toHaveLength(342);
+    expect(
+      trancheSix
+        .filter((candidate) => candidate.emission.mode === 'direct')
+        .reduce((total, candidate) => total + candidate.emission.directAccesses, 0),
+    ).toBe(3_187);
+    expect(surface?.emission.directAccesses).toBe(433);
     expect(new Set(tranche6TypedStructCandidates.map(candidateId)).size).toBe(tranche6TypedStructCandidates.length);
     expect(scene?.emission.pendingAccesses).toBe(14);
     expect(asset?.emission.pendingAccesses).toBe(10);

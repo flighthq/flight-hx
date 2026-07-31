@@ -34,7 +34,7 @@ class TextureAtlasRegion {
 
   public static function getTextureAtlasRegionById(atlas:TextureAtlas, id:Float):Null<flighthq.types.TextureAtlasRegion> {
     for (region in _Runtime.iterable(_Runtime.field(atlas, 'regions'))) {
-      if ((cast _Runtime.strictEquals(_Runtime.field(region, 'id'), id) : Bool)) { return cast region; }
+      if ((cast _Runtime.strictEquals(region.id, id) : Bool)) { return cast region; }
     }
     return cast null;
     return cast null;
@@ -42,7 +42,7 @@ class TextureAtlasRegion {
 
   public static function getTextureAtlasRegionByName(atlas:TextureAtlas, name:String):Null<flighthq.types.TextureAtlasRegion> {
     for (region in _Runtime.iterable(_Runtime.field(atlas, 'regions'))) {
-      if ((cast _Runtime.strictEquals(_Runtime.field(region, 'name'), name) : Bool)) { return cast region; }
+      if ((cast _Runtime.strictEquals(region.name, name) : Bool)) { return cast region; }
     }
     return cast null;
     return cast null;
@@ -52,7 +52,7 @@ class TextureAtlasRegion {
     var result:Array<flighthq.types.TextureAtlasRegion> = cast _Runtime.UNDEFINED;
     result = cast ([] : Array<Dynamic>);
     for (region in _Runtime.iterable(_Runtime.field(atlas, 'regions'))) {
-      if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(region, 'name'), null) : Bool) && (cast StringTools.startsWith(_Runtime.field(region, 'name'), prefix) : Bool)) : Bool)) { _Runtime.callProperty(result, 'push', cast ([region] : Array<Dynamic>)); }
+      if ((cast ((cast !_Runtime.strictEquals(region.name, null) : Bool) && (cast StringTools.startsWith(region.name, prefix) : Bool)) : Bool)) { _Runtime.callProperty(result, 'push', cast ([region] : Array<Dynamic>)); }
     }
     return cast result;
     return cast null;
@@ -70,10 +70,10 @@ class TextureAtlasRegion {
       _Runtime.setField(out, 'height', 0.0);
       return cast out;
     }
-    rx = _Runtime.field(region, 'x');
-    ry = _Runtime.field(region, 'y');
-    rw = _Runtime.field(region, 'width');
-    rh = _Runtime.field(region, 'height');
+    rx = region.x;
+    ry = region.y;
+    rw = region.width;
+    rh = region.height;
     _Runtime.setField(out, 'x', (rx / imageWidth));
     _Runtime.setField(out, 'y', (ry / imageHeight));
     _Runtime.setField(out, 'width', (rw / imageWidth));
@@ -83,11 +83,11 @@ class TextureAtlasRegion {
   }
 
   public static function setTextureAtlasRegion(out:flighthq.types.TextureAtlasRegion, x:Float, y:Float = 0.0, width:Float = 0.0, height:Float = 0.0, pivotX:Float = 0.0, pivotY:Float = 0.0):Void {
-    _Runtime.setField(out, 'x', x);
-    _Runtime.setField(out, 'y', y);
-    _Runtime.setField(out, 'width', width);
-    _Runtime.setField(out, 'height', height);
-    _Runtime.setField(out, 'pivotX', pivotX);
-    _Runtime.setField(out, 'pivotY', pivotY);
+    (out.x = cast (x : Dynamic));
+    (out.y = cast (y : Dynamic));
+    (out.width = cast (width : Dynamic));
+    (out.height = cast (height : Dynamic));
+    (out.pivotX = cast (pivotX : Dynamic));
+    (out.pivotY = cast (pivotY : Dynamic));
   }
 }

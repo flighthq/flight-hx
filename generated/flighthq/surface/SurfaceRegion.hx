@@ -8,15 +8,15 @@ import flighthq.types.SurfaceRegion;
 
 class SurfaceRegion {
   public static function createSurfaceRegion(surface:Surface, x:Float = 0.0, y:Float = 0.0, ?width:Float, ?height:Float):flighthq.types.SurfaceRegion {
-    if (width == null) width = cast (_Runtime.field(surface, 'width') : Dynamic);
-    if (height == null) height = cast (_Runtime.field(surface, 'height') : Dynamic);
+    if (width == null) width = cast (surface.width : Dynamic);
+    if (height == null) height = cast (surface.height : Dynamic);
     return cast { surface: surface, x: x, y: y, width: width, height: height };
     return cast null;
   }
 
   public static function setSurfaceRegion(out:flighthq.types.SurfaceRegion, surface:Surface, x:Float = 0.0, y:Float = 0.0, ?width:Float, ?height:Float):flighthq.types.SurfaceRegion {
-    if (width == null) width = cast (_Runtime.field(surface, 'width') : Dynamic);
-    if (height == null) height = cast (_Runtime.field(surface, 'height') : Dynamic);
+    if (width == null) width = cast (surface.width : Dynamic);
+    if (height == null) height = cast (surface.height : Dynamic);
     _Runtime.setField(out, 'surface', surface);
     _Runtime.setField(out, 'x', x);
     _Runtime.setField(out, 'y', y);

@@ -41,7 +41,7 @@ class RegisterBitmapHitTest {
     rect = _Runtime.field(_Runtime.field(bitmap, 'data'), 'sourceRectangle');
     px = HxMath.floor((_Runtime.field(RegisterBitmapHitTest.bitmapAlphaLocalPoint__registerBitmapHitTest, 'x') + ((cast !_Runtime.strictEquals(rect, null) : Bool) ? (cast _Runtime.field(rect, 'x') : Dynamic) : (cast 0.0 : Dynamic))));
     py = HxMath.floor((_Runtime.field(RegisterBitmapHitTest.bitmapAlphaLocalPoint__registerBitmapHitTest, 'y') + ((cast !_Runtime.strictEquals(rect, null) : Bool) ? (cast _Runtime.field(rect, 'y') : Dynamic) : (cast 0.0 : Dynamic))));
-    if ((cast ((cast ((cast ((cast ((cast px : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast py : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast px : Float) >= (cast _Runtime.field(surface, 'width') : Float)) : Bool)) : Bool) || (cast ((cast py : Float) >= (cast _Runtime.field(surface, 'height') : Float)) : Bool)) : Bool)) { return cast -1.0; }
+    if ((cast ((cast ((cast ((cast ((cast px : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast py : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast px : Float) >= (cast surface.width : Float)) : Bool)) : Bool) || (cast ((cast py : Float) >= (cast surface.height : Float)) : Bool)) : Bool)) { return cast -1.0; }
     return cast ((cast ((cast _Runtime.callValue(getSurfacePixelChannel, cast ([surface, px, py, ImageChannelValue.Alpha] : Array<Dynamic>)) : Float) >= (cast alphaThreshold : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }

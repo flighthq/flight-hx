@@ -56,12 +56,12 @@ class Viewport {
       }
     }
     if ((cast ((cast _Runtime.strictEquals(contentWidth, 0.0) : Bool) || (cast _Runtime.strictEquals(contentHeight, 0.0) : Bool)) : Bool)) {
-      _Runtime.setField(out, 'a', 1.0);
-      _Runtime.setField(out, 'b', 0.0);
-      _Runtime.setField(out, 'c', 0.0);
-      _Runtime.setField(out, 'd', 1.0);
-      _Runtime.setField(out, 'tx', 0.0);
-      _Runtime.setField(out, 'ty', 0.0);
+      (out.a = cast (1.0 : Dynamic));
+      (out.b = cast (0.0 : Dynamic));
+      (out.c = cast (0.0 : Dynamic));
+      (out.d = cast (1.0 : Dynamic));
+      (out.tx = cast (0.0 : Dynamic));
+      (out.ty = cast (0.0 : Dynamic));
       return;
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(scene, 'scaleMode'), 'noscale') : Bool)) {
@@ -75,12 +75,12 @@ class Viewport {
     } else {
       (sx = cast ((sy = cast (_Runtime.callValue(computeViewportFillScale, cast ([contentWidth, contentHeight, viewWidth, viewHeight] : Array<Dynamic>)) : Dynamic)) : Dynamic));
     } } }
-    _Runtime.setField(out, 'a', sx);
-    _Runtime.setField(out, 'b', 0.0);
-    _Runtime.setField(out, 'c', 0.0);
-    _Runtime.setField(out, 'd', sy);
-    _Runtime.setField(out, 'tx', _Runtime.callValue(computeViewportAlignX, cast ([(contentWidth * sx), viewWidth, _Runtime.field(scene, 'align')] : Array<Dynamic>)));
-    _Runtime.setField(out, 'ty', _Runtime.callValue(computeViewportAlignY, cast ([(contentHeight * sy), viewHeight, _Runtime.field(scene, 'align')] : Array<Dynamic>)));
+    (out.a = cast (sx : Dynamic));
+    (out.b = cast (0.0 : Dynamic));
+    (out.c = cast (0.0 : Dynamic));
+    (out.d = cast (sy : Dynamic));
+    (out.tx = cast (_Runtime.callValue(computeViewportAlignX, cast ([(contentWidth * sx), viewWidth, _Runtime.field(scene, 'align')] : Array<Dynamic>)) : Dynamic));
+    (out.ty = cast (_Runtime.callValue(computeViewportAlignY, cast ([(contentHeight * sy), viewHeight, _Runtime.field(scene, 'align')] : Array<Dynamic>)) : Dynamic));
   }
 
   public static function createViewport<Traits>(?obj:Dynamic):flighthq.types.Viewport<Traits> {

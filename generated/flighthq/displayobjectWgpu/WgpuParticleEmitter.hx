@@ -145,7 +145,7 @@ class WgpuParticleEmitter {
         var id:Dynamic = flighthq._internal._StaticIndex.readUint16Array(ids, i);
         if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
         var region:Dynamic = flighthq._internal._StaticIndex.readArray(regions, id);
-        if ((cast ((cast ((cast _Runtime.field(region, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(region, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
+        if ((cast ((cast ((cast region.width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast region.height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
         var tt:Dynamic = (i * 4.0);
         var px:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, tt);
         var py:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 1.0));
@@ -163,12 +163,12 @@ class WgpuParticleEmitter {
         flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 5.0), ((cast hasColors : Bool) ? (cast flighthq._internal._StaticIndex.readFloat32Array(colors, (ct + 1.0)) : Dynamic) : (cast 1.0 : Dynamic)));
         flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 6.0), ((cast hasColors : Bool) ? (cast flighthq._internal._StaticIndex.readFloat32Array(colors, (ct + 2.0)) : Dynamic) : (cast 1.0 : Dynamic)));
         flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 7.0), (nodeAlpha * flighthq._internal._StaticIndex.readFloat32Array(alphas, i)));
-        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 8.0), (_Runtime.field(region, 'x') * iw));
-        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 9.0), (_Runtime.field(region, 'y') * ih));
-        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 10.0), ((_Runtime.field(region, 'x') + _Runtime.field(region, 'width')) * iw));
-        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 11.0), ((_Runtime.field(region, 'y') + _Runtime.field(region, 'height')) * ih));
-        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 12.0), _Runtime.field(region, 'width'));
-        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 13.0), _Runtime.field(region, 'height'));
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 8.0), (region.x * iw));
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 9.0), (region.y * ih));
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 10.0), ((region.x + region.width) * iw));
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 11.0), ((region.y + region.height) * ih));
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 12.0), region.width);
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 13.0), region.height);
         (base = cast ((base + WgpuParticleEmitter.INSTANCE_FLOATS__wgpuParticleEmitter) : Dynamic));
         drawCount++;
         i++;
@@ -186,7 +186,7 @@ class WgpuParticleEmitter {
     matrixArray = _Runtime.field(__destructure4, 'matrixArray');
     viewport = _Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));
     t = _Runtime.field(renderProxy, 'transform2D');
-    if ((cast _Runtime.field(_Runtime.field(source, 'data'), 'worldSpace') : Bool)) {
+    if ((cast _Runtime.field(source, 'data').worldSpace : Bool)) {
       (iw2 = cast ((2.0 / _Runtime.field(viewport, 'width')) : Dynamic));
       (ih2 = cast ((2.0 / _Runtime.field(viewport, 'height')) : Dynamic));
       flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 0.0, iw2);
@@ -201,14 +201,14 @@ class WgpuParticleEmitter {
     } else {
       (iw2 = cast ((2.0 / _Runtime.field(viewport, 'width')) : Dynamic));
       (ih2 = cast ((2.0 / _Runtime.field(viewport, 'height')) : Dynamic));
-      flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 0.0, (_Runtime.field(t, 'a') * iw2));
-      flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 1.0, (-_Runtime.field(t, 'b') * ih2));
+      flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 0.0, (t.a * iw2));
+      flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 1.0, (-t.b * ih2));
       flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 2.0, 0.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 3.0, (_Runtime.field(t, 'c') * iw2));
-      flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 4.0, (-_Runtime.field(t, 'd') * ih2));
+      flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 3.0, (t.c * iw2));
+      flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 4.0, (-t.d * ih2));
       flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 5.0, 0.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 6.0, ((_Runtime.field(t, 'tx') * iw2) - 1.0));
-      flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 7.0, ((-_Runtime.field(t, 'ty') * ih2) + 1.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 6.0, ((t.tx * iw2) - 1.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 7.0, ((-t.ty * ih2) + 1.0));
       flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 8.0, 1.0);
     }
     flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 0.0), flighthq._internal._StaticIndex.readFloat32Array(matrixArray, 0.0));

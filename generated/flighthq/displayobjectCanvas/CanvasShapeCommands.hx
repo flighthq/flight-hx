@@ -231,14 +231,14 @@ class CanvasShapeCommands {
       var sb:Dynamic = (y + height);
       var canOptimize:Dynamic = true;
       if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(state, 'fillMatrix'), null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(state, 'fillMatrixInverse'), null) : Bool)) : Bool)) {
-        if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(state, 'fillMatrix'), 'b'), 0.0) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(state, 'fillMatrix'), 'c'), 0.0) : Bool)) : Bool)) {
+        if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(state, 'fillMatrix').b, 0.0) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(state, 'fillMatrix').c, 0.0) : Bool)) : Bool)) {
           (canOptimize = cast (false : Dynamic));
         } else {
           var inv:Dynamic = _Runtime.field(state, 'fillMatrixInverse');
-          (sl = cast ((((_Runtime.field(inv, 'a') * x) + (_Runtime.field(inv, 'c') * y)) + _Runtime.field(inv, 'tx')) : Dynamic));
-          (st = cast ((((_Runtime.field(inv, 'b') * x) + (_Runtime.field(inv, 'd') * y)) + _Runtime.field(inv, 'ty')) : Dynamic));
-          (sr = cast ((((_Runtime.field(inv, 'a') * (x + width)) + (_Runtime.field(inv, 'c') * (y + height))) + _Runtime.field(inv, 'tx')) : Dynamic));
-          (sb = cast ((((_Runtime.field(inv, 'b') * (x + width)) + (_Runtime.field(inv, 'd') * (y + height))) + _Runtime.field(inv, 'ty')) : Dynamic));
+          (sl = cast ((((inv.a * x) + (inv.c * y)) + inv.tx) : Dynamic));
+          (st = cast ((((inv.b * x) + (inv.d * y)) + inv.ty) : Dynamic));
+          (sr = cast ((((inv.a * (x + width)) + (inv.c * (y + height))) + inv.tx) : Dynamic));
+          (sb = cast ((((inv.b * (x + width)) + (inv.d * (y + height))) + inv.ty) : Dynamic));
         }
       }
       if ((cast ((cast ((cast ((cast ((cast canOptimize : Bool) && (cast ((cast sl : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast st : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast sr : Float) <= (cast _Runtime.field(state, 'bitmapW') : Float)) : Bool)) : Bool) && (cast ((cast sb : Float) <= (cast _Runtime.field(state, 'bitmapH') : Float)) : Bool)) : Bool)) {

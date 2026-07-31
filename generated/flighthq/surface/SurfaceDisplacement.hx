@@ -89,8 +89,8 @@ class SurfaceDisplacement {
             var y0:Dynamic = HxMath.floor(sampleY);
             var tx:Dynamic = (sampleX - x0);
             var ty:Dynamic = (sampleY - y0);
-            var sStride:Dynamic = _Runtime.field(_Runtime.field(source, 'surface'), 'width');
-            var sData:Dynamic = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
+            var sStride:Dynamic = _Runtime.field(source, 'surface').width;
+            var sData:Dynamic = _Runtime.field(source, 'surface').data;
             var x0c:Dynamic = (_Runtime.field(source, 'x') + HxMath.max(0.0, HxMath.min((w - 1.0), x0)));
             var x1c:Dynamic = (_Runtime.field(source, 'x') + HxMath.max(0.0, HxMath.min((w - 1.0), (x0 + 1.0))));
             var y0c:Dynamic = (_Runtime.field(source, 'y') + HxMath.max(0.0, HxMath.min((h - 1.0), y0)));
@@ -153,8 +153,8 @@ class SurfaceDisplacement {
     var my:Dynamic = cast _Runtime.UNDEFINED;
     mx = (_Runtime.field(map, 'x') + px);
     my = (_Runtime.field(map, 'y') + py);
-    if ((cast ((cast ((cast ((cast ((cast mx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast mx : Float) >= (cast _Runtime.field(_Runtime.field(map, 'surface'), 'width') : Float)) : Bool)) : Bool) || (cast ((cast my : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast my : Float) >= (cast _Runtime.field(_Runtime.field(map, 'surface'), 'height') : Float)) : Bool)) : Bool)) { return cast 128.0; }
-    return cast flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(_Runtime.field(map, 'surface'), 'data'), ((((my * _Runtime.field(_Runtime.field(map, 'surface'), 'width')) + mx) * 4.0) + component));
+    if ((cast ((cast ((cast ((cast ((cast mx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast mx : Float) >= (cast _Runtime.field(map, 'surface').width : Float)) : Bool)) : Bool) || (cast ((cast my : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast my : Float) >= (cast _Runtime.field(map, 'surface').height : Float)) : Bool)) : Bool)) { return cast 128.0; }
+    return cast flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(map, 'surface').data, ((((my * _Runtime.field(map, 'surface').width) + mx) * 4.0) + component));
     return cast null;
   }
 }

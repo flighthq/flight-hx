@@ -152,7 +152,7 @@ class Surface {
   }
 
   public static function cloneSurface(source:flighthq.types.Surface):flighthq.types.Surface {
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: _Runtime.field(source, 'alphaType'), colorSpace: _Runtime.field(source, 'colorSpace'), compressed: null, data: new flighthq._internal._UInt8ClampedArray(_Runtime.field(source, 'data')), format: _Runtime.field(source, 'format'), height: _Runtime.field(source, 'height'), source: null, version: 0.0, width: _Runtime.field(source, 'width') }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: source.alphaType, colorSpace: source.colorSpace, compressed: null, data: new flighthq._internal._UInt8ClampedArray(source.data), format: source.format, height: source.height, source: null, version: 0.0, width: source.width }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -189,9 +189,9 @@ class Surface {
   public static function convertSurfaceAlphaType(out:flighthq.types.Surface, target:AlphaType):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var len:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(_Runtime.field(out, 'alphaType'), target) : Bool)) { return; }
-    data = _Runtime.field(out, 'data');
-    len = ((_Runtime.field(out, 'width') * _Runtime.field(out, 'height')) * 4.0);
+    if ((cast _Runtime.strictEquals(out.alphaType, target) : Bool)) { return; }
+    data = out.data;
+    len = ((out.width * out.height) * 4.0);
     if ((cast _Runtime.strictEquals(target, 'premultiplied') : Bool)) {
       {
         var i:Dynamic = 0.0;
@@ -222,7 +222,7 @@ class Surface {
         }
       }
     }
-    _Runtime.setField(out, 'alphaType', target);
+    (out.alphaType = cast (target : Dynamic));
     _Runtime.callValue(invalidateImageResource, cast ([out] : Array<Dynamic>));
   }
 
