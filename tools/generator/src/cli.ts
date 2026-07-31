@@ -5,6 +5,7 @@ import { portConfig } from '../port.config.ts';
 import { analyzeUpstream } from './analyze/inventory.ts';
 import { auditLowering } from './analyze/lowering.ts';
 import { auditTypedStructClassFeasibility } from './analyze/typed-struct-classes.ts';
+import { auditTypedStructProvenance } from './analyze/typed-struct-provenance.ts';
 import { typedStructRegistry } from './analyze/typed-structs.ts';
 import { generateCoreModules } from './emit/core.ts';
 import {
@@ -13,6 +14,7 @@ import {
   loweringSummary,
   stableJson,
   typedStructClassFeasibilitySummary,
+  typedStructProvenanceSummary,
   typedStructSummary,
   writeOrCheck,
 } from './emit/reports.ts';
@@ -31,6 +33,10 @@ try {
     apiOnly || !typedStructs
       ? undefined
       : auditTypedStructClassFeasibility(workspaceDirectory, inventory.upstreamCommit, typedStructs);
+  const typedStructProvenance =
+    apiOnly || !typedStructs || !typedStructClasses
+      ? undefined
+      : auditTypedStructProvenance(workspaceDirectory, inventory.upstreamCommit, typedStructs, typedStructClasses);
   const lowering = apiOnly ? undefined : auditLowering(workspaceDirectory, typedStructs);
   const api = createApiReport(inventory);
 
@@ -57,6 +63,17 @@ try {
       writeOrCheck(
         path.join(reportsDirectory, 'typed-struct-classes.md'),
         typedStructClassFeasibilitySummary(typedStructClasses),
+        check,
+      );
+      if (!typedStructProvenance) throw new Error('Expected typed-struct provenance audit');
+      writeOrCheck(
+        path.join(reportsDirectory, 'typed-struct-provenance.json'),
+        stableJson(typedStructProvenance),
+        check,
+      );
+      writeOrCheck(
+        path.join(reportsDirectory, 'typed-struct-provenance.md'),
+        typedStructProvenanceSummary(typedStructProvenance),
         check,
       );
     }

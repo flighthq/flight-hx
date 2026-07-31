@@ -2,6 +2,7 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
 import type { TypedStructClassFeasibilityAudit } from '../analyze/typed-struct-classes.ts';
+import type { TypedStructProvenanceAudit } from '../analyze/typed-struct-provenance.ts';
 import type { TypedStructAudit } from '../analyze/typed-structs.ts';
 import type { ApiReport, UpstreamInventory } from '../model/inventory.ts';
 import type { LoweringAudit } from '../analyze/lowering.ts';
@@ -260,6 +261,48 @@ export function typedStructClassFeasibilitySummary(audit: TypedStructClassFeasib
       schema.oracle.strictEqualityAssertions;
     lines.push(
       `| \`${schema.id}\` | ${schema.directAccesses} | ${schema.fields.total} | ${schema.fields.optional} | ${schema.fields.requiredUndefined} | ${schema.construction.objectLiterals} | ${schema.construction.plainObjectLiterals} | ${schema.construction.objectLiteralsWithSpread} | ${schema.construction.computedObjectLiterals} | ${schema.construction.objectLiteralsOmittingOptionalFields} | ${schema.production.crossSchemaTransfers} | ${schema.production.anonymousStructuralTransfers} | ${schema.production.dynamicIngresses} | ${schema.production.enumerations} | ${schema.production.jsonSerializations} | ${schema.production.objectRests} | ${schema.production.objectSpreads} | ${schema.bridge.inputSignatures} | ${schema.bridge.outputSignatures} | ${schema.construction.testObjectLiterals} | ${oracle} | ${schema.migration.mechanicallyCompatible ? 'yes' : 'no'} | ${schema.migration.normalizationReasons.length > 0 ? schema.migration.normalizationReasons.map((reason) => `\`${reason}\``).join(', ') : '—'} | ${schema.migration.observabilityReasons.length > 0 ? schema.migration.observabilityReasons.map((reason) => `\`${reason}\``).join(', ') : '—'} |`,
+    );
+  }
+  lines.push('');
+  return lines.join('\n');
+}
+
+export function typedStructProvenanceSummary(audit: TypedStructProvenanceAudit): string {
+  const summary = audit.summary;
+  const lines = [
+    '# Typed Struct Provenance Audit',
+    '',
+    `Upstream commit: \`${audit.upstreamCommit}\``,
+    '',
+    'This reporting-only audit tests nominal-identity closure for the clean required-field set. It does not enable class emission. Bridge exposure is reported separately and is not itself a closure blocker.',
+    '',
+    '| Metric | Count |',
+    '| --- | ---: |',
+    `| Clean required-field candidates | ${summary.candidateSchemas} |`,
+    `| Nominally closed candidates | ${summary.closedSchemas} |`,
+    `| Blocked candidates | ${summary.blockedSchemas} |`,
+    `| Normalization-provenance blockers only | ${summary.normalizationOnlyBlockedSchemas} |`,
+    `| Container-transfer blockers only | ${summary.containerOnlyBlockedSchemas} |`,
+    `| Both blocker classes | ${summary.combinedBlockedSchemas} |`,
+    `| Normalization roots (all eligible schemas) | ${summary.normalizationRoots} |`,
+    `| JSON.parse roots | ${summary.jsonParseRoots} |`,
+    `| Containment edges (all eligible schemas) | ${summary.containmentEdges} |`,
+    `| Candidates blocked by normalization provenance | ${summary.normalizationProvenanceBlockedSchemas} |`,
+    `| Candidates blocked by container transfers | ${summary.containerTransferBlockedSchemas} |`,
+    `| Candidates with anonymous container transfers | ${summary.anonymousContainerTransferSchemas} |`,
+    `| Candidates with cross-schema container transfers | ${summary.crossSchemaContainerTransferSchemas} |`,
+    `| Candidates with dynamic container transfers | ${summary.dynamicContainerTransferSchemas} |`,
+    `| Candidates exposed through bridge inputs | ${summary.bridgeInputExposedSchemas} |`,
+    `| Candidates exposed through bridge outputs | ${summary.bridgeOutputExposedSchemas} |`,
+    '',
+    'Exact containment paths, roots, transfer locations, and bridge paths are in `typed-struct-provenance.json`.',
+    '',
+    '| Candidate | Direct | Fields | Parents | Children | Normalization roots | Container transfers | Bridge in roots | Bridge out roots | Closed | Blockers |',
+    '| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | :---: | --- |',
+  ];
+  for (const schema of audit.schemas) {
+    lines.push(
+      `| \`${schema.id}\` | ${schema.directAccesses} | ${schema.fields} | ${schema.containment.parents.length} | ${schema.containment.children.length} | ${schema.normalizationProvenance.length} | ${schema.transfers.length} | ${schema.bridgeExposure.inputPaths.length} | ${schema.bridgeExposure.outputPaths.length} | ${schema.nominalIdentity.closed ? 'yes' : 'no'} | ${schema.nominalIdentity.blockerReasons.length > 0 ? schema.nominalIdentity.blockerReasons.map((reason) => `\`${reason}\``).join(', ') : '—'} |`,
     );
   }
   lines.push('');

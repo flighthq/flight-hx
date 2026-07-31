@@ -4,6 +4,7 @@ import path from 'node:path';
 import ts from 'typescript';
 
 import { auditTypedStructClassFeasibility } from '../../tools/generator/src/analyze/typed-struct-classes.ts';
+import { auditTypedStructProvenance } from '../../tools/generator/src/analyze/typed-struct-provenance.ts';
 import {
   cppStructInitTypedStructIds,
   createTypedStructRegistry,
@@ -15,7 +16,11 @@ import {
 } from '../../tools/generator/src/analyze/typed-structs.ts';
 import { upstreamTypeScriptProgram } from '../../tools/generator/src/analyze/program.ts';
 import { emitHaxeModule } from '../../tools/generator/src/emit/haxe.ts';
-import { typedStructClassFeasibilitySummary, typedStructSummary } from '../../tools/generator/src/emit/reports.ts';
+import {
+  typedStructClassFeasibilitySummary,
+  typedStructProvenanceSummary,
+  typedStructSummary,
+} from '../../tools/generator/src/emit/reports.ts';
 import { lowerTypeScriptSource } from '../../tools/generator/src/lower/typescript.ts';
 import type { IrExpression, IrTypedStructBinding } from '../../tools/generator/src/model/ir.ts';
 
@@ -244,6 +249,64 @@ describe('typed struct analysis', () => {
       testObjectLiterals: 1,
     });
     expect(typedStructClassFeasibilitySummary(audit)).toContain('| Eligible canonical schemas | 2 |');
+  });
+
+  it('propagates normalization and bridge roots through containment and catches generic construction gaps', () => {
+    const audit = provenanceAuditFixture(`
+      export interface A { children: B[]; envelope: { child: B }; }
+      export interface B { x: number; }
+      export interface C { value: number; }
+      declare const text: string;
+      declare const records: Array<{ x: number }>;
+      const parsed = JSON.parse(text) as A;
+      const children: B[] = records.map((record) => ({ x: record.x }));
+      const safe: C[] = [{ value: 1 }];
+      export function consume(value: A): C { return safe[0]!; }
+    `);
+    const b = audit.schemas.find((schema) => schema.name === 'B');
+    const c = audit.schemas.find((schema) => schema.name === 'C');
+
+    expect(audit.summary).toMatchObject({
+      blockedSchemas: 1,
+      candidateSchemas: 2,
+      closedSchemas: 1,
+      combinedBlockedSchemas: 1,
+      containerOnlyBlockedSchemas: 0,
+      normalizationOnlyBlockedSchemas: 0,
+    });
+    expect(audit.jsonParseRoots).toEqual([
+      expect.objectContaining({
+        schemaId: expect.stringContaining('#A'),
+        sites: [expect.objectContaining({ kind: 'json-parse-root' })],
+      }),
+    ]);
+    expect(audit.containmentEdges).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ childSchemaId: expect.stringContaining('#B'), fieldPath: 'envelope.child' }),
+      ]),
+    );
+    expect(b).toMatchObject({
+      bridgeExposure: {
+        inputPaths: [expect.objectContaining({ rootSchemaId: expect.stringContaining('#A') })],
+      },
+      nominalIdentity: {
+        blockerReasons: ['container-transfer', 'normalization-provenance'],
+        closed: false,
+      },
+      normalizationProvenance: [
+        expect.objectContaining({
+          path: [expect.stringContaining('#A'), expect.stringContaining('children[]:')],
+          rootSchemaId: expect.stringContaining('#A'),
+        }),
+      ],
+      transfers: [expect.objectContaining({ kind: 'anonymous-container-transfer' })],
+    });
+    expect(c).toMatchObject({
+      nominalIdentity: { blockerReasons: [], closed: true },
+      normalizationProvenance: [],
+      transfers: [],
+    });
+    expect(typedStructProvenanceSummary(audit)).toContain('| Clean required-field candidates | 2 |');
   });
 
   it('enables the reviewed tranche-six allowlist while leaving ineligible Rectangle parked', () => {
@@ -773,6 +836,52 @@ function classAuditFixture(productionText: string, testText: string) {
   }));
   const registry = createTypedStructRegistry(workspace, 'fixture', candidates, program, checker);
   return auditTypedStructClassFeasibility(workspace, 'fixture', registry, { checker, program });
+}
+
+function provenanceAuditFixture(productionText: string) {
+  const workspace = '/workspace';
+  const source = 'upstream/packages/types/src/Vector2.ts';
+  const productionFile = `${workspace}/${source}`;
+  const options: ts.CompilerOptions = {
+    lib: ['lib.es2022.d.ts'],
+    module: ts.ModuleKind.ESNext,
+    moduleResolution: ts.ModuleResolutionKind.Bundler,
+    skipLibCheck: true,
+    strict: true,
+    target: ts.ScriptTarget.ESNext,
+  };
+  const fixture = ts.createSourceFile(productionFile, productionText, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
+  const host = ts.createCompilerHost(options);
+  const directoryExists = host.directoryExists?.bind(host);
+  const fileExists = host.fileExists.bind(host);
+  const getSourceFile = host.getSourceFile.bind(host);
+  const readFile = host.readFile.bind(host);
+  host.fileExists = (requested) => requested === productionFile || fileExists(requested);
+  host.directoryExists = (requested) => requested.startsWith(`${workspace}/`) || directoryExists?.(requested) === true;
+  host.readFile = (requested) => (requested === productionFile ? fixture.text : readFile(requested));
+  host.getSourceFile = (requested, languageVersion, onError, shouldCreateNewSourceFile) =>
+    requested === productionFile
+      ? fixture
+      : getSourceFile(requested, languageVersion, onError, shouldCreateNewSourceFile);
+  const program = ts.createProgram([productionFile], options, host);
+  const diagnostics = program.getSemanticDiagnostics();
+  if (diagnostics.length > 0) {
+    throw new Error(
+      diagnostics.map((diagnostic) => ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n')).join('\n'),
+    );
+  }
+  const checker = program.getTypeChecker();
+  const candidates: TypedStructCandidate[] = ['A', 'B', 'C'].map((name) => ({
+    emission: 'direct',
+    name,
+    packageName: '@flighthq/types',
+    purpose: 'provenance audit fixture',
+    source,
+  }));
+  const programAndChecker = { checker, program };
+  const registry = createTypedStructRegistry(workspace, 'fixture', candidates, program, checker);
+  const classAudit = auditTypedStructClassFeasibility(workspace, 'fixture', registry, programAndChecker);
+  return auditTypedStructProvenance(workspace, 'fixture', registry, classAudit, programAndChecker);
 }
 
 function candidateId(candidate: TypedStructCandidate): string {
