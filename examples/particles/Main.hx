@@ -260,7 +260,14 @@ class Main extends Application {
   // Upstream `enterFrame`, driven by Lime's per-frame `update` (deltaTime is milliseconds).
   override public function update(deltaTime:Int):Void {
     if (!ready) return;
-    final dt = Math.min(deltaTime / 1000.0, 0.05);
+    var dt = Math.min(deltaTime / 1000.0, 0.05);
+    #if sys
+    // Probe-only fixed timestep: simulation time advances deterministically
+    // regardless of headless wall-clock speed, so particle population and the
+    // measured workload are reproducible.
+    final forcedDt = Sys.getEnv('FLIGHT_PERF_DT');
+    if (forcedDt != null) dt = Std.parseFloat(forcedDt);
+    #end
 
     // Spring-follow the mouse for the fire emitter.
     fireVelX += ((mouseX - fireEmitter.x) * SPRING - fireVelX * DAMPING) * dt;
@@ -286,9 +293,40 @@ class Main extends Application {
   }
 
   // Upstream `render(root)`, driven by Lime's per-frame `render`.
+  var perfFrames = 0;
+  var perfStart = 0.0;
+  var perfWarmup = -1;
+
   override public function render(context:RenderContext):Void {
     if (!ready || root == null) return;
+    #if sys
+    if (Sys.getEnv('FLIGHT_PERF_FRAMES') != null) {
+      if (perfWarmup < 0) {
+        final w = Sys.getEnv('FLIGHT_PERF_WARMUP');
+        perfWarmup = w == null ? 0 : Std.parseInt(w);
+      }
+      if (perfWarmup > 0) {
+        perfWarmup--;
+      } else {
+        if (perfFrames == 0) perfStart = haxe.Timer.stamp();
+        perfFrames++;
+        final target = Std.parseInt(Sys.getEnv('FLIGHT_PERF_FRAMES'));
+        if (perfFrames >= target) {
+          final elapsed = haxe.Timer.stamp() - perfStart;
+          final particles = fireEmitter.data.particleCount + snowEmitter.data.particleCount;
+          Sys.println('PERF frames=' + (perfFrames - 1) + ' elapsed=' + elapsed + 's fps=' + ((perfFrames - 1) / elapsed)
+            + ' particles=' + particles);
+          lime.system.System.exit(0);
+        }
+      }
+    }
+    #end
     if (!prepareDisplayObjectRender(renderState, root)) return;
+    #if sys
+    // Script-only bench mode: full update/prepare cost without backend draws,
+    // so tranche measurements are not flattened by the rasterizer floor.
+    if (Sys.getEnv('FLIGHT_PERF_MODE') == 'script') return;
+    #end
     if (usingCairo) {
       renderCanvasBackground(renderState);
       renderCanvasDisplayObject(renderState, root);

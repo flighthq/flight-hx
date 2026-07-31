@@ -38,6 +38,19 @@ class Main extends Application {
         throw 'Flight examples require an OpenGL/WebGL or cairo render context.';
     }
     scale = window.scale;
+
+    #if (lime && !js && lime_cairo)
+    // Browsers resolve the generic CSS families natively; on native targets the
+    // bundled Liberation faces back them for both the cairo window path and the
+    // GL glyph-atlas scratch canvases (the registry is global).
+    inline function bundledFont(id:String):lime.text.Font return lime.utils.Assets.getFont('fonts/' + id);
+    flighthq._internal.backend.NativeCanvas2dContext.registerFont('sans-serif', bundledFont('LiberationSans-Regular.ttf'));
+    flighthq._internal.backend.NativeCanvas2dContext.registerFont('sans-serif', bundledFont('LiberationSans-Bold.ttf'), true);
+    flighthq._internal.backend.NativeCanvas2dContext.registerFont('sans-serif', bundledFont('LiberationSans-Italic.ttf'), false, true);
+    flighthq._internal.backend.NativeCanvas2dContext.registerFont('sans-serif', bundledFont('LiberationSans-BoldItalic.ttf'), true, true);
+    flighthq._internal.backend.NativeCanvas2dContext.registerFont('serif', bundledFont('LiberationSerif-Regular.ttf'));
+    flighthq._internal.backend.NativeCanvas2dContext.registerFont('monospace', bundledFont('LiberationMono-Regular.ttf'));
+    #end
     if (usingCairo) {
       final canvas = new _CairoCanvas(window);
       renderState = createCanvasRenderState(canvas, {

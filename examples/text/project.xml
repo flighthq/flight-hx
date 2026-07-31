@@ -10,4 +10,7 @@
   <classpath name="." />
   <haxeflag name="-dce" value="full" />
   <haxelib name="lime" />
+  <!-- Bundled Liberation faces (SIL OFL) back the generic CSS families on
+       native targets; browsers already resolve these families themselves. -->
+  <assets path="assets/fonts" rename="fonts" include="*.ttf" unless="html5" />
 </project>
