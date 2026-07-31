@@ -296,6 +296,9 @@ class Main extends Application {
   var perfFrames = 0;
   var perfStart = 0.0;
   var perfWarmup = -1;
+  #if cpp
+  var perfGcStart:Float = 0;
+  #end
 
   override public function render(context:RenderContext):Void {
     if (!ready || root == null) return;
@@ -308,14 +311,27 @@ class Main extends Application {
       if (perfWarmup > 0) {
         perfWarmup--;
       } else {
-        if (perfFrames == 0) perfStart = haxe.Timer.stamp();
+        if (perfFrames == 0) {
+          perfStart = haxe.Timer.stamp();
+          #if cpp
+          // Normalize heap state, then baseline usage so the summary can report
+          // net allocation across the measured window (a comparative proxy, not
+          // an exact allocation count — collections inside the window subtract).
+          cpp.vm.Gc.run(true);
+          perfGcStart = cpp.vm.Gc.memInfo64(cpp.vm.Gc.MEM_INFO_USAGE);
+          #end
+        }
         perfFrames++;
         final target = Std.parseInt(Sys.getEnv('FLIGHT_PERF_FRAMES'));
         if (perfFrames >= target) {
           final elapsed = haxe.Timer.stamp() - perfStart;
           final particles = fireEmitter.data.particleCount + snowEmitter.data.particleCount;
+          var gcNote = '';
+          #if cpp
+          gcNote = ' gcUsageDelta=' + Std.string(cpp.vm.Gc.memInfo64(cpp.vm.Gc.MEM_INFO_USAGE) - perfGcStart);
+          #end
           Sys.println('PERF frames=' + (perfFrames - 1) + ' elapsed=' + elapsed + 's fps=' + ((perfFrames - 1) / elapsed)
-            + ' particles=' + particles);
+            + ' particles=' + particles + gcNote);
           lime.system.System.exit(0);
         }
       }
