@@ -168,9 +168,9 @@ class SpineParse {
       while ((cast ((cast i : Float) < (cast _Runtime.field(arr, 'length') : Float)) : Bool)) {
         var k:Dynamic = (cast flighthq._internal._StaticIndex.readArray(arr, i) : Dynamic);
         var __destructure0:Dynamic = _Runtime.callValue(SpineParse.hexToRgb__spineParse, cast ([((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(k, 'color')), 'string') : Bool) ? (cast _Runtime.field(k, 'color') : Dynamic) : (cast 'ffffff' : Dynamic))] : Array<Dynamic>));
-        var r:Dynamic = _Runtime.getIndex(__destructure0, 0.0);
-        var g:Dynamic = _Runtime.getIndex(__destructure0, 1.0);
-        var b:Dynamic = _Runtime.getIndex(__destructure0, 2.0);
+        var r:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
+        var g:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
+        var b:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
         _Runtime.callProperty(keys, 'push', cast ([{ time: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(k, 'time')), 'number') : Bool) ? (cast _Runtime.field(k, 'time') : Dynamic) : (cast (i / (_Runtime.field(arr, 'length') - 1.0)) : Dynamic)), r: r, g: g, b: b }] : Array<Dynamic>));
         i++;
       }

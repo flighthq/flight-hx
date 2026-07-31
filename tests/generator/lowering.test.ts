@@ -1360,7 +1360,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain("_Runtime.defaultUndefined(_Runtime.field(__destructure0, 'mode')");
   });
 
-  it('retains destructuring receiver facts without changing dynamic emission', () => {
+  it('emits direct Array destructuring reads while keeping unapproved receiver shapes dynamic', () => {
     const { checker, source } = typedSource(
       '/workspace/upstream/packages/example/src/destructuring.ts',
       `export function read(
@@ -1422,9 +1422,9 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(ir).toContain('"destructuringSource":{"receiver":"Uint16ArrayOrUint32Array","source":"assignment"}');
     expect(ir).toContain('"destructuringSource":{"escape":"regexp-result-array","source":"declaration"}');
     expect(emission.destructuringReads).toEqual({
-      assignment: { eligible: 2, parked: 0 },
-      declaration: { eligible: 7, parked: 6 },
-      parameter: { eligible: 2, parked: 0 },
+      assignment: { direct: 0, parked: 0, proven: 2 },
+      declaration: { direct: 4, parked: 6, proven: 7 },
+      parameter: { direct: 2, parked: 0, proven: 2 },
     });
     expect(emission.destructuringEscapes).toEqual({
       'regexp-result-array': { assignment: 0, declaration: 1, parameter: 0 },
@@ -1446,9 +1446,14 @@ describe('TypeScript lowering and Haxe emission', () => {
       declaration: 0,
       parameter: 0,
     });
-    expect(output.match(/_Runtime\.getIndex\(/gu)).toHaveLength(17);
+    expect(emission.indexedAccesses).toEqual({ reads: 6, writes: 0 });
+    expect(emission.indexedReceivers.Array).toEqual({ reads: 6, writes: 0 });
+    expect(output.match(/_Runtime\.getIndex\(/gu)).toHaveLength(11);
+    expect(output.match(/_StaticIndex\.readArray\(/gu)).toHaveLength(6);
     expect(output).not.toContain('__flight_destructuring_index');
-    expect(output).not.toContain('_StaticIndex.read');
+    expect(output).not.toContain('_StaticIndex.readFloat32Array');
+    expect(output).not.toContain('_StaticIndex.readArrayOrFloat32Array');
+    expect(output).not.toContain('_StaticIndex.readUint16ArrayOrUint32Array');
   });
 
   it('emits direct Array reads for synthetic iteration bindings only', () => {
@@ -1605,9 +1610,9 @@ describe('TypeScript lowering and Haxe emission', () => {
         'unproven-receiver': { assignment: 0, declaration: 0, parameter: 0 },
       },
       destructuringReads: {
-        assignment: { eligible: 0, parked: 0 },
-        declaration: { eligible: 0, parked: 0 },
-        parameter: { eligible: 0, parked: 0 },
+        assignment: { direct: 0, parked: 0, proven: 0 },
+        declaration: { direct: 0, parked: 0, proven: 0 },
+        parameter: { direct: 0, parked: 0, proven: 0 },
       },
       destructuringReceivers: {
         Array: { assignment: 0, declaration: 0, parameter: 0 },

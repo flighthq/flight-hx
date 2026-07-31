@@ -47,8 +47,12 @@ export function inventorySummary(inventory: UpstreamInventory): string {
 export function loweringSummary(audit: LoweringAudit): string {
   const facts = audit.summary.staticFacts;
   const emission = audit.summary.staticEmission;
-  const destructuringEligible = Object.values(emission.destructuringReads).reduce(
-    (total, counts) => total + counts.eligible,
+  const destructuringProven = Object.values(emission.destructuringReads).reduce(
+    (total, counts) => total + counts.proven,
+    0,
+  );
+  const destructuringDirect = Object.values(emission.destructuringReads).reduce(
+    (total, counts) => total + counts.direct,
     0,
   );
   const destructuringParked = Object.values(emission.destructuringReads).reduce(
@@ -83,8 +87,10 @@ export function loweringSummary(audit: LoweringAudit): string {
     `| Direct indexed writes | ${emission.indexedAccesses.writes} |`,
     `| Direct synthetic iteration-binding Array reads | ${emission.syntheticArrayReads.iterationBindings} |`,
     `| Direct synthetic high-arity-argument Array reads | ${emission.syntheticArrayReads.highArityArguments} |`,
-    `| Audited ordinary destructuring indexed reads | ${destructuringEligible + destructuringParked} |`,
-    `| Destructuring reads with retained receiver facts | ${destructuringEligible} |`,
+    `| Audited ordinary destructuring indexed reads | ${destructuringProven + destructuringParked} |`,
+    `| Destructuring reads with retained receiver facts | ${destructuringProven} |`,
+    `| Direct destructuring Array reads | ${destructuringDirect} |`,
+    `| Proven destructuring reads awaiting a direct endpoint | ${destructuringProven - destructuringDirect} |`,
     `| Parked destructuring reads | ${destructuringParked} |`,
     '',
     '| Indexed receiver | Proven expressions | Proven reads | Proven writes | Direct reads | Direct writes |',
@@ -96,9 +102,31 @@ export function loweringSummary(audit: LoweringAudit): string {
       `| \`${receiver}\` | ${counts.expressions} | ${counts.reads} | ${counts.writes} | ${direct.reads} | ${direct.writes} |`,
     );
   }
+  const reads = emission.destructuringReads;
+  const direct = {
+    assignment: reads.assignment.direct,
+    declaration: reads.declaration.direct,
+    parameter: reads.parameter.direct,
+  };
+  const deferred = {
+    assignment: reads.assignment.proven - reads.assignment.direct,
+    declaration: reads.declaration.proven - reads.declaration.direct,
+    parameter: reads.parameter.proven - reads.parameter.direct,
+  };
+  const parked = {
+    assignment: reads.assignment.parked,
+    declaration: reads.declaration.parked,
+    parameter: reads.parameter.parked,
+  };
   lines.push(
     '',
-    '| Destructuring receiver | Assignment reads | Declaration reads | Parameter reads | Total |',
+    '| Destructuring emission | Assignment reads | Declaration reads | Parameter reads | Total |',
+    '| --- | ---: | ---: | ---: | ---: |',
+    `| Direct Array | ${direct.assignment} | ${direct.declaration} | ${direct.parameter} | ${direct.assignment + direct.declaration + direct.parameter} |`,
+    `| Proven, awaiting endpoint | ${deferred.assignment} | ${deferred.declaration} | ${deferred.parameter} | ${deferred.assignment + deferred.declaration + deferred.parameter} |`,
+    `| Parked | ${parked.assignment} | ${parked.declaration} | ${parked.parameter} | ${parked.assignment + parked.declaration + parked.parameter} |`,
+    '',
+    '| Proven destructuring receiver | Assignment reads | Declaration reads | Parameter reads | Total |',
     '| --- | ---: | ---: | ---: | ---: |',
   );
   for (const [receiver, counts] of Object.entries(emission.destructuringReceivers)) {
@@ -107,14 +135,6 @@ export function loweringSummary(audit: LoweringAudit): string {
       `| <code>${receiver}</code> | ${counts.assignment} | ${counts.declaration} | ${counts.parameter} | ${total} |`,
     );
   }
-  const parked = {
-    assignment: emission.destructuringReads.assignment.parked,
-    declaration: emission.destructuringReads.declaration.parked,
-    parameter: emission.destructuringReads.parameter.parked,
-  };
-  lines.push(
-    `| Parked | ${parked.assignment} | ${parked.declaration} | ${parked.parameter} | ${parked.assignment + parked.declaration + parked.parameter} |`,
-  );
   lines.push(
     '',
     '| Destructuring parked reason | Assignment reads | Declaration reads | Parameter reads | Total |',

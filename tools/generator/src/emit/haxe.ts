@@ -1808,7 +1808,7 @@ function emptyStaticLoweringEmissionCounts(): StaticLoweringEmissionCounts {
       ]),
     ) as StaticLoweringEmissionCounts['destructuringEscapes'],
     destructuringReads: Object.fromEntries(
-      destructuringReadSources.map((source) => [source, { eligible: 0, parked: 0 }]),
+      destructuringReadSources.map((source) => [source, { direct: 0, parked: 0, proven: 0 }]),
     ) as StaticLoweringEmissionCounts['destructuringReads'],
     destructuringReceivers: Object.fromEntries(
       indexedReceiverNames.map((receiver) => [
@@ -1865,7 +1865,8 @@ function finalizeStaticLoweringEmission(output: string): string {
     for (const receiver of indexedReceiverNames) {
       const marker = destructuringReadMarker(source, receiver);
       const count = finalized.split(marker).length - 1;
-      staticLoweringEmission.destructuringReads[source].eligible += count;
+      staticLoweringEmission.destructuringReads[source].proven += count;
+      if (receiver === 'Array') staticLoweringEmission.destructuringReads[source].direct += count;
       staticLoweringEmission.destructuringReceivers[receiver][source] += count;
       finalized = finalized.replaceAll(marker, '');
     }
@@ -1885,6 +1886,15 @@ function markDestructuringRead(expression: IrExpression, value: string): string 
   return source
     ? `${destructuringReadMarker(source.source, source.receiver ?? source.escape ?? 'unproven-receiver')}${value}`
     : value;
+}
+
+function emitDestructuringRead(expression: IrExpression, object: string, index: string): string {
+  const source = expression.staticFacts?.destructuringSource;
+  const value =
+    source?.receiver === 'Array'
+      ? markStaticIndexedLowering('Array', 'reads', `flighthq._internal._StaticIndex.readArray(${object}, ${index})`)
+      : `_Runtime.getIndex(${object}, ${index})`;
+  return markDestructuringRead(expression, value);
 }
 
 function markStaticLowering(name: ScalarStaticLoweringEmissionName, value: string): string {
@@ -1964,7 +1974,7 @@ function emitExpression(expression: IrExpression): string {
         const temporary = `__destructure${String(temporaryIndex++)}`;
         return `({ var ${temporary}:Dynamic = ${emitExpression(expression.right)}; ${expression.left.elements
           .map((element, index) => {
-            const value = markDestructuringRead(expression, `_Runtime.getIndex(${temporary}, ${String(index)})`);
+            const value = emitDestructuringRead(expression, temporary, String(index));
             return element.kind === 'element'
               ? `_Runtime.setIndex(${emitExpression(element.object)}, ${emitExpression(element.index)}, ${value})`
               : `${emitExpression(element)} = cast ${value}`;
@@ -2212,10 +2222,9 @@ function emitExpression(expression: IrExpression): string {
       }
       return (
         emitStaticIndexedRead(expression) ??
-        markDestructuringRead(
-          expression,
-          `_Runtime.${expression.optional ? 'optionalIndex' : 'getIndex'}(${emitExpression(expression.object)}, ${emitExpression(expression.index)})`,
-        )
+        (expression.staticFacts?.destructuringSource && !expression.optional
+          ? emitDestructuringRead(expression, emitExpression(expression.object), emitExpression(expression.index))
+          : `_Runtime.${expression.optional ? 'optionalIndex' : 'getIndex'}(${emitExpression(expression.object)}, ${emitExpression(expression.index)})`)
       );
     case 'function': {
       const name = expression.name && !expression.async ? ` ${safeName(expression.name)}` : '';

@@ -17,9 +17,9 @@ class Curve {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
         var __destructure0:Dynamic = _Runtime.callValue(f, cast ([(i / (n - 1.0))] : Array<Dynamic>));
-        var r:Dynamic = _Runtime.getIndex(__destructure0, 0.0);
-        var g:Dynamic = _Runtime.getIndex(__destructure0, 1.0);
-        var b:Dynamic = _Runtime.getIndex(__destructure0, 2.0);
+        var r:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
+        var g:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
+        var b:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
         flighthq._internal._StaticIndex.writeArray(lut, (i * 3.0), r);
         flighthq._internal._StaticIndex.writeArray(lut, ((i * 3.0) + 1.0), g);
         flighthq._internal._StaticIndex.writeArray(lut, ((i * 3.0) + 2.0), b);
@@ -61,19 +61,19 @@ class Curve {
     var g:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
     __destructure1 = _Runtime.callValue(Curve.rgbToHsv__curve, cast ([r0, g0, b0] : Array<Dynamic>));
-    h0 = _Runtime.getIndex(__destructure1, 0.0);
-    s0 = _Runtime.getIndex(__destructure1, 1.0);
-    v0 = _Runtime.getIndex(__destructure1, 2.0);
+    h0 = flighthq._internal._StaticIndex.readArray(__destructure1, 0.0);
+    s0 = flighthq._internal._StaticIndex.readArray(__destructure1, 1.0);
+    v0 = flighthq._internal._StaticIndex.readArray(__destructure1, 2.0);
     __destructure2 = _Runtime.callValue(Curve.rgbToHsv__curve, cast ([r1, g1, b1] : Array<Dynamic>));
-    h1 = _Runtime.getIndex(__destructure2, 0.0);
-    s1 = _Runtime.getIndex(__destructure2, 1.0);
-    v1 = _Runtime.getIndex(__destructure2, 2.0);
+    h1 = flighthq._internal._StaticIndex.readArray(__destructure2, 0.0);
+    s1 = flighthq._internal._StaticIndex.readArray(__destructure2, 1.0);
+    v1 = flighthq._internal._StaticIndex.readArray(__destructure2, 2.0);
     dh = (h1 - h0);
     if ((cast ((cast dh : Float) > (cast 0.5 : Float)) : Bool)) { (dh = cast ((dh - 1.0) : Dynamic)); } else { if ((cast ((cast dh : Float) < (cast -0.5 : Float)) : Bool)) { (dh = cast ((dh + 1.0) : Dynamic)); } }
     __destructure3 = _Runtime.callValue(Curve.hsvToRgb__curve, cast ([(h0 + (dh * t)), (s0 + ((s1 - s0) * t)), (v0 + ((v1 - v0) * t))] : Array<Dynamic>));
-    r = _Runtime.getIndex(__destructure3, 0.0);
-    g = _Runtime.getIndex(__destructure3, 1.0);
-    b = _Runtime.getIndex(__destructure3, 2.0);
+    r = flighthq._internal._StaticIndex.readArray(__destructure3, 0.0);
+    g = flighthq._internal._StaticIndex.readArray(__destructure3, 1.0);
+    b = flighthq._internal._StaticIndex.readArray(__destructure3, 2.0);
     flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, offset, r);
     flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, (offset + 1.0), g);
     flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, (offset + 2.0), b);

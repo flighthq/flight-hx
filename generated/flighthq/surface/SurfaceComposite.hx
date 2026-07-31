@@ -280,8 +280,8 @@ class SurfaceComposite {
     srcA = (a / 255.0);
     dstA = (flighthq._internal._StaticIndex.readUint8ClampedArray(dest, (di + 3.0)) / 255.0);
     __destructure0 = _Runtime.callValue(SurfaceComposite.porterDuffFactors__surfaceComposite, cast ([mode, srcA, dstA] : Array<Dynamic>));
-    fa = _Runtime.getIndex(__destructure0, 0.0);
-    fb = _Runtime.getIndex(__destructure0, 1.0);
+    fa = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
+    fb = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
     outA = ((fa * srcA) + (fb * dstA));
     if ((cast ((cast outA : Float) <= (cast 0.0 : Float)) : Bool)) {
       flighthq._internal._StaticIndex.writeUint8ClampedArray(dest, di, 0.0);
